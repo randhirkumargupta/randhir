@@ -13,7 +13,7 @@
             <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>                            
         </ul>
         <div class="globle-search">
-            <input class="search-text" placeholder="Search.." type="text" value=""></div>
+            <input class="search-text" placeholder="Type here" type="text" value=""></div>
         </div>
     <div class="main-nav">
         <?php print drupal_render($data['itg_top_manu_header']); ?>

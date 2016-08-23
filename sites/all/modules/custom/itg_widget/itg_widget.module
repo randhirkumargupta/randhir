@@ -314,6 +314,9 @@ function itg_widget_block_info() {
   $blocks['watch_right_now_videos_widget'] = array(
       'info' => t('Widget: Watch right now videos'),
   );
+  $blocks['anchor_langing_page_menu'] = array(
+      'info' => t('Anchor landing page menu'),
+  );
   return $blocks;
 }
 
@@ -559,6 +562,10 @@ function itg_widget_block_view($delta = '') {
       $data = itg_widget_featured_video_carousel_data($info, 'rolling');
       $block['content'] = theme("featured_video_carousel_rollingslider", array("data" => $data));
       break;
+     // Top takes videos ordering reordering widget case
+    case 'anchor_langing_page_menu':
+      $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
+      break;
   }
   return $block;
 }
@@ -781,6 +788,9 @@ function itg_widget_theme() {
       ),
       'itg_widget_watch_right_now_videos_widget' => array(
           'template' => 'templates/watch-right-now-videos-widget',
+      ),
+      'anchor_langing_page_menu' => array(
+          'template' => 'templates/anchor-landing-page-menu',
       ),
   );
   return $themes;
@@ -1005,7 +1015,7 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
-  if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['tid'] == '399')) {
+  if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['taxonomy_term']->name == 'Anchor')) {
 
     drupal_add_js(
             "jQuery(document).ready(function(){
@@ -1015,15 +1025,7 @@ function itg_widget_preprocess_node(&$vars) {
               });
             })", 'inline'
     );
-    $anchor_id = $vars['nid'];
     $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
-    // Query to get category in which anchor is associated.
-    $cat_query = db_select('field_data_field_story_category', 'cat');
-    $cat_query->leftJoin('node', 'n', 'n.nid=cat.entity_id');
-    $cat_query->fields('cat', array('field_story_category_tid'));
-    $cat_query->condition('cat.entity_id', $anchor_id);
-    $categories_of_anchor = $cat_query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    pr($categories_of_anchor);
   }
 }
 
@@ -1045,4 +1047,24 @@ function itg_widget_nodes_from_nodequeue($nodequeue_name) {
   $nq_query->addField('nq', 'nid', 'entity_id');
   $nq_query->orderBy('n.nid', 'DESC');
   return $nq_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Implements function for anchor landing menu
+ */
+function itg_widget_anchor_landing_menu($nid){
+   // Query to get category in which anchor is associated.
+    $cat_query = db_select('field_data_field_video_anchor', 'video_anchor');
+    $cat_query->leftJoin('field_data_field_story_category', 'cat', 'video_anchor.entity_id = cat.entity_id');
+    $cat_query->leftJoin('taxonomy_term_data', 'ttd', 'ttd.tid=cat.field_story_category_tid');
+    $cat_query->fields('cat', array('field_story_category_tid'));
+    $cat_query->distinct('cat.field_story_category_tid');
+    $cat_query->fields('ttd', array('name'));
+    $cat_query->condition('video_anchor.field_video_anchor_target_id', $nid, '=');
+    $cat_query->condition('cat.bundle', 'videogallery', '=');
+    $categories_of_anchor = $cat_query->execute();
+    foreach($categories_of_anchor as $cate){
+      $result[$cate->field_story_category_tid] = $cate->name;
+    }
+    return $result;
 }

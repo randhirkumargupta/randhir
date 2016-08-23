@@ -576,6 +576,11 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+  $items['dailymotion-video-time-filter'] = array(
+    'page callback' => 'itg_videogallery_ajax_time_filter_video',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -978,23 +983,16 @@ function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
  */
 function itg_videogallery_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'videogallery') {
-   // drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery-1.11.0.min.js', array('scope' => 'footer'));
+   drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+   drupal_add_js('    
+    jQuery(document).ready(function(){
+        var fullWidth = jQuery("#block-views-video-landing-header-block-1 .photo-list li").length;    
+        jQuery("#block-views-video-landing-header-block-1 .photo-list").css("width", fullWidth * 170 + "px");
+        jQuery("#block-views-video-landing-header-block-1 .photo-list").mCustomScrollbar({
+            axis:"x" // horizontal scrollbar
+        });    
+    });', array('type' => 'inline', 'scope' => 'footer'));
 
-
-    drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
-    drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css');
-
-    drupal_add_js('
-            (function($){
-   $(window).on("load",function(){
-    
-    $("#block-views-video-landing-header-block-1 .item-list").mCustomScrollbar({
-    axis:"x" // horizontal scrollbar
-});    
-   });
-  })(jQuery);
-        ', array('type' => 'inline', 'scope' => 'footer'));
-    
     // Category view on landing page
     drupal_add_js("jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').click(function(){
                var section_id = jQuery(this).val();
@@ -1003,7 +1001,7 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
                jQuery('#edit-field-story-category-tid').trigger('change');
                jQuery(this).find('a').addClass('active');
            });", array('type' => 'inline', 'scope' => 'footer'));
-drupal_add_js("jQuery(document).ready(function(){
+    drupal_add_js("jQuery(document).ready(function(){
                jQuery('#edit-field-story-category-tid').val(" . $_GET['category'] . "); 
                jQuery('#edit-field-story-category-tid').trigger('change');
                jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
@@ -1024,16 +1022,40 @@ function itg_videogallery_ajax_ftp_video() {
   if ($case == 'used') {
     $used_video = itg_videogallery_ftp_used_video();
     foreach ($used_video as $key => $u_video) {
-      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video . '</input></span>';
+      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video['filename'] . '</input><span class="file_size">'.$u_video['filesize'].' MB</span></span>';
     }
   }
   elseif ($case == 'unused') {
     $unused_video = itg_videogallery_ftp_unused_video();
     foreach ($unused_video as $key => $un_video) {
-      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $un_video . '</input></span>';
+      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $un_video['filename'] . '</input><span class="file_size">'.$un_video['filesize'].' MB</span></span>';
     }
   }
-  if(empty($val)){
+  if (empty($val)) {
+    $val = "Result not found.";
+  }
+  echo '<div id="edit-video-browse-select">' . $val . '</div>';
+}
+
+/**
+ * Implements function for time filter ajax
+ */
+function itg_videogallery_ajax_time_filter_video() {
+  $back_time = $_POST['back_time'];
+  $val = '';
+  if ($back_time) {
+    if (is_numeric($back_time)) {
+      $before_time = time() - (60 * 60 * $back_time);
+    }
+    elseif ($before_time == '-all-') {
+      $before_time = '-all-';
+    }
+    $used_video = itg_videogallery_ftp_used_video($before_time);
+    foreach ($used_video as $key => $u_video) {
+      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video['filename'] . '</input><span class="file_size">'.$u_video['filesize'].' MB</span></span>';
+    }
+  }
+  if (empty($val)) {
     $val = "Result not found.";
   }
   echo '<div id="edit-video-browse-select">' . $val . '</div>';
@@ -1043,17 +1065,21 @@ function itg_videogallery_ajax_ftp_video() {
  * Implement function for get used video on FTP
  * @return array
  */
-function itg_videogallery_ftp_used_video() {
+function itg_videogallery_ftp_used_video($before_time) {
   $query = db_select('field_data_field_upload_video', 'f_video');
   $query->fields('f_video', array('field_upload_video_fid'));
   $query->distinct();
   $query->join('itg_dailymotion_ftp_video', 'itg_ftp_video', 'itg_ftp_video.fid = f_video.field_upload_video_fid');
   $query->fields('itg_ftp_video', array('fid'));
   $query->join('file_managed', 'fm', 'fm.fid = f_video.field_upload_video_fid');
-  $query->fields('fm', array('filename'));
+  $query->fields('fm', array('filename', 'filesize'));
+  if (!empty($before_time) && is_numeric($before_time)) {
+    $query->condition('fm.timestamp', $before_time, '>');
+  }
   $results = $query->execute();
   foreach ($results as $result) {
-    $used_video[$result->field_upload_video_fid] = $result->filename;
+    $used_video[$result->field_upload_video_fid]['filename'] = $result->filename;
+    $used_video[$result->field_upload_video_fid]['filesize'] = number_format($result->filesize/(1024*1024), 2);
   }
   return $used_video;
 }
@@ -1072,13 +1098,13 @@ function itg_videogallery_ftp_unused_video() {
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
     if (isset($extension) && $extension == 'mp4') {
-      //$file[] = itg_video_check_exist_file_browse($file_array[1]);
       $new_file[] = itg_videogallery_ftp_unused_file($file_array[1]);
     }
   }
   foreach ($new_file as $final_file) {
     if (!empty($final_file['filename'])) {
-      $options[$final_file['fid']] = $final_file['filename'];
+      $options[$final_file['fid']]['filename'] = $final_file['filename'];
+      $options[$final_file['fid']]['filesize'] = number_format($final_file['filesize']/(1024*1024), 2);
     }
   }
   return $options;
@@ -1094,7 +1120,7 @@ function itg_videogallery_ftp_unused_file($filename) {
   $query = db_select('file_managed', 'fm');
   $query->condition('filename', $filename, '=');
   $query->condition('uri', $uri, '=');
-  $query->fields('fm', array('fid', 'filename'));
+  $query->fields('fm', array('fid', 'filename', 'filesize'));
   $query->leftJoin('field_data_field_upload_video', 'f_video', 'f_video.field_upload_video_fid = fm.fid');
   $query->condition(db_or()->isNull('f_video.field_upload_video_fid'));
   $query->fields('f_video', array('field_upload_video_fid'));

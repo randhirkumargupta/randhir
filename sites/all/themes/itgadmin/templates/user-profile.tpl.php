@@ -35,6 +35,11 @@
 
 ?>
 <div class="user-profile-div">
+   <?php 
+   global $user;
+   $edit_link = 'user/'.$user->uid.'/edit';
+   print "<span class='user-edit-link'>".l('Edit Profile', $edit_link)."</span>";
+   ?>
   <?php if ($user_profile): ?>
     <?php // print render($user_profile['field_user_picture']);
     ?>

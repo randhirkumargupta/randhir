@@ -101,11 +101,14 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     <li>                     
                       <?php
                         $category_url = arg();
-                        if ($widget_data[$blockid]['cat_id'] == $_GET['category']) {
-                          $class_active = 'menu-active';
+                        if (isset($_GET['category']) && $widget_data[$blockid]['cat_id'] == $_GET['category']) {                          
+                          $class_active = 'menu-active set-offset';
+                          
                         }
-                        else {
-                          $class_active = ''; 
+                        elseif (!isset($_GET['category']) && $count == 1) {
+                          $class_active = 'menu-active'; 
+                        } else {
+                           $class_active = '';
                         }
                         print l($widget_data[$blockid]['block_title'], 
                                 $category_url,

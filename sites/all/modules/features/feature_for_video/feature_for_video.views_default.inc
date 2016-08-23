@@ -959,11 +959,13 @@ allowfullscreen></iframe>';
                 <li><a href="#"><i class="fa fa-envelope"></i> Email</a></li>
                 <li><a href="#"><i class="fa fa-link"></i> Embed</a></li>
                 <li><a href="#"><i class="fa fa-comment"></i> Comment</a></li>
+<li><a href="#"><i class="fa fa-share"></i>Submit Video</a></li>
             </ul>
         </div>
     </div>
     <div class="col-md-4 video-header-right"><p>[field_story_expert_description]</p>
         <p class="upload-date">[timestamp]</p>
+<div class="ads"></div>
     </div>
 </div>
     </div>';
@@ -974,6 +976,12 @@ allowfullscreen></iframe>';
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'container';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '16';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
