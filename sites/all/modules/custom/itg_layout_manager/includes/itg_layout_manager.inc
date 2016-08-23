@@ -116,12 +116,12 @@ function itg_layout_list_delete() {
   $itg_query->groupBy('layout_tpl.section_name');
   $itg_query->extend('PagerDefault')->limit($items_per_page);
   
-  if (!empty($_GET['section'])) {
+  /*if (!empty($_GET['section'])) {
     $itg_query->condition('layout_tpl.section_name', $_GET['section']);
   }
   else {
     $itg_query->condition('layout_tpl.section_name', 'home_page', '!=');
-  } 
+  } */
   
   $itg_result = $itg_query->execute()->fetchAll();
   
