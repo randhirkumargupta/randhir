@@ -72,6 +72,13 @@ function itg_layout_manager_menu() {
       'file' => 'includes/itg_layout_manager.inc',
   );
   
+  $items['section-widgets-list-delete'] = array(      
+      'page callback' => 'itg_section_widgets_list_delete',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_manager.inc',
+  );
+  
   return $items;
 }
 

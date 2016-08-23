@@ -161,3 +161,13 @@ function itg_layout_delete() {
   db_delete('itg_layout_tpl')->condition('id', arg(1))->execute();
   drupal_goto('itg-admin-layout-list');
 }
+
+/**
+ * for layout delete for admin
+ * @return array $output
+ */
+function itg_section_widgets_list_delete() {
+  $result = db_truncate('itg_section_widgets_list')->execute();
+  echo 'truncate';exit;
+}
+ 
