@@ -1,6 +1,9 @@
 <?php
 //p($entity_data_node);
 global $base_url;
+
+//drupal_add_css('', array('type' => 'inline', 'scope' => 'footer'));
+
 if (!empty($data)) {  ?>
 
   <div class="container">
@@ -32,5 +35,21 @@ if (!empty($data)) {  ?>
   No Feature content found
 <?php } ?>
 
-  
+<!--This Uncompressed CSS is for photo rolling slider to set title and image count visibleness for centered image.  -->
+<style>
+.carousel .slides .slideItem[style*="width: 645px"] span{
+    opacity: 1;
+      -webkit-transition: all 500ms ease .2s;
+    -moz-transition: all 500ms ease .2s;
+    -o-transition: all 500ms ease .2s;
+    transition: all 500ms ease .2s;
+}
+.carousel .slides .slideItem[style*="width: 645px"] span.overlay{
+    opacity: 0;
+      -webkit-transition: all 500ms ease .2s;
+    -moz-transition: all 500ms ease .2s;
+    -o-transition: all 500ms ease .2s;
+    transition: all 500ms ease .2s;
+}
+</style>  
   
