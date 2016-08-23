@@ -166,7 +166,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       break;
     case 'vas_service_content_node_form':
-
       $form['metatags']['#type'] = 'hidden';
       // hide preview button
       variable_set('node_preview_vas-service-content', '0');
@@ -256,7 +255,10 @@ function itg_mobile_services_add_option($element) {
  */
 function itg_mobile_vas_service_content_submit($form, &$form_state) {
   $association_nid = $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id'];
-
+  $astro_service = itg_mobile_services_check_astro_service($association_nid);
+  if (!empty($astro_service)) {
+    unset($form_state['input']['field_service_content'][LANGUAGE_NONE][0]);
+  }
   if ($association_nid) {
     $node = node_load($association_nid);
     $form_state['values']['title'] = $node->title;
@@ -403,6 +405,12 @@ function itg_mobile_association_validator(&$form, &$form_state) {
   $validate = FALSE;
   $node_nid = isset($form_state['node']->nid) ? $form_state['node']->nid : '';
   $target_id = trim($form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]['target_id']);
+  $astro_service = itg_mobile_services_check_astro_service($target_id);
+  if (!empty($astro_service)) {
+    $form_state['input']['field_service_content'][LANGUAGE_NONE][0]['field_service_content_date'][LANGUAGE_NONE][0]['value']['date'] = '';
+    $form_state['input']['field_service_content'][LANGUAGE_NONE][0]['field_story_expert_description'][LANGUAGE_NONE][0]['value'] = '';
+  }
+
   $service_expiry_date = itg_mobile_get_service_expiry_date($target_id);
 
   $frequency = $form_state['values']['field_service_frequency'][LANGUAGE_NONE][0]['value'];
@@ -595,7 +603,7 @@ function itg_service_content_after_build($form, &$form_state) {
     if (!empty($astro_service)) {
       // set Zodiac field item label name and image
       $zodiac_name = itg_astro_zodiac_thumbnail();
-      $cnt = 1;
+      $cnt = isset($form['nid']['#value']) ? 0 : 1;
       for ($i = 0; $i <= 12; $i++) {
         $form['field_service_content'][LANGUAGE_NONE][$cnt]['field_story_expert_description']['#prefix'] = '<div class="itg-astro-image"><img src="' . image_style_url("thumbnail", $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['uri']) . '" alt="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['alt'] . '" title="' . $zodiac_name[$i]->field_astro_thumb_icon['und'][0]['title'] . '"></div>';
         $cnt++;
@@ -1247,7 +1255,7 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
       $schema_tomorrow = date_format($date, "Y-m-d");
       $tomorrow_date = isset($service_content_details[$schema_tomorrow]['startdate']) ? $service_content_details[$schema_tomorrow]['startdate'] : $tomorrow;
       $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_content_date[LANGUAGE_NONE][0]['value'] = $tomorrow_date;
-      if (!empty($_SESSION['field_astro_zodiac'])) {
+      if (!empty($_SESSION['field_astro_zodiac']) || !empty($astro_service)) {
         $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $zodiac_name[$i]->name . ' - ' . $service_content_details[$schema_tomorrow]['content'];
       }
       else {
