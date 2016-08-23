@@ -2264,6 +2264,44 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
+.node-type-print-team-integration.section-content{
+  .tabs-primary{display: none;}
+  .-content{
+    padding: 20px;
+    h2{
+      background-color: #fefafb;
+      border-top: 1px solid #d9d9d9;
+      border-bottom: 1px solid #d9d9d9;
+      padding: 8px 20px;
+      line-height: 28px;
+      font-size: 18px;
+      margin: 15px 0;
+    }
+    .field{
+      padding: 5px 30px;
+      @extend .dib;
+      @extend .full;
+      .field{
+        padding: 0 0 5px;
+        vertical-align: top;
+      }
+      .field-label{
+        @extend .fleft;
+        width: 220px;
+        padding-right: 20px;
+      }
+      .field-items{
+        overflow: hidden;
+        float: none;
+        > .field-item + .field-item{
+          border-top: 1px solid #d9d9d9;
+          padding-top: 6px;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
 .node-preview{
   padding: 20px;
   h2{
