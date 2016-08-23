@@ -855,10 +855,10 @@ jQuery(document).ready(function() {
     })
     
     //right side bar toggle    
-    jQuery('.region-sidebar-second h2.block-title').click(function(){
-         jQuery('.region-sidebar-second h2.block-title i.fa-minus-circle').hide();
-         jQuery('.region-sidebar-second h2.block-title i.fa-plus-circle').show();
-         jQuery('.region-sidebar-second h2.block-title').next().slideUp();
+    jQuery('.block-itg-layout-manager h2.block-title').click(function(){
+         jQuery('.block-itg-layout-manager h2.block-title i.fa-minus-circle').hide();
+         jQuery('.block-itg-layout-manager h2.block-title i.fa-plus-circle').show();
+         jQuery('.block-itg-layout-manager h2.block-title').next().slideUp();
          
         if(jQuery(this).next().is(":visible")){
            jQuery(this).next().stop().slideUp();

@@ -2362,7 +2362,7 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-mega-review-review-values"] tbody,
 [id*="field-story-highlights-values"] tbody {
   float: none;
-  margin-left: 50px;
+  margin-left: 250px;
 }
 [id*="field-erf-registration-fee-values"] tbody tr td,
 [id*="field-mega-review-review-values"] tbody tr td,
@@ -5345,7 +5345,7 @@ div.node #comments h2 {
   margin-top: 10px;
 }
 
-.original-image, .crop-image {
+.original-image, .crop-image, .cancel-image {
   cursor: pointer;
   padding: 6px 40px;
   position: relative;
@@ -5571,6 +5571,10 @@ div.node #comments h2 {
 }
 [id*="field-story-highlights-values"] .form-submit[value="Add another item"] {
   margin-left: 30px;
+}
+[id*="field-story-highlights-values"] thead {
+  display: block;
+  margin-top: 8px;
 }
 [id*="field-story-highlights-values"] tbody tr td .form-submit[value="Remove"] {
   margin-left: 0 !important;
