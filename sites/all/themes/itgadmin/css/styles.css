@@ -6189,3 +6189,13 @@ div.node #comments h2 {
   padding: 6px 12px;
   border-radius: 4px;
 }
+
+#widget-ajex-loader {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99999;
+}

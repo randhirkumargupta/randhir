@@ -75,7 +75,7 @@ jQuery(document).ready(function (e) {
         slidesToScroll: 1,
         asNavFor: '.slickslide, .counterslide',
         dots: true,
-        centerMode: true,
+        centerMode: false,
         focusOnSelect: true
     });
         
