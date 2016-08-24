@@ -175,6 +175,54 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'photogallery' => 'photogallery',
   );
+
+  /* Display: Author */
+  $handler = $view->new_display('block', 'Author', 'block_5');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Author';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'mini';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['total_pages'] = '5';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Flags: follow */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'follow';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Flags: Flag link */
+  $handler->display->display_options['fields']['ops']['id'] = 'ops';
+  $handler->display->display_options['fields']['ops']['table'] = 'flagging';
+  $handler->display->display_options['fields']['ops']['field'] = 'ops';
+  $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['fields']['ops']['label'] = '';
+  $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'reporter' => 'reporter',
+  );
   $export['personalization_saved_content'] = $view;
 
   return $export;

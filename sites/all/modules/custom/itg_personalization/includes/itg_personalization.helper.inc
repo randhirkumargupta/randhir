@@ -27,6 +27,9 @@ function _personalized_saved_content($view_name, $type = 'ajax') {
         break;
       case 'photogallery':
         $content = views_embed_view('personalization_saved_content', 'block_4');
+        break;
+      case 'author':
+        $content = views_embed_view('personalization_saved_content', 'block_5');
     }
     $commands = array();
     $commands[] = ajax_command_replace("#target", '<div id="target">' . $content . '</div>');
