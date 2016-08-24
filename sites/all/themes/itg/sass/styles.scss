@@ -1276,8 +1276,8 @@ footer{
             padding: 25px 0;
         }
         .search-pic{
-            width: 170px;
-            height: 127px;
+            width: 144px;
+            height: 107px;            
             overflow: hidden;
             &:empty{
                 display: none;
@@ -1285,12 +1285,15 @@ footer{
         }
         .search-detail{
             h2{
-                @include font(22px,28px);
+                @include font(15px,20px);
                 margin-bottom:10px;
                 a{
-                    @include font(22px,28px,$itg-font-medium);   
+                    @include font(15px,20px,$itg-font-medium);   
                 }
-            }            
+            }
+            p{
+                display: none;
+            }
         }
         .social-share{
             @include display-inline;
@@ -1310,7 +1313,7 @@ footer{
         @include itg-font($itg-roboto); 
         border-bottom: 1px solid $border-color;
         .count{
-            @include font(30px,22px,$itg-font-medium);            
+            @include font(19px,22px,$itg-font-medium);            
             color: #737373;                     
             padding-bottom: 20px;
             display: block;
@@ -1320,6 +1323,8 @@ footer{
         }
         .search-menu{
             padding-bottom: 20px;
+            white-space: nowrap;
+            overflow-x: auto;
             a{
                 padding: 0 10px;
                 border-left: 2px solid #737373;
