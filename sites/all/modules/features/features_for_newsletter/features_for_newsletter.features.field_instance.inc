@@ -201,8 +201,8 @@ function features_for_newsletter_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -889,8 +889,8 @@ function features_for_newsletter_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1008,8 +1008,8 @@ function features_for_newsletter_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,

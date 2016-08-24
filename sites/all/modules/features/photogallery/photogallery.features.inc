@@ -41,6 +41,36 @@ function photogallery_image_default_styles() {
     ),
   );
 
+  // Exported image style: photgallery_landing_slider_753x543.
+  $styles['photgallery_landing_slider_753x543'] = array(
+    'label' => 'photgallery_landing_slider_753x543',
+    'effects' => array(
+      8 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 750,
+          'height' => 539,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: photo_landing_slider_thumb_88_86.
+  $styles['photo_landing_slider_thumb_88_86'] = array(
+    'label' => 'Photo_landing_slider_thumb_88_66',
+    'effects' => array(
+      6 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 88,
+          'height' => 66,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: photogallery_slide.
   $styles['photogallery_slide'] = array(
     'label' => 'Photogallery_slide',

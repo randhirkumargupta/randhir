@@ -53,8 +53,11 @@ stylesheets[all][] = system.theme.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/font-awesome.css
 stylesheets[all][] = css/slick.css
+stylesheets[all][] = css/itg-photo-slider.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/styles.css
+stylesheets[all][] = css/styles-new.css
+stylesheets[all][] = css/media.css
 
 ; Built-in conditional stylesheet support has been removed from Zen 7.x-5.x.
 ; Instead, Zen now adds conditional-comment-included classes to the html
@@ -99,6 +102,7 @@ regions[sidebar_first]  = First sidebar
 regions[sidebar_second] = Second sidebar
 regions[footer]         = Footer
 regions[bottom]         = Page bottom
+regions[top]            = Page top
 
 ; The page_top and page_bottom regions are hidden, which means they will not
 ; show up on the blocks administration page. But they are required in order for

@@ -11,6 +11,43 @@ function feature_for_mobile_services_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_service_content-field_client_short_description'.
+  $field_instances['field_collection_item-field_service_content-field_client_short_description'] = array(
+    'bundle' => 'field_service_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_client_short_description',
+    'label' => 'Title',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_service_content-field_service_audio'.
   $field_instances['field_collection_item-field_service_content-field_service_audio'] = array(
     'bundle' => 'field_service_content',
@@ -122,7 +159,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
@@ -185,7 +222,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -222,7 +259,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'rows' => 1,
       ),
       'type' => 'text_textarea',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -312,7 +349,7 @@ function feature_for_mobile_services_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 13,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -324,9 +361,14 @@ function feature_for_mobile_services_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_client_selection',
-    'label' => 'Client Selection',
+    'label' => 'Client selection',
     'required' => 1,
     'settings' => array(
+      'behaviors' => array(
+        'taxonomy-index' => array(
+          'status' => TRUE,
+        ),
+      ),
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
@@ -1235,6 +1277,95 @@ function feature_for_mobile_services_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-service_creation-field_astro_service'.
+  $field_instances['node-service_creation-field_astro_service'] = array(
+    'bundle' => 'service_creation',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_astro_service',
+    'label' => 'Astro Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-service_creation-field_mobile_xml_format'.
+  $field_instances['node-service_creation-field_mobile_xml_format'] = array(
+    'bundle' => 'service_creation',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'xml_field',
+        'settings' => array(),
+        'type' => 'xml_field_safe',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mobile_xml_format',
+    'label' => 'Xml format',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+      'validation_callback' => 'xml_field_is_valid_xml_string',
+      'xml_example_collapsed' => 1,
+      'xml_example_show' => 1,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'xml_field_codemirror',
+      'settings' => array(
+        'codemirror' => array(
+          'theme' => 'default',
+        ),
+      ),
+      'type' => 'xml_field_codemirror',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-service_creation-field_service_char_limit'.
   $field_instances['node-service_creation-field_service_char_limit'] = array(
     'bundle' => 'service_creation',
@@ -1279,7 +1410,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 21,
+      'weight' => 12,
     ),
   );
 
@@ -1319,6 +1450,48 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-service_creation-field_service_fetch_link'.
+  $field_instances['node-service_creation-field_service_fetch_link'] = array(
+    'bundle' => 'service_creation',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'http://indiatoday.com',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_service_fetch_link',
+    'label' => 'Fetch link (our server)',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
       'weight' => 8,
     ),
   );
@@ -1358,7 +1531,7 @@ function feature_for_mobile_services_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 3,
     ),
   );
 
@@ -1400,7 +1573,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 10,
     ),
   );
 
@@ -1442,7 +1615,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -1500,7 +1673,7 @@ function feature_for_mobile_services_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 14,
+      'weight' => 9,
     ),
   );
 
@@ -1734,8 +1907,9 @@ function feature_for_mobile_services_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Client Selection');
+  t('Astro Type');
   t('Client Title');
+  t('Client selection');
   t('Client title');
   t('Contact Person Name');
   t('Content');
@@ -1752,6 +1926,7 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('FTP URL');
   t('FTP Username');
   t('Fetch link');
+  t('Fetch link (our server)');
   t('Field Title');
   t('Field char limit');
   t('Footer');
@@ -1765,6 +1940,9 @@ function feature_for_mobile_services_field_default_field_instances() {
   t('Service Title');
   t('Service Type (Regional)');
   t('Short Description');
+  t('Title');
+  t('Xml format');
+  t('http://indiatoday.com');
 
   return $field_instances;
 }

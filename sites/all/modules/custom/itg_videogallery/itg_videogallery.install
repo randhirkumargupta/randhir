@@ -37,8 +37,19 @@ function itg_videogallery_schema() {
         'type' => 'int',
         'not null' => TRUE,
       ),
+      'nid' => array(
+        'description' => 'video_nid',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
       'tags' => array(
         'description' => 'Tags of video',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'upload_time' => array(
+        'description' => 'Video upload time',
         'type' => 'varchar',
         'length' => '255',
         'not null' => TRUE,
@@ -49,8 +60,66 @@ function itg_videogallery_schema() {
         'length' => '250',
         'not null' => TRUE,
       ),
+      'video_duration' => array(
+        'description' => 'Video duration',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
     ),
     'primary key' => array('eid'),
+  );
+  // playlist in database
+  $schema['dailymotion_playlist_details'] = array(
+    'description' => 'Save the dailymotion response.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+       'pid' => array(
+        'description' => 'playlist id from dailymotion',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'playlist_name' => array(
+        'description' => 'playlist name from dailymotion',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'node_id' => array(
+        'description' => 'node id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'video_id' => array(
+        'description' => 'Video id which return by dailymotion',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  // FTP Videos
+  $schema['itg_dailymotion_ftp_video'] = array(
+    'description' => 'Differenc between FTP video and local video',
+    'fields' => array(
+      'id' => array(
+        'description' => 'id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => 'node id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
   );
   return $schema;
 }

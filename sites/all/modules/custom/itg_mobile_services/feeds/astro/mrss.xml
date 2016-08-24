@@ -1,0 +1,21 @@
+<channel>
+<header>
+<title>India Today's Videos Feed</title>
+<link>http://www.indiatoday.intoday.in/</link>
+<description>India Today's Videos Feed</description>
+</header>  
+    <item>
+        <title>{field_story_expert_description}</title>
+        <image>{field_story_large_image}</image>
+        <audio>{field_service_audio}</audio>
+        <link>{field_service_video}</link>
+        <pubDate>{field_service_content_date}</pubDate>
+         <media:content url='{field_service_video}'>
+            <media:title>{field_story_expert_description}</media:title>
+           <media:description>{field_story_large_image_description}</media:description>
+            <media:thumbnail url='{field_story_large_image}'/>
+            <media:keywords>{field_story_large_image_keyword}</media:keywords>
+          <media:category/>
+        </media:content>
+    </item>
+</channel>

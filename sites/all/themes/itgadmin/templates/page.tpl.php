@@ -32,7 +32,7 @@ if (!in_array('administrator', $user->roles)) {
     }
 }
 ?>
-
+<div id="widget-ajex-loader" style="display: none"><img class="widget-loader" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 <div id="page">
 
     <header class="header" id="header" role="banner">
@@ -194,3 +194,6 @@ if (!in_array('administrator', $user->roles)) {
 </div>
 
 <?php print render($page['bottom']); ?>
+<!--<div class="ajax-loader">
+  <img src="<?php  //echo base_path().path_to_theme(); ?>/images/loader.svg" alt=""/>
+</div>-->

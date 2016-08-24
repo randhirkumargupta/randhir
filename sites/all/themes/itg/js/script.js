@@ -149,9 +149,152 @@ Drupal.behaviors.my_custom_behavior = {
       $(this).attr('placeholder', plaholderText);
       $(this).prev('label').hide();
     });
+    
+    headerMain();
+    function headerMain(){
+        //var logotxt = $('.container.header-logo').html();
+        $('.container.header-logo').prependTo('#block-itg-layout-manager-header-block');
+        $('.search-icon').click(function(){
+            $('.globle-search').css('width','255px');
+        });
+        
+        $('.mobile-nav').click(function(){
+            $('.navigation').stop().slideToggle();
+        });
+        $(document).on('click', function(){            
+            $('.globle-search').css('width','0px');
+        });
+        $('.search-icon, .globle-search').click(function(e){
+            e.stopPropagation();
+        });
+    }
+        
+    // jQuery Code for tabbing
+    $('.tab-buttons').on('click', 'span', function(){
+      var dataID = '.' + $(this).attr('data-id');
+      $(this).addClass('active').siblings().removeClass('active');
+      $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
+    });
+    // jQuery Code for tabbing End
+    
+    //ITG Listing top spacing          
+    $('.tab-data').find('ul.itg-listing').css('padding-top','0');
 
+     //search page result
+    $('.itg-search-list').each(function(){
+        $(this).find('.search-pic').each(function(){
+            var current = $(this);        
+            if(current.children().length == 0){          
+              $(current).addClass("hide"); 
+            }
+        });        
+        var currentSocial = $(this).children('.social-share');
+        var currentInfo = $(this).children(".search-detail").children(".other-info");
+        console.log(currentSocial);
+        currentSocial.appendTo(currentInfo);        
+    });
+        
+    //pagination
+    $('.pager .pager-previous a').html('<i class="fa fa-chevron-left"></i>');
+    $('.pager .pager-next a').html('<i class="fa fa-chevron-right"></i>');
+    
+    //video landing page UL width
+    var videoNumber = $('#block-views-video-landing-header-block-1 .item-list ul li').length;    
+    $('#block-views-video-landing-header-block-1 .item-list ul').css('width', videoNumber*170+'px');
+    // Global function to set lable as input placeholder
+    function placeHolder(element, parent){
+      $(element).each(function(){
+        el = $(this);                                                                     //make a variable for this label
+        el_for = el.attr('for');                                                          //get the value of the label attr for
+        label_value = el.text();                                                          //get the value of the label
+        el.hide();                                                                        //hide the label
+        el_input = 'input[id='+el_for+']';                                                //get input element
+        $(parent).find(el_input).attr('placeholder', $.trim(label_value));                //fill it with the label's value
+      });
+    }
+    placeHolder('#edit-keyword-wrapper > label', '#edit-keyword-wrapper');
+    
   }
 };
 
 
 })(jQuery, Drupal, this, this.document);
+
+
+jQuery(document).ready(function () {
+    jQuery(".top_stories_ordering .block-itg-widget").mousemove(function (e) {
+        var h = jQuery(this).height() + 13;
+//        alert(h);
+        var offset = jQuery(this).offset();
+        var position = (e.pageY - offset.top) / jQuery(this).height();
+        if (position < 0.20) {
+
+            jQuery(this).stop().animate({scrollTop: 0}, 1000);
+        }
+        else if (position > 0.70) {
+
+            jQuery(this).stop().animate({scrollTop: h}, 1000);
+        }
+        else
+        {
+//            jQuery(this).stop();
+        }
+    });
+    
+            //header menu add icon for mobile
+jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+//ITG footer
+footerMain();
+    function footerMain(){
+    //footer toggal script
+    jQuery('.footer-expand-icon').click(function(){
+        jQuery('.footer-toggle').slideToggle();
+        jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
+        jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
+    });
+    //footer add more link
+    jQuery('.footer-bottom .cell ul').each( function(){
+        var countList = jQuery(this).children('li').length;        
+        if(countList > 8){
+           jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
+           jQuery(this).append("<li><span class='more-link'>More</span></li>");
+        }
+    });
+   jQuery('.more-link').click(function(){
+        jQuery(this).parents('ul').find('li.hidelist').slideToggle();
+        jQuery(this).toggleClass('active');
+        jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
+        if(jQuery(this).hasClass('active')){
+            jQuery('.more-link').text('Less');
+        } else{
+            jQuery('.more-link').text('More');
+        }
+    });
+    }
+
+});
+
+
+// code to copy serach text into search page
+jQuery(document).ready(function () {
+
+    jQuery('.search-text').keyup(function (e) {
+
+        var code = e.keyCode || e.which;
+
+        if (code == 13) { //Enter keycode
+            //Do something
+            var urldata = Drupal.settings.basePath + 'site-search?keyword=' + jQuery(this).val();
+            window.location.href = urldata;
+        }
+
+    })
+  });
+
+jQuery(window).load(function () {
+    // jQuery code to set offset of photo section page
+    var menuOffset = jQuery('.itg-region').offset();
+    if (jQuery('.video_landing_menu li').children().hasClass('set-offset')) {
+        jQuery("body,html").animate({scrollTop: menuOffset.top - 100}, 300);
+    }      
+});

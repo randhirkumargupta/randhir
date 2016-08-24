@@ -1,6 +1,7 @@
 <?php if (!empty($content)): ?>
   <div class='<?php print $classes ?>'>
       <?php if ($view_mode == 'full'): ?>
+      <?php //print render($content['links']['flag']); ?>
         <a href="javascript:;" class="close-preview">&nbsp;</a>
         <?php
         // Load custom block for social media integration 
@@ -22,7 +23,7 @@
                 </div>
               </div>
           </div>
-        <?php endif; ?>
+        <?php endif; ?>        
         <div class="basic-details content-box">
             <h2><?php print t('Quick File'); ?></h2>
             <div class="content-details">
@@ -228,6 +229,23 @@
               </div>  
           </div>
         <?php endif; ?>
+            <?php
+            $highlight = render($content['field_story_highlights']);
+            if (!empty($highlight)):
+              ?>
+              <div class="expert-details content-box">
+                  <h2><?php print t('Brief case'); ?></h2>
+                  <div class="content-details">
+                      <?php
+                      $h_count = 1;
+                      foreach ($node->field_story_highlights['und'] as $high) {
+                        print '<div class="field"><div class="field-label">'.$h_count.':</div><div class="field-items">'.$high['value'].'</div></div>';
+                        $h_count++;
+                      }
+                      ?>
+                  </div>  
+              </div>
+            <?php endif; ?>
       <?php endif; // end of view mode full condition ?></div>
   <?php
   // code for comment hide and show based on condition

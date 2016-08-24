@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for snap post feature.
+ */
+
+include_once 'feature_for_snap_post.features.inc';

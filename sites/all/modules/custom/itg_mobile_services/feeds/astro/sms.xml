@@ -1,0 +1,5 @@
+<channel>
+    <smsText keyword="{field_zodiac}">
+        <![CDATA[{field_story_expert_description}]]>
+    </smsText>
+</channel>

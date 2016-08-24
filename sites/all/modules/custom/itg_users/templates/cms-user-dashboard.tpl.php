@@ -27,7 +27,7 @@ foreach($data['user_link'] as $key => $val){
           $class = 'fa fa-newspaper-o';
         } else if ($key == 'manage-photogallery') {
           $class = 'fa fa-picture-o';
-        } else if ($key == 'category-manager') {
+        } else if ($key == 'category-manager-listing') {
           $class = 'fa fa-list-alt';
         } else {
           $class = 'fa fa-list-alt';

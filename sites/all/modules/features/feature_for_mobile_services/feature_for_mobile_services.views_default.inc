@@ -184,7 +184,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  /* Field: Content: Client Selection */
+  /* Field: Content: Client selection */
   $handler->display->display_options['fields']['field_client_selection']['id'] = 'field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['table'] = 'field_data_field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['field'] = 'field_client_selection';
@@ -355,7 +355,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
@@ -496,7 +496,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
@@ -622,7 +622,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['title']['relationship'] = 'field_service_association_title_target_id';
   $handler->display->display_options['fields']['title']['label'] = 'Service Title';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Client Selection */
+  /* Field: Content: Client selection */
   $handler->display->display_options['fields']['field_client_selection']['id'] = 'field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['table'] = 'field_data_field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['field'] = 'field_client_selection';
@@ -648,7 +648,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
@@ -801,7 +801,7 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
-  $handler->display->display_options['fields']['changed']['label'] = 'Modified date';
+  $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';

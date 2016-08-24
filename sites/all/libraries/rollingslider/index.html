@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery rollingslider.js Plugin Example</title>
+	<link rel="stylesheet" href="style/index.css">
+	</head>
+	<body>
+		<div class="demo-wrap">
+			<div id="demo" class="demo">
+				<ul class="slide-wrap" id="example">
+					<li class="pos1">
+						<div class="inner">
+							<a href="#">
+								<img src="https://unsplash.it/300/390?image=944"/>
+								<span class="pic-tit">1</span>
+							</a>
+						</div>
+					</li>
+					<li class="pos2">
+						<div class="inner">
+							<a href="#">
+								<img src="https://unsplash.it/300/390?image=943"/>
+								<span class="pic-tit">2</span>
+							</a>
+						</div>
+					</li>
+					<li class="pos3">
+						<div class="inner">
+							<a href="#">
+								<img src="https://unsplash.it/300/390?image=942"/>
+								<span class="pic-tit">3</span>
+							</a>
+						</div>
+					</li>
+					<li class="pos4">
+						<div class="inner">
+							<a href="#">
+								<img src="https://unsplash.it/300/390?image=941"/>
+								<span class="pic-tit">4</span>
+							</a>
+						</div>
+					</li>
+					<li class="pos5">
+						<div class="inner">
+							<a href="#">
+								<img src="https://unsplash.it/300/390?image=940"/>
+								<span class="pic-tit">5</span>
+							</a>
+						</div>
+					</li>
+					<li>
+						<div class="inner">
+							<a href="#">
+								<img data-src="https://unsplash.it/300/390?image=840"/>
+								<span class="pic-tit">6</span>
+							</a>
+						</div>
+					</li>
+					<li>
+						<div class="inner">
+							<a href="#">
+								<img data-src="https://unsplash.it/300/390?image=540"/>
+								<span class="pic-tit">7</span>
+							</a>
+						</div>
+					</li>
+					<li>
+						<div class="inner">
+							<a href="#">
+								<img data-src="https://unsplash.it/300/390?image=340"/>
+								<span class="pic-tit">8</span>
+							</a>
+						</div>
+					</li>
+				</ul>
+				<i class="arrow prev" id="jprev">&lt;</i>
+				<i class="arrow next" id="jnext">&gt;</i>
+			</div>
+		</div>
+		<script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="script/jquery.rollingslider.js"></script>
+		<script>
+			$('#demo').RollingSlider({
+				showArea:"#example",
+				prev:"#jprev",
+				next:"#jnext",
+				moveSpeed:300,
+				autoPlay:false
+			});
+		</script>
+</body>
+</html>

@@ -109,13 +109,17 @@ function itg_story_theme($existing, $type, $theme, $path) {
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':
+      
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       unset($form['actions']['preview_changes']);
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['#after_build'][] = 'itg_story_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
       break;
+  
   }
+        $form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
+
 }
 
 /**
@@ -171,7 +175,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
  * {@inheritdoc}
  */
 function itg_story_node_validate($node, $form, &$form_state) {
-
+//return TRUE;
   // Code for redirection url validation
   if ($node->type == 'story') {
 
@@ -250,7 +254,12 @@ function itg_story_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
+
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-highlights-und-0-remove-button").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
   }
+
 
   $form['field_story_select_magazine']['und']['#title'] = t('Select magazine') . '<span class="form-required" title="This field is required."> *</span>';
   $form['field_story_magazine_kicker_text']['und']['#title'] = t('Magazine kicker') . '<span class="form-required" title="This field is required."> *</span>';
@@ -344,10 +353,13 @@ function itg_story_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_story_node_update($node) {
-  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
+  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft' && $node->op == 'Save') {
     foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
       if ($val['value'] == 'breaking_news') {
-        itg_story_create_breaking_news($node);
+        $breaking_cond = get_breaking_id($node->nid);
+        if (!$breaking_cond) {
+          itg_story_create_breaking_news($node);
+        }
       }
     }
   }
@@ -514,4 +526,20 @@ function itg_story_checked_issue($issue_date) {
   }
 
   return TRUE;
+}
+
+
+/**
+ * Get breakingnews  id
+ * @param int $breaking_id
+ * @return int $itg_result
+ */
+function get_breaking_id($breaking_id) {  
+  $query = db_select('field_data_field_source', 'fs');
+  $query->fields('fs', array('entity_id'));  
+  $query->condition('fs.bundle', 'breaking_news');
+  $query->condition('fs.field_source_value', $breaking_id);
+  $itg_result = $query->execute()->fetchField();
+  
+  return $itg_result;
 }

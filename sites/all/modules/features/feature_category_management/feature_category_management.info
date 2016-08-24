@@ -29,7 +29,6 @@ features[field_instance][] = taxonomy_term-category_management-field_cm_no_follo
 features[field_instance][] = taxonomy_term-category_management-field_cm_redirection_url
 features[field_instance][] = taxonomy_term-category_management-field_cm_select_type
 features[field_instance][] = taxonomy_term-category_management-field_cm_sponsored_category
-features[field_instance][] = taxonomy_term-category_management-field_publish_time
 features[field_instance][] = taxonomy_term-category_management-field_sponser_logo
 features[field_instance][] = taxonomy_term-category_management-field_user_city
 features[field_validation_rule][] = Category Management Redirect URL

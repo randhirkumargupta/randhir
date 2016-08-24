@@ -12,6 +12,9 @@
 function itg_mobile_services_feed_generator_of_contents($node) {
   // get service id  
   $association_nid = $node->field_service_association_title[LANGUAGE_NONE][0]['target_id'];
+  // get astro exist
+  $astro = itg_mobile_services_check_astro_service($association_nid);
+
   $frequency_date_array = explode(' ', $node->field_service_frequency_date[LANGUAGE_NONE][0]['value']);
   $today_date = date('Y-m-d');
 
@@ -19,8 +22,10 @@ function itg_mobile_services_feed_generator_of_contents($node) {
   $service_details = node_load($association_nid);
   // service title
   $service_title = str_replace(' ', '-', $service_details->title);
-  // delivery mode
+  // xml format
   $delivery_mode = $service_details->field_service_delivery_mode[LANGUAGE_NONE][0]['value'];
+  // delivery mode
+  $xml_format = $service_details->field_mobile_xml_format[LANGUAGE_NONE][0]['xml'];
 
   $get_clients_id = get_clients_id($association_nid);
   // client ids
@@ -45,7 +50,7 @@ function itg_mobile_services_feed_generator_of_contents($node) {
     if (is_array($data['clients']) && count($data['clients']) > 0) {
       foreach ($data['clients'] as $key => $val) {
         if ($content_count <= $val && empty($error)) {
-          drupal_set_message('Feed cannot be generated. You have already exceeded feed count limit. Please increase content count limit from service association page.', 'error');
+          drupal_set_message(t('Feed cannot be generated. You have already exceeded feed count limit. Please increase content count limit from service association page.'), 'error');
           $error = TRUE;
         }
       }
@@ -56,26 +61,52 @@ function itg_mobile_services_feed_generator_of_contents($node) {
     return FALSE;
   }
   else {
-    switch ($delivery_mode) {
-      case 1: // xml
-        $file_path = itg_mobile_services_generate_xml($node, $service_title, $field_header, $field_footer);
-        break;
-      case 2: // rss
-        $file_path = itg_mobile_services_generate_rss($node, $service_title, $field_header, $field_footer);
-        break;
-      case 3: // mrss
-        $file_path = itg_mobile_services_generate_mrss($node, $service_title, $field_header, $field_footer);
-        break;
-      case 4: //ussd
-        $file_path = itg_mobile_services_generate_ussd($node, $service_title, $field_header, $field_footer);
-        break;
-      case 5: //sms
-        $file_path = itg_mobile_services_generate_sms($node, $service_title, $field_header, $field_footer);
-        break;
-      case 6: // Simple Text Feed
-        $file_path = itg_mobile_services_generate_feed($node, $service_title, $field_header, $field_footer);
-        break;
+
+    if ($astro) {
+      switch ($delivery_mode) {
+        case 1: // xml
+          $file_path = itg_mobile_services_generate_xml($node, $service_title, $field_header, $field_footer, $xml_format, $astro);
+          break;
+        case 2: // rss
+          $file_path = itg_mobile_services_generate_rss($node, $service_title, $field_header, $field_footer, $xml_format, $astro);
+          break;
+        case 3: // mrss
+          $file_path = itg_mobile_services_generate_astro_mrss($node, $service_title, $field_header, $field_footer, $xml_format, $astro);
+          break;
+        case 4: //ussd
+          $file_path = itg_mobile_services_generate_ussd($node, $service_title, $field_header, $field_footer, $xml_format, $astro);
+          break;
+        case 5: //sms
+          $file_path = itg_mobile_services_generate_astro_sms($node, $service_title, $field_header, $field_footer, $xml_format, $astro);
+          break;
+        case 6: // Simple Text Feed
+          $file_path = itg_mobile_services_generate_feed($node, $service_title, $field_header, $field_footer, $xml_format, $astro);
+          break;
+      }
     }
+    else {
+      switch ($delivery_mode) {
+        case 1: // xml
+          $file_path = itg_mobile_services_generate_xml($node, $service_title, $field_header, $field_footer, $xml_format, NULL);
+          break;
+        case 2: // rss
+          $file_path = itg_mobile_services_generate_rss($node, $service_title, $field_header, $field_footer, $xml_format, NULL);
+          break;
+        case 3: // mrss
+          $file_path = itg_mobile_services_generate_mrss($node, $service_title, $field_header, $field_footer, $xml_format, NULL);
+          break;
+        case 4: //ussd
+          $file_path = itg_mobile_services_generate_ussd($node, $service_title, $field_header, $field_footer, $xml_format, NULL);
+          break;
+        case 5: //sms
+          $file_path = itg_mobile_services_generate_sms($node, $service_title, $field_header, $field_footer, $xml_format, $astro);
+          break;
+        case 6: // Simple Text Feed
+          $file_path = itg_mobile_services_generate_feed($node, $service_title, $field_header, $field_footer, $xml_format, $astro);
+          break;
+      }
+    }
+
 
     foreach ($client_id_array as $client_id) {
       $client_info = node_load($client_id);
@@ -288,9 +319,9 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
     $details = serialize($details_array);
     if ($nid) {
       db_delete('itg_cron_time_scheduler')
-        ->condition('cron_type', 'vas_service_content', '=')
-        ->condition('content_id', $nid, '=')
-        ->execute();
+          ->condition('cron_type', 'vas_service_content', '=')
+          ->condition('content_id', $nid, '=')
+          ->execute();
 
       $query = db_insert('itg_cron_time_scheduler');
       $query->fields(array(
@@ -337,12 +368,12 @@ function itg_mobile_cron_after_feed_generate($node, $client_array, $content_coun
  * @param int $status
  */
 function itg_mobile_web_url_mobile($service_fetch_link, $file_path, $status) {
-
+  $timestamp = date("Y-m-d H:i:s");
   $query = db_insert('itg_syndication_feed_url');
   $query->fields(array(
     'xml_name' => $file_path,
     'client_feed_url' => $service_fetch_link,
-    'created_date' => time(),
+    'created_date' => $timestamp,
     'status' => $status
   ));
   $query->execute();
@@ -354,47 +385,124 @@ function itg_mobile_web_url_mobile($service_fetch_link, $file_path, $status) {
  */
 function itg_mobile_get_feed_byurl() {
   global $base_url;
-  $url = $base_url . '/' . arg(0) . '/' . arg(1) . '/' . arg(2);
+  $build = array();
+  $request_url = explode('/', $_SERVER['REQUEST_URI']);
+  unset($request_url[0]);
+  unset($request_url[1]);
+  $url = $base_url . '/' . $request_url[2] . '/' . $request_url[3] . '/' . $request_url[4];
+  $path = file_create_url('public://');
 
-  $itg_query = db_select('itg_syndication_feed_url', 'feed');
-  $itg_query->fields('feed', array('id', 'xml_name', 'created_date'));
-  $itg_query->condition('feed.client_feed_url', $url);
-  $itg_query->condition('feed.status', 1, '=');
-  $itg_query->orderBy('created_date', 'DESC'); //ORDER BY created
-  $itg_result = $itg_query->execute()->fetchAll();
+  $query = db_select('itg_syndication_feed_url', 'feed')->extend('PagerDefault');
+  # get the desired fields from the database
+  $query ->condition('feed.client_feed_url', $url)
+      ->condition('feed.status', 1, '=');
 
-  // TODO: add php tags and language tags
-  $table = '<table class="views-table">';
-  $table .= '<tbody>';
-  $table .= '<tr>';
-  $table .= '<th>S. No.</th>';
-  $table .= '<th>Service Name</th>';
-  $table .= '<th>Frequency</th>';
-  $table .= '<th>Frequency Date</th>';
-  $table .= '<th>Time</th>';
-  $table .= '<th>Link</th>';
-  $table .= '</tr>';
+  $search_box = drupal_render(drupal_get_form('search_form'));
+  # set the database table
+  if (isset($_POST['max']['date'])) {
+    $mx_date = str_replace('/', '-', $_POST['max']['date']);
+    $min_date = str_replace('/', '-', $_POST['min']['date']);
+
+    $max_date = date('Y-m-d', strtotime($mx_date)) . ' 00:00:00';
+    $min_date = date('Y-m-d', strtotime($min_date)) . ' 00:00:00';
+
+    $query->condition('feed.created_date', $min_date, '>=');
+    $query->condition('feed.created_date', $max_date, '<=');
+  }
+
+  $query->fields('feed', array('id', 'xml_name', 'created_date'))
+      ->orderBy('created_date', 'DESC')
+      ->limit(10);
+  # execute the query
+  $results = $query->execute();
+  $header = array(
+    '1' => t('S. No.'),
+    '2' => array('data' => t('Service Name'), 'sort' => 'desc'),
+    '3' => t('Frequency'),
+    '4' => t('Frequency Date'),
+    '5' => t('Created Date'),
+    '6' => t('Link'),
+  );
+  # build the table fields
+  $rows = array();
   $i = 1;
-  foreach ($itg_result as $itg_val) {
-    $file_url = explode('sites/', $itg_val->xml_name);
-    $file_url_array = explode('_', $file_url[1]);
+  foreach ($results as $row) {
+
+    $real_path = substr($path, 0, -1) . $row->xml_name;
+    $files_url = explode('mobile/', $real_path);
+    $file_url = explode('/', $files_url[1]);
+    $file_url_array = explode('_', $file_url[2]);
     $file_date_array = explode('.', $file_url_array[3]);
     $frequency_type_arr = explode('/', $file_url_array[0]);
     $frequency_type = ($frequency_type_arr[count($frequency_type_arr) - 1]);
     $frequency_date = $file_url_array[2];
     $date_time = isset($file_url_array[0]) ? date('d/m/Y H:i:s', $file_date_array[0]) : '';
-    $table .= '<tr>';
-    $table .= '<td>' . $i . '</td>';
-    $table .= '<td>' . $file_url_array[1] . '</td>';
-    $table .= '<td>' . $frequency_type . '</td>';
-    $table .= '<td>' . $frequency_date . '</td>';
-    $table .= '<td>' . $date_time . '</td>';
-    $table .= '<td><a href="' . $base_url . '/sites/' . $file_url[1] . '" download> Click to Download </a>' . '</td>';
-    $table .= '</tr>';
+    $created_date = $row->created_date;
+
+    $rows[] = array($i,
+      $file_url_array[1],
+      $frequency_type,
+      $frequency_date,
+      $created_date,
+      '<a href="' . $real_path . '" download> Click to Download </a>' . '</td>',
+    );
     $i++;
   }
-  $table .= '</tbody></table>';
-  return $table;
+  // Format and print out the table.
+  $output = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table'))));
+
+  $build['content'] = array(
+    'itg_mobile_services_search' => drupal_get_form('itg_mobile_services_search_form'),
+    'itg_mobile_services_content' => array(
+      '#markup' => $output,
+    ),
+  );
+  # add the pager
+  $build['pager'] = array(
+    '#theme' => 'pager',
+    '#weight' => 5,
+  );
+
+  return $build;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @return string
+ */
+function itg_mobile_services_search_form($form, &$form_state) {
+  $form['created']['min'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('From'),
+    '#date_format' => 'd/m/Y',
+    '#date_year_range' => '-1:+1',
+  );
+  $form['created']['max'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('To'),
+    '#date_format' => 'd/m/Y',
+    '#date_year_range' => '-1:+1',
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+  return $form;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param array $form_state
+ */
+function itg_mobile_services_search_form_submit($form, &$form_state) {
+  $form_state['rebuild'] = TRUE;
 }
 
 /**
@@ -425,11 +533,11 @@ function itg_mobile_services_cron() {
       $file_path = $data['file_path'];
 
       db_update('itg_cron_time_scheduler')
-        ->fields(array(
-          'status' => 1
-        ))
-        ->condition('content_id', $content_id)
-        ->execute();
+          ->fields(array(
+            'status' => 1
+          ))
+          ->condition('content_id', $content_id)
+          ->execute();
       foreach ($client_id_array as $client_id) {
         $client_info = node_load($client_id);
         if (is_object($client_info) && count($client_info) > 0) {
@@ -441,11 +549,11 @@ function itg_mobile_services_cron() {
               $service_fetch_link = isset($client_info->field_service_fetch_link[LANGUAGE_NONE]) ? $client_info->field_service_fetch_link[LANGUAGE_NONE][0]['value'] : '';
 
               db_update('itg_syndication_feed_url')
-                ->fields(array(
-                  'status' => 1
-                ))
-                ->condition('client_feed_url', $service_fetch_link)
-                ->execute();
+                  ->fields(array(
+                    'status' => 1
+                  ))
+                  ->condition('client_feed_url', $service_fetch_link)
+                  ->execute();
               break;
             case 2: // 2. Via FTP location
               $ftp_ip_address = isset($client_info->field_ftp_ip_address[LANGUAGE_NONE]) ? $client_info->field_ftp_ip_address[LANGUAGE_NONE][0]['value'] : '';

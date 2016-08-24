@@ -1,0 +1,13 @@
+name = feature for snap post
+description = feature for snap post
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[image][] = buzz_image
+features[image][] = story_image
+features[views_view][] = snappost
+features_exclude[dependencies][ctools] = ctools
+features_exclude[dependencies][image] = image

@@ -7,10 +7,11 @@
 
 ?>
 <div class="block-itg-story-list">
-<span class="target-link" data-target-id="BreakingNewsBasicDetails">Basic Details</span> 
-<span class="target-link" data-target-id="ContentDetails">Content Details</span>
-<span class="target-link" data-target-id="Shortdescriptions">Short description</span>
-<span class="target-link" data-target-id="DisplayOn">Display on</span>
-<span class="target-link" data-target-id="BrowseMedia">Browse Media</span>
-<span class="target-link" data-target-id="title-metatags">Meta Details</span>
+<span class="target-link" data-target-id="BreakingNewsBasicDetails"><?php print t('Basic Details'); ?></span> 
+<span class="target-link" data-target-id="ContentDetails"><?php print t('Content Details'); ?></span>
+<span class="target-link" data-target-id="Shortdescriptions"><?php print t('Short description'); ?></span>
+<span class="target-link" data-target-id="BrowseMedia"><?php print t('Browse Media'); ?></span>
+<span class="target-link" data-target-id="Highlights"><?php print t('Highlights'); ?></span>
+<span class="target-link" data-target-id="Relatedcontent"><?php print t('Related content'); ?></span>
+<span class="target-link" data-target-id="title-metatags"><?php print t('Meta Details'); ?></span>
 </div>

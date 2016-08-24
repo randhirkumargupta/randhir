@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * @file
+ * The ITG Image Search module.
+ *
+ * Contains functionality related to Image Searching.
+ *
+ */
+
+/**
+ * Implements hook_menu().
+ * {@inheritdoc}
+ */
+function itg_image_search_menu() {
+
+    $items = array();
+    $items['findimage'] = array(
+        'page callback' => 'itg_image_search_findimages', // search image by tags and make listing.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+    
+    $items['saveimage'] = array(
+        'page callback' => 'itg_image_search_saveimage', // make image tags edit
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+
+
+    return $items;
+}
+
+/**
+ * This function use for search image by tags and make listing
+ */
+
+function itg_image_search_findimages() {
+    $serilizedata = $_POST['formdata'];
+    parse_str($serilizedata, $output);
+    $tags = $output['terms'];
+    $gettagfid = itg_image_search_getimagefid_by_tag($tags);
+    print theme('image_listing', array('data' => $gettagfid,'term'=>$tags
+    ));
+}
+
+/**
+ * This function use for find images by tags title
+ * @param string $tags
+ * @return array $result
+ */
+
+function itg_image_search_getimagefid_by_tag($tags) {
+    $result = db_select('image_tags', 'tags')
+            ->fields('tags', array('image_id'))
+            ->condition('tag_title', '%' . db_like($tags) . '%', 'LIKE')
+            ->execute()
+            ->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_image_search_theme($existing, $type, $theme, $path) {
+
+    return array(
+        'image_listing' => array(
+            'template' => 'templates/image_listing',
+        ),
+    );
+}
+
+
+function itg_image_search_saveimage() {
+
+    $image_url = $_POST['imageurl'];
+    if (strpos($image_url,'styles/thumbnail'))
+    {
+      $image_url=str_replace('styles/thumbnail/public/','',$image_url);     
+}  
+    $image_name = $_POST['field_id'];
+    $imagedata=file_get_contents($image_url);
+    if (!file_exists(file_default_scheme() . '://crop_image')) {
+        mkdir(file_default_scheme() . '://crop_image', 0777, TRUE);
+    }
+    $file = file_save_data($imagedata, file_default_scheme() . '://crop_image/' . $image_name . '.png');
+    file_usage_add($file, 'itg_image_repository', 'file', $file->fid);
+
+    (array) $file;
+    print json_encode($file);
+    exit();
+}

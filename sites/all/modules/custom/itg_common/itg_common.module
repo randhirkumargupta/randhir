@@ -42,8 +42,23 @@ function itg_common_dropdown_supplement($id = '') {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
+  //p($form);  
   if ($user->uid != '1') {
+    // checkbox hide for all user of Provide a menu link on all form
+    drupal_add_js('jQuery(document).ready(function() {                  
+             jQuery(".form-item-menu-enabled").hide();                         
+      });', array('type' => 'inline', 'scope' => 'footer'));
+    
+    if ($form_id == 'menu_edit_item') {
+      // Add JS to hide extra element of menu forms
+      drupal_add_js('jQuery(document).ready(function() {                  
+             jQuery(".form-item-description").hide();
+             jQuery(".form-type-checkbox").hide();
+             jQuery(".form-item-expanded").hide();
+             jQuery(".form-item-parent").hide();
+             jQuery(".form-item-weight").hide();             
+      });', array('type' => 'inline', 'scope' => 'footer'));
+    }
     // hide source relation and type field from other users 
     if ($form_id == 'podcast_node_form'
       || $form_id == 'videogallery_node_form'
@@ -54,8 +69,22 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     ) {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
+      
+      // add common hidden type field
+      $type = $form['type']['#value'];
+
+      $form['ntype'] = array(
+        '#title' => t('Ntype'),
+        '#type' => 'hidden',
+        '#id' => 'ntype',
+        '#description' => t(''),
+        '#value' => $type,
+      );
+      
     }
 
+    
+    
     // Add JS to hide Advance seeting from all content type forms
     drupal_add_js('jQuery(document).ready(function() {                  
            jQuery("#edit-metatags-und-advanced").hide();
@@ -102,6 +131,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     || $form_id == 'story_node_form'
     || $form_id == 'itg_celebrity_profile_node_form'
     || $form_id == 'blog_node_form'
+    || $form_id == 'podcast_node_form'
   ) {
     if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
       $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
@@ -265,17 +295,6 @@ function itg_common_cancel_button($form, &$form_state) {
 }
 
 /**
- * Implements hook_views_pre_render
- * {@inheritdoc}
- */
-function itg_common_views_pre_render(&$view) {
-  if ($view->name == "byline_list") {
-    $header_content = l(t('Create Byline'), 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
-    $view->attachment_before = $header_content;
-  }
-}
-
-/**
  * Implements hook_form_FORMID_alter().
  * {@inheritdoc}
  */
@@ -416,13 +435,13 @@ function itg_common_node_presave($node) {
     case 'astro':
     case 'recipe':
     case 'poll':
-    case 'mega_review_critic':
-      if ($node->op == 'Save as Draft') {        
-        $node->status = 0;
-      }
-      else {        
+    case 'mega_review_critic':      
+      if ($node->op == 'Publish') {        
         $node->status = 1;
-      }
+      }      
+      elseif ($node->op == 'Save as Draft' || $node->status == 0) {        
+        $node->status = 0;        
+      }      
   }
 }
 

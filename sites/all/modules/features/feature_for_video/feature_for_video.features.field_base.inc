@@ -10,6 +10,35 @@
 function feature_for_video_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_dailymotion_playlist'.
+  $field_bases['field_dailymotion_playlist'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_dailymotion_playlist',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'playlist',
+          'parent' => 0,
+        ),
+      ),
+    ),
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
+  );
+
   // Exported field_base: 'field_upload_video'.
   $field_bases['field_upload_video'] = array(
     'active' => 1,
@@ -54,18 +83,17 @@ function feature_for_video_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
-      'handler' => 'base',
+      'handler' => 'views',
       'handler_settings' => array(
         'behaviors' => array(
           'views-select-list' => array(
             'status' => 0,
           ),
         ),
-        'sort' => array(
-          'type' => 'none',
-        ),
-        'target_bundles' => array(
-          'itg_celebrity_profile' => 'itg_celebrity_profile',
+        'view' => array(
+          'args' => array(),
+          'display_name' => 'entityreference_1',
+          'view_name' => 'anchor_option_view',
         ),
       ),
       'target_type' => 'node',
@@ -102,54 +130,28 @@ function feature_for_video_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_video_thumbnail'.
-  $field_bases['field_video_thumbnail'] = array(
+  // Exported field_base: 'field_video_duration'.
+  $field_bases['field_video_duration'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_video_thumbnail',
+    'field_name' => 'field_video_duration',
     'field_permissions' => array(
       'type' => 0,
     ),
     'indexes' => array(
-      'fid' => array(
-        0 => 'fid',
+      'format' => array(
+        0 => 'format',
       ),
     ),
     'locked' => 0,
-    'module' => 'image',
+    'module' => 'text',
     'settings' => array(
-      'default_image' => 0,
-      'uri_scheme' => 'public',
+      'max_length' => 255,
     ),
     'translatable' => 0,
-    'type' => 'image',
-  );
-
-  // Exported field_base: 'field_videogallery_video_upload'.
-  $field_bases['field_videogallery_video_upload'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_videogallery_video_upload',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'revision_id' => array(
-        0 => 'revision_id',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'field_collection',
-    'settings' => array(
-      'hide_blank_items' => 1,
-      'path' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'field_collection',
+    'type' => 'text',
   );
 
   return $field_bases;

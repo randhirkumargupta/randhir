@@ -13,14 +13,13 @@
  * @param array $category
  */
 function itg_users_user_presave(&$edit, $account, $category) {
-  
+
   if ($edit['field_first_name'][LANGUAGE_NONE][0]['value']) {
     $edit['field_first_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_first_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
   if ($edit['field_last_name'][LANGUAGE_NONE][0]['value']) {
     $edit['field_last_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_last_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
-   
 }
 
 /**
@@ -40,31 +39,30 @@ function itg_users_menu() {
     'page callback' => 'itg_users_block_user',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_users.inc',     
+    'file' => 'includes/itg_users.inc',
   );
-  
+
   $items['access-denied'] = array(
     'page callback' => 'itg_users_access_denied',
-    'access callback' => TRUE,   
+    'access callback' => TRUE,
   );
 
   return $items;
 }
-
 
 /**
  * Implements hook_form_alter().
  */
 function itg_users_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  
+
   if (isset($form['confirm']['#value'])) {
-   // hide remove button of first field on add form 
+    // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
               jQuery(".confirm-user").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer')); 
+            });', array('type' => 'inline', 'scope' => 'footer'));
   }
-  
+
   if ($form_id == "user_pass") {
     drupal_add_js("jQuery('#edit-name').blur(function(){
       jQuery('#user-pass .login-wrapper span.error').text('');
@@ -79,13 +77,28 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
       });", array('type' => 'inline', 'scope' => 'footer'));
   }
   if ($form_id == 'user_profile_form') {
+    // access denied code for direct hit 
+    if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit' && arg(1) != $user->uid) {
+      $arg = arg(1);            
+      $user_child_roles = itg_users_role_delegation($user->roles);
+      $user_role = user_load($arg);
+      $user_intersec = array_intersect($user_role->roles, $user_child_roles);
+      if (empty($user_intersec) && (!in_array('administrator', $user->roles))) {
+        drupal_access_denied();
+        module_invoke_all('exit');
+        drupal_exit();
+      }
+//      else {
+//        return true;
+//      }
+    }
     $form['field_notify_user_of_update_acco']['und']['#attributes'] = array('checked' => 'checked');
     $form['account']['name']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#attributes']['disabled'] = 'disabled';
     $form['account']['mail']['#weight'] = '-6';
     $form['#validate'][] = 'itg_users_validate_user_profile_validate';
     $form['#after_build'][] = 'itg_users_after_user_profile_validate';
-           
+
     if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit') {
       $self_user = arg(1);
       //$user_role = user_load($self_user);
@@ -95,7 +108,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
         unset($form['field_story_expiry_date']);
         unset($form['field_notify_user_of_update_acco']);
         unset($form['field_subscribe_for_newsletter']);
-        }
+      }
     }
 
     if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) {
@@ -158,7 +171,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
             '#required' => TRUE,
           );
         }
-      }           
+      }
 
       //Check to default when create new user 'Notify User of New Account' checkbox will be checked.
       $form['account']['notify']['#default_value'] = TRUE;
@@ -328,7 +341,7 @@ function itg_users_views_pre_render(&$view) {
 
     $header_content = '';
     if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles)) {
-      $header_content = '<span class="count">Count ('.$view->total_rows.') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Create User'), 'admin/people/create', array('query' => array('destination' => 'manage-users'), 'attributes' => array('class' => 'confirm-user')));
     }
 
@@ -396,10 +409,11 @@ function itg_users_role_delegation_uid() {
 
   return $user_array;
 }
- 
+
 /*
  * after build for user management form
  */
+
 function itg_user_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_users') . '/js/itg_users.js', array('weight' => 1));
   return $form;
@@ -446,18 +460,18 @@ function itg_users_user_login(&$edit, $account) {
   $role_count = count($account->roles);
   //p($account->roles);
   if (isset($_GET['destination'])) {
-        unset($_GET['destination']);
-    }
-   if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
+    unset($_GET['destination']);
+  }
+  if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
     if (!isset($_GET['destination']) && arg(1) != "reset") {
       $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
     }
   }
   if ($role_count < 3) {
     if (array_key_exists(EXPERT, $account->roles)) {
-       if (arg(1) != "reset") {
-      $_GET['destination'] = 'ask-an-expert';
-       }
+      if (arg(1) != "reset") {
+        $_GET['destination'] = 'ask-an-expert';
+      }
     }
   }
 }
@@ -564,31 +578,30 @@ function itg_users_user_update(&$edit, $account, $category) {
       }
     }
   }
-  
+
   // send mail when user select notification chekbox
   if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
 
-    $news_info = 'You have sucessfully subscribed for India Today newsletters.';    
+    $news_info = 'You have sucessfully subscribed for India Today newsletters.';
     $mail_content = itg_users_get_mail_content($news_info);
-      $params = array(
-        'body' => $mail_content,
-        'subject' => 'India Today | Newsletter Subscription!',
-      );
+    $params = array(
+      'body' => $mail_content,
+      'subject' => 'India Today | Newsletter Subscription!',
+    );
 
-      $to = $account->mail;
+    $to = $account->mail;
 
-      $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
-      if ($mail['result']) {
-        return TRUE;
-      }
-      else {
-        $error_msg = 'Failed to send the email!';
-        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-        return FALSE;
-      }
+    $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    }
+    else {
+      $error_msg = 'Failed to send the email!';
+      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      return FALSE;
+    }
   }
 }
-
 
 /**
  * Implements hook_node_insert
@@ -596,28 +609,27 @@ function itg_users_user_update(&$edit, $account, $category) {
  * @param type $account
  * @param type $category
  */
-function itg_users_user_insert(&$edit, $account, $category) { 
+function itg_users_user_insert(&$edit, $account, $category) {
   if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
-    $news_info = 'You have sucessfully subscribed for India Today newsletters.';    
+    $news_info = 'You have sucessfully subscribed for India Today newsletters.';
     $mail_content = itg_users_get_mail_content($news_info);
-      $params = array(
-        'body' => $mail_content,
-        'subject' => 'India Today | Newsletter Subscription!',
-      );
+    $params = array(
+      'body' => $mail_content,
+      'subject' => 'India Today | Newsletter Subscription!',
+    );
 
-      $to = $account->mail;
+    $to = $account->mail;
 
-      $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
-      if ($mail['result']) {
-        return TRUE;
-      }
-      else {
-        $error_msg = 'Failed to send the email!';
-        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-        return FALSE;
-      }
+    $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
+    if ($mail['result']) {
+      return TRUE;
+    }
+    else {
+      $error_msg = 'Failed to send the email!';
+      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+      return FALSE;
+    }
   }
-  
 }
 
 /**
@@ -642,8 +654,8 @@ function itg_users_mail($key, &$message, $params) {
         $message['headers'][$key] = $value;
       }
       break;
-      
-      case 'send_subscribe_mail_to_user':
+
+    case 'send_subscribe_mail_to_user':
       $headers = array(
         'MIME-Version' => '1.0',
         'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
@@ -656,8 +668,8 @@ function itg_users_mail($key, &$message, $params) {
         $message['headers'][$key] = $value;
       }
       break;
-      
-      case 'send_password_mail_to_user':
+
+    case 'send_password_mail_to_user':
       $headers = array(
         'MIME-Version' => '1.0',
         'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
@@ -680,9 +692,9 @@ function itg_users_mail($key, &$message, $params) {
  * @return string
  */
 function itg_users_get_mail_content($role) {
-  
+
   global $base_url;
-  
+
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -693,31 +705,28 @@ function itg_users_get_mail_content($role) {
       <tr><td></td></tr>
       <tr><td>Dear user,</td></tr>
       <tr><td></td></tr>
-      <tr><td>'.$role.'</td></tr>
+      <tr><td>' . $role . '</td></tr>
       <tr><td></td></tr>
       <tr><td>Thanks,</td></tr>
       <tr><td>India Today Team</td></tr></table>
 </body></html>';
 
   return $content;
-  
 }
 
-
- 
 /**
  * Get last node published by user
  * @param type $rid
  */
-function itg_users_role_name($rid) {  
+function itg_users_role_name($rid) {
   $role_result = db_select('role', 'r')
-    ->fields('r')
-    ->condition('rid', $rid)
-    ->condition('rid', 1,'!=')
-    ->execute()
-    ->fetchAssoc();
-   
-    return $role_result['name'];
+      ->fields('r')
+      ->condition('rid', $rid)
+      ->condition('rid', 1, '!=')
+      ->execute()
+      ->fetchAssoc();
+
+  return $role_result['name'];
 }
 
 /**
@@ -746,5 +755,5 @@ function itg_users_access_denied() {
  * {@inheritdoc}
  */
 function itg_users_js_alter(&$javascript) {
- $javascript['modules/user/user.js']['data'] =  drupal_get_path('module', 'itg_users') . '/js/custom_user.js';
+  $javascript['modules/user/user.js']['data'] = drupal_get_path('module', 'itg_users') . '/js/custom_user.js';
 }

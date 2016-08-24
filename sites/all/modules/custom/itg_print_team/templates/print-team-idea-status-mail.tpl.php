@@ -5,7 +5,7 @@
  */
 
 global $base_url;
-$idea_link = $base_url.'/node/'.$node->nid.'/edit';
+$idea_link = $base_url . '/user/login?destination=node/' . $node->nid.'/edit';
 
 ?> 
 
@@ -22,13 +22,13 @@ $idea_link = $base_url.'/node/'.$node->nid.'/edit';
         <td style="padding: 10px 20px;">Dear User,</td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Your idea has been review by our team.</td>
+        <td style="padding: 10px 20px;">Your idea has been reviewed and updated by our team. Details are given below:</td>
       </tr>
       <tr>
         <td style="padding: 10px 20px;">Current status: <strong><?php echo $node->field_pti_idea_status[LANGUAGE_NONE][0]['value']; ?></strong></td>
       </tr>
       
-      <?php if($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {?>
+      <?php if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {?>
       <tr>
         <td style="padding: 10px 20px;">Words limit to write story: <?php echo $node->field_pti_words_limit[LANGUAGE_NONE][0]['value']; ?></td>
       </tr>
@@ -37,16 +37,16 @@ $idea_link = $base_url.'/node/'.$node->nid.'/edit';
       </tr>
       <?php } ?>
       
-      <?php if($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs Modification') {?>
+      <?php if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs-Modification') {?>
       <tr>
         <td style="padding: 10px 20px;">You need to describe more about your idea.</td>
       </tr>
       <?php } ?>
       
       
-      <?php if($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs Modification') {?>
+      <?php if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved' || $node->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Needs-Modification') {?>
       <tr>
-        <td style="padding: 10px 20px;"><?php echo l('Click here to update', $idea_link, array('attributes' => array('target' => '_blank'))); ?></td>
+        <td style="padding: 10px 20px;"><?php echo l('Click here to view idea', $idea_link, array('attributes' => array('target' => '_blank'))); ?></td>
       </tr>
       <?php } ?>
       

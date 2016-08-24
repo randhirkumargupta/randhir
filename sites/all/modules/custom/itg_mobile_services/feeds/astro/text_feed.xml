@@ -1,0 +1,13 @@
+<channel>
+<header>
+<title>Currency Rates</title>
+<description>Currency Rates</description>
+<link>http://www.indiatoday.intoday.in/</link>
+</header>  
+    <item>
+	<title>{field_client_short_description}</title>
+	<description>{field_story_expert_description}</description>
+        <link>http://indiatoday.intoday.in/</link>
+	<pubDate>{field_service_content_date}</pubDate>         
+    </item>
+</channel>

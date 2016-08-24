@@ -61,7 +61,7 @@
             $('#edit-title').blur(function() {
                 $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
             });
-
+            $('.plupload_container').removeAttr("title");
             // Display Byline details
             $('#edit-field-story-reporter-und-0-target-id').blur(function() {
                 var base_url = Drupal.settings.basePath;
@@ -74,8 +74,234 @@
                     }
                 });
             });
+            // FTP browse js
+            $('document').ready(function() {
+                var old_vid = $("input[name='field_upload_video[und][0][fid]']").val();
+                if (old_vid == 0) {
+                    $("#edit-field-upload-video-und-0-upload").hide();
+                    $("#edit-field-upload-video-und-0-upload-button").hide();
+                    $('#edit-field-upload-video label').hide();
+                } else {
+                    $(".browse-ftp-click").hide();
+                    $('.browse-video-form label').hide();
+                    $('#edit-field-upload-video label:first').show();
+                }
+            });
 
+
+            $('.browse-ftp').hide();
+
+            $('.ftp-server a').click(function() {
+                var vid = $('#edit-video-browse-select .form-radio:checked').val();
+                if (vid !== "" && !$.isNumeric(vid)) {
+                    alert('Please select video file.');
+                } else {
+                    $("input[name='field_upload_video[und][0][fid]']").val(vid);
+                    $("#edit-field-upload-video-und-0-upload-button").mousedown();
+                    $.colorbox.close();
+                    setTimeout(function() {
+                        $('#edit-video-browse-select .form-radio').prop('checked', false);
+                    }, 1000);
+                }
+            });
+            // popup show hide
+            $(".video-local").click(function() {
+                $(".local_browse").show();
+                $(".ftp-server").hide();
+                $(".video_filters").hide();
+                $('.video-ftp').removeClass('active');
+                $(this).addClass('active');
+            });
+            $(".video-ftp").click(function() {
+                $(".local_browse").hide();
+                $(".ftp-server").show();
+                $(".video_filters").show();
+                $(this).addClass('active');
+                $('.video-local').removeClass('active');
+                $('.used-unused-select').val('unused');
+                $('.used-unused-select').trigger('change');
+
+            });
+            $(".browse-local").click(function() {
+                $("#edit-field-upload-video-und-0-upload").show();
+                $("#edit-field-upload-video-und-0-upload-button").show();
+                $("#edit-field-upload-video-und-0-upload").trigger('click');
+                $("#edit-field-upload-video-und-0-upload").change(function() {
+                    $("#edit-field-upload-video-und-0-upload-button").mousedown();
+                    $.colorbox.close();
+                });
+            });
+            // check ajax upload button
+
+            $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                if (form_build_id = settings.url.match(/file\/ajax\/field_upload_video\d*\/(.*)$/)) {
+
+                    if ($('#videogallery-node-form').find("input[name='field_upload_video_und_0_remove_button']").val() == 'Remove') {
+                        $(".browse-ftp-click").hide();
+                        $('.browse-video-form label').hide();
+                        $('#edit-field-upload-video label:first').show();
+
+                    } else {
+
+                        $(".browse-ftp-click").show();
+                        $("input[name='field_video_duration[und][0][value]']").val('');
+
+                        $('.browse-video-form label').show();
+                        $('#edit-field-upload-video label:first').hide();
+                    }
+                }
+
+            });
+
+            // Primary category js
+            jQuery('.add-to-dropbox').mousedown(function()
+            {
+
+                var selectvalue = jQuery('.selects > .form-select:last option:selected').val();
+                var comptext = "";
+                var makeradio = "";
+                var flag = 0;
+                if (selectvalue != "")
+                {
+                    jQuery('.selects > .form-select').each(function()
+                    {
+                        var getid = jQuery(this).attr('id');
+                        var selopttext = jQuery('#' + getid + ' option:selected').text();
+                        var selval = jQuery('#' + getid + ' option:selected').val();
+                        if (selval.indexOf("label") != 0)
+                        {
+                            comptext = comptext + selopttext + '›';
+                        }
+
+                    });
+                    comptext = comptext.slice(0, -1);
+                    jQuery('#primary-category-data option').each(function()
+                    {
+                        var existvalue = jQuery(this).val();
+                        if (selectvalue == existvalue)
+                        {
+                            flag = 1;
+                        }
+
+                    });
+                    if (comptext != "" && flag == 0)
+                    {
+                        makeradio = '<option value="' + selectvalue + '">' + comptext + '</option>';
+                        jQuery('#primary-category-data').append(makeradio);
+
+                        var gethtml = jQuery('#primary-category-data').html();
+                        jQuery('#edit-field-primary-category-html-und-0-value').val(gethtml);
+                    }
+                }
+
+            });
+            jQuery('.dropbox-remove a').click(function() {
+                var getdattext = jQuery(this).parent().siblings('td').text();
+
+                $('#primary-category-data option').each(function() {
+
+                    var getdoptiontext = jQuery(this).text();
+                    if (getdoptiontext == getdattext) {
+                        jQuery(this).remove();
+                    }
+                });
+
+            });
+            jQuery('#primary-category-data').change(function() {
+                var getval = jQuery(this).val();
+                jQuery('#edit-field-primary-category-und-0-value').val(getval);
+                jQuery('#primary-category-data option').attr('selected', false);
+                jQuery('#primary-category-data option[value=' + getval + ']').attr('selected', 'selected');
+                var gethtml = jQuery('#primary-category-data').html();
+                jQuery('#edit-field-primary-category-html-und-0-value').val(gethtml);
+            });
+
+            // end primary category js
         }
 
     };
 })(jQuery, Drupal, this, this.document);
+
+jQuery('document').ready(function() {
+    jQuery('.browse-ftp-click').click(function() {
+        var old_vid = jQuery("input[name='field_upload_video[und][0][fid]']").val();
+        if (old_vid != 0) {
+
+        } else {
+            jQuery('.video-ftp').trigger('click');
+            jQuery('.video-local').removeClass('active');
+            jQuery('.used-unused-select').val('unused');
+            jQuery('.used-unused-select').trigger('change');
+            jQuery('.time-filter').hide();
+            var data = jQuery('.browse-ftp').html();
+            //  jQuery.colorbox({width: "80%", height: "80%",fixed: true});
+            jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%", fixed: true, onComplete: function() {
+
+                }});
+        }
+    });
+});
+
+// new code
+jQuery('document').ready(function() {
+    jQuery('.used-unused-select').live('change', function() {
+        jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+        var select_value = jQuery(this).val();
+        if (select_value == 'used') {
+            jQuery('.time-filter').show();
+            jQuery('.time-filter-select').val('-all-');
+        } else {
+            jQuery('.time-filter').hide();
+        }
+        var base_url = Drupal.settings.basePath;
+        jQuery.ajax({
+            url: base_url + '/dailymotion-ftp-videos-post',
+            type: 'post',
+            data: {'case': select_value},
+            success: function(data) {
+                jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+                jQuery('.video-options-wrapper').html(data);
+
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+
+    });
+});
+
+// Time filter ajax
+jQuery('document').ready(function() {
+    jQuery('.time-filter-select').live('change', function() {
+        jQuery('#loader-data img').show();
+        var select_value = jQuery(this).val();
+        var base_url = Drupal.settings.basePath;
+        jQuery.ajax({
+            url: base_url + '/dailymotion-video-time-filter',
+            type: 'post',
+            data: {'back_time': select_value},
+            success: function(data) {
+                jQuery('#loader-data img').hide();
+                jQuery('.video-options-wrapper').html(data);
+
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+
+    });
+});
+
+//   code load the selectd option and add to select box
+jQuery(window).load(function() {
+    // executes when complete page is fully loaded, including all frames, objects and images
+    var getvaluehtml = jQuery('#edit-field-primary-category-html-und-0-value').val();
+    if (getvaluehtml != "")
+    {
+        jQuery('#primary-category-data').html(getvaluehtml);
+    }
+});
