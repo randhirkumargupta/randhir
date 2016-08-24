@@ -289,11 +289,12 @@ jQuery(document).ready(function () {
         }
 
     })
+  });
+
+jQuery(window).load(function () {
     // jQuery code to set offset of photo section page
     var menuOffset = jQuery('.itg-region').offset();
     if (jQuery('.video_landing_menu li').children().hasClass('set-offset')) {
         jQuery("body,html").animate({scrollTop: menuOffset.top - 100}, 300);
-    }
-
-
+    }      
 });
