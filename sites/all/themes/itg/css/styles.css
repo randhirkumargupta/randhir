@@ -348,6 +348,9 @@ header {
   background: #a00606;
   display: none;
 }
+#block-itg-layout-manager-header-block .navigation .container {
+  position: relative;
+}
 #block-itg-layout-manager-header-block .navigation .menu {
   zoom: 1;
 }
@@ -368,6 +371,22 @@ header {
 }
 #block-itg-layout-manager-header-block .navigation ul li a.active, #block-itg-layout-manager-header-block .navigation ul li a:hover {
   color: #ffc106;
+}
+#block-itg-layout-manager-header-block .navigation ul li.all-menu a {
+  border-right: none;
+}
+#block-itg-layout-manager-header-block .navigation ul li.all-menu a i {
+  font-size: 22px;
+  font-size: 1.375rem;
+  color: #131212;
+  vertical-align: middle;
+}
+#block-itg-layout-manager-header-block .navigation ul#newlist {
+  position: absolute;
+  right: 0;
+  z-index: 99;
+  background: #a00606;
+  display: none;
 }
 
 /*End header css*/
