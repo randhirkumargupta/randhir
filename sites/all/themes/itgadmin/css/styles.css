@@ -6328,10 +6328,10 @@ div.node #comments h2 {
 }
 
 .top-colum-1 .widget-settings .widget-title-wrapper {
-  width: 200px;
-}
-.top-colum-1 .widget-settings .widget-title-wrapper input[type="text"] {
-  display: block;
+  /*    width: 200px;*/
+  /*    input[type="text"]{
+          display: block;
+      }*/
 }
 
 #views-form-photo-carousel-widget-photo-carousel-list .form-actions a {
