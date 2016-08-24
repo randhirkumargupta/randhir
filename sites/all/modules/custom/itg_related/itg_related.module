@@ -264,7 +264,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $get_comma_value = implode(',', $get_value);
           $val_str = str_replace(",", " OR ", $get_comma_value);
         }
-        else if ($key == 'sm_field_itg_common_by_line_name') {
+        else if ($key == 'sm_field_itg_common_by_line_name' || $key == 'sm_alttext' || $key == 'sm_image_title') {
           $quotes_string = '"'.$val.'"';
           $val_str = $quotes_string;
         }

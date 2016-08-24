@@ -10,7 +10,7 @@
             if (uid != 1) {
 
             }
-
+            jQuery('#edit-path').show();    
             jQuery('.add-to-dropbox').mousedown(function ()
             {
                 var selectvalue = jQuery('.selects > .form-select:last option:selected').val();
