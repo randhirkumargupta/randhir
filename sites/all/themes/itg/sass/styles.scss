@@ -259,19 +259,41 @@ header{
     .navigation{    
         background: $red-bg;
         display:none;
+        .container{
+            @include pos(relative);
+        }
         .menu{
-         @include clearfix;   
+            @include clearfix;   
         }
         ul{
-            li a {
-                border-top: 1px solid #900505;
-                display: block;
-                line-height: 30px;
-                padding: 0 15px;
-                &.active, &:hover{
-                    color: $yellow-color;
+            li{
+                a{
+                   border-top: 1px solid #900505;
+                    display: block;
+                    line-height: 30px;
+                    padding: 0 15px;
+                    &.active, &:hover{
+                        color: $yellow-color;
+                    }
+                } 
+                &.all-menu{
+                    a{
+                        border-right: none;
+                        i{
+                        @include font(22px);
+                        color: #131212;
+                        vertical-align: middle;
+                        }
+                    }
                 }
-            }  
+            }
+            &#newlist{
+                position: absolute;
+                right: 0;
+                z-index: 99;
+                background: #a00606;
+                display: none;
+            }
         }
     }
 }
@@ -1919,8 +1941,13 @@ footer{
     border-bottom:1px solid $border-color;
     .tab-buttons{
         @include display-inline;
+        background: transparent;
         span{
-            @include calculate-width(1);
+            width: auto;
+            border-top: 3px solid rgba(202, 202, 202,1);
+            &.active{
+                 border-top: 3px solid #a00606;
+            }
         }
     }
 }

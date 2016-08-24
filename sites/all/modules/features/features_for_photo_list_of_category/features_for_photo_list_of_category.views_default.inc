@@ -735,19 +735,17 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'itg';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Field: Content: Client Title */
-  $handler->display->display_options['fields']['field_client_title']['id'] = 'field_client_title';
-  $handler->display->display_options['fields']['field_client_title']['table'] = 'field_data_field_client_title';
-  $handler->display->display_options['fields']['field_client_title']['field'] = 'field_client_title';
-  $handler->display->display_options['fields']['field_client_title']['label'] = '';
-  $handler->display->display_options['fields']['field_client_title']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_client_title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_client_title']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
   $handler->display->display_options['fields']['nid_1']['table'] = 'node';
   $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
   $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';

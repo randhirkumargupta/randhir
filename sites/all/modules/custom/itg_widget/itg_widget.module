@@ -1020,8 +1020,8 @@ function itg_widget_preprocess_node(&$vars) {
     drupal_add_js(
             "jQuery(document).ready(function(){
               jQuery('.read-more , .full-content').click(function(){
-                jQuery('.less-content').toggle('500');
-                jQuery('.full-content').toggle('500');
+                jQuery('.less-content').toggle();
+                jQuery('.full-content').toggle();
               });
             })", 'inline'
     );
@@ -1077,9 +1077,9 @@ function itg_widget_node_view($node, $view_mode, $langcode) {
     $cat_array = itg_widget_anchor_landing_menu(arg(1));
     $first_key = key($cat_array);
     // Category view on landing page
-    drupal_add_js("jQuery('.video_landing_menu li').click(function(){
-               var section_id = jQuery(this).val();
-               jQuery('.video_landing_menu li a').removeClass('active');
+    drupal_add_js("jQuery('.anchor-detail-menu .tab-buttons span').click(function(){
+               var section_id = jQuery(this).attr('value');
+               jQuery('.anchor-detail-menu .tab-buttons span a').removeClass('active');
                jQuery('#edit-field-story-category-tid').val(section_id); 
                jQuery('#edit-field-story-category-tid').trigger('change');
                jQuery(this).find('a').addClass('active');
@@ -1087,9 +1087,9 @@ function itg_widget_node_view($node, $view_mode, $langcode) {
     drupal_add_js("jQuery(document).ready(function(){
                jQuery('#edit-field-story-category-tid').val(" . $first_key . "); 
                jQuery('#edit-field-story-category-tid').trigger('change');
-               jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
-                  if(jQuery(this).val() == " . $first_key . "){
-                      jQuery(this).find('a').addClass('active');
+               jQuery('.anchor-detail-menu .tab-buttons span').each(function() {
+                  if(jQuery(this).attr('value') == " . $first_key . "){
+                      jQuery(this).addClass('active');
                     }
               });
            });", array('type' => 'inline', 'scope' => 'footer'));
