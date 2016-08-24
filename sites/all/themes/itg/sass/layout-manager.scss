@@ -411,3 +411,194 @@ a{
 }
 /*End Dont miss Home page css*/
 }
+
+
+/*Start May we suggest css*/
+.we_may_suggest{
+    span.widget-title{
+        @include pos(relative);
+    }
+}
+.may-be-suggest-container{    
+    ul{
+        @include listing-with-image(may-we-suggest,right,10px,pic,title);
+        @extend .list-none;
+        .pic{
+            width: 88px;
+        }
+        li{
+            &.may-we-suggest{
+             padding:10px 0;   
+            }            
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            } 
+        }
+    }
+    @include sidebar-heading;
+}
+/*End May we suggest End*/
+
+/*Start top-takes-video suggest css*/
+.top_takes_videos_widget{
+    .widget-title{
+        position: relative;
+    }    
+}
+.top-takes-video-container{
+    ul{
+        @extend .list-none;
+        @include listing-with-image(top-takes-video,right,10px,pic,title);
+        li{
+            &.top-takes-video{
+             padding:10px 0; 
+             .pic{
+            position: relative;
+            &:after{
+                background: url(../images/video-icon-small.png) no-repeat;
+                content:"";
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                right: 5px;
+                bottom: 5px;
+            }
+        }
+             
+            }            
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            } 
+        }
+    }
+    @include sidebar-heading;
+}
+.sidebar-second .top-takes-video-container h3{
+    display: block;
+}
+/*End top-takes-video suggest End*/
+
+/*Start Watch right Now suggest css*/
+.watch_right_now_videos_widget{
+    .widget-title{
+        @include pos(relative);
+    }
+}
+.watch-right-now-video{
+    @include sidebar-heading;
+    ul{
+        @extend .list-none;
+        @include listing-with-image(watch-right-now-list,right,5px,pic,title);        
+        li.watch-right-now-list{
+            .pic{
+                width: 88px;
+                position: relative;
+                &:after{
+                    background: url(../images/video-icon-small.png) no-repeat;
+                    content:"";
+                    width: 18px;
+                    height: 18px;
+                    position: absolute;
+                    right: 5px;
+                    bottom: 5px;
+                }
+            }
+            padding:10px 0;
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            }
+        }
+    }   
+}
+/*End Watch right Now suggest End*/
+/*Start photo section slider Homepage*/
+.featured_photo_carousel{
+    .widget-title{
+        @include pos(absolute,10px,null,null,10px);        
+    }
+    .flexslider{
+        border:none;
+        margin:0;
+        .slides{
+            li{
+                @include pos(relative);
+                .detail{                   
+                    @include calculate-width(1);
+                    font-family: $itg-roboto;
+                    .flex-caption {    
+                        padding: 10px 10px;    
+                        background: #000;
+                        color: $white-color;
+                        @include font(18px,24px,$itg-font-medium);    
+                        width: auto;
+                        height: 66px;
+                    }
+                    .flex-count{
+                        @include pos(absolute,null,null,78px,0px);
+                        @include display-inline;
+                        background: #000;
+                        opacity: .5;
+                        color: $white-color;
+                        @include font(12px,23px);            
+                        margin-bottom:0;
+                        padding: 0 10px;  
+                        height: 23px;
+                    }
+                }
+
+            }
+        }
+        .flex-control-nav{
+            display: none;
+        }
+        .flex-count{
+            @include display-inline;
+            background: #000;
+            opacity: 0.6;
+            color: $white-color;
+            @include font(12px);            
+            margin-bottom: 10px;
+            i{
+                margin-right: 5px;
+            }
+        }
+        .flex-direction-nav a{
+            display: block;
+            opacity: 1;
+            &:before{
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: 30px;
+                display: inline-block;                
+                color: #fff;    
+                background: #67aaef;
+                Z-INDEX: 1;
+                WIDTH: 40px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+            }
+            &.flex-prev{
+                left: 0;
+                &:before{
+                    content: '\f104';
+                }
+            }
+            &.flex-next{
+                right: 0;
+                &:before{
+                    content: '\f105';
+                }
+            }
+        }
+    }
+}
+/*End Photo section slider Homepage*/
