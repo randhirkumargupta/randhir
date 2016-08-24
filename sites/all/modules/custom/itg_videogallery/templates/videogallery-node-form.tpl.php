@@ -95,6 +95,6 @@
   <h2 class="story-title"><?php print t('Related content'); ?></h2>
   <?php print drupal_render($form['field_common_related_content']); ?>
 </div>
-<h2 id="title-metatags" class="story-title"><?php print t('Meta Tags'); ?></h2>
+<h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
