@@ -2611,9 +2611,14 @@ footer .footer-copyright {
 .anchor-detail-menu .tab-buttons {
   display: inline-block;
   vertical-align: top;
+  background: transparent;
 }
 .anchor-detail-menu .tab-buttons span {
-  width: 100%;
+  width: auto;
+  border-top: 3px solid #cacaca;
+}
+.anchor-detail-menu .tab-buttons span.active {
+  border-top: 3px solid #a00606;
 }
 
 #block-views-anchor-landing-page-block .anchor {
