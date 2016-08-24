@@ -7,8 +7,8 @@
  */
 $menus = itg_widget_anchor_landing_menu(arg(1));
 foreach ($menus as $key => $value):
-  $output .= '<li value="' . $key . '"><a href="javascript:void(0)" class="NULL">' . $value . '</a></li>';
+  $output .= '<span value="' . $key . '"><a href="javascript:void(0)" class="NULL">' . $value . '</a></span>';
 endforeach;
 
-print '<ul class="video_landing_menu">' . $output . '</ul>';
+print '<div class="anchor-detail-menu"><div class="tab-buttons">' . $output . '</div></div>';
 ?>

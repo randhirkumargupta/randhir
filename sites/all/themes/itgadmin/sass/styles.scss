@@ -2963,13 +2963,20 @@ fieldset#edit-select{
               width: 10%;
               float: left;
               &:first-child{
-                width: 60%;
+                width: 35%;
                 padding-left: 30px;
                 .fa{
                   margin-right: 10px;
                 }
               }
+              &:nth-child(2){
+                width: 25%;
+              }
               a{color: #1fb5ad;}
+            }
+            .itg-clipboard {
+              color: #1fb5ad;
+              margin-left: 5px;
             }
           }
         }
@@ -3013,9 +3020,12 @@ fieldset#edit-select{
     height: 34px;
     padding: 8px 5px;
     &.cmt-title{
-      width: 60%;
+      width: 35%;
     }
     &.cmt-other{
+      &:nth-child(2){
+        width: 25%;
+      }
       width: 10%;
       
     }
@@ -6475,10 +6485,10 @@ div.node{
   }
 }
 .top-colum-1 .widget-settings .widget-title-wrapper{
-    width: 200px;
-    input[type="text"]{
+/*    width: 200px;*/
+/*    input[type="text"]{
         display: block;
-    }
+    }*/
 }
 #views-form-photo-carousel-widget-photo-carousel-list{
   @extend .confirmation;

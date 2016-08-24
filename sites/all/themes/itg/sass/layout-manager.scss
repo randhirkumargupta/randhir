@@ -413,7 +413,113 @@ a{
 }
 
 
+/*Start May we suggest css*/
+.we_may_suggest{
+    span.widget-title{
+        @include pos(relative);
+    }
+}
+.may-be-suggest-container{    
+    ul{
+        @include listing-with-image(may-we-suggest,right,10px,pic,title);
+        @extend .list-none;
+        .pic{
+            width: 88px;
+        }
+        li{
+            &.may-we-suggest{
+             padding:10px 0;   
+            }            
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            } 
+        }
+    }
+    @include sidebar-heading;
+}
+/*End May we suggest End*/
 
+/*Start top-takes-video suggest css*/
+.top_takes_videos_widget{
+    .widget-title{
+        position: relative;
+    }    
+}
+.top-takes-video-container{
+    ul{
+        @extend .list-none;
+        @include listing-with-image(top-takes-video,right,10px,pic,title);
+        li{
+            &.top-takes-video{
+             padding:10px 0; 
+             .pic{
+            position: relative;
+            &:after{
+                background: url(../images/video-icon-small.png) no-repeat;
+                content:"";
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                right: 5px;
+                bottom: 5px;
+            }
+        }
+             
+            }            
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            } 
+        }
+    }
+    @include sidebar-heading;
+}
+.sidebar-second .top-takes-video-container h3{
+    display: block;
+}
+/*End top-takes-video suggest End*/
+
+/*Start Watch right Now suggest css*/
+.watch_right_now_videos_widget{
+    .widget-title{
+        @include pos(relative);
+    }
+}
+.watch-right-now-video{
+    @include sidebar-heading;
+    ul{
+        @extend .list-none;
+        @include listing-with-image(watch-right-now-list,right,5px,pic,title);        
+        li.watch-right-now-list{
+            .pic{
+                width: 88px;
+                position: relative;
+                &:after{
+                    background: url(../images/video-icon-small.png) no-repeat;
+                    content:"";
+                    width: 18px;
+                    height: 18px;
+                    position: absolute;
+                    right: 5px;
+                    bottom: 5px;
+                }
+            }
+            padding:10px 0;
+            &+li{
+               border-top: 1px solid $border-color;
+           }
+           &:last-child{
+                border-bottom: 1px solid $border-color;
+            }
+        }
+    }   
+}
+/*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
 .featured_photo_carousel{
     .widget-title{
