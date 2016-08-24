@@ -3239,14 +3239,21 @@ fieldset#edit-select .form-submit {
   float: left;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail:first-child {
-  width: 60%;
+  width: 35%;
   padding-left: 30px;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail:first-child .fa {
   margin-right: 10px;
 }
+.view-category-manager .view-content .item-list ul li .term-wrapper .term-detail:nth-child(2) {
+  width: 25%;
+}
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail a {
   color: #1fb5ad;
+}
+.view-category-manager .view-content .item-list ul li .term-wrapper .itg-clipboard {
+  color: #1fb5ad;
+  margin-left: 5px;
 }
 .view-category-manager .view-content .item-list .item-list ul li .term-detail:first-child {
   padding-left: 40px;
@@ -3289,10 +3296,13 @@ fieldset#edit-select .form-submit {
   padding: 8px 5px;
 }
 .category-manager-thead div.cmt-title {
-  width: 60%;
+  width: 35%;
 }
 .category-manager-thead div.cmt-other {
   width: 10%;
+}
+.category-manager-thead div.cmt-other:nth-child(2) {
+  width: 25%;
 }
 
 .details-parent {
