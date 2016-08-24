@@ -14,6 +14,10 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';  
 }
+
+if ($theme == 'itgadmin' && !isset($preview)) {
+    $gray_bg_layout = 'gray-bg-layout';
+}
 ?>
 
 <!--------------------------------Code for Front tpl---------------------------------------->
@@ -67,7 +71,7 @@ if (arg(2) == 'preview') {
         <?php print render($page['header']); ?>
         <?php
           // photo_carousel widget
-          $block = block_load('itg_widget', 'featured_video_carousel_r');
+          $block = block_load('itg_widget', 'featured_photo_carousel_r');
           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
           print render($render_array);
         ?>
@@ -97,11 +101,14 @@ if (arg(2) == 'preview') {
                     <li>                     
                       <?php
                         $category_url = arg();
-                        if ($widget_data[$blockid]['cat_id'] == $_GET['category']) {
-                          $class_active = 'menu-active';
+                        if (isset($_GET['category']) && $widget_data[$blockid]['cat_id'] == $_GET['category']) {                          
+                          $class_active = 'menu-active set-offset';
+                          
                         }
-                        else {
-                          $class_active = ''; 
+                        elseif (!isset($_GET['category']) && $count == 1) {
+                          $class_active = 'menu-active'; 
+                        } else {
+                           $class_active = '';
                         }
                         print l($widget_data[$blockid]['block_title'], 
                                 $category_url,
@@ -208,6 +215,11 @@ if (arg(2) == 'preview') {
           <div class="col-md-4">
               <div class="sidebar-section-photo">
                 <div class="itg-widget">
+                    <div class="ad-widget">
+                      <div class="sidebar-ad droppable"></div>
+                    </div>              
+                  </div>
+                <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-21']['widget_name']; ?>">
                      <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-21']['block_title'])) { ?>
@@ -291,6 +303,11 @@ if (arg(2) == 'preview') {
                     </div>             
                   </div>               
                 </div>
+                <div class="itg-widget">
+                    <div class="ad-widget">
+                      <div class="sidebar-ad droppable"></div>
+                    </div>              
+                  </div>
               </div>
           </div>
         </div>
