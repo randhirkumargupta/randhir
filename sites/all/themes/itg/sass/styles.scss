@@ -1914,7 +1914,42 @@ footer{
 }
 /*End anchors listing css*/
 
-/*Start anchors listing css*/
+/*CSS Start Anchor listing detail page*/
+.anchor-detail-menu{
+    border-bottom:1px solid $border-color;
+    .tab-buttons{
+        @include display-inline;
+        span{
+            @include calculate-width(1);
+        }
+    }
+}
+#block-views-anchor-landing-page-block{
+    .anchor{
+        box-shadow: 0px 0px 5px #cecccc;
+        @include clearfix;
+        padding: 10px;
+        font-family: $itg-roboto;
+    }
+    .anchor-left, .anchor-right{
+        @include float(left);
+        @include calculate-width(2);
+    }
+    .anchor-right{
+        padding-left:15px;
+        a.active{
+            @include font(22px,30px,700);            
+            color: #33363b;
+        }
+        a{
+            color: #a00606;
+            @include font(12px);
+        }
+    }
+}
+/*CSS End Anchor listing detail page*/
+
+/*Start Live Block css*/
 .live-block{
     ul{
         @extend .list-none;
@@ -2009,7 +2044,7 @@ footer{
         }
     }
 }
-/*End anchors listing css*/
+/*End live block css*/
 /*Start css No result found side bar*/
 .sidebars .block-itg-widget{
     span.no-result-found{
@@ -2669,6 +2704,7 @@ footer{
     .view-content{      
       .photo-list{
         list-style: none;
+        margin:0 -15px;
         li{
           padding: 15px;
           float: left;
