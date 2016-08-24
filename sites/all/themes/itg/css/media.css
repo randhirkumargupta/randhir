@@ -400,6 +400,35 @@
   }
 
   /*End CSS Snap Post*/
+  /*Start css ITG globle search result page*/
+  .view-front-end-global-search .view-content .search-pic {
+    width: 170px;
+    height: 127px;
+  }
+  .view-front-end-global-search .view-content .search-detail h2 {
+    font-size: 22px;
+    font-size: 1.375rem;
+    line-height: 28px;
+    margin-top: -5px;
+  }
+  .view-front-end-global-search .view-content .search-detail h2 a {
+    font-size: 22px;
+    font-size: 1.375rem;
+    line-height: 28px;
+  }
+  .view-front-end-global-search .view-content .search-detail p {
+    display: block;
+  }
+  .view-front-end-global-search .attachment .search-menu {
+    white-space: inherit;
+    overflow-x: inherit;
+  }
+  .view-front-end-global-search .attachment .count {
+    font-size: 30px;
+    font-size: 1.875rem;
+  }
+
+  /*End css ITG globle search result page*/
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1199px) {
