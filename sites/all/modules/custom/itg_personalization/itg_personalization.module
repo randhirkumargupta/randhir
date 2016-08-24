@@ -148,6 +148,7 @@ function itg_personalization_block_view($delta = '') {
       break;
     case 'user_saved_content':      
       $block['content'] = '<div id="target"></div>';      
+      $block['content'] .= '<div id="target-content"></div>';      
   }
 
   return $block;
