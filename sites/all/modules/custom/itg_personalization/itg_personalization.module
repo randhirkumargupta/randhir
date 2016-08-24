@@ -1,0 +1,154 @@
+<?php
+
+/* 
+ * @file
+ *   This is personalized conent module for user content.
+ */
+module_load_all_includes('inc', 'includes/itg_personalization.helper');
+
+/**
+ * Implements hook_permission().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_permission() {
+  return array(
+    'view personalized content' => array(
+      'title' => t('View personalized user content'),
+      'description' => t('This permission grant user to view personalized content.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_menu() {
+  $items['personalization'] = array(
+    'title' => t('Personalization'),
+    'description' => t('User personalized content.'),
+    'page callback' => 'itg_personalization_home_page',
+    'access arguments' => array('view personalized content'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['itg-saved-content/%'] = array(    
+    'page callback' => '_personalized_saved_content',
+    'access arguments' => array('access content'),
+    'page arguments' => array(1),
+    'file' => 'includes/itg_personalization.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+}
+
+/**
+ * Caback function for personalized content page.
+ *
+ * @global stdObject $user
+ *   Standard user object.
+ * 
+ * @return array
+ *   Html output for this page.
+ */
+function itg_personalization_home_page() {
+  global $user;
+  $data = array();
+  
+  // Load user fields
+  $user_fields = user_load($user->uid);  
+  
+  // Render user picture.
+  $data['profile_pic'] = theme(
+    'image_style',
+    array(
+      'style_name' => 'user_picture',
+      'path' => $user_fields->field_user_picture['und'][0]['uri'],
+    )
+  );  
+  
+  // Load user name    
+  $f_name = $user_fields->field_first_name['und'][0]['value'];
+  $l_name = $user_fields->field_last_name['und'][0]['value'];  
+  $data['full_name'] = $f_name . ' ' . $l_name;
+  
+  // user logout link
+  $data['logout'] = l(t('Logout'), 'user/logout');
+  
+  return theme('personalization_home_page', array('data' => $data));
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_theme() {
+  $themes = array(
+    'personalization_home_page' => array(
+      'template' => 'itg-personalizaton-home',
+      'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
+      'variables' => array('data' => NULL),
+    ),    
+    'personalization_menu_tab' => array(
+      'template' => 'itg-personalizaton-menu-tab',
+      'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
+      'variables' => array('data' => NULL),
+    ),    
+    'personalization_saved_content_tab' => array(
+      'template' => 'itg-personalizaton-saved_content_menu-tab',
+      'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
+      'variables' => array('data' => NULL),
+    ),    
+  );
+
+  return $themes;
+}
+
+/**
+ * Implements hook_block_info().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_block_info() {
+  $blocks['personalized_content_menu_tab'] = array(
+    'info' => t('Personalized menu tab'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['personalized_saved_content'] = array(
+    'info' => t('Personalized saved content menu tab'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['user_saved_content'] = array(
+    'info' => t('Personalized saved content data'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_block_view($delta = '') {
+  $block = array();  
+  switch ($delta) {
+    // Load personalized menu tab.
+    case 'personalized_content_menu_tab':
+      $block['content'] = theme('personalization_menu_tab');
+      break;
+    // Load personalized saved content menu tab.
+    case 'personalized_saved_content':
+      drupal_add_js('misc/ajax.js');      
+      $block['content'] = theme('personalization_saved_content_tab');
+      break;
+    case 'user_saved_content':      
+      $block['content'] = '<div id="target"></div>';      
+  }
+
+  return $block;
+}
