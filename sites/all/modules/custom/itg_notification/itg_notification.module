@@ -1,0 +1,143 @@
+<?php
+
+/**
+ * @file : itg_notification
+ * 
+ * Contains functionality for Notification.
+ *
+ */
+
+/**
+ * Implements hook_form_alter
+ * {@inheritdoc}
+ */
+function itg_notification_form_alter(&$form, &$form_state, $form_id) {
+
+  // Alter for "notification"
+  if ($form_id == 'notification_node_form') {
+    
+    // Unset metatags
+    unset($form['#metatags']);
+    
+    // Add cancel button
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'manage-notifications', array('attributes' => array('class' => 'button'))),
+        '#weight' => 21,
+        '#value' => t('Cancel'),
+    );
+    
+    $form['title']['#description'] = '';
+    $form['title']['#prefix'] = '<div class="main-cont">';
+    $form['title']['#suffix'] = '<span class="byline" id= "notification-text-counter"></span></div>';
+    $form['actions']['submit']['#submit'][] = 'itg_notification_submit_handler_for_redirect';
+    $form['#after_build'][] = 'itg_notification_form_after_build';
+  }
+}
+
+/**
+ * Custom submit callback for alter message after operation.
+ */
+function itg_notification_submit_handler_for_redirect($form, &$form_state) {
+  
+  // Unset drupal default messages
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+
+  // Unset destination
+  unset($_GET['destination']);
+
+  // Check for edit and add node
+  if (arg(2) == 'edit') {
+    $op = 'updated successfully';
+  }
+  else {
+    $op = 'successfully published';
+  }
+  
+  $form_state['redirect'] = 'manage-notifications';
+  drupal_set_message(t('Notification <strong>@notificationtitle</strong> has been @operation.', array('@notificationtitle' => $form_state['node']->title, '@operation' => $op)));
+}
+
+/**
+ * Implements hook_form_after_build
+ * {@inheritdoc}
+ */
+function itg_notification_form_after_build($form, &$form_state) {
+  global $user, $base_url;
+
+  // Extract type of node
+  if (arg(0) == 'node') {
+    if (arg(1) == 'add') {
+      $type = arg(2);
+      $nid = '';
+    }
+    else {
+      $node = node_load(arg(1));
+      $type = $node->type;
+      $nid = arg(1);
+    }
+  }
+
+  // Array used in itg_notification.js
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  $settings['type'] = ucfirst($type);
+  $settings['nid'] = $nid;
+
+  drupal_add_js(array('itg_notification' => array('settings' => $settings)), array('type' => 'setting'));
+
+  // Add JS for itg_notification
+  drupal_add_js(drupal_get_path('module', 'itg_notification') . '/js/itg_notification.js', array('weight' => 1));
+
+  // Unset SEF URL field
+  $form['path']['#access'] = FALSE;
+
+  // Unset metatag description
+  unset($form['metatags']['intro_text']['#markup']);
+  unset($form['metatags']['#description']);
+  
+  return $form;
+}
+
+/**
+ * Implements hook_views_pre_render
+ * {@inheritdoc}
+ */
+function itg_notification_views_pre_render(&$view) {
+  
+  // "Add Notification" button on listing page of items
+  if ($view->name == "manage_notifications") {
+    $header_content_notification = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_notification .= l(t('Create Notification'), 'node/add/notification');
+    $view->attachment_before = $header_content_notification;
+  }
+}
+
+/**
+ * Implements hook_views_exposed_form_alter
+ * {@inheritdoc}
+ */
+function itg_notification_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+
+   if ($form['#id'] == 'views-exposed-form-manage-notifications-page') {
+     
+     // Call function autocomplete to show matching titles
+     $form['title']['#autocomplete_path'] = 'content-title-list/notification/autocomplete';
+     $form['title']['#attributes'] = array('placeholder' => t('Message Title'));     
+   }
+}
+
+/**
+ * Implements hook_node_validate
+ * {@inheritdoc}
+ */
+function itg_notification_node_validate($node, $form, &$form_state) {
+  $message_url = $node->field_cm_redirection_url[LANGUAGE_NONE][0]['value'];
+  if (!empty($message_url)) {
+    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $message_url)) {
+      form_set_error('field_cm_redirection_url', t('Please enter a valid message URL.'));
+    }
+  }
+}
