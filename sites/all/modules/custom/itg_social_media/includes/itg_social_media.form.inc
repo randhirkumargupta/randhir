@@ -10,7 +10,7 @@
  *
  * {@inheritdoc}
  */
-function itg_social_media_form($form, &$form_state, $c_type, $nid) {
+function itg_social_media_form($form, &$form_state, $c_type, $nid) {  
   global $user, $base_url;
   // Load node so that we can provide default value if values already present.
   $node = node_load($nid);
@@ -19,10 +19,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     foreach ($node->field_story_social_media_integ['und'] as $option) {
       $data[] = $option['value'];
     }
-  }
-  drupal_add_js(drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js');
-  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
-   
+  }   
   // Prepare form array.
   $form['itg_smi'] = array(
     '#type' => 'checkboxes',
@@ -247,6 +244,25 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
     '#type' => 'submit',
     '#value' => t('Share Content'),    
   );
+  $form['#after_build'][] = 'itg_social_media_form_after_build';
+  
+  return $form;
+}
 
+/**
+ * Implements after build function.
+ *
+ * @param array $form
+ *   Array containing form elements.
+ * @param array $form_state
+ *   Array of submitted form data.
+ *
+ * @return array
+ *   Altered form element array.
+ */
+function itg_social_media_form_after_build($form, &$form_state) {
+  drupal_add_js(drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js');
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
+  
   return $form;
 }

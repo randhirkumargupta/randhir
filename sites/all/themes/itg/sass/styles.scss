@@ -259,19 +259,41 @@ header{
     .navigation{    
         background: $red-bg;
         display:none;
+        .container{
+            @include pos(relative);
+        }
         .menu{
-         @include clearfix;   
+            @include clearfix;   
         }
         ul{
-            li a {
-                border-top: 1px solid #900505;
-                display: block;
-                line-height: 30px;
-                padding: 0 15px;
-                &.active, &:hover{
-                    color: $yellow-color;
+            li{
+                a{
+                   border-top: 1px solid #900505;
+                    display: block;
+                    line-height: 30px;
+                    padding: 0 15px;
+                    &.active, &:hover{
+                        color: $yellow-color;
+                    }
+                } 
+                &.all-menu{
+                    a{
+                        border-right: none;
+                        i{
+                        @include font(22px);
+                        color: #131212;
+                        vertical-align: middle;
+                        }
+                    }
                 }
-            }  
+            }
+            &#newlist{
+                position: absolute;
+                right: 0;
+                z-index: 99;
+                background: #a00606;
+                display: none;
+            }
         }
     }
 }
@@ -1276,8 +1298,8 @@ footer{
             padding: 25px 0;
         }
         .search-pic{
-            width: 170px;
-            height: 127px;
+            width: 144px;
+            height: 107px;            
             overflow: hidden;
             &:empty{
                 display: none;
@@ -1285,12 +1307,15 @@ footer{
         }
         .search-detail{
             h2{
-                @include font(22px,28px);
+                @include font(15px,20px);
                 margin-bottom:10px;
                 a{
-                    @include font(22px,28px,$itg-font-medium);   
+                    @include font(15px,20px,$itg-font-medium);   
                 }
-            }            
+            }
+            p{
+                display: none;
+            }
         }
         .social-share{
             @include display-inline;
@@ -1310,7 +1335,7 @@ footer{
         @include itg-font($itg-roboto); 
         border-bottom: 1px solid $border-color;
         .count{
-            @include font(30px,22px,$itg-font-medium);            
+            @include font(19px,22px,$itg-font-medium);            
             color: #737373;                     
             padding-bottom: 20px;
             display: block;
@@ -1320,6 +1345,8 @@ footer{
         }
         .search-menu{
             padding-bottom: 20px;
+            white-space: nowrap;
+            overflow-x: auto;
             a{
                 padding: 0 10px;
                 border-left: 2px solid #737373;
@@ -1909,7 +1936,47 @@ footer{
 }
 /*End anchors listing css*/
 
-/*Start anchors listing css*/
+/*CSS Start Anchor listing detail page*/
+.anchor-detail-menu{
+    border-bottom:1px solid $border-color;
+    .tab-buttons{
+        @include display-inline;
+        background: transparent;
+        span{
+            width: auto;
+            border-top: 3px solid rgba(202, 202, 202,1);
+            &.active{
+                 border-top: 3px solid #a00606;
+            }
+        }
+    }
+}
+#block-views-anchor-landing-page-block{
+    .anchor{
+        box-shadow: 0px 0px 5px #cecccc;
+        @include clearfix;
+        padding: 10px;
+        font-family: $itg-roboto;
+    }
+    .anchor-left, .anchor-right{
+        @include float(left);
+        @include calculate-width(2);
+    }
+    .anchor-right{
+        padding-left:15px;
+        a.active{
+            @include font(22px,30px,700);            
+            color: #33363b;
+        }
+        a{
+            color: #a00606;
+            @include font(12px);
+        }
+    }
+}
+/*CSS End Anchor listing detail page*/
+
+/*Start Live Block css*/
 .live-block{
     ul{
         @extend .list-none;
@@ -2004,7 +2071,7 @@ footer{
         }
     }
 }
-/*End anchors listing css*/
+/*End live block css*/
 /*Start css No result found side bar*/
 .sidebars .block-itg-widget{
     span.no-result-found{
@@ -2664,6 +2731,7 @@ footer{
     .view-content{      
       .photo-list{
         list-style: none;
+        margin:0 -15px;
         li{
           padding: 15px;
           float: left;

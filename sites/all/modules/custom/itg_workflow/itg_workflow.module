@@ -38,7 +38,7 @@ function itg_workflow_after_build($form, &$form_state) {
     global $user, $base_url;
 
     // code for sequence change of modration field
-
+    $form['additional_settings']['group']['#groups']['additional_settings'][0]['#weight'] = -1;
     $log = $form['revision_information']['log'];
     $state = $form['revision_information']['workbench_moderation_state_new'];
     
@@ -592,4 +592,3 @@ function itg_workflow_mail($key, &$message, $params) {
             break;
     }
 }
-?>
