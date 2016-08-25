@@ -130,8 +130,7 @@ function itg_widget_views_pre_render(&$view) {
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'big_story_format') {
-    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Search Content'), 'big-story-format-conent', array('query' => array('destination' => arg(0))));
+    $header_content = l(t('Search Content'), 'big-story-format-conent', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "section_wise_draggable_content_order" && $view->current_display == 'big_story_format') {
