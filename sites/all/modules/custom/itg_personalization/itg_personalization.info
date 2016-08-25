@@ -1,0 +1,5 @@
+name = ITG Personalization
+description = User personalized content.
+core = 7.x
+
+package = ITG

@@ -102,7 +102,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                       <?php
                         $category_url = arg();
                         if (isset($_GET['category']) && $widget_data[$blockid]['cat_id'] == $_GET['category']) {                          
-                          $class_active = 'menu-active';
+                          $class_active = 'menu-active set-offset';
+                          
                         }
                         elseif (!isset($_GET['category']) && $count == 1) {
                           $class_active = 'menu-active'; 

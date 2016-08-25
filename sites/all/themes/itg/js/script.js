@@ -157,8 +157,9 @@ Drupal.behaviors.my_custom_behavior = {
         $('.search-icon').click(function(){
             $('.globle-search').css('width','255px');
         });
-        $('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+        
         $('.mobile-nav').click(function(){
+            console.log("here");
             $('.navigation').stop().slideToggle();
         });
         $(document).on('click', function(){            
@@ -168,34 +169,7 @@ Drupal.behaviors.my_custom_behavior = {
             e.stopPropagation();
         });
     }
-    
-    footerMain();
-    function footerMain(){
-    //footer toggal script
-    $('.footer-expand-icon').click(function(){
-        $('.footer-toggle').slideToggle();
-        $("html, body").animate({ scrollTop: $(document).height() }, 800);
-        $('.footer-expand-icon').toggleClass('footer-open-icon');
-    });
-    //footer add more link
-    $('.footer-bottom .cell ul').each( function(){
-        var countList = $(this).children('li').length;        
-        if(countList > 8){
-           $(this).find('li:gt(7)').hide().addClass('hidelist');
-           $(this).append("<li><span class='more-link'>More</span></li>");
-        }
-    });
-    $('.more-link').click(function(){
-        $(this).parents('ul').find('li.hidelist').slideToggle();
-        $(this).toggleClass('active');
-        $("html, body").animate({ scrollTop: $(document).height() }, 800);
-        if($(this).hasClass('active')){
-            $('.more-link').text('Less');
-        } else{
-            $('.more-link').text('More');
-        }
-    });
-    }
+        
     // jQuery Code for tabbing
     $('.tab-buttons').on('click', 'span', function(){
       var dataID = '.' + $(this).attr('data-id');
@@ -267,7 +241,57 @@ jQuery(document).ready(function () {
 //            jQuery(this).stop();
         }
     });
-
+    
+//header menu add icon for mobile
+jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+    var navValue = jQuery('.navigation .menu li').length;
+    if (navValue > 13) {
+        jQuery('.navigation .menu li').eq(12).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-ellipsis-h"></i></li>');
+        var count_li = 0;
+        var i = 1;
+        jQuery('.navigation .menu li').each(function () {
+            count_li++;
+            console.log(count_li);
+            if (count_li > 14 && i == 1) {
+                jQuery('.navigation .container').append('<ul id="newlist"></ul>');
+                jQuery('#newlist').append(jQuery(this).nextUntil(jQuery(this).last()).andSelf());
+                i++;
+            }
+        });
+    }
+    
+    jQuery(document).on('click','.all-menu', function(){
+        jQuery('#newlist').slideToggle();
+    });
+    
+//ITG footer
+footerMain();
+    function footerMain(){
+    //footer toggal script
+    jQuery('.footer-expand-icon').click(function(){
+        jQuery('.footer-toggle').slideToggle();
+        jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
+        jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
+    });
+    //footer add more link
+    jQuery('.footer-bottom .cell ul').each( function(){
+        var countList = jQuery(this).children('li').length;        
+        if(countList > 8){
+           jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
+           jQuery(this).append("<li><span class='more-link'>More</span></li>");
+        }
+    });
+   jQuery('.more-link').click(function(){
+        jQuery(this).parents('ul').find('li.hidelist').slideToggle();
+        jQuery(this).toggleClass('active');
+        jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
+        if(jQuery(this).hasClass('active')){
+            jQuery('.more-link').text('Less');
+        } else{
+            jQuery('.more-link').text('More');
+        }
+    });
+    }
 
 });
 
@@ -286,6 +310,12 @@ jQuery(document).ready(function () {
         }
 
     })
+  });
 
-
+jQuery(window).load(function () {
+    // jQuery code to set offset of photo section page
+    var menuOffset = jQuery('.itg-region').offset();
+    if (jQuery('.video_landing_menu li').children().hasClass('set-offset')) {
+        jQuery("body,html").animate({scrollTop: menuOffset.top - 100}, 300);
+    }      
 });

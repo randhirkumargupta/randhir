@@ -34,7 +34,7 @@
                     drop: function (event, ui) {
                         var ad_class = $(this).attr('class');
                         
-                        if (ad_class == 'sidebar-ad droppable ui-droppable') {
+                        if (ad_class == 'sidebar-ad droppable ui-droppable') { // code change by avanish
                           alert("You can't drag any widget in this content area!");
                           return false;
                         }
@@ -68,6 +68,7 @@
                                 $('#'+content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');                                
                               },
                               success: function(data) {
+                                 
                                  // for category tab widget
                                  $('input[name = '+block_name+']').val(category_name_tab);
                                  $('.widget-title[data-id="'+block_name+'"]').html(category_name_tab);
@@ -78,7 +79,15 @@
                                     $('#'+block_name).html(category_name_tab);
                                  }
                                  
-                                 $('#'+content_place).html(data);  
+                                 $('#'+content_place).html(data);
+                                 //code by avanish
+                                  if (widget_name == 'featured_photo_carousel') {                                    
+                                    jQuery(".flexslider").flexslider({
+                                       animation: "slide",
+                                       prevText: "",
+                                       nextText: "",
+                                       });
+                                  }
                               }
                         });
                     }
