@@ -142,7 +142,7 @@ function itg_layout_manager_block_view($delta = '') {
   switch ($delta) {
     case 'header_block':
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
-      $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
+      $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');      
       $block['content'] = theme('header_block', array('data' => $data));
       break;
     
