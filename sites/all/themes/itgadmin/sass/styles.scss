@@ -1058,6 +1058,7 @@ div.vertical-tabs {
       position: absolute;
       left: 775px;
       top: 7px;
+      z-index: 9;
     }
     div.description{
       width: 200px;
@@ -3567,6 +3568,7 @@ div.node{
         &.field-multiple-drag{
           display: none;
         }
+        .form-managed-file .image-widget-data .form-submit[value="Remove"]{left: 570px;}
         > .form-submit, > .ajax-new-content > .form-submit{margin-bottom: 30px;}
       }
     }

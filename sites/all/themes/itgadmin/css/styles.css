@@ -1635,6 +1635,7 @@ div.vertical-tabs .form-textarea-wrapper {
   position: absolute;
   left: 775px;
   top: 7px;
+  z-index: 9;
 }
 .form-managed-file .image-widget-data div.description {
   width: 200px;
@@ -3785,6 +3786,9 @@ div.node #comments h2 {
 }
 [id*="field-story-template-buzz-values"] tbody tr td.field-multiple-drag {
   display: none;
+}
+[id*="field-story-template-buzz-values"] tbody tr td .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+  left: 570px;
 }
 [id*="field-story-template-buzz-values"] tbody tr td > .form-submit, [id*="field-story-template-buzz-values"] tbody tr td > .ajax-new-content > .form-submit {
   margin-bottom: 30px;
