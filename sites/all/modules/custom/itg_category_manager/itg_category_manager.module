@@ -214,6 +214,21 @@ function itg_category_manager_term_state_content($nodeid, $key) {
 }
 
 /**
+ * Implements hook_js_alter() for use custom ckeditor js()
+ * 
+ * {@inheritdoc} 
+ * @global string $base_url
+ * @param array $javascript
+ */
+
+function itg_category_manager_js_alter(&$javascript) {
+    
+    global $base_url;
+    $javascript['//cdn.ckeditor.com/4.5.4/full-all/ckeditor.js']['data']=$base_url.'/sites/all/modules/custom/itg_category_manager/js/ckeditor.js';
+    
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
  * 
  * @global stdObject $user
@@ -373,6 +388,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     }
   }
 }
+
 
 /**
  * Get all categories under their parent category
@@ -997,7 +1013,6 @@ jQuery("#edit-field-primary-category-und-0-value").val(jQuery("#primary-category
 });', array('type' => 'inline', 'scope' => 'footer'));
 
     $form_names_use_primay_field = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form', 'videogallery_node_form', 'blog_node_form', 'recipe_node_form', 'cooking_tips_node_form', 'food_news_node_form', 'print_team_integration_node_form');
-
     if (in_array($form_id, $form_names_use_primay_field)) {
       $form['field_primary_cat_data'] = array('#title' => t('Select Primary'), '#type' => 'select', '#validated' => TRUE, '#attributes' => array('id' => 'primary-category-data'), '#options' => array('' => t('Select')));
     }

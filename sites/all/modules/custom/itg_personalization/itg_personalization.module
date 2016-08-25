@@ -125,6 +125,10 @@ function itg_personalization_block_info() {
     'info' => t('Personalized saved content data'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['user_my_content'] = array(
+    'info' => t('Personalized My Content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -149,7 +153,61 @@ function itg_personalization_block_view($delta = '') {
     case 'user_saved_content':      
       $block['content'] = '<div id="target"></div>';      
       $block['content'] .= '<div id="target-content"></div>';      
+      break;
+    case 'user_my_content':
+      module_load_include('inc', 'node', 'node.pages');
+      $form = node_add('ugc');      
+      $block['content'] = drupal_render($form);
   }
 
   return $block;
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
+  $arg = arg();
+  if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
+    // Hide user name field.
+    $form['field_user_name']['#prefix'] = '<div style="display: none;">';
+    $form['field_user_name']['#suffix'] = '</div>';
+    // Hide user email field.
+    $form['field_user_email']['#prefix'] = '<div style="display: none;">';
+    $form['field_user_email']['#suffix'] = '</div>';
+    // Hide city field.
+    $form['field_user_city']['#prefix'] = '<div style="display: none;">';
+    $form['field_user_city']['#suffix'] = '</div>';
+    // Set field visibility for category field.
+    $form['field_section']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+      ),
+    );
+    // Set visibility for title filed.
+    $form['title']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+      ),
+    );    
+    // Set visibility for submit buttons.
+    $form['actions']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+      ),
+    );    
+    // Set visibility for submit buttons.
+    $form['field_user_message']['und'][0] = array(
+      '#title' => t('Description'),
+      '#type' => 'textarea',
+      '#rows' => 3,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+        ),
+      ),  
+    );   
+  }
 }
