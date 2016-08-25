@@ -3458,7 +3458,7 @@ footer .footer-copyright {
   color: #fff;
 }
 #block-views-video-landing-header-block-1 .view-content {
-  margin: 0 -10px;
+  /*margin:0 -10px;*/
   overflow: hidden;
 }
 #block-views-video-landing-header-block-1 .view-content ul.photo-list {
@@ -3474,7 +3474,7 @@ footer .footer-copyright {
   clear: both;
 }
 #block-views-video-landing-header-block-1 .view-content ul.photo-list li {
-  width: 170px;
+  width: 190px;
   padding: 0 10px;
   float: left;
 }

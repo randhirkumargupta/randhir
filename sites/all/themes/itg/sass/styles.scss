@@ -2636,12 +2636,12 @@ footer{
         }
     }
     .view-content{     
-             margin:0 -10px;
-            overflow: hidden;
+        /*margin:0 -10px;*/
+       overflow: hidden;
         ul.photo-list{           
             @include clearfix();            
             li{
-                width: 170px;
+                width: 190px;
                 padding: 0 10px;
                 @include float(left);                
             }
