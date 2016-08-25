@@ -4,18 +4,6 @@
  * Implementation of hook_menu().
  * {@inheritdoc}
  */
-//
-//function itg_term_init() {
-//    include_once('itg_image_repository.inc'); 
-//     $params = array();
-//  $theme = filefield_sources_invoke_all('theme', $params);
-//  $theme['filefield_source_itg_image_repository_element'] =Array ( 'render element' => 'element', 'file' => 'sources/itg_image_repository.inc');
-////print_r( $theme);die;
-//
-//}
-
-
-
 function itg_term_menu() {
   $items['texonomy/confirm/ajax/%'] = array(
     'title' => 'Texonomy Term',
@@ -110,14 +98,18 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
       if (isset($_REQUEST['destination']) && $_REQUEST['destination'] == 'tags-management') {
         unset($form['actions']['delete']);
       }
-     
-      if(!is_object($form['#term']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
+
+      if (!is_object($form['#term']) && $form['#term']['vocabulary_machine_name'] == 'tags') {
         $form['#submit'][] = 'itg_term_status_message';
       }
     case 'taxonomy_csv_import_form':
 
       // Check if the user has not the 'administrator' role.
       if (!in_array('administrator', $user->roles)) {
+
+        drupal_add_js("jQuery(document).ready(function(){ jQuery('.page-admin-structure-taxonomy-csv-import .region.region-help').hide(); jQuery('.page-admin-structure-taxonomy-csv-import .form-type-item').hide(); });", 'inline');
+
+
         if (arg(3) == 'csv_import') {
           $form['csv_import_example'] = array(
             '#prefix' => "<div class='term-main-wrap'>" . t('Click to Download') . " " . l(t('Import Example'), 'sites/all/modules/custom/itg_term/examples/term.csv') . "</div>"
@@ -188,10 +180,11 @@ function itg_term_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form
  * @param array $form_state
  */
-function itg_term_after_build($form, &$form_state){
+function itg_term_after_build($form, &$form_state) {
   drupal_add_js("jQuery(document).ready(function(){  jQuery(document.body).addClass('taxonomy-form-term-tags'); });", 'inline');
   return $form;
 }
+
 /**
  * Implements after build function().
  * @param array $form
@@ -199,7 +192,7 @@ function itg_term_after_build($form, &$form_state){
  * @return array $form
  */
 function itg_term_status_message(&$form, &$form_state) {
-  if($form['#term']['vocabulary_machine_name'] == 'tags') {
+  if ($form['#term']['vocabulary_machine_name'] == 'tags') {
     if (isset($_SESSION['messages']['status'])) {
       unset($_SESSION['messages']['status']);
     }
@@ -211,10 +204,11 @@ function itg_term_status_message(&$form, &$form_state) {
       $op = 'updated';
     }
     $term = $form_state['values']['name'];
-    drupal_set_message(t('Tag <b>' . $term . '</b> has been ' . $op . '.'));
+
+    drupal_set_message(t('Tag @tag_title has been @op.', array('@tag_title' => $term, '@op' => $op)), 'status');
     $form_state['redirect'] = 'tags-management';
     return $form;
-  } 
+  }
 }
 
 /**
@@ -232,7 +226,6 @@ function itg_term_batch_alter(&$batch) {
     $batch['form_state']['redirect']['path'] = 'tags-management';
   }
   elseif (isset($batch['sets'][0]['operations'][0][0]) && $batch['sets'][0]['operations'][0][0] == '_taxonomy_csv_vocabulary_import_process') {
-
     // set message
     variable_set('term_import_message', 'Terms are imported.');
     drupal_set_message(t(variable_get('term_import_message')));
@@ -307,7 +300,7 @@ function itg_term_views_pre_render(&$view) {
     }
 
     // Add "Create Tag" button on listing page of Tags Management
-    $header_content_term = '<span class="count">Count ('.$view->total_rows.') </span>';
+    $header_content_term = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content_term .= l(t('Create Tag'), 'admin/structure/taxonomy/tags/add') . " " . l(t('Import CSV'), 'admin/structure/taxonomy/csv_import');
     drupal_add_js("jQuery(document).ready(function(){ jQuery('.feed-icon a').empty(); jQuery('.feed-icon a').html('Export CSV'); });", 'inline');
     $view->attachment_before = $header_content_term;
@@ -395,7 +388,7 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
     drupal_add_js(array('itg_term' => array('settings' => $settings)), array('type' => 'setting'));
 
     $form['#info']['filter-created']['label'] = FALSE;
-    $form['name']['#autocomplete_path'] = 'texonomy/13/autocomplete';
+    $form['name']['#autocomplete_path'] = 'texonomy/1/autocomplete';
     $form['name']['#attributes'] = array(
       'placeholder' => t('Name')
     );
@@ -430,13 +423,13 @@ function itg_term_form_views_exposed_form_alter(&$form, &$form_state) {
 function itg_term_views_query_alter(&$view, &$query) {
   if (isset($view->name) && $view->name === 'tags_management') {
     if (isset($_GET['created']['max']['date'])) {
-      
+
       $mx_date = str_replace('/', '-', $_GET['created']['max']['date']);
       $mx_date = strtotime($mx_date . ' +1 days');
       $max_conditions_array = array();
       $max_date = strtotime(date('d-m-Y', $mx_date));
       $max_date_condition = " AND " . $max_date;
-      
+
       if (isset($view->query->where[1]['conditions'][1]['field'])) {
         foreach ($query->where[1]['conditions'] as $idx => $condition) {
           if (!is_object($condition['field']) && $condition['operator'] == 'formula') {

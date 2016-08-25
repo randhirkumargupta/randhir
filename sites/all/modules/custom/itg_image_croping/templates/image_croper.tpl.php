@@ -118,6 +118,7 @@ $url = file_create_url($data->uri);
 <div class="croper-action">
     <button class="crop-image add-more">Crop</button>
     <button class="original-image add-more">Use Original</button>
+    <button class="cancel-image add-more">Cancel</button>
 </div>
 
 <!--   -->
@@ -130,7 +131,7 @@ $url = file_create_url($data->uri);
             },
             mageBackgroundBorderWidth: 10,
             initialZoom: 'image',
-            maxZoom: 7,
+            maxZoom: 10,
             quality: 1,
             minZoom: 'fill',
             smallImage: 'stretch',
@@ -152,7 +153,16 @@ $url = file_create_url($data->uri);
 
     });
 
-
+//  cancel image
+jQuery('.cancel-image').click(function(){
+if(jQuery('.div-upload-img').hasClass('active'))
+ {
+    jQuery('#file-preview').hide();
+ }else{
+     jQuery('#file-preview').hide();
+     jQuery('#search-preview').show();
+ }
+})
 
     jQuery('.crop-image').click(function() {
         showloader();

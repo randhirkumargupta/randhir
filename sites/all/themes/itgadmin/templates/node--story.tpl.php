@@ -1,6 +1,7 @@
 <?php if (!empty($content)): ?>
   <div class='<?php print $classes ?>'>
       <?php if ($view_mode == 'full'): ?>
+      <?php //print render($content['links']['flag']); ?>
         <a href="javascript:;" class="close-preview">&nbsp;</a>
         <?php
         // Load custom block for social media integration 
@@ -22,7 +23,7 @@
                 </div>
               </div>
           </div>
-        <?php endif; ?>
+        <?php endif; ?>        
         <div class="basic-details content-box">
             <h2><?php print t('Quick File'); ?></h2>
             <div class="content-details">

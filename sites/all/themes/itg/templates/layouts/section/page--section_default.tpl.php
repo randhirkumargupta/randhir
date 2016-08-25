@@ -253,6 +253,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         </div>
   
   <!--Common section strat here-->
+  <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-common-section mt-50">
 
         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -328,9 +329,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         </div>
 
     </div>
+  <?php } ?>
   <!--End of Common section-->
   
   <!--Common section strat here-->
+  <?php if (isset($widget_data['itg-block-17']['widget_name']) || isset($widget_data['itg-block-18']['widget_name']) || isset($widget_data['itg-block-19']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-common-section mt-50">
 
         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -406,9 +409,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         </div>
 
     </div>
+  <?php } ?>
   <!--End of Common section-->
   
-  <!--Don't miss and Ad section starts here-->  
+  <!--Don't miss and Ad section starts here-->
+<?php if (isset($widget_data['itg-block-10']['widget_name']) || $theme == 'itgadmin') { ?>  
      <div class="row itg-h321-section mt-50">
         <div class="col-md-8 col-sm-8 col-xs-12">
             <div class="itg-widget">
@@ -440,10 +445,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
              </div>               
            </div>  
         </div>
-     </div> 
+     </div>
+<?php } ?>
   <!--End of Don't miss and Ad section-->  
   
-  <!--Photo slider and Watch now section starts here-->    
+  <!--Photo slider and Watch now section starts here-->
+  <?php if (isset($widget_data['itg-block-12']['widget_name']) || isset($widget_data['itg-block-13']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-h450-section mt-50">
         <div class="col-md-8 col-sm-8 col-xs-12">
             <div class="itg-widget">
@@ -491,10 +498,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 </div>               
             </div>  
         </div>
-     </div> 
+     </div>
+  <?php } ?>
   <!--Photo slider and Watch now section starts here-->   
 
 <!--Common section strat here-->
+<?php if (isset($widget_data['itg-block-14']['widget_name']) || isset($widget_data['itg-block-15']['widget_name']) || isset($widget_data['itg-block-16']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-common-section mt-50">
 
         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -570,6 +579,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         </div>
 
     </div>
+<?php } ?>
   <!--End of Common section-->  
   
 </div>

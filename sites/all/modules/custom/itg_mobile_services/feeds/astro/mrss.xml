@@ -18,7 +18,4 @@
           <media:category/>
         </media:content>
     </item>
-<footer>
-<description>{field_footer}</description>
-</footer>
 </channel>

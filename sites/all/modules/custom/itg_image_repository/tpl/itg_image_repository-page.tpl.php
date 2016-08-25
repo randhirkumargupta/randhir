@@ -43,7 +43,8 @@
                                     success: function(data) {
                                         //  itg_image_repository.processResponse
                                         hideloader();
-                                        jQuery('#file-preview').html(data);
+                                        
+                                        jQuery('#file-preview').show().html(data);
                                     },
                                     error: function(xhr, desc, err) {
                                         console.log(xhr);
@@ -58,7 +59,6 @@
                             jQuery('#file-preview').html('');
 
                             var imageId = jQuery(this).siblings('.dz-image').children('img').attr('imageid');
-                            alert(imageId);
 
                         })
 
@@ -80,7 +80,7 @@
                                     success: function(data) {
                                         //  itg_image_repository.processResponse
                                         hideloader();
-                                        jQuery('#file-preview').html(data);
+                                        jQuery('#file-preview').show().html(data);
                                     },
                                     error: function(xhr, desc, err) {
                                         console.log(xhr);
@@ -134,7 +134,7 @@
                                             success: function(data) {
                                                 //  itg_image_repository.processResponse
                                                 hideloader();
-                                                jQuery('#file-preview').html(data);
+                                                jQuery('#file-preview').show().html(data);
                                             },
                                             error: function(xhr, desc, err) {
                                                 console.log(xhr);

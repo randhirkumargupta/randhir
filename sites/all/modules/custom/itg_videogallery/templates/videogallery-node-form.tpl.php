@@ -12,22 +12,33 @@
   <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
   <div class="browse-ftp">
     <div id="itg_video_content">
-      <div class="video-ftp active">Server</div>
-      <div class="video-local">Local Browse</div>
+      <div class="video-ftp active"><?php print t('Server'); ?></div>
+      <div class="video-local"><?php print t('Local Browse'); ?></div>
       <div id="loader-data"><img class="widget-loader" style="display: none" align="center" src="<?php echo base_path(); ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
+
       <div class="ftp-server">
-        <label><strong><?php echo t('Filter') ?>: </strong><select class="used-unused-select">
-            <option value="used">Published</option>
-            <option value="unused">Un Published</option>
-          </select></label>
+        <div class="video_filters">
+          <label><?php echo t('Filter') ?>:</label><select class="used-unused-select">
+              <option value="unused"><?php print t("Un Published"); ?></option>
+              <option value="used"><?php print t("Published"); ?></option>
+            </select>
+          <div class="time-filter">
+            <label><?php echo t('Select Time') ?>:</label><select class="time-filter-select">
+                <option value="-all-"><?php print t("All"); ?></option>  
+                <option value="2"><?php print t("2 Hours"); ?></option>
+                <option value="4"><?php print t("4 Hours"); ?></option>
+                <option value="6"><?php print t("6 Hours"); ?></option>
+                <option value="10"><?php print t("10 Hours"); ?></option>
+                <option value="24"><?php print t("24 Hours"); ?></option>
+              </select>
+          </div>
+        </div>
         <div class="video-options-wrapper"></div>
-        <a href="javascript:void(0)" class = "button">Attach Video</a>
-        <?php //print drupal_render($form['video_browse_select']); ?>
-
-
-      </div>
+        <a href="javascript:void(0)" class = "button"><?php print t('Attach Video'); ?></a>
+      </div>  
+      <?php //print drupal_render($form['video_browse_select']); ?>
       <div class="local_browse" style="display: none">
-        <span class="button browse-local">Local Browse</span>
+        <span class="button browse-local"><?php print t('Browse Video'); ?></span>
       </div>
     </div>
   </div>
@@ -81,9 +92,9 @@
   <?php print drupal_render($form['field_story_expiry_date']); ?> 
 </div>
 <div id="Relatedcontent">
-  <h2 class="story-title">Related content</h2>
+  <h2 class="story-title"><?php print t('Related content'); ?></h2>
   <?php print drupal_render($form['field_common_related_content']); ?>
 </div>
-<h2 id="title-metatags" class="story-title"><?php print t('Meta Tags'); ?></h2>
+<h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

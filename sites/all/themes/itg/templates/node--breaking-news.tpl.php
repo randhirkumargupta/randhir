@@ -31,20 +31,20 @@ if (!empty($content)):
     <iframe width="100%" height="360" frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="http://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;autoPlay=true&amp;mute=false"></iframe>
     
     <div class="live-hightlight">
-    <h3>Highlights</h3>
-    <ul>
-        <?php
-        
-                      $h_count = 1;
-                      foreach ($node->field_story_highlights['und'] as $high) {
-                        print '<li>'.$high['value'].'</li>';
-                        $h_count++;
-                      }
-                      
-        ?>
-        
-    </ul>
-    </div>
+              <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
+                <h3>Highlights</h3>
+              <?php } ?>
+              <ul>
+                  <?php
+                  $h_count = 1;
+                  foreach ($node->field_story_highlights['und'] as $high) {
+                    print '<li>' . $high['value'] . '</li>';
+                    $h_count++;
+                  }
+                  ?>
+
+              </ul>
+          </div>
     <?php } ?>
     <div class="timeline">
     <h3>Timeline</h3>

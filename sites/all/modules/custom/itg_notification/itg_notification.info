@@ -1,0 +1,6 @@
+name = ITG Notification
+description = "Module contains functionality for notification."
+package = "ITG"
+core = 7.x
+
+files[] = itg_notification.module

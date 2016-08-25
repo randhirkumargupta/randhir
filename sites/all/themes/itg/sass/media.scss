@@ -366,6 +366,41 @@
 }
 /*End CSS Snap Post*/
 
+/*Start css ITG globle search result page*/
+.view-front-end-global-search{
+    .view-content{
+        .search-pic{
+            width: 170px;
+            height: 127px;
+        }
+        .search-detail{
+            h2{
+                @include font(22px,28px); 
+                margin-top:-5px;
+                a{
+                 @include font(22px,28px); 
+                }
+            }
+            p{
+               display: block; 
+            }
+        }
+    }
+    .attachment{
+        .search-menu{
+             white-space: inherit;
+            overflow-x: inherit;
+        }        
+        .count{
+            @include font(30px);
+        }        
+    }
+} 
+/*End css ITG globle search result page*/
+
+
+
+
 }
 /*End CSS Desktop version*/
 

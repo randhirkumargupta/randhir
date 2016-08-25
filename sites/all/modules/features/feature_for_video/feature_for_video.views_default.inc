@@ -844,7 +844,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Content */
+  /* Field: Field: Long Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -920,7 +920,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Content */
+  /* Field: Field: Long Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -959,11 +959,13 @@ allowfullscreen></iframe>';
                 <li><a href="#"><i class="fa fa-envelope"></i> Email</a></li>
                 <li><a href="#"><i class="fa fa-link"></i> Embed</a></li>
                 <li><a href="#"><i class="fa fa-comment"></i> Comment</a></li>
+<li><a href="#"><i class="fa fa-share"></i>Submit Video</a></li>
             </ul>
         </div>
     </div>
     <div class="col-md-4 video-header-right"><p>[field_story_expert_description]</p>
         <p class="upload-date">[timestamp]</p>
+<div class="ads"></div>
     </div>
 </div>
     </div>';
@@ -974,12 +976,17 @@ allowfullscreen></iframe>';
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'container';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '16';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'customstyle';
+  $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
@@ -1014,12 +1021,12 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
   $handler->display->display_options['fields']['field_video_duration']['label'] = '';
   $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
-  /* Field: Content: Short headline */
-  $handler->display->display_options['fields']['field_story_short_headline']['id'] = 'field_story_short_headline';
-  $handler->display->display_options['fields']['field_story_short_headline']['table'] = 'field_data_field_story_short_headline';
-  $handler->display->display_options['fields']['field_story_short_headline']['field'] = 'field_story_short_headline';
-  $handler->display->display_options['fields']['field_story_short_headline']['label'] = '';
-  $handler->display->display_options['fields']['field_story_short_headline']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: Category */
   $handler->display->display_options['sorts']['cat_id']['id'] = 'cat_id';

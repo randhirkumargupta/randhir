@@ -26,6 +26,12 @@ function itg_related_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['twitter-handle/autocomplete'] = array(
+    'page callback' => 'itg_get_twitter_list',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -92,7 +98,7 @@ function my_custom_ajax_callback() {
   $data = array('######1', '######2');
 
   $combined_data = array('label' => $_POST['title'], 'bundle_name' => trim($_POST['bundle_name']), 'im_vid_4' => $_POST['section_id'], 'hash' => $_POST['hash']);
-  $output = serialize($combined_data);
+  //$output = serialize($combined_data);
   $check_title = check_search_title(trim($_POST['search_name']));
 
   if ($check_title) {
@@ -140,9 +146,9 @@ function itg_related_views_pre_render(&$view) {
 }
 
 /**
- * Implement hook_form_views_exposed_form_alter
- * @param Array $form
- * @param Array $form_state
+ * Implements hook_form_views_exposed_form_alter()
+ *
+ * {@inheritdoc}
  */
 function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
@@ -150,11 +156,13 @@ function itg_related_form_views_exposed_form_alter(&$form, &$form_state, $form_i
   if ($form["#id"] == 'views-exposed-form-related-content-new-page') {
     $form['sm_vid_Tags']['#autocomplete_path'] = 'tag-list/1/autocomplete';
     $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/4/autocomplete';
+    $form['sm_field_itg_common_by_line_name']['#autocomplete_path'] = 'reporter-list/autocomplete';
+    $form['sm_field_itg_common_by_line_twit']['#autocomplete_path'] = 'twitter-handle/autocomplete';
   }
 }
 
 /**
- * @param varchar $title
+ * @param string $title
  * @return string
  */
 function check_search_title($title) {
@@ -167,8 +175,7 @@ function check_search_title($title) {
 
 /**
  * update search title if exist
- * 
- * @param varchar $title,$combined_data
+ * @param string $title,$combined_data
  * @param int $uid 
  */
 function update_search_title($title, $combined_data, $uid, $type) {
@@ -257,7 +264,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $get_comma_value = implode(',', $get_value);
           $val_str = str_replace(",", " OR ", $get_comma_value);
         }
-        else if ($key == 'sm_field_itg_common_by_line_name') {
+        else if ($key == 'sm_field_itg_common_by_line_name' || $key == 'sm_alttext' || $key == 'sm_image_title') {
           $quotes_string = '"'.$val.'"';
           $val_str = $quotes_string;
         }
@@ -347,7 +354,7 @@ function itg_related_block_info() {
 
 /**
  * Implements hook_block_view()
- * @param type $delta
+ * @param string $delta
  */
 function itg_related_block_view($delta = '') {
   global $user;
@@ -364,10 +371,10 @@ function itg_related_block_view($delta = '') {
 
 /**
  * Implements hook_theme().
- * @param type $existing
- * @param type $type
- * @param type $theme
- * @param type $path
+ * @param string $existing
+ * @param string $type
+ * @param string $theme
+ * @param string $path
  */
 function itg_related_theme($existing, $type, $theme, $path) {
   $themes = array(
@@ -408,4 +415,24 @@ function itg_get_tag($title) {
     }
     drupal_json_output($options);
   }
+}
+
+
+/**
+ * Implement itg_get_twitter_list
+ * @param string $name
+ */
+function itg_get_twitter_list($name) {
+  $reporter_name = db_select('field_data_field_itg_common_by_line_twitter', 'rpn')
+      ->distinct()
+      ->fields('rpn', array('field_itg_common_by_line_twitter_value'))
+      ->condition('field_itg_common_by_line_twitter_value', '%' . $name . '%', 'LIKE')
+      ->condition('field_itg_common_by_line_twitter_value', 'NULL' , '!=')
+      ->execute();
+
+  while ($record = $reporter_name->fetchAssoc()) {
+    //$options[$prefix . $record['name'] . ':' . $record['tid']] = $record['name'];
+    $options[$record['field_itg_common_by_line_twitter_value']] = $record['field_itg_common_by_line_twitter_value'];
+  }
+  drupal_json_output($options);
 }

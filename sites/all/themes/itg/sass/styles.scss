@@ -32,6 +32,9 @@ a{
     color:$black-color;
     text-decoration: none;
 }
+a:focus, button:focus{
+    outline: 0 none;
+}
 img{
     vertical-align: top;
     max-width: 100%;
@@ -256,19 +259,41 @@ header{
     .navigation{    
         background: $red-bg;
         display:none;
+        .container{
+            @include pos(relative);
+        }
         .menu{
-         @include clearfix;   
+            @include clearfix;   
         }
         ul{
-            li a {
-                border-top: 1px solid #900505;
-                display: block;
-                line-height: 30px;
-                padding: 0 15px;
-                &.active, &:hover{
-                    color: $yellow-color;
+            li{
+                a{
+                   border-top: 1px solid #900505;
+                    display: block;
+                    line-height: 30px;
+                    padding: 0 15px;
+                    &.active, &:hover{
+                        color: $yellow-color;
+                    }
+                } 
+                &.all-menu{
+                    a{
+                        border-right: none;
+                        i{
+                        @include font(22px);
+                        color: #131212;
+                        vertical-align: middle;
+                        }
+                    }
                 }
-            }  
+            }
+            &#newlist{
+                position: absolute;
+                right: 0;
+                z-index: 99;
+                background: #a00606;
+                display: none;
+            }
         }
     }
 }
@@ -1273,19 +1298,27 @@ footer{
             padding: 25px 0;
         }
         .search-pic{
-            width: 170px;
+            width: 144px;
+            height: 107px;            
+            overflow: hidden;
+            &:empty{
+                display: none;
+            }
         }
         .search-detail{
             h2{
-                @include font(22px,28px);
+                @include font(15px,20px);
                 margin-bottom:10px;
                 a{
-                    @include font(22px,28px,$itg-font-medium);   
+                    @include font(15px,20px,$itg-font-medium);   
                 }
-            }            
+            }
+            p{
+                display: none;
+            }
         }
         .social-share{
-            text-align: right;
+            @include display-inline;
             @include social-share;
         }
         .other-info{
@@ -1302,7 +1335,7 @@ footer{
         @include itg-font($itg-roboto); 
         border-bottom: 1px solid $border-color;
         .count{
-            @include font(30px,22px,$itg-font-medium);            
+            @include font(19px,22px,$itg-font-medium);            
             color: #737373;                     
             padding-bottom: 20px;
             display: block;
@@ -1312,6 +1345,8 @@ footer{
         }
         .search-menu{
             padding-bottom: 20px;
+            white-space: nowrap;
+            overflow-x: auto;
             a{
                 padding: 0 10px;
                 border-left: 2px solid #737373;
@@ -1901,7 +1936,47 @@ footer{
 }
 /*End anchors listing css*/
 
-/*Start anchors listing css*/
+/*CSS Start Anchor listing detail page*/
+.anchor-detail-menu{
+    border-bottom:1px solid $border-color;
+    .tab-buttons{
+        @include display-inline;
+        background: transparent;
+        span{
+            width: auto;
+            border-top: 3px solid rgba(202, 202, 202,1);
+            &.active{
+                 border-top: 3px solid #a00606;
+            }
+        }
+    }
+}
+#block-views-anchor-landing-page-block{
+    .anchor{
+        box-shadow: 0px 0px 5px #cecccc;
+        @include clearfix;
+        padding: 10px;
+        font-family: $itg-roboto;
+    }
+    .anchor-left, .anchor-right{
+        @include float(left);
+        @include calculate-width(2);
+    }
+    .anchor-right{
+        padding-left:15px;
+        a.active{
+            @include font(22px,30px,700);            
+            color: #33363b;
+        }
+        a{
+            color: #a00606;
+            @include font(12px);
+        }
+    }
+}
+/*CSS End Anchor listing detail page*/
+
+/*Start Live Block css*/
 .live-block{
     ul{
         @extend .list-none;
@@ -1996,7 +2071,7 @@ footer{
         }
     }
 }
-/*End anchors listing css*/
+/*End live block css*/
 /*Start css No result found side bar*/
 .sidebars .block-itg-widget{
     span.no-result-found{
@@ -2051,24 +2126,25 @@ footer{
         .slides{
             li{
                 @include pos(relative);
-                .detail{
-                    @include pos(absolute,null,null,0px,0px);
+                .detail{                   
                     @include calculate-width(1);
                     font-family: $itg-roboto;
                     .flex-caption {    
-                        padding: 15px 10px;    
+                        padding: 10px 10px;    
                         background: #000;
                         color: $white-color;
                         @include font(18px,24px,$itg-font-medium);    
                         width: auto;
+                        height: 66px;
                     }
                     .flex-count{
+                        @include pos(absolute,null,null,78px,0px);
                         @include display-inline;
                         background: #000;
                         opacity: .5;
                         color: $white-color;
                         @include font(12px,23px);            
-                        margin-bottom: 10px;
+                        margin-bottom:0;
                         padding: 0 10px;  
                         height: 23px;
                     }
@@ -2123,14 +2199,21 @@ footer{
 /*End Photo section slider Homepage*/
 
 /*Start Poll Landing page*/
-.poll-wrapper{
-    @include clearfix;
-    border: 1px solid #dddddd;
-    padding: 20px;
+.poll-wrapper{ 
+    @include sidebar-heading;
+    h3{
+      display: block;  
+      span{
+          padding: 0px 20px 10px 0px;
+      }
+    }
     .related-story.relative-active{
         width: 44% !important;
     }
     .poll-data{
+        @include clearfix;
+        border: 1px solid #dddddd;
+        padding: 20px;
         .poll-replace-id{
             width: 100%;
             display: inline-block;
@@ -2235,6 +2318,12 @@ footer{
                     }
                 }
             }
+            .form-radios{
+                .poll-ans-caption{
+                    padding: 10px 15px;
+                    @include display-inline;
+                }
+            }
         }
         &.relative-with-img{
             width: 56%;
@@ -2263,16 +2352,14 @@ footer{
         .form-item-pole-answer{
             padding: 0 0 12px;
         }
-        .form-submit{
-            width: 100px;
-            height: 34px;
-            background: #0e8ae2;
-            border: 1px solid #48a4e5;
-            color: $white-color;
-            text-transform: uppercase;
-            font-weight: 700;
-            box-shadow: 1px 2px 2px #b5b1b1;
+        .form-submit{            
+            background: #1a3c8d;
+            border: 1px solid #1a3c8d;
+            color: #fff;
+            text-transform: uppercase;            
             cursor: pointer;
+            padding: 6px 5px 5px 5px;            
+            font-size: 12px;
         }
         .error{
             display: block;
@@ -2350,8 +2437,8 @@ footer{
         ul{
             @extend .list-none;
         }
-        .poll-list{
-            padding: 30px 0; 
+        .poll-list{            
+            padding:0 0 30px 0; 
         }
         .detail{
             @include clearfix;
@@ -2479,27 +2566,28 @@ footer{
             @include float(right);
             width: 16%;
             background: #1a1a1a;
+            height:484px;
+            overflow: hidden;
             ul{
                 li{
                     a{
                         display: block;
-                        padding: 25px 5px 24px 10px;
-                        color: #aba9aa;
+                        padding: 21px 5px 21px 10px;
+                        color: #aaa9a9;
                         font-family:$itg-roboto;
                         i{
                             font-size: 18px;
                             vertical-align: middle;
                             margin-right: 5px;
                         }
+                        &:hover{
+                            background: #363636;
+                            color: $white-color;
+                        }
                     }
                     + li a{
                         border-top:1px solid #000;
-                    }
-                    &:last-child{
-                        a{
-                            padding-bottom: 26px;
-                        }
-                    }
+                    }                    
                 }
             }
         }
@@ -2515,9 +2603,15 @@ footer{
     .video-header-right{
         p.upload-date{
             font-size: 12px;
-            color: #fff;
+            color: $white-color;
             margin-top: 10px;
             font-family:$itg-roboto;
+        }
+        .ads{
+            width: 300px;
+            height: 250px;
+            background: #363636;
+            margin: 40px auto 0;
         }
     }
 
@@ -2525,7 +2619,8 @@ footer{
 #block-views-video-landing-header-block-1{    
     color:#aaa8a9;
     background: #171717;
-    border-top: 5px solid #171717;    
+    border-top: 5px solid #171717;
+    padding-bottom: 35px;
     ul{
         @extend .list-none;
     }
@@ -2539,55 +2634,29 @@ footer{
             color: $white-color;
         }
     }
-    .view-content{
-        .item-list{  
+    .view-content{     
              margin:0 -10px;
-        ul{           
+            overflow: hidden;
+        ul.photo-list{           
             @include clearfix();            
             li{
                 width: 170px;
                 padding: 0 10px;
-                @include float(left);
-                @include pos(relative);
-                .views-field-field-story-extra-large-image{
-                    @extend .pos-rel;
-                        &:after{
-                            background: url(../images/video-icon-small.png) no-repeat;
-                            content:"";
-                            width: 18px;
-                            height: 18px;
-                            position: absolute;
-                            left: 5px;
-                            bottom: 5px;
-                        }
-                }
-                .views-field-field-video-duration{
-                    @include pos(absolute,104px,null,null,40px);                    
-                    cursor: pointer;
-                    font-family: $itg-roboto;
-                    @include font(12px);
-                    color: $white-color;
-                }
-                .views-field-field-story-short-headline{
-                    margin-top: 15px;
-                }
+                @include float(left);                
             }
-        }
-        }
+        }        
+    }
+    .mCSB_container{
+        @include display-inline;
     }
     .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {        
         height: 20px;        
         background: #1b1b1b;        
-        border-bottom: 1px solid #2c2c2c;
-        /* Safari 4-5, Chrome 1-9 */
-        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1b1b1b), to(#525252));
-        /* Safari 5.1, Chrome 10+ */
-        background: -webkit-linear-gradient(top, #1b1b1b, #525252);
-        /* Firefox 3.6+ */
-        background: -moz-linear-gradient(top, #1b1b1b, #525252);
-        /* IE 10 */
-        background: -ms-linear-gradient(top, #1b1b1b, #525252);
-        /* Opera 11.10+ */
+        border-bottom: 1px solid #2c2c2c;        
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1b1b1b), to(#525252));        
+        background: -webkit-linear-gradient(top, #1b1b1b, #525252);        
+        background: -moz-linear-gradient(top, #1b1b1b, #525252);        
+        background: -ms-linear-gradient(top, #1b1b1b, #525252);        
         background: -o-linear-gradient(top, #1b1b1b, #525252);
         border-radius: 10px 10px 16px 16px;   
         margin: 0
@@ -2595,13 +2664,14 @@ footer{
     .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
         width: 100px;
         height: 12px;
-        margin: 2px auto;
+        margin: 5px auto;
+        background: #b7b7b7;
+        border-radius: 10px;
     }
 }
 /*video and photo menu*/
 #block-itg-videogallery-videogallery-menu-video-block, #block-itg-photogallery-photo-menu-landing-block{    
-    border-bottom: 1px solid #d9d9d9;
-    padding-top: 30px;
+    border-bottom: 1px solid #d9d9d9;    
     margin-bottom: 30px;
     margin-top: 30px;
     ul{
@@ -2650,14 +2720,18 @@ footer{
       right: 0;
     }
   }
-.view-video-list-of-category{    
+  #block-itg-videogallery-videogallery-menu-video-block{
+      padding-top: 0;
+      margin-top: 0;
+  }
+.view-video-list-of-category, .view-video-landing-header{    
     .views-exposed-form{
         display: none;
     }
-    .view-content{
-      margin: 0 -15px;
+    .view-content{      
       .photo-list{
         list-style: none;
+        margin:0 -15px;
         li{
           padding: 15px;
           float: left;
@@ -2700,12 +2774,12 @@ footer{
   }
 
 /*CSS End Video landing Header*/
-/*video rolling slider*/
+/*video and Photo rolling slider*/
 #block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r{
- background: #171717;   
-     padding: 50px 0 0 0;
+    background: #171717;   
+    padding: 50px 0 0 0;
 }
-/*video rolling slider end*/
+/*video and photo rolling slider end*/
 
 /*CCS start Photo landing Page*/
 #block-views-photo-list-of-category-block-2{
@@ -2762,3 +2836,32 @@ footer{
     }
 }
 /*CSS End HOme page widget rhs-section-ordering*/
+
+/*CSS start breadcrumbs ITG */
+#breadcrumbs{
+    margin-bottom: 10px;
+    ul{
+        @extend .list-none;
+        li{
+            @include display-inline;
+            font-family: $itg-roboto;            
+            padding-right: 5px;
+            color: #a1a1a1;
+            a{
+                font-family: $itg-roboto;
+                color: #a1a1a1;
+            }
+            &:after{
+                content: '/';
+                @include display-inline;
+                width: 5px;
+                height: 5px;
+                padding-left: 5px;    
+            }
+            &:last-child:after, &:first-child:after{
+                display: none;
+            }
+        }
+    }
+}
+/*CSS End breadcrumbs ITG */
