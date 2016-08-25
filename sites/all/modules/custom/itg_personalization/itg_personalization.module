@@ -56,7 +56,7 @@ function itg_personalization_menu() {
 function itg_personalization_home_page() {
   global $user;
   $data = array();
-  
+  drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js');
   // Load user fields
   $user_fields = user_load($user->uid);  
   
@@ -180,6 +180,9 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     // Hide city field.
     $form['field_user_city']['#prefix'] = '<div style="display: none;">';
     $form['field_user_city']['#suffix'] = '</div>';
+    // Hide section field.    
+    $form['field_section']['#prefix'] = '<div style="display: none;">';
+    $form['field_section']['#suffix'] = '</div>';    
     // Set field visibility for category field.
     $form['field_section']['#states'] = array(
       'visible' => array(
@@ -208,6 +211,9 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
           ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
         ),
       ),  
-    );   
+    );    
+    // Change placeholder of ugc type field.
+    $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');
+    unset($form['field_ugc_ctype']['und']['#title']);    
   }
 }
