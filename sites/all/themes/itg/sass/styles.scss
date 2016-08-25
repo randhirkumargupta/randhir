@@ -259,19 +259,41 @@ header{
     .navigation{    
         background: $red-bg;
         display:none;
+        .container{
+            @include pos(relative);
+        }
         .menu{
-         @include clearfix;   
+            @include clearfix;   
         }
         ul{
-            li a {
-                border-top: 1px solid #900505;
-                display: block;
-                line-height: 30px;
-                padding: 0 15px;
-                &.active, &:hover{
-                    color: $yellow-color;
+            li{
+                a{
+                   border-top: 1px solid #900505;
+                    display: block;
+                    line-height: 30px;
+                    padding: 0 15px;
+                    &.active, &:hover{
+                        color: $yellow-color;
+                    }
+                } 
+                &.all-menu{
+                    a{
+                        border-right: none;
+                        i{
+                        @include font(22px);
+                        color: #131212;
+                        vertical-align: middle;
+                        }
+                    }
                 }
-            }  
+            }
+            &#newlist{
+                position: absolute;
+                right: 0;
+                z-index: 99;
+                background: #a00606;
+                display: none;
+            }
         }
     }
 }

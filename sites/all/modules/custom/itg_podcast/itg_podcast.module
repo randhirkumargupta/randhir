@@ -458,9 +458,11 @@ function itg_podcast_form_views_exposed_form_alter(&$form, &$form_state, $form_i
 function itg_podcast_views_pre_render(&$view) {
 
   if ($view->name == "manage_podcast" || $view->name == "podcast_management") {
+    if (!isset($_POST['views_bulk_operations'])) {
     $header_content_audio = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_audio .= l(t('Upload Audio'), 'node/add/podcast', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content_audio;
+    }
   }
 }
 
