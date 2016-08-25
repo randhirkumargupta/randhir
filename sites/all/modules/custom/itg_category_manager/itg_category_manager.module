@@ -215,6 +215,21 @@ return $flag;
 }
 
 /**
+ * Implements hook_js_alter() for use custom ckeditor js()
+ * 
+ * {@inheritdoc} 
+ * @global string $base_url
+ * @param array $javascript
+ */
+
+function itg_category_manager_js_alter(&$javascript) {
+    
+    global $base_url;
+    $javascript['//cdn.ckeditor.com/4.5.4/full-all/ckeditor.js']['data']=$base_url.'/sites/all/modules/custom/itg_category_manager/js/ckeditor.js';
+    
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for taxonomy_form_term().
  * 
  * @global stdObject $user
@@ -372,6 +387,7 @@ $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
 }
 }
 }
+
 
 /**
  * Get all categories under their parent category
@@ -992,7 +1008,7 @@ $form_names_use_primay_field = array('story_node_form', 'photogallery_node_form'
 if (in_array($form_id, $form_names_use_primay_field)) {
 $form['field_primary_cat_data'] = array('#title' => t('Select Primary'), '#type' => 'select', '#validated' => TRUE, '#attributes' => array('id' => 'primary-category-data'), '#options' => array('' => t('Select')));
 }
-drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', 'file');
+drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js',array('type'=>'file','scope' => 'footer'));
 }
 }
 

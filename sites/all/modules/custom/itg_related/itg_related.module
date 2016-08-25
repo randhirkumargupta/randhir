@@ -285,8 +285,13 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     $str = ltrim(trim($str), "AND");
   }
 
-  if($_GET['q'] == 'searchimage') {
+  if ($_GET['q'] == 'searchimage') {
     $search_array = $query->getSolrParams();
+    if (empty($str) && $_GET['keyword'] != '') {
+      $hash = array('bw8w8n', '5fyeg7', '2e1u4m', 'e49it8');
+      $hash_value = implode(' OR ', $hash);
+      $str = 'hash:(' . $hash_value . ')';
+    }
     $query->replaceParam("fq", '(' . $str . ')');
   }
   else {
