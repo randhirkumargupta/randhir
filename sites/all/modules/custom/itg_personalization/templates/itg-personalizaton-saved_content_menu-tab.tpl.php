@@ -5,8 +5,8 @@
  *   Template file for personalized saved content. 
  */
 ?>
-<ul class="saved-item">
-    <li>
+<ul class="saved-item-tab">
+    <li class="active">
     <?php 
     echo l(t('All')  , 'itg-saved-content/all/nojs/', 
       array('attributes' => array('class' => array('use-ajax'))));
