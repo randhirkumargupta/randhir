@@ -78,6 +78,7 @@ a:focus, button:focus {
 img {
   vertical-align: top;
   max-width: 100%;
+  height: auto;
 }
 
 .mr-0, *, #block-formblock-ask-an-expert .form-item .form-item {

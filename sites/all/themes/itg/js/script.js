@@ -152,16 +152,14 @@ Drupal.behaviors.my_custom_behavior = {
     
     headerMain();
     function headerMain(){
+        
         //var logotxt = $('.container.header-logo').html();
         $('.container.header-logo').prependTo('#block-itg-layout-manager-header-block');
         $('.search-icon').click(function(){
-            $('.globle-search').css('width','255px');
+            $(this).parents('div').find('.globle-search').css('width','255px');
         });
         
-        $('.mobile-nav').click(function(){
-            console.log("here");
-            $('.navigation').stop().slideToggle();
-        });
+        
         $(document).on('click', function(){            
             $('.globle-search').css('width','0px');
         });
@@ -236,10 +234,6 @@ jQuery(document).ready(function () {
 
             jQuery(this).stop().animate({scrollTop: h}, 1000);
         }
-        else
-        {
-//            jQuery(this).stop();
-        }
     });
     
 //header menu add icon for mobile
@@ -262,6 +256,9 @@ jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" h
     
     jQuery(document).on('click','.all-menu', function(){
         jQuery('#newlist').slideToggle();
+    });
+    jQuery('.mobile-nav').click(function(){              
+        jQuery('.navigation').slideToggle();
     });
     
 //ITG footer
@@ -292,7 +289,6 @@ footerMain();
         }
     });
     }
-
 });
 
 
