@@ -45,7 +45,7 @@ function itg_image_croping_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
-    
+
     $items['edittags'] = array(
         'page callback' => 'itg_image_croping_edit_tags', // save the tags on images.
         'type' => MENU_CALLBACK,
@@ -62,8 +62,8 @@ function itg_image_croping_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
-    
-      $items['gettags'] = array(
+
+    $items['gettags'] = array(
         'page callback' => 'itg_image_croping_get_image_tag', // se for get the tags by tagid on image.
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
@@ -81,10 +81,9 @@ function itg_image_croping_ajax_make_ajax() {
 
     $image_id = $_POST['imageId'];
     $field_name = $_POST['field_id'];
-    if($_POST['img_height'] && $_POST['img_width'])
-    {
-    $image_height = trim($_POST['img_height']);
-    $image_width = trim($_POST['img_width']);
+    if ($_POST['img_height'] && $_POST['img_width']) {
+        $image_height = trim($_POST['img_height']);
+        $image_width = trim($_POST['img_width']);
     }
     $file = file_load($image_id);
     if (empty($file)) {
@@ -93,6 +92,8 @@ function itg_image_croping_ajax_make_ajax() {
     $imagedata = base64_encode(file_get_contents($file->uri));
     $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata));
 
+    drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
+  type' => 'file', 'scope' => 'content'));
 
     print theme('image_repository', array('data' => $file,
         'field_name' => $field_name,
@@ -146,10 +147,10 @@ function itg_image_croping_remove_image_tag() {
 function itg_image_croping_get_image_tag() {
 
     $tag_id = $_POST['tag_id'];
-    $data = db_select('image_tags','c')
-                ->fields('c')
-            ->condition('id', $tag_id, '=')
-            ->execute()->fetchAssoc();
+    $data = db_select('image_tags', 'c')
+                    ->fields('c')
+                    ->condition('id', $tag_id, '=')
+                    ->execute()->fetchAssoc();
     print json_encode($data);
     exit();
 }
@@ -207,8 +208,7 @@ function itg_image_croping_save_tags() {
 
         $return = array('status' => '1', 'id' => $inserted_data);
         print json_encode($return);
-    } 
-    else {
+    } else {
         $return = array('status' => '0', 'id' => '');
         print json_encode($return);
     }
@@ -227,28 +227,25 @@ function itg_image_croping_edit_tags() {
     $x_coordinate = $_POST['pic_x'];
     $y_coordinate = $_POST['pic_y'];
     $type = $_POST['type'];
-   
 
-        $inserted_data = db_update('image_tags')->fields(array(
-                    'tag_title' => $tag,
-                    'tag_url' => $tag_url,
-                    'x_coordinate' => $x_coordinate,
-                    'y_coordinate' => $y_coordinate,
-                )) ->condition('id', $fid, '=')
-->execute();
+
+    $inserted_data = db_update('image_tags')->fields(array(
+                'tag_title' => $tag,
+                'tag_url' => $tag_url,
+                'x_coordinate' => $x_coordinate,
+                'y_coordinate' => $y_coordinate,
+            ))->condition('id', $fid, '=')
+            ->execute();
     if ($inserted_data) {
 
         $return = array('status' => '1', 'id' => $inserted_data);
         print json_encode($return);
-    } 
-    else {
+    } else {
         $return = array('status' => '0', 'id' => '');
         print json_encode($return);
     }
     exit();
 }
-
-
 
 /**
  * Implements hook_theme().
