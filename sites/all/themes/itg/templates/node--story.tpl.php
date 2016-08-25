@@ -137,6 +137,7 @@
             $entity = entity_load('field_collection_item', array($field_collection_id));
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
             $img = '<img src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
+            if(!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
             if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
             $buzz_output.= '<div class="buzz-img">' . $img . '</div>';
@@ -147,7 +148,7 @@
             $buzz_output.= '</div>';
              $buzz++;
           }
-         
+          }
           print $buzz_output;
         }
         ?>

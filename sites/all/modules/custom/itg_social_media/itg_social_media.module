@@ -297,7 +297,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
     $pre_save['username'] = $user->name;
     $pre_save['social_media'] = 'facebook ' . $type;
     $pre_save['status'] = 1;
-    $mtype = $type == 'Photos' ? 'Image' : 'Video';
+    $mtype = $type == 'photos' ? 'Image' : 'Video';
  watchdog('Facebook pre', '<pre>' . print_r($pre_save, TRUE) . '</pre>');   
     // INSERT INTO DATABASE    
     drupal_write_record('itg_social_media_logs', $pre_save);

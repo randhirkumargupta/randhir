@@ -159,6 +159,7 @@
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li {
   padding: 0 5px;
+  cursor: pointer;
 }
 #block-views-photo-landing-slider-block .other-details-main {
   height: 645px;
