@@ -30,27 +30,27 @@
 
     jQuery('.view-content img').live('click', function() {
         var getimageurl = jQuery(this).attr('src');
-        var altdata=jQuery(this).attr('alt');
-        var titledata=jQuery(this).attr('title');
+        var altdata = jQuery(this).attr('alt');
+        var titledata = jQuery(this).attr('title');
+        var fieldname = parent.jQuery('#field_name').val();
         parent.jQuery('#img_alttext').val(altdata);
-         parent.jQuery('#img_title').val(titledata);
+        parent.jQuery('#img_title').val(titledata);
         jQuery.ajax({
             url: Drupal.settings.basePath + 'saveimage',
             type: 'post',
             beforeSend: function() {
                 parent.jQuery('#loader-data').show();
             },
-            data: {'imageurl': getimageurl},
+            data: {'imageurl': getimageurl, 'field_name': fieldname},
             success: function(data) {
                 var objdata = jQuery.parseJSON(data);
                 var imageId = objdata.fid;
-                var fieldname = parent.jQuery('#field_name').val();
                 var height = parent.jQuery('#image_height').val();
                 var width = parent.jQuery('#image_width').val();
 
                 if (imageId != "")
                 {
-                   
+
                     var imageName = jQuery(this).siblings('.dz-image').children('img').attr('imgname');
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'getimagetocroper',
