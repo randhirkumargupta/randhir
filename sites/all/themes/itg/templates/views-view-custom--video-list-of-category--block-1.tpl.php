@@ -14,7 +14,7 @@ if (isset($_GET['category'])) {
         <div class="tile">
  <figure>
  <?php print l($img, 'node/'.$row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => arg(2)), 'html' => TRUE)); ?>
-<figcaption><i class="fa fa-camera" ></i><?php print $row['field_video_duration']; ?></figcaption>
+<figcaption><i class="fa fa-play-circle"></i> <?php print $row['field_video_duration']; ?></figcaption>
 
       </figure>
 

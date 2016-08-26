@@ -41,7 +41,7 @@ function itg_common_dropdown_supplement($id = '') {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
     global $user;
-    if ($form_id != 'views_exposed_form') {
+    if (isset($form['#node']) || $form_id == 'taxonomy_form_term') {
         drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_addbtn.js', array('type' => 'file', 'scope' => 'footer'));
     }
     if ($user->uid != '1') {
