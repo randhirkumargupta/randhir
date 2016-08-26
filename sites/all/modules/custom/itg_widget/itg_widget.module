@@ -459,6 +459,7 @@ function itg_widget_block_view($delta = '') {
 
       $info['view_name'] = 'photo_carousel_widget'; // view name
       $info['page'] = 'photo_carousel'; // page name
+      $info['nodequeue'] = 'photo_carousel';
       $data = itg_widget_featured_photo_carousel_data($info, 'flexslider');
       $block['content'] = theme("featured_photo_carousel", array("data" => $data));
       break;
@@ -526,6 +527,7 @@ function itg_widget_block_view($delta = '') {
 
       $info['view_name'] = 'photo_carousel_widget'; // view name
       $info['page'] = 'video_carousel'; // page name
+      $info['nodequeue'] = 'video_carousel';
       $data = itg_widget_featured_video_carousel_data($info, 'flexslider');
       $block['content'] = theme("featured_video_carousel", array("data" => $data));
       break;
