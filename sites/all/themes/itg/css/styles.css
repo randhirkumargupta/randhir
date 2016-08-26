@@ -3549,8 +3549,8 @@ footer .footer-copyright {
   color: #fff;
 }
 #block-views-video-landing-header-block-1 .view-content {
-  /*margin:0 -10px;*/
-  overflow: hidden;
+ /*margin:0 -10px;
+overflow: hidden;*/
 }
 #block-views-video-landing-header-block-1 .view-content ul.photo-list {
   zoom: 1;
@@ -3687,11 +3687,13 @@ footer .footer-copyright {
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
-  font-family: "Roboto Slab";
 }
 .view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a {
   color: #494949;
-  font-family: "Roboto Slab";
+}
+
+.view-video-landing-header .view-content .photo-list li .tile a {
+  color: #b4b4b4;
 }
 
 /*CSS End Video landing Header*/

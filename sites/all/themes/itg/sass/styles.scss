@@ -2710,8 +2710,8 @@ footer{
         }
     }
     .view-content{     
-        /*margin:0 -10px;*/
-       overflow: hidden;
+        /*margin:0 -10px;
+       overflow: hidden;*/
         ul.photo-list{           
             @include clearfix();            
             li{
@@ -2835,17 +2835,20 @@ footer{
               display: block;
               font-size: 12px;
               color: #b1b1b1;
-              padding: 8px 0 5px;
-              font-family: "Roboto Slab";
+              padding: 8px 0 5px;              
             }
             a{
-              color: #494949;
-              font-family: "Roboto Slab";
+              color: #494949;              
             }
           }
         }
       }
     }
+  }
+  .view-video-landing-header {
+      .view-content .photo-list li .tile a{
+          color:#b4b4b4
+      }      
   }
 
 /*CSS End Video landing Header*/
