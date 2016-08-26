@@ -260,6 +260,7 @@
                 @include float(none);
             } 
             .profile-detail {
+                margin:0;
                 ul {
                     li{ 
                         @include float(none);
@@ -270,7 +271,13 @@
                         }
                     }
                 }    
-            }   
+            }
+            ul.social-links{                
+                li{
+                    @include float(left);               
+                    padding:10px 0;
+                }
+            }
         }
         .briefcase{
             margin-top: 50px;
