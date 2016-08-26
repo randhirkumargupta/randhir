@@ -2627,19 +2627,19 @@ footer{
     background: #171717;     
     .video-landing-header{
         background: #000;
-        padding-bottom: 15px;
+        padding: 0 15px 15px 15px;
     }
     .video-header-left{
         @include clearfix;
         .video{
             @include float(left);
-            width: 84%;
+            width: 83%;
             padding: 15px;
             border:1px solid #242424;
         }
         .social-likes{
             @include float(right);
-            width: 16%;
+            width: 17%;
             background: #1a1a1a;
             height:484px;
             overflow: hidden;
@@ -2669,13 +2669,15 @@ footer{
     }
     h2{
         color: $white-color;
-        font-size: 26px;
+        font-size: 24px;
         margin: 10px 0;
     }
     ul{
         @extend .list-none;
     }   
     .video-header-right{
+        position: relative; 
+        height: 484px;
         p.upload-date{
             font-size: 12px;
             color: $white-color;
@@ -2686,7 +2688,9 @@ footer{
             width: 300px;
             height: 250px;
             background: #363636;
-            margin: 40px auto 0;
+            margin: 40px 20px 0;
+            position: absolute;
+            bottom: 0;
         }
     }
 
@@ -2699,31 +2703,29 @@ footer{
     ul{
         @extend .list-none;
     }
-    .container{
-        background: #000;
-        padding:10px 25px 
+    .container{        
+        padding:10px 15px 
     }
     .view-header{
+        background: #000;
+        padding:10px 15px;
         h3{
             @include font(14px);
-            color: $white-color;
+            color: $white-color;            
         }
     }
-    .view-content{     
-        /*margin:0 -10px;
-       overflow: hidden;*/
-        ul.photo-list{           
-            @include clearfix();            
-            li{
+    .view-content{            
+        background: #000;
+        padding:10px 15px;
+        overflow-x: scroll;
+        ul.photo-list{                       
+            li{               
+                padding: 0 15px 10px;    
                 width: 190px;
-                padding: 0 10px;
-                @include float(left);                
             }
         }        
     }
-    .mCSB_container{
-        @include display-inline;
-    }
+ 
     .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {        
         height: 20px;        
         background: #1b1b1b;        

@@ -1,7 +1,7 @@
-<div class="custom-scroll-bar">
-<ul class="photo-list" style="overflow: hidden;">
+<div class="defalt-bar">
+<ul class="row photo-list">
   <?php foreach ($rows as $index => $row): ?>
-    <li class="col-md-3">
+    <li class="col-md-2">
         <div class="tile">
      <figure>
         <?php
