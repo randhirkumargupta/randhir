@@ -130,9 +130,8 @@ function tv_schedule_list($search_date) {
 /**
  * Custom method for checking story details on particular date.
  *
- * @param string $dte
- * @param string $tme
- * @param string $zne
+ * @param string $date
+ * @param string $time
  * @return int
  */
 function tv_story_list($date, $time) {
