@@ -6492,7 +6492,8 @@ div.node{
         display: block;
     }*/
 }
-#views-form-photo-carousel-widget-photo-carousel-list{
+#views-form-photo-carousel-widget-photo-carousel-list, 
+#views-form-photo-carousel-widget-video-carousel-list{
   @extend .confirmation;
   .form-actions{
     #edit-submit{
