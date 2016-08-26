@@ -15,6 +15,7 @@ function feature_for_personalization_user_default_permissions() {
     'name' => 'view personalized content',
     'roles' => array(
       'Editor' => 'Editor',
+      'Front User' => 'Front User',
       'administrator' => 'administrator',
     ),
     'module' => 'itg_personalization',
