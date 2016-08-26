@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * home page feature ordering and reordering
@@ -29,6 +30,10 @@ function itg_widget_featured_photo_carousel_data($info, $slider_type) {
       // TODO: Add values to Variables and create config file. Widget settings.
       $query->range(0, 5);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      if (empty($result)) {
+        $nodequeue_name = isset($info['nodequeue']) ? $info['nodequeue'] : "";
+        $result = itg_widget_nodes_from_nodequeue($nodequeue_name);
+      }
       $actual_result = itg_widget_featured_photo_carousel_data_fetch($result, $slider_type);
       return $actual_result;
     }
@@ -41,7 +46,6 @@ function itg_widget_featured_photo_carousel_data($info, $slider_type) {
   }
   return $data;
 }
-
 
 /**
  * @param array $result
