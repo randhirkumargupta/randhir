@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * home page feature ordering and reordering
@@ -25,7 +26,7 @@ function itg_widget_featured_video_carousel_data($info, $slider_type) {
       $query->orderBy('dv_s.weight', 'ASC');
       // only top 5 nodes are required as per requirement
       // TODO: Add values to Variables and create config file. Widget settings.
-      $query->range(0, 5); 
+      $query->range(0, 5);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
       $actual_result = itg_widget_featured_video_carousel_data_fetch($result, $slider_type);
       return $actual_result;
@@ -39,7 +40,6 @@ function itg_widget_featured_video_carousel_data($info, $slider_type) {
   }
   return $data;
 }
-
 
 /**
  * @param array $result
