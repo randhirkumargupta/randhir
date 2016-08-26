@@ -3486,22 +3486,23 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block .video-header-left .video {
   float: left;
-  width: 83%;
-  padding: 15px;
+  width: 84.5%;
+  padding: 10px;
   border: 1px solid #242424;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes {
   float: right;
-  width: 17%;
+  width: 15.5%;
   background: #1a1a1a;
-  height: 484px;
+  height: 474px;
   overflow: hidden;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
   display: block;
-  padding: 21px 5px 21px 10px;
+  padding: 20px 5px 20px 10px;
   color: #aaa9a9;
   font-family: "Roboto", sans-serif;
+  font-size: 12px;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
   font-size: 18px;
