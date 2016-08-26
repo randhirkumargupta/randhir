@@ -124,3 +124,24 @@ function tv_schedule_list($search_date) {
     $results = $cursor->count();
     return $results;
 }
+
+/**
+ * Custom method for checking story details on particular date.
+ *
+ * @param string $dte
+ * @param string $tme
+ * @param string $zne
+ * @return int
+ */
+function tv_story_list($dte, $tme, $zne = '') {
+  $itg_query = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('status', 1);
+  $itg_query->join('field_data_field_poll_start_date', 'frq', 'n.nid = frq.entity_id');
+  $itg_query->condition('frq.field_poll_start_date_value', $dte);
+  $itg_query->join('field_data_field_story_tv_time', 'ast', 'n.nid = ast.entity_id');
+  $itg_query->condition('ast.field_story_tv_time_value', $tme);
+  $itg_result = $itg_query->execute()->fetchField();
+
+  return $itg_result;
+}
