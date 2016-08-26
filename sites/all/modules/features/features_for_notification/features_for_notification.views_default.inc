@@ -26,9 +26,13 @@ function features_for_notification_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    4 => '4',
+    5 => '5',
     6 => '6',
+    7 => '7',
     20 => '20',
     10 => '10',
+    9 => '9',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -137,7 +141,7 @@ function features_for_notification_views_default_views() {
   $handler->display->display_options['fields']['field_ntf_select_device']['table'] = 'field_data_field_ntf_select_device';
   $handler->display->display_options['fields']['field_ntf_select_device']['field'] = 'field_ntf_select_device';
   $handler->display->display_options['fields']['field_ntf_select_device']['label'] = 'Device';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Schedule */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
