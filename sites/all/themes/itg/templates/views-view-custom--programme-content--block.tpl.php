@@ -4,7 +4,7 @@
   foreach ($rows as $key => $row) :
     $section_cat_id = $row['field_story_category'];
     if ($key == 0) {
-      $url = l("more>>", 'node/' . $row['nid'], array('attributes' => array('class' => 'more-link')), array('query' => array('category' => $section_cat_id), 'html' => TRUE));
+      $url = l("More>>", 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE));
     }
     if ($key > 3) {
       continue;
@@ -16,6 +16,14 @@
         $img = $row['field_story_extra_large_image'];
         ?>
         <div class="large-image">
+          <?php print l($img, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE)); ?>
+        </div>
+      <?php else : ?>
+        <div class="large-image">
+          <?php
+          global $base_url;
+          $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
+          ?>
           <?php print l($img, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE)); ?>
         </div>
       <?php endif; ?>

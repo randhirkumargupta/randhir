@@ -178,6 +178,8 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['alter']['text'] = '[field_story_category-tid] ';
   $handler->display->display_options['fields']['field_story_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_story_category']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
@@ -215,18 +217,18 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Has taxonomy term ID */
-  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
-  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
-  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
-  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['tid']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['tid']['validate']['type'] = 'taxonomy_term';
-  $handler->display->display_options['arguments']['tid']['validate_options']['vocabularies'] = array(
+  /* Contextual filter: Content: Section (field_story_category) */
+  $handler->display->display_options['arguments']['field_story_category_tid']['id'] = 'field_story_category_tid';
+  $handler->display->display_options['arguments']['field_story_category_tid']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['arguments']['field_story_category_tid']['field'] = 'field_story_category_tid';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'taxonomy_tid';
+  $handler->display->display_options['arguments']['field_story_category_tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_story_category_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_story_category_tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_story_category_tid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_story_category_tid']['validate']['type'] = 'taxonomy_term';
+  $handler->display->display_options['arguments']['field_story_category_tid']['validate_options']['vocabularies'] = array(
     'category_management' => 'category_management',
   );
   $export['programme_content'] = $view;
