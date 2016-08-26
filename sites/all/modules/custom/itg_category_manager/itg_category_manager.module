@@ -314,8 +314,6 @@ drupal_add_js('(function($) {$(document).ready(function() {
 if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
 $form['name']['#title'] = t('Category Title');
 $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
-//$form['description']['#type']='textarea';
-//p($form);
 //unset($form['description']);
 //Hide settings title levels
 unset($form['field_cm_hide_cat_from_home'][LANGUAGE_NONE]['#title']);
