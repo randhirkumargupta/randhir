@@ -12,35 +12,36 @@
         <?php print drupal_get_html_head(); ?>
         <?php print drupal_get_css(); ?>
         <?php print drupal_get_js('header'); ?>
-      
+
     </head>
 
     <body class="itg_image_repository">
         <div id="itg_image_repository-messages"><?php print theme('status_messages'); ?></div>
-        <?php print $content;?>
+        <?php print $content; ?>
         <input type="hidden" id="field_name" value="<?php echo $_GET['field_name']; ?>" >
             <input type="hidden" id="image_height" value="<?php echo $_GET['height']; ?>" >
                 <input type="hidden" id="image_width" value="<?php echo $_GET['width']; ?>" >
-                  <input type="hidden" id="btn_name" value="<?php echo $_GET['btn_name']; ?>" >
-                      <input type="hidden" id="img_alttext" value="" >
-                          <input type="hidden" id="img_title" value="" >
-                              <?php 
-                               $ckeditorcheck=explode('|', $_GET['app']);
-                              if($ckeditorcheck[0]=='ckeditor')
-                              {
-                                 echo '<input type="hidden" id="ckeditor_yes" value="1" >';
-                              }?>
-                    <script type="text/javascript">
-                        var fieldname = '<?php echo $_GET['field_name']; ?>';
-                        var height = '<?php echo $_GET['height']; ?>';
-                        var width = '<?php echo $_GET['width']; ?>';
-                        
-                    </script>
+                    <input type="hidden" id="btn_name" value="<?php echo $_GET['btn_name']; ?>" >
+                        <input type="hidden" id="img_alttext" value="" >
+                            <input type="hidden" id="img_title" value="" >
+                                <?php
+                                $ckeditorcheck = explode('|', $_GET['app']);
+                                if ($ckeditorcheck[0] == 'ckeditor') {
+                                    echo '<input type="hidden" id="ckeditor_yes" value="1" >';
+                                }
+                                ?>
+                                <script type="text/javascript">
+                                    var fieldname = '<?php echo $_GET['field_name']; ?>';
+                                    var height = '<?php echo $_GET['height']; ?>';
+                                    var width = '<?php echo $_GET['width']; ?>';
 
-                    <?php 
-                     drupal_add_js(drupal_get_path('module', 'itg_image_repository') . '/js/itg_image_repo.js', array('
+                                </script>
+
+                                <?php
+                                drupal_add_js(drupal_get_path('module', 'itg_image_repository') . '/js/itg_image_repo.js', array('
   type' => 'file', 'scope' => 'footer'));
-                     print drupal_get_js('footer'); ?>
-                    </body>
+                                print drupal_get_js('footer');
+                                ?>
+                                </body>
 
-                    </html>
+                                </html>
