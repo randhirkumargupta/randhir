@@ -35,8 +35,6 @@ function itg_syndication_menu() {
 }
 
 
-
-
 /**
  * Implement hook_permissions()
  */

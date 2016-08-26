@@ -8,4 +8,6 @@ dependencies[] = views_customstyle
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = anchor_landing_page
+features[views_view][] = programme_content
+features[views_view][] = programmes
 features_exclude[dependencies][ctools] = ctools
