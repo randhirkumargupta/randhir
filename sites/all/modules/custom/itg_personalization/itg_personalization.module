@@ -30,7 +30,8 @@ function itg_personalization_menu() {
     'title' => t('Personalization'),
     'description' => t('User personalized content.'),
     'page callback' => 'itg_personalization_home_page',
-    'access arguments' => array('view personalized content'),
+    'access callback' => TRUE,
+    //'access arguments' => array('view personalized content'),
     'type' => MENU_NORMAL_ITEM,
   );
   $items['itg-saved-content/%'] = array(    
@@ -77,7 +78,7 @@ function itg_personalization_home_page() {
   // user logout link
   $data['logout'] = l(t('Logout'), 'user/logout');
   
-  return theme('personalization_home_page', array('data' => $data));
+  return theme('personalization_userpage', array('data' => $data));
 }
 
 /**
@@ -87,7 +88,7 @@ function itg_personalization_home_page() {
  */
 function itg_personalization_theme() {
   $themes = array(
-    'personalization_home_page' => array(
+    'personalization_userpage' => array(
       'template' => 'itg-personalizaton-home',
       'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
       'variables' => array('data' => NULL),
