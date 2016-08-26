@@ -1,7 +1,7 @@
 <div class="defalt-bar">
-<ul class="row photo-list">
+<ul class="photo-list">
   <?php foreach ($rows as $index => $row): ?>
-    <li class="col-md-2">
+    <li class="">
         <div class="tile">
      <figure>
         <?php
@@ -13,6 +13,20 @@
         <?php $title = $row['title']; ?>
     <?php print l($title, 'node/' . $row['nid'], array('query' => array('category' => $_GET['category'], 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
         </div>
+    </li>
+    <li class="">
+        <div class="tile">
+     <figure>
+          <a href="/itgcms/content/ftp-video?category=445&amp;sid=445"></a>        <figcaption><i class="fa fa-play-circle"></i> 00:05</figcaption>
+        </figure>
+            <a href="/itgcms/content/ftp-video?category=445&amp;sid=445">five-pakistani-balloons-found-in-fatehpur-pathankot</a>        </div>
+    </li>
+    <li class="">
+        <div class="tile">
+     <figure>
+          <a href="/itgcms/content/ftp-video?category=445&amp;sid=445"></a>        <figcaption><i class="fa fa-play-circle"></i> 00:05</figcaption>
+        </figure>
+            <a href="/itgcms/content/ftp-video?category=445&amp;sid=445">five-pakistani-balloons-found-in-fatehpur-pathankot</a>        </div>
     </li>
 <?php endforeach; ?>
 </ul>
