@@ -435,6 +435,7 @@ function features_for_story_field_default_field_bases() {
         'comment' => 'Comment',
         'medium_style_comment' => 'Medium Style Comment',
         'display_lock' => 'Display Lock',
+        'set_as_featured' => 'Set As Featured',
         'tv' => 'Associate Tv',
       ),
       'allowed_values_function' => '',
