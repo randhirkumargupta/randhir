@@ -77,6 +77,7 @@ function tv_schedule_listing() {
     if ($results > 0) {
         // iterate cursor to get value of documents
         foreach ($cursor as $document) {
+          
             $s_time = time_zone_conversion($document['time'], $_GET['time_zone']);
             if ($s_time == $curent_time) {
                 $out[$keys]['time'] = '';
@@ -87,6 +88,7 @@ function tv_schedule_listing() {
             //$out[$keys]['time'] = $document["time"];
             $out[$keys]['day'] = $document["day"];
             $out[$keys]['program'] = $document["program"];
+            $out['story_link'] = tv_story_list($date, $document['time']);
             $keys++;
 
             //counter required for current time slot display.
@@ -133,14 +135,15 @@ function tv_schedule_list($search_date) {
  * @param string $zne
  * @return int
  */
-function tv_story_list($dte, $tme, $zne = '') {
+function tv_story_list($date, $time) {
   $itg_query = db_select('node', 'n')
       ->fields('n', array('nid'))
+      ->condition('type', 'story')
       ->condition('status', 1);
   $itg_query->join('field_data_field_poll_start_date', 'frq', 'n.nid = frq.entity_id');
-  $itg_query->condition('frq.field_poll_start_date_value', $dte);
+  $itg_query->condition('frq.field_poll_start_date_value', $date);
   $itg_query->join('field_data_field_story_tv_time', 'ast', 'n.nid = ast.entity_id');
-  $itg_query->condition('ast.field_story_tv_time_value', $tme);
+  $itg_query->condition('ast.field_story_tv_time_value', $time);
   $itg_result = $itg_query->execute()->fetchField();
 
   return $itg_result;
