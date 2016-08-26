@@ -88,7 +88,7 @@ function tv_schedule_listing() {
             //$out[$keys]['time'] = $document["time"];
             $out[$keys]['day'] = $document["day"];
             $out[$keys]['program'] = $document["program"];
-            $out['story_link'] = tv_story_list($date, $document['time']);
+            
             $keys++;
 
             //counter required for current time slot display.
