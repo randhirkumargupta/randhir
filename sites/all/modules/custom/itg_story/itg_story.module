@@ -416,7 +416,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
   }
   
-  // Setup supplement select
+  // Setup tv time field select
   $form[$tv_time_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $tv_time_field . '_replace">';
   $form[$tv_time_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 
