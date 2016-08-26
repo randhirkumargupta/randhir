@@ -25,7 +25,7 @@
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
   <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
   <link href="<?php print $base_path; ?>sites/all/themes/itgadmin/css/font-awesome.css" rel="stylesheet" type="text/css"/>
   <?php print $styles; ?>
   <?php print $scripts; ?>
