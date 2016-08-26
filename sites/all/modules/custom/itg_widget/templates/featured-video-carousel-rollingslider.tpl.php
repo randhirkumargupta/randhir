@@ -18,6 +18,7 @@ if (!empty($data)) {
             <!--<img src="/itgcms/sites/all/themes/itg/images/demo-photo.jpg">-->
               <span class="flex-count" style="text-align: right"><i class="fa fa-play-circle"></i></span>
               <span class="pic-tit"><?php print $entity_data_node['title']; ?></span>
+              <span class="overlay"></span>
             </a>
 
           </div>  
@@ -33,5 +34,20 @@ if (!empty($data)) {
 
 <?php } ?>
 
-
-
+  <!--This Uncompressed CSS is for photo rolling slider to set title and image count visibleness for centered image.  -->
+<style>
+.carousel .slides .slideItem[style*="width: 645px"] span{
+    opacity: 1;
+      -webkit-transition: all 500ms ease .2s;
+    -moz-transition: all 500ms ease .2s;
+    -o-transition: all 500ms ease .2s;
+    transition: all 500ms ease .2s;
+}
+.carousel .slides .slideItem[style*="width: 645px"] span.overlay{
+    opacity: 0;
+      -webkit-transition: all 500ms ease .2s;
+    -moz-transition: all 500ms ease .2s;
+    -o-transition: all 500ms ease .2s;
+    transition: all 500ms ease .2s;
+}
+</style>  
