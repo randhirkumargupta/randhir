@@ -1462,6 +1462,7 @@ footer{
                         span.share-count{
                             display: block;
                             @include font(44px,44px,500);
+                            color:#bebebe;
                         }                                     
                         &.twitter{
                             color: #0783ec;
@@ -1475,6 +1476,33 @@ footer{
                         }
                         +li{
                             border-left: 1px solid #a6a6a6;
+                        }
+                    }
+                }
+                ul.social-links{
+                    @include clearfix;
+                    margin-top:0;
+                    li{
+                        @include float(left);
+                        width: 50%;                        
+                        i{
+                            font-size: 16px;
+                            color: #c0c0c0;
+                        }
+                        span{
+                            display: block;
+                            margin-top: 5px;
+                        }
+                        &:nth-child(odd){
+                            border-right: 1px solid $border-color;
+                        }
+                        &:last-child{
+                            @include calculate-width(1);
+                            border-right: none;
+                            i{
+                                vertical-align: middle;
+                                margin-right: 5px;
+                            }
                         }
                     }
                 }
@@ -1577,7 +1605,53 @@ footer{
                 }
             }
         }
-    }        
+    } 
+    .social-list{
+        font-family: $itg-roboto;
+        color: #939292;
+        @include font(12px);
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+        li{
+            @include display-inline;
+            padding: 10px 16px 5px;
+            @include text-align(center);
+            border-left: 1px solid $border-color;
+            a{
+                color:#c0c0c0;
+                i{
+                    @include font(16px);
+                }
+            }
+            span{
+                display: block;
+                &.share-count{
+                   @include font(26px,null,$itg-font-bold);
+                   color: #bebebe;
+                }
+            }
+            &:nth-child(1){
+                border-left: none;
+                span{
+                    text-transform: uppercase;
+                    font-weight: $itg-font-bold;
+                }
+            }
+            &:nth-child(7){
+                @include text-align(left);
+                span{
+                    color:#4d4d4d;
+                }
+            }
+            &:last-child{
+                line-height: 35px;
+                a{
+                    color: #1a3c8d;
+                    @include font(14px,35px,$itg-font-bold);                
+                }
+            }
+        }
+    }
 }
 .buzz-feedback{
     @include calculate-width(1);

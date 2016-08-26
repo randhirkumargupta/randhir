@@ -317,6 +317,9 @@
   .story-section .story-left .byline .profile-pic, .story-section .story-left .byline .profile-detail {
     float: none;
   }
+  .story-section .story-left .byline .profile-detail {
+    margin: 0;
+  }
   .story-section .story-left .byline .profile-detail ul li {
     float: none;
     padding: 5px 0;
@@ -324,6 +327,10 @@
   }
   .story-section .story-left .byline .profile-detail ul li + li {
     border-left: none;
+  }
+  .story-section .story-left .byline ul.social-links li {
+    float: left;
+    padding: 10px 0;
   }
   .story-section .story-left .briefcase {
     margin-top: 50px;
