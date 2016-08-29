@@ -67,6 +67,8 @@ if($clicked_day == "")
                     }
                     else {
                         print ucfirst($val['program']);
+                        print '<br/>';
+                        print ucfirst($val['id']);
                     } $counter++;
                     ?></span>   
             </div>    
