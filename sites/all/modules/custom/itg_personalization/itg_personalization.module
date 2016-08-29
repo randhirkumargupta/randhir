@@ -34,6 +34,36 @@ function itg_personalization_menu() {
     //'access arguments' => array('view personalized content'),
     'type' => MENU_NORMAL_ITEM,
   );
+  $items['personalization/saved-items'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/all'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/articles'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/videos'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/photogalleries'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
   $items['itg-saved-content/%'] = array(    
     'page callback' => '_personalized_saved_content',
     'access arguments' => array('access content'),
@@ -171,6 +201,7 @@ function itg_personalization_block_view($delta = '') {
  */
 function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
   $arg = arg();
+  
   if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
     // Hide user name field.
     $form['field_user_name']['#prefix'] = '<div style="display: none;">';
@@ -217,4 +248,22 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');
     unset($form['field_ugc_ctype']['und']['#title']);    
   }
+}
+
+/**
+ * Get content type from nodeid. 
+ *
+ * @param int $nid
+ *   Node id of the node.
+ *
+ * @return string
+ *   Node type of the node.
+ */
+function itg_personalization_flag_text($nid) {
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('type'))
+      ->condition('nid', $nid);
+  $itg_result = $itg_query->execute()->fetchField();
+  
+  return $itg_result;
 }

@@ -8,8 +8,7 @@
 <ul class="personal-menu-tab">    
   <li class="saved-items">   
   <?php 
-    echo l(t('Saved Items')  , 'itg-saved-content/all/nojs/', 
-    array('attributes' => array('class' => array('use-ajax'))));
+    echo l(t('Saved Items')  , 'personalization/saved-items');
   ?>  
   </li>
   <li class="my-content">

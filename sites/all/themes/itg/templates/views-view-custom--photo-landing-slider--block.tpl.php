@@ -45,7 +45,8 @@
                 <li><a href="#"><i class="fa fa-comment"></i></a></li>
                 <li><a href="#"><i class="fa fa-link"></i></a></li>
                 <li><a href="#"><i class="fa fa-share"></i></a></li>
-                <li><a href="#"><i class="fa fa-bookmark"></i></a></li>
+                <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>
+                <li><a href="#"><?php print $read_later; ?></a></li>
             </ul>
             
             
