@@ -2627,29 +2627,30 @@ footer{
     background: #171717;     
     .video-landing-header{
         background: #000;
-        padding-bottom: 15px;
+        padding: 0 15px 15px 15px;
     }
     .video-header-left{
         @include clearfix;
         .video{
             @include float(left);
-            width: 84%;
-            padding: 15px;
+            width: 84.5%;
+            padding: 10px;
             border:1px solid #242424;
         }
         .social-likes{
             @include float(right);
-            width: 16%;
+            width: 15.5%;
             background: #1a1a1a;
-            height:484px;
+            height:474px;
             overflow: hidden;
             ul{
                 li{
                     a{
                         display: block;
-                        padding: 21px 5px 21px 10px;
+                        padding: 20px 5px 20px 10px;
                         color: #aaa9a9;
                         font-family:$itg-roboto;
+                        font-size:12px;
                         i{
                             font-size: 18px;
                             vertical-align: middle;
@@ -2669,13 +2670,15 @@ footer{
     }
     h2{
         color: $white-color;
-        font-size: 26px;
+        font-size: 24px;
         margin: 10px 0;
     }
     ul{
         @extend .list-none;
     }   
     .video-header-right{
+        position: relative; 
+        height: 484px;
         p.upload-date{
             font-size: 12px;
             color: $white-color;
@@ -2686,7 +2689,9 @@ footer{
             width: 300px;
             height: 250px;
             background: #363636;
-            margin: 40px auto 0;
+            margin: 40px 20px 0;
+            position: absolute;
+            bottom: 0;
         }
     }
 
@@ -2699,31 +2704,29 @@ footer{
     ul{
         @extend .list-none;
     }
-    .container{
-        background: #000;
-        padding:10px 25px 
+    .container{        
+        padding:10px 15px 
     }
     .view-header{
+        background: #000;
+        padding:10px 15px;
         h3{
             @include font(14px);
-            color: $white-color;
+            color: $white-color;            
         }
     }
-    .view-content{     
-        /*margin:0 -10px;*/
-       overflow: hidden;
-        ul.photo-list{           
-            @include clearfix();            
-            li{
+    .view-content{            
+        background: #000;
+        padding:10px 15px;
+        overflow-x: scroll;
+        ul.photo-list{                       
+            li{               
+                padding: 0 15px 10px;    
                 width: 190px;
-                padding: 0 10px;
-                @include float(left);                
             }
         }        
     }
-    .mCSB_container{
-        @include display-inline;
-    }
+ 
     .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {        
         height: 20px;        
         background: #1b1b1b;        
@@ -2835,17 +2838,20 @@ footer{
               display: block;
               font-size: 12px;
               color: #b1b1b1;
-              padding: 8px 0 5px;
-              font-family: "Roboto Slab";
+              padding: 8px 0 5px;              
             }
             a{
-              color: #494949;
-              font-family: "Roboto Slab";
+              color: #494949;              
             }
           }
         }
       }
     }
+  }
+  .view-video-landing-header {
+      .view-content .photo-list li .tile a{
+          color:#b4b4b4
+      }      
   }
 
 /*CSS End Video landing Header*/

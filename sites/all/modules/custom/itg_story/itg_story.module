@@ -374,6 +374,8 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
 
   $magazine_field = 'field_story_select_magazine';
   $supplement_field = 'field_story_select_supplement';
+  $tv_date_field = 'field_poll_start_date';
+  $tv_time_field = 'field_story_tv_time';
 
   // set magazine on edit and trigger action
   if (isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
@@ -382,12 +384,28 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   else {
     $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
   }
+  
+  
+  if (isset($form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
+    $date_val = $form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value'];
+  }
+  else {
+    $date_val = $form_state['input'][$tv_date_field][LANGUAGE_NONE][0]['value']['date'];
+  }
+  
 
   // add ajax on magazine field
   $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
     'event' => 'change',
     'callback' => 'itg_story_magazine_ajax_callback',
     'wrapper' => $supplement_field . '_replace',
+  );
+  
+  // add ajax on tv date field
+  $form[$tv_date_field][LANGUAGE_NONE][0]['#ajax'] = array(
+    'event' => 'change',
+    'callback' => 'itg_tv_time_ajax_callback',
+    'wrapper' => $tv_time_field . '_replace',
   );
 
   // Setup supplement select
@@ -397,11 +415,36 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   if (function_exists('itg_common_dropdown_supplement')) {
     $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
   }
+  
+  // Setup tv time field select
+  $form[$tv_time_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $tv_time_field . '_replace">';
+  $form[$tv_time_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+
+  if (function_exists('itg_common_tv_time')) {
+    $form[$tv_time_field][LANGUAGE_NONE]['#options'] = itg_common_tv_time($date_val);
+    $form[$tv_time_field][LANGUAGE_NONE]['#default_value'] = $form['#node']->field_story_tv_time[LANGUAGE_NONE][0]['value'];
+    // $form[$tv_time_field]['#validated'] = TRUE;
+  }
+
 
   // code for story expiry date field show and hide
   $form['field_story_expiry_date']['#states'] = array(
     'visible' => array(
       ':input[name="field_story_expires[und][Yes]"]' => array('checked' => TRUE),
+    )
+  );
+  
+  // code for tv date field show and hide
+  $form['field_poll_start_date']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_configurations[und][tv]"]' => array('checked' => TRUE),
+    )
+  );
+  
+  // code for Time field show and hide
+  $form['field_story_tv_time']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_configurations[und][tv]"]' => array('checked' => TRUE),
     )
   );
 
@@ -489,6 +532,16 @@ function itg_story_magazine_ajax_callback($form, $form_state) {
   return $form['field_story_select_supplement'];
 }
 
+/**
+ * Ajax callback for tv time dropdown
+ * @param array $form
+ * @param array $form_state
+ * @return int
+ */
+function itg_tv_time_ajax_callback($form, $form_state) {
+  return $form['field_story_tv_time'];
+}
+
 
 /**
  * Implements hook_library_alter().
@@ -542,4 +595,27 @@ function get_breaking_id($breaking_id) {
   $itg_result = $query->execute()->fetchField();
   
   return $itg_result;
+}
+
+/**
+ * Helper function to populate the second dropdown.
+ * @param string $id
+ * @return array $data
+ */
+function itg_common_tv_time($id = '') {
+
+ $final_id = date('Y/m/d',strtotime($id));
+
+  $db = mongodb();
+  $people = $db->tv_schedule;
+  $date = $final_id;
+  $cond = array('program date' => $date);
+  $cursor = $people->find($cond);
+  // Fetch query for supplements
+  $select = t('- None -');
+  $data = array('_none' => $select);
+  foreach ($cursor as $document) {
+    $data[$document['time']] = $document['time'];
+  }
+  return $data;
 }

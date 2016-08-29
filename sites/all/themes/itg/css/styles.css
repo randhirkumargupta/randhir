@@ -3470,7 +3470,7 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block .video-landing-header {
   background: #000;
-  padding-bottom: 15px;
+  padding: 0 15px 15px 15px;
 }
 #block-views-video-landing-header-block .video-header-left {
   zoom: 1;
@@ -3486,22 +3486,23 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block .video-header-left .video {
   float: left;
-  width: 84%;
-  padding: 15px;
+  width: 84.5%;
+  padding: 10px;
   border: 1px solid #242424;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes {
   float: right;
-  width: 16%;
+  width: 15.5%;
   background: #1a1a1a;
-  height: 484px;
+  height: 474px;
   overflow: hidden;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
   display: block;
-  padding: 21px 5px 21px 10px;
+  padding: 20px 5px 20px 10px;
   color: #aaa9a9;
   font-family: "Roboto", sans-serif;
+  font-size: 12px;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
   font-size: 18px;
@@ -3517,8 +3518,12 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block h2 {
   color: #fff;
-  font-size: 26px;
+  font-size: 24px;
   margin: 10px 0;
+}
+#block-views-video-landing-header-block .video-header-right {
+  position: relative;
+  height: 484px;
 }
 #block-views-video-landing-header-block .video-header-right p.upload-date {
   font-size: 12px;
@@ -3530,7 +3535,9 @@ footer .footer-copyright {
   width: 300px;
   height: 250px;
   background: #363636;
-  margin: 40px auto 0;
+  margin: 40px 20px 0;
+  position: absolute;
+  bottom: 0;
 }
 
 #block-views-video-landing-header-block-1 {
@@ -3540,8 +3547,11 @@ footer .footer-copyright {
   padding-bottom: 35px;
 }
 #block-views-video-landing-header-block-1 .container {
+  padding: 10px 15px;
+}
+#block-views-video-landing-header-block-1 .view-header {
   background: #000;
-  padding: 10px 25px;
+  padding: 10px 15px;
 }
 #block-views-video-landing-header-block-1 .view-header h3 {
   font-size: 14px;
@@ -3549,29 +3559,13 @@ footer .footer-copyright {
   color: #fff;
 }
 #block-views-video-landing-header-block-1 .view-content {
-  /*margin:0 -10px;*/
-  overflow: hidden;
-}
-#block-views-video-landing-header-block-1 .view-content ul.photo-list {
-  zoom: 1;
-}
-#block-views-video-landing-header-block-1 .view-content ul.photo-list:before, #block-views-video-landing-header-block-1 .view-content ul.photo-list:after {
-  content: "";
-  display: block;
-  height: 0;
-  overflow: hidden;
-}
-#block-views-video-landing-header-block-1 .view-content ul.photo-list:after {
-  clear: both;
+  background: #000;
+  padding: 10px 15px;
+  overflow-x: scroll;
 }
 #block-views-video-landing-header-block-1 .view-content ul.photo-list li {
+  padding: 0 15px 10px;
   width: 190px;
-  padding: 0 10px;
-  float: left;
-}
-#block-views-video-landing-header-block-1 .mCSB_container {
-  display: inline-block;
-  vertical-align: top;
 }
 #block-views-video-landing-header-block-1 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
   height: 20px;
@@ -3687,11 +3681,13 @@ footer .footer-copyright {
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
-  font-family: "Roboto Slab";
 }
 .view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a {
   color: #494949;
-  font-family: "Roboto Slab";
+}
+
+.view-video-landing-header .view-content .photo-list li .tile a {
+  color: #b4b4b4;
 }
 
 /*CSS End Video landing Header*/
