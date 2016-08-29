@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul {
+.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul {
   list-style-type: none;
 }
 
@@ -296,7 +296,7 @@ input[type="text"], select, input[type="password"] {
 
 /*start header css*/
 header {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 #block-itg-layout-manager-header-block {
@@ -388,6 +388,33 @@ header {
   z-index: 99;
   background: #a00606;
   display: none;
+}
+#block-itg-layout-manager-header-block .head-live-tv {
+  text-align: right;
+  padding: 0 10px;
+  margin-top: -10px;
+  position: relative;
+}
+#block-itg-layout-manager-header-block .head-live-tv ul li {
+  display: inline-block;
+  vertical-align: bottom;
+  padding-left: 15px;
+}
+#block-itg-layout-manager-header-block .head-live-tv .globle-search {
+  position: absolute;
+  top: 0px;
+  right: 94px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  width: 0px;
+  overflow: hidden;
+}
+#block-itg-layout-manager-header-block .head-live-tv .globle-search .search-text {
+  height: 25px;
+  line-height: 25px;
 }
 
 /*End header css*/
@@ -1399,6 +1426,8 @@ footer .footer-copyright {
 
 .section-ordering h3 {
   padding: 15px 0;
+  font-size: 20px;
+  font-size: 1.25rem;
 }
 .section-ordering p {
   font-size: 14px;
@@ -3523,7 +3552,7 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block .video-header-right {
   position: relative;
-  height: 484px;
+  height: 474px;
 }
 #block-views-video-landing-header-block .video-header-right p.upload-date {
   font-size: 12px;
@@ -3561,10 +3590,10 @@ footer .footer-copyright {
 #block-views-video-landing-header-block-1 .view-content {
   background: #000;
   padding: 10px 15px;
-  overflow-x: scroll;
+  /*        overflow-x: scroll;*/
 }
 #block-views-video-landing-header-block-1 .view-content ul.photo-list li {
-  padding: 0 15px 10px;
+  padding: 0 10px 10px;
   width: 190px;
 }
 #block-views-video-landing-header-block-1 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
@@ -3580,9 +3609,8 @@ footer .footer-copyright {
   margin: 0;
 }
 #block-views-video-landing-header-block-1 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
-  width: 100px;
   height: 12px;
-  margin: 5px auto;
+  margin: 3px auto;
   background: #b7b7b7;
   border-radius: 10px;
 }
@@ -3650,7 +3678,7 @@ footer .footer-copyright {
 }
 .view-video-list-of-category .view-content .photo-list, .view-video-landing-header .view-content .photo-list {
   list-style: none;
-  margin: 0 -15px;
+  margin: 0 -10px;
 }
 .view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li {
   padding: 15px;
@@ -3688,6 +3716,19 @@ footer .footer-copyright {
 
 .view-video-landing-header .view-content .photo-list li .tile a {
   color: #b4b4b4;
+}
+.view-video-landing-header .defalt-bar {
+  max-width: 100%;
+  position: relative;
+  overflow: auto;
+}
+.view-video-landing-header .photo-list {
+  max-height: 210px;
+  overflow-y: hidden;
+}
+.view-video-landing-header .photo-list li {
+  height: 210px;
+  overflow: hidden;
 }
 
 /*CSS End Video landing Header*/

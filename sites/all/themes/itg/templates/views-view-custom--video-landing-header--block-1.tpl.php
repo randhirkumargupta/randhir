@@ -1,7 +1,7 @@
 <div class="defalt-bar">
-<ul class="row photo-list">
+<ul class="photo-list">
   <?php foreach ($rows as $index => $row): ?>
-    <li class="col-md-2">
+    <li class="">
         <div class="tile">
      <figure>
         <?php
@@ -13,7 +13,7 @@
         <?php $title = $row['title']; ?>
     <?php print l($title, 'node/' . $row['nid'], array('query' => array('category' => $_GET['category'], 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
         </div>
-    </li>
+    </li>    
 <?php endforeach; ?>
 </ul>
     </div>
