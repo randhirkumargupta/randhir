@@ -152,15 +152,14 @@ Drupal.behaviors.my_custom_behavior = {
     
     headerMain();
     function headerMain(){
+        
         //var logotxt = $('.container.header-logo').html();
         $('.container.header-logo').prependTo('#block-itg-layout-manager-header-block');
         $('.search-icon').click(function(){
-            $('.globle-search').css('width','255px');
+            $(this).parents('div').find('.globle-search').css('width','255px');
         });
         
-        $('.mobile-nav').click(function(){
-            $('.navigation').stop().slideToggle();
-        });
+        
         $(document).on('click', function(){            
             $('.globle-search').css('width','0px');
         });
@@ -235,14 +234,33 @@ jQuery(document).ready(function () {
 
             jQuery(this).stop().animate({scrollTop: h}, 1000);
         }
-        else
-        {
-//            jQuery(this).stop();
-        }
     });
     
-            //header menu add icon for mobile
+//header menu add icon for mobile
 jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+    var navValue = jQuery('.navigation .menu li').length;
+    if (navValue > 13) {
+        jQuery('.navigation .menu li').eq(12).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-ellipsis-h"></i></li>');
+        var count_li = 0;
+        var i = 1;
+        jQuery('.navigation .menu li').each(function () {
+            count_li++;
+            console.log(count_li);
+            if (count_li > 14 && i == 1) {
+                jQuery('.navigation .container').append('<ul id="newlist"></ul>');
+                jQuery('#newlist').append(jQuery(this).nextUntil(jQuery(this).last()).andSelf());
+                i++;
+            }
+        });
+    }
+    
+    jQuery(document).on('click','.all-menu', function(){
+        jQuery('#newlist').slideToggle();
+    });
+    jQuery('.mobile-nav').click(function(){              
+        jQuery('.navigation').slideToggle();
+    });
+    
 //ITG footer
 footerMain();
     function footerMain(){
@@ -271,7 +289,6 @@ footerMain();
         }
     });
     }
-
 });
 
 

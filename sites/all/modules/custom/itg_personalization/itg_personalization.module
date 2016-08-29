@@ -1,0 +1,269 @@
+<?php
+
+/* 
+ * @file
+ *   This is personalized conent module for user content.
+ */
+module_load_all_includes('inc', 'includes/itg_personalization.helper');
+
+/**
+ * Implements hook_permission().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_permission() {
+  return array(
+    'view personalized content' => array(
+      'title' => t('View personalized user content'),
+      'description' => t('This permission grant user to view personalized content.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_menu() {
+  $items['personalization'] = array(
+    'title' => t('Personalization'),
+    'description' => t('User personalized content.'),
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,
+    //'access arguments' => array('view personalized content'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/all'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/articles'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/videos'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/photogalleries'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['itg-saved-content/%'] = array(    
+    'page callback' => '_personalized_saved_content',
+    'access arguments' => array('access content'),
+    'page arguments' => array(1),
+    'file' => 'includes/itg_personalization.helper.inc',
+    'type' => MENU_CALLBACK,
+  );  
+  
+  return $items;
+}
+
+/**
+ * Caback function for personalized content page.
+ *
+ * @global stdObject $user
+ *   Standard user object.
+ * 
+ * @return array
+ *   Html output for this page.
+ */
+function itg_personalization_home_page() {
+  global $user;
+  $data = array();
+  drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js');
+  // Load user fields
+  $user_fields = user_load($user->uid);  
+  
+  // Render user picture.
+  $data['profile_pic'] = theme(
+    'image_style',
+    array(
+      'style_name' => 'user_picture',
+      'path' => $user_fields->field_user_picture['und'][0]['uri'],
+    )
+  );  
+  
+  // Load user name    
+  $f_name = $user_fields->field_first_name['und'][0]['value'];
+  $l_name = $user_fields->field_last_name['und'][0]['value'];  
+  $data['full_name'] = $f_name . ' ' . $l_name;
+  
+  // user logout link
+  $data['logout'] = l(t('Logout'), 'user/logout');
+  
+  return theme('personalization_userpage', array('data' => $data));
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_theme() {
+  $themes = array(
+    'personalization_userpage' => array(
+      'template' => 'itg-personalizaton-home',
+      'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
+      'variables' => array('data' => NULL),
+    ),    
+    'personalization_menu_tab' => array(
+      'template' => 'itg-personalizaton-menu-tab',
+      'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
+      'variables' => array('data' => NULL),
+    ),    
+    'personalization_saved_content_tab' => array(
+      'template' => 'itg-personalizaton-saved_content_menu-tab',
+      'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
+      'variables' => array('data' => NULL),
+    ),    
+  );
+
+  return $themes;
+}
+
+/**
+ * Implements hook_block_info().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_block_info() {
+  $blocks['personalized_content_menu_tab'] = array(
+    'info' => t('Personalized menu tab'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['personalized_saved_content'] = array(
+    'info' => t('Personalized saved content menu tab'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['user_saved_content'] = array(
+    'info' => t('Personalized saved content data'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['user_my_content'] = array(
+    'info' => t('Personalized My Content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_block_view($delta = '') {
+  $block = array();  
+  switch ($delta) {
+    // Load personalized menu tab.
+    case 'personalized_content_menu_tab':
+      $block['content'] = theme('personalization_menu_tab');
+      break;
+    // Load personalized saved content menu tab.
+    case 'personalized_saved_content':
+      drupal_add_js('misc/ajax.js');      
+      $block['content'] = theme('personalization_saved_content_tab');
+      break;
+    case 'user_saved_content':      
+      $block['content'] = '<div id="target"></div>';      
+      $block['content'] .= '<div id="target-content"></div>';      
+      break;
+    case 'user_my_content':
+      module_load_include('inc', 'node', 'node.pages');
+      $form = node_add('ugc');      
+      $block['content'] = drupal_render($form);
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
+  $arg = arg();
+  
+  if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
+    // Hide user name field.
+    $form['field_user_name']['#prefix'] = '<div style="display: none;">';
+    $form['field_user_name']['#suffix'] = '</div>';
+    // Hide user email field.
+    $form['field_user_email']['#prefix'] = '<div style="display: none;">';
+    $form['field_user_email']['#suffix'] = '</div>';
+    // Hide city field.
+    $form['field_user_city']['#prefix'] = '<div style="display: none;">';
+    $form['field_user_city']['#suffix'] = '</div>';
+    // Hide section field.    
+    $form['field_section']['#prefix'] = '<div style="display: none;">';
+    $form['field_section']['#suffix'] = '</div>';    
+    // Set field visibility for category field.
+    $form['field_section']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+      ),
+    );
+    // Set visibility for title filed.
+    $form['title']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+      ),
+    );    
+    // Set visibility for submit buttons.
+    $form['actions']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+      ),
+    );    
+    // Set visibility for submit buttons.
+    $form['field_user_message']['und'][0] = array(
+      '#title' => t('Description'),
+      '#type' => 'textarea',
+      '#rows' => 3,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+        ),
+      ),  
+    );    
+    // Change placeholder of ugc type field.
+    $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');
+    unset($form['field_ugc_ctype']['und']['#title']);    
+  }
+}
+
+/**
+ * Get content type from nodeid. 
+ *
+ * @param int $nid
+ *   Node id of the node.
+ *
+ * @return string
+ *   Node type of the node.
+ */
+function itg_personalization_flag_text($nid) {
+  $itg_query = db_select('node', 'n');
+  $itg_query->fields('n', array('type'))
+      ->condition('nid', $nid);
+  $itg_result = $itg_query->execute()->fetchField();
+  
+  return $itg_result;
+}

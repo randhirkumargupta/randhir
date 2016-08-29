@@ -463,3 +463,240 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     @if ($debug) { // visualizing layout internals
         display: block;
     }*/
+
+
+
+
+/* CSS FOR FRONT USER PERSONALIZATION */
+.personalized-wrapper{
+  background-color: #eaebed;
+}
+.personalized-user-area{
+  display: table;
+  max-width: 100%;
+  height: 240px;
+  margin: 0 auto;
+  width: 800px;
+}
+.personalized-user{
+  display: table-cell;
+  padding: 20px;
+  text-align: center;
+  vertical-align: middle;
+  width: 260px;
+  .user-pic{
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #d3d6db;
+  }
+  .user-name{
+    color: #1a3c8d;
+    font: 500 27px/27px Roboto;
+    text-transform: uppercase;
+    padding: 12px 0 2px;
+  }
+  .logout-link a{
+    color: #777;
+    font: 400 16px/18px Roboto;
+  }
+}
+.personalized-user-info{
+  display: table-cell;
+  padding: 20px 0;
+  text-align: center;
+  vertical-align: middle;
+  span{
+    padding: 0 20px;
+    display: inline-block;
+    vertical-align: top;
+    .fa{
+      font-size: 35px;
+      color: #8d8d8d;
+    }
+    dfn{
+      font-style: normal;
+      display: block;
+      font-size: 16px;
+      color: #323232;
+      margin-top: 10px;
+    }
+  }
+}
+.block-itg-personalization{
+  text-align: center;
+  
+  .personal-menu-tab, .saved-item-tab{
+    list-style: none;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+.personal-menu-tab{
+  border: 1px solid #c6c6c6;
+  border-radius: 5px;
+  position: relative;
+  li{
+    border-left: 1px solid #c6c6c6;
+    float: left;
+    &:first-child{
+      border: none;
+      border-radius: 5px 0 0 5px;
+      overflow: hidden;
+    }
+    &:last-child{
+      overflow: hidden;
+      border-radius: 0 5px 5px 0;
+    }
+    a{
+      display: block;
+      color: #4f4f4f;
+      font: 300 18px/18px Roboto;
+      padding: 10px 8px;
+      background-color: #f6f6f7;
+      &:before{
+        display: inline-block;
+        margin-right: 5px;
+        color: #8d8d8d;
+        font-family: 'FontAwesome';
+      }
+    }
+    &.saved-items{
+      a:before{
+        content: '\f02e';
+      }
+    }
+    &.my-content{
+      a:before{
+        content: '\f064';
+      }
+    }
+    &.my-Preferences{
+      a:before{
+        content: '\f013';
+      }
+    }
+    &.following{
+      a:before{
+        content: '\f007';
+      }
+    }
+    &.my-credits{
+      a:before{
+        content: '\f1c0';
+      }
+    }
+    &.edit-profile{
+      a:before{
+        content: '\f040';
+      }
+    }
+    &.active, &:hover{
+      a{
+        background-color: #fff;
+      }
+    }
+    .ajax-progress-throbber{
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      top: 30px;
+    }
+  }
+}
+.saved-item-tab{
+  margin: 60px 0 30px;
+  position: relative;
+  li{
+    float: left;
+    a{
+      padding: 10px 30px;
+      background-color: #f1f1f1;
+      border-top: 3px solid #fff;
+      border-bottom: 1px solid #f1f1f1;
+      color: #515151;
+      font: 400 15px/18px Roboto;
+    }
+    &:first-child{
+      a{
+        border-left: 1px solid #f1f1f1;
+      }
+    }
+    &:last-child{
+      a{
+        border-right: 1px solid #f1f1f1;
+      }
+    }
+    &.active, &:hover{
+      a{
+      border-top-color: #bb3330;
+      border-radius: 5px 5px 0 0;
+      background-color: #fff;
+      color: #b70c09;
+      }
+    }
+    .ajax-progress-throbber{
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      top: 100px;
+    }
+  }
+}
+.personal-list{
+  list-style: none;
+  > .li{
+    .personal-details{
+      position: relative;
+      .personal-pic{
+        overflow: hidden;
+        height: 210px;
+        img{
+          width: 100%;
+        }
+      }
+      .personal-caption{
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #a00606;
+        height: 22px;
+        line-height: 22px;
+        padding: 0 7px;
+        text-transform: uppercase;
+        color: #fff;
+        font-family: "Roboto",sans-serif;
+        z-index: 10;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+      .personal-action{
+        display: none;
+        position: absolute;
+        background-color: rgba(255, 255, 255, .5);
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9;
+      }
+    }
+    > a{
+      font-size: 20px;
+      line-height: 24px;
+      color: #323232;
+      padding-top: 15px;
+    }
+  }
+}
+/* End of Personalization CSS */
