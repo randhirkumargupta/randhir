@@ -30,10 +30,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="logo">
               <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
             </div>
-          <?php endif; ?>
-          <div class="login-link desktop-hide">
-            <a href="/user">Login</a>
-          </div> 
+          <?php endif; ?>         
         </div>
 
         <?php if ($site_name || $site_slogan): ?>

@@ -246,19 +246,8 @@
 
 }
 
-.itg-layout-container .itg-h450-section .droppable{
-    height: 450px;
-}
-.itg-layout-container .itg-h321-section .droppable, 
-.itg-layout-container .top-colum-3 .itg-widget-parent .droppable{
-    height: 321px;
-}
-.itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
-    height: 673px;
-}
-.itg-layout-container .top-colum-3 .droppable{
-    height: 276px;
-}.itg-h450-section{
+
+.itg-h450-section{
     .widget-wrapper{
         height: 100%;
         padding: 10px;
@@ -270,11 +259,6 @@
         height: 100%;
         padding: 5px 20px 8px;
         background-color: #f3f3f3;
-    }
-}
-.itg-common-section{
-    .droppable{
-        height: 408px;
     }
 }
 .widget-wrapper{
@@ -441,6 +425,9 @@
 }
 .itg-layout-container .top-colum-3 .itg-widget-parent .droppable.sidebar-ad{
     height: 100%;
+}
+.itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
+	margin-bottom:50px;
 }
 
 #block-block-1{
@@ -653,7 +640,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .personal-list{
   list-style: none;
-  > .li{
+  > li{
     .personal-details{
       position: relative;
       .personal-pic{
