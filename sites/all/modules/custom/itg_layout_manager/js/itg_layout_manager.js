@@ -26,6 +26,7 @@
                         widget_name = $(this).attr('data-widget');
                         // for category tab
                         category_name_tab = $(this).attr('id');
+                        //alert(widget_name);
                     }
                 });
                 
@@ -38,6 +39,8 @@
                           alert("You can't drag any widget in this content area!");
                           return false;
                         }
+                        //alert(widget_name);
+                        
                         
                         $(this).removeClass("gray-bg-layout");
                         // content block id for display content widget
@@ -50,6 +53,15 @@
                         
                         //if content place is define
                         var display_area = $(this).attr('data-tabwidget_display');
+                        // for photo and video section
+                        var ulId = $('li[data-widget="'+ widget_name +'"]').closest('ul').attr('id');
+                        
+                        if (display_area == 'region-section-content' && ulId != 'templates-widgets-section') {
+                          alert("You can't drag this widget in this content area!");
+                          return false;
+                        }
+                        
+                        
                         
                         if (display_area) {
                           var content_place = display_area;  
@@ -167,7 +179,7 @@
                           }
                     });
                  });
-                 
+                 // for section cards
                  $('#layout-section-save').click(function() {
                     var base_url = settings.itg_story.settings.base_url;
                     // category value
@@ -196,6 +208,40 @@
                     }
                 });
                 
+                // for section widgets
+                
+                $('#layout-section_widget2-save').click(function() {
+                    
+                    var base_url = settings.itg_story.settings.base_url;
+                    // category value
+                    var category_name = $('#edit-section-widget2-name').val();
+                    // tamplate section value
+                    var section_name = $('#edit-section').val();
+                    // tamplate name
+                    var template_name = $('#edit-template-name').val();
+                    // widget name for content display
+                    var widgets_type = $(this).attr('data-section-widget2');
+                    
+                    if (category_name) {
+                        $.ajax({
+                              url: base_url + "/section-widgets-ajax/insert",
+                              method: 'post',
+                              data: {cid:1, section_name:section_name, template_name:template_name, category_name:category_name, widgets_type:widgets_type},
+                              beforeSend:function(){                                
+                                $('#section_widget2_list').html('<img class="widget-loader" align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                              },
+                              success: function(data) {
+                                 // display category list in block
+                                 $('#section_widget2_list').html(data);
+                                 draggable_widgets();
+                              }
+                        });
+                    }
+                });
+                
+                //code end for section_widget2
+                
+                // delete section cards
                 $('body').on('click', '.layout-section-delete', function() {
                     var base_url = settings.itg_story.settings.base_url;
                     var widget_id = $(this).attr('data-widget');
@@ -211,6 +257,27 @@
                           },
                           success: function(data) {
                              $('#section_widgets_list').html(data);
+                             draggable_widgets();
+                          }
+                    });
+                });
+                
+                // delete section widgets
+                $('body').on('click', '.layout-section-widget2-delete', function() {
+                    var base_url = settings.itg_story.settings.base_url;
+                    var widget_id = $(this).attr('data-widget');
+                    var section_name = $('#edit-section').val();
+                    var template_name = $('#edit-template-name').val();
+                    
+                    $.ajax({
+                          url: base_url + "/section-widgets-ajax/delete",
+                          method: 'post',
+                          data: {id:widget_id, section_name:section_name, template_name:template_name,},
+                          beforeSend:function(){                                
+                            $('#section_widget2_list').html('<img class="widget-loader" align="center" src="'+Drupal.settings.basePath+'/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                          },
+                          success: function(data) {
+                             $('#section_widget2_list').html(data);
                              draggable_widgets();
                           }
                     });

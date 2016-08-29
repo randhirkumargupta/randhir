@@ -54,7 +54,7 @@ function section_widgets_ajax() {
       $category_array = explode('(', $_GET['category_name']);
       $cid = substr($category_array[1], 0,-1);
       // category exit or not for this section
-      $check_cid = get_section_widgets_id($cid, $_GET['section_name']);
+      $check_cid = get_section_widgets_id($cid, $_GET['section_name'], $_GET['widgets_type']);
       
       if (empty($check_cid)) {
         $query_layout_tpl = db_insert('itg_section_widgets_list');
@@ -72,6 +72,11 @@ function section_widgets_ajax() {
     }
   }
   elseif ($arg[1] == 'delete') {
+      $query = db_select('itg_section_widgets_list', 'section');
+      $query->fields('section', array('widget_type'));
+      $query->condition('id', $_GET['id']);
+      $_GET['widgets_type'] = $query->execute()->fetchField();
+      
     db_delete('itg_section_widgets_list')->condition('id', $_GET['id'])->execute();
   }
   
