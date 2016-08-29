@@ -1,6 +1,14 @@
 <div class="header-ads mhide">
     <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">
-</div>                               
+</div> 
+<div class="head-live-tv desktop-hide">
+    <ul>
+        <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
+        <li><a href="javascript:void(0)" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv"></a></li> 
+    </ul>
+    <div class="globle-search">
+     <input class="search-text" placeholder="Type here" type="text" value=""></div>
+</div>
 <div class="container top-nav">                  
     <div class="social-nav mhide">
         <ul class="social-nav mhide">

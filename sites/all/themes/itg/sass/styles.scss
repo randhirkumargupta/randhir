@@ -197,7 +197,7 @@ input[type="text"], select, input[type="password"]{
 
 /*start header css*/
 header{
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 #block-itg-layout-manager-header-block{    
     padding-top: 20px;
@@ -295,6 +295,30 @@ header{
                 background: #a00606;
                 display: none;
             }
+        }
+    }
+    .head-live-tv{
+        text-align:right;
+        padding: 0 10px;
+        margin-top: -10px;
+        @include pos(relative);
+        ul{
+            @extend .list-none;
+            li{
+                display: inline-block;
+                vertical-align: bottom;
+                padding-left: 15px;
+            }
+        }
+        .globle-search{
+            @include pos(absolute,0px,94px,null,null);
+            @include transition(all 0.5s ease-in-out );
+            width:0px;
+            overflow:hidden;                        
+            .search-text{
+                height:25px;
+                line-height:25px;
+            }                    
         }
     }
 }
@@ -1177,6 +1201,7 @@ footer{
 .section-ordering{    
     h3{
         padding: 15px 0;
+        @include font(20px);
     }
     p{
         @include font(14px,18px);
