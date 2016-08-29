@@ -97,7 +97,7 @@ function tv_schedule_listing() {
               $ass_search_date = date('Y/m/d');
             }
             $node_detail = node_load(tv_story_list($ass_search_date, $document['time']));
-            $out[$keys]['id'] = l(t($node_detail->title), 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'blank')));
+            $out[$keys]['story_attach'] = l(t($node_detail->title), 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'blank')));
             
             $keys++;
 
