@@ -95,6 +95,13 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
   // code for search image filter
   
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'searchimage') {
+    
+    $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
+    $form['bundle_name']['#type'] = 'select';
+    $form['bundle_name']['#options'] = $bundle_name;
+    $form['bundle_name']['#size'] = 5;
+    $form['bundle_name']['#multiple'] = TRUE;
+
 
     $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $form['hash']['#type'] = 'select';
@@ -221,6 +228,10 @@ function itg_front_search_form_views_exposed_form_alter(&$form, &$form_state, $f
 
     $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
     $form['sm_field_itg_common_by_line_name']['#autocomplete_path'] = 'reporter-list/autocomplete';
+  }
+  if ($form["#id"] == 'views-exposed-form-searchimage-page') {
+
+    $form['tm_vid_4_names']['#autocomplete_path'] = 'tag-list/' . CATEGORY_MANAGMENT . '/autocomplete';
   }
 }
 

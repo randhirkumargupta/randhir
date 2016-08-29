@@ -2678,7 +2678,7 @@ footer{
     }   
     .video-header-right{
         position: relative; 
-        height: 484px;
+        height: 474px;
         p.upload-date{
             font-size: 12px;
             color: $white-color;
@@ -2718,10 +2718,10 @@ footer{
     .view-content{            
         background: #000;
         padding:10px 15px;
-        overflow-x: scroll;
+/*        overflow-x: scroll;*/
         ul.photo-list{                       
             li{               
-                padding: 0 15px 10px;    
+                padding: 0 10px 10px;    
                 width: 190px;
             }
         }        
@@ -2740,9 +2740,8 @@ footer{
         margin: 0
     }
     .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
-        width: 100px;
         height: 12px;
-        margin: 5px auto;
+        margin: 3px auto;
         background: #b7b7b7;
         border-radius: 10px;
     }
@@ -2809,7 +2808,7 @@ footer{
     .view-content{      
       .photo-list{
         list-style: none;
-        margin:0 -15px;
+        margin:0 -10px;
         li{
           padding: 15px;
           float: left;
@@ -2851,7 +2850,20 @@ footer{
   .view-video-landing-header {
       .view-content .photo-list li .tile a{
           color:#b4b4b4
-      }      
+      }
+      .defalt-bar{        
+        max-width: 100%;
+        position: relative;
+        overflow: auto;
+    }
+    .photo-list{
+        max-height: 210px;
+        overflow-y: hidden;        
+    }
+    .photo-list li{
+        height: 210px;
+        overflow: hidden;
+    }
   }
 
 /*CSS End Video landing Header*/
