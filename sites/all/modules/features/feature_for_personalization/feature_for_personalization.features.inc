@@ -47,21 +47,23 @@ function feature_for_personalization_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 3,
     'module' => 'feature_for_personalization',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
-  // Exported flag: "My Saved Content".
+  // Exported flag: "Read later".
   $flags['my_saved_content'] = array(
     'entity_type' => 'node',
-    'title' => 'My Saved Content',
+    'title' => 'Read later',
     'global' => 0,
     'types' => array(
       0 => 'story',
+      1 => 'videogallery',
+      2 => 'photogallery',
     ),
-    'flag_short' => 'Read Later',
+    'flag_short' => 'READ LATER',
     'flag_long' => 'Save content to your save content list.',
     'flag_message' => 'Content has been saved.',
     'unflag_short' => 'Remove',
@@ -84,11 +86,11 @@ function feature_for_personalization_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 3,
     'module' => 'feature_for_personalization',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   return $flags;
 

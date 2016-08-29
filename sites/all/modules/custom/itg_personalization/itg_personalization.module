@@ -30,7 +30,8 @@ function itg_personalization_menu() {
     'title' => t('Personalization'),
     'description' => t('User personalized content.'),
     'page callback' => 'itg_personalization_home_page',
-    'access arguments' => array('view personalized content'),
+    'access callback' => TRUE,
+    //'access arguments' => array('view personalized content'),
     'type' => MENU_NORMAL_ITEM,
   );
   $items['itg-saved-content/%'] = array(    
@@ -56,7 +57,7 @@ function itg_personalization_menu() {
 function itg_personalization_home_page() {
   global $user;
   $data = array();
-  
+  drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js');
   // Load user fields
   $user_fields = user_load($user->uid);  
   
@@ -77,7 +78,7 @@ function itg_personalization_home_page() {
   // user logout link
   $data['logout'] = l(t('Logout'), 'user/logout');
   
-  return theme('personalization_home_page', array('data' => $data));
+  return theme('personalization_userpage', array('data' => $data));
 }
 
 /**
@@ -87,7 +88,7 @@ function itg_personalization_home_page() {
  */
 function itg_personalization_theme() {
   $themes = array(
-    'personalization_home_page' => array(
+    'personalization_userpage' => array(
       'template' => 'itg-personalizaton-home',
       'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
       'variables' => array('data' => NULL),
@@ -125,6 +126,10 @@ function itg_personalization_block_info() {
     'info' => t('Personalized saved content data'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['user_my_content'] = array(
+    'info' => t('Personalized My Content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -148,7 +153,68 @@ function itg_personalization_block_view($delta = '') {
       break;
     case 'user_saved_content':      
       $block['content'] = '<div id="target"></div>';      
+      $block['content'] .= '<div id="target-content"></div>';      
+      break;
+    case 'user_my_content':
+      module_load_include('inc', 'node', 'node.pages');
+      $form = node_add('ugc');      
+      $block['content'] = drupal_render($form);
   }
 
   return $block;
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
+  $arg = arg();
+  if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
+    // Hide user name field.
+    $form['field_user_name']['#prefix'] = '<div style="display: none;">';
+    $form['field_user_name']['#suffix'] = '</div>';
+    // Hide user email field.
+    $form['field_user_email']['#prefix'] = '<div style="display: none;">';
+    $form['field_user_email']['#suffix'] = '</div>';
+    // Hide city field.
+    $form['field_user_city']['#prefix'] = '<div style="display: none;">';
+    $form['field_user_city']['#suffix'] = '</div>';
+    // Hide section field.    
+    $form['field_section']['#prefix'] = '<div style="display: none;">';
+    $form['field_section']['#suffix'] = '</div>';    
+    // Set field visibility for category field.
+    $form['field_section']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+      ),
+    );
+    // Set visibility for title filed.
+    $form['title']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+      ),
+    );    
+    // Set visibility for submit buttons.
+    $form['actions']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+      ),
+    );    
+    // Set visibility for submit buttons.
+    $form['field_user_message']['und'][0] = array(
+      '#title' => t('Description'),
+      '#type' => 'textarea',
+      '#rows' => 3,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
+        ),
+      ),  
+    );    
+    // Change placeholder of ugc type field.
+    $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');
+    unset($form['field_ugc_ctype']['und']['#title']);    
+  }
 }
