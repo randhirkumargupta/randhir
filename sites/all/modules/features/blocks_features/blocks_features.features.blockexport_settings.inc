@@ -7116,7 +7116,7 @@ publish-ugc-comments',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
@@ -7124,6 +7124,8 @@ node/add/breaking-news
 node/add/blog
 node/add/podcast
 node/add/videogallery
+node/add/photogallery
+node/add/survey
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7143,6 +7145,8 @@ node/add/breaking-news
 node/add/blog
 node/add/podcast
 node/add/videogallery
+node/add/photogallery
+node/add/survey
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7162,6 +7166,8 @@ node/add/breaking-news
 node/add/blog
 node/add/podcast
 node/add/videogallery
+node/add/photogallery
+node/add/survey
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7173,7 +7179,7 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
@@ -7181,6 +7187,8 @@ node/add/breaking-news
 node/add/blog
 node/add/podcast
 node/add/videogallery
+node/add/photogallery
+node/add/survey
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7192,7 +7200,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
@@ -7200,6 +7208,8 @@ node/add/breaking-news
 node/add/blog
 node/add/podcast
 node/add/videogallery
+node/add/photogallery
+node/add/survey
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7211,7 +7221,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
@@ -7219,6 +7229,8 @@ node/add/breaking-news
 node/add/blog
 node/add/podcast
 node/add/videogallery
+node/add/photogallery
+node/add/survey
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -7230,7 +7242,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/story
@@ -7238,6 +7250,8 @@ node/add/breaking-news
 node/add/blog
 node/add/podcast
 node/add/videogallery
+node/add/photogallery
+node/add/survey
 node/*/edit',
   'title' => 'Related Content',
   'cache' => 8,
@@ -15615,7 +15629,7 @@ snappost',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -15782,6 +15796,118 @@ snappost',
   'title' => '',
   'cache' => 1,
 );
+  $export['block'][] = array(
+  'bid' => 1112,
+  'module' => 'itg_layout_manager',
+  'delta' => 'layout_section_widget2',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1113,
+  'module' => 'itg_widget',
+  'delta' => 'anchor_langing_page_menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1114,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block_1',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1115,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block_2',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1116,
+  'module' => 'views',
+  'delta' => 'video_list_of_category-block_3',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1117,
+  'module' => 'itg_layout_manager',
+  'delta' => 'layout_section_widget2',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1118,
+  'module' => 'itg_widget',
+  'delta' => 'anchor_langing_page_menu',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1119,
+  'module' => 'menu',
+  'delta' => 'devel',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
   $export['block_custom'][] = array(
   'bid' => 1,
   'body' => '<div class="ad-display-block">Ad</div>
@@ -15800,6 +15926,11 @@ snappost',
   'type' => 'blog',
 );
   $export['block_node_type'][] = array(
+  'module' => 'itg_related',
+  'delta' => 'related_form_block',
+  'type' => 'blog',
+);
+  $export['block_node_type'][] = array(
   'module' => 'views',
   'delta' => 'view_moderation_history-block_1',
   'type' => 'blog',
@@ -15807,6 +15938,11 @@ snappost',
   $export['block_node_type'][] = array(
   'module' => 'itg_breaking_news',
   'delta' => 'breaking_news_tab_form_block',
+  'type' => 'breaking_news',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_related',
+  'delta' => 'related_form_block',
   'type' => 'breaking_news',
 );
   $export['block_node_type'][] = array(
@@ -15827,6 +15963,11 @@ snappost',
   $export['block_node_type'][] = array(
   'module' => 'itg_photogallery',
   'delta' => 'photo_menu_landing_block',
+  'type' => 'photogallery',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_related',
+  'delta' => 'related_form_block',
   'type' => 'photogallery',
 );
   $export['block_node_type'][] = array(
@@ -15905,9 +16046,19 @@ snappost',
   'type' => 'story',
 );
   $export['block_node_type'][] = array(
+  'module' => 'itg_related',
+  'delta' => 'related_form_block',
+  'type' => 'survey',
+);
+  $export['block_node_type'][] = array(
   'module' => 'itg_survey',
   'delta' => 'survey_tab_form_block',
   'type' => 'survey',
+);
+  $export['block_node_type'][] = array(
+  'module' => 'itg_related',
+  'delta' => 'related_form_block',
+  'type' => 'videogallery',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_videogallery',
