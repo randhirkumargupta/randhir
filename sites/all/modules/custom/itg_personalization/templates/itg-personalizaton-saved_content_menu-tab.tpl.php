@@ -7,27 +7,15 @@
 ?>
 <ul class="saved-item-tab">
     <li class="active">
-    <?php 
-    echo l(t('All')  , 'itg-saved-content/all/nojs/', 
-      array('attributes' => array('class' => array('use-ajax'))));
-    ?>
+      <?php echo l(t('All')  , 'personalization/saved-items/all'); ?>
     </li>
     <li>
-    <?php 
-    echo l(t('Articles')  , 'itg-saved-content/articles/nojs/', 
-      array('attributes' => array('class' => array('use-ajax'))));
-    ?>  
+      <?php echo l(t('Articles')  , 'personalization/saved-items/articles'); ?>  
     </li>
     <li>
-    <?php 
-    echo l(t('Videos')  , 'itg-saved-content/videos/nojs/', 
-      array('attributes' => array('class' => array('use-ajax'))));
-    ?>  
+      <?php echo l(t('Videos')  , 'personalization/saved-items/videos'); ?>  
     </li>
     <li>
-    <?php 
-    echo l(t('Photo Galleries')  , 'itg-saved-content/photogallery/nojs/', 
-      array('attributes' => array('class' => array('use-ajax'))));
-    ?>  
+      <?php echo l(t('Photo Galleries')  , 'personalization/saved-items/photogalleries'); ?>  
     </li>    
 </ul>
