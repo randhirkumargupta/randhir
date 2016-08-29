@@ -34,6 +34,36 @@ function itg_personalization_menu() {
     //'access arguments' => array('view personalized content'),
     'type' => MENU_NORMAL_ITEM,
   );
+  $items['personalization/saved-items'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/all'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/articles'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/videos'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['personalization/saved-items/photogalleries'] = array(
+    'title' => t('Personalization - Saved Items'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
   $items['itg-saved-content/%'] = array(    
     'page callback' => '_personalized_saved_content',
     'access arguments' => array('access content'),
@@ -171,6 +201,7 @@ function itg_personalization_block_view($delta = '') {
  */
 function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
   $arg = arg();
+  
   if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
     // Hide user name field.
     $form['field_user_name']['#prefix'] = '<div style="display: none;">';
