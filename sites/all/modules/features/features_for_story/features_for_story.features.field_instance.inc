@@ -361,6 +361,64 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_poll_start_date'.
+  $field_instances['node-story-field_poll_start_date'] = array(
+    'bundle' => 'story',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 74,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_poll_start_date',
+    'label' => 'Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'Y/m/d - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 66,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_primary_category'.
   $field_instances['node-story-field_primary_category'] = array(
     'bundle' => 'story',
@@ -2807,6 +2865,45 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_tv_time'.
+  $field_instances['node-story-field_story_tv_time'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 76,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_tv_time',
+    'label' => 'Time',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 69,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_tweet'.
   $field_instances['node-story-field_story_tweet'] = array(
     'bundle' => 'story',
@@ -3092,6 +3189,7 @@ function features_for_story_field_default_field_instances() {
   t('Common by line');
   t('Configurations');
   t('Courtesy');
+  t('Date');
   t('Expert Name');
   t('Expert description');
   t('Expert image');
@@ -3152,6 +3250,7 @@ function features_for_story_field_default_field_instances() {
   t('This headline shows on the homepage');
   t('This is the redirection URL for the New Title added above (url format: https://www.w3schools.com)');
   t('This title will append after the main Story headline on the homepage');
+  t('Time');
   t('Tweet');
   t('Twitter Image');
   t('Twitter Video');

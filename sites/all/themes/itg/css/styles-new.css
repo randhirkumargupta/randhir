@@ -240,23 +240,6 @@
   margin: 30px auto 30px auto;
 }
 
-.itg-layout-container .itg-h450-section .droppable {
-  height: 450px;
-}
-
-.itg-layout-container .itg-h321-section .droppable,
-.itg-layout-container .top-colum-3 .itg-widget-parent .droppable {
-  height: 321px;
-}
-
-.itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable {
-  height: 673px;
-}
-
-.itg-layout-container .top-colum-3 .droppable {
-  height: 276px;
-}
-
 .itg-h450-section .widget-wrapper {
   height: 100%;
   padding: 10px;
@@ -267,10 +250,6 @@
   height: 100%;
   padding: 5px 20px 8px;
   background-color: #f3f3f3;
-}
-
-.itg-common-section .droppable {
-  height: 408px;
 }
 
 .widget-wrapper {
@@ -437,6 +416,10 @@
   height: 100%;
 }
 
+.itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable {
+  margin-bottom: 50px;
+}
+
 #block-block-1 {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -459,3 +442,221 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     @if ($debug) { // visualizing layout internals
         display: block;
     }*/
+/* CSS FOR FRONT USER PERSONALIZATION */
+.personalized-wrapper {
+  background-color: #eaebed;
+}
+
+.personalized-user-area {
+  display: table;
+  max-width: 100%;
+  height: 240px;
+  margin: 0 auto;
+  width: 800px;
+}
+
+.personalized-user {
+  display: table-cell;
+  padding: 20px;
+  text-align: center;
+  vertical-align: middle;
+  width: 260px;
+}
+.personalized-user .user-pic {
+  display: inline-block;
+  vertical-align: top;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #d3d6db;
+}
+.personalized-user .user-name {
+  color: #1a3c8d;
+  font: 500 27px/27px Roboto;
+  text-transform: uppercase;
+  padding: 12px 0 2px;
+}
+.personalized-user .logout-link a {
+  color: #777;
+  font: 400 16px/18px Roboto;
+}
+
+.personalized-user-info {
+  display: table-cell;
+  padding: 20px 0;
+  text-align: center;
+  vertical-align: middle;
+}
+.personalized-user-info span {
+  padding: 0 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+.personalized-user-info span .fa {
+  font-size: 35px;
+  color: #8d8d8d;
+}
+.personalized-user-info span dfn {
+  font-style: normal;
+  display: block;
+  font-size: 16px;
+  color: #323232;
+  margin-top: 10px;
+}
+
+.block-itg-personalization {
+  text-align: center;
+}
+.block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
+  list-style: none;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.personal-menu-tab {
+  border: 1px solid #c6c6c6;
+  border-radius: 5px;
+  position: relative;
+}
+.personal-menu-tab li {
+  border-left: 1px solid #c6c6c6;
+  float: left;
+}
+.personal-menu-tab li:first-child {
+  border: none;
+  border-radius: 5px 0 0 5px;
+  overflow: hidden;
+}
+.personal-menu-tab li:last-child {
+  overflow: hidden;
+  border-radius: 0 5px 5px 0;
+}
+.personal-menu-tab li a {
+  display: block;
+  color: #4f4f4f;
+  font: 300 18px/18px Roboto;
+  padding: 10px 8px;
+  background-color: #f6f6f7;
+}
+.personal-menu-tab li a:before {
+  display: inline-block;
+  margin-right: 5px;
+  color: #8d8d8d;
+  font-family: 'FontAwesome';
+}
+.personal-menu-tab li.saved-items a:before {
+  content: '\f02e';
+}
+.personal-menu-tab li.my-content a:before {
+  content: '\f064';
+}
+.personal-menu-tab li.my-Preferences a:before {
+  content: '\f013';
+}
+.personal-menu-tab li.following a:before {
+  content: '\f007';
+}
+.personal-menu-tab li.my-credits a:before {
+  content: '\f1c0';
+}
+.personal-menu-tab li.edit-profile a:before {
+  content: '\f040';
+}
+.personal-menu-tab li.active a, .personal-menu-tab li:hover a {
+  background-color: #fff;
+}
+.personal-menu-tab li .ajax-progress-throbber {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 30px;
+}
+
+.saved-item-tab {
+  margin: 60px 0 30px;
+  position: relative;
+}
+.saved-item-tab li {
+  float: left;
+}
+.saved-item-tab li a {
+  padding: 10px 30px;
+  background-color: #f1f1f1;
+  border-top: 3px solid #fff;
+  border-bottom: 1px solid #f1f1f1;
+  color: #515151;
+  font: 400 15px/18px Roboto;
+}
+.saved-item-tab li:first-child a {
+  border-left: 1px solid #f1f1f1;
+}
+.saved-item-tab li:last-child a {
+  border-right: 1px solid #f1f1f1;
+}
+.saved-item-tab li.active a, .saved-item-tab li:hover a {
+  border-top-color: #bb3330;
+  border-radius: 5px 5px 0 0;
+  background-color: #fff;
+  color: #b70c09;
+}
+.saved-item-tab li .ajax-progress-throbber {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 100px;
+}
+
+.personal-list {
+  list-style: none;
+}
+.personal-list > li .personal-details {
+  position: relative;
+}
+.personal-list > li .personal-details .personal-pic {
+  overflow: hidden;
+  height: 210px;
+}
+.personal-list > li .personal-details .personal-pic img {
+  width: 100%;
+}
+.personal-list > li .personal-details .personal-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #a00606;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 7px;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: "Roboto",sans-serif;
+  z-index: 10;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.personal-list > li .personal-details .personal-action {
+  display: none;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+.personal-list > li > a {
+  font-size: 20px;
+  line-height: 24px;
+  color: #323232;
+  padding-top: 15px;
+}
+
+/* End of Personalization CSS */

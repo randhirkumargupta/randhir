@@ -66,8 +66,10 @@ function itg_widget_big_story_block_data($info) {
   $widget_name = isset($info['widget']) ? $info['widget'] : "";
   $data = array();
   if (!empty($widget_name)) {
-    $query = db_select('itg_widget_order', 'iwo')
-            ->condition('iwo.widget', $widget_name)
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->condition('iwo.widget', $widget_name)
+            ->condition('n.status', 1)
             ->fields('iwo', array('nid', 'extra'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $entity_data = array();

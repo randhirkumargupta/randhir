@@ -28,6 +28,7 @@ function feature_category_management_field_group_info() {
       2 => 'field_sponser_logo',
       3 => 'field_user_city',
       4 => 'name',
+      5 => 'description',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -97,7 +98,6 @@ function feature_category_management_field_group_info() {
       1 => 'field_cm_hide_cat_from_search',
       2 => 'field_cm_no_follow',
       3 => 'field_cm_sponsored_category',
-      4 => 'field_publish_time',
     ),
     'format_type' => 'div',
     'format_settings' => array(

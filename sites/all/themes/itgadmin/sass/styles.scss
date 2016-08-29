@@ -1058,6 +1058,7 @@ div.vertical-tabs {
       position: absolute;
       left: 775px;
       top: 7px;
+      z-index: 9;
     }
     div.description{
       width: 200px;
@@ -3567,6 +3568,7 @@ div.node{
         &.field-multiple-drag{
           display: none;
         }
+        .form-managed-file .image-widget-data .form-submit[value="Remove"]{left: 570px;}
         > .form-submit, > .ajax-new-content > .form-submit{margin-bottom: 30px;}
       }
     }
@@ -5908,7 +5910,7 @@ div.node{
     .form-actions{margin-top: 20px;}
   }
   
-  .view-photo-list-of-category{
+  .view-photo-list-of-category, .view-video-list-of-category{
     .view-content{
       margin: 0 -15px;
       .photo-list{
@@ -6490,7 +6492,8 @@ div.node{
         display: block;
     }*/
 }
-#views-form-photo-carousel-widget-photo-carousel-list{
+#views-form-photo-carousel-widget-photo-carousel-list, 
+#views-form-photo-carousel-widget-video-carousel-list{
   @extend .confirmation;
   .form-actions{
     #edit-submit{
@@ -6527,61 +6530,4 @@ div.node{
   position: absolute;
   top: 0;
   width: 100%;
-}
-
-
-/* CSS FOR FRONT USER PERSONALIZATION */
-.personalized-wrapper{
-  background-color: #eaebed;
-  @extend .dib;
-  @extend .full;
-}
-.personalized-user-area{
-  display: table;
-  max-width: 800px;
-  height: 240px;
-  margin: 0 auto;
-}
-.personalized-user{
-  display: table-cell;
-  padding: 20px 50px;
-  text-align: center;
-  vertical-align: middle;
-  .user-pic{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #d3d6db;
-  }
-}
-.personalized-user-info{
-  display: table-cell;
-  padding: 20px 50px;
-  text-align: center;
-  vertical-align: middle;
-  span{
-    padding: 0 20px;
-    @extend .dib;
-    @extend .vtop;
-    .fa{
-      font-size: 35px;
-    }
-    dfn{
-      font-style: normal;
-      display: block;
-      font-size: 16px;
-    }
-  }
-}
-.block-itg-personalization{
-  @extend .dib;
-  @extend .full;
-  .personal-menu-tab, .saved-item{
-    @extend .no-bullet;
-    text-align: center;
-    li{
-      @extend .dib;
-      @extend .vtop;
-    }
-  }
 }

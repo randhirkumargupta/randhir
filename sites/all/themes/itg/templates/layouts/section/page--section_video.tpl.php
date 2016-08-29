@@ -30,10 +30,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <div class="logo">
               <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
             </div>
-          <?php endif; ?>
-          <div class="login-link desktop-hide">
-            <a href="/user">Login</a>
-          </div> 
+          <?php endif; ?>         
         </div>
 
         <?php if ($site_name || $site_slogan): ?>
@@ -71,7 +68,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         <?php print render($page['header']); ?>
         <?php
           // photo_carousel widget
-          $block = block_load('itg_widget', 'featured_photo_carousel_r');
+          $block = block_load('itg_widget', 'featured_video_carousel_r');
           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
           print render($render_array);
         ?>

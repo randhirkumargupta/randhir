@@ -495,9 +495,9 @@ function itg_videogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
 function itg_videogallery_views_pre_render(&$view) {
   if ($view->name == "manage_videogallery" || $view->name == "videogallery_management") {
     if (!isset($_POST['views_bulk_operations'])) {
-    $header_content_video = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_video .= l(t('Upload Video'), 'node/add/videogallery', array('query' => array('destination' => arg(0))));
-    $view->attachment_before = $header_content_video;
+      $header_content_video = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+      $header_content_video .= l(t('Upload Video'), 'node/add/videogallery', array('query' => array('destination' => arg(0))));
+      $view->attachment_before = $header_content_video;
     }
   }
 }
@@ -985,15 +985,18 @@ function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
  */
 function itg_videogallery_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'videogallery') {
-   drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
-   drupal_add_js('    
-    jQuery(document).ready(function(){
-        var fullWidth = jQuery("#block-views-video-landing-header-block-1 .photo-list li").length;    
-        jQuery("#block-views-video-landing-header-block-1 .photo-list").css("width", fullWidth * 170 + "px");
-        jQuery("#block-views-video-landing-header-block-1 .photo-list").mCustomScrollbar({
-            axis:"x" // horizontal scrollbar
-        });    
-    });', array('type' => 'inline', 'scope' => 'footer'));
+    //drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery-1.11.0.min', array('scope' => 'footer'));
+    drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+    drupal_add_js('             
+       (function($){
+            $(window).on("load",function(){
+                $(".defalt-bar").mCustomScrollbar({
+                    axis:"x",
+                    
+                });       
+            });
+ })(jQuery);', array('type' => 'inline', 'scope' => 'footer'));
 
     // Category view on landing page
     drupal_add_js("jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').click(function(){
@@ -1012,6 +1015,23 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
                     }
               });
            });", array('type' => 'inline', 'scope' => 'footer'));
+    // Views render on video template
+    if (itg_videogallery_get_categoryparent($_GET['category']) == TRUE && empty($_GET['sid'])) {
+      $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
+    }
+    elseif (itg_videogallery_get_categoryparent($_GET['category']) == FALSE && isset($_GET['category']) && isset($_GET['sid'])) {
+      $view_output = views_embed_view('video_list_of_category', 'block');
+    }
+    elseif (empty($_GET['sid'])) {
+      if (isset($_GET['category']) && itg_videogallery_get_categoryparent($_GET['category']) == FALSE) {
+        $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
+      }
+      elseif (empty($_GET['category'])) {
+        $tid = itg_videogallery_get_tid_nid(arg(1));
+        $view_output = views_embed_view('video_list_of_category', 'block_3', $tid);
+      }
+    }
+    $node->view_output = $view_output;
   }
 }
 
@@ -1024,13 +1044,13 @@ function itg_videogallery_ajax_ftp_video() {
   if ($case == 'used') {
     $used_video = itg_videogallery_ftp_used_video();
     foreach ($used_video as $key => $u_video) {
-      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video['filename'] . '</input><span class="file_size">'.$u_video['filesize'].' MB</span></span>';
+      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video['filename'] . '</input><span class="file_size">' . $u_video['filesize'] . ' MB</span></span>';
     }
   }
   elseif ($case == 'unused') {
     $unused_video = itg_videogallery_ftp_unused_video();
     foreach ($unused_video as $key => $un_video) {
-      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $un_video['filename'] . '</input><span class="file_size">'.$un_video['filesize'].' MB</span></span>';
+      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $un_video['filename'] . '</input><span class="file_size">' . $un_video['filesize'] . ' MB</span></span>';
     }
   }
   if (empty($val)) {
@@ -1054,7 +1074,7 @@ function itg_videogallery_ajax_time_filter_video() {
     }
     $used_video = itg_videogallery_ftp_used_video($before_time);
     foreach ($used_video as $key => $u_video) {
-      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video['filename'] . '</input><span class="file_size">'.$u_video['filesize'].' MB</span></span>';
+      $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video['filename'] . '</input><span class="file_size">' . $u_video['filesize'] . ' MB</span></span>';
     }
   }
   if (empty($val)) {
@@ -1081,7 +1101,7 @@ function itg_videogallery_ftp_used_video($before_time) {
   $results = $query->execute();
   foreach ($results as $result) {
     $used_video[$result->field_upload_video_fid]['filename'] = $result->filename;
-    $used_video[$result->field_upload_video_fid]['filesize'] = number_format($result->filesize/(1024*1024), 2);
+    $used_video[$result->field_upload_video_fid]['filesize'] = number_format($result->filesize / (1024 * 1024), 2);
   }
   return $used_video;
 }
@@ -1106,7 +1126,7 @@ function itg_videogallery_ftp_unused_video() {
   foreach ($new_file as $final_file) {
     if (!empty($final_file['filename'])) {
       $options[$final_file['fid']]['filename'] = $final_file['filename'];
-      $options[$final_file['fid']]['filesize'] = number_format($final_file['filesize']/(1024*1024), 2);
+      $options[$final_file['fid']]['filesize'] = number_format($final_file['filesize'] / (1024 * 1024), 2);
     }
   }
   return $options;
@@ -1130,4 +1150,48 @@ function itg_videogallery_ftp_unused_file($filename) {
   $query->range(0, 1);
   $results = $query->execute()->fetchAssoc();
   return $results;
+}
+
+/**
+ * Implements hook_views_query_alter()
+ * {@inheritdoc}
+ */
+function itg_videogallery_views_query_alter(&$view, &$query) {
+  if ($view->name == 'video_landing_header' && $view->current_display == 'block_1') {
+    if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+      $parent = taxonomy_get_parents($_GET['category']);
+      $key = key($parent);
+      $parent_name = $parent[$key]->name;
+      if ($parent[$key]->name == 'program') {
+        $query->where[0]['conditions'][0]['value'][':field_data_field_story_category_field_story_category_tid'] = NULL;
+      }
+    }
+  }
+}
+
+/**
+ * Implements function for check tid parent program
+ * @param type int
+ * @return boolean
+ */
+function itg_videogallery_get_categoryparent($tid) {
+  $parent = taxonomy_get_parents($tid);
+  $key = key($parent);
+  $parent_name = $parent[$key]->name;
+  if ($parent[$key]->name == 'program') {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Implements function for get tid by nid
+ * @param type int
+ * @return int
+ */
+function itg_videogallery_get_tid_nid($nid) {
+  $node = node_load($nid);
+  return $node->field_story_category[LANGUAGE_NONE][0]['tid'];
 }
