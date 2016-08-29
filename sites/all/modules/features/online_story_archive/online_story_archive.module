@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the online story archive feature.
+ */
+
+include_once 'online_story_archive.features.inc';
