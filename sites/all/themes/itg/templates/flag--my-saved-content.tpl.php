@@ -48,13 +48,30 @@
  * some advanced theming you may have to remove all the whitespace.
  */
 ?>
-
+<?php $arg = arg(); ?>
+<?php 
+  $node_type = itg_personalization_flag_text($arg[1]);   
+  switch ($node_type) {
+    case 'story':
+      $flag_text = 'READ LATER';
+      $flag_icon = '<i class="fa fa-bookmark"></i>';
+      break;
+    case 'photogallery':
+      $flag_text = 'I am yes';
+      $flag_icon = '<i class="fa fa-bookmark"></i>';
+      break;
+    case 'videogallery':
+      $flag_text = 'Watch Later';
+      $flag_icon = '<i class="fa fa-clock-o"></i>';
+      break;
+  }
+?>
 <?php if ($needs_wrapping_element): ?>
   <div class="flag-outer flag-outer-<?php print $flag_name_css; ?>">
 <?php endif; ?>
 <span class="<?php print $flag_wrapper_classes; ?>">
   <?php if ($link_href): ?>
-    <a href="<?php print $link_href; ?>" title="<?php print $link_title; ?>" class="<?php print $flag_classes ?>" rel="nofollow"><i class="fa fa-bookmark"></i> <?php print $link_text; ?></a><span class="flag-throbber">&nbsp;</span>
+    <a href="<?php print $link_href; ?>" title="<?php print $link_title; ?>" class="<?php print $flag_classes ?>" rel="nofollow"><?php print $flag_icon . ' ' . $flag_text; ?></a><span class="flag-throbber">&nbsp;</span>
   <?php else: ?>
     <span class="<?php print $flag_classes ?>"><?php print $link_text; ?></span>
   <?php endif; ?>
