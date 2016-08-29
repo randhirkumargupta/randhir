@@ -30,6 +30,10 @@
     });
 
     }
+    
+  jQuery( document ).on('ajaxComplete',function( event, xhr, settings ) {
+  var html=jQuery('.image-fullname').find('a').attr('target', '_blank');
+});
 
 })(jQuery, Drupal, this, this.document);
 
