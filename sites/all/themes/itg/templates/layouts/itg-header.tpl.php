@@ -1,3 +1,10 @@
+<?php
+foreach($data['itg_main_manu_header'] as $key => $val) {  
+  if ($val['#localized_options']['attributes']['title'] == 1) {
+    $data['itg_main_manu_header'][$key]['#attributes']['class'][] = 'sponser-link';
+  }
+}
+?>
 <div class="header-ads mhide">
     <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">
 </div>                               

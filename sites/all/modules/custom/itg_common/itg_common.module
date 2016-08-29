@@ -50,10 +50,16 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       });', array('type' => 'inline', 'scope' => 'footer'));
     
     if ($form_id == 'menu_edit_item') {
+      
+      if ($form['original_item']['#value']['menu_name'] == 'menu-itg-main-menu-header') {
+        $form['description']['#type'] = 'checkbox';
+        $form['description']['#title'] = 'Sponser';
+      }
+      
       // Add JS to hide extra element of menu forms
       drupal_add_js('jQuery(document).ready(function() {                  
-             jQuery(".form-item-description").hide();
-             jQuery(".form-type-checkbox").hide();
+             // jQuery(".form-item-description").hide();
+             // jQuery(".form-type-checkbox").hide();
              jQuery(".form-item-expanded").hide();
              jQuery(".form-item-parent").hide();
              jQuery(".form-item-weight").hide();             

@@ -283,6 +283,40 @@
                     });
                 });
                 
+                // add more section widgets
+                
+                $('.content-section-widget').click(function() {                   
+                   var widgets_id = $(this).attr('id');
+                   //alert(widgets_id);
+                   $('#content-section-widget-'+widgets_id).show();
+                   $('#'+widgets_id).hide();
+                   var newValue = parseInt(widgets_id) + 1;
+                   $('#'+newValue).show();
+                })
+                
+                $('.delete-block-widget').click(function() {
+                    return false;
+                    var block_id = $(this).attr("delete-block-id");                    
+                    var section_name = $('#edit-section').val();
+                    var template_name = $('#edit-template-name').val();
+                    
+                    var base_url = settings.itg_story.settings.base_url;
+                   
+                    $.ajax({
+                          url: base_url + "/insert-layout-setting-ajax/widget_delete",
+                          method: 'post',
+                          data: {block_name:block_id,section_name:section_name,template_name:template_name},
+                          beforeSend:function(){
+                              $('#'+block_id).addClass('input-loader');                             
+                          },
+                          success: function(data) {                            
+                            $('#'+block_id).html('');
+                            jQuery('span[data-id="'+block_id+'"]').html('');
+                            $('.block_id').removeClass('input-loader');  
+                          }
+                    });
+               });
+                
             }   
             
  };

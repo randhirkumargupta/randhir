@@ -8,6 +8,7 @@
  */
 //$preview = $widget_data['preview'];
 //p($widget_data);
+
 ?>
 
 <?php
@@ -163,7 +164,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                 <div class="widget-settings">
                                   <div class="widget-title-wrapper">
-                                    <span class="widget-title" data-id="itg-block-7"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
+                                    <span class="widget-title" data-id="itg-block-2"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
                                     <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
                                   </div>
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
@@ -580,7 +581,132 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
     </div>
 <?php } ?>
-  <!--End of Common section-->  
+  <!--End of Common section--> 
+  
+<!--Common section add more strat here-->
+<?php $count_widget = 19; ?>
+<?php $last_val = 0;?>
+<?php for ($count = 1; $count <= EXTRA_SECTION_CARDS; $count++) { ?>
+<?php
+  $widget_name1 = 'itg-block-'.($count_widget+1);
+  $widget_name2 = 'itg-block-'.($count_widget+2);
+  $widget_name3 = 'itg-block-'.($count_widget+3);
+  
+?>
+
+<?php if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$widget_name2]['widget_name']) || isset($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
+<?php
+if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$widget_name2]['widget_name']) || isset($widget_data[$widget_name3]['widget_name'])) {
+  $last_val++;
+  $display_style = 'style="display:block"';
+} else {
+   $display_style = 'style="display:none"';
+}
+?>
+<div class="row itg-common-section mt-50" <?php echo $display_style; ?> id="content-section-widget-<?php print $count;?>">
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data[$widget_name1]['widget_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data[$widget_name1]['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data[$widget_name1]['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="<?php print $widget_name1;?>"><?php print $widget_data[$widget_name1]['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data[$widget_name1]['block_title']; ?>" name="<?php print $widget_name1;?>" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                      <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="<?php print $widget_name1;?>">X</a></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="<?php print $widget_name1;?>"><?php print $widget_data[$widget_name1]['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>  
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data[$widget_name2]['widget_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data[$widget_name2]['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data[$widget_name2]['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="<?php print $widget_name2;?>"><?php print $widget_data[$widget_name2]['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data[$widget_name2]['block_title']; ?>" name="<?php print $widget_name2;?>" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                      <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="<?php print $widget_name2;?>">X</a></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="<?php print $widget_name2; ?>"><?php print $widget_data[$widget_name2]['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data[$widget_name3]['widget_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data[$widget_name3]['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data[$widget_name3]['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="<?php print $widget_name3;?>"><?php print $widget_data[$widget_name3]['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data[$widget_name3]['block_title']; ?>" name="<?php print $widget_name3;?>" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                      <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="<?php print $widget_name3;?>">X</a></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="<?php print $widget_name3;?>"><?php print $widget_data[$widget_name3]['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>          
+        </div>
+<?php //if (EXTRA_SECTION_CARDS != $count) {?>
+<!--  <div><a  href="javascript:void(0)" class="content-section-widget" id="<?php print $count+1;?>">Add more+</a></div>-->
+<?php //} ?>
+    </div>
+
+<?php } ?>
+
+<?php $count_widget = 3 + $count_widget; ?>
+<?php } ?>
+
+<?php 
+ if (isset($last_val) && $last_val > 0) {
+   $last_val = $last_val;
+ }else {
+   $last_val = 1;
+ }
+drupal_add_js('jQuery(document).ready(function() {
+             jQuery(".content-section-widget").hide();
+             jQuery("#"'+$last_val+').show();                         
+      });', array('type' => 'inline', 'scope' => 'footer'));
+?>
+
+<!--<div><a href="javascript:void(0)" class="content-section-widget" id="<?php echo $last_val;?>">Add more+</a></div>-->
+
+
+
+<!--End of Common add more section-->  
+
   
 </div>
 <!--------------------------------Code for Front tpl---------------------------------------->
