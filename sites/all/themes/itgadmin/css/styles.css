@@ -91,7 +91,7 @@ img {
 #block-menu-menu-podcast-admin-menu > .menu,
 #block-menu-menu-print-team-menu > .menu,
 #block-menu-menu-videogallery-admin-menu > .menu,
-#block-menu-menu-story-content-admin-menu > .menu, .breadcrumb ol, .header__secondary-menu ul, .dashboard-tab, .view-category-manager .view-content .item-list ul, .photogallery-list.flexslider .flex-direction-nav, #comments .comment ul.links, .block-itg-related ul, .itg-region ul, .page-admin-structure-menu-manage .action-links, .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
+#block-menu-menu-story-content-admin-menu > .menu, .breadcrumb ol, .header__secondary-menu ul, .dashboard-tab, .view-category-manager .view-content .item-list ul, .photogallery-list.flexslider .flex-direction-nav, #comments .comment ul.links, .block-itg-related ul, .itg-region ul, .page-admin-structure-menu-manage .action-links {
   list-style: none;
 }
 
@@ -135,7 +135,7 @@ img {
 [id*="field-email-address-values"] tbody,
 [id*="field-mega-review-review-values"] tbody,
 [id*="field-story-highlights-values"] tbody, [id*="field-videogallery-video-upload-values"] tbody, [id*="field-pti-print-media-values"] tbody, span.error, .dashboard-tab li a span, .node-category-form fieldset#edit-relations legend, [id*="itg-survey-survey-form"] .question-container#question-container-0, [id*="itg-quiz-quiz-form"] .question-container#question-container-0, [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item, [id*="itg-survey-survey-form"] .answer-container div.rating, [id*="itg-quiz-quiz-form"] .answer-container div.rating, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-img-upload .file, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twit-img-upload .file, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-img-upload .file, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-img-upload .file, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-img-upload .file, .photogallery-list.flexslider .flex-nav-prev a, .photogallery-list.flexslider .flex-nav-next a, [id*="field-story-template-buzz-values"] tbody tr, [id*="field-story-template-buzz-values"] tbody tr td, [id*="field-astro-zodiac-values"] > tbody > tr,
-[id*="field-astro-numerology-values-values"] > tbody > tr, [id*="field-service-content-values"] tbody tr, .view-view-moderation-history .views-row .field-content, .block-itg-related .my-saved-search ul li a, [id*="field-videogallery-video-upload-values"] tbody tr, [id*="field-pti-print-media-values"] tbody tr, .itg-region ul li a, .view-photo-list-of-category .view-content .photo-list li .tile .posted-on, .view-video-list-of-category .view-content .photo-list li .tile .posted-on, .personal-menu-tab li a {
+[id*="field-astro-numerology-values-values"] > tbody > tr, [id*="field-service-content-values"] tbody tr, .view-view-moderation-history .views-row .field-content, .block-itg-related .my-saved-search ul li a, [id*="field-videogallery-video-upload-values"] tbody tr, [id*="field-pti-print-media-values"] tbody tr, .itg-region ul li a, .view-photo-list-of-category .view-content .photo-list li .tile .posted-on, .view-video-list-of-category .view-content .photo-list li .tile .posted-on {
   display: block;
 }
 
@@ -247,7 +247,7 @@ img {
 .delete-link,
 .move-link,
 .edit-cm a, [id*="field-newsl-add-news-values"] fieldset, .newsletter-templates .newsletter-list, [id*="field-service-content-values"] .field-name-field-story-expert-description label + .form-textarea-wrapper:after, .my-stats, .my-stats-last-details, .node-newsletter_templates-form .form-item-title + .form-type-item, .node-newsletter_templates-form .form-field-name-field-newst-header-headline, .block-itg-related .checked-list li .ui-icon, .node-newsletter-form #newsletter-date-time-wrapper, .view-related-content-new .view-filters, .search-criteria + .success, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, .block-itg-layout-manager, #itg-layout-manager-filter-form, .itg-region ul, .itg-region ul li, #pti-basic-info, #itg_video_content .ftp-server, #itg_video_content .local_browse, #itg_video_content .ftp-server .video_filters .time-filter, .page-admin-structure-menu-manage .action-links, [id*="itg-mobile-services-search-form"], .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, .easyPaginateNav a, #views-form-photo-carousel-widget-photo-carousel-list .form-actions a,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions a, .personalized-user .user-pic, .personalized-user-info span, .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
+#views-form-photo-carousel-widget-video-carousel-list .form-actions a {
   display: inline-block;
 }
 
@@ -352,7 +352,7 @@ img {
 #block-menu-menu-videogallery-admin-menu > .menu > li,
 #block-menu-menu-story-content-admin-menu > .menu > li, .block-itg-story-list span, .view .attachment .count, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file img, [id*="itg-social-media-form"] > div fieldset .form-managed-file .file a, .confirmation a#edit-cancel, #views-form-photo-carousel-widget-photo-carousel-list a#edit-cancel,
 #views-form-photo-carousel-widget-video-carousel-list a#edit-cancel, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file a, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file a, .block-itg-related .checked-list li .ui-icon, .view-related-content-new .view-filters, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file-size, #pti-basic-info, #itg_video_content .ftp-server .video_filters .time-filter, .page-admin-structure-menu-manage .action-links, .ftp-server #edit-video-browse-select .ftp_video_radio, .browse-video-form .ftp_browse_field .browse-ftp-click, #views-form-photo-carousel-widget-photo-carousel-list .form-actions a,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions a, .personalized-user .user-pic, .personalized-user-info span, .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
+#views-form-photo-carousel-widget-video-carousel-list .form-actions a {
   vertical-align: top;
 }
 
@@ -436,7 +436,7 @@ img {
 .view-link,
 .delete-link,
 .move-link,
-.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .user-profile-div, .block-itg-related .rel-link, .main-cont, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure, .view-video-list-of-category .view-content .photo-list li .tile figure, .personal-menu-tab, .saved-item-tab {
+.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .node-photogallery-form #BrowseMedia .form-field-type-image .image-widget-data, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .user-profile-div, .block-itg-related .rel-link, .main-cont, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure, .view-video-list-of-category .view-content .photo-list li .tile figure {
   position: relative;
 }
 
@@ -459,7 +459,7 @@ img {
 [id*="field-email-address-values"] tbody,
 [id*="field-mega-review-review-values"] tbody,
 [id*="field-story-highlights-values"] tbody, [id*="field-videogallery-video-upload-values"] tbody, [id*="field-pti-print-media-values"] tbody, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-skip, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .newsletter-templates .newsletter-list .title-kicker, .view-view-moderation-history .views-row .field-content, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, .personal-menu-tab li:first-child, .personal-menu-tab li:last-child {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-skip, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .newsletter-templates .newsletter-list .title-kicker, .view-view-moderation-history .views-row .field-content, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a {
   overflow: hidden;
 }
 
@@ -6405,160 +6405,4 @@ div.node #comments h2 {
   position: absolute;
   top: 0;
   width: 100%;
-}
-
-/* CSS FOR FRONT USER PERSONALIZATION */
-.personalized-wrapper {
-  background-color: #eaebed;
-}
-
-.personalized-user-area {
-  display: table;
-  max-width: 100%;
-  height: 240px;
-  margin: 0 auto;
-  width: 800px;
-}
-
-.personalized-user {
-  display: table-cell;
-  padding: 20px;
-  text-align: center;
-  vertical-align: middle;
-  width: 260px;
-}
-.personalized-user .user-pic {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: #d3d6db;
-}
-.personalized-user .user-name {
-  color: #1a3c8d;
-  font: 500 27px/27px Roboto;
-  text-transform: uppercase;
-  padding: 12px 0 2px;
-}
-.personalized-user .logout-link a {
-  color: #777;
-  font: 400 16px/18px Roboto;
-}
-
-.personalized-user-info {
-  display: table-cell;
-  padding: 20px 0;
-  text-align: center;
-  vertical-align: middle;
-}
-.personalized-user-info span {
-  padding: 0 20px;
-}
-.personalized-user-info span .fa {
-  font-size: 35px;
-  color: #8d8d8d;
-}
-.personalized-user-info span dfn {
-  font-style: normal;
-  display: block;
-  font-size: 16px;
-  color: #323232;
-  margin-top: 10px;
-}
-
-.block-itg-personalization {
-  text-align: center;
-}
-
-.personal-menu-tab {
-  border: 1px solid #c6c6c6;
-  border-radius: 5px;
-}
-.personal-menu-tab li {
-  border-left: 1px solid #c6c6c6;
-  float: left;
-}
-.personal-menu-tab li:first-child {
-  border: none;
-  border-radius: 5px 0 0 5px;
-}
-.personal-menu-tab li:last-child {
-  border-radius: 0 5px 5px 0;
-}
-.personal-menu-tab li a {
-  color: #4f4f4f;
-  font: 300 18px/18px Roboto;
-  padding: 10px 8px;
-  background-color: #f6f6f7;
-}
-.personal-menu-tab li a:before {
-  display: inline-block;
-  margin-right: 5px;
-  color: #8d8d8d;
-  font-family: 'FontAwesome';
-}
-.personal-menu-tab li.saved-items a:before {
-  content: '\f02e';
-}
-.personal-menu-tab li.my-content a:before {
-  content: '\f064';
-}
-.personal-menu-tab li.my-Preferences a:before {
-  content: '\f013';
-}
-.personal-menu-tab li.following a:before {
-  content: '\f007';
-}
-.personal-menu-tab li.my-credits a:before {
-  content: '\f1c0';
-}
-.personal-menu-tab li.edit-profile a:before {
-  content: '\f040';
-}
-.personal-menu-tab li.active a, .personal-menu-tab li:hover a {
-  background-color: #fff;
-}
-.personal-menu-tab li .ajax-progress-throbber {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  top: 30px;
-}
-
-.saved-item-tab {
-  margin: 60px 0 30px;
-}
-.saved-item-tab li {
-  float: left;
-}
-.saved-item-tab li a {
-  padding: 10px 30px;
-  background-color: #f1f1f1;
-  border-top: 3px solid #fff;
-  border-bottom: 1px solid #f1f1f1;
-  color: #515151;
-  font: 400 15px/18px Roboto;
-}
-.saved-item-tab li:first-child a {
-  border-left: 1px solid #f1f1f1;
-}
-.saved-item-tab li:last-child a {
-  border-right: 1px solid #f1f1f1;
-}
-.saved-item-tab li.active a, .saved-item-tab li:hover a {
-  border-top-color: #bb3330;
-  border-radius: 5px 5px 0 0;
-  background-color: #fff;
-  color: #b70c09;
-}
-.saved-item-tab li .ajax-progress-throbber {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  top: 100px;
 }
