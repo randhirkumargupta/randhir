@@ -35,22 +35,19 @@ function itg_ads_block_view($delta = '') {
   $block = array();
   
   switch ($delta) {
-    case 'ad_right_sidebar_1':
-      
+    case 'ad_right_sidebar_1':      
       //$page_name = 'Rest';
-      //$data['itg_ad'] = get_ad_script($page_name);
-      
+      //$data['itg_ad'] = get_ad_script($page_name);      
       $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
       break;
     
-    case 'ad_right_sidebar_2':  
-      
+    case 'ad_right_sidebar_2':
       $page_name = 'Rest';
       $data['itg_ad'] = get_ad_script($page_name);
       $block['content'] = theme('ad_right_sidebar_block2', array('data' => $data));
-      break;
-     return $block;
-} 
+      break;     
+  }
+  return $block;
 }
 
 /**
