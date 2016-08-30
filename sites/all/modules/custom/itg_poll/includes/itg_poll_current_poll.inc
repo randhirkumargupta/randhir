@@ -27,19 +27,15 @@ function itg_poll_get_all_current_poll() {
 
   $fieldcollect = entity_load('field_collection_item', $item_id);
   if (is_array($fieldcollect) && count($fieldcollect) > 0) {
-   $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
-      $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
-      if (isset($poll_answer_image) && $poll_answer_image > 0) {
-        $poll_image_exist_class = 'poll-option-image';
-      }
-      else {
-        $poll_image_exist_class = '';
-      }
-    
+    $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
+    $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
+    if (isset($poll_answer_image) && $poll_answer_image > 0) {
+      $poll_image_exist_class = 'poll-option-image';
+    }
+    else {
+      $poll_image_exist_class = '';
+    }
   }
-
-
-
 
   if (isset($related_nids) && !empty($related_nids) && count($related_nids) > 0) {
     $related_nodes = get_polls_related_story_nodes($related_nids);
