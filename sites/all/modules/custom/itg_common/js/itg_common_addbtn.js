@@ -24,7 +24,7 @@
         var id_to_trigger = jQuery(this).attr('data-id');
         jQuery('#' + id_to_trigger).trigger('click');
     });
-    jQuery('.top-actions .published').click(function() {
+    jQuery('.top-actions .button').click(function() {
         var id_to_trigger = jQuery(this).attr('data-id');
         jQuery('#' + id_to_trigger).trigger('click');
     });
