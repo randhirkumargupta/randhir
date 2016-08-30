@@ -17,7 +17,7 @@
         $('#edit-metatags').show();
       }
       
-      $('input[name="field_survey_start_date[und][0][value][date]"]').prop("readonly", true);
+      $('input[name="field_ntf_schedule[und][0][value][date]"]').prop("readonly", true);
       $('#edit-field-cm-display-title-und-0-value').prop("readonly", true);
       
       // Assign story checkbox value (show/hide Content ID)
