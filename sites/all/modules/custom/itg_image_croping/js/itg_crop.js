@@ -107,5 +107,29 @@
             }
         });
     });
+    jQuery('#select-aspect-ratio').change(function(){
+        var get_aspect_ratio=jQuery(this).val();
+        var field_name = jQuery('#data_field_name').val();
+        var image_fiedlid = jQuery('#image_fiedlid').val();
+         var get_original_height = jQuery('#image_original_hight').val();
+        var get_original_width = jQuery('#image_original_width').val();
+        jQuery.ajax({
+            url: Drupal.settings.basePath + 'change_image_aspect_ratio',
+            type: 'post',
+            data: {'imageId': image_fiedlid, 'field_name': field_name,'original_height':get_original_height,'origninal_width':get_original_width,'aspect_ratio':get_aspect_ratio},
+             beforeSend:function(){ 
+                 showloader();
+                          },
+            success: function(data) {
+                    hideloader();
+                    jQuery('#file-preview').show().html(data);
+
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+    })
 
 })(jQuery, Drupal, this, this.document);
