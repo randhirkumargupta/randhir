@@ -77,6 +77,7 @@ function tv_schedule_listing() {
     if ($results > 0) {
         // iterate cursor to get value of documents
         foreach ($cursor as $document) {
+          
             $s_time = time_zone_conversion($document['time'], $_GET['time_zone']);
             if ($s_time == $curent_time) {
                 $out[$keys]['time'] = '';
@@ -87,6 +88,17 @@ function tv_schedule_listing() {
             //$out[$keys]['time'] = $document["time"];
             $out[$keys]['day'] = $document["day"];
             $out[$keys]['program'] = $document["program"];
+            
+            if(!empty($search_date)) {
+              $ass_search_date = $search_date;
+            }
+            else
+            {
+              $ass_search_date = date('Y/m/d');
+            }
+            $node_detail = node_load(tv_story_list($ass_search_date, $document['time']));
+            $out[$keys]['story_attach'] = l(t($node_detail->title), 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'blank')));
+            
             $keys++;
 
             //counter required for current time slot display.
@@ -123,4 +135,25 @@ function tv_schedule_list($search_date) {
     $cursor = $people->find($cond);
     $results = $cursor->count();
     return $results;
+}
+
+/**
+ * Custom method for checking story details on particular date.
+ *
+ * @param string $date
+ * @param string $time
+ * @return int
+ */
+function tv_story_list($date, $time) {
+  $itg_query = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('type', 'story')
+      ->condition('status', 1);
+  $itg_query->join('field_data_field_poll_start_date', 'frq', 'n.nid = frq.entity_id');
+  $itg_query->condition('frq.field_poll_start_date_value', $date);
+  $itg_query->join('field_data_field_story_tv_time', 'ast', 'n.nid = ast.entity_id');
+  $itg_query->condition('ast.field_story_tv_time_value', $time);
+  $itg_result = $itg_query->execute()->fetchField();
+
+  return $itg_result;
 }

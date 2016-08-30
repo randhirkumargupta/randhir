@@ -242,6 +242,76 @@ function feature_for_searchimage_views_default_views() {
     22 => 0,
     24 => 0,
   );
+  /* Filter criterion: Apache Solr: tm_vid_4_names */
+  $handler->display->display_options['filters']['tm_vid_4_names']['id'] = 'tm_vid_4_names';
+  $handler->display->display_options['filters']['tm_vid_4_names']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['tm_vid_4_names']['field'] = 'tm_vid_4_names';
+  $handler->display->display_options['filters']['tm_vid_4_names']['operator'] = 'word';
+  $handler->display->display_options['filters']['tm_vid_4_names']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['operator_id'] = 'tm_vid_4_names_op';
+  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['label'] = 'Section';
+  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['operator'] = 'tm_vid_4_names_op';
+  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['identifier'] = 'tm_vid_4_names';
+  $handler->display->display_options['filters']['tm_vid_4_names']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+  );
+  /* Filter criterion: Apache Solr: bundle_name */
+  $handler->display->display_options['filters']['bundle_name']['id'] = 'bundle_name';
+  $handler->display->display_options['filters']['bundle_name']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['bundle_name']['field'] = 'bundle_name';
+  $handler->display->display_options['filters']['bundle_name']['operator'] = 'word';
+  $handler->display->display_options['filters']['bundle_name']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['bundle_name']['expose']['operator_id'] = 'bundle_name_op';
+  $handler->display->display_options['filters']['bundle_name']['expose']['label'] = 'Content type';
+  $handler->display->display_options['filters']['bundle_name']['expose']['operator'] = 'bundle_name_op';
+  $handler->display->display_options['filters']['bundle_name']['expose']['identifier'] = 'bundle_name';
+  $handler->display->display_options['filters']['bundle_name']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+  );
   $handler->display->display_options['path'] = 'searchimage';
   $export['searchimage'] = $view;
 

@@ -15,6 +15,8 @@ module_load_include('inc', 'itg_widget', 'includes/itg_widget_order_re_order');
 // All Code for action (Bulk Operation).
 module_load_include('inc', 'itg_widget', 'includes/itg_widget_actions_bulk_operation');
 
+module_load_include('inc', 'itg_widget', 'includes/itg_widget.helper');
+
 /**
  * {@inheritdoc}
  */
@@ -111,18 +113,19 @@ function itg_widget_setids() {
 
 function remove_extra_data() {
   $widget = array(
-      'widget_anchors_listing',
-      'home_page_feature_widget',
-      'story_widget',
-      'section_wise_content_ordering_list',
-      'section_wise_draggable_content_order',
-      'big_story_format_widget',
-      'dont_miss_content_widget',
-      'section_wise_widget',
-      'we_may_suggest_widget',
-      'section_wise_content_ordering',
-      'widget_anchors_listing',
-      'category_wise_content_list',
+//      'widget_anchors_listing',
+//      'home_page_feature_widget',
+//      'story_widget',
+//      'section_wise_content_ordering_list',
+//      'section_wise_draggable_content_order',
+//      'big_story_format_widget',
+//      'dont_miss_content_widget',
+//      'section_wise_widget',
+//      'we_may_suggest_widget',
+//      'section_wise_content_ordering',
+//      'widget_anchors_listing',
+//      'category_wise_content_list',
+      'photo_carousel_widget',
   );
   foreach ($widget as $view_name) {
     $num_deleted = db_delete('draggableviews_structure')
@@ -314,6 +317,9 @@ function itg_widget_block_info() {
   $blocks['watch_right_now_videos_widget'] = array(
       'info' => t('Widget: Watch right now videos'),
   );
+  $blocks['anchor_langing_page_menu'] = array(
+      'info' => t('Anchor landing page menu'),
+  );
   return $blocks;
 }
 
@@ -453,6 +459,7 @@ function itg_widget_block_view($delta = '') {
 
       $info['view_name'] = 'photo_carousel_widget'; // view name
       $info['page'] = 'photo_carousel'; // page name
+      $info['nodequeue'] = 'photo_carousel';
       $data = itg_widget_featured_photo_carousel_data($info, 'flexslider');
       $block['content'] = theme("featured_photo_carousel", array("data" => $data));
       break;
@@ -520,6 +527,7 @@ function itg_widget_block_view($delta = '') {
 
       $info['view_name'] = 'photo_carousel_widget'; // view name
       $info['page'] = 'video_carousel'; // page name
+      $info['nodequeue'] = 'video_carousel';
       $data = itg_widget_featured_video_carousel_data($info, 'flexslider');
       $block['content'] = theme("featured_video_carousel", array("data" => $data));
       break;
@@ -558,6 +566,10 @@ function itg_widget_block_view($delta = '') {
       $info['page'] = 'video_carousel'; // page name
       $data = itg_widget_featured_video_carousel_data($info, 'rolling');
       $block['content'] = theme("featured_video_carousel_rollingslider", array("data" => $data));
+      break;
+    // Top takes videos ordering reordering widget case
+    case 'anchor_langing_page_menu':
+      $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
       break;
   }
   return $block;
@@ -685,7 +697,7 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     // $form_state['selection'] = $_SESSION[$form['#form_id']];
     //$form_state['values']['views_bulk_operations'] = $form_state['selection'];
   }
-  
+
   // Add a node id contianer just below the bulk operation.
   if (isset($form['select']['action::nodequeue_add_action'])) {
     $form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container"></div>';
@@ -781,6 +793,9 @@ function itg_widget_theme() {
       ),
       'itg_widget_watch_right_now_videos_widget' => array(
           'template' => 'templates/watch-right-now-videos-widget',
+      ),
+      'anchor_langing_page_menu' => array(
+          'template' => 'templates/anchor-landing-page-menu',
       ),
   );
   return $themes;
@@ -1010,20 +1025,12 @@ function itg_widget_preprocess_node(&$vars) {
     drupal_add_js(
             "jQuery(document).ready(function(){
               jQuery('.read-more , .full-content').click(function(){
-                jQuery('.less-content').toggle('500');
-                jQuery('.full-content').toggle('500');
+                jQuery('.less-content').toggle();
+                jQuery('.full-content').toggle();
               });
             })", 'inline'
     );
-    $anchor_id = $vars['nid'];
     $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
-    // Query to get category in which anchor is associated.
-    $cat_query = db_select('field_data_field_story_category', 'cat');
-    $cat_query->leftJoin('node', 'n', 'n.nid=cat.entity_id');
-    $cat_query->fields('cat', array('field_story_category_tid'));
-    $cat_query->condition('cat.entity_id', $anchor_id);
-    $categories_of_anchor = $cat_query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    pr($categories_of_anchor);
   }
 }
 
@@ -1045,4 +1052,79 @@ function itg_widget_nodes_from_nodequeue($nodequeue_name) {
   $nq_query->addField('nq', 'nid', 'entity_id');
   $nq_query->orderBy('n.nid', 'DESC');
   return $nq_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Implements function for anchor landing menu
+ */
+function itg_widget_anchor_landing_menu($nid) {
+  // Query to get category in which anchor is associated.
+  $cat_query = db_select('field_data_field_video_anchor', 'video_anchor');
+  $cat_query->leftJoin('field_data_field_story_category', 'cat', 'video_anchor.entity_id = cat.entity_id');
+  $cat_query->leftJoin('taxonomy_term_data', 'ttd', 'ttd.tid=cat.field_story_category_tid');
+  $cat_query->fields('cat', array('field_story_category_tid'));
+  $cat_query->distinct('cat.field_story_category_tid');
+  $cat_query->fields('ttd', array('name'));
+  $cat_query->condition('video_anchor.field_video_anchor_target_id', $nid, '=');
+  $cat_query->condition('cat.bundle', 'videogallery', '=');
+  $categories_of_anchor = $cat_query->execute();
+  foreach ($categories_of_anchor as $cate) {
+    $result[$cate->field_story_category_tid] = $cate->name;
+  }
+  return $result;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_widget_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'reporter' && drupal_is_front_page() == FALSE) {
+    $cat_array = itg_widget_anchor_landing_menu(arg(1));
+    $first_key = key($cat_array);
+    // Category view on landing page
+    drupal_add_js("jQuery('.anchor-detail-menu .tab-buttons span').click(function(){
+               var section_id = jQuery(this).attr('value');
+               jQuery('.anchor-detail-menu .tab-buttons span a').removeClass('active');
+               jQuery('#edit-field-story-category-tid').val(section_id); 
+               jQuery('#edit-field-story-category-tid').trigger('change');
+               jQuery(this).find('a').addClass('active');
+           });", array('type' => 'inline', 'scope' => 'footer'));
+    drupal_add_js("jQuery(document).ready(function(){
+               jQuery('#edit-field-story-category-tid').val(" . $first_key . "); 
+               jQuery('#edit-field-story-category-tid').trigger('change');
+               jQuery('.anchor-detail-menu .tab-buttons span').each(function() {
+                  if(jQuery(this).attr('value') == " . $first_key . "){
+                      jQuery(this).addClass('active');
+                    }
+              });
+           });", array('type' => 'inline', 'scope' => 'footer'));
+  }
+}
+
+/**
+ * Comman function for all the widgets for getting the widgets nodeids
+ * 
+ * @param string $view_name
+ * @param string $page
+ * @param string $expire_date
+ * @param int $range_min
+ * @param int $range_max
+ * @return array
+ */
+function draggable_views_nodes_for_widgets($view_name, $page, $expire_date, $range_min = 0, $range_max) {
+  if (!empty($view_name) && !empty($page) && !empty($expire_date) && !empty($range_max) && !empty($range_max)) {
+    $query = db_select('draggableviews_structure', 'dv_s');
+    $query->leftJoin('node', 'n', 'n.nid=dv_s.entity_id');
+    $query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
+    $query->fields('dv_s', array('entity_id'));
+    $query->fields('fsed', array('field_story_expiry_date_value'));
+    $query->condition('dv_s.view_name', $view_name);
+    $query->condition('dv_s.view_display', $page);
+    $query->condition('n.status', '1');
+    $query->condition('fsed.field_story_expiry_date_value', $expire_date, '>=');
+    $query->orderBy('dv_s.weight', 'ASC');
+    $query->groupBy('dv_s.entity_id');
+    $query->range($range_min, $range_max);
+    return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

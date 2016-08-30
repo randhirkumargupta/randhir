@@ -844,7 +844,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Long Description */
+  /* Field: Field: Content */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -920,7 +920,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Long Description */
+  /* Field: Field: Content */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -943,8 +943,8 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="container">
-    
-<div class="row video-landing-header">
+ <div class ="video-landing-header">
+<div class="row">
     <div class="col-md-12">
     <h2>[title]</h2>
 </div>
@@ -959,14 +959,17 @@ allowfullscreen></iframe>';
                 <li><a href="#"><i class="fa fa-envelope"></i> Email</a></li>
                 <li><a href="#"><i class="fa fa-link"></i> Embed</a></li>
                 <li><a href="#"><i class="fa fa-comment"></i> Comment</a></li>
+<li><a href="#"><i class="fa fa-share"></i>Submit Video</a></li>
             </ul>
         </div>
     </div>
     <div class="col-md-4 video-header-right"><p>[field_story_expert_description]</p>
         <p class="upload-date">[timestamp]</p>
+<div class="ads"></div>
     </div>
 </div>
-    </div>';
+    </div>
+</div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
 
   /* Display: video landing page header scroll */
@@ -1043,7 +1046,9 @@ allowfullscreen></iframe>';
   $handler->display->display_options['arguments']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['code'] = 'return $_GET[\'category\'];';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['code'] = 'if(isset($_GET[\'category\']) && isset($_GET[\'sid\'])){
+return $_GET[\'category\'];
+}';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary_options']['items_per_page'] = '25';

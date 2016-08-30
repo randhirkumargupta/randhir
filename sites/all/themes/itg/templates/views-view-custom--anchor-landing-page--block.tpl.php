@@ -18,11 +18,13 @@ global $base_url
       <?php echo $anchor['title']; ?>
       <div class="less-content">
         <?php echo mb_strimwidth(strip_tags($anchor['body']), 0, 245, ".."); ?>
-        <a class="anchor-action read-more"> More[+]</a>
-      </div>
-      <div class="full-content" style="display: none">
-        <?php echo $anchor['body']; ?>
-        <a class="anchor-action read-less"> Less[-]</a>
+        <?php if (strlen($anchor['body']) > 245) { ?>
+          <a class="anchor-action read-more"> More[+]</a>
+        </div>
+        <div class="full-content" style="display: none">
+          <?php echo $anchor['body']; ?>
+          <a class="anchor-action read-less"> Less[-]</a>
+        <?php } ?>
       </div>  
     </div>
   </div>

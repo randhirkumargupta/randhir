@@ -29,6 +29,7 @@
                       ?>
                   </div>
               <div class="profile-detail">
+                  <a href="../../../../../../html/itgcms/sites/all/themes/itg/templates/flag--my-saved-content.tpl.php"></a>
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
                       <?php  $twitter_handle = $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
@@ -47,6 +48,15 @@
                       <li><?php print  date('F j, Y', $node->created); ?>   </li>
                       <li>UPDATED <?php print  date('H:i', $node->changed); ?> IST</li>
                       <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
+                  </ul>
+                  <ul class="social-links">
+                      <li><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
+                      <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
+                      <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
+                      <li><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
+                      <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
+                      <li><?php print $read_later; ?></li>
+                      
                   </ul>
                   </div>
                   </div>
@@ -137,6 +147,7 @@
             $entity = entity_load('field_collection_item', array($field_collection_id));
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
             $img = '<img src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
+            if(!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
             if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
             $buzz_output.= '<div class="buzz-img">' . $img . '</div>';
@@ -147,7 +158,7 @@
             $buzz_output.= '</div>';
              $buzz++;
           }
-         
+          }
           print $buzz_output;
         }
         ?>
@@ -156,6 +167,19 @@
       
       
       <div class="section-left-bototm">
+          <div class="social-list">
+            <ul>
+                <li><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
+                <li><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
+                <li><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
+                <li><span class="share-count">4.3k</span> SHARES</li>
+                <li><span>Edited by</span> Arunava Chatterjee</li>
+                <li><a href="#">follow the Story</a></li>
+            </ul>
+          </div>
+          
               <?php if(!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
               <div class="snap-post">
                   <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>

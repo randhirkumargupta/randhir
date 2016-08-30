@@ -4,7 +4,7 @@
  */
 
 (function ($) {
-    Drupal.behaviors.itg_related = {
+    Drupal.behaviors.itg_front_search = {
         attach: function (context, settings) {
 
             var custom_field_val = getParameterByName('custom_drp');
@@ -17,8 +17,7 @@
                 if (datetypevalue == 'calender') { // Image question
                     $(".caln").show();
                     $(".caln").show();
-                }
-                else
+                } else
                 {
                     $(".caln").hide();
                     $(".caln").hide();
@@ -46,12 +45,12 @@
             $('#reset_button').click(function () {
                 $('#edit-reset').trigger('click');
             });
-            
+
             $(function () {
                 $("#edit-ds-changed-datepicker-popup-0").datepicker({
-                   dateFormat : 'yy-mm-dd',
-                   changeMonth: true,
-                   changeYear : true,
+                    dateFormat: 'yy-mm-dd',
+                    changeMonth: true,
+                    changeYear: true,
                     onSelect: function (selected) {
                         var dt = new Date(selected);
                         dt.setDate(dt.getDate() + 1);
@@ -59,15 +58,30 @@
                     }
                 });
                 $("#edit-ds-changed-max-datepicker-popup-0").datepicker({
-                    dateFormat : 'yy-mm-dd',
+                    dateFormat: 'yy-mm-dd',
                     changeMonth: true,
-                    changeYear : true,
+                    changeYear: true,
                     onSelect: function (selected) {
                         var dt = new Date(selected);
                         dt.setDate(dt.getDate() - 1);
                         $("#edit-ds-changed-datepicker-popup-0").datepicker("option", "maxDate", dt);
                     }
                 });
+            });
+
+            // for online story archive
+            if (Drupal.settings.itg_front_search.settings.archive_story) {
+                jQuery(".caln").show();
+                jQuery('#edit-bundle-name-wrapper').hide();
+                jQuery('.form-item-ds-changed label').hide();
+
+            }
+
+            jQuery('.atleta a').click(function (e) {
+                e.preventDefault();
+                var h = jQuery(this).attr('href');
+                jQuery('#edit-ds-changed-datepicker-popup-0').val(h);
+                jQuery('#edit-submit-archive-story').trigger('click');
             });
         }
 

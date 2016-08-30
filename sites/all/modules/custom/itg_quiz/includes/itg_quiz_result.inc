@@ -51,7 +51,7 @@ function itg_quiz_user_list() {
           <td>' . $record->user_name . '</td>
           <td>'.$record->user_email.'</td>
           <td>'.$record->quiz_title.'</td>
-          <td>'.date('Y/m/d', $record->created).'</td>
+          <td>'.date('d/m/Y', $record->created).'</td>
           <td>'.$record->ques_total.'</td>
           <td>'.$record->ques_attempt.'</td>
           <td>'.$correct_answer.'</td>
