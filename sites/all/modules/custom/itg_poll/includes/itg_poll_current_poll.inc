@@ -19,7 +19,7 @@ function itg_poll_get_all_current_poll() {
   }
 
   $poll_image_exist_class = '';
-  
+
   foreach ($node->field_poll_answer['und'] as $row) {
     $item_id[] = $row['value']; // fieldcollection id
   }
@@ -28,20 +28,21 @@ function itg_poll_get_all_current_poll() {
   $fieldcollect = entity_load('field_collection_item', $item_id);
   if (is_array($fieldcollect) && count($fieldcollect) > 0) {
 
-    foreach ($fieldcollect as $key => $temp_ent); {
+    foreach ($fieldcollect as $key => $temp_ent)
+      ; {
       $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
       if (isset($poll_answer_image) && $poll_answer_image > 0) {
-       $poll_image_exist_class = 'poll-option-image';
-       }
+        $poll_image_exist_class = 'poll-option-image';
+      }
       else {
-       $poll_image_exist_class = '';
+        $poll_image_exist_class = '';
       }
     }
   }
-  
-  
-  
-  
+
+
+
+
   if (isset($related_nids) && !empty($related_nids) && count($related_nids) > 0) {
     $related_nodes = get_polls_related_story_nodes($related_nids);
   }
@@ -50,9 +51,9 @@ function itg_poll_get_all_current_poll() {
   $polls_info['related_nodes'] = $related_nodes;
   $polls_info['poll_banner_image'] = $poll_banner_image;
   $polls_info['title'] = $node->title;
-  $polls_info['updated'] =  t('Updated: ').date('M d Y H:i', $node->changed);
-  $polls_info['poll_image_exist_class'] =  $poll_image_exist_class;
- 
+  $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
+  $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
+
   return theme('itg_poll_list_all_forms', array('data' => $polls_info));
 }
 
@@ -104,7 +105,7 @@ function itg_poll_form_new($form, &$form_state, $nid) {
   $form["wrapper"] = array(
     "#markup" => "<div class='inline-messages-" . $nid . "'></div>",
   );
-   
+
   $node = node_load($nid);
 
   foreach ($node->field_poll_answer['und'] as $row) {

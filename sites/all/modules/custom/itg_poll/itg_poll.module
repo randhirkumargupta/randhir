@@ -221,7 +221,7 @@ function itg_poll_isCookies($nid) {
 
     $poll_array = explode('_', $_COOKIE['visitedPoll']);
 
-    if ($nid === $poll_array[1]) {
+    if ((int) $nid === (int) $poll_array[1]) {
       $is_cookies = 'yes';
     }
   }
@@ -761,6 +761,7 @@ function itg_poll_menu() {
  * @return array
  */
 function itg_active_polls_page() {
+
   if (!isset($_GET['poll_index']) && empty($_GET['poll_index'])) {
     drupal_goto('itg_active_polls', array(
       'query' => array(
@@ -838,8 +839,35 @@ function itg_poll_home_page_polls_select($nid) {
     $poll_banner_image = '';
   }
 
+  $poll_image_exist_class = '';
+
+  foreach ($node->field_poll_answer['und'] as $row) {
+    $item_id[] = $row['value']; // fieldcollection id
+  }
+  // instant or after complete
+
+  $fieldcollect = entity_load('field_collection_item', $item_id);
+  if (is_array($fieldcollect) && count($fieldcollect) > 0) {
+
+    foreach ($fieldcollect as $key => $temp_ent)
+      ; {
+      $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
+      if (isset($poll_answer_image) && $poll_answer_image > 0) {
+        $poll_image_exist_class = 'poll-option-image';
+      }
+      else {
+        $poll_image_exist_class = '';
+      }
+    }
+  }
+
+
   $polls_info['poll_banner_image'] = $poll_banner_image;
   $polls_info['nid'] = $nid;
+  $polls_info['title'] = $node->title;
+  $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
+  $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
+
   return theme('itg_poll_homepage_forms', array('data' => $polls_info));
 }
 
@@ -877,19 +905,18 @@ function itg_poll_form_home_page($form, &$form_state, $nid) {
         $poll_answer[$key] = isset($poll_image) ? $poll_image : '';
       }
       else {
-        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<br /><span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
+       // $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<br /><span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
+        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text):'';
       }
     }
   }
 
-  $form["poll_title"] = array(
-    "#markup" => "<div class='poll-title-wrapper'><h2>" . t($node->title) . "</h2></div>",
-  );
-
-
-  $form["poll_updated"] = array(
-    "#markup" => "<div class='poll-updated-wrapper'>Updated " . date('M d Y H:i', $node->changed) . "</div>",
-  );
+//  $form["poll_title"] = array(
+//    "#markup" => "<div class='poll-title-wrapper'><h2>" . t($node->title) . "</h2></div>",
+//  );
+//  $form["poll_updated"] = array(
+//    "#markup" => "<div class='poll-updated-wrapper'>Updated " . date('M d Y H:i', $node->changed) . "</div>",
+//  );
 
 
   $form['pole_answer'] = array(
