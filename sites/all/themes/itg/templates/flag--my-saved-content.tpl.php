@@ -57,7 +57,7 @@
       $flag_icon = '<i class="fa fa-bookmark"></i>';
       break;
     case 'photogallery':
-      $flag_text = 'I am yes';
+      $flag_text = '';
       $flag_icon = '<i class="fa fa-bookmark"></i>';
       break;
     case 'videogallery':

@@ -274,3 +274,23 @@ function itg_personalization_flag_text($nid) {
   return $itg_result;
 }
 
+/**
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_views_pre_render(&$view) { 
+  if ($view->name == 'personalization_saved_content' && $view->current_display == 'block_6') {    
+    foreach ($view->result as $key => $value) {
+      if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {        
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Pending';
+      }
+      if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {        
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Reject';
+      }
+      if ($view->result[$key]->node_status == '0' && $view->result[$key]->field_field_story_source_type[0]['raw']['value'] == '1') {        
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Approve';
+      }
+    }
+  }
+}
