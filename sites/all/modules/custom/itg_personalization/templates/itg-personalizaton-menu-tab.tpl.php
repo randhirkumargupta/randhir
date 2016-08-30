@@ -9,7 +9,14 @@
 <ul class="personal-menu-tab">    
   <li class="saved-items">   
   <?php 
-    echo l(t('Saved Items')  , 'personalization/saved-items');
+    if ($arg[1] == 'saved-items' && isset($arg[2])) {
+      echo l(t('Saved Items')  , 'personalization/saved-items', 
+          array('attributes' => array('class' => array('active'))));
+    }
+    else {
+      echo l(t('Saved Items')  , 'personalization/saved-items');
+    }
+    
   ?>  
   </li>
   <li class="my-content">

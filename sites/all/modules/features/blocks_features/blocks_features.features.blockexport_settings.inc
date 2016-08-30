@@ -7770,7 +7770,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -7809,7 +7810,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -7918,7 +7920,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -8083,7 +8086,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -8248,7 +8252,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -8413,7 +8418,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -8578,7 +8584,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -10899,7 +10906,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -11022,7 +11030,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -11289,7 +11298,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -11412,7 +11422,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -11651,7 +11662,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -11774,7 +11786,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -12041,7 +12054,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -12164,7 +12178,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -12431,7 +12446,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -12554,7 +12570,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -12821,7 +12838,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -12944,7 +12962,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -13211,7 +13230,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -13334,7 +13354,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => 1,
 );
@@ -15757,7 +15778,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => -1,
 );
@@ -15782,7 +15804,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => -1,
 );
@@ -15807,7 +15830,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => -1,
 );
@@ -15832,7 +15856,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => -1,
 );
@@ -15857,7 +15882,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => -1,
 );
@@ -15882,7 +15908,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => -1,
 );
@@ -15907,7 +15934,8 @@ personalization/saved-items
 personalization/saved-items/all
 personalization/saved-items/articles
 personalization/saved-items/videos
-personalization/saved-items/photogalleries',
+personalization/saved-items/photogalleries
+personalization/my-content',
   'title' => '',
   'cache' => -1,
 );
@@ -16071,7 +16099,7 @@ personalization/saved-items/photogalleries',
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'personalization',
+  'pages' => 'personalization/my-content',
   'title' => '',
   'cache' => 8,
 );
@@ -16223,10 +16251,10 @@ personalization/saved-items',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => 'personalization',
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
   'title' => '',
   'cache' => 8,
 );
@@ -16237,10 +16265,10 @@ personalization/saved-items',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => 'personalization',
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
   'title' => '',
   'cache' => 8,
 );
@@ -16251,10 +16279,10 @@ personalization/saved-items',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => 'personalization',
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
   'title' => '',
   'cache' => 8,
 );
@@ -16265,10 +16293,10 @@ personalization/saved-items',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => 'personalization',
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
   'title' => '',
   'cache' => 8,
 );
@@ -16279,10 +16307,10 @@ personalization/saved-items',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => 'personalization',
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
   'title' => '',
   'cache' => 8,
 );
@@ -16293,10 +16321,10 @@ personalization/saved-items',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => 'personalization',
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
   'title' => '',
   'cache' => 8,
 );
@@ -17555,6 +17583,104 @@ personalization/saved-items',
   'pages' => '',
   'title' => '',
   'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1218,
+  'module' => 'views',
+  'delta' => '7a788d5fc14ed02cf09fe6aa1d609c28',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'personalization',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1219,
+  'module' => 'views',
+  'delta' => '7a788d5fc14ed02cf09fe6aa1d609c28',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1220,
+  'module' => 'views',
+  'delta' => '7a788d5fc14ed02cf09fe6aa1d609c28',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1221,
+  'module' => 'views',
+  'delta' => '7a788d5fc14ed02cf09fe6aa1d609c28',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1222,
+  'module' => 'views',
+  'delta' => '7a788d5fc14ed02cf09fe6aa1d609c28',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1223,
+  'module' => 'views',
+  'delta' => '7a788d5fc14ed02cf09fe6aa1d609c28',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1224,
+  'module' => 'views',
+  'delta' => '7a788d5fc14ed02cf09fe6aa1d609c28',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
+  'title' => '<none>',
+  'cache' => 1,
 );
   $export['block_custom'][] = array(
   'bid' => 1,
