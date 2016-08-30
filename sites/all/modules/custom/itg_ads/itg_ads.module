@@ -36,8 +36,8 @@ function itg_ads_block_view($delta = '') {
   
   switch ($delta) {
     case 'ad_right_sidebar_1':      
-      //$page_name = 'Rest';
-      //$data['itg_ad'] = get_ad_script($page_name);      
+      $page_name = 'Rest';
+      $data['itg_ad'] = get_ad_script($page_name);      
       $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
       break;
     
