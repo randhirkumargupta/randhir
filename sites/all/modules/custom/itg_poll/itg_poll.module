@@ -1017,7 +1017,7 @@ function itg_poll_query_poll_landing_past_poll_alter(QueryAlterableInterface $qu
   $query->leftJoin('field_data_field_poll_end_date', 'o', 'node.nid = o.entity_id');
   $or = db_or();
   $db_and = db_and();
-  $or->condition('node.status', 0, '=');
+  //$or->condition('node.status', 0, '=');
   $db_and->isNotNull('o.field_poll_end_date_value');
   $db_and->condition('o.field_poll_end_date_value', $cur_date, '<');
   $or->condition($db_and);
