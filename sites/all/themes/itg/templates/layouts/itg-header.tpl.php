@@ -1,5 +1,6 @@
 <div class="header-ads mhide">
-    <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">
+ <!--   <img src="<?php //print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
+     <?php  print ($data['itg_top']['200*200_home_header']); ?>
 </div>                               
 <div class="container top-nav">                  
     <div class="social-nav mhide">

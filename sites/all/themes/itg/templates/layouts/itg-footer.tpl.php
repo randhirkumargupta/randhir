@@ -19,7 +19,8 @@
 <section class="footer-toggle">
  <section class="footer-mid mhide">
         <div class="container">
-         <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">
+<!--         <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">-->
+        <?php  print ($data['itg_top']['150*150_home_footer']); ?>
         </div>
  </section>
    <section class="footer-bottom">
