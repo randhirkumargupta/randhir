@@ -141,7 +141,7 @@ function features_for_notification_views_default_views() {
   $handler->display->display_options['fields']['field_ntf_select_device']['table'] = 'field_data_field_ntf_select_device';
   $handler->display->display_options['fields']['field_ntf_select_device']['field'] = 'field_ntf_select_device';
   $handler->display->display_options['fields']['field_ntf_select_device']['label'] = 'Device';
-  /* Field: Content: Schedule */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
