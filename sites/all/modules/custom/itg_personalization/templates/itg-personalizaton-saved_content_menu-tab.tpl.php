@@ -5,9 +5,18 @@
  *   Template file for personalized saved content. 
  */
 ?>
+<?php $arg = arg(); ?>
 <ul class="saved-item-tab">
-    <li class="active">
-      <?php echo l(t('All')  , 'personalization/saved-items/all'); ?>
+    <li>
+      <?php 
+        if ($arg[1] == 'saved-items' && !isset($arg[2])) {
+          echo l(t('All')  , 'personalization/saved-items/all',
+              array('attributes' => array('class' => array('active'))));
+        }
+        else {
+          echo l(t('All')  , 'personalization/saved-items/all');
+        }
+      ?>      
     </li>
     <li>
       <?php echo l(t('Articles')  , 'personalization/saved-items/articles'); ?>  

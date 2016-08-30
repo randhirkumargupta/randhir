@@ -107,10 +107,13 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="personal-details">
 <div class="personal-pic">[field_story_extra_large_image]</div>
 <div class="personal-caption">[field_story_category]</div>
-<div class="personal-action">[ops] <a href="#" class="personal-share"></a></div>
+<div class="personal-action">[ops] <a href="#" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i></a></div>
 </div>
 [title]';
+  $handler->display->display_options['fields']['nothing']['element_type'] = '0';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -199,7 +202,8 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="personal-details">
 <div class="personal-pic">[field_story_extra_large_image]</div>
 <div class="personal-caption">[field_story_category]</div>
-<div class="personal-action">[ops] <a href="#" class="personal-share"></a></div>
+<div class="personal-action">[ops] <a href="#" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i>
+</a></div>
 </div>
 [title]';
   $handler->display->display_options['fields']['nothing']['element_type'] = '0';
@@ -406,19 +410,21 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['fields']['created']['label'] = 'Submit Date';
   $handler->display->display_options['fields']['created']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Source type */
+  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
+  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Status';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
   $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = '';
+  $handler->display->display_options['fields']['status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['status']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['status']['not'] = 0;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -426,12 +432,7 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'ugc' => 'ugc',
   );
-  /* Filter criterion: User: Current */
-  $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
-  $handler->display->display_options['filters']['uid_current']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
-  $handler->display->display_options['filters']['uid_current']['relationship'] = 'uid';
-  $handler->display->display_options['filters']['uid_current']['value'] = '1';
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $export['personalization_saved_content'] = $view;
 
   return $export;
