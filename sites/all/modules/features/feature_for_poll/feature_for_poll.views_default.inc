@@ -102,6 +102,9 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_tags'] = array(
+    0 => 'poll_landing_past_poll',
+  );
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
@@ -193,13 +196,6 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -207,12 +203,6 @@ function feature_for_poll_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'poll' => 'poll',
   );
-  /* Filter criterion: Content: End Date (field_poll_end_date) */
-  $handler->display->display_options['filters']['field_poll_end_date_value']['id'] = 'field_poll_end_date_value';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['table'] = 'field_data_field_poll_end_date';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['field'] = 'field_poll_end_date_value';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['operator'] = '>';
-  $handler->display->display_options['filters']['field_poll_end_date_value']['default_date'] = 'now';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
