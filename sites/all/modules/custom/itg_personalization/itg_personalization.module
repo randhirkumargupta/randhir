@@ -64,6 +64,12 @@ function itg_personalization_menu() {
     'access callback' => TRUE,    
     'type' => MENU_NORMAL_ITEM,
   );
+  $items['personalization/my-content'] = array(
+    'title' => t('Personalization - My Contents'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
   $items['itg-saved-content/%'] = array(    
     'page callback' => '_personalized_saved_content',
     'access arguments' => array('access content'),
@@ -200,8 +206,7 @@ function itg_personalization_block_view($delta = '') {
  * {@inheritdoc}.
  */
 function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
-  $arg = arg();
-  
+  $arg = arg();   
   if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
     // Hide user name field.
     $form['field_user_name']['#prefix'] = '<div style="display: none;">';
@@ -246,6 +251,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     );    
     // Change placeholder of ugc type field.
     $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');
+    
     unset($form['field_ugc_ctype']['und']['#title']);    
   }
 }
@@ -267,3 +273,4 @@ function itg_personalization_flag_text($nid) {
   
   return $itg_result;
 }
+

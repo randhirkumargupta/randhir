@@ -62,12 +62,11 @@ function features_for_notification_field_group_info() {
     'children' => array(
       0 => 'body',
       1 => 'field_cm_redirection_url',
-      2 => 'field_survey_start_date',
-      3 => 'field_ntf_select_device',
-      4 => 'field_ntf_assign_story',
-      5 => 'field_news_cid',
-      6 => 'field_cm_display_title',
-      7 => 'title',
+      2 => 'field_ntf_select_device',
+      3 => 'field_ntf_assign_story',
+      4 => 'field_news_cid',
+      5 => 'field_ntf_schedule',
+      6 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
