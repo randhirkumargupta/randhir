@@ -168,7 +168,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
  * @return array $form
  */
 function itg_common_add_js_top_btn($form, &$form_state) {
-    if (isset($form['#node']) || $form_id == 'taxonomy_form_term') {
+    global $theme;
+    if ((isset($form['#node']) || $form_id == 'taxonomy_form_term') && $theme=='itgadmin') {
         drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_addbtn.js', array('type' => 'file', 'scope' => 'footer'));
     }
     return $form;
