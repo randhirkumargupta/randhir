@@ -848,13 +848,13 @@ function itg_poll_home_page_polls_select($nid) {
 
   $fieldcollect = entity_load('field_collection_item', $item_id);
   if (is_array($fieldcollect) && count($fieldcollect) > 0) {
-    $poll_answer_image = isset($fieldcollect[0]->field_poll_answer_image[LANGUAGE_NONE]) ? $fieldcollect[0]->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
-    if (isset($poll_answer_image) && $poll_answer_image > 0) {
-      $poll_image_exist_class = 'poll-option-image';
-    }
-    else {
-      $poll_image_exist_class = '';
-    }
+      $poll_answer_image = isset($fieldcollect[0]->field_poll_answer_image[LANGUAGE_NONE]) ? $fieldcollect[0]->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
+      if (isset($poll_answer_image) && $poll_answer_image > 0) {
+        $poll_image_exist_class = 'poll-option-image';
+      }
+      else {
+        $poll_image_exist_class = '';
+      }
   }
 
 
@@ -901,8 +901,8 @@ function itg_poll_form_home_page($form, &$form_state, $nid) {
         $poll_answer[$key] = isset($poll_image) ? $poll_image : '';
       }
       else {
-        // $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<br /><span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
-        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) : '';
+       // $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<br /><span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
+        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text):'';
       }
     }
   }
