@@ -64,6 +64,12 @@ function itg_personalization_menu() {
     'access callback' => TRUE,    
     'type' => MENU_NORMAL_ITEM,
   );
+  $items['personalization/my-content'] = array(
+    'title' => t('Personalization - My Contents'),    
+    'page callback' => 'itg_personalization_home_page',
+    'access callback' => TRUE,    
+    'type' => MENU_NORMAL_ITEM,
+  );
   $items['itg-saved-content/%'] = array(    
     'page callback' => '_personalized_saved_content',
     'access arguments' => array('access content'),
@@ -200,8 +206,7 @@ function itg_personalization_block_view($delta = '') {
  * {@inheritdoc}.
  */
 function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
-  $arg = arg();
-  
+  $arg = arg();   
   if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
     // Hide user name field.
     $form['field_user_name']['#prefix'] = '<div style="display: none;">';
@@ -246,6 +251,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     );    
     // Change placeholder of ugc type field.
     $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');
+    
     unset($form['field_ugc_ctype']['und']['#title']);    
   }
 }
@@ -266,4 +272,25 @@ function itg_personalization_flag_text($nid) {
   $itg_result = $itg_query->execute()->fetchField();
   
   return $itg_result;
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}.
+ */
+function itg_personalization_views_pre_render(&$view) { 
+  if ($view->name == 'personalization_saved_content' && $view->current_display == 'block_6') {    
+    foreach ($view->result as $key => $value) {
+      if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {        
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Pending';
+      }
+      if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {        
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Reject';
+      }
+      if ($view->result[$key]->node_status == '0' && $view->result[$key]->field_field_story_source_type[0]['raw']['value'] == '1') {        
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Approve';
+      }
+    }
+  }
 }

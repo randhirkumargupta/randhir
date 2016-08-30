@@ -544,6 +544,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #8d8d8d;
   font-family: 'FontAwesome';
 }
+.personal-menu-tab li a.active, .personal-menu-tab li a:hover {
+  background-color: #fff;
+}
 .personal-menu-tab li.saved-items a:before {
   content: '\f02e';
 }
@@ -561,9 +564,6 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .personal-menu-tab li.edit-profile a:before {
   content: '\f040';
-}
-.personal-menu-tab li.active a, .personal-menu-tab li:hover a {
-  background-color: #fff;
 }
 .personal-menu-tab li .ajax-progress-throbber {
   position: absolute;
@@ -590,17 +590,17 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #515151;
   font: 400 15px/18px Roboto;
 }
+.saved-item-tab li a.active, .saved-item-tab li a:hover {
+  border-top-color: #bb3330;
+  border-radius: 5px 5px 0 0;
+  background-color: #fff;
+  color: #b70c09;
+}
 .saved-item-tab li:first-child a {
   border-left: 1px solid #f1f1f1;
 }
 .saved-item-tab li:last-child a {
   border-right: 1px solid #f1f1f1;
-}
-.saved-item-tab li.active a, .saved-item-tab li:hover a {
-  border-top-color: #bb3330;
-  border-radius: 5px 5px 0 0;
-  background-color: #fff;
-  color: #b70c09;
 }
 .saved-item-tab li .ajax-progress-throbber {
   position: absolute;
@@ -614,6 +614,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 
 .personal-list {
   list-style: none;
+}
+.personal-list > li {
+  padding-bottom: 30px;
+  padding-top: 30px;
 }
 .personal-list > li .personal-details {
   position: relative;
@@ -645,18 +649,61 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .personal-list > li .personal-details .personal-action {
   display: none;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   z-index: 9;
 }
+.personal-list > li .personal-details .personal-action .personal-share, .personal-list > li .personal-details .personal-action .flag-wrapper {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  bottom: 10px;
+  left: 60px;
+  border: 1px solid #323232;
+  border-radius: 50%;
+  text-align: center;
+}
+.personal-list > li .personal-details .personal-action .personal-share .fa, .personal-list > li .personal-details .personal-action .flag-wrapper .fa {
+  font-size: 22px;
+  line-height: 38px;
+}
+.personal-list > li .personal-details .personal-action .flag-wrapper {
+  left: 10px;
+}
+.personal-list > li .personal-details .personal-action .flag-wrapper a.flag {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+.personal-list > li .personal-details .personal-action .flag-wrapper a.flag:after {
+  content: '\f00d';
+  display: inline-block;
+  font: 22px/38px FontAwesome;
+}
+.personal-list > li .personal-details .personal-action .flag-wrapper .flag-throbber {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: -25px;
+}
+.personal-list > li .personal-details .personal-action .flag-wrapper .flag-message {
+  top: -25px;
+}
 .personal-list > li > a {
+  display: block;
+  height: 65px;
+  overflow: hidden;
   font-size: 20px;
   line-height: 24px;
   color: #323232;
   padding-top: 15px;
+}
+.personal-list > li:hover .personal-action {
+  display: block;
 }
 
 /* End of Personalization CSS */
