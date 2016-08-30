@@ -3843,3 +3843,141 @@ footer .footer-copyright {
 }
 
 /*CSS End breadcrumbs ITG */
+/* CSS For Program Page */
+.programe-container .program-row {
+  overflow: hidden;
+  padding: 10px;
+}
+.programe-container .program-row .pic {
+  float: left;
+  margin-right: 10px;
+}
+.programe-container .program-row .program-right {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.programe-container .program-row {
+  background-color: #f5f5f5;
+}
+.programe-container .program-row .programe-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #33363b;
+}
+.programe-container .program-row .programe-timing {
+  font-size: 12px;
+  font-weight: 400;
+  color: #8a8a8a;
+}
+.programe-container .program-row .description-timing {
+  font-size: 14px;
+  font-weight: 400;
+  color: #33363b;
+}
+.programe-container .heading {
+  position: relative;
+  padding: 10px 0;
+}
+.programe-container .heading h3 {
+  background: #fff none repeat scroll 0 0;
+  color: #969696;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  padding-right: 10px;
+  position: relative;
+  text-transform: uppercase;
+  vertical-align: middle;
+  z-index: 9;
+}
+.programe-container .heading:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 2px;
+  background-color: #ddd;
+}
+
+.view-programme-content .view-content {
+  margin: 0 -15px;
+}
+.view-programme-content .view-content .programe-list {
+  list-style: none;
+  overflow: hidden;
+}
+.view-programme-content .view-content .programe-list > .tile-wrapper {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  float: left;
+  overflow: hidden;
+  height: 242px;
+}
+.view-programme-content .view-content .programe-list > .tile-wrapper .tile figure {
+  width: 170px;
+  height: 127px;
+  overflow: hidden;
+  position: relative;
+}
+.view-programme-content .view-content .programe-list > .tile-wrapper .tile figure img {
+  width: 170px;
+  height: 127px;
+}
+.view-programme-content .view-content .programe-list > .tile-wrapper .tile figure figcaption {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 12px;
+  font-family: Roboto;
+}
+.view-programme-content .view-content .programe-list > .tile-wrapper .tile figure figcaption .fa {
+  font-size: 14px;
+  margin-right: 5px;
+}
+.view-programme-content .view-content .programe-list > .tile-wrapper .tile .posted-on {
+  display: block;
+  font-size: 12px;
+  color: #b1b1b1;
+  padding: 8px 0 5px;
+  font-family: "Roboto Slab";
+}
+.view-programme-content .view-content .programe-list > .tile-wrapper .tile .description {
+  color: #494949;
+  font-family: "Roboto Slab";
+}
+.view-programme-content .view-content .programe-list .more {
+  text-align: right;
+  position: relative;
+  margin: 30px 0 50px;
+}
+.view-programme-content .view-content .programe-list .more:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 2px;
+  background-color: #ddd;
+}
+.view-programme-content .view-content .programe-list .more a {
+  background-color: #fff;
+  color: #323232;
+  display: inline-block;
+  font: 700 14px/18px Roboto;
+  padding-left: 10px;
+  position: relative;
+  vertical-align: top;
+  z-index: 9;
+}
