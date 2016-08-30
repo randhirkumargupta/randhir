@@ -6,8 +6,10 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
 }
 ?>
 <div class="header-ads mhide">
-    <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">
-</div> 
+ <!--   <img src="<?php //print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
+     <?php  print ($data['itg_top']['200*200_home_header']); ?>
+</div>                               
+
 <div class="head-live-tv desktop-hide">
     <ul>
         <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
@@ -16,6 +18,7 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
     <div class="globle-search">
      <input class="search-text" placeholder="Type here" type="text" value=""></div>
 </div>
+
 <div class="container top-nav">                  
     <div class="social-nav mhide">
         <ul class="social-nav mhide">
