@@ -56,7 +56,7 @@ function features_for_survey_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Date Settings',
-    'weight' => '3',
+    'weight' => '2',
     'children' => array(
       0 => 'field_survey_end_date',
       1 => 'field_survey_start_date',
@@ -91,7 +91,7 @@ function features_for_survey_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Meta Tags',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'metatags',
       1 => 'path',
@@ -150,6 +150,39 @@ function features_for_survey_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_survey_related_content|node|survey|form';
+  $field_group->group_name = 'group_survey_related_content';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'survey';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Related Content',
+    'weight' => '4',
+    'children' => array(
+      0 => 'field_common_related_content',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Related Content',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'survey-related-content',
+        'classes' => 'group-survey-related-content field-group-div',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_survey_related_content|node|survey|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_survey_section|node|survey|form';
   $field_group->group_name = 'group_survey_section';
   $field_group->entity_type = 'node';
@@ -158,7 +191,7 @@ function features_for_survey_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Categorization',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'field_survey_category',
     ),
@@ -187,6 +220,7 @@ function features_for_survey_field_group_info() {
   t('Categorization');
   t('Date Settings');
   t('Meta Tags');
+  t('Related Content');
 
   return $field_groups;
 }
