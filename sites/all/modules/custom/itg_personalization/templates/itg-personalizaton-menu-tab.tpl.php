@@ -5,6 +5,7 @@
  *   Menu tab for personalized content. 
  */
 ?>
+<?php $arg = arg(); ?>
 <ul class="personal-menu-tab">    
   <li class="saved-items">   
   <?php 
@@ -14,8 +15,7 @@
   <li class="my-content">
       
   <?php 
-    echo l(t('My Content')  , 'itg-saved-content/my-content/nojs/', 
-    array('attributes' => array('class' => array('use-ajax'))));
+    echo l(t('My Content')  , 'personalization/my-content');
   ?>
   </li>
   <li class="my-Preferences"><a href="javascript:;"><?php print t('My Preferences'); ?></a></li>
