@@ -273,3 +273,4 @@ function itg_personalization_flag_text($nid) {
   
   return $itg_result;
 }
+
