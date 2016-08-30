@@ -21,6 +21,12 @@ function itg_image_croping_menu() {
         'access arguments' => array('access content'),
     );
 
+    $items['change_image_aspect_ratio'] = array(
+        'page callback' => 'itg_image_croping_change_image_aspect_ratio', // load the croper according to aspect ratio!.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+
     $items['savecropedimage'] = array(
         'page callback' => 'itg_image_croping_crop_image', // save croped image by form the image dataurl (base64).
         'type' => MENU_CALLBACK,
@@ -75,9 +81,54 @@ function itg_image_croping_menu() {
 /**
  * This function use for load the croper according to size!
  */
+function itg_image_croping_change_image_aspect_ratio() {
+
+
+    $image_id = $_POST['imageId'];
+    $field_name = $_POST['field_id'];
+    if ($_POST['original_height'] && $_POST['origninal_width']) {
+        $image_height = trim($_POST['original_height']);
+        $image_width = trim($_POST['origninal_width']);
+    }
+    $aspect_ratio = trim($_POST['aspect_ratio']);
+
+    $file = file_load($image_id);
+    if (empty($file)) {
+        drupal_set_message(t('This image is not valid!'));
+    }
+    $imagedata = base64_encode(file_get_contents($file->uri));
+    $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, $aspect_ratio));
+
+    drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
+  type' => 'file', 'scope' => 'content'));
+    $aspect_ratio_data = itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $image_width);
+    print theme('image_repository', array('data' => $file,
+        'field_name' => $field_name,
+        'image_height' => $aspect_ratio_data['height'],
+        'image_width' => $aspect_ratio_data['width'],
+        'form' => $drupal_form));
+}
+
+/**
+ * This function use for get new height and width by aspect ratio
+ * 
+ */
+function itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $image_width) {
+    $ratioarray = explode(':', $aspect_ratio);
+    $ratio = $ratioarray[0] / $ratioarray[1];
+    $new_height = $image_width / $ratio;
+    $new_width = $image_height * $ratio;
+    $returndata['height'] = $new_height;
+    $returndata['width'] = $new_width;
+    return $returndata;
+}
+
+/**
+ * This function use for load the croper according to size!
+ */
 function itg_image_croping_ajax_make_ajax() {
-    $image_height = 350;  //set the inital height of croper
-    $image_width = 500;    //set the inital width of croper 
+    $image_height = 500;  //set the inital height of croper
+    $image_width = 750;    //set the inital width of croper 
 
     $image_id = $_POST['imageId'];
     $field_name = $_POST['field_id'];
@@ -90,7 +141,7 @@ function itg_image_croping_ajax_make_ajax() {
         drupal_set_message(t('This image is not valid!'));
     }
     $imagedata = base64_encode(file_get_contents($file->uri));
-    $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata));
+    $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width));
 
     drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
   type' => 'file', 'scope' => 'content'));
@@ -273,7 +324,9 @@ function itg_image_croping_crop_image() {
 
     $image_data_url = $_POST['image_data'];
     $image_name = $_POST['field_name'];
-
+    if ($image_name == "") {
+        $image_name = time();
+    }
     $image_data_url = str_replace('data:image/png;base64,', '', $image_data_url);
 
     $imagedata = base64_decode($image_data_url);
@@ -292,7 +345,19 @@ function itg_image_croping_crop_image() {
  * Implements hook_form().
  * {@inheritdoc}
  */
-function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata) {
+function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata, $image_height, $image_width, $aspectratio = null) {
+
+    $orignal_ratio = number_format($image_width / $image_height, 2);
+    $orignal_ratio = $orignal_ratio . ':1';
+    $form['aspect ratio'] = array(
+        '#title' => t('Aspect ratio'),
+        '#type' => 'select',
+        '#description' => 'Select aspect ratio.',
+        '#default_value' => $aspectratio,
+        '#options' => array($orignal_ratio => $orignal_ratio, '1:1' => '1:1', '2:1' => '2:1', '4:3' => '4:3', '16:9' => '16:9'),
+        '#attributes' => array('id' => 'select-aspect-ratio'),
+    );
+
 
     $form['cropit_image_zoom_input'] = array(
         '#type' => 'markup',
@@ -309,6 +374,21 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         '#attributes' => array('class' => 'hidden-image-data', 'id' => 'data_first_image', 'name' => 'image-data'),
     );
 
+    $form['data_field_name'] = array(
+        '#type' => 'hidden',
+        '#value' => ($field_name) ? $field_name : '',
+        '#attributes' => array('id' => 'data_field_name', 'name' => 'data_field_name'),
+    );
+    $form['image_original_hight'] = array(
+        '#type' => 'hidden',
+        '#value' => ($image_height) ? $image_height : '',
+        '#attributes' => array('id' => 'image_original_hight', 'name' => 'image_original_hight'),
+    );
+    $form['image_original_width'] = array(
+        '#type' => 'hidden',
+        '#value' => ($image_width) ? $image_width : '',
+        '#attributes' => array('id' => 'image_original_width', 'name' => 'image_original_width'),
+    );
     $form['data_field_name'] = array(
         '#type' => 'hidden',
         '#value' => ($field_name) ? $field_name : '',

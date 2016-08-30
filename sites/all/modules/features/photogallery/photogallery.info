@@ -48,6 +48,7 @@ features[field_instance][] = field_collection_item-field_gallery_image-field_pho
 features[field_instance][] = node-photogallery-field_bulk_media_upload
 features[field_instance][] = node-photogallery-field_common_audio
 features[field_instance][] = node-photogallery-field_common_audio_file
+features[field_instance][] = node-photogallery-field_common_related_content
 features[field_instance][] = node-photogallery-field_credit_name
 features[field_instance][] = node-photogallery-field_credit_to_all
 features[field_instance][] = node-photogallery-field_featured

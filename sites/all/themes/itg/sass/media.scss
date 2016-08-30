@@ -27,6 +27,9 @@
     .desktop-hide{
         display: none;   
     }
+	header{
+		margin-bottom: 30px;
+	}
     #block-itg-layout-manager-header-block{
         height:220px;        
         .header-top{           
@@ -199,6 +202,27 @@
            @include float(right);
         }
     }
+	.itg-layout-container .itg-h450-section .droppable{
+    height: 450px;
+}
+.itg-layout-container .itg-h321-section .droppable, 
+.itg-layout-container .top-colum-3 .itg-widget-parent .droppable{
+    height: 321px;
+}
+.itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
+    height: 673px;
+}
+.itg-layout-container .top-colum-3 .droppable{
+    height: 276px;
+}
+.itg-common-section{
+    .droppable{
+        height: 408px;
+    }
+}
+.itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
+	margin-bottom:0px;
+}
 /*End CSS Top Block Grid Home Page*/  
 /*Start CSS Big New Home page*/
     .big-news{        
@@ -224,7 +248,14 @@
             padding: 5px;
         }
     }
-/*End CSS Featured-news Home Page*/   
+/*End CSS Featured-news Home Page*/  
+/*CSS Start story section */
+.section-ordering{    
+    h3{        
+        @include font(20px);
+    }    
+}
+/*CSS End story section */
 /*Start Dont miss Home page css*/
 .dont-miss{    
    /*padding: 20px 0px 0px 10px;*/
@@ -260,6 +291,7 @@
                 @include float(none);
             } 
             .profile-detail {
+                margin:0;
                 ul {
                     li{ 
                         @include float(none);
@@ -270,7 +302,13 @@
                         }
                     }
                 }    
-            }   
+            }
+            ul.social-links{                
+                li{
+                    @include float(left);               
+                    padding:10px 0;
+                }
+            }
         }
         .briefcase{
             margin-top: 50px;

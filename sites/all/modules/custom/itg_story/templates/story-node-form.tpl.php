@@ -52,6 +52,8 @@
 <div id="Configuration">
     <h2 class="story-title"><?php print t('Configuration'); ?></h2>
     <?php print drupal_render($form['field_story_configurations']); ?>
+    <?php print drupal_render($form['field_poll_start_date']); ?>
+    <?php print drupal_render($form['field_story_tv_time']); ?>
     <?php print drupal_render($form['field_story_featured_name']); ?>
     <?php print drupal_render($form['field_story_syndication']); ?>
     <?php print drupal_render($form['field_story_comment_question']); ?>

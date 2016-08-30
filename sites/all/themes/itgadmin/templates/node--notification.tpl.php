@@ -84,7 +84,7 @@
                     foreach ($node->field_ntf_select_device[LANGUAGE_NONE] as $device_arr) {
                       $device_name .= $device_arr['value'] . ', ';
                     }
-                    print rtrim($device_name, ", ");
+                    print ucwords(rtrim($device_name, ", "));
  
                  ?>
                 </div>
@@ -92,7 +92,7 @@
 
               <div class="field">
                 <div class="field-label">Schedule: </div>
-                <div class="field-items"><?php print date('d/m/Y h:i', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])); ?></div>
+                <div class="field-items"><?php print date('d/m/Y h:i', strtotime($node->field_ntf_schedule[LANGUAGE_NONE][0]['value'])); ?></div>
               </div>
 
               <div class="field">

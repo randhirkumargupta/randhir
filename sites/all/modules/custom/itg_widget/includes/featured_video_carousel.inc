@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * home page feature ordering and reordering
@@ -19,14 +20,20 @@ function itg_widget_featured_video_carousel_data($info, $slider_type) {
     // condition to validate
     if (!empty($view_name) && !empty($page)) {
       $query = db_select('draggableviews_structure', 'dv_s');
+      $query->leftJoin('node', 'n', 'n.nid=dv_s.entity_id');
       $query->fields('dv_s', array('entity_id'));
       $query->condition('dv_s.view_name', $view_name);
       $query->condition('dv_s.view_display', $page);
       $query->orderBy('dv_s.weight', 'ASC');
+      $query->condition('n.status', '1');
       // only top 5 nodes are required as per requirement
       // TODO: Add values to Variables and create config file. Widget settings.
-      $query->range(0, 5); 
+      $query->range(0, 5);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      if (empty($result)) {
+        $nodequeue_name = isset($info['nodequeue']) ? $info['nodequeue'] : "";
+        $result = itg_widget_nodes_from_nodequeue($nodequeue_name);
+      }
       $actual_result = itg_widget_featured_video_carousel_data_fetch($result, $slider_type);
       return $actual_result;
     }
@@ -39,7 +46,6 @@ function itg_widget_featured_video_carousel_data($info, $slider_type) {
   }
   return $data;
 }
-
 
 /**
  * @param array $result

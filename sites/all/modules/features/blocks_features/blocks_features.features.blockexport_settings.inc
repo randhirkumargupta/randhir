@@ -7746,9 +7746,7 @@ draft-manage-astro',
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -7773,16 +7771,14 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -7877,16 +7873,14 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8037,16 +8031,14 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8197,16 +8189,14 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8357,16 +8347,14 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -8517,16 +8505,14 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -10833,16 +10819,14 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -10951,16 +10935,14 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11220,9 +11202,7 @@ node/*/edit',
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11338,9 +11318,7 @@ tv-show/*',
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11565,16 +11543,14 @@ node/*/edit',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11683,16 +11659,14 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -11945,16 +11919,14 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12063,16 +12035,14 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12325,16 +12295,14 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12443,16 +12411,14 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12705,16 +12671,14 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -12823,16 +12787,14 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -13085,16 +13047,14 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -13203,16 +13163,14 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => 1,
 );
@@ -14637,7 +14595,7 @@ node/*/edit',
   'region' => 'header',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'node/*/edit',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -14718,10 +14676,10 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'node/*/edit',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -14802,10 +14760,10 @@ node/*/edit',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'node/*/edit',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -14886,10 +14844,10 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'node/*/edit',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -14984,10 +14942,10 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'node/*/edit',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -15082,10 +15040,10 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'node/*/edit',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -15180,10 +15138,10 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'node/*/edit',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -15621,16 +15579,14 @@ node/*/edit',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => -1,
 );
@@ -15648,9 +15604,7 @@ tv-show/*',
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => -1,
 );
@@ -15661,16 +15615,14 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => -1,
 );
@@ -15681,16 +15633,14 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => -1,
 );
@@ -15701,16 +15651,14 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => -1,
 );
@@ -15721,16 +15669,14 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => -1,
 );
@@ -15741,16 +15687,14 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
 user/*
 taxonomy/term/*
 <front>
-snappost
-tv-show
-tv-show/*',
+snappost',
   'title' => '',
   'cache' => -1,
 );
@@ -16330,7 +16274,7 @@ tv-show/*',
 );
   $export['block_custom'][] = array(
   'bid' => 1,
-  'body' => '<div class="ad-display-block"><p>Ad</p></div>
+  'body' => '<div class="ad-display-block">Ad</div>
 ',
   'info' => 'Ad display block for second side bar',
   'format' => 'full_html',
@@ -16463,11 +16407,6 @@ tv-show/*',
   $export['block_node_type'][] = array(
   'module' => 'itg_videogallery',
   'delta' => 'videogallery_tab_form_block',
-  'type' => 'videogallery',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'views',
-  'delta' => 'video_landing_header-block_1',
   'type' => 'videogallery',
 );
   $export['block_node_type'][] = array(
