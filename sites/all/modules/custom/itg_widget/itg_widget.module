@@ -1128,3 +1128,17 @@ function draggable_views_nodes_for_widgets($view_name, $page, $expire_date, $ran
     return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   }
 }
+
+/**
+ * {@inheritdoc}
+ */
+function itg_widget_block_view_alter(&$data, $block) {
+  $item = menu_get_item();
+  if ($block->delta == 'programmes-rhs_programmes') {
+    $page_argument = $item['page_arguments'];
+    // if current page is not anchor's listing page as well as occupation is not acnhor then make block's data empty array
+    if (($item['path'] != 'anchors-list' && arg(0) != 'node') || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node')) {
+      $data['content'] = array();
+    }
+  }
+}
