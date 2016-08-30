@@ -587,8 +587,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 <?php
   $widget_name1 = 'itg-block-'.($count_widget+1);
   $widget_name2 = 'itg-block-'.($count_widget+2);
-  $widget_name3 = 'itg-block-'.($count_widget+3);
-  
+  $widget_name3 = 'itg-block-'.($count_widget+3);  
 ?>
 
 <?php if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$widget_name2]['widget_name']) || isset($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
@@ -676,9 +675,9 @@ if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$wid
                 </div>               
             </div>          
         </div>
-<?php //if (EXTRA_SECTION_CARDS != $count) {?>
-<!--  <div><a  href="javascript:void(0)" class="content-section-widget" id="<?php print $count+1;?>">Add more+</a></div>-->
-<?php //} ?>
+<?php if ((EXTRA_SECTION_CARDS != $count) && ($count != $last_val)) {?>
+<!--  <div><a  href="javascript:void(0)" class="content-section-widget" id="<?php print $count+1;?>">Add more1+</a></div>-->
+<?php } ?>
     </div>
 
 <?php } ?>
@@ -686,19 +685,31 @@ if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$wid
 <?php $count_widget = 3 + $count_widget; ?>
 <?php } ?>
 
-<?php 
+<?php
+
  if (isset($last_val) && $last_val > 0) {
-   $last_val = $last_val;
+   $last_val = $last_val+1;
  }else {
    $last_val = 1;
- }
+ }?>
+<!--<div><a href="javascript:void(0)" class="content-section-widget" id="<?php echo $last_val;?>">Add more+</a></div>-->
+<?php
+$ft = '#'.$last_val;
+ 
 drupal_add_js('jQuery(document).ready(function() {
-             jQuery(".content-section-widget").hide();
-             jQuery("#"'+$last_val+').show();                         
+             jQuery(".content-section-widget").hide(); 
+             jQuery("'.$ft.'").show();
       });', array('type' => 'inline', 'scope' => 'footer'));
+
+for($i=1; $i<=$last_val;$i++ ){
+  drupal_add_js('jQuery(document).ready(function() {
+              
+             jQuery("#content-section-widget-'.$i.'").show();
+      });', array('type' => 'inline', 'scope' => 'footer'));
+}
 ?>
 
-<!--<div><a href="javascript:void(0)" class="content-section-widget" id="<?php echo $last_val;?>">Add more+</a></div>-->
+
 
 
 

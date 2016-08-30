@@ -295,7 +295,7 @@
                 })
                 
                 $('.delete-block-widget').click(function() {
-                    return false;
+                    //return false;
                     var block_id = $(this).attr("delete-block-id");                    
                     var section_name = $('#edit-section').val();
                     var template_name = $('#edit-template-name').val();
