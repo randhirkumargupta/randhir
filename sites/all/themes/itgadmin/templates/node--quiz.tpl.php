@@ -56,6 +56,8 @@
                 <div class="field-label">Quiz Type:</div>
                 <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $node->field_quiz_type[LANGUAGE_NONE][0]['value'])); ?></div>
               </div>
+              
+              <?php if($node->field_quiz_type[LANGUAGE_NONE][0]['value'] == 'immediate') { ?>
               <div class="field">
                 <div class="field-label">Immediate Result:</div>
                 <div class="field-items">
@@ -69,6 +71,22 @@
                   ?>
                 </div>
               </div>
+              <?php } else { ?>
+              <div class="field">
+                <div class="field-label">Winners:</div>
+                <div class="field-items">
+                  <?php
+                  if (empty($node->field_quiz_winners[LANGUAGE_NONE][0]['value'])) {
+                    echo 'None';
+                  }
+                  else {
+                    echo $node->field_quiz_winners[LANGUAGE_NONE][0]['value'];
+                  }
+                  ?>
+                </div>
+              </div>
+              
+              <?php } ?>
               <div class="field">
                 <div class="field-label">Quiz Scoring Type:</div>
                 <div class="field-items"><?php echo ucwords($node->field_quiz_scoring_type[LANGUAGE_NONE][0]['value']); ?></div>
