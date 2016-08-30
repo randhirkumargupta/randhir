@@ -48,47 +48,49 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
              jQuery(".form-item-menu-enabled").hide();                         
       });', array('type' => 'inline', 'scope' => 'footer'));
 
-        if ($form_id == 'menu_edit_item') {
-            // Add JS to hide extra element of menu forms
-            drupal_add_js('jQuery(document).ready(function() {                  
-             jQuery(".form-item-description").hide();
-             jQuery(".form-type-checkbox").hide();
-             jQuery(".form-item-expanded").hide();
-             jQuery(".form-item-parent").hide();
-             jQuery(".form-item-weight").hide();             
+    
+      if ($form_id == 'menu_edit_item') {      
+          if ($form['original_item']['#value']['menu_name'] == 'menu-itg-main-menu-header') {
+            $form['description']['#type'] = 'checkbox';
+            $form['description']['#title'] = 'Sponser';
+          }      
+          // Add JS to hide extra element of menu forms
+          drupal_add_js('jQuery(document).ready(function() {                  
+                          // jQuery(".form-item-description").hide();
+                          // jQuery(".form-type-checkbox").hide();
+                          jQuery(".form-item-expanded").hide();
+                          jQuery(".form-item-parent").hide();
+                          jQuery(".form-item-weight").hide();             
+          });', array('type' => 'inline', 'scope' => 'footer'));
+      }
+    
+      // hide source relation and type field from other users 
+      if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form') {
+         $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
+         $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
+
+         // add common hidden type field
+         $type = $form['type']['#value'];
+         $form['ntype'] = array(
+             '#title' => t('Ntype'),
+             '#type' => 'hidden',
+             '#id' => 'ntype',
+             '#description' => t(''),
+             '#value' => $type,
+         );
+     }
+
+      // Add JS to hide Advance seeting from all content type forms
+      drupal_add_js('jQuery(document).ready(function() {                  
+         jQuery("#edit-metatags-und-advanced").hide();
+         jQuery(".form-item-metatags-und-abstract-value").hide();
       });', array('type' => 'inline', 'scope' => 'footer'));
-        }
-        // hide source relation and type field from other users 
-        if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form'
-        ) {
-            $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
-            $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
-
-            // add common hidden type field
-            $type = $form['type']['#value'];
-
-            $form['ntype'] = array(
-                '#title' => t('Ntype'),
-                '#type' => 'hidden',
-                '#id' => 'ntype',
-                '#description' => t(''),
-                '#value' => $type,
-            );
-        }
-
-
-
-        // Add JS to hide Advance seeting from all content type forms
-        drupal_add_js('jQuery(document).ready(function() {                  
-           jQuery("#edit-metatags-und-advanced").hide();
-           jQuery(".form-item-metatags-und-abstract-value").hide();
-    });', array('type' => 'inline', 'scope' => 'footer'));
     }
 
     // Set title on Preview
     if (arg(1) == 'add' && isset($form['#node']->op) && $form['#node']->op == 'Preview') {
-        $content_type_name = get_content_type_name($form['#node']->type);
-        drupal_set_title('Create ' . $content_type_name);
+      $content_type_name = get_content_type_name($form['#node']->type);
+      drupal_set_title('Create ' . $content_type_name);
     }
 
     // code to change page title on node edit
@@ -103,45 +105,40 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
 
     if ($form_id != 'ask_an_expert_node_form') {
-        if (isset($form['title']['#title'])) {
-            $form['title']['#description'] = $form['title']['#title'];
-        }
+      if (isset($form['title']['#title'])) {
+        $form['title']['#description'] = $form['title']['#title'];
+      }
     }
 
     // Button name change some content
-    if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))
-    ) {
-        $form['actions']['itg_custom_button'] = array('#type' => 'submit',
-            '#value' => t('Save as Draft'),
-            '#submit' => array('node_form_submit'));
-        $form['actions']['submit']['#value'] = t('Publish');
+    if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
+      $form['actions']['itg_custom_button'] = array('#type' => 'submit',
+          '#value' => t('Save as Draft'),
+          '#submit' => array('node_form_submit'));
+      $form['actions']['submit']['#value'] = t('Publish');
     }
 
     // Extra meta tags element hide from form
-    if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form'
-    ) {
-        if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
-            $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
-        }
-        $form['#after_build'][] = 'itg_common_cancel_button';
+    if ($form_id == 'mega_review_critic_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form') {
+      if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+        $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+      }
+      $form['#after_build'][] = 'itg_common_cancel_button';
     }
 
     // Auto Generate image according photo gallery
-    if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'podcast_node_form'
-    ) {
-
+    if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'podcast_node_form') {
         $form['field_story_extra_large_image']['#suffix'] = '<a class="img-crt button" href="javascript:;">Generate Image</a><span class="generate-image-error error"></span>';
         if (isset($form_state['build_info']['args'][0]->field_story_extra_large_image)) {
-            $cover_id = $form_state['build_info']['args'][0]->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
-            $file = file_load($cover_id);
-            $settings['large_node_uri'] = $file->uri;
-            drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
+          $cover_id = $form_state['build_info']['args'][0]->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
+          $file = file_load($cover_id);
+          $settings['large_node_uri'] = $file->uri;
+          drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
         }
 
         $form['#after_build'][] = 'itg_common_image_generate';
     }
-    if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form'
-    ) {
+    if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form') {
 
         $form['field_story_extra_large_image']['#suffix'] = '<a class="img-crt button" href="javascript:;">Generate Image</a><span class="generate-image-error error"></span>';
 
@@ -169,7 +166,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_common_add_js_top_btn($form, &$form_state) {
     global $theme;
-    if (((isset($form['#node']) || $form['#form_id'] == 'taxonomy_form_term') && $theme == 'itgadmin') && $form['#form_id'] != 'node_delete_confirm') {
+    $ignore_in_form=array('node_delete_confirm', 'comment_node_blog_form');
+    $add_extraform=array('taxonomy_form_term', 'user_register_form');
+    if (((isset($form['#node']) || in_array($form['#form_id'],$add_extraform)) && $theme == 'itgadmin') && ! in_array($form['#form_id'], $ignore_in_form)) {
         drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_addbtn.js', array('type' => 'file', 'scope' => 'footer'));
     }
     return $form;

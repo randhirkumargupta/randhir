@@ -9,6 +9,7 @@
  * @return
  */
 function insert_layout_setting_ajax() {
+  
   global $user;  
   $arg = arg();
       
@@ -19,7 +20,7 @@ function insert_layout_setting_ajax() {
   $unpublish_tpl_id = $tpl_id_array[0];  
   
   // code for layout setting
-  if ($arg[1] == 'layout' || $arg[1] == 'title') {
+  if ($arg[1] == 'layout' || $arg[1] == 'title' || $arg[1] == 'widget_delete') {
     
     // insert layout tpl details
     if (empty($unpublish_tpl_id)) {        
@@ -87,6 +88,9 @@ function insert_layout_setting_ajax() {
         db_update('itg_layout_manager')
             ->fields(array('block_title' => $_GET['block_title']))
             ->condition('id', $layout_id)->execute();
+      } else if ($arg[1] == 'widget_delete') {
+        //p($layout_id);
+        db_delete('itg_layout_manager')->condition('id', $layout_id)->execute();
       } else {
         $block_title = $_GET['block_title'];
         $widget = explode('#', $_GET['widget_name']);
@@ -104,7 +108,7 @@ function insert_layout_setting_ajax() {
       $widget = explode('#', $_GET['widget_name']);
     }
     
-    $output = get_itg_widget($widget[0], $widget[1]);
+    $output = get_itg_widget($widget[0], $widget[1]);   
     
     print $output;
   }

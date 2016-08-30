@@ -943,8 +943,8 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="container">
-    
-<div class="row video-landing-header">
+ <div class ="video-landing-header">
+<div class="row">
     <div class="col-md-12">
     <h2>[title]</h2>
 </div>
@@ -968,7 +968,8 @@ allowfullscreen></iframe>';
 <div class="ads"></div>
     </div>
 </div>
-    </div>';
+    </div>
+</div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
 
   /* Display: video landing page header scroll */
