@@ -87,6 +87,9 @@ function get_itg_widget($widget_name, $filter_url = NULL) {
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
     return create_setion_widgets($filter_url);
   }
+  elseif (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
+    return create_setion_widget2($filter_url);
+  }
   elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {   
     if (isset($widget_name) && ($widget_name == 'photo_list_of_category')) {
       $block = 'block';
@@ -235,34 +238,69 @@ function display_section_widgets_list($section_name, $template_name, $widget_typ
   $itg_query = db_select('itg_section_widgets_list', 'layout_tpl');
   $itg_query->fields('layout_tpl', array('id','category_name', 'category_id'));
   $itg_query->condition('layout_tpl.template_section_name', $section_name);
-  $itg_query->condition('layout_tpl.template_name', $template_name);  
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  $itg_query->condition('layout_tpl.widget_type', $widget_type);
   $itg_result = $itg_query->execute()->fetchAll();
   
-  $widget_name = $widget_type;
-  
-  $content = '<ul id="templates-widgets-section" class="no-bullet pd-10 templates-widgets">';
-  
-  foreach ($itg_result as $row) {    
-    $content .= '<li id="'.$row->category_name.'" data-widget="'.$widget_name.'#'.$row->category_id.'">'
-            . '<span>'.$row->category_name.' ('.$row->category_id.')</span>'
-            . '<span><a class="layout-section-delete" href="javascript:void(0)" data-widget="'.$row->id.'">X</a></span>'
-            . '</li>';
-  }
-  
-  $content .= '</ul>';
+  $content = category_widget_list($itg_result, $widget_type);
   
   return $content;
 }
 
+
+
+/**
+ * Display section widgets list
+ * @param string $section_name
+ * @param string $template_name 
+ * @return string 
+ */
+function category_widget_list($itg_result, $widget_name) {
+  
+  if ($widget_name == 'section_widget2_wise_order') {
+    $content = '<ul id="templates-widget2-section" class="no-bullet pd-10 templates-widgets">';
+
+    foreach ($itg_result as $row) {    
+      $content .= '<li id="'.$row->category_name.'" data-widget="'.$widget_name.'#'.$row->category_id.'">'
+              . '<span>'.$row->category_name.' ('.$row->category_id.')</span>'
+              . '<span><a class="layout-section-widget2-delete" href="javascript:void(0)" data-widget="'.$row->id.'">X</a></span>'
+              . '</li>';
+    }
+
+    $content .= '</ul>';
+  }
+  else {
+    $content = '<ul id="templates-widgets-section" class="no-bullet pd-10 templates-widgets">';
+  
+    foreach ($itg_result as $row) {    
+      $content .= '<li id="'.$row->category_name.'" data-widget="'.$widget_name.'#'.$row->category_id.'">'
+              . '<span>'.$row->category_name.' ('.$row->category_id.')</span>'
+              . '<span><a class="layout-section-delete" href="javascript:void(0)" data-widget="'.$row->id.'">X</a></span>'
+              . '</li>';
+    }
+  
+    $content .= '</ul>';
+  }
+  
+  return $content;
+  
+}
+
+
+
 /**
  * Get section widgets id
+ * @param $cid
+ * @param $section
+ * @param $widget_type
  * @return int
  */
-function get_section_widgets_id($cid, $section) {
+function get_section_widgets_id($cid, $section, $widget_type) {
   $query = db_select('itg_section_widgets_list', 'section');
   $query->fields('section', array('id'));  
   $query->condition('category_id', $cid);
   $query->condition('template_section_name', $section);
+  $query->condition('widget_type', $widget_type);
   return $query->execute()->fetchField();
 }
 
@@ -301,7 +339,8 @@ function get_widgets_poll_list() {
 }
 
 /**
- * Get itg setion widgets 
+ * Get itg setion cards
+ * @param $section_id
  * @return array
  */
 function create_setion_widgets($section_id) {
@@ -318,6 +357,31 @@ function create_setion_widgets($section_id) {
   return theme("section_wise_ordering", array("data" => $data));
 }
 
+/**
+ * Get itg setion widgets
+ * @param $section_id
+ * @return array
+ */
+function create_setion_widget2($section_id) {
+  module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
+  // value is hardcoded need to be change for dyanamic functionality
+  $info['section'] = $section_id; // tid of section
+  $info['content_type'] = ''; // content type machine name
+  // view name which is stored in draggableviews_structure table
+  $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
+  //$block['subject'] = t('Section wise ordering from custom table');
+  $data = itg_widget_section_wise_ordering_for_rhs_from_custom_table($info);
+  
+  return theme("rhs_section_wise_ordering", array("data" => $data));
+}
+
+/**
+ * Get get_first_category_of_media_widget
+ * @param $section
+ * @param $template
+ * @param $widget_name
+ * @return array
+ */
 function get_first_category_of_media_widget($section, $template, $widget_name) {
   $query = db_select('itg_layout_tpl', 'ilt');
   $query->condition('ilt.status', 1, '=');

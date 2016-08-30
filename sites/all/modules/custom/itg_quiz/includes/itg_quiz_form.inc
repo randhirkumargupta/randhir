@@ -374,8 +374,8 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
         $correct_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
         $incorrect_answer = $total_ques_attempt - $correct_answer;
 
-        $output = '<div class = "quiz-contest-result"> <h2 style="font-size:16px; margin: 10px 0px 5px 0px">Quiz Result:</h2>
-        <div class = "quiz-contest-result"><strong>Total Question  attempted:</strong> ' . $total_ques_attempt . '</div>
+        $output = '<div class = "quiz-contest-result"> <h2 style="font-size:16px; font-weight:bold; margin: 10px 0px 5px 0px">Quiz Result:</h2>
+        <div class = "quiz-contest-result"><strong>Total Question  Attempted:</strong> ' . $total_ques_attempt . '</div>
         <div class = "quiz-contest-result"><strong>Correct Answer:</strong> ' . $correct_answer . '</div>
         <div class = "quiz-contest-result"><strong>Incorrect Answer:</strong> ' . $incorrect_answer . '</div>
         <div class = "quiz-contest-result"><strong>Total Score:</strong> ' . $total_score . '</div>';

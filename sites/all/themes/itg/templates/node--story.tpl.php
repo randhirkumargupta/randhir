@@ -29,6 +29,7 @@
                       ?>
                   </div>
               <div class="profile-detail">
+                  <a href="../../../../../../html/itgcms/sites/all/themes/itg/templates/flag--my-saved-content.tpl.php"></a>
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
                       <?php  $twitter_handle = $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
@@ -53,7 +54,9 @@
                       <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
                       <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
                       <li><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
-                      <li><a href="#"><i class="fa fa-bookmark"></i> READ LATER</a></li>
+                      <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
+                      <li><?php print $read_later; ?></li>
+                      
                   </ul>
                   </div>
                   </div>

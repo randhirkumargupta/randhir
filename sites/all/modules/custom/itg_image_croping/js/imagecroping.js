@@ -1,6 +1,3 @@
-/*
- * @file imagecroping.js
- */
 
 /*
  * @file imagecroping.js
