@@ -166,7 +166,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_common_add_js_top_btn($form, &$form_state) {
     global $theme;
-    if (((isset($form['#node']) || $form['#form_id'] == 'taxonomy_form_term') && $theme == 'itgadmin') && $form['#form_id'] != 'node_delete_confirm') {
+    $ignore_in_form=array('node_delete_confirm', 'comment_node_blog_form');
+    $add_extraform=array('taxonomy_form_term', 'user_register_form', 'loyality_reward_points_configuration_form');
+    if (((isset($form['#node']) || in_array($form['#form_id'],$add_extraform)) && $theme == 'itgadmin') && ! in_array($form['#form_id'], $ignore_in_form)) {
         drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_addbtn.js', array('type' => 'file', 'scope' => 'footer'));
     }
     return $form;

@@ -275,9 +275,9 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
     if (!isset($filed_collection->field_images['und'])) {
       
       //$filed_collection->field_images['und'][0]['fid'] = $file_ids[$i];
-     // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_caption['und'][0]['value'] = $file_ids[$i]['filename'];
+    $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_caption['und'][0]['value'] = $file_ids[$i]['filename'];
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
-//      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['alt'] = $file_ids[$i]['filename'];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['alt'] = $file_ids[$i]['filename'];
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['title'] = $file_ids[$i]['filename'];
      // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_gallery_small_image['und'][0]['fid'] = $file_ids[$i]['fid'];   
       $i++;

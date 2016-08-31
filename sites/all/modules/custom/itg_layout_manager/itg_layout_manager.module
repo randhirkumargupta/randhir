@@ -141,13 +141,36 @@ function itg_layout_manager_block_view($delta = '') {
   
   switch ($delta) {
     case 'header_block':
+       
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
-      $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');      
+      $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
+      
+      $is_fron_page = drupal_is_front_page();      
+      if (!empty($is_fron_page)) {          
+        $page_name = 'Home';
+      }
+      else {
+       $page_name = 'Rest';   
+      }
+      
+      $data['itg_top'] = get_ad_script($page_name);      
+
       $block['content'] = theme('header_block', array('data' => $data));
       break;
     
-    case 'footer_block':            
+    case 'footer_block':  
+        
       $data = get_itg_footer_menu();
+      $is_fron_page = drupal_is_front_page();      
+      if (!empty($is_fron_page)) {          
+        $page_name = 'Home';
+      }
+      else {
+       $page_name = 'Rest';   
+      }
+      
+      $data['itg_top'] = get_ad_script($page_name);  
+      //$data['itg_top'] = get_ad_script('Home');
       $block['content'] = theme('footer_block', array('data' => $data));
       break;
           

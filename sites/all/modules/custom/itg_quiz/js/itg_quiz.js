@@ -44,16 +44,20 @@
       //Immediate and contest type radio button treatment
       if ($("input[name='field_quiz_type[und]']:checked").val() === 'immediate') {
         $('#edit-field-quiz-immediate-result').show();
+        $('#edit-field-quiz-winners').hide();
       } else {
         $('#edit-field-quiz-immediate-result').hide();
+        $('#edit-field-quiz-winners').show();
       }
 
       $("input[name='field_quiz_type[und]']").on("click", function() {
         var check_radio_name = $(this).val();
         if (check_radio_name == 'immediate') {
           $('#edit-field-quiz-immediate-result').show();
+          $('#edit-field-quiz-winners').hide();
         } else {
           $('#edit-field-quiz-immediate-result').hide();
+          $('#edit-field-quiz-winners').show();
         }
       });
       
