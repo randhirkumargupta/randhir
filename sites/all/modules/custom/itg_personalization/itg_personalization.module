@@ -278,7 +278,7 @@ function itg_personalization_flag_text($nid) {
  * Implements hook_views_pre_render().
  *
  * {@inheritdoc}.
- */
+ */ 
 function itg_personalization_views_pre_render(&$view) { 
   if ($view->name == 'personalization_saved_content' && $view->current_display == 'block_6') {    
     foreach ($view->result as $key => $value) {
