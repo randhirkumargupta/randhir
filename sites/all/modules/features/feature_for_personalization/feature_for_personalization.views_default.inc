@@ -433,6 +433,12 @@ function feature_for_personalization_views_default_views() {
     'ugc' => 'ugc',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: User: Current */
+  $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
+  $handler->display->display_options['filters']['uid_current']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
+  $handler->display->display_options['filters']['uid_current']['relationship'] = 'uid';
+  $handler->display->display_options['filters']['uid_current']['value'] = '1';
   $export['personalization_saved_content'] = $view;
 
   return $export;
