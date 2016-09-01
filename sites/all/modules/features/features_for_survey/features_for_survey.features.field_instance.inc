@@ -303,6 +303,48 @@ function features_for_survey_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-survey-field_common_related_content'.
+  $field_instances['node-survey-field_common_related_content'] = array(
+    'bundle' => 'survey',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_common_related_content',
+    'label' => 'Related Content',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-survey-field_survey_add_questions'.
   $field_instances['node-survey-field_survey_add_questions'] = array(
     'bundle' => 'survey',
@@ -603,6 +645,7 @@ function features_for_survey_field_default_field_instances() {
   t('Please select end date.');
   t('Please select the start date.');
   t('Question');
+  t('Related Content');
   t('Section');
   t('Skip');
   t('Survey End Date');

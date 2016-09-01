@@ -4,9 +4,8 @@
  */
 
 (function($) {
-  
             // code use for make primary category
-            jQuery('.add-to-dropbox').mousedown(function()
+            jQuery('.add-to-dropbox').live('mousedown',function()
             {
                 var selectvalue = jQuery('.selects > .form-select:last option:selected').val();
                 var comptext = "";

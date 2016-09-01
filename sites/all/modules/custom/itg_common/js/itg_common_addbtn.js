@@ -24,12 +24,16 @@
         var id_to_trigger = jQuery(this).attr('data-id');
         jQuery('#' + id_to_trigger).trigger('click');
     });
-    jQuery('.top-actions .published').click(function() {
+    jQuery('.top-actions .button').click(function() {
         var id_to_trigger = jQuery(this).attr('data-id');
         jQuery('#' + id_to_trigger).trigger('click');
     });
 
     }
+    
+  jQuery( document ).on('ajaxComplete',function( event, xhr, settings ) {
+  var html=jQuery('.image-fullname').find('a').attr('target', '_blank');
+});
 
 })(jQuery, Drupal, this, this.document);
 

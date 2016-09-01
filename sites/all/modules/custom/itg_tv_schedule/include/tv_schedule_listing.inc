@@ -89,6 +89,16 @@ function tv_schedule_listing() {
             $out[$keys]['day'] = $document["day"];
             $out[$keys]['program'] = $document["program"];
             
+            if(!empty($search_date)) {
+              $ass_search_date = $search_date;
+            }
+            else
+            {
+              $ass_search_date = date('Y/m/d');
+            }
+            $node_detail = node_load(tv_story_list($ass_search_date, $document['time']));
+            $out[$keys]['story_attach'] = l(t($node_detail->title), 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'blank')));
+            
             $keys++;
 
             //counter required for current time slot display.

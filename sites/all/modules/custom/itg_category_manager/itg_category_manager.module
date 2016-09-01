@@ -1016,7 +1016,7 @@ jQuery("#edit-field-primary-category-und-0-value").val(jQuery("#primary-category
     if (in_array($form_id, $form_names_use_primay_field)) {
       $form['field_primary_cat_data'] = array('#title' => t('Select Primary'), '#type' => 'select', '#validated' => TRUE, '#attributes' => array('id' => 'primary-category-data'), '#options' => array('' => t('Select')));
     }
-    drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', 'file');
+    drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', array('type'=>'file','scope'=>'footer'));
   }
 }
 

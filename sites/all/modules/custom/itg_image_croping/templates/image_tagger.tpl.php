@@ -24,7 +24,6 @@ list($width, $height) = getimagesize($url);
     <input type="hidden" value="<?php echo $height; ?>" id="imcheigth">
     <input type="hidden" value="<?php echo $width; ?>" id="imcwidth">
 </div>
-<script type="text/javascript" src="<?php echo base_path() . 'sites/all/modules/custom/itg_image_croping/js/jquery.min.js'; ?>"></script>
 <?php drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_fieldmapping.js', array('
   type' => 'file', 'scope' => 'content'));  
   

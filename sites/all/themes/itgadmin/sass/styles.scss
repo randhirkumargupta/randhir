@@ -6196,6 +6196,7 @@ div.node{
       .form-item{
         float: left;
         margin-right: 10px;
+        max-width: 110px;
         label{padding-top: 0;}
       }
       #edit-submit-searchimage{
@@ -6530,4 +6531,15 @@ div.node{
   position: absolute;
   top: 0;
   width: 100%;
+}
+#itg-image-croping-crop-form{
+  .form-item-aspect-ratio{
+    @extend .dib;
+    @extend .full;
+    @extend .vtop;
+    .form-select{
+      float: left;
+      width: 120px;
+    }
+  }
 }
