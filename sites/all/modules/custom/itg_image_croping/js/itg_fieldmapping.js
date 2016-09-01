@@ -226,8 +226,9 @@
         } else {
             parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
             parent.jQuery(document).ajaxComplete(function(event, request, settings) {
-
+               
                 if (settings.url.indexOf(field_name) >= 0) {
+                    
                     var image_alttext = jQuery('#img_alttext').val();
                     var image_title = jQuery('#img_title').val();
                     if(image_alttext=="")
@@ -240,16 +241,17 @@
                        var imagetitle=jQuery('#imgtag img').attr('src');
                         var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length); 
                     }
-
+              setTimeout(function(){
                     parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
                     parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
                     var captionid = getbame + '[field_image_caption][und][0][value]';
                     captionid = captionid.replace('[field_images][und][0]', "");
                     parent.jQuery('[name="' + captionid + '"]').val(image_title);
-
-                }
-                hideloader();
+                    hideloader();
                 parent.jQuery.colorbox.close();
+                }, 500);
+                }
+               
 
             });
         }
