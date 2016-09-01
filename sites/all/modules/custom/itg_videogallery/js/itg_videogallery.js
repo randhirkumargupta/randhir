@@ -7,7 +7,7 @@
     Drupal.behaviors.itg_videogallery = {
         attach: function(context, settings) {
             var uid = settings.itg_videogallery.settings.uid;
-            jQuery('#edit-path').show();    
+            jQuery('#edit-path').show();
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
             if (uid != 1) {
@@ -218,6 +218,16 @@
             });
 
             // end primary category js
+
+            // This code is written for restricting past date access for expiry date in video gallery content type   
+            try {
+                jQuery('#videogallery-node-form #edit-field-story-expiry-date-und-0-value-datepicker-popup-1').datepicker({
+                    minDate: 0
+                });
+            } catch (e) {
+
+            }
+
         }
 
     };
