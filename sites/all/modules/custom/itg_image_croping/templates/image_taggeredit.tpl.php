@@ -5,7 +5,7 @@
        
         var counter = 0;
         var mouseX = 0;
-        var mouseYw = 0;
+        var mouseY = 0;
         var field_namwwe='<?php echo $field_name;?>';
       
 
@@ -24,10 +24,11 @@
             name = jQuery('#tagname').val();
              tagurl = jQuery('#tagurl').val();
            
-    
+
             var img = jQuery('#imgtag').find('img');
             if(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)){
        jQuery('.web-error').hide();
+           showloader();
          jQuery.ajax({
                     url: Drupal.settings.basePath + 'savetags',
                     type: 'post',
@@ -87,6 +88,7 @@
             var img = jQuery('#imgtag').find('img');
             if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
                 jQuery('.web-error').hide();
+                    showloader();
                 jQuery.ajax({
                     url: Drupal.settings.basePath + 'edittags',
                     type: 'post',
@@ -120,6 +122,7 @@
             id = jQuery(this).parent().attr("id");
             id=id.split('_');
             id=id[1];
+            showloader();
             // Remove the tag
             jQuery.ajax({
                 type: "POST",
@@ -161,6 +164,7 @@
            id = jQuery(this).parent().attr("id");
             id=id.split('_');
             id=id[1];
+            showloader();
             // Remove the tag
             $.ajax({
                 type: "POST",
@@ -195,6 +199,7 @@
                          var objdata = jQuery.parseJSON(data);
                      jQuery('#taglist ol').html(objdata.lists);
                      jQuery('#tagbox').html(objdata.boxes);
+                     hideloader();
                     },
                     error: function(xhr, desc, err) {
                     console.log(xhr);
@@ -205,7 +210,14 @@
 
         }
       
-
+function showloader()
+{
+    jQuery('#loader-data').show();
+}
+function hideloader()
+{
+    jQuery('#loader-data').hide();
+}
  
 </script> 
 
@@ -352,6 +364,7 @@
     
 </div>
    
+<div id="loader-data" style="display: none"><img class="widget-loader" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 
 
 
