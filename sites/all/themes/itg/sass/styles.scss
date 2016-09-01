@@ -214,7 +214,7 @@ header{
         @include pos(relative);
     }
     .header-ads{
-        text-align: center;
+        text-align: center;        
     }
     .login-link{
         text-align: right;
@@ -3186,3 +3186,174 @@ footer{
       }
   }
 }
+/*css start archive-story */
+.view-archive-story{
+    .view-content{        
+        @include listing-with-image(itg-search-list,left,10px,search-pic,search-detail);
+        ul{
+            @extend .list-none;
+        }        
+        li.itg-search-list{
+            padding: 25px 0;
+        }
+        .search-pic{
+            width: 144px;
+            height: 107px;            
+            overflow: hidden;
+            &:empty{
+                display: none;
+            }
+        }
+        .search-detail{
+            h2{
+                @include font(15px,20px);
+                margin-bottom:10px;
+                a{
+                    @include font(15px,20px,$itg-font-medium);   
+                }
+            }
+            p{
+                display: none;
+            }
+        }
+        .social-share{
+            @include display-inline;
+            @include social-share;
+        }
+        .other-info{
+            @include itg-font($itg-roboto);
+            @include font(12px);
+            color: #8f8f8f;
+            margin-top: 15px;
+        }
+    }
+    #archive-story-date-slider{
+        ul{
+            height:50px;
+            padding: 0 50px;
+            li{
+                text-align: center;
+                border-left:1px solid $border-color;                
+                a{
+                    @include font(16px);
+                    text-transform: uppercase;
+                    @include itg-font($itg-roboto); 
+                    display: block;
+                    height:50px;
+                    padding-top:5px;
+                }
+                &:hover{
+                    background: #f5f4f4;
+                }
+                &.active{
+                    a{
+                        background: #f5f4f4;
+                        color:#a00606;
+                    }
+                }
+            }
+        }
+    }
+    .attachment {
+        @include itg-font($itg-roboto);         
+        .count{
+            @include font(19px,22px,$itg-font-medium);            
+            color: #737373;                     
+            padding-bottom: 20px;
+            display: block;
+            span{
+                color: $red-color;
+            }
+        }
+        .search-menu{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            white-space: nowrap;
+            overflow-x: auto;
+            a{
+                padding: 0 10px;                                
+                @include display-inline;
+                color: #747474;                
+                text-transform: uppercase;
+                @include font(20px,24px,$itg-font-regular);
+                &:nth-child(1){
+                    padding-left: 0;
+                    border-left: 0;
+                }
+                &:hover, &.active{
+                    color: $red-color;
+                }
+            }
+        }
+    }
+    .item-list{
+        @include pager;
+    }
+    .archive-header{
+        @include clearfix;
+        border:1px solid $border-color;        
+        #archive-story-date-slider{
+            float: left;
+            width: 68%;
+        }
+        .archive-calender-custom{
+            float: right;
+            width: 32%;
+            text-align: right;
+            .views-exposed-form .views-exposed-widget{                
+                @include float(right);
+                @include pos(relative);
+                padding: 10px 1em 0 0;
+                input[type="text"]{
+                    background: url(../images/calender-icon.png) no-repeat center right;
+                }
+                .description{
+                    position: absolute;
+                    color: #989898;
+                    top: 18px;
+                    left: 10px;
+                    font-family: $itg-roboto;
+                    @include font(12px);
+                }
+            }
+        }
+    }
+    .slick-prev, .slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 50px;
+    height: 50px;    
+    padding: 0;
+    cursor: pointer;    
+    border: none;
+    outline: none;    
+    background: transparent;    
+}
+.slick-next {
+    right: 0px;
+}
+.slick-prev {
+    left: 0px;
+}
+.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {    
+    outline: none;
+}
+.slick-prev:before, .slick-next:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 20px;    
+    opacity: 1;
+    color: #c5c5c5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.slick-next::before {
+    content: "\f054";
+}
+.slick-prev::before {
+    content: "\f053";
+}
+}
+/*css End archive-story */
