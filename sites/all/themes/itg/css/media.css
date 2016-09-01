@@ -66,14 +66,14 @@
   }
 
   #block-itg-layout-manager-header-block {
-    height: 220px;
+    /*height:220px;*/
   }
   #block-itg-layout-manager-header-block .header-top {
     height: 163px;
   }
   #block-itg-layout-manager-header-block .logo {
     width: auto;
-    top: 100px;
+    top: -15px;
   }
   #block-itg-layout-manager-header-block .logo a {
     display: block;
@@ -418,6 +418,12 @@
     font-size: 1.0625rem;
     font-weight: 500;
   }
+  .story-section .social-list li {
+    width: auto;
+  }
+  .story-section .social-list li:nth-child(7) {
+    border-left: 1px solid #dddddd;
+  }
 
   .buzz-feedback .story-right {
     width: 100%;
@@ -488,6 +494,44 @@
   }
 
   /*End css ITG globle search result page*/
+  /*Archive story page*/
+  /*Archive story page End*/
+  .view-archive-story .view-content .search-pic {
+    width: 170px;
+    height: 127px;
+  }
+  .view-archive-story .view-content .search-detail h2 {
+    font-size: 22px;
+    font-size: 1.375rem;
+    line-height: 28px;
+    margin-top: -5px;
+  }
+  .view-archive-story .view-content .search-detail h2 a {
+    font-size: 22px;
+    font-size: 1.375rem;
+    line-height: 28px;
+  }
+  .view-archive-story .view-content .search-detail p {
+    display: block;
+  }
+
+  /*Start anchors listing css*/
+  .view-widget-anchors-listing .anchor-listing .pic {
+    width: 170px;
+  }
+  .view-widget-anchors-listing .anchor-listing .detail h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-size: 1.5rem;
+  }
+
+  /*End anchors listing css*/
+  /*CSS start sidebar */
+  .sidebars {
+    margin-top: 0px;
+  }
+
+  /*CSS end sidebar */
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1199px) {

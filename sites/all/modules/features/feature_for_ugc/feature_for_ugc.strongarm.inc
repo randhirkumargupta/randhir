@@ -93,7 +93,10 @@ function feature_for_ugc_strongarm() {
           'weight' => '5',
         ),
         'path' => array(
-          'weight' => '12',
+          'weight' => '13',
+        ),
+        'metatags' => array(
+          'weight' => '14',
         ),
       ),
       'display' => array(),

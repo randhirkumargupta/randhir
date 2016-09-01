@@ -31,13 +31,13 @@
 		margin-bottom: 30px;
 	}
     #block-itg-layout-manager-header-block{
-        height:220px;        
+        /*height:220px;*/
         .header-top{           
             height: 163px;
         }
         .logo{
             width: auto;
-            top: 100px;
+            top: -15px;
             a{
                 display: block;    
                 overflow: hidden;
@@ -358,6 +358,14 @@
             }
         }
     }
+    .social-list{
+        li{
+            width: auto;
+            &:nth-child(7){
+                border-left: 1px solid $border-color;
+            }
+        }
+    }
 }
 .buzz-feedback{
     .story-right{
@@ -447,8 +455,48 @@
 /*End css ITG globle search result page*/
 
 
-
-
+/*Archive story page*/
+/*Archive story page End*/
+.view-archive-story{
+.view-content{
+        .search-pic{
+            width: 170px;
+            height: 127px;
+        }
+        .search-detail{
+            h2{
+                @include font(22px,28px); 
+                margin-top:-5px;
+                a{
+                 @include font(22px,28px); 
+                }
+            }
+            p{
+               display: block; 
+            }
+        }
+    }
+}
+/*Start anchors listing css*/
+.view-widget-anchors-listing {
+    .anchor-listing {
+            .pic{
+                   width: 170px;
+            }
+            .detail{
+                h3{
+                    margin-bottom: 10px;
+                    @include font(24px);
+                }
+            }
+        }
+    }
+/*End anchors listing css*/
+/*CSS start sidebar */
+.sidebars{
+    margin-top: 0px;
+}
+/*CSS end sidebar */
 }
 /*End CSS Desktop version*/
 

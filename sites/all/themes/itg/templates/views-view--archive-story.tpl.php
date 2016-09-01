@@ -41,30 +41,30 @@
 
   <?php if ($exposed): ?>
    <!--start-->
-   <?php
-   $month = date('F');
-   $days = date('t');
-   $m = date('m');
-   $y = date('Y');
-   ?>
+     <?php
+     $month = date("m");
+     $day = date("d");
+     $year = date("Y");
+     ?>
+   <div class="archive-header">
     <div id="archive-story-date-slider">
                 <ul>
-                  <?php for($i=1; $i<=$days; $i++) { 
-                        $date = $y . '-' . $m . '-' . $i;
-                    ?>
-                       <li class="atleta"> <a href="<?php print $date; ?>">
+                  <?php for($i=30; $i>=1; $i--) { ?>
+                       <li class="atleta"> <a href="<?php print date('Y-m-d',mktime(0,0,0,$month,($day-$i),$year)); ?>">
       
-                                <h3><?php print $i; ?></h3>
-                                <?php print $month; ?>
+                                <span><?php echo date('d',mktime(0,0,0,$month,($day-$i),$year)); ?></span>
+                                <?php print date('M',mktime(0,0,0,$month,($day-$i),$year)); ?>
                        
                         </a></li>
                   <?php } ?>
                 </ul>
     </div>
-  <!--end start-->
-    <div class="view-filters">
-      <?php print $exposed; ?>
-    </div>
+   <div class="archive-calender-custom">
+       <?php print $exposed; ?>
+   </div>
+       </div>
+      
+  <!--end start-->    
   <?php endif; ?>
 
   <?php if ($attachment_before): ?>
