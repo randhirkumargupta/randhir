@@ -45,7 +45,7 @@ global $base_url;
     <div class="heading">
       <?php
       $episodes_text = $row['name'];
-      print t("<h3>Last episodes from " . $episodes_text . "</h3>");
+      print t("<h3>Latest episodes from " . $episodes_text . "</h3>");
       ?>
     </div>
     <?php print views_embed_view('programme_content', 'block', $row['tid']); ?>
