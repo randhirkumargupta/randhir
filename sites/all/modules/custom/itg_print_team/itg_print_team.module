@@ -462,7 +462,8 @@ function itg_print_team_form_after_build($form, &$form_state) {
 
   // Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
+  unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
   return $form;
 }
 
