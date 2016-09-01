@@ -42,21 +42,19 @@
   <?php if ($exposed): ?>
    <!--start-->
    <?php
-   $month = date('F');
-   $days = date('t');
-   $m = date('m');
-   $y = date('Y');
+   
+      $m= date("m");
+      $de= date("d");
+      $y= date("Y");
    ?>
    <div class="archive-header">
     <div id="archive-story-date-slider">
                 <ul>
-                  <?php for($i=1; $i<=$days; $i++) { 
-                        $date = $y . '-' . $m . '-' . $i;
-                    ?>
-                       <li class="atleta"> <a href="<?php print $date; ?>">
+                  <?php for($i=30; $i>=1; $i--) { ?>
+                       <li class="atleta"> <a href="<?php print date('Y-m-d',mktime(0,0,0,$m,($de-$i),$y)); ?>">
       
-                                <span><?php print $i; ?></span>
-                                <?php print $month; ?>
+                                <span><?php echo date('d',mktime(0,0,0,$m,($de-$i),$y)); ?></span>
+                                <?php print date('M',mktime(0,0,0,$m,($de-$i),$y)); ?>
                        
                         </a></li>
                   <?php } ?>
@@ -113,14 +111,3 @@
   <?php endif; ?>
 
 </div><?php /* class view */ ?>
-
-<script>
-    
-jQuery('#archive-story-date-slider ul').slick({
-  dots: false,
-  infinite: false,
-  speed: 300,
-  slidesToShow: 7,
-  slidesToScroll: 1,  
-});
-</script>
