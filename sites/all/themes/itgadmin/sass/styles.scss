@@ -6537,9 +6537,21 @@ div.node{
     @extend .dib;
     @extend .full;
     @extend .vtop;
+    padding: 0;
+    text-align: center;
+    label{
+      padding: 0;
+      @extend .dib;
+      @extend .vmid;
+      float: none;
+    }
     .form-select{
-      float: left;
-      width: 120px;
+      @extend .dib;
+      @extend .vmid;
+      width: 80px;
     }
   }
+}
+#edit-metatags-und-basic{
+  border: none;
 }
