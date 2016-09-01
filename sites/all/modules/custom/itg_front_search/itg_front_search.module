@@ -115,10 +115,14 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       '#title' => t('From'),
       '#date_format' => 'Y-m-d',
       '#date_year_range' => '-1:+1',
+      '#description' => '',
+      '#size' => 10,
       '#prefix' => '<div class="caln">',
       '#attributes' => array(
-        'readonly' => 'readonly'
+        'readonly' => 'readonly',
+        'placeholder' => t('Date')
       ),
+     '#suffix' => '</div>',
     );
   }
 }
@@ -192,19 +196,22 @@ function itg_front_search_views_pre_render(&$view) {
       $splittedsite = explode("/", $related_result->site);
       $related_result->site = strtoupper($splittedsite[3]);
     }
-
-    if (!empty($_GET['keyword'])) {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $_GET['keyword'] . ' "</span></span>';
-    }
-    else {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
-    }
+    
+    
 
     if ($view->name == "archive_story") {
       $bundle_name = array('Story' => 'Story', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery');
-      $search_url = 'archive-story';
+      $search_url = 'online-archive-story';
     }
     else {
+      
+      if (!empty($_GET['keyword'])) {
+        $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $_GET['keyword'] . ' "</span></span>';
+      }
+      else {
+        $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
+      }
+    
       $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
       $search_url = 'site-search';
     }
@@ -233,9 +240,7 @@ function itg_front_search_views_pre_render(&$view) {
 
     $front_search .='<div class="search-menu">' . $url . '</div>';
     $view->attachment_before = $front_search;
-    if ($view->name != "archive_story") {
-      $_GET = $get_var;
-    }
+    $_GET = $get_var;
   }
 }
 

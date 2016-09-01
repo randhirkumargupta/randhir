@@ -324,7 +324,7 @@ header {
 #block-itg-layout-manager-header-block .logo {
   width: 67px;
   position: absolute;
-  top: -10px;
+  top: -30px;
   left: 10px;
 }
 #block-itg-layout-manager-header-block .top-nav {
@@ -1814,6 +1814,27 @@ footer .footer-copyright {
   font-weight: 700;
   line-height: 30px;
 }
+.story-section .comment-mobile {
+  background: #1c1c1c;
+  margin: -15px -15px 20px;
+  font-family: "Roboto", sans-serif;
+}
+.story-section .comment-mobile ul {
+  text-align: right;
+}
+.story-section .comment-mobile ul li {
+  display: inline-block;
+  vertical-align: top;
+}
+.story-section .comment-mobile ul li a {
+  color: #989898;
+  padding: 10px;
+  display: block;
+  text-transform: uppercase;
+}
+.story-section .comment-mobile ul li a i {
+  font-size: 16px;
+}
 .story-section .story-left-section {
   margin: 0 -15px;
   zoom: 1;
@@ -2067,13 +2088,23 @@ footer .footer-copyright {
   font-size: 0.75rem;
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
+  zoom: 1;
+}
+.story-section .social-list:before, .story-section .social-list:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.story-section .social-list:after {
+  clear: both;
 }
 .story-section .social-list li {
-  display: inline-block;
-  vertical-align: top;
+  float: left;
   padding: 10px 16px 5px;
   text-align: center;
   border-left: 1px solid #dddddd;
+  width: 50%;
 }
 .story-section .social-list li a {
   color: #c0c0c0;
@@ -2100,6 +2131,7 @@ footer .footer-copyright {
 }
 .story-section .social-list li:nth-child(7) {
   text-align: left;
+  border-left: none;
 }
 .story-section .social-list li:nth-child(7) span {
   color: #4d4d4d;
@@ -2724,12 +2756,12 @@ footer .footer-copyright {
   border-bottom: 1px solid #dddddd;
 }
 .view-widget-anchors-listing .anchor-listing .pic {
-  width: 170px;
+  width: 140px;
 }
 .view-widget-anchors-listing .anchor-listing .detail h3 {
-  margin-bottom: 10px;
-  font-size: 24px;
-  font-size: 1.5rem;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
 }
 .view-widget-anchors-listing .anchor-listing .detail p {
@@ -2928,6 +2960,10 @@ footer .footer-copyright {
 
 /*End live block css*/
 /*Start css No result found side bar*/
+.sidebars {
+  margin-top: 40px;
+}
+
 .sidebars .block-itg-widget span.no-result-found {
   background: #f3f3f3;
   margin: 30px;

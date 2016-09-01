@@ -59,6 +59,14 @@ function itg_widget_menu() {
       'page callback' => 'itg_widget_anchor_autocomplete_id',
       'access arguments' => array('access content'),
   );
+  $items['node-list-title/autocomplete'] = array(
+      'page callback' => 'itg_widget_all_content_title',
+      'access arguments' => array('access content'),
+  );
+  $items['node-list-nid/autocomplete'] = array(
+      'page callback' => 'itg_widget_all_content_nid',
+      'access arguments' => array('access content'),
+  );
   $items['remove-extra-data'] = array(
       'page callback' => 'remove_extra_data',
       'access arguments' => array('access administrator'),
@@ -68,7 +76,35 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'access arguments' => array('access content'),
   );
+
+  $items['admin/settings/custom-variables'] = array(
+      'title' => 'Custom variables',
+      'description' => 'Custom variables settings page',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_widgets_custom_variables'),
+      'access arguments' => array('access administrator'),
+      'type' => MENU_NORMAL_ITEM,
+  );
+
   return $items;
+}
+
+/**
+ * This function is used to create settings.
+ * 
+ * {@inheritdoc}
+ */
+function itg_widgets_custom_variables() {
+  $form = array();
+  $form['program_category_id_for_programmes'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter Program Category Id'),
+      '#default_value' => variable_get('program_category_id_for_programmes'),
+      '#required' => TRUE,
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+  return system_settings_form($form);
 }
 
 /**
@@ -720,7 +756,7 @@ function itg_widget_custom_session_destory($form, &$form_state) {
   $_SESSION[$form['#form_id']] = array();
   unset($_SESSION[$form['#form_id']]);
   return array(
-    'form_values' => $form_state['values'],
+      'form_values' => $form_state['values'],
   );
 }
 
@@ -846,9 +882,18 @@ function get_required_data_from_entity_id($entity_id) {
 function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   switch ($form['#id']) {
     case 'views-exposed-form-home-page-feature-widget-page-1':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
     case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE, 'story');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
     case 'views-exposed-form-story-widget-most-popular':
     case 'views-exposed-form-story-widget-page-1':
@@ -856,6 +901,18 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
       $form['nid']['#attributes']['placeholder'] = t('Story ID');
       $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
+      break;
+    case 'views-exposed-form-photo-carousel-widget-photo-carousel-list':
+      $form['title']['#attributes']['placeholder'] = t('Photo Gallery Title');
+      $form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
+      $form['nid']['#attributes']['placeholder'] = t('Photo Gallery ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
+      break;
+    case 'views-exposed-form-photo-carousel-widget-video-carousel-list':
+      $form['title']['#attributes']['placeholder'] = t('Video Gallery Title');
+      $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
+      $form['nid']['#attributes']['placeholder'] = t('Video Gallery ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
       break;
     case 'views-exposed-form-story-widget-trending-videos':
     case 'views-exposed-form-story-widget-top-takes-video':
@@ -866,9 +923,18 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
       break;
     case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
     case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
     case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
       $form['title']['#attributes']['placeholder'] = t('Anchor name');
@@ -879,11 +945,18 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     case 'views-exposed-form-section-wise-draggable-content-order-page':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
     case 'views-exposed-form-section-wise-content-ordering-list-page':
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
+  }
+
+  if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
+    $form['#info']['filter-shs_term_node_tid_depth']['label'] = 'Section';
   }
 }
 
@@ -891,6 +964,26 @@ function custom_section_wise_validate($form, &$form_state) {
   if ($form_state['values']['category_tid'] == 'All' && isset($_GET['category_tid'])) {
     form_set_error('category_tid', 'Category is required');
   }
+}
+
+function autocomplete_for_widgets($type, $isCondition = FALSE, $custom_type = 'breaking_news') {
+  $autocomplete = array();
+  if (isset($type) && $type != 'All') {
+    $autocomplete['title'] = "content-title-list/$type/autocomplete";
+    $autocomplete['nid'] = "content-nid-list/$type/autocomplete";
+  }
+  else {
+    // Handle case for big story
+    if (!$isCondition) {
+      $autocomplete['title'] = "node-list-title/autocomplete";
+      $autocomplete['nid'] = "node-list-nid/autocomplete";
+    }
+    else {
+      $autocomplete['title'] = "content-title-list/$custom_type/autocomplete";
+      $autocomplete['nid'] = "content-nid-list/$custom_type/autocomplete";
+    }
+  }
+  return $autocomplete;
 }
 
 /**
@@ -946,30 +1039,28 @@ function itg_widget_views_api() {
  * {@inheritdoc}
  */
 function itg_widget_views_query_alter(&$view, &$query) {
+  global $user;
   if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
     unset($query->table_queue['field_data_field_type']);
     unset($query->tables['node']['field_data_field_type']);
     unset($query->where[1]['conditions'][2]);
   }
-//  if ($view->name == 'category_wise_content_list' && $view->current_display == 'page') {
-////    $requested_uri = request_uri();
-////    $requested_uri_chunk = explode('/', $requested_uri);
-////    // Category is always in last in url. 
-////    $category_from_url = end($requested_uri_chunk);
-////    $category_obj = taxonomy_get_term_by_name($category_from_url);
-////    $category = 0;
-////    foreach ($category_obj as $tid => $category_object) {
-////      $category = $tid;
-////    }
-////
-////    $where = $query->where[0]['conditions'][0]['value'];
-////    //pr($category);
-////    if ($category) {
-////      //$query->add_where(1,'taxonomy_term_data_node.tid', $category, 'NOT IN');
-////     
-////    }
-////    //pr($where);
-//  }
+  if ($view->name == 'programmes' && $view->current_display == 'page') {
+    $program_cat_value = variable_get('program_category_id_for_programmes');
+    if (strlen($program_cat_value) <= 0) {
+      // Link should display only adminstrator.
+      if (in_array('administrator', $user->roles)) {
+        $link = l("click here", 'admin/settings/custom-variables');
+      }
+      drupal_set_message("Program category setting not found $link", "error");
+    }
+    $program_where_condition = array(
+        'field' => 'taxonomy_term_hierarchy.parent',
+        'value' => $program_cat_value,
+        'operator' => '=',
+    );
+    array_push($query->where[1]['conditions'], $program_where_condition);
+  }
 }
 
 /**
@@ -1212,5 +1303,57 @@ function itg_widget_block_view_alter(&$data, $block) {
     if (($item['path'] != 'anchors-list' && arg(0) != 'node') || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node')) {
       $data['content'] = array();
     }
+  }
+}
+
+/**
+ * Callback function for widget title autocomplete.
+ * 
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
+function itg_widget_all_content_title($title) {
+  if (strlen(trim($title)) > 0) {
+    $options = array();
+    $title = strtolower(trim($title));
+    $query = db_select('node', 'n');
+    $query->fields('n', array('title'));
+    $query->condition('n. title', '%' . $title . '%', 'LIKE');
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+    $query->condition('n.status', 1);
+    $query->range(0, 20);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $options[$record['title']] = $record['title'];
+    }
+
+    drupal_json_output($options);
+  }
+}
+
+/**
+ * Callback function for widget title autocomplete.
+ * 
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
+function itg_widget_all_content_nid($title) {
+  if (strlen(trim($title)) > 0) {
+    $options = array();
+    $title = strtolower(trim($title));
+    $query = db_select('node', 'n');
+    $query->fields('n', array('nid'));
+    $query->condition('n. nid', '%' . $title . '%', 'LIKE');
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+    $query->condition('n.status', 1);
+    $query->range(0, 20);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $options[$record['nid']] = $record['nid'];
+    }
+
+    drupal_json_output($options);
   }
 }
