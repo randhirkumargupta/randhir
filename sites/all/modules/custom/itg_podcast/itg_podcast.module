@@ -201,6 +201,9 @@ function itg_podcast_custom_submit($form, &$form_state) {
             'fid' => $response['fid'],
             'tags' => $response['tags'],
             'video_id' => $response['id'],
+            'nid' => $node_id,
+            'upload_time' => REQUEST_TIME,
+            'video_duration' => $response['duration'],
           ))
           ->execute();
       itg_podcast_unlink_video_playlist($response_result, $playlist_name, $tags_value);
@@ -214,14 +217,12 @@ function itg_podcast_custom_submit($form, &$form_state) {
  * @return object
  */
 function itg_podcast_dailymotion_api() {
-  require_once 'includes/Dailymotion.php';
+require_once 'includes/Dailymotion.php';
   $user_name = variable_get('dailymotion_username', '');
   $password = variable_get('dailymotion_password', '');
   $api_key = variable_get('dailymotion_apikey', '');
   $api_secret = variable_get('dailymotion_secretkey', '');
 
-  // Tell the SDK what kind of authentication you'd like to use.
-  // Because the SDK works with lazy authentication, no request is performed at this point.
   try {
     $api = new Dailymotion();
     $scopes = array(
@@ -354,20 +355,24 @@ function itg_podcast_edit_dailymotion($vid_res_result, $playlist_name, $node_id)
 function itg_podcast_dailymotion($real_path, $key, $uri, $fid, $tags_value) {
   $api = itg_podcast_dailymotion_api();
 
-  $filePath = $real_path;
+  //$filePath = $real_path;
   // Temporarily upload a file on Dailymotion' servers
   // This does not create a video, it only offers you a public URL to work with.
   try {
-    $url = $api->uploadFile($filePath);
+    $url = $api->uploadFile($real_path);
     $result = $api->post(
         '/me/videos', array(
       'url' => $url,
       'title' => $uri,
       'tags' => $tags_value,
-      'channel' => 'news',
+      'channel' => 'tv',
       'published' => TRUE,
         )
     );
+    $dur = $api->get(
+        '/video/' . $result['id'], array('fields' => array('duration'))
+    );
+    $result['duration'] = $dur['duration'];
     $a = new Dailymotion();
     $a->logout();
     $result['fid'] = $fid;
@@ -459,9 +464,9 @@ function itg_podcast_views_pre_render(&$view) {
 
   if ($view->name == "manage_podcast" || $view->name == "podcast_management") {
     if (!isset($_POST['views_bulk_operations'])) {
-    $header_content_audio = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_audio .= l(t('Upload Audio'), 'node/add/podcast', array('query' => array('destination' => arg(0))));
-    $view->attachment_before = $header_content_audio;
+      $header_content_audio = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+      $header_content_audio .= l(t('Upload Audio'), 'node/add/podcast', array('query' => array('destination' => arg(0))));
+      $view->attachment_before = $header_content_audio;
     }
   }
 }

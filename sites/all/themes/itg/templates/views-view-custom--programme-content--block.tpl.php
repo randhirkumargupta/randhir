@@ -1,6 +1,7 @@
 <div class="programe-list">
   <?php
   $url = "#";
+   global $base_url;
   foreach ($rows as $key => $row) :
     $section_cat_id = $row['field_story_category'];
     if ($key == 0) {
@@ -20,7 +21,7 @@
           <?php print l($img, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE)); ?>
       <?php else : ?>
           <?php
-          global $base_url;
+         
           $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
           ?>
           <?php print l($img, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE)); ?>
