@@ -3266,7 +3266,10 @@ footer{
                     @include itg-font($itg-roboto); 
                     display: block;
                     height:50px;
-                    padding-top:5px;
+                    padding-top:8px;
+                    span{
+                        display: block;
+                    }
                 }
                 &:hover{
                     background: #f5f4f4;
@@ -3292,8 +3295,7 @@ footer{
             }
         }
         .search-menu{
-            padding-top: 20px;
-            padding-bottom: 20px;
+            padding-top: 20px;            
             white-space: nowrap;
             overflow-x: auto;
             a{
@@ -3332,6 +3334,8 @@ footer{
                 padding: 10px 1em 0 0;
                 input[type="text"]{
                     background: url(../images/calender-icon.png) no-repeat center right;
+                    width: 138px;
+                    border-radius: 3px;
                 }
                 .description{
                     position: absolute;
@@ -3340,6 +3344,7 @@ footer{
                     left: 10px;
                     font-family: $itg-roboto;
                     @include font(12px);
+                    display: none;
                 }
             }
         }
@@ -3357,6 +3362,7 @@ footer{
     border: none;
     outline: none;    
     background: transparent;    
+    border-right: 1px solid #ddd;
 }
 .slick-next {
     right: 0px;
