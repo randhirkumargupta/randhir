@@ -11,14 +11,14 @@
 /**
  * Implements hook_menu().
  */
-function itg_ugc_menu() {  
+function itg_ugc_menu() {
   $items['ugc-title/%/reject'] = array(
     'page callback' => 'itg_ugc_node_status_update',
     'page arguments' => array(1),
     'access arguments' => array('access reject ugc content link'),
     'type' => MENU_CALLBACK,
-    );
- 
+  );
+
   return $items;
 }
 
@@ -30,10 +30,9 @@ function itg_ugc_permission() {
     'access reject ugc content link' => array(
       'title' => t('Ugc reject permission'),
       'description' => t('Ugc reject permission.'),
-    ),    
+    ),
   );
 }
-
 
 /**
  * Implement hook_form_alter
@@ -41,14 +40,14 @@ function itg_ugc_permission() {
  */
 function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  
+
   // get id of ugc content
-  $url_nid = arg(3);  
-  
+  $url_nid = arg(3);
+
   if (empty($form['nid']['#value'])) {
     // prefill input value in blog form
     if ($form_id == 'blog_node_form' && !empty($url_nid)) {
-      // get node values 
+      // get node values
       $node = node_load($url_nid);
 
       $form['title']['#default_value'] = $node->title;
@@ -60,7 +59,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
     // prefill input value in story form
     if ($form_id == 'story_node_form' && !empty($url_nid)) {
-      // get node values 
+      // get node values
       $node = node_load($url_nid);
       $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
       $form['title']['#default_value'] = $node->title;
@@ -71,15 +70,15 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
-       if (!empty($ugc_user_name)) {
+      if (!empty($ugc_user_name)) {
         $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
         $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
       }
     }
-    
+
     // prefill input value in videogallery form
     if ($form_id == 'videogallery_node_form' && !empty($url_nid)) {
-      // get node values 
+      // get node values
       $node = node_load($url_nid);
       $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
       $form['title']['#default_value'] = $node->title;
@@ -89,7 +88,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
-       if (!empty($ugc_user_name)) {
+      if (!empty($ugc_user_name)) {
         $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
         $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
       }
@@ -100,10 +99,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
-    
+
     // prefill input value in podcast form
     if ($form_id == 'podcast_node_form' && !empty($url_nid)) {
-      // get node values 
+      // get node values
       $node = node_load($url_nid);
       $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
       $form['title']['#default_value'] = $node->title;
@@ -122,7 +121,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
     // prefill input value in recipe form
     if ($form_id == 'recipe_node_form' && !empty($url_nid)) {
-      // get node values 
+      // get node values
       $node = node_load($url_nid);
       $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
       $form['title']['#default_value'] = $node->title;
@@ -145,7 +144,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
 
     // prefill input value in photogallery form
     if ($form_id == 'photogallery_node_form' && !empty($url_nid)) {
-      // get node values 
+      // get node values
       $node = node_load($url_nid);
 
       $form['title']['#default_value'] = $node->title;
@@ -153,7 +152,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_gallery_kicer'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
-      
+
 
       foreach ($form['field_gallery_image']['und'] as $delta => $field) {
         if (is_numeric($delta)) {
@@ -166,47 +165,46 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   $user_fields = user_load($user->uid);
-  
+
   if ($form_id == 'ugc_node_form') {
     if ($user->uid != '1') {
-      // hide source and type field from other users 
+      // hide source and type field from other users
       if ($form_id == 'ugc_node_form') {
         $form['field_story_source_type']['#access'] = FALSE;
         $form['field_source']['#access'] = FALSE;
       }
     }
-    
-    if($user->uid && $user->uid != 1) {
-    $form['actions']['cancel'] = array(
+
+    if ($user->uid && $user->uid != 1) {
+      $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'cms-user-dashboard', array('attributes' => array('class' => 'button'))),
         '#weight' => 21,
         '#value' => t('Cancel'),
       );
     }
-    $type="ugc";
+    $type = "ugc";
 
     $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-     foreach ($tax as $key => $term) {  
-        
-    if (!itg_category_manager_term_state($term->tid)) {
-      unset($tax[$key]);
-    }
-     if($type!=""){
-    if(!itg_category_manager_term_state_content($type,$term->tid)) {
-         unset($tax[$key]);
-    }
-    }
-    
-  }
-    
-    $op = array("_none" => "Select Category");
-        foreach ($tax as $key => $val) {
-            $op[$val->tid] = $val->name;
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
+      if ($type != "") {
+        if (!itg_category_manager_term_state_content($type, $term->tid)) {
+          unset($tax[$key]);
         }
-        
+      }
+    }
+
+    $op = array("_none" => "Select Category");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+
     $form['field_section']['#title'] = array('All' => '- Any -');
     $form['field_section']['und']['#options'] = $op;
-    
+
     $form['field_recipe_audio']['und'][0]['#title'] = t('Audio') . '<span class="form-required" title="This field is required."> *</span>';
     // get content type field value
     $type = $form['field_ugc_ctype'][LANGUAGE_NONE][0]['value'];
@@ -224,31 +222,70 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#submit'][] = 'itg_ugc_form_custom_callback';
   }
 
-  // Hide/show description field
-  $form['field_user_message']['#states'] = array(
-    'required' => array(
-      ':input[name="field_ugc_ctype[und]"]' => array(
-        array('value' => 'story'),
-        array('value' => 'recipe'),
-        array('value' => 'blog')
-      ),
-    ),
-  );
-  
 
+  $arg = arg();
   // Hide/show photo field
-  $form['field_ugc_upload_photo']['#states'] = array(
-    'visible' => array(
-      array(
-        array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery')),
-        'or',
-        array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'recipe')),
+  if ($arg[0] == 'personalization' && $arg[1] == 'my-content') {    
+    $form['field_ugc_personalization_photo']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
       ),
-    ),
-    'required' => array(
-      ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
-    )
-  );
+    );
+    // Hide show photo field.
+    $form['field_ugc_upload_photo']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('value' => 'recipe'),
+      ),
+      'required' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
+      )
+    );
+    // Hide/show description field
+    $form['field_user_message']['#states'] = array(
+      'required' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array(
+          array('value' => 'story'),
+          array('value' => 'recipe'),
+          array('value' => 'blog')
+        ),
+      ),
+      'invisible' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
+      ),     
+    );
+  }
+  else {
+    // Hide field collection photo field.
+    $form['field_ugc_personalization_photo']['#prefix'] = '<div style="display: none;">';
+    $form['field_ugc_personalization_photo']['#suffix'] = '</div>';
+    // Hide field video tags.
+    $form['field_story_client_title']['#prefix'] = '<div style="display: none;">';
+    $form['field_story_client_title']['#suffix'] = '</div>';
+    // Hide show photo field.
+    $form['field_ugc_upload_photo']['#states'] = array(
+      'visible' => array(
+        array(
+          array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery')),
+          'or',
+          array(':input[name="field_ugc_ctype[und]"]' => array('value' => 'recipe')),
+        ),
+      ),
+      'required' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array('value' => 'photogallery'),
+      )
+    );
+    // Hide/show description field
+    $form['field_user_message']['#states'] = array(
+      'required' => array(
+        ':input[name="field_ugc_ctype[und]"]' => array(
+          array('value' => 'story'),
+          array('value' => 'recipe'),
+          array('value' => 'blog')
+        ),
+      ),
+    );
+  }
+
 
   // Hide/show video field
   $form['field_astro_video']['#states'] = array(
@@ -285,17 +322,16 @@ function itg_ugc_form_custom_callback($form, &$form_state) {
 
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
-  }    
+  }
   // Set redirection after submit.
-  if ($arg[0] == 'personalization' && $arg[1] == 'my-content') {    
+  if ($arg[0] == 'personalization' && $arg[1] == 'my-content') {
     $_REQUEST['destination'] = 'personalization/my-content';
     $form_state['redirect'] = 'personalization/my-content';
   }
   else {
     $_REQUEST['destination'] = 'node/add/ugc';
     $msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
-  }  
-  
+  }
 }
 
 /**
@@ -305,8 +341,8 @@ function itg_ugc_form_custom_callback($form, &$form_state) {
  */
 function itg_ugc_after_build($form, &$form_state) {
   global $user, $base_url;
-  
-  $form['title']['#description'] = '';  
+
+  $form['title']['#description'] = '';
   // update automatic alias name
   $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
 
@@ -319,7 +355,7 @@ function itg_ugc_after_build($form, &$form_state) {
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
   );
-  
+
   return $form;
 }
 
@@ -348,13 +384,13 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     $title = $node->title;
 
     // validate if decription field is blank
-    if ($type == 'story' || $type == 'recipe'  || $type == 'blog') {
+    if ($type == 'story' || $type == 'recipe' || $type == 'blog') {
       if (empty($description)) {
         form_set_error('field_user_message', t("Description field is required."));
       }
     }
-    
-  
+
+
     // validate if image field is blank
     if (($type == 'photogallery')) {
       if (empty($upload_image)) {
@@ -388,25 +424,24 @@ function itg_ugc_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#autocomplete_path'] = 'content-title-list/ugc/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
-  
+
   // code to open alert box when click on reject link in ugc listing
   if ($form['#id'] == 'views-exposed-form-manage-ugc-page') {
-    drupal_add_js('jQuery(document).ready(function() {                  
-                    jQuery(".ugc-reject").click(function() {                 
+    drupal_add_js('jQuery(document).ready(function() {
+                    jQuery(".ugc-reject").click(function() {
                     var reject_status = "reject";
-                    if (reject_status == "reject") {                   
+                    if (reject_status == "reject") {
                        var msg = confirm("Are you sure you want to reject this content?");
                        if (msg == true) {
                            return true;
                        }
-                       return false; 
+                       return false;
                     }
-                    return true;                     
-                 });                      
+                    return true;
+                 });
           });', array('type' => 'inline', 'scope' => 'footer'));
   }
 }
-
 
 /**
  * Implement hook_node_presave
@@ -419,11 +454,11 @@ function itg_ugc_node_presave($node) {
       $node->field_user_message[LANGUAGE_NONE][0]['value'] = $ugc_description;
       $node->field_user_message[LANGUAGE_NONE][0]['format'] = 'full_html';
     }
-    
+
     // check for city and byline
-      $user_city = $node->field_user_city[LANGUAGE_NONE][0]['value'];
-      $cat_check = itg_category_manager_get_term_from_name($user_city, 2);
-      if (!empty($cat_check)) {
+    $user_city = $node->field_user_city[LANGUAGE_NONE][0]['value'];
+    $cat_check = itg_category_manager_get_term_from_name($user_city, 2);
+    if (!empty($cat_check)) {
       $node->field_user_city[LANGUAGE_NONE][0]['value'] = $user_city;
     }
     else {
@@ -446,12 +481,11 @@ function itg_ugc_node_status_update($nid, $title) {
   global $user;
   $node = node_load($nid);
   $node_author = user_load($user->uid);
-  $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'].' '.$node_author->field_last_name[LANGUAGE_NONE][0]['value'];
+  $rejected_by = $node_author->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $node_author->field_last_name[LANGUAGE_NONE][0]['value'];
   // set status property to 0
   $node->status = 0;
   if (!empty($title)) {
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 1;
-    
   }
   $node->field_source[LANGUAGE_NONE][0]['value'] = $rejected_by;
   // re-save the node
@@ -464,7 +498,7 @@ function itg_ugc_node_status_update($nid, $title) {
     $uname = $node->field_user_name[LANGUAGE_NONE][0]['value'];
     $type = $node->field_ugc_ctype[LANGUAGE_NONE][0]['value'];
     $mail_content = itg_ugc_get_mail_content($uname, $type, 'Published', $to);
-    
+
     $_GET['destination'] = 'manage-ugc';
   }
   else {
@@ -473,12 +507,11 @@ function itg_ugc_node_status_update($nid, $title) {
     $uname = $node->field_user_name[LANGUAGE_NONE][0]['value'];
     $type = $node->field_ugc_ctype[LANGUAGE_NONE][0]['value'];
     $mail_content = itg_ugc_get_mail_content($uname, $type, 'Rejected', $to);
-    
+
     drupal_set_message(t($node->title . ' has been rejected successfully.'));
     drupal_goto('manage-ugc');
   }
 }
-
 
 /**
  * Send mail to ugc user, when query is received
@@ -501,8 +534,8 @@ function itg_ugc_user_mail($key, &$message, $params) {
         $message['headers'][$key] = $value;
       }
       break;
-      
-      case 'send_Published_mail_to_ugc_user':
+
+    case 'send_Published_mail_to_ugc_user':
       $headers = array(
         'MIME-Version' => '1.0',
         'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
@@ -530,7 +563,6 @@ function itg_ugc_node_view($node, $view_mode, $langcode) {
     $settings['uid'] = $user->uid;
     drupal_add_js(array('itg_ugc' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.js');
-    
   }
 }
 
@@ -538,19 +570,17 @@ function itg_ugc_node_view($node, $view_mode, $langcode) {
  * Implements hook_node_insert
  * @param type $node
  */
-function itg_ugc_node_insert($node) {  
-    if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast') {
-      $title = $node->title;
-      $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
-      $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+function itg_ugc_node_insert($node) {
+  if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast') {
+    $title = $node->title;
+    $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+    $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 
-      if ($source_type == 'UGC' && !empty($source_id)) {
-        itg_ugc_node_status_update($source_id, $title);
-      }
-      
+    if ($source_type == 'UGC' && !empty($source_id)) {
+      itg_ugc_node_status_update($source_id, $title);
     }
+  }
 }
-
 
 /**
  * Implement hook_views_pre_render
