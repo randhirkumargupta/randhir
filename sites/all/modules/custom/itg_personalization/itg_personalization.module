@@ -256,8 +256,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
       ),
     );
     // Change placeholder of ugc type field.
-    $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');
-    
+    $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');    
     unset($form['field_ugc_ctype']['und']['#title']);    
   }
 }

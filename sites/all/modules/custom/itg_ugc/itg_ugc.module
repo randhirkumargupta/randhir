@@ -278,17 +278,24 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
  * @param type $form_state
  */
 function itg_ugc_form_custom_callback($form, &$form_state) {
-
+  $arg = arg();
   $node_type = ucfirst($form_state['node']->type);
   $node_type = str_replace("_", " ", $node_type);
   $title = ucfirst($form_state['node']->title);
 
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
+  }    
+  // Set redirection after submit.
+  if ($arg[0] == 'personalization' && $arg[1] == 'my-content') {    
+    $_REQUEST['destination'] = 'personalization/my-content';
+    $form_state['redirect'] = 'personalization/my-content';
   }
+  else {
+    $_REQUEST['destination'] = 'node/add/ugc';
+    $msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
+  }  
   
-  $_REQUEST['destination'] = 'node/add/ugc';
-  $msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
 }
 
 /**
