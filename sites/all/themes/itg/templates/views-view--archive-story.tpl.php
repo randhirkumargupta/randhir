@@ -47,6 +47,7 @@
    $m = date('m');
    $y = date('Y');
    ?>
+   <div class="archive-header">
     <div id="archive-story-date-slider">
                 <ul>
                   <?php for($i=1; $i<=$days; $i++) { 
@@ -54,17 +55,19 @@
                     ?>
                        <li class="atleta"> <a href="<?php print $date; ?>">
       
-                                <h3><?php print $i; ?></h3>
+                                <span><?php print $i; ?></span>
                                 <?php print $month; ?>
                        
                         </a></li>
                   <?php } ?>
                 </ul>
     </div>
-  <!--end start-->
-    <div class="view-filters">
-      <?php print $exposed; ?>
-    </div>
+   <div class="archive-calender-custom">
+       <?php print $exposed; ?>
+   </div>
+       </div>
+      
+  <!--end start-->    
   <?php endif; ?>
 
   <?php if ($attachment_before): ?>
@@ -110,3 +113,14 @@
   <?php endif; ?>
 
 </div><?php /* class view */ ?>
+
+<script>
+    
+jQuery('#archive-story-date-slider ul').slick({
+  dots: false,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 7,
+  slidesToScroll: 1,  
+});
+</script>
