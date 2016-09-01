@@ -307,6 +307,7 @@ function itg_front_search_node_presave($node) {
     $reporter_node_id = node_load($reporter_id);
     $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node_id->title);
     $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node_id->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
+    $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node_id->nid);
   }
 
   if ($node->type == 'photogallery') {
