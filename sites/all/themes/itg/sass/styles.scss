@@ -225,7 +225,7 @@ header{
     }
     .logo{
         width:67px;
-        @include pos(absolute,-10px,null,null,10px);
+        @include pos(absolute,-30px,null,null,10px);
         img{
             @extend .max-wdt;
         }
@@ -1451,6 +1451,26 @@ footer{
     h1{
         @include font(24px,30px,700);       
     }
+    .comment-mobile{
+        background: #1c1c1c;
+        margin: -15px -15px 20px;
+        font-family:$itg-roboto;
+        ul{
+            text-align: right;
+            li{        
+                @include display-inline;
+                a{
+                    color: #989898;  
+                    padding: 10px;
+                    display: block;
+                    text-transform:uppercase;
+                    i{
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
     .story-left-section{
         margin: 0 -15px;
         @include clearfix;
@@ -1637,11 +1657,13 @@ footer{
         @include font(12px);
         border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
+        @include clearfix;
         li{
-            @include display-inline;
+            @include float(left);
             padding: 10px 16px 5px;
             @include text-align(center);
             border-left: 1px solid $border-color;
+            @include calculate-width(2);
             a{
                 color:#c0c0c0;
                 i{
@@ -1664,10 +1686,11 @@ footer{
             }
             &:nth-child(7){
                 @include text-align(left);
+                border-left: none;
                 span{
                     color:#4d4d4d;
                 }
-            }
+            }            
             &:last-child{
                 line-height: 35px;
                 a{
@@ -2014,12 +2037,12 @@ footer{
         padding:20px 0;
         border-bottom:1px solid $border-color;
         .pic{
-            width: 170px;
+            width: 140px;
         }
     .detail{
             h3{
-                margin-bottom: 10px;                
-                @include font(24px,null,$itg-font-bold);
+                margin-bottom: 5px;                
+                @include font(18px,null,$itg-font-bold);
             }
             p{
                 @include font(14px,22px);
@@ -2173,6 +2196,9 @@ footer{
 }
 /*End live block css*/
 /*Start css No result found side bar*/
+.sidebars{
+    margin-top: 40px;
+}
 .sidebars .block-itg-widget{
     span.no-result-found{
         background: #f3f3f3;
