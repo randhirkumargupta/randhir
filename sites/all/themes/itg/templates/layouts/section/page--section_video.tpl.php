@@ -131,7 +131,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               <?php } ?>              
             </ul>
             <?php
-drupal_add_js("jQuery('.video_landing_menu li a').click(function(){
+drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                var section_id = jQuery(this).attr('data-anchor');
                jQuery('.video_landing_menu li a').removeClass('menu-active');
                jQuery('#edit-field-story-category-tid').val(section_id); 

@@ -7,6 +7,9 @@ print $no_result;
  */
 ?>
 <?php
+$date = date("Y-m-d H:i:s");
+$time = new DateTime($date);
+$current_day = $time->format('Y/m/d');
 $counter = 0;
 $day = strtoupper(date("D"));
 global $base_url;
@@ -61,7 +64,7 @@ if($clicked_day == "")
         <?php foreach ($output as $val): ?>
             <div class="tv-schedule-task"> 
                 <span><?php
-                    if ($total == $counter && $day == $val['day']) {
+                    if ($total == $counter && $day == $val['day'] && $current_day == $val['program date']) {
                         echo '<a href = "http://indiatoday.intoday.in/livetv.jsp">' . ucfirst($val['program']) . '</a>';
                         //print $val['program'];
                     }
