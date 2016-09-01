@@ -447,7 +447,28 @@
 /*End css ITG globle search result page*/
 
 
-
+/*Archive story page*/
+/*Archive story page End*/
+.view-archive-story{
+.view-content{
+        .search-pic{
+            width: 170px;
+            height: 127px;
+        }
+        .search-detail{
+            h2{
+                @include font(22px,28px); 
+                margin-top:-5px;
+                a{
+                 @include font(22px,28px); 
+                }
+            }
+            p{
+               display: block; 
+            }
+        }
+    }
+}
 
 }
 /*End CSS Desktop version*/
