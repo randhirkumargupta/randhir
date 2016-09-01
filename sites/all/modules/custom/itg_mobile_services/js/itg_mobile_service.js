@@ -23,7 +23,8 @@ var astroFlag = 0;
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
                 jQuery(".field-type-text.field-name-field-client-short-description.field-widget-text-textfield.form-wrapper").hide();
                 jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
-                jQuery("input[id*='field-service-content-date-und-0-value']").hide();
+                //jQuery("input[id*='field-service-content-date-und-0-value']").hide();
+                jQuery("[id*='field-service-content-date']").hide();
                 astroFlag = 1;
             }
             if (Drupal.settings.itg_mobile_services.settings.service_content_first_row_hide) {
@@ -80,7 +81,7 @@ var astroFlag = 0;
                     } else {
                         jQuery('#content-enable-button').show();
                     }
-                    
+
                     session++;
                 } else {
                     jQuery('#edit-field-service-frequency-date').hide();
@@ -169,8 +170,13 @@ var astroFlag = 0;
                 }
                 if (selectedVal > 1) {
                     jQuery('#edit-field-service-frequency-date').show();
-                    $('#edit-field-service-content').show();
+
                 }
+            }
+
+            var service_asso = jQuery("#edit-field-service-association-title-und option:selected").val();
+            if (service_asso != '_none' && service_asso > 1) {
+                $('#edit-field-service-content').show();
             }
 
             jQuery('#edit-field-service-frequency-und input[type="radio"]').click(function () {
@@ -181,9 +187,14 @@ var astroFlag = 0;
                     jQuery('#edit-field-service-frequency-date').hide();
                     jQuery('#edit-field-service-content-und-0-remove-button').hide();
                     jQuery('#edit-field-service-content-und-add-more').hide();
-                    jQuery("#edit-field-service-content tbody tr:first").css("display", "block");
+
                     var today_date = custom_today_date();
-                    jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                    if (astroFlag == 1) {
+                        jQuery("#edit-field-service-content tbody tr:first").css("display", "hide");
+                    } else {
+                        jQuery("#edit-field-service-content tbody tr:first").css("display", "block");
+                        jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                    }
                     jQuery('input[name="field_service_frequency_date[und][0][value][date]"]').val(today_date);
                     jQuery('input[name="field_service_frequency_date[und][0][value2][date]"]').val(today_date);
                 } else if ($(this).attr("value") == "2") {
@@ -351,6 +362,7 @@ var astroFlag = 0;
                 });
             }
 
+            jQuery("input[id*='field-client-short-description-und']").attr("placeholder", "Title");
             jQuery('#edit-field-service-content textarea').attr("placeholder", "Content Text");
 
             function set_dates() {
