@@ -7,7 +7,7 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
 ?>
 <div class="header-ads mhide">
  <!--   <img src="<?php //print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
-     <?php  print ($data['itg_top']['200*200_home_header']); ?>
+     <?php  print ($data['itg_top']['200*200_header']); ?>
 </div>                               
 
 <div class="head-live-tv desktop-hide">
