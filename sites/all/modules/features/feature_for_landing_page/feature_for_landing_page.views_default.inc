@@ -255,7 +255,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
-  /* Field: Field: Sponser Logo */
+  /* Field: Field: Category Icon */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
@@ -315,7 +315,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  /* Field: Field: Sponser Logo */
+  /* Field: Field: Category Icon */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
@@ -324,7 +324,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['field_sponser_logo']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_sponser_logo']['settings'] = array(
     'image_style' => 'widget_very_small',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   /* Field: Taxonomy term: Display Title */
   $handler->display->display_options['fields']['field_cm_display_title']['id'] = 'field_cm_display_title';
@@ -343,8 +343,10 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['description']['field'] = 'description';
   $handler->display->display_options['fields']['description']['label'] = '';
+  $handler->display->display_options['fields']['description']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['description']['alter']['max_length'] = '85';
   $handler->display->display_options['fields']['description']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['description']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['description']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   /* Field: Taxonomy term: Term ID */
@@ -394,7 +396,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['description']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['description']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
-  /* Field: Field: Sponser Logo */
+  /* Field: Field: Category Icon */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';

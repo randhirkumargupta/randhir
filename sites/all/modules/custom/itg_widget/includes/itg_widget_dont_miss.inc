@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 /**
  * Function to use insert data into custom table.
  *
@@ -41,12 +41,7 @@ function itg_widget_dont_miss_ordering_data($info) {
   $data = '';
   if (!empty($info)) {
     $widget_name = $info['widget_name'];
-    $result = db_select('itg_widget_order', 'iwo')
-                    ->fields('iwo', array('nid', 'extra', 'weight'))
-                    ->condition('iwo.widget', $widget_name)
-                    ->orderBy('iwo.weight', 'ASC')
-                    ->range(0, 4)
-                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $result = get_view_nodes_form_custom_table_for_widgets($widget_name, DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE);
     $entity_data = array();
     foreach ($result as $entity_data_node) {
       $entity_data[] = array("node_load_data" => node_load($entity_data_node['nid']), "custom_label" => $entity_data_node['extra']);

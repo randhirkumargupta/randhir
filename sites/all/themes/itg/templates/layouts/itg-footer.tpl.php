@@ -23,7 +23,7 @@
  <section class="footer-mid mhide">
         <div class="container">
 <!--         <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">-->
-        <?php  print ($data['itg_top']['150*150_home_footer']); ?>
+        <?php  print ($data['itg_top']['150*150_footer']); ?>
         </div>
  </section>
    <section class="footer-bottom">
