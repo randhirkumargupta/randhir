@@ -298,15 +298,15 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['filters']['machine_name']['value'] = array(
     'category_management' => 'category_management',
   );
-  /* Filter criterion: Taxonomy term: Parent term */
-  $handler->display->display_options['filters']['parent']['id'] = 'parent';
-  $handler->display->display_options['filters']['parent']['table'] = 'taxonomy_term_hierarchy';
-  $handler->display->display_options['filters']['parent']['field'] = 'parent';
-  $handler->display->display_options['filters']['parent']['value']['value'] = '460';
+  $handler->display->display_options['filters']['machine_name']['group'] = 1;
 
   /* Display: Programmes */
   $handler = $view->new_display('page', 'Programmes', 'page');
   $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Taxonomy term: Parent term */
+  $handler->display->display_options['relationships']['parent']['id'] = 'parent';
+  $handler->display->display_options['relationships']['parent']['table'] = 'taxonomy_term_hierarchy';
+  $handler->display->display_options['relationships']['parent']['field'] = 'parent';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Taxonomy term: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
@@ -356,6 +356,16 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['tid']['label'] = '';
   $handler->display->display_options['fields']['tid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Taxonomy vocabulary: Machine name */
+  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['value'] = array(
+    'category_management' => 'category_management',
+  );
+  $handler->display->display_options['filters']['machine_name']['group'] = 1;
   $handler->display->display_options['path'] = 'programmes';
 
   /* Display: RHS Program Block */

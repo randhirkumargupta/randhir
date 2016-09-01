@@ -30,12 +30,13 @@ function online_story_archive_apachesolr_environments() {
   );
   $environment->index_bundles = array(
     'node' => array(
-      0 => 'blog',
-      1 => 'magazine',
-      2 => 'photogallery',
-      3 => 'podcast',
-      4 => 'story',
-      5 => 'videogallery',
+      0 => 'ads_management',
+      1 => 'blog',
+      2 => 'magazine',
+      3 => 'photogallery',
+      4 => 'podcast',
+      5 => 'story',
+      6 => 'videogallery',
     ),
   );
   $export['solr'] = $environment;

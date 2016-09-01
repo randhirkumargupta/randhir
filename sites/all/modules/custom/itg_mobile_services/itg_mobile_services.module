@@ -209,7 +209,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       $form['reset_date_button'] = array(
         '#type' => 'button',
-        '#weight' => 7,
+        '#weight' => 6,
         '#value' => t('Reset Date'),
         '#attributes' => array(
           'id' => 'reset-date-button',
@@ -757,7 +757,7 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
       $commands[] = ajax_command_invoke('#edit-field-service-content-add-more-number', 'val', array('11'));
       $commands[] = ajax_command_invoke(NULL, 'mobile_astro_custom_js', array());
     }
-    else if ($_SESSION['field_astro_zodiac']) {
+    elseif ($_SESSION['field_astro_zodiac']) {
       unset($_SESSION['field_astro_zodiac']);
       $commands[] = ajax_command_invoke(NULL, 'mobile_astro_delete_js', array());
     }
@@ -1151,7 +1151,7 @@ function itg_mobile_services_get_service_list() {
   $query = db_select('node', 'node');
   $query->distinct();
   $query->fields('node', array('nid', 'title'));
-  
+
   $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
   if (empty($node_nid)) {
     $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
