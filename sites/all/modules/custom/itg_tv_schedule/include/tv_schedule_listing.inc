@@ -64,8 +64,9 @@ function tv_schedule_listing() {
             $cond = array('day' => $day);
         }
         else {
-            $day = strtoupper(date("D"));
-            $cond = array('day' => $day);
+//            $day = strtoupper(date("D"));
+//            $cond = array('day' => $day);
+              $cond = array('program date' => $current_day);  
         }
     }
 
@@ -88,6 +89,7 @@ function tv_schedule_listing() {
             //$out[$keys]['time'] = $document["time"];
             $out[$keys]['day'] = $document["day"];
             $out[$keys]['program'] = $document["program"];
+            $out[$keys]['program date'] = $document["program date"];
             
             if(!empty($search_date)) {
               $ass_search_date = $search_date;
@@ -102,7 +104,7 @@ function tv_schedule_listing() {
             $keys++;
 
             //counter required for current time slot display.
-            if (($curent_time >= $s_time) || ($current_day == $document["program date"])) {
+            if (($curent_time >= $s_time) && ($current_day == $document["program date"])) {
                 $counter++;
             }
         }

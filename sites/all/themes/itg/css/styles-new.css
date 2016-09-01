@@ -706,4 +706,42 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: block;
 }
 
+.view-personalization-saved-content .views-table {
+  width: 100%;
+  max-width: 860px;
+  border-collapse: collapse;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+.view-personalization-saved-content .views-table th {
+  background-color: #1a3c8d;
+  font-weight: 500;
+  color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+.view-personalization-saved-content .views-table th:first-child {
+  border-radius: 5px 0 0 0;
+  border-left: 1px solid #e0e0e0;
+  min-width: 300px;
+  text-align: left;
+  text-indent: 40px;
+}
+.view-personalization-saved-content .views-table th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #e0e0e0;
+}
+.view-personalization-saved-content .views-table td {
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+.view-personalization-saved-content .views-table td:first-child {
+  text-align: left;
+}
+.view-personalization-saved-content .views-table th, .view-personalization-saved-content .views-table td {
+  padding: 10px;
+  max-width: 300px;
+  font: 300 16px/22px Roboto;
+  min-width: 120px;
+}
+
 /* End of Personalization CSS */

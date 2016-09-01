@@ -694,14 +694,34 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     // $form_state['selection'] value is set by bulk operation submit.
     // Only selected nodes are come in $form_state['selection'] array.
     // Here we are forcely chaing the array.
-    // $form_state['selection'] = $_SESSION[$form['#form_id']];
-    //$form_state['values']['views_bulk_operations'] = $form_state['selection'];
+    $form_state['selection'] = $_SESSION[$form['#form_id']];
+    $form_state['values']['views_bulk_operations'] = $form_state['selection'];
+    $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
   }
 
   // Add a node id contianer just below the bulk operation.
   if (isset($form['select']['action::nodequeue_add_action'])) {
     $form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container"></div>';
   }
+
+  if (isset($form['select']['action::itg_widget_categories_wise_node_group'])) {
+    $form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '<div class="nodes_id_container"></div>';
+  }
+}
+
+/**
+ * Function custom submit for destorying the session for current form id.
+ * 
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_widget_custom_session_destory($form, &$form_state) {
+  $_SESSION[$form['#form_id']] = array();
+  unset($_SESSION[$form['#form_id']]);
+  return array(
+    'form_values' => $form_state['values'],
+  );
 }
 
 /**
@@ -712,7 +732,19 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
  */
 function forms_uses_checked_content_id() {
   return array(
-      'views_form_story_widget_page_1'
+      'views_form_story_widget_page_1',
+      'views_form_widget_anchors_listing_anchors_listing_page',
+      'views_form_section_wise_draggable_content_order_big_story_format',
+      'views_form_section_wise_draggable_content_order_dont_miss_content',
+      'views_form_home_page_feature_widget_page_1',
+      'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
+      'views_form_story_widget_most_popular',
+      'views_form_section_wise_draggable_content_order_page',
+      'views_form_story_widget_trending_videos',
+      'views_form_story_widget_top_takes_video',
+      'views_form_story_widget_watch_right_now',
+      'views_form_photo_carousel_widget_photo_carousel_list',
+      'views_form_photo_carousel_widget_video_carousel_list'
   );
 }
 
@@ -1008,6 +1040,7 @@ function itg_widget_preprocess_views_view(&$vars) {
       'story_widget',
       'section_wise_content_ordering_list',
       'section_wise_draggable_content_order',
+      'photo_carousel_widget'
   );
   if (in_array($view_name, $widget_views)) {
     $vars['classes_array'][] = 'widgets-view';
@@ -1130,15 +1163,54 @@ function draggable_views_nodes_for_widgets($view_name, $page, $expire_date, $ran
 }
 
 /**
+ * Function returns data for cutom tables widgets.
+ * 
+ * @param string $widget_name
+ * @param int $range_max
+ * @param int $range_min
+ * @return array
+ */
+function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, $range_min = 0) {
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+  $query->condition('iwo.widget', $widget_name)
+          ->condition('n.status', 1)
+          ->orderBy('iwo.weight', 'ASC')
+          ->range($range_min, $range_max)
+          ->fields('iwo', array('nid', 'extra', 'weight'));
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $weight = 0;
+  foreach ($result as $data) {
+    $weight +=$data['weight'];
+  }
+
+  if ($weight > 0) {
+    return $result;
+  }
+  else {
+    // Query for renctaly careated node if weight is not saved
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->condition('iwo.widget', $widget_name)
+            ->condition('n.status', 1)
+            ->orderBy('n.nid', 'DESC')
+            ->range($range_min, $range_max)
+            ->fields('iwo', array('nid', 'extra', 'weight'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+}
+
+/**
  * {@inheritdoc}
  */
-//function itg_widget_block_view_alter(&$data, $block) {
-//  $item = menu_get_item();
-//  if ($block->delta == 'programmes-rhs_programmes') {
-//    $page_argument = $item['page_arguments'];
-//    // if current page is not anchor's listing page as well as occupation is not acnhor then make block's data empty array
-//    if (($item['path'] != 'anchors-list' && arg(0) != 'node') || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node')) {
-//      $data['content'] = array();
-//    }
-//  }
-//}
+function itg_widget_block_view_alter(&$data, $block) {
+  $item = menu_get_item();
+  if ($block->delta == 'programmes-rhs_programmes') {
+    $page_argument = $item['page_arguments'];
+    // if current page is not anchor's listing page as well as occupation is not acnhor then make block's data empty array
+    if (($item['path'] != 'anchors-list' && arg(0) != 'node') || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node')) {
+      $data['content'] = array();
+    }
+  }
+}
