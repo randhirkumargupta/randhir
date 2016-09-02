@@ -234,7 +234,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
             /* condition for online archive story calender */
             $online_archive_story_min_date = implode(" ", $_GET['ds_changed']);
             if (!empty($online_archive_story_min_date)) {
-              print 'yes';
+             
               $val_str = '[' . $online_archive_story_min_date . 'T00:00:00Z/DAY TO ' . $online_archive_story_min_date . 'T00:00:00Z/DAY+1DAY]';
             }
             else {
