@@ -1,3 +1,33 @@
+/*====================== IndiaToday Variables =========================*/
+/*=======================================================================*/
+/*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
+/*Fonts used in Indiatoday site*/
+/*Colors used in Indiatoday site*/
+/*Background Colors used in Indiatoday site*/
+/*Border Colors used in Indiatoday site*/
+/*Text color in Indiatoday site*/
+/*Background color in Indiatoday site*/
+/*navigation font in Indiatoday site*/
+/*Full radius in Indiatoday site*/
+/*footer color in Indiatoday site*/
+/*font family an font weight mixins*/
+/*font size an font weight mixins*/
+/*clear fix mixins*/
+/*Box sizeing mixins*/
+/*Center Block mixins*/
+/*Float mixins*/
+/*Display inline block mixins*/
+/*Text align block mixins*/
+/* Positional mixins */
+/* Calculate-width function */
+/* Tab Button mixins */
+/* Tab Listing mixins */
+/* Story Tag mixins */
+/* List before icon */
+/*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
 /*CSS For Search Page*/
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper {
   width: 100%;
@@ -742,6 +772,220 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   max-width: 300px;
   font: 300 16px/22px Roboto;
   min-width: 120px;
+}
+.view-personalization-saved-content .item-list ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-personalization-saved-content .item-list ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-next a, .view-personalization-saved-content .item-list ul.pager li.pager-last a, .view-personalization-saved-content .item-list ul.pager li.pager-first a, .view-personalization-saved-content .item-list ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-next.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-next.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
+
+#content #block-itg-personalization-user-my-content {
+  margin: 0 auto;
+  max-width: 720px;
+  text-align: left;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-name-field-ugc-ctype {
+  text-align: center;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-name-field-ugc-ctype .form-select {
+  width: 450px;
+  height: 44px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 3px 0 #ccc;
+  color: #bababa;
+  font: 300 16px/normal Roboto;
+  text-align: center;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textfield {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textfield label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 99;
+  position: relative;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textfield .form-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 160px;
+  z-index: 9;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea label {
+  width: 150px;
+  height: 125px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 99;
+  position: relative;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea .form-textarea-wrapper {
+  padding-left: 150px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea .form-textarea {
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file label, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file label {
+  width: 150px;
+  height: 125px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 99;
+  position: relative;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file {
+  width: 100%;
+  padding: 10px 10px 10px 160px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
+  width: 100px;
+  background-color: #ededed;
+  border: 1px solid #bababa;
+  height: 28px;
+  float: right;
+  cursor: pointer;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .ajax-progress-throbber, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .ajax-progress-throbber {
+  display: none;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file div.description, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file div.description {
+  margin-top: 40px;
+  padding-left: 160px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data {
+  float: none;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield {
+  max-width: 200px;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  overflow: hidden;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield .form-text, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield .form-text {
+  border: 1px solid #ddd;
+  height: 34px;
+  padding: 5px;
+  position: static;
+  width: 100%;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield div.description, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield div.description {
+  display: none;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-submit[value="Remove"], #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-submit[value="Remove"] {
+  color: #ee4d4d;
+  font-size: 13px;
+  left: 550px;
+  position: absolute;
+  top: 16px;
+  cursor: pointer;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-actions {
+  padding: 20px 0;
+  text-align: center;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-actions .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/28px Roboto;
+  color: #fff;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-actions a.button {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/41px Roboto;
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
 }
 
 /* End of Personalization CSS */
