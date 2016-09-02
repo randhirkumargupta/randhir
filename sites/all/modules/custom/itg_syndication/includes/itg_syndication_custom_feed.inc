@@ -30,6 +30,11 @@ function generate_custom_pattern_feed($data) {
   $nids = isset($data['syndication']) ? unserialize($data['syndication']) : array();
   $client = isset($data['client_title']) ? $data['client_title'] : "";
   $content_type = isset($data['web_property']) ? $data['web_property'] : "";
+  
+  // As known magazine is story content.
+  if($content_type == 'magazine') {
+    $content_type = 'story';
+  }
   $feed_type = isset($data['feed_type']) ? $data['feed_type'] : "";
   if (count($data) && (!empty($nids) && !empty($client) && !empty($content_type))) {
     /* get pattern of specific client for specific content_type */

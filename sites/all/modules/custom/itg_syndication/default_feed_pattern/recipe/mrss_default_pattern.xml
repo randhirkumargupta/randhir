@@ -7,7 +7,7 @@
         <item>
             <title>{{{node_title}}}</title>
             <link>{{{node_permalink}}}</link>
-            <description>{{{body}}}</description>
+            <description>{{{field_recipe_description}}}</description>
             <guid isPermaLink="false">{{{node_permalink}}}</guid>
             <media:content>
                 <media:thumbnail url="{{{field_story_extra_large_image}}}"/>

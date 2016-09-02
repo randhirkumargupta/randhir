@@ -7,7 +7,7 @@
         <item>
             <title>{{{node_title}}}</title>
             <guid isPermaLink="true">{{{node_permalink}}}</guid>
-            <description>{{{body}}}</description>
+            <description>{{{field_recipe_description}}}</description>
             <category>{{{field_story_category}}}</category>
             <pubDate>{{{node_published_date}}}</pubDate>
             <author>{{{node_author}}}</author>
