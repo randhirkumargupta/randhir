@@ -15,7 +15,7 @@ function itg_personalization_views_data_alter(&$data) {
     'field' => array(
       'title' => t('Range Slider'),
       'help' => t('Set user preferences.'),
-      'handler' => 'itg_personalization_field_handler_range_slider',
+      'handler' => 'itg_personalization_field_handler_tid_edit',
     ),
   );
 }

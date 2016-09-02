@@ -6,6 +6,10 @@
  */
 module_load_all_includes('inc', 'includes/itg_personalization.helper');
 
+function itg_personalization_init() {
+  $data = itg_loyalty_reward_user_details(4);
+  //dpm($data);
+}
 /**
  * Implements hook_permission().
  *
@@ -34,38 +38,8 @@ function itg_personalization_menu() {
     //'access arguments' => array('view personalized content'),
     'type' => MENU_NORMAL_ITEM,
   );
-  $items['personalization/saved-items'] = array(
+  $items['personalization/%'] = array(
     'title' => t('Personalization - Saved Items'),    
-    'page callback' => 'itg_personalization_home_page',
-    'access callback' => TRUE,    
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['personalization/saved-items/all'] = array(
-    'title' => t('Personalization - Saved Items'),    
-    'page callback' => 'itg_personalization_home_page',
-    'access callback' => TRUE,    
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['personalization/saved-items/articles'] = array(
-    'title' => t('Personalization - Saved Items'),    
-    'page callback' => 'itg_personalization_home_page',
-    'access callback' => TRUE,    
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['personalization/saved-items/videos'] = array(
-    'title' => t('Personalization - Saved Items'),    
-    'page callback' => 'itg_personalization_home_page',
-    'access callback' => TRUE,    
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['personalization/saved-items/photogalleries'] = array(
-    'title' => t('Personalization - Saved Items'),    
-    'page callback' => 'itg_personalization_home_page',
-    'access callback' => TRUE,    
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['personalization/my-content'] = array(
-    'title' => t('Personalization - My Contents'),    
     'page callback' => 'itg_personalization_home_page',
     'access callback' => TRUE,    
     'type' => MENU_NORMAL_ITEM,

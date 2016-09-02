@@ -19,13 +19,12 @@
     
   ?>  
   </li>
-  <li class="my-content">
-      
-  <?php 
-    echo l(t('My Content')  , 'personalization/my-content');
-  ?>
+  <li class="my-content">      
+  <?php echo l(t('My Content')  , 'personalization/my-content'); ?>
   </li>
-  <li class="my-Preferences"><a href="javascript:;"><?php print t('My Preferences'); ?></a></li>
+  <li class="my-Preferences">      
+  <?php echo l(t('My Preferences'), 'personalization/my-preferences'); ?>    
+  </li>
   <li class="following">
   <?php    
     echo l(t('Following'), 'itg-saved-content/author/nojs/', 
