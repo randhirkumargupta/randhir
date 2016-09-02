@@ -82,6 +82,16 @@
                     slidesToShow: 7,
                     slidesToScroll: 1,
                 });
+                
+                jQuery('#edit-ds-changed-datepicker-popup-0').datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    changeMonth: true,
+                    changeYear: true,
+                    maxDate: -1,
+                    onSelect: function (dateText, inst) {
+                        jQuery('#edit-submit-archive-story').trigger('click');
+                    }
+                });
 
             }
 

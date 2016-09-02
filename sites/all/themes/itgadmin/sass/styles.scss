@@ -1941,7 +1941,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-syndication-ftp-details-values"], 
 [id*="field-email-address-values"], 
 [id*="field-mega-review-review-values"],
-[id*="field-story-highlights-values"]{
+[id*="field-story-highlights-values"], 
+[id*="field-story-template-guru-values"]{
   @extend .itg-add-another-item;
 }
 [id*="field-erf-registration-fee-values"], 

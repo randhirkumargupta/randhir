@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul {
+.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul {
   list-style-type: none;
 }
 
@@ -1618,6 +1618,7 @@ footer .footer-copyright {
 .view-front-end-global-search .view-content .social-share {
   display: inline-block;
   vertical-align: top;
+  margin-top: 5px;
 }
 .view-front-end-global-search .view-content .social-share ul li {
   display: inline-block;
@@ -1626,13 +1627,20 @@ footer .footer-copyright {
 }
 .view-front-end-global-search .view-content .social-share ul li a {
   background: #000;
-  width: 23px;
-  height: 23px;
+  width: 20px;
+  height: 20px;
   border-radius: 100%;
   display: block;
   color: #fff;
   text-align: center;
   line-height: 23px;
+}
+@media screen and (min-width: 768px) {
+  .view-front-end-global-search .view-content .social-share ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
 }
 .view-front-end-global-search .view-content .social-share ul li a.share {
   color: #d0d0d0;
@@ -1649,12 +1657,17 @@ footer .footer-copyright {
 .view-front-end-global-search .view-content .social-share ul li a.google {
   background: url(../images/google-icon.jpg) no-repeat center center;
 }
+.view-front-end-global-search .view-content .social-share ul li {
+  padding-right: 4px;
+}
 .view-front-end-global-search .view-content .other-info {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-size: 0.75rem;
   color: #8f8f8f;
-  margin-top: 15px;
+  padding-top: 15px;
+  overflow: hidden;
+  width: 100%;
 }
 .view-front-end-global-search .item-list ul.pager {
   margin: 10px 0;
@@ -2654,9 +2667,10 @@ footer .footer-copyright {
 /*End snap post css*/
 /*Start category wise content list css*/
 .view-category-wise-content-list h1 {
-  font-size: 32px;
-  font-size: 2rem;
-  font-weight: 400;
+  font-size: 25px;
+  font-size: 1.5625rem;
+  font-weight: 700;
+  line-height: 40px;
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
 }
@@ -2666,7 +2680,7 @@ footer .footer-copyright {
 }
 .view-category-wise-content-list .catagory-listing .pic {
   float: left;
-  margin-right: 25px;
+  margin-right: 10px;
 }
 .view-category-wise-content-list .catagory-listing .detail {
   display: block;
@@ -2680,17 +2694,23 @@ footer .footer-copyright {
   padding: 20px 0;
 }
 .view-category-wise-content-list .catagory-listing .pic {
-  width: 170px;
+  width: 144px;
+  padding-right: 10px;
 }
 .view-category-wise-content-list .catagory-listing .detail h3 {
   margin-bottom: 10px;
-  font-weight: 700;
+  font-size: 15px;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 22px;
+  color: #323232;
 }
 .view-category-wise-content-list .catagory-listing .detail p {
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 19px;
   color: #696969;
+  display: none;
 }
 .view-category-wise-content-list .item-list ul.pager {
   margin: 10px 0;
@@ -2870,13 +2890,20 @@ footer .footer-copyright {
 }
 .live-block .breaking-section .social-share ul li a {
   background: #000;
-  width: 23px;
-  height: 23px;
+  width: 20px;
+  height: 20px;
   border-radius: 100%;
   display: block;
   color: #fff;
   text-align: center;
   line-height: 23px;
+}
+@media screen and (min-width: 768px) {
+  .live-block .breaking-section .social-share ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
 }
 .live-block .breaking-section .social-share ul li a.share {
   color: #d0d0d0;
@@ -3897,6 +3924,7 @@ footer .footer-copyright {
   color: #323232;
 }
 .programe-container .program-row {
+  font-family: "Roboto", sans-serif;
   background-color: #f5f5f5;
 }
 .programe-container .program-row .programe-title {
@@ -4135,13 +4163,20 @@ footer .footer-copyright {
 }
 .view-archive-story .view-content .social-share ul li a {
   background: #000;
-  width: 23px;
-  height: 23px;
+  width: 20px;
+  height: 20px;
   border-radius: 100%;
   display: block;
   color: #fff;
   text-align: center;
   line-height: 23px;
+}
+@media screen and (min-width: 768px) {
+  .view-archive-story .view-content .social-share ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
 }
 .view-archive-story .view-content .social-share ul li a.share {
   color: #d0d0d0;
@@ -4352,3 +4387,73 @@ footer .footer-copyright {
 }
 
 /*css End archive-story */
+/*CSS start program RHS*/
+.program-rhs h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  display: none;
+  position: relative;
+}
+.program-rhs h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+.program-rhs h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
+.program-rhs h3 {
+  display: block;
+}
+.program-rhs h3 span {
+  padding: 45px 20px 10px 30px;
+}
+.program-rhs ul {
+  padding: 10px 20px 0 30px;
+}
+.program-rhs ul span.time {
+  color: #b1b1b1;
+  font-size: 12px;
+  font-size: 0.75rem;
+  padding: 10px 0;
+  display: block;
+}
+.program-rhs ul .detail {
+  padding: 0 0 22px 0;
+}
+.program-rhs h4 {
+  font-size: 18px;
+  background: #f5f5f5;
+  padding: 5px 5px;
+  font-weight: 700;
+  font-family: "Roboto Slab", sans-serif;
+}
+.program-rhs .detail {
+  overflow: hidden;
+  padding: 10px;
+}
+.program-rhs .detail .pic {
+  float: right;
+  margin-left: 10;
+}
+.program-rhs .detail .discription {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+
+/*CSS end program RHS*/

@@ -17,7 +17,8 @@ list($width, $height) = getimagesize($url);
         <ol> 
         </ol> 
     </div> 
-    <button class="add-more maptofield">Upload</button
+    <button class="add-more maptofield">Upload</button>
+     <button class="cancel-image add-more">Cancel</button>
     <input type="hidden" value="<?php echo $field_name; ?>" id="field_name">
     <input type="hidden" value="<?php echo $data->fid; ?>" id="image_fiedlid">
     <input type="hidden" value="<?php echo $url; ?>" id="imcurl">
