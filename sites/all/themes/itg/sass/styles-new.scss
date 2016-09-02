@@ -1,3 +1,5 @@
+@import "itg-variables";
+@import "itg-mixins";
 /*CSS For Search Page*/
 @mixin gradient($color1, $color2){
     background: $color1; /* For browsers that do not support gradients */
@@ -728,6 +730,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     }
   }
 }
+
 .view-personalization-saved-content{
   .views-table{
     width: 100%;
@@ -764,6 +767,188 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       max-width: 300px;
       font: 300 16px/22px Roboto;
       min-width: 120px;
+    }
+  }
+  .item-list{
+    @include pager;
+  }
+}
+#content{ 
+  #block-itg-personalization-user-my-content{
+    margin: 0 auto;
+    max-width: 720px;
+    text-align: left;
+    .node-ugc-form{
+      .form-field-name-field-ugc-ctype{
+        text-align: center;
+        .form-select{
+          width: 450px;
+          height: 44px;
+          border-radius: 5px;
+          border: 1px solid rgba(0,0,0,.20);
+          box-shadow: 0 0 3px 0 #ccc;
+          color: #bababa;
+          font: 300 16px/normal Roboto;
+          text-align: center;
+        }
+      }
+      .form-type-textfield{
+        display: inline-block;
+        vertical-align: top;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        margin: 10px 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        label{
+          width: 150px;
+          padding: 0 20px;
+          font: 300 14px/36px Roboto;
+          background-color: #fbfbfb;
+          border-right: 1px solid #e0e0e0;
+          z-index: 99;
+          position: relative;
+        }
+        .form-text{
+          position: absolute;
+          left: 0;
+          top: 0;
+          border: none;
+          width: 100%;
+          height: 100%;
+          padding-left: 160px;
+          z-index: 9;
+        }
+      }
+      .form-type-textarea{
+        display: inline-block;
+        vertical-align: top;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        margin: 10px 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        label{
+          width: 150px;
+          height: 125px;
+          padding: 0 20px;
+          font: 300 14px/36px Roboto;
+          background-color: #fbfbfb;
+          border-right: 1px solid #e0e0e0;
+          z-index: 99;
+          position: relative;
+        }
+        .form-textarea-wrapper{
+          padding-left: 150px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
+        .form-textarea{
+          border: none;
+          width: 100%;
+          height: 100%;
+          padding: 10px;
+        }
+      }
+      .form-field-type-image, .form-field-type-file{
+        .form-type-managed-file{
+          display: inline-block;
+          vertical-align: top;
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+          margin: 10px 0;
+          border: 1px solid #e0e0e0;
+          border-radius: 5px;
+          label{
+            width: 150px;
+            height: 125px;
+            padding: 0 20px;
+            font: 300 14px/36px Roboto;
+            background-color: #fbfbfb;
+            border-right: 1px solid #e0e0e0;
+            z-index: 99;
+            position: relative;
+          }
+          .form-managed-file{
+            width: 100%;
+            padding: 10px 10px 10px 160px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            .form-submit[value="Upload"]{
+              width: 100px;
+              background-color: #ededed;
+              border: 1px solid #bababa;
+              height: 28px;
+              float: right;
+              cursor: pointer;
+            }
+            .ajax-progress-throbber{
+              display: none;
+            }
+          }
+          div.description{
+            margin-top: 40px;
+            padding-left: 160px;
+          }
+        }
+        div.image-widget-data{
+          float: none;
+          .form-type-textfield{
+            max-width: 200px;
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            overflow: hidden;
+            .form-text{
+              border: 1px solid #ddd;
+              height: 34px;
+              padding: 5px;
+              position: static;
+              width: 100%;
+            }
+            div.description{
+              display: none;
+            }
+          }
+          .form-submit[value="Remove"] {
+            color: #ee4d4d;
+            font-size: 13px;
+            left: 550px;
+            position: absolute;
+            top: 16px;
+            cursor: pointer;
+          }
+        }
+      }
+      .form-actions{
+        padding: 20px 0;
+        text-align: center;
+        .form-submit{
+          background: url(../images/btn-blue.png) no-repeat;
+          height: 41px;
+          border: none;
+          width: 170px;
+          font: 300 20px/28px Roboto;
+          color: #fff;
+        }
+        a.button{
+          background: url(../images/btn-blue.png) no-repeat;
+          height: 41px;
+          border: none;
+          width: 170px;
+          font: 300 20px/41px Roboto;
+          display: inline-block;
+          vertical-align: top;
+          color: #fff;
+        }
+      }
     }
   }
 }
