@@ -228,13 +228,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       $form['#validate'][] = 'itg_mobile_association_validator';
       $form['#after_build'][] = 'itg_service_content_after_build';
-      
-      foreach ($form['field_service_content'][LANGUAGE_NONE] as $key => $fieldcollection) {
-        if (is_numeric($key)) {
-          $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video'][LANGUAGE_NONE][0]['#upload_validators']['itg_custom_video_field_validate'] = array(1, 2);
-        }
-      }
-      
       $form['actions']['submit']['#submit'][] = 'itg_mobile_vas_service_content_submit';
       if (empty($_GET['destination'])) {
         $_GET['destination'] = 'service-content-listing';
@@ -242,18 +235,6 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
   return $form;
-}
-
-/**
- * Implements function for validate image
- * @param array $field
- * @return array
- */
-function itg_custom_video_field_validate($field) {
-  $val = itg_video_check_exist_file($field->filename);
-  $field->destination = $val;
-  $errors = array();
-  return $errors;
 }
 
 /**
@@ -492,23 +473,6 @@ function itg_mobile_association_validator(&$form, &$form_state) {
           drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-story-expert-description').show(); jQuery('.field-name-field-story-large-image').show();jQuery('.field-name-field-service-audio').show();jQuery('.field-name-field-service-video').show();});", 'inline');
         }
       }
-    }
-  }
-  
-    // field collection validation
-  foreach ($form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'] as $key => $filed_collection) {  
-    $fids[] = $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['fid'];
-    $validate_thumb[$key] = $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['fid'];
-  }
-  $newfid = array_filter($fids);
-  $validate_thumbs = array_filter($validate_thumb);
-  if (empty($newfid)) {
-    form_set_error('field_service_video', t('Upload video is required.'));
-  }
-  foreach ($validate_thumbs as $key => $valu) {
-    $count = $key + 1;
-    if ($form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_video_thumbnail[LANGUAGE_NONE][0]['fid'] == '') {
-      form_set_error('field_video_thumbnail', t('Video Thumbnail image is required.'));
     }
   }
 }
