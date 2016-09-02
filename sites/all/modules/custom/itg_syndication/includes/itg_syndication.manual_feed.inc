@@ -90,7 +90,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
       '#type' => 'select',
       '#title' => t('Select Issue'),
       '#options' => $mag_option,
-      '#weight' => 3,
+      '#weight' => 4,
       '#states' => array(
         'visible' => array(
           ':input[name="type"]' => array('value' => 'magazine'),
