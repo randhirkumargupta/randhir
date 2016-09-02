@@ -151,12 +151,13 @@
                 $('.form-field-name-field-astro-video').find('.messages.error').remove();
             });
 
+
             $('.form-field-name-field-ugc-upload-photo').find('.form-submit').on('mousedown', function(e) {
                 $('.form-field-name-field-ugc-upload-photo').find('.messages.status').remove();
             });
 
             $('.form-field-name-field-astro-video').find('.form-submit').on('mousedown', function(e) {
-                $('.form-field-name-field-astro-video').find('.messages.success').remove();
+                $('.form-field-name-field-astro-video').find('.messages.status').remove();
             });
 
         }
