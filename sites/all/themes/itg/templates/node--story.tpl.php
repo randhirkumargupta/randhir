@@ -7,7 +7,16 @@
 ?>
 <div class="story-section <?php print $class_buzz;?>">
   <div class='<?php print $classes ?>'>
-      <?php //pr($node); ?>      
+      <?php //pr($node); ?> 
+      <div class="comment-mobile desktop-hide">
+          <ul>
+              <li><a href="#"><i class="fa fa-envelope"></i> Mail to author</a></li>
+              <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
+              <li><a href="#"><i class="fa fa-comment"></i></a></li>
+              <li><a href="#"><i class="fa fa-share-alt"></i></a></li>              
+          </ul>
+          
+      </div>
       <h1><?php print $node->title; ?></h1>
       <div class="story-left-section">
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
@@ -49,7 +58,7 @@
                       <li>UPDATED <?php print  date('H:i', $node->changed); ?> IST</li>
                       <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
                   </ul>
-                  <ul class="social-links">
+                  <ul class="social-links mhide">
                       <li><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
                       <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
                       <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
@@ -169,12 +178,12 @@
       <div class="section-left-bototm">
           <div class="social-list">
             <ul>
-                <li><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                <li><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
-                <li><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
-                <li><span class="share-count">4.3k</span> SHARES</li>
+                <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
+                <li class="mhide"><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
+                <li class="mhide"><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
+                <li class="mhide"><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
+                <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
+                <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>
                 <li><a href="#">follow the Story</a></li>
             </ul>
