@@ -568,6 +568,7 @@ function mega_review_critic_features_views_default_views() {
     6 => '6',
     7 => '7',
     20 => '20',
+    10 => '10',
     9 => '9',
   );
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -747,6 +748,7 @@ function mega_review_critic_features_views_default_views() {
     6 => '6',
     7 => '7',
     20 => '20',
+    10 => '10',
     9 => '9',
   );
   $handler->display->display_options['defaults']['pager'] = FALSE;

@@ -227,3 +227,43 @@ function itg_reporter_get_twitter_handle($twitter) {
     drupal_json_output($options);
   }
 }
+
+
+/**
+ * Implement hook_node_update
+ * @param Object $node
+ */
+function itg_reporter_node_update($node) {
+  if ($node->type == 'reporter' && !empty($node->nid)) {
+    $nids = itg_reporter_get_all_story_nid($node->nid);
+    $reporter_name = strtolower($node->title);
+    $reporter_twitter = strtolower($node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
+    foreach ($nids as $value) {
+      $story_node = node_load($value);
+      $story_byline = $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'];
+      $story_twitter = $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
+      $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $reporter_name;
+      $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $reporter_twitter;
+      if ($reporter_name != $story_byline || $reporter_twitter != $story_twitter) {
+        field_attach_update('node', $story_node);
+      }
+    }
+  }
+}
+
+/**
+ * Implement itg_reporter_get_all_story_nid
+ * @param int $source_id
+ */
+function itg_reporter_get_all_story_nid($source_id){
+    
+    $query = db_select('field_data_field_story_source_id', 'c');
+    $query->fields('c', array('entity_id'));
+    $query->condition('c.field_story_source_id_value', $source_id, '=');
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $options[] = $record['entity_id'];
+    }
+    
+    return $options;
+}
