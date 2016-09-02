@@ -203,9 +203,9 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if ($i > 1) {
       $and = ' AND ';
     }
-    $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'archive-story');
+    $remove_key = array('related-content', 'page', 'width', 'height', 'iframe', 'type', 'items_per_page', 'keyword', 'site-search', 'ds_changed_max', 'custom_drp', 'exact_match', 'searchimage', 'online-archive-story');
 
-    if (!empty($val) && $val != 'related-content' && $val != 'site-search' && $val != 'searchimage' && $val != 'archive-story'  && !in_array($key, $remove_key)) {
+    if (!empty($val) && $val != 'related-content' && $val != 'site-search' && $val != 'searchimage' && $val != 'online-archive-story'  && !in_array($key, $remove_key)) {
 
       if (is_array($val)) {
 
@@ -231,7 +231,15 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
             }
           }
           else if ($_GET['custom_drp'] != 'calender' && $_GET['custom_drp'] != '_none') {
-            $val_str = '[' . $_GET['custom_drp'] . 'T00:00:00Z/DAY TO ' . date('Y-m-d') . 'T00:00:00Z/DAY+1DAY]';
+            /* condition for online archive story calender */
+            $online_archive_story_min_date = implode(" ", $_GET['ds_changed']);
+            if (!empty($online_archive_story_min_date)) {
+              print 'yes';
+              $val_str = '[' . $online_archive_story_min_date . 'T00:00:00Z/DAY TO ' . $online_archive_story_min_date . 'T00:00:00Z/DAY+1DAY]';
+            }
+            else {
+              $val_str = '[' . $_GET['custom_drp'] . 'T00:00:00Z/DAY TO ' . date('Y-m-d') . 'T00:00:00Z/DAY+1DAY]';
+            }
           }
         }
         else {
