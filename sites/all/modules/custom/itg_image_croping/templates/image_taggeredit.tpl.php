@@ -348,7 +348,9 @@ function hideloader()
 	}
 </style>	
 
-<?php $url = file_create_url($data->uri);?>
+<?php $url = file_create_url($data->uri);
+ global $base_url;
+?>
  
 <div id="container">
     <div id="imgtag"> 
