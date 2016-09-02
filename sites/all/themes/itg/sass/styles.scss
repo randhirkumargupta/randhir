@@ -3026,6 +3026,7 @@ footer{
 .programe-container{
   @include listing-with-image(program-row,left,10px,pic,program-right);
   .program-row{
+      font-family: $itg-roboto;
     background-color: #f5f5f5;
     .programe-title{
       font-size: 22px;
