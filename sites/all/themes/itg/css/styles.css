@@ -4180,7 +4180,10 @@ footer .footer-copyright {
   font-family: "Roboto", sans-serif;
   display: block;
   height: 50px;
-  padding-top: 5px;
+  padding-top: 8px;
+}
+.view-archive-story #archive-story-date-slider ul li a span {
+  display: block;
 }
 .view-archive-story #archive-story-date-slider ul li:hover {
   background: #f5f4f4;
@@ -4206,7 +4209,6 @@ footer .footer-copyright {
 }
 .view-archive-story .attachment .search-menu {
   padding-top: 20px;
-  padding-bottom: 20px;
   white-space: nowrap;
   overflow-x: auto;
 }
@@ -4297,6 +4299,8 @@ footer .footer-copyright {
 }
 .view-archive-story .archive-header .archive-calender-custom .views-exposed-form .views-exposed-widget input[type="text"] {
   background: url(../images/calender-icon.png) no-repeat center right;
+  width: 138px;
+  border-radius: 3px;
 }
 .view-archive-story .archive-header .archive-calender-custom .views-exposed-form .views-exposed-widget .description {
   position: absolute;
@@ -4306,6 +4310,7 @@ footer .footer-copyright {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-size: 0.75rem;
+  display: none;
 }
 .view-archive-story .slick-prev, .view-archive-story .slick-next {
   font-size: 0;
@@ -4320,6 +4325,7 @@ footer .footer-copyright {
   border: none;
   outline: none;
   background: transparent;
+  border-right: 1px solid #ddd;
 }
 .view-archive-story .slick-next {
   right: 0px;
