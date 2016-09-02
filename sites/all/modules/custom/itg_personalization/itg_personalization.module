@@ -299,3 +299,13 @@ function itg_personalization_views_pre_render(&$view) {
     }
   }
 }
+
+/**
+ * Implements hook_views_api().
+ */
+function itg_personalization_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'itg_personalization') . '/views',
+  );
+}
