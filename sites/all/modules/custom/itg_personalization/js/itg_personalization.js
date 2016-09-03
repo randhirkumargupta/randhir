@@ -25,4 +25,8 @@ jQuery(document).ready(function () {
     // Change text of select option.
     jQuery("#edit-field-ugc-ctype-und option[value='photogallery']").text('Photo');
     jQuery("#edit-field-ugc-ctype-und option[value='videogallery']").text('Video');
+    
+    jQuery("#views-form-personalization-my-preferences-block #edit-reset")
+    .appendTo("#views-form-personalization-my-preferences-block #edit-actions");
+    
 });

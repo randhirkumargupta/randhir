@@ -56,7 +56,20 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
         '#display_values' => TRUE,
         '#slider_length' => '400px',
       );      
-    }
+    }    
+    // Add reset button.
+    $form['reset'] = array(
+      '#type' => 'button',
+      '#button_type' => 'reset',
+      '#value' => t('Reset'),
+      '#weight' => 9,
+      '#validate' => array(),
+      '#attributes' => array(
+            'onclick' => 'jQuery(".sliderfield").find(".ui-slider-range").css("width", "50%");
+        jQuery(".sliderfield").find(".ui-slider-handle").css("left", "50%");
+        jQuery(".sliderfield").find(".sliderfield-display-values-field").text(50); return false;',
+          ),
+    );
     // Submit to the current page if not a page display.
     if ($this->view->display_handler->plugin_name != 'page') {
       $form['#action'] = $base_url . '/personalization/my-preferences';

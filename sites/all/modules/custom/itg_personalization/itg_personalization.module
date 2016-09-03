@@ -34,8 +34,7 @@ function itg_personalization_menu() {
     'title' => t('Personalization'),
     'description' => t('User personalized content.'),
     'page callback' => 'itg_personalization_home_page',
-    'access callback' => TRUE,
-    //'access arguments' => array('view personalized content'),
+    'access callback' => TRUE,    
     'type' => MENU_NORMAL_ITEM,
   );
   $items['personalization/%'] = array(
