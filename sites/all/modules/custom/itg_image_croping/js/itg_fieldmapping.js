@@ -60,6 +60,16 @@ var mTimer=null;
 
  }, 200);
     });
+//  cancel image
+    jQuery('.cancel-image').click(function() {
+        if (jQuery('.div-upload-img').hasClass('active'))
+        {
+            jQuery('#file-preview').hide();
+        } else {
+            jQuery('#file-preview').hide();
+            jQuery('#search-preview').show();
+        }
+    })
 
     // Save button click - save tags
     jQuery('#file-preview').on('click', '#btnsavetagedit', function() {

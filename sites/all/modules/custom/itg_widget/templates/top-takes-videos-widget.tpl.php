@@ -1,6 +1,6 @@
 <?php if (!empty($data)) : global $base_url; ?>
   <div class="top-takes-video-container">
-    <h3><span><?php print t("Top Takes") ?></span></h3>
+    <?php $is_fron_page = drupal_is_front_page(); if (empty($is_fron_page)) { ?><h3><span><?php print t("Top Takes") ?></span></h3><?php } ?>
     <ul>  
       <?php foreach ($data as $video_key => $video_data) { ?>
         <li id="top-takes-<?php echo $video_data->nid ?>" class="top-takes-video top-takes-list top-takes-<?php echo $video_key ?>"">
