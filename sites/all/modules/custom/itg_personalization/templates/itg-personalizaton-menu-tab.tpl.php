@@ -31,7 +31,9 @@
     array('attributes' => array('class' => array('use-ajax'))));
   ?>
   </li>    
-  <li class="my-credits"><a href="javascript:;"><?php print t('My Credits'); ?></a></li>
+  <li class="my-credits">
+    <?php echo l(t('My Credits'), 'personalization/my-credits'); ?>      
+  </li>
   <li class="edit-profile"><a href="javascript:;"><?php print t('Edit Profile'); ?></a></li>
 </ul>
 

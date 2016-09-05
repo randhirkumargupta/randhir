@@ -112,6 +112,11 @@ function itg_personalization_theme() {
       'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
       'variables' => array('data' => NULL),
     ),    
+    'personalization_my_preferences' => array(
+      'template' => 'personalization-my-preferences',
+      'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
+      'variables' => array('data' => NULL),
+    ),    
   );
 
   return $themes;
@@ -137,6 +142,10 @@ function itg_personalization_block_info() {
   );
   $blocks['user_my_content'] = array(
     'info' => t('Personalized My Content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['user_my_preferences'] = array(
+    'info' => t('Personalized My Preferences'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
@@ -168,6 +177,10 @@ function itg_personalization_block_view($delta = '') {
       module_load_include('inc', 'node', 'node.pages');
       $form = node_add('ugc');      
       $block['content'] = drupal_render($form);
+      break;
+    case 'user_my_preferences':      
+      $data = itg_loyalty_reward_user_details(4);
+      $block['content'] = theme('personalization_my_preferences');
   }
 
   return $block;
