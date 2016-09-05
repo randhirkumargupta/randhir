@@ -1,0 +1,8 @@
+name = ITG Live TV
+description = "ITG Live TV Module"
+core = 7.x
+package = ITG
+
+files[] = itg_live_tv.module
+
+
