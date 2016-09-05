@@ -348,6 +348,7 @@ function feature_for_all_widgets_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'nid';
   $handler->display->display_options['fields']['title']['label'] = 'Content Title';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -432,11 +433,12 @@ print \'<a href="move-dont-miss-widget-node/section_wise_widget/\'.$_GET[\'type\
   $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
   $handler->display->display_options['sorts']['weight_1']['table'] = 'itg_widget_order';
   $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['relationship'] = 'nid';
+  /* Sort criterion: Content: Nid */
+  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['table'] = 'node';
+  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['relationship'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -1070,7 +1072,6 @@ print \'<a href="move-dont-miss-widget-node/dont_miss_content_widget/0/0/\'.$dat
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
     'nid' => 'nid',
-    'field_story_category' => 'field_story_category',
     'field_display_on' => 'field_display_on',
     'type' => 'type',
     'field_first_name' => 'field_first_name',
@@ -1082,7 +1083,7 @@ print \'<a href="move-dont-miss-widget-node/dont_miss_content_widget/0/0/\'.$dat
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -1095,20 +1096,15 @@ print \'<a href="move-dont-miss-widget-node/dont_miss_content_widget/0/0/\'.$dat
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_category' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_display_on' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'type' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -1171,6 +1167,7 @@ print \'<a href="move-dont-miss-widget-node/dont_miss_content_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -1353,6 +1350,7 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -1964,6 +1962,7 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';

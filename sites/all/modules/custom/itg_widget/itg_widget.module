@@ -161,7 +161,7 @@ function remove_extra_data() {
 //      'section_wise_content_ordering',
 //      'widget_anchors_listing',
 //      'category_wise_content_list',
- //     'photo_carousel_widget',
+          //     'photo_carousel_widget',
   );
   foreach ($widget as $view_name) {
     $num_deleted = db_delete('draggableviews_structure')
@@ -728,9 +728,10 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
   if (in_array($form['#form_id'], $form_to_used_session_checked)) {
     // $form_state['selection'] value is set by bulk operation submit.
     // Only selected nodes are come in $form_state['selection'] array.
-    // Here we are forcely chaing the array.
-    $form_state['selection'] = $_SESSION[$form['#form_id']];
-    $form_state['values']['views_bulk_operations'] = $form_state['selection'];
+    // Here we are forcely changing the array.
+    // for big story we are using single selection so skip for big story.
+      $form_state['selection'] = $_SESSION[$form['#form_id']];
+      $form_state['values']['views_bulk_operations'] = $form_state['selection'];
     $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
   }
 
@@ -769,7 +770,6 @@ function forms_uses_checked_content_id() {
   return array(
       'views_form_story_widget_page_1',
       'views_form_widget_anchors_listing_anchors_listing_page',
-      'views_form_section_wise_draggable_content_order_big_story_format',
       'views_form_section_wise_draggable_content_order_dont_miss_content',
       'views_form_home_page_feature_widget_page_1',
       'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
@@ -1174,17 +1174,20 @@ function itg_widget_preprocess_node(&$vars) {
  * @param string $nodequeue_name
  * @return array
  */
-function itg_widget_nodes_from_nodequeue($nodequeue_name) {
+function itg_widget_nodes_from_nodequeue($nodequeue_name, $is_dont_expire = FALSE, $min_range, $max_range) {
   $today = date('Y-m-d 00:00:00');
   $nodequeue_id = get_nodequeue_load_queue_by_name($nodequeue_name);
   $nq_query = db_select('nodequeue_nodes', 'nq');
   $nq_query->leftJoin('node', 'n', 'n.nid=nq.nid');
-  $nq_query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
+  if (!$is_dont_expire) {
+    $nq_query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
+    $nq_query->condition('fsed.field_story_expiry_date_value', $today, '>=');
+  }
   $nq_query->condition('nq.qid', $nodequeue_id);
   $nq_query->condition('n.status', '1');
-  $nq_query->condition('fsed.field_story_expiry_date_value', $today, '>=');
   $nq_query->addField('nq', 'nid', 'entity_id');
   $nq_query->orderBy('n.nid', 'DESC');
+  $nq_query->range($min_range, $max_range);
   return $nq_query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -1249,13 +1252,17 @@ function draggable_views_nodes_for_widgets($view_name, $page, $expire_date, $ran
   if (!empty($view_name) && !empty($page) && !empty($expire_date) && !empty($range_max) && !empty($range_max)) {
     $query = db_select('draggableviews_structure', 'dv_s');
     $query->leftJoin('node', 'n', 'n.nid=dv_s.entity_id');
-    $query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
+    if ($expire_date != "NOT") {
+      $query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
+      $query->fields('fsed', array('field_story_expiry_date_value'));
+    }
     $query->fields('dv_s', array('entity_id'));
-    $query->fields('fsed', array('field_story_expiry_date_value'));
     $query->condition('dv_s.view_name', $view_name);
     $query->condition('dv_s.view_display', $page);
     $query->condition('n.status', '1');
-    $query->condition('fsed.field_story_expiry_date_value', $expire_date, '>=');
+    if ($expire_date != "NOT") {
+      $query->condition('fsed.field_story_expiry_date_value', $expire_date, '>=');
+    }
     $query->orderBy('dv_s.weight', 'ASC');
     $query->groupBy('dv_s.entity_id');
     $query->range($range_min, $range_max);
