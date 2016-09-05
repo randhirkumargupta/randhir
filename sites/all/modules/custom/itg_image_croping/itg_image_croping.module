@@ -275,16 +275,16 @@ function itg_image_croping_edit_tags() {
     $fid = $_POST['tagid'];
     $tag = $_POST['name'];
     $tag_url = $_POST['url'];
-    $x_coordinate = $_POST['pic_x'];
-    $y_coordinate = $_POST['pic_y'];
+//    $x_coordinate = $_POST['pic_x'];
+//    $y_coordinate = $_POST['pic_y'];
     $type = $_POST['type'];
 
 
     $inserted_data = db_update('image_tags')->fields(array(
                 'tag_title' => $tag,
                 'tag_url' => $tag_url,
-                'x_coordinate' => $x_coordinate,
-                'y_coordinate' => $y_coordinate,
+//                'x_coordinate' => $x_coordinate,
+//                'y_coordinate' => $y_coordinate,
             ))->condition('id', $fid, '=')
             ->execute();
     if ($inserted_data) {

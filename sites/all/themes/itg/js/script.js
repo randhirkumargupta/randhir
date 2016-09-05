@@ -154,7 +154,7 @@ Drupal.behaviors.my_custom_behavior = {
     function headerMain(){
         
         //var logotxt = $('.container.header-logo').html();
-        $('.container.header-logo').prependTo('#block-itg-layout-manager-header-block');
+        $('.container.header-logo').prependTo('.itg-logo-container');
         $('.search-icon').click(function(){
             $(this).parents('div').find('.globle-search').css('width','255px');
         });
@@ -180,17 +180,22 @@ Drupal.behaviors.my_custom_behavior = {
     $('.tab-data').find('ul.itg-listing').css('padding-top','0');
 
      //search page result
+     var winWidth;
+    $(".view-front-end-global-search").find("#edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper, .views-submit-button, .views-reset-button").wrapAll("<div class='searh-all-filters'></div>");
     $('.itg-search-list').each(function(){
         $(this).find('.search-pic').each(function(){
             var current = $(this);        
             if(current.children().length == 0){          
               $(current).addClass("hide"); 
             }
-        });        
+        });      
+        winWidth = $(window).width();
         var currentSocial = $(this).children('.social-share');
-        var currentInfo = $(this).children(".search-detail").children(".other-info");
-        console.log(currentSocial);
-        currentSocial.appendTo(currentInfo);        
+        var currentInfo = $(this).children(".search-detail").children(".other-info"); 
+        currentSocial.appendTo(currentInfo);
+        if(winWidth < 768){
+            $(currentInfo).appendTo(this);
+        }
     });
         
     //pagination

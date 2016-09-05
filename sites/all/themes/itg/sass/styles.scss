@@ -225,7 +225,7 @@ header{
     }
     .logo{
         width:67px;
-        @include pos(absolute,-10px,null,null,10px);
+        @include pos(absolute,-30px,null,null,10px);
         img{
             @extend .max-wdt;
         }
@@ -1346,12 +1346,20 @@ footer{
         .social-share{
             @include display-inline;
             @include social-share;
+            margin-top:5px;
+            ul{
+                li{
+                    padding-right: 4px;                    
+                }
+            }
         }
         .other-info{
             @include itg-font($itg-roboto);
             @include font(12px);
             color: #8f8f8f;
-            margin-top: 15px;
+            padding-top: 15px;
+            overflow: hidden;
+            width: 100%;
         }
     }
     .item-list{
@@ -1450,6 +1458,26 @@ footer{
     }
     h1{
         @include font(24px,30px,700);       
+    }
+    .comment-mobile{
+        background: #1c1c1c;
+        margin: -15px -15px 20px;
+        font-family:$itg-roboto;
+        ul{
+            text-align: right;
+            li{        
+                @include display-inline;
+                a{
+                    color: #989898;  
+                    padding: 10px;
+                    display: block;
+                    text-transform:uppercase;
+                    i{
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
     }
     .story-left-section{
         margin: 0 -15px;
@@ -1637,11 +1665,13 @@ footer{
         @include font(12px);
         border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
+        @include clearfix;
         li{
-            @include display-inline;
+            @include float(left);
             padding: 10px 16px 5px;
             @include text-align(center);
             border-left: 1px solid $border-color;
+            @include calculate-width(2);
             a{
                 color:#c0c0c0;
                 i{
@@ -1664,10 +1694,11 @@ footer{
             }
             &:nth-child(7){
                 @include text-align(left);
+                border-left: none;
                 span{
                     color:#4d4d4d;
                 }
-            }
+            }            
             &:last-child{
                 line-height: 35px;
                 a{
@@ -1981,24 +2012,27 @@ footer{
 /*Start category wise content list css*/
 .view-category-wise-content-list{
     h1{
-        @include font(32px,null,400);        
+        @include font(25px,40px,700);        
         border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
     }
-    @include listing-with-image(catagory-listing,left,25px,pic,detail);
+    @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
         .pic{
-            width: 170px;
+            width: 144px;
+            padding-right: 10px;
         }
         .detail{
             h3{
-                margin-bottom: 10px;
-                font-weight: $itg-font-bold;
+                margin-bottom: 10px;                
+                @include font(15px,22px,$itg-font-regular);                    
+                color: #323232;    
             }
             p{
                 @include font(14px,19px);
                 color: #696969;
+                display: none;
             }
         }
     }
@@ -2014,12 +2048,12 @@ footer{
         padding:20px 0;
         border-bottom:1px solid $border-color;
         .pic{
-            width: 170px;
+            width: 140px;
         }
     .detail{
             h3{
-                margin-bottom: 10px;                
-                @include font(24px,null,$itg-font-bold);
+                margin-bottom: 5px;                
+                @include font(18px,null,$itg-font-bold);
             }
             p{
                 @include font(14px,22px);
@@ -2173,6 +2207,9 @@ footer{
 }
 /*End live block css*/
 /*Start css No result found side bar*/
+.sidebars{
+    margin-top: 40px;
+}
 .sidebars .block-itg-widget{
     span.no-result-found{
         background: #f3f3f3;
@@ -2835,11 +2872,12 @@ footer{
         list-style: none;
         margin:0 -10px;
         li{
-          padding: 15px;
+          padding: 15px 10px;
           float: left;
+          width:50%;
           .tile{
             figure{
-              width: 170px;
+              max-width: 100%;
               height: 127px;
               overflow: hidden;
               position: relative;
@@ -2989,6 +3027,7 @@ footer{
 .programe-container{
   @include listing-with-image(program-row,left,10px,pic,program-right);
   .program-row{
+      font-family: $itg-roboto;
     background-color: #f5f5f5;
     .programe-title{
       font-size: 22px;
@@ -3240,7 +3279,10 @@ footer{
                     @include itg-font($itg-roboto); 
                     display: block;
                     height:50px;
-                    padding-top:5px;
+                    padding-top:8px;
+                    span{
+                        display: block;
+                    }
                 }
                 &:hover{
                     background: #f5f4f4;
@@ -3266,8 +3308,7 @@ footer{
             }
         }
         .search-menu{
-            padding-top: 20px;
-            padding-bottom: 20px;
+            padding-top: 20px;            
             white-space: nowrap;
             overflow-x: auto;
             a{
@@ -3306,6 +3347,8 @@ footer{
                 padding: 10px 1em 0 0;
                 input[type="text"]{
                     background: url(../images/calender-icon.png) no-repeat center right;
+                    width: 138px;
+                    border-radius: 3px;
                 }
                 .description{
                     position: absolute;
@@ -3314,6 +3357,7 @@ footer{
                     left: 10px;
                     font-family: $itg-roboto;
                     @include font(12px);
+                    display: none;
                 }
             }
         }
@@ -3331,6 +3375,7 @@ footer{
     border: none;
     outline: none;    
     background: transparent;    
+    border-right: 1px solid #ddd;
 }
 .slick-next {
     right: 0px;
@@ -3357,3 +3402,35 @@ footer{
 }
 }
 /*css End archive-story */
+/*CSS start program RHS*/
+.program-rhs{
+    @include sidebar-heading;
+    h3{
+        display: block;
+        span{
+                padding:45px 20px 10px 30px;   
+            }
+    }
+    ul{
+        @extend .list-none;    
+        padding: 10px 20px 0 30px;
+        span.time{
+            color:#b1b1b1;
+            @include font(12px);
+            padding:10px 0;
+            display: block;
+        }
+        .detail{
+            padding:0 0 22px 0;
+        }
+    }
+    h4{
+        font-size: 18px;
+        background: #f5f5f5;
+        padding: 5px 5px;
+        font-weight: 700;
+        font-family: $itg-robotoslab;
+    }
+    @include listing-with-image(detail,right,10,pic,discription);
+}
+/*CSS end program RHS*/

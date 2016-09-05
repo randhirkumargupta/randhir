@@ -735,10 +735,6 @@
       $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
     });
     
-    jQuery('body').on('click','.sidebar-trigger',function(){
-      jQuery(this).parent().toggleClass('active');
-    });
-    
     //ITG Listing top spacing          
     $('.tab-data').find('ul.itg-listing').css('padding-top','0');
     
@@ -827,6 +823,10 @@ jQuery(document).ready(function(){
         jQuery(".ajax-loader").hide();
     });
     
+    // jquery code for sliding sidebar
+    jQuery('body').on('click','.sidebar-trigger',function(){
+      jQuery(this).parent().toggleClass('active');
+    });
     
 });
 

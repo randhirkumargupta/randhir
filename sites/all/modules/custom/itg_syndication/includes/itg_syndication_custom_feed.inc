@@ -30,6 +30,11 @@ function generate_custom_pattern_feed($data) {
   $nids = isset($data['syndication']) ? unserialize($data['syndication']) : array();
   $client = isset($data['client_title']) ? $data['client_title'] : "";
   $content_type = isset($data['web_property']) ? $data['web_property'] : "";
+  
+  // As known magazine is story content.
+  if($content_type == 'magazine') {
+    $content_type = 'story';
+  }
   $feed_type = isset($data['feed_type']) ? $data['feed_type'] : "";
   if (count($data) && (!empty($nids) && !empty($client) && !empty($content_type))) {
     /* get pattern of specific client for specific content_type */
@@ -308,6 +313,9 @@ function get_predefine_variables_value($node, $variable) {
       $node_alise_url = $base_url . '/' . drupal_get_path_alias("node/$node->nid");
       $value = $node_alise_url;
       break;
+    case 'node_title':
+      $value = $node->title;
+      break;
   }
   return $value;
 }
@@ -318,6 +326,7 @@ function pre_define_variables() {
       'node_published_date',
       'node_author',
       'node_permalink',
+      'node_title'
   );
 }
 
@@ -410,7 +419,7 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
           $fid_value = $values['fid'];
           $file_load = file_load($fid_value);
           $file_url = file_create_url($file_load->uri);
-          $required_value[] = (strlen($file_url)>8) ? $file_url : DEFAULT_URL;
+          $required_value[] = (strlen($file_url) > 8) ? $file_url : DEFAULT_URL;
           break;
         case 'uid':
           $uid_values = entity_load('user', $values['uid']);
@@ -477,7 +486,7 @@ function get_default_feed_pattern($feed_type, $content_type) {
       break;
     case "rss":
     case "mrss":
-      $default_pattern_file_path = drupal_get_path('module', 'itg_syndication') . "/default_feed_pattern/" . $feed_type . "_default_pattern.xml";
+      $default_pattern_file_path = drupal_get_path('module', 'itg_syndication') . "/default_feed_pattern/$content_type/" . $feed_type . "_default_pattern.xml";
       $default_pattern = file_get_contents($default_pattern_file_path);
       break;
   }
@@ -550,7 +559,7 @@ function get_lebel_of_field($entity_type = 'node', $bundle_name, $field_name) {
  */
 function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$form, &$form_state, $form_id) {
   $data = array();
-  $predefine_variables_markup = '';
+  $predefine_variables_markup = "";
   drupal_add_js('jQuery(document).ready(function(){
         jQuery("select#edit-field-syndication-feed-content-und").on(\'change\',function(){
            var selected =   jQuery(this).val();
@@ -578,14 +587,12 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
     $content_type = $form_state['build_info']['args'][0]->field_syndication_feed_content['und'][0]['value'];
     $predefine_variables_markup = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
   }
-
   $form['pre_define_vars'] = array(
       '#type' => 'markup',
       '#prefix' => '<div id="pre_define_vars_replace_wrapper">',
       '#suffix' => '</div>',
       '#markup' => $predefine_variables_markup,
   );
-
 
   $form['actions']['cancle'] = array(
       '#markup' => l(t('Cancel'), $_GET['destination'], array(
@@ -620,7 +627,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
  * @param array $form
  * @param array $form_state
  */
-function itg_syndication_form_syndication_feed_from_pattern_node_form_validate($form, &$form_state) {
+function itg_syndication_form_syndication_feed_from_pattern_node_form_validate(&$form, &$form_state) {
   $arg = arg();
   $invalid_vars = array();
   $node = (object) $form_state['values'];
@@ -644,6 +651,9 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_validate($
     }
     watchdog('debug', "Total " . count($result) . " results founds for combination");
   }
+  
+  // For retaing value of markup field.
+  $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
   #check for all valid variables
   is_all_vars_valid($xml_pattern, $content_type);
 }

@@ -497,7 +497,7 @@ body.sidebar-second{
     top: 50px;
     left: 100%;
     width: 330px;
-    z-index: 9999;
+    z-index: 99999;
     transition: all 500ms ease 0s;
     &.active{
       transform: translateX(-330px);
@@ -1805,6 +1805,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       thead{
         padding-right: 20px;
         padding-top: 8px;
+        padding-left: 0;
         width: 220px;
         th{
           font-weight: 400;
@@ -1832,7 +1833,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     padding-left: 220px;
   }
   .form-field-name-field-common-related-content{
-    .form-type-textfield .form-text{max-width: 840px;}
+    .form-type-textfield .form-text{max-width: 840px !important;}
   }
 }
 .form-field-name-field-astro-date-range{
@@ -1941,7 +1942,10 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-syndication-ftp-details-values"], 
 [id*="field-email-address-values"], 
 [id*="field-mega-review-review-values"],
-[id*="field-story-highlights-values"]{
+[id*="field-story-highlights-values"], 
+[id*="field-story-template-quotes-values"], 
+[id*="field-story-template-factoids-values"], 
+[id*="field-story-template-guru-values"]{
   @extend .itg-add-another-item;
 }
 [id*="field-erf-registration-fee-values"], 
@@ -4728,6 +4732,7 @@ div.node{
     @extend .fleft;
     line-height: 32px;
     margin-bottom: 0;
+    width: 810px;
   }
   .block-itg-story-list{
     margin: 10px 0 0;
@@ -6554,4 +6559,23 @@ div.node{
 }
 #edit-metatags-und-basic{
   border: none;
+}
+[id*="field-story-template-quotes-values"], 
+[id*="field-story-template-factoids-values"],
+[id*="field-story-template-guru-values"]{
+  tbody tr{
+    td{
+      border: none;
+      padding-bottom: 10px;
+      .form-type-textfield{
+        float: left;
+      }
+      > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+        margin: 1px 0 0 10px;
+      }
+    }
+  }
+  &+.description{
+    display: none !important;
+  }
 }

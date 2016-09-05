@@ -192,7 +192,7 @@ function online_story_archive_views_default_views() {
     18 => 0,
     23 => 0,
   );
-  $handler->display->display_options['path'] = 'archive-story';
+  $handler->display->display_options['path'] = 'online-archive-story';
   $export['archive_story'] = $view;
 
   return $export;

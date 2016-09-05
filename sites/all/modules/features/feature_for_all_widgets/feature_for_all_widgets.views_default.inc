@@ -359,7 +359,6 @@ function feature_for_all_widgets_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['group_column'] = 'entity_id';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
@@ -709,7 +708,6 @@ print \'<a href="move-dont-miss-widget-node/section_wise_widget/\'.$_GET[\'type\
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
   /* Field: Content: Type */
@@ -952,7 +950,6 @@ print \'<a href="move-dont-miss-widget-node/we_may_suggest_widget/\'.$_GET[\'typ
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['relationship'] = 'nid';
-  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
   /* Field: Content: Type */
@@ -1365,7 +1362,6 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
-  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
   /* Field: Field: First name */
@@ -1636,7 +1632,6 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
-  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
   /* Field: Field: First name */
@@ -2196,7 +2191,6 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
-  $handler->display->display_options['fields']['field_story_category']['label'] = 'Category';
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
   /* Field: Field: First name */
