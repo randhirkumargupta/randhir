@@ -112,8 +112,8 @@ function itg_personalization_theme() {
       'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
       'variables' => array('data' => NULL),
     ),    
-    'personalization_my_preferences' => array(
-      'template' => 'personalization-my-preferences',
+    'personalization_my_point' => array(
+      'template' => 'personalization-my-point',
       'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
       'variables' => array('data' => NULL),
     ),    
@@ -144,8 +144,8 @@ function itg_personalization_block_info() {
     'info' => t('Personalized My Content'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['user_my_preferences'] = array(
-    'info' => t('Personalized My Preferences'),
+  $blocks['user_my_point'] = array(
+    'info' => t('Personalized My Points'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
@@ -178,9 +178,24 @@ function itg_personalization_block_view($delta = '') {
       $form = node_add('ugc');      
       $block['content'] = drupal_render($form);
       break;
-    case 'user_my_preferences':      
+    case 'user_my_point':      
       $data = itg_loyalty_reward_user_details(4);
-      $block['content'] = theme('personalization_my_preferences');
+      $data['unit_description'][] = array(
+        'activity_name' => 'Content Share',
+        'points_per_activity' => '05',
+        'earned_points' => '50',
+      );
+      $data['unit_description'][] = array(
+        'activity_name' => 'UGC Contribution',
+        'points_per_activity' => '10',
+        'earned_points' => '100',
+      );
+      $data['unit_description'][] = array(
+        'activity_name' => 'Refer a Friend',
+        'points_per_activity' => '20',
+        'earned_points' => '200',
+      );
+      $block['content'] = theme('personalization_my_point', array('data' => $data));
   }
 
   return $block;
