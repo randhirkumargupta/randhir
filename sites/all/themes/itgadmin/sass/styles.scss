@@ -4131,7 +4131,6 @@ div.node{
     label{
       @extend .hide;
       &+.form-textarea-wrapper{
-        padding-left: 150px;
         &:after{
           content: '';
           @extend .dib;
@@ -5819,6 +5818,7 @@ div.node{
 .page-node-add-podcast, 
 .page-node-add-recipe, 
 .node-type-print-team-integration,
+[id*="field-service-content-values"],
 .page-node-add-poll{
     .form-type-managed-file{
       .image-widget-data{
@@ -6577,5 +6577,18 @@ div.node{
   }
   &+.description{
     display: none !important;
+  }
+}
+[id*="vas-service-content-node-form"]{
+  div.vertical-tabs{
+    display: none;
+  }
+}
+.page-node-delete{
+  .confirmation{
+    margin-top: 20px;
+  }
+  .action-with-title #page-title{
+    float: none;
   }
 }
