@@ -293,8 +293,13 @@
             .profile-pic, .profile-detail{
                 @include float(none);
             } 
+            .profile-pic img{
+                width: 60px;
+                height: 60px;
+            }
             .profile-detail {
-                margin:0;
+                width: auto;
+                margin: 0px 0 0 10px;
                 ul {
                     li{ 
                         @include float(none);
@@ -303,8 +308,16 @@
                         +li{
                             border-left: none; 
                         }
+                        &:last-child{
+                            border-left:none;                            
+                        }
                     }
-                }    
+                } 
+                ul.date-update{                    
+                    li{
+                        margin-bottom: 0px;
+                    }   
+                }
             }
             ul.social-links{                
                 li{
@@ -338,7 +351,10 @@
         }
     }
     .story-right{
-        width: 79%;        
+        width: 79%;  
+        .byline .profile-detail{
+            margin: 0px 0 0 10px
+        }
     }
     .snap-post{ 
         padding: 20px 20px 20px 100px;
@@ -496,6 +512,7 @@
                    width: 170px;
             }
             .detail{
+                overflow: hidden;                    ;
                 h3{
                     margin-bottom: 10px;
                     @include font(24px);
@@ -505,6 +522,9 @@
     }
 /*End anchors listing css*/
 /*CSS start sidebar */
+section.sidebar{
+    border: 1px solid #ddd;
+}
 .sidebars{
     margin-top: 0px;
 }
@@ -544,7 +564,23 @@
     }
 }
 /*CSS End Photo landing page*/
-
+/* start side bar common */
+.sidebar-second{
+    .may-be-suggest-container, .top-takes-video-container, .watch-right-now-video{
+        h3{
+            display: block;
+            span{
+                padding:45px 20px 10px 30px;   
+            }        
+        }
+        ul{
+            li{
+                padding:10px 24px 10px 30px;
+            }
+        }
+    }
+}
+/* End side bar common */
 
 
 
