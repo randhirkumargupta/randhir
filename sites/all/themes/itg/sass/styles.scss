@@ -2872,11 +2872,12 @@ footer{
         list-style: none;
         margin:0 -10px;
         li{
-          padding: 15px;
+          padding: 15px 10px;
           float: left;
+          width:50%;
           .tile{
             figure{
-              width: 170px;
+              max-width: 100%;
               height: 127px;
               overflow: hidden;
               position: relative;
