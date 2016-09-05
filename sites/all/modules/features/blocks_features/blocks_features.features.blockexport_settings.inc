@@ -7766,12 +7766,7 @@ taxonomy/term/*
 personalization/my-saved-content
 snappost
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -7798,7 +7793,7 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -7808,12 +7803,7 @@ taxonomy/term/*
 personalization/my-saved-content
 snappost
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -7910,7 +7900,7 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -7920,12 +7910,7 @@ taxonomy/term/*
 personalization/my-saved-content
 snappost
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -8078,7 +8063,7 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8088,12 +8073,7 @@ taxonomy/term/*
 personalization/my-saved-content
 snappost
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -8246,7 +8226,7 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8256,12 +8236,7 @@ taxonomy/term/*
 personalization/my-saved-content
 snappost
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -8414,7 +8389,7 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8424,12 +8399,7 @@ taxonomy/term/*
 personalization/my-saved-content
 snappost
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -8582,7 +8552,7 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8592,12 +8562,7 @@ taxonomy/term/*
 personalization/my-saved-content
 snappost
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -10906,7 +10871,7 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -10914,14 +10879,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -11032,7 +10991,7 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11040,14 +10999,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -11310,14 +11263,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -11436,14 +11383,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -11670,7 +11611,7 @@ node/*/edit',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11678,14 +11619,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -11796,7 +11731,7 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11804,14 +11739,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -12066,7 +11995,7 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12074,14 +12003,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -12192,7 +12115,7 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12200,14 +12123,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -12462,7 +12379,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12470,14 +12387,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -12588,7 +12499,7 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12596,14 +12507,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -12858,7 +12763,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12866,14 +12771,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -12984,7 +12883,7 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12992,14 +12891,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -13254,7 +13147,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -13262,14 +13155,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -13380,7 +13267,7 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -13388,14 +13275,8 @@ user/*
 taxonomy/term/*
 <front>
 snappost
-personalization/my-saved-content
 personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 tv-show
 tv-show/*',
   'title' => '',
@@ -16090,12 +15971,7 @@ personalization/my-content',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content',
+personalization/*',
   'title' => '<none>',
   'cache' => 8,
 );
@@ -16382,12 +16258,7 @@ personalization/saved-items',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content',
+personalization/*',
   'title' => '<none>',
   'cache' => 8,
 );
@@ -16402,12 +16273,7 @@ personalization/my-content',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content',
+personalization/*',
   'title' => '<none>',
   'cache' => 8,
 );
@@ -16422,12 +16288,7 @@ personalization/my-content',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content',
+personalization/*',
   'title' => '<none>',
   'cache' => 8,
 );
@@ -16442,12 +16303,7 @@ personalization/my-content',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content',
+personalization/*',
   'title' => '<none>',
   'cache' => 8,
 );
@@ -16462,12 +16318,7 @@ personalization/my-content',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content',
+personalization/*',
   'title' => '<none>',
   'cache' => 8,
 );
@@ -16482,12 +16333,7 @@ personalization/my-content',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content',
+personalization/*',
   'title' => '<none>',
   'cache' => 8,
 );
@@ -17738,16 +17584,11 @@ personalization/saved-items',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17762,16 +17603,11 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17790,12 +17626,7 @@ tv-show/*',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17814,12 +17645,7 @@ tv-show/*',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17834,16 +17660,11 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17858,16 +17679,11 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17882,16 +17698,11 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17906,16 +17717,11 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17930,16 +17736,11 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17954,16 +17755,11 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -17978,16 +17774,11 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18002,16 +17793,11 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18026,16 +17812,11 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18050,16 +17831,11 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18246,12 +18022,7 @@ tv-show/*',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18266,16 +18037,11 @@ tv-show/*',
   'theme' => 'itg',
   'status' => 1,
   'weight' => 0,
-  'region' => 'sidebar_second',
+  'region' => 'content',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18294,12 +18060,7 @@ tv-show/*',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18318,12 +18079,7 @@ tv-show/*',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18342,12 +18098,7 @@ tv-show/*',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18366,12 +18117,7 @@ tv-show/*',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
@@ -18390,18 +18136,209 @@ tv-show/*',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
-personalization/saved-items
-personalization/saved-items/all
-personalization/saved-items/articles
-personalization/saved-items/videos
-personalization/saved-items/photogalleries
-personalization/my-content
+personalization/*
 user
 user/*
 tv-show
 tv-show/*',
   'title' => '',
   'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1253,
+  'module' => 'views',
+  'delta' => 'bbfa04e64b626dbacfbcbb96520d0e77',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'personalization',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'personalization/my-preferences',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1254,
+  'module' => 'views',
+  'delta' => 'bbfa04e64b626dbacfbcbb96520d0e77',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-preferences',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1255,
+  'module' => 'views',
+  'delta' => 'bbfa04e64b626dbacfbcbb96520d0e77',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-preferences',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1256,
+  'module' => 'views',
+  'delta' => 'bbfa04e64b626dbacfbcbb96520d0e77',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-preferences',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1257,
+  'module' => 'views',
+  'delta' => 'bbfa04e64b626dbacfbcbb96520d0e77',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-preferences',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1258,
+  'module' => 'views',
+  'delta' => 'bbfa04e64b626dbacfbcbb96520d0e77',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-preferences',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1259,
+  'module' => 'views',
+  'delta' => 'bbfa04e64b626dbacfbcbb96520d0e77',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-preferences',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1260,
+  'module' => 'itg_personalization',
+  'delta' => 'user_my_preferences',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1261,
+  'module' => 'itg_personalization',
+  'delta' => 'user_my_preferences',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1262,
+  'module' => 'itg_personalization',
+  'delta' => 'user_my_preferences',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1263,
+  'module' => 'itg_personalization',
+  'delta' => 'user_my_preferences',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1264,
+  'module' => 'itg_personalization',
+  'delta' => 'user_my_preferences',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1265,
+  'module' => 'itg_personalization',
+  'delta' => 'user_my_preferences',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1266,
+  'module' => 'itg_personalization',
+  'delta' => 'user_my_preferences',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
 );
   $export['block_custom'][] = array(
   'bid' => 1,
