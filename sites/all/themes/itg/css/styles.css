@@ -382,6 +382,10 @@ header {
   color: #131212;
   vertical-align: middle;
 }
+#block-itg-layout-manager-header-block .navigation ul li.sponser-link a {
+  background: #ffc106;
+  color: #323232;
+}
 #block-itg-layout-manager-header-block .navigation ul#newlist {
   position: absolute;
   right: 0;
@@ -4452,10 +4456,10 @@ footer .footer-copyright {
   display: block;
 }
 .program-rhs h3 span {
-  padding: 45px 20px 10px 30px;
+  padding: 45px 20px 10px 0px;
 }
 .program-rhs ul {
-  padding: 10px 20px 0 30px;
+  padding: 10px 20px 0 0px;
 }
 .program-rhs ul span.time {
   color: #b1b1b1;

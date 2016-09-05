@@ -287,6 +287,10 @@ header{
                         }
                     }
                 }
+                &.sponser-link a{
+                    background: $yellow-bg;
+                    color: $black-color;
+                }
             }
             &#newlist{
                 position: absolute;
@@ -3432,12 +3436,12 @@ footer{
     h3{
         display: block;
         span{
-                padding:45px 20px 10px 30px;   
+                padding:45px 20px 10px 0px;   
             }
     }
     ul{
         @extend .list-none;    
-        padding: 10px 20px 0 30px;
+        padding: 10px 20px 0 0px;
         span.time{
             color:#b1b1b1;
             @include font(12px);
