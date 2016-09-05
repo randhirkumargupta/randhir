@@ -3744,11 +3744,12 @@ footer .footer-copyright {
   margin: 0 -10px;
 }
 .view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li {
-  padding: 15px;
+  padding: 15px 10px;
   float: left;
+  width: 50%;
 }
 .view-video-list-of-category .view-content .photo-list li .tile figure, .view-video-landing-header .view-content .photo-list li .tile figure {
-  width: 170px;
+  max-width: 100%;
   height: 127px;
   overflow: hidden;
   position: relative;

@@ -531,6 +531,24 @@
     }    
 }
 /*End category wise content list css*/
+
+/*CSS Starts Photo landing page*/
+.view-video-list-of-category, .view-video-landing-header, .view-photo-list-of-category{
+    .view-content{      
+        .photo-list{
+            li{
+                padding: 15px;
+                width: 25%;                            
+            }
+        }
+    }
+}
+/*CSS End Photo landing page*/
+
+
+
+
+
 }
 /*End CSS Desktop version*/
 
