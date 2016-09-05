@@ -378,10 +378,9 @@
   overflow: hidden;
 }
 .view-photo-list-of-category .view-content .photo-list li {
+  width: 50%;
   padding: 15px;
   float: left;
-  overflow: hidden;
-  height: 242px;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure {
   width: 170px;

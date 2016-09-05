@@ -643,6 +643,13 @@
   }
 
   /*End category wise content list css*/
+  /*CSS Starts Photo landing page*/
+  .view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li {
+    padding: 15px;
+    width: 25%;
+  }
+
+  /*CSS End Photo landing page*/
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {

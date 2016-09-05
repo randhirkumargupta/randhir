@@ -141,7 +141,6 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
     'callback' => 'itg_ads_value_ajax_callback',
     'wrapper' => $ads_placeholder_field . '_replace',
   );
-//$form['field_ads_placeholder']['und']['#validated'] = TRUE;
 $form['field_ads_placeholder']['#validated'] = TRUE;
   
   // Setup supplement select
