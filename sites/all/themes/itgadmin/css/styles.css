@@ -6551,3 +6551,60 @@ div.node #comments h2 {
 .page-node-delete .action-with-title #page-title {
   float: none;
 }
+
+.page-error .page-error-pic {
+  text-align: center;
+}
+.page-error .page-error-pic p {
+  font: 16px/18px 'Roboto Slab';
+}
+.page-error .go-back {
+  color: #000;
+  padding-top: 30px;
+  font: 19px/28px 'Roboto Slab';
+}
+.page-error .go-back a {
+  color: #1a3c8d;
+}
+.page-error .error-or {
+  display: block;
+  text-indent: 100px;
+  color: #6c6c6c;
+  font: 19px/28px 'Roboto Slab';
+  padding: 20px 0;
+}
+.page-error h3 {
+  background-color: #1a3c8d;
+  color: #fff;
+  display: inline-block;
+  font: 500 18px/28px Roboto;
+  padding: 0 5px;
+  text-transform: uppercase;
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+.page-error .latest-headlines-list {
+  list-style: none;
+  max-width: 430px;
+}
+.page-error .latest-headlines-list li {
+  font-size: 14px;
+  padding-left: 10px;
+  position: relative;
+}
+.page-error .latest-headlines-list li .red {
+  color: #d12019;
+}
+.page-error .latest-headlines-list li:before {
+  background-color: #d12019;
+  border-radius: 50%;
+  content: "";
+  height: 6px;
+  left: 0;
+  position: absolute;
+  top: 6px;
+  width: 6px;
+}
+.page-error .latest-headlines-list li + li {
+  margin-top: 20px;
+}
