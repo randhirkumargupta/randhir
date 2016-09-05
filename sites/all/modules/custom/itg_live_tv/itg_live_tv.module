@@ -206,7 +206,7 @@ function itg_live_tv_views_pre_render(&$view) {
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_live_tv' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_live_tv') . '/js/itg_live_tv.js', array('weight' => 1));
-  // Add "Create Breaking news" on listing page of Breaking news
+  // condition for view name
   if ($view->name == "live_tv_integration") {
     $header_content_breaking = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_breaking .= l('Create Live tv integration', 'node/add/live-tv-integration', array('query' => array('destination' => 'live-tv-integration')));

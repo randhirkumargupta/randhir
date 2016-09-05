@@ -30,7 +30,7 @@
                         'type': 'POST',
                         // dataType: 'json',
                         beforeSend: function () {
-                            // setting a timeout
+                           
                             $('#widget-ajex-loader').show();
 
 
