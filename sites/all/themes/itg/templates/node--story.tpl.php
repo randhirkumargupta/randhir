@@ -177,7 +177,14 @@
             if(!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
             if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
-            $buzz_output.= '<div class="buzz-img">' . $img . '</div>';
+            $buzz_output.= '<div class="buzz-img"><div class="social-share">
+          <ul>
+              <li><a href="#" class="share"><i class="fa fa-share-alt"></i></a></li>
+              <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
+          </ul>
+      </div>' . $img . '</div>';
             }
             if(!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
             $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
@@ -190,8 +197,7 @@
         }
         ?>
       
-      <!-- condition for buzz end -->
-      
+      <!-- condition for buzz end -->      
       
       <div class="section-left-bototm">
           <div class="social-list">
