@@ -141,7 +141,14 @@ function itg_layout_manager_block_view($delta = '') {
   
   switch ($delta) {
     case 'header_block':
-       
+      
+      // Code for adds
+        drupal_add_js('http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap', array('scope' => 'header'));
+        drupal_add_js('http://static.chartbeat.com/js/chartbeat_mab.js', array('scope' => 'header'));
+        drupal_add_js('http://xp1.zedo.com/client/xp1/fmos.js', array('scope' => 'header'));
+        drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads_header_script.js', array('scope' => 'header'));
+      // end
+      
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
       
