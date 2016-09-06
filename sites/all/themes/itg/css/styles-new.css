@@ -744,7 +744,6 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .view-personalization-saved-content .views-table th {
   background-color: #1a3c8d;
-  font-weight: 500;
   color: #fff;
   border-top: 1px solid #e0e0e0;
 }
@@ -975,6 +974,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   width: 170px;
   font: 300 20px/28px Roboto;
   color: #fff;
+  cursor: pointer;
 }
 #content #block-itg-personalization-user-my-content .node-ugc-form .form-actions a.button {
   background: url(../images/btn-blue.png) no-repeat;
@@ -987,4 +987,156 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #fff;
 }
 
+.view-personalization-my-preferences {
+  margin: 0 auto;
+  max-width: 765px;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block table {
+  width: 100%;
+  margin: 40px 30px;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block table td {
+  padding: 10px 0;
+  vertical-align: bottom;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name a {
+  color: #000;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions {
+  padding: 20px 0;
+  text-align: center;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-submit, .view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-reset {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/28px Roboto;
+  color: #fff;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+#block-itg-personalization-user-my-point {
+  max-width: 666px;
+  margin: 0 auto;
+}
+#block-itg-personalization-user-my-point .unit-description {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+#block-itg-personalization-user-my-point .unit-description th, #block-itg-personalization-user-my-point .unit-description td {
+  padding: 10px;
+  max-width: 300px;
+  font: 300 16px/22px Roboto;
+  min-width: 120px;
+}
+#block-itg-personalization-user-my-point .unit-description th {
+  background-color: #1a3c8d;
+  color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+#block-itg-personalization-user-my-point .unit-description th:first-child {
+  border-radius: 5px 0 0 0;
+  border-left: 1px solid #e0e0e0;
+  min-width: 300px;
+  text-align: left;
+  padding-left: 20px;
+}
+#block-itg-personalization-user-my-point .unit-description th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #e0e0e0;
+}
+#block-itg-personalization-user-my-point .unit-description td {
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+#block-itg-personalization-user-my-point .unit-description td:first-child {
+  text-align: left;
+  padding-left: 20px;
+}
+#block-itg-personalization-user-my-point .header-point {
+  color: #1a3c8d;
+  padding: 50px 0 20px 20px;
+  text-align: left;
+}
+#block-itg-personalization-user-my-point .header-point span {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px 0;
+  font: 400 14px/18px Roboto;
+}
+#block-itg-personalization-user-my-point .header-point span + span:before {
+  content: '|';
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 20px;
+}
+#block-itg-personalization-user-my-point .header-point span strong {
+  font-weight: 500;
+}
+
 /* End of Personalization CSS */
+/* CSS For Error Pages */
+.page-error .page-error-pic {
+  text-align: center;
+}
+.page-error .page-error-pic p {
+  font: 16px/18px 'Roboto Slab';
+}
+.page-error .go-back {
+  color: #000;
+  padding-top: 30px;
+  font: 19px/28px 'Roboto Slab';
+}
+.page-error .go-back a {
+  color: #1a3c8d;
+}
+.page-error .error-or {
+  display: block;
+  text-indent: 100px;
+  color: #6c6c6c;
+  font: 19px/28px 'Roboto Slab';
+  padding: 20px 0;
+}
+.page-error h3 {
+  background-color: #1a3c8d;
+  color: #fff;
+  display: inline-block;
+  font: 500 18px/28px Roboto;
+  padding: 0 5px;
+  text-transform: uppercase;
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+.page-error .latest-headlines-list {
+  list-style: none;
+  max-width: 430px;
+}
+.page-error .latest-headlines-list li {
+  font-size: 14px;
+  padding-left: 10px;
+  position: relative;
+}
+.page-error .latest-headlines-list li .red {
+  color: #d12019;
+}
+.page-error .latest-headlines-list li:before {
+  background-color: #d12019;
+  border-radius: 50%;
+  content: "";
+  height: 6px;
+  left: 0;
+  position: absolute;
+  top: 6px;
+  width: 6px;
+}
+.page-error .latest-headlines-list li + li {
+  margin-top: 20px;
+}
+
+/* End of Error Pages CSS */

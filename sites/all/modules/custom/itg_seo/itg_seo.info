@@ -1,0 +1,6 @@
+name = ITG SEO
+description = "Module: Contains functionality related to seo."
+package = "ITG"
+core = 7.x
+
+files[] = itg_seo.module
