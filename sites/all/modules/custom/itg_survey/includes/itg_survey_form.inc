@@ -12,8 +12,8 @@ function itg_survey_survey_form() {
   global $base_url;
   
   //Get node of current survey (load all questions ans answer options to generate survey form)
-  $node = itg_survey_get_current_survey();
-
+  $arg = arg();
+  $node = node_load($arg[1]);
   
   //Check: Any survey is activated OR not
   if ($node) {
@@ -282,7 +282,8 @@ function itg_survey_survey_form() {
         '#markup' => '<h2>Survey has been expired!</h2>',
     );
   }
-
+  
+  //$form['#theme'] = array('itg_survey_form');
   return $form;
 }
 
@@ -536,7 +537,7 @@ function itg_survey_survey_form_submit($form, &$form_state){
     unset($_SESSION['survey_unique_key']);
   }
 
-  //Display saved survey message on final submit only.
+  //Display message on final submit.
   if ($num == ($form_detail['question_total'] - 1)) {
     drupal_set_message(t('Survey has been saved successfully. Thank you for taking our survey!'));
   }
