@@ -13,14 +13,26 @@
   .container {
     max-width: 750px;
   }
+
+  #block-views-photo-landing-slider-block {
+    max-width: 750px;
+  }
 }
 @media (min-width: 992px) {
   .container {
     max-width: 970px;
   }
+
+  #block-views-photo-landing-slider-block {
+    max-width: 970px;
+  }
 }
 @media (min-width: 1200px) {
   .container {
+    max-width: 1200px;
+  }
+
+  #block-views-photo-landing-slider-block {
     max-width: 1200px;
   }
 }
