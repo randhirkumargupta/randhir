@@ -48,7 +48,7 @@
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle;?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
                       <?php } ?>
                   </ul>
-                  <ul>
+                  <ul class="date-update">
                       <li class="mailto mhide"><i class="fa fa-envelope-o"></i> &nbsp;<?php
                               $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
                               print "<a href='mailto:$email'>Mail To Author</a>";
@@ -70,7 +70,7 @@
                   </div>
                   </div>
                   <?php if(!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-                  <div class="briefcase">
+                  <div class="briefcase mhide">
                       <h4><?php print t('Briefcase'); ?></h4>
                       <ul>
                           <?php
@@ -115,7 +115,7 @@
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle;?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
                       <?php } ?>
                   </ul>
-                  <ul>
+                  <ul class="date-update">
                      <li><?php print  date('F j, Y', $node->created); ?>   </li>
                       <li>UPDATED <?php print  date('H:i', $node->changed); ?> IST</li>
                       <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
@@ -136,6 +136,24 @@
       </div>
       
       <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
+            
+      <?php
+      if (empty($node->field_story_template_buzz[LANGUAGE_NONE])){
+      if(!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
+                  <div class="briefcase desktop-hide">
+                      <h4><?php print t('Briefcase'); ?></h4>
+                      <ul>
+                          <?php
+                          foreach ($node->field_story_highlights['und'] as $high) {
+                              print '<li>' . $high['value'] . '</li>';
+                          }
+                          ?>
+                      </ul>
+                  </div>
+      <?php } } ?>
+      
+      
+      
       <div class="description"><?php print render($content['body']); ?></div>
       
       </div>
