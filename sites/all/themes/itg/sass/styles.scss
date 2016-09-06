@@ -2155,11 +2155,12 @@ footer{
         font-family: $itg-roboto;
     }
     .anchor-left, .anchor-right{
-        @include float(left);
-        @include calculate-width(2);
+        @include float(none);
+        @include calculate-width(1);
     }
     .anchor-right{
-        padding-left:15px;
+        padding-left:0px;
+        padding-top:15px;
         a.active{
             @include font(22px,30px,700);            
             color: #33363b;

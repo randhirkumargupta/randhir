@@ -680,6 +680,9 @@
     padding: 15px;
     width: 25%;
   }
+  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-video-landing-header .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1) {
+    clear: left;
+  }
 
   /*CSS End Photo landing page*/
   /* start side bar common */
@@ -703,6 +706,23 @@
   }
 
   /*End start program RHS*/
+  /*CSS Start Anchor listing detail page*/
+  #block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
+    float: left;
+    width: 50%;
+  }
+  #block-views-anchor-landing-page-block .anchor-right {
+    padding-left: 15px;
+    padding-top: 0px;
+  }
+
+  /*CSS End Anchor listing detail page*/
+  /*CSS Start Photo landing page*/
+  .region-top {
+    margin-top: -30px;
+  }
+
+  /*CSS End Photo landing page*/
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {

@@ -2914,11 +2914,12 @@ footer .footer-copyright {
   clear: both;
 }
 #block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
-  float: left;
-  width: 50%;
+  float: none;
+  width: 100%;
 }
 #block-views-anchor-landing-page-block .anchor-right {
-  padding-left: 15px;
+  padding-left: 0px;
+  padding-top: 15px;
 }
 #block-views-anchor-landing-page-block .anchor-right a.active {
   font-size: 22px;

@@ -1,6 +1,9 @@
 /*Start CSS Desktop version*/
 @import "itg-variables";
 @import "itg-mixins";
+@media only screen and (max-width:1200px){
+    
+}
 /*Start header CSS Desktop version*/
 @media only screen and (min-width:768px){    
     h1{    
@@ -568,7 +571,10 @@ section.sidebar{
         .photo-list{
             li{
                 padding: 15px;
-                width: 25%;                            
+                width: 25%; 
+                &:nth-child(4n+1){
+                    clear: left;
+                }
             }
         }
     }
@@ -605,7 +611,24 @@ section.sidebar{
 }
 /*End start program RHS*/
 
+/*CSS Start Anchor listing detail page*/
+#block-views-anchor-landing-page-block{
+    .anchor-left, .anchor-right{
+        @include float(left);
+        @include calculate-width(2);
+    }
+    .anchor-right{
+        padding-left:15px;
+        padding-top:0px;
+    }
+}
+/*CSS End Anchor listing detail page*/
 
+/*CSS Start Photo landing page*/
+.region-top{
+    margin-top: -30px;
+}
+/*CSS End Photo landing page*/
 
 }
 /*End CSS Desktop version*/
