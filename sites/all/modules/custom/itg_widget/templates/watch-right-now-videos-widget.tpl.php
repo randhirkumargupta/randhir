@@ -1,6 +1,6 @@
 <?php if (!empty($data)) : global $base_url; ?>
   <div class="watch-right-now-video">
-    <h3><span><?php print t("Watch Right Now") ?></span></h3>
+    <?php $is_fron_page = drupal_is_front_page(); if (empty($is_fron_page)) { ?><h3><span><?php print t("Watch Right Now") ?></span></h3><?php } ?>
     <ul class="">    
       <?php foreach ($data as $video_key => $video_data) { ?>
         <li id="watch-right-now-<?php echo $video_data->nid ?>" class="watch-right-now-list watch-right-now-<?php echo $video_key ?>"">        

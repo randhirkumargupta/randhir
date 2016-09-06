@@ -1,3 +1,33 @@
+/*====================== IndiaToday Variables =========================*/
+/*=======================================================================*/
+/*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
+/*Fonts used in Indiatoday site*/
+/*Colors used in Indiatoday site*/
+/*Background Colors used in Indiatoday site*/
+/*Border Colors used in Indiatoday site*/
+/*Text color in Indiatoday site*/
+/*Background color in Indiatoday site*/
+/*navigation font in Indiatoday site*/
+/*Full radius in Indiatoday site*/
+/*footer color in Indiatoday site*/
+/*font family an font weight mixins*/
+/*font size an font weight mixins*/
+/*clear fix mixins*/
+/*Box sizeing mixins*/
+/*Center Block mixins*/
+/*Float mixins*/
+/*Display inline block mixins*/
+/*Text align block mixins*/
+/* Positional mixins */
+/* Calculate-width function */
+/* Tab Button mixins */
+/* Tab Listing mixins */
+/* Story Tag mixins */
+/* List before icon */
+/*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
 /*CSS For Search Page*/
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper {
   width: 100%;
@@ -348,10 +378,9 @@
   overflow: hidden;
 }
 .view-photo-list-of-category .view-content .photo-list li {
+  width: 50%;
   padding: 15px;
   float: left;
-  overflow: hidden;
-  height: 242px;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure {
   width: 170px;
@@ -715,7 +744,6 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .view-personalization-saved-content .views-table th {
   background-color: #1a3c8d;
-  font-weight: 500;
   color: #fff;
   border-top: 1px solid #e0e0e0;
 }
@@ -743,5 +771,372 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 300 16px/22px Roboto;
   min-width: 120px;
 }
+.view-personalization-saved-content .item-list ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-personalization-saved-content .item-list ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-next a, .view-personalization-saved-content .item-list ul.pager li.pager-last a, .view-personalization-saved-content .item-list ul.pager li.pager-first a, .view-personalization-saved-content .item-list ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-personalization-saved-content .item-list ul.pager li.pager-next.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-next.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
+
+#content #block-itg-personalization-user-my-content {
+  margin: 0 auto;
+  max-width: 720px;
+  text-align: left;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-name-field-ugc-ctype {
+  text-align: center;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-name-field-ugc-ctype .form-select {
+  width: 450px;
+  height: 44px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 3px 0 #ccc;
+  color: #bababa;
+  font: 300 16px/normal Roboto;
+  text-align: center;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textfield {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textfield label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 99;
+  position: relative;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textfield .form-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 160px;
+  z-index: 9;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea label {
+  width: 150px;
+  height: 125px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 99;
+  position: relative;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea .form-textarea-wrapper {
+  padding-left: 150px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea .form-textarea {
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file label, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file label {
+  width: 150px;
+  height: 125px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 99;
+  position: relative;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file {
+  width: 100%;
+  padding: 10px 10px 10px 160px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
+  width: 100px;
+  background-color: #ededed;
+  border: 1px solid #bababa;
+  height: 28px;
+  float: right;
+  cursor: pointer;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .ajax-progress-throbber, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .ajax-progress-throbber {
+  display: none;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file div.description, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file div.description {
+  margin-top: 40px;
+  padding-left: 160px;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data {
+  float: none;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield {
+  max-width: 200px;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  overflow: hidden;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield .form-text, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield .form-text {
+  border: 1px solid #ddd;
+  height: 34px;
+  padding: 5px;
+  position: static;
+  width: 100%;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield div.description, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield div.description {
+  display: none;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-submit[value="Remove"], #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-submit[value="Remove"] {
+  color: #ee4d4d;
+  font-size: 13px;
+  left: 550px;
+  position: absolute;
+  top: 16px;
+  cursor: pointer;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-actions {
+  padding: 20px 0;
+  text-align: center;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-actions .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/28px Roboto;
+  color: #fff;
+  cursor: pointer;
+}
+#content #block-itg-personalization-user-my-content .node-ugc-form .form-actions a.button {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/41px Roboto;
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+}
+
+.view-personalization-my-preferences {
+  margin: 0 auto;
+  max-width: 765px;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block table {
+  width: 100%;
+  margin: 40px 30px;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block table td {
+  padding: 10px 0;
+  vertical-align: bottom;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name a {
+  color: #000;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions {
+  padding: 20px 0;
+  text-align: center;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-submit, .view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-reset {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/28px Roboto;
+  color: #fff;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+#block-itg-personalization-user-my-point {
+  max-width: 666px;
+  margin: 0 auto;
+}
+#block-itg-personalization-user-my-point .unit-description {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+#block-itg-personalization-user-my-point .unit-description th, #block-itg-personalization-user-my-point .unit-description td {
+  padding: 10px;
+  max-width: 300px;
+  font: 300 16px/22px Roboto;
+  min-width: 120px;
+}
+#block-itg-personalization-user-my-point .unit-description th {
+  background-color: #1a3c8d;
+  color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+#block-itg-personalization-user-my-point .unit-description th:first-child {
+  border-radius: 5px 0 0 0;
+  border-left: 1px solid #e0e0e0;
+  min-width: 300px;
+  text-align: left;
+  padding-left: 20px;
+}
+#block-itg-personalization-user-my-point .unit-description th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #e0e0e0;
+}
+#block-itg-personalization-user-my-point .unit-description td {
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+#block-itg-personalization-user-my-point .unit-description td:first-child {
+  text-align: left;
+  padding-left: 20px;
+}
+#block-itg-personalization-user-my-point .header-point {
+  color: #1a3c8d;
+  padding: 50px 0 20px 20px;
+  text-align: left;
+}
+#block-itg-personalization-user-my-point .header-point span {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px 0;
+  font: 400 14px/18px Roboto;
+}
+#block-itg-personalization-user-my-point .header-point span + span:before {
+  content: '|';
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 20px;
+}
+#block-itg-personalization-user-my-point .header-point span strong {
+  font-weight: 500;
+}
 
 /* End of Personalization CSS */
+/* CSS For Error Pages */
+.page-error .page-error-pic {
+  text-align: center;
+}
+.page-error .page-error-pic p {
+  font: 16px/18px 'Roboto Slab';
+}
+.page-error .go-back {
+  color: #000;
+  padding-top: 30px;
+  font: 19px/28px 'Roboto Slab';
+}
+.page-error .go-back a {
+  color: #1a3c8d;
+}
+.page-error .error-or {
+  display: block;
+  text-indent: 100px;
+  color: #6c6c6c;
+  font: 19px/28px 'Roboto Slab';
+  padding: 20px 0;
+}
+.page-error h3 {
+  background-color: #1a3c8d;
+  color: #fff;
+  display: inline-block;
+  font: 500 18px/28px Roboto;
+  padding: 0 5px;
+  text-transform: uppercase;
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+.page-error .latest-headlines-list {
+  list-style: none;
+  max-width: 430px;
+}
+.page-error .latest-headlines-list li {
+  font-size: 14px;
+  padding-left: 10px;
+  position: relative;
+}
+.page-error .latest-headlines-list li .red {
+  color: #d12019;
+}
+.page-error .latest-headlines-list li:before {
+  background-color: #d12019;
+  border-radius: 50%;
+  content: "";
+  height: 6px;
+  left: 0;
+  position: absolute;
+  top: 6px;
+  width: 6px;
+}
+.page-error .latest-headlines-list li + li {
+  margin-top: 20px;
+}
+
+/* End of Error Pages CSS */

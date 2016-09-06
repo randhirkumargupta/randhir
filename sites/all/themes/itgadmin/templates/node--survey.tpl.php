@@ -49,6 +49,14 @@
           <div class="field-items"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
         </div>
         <div class="field">
+          <div class="field-label">Survey Questions Format:</div>
+          <div class="field-items"><?php echo $node->field_survey_questions_format[LANGUAGE_NONE][0]['value']; ?></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Publish:</div>
+          <div class="field-items"><?php echo $node->status ? 'Yes' : 'No'; ?></div>
+        </div>
+        <div class="field">
           <div class="field-label">Survey Question Display:</div>
           <div class="field-items"><?php echo ucwords($node->field_survey_question_display[LANGUAGE_NONE][0]['value']); ?></div>
         </div>
