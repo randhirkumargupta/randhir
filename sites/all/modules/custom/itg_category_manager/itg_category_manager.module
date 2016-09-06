@@ -996,29 +996,81 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
 // code use for append field for primary category and category list by contant type
   $code_append_array = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form', 'quiz_node_form', 'videogallery_node_form', 'blog_node_form', 'recipe_node_form', 'cooking_tips_node_form', 'food_news_node_form', 'print_team_integration_node_form');
   if (in_array($form_id, $code_append_array)) {
-    if (arg(0) == 'node' && arg(1) == 'add') {
+    
+    $form['#after_build'][] = 'itg_categor_form_edit_category_radio';
+    
+  }
+  
+}
+
+function itg_categor_form_edit_category_radio($form, &$form_state)
+{
+  if (arg(0) == 'node' && arg(1) == 'add') {
       $type = arg(2);
     }
     elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
       $node = node_load(arg(1));
       $type = $node->type;
     }
-    drupal_add_js('jQuery(document).ready(function() {
+  $editid=$form_state['input']['field_primary_category'][LANGUAGE_NONE][0]['value'];
+  $editid=($editid? $editid:0);
+ drupal_add_js('jQuery(document).ready(function() {
+  jQuery(".form-item-field-primary-category-html-text-und-0-value").hide();
 jQuery(".node-form").append("<input type=hidden name=form_node value=' . $type . ' >");
-jQuery("#edit-submit").click(function(){
-var gethtml = jQuery("#primary-category-data").html();
-jQuery("#edit-field-primary-category-html-und-0-value").val(gethtml);
-jQuery("#edit-field-primary-category-und-0-value").val(jQuery("#primary-category-data").val());
-})   
+jQuery("form").submit(function(){
+var gethtml = jQuery(".dropbox-title").html();
+jQuery("#edit-field-primary-category-html-text-und-0-value").val(gethtml);
+jQuery(".primary-radio").each(function()
+    {
+      if(jQuery(this).is(":checked"))
+      {
+      jQuery("#edit-field-primary-category-und-0-value").val(jQuery(this).val());
+
+      }
+    });
+  });
 });', array('type' => 'inline', 'scope' => 'footer'));
 
-    $form_names_use_primay_field = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form', 'videogallery_node_form', 'blog_node_form', 'recipe_node_form', 'cooking_tips_node_form', 'food_news_node_form', 'print_team_integration_node_form');
-    if (in_array($form_id, $form_names_use_primay_field)) {
-      $form['field_primary_cat_data'] = array('#title' => t('Select Primary'), '#type' => 'select', '#validated' => TRUE, '#attributes' => array('id' => 'primary-category-data'), '#options' => array('' => t('Select')));
+drupal_add_js('jQuery(window).load(function() {
+  var geteditid="";
+   geteditid='.$editid.';
+
+  var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
+    if (getvaluehtml != "")
+    {
+        jQuery(".dropbox-title").html(getvaluehtml).hide();
+        jQuery("#primary-category-data").html(getvaluehtml);
+        jQuery(".hiddenradio").each(function(){
+          var gettoptext=jQuery(this).find(".primary-text").text();
+          var selectvalue=jQuery(this).find(".select-prim").val();
+          
+        makeradio = "<input class=primary-radio name=primary_radio type=radio  value="+selectvalue+">";
+
+                        
+                         jQuery(".dropbox-entry").each(function(){
+                            var gettrtext=jQuery(this).children("td:first").text();
+                            if(gettoptext==gettrtext)
+                            {
+                                jQuery(this).children("td:first").find(".dropbox-item:first").before(makeradio);
+                            }
+                          });
+
+        })
     }
-    drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', array('type'=>'file','scope'=>'footer'));
-  }
+    jQuery(".primary-radio").each(function()
+    {
+      if(jQuery(this).val()==geteditid)
+      {
+       jQuery(this).prop( "checked", true );
+      }
+    });
+});
+', array('type' => 'inline', 'scope' => 'footer'));
+ drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', array('type'=>'file','scope'=>'footer'));
+
+ return $form;
 }
+
 
 /**
  * Implements hook_block_info()
