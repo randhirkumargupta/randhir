@@ -38,13 +38,13 @@ function itg_msi_menu(){
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
-  
-    $items['get_tid'] = array(
-      'page callback' => 'itg_msi_get_term_from_name',
-      'access callback' => TRUE,
-      'type' => MENU_CALLBACK,
+
+  $items['get_tid'] = array(
+    'page callback' => 'itg_msi_get_term_from_name',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
   );
-    
+
   return $items;
 }
 
@@ -169,7 +169,8 @@ function itg_msi_form_after_build($form, &$form_state){
     
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
+  unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
   
   unset($form['field_supp_import_xml'][LANGUAGE_NONE]['#file_upload_title']);
   unset($form['field_field_issue_import_xml'][LANGUAGE_NONE]['#file_upload_title']);
@@ -647,4 +648,117 @@ function itg_msi_get_associated_fid_node($node, $xml_uid){
     $fid[] = $record['fid'];
   }
   return $fid;
+}
+
+
+/**
+ * Implements hook_block_info()
+ * {@inheritdoc}
+ */
+function itg_msi_block_info() {
+  $blocks['magazine_calendar'] = array(
+    'info' => t('Magazine Calendar Block'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * {@inheritdoc}
+ */
+function itg_msi_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = itg_msi_calendar_data();
+  switch ($delta) {
+    case 'magazine_calendar':
+      $block['content'] = theme('magazine_calendar_template_block', array('data' => $data));
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_msi_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'magazine_calendar_template_block' => array(
+      'template' => 'magazine-calendar-template',
+      'path' => drupal_get_path('module', 'itg_msi') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+  );
+  return $themes;
+}
+
+/**
+ * Implements function for get years
+ * @return array
+ */
+function itg_msi_calendar_data() {
+  $cur_year = date('Y');
+  $years = $cur_year - 1975;
+  for ($i = 0; $i <= $years; $i++) {
+    $output_year[] = $cur_year--;
+  }
+  return $output_year;
+}
+
+function itg_msi_last_week_issue(){
+  $current_issue = itg_msi_get_current_time_issue();
+  if(!empty($current_issue)){
+    $output = $current_issue;
+  }else{
+  $current_time = date('Y-m-d', time());
+  $query = db_select('field_data_field_issue_title', 'ft');
+  $query->fields('ft', array('field_issue_title_value'));
+  $query->condition('field_issue_title_value', $current_time, '<');
+  $query->orderBy('ft.field_issue_title_value', 'DESC');
+  $query->range(0,1);
+  $output = $query->execute()->fetchField();
+  }
+  $result = explode(' 00:', $output);
+  return $result[0];
+}
+
+function itg_msi_next_week_issue(){
+  $current_time = date('Y-m-d', time());
+  $query = db_select('field_data_field_issue_title', 'ft');
+  $query->fields('ft', array('field_issue_title_value'));
+  $query->condition('field_issue_title_value', $current_time, '>');
+  $query->orderBy('ft.field_issue_title_value', 'ASC');
+  $query->range(0,1);
+  $result = strtotime($query->execute()->fetchField());
+  $date_format_result = format_date($result, $type = 'itg', $format = '', $timezone = NULL, $langcode = NULL);
+  return $date_format_result;
+}
+
+function itg_msi_get_current_time_issue(){
+  $current_time = date('Y-m-d', time());
+  $query = db_select('field_data_field_issue_title', 'ft');
+  $query->fields('ft', array('field_issue_title_value'));
+  $query->condition('field_issue_title_value', $current_time, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+/**
+ * Implements hook_views_query_alter()
+ * {@inheritdoc}
+ */
+function itg_msi_views_query_alter(&$view, &$query) {
+  if ($view->name == 'latest_issue_magzine' && $view->current_display == 'page') {
+    $query->where[1]['conditions'][2]['value'][':field_data_field_issue_title_field_issue_title_value'] = itg_msi_last_week_issue();
+  }
+  if ($view->name == 'latest_issue_magzine' && $view->current_display == 'block_1') {
+      //$query->where[0]['conditions'][0]['value'][':field_data_field_issue_title_field_issue_title_value'] = itg_msi_last_week_issue();
+  }
+  if ($view->name == 'magazine_top_story' && $view->current_display == 'block') {
+    //p($query);
+      //$query->where[0]['conditions'][0]['value'][':field_data_field_issue_title_field_issue_title_value'] = itg_msi_last_week_issue();
+  }
+  
 }
