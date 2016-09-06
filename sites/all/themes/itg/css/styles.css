@@ -2216,16 +2216,20 @@ footer .footer-copyright {
 .buzz-feedback .buzz-section > * {
   margin-bottom: 15px;
 }
+.buzz-feedback .buzz-section h1 {
+  font-size: 21px;
+  font-size: 1.3125rem;
+}
 .buzz-feedback .buzz-section h1 span {
   background: #a00606;
   color: #fff;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   display: inline-block;
   vertical-align: top;
-  font-size: 24px;
-  font-size: 1.5rem;
-  line-height: 34px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 24px;
   text-align: center;
   border-radius: 100%;
   margin: 5px 12px 0 0;
@@ -2235,6 +2239,49 @@ footer .footer-copyright {
   font-size: 1rem;
   line-height: 22px;
   font-family: "Roboto", sans-serif;
+}
+.buzz-feedback .buzz-section .buzz-img {
+  position: relative;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share {
+  position: absolute;
+  bottom: 0;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share ul {
+  zoom: 1;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share ul:before, .buzz-feedback .buzz-section .buzz-img .social-share ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share ul:after {
+  clear: both;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share ul li {
+  float: left;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share ul li a {
+  height: 38px;
+  width: 40px;
+  line-height: 38px;
+  display: block;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share ul li a.share {
+  background: #000000;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share ul li a.facebook {
+  background: #0840c6;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share ul li a.twitter {
+  background: #009ef0;
+}
+.buzz-feedback .buzz-section .buzz-img .social-share ul li a.google {
+  background: #cc0808;
 }
 .buzz-feedback .snap-post {
   margin-top: 0;

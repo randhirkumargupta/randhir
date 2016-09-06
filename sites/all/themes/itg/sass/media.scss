@@ -390,6 +390,16 @@
     .story-right{
         width: 100%
     }
+    .buzz-section{
+        h1{
+            @include font(34px);
+            span{                
+                width: 32px;
+                height: 32px;                
+                @include font(24px,34px);                
+            }
+        }
+    }
 }
 /*End Story page css*/
 

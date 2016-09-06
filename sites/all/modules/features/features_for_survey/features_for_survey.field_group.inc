@@ -25,7 +25,10 @@ function features_for_survey_field_group_info() {
     'children' => array(
       0 => 'body',
       1 => 'field_survey_question_display',
-      2 => 'title',
+      2 => 'field_story_reporter',
+      3 => 'field_survey_questions_format',
+      4 => 'field_supp_publish',
+      5 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -158,7 +161,7 @@ function features_for_survey_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related Content',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_common_related_content',
     ),
