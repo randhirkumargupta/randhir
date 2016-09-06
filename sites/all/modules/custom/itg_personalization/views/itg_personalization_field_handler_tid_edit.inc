@@ -41,7 +41,7 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
       '#tree' => TRUE,
     );
     // Iterate over the result and add our replacement fields to the form.
-    foreach($this->view->result as $row_index => $row) {
+    foreach ($this->view->result as $row_index => $row) {
       // Adding a slider field into form.      
       $form[$this->options['id']][$row_index] = array(                
         '#type' => 'slider',
@@ -82,7 +82,7 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
   function views_form_submit($form, &$form_state) {    
     // Determine which nodes we need to update.
     $updates = array();
-    foreach($this->view->result as $row_index => $row) {
+    foreach ($this->view->result as $row_index => $row) {
       $value = $form_state['values'][$this->options['id']][$row_index];
       if ($row->{$this->aliases['name']} != $value) {
         $updates[$row->{$this->aliases['tid']}] = $value;

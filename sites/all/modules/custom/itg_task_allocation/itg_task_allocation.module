@@ -215,7 +215,7 @@ function itg_task_allocation_node_access($node, $op, $account) {
  */
 function itg_task_allocation_views_query_alter(&$view, &$query) {
 
-    if (isset($view->name) && $view->name === 'task') {
+    if (isset($view->name) && $view->name === 'task' && $view->current_display == 'page') {
         if (isset($_GET['field_task_team_member_target_id']) && $_GET['field_task_team_member_target_id'] !== '') {
             $search_id = check_plain($query->where[1]['conditions'][2]['value']);
             $queries = db_select('users', 'u');
