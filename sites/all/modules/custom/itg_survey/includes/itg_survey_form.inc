@@ -98,14 +98,18 @@ function itg_survey_survey_form() {
           '#prefix' => '<div style="color:red" id="messages">',
           '#suffix' => '</div>'
       );
- 
+   
       //Prepare Question and Answer form
+      $form['question_number' . $num] = array(
+          '#type' => 'markup',
+          '#markup' => '<div class="question-number">' . ($num + 1) . ' of ' . $total_num_of_ques . '</div>',
+          '#prefix' => '<div id="question-container-' . $num . '" class="question-container">'
+      );
       $form['question_heading' . $num] = array(
           '#type' => 'markup',
-          '#markup' => '<h2 class="question-heading">' . ($num + 1) . '. ' . $question . '?</h2>',
-          '#prefix' => '<div id="question-container-'.$num.'" class="question-container">'
-      );
-      
+          '#markup' => '<div class="question-heading">' . $question . '</div>',
+          
+      );      
       $form['question' . $num] = array(
           '#type' => 'hidden',
           '#value' => $question,
@@ -131,7 +135,7 @@ function itg_survey_survey_form() {
       $form['answer' . $num] = array(
           '#type' => 'markup',
           '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
-          '#markup' => '<h2 class="answer-heading">Answer: ' . $required . '</h2> ',
+          '#markup' => '<div class="answer-heading">Answer: ' . $required . '</div> ',
       );
 
       if ($answer_type == 'textfield') { // Answer options for Textfield
@@ -250,6 +254,11 @@ function itg_survey_survey_form() {
         '#type' => 'hidden',
         '#value' => $node->nid,
     );
+    
+    $form['node'] = array(
+        '#type' => 'hidden',
+        '#value' => $node,
+    );
 
     $form['textfield_total_count'] = array(
         '#type' => 'hidden',
@@ -283,7 +292,7 @@ function itg_survey_survey_form() {
     );
   }
   
-  //$form['#theme'] = array('itg_survey_form');
+  $form['#theme'] = array('itg_survey_form', $node);
   return $form;
 }
 
