@@ -28,7 +28,7 @@ function itg_survey_menu() {
   
   $items = array();
   
-  $items['survey'] = array(
+  $items['itg-survey/%'] = array(
       'title' => t('Survey'),
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_survey_survey_form'),
@@ -57,8 +57,7 @@ function itg_survey_theme() {
   return array(    
     'itg_survey_form' => array(
       'variable' => array('data' => NULL),
-      'path' =>  $path,
-      'template' => 'itg-survey-form',
+      'template' => 'templates/itg-survey-form',
       'render element' => 'form',
     ),
     'survey_tab_form_display_block' => array(
@@ -217,7 +216,28 @@ function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 }
 
 /**
- * Implement hook_node_insert 
+ * Implement hook_node_presave
+ *  
+ * {@inheritdoc}
+ */
+function itg_survey_node_presave($node){
+  
+  // Publish/unpublish functionality for survey
+  if ($node->type == 'survey') {
+    if ($node->is_new == 1) {
+      $node->status = $node->field_supp_publish[LANGUAGE_NONE][0]['value'];
+    }
+    else {
+      $publish = $node->field_supp_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+      $node->status = $publish;
+      field_attach_update('node', $node);
+    }
+  }
+}
+
+/**
+ * Implement hook_node_insert
+ *  
  * {@inheritdoc}
  */
 function itg_survey_node_insert($node) {
@@ -229,7 +249,8 @@ function itg_survey_node_insert($node) {
 }
 
 /**
- * Implement hook_node_update 
+ * Implement hook_node_update
+ *  
  * {@inheritdoc}
  */
 function itg_survey_node_update($node) {
@@ -242,7 +263,8 @@ function itg_survey_node_update($node) {
 
 
 /**
- * Implement hook_node_validate 
+ * Implement hook_node_validate
+ *  
  * {@inheritdoc}
  */
 function itg_survey_node_validate($node, $form, &$form_state) {
@@ -274,7 +296,7 @@ function itg_survey_node_validate($node, $form, &$form_state) {
 
 /**
  * Get Active node for survey
- * @return Array
+ * @return array
  */
 function itg_survey_get_current_survey() {
   $curr_time = strtotime(date('Y-m-d').' 00:00:00');

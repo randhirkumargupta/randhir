@@ -57,8 +57,8 @@
       $flag_icon = '<i class="fa fa-bookmark"></i>';
       break;
     case 'photogallery':
-      $flag_text = '';
-      $flag_icon = '<i class="fa fa-bookmark"></i>';
+      $flag_text = '<i class="fa fa-bookmark"></i>';
+      $flag_icon = '';
       break;
     case 'videogallery':
       $flag_text = 'Watch Later';
