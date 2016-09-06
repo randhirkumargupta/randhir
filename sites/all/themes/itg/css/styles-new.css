@@ -744,7 +744,6 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .view-personalization-saved-content .views-table th {
   background-color: #1a3c8d;
-  font-weight: 500;
   color: #fff;
   border-top: 1px solid #e0e0e0;
 }
@@ -1018,6 +1017,67 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #fff;
   margin: 0 20px;
   cursor: pointer;
+}
+
+#block-itg-personalization-user-my-point {
+  max-width: 666px;
+  margin: 0 auto;
+}
+#block-itg-personalization-user-my-point .unit-description {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+#block-itg-personalization-user-my-point .unit-description th, #block-itg-personalization-user-my-point .unit-description td {
+  padding: 10px;
+  max-width: 300px;
+  font: 300 16px/22px Roboto;
+  min-width: 120px;
+}
+#block-itg-personalization-user-my-point .unit-description th {
+  background-color: #1a3c8d;
+  color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+#block-itg-personalization-user-my-point .unit-description th:first-child {
+  border-radius: 5px 0 0 0;
+  border-left: 1px solid #e0e0e0;
+  min-width: 300px;
+  text-align: left;
+  padding-left: 20px;
+}
+#block-itg-personalization-user-my-point .unit-description th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #e0e0e0;
+}
+#block-itg-personalization-user-my-point .unit-description td {
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+#block-itg-personalization-user-my-point .unit-description td:first-child {
+  text-align: left;
+  padding-left: 20px;
+}
+#block-itg-personalization-user-my-point .header-point {
+  color: #1a3c8d;
+  padding: 50px 0 20px 20px;
+  text-align: left;
+}
+#block-itg-personalization-user-my-point .header-point span {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px 0;
+  font: 400 14px/18px Roboto;
+}
+#block-itg-personalization-user-my-point .header-point span + span:before {
+  content: '|';
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 20px;
+}
+#block-itg-personalization-user-my-point .header-point span strong {
+  font-weight: 500;
 }
 
 /* End of Personalization CSS */

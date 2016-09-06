@@ -4325,6 +4325,8 @@ div.node #comments h2 {
   padding: 6px 30px;
   position: absolute;
   width: 144px;
+  top: 0;
+  left: 0;
 }
 [id*="field-service-content-values"] tbody tr td .itg-astro-image img {
   bottom: 0;
