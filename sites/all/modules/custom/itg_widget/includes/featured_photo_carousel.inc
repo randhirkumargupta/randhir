@@ -4,7 +4,7 @@
  * @file
  * home page feature ordering and reordering
  */
-
+module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 /**
  * function to get data of nodes in sequence which is saved in draggableviews_structure table
  * @param array $info
@@ -19,30 +19,13 @@ function itg_widget_featured_photo_carousel_data($info, $slider_type) {
     $page = isset($info['page']) ? $info['page'] : "";
     // condition to validate
     if (!empty($view_name) && !empty($page)) {
-      $query = db_select('draggableviews_structure', 'dv_s');
-      $query->leftJoin('node', 'n', 'n.nid=dv_s.entity_id');
-      $query->fields('dv_s', array('entity_id'));
-      $query->condition('dv_s.view_name', $view_name);
-      $query->condition('dv_s.view_display', $page);
-      $query->orderBy('dv_s.weight', 'ASC');
-      $query->condition('n.status', '1');
-      // only top 5 nodes are required as per requirement
-      // TODO: Add values to Variables and create config file. Widget settings.
-      $query->range(0, 5);
-      $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      $result = draggable_views_nodes_for_widgets($view_name, $page, "NOT", PHOTO_CAROUSEL_MIN_RANGE, PHOTO_CAROUSEL_MAX_RANGE);
       if (empty($result)) {
         $nodequeue_name = isset($info['nodequeue']) ? $info['nodequeue'] : "";
-        $result = itg_widget_nodes_from_nodequeue($nodequeue_name);
+        $result = itg_widget_nodes_from_nodequeue($nodequeue_name, TRUE , PHOTO_CAROUSEL_MIN_RANGE , PHOTO_CAROUSEL_MAX_RANGE);
       }
-      $actual_result = itg_widget_featured_photo_carousel_data_fetch($result, $slider_type);
-      return $actual_result;
+      return itg_widget_featured_photo_carousel_data_fetch($result, $slider_type);
     }
-    else {
-      watchdog('Widget', 'Either section or content type is empty');
-    }
-  }
-  else {
-    watchdog('Widget', 'view_name and page name is empty');
   }
   return $data;
 }

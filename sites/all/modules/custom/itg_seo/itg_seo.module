@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * Implementation of hook_menu().
+ * 
+ * {@inheritdoc}
+ */
+function itg_seo_menu() {
+  
+  $items = array();
+  
+  $items['itg-access-denied'] = array(
+      'title' => t('Access Denied'),
+      'page callback' => 'itg_seo_access_denied',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+  $items['itg-not-found'] = array(
+      'title' => t('Not Found'),
+      'page callback' => 'itg_seo_not_found',
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Call template file for access denied page
+ * 
+ * @return array
+ */
+function itg_seo_access_denied () {
+  return theme('itg_seo_access_denied');
+}
+
+/**
+ * Call template file for not found page
+ * 
+ * @return array
+ */
+function itg_seo_not_found () {
+  return theme('itg_seo_not_found');
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * {@inheritdoc}.
+ */
+function itg_seo_theme() {
+  $themes = array(
+    'itg_seo_access_denied' => array(
+      'template' => 'itg-seo-access-denied',
+      'path' => drupal_get_path('module', 'itg_seo') . '/templates',
+    ),    
+    'itg_seo_not_found' => array(
+      'template' => 'itg-seo-not-found',
+      'path' => drupal_get_path('module', 'itg_seo') . '/templates',
+    ),    
+  );
+
+  return $themes;
+}
