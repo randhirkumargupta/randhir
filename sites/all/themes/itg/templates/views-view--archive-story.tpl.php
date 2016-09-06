@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Main view template.
@@ -28,85 +27,85 @@
  */
 ?>
 <div class="<?php print $classes; ?>">
-  <?php print render($title_prefix); ?>
-  <?php if ($title): ?>
-    <?php print $title; ?>
-  <?php endif; ?>
-  <?php print render($title_suffix); ?>
-  <?php if ($header): ?>
-    <div class="view-header">
-      <?php print $header; ?>
-    </div>
-  <?php endif; ?>
+    <?php print render($title_prefix); ?>
+    <?php if ($title): ?>
+      <?php print $title; ?>
+    <?php endif; ?>
+    <?php print render($title_suffix); ?>
+    <?php if ($header): ?>
+      <div class="view-header">
+          <?php print $header; ?>
+      </div>
+    <?php endif; ?>
 
-  <?php if ($exposed): ?>
-   <!--start-->
-   <?php
-   $month = date('F');
-   $days = date('t');
-   $m = date('m');
-   $y = date('Y');
-   ?>
-    <div id="archive-story-date-slider">
-                <ul>
-                  <?php for($i=1; $i<=$days; $i++) { 
-                        $date = $y . '-' . $m . '-' . $i;
-                    ?>
-                       <li class="atleta"> <a href="<?php print $date; ?>">
-      
-                                <h3><?php print $i; ?></h3>
-                                <?php print $month; ?>
-                       
+    <?php if ($exposed): ?>
+      <!--start-->
+      <?php
+      $month = date("m");
+      $day = date("d");
+      $year = date("Y");
+      ?>
+      <div class="archive-header">
+          <div id="archive-story-date-slider">
+              <ul>
+                  <?php for ($i = 30; $i >= 1; $i--) { ?>
+                    <li class="atleta"> <a href="<?php print date('Y-m-d', mktime(0, 0, 0, $month, ($day - $i), $year)); ?>">
+
+                            <span><?php print date('d', mktime(0, 0, 0, $month, ($day - $i), $year)); ?></span>
+                            <?php print date('M', mktime(0, 0, 0, $month, ($day - $i), $year)); ?>
+
                         </a></li>
                   <?php } ?>
-                </ul>
-    </div>
-  <!--end start-->
-    <div class="view-filters">
-      <?php print $exposed; ?>
-    </div>
-  <?php endif; ?>
+              </ul>
+          </div>
+          <div class="archive-calender-custom">
+              <?php print $exposed; ?>
+          </div>
+      </div>
 
-  <?php if ($attachment_before): ?>
-    <div class="attachment attachment-before">
-      <?php print $attachment_before; ?>
-    </div>
-  <?php endif; ?>
+      <!--end start-->    
+    <?php endif; ?>
 
-  <?php if ($rows): ?>
-    <div class="view-content">
-      <?php print $rows; ?>
-    </div>
-  <?php elseif ($empty): ?>
-    <div class="view-empty">
-      <?php print $empty; ?>
-    </div>
-  <?php endif; ?>
+    <?php if ($attachment_before): ?>
+      <div class="attachment attachment-before">
+          <?php print $attachment_before; ?>
+      </div>
+    <?php endif; ?>
 
-  <?php if ($pager): ?>
-    <?php print $pager; ?>
-  <?php endif; ?>
+    <?php if ($rows): ?>
+      <div class="view-content">
+          <?php print $rows; ?>
+      </div>
+    <?php elseif ($empty): ?>
+      <div class="view-empty">
+          <?php print $empty; ?>
+      </div>
+    <?php endif; ?>
 
-  <?php if ($attachment_after): ?>
-    <div class="attachment attachment-after">
-      <?php print $attachment_after; ?>
-    </div>
-  <?php endif; ?>
+    <?php if ($pager): ?>
+      <?php print $pager; ?>
+    <?php endif; ?>
 
-  <?php if ($more): ?>
-    <?php print $more; ?>
-  <?php endif; ?>
+    <?php if ($attachment_after): ?>
+      <div class="attachment attachment-after">
+          <?php print $attachment_after; ?>
+      </div>
+    <?php endif; ?>
 
-  <?php if ($footer): ?>
-    <div class="view-footer">
-      <?php print $footer; ?>
-    </div>
-  <?php endif; ?>
+    <?php if ($more): ?>
+      <?php print $more; ?>
+    <?php endif; ?>
 
-  <?php if ($feed_icon): ?>
-    <div class="feed-icon">
-      <?php print $feed_icon; ?>
-    </div>
-  <?php endif; ?>
+    <?php if ($footer): ?>
+      <div class="view-footer">
+          <?php print $footer; ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($feed_icon): ?>
+      <div class="feed-icon">
+          <?php print $feed_icon; ?>
+      </div>
+    <?php endif; ?>
 
 </div><?php /* class view */ ?>

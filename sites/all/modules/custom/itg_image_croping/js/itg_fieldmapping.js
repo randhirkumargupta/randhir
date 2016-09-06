@@ -20,14 +20,17 @@
         jQuery('#tagit').css({top: mouseY, left: mouseX});
         jQuery('#tagname').focus();
     });
-
+var mTimer=null;
     // Save button click - save tags
     jQuery('#file-preview').on('click', '#btnsavetag', function() {
+          window.clearTimeout(mTimer); 
+          mTimer=window.setTimeout(function() {
+          showloader();
         name = jQuery('#tagname').val();
         tagurl = jQuery('#tagurl').val();
-
-
-        var img = jQuery('#imgtag').find('img');
+      
+     if(tagurl!="")
+     {
         if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
             jQuery('.web-error').hide();
             jQuery.ajax({
@@ -38,7 +41,8 @@
                     var objdata = jQuery.parseJSON(data);
                     if (objdata.status == 1)
                     {
-                        jQuery('#tagit').fadeOut();
+
+                        jQuery('#tagit').remove();
                         viewtag(image_fiedlid);
 
                     }
@@ -49,13 +53,23 @@
                     console.log("Details: " + desc + "\nError:" + err);
                 }
             });
-        } else {
+        }} else {
             jQuery('.web-error').show();
             return false;
         }
 
-
+ }, 200);
     });
+//  cancel image
+    jQuery('.cancel-image').click(function() {
+        if (jQuery('.div-upload-img').hasClass('active'))
+        {
+            jQuery('#file-preview').hide();
+        } else {
+            jQuery('#file-preview').hide();
+            jQuery('#search-preview').show();
+        }
+    })
 
     // Save button click - save tags
     jQuery('#file-preview').on('click', '#btnsavetagedit', function() {
@@ -76,7 +90,7 @@
                     var objdata = jQuery.parseJSON(data);
                     if (objdata.status == 1)
                     {
-                        jQuery('#tagit').fadeOut();
+                        jQuery('#tagit').remove();
                         viewtag(image_fiedlid);
 
                     }
@@ -100,7 +114,7 @@
 
     // Cancel the tag box.
     jQuery(document).on('click', '#tagit #btncancel', function() {
-        jQuery('#tagit').fadeOut();
+        jQuery('#tagit').remove();
     });
 
     // mouseover the taglist 
@@ -120,7 +134,8 @@
     });
 
     // Remove tags.
-    jQuery('#taglist').on('click', '.remove', function() {
+    jQuery('#tagbox').on('click', '.remove', function() {
+        showloader();
         id = jQuery(this).parent().attr("id");
         id = id.split('_');
         id = id[1];
@@ -133,8 +148,10 @@
                 var img = jQuery('#imgtag').find('img');
                 var id = jQuery(img).attr('id');
                 //get tags if present
-                jQuery('#tagit').fadeOut();
+                
+                jQuery('#tagit').remove();
                 viewtag(image_fiedlid);
+           
 
 
             }
@@ -155,7 +172,7 @@
                 var img = jQuery('#imgtag').find('img');
                 var id = jQuery(img).attr('id');
                 //get tags if present
-                jQuery('#tagit').fadeOut();
+                jQuery('#tagit').remove();
                 viewtag(image_fiedlid);
 
 
@@ -202,6 +219,7 @@
                 var objdata = jQuery.parseJSON(data);
                 jQuery('#taglist ol').html(objdata.lists);
                 jQuery('#tagbox').html(objdata.boxes);
+                hideloader()
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);
@@ -226,32 +244,32 @@
         } else {
             parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
             parent.jQuery(document).ajaxComplete(function(event, request, settings) {
-               
+
                 if (settings.url.indexOf(field_name) >= 0) {
-                    
+
                     var image_alttext = jQuery('#img_alttext').val();
                     var image_title = jQuery('#img_title').val();
-                    if(image_alttext=="")
+                    if (image_alttext == "")
                     {
-                        var imagealt=jQuery('#imgtag img').attr('src');
+                        var imagealt = jQuery('#imgtag img').attr('src');
                         var image_alttext = imagealt.substring(imagealt.lastIndexOf("/") + 1, imagealt.length);
                     }
-                    if(image_title=="")
+                    if (image_title == "")
                     {
-                       var imagetitle=jQuery('#imgtag img').attr('src');
-                        var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length); 
+                        var imagetitle = jQuery('#imgtag img').attr('src');
+                        var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
                     }
-              setTimeout(function(){
-                    parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
-                    parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
-                    var captionid = getbame + '[field_image_caption][und][0][value]';
-                    captionid = captionid.replace('[field_images][und][0]', "");
-                    parent.jQuery('[name="' + captionid + '"]').val(image_title);
-                    hideloader();
-                parent.jQuery.colorbox.close();
-                }, 500);
+                    setTimeout(function() {
+                        parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
+                        parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+                        var captionid = getbame + '[field_image_caption][und][0][value]';
+                        captionid = captionid.replace('[field_images][und][0]', "");
+                        parent.jQuery('[name="' + captionid + '"]').val(image_title);
+                        hideloader();
+                        parent.jQuery.colorbox.close();
+                    }, 500);
                 }
-               
+
 
             });
         }

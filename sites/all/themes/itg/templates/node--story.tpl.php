@@ -7,7 +7,16 @@
 ?>
 <div class="story-section <?php print $class_buzz;?>">
   <div class='<?php print $classes ?>'>
-      <?php //pr($node); ?>      
+      <?php //pr($node); ?> 
+      <div class="comment-mobile desktop-hide">
+          <ul>
+              <li><a href="#"><i class="fa fa-envelope"></i> Mail to author</a></li>
+              <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
+              <li><a href="#"><i class="fa fa-comment"></i></a></li>
+              <li><a href="#"><i class="fa fa-share-alt"></i></a></li>              
+          </ul>
+          
+      </div>
       <h1><?php print $node->title; ?></h1>
       <div class="story-left-section">
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
@@ -39,7 +48,7 @@
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle;?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
                       <?php } ?>
                   </ul>
-                  <ul>
+                  <ul class="date-update">
                       <li class="mailto mhide"><i class="fa fa-envelope-o"></i> &nbsp;<?php
                               $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
                               print "<a href='mailto:$email'>Mail To Author</a>";
@@ -49,7 +58,7 @@
                       <li>UPDATED <?php print  date('H:i', $node->changed); ?> IST</li>
                       <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
                   </ul>
-                  <ul class="social-links">
+                  <ul class="social-links mhide">
                       <li><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
                       <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
                       <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
@@ -61,7 +70,7 @@
                   </div>
                   </div>
                   <?php if(!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-                  <div class="briefcase">
+                  <div class="briefcase mhide">
                       <h4><?php print t('Briefcase'); ?></h4>
                       <ul>
                           <?php
@@ -106,7 +115,7 @@
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle;?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
                       <?php } ?>
                   </ul>
-                  <ul>
+                  <ul class="date-update">
                      <li><?php print  date('F j, Y', $node->created); ?>   </li>
                       <li>UPDATED <?php print  date('H:i', $node->changed); ?> IST</li>
                       <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
@@ -127,6 +136,24 @@
       </div>
       
       <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
+            
+      <?php
+      if (empty($node->field_story_template_buzz[LANGUAGE_NONE])){
+      if(!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
+                  <div class="briefcase desktop-hide">
+                      <h4><?php print t('Briefcase'); ?></h4>
+                      <ul>
+                          <?php
+                          foreach ($node->field_story_highlights['und'] as $high) {
+                              print '<li>' . $high['value'] . '</li>';
+                          }
+                          ?>
+                      </ul>
+                  </div>
+      <?php } } ?>
+      
+      
+      
       <div class="description"><?php print render($content['body']); ?></div>
       
       </div>
@@ -150,7 +177,14 @@
             if(!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
             if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
-            $buzz_output.= '<div class="buzz-img">' . $img . '</div>';
+            $buzz_output.= '<div class="buzz-img"><div class="social-share">
+          <ul>
+              <li><a href="#" class="share"><i class="fa fa-share-alt"></i></a></li>
+              <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
+          </ul>
+      </div>' . $img . '</div>';
             }
             if(!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
             $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
@@ -163,18 +197,17 @@
         }
         ?>
       
-      <!-- condition for buzz end -->
-      
+      <!-- condition for buzz end -->      
       
       <div class="section-left-bototm">
           <div class="social-list">
             <ul>
-                <li><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                <li><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
-                <li><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
-                <li><span class="share-count">4.3k</span> SHARES</li>
+                <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
+                <li class="mhide"><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
+                <li class="mhide"><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
+                <li class="mhide"><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
+                <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
+                <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>
                 <li><a href="#">follow the Story</a></li>
             </ul>

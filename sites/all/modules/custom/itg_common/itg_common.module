@@ -239,16 +239,17 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
 
     unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
     unset($form['metatags']['intro_text']['#markup']);
-
+    
+    // Add code after metatag updation
+    unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
+    unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
+  
     $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
     $form['path']['#prefix'] = '<h2 class="story-title">' . t('Meta Tags') . '</h2>';
 
     drupal_add_js('jQuery(document).ready(function() {
-             // hide some eliment of metatags
              jQuery(".vertical-tabs-list").hide();
-             jQuery("#edit-metatags").show();
-             jQuery("#edit-metatags-und-advanced").hide();
-             jQuery(".form-item-metatags-und-abstract-value").hide();              
+             jQuery("#edit-metatags").show();              
            });', array('type' => 'inline', 'scope' => 'footer'));
 
     return $form;

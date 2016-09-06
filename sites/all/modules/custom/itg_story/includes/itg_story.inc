@@ -52,8 +52,9 @@ function itg_story_get_content_title($title) {
     $query->fields('n', array('title'));
     $query->condition('title', '%' . $title . '%', 'LIKE');
     $query->condition('n.type', $content_type, '=');
+    $query->condition('n.status',1);
     $query->range(0, 20);
-
+    
     $result = $query->execute();
 
     while ($record = $result->fetchAssoc()) {

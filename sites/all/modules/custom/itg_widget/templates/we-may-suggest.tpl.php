@@ -1,6 +1,6 @@
 <?php if (!empty($data)) : global $base_url; ?>
   <div class="may-be-suggest-container">
-    <h3><span><?php print t("May We Suggest") ?></span></h3>
+      <?php $is_fron_page = drupal_is_front_page(); if (empty($is_fron_page)) { ?><h3><span><?php print t("May We Suggest") ?></span></h3><?php } ?>
     <ul>
       <?php foreach ($data as $key => $entity_info) { ?>
         <li class="may-we-suggest" id="may-be-suggest-<?php print $key ?>">

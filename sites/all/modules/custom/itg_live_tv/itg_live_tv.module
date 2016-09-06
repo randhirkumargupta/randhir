@@ -1,0 +1,295 @@
+<?php
+
+/**
+ * @file
+ * The ITG Live TV module.
+ *
+ * Contains functionality for Live TV.
+ *
+ */
+
+/**
+ * Implements hook_menu().
+ * @return array
+ */
+function itg_live_tv_menu() {
+  $items['live-tv-details-ajax'] = array(
+    'page callback' => 'itg_live_tv_details',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_block_info().
+ * {@inheritdoc}
+ */
+function itg_live_tv_block_info() {
+  $blocks['live_tv_tab_form_block'] = array(
+    'info' => t('Live tv Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ * {@inheritdoc}
+ */
+function itg_live_tv_block_view($delta = '') {
+  $block = array();
+  $data = '';
+  switch ($delta) {
+    case 'live_tv_tab_form_block':
+      $block['content'] = theme('live_tv_tab_form_display_block', array('data' => $data));
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_live_tv_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'live_tv_tab_form_display_block' => array(
+      'template' => 'live-tv-integration-form-tab-template',
+      'path' => drupal_get_path('module', 'itg_live_tv') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'live_tv_integration_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'live-tv-integration-node-form',
+      'path' => drupal_get_path('module', 'itg_live_tv') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+
+  return $themes;
+}
+
+/**
+ * Implements hook_form_alter().
+ * {@inheritdoc}
+ */
+function itg_live_tv_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($form_id == 'live_tv_integration_node_form') {
+
+    if (isset($form['#node']->nid)) {
+
+      $default_tv_value = $form['title']['#default_value'];
+      $form['title']['#attributes'] = array('disabled' => TRUE);
+    }
+
+    $itg_vid = taxonomy_vocabulary_machine_name_load('live_tv');
+    $tax = taxonomy_get_tree($itg_vid->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+    $op['_none'] = t(' - Select - ');
+    foreach ($tax as $key => $val) {
+      $op[$val->name] = $val->name;
+    }
+
+
+    if (empty($form['#node']->nid)) {
+      $form['title'] = array(
+        '#title' => t('Company'),
+        '#type' => 'select',
+        '#id' => 'company',
+        '#default_value' => $default_tv_value,
+        '#description' => t(''),
+        '#options' => $op,
+      );
+    }
+    $form['#after_build'][] = 'itg_live_tv_after_build';
+    $form['actions']['submit']['#submit'][] = 'itg_live_tv_form_custom_callback';
+
+    $destination = 'live-tv-integration';
+    $form['actions']['cancel'] = array(
+      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+      '#weight' => 21,
+      '#value' => t('Cancel'),
+    );
+  }
+}
+
+/**
+ * Implement hook_after_build
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_live_tv_after_build($form, &$form_state) {
+
+  global $user, $base_url;
+
+  // hide device field on add form 
+  drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-live-tv-device").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  
+  // alter label name
+  if (isset($form['#node']->nid)) {
+    $form['title']['#title'] = t('Company');
+  }
+  else {
+    $form['title']['#title'] = t('Company') . '<span class="form-required" title="This field is required."> *</span>';
+  }
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  drupal_add_js(array('itg_live_tv' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_live_tv') . '/js/itg_live_tv.js');
+
+  return $form;
+}
+
+/**
+ * Custom submit callback for redirecting Live TV form.
+ * {@inheritdoc}
+ */
+function itg_live_tv_form_custom_callback($form, &$form_state) {
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'live-tv-integration') {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';
+  }
+  $live_tv_title = $form_state['node']->title;
+  drupal_set_message(t('Live tv integration <b>' . $live_tv_title . '</b> has been ' . $op . '.'));
+  $_GET['destination'] = $_REQUEST['destination'];
+}
+
+/**
+ * Implements hook_node_validate().
+ * {@inheritdoc}
+ */
+function itg_live_tv_node_validate($node, $form, &$form_state) {
+
+  if ($node->type == 'live_tv_integration') {
+
+    $tv_title = $node->title;
+
+    if (function_exists('itg_api_get_nid')) {
+
+      $duplicate_title = itg_api_get_nid($tv_title, 'live_tv_integration');
+    }
+
+    // code to validation title field
+    if ($tv_title == '_none') {
+      form_set_error('title', t("Please select Company"));
+    }
+
+    if (!empty($duplicate_title) && empty($form['#node']->nid)) {
+      form_set_error('title', t("Company name already exist"));
+    }
+  }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * {@inheritdoc}
+ */
+function itg_live_tv_views_pre_render(&$view) {
+  global $user, $base_url;
+
+  $settings = array();
+  $settings['base_url'] = $base_url;
+  $settings['uid'] = $user->uid;
+  drupal_add_js(array('itg_live_tv' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_live_tv') . '/js/itg_live_tv.js', array('weight' => 1));
+  // condition for view name
+  if ($view->name == "live_tv_integration") {
+    $header_content_breaking = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_breaking .= l('Create Live tv integration', 'node/add/live-tv-integration', array('query' => array('destination' => 'live-tv-integration')));
+    $view->attachment_before = $header_content_breaking;
+  }
+
+  foreach ($view->result as $live_result) {
+
+    $errors = array_filter($live_result->field_field_live_tv_device);
+    if (empty($errors)) {
+      $live_result->field_field_live_tv_device[0]['rendered']['#markup'] = 'Not Activated';
+    }
+  }
+}
+
+/**
+ * Implements itg_live_tv_details
+ */
+function itg_live_tv_details() {
+  $n_id = $_POST['company'];
+  $device = $_POST['device'];
+  // check if value is exist
+  if (!empty($n_id) && !empty($device)) {
+    $exist_val = itg_live_tv_company($device);
+    $errors = array_filter($exist_val);
+    // $node = node_load($n_id);
+    //p($node->field_live_tv_device);
+    if (!empty($errors)) {
+      foreach ($exist_val as $val) {
+        $node = node_load($val);
+        foreach ($node->field_live_tv_device[LANGUAGE_NONE] as $key => $value) {
+          // print $key.'upper';
+          if ($value['value'] == $device) {
+            // print $value['value'].'yes';
+            unset($node->field_live_tv_device[LANGUAGE_NONE][$key]);
+            field_attach_presave('node', $node);
+            field_attach_update('node', $node);
+            // Clear the static loading cache.
+            entity_get_controller('node')->resetCache(array($node->nid));
+            itg_live_tv_insert($n_id, $device);
+          }
+        }
+      }
+    }
+    else {
+      itg_live_tv_insert($n_id, $device);
+    }
+  }
+}
+
+  /**
+ * Implements itg_live_tv_company
+ * @param string $device
+ * @return array
+ */
+function itg_live_tv_company($device) {
+  $query = db_select('field_data_field_live_tv_device', 'c');
+  $query->fields('c', array('entity_id'));
+  $query->condition('c.field_live_tv_device_value', $device, '=');
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $options[] = $record['entity_id'];
+  }
+
+  return $options;
+}
+
+/**
+ * Implements itg_live_tv_insert
+ * @param int $n_id
+ * @param string $device
+ */
+function itg_live_tv_insert($n_id, $device) {
+  $node = node_load($n_id);
+  foreach ($node->field_live_tv_device['und'] as $key => $value) {
+    if (!empty($value)) {
+      $data[]['value'] = $value;
+    }
+  }
+  $data[]['value'] = $device;
+  $node->field_live_tv_device[LANGUAGE_NONE] = $data;
+  field_attach_presave('node', $node);
+  field_attach_update('node', $node);
+  // Clear the static loading cache.
+  entity_get_controller('node')->resetCache(array($node->nid));
+}
