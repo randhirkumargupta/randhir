@@ -1621,7 +1621,7 @@ footer .footer-copyright {
 .view-front-end-global-search .view-content .social-share {
   display: inline-block;
   vertical-align: top;
-  margin-top: 5px;
+  /*            margin-top:5px;*/
 }
 .view-front-end-global-search .view-content .social-share ul li {
   display: inline-block;
@@ -4532,7 +4532,7 @@ footer .footer-copyright {
 }
 .program-rhs .detail .pic {
   float: right;
-  margin-left: 10;
+  margin-left: 10px;
 }
 .program-rhs .detail .discription {
   display: block;

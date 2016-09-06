@@ -2,7 +2,9 @@
 @import "itg-variables";
 @import "itg-mixins";
 @media only screen and (max-width:1200px){
-    
+    #block-views-photo-landing-slider-block{
+        width: 100%;
+    }
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width:768px){    
@@ -572,6 +574,9 @@ section.sidebar{
             li{
                 padding: 15px;
                 width: 25%; 
+                &:nth-child(2n+1){
+                    clear: none;
+                }
                 &:nth-child(4n+1){
                     clear: left;
                 }
@@ -620,13 +625,54 @@ section.sidebar{
     .anchor-right{
         padding-left:15px;
         padding-top:0px;
-    }
+    }        
 }
 /*CSS End Anchor listing detail page*/
 
 /*CSS Start Photo landing page*/
 .region-top{
+    padding: 20px 0 ;    
     margin-top: -30px;
+}
+#block-views-photo-landing-slider-block{
+    h2{
+        margin-bottom: 15px;
+    }
+    .other-details-main {
+        height: 632px;
+        background: #111111;
+        .counter{            
+            padding: 15px 25px;            
+        }
+        .counterslide{
+            .slick-next{
+                right: 25px;
+            }
+            .slick-prev{
+                right: 87px;
+            }
+        }
+    }
+    .social-icon{
+            ul{
+                 padding-left:10px;
+                li{
+                    a{
+                       padding: 0 17px;
+                       line-height: 55px;
+                    }
+                }
+            }
+       }
+       .slick-slider .slick-next, .slick-slider .slick-prev{
+           width: 50px;
+           height: 100px;
+           margin-top: -50px;
+           &:before{
+                top: 38px;
+                font-size: 30px;
+           }
+       }      
 }
 /*CSS End Photo landing page*/
 

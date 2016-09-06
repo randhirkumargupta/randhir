@@ -29,6 +29,11 @@
 /*mixin for transition animation*/
 /*mixin for listing with image*/
 /*mixin for pager*/
+@media only screen and (max-width: 1200px) {
+  #block-views-photo-landing-slider-block {
+    width: 100%;
+  }
+}
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 768px) {
   h1 {
@@ -680,6 +685,9 @@
     padding: 15px;
     width: 25%;
   }
+  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-video-landing-header .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1) {
+    clear: none;
+  }
   .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-video-landing-header .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1) {
     clear: left;
   }
@@ -719,7 +727,41 @@
   /*CSS End Anchor listing detail page*/
   /*CSS Start Photo landing page*/
   .region-top {
+    padding: 20px 0;
     margin-top: -30px;
+  }
+
+  #block-views-photo-landing-slider-block h2 {
+    margin-bottom: 15px;
+  }
+  #block-views-photo-landing-slider-block .other-details-main {
+    height: 632px;
+    background: #111111;
+  }
+  #block-views-photo-landing-slider-block .other-details-main .counter {
+    padding: 15px 25px;
+  }
+  #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-next {
+    right: 25px;
+  }
+  #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-prev {
+    right: 87px;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul {
+    padding-left: 10px;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li a {
+    padding: 0 17px;
+    line-height: 55px;
+  }
+  #block-views-photo-landing-slider-block .slick-slider .slick-next, #block-views-photo-landing-slider-block .slick-slider .slick-prev {
+    width: 50px;
+    height: 100px;
+    margin-top: -50px;
+  }
+  #block-views-photo-landing-slider-block .slick-slider .slick-next:before, #block-views-photo-landing-slider-block .slick-slider .slick-prev:before {
+    top: 38px;
+    font-size: 30px;
   }
 
   /*CSS End Photo landing page*/

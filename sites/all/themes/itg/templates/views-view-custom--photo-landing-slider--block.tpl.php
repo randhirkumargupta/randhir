@@ -1,5 +1,20 @@
 <div class="row">
-    <h2><?php print $row['title']; ?></h2>
+    <div class="col-md-12">
+        <h2>These First-Ever Same-Sex City Hall Weddings Will <?php print $row['title']; ?></h2>    
+        <div class="social-icon desktop-hide">
+            <ul>
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-comment"></i></a></li>
+                <li><a href="#"><i class="fa fa-link"></i></a></li>
+                <li><a href="#"><i class="fa fa-share"></i></a></li>
+                <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>
+                <li><a href="#"><?php print $read_later; ?></a></li>
+            </ul>
+        </div>
+    </div>
+    
     <div class="col-md-8">
         <ul class="slickslide">
             <?php foreach ($rows as $index => $row): ?>
@@ -21,7 +36,8 @@
             </ul>
         </div>
     </div>
-    <div class="col-md-4 other-details-main">
+    <div class="col-md-4">
+        <div class="other-details-main">
         <ul class="counterslide">
             <?php foreach ($rows as $index => $row): ?>
                 <li>
@@ -37,7 +53,7 @@
             <?php endforeach; ?>
         </ul>
         
-        <div class="social-icon">
+        <div class="social-icon mhide">
             <ul>
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
@@ -48,16 +64,13 @@
                 <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>
                 <li><a href="#"><?php print $read_later; ?></a></li>
             </ul>
-            
-            
-            
         </div>
         
         
         <div class="photo-ad">       
         </div>
         
-        
+    </div>
     </div>
 </div>
 
@@ -77,7 +90,8 @@ jQuery(document).ready(function (e) {
         asNavFor: '.slickslide, .counterslide',
         dots: true,
         centerMode: false,
-        focusOnSelect: true
+        arrows: true,
+        variableWidth: true
     });
         
     jQuery('.counterslide').slick({
