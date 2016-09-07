@@ -1349,7 +1349,7 @@ footer{
         .social-share{
             @include display-inline;
             @include social-share;
-            margin-top:5px;
+/*            margin-top:5px;*/
             ul{
                 li{
                     padding-right: 4px;                    
@@ -2155,11 +2155,12 @@ footer{
         font-family: $itg-roboto;
     }
     .anchor-left, .anchor-right{
-        @include float(left);
-        @include calculate-width(2);
+        @include float(none);
+        @include calculate-width(1);
     }
     .anchor-right{
-        padding-left:15px;
+        padding-left:0px;
+        padding-top:15px;
         a.active{
             @include font(22px,30px,700);            
             color: #33363b;
@@ -3493,6 +3494,6 @@ footer{
         font-weight: 700;
         font-family: $itg-robotoslab;
     }
-    @include listing-with-image(detail,right,10,pic,discription);
+    @include listing-with-image(detail,right,10px,pic,discription);
 }
 /*CSS end program RHS*/
