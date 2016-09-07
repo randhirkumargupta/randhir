@@ -311,7 +311,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
             $form['name']['#title'] = t('Category Title');
             $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
-//unset($form['description']);
+            unset($form['description']);
 //Hide settings title levels
             unset($form['field_cm_hide_cat_from_home'][LANGUAGE_NONE]['#title']);
             unset($form['field_cm_hide_cat_from_search'][LANGUAGE_NONE]['#title']);
