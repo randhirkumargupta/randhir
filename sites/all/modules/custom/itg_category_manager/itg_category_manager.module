@@ -984,6 +984,26 @@ function itg_category_manager_views_data() {
  * {@inheritdoc} 
  */
 function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
+  
+  if ($form['#term']['vocabulary_machine_name'] == 'category_management' && $form_id == 'taxonomy_form_term') {
+    
+     $dir = getcwd().'/'.drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts/section';
+   
+      $scanned_directory = array_diff(scandir($dir, 1), array('..', '.'));
+
+      $data = array("_none" => "-- Template --");
+
+      foreach ($scanned_directory as $key => $val) {
+        $tpl = substr($val,0,-8);
+        if (!empty($tpl)) {
+          $data[$tpl] = $tpl;
+        }            
+      }
+    
+    $form['field_cm_select_template'][LANGUAGE_NONE]['#default_value'][0] = $form['field_cm_select_template'][LANGUAGE_NONE]['#entity']->field_cm_select_template[LANGUAGE_NONE][0]['value'];
+    $form['field_cm_select_template'][LANGUAGE_NONE]['#options'] = $data;
+  }
+  
   if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
     drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/clipboard.min.js', 'file');
     drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js', 'file');
