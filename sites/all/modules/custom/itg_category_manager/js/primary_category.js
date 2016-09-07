@@ -38,7 +38,6 @@
 
 
             jQuery(document).on('ajaxComplete', function(event, xhr, settings) {
-
                 if (settings.url.indexOf('hierarchical_select_ajax') >= 0) {
 
                     if (comptext != "" && flag == 0)
@@ -79,26 +78,7 @@
         }
 
     });
-    jQuery('.dropbox-remove a').live('mousedown', function() {
-        var getdattext = jQuery(this).parent().siblings('td').text();
-        jQuery(document).on('ajaxComplete', function(event, xhr, settings) {
-            if (settings.url.indexOf('hierarchical_select_ajax') >= 0) {
-
-                var getdoptiontext = jQuery(this).text();
-                jQuery('.dropbox-title .primary-text').each(function() {
-
-                    var getdoptiontext = jQuery(this).text();
-
-                    if (getdoptiontext == getdattext) {
-
-                        jQuery(this).parent('.hiddenradio').remove();
-                    }
-                });
-
-            }
-        });
-
-    });
+    
 
     jQuery('.primary-radio').live('mousedown', function() {
         var getval = jQuery(this).val();

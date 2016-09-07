@@ -1046,6 +1046,50 @@ jQuery(".primary-radio").each(function()
        jQuery(this).prop( "checked", true );
       }
     });
+    jQuery(".dropbox-remove a").live("mousedown", function() {
+        var getdattext = jQuery(this).parent().siblings("td").text();
+        jQuery(document).on("ajaxComplete", function(event, xhr, settings) {
+            if (settings.url.indexOf("hierarchical_select_ajax") >= 0) {
+            jQuery("#edit-field-primary-category-und-0-value").val(0);
+                var getdoptiontext = jQuery(this).text();
+                var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
+
+if (getvaluehtml != "")
+    {
+        jQuery(".dropbox-title").html(getvaluehtml).hide();
+        }
+                jQuery(".dropbox-title .primary-text").each(function() {
+
+                    var getdoptiontext = jQuery(this).text();
+                    if (getdoptiontext == getdattext) {
+
+                        jQuery(this).parent(".hiddenradio").remove();
+                    }
+                });
+                jQuery(".hiddenradio").each(function(){
+          var gettoptext=jQuery(this).find(".primary-text").text();
+          var selectvalue=jQuery(this).find(".select-prim").val();
+          
+        makeradio = "<input class=primary-radio name=primary_radio type=radio  value="+selectvalue+">";
+
+                        
+                         jQuery(".dropbox-entry").each(function(){
+                            var gettrtext=jQuery(this).children("td:first").text();
+                            if(gettoptext==gettrtext)
+                            {
+                            if (!jQuery(this).children("td:first").find("input").hasClass("primary-radio"))
+                                {
+                                jQuery(this).children("td:first").find(".dropbox-item:first").before(makeradio);
+                               }
+                            }
+                          });
+
+        })
+
+            }
+        });
+
+    });
 });
 ', array('type' => 'inline', 'scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', array('type' => 'file', 'scope' => 'footer'));
