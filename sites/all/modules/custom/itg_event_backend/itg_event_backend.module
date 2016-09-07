@@ -316,7 +316,7 @@ function itg_event_backend_after_build($form, &$form_state) {
     $form['actions']['submit2']['#access'] = FALSE;
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
-    $form['path']['#prefix'] = '<h2 id="title-metatags" class="story-title">Meta Tags</h2>';
+    $form['path']['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
   }
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
     $form['actions']['submit']['#access'] = TRUE;
