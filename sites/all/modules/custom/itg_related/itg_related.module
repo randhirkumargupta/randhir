@@ -266,7 +266,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
           $val_str = $val_str . '*';
         }
-        else if ($key == 'tm_vid_4_names') {
+        else if ($key == 'tm_vid_4_names' && $_GET['q'] != 'searchimage') {
           $get_value = preg_split('/[\s,]/', $val);
           $get_value = array_filter($get_value);
           $get_comma_value = implode(',', $get_value);
@@ -309,7 +309,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $query->replaceParam("fq", '(' . $str . ')');
     }
   }
-  // p($query->getSolrParams());
+  //p($query->getSolrParams());
 }
 
 /**
