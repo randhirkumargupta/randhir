@@ -392,6 +392,7 @@ function itg_survey_vote_percentage($nid, $ques_id, $answer){
             ->condition('su.survey_info', 1, '=')
             ->execute();
     $total_answwer_for_ques = $result->rowCount();
+
     $vote_percentage = ($total_answwer_for_ques / $total_vote_on_question) * 100;
     return round($vote_percentage, 2) . '%';
   }
