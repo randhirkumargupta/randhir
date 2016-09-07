@@ -146,21 +146,31 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'photogallery_node_form' && !empty($url_nid)) {
       // get node values
       $node = node_load($url_nid);
-
+      
       $form['title']['#default_value'] = $node->title;
       $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_gallery_kicer'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
-
-
-      foreach ($form['field_gallery_image']['und'] as $delta => $field) {
-        if (is_numeric($delta)) {
-          // assign value in first field collection item
-          $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
-          $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_image_caption'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
+      
+      if (empty($node->field_ugc_personalization_photo['und'][0]['value'])) {
+        foreach ($form['field_gallery_image']['und'] as $delta => $field) {
+          if (is_numeric($delta)) {
+            // assign value in first field collection item
+            $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
+            $form['field_gallery_image'][LANGUAGE_NONE][$delta]['field_image_caption'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
+          }
         }
       }
+      else {        
+        $collection_id = $node->field_ugc_personalization_photo['und'][0]['value'];
+        $collection_value = field_collection_item_load($collection_id);        
+        $form['field_gallery_image'][LANGUAGE_NONE][0]['field_images'][LANGUAGE_NONE][0]['#default_value']['fid'] = $collection_value->field_ugc_upload_photo['und'][0]['fid'];        
+        $form['field_gallery_image']['und'][0]['field_image_caption']['und'][0]['value']['#default_value'] = $collection_value->field_story_short_headline['und'][0]['value'];        
+        drupal_add_js('jQuery(document).ready(function() {
+                    jQuery("#edit-field-gallery-image-und-add-more").mousedown();});', array('type' => 'inline', 'scope' => 'footer'));
+      }
+      
     }
   }
 
@@ -364,16 +374,15 @@ function itg_ugc_after_build($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_ugc_node_validate($node, $form, &$form_state) {
-
   if ($node->type == 'ugc') {
     // get value of content type field
-    $type = $node->field_ugc_ctype[LANGUAGE_NONE][0]['value'];
+    $type = $node->field_ugc_ctype[LANGUAGE_NONE][0]['value'];    
     // get value of body field
     $description = $node->field_user_message[LANGUAGE_NONE][0]['value'];
     // get fid of upload image
     $upload_image = $node->field_ugc_upload_photo[LANGUAGE_NONE][0]['fid'];
     // get fid of upload video
-    $upload_video = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];
+    $upload_video = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];    
     // get fid of upload audio
     $upload_audio = $node->field_recipe_audio[LANGUAGE_NONE][0]['fid'];
     // get email of user
@@ -382,24 +391,27 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     $user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
     // get email of user
     $title = $node->title;
-
+    // Get personalization multi photos
+    $personal_multi_photo = $form_state['values']['field_ugc_personalization_photo']['und'][0]['field_ugc_upload_photo']['und'][0]['fid'];
+    $arg = arg();
     // validate if decription field is blank
     if ($type == 'story' || $type == 'recipe' || $type == 'blog') {
       if (empty($description)) {
         form_set_error('field_user_message', t("Description field is required."));
       }
-    }
-
-
+    }    
     // validate if image field is blank
     if (($type == 'photogallery')) {
-      if (empty($upload_image)) {
+      if (empty($upload_image) && $arg[1] !== 'my-content') {
         form_set_error('field_ugc_upload_photo', t("Image field is required."));
+      }
+      if ($arg[1] === 'my-content' && empty($personal_multi_photo)) {
+        form_set_error('field_ugc_personalization_photo', t('Upload photo field is required.'));
       }
     }
 
     // validate if video field is blank
-    if (($type == 'video')) {
+    if (($type == 'videogallery')) {
       if (empty($upload_video)) {
         form_set_error('field_astro_video', t("Video field is required."));
       }
