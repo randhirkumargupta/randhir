@@ -10,6 +10,7 @@
 
 /**
  * Implements hook_permission
+ * 
  * {@inheritdoc}
  */
 function itg_survey_permission() {
@@ -22,6 +23,7 @@ function itg_survey_permission() {
 
 /**
  * Implements hook_menu
+ * 
  * {@inheritdoc}
  */
 function itg_survey_menu() {
@@ -50,6 +52,7 @@ function itg_survey_menu() {
 
 /**
  * Implements hook_theme
+ * 
  * {@inheritdoc}
  */
 function itg_survey_theme() {
@@ -71,6 +74,7 @@ function itg_survey_theme() {
 /***************************Form Related hooks*********************************/
 /**
  * Implements hook_form_alter
+ * 
  * {@inheritdoc}
  */
 function itg_survey_form_alter(&$form, &$form_state, $form_id) {
@@ -199,13 +203,14 @@ function itg_survey_views_pre_render(&$view) {
 
 /**
  * Implement hook_form_views_exposed_form_alter
+ * 
  * {@inheritdoc}
  */
 function itg_survey_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   
    if ($form['#id'] == 'views-exposed-form-manage-survey-page') {
      
-     //Call function autocomplete to show matching titles
+     // Call function autocomplete to show matching titles
      $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));     
    }
@@ -351,8 +356,8 @@ function itg_survey_get_survey_by_users($nid, $user_type){
 
 /**
  * Get total number of survey taken by users for a node
- * @param Int $nid
- * @return Int
+ * @param int $nid
+ * @return int
  */
 function itg_survey_get_total_survey($nid){
     $result = db_select('itg_survey_user', 'isu')
@@ -371,9 +376,9 @@ function itg_survey_get_total_survey($nid){
 
 /**
  * Get total vote of a perticular answer for a individual question
- * @param Int $nid
- * @param Int $ques_id
- * @param String $answer
+ * @param int $nid
+ * @param int $ques_id
+ * @param string $answer
  * @return string
  */
 function itg_survey_vote_percentage($nid, $ques_id, $answer){

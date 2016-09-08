@@ -323,8 +323,8 @@ jQuery(document).ready(function () {
       var docH = jQuery(document).height();
       var targetH = docH - winH;
       var scrollH = jQuery(window).scrollTop();
-      console.log(scrollH + "==" + targetH);
-      if(scrollH == targetH) {
+      if(parseInt(scrollH) == parseInt(targetH)) {
+        console.log(scrollH + "==" + targetH);
            jQuery('.load-more').show();
       }
     });
