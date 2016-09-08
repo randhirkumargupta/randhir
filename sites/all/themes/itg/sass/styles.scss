@@ -2925,6 +2925,7 @@ footer{
   #block-itg-videogallery-videogallery-menu-video-block{
       padding-top: 0;
       margin-top: 0;
+      @include sidebar-heading;
   }
 .view-video-list-of-category, .view-video-landing-header{    
     .views-exposed-form{
@@ -3145,6 +3146,7 @@ footer{
         .programe-list{
             list-style: none;
             overflow: hidden;
+            margin-bottom:60px;
             > .tile-wrapper{
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -3192,7 +3194,7 @@ footer{
             .more{
               text-align: right;
               position: relative;
-              margin: 30px 0 50px;
+              margin: 0px;
               &:after{
                 content: '';
                 position: absolute;
@@ -3526,7 +3528,7 @@ footer{
                     display: block;
                     font-family: $itg-roboto;
                     color:#808080;
-                    &.active, &:hover{
+                    &.active, &:hover, &.menu_active{
                         color:#000;
                         background: #eaeaea;
                     }
