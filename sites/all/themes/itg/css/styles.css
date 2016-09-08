@@ -4731,6 +4731,9 @@ footer .footer-copyright {
   border: 1px solid #dddddd;
   padding-bottom: 10px;
 }
+.magazin-lhs-top a:hover {
+  color: #193984;
+}
 .magazin-lhs-top .magazin-top {
   zoom: 1;
   margin-bottom: 20px;

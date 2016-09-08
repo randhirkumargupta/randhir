@@ -3601,6 +3601,9 @@ footer{
     background: #f6f5f5;
     border: 1px solid $border-color;
     padding-bottom: 10px;
+    a:hover{
+        color:#193984;
+    }
     .magazin-top{
         @include clearfix;
         margin-bottom:20px;
