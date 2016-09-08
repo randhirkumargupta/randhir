@@ -43,15 +43,55 @@ function itg_personalization_menu() {
     'access callback' => TRUE,    
     'type' => MENU_NORMAL_ITEM,
   );
-  $items['itg-saved-content/%'] = array(    
-    'page callback' => '_personalized_saved_content',
-    'access arguments' => array('access content'),
-    'page arguments' => array(1),
-    'file' => 'includes/itg_personalization.helper.inc',
-    'type' => MENU_CALLBACK,
+  $items['personalized-ugc-content'] = array(    
+    'page callback' => '_personalized_ugc_content',
+    'access arguments' => array('access content'),    
+    'file path' => drupal_get_path('module', 'node'),
+    'file' => 'node.pages.inc',
+    'type' => MENU_NORMAL_ITEM,
   );  
   
   return $items;
+}
+
+/**
+ * Implements callback function for ugc my content form.
+ *
+ * @global stdObject $user
+ *   User statndard object.
+ * @return array
+ *   Themed html output.
+ */
+function _personalized_ugc_content() {
+  global $user;
+  $data = array();
+  drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js');
+  // Load user fields
+  $user_fields = user_load($user->uid);  
+  
+  // Render user picture.
+  $data['profile_pic'] = theme(
+    'image_style',
+    array(
+      'style_name' => 'user_picture',
+      'path' => $user_fields->field_user_picture['und'][0]['uri'],
+    )
+  );  
+  
+  // Load user name    
+  $f_name = $user_fields->field_first_name['und'][0]['value'];
+  $l_name = $user_fields->field_last_name['und'][0]['value'];  
+  $data['full_name'] = $f_name . ' ' . $l_name;
+  
+  // user logout link
+  $data['logout'] = l(t('Logout'), 'user/logout');
+  // Node add form
+  $data['form_output'] = node_add('ugc');
+  // Menu tab
+  $block = module_invoke('itg_personalization', 'block_view', 'block_delta');
+  print render($block['content']);
+  
+  return theme('personalization_userpage', array('data' => $data));;
 }
 
 /**
@@ -85,7 +125,7 @@ function itg_personalization_home_page() {
   $data['full_name'] = $f_name . ' ' . $l_name;
   
   // user logout link
-  $data['logout'] = l(t('Logout'), 'user/logout');
+  $data['logout'] = l(t('Logout'), 'user/logout');  
   
   return theme('personalization_userpage', array('data' => $data));
 }
@@ -228,18 +268,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
       'visible' => array(
         ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
       ),
-    );    
-    // Set visibility for submit buttons.
-    $form['field_user_message']['und'][0] = array(
-      '#title' => t('Description'),
-      '#type' => 'textarea',
-      '#rows' => 3,
-      '#states' => array(
-        'visible' => array(
-          ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
-        ),
-      ),  
-    );    
+    );            
     // Set field visibility for tags field.
     $form['field_story_client_title']['#states'] = array(
       'visible' => array(
