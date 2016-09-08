@@ -215,7 +215,7 @@ header{
     }
     .header-ads{
         text-align: center; 
-        row{
+        .row{
             margin: 0 auto;
             @include display-inline;
         }
@@ -3742,7 +3742,15 @@ footer{
                 }
             }
         }
-    }
-    
+    }    
 }
+/*.class{
+    h3{
+        @include font(26px,null,300);
+        color:#db1314;        
+        span{
+            font-weight: 700;
+        }
+    }
+}*/
 /*CSS End So sorry page*/
