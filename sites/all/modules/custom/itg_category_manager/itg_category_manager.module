@@ -970,6 +970,42 @@ function itg_category_manager_views_data() {
  * {@inheritdoc} 
  */
 function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
+  
+  if ($form['#term']['vocabulary_machine_name'] == 'category_management' && $form_id == 'taxonomy_form_term') {
+    
+    $select_template_type = 'field_cm_select_template_type';
+    $select_template = 'field_cm_select_template';
+    
+    unset($form[$select_template_type][LANGUAGE_NONE]['#options']['_none']);
+    
+    // add ajax on Select template field
+    $form[$select_template_type][LANGUAGE_NONE]['#ajax'] = array(
+      'event' => 'change',
+      'callback' => 'itg_template_ajax_callback',
+      'wrapper' => $select_template . '_replace',
+    );
+    
+    // set Select template type on edit and trigger action
+    
+    if (isset($form[$select_template_type][LANGUAGE_NONE]['#default_value']) && !isset($form_state['triggering_element'])) {
+      $template_type = $form[$select_template_type][LANGUAGE_NONE]['#default_value'];
+    }
+    else {
+      $template_type = $form_state['input'][$select_template_type][LANGUAGE_NONE];
+    }
+    
+    // Setup template type
+    $form[$select_template][LANGUAGE_NONE]['#prefix'] = '<div id="' . $select_template . '_replace">';
+    $form[$select_template][LANGUAGE_NONE]['#suffix'] = '</div>';
+
+    if (function_exists('get_tplname_on_category')) {     
+      $form[$select_template][LANGUAGE_NONE]['#options'] = get_tplname_on_category($template_type);
+      $form[$select_template][LANGUAGE_NONE]['#default_value'] = $form[$select_template][LANGUAGE_NONE]['#entity']->field_cm_select_template[LANGUAGE_NONE][0]['value'];
+    }    
+
+  }
+  
+  
     if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
         drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/clipboard.min.js', 'file');
         drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/itg_category_manager.js', 'file');
@@ -997,6 +1033,11 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
     $editid = $form_state['input']['field_primary_category'][LANGUAGE_NONE][0]['value'];
     $editid = ($editid ? $editid : 0);
     drupal_add_js('jQuery(document).ready(function() {
+        var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
+        if(rows==0){
+        jQuery(".dropbox table").before( "<span class=title-select-prim>Select primary category</span>" );
+       
+        }
   jQuery(".form-item-field-primary-category-html-text-und-0-value").hide();
 jQuery(".node-form").append("<input type=hidden name=form_node value=' . $type . ' >");
 jQuery("form").submit(function(){
@@ -1058,6 +1099,12 @@ if (getvaluehtml != "")
     {
         jQuery(".dropbox-title").html(getvaluehtml).hide();
         }
+        jQuery(".title-select-prim").remove();
+        var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
+        if(rows==0){
+        jQuery(".dropbox table").before( "<span class=title-select-prim>Select primary category</span>" );
+       
+        }
                 jQuery(".dropbox-title .primary-text").each(function() {
 
                     var getdoptiontext = jQuery(this).text();
@@ -1084,7 +1131,12 @@ if (getvaluehtml != "")
                             }
                           });
 
-        })
+        });
+        var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
+        if(rows>0){
+        jQuery(".title-select-prim").remove();
+        jQuery(".hiddenradio").remove();
+        }
 
             }
         });
@@ -1429,4 +1481,37 @@ function itg_category_manager_views_query_alter(&$view, &$query) {
     if (isset($_GET['name']) && $_GET['name'] !== '' && $view->name == 'category_manager') {
         unset($query->where[1]['conditions'][2]);
     }
+}
+
+
+/**
+ * Get template name list of layouts directory
+ * @param string $tpl_dir 
+ * @return array $data
+ */
+function get_tplname_on_category($dir_name) {
+  $dir = getcwd().'/'.drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts/'.$dir_name;
+   
+  $scanned_directory = array_diff(scandir($dir, 1), array('..', '.'));
+
+  $data = array("_none" => "-- Template --");
+
+  foreach ($scanned_directory as $key => $val) {
+    $tpl = substr($val,0,-8);
+    if (!empty($tpl)) {
+      $data[$tpl] = $tpl;
+    }            
+  }
+  
+  return $data;
+}
+
+/**
+ * Ajax callback for select template
+ * @param array $form
+ * @param array $form_state
+ * @return int
+ */
+function itg_template_ajax_callback($form, $form_state) {
+  return $form['field_cm_select_template'];
 }

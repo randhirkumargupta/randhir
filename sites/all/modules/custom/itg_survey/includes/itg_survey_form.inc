@@ -181,7 +181,7 @@ function itg_survey_survey_form() {
           
           $txt_num++;
         }
-        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
+//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } elseif ($answer_type == 'rating') { // Answer option for rating
         $rating_num = 0;
@@ -200,14 +200,14 @@ function itg_survey_survey_form() {
           
           $rating_num++;
         }
-        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
+//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } else {  //Answer option for radios and checkboxes
         $form['answer_option' . $num] = array(
             '#title' => t(''),
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
-            '#suffix' => '</div>',
+//            '#suffix' => '</div>',
         );
       }
       
@@ -215,7 +215,7 @@ function itg_survey_survey_form() {
         if ($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif') {
           $form['media' . $num] = array(
               '#type' => 'markup',
-              '#prefix' => '<div>',
+              '#prefix' => '<div class="survey-media">',
               '#markup' => '<img src="' . $media_path . '" height="100" width="130"/>',
               '#suffix' => '</div>',
           );
@@ -223,7 +223,7 @@ function itg_survey_survey_form() {
         else {
           $form['media' . $num] = array(
               '#type' => 'markup',
-              '#prefix' => '<div>',
+              '#prefix' => '<div class="survey-media">',
               '#markup' => '<video width="140" height="145" controls="controls">
                 <source src="' . $media . '" type="video/mp4"> 
                  <object> 
@@ -234,7 +234,7 @@ function itg_survey_survey_form() {
           );
         }
       }
-      
+      $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       // Render multiple submit buttons, if questions are displaying one-by-one
       if ($survey_question_format == 'One question at a time') {
         $form['survey_submit_' . $num] = array(
@@ -270,6 +270,14 @@ function itg_survey_survey_form() {
           );
         }
       }
+      
+      if($survey_question_format == 'All questions at a time') {
+          $form['close_question_container' . $num] = array(
+              '#type' => 'markup',
+              '#markup' => '</div>',
+          );
+      }
+      
       $num++;
       
     } //End of foreach loop
@@ -332,13 +340,7 @@ function itg_survey_survey_form() {
           ),
           '#attributes' => array('class' => array('survey-submit'))
       );
-      $form['close_question_container' . $num] = array(
-          '#type' => 'markup',
-          '#markup' => '</div>',
-      );
     }
-   
-
   }
   else {
     $form['no_survey'] = array(
@@ -353,8 +355,8 @@ function itg_survey_survey_form() {
 
 /**
  * Validate function of survey form
- * @param Array $form
- * @param Array $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function itg_survey_survey_form_validate($form, &$form_state) {
 
@@ -362,7 +364,8 @@ function itg_survey_survey_form_validate($form, &$form_state) {
 
   if (isset($_COOKIE[$cookie_name])) {
     form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));
-  } else {
+  } 
+  else {
 
     $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
     $num = $btn_num_arr[1];
@@ -375,115 +378,66 @@ function itg_survey_survey_form_validate($form, &$form_state) {
     $question_format = $form_detail['question_format'];
 
     if ($question_format == 'All questions at a time') {
+      $loop_start_num = 0;
+      $loop_end_num = $question_total - 1;
+    } 
+    else {
+      $loop_start_num = $num;
+      $loop_end_num = $num;
+    }
 
-      for ($ques_num = 0; $ques_num < $question_total; $ques_num++) {
-
-        // Checkbox validation
-        if ($form_detail['question_type' . $ques_num] === 'checkboxes') {
-          if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-            foreach ($form_detail['answer_option' . $num] as $key => $value) {
-              if ($value !== 0) {
-                $ans_flag = TRUE;
-              }
-            }
-            if (!$ans_flag) {
-              form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
-            }
-          }
-        }
-
-        // Radio Button validation
-        if ($form_detail['question_type' . $ques_num] === 'radios') {
-          if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-            if (empty($form_detail['answer_option' . $ques_num])) {
-              form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
-            }
-          }
-        }
-
-        // Rating validation
-        if ($form_detail['question_type' . $ques_num] === 'rating') {
-          if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-            for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
-              for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
-                if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] !== 0) {
-                  $rating_ans_flag = TRUE;
-                }
-              }
-            }
-            if (!$rating_ans_flag) {
-              form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
-            }
-          }
-        }
-
-        // Textfield validation
-        if ($form_detail['question_type' . $ques_num] === 'textfield') {
-          if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-            $txt_ans_flag = FALSE;
-            for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
-              if ($form_detail['answer_option' . $ques_num . '_' . $text_field] !== '') {
-                $txt_ans_flag = TRUE;
-              }
-            }
-            if (!$txt_ans_flag) {
-              form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
-            }
-          }
-        }
-      }
-    } else {
+    for ($ques_num = $loop_start_num; $ques_num <= $loop_end_num; $ques_num++) {
 
       // Checkbox validation
-      if ($form_detail['question_type' . $num] === 'checkboxes') {
-        if ($form_detail['question_skip' . $num] !== 'yes') {
-          foreach ($form_detail['answer_option' . $num] as $key => $value) {
+      if ($form_detail['question_type' . $ques_num] === 'checkboxes') {
+        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
+          foreach ($form_detail['answer_option' . $ques_num] as $key => $value) {
             if ($value !== 0) {
               $ans_flag = TRUE;
             }
           }
           if (!$ans_flag) {
-            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '" is required. Please select any answer option to proceed.'));
+            form_set_error('answer_option' . $ques_num, t('Question @questiontitle is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
 
       // Radio Button validation
-      if ($form_detail['question_type' . $num] === 'radios') {
-        if ($form_detail['question_skip' . $num] !== 'yes') {
-          if (empty($form_detail['answer_option' . $num])) {
-            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please select any answer option to proceed.'));
+      if ($form_detail['question_type' . $ques_num] === 'radios') {
+        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
+          if (empty($form_detail['answer_option' . $ques_num])) {
+            form_set_error('answer_option' . $ques_num, t('Question @questiontitle is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
 
       // Rating validation
-      if ($form_detail['question_type' . $num] === 'rating') {
-        if ($form_detail['question_skip' . $num] !== 'yes') {
+      if ($form_detail['question_type' . $ques_num] === 'rating') {
+        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
           for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
             for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
-              if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] !== 0) {
+              if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] !== 0) {
                 $rating_ans_flag = TRUE;
               }
             }
           }
           if (!$rating_ans_flag) {
-            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please provide your answer to proceed.'));
+            form_set_error('answer_option' . $ques_num, t('Question @questiontitle is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
 
       // Textfield validation
-      if ($form_detail['question_type' . $num] === 'textfield') {
-        if ($form_detail['question_skip' . $num] !== 'yes') {
+      if ($form_detail['question_type' . $ques_num] === 'textfield') {
+        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
           $txt_ans_flag = FALSE;
           for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
-            if ($form_detail['answer_option' . $num . '_' . $text_field] !== '') {
+            if ($form_detail['answer_option' . $ques_num . '_' . $text_field] !== '') {
               $txt_ans_flag = TRUE;
             }
           }
           if (!$txt_ans_flag) {
-            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please provide your answer to proceed.'));
+            form_set_error('answer_option' . $ques_num, t('Question @questiontitle is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
@@ -514,16 +468,23 @@ function itg_survey_survey_form_submit($form, &$form_state) {
   }
   
   // Set a session for a survey (Will be same for all questions during a survey) 
-  if(!isset($_SESSION['survey_unique_key'])){
+  if (!isset($_SESSION['survey_unique_key'])) {
     $_SESSION['survey_unique_key'] = user_password(6);
   }
   
-  // Insert anwer value
+  // Set loop variables for both scenario (all/one-by-one)
+  if ($question_format == 'All questions at a time') {
+    $loop_start_num = 0;
+    $loop_end_num = $question_total - 1;
+  } else {
+    $loop_start_num = $num;
+    $loop_end_num = $num;
+  }
+  
+  // Save answer into DB
   if ($btn_num_arr[0] == 'surveysubmit') {
 
-    if ($question_format == 'All questions at a time') {
-
-      for ($ques_num = 0; $ques_num < $question_total; $ques_num++) {
+      for ($ques_num = $loop_start_num; $ques_num <= $loop_end_num; $ques_num++) {
 
         // Insert for radio button type answer
         if ($form_state['values']['question_type' . $ques_num] == 'radios') {
@@ -622,105 +583,6 @@ function itg_survey_survey_form_submit($form, &$form_state) {
             }
           }
         }
-      }
-    } else {
-      // Insert for radio button type answer
-      if ($form_state['values']['question_type' . $num] == 'radios') {
-
-        db_insert('itg_survey_detail')
-                ->fields(array(
-                    'nid' => $form_state['values']['nid'],
-                    'uid' => $user->uid,
-                    'ques_id' => $form_state['values']['question_id' . $num],
-                    'question' => $form_state['values']['question' . $num],
-                    'answer' => strtolower($form_state['values']['answer_option' . $num]),
-                    'ans_type' => $form_state['values']['question_type' . $num],
-                    'user_type' => $user_type,
-                    'page_url' => $form_state['values']['survey_url'],
-                    'survey_title' => $form_state['values']['survey_title'],
-                    'survey_key' => $_SESSION['survey_unique_key'],
-                    'survey_info' => 0,
-                    'created' => time(),
-                ))
-                ->execute();
-      }
-
-      // Insert for checkboxs type answer
-      if ($form_state['values']['question_type' . $num] == 'checkboxes') {
-
-        foreach ($form_state['values']['answer_option' . $num] as $key => $value) {
-          if ($value) {
-            db_insert('itg_survey_detail')
-                    ->fields(array(
-                        'nid' => $form_state['values']['nid'],
-                        'uid' => $user->uid,
-                        'ques_id' => $form_state['values']['question_id' . $num],
-                        'question' => $form_state['values']['question' . $num],
-                        'answer' => strtolower($value),
-                        'ans_type' => $form_state['values']['question_type' . $num],
-                        'user_type' => $user_type,
-                        'page_url' => $form_state['values']['survey_url'],
-                        'survey_title' => $form_state['values']['survey_title'],
-                        'survey_key' => $_SESSION['survey_unique_key'],
-                        'survey_info' => 0,
-                        'created' => time(),
-                    ))
-                    ->execute();
-          }
-        }
-      }
-
-      // Insert for textfield type answer
-      if ($form_state['values']['question_type' . $num] == 'textfield') {
-
-        for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
-          if ($form_detail['answer_option' . $num . '_' . $text_field] !== '') {
-            db_insert('itg_survey_detail')
-                    ->fields(array(
-                        'nid' => $form_state['values']['nid'],
-                        'uid' => $user->uid,
-                        'ques_id' => $form_state['values']['question_id' . $num],
-                        'question' => $form_state['values']['question' . $num],
-                        'answer' => strtolower($form_detail['answer_option_name' . $num . '_' . $text_field]),
-                        'ans_type' => $form_state['values']['question_type' . $num],
-                        'user_type' => $user_type,
-                        'page_url' => $form_state['values']['survey_url'],
-                        'survey_title' => $form_state['values']['survey_title'],
-                        'survey_key' => $_SESSION['survey_unique_key'],
-                        'survey_info' => 0,
-                        'created' => time(),
-                    ))
-                    ->execute();
-          }
-        }
-      }
-
-      // Insert for rating type answer
-      if ($form_state['values']['question_type' . $num] == 'rating') {
-
-        for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
-          for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
-            if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] == 1) {
-              db_insert('itg_survey_detail')
-                      ->fields(array(
-                          'nid' => $form_state['values']['nid'],
-                          'uid' => $user->uid,
-                          'ques_id' => $form_state['values']['question_id' . $num],
-                          'question' => $form_state['values']['question' . $num],
-                          'answer' => $form_detail['answer_option' . $num . '_' . $rating_field . '_name'] ? strtolower($form_detail['answer_option' . $num . '_' . $rating_field . '_name']) : $form_state['values']['question' . $num],
-                          'ans_type' => $form_state['values']['question_type' . $num],
-                          'user_type' => $user_type,
-                          'page_url' => $form_state['values']['survey_url'],
-                          'survey_title' => $form_state['values']['survey_title'],
-                          'survey_key' => $_SESSION['survey_unique_key'],
-                          'survey_info' => 0,
-                          'created' => time(),
-                      ))
-                      ->execute();
-            }
-          }
-        }
-      }
     }
   }
  
@@ -741,7 +603,7 @@ function itg_survey_survey_form_submit($form, &$form_state) {
             ))
             ->execute();
     
-    // Update table and set survey_info(status) = 1, means this survey has been completed by a user 
+    // Update table and set survey_info(status) = 1(means this survey has been completed by a user) 
     db_update('itg_survey_detail')
             ->fields(array(
                 'survey_info' => 1,
@@ -777,4 +639,3 @@ function survey_form_ajax_handler(&$form, &$form_state){
 }
 
 ?>
-

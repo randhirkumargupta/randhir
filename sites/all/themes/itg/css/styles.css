@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul {
+.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul {
   list-style-type: none;
 }
 
@@ -313,6 +313,11 @@ header {
 }
 #block-itg-layout-manager-header-block .header-ads {
   text-align: center;
+}
+#block-itg-layout-manager-header-block .header-ads row {
+  margin: 0 auto;
+  display: inline-block;
+  vertical-align: top;
 }
 #block-itg-layout-manager-header-block .login-link {
   text-align: right;
@@ -2893,6 +2898,7 @@ footer .footer-copyright {
 .anchor-detail-menu .tab-buttons span {
   width: auto;
   border-top: 3px solid #cacaca;
+  padding: 0 30px;
 }
 .anchor-detail-menu .tab-buttons span.active {
   border-top: 3px solid #a00606;
@@ -3821,6 +3827,31 @@ footer .footer-copyright {
   padding-top: 0;
   margin-top: 0;
 }
+#block-itg-videogallery-videogallery-menu-video-block h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  display: none;
+  position: relative;
+}
+#block-itg-videogallery-videogallery-menu-video-block h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+#block-itg-videogallery-videogallery-menu-video-block h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
 
 .view-video-list-of-category .views-exposed-form, .view-video-landing-header .views-exposed-form {
   display: none;
@@ -4063,6 +4094,7 @@ footer .footer-copyright {
 .view-programme-content .view-content .programe-list {
   list-style: none;
   overflow: hidden;
+  margin-bottom: 50px;
 }
 .view-programme-content .view-content .programe-list > .tile-wrapper {
   padding-top: 15px;
@@ -4109,7 +4141,7 @@ footer .footer-copyright {
 .view-programme-content .view-content .programe-list .more {
   text-align: right;
   position: relative;
-  margin: 30px 0 50px;
+  margin-bottom: 20px;
 }
 .view-programme-content .view-content .programe-list .more:after {
   content: '';
@@ -4546,7 +4578,7 @@ footer .footer-copyright {
 /*CSS end program RHS*/
 /*CSS Start magazine-calander RHS*/
 #block-itg-msi-magazine-calendar {
-  padding: 50px 30px 20px 30px;
+  padding: 50px 0px 20px 0px;
 }
 #block-itg-msi-magazine-calendar .calendar-title {
   position: relative;
@@ -4603,7 +4635,7 @@ footer .footer-copyright {
   font-family: "Roboto", sans-serif;
   color: #808080;
 }
-#block-itg-msi-magazine-calendar ul li span a.active, #block-itg-msi-magazine-calendar ul li span a:hover {
+#block-itg-msi-magazine-calendar ul li span a.active, #block-itg-msi-magazine-calendar ul li span a:hover, #block-itg-msi-magazine-calendar ul li span a.menu_active {
   color: #000;
   background: #eaeaea;
 }
@@ -4635,7 +4667,7 @@ footer .footer-copyright {
 /*CSS End magazine-calander RHS*/
 /*CSS Start Latest issue magazins*/
 #block-views-latest-issue-magzine-block-1 {
-  padding: 50px 30px 20px 30px;
+  padding: 50px 0px 20px 0px;
   font-family: "Roboto", sans-serif;
 }
 #block-views-latest-issue-magzine-block-1 h2 {
@@ -4844,3 +4876,59 @@ footer .footer-copyright {
 }
 
 /*End start magazins*/
+/*CSS Start RHS add block*/
+#block-itg-ads-ad-right-sidebar-1 {
+  display: inline-block;
+  padding: 30px 34px 0;
+}
+
+/*CSS End RHS add block*/
+/*CSS Start So sorry page*/
+#block-itg-layout-manager-header-sosorry-block .sosory-header {
+  zoom: 1;
+  background: #db1314;
+  padding: 15px 0;
+  text-align: center;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-header:before, #block-itg-layout-manager-header-sosorry-block .sosory-header:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-header:after {
+  clear: both;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-header .sosorryitg {
+  padding: 40px 30px 0 0;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-header .soindiatoday {
+  float: right;
+  padding-top: 20px;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-footer {
+  background: #000;
+  padding: 12px 0;
+  text-align: center;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-footer a {
+  color: #eff94e;
+  font-size: 12px;
+  font-family: "Roboto", sans-serif;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-footer ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 20px;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-footer ul li i {
+  font-size: 30px;
+  vertical-align: middle;
+  padding-right: 10px;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-footer ul li:nth-child(2) {
+  border-left: 1px solid #eff94e;
+  border-right: 1px solid #eff94e;
+}
+
+/*CSS End So sorry page*/

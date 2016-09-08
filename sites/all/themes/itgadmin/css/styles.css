@@ -2683,11 +2683,8 @@ div.image-widget-data .ajax-progress-throbber {
 }
 
 [id*="field-event-media-values"] > tbody > tr > td {
-  min-width: 620px;
+  width: 100%;
   margin-bottom: 20px;
-}
-[id*="field-event-media-values"] .field-name-field-quiz-answer-image .form-managed-file .form-submit[value="Remove"] {
-  left: 532px;
 }
 
 [class*="node-type-"] .tabs-primary, [class*="page-node-"] .tabs-primary {
@@ -4939,6 +4936,9 @@ div.node #comments h2 {
 .action-with-title #page-title {
   line-height: 32px;
   margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   width: 810px;
 }
 .action-with-title .block-itg-story-list {

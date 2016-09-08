@@ -214,7 +214,11 @@ header{
         @include pos(relative);
     }
     .header-ads{
-        text-align: center;        
+        text-align: center; 
+        row{
+            margin: 0 auto;
+            @include display-inline;
+        }
     }
     .login-link{
         text-align: right;
@@ -2141,6 +2145,7 @@ footer{
         span{
             width: auto;
             border-top: 3px solid rgba(202, 202, 202,1);
+            padding: 0 30px;
             &.active{
                  border-top: 3px solid #a00606;
             }
@@ -2925,6 +2930,7 @@ footer{
   #block-itg-videogallery-videogallery-menu-video-block{
       padding-top: 0;
       margin-top: 0;
+      @include sidebar-heading;
   }
 .view-video-list-of-category, .view-video-landing-header{    
     .views-exposed-form{
@@ -3145,6 +3151,7 @@ footer{
         .programe-list{
             list-style: none;
             overflow: hidden;
+            margin-bottom:50px;
             > .tile-wrapper{
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -3192,7 +3199,7 @@ footer{
             .more{
               text-align: right;
               position: relative;
-              margin: 30px 0 50px;
+              margin-bottom: 20px;
               &:after{
                 content: '';
                 position: absolute;
@@ -3500,7 +3507,7 @@ footer{
 
 /*CSS Start magazine-calander RHS*/
 #block-itg-msi-magazine-calendar{    
-    padding: 50px 30px 20px 30px;
+    padding: 50px 0px 20px 0px;
     .calendar-title{
         @include story-tag(22px,22px);
     }
@@ -3526,7 +3533,7 @@ footer{
                     display: block;
                     font-family: $itg-roboto;
                     color:#808080;
-                    &.active, &:hover{
+                    &.active, &:hover, &.menu_active{
                         color:#000;
                         background: #eaeaea;
                     }
@@ -3560,7 +3567,7 @@ footer{
 
 /*CSS Start Latest issue magazins*/
 #block-views-latest-issue-magzine-block-1{
-    padding: 50px 30px 20px 30px;
+    padding: 50px 0px 20px 0px;
     font-family:$itg-roboto;
     h2{
         @include story-tag(22px,22px);
@@ -3689,3 +3696,53 @@ footer{
     }
 }
 /*End start magazins*/
+/*CSS Start RHS add block*/
+#block-itg-ads-ad-right-sidebar-1{
+    display: inline-block;
+    padding: 30px 34px 0;
+}
+/*CSS End RHS add block*/
+/*CSS Start So sorry page*/
+#block-itg-layout-manager-header-sosorry-block{
+    .sosory-header{
+        @include clearfix;
+        background: #db1314;
+        padding: 15px 0; 
+        @include text-align(center);
+        .sosorryitg{
+            padding: 40px 30px 0 0;
+        }
+        .soindiatoday{
+            float: right;
+            padding-top: 20px;
+        }
+    }
+    .sosory-footer{
+        background: #000;
+        padding: 12px 0;            
+        text-align: center;                
+        a{
+             color:#eff94e;
+             font-size: 12px;
+             font-family:$itg-roboto;
+        }
+        ul{
+            @extend .list-none;
+            li{
+                @include display-inline;
+                padding:0 20px;
+                i{
+                    font-size: 30px;
+                    vertical-align: middle;
+                    padding-right: 10px;
+                }
+                &:nth-child(2){
+                    border-left: 1px solid #eff94e;
+                    border-right: 1px solid #eff94e;
+                }
+            }
+        }
+    }
+    
+}
+/*CSS End So sorry page*/
