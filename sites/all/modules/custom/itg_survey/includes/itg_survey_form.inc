@@ -181,7 +181,7 @@ function itg_survey_survey_form() {
           
           $txt_num++;
         }
-        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
+//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } elseif ($answer_type == 'rating') { // Answer option for rating
         $rating_num = 0;
@@ -200,14 +200,14 @@ function itg_survey_survey_form() {
           
           $rating_num++;
         }
-        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
+//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } else {  //Answer option for radios and checkboxes
         $form['answer_option' . $num] = array(
             '#title' => t(''),
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
-            '#suffix' => '</div>',
+//            '#suffix' => '</div>',
         );
       }
       
@@ -215,7 +215,7 @@ function itg_survey_survey_form() {
         if ($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif') {
           $form['media' . $num] = array(
               '#type' => 'markup',
-              '#prefix' => '<div>',
+              '#prefix' => '<div class="survey-media">',
               '#markup' => '<img src="' . $media_path . '" height="100" width="130"/>',
               '#suffix' => '</div>',
           );
@@ -223,7 +223,7 @@ function itg_survey_survey_form() {
         else {
           $form['media' . $num] = array(
               '#type' => 'markup',
-              '#prefix' => '<div>',
+              '#prefix' => '<div class="survey-media">',
               '#markup' => '<video width="140" height="145" controls="controls">
                 <source src="' . $media . '" type="video/mp4"> 
                  <object> 
@@ -234,7 +234,7 @@ function itg_survey_survey_form() {
           );
         }
       }
-      
+      $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       // Render multiple submit buttons, if questions are displaying one-by-one
       if ($survey_question_format == 'One question at a time') {
         $form['survey_submit_' . $num] = array(
