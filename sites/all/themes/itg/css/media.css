@@ -765,6 +765,12 @@
   }
 
   /*CSS End Photo landing page*/
+  /*CSS Start magazine-calander RHS*/
+  #block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1 {
+    padding: 50px 30px 20px 30px;
+  }
+
+  /*CSS End magazine-calander RHS*/
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {

@@ -314,6 +314,11 @@ header {
 #block-itg-layout-manager-header-block .header-ads {
   text-align: center;
 }
+#block-itg-layout-manager-header-block .header-ads row {
+  margin: 0 auto;
+  display: inline-block;
+  vertical-align: top;
+}
 #block-itg-layout-manager-header-block .login-link {
   text-align: right;
 }
@@ -2893,6 +2898,7 @@ footer .footer-copyright {
 .anchor-detail-menu .tab-buttons span {
   width: auto;
   border-top: 3px solid #cacaca;
+  padding: 0 30px;
 }
 .anchor-detail-menu .tab-buttons span.active {
   border-top: 3px solid #a00606;
@@ -4572,7 +4578,7 @@ footer .footer-copyright {
 /*CSS end program RHS*/
 /*CSS Start magazine-calander RHS*/
 #block-itg-msi-magazine-calendar {
-  padding: 50px 30px 20px 30px;
+  padding: 50px 0px 20px 0px;
 }
 #block-itg-msi-magazine-calendar .calendar-title {
   position: relative;
@@ -4661,7 +4667,7 @@ footer .footer-copyright {
 /*CSS End magazine-calander RHS*/
 /*CSS Start Latest issue magazins*/
 #block-views-latest-issue-magzine-block-1 {
-  padding: 50px 30px 20px 30px;
+  padding: 50px 0px 20px 0px;
   font-family: "Roboto", sans-serif;
 }
 #block-views-latest-issue-magzine-block-1 h2 {
@@ -4903,8 +4909,10 @@ footer .footer-copyright {
 #block-itg-layout-manager-header-sosorry-block .sosory-footer {
   background: #000;
   padding: 12px 0;
-  color: #eff94e;
   text-align: center;
+}
+#block-itg-layout-manager-header-sosorry-block .sosory-footer a {
+  color: #eff94e;
   font-size: 12px;
   font-family: "Roboto", sans-serif;
 }
