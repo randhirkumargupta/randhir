@@ -314,7 +314,7 @@ header {
 #block-itg-layout-manager-header-block .header-ads {
   text-align: center;
 }
-#block-itg-layout-manager-header-block .header-ads row {
+#block-itg-layout-manager-header-block .header-ads .row {
   margin: 0 auto;
   display: inline-block;
   vertical-align: top;
@@ -4731,6 +4731,9 @@ footer .footer-copyright {
   border: 1px solid #dddddd;
   padding-bottom: 10px;
 }
+.magazin-lhs-top a:hover {
+  color: #193984;
+}
 .magazin-lhs-top .magazin-top {
   zoom: 1;
   margin-bottom: 20px;
@@ -4931,4 +4934,13 @@ footer .footer-copyright {
   border-right: 1px solid #eff94e;
 }
 
+/*.class{
+    h3{
+        @include font(26px,null,300);
+        color:#db1314;        
+        span{
+            font-weight: 700;
+        }
+    }
+}*/
 /*CSS End So sorry page*/
