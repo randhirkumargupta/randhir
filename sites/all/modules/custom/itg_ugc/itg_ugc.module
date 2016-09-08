@@ -65,8 +65,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#default_value'] = $node->title;
       $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
-      $form['body'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];
-      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['body'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];      
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
@@ -83,8 +83,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
       $form['title']['#default_value'] = $node->title;
       $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
-      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;
-      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;      
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
@@ -485,7 +485,7 @@ function itg_ugc_node_presave($node) {
  * @param int $nid
  * @param string $title
  */
-function itg_ugc_node_status_update($nid, $title) {
+function itg_ugc_node_status_update($nid, $title) {  
   global $user;
   $node = node_load($nid);
   $node_author = user_load($user->uid);
@@ -581,8 +581,14 @@ function itg_ugc_node_view($node, $view_mode, $langcode) {
 function itg_ugc_node_insert($node) {
   if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast') {
     $title = $node->title;
-    $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+    
     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];    
+    if ($node->type == 'story' || $node->type == 'videogallery') {
+      $source_id = $node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'];
+    }
+    else {
+      $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+    }
     if ($source_type == 'UGC' && !empty($source_id)) {
       itg_ugc_node_status_update($source_id, $title);
     }

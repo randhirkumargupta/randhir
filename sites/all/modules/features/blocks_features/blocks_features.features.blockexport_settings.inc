@@ -7768,7 +7768,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -7793,7 +7794,7 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -7805,7 +7806,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -7900,7 +7902,7 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -7912,7 +7914,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -8063,7 +8066,7 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8075,7 +8078,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -8226,7 +8230,7 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8238,7 +8242,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -8389,7 +8394,7 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8401,7 +8406,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -8552,7 +8558,7 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8564,7 +8570,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -10871,7 +10878,7 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -10882,7 +10889,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -10991,7 +10999,7 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11002,7 +11010,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11266,7 +11275,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11386,7 +11396,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11611,7 +11622,7 @@ node/*/edit',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11622,7 +11633,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11731,7 +11743,7 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11742,7 +11754,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11995,7 +12008,7 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12006,7 +12019,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12115,7 +12129,7 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12126,7 +12140,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12379,7 +12394,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12390,7 +12405,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12499,7 +12515,7 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12510,7 +12526,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12763,7 +12780,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12774,7 +12791,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12883,7 +12901,7 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12894,7 +12912,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -13147,7 +13166,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -13158,7 +13177,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -13267,7 +13287,7 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -13278,7 +13298,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -18899,6 +18920,104 @@ tv-show/*',
   'pages' => '',
   'title' => '',
   'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1309,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1310,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1311,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1312,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1313,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1314,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1315,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
 );
   $export['block_custom'][] = array(
   'bid' => 1,
