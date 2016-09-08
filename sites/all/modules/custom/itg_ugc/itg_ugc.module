@@ -77,7 +77,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // prefill input value in videogallery form
-    if ($form_id == 'videogallery_node_form' && !empty($url_nid)) {
+    if ($form_id == 'videogallery_node_form' && !empty($url_nid)) {      
       // get node values
       $node = node_load($url_nid);
       $ugc_user_name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
@@ -91,13 +91,9 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       if (!empty($ugc_user_name)) {
         $form['field_story_reporter']['#prefix'] = '<div class="main-cont">';
         $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
-      }
-      foreach ($form['field_videogallery_video_upload']['und'] as $delta => $field) {
-        if (is_numeric($delta)) {
-          // assign value in first field collection item
-          $form['field_videogallery_video_upload'][LANGUAGE_NONE][$delta]['field_upload_video'][LANGUAGE_NONE][0]['#default_value']['fid'] = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];
-        }
-      }
+      }      
+      // assign value in first field collection item
+      $form['field_upload_video']['und'][0]['#default_value']['fid'] = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];      
     }
 
     // prefill input value in podcast form
@@ -586,8 +582,7 @@ function itg_ugc_node_insert($node) {
   if ($node->type == 'story' || $node->type == 'blog' || $node->type == 'recipe' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast') {
     $title = $node->title;
     $source_id = $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
-    $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
-
+    $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];    
     if ($source_type == 'UGC' && !empty($source_id)) {
       itg_ugc_node_status_update($source_id, $title);
     }

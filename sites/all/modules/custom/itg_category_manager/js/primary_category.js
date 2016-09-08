@@ -67,6 +67,10 @@
                             });
 
                         });
+                        
+                        jQuery('.title-select-prim').remove();
+                        jQuery('.dropbox table').before( "<span class='title-select-prim'>Select primary category</span>" );
+                    
                         var gethtml = jQuery('.dropbox-title').html();
                         jQuery('#edit-field-primary-category-html-text-und-0-value').val(gethtml);
                     }
