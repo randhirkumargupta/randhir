@@ -42,56 +42,9 @@ function itg_personalization_menu() {
     'page callback' => 'itg_personalization_home_page',
     'access callback' => TRUE,    
     'type' => MENU_NORMAL_ITEM,
-  );
-  $items['personalized-ugc-content'] = array(    
-    'page callback' => '_personalized_ugc_content',
-    'access arguments' => array('access content'),    
-    'file path' => drupal_get_path('module', 'node'),
-    'file' => 'node.pages.inc',
-    'type' => MENU_NORMAL_ITEM,
-  );  
+  );    
   
   return $items;
-}
-
-/**
- * Implements callback function for ugc my content form.
- *
- * @global stdObject $user
- *   User statndard object.
- * @return array
- *   Themed html output.
- */
-function _personalized_ugc_content() {
-  global $user;
-  $data = array();
-  drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js');
-  // Load user fields
-  $user_fields = user_load($user->uid);  
-  
-  // Render user picture.
-  $data['profile_pic'] = theme(
-    'image_style',
-    array(
-      'style_name' => 'user_picture',
-      'path' => $user_fields->field_user_picture['und'][0]['uri'],
-    )
-  );  
-  
-  // Load user name    
-  $f_name = $user_fields->field_first_name['und'][0]['value'];
-  $l_name = $user_fields->field_last_name['und'][0]['value'];  
-  $data['full_name'] = $f_name . ' ' . $l_name;
-  
-  // user logout link
-  $data['logout'] = l(t('Logout'), 'user/logout');
-  // Node add form
-  $data['form_output'] = node_add('ugc');
-  // Menu tab
-  $block = module_invoke('itg_personalization', 'block_view', 'block_delta');
-  print render($block['content']);
-  
-  return theme('personalization_userpage', array('data' => $data));;
 }
 
 /**
