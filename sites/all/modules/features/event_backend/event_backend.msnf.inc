@@ -21,17 +21,16 @@ function event_backend_msnf_step_info() {
     'label' => 'Step7-Configuration',
     'weight' => '7',
     'children' => array(
-      0 => 'field_config_programme',
-      1 => 'field_config_speakers',
-      2 => 'field_config_sponsors',
-      3 => 'field_config_photo',
-      4 => 'field_config_video',
-      5 => 'field_config_flashback',
-      6 => 'field_config_home',
+      0 => 'field_config_flashback',
+      1 => 'field_config_home',
+      2 => 'field_config_photo',
+      3 => 'field_config_programme',
+      4 => 'field_config_speakers',
+      5 => 'field_config_sponsors',
+      6 => 'field_config_video',
       7 => 'field_force_registration_open',
-      8 => 'metatags',
-      9 => 'path',
-      10 => 'additional_settings',
+      8 => 'path',
+      9 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -65,12 +64,12 @@ function event_backend_msnf_step_info() {
     'weight' => '0',
     'children' => array(
       0 => 'body',
-      1 => 'field_event_short_description',
-      2 => 'field_story_url',
+      1 => 'field_event_close_date',
+      2 => 'field_event_short_description',
       3 => 'field_event_start_date',
-      4 => 'field_event_close_date',
-      5 => 'field_registration_close_date',
-      6 => 'field_story_expiry_date',
+      4 => 'field_registration_close_date',
+      5 => 'field_story_expiry_date',
+      6 => 'field_story_kicker_text',
       7 => 'title',
     ),
     'format_type' => 'default',
@@ -102,7 +101,7 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step5-Highlights',
-    'weight' => '5',
+    'weight' => '4',
     'children' => array(
       0 => 'field_event_highlights',
     ),
@@ -211,7 +210,7 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step3-Program Schedule',
-    'weight' => '3',
+    'weight' => '2',
     'children' => array(
       0 => 'field_program_schedule',
     ),
@@ -244,11 +243,11 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step2-Registration Fees',
-    'weight' => '2',
+    'weight' => '1',
     'children' => array(
       0 => 'field_event_type',
-      1 => 'field_group_registration_fee_5',
-      2 => 'field_group_registration_fee_10',
+      1 => 'field_group_registration_fee_10',
+      2 => 'field_group_registration_fee_5',
       3 => 'field_individual_registration_fe',
       4 => 'field_no_of_tickets',
     ),
@@ -281,7 +280,7 @@ function event_backend_msnf_step_info() {
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
     'label' => 'Step4-Sponsor',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'field_associate_sponsors',
     ),
