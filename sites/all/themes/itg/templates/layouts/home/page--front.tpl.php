@@ -105,7 +105,7 @@ if ($theme != 'itgadmin') {
         
 <?php } ?>
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
- <?php //print render($page['content']); ?>
+ 
 
 <div class="itg-layout-container <?php echo $itg_class; ?>">
     <?php if(isset($widget_data['big_story'])) : ?>
@@ -696,6 +696,29 @@ if ($theme != 'itgadmin') {
     </div>
 <?php } ?>
   <!--End of Common section-->
+  
+  <!--Load More Loader-->
+  <div class="load-more">
+    <img src="<?php echo base_path() ?>sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
+  </div>
+  <!--End of Loader-->
+  
+  <?php //print render($page['content']); ?>
+  <!--Start third party widgets -->
+  <div>
+    
+    <div class="vukkul-comment">
+    <div id="vuukle_div"></div>            
+      <?php 
+       if(function_exists('vukkul_view')) {
+         vukkul_view();
+       }
+       ?>     
+    </div>
+  </div>
+    
+  <!--End third party widgets -->
+ 
   
 </div>
 <!--------------------------------Code for Front tpl---------------------------------------->
