@@ -29,4 +29,7 @@ jQuery(document).ready(function () {
     jQuery("#views-form-personalization-my-preferences-block #edit-reset")
     .appendTo("#views-form-personalization-my-preferences-block #edit-actions");
     
+    // Hide remove button
+    jQuery('input[name="field_ugc_personalization_photo_und_0_remove_button"]').hide();
+    
 });

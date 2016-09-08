@@ -402,8 +402,8 @@ function event_backend_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1423,7 +1423,7 @@ function event_backend_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_group_registration_fee_10',
-    'label' => 'Group Registration Fee (upto 10)',
+    'label' => 'Group Registration Fee (upto 10 member)',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1472,7 +1472,7 @@ function event_backend_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_group_registration_fee_5',
-    'label' => 'Group Registration Fee (upto 5)',
+    'label' => 'Group Registration Fee (for 5 member) ',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1892,8 +1892,8 @@ function event_backend_field_default_field_instances() {
   t('Event Type');
   t('Flashback');
   t('Force Registration Open');
-  t('Group Registration Fee (upto 10)');
-  t('Group Registration Fee (upto 5)');
+  t('Group Registration Fee (for 5 member) ');
+  t('Group Registration Fee (upto 10 member)');
   t('Home');
   t('Individual Registration Fee');
   t('Kicker Text');
