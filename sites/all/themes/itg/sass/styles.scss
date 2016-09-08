@@ -3146,7 +3146,7 @@ footer{
         .programe-list{
             list-style: none;
             overflow: hidden;
-            margin-bottom:60px;
+            margin-bottom:50px;
             > .tile-wrapper{
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -3194,7 +3194,7 @@ footer{
             .more{
               text-align: right;
               position: relative;
-              margin: 0px;
+              margin-bottom: 20px;
               &:after{
                 content: '';
                 position: absolute;
@@ -3691,3 +3691,51 @@ footer{
     }
 }
 /*End start magazins*/
+/*CSS Start RHS add block*/
+#block-itg-ads-ad-right-sidebar-1{
+    display: inline-block;
+    padding: 30px 34px 0;
+}
+/*CSS End RHS add block*/
+/*CSS Start So sorry page*/
+#block-itg-layout-manager-header-sosorry-block{
+    .sosory-header{
+        @include clearfix;
+        background: #db1314;
+        padding: 15px 0; 
+        @include text-align(center);
+        .sosorryitg{
+            padding: 40px 30px 0 0;
+        }
+        .soindiatoday{
+            float: right;
+            padding-top: 20px;
+        }
+    }
+    .sosory-footer{
+        background: #000;
+        padding: 12px 0;    
+        color:#eff94e;
+        text-align: center;
+        font-size: 12px;
+        font-family:$itg-roboto;
+        ul{
+            @extend .list-none;
+            li{
+                @include display-inline;
+                padding:0 20px;
+                i{
+                    font-size: 30px;
+                    vertical-align: middle;
+                    padding-right: 10px;
+                }
+                &:nth-child(2){
+                    border-left: 1px solid #eff94e;
+                    border-right: 1px solid #eff94e;
+                }
+            }
+        }
+    }
+    
+}
+/*CSS End So sorry page*/
