@@ -16,8 +16,8 @@ if (itg_videogallery_get_categoryparent($_GET['category']) == FALSE && isset($_G
 }
 elseif (itg_videogallery_get_categoryparent($_GET['category']) == TRUE && empty($_GET['sid'])) {
   $term_load = taxonomy_term_load($_GET['category']);
-  print '<h3>Other Episodes From ' . $term_load->name . '</h3>';
+  print '<h3><span>Other Episodes From ' . $term_load->name . '</span></h3>';
 }if (empty($_GET['category'])) {
-  print '<h3>Other Video Galleries</h3>';
+  print '<h3><span>Other Video Galleries</span></h3>';
 }
 ?>

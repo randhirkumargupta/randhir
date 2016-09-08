@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h2>These First-Ever Same-Sex City Hall Weddings Will <?php print $row['title']; ?></h2>    
+        <h2><?php print $row['title']; ?></h2>    
         <div class="social-icon desktop-hide">
             <ul>
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>

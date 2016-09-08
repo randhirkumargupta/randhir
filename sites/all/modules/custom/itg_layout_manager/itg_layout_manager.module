@@ -128,6 +128,11 @@ function itg_layout_manager_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['header_sosorry_block'] = array(
+    'info' => t('So sorry Header Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -235,6 +240,10 @@ function itg_layout_manager_block_view($delta = '') {
       $block['content'] = theme('header_snap_post_block', array('data' => $data));
       break;
     
+    case 'header_sosorry_block':      
+      $block['content'] = theme('header_so_sorry_block', array('data' => $data));
+      break;
+    
   }
   
   return $block;
@@ -299,6 +308,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
     'header_snap_post_block' => array(
       'variable' => array('data' => NULL),
       'template' => 'itg-header-snap-post',
+      'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+    ),
+    'header_so_sorry_block' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'itg-header-sosorry',
       'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
     ),
   );
