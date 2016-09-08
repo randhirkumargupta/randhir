@@ -1057,6 +1057,48 @@ function astro_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-astro-field_primary_category_html_text'.
+  $field_instances['node-astro-field_primary_category_html_text'] = array(
+    'bundle' => 'astro',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html_text',
+    'label' => 'Primary category textarea',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 21,
+    ),
+  );
+
   // Exported field_instance: 'node-astro-field_story_category'.
   $field_instances['node-astro-field_story_category'] = array(
     'bundle' => 'astro',
@@ -1285,6 +1327,7 @@ function astro_feature_field_default_field_instances() {
   t('Panchaang-Calendar');
   t('Please select zodiac sign name.');
   t('Primary category html');
+  t('Primary category textarea');
   t('Select Frequency');
   t('Select Number');
   t('Select Program');
