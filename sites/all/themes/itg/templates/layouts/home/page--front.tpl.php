@@ -696,6 +696,13 @@ if ($theme != 'itgadmin') {
     </div>
 <?php } ?>
   <!--End of Common section-->
+  
+  <!--Load More Loader-->
+  <div class="load-more">
+    <img src="<?php echo base_path() ?>sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
+  </div>
+  <!--End of Loader-->
+  
   <?php //print render($page['content']); ?>
   <!--Start third party widgets -->
   <div>
@@ -711,6 +718,7 @@ if ($theme != 'itgadmin') {
   </div>
     
   <!--End third party widgets -->
+ 
   
 </div>
 <!--------------------------------Code for Front tpl---------------------------------------->
