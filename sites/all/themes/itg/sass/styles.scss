@@ -2925,6 +2925,7 @@ footer{
   #block-itg-videogallery-videogallery-menu-video-block{
       padding-top: 0;
       margin-top: 0;
+      @include sidebar-heading;
   }
 .view-video-list-of-category, .view-video-landing-header{    
     .views-exposed-form{
@@ -3526,7 +3527,7 @@ footer{
                     display: block;
                     font-family: $itg-roboto;
                     color:#808080;
-                    &.active, &:hover{
+                    &.active, &:hover, &.menu_active{
                         color:#000;
                         background: #eaeaea;
                     }
