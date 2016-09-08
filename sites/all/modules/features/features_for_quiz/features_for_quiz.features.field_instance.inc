@@ -641,7 +641,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -684,7 +684,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -770,7 +770,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -813,7 +813,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -852,7 +852,52 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_story_reporter'.
+  $field_instances['node-quiz-field_story_reporter'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_reporter',
+    'label' => 'Byline',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 3,
     ),
   );
 
@@ -1058,6 +1103,7 @@ function features_for_quiz_field_default_field_instances() {
   t('Answer Details');
   t('Answer Options');
   t('Answer Type');
+  t('Byline');
   t('Correct Answer');
   t('If user selects, normal; first added questions will appear on top for front end user. And if user selects ‘Random’ quiz questions will appear on random basis.');
   t('Immediate Result');

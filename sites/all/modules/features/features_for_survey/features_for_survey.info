@@ -3,6 +3,7 @@ description = Contains functionality of survey
 core = 7.x
 package = Features
 version = 7.x-1.2
+dependencies[] = entityreference
 dependencies[] = feature_category_management
 dependencies[] = features_for_story
 dependencies[] = features_supplement_magazine

@@ -278,6 +278,13 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Publish */
+  $handler->display->display_options['fields']['field_supp_publish']['id'] = 'field_supp_publish';
+  $handler->display->display_options['fields']['field_supp_publish']['table'] = 'field_data_field_supp_publish';
+  $handler->display->display_options['fields']['field_supp_publish']['field'] = 'field_supp_publish';
+  $handler->display->display_options['fields']['field_supp_publish']['label'] = 'Published';
+  $handler->display->display_options['fields']['field_supp_publish']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_supp_publish']['delta_offset'] = '0';
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
