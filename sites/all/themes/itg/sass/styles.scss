@@ -3146,6 +3146,7 @@ footer{
         .programe-list{
             list-style: none;
             overflow: hidden;
+            margin-bottom:60px;
             > .tile-wrapper{
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -3193,7 +3194,7 @@ footer{
             .more{
               text-align: right;
               position: relative;
-              margin: 30px 0 50px;
+              margin: 0px;
               &:after{
                 content: '';
                 position: absolute;
