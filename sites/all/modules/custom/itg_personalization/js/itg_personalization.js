@@ -6,10 +6,10 @@ jQuery(document).ready(function () {
     // Hide my content listing 
     var ctype = jQuery("select[name='field_ugc_ctype[und]']").find('option:selected').val();
     if (ctype == '_none') {
-        jQuery('#block-views-7a788d5fc14ed02cf09fe6aa1d609c28').show();
+        jQuery('#block-views-c3b0c328c45542af0b403435a6097179').show();
         jQuery('.form-field-name-field-user-message').hide();
     } else {
-        jQuery('#block-views-7a788d5fc14ed02cf09fe6aa1d609c28').hide();
+        jQuery('#block-views-c3b0c328c45542af0b403435a6097179').hide();
     }
     if (ctype == 'blog') {
         jQuery('.form-field-name-field-user-message').show();
@@ -18,9 +18,9 @@ jQuery(document).ready(function () {
         var ctype = jQuery(this).find('option:selected').val();
         // Show hide content listing block.
         if (ctype == '_none') {
-            jQuery('#block-views-7a788d5fc14ed02cf09fe6aa1d609c28').show();
+            jQuery('#block-views-c3b0c328c45542af0b403435a6097179').show();
         } else {
-            jQuery('#block-views-7a788d5fc14ed02cf09fe6aa1d609c28').hide();
+            jQuery('#block-views-c3b0c328c45542af0b403435a6097179').hide();
         }        
         
         switch (ctype) {
