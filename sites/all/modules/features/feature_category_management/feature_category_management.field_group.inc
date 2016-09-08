@@ -62,6 +62,8 @@ function feature_category_management_field_group_info() {
     'weight' => '3',
     'children' => array(
       0 => 'field_cm_select_type',
+      1 => 'field_cm_select_template',
+      2 => 'field_cm_select_template_type',
     ),
     'format_type' => 'div',
     'format_settings' => array(
