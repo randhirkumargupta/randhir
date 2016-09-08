@@ -353,8 +353,8 @@ function itg_survey_survey_form() {
 
 /**
  * Validate function of survey form
- * @param Array $form
- * @param Array $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function itg_survey_survey_form_validate($form, &$form_state) {
 
@@ -362,7 +362,8 @@ function itg_survey_survey_form_validate($form, &$form_state) {
 
   if (isset($_COOKIE[$cookie_name])) {
     form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));
-  } else {
+  } 
+  else {
 
     $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
     $num = $btn_num_arr[1];
@@ -375,115 +376,66 @@ function itg_survey_survey_form_validate($form, &$form_state) {
     $question_format = $form_detail['question_format'];
 
     if ($question_format == 'All questions at a time') {
+      $loop_start_num = 0;
+      $loop_end_num = $question_total - 1;
+    } 
+    else {
+      $loop_start_num = $num;
+      $loop_end_num = $num;
+    }
 
-      for ($ques_num = 0; $ques_num < $question_total; $ques_num++) {
-
-        // Checkbox validation
-        if ($form_detail['question_type' . $ques_num] === 'checkboxes') {
-          if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-            foreach ($form_detail['answer_option' . $num] as $key => $value) {
-              if ($value !== 0) {
-                $ans_flag = TRUE;
-              }
-            }
-            if (!$ans_flag) {
-              form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
-            }
-          }
-        }
-
-        // Radio Button validation
-        if ($form_detail['question_type' . $ques_num] === 'radios') {
-          if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-            if (empty($form_detail['answer_option' . $ques_num])) {
-              form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
-            }
-          }
-        }
-
-        // Rating validation
-        if ($form_detail['question_type' . $ques_num] === 'rating') {
-          if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-            for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
-              for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
-                if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] !== 0) {
-                  $rating_ans_flag = TRUE;
-                }
-              }
-            }
-            if (!$rating_ans_flag) {
-              form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
-            }
-          }
-        }
-
-        // Textfield validation
-        if ($form_detail['question_type' . $ques_num] === 'textfield') {
-          if ($form_detail['question_skip' . $ques_num] !== 'yes') {
-            $txt_ans_flag = FALSE;
-            for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
-              if ($form_detail['answer_option' . $ques_num . '_' . $text_field] !== '') {
-                $txt_ans_flag = TRUE;
-              }
-            }
-            if (!$txt_ans_flag) {
-              form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
-            }
-          }
-        }
-      }
-    } else {
+    for ($ques_num = $loop_start_num; $ques_num <= $loop_end_num; $ques_num++) {
 
       // Checkbox validation
-      if ($form_detail['question_type' . $num] === 'checkboxes') {
-        if ($form_detail['question_skip' . $num] !== 'yes') {
+      if ($form_detail['question_type' . $ques_num] === 'checkboxes') {
+        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
           foreach ($form_detail['answer_option' . $num] as $key => $value) {
             if ($value !== 0) {
               $ans_flag = TRUE;
             }
           }
           if (!$ans_flag) {
-            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '" is required. Please select any answer option to proceed.'));
+            form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
           }
         }
       }
 
       // Radio Button validation
-      if ($form_detail['question_type' . $num] === 'radios') {
-        if ($form_detail['question_skip' . $num] !== 'yes') {
-          if (empty($form_detail['answer_option' . $num])) {
-            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please select any answer option to proceed.'));
+      if ($form_detail['question_type' . $ques_num] === 'radios') {
+        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
+          if (empty($form_detail['answer_option' . $ques_num])) {
+            form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
           }
         }
       }
 
       // Rating validation
-      if ($form_detail['question_type' . $num] === 'rating') {
-        if ($form_detail['question_skip' . $num] !== 'yes') {
+      if ($form_detail['question_type' . $ques_num] === 'rating') {
+        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
           for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
             for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
-              if ($form_detail['answer_option' . $num . '_' . $rating_field][$rating_field_val] !== 0) {
+              if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] !== 0) {
                 $rating_ans_flag = TRUE;
               }
             }
           }
           if (!$rating_ans_flag) {
-            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please provide your answer to proceed.'));
+            form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
           }
         }
       }
 
       // Textfield validation
-      if ($form_detail['question_type' . $num] === 'textfield') {
-        if ($form_detail['question_skip' . $num] !== 'yes') {
+      if ($form_detail['question_type' . $ques_num] === 'textfield') {
+        if ($form_detail['question_skip' . $ques_num] !== 'yes') {
           $txt_ans_flag = FALSE;
           for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
-            if ($form_detail['answer_option' . $num . '_' . $text_field] !== '') {
+            if ($form_detail['answer_option' . $ques_num . '_' . $text_field] !== '') {
               $txt_ans_flag = TRUE;
             }
           }
           if (!$txt_ans_flag) {
-            form_set_error('answer_option' . $num, t('Question "' . $form_detail['question' . $num] . '?" is required. Please provide your answer to proceed.'));
+            form_set_error('answer_option' . $ques_num, t('Question "' . $form_detail['question' . $ques_num] . '" is required.'));
           }
         }
       }
@@ -777,4 +729,3 @@ function survey_form_ajax_handler(&$form, &$form_state){
 }
 
 ?>
-
