@@ -316,7 +316,19 @@ jQuery(document).ready(function () {
             window.location.href = urldata;
         }
 
-    })
+    });
+    
+    jQuery(window).scroll(function () {
+      var winH = jQuery(window).height() + jQuery('#footer').outerHeight(true) + 40;
+      var docH = jQuery(document).height();
+      var targetH = docH - winH;
+      var scrollH = jQuery(window).scrollTop();
+      console.log(scrollH + "==" + targetH);
+      if(scrollH == targetH) {
+           jQuery('.load-more').show();
+      }
+    });
+    
   });
 
 jQuery(window).load(function () {
