@@ -1,3 +1,4 @@
+<span class="calendar-title">calendar</span>
 <?php
 
 /**
@@ -17,4 +18,17 @@ foreach ($data as $year) {
   $count++;
 }
 ?>
-<?php print '<ul>' . $output . '</ul>'; ?>
+<?php print '<ul class="calanderslide">' . $output . '</ul>'; ?>
+
+<script>
+    jQuery(document).ready(function(){    
+        jQuery('.calanderslide').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: false,  
+            prevArrow:'<button class="slick-prev"><i class="fa fa-chevron-right"></i></button>',
+            nextArrow:'<button class="slick-next"><i class="fa fa-chevron-left"></i></button>'
+        });    
+    });
+</script>

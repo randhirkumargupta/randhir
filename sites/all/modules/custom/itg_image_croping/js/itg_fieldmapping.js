@@ -259,6 +259,10 @@ var mTimer=null;
                         var imagetitle = jQuery('#imgtag img').attr('src');
                         var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
                     }
+ 
+                    image_title=image_title.replace(/%20/g, " ");
+                    image_alttext=image_alttext.replace(/%20/g, " ");
+
                     setTimeout(function() {
                         parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
                         parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
