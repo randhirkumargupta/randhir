@@ -883,7 +883,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 #content #block-formblock-ugc .node-ugc-form .form-type-textarea label {
   width: 150px;
-  height: 125px;
+  height: 570px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
   background-color: #fbfbfb;
