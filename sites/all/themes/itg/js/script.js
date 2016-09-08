@@ -18,6 +18,12 @@ Drupal.behaviors.my_custom_behavior = {
   attach: function(context, settings) {
 
     // Place your code here.
+    // Make unflag link unclickable
+    if ($('a').hasClass('unflag-action')) {
+        $('.page-node .unflag-action').attr('title', '');
+        $('.page-node .unflag-action').css('pointer-events', 'none');
+    }
+    
     $('input.rating').hover(function(){
     $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
     $(this).parent().nextAll().removeClass('rating-hover');
