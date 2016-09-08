@@ -785,7 +785,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   }
 }
 #content{ 
-  #block-itg-personalization-user-my-content{
+  #block-formblock-ugc{
     margin: 0 auto;
     max-width: 720px;
     text-align: left;
@@ -843,7 +843,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         border-radius: 5px;
         label{
           width: 150px;
-          height: 125px;
+          height: 570px;
           padding: 0 20px;
           font: 300 14px/36px Roboto;
           background-color: #fbfbfb;
@@ -866,7 +866,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           padding: 10px;
         }
       }
-      .form-field-type-image, .form-field-type-file{
+      .form-field-type-image, .field-type-image, .form-field-type-file{
         .form-type-managed-file{
           display: inline-block;
           vertical-align: top;
@@ -960,6 +960,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           vertical-align: top;
           color: #fff;
         }
+      }
+    }
+    [id*="field-ugc-personalization-photo-add-more-wrapper"]{
+      > .form-item{
+        margin-left: 0;
+        margin-right: 0;
       }
     }
   }

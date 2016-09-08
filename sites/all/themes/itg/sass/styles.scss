@@ -215,7 +215,7 @@ header{
     }
     .header-ads{
         text-align: center; 
-        row{
+        .row{
             margin: 0 auto;
             @include display-inline;
         }
@@ -3601,6 +3601,9 @@ footer{
     background: #f6f5f5;
     border: 1px solid $border-color;
     padding-bottom: 10px;
+    a:hover{
+        color:#193984;
+    }
     .magazin-top{
         @include clearfix;
         margin-bottom:20px;
@@ -3742,7 +3745,15 @@ footer{
                 }
             }
         }
-    }
-    
+    }    
 }
+/*.class{
+    h3{
+        @include font(26px,null,300);
+        color:#db1314;        
+        span{
+            font-weight: 700;
+        }
+    }
+}*/
 /*CSS End So sorry page*/
