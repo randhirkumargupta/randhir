@@ -1139,3 +1139,166 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     display: block;
   }
 }
+/* End of Load More CSS */
+
+/* CSS For Survey */
+@mixin story-profile-pic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #e4e4e4;
+}
+.survey-form-main-container{
+  h1{
+    @include font(24px,30px,700);       
+  }
+  .survey-description{
+    color:#bebebe;
+    margin-top: 10px;
+  }
+  .byline{            
+    color: #989898;
+    padding: 10px 0;
+    margin: 20px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    @include itg-font($itg-roboto);
+    @include font(12px);
+    @include clearfix;
+    a{
+      color: #989898;
+    }
+    .profile-pic, .profile-detail{
+      @include float(left);
+    } 
+    .profile-pic{
+      img{
+        @include story-profile-pic;    
+      }                
+    }
+    .profile-detail {
+      width: 74%;    
+      margin: 0 0 0 10px;
+      ul {
+        list-style: none;
+        margin-top: 5px;
+        @include font(12px,12px);
+        @include clearfix;
+        li{  
+          @include float(left);
+          padding: 0 5px;
+          span.share-count{
+            display: block;
+            @include font(44px,44px,500);
+            color:#bebebe;
+          } 
+          &:last-child{
+            border:none;                            
+          }
+          &.twitter{
+            color: #0783ec;
+            margin-top: 0px;
+          }
+          &.title{
+            color: #6b6b6b;
+            @include font(12px,20px,$itg-font-bold);
+          }
+          &.mailto{
+            text-transform: uppercase;
+          }                                               
+        }
+      }
+      ul.date-update{                    
+        li{
+          margin-bottom: 7px;
+        }   
+      }
+      ul.social-links{
+        @include clearfix;
+        margin-top:0;
+        li{
+          @include float(left);
+          width: 50%;                        
+          i{
+            font-size: 16px;
+            color: #c0c0c0;
+          }
+          span{
+            display: block;
+            margin-top: 5px;
+          }
+          &:nth-child(odd){
+            border-right: 1px solid $border-color;
+          }
+          &:last-child{
+            @include calculate-width(1);
+            border-right: none;
+            i{
+              vertical-align: middle;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.question-container{
+  font-family: Roboto;
+  .question-heading{
+    font-size: 18px;
+    color: #666;
+    font-weight: 500;
+  }
+  .question-number{
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px 10px;
+    color: #fff;
+    background-color: #989898;
+    font: 500 14px/18px Roboto;
+  }
+  .answer-container{
+    padding-left: 10px;
+    position: relative;
+    .survey-media{
+      position: absolute;
+      bottom: 0;
+      width: 140px;
+      right: 0;
+    }
+    > .form-item .form-item{
+      margin: 0 0 20px;
+      &.form-type-radio .form-radio {
+        margin: 3px 5px 0 0;
+      }
+    }
+  }
+}
+.survey-form-wrapper-all{
+  .question-container{display: block;}
+}
+[id*="itg-survey-survey-form"]{
+  .form-submit{
+    min-width: 100px;
+    padding: 5px 10px;
+    height: 36px;
+    border: none;
+    border-radius: 1px;
+    box-shadow: 0 1px 3px 0 #666;
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#4fb5ff, #0986e0); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#4fb5ff, #0986e0); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#4fb5ff, #0986e0); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#4fb5ff, #0986e0); /* Standard syntax */
+    font-size: 16px;
+    font-family: Roboto;
+    color: #fff;
+    font-weight: 300;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  .success-message, .messages--status{
+    font-size: 18px;
+  }
+}
