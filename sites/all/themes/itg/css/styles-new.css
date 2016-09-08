@@ -1192,3 +1192,15 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 
 /* End of Error Pages CSS */
+/* Load more CSS */
+.load-more {
+  display: none;
+  padding: 20px;
+  text-align: center;
+}
+.load-more img {
+  max-width: 40px;
+}
+.load-more.active {
+  display: block;
+}
