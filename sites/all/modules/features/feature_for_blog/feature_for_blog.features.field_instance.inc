@@ -178,6 +178,47 @@ function feature_for_blog_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-blog-field_primary_category_html_text'.
+  $field_instances['node-blog-field_primary_category_html_text'] = array(
+    'bundle' => 'blog',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html_text',
+    'label' => 'Primary category textarea',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 15,
+    ),
+  );
+
   // Exported field_instance: 'node-blog-field_story_archive'.
   $field_instances['node-blog-field_story_archive'] = array(
     'bundle' => 'blog',
@@ -383,6 +424,7 @@ function feature_for_blog_field_default_field_instances() {
   t('Node Identity');
   t('Please enter Short description.');
   t('Please enter bloggers name (e.g. Ankush, Sumit etc.)');
+  t('Primary category textarea');
   t('Related Content');
   t('Section');
   t('Short description');
