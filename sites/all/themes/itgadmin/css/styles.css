@@ -6771,6 +6771,28 @@ div.node #comments h2 {
   margin-right: 5px;
 }
 
+.survey-form-main-container .byline .social-info {
+  float: right;
+  width: 200px;
+}
+
+.survey-form-main-container .byline .social-info span {
+  float: left;
+  width: 25%;
+  padding: 5px;
+  text-align: center;
+}
+
+.survey-form-main-container .byline .social-info span .fa {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.survey-form-main-container .byline .social-info span dfn {
+  font: normal 400 12px/18px Roboto;
+  display: block;
+}
+
 .question-container {
   font-family: Roboto;
 }

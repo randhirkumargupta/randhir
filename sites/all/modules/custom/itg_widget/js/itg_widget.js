@@ -183,7 +183,16 @@ Drupal.behaviors.itg_widgets = {
         //jQuery(".widgets-view .view-link").css("text-transform","capitalize");
 
         jQuery(".view-section-wise-content-ordering-list span.move-link").on('click', function() {
-            if (confirm("Are you sure you want to move this content ?")) {
+            if (confirm("Are you sure you want to remove this content ?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+        
+          jQuery(".view-display-id-poll_widget_list span.move-link").on('click', function() {
+            if (confirm("Are you sure you want to remove this content ?")) {
                 return true;
             }
             else {

@@ -21,7 +21,10 @@
         <?php if ($current_issue[0] == $issue_attribute_date): ?>
           <div class="issue-subscribe-link"><?php print $row['nothing']; ?></div>
         <?php endif; ?>
-        <div class="next-issue-out"><span class="text">Next issue out on </span><span class="issue-next-date"><?php print itg_msi_next_week_issue(); ?></span></div>
+          <?php $future_isue = itg_msi_next_week_issue(); ?>
+          <?php if($future_isue): ?>
+        <div class="next-issue-out"><span class="text">Next issue out on </span><span class="issue-next-date"><?php print $future_isue; ?></span></div>
+        <?php endif; ?>
       </div>
     </div>
 
