@@ -6,6 +6,8 @@
  * A Views' field handler for editing a node title.
  *
  */
+module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
+
 class itg_personalization_field_handler_tid_edit extends views_handler_field {
 
   function construct() {
@@ -43,9 +45,11 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
     // Iterate over the result and add our replacement fields to the form.
     foreach ($this->view->result as $row_index => $row) {
       // Adding a slider field into form.      
+      $tid_weight = get_personalization_saved_value($row->tid);
+      $default_value = isset($tid_weight->weight) ? $tid_weight->weight : 50;
       $form[$this->options['id']][$row_index] = array(                
         '#type' => 'slider',
-        '#default_value' => 50,        
+        '#default_value' => $default_value,        
         '#slider_style' => 'blue',
         '#range' => 'min',
         '#min' => 0,
@@ -79,7 +83,7 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
   /**
    * Form submit method.
    */
-  function views_form_submit($form, &$form_state) {    
+  function views_form_submit($form, &$form_state) {
     // Determine which nodes we need to update.
     $updates = array();
     foreach ($this->view->result as $row_index => $row) {
@@ -87,6 +91,7 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
       if ($row->{$this->aliases['name']} != $value) {
         $updates[$row->{$this->aliases['tid']}] = $value;
       }
-    }    
+    }
+    save_itg_widget_personalization_data($updates);
   }
 }
