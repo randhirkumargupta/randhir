@@ -1183,7 +1183,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }                
     }
     .profile-detail {
-      width: 74%;    
+      width: 60%;    
       margin: 0 0 0 10px;
       ul {
         list-style: none;
@@ -1244,6 +1244,24 @@ $debug: "width:645px"; // TODO: move to _settings.scss
               margin-right: 5px;
             }
           }
+        }
+      }
+    }
+    .social-info{
+      float: right;
+      width: 200px;
+      span{
+        float: left;
+        width: 25%;
+        padding: 5px;
+        text-align: center;
+        .fa{
+          font-size: 18px;
+          line-height: 22px;
+        }
+        dfn{
+          font: normal 400 12px/18px Roboto;
+          display: block;
         }
       }
     }
