@@ -327,6 +327,7 @@ function itg_image_croping_crop_image() {
     if ($image_name == "") {
         $image_name = time();
     }
+    $image_name=$image_name.rand(111,999);
     $image_data_url = str_replace('data:image/png;base64,', '', $image_data_url);
 
     $imagedata = base64_decode($image_data_url);

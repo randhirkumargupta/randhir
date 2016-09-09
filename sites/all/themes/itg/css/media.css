@@ -29,6 +29,11 @@
 /*mixin for transition animation*/
 /*mixin for listing with image*/
 /*mixin for pager*/
+@media only screen and (max-width: 1200px) {
+  #block-views-photo-landing-slider-block {
+    width: 100%;
+  }
+}
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 768px) {
   h1 {
@@ -59,6 +64,10 @@
 
   .desktop-hide {
     display: none;
+  }
+
+  .list-none, .view-front-end-global-search .view-content .social-share ul {
+    list-style-type: none;
   }
 
   header {
@@ -353,8 +362,13 @@
   .story-section .story-left .byline .profile-pic, .story-section .story-left .byline .profile-detail {
     float: none;
   }
+  .story-section .story-left .byline .profile-pic img {
+    width: 60px;
+    height: 60px;
+  }
   .story-section .story-left .byline .profile-detail {
-    margin: 0;
+    width: auto;
+    margin: 0px 0 0 10px;
   }
   .story-section .story-left .byline .profile-detail ul li {
     float: none;
@@ -363,6 +377,12 @@
   }
   .story-section .story-left .byline .profile-detail ul li + li {
     border-left: none;
+  }
+  .story-section .story-left .byline .profile-detail ul li:last-child {
+    border-left: none;
+  }
+  .story-section .story-left .byline .profile-detail ul.date-update li {
+    margin-bottom: 0px;
   }
   .story-section .story-left .byline ul.social-links li {
     float: left;
@@ -391,6 +411,9 @@
   }
   .story-section .story-right {
     width: 79%;
+  }
+  .story-section .story-right .byline .profile-detail {
+    margin: 0px 0 0 10px;
   }
   .story-section .snap-post {
     padding: 20px 20px 20px 100px;
@@ -427,6 +450,17 @@
 
   .buzz-feedback .story-right {
     width: 100%;
+  }
+  .buzz-feedback .buzz-section h1 {
+    font-size: 34px;
+    font-size: 2.125rem;
+  }
+  .buzz-feedback .buzz-section h1 span {
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 34px;
   }
 
   /*End Story page css*/
@@ -484,6 +518,53 @@
   .view-front-end-global-search .view-content .search-detail p {
     display: block;
   }
+  .view-front-end-global-search .view-content .social-share {
+    margin-top: 0px;
+  }
+  .view-front-end-global-search .view-content .social-share ul li {
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 8px;
+  }
+  .view-front-end-global-search .view-content .social-share ul li a {
+    background: #000;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    display: block;
+    color: #fff;
+    text-align: center;
+    line-height: 23px;
+  }
+}
+@media only screen and (min-width: 768px) and (min-width: 768px) {
+  .view-front-end-global-search .view-content .social-share ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .view-front-end-global-search .view-content .social-share ul li a.share {
+    color: #d0d0d0;
+  }
+  .view-front-end-global-search .view-content .social-share ul li a.share, .view-front-end-global-search .view-content .social-share ul li a.google {
+    background: transparent;
+  }
+  .view-front-end-global-search .view-content .social-share ul li a.facebook {
+    background: #0b4887;
+  }
+  .view-front-end-global-search .view-content .social-share ul li a.twitter {
+    background: #05a3d2;
+  }
+  .view-front-end-global-search .view-content .social-share ul li a.google {
+    background: url(../images/google-icon.jpg) no-repeat center center;
+  }
+  .view-front-end-global-search .view-content .other-info {
+    padding-top: 0;
+    margin-top: 15px;
+    overflow: inherit;
+  }
   .view-front-end-global-search .attachment .search-menu {
     white-space: inherit;
     overflow-x: inherit;
@@ -519,6 +600,9 @@
   .view-widget-anchors-listing .anchor-listing .pic {
     width: 170px;
   }
+  .view-widget-anchors-listing .anchor-listing .detail {
+    overflow: hidden;
+  }
   .view-widget-anchors-listing .anchor-listing .detail h3 {
     margin-bottom: 10px;
     font-size: 24px;
@@ -527,14 +611,169 @@
 
   /*End anchors listing css*/
   /*CSS start sidebar */
+  section.sidebar {
+    border: 1px solid #ddd;
+  }
+
   .sidebars {
     margin-top: 0px;
   }
 
   /*CSS end sidebar */
+  .view-category-wise-content-list h1 {
+    font-size: 32px;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 46px;
+  }
+  .view-category-wise-content-list .catagory-listing .pic {
+    width: 170px;
+  }
+  .view-category-wise-content-list .catagory-listing .detail h3 {
+    font-size: 20px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 24px;
+  }
+  .view-category-wise-content-list .catagory-listing .detail p {
+    display: block;
+  }
+  .view-category-wise-content-list .item-list ul.pager {
+    margin: 10px 0;
+    list-style-type: none;
+    text-align: center;
+  }
+  .view-category-wise-content-list .item-list ul.pager li {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .view-category-wise-content-list .item-list ul.pager li.pager-current {
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    background-color: #337ab7;
+    color: #fff;
+    border-radius: 50%;
+    font-family: "Roboto", sans-serif;
+  }
+  .view-category-wise-content-list .item-list ul.pager li.pager-item a {
+    display: block;
+    height: 25px;
+    width: 25px;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 25px;
+    color: #323232;
+    font-family: "Roboto", sans-serif;
+  }
+  .view-category-wise-content-list .item-list ul.pager li.pager-item a:hover {
+    background-color: #337ab7;
+    color: #fff;
+    border-radius: 50%;
+  }
+  .view-category-wise-content-list .item-list ul.pager li.pager-next a, .view-category-wise-content-list .item-list ul.pager li.pager-last a, .view-category-wise-content-list .item-list ul.pager li.pager-first a, .view-category-wise-content-list .item-list ul.pager li.pager-previous a {
+    color: #323232;
+    line-height: 25px;
+  }
+  .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last {
+    display: none;
+  }
+
+  /*End category wise content list css*/
+  /*CSS Starts Photo landing page*/
+  .view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li {
+    padding: 15px;
+    width: 25%;
+  }
+  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-video-landing-header .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1) {
+    clear: none;
+  }
+  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-video-landing-header .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1) {
+    clear: left;
+  }
+
+  /*CSS End Photo landing page*/
+  /* start side bar common */
+  .sidebar-second .may-be-suggest-container h3, .sidebar-second .top-takes-video-container h3, .sidebar-second .watch-right-now-video h3 {
+    display: block;
+  }
+  .sidebar-second .may-be-suggest-container h3 span, .sidebar-second .top-takes-video-container h3 span, .sidebar-second .watch-right-now-video h3 span {
+    padding: 45px 20px 10px 30px;
+  }
+  .sidebar-second .may-be-suggest-container ul li, .sidebar-second .top-takes-video-container ul li, .sidebar-second .watch-right-now-video ul li {
+    padding: 10px 24px 10px 30px;
+  }
+
+  /* End side bar common */
+  /*CSS start program RHS*/
+  .program-rhs h3 span {
+    padding: 45px 20px 10px 30px;
+  }
+  .program-rhs ul {
+    padding: 10px 20px 0 30px;
+  }
+
+  /*End start program RHS*/
+  /*CSS Start Anchor listing detail page*/
+  #block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
+    float: left;
+    width: 50%;
+  }
+  #block-views-anchor-landing-page-block .anchor-right {
+    padding-left: 15px;
+    padding-top: 0px;
+  }
+
+  /*CSS End Anchor listing detail page*/
+  /*CSS Start Photo landing page*/
+  .region-top {
+    padding: 20px 0;
+    margin-top: -30px;
+  }
+
+  #block-views-photo-landing-slider-block h2 {
+    margin-bottom: 15px;
+  }
+  #block-views-photo-landing-slider-block .other-details-main {
+    height: 632px;
+    background: #111111;
+  }
+  #block-views-photo-landing-slider-block .other-details-main .counter {
+    padding: 15px 25px;
+  }
+  #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-next {
+    right: 25px;
+  }
+  #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-prev {
+    right: 87px;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul {
+    padding-left: 10px;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li a {
+    padding: 0 17px;
+    line-height: 55px;
+  }
+  #block-views-photo-landing-slider-block .slick-slider .slick-next, #block-views-photo-landing-slider-block .slick-slider .slick-prev {
+    width: 50px;
+    height: 100px;
+    margin-top: -50px;
+  }
+  #block-views-photo-landing-slider-block .slick-slider .slick-next:before, #block-views-photo-landing-slider-block .slick-slider .slick-prev:before {
+    top: 38px;
+    font-size: 30px;
+  }
+
+  /*CSS End Photo landing page*/
+  /*CSS Start magazine-calander RHS*/
+  #block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1 {
+    padding: 50px 30px 20px 30px;
+  }
+
+  /*CSS End magazine-calander RHS*/
 }
 /*End CSS Desktop version*/
-@media only screen and (min-width: 768px) and (max-width: 1199px) {
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
   #block-itg-layout-manager-header-block .top-nav .main-nav li a {
     padding: 0 15px;
     font-size: 20px;

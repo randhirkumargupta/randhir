@@ -245,7 +245,7 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
     unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
   
     $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
-    $form['path']['#prefix'] = '<h2 class="story-title">' . t('Meta Tags') . '</h2>';
+    $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
 
     drupal_add_js('jQuery(document).ready(function() {
              jQuery(".vertical-tabs-list").hide();

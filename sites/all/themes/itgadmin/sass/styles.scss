@@ -497,7 +497,7 @@ body.sidebar-second{
     top: 50px;
     left: 100%;
     width: 330px;
-    z-index: 9999;
+    z-index: 99999;
     transition: all 500ms ease 0s;
     &.active{
       transform: translateX(-330px);
@@ -1805,6 +1805,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       thead{
         padding-right: 20px;
         padding-top: 8px;
+        padding-left: 0;
         width: 220px;
         th{
           font-weight: 400;
@@ -1832,7 +1833,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     padding-left: 220px;
   }
   .form-field-name-field-common-related-content{
-    .form-type-textfield .form-text{max-width: 840px;}
+    .form-type-textfield .form-text{max-width: 840px !important;}
   }
 }
 .form-field-name-field-astro-date-range{
@@ -1941,7 +1942,10 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-syndication-ftp-details-values"], 
 [id*="field-email-address-values"], 
 [id*="field-mega-review-review-values"],
-[id*="field-story-highlights-values"]{
+[id*="field-story-highlights-values"], 
+[id*="field-story-template-quotes-values"], 
+[id*="field-story-template-factoids-values"], 
+[id*="field-story-template-guru-values"]{
   @extend .itg-add-another-item;
 }
 [id*="field-erf-registration-fee-values"], 
@@ -2208,7 +2212,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     @extend .full;
     > td{
       @extend .fleft;
-      min-width: 620px;
+      width: 100%;
       margin-bottom: 20px;
     }
   } 
@@ -2217,13 +2221,6 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     @extend .choose-audio-video-file;
     .ajax-progress-throbber{
       @extend .hide;
-    }
-  }
-  .field-name-field-quiz-answer-image{
-    .form-managed-file{
-      .form-submit[value="Remove"]{
-        left: 532px;
-      }
     }
   }
 }
@@ -4096,6 +4093,8 @@ div.node{
       padding: 6px 30px;
       position: absolute;
       width: 144px;
+      top: 0;
+      left: 0;
       img{
         bottom: 0;
         left: 0;
@@ -4127,7 +4126,6 @@ div.node{
     label{
       @extend .hide;
       &+.form-textarea-wrapper{
-        padding-left: 150px;
         &:after{
           content: '';
           @extend .dib;
@@ -4728,6 +4726,10 @@ div.node{
     @extend .fleft;
     line-height: 32px;
     margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 810px;
   }
   .block-itg-story-list{
     margin: 10px 0 0;
@@ -5814,6 +5816,7 @@ div.node{
 .page-node-add-podcast, 
 .page-node-add-recipe, 
 .node-type-print-team-integration,
+[id*="field-service-content-values"],
 .page-node-add-poll{
     .form-type-managed-file{
       .image-widget-data{
@@ -6554,4 +6557,94 @@ div.node{
 }
 #edit-metatags-und-basic{
   border: none;
+}
+[id*="field-story-template-quotes-values"], 
+[id*="field-story-template-factoids-values"],
+[id*="field-story-template-guru-values"]{
+  tbody tr{
+    td{
+      border: none;
+      padding-bottom: 10px;
+      .form-type-textfield{
+        float: left;
+      }
+      > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+        margin: 1px 0 0 10px;
+      }
+    }
+  }
+  &+.description{
+    display: none !important;
+  }
+}
+[id*="vas-service-content-node-form"]{
+  div.vertical-tabs{
+    display: none;
+  }
+}
+.page-node-delete{
+  .confirmation{
+    margin-top: 20px;
+  }
+  .action-with-title #page-title{
+    float: none;
+  }
+}
+.page-error{
+  .page-error-pic{
+    text-align: center;
+    p{
+      font: 16px/18px 'Roboto Slab';
+    }
+  }
+  .go-back {
+    color: #000;
+    padding-top: 30px;
+    font: 19px/28px 'Roboto Slab';
+    a{
+      color: #1a3c8d;
+    }
+  }
+  .error-or{
+    display: block;
+    text-indent: 100px;
+    color: #6c6c6c;
+    font: 19px/28px 'Roboto Slab';
+    padding: 20px 0;
+  }
+  h3{
+    background-color: #1a3c8d;
+    color: #fff;
+    display: inline-block;
+    font: 500 18px/28px Roboto;
+    padding: 0 5px;
+    text-transform: uppercase;
+    vertical-align: top;
+    margin-bottom: 10px;
+  }
+  .latest-headlines-list{
+    list-style: none;
+    max-width: 430px;
+    li{
+      font-size: 14px;
+      padding-left: 10px;
+      position: relative;
+      .red{
+        color: #d12019;
+      }
+      &:before{
+        background-color: #d12019;
+        border-radius: 50%;
+        content: "";
+        height: 6px;
+        left: 0;
+        position: absolute;
+        top: 6px;
+        width: 6px;
+      }
+      &+li{
+        margin-top: 20px;
+      }
+    }
+  }
 }

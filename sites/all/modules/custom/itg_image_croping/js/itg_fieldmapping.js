@@ -60,6 +60,16 @@ var mTimer=null;
 
  }, 200);
     });
+//  cancel image
+    jQuery('.cancel-image').click(function() {
+        if (jQuery('.div-upload-img').hasClass('active'))
+        {
+            jQuery('#file-preview').hide();
+        } else {
+            jQuery('#file-preview').hide();
+            jQuery('#search-preview').show();
+        }
+    })
 
     // Save button click - save tags
     jQuery('#file-preview').on('click', '#btnsavetagedit', function() {
@@ -249,6 +259,10 @@ var mTimer=null;
                         var imagetitle = jQuery('#imgtag img').attr('src');
                         var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
                     }
+ 
+                    image_title=image_title.replace(/%20/g, " ");
+                    image_alttext=image_alttext.replace(/%20/g, " ");
+
                     setTimeout(function() {
                         parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
                         parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);

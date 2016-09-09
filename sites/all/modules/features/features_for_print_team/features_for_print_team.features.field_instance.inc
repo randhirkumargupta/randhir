@@ -208,8 +208,8 @@ function features_for_print_team_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-print_team_integration-field_primary_category_html'.
-  $field_instances['node-print_team_integration-field_primary_category_html'] = array(
+  // 'node-print_team_integration-field_primary_category_html_text'.
+  $field_instances['node-print_team_integration-field_primary_category_html_text'] = array(
     'bundle' => 'print_team_integration',
     'default_value' => NULL,
     'deleted' => 0,
@@ -230,8 +230,8 @@ function features_for_print_team_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html',
-    'label' => 'Primary category html',
+    'field_name' => 'field_primary_category_html_text',
+    'label' => 'Primary category textarea',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -242,9 +242,9 @@ function features_for_print_team_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 23,
     ),
   );
@@ -739,7 +739,7 @@ function features_for_print_team_field_default_field_instances() {
   t('Magazine Kicker');
   t('Mark as Complete');
   t('Please mark as complete, if item has been sold out.');
-  t('Primary category html');
+  t('Primary category textarea');
   t('Rating');
   t('Select Section');
   t('Timeline');

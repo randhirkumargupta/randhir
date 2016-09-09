@@ -128,6 +128,11 @@ function itg_layout_manager_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['header_sosorry_block'] = array(
+    'info' => t('So sorry Header Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -141,7 +146,14 @@ function itg_layout_manager_block_view($delta = '') {
   
   switch ($delta) {
     case 'header_block':
-       
+      
+      // Code for adds
+        drupal_add_js('http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap', array('scope' => 'header'));
+        drupal_add_js('http://static.chartbeat.com/js/chartbeat_mab.js', array('scope' => 'header'));
+        drupal_add_js('http://xp1.zedo.com/client/xp1/fmos.js', array('scope' => 'header'));
+        drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads_header_script.js', array('scope' => 'header'));
+      // end
+      
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
       
@@ -228,6 +240,10 @@ function itg_layout_manager_block_view($delta = '') {
       $block['content'] = theme('header_snap_post_block', array('data' => $data));
       break;
     
+    case 'header_sosorry_block':      
+      $block['content'] = theme('header_so_sorry_block', array('data' => $data));
+      break;
+    
   }
   
   return $block;
@@ -292,6 +308,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
     'header_snap_post_block' => array(
       'variable' => array('data' => NULL),
       'template' => 'itg-header-snap-post',
+      'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+    ),
+    'header_so_sorry_block' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'itg-header-sosorry',
       'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
     ),
   );

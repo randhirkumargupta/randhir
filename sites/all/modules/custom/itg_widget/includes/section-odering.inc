@@ -4,7 +4,7 @@
  * @file
  *      Section and top stories widegt ordering and reordering
  */
-
+module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 /**
  * function to get data of nodes in sequence which is saved in draggableviews_structure table
  * @param array $info
@@ -23,7 +23,7 @@ function itg_widget_top_stories_ordering_data($info) {
       $result = draggable_views_nodes_for_widgets($view_name, $page, $today, 0, TOP_STORIES_LIMIT);
       if (empty($result)) {
         $nodequeue_name = isset($info['nodequeue']) ? $info['nodequeue'] : "";
-        $result = itg_widget_nodes_from_nodequeue($nodequeue_name);
+        $result = itg_widget_nodes_from_nodequeue($nodequeue_name , FALSE , TOP_STORIES_MIN_RANGE , TOP_STORIES_LIMIT);
       }
       $entity_data = array();
       foreach ($result as $entity_data_node) {
