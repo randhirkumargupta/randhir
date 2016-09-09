@@ -37,6 +37,25 @@ else {
         <li>New Delhi</li>
       </ul>
     </div>
+    <div class="social-info">
+      <span>
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+        <dfn>1522</dfn>
+      </span>
+      <span>
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+        <dfn>1522</dfn>
+      </span>
+      <span>
+        <i class="fa fa-google-plus" aria-hidden="true"></i>
+        <dfn>1522</dfn>
+      </span>
+      <span>
+        <i class="fa fa-comment" aria-hidden="true"></i>
+        <dfn>1522</dfn>
+      </span>
+      
+    </div>
   </div>
   
   <!-- Render survey form -->
