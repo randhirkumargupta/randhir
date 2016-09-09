@@ -181,7 +181,7 @@ function itg_survey_survey_form() {
           
           $txt_num++;
         }
-        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
+//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } elseif ($answer_type == 'rating') { // Answer option for rating
         $rating_num = 0;
@@ -200,14 +200,14 @@ function itg_survey_survey_form() {
           
           $rating_num++;
         }
-        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
+//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } else {  //Answer option for radios and checkboxes
         $form['answer_option' . $num] = array(
             '#title' => t(''),
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
-            '#suffix' => '</div>',
+//            '#suffix' => '</div>',
         );
       }
       
@@ -215,7 +215,7 @@ function itg_survey_survey_form() {
         if ($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif') {
           $form['media' . $num] = array(
               '#type' => 'markup',
-              '#prefix' => '<div>',
+              '#prefix' => '<div class="survey-media">',
               '#markup' => '<img src="' . $media_path . '" height="100" width="130"/>',
               '#suffix' => '</div>',
           );
@@ -223,7 +223,7 @@ function itg_survey_survey_form() {
         else {
           $form['media' . $num] = array(
               '#type' => 'markup',
-              '#prefix' => '<div>',
+              '#prefix' => '<div class="survey-media">',
               '#markup' => '<video width="140" height="145" controls="controls">
                 <source src="' . $media . '" type="video/mp4"> 
                  <object> 
@@ -234,7 +234,7 @@ function itg_survey_survey_form() {
           );
         }
       }
-      
+      $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       // Render multiple submit buttons, if questions are displaying one-by-one
       if ($survey_question_format == 'One question at a time') {
         $form['survey_submit_' . $num] = array(
@@ -359,7 +359,8 @@ function itg_survey_survey_form() {
  * @param array $form_state
  */
 function itg_survey_survey_form_validate($form, &$form_state) {
-
+  
+  $form_detail = $form_state['values'];
   $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'];
 
   if (isset($_COOKIE[$cookie_name])) {
@@ -369,11 +370,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
 
     $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
     $num = $btn_num_arr[1];
-
-    $form_detail = $form_state['values'];
-    $ans_flag = FALSE;
-    $txt_ans_flag = FALSE;
-    $rating_ans_flag = FALSE;
+    
     $question_total = $form_detail['question_total'];
     $question_format = $form_detail['question_format'];
 
@@ -391,13 +388,14 @@ function itg_survey_survey_form_validate($form, &$form_state) {
       // Checkbox validation
       if ($form_detail['question_type' . $ques_num] === 'checkboxes') {
         if ($form_detail['question_skip' . $ques_num] !== 'yes') {
+          $ans_flag = FALSE;
           foreach ($form_detail['answer_option' . $ques_num] as $key => $value) {
             if ($value !== 0) {
               $ans_flag = TRUE;
             }
           }
           if (!$ans_flag) {
-            form_set_error('answer_option' . $ques_num, t('Question @questiontitle is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
+            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
@@ -406,7 +404,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
       if ($form_detail['question_type' . $ques_num] === 'radios') {
         if ($form_detail['question_skip' . $ques_num] !== 'yes') {
           if (empty($form_detail['answer_option' . $ques_num])) {
-            form_set_error('answer_option' . $ques_num, t('Question @questiontitle is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
+            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
@@ -414,6 +412,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
       // Rating validation
       if ($form_detail['question_type' . $ques_num] === 'rating') {
         if ($form_detail['question_skip' . $ques_num] !== 'yes') {
+          $rating_ans_flag = FALSE;
           for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
             for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
               if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] !== 0) {
@@ -422,7 +421,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
             }
           }
           if (!$rating_ans_flag) {
-            form_set_error('answer_option' . $ques_num, t('Question @questiontitle is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
+            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }
@@ -437,7 +436,7 @@ function itg_survey_survey_form_validate($form, &$form_state) {
             }
           }
           if (!$txt_ans_flag) {
-            form_set_error('answer_option' . $ques_num, t('Question @questiontitle is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
+            form_set_error('answer_option' . $ques_num, t('Question "@questiontitle" is required.', array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
         }
       }

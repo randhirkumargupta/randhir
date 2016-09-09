@@ -747,52 +747,52 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: block;
 }
 
-.view-personalization-saved-content .views-table {
+.view-personalization-my-content .views-table {
   width: 100%;
   max-width: 860px;
   border-collapse: collapse;
   border-radius: 5px;
   margin: 0 auto;
 }
-.view-personalization-saved-content .views-table th {
+.view-personalization-my-content .views-table th {
   background-color: #1a3c8d;
   color: #fff;
   border-top: 1px solid #e0e0e0;
 }
-.view-personalization-saved-content .views-table th:first-child {
+.view-personalization-my-content .views-table th:first-child {
   border-radius: 5px 0 0 0;
   border-left: 1px solid #e0e0e0;
   min-width: 300px;
   text-align: left;
   text-indent: 40px;
 }
-.view-personalization-saved-content .views-table th:last-child {
+.view-personalization-my-content .views-table th:last-child {
   border-radius: 0 5px 0 0;
   border-right: 1px solid #e0e0e0;
 }
-.view-personalization-saved-content .views-table td {
+.view-personalization-my-content .views-table td {
   border: 1px solid #e0e0e0;
   text-align: center;
 }
-.view-personalization-saved-content .views-table td:first-child {
+.view-personalization-my-content .views-table td:first-child {
   text-align: left;
 }
-.view-personalization-saved-content .views-table th, .view-personalization-saved-content .views-table td {
+.view-personalization-my-content .views-table th, .view-personalization-my-content .views-table td {
   padding: 10px;
   max-width: 300px;
   font: 300 16px/22px Roboto;
   min-width: 120px;
 }
-.view-personalization-saved-content .item-list ul.pager {
+.view-personalization-my-content .item-list ul.pager {
   margin: 10px 0;
   list-style-type: none;
   text-align: center;
 }
-.view-personalization-saved-content .item-list ul.pager li {
+.view-personalization-my-content .item-list ul.pager li {
   display: inline-block;
   vertical-align: top;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-current {
+.view-personalization-my-content .item-list ul.pager li.pager-current {
   height: 25px;
   width: 25px;
   line-height: 25px;
@@ -801,7 +801,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border-radius: 50%;
   font-family: "Roboto", sans-serif;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-item a {
+.view-personalization-my-content .item-list ul.pager li.pager-item a {
   display: block;
   height: 25px;
   width: 25px;
@@ -811,28 +811,28 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #323232;
   font-family: "Roboto", sans-serif;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-item a:hover {
+.view-personalization-my-content .item-list ul.pager li.pager-item a:hover {
   background-color: #337ab7;
   color: #fff;
   border-radius: 50%;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-next a, .view-personalization-saved-content .item-list ul.pager li.pager-last a, .view-personalization-saved-content .item-list ul.pager li.pager-first a, .view-personalization-saved-content .item-list ul.pager li.pager-previous a {
+.view-personalization-my-content .item-list ul.pager li.pager-next a, .view-personalization-my-content .item-list ul.pager li.pager-last a, .view-personalization-my-content .item-list ul.pager li.pager-first a, .view-personalization-my-content .item-list ul.pager li.pager-previous a {
   color: #323232;
   line-height: 25px;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-next.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-next.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-last.last {
+.view-personalization-my-content .item-list ul.pager li.pager-next.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-next.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-last.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-last.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-first.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-first.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-previous.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-previous.pager-last.last {
   display: none;
 }
 
-#content #block-itg-personalization-user-my-content {
+#content #block-formblock-ugc {
   margin: 0 auto;
   max-width: 720px;
   text-align: left;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-name-field-ugc-ctype {
+#content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype {
   text-align: center;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-name-field-ugc-ctype .form-select {
+#content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype .form-select {
   width: 450px;
   height: 44px;
   border-radius: 5px;
@@ -842,7 +842,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 300 16px/normal Roboto;
   text-align: center;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textfield {
+#content #block-formblock-ugc .node-ugc-form .form-type-textfield {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -852,7 +852,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textfield label {
+#content #block-formblock-ugc .node-ugc-form .form-type-textfield label {
   width: 150px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
@@ -861,7 +861,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   z-index: 99;
   position: relative;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textfield .form-text {
+#content #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
   position: absolute;
   left: 0;
   top: 0;
@@ -871,7 +871,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding-left: 160px;
   z-index: 9;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea {
+#content #block-formblock-ugc .node-ugc-form .form-type-textarea {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -881,9 +881,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea label {
+#content #block-formblock-ugc .node-ugc-form .form-type-textarea label {
   width: 150px;
-  height: 125px;
+  height: 570px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
   background-color: #fbfbfb;
@@ -891,7 +891,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   z-index: 99;
   position: relative;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea .form-textarea-wrapper {
+#content #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper {
   padding-left: 150px;
   position: absolute;
   left: 0;
@@ -899,13 +899,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   width: 100%;
   height: 100%;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-type-textarea .form-textarea {
+#content #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea {
   border: none;
   width: 100%;
   height: 100%;
   padding: 10px;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -915,7 +915,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file label, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file label {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file label, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file label, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file label {
   width: 150px;
   height: 125px;
   padding: 0 20px;
@@ -925,14 +925,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   z-index: 99;
   position: relative;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file {
   width: 100%;
   padding: 10px 10px 10px 160px;
   position: absolute;
   left: 0;
   top: 0;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
   width: 100px;
   background-color: #ededed;
   border: 1px solid #bababa;
@@ -940,34 +940,34 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   float: right;
   cursor: pointer;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .ajax-progress-throbber, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .ajax-progress-throbber {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .ajax-progress-throbber, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .ajax-progress-throbber, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .ajax-progress-throbber {
   display: none;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image .form-type-managed-file div.description, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file .form-type-managed-file div.description {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.description, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.description, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file div.description {
   margin-top: 40px;
   padding-left: 160px;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data, #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data, #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data {
   float: none;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield {
   max-width: 200px;
   border: none;
   border-radius: 0;
   margin: 0;
   overflow: hidden;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield .form-text, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield .form-text {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield .form-text, #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield .form-text, #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield .form-text {
   border: 1px solid #ddd;
   height: 34px;
   padding: 5px;
   position: static;
   width: 100%;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield div.description, #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield div.description {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield div.description, #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield div.description, #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield div.description {
   display: none;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-image div.image-widget-data .form-submit[value="Remove"], #content #block-itg-personalization-user-my-content .node-ugc-form .form-field-type-file div.image-widget-data .form-submit[value="Remove"] {
+#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-submit[value="Remove"], #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-submit[value="Remove"], #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-submit[value="Remove"] {
   color: #ee4d4d;
   font-size: 13px;
   left: 550px;
@@ -975,11 +975,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   top: 16px;
   cursor: pointer;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-actions {
+#content #block-formblock-ugc .node-ugc-form .form-actions {
   padding: 20px 0;
   text-align: center;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-actions .form-submit {
+#content #block-formblock-ugc .node-ugc-form .form-actions .form-submit {
   background: url(../images/btn-blue.png) no-repeat;
   height: 41px;
   border: none;
@@ -988,7 +988,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #fff;
   cursor: pointer;
 }
-#content #block-itg-personalization-user-my-content .node-ugc-form .form-actions a.button {
+#content #block-formblock-ugc .node-ugc-form .form-actions a.button {
   background: url(../images/btn-blue.png) no-repeat;
   height: 41px;
   border: none;
@@ -997,6 +997,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: inline-block;
   vertical-align: top;
   color: #fff;
+}
+#content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .view-personalization-my-preferences {
@@ -1203,4 +1207,221 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .load-more.active {
   display: block;
+}
+
+/* End of Load More CSS */
+/* CSS For Survey */
+.survey-form-main-container h1 {
+  font-size: 24px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 30px;
+}
+.survey-form-main-container .survey-description {
+  color: #bebebe;
+  margin-top: 10px;
+}
+.survey-form-main-container .byline {
+  color: #989898;
+  padding: 10px 0;
+  margin: 20px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-size: 0.75rem;
+  zoom: 1;
+}
+.survey-form-main-container .byline:before, .survey-form-main-container .byline:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.survey-form-main-container .byline:after {
+  clear: both;
+}
+.survey-form-main-container .byline a {
+  color: #989898;
+}
+.survey-form-main-container .byline .profile-pic, .survey-form-main-container .byline .profile-detail {
+  float: left;
+}
+.survey-form-main-container .byline .profile-pic img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #e4e4e4;
+}
+.survey-form-main-container .byline .profile-detail {
+  width: 60%;
+  margin: 0 0 0 10px;
+}
+.survey-form-main-container .byline .profile-detail ul {
+  list-style: none;
+  margin-top: 5px;
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 12px;
+  zoom: 1;
+}
+.survey-form-main-container .byline .profile-detail ul:before, .survey-form-main-container .byline .profile-detail ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.survey-form-main-container .byline .profile-detail ul:after {
+  clear: both;
+}
+.survey-form-main-container .byline .profile-detail ul li {
+  float: left;
+  padding: 0 5px;
+}
+.survey-form-main-container .byline .profile-detail ul li span.share-count {
+  display: block;
+  font-size: 44px;
+  font-size: 2.75rem;
+  font-weight: 500;
+  line-height: 44px;
+  color: #bebebe;
+}
+.survey-form-main-container .byline .profile-detail ul li:last-child {
+  border: none;
+}
+.survey-form-main-container .byline .profile-detail ul li.twitter {
+  color: #0783ec;
+  margin-top: 0px;
+}
+.survey-form-main-container .byline .profile-detail ul li.title {
+  color: #6b6b6b;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 20px;
+}
+.survey-form-main-container .byline .profile-detail ul li.mailto {
+  text-transform: uppercase;
+}
+.survey-form-main-container .byline .profile-detail ul.date-update li {
+  margin-bottom: 7px;
+}
+.survey-form-main-container .byline .profile-detail ul.social-links {
+  zoom: 1;
+  margin-top: 0;
+}
+.survey-form-main-container .byline .profile-detail ul.social-links:before, .survey-form-main-container .byline .profile-detail ul.social-links:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.survey-form-main-container .byline .profile-detail ul.social-links:after {
+  clear: both;
+}
+.survey-form-main-container .byline .profile-detail ul.social-links li {
+  float: left;
+  width: 50%;
+}
+.survey-form-main-container .byline .profile-detail ul.social-links li i {
+  font-size: 16px;
+  color: #c0c0c0;
+}
+.survey-form-main-container .byline .profile-detail ul.social-links li span {
+  display: block;
+  margin-top: 5px;
+}
+.survey-form-main-container .byline .profile-detail ul.social-links li:nth-child(odd) {
+  border-right: 1px solid #dddddd;
+}
+.survey-form-main-container .byline .profile-detail ul.social-links li:last-child {
+  width: 100%;
+  border-right: none;
+}
+.survey-form-main-container .byline .profile-detail ul.social-links li:last-child i {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.survey-form-main-container .byline .social-info {
+  float: right;
+  width: 200px;
+}
+.survey-form-main-container .byline .social-info span {
+  float: left;
+  width: 25%;
+  padding: 5px;
+  text-align: center;
+}
+.survey-form-main-container .byline .social-info span .fa {
+  font-size: 18px;
+  line-height: 22px;
+}
+.survey-form-main-container .byline .social-info span dfn {
+  font: normal 400 12px/18px Roboto;
+  display: block;
+}
+
+.question-container {
+  font-family: Roboto;
+}
+.question-container .question-heading {
+  font-size: 18px;
+  color: #666;
+  font-weight: 500;
+}
+.question-container .question-number {
+  display: inline-block;
+  vertical-align: top;
+  padding: 5px 10px;
+  color: #fff;
+  background-color: #989898;
+  font: 500 14px/18px Roboto;
+}
+.question-container .answer-container {
+  padding-left: 10px;
+  position: relative;
+}
+.question-container .answer-container .survey-media {
+  position: absolute;
+  bottom: 0;
+  width: 140px;
+  right: 0;
+}
+.question-container .answer-container > .form-item .form-item {
+  margin: 0 0 20px;
+}
+.question-container .answer-container > .form-item .form-item.form-type-radio .form-radio {
+  margin: 3px 5px 0 0;
+}
+
+.survey-form-wrapper-all .question-container {
+  display: block;
+}
+
+[id*="itg-survey-survey-form"] .form-submit {
+  min-width: 100px;
+  padding: 5px 10px;
+  height: 36px;
+  border: none;
+  border-radius: 1px;
+  box-shadow: 0 1px 3px 0 #666;
+  background: red;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#4fb5ff, #0986e0);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#4fb5ff, #0986e0);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#4fb5ff, #0986e0);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#4fb5ff, #0986e0);
+  /* Standard syntax */
+  font-size: 16px;
+  font-family: Roboto;
+  color: #fff;
+  font-weight: 300;
+  margin-right: 20px;
+  cursor: pointer;
+}
+[id*="itg-survey-survey-form"] .success-message, [id*="itg-survey-survey-form"] .messages--status {
+  font-size: 18px;
 }

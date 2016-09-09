@@ -20,12 +20,43 @@ else {
 }
 ?>
 <div class="survey-form-main-container">
-  <div class="survey-title"><?php echo $node->title; ?></div>
+  <h1 class="survey-title"><?php echo $node->title; ?></h1>
   <div class="survey-description"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
-  <div class="survey-byline-name"><?php echo $byline_name; ?></div>
-  <div class="survey-byline-twitter-handler"><?php echo $byline_twitter_handler; ?></div>
-  <div class="survey-byline-image"><img src="<?php echo $byline_image; ?>" alt="" title=""/></div>
-  <div class="survey-byline-date"><?php echo $created_date . ' | UPDATED ' . $updated_date . ' IST | New Delhi'; ?></div>
+  <div class="byline">
+    <div class="profile-pic">
+      <img src="<?php echo $byline_image; ?>" alt="" title=""/>
+    </div>
+    <div class="profile-detail">
+      <ul>
+        <li class="title"><?php echo $byline_name; ?></li>
+        <li class="twitter"><?php echo $byline_twitter_handler; ?></li>
+      </ul>
+      <ul class="date-update">
+        <li><?php echo $created_date; ?> | </li>
+        <li>UPDATED <?php echo $updated_date; ?> IST | </li>
+        <li>New Delhi</li>
+      </ul>
+    </div>
+    <div class="social-info">
+      <span>
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+        <dfn>1522</dfn>
+      </span>
+      <span>
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+        <dfn>1522</dfn>
+      </span>
+      <span>
+        <i class="fa fa-google-plus" aria-hidden="true"></i>
+        <dfn>1522</dfn>
+      </span>
+      <span>
+        <i class="fa fa-comment" aria-hidden="true"></i>
+        <dfn>1522</dfn>
+      </span>
+      
+    </div>
+  </div>
   
   <!-- Render survey form -->
   <div class="<?php echo $form_class; ?>">

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for so sorry feature.
+ */
+
+include_once 'feature_for_so_sorry.features.inc';

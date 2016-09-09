@@ -7768,7 +7768,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -7793,7 +7794,7 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -7805,7 +7806,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -7900,7 +7902,7 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -7912,7 +7914,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -8063,7 +8066,7 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8075,7 +8078,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -8226,7 +8230,7 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8238,7 +8242,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -8389,7 +8394,7 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8401,7 +8406,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -8552,7 +8558,7 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8564,7 +8570,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -10871,7 +10878,7 @@ itg-layout-manager/section',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -10882,7 +10889,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -10991,7 +10999,7 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11002,7 +11010,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11266,7 +11275,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11386,7 +11396,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11611,7 +11622,7 @@ node/*/edit',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11622,7 +11633,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11731,7 +11743,7 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11742,7 +11754,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -11995,7 +12008,7 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12006,7 +12019,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12115,7 +12129,7 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12126,7 +12140,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12379,7 +12394,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12390,7 +12405,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12499,7 +12515,7 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12510,7 +12526,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12763,7 +12780,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12774,7 +12791,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -12883,7 +12901,7 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12894,7 +12912,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -13147,7 +13166,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -13158,7 +13177,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -13267,7 +13287,7 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -13278,7 +13298,8 @@ snappost
 personalization
 personalization/*
 tv-show
-tv-show/*',
+tv-show/*
+calendar/*/*/magazine.html',
   'title' => '',
   'cache' => 1,
 );
@@ -15966,7 +15987,7 @@ personalization/my-content',
   'delta' => 'personalized_content_menu_tab',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -77,
+  'weight' => -81,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -15981,7 +16002,7 @@ personalization/*',
   'delta' => 'personalized_saved_content',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -75,
+  'weight' => -78,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -16000,7 +16021,7 @@ personalization/saved-items/photogalleries',
   'delta' => 'user_saved_content',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -76,
+  'weight' => -79,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -16070,7 +16091,7 @@ personalization/saved-items/photogalleries',
   'delta' => 'video_list_of_category-block_2',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -67,
+  'weight' => -70,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -16098,7 +16119,7 @@ personalization/saved-items/photogalleries',
   'delta' => '38f0346c2132f36b14636c66a4924d6e',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -73,
+  'weight' => -76,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -16113,7 +16134,7 @@ personalization/saved-items',
   'delta' => '769b5173b8b634c80e7494097fe05bf3',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -72,
+  'weight' => -75,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -16127,7 +16148,7 @@ personalization/saved-items',
   'delta' => 'f4b87536c91052455f4426444a611153',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -68,
+  'weight' => -71,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -16141,7 +16162,7 @@ personalization/saved-items',
   'delta' => '889f82f979b23a28427520a7b9e1407e',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -69,
+  'weight' => -72,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -17484,9 +17505,9 @@ personalization/saved-items',
   'module' => 'views',
   'delta' => '7a788d5fc14ed02cf09fe6aa1d609c28',
   'theme' => 'itg',
-  'status' => 1,
-  'weight' => -70,
-  'region' => 'personalization',
+  'status' => 0,
+  'weight' => -72,
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'personalization/my-content',
@@ -18122,7 +18143,7 @@ tv-show/*',
   'delta' => 'bbfa04e64b626dbacfbcbb96520d0e77',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -74,
+  'weight' => -77,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -18332,7 +18353,7 @@ tv-show/*',
   'delta' => 'user_my_point',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -78,
+  'weight' => -80,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -18416,7 +18437,7 @@ tv-show/*',
   'delta' => 'ugc',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -71,
+  'weight' => -74,
   'region' => 'personalization',
   'custom' => 0,
   'visibility' => 1,
@@ -18899,6 +18920,202 @@ tv-show/*',
   'pages' => '',
   'title' => '',
   'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1309,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1310,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1311,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1312,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1313,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1314,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1315,
+  'module' => 'itg_layout_manager',
+  'delta' => 'header_sosorry_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1316,
+  'module' => 'views',
+  'delta' => 'c3b0c328c45542af0b403435a6097179',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => -73,
+  'region' => 'personalization',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'personalization/my-content',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1317,
+  'module' => 'views',
+  'delta' => 'c3b0c328c45542af0b403435a6097179',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-content',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1318,
+  'module' => 'views',
+  'delta' => 'c3b0c328c45542af0b403435a6097179',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-content',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1319,
+  'module' => 'views',
+  'delta' => 'c3b0c328c45542af0b403435a6097179',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-content',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1320,
+  'module' => 'views',
+  'delta' => 'c3b0c328c45542af0b403435a6097179',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-content',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1321,
+  'module' => 'views',
+  'delta' => 'c3b0c328c45542af0b403435a6097179',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-content',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1322,
+  'module' => 'views',
+  'delta' => 'c3b0c328c45542af0b403435a6097179',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'personalization/my-content',
+  'title' => '',
+  'cache' => 1,
 );
   $export['block_custom'][] = array(
   'bid' => 1,
