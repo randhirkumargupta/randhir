@@ -79,8 +79,8 @@
 }
 .region-top{
     background-color: #171717;
-    padding: 20px 0;
-    margin-top: -30px;
+    padding: 20px 0 0 0;    
+    margin-top: -15px;
 }
 #block-views-photo-landing-slider-block{
     padding-right: 15px;
@@ -88,6 +88,10 @@
     margin-right: auto;
     margin-left: auto;
     width: 1200px;
+    h2{
+        margin-bottom: 10px;
+        color:#fff;
+    }
     .slick-slider.counterslide {
         background: transparent;
         padding: 0;
@@ -99,53 +103,55 @@
         .slick-prev{
             font: normal normal normal 14px/1 FontAwesome;
             cursor: pointer;
-            width: 50px;
-            height: 100px;
+            width: 24px;
+            height: 48px;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 0 90px 90px 0;
             left: 10px;
             font-size: 0;
             position: absolute;
-            top: 230px;
+            top: 50%;
             z-index: 9;
             border: none;
+            margin-top:-12px;
             &:hover{
                 background-color: rgba(255, 255, 255, 0.6);
             }
             &:before{
                 content: '\f053';
                 font: normal normal normal 14px/1 FontAwesome;
-                font-size: 30px;
+                font-size: 20px;
                 padding-left: 0;
                 left: 0;
                 position: absolute;
-                top: 38px;
+                top: 16px;
             }
         }
         .slick-next{
             font: normal normal normal 14px/1 FontAwesome;
             cursor: pointer;
-            width: 50px;
-            height: 100px;
+            width: 24px;
+            height: 48px;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 90px 0px 0px 90px;
             right: 10px;
             font-size: 0;
             position: absolute;
-            top: 230px;
+            top: 50%;
             z-index: 9;
             border: none;
+            margin-top:-12px;
             &:hover{
                 background-color: rgba(255, 255, 255, 0.6);
             }
             &:before{            
                 content: '\f054';
                 font: normal normal normal 14px/1 FontAwesome;
-                font-size: 30px;
+                font-size: 20px;
                 padding-left: 0;
                 right: 0;
                 position: absolute;
-                top: 38px;
+                top: 16px;
             }
         }
         ul.slick-dots li {
@@ -170,15 +176,15 @@
         ul{
             list-style: none;
         }
-        height:645px;      
-        background: #111111;
+        height:auto;      
+        background: transparent;
         padding: 0px;
         color: #aeaeae;
         .counter{
             font-size: 18px;
             margin-bottom: 20px;
             border-bottom: 1px solid #222222;
-            padding: 15px 20px;
+            padding: 15px 0px;
             font-family:'Roboto', sans-serif;             
         }
         .caption{
@@ -192,7 +198,7 @@
             height: inherit;
             background-color: #111;
             border-radius: inherit;
-            right: 87px;
+            right: 60px;
             font-size: 12px;
             position: absolute;
             top: 18px;
@@ -202,6 +208,7 @@
             text-transform: uppercase;
             left: auto;
             font-family:'Roboto', sans-serif;
+            margin-top:0;
             &:hover{
                 color: #fff;
             }
@@ -210,26 +217,35 @@
             }
         }
         .counterslide .slick-next{
-            right: 25px;
+            right: 0px;
             border-left: 1px solid #c1c1c1;
             padding-left: 15px;            
         }
-        .social-icon{
+        
+        .photo-ad{
+            width: 280px;
+            height: 250px;
+            background: #000;
+            margin: 30px auto 30px auto;
+        }
+    }
+    .social-icon{
             border-top: 1px solid #222222;
             border-bottom: 1px solid #222222;
             margin-top: 40px;
             ul{
-                padding-left:10px;
+                padding-left:0px;
                 display: inline-block;
                 vertical-align: top;
                 width:100%;
+                list-style:none;
                 li{
                     float: left;                                      
                     a{
                         font-size: 22px;
                         color: #c0c0c0;
-                        padding: 0 17px;
-                        line-height: 55px;
+                        padding: 0 12px;
+                        line-height: 35px;
                         display: block;
                         &:hover{
                             background: #222222;
@@ -237,14 +253,10 @@
                     }              
                 }
             }
+            &.desktop-hide{
+                margin: 10px 0;
+            }
         }
-        .photo-ad{
-            width: 300px;
-            height: 250px;
-            background: #000;
-            margin: 30px auto 30px auto;
-        }
-    }
 
 }
 
@@ -361,12 +373,10 @@
             overflow: hidden;
             li{
                 width: 50%;
-                padding: 15px;
+                padding: 15px 10px;
                 float: left;                                
                 .tile{
-                    figure{
-                        width: 170px;
-                        height: 127px;
+                    figure{                        
                         overflow: hidden;
                         position: relative;
                         figcaption{
@@ -395,6 +405,9 @@
                         color: #494949;
                         font-family: "Roboto Slab";
                     }
+                }
+                &:nth-child(2n+1){
+                    clear: left;
                 }
             }
         }
@@ -772,7 +785,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   }
 }
 #content{ 
-  #block-itg-personalization-user-my-content{
+  #block-formblock-ugc{
     margin: 0 auto;
     max-width: 720px;
     text-align: left;
@@ -830,7 +843,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         border-radius: 5px;
         label{
           width: 150px;
-          height: 125px;
+          height: 570px;
           padding: 0 20px;
           font: 300 14px/36px Roboto;
           background-color: #fbfbfb;
@@ -853,7 +866,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           padding: 10px;
         }
       }
-      .form-field-type-image, .form-field-type-file{
+      .form-field-type-image, .field-type-image, .form-field-type-file{
         .form-type-managed-file{
           display: inline-block;
           vertical-align: top;
@@ -949,6 +962,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         }
       }
     }
+    [id*="field-ugc-personalization-photo-add-more-wrapper"]{
+      > .form-item{
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
   }
 }
 .view-personalization-my-preferences {
@@ -985,6 +1004,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         }
       }
     }
+    @include pager;
 }
 #block-itg-personalization-user-my-point{
   max-width: 666px;
@@ -1112,3 +1132,179 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   }
 }
 /* End of Error Pages CSS */
+
+/* Load more CSS */
+.load-more {
+  display: none;
+  padding: 20px;
+  text-align: center;
+  img{
+    max-width: 40px;
+  }
+  &.active{
+    display: block;
+  }
+}
+/* End of Load More CSS */
+
+/* CSS For Survey */
+@mixin story-profile-pic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #e4e4e4;
+}
+.survey-form-main-container{
+  h1{
+    @include font(24px,30px,700);       
+  }
+  .survey-description{
+    color:#bebebe;
+    margin-top: 10px;
+  }
+  .byline{            
+    color: #989898;
+    padding: 10px 0;
+    margin: 20px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    @include itg-font($itg-roboto);
+    @include font(12px);
+    @include clearfix;
+    a{
+      color: #989898;
+    }
+    .profile-pic, .profile-detail{
+      @include float(left);
+    } 
+    .profile-pic{
+      img{
+        @include story-profile-pic;    
+      }                
+    }
+    .profile-detail {
+      width: 74%;    
+      margin: 0 0 0 10px;
+      ul {
+        list-style: none;
+        margin-top: 5px;
+        @include font(12px,12px);
+        @include clearfix;
+        li{  
+          @include float(left);
+          padding: 0 5px;
+          span.share-count{
+            display: block;
+            @include font(44px,44px,500);
+            color:#bebebe;
+          } 
+          &:last-child{
+            border:none;                            
+          }
+          &.twitter{
+            color: #0783ec;
+            margin-top: 0px;
+          }
+          &.title{
+            color: #6b6b6b;
+            @include font(12px,20px,$itg-font-bold);
+          }
+          &.mailto{
+            text-transform: uppercase;
+          }                                               
+        }
+      }
+      ul.date-update{                    
+        li{
+          margin-bottom: 7px;
+        }   
+      }
+      ul.social-links{
+        @include clearfix;
+        margin-top:0;
+        li{
+          @include float(left);
+          width: 50%;                        
+          i{
+            font-size: 16px;
+            color: #c0c0c0;
+          }
+          span{
+            display: block;
+            margin-top: 5px;
+          }
+          &:nth-child(odd){
+            border-right: 1px solid $border-color;
+          }
+          &:last-child{
+            @include calculate-width(1);
+            border-right: none;
+            i{
+              vertical-align: middle;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.question-container{
+  font-family: Roboto;
+  .question-heading{
+    font-size: 18px;
+    color: #666;
+    font-weight: 500;
+  }
+  .question-number{
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px 10px;
+    color: #fff;
+    background-color: #989898;
+    font: 500 14px/18px Roboto;
+  }
+  .answer-container{
+    padding-left: 10px;
+    position: relative;
+    .survey-media{
+      position: absolute;
+      bottom: 0;
+      width: 140px;
+      right: 0;
+    }
+    > .form-item .form-item{
+      margin: 0 0 20px;
+      &.form-type-radio .form-radio {
+        margin: 3px 5px 0 0;
+      }
+    }
+  }
+}
+.survey-form-wrapper-all{
+  .question-container{display: block;}
+}
+[id*="itg-survey-survey-form"]{
+  .form-submit{
+    min-width: 100px;
+    padding: 5px 10px;
+    height: 36px;
+    border: none;
+    border-radius: 1px;
+    box-shadow: 0 1px 3px 0 #666;
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#4fb5ff, #0986e0); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#4fb5ff, #0986e0); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#4fb5ff, #0986e0); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#4fb5ff, #0986e0); /* Standard syntax */
+    font-size: 16px;
+    font-family: Roboto;
+    color: #fff;
+    font-weight: 300;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  .success-message, .messages--status{
+    font-size: 18px;
+  }
+}

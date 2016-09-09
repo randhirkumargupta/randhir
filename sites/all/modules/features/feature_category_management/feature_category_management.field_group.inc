@@ -27,8 +27,9 @@ function feature_category_management_field_group_info() {
       1 => 'field_cm_redirection_url',
       2 => 'field_sponser_logo',
       3 => 'field_user_city',
-      4 => 'name',
-      5 => 'description',
+      4 => 'field_description',
+      5 => 'name',
+      6 => 'description',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -62,6 +63,8 @@ function feature_category_management_field_group_info() {
     'weight' => '3',
     'children' => array(
       0 => 'field_cm_select_type',
+      1 => 'field_cm_select_template',
+      2 => 'field_cm_select_template_type',
     ),
     'format_type' => 'div',
     'format_settings' => array(

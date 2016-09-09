@@ -42,14 +42,7 @@ function itg_personalization_menu() {
     'page callback' => 'itg_personalization_home_page',
     'access callback' => TRUE,    
     'type' => MENU_NORMAL_ITEM,
-  );
-  $items['itg-saved-content/%'] = array(    
-    'page callback' => '_personalized_saved_content',
-    'access arguments' => array('access content'),
-    'page arguments' => array(1),
-    'file' => 'includes/itg_personalization.helper.inc',
-    'type' => MENU_CALLBACK,
-  );  
+  );    
   
   return $items;
 }
@@ -85,7 +78,7 @@ function itg_personalization_home_page() {
   $data['full_name'] = $f_name . ' ' . $l_name;
   
   // user logout link
-  $data['logout'] = l(t('Logout'), 'user/logout');
+  $data['logout'] = l(t('Logout'), 'user/logout');  
   
   return theme('personalization_userpage', array('data' => $data));
 }
@@ -139,11 +132,7 @@ function itg_personalization_block_info() {
   $blocks['user_saved_content'] = array(
     'info' => t('Personalized saved content data'),
     'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  $blocks['user_my_content'] = array(
-    'info' => t('Personalized My Content'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+  );  
   $blocks['user_my_point'] = array(
     'info' => t('Personalized My Points'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -165,19 +154,13 @@ function itg_personalization_block_view($delta = '') {
       $block['content'] = theme('personalization_menu_tab');
       break;
     // Load personalized saved content menu tab.
-    case 'personalized_saved_content':
-      drupal_add_js('misc/ajax.js');      
+    case 'personalized_saved_content':      
       $block['content'] = theme('personalization_saved_content_tab');
       break;
     case 'user_saved_content':      
       $block['content'] = '<div id="target"></div>';      
       $block['content'] .= '<div id="target-content"></div>';      
-      break;
-    case 'user_my_content':
-      module_load_include('inc', 'node', 'node.pages');
-      $form = node_add('ugc');      
-      $block['content'] = drupal_render($form);
-      break;
+      break;    
     case 'user_my_point':      
       $data = itg_loyalty_reward_user_details(4);
       $data['unit_description'][] = array(
@@ -208,7 +191,7 @@ function itg_personalization_block_view($delta = '') {
  */
 function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
   $arg = arg();   
-  if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
+  if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {    
     // Hide user name field.
     $form['field_user_name']['#prefix'] = '<div style="display: none;">';
     $form['field_user_name']['#suffix'] = '</div>';
@@ -238,18 +221,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
       'visible' => array(
         ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
       ),
-    );    
-    // Set visibility for submit buttons.
-    $form['field_user_message']['und'][0] = array(
-      '#title' => t('Description'),
-      '#type' => 'textarea',
-      '#rows' => 3,
-      '#states' => array(
-        'visible' => array(
-          ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
-        ),
-      ),  
-    );    
+    );            
     // Set field visibility for tags field.
     $form['field_story_client_title']['#states'] = array(
       'visible' => array(
@@ -258,8 +230,27 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     );
     // Change placeholder of ugc type field.
     $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');    
+    $form['#after_build'][] = 'itg_personalization_after_build';    
     unset($form['field_ugc_ctype']['und']['#title']);    
   }
+}
+
+/**
+ * Implements custom after build function for ugs form.
+ * 
+ * @param array $form
+ *   Array containing form elements.
+ * @param array $form_state
+ *   Array containing form submitted data.
+ *
+ * @return array
+ *   Return altered form elements.
+ */
+function itg_personalization_after_build($form, &$form_state) {
+  // Add astric to upload image field.
+  $form['field_ugc_personalization_photo']['und'][0]['field_ugc_upload_photo']['und'][0]['#title'] = t('Upload Photo <span class="form-required" title="This field is required."> *</span>');
+  
+  return $form;
 }
 
 /**
@@ -303,10 +294,53 @@ function itg_personalization_views_pre_render(&$view) {
 
 /**
  * Implements hook_views_api().
+ *
+ * {@inheritdoc}.
  */
 function itg_personalization_views_api() {
   return array(
     'api' => 3,
     'path' => drupal_get_path('module', 'itg_personalization') . '/views',
   );
+}
+
+/**
+ * Callback for itg_mobile_services_field_add_more_submit
+ * @param array $form
+ * @param array $form_state
+ */ 
+function itg_personalization_field_add_more_submit($form, &$form_state) {
+  if (isset($_SESSION['personalization_node'])) {
+    $personalization_node = $_SESSION['personalization_node'];  
+  }  
+  $button = $form_state['triggering_element'];
+  // Go one level up in the form, to the widgets container.
+  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
+  $field_name = $element['#field_name'];
+  $langcode = $element['#language'];
+  $parents = $element['#field_parents'];
+
+  // Alter the number of widgets to show. items_count = 0 means 1.
+  $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
+  //get the number from the select
+  $numbtoadd = $form[$field_name]['add_more_number']['#value'];
+  if ($numbtoadd) {
+    $field_state['items_count'] += $numbtoadd - 1;
+    field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
+    $form_state['rebuild'] = TRUE;
+  }
+  $node = drupal_rebuild_form('photogallery_node_form', $form_state, $old_form = NULL);
+  
+  $i = 0;  
+  foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
+    if (!isset($filed_collection->field_images['und']) && $i >= 1) {
+      $collection_id = $personalization_node->field_ugc_personalization_photo['und'][$i]['value'];        
+      $collection_value = field_collection_item_load($collection_id);      
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_caption['und'][0]['value'] = $collection_value->field_story_short_headline['und'][0]['value'];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $collection_value->field_ugc_upload_photo['und'][0]['fid'];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['alt'] = $collection_value->field_ugc_upload_photo['und'][0]['alt'];
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['title'] = $collection_value->field_ugc_upload_photo['und'][0]['title'];      
+    }
+    $i++;
+  }
 }

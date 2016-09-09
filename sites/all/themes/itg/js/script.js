@@ -18,6 +18,12 @@ Drupal.behaviors.my_custom_behavior = {
   attach: function(context, settings) {
 
     // Place your code here.
+    // Make unflag link unclickable
+    if ($('a').hasClass('unflag-action')) {
+        $('.page-node .unflag-action').attr('title', '');
+        $('.page-node .unflag-action').css('pointer-events', 'none');
+    }
+    
     $('input.rating').hover(function(){
     $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
     $(this).parent().nextAll().removeClass('rating-hover');
@@ -30,110 +36,6 @@ Drupal.behaviors.my_custom_behavior = {
     $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
     $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
   });
-  
-  $('.survey-submit, .survey-submit-skip').mousedown(function(){
-    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
-    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
-    var textValue = $(this).parents('.question-container').find('.form-text').val();
-    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
-    var surveyTaken = $('body').find('input[name="survey_taken"]').val();
-    
-    if(checkValue && skipValue == 'no' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    } else if(skipValue == 'yes' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    }
-    
-    if(radioValue && skipValue == 'no' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    } else if(skipValue == 'yes' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    }
-    
-    if(textValue  && skipValue == 'no' && textValue != 'undefined' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    } else if(skipValue == 'yes' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    }
-    
-  });
-  
-  var loader = '<div class="ajax-loader"><img src="sites/all/themes/rubik/images/loader.svg" alt=""/></div>';
-  
-  $('#itg-survey-survey-form .button-yes').mousedown(function(){
-    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
-    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
-    var textValue = $(this).parents('.question-container').find('.form-text').val();
-    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
-    
-    if(checkValue && skipValue == 'no'){
-      $('.question-container').hide();
-      $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-      
-    } else if(skipValue == 'yes'){
-     $('.question-container').hide();
-     $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    }
-    
-    if(radioValue && skipValue == 'no'){
-      $('.question-container').hide();
-      $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    } else if(skipValue == 'yes'){
-     $('.question-container').hide();
-     $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    }
-    
-    if(textValue  && skipValue == 'no' && textValue != 'undefined'){
-      $('.question-container').hide();
-      $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    } else if(skipValue == 'yes'){
-      $('.question-container').hide();
-      $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    }
-  });
-  
   
   $('.image-widget').each(function () {
       var filename = $(this).find('.file').html();
@@ -310,7 +212,19 @@ jQuery(document).ready(function () {
             window.location.href = urldata;
         }
 
-    })
+    });
+    
+    jQuery(window).scroll(function () {
+      var winH = jQuery(window).height() + jQuery('#footer').height() + 40;
+      var docH = jQuery(document).height();
+      var targetH = docH - winH;
+      var scrollH = jQuery(window).scrollTop();
+      if(scrollH >= targetH) {
+        console.log(scrollH + "==" + targetH);
+           jQuery('.load-more').show();
+      }
+    });
+    
   });
 
 jQuery(window).load(function () {

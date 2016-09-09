@@ -154,19 +154,19 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     form_set_error('field_individual_registration_fe', t('Individual Registration Fee is required.'));
   }
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_group_registration_fee_5', t('Group Registration Fee (upto 5) is required.'));
+    form_set_error('field_group_registration_fee_5', t('Group Registration Fee (for 5 member) is required.'));
   }
 
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
-    form_set_error('field_group_registration_fee_10', t('Group Registration Fee (upto 10) is required.'));
+    form_set_error('field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
   }
   // Fees validation for registration
   if ($event_type == 'paid' && $form_state['values']['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
-    form_set_error('field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (upto 5)'));
+    form_set_error('field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (for 5 member)'));
   }
 
   if ($event_type == 'paid' && $form_state['values']['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
-    form_set_error('field_group_registration_fee_5', t('Group Registration Fee (upto 5) should be less then Group Registration Fee (upto 10).'));
+    form_set_error('field_group_registration_fee_5', t('Group Registration Fee (for 5 member) should be less then Group Registration Fee (upto 10 member).'));
   }
 
   if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second")) {
@@ -316,7 +316,7 @@ function itg_event_backend_after_build($form, &$form_state) {
     $form['actions']['submit2']['#access'] = FALSE;
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
-    $form['path']['#prefix'] = '<h2 id="title-metatags" class="story-title">Meta Tags</h2>';
+    $form['path']['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
   }
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
     $form['actions']['submit']['#access'] = TRUE;

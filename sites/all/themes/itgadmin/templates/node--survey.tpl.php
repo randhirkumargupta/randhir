@@ -40,7 +40,7 @@
 
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-          <div class="field">
+        <div class="field">
           <div class="field-label">Survey Title:</div>
           <div class="field-items"><?php echo $title; ?></div>
         </div>
