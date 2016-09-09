@@ -20,7 +20,7 @@ var sDateFlag = 1;
                 $("#widget-ajex-loader").css("display", "block");
                 jQuery('#edit-field-service-content-und-add-more').mousedown();
             };
-            
+
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
                 jQuery(".field-type-text.field-name-field-client-short-description.field-widget-text-textfield.form-wrapper").hide();
                 jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
@@ -360,6 +360,7 @@ var sDateFlag = 1;
                         return false;
                     }
 
+
                     if (genrateFlag == 1) {
                         jQuery("#edit-field-service-association-title-und, #edit-field-footer-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").addClass("itg-disabled");
                         jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');
@@ -373,7 +374,9 @@ var sDateFlag = 1;
                             //lots more code
                         }, 3000);
                         genrateFlag++;
+
                     }
+
                 });
             }
 
@@ -413,6 +416,7 @@ var sDateFlag = 1;
             }
 
             if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
+                jQuery('.custom-content-submit').removeAttr('disabled');
                 var content_edit_mode = Drupal.settings.itg_mobile_services.settings.service_content_edit_mode;
                 jQuery('#field-service-content-add-more-wrapper').show();
                 jQuery('#edit-field-service-frequency').show();
@@ -456,6 +460,13 @@ var sDateFlag = 1;
                 }
             });
 
+            jQuery('#content-enable-button').removeAttr('disabled');
+            jQuery('#reset-date-button').removeAttr('disabled');
+            var frequency_from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
+            var frequency_end_date = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
+            if (frequency_from_date != '' && frequency_end_date != '') {
+                jQuery('.mobile-content-submit').removeAttr('disabled');
+            }
 
             jQuery('.field-name-field-story-expert-description .form-textarea').on('keyup', function () {
                 if (Drupal.settings.itg_mobile_services.settings.countchar) {
