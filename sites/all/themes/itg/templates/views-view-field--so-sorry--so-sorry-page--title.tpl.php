@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * This template is used to print a single field in a view.
@@ -21,18 +22,4 @@
  * the view is modified.
  */
 ?>
-<?php
-$arg = arg();
-$autoplay = 0;
- if(isset($arg[1])) {
-   $autoplay = 1;
- }
-?>
-<div class="sosory-video">
-  <iframe frameborder="0" 
-          width="750"
-          height="539"
-          src="https://www.dailymotion.com/embed/video/<?php print $output; ?>?autoplay=<?php print $autoplay; ?>&mute=1&ui-start-screen-info"
-          allowfullscreen>
-  </iframe>
-    </div>
+<h1> <?php print $output; ?> </h1>
