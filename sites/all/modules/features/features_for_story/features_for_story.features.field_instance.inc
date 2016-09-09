@@ -3174,6 +3174,52 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_ugc_source_id'.
+  $field_instances['node-story-field_story_ugc_source_id'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 78,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_story_ugc_source_id',
+    'label' => 'UGC Source ID',
+    'required' => FALSE,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 72,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_stroy_city'.
   $field_instances['node-story-field_stroy_city'] = array(
     'bundle' => 'story',
@@ -3299,6 +3345,7 @@ function features_for_story_field_default_field_instances() {
   t('Twitter Video');
   t('Twitter Video Description');
   t('Twitter narrative');
+  t('UGC Source ID');
   t('common by line twitter');
   t('primary category');
 
