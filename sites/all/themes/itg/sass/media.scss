@@ -137,9 +137,6 @@
                     height: 37px;
                     @include font($itg-nav-fontsize,37px,null);                                            
                     }
-                    &:first-child a{
-                             padding-left: 0;
-                        }
                 }
             }
         }
@@ -663,8 +660,11 @@ section.sidebar{
                  padding-left:10px;
                 li{
                     a{
-                       padding: 0 17px;
+                       padding: 0 15px;
                        line-height: 55px;
+                    }
+                    span.flag-throbber{
+                        display: none;
                     }
                 }
             }
