@@ -394,7 +394,7 @@ function itg_mobile_get_feed_byurl() {
 
   $query = db_select('itg_syndication_feed_url', 'feed')->extend('PagerDefault');
   # get the desired fields from the database
-  $query ->condition('feed.client_feed_url', $url)
+  $query->condition('feed.client_feed_url', $url)
       ->condition('feed.status', 1, '=');
 
   $search_box = drupal_render(drupal_get_form('search_form'));
@@ -435,9 +435,10 @@ function itg_mobile_get_feed_byurl() {
     $file_date_array = explode('.', $file_url_array[3]);
     $frequency_type_arr = explode('/', $file_url_array[0]);
     $frequency_type = ($frequency_type_arr[count($frequency_type_arr) - 1]);
-    $frequency_date = $file_url_array[2];
+    $fq_date = explode('-to', $file_url_array[2]);
+    $frequency_date = isset($fq_date[0]) ? date('d/m/Y', strtotime($fq_date[0])) : date('d/m/Y', strtotime($file_url_array[2]));
     $date_time = isset($file_url_array[0]) ? date('d/m/Y H:i:s', $file_date_array[0]) : '';
-    $created_date = $row->created_date;
+    $created_date = isset($row->created_date) ? date('d/m/Y H:i:s', strtotime($row->created_date)) : '';
 
     $rows[] = array($i,
       $file_url_array[1],
@@ -477,13 +478,17 @@ function itg_mobile_services_search_form($form, &$form_state) {
     '#type' => 'date_popup',
     '#title' => t('From'),
     '#date_format' => 'd/m/Y',
-    '#date_year_range' => '-1:+1',
+    '#date_year_range' => '-1:0',
+    '#attributes' => array(
+      'readonly' => 'readonly'
+    ),
   );
+
   $form['created']['max'] = array(
     '#type' => 'date_popup',
     '#title' => t('To'),
     '#date_format' => 'd/m/Y',
-    '#date_year_range' => '-1:+1',
+    '#date_year_range' => '-1:0',
     '#attributes' => array(
       'readonly' => 'readonly'
     ),
@@ -493,6 +498,23 @@ function itg_mobile_services_search_form($form, &$form_state) {
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
+
+  $request_url = explode('/', $_SERVER['REQUEST_URI']);
+  unset($request_url[0]);
+  unset($request_url[1]);
+  $url = $base_url . '/' . $request_url[2] . '/' . $request_url[3] . '/' . $request_url[4];
+
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Reset'), $url, array(
+      'attributes' => array(
+        'class' => 'button custom-url-search'
+      )
+    )),
+    '#weight' => 9,
+    '#value' => t('Reset')
+  );
+
+
   return $form;
 }
 
