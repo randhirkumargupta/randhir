@@ -3816,3 +3816,48 @@ footer{
     }
 }
 /*CSS End So sorry page*/
+/*CSS Start user login header*/
+#block-itg-layout-manager-header-block{
+    .menu-login{
+        .user-menu{
+            @include pos(relative);
+            a.user-icon{
+                position: absolute;
+                right: 0;
+                background: #ffc106;
+                width: 37px;
+                height: 40px;
+                line-height: 40px;
+                color: #ac0000;
+                top: -39px;
+                box-shadow: 0px 0px 2px #ccc;
+                text-align: center;
+                font-size: 28px;
+            }
+            ul.menu{
+                position: absolute;
+                right: 0;
+                background: #a00606;                
+                z-index: 9;
+                box-shadow: 2px 3px 3px #ccc;
+                display: none;
+                li{
+                    a{
+                        color: #fff;
+                        display: block;
+                        border-bottom: 1px solid #000;
+                        padding: 10px 20px;
+                    }
+                }
+                
+            }
+            &:hover{
+                ul.menu{
+                    display: block;
+                }
+            }
+        }
+
+    }
+}
+/*End Start user login header*/
