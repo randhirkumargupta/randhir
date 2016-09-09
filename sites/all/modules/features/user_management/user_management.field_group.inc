@@ -42,7 +42,7 @@ function user_management_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_configuration|user|user|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -78,7 +78,7 @@ function user_management_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_reset_password|user|user|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -114,7 +114,7 @@ function user_management_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_user_basic_details|user|user|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   // Translatables
   // Included for use with string extractors like potx.

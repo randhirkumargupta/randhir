@@ -118,6 +118,9 @@ function features_for_story_strongarm() {
         'path' => array(
           'weight' => '48',
         ),
+        'flag' => array(
+          'weight' => '10',
+        ),
       ),
       'display' => array(),
     ),
