@@ -201,24 +201,24 @@
     // jQuery code to filter category manager
     $('.itg-section').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.not('.active').addClass('active').parent().next().addClass('hide').find('.cmd-heading').addClass('active');
     });
     $('.itg-category').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
       el.parent().parent().parent().parent().prev().children('.cmd-heading').removeClass('active');
     });
     $('.itg-sub-category').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
       el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
     });
     $('.itg-sub-sub-category').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
       el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
     });
