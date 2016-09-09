@@ -5575,7 +5575,7 @@ div.node #comments h2 {
   margin-top: 10px;
 }
 
-.original-image, .crop-image, .cancel-image {
+.original-image, .crop-image, .cancel-image, .maptofield {
   cursor: pointer;
   padding: 6px 40px;
   position: relative;
@@ -6866,4 +6866,9 @@ div.node #comments h2 {
 }
 .page-node-edit.node-type-survey .survey-view-result-btn {
   margin-right: 5px;
+}
+
+#edit-field-story-category .primary-radio {
+  float: left;
+  margin: 0 10px;
 }
