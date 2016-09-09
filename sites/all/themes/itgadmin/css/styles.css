@@ -3324,13 +3324,11 @@ fieldset#edit-select .form-submit {
   color: #fff;
 }
 .view-category-manager .cmd-heading .fa {
-  position: absolute;
-  left: 10px;
-  top: 0;
-  bottom: 0;
-  width: 14px;
-  height: 14px;
-  margin: auto 0;
+  float: left;
+  margin: 5px 10px 0 0;
+}
+.view-category-manager .cmd-heading p {
+  overflow: hidden;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper {
   border-bottom: 1px solid #d9d9d9;
@@ -3341,14 +3339,10 @@ fieldset#edit-select .form-submit {
   float: left;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail:first-child {
-  width: 35%;
-  padding-left: 30px;
-}
-.view-category-manager .view-content .item-list ul li .term-wrapper .term-detail:first-child .fa {
-  margin-right: 10px;
+  width: 30%;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail:nth-child(2) {
-  width: 25%;
+  width: 30%;
 }
 .view-category-manager .view-content .item-list ul li .term-wrapper .term-detail a {
   color: #1fb5ad;
@@ -3356,15 +3350,16 @@ fieldset#edit-select .form-submit {
 .view-category-manager .view-content .item-list ul li .term-wrapper .itg-clipboard {
   color: #1fb5ad;
   margin-left: 5px;
+  display: none;
 }
 .view-category-manager .view-content .item-list .item-list ul li .term-detail:first-child {
-  padding-left: 40px;
+  padding-left: 25px;
 }
 .view-category-manager .view-content .item-list .item-list ul li .cmd-heading .fa {
   left: 20px;
 }
 .view-category-manager .view-content .item-list .item-list ul li .item-list ul li .term-detail:first-child {
-  padding-left: 50px;
+  padding-left: 35px;
 }
 .view-category-manager .view-content .item-list .item-list ul li .item-list ul li .cmd-heading .fa {
   left: 30px;
@@ -3379,7 +3374,7 @@ fieldset#edit-select .form-submit {
 }
 
 .view-category-manager .cmd-heading.active .fa-plus-square-o {
-  display: block;
+  display: inline-block;
 }
 
 .category-manager-thead {
@@ -5580,7 +5575,7 @@ div.node #comments h2 {
   margin-top: 10px;
 }
 
-.original-image, .crop-image, .cancel-image {
+.original-image, .crop-image, .cancel-image, .maptofield {
   cursor: pointer;
   padding: 6px 40px;
   position: relative;
@@ -6509,9 +6504,10 @@ div.node #comments h2 {
 #itg-image-croping-crop-form .form-item-aspect-ratio label {
   padding: 0;
   float: none;
+  width: auto;
 }
 #itg-image-croping-crop-form .form-item-aspect-ratio .form-select {
-  width: 80px;
+  width: 75px;
 }
 
 #edit-metatags-und-basic {
@@ -6870,4 +6866,9 @@ div.node #comments h2 {
 }
 .page-node-edit.node-type-survey .survey-view-result-btn {
   margin-right: 5px;
+}
+
+#edit-field-story-category .primary-radio {
+  float: left;
+  margin: 0 10px;
 }
