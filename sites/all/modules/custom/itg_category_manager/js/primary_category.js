@@ -10,7 +10,7 @@
         var selectvalue = jQuery('.selects > .form-select:last option:selected').val();
         var comptext = "";
         var makeradio = "";
-        var datahtml = jQuery('.dropbox-title').html();
+        var datahtml ='<div class="prim-html">'+ jQuery('.prim-html').html();
         var flag = 0;
         if (selectvalue != "")
         {
@@ -35,18 +35,19 @@
                 }
 
             });
-
+ makeradio = '<span class="hiddenradio"><input type="radio" class="select-prim" value="' + selectvalue + '"><span class="primary-text">' + comptext + '</span></span>';
+                        datahtml = datahtml.replace(makeradio, "");
+                        datahtml = datahtml + makeradio+'</div>';
+                       jQuery('.prim-html').remove();
+                        jQuery('.form-item-field-primary-category-html-und-0-value').append(datahtml).hide();
 
             jQuery(document).on('ajaxComplete', function(event, xhr, settings) {
                 if (settings.url.indexOf('hierarchical_select_ajax') >= 0) {
-
+             
                     if (comptext != "" && flag == 0)
                     {
 
-                        makeradio = '<span class="hiddenradio"><input type="radio" class="select-prim" value="' + selectvalue + '"><span class="primary-text">' + comptext + '</span></span>';
-                        datahtml = datahtml.replace(makeradio, "");
-                        datahtml = datahtml + makeradio;
-                        jQuery('.dropbox-title').html(datahtml).hide();
+                       
                         jQuery(".hiddenradio").each(function() {
                             var gettoptext = jQuery(this).find(".primary-text").text();
                             var selectvalue = jQuery(this).find(".select-prim").val();
@@ -71,7 +72,7 @@
                         jQuery('.title-select-prim').remove();
                         jQuery('.dropbox table').before( "<span class='title-select-prim'>Select primary category</span>" );
                     
-                        var gethtml = jQuery('.dropbox-title').html();
+                        var gethtml = jQuery('.prim-htmle').html();
                         jQuery('#edit-field-primary-category-html-text-und-0-value').val(gethtml);
                     }
 
@@ -89,7 +90,7 @@
 
         jQuery('#edit-field-primary-category-und-0-value').val(getval);
 
-        var gethtml = jQuery('.dropbox-title').html();
+        var gethtml = jQuery('.prim-html').html();
 
         jQuery('#edit-field-primary-category-html-text-und-0-value').val(gethtml);
     });
