@@ -276,8 +276,8 @@ function itg_personalization_flag_text($nid) {
  *
  * {@inheritdoc}.
  */ 
-function itg_personalization_views_pre_render(&$view) { 
-  if ($view->name == 'personalization_saved_content' && $view->current_display == 'block_6') {    
+function itg_personalization_views_pre_render(&$view) {  
+  if ($view->name == 'personalization_my_content') {    
     foreach ($view->result as $key => $value) {
       if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {        
         $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Pending';

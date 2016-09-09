@@ -14,6 +14,7 @@ features[flag][] = follow
 features[flag][] = my_saved_content
 features[user_permission][] = view personalized content
 features[user_role][] = Front User
+features[views_view][] = personalization_my_content
 features[views_view][] = personalization_my_preferences
 features[views_view][] = personalization_saved_content
 features_exclude[dependencies][views] = views
