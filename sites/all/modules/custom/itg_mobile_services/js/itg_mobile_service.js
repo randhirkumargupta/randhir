@@ -16,35 +16,14 @@ var sDateFlag = 1;
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
-
             jQuery.fn.mobile_astro_custom_js = function () {
-                jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                $("#widget-ajex-loader").css("display", "block");
                 jQuery('#edit-field-service-content-und-add-more').mousedown();
             };
-
-
-
-//            $('#vas-service-content-node-form').ajaxComplete(function(event, xhr, settings) {
-//                console.log('target'+event.target.id);
-//                if ($(event.target.id) == 'the-id-of-your-item') {
-//                  // Your code here
-//                }
-//            });
-
-
-
-//             jQuery(document).on('ajaxComplete', function(event, xhr, settings) {
-//                 console.log('extraData'+settings.extraData.view_display_id);
-//                 console.log('settings.url'+settings.url.indexOf('countchar_validation'));
-//                 console.log("Requested with " + settings.requestingObjectId);
-//                if (settings.url.indexOf('countchar_validation') >= 0) {
-//                    jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
-//                }
-//             });    
+            
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
                 jQuery(".field-type-text.field-name-field-client-short-description.field-widget-text-textfield.form-wrapper").hide();
                 jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
-                //jQuery("input[id*='field-service-content-date-und-0-value']").hide();
                 jQuery("[id*='field-service-content-date']").hide();
                 astroFlag = 1;
             }
@@ -121,7 +100,7 @@ var sDateFlag = 1;
 
             var description_message = jQuery('textarea#edit-field-service-content-und-12-field-story-expert-description-und-0-value--2').html();
             if (description_message) {
-                jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+                $("#widget-ajex-loader").css("display", "none");
             }
 
             jQuery.fn.content_create_custom_js = function () {
