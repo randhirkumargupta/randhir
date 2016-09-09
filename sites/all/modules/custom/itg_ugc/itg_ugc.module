@@ -67,6 +67,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
       $form['body'][LANGUAGE_NONE][0]['#default_value'] = $node->field_user_message[LANGUAGE_NONE][0]['value'];      
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
@@ -85,6 +87,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $node->title;
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;      
       $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_stroy_city'][LANGUAGE_NONE]['#default_value'] = $node->field_user_city[LANGUAGE_NONE][0]['value'];
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
@@ -93,7 +97,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_reporter']['#suffix'] = '<span class="byline">' . $ugc_user_name . ' (UGC User)</span></div>';
       }      
       // assign value in first field collection item
-      $form['field_upload_video']['und'][0]['#default_value']['fid'] = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];      
+      $form['field_upload_video']['und'][0]['#default_value']['fid'] = $node->field_astro_video[LANGUAGE_NONE][0]['fid'];
     }
 
     // prefill input value in podcast form
