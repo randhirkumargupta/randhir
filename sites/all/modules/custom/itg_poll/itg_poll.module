@@ -435,6 +435,11 @@ function itg_poll_block_info() {
     'info' => t('poll Form Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['home_page_poll_widget_block'] = array(
+    'info' => t('Home Page Poll Widget'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -450,7 +455,15 @@ function itg_poll_block_view($delta = '') {
     case 'poll_tab_form_block':
       $block['content'] = theme('itg_poll_tab_form_display_block', array('data' => $data));
       break;
+  
+    case 'home_page_poll_widget_block':
+      $selected_poll_widget = get_homepage_current_poll_widget('poll','poll_widget');  
+      $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
+      break;
   }
+  
+  
+  
 
   // Disable form tab from delete page
   if (arg(0) == 'node' && arg(2) == 'delete') {
@@ -459,6 +472,22 @@ function itg_poll_block_view($delta = '') {
 
   return $block;
 }
+
+
+/*
+ * This will return selected poll for widget
+ */
+
+function get_homepage_current_poll_widget($content_type,$widget_name) {
+    $nodes_already = db_select('itg_widget_order', 'iwo')
+      ->condition('iwo.content_type', $content_type)
+      ->condition('iwo.widget', $widget_name)
+      ->fields('iwo', array('nid'))
+      ->execute()->fetch();
+    return $nodes_already->nid;
+    
+}
+
 
 /**
  * Implements hook_theme().
