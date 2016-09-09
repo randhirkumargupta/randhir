@@ -190,6 +190,18 @@ function itg_widget_views_pre_render(&$view) {
     $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
     $view->attachment_before = $header_content;
   }
+
+   elseif ($view->name == "poll_widget" && $view->current_display == 'poll_widget_list') {
+    $header_content = l(t('Search Content'), 'poll-format-conent', array('query' => array('destination' => arg(0))));
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "poll_widget" && $view->current_display == 'poll_widget_format') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Poll Widget'), 'poll-format-widget-list');
+      $view->attachment_before = $header_content;
+    }
+  }
 }
 
 /**
