@@ -1030,8 +1030,13 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
         $node = node_load(arg(1));
         $type = $node->type;
     }
-    $editid = $form_state['input']['field_primary_category'][LANGUAGE_NONE][0]['value'];
-    $editid = ($editid ? $editid : 0);
+    $editid=0;
+    $editid_new = $form_state['input']['field_primary_category'][LANGUAGE_NONE][0]['value'];
+     if(is_numeric($editid_new))
+    {
+        $editid=$editid_new;
+    }
+
     drupal_add_js('jQuery(document).ready(function() {
         var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
         if(rows==0){
