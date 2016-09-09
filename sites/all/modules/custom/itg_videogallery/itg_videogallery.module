@@ -168,6 +168,8 @@ function itg_videogallery_custom_submit($form, &$form_state) {
   $node_id = $form_state['values']['nid'];
   foreach ($form_state['values']['field_dailymotion_playlist'][LANGUAGE_NONE] as $playlist_term) {
     $playlist_name[] = $playlist_term['name'];
+//    $term_load = taxonomy_term_load($playlist_term['tid']);
+//    $playlist_name[] = $term_load->name;
   }
   $video_fid = $form_state['values']['field_upload_video'][LANGUAGE_NONE][0]['fid'];
   if ($video_fid != '' && is_numeric($video_fid)) {
