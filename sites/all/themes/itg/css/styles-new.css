@@ -747,52 +747,52 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: block;
 }
 
-.view-personalization-saved-content .views-table {
+.view-personalization-my-content .views-table {
   width: 100%;
   max-width: 860px;
   border-collapse: collapse;
   border-radius: 5px;
   margin: 0 auto;
 }
-.view-personalization-saved-content .views-table th {
+.view-personalization-my-content .views-table th {
   background-color: #1a3c8d;
   color: #fff;
   border-top: 1px solid #e0e0e0;
 }
-.view-personalization-saved-content .views-table th:first-child {
+.view-personalization-my-content .views-table th:first-child {
   border-radius: 5px 0 0 0;
   border-left: 1px solid #e0e0e0;
   min-width: 300px;
   text-align: left;
   text-indent: 40px;
 }
-.view-personalization-saved-content .views-table th:last-child {
+.view-personalization-my-content .views-table th:last-child {
   border-radius: 0 5px 0 0;
   border-right: 1px solid #e0e0e0;
 }
-.view-personalization-saved-content .views-table td {
+.view-personalization-my-content .views-table td {
   border: 1px solid #e0e0e0;
   text-align: center;
 }
-.view-personalization-saved-content .views-table td:first-child {
+.view-personalization-my-content .views-table td:first-child {
   text-align: left;
 }
-.view-personalization-saved-content .views-table th, .view-personalization-saved-content .views-table td {
+.view-personalization-my-content .views-table th, .view-personalization-my-content .views-table td {
   padding: 10px;
   max-width: 300px;
   font: 300 16px/22px Roboto;
   min-width: 120px;
 }
-.view-personalization-saved-content .item-list ul.pager {
+.view-personalization-my-content .item-list ul.pager {
   margin: 10px 0;
   list-style-type: none;
   text-align: center;
 }
-.view-personalization-saved-content .item-list ul.pager li {
+.view-personalization-my-content .item-list ul.pager li {
   display: inline-block;
   vertical-align: top;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-current {
+.view-personalization-my-content .item-list ul.pager li.pager-current {
   height: 25px;
   width: 25px;
   line-height: 25px;
@@ -801,7 +801,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border-radius: 50%;
   font-family: "Roboto", sans-serif;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-item a {
+.view-personalization-my-content .item-list ul.pager li.pager-item a {
   display: block;
   height: 25px;
   width: 25px;
@@ -811,16 +811,16 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #323232;
   font-family: "Roboto", sans-serif;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-item a:hover {
+.view-personalization-my-content .item-list ul.pager li.pager-item a:hover {
   background-color: #337ab7;
   color: #fff;
   border-radius: 50%;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-next a, .view-personalization-saved-content .item-list ul.pager li.pager-last a, .view-personalization-saved-content .item-list ul.pager li.pager-first a, .view-personalization-saved-content .item-list ul.pager li.pager-previous a {
+.view-personalization-my-content .item-list ul.pager li.pager-next a, .view-personalization-my-content .item-list ul.pager li.pager-last a, .view-personalization-my-content .item-list ul.pager li.pager-first a, .view-personalization-my-content .item-list ul.pager li.pager-previous a {
   color: #323232;
   line-height: 25px;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-next.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-next.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-last.last {
+.view-personalization-my-content .item-list ul.pager li.pager-next.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-next.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-last.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-last.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-first.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-first.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-previous.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-previous.pager-last.last {
   display: none;
 }
 
