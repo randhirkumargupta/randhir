@@ -93,7 +93,7 @@ function features_for_survey_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Meta Tags',
+    'label' => 'SEO Meta Tags',
     'weight' => '6',
     'children' => array(
       0 => 'metatags',
@@ -101,7 +101,7 @@ function features_for_survey_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Meta Tags',
+      'label' => 'SEO Meta Tags',
       'instance_settings' => array(
         'required_fields' => 0,
         'id' => 'metatags-wrapper',
@@ -222,8 +222,8 @@ function features_for_survey_field_group_info() {
   t('Basic Settings');
   t('Categorization');
   t('Date Settings');
-  t('Meta Tags');
   t('Related Content');
+  t('SEO Meta Tags');
 
   return $field_groups;
 }
