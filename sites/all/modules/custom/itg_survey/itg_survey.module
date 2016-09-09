@@ -89,10 +89,11 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       // Form fields treatment
       $form['title']['#title'] = 'Survey Title';
       $form['title']['#description'] = '<p>' . t('Please enter survey title.') . '</p>';
+      unset($form['field_supp_publish'][LANGUAGE_NONE]['#title']);
       
       if(is_numeric(arg(1)) && arg(2) == 'edit') {
         $form['actions']['view_survey_result'] = array(
-          '#markup' => l(t('View Survey Result'), 'survey-result/'.arg(1), array('attributes' => array('class' => 'button', 'target'=>'_blank'))),
+          '#markup' => l(t('View Survey Result'), 'survey-result/'.arg(1), array('attributes' => array('class' => 'survey-view-result', 'target'=>'_blank'))),
           '#weight' => 20,
           '#value' => t('View Survey Result'),
         );
