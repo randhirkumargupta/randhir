@@ -24,28 +24,19 @@ jQuery(document).ready(function () {
         }        
         
         switch (ctype) {
-            case 'story':
-                jQuery('.form-item-title label').html('Story Title <span class="form-required" title="This field is required.">*</span>');
-                jQuery('.form-item-field-user-message-und-0-value label').html('Story Body <span class="form-required" title="This field is required.">*</span>');
+            case 'story':                
                 jQuery('.form-field-name-field-user-message').show();
                 break;
-            case 'blog':
-                jQuery('.form-item-title label').html('Title <span class="form-required" title="This field is required.">*</span>');
-                jQuery('.form-item-field-user-message-und-0-value label').html('Description <span class="form-required" title="This field is required.">*</span>');
+            case 'blog':                
                 jQuery('.form-field-name-field-user-message').show();
                 break;
-            case 'photogallery':
-                jQuery('.form-item-title label').html('Photo Title <span class="form-required" title="This field is required.">*</span>');                
+            case 'photogallery':                
                 jQuery('.form-field-name-field-user-message').hide();
                 break;
-            case 'recipe':
-                jQuery('.form-item-title label').html('Title <span class="form-required" title="This field is required.">*</span>');
-                jQuery('.form-item-field-user-message-und-0-value label').html('Description <span class="form-required" title="This field is required.">*</span>');
+            case 'recipe':                
                 jQuery('.form-field-name-field-user-message').show();
                 break;
-            case 'videogallery':
-                jQuery('.form-item-title label').html('Video Title <span class="form-required" title="This field is required.">*</span>');
-                jQuery('.form-item-field-user-message-und-0-value label').html('Video Description <span class="form-required" title="This field is required.">*</span>');                
+            case 'videogallery':                
                 jQuery('.form-field-name-field-user-message').show();
         }
         
