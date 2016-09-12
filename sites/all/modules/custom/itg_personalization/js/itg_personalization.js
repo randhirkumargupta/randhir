@@ -38,6 +38,9 @@ jQuery(document).ready(function () {
                 break;
             case 'videogallery':                
                 jQuery('.form-field-name-field-user-message').show();
+                break;
+            default:
+                jQuery('.form-field-name-field-user-message').hide();
         }
         
     });
