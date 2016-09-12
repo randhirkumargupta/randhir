@@ -6880,3 +6880,76 @@ div.node #comments h2 {
   margin: 18px 0 0 10px;
   height: 30px;
 }
+
+/* CSS For Homepage Poll widget */
+.home_page_poll_widget_block .poll-data {
+  max-width: 370px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+.home_page_poll_widget_block .poll-data .poll-banner-image {
+  max-width: 100%;
+  max-height: 208px;
+  height: 208px;
+  margin: 0;
+}
+.home_page_poll_widget_block .poll-data .poll-banner-image img {
+  width: 100%;
+  height: 208px;
+}
+.home_page_poll_widget_block .poll-data .active-poll-title {
+  background-color: #000;
+  float: left;
+  width: 100%;
+  height: 68px;
+  margin-bottom: 11px;
+  overflow: hidden;
+}
+.home_page_poll_widget_block .poll-data .active-poll-title h2 {
+  color: #fff;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0;
+  padding: 10px;
+}
+.home_page_poll_widget_block .poll-data .active-poll-title .updated-msg {
+  display: none;
+}
+.home_page_poll_widget_block .poll-data form {
+  text-align: center;
+  padding-bottom: 20px;
+}
+.home_page_poll_widget_block .poll-data form label {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0;
+}
+.home_page_poll_widget_block .poll-data form .form-radios .form-item {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px;
+}
+.home_page_poll_widget_block .poll-data form .form-radios .form-item .form-radio {
+  float: left;
+  margin: 3px 2px 0 0;
+}
+.home_page_poll_widget_block .poll-data .poll-replace-id .form-submit {
+  width: 100px;
+  height: 36px;
+  background-color: #ccc;
+  border: none;
+  width: 100px;
+  height: 36px;
+  font-weight: 500;
+  font-family: Roboto;
+  margin-top: 20px;
+  font-size: 500;
+  color: #323232;
+}
+
+.home_page_poll_widget_block .widget-settings {
+  position: absolute;
+  z-index: 99;
+}
