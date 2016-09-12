@@ -869,3 +869,16 @@
     border-left: none;
   }
 }
+@media only screen and (min-width: 640px) {
+  /*CSS Start Anchor listing detail page*/
+  #block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
+    float: left;
+    width: 50%;
+  }
+  #block-views-anchor-landing-page-block .anchor-right {
+    padding-left: 15px;
+    padding-top: 0px;
+  }
+
+  /*CSS End Anchor listing detail page*/
+}

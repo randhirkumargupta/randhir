@@ -4991,7 +4991,6 @@ footer .footer-copyright {
   line-height: 40px;
   color: #ac0000;
   top: -39px;
-  box-shadow: 0px 0px 2px #ccc;
   text-align: center;
   font-size: 28px;
 }
@@ -5000,7 +4999,6 @@ footer .footer-copyright {
   right: 0;
   background: #a00606;
   z-index: 9;
-  box-shadow: 2px 3px 3px #ccc;
   display: none;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li a {
