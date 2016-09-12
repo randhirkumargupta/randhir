@@ -788,7 +788,7 @@
     margin-bottom: 0px;
   }
   #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li i {
-    float: left;
+    float: none;
   }
   #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li:nth-child(2) {
     border-left: 1px solid #eff94e;

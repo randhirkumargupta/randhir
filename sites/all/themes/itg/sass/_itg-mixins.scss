@@ -366,7 +366,7 @@ $root-font-size: 16px;
      @media screen and (max-width: 768px) {
         .photo-list{
             white-space: nowrap;
-            overflow: scroll;
+            overflow-x: scroll;
             li{
                 width: 144px;
                 @include display-inline;

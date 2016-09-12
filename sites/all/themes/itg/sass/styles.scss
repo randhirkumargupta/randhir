@@ -3697,10 +3697,7 @@ footer{
         span{
             font-weight: 700;
         }
-    }
-    .view-content{
-        @include photo-scroll;
-    }
+    }    
 }
 #block-views-so-sorry-the-remix{
     .title{
@@ -3718,6 +3715,11 @@ footer{
 }
 #block-views-so-sorry-most-watched{
     margin-top: 50px;
+    .view-so-sorry{
+        .view-content{
+            @include photo-scroll;
+        }
+    }
 }
 .view-display-id-so_sorry_page{
     margin: -15px;
