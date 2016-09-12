@@ -37,6 +37,7 @@ features[field_instance][] = node-ads_management-field_ads_template_variants
 features[node][] = ads_management
 features[taxonomy][] = ad_template
 features[taxonomy][] = ads_content
+features[taxonomy][] = ads_section_selection
 features[user_permission][] = create ads_management content
 features[user_permission][] = delete any ads_management content
 features[user_permission][] = delete own ads_management content

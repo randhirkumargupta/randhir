@@ -329,7 +329,8 @@ function alter_ad_submit_status_message(&$form, $form_state) {
  * {@inheritdoc}
  */
 function itg_ads_node_validate($node, $form, &$form_state) {
-
+     $current_date = date("Y-m-d H:i:s");
+     $current_time = strtotime($current_date);
     if ($node->type == 'ads_management') {
 
         $template = $node->field_ads_template_selection[LANGUAGE_NONE][0]['value'];
@@ -348,8 +349,11 @@ function itg_ads_node_validate($node, $form, &$form_state) {
         //check on date values
         $start_date = strtotime($form_state['values']['field_ads_start_date'][LANGUAGE_NONE][0]['value']);
         $end_date = strtotime($form_state['values']['field_ads_end_date'][LANGUAGE_NONE][0]['value']);
-        if ($end_date < $start_date) {
+        if ($end_date < $start_date ) {
             form_set_error('field_ads_end_date', 'End date must be greater than or equal to Start date.');
+        }
+        if ($end_date < $current_time ) {
+            form_set_error('field_ads_end_date', 'End date must be greater than or equal to current date.');
         }
     }
 }

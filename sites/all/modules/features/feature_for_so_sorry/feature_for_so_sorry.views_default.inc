@@ -711,7 +711,7 @@ function feature_for_so_sorry_views_default_views() {
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid']['field'] = 'tid';
   $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '466',
+    0 => '486',
   );
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
   /* Filter criterion: Content: Published */
@@ -1309,7 +1309,7 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['filters']['field_story_category_tid']['value'] = array(
-    0 => '466',
+    0 => '486',
   );
   $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
 
@@ -1409,7 +1409,7 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid']['field'] = 'tid';
   $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '466',
+    0 => '486',
   );
   $handler->display->display_options['filters']['tid']['group'] = 1;
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
