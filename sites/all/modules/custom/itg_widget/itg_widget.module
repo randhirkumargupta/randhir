@@ -430,6 +430,11 @@ function itg_widget_block_info() {
   $blocks['anchor_langing_page_menu'] = array(
       'info' => t('Anchor landing page menu'),
   );
+  $blocks['home_page_poll_widget_block'] = array(
+    'info' => t('Home Page Poll Widget'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -680,6 +685,10 @@ function itg_widget_block_view($delta = '') {
     // Top takes videos ordering reordering widget case
     case 'anchor_langing_page_menu':
       $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
+      break;
+    case 'home_page_poll_widget_block':
+      $selected_poll_widget = get_homepage_current_poll_widget('poll','poll_widget');  
+      $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
       break;
   }
   return $block;
@@ -1527,4 +1536,62 @@ function itg_widget_so_sorry_content_nid($title) {
 
     drupal_json_output($options);
   }
+}
+
+/*
+ * This will return selected poll for widget
+ */
+
+function get_homepage_current_poll_widget($content_type,$widget_name) {
+    $nodes_already = db_select('itg_widget_order', 'iwo')
+      ->condition('iwo.content_type', $content_type)
+      ->condition('iwo.widget', $widget_name)
+      ->fields('iwo', array('nid'))
+      ->execute()->fetch();
+    return $nodes_already->nid;
+    
+}
+
+/**
+ * This mentod will return a poll widget for against poll nid, used in home page widget 
+ * @param type $nid
+ */
+function itg_poll_home_page_polls_select($nid) {
+
+  $node = node_load($nid);
+  $poll_banner_image = '';
+  if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
+    $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
+  }
+  else {
+    $poll_banner_image = '';
+  }
+
+  $poll_image_exist_class = '';
+
+  foreach ($node->field_poll_answer['und'] as $row) {
+    $item_id[] = $row['value']; // fieldcollection id
+  }
+  // instant or after complete
+
+  $fieldcollect = entity_load('field_collection_item', $item_id);
+  if (is_array($fieldcollect) && count($fieldcollect) > 0) {
+    $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
+    $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
+    if (isset($poll_answer_image) && $poll_answer_image > 0) {
+      $poll_image_exist_class = 'poll-option-image';
+    }
+    else {
+      $poll_image_exist_class = '';
+    }
+  }
+
+
+  $polls_info['poll_banner_image'] = $poll_banner_image;
+  $polls_info['nid'] = $nid;
+  $polls_info['title'] = $node->title;
+  $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
+  $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
+
+  return theme('itg_poll_homepage_forms', array('data' => $polls_info));
 }
