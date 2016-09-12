@@ -183,6 +183,11 @@ function features_for_story_field_default_field_bases() {
         'podcast' => 'podcast',
         'reporter' => 'reporter',
         'print_team_integration' => 'print Team',
+        'survey' => 'survey',
+        'cooking-tips' => 'cooking-tips',
+        'food-news' => 'food-news',
+        'quiz' => 'quiz',
+        'ugc' => 'ugc',
       ),
       'allowed_values_function' => '',
     ),
@@ -435,7 +440,8 @@ function features_for_story_field_default_field_bases() {
         'comment' => 'Comment',
         'medium_style_comment' => 'Medium Style Comment',
         'display_lock' => 'Display Lock',
-        'syndication' => 'Syndication',
+        'set_as_featured' => 'Set As Featured',
+        'tv' => 'Associate Tv',
       ),
       'allowed_values_function' => '',
     ),
@@ -580,8 +586,8 @@ function features_for_story_field_default_field_bases() {
       'cache_enabled' => 0,
       'granularity' => array(
         'day' => 'day',
-        'hour' => 0,
-        'minute' => 0,
+        'hour' => 'hour',
+        'minute' => 'minute',
         'month' => 'month',
         'second' => 0,
         'year' => 'year',
@@ -1569,6 +1575,31 @@ function features_for_story_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_story_tv_time'.
+  $field_bases['field_story_tv_time'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_tv_time',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_story_tweet'.
   $field_bases['field_story_tweet'] = array(
     'active' => 1,
@@ -1666,6 +1697,24 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_story_ugc_source_id'.
+  $field_bases['field_story_ugc_source_id'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_ugc_source_id',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
   );
 
   // Exported field_base: 'field_stroy_city'.

@@ -60,9 +60,9 @@ function itg_autosave_construct_nested_taxonomy_item_list(&$tree, &$item_list) {
   global $base_url;
   foreach (array_reverse($tree) as $term) {
     $other_details = itg_autosave_tree_detail($term->tid);
-    $output = '<div class="term-wrapper"><div class="term-detail cmd-heading"><i class="fa fa-minus-square-o" aria-hidden="true"></i><i class="fa fa-plus-square-o" aria-hidden="true"></i>' . $term->name . '</div>';
+    $output = '<div class="term-wrapper"><div class="term-detail cmd-heading"><i class="fa fa-minus-square-o" aria-hidden="true"></i><i class="fa fa-plus-square-o" aria-hidden="true"></i><p>' . $term->name . '</p></div>';
     $output .= '<div class="term-detail" id ="sef-url-' . $term->tid . '">'. $base_url . '/' . $other_details->sef_url;    
-    $output .= '<button class="itg-clipboard" data-clipboard-target="#sef-url-' . $term->tid . '">Copy</button>';    
+    $output .= '<span title="Copy to clipboard" class="itg-clipboard" data-clipboard-target="#sef-url-' . $term->tid . '"><i class="fa fa-clipboard" aria-hidden="true"></i></span>';    
     $output .= '</div>';
     $output .= '<div class="term-detail">' . format_date($other_details->created, 'custom_date_d_m_y_') . '</div>';
     $output .= '<div class="term-detail">' . format_date($other_details->changed, 'custom_date_d_m_y_') . '</div>';

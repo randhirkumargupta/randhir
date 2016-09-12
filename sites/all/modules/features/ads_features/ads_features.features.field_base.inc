@@ -104,10 +104,7 @@ function ads_features_field_default_field_bases() {
     'locked' => 0,
     'module' => 'list',
     'settings' => array(
-      'allowed_values' => array(
-        '200_200' => '200*200',
-        '400_400' => '400*400',
-      ),
+      'allowed_values' => array(),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
@@ -134,7 +131,7 @@ function ads_features_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         0 => array(
-          'vocabulary' => 'category_management',
+          'vocabulary' => 'ads_section_selection',
           'parent' => 0,
         ),
       ),

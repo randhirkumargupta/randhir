@@ -11,19 +11,20 @@ var firstDate = 1;
 var fixedDate = '';
 var maxLen = 0;
 var astroFlag = 0;
+var sDateFlag = 1;
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
-
             jQuery.fn.mobile_astro_custom_js = function () {
+                $("#widget-ajex-loader").css("display", "block");
                 jQuery('#edit-field-service-content-und-add-more').mousedown();
             };
 
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
                 jQuery(".field-type-text.field-name-field-client-short-description.field-widget-text-textfield.form-wrapper").hide();
                 jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
-                jQuery("input[id*='field-service-content-date-und-0-value']").hide();
+                jQuery("[id*='field-service-content-date']").hide();
                 astroFlag = 1;
             }
             if (Drupal.settings.itg_mobile_services.settings.service_content_first_row_hide) {
@@ -37,10 +38,15 @@ var astroFlag = 0;
             jQuery('.form-field-name-field-service-content .form-type-date-popup input').addClass('itg-disabled');
             jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').removeClass('itg-disabled');
             jQuery('#edit-field-service-frequency-und input').click(function () {
-                if ($(this).val() == 2) { // weekly
+                if ($(this).val() == 1) { // day
+                    jQuery('.custom-content-submit').removeAttr('disabled');
+                } else if ($(this).val() == 2) { // weekly
                     jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
+                    jQuery('.custom-content-submit').attr('disabled', 'disabled');
+
                 } else if ($(this).val() == 3) { // monthly
                     jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
+                    jQuery('.custom-content-submit').attr('disabled', 'disabled');
                 }
             });
             jQuery('#content-enable-button').hide();
@@ -80,7 +86,7 @@ var astroFlag = 0;
                     } else {
                         jQuery('#content-enable-button').show();
                     }
-                    
+
                     session++;
                 } else {
                     jQuery('#edit-field-service-frequency-date').hide();
@@ -90,6 +96,11 @@ var astroFlag = 0;
                 // hide defaut 
                 jQuery("#edit-field-service-frequency-date-und-0-show-todate").prop('checked', true);
                 jQuery('#edit-field-service-frequency-date').hide();
+            }
+
+            var description_message = jQuery('textarea#edit-field-service-content-und-12-field-story-expert-description-und-0-value--2').html();
+            if (description_message) {
+                $("#widget-ajex-loader").css("display", "none");
             }
 
             jQuery.fn.content_create_custom_js = function () {
@@ -169,8 +180,15 @@ var astroFlag = 0;
                 }
                 if (selectedVal > 1) {
                     jQuery('#edit-field-service-frequency-date').show();
-                    $('#edit-field-service-content').show();
+                    jQuery('input[type="submit"]').attr('disabled', 'disabled');
+                } else if (selectedVal == 1) {
+                    jQuery('input[type="submit"]').removeAttr('disabled');
                 }
+            }
+
+            var service_asso = jQuery("#edit-field-service-association-title-und option:selected").val();
+            if (service_asso != '_none' && service_asso > 1) {
+                $('#edit-field-service-content').show();
             }
 
             jQuery('#edit-field-service-frequency-und input[type="radio"]').click(function () {
@@ -181,9 +199,14 @@ var astroFlag = 0;
                     jQuery('#edit-field-service-frequency-date').hide();
                     jQuery('#edit-field-service-content-und-0-remove-button').hide();
                     jQuery('#edit-field-service-content-und-add-more').hide();
-                    jQuery("#edit-field-service-content tbody tr:first").css("display", "block");
+
                     var today_date = custom_today_date();
-                    jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                    if (astroFlag == 1) {
+                        jQuery("#edit-field-service-content tbody tr:first").css("display", "hide");
+                    } else {
+                        jQuery("#edit-field-service-content tbody tr:first").css("display", "block");
+                        jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                    }
                     jQuery('input[name="field_service_frequency_date[und][0][value][date]"]').val(today_date);
                     jQuery('input[name="field_service_frequency_date[und][0][value2][date]"]').val(today_date);
                 } else if ($(this).attr("value") == "2") {
@@ -310,7 +333,10 @@ var astroFlag = 0;
                 jQuery('#edit-field-service-content-add-more-number').val(diff);
             }
 
+
             if (genrateFlag == 1) {
+
+
                 jQuery(document).on("click", "#content-enable-button", function (event) {
                     event.preventDefault();
                     var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
@@ -334,6 +360,7 @@ var astroFlag = 0;
                         return false;
                     }
 
+
                     if (genrateFlag == 1) {
                         jQuery("#edit-field-service-association-title-und, #edit-field-footer-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").addClass("itg-disabled");
                         jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');
@@ -347,10 +374,13 @@ var astroFlag = 0;
                             //lots more code
                         }, 3000);
                         genrateFlag++;
+
                     }
+
                 });
             }
 
+            jQuery("input[id*='field-client-short-description-und']").attr("placeholder", "Title");
             jQuery('#edit-field-service-content textarea').attr("placeholder", "Content Text");
 
             function set_dates() {
@@ -386,6 +416,7 @@ var astroFlag = 0;
             }
 
             if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
+                jQuery('.custom-content-submit').removeAttr('disabled');
                 var content_edit_mode = Drupal.settings.itg_mobile_services.settings.service_content_edit_mode;
                 jQuery('#field-service-content-add-more-wrapper').show();
                 jQuery('#edit-field-service-frequency').show();
@@ -429,6 +460,13 @@ var astroFlag = 0;
                 }
             });
 
+            jQuery('#content-enable-button').removeAttr('disabled');
+            jQuery('#reset-date-button').removeAttr('disabled');
+            var frequency_from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
+            var frequency_end_date = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
+            if (frequency_from_date != '' && frequency_end_date != '') {
+                jQuery('.mobile-content-submit').removeAttr('disabled');
+            }
 
             jQuery('.field-name-field-story-expert-description .form-textarea').on('keyup', function () {
                 if (Drupal.settings.itg_mobile_services.settings.countchar) {
@@ -442,6 +480,7 @@ var astroFlag = 0;
                 remain = maxLen - parseInt(tlength);
                 jQuery('#custom_service_content_' + string[5]).text(remain + ' characters remaining out of ' + maxLen);
             });
+
         }
     }
 })(jQuery);
@@ -451,4 +490,3 @@ var astroFlag = 0;
 function days_in_month(month, year) {
     return new Date(year, month, 0).getDate();
 }
-

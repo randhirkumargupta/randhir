@@ -13,5 +13,5 @@
   <span class="target-link" data-target-id="SocialMedia"><?php print t('Social Media'); ?></span>
   <span class="target-link" data-target-id="RecipeSyndication"><?php print t('Syndication'); ?></span>
   <span class="target-link" data-target-id="RecipeCategory"><?php print t('Recipe Category'); ?></span>
-  <span class="target-link" data-target-id="edit-metatags"><?php print t('Meta Tags'); ?></span>
+  <span class="target-link" data-target-id="title-metatags"><?php echo t('Meta Details');?></span>
 </div>

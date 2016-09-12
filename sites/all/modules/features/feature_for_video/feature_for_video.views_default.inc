@@ -844,7 +844,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Long Description */
+  /* Field: Field: Expert description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -883,6 +883,17 @@ allowfullscreen></iframe>';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: File Usage: File */
+  $handler->display->display_options['relationships']['node_to_file']['id'] = 'node_to_file';
+  $handler->display->display_options['relationships']['node_to_file']['table'] = 'file_usage';
+  $handler->display->display_options['relationships']['node_to_file']['field'] = 'node_to_file';
+  /* Relationship: Flags: my_saved_content */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'my_saved_content';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -920,7 +931,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Long Description */
+  /* Field: Field: Expert description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -937,14 +948,23 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['timestamp']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['timestamp']['date_format'] = 'itg';
   $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
+  /* Field: Flags: Flag link */
+  $handler->display->display_options['fields']['ops']['id'] = 'ops';
+  $handler->display->display_options['fields']['ops']['table'] = 'flagging';
+  $handler->display->display_options['fields']['ops']['field'] = 'ops';
+  $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['fields']['ops']['label'] = '';
+  $handler->display->display_options['fields']['ops']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['ops']['link_type'] = 'normal';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="container">
-    
-<div class="row video-landing-header">
+ <div class ="video-landing-header">
+<div class="row">
     <div class="col-md-12">
     <h2>[title]</h2>
 </div>
@@ -953,7 +973,7 @@ allowfullscreen></iframe>';
         <div class="social-likes">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> 585</a></li>
-                <li><a href="#"><i class="fa fa-clock-o"></i> Watch Later</a></li>
+                <li>[ops]</li>
                 <li><a href="#"><i class="fa fa-facebook"></i> Share</a></li>
                 <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
                 <li><a href="#"><i class="fa fa-envelope"></i> Email</a></li>
@@ -968,7 +988,8 @@ allowfullscreen></iframe>';
 <div class="ads"></div>
     </div>
 </div>
-    </div>';
+    </div>
+</div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
 
   /* Display: video landing page header scroll */
@@ -1045,7 +1066,9 @@ allowfullscreen></iframe>';
   $handler->display->display_options['arguments']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['code'] = 'return $_GET[\'category\'];';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['code'] = 'if(isset($_GET[\'category\']) && isset($_GET[\'sid\'])){
+return $_GET[\'category\'];
+}';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary_options']['items_per_page'] = '25';

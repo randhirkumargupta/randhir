@@ -62,7 +62,8 @@ function features_for_quiz_field_group_info() {
       3 => 'field_quiz_scoring_type',
       4 => 'field_quiz_type',
       5 => 'field_quiz_winners',
-      6 => 'title',
+      6 => 'field_story_reporter',
+      7 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -127,7 +128,7 @@ function features_for_quiz_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Meta Tags',
+    'label' => 'SEO Meta Tags',
     'weight' => '5',
     'children' => array(
       0 => 'metatags',
@@ -135,7 +136,7 @@ function features_for_quiz_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Meta Tags',
+      'label' => 'SEO Meta Tags',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => 'tab-quiz-metatags',
@@ -190,7 +191,7 @@ function features_for_quiz_field_group_info() {
   t('Basic Settings');
   t('Categorization');
   t('Date Settings');
-  t('Meta Tags');
+  t('SEO Meta Tags');
 
   return $field_groups;
 }

@@ -146,7 +146,8 @@ function itg_loyalty_reward_form_after_build($form, &$form_state) {
 
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
+  unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
   return $form;
 }
 
@@ -267,4 +268,26 @@ function itg_loyalty_reward_product_expiry_notification_callback() {
       }
     }
   }
+}
+
+/**
+ * Get reward points details of a user
+ * @param type $uid
+ * @return array
+ */
+function itg_loyalty_reward_user_details($uid) {
+  $user_details = array(
+      'total_earned_so_far' => 500,
+      'redeemed_points' => 300,
+      'lrp_content_share' => 432,
+      'lrp_content_like' => 233,
+      'lrp_content_visit' => 878,
+      'lrp_follow_itg_on_social_sites' => 523,
+      'lrp_newsletter_subscription' => 100,
+      'lrp_ugc_contribution' => 150,
+      'lrp_online_registration_for_any_events' => 645,
+      'lrp_participation_in_poll_campaign_survey' => 123,
+      'lrp_refer_a_friend' => 42,
+  );
+  return $user_details;
 }

@@ -18,6 +18,12 @@ Drupal.behaviors.my_custom_behavior = {
   attach: function(context, settings) {
 
     // Place your code here.
+    // Make unflag link unclickable
+    if ($('a').hasClass('unflag-action')) {
+        $('.page-node .unflag-action').attr('title', '');
+        $('.page-node .unflag-action').css('pointer-events', 'none');
+    }
+    
     $('input.rating').hover(function(){
     $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
     $(this).parent().nextAll().removeClass('rating-hover');
@@ -30,110 +36,6 @@ Drupal.behaviors.my_custom_behavior = {
     $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
     $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
   });
-  
-  $('.survey-submit, .survey-submit-skip').mousedown(function(){
-    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
-    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
-    var textValue = $(this).parents('.question-container').find('.form-text').val();
-    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
-    var surveyTaken = $('body').find('input[name="survey_taken"]').val();
-    
-    if(checkValue && skipValue == 'no' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    } else if(skipValue == 'yes' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    }
-    
-    if(radioValue && skipValue == 'no' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    } else if(skipValue == 'yes' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    }
-    
-    if(textValue  && skipValue == 'no' && textValue != 'undefined' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    } else if(skipValue == 'yes' && surveyTaken == 'no'){
-      $(this).ajaxSuccess(function(){
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    }
-    
-  });
-  
-  var loader = '<div class="ajax-loader"><img src="sites/all/themes/rubik/images/loader.svg" alt=""/></div>';
-  
-  $('#itg-survey-survey-form .button-yes').mousedown(function(){
-    var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
-    var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
-    var textValue = $(this).parents('.question-container').find('.form-text').val();
-    var skipValue = $(this).parents('.question-container').find('.question-skip').val();
-    
-    if(checkValue && skipValue == 'no'){
-      $('.question-container').hide();
-      $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-      
-    } else if(skipValue == 'yes'){
-     $('.question-container').hide();
-     $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    }
-    
-    if(radioValue && skipValue == 'no'){
-      $('.question-container').hide();
-      $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    } else if(skipValue == 'yes'){
-     $('.question-container').hide();
-     $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    }
-    
-    if(textValue  && skipValue == 'no' && textValue != 'undefined'){
-      $('.question-container').hide();
-      $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    } else if(skipValue == 'yes'){
-      $('.question-container').hide();
-      $('body').find('.ajax-loader').remove();
-      $(this).parents('.block-content').append(loader);
-      $(this).ajaxSuccess(function(){
-        $('body').find('.ajax-loader').remove();
-      });
-    }
-  });
-  
   
   $('.image-widget').each(function () {
       var filename = $(this).find('.file').html();
@@ -152,15 +54,14 @@ Drupal.behaviors.my_custom_behavior = {
     
     headerMain();
     function headerMain(){
+        
         //var logotxt = $('.container.header-logo').html();
-        $('.container.header-logo').prependTo('#block-itg-layout-manager-header-block');
+        $('.container.header-logo').prependTo('.itg-logo-container');
         $('.search-icon').click(function(){
-            $('.globle-search').css('width','255px');
+            $(this).parents('div').find('.globle-search').css('width','255px');
         });
         
-        $('.mobile-nav').click(function(){
-            $('.navigation').stop().slideToggle();
-        });
+        
         $(document).on('click', function(){            
             $('.globle-search').css('width','0px');
         });
@@ -181,17 +82,22 @@ Drupal.behaviors.my_custom_behavior = {
     $('.tab-data').find('ul.itg-listing').css('padding-top','0');
 
      //search page result
+     var winWidth;
+    $(".view-front-end-global-search").find("#edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper, .views-submit-button, .views-reset-button").wrapAll("<div class='searh-all-filters'></div>");
     $('.itg-search-list').each(function(){
         $(this).find('.search-pic').each(function(){
             var current = $(this);        
             if(current.children().length == 0){          
               $(current).addClass("hide"); 
             }
-        });        
+        });      
+        winWidth = $(window).width();
         var currentSocial = $(this).children('.social-share');
-        var currentInfo = $(this).children(".search-detail").children(".other-info");
-        console.log(currentSocial);
-        currentSocial.appendTo(currentInfo);        
+        var currentInfo = $(this).children(".search-detail").children(".other-info"); 
+        currentSocial.appendTo(currentInfo);
+        if(winWidth < 768){
+            $(currentInfo).appendTo(this);
+        }
     });
         
     //pagination
@@ -235,14 +141,33 @@ jQuery(document).ready(function () {
 
             jQuery(this).stop().animate({scrollTop: h}, 1000);
         }
-        else
-        {
-//            jQuery(this).stop();
-        }
     });
     
-            //header menu add icon for mobile
+//header menu add icon for mobile
 jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+    var navValue = jQuery('.navigation .menu li').length;
+    if (navValue > 13) {
+        jQuery('.navigation .menu li').eq(12).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-ellipsis-h"></i></li>');
+        var count_li = 0;
+        var i = 1;
+        jQuery('.navigation .menu li').each(function () {
+            count_li++;
+            console.log(count_li);
+            if (count_li > 14 && i == 1) {
+                jQuery('.navigation .container').append('<ul id="newlist"></ul>');
+                jQuery('#newlist').append(jQuery(this).nextUntil(jQuery(this).last()).andSelf());
+                i++;
+            }
+        });
+    }
+    
+    jQuery(document).on('click','.all-menu', function(){
+        jQuery('#newlist').slideToggle();
+    });
+    jQuery('.mobile-nav').click(function(){              
+        jQuery('.navigation').slideToggle();
+    });
+    
 //ITG footer
 footerMain();
     function footerMain(){
@@ -271,7 +196,6 @@ footerMain();
         }
     });
     }
-
 });
 
 
@@ -288,7 +212,19 @@ jQuery(document).ready(function () {
             window.location.href = urldata;
         }
 
-    })
+    });
+    
+    jQuery(window).scroll(function () {
+      var winH = jQuery(window).height() + jQuery('#footer').height() + 40;
+      var docH = jQuery(document).height();
+      var targetH = docH - winH;
+      var scrollH = jQuery(window).scrollTop();
+      if(scrollH >= targetH) {
+        console.log(scrollH + "==" + targetH);
+           jQuery('.load-more').show();
+      }
+    });
+    
   });
 
 jQuery(window).load(function () {

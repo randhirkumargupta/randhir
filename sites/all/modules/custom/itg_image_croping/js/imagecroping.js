@@ -1,6 +1,3 @@
-/*
- * @file imagecroping.js
- */
 
 /*
  * @file imagecroping.js
@@ -21,9 +18,9 @@
             type: 'post',
             data: {'fid': imageid, 'field_name': fieldname},
             success: function(data) {
-                $.colorbox({html: "" + data + "",onComplete : function() { 
-       $(this).colorbox.resize(); 
-    }  });
+                $.colorbox({html: "" + data + "", onComplete: function() {
+                        $(this).colorbox.resize();
+                    }});
 
 
             },
@@ -36,7 +33,7 @@
 })(jQuery);
 function showimagerepopopu(iframeurl)
 {
-    jQuery.colorbox({href: iframeurl, iframe: true, width: "90%", height: "95%",fixed: true});
+    jQuery.colorbox({href: iframeurl, iframe: true, width: "90%", height: "95%", fixed: true});
 
 }
 

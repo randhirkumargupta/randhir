@@ -479,6 +479,48 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-photogallery-field_common_related_content'.
+  $field_instances['node-photogallery-field_common_related_content'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 54,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_common_related_content',
+    'label' => 'Related Content',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 54,
+    ),
+  );
+
   // Exported field_instance: 'node-photogallery-field_credit_name'.
   $field_instances['node-photogallery-field_credit_name'] = array(
     'bundle' => 'photogallery',
@@ -946,6 +988,49 @@ function photogallery_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 52,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-photogallery-field_primary_category_html_text'.
+  $field_instances['node-photogallery-field_primary_category_html_text'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 55,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html_text',
+    'label' => 'Primary category textarea',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 55,
     ),
   );
 
@@ -2465,6 +2550,8 @@ function photogallery_field_default_field_instances() {
   t('Posted by Twitter');
   t('Posted by facebook');
   t('Primary category html');
+  t('Primary category textarea');
+  t('Related Content');
   t('Section');
   t('Set As Featured');
   t('Small image');

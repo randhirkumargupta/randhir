@@ -30,6 +30,7 @@ function feature_for_ugc_user_default_permissions() {
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
+      'Front User' => 'Front User',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',

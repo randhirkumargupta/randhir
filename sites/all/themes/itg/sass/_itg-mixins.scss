@@ -62,10 +62,10 @@ $root-font-size: 16px;
    text-align:center;
   }
   @else if ($align == left) {
-   position: left;
+   text-align: left;
   }
   @else if ($align == right) {
-   position: right;
+   text-align: right;
   }
 }
 
@@ -323,6 +323,7 @@ $root-font-size: 16px;
 }
 
 @mixin social-share{
+    $break-mobile :768px;
     ul{
         @extend .list-none;
         li{
@@ -330,13 +331,18 @@ $root-font-size: 16px;
             padding-right: 8px;
             a{
                 background: #000;
-                width: 23px;
-                height: 23px;                        
+                width: 20px;
+                height: 20px;                       
                 border-radius: 100%;
                 display: block;
                 color: #fff;
                 text-align: center;
-                line-height: 23px;
+                line-height: 23px;                
+                @media screen and (min-width: $break-mobile) {
+                    width: 23px;
+                    height: 23px; 
+                    line-height: 25px;
+                }
                 &.share{
                     color:#d0d0d0;
                 }
@@ -355,4 +361,20 @@ $root-font-size: 16px;
             }
         }
     }
+}
+@mixin photo-scroll{
+     @media screen and (max-width: 768px) {
+        .photo-list{
+            white-space: nowrap;
+            overflow-x: scroll;
+            li{
+                width: 144px;
+                @include display-inline;
+                float: none;
+                a{
+                    white-space: pre-wrap;
+                }
+            }
+        }
+     }
 }

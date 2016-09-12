@@ -209,7 +209,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       $form['reset_date_button'] = array(
         '#type' => 'button',
-        '#weight' => 7,
+        '#weight' => 4,
         '#value' => t('Reset Date'),
         '#attributes' => array(
           'id' => 'reset-date-button',
@@ -228,13 +228,34 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       $form['#validate'][] = 'itg_mobile_association_validator';
       $form['#after_build'][] = 'itg_service_content_after_build';
+
+
+      foreach ($form['field_service_content'][LANGUAGE_NONE] as $key => $fieldcollection) {
+        if (is_numeric($key)) {
+          $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video'][LANGUAGE_NONE][0]['#upload_validators']['itg_custom_video_field_validate'] = array(1, 2);
+        }
+      }
+      $form['actions']['submit']['#attributes'] = array('class' => array('custom-content-submit mobile-content-submit'));
       $form['actions']['submit']['#submit'][] = 'itg_mobile_vas_service_content_submit';
+      $form['actions']['submit']['#submit'][] = 'itg_mobile_service_custom_submit';
       if (empty($_GET['destination'])) {
         $_GET['destination'] = 'service-content-listing';
       }
       break;
   }
   return $form;
+}
+
+/**
+ * Implements function for validate image
+ * @param array $field
+ * @return array
+ */
+function itg_custom_video_field_validate($field) {
+  $val = itg_video_check_exist_file($field->filename);
+  $field->destination = $val;
+  $errors = array();
+  return $errors;
 }
 
 /**
@@ -475,6 +496,17 @@ function itg_mobile_association_validator(&$form, &$form_state) {
       }
     }
   }
+
+  // field collection validation
+  foreach ($form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'] as $key => $filed_collection) {
+    $fids[] = $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['fid'];
+    $validate_thumb[$key] = $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['fid'];
+  }
+  $newfid = array_filter($fids);
+  $validate_thumbs = array_filter($validate_thumb);
+  if (empty($newfid)) {
+    //form_set_error('field_service_video', t('Upload video is required.'));
+  }
 }
 
 /**
@@ -590,7 +622,6 @@ function itg_service_association_after_build($form, &$form_state) {
  * @return array
  */
 function itg_service_content_after_build($form, &$form_state) {
-
   if (isset($form_state['values']['field_service_association_title'][LANGUAGE_NONE])) {
     if (is_array($form_state['values']['field_service_association_title'][LANGUAGE_NONE])) {
       $association_nid = isset($form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]) ? (int) $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0] : '';
@@ -757,7 +788,7 @@ function itg_mobile_content_custom_callback(&$form, &$form_state) {
       $commands[] = ajax_command_invoke('#edit-field-service-content-add-more-number', 'val', array('11'));
       $commands[] = ajax_command_invoke(NULL, 'mobile_astro_custom_js', array());
     }
-    else if ($_SESSION['field_astro_zodiac']) {
+    elseif ($_SESSION['field_astro_zodiac']) {
       unset($_SESSION['field_astro_zodiac']);
       $commands[] = ajax_command_invoke(NULL, 'mobile_astro_delete_js', array());
     }
@@ -1151,7 +1182,7 @@ function itg_mobile_services_get_service_list() {
   $query = db_select('node', 'node');
   $query->distinct();
   $query->fields('node', array('nid', 'title'));
-  
+
   $query->join('field_data_field_story_expiry_date', 'expiry_date', "node.nid= expiry_date.entity_id");
   if (empty($node_nid)) {
     $query->where("expiry_date.field_story_expiry_date_value >= CURDATE()");
@@ -1449,4 +1480,84 @@ function itg_mobile_services_cronapi($op, $job = NULL) {
     'file' => 'includes/itg_mobile_services.inc',
   );
   return $items;
+}
+
+/**
+ * Implements custom submit for move video on dailymotion.
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_mobile_service_custom_submit($form, &$form_state) {
+  $tags_value = 'mobile-vas';
+  $node_id = $form_state['values']['nid'];
+  $playlist_name = 'x4n76t';
+
+  foreach ($form_state['values']['field_service_content'][LANGUAGE_NONE] as $key => $fieldcollection) {
+    if (is_numeric($key)) {
+      $fid = $form_state['values']['field_service_content'][LANGUAGE_NONE][$key]['field_service_video'][LANGUAGE_NONE][0]['fid'];
+      //$thumb_fid = $form_state['values']['field_videogallery_video_upload'][LANGUAGE_NONE][$key]['field_video_thumbnail'][LANGUAGE_NONE][0]['fid'];
+      if ($fid != '' && is_numeric($fid)) {
+        $query = db_select('dailymotion_response_details', 'drd');
+        $query->fields('drd', array('fid', 'video_id'));
+        $query->condition('fid', $fid, '=');
+        $result_fid = $query->execute()->fetchAssoc();
+        if ($result_fid['fid'] == '') {
+          $new_fid_array[$key]['vid_fid'] = $fid;
+        }
+        else {
+          // Video uploaded on dailymotion
+          $result_video_fid .= $result_fid['video_id'] . ', ';
+          itg_videogallery_unlink_video_playlist($result_fid, $playlist_name, $tags_value);
+        }
+      }
+    }
+  }
+  if ($result_video_fid != '') {
+    $final_exist_video = trim($result_video_fid, ", ");
+    itg_videogallery_edit_dailymotion($final_exist_video, $playlist_name, $node_id);
+  }
+  $response_result = array();
+  if (isset($new_fid_array) && is_array($new_fid_array) && count($new_fid_array) > 0) {
+    foreach ($new_fid_array as $key => $value) {
+      if (is_numeric($key)) {
+        // Video not uploaded on dailymotion
+        $file_details = file_load($value['vid_fid']);
+        $real_path = drupal_realpath($file_details->uri);
+        $response = itg_videogallery_dailymotion($real_path, $file_details->uri, $value['vid_fid'], $tags_value, $node_id);
+        // Perform playlist and tags when new video create.
+        $response_result['video_id'] = $response['id'];
+        $response_result['fid'] = $response['fid'];
+        $nid = db_insert('dailymotion_response_details')
+            ->fields(array(
+              'title' => $response['title'],
+              'channel' => $response['channel'],
+              'fid' => $response['fid'],
+              'tags' => $response['tags'],
+              'video_id' => $response['id'],
+              'nid' => $node_id,
+              'upload_time' => REQUEST_TIME,
+              'video_duration' => $response['duration'],
+            ))
+            ->execute();
+        itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
+        itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_mobile_services_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'vas_service_content_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'vas-service-content-node-form',
+      'path' => drupal_get_path('module', 'itg_mobile_services') . '/templates',
+      'render element' => 'form',
+    ),
+  );
+  return $themes;
 }

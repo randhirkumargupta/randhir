@@ -221,7 +221,7 @@ function itg_poll_isCookies($nid) {
 
     $poll_array = explode('_', $_COOKIE['visitedPoll']);
 
-    if ($nid === $poll_array[1]) {
+    if ((int) $nid === (int) $poll_array[1]) {
       $is_cookies = 'yes';
     }
   }
@@ -435,7 +435,7 @@ function itg_poll_block_info() {
     'info' => t('poll Form Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-
+  
   return $blocks;
 }
 
@@ -450,7 +450,12 @@ function itg_poll_block_view($delta = '') {
     case 'poll_tab_form_block':
       $block['content'] = theme('itg_poll_tab_form_display_block', array('data' => $data));
       break;
+  
+    
   }
+  
+  
+  
 
   // Disable form tab from delete page
   if (arg(0) == 'node' && arg(2) == 'delete') {
@@ -459,6 +464,7 @@ function itg_poll_block_view($delta = '') {
 
   return $block;
 }
+
 
 /**
  * Implements hook_theme().
@@ -761,6 +767,7 @@ function itg_poll_menu() {
  * @return array
  */
 function itg_active_polls_page() {
+
   if (!isset($_GET['poll_index']) && empty($_GET['poll_index'])) {
     drupal_goto('itg_active_polls', array(
       'query' => array(
@@ -823,25 +830,7 @@ function itg_poll_form_new_ajax_submit($form, &$form_state) {
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
-/**
- * This mentod will return a poll widget for against poll nid, used in home page widget 
- * @param type $nid
- */
-function itg_poll_home_page_polls_select($nid) {
 
-  $node = node_load($nid);
-  $poll_banner_image = '';
-  if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
-    $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
-  }
-  else {
-    $poll_banner_image = '';
-  }
-
-  $polls_info['poll_banner_image'] = $poll_banner_image;
-  $polls_info['nid'] = $nid;
-  return theme('itg_poll_homepage_forms', array('data' => $polls_info));
-}
 
 /**
  * Implementation of hook_form().
@@ -877,19 +866,18 @@ function itg_poll_form_home_page($form, &$form_state, $nid) {
         $poll_answer[$key] = isset($poll_image) ? $poll_image : '';
       }
       else {
-        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<br /><span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
+        // $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) . '<br /><span class="poll-ans-caption">' . t($poll_caption_text) . '</span>' : '';
+        $poll_answer[$key] = isset($poll_answer_text) ? t($poll_answer_text) : '';
       }
     }
   }
 
-  $form["poll_title"] = array(
-    "#markup" => "<div class='poll-title-wrapper'><h2>" . t($node->title) . "</h2></div>",
-  );
-
-
-  $form["poll_updated"] = array(
-    "#markup" => "<div class='poll-updated-wrapper'>Updated " . date('M d Y H:i', $node->changed) . "</div>",
-  );
+//  $form["poll_title"] = array(
+//    "#markup" => "<div class='poll-title-wrapper'><h2>" . t($node->title) . "</h2></div>",
+//  );
+//  $form["poll_updated"] = array(
+//    "#markup" => "<div class='poll-updated-wrapper'>Updated " . date('M d Y H:i', $node->changed) . "</div>",
+//  );
 
 
   $form['pole_answer'] = array(
@@ -982,4 +970,20 @@ function itg_poll_form_home_page_ajax_submit($form, &$form_state) {
   $poll_answer = itg_poll_get_past_data($node_id);
   $commands[] = ajax_command_replace('.poll-replace-id', $poll_answer);
   return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+/**
+ * Added a Query tag as  "poll_landing_past_poll" in past poll used in View : [past_polls] and written query tag alter as required
+ * Implements hook_query_TAG_alter()
+ */
+function itg_poll_query_poll_landing_past_poll_alter(QueryAlterableInterface $query) {
+  $cur_date = date('Y-m-d H:i:s');
+  $query->leftJoin('field_data_field_poll_end_date', 'o', 'node.nid = o.entity_id');
+  $or = db_or();
+  $db_and = db_and();
+  //$or->condition('node.status', 0, '=');
+  $db_and->isNotNull('o.field_poll_end_date_value');
+  $db_and->condition('o.field_poll_end_date_value', $cur_date, '<');
+  $or->condition($db_and);
+  $query->condition($or);
 }

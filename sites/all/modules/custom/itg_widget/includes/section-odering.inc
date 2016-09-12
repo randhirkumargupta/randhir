@@ -4,7 +4,7 @@
  * @file
  *      Section and top stories widegt ordering and reordering
  */
-
+module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 /**
  * function to get data of nodes in sequence which is saved in draggableviews_structure table
  * @param array $info
@@ -20,24 +20,10 @@ function itg_widget_top_stories_ordering_data($info) {
     // condition to validate
     $today = date('Y-m-d 00:00:00');
     if (!empty($view_name) && !empty($page)) {
-      $query = db_select('draggableviews_structure', 'dv_s');
-      $query->leftJoin('node', 'n', 'n.nid=dv_s.entity_id');
-      $query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
-      $query->fields('dv_s', array('entity_id'));
-      $query->fields('fsed', array('field_story_expiry_date_value'));
-      $query->condition('dv_s.view_name', $view_name);
-      $query->condition('dv_s.view_display', $page);
-      $query->condition('n.status', '1');
-      $query->condition('fsed.field_story_expiry_date_value', $today, '>=');
-      //$query->condition('fsed.') //DATE_FORMAT(field_data_field_story_expiry_date.field_story_expiry_date_value, '%Y-%m-%d') = '') )
-      $query->orderBy('dv_s.weight', 'ASC');
-      $query->groupBy('dv_s.entity_id');
-      // only top 15 nodes are required as per requirement
-      $query->range(0, 15);
-      $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      $result = draggable_views_nodes_for_widgets($view_name, $page, $today, 0, TOP_STORIES_LIMIT);
       if (empty($result)) {
         $nodequeue_name = isset($info['nodequeue']) ? $info['nodequeue'] : "";
-        $result = itg_widget_nodes_from_nodequeue($nodequeue_name);
+        $result = itg_widget_nodes_from_nodequeue($nodequeue_name , FALSE , TOP_STORIES_MIN_RANGE , TOP_STORIES_LIMIT);
       }
       $entity_data = array();
       foreach ($result as $entity_data_node) {

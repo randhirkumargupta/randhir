@@ -402,8 +402,8 @@ function event_backend_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -791,7 +791,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 31,
+      'weight' => 44,
     ),
   );
 
@@ -834,7 +834,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 25,
+      'weight' => 38,
     ),
   );
 
@@ -877,7 +877,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 29,
+      'weight' => 42,
     ),
   );
 
@@ -920,7 +920,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 26,
+      'weight' => 39,
     ),
   );
 
@@ -963,7 +963,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 27,
+      'weight' => 40,
     ),
   );
 
@@ -1006,7 +1006,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 28,
+      'weight' => 41,
     ),
   );
 
@@ -1049,7 +1049,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 30,
+      'weight' => 43,
     ),
   );
 
@@ -1345,7 +1345,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 2,
+      'weight' => 6,
     ),
   );
 
@@ -1389,7 +1389,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 32,
+      'weight' => 45,
     ),
   );
 
@@ -1423,7 +1423,7 @@ function event_backend_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_group_registration_fee_10',
-    'label' => 'Group Registration Fee (upto 10)',
+    'label' => 'Group Registration Fee (upto 10 member)',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1438,7 +1438,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 5,
+      'weight' => 9,
     ),
   );
 
@@ -1472,7 +1472,7 @@ function event_backend_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_group_registration_fee_5',
-    'label' => 'Group Registration Fee (upto 5)',
+    'label' => 'Group Registration Fee (for 5 member) ',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1487,7 +1487,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 4,
+      'weight' => 8,
     ),
   );
 
@@ -1536,7 +1536,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 3,
+      'weight' => 7,
     ),
   );
 
@@ -1584,7 +1584,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 6,
+      'weight' => 10,
     ),
   );
 
@@ -1631,7 +1631,7 @@ function event_backend_field_default_field_instances() {
         'replace_label' => 0,
       ),
       'type' => 'field_collection_embed',
-      'weight' => 3,
+      'weight' => 6,
     ),
   );
 
@@ -1749,6 +1749,48 @@ function event_backend_field_default_field_instances() {
       ),
       'type' => 'date_popup',
       'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_story_kicker_text'.
+  $field_instances['node-event_backend-field_story_kicker_text'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 24,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_kicker_text',
+    'label' => 'Event Location',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 4,
     ),
   );
 
@@ -1887,13 +1929,14 @@ function event_backend_field_default_field_instances() {
   t('Enter fees in INR');
   t('Event Close Date');
   t('Event Highlights');
+  t('Event Location');
   t('Event Media');
   t('Event Start Date');
   t('Event Type');
   t('Flashback');
   t('Force Registration Open');
-  t('Group Registration Fee (upto 10)');
-  t('Group Registration Fee (upto 5)');
+  t('Group Registration Fee (for 5 member) ');
+  t('Group Registration Fee (upto 10 member)');
   t('Home');
   t('Individual Registration Fee');
   t('Kicker Text');
