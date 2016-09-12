@@ -5048,8 +5048,10 @@ footer .footer-copyright {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li a {
   color: #fff;
   display: block;
-  border-bottom: 1px solid #000;
   padding: 10px 20px;
+}
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li {
+  border-top: 1px solid #000;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu:hover ul.menu {
   display: block;

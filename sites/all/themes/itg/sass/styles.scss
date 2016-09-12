@@ -3844,9 +3844,11 @@ footer{
                 li{
                     a{
                         color: #fff;
-                        display: block;
-                        border-bottom: 1px solid #000;
+                        display: block;                        
                         padding: 10px 20px;
+                    }
+                    + li{
+                        border-top: 1px solid #000;
                     }
                 }
                 
