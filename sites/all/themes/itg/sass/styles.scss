@@ -316,6 +316,11 @@ header{
                 display: inline-block;
                 vertical-align: bottom;
                 padding-left: 15px;
+                a{
+                    i{
+                        font-size: 18px;
+                    }
+                }
             }
         }
         .globle-search{
@@ -2139,13 +2144,16 @@ footer{
 /*CSS Start Anchor listing detail page*/
 .anchor-detail-menu{
     border-bottom:1px solid $border-color;
-    .tab-buttons{
-        @include display-inline;
+    white-space: nowrap;
+    overflow: auto;
+    .tab-buttons{        
         background: transparent;
         span{
             width: auto;
             border-top: 3px solid rgba(202, 202, 202,1);
             padding: 0 30px;
+            @include display-inline;
+            float: none;
             &.active{
                  border-top: 3px solid #a00606;
             }
@@ -3227,74 +3235,6 @@ footer{
     }
 }
 
-
-
-/* CSS For Homepage Poll widget */
-.page-user{
-  .poll-data{
-    max-width: 370px;
-    padding: 0;
-    margin: 0;
-    border: none;
-    border-bottom: 1px solid #ddd;
-    .poll-banner-image{
-      max-width: 100%;
-      margin: 0;
-      img{
-        width: 100%;
-        height: 208px;
-      }
-    }
-    .active-poll-title{
-      background-color: #000;
-      float: left;
-      width: 100%;
-      h2{
-        color: #fff;
-        font-size: 20px;
-        line-height: 24px;
-        margin: 0;
-        padding: 10px;
-      }
-      .updated-msg{
-        display: none;
-      }
-    }
-    form{
-      text-align: center;
-      padding-bottom: 20px;
-      label{
-        display: inline-block;
-        vertical-align: top;
-        padding: 0;
-      }
-      .form-radios{
-        .form-item{
-          display: inline-block;
-          vertical-align: top;
-          margin: 0 10px;
-          .form-radio{
-            float: left;
-            margin: 3px 2px 0 0;
-          }
-        }
-      }
-    }
-    .poll-replace-id .form-submit{
-        width: 100px;
-        height: 36px;
-        background-color: #ccc;
-        border: none;
-        width: 100px;
-        height: 36px;
-        font-weight: 500;
-        font-family: Roboto;
-        margin-top: 20px;
-        font-size: 500;
-        color: #323232;
-      }
-  }
-}
 /*css start archive-story */
 .view-archive-story{
     .view-content{        
@@ -3713,7 +3653,7 @@ footer{
         padding: 15px 0; 
         @include text-align(center);
         .sosorryitg{
-            padding: 40px 30px 0 0;
+            padding: 0px 30px 0 0;
         }
         .soindiatoday{
             float: right;
@@ -3723,7 +3663,7 @@ footer{
     .sosory-footer{
         background: #000;
         padding: 12px 0;            
-        text-align: center;                
+        text-align: left;                
         a{
              color:#eff94e;
              font-size: 12px;
@@ -3732,17 +3672,15 @@ footer{
         ul{
             @extend .list-none;
             li{
-                @include display-inline;
-                padding:0 20px;
+                @include display-inline;    
+                @include calculate-width(1);
+                margin-bottom: 15px;
                 i{
                     font-size: 30px;
                     vertical-align: middle;
                     padding-right: 10px;
-                }
-                &:nth-child(2){
-                    border-left: 1px solid #eff94e;
-                    border-right: 1px solid #eff94e;
-                }
+                    float: left;
+                }                
             }
         }
     }    
@@ -3753,13 +3691,16 @@ footer{
 .view-so-sorry{
     margin-bottom:40px;
     h2{
-        @include font(26px,null,300);
+        @include font(21px,null,300);
         color:#db1314;    
         text-transform:uppercase;
         span{
             font-weight: 700;
         }
-    }    
+    }
+    .view-content{
+        @include photo-scroll;
+    }
 }
 #block-views-so-sorry-the-remix{
     .title{
@@ -3779,14 +3720,16 @@ footer{
     margin-top: 50px;
 }
 .view-display-id-so_sorry_page{
+    margin: -15px;
     @include pos(relative);    
     h1{
-        @include pos(absolute,null,null,0,0);    
+        @include pos(relative,null,null,0,0);    
         @include calculate-width(1);
         color: $white-color;
         padding: 7px 15px;
         @include font(32px);
-        background: rgba(0, 0, 0, 0.25);
+        background: rgba(0, 0, 0, 1);
+        font-size: 21px;
     }
 }
 .sosorry-social{
@@ -3863,3 +3806,21 @@ footer{
     }
 }
 /*End Start user login header*/
+
+/*CSS Start video setting Ifram*/
+.iframe-video{
+        position: relative;
+        padding-bottom: 65.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: auto; 
+        -webkit-overflow-scrolling:touch;    
+    iframe{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+/*CSS End video setting Ifram*/

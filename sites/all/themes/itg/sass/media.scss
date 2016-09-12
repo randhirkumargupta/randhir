@@ -685,6 +685,42 @@ section.sidebar{
     padding: 50px 30px 20px 30px;
 }
 /*CSS End magazine-calander RHS*/
+
+/*CSS Start So sorry page*/
+#block-itg-layout-manager-header-sosorry-block{
+    .sosory-header .sosorryitg{
+        padding: 40px 30px 0 0;   
+    }
+    .sosory-footer{
+        text-align: center;   
+        ul li{
+            width: auto;
+            padding:0 20px;
+            margin-bottom: 0px;
+            i{
+                float: left;
+            }  
+            &:nth-child(2){
+                border-left: 1px solid #eff94e;
+                border-right: 1px solid #eff94e;
+            }
+        } 
+    } 
+}
+.view-so-sorry{
+    h2{
+        @include font(26px,null,300);
+    }
+}
+.view-display-id-so_sorry_page{
+    margin:0;
+    h1{
+        font-size: 26px;
+        @include pos(absolute,null,null,0,0);
+         background: rgba(0, 0, 0, 0.25);
+    }
+}
+/*CSS End So sorry page*/
 }
 /*End CSS Desktop version*/
 
@@ -705,7 +741,20 @@ section.sidebar{
                 }
             }
         }
-    }
+        .navigation{
+            .menu {
+                margin-left: 135px;
+                margin-right: 50px;
+                padding-left: 0;
+                white-space: nowrap;
+                overflow-x: scroll;
+                li{
+                    @include display-inline;
+                    float: none;
+                }
+            }
+        }
+    }    
     .top-block .top-colum-2{
        @include calculate-width(1);
        margin-bottom: 50px;
@@ -725,5 +774,17 @@ section.sidebar{
     .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget{
         overflow: scroll;
         height: 663px;
+    }
+    #block-itg-layout-manager-header-sosorry-block{
+        .sosory-header .sosorryitg{
+            padding: 40px 30px 0 0;
+        }
+        .sosory-footer{              
+            ul li{
+                &:nth-child(2){                    
+                    border-left:none;
+                }
+            } 
+        } 
     }
 }
