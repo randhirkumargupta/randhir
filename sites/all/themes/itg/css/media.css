@@ -182,7 +182,7 @@
     clear: both;
   }
   #block-itg-layout-manager-header-block .navigation .menu {
-    padding-left: 145px;
+    padding-left: 135px;
   }
   #block-itg-layout-manager-header-block .navigation .menu li {
     float: left;
@@ -198,9 +198,6 @@
     font-size: 14px;
     font-size: 0.875rem;
     line-height: 37px;
-  }
-  #block-itg-layout-manager-header-block .navigation .menu li:first-child a {
-    padding-left: 0;
   }
 
   /*End header CSS Desktop version*/
@@ -755,8 +752,11 @@
     padding-left: 10px;
   }
   #block-views-photo-landing-slider-block .social-icon ul li a {
-    padding: 0 17px;
+    padding: 0 15px;
     line-height: 55px;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li span.flag-throbber {
+    display: none;
   }
   #block-views-photo-landing-slider-block .slick-slider .slick-next, #block-views-photo-landing-slider-block .slick-slider .slick-prev {
     width: 50px;

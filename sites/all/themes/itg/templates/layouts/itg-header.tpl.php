@@ -39,7 +39,20 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
     </div>
     <nav class="navigation">
         <div class="container">
-            <?php print drupal_render($data['itg_main_manu_header']); ?>
-        </div>   
+            <?php print drupal_render($data['itg_main_manu_header']); ?>            
+        </div>         
     </nav>
+     
+    <div class="menu-login">
+        <div class="container ">   
+            <div class="user-menu">
+                <a href="#" class="user-icon"><i class="fa fa-user"></i></a>
+                <?php
+                $block = module_invoke('system', 'block_view', 'user-menu');
+                print render($block['content']);
+                ?>
+            </div>
+        </div>
+    </div>
+    
 </div>

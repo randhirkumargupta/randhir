@@ -93,7 +93,7 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       
       if(is_numeric(arg(1)) && arg(2) == 'edit') {
         $form['actions']['view_survey_result'] = array(
-          '#markup' => l(t('View Survey Result'), 'survey-result/'.arg(1), array('attributes' => array('class' => 'survey-view-result', 'target'=>'_blank'))),
+          '#markup' => l(t('View Survey Result'), 'survey-result/'.arg(1), array('attributes' => array('class' => 'survey-view-result-btn', 'target'=>'_blank'))),
           '#weight' => 20,
           '#value' => t('View Survey Result'),
         );

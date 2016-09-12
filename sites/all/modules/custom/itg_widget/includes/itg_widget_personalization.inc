@@ -24,7 +24,11 @@ function save_itg_widget_personalization_data($updates) {
   drupal_set_message("My Preferences Has Been Save");
 }
 
-
+/**
+ * 
+ * @param int $tid
+ * @return array
+ */
 function get_personalization_saved_value($tid) {
   $query = db_select('itg_widget_order','iwo');
   $query->addField('iwo','weight');
