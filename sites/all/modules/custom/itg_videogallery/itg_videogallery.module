@@ -1021,7 +1021,7 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
     if (itg_videogallery_get_categoryparent($_GET['category']) == TRUE && empty($_GET['sid'])) {
       $view_output = views_embed_view('video_list_of_category', 'block_3', $_GET['category']);
     }
-    elseif (itg_videogallery_get_categoryparent($_GET['category']) == FALSE && isset($_GET['category']) && isset($_GET['sid'])) {
+    elseif ((itg_videogallery_get_categoryparent($_GET['category']) == FALSE || itg_videogallery_get_categoryparent($_GET['category']) == TRUE)  && isset($_GET['category']) && isset($_GET['sid'])) {
       $view_output = views_embed_view('video_list_of_category', 'block');
     }
     elseif (empty($_GET['sid'])) {
