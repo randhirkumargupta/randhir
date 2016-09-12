@@ -5853,6 +5853,7 @@ div.node #comments h2 {
 .page-node-add-recipe .form-type-managed-file .image-widget-data,
 .node-type-print-team-integration .form-type-managed-file .image-widget-data,
 [id*="field-service-content-values"] .form-type-managed-file .image-widget-data,
+.node-category-form .form-type-managed-file .image-widget-data,
 .page-node-add-poll .form-type-managed-file .image-widget-data {
   position: relative;
   float: none;
@@ -5868,6 +5869,7 @@ div.node #comments h2 {
 .page-node-add-recipe .form-type-managed-file a.filefield-sources-imce-browse,
 .node-type-print-team-integration .form-type-managed-file a.filefield-sources-imce-browse,
 [id*="field-service-content-values"] .form-type-managed-file a.filefield-sources-imce-browse,
+.node-category-form .form-type-managed-file a.filefield-sources-imce-browse,
 .page-node-add-poll .form-type-managed-file a.filefield-sources-imce-browse {
   height: 100%;
   left: 0;
@@ -5886,6 +5888,7 @@ div.node #comments h2 {
 .page-node-add-recipe .form-type-managed-file a.filefield-sources-imce-browse:after,
 .node-type-print-team-integration .form-type-managed-file a.filefield-sources-imce-browse:after,
 [id*="field-service-content-values"] .form-type-managed-file a.filefield-sources-imce-browse:after,
+.node-category-form .form-type-managed-file a.filefield-sources-imce-browse:after,
 .page-node-add-poll .form-type-managed-file a.filefield-sources-imce-browse:after {
   background-color: #fff;
   border: 1px solid #d9d9d9;
@@ -6871,4 +6874,9 @@ div.node #comments h2 {
 #edit-field-story-category .primary-radio {
   float: left;
   margin: 0 10px;
+}
+
+[id*="itg-mobile-services-search-form"] a.custom-url-search {
+  margin: 18px 0 0 10px;
+  height: 30px;
 }

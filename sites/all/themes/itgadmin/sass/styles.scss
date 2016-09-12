@@ -5812,6 +5812,7 @@ div.node{
 .page-node-add-recipe, 
 .node-type-print-team-integration,
 [id*="field-service-content-values"],
+.node-category-form,
 .page-node-add-poll{
     .form-type-managed-file{
       .image-widget-data{
@@ -6872,5 +6873,11 @@ div.node{
   .primary-radio {
     float: left;
     margin: 0 10px;
+  }
+}
+[id*="itg-mobile-services-search-form"]{
+  a.custom-url-search{
+    margin: 18px 0 0 10px;
+    height: 30px;
   }
 }
