@@ -131,9 +131,11 @@
     // scroll-to-top animate
     $(window).scroll(function () {
       if ($(this).scrollTop() > 90) {
-        $('#block-itg-podcast-podcast-tab-form-block, #block-itg-blog-blog-tab-form-block, #block-itg-reporter-reporter-tab-form-block, .action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').addClass('fixed');
+        $('.action-with-title').addClass('fixed');
+//        $('#block-itg-podcast-podcast-tab-form-block, #block-itg-blog-blog-tab-form-block, #block-itg-reporter-reporter-tab-form-block, .action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').addClass('fixed');
       } else {
-        $('#block-itg-podcast-podcast-tab-form-block, #block-itg-blog-blog-tab-form-block, #block-itg-reporter-reporter-tab-form-block, .action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').removeClass('fixed');
+        $('.action-with-title').removeClass('fixed');
+//        $('#block-itg-podcast-podcast-tab-form-block, #block-itg-blog-blog-tab-form-block, #block-itg-reporter-reporter-tab-form-block, .action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').removeClass('fixed');
       }
     });
     $('body').on('click', '.target-link', function (e) {
@@ -197,29 +199,33 @@
     });
 
     // jQuery code to filter category manager
+    
     $('.itg-section').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.not('.active').addClass('active').parent().next().addClass('hide').find('.cmd-heading').addClass('active');
     });
     $('.itg-category').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
       el.parent().parent().parent().parent().prev().children('.cmd-heading').removeClass('active');
     });
     $('.itg-sub-category').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
       el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
     });
     $('.itg-sub-sub-category').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
       el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
     });
+    setTimeout(function(){
+      $('.page-category-manager-listing').find('.itg-section').trigger('click');
+    }, 10);
 
     // jQuery code for flexslider
     $('.photogallery-list').flexslider({

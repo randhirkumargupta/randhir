@@ -39,7 +39,6 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header =
     }
     $header .= '<' . $label . '>' . $pattren . '</' . $label . '>';
   }
-
   // footer
   foreach ($xmlarray['footer'] as $label => $pattren) {
     if ($pattren == '{field_header}') {

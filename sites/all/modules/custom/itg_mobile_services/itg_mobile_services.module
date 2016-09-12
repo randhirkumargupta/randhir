@@ -209,7 +209,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       $form['reset_date_button'] = array(
         '#type' => 'button',
-        '#weight' => 6,
+        '#weight' => 4,
         '#value' => t('Reset Date'),
         '#attributes' => array(
           'id' => 'reset-date-button',
@@ -235,7 +235,7 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
           $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video'][LANGUAGE_NONE][0]['#upload_validators']['itg_custom_video_field_validate'] = array(1, 2);
         }
       }
-      $form['actions']['submit']['#attributes'] = array('class' => array('custom-content-submit'));
+      $form['actions']['submit']['#attributes'] = array('class' => array('custom-content-submit mobile-content-submit'));
       $form['actions']['submit']['#submit'][] = 'itg_mobile_vas_service_content_submit';
       $form['actions']['submit']['#submit'][] = 'itg_mobile_service_custom_submit';
       if (empty($_GET['destination'])) {
