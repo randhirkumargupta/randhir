@@ -19,11 +19,11 @@ global $base_url
       <div class="less-content">
         <?php echo mb_strimwidth(strip_tags($anchor['body']), 0, 245, ".."); ?>
         <?php if (strlen($anchor['body']) > 245) { ?>
-          <a class="anchor-action read-more"> More[+]</a>
+          <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>
         </div>
         <div class="full-content" style="display: none">
           <?php echo $anchor['body']; ?>
-          <a class="anchor-action read-less"> Less[-]</a>
+            <a href="#" class="anchor-action read-less"> Less[-]</a>
         <?php } ?>
       </div>  
     </div>

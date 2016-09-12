@@ -44,7 +44,9 @@ if (!empty($content)):
               $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
               if (filter_var($live_url, FILTER_VALIDATE_URL)) {
                 ?>
-                <iframe width="100%" height="360" frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>
+                <div class="iframe-video">
+                <iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>
+                </div>
                 <?php
               }
               else {
