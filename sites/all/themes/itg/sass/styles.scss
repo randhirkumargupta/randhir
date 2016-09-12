@@ -2886,7 +2886,7 @@ footer{
 }
 /*video and photo menu*/
 #block-itg-videogallery-videogallery-menu-video-block, #block-itg-photogallery-photo-menu-landing-block{    
-    border-bottom: 1px solid #d9d9d9;    
+   /* border-bottom: 1px solid #d9d9d9;    */
     margin-bottom: 30px;
     margin-top: 30px;
     ul{
@@ -2895,6 +2895,7 @@ footer{
       display: inline-block;
       width: 100%;
       position: relative;
+      border-bottom: 1px solid #d9d9d9;
       li{
         @include display-inline;
         border-right: 0;
@@ -2939,6 +2940,14 @@ footer{
       padding-top: 0;
       margin-top: 0;
       @include sidebar-heading;
+      h3{
+          display: block;
+          span{
+            padding-top: 0;
+            padding-left: 0;
+          }
+      }
+      
   }
 .view-video-list-of-category, .view-video-landing-header, .view-so-sorry{    
     .views-exposed-form{
