@@ -23,6 +23,11 @@ Drupal.behaviors.my_custom_behavior = {
         $('.page-node .unflag-action').attr('title', '');
         $('.page-node .unflag-action').css('pointer-events', 'none');
     }
+    // Change flag login link text.
+    $('.node-type-videogallery .itg-flag-login').html('<i class="fa fa-clock-o"></i> Watch Later');
+    $('.node-type-photogallery .itg-flag-login').html('<i class="fa fa-bookmark"></i>');
+    $('.node-type-story .itg-flag-login').html('<i class="fa fa-bookmark"></i> READ LATER');
+    // Code end for flag login text.
     
     $('input.rating').hover(function(){
     $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
