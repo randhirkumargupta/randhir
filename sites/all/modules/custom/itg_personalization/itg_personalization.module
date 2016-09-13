@@ -34,13 +34,13 @@ function itg_personalization_menu() {
     'title' => 'Personalization',
     'description' => 'User personalized content.',
     'page callback' => 'itg_personalization_home_page',
-    'access callback' => TRUE,    
+    'access arguments' => array('view personalized content'),
     'type' => MENU_NORMAL_ITEM,
   );
   $items['personalization/%'] = array(
     'title' => 'Personalization - Saved Items',    
     'page callback' => 'itg_personalization_home_page',
-    'access callback' => TRUE,    
+    'access arguments' => array('view personalized content'),    
     'type' => MENU_NORMAL_ITEM,
   );    
   
