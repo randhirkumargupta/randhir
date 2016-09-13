@@ -2,7 +2,6 @@
 global $base_url;
 ?>
 
-<h2>YOU'LL <span>LOVE THESE</span></h2>
 <ul class="photo-list">
     <?php foreach ($rows as $key => $value) : ?>
         <li class="col-md-3">
