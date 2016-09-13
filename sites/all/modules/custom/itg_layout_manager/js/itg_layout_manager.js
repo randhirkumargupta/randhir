@@ -316,6 +316,32 @@
                           }
                     });
                });
+               jQuery('.removes-more-block').on('click',function(){
+          jQuery(this).hide();
+          jQuery(this).parent('.itg-common-section').find('.delete-block-widget').each(function(){
+               var block_id = jQuery(this).attr("delete-block-id");                    
+                    var section_name = jQuery('#edit-section').val();
+                    var template_name = jQuery('#edit-template-name').val();
+                    
+                    var base_url = settings.itg_story.settings.base_url;
+                   
+                    jQuery.ajax({
+                          url: base_url + "/insert-layout-setting-ajax/widget_delete",
+                          method: 'post',
+                          data: {block_name:block_id,section_name:section_name,template_name:template_name},
+                          beforeSend:function(){
+                              jQuery('#'+block_id).addClass('input-loader');                             
+                          },
+                          success: function(data) {                            
+                            jQuery('#'+block_id).html('');
+                            jQuery('span[data-id="'+block_id+'"]').html('');
+                            jQuery('#'+block_id).removeClass('input-loader');  
+                          }
+                    });
+          })
+         jQuery(this).parent('.itg-common-section').hide(750);
+         jQuery(this).parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();  
+      });
                 
             }   
             

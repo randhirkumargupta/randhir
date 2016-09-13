@@ -50,8 +50,8 @@
                   print "<a class='remove-so-sorry-extra-data' href='remove-so-sorry-extra-data/".$row['nid']."'>" .t("Remove From $new_text"). "</a>";
                 } else {
                   ?>
-                Feature : <input type="radio" data-nid='<?php print $row['nid'] ?>' class="add-so-sorry-extra-data" name='feature_or_remix' value="feature">
-                Remix : <input type="radio" data-nid='<?php print $row['nid'] ?>' class="add-so-sorry-extra-data" name="feature_or_remix" value="remix">
+                <input type="radio" data-nid='<?php print $row['nid'] ?>' class="add-so-sorry-extra-data" name='feature_or_remix' value="feature"> Feature
+                <input type="radio" data-nid='<?php print $row['nid'] ?>' class="add-so-sorry-extra-data" name="feature_or_remix" value="remix"> Remix
                   <?php
                 }
               } else {
