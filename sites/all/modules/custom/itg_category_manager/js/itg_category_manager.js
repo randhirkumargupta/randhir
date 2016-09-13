@@ -13,7 +13,13 @@
       function hideLodingImage() {
         $('.term-spinner').hide();
       }
-
+      
+        if(jQuery('#edit-parent-hierarchical-select-selects-0').val()!='0')
+        {
+            jQuery('#edit-field-set-as-featured-cate').hide();
+        }
+        
+      
       // Disable manual or forcefully
       $('#edit-state-mode-1, #edit-state-mode-0').click(function () {
         var state = $(this).is(':checked');
@@ -56,10 +62,13 @@
       });
       $('.hierarchical-select select').on('change',function(){
           if($(this).val()!=0)
-          {
+          {   
+              $('#edit-field-set-as-featured-cate-und-yes').prop('checked',false);
+              $('#edit-field-set-as-featured-cate').hide();
               $('#edit-field-cm-select-type-und').attr('disabled',true);
                $('#edit-field-cm-select-type-und').removeAttr('required');
           }else{
+              jQuery('#edit-field-set-as-featured-cate').show();
             $('#edit-field-cm-select-type-und').attr('disabled',false);
              $('#edit-field-cm-select-type-und').attr('required','required');
 
