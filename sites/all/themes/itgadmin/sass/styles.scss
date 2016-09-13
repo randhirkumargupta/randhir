@@ -427,6 +427,45 @@ ul.pager{
     }
   }
 }
+.image-repo-browse{
+  .form-field-type-image{
+    .form-type-managed-file > label {
+      padding-bottom: 5px;
+      padding-top: 5px;
+    }
+    .image-widget-data{
+      @extend .pos-rel;
+      .form-submit[value="Remove"]{
+        left: 400px;
+      }
+    }
+    a.filefield-sources-imce-browse{
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      &:after{
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #2f2f2f;
+        content: "Choose Your File";
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 300;
+        height: 28px;
+        left: 0;
+        line-height: 26px;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 134px;
+      }
+    }
+  }
+}
 #page-title{
   @extend .mb-10;
 }
@@ -3941,38 +3980,8 @@ div.node{
       left: 280px;
     }
   }
-  #BrowseMedia .form-field-type-image{
-    .image-widget-data{
-      @extend .pos-rel;
-      .form-submit[value="Remove"]{
-        left: 400px;
-      }
-    }
-    a.filefield-sources-imce-browse{
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 100%;
-      &:after{
-        background-color: #fff;
-        border: 1px solid #d9d9d9;
-        border-radius: 5px;
-        box-sizing: border-box;
-        color: #2f2f2f;
-        content: "Choose Your File";
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: 300;
-        height: 28px;
-        left: 0;
-        line-height: 26px;
-        position: absolute;
-        text-align: center;
-        top: 0;
-        width: 134px;
-      }
-    }
+  #BrowseMedia{
+    @extend .image-repo-browse;
   }
 }
 #SocialMedia{
@@ -4673,6 +4682,43 @@ div.node{
   } 
   .form-field-name-field-videogallery-video-upload{
     margin-top: 30px;
+  }
+  #Imageupload .form-field-type-image{
+    .form-type-managed-file > label {
+      padding-bottom: 5px;
+      padding-top: 5px;
+    }
+    .image-widget-data{
+      @extend .pos-rel;
+      .form-submit[value="Remove"]{
+        left: 400px;
+      }
+    }
+    a.filefield-sources-imce-browse{
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      &:after{
+        background-color: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #2f2f2f;
+        content: "Choose Your File";
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 300;
+        height: 28px;
+        left: 0;
+        line-height: 26px;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 134px;
+      }
+    }
   }
 }
 .form-item-htmlmail-plaintext{
@@ -6957,4 +7003,14 @@ div.node{
     position: absolute;
     z-index: 99;
   }
+}
+.node-notification-form, 
+.node-food_news-form, 
+.node-cooking_tips-form, 
+.node-reporter-form,
+.node-astro-form,
+.node-issue-form,
+.node-newsletter-form,
+.node-mega_review_critic-form{
+  @extend .image-repo-browse;
 }
