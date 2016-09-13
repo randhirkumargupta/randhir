@@ -51,7 +51,7 @@ function get_personalization_front_data() {
   // Create gorup of same weight tids
   foreach ($result as $info) {
     $new_ordered_data_weighted_group[$info->weight][] = $info->nid;
-  }
+  }   
   foreach ($new_ordered_data_weighted_group as $weight => $tids) {
     $temp_tid_array_baised_on_node_count = array();
 
@@ -65,7 +65,7 @@ function get_personalization_front_data() {
       }
       // decending order
       krsort($temp_tid_array_baised_on_node_count);
-
+      // Get array in decending mode baised on node count.
       $sorted_array = get_array_in_decending_mode($temp_tid_array_baised_on_node_count);
     }
     else {

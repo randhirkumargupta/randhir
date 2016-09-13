@@ -1463,9 +1463,28 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
  */
 function itg_widget_block_view_alter(&$data, $block) {
   $item = menu_get_item();
+  $arg = arg();
   if ($block->delta == 'programmes-rhs_programmes') {
     $page_argument = $item['page_arguments'];
-    if ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node') {
+    if ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node' && isset($_GET['sid'])) {
+      $data['content'] = array();
+    }
+  }
+
+  if ($block->delta == 'we_may_suggest') {
+    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
+      $data['content'] = array();
+    }
+  }
+
+  if ($block->delta == 'watch_right_now_videos_widget') {
+    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
+      $data['content'] = array();
+    }
+  }
+
+  if ($block->delta == 'top_takes_videos_widget') {
+    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
       $data['content'] = array();
     }
   }
