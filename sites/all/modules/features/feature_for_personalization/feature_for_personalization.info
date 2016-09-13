@@ -5,6 +5,7 @@ package = Features
 version = 7.x-1.0
 dependencies[] = features
 dependencies[] = flag_actions
+dependencies[] = flag_anon
 dependencies[] = flag_bookmark
 dependencies[] = itg_personalization
 dependencies[] = sliderfield
