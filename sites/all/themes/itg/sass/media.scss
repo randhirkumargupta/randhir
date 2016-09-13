@@ -570,7 +570,7 @@ section.sidebar{
 /*End category wise content list css*/
 
 /*CSS Starts Photo landing page*/
-.view-video-list-of-category, .view-video-landing-header, .view-photo-list-of-category, .view-so-sorry{
+.view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry{
     .view-content{      
         .photo-list{
             li{
@@ -721,6 +721,11 @@ section.sidebar{
     }
 }
 /*CSS End So sorry page*/
+/*CSS Start RHS add block*/
+#block-itg-ads-ad-right-sidebar-1{    
+    padding: 30px 34px 0;
+}
+/*CSS End RHS add block*/
 }
 /*End CSS Desktop version*/
 
