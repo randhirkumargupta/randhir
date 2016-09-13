@@ -367,12 +367,11 @@ $root-font-size: 16px;
         .photo-list{
             white-space: nowrap;
             overflow-x: scroll;
-            li{
-                width: 144px;
+            li{               
                 @include display-inline;
                 float: none;
                 a{
-                    white-space: pre-wrap;
+                    white-space: initial;
                 }
             }
         }
