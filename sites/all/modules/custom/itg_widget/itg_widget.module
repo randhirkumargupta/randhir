@@ -707,6 +707,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/fitg_widget_personalization');
       $data = get_personlization_front_block_data();
       $block['content'] = theme("personlization_front_end", array("data" => $data));
+      break;
     case 'home_page_poll_widget_block':
       $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
       $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
