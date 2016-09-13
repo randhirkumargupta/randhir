@@ -1007,6 +1007,14 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'so_sorry_widget';
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    0 => '486',
+  );
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['path'] = 'so-sorry-video-widget-order-reorder';
 
   /* Display: So Sorry Feature Video */
@@ -1063,6 +1071,14 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    0 => '486',
+  );
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
 
   /* Display: So Sorry Feature Video */
   $handler = $view->new_display('page', 'So Sorry Feature Video', 'so_sorry_page');
@@ -1129,6 +1145,14 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['extra']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['extra']['field'] = 'extra';
   $handler->display->display_options['filters']['extra']['value'] = 'feature';
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    0 => '486',
+  );
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['path'] = 'sosorry';
 
   /* Display: The Remix */
@@ -1206,6 +1230,19 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'so_sorry_widget';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    0 => '486',
+  );
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
 
   /* Display: Most Watched */
   $handler = $view->new_display('block', 'Most Watched', 'most_watched');

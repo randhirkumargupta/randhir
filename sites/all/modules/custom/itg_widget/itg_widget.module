@@ -17,12 +17,14 @@ module_load_include('inc', 'itg_widget', 'includes/itg_widget_actions_bulk_opera
 
 module_load_include('inc', 'itg_widget', 'includes/itg_widget.helper');
 
+module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
+
 /**
  * {@inheritdoc}
  */
 function itg_widget_init() {
-  // Js for move funtionality.
-  // This is use in case of nodequeue in case of custom table we calls a callback funtion.
+// Js for move funtionality.
+// This is use in case of nodequeue in case of custom table we calls a callback funtion.
   drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
 }
 
@@ -97,7 +99,13 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'access arguments' => array('access content'),
   );
-  
+
+  $items['test_function_callback'] = array(
+      'page callback' => 'get_personalization_front_data', // load the croper according to size!.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+
   $items['issue_filter_widget'] = array(
       'page callback' => 'itg_widget_issuewidget_filter_form', // load the croper according to size!.
       'type' => MENU_CALLBACK,
@@ -196,7 +204,7 @@ function remove_extra_data() {
 //      'section_wise_content_ordering',
 //      'widget_anchors_listing',
 //      'category_wise_content_list',
-          //     'photo_carousel_widget',
+//     'photo_carousel_widget',
   );
   foreach ($widget as $view_name) {
     $num_deleted = db_delete('draggableviews_structure')
@@ -246,7 +254,7 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
   if (!empty($widget_name) && !empty($cat_tid) && !empty($nid)) {
     $num = db_delete('itg_widget_order')
             ->condition('nid', $nid)
-            //->condition('content_type', $content_type)
+//->condition('content_type', $content_type)
             ->condition('cat_id', $cat_tid)
             ->condition('widget', $widget_name)
             ->execute();
@@ -268,7 +276,7 @@ function remove_extra_field_value_for_so_sorry($nid) {
           ->condition('nid', $nid)
           ->condition('widget', 'so_sorry_widget')
           ->execute();
-  //drupal_set_message(t("Node has been moved"));
+//drupal_set_message(t("Node has been moved"));
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
 
@@ -279,7 +287,7 @@ function remove_extra_field_value_for_so_sorry($nid) {
  * @param string $extra
  */
 function add_extra_field_value_for_so_sorry($nid, $extra) {
-  // Handling only single nid can be either feature or remix;
+// Handling only single nid can be either feature or remix;
   $so_sorry_extra_nodes = db_select('itg_widget_order', 'iwo')
                   ->condition('iwo.extra', $extra)
                   ->fields('iwo', array('nid'))
@@ -351,7 +359,7 @@ function remove_from_widgets($nid, $qid, $view_name, $page_name) {
   $draggable_delete = draggable_view_node_delete($view_name, $page_name, $nid);
   nodequeue_subqueue_remove_node($qid, $nid);
   if ($draggable_delete) {
-    //nodequeue_subqueue_remove_node($qid, $nid);
+//nodequeue_subqueue_remove_node($qid, $nid);
     print "deleted";
   }
   else {
@@ -436,11 +444,14 @@ function itg_widget_block_info() {
   $blocks['anchor_langing_page_menu'] = array(
       'info' => t('Anchor landing page menu'),
   );
-  $blocks['home_page_poll_widget_block'] = array(
-    'info' => t('Home Page Poll Widget'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
+  $blocks['personlization'] = array(
+      'info' => t('Persionlization front end'),
   );
-  
+  $blocks['home_page_poll_widget_block'] = array(
+      'info' => t('Home Page Poll Widget'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
   return $blocks;
 }
 
@@ -692,8 +703,13 @@ function itg_widget_block_view($delta = '') {
     case 'anchor_langing_page_menu':
       $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
       break;
+    case 'personlization':
+      module_load_include('inc', 'itg_widget', 'includes/fitg_widget_personalization');
+      $data = get_personlization_front_block_data();
+      $block['content'] = theme("personlization_front_end", array("data" => $data));
+      break;
     case 'home_page_poll_widget_block':
-      $selected_poll_widget = get_homepage_current_poll_widget('poll','poll_widget');  
+      $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
       $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
       break;
   }
@@ -954,6 +970,9 @@ function itg_widget_theme() {
       'anchor_langing_page_menu' => array(
           'template' => 'templates/anchor-landing-page-menu',
       ),
+      'personlization_front_end' => array(
+          'template' => 'templates/personlization-front-end',
+      ),
   );
   return $themes;
 }
@@ -1174,7 +1193,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_page') {
-    
+
     // Handling the query if other videos are clicked but those are not feature.
     // But they are in itg_widget_order table as well as widget value is equal to so_sorry_widget
     $arg = arg();
@@ -1548,14 +1567,13 @@ function itg_widget_so_sorry_content_nid($title) {
  * This will return selected poll for widget
  */
 
-function get_homepage_current_poll_widget($content_type,$widget_name) {
-    $nodes_already = db_select('itg_widget_order', 'iwo')
-      ->condition('iwo.content_type', $content_type)
-      ->condition('iwo.widget', $widget_name)
-      ->fields('iwo', array('nid'))
-      ->execute()->fetch();
-    return $nodes_already->nid;
-    
+function get_homepage_current_poll_widget($content_type, $widget_name) {
+  $nodes_already = db_select('itg_widget_order', 'iwo')
+                  ->condition('iwo.content_type', $content_type)
+                  ->condition('iwo.widget', $widget_name)
+                  ->fields('iwo', array('nid'))
+                  ->execute()->fetch();
+  return $nodes_already->nid;
 }
 
 /**
@@ -1602,7 +1620,6 @@ function itg_poll_home_page_polls_select($nid) {
   return theme('itg_poll_homepage_forms', array('data' => $polls_info));
 }
 
-
 /**
  * Implements hook_form().
  * {@inheritdoc}
@@ -1610,42 +1627,39 @@ function itg_poll_home_page_polls_select($nid) {
  * @param array $form_state
  */
 function itg_widget_issuewidget_filter_form($form, $form_state) {
-    $options=array();
-    $options['']='Select';
-    $query = db_select('node', 'n');
-    $query->fields('n', array('title'));
-    $query->condition('n.type', array('issue'), '=');
-    $query->condition('n.status', 1);
-    $result = $query->execute();
-    while ($record = $result->fetchAssoc()) {
-      $options[date('Y-m-d',  strtotime($record['title']))] = date('d/m/Y',  strtotime($record['title']));
-    }
+  $options = array();
+  $options[''] = 'Select';
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->condition('n.type', array('issue'), '=');
+  $query->condition('n.status', 1);
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $options[date('Y-m-d', strtotime($record['title']))] = date('d/m/Y', strtotime($record['title']));
+  }
 
-    $form['content_title'] = array(
-        '#title' => t('Content Title'),
-        '#type' => 'select',
-        '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
-        '#options' => $options,
-        
-    );
-    $form['items_per_page'] = array(
-        '#title' => t('Items per page '),
-        '#type' => 'select',
-        '#default_value' => ($_GET['items_per_page'])?$_GET['items_per_page']:20,
-        '#options' => array(5=>5,10=>10,20=>20,40=>40,60=>60),
-        
-    );
-    $form['alt_button'] = array(
-  '#type' => 'submit',
-  '#value' => t('Apply'),
-
-);
-    $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'),'#submit' => array('itg_widget_issuewidget_filter_reset'),);
-
-  
+  $form['content_title'] = array(
+      '#title' => t('Content Title'),
+      '#type' => 'select',
+      '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
+      '#options' => $options,
+  );
+  $form['items_per_page'] = array(
+      '#title' => t('Items per page '),
+      '#type' => 'select',
+      '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+      '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+  );
+  $form['alt_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Apply'),
+  );
+  $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'), '#submit' => array('itg_widget_issuewidget_filter_reset'),);
 
 
-    return $form;
+
+
+  return $form;
 }
 
 /**
@@ -1654,13 +1668,10 @@ function itg_widget_issuewidget_filter_form($form, $form_state) {
  * @param array $form
  * @param array $form_state
  */
+function itg_widget_issuewidget_filter_form_submit($form, $form_state) {
 
-function itg_widget_issuewidget_filter_form_submit($form, $form_state)
-{
-   
-     $query = array('field_story_issue_date_value[value][date]' =>$form_state['values']['content_title'] ,'items_per_page'=>$form_state['values']['items_per_page']);
-     drupal_goto('issue-base-magazin-widget',array('query'=>$query));
-
+  $query = array('field_story_issue_date_value[value][date]' => $form_state['values']['content_title'], 'items_per_page' => $form_state['values']['items_per_page']);
+  drupal_goto('issue-base-magazin-widget', array('query' => $query));
 }
 
 /**
@@ -1669,14 +1680,10 @@ function itg_widget_issuewidget_filter_form_submit($form, $form_state)
  * @param array $form
  * @param array $form_state
  */
+function itg_widget_issuewidget_filter_reset($form, $form_state) {
 
-function itg_widget_issuewidget_filter_reset($form, $form_state)
-{
-    
-     drupal_goto('issue-base-magazin-widget');
+  drupal_goto('issue-base-magazin-widget');
 }
-
-
 
 /**
  * Implements hook_form().
@@ -1685,42 +1692,39 @@ function itg_widget_issuewidget_filter_reset($form, $form_state)
  * @param array $form_state
  */
 function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
-    $options=array();
-    $options['']='Select';
-    $query = db_select('node', 'n');
-    $query->fields('n', array('title'));
-    $query->condition('n.type', array('issue'), '=');
-    $query->condition('n.status', 1);
-    $result = $query->execute();
-    while ($record = $result->fetchAssoc()) {
-      $options[date('Y-m-d',  strtotime($record['title']))] = date('d/m/Y',  strtotime($record['title']));
-    }
+  $options = array();
+  $options[''] = 'Select';
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->condition('n.type', array('issue'), '=');
+  $query->condition('n.status', 1);
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $options[date('Y-m-d', strtotime($record['title']))] = date('d/m/Y', strtotime($record['title']));
+  }
 
-    $form['content_title'] = array(
-        '#title' => t('Content Title'),
-        '#type' => 'select',
-        '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
-        '#options' => $options,
-        
-    );
-    $form['items_per_page'] = array(
-        '#title' => t('Items per page '),
-        '#type' => 'select',
-        '#default_value' => ($_GET['items_per_page'])?$_GET['items_per_page']:20,
-        '#options' => array(5=>5,10=>10,20=>20,40=>40,60=>60),
-        
-    );
-    $form['alt_button'] = array(
-  '#type' => 'submit',
-  '#value' => t('Apply'),
-
-);
-    $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'),'#submit' => array('itg_widget_issuewidgetlist_filter_reset'),);
-
-  
+  $form['content_title'] = array(
+      '#title' => t('Content Title'),
+      '#type' => 'select',
+      '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
+      '#options' => $options,
+  );
+  $form['items_per_page'] = array(
+      '#title' => t('Items per page '),
+      '#type' => 'select',
+      '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+      '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+  );
+  $form['alt_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Apply'),
+  );
+  $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'), '#submit' => array('itg_widget_issuewidgetlist_filter_reset'),);
 
 
-    return $form;
+
+
+  return $form;
 }
 
 /**
@@ -1729,13 +1733,10 @@ function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
  * @param array $form
  * @param array $form_state
  */
+function itg_widget_issuewidgetlist_filter_form_submit($form, $form_state) {
 
-function itg_widget_issuewidgetlist_filter_form_submit($form, $form_state)
-{
-   
-     $query = array('field_story_issue_date_value[value][date]' =>$form_state['values']['content_title'] ,'items_per_page'=>$form_state['values']['items_per_page']);
-     drupal_goto('issue-magazin-widget-list',array('query'=>$query));
-
+  $query = array('field_story_issue_date_value[value][date]' => $form_state['values']['content_title'], 'items_per_page' => $form_state['values']['items_per_page']);
+  drupal_goto('issue-magazin-widget-list', array('query' => $query));
 }
 
 /**
@@ -1744,9 +1745,7 @@ function itg_widget_issuewidgetlist_filter_form_submit($form, $form_state)
  * @param array $form
  * @param array $form_state
  */
+function itg_widget_issuewidgetlist_filter_reset($form, $form_state) {
 
-function itg_widget_issuewidgetlist_filter_reset($form, $form_state)
-{
-    
-     drupal_goto('issue-magazin-widget-list');
+  drupal_goto('issue-magazin-widget-list');
 }
