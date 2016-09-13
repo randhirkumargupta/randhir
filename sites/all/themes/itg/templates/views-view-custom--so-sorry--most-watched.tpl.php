@@ -18,7 +18,7 @@ global $base_url;
     <?php endif; ?>
       <figcaption><i class="fa fa-play-circle"></i> <?php print $value['field_video_duration']; ?></figcaption>
 </figure>
-            <span class="posted-on"><?php print $value['created']; ?></span>
+          <span class="posted-on"><?php print date ('D, d M, Y',  strtotime($value['created'])) ?></span>
              <?php print l($value['title'], $base_url . '/' . "sosorry/" . $value['nid'] . "") ?>
 
         </div>

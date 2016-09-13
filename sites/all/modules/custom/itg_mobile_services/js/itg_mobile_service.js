@@ -464,9 +464,29 @@ var sDateFlag = 1;
             jQuery('#reset-date-button').removeAttr('disabled');
             var frequency_from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
             var frequency_end_date = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
-            if (frequency_from_date != '' && frequency_end_date != '') {
-                jQuery('.mobile-content-submit').removeAttr('disabled');
-            }
+            
+            jQuery('.mobile-content-submit').on("click", function (event) {
+                event.preventDefault();
+                if (frequency_from_date == '') {
+                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
+                    return false;
+                } else if (frequency_end_date == '') {
+                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2').append('<span class="error">Please enter end date.</span>');
+                    return false;
+                }
+                if (frequency_from_date != '' && frequency_end_date != '') {
+                    jQuery('.mobile-content-submit').removeAttr('disabled');
+                    jQuery('#edit-field-service-content-und-add-more').mousedown();
+                } 
+            });
+           
+            
+           
+           
 
             jQuery('.field-name-field-story-expert-description .form-textarea').on('keyup', function () {
                 if (Drupal.settings.itg_mobile_services.settings.countchar) {
