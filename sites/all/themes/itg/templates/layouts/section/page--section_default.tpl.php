@@ -413,7 +413,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
   <!--Don't miss and Ad section starts here-->
 <?php if (isset($widget_data['itg-block-10']['widget_name']) || $theme == 'itgadmin') { ?>  
      <div class="row itg-h321-section">
-        <div class="col-md-8 col-sm-8 col-xs-12 mt-50">
+        <div class="col-md-8 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name']; ?>">
@@ -436,7 +436,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 </div>               
             </div>  
         </div>
-         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
            <div class="itg-widget">
              <div class="ad-widget">
                <div class="sidebar-ad droppable"></div>
@@ -450,7 +450,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
   <!--Photo slider and Watch now section starts here-->
   <?php if (isset($widget_data['itg-block-12']['widget_name']) || isset($widget_data['itg-block-13']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-h450-section">
-        <div class="col-md-8 col-sm-8 col-xs-12 mt-50">
+        <div class="col-md-8 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-12']['widget_name']; ?>">
@@ -473,7 +473,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 </div>               
             </div>  
         </div>
-         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-13']['widget_name']; ?>">

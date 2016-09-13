@@ -29,10 +29,8 @@ if (isset($arg[1])) {
 }
 ?>
 <?php if (isset($output)) { ?>
-  <div class="sosory-video">
-    <iframe frameborder="0" 
-            width="750"
-            height="539"
+  <div class="sosory-video iframe-video">
+    <iframe frameborder="0"             
             src="https://www.dailymotion.com/embed/video/<?php print $output; ?>?autoplay=<?php print $autoplay; ?>&mute=1&ui-start-screen-info"
             allowfullscreen>
     </iframe>
