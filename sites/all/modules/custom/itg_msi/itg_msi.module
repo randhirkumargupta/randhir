@@ -802,3 +802,66 @@ function itg_msi_get_current_issue() {
   }
   return $output;
 }
+
+/**
+ * Implement function for get issue based story according category on magazine page
+ * @param string $issue_date
+ * @return array
+ */
+function itg_msi_issue_category_data($issue_date){
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_magazine_story_issue', 'issue_based', 'n.nid = issue_based.entity_id');
+  $query->join('field_data_field_story_issue_date', 'issue_date', 'n.nid = issue_date.entity_id');
+  $query->join('field_data_field_story_category', 'story_section', 'n.nid = story_section.entity_id');
+  $query->join('taxonomy_term_data', 'term_name', 'story_section.field_story_category_tid = term_name.tid');
+  $query->join('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->join('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
+  $query->fields('n', array('nid', 'title'));
+  $query->fields('term_name', array('name'));
+  $query->fields('issue_date', array('field_story_issue_date_value'));
+  $query->fields('f_managed', array('fid', 'uri'));
+  $query->fields('story_section', array('field_story_category_tid'));
+  $query->condition(db_or()->isnotNull('issue_date.field_story_issue_date_value'));
+  $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
+  $query->condition('story_section.bundle', 'story', '=');
+  $query->orderBy('n.created', DESC);
+  $results = $query->execute();
+  foreach($results as $value){
+    $result[$value->field_story_category_tid][] = $value;
+  }
+  return $result;
+}
+
+/**
+ * Implement function for get issue based story according supplement on magazine page
+ * @param string $issue_date
+ * @return array
+ */
+function itg_msi_issue_suppliment_data($issue_date){
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_magazine_story_issue', 'issue_based', 'n.nid = issue_based.entity_id');
+  $query->join('field_data_field_story_issue_date', 'issue_date', 'n.nid = issue_date.entity_id');
+  $query->join('field_data_field_story_select_supplement', 'story_supplement', 'n.nid = story_supplement.entity_id');
+  $query->join('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->join('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
+  $query->fields('n', array('nid', 'title'));
+  $query->fields('issue_date', array('field_story_issue_date_value'));
+  $query->fields('f_managed', array('fid', 'uri'));
+  $query->fields('story_supplement', array('field_story_select_supplement_target_id'));
+ // $query->condition(db_or()->isnotNull('story_supplement.field_story_select_supplement_target_id'));
+  $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
+  $query->orderBy('n.created', DESC);
+  $results = $query->execute();
+  foreach($results as $value){
+    $result[$value->field_story_select_supplement_target_id][] = $value;
+  }
+  return $result;
+}
+
+function itg_msi_issue_suppliment_title($nid){
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchField();
+  return t($result);
+}
