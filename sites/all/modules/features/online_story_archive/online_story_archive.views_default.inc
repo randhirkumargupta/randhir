@@ -180,6 +180,7 @@ function online_story_archive_views_default_views() {
     20 => 0,
     6 => 0,
     21 => 0,
+    19 => 0,
     10 => 0,
     13 => 0,
     11 => 0,
@@ -187,11 +188,57 @@ function online_story_archive_views_default_views() {
     17 => 0,
     14 => 0,
     12 => 0,
-    19 => 0,
     15 => 0,
     18 => 0,
     23 => 0,
+    22 => 0,
+    24 => 0,
   );
+  /* Filter criterion: Apache Solr: hash */
+  $handler->display->display_options['filters']['hash']['id'] = 'hash';
+  $handler->display->display_options['filters']['hash']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['hash']['field'] = 'hash';
+  $handler->display->display_options['filters']['hash']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['hash']['expose']['operator_id'] = 'hash_op';
+  $handler->display->display_options['filters']['hash']['expose']['label'] = 'hash';
+  $handler->display->display_options['filters']['hash']['expose']['operator'] = 'hash_op';
+  $handler->display->display_options['filters']['hash']['expose']['identifier'] = 'hash';
+  $handler->display->display_options['filters']['hash']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+  );
+  /* Filter criterion: Apache Solr: ds_created */
+  $handler->display->display_options['filters']['ds_created']['id'] = 'ds_created';
+  $handler->display->display_options['filters']['ds_created']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['ds_created']['field'] = 'ds_created';
+  $handler->display->display_options['filters']['ds_created']['operator'] = '<';
+  $handler->display->display_options['filters']['ds_created']['value']['value'] = 'now -2 day';
+  /* Filter criterion: Apache Solr: bs_status */
+  $handler->display->display_options['filters']['bs_status']['id'] = 'bs_status';
+  $handler->display->display_options['filters']['bs_status']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['bs_status']['field'] = 'bs_status';
+  $handler->display->display_options['filters']['bs_status']['value'] = '1';
   $handler->display->display_options['path'] = 'online-archive-story';
   $export['archive_story'] = $view;
 
