@@ -585,7 +585,7 @@ function feature_for_ugc_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Rejected date';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Field: source */
+  /* Field: Field: Kicker Text */
   $handler->display->display_options['fields']['field_source']['id'] = 'field_source';
   $handler->display->display_options['fields']['field_source']['table'] = 'field_data_field_source';
   $handler->display->display_options['fields']['field_source']['field'] = 'field_source';
