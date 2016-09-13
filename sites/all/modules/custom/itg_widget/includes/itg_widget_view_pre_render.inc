@@ -8,6 +8,7 @@
  * {@inheritdoc}
  */
 function itg_widget_views_pre_render(&$view) {
+
   if ($view->name == "so_sorry" && $view->current_display == 'so_sorry_videos_widget') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'so-sorry-video-widget-list', array('query' => array('destination' => arg(0))));
@@ -16,7 +17,7 @@ function itg_widget_views_pre_render(&$view) {
   elseif ($view->name == "so_sorry" && $view->current_display == 'so_sorry_videos') {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Top Story Widget'), 'so-sorry-video-widget-order-reorder');
+      $header_content .= l(t('So Sorry Widget'), 'so-sorry-video-widget-order-reorder');
       $view->attachment_before = $header_content;
     }
   }
@@ -217,6 +218,18 @@ function itg_widget_views_pre_render(&$view) {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Poll Widget'), 'poll-format-widget-list');
+      $view->attachment_before = $header_content;
+    }
+  }
+  
+   elseif ($view->name == "issue_base_magazin_widget" && $view->current_display == 'issue_magazin_widget_list') {
+    $header_content = l(t('Search Content'), 'issue-base-magazin-widget');
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "issue_base_magazin_widget" && $view->current_display == 'issue_base_magazin_widget') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Issue Magazin Widget'), 'issue-magazin-widget-list');
       $view->attachment_before = $header_content;
     }
   }

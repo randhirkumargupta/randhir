@@ -217,7 +217,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -251,7 +251,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -357,6 +357,40 @@ function feature_category_management_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_set_as_featured_cate'.
+  $field_instances['taxonomy_term-category_management-field_set_as_featured_cate'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 12,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_set_as_featured_cate',
+    'label' => 'Set As Featured',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 7,
     ),
   );
 
@@ -490,6 +524,7 @@ function feature_category_management_field_default_field_instances() {
   t('Redirection URL');
   t('Select template');
   t('Select template type');
+  t('Set As Featured');
   t('Sponsored Category');
 
   return $field_instances;

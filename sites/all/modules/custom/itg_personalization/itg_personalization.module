@@ -283,10 +283,10 @@ function itg_personalization_views_pre_render(&$view) {
         $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Pending';
       }
       if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {        
-        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Reject';
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Rejected';
       }
       if ($view->result[$key]->node_status == '0' && $view->result[$key]->field_field_story_source_type[0]['raw']['value'] == '1') {        
-        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Approve';
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Approved';
       }
     }
   }
