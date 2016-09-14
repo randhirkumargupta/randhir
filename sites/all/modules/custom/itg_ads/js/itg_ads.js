@@ -18,14 +18,14 @@
                 var val = $('#edit-field-ads-template-selection-und').val();
 
                 if (val == "Section") { // if section select then template variant should be reset
-                    $('#edit-field-ads-template-variants-und').val('');
+                //    $('#edit-field-ads-template-variants-und').val('');
                 } else if (val == "Home") { // if home select then content/section selection should be reset
                     $('#edit-field-ads-section-selection-und').val('');
-                    $('#edit-field-ads-content-selection-und').val('');
+                //    $('#edit-field-ads-content-selection-und').val('');
                 } else if (val == "Rest") { // if rest select then content/section selection and template variant should be reset 
-                    $('#edit-field-ads-template-variants-und').val('');
+                  //  $('#edit-field-ads-template-variants-und').val('');
                     $('#edit-field-ads-section-selection-und').val('');
-                    $('#edit-field-ads-content-selection-und').val('');
+                  //  $('#edit-field-ads-content-selection-und').val('');
 
                 }
 
