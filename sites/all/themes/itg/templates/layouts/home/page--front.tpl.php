@@ -708,10 +708,10 @@ if( $theme != 'itgadmin')
 <?php $divcou = 3 + $divcou; ?>
    <?php if ((EXTRA_SECTION_CARDS != $divcou) && ($divcou != $last_val)) {?>
        <a href="javascript:void(0)" class="add-more-block">Load More+</a>
-       <?php } ?>
+       <?php } if ($theme == 'itgadmin'){?>
 
     <a href="javascript:void(0)" class="removes-more-block">Less-</a>
-     
+       <?php }?>
     </div>
 
 <?php } ?>
@@ -807,7 +807,7 @@ if($theme != 'itgadmin')
     drupal_add_js("jQuery(document).ready(function() {
        jQuery('.add-more-block').on('click', function() {
                 jQuery(this).hide();
-                jQuery(this).parent('.itg-common-section').next('.show-on-add').show(750);
+                jQuery(this).parent('.itg-common-section').next('.show-on-add').slideDown( 1000);
                 jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
                 jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();
                  if (jQuery(this).parent('.itg-common-section').next('.itg-common-section').next('.itg-common-section').is(':visible')) {

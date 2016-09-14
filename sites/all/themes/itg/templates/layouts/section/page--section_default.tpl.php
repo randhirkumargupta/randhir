@@ -686,10 +686,10 @@ if( $theme != 'itgadmin')
 <?php $divcou = 3 + $divcou; ?>
    <?php if ((EXTRA_SECTION_CARDS != $divcou) && ($divcou != $last_val)) {?>
        <a href="javascript:void(0)" class="add-more-block">Load More+</a>
-       <?php } ?>
+       <?php } if ($theme == 'itgadmin'){?>
 
     <a href="javascript:void(0)" class="removes-more-block">Less-</a>
-     
+       <?php } ?>
     </div>
 
 <?php } ?>

@@ -114,7 +114,7 @@ function ads_features_field_default_field_bases() {
   // Exported field_base: 'field_ads_section_selection'.
   $field_bases['field_ads_section_selection'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ads_section_selection',
@@ -122,22 +122,22 @@ function ads_features_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'taxonomy',
+    'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'ads_section_selection',
-          'parent' => 0,
-        ),
+        'Photo' => 'Section Photo',
+        'Video' => 'Section Video',
+        'Default' => 'Section Default',
       ),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_ads_short_description'.
