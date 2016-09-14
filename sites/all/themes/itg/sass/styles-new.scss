@@ -1273,6 +1273,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     font-size: 18px;
     color: #666;
     font-weight: 500;
+    span{
+      font-size: 14px;
+    }
   }
   .question-number{
     display: inline-block;
@@ -1295,6 +1298,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       margin: 0 0 20px;
       &.form-type-radio .form-radio {
         margin: 3px 5px 0 0;
+      }
+    }
+    .form-type-textfield{
+      > label{
+        float: left;
+        padding: 8px 20px 0 0;
+        width: 220px;
       }
     }
   }
