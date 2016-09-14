@@ -2921,6 +2921,9 @@ div.image-widget-data .ajax-progress-throbber {
 .node-category-form .hierarchical-select-wrapper .hierarchical-select .selects .form-select {
   max-width: 170px;
 }
+.node-category-form .field-name-field-sponser-logo .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+  left: 550px;
+}
 
 [id*="itg-survey-survey-form"] #messages, [id*="itg-quiz-quiz-form"] #messages {
   margin: 20px 0;
@@ -7043,4 +7046,26 @@ div.node #comments h2 {
 [id*="itg-widget-issuewidget-filter-form"] .form-submit, [id*="itg-widget-issuewidgetlist-filter-form"] .form-submit {
   height: 36px;
   margin: 26px 3px 0 7px;
+}
+
+[id*="block-itg-category-manager-sef-url-log"] {
+  padding-bottom: 10px;
+}
+[id*="block-itg-category-manager-sef-url-log"] table.itg-log {
+  font: 400 12px/18px Roboto;
+  margin: 5px auto;
+  max-width: 310px;
+  text-align: center;
+}
+[id*="block-itg-category-manager-sef-url-log"] table.itg-log th {
+  font-weight: 500;
+}
+[id*="block-itg-category-manager-sef-url-log"] table.itg-log td, [id*="block-itg-category-manager-sef-url-log"] table.itg-log th {
+  border: 1px solid #fff;
+  padding: 3px;
+  word-wrap: break-word;
+}
+
+.region-sidebar-second .block-itg-category-manager .block-title {
+  margin-top: 0;
 }
