@@ -3859,7 +3859,7 @@ node/*/edit',
   'delta' => 'ask_an_expert',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -81,
+  'weight' => -80,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
@@ -7755,7 +7755,7 @@ draft-manage-astro',
   'delta' => 'we_may_suggest',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -80,
+  'weight' => -79,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -7796,7 +7796,7 @@ sosorry/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -7906,7 +7906,7 @@ sosorry/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8072,7 +8072,7 @@ sosorry/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8238,7 +8238,7 @@ sosorry/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8404,7 +8404,7 @@ sosorry/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -8570,7 +8570,7 @@ sosorry/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -10906,7 +10906,7 @@ sosorry/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -10920,7 +10920,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -11029,7 +11030,7 @@ sosorry/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11043,7 +11044,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -11295,7 +11297,7 @@ node/*/edit',
   'delta' => 'top_takes_videos_widget',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -77,
+  'weight' => -76,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -11310,7 +11312,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -11418,7 +11421,7 @@ sosorry/*',
   'delta' => 'watch_right_now_videos_widget',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -78,
+  'weight' => -77,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -11433,7 +11436,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -11658,7 +11662,7 @@ node/*/edit',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11672,7 +11676,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -11781,7 +11786,7 @@ sosorry/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -11795,7 +11800,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -12048,7 +12054,7 @@ node/*/edit',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12062,7 +12068,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -12171,7 +12178,7 @@ sosorry/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12185,7 +12192,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -12438,7 +12446,7 @@ node/*/edit',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12452,7 +12460,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -12561,7 +12570,7 @@ sosorry/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12575,7 +12584,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -12828,7 +12838,7 @@ node/*/edit',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12842,7 +12852,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -12951,7 +12962,7 @@ sosorry/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -12965,7 +12976,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -13218,7 +13230,7 @@ node/*/edit',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -13232,7 +13244,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -13341,7 +13354,7 @@ sosorry/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -13355,7 +13368,8 @@ tv-show
 tv-show/*
 calendar/*/*/magazine.html
 sosorry
-sosorry/*',
+sosorry/*
+anchors-list',
   'title' => '',
   'cache' => 1,
 );
@@ -17702,7 +17716,7 @@ sosorry/*',
   'delta' => 'ad_right_sidebar_1',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -84,
+  'weight' => -83,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -17722,7 +17736,7 @@ tv-show/*
   'delta' => 'ad_right_sidebar_2',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -79,
+  'weight' => -78,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -17955,12 +17969,11 @@ sosorry/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
 personalization/*
-anchors-list
 user
 user/*
 tv-show
@@ -17969,7 +17982,8 @@ calendar/*/*/magazine.html
 sosorry
 sosorry/*
 programmes
-videos',
+videos
+<front>',
   'title' => '',
   'cache' => -1,
 );
@@ -17979,13 +17993,12 @@ videos',
   'delta' => 'programmes-rhs_programmes',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -74,
+  'weight' => -84,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
 personalization/*
-anchors-list
 user
 user/*
 tv-show
@@ -17994,7 +18007,8 @@ calendar/*/*/magazine.html
 sosorry
 sosorry/*
 programmes
-videos',
+videos
+<front>',
   'title' => '',
   'cache' => -1,
 );
@@ -18005,12 +18019,11 @@ videos',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
 personalization/*
-anchors-list
 user
 user/*
 tv-show
@@ -18019,7 +18032,8 @@ calendar/*/*/magazine.html
 sosorry
 sosorry/*
 programmes
-videos',
+videos
+<front>',
   'title' => '',
   'cache' => -1,
 );
@@ -18030,12 +18044,11 @@ videos',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
 personalization/*
-anchors-list
 user
 user/*
 tv-show
@@ -18044,7 +18057,8 @@ calendar/*/*/magazine.html
 sosorry
 sosorry/*
 programmes
-videos',
+videos
+<front>',
   'title' => '',
   'cache' => -1,
 );
@@ -18055,12 +18069,11 @@ videos',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
 personalization/*
-anchors-list
 user
 user/*
 tv-show
@@ -18069,7 +18082,8 @@ calendar/*/*/magazine.html
 sosorry
 sosorry/*
 programmes
-videos',
+videos
+<front>',
   'title' => '',
   'cache' => -1,
 );
@@ -18080,12 +18094,11 @@ videos',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
 personalization/*
-anchors-list
 user
 user/*
 tv-show
@@ -18094,7 +18107,8 @@ calendar/*/*/magazine.html
 sosorry
 sosorry/*
 programmes
-videos',
+videos
+<front>',
   'title' => '',
   'cache' => -1,
 );
@@ -18105,12 +18119,11 @@ videos',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
 personalization/*
-anchors-list
 user
 user/*
 tv-show
@@ -18119,7 +18132,8 @@ calendar/*/*/magazine.html
 sosorry
 sosorry/*
 programmes
-videos',
+videos
+<front>',
   'title' => '',
   'cache' => -1,
 );
@@ -18570,7 +18584,7 @@ tv-show/*',
   'delta' => 'magazine_calendar',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -83,
+  'weight' => -82,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
@@ -18752,7 +18766,7 @@ tv-show/*',
   'delta' => 'latest_issue_magzine-block_1',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -82,
+  'weight' => -81,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
