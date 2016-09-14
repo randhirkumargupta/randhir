@@ -350,7 +350,8 @@
     font-weight: 500;
     line-height: 24px;
     padding: 10px;
-    height: auto;
+    min-height: 68px;
+    max-height: auto;
     overflow: initial;
   }
   .featured_photo_carousel .flexslider .slides li .detail .flex-count {

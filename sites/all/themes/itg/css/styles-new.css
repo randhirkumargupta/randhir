@@ -998,6 +998,27 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   vertical-align: top;
   color: #fff;
 }
+#content #block-formblock-ugc .node-ugc-form table td {
+  position: relative;
+}
+#content #block-formblock-ugc .node-ugc-form table td > .form-submit[value="Remove"], #content #block-formblock-ugc .node-ugc-form table td .ajax-new-content > .form-submit[value="Remove"] {
+  position: absolute;
+  right: 10px;
+  margin: 0;
+  bottom: 20px;
+}
+#content #block-formblock-ugc .node-ugc-form table + div .field-add-more-submit {
+  margin-left: 0;
+}
+#content #block-formblock-ugc .node-ugc-form .messages.error.file-upload-js-error {
+  display: none;
+}
+#content #block-formblock-ugc .node-ugc-form input[type="file"] {
+  width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
   margin-left: 0;
   margin-right: 0;

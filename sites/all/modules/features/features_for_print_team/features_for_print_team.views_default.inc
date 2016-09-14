@@ -33,6 +33,7 @@ function features_for_print_team_views_default_views() {
     15 => '15',
     6 => '6',
     25 => '25',
+    26 => '26',
     16 => '16',
     17 => '17',
     18 => '18',
