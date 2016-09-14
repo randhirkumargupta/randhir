@@ -5,9 +5,9 @@
         <link>http://yourlinkhere.com/xyz.xml</link>
         <description>MRSS Description</description>
         <item>
-            <title>{{{field_story_long_head_line}}}</title>
+            <title>{{{node_title}}}</title>
             <link>{{{node_permalink}}}</link>
-            <description>{{{body}}}</description>
+            <description>{{{field_story_expert_description}}}</description>
             <guid isPermaLink="false">{{{node_permalink}}}</guid>
             <media:content>
                 <media:thumbnail url="{{{field_story_extra_large_image}}}"/>
