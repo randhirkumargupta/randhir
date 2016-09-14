@@ -4917,6 +4917,10 @@ footer .footer-copyright {
   font-weight: 700;
 }
 
+#block-views-so-sorry-the-remix {
+  max-width: 370px;
+  margin: 0 auto;
+}
 #block-views-so-sorry-the-remix .title {
   background: #000;
   padding: 10px;

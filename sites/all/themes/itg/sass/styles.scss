@@ -3716,6 +3716,8 @@ footer{
     }    
 }
 #block-views-so-sorry-the-remix{
+    max-width: 370px;
+    margin: 0 auto;
     .title{
         background: #000;        
         padding: 10px;
@@ -3723,7 +3725,7 @@ footer{
             color: #fff;
             font-family: $itg-roboto;
         }
-    }
+    }    
 }
 .sosory-video{
     padding: 10px;
