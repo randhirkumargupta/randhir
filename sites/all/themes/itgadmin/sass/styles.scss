@@ -6523,6 +6523,7 @@ div.node{
   padding: 5px 3px;
   border: 1px solid red;
   margin-right: 5px;
+  margin-bottom: 5px;
   width: 65px;
   text-align: left;
   position: relative;
@@ -7065,4 +7066,17 @@ div.node{
 }
 .region-sidebar-second .block-itg-category-manager .block-title{
   margin-top: 0;
+}
+.widgets-view{
+  .vbo-views-form{
+    fieldset#edit-select{
+      .form-submit{
+        @extend .fleft;
+      }
+      .nodes_id_container{
+        @extend .db;
+        @extend .of-hide;
+      }
+    }
+  }
 }
