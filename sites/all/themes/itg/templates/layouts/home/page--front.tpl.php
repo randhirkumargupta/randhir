@@ -809,6 +809,9 @@ if($theme != 'itgadmin')
                 jQuery(this).parent('.itg-common-section').next('.show-on-add').show(750);
                 jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
                 jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();
+                 if (jQuery(this).parent('.itg-common-section').next('.itg-common-section').next('.itg-common-section').is(':visible')) {
+                  jQuery(this).parent('.itg-common-section').next('.itg-common-section').find('.add-more-block').hide();
+                }
             });
             jQuery('.add-more-block').each(function() {
 
