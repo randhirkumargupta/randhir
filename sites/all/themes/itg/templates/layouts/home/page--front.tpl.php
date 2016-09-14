@@ -681,9 +681,9 @@ if ($theme != 'itgadmin') {
 <?php } ?>
   <!--End of Common section-->
   
-  <!--Load More Loader-->
+  <!--Load More Loader
   <div class="load-more">
-    <img src="<?php echo base_path() ?>sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
+    <img src="<?php //echo base_path() ?>sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
   </div>
   <!--End of Loader-->
   

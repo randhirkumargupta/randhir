@@ -3646,6 +3646,14 @@ footer{
          }
     }
 }
+.magazin-section{
+    .section-ordering{
+        @include pos(relative);
+    }
+    span.widget-title{
+        @include pos(absolute);            
+    }
+}
 /*End start magazins*/
 /*CSS Start RHS add block*/
 #block-itg-ads-ad-right-sidebar-1{

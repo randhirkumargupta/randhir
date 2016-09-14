@@ -218,16 +218,16 @@ jQuery(document).ready(function () {
 
     });
     
-    jQuery(window).scroll(function () {
-      var winH = jQuery(window).height() + jQuery('#footer').height() + 40;
-      var docH = jQuery(document).height();
-      var targetH = docH - winH;
-      var scrollH = jQuery(window).scrollTop();
-      if(scrollH >= targetH) {
-        console.log(scrollH + "==" + targetH);
-           jQuery('.load-more').show();
-      }
-    });
+//    jQuery(window).scroll(function () {
+//      var winH = jQuery(window).height() + jQuery('#footer').height() + 40;
+//      var docH = jQuery(document).height();
+//      var targetH = docH - winH;
+//      var scrollH = jQuery(window).scrollTop();
+//      if(scrollH >= targetH) {
+//        console.log(scrollH + "==" + targetH);
+//           jQuery('.load-more').show();
+//      }
+//    });
     
     //Add header for so-sorry page
     jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");

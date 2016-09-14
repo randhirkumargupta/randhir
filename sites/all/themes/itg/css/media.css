@@ -770,10 +770,9 @@
 
   /*CSS End Photo landing page*/
   /*CSS Start magazine-calander RHS*/
-  #block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1 {
-    padding: 50px 30px 20px 30px;
-  }
-
+  /*#block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1{    
+      padding: 50px 30px 20px 30px;
+  }*/
   /*CSS End magazine-calander RHS*/
   /*CSS Start So sorry page*/
   #block-itg-layout-manager-header-sosorry-block .sosory-header .sosorryitg {
