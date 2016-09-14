@@ -43,9 +43,11 @@
  makeradio = '<span class="hiddenradio"><input type="radio" class="select-prim" value="' + selectvalue + '"><span class="primary-text">' + comptext + '</span></span>';
                         datahtml = datahtml.replace(makeradio, "");
                         datahtml = datahtml + makeradio+'</div>';
+                        console.log(datahtml);
                        jQuery('.prim-html').remove();
+                       setTimeout(function(){ 
                         jQuery('.form-item-field-primary-category-html-und-0-value').append(datahtml).hide();
-
+}, 1000);
             jQuery(document).on('ajaxComplete', function(event, xhr, settings) {
                 if (settings.url.indexOf('hierarchical_select_ajax') >= 0) {
              
