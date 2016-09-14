@@ -2343,14 +2343,16 @@ footer{
                     @include calculate-width(1);
                     font-family: $itg-roboto;
                     .flex-caption {    
-                        padding: 10px 10px;    
+                        padding: 5px;    
                         background: #000;
                         color: $white-color;
-                        @include font(18px,24px,$itg-font-medium);    
-                        width: auto;                        
+                        @include font(13px,18px,$itg-font-medium);    
+                        width: auto; 
+                        max-height: 45px;
+                        overflow: hidden;
                     }
                     .flex-count{
-                        @include pos(absolute,null,null,78px,0px);
+                        @include pos(absolute,null,null,49px,0px);
                         @include display-inline;
                         background: #000;
                         opacity: .5;
@@ -2364,7 +2366,7 @@ footer{
 
             }
         }
-        .flex-control-nav{
+        .flex-control-nav, .flex-direction-nav{
             display: none;
         }
         .flex-count{
@@ -3328,13 +3330,13 @@ footer{
         .search-menu{
             padding-top: 20px;            
             white-space: nowrap;
-            overflow-x: auto;
+            overflow-x: scroll;
             a{
                 padding: 0 10px;                                
                 @include display-inline;
                 color: #747474;                
                 text-transform: uppercase;
-                @include font(20px,24px,$itg-font-regular);
+                @include font(16px,24px,$itg-font-regular);
                 &:nth-child(1){
                     padding-left: 0;
                     border-left: 0;
@@ -3646,6 +3648,14 @@ footer{
          }
     }
 }
+.magazin-section{
+    .section-ordering{
+        @include pos(relative);
+    }
+    span.widget-title{
+        @include pos(absolute);            
+    }
+}
 /*End start magazins*/
 /*CSS Start RHS add block*/
 #block-itg-ads-ad-right-sidebar-1{
@@ -3708,6 +3718,8 @@ footer{
     }    
 }
 #block-views-so-sorry-the-remix{
+    max-width: 370px;
+    margin: 0 auto;
     .title{
         background: #000;        
         padding: 10px;
@@ -3715,7 +3727,7 @@ footer{
             color: #fff;
             font-family: $itg-roboto;
         }
-    }
+    }    
 }
 .sosory-video{
     padding: 10px;
@@ -3853,7 +3865,7 @@ footer{
 /*CSS Start video setting Ifram*/
 .iframe-video{
         position: relative;
-        padding-bottom: 65.25%;
+        padding-bottom: 50%;
         padding-top: 30px;
         height: 0;
         overflow: auto; 

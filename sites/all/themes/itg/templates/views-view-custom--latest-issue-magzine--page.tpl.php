@@ -33,7 +33,7 @@
     </div>
   <?php endforeach; ?>
 </div>
-
+<div class="row magazin-section">
 <?php
 // category based story according issue date
 $data = itg_msi_issue_category_data($issue_attribute_date);
@@ -58,7 +58,7 @@ foreach ($data as $parent_key => $parent_value) {
   if (!empty($sub_title)) {
     $output .= $sub_title;
   }
-  print '<div class="section-ordering">' . $output . '</div>';
+  print '<div class="col-md-6 col-sm-12 col-xs-12 mt-50"><div class="section-ordering">' . $output . '</div></div>';
 }
 
 
@@ -85,7 +85,8 @@ foreach ($supplement_value as $suppliment_key => $suppliment_value) {
   if (!empty($sup_sub_title)) {
     $supp_output .= $sup_sub_title;
   }
-  print '<div class="section-ordering">' . $supp_output . '</div>';
+  print '<div class="col-md-6 col-sm-12 col-xs-12 mt-50"><div class="section-ordering">' . $supp_output . '</div></div>';
 }
 }
 ?>
+</div>
