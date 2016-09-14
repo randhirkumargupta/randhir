@@ -231,7 +231,10 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
 
       foreach ($form['field_service_content'][LANGUAGE_NONE] as $key => $fieldcollection) {
-        if (is_numeric($key)) {
+        if (is_numeric($key)) { 
+          
+          $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video']['#attributes']['class'][] = 'mobile-video-fields';
+          $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_audio']['#attributes']['class'][] = 'mobile-audio-fields';
           $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video'][LANGUAGE_NONE][0]['#upload_validators']['itg_custom_video_field_validate'] = array(1, 2);
         }
       }
@@ -681,7 +684,30 @@ function itg_service_content_after_build($form, &$form_state) {
   else {
     $settings['service_content_edit_mode'] = FALSE;
   }
-
+  
+  
+  foreach ($form['field_service_content'][LANGUAGE_NONE] as $key => $fieldcollection) {
+    if (is_numeric($key)) {
+    
+      $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video_keyword']['#attributes']['class'][] = 'file-display';
+          
+//      // for video keyword
+//      if ($form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video'][LANGUAGE_NONE][0]['fid']['#value']) {
+//        $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video_keyword']['#access'] = TRUE;
+//      }
+//      else {
+//        $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video_keyword']['#access'] = FALSE;
+//      }
+//      // for Audio keyword
+//      if ($form['field_service_content'][LANGUAGE_NONE][$key]['field_service_audio'][LANGUAGE_NONE][0]['fid']['#value']) {
+//        $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_audio_keyword']['#access'] = TRUE;
+//      }
+//      else {
+//        $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_audio_keyword']['#access'] = FALSE;
+//      }
+    }
+  }
+                          
   $countchar = itg_countchar_validation($association_nid);
   $settings['countchar'] = $countchar;
 

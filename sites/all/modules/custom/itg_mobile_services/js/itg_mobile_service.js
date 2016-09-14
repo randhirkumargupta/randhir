@@ -12,6 +12,7 @@ var fixedDate = '';
 var maxLen = 0;
 var astroFlag = 0;
 var sDateFlag = 1;
+var dynamicId = '';
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
@@ -39,14 +40,14 @@ var sDateFlag = 1;
             jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').removeClass('itg-disabled');
             jQuery('#edit-field-service-frequency-und input').click(function () {
                 if ($(this).val() == 1) { // day
-                    jQuery('.custom-content-submit').removeAttr('disabled');
+                  //  jQuery('.custom-content-submit').removeAttr('disabled');
                 } else if ($(this).val() == 2) { // weekly
                     jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
-                    jQuery('.custom-content-submit').attr('disabled', 'disabled');
+                    //jQuery('.custom-content-submit').attr('disabled', 'disabled');
 
                 } else if ($(this).val() == 3) { // monthly
                     jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
-                    jQuery('.custom-content-submit').attr('disabled', 'disabled');
+                    //jQuery('.custom-content-submit').attr('disabled', 'disabled');
                 }
             });
             jQuery('#content-enable-button').hide();
@@ -54,9 +55,11 @@ var sDateFlag = 1;
             jQuery('.field-name-field-story-expert-description').hide();
             jQuery('.field-name-field-story-large-image').hide();
             jQuery('.field-name-field-service-audio').hide();
+            //jQuery('.field-name-field-service-audio-keyword').hide();
             jQuery('.field-name-field-service-video').hide();
+            //jQuery('.field-name-field-service-video-keyword').hide();
 
-
+ 
             jQuery('input[name="field_service_content_add_more"]').hide();
 
             $('#edit-field-service-association-title-und').change(function () {
@@ -180,10 +183,7 @@ var sDateFlag = 1;
                 }
                 if (selectedVal > 1) {
                     jQuery('#edit-field-service-frequency-date').show();
-                    jQuery('input[type="submit"]').attr('disabled', 'disabled');
-                } else if (selectedVal == 1) {
-                    jQuery('input[type="submit"]').removeAttr('disabled');
-                }
+                } 
             }
 
             var service_asso = jQuery("#edit-field-service-association-title-und option:selected").val();
@@ -243,7 +243,7 @@ var sDateFlag = 1;
             if (firstTime == 1) {
                 jQuery('<span id="custom_service_content_0"></span>').insertAfter('textarea[name="field_service_content[und][0][field_story_expert_description][und][0][value]"]');
                 var length_textarea = jQuery("#field-service-content-values > tbody > tr").length;
-
+                
                 for (var ii = 1; ii <= length_textarea; ) {
                     jQuery('<span id="custom_service_content_' + ii + '"></span>').insertAfter('textarea[name="field_service_content[und][' + ii + '][field_story_expert_description][und][0][value]"]');
                     ii++;
@@ -338,7 +338,7 @@ var sDateFlag = 1;
 
 
                 jQuery(document).on("click", "#content-enable-button", function (event) {
-                    event.preventDefault();
+                    event.preventDefault();            
                     var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
                     var edate = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
                     if (sdate == '') {
@@ -407,7 +407,7 @@ var sDateFlag = 1;
                         }
                         tomorrow = dd + '/' + mm + '/' + yyyy;
                         jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').addClass('itg-disabled');
-                        jQuery('<span id="custom_service_content_' + i + '"></span>').insertAfter('textarea[name="field_service_content[und][' + i + '][field_story_expert_description][und][0][value]"]');
+                        jQuery('<span id="custom_service_content_' + i + '"></span>').insertAfter('textarea[name="field_service_content[und][' + i + '][field_story_expert_description][und][0][value]"]');        
                         i++;
                         start_date++;
                     }
@@ -416,7 +416,7 @@ var sDateFlag = 1;
             }
 
             if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
-                jQuery('.custom-content-submit').removeAttr('disabled');
+                //jQuery('.custom-content-submit').removeAttr('disabled');
                 var content_edit_mode = Drupal.settings.itg_mobile_services.settings.service_content_edit_mode;
                 jQuery('#field-service-content-add-more-wrapper').show();
                 jQuery('#edit-field-service-frequency').show();
@@ -465,24 +465,25 @@ var sDateFlag = 1;
             var frequency_from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
             var frequency_end_date = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
             
-            jQuery('.mobile-content-submit').on("click", function (event) {
-                event.preventDefault();
-                if (frequency_from_date == '') {
-                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
-                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
-                    jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
-                    return false;
-                } else if (frequency_end_date == '') {
-                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
-                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
-                    jQuery('.form-item-field-service-frequency-date-und-0-value2').append('<span class="error">Please enter end date.</span>');
-                    return false;
-                }
-                if (frequency_from_date != '' && frequency_end_date != '') {
-                    jQuery('.mobile-content-submit').removeAttr('disabled');
-                    jQuery('#edit-field-service-content-und-add-more').mousedown();
-                } 
-            });
+//            jQuery('.mobile-content-submit').on("click", function (event) {
+//                event.preventDefault();
+//                if (frequency_from_date == '') {
+//                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+//                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+//                    jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
+//                    return false;
+//                } else if (frequency_end_date == '') {
+//                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+//                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+//                    jQuery('.form-item-field-service-frequency-date-und-0-value2').append('<span class="error">Please enter end date.</span>');
+//                    return false;
+//                }
+//                if (frequency_from_date != '' && frequency_end_date != '') {
+//                    //jQuery('.mobile-content-submit').removeAttr('disabled');
+//                    jQuery('#edit-field-service-content-und-add-more').mousedown();
+//                    jQuery('.mobile-content-submit').mousedown();
+//                } 
+//            });
            
             
            
@@ -500,6 +501,45 @@ var sDateFlag = 1;
                 remain = maxLen - parseInt(tlength);
                 jQuery('#custom_service_content_' + string[5]).text(remain + ' characters remaining out of ' + maxLen);
             });
+
+
+            // remove disable for video upload button
+            jQuery( "input[name*='field_service_video_und_0_upload_button']" ).removeAttr('disabled');
+
+            // jQuery('.field-name-field-service-video-keyword').hide();
+            // for hide video and audio keyword text field
+            for (var i = 1; i <= 3; i++) {
+               jQuery('#edit-field-service-content-und-'+i+'-field-service-video-keyword--2').hide();
+               jQuery('#edit-field-service-content-und-'+i+'-field-service-audio-keyword--2').hide();
+               
+            }
+
+            // for video
+            jQuery(".mobile-video-fields input").on('click', function () { 
+                var uploadId = jQuery(this).attr("id");
+                var dataId = uploadId.split('-field-service-video-und-0-upload--');
+                var elementId = dataId[0].split('edit-field-service-content-und-');
+                dynamicId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-video-keyword--'+dataId[1];
+            });
+            // for Audio
+            jQuery(".mobile-audio-fields a").on('click', function () { 
+                          var uploadId = jQuery(this).next("input").attr("id");
+                          var dataId = uploadId.split('-field-service-audio-und-0--');
+                          var elementId = dataId[0].split('edit-field-service-content-und-');
+                          var lastElementId = dataId[1].split('-upload-imce-select');
+                          dynamicAudioId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-audio-keyword--'+lastElementId[0];
+                });
+
+              
+            jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
+                    if (settings.url.indexOf('field_service_video') >= 0) {
+                        jQuery(dynamicId).show();
+                    }
+                    if (settings.url.indexOf('field_service_audio') >= 0) {
+                        jQuery(dynamicAudioId).show();
+                    }
+            });    
+
 
         }
     }
