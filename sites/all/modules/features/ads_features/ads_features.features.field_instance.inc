@@ -200,10 +200,10 @@ function ads_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 2,
+        'type' => 'list_default',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
