@@ -7080,3 +7080,21 @@ div.node{
     }
   }
 }
+.load-more-wrapper{
+  @extend .dib;
+  @extend .full;
+  @extend .vtop;
+  paddin: 10px;
+  text-align: center;
+  .add-more-block, .removes-more-block{
+    @extend .dib;
+    @extend .vtop;
+    padding: 10px 20px;
+    font: 14px/18px Roboto;
+    color: #fff;
+    background-color: #666;
+    border-radius: 5px;
+    margin: 0 10px;
+    text-transform: uppercase;
+  }
+}
