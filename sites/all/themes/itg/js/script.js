@@ -156,8 +156,7 @@ jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" h
         var count_li = 0;
         var i = 1;
         jQuery('.navigation .menu li').each(function () {
-            count_li++;
-            console.log(count_li);
+            count_li++;            
             if (count_li > 14 && i == 1) {
                 jQuery('.navigation .container').append('<ul id="newlist"></ul>');
                 jQuery('#newlist').append(jQuery(this).nextUntil(jQuery(this).last()).andSelf());
@@ -219,16 +218,19 @@ jQuery(document).ready(function () {
 
     });
     
-    jQuery(window).scroll(function () {
-      var winH = jQuery(window).height() + jQuery('#footer').height() + 40;
-      var docH = jQuery(document).height();
-      var targetH = docH - winH;
-      var scrollH = jQuery(window).scrollTop();
-      if(scrollH >= targetH) {
-        console.log(scrollH + "==" + targetH);
-           jQuery('.load-more').show();
-      }
-    });
+//    jQuery(window).scroll(function () {
+//      var winH = jQuery(window).height() + jQuery('#footer').height() + 40;
+//      var docH = jQuery(document).height();
+//      var targetH = docH - winH;
+//      var scrollH = jQuery(window).scrollTop();
+//      if(scrollH >= targetH) {
+//        console.log(scrollH + "==" + targetH);
+//           jQuery('.load-more').show();
+//      }
+//    });
+    
+    //Add header for so-sorry page
+    jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
     
   });
 
