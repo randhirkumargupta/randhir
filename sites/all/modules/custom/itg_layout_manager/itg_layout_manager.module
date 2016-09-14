@@ -338,6 +338,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $data['big_story'] = get_itg_widget('big_story_format');
     $data['personlization'] = get_itg_widget('personlization');
     $vars['widget_data'] = $data;
+    $vars['itg_ad'] = get_ad_script('Home');
   }
   
   //section template display on front
@@ -363,6 +364,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
         $vars['widget_data'] = $data;
         $tpl_name = str_replace('--', '__', $tpl_name);
         $vars['theme_hook_suggestions'][] = $tpl_name;
+        //$vars['itg_ad'] = get_ad_script('Section');
       }
     }
     
