@@ -5,9 +5,9 @@
         <link>http://www.example.com</link>
         <description>Rss feed description here</description>
         <item>
-            <title>{{{field_story_long_head_line}}}</title>
+            <title>{{{node_title}}}</title>
             <guid isPermaLink="true">{{{node_permalink}}}</guid>
-            <description>{{{body}}}</description>
+            <description>{{{field_story_expert_description}}}</description>
             <category>{{{field_story_category}}}</category>
             <pubDate>{{{node_published_date}}}</pubDate>
             <author>{{{node_author}}}</author>
