@@ -279,7 +279,22 @@
     }
 }
 /*End Dont miss Home page css*/
-
+/*Start photo section slider Homepage*/
+.featured_photo_carousel{
+    .flexslider .flex-direction-nav{
+        display: block;
+    }       
+    .flexslider .slides li .detail .flex-caption{
+        @include font(18px,24px,$itg-font-medium);  
+        padding: 10px;        
+        height: auto;
+        overflow: initial;
+    }
+    .flexslider .slides li .detail .flex-count{
+        @include pos(absolute,null,null,78px,0px);
+    }
+}
+/*End photo section slider Homepage*/
 /*Start Story page css*/
 .story-section{
     h1{

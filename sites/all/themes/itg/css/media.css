@@ -340,6 +340,26 @@
   }
 
   /*End Dont miss Home page css*/
+  /*Start photo section slider Homepage*/
+  .featured_photo_carousel .flexslider .flex-direction-nav {
+    display: block;
+  }
+  .featured_photo_carousel .flexslider .slides li .detail .flex-caption {
+    font-size: 18px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 24px;
+    padding: 10px;
+    height: auto;
+    overflow: initial;
+  }
+  .featured_photo_carousel .flexslider .slides li .detail .flex-count {
+    position: absolute;
+    bottom: 78px;
+    left: 0px;
+  }
+
+  /*End photo section slider Homepage*/
   /*Start Story page css*/
   .story-section h1 {
     font-size: 34px;
