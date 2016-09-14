@@ -6,12 +6,6 @@
   Drupal.behaviors.itg_survey = {
     attach: function(context, settings) {
       
-      // Hide title form take survey page
-      var surveyStr = $(location).attr('href');
-      if (surveyStr.indexOf("itg-survey") > 0) {
-        $("#page-title").hide();
-      }
-      
       //Hide left side vertical tabs in case of simple users
       var uid = settings.itg_survey.settings.uid;
       var nid = settings.itg_survey.settings.nid;
