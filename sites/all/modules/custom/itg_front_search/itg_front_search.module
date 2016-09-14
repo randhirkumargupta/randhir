@@ -165,6 +165,9 @@ function itg_front_search_views_pre_render(&$view) {
     $settings['uid'] = $user->uid;
     if ($view->name == "archive_story") {
       $settings['archive_story'] = TRUE;
+      if (is_array($user->roles) && !in_array('administrator', $user->roles)) {
+         $settings['archive_story_front'] = TRUE;
+      }
     }
 
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));

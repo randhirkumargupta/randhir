@@ -6849,6 +6849,7 @@ div.node{
   font-size: 18px;
   color: #666;
   font-weight: 500;
+  margin: 10px 0;
 }
 .question-container .question-number {
   display: inline-block;
@@ -6861,6 +6862,7 @@ div.node{
 .question-container .answer-container {
   padding-left: 10px;
   position: relative;
+  margin-bottom: 10px;
 }
 .question-container .answer-container .survey-media {
   position: absolute;
@@ -7014,4 +7016,28 @@ div.node{
 .node-newsletter_templates-form,
 .node-mega_review_critic-form{
   @extend .image-repo-browse;
+}
+[id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"]{
+  @extend .full;
+  @extend .dib;
+  @extend .vtop;
+  .form-type-select{
+    @extend .dib;
+    @extend .vtop;
+    width: 200px;
+    padding: 10px 10px 0 0;
+    .form-select{
+      width: 100%;
+    }
+  }
+  .form-submit{
+    height: 36px;
+    margin: 26px 3px 0 7px;
+  }
+  #edit-alt-button{
+    @extend .add-more;
+  }
+  #edit-reset{
+    @extend .add-more-wbg;
+  }
 }

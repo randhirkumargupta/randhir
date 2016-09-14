@@ -147,6 +147,13 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
+  $form['anchor_id_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter Occupation for Anchors'),
+      '#default_value' => variable_get('anchor_id_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
   return system_settings_form($form);
 }
 
@@ -1201,6 +1208,17 @@ function itg_widget_views_query_alter(&$view, &$query) {
       unset($query->where[1]['conditions'][1]);
     }
   }
+  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_display_page') || ($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
+    $anchor_tid = variable_get('anchor_id_for_widget');
+    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+    if (strlen($anchor_tid) <= 0) {
+      // Link should display only adminstrator.
+      if (in_array('administrator', $user->roles)) {
+        $link = l("click here", 'admin/settings/custom-variables');
+      }
+      drupal_set_message("Anchor setting not found $link", "error");
+    }
+  }
 }
 
 /**
@@ -1445,9 +1463,28 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
  */
 function itg_widget_block_view_alter(&$data, $block) {
   $item = menu_get_item();
+  $arg = arg();
   if ($block->delta == 'programmes-rhs_programmes') {
     $page_argument = $item['page_arguments'];
-    if ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node') {
+    if ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node' && isset($_GET['sid'])) {
+      $data['content'] = array();
+    }
+  }
+
+  if ($block->delta == 'we_may_suggest') {
+    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
+      $data['content'] = array();
+    }
+  }
+
+  if ($block->delta == 'watch_right_now_videos_widget') {
+    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
+      $data['content'] = array();
+    }
+  }
+
+  if ($block->delta == 'top_takes_videos_widget') {
+    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
       $data['content'] = array();
     }
   }
