@@ -14,7 +14,7 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
   //Mail content: In case of "insert", "update" and "association"
   if ($source == 'insert') {
     $mail_content = itg_print_team_approval_mail_content($node);
-    $user_emails = itg_print_team_get_approval_user_emails('approval');
+    $user_emails = itg_print_team_get_approval_user_emails('approval_users');
     $user_email_ids = implode(",", $user_emails);
   }
   elseif($source == 'update') {
@@ -24,7 +24,7 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
   }
   else {
     $mail_content = itg_print_team_association_mail_content($node, $op_type);
-    $user_emails = itg_print_team_get_approval_user_emails('association');
+    $user_emails = itg_print_team_get_approval_user_emails('association_users');
     $user_email_ids = implode(",", $user_emails);
   }
 
@@ -137,8 +137,8 @@ function itg_print_team_notification_mail_content($node) {
 function itg_print_team_get_approval_user_emails($user_type) {
   $user_list = array();
   
-  if ($user_type == 'approval') {
-    $roles = array('Site Admin', 'Co-ordinator', 'Editor', 'Section Editor/Anchor');
+  if ($user_type == 'approval_users') {
+    $roles = array('Site Admin', 'Co-ordinator', 'Editor', 'Section Editor/Anchor', 'Knowledge Centre');
   }
   else {
     $roles = array('Photo Coordinator', 'Photo Head', 'Design Head', 'Copy Desk');
