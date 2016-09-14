@@ -581,7 +581,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
   <!--End of Common section--> 
   
 <!--Common section add more strat here-->
-<?php $count_widget = 23; ?>
+<?php $count_widget = 16; ?>
 <?php $last_val = 0;
 $divcounter=1;
 $divcou=0;
