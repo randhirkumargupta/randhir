@@ -3121,7 +3121,7 @@ node/*/edit',
   'delta' => 'sef_url_log',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -75,
+  'weight' => -76,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
@@ -3859,7 +3859,7 @@ node/*/edit',
   'delta' => 'ask_an_expert',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -80,
+  'weight' => -81,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
@@ -7755,7 +7755,7 @@ draft-manage-astro',
   'delta' => 'we_may_suggest',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -79,
+  'weight' => -80,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -11295,7 +11295,7 @@ node/*/edit',
   'delta' => 'top_takes_videos_widget',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -76,
+  'weight' => -77,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -11418,7 +11418,7 @@ sosorry/*',
   'delta' => 'watch_right_now_videos_widget',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -77,
+  'weight' => -78,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -17661,7 +17661,7 @@ personalization/saved-items',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17669,7 +17669,8 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>',
   'title' => '',
   'cache' => 8,
 );
@@ -17680,7 +17681,7 @@ tv-show/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17688,7 +17689,10 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>
+sosorry
+sosorry/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17698,7 +17702,7 @@ tv-show/*',
   'delta' => 'ad_right_sidebar_1',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -83,
+  'weight' => -84,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -17707,7 +17711,8 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>',
   'title' => '',
   'cache' => 8,
 );
@@ -17717,7 +17722,7 @@ tv-show/*',
   'delta' => 'ad_right_sidebar_2',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -78,
+  'weight' => -79,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -17726,7 +17731,10 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>
+sosorry
+sosorry/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17737,7 +17745,7 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17745,7 +17753,8 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>',
   'title' => '',
   'cache' => 8,
 );
@@ -17756,7 +17765,7 @@ tv-show/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17764,7 +17773,10 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>
+sosorry
+sosorry/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17775,7 +17787,7 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17783,7 +17795,8 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>',
   'title' => '',
   'cache' => 8,
 );
@@ -17794,7 +17807,7 @@ tv-show/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17802,7 +17815,10 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>
+sosorry
+sosorry/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17813,7 +17829,7 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17821,7 +17837,8 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>',
   'title' => '',
   'cache' => 8,
 );
@@ -17832,7 +17849,7 @@ tv-show/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17840,7 +17857,10 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>
+sosorry
+sosorry/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17851,7 +17871,7 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17859,7 +17879,8 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>',
   'title' => '',
   'cache' => 8,
 );
@@ -17870,7 +17891,7 @@ tv-show/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17878,7 +17899,10 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>
+sosorry
+sosorry/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17889,7 +17913,7 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17897,7 +17921,8 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>',
   'title' => '',
   'cache' => 8,
 );
@@ -17908,7 +17933,7 @@ tv-show/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17916,7 +17941,10 @@ personalization/*
 user
 user/*
 tv-show
-tv-show/*',
+tv-show/*
+<front>
+sosorry
+sosorry/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17951,7 +17979,7 @@ videos',
   'delta' => 'programmes-rhs_programmes',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => 0,
+  'weight' => -74,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
@@ -18542,7 +18570,7 @@ tv-show/*',
   'delta' => 'magazine_calendar',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -82,
+  'weight' => -83,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
@@ -18724,7 +18752,7 @@ tv-show/*',
   'delta' => 'latest_issue_magzine-block_1',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -81,
+  'weight' => -82,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
@@ -19579,7 +19607,7 @@ sosorry/*',
   'delta' => 'so_sorry-the_remix',
   'theme' => 'itg',
   'status' => 1,
-  'weight' => -73,
+  'weight' => -75,
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 1,
@@ -20027,12 +20055,130 @@ sosorry/*',
   'title' => '',
   'cache' => 1,
 );
+  $export['block'][] = array(
+  'bid' => 1379,
+  'module' => 'block',
+  'delta' => 2,
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1380,
+  'module' => 'block',
+  'delta' => 2,
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => -85,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1381,
+  'module' => 'block',
+  'delta' => 2,
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1382,
+  'module' => 'block',
+  'delta' => 2,
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1383,
+  'module' => 'block',
+  'delta' => 2,
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1384,
+  'module' => 'block',
+  'delta' => 2,
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1385,
+  'module' => 'block',
+  'delta' => 2,
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => -1,
+);
   $export['block_custom'][] = array(
   'bid' => 1,
   'body' => '<div class="ad-display-block">Ad</div>
 ',
   'info' => 'Ad display block for second side bar',
   'format' => 'full_html',
+);
+  $export['block_custom'][] = array(
+  'bid' => 2,
+  'body' => '<div class="sosorry-social">
+    <ul>
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="#"><i class="fa fa-rss"></i></a></li>        
+    </ul>
+</div>',
+  'info' => 'sosorry social icons',
+  'format' => 'php_code',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_astro',
