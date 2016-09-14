@@ -575,15 +575,18 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 </div>               
             </div>          
         </div>
-
+ <a href="javascript:void(0)" class="add-more-block">Add</a>
     </div>
 <?php } ?>
   <!--End of Common section--> 
   
 <!--Common section add more strat here-->
-<?php $count_widget = 19; ?>
-<?php $last_val = 0;?>
-<?php for ($count = 1; $count <= EXTRA_SECTION_CARDS; $count++) { ?>
+<?php $count_widget = 16; ?>
+<?php $last_val = 0;
+$divcounter=1;
+$divcou=0;
+?>
+<?php for ($count = 1; $count <= EXTRA_SECTION_CARDS; $count+=3) { ?>
 <?php
   $widget_name1 = 'itg-block-'.($count_widget+1);
   $widget_name2 = 'itg-block-'.($count_widget+2);
@@ -592,14 +595,14 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
 <?php if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$widget_name2]['widget_name']) || isset($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
 <?php
-if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$widget_name2]['widget_name']) || isset($widget_data[$widget_name3]['widget_name'])) {
+$display_style = 'style="display:none"';
+if ($widget_data[$widget_name1]['widget_name']!= null || $widget_data[$widget_name2]['widget_name'] != null || $widget_data[$widget_name3]['widget_name'] != null) {
   $last_val++;
   $display_style = 'style="display:block"';
-} else {
-   $display_style = 'style="display:none"';
-}
+
+} 
 ?>
-<div class="row itg-common-section mt-50" <?php echo $display_style; ?> id="content-section-widget-<?php print $count;?>">
+<div class="row itg-common-section mt-50 show-on-add" <?php echo $display_style; ?> id="content-section-widget-<?php print $divcounter;?>">
 
         <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="itg-widget">
@@ -675,14 +678,19 @@ if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$wid
                 </div>               
             </div>          
         </div>
-<?php if ((EXTRA_SECTION_CARDS != $count) && ($count != $last_val)) {?>
-<!--  <div><a  href="javascript:void(0)" class="content-section-widget" id="<?php print $count+1;?>">Add more1+</a></div>-->
-<?php } ?>
+<?php $divcou = 3 + $divcou; ?>
+
+    <?php if ((EXTRA_SECTION_CARDS != $divcou) && ($divcou != $last_val)) {?>
+       <a href="javascript:void(0)" class="add-more-block">Add</a>
+       <?php } ?>
+
+    <a href="javascript:void(0)" class="removes-more-block">X</a>
+   
     </div>
 
 <?php } ?>
 
-<?php $count_widget = 3 + $count_widget; ?>
+<?php $count_widget = 3 + $count_widget;$divcounter++; ?>
 <?php } ?>
 
 <?php
@@ -774,3 +782,21 @@ for($i=1; $i<=$last_val;$i++ ){
   <img src="<?php  echo base_path().drupal_get_path('theme', $theme);?>/images/loader.svg" alt=""/>
 </div>
 <?php } ?>
+
+<script>
+    jQuery(document).ready(function() {
+      jQuery('.add-more-block').on('click',function(){
+          jQuery(this).hide();
+         jQuery(this).parent('.itg-common-section').next('.show-on-add').show(750);
+         jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
+        jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();  
+    });
+    jQuery('.add-more-block').each(function(){
+       
+       if( jQuery(this).parent('.itg-common-section').is(":visible")){
+           jQuery(this).hide();
+       }
+    });
+      
+    });
+    </script>
