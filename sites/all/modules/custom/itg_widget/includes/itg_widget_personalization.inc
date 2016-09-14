@@ -12,6 +12,17 @@
  */
 function save_itg_widget_personalization_data($updates) {
   $widget_name = "personalization_widget";
+
+  $nids = array_keys($updates);
+  // Delete all the tids from table if they are not in $updates variable
+  // unsued tid should be delete
+  foreach ($updates as $tid => $weight) {
+    db_delete('itg_widget_order')
+            ->condition('widget', $widget_name)
+            ->condition('nid', $nids, "NOT IN")
+            ->execute();
+  }
+  // Update the weight of tids if exists or insert if dont exists.
   foreach ($updates as $termId => $weight) {
     db_merge('itg_widget_order')
             ->key(array('nid' => $termId, 'widget' => $widget_name))
@@ -51,7 +62,8 @@ function get_personalization_front_data() {
   // Create gorup of same weight tids
   foreach ($result as $info) {
     $new_ordered_data_weighted_group[$info->weight][] = $info->nid;
-  }   
+  }
+
   foreach ($new_ordered_data_weighted_group as $weight => $tids) {
     $temp_tid_array_baised_on_node_count = array();
 
@@ -67,12 +79,16 @@ function get_personalization_front_data() {
       krsort($temp_tid_array_baised_on_node_count);
       // Get array in decending mode baised on node count.
       $sorted_array = get_array_in_decending_mode($temp_tid_array_baised_on_node_count);
+
+      foreach ($sorted_array as $tids_after_sorting) {
+        $new_ordered_data[] = $tids_after_sorting;
+      }
     }
     else {
       $new_ordered_data[] = $tids[0];
     }
   }
-  return $result;
+  return $new_ordered_data;
 }
 
 function get_array_in_decending_mode($temp_tid_array_baised_on_node_count) {
@@ -115,7 +131,7 @@ function get_personlization_node_data_for_front($nid) {
  * @param int $tid
  * @return array
  */
-function get_node_ids_assoicated_with_tid($tid) {
+function get_node_ids_assoicated_with_tid($tid, $is_front = FALSE) {
   $query = db_select('taxonomy_index', 'ti');
   $query->leftJoin('node', 'n', 'n.nid=ti.nid');
   $query->addField('ti', 'nid');
@@ -123,7 +139,9 @@ function get_node_ids_assoicated_with_tid($tid) {
   $query->condition('n.status', 1);
   $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
   $query->orderBy('n.created', 'DESC');
-  $query->range(0, 2);
+  if ($is_front) {
+    $query->range(0, 2);
+  }
   return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -135,10 +153,10 @@ function get_personlization_front_block_data() {
   $front_end_data = array();
   foreach ($persionalization as $persionalization_key => $persionalization_data) {
     // tid saved in nid colom in itg_widget_order table
-    $nodes_associate_with_taxonomy = get_node_ids_assoicated_with_tid($persionalization_data->nid);
+    $nodes_associate_with_taxonomy = get_node_ids_assoicated_with_tid($persionalization_data, TRUE);
     foreach ($nodes_associate_with_taxonomy as $key => $nid_array) {
       $nid = $nid_array['nid'];
-      $tid = $persionalization_data->nid;
+      $tid = $persionalization_data;
       $front_end_data[$tid]['data'][] = get_personlization_node_data_for_front($nid);
       $front_end_data[$tid]['taxonomy_term_load'] = taxonomy_term_load($tid);
     }
