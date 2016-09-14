@@ -3328,13 +3328,13 @@ footer{
         .search-menu{
             padding-top: 20px;            
             white-space: nowrap;
-            overflow-x: auto;
+            overflow-x: scroll;
             a{
                 padding: 0 10px;                                
                 @include display-inline;
                 color: #747474;                
                 text-transform: uppercase;
-                @include font(20px,24px,$itg-font-regular);
+                @include font(16px,24px,$itg-font-regular);
                 &:nth-child(1){
                     padding-left: 0;
                     border-left: 0;
