@@ -316,6 +316,11 @@ header{
                 display: inline-block;
                 vertical-align: bottom;
                 padding-left: 15px;
+                a{
+                    i{
+                        font-size: 18px;
+                    }
+                }
             }
         }
         .globle-search{
@@ -2139,13 +2144,16 @@ footer{
 /*CSS Start Anchor listing detail page*/
 .anchor-detail-menu{
     border-bottom:1px solid $border-color;
-    .tab-buttons{
-        @include display-inline;
+    white-space: nowrap;
+    overflow: auto;
+    .tab-buttons{        
         background: transparent;
         span{
             width: auto;
             border-top: 3px solid rgba(202, 202, 202,1);
             padding: 0 30px;
+            @include display-inline;
+            float: none;
             &.active{
                  border-top: 3px solid #a00606;
             }
@@ -2339,8 +2347,7 @@ footer{
                         background: #000;
                         color: $white-color;
                         @include font(18px,24px,$itg-font-medium);    
-                        width: auto;
-                        height: 66px;
+                        width: auto;                        
                     }
                     .flex-count{
                         @include pos(absolute,null,null,78px,0px);
@@ -2832,7 +2839,7 @@ footer{
     border-top: 5px solid #171717;
     padding-bottom: 35px;
     ul{
-        @extend .list-none;
+        @extend .list-none;        
     }
     .container{        
         padding:10px 15px 
@@ -2878,7 +2885,7 @@ footer{
 }
 /*video and photo menu*/
 #block-itg-videogallery-videogallery-menu-video-block, #block-itg-photogallery-photo-menu-landing-block{    
-    border-bottom: 1px solid #d9d9d9;    
+   /* border-bottom: 1px solid #d9d9d9;    */
     margin-bottom: 30px;
     margin-top: 30px;
     ul{
@@ -2887,6 +2894,7 @@ footer{
       display: inline-block;
       width: 100%;
       position: relative;
+      border-bottom: 1px solid #d9d9d9;
       li{
         @include display-inline;
         border-right: 0;
@@ -2931,6 +2939,14 @@ footer{
       padding-top: 0;
       margin-top: 0;
       @include sidebar-heading;
+      h3{
+          display: block;
+          span{
+            padding-top: 0;
+            padding-left: 0;
+          }
+      }
+      
   }
 .view-video-list-of-category, .view-video-landing-header, .view-so-sorry{    
     .views-exposed-form{
@@ -3227,74 +3243,6 @@ footer{
     }
 }
 
-
-
-/* CSS For Homepage Poll widget */
-.page-user{
-  .poll-data{
-    max-width: 370px;
-    padding: 0;
-    margin: 0;
-    border: none;
-    border-bottom: 1px solid #ddd;
-    .poll-banner-image{
-      max-width: 100%;
-      margin: 0;
-      img{
-        width: 100%;
-        height: 208px;
-      }
-    }
-    .active-poll-title{
-      background-color: #000;
-      float: left;
-      width: 100%;
-      h2{
-        color: #fff;
-        font-size: 20px;
-        line-height: 24px;
-        margin: 0;
-        padding: 10px;
-      }
-      .updated-msg{
-        display: none;
-      }
-    }
-    form{
-      text-align: center;
-      padding-bottom: 20px;
-      label{
-        display: inline-block;
-        vertical-align: top;
-        padding: 0;
-      }
-      .form-radios{
-        .form-item{
-          display: inline-block;
-          vertical-align: top;
-          margin: 0 10px;
-          .form-radio{
-            float: left;
-            margin: 3px 2px 0 0;
-          }
-        }
-      }
-    }
-    .poll-replace-id .form-submit{
-        width: 100px;
-        height: 36px;
-        background-color: #ccc;
-        border: none;
-        width: 100px;
-        height: 36px;
-        font-weight: 500;
-        font-family: Roboto;
-        margin-top: 20px;
-        font-size: 500;
-        color: #323232;
-      }
-  }
-}
 /*css start archive-story */
 .view-archive-story{
     .view-content{        
@@ -3701,8 +3649,8 @@ footer{
 /*End start magazins*/
 /*CSS Start RHS add block*/
 #block-itg-ads-ad-right-sidebar-1{
-    display: inline-block;
-    padding: 30px 34px 0;
+    @include display-inline;
+    padding:0px 15px 0 0;
 }
 /*CSS End RHS add block*/
 /*CSS Start So sorry page*/
@@ -3713,7 +3661,7 @@ footer{
         padding: 15px 0; 
         @include text-align(center);
         .sosorryitg{
-            padding: 40px 30px 0 0;
+            padding: 0px 30px 0 0;
         }
         .soindiatoday{
             float: right;
@@ -3723,7 +3671,7 @@ footer{
     .sosory-footer{
         background: #000;
         padding: 12px 0;            
-        text-align: center;                
+        text-align: left;                
         a{
              color:#eff94e;
              font-size: 12px;
@@ -3732,17 +3680,15 @@ footer{
         ul{
             @extend .list-none;
             li{
-                @include display-inline;
-                padding:0 20px;
+                @include display-inline;    
+                @include calculate-width(1);
+                margin-bottom: 15px;
                 i{
                     font-size: 30px;
                     vertical-align: middle;
                     padding-right: 10px;
-                }
-                &:nth-child(2){
-                    border-left: 1px solid #eff94e;
-                    border-right: 1px solid #eff94e;
-                }
+                    float: left;
+                }                
             }
         }
     }    
@@ -3753,7 +3699,7 @@ footer{
 .view-so-sorry{
     margin-bottom:40px;
     h2{
-        @include font(26px,null,300);
+        @include font(21px,null,300);
         color:#db1314;    
         text-transform:uppercase;
         span{
@@ -3777,16 +3723,23 @@ footer{
 }
 #block-views-so-sorry-most-watched{
     margin-top: 50px;
+    .view-so-sorry{
+        .view-content{
+            @include photo-scroll;
+        }
+    }
 }
 .view-display-id-so_sorry_page{
+    margin: -15px;
     @include pos(relative);    
     h1{
-        @include pos(absolute,null,null,0,0);    
+        @include pos(relative,null,null,0,0);    
         @include calculate-width(1);
         color: $white-color;
         padding: 7px 15px;
         @include font(32px);
-        background: rgba(0, 0, 0, 0.25);
+        background: rgba(0, 0, 0, 1);
+        font-size: 21px;
     }
 }
 .sosorry-social{
@@ -3815,6 +3768,41 @@ footer{
         }
     }
 }
+#block-views-so-sorry-you-will-love-these{
+    .pager.pager--infinite-scroll {
+        list-style-type: none;
+        text-align: center;
+        margin-top: 25px;
+        a{
+            background: #db0e0f;
+            color: #fff;
+            font-family: roboto;
+            text-transform: uppercase;
+            padding: 10px 15px;
+            border-radius: 30px 0px 0px 30px;
+            display: inline-block;
+            @include pos(relative);
+            &:after{
+                width: 35px;
+                height: 38px;
+                background: #cb090a;
+                color:#fff;
+                display: inline-block;
+                content: "\f0d7";
+                vertical-align: top;
+                position: absolute;
+                top: 0;
+                right: -35px;
+                border-radius: 0px 30px 30px 0px;
+                border-left: 1px solid #ee5e5e;
+                font: normal normal normal 14px/1 FontAwesome;
+                line-height: 38px;
+                font-size: 18px;
+                text-align: center;
+            }
+        }
+    }
+}
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
 #block-itg-layout-manager-header-block{
@@ -3829,8 +3817,7 @@ footer{
                 height: 40px;
                 line-height: 40px;
                 color: #ac0000;
-                top: -39px;
-                box-shadow: 0px 0px 2px #ccc;
+                top: -39px;                
                 text-align: center;
                 font-size: 28px;
             }
@@ -3838,15 +3825,16 @@ footer{
                 position: absolute;
                 right: 0;
                 background: #a00606;                
-                z-index: 9;
-                box-shadow: 2px 3px 3px #ccc;
+                z-index: 9;               
                 display: none;
                 li{
                     a{
                         color: #fff;
-                        display: block;
-                        border-bottom: 1px solid #000;
+                        display: block;                        
                         padding: 10px 20px;
+                    }
+                    + li{
+                        border-top: 1px solid #000;
                     }
                 }
                 
@@ -3861,3 +3849,21 @@ footer{
     }
 }
 /*End Start user login header*/
+
+/*CSS Start video setting Ifram*/
+.iframe-video{
+        position: relative;
+        padding-bottom: 65.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: auto; 
+        -webkit-overflow-scrolling:touch;    
+    iframe{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+/*CSS End video setting Ifram*/

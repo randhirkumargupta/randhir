@@ -33,8 +33,7 @@ else {
       </ul>
       <ul class="date-update">
         <li><?php echo $created_date; ?> | </li>
-        <li>UPDATED <?php echo $updated_date; ?> IST | </li>
-        <li>New Delhi</li>
+        <li>UPDATED <?php echo $updated_date; ?> IST </li>
       </ul>
     </div>
     <div class="social-info">

@@ -110,6 +110,28 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $form['hash']['#size'] = 5;
     $form['hash']['#multiple'] = TRUE;
   } if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'archive_story') {
+
+    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    $request_url_array = explode('/', $_SERVER['REQUEST_URI']);
+    if (is_array($request_url_array) && count($request_url_array) > 0) {
+      if (in_array('dev', $request_url_array)) {
+        $hash = '5fyeg7';
+      }
+      elseif (in_array('qa', $request_url_array)) {
+        $hash = '2e1u4m';
+      }
+      elseif (in_array('stage', $request_url_array)) {
+        $hash = 'e49it8';
+      }
+      else {
+        $hash = '2e1u4m';
+      }
+    }
+
+    $form['bundle_name']['#default_value'] = 'Story';
+    $form['bundle_name']['#value'] = 'Story';
+    $form['hash']['#default_value'] = $hash;
+    $form['hash']['#value'] = $hash;
     $form['ds_changed'] = array(
       '#type' => 'date_popup',
       '#title' => t('From'),
@@ -122,7 +144,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
         'readonly' => 'readonly',
         'placeholder' => t('Date')
       ),
-     '#suffix' => '</div>',
+      '#suffix' => '</div>',
     );
   }
 }
@@ -143,6 +165,9 @@ function itg_front_search_views_pre_render(&$view) {
     $settings['uid'] = $user->uid;
     if ($view->name == "archive_story") {
       $settings['archive_story'] = TRUE;
+      if (is_array($user->roles) && !in_array('administrator', $user->roles)) {
+         $settings['archive_story_front'] = TRUE;
+      }
     }
 
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));
@@ -196,22 +221,22 @@ function itg_front_search_views_pre_render(&$view) {
       $splittedsite = explode("/", $related_result->site);
       $related_result->site = strtoupper($splittedsite[3]);
     }
-    
-    
+
+
 
     if ($view->name == "archive_story") {
-      $bundle_name = array('Story' => 'Story', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery');
+      $bundle_name = array('Story' => 'STORIES', 'photogallery' => 'PHOTO', 'Videogallery' => 'VIDEO');
       $search_url = 'online-archive-story';
     }
     else {
-      
+
       if (!empty($_GET['keyword'])) {
         $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $_GET['keyword'] . ' "</span></span>';
       }
       else {
         $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
       }
-    
+
       $bundle_name = array('All' => 'All', 'Story' => 'Story', 'Blog' => 'Blog', 'photogallery' => 'Photogallery', 'Videogallery' => 'Videogallery', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
       $search_url = 'site-search';
     }
@@ -219,17 +244,50 @@ function itg_front_search_views_pre_render(&$view) {
 
     $get_var = $_GET;
     $all_bundle = $_GET['bundle_name'];
+
     unset($_GET['q']);
     unset($_GET['bundle_name']);
 
+    if ($view->name == "archive_story") {
+      $all_bundle = $all_bundle ? array($_REQUEST['bundle_name']) : array('Story');
+    }
+
     foreach ($bundle_name as $key => $val) {
-      $_GET['bundle_name'][''] = $key;
+      if ($view->name == "archive_story") {
+        $_GET['bundle_name'] = $key;
+      }
+      else {
+        $_GET['bundle_name'][''] = $key;
+      }
+      
       $lnk_class = '';
+
+
       if (in_array($key, $all_bundle)) {
         $lnk_class = "active";
       }
-
-      $url .= l($key, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
+      if ($view->name == "archive_story") {
+        $request_url_array = explode('/', $_SERVER['REQUEST_URI']);
+        if (is_array($request_url_array) && count($request_url_array) > 0) {
+          if (in_array('dev', $request_url_array)) {
+            $hash = '5fyeg7';
+          }
+          elseif (in_array('qa', $request_url_array)) {
+            $hash = '2e1u4m';
+          }
+          elseif (in_array('stage', $request_url_array)) {
+            $hash = 'e49it8';
+          }
+          else {
+            $hash = '2e1u4m';
+          }
+        }
+        $_GET['hash'] = $hash;
+        $url .= l($val, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
+      }
+      else {
+        $url .= l($key, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
+      }
     }
 
     $form['suggest_links'] = array(
@@ -314,7 +372,7 @@ function itg_front_search_node_presave($node) {
     $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node_id->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
     if ($reporter_node_id->nid > 0) {
       $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node_id->nid);
-    }    
+    }
   }
 
   if ($node->type == 'photogallery') {

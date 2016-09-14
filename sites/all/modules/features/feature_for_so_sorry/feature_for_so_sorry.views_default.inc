@@ -711,7 +711,7 @@ function feature_for_so_sorry_views_default_views() {
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid']['field'] = 'tid';
   $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '466',
+    0 => '486',
   );
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
   /* Filter criterion: Content: Published */
@@ -974,7 +974,7 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_1']['label'] = 'Feature / Remix';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Marked as Featured/Remix';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[extra]';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
@@ -1007,6 +1007,14 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'so_sorry_widget';
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    0 => '486',
+  );
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['path'] = 'so-sorry-video-widget-order-reorder';
 
   /* Display: So Sorry Feature Video */
@@ -1063,6 +1071,14 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    0 => '486',
+  );
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
 
   /* Display: So Sorry Feature Video */
   $handler = $view->new_display('page', 'So Sorry Feature Video', 'so_sorry_page');
@@ -1129,6 +1145,19 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['extra']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['extra']['field'] = 'extra';
   $handler->display->display_options['filters']['extra']['value'] = 'feature';
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    0 => '486',
+  );
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'sosorry';
 
   /* Display: The Remix */
@@ -1206,6 +1235,19 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'so_sorry_widget';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    0 => '486',
+  );
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
 
   /* Display: Most Watched */
   $handler = $view->new_display('block', 'Most Watched', 'most_watched');
@@ -1309,7 +1351,7 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['filters']['field_story_category_tid']['value'] = array(
-    0 => '466',
+    0 => '486',
   );
   $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
 
@@ -1326,11 +1368,11 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['type'] = 'infinite_scroll';
+  $handler->display->display_options['pager']['options']['manual_load'] = 1;
+  $handler->display->display_options['pager']['options']['text'] = 'See More';
   $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['pager']['options']['offset'] = '4';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
@@ -1409,7 +1451,7 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid']['field'] = 'tid';
   $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '466',
+    0 => '486',
   );
   $handler->display->display_options['filters']['tid']['group'] = 1;
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';

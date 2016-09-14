@@ -16,9 +16,9 @@ global $base_url;
         <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
       </a>
     <?php endif; ?>
-      <figcaption><i class="fa fa-camera"></i> <?php print $value['field_video_duration']; ?></figcaption>
+      <figcaption><i class="fa fa-play-circle"></i> <?php print $value['field_video_duration']; ?></figcaption>
 </figure>
-            <span class="posted-on"><?php print $value['created']; ?></span>
+          <span class="posted-on"><?php print date ('D, d M, Y',  strtotime($value['created'])) ?></span>
              <?php print l($value['title'], $base_url . '/' . "sosorry/" . $value['nid'] . "") ?>
 
         </div>

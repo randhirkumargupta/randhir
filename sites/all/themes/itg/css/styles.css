@@ -409,6 +409,9 @@ header {
   vertical-align: bottom;
   padding-left: 15px;
 }
+#block-itg-layout-manager-header-block .head-live-tv ul li a i {
+  font-size: 18px;
+}
 #block-itg-layout-manager-header-block .head-live-tv .globle-search {
   position: absolute;
   top: 0px;
@@ -2889,16 +2892,19 @@ footer .footer-copyright {
 /*CSS Start Anchor listing detail page*/
 .anchor-detail-menu {
   border-bottom: 1px solid #dddddd;
+  white-space: nowrap;
+  overflow: auto;
 }
 .anchor-detail-menu .tab-buttons {
-  display: inline-block;
-  vertical-align: top;
   background: transparent;
 }
 .anchor-detail-menu .tab-buttons span {
   width: auto;
   border-top: 3px solid #cacaca;
   padding: 0 30px;
+  display: inline-block;
+  vertical-align: top;
+  float: none;
 }
 .anchor-detail-menu .tab-buttons span.active {
   border-top: 3px solid #a00606;
@@ -3143,7 +3149,6 @@ footer .footer-copyright {
   font-weight: 500;
   line-height: 24px;
   width: auto;
-  height: 66px;
 }
 .featured_photo_carousel .flexslider .slides li .detail .flex-count {
   position: absolute;
@@ -3772,7 +3777,7 @@ footer .footer-copyright {
 
 /*video and photo menu*/
 #block-itg-videogallery-videogallery-menu-video-block, #block-itg-photogallery-photo-menu-landing-block {
-  border-bottom: 1px solid #d9d9d9;
+  /* border-bottom: 1px solid #d9d9d9;    */
   margin-bottom: 30px;
   margin-top: 30px;
 }
@@ -3782,6 +3787,7 @@ footer .footer-copyright {
   display: inline-block;
   width: 100%;
   position: relative;
+  border-bottom: 1px solid #d9d9d9;
 }
 #block-itg-videogallery-videogallery-menu-video-block ul li, #block-itg-photogallery-photo-menu-landing-block ul li {
   display: inline-block;
@@ -3851,6 +3857,13 @@ footer .footer-copyright {
   height: 5px;
   margin-top: -2px;
   background: #ddd;
+}
+#block-itg-videogallery-videogallery-menu-video-block h3 {
+  display: block;
+}
+#block-itg-videogallery-videogallery-menu-video-block h3 span {
+  padding-top: 0;
+  padding-left: 0;
 }
 
 .view-video-list-of-category .views-exposed-form, .view-video-landing-header .views-exposed-form, .view-so-sorry .views-exposed-form {
@@ -4172,69 +4185,6 @@ footer .footer-copyright {
   position: relative;
   vertical-align: top;
   z-index: 9;
-}
-
-/* CSS For Homepage Poll widget */
-.page-user .poll-data {
-  max-width: 370px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  border-bottom: 1px solid #ddd;
-}
-.page-user .poll-data .poll-banner-image {
-  max-width: 100%;
-  margin: 0;
-}
-.page-user .poll-data .poll-banner-image img {
-  width: 100%;
-  height: 208px;
-}
-.page-user .poll-data .active-poll-title {
-  background-color: #000;
-  float: left;
-  width: 100%;
-}
-.page-user .poll-data .active-poll-title h2 {
-  color: #fff;
-  font-size: 20px;
-  line-height: 24px;
-  margin: 0;
-  padding: 10px;
-}
-.page-user .poll-data .active-poll-title .updated-msg {
-  display: none;
-}
-.page-user .poll-data form {
-  text-align: center;
-  padding-bottom: 20px;
-}
-.page-user .poll-data form label {
-  display: inline-block;
-  vertical-align: top;
-  padding: 0;
-}
-.page-user .poll-data form .form-radios .form-item {
-  display: inline-block;
-  vertical-align: top;
-  margin: 0 10px;
-}
-.page-user .poll-data form .form-radios .form-item .form-radio {
-  float: left;
-  margin: 3px 2px 0 0;
-}
-.page-user .poll-data .poll-replace-id .form-submit {
-  width: 100px;
-  height: 36px;
-  background-color: #ccc;
-  border: none;
-  width: 100px;
-  height: 36px;
-  font-weight: 500;
-  font-family: Roboto;
-  margin-top: 20px;
-  font-size: 500;
-  color: #323232;
 }
 
 /*css start archive-story */
@@ -4891,7 +4841,8 @@ footer .footer-copyright {
 /*CSS Start RHS add block*/
 #block-itg-ads-ad-right-sidebar-1 {
   display: inline-block;
-  padding: 30px 34px 0;
+  vertical-align: top;
+  padding: 0px 15px 0 0;
 }
 
 /*CSS End RHS add block*/
@@ -4912,7 +4863,7 @@ footer .footer-copyright {
   clear: both;
 }
 #block-itg-layout-manager-header-sosorry-block .sosory-header .sosorryitg {
-  padding: 40px 30px 0 0;
+  padding: 0px 30px 0 0;
 }
 #block-itg-layout-manager-header-sosorry-block .sosory-header .soindiatoday {
   float: right;
@@ -4921,7 +4872,7 @@ footer .footer-copyright {
 #block-itg-layout-manager-header-sosorry-block .sosory-footer {
   background: #000;
   padding: 12px 0;
-  text-align: center;
+  text-align: left;
 }
 #block-itg-layout-manager-header-sosorry-block .sosory-footer a {
   color: #eff94e;
@@ -4931,16 +4882,14 @@ footer .footer-copyright {
 #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li {
   display: inline-block;
   vertical-align: top;
-  padding: 0 20px;
+  width: 100%;
+  margin-bottom: 15px;
 }
 #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li i {
   font-size: 30px;
   vertical-align: middle;
   padding-right: 10px;
-}
-#block-itg-layout-manager-header-sosorry-block .sosory-footer ul li:nth-child(2) {
-  border-left: 1px solid #eff94e;
-  border-right: 1px solid #eff94e;
+  float: left;
 }
 
 .page-sosorry .header-logo {
@@ -4951,8 +4900,8 @@ footer .footer-copyright {
   margin-bottom: 40px;
 }
 .view-so-sorry h2 {
-  font-size: 26px;
-  font-size: 1.625rem;
+  font-size: 21px;
+  font-size: 1.3125rem;
   font-weight: 300;
   color: #db1314;
   text-transform: uppercase;
@@ -4978,12 +4927,27 @@ footer .footer-copyright {
 #block-views-so-sorry-most-watched {
   margin-top: 50px;
 }
+@media screen and (max-width: 768px) {
+  #block-views-so-sorry-most-watched .view-so-sorry .view-content .photo-list {
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+  #block-views-so-sorry-most-watched .view-so-sorry .view-content .photo-list li {
+    display: inline-block;
+    vertical-align: top;
+    float: none;
+  }
+  #block-views-so-sorry-most-watched .view-so-sorry .view-content .photo-list li a {
+    white-space: initial;
+  }
+}
 
 .view-display-id-so_sorry_page {
+  margin: -15px;
   position: relative;
 }
 .view-display-id-so_sorry_page h1 {
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -4991,7 +4955,8 @@ footer .footer-copyright {
   padding: 7px 15px;
   font-size: 32px;
   font-size: 2rem;
-  background: rgba(0, 0, 0, 0.25);
+  background: black;
+  font-size: 21px;
 }
 
 .sosorry-social {
@@ -5019,6 +4984,40 @@ footer .footer-copyright {
   font-size: 20px;
 }
 
+#block-views-so-sorry-you-will-love-these .pager.pager--infinite-scroll {
+  list-style-type: none;
+  text-align: center;
+  margin-top: 25px;
+}
+#block-views-so-sorry-you-will-love-these .pager.pager--infinite-scroll a {
+  background: #db0e0f;
+  color: #fff;
+  font-family: roboto;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  border-radius: 30px 0px 0px 30px;
+  display: inline-block;
+  position: relative;
+}
+#block-views-so-sorry-you-will-love-these .pager.pager--infinite-scroll a:after {
+  width: 35px;
+  height: 38px;
+  background: #cb090a;
+  color: #fff;
+  display: inline-block;
+  content: "\f0d7";
+  vertical-align: top;
+  position: absolute;
+  top: 0;
+  right: -35px;
+  border-radius: 0px 30px 30px 0px;
+  border-left: 1px solid #ee5e5e;
+  font: normal normal normal 14px/1 FontAwesome;
+  line-height: 38px;
+  font-size: 18px;
+  text-align: center;
+}
+
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
 #block-itg-layout-manager-header-block .menu-login .user-menu {
@@ -5033,7 +5032,6 @@ footer .footer-copyright {
   line-height: 40px;
   color: #ac0000;
   top: -39px;
-  box-shadow: 0px 0px 2px #ccc;
   text-align: center;
   font-size: 28px;
 }
@@ -5042,17 +5040,36 @@ footer .footer-copyright {
   right: 0;
   background: #a00606;
   z-index: 9;
-  box-shadow: 2px 3px 3px #ccc;
   display: none;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li a {
   color: #fff;
   display: block;
-  border-bottom: 1px solid #000;
   padding: 10px 20px;
+}
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li {
+  border-top: 1px solid #000;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu:hover ul.menu {
   display: block;
 }
 
 /*End Start user login header*/
+/*CSS Start video setting Ifram*/
+.iframe-video {
+  position: relative;
+  padding-bottom: 65.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.iframe-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*CSS End video setting Ifram*/

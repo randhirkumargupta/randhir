@@ -7,7 +7,12 @@
     // code use for make primary category
     jQuery('.add-to-dropbox').live('mousedown', function()
     {
-        var selectvalue = jQuery('.selects > .form-select:last option:selected').val();
+        var selectvalue="";
+        jQuery('.selects > .form-select').each(function(){
+            if(jQuery(this).find(":selected").val().indexOf("label") != 0 && jQuery(this).find(":selected").val() !=""){
+          selectvalue=jQuery(this).find(":selected").val();
+            }
+        });
         var comptext = "";
         var makeradio = "";
         var datahtml ='<div class="prim-html">'+ jQuery('.prim-html').html();
