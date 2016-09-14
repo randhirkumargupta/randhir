@@ -318,7 +318,7 @@
             });
             jQuery('.removes-more-block').on('click', function() {
                 jQuery(this).hide();
-                jQuery(this).parent('.itg-common-section').find('.delete-block-widget').each(function() {
+                jQuery(this).parent().parent('.itg-common-section').find('.delete-block-widget').each(function() {
                     var block_id = jQuery(this).attr("delete-block-id");
                     var section_name = jQuery('#edit-section').val();
                     var template_name = jQuery('#edit-template-name').val();
@@ -339,22 +339,22 @@
                         }
                     });
                 })
-                jQuery(this).parent('.itg-common-section').hide();
-                jQuery(this).parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
+                jQuery(this).parent().parent('.itg-common-section').hide();
+                jQuery(this).parent().parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
             });
 
             jQuery('.add-more-block').on('click', function() {
                 jQuery(this).hide();
-                jQuery(this).parent('.itg-common-section').next('.show-on-add').slideDown( 1000);
-                jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
-                jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();
-            if (jQuery(this).parent('.itg-common-section').next('.itg-common-section').next('.itg-common-section').is(':visible')) {
-                  jQuery(this).parent('.itg-common-section').next('.itg-common-section').find('.add-more-block').hide();
+                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').slideDown( 1000);
+                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
+                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();
+            if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').next('.itg-common-section').is(':visible')) {
+                  jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').find('.add-more-block').hide();
                 }
             });
             jQuery('.add-more-block').each(function() {
 
-                if (jQuery(this).parent('.itg-common-section').next('.itg-common-section').is(":visible")) {
+                if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').is(":visible")) {
                     jQuery(this).hide();
                 }
             });
