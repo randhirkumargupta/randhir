@@ -720,10 +720,11 @@ if( $theme != 'itgadmin')
 <?php } ?>
   <!--End of Common section-->
   
-  <!--Load More Loader-->
-<!--  <div class="load-more" style="display:none">
-    <img src="<?php echo base_path() ?>sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
-  </div>-->
+
+  <!--Load More Loader
+  <div class="load-more">
+    <img src="<?php //echo base_path() ?>sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
+  </div>
   <!--End of Loader-->
   
   <?php //print render($page['content']); ?>
