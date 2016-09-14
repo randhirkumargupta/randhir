@@ -1369,6 +1369,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #666;
   font-weight: 500;
 }
+.question-container .question-heading span {
+  font-size: 14px;
+}
 .question-container .question-number {
   display: inline-block;
   vertical-align: top;
@@ -1392,6 +1395,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .question-container .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 3px 5px 0 0;
+}
+.question-container .answer-container .form-type-textfield > label {
+  float: left;
+  padding: 8px 20px 0 0;
+  width: 220px;
 }
 
 .survey-form-wrapper-all .question-container {
