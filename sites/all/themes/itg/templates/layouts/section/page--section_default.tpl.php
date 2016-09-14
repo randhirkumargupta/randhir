@@ -581,7 +581,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
   <!--End of Common section--> 
   
 <!--Common section add more strat here-->
-<?php $count_widget = 23; ?>
+<?php $count_widget = 19; ?>
 <?php $last_val = 0;
 $divcounter=1;
 $divcou=0;
@@ -601,6 +601,11 @@ if ($widget_data[$widget_name1]['widget_name']!= null || $widget_data[$widget_na
   $display_style = 'style="display:block"';
 
 } 
+if( $theme != 'itgadmin')
+{
+    $display_style = 'style="display:none"';
+}
+
 ?>
 <div class="row itg-common-section mt-50 show-on-add" <?php echo $display_style; ?> id="content-section-widget-<?php print $divcounter;?>">
 
@@ -679,19 +684,19 @@ if ($widget_data[$widget_name1]['widget_name']!= null || $widget_data[$widget_na
             </div>          
         </div>
 <?php $divcou = 3 + $divcou; ?>
-
-    <?php if ((EXTRA_SECTION_CARDS != $divcou) && ($divcou != $last_val)) {?>
-       <a href="javascript:void(0)" class="add-more-block">Add</a>
+   <?php if ((EXTRA_SECTION_CARDS != $divcou) && ($divcou != $last_val)) {?>
+       <a href="javascript:void(0)" class="add-more-block">Load More+</a>
        <?php } ?>
 
-    <a href="javascript:void(0)" class="removes-more-block">X</a>
-   
+    <a href="javascript:void(0)" class="removes-more-block">Less-</a>
+     
     </div>
 
 <?php } ?>
 
 <?php $count_widget = 3 + $count_widget;$divcounter++; ?>
 <?php } ?>
+
 
 <?php
 
@@ -783,20 +788,3 @@ for($i=1; $i<=$last_val;$i++ ){
 </div>
 <?php } ?>
 
-<script>
-    jQuery(document).ready(function() {
-      jQuery('.add-more-block').on('click',function(){
-          jQuery(this).hide();
-         jQuery(this).parent('.itg-common-section').next('.show-on-add').show(750);
-         jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
-        jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();  
-    });
-    jQuery('.add-more-block').each(function(){
-       
-       if( jQuery(this).parent('.itg-common-section').is(":visible")){
-           jQuery(this).hide();
-       }
-    });
-      
-    });
-    </script>
