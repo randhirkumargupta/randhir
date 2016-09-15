@@ -7072,7 +7072,7 @@ div.node #comments h2 {
 }
 
 .load-more-wrapper {
-  paddin: 10px;
+  padding: 10px;
   text-align: center;
 }
 .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block {
@@ -7083,4 +7083,9 @@ div.node #comments h2 {
   border-radius: 5px;
   margin: 0 10px;
   text-transform: uppercase;
+}
+.load-more-wrapper .add-more-block .fa, .load-more-wrapper .removes-more-block .fa {
+  font-size: 16px;
+  vertical-align: bottom;
+  margin-left: 5px;
 }
