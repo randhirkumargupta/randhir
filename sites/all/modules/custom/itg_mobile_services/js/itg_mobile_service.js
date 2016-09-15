@@ -40,15 +40,10 @@ var dynamicAudioId = '';
             jQuery('.form-field-name-field-service-content .form-type-date-popup input').addClass('itg-disabled');
             jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').removeClass('itg-disabled');
             jQuery('#edit-field-service-frequency-und input').click(function () {
-                if ($(this).val() == 1) { // day
-                  //  jQuery('.custom-content-submit').removeAttr('disabled');
-                } else if ($(this).val() == 2) { // weekly
+                if ($(this).val() == 2) { // weekly
                     jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
-                    //jQuery('.custom-content-submit').attr('disabled', 'disabled');
-
                 } else if ($(this).val() == 3) { // monthly
                     jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
-                    //jQuery('.custom-content-submit').attr('disabled', 'disabled');
                 }
             });
             jQuery('#content-enable-button').hide();
@@ -56,11 +51,8 @@ var dynamicAudioId = '';
             jQuery('.field-name-field-story-expert-description').hide();
             jQuery('.field-name-field-story-large-image').hide();
             jQuery('.field-name-field-service-audio').hide();
-            //jQuery('.field-name-field-service-audio-keyword').hide();
             jQuery('.field-name-field-service-video').hide();
-            //jQuery('.field-name-field-service-video-keyword').hide();
 
- 
             jQuery('input[name="field_service_content_add_more"]').hide();
 
             $('#edit-field-service-association-title-und').change(function () {
@@ -184,7 +176,7 @@ var dynamicAudioId = '';
                 }
                 if (selectedVal > 1) {
                     jQuery('#edit-field-service-frequency-date').show();
-                } 
+                }
             }
 
             var service_asso = jQuery("#edit-field-service-association-title-und option:selected").val();
@@ -244,7 +236,7 @@ var dynamicAudioId = '';
             if (firstTime == 1) {
                 jQuery('<span id="custom_service_content_0"></span>').insertAfter('textarea[name="field_service_content[und][0][field_story_expert_description][und][0][value]"]');
                 var length_textarea = jQuery("#field-service-content-values > tbody > tr").length;
-                
+
                 for (var ii = 1; ii <= length_textarea; ) {
                     jQuery('<span id="custom_service_content_' + ii + '"></span>').insertAfter('textarea[name="field_service_content[und][' + ii + '][field_story_expert_description][und][0][value]"]');
                     ii++;
@@ -339,7 +331,7 @@ var dynamicAudioId = '';
 
 
                 jQuery(document).on("click", "#content-enable-button", function (event) {
-                    event.preventDefault();            
+                    event.preventDefault();
                     var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
                     var edate = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
                     if (sdate == '') {
@@ -408,7 +400,7 @@ var dynamicAudioId = '';
                         }
                         tomorrow = dd + '/' + mm + '/' + yyyy;
                         jQuery('input[name="field_service_content[und][' + i + '][field_service_content_date][und][0][value][date]"]').addClass('itg-disabled');
-                        jQuery('<span id="custom_service_content_' + i + '"></span>').insertAfter('textarea[name="field_service_content[und][' + i + '][field_story_expert_description][und][0][value]"]');        
+                        jQuery('<span id="custom_service_content_' + i + '"></span>').insertAfter('textarea[name="field_service_content[und][' + i + '][field_story_expert_description][und][0][value]"]');
                         i++;
                         start_date++;
                     }
@@ -417,7 +409,6 @@ var dynamicAudioId = '';
             }
 
             if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
-                //jQuery('.custom-content-submit').removeAttr('disabled');
                 var content_edit_mode = Drupal.settings.itg_mobile_services.settings.service_content_edit_mode;
                 jQuery('#field-service-content-add-more-wrapper').show();
                 jQuery('#edit-field-service-frequency').show();
@@ -463,9 +454,9 @@ var dynamicAudioId = '';
 
             jQuery('#content-enable-button').removeAttr('disabled');
             jQuery('#reset-date-button').removeAttr('disabled');
-            
-           
-            jQuery('#vas-service-content-node-form').submit(function() { 
+
+
+            jQuery('#vas-service-content-node-form').submit(function () {
                 var frequency_from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
                 var frequency_end_date = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
                 if (frequency_from_date == '') {
@@ -482,10 +473,10 @@ var dynamicAudioId = '';
                     return false;
                 }
             });
-           
-            
-           
-           
+
+
+
+
 
             jQuery('.field-name-field-story-expert-description .form-textarea').on('keyup', function () {
                 if (Drupal.settings.itg_mobile_services.settings.countchar) {
@@ -502,58 +493,53 @@ var dynamicAudioId = '';
 
 
             // remove disable for video upload button
-            jQuery( "input[name*='field_service_video_und_0_upload_button']" ).removeAttr('disabled');
-            if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
-                //jQuery( ".field-name-field-service-audio-keyword" ).hide();
-                //jQuery( ".field-name-field-service-video-keyword" ).hide();
-            } else {
-                jQuery( ".field-name-field-service-audio-keyword" ).hide();
-                jQuery( ".field-name-field-service-video-keyword" ).hide();
-            }
+            jQuery("input[name*='field_service_video_und_0_upload_button']").removeAttr('disabled');
 
             if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
                 jQuery('#content-enable-button').hide();
-                 // for video
-                jQuery(".mobile-video-fields input").on('click', function () { 
+                // for video
+                jQuery(".mobile-video-fields input").on('click', function () {
                     var uploadId = jQuery(this).attr("id");
                     var dataId = uploadId.split('-field-service-video-und-0-upload');
                     var elementId = dataId[0].split('edit-field-service-content-und-');
-                    dynamicId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-video-keyword';
+                    dynamicId = '#edit-field-service-content-und-' + elementId[1] + '-field-service-video-keyword';
                 });
                 // for Audio
-                jQuery(".mobile-audio-fields a").on('click', function () { 
-                        var uploadId = jQuery(this).next("input").attr("id");
-                        var dataId = uploadId.split('-field-service-audio-und-0-upload-imce-select');
-                        var elementId = dataId[0].split('edit-field-service-content-und-');
-                        dynamicAudioId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-audio-keyword';
+                jQuery(".mobile-audio-fields a").on('click', function () {
+                    var uploadId = jQuery(this).next("input").attr("id");
+                    var dataId = uploadId.split('-field-service-audio-und-0-upload-imce-select');
+                    var elementId = dataId[0].split('edit-field-service-content-und-');
+                    dynamicAudioId = '#edit-field-service-content-und-' + elementId[1] + '-field-service-audio-keyword';
                 });
             } else {
-                 // for video
-                jQuery(".mobile-video-fields input").on('click', function () { 
+                jQuery(".field-name-field-service-audio-keyword").hide();
+                jQuery(".field-name-field-service-video-keyword").hide();
+                // for video
+                jQuery(".mobile-video-fields input").on('click', function (event) {
+                    event.preventDefault();
                     var uploadId = jQuery(this).attr("id");
                     var dataId = uploadId.split('-field-service-video-und-0-upload--');
                     var elementId = dataId[0].split('edit-field-service-content-und-');
-                    dynamicId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-video-keyword--'+dataId[1];
+                    dynamicId = '#edit-field-service-content-und-' + elementId[1] + '-field-service-video-keyword--' + dataId[1];
+
                 });
                 // for Audio
-                jQuery(".mobile-audio-fields a").on('click', function () { 
-                        var uploadId = jQuery(this).next("input").attr("id");
-                        var dataId = uploadId.split('-field-service-audio-und-0--');
-                        var elementId = dataId[0].split('edit-field-service-content-und-');
-                        var lastElementId = dataId[1].split('-upload-imce-select');
-                        dynamicAudioId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-audio-keyword--'+lastElementId[0];
+                jQuery(".mobile-audio-fields a").on('click', function () {
+                    var uploadId = jQuery(this).next("input").attr("id");
+                    var dataId = uploadId.split('-field-service-audio-und-0--');
+                    var elementId = dataId[0].split('edit-field-service-content-und-');
+                    var lastElementId = dataId[1].split('-upload-imce-select');
+                    dynamicAudioId = '#edit-field-service-content-und-' + elementId[1] + '-field-service-audio-keyword--' + lastElementId[0];
                 });
             }
-           
 
-              
-            jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
-                    if (settings.url.indexOf('field_service_video') >= 0) {
-                        jQuery(dynamicId).show();
-                    }
-                    if (settings.url.indexOf('field_service_audio') >= 0) {
-                        jQuery(dynamicAudioId).show();
-                    }
+            jQuery(document).ajaxSuccess(function (event, xhr, settings) {
+                if (settings.url.indexOf('field_service_video') >= 0) {
+                    jQuery(dynamicId).show();
+                }
+                if (settings.url.indexOf('field_service_audio') >= 0) {
+                    jQuery(dynamicAudioId).show();
+                }
             });
 
         }
@@ -565,3 +551,4 @@ var dynamicAudioId = '';
 function days_in_month(month, year) {
     return new Date(year, month, 0).getDate();
 }
+
