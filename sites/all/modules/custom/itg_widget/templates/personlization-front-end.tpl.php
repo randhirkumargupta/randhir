@@ -25,7 +25,7 @@
           else {
             ?>
             <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
-  <?php } ?>
+          <?php } ?>
         </a>
       </div>
       <div class="detail">
@@ -42,7 +42,7 @@
         </a>
       </div>
     </li>
-  <?php
+    <?php
   }
   print "</ul></div>";
   $front_data = array_chunk($data, 3);
@@ -66,32 +66,21 @@
             else {
               ?>
               <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
-    <?php } ?>
+            <?php } ?>
           </a>
         </div>
 
         <div class="detail">
           <h4><?php print $node_info['taxonomy_name']; ?></h4>
           <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
-      <?php print $node_info['node_data']['title']; ?>
+            <?php print $node_info['node_data']['title']; ?>
           </a>
         </div>
 
       </li>
-    <?php
+      <?php
+    }
+    print "</ul></div>";
   }
-  print "</ul></div>";
-}
-?>
-</div>    
-<script>
-  jQuery(document).ready(function() {
-    jQuery('.recommended-slider').slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      centerPadding: '40px',
-      prevArrow: '<button class="slick-prev"><i class="fa fa-angle-left"></i></button>',
-      nextArrow: '<button class="slick-next"><i class="fa fa-angle-right"></i></button>'
-    });
-  });
-</script>
+  ?>
+</div>
