@@ -840,6 +840,12 @@
   }
 
   /*CSS End RHS add block*/
+  .recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing .pic {
+    width: auto;
+  }
+  .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next, .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-prev {
+    display: block !important;
+  }
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
