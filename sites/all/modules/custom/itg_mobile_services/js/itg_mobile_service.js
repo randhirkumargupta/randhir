@@ -515,8 +515,7 @@ var dynamicAudioId = '';
                 jQuery(".field-name-field-service-audio-keyword").hide();
                 jQuery(".field-name-field-service-video-keyword").hide();
                 // for video
-                jQuery(".mobile-video-fields input").on('click', function (event) {
-                    event.preventDefault();
+                jQuery(".mobile-video-fields input").on('click', function () {
                     var uploadId = jQuery(this).attr("id");
                     var dataId = uploadId.split('-field-service-video-und-0-upload--');
                     var elementId = dataId[0].split('edit-field-service-content-und-');
