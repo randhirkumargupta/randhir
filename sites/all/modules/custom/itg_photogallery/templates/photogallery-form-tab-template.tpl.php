@@ -15,6 +15,6 @@
 <span class="target-link" data-target-id="SocialMedia"><?php print t('Social Media'); ?></span>
 <span class="target-link" data-target-id="Relatedcontent"><?php print t('Related content'); ?></span>
 <span class="target-link" data-target-id="edit-revision-information"><?php print t('Remarks'); ?></span>
-<span class="target-link" data-target-id="title-metatags"><?php print t('Meta Details'); ?></span>
+<span class="target-link" data-target-id="title-metatags"><?php print t('SEO Meta Details'); ?></span>
 
 </div>
