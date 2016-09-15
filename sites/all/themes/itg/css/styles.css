@@ -5089,7 +5089,7 @@ footer .footer-copyright {
 /*CSS Start for recommended for you home page*/
 .recommended-for-you {
   background: #f3f3f3;
-  margin: 40px 0px;
+  margin: 40px 0px 0px 0px;
   padding: 20px 0 10px 0;
 }
 .recommended-for-you .widget-title {
@@ -5135,6 +5135,9 @@ footer .footer-copyright {
 .recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing {
   padding: 0 0 30px 0;
 }
+.recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing .pic {
+  width: 144px;
+}
 .recommended-for-you #block-itg-widget-personlization ul.common-list h4 {
   font-size: 12px;
   font-size: 0.75rem;
@@ -5170,6 +5173,7 @@ footer .footer-copyright {
   z-index: 999;
   color: #b9b9b9;
   cursor: pointer;
+  display: none !important;
 }
 .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next {
   right: -50px;
