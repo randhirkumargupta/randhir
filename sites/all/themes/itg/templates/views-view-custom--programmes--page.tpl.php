@@ -17,10 +17,12 @@ global $base_url;
           <?php print l($row['field_sponser_logo'], 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
         </div>
       <?php else : ?>
-        <?php
-        $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
-        ?>
-        <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+        <div class="pic">
+          <?php
+          $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
+          ?>
+          <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+        </div>
       <?php endif; ?>
       <div class="program-right">
         <?php if (isset($row['field_cm_display_title'])) : ?>
