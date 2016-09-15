@@ -961,6 +961,31 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           color: #fff;
         }
       }
+      table{
+          td{
+              position: relative;
+              > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+                    position: absolute;
+                    right: 10px;
+                    margin: 0;
+                    bottom: 20px;
+              }
+          }
+          + div{
+              .field-add-more-submit{
+                  margin-left: 0;
+              }
+          }
+      }
+      .messages.error.file-upload-js-error{
+          display: none;
+      }
+      input[type="file"]{
+            width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+      }
     }
     [id*="field-ugc-personalization-photo-add-more-wrapper"]{
       > .form-item{
@@ -1273,6 +1298,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     font-size: 18px;
     color: #666;
     font-weight: 500;
+    span{
+      font-size: 14px;
+    }
   }
   .question-number{
     display: inline-block;
@@ -1295,6 +1323,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       margin: 0 0 20px;
       &.form-type-radio .form-radio {
         margin: 3px 5px 0 0;
+      }
+    }
+    .form-type-textfield{
+      > label{
+        float: left;
+        padding: 8px 20px 0 0;
+        width: 220px;
       }
     }
   }

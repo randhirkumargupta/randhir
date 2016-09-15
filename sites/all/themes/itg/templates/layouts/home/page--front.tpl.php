@@ -597,7 +597,7 @@ if ($theme != 'itgadmin') {
             </div>          
         </div>
 
-<a href="javascript:void(0)" class="add-more-block">Load More+</a>
+      <div class="load-more-wrapper"><a href="javascript:void(0)" class="add-more-block">Load More</a></div>
     </div>
 <?php } ?>
 <!--End of Common section-->  
@@ -705,13 +705,14 @@ if( $theme != 'itgadmin')
                 </div>               
             </div>          
         </div>
-<?php $divcou = 3 + $divcou; ?>
+<?php $divcou = 3 + $divcou; ?><div class="load-more-wrapper">
    <?php if ((EXTRA_SECTION_CARDS != $divcou) && ($divcou != $last_val)) {?>
-       <a href="javascript:void(0)" class="add-more-block">Load More+</a>
-       <?php } ?>
+  <a href="javascript:void(0)" class="add-more-block">Load More</a>
+       <?php } if ($theme == 'itgadmin'){?>
 
-    <a href="javascript:void(0)" class="removes-more-block">Less-</a>
-     
+    <a href="javascript:void(0)" class="removes-more-block">Less</a>
+       <?php }?>
+    </div>
     </div>
 
 <?php } ?>
@@ -720,10 +721,11 @@ if( $theme != 'itgadmin')
 <?php } ?>
   <!--End of Common section-->
   
-  <!--Load More Loader-->
-<!--  <div class="load-more" style="display:none">
-    <img src="<?php echo base_path() ?>sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
-  </div>-->
+
+  <!--Load More Loader
+  <div class="load-more">
+    <img src="<?php //echo base_path() ?>sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
+  </div>
   <!--End of Loader-->
   
   <?php //print render($page['content']); ?>
@@ -806,27 +808,27 @@ if($theme != 'itgadmin')
     drupal_add_js("jQuery(document).ready(function() {
        jQuery('.add-more-block').on('click', function() {
                 jQuery(this).hide();
-                jQuery(this).parent('.itg-common-section').next('.show-on-add').show(750);
-                jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
-                jQuery(this).parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();
-                 if (jQuery(this).parent('.itg-common-section').next('.itg-common-section').next('.itg-common-section').is(':visible')) {
-                  jQuery(this).parent('.itg-common-section').next('.itg-common-section').find('.add-more-block').hide();
+                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').slideDown( 1000);
+                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
+                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();
+                 if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').next('.itg-common-section').is(':visible')) {
+                  jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').find('.add-more-block').hide();
                 }
             });
             jQuery('.add-more-block').each(function() {
 
-                if (jQuery(this).parent('.itg-common-section').next('.itg-common-section').is(':visible')) {
+                if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').is(':visible')) {
                     jQuery(this).hide();
                 }
-                if(jQuery(this).parent('.itg-common-section').next('.itg-common-section').html() ==null)
+                if(jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').html() ==null)
                 {
                     jQuery(this).remove();
                 }
             });
              jQuery('.removes-more-block').on('click', function() {
                 jQuery(this).hide();
-                 jQuery(this).parent('.itg-common-section').hide(750);
-                jQuery(this).parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
+                 jQuery(this).parent().parent('.itg-common-section').hide(750);
+                jQuery(this).parent().parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
             });
       
     });", array('type' => 'inline', 'scope' => 'footer'));
