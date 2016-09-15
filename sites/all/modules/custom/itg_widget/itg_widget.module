@@ -711,7 +711,7 @@ function itg_widget_block_view($delta = '') {
       $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
       break;
     case 'personlization':
-      module_load_include('inc', 'itg_widget', 'includes/fitg_widget_personalization');
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
       $data = get_personlization_front_block_data();
       $block['content'] = theme("personlization_front_end", array("data" => $data));
       break;

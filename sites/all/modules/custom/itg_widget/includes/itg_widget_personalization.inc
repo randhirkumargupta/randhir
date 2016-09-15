@@ -157,8 +157,9 @@ function get_personlization_front_block_data() {
     foreach ($nodes_associate_with_taxonomy as $key => $nid_array) {
       $nid = $nid_array['nid'];
       $tid = $persionalization_data;
-      $front_end_data[$tid]['data'][] = get_personlization_node_data_for_front($nid);
-      $front_end_data[$tid]['taxonomy_term_load'] = taxonomy_term_load($tid);
+      $temp_node_data = get_personlization_node_data_for_front($nid);
+      $texonomy_data = taxonomy_term_load($tid);
+      $front_end_data[] = array("node_data"=>$temp_node_data[0] , "taxonomy_name" => $texonomy_data->name);
     }
   }
   return $front_end_data;
