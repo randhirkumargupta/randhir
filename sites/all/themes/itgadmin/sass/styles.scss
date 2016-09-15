@@ -7084,7 +7084,7 @@ div.node{
   @extend .dib;
   @extend .full;
   @extend .vtop;
-  paddin: 10px;
+  padding: 10px;
   text-align: center;
   .add-more-block, .removes-more-block{
     @extend .dib;
@@ -7096,5 +7096,10 @@ div.node{
     border-radius: 5px;
     margin: 0 10px;
     text-transform: uppercase;
+    .fa{
+      font-size: 16px;
+      vertical-align: bottom;
+      margin-left: 5px;
+    }
   }
 }

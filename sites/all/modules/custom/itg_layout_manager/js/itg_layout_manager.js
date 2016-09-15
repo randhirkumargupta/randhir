@@ -318,6 +318,7 @@
             });
             jQuery('.removes-more-block').on('click', function() {
                 jQuery(this).hide();
+                
                 jQuery(this).parent().parent('.itg-common-section').find('.delete-block-widget').each(function() {
                     var block_id = jQuery(this).attr("delete-block-id");
                     var section_name = jQuery('#edit-section').val();
