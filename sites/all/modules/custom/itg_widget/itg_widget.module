@@ -1208,6 +1208,15 @@ function itg_widget_views_query_alter(&$view, &$query) {
       unset($query->where[1]['conditions'][1]);
     }
   }
+
+  if ($view->name == 'anchor_option_view') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+  }
+
+  if ($view->name == 'anchor_landing_page') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+  }
+
   if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_display_page') || ($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
     $anchor_tid = variable_get('anchor_id_for_widget');
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
@@ -1218,6 +1227,34 @@ function itg_widget_views_query_alter(&$view, &$query) {
       }
       drupal_set_message("Anchor setting not found $link", "error");
     }
+  }
+
+  if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_videos') {
+    $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
+  }
+
+  if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_videos_widget') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('so_sorry_category_id_for_widget');
+  }
+
+  if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_feature') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('so_sorry_category_id_for_widget');
+  }
+
+  if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_page') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('so_sorry_category_id_for_widget');
+  }
+
+  if ($view->name == 'so_sorry' && $view->current_display == 'the_remix') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('so_sorry_category_id_for_widget');
+  }
+
+  if ($view->name == 'so_sorry' && $view->current_display == 'most_watched') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('so_sorry_category_id_for_widget');
+  }
+
+  if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
+    $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
   }
 }
 
@@ -1303,7 +1340,7 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
-  
+
   // Get all terms of vocabulary occupation.
   $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
   $itg_occupation_tree = taxonomy_get_tree($itg_occupation->vid);

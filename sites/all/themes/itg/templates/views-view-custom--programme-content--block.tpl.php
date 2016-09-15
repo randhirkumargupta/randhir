@@ -3,7 +3,7 @@
   $url = "#";
    global $base_url;
   foreach ($rows as $key => $row) :
-    $section_cat_id = $row['field_story_category'];
+    $section_cat_id = trim($row['field_story_category']);
     if ($key == 0) {
       $url = l("More »", 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE));
     }
