@@ -1182,9 +1182,11 @@ function itg_videogallery_views_query_alter(&$view, &$query) {
  */
 function itg_videogallery_get_categoryparent($tid) {
   $parent = taxonomy_get_parents($tid);
-  $key = key($parent);
-  $parent_name = $parent[$key]->name;
-  if ($parent[$key]->name == 'program') {
+  $parent_tid = key($parent);
+  $program_tid = variable_get('program_category_id_for_programmes');
+  //$key = key($parent);
+ // $parent_name = $parent[$key]->name;
+  if ($program_tid == $parent_tid) {
     return TRUE;
   }
   else {
