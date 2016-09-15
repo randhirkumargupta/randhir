@@ -38,7 +38,6 @@
 // category based story according issue date
   $data = itg_msi_issue_category_data($issue_attribute_date);
   $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date);
-  p($supplement_value);
   if (isset($supplement_value)) {
     $class = '';
     print '<div class="col-md-6 col-sm-12 col-xs-12 mt-50">';
