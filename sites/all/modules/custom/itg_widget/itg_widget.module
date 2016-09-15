@@ -1471,28 +1471,34 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
  */
 function itg_widget_block_view_alter(&$data, $block) {
   $item = menu_get_item();
-  $arg = arg();
-  if ($block->delta == 'programmes-rhs_programmes') {
-    $page_argument = $item['page_arguments'];
+  $arg = arg();  
+  $page_argument = $item['page_arguments'];  
+  if ($block->delta == 'programmes-rhs_programmes') {            
     if ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node' && isset($_GET['sid'])) {
-      $data['content'] = array();
+      $data['content'] = array();      
+    } 
+    elseif ($page_argument[0]->type == 'story' || $page_argument[0]->type == 'breaking_news') {
+      $data['content'] = array();      
     }
+    elseif ($arg[0] == 'taxonomy' && $arg[1] == 'term') {      
+      $data['content'] = array();
+    }    
   }
 
-  if ($block->delta == 'we_may_suggest') {
-    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
-      $data['content'] = array();
+  if ($block->delta == 'we_may_suggest') {     
+    if ($arg[0] == 'node' && !isset($_GET['sid']) && $page_argument[0]->type != 'story' && $page_argument[0]->type != 'breaking_news') {            
+      $data['content'] = array();      
     }
   }
 
   if ($block->delta == 'watch_right_now_videos_widget') {
-    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
+    if ($arg[0] == 'node' && !isset($_GET['sid']) && $page_argument[0]->type != 'story' && $page_argument[0]->type != 'breaking_news') {
       $data['content'] = array();
     }
   }
 
   if ($block->delta == 'top_takes_videos_widget') {
-    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
+    if ($arg[0] == 'node' && !isset($_GET['sid']) && $page_argument[0]->type != 'story' && $page_argument[0]->type != 'breaking_news') {
       $data['content'] = array();
     }
   }
