@@ -595,7 +595,7 @@ $display_style = 'display:none';
   $widget_name3 = 'itg-block-'.($count_widget+3);  
 ?>
 
-<?php if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$widget_name2]['widget_name']) || isset($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
+<?php if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
 <?php
 $display_style = 'display:none';
 

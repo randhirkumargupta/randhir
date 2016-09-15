@@ -607,6 +607,7 @@ if ($theme != 'itgadmin') {
 <?php $last_val = 0;
 $divcounter=1;
 $divcou=0;
+
 ?>
 <?php for ($count = 1; $count <= EXTRA_SECTION_CARDS; $count+=3) { ?>
 <?php
@@ -615,8 +616,9 @@ $divcou=0;
   $widget_name3 = 'itg-block-'.($count_widget+3);  
 ?>
 
-<?php if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$widget_name2]['widget_name']) || isset($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
+<?php if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
 <?php
+
 $display_style = 'style="display:none"';
 if ($widget_data[$widget_name1]['widget_name']!= null || $widget_data[$widget_name2]['widget_name'] != null || $widget_data[$widget_name3]['widget_name'] != null) {
   $last_val++;
