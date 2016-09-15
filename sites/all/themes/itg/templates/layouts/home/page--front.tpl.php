@@ -249,7 +249,19 @@ if ($theme != 'itgadmin') {
                 </div>
             </div>
         </div>
-  
+    
+    </div>
+      </section>
+    </main>
+
+      <section class="recommended-for-you">
+       <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization']?></div>
+    </section>
+      
+ <main id="main" class="container">
+      <section id="content" role="main">
+
+<div class="itg-layout-container itg-front">
   <!--Common section strat here-->
   <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-common-section">
@@ -518,6 +530,7 @@ if ($theme != 'itgadmin') {
      </div>
   <?php } ?>
   <!--Photo slider and Watch now section starts here--> 
+
 
 <!--Common section strat here-->
 <?php if (isset($widget_data['itg-block-14']['widget_name']) || isset($widget_data['itg-block-15']['widget_name']) || isset($widget_data['itg-block-16']['widget_name']) || $theme == 'itgadmin') { ?>
