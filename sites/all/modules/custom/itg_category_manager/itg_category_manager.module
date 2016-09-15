@@ -1103,12 +1103,7 @@ jQuery(".primary-radio").each(function()
       }
     });
     jQuery(".dropbox-remove a").live("mousedown", function() {
-        var getdattext = jQuery(this).parent().siblings("td").text();
-        jQuery(document).on("ajaxComplete", function(event, xhr, settings) {
-            if (settings.url.indexOf("hierarchical_select_ajax") >= 0) {
-            jQuery("#edit-field-primary-category-und-0-value").val(0);
-                var getdoptiontext = jQuery(this).text();
-                var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
+    var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
 
 if (getvaluehtml != "")
     {
@@ -1116,6 +1111,12 @@ if (getvaluehtml != "")
        jQuery(".prim-html").remove()
         jQuery(".form-item-field-primary-category-html-und-0-value").append(getvaluehtml).hide();
         }
+        var getdattext = jQuery(this).parent().siblings("td").text();
+        jQuery(document).on("ajaxComplete", function(event, xhr, settings) {
+            if (settings.url.indexOf("hierarchical_select_ajax") >= 0) {
+            jQuery("#edit-field-primary-category-und-0-value").val(0);
+                var getdoptiontext = jQuery(this).text();
+                
         jQuery(".title-select-prim").remove();
         var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
         if(rows==0){

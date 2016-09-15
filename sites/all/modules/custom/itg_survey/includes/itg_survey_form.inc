@@ -9,7 +9,7 @@
  * Create survey form
  */
 function itg_survey_survey_form() {
-  global $base_url;
+  global $base_url, $user;
   
   //Get node of current survey
   $arg = arg();
@@ -18,7 +18,8 @@ function itg_survey_survey_form() {
   // Check node type
   if ($node->type == 'survey') {
     
-    drupal_add_js(drupal_get_path('module', 'itg_survey').'/js/itg_survey.js');
+    // Add JS for front
+    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_front.js');
     
     // Survey End date
     $survey_expiry_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours');
