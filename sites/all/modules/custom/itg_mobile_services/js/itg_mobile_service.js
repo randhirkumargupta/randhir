@@ -13,6 +13,7 @@ var maxLen = 0;
 var astroFlag = 0;
 var sDateFlag = 1;
 var dynamicId = '';
+var dynamicAudioId = '';
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
@@ -462,28 +463,25 @@ var dynamicId = '';
 
             jQuery('#content-enable-button').removeAttr('disabled');
             jQuery('#reset-date-button').removeAttr('disabled');
-            var frequency_from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
-            var frequency_end_date = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
             
-//            jQuery('.mobile-content-submit').on("click", function (event) {
-//                event.preventDefault();
-//                if (frequency_from_date == '') {
-//                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
-//                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
-//                    jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
-//                    return false;
-//                } else if (frequency_end_date == '') {
-//                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
-//                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
-//                    jQuery('.form-item-field-service-frequency-date-und-0-value2').append('<span class="error">Please enter end date.</span>');
-//                    return false;
-//                }
-//                if (frequency_from_date != '' && frequency_end_date != '') {
-//                    //jQuery('.mobile-content-submit').removeAttr('disabled');
-//                    jQuery('#edit-field-service-content-und-add-more').mousedown();
-//                    jQuery('.mobile-content-submit').mousedown();
-//                } 
-//            });
+           
+            jQuery('#vas-service-content-node-form').submit(function() { 
+                var frequency_from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
+                var frequency_end_date = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
+                if (frequency_from_date == '') {
+                    alert("Please enter start date.");
+                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
+                    return false;
+                } else if (frequency_end_date == '') {
+                    alert("Please enter end date.");
+                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2').append('<span class="error">Please enter end date.</span>');
+                    return false;
+                }
+            });
            
             
            
@@ -505,30 +503,48 @@ var dynamicId = '';
 
             // remove disable for video upload button
             jQuery( "input[name*='field_service_video_und_0_upload_button']" ).removeAttr('disabled');
-
-            // jQuery('.field-name-field-service-video-keyword').hide();
-            // for hide video and audio keyword text field
-            for (var i = 1; i <= 3; i++) {
-               jQuery('#edit-field-service-content-und-'+i+'-field-service-video-keyword--2').hide();
-               jQuery('#edit-field-service-content-und-'+i+'-field-service-audio-keyword--2').hide();
-               
+            if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
+                //jQuery( ".field-name-field-service-audio-keyword" ).hide();
+                //jQuery( ".field-name-field-service-video-keyword" ).hide();
+            } else {
+                jQuery( ".field-name-field-service-audio-keyword" ).hide();
+                jQuery( ".field-name-field-service-video-keyword" ).hide();
             }
 
-            // for video
-            jQuery(".mobile-video-fields input").on('click', function () { 
-                var uploadId = jQuery(this).attr("id");
-                var dataId = uploadId.split('-field-service-video-und-0-upload--');
-                var elementId = dataId[0].split('edit-field-service-content-und-');
-                dynamicId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-video-keyword--'+dataId[1];
-            });
-            // for Audio
-            jQuery(".mobile-audio-fields a").on('click', function () { 
-                          var uploadId = jQuery(this).next("input").attr("id");
-                          var dataId = uploadId.split('-field-service-audio-und-0--');
-                          var elementId = dataId[0].split('edit-field-service-content-und-');
-                          var lastElementId = dataId[1].split('-upload-imce-select');
-                          dynamicAudioId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-audio-keyword--'+lastElementId[0];
+            if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
+                jQuery('#content-enable-button').hide();
+                 // for video
+                jQuery(".mobile-video-fields input").on('click', function () { 
+                    var uploadId = jQuery(this).attr("id");
+                    var dataId = uploadId.split('-field-service-video-und-0-upload');
+                    var elementId = dataId[0].split('edit-field-service-content-und-');
+                    dynamicId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-video-keyword';
                 });
+                // for Audio
+                jQuery(".mobile-audio-fields a").on('click', function () { 
+                        var uploadId = jQuery(this).next("input").attr("id");
+                        var dataId = uploadId.split('-field-service-audio-und-0-upload-imce-select');
+                        var elementId = dataId[0].split('edit-field-service-content-und-');
+                        dynamicAudioId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-audio-keyword';
+                });
+            } else {
+                 // for video
+                jQuery(".mobile-video-fields input").on('click', function () { 
+                    var uploadId = jQuery(this).attr("id");
+                    var dataId = uploadId.split('-field-service-video-und-0-upload--');
+                    var elementId = dataId[0].split('edit-field-service-content-und-');
+                    dynamicId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-video-keyword--'+dataId[1];
+                });
+                // for Audio
+                jQuery(".mobile-audio-fields a").on('click', function () { 
+                        var uploadId = jQuery(this).next("input").attr("id");
+                        var dataId = uploadId.split('-field-service-audio-und-0--');
+                        var elementId = dataId[0].split('edit-field-service-content-und-');
+                        var lastElementId = dataId[1].split('-upload-imce-select');
+                        dynamicAudioId = '#edit-field-service-content-und-'+elementId[1]+'-field-service-audio-keyword--'+lastElementId[0];
+                });
+            }
+           
 
               
             jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
@@ -538,8 +554,7 @@ var dynamicId = '';
                     if (settings.url.indexOf('field_service_audio') >= 0) {
                         jQuery(dynamicAudioId).show();
                     }
-            });    
-
+            });
 
         }
     }

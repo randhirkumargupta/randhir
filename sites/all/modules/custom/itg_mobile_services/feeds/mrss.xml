@@ -1,8 +1,8 @@
 <channel>
 <header>
-<title>India Today's Videos Feed</title>
-<link>http://www.indiatoday.intoday.in/</link>
-<description>India Today's Videos Feed</description>
+    <title>India Today's Videos Feed</title>
+    <link>http://www.indiatoday.intoday.in/</link>
+    <description>India Today's Videos Feed</description>
 </header>  
     <item>
         <title>{field_client_short_description}</title>
@@ -31,6 +31,6 @@
         </media:content>
     </item>
 <footer>
-<description>{field_footer}</description>
+    <description>{field_footer}</description>
 </footer>
 </channel>
