@@ -1303,7 +1303,15 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
-  if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['taxonomy_term']->name == 'Anchor')) {
+  
+  // Get all terms of vocabulary occupation.
+  $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
+  $itg_occupation_tree = taxonomy_get_tree($itg_occupation->vid);
+  foreach ($itg_occupation_tree as $term) {
+    $occupation[] = $term->name;
+  }
+
+  if ($vars['type'] == 'reporter' && in_array('Anchor', $occupation)) {
 
     drupal_add_js(
             "jQuery(document).ready(function(){
