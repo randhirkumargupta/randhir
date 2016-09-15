@@ -249,7 +249,19 @@ if ($theme != 'itgadmin') {
                 </div>
             </div>
         </div>
-  
+    
+    </div>
+      </section>
+    </main>
+
+      <section class="recommended-for-you">
+       <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization']?></div>
+    </section>
+      
+ <main id="main" class="container">
+      <section id="content" role="main">
+
+<div class="itg-layout-container itg-front">
   <!--Common section strat here-->
   <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-common-section">
@@ -519,6 +531,7 @@ if ($theme != 'itgadmin') {
   <?php } ?>
   <!--Photo slider and Watch now section starts here--> 
 
+
 <!--Common section strat here-->
 <?php if (isset($widget_data['itg-block-14']['widget_name']) || isset($widget_data['itg-block-15']['widget_name']) || isset($widget_data['itg-block-16']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-common-section">
@@ -609,6 +622,7 @@ if ($theme != 'itgadmin') {
 <?php $last_val = 0;
 $divcounter=1;
 $divcou=0;
+
 ?>
 <?php for ($count = 1; $count <= EXTRA_SECTION_CARDS; $count+=3) { ?>
 <?php
@@ -617,8 +631,9 @@ $divcou=0;
   $widget_name3 = 'itg-block-'.($count_widget+3);  
 ?>
 
-<?php if (isset($widget_data[$widget_name1]['widget_name']) || isset($widget_data[$widget_name2]['widget_name']) || isset($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
+<?php if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
 <?php
+
 $display_style = 'style="display:none"';
 if ($widget_data[$widget_name1]['widget_name']!= null || $widget_data[$widget_name2]['widget_name'] != null || $widget_data[$widget_name3]['widget_name'] != null) {
   $last_val++;
@@ -829,8 +844,8 @@ if($theme != 'itgadmin')
             });
              jQuery('.removes-more-block').on('click', function() {
                 jQuery(this).hide();
-                 jQuery(this).parent().parent('.itg-common-section').hide(750);
-                jQuery(this).parent().parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
+                 jQuery(this).parent('.itg-common-section').hide();
+                jQuery(this).parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
             });
       
     });", array('type' => 'inline', 'scope' => 'footer'));

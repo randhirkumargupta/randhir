@@ -47,7 +47,7 @@
                        jQuery('.prim-html').remove();
                        setTimeout(function(){ 
                         jQuery('.form-item-field-primary-category-html-und-0-value').append(datahtml).hide();
-}, 1000);
+}, 500);
             jQuery(document).on('ajaxComplete', function(event, xhr, settings) {
                 if (settings.url.indexOf('hierarchical_select_ajax') >= 0) {
              
