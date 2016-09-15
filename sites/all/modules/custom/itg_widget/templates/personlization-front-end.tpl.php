@@ -1,39 +1,85 @@
+    <div class="recommended-slider">
 <?php
-$i = 0;
 global $base_url;
-foreach ($data as $tid => $info) :
-  ?>
-  <div class="widget-personlization-<?php print $i ?>">
-    <h3><?php print $info['taxonomy_term_load']->name ?></h3>
-    <?php
-    foreach ($info['data'] as $key => $nodes) {
-      $node_info = $nodes[0];
-      ?>
-      <li>
-        <div>
+$frist_block = array();
+$frist_block[] = $data[0];
+unset($data[0]);
+$frist_block[1] = $data[1];
+unset($data[1]);
+print '<div class=""><ul class="frist-ul common-list">';
+foreach ($frist_block as $node_info) {    ?>
+    <li class="recom-listing">
+                  
+        <div class="pic">
+                <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
+                    <?php
+                    if (isset($node_info['node_data']['uri'])) {
+                        print theme('image_style', array(
+                            'style_name' => 'video_landing_page_170_x_127',
+                            'path' => $node_info['node_data']['uri'],
+                                        )
+                        );
+                    } else {
+                        ?>
+                        <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                    <?php } ?>
+                </a>
+            </div>
+        <div class="detail">
+            <h4><?php print $node_info['taxonomy_name']; ?>  </h4>
+                <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
+                    <?php print $node_info['node_data']['title']; ?>
+                </a>
+            </div>
+        </li>
+<?php }
+print "</ul></div>";
+$front_data = array_chunk($data, 3);
 
-          <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['nid']}"); ?>">
-            <?php
-            if (isset($node_info['uri'])) {
-              print theme('image_style', array(
-                  'style_name' => 'video_landing_page_170_x_127',
-                  'path' => $node_info['uri'],
-                              )
-              );
-            }
-            else {
-              ?>
-              <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
-            <?php } ?>
-          </a>
-        </div>
-        <div>
-          <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['nid']}"); ?>">
-            <?php print $node_info['title']; ?>
-          </a>
-        </div>
-      </li>
-    <?php } ?>
-  </div>
-  <?php
-endforeach;
+
+foreach ($front_data as $info) {
+    print '<div class=""><ul class="rest-list common-list">';
+    foreach ($info as $node_info) {
+        ?>
+        <li class="recom-listing">
+            <div class="pic">
+                <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
+                    <?php
+                    if (isset($node_info['node_data']['uri'])) {
+                        print theme('image_style', array(
+                            'style_name' => 'video_landing_page_170_x_127',
+                            'path' => $node_info['node_data']['uri'],
+                                        )
+                        );
+                    } else {
+                        ?>
+                        <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                    <?php } ?>
+                </a>
+            </div>
+            
+            <div class="detail">
+                <h4><?php print $node_info['taxonomy_name']; ?></h4>
+                <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
+                    <?php print $node_info['node_data']['title']; ?>
+                </a>
+            </div>
+            
+        </li>
+        <?php
+    }
+    print "</ul></div>";
+}
+?>
+</div>    
+<script>
+jQuery(document).ready(function(){
+    jQuery('.recommended-slider').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,      
+      centerPadding: '40px',
+      prevArrow:'<button class="slick-prev"><i class="fa fa-angle-left"></i></button>',
+      nextArrow:'<button class="slick-next"><i class="fa fa-angle-right"></i></button>'
+    });
+});
+</script>
