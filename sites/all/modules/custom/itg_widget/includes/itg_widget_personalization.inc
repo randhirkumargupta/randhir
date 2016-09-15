@@ -58,7 +58,22 @@ function get_personalization_front_data() {
           ->orderBy('iwo.weight', 'DESC')
           ->orderBy('iwo.nid', 'DESC');
   $result = $query->execute()->fetchAll();
-
+  
+  // case handled if perferences is not saved.
+  if (count($result) == 0) {
+    $vocabulary = taxonomy_vocabulary_machine_name_load('category_management');
+    $terms = taxonomy_get_tree($vocabulary->vid);
+    foreach ($terms as $term_ids) {
+      $std_obj = new stdClass();
+      // Default weight 50 is required.
+      // so that (Create gorup of same weight tids) 
+      // code will handle weight according to number of nodes associated with term
+      $std_obj->weight = 50;
+      $std_obj->nid = $term_ids->tid;
+      $result[] = $std_obj;
+    }
+  }
+  
   // Create gorup of same weight tids
   foreach ($result as $info) {
     $new_ordered_data_weighted_group[$info->weight][] = $info->nid;
@@ -157,8 +172,9 @@ function get_personlization_front_block_data() {
     foreach ($nodes_associate_with_taxonomy as $key => $nid_array) {
       $nid = $nid_array['nid'];
       $tid = $persionalization_data;
-      $front_end_data[$tid]['data'][] = get_personlization_node_data_for_front($nid);
-      $front_end_data[$tid]['taxonomy_term_load'] = taxonomy_term_load($tid);
+      $temp_node_data = get_personlization_node_data_for_front($nid);
+      $texonomy_data = taxonomy_term_load($tid);
+      $front_end_data[] = array("node_data" => $temp_node_data[0], "taxonomy_name" => $texonomy_data->name);
     }
   }
   return $front_end_data;

@@ -88,7 +88,7 @@ jQuery(document).ready(function (e) {
         slidesToShow: 7,
         slidesToScroll: 1,
         asNavFor: '.slickslide, .counterslide',
-        dots: true,
+        dots: false,
         centerMode: false,
         arrows: true,
         variableWidth: true
