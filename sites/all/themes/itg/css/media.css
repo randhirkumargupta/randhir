@@ -790,8 +790,11 @@
   }
   #block-views-photo-landing-slider-block .slick-thumbs .slick-prev, #block-views-photo-landing-slider-block .slick-thumbs .slick-next {
     background: transparent;
-    margin-top: -75px;
+    margin-top: -55px;
     color: #fff;
+  }
+  #block-views-photo-landing-slider-block .slick-thumbs .slick-prev:hover, #block-views-photo-landing-slider-block .slick-thumbs .slick-next:hover {
+    background: transparent;
   }
 
   /*CSS End Photo landing page*/
