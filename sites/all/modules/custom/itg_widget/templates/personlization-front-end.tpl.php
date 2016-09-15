@@ -8,6 +8,7 @@
   unset($data[1]);
   print '<div class=""><ul class="frist-ul common-list">';
   foreach ($frist_block as $frist_key => $node_info) {
+    $height_width =  'width="170" height="127"';
     ?>
     <li class="recom-listing">
 
@@ -23,9 +24,10 @@
             );
           }
           else {
+            $height_width = ($frist_key == 0) ? 'width="370" height="208"' : 'width="170" height="127"';
             ?>
-            <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
-  <?php } ?>
+            <img <?php print $height_width; ?> src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+          <?php } ?>
         </a>
       </div>
       <div class="detail">
@@ -42,7 +44,7 @@
         </a>
       </div>
     </li>
-  <?php
+    <?php
   }
   print "</ul></div>";
   $front_data = array_chunk($data, 3);
@@ -65,22 +67,22 @@
             }
             else {
               ?>
-              <img src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
-    <?php } ?>
+              <img width="170" height="127" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+            <?php } ?>
           </a>
         </div>
 
         <div class="detail">
           <h4><?php print $node_info['taxonomy_name']; ?></h4>
           <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
-      <?php print $node_info['node_data']['title']; ?>
+            <?php print $node_info['node_data']['title']; ?>
           </a>
         </div>
 
       </li>
-    <?php
+      <?php
+    }
+    print "</ul></div>";
   }
-  print "</ul></div>";
-}
-?>
+  ?>
 </div>
