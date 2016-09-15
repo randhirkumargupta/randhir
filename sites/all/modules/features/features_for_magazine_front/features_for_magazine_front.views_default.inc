@@ -329,6 +329,10 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Section wise ordering content: extra */
+  $handler->display->display_options['sorts']['extra']['id'] = 'extra';
+  $handler->display->display_options['sorts']['extra']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['extra']['field'] = 'extra';
   /* Contextual filter: Content: Issue date (field_story_issue_date) */
   $handler->display->display_options['arguments']['field_story_issue_date_value']['id'] = 'field_story_issue_date_value';
   $handler->display->display_options['arguments']['field_story_issue_date_value']['table'] = 'field_data_field_story_issue_date';
@@ -367,6 +371,11 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['filters']['field_story_issue_date_value']['field'] = 'field_story_issue_date_value';
   $handler->display->display_options['filters']['field_story_issue_date_value']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_story_issue_date_value']['year_range'] = '-100:+100';
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'issue_magazin_widget';
 
   /* Display: Magzine bottom story block */
   $handler = $view->new_display('block', 'Magzine bottom story block', 'block');
@@ -410,6 +419,16 @@ function features_for_magazine_front_views_default_views() {
 <h3>[title]</h3>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
 
   /* Display: Magzine top story block */
   $handler = $view->new_display('block', 'Magzine top story block', 'block_1');
@@ -450,6 +469,16 @@ function features_for_magazine_front_views_default_views() {
 <h2>[title]</h2>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $export['magazine_top_story'] = $view;
 
   return $export;
