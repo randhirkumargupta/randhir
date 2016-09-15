@@ -339,7 +339,7 @@
                         }
                     });
                 })
-                jQuery(this).parent().parent('.itg-common-section').hide();
+                jQuery(this).parent().parent('.itg-common-section').slideUp( 1000);
                 jQuery(this).parent().parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
             });
 
