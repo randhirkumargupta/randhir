@@ -788,6 +788,11 @@
     top: 38px;
     font-size: 30px;
   }
+  #block-views-photo-landing-slider-block .slick-thumbs .slick-prev, #block-views-photo-landing-slider-block .slick-thumbs .slick-next {
+    background: transparent;
+    margin-top: -75px;
+    color: #fff;
+  }
 
   /*CSS End Photo landing page*/
   /*CSS Start magazine-calander RHS*/
@@ -835,6 +840,12 @@
   }
 
   /*CSS End RHS add block*/
+  .recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing .pic {
+    width: auto;
+  }
+  .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next, .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-prev {
+    display: block !important;
+  }
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
