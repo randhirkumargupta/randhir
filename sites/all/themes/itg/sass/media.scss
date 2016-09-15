@@ -693,7 +693,14 @@ section.sidebar{
                 top: 38px;
                 font-size: 30px;
            }
-       }      
+       }  
+       .slick-thumbs{
+           .slick-prev, .slick-next{
+               background: transparent;
+               margin-top: -75px;
+               color:#fff;
+           }
+       }
 }
 /*CSS End Photo landing page*/
 /*CSS Start magazine-calander RHS*/
