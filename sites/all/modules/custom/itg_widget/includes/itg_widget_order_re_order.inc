@@ -235,43 +235,13 @@ function update_itg_widget_order_table_data_for_issue_magazin($form, &$form_stat
   $extra_values = array();
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
-    $result = db_select('itg_widget_order')
-                    ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
-                    ->condition('widget', $widget)
-                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $extra_values = $result;
+    db_update('itg_widget_order')
+                ->fields(array('weight' => $value['weight']))
+                 ->condition('widget', 'issue_magazin_widget')
+            ->condition('nid', $value['id'])
+                ->execute();
   }
-  // Make draggable array with extra and content type , which is recived above.
-  foreach ($extra_values as $key => $value) {
-    foreach ($draggable_view_data as $draggable_node_key => $draggable_nodes) {
-      if ($draggable_nodes['id'] == $value['nid']) {
-        $draggable_view_data[$key]['content_type'] = ($value['content_type']) ? $value['content_type'] : "";
-        $draggable_view_data[$key]['extra'] = ($value['extra']) ? $value['extra'] : "";
-      }
-    }
-  }
-  // Delete all entry of widget so_sorry_widget as we have all the array of already inserted data.
-  db_delete('itg_widget_order')
-          ->condition('widget', $widget)
-          ->execute();
-
-  // Now insert again with updated values.
-  foreach ($draggable_view_data as $key => $node_data) {
-     $num_deleted = db_delete('itg_widget_order')
-            ->condition('widget', $widget_name)
-            ->condition('nid', $node_data['id'])
-            ->execute();
-    db_insert('itg_widget_order')
-            ->fields(array(
-                'nid' => $node_data['id'],
-                'widget' => $widget,
-                'content_type' => ($node_data['content_type']) ? $node_data['content_type'] : "",
-                'cat_id' => '0',
-                'weight' => $node_data['weight'],
-                'extra' => $node_data['extra'],
-            ))
-            ->execute();
-  }
+ 
 }
 
 
