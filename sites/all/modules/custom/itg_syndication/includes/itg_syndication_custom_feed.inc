@@ -595,7 +595,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
   );
 
   $form['actions']['cancle'] = array(
-      '#markup' => l(t('Cancel'), $_GET['destination'], array(
+      '#markup' => l(t('Cancel'), 'syndication-feed-pattern-listing', array(
           'attributes' => array(
               'class' => 'button'
           )

@@ -7,7 +7,7 @@
     }
 }
 /*Start header CSS Desktop version*/
-@media only screen and (min-width:768px){    
+@media only screen and (min-width:769px){    
     h1{    
         font-size: $h1-font-size;
         line-height: $h1-line-height;
@@ -124,7 +124,7 @@
             margin-top: 20px;
             display:block !important;
             .menu{
-                padding-left:145px;
+                padding-left:135px;
             li{
                 @include float(left);
                 a{
@@ -137,9 +137,6 @@
                     height: 37px;
                     @include font($itg-nav-fontsize,37px,null);                                            
                     }
-                    &:first-child a{
-                             padding-left: 0;
-                        }
                 }
             }
         }
@@ -282,7 +279,23 @@
     }
 }
 /*End Dont miss Home page css*/
-
+/*Start photo section slider Homepage*/
+.featured_photo_carousel{
+    .flexslider .flex-direction-nav{
+        display: block;
+    }       
+    .flexslider .slides li .detail .flex-caption{
+        @include font(18px,24px,$itg-font-medium);  
+        padding: 10px;   
+        min-height: 68px;
+        max-height: auto;
+        overflow: initial;
+    }
+    .flexslider .slides li .detail .flex-count{
+        @include pos(absolute,null,null,78px,0px);
+    }
+}
+/*End photo section slider Homepage*/
 /*Start Story page css*/
 .story-section{
     h1{
@@ -527,7 +540,7 @@
                    width: 170px;
             }
             .detail{
-                overflow: hidden;                    ;
+                overflow: hidden; 
                 h3{
                     margin-bottom: 10px;
                     @include font(24px);
@@ -542,6 +555,11 @@ section.sidebar{
 }
 .sidebars{
     margin-top: 0px;
+}
+.page-sosorry{
+        section.sidebar{
+        border: none;
+    }
 }
 /*CSS end sidebar */
 .view-category-wise-content-list{
@@ -568,7 +586,7 @@ section.sidebar{
 /*End category wise content list css*/
 
 /*CSS Starts Photo landing page*/
-.view-video-list-of-category, .view-video-landing-header, .view-photo-list-of-category{
+.view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry{
     .view-content{      
         .photo-list{
             li{
@@ -658,8 +676,11 @@ section.sidebar{
                  padding-left:10px;
                 li{
                     a{
-                       padding: 0 17px;
+                       padding: 0 15px;
                        line-height: 55px;
+                    }
+                    span.flag-throbber{
+                        display: none;
                     }
                 }
             }
@@ -676,10 +697,49 @@ section.sidebar{
 }
 /*CSS End Photo landing page*/
 /*CSS Start magazine-calander RHS*/
-#block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1{    
+/*#block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1{    
     padding: 50px 30px 20px 30px;
-}
+}*/
 /*CSS End magazine-calander RHS*/
+
+/*CSS Start So sorry page*/
+#block-itg-layout-manager-header-sosorry-block{
+    .sosory-header .sosorryitg{
+        padding: 40px 30px 0 0;   
+    }
+    .sosory-footer{
+        text-align: center;   
+        ul li{
+            width: auto;
+            padding:0 20px;
+            margin-bottom: 0px;
+            i{
+                float: none;
+            }  
+            &:nth-child(2){
+                border-left: 1px solid #eff94e;
+                border-right: 1px solid #eff94e;
+            }
+        } 
+    } 
+}
+.view-so-sorry{
+    h2{
+        @include font(26px,null,300);
+    }
+}
+.view-display-id-so_sorry_page{
+    margin:0;
+    h1{
+        font-size: 26px;                        
+    }
+}
+/*CSS End So sorry page*/
+/*CSS Start RHS add block*/
+#block-itg-ads-ad-right-sidebar-1{    
+    padding: 30px 34px 0;
+}
+/*CSS End RHS add block*/
 }
 /*End CSS Desktop version*/
 
@@ -700,13 +760,29 @@ section.sidebar{
                 }
             }
         }
-    }
+        .navigation{
+            .menu {
+                margin-left: 135px;
+                margin-right: 50px;
+                padding-left: 0;
+                white-space: nowrap;
+                overflow-x: scroll;
+                li{
+                    @include display-inline;
+                    float: none;
+                }
+            }
+        }
+    }    
     .top-block .top-colum-2{
        @include calculate-width(1);
+       margin-bottom: 50px;
     }
     .top-block .top-colum-1, .top-block .top-colum-3{
        @include calculate-width(2);
+       @include float(left);
     }
+    
     .big-news .big-story-col-1, .big-news .big-story-col-2{
         @include calculate-width(1);
     }
@@ -714,4 +790,35 @@ section.sidebar{
         padding-top: 20px;
         padding-left: 15px;   
     }
+    .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget{
+        overflow: scroll;
+        height: 663px;
+    }
+    #block-itg-layout-manager-header-sosorry-block{
+        .sosory-header .sosorryitg{
+            padding: 40px 30px 0 0;
+        }
+        .sosory-footer{              
+            ul li{                               
+                &:nth-child(2){                    
+                    border-left:none;
+                }
+            } 
+        } 
+    }    
+}
+
+@media only screen and (min-width:640px){
+    /*CSS Start Anchor listing detail page*/
+    #block-views-anchor-landing-page-block{
+        .anchor-left, .anchor-right{
+            @include float(left);
+            @include calculate-width(2);
+        }
+        .anchor-right{
+            padding-left:15px;
+            padding-top:0px;
+        }        
+    }
+    /*CSS End Anchor listing detail page*/
 }

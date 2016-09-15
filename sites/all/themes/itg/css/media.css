@@ -35,7 +35,7 @@
   }
 }
 /*Start header CSS Desktop version*/
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   h1 {
     font-size: 40px;
     line-height: 46px;
@@ -182,7 +182,7 @@
     clear: both;
   }
   #block-itg-layout-manager-header-block .navigation .menu {
-    padding-left: 145px;
+    padding-left: 135px;
   }
   #block-itg-layout-manager-header-block .navigation .menu li {
     float: left;
@@ -198,9 +198,6 @@
     font-size: 14px;
     font-size: 0.875rem;
     line-height: 37px;
-  }
-  #block-itg-layout-manager-header-block .navigation .menu li:first-child a {
-    padding-left: 0;
   }
 
   /*End header CSS Desktop version*/
@@ -343,6 +340,27 @@
   }
 
   /*End Dont miss Home page css*/
+  /*Start photo section slider Homepage*/
+  .featured_photo_carousel .flexslider .flex-direction-nav {
+    display: block;
+  }
+  .featured_photo_carousel .flexslider .slides li .detail .flex-caption {
+    font-size: 18px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 24px;
+    padding: 10px;
+    min-height: 68px;
+    max-height: auto;
+    overflow: initial;
+  }
+  .featured_photo_carousel .flexslider .slides li .detail .flex-count {
+    position: absolute;
+    bottom: 78px;
+    left: 0px;
+  }
+
+  /*End photo section slider Homepage*/
   /*Start Story page css*/
   .story-section h1 {
     font-size: 34px;
@@ -537,14 +555,14 @@
     line-height: 23px;
   }
 }
-@media only screen and (min-width: 768px) and (min-width: 768px) {
+@media only screen and (min-width: 769px) and (min-width: 768px) {
   .view-front-end-global-search .view-content .social-share ul li a {
     width: 23px;
     height: 23px;
     line-height: 25px;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   .view-front-end-global-search .view-content .social-share ul li a.share {
     color: #d0d0d0;
   }
@@ -619,6 +637,10 @@
     margin-top: 0px;
   }
 
+  .page-sosorry section.sidebar {
+    border: none;
+  }
+
   /*CSS end sidebar */
   .view-category-wise-content-list h1 {
     font-size: 32px;
@@ -681,14 +703,14 @@
 
   /*End category wise content list css*/
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li {
     padding: 15px;
     width: 25%;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-video-landing-header .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-video-landing-header .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1) {
     clear: left;
   }
 
@@ -751,8 +773,11 @@
     padding-left: 10px;
   }
   #block-views-photo-landing-slider-block .social-icon ul li a {
-    padding: 0 17px;
+    padding: 0 15px;
     line-height: 55px;
+  }
+  #block-views-photo-landing-slider-block .social-icon ul li span.flag-throbber {
+    display: none;
   }
   #block-views-photo-landing-slider-block .slick-slider .slick-next, #block-views-photo-landing-slider-block .slick-slider .slick-prev {
     width: 50px;
@@ -766,11 +791,50 @@
 
   /*CSS End Photo landing page*/
   /*CSS Start magazine-calander RHS*/
-  #block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1 {
-    padding: 50px 30px 20px 30px;
+  /*#block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1{    
+      padding: 50px 30px 20px 30px;
+  }*/
+  /*CSS End magazine-calander RHS*/
+  /*CSS Start So sorry page*/
+  #block-itg-layout-manager-header-sosorry-block .sosory-header .sosorryitg {
+    padding: 40px 30px 0 0;
+  }
+  #block-itg-layout-manager-header-sosorry-block .sosory-footer {
+    text-align: center;
+  }
+  #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li {
+    width: auto;
+    padding: 0 20px;
+    margin-bottom: 0px;
+  }
+  #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li i {
+    float: none;
+  }
+  #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li:nth-child(2) {
+    border-left: 1px solid #eff94e;
+    border-right: 1px solid #eff94e;
   }
 
-  /*CSS End magazine-calander RHS*/
+  .view-so-sorry h2 {
+    font-size: 26px;
+    font-size: 1.625rem;
+    font-weight: 300;
+  }
+
+  .view-display-id-so_sorry_page {
+    margin: 0;
+  }
+  .view-display-id-so_sorry_page h1 {
+    font-size: 26px;
+  }
+
+  /*CSS End So sorry page*/
+  /*CSS Start RHS add block*/
+  #block-itg-ads-ad-right-sidebar-1 {
+    padding: 30px 34px 0;
+  }
+
+  /*CSS End RHS add block*/
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
@@ -783,13 +847,27 @@
     top: -6px;
     left: 0;
   }
+  #block-itg-layout-manager-header-block .navigation .menu {
+    margin-left: 135px;
+    margin-right: 50px;
+    padding-left: 0;
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+  #block-itg-layout-manager-header-block .navigation .menu li {
+    display: inline-block;
+    vertical-align: top;
+    float: none;
+  }
 
   .top-block .top-colum-2 {
     width: 100%;
+    margin-bottom: 50px;
   }
 
   .top-block .top-colum-1, .top-block .top-colum-3 {
     width: 50%;
+    float: left;
   }
 
   .big-news .big-story-col-1, .big-news .big-story-col-2 {
@@ -800,4 +878,29 @@
     padding-top: 20px;
     padding-left: 15px;
   }
+
+  .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget {
+    overflow: scroll;
+    height: 663px;
+  }
+
+  #block-itg-layout-manager-header-sosorry-block .sosory-header .sosorryitg {
+    padding: 40px 30px 0 0;
+  }
+  #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li:nth-child(2) {
+    border-left: none;
+  }
+}
+@media only screen and (min-width: 640px) {
+  /*CSS Start Anchor listing detail page*/
+  #block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
+    float: left;
+    width: 50%;
+  }
+  #block-views-anchor-landing-page-block .anchor-right {
+    padding-left: 15px;
+    padding-top: 0px;
+  }
+
+  /*CSS End Anchor listing detail page*/
 }

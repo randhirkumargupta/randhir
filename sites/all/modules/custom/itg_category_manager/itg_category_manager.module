@@ -311,7 +311,8 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
             $form['name']['#title'] = t('Category Title');
             $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
-            unset($form['description']);
+            //unset($form['description']);
+            unset($form['field_cm_sponsored_category']);
 //Hide settings title levels
             unset($form['field_cm_hide_cat_from_home'][LANGUAGE_NONE]['#title']);
             unset($form['field_cm_hide_cat_from_search'][LANGUAGE_NONE]['#title']);
@@ -487,7 +488,7 @@ function itg_category_manager_term_validate($form, &$form_state) {
  * @param type $form_state
  * @return int
  */
-function itg_category_manager_add_form_after_build($form, &$form_state) {
+function itg_category_manager_add_form_after_build(&$form, &$form_state) {
 //Add cancel link to add and edit form of category add form exit;
     $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'category-manager-listing', array('attributes' => array('class' => 'button'))),
@@ -502,10 +503,12 @@ function itg_category_manager_add_form_after_build($form, &$form_state) {
             ),
         ),
     );
+    
+    unset($form['description']['format']['format']);
 //Unset metatag description
     unset($form['metatags']['intro_text']['#markup']);
     unset($form['metatags']['#description']);
-
+   
     return $form;
 }
 
@@ -1030,18 +1033,25 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
         $node = node_load(arg(1));
         $type = $node->type;
     }
-    $editid = $form_state['input']['field_primary_category'][LANGUAGE_NONE][0]['value'];
-    $editid = ($editid ? $editid : 0);
+    $editid=0;
+    $editid_new = $form_state['input']['field_primary_category'][LANGUAGE_NONE][0]['value'];
+     if(is_numeric($editid_new))
+    {
+        $editid=$editid_new;
+    }
+
     drupal_add_js('jQuery(document).ready(function() {
         var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
         if(rows==0){
+         jQuery(".title-select-prim").remove();
         jQuery(".dropbox table").before( "<span class=title-select-prim>Select primary category</span>" );
        
         }
   jQuery(".form-item-field-primary-category-html-text-und-0-value").hide();
 jQuery(".node-form").append("<input type=hidden name=form_node value=' . $type . ' >");
 jQuery("form").submit(function(){
-var gethtml = jQuery(".dropbox-title").html();
+var gethtml = jQuery(".prim-html").html();
+
 jQuery("#edit-field-primary-category-html-text-und-0-value").val(gethtml);
 jQuery(".primary-radio").each(function()
     {
@@ -1061,20 +1071,25 @@ jQuery(".primary-radio").each(function()
   var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
     if (getvaluehtml != "")
     {
-        jQuery(".dropbox-title").html(getvaluehtml).hide();
+    getvaluehtml="<div class=prim-html>"+getvaluehtml+"</div>";
+    jQuery(".prim-html").remove();
+ 
+     jQuery(".form-item-field-primary-category-html-und-0-value").append(getvaluehtml).hide();
         jQuery("#primary-category-data").html(getvaluehtml);
-        jQuery(".hiddenradio").each(function(){
+        jQuery(".prim-html").children("span").each(function(){
           var gettoptext=jQuery(this).find(".primary-text").text();
           var selectvalue=jQuery(this).find(".select-prim").val();
           
         makeradio = "<input class=primary-radio name=primary_radio type=radio  value="+selectvalue+">";
-
                         
                          jQuery(".dropbox-entry").each(function(){
                             var gettrtext=jQuery(this).children("td:first").text();
                             if(gettoptext==gettrtext)
                             {
+                             if (!jQuery(this).children("td:first").find("input").hasClass("primary-radio"))
+                                {
                                 jQuery(this).children("td:first").find(".dropbox-item:first").before(makeradio);
+                                }
                             }
                           });
 
@@ -1088,24 +1103,28 @@ jQuery(".primary-radio").each(function()
       }
     });
     jQuery(".dropbox-remove a").live("mousedown", function() {
+    var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
+
+if (getvaluehtml != "")
+    {
+    getvaluehtml="<div class=prim-html>"+getvaluehtml+"</div>";
+       jQuery(".prim-html").remove()
+        jQuery(".form-item-field-primary-category-html-und-0-value").append(getvaluehtml).hide();
+        }
         var getdattext = jQuery(this).parent().siblings("td").text();
         jQuery(document).on("ajaxComplete", function(event, xhr, settings) {
             if (settings.url.indexOf("hierarchical_select_ajax") >= 0) {
             jQuery("#edit-field-primary-category-und-0-value").val(0);
                 var getdoptiontext = jQuery(this).text();
-                var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
-
-if (getvaluehtml != "")
-    {
-        jQuery(".dropbox-title").html(getvaluehtml).hide();
-        }
+                
         jQuery(".title-select-prim").remove();
         var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
         if(rows==0){
+        jQuery(".title-select-prim").remove();
         jQuery(".dropbox table").before( "<span class=title-select-prim>Select primary category</span>" );
        
         }
-                jQuery(".dropbox-title .primary-text").each(function() {
+                jQuery(".prim-html .primary-text").each(function() {
 
                     var getdoptiontext = jQuery(this).text();
                     if (getdoptiontext == getdattext) {

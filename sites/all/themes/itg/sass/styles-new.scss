@@ -743,7 +743,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   }
 }
 
-.view-personalization-saved-content{
+.view-personalization-my-content{
   .views-table{
     width: 100%;
     max-width: 860px;
@@ -960,6 +960,31 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           vertical-align: top;
           color: #fff;
         }
+      }
+      table{
+          td{
+              position: relative;
+              > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+                    position: absolute;
+                    right: 10px;
+                    margin: 0;
+                    bottom: 20px;
+              }
+          }
+          + div{
+              .field-add-more-submit{
+                  margin-left: 0;
+              }
+          }
+      }
+      .messages.error.file-upload-js-error{
+          display: none;
+      }
+      input[type="file"]{
+            width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
       }
     }
     [id*="field-ugc-personalization-photo-add-more-wrapper"]{
@@ -1183,7 +1208,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }                
     }
     .profile-detail {
-      width: 74%;    
+      width: 60%;    
       margin: 0 0 0 10px;
       ul {
         list-style: none;
@@ -1247,6 +1272,24 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         }
       }
     }
+    .social-info{
+      float: right;
+      width: 200px;
+      span{
+        float: left;
+        width: 25%;
+        padding: 5px;
+        text-align: center;
+        .fa{
+          font-size: 18px;
+          line-height: 22px;
+        }
+        dfn{
+          font: normal 400 12px/18px Roboto;
+          display: block;
+        }
+      }
+    }
   }
 }
 .question-container{
@@ -1255,6 +1298,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     font-size: 18px;
     color: #666;
     font-weight: 500;
+    span{
+      font-size: 14px;
+    }
   }
   .question-number{
     display: inline-block;
@@ -1277,6 +1323,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       margin: 0 0 20px;
       &.form-type-radio .form-radio {
         margin: 3px 5px 0 0;
+      }
+    }
+    .form-type-textfield{
+      > label{
+        float: left;
+        padding: 8px 20px 0 0;
+        width: 220px;
       }
     }
   }
@@ -1306,5 +1359,84 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   }
   .success-message, .messages--status{
     font-size: 18px;
+  }
+}
+
+/* CSS For Homepage Poll widget */
+.home_page_poll_widget_block{
+  .poll-data{
+    max-width: 370px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    .poll-banner-image{
+      max-width: 100%;
+      max-height: 208px;
+      height: 208px;
+      width: 100%;
+      margin: 0;
+      img{
+        width: 100%;
+        height: 208px;
+      }
+    }
+    .active-poll-title{
+      background-color: #000;
+      float: left;
+      width: 100%;
+      height: 68px;
+      margin-bottom: 11px;
+      overflow: hidden;
+      h2{
+        color: #fff;
+        font-size: 20px;
+        line-height: 24px;
+        margin: 0;
+        padding: 10px;
+      }
+      .updated-msg{
+        display: none;
+      }
+    }
+    form{
+      text-align: center;
+      padding-bottom: 20px;
+      label{
+        display: inline-block;
+        vertical-align: top;
+        padding: 0;
+      }
+      .form-radios{
+        .form-item{
+          display: inline-block;
+          vertical-align: top;
+          margin: 0 10px;
+          .form-radio{
+            float: left;
+            margin: 3px 2px 0 0;
+          }
+        }
+      }
+    }
+    .poll-replace-id .form-submit{
+        width: 100px;
+        height: 36px;
+        background-color: #ccc;
+        border: none;
+        width: 100px;
+        height: 36px;
+        font-weight: 500;
+        font-family: Roboto;
+        margin-top: 20px;
+        font-size: 500;
+        color: #323232;
+      }
+  }
+}
+.home_page_poll_widget_block{
+  .widget-settings{
+    position: absolute;
+    z-index: 99;
   }
 }

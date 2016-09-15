@@ -17,6 +17,17 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
     </ul>
     <div class="globle-search">
      <input class="search-text" placeholder="Type here" type="text" value=""></div>
+<!--      <div class="menu-login desktop-hide">
+        <div class="container ">   
+            <div class="user-menu">
+                <a href="#" class="user-icon"><i class="fa fa-user"></i></a>
+                <?php
+                //$block = module_invoke('system', 'block_view', 'user-menu');
+               // print render($block['content']);
+                ?>
+            </div>
+        </div>
+    </div>-->
 </div>
 <div class="itg-logo-container">
     <div class="container top-nav">                  
@@ -39,7 +50,20 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
     </div>
     <nav class="navigation">
         <div class="container">
-            <?php print drupal_render($data['itg_main_manu_header']); ?>
-        </div>   
+            <?php print drupal_render($data['itg_main_manu_header']); ?>            
+        </div>         
     </nav>
+     
+    <div class="menu-login mhide">
+        <div class="container ">   
+            <div class="user-menu">
+                <a href="#" class="user-icon"><i class="fa fa-user"></i></a>
+                <?php
+                $block = module_invoke('system', 'block_view', 'user-menu');
+                print render($block['content']);
+                ?>
+            </div>
+        </div>
+    </div>
+    
 </div>

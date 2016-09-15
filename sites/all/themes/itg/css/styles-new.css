@@ -747,52 +747,52 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: block;
 }
 
-.view-personalization-saved-content .views-table {
+.view-personalization-my-content .views-table {
   width: 100%;
   max-width: 860px;
   border-collapse: collapse;
   border-radius: 5px;
   margin: 0 auto;
 }
-.view-personalization-saved-content .views-table th {
+.view-personalization-my-content .views-table th {
   background-color: #1a3c8d;
   color: #fff;
   border-top: 1px solid #e0e0e0;
 }
-.view-personalization-saved-content .views-table th:first-child {
+.view-personalization-my-content .views-table th:first-child {
   border-radius: 5px 0 0 0;
   border-left: 1px solid #e0e0e0;
   min-width: 300px;
   text-align: left;
   text-indent: 40px;
 }
-.view-personalization-saved-content .views-table th:last-child {
+.view-personalization-my-content .views-table th:last-child {
   border-radius: 0 5px 0 0;
   border-right: 1px solid #e0e0e0;
 }
-.view-personalization-saved-content .views-table td {
+.view-personalization-my-content .views-table td {
   border: 1px solid #e0e0e0;
   text-align: center;
 }
-.view-personalization-saved-content .views-table td:first-child {
+.view-personalization-my-content .views-table td:first-child {
   text-align: left;
 }
-.view-personalization-saved-content .views-table th, .view-personalization-saved-content .views-table td {
+.view-personalization-my-content .views-table th, .view-personalization-my-content .views-table td {
   padding: 10px;
   max-width: 300px;
   font: 300 16px/22px Roboto;
   min-width: 120px;
 }
-.view-personalization-saved-content .item-list ul.pager {
+.view-personalization-my-content .item-list ul.pager {
   margin: 10px 0;
   list-style-type: none;
   text-align: center;
 }
-.view-personalization-saved-content .item-list ul.pager li {
+.view-personalization-my-content .item-list ul.pager li {
   display: inline-block;
   vertical-align: top;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-current {
+.view-personalization-my-content .item-list ul.pager li.pager-current {
   height: 25px;
   width: 25px;
   line-height: 25px;
@@ -801,7 +801,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border-radius: 50%;
   font-family: "Roboto", sans-serif;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-item a {
+.view-personalization-my-content .item-list ul.pager li.pager-item a {
   display: block;
   height: 25px;
   width: 25px;
@@ -811,16 +811,16 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #323232;
   font-family: "Roboto", sans-serif;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-item a:hover {
+.view-personalization-my-content .item-list ul.pager li.pager-item a:hover {
   background-color: #337ab7;
   color: #fff;
   border-radius: 50%;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-next a, .view-personalization-saved-content .item-list ul.pager li.pager-last a, .view-personalization-saved-content .item-list ul.pager li.pager-first a, .view-personalization-saved-content .item-list ul.pager li.pager-previous a {
+.view-personalization-my-content .item-list ul.pager li.pager-next a, .view-personalization-my-content .item-list ul.pager li.pager-last a, .view-personalization-my-content .item-list ul.pager li.pager-first a, .view-personalization-my-content .item-list ul.pager li.pager-previous a {
   color: #323232;
   line-height: 25px;
 }
-.view-personalization-saved-content .item-list ul.pager li.pager-next.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-next.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-last.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-first.pager-last.last, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-first.first, .view-personalization-saved-content .item-list ul.pager li.pager-previous.pager-last.last {
+.view-personalization-my-content .item-list ul.pager li.pager-next.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-next.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-last.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-last.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-first.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-first.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-previous.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-previous.pager-last.last {
   display: none;
 }
 
@@ -997,6 +997,27 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: inline-block;
   vertical-align: top;
   color: #fff;
+}
+#content #block-formblock-ugc .node-ugc-form table td {
+  position: relative;
+}
+#content #block-formblock-ugc .node-ugc-form table td > .form-submit[value="Remove"], #content #block-formblock-ugc .node-ugc-form table td .ajax-new-content > .form-submit[value="Remove"] {
+  position: absolute;
+  right: 10px;
+  margin: 0;
+  bottom: 20px;
+}
+#content #block-formblock-ugc .node-ugc-form table + div .field-add-more-submit {
+  margin-left: 0;
+}
+#content #block-formblock-ugc .node-ugc-form .messages.error.file-upload-js-error {
+  display: none;
+}
+#content #block-formblock-ugc .node-ugc-form input[type="file"] {
+  width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
   margin-left: 0;
@@ -1254,7 +1275,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 2px solid #e4e4e4;
 }
 .survey-form-main-container .byline .profile-detail {
-  width: 74%;
+  width: 60%;
   margin: 0 0 0 10px;
 }
 .survey-form-main-container .byline .profile-detail ul {
@@ -1342,6 +1363,24 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   vertical-align: middle;
   margin-right: 5px;
 }
+.survey-form-main-container .byline .social-info {
+  float: right;
+  width: 200px;
+}
+.survey-form-main-container .byline .social-info span {
+  float: left;
+  width: 25%;
+  padding: 5px;
+  text-align: center;
+}
+.survey-form-main-container .byline .social-info span .fa {
+  font-size: 18px;
+  line-height: 22px;
+}
+.survey-form-main-container .byline .social-info span dfn {
+  font: normal 400 12px/18px Roboto;
+  display: block;
+}
 
 .question-container {
   font-family: Roboto;
@@ -1350,6 +1389,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-size: 18px;
   color: #666;
   font-weight: 500;
+}
+.question-container .question-heading span {
+  font-size: 14px;
 }
 .question-container .question-number {
   display: inline-block;
@@ -1374,6 +1416,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .question-container .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 3px 5px 0 0;
+}
+.question-container .answer-container .form-type-textfield > label {
+  float: left;
+  padding: 8px 20px 0 0;
+  width: 220px;
 }
 
 .survey-form-wrapper-all .question-container {
@@ -1406,4 +1453,78 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 [id*="itg-survey-survey-form"] .success-message, [id*="itg-survey-survey-form"] .messages--status {
   font-size: 18px;
+}
+
+/* CSS For Homepage Poll widget */
+.home_page_poll_widget_block .poll-data {
+  max-width: 370px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+.home_page_poll_widget_block .poll-data .poll-banner-image {
+  max-width: 100%;
+  max-height: 208px;
+  height: 208px;
+  width: 100%;
+  margin: 0;
+}
+.home_page_poll_widget_block .poll-data .poll-banner-image img {
+  width: 100%;
+  height: 208px;
+}
+.home_page_poll_widget_block .poll-data .active-poll-title {
+  background-color: #000;
+  float: left;
+  width: 100%;
+  height: 68px;
+  margin-bottom: 11px;
+  overflow: hidden;
+}
+.home_page_poll_widget_block .poll-data .active-poll-title h2 {
+  color: #fff;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0;
+  padding: 10px;
+}
+.home_page_poll_widget_block .poll-data .active-poll-title .updated-msg {
+  display: none;
+}
+.home_page_poll_widget_block .poll-data form {
+  text-align: center;
+  padding-bottom: 20px;
+}
+.home_page_poll_widget_block .poll-data form label {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0;
+}
+.home_page_poll_widget_block .poll-data form .form-radios .form-item {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px;
+}
+.home_page_poll_widget_block .poll-data form .form-radios .form-item .form-radio {
+  float: left;
+  margin: 3px 2px 0 0;
+}
+.home_page_poll_widget_block .poll-data .poll-replace-id .form-submit {
+  width: 100px;
+  height: 36px;
+  background-color: #ccc;
+  border: none;
+  width: 100px;
+  height: 36px;
+  font-weight: 500;
+  font-family: Roboto;
+  margin-top: 20px;
+  font-size: 500;
+  color: #323232;
+}
+
+.home_page_poll_widget_block .widget-settings {
+  position: absolute;
+  z-index: 99;
 }

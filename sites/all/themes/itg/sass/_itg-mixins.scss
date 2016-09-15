@@ -362,3 +362,18 @@ $root-font-size: 16px;
         }
     }
 }
+@mixin photo-scroll{
+     @media screen and (max-width: 768px) {
+        .photo-list{
+            white-space: nowrap;
+            overflow-x: scroll;
+            li{               
+                @include display-inline;
+                float: none;
+                a{
+                    white-space: initial;
+                }
+            }
+        }
+     }
+}

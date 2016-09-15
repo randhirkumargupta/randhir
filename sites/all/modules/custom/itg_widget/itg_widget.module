@@ -17,12 +17,14 @@ module_load_include('inc', 'itg_widget', 'includes/itg_widget_actions_bulk_opera
 
 module_load_include('inc', 'itg_widget', 'includes/itg_widget.helper');
 
+module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
+
 /**
  * {@inheritdoc}
  */
 function itg_widget_init() {
-  // Js for move funtionality.
-  // This is use in case of nodequeue in case of custom table we calls a callback funtion.
+// Js for move funtionality.
+// This is use in case of nodequeue in case of custom table we calls a callback funtion.
   drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
 }
 
@@ -46,6 +48,19 @@ function itg_widget_menu() {
       'page arguments' => array(1, 2, 3, 4),
       'access arguments' => array('administer nodequeue'),
   );
+
+  $items['remove-so-sorry-extra-data/%'] = array(
+      'page callback' => 'remove_extra_field_value_for_so_sorry',
+      'page arguments' => array(1),
+      'access arguments' => array('administer nodequeue'),
+  );
+
+  $items['add-so-sorry-extra-data/%/%'] = array(
+      'page callback' => 'add_extra_field_value_for_so_sorry',
+      'page arguments' => array(1, 2),
+      'access arguments' => array('administer nodequeue'),
+  );
+
   $items['move-dont-miss-widget-node/%/%/%/%'] = array(
       'page callback' => 'move_node_from_dont_miss_widget',
       'page arguments' => array(1, 2, 3, 4),
@@ -67,12 +82,32 @@ function itg_widget_menu() {
       'page callback' => 'itg_widget_all_content_nid',
       'access arguments' => array('access content'),
   );
+  $items['so-sorry-content-title/autocomplete'] = array(
+      'page callback' => 'itg_widget_so_sorry_content_title',
+      'access arguments' => array('access content'),
+  );
+  $items['so-sorry-content-nid/autocomplete'] = array(
+      'page callback' => 'itg_widget_so_sorry_content_nid',
+      'access arguments' => array('access content'),
+  );
   $items['remove-extra-data'] = array(
       'page callback' => 'remove_extra_data',
       'access arguments' => array('access administrator'),
   );
   $items['setids'] = array(
       'page callback' => 'itg_widget_setids', // load the croper according to size!.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+
+  $items['test_function_callback'] = array(
+      'page callback' => 'get_personalization_front_data', // load the croper according to size!.
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+
+  $items['issue_filter_widget'] = array(
+      'page callback' => 'itg_widget_issuewidget_filter_form', // load the croper according to size!.
       'type' => MENU_CALLBACK,
       'access arguments' => array('access content'),
   );
@@ -101,6 +136,21 @@ function itg_widgets_custom_variables() {
       '#title' => t('Enter Program Category Id'),
       '#default_value' => variable_get('program_category_id_for_programmes'),
       '#required' => TRUE,
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+  $form['so_sorry_category_id_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter So Sorry Category Id'),
+      '#default_value' => variable_get('so_sorry_category_id_for_widget'),
+      '#required' => TRUE,
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+  $form['anchor_id_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter Occupation for Anchors'),
+      '#default_value' => variable_get('anchor_id_for_widget'),
       '#size' => 20,
       '#maxlength' => 20,
   );
@@ -161,7 +211,7 @@ function remove_extra_data() {
 //      'section_wise_content_ordering',
 //      'widget_anchors_listing',
 //      'category_wise_content_list',
-          //     'photo_carousel_widget',
+//     'photo_carousel_widget',
   );
   foreach ($widget as $view_name) {
     $num_deleted = db_delete('draggableviews_structure')
@@ -211,7 +261,7 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
   if (!empty($widget_name) && !empty($cat_tid) && !empty($nid)) {
     $num = db_delete('itg_widget_order')
             ->condition('nid', $nid)
-            //->condition('content_type', $content_type)
+//->condition('content_type', $content_type)
             ->condition('cat_id', $cat_tid)
             ->condition('widget', $widget_name)
             ->execute();
@@ -220,6 +270,51 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
       drupal_goto($_SERVER['HTTP_REFERER']);
     }
   }
+}
+
+/**
+ * Function is used to remove extra field value croospond to nid.
+ * 
+ * @param int $nid
+ */
+function remove_extra_field_value_for_so_sorry($nid) {
+  $num_updated = db_update('itg_widget_order')
+          ->fields(array('extra' => " "))
+          ->condition('nid', $nid)
+          ->condition('widget', 'so_sorry_widget')
+          ->execute();
+//drupal_set_message(t("Node has been moved"));
+  drupal_goto($_SERVER['HTTP_REFERER']);
+}
+
+/**
+ * Function is used to add extra field value croospond to nid.
+ * 
+ * @param int $nid
+ * @param string $extra
+ */
+function add_extra_field_value_for_so_sorry($nid, $extra) {
+// Handling only single nid can be either feature or remix;
+  $so_sorry_extra_nodes = db_select('itg_widget_order', 'iwo')
+                  ->condition('iwo.extra', $extra)
+                  ->fields('iwo', array('nid'))
+                  ->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($so_sorry_extra_nodes as $key => $nids) {
+    db_update('itg_widget_order')
+            ->fields(array('extra' => " "))
+            ->condition('nid', $nids['nid'])
+            ->condition('widget', 'so_sorry_widget')
+            ->execute();
+  }
+
+  db_update('itg_widget_order')
+          ->fields(array('extra' => $extra))
+          ->condition('nid', $nid)
+          ->condition('widget', 'so_sorry_widget')
+          ->execute();
+
+  drupal_goto($_SERVER['HTTP_REFERER']);
 }
 
 /**
@@ -271,7 +366,7 @@ function remove_from_widgets($nid, $qid, $view_name, $page_name) {
   $draggable_delete = draggable_view_node_delete($view_name, $page_name, $nid);
   nodequeue_subqueue_remove_node($qid, $nid);
   if ($draggable_delete) {
-    //nodequeue_subqueue_remove_node($qid, $nid);
+//nodequeue_subqueue_remove_node($qid, $nid);
     print "deleted";
   }
   else {
@@ -356,6 +451,14 @@ function itg_widget_block_info() {
   $blocks['anchor_langing_page_menu'] = array(
       'info' => t('Anchor landing page menu'),
   );
+  $blocks['personlization'] = array(
+      'info' => t('Persionlization front end'),
+  );
+  $blocks['home_page_poll_widget_block'] = array(
+      'info' => t('Home Page Poll Widget'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
   return $blocks;
 }
 
@@ -607,6 +710,15 @@ function itg_widget_block_view($delta = '') {
     case 'anchor_langing_page_menu':
       $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
       break;
+    case 'personlization':
+      module_load_include('inc', 'itg_widget', 'includes/fitg_widget_personalization');
+      $data = get_personlization_front_block_data();
+      $block['content'] = theme("personlization_front_end", array("data" => $data));
+      break;
+    case 'home_page_poll_widget_block':
+      $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
+      $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
+      break;
   }
   return $block;
 }
@@ -730,8 +842,8 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     // Only selected nodes are come in $form_state['selection'] array.
     // Here we are forcely changing the array.
     // for big story we are using single selection so skip for big story.
-      $form_state['selection'] = $_SESSION[$form['#form_id']];
-      $form_state['values']['views_bulk_operations'] = $form_state['selection'];
+    $form_state['selection'] = $_SESSION[$form['#form_id']];
+    $form_state['values']['views_bulk_operations'] = $form_state['selection'];
     $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
   }
 
@@ -779,7 +891,8 @@ function forms_uses_checked_content_id() {
       'views_form_story_widget_top_takes_video',
       'views_form_story_widget_watch_right_now',
       'views_form_photo_carousel_widget_photo_carousel_list',
-      'views_form_photo_carousel_widget_video_carousel_list'
+      'views_form_photo_carousel_widget_video_carousel_list',
+      'views_form_so_sorry_so_sorry_videos',
   );
 }
 
@@ -864,6 +977,9 @@ function itg_widget_theme() {
       'anchor_langing_page_menu' => array(
           'template' => 'templates/anchor-landing-page-menu',
       ),
+      'personlization_front_end' => array(
+          'template' => 'templates/personlization-front-end',
+      ),
   );
   return $themes;
 }
@@ -920,6 +1036,17 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['nid']['#attributes']['placeholder'] = t('Video ID');
       $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
       $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
+      break;
+    case 'views-exposed-form-so-sorry-so-sorry-videos':
+      $cat_setting = trim(variable_get('so_sorry_category_id_for_widget'));
+      if (strlen($cat_setting) <= 0) {
+        $setting_link = l("Click Here", "admin/settings/custom-variables");
+        drupal_set_message("Setting not found for autocomplete. Please $setting_link", "error");
+      }
+      $form['title']['#attributes']['placeholder'] = t('Video Title');
+      $form['nid']['#attributes']['placeholder'] = t('Video ID');
+      $form['title']['#autocomplete_path'] = 'so-sorry-content-title/autocomplete';
+      $form['nid']['#autocomplete_path'] = 'so-sorry-content-nid/autocomplete';
       break;
     case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
@@ -1071,6 +1198,27 @@ function itg_widget_views_query_alter(&$view, &$query) {
     );
     array_push($query->where[1]['conditions'], $program_where_condition);
   }
+
+  if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_page') {
+
+    // Handling the query if other videos are clicked but those are not feature.
+    // But they are in itg_widget_order table as well as widget value is equal to so_sorry_widget
+    $arg = arg();
+    if (isset($arg[1])) {
+      unset($query->where[1]['conditions'][1]);
+    }
+  }
+  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_display_page') || ($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
+    $anchor_tid = variable_get('anchor_id_for_widget');
+    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+    if (strlen($anchor_tid) <= 0) {
+      // Link should display only adminstrator.
+      if (in_array('administrator', $user->roles)) {
+        $link = l("click here", 'admin/settings/custom-variables');
+      }
+      drupal_set_message("Anchor setting not found $link", "error");
+    }
+  }
 }
 
 /**
@@ -1141,7 +1289,8 @@ function itg_widget_preprocess_views_view(&$vars) {
       'story_widget',
       'section_wise_content_ordering_list',
       'section_wise_draggable_content_order',
-      'photo_carousel_widget'
+      'photo_carousel_widget',
+      'so_sorry',
   );
   if (in_array($view_name, $widget_views)) {
     $vars['classes_array'][] = 'widgets-view';
@@ -1154,7 +1303,15 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
-  if ($vars['type'] == 'reporter' && ($vars['field_celebrity_pro_occupation'][0]['taxonomy_term']->name == 'Anchor')) {
+  
+  // Get all terms of vocabulary occupation.
+  $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
+  $itg_occupation_tree = taxonomy_get_tree($itg_occupation->vid);
+  foreach ($itg_occupation_tree as $term) {
+    $occupation[] = $term->name;
+  }
+
+  if ($vars['type'] == 'reporter' && in_array('Anchor', $occupation)) {
 
     drupal_add_js(
             "jQuery(document).ready(function(){
@@ -1314,9 +1471,28 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
  */
 function itg_widget_block_view_alter(&$data, $block) {
   $item = menu_get_item();
+  $arg = arg();
   if ($block->delta == 'programmes-rhs_programmes') {
     $page_argument = $item['page_arguments'];
-    if ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node') {
+    if ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node' && isset($_GET['sid'])) {
+      $data['content'] = array();
+    }
+  }
+
+  if ($block->delta == 'we_may_suggest') {
+    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
+      $data['content'] = array();
+    }
+  }
+
+  if ($block->delta == 'watch_right_now_videos_widget') {
+    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
+      $data['content'] = array();
+    }
+  }
+
+  if ($block->delta == 'top_takes_videos_widget') {
+    if ($arg[0] == 'node' && !isset($_GET['sid'])) {
       $data['content'] = array();
     }
   }
@@ -1334,6 +1510,35 @@ function itg_widget_all_content_title($title) {
     $title = strtolower(trim($title));
     $query = db_select('node', 'n');
     $query->fields('n', array('title'));
+    $query->condition('n. title', '%' . $title . '%', 'LIKE');
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+    $query->condition('n.status', 1);
+    $query->range(0, 20);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $options[$record['title']] = $record['title'];
+    }
+
+    drupal_json_output($options);
+  }
+}
+
+/**
+ * Callback function for widget title autocomplete.
+ * 
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
+function itg_widget_so_sorry_content_title($title) {
+  if (strlen(trim($title)) > 0) {
+    $options = array();
+    $so_sorry_cat = variable_get('so_sorry_category_id_for_widget');
+    $title = strtolower(trim($title));
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
+    $query->fields('n', array('title'));
+    $query->condition('cat.field_story_category_tid', $so_sorry_cat);
     $query->condition('n. title', '%' . $title . '%', 'LIKE');
     $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
     $query->condition('n.status', 1);
@@ -1372,4 +1577,220 @@ function itg_widget_all_content_nid($title) {
 
     drupal_json_output($options);
   }
+}
+
+/**
+ * Callback function for widget title autocomplete.
+ * 
+ * @param string $string keyword for auto suggest.
+ * @return json Autocomplete callback for category manager view
+ */
+function itg_widget_so_sorry_content_nid($title) {
+  if (strlen(trim($title)) > 0) {
+    $options = array();
+    $so_sorry_cat = variable_get('so_sorry_category_id_for_widget');
+    $title = strtolower(trim($title));
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_category', 'cat', 'cat.entity_id=n.nid');
+    $query->fields('n', array('nid'));
+    $query->condition('cat.field_story_category_tid', $so_sorry_cat);
+    $query->condition('n. nid', '%' . $title . '%', 'LIKE');
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+    $query->condition('n.status', 1);
+    $query->range(0, 20);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $options[$record['nid']] = $record['nid'];
+    }
+
+    drupal_json_output($options);
+  }
+}
+
+/*
+ * This will return selected poll for widget
+ */
+
+function get_homepage_current_poll_widget($content_type, $widget_name) {
+  $nodes_already = db_select('itg_widget_order', 'iwo')
+                  ->condition('iwo.content_type', $content_type)
+                  ->condition('iwo.widget', $widget_name)
+                  ->fields('iwo', array('nid'))
+                  ->execute()->fetch();
+  return $nodes_already->nid;
+}
+
+/**
+ * This mentod will return a poll widget for against poll nid, used in home page widget 
+ * @param type $nid
+ */
+function itg_poll_home_page_polls_select($nid) {
+
+  $node = node_load($nid);
+  $poll_banner_image = '';
+  if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
+    $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
+  }
+  else {
+    $poll_banner_image = '';
+  }
+
+  $poll_image_exist_class = '';
+
+  foreach ($node->field_poll_answer['und'] as $row) {
+    $item_id[] = $row['value']; // fieldcollection id
+  }
+  // instant or after complete
+
+  $fieldcollect = entity_load('field_collection_item', $item_id);
+  if (is_array($fieldcollect) && count($fieldcollect) > 0) {
+    $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
+    $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
+    if (isset($poll_answer_image) && $poll_answer_image > 0) {
+      $poll_image_exist_class = 'poll-option-image';
+    }
+    else {
+      $poll_image_exist_class = '';
+    }
+  }
+
+
+  $polls_info['poll_banner_image'] = $poll_banner_image;
+  $polls_info['nid'] = $nid;
+  $polls_info['title'] = $node->title;
+  $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
+  $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
+
+  return theme('itg_poll_homepage_forms', array('data' => $polls_info));
+}
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_issuewidget_filter_form($form, $form_state) {
+  $options = array();
+  $options[''] = 'Select';
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->condition('n.type', array('issue'), '=');
+  $query->condition('n.status', 1);
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $options[date('Y-m-d', strtotime($record['title']))] = date('d/m/Y', strtotime($record['title']));
+  }
+
+  $form['content_title'] = array(
+      '#title' => t('Content Title'),
+      '#type' => 'select',
+      '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
+      '#options' => $options,
+  );
+  $form['items_per_page'] = array(
+      '#title' => t('Items per page '),
+      '#type' => 'select',
+      '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+      '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+  );
+  $form['alt_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Apply'),
+  );
+  $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'), '#submit' => array('itg_widget_issuewidget_filter_reset'),);
+
+
+
+
+  return $form;
+}
+
+/**
+ * This mentod will go to issue widget filter url
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_issuewidget_filter_form_submit($form, $form_state) {
+
+  $query = array('field_story_issue_date_value[value][date]' => $form_state['values']['content_title'], 'items_per_page' => $form_state['values']['items_per_page']);
+  drupal_goto('issue-base-magazin-widget', array('query' => $query));
+}
+
+/**
+ * This mentod will go to issue widget list page after rest
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_issuewidget_filter_reset($form, $form_state) {
+
+  drupal_goto('issue-base-magazin-widget');
+}
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
+  $options = array();
+  $options[''] = 'Select';
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->condition('n.type', array('issue'), '=');
+  $query->condition('n.status', 1);
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $options[date('Y-m-d', strtotime($record['title']))] = date('d/m/Y', strtotime($record['title']));
+  }
+
+  $form['content_title'] = array(
+      '#title' => t('Content Title'),
+      '#type' => 'select',
+      '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
+      '#options' => $options,
+  );
+  $form['items_per_page'] = array(
+      '#title' => t('Items per page '),
+      '#type' => 'select',
+      '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+      '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+  );
+  $form['alt_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Apply'),
+  );
+  $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'), '#submit' => array('itg_widget_issuewidgetlist_filter_reset'),);
+
+
+
+
+  return $form;
+}
+
+/**
+ * This mentod will go to added issue widget list filter url
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_issuewidgetlist_filter_form_submit($form, $form_state) {
+
+  $query = array('field_story_issue_date_value[value][date]' => $form_state['values']['content_title'], 'items_per_page' => $form_state['values']['items_per_page']);
+  drupal_goto('issue-magazin-widget-list', array('query' => $query));
+}
+
+/**
+ * This mentod will go to added issue widget list page after rest
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_issuewidgetlist_filter_reset($form, $form_state) {
+
+  drupal_goto('issue-magazin-widget-list');
 }

@@ -157,14 +157,14 @@ function itg_layout_manager_block_view($delta = '') {
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
       
-//      $is_fron_page = drupal_is_front_page();      
-//      if (!empty($is_fron_page)) {          
-//        $page_name = 'Home';
-//      }
-//      else {
-//       //$page_name = 'Rest';   
-//      }
-      $page_name = 'Home';
+      $is_fron_page = drupal_is_front_page();      
+      if (!empty($is_fron_page)) {          
+        $page_name = 'Home';
+      }
+      else {
+       $page_name = 'Rest';   
+      }
+      //$page_name = 'Home';
       $data['itg_top'] = get_ad_script($page_name);      
 
       $block['content'] = theme('header_block', array('data' => $data));
@@ -173,14 +173,14 @@ function itg_layout_manager_block_view($delta = '') {
     case 'footer_block':  
         
       $data = get_itg_footer_menu();
-//      $is_fron_page = drupal_is_front_page();      
-//      if (!empty($is_fron_page)) {          
-//        $page_name = 'Home';
-//      }
-//      else {
-//       //$page_name = 'Rest';   
-//      }
-      $page_name = 'Home';
+      $is_fron_page = drupal_is_front_page();      
+      if (!empty($is_fron_page)) {          
+        $page_name = 'Home';
+      }
+      else {
+       $page_name = 'Rest';   
+      }
+      //$page_name = 'Home';
       $data['itg_top'] = get_ad_script($page_name);  
       //$data['itg_top'] = get_ad_script('Home');
       $block['content'] = theme('footer_block', array('data' => $data));
@@ -336,7 +336,9 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $template_name = 'page--front';
     $data = get_layout_details($section, $template_name, 'front'); 
     $data['big_story'] = get_itg_widget('big_story_format');
+    $data['personlization'] = get_itg_widget('personlization');
     $vars['widget_data'] = $data;
+    $vars['itg_ad'] = get_ad_script('Home');
   }
   
   //section template display on front
@@ -362,6 +364,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
         $vars['widget_data'] = $data;
         $tpl_name = str_replace('--', '__', $tpl_name);
         $vars['theme_hook_suggestions'][] = $tpl_name;
+        //$vars['itg_ad'] = get_ad_script('Section');
       }
     }
     

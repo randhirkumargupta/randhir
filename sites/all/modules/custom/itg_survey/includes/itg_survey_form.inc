@@ -9,20 +9,35 @@
  * Create survey form
  */
 function itg_survey_survey_form() {
-  global $base_url;
+  global $base_url, $user;
   
-  //Get node of current survey (load all questions ans answer options to generate survey form)
+  //Get node of current survey
   $arg = arg();
   $node = node_load($arg[1]);
   
   // Check node type
   if ($node->type == 'survey') {
     
+    // Add JS for front
+    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_front.js');
+    
+    // Survey End date
+    $survey_expiry_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours');
+    
     // If survey is not published
     if(!$node->status) {
       $form['survey_status'] = array(
         '#type' => 'markup',
-        '#markup' => 'This survey is not published!',
+        '#markup' => '<h2>This survey is not published!</h2>',
+     );
+      return $form;
+    }
+    
+   // If survey has been expired. 
+   if(time() > $survey_expiry_date) {
+      $form['survey_expiry_status'] = array(
+        '#type' => 'markup',
+        '#markup' => '<h2>This survey has been expired!</h2>',
      );
       return $form;
     }
@@ -134,7 +149,7 @@ function itg_survey_survey_form() {
       
       $form['question_heading' . $num] = array(
           '#type' => 'markup',
-          '#markup' => '<div class="question-heading">' . $question . $required. '</div>',
+          '#markup' => '<div class="question-heading">' . $question . ' ' . $required. '</div>',
           
       );      
       $form['question' . $num] = array(
@@ -343,10 +358,7 @@ function itg_survey_survey_form() {
     }
   }
   else {
-    $form['no_survey'] = array(
-        '#type' => 'markup',
-        '#markup' => '<h2>'. drupal_not_found() . '</h2>',
-    );
+    drupal_not_found();
   }
   
   $form['#theme'] = array('itg_survey_form', $node);

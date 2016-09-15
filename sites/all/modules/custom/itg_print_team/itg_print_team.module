@@ -683,11 +683,11 @@ function itg_print_team_association_custom_validate($form, &$form_state) {
   }
 
   if ($magazine == '_none') {
-    form_set_error('magazine', t('Please select Magazine.'));
+    form_set_error('magazine', t('Please select magazine.'));
   }
 
   if ($issue == '_none') {
-    form_set_error('issue', t('Please select Issue.'));
+    form_set_error('issue', t('Please select issue.'));
   }
 }
 
@@ -930,7 +930,8 @@ function itg_print_team_check_approval_users(){
           || $roles == 'Design Head'
           || $roles == 'Copy Desk'
           || $roles == 'Designer'
-          || $roles == 'Photographer'    
+          || $roles == 'Photographer'
+          || $roles == 'Knowledge Centre'  
      ) {
       $idea_review_flag_user = TRUE;
     }
@@ -1027,5 +1028,3 @@ function itg_print_team_form_comment_form_alter(&$form, &$form_state, $form_id) 
       break;
   }
 }
-
-
