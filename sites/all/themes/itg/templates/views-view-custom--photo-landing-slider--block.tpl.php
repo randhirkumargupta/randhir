@@ -9,8 +9,13 @@
                 <li><a href="#"><i class="fa fa-comment"></i></a></li>
                 <li><a href="#"><i class="fa fa-link"></i></a></li>
                 <li><a href="#"><i class="fa fa-share"></i></a></li>
-                <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>
-                <li><a href="#"><?php print $read_later; ?></a></li>
+                <?php global $user; ?>
+                  <?php if ($user->uid > 0): ?>
+                     <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
+                     <li><?php print $read_later; ?></li>
+                  <?php else: ?>
+                     <?php print '<li>' . l('<i class="fa fa-bookmark"></i>fdffd', 'user/login', array('html' => TRUE)) . '</li>'; ?>
+                <?php endif; ?>                  
             </ul>
         </div>
     </div>
@@ -61,8 +66,13 @@
                 <li><a href="#"><i class="fa fa-comment"></i></a></li>
                 <li><a href="#"><i class="fa fa-link"></i></a></li>
                 <li><a href="#"><i class="fa fa-share"></i></a></li>
-                <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>
-                <li><a href="#"><?php print $read_later; ?></a></li>
+                <?php global $user; ?>
+                  <?php if ($user->uid > 0): ?>
+                     <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
+                     <li><?php print $read_later; ?></li>
+                  <?php else: ?>
+                     <?php print '<li>' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE)) . '</li>'; ?>
+                <?php endif; ?>
             </ul>
         </div>
         
@@ -88,7 +98,7 @@ jQuery(document).ready(function (e) {
         slidesToShow: 7,
         slidesToScroll: 1,
         asNavFor: '.slickslide, .counterslide',
-        dots: true,
+        dots: false,
         centerMode: false,
         arrows: true,
         variableWidth: true

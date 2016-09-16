@@ -775,8 +775,8 @@ for($i=1; $i<=$last_val;$i++ ){
 
       <?php if ($sidebar_first || $sidebar_second): ?>
         <aside class="sidebars">
-          <?php print $sidebar_first; ?>
-          <?php print $sidebar_second; ?>
+          <?php //print $sidebar_first; ?>
+          <?php //print $sidebar_second; ?>
         </aside>
       <?php endif; ?>
     </main>
