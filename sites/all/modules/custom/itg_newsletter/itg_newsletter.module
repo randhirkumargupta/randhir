@@ -15,9 +15,10 @@
 function itg_newsletter_init() {
   // Hide Abstract area which appears in metatags from all content type forms
   if ((arg(0) == 'node' && arg(1) == 'add') || (arg(0) == 'node' && arg(2) == 'edit')) {
-    drupal_add_js('jQuery(document).ready(function() {            
+    drupal_add_js('jQuery(document).ready(function() {   alert(1);         
            jQuery("#edit-metatags-und-advanced").hide();
            jQuery(".form-item-metatags-und-abstract-value").hide();
+           JQuery("#edit-metatags-und-title-value").val(""));
     });', array('type' => 'inline', 'scope' => 'footer'));
   }
 }
