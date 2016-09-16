@@ -697,8 +697,11 @@ section.sidebar{
        .slick-thumbs{
            .slick-prev, .slick-next{
                background: transparent;
-               margin-top: -75px;
+               margin-top: -55px;
                color:#fff;
+               &:hover{
+               background: transparent;    
+               }
            }
        }
 }
