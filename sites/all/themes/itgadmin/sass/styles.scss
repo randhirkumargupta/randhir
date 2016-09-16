@@ -5773,8 +5773,9 @@ div.node{
 }
 #edit-field-story-extra-large-image{
   .image-widget-data{
-      input[type="submit"]{
-        @extend .add-more-wbg;
+    float: left !important;
+      .form-submit[value="Remove"]{
+        left: 400px;
         }
     }  
 } 

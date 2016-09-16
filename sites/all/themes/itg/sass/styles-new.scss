@@ -1441,14 +1441,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   }
 }
 .load-more-wrapper{
-  @extend .dib;
-  @extend .full;
-  @extend .vtop;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
   padding: 10px;
   text-align: center;
   .add-more-block, .removes-more-block{
-    @extend .dib;
-    @extend .vtop;
+    display: inline-block;
+    vertical-align: top;
     padding: 10px 20px;
     font: 14px/18px Roboto;
     color: #fff;
