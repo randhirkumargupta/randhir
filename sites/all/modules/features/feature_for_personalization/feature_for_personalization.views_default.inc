@@ -165,6 +165,13 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['filters']['parent']['table'] = 'taxonomy_term_hierarchy';
   $handler->display->display_options['filters']['parent']['field'] = 'parent';
   $handler->display->display_options['filters']['parent']['value']['value'] = '0';
+  /* Filter criterion: Taxonomy term: Set As Featured (field_set_as_featured_cate) */
+  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['id'] = 'field_set_as_featured_cate_value';
+  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['table'] = 'field_data_field_set_as_featured_cate';
+  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['field'] = 'field_set_as_featured_cate_value';
+  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['value'] = array(
+    'Yes' => 'Yes',
+  );
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');

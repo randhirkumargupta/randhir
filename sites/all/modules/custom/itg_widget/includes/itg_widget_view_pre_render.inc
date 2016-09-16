@@ -229,7 +229,7 @@ function itg_widget_views_pre_render(&$view) {
   elseif ($view->name == "issue_base_magazin_widget" && $view->current_display == 'issue_base_magazin_widget') {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Issue Magazin Widget'), 'issue-magazin-widget-list');
+      $header_content .= l(t('Issue Magazine Widget'), 'issue-magazin-widget-list');
       $view->attachment_before = $header_content;
     }
   }
