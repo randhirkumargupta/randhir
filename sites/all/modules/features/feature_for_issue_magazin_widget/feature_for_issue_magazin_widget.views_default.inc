@@ -28,6 +28,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'input_required';
+  $handler->display->display_options['exposed_form']['options']['text_input_required'] = '';
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
@@ -121,8 +122,8 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'issue_magazin_widget';
 
-  /* Display: Content For : Issue base magazin widget */
-  $handler = $view->new_display('page', 'Content For : Issue base magazin widget', 'issue_base_magazin_widget');
+  /* Display: Content For : Issue base magazine widget */
+  $handler = $view->new_display('page', 'Content For : Issue base magazine widget', 'issue_base_magazin_widget');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Issue Base Magazine Widget';
   $handler->display->display_options['display_description'] = 'Content For : Issue base magazin widget';
@@ -137,6 +138,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'input_required';
+  $handler->display->display_options['exposed_form']['options']['text_input_required'] = '';
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
