@@ -1463,3 +1463,16 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     }
   }
 }
+
+.page-personalization{
+  .form-type-textarea{
+    .ckeditor_links{
+      display: none;
+    }
+  }
+  .block .block-title{
+    font: 400 18px/18px Roboto;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+} 
