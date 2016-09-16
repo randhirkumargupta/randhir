@@ -5,11 +5,11 @@
 (function($) {
   Drupal.behaviors.itg_survey = {
     attach: function(context, settings) {
+      
       //Hide left side vertical tabs in case of simple users
       var uid = settings.itg_survey.settings.uid;
       var nid = settings.itg_survey.settings.nid;
-
-     
+ 
       if (uid != 1) {
         $('.field-edit-link').hide();
         $('#edit-body-und-0-format').hide();
@@ -17,7 +17,6 @@
         $('#edit-metatags').show();
         
       }
-   
 
       if(nid == '' || nid == null){
         if($('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
@@ -41,7 +40,6 @@
       });
 
       //Collect values assigned in settings array 
-      var base_url = settings.itg_survey.settings.base_url;
       var type = settings.itg_survey.settings.type;
 
       //Restrict print issue date to select previous date in magazine form 
@@ -53,11 +51,7 @@
         });
         $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, #edit-field-survey-end-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-2, #edit-field-survey-end-date-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
-      
-//      $('#edit-field-survey-add-questions-und-add-more').mousedown(function(){
-//
-//      });
-      
+
       $("#survey-node-form").validate({ 
         submitHandler: function (form) {
           $('input:submit').attr('disabled', 'disabled');

@@ -39,7 +39,6 @@ function itg_mobile_services_generate_xml($node, $service_title, $field_header =
     }
     $header .= '<' . $label . '>' . $pattren . '</' . $label . '>';
   }
-
   // footer
   foreach ($xmlarray['footer'] as $label => $pattren) {
     if ($pattren == '{field_header}') {
@@ -628,17 +627,18 @@ function get_required_data_field_get_items_mobile($field_collect, $astro) {
         $service_content_date_arr = explode(' ', $service_content_date);
         $required_value[$key]['field_service_content_date'] = date('r', strtotime($service_content_date_arr[0]));
       }
+ 
       $required_value[$key]['field_client_short_description'] = isset($field_collection_item[$val['value']]->field_client_short_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_client_short_description[LANGUAGE_NONE][0]['value'] : '';
       $required_value[$key]['field_story_expert_description'] = isset($field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_expert_description[LANGUAGE_NONE][0]['value'] : '';
       $service_content_image = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['fid'] : '';
       $service_content_image_desc = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['alt'] : '';
       $service_content_image_keyword = isset($field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_story_large_image[LANGUAGE_NONE][0]['title'] : '';
       $service_content_audio = isset($field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['fid'] : '';
-      $service_content_audio_desc = isset($field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['alt'] : '';
-      $service_content_audio_keyword = isset($field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['title'] : '';
+      $service_content_audio_desc = isset($field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio[LANGUAGE_NONE][0]['description'] : '';
+      $service_content_audio_keyword = isset($field_collection_item[$val['value']]->field_service_audio_keyword[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_audio_keyword[LANGUAGE_NONE][0]['value'] : '';
       $service_content_video = isset($field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['fid'] : '';
-      $service_content_video_desc = isset($field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['alt'] : '';
-      $service_content_video_keyword = isset($field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['title'] : '';
+      $service_content_video_desc = isset($field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video[LANGUAGE_NONE][0]['description'] : '';
+      $service_content_video_keyword = isset($field_collection_item[$val['value']]->field_service_video_keyword[LANGUAGE_NONE]) ? $field_collection_item[$val['value']]->field_service_video_keyword[LANGUAGE_NONE][0]['value'] : '';
 
       // image
       if (!empty($service_content_image)) {
@@ -662,9 +662,9 @@ function get_required_data_field_get_items_mobile($field_collect, $astro) {
       if (!empty($service_content_video)) {
         $video_file = file_load($service_content_video);
         $video_url = file_create_url($video_file->uri);
-        $required_value[$key]['field_service_video'] = $video = $video_url;
+        $required_value[$key]['field_service_video'] = $video_url;
         $required_value[$key]['field_service_video_description'] = $service_content_video_desc;
-        $required_value[$key]['field_service_video_keyword'] = $service_content_video_keyword;
+        $required_value[$key]['field_service_video_keyword'] = $service_content_video_keyword;       
       }
 
       // astro

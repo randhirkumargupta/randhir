@@ -48,7 +48,7 @@
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle;?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
                       <?php } ?>
                   </ul>
-                  <ul>
+                  <ul class="date-update">
                       <li class="mailto mhide"><i class="fa fa-envelope-o"></i> &nbsp;<?php
                               $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
                               print "<a href='mailto:$email'>Mail To Author</a>";
@@ -63,14 +63,18 @@
                       <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
                       <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
                       <li><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
-                      <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
-                      <li><?php print $read_later; ?></li>
-                      
+                      <?php global $user; ?>
+                      <?php if ($user->uid > 0): ?>
+                         <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
+                         <li><?php print $read_later; ?></li>
+                      <?php else: ?>
+                         <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE)) . '</li>'; ?>
+                      <?php endif; ?>                      
                   </ul>
                   </div>
                   </div>
                   <?php if(!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-                  <div class="briefcase">
+                  <div class="briefcase mhide">
                       <h4><?php print t('Briefcase'); ?></h4>
                       <ul>
                           <?php
@@ -115,7 +119,7 @@
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle;?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']; ?></li>                
                       <?php } ?>
                   </ul>
-                  <ul>
+                  <ul class="date-update">
                      <li><?php print  date('F j, Y', $node->created); ?>   </li>
                       <li>UPDATED <?php print  date('H:i', $node->changed); ?> IST</li>
                       <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
@@ -136,6 +140,24 @@
       </div>
       
       <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
+            
+      <?php
+      if (empty($node->field_story_template_buzz[LANGUAGE_NONE])){
+      if(!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
+                  <div class="briefcase desktop-hide">
+                      <h4><?php print t('Briefcase'); ?></h4>
+                      <ul>
+                          <?php
+                          foreach ($node->field_story_highlights['und'] as $high) {
+                              print '<li>' . $high['value'] . '</li>';
+                          }
+                          ?>
+                      </ul>
+                  </div>
+      <?php } } ?>
+      
+      
+      
       <div class="description"><?php print render($content['body']); ?></div>
       
       </div>
@@ -159,7 +181,14 @@
             if(!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
             if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
-            $buzz_output.= '<div class="buzz-img">' . $img . '</div>';
+            $buzz_output.= '<div class="buzz-img"><div class="social-share">
+          <ul>
+              <li><a href="#" class="share"><i class="fa fa-share-alt"></i></a></li>
+              <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
+          </ul>
+      </div>' . $img . '</div>';
             }
             if(!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
             $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
@@ -172,8 +201,7 @@
         }
         ?>
       
-      <!-- condition for buzz end -->
-      
+      <!-- condition for buzz end -->      
       
       <div class="section-left-bototm">
           <div class="social-list">

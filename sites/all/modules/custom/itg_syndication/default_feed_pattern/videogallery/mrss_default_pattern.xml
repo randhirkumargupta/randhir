@@ -1,0 +1,17 @@
+<rss version="2.0"
+     xmlns:media="http://search.yahoo.com/mrss/">
+    <channel>
+        <title>MRSS title</title>
+        <link>http://yourlinkhere.com/xyz.xml</link>
+        <description>MRSS Description</description>
+        <item>
+            <title>{{{node_title}}}</title>
+            <link>{{{node_permalink}}}</link>
+            <description>{{{field_story_expert_description}}}</description>
+            <guid isPermaLink="false">{{{node_permalink}}}</guid>
+            <media:content>
+                <media:thumbnail url="{{{field_story_extra_large_image}}}"/>
+            </media:content>
+        </item>
+    </channel>
+</rss>

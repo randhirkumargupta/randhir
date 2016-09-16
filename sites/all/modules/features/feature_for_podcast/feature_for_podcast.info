@@ -35,6 +35,7 @@ features[field_instance][] = node-podcast-field_podcast_audio_upload
 features[field_instance][] = node-podcast-field_podcast_kicker_message
 features[field_instance][] = node-podcast-field_primary_category
 features[field_instance][] = node-podcast-field_primary_category_html
+features[field_instance][] = node-podcast-field_primary_category_html_text
 features[field_instance][] = node-podcast-field_story_archive
 features[field_instance][] = node-podcast-field_story_category
 features[field_instance][] = node-podcast-field_story_extra_large_image

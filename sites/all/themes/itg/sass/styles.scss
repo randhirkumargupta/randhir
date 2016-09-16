@@ -214,7 +214,11 @@ header{
         @include pos(relative);
     }
     .header-ads{
-        text-align: center;        
+        text-align: center; 
+        .row{
+            margin: 0 auto;
+            @include display-inline;
+        }
     }
     .login-link{
         text-align: right;
@@ -287,6 +291,10 @@ header{
                         }
                     }
                 }
+                &.sponser-link a{
+                    background: $yellow-bg;
+                    color: $black-color;
+                }
             }
             &#newlist{
                 position: absolute;
@@ -308,6 +316,11 @@ header{
                 display: inline-block;
                 vertical-align: bottom;
                 padding-left: 15px;
+                a{
+                    i{
+                        font-size: 18px;
+                    }
+                }
             }
         }
         .globle-search{
@@ -912,8 +925,7 @@ header{
 .tv-schedule-news{border: 1px solid #d9d9d9;}
 .tv-schedule-news .tv-schedule-task span{padding: 10px; border: 1px solid #d9d9d9; overflow: hidden; height: 100px;}
 
-section.sidebar{
-    border: 1px solid #ddd;
+section.sidebar{    
     min-height: 600px;
 }
 /*Start CSS footer section*/
@@ -1346,12 +1358,20 @@ footer{
         .social-share{
             @include display-inline;
             @include social-share;
+/*            margin-top:5px;*/
+            ul{
+                li{
+                    padding-right: 4px;                    
+                }
+            }
         }
         .other-info{
             @include itg-font($itg-roboto);
             @include font(12px);
             color: #8f8f8f;
-            margin-top: 15px;
+            padding-top: 15px;
+            overflow: hidden;
+            width: 100%;
         }
     }
     .item-list{
@@ -1439,8 +1459,8 @@ footer{
 /*End Dont miss Home page css*/
 /*Start Story page css*/
 @mixin story-profile-pic{
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 2px solid #e4e4e4;
 }
@@ -1496,9 +1516,10 @@ footer{
                 }                
             }
             .profile-detail {
-                margin: 5px 0 0 10px;
+                width: 74%;    
+                margin: -5px 0 0 10px;
                 ul {
-                    margin-top: 5px;
+                    margin-bottom: 5px;
                     @include font(12px,12px);
                     @include clearfix;
                     li{  
@@ -1508,9 +1529,13 @@ footer{
                             display: block;
                             @include font(44px,44px,500);
                             color:#bebebe;
-                        }                                     
+                        } 
+                        &:last-child{
+                            border:none;                            
+                        }
                         &.twitter{
                             color: #0783ec;
+                            margin-top: 0px;
                         }
                         &.title{
                             color: #6b6b6b;
@@ -1518,11 +1543,13 @@ footer{
                         }
                         &.mailto{
                             text-transform: uppercase;
-                        }
-                        +li{
-                            border-left: 1px solid #a6a6a6;
-                        }
+                        }                                               
                     }
+                }
+                ul.date-update{                    
+                    li{
+                        margin-bottom: 7px;
+                    }   
                 }
                 ul.social-links{
                     @include clearfix;
@@ -1598,12 +1625,28 @@ footer{
             padding-top: 25px;
             @include font(15px,27px);            
         }
+        .briefcase {
+            margin-top:20px;
+            h4{
+                @include font(16px);
+                color: #323232;                    
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
+            ul{
+                li{
+                    @include before-icon-list(5px, 5px, 6px, 0px, $red-color, 100%);                    
+                    @include font(13px);
+                    margin-bottom: 10px;
+                    padding-left: 15px;
+                }
+            }
+        }
     }
     .snap-post{        
         padding: 20px 20px 20px 70px;
         border-top: 1px solid #e0e0e0;
-        border-bottom: 1px solid #e0e0e0;
-        margin-top: 40px;
+        border-bottom: 1px solid #e0e0e0;        
         background:url(../images/snap-post-icon.png) no-repeat 15px 20px #f5f5f5;
          background-size: 40px;
         .discription{
@@ -1657,6 +1700,7 @@ footer{
         @include font(12px);
         border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
+        margin-top: 40px;        
         @include clearfix;
         li{
             @include float(left);
@@ -1701,7 +1745,7 @@ footer{
         }
     }
 }
-.buzz-feedback{
+.buzz-feedback{    
     @include calculate-width(1);
     .story-right{
      @include calculate-width(1);
@@ -1720,13 +1764,14 @@ footer{
             margin-bottom: 15px;
         }
         h1{
+            @include font(21px);
             span{
                 background: $red-color;
                 color: $white-color;
-                width: 32px;
-                height: 32px;
+                width: 24px;
+                height: 24px;
                 @include display-inline;
-                @include font(24px,34px);
+                @include font(16px,24px);
                 @include text-align(center);                
                 border-radius: 100%;                
                 margin:5px 12px 0 0;               
@@ -1735,6 +1780,39 @@ footer{
         .buzz-discription{
             @include font(16px,22px); 
             @include itg-font($itg-roboto);
+        }
+        .buzz-img{
+            @include pos(relative);
+            .social-share{
+                @include pos(absolute,null,null,0,null);
+                ul{
+                    @include clearfix;
+                    li{
+                        @include float(left);
+                        a{
+                            height: 38px;
+                            width: 40px;
+                            line-height: 38px;
+                            display: block;
+                            color:$white-color;
+                            text-align: center;
+                            font-size: 20px;
+                            &.share{
+                                background: #000000;
+                            }
+                            &.facebook{
+                                background: #0840c6;
+                            }
+                            &.twitter{
+                                background: #009ef0;
+                            }
+                            &.google{
+                                background: #cc0808;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     .snap-post{ 
@@ -2004,24 +2082,27 @@ footer{
 /*Start category wise content list css*/
 .view-category-wise-content-list{
     h1{
-        @include font(32px,null,400);        
+        @include font(25px,40px,700);        
         border-top: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
     }
-    @include listing-with-image(catagory-listing,left,25px,pic,detail);
+    @include listing-with-image(catagory-listing,left,10px,pic,detail);
     .catagory-listing{
         padding: 20px 0;
         .pic{
-            width: 170px;
+            width: 144px;
+            padding-right: 10px;
         }
         .detail{
             h3{
-                margin-bottom: 10px;
-                font-weight: $itg-font-bold;
+                margin-bottom: 10px;                
+                @include font(15px,22px,$itg-font-regular);                    
+                color: #323232;    
             }
             p{
                 @include font(14px,19px);
                 color: #696969;
+                display: none;
             }
         }
     }
@@ -2039,7 +2120,8 @@ footer{
         .pic{
             width: 140px;
         }
-    .detail{
+    .detail{     
+        overflow: initial;
             h3{
                 margin-bottom: 5px;                
                 @include font(18px,null,$itg-font-bold);
@@ -2062,12 +2144,16 @@ footer{
 /*CSS Start Anchor listing detail page*/
 .anchor-detail-menu{
     border-bottom:1px solid $border-color;
-    .tab-buttons{
-        @include display-inline;
+    white-space: nowrap;
+    overflow: auto;
+    .tab-buttons{        
         background: transparent;
         span{
             width: auto;
             border-top: 3px solid rgba(202, 202, 202,1);
+            padding: 0 30px;
+            @include display-inline;
+            float: none;
             &.active{
                  border-top: 3px solid #a00606;
             }
@@ -2082,11 +2168,12 @@ footer{
         font-family: $itg-roboto;
     }
     .anchor-left, .anchor-right{
-        @include float(left);
-        @include calculate-width(2);
+        @include float(none);
+        @include calculate-width(1);
     }
     .anchor-right{
-        padding-left:15px;
+        padding-left:0px;
+        padding-top:15px;
         a.active{
             @include font(22px,30px,700);            
             color: #33363b;
@@ -2229,12 +2316,12 @@ footer{
         h3{
             display: block;
             span{
-                padding:45px 20px 10px 30px;   
+                padding:45px 20px 10px 0px;   
             }        
         }
         ul{
             li{
-                padding:10px 24px 10px 30px;
+                padding:10px 0px 10px 0px;
             }
         }
     }
@@ -2256,15 +2343,16 @@ footer{
                     @include calculate-width(1);
                     font-family: $itg-roboto;
                     .flex-caption {    
-                        padding: 10px 10px;    
+                        padding: 5px;    
                         background: #000;
                         color: $white-color;
-                        @include font(18px,24px,$itg-font-medium);    
-                        width: auto;
-                        height: 66px;
+                        @include font(13px,18px,$itg-font-medium);    
+                        width: auto; 
+                        max-height: 45px;
+                        overflow: hidden;
                     }
                     .flex-count{
-                        @include pos(absolute,null,null,78px,0px);
+                        @include pos(absolute,null,null,49px,0px);
                         @include display-inline;
                         background: #000;
                         opacity: .5;
@@ -2278,7 +2366,7 @@ footer{
 
             }
         }
-        .flex-control-nav{
+        .flex-control-nav, .flex-direction-nav{
             display: none;
         }
         .flex-count{
@@ -2753,7 +2841,7 @@ footer{
     border-top: 5px solid #171717;
     padding-bottom: 35px;
     ul{
-        @extend .list-none;
+        @extend .list-none;        
     }
     .container{        
         padding:10px 15px 
@@ -2799,7 +2887,7 @@ footer{
 }
 /*video and photo menu*/
 #block-itg-videogallery-videogallery-menu-video-block, #block-itg-photogallery-photo-menu-landing-block{    
-    border-bottom: 1px solid #d9d9d9;    
+   /* border-bottom: 1px solid #d9d9d9;    */
     margin-bottom: 30px;
     margin-top: 30px;
     ul{
@@ -2808,6 +2896,7 @@ footer{
       display: inline-block;
       width: 100%;
       position: relative;
+      border-bottom: 1px solid #d9d9d9;
       li{
         @include display-inline;
         border-right: 0;
@@ -2851,8 +2940,17 @@ footer{
   #block-itg-videogallery-videogallery-menu-video-block{
       padding-top: 0;
       margin-top: 0;
+      @include sidebar-heading;
+      h3{
+          display: block;
+          span{
+            padding-top: 0;
+            padding-left: 0;
+          }
+      }
+      
   }
-.view-video-list-of-category, .view-video-landing-header{    
+.view-video-list-of-category, .view-video-landing-header, .view-so-sorry{    
     .views-exposed-form{
         display: none;
     }
@@ -2860,13 +2958,14 @@ footer{
       .photo-list{
         list-style: none;
         margin:0 -10px;
+        @include clearfix;
         li{
-          padding: 15px;
+          padding: 15px 10px;
           float: left;
+          width:50%;
           .tile{
             figure{
-              width: 170px;
-              height: 127px;
+              max-width: 100%;              
               overflow: hidden;
               position: relative;
               figcaption{
@@ -3015,6 +3114,7 @@ footer{
 .programe-container{
   @include listing-with-image(program-row,left,10px,pic,program-right);
   .program-row{
+      font-family: $itg-roboto;
     background-color: #f5f5f5;
     .programe-title{
       font-size: 22px;
@@ -3069,6 +3169,7 @@ footer{
         .programe-list{
             list-style: none;
             overflow: hidden;
+            margin-bottom:50px;
             > .tile-wrapper{
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -3116,7 +3217,7 @@ footer{
             .more{
               text-align: right;
               position: relative;
-              margin: 30px 0 50px;
+              margin-bottom: 20px;
               &:after{
                 content: '';
                 position: absolute;
@@ -3144,74 +3245,6 @@ footer{
     }
 }
 
-
-
-/* CSS For Homepage Poll widget */
-.page-user{
-  .poll-data{
-    max-width: 370px;
-    padding: 0;
-    margin: 0;
-    border: none;
-    border-bottom: 1px solid #ddd;
-    .poll-banner-image{
-      max-width: 100%;
-      margin: 0;
-      img{
-        width: 100%;
-        height: 208px;
-      }
-    }
-    .active-poll-title{
-      background-color: #000;
-      float: left;
-      width: 100%;
-      h2{
-        color: #fff;
-        font-size: 20px;
-        line-height: 24px;
-        margin: 0;
-        padding: 10px;
-      }
-      .updated-msg{
-        display: none;
-      }
-    }
-    form{
-      text-align: center;
-      padding-bottom: 20px;
-      label{
-        display: inline-block;
-        vertical-align: top;
-        padding: 0;
-      }
-      .form-radios{
-        .form-item{
-          display: inline-block;
-          vertical-align: top;
-          margin: 0 10px;
-          .form-radio{
-            float: left;
-            margin: 3px 2px 0 0;
-          }
-        }
-      }
-    }
-    .poll-replace-id .form-submit{
-        width: 100px;
-        height: 36px;
-        background-color: #ccc;
-        border: none;
-        width: 100px;
-        height: 36px;
-        font-weight: 500;
-        font-family: Roboto;
-        margin-top: 20px;
-        font-size: 500;
-        color: #323232;
-      }
-  }
-}
 /*css start archive-story */
 .view-archive-story{
     .view-content{        
@@ -3297,13 +3330,13 @@ footer{
         .search-menu{
             padding-top: 20px;            
             white-space: nowrap;
-            overflow-x: auto;
+            overflow-x: scroll;
             a{
                 padding: 0 10px;                                
                 @include display-inline;
                 color: #747474;                
                 text-transform: uppercase;
-                @include font(20px,24px,$itg-font-regular);
+                @include font(16px,24px,$itg-font-regular);
                 &:nth-child(1){
                     padding-left: 0;
                     border-left: 0;
@@ -3389,3 +3422,534 @@ footer{
 }
 }
 /*css End archive-story */
+/*CSS start program RHS*/
+.program-rhs{
+    @include sidebar-heading;
+    h3{
+        display: block;
+        span{
+                padding:45px 20px 10px 0px;   
+            }
+    }
+    ul{
+        @extend .list-none;    
+        padding: 10px 20px 0 0px;
+        span.time{
+            color:#b1b1b1;
+            @include font(12px);
+            padding:10px 0;
+            display: block;
+        }
+        .detail{
+            padding:0 0 22px 0;
+        }
+    }
+    h4{
+        font-size: 18px;
+        background: #f5f5f5;
+        padding: 5px 5px;
+        font-weight: 700;
+        font-family: $itg-robotoslab;
+    }
+    @include listing-with-image(detail,right,10px,pic,discription);
+}
+/*CSS end program RHS*/
+
+/*CSS Start magazine-calander RHS*/
+#block-itg-msi-magazine-calendar{    
+    padding: 50px 0px 20px 0px;
+    .calendar-title{
+        @include story-tag(22px,22px);
+    }
+    ul{
+        @extend .list-none;
+        @include pos(relative);
+        border: 1px solid #ddd;
+        padding-bottom:33px;
+        margin-top: -2px;
+        li{
+            @include clearfix;                
+            span{
+                @include float(left);
+                @include calculate-width(4);
+                height: 34px;
+                @include display-inline;
+                text-align: center;
+                line-height: 34px;
+                border: 1px solid #ddd;
+                border-top: none;
+                border-left: none;
+                a{
+                    display: block;
+                    font-family: $itg-roboto;
+                    color:#808080;
+                    &.active, &:hover, &.menu_active{
+                        color:#000;
+                        background: #eaeaea;
+                    }
+                }
+            }
+        }
+    }
+    button{
+        @include display-inline;
+        background: transparent;
+        border: 1px solid #ddd;
+        border-bottom: 1px solid transparent;   
+        border-left: 1px solid transparent;  
+        width: 25%;
+        height: 34px;
+        @include pos(absolute,null,null,0,0);
+        cursor: pointer;
+        color:#7c7c7c;
+        i{
+            font-size: 18px;
+        }
+    }
+    button.slick-prev{
+        right: 0;
+        left:auto;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid transparent;  
+    }
+}
+/*CSS End magazine-calander RHS*/
+
+/*CSS Start Latest issue magazins*/
+#block-views-latest-issue-magzine-block-1{
+    padding: 50px 0px 20px 0px;
+    font-family:$itg-roboto;
+    h2{
+        @include story-tag(22px,22px);
+        font-size: 14px;
+        font-weight: normal;
+        @include display-inline;        
+    }
+    ul{
+        @include clearfix;
+        @extend .list-none;
+        padding:20px;
+        background:#f5f5f5;
+        li.issue-magazin-row{
+            @include float(left);
+            @include calculate-width(2);
+            @include text-align(center);
+            margin-bottom:30px;
+            span{
+                color:#193984;
+                display: block;
+                margin-top: 5px;
+                @include font(12px,null,500);                
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+/*CSS end Latest issue magazins*/
+/*CSS start magazins*/
+.magazin-lhs-top{
+    background: #f6f5f5;
+    border: 1px solid $border-color;
+    padding-bottom: 10px;
+    a:hover{
+        color:#193984;
+    }
+    .magazin-top{
+        @include clearfix;
+        margin-bottom:20px;
+        ul{
+            @extend .list-none;
+        }
+        .magazin-top-left {            
+            @include float(left);
+            width: 66.6666%;
+            padding:0 10px;
+            padding-top: 10px;
+            @include pos(relative);
+            .web-excl{
+                @include story-tag(22px,22px);
+                @include pos(absolute,10px,null,null,10px);
+            }
+            h2{
+                margin-top: 10px;
+            }
+        }
+        .magazin-subscribe{
+            @include float(right);
+            width: 33.33333%;
+            padding:10px;
+            font-family: $itg-roboto;
+            background: $white-color;            
+            border:1px solid $border-color;            
+            .latest-issue{
+                @include story-tag(22px,22px);
+            }
+            .issue-title{
+                background: #9d9d9d;
+                width: 210px;
+                margin: 0 auto;
+                height: 32px;
+                line-height: 32px;
+                color:#fff;  
+                text-align: center;
+                @include pos(relative);
+                &:after{
+                    width: 19px; 
+                    height: 23px;                     
+                    content:'';
+                    background: url(../images/riban-icon-left.png) no-repeat center center;
+                    position: absolute;
+                    right: 0;
+                    top: -23px;
+                }
+                &:before{
+                    width: 19px; 
+                    height: 23px;                     
+                    content:'';
+                    background: url(../images/riban-icon-right.png) no-repeat center center;
+                    position: absolute;
+                    left: 0;
+                    top: -23px;
+                }
+            }
+            .issue-subscribe-link{
+                @include font(22px,null,700);
+                text-transform: uppercase;
+                color:#444444;
+                margin-top: 10px;
+                text-align: center;
+            }
+            .issue-image{
+                text-align: center;
+                margin-top: 10px;
+            }
+            .next-issue-out{
+                margin-top:10px;
+                text-align: center;
+                span{
+                    display: block;
+                    color:#919191;
+                }
+            }
+        }
+    }
+    .magazin-bottom{
+        ul{
+            @include clearfix;
+            @extend .list-none;            
+            li{
+                @include calculate-width(3);
+                padding: 0 10px;
+                @include float(left);
+            }
+        }
+        h3{
+                margin-top: 10px;
+         }
+    }
+}
+.magazin-section{
+    .section-ordering{
+        @include pos(relative);
+    }
+    span.widget-title{
+        @include pos(absolute);            
+    }
+}
+/*End start magazins*/
+/*CSS Start RHS add block*/
+#block-itg-ads-ad-right-sidebar-1{
+    @include display-inline;
+    padding:0px 15px 0 0;
+}
+/*CSS End RHS add block*/
+/*CSS Start So sorry page*/
+#block-itg-layout-manager-header-sosorry-block{
+    .sosory-header{
+        @include clearfix;
+        background: #db1314;
+        padding: 15px 0; 
+        @include text-align(center);
+        .sosorryitg{
+            padding: 0px 30px 0 0;
+        }
+        .soindiatoday{
+            float: right;
+            padding-top: 20px;
+        }
+    }
+    .sosory-footer{
+        background: #000;
+        padding: 12px 0;            
+        text-align: left;                
+        a{
+             color:#eff94e;
+             font-size: 12px;
+             font-family:$itg-roboto;
+        }
+        ul{
+            @extend .list-none;
+            li{
+                @include display-inline;    
+                @include calculate-width(1);
+                margin-bottom: 15px;
+                i{
+                    font-size: 30px;
+                    vertical-align: middle;
+                    padding-right: 10px;
+                    float: left;
+                }                
+            }
+        }
+    }    
+}
+.page-sosorry .header-logo{
+    display: none;
+}
+.view-so-sorry{
+    margin-bottom:40px;
+    h2{
+        @include font(21px,null,300);
+        color:#db1314;    
+        text-transform:uppercase;
+        span{
+            font-weight: 700;
+        }
+    }    
+}
+#block-views-so-sorry-the-remix{
+    max-width: 370px;
+    margin: 0 auto;
+    .title{
+        background: #000;        
+        padding: 10px;
+        a{
+            color: #fff;
+            font-family: $itg-roboto;
+        }
+    }    
+}
+.sosory-video{
+    padding: 10px;
+    background: #000;
+}
+#block-views-so-sorry-most-watched{
+    margin-top: 50px;
+    .view-so-sorry{
+        .view-content{
+            @include photo-scroll;
+        }
+    }
+}
+.view-display-id-so_sorry_page{
+    margin: -15px;
+    @include pos(relative);    
+    h1{
+        @include pos(relative,null,null,0,0);    
+        @include calculate-width(1);
+        color: $white-color;
+        padding: 7px 15px;
+        @include font(32px);
+        background: rgba(0, 0, 0, 1);
+        font-size: 21px;
+    }
+}
+.sosorry-social{
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    margin-bottom:50px;
+    ul{
+        @extend .list-none;
+        li{
+            @include display-inline;
+            padding: 0 10px;
+            a{
+                width: 40px;
+                height: 40px;                            
+                display: block;
+                background: #4c4c4c;
+                text-align: center;
+                line-height:45px;
+                border-radius:100%;
+                i{  
+                    color: #fff;
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
+#block-views-so-sorry-you-will-love-these{
+    .pager.pager--infinite-scroll {
+        list-style-type: none;
+        text-align: center;
+        margin-top: 25px;
+        a{
+            background: #db0e0f;
+            color: #fff;
+            font-family: roboto;
+            text-transform: uppercase;
+            padding: 10px 15px;
+            border-radius: 30px 0px 0px 30px;
+            display: inline-block;
+            @include pos(relative);
+            &:after{
+                width: 35px;
+                height: 38px;
+                background: #cb090a;
+                color:#fff;
+                display: inline-block;
+                content: "\f0d7";
+                vertical-align: top;
+                position: absolute;
+                top: 0;
+                right: -35px;
+                border-radius: 0px 30px 30px 0px;
+                border-left: 1px solid #ee5e5e;
+                font: normal normal normal 14px/1 FontAwesome;
+                line-height: 38px;
+                font-size: 18px;
+                text-align: center;
+            }
+        }
+    }
+}
+/*CSS End So sorry page*/
+/*CSS Start user login header*/
+#block-itg-layout-manager-header-block{
+    .menu-login{
+        .user-menu{
+            @include pos(relative);
+            a.user-icon{
+                position: absolute;
+                right: 0;
+                background: #ffc106;
+                width: 37px;
+                height: 40px;
+                line-height: 40px;
+                color: #ac0000;
+                top: -39px;                
+                text-align: center;
+                font-size: 28px;
+            }
+            ul.menu{
+                position: absolute;
+                right: 0;
+                background: #a00606;                
+                z-index: 9;               
+                display: none;
+                li{
+                    a{
+                        color: #fff;
+                        display: block;                        
+                        padding: 10px 20px;
+                    }
+                    + li{
+                        border-top: 1px solid #000;
+                    }
+                }
+                
+            }
+            &:hover{
+                ul.menu{
+                    display: block;
+                }
+            }
+        }
+
+    }
+}
+/*End Start user login header*/
+
+/*CSS Start video setting Ifram*/
+.iframe-video{
+        position: relative;
+        padding-bottom: 50%;
+        padding-top: 30px;
+        height: 0;
+        overflow: auto; 
+        -webkit-overflow-scrolling:touch;    
+    iframe{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+/*CSS End video setting Ifram*/
+
+/*CSS Start for recommended for you home page*/
+.recommended-for-you{
+    background: #f3f3f3;
+    margin:40px 0px 0px 0px;
+    padding: 20px 0 10px 0;    
+    .widget-title{
+        @include story-tag(22px,22px);   
+        margin-bottom: 10px;
+    }
+    ul{
+        @extend .list-none;
+    }
+    #block-itg-widget-personlization{
+        ul.common-list{
+            padding: 0 15px;
+            @include listing-with-image(recom-listing,left,15px,pic,detail);            
+            li.recom-listing{
+                padding:0 0 30px 0;
+                .pic{
+                    width: 144px;
+                }
+            }
+            h4{
+                @include font(12px,null,700);                
+                color: #048cb9;
+                text-transform: uppercase;
+            }
+        }
+        ul.frist-ul{
+            li{
+                &:first-child{
+                    h4{
+                        display: none;
+                    }
+                    .pic{
+                        float: none;
+                        margin: 0;
+                    }
+                    .detail{
+                        background: #fff;
+                        padding: 13px 10px;
+                        font-size: 18px;
+                        line-height: 24px;
+                        font-family: roboto;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+        .recommended-slider{
+            margin:0 -15px;            
+            button.slick-prev, button.slick-next{
+                background: transparent;
+                border: none;
+                font-size: 60px;
+                position: absolute;
+                top: 50%;
+                margin-top: -40px;
+                z-index: 999;
+                color: #b9b9b9;
+                cursor: pointer;
+                display: none !important;
+            }
+            button.slick-next{
+                right: -50px;
+            }
+            button.slick-prev{
+                left: -50px;
+            }
+        }
+    }
+}
+/*CSS End for recommended for you home page*/

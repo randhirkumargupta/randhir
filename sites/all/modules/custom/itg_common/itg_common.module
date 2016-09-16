@@ -245,7 +245,7 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
     unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
   
     $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
-    $form['path']['#prefix'] = '<h2 class="story-title">' . t('Meta Tags') . '</h2>';
+    $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
 
     drupal_add_js('jQuery(document).ready(function() {
              jQuery(".vertical-tabs-list").hide();
@@ -395,7 +395,7 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * {@inheritdoc}
  */
 function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-    if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form') {
+    if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form') {
         $element['#datepicker_options'] = array(
             'minDate' => "+0D",
         );

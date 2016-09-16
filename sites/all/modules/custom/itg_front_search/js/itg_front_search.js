@@ -74,13 +74,26 @@
                 jQuery(".caln").show();
                 jQuery('#edit-bundle-name-wrapper').hide();
                 jQuery('.form-item-ds-changed label').hide();
+                jQuery('#edit-hash-wrapper').css("display", "none");
+                if (Drupal.settings.itg_front_search.settings.archive_story_front) {
+                    jQuery('#archive-story-date-slider ul').slick({
+                        dots: false,
+                        infinite: false,
+                        speed: 300,
+                        slidesToShow: 7,
+                        slidesToScroll: 1,
+                    });
+                }
                 
-                jQuery('#archive-story-date-slider ul').slick({
-                    dots: false,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 7,
-                    slidesToScroll: 1,
+
+                jQuery('#edit-ds-changed-datepicker-popup-0').datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    changeMonth: true,
+                    changeYear: true,
+                    maxDate: -1,
+                    onSelect: function (dateText, inst) {
+                        jQuery('#edit-submit-archive-story').trigger('click');
+                    }
                 });
 
             }
@@ -91,7 +104,7 @@
                 jQuery('#edit-ds-changed-datepicker-popup-0').val(h);
                 jQuery('#edit-submit-archive-story').trigger('click');
             });
-            
+
         }
 
     };

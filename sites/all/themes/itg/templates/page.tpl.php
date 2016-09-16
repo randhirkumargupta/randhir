@@ -31,23 +31,7 @@
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
-                <?php if ($secondary_menu): ?>
-                    <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
-                        <?php
-                        print theme('links__system_secondary_menu', array(
-                            'links' => $secondary_menu,
-                            'attributes' => array(
-                                'class' => array('links', 'inline', 'clearfix'),
-                            ),
-                            'heading' => array(
-                                'text' => $secondary_menu_heading,
-                                'level' => 'h2',
-                                'class' => array('element-invisible'),
-                            ),
-                        ));
-                        ?>
-                    </nav>
-                <?php endif; ?>
+                
                 <?php print render($page['header']); ?>
                     
             </section>
@@ -83,6 +67,7 @@
         <ul class="action-links"><?php print render($action_links); ?></ul>
       <?php endif; ?>
       <?php print render($page['content']); ?>
+      <?php print render($page['content_bottom']); ?>
       <?php print render($page['personalization']); ?>
       <?php print $feed_icons; ?>
     </section>

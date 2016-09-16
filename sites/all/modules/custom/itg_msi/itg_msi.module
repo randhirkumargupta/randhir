@@ -25,40 +25,41 @@ function itg_msi_permission() {
  * Implement hook_menu
  * @return string
  */
-function itg_msi_menu(){
-  
+function itg_msi_menu() {
+
   $items['check-duplicate-title/%'] = array(
-      'page callback' => 'itg_msi_check_duplicate_title',
-      'access callback' => TRUE,
-      'type' => MENU_CALLBACK,
+    'page callback' => 'itg_msi_check_duplicate_title',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
   );
-  
+
   $items['content/%/autocomplete'] = array(
     'page callback' => 'itg_msi_autocomplete_content',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
   );
-  
-    $items['get_tid'] = array(
-      'page callback' => 'itg_msi_get_term_from_name',
-      'access callback' => TRUE,
-      'type' => MENU_CALLBACK,
+
+  $items['get_tid'] = array(
+    'page callback' => 'itg_msi_get_term_from_name',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
   );
-    
+
   return $items;
 }
 
-/***************************Form Related hooks*********************************/
+/* * *************************Form Related hooks******************************** */
+
 /**
  * Implement hook_form_alter
  * @param Array $form
  * @param Array $form_state
  * @param String $form_id
  */
-function itg_msi_form_alter(&$form, &$form_state, $form_id){
-  
+function itg_msi_form_alter(&$form, &$form_state, $form_id) {
+
   global $user;
-  
+
   //Set destination for magazine form
   if ($form_id == 'magazine_node_form') {
     $destination = 'manage-magazines';
@@ -79,27 +80,26 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
     $destination = 'manage-issues';
     $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
   }
-  
+
   //Add cancel button for magazine, supplement and issue
-  if($form_id == 'magazine_node_form' || $form_id == 'supplement_node_form' || $form_id == 'issue_node_form'){
-    
+  if ($form_id == 'magazine_node_form' || $form_id == 'supplement_node_form' || $form_id == 'issue_node_form') {
+
     //Hide Publish label from magazine and supplement form
     unset($form['field_magazine_publish'][LANGUAGE_NONE]['#title']);
     unset($form['field_supp_publish'][LANGUAGE_NONE]['#title']);
-    
+
     //Add cancel button to magazine, supplement and issue form
     $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-        '#weight' => 21,
-        '#value' => t('Cancel'),
+      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+      '#weight' => 21,
+      '#value' => t('Cancel'),
     );
 
     //Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
-    $form['actions']['submit']['#submit'][] ='_submit_handler_for_redirect';
-    
+    $form['actions']['submit']['#submit'][] = '_submit_handler_for_redirect';
+
     //Call function after build
     $form['#after_build'][] = 'itg_msi_form_after_build';
-    
   }
 
   //Hide source type and source id from story add and edit form.
@@ -110,28 +110,31 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id){
 //    }
 //  }
 }
- /**
+
+/**
  * Custom submit callback for redirecting breaking news form.
  */
 function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-  
-  if(arg(2) == 'edit'){
+
+  if (arg(2) == 'edit') {
     $op = 'updated.';
-  } else {
-     $op = 'created.';
   }
-  
-  if($form_state['node']->type == 'issue'){
-    
+  else {
+    $op = 'created.';
+  }
+
+  if ($form_state['node']->type == 'issue') {
+
     $title = date('d/m/Y', strtotime($form_state['node']->field_issue_title[LANGUAGE_NONE][0]['value']));
-  } else {
+  }
+  else {
     $title = $form_state['node']->title;
   }
   $content_type = ucwords($form_state['node']->type);
-  drupal_set_message(t($content_type.' <strong>'.$title.'</strong> has been '.$op));
+  drupal_set_message(t($content_type . ' <strong>' . $title . '</strong> has been ' . $op));
 }
 
 /**
@@ -140,15 +143,16 @@ function itg_msi_issue_form_custom_submit_callback($form, &$form_state) {
  * @param Array $form_state
  * @return Array
  */
-function itg_msi_form_after_build($form, &$form_state){
+function itg_msi_form_after_build($form, &$form_state) {
   global $user, $base_url;
-  
+
   //Extract type of node
-  if(arg(0) == 'node'){
-    if(arg(1) == 'add'){
-        $type = arg(2);
-        $nid = '';
-    } else {
+  if (arg(0) == 'node') {
+    if (arg(1) == 'add') {
+      $type = arg(2);
+      $nid = '';
+    }
+    else {
       $node = node_load(arg(1));
       $type = $node->type;
       $nid = arg(1);
@@ -161,19 +165,20 @@ function itg_msi_form_after_build($form, &$form_state){
   $settings['uid'] = $user->uid;
   $settings['type'] = ucfirst($type);
   $settings['nid'] = $nid;
-  
+
   drupal_add_js(array('itg_msi' => array('settings' => $settings)), array('type' => 'setting'));
-  
+
   //Add JS for magazine, supplement and issue
-   drupal_add_js(drupal_get_path('module', 'itg_msi') . '/js/itg_msi.js', array('weight' => 1));
-    
+  drupal_add_js(drupal_get_path('module', 'itg_msi') . '/js/itg_msi.js', array('weight' => 1));
+
   //Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
-  
+  unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
+  unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
+
   unset($form['field_supp_import_xml'][LANGUAGE_NONE]['#file_upload_title']);
   unset($form['field_field_issue_import_xml'][LANGUAGE_NONE]['#file_upload_title']);
- 
+
   return $form;
 }
 
@@ -184,42 +189,43 @@ function itg_msi_form_after_build($form, &$form_state){
  * @param Array $form_id
  */
 function itg_msi_form_issue_node_form_alter(&$form, &$form_state, $form_id) {
-    
-    $magazine_field = 'field_issue_magazine';
-    $supplement_field = 'field_issue_supplement';
-    
-    // Set magazine on edit and trigger action
-    if(isset($form[$magazine_field]['und']['#default_value'][0]) && !isset($form_state['triggering_element'])) {
-      $magazine_id = $form[$magazine_field]['und']['#default_value'][0];
-    } else {
-      $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
-    }
-    
-    // Add ajax on magazine field 
-    $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
-      'event' => 'change',
-      'callback' => 'itg_msi_magazine_ajax_callback',
-      'wrapper' => $supplement_field . '_replace',
-    );
 
-    // Setup supplement select
-    $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="'.$supplement_field.'_replace">';
-    $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
-    if (function_exists('itg_common_dropdown_supplement')) {
-      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
-    }
+  $magazine_field = 'field_issue_magazine';
+  $supplement_field = 'field_issue_supplement';
+
+  // Set magazine on edit and trigger action
+  if (isset($form[$magazine_field]['und']['#default_value'][0]) && !isset($form_state['triggering_element'])) {
+    $magazine_id = $form[$magazine_field]['und']['#default_value'][0];
+  }
+  else {
+    $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
+  }
+
+  // Add ajax on magazine field 
+  $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+    'event' => 'change',
+    'callback' => 'itg_msi_magazine_ajax_callback',
+    'wrapper' => $supplement_field . '_replace',
+  );
+
+  // Setup supplement select
+  $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $supplement_field . '_replace">';
+  $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
+  if (function_exists('itg_common_dropdown_supplement')) {
+    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+  }
 }
 
 /**
-* Ajax callback for supplement
-* @param Array $form
-* @param Array $form_state
-*/
+ * Ajax callback for supplement
+ * @param Array $form
+ * @param Array $form_state
+ */
 function itg_msi_magazine_ajax_callback($form, $form_state) {
-    return $form['field_issue_supplement'];
+  return $form['field_issue_supplement'];
 }
 
-/*******************************View Related hooks*****************************/
+/* * *****************************View Related hooks**************************** */
 
 /**
  * Implement hook_views_pre_render
@@ -228,22 +234,22 @@ function itg_msi_magazine_ajax_callback($form, $form_state) {
 function itg_msi_views_pre_render(&$view) {
   //Add "Create Magazine" button on listing page of magazine
   if ($view->name == "manage_magazines") {
-    $header_content_magazine = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_magazine = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_magazine .= '<a href="./node/add/magazine">Create Magazine</a>';
     $view->attachment_before = $header_content_magazine;
   }
-  
+
   //Add "Create Supplement" button on listing page of supplement
   if ($view->name == "manage_supplements") {
-    $header_content_supplement = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    $header_content_supplement = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_supplement .= '<a href="./node/add/supplement">Create Supplement</a>';
     $view->attachment_before = $header_content_supplement;
   }
-  
+
   //Add "Create Issue" button on listing page of issue
   if ($view->name == "manage_issues") {
-    drupal_add_js(drupal_get_path('module', 'jquery_update').'/replace/ui/ui/minified/jquery.ui.datepicker.min.js');
-    $header_content_issue = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
+    drupal_add_js(drupal_get_path('module', 'jquery_update') . '/replace/ui/ui/minified/jquery.ui.datepicker.min.js');
+    $header_content_issue = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
     $view->attachment_before = $header_content_issue;
   }
@@ -256,40 +262,37 @@ function itg_msi_views_pre_render(&$view) {
  * @param String $form_id
  */
 function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  
-   if ($form['#id'] == 'views-exposed-form-manage-magazines-page' || $form['#id'] == 'views-exposed-form-manage-supplements-page') {
-     if($form_state['view']->name == 'manage_magazines'){
-       $type = 'magazine';
-     }
-     if($form_state['view']->name == 'manage_supplements'){
-       $type = 'supplement';
-     }
-     //Call function autocomplete to show matching titles
-     $form['title']['#autocomplete_path'] = 'content-title-list/'.$type.'/autocomplete';
-     $form['title']['#attributes'] = array('placeholder' => t('Title'));
-   }
-   
-   //Add aotocomplete on issue title
-   if ($form['#id'] == 'views-exposed-form-manage-issues-page'){
+
+  if ($form['#id'] == 'views-exposed-form-manage-magazines-page' || $form['#id'] == 'views-exposed-form-manage-supplements-page') {
+    if ($form_state['view']->name == 'manage_magazines') {
+      $type = 'magazine';
+    }
+    if ($form_state['view']->name == 'manage_supplements') {
+      $type = 'supplement';
+    }
+    //Call function autocomplete to show matching titles
+    $form['title']['#autocomplete_path'] = 'content-title-list/' . $type . '/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+
+  //Add aotocomplete on issue title
+  if ($form['#id'] == 'views-exposed-form-manage-issues-page') {
     drupal_add_js('jQuery(document).ready(function() {                  
         jQuery("#edit-field-issue-title-value-value-datepicker-popup-0").prop("readonly", true);
     });', array('type' => 'inline', 'scope' => 'footer'));
-     
-      if($form_state['view']->name == 'manage_issues'){
-       $type = 'issue';
-     }
-     $form['title']['#autocomplete_path'] = 'content/'.$type.'/autocomplete';
-     $form['field_issue_title_value']['value']['#attributes'] = array('placeholder' => t('Title'));
 
-   }
-   if ($form['#id'] == 'views-exposed-form-issue-listing-page-1'){
-     $form['title']['#attributes'] = array('placeholder' => t('Title')); 
-   }
+    if ($form_state['view']->name == 'manage_issues') {
+      $type = 'issue';
+    }
+    $form['title']['#autocomplete_path'] = 'content/' . $type . '/autocomplete';
+    $form['field_issue_title_value']['value']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  if ($form['#id'] == 'views-exposed-form-issue-listing-page-1') {
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
 }
 
-
-
-/*******************************Node Related hooks*****************************/
+/* * *****************************Node Related hooks**************************** */
 
 /**
  * Implement hook_node_view
@@ -298,8 +301,8 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
  * @param string $langcode
  */
 function itg_msi_node_view($node, $view_mode, $langcode) {
-  if($node->type == 'issue'){
-    drupal_set_title(date('d/m/Y',strtotime($node->title)));
+  if ($node->type == 'issue') {
+    drupal_set_title(date('d/m/Y', strtotime($node->title)));
   }
 }
 
@@ -327,7 +330,7 @@ function itg_msi_node_access($node, $op, $account) {
  * Implement hook_node_insert
  * @param Object $node
  */
-function itg_msi_node_insert($node){
+function itg_msi_node_insert($node) {
   switch ($node->type) {
     case 'supplement':
       module_load_include('inc', 'itg_msi', 'create_issue_xml');
@@ -348,8 +351,8 @@ function itg_msi_node_insert($node){
  * Implement hook_node_update
  * @param Object $node
  */
-function itg_msi_node_update($node){
-    switch ($node->type) {
+function itg_msi_node_update($node) {
+  switch ($node->type) {
     case 'supplement':
       module_load_include('inc', 'itg_msi', 'create_issue_xml');
       _create_issue_using_xmlfile($node, 'update');
@@ -365,35 +368,36 @@ function itg_msi_node_update($node){
   }
 }
 
-
 /**
  * Implement hook_node_presave
  * @param Object $node
  */
-function itg_msi_node_presave($node){
-  
+function itg_msi_node_presave($node) {
+
   //Publish/Unpublish functionality for supplement
   if ($node->type == 'supplement') {
     if ($node->is_new == 1) {
       $node->status = $node->field_supp_publish[LANGUAGE_NONE][0]['value'];
-    } else {
+    }
+    else {
       $publish = $node->field_supp_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
       $node->status = $publish;
       field_attach_update('node', $node);
     }
   }
-  
+
   //Publish/Unpublish functionality for magazine
   if ($node->type == 'magazine') {
     if ($node->is_new == 1) {
       $node->status = $node->field_magazine_publish[LANGUAGE_NONE][0]['value'];
-    } else {
+    }
+    else {
       $publish = $node->field_magazine_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
       $node->status = $publish;
       field_attach_update('node', $node);
     }
   }
-    //Set date in title
+  //Set date in title
   if ($node->type == 'issue') {
     $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
   }
@@ -406,13 +410,14 @@ function itg_msi_node_presave($node){
  * @param Array $form_state
  */
 function itg_msi_node_validate($node, $form, &$form_state) {
-  
+
   if ($node->type == 'magazine' || $node->type == 'supplement') { // Validate duplicacy on titles for magazine and supplement
     //if (!isset($node->nid)) {
     $title = $form_state['values']['title'];
     if (isset($node->nid)) {
       $results = db_select('node')->fields('node', array('title'))->condition('title', $title, '=')->condition('type', $node->type)->condition('nid', $node->nid, '!=')->execute();
-    } else {
+    }
+    else {
       $results = db_select('node')->fields('node', array('title'))->condition('title', $title, '=')->condition('type', $node->type)->execute();
     }
 
@@ -424,15 +429,15 @@ function itg_msi_node_validate($node, $form, &$form_state) {
     //Set error for duplicacy
     if (isset($matches) && !empty($matches)) {
       form_set_error('title', t('@contenttype title <strong>@contenttitle</strong> is already exist.', array('@contenttype' => ucfirst($node->type), '@contenttitle' => $title)));
-      
+
       //Change message order for type "Magazine"
-      if($node->type == 'magazine'){
+      if ($node->type == 'magazine') {
         $message_arr = $_SESSION['messages']['error'];
-        $message_arr_new = array($message_arr[1],$message_arr[0]);
+        $message_arr_new = array($message_arr[1], $message_arr[0]);
         $_SESSION['messages']['error'] = $message_arr_new;
       }
     }
-    
+
     //Case: Supplement creation (If issue is already exist, throw an error)
     if ($node->type == 'supplement') {
       $is_issue_exist = itg_msi_check_for_issue_existence($node, 'supplement');
@@ -440,25 +445,24 @@ function itg_msi_node_validate($node, $form, &$form_state) {
         form_set_error('field_supp_issue', t('This issue doesn\'t exist. Please select another issue to map supplement.'));
       }
     }
-    
   }
-  
+
   //Case: Issue creation (If issue is already exist, throw an error) 
-  if ($node->type == 'issue'){
-    if(arg(2) == 'edit'){
+  if ($node->type == 'issue') {
+    if (arg(2) == 'edit') {
       $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue', arg(1));
-    } else {
+    }
+    else {
       $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue', NULL);
     }
-    
-    if($is_issue_exist){
+
+    if ($is_issue_exist) {
       form_set_error('field_supp_issue', t('This issue is already exist.'));
     }
   }
-  
 }
 
-/**************************Common Functionality********************************/
+/* * ************************Common Functionality******************************* */
 
 /**
  * Redirect node to their manage pages after node creation
@@ -466,9 +470,9 @@ function itg_msi_node_validate($node, $form, &$form_state) {
  * @param Array $form_state
  */
 function _submit_handler_for_redirect($form, &$form_state) {
-  
+
   unset($_GET['destination']); // Unset destination
-  
+
   switch ($form['#form_id']) {
     case 'magazine_node_form':
       $form_state['redirect'] = 'manage-magazines';
@@ -489,29 +493,30 @@ function _submit_handler_for_redirect($form, &$form_state) {
  * Call through ajax function
  */
 function itg_msi_check_duplicate_title() {
-    $type = arg(1);
-    $nid = arg(2);
-    $title = $_POST['title'];
-    $itgQuery = db_select('node', 'itg');
-    
-    if (empty($nid)) {
-    $itgQuery->fields('itg', array('title'))
-            ->condition('title', $title, '=')
-            ->condition('type', $type, '=');
-    } else {
-      $itgQuery->fields('itg', array('title'))
-              ->condition('title', $title, '=')
-              ->condition('type', $type, '=')
-              ->condition('nid', $nid, '!=');
-    }
+  $type = arg(1);
+  $nid = arg(2);
+  $title = $_POST['title'];
+  $itgQuery = db_select('node', 'itg');
 
-    $itgResult = $itgQuery->execute()->fetchObject();
-    if (isset($itgResult->title) && strcasecmp($title, $itgResult->title) == 0) {
-      echo ($type == 'astro') ? 'false' : drupal_json_encode(array('Code' => 1));
-    }    
-    else {
-      echo ($type == 'astro') ? 'true' :  drupal_json_encode(array('Code' => 0));
-    }
+  if (empty($nid)) {
+    $itgQuery->fields('itg', array('title'))
+        ->condition('title', $title, '=')
+        ->condition('type', $type, '=');
+  }
+  else {
+    $itgQuery->fields('itg', array('title'))
+        ->condition('title', $title, '=')
+        ->condition('type', $type, '=')
+        ->condition('nid', $nid, '!=');
+  }
+
+  $itgResult = $itgQuery->execute()->fetchObject();
+  if (isset($itgResult->title) && strcasecmp($title, $itgResult->title) == 0) {
+    echo ($type == 'astro') ? 'false' : drupal_json_encode(array('Code' => 1));
+  }
+  else {
+    echo ($type == 'astro') ? 'true' : drupal_json_encode(array('Code' => 0));
+  }
 }
 
 /**
@@ -532,7 +537,7 @@ function itg_msi_get_term_from_name($term_name, $vocabulary_name) {
  * @param String $type
  * @return Int $nid
  */
-function itg_msi_get_nid_using_title_type($title, $type){
+function itg_msi_get_nid_using_title_type($title, $type) {
   $entity_arr = entity_load('node', array(), array('type' => $type, 'title' => $title));
   foreach ($entity_arr as $key => $val) {
     $nid = $entity_arr[$key]->nid;
@@ -545,8 +550,8 @@ function itg_msi_get_nid_using_title_type($title, $type){
  * @param string $title
  */
 function itg_msi_autocomplete_content($title) {
-  
-    if (strlen(trim($title)) > 0) {
+
+  if (strlen(trim($title)) > 0) {
     $content_type = arg(1);
     $options = '';
     $title = strtolower(trim($title));
@@ -563,39 +568,42 @@ function itg_msi_autocomplete_content($title) {
     drupal_json_output($options);
   }
 }
- 
- /**
-  * Check issue existence, if yes return TRUE else FALSE
-  * @param Object $node
-  * @return boolean
-  */
- function itg_msi_check_for_issue_existence($node, $type, $nid = NULL){
-   
-   if($type == 'supplement'){
-     $issue_title = $node->field_supp_issue[LANGUAGE_NONE][0]['value'];
-   } else {
-     $issue_title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
-   }
 
-   if(!empty($nid)){
-      $result = db_select('field_data_field_issue_title', 'it')
-            ->fields('it', array('entity_id'))
-            ->condition('field_issue_title_value', db_like($issue_title) . '%', 'LIKE')
-            ->condition('entity_id', $nid, '!=')
-            ->execute()
-            ->fetchAssoc();
-   } else {
-           $result = db_select('field_data_field_issue_title', 'it')
-            ->fields('it', array('entity_id'))
-            ->condition('field_issue_title_value', db_like($issue_title) . '%', 'LIKE')
-            ->execute()
-            ->fetchAssoc();
-   }
-    if ($result['entity_id']) {
-      return TRUE; //Return TRUE if issue is already exist with same name
-    } else {
-      return FALSE;
-    }
+/**
+ * Check issue existence, if yes return TRUE else FALSE
+ * @param Object $node
+ * @return boolean
+ */
+function itg_msi_check_for_issue_existence($node, $type, $nid = NULL) {
+
+  if ($type == 'supplement') {
+    $issue_title = $node->field_supp_issue[LANGUAGE_NONE][0]['value'];
+  }
+  else {
+    $issue_title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
+  }
+
+  if (!empty($nid)) {
+    $result = db_select('field_data_field_issue_title', 'it')
+        ->fields('it', array('entity_id'))
+        ->condition('field_issue_title_value', db_like($issue_title) . '%', 'LIKE')
+        ->condition('entity_id', $nid, '!=')
+        ->execute()
+        ->fetchAssoc();
+  }
+  else {
+    $result = db_select('field_data_field_issue_title', 'it')
+        ->fields('it', array('entity_id'))
+        ->condition('field_issue_title_value', db_like($issue_title) . '%', 'LIKE')
+        ->execute()
+        ->fetchAssoc();
+  }
+  if ($result['entity_id']) {
+    return TRUE; //Return TRUE if issue is already exist with same name
+  }
+  else {
+    return FALSE;
+  }
 }
 
 /**
@@ -604,47 +612,287 @@ function itg_msi_autocomplete_content($title) {
  * @param Object $row
  * @return String
  */
-function itg_msi_show_mapped_stories($row){
-    $result = db_select('field_data_field_story_source_id', 'si')
-            ->fields('si', array('entity_id'))
-            ->condition('field_story_source_id_value', $row->nid, '=')
-            ->execute();
-      while($record = $result->fetchAssoc()) {
-        $entity_id[] = $record['entity_id'];
-    }
-    $count = count($entity_id);
-    $text = 'List Stories('.$count.')';
-    $path = 'issue-listing/'.$row->type.'/'.$row->nid;
-    
-    //Prepare link for list associated stoies to this node
-    if($count < 1){
-      return $text;
-    } else {
-      return l($text, $path, array('attributes' => array('target'=>'_blank')));
-    }
+function itg_msi_show_mapped_stories($row) {
+  $result = db_select('field_data_field_story_source_id', 'si')
+      ->fields('si', array('entity_id'))
+      ->condition('field_story_source_id_value', $row->nid, '=')
+      ->execute();
+  while ($record = $result->fetchAssoc()) {
+    $entity_id[] = $record['entity_id'];
+  }
+  $count = count($entity_id);
+  $text = 'List Stories(' . $count . ')';
+  $path = 'issue-listing/' . $row->type . '/' . $row->nid;
+
+  //Prepare link for list associated stoies to this node
+  if ($count < 1) {
+    return $text;
+  }
+  else {
+    return l($text, $path, array('attributes' => array('target' => '_blank')));
+  }
 }
 
 /**
  * Get fids of files associated with a node
  * @return Array
  */
-function itg_msi_get_associated_fid_node($node, $xml_uid){
-  
+function itg_msi_get_associated_fid_node($node, $xml_uid) {
+
   if ($xml_uid) {
     $result = db_select('itg_msi_node_xml', 'fn')
-            ->fields('fn', array('fid'))
-            ->condition('nid', $node->nid, '=')
-            ->condition('xml_uid', $xml_uid, '=')
-            ->execute();
-  } else {
+        ->fields('fn', array('fid'))
+        ->condition('nid', $node->nid, '=')
+        ->condition('xml_uid', $xml_uid, '=')
+        ->execute();
+  }
+  else {
     $result = db_select('itg_msi_node_xml', 'fn')
-            ->fields('fn', array('fid'))
-            ->condition('nid', $node->nid, '=')
-            ->execute();
+        ->fields('fn', array('fid'))
+        ->condition('nid', $node->nid, '=')
+        ->execute();
   }
 
   while ($record = $result->fetchAssoc()) {
     $fid[] = $record['fid'];
   }
   return $fid;
+}
+
+/**
+ * Implements hook_block_info()
+ * {@inheritdoc}
+ */
+function itg_msi_block_info() {
+  $blocks['magazine_calendar'] = array(
+    'info' => t('Magazine Calendar Block'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * {@inheritdoc}
+ */
+function itg_msi_block_view($delta = '') {
+  global $user;
+  $block = array();
+  $data = itg_msi_calendar_data();
+  switch ($delta) {
+    case 'magazine_calendar':
+      $block['content'] = theme('magazine_calendar_template_block', array('data' => $data));
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_msi_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'magazine_calendar_template_block' => array(
+      'template' => 'magazine-calendar-template',
+      'path' => drupal_get_path('module', 'itg_msi') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+  );
+  return $themes;
+}
+
+/**
+ * Implements function for get years for calendar on magazine
+ * @return array
+ */
+function itg_msi_calendar_data() {
+  $cur_year = date('Y');
+  $years = $cur_year - 1975;
+  for ($i = 0; $i <= $years; $i++) {
+    $output_year[] = $cur_year--;
+  }
+  return $output_year;
+}
+
+/**
+ * Implements function for get current or running issue date in view
+ * @return string
+ */
+function itg_msi_last_week_issue() {
+  $current_issue = itg_msi_get_current_time_issue();
+  $cur_year = date('Y');
+  if (is_numeric(arg(2)) && arg(2) == $cur_year && arg(1) == 0 && arg(0) == 'calendar') {
+    $output = itg_msi_get_current_issue();
+  }
+  elseif (arg(1) == 0 && is_numeric(arg(2)) && arg(2) != $cur_year && arg(0) == 'calendar') {
+    $current_year = arg(2);
+    $query = db_select('field_data_field_issue_title', 'ft');
+    $query->fields('ft', array('field_issue_title_value'));
+    $query->condition('ft.field_issue_title_value', '%' . db_like($current_year) . '%', 'LIKE');
+    $query->orderBy('ft.field_issue_title_value', 'DESC');
+    $query->range(0, 1);
+    $output = $query->execute()->fetchField();
+  }
+  elseif (arg(1) != 0 && is_numeric(arg(2)) && arg(0) == 'calendar') {
+    $node = node_load(arg(1));
+    $output = $node->title;
+  }
+  $result = explode(' 00:', $output);
+  return $result[0];
+}
+
+/**
+ * Implements function for get next upcoming issue
+ * @return string
+ */
+function itg_msi_next_week_issue() {
+  $current_time = date('Y-m-d', time());
+  $query = db_select('field_data_field_issue_title', 'ft');
+  $query->fields('ft', array('field_issue_title_value'));
+  $query->condition('field_issue_title_value', $current_time, '>');
+  $query->orderBy('ft.field_issue_title_value', 'ASC');
+  $query->range(0, 1);
+  $result = strtotime($query->execute()->fetchField());
+  $date_format_result = format_date($result, $type = 'itg', $format = '', $timezone = NULL, $langcode = NULL);
+  return $date_format_result;
+}
+
+/**
+ * Implements function for get current date issue.
+ * @return string
+ */
+function itg_msi_get_current_time_issue() {
+  $current_time = date('Y-m-d', time());
+  $query = db_select('field_data_field_issue_title', 'ft');
+  $query->fields('ft', array('field_issue_title_value'));
+  $query->condition('field_issue_title_value', $current_time, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+/**
+ * Implements hook_views_query_alter()
+ * {@inheritdoc}
+ */
+function itg_msi_views_query_alter(&$view, &$query) {
+  if ($view->name == 'latest_issue_magzine' && $view->current_display == 'page') {
+    $query->where[1]['conditions'][2]['value'][':field_data_field_issue_title_field_issue_title_value'] = itg_msi_last_week_issue();
+  }
+  if($view->name == 'magazine_top_story' && $view->current_display == 'block'){
+    $issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value2'];
+    $chk_wid_val = itg_msi_check_magazine_widget($issue_date);
+    if(!empty($chk_wid_val)){
+      unset($query->orderby[1]);
+    }else{
+      unset($query->where[1]['conditions'][4]);
+      unset($query->orderby[0]);
+    }
+  }elseif($view->name == 'magazine_top_story' && $view->current_display == 'block_1'){
+    $issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value'];
+    $chk_wid_val = itg_msi_check_magazine_widget($issue_date);
+    if(!empty($chk_wid_val)){
+      unset($query->orderby[1]);
+    }else{
+      unset($query->where[1]['conditions'][4]);
+      unset($query->orderby[0]);
+    }
+  }
+}
+
+/**
+ * Implement function for check widget exist
+ */
+function itg_msi_check_magazine_widget($issue_date){
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->fields('iwo' , array('nid'));
+  $query->condition('widget', 'issue_magazin_widget', '=');
+  $query->condition('extra', $issue_date, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implements function for get current issue date.
+ * @return string
+ */
+function itg_msi_get_current_issue() {
+  $current_issue = itg_msi_get_current_time_issue();
+  $cur_year = date('Y');
+  if (!empty($current_issue)) {
+    $output = $current_issue;
+  }
+  else {
+    $current_time = date('Y-m-d', time());
+    $query = db_select('field_data_field_issue_title', 'ft');
+    $query->fields('ft', array('field_issue_title_value'));
+    $query->condition('field_issue_title_value', $current_time, '<');
+    $query->orderBy('ft.field_issue_title_value', 'DESC');
+    $query->range(0, 1);
+    $output = $query->execute()->fetchField();
+  }
+  return $output;
+}
+
+/**
+ * Implement function for get issue based story according category on magazine page
+ * @param string $issue_date
+ * @return array
+ */
+function itg_msi_issue_category_data($issue_date){
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_magazine_story_issue', 'issue_based', 'n.nid = issue_based.entity_id');
+  $query->join('field_data_field_story_issue_date', 'issue_date', 'n.nid = issue_date.entity_id');
+  $query->join('field_data_field_story_category', 'story_section', 'n.nid = story_section.entity_id');
+  $query->join('taxonomy_term_data', 'term_name', 'story_section.field_story_category_tid = term_name.tid');
+  $query->join('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->join('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
+  $query->fields('n', array('nid', 'title'));
+  $query->fields('term_name', array('name'));
+  $query->fields('issue_date', array('field_story_issue_date_value'));
+  $query->fields('f_managed', array('fid', 'uri'));
+  $query->fields('story_section', array('field_story_category_tid'));
+  $query->condition(db_or()->isnotNull('issue_date.field_story_issue_date_value'));
+  $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
+  $query->condition('story_section.bundle', 'story', '=');
+  $query->orderBy('n.created', DESC);
+  $results = $query->execute();
+  foreach($results as $value){
+    $result[$value->field_story_category_tid][] = $value;
+  }
+  return $result;
+}
+
+/**
+ * Implement function for get issue based story according supplement on magazine page
+ * @param string $issue_date
+ * @return array
+ */
+function itg_msi_issue_suppliment_data($issue_date){
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_magazine_story_issue', 'issue_based', 'n.nid = issue_based.entity_id');
+  $query->join('field_data_field_story_issue_date', 'issue_date', 'n.nid = issue_date.entity_id');
+  $query->join('field_data_field_story_select_supplement', 'story_supplement', 'n.nid = story_supplement.entity_id');
+  $query->join('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->join('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
+  $query->fields('n', array('nid', 'title'));
+  $query->fields('issue_date', array('field_story_issue_date_value'));
+  $query->fields('f_managed', array('fid', 'uri'));
+  $query->fields('story_supplement', array('field_story_select_supplement_target_id'));
+ // $query->condition(db_or()->isnotNull('story_supplement.field_story_select_supplement_target_id'));
+  $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
+  $query->orderBy('n.created', DESC);
+  $results = $query->execute();
+  foreach($results as $value){
+    $result[$value->field_story_select_supplement_target_id][] = $value;
+  }
+  return $result;
+}
+
+function itg_msi_issue_suppliment_title($nid){
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchField();
+  return t($result);
 }

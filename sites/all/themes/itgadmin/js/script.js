@@ -131,9 +131,11 @@
     // scroll-to-top animate
     $(window).scroll(function () {
       if ($(this).scrollTop() > 90) {
-        $('#block-itg-podcast-podcast-tab-form-block, #block-itg-blog-blog-tab-form-block, #block-itg-reporter-reporter-tab-form-block, .action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').addClass('fixed');
+        $('.action-with-title').addClass('fixed');
+//        $('#block-itg-podcast-podcast-tab-form-block, #block-itg-blog-blog-tab-form-block, #block-itg-reporter-reporter-tab-form-block, .action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').addClass('fixed');
       } else {
-        $('#block-itg-podcast-podcast-tab-form-block, #block-itg-blog-blog-tab-form-block, #block-itg-reporter-reporter-tab-form-block, .action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').removeClass('fixed');
+        $('.action-with-title').removeClass('fixed');
+//        $('#block-itg-podcast-podcast-tab-form-block, #block-itg-blog-blog-tab-form-block, #block-itg-reporter-reporter-tab-form-block, .action-with-title, .block-itg-astro, .block-itg-poll, .block-itg-breaking-news, #block-menu-menu-story-content-admin-menu, .block-itg-photogallery, .block-itg-recipe, .block-itg-survey, .block-itg-quiz, .block-itg-mega-reviews-critics, #block-itg-event-backend-sponsor-tab-form-block, .block-itg-newsletter').removeClass('fixed');
       }
     });
     $('body').on('click', '.target-link', function (e) {
@@ -197,29 +199,33 @@
     });
 
     // jQuery code to filter category manager
+    
     $('.itg-section').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.not('.active').addClass('active').parent().next().addClass('hide').find('.cmd-heading').addClass('active');
     });
     $('.itg-category').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
       el.parent().parent().parent().parent().prev().children('.cmd-heading').removeClass('active');
     });
     $('.itg-sub-category').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
       el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
     });
     $('.itg-sub-sub-category').click(function (e) {
       $(this).addClass('active').siblings().removeClass('active');
-      var el = $('.view-content > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li .item-list > ul > li > .category-manager-details > .cmd-heading');
+      var el = $('.view-content > div > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .item-list > ul > li > .term-wrapper > .cmd-heading');
       el.addClass('active').parent().parent().parent().parent().removeClass('hide').find('.item-list').addClass('hide');
       el.parents('.item-list').removeClass('hide').prev().children('.cmd-heading').removeClass('active');
     });
+    setTimeout(function(){
+      $('.page-category-manager-listing').find('.itg-section').trigger('click');
+    }, 10);
 
     // jQuery code for flexslider
     $('.photogallery-list').flexslider({
@@ -272,108 +278,7 @@
       $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
     });
 
-    $('.survey-submit, .survey-submit-skip').mousedown(function () {
-      var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
-      var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
-      var textValue = $(this).parents('.question-container').find('.form-text').val();
-      var skipValue = $(this).parents('.question-container').find('.question-skip').val();
-      var surveyTaken = $('body').find('input[name="survey_taken"]').val();
-
-      if (checkValue && skipValue == 'no' && surveyTaken == 'no') {
-        $(this).ajaxSuccess(function () {
-          $('.question-container').hide();
-          $(this).parents('.question-container').next().show();
-        });
-      } else if (skipValue == 'yes' && surveyTaken == 'no') {
-        $(this).ajaxSuccess(function () {
-          $('.question-container').hide();
-          $(this).parents('.question-container').next().show();
-        });
-      }
-
-      if (radioValue && skipValue == 'no' && surveyTaken == 'no') {
-        $(this).ajaxSuccess(function () {
-          $('.question-container').hide();
-          $(this).parents('.question-container').next().show();
-        });
-      } else if (skipValue == 'yes' && surveyTaken == 'no') {
-        $(this).ajaxSuccess(function () {
-          $('.question-container').hide();
-          $(this).parents('.question-container').next().show();
-        });
-      }
-
-      if (textValue && skipValue == 'no' && textValue != 'undefined' && surveyTaken == 'no') {
-        $(this).ajaxSuccess(function () {
-          $('.question-container').hide();
-          $(this).parents('.question-container').next().show();
-        });
-      } else if (skipValue == 'yes' && surveyTaken == 'no') {
-        $(this).ajaxSuccess(function () {
-          $('.question-container').hide();
-          $(this).parents('.question-container').next().show();
-        });
-      }
-
-    });
-
-    var loader = '<div class="ajax-loader"><img src="sites/all/themes/itgadmin/images/loader.svg" alt=""/></div>';
-
-    $('#itg-survey-survey-form .button-yes').mousedown(function () {
-      var checkValue = $(this).parents('.question-container').find('.form-checkbox').is(':checked');
-      var radioValue = $(this).parents('.question-container').find('.form-radio').is(':checked');
-      var textValue = $(this).parents('.question-container').find('.form-text').val();
-      var skipValue = $(this).parents('.question-container').find('.question-skip').val();
-
-      if (checkValue && skipValue == 'no') {
-        $('.question-container').hide();
-        $('body').find('.ajax-loader').remove();
-        $(this).parents('.block-content').append(loader);
-        $(this).ajaxSuccess(function () {
-          $('body').find('.ajax-loader').remove();
-        });
-
-      } else if (skipValue == 'yes') {
-        $('.question-container').hide();
-        $('body').find('.ajax-loader').remove();
-        $(this).parents('.block-content').append(loader);
-        $(this).ajaxSuccess(function () {
-          $('body').find('.ajax-loader').remove();
-        });
-      }
-
-      if (radioValue && skipValue == 'no') {
-        $('.question-container').hide();
-        $('body').find('.ajax-loader').remove();
-        $(this).parents('.block-content').append(loader);
-        $(this).ajaxSuccess(function () {
-          $('body').find('.ajax-loader').remove();
-        });
-      } else if (skipValue == 'yes') {
-        $('.question-container').hide();
-        $('body').find('.ajax-loader').remove();
-        $(this).parents('.block-content').append(loader);
-        $(this).ajaxSuccess(function () {
-          $('body').find('.ajax-loader').remove();
-        });
-      }
-
-      if (textValue && skipValue == 'no' && textValue != 'undefined') {
-        $('.question-container').hide();
-        $('body').find('.ajax-loader').remove();
-        $(this).parents('.block-content').append(loader);
-        $(this).ajaxSuccess(function () {
-          $('body').find('.ajax-loader').remove();
-        });
-      } else if (skipValue == 'yes') {
-        $('.question-container').hide();
-        $('body').find('.ajax-loader').remove();
-        $(this).parents('.block-content').append(loader);
-        $(this).ajaxSuccess(function () {
-          $('body').find('.ajax-loader').remove();
-        });
-      }
-    });
+    
 
     $('#itg-quiz-quiz-form .quiz-submit').mousedown(function () {
       $(this).ajaxSuccess(function () {
@@ -735,10 +640,6 @@
       $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
     });
     
-    jQuery('body').on('click','.sidebar-trigger',function(){
-      jQuery(this).parent().toggleClass('active');
-    });
-    
     //ITG Listing top spacing          
     $('.tab-data').find('ul.itg-listing').css('padding-top','0');
     
@@ -827,6 +728,10 @@ jQuery(document).ready(function(){
         jQuery(".ajax-loader").hide();
     });
     
+    // jquery code for sliding sidebar
+    jQuery('body').on('click','.sidebar-trigger',function(){
+      jQuery(this).parent().toggleClass('active');
+    });
     
 });
 

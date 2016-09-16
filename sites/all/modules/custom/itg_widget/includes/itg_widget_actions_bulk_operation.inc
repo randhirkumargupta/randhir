@@ -100,6 +100,20 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     $we_may_suggest_content = $form_state;
     save_we_may_suggest_widget_data($we_may_suggest_content);
   }
+  elseif ($current_display == 'so_sorry_videos') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_so_sorry');
+    save_so_sorry_widget_data($form_state);    
+  }
+
+  elseif ($current_display == 'poll_widget_format') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_poll');
+    save_poll_widget_data($form_state);
+  }
+  elseif ($current_display == 'issue_base_magazin_widget') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_issue_base_magazin_widget');
+    save_issue_magazin_widget_data($form_state);
+  }
+
   else {
     // Logic to skip nodes which are already in itg_widget_order table
     $nodes_already = db_select('itg_widget_order', 'iwo')
