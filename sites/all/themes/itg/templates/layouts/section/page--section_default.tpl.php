@@ -109,7 +109,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
       $itg_class = 'itg-front';
     }
 ?>
-<div class="itg-layout-container <?php echo $itg_class; ?>">
+<div class="itg-layout-container <?php echo $itg_class; ?> default-section">
     <?php if(isset($widget_data['big_story'])) : ?>
     <div class="row">
         <div class="col-md-12">
