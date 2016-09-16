@@ -14,6 +14,7 @@ var astroFlag = 0;
 var sDateFlag = 1;
 var dynamicId = '';
 var dynamicAudioId = '';
+var colorboxFloag = 1;
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
@@ -515,20 +516,35 @@ var dynamicAudioId = '';
                 jQuery(".field-name-field-service-audio-keyword").hide();
                 jQuery(".field-name-field-service-video-keyword").hide();
                 // for video
-                jQuery(".mobile-video-fields input").on('click', function () {
-                    var uploadId = jQuery(this).attr("id");
-                    var dataId = uploadId.split('-field-service-video-und-0-upload--');
-                    var elementId = dataId[0].split('edit-field-service-content-und-');
-                    dynamicId = '#edit-field-service-content-und-' + elementId[1] + '-field-service-video-keyword--' + dataId[1];
+                jQuery(".mobile-video-fields input").on('click', function (event) {
+                    event.preventDefault();
+                    var uploadName = jQuery(this).attr("name");
+                    var uploadId = jQuery(this).attr("name").split('files[field_service_content_und_')[1].split('_field_service_video_und_0]');
+                    dynamicId ="div[id^='edit-field-service-content-und-" + uploadId + "-field-service-video']";
+                    
+                     // for video seach popup
+                    jQuery('.video-ftp').trigger('click');
+                    jQuery('.video-local').removeClass('active');
+                    jQuery('.used-unused-select').val('unused');
+                    jQuery('.used-unused-select').trigger('change');
+                    jQuery('.time-filter').hide();
+                    
+                    if(colorboxFloag == 1) {
+                        alert('colorboxFloag'+colorboxFloag);
+                         var data = jQuery('.browse-ftp').html();
+                          //  jQuery.colorbox({width: "80%", height: "80%",fixed: true});
+                        jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%", fixed: true, onComplete: function() {
+
+                        }});
+                         colorboxFloag++;
+                    }
+                   
 
                 });
                 // for Audio
                 jQuery(".mobile-audio-fields a").on('click', function () {
-                    var uploadId = jQuery(this).next("input").attr("id");
-                    var dataId = uploadId.split('-field-service-audio-und-0--');
-                    var elementId = dataId[0].split('edit-field-service-content-und-');
-                    var lastElementId = dataId[1].split('-upload-imce-select');
-                    dynamicAudioId = '#edit-field-service-content-und-' + elementId[1] + '-field-service-audio-keyword--' + lastElementId[0];
+                    var uploadId = jQuery(this).next().attr('name').split('field_service_content[und][')[1].split('][field_service_audio][und][0][filefield_imce][button]')[0];
+                    dynamicAudioId ="div[id^='edit-field-service-content-und-" + uploadId + "-field-service-audio']";
                 });
             }
 
@@ -540,6 +556,148 @@ var dynamicAudioId = '';
                     jQuery(dynamicAudioId).show();
                 }
             });
+            
+            
+             /////////////////// for video seach popup //////////////////////////////////////////
+            
+            $('.browse-ftp').hide();
+
+            $('.ftp-server a').click(function() {
+                var vid = $('#edit-video-browse-select .form-radio:checked').val();
+                if (vid !== "" && !$.isNumeric(vid)) {
+                    alert('Please select video file.');
+                } else {
+                    $("input[name=" + uploadName + "]").val(vid);
+                    $("#edit-field-upload-video-und-0-upload-button").mousedown();
+                    $.colorbox.close();
+                    setTimeout(function() {
+                        $('#edit-video-browse-select .form-radio').prop('checked', false);
+                    }, 1000);
+                }
+            });
+            // popup show hide
+            $(".video-local").click(function() {
+                $(".local_browse").show();
+                $(".ftp-server").hide();
+                $(".video_filters").hide();
+                $('.video-ftp').removeClass('active');
+                $(this).addClass('active');
+            });
+            $(".video-ftp").click(function() {
+                $(".local_browse").hide();
+                $(".ftp-server").show();
+                $(".video_filters").show();
+                $(this).addClass('active');
+                $('.video-local').removeClass('active');
+                $('.used-unused-select').val('unused');
+                $('.used-unused-select').trigger('change');
+
+            });
+            $(".browse-local").click(function() {
+                $("#edit-field-upload-video-und-0-upload").show();
+                $("#edit-field-upload-video-und-0-upload-button").show();
+                $("#edit-field-upload-video-und-0-upload").trigger('click');
+                $("#edit-field-upload-video-und-0-upload").change(function() {
+                    $("#edit-field-upload-video-und-0-upload-button").mousedown();
+                    $.colorbox.close();
+                });
+            });
+            // check ajax upload button
+
+            $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                if (form_build_id = settings.url.match(/file\/ajax\/field_upload_video\d*\/(.*)$/)) {
+
+                    if ($('#videogallery-node-form').find("input[name='field_upload_video_und_0_remove_button']").val() == 'Remove') {
+                        $(".browse-ftp-click").hide();
+                        $('.browse-video-form label').hide();
+                        $('#edit-field-upload-video label:first').show();
+
+                    } else {
+
+                        $(".browse-ftp-click").show();
+                        $("input[name='field_video_duration[und][0][value]']").val('');
+
+                        $('.browse-video-form label').show();
+                        $('#edit-field-upload-video label:first').hide();
+                    }
+                }
+
+            });
+            
+            jQuery('document').ready(function() {
+                jQuery('.browse-ftp-click').click(function() {
+                    var old_vid = jQuery("input[name='field_upload_video[und][0][fid]']").val();
+                    if (old_vid != 0) {
+
+                    } else {
+                        jQuery('.video-ftp').trigger('click');
+                        jQuery('.video-local').removeClass('active');
+                        jQuery('.used-unused-select').val('unused');
+                        jQuery('.used-unused-select').trigger('change');
+                        jQuery('.time-filter').hide();
+                        var data = jQuery('.browse-ftp').html();
+                        //  jQuery.colorbox({width: "80%", height: "80%",fixed: true});
+                        jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%", fixed: true, onComplete: function() {
+
+                            }});
+                    }
+                });
+            });
+            
+            // new code
+            jQuery('document').ready(function() {
+                jQuery('.used-unused-select').live('change', function() {
+                    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                    var select_value = jQuery(this).val();
+                    if (select_value == 'used') {
+                        jQuery('.time-filter').show();
+                        jQuery('.time-filter-select').val('-all-');
+                    } else {
+                        jQuery('.time-filter').hide();
+                    }
+                    var base_url = Drupal.settings.basePath;
+                    jQuery.ajax({
+                        url: base_url + '/dailymotion-ftp-videos-post',
+                        type: 'post',
+                        data: {'case': select_value},
+                        success: function(data) {
+                            jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+                            jQuery('.video-options-wrapper').html(data);
+
+                        },
+                        error: function(xhr, desc, err) {
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError:" + err);
+                        }
+                    });
+
+                });
+            });
+
+            // Time filter ajax
+            jQuery('document').ready(function() {
+                jQuery('.time-filter-select').live('change', function() {
+                    jQuery('#loader-data img').show();
+                    var select_value = jQuery(this).val();
+                    var base_url = Drupal.settings.basePath;
+                    jQuery.ajax({
+                        url: base_url + '/dailymotion-video-time-filter',
+                        type: 'post',
+                        data: {'back_time': select_value},
+                        success: function(data) {
+                            jQuery('#loader-data img').hide();
+                            jQuery('.video-options-wrapper').html(data);
+
+                        },
+                        error: function(xhr, desc, err) {
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError:" + err);
+                        }
+                    });
+
+                });
+            });
+
 
         }
     }
