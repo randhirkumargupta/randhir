@@ -613,6 +613,7 @@ function itg_widget_block_view($delta = '') {
       global $base_url;
 
       drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
+      drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
 
       drupal_add_js("jQuery(document).ready(function () {
             jQuery('.carousel').carousel({
@@ -681,7 +682,7 @@ function itg_widget_block_view($delta = '') {
       global $base_url;
 
       drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
-
+      drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
       drupal_add_js("jQuery(document).ready(function () {
             jQuery('.carousel').carousel({
               frontWidth: 645,
