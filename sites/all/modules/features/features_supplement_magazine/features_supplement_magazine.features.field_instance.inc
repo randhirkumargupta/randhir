@@ -120,6 +120,7 @@ function features_supplement_magazine_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 'imce',
+            'itg_image_repository' => 0,
             'plupload' => 'plupload',
             'reference' => 0,
             'remote' => 0,
@@ -832,7 +833,7 @@ Image Size (300 x 225)',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 2,
+      'weight' => 8,
     ),
   );
 
