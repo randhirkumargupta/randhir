@@ -4325,7 +4325,7 @@ footer .footer-copyright {
 .view-archive-story .attachment .search-menu {
   padding-top: 20px;
   white-space: nowrap;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .view-archive-story .attachment .search-menu a {
   padding: 0 10px;
@@ -4817,6 +4817,8 @@ footer .footer-copyright {
 .magazin-lhs-top .magazin-top .magazin-subscribe .next-issue-out span {
   display: block;
   color: #919191;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 .magazin-lhs-top .magazin-bottom ul {
   zoom: 1;
@@ -5183,3 +5185,12 @@ footer .footer-copyright {
 }
 
 /*CSS End for recommended for you home page*/
+.default-video.itg-layout-container .ad-widget, .default-photo.itg-layout-container .ad-widget {
+  border: none;
+}
+.default-video .top_takes_videos_widget span.widget-title, .default-video .watch_right_now_videos_widget span.widget-title, .default-photo .top_takes_videos_widget span.widget-title, .default-photo .watch_right_now_videos_widget span.widget-title {
+  display: none;
+}
+.default-video .sidebar-section-photo, .default-video .sidebar-section-video, .default-photo .sidebar-section-photo, .default-photo .sidebar-section-video {
+  border: 1px solid #dddddd;
+}
