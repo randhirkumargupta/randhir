@@ -1553,8 +1553,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin-left: 5px;
 }
 
-.page-personalization .form-type-textarea .ckeditor_links {
-  display: none;
+.page-personalization .ckeditor_links {
+  display: none !important;
 }
 .page-personalization .block .block-title {
   font: 400 18px/18px Roboto;
