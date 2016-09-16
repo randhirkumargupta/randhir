@@ -3330,7 +3330,7 @@ footer{
         .search-menu{
             padding-top: 20px;            
             white-space: nowrap;
-            overflow-x: scroll;
+            overflow-x: auto;
             a{
                 padding: 0 10px;                                
                 @include display-inline;
@@ -3629,6 +3629,8 @@ footer{
                 span{
                     display: block;
                     color:#919191;
+                    text-transform: uppercase;
+                    font-weight: 500;
                 }
             }
         }
@@ -3953,3 +3955,18 @@ footer{
     }
 }
 /*CSS End for recommended for you home page*/
+.default-video, .default-photo{
+    &.itg-layout-container{
+     .ad-widget{
+          border: none;
+       }   
+    }    
+    .top_takes_videos_widget, .watch_right_now_videos_widget{
+        span.widget-title{
+            display: none;
+        }
+    }
+    .sidebar-section-photo, .sidebar-section-video{
+        border: 1px solid $border-color;
+    }    
+}
