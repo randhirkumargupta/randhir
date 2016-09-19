@@ -510,6 +510,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   height: 100px;
   border-radius: 50%;
   background-color: #d3d6db;
+  overflow: hidden;
 }
 .personalized-user .user-name {
   color: #1a3c8d;
@@ -1006,6 +1007,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   right: 10px;
   margin: 0;
   bottom: 20px;
+}
+#content #block-formblock-ugc .node-ugc-form table td .ajax-progress {
+  display: none;
 }
 #content #block-formblock-ugc .node-ugc-form table + div .field-add-more-submit {
   margin-left: 0;
