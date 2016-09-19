@@ -5774,10 +5774,7 @@ div.node{
 #edit-field-story-extra-large-image{
   .image-widget-data{
     float: left !important;
-      .form-submit[value="Remove"]{
-        left: 400px;
-        }
-    }  
+  }  
 } 
 #page-title{
     span.autosave{
@@ -7102,5 +7099,48 @@ div.node{
       vertical-align: bottom;
       margin-left: 5px;
     }
+  }
+}
+.page-submit-idea{
+  .top-actions{
+    .form-submit{
+      @extend .btn-save;
+    }
+    a.button{
+      height: 34px;
+      padding-top: 9px;
+    }
+  }
+}
+#menu-item-delete-form{
+  #page-title{
+    margin-bottom: 30px;
+  }
+  .form-actions{
+    #edit-submit{
+      @extend .btn;
+      @extend .btn-save;
+    }
+  }
+}
+[id*="menu-edit-item"]{
+  @extend .node-form;
+  .form-type-checkbox{
+      margin: 30px 0;
+      padding: 0 30px;
+      position: relative;
+      > label{
+        float: left;
+        width: 220px;
+      }
+      div.description{
+        @extend .desc-popup;
+        left: 280px;
+      }
+      &:hover{
+        div.description{
+          display: block;
+        }
+      }
   }
 }
