@@ -1,4 +1,5 @@
 <div class="programe-list">
+    <ul class="photo-list">
   <?php
   $url = "#";
   global $base_url;
@@ -11,8 +12,8 @@
       continue;
     }
     ?>
-    <div class="col-md-3 tile-wrapper">
-      <div class="tile">
+    <li class="col-md-3">          
+      <span class="tile">
         <figure>
           <?php if (isset($row['field_story_extra_large_image'])) : ?>
             <?php
@@ -40,16 +41,17 @@
         <?php endif; ?>
 
         <?php if (isset($row['title'])) : ?>
-          <div class="description">
+          
             <?php print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id))); ?>
-          </div>
+          
         <?php endif; ?>
-      </div>
-    </div>
+      </span>
+    </li>
     <?php
     if ($key == 3 && count($rows) > 3) {
       print '<div class="col-md-12"><div class="more">' . $url . '</div></div>';
     }
     ?>
   <?php endforeach; ?>
+    </ul>
 </div>
