@@ -610,6 +610,7 @@ function itg_service_association_after_build($form, &$form_state) {
   $form['field_service_association_title'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_service_list();
   $form_state['redirect'] = 'service-association-listing';
   $settings['service_association_form'] = TRUE;
+  $settings['service_form'] = TRUE;
   drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form['path']['#access'] = FALSE;
@@ -775,6 +776,9 @@ function itg_mobile_service_after_submit($form, $form_state) {
  */
 function itg_mobile_client_after_build($form, &$form_state) {
   $form['path']['#access'] = FALSE;
+  $settings = array();
+  $settings['service_form'] = FALSE;
+  drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form_state['redirect'] = 'clients-listing';
   return $form;
@@ -787,9 +791,11 @@ function itg_mobile_client_after_build($form, &$form_state) {
  * @return array
  */
 function itg_mobile_service_after_build($form, &$form_state) {
+  $settings = array();
   $settings['service_form'] = TRUE;
   drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
+
   $form['path']['#access'] = FALSE;
   $form['field_story_expiry_date']['#attributes'] = array('readonly' => 'readonly');
   $form_state['redirect'] = 'service-listing';
