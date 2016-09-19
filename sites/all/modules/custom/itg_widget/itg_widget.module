@@ -857,11 +857,10 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   }
 
   $syndication_form = sydication_field_filter_views_form();
-
   if (in_array($form['#id'], $syndication_form)) {
     $sydication_field_name = 'field_story_syndication_value_1_op';
     $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
-    if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
+    if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
       $sydication_field_name = 'field_story_syndication_value_op';
       $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
     }
@@ -869,6 +868,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $form[$sydication_field_name]['#options']['all'] = '- Any -';
     $form[$sydication_field_name]['#options']['or'] = 'Yes';
     $form[$sydication_field_name]['#options']['not'] = 'No';
+    
     drupal_add_css('.form-item-field-story-syndication-value-1 , .form-item-field-story-syndication-value {display:none;}', array('type' => 'inline'));
     drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
 
@@ -892,6 +892,8 @@ function sydication_field_filter_views_form() {
       'views-exposed-form-recipe-management-page-1',
       'views-exposed-form-recipe-management-page-2',
       'views-exposed-form-strory-menegment-page-1',
+      'views-exposed-form-photo-gallery-management-page-1',
+      'views-exposed-form-videogallery-management-page-1'
   );
 }
 
