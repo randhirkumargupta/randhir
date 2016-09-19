@@ -769,6 +769,7 @@ function itg_widget_block_view($delta = '') {
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
   $setting = array();
   $queue_flag = "";
   $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
@@ -854,8 +855,44 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   foreach (forms_uses_checked_content_id() as $forms) {
     //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
   }
+
+  $syndication_form = sydication_field_filter_views_form();
+
+  if (in_array($form['#id'], $syndication_form)) {
+    $sydication_field_name = 'field_story_syndication_value_1_op';
+    $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
+    if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
+      $sydication_field_name = 'field_story_syndication_value_op';
+      $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
+    }
+    unset($form[$sydication_field_name]['#options']);
+    $form[$sydication_field_name]['#options']['all'] = '- Any -';
+    $form[$sydication_field_name]['#options']['or'] = 'Yes';
+    $form[$sydication_field_name]['#options']['not'] = 'No';
+    drupal_add_css('.form-item-field-story-syndication-value-1 , .form-item-field-story-syndication-value {display:none;}', array('type' => 'inline'));
+    drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
+
+    $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
+    $url_without_query_string = end(explode('/', $url_chunk[0]));
+
+    $form['reset'] = array(
+        '#type' => 'markup',
+        '#markup' => l("Reset", $url_without_query_string, array("query" => $query_url)),
+    );
+  }
+
   // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
+}
+
+// Exposed filter forms id
+function sydication_field_filter_views_form() {
+  return array(
+      'views-exposed-form-recipe-management-page',
+      'views-exposed-form-recipe-management-page-1',
+      'views-exposed-form-recipe-management-page-2',
+      'views-exposed-form-strory-menegment-page-1',
+  );
 }
 
 /**
@@ -1270,7 +1307,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
       drupal_set_message("Anchor setting not found $link", "error");
     }
   }
-  
+
   if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
     $anchor_tid = variable_get('anchor_id_for_widget');
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');

@@ -245,6 +245,12 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Syndication */
+  $handler->display->display_options['fields']['field_story_syndication']['id'] = 'field_story_syndication';
+  $handler->display->display_options['fields']['field_story_syndication']['table'] = 'field_data_field_story_syndication';
+  $handler->display->display_options['fields']['field_story_syndication']['field'] = 'field_story_syndication';
+  $handler->display->display_options['fields']['field_story_syndication']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_story_syndication']['delta_offset'] = '0';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -384,6 +390,46 @@ function feature_for_recipe_views_default_views() {
     10 => 0,
     9 => 0,
   );
+  /* Filter criterion: Content: Syndication (field_story_syndication) */
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['id'] = 'field_story_syndication_value_1';
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['table'] = 'field_data_field_story_syndication';
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['field'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['value'] = array(
+    'Yes' => 'Yes',
+  );
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['expose']['operator_id'] = 'field_story_syndication_value_1_op';
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['expose']['label'] = 'Syndication';
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['expose']['operator'] = 'field_story_syndication_value_1_op';
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['expose']['identifier'] = 'field_story_syndication_value_1';
+  $handler->display->display_options['filters']['field_story_syndication_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'recipe-management';
   $handler->display->display_options['menu']['title'] = 'Recipe';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -494,6 +540,12 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Syndication */
+  $handler->display->display_options['fields']['field_story_syndication']['id'] = 'field_story_syndication';
+  $handler->display->display_options['fields']['field_story_syndication']['table'] = 'field_data_field_story_syndication';
+  $handler->display->display_options['fields']['field_story_syndication']['field'] = 'field_story_syndication';
+  $handler->display->display_options['fields']['field_story_syndication']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_story_syndication']['delta_offset'] = '0';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -584,6 +636,46 @@ function feature_for_recipe_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+  );
+  /* Filter criterion: Content: Syndication (field_story_syndication) */
+  $handler->display->display_options['filters']['field_story_syndication_value']['id'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['table'] = 'field_data_field_story_syndication';
+  $handler->display->display_options['filters']['field_story_syndication_value']['field'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['value'] = array(
+    'Yes' => 'Yes',
+  );
+  $handler->display->display_options['filters']['field_story_syndication_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['operator_id'] = 'field_story_syndication_value_op';
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['label'] = 'Syndication';
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['operator'] = 'field_story_syndication_value_op';
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['identifier'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['path'] = 'manage-cooking-tips';
   $handler->display->display_options['menu']['title'] = 'Cooking Tips';
@@ -693,6 +785,12 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['label'] = 'Food News Title';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
+  /* Field: Content: Syndication */
+  $handler->display->display_options['fields']['field_story_syndication']['id'] = 'field_story_syndication';
+  $handler->display->display_options['fields']['field_story_syndication']['table'] = 'field_data_field_story_syndication';
+  $handler->display->display_options['fields']['field_story_syndication']['field'] = 'field_story_syndication';
+  $handler->display->display_options['fields']['field_story_syndication']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_story_syndication']['delta_offset'] = '0';
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -783,6 +881,43 @@ function feature_for_recipe_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+  );
+  /* Filter criterion: Content: Syndication (field_story_syndication) */
+  $handler->display->display_options['filters']['field_story_syndication_value']['id'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['table'] = 'field_data_field_story_syndication';
+  $handler->display->display_options['filters']['field_story_syndication_value']['field'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['operator_id'] = 'field_story_syndication_value_op';
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['label'] = 'Syndication';
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['operator'] = 'field_story_syndication_value_op';
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['identifier'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['path'] = 'manage-food-news';
 
