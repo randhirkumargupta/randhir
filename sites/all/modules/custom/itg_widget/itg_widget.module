@@ -1702,6 +1702,8 @@ function itg_widget_so_sorry_content_nid($title) {
 
 /*
  * This will return selected poll for widget
+ *  @param string $content_type content Type.
+ *  @param string $widget_name keyword for auto suggest.
  */
 
 function get_homepage_current_poll_widget($content_type, $widget_name) {
