@@ -1,7 +1,6 @@
 <?php
 /**
  * Get Duplicate Email
- * @param int $mobile
  * @param string $email
  */
 function itg_sso_user_email_check($email) {
@@ -16,7 +15,6 @@ function itg_sso_user_email_check($email) {
 /**
  * Get Duplicate mobile.
  * @param int $mobile
- * @param string $email
  */
 function itg_sso_user_mobile_check($mobile) {
   
@@ -31,6 +29,7 @@ function itg_sso_user_mobile_check($mobile) {
  * Get otp value by mobile or email.
  * @param int $mobile
  * @param string $email
+ * @param string $source
  */
 function itg_sso_reg_get_otp($mobile, $mail, $source) {
   $otp_check = db_select('itg_sso_reg_otp_info', 'otv')->fields('otv', array('otp'));
@@ -81,6 +80,8 @@ function itg_sso_reg_otp_callback() {
 /**
  * Implements itg_sso_otp_check
  * @param int $otpmobile
+ * @param string $email
+ * @param string $source
  */
 function itg_sso_otp_check($otpmobile, $email, $source) {
   
@@ -108,6 +109,7 @@ function itg_sso_otp_check($otpmobile, $email, $source) {
  * Implements itg_sso_otp_delete
  * @param int $mobile
  * @param string $email
+ * @param string $source
  */
 function itg_sso_otp_delete($mail, $mobile, $source) {
 
@@ -166,6 +168,7 @@ function itg_sso_user_activate_callback() {
  * @param int $uid
  * @param string $email
  * @param int $rand_otp
+ * @param string $rand_otp
  */
 function itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, $source) {
   $otp = db_insert('itg_sso_reg_otp_info') // Table name no longer needs {}
