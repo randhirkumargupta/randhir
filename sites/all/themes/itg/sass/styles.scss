@@ -3651,6 +3651,9 @@ footer{
     }
 }
 .magazin-section{
+    .col-md-6:nth-child(2n+1){
+        clear:left;
+    }
     .section-ordering{
         @include pos(relative);
     }
