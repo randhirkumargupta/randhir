@@ -703,14 +703,14 @@
 
   /*End category wise content list css*/
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li {
     padding: 15px;
     width: 25%;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1) {
     clear: left;
   }
 
@@ -805,6 +805,10 @@
 
   /*CSS End magazine-calander RHS*/
   /*CSS Start So sorry page*/
+  .page-sosorry #block-itg-ads-ad-right-sidebar-1 {
+    padding: 30px 34px 30px 34px;
+  }
+
   #block-itg-layout-manager-header-sosorry-block .sosory-header .sosorryitg {
     padding: 40px 30px 0 0;
   }
@@ -844,12 +848,23 @@
   }
 
   /*CSS End RHS add block*/
+  /*CSS Start Home page Recommended-for-you */
   .recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing .pic {
     width: auto;
   }
   .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next, .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-prev {
     display: block !important;
   }
+
+  /*CSS End Home page Recommended-for-you */
+  /* CSS Start For Program Page */
+  .programe-container .program-row .programe-title {
+    font-size: 22px;
+    font-size: 1.375rem;
+    font-weight: 700;
+  }
+
+  /* CSS End For Program Page */
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {

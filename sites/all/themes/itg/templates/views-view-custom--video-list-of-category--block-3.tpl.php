@@ -16,7 +16,7 @@
             print l($img, 'node/' . $row['nid'], array('html' => TRUE));
           }
           ?>
-          <figcaption><i class="fa fa-camera" ></i> <?php print $row['field_video_duration']; ?></figcaption>
+          <figcaption><i class="fa fa-play-circle" ></i> <?php print $row['field_video_duration']; ?></figcaption>
 
         </figure>
 
