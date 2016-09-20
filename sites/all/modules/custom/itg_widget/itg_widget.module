@@ -763,89 +763,132 @@ function itg_widget_block_view($delta = '') {
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
-    $setting = array();
-    $queue_flag = "";
-    $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
-    $current_display = isset($form_state['view']->current_display) ? $form_state['view']->current_display : "";
-    /* Load all nodes queues */
-    $queues = nodequeue_load_queues(nodequeue_get_all_qids());
-    switch ($view_name) {
-        // top story
-        case 'story_widget':
-            if ($current_display == 'most_popular') {
-                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
-                $queue_flag = 5; // most popular
-            } elseif ($current_display == 'trending_videos') {
-                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-                $queue_flag = 4; // top story widget qid
-            } elseif ($current_display == 'top_takes_video') {
-                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-                $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('top_takes_videos'); // top story widget qid
-            } elseif ($current_display == 'watch_right_now') {
-                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-                $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('watch_right_now'); // top story widget qid
-            } else {
-                $queue_flag = 1; // trending_videos widget qid
-            }
-            break;
-        // home page feature
-        case 'home_page_feature_widget':
-            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
-            $queue_flag = 2; // home page feature qid
-            break;
-        // We may suggest
-        case 'we_may_suggest':
-            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
-            $queue_flag = 3; // home page feature qid
-            break;
-        case 'widget_anchors_listing':
-            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
-            $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('widget_anchor'); // anchor widget nodequeue
-            break;
+  global $base_url;
+  $setting = array();
+  $queue_flag = "";
+  $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
+  $current_display = isset($form_state['view']->current_display) ? $form_state['view']->current_display : "";
+  /* Load all nodes queues */
+  $queues = nodequeue_load_queues(nodequeue_get_all_qids());
+  switch ($view_name) {
+    // top story
+    case 'story_widget':
+      if ($current_display == 'most_popular') {
+        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
+        $queue_flag = 5; // most popular
+      }
+      elseif ($current_display == 'trending_videos') {
+        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+        $queue_flag = 4; // top story widget qid
+      }
+      elseif ($current_display == 'top_takes_video') {
+        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+        $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('top_takes_videos'); // top story widget qid
+      }
+      elseif ($current_display == 'watch_right_now') {
+        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+        $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('watch_right_now'); // top story widget qid
+      }
+      else {
+        $queue_flag = 1; // trending_videos widget qid
+      }
+      break;
+    // home page feature
+    case 'home_page_feature_widget':
+      // watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
+      $queue_flag = 2; // home page feature qid
+      break;
+    // We may suggest
+    case 'we_may_suggest':
+      // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+      $queue_flag = 3; // home page feature qid
+      break;
+    case 'widget_anchors_listing':
+      // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+      $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('widget_anchor'); // anchor widget nodequeue
+      break;
 
-        case 'photo_carousel_widget':
-            if ($current_display == 'photo_carousel_list') {
-                //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
-                $queue_flag = get_nodequeue_load_queue_by_name('photo_carousel');
-                ; // photo carousel list widget qid
-            }
-            if ($current_display == 'video_carousel_list') {
-                //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Video Carousel video");
-                $queue_flag = get_nodequeue_load_queue_by_name('video_carousel'); // video carousel list widget qid
-            }
+    case 'photo_carousel_widget':
+      if ($current_display == 'photo_carousel_list') {
+        //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
+        $queue_flag = get_nodequeue_load_queue_by_name('photo_carousel');
+        ; // photo carousel list widget qid
+      }
+      if ($current_display == 'video_carousel_list') {
+        //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Video Carousel video");
+        $queue_flag = get_nodequeue_load_queue_by_name('video_carousel'); // video carousel list widget qid
+      }
 
-            break;
+      break;
+  }
+  if (!empty($queues[$queue_flag])) {
+    $setting['name'] = $queues[$queue_flag]->name;
+    $setting['qid'] = $queues[$queue_flag]->qid;
+    $setting['title'] = $queues[$queue_flag]->title;
+    // add js for setting
+    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
+    // pass setting to js for bulk operation
+    drupal_add_js(array('itg_widget' => array('data' => $setting)), 'setting');
+  }
+  // Alter form for confirm message during bulk operation.
+  // Below forms are thoese which are not doing action for nodequeue.
+  // Nodequeue from are being altered form itg_widget.main.js.
+  $form_id_array_to_alter = array(
+      'views_form_section_wise_draggable_content_order_big_story_format',
+      'views_form_section_wise_draggable_content_order_dont_miss_content',
+      'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
+      'views_form_section_wise_draggable_content_order_page',
+  );
+
+
+  if (in_array($form_id, $form_id_array_to_alter)) {
+    $form['actions']['submit']['#value'] = t('Confirm');
+  }
+
+
+  foreach (forms_uses_checked_content_id() as $forms) {
+    //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
+  }
+
+  $syndication_form = sydication_field_filter_views_form();
+  if (in_array($form['#id'], $syndication_form)) {
+    $sydication_field_name = 'field_story_syndication_value_1_op';
+    $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
+    if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
+      $sydication_field_name = 'field_story_syndication_value_op';
+      $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
     }
-    if (!empty($queues[$queue_flag])) {
-        $setting['name'] = $queues[$queue_flag]->name;
-        $setting['qid'] = $queues[$queue_flag]->qid;
-        $setting['title'] = $queues[$queue_flag]->title;
-        // add js for setting
-        drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
-        // pass setting to js for bulk operation
-        drupal_add_js(array('itg_widget' => array('data' => $setting)), 'setting');
-    }
-    // Alter form for confirm message during bulk operation.
-    // Below forms are thoese which are not doing action for nodequeue.
-    // Nodequeue from are being altered form itg_widget.main.js.
-    $form_id_array_to_alter = array(
-        'views_form_section_wise_draggable_content_order_big_story_format',
-        'views_form_section_wise_draggable_content_order_dont_miss_content',
-        'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
-        'views_form_section_wise_draggable_content_order_page',
+    unset($form[$sydication_field_name]['#options']);
+    $form[$sydication_field_name]['#options']['all'] = '- Any -';
+    $form[$sydication_field_name]['#options']['or'] = 'Yes';
+    $form[$sydication_field_name]['#options']['not'] = 'No';
+    
+    drupal_add_css('.form-item-field-story-syndication-value-1 , .form-item-field-story-syndication-value {display:none;}', array('type' => 'inline'));
+    drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
+
+    $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
+    $url_without_query_string = end(explode('/', $url_chunk[0]));
+
+    $form['reset'] = array(
+        '#type' => 'markup',
+        '#markup' => l("Reset", $url_without_query_string, array("query" => $query_url)),
     );
+  }
 
+  // Assign deafult values in case of checkbox are checked.
+  $form = get_sessions_of_ticked_nodes($form);
+}
 
-    if (in_array($form_id, $form_id_array_to_alter)) {
-        $form['actions']['submit']['#value'] = t('Confirm');
-    }
-
-
-    foreach (forms_uses_checked_content_id() as $forms) {
-        //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
-    }
-    // Assign deafult values in case of checkbox are checked.
-    $form = get_sessions_of_ticked_nodes($form);
+// Exposed filter forms id
+function sydication_field_filter_views_form() {
+  return array(
+      'views-exposed-form-recipe-management-page',
+      'views-exposed-form-recipe-management-page-1',
+      'views-exposed-form-recipe-management-page-2',
+      'views-exposed-form-strory-menegment-page-1',
+      'views-exposed-form-photo-gallery-management-page-1',
+      'views-exposed-form-videogallery-management-page-1'
+  );
 }
 
 /**
