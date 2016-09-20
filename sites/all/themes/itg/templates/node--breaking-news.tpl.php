@@ -26,7 +26,7 @@ if (!empty($content)):
     <h1><span><?php print ($type) ?></span>: <?php print ($title) ?></h1>
     <p class="short-discription"> <?php print ($node->field_label['und']['0']['value'])?></p>
     <span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span>
-    
+     <div class="iframe-video">
         <?php
         if ($type == 'Live Blog') {
           $useragent=$_SERVER['HTTP_USER_AGENT'];
@@ -44,9 +44,9 @@ if (!empty($content)):
               $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
               if (filter_var($live_url, FILTER_VALIDATE_URL)) {
                 ?>
-                <div class="iframe-video">
+               
                 <iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>
-                </div>
+                
                 <?php
               }
               else {
@@ -56,6 +56,7 @@ if (!empty($content)):
             }
           }
           ?>
+                </div>
     <!--<iframe width="100%" height="360" frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="http://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;autoPlay=true&amp;mute=false"></iframe>-->
     
     <div class="live-hightlight">

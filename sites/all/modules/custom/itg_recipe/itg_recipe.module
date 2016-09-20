@@ -325,10 +325,10 @@ function itg_recipe_views_pre_render(&$view) {
   //Add "Create recipe" button on listing page of recipe
   if ($view->name == "recipe_management") {
     $header_content_recipe = '<span class="count">Count('.$view->total_rows.')&nbsp;</span>';
-    $header_content_recipe .= '<span class="manage_recipe_view_menu">' .l(t("Recipes"), "recipe-management"). '&nbsp;</span>';
-    $header_content_recipe .= '<span class="manage_cooking_tips_view_menu">' . l(t('Cooking Tips'), 'manage-cooking-tips') . '&nbsp;</span>';
+    $header_content_recipe .= '<span class="manage_recipe_view_menu">' .l(t("Recipes"), "recipe-management" , array("query"=>array("title"=> "","field_recipe_content_type_value"=>"All","field_story_syndication_value_1_op"=>"all","field_story_syndication_value_1"=>"Yes"))). '&nbsp;</span>';
+    $header_content_recipe .= '<span class="manage_cooking_tips_view_menu">' . l(t('Cooking Tips'), 'manage-cooking-tips' , array("query"=>array("title"=> "","field_recipe_content_type_value"=>"All","field_story_syndication_value_op"=>"all","field_story_syndication_value"=>"Yes"))) . '&nbsp;</span>';
     $header_content_recipe .= '<span class="create_cooking_tips">' . l(t('Create Cooking Tips'), 'node/add/cooking-tips', array('query' => array('destination' => 'manage-cooking-tips'))) . '&nbsp;</span>';
-    $header_content_recipe .= '<span class="manage_cooking_tips_view_menu">' . l(t('Food News'), 'manage-food-news') . '&nbsp;</span>';
+    $header_content_recipe .= '<span class="manage_cooking_tips_view_menu">' . l(t('Food News'), 'manage-food-news' , array("query"=>array("title"=> "","field_recipe_content_type_value"=>"All","field_story_syndication_value_op"=>"all","field_story_syndication_value"=>"Yes"))) . '&nbsp;</span>';
     $header_content_recipe .= '<span class="create_cooking_tips">' . l(t('Create Food News'), 'node/add/food-news', array('query' => array('destination' => 'manage-food-news'))) . '&nbsp;</span>';
     $header_content_recipe .= l(t('Create Recipe'), 'node/add/recipe', array('query' => array('destination' => 'recipe-management')));
     $view->attachment_before = $header_content_recipe;

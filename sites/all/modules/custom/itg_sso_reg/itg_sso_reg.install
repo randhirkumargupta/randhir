@@ -1,0 +1,110 @@
+<?php
+/**
+ * @file
+ * Install functions for the sso otp.
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store file information associated with a node
+ * @return array
+ */
+function itg_sso_reg_schema() {
+  $schema['itg_sso_reg_otp_info'] = array(
+    'description' => 'Table for store information related to itg_sso otp.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a table.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'mobile' => array(
+        'description' => 'Mobile no.',
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'email' => array(
+        'description' => 'Email',
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'source' => array(
+        'description' => 'source',
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'otp' => array(
+        'description' => 'otp',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'otp_count' => array(
+        'description' => 'otp count',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => t('Created otp date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+      
+    ),
+    'primary key' => array('id'),
+  );
+  
+  
+  $schema['itg_user_activate_info'] = array(
+    'description' => 'Table for store information related to itg_sso user activation.',
+    'fields' => array(
+      'aid' => array(
+        'description' => 'The primary identifier for a table.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'uid',
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'description' => 'status',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => t('Created user date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+      'updated' => array(
+        'description' => t('update activation date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+      
+    ),
+    'primary key' => array('aid'),
+  );
+
+  return $schema;
+}
