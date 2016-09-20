@@ -1108,9 +1108,11 @@ jQuery(".primary-radio").each(function()
 if (getvaluehtml != "")
     {
     getvaluehtml="<div class=prim-html>"+getvaluehtml+"</div>";
-       jQuery(".prim-html").remove()
+       jQuery(".prim-html").remove();
+         setTimeout(function(){ 
         jQuery(".form-item-field-primary-category-html-und-0-value").append(getvaluehtml).hide();
-        }
+       
+}, 500);}
         var getdattext = jQuery(this).parent().siblings("td").text();
         jQuery(document).on("ajaxComplete", function(event, xhr, settings) {
             if (settings.url.indexOf("hierarchical_select_ajax") >= 0) {

@@ -1,0 +1,8 @@
+name = ITG SSO User Registration
+description = "ITG SSO User Registration Management Module"
+core = 7.x
+package = ITG
+
+files[] = itg_sso_reg.module
+
+

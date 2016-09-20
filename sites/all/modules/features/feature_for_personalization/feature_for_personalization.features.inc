@@ -33,8 +33,6 @@ function feature_for_personalization_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'weight' => 0,
-    'anon_display' => '',
-    'anon_message' => '',
     'show_in_links' => array(
       'full' => 'full',
       'teaser' => 'teaser',
@@ -49,6 +47,8 @@ function feature_for_personalization_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
+    'anon_display' => '',
+    'anon_message' => '',
     'module' => 'feature_for_personalization',
     'locked' => array(
       0 => 'name',
@@ -74,8 +74,6 @@ function feature_for_personalization_flag_default_flags() {
     'unflag_denied_text' => '',
     'link_type' => 'normal',
     'weight' => 0,
-    'anon_display' => 1,
-    'anon_message' => '<a href="[login-url]" class="itg-flag-login">Watch</a>',
     'show_in_links' => array(
       'full' => 'full',
       'teaser' => 'teaser',
@@ -90,6 +88,8 @@ function feature_for_personalization_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
+    'anon_display' => 1,
+    'anon_message' => '<a href="[login-url]" class="itg-flag-login">Watch</a>',
     'module' => 'feature_for_personalization',
     'locked' => array(
       0 => 'name',

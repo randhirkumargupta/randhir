@@ -232,6 +232,9 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
 
       foreach ($form['field_service_content'][LANGUAGE_NONE] as $key => $fieldcollection) {
         if (is_numeric($key)) {
+
+          $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video']['#attributes']['class'][] = 'mobile-video-fields';
+          $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_audio']['#attributes']['class'][] = 'mobile-audio-fields';
           $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video'][LANGUAGE_NONE][0]['#upload_validators']['itg_custom_video_field_validate'] = array(1, 2);
         }
       }
@@ -295,6 +298,7 @@ function itg_mobile_vas_service_content_submit($form, &$form_state) {
   else {
     $op = 'updated';
   }
+
   $node_title = isset($form_state['node']->title) ? $form_state['node']->title : $node->title;
   drupal_set_message(t('Vas Service Content @mobile_title has been @op.', array('@mobile_title' => $node_title, '@op' => $op)), 'status');
   $form_state['redirect'] = 'service-content-listing';
@@ -331,7 +335,6 @@ function itg_mobile_services_node_update($node) {
 function save_cron_details_of_mobile_services($node) {
   // Load itg_mobile_services.inc from the node module.
   module_load_include('inc', 'itg_mobile_services', 'includes/itg_mobile_services');
-  //p($node);
   itg_mobile_services_feed_generator_of_contents($node);
 }
 
@@ -607,6 +610,7 @@ function itg_service_association_after_build($form, &$form_state) {
   $form['field_service_association_title'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_service_list();
   $form_state['redirect'] = 'service-association-listing';
   $settings['service_association_form'] = TRUE;
+  $settings['service_form'] = TRUE;
   drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form['path']['#access'] = FALSE;
@@ -682,6 +686,30 @@ function itg_service_content_after_build($form, &$form_state) {
     $settings['service_content_edit_mode'] = FALSE;
   }
 
+
+  foreach ($form['field_service_content'][LANGUAGE_NONE] as $key => $fieldcollection) {
+    if (is_numeric($key)) {
+
+      $form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video_keyword']['#attributes']['class'][] = 'file-display';
+      if ($form['nid']['#value']) {
+        // for hide video keyword text field
+        if ($form['field_service_content'][LANGUAGE_NONE][$key]['field_service_video'][LANGUAGE_NONE][0]['fid']['#value']) {
+          drupal_add_js("jQuery(document).ready(function() {  jQuery( '#edit-field-service-content-und-$key-field-service-video-keyword' ).show(); });", 'inline');
+        }
+        else {
+          drupal_add_js("jQuery(document).ready(function() {  jQuery( '#edit-field-service-content-und-$key-field-service-video-keyword' ).hide(); });", 'inline');
+        }
+        // for hide audio keyword text field
+        if ($form['field_service_content'][LANGUAGE_NONE][$key]['field_service_audio'][LANGUAGE_NONE][0]['fid']['#value']) {
+          drupal_add_js("jQuery(document).ready(function() {  jQuery( '#edit-field-service-content-und-$key-field-service-audio-keyword' ).show(); });", 'inline');
+        }
+        else {
+          drupal_add_js("jQuery(document).ready(function() { jQuery( '#edit-field-service-content-und-$key-field-service-audio-keyword' ).hide(); });", 'inline');
+        }
+      }
+    }
+  }
+
   $countchar = itg_countchar_validation($association_nid);
   $settings['countchar'] = $countchar;
 
@@ -748,6 +776,9 @@ function itg_mobile_service_after_submit($form, $form_state) {
  */
 function itg_mobile_client_after_build($form, &$form_state) {
   $form['path']['#access'] = FALSE;
+  $settings = array();
+  $settings['service_form'] = FALSE;
+  drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form_state['redirect'] = 'clients-listing';
   return $form;
@@ -760,9 +791,11 @@ function itg_mobile_client_after_build($form, &$form_state) {
  * @return array
  */
 function itg_mobile_service_after_build($form, &$form_state) {
+  $settings = array();
   $settings['service_form'] = TRUE;
   drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
+
   $form['path']['#access'] = FALSE;
   $form['field_story_expiry_date']['#attributes'] = array('readonly' => 'readonly');
   $form_state['redirect'] = 'service-listing';
@@ -887,7 +920,6 @@ function itg_mobile_services_custom_callback($form, &$form_state) {
 function itg_mobile_services_xml_callback($form, &$form_state) {
   $delivery_mode = $form_state['input']['field_service_delivery_mode'][LANGUAGE_NONE];
   $astro_service = $form_state['input']['field_astro_service'][LANGUAGE_NONE];
-  // watchdog("arun", '<pre>'. print_r($form_state['input'], TRUE) .'</pre>');
   if ($astro_service) {
     $file_path = drupal_get_path('module', 'itg_mobile_services') . '/feeds/astro/';
   }
@@ -1022,7 +1054,6 @@ function itg_countchar_validation($nid) {
  * {@inheritdoc}
  */
 function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-// TODO: Review again
   switch ($form['#id']) {
     case 'views-exposed-form-clients-details-page':
       $form['field_client_title_tid']['#attributes'] = array(
@@ -1270,10 +1301,17 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
     $date_key_arr = explode(' ', $service_details[$entity_id]->field_service_content_date[LANGUAGE_NONE][0]['value']);
     $date_key = $date_key_arr[0];
     $service_content_details[$date_key]['startdate'] = $service_details[$entity_id]->field_service_content_date[LANGUAGE_NONE][0]['value'];
+    $service_content_details[$date_key]['title'] = $service_details[$entity_id]->field_client_short_description[LANGUAGE_NONE][0]['value'];
     $service_content_details[$date_key]['content'] = $service_details[$entity_id]->field_story_expert_description[LANGUAGE_NONE][0]['value'];
     $service_content_details[$date_key]['image'] = $service_details[$entity_id]->field_story_large_image[LANGUAGE_NONE][0]['fid'];
+    $service_content_details[$date_key]['image_description'] = $service_details[$entity_id]->field_story_large_image[LANGUAGE_NONE][0]['alt'];
+    $service_content_details[$date_key]['image_keyword'] = $service_details[$entity_id]->field_story_large_image[LANGUAGE_NONE][0]['title'];
     $service_content_details[$date_key]['video'] = $service_details[$entity_id]->field_service_video[LANGUAGE_NONE][0]['fid'];
+    $service_content_details[$date_key]['video_description'] = $service_details[$entity_id]->field_service_video[LANGUAGE_NONE][0]['description'];
+    $service_content_details[$date_key]['video_keyword'] = $service_details[$entity_id]->field_service_video_keyword[LANGUAGE_NONE][0]['value'];
     $service_content_details[$date_key]['audio'] = $service_details[$entity_id]->field_service_audio[LANGUAGE_NONE][0]['fid'];
+    $service_content_details[$date_key]['audio_description'] = $service_details[$entity_id]->field_service_audio[LANGUAGE_NONE][0]['description'];
+    $service_content_details[$date_key]['audio_keyword'] = $service_details[$entity_id]->field_service_audio_keyword[LANGUAGE_NONE][0]['value'];
     $service_content_details[$date_key]['entity_id'] = $entity_id;
   }
   $i = -1;
@@ -1292,10 +1330,19 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
       else {
         $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $service_content_details[$schema_tomorrow]['content'];
       }
-
+      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_client_short_description[LANGUAGE_NONE][0]['value'] = $service_content_details[$schema_tomorrow]['title'];
       $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $service_content_details[$schema_tomorrow]['image'];
+      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_large_image[LANGUAGE_NONE][0]['alt'] = $service_content_details[$schema_tomorrow]['image_description'];
+      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_story_large_image[LANGUAGE_NONE][0]['title'] = $service_content_details[$schema_tomorrow]['image_keyword'];
+      // for Audio
       $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['fid'] = $service_content_details[$schema_tomorrow]['video'];
+      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video[LANGUAGE_NONE][0]['description'] = $service_content_details[$schema_tomorrow]['video_description'];
+      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_video_keyword[LANGUAGE_NONE][0]['value'] = $service_content_details[$schema_tomorrow]['video_keyword'];
+      // for Audio
       $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_audio[LANGUAGE_NONE][0]['fid'] = $service_content_details[$schema_tomorrow]['audio'];
+      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_audio[LANGUAGE_NONE][0]['description'] = $service_content_details[$schema_tomorrow]['audio_description'];
+      $form_state['field']['field_service_content'][LANGUAGE_NONE]['entity'][$key]->field_service_audio_keyword[LANGUAGE_NONE][0]['value'] = $service_content_details[$schema_tomorrow]['audio_keyword'];
+
       $i++;
     }
   }

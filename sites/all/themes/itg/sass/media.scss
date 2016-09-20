@@ -586,7 +586,7 @@ section.sidebar{
 /*End category wise content list css*/
 
 /*CSS Starts Photo landing page*/
-.view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry{
+.view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content{
     .view-content{      
         .photo-list{
             li{
@@ -693,16 +693,31 @@ section.sidebar{
                 top: 38px;
                 font-size: 30px;
            }
-       }      
+       }  
+       .slick-thumbs{
+           .slick-prev, .slick-next{
+               background: transparent;
+               margin-top: -55px;
+               color:#fff;
+               &:hover{
+               background: transparent;    
+               }
+           }
+       }
 }
 /*CSS End Photo landing page*/
 /*CSS Start magazine-calander RHS*/
-/*#block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1{    
-    padding: 50px 30px 20px 30px;
-}*/
+#block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1{    
+    padding: 50px 34px 20px 34px;
+}
 /*CSS End magazine-calander RHS*/
 
 /*CSS Start So sorry page*/
+.page-sosorry{
+    #block-itg-ads-ad-right-sidebar-1{
+        padding: 30px 34px 30px 34px;
+    }
+}
 #block-itg-layout-manager-header-sosorry-block{
     .sosory-header .sosorryitg{
         padding: 40px 30px 0 0;   
@@ -740,6 +755,39 @@ section.sidebar{
     padding: 30px 34px 0;
 }
 /*CSS End RHS add block*/
+
+/*CSS Start Home page Recommended-for-you */
+.recommended-for-you{
+    #block-itg-widget-personlization{
+        ul.common-list{                                 
+            li.recom-listing{
+                .pic{
+                    width: auto;
+                }
+            }
+        }
+        .recommended-slider{
+          button.slick-next, button.slick-prev{
+            display: block !important;
+            }   
+        }     
+    } 
+}
+/*CSS End Home page Recommended-for-you */
+
+/* CSS Start For Program Page */
+.programe-container{
+    .program-row{
+        .programe-title{
+            @include font(22px, null, 700);
+        }
+    }
+}
+/* CSS End For Program Page */
+
+
+
+
 }
 /*End CSS Desktop version*/
 

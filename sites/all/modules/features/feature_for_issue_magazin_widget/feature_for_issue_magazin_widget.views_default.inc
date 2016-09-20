@@ -22,12 +22,13 @@ function feature_for_issue_magazin_widget_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Issue Magazin widget List';
+  $handler->display->display_options['title'] = 'Issue Magazine widget List';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'input_required';
+  $handler->display->display_options['exposed_form']['options']['text_input_required'] = '';
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
@@ -121,10 +122,10 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'issue_magazin_widget';
 
-  /* Display: Content For : Issue base magazin widget */
-  $handler = $view->new_display('page', 'Content For : Issue base magazin widget', 'issue_base_magazin_widget');
+  /* Display: Content For : Issue base magazine widget */
+  $handler = $view->new_display('page', 'Content For : Issue base magazine widget', 'issue_base_magazin_widget');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Issue Base Magazin Widget';
+  $handler->display->display_options['title'] = 'Issue Base Magazine Widget';
   $handler->display->display_options['display_description'] = 'Content For : Issue base magazin widget';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
@@ -137,6 +138,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'input_required';
+  $handler->display->display_options['exposed_form']['options']['text_input_required'] = '';
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
@@ -407,8 +409,8 @@ function feature_for_issue_magazin_widget_views_default_views() {
   );
   $handler->display->display_options['path'] = 'issue-base-magazin-widget';
 
-  /* Display: Issue Magazin widget List */
-  $handler = $view->new_display('page', 'Issue Magazin widget List', 'issue_magazin_widget_list');
+  /* Display: Issue Magazine widget List */
+  $handler = $view->new_display('page', 'Issue Magazine widget List', 'issue_magazin_widget_list');
   $handler->display->display_options['display_description'] = 'Issue Magazin widget List';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
@@ -494,6 +496,11 @@ print \' <a href="move-dont-miss-widget-node/issue_magazin_widget/0/0/\'.$row->n
   $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

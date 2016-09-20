@@ -2500,7 +2500,7 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['label'] = 'Byline\'s Email id';
-  /* Field: Content: Reporter Twitter Handle */
+  /* Field: Content: Twitter Handle */
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['id'] = 'field_reporter_twitter_handle';
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['table'] = 'field_data_field_reporter_twitter_handle';
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['field'] = 'field_reporter_twitter_handle';
@@ -2804,7 +2804,14 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Anchors Order Reorder';
   $handler->display->display_options['defaults']['access'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    5 => '5',
+    6 => '6',
+    20 => '20',
+    10 => '10',
+  );
   $handler->display->display_options['defaults']['cache'] = FALSE;
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
@@ -2984,6 +2991,14 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['filters']['name']['field'] = 'name';
   $handler->display->display_options['filters']['name']['relationship'] = 'nodequeue_rel';
   $handler->display->display_options['filters']['name']['value'] = 'widget_anchor';
+  /* Filter criterion: Content: Occupation (field_celebrity_pro_occupation) */
+  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['id'] = 'field_celebrity_pro_occupation_tid';
+  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['table'] = 'field_data_field_celebrity_pro_occupation';
+  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['field'] = 'field_celebrity_pro_occupation_tid';
+  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['value'] = array(
+    0 => '399',
+  );
+  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['vocabulary'] = 'itg_occupation';
   $handler->display->display_options['path'] = 'anchor-list-order-reorder';
 
   /* Display: Anchors Display Page */
@@ -3099,6 +3114,13 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Nodequeue: Queue machine name */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'nodequeue_queue';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['name']['value'] = 'widget_anchor';
+  $handler->display->display_options['filters']['name']['group'] = 1;
   /* Filter criterion: Content: Occupation (field_celebrity_pro_occupation) */
   $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['id'] = 'field_celebrity_pro_occupation_tid';
   $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['table'] = 'field_data_field_celebrity_pro_occupation';
@@ -3108,13 +3130,6 @@ print \' <a href="move-dont-miss-widget-node/big_story_format_widget/0/0/\'.$dat
   );
   $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['vocabulary'] = 'itg_occupation';
-  /* Filter criterion: Nodequeue: Queue machine name */
-  $handler->display->display_options['filters']['name']['id'] = 'name';
-  $handler->display->display_options['filters']['name']['table'] = 'nodequeue_queue';
-  $handler->display->display_options['filters']['name']['field'] = 'name';
-  $handler->display->display_options['filters']['name']['relationship'] = 'nodequeue_rel';
-  $handler->display->display_options['filters']['name']['value'] = 'widget_anchor';
-  $handler->display->display_options['filters']['name']['group'] = 1;
   $handler->display->display_options['path'] = 'anchors-list';
   $export['widget_anchors_listing'] = $view;
 

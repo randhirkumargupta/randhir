@@ -62,7 +62,7 @@ h4 {
   line-height: 18px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul {
+.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul {
   list-style-type: none;
 }
 
@@ -3868,34 +3868,34 @@ footer .footer-copyright {
   padding-left: 0;
 }
 
-.view-video-list-of-category .views-exposed-form, .view-video-landing-header .views-exposed-form, .view-so-sorry .views-exposed-form {
+.view-video-list-of-category .views-exposed-form, .view-video-landing-header .views-exposed-form, .view-so-sorry .views-exposed-form, .view-programme-content .views-exposed-form {
   display: none;
 }
-.view-video-list-of-category .view-content .photo-list, .view-video-landing-header .view-content .photo-list, .view-so-sorry .view-content .photo-list {
+.view-video-list-of-category .view-content .photo-list, .view-video-landing-header .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list {
   list-style: none;
   margin: 0 -10px;
   zoom: 1;
 }
-.view-video-list-of-category .view-content .photo-list:before, .view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:before, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:before, .view-so-sorry .view-content .photo-list:after {
+.view-video-list-of-category .view-content .photo-list:before, .view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:before, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:before, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:before, .view-programme-content .view-content .photo-list:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:after {
+.view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:after {
   clear: both;
 }
-.view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-so-sorry .view-content .photo-list li {
+.view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li {
   padding: 15px 10px;
   float: left;
   width: 50%;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure, .view-video-landing-header .view-content .photo-list li .tile figure, .view-so-sorry .view-content .photo-list li .tile figure {
+.view-video-list-of-category .view-content .photo-list li .tile figure, .view-video-landing-header .view-content .photo-list li .tile figure, .view-so-sorry .view-content .photo-list li .tile figure, .view-programme-content .view-content .photo-list li .tile figure {
   max-width: 100%;
   overflow: hidden;
   position: relative;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure figcaption, .view-video-landing-header .view-content .photo-list li .tile figure figcaption, .view-so-sorry .view-content .photo-list li .tile figure figcaption {
+.view-video-list-of-category .view-content .photo-list li .tile figure figcaption, .view-video-landing-header .view-content .photo-list li .tile figure figcaption, .view-so-sorry .view-content .photo-list li .tile figure figcaption, .view-programme-content .view-content .photo-list li .tile figure figcaption {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -3905,17 +3905,17 @@ footer .footer-copyright {
   font-size: 12px;
   font-family: Roboto;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-video-landing-header .view-content .photo-list li .tile figure figcaption .fa, .view-so-sorry .view-content .photo-list li .tile figure figcaption .fa {
+.view-video-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-video-landing-header .view-content .photo-list li .tile figure figcaption .fa, .view-so-sorry .view-content .photo-list li .tile figure figcaption .fa, .view-programme-content .view-content .photo-list li .tile figure figcaption .fa {
   font-size: 14px;
   margin-right: 5px;
 }
-.view-video-list-of-category .view-content .photo-list li .tile .posted-on, .view-video-landing-header .view-content .photo-list li .tile .posted-on, .view-so-sorry .view-content .photo-list li .tile .posted-on {
+.view-video-list-of-category .view-content .photo-list li .tile .posted-on, .view-video-landing-header .view-content .photo-list li .tile .posted-on, .view-so-sorry .view-content .photo-list li .tile .posted-on, .view-programme-content .view-content .photo-list li .tile .posted-on {
   display: block;
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
 }
-.view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a, .view-so-sorry .view-content .photo-list li .tile a {
+.view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a, .view-so-sorry .view-content .photo-list li .tile a, .view-programme-content .view-content .photo-list li .tile a {
   color: #494949;
 }
 
@@ -3974,8 +3974,19 @@ footer .footer-copyright {
   display: block;
 }
 
-.view-photo-list-of-category .view-filters {
+.view-photo-list-of-category .view-filters .edit-field-story-category-tid-wrapper {
   display: none;
+}
+.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button {
+  position: absolute;
+  padding: 0;
+  float: none;
+  top: 100px;
+  z-index: 1;
+  left: 50%;
+}
+.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button .ajax-progress.throbber {
+  background: transparent url(images/tab-loading.gif) no-repeat 0px center;
 }
 
 /*CCS End Photo landing Page*/
@@ -4070,7 +4081,8 @@ footer .footer-copyright {
   background-color: #f5f5f5;
 }
 .programe-container .program-row .programe-title {
-  font-size: 22px;
+  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #33363b;
 }
@@ -4112,55 +4124,19 @@ footer .footer-copyright {
   background-color: #ddd;
 }
 
-.view-programme-content .view-content {
-  margin: 0 -15px;
-}
-.view-programme-content .view-content .programe-list {
-  list-style: none;
-  overflow: hidden;
-  margin-bottom: 50px;
-}
-.view-programme-content .view-content .programe-list > .tile-wrapper {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  float: left;
-  overflow: hidden;
-  height: 242px;
-}
-.view-programme-content .view-content .programe-list > .tile-wrapper .tile figure {
-  width: 170px;
-  height: 127px;
-  overflow: hidden;
-  position: relative;
-}
-.view-programme-content .view-content .programe-list > .tile-wrapper .tile figure img {
-  width: 170px;
-  height: 127px;
-}
-.view-programme-content .view-content .programe-list > .tile-wrapper .tile figure figcaption {
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  padding: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  font-size: 12px;
-  font-family: Roboto;
-}
-.view-programme-content .view-content .programe-list > .tile-wrapper .tile figure figcaption .fa {
-  font-size: 14px;
-  margin-right: 5px;
-}
-.view-programme-content .view-content .programe-list > .tile-wrapper .tile .posted-on {
-  display: block;
-  font-size: 12px;
-  color: #b1b1b1;
-  padding: 8px 0 5px;
-  font-family: "Roboto Slab";
-}
-.view-programme-content .view-content .programe-list > .tile-wrapper .tile .description {
-  color: #494949;
-  font-family: "Roboto Slab";
+@media screen and (max-width: 768px) {
+  .view-programme-content .view-content .photo-list {
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+  .view-programme-content .view-content .photo-list li {
+    display: inline-block;
+    vertical-align: top;
+    float: none;
+  }
+  .view-programme-content .view-content .photo-list li a {
+    white-space: initial;
+  }
 }
 .view-programme-content .view-content .programe-list .more {
   text-align: right;
@@ -4325,7 +4301,7 @@ footer .footer-copyright {
 .view-archive-story .attachment .search-menu {
   padding-top: 20px;
   white-space: nowrap;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .view-archive-story .attachment .search-menu a {
   padding: 0 10px;
@@ -4817,6 +4793,8 @@ footer .footer-copyright {
 .magazin-lhs-top .magazin-top .magazin-subscribe .next-issue-out span {
   display: block;
   color: #919191;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 .magazin-lhs-top .magazin-bottom ul {
   zoom: 1;
@@ -4839,6 +4817,9 @@ footer .footer-copyright {
   margin-top: 10px;
 }
 
+.magazin-section .col-md-6:nth-child(2n+1) {
+  clear: left;
+}
 .magazin-section .section-ordering {
   position: relative;
 }
@@ -4921,7 +4902,7 @@ footer .footer-copyright {
 
 #block-views-so-sorry-the-remix {
   max-width: 370px;
-  margin: 0 auto;
+  margin: 50px auto 0 auto;
 }
 #block-views-so-sorry-the-remix .title {
   background: #000;
@@ -4976,7 +4957,6 @@ footer .footer-copyright {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   padding: 15px 0;
-  margin-bottom: 50px;
 }
 .sosorry-social ul li {
   display: inline-block;
@@ -5086,3 +5066,109 @@ footer .footer-copyright {
 }
 
 /*CSS End video setting Ifram*/
+/*CSS Start for recommended for you home page*/
+.recommended-for-you {
+  background: #f3f3f3;
+  margin: 40px 0px 0px 0px;
+  padding: 20px 0 10px 0;
+}
+.recommended-for-you .widget-title {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background: #a00606;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 7px;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+.recommended-for-you .widget-title a {
+  color: #fff;
+}
+.recommended-for-you #block-itg-widget-personlization ul.common-list {
+  padding: 0 15px;
+}
+.recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing {
+  overflow: hidden;
+  padding: 10px;
+}
+.recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing .pic {
+  float: left;
+  margin-right: 15px;
+}
+.recommended-for-you #block-itg-widget-personlization ul.common-list .recom-listing .detail {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing {
+  padding: 0 0 30px 0;
+}
+.recommended-for-you #block-itg-widget-personlization ul.common-list li.recom-listing .pic {
+  width: 144px;
+}
+.recommended-for-you #block-itg-widget-personlization ul.common-list h4 {
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #048cb9;
+  text-transform: uppercase;
+}
+.recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child h4 {
+  display: none;
+}
+.recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child .pic {
+  float: none;
+  margin: 0;
+}
+.recommended-for-you #block-itg-widget-personlization ul.frist-ul li:first-child .detail {
+  background: #fff;
+  padding: 13px 10px;
+  font-size: 18px;
+  line-height: 24px;
+  font-family: roboto;
+  font-weight: 500;
+}
+.recommended-for-you #block-itg-widget-personlization .recommended-slider {
+  margin: 0 -15px;
+}
+.recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-prev, .recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next {
+  background: transparent;
+  border: none;
+  font-size: 60px;
+  position: absolute;
+  top: 50%;
+  margin-top: -40px;
+  z-index: 999;
+  color: #b9b9b9;
+  cursor: pointer;
+  display: none !important;
+}
+.recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-next {
+  right: -50px;
+}
+.recommended-for-you #block-itg-widget-personlization .recommended-slider button.slick-prev {
+  left: -50px;
+}
+
+/*CSS End for recommended for you home page*/
+.default-video.itg-layout-container .ad-widget, .default-photo.itg-layout-container .ad-widget {
+  border: none;
+}
+.default-video .top_takes_videos_widget span.widget-title, .default-video .watch_right_now_videos_widget span.widget-title, .default-photo .top_takes_videos_widget span.widget-title, .default-photo .watch_right_now_videos_widget span.widget-title {
+  display: none;
+}
+.default-video .sidebar-section-photo, .default-video .sidebar-section-video, .default-photo .sidebar-section-photo, .default-photo .sidebar-section-video {
+  border: 1px solid #dddddd;
+}

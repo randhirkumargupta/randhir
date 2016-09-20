@@ -4180,6 +4180,28 @@ div.node{
   .field-name-field-service-video{
     @extend .choose-audio-video-file;
   }
+  td .field-name-field-story-large-image {
+    .form-managed-file .image-widget-data .form-submit[value="Remove"]{
+      left: 500px;
+    }
+  }
+  td .field-name-field-service-video,
+  td .field-name-field-service-audio{
+    .form-managed-file{
+      .form-type-textfield{
+        margin: 10px 0;
+        > label{
+          width: auto;
+        }
+        .form-text + div.description{
+          left: 440px;
+        }
+      }
+    }
+  }
+  td .field-name-field-service-video{
+    @extend .Browse-upload;
+  }
 }
 .view{
   table{
@@ -5773,10 +5795,8 @@ div.node{
 }
 #edit-field-story-extra-large-image{
   .image-widget-data{
-      input[type="submit"]{
-        @extend .add-more-wbg;
-        }
-    }  
+    float: left !important;
+  }  
 } 
 #page-title{
     span.autosave{
@@ -7084,7 +7104,7 @@ div.node{
   @extend .dib;
   @extend .full;
   @extend .vtop;
-  paddin: 10px;
+  padding: 10px;
   text-align: center;
   .add-more-block, .removes-more-block{
     @extend .dib;
@@ -7096,5 +7116,52 @@ div.node{
     border-radius: 5px;
     margin: 0 10px;
     text-transform: uppercase;
+    .fa{
+      font-size: 16px;
+      vertical-align: bottom;
+      margin-left: 5px;
+    }
+  }
+}
+.page-submit-idea{
+  .top-actions{
+    .form-submit{
+      @extend .btn-save;
+    }
+    a.button{
+      padding-top: 9px;
+    }
+  }
+}
+#menu-item-delete-form{
+  #page-title{
+    margin-bottom: 30px;
+  }
+  .form-actions{
+    #edit-submit{
+      @extend .btn;
+      @extend .btn-save;
+    }
+  }
+}
+[id*="menu-edit-item"]{
+  @extend .node-form;
+  .form-type-checkbox{
+      margin: 30px 0;
+      padding: 0 30px;
+      position: relative;
+      > label{
+        float: left;
+        width: 220px;
+      }
+      div.description{
+        @extend .desc-popup;
+        left: 280px;
+      }
+      &:hover{
+        div.description{
+          display: block;
+        }
+      }
   }
 }

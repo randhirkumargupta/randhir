@@ -17,5 +17,5 @@
   <span class="target-link" data-target-id="ExpertChunk"><?php print t('Expert Chunk'); ?></span>
   <span class="target-link" data-target-id="Briefcase"><?php print t('Brief case'); ?></span>
   <span class="target-link" data-target-id="title-metatags"><?php print t('Remarks'); ?></span>
-  <span class="target-link" data-target-id="edit-revision-information"><?php print t('Meta Details'); ?></span>  
+  <span class="target-link" data-target-id="edit-revision-information"><?php print t('SEO Meta Details'); ?></span>  
 </div>

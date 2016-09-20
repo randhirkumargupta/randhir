@@ -174,7 +174,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
         $itg_class = 'itg-front';
       }
       ?>
-      <div class="itg-layout-container <?php echo $itg_class; ?>">
+      <div class="itg-layout-container <?php echo $itg_class; ?> default-photo">
         <?php if ($theme == 'itgadmin') { ?>
         <div class="row">
           <div class="col-md-12">
@@ -357,8 +357,8 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
 
       <?php if ($sidebar_first || $sidebar_second): ?>
         <aside class="sidebars">
-    <?php print $sidebar_first; ?>
-    <?php print $sidebar_second; ?>
+    <?php //print $sidebar_first; ?>
+    <?php //print $sidebar_second; ?>
         </aside>
     <?php endif; ?>
     </main>

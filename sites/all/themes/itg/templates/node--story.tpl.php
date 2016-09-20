@@ -63,9 +63,13 @@
                       <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
                       <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
                       <li><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
-                      <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
-                      <li><?php print $read_later; ?></li>
-                      
+                      <?php global $user; ?>
+                      <?php if ($user->uid > 0): ?>
+                         <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
+                         <li><?php print $read_later; ?></li>
+                      <?php else: ?>
+                         <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE)) . '</li>'; ?>
+                      <?php endif; ?>                      
                   </ul>
                   </div>
                   </div>

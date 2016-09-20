@@ -25,7 +25,7 @@ var mTimer=null;
     jQuery('#file-preview').on('click', '#btnsavetag', function() {
           window.clearTimeout(mTimer); 
           mTimer=window.setTimeout(function() {
-          showloader();
+          
         name = jQuery('#tagname').val();
         tagurl = jQuery('#tagurl').val();
       
@@ -33,6 +33,7 @@ var mTimer=null;
      {
         if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
             jQuery('.web-error').hide();
+            showloader();
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'savetags',
                 type: 'post',
@@ -53,8 +54,11 @@ var mTimer=null;
                     console.log("Details: " + desc + "\nError:" + err);
                 }
             });
+        }else {
+            jQuery('.web-error').html('Enter currect url').show();
+            return false;
         }} else {
-            jQuery('.web-error').show();
+            jQuery('.web-error').html('Enter url').show();
             return false;
         }
 
