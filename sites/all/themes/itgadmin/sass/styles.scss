@@ -1725,7 +1725,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       }
       .views-reset-button{
         width: auto;
-        .form-submit{
+        .form-submit, a{
           @extend .mr-0;
           @extend .add-more-wbg;
           height: 36px;
@@ -4189,7 +4189,8 @@ div.node{
   td .field-name-field-service-audio{
     .form-managed-file{
       .form-type-textfield{
-        margin: 10px 0;
+        margin: 10px 0 0;
+        padding: 0;
         > label{
           width: auto;
         }
