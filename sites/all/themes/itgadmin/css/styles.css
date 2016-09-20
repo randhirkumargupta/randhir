@@ -4420,7 +4420,8 @@ div.node #comments h2 {
 }
 .node-vas_service_content-form td .field-name-field-service-video .form-managed-file .form-type-textfield,
 .node-vas_service_content-form td .field-name-field-service-audio .form-managed-file .form-type-textfield {
-  margin: 10px 0;
+  margin: 10px 0 0;
+  padding: 0;
 }
 .node-vas_service_content-form td .field-name-field-service-video .form-managed-file .form-type-textfield > label,
 .node-vas_service_content-form td .field-name-field-service-audio .form-managed-file .form-type-textfield > label {
