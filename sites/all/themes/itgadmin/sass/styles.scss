@@ -4180,6 +4180,28 @@ div.node{
   .field-name-field-service-video{
     @extend .choose-audio-video-file;
   }
+  td .field-name-field-story-large-image {
+    .form-managed-file .image-widget-data .form-submit[value="Remove"]{
+      left: 500px;
+    }
+  }
+  td .field-name-field-service-video,
+  td .field-name-field-service-audio{
+    .form-managed-file{
+      .form-type-textfield{
+        margin: 10px 0;
+        > label{
+          width: auto;
+        }
+        .form-text + div.description{
+          left: 440px;
+        }
+      }
+    }
+  }
+  td .field-name-field-service-video{
+    @extend .Browse-upload;
+  }
 }
 .view{
   table{
