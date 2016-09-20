@@ -233,4 +233,17 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  
+ elseif ($view->name == "special_auto_review_widget" && $view->current_display == 'special_auto_review_widget_list') {
+    $header_content = l(t('Search Content'), 'special-auto-review-widget-contents');
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "special_auto_review_widget" && $view->current_display == 'special_auto_review_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Special Auto Review Widget'), 'special-auto-review-widget-lsit');
+      $view->attachment_before = $header_content;
+    }
+  }
+  
 }
