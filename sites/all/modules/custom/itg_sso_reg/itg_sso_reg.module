@@ -60,7 +60,8 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js');
 
   if ($form_state['step'] == '1') {
-    $ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', 'user/login', array('attributes' => array('target' => '_blank', 'class' => array('')))) . '</div>';
+    $ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', 'user/login', array('attributes' => array('target' => '_blank', 'class' => array('')))) . '</div>'
+        . '<div class="forgot-link">' . l('Forgot password ?', 'forgot-password') . '</div>';
   }
   // Add a wrapper div that will be used by the Form API to update the form using AJAX
   $form['#prefix'] = '<div id="itg_sso_reg_multistep_form">';
