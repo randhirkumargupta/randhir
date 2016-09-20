@@ -95,6 +95,11 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     $dont_miss_content = $form_state;
     save_dont_miss_widget_data($dont_miss_content);
   }
+  elseif ($current_display == 'special_auto_review_widget_contents') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
+    $dont_miss_content = $form_state;
+    save_special_auto_review_widget_data($dont_miss_content);
+  }
   elseif ($current_display == 'we_may_suggest_widget') {
     module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
     $we_may_suggest_content = $form_state;
