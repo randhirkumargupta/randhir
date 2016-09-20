@@ -229,41 +229,8 @@ function itg_widget_views_pre_render(&$view) {
   elseif ($view->name == "issue_base_magazin_widget" && $view->current_display == 'issue_base_magazin_widget') {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Issue Magazin Widget'), 'issue-magazin-widget-list');
+      $header_content .= l(t('Issue Magazine Widget'), 'issue-magazin-widget-list');
       $view->attachment_before = $header_content;
     }
   }
-}
-
-/**
- * Function used for showing correct order of anchors.
- * 
- * @return array
- */
-function get_anchor_display_page_order() {
-  $query = db_select('draggableviews_structure', 'ds')
-          ->fields('ds', array('entity_id', 'weight'))
-          ->condition('ds.args', '{"ntype":null}')
-          ->condition('ds.view_name', 'widget_anchors_listing')
-          ->orderBy('ds.weight');
-  return $query->execute()->fetchAll();
-}
-
-/**
- * Make custom order of anchors.
- * 
- * @param array $views_data
- * @return array
- */
-function ordered_anchors($views_data) {
-  $real_order_of_anchors = get_anchor_display_page_order();
-  $new_order_of_anchors = array();
-  foreach ($real_order_of_anchors as $anchor) {
-    foreach ($views_data as $view_anchors) {
-      if ($view_anchors->nid == $anchor->entity_id) {
-        $new_order_of_anchors[] = $view_anchors;
-      }
-    }
-  }
-  return $new_order_of_anchors;
 }

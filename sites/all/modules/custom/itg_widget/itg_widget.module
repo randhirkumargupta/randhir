@@ -202,10 +202,11 @@ function remove_extra_data() {
 //      'widget_anchors_listing',
 //      'home_page_feature_widget',
 //      'story_widget',
-//      'section_wise_content_ordering_list',
+      'section_wise_content_ordering_list',
 //      'section_wise_draggable_content_order',
 //      'big_story_format_widget',
-//      'dont_miss_content_widget',
+      'dont_miss_content_widget',
+      'dont_miss_content',
 //      'section_wise_widget',
 //      'we_may_suggest_widget',
 //      'section_wise_content_ordering',
@@ -216,6 +217,7 @@ function remove_extra_data() {
   foreach ($widget as $view_name) {
     $num_deleted = db_delete('draggableviews_structure')
             ->condition('view_name', $view_name)
+            ->condition('view_display', 'dont_miss_content')
             ->execute();
 
     $num_deleted = db_delete('itg_widget_order')
@@ -456,6 +458,10 @@ function itg_widget_block_info() {
   );
   $blocks['home_page_poll_widget_block'] = array(
       'info' => t('Home Page Poll Widget'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['sosorry_social_icons_block'] = array(
+      'info' => t('So Sorry Social Icons Custom Block'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
@@ -745,6 +751,16 @@ function itg_widget_block_view($delta = '') {
       $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
       $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
       break;
+    case 'sosorry_social_icons_block':
+      $block['content'] = '<div class="sosorry-social">
+    <ul>
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="#"><i class="fa fa-rss"></i></a></li>        
+    </ul>
+</div>';
+      break;
   }
   return $block;
 }
@@ -753,6 +769,7 @@ function itg_widget_block_view($delta = '') {
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
   $setting = array();
   $queue_flag = "";
   $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
@@ -838,8 +855,46 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   foreach (forms_uses_checked_content_id() as $forms) {
     //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
   }
+
+  $syndication_form = sydication_field_filter_views_form();
+  if (in_array($form['#id'], $syndication_form)) {
+    $sydication_field_name = 'field_story_syndication_value_1_op';
+    $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
+    if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
+      $sydication_field_name = 'field_story_syndication_value_op';
+      $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
+    }
+    unset($form[$sydication_field_name]['#options']);
+    $form[$sydication_field_name]['#options']['all'] = '- Any -';
+    $form[$sydication_field_name]['#options']['or'] = 'Yes';
+    $form[$sydication_field_name]['#options']['not'] = 'No';
+    
+    drupal_add_css('.form-item-field-story-syndication-value-1 , .form-item-field-story-syndication-value {display:none;}', array('type' => 'inline'));
+    drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
+
+    $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
+    $url_without_query_string = end(explode('/', $url_chunk[0]));
+
+    $form['reset'] = array(
+        '#type' => 'markup',
+        '#markup' => l("Reset", $url_without_query_string, array("query" => $query_url)),
+    );
+  }
+
   // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
+}
+
+// Exposed filter forms id
+function sydication_field_filter_views_form() {
+  return array(
+      'views-exposed-form-recipe-management-page',
+      'views-exposed-form-recipe-management-page-1',
+      'views-exposed-form-recipe-management-page-2',
+      'views-exposed-form-strory-menegment-page-1',
+      'views-exposed-form-photo-gallery-management-page-1',
+      'views-exposed-form-videogallery-management-page-1'
+  );
 }
 
 /**
@@ -1255,6 +1310,18 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
 
+  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
+    $anchor_tid = variable_get('anchor_id_for_widget');
+    $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+    if (strlen($anchor_tid) <= 0) {
+      // Link should display only adminstrator.
+      if (in_array('administrator', $user->roles)) {
+        $link = l("click here", 'admin/settings/custom-variables');
+      }
+      drupal_set_message("Anchor setting not found $link", "error");
+    }
+  }
+
   if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_videos') {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
   }
@@ -1305,9 +1372,10 @@ function get_nodequeue_load_queue_by_name($qname) {
  * @return json Autocomplete callback for category manager view
  */
 function itg_widget_anchor_autocomplete_name($string) {
+  $anchor_id = variable_get('anchor_id_for_widget');
   $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
-  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
+  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', $anchor_id);
   $itg_query->condition('n.title', '%' . $string . '%', 'LIKE')
           ->fields('n', array('title'));
   $itg_result = $itg_query->execute();
@@ -1325,9 +1393,10 @@ function itg_widget_anchor_autocomplete_name($string) {
  * @return json Autocomplete callback for category manager view
  */
 function itg_widget_anchor_autocomplete_id($string) {
+  $anchor_id = variable_get('anchor_id_for_widget');
   $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
-  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
+  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', $anchor_id);
   $itg_query->condition('n.nid', '%' . $string . '%', 'LIKE')
           ->fields('n', array('nid'));
   $itg_result = $itg_query->execute();

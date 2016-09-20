@@ -36,10 +36,10 @@
           <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
             <?php
             if ($frist_key == 0) {
-              print substr($node_info['node_data']['title'], 0, 240);
+              echo mb_strimwidth($node_info['node_data']['title'], 0, 240, "..");
             }
             else {
-              print $node_info['node_data']['title'];
+              echo mb_strimwidth($node_info['node_data']['title'], 0, 80, "..");
             }
             ?>
           </a>
@@ -76,7 +76,7 @@
           <div class="detail">
             <h4><?php print $node_info['taxonomy_name']; ?></h4>
             <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
-              <?php print $node_info['node_data']['title']; ?>
+              <?php echo mb_strimwidth($node_info['node_data']['title'], 0, 80, ".."); ?>
             </a>
           </div>
 

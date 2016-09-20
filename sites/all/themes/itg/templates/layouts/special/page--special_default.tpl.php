@@ -717,6 +717,39 @@ for($i=1; $i<=$last_val;$i++ ){
 
   
 </div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-sx-12">1</div>
+    <div class="col-md-4 col-sm-4 col-sx-12">2</div>
+    <div class="col-md-4 col-sm-4 col-sx-12">3</div>    
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-sx-12">1</div>
+    <div class="col-md-4 col-sm-4 col-sx-12">2</div>
+    <div class="col-md-4 col-sm-4 col-sx-12">3</div>    
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-sx-12">1</div>
+    <div class="col-md-4 col-sm-4 col-sx-12">2</div>
+    <div class="col-md-4 col-sm-4 col-sx-12">3</div>    
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-8 col-sx-12">1</div>
+    <div class="col-md-4 col-sm-4 col-sx-12">2</div>    
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-8 col-sx-12">1</div>
+    <div class="col-md-4 col-sm-4 col-sx-12">2</div>    
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-8 col-sx-12">1</div>
+    <div class="col-md-4 col-sm-4 col-sx-12">2</div>    
+</div>
+
+
+
 <!--------------------------------Code for Front tpl---------------------------------------->
         <?php if ($theme != 'itgadmin') {?>
         <?php //print $feed_icons;  ?>
