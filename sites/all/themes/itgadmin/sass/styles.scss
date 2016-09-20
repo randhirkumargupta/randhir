@@ -1725,7 +1725,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       }
       .views-reset-button{
         width: auto;
-        .form-submit{
+        .form-submit, a{
           @extend .mr-0;
           @extend .add-more-wbg;
           height: 36px;
