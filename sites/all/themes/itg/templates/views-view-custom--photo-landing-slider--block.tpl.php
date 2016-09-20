@@ -11,7 +11,7 @@
                 <li><a href="#"><i class="fa fa-share"></i></a></li>
                 <?php global $user; ?>
                   <?php if ($user->uid > 0): ?>
-                     <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
+                     <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>                      
                      <li><?php print $read_later; ?></li>
                   <?php else: ?>
                      <?php print '<li>' . l('<i class="fa fa-bookmark"></i>fdffd', 'user/login', array('html' => TRUE)) . '</li>'; ?>
@@ -67,8 +67,7 @@
                 <li><a href="#"><i class="fa fa-link"></i></a></li>
                 <li><a href="#"><i class="fa fa-share"></i></a></li>
                 <?php global $user; ?>
-                  <?php if ($user->uid > 0): ?>
-                     <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
+                  <?php if ($user->uid > 0): ?>                     
                      <li><?php print $read_later; ?></li>
                   <?php else: ?>
                      <?php print '<li>' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE)) . '</li>'; ?>

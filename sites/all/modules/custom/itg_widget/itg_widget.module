@@ -1333,9 +1333,10 @@ function get_nodequeue_load_queue_by_name($qname) {
  * @return json Autocomplete callback for category manager view
  */
 function itg_widget_anchor_autocomplete_name($string) {
+  $anchor_id = variable_get('anchor_id_for_widget');
   $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
-  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
+  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', $anchor_id);
   $itg_query->condition('n.title', '%' . $string . '%', 'LIKE')
           ->fields('n', array('title'));
   $itg_result = $itg_query->execute();
@@ -1353,9 +1354,10 @@ function itg_widget_anchor_autocomplete_name($string) {
  * @return json Autocomplete callback for category manager view
  */
 function itg_widget_anchor_autocomplete_id($string) {
+  $anchor_id = variable_get('anchor_id_for_widget');
   $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
-  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
+  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', $anchor_id);
   $itg_query->condition('n.nid', '%' . $string . '%', 'LIKE')
           ->fields('n', array('nid'));
   $itg_result = $itg_query->execute();

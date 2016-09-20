@@ -4841,6 +4841,9 @@ footer .footer-copyright {
   margin-top: 10px;
 }
 
+.magazin-section .col-md-6:nth-child(2n+1) {
+  clear: left;
+}
 .magazin-section .section-ordering {
   position: relative;
 }
