@@ -492,6 +492,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     height: 100px;
     border-radius: 50%;
     background-color: #d3d6db;
+    overflow: hidden;
   }
   .user-name{
     color: #1a3c8d;
@@ -970,6 +971,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
                     margin: 0;
                     bottom: 20px;
               }
+              .ajax-progress{
+                display: none;
+              }
           }
           + div{
               .field-add-more-submit{
@@ -1438,6 +1442,26 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   .widget-settings{
     position: absolute;
     z-index: 99;
+  }
+  .poll-wrapper .poll-data .poll-replace-id{
+    margin-top: 0;
+  }
+  .poll-wrapper .poll-data .poll-replace-id .past-poll li:last-child,
+  .poll-wrapper .poll-data .poll-replace-id .past-poll li{
+    margin-bottom: 10px;
+  }
+  .poll-wrapper .poll-data .poll-replace-id .poll-answer-text {
+    float: left;
+    width: 35%;
+  }
+  .poll-wrapper .poll-data .poll-replace-id .noofvotes, .poll-wrapper .poll-data .poll-replace-id .percentage {
+    float: left;
+    width: 30%;
+    padding-left: 10px;
+  }
+  .poll-wrapper .poll-data .poll-replace-id .poll-past-percentage-progess {
+    width: 35%;
+    float: left;
   }
 }
 .load-more-wrapper{
