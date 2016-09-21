@@ -1425,7 +1425,7 @@ footer{
         margin-bottom: 5px;
     }    
 }
-.dont-miss, #block-itg-widget-yearende-left-top-news .top-news{    
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
     /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
@@ -1457,6 +1457,16 @@ footer{
     }
 }
 /*End Dont miss Home page css*/
+/*CSS Start year end top news*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);
+        }
+    }
+}
+/*CSS End year end top news*/
 /*Start Story page css*/
 @mixin story-profile-pic{
     width: 50px;
