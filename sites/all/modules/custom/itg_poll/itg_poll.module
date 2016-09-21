@@ -53,6 +53,9 @@ function itg_poll_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_show_end_date[und][1]"]' => array('checked' => TRUE),
       )
     );
+    // Hide ITG State field.
+    $form['field_poll_itg_state']['und']["#prefix"] = '<div style="display: none;">';
+    $form['field_poll_itg_state']['und']["#suffix"] = '</div>';    
     if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'poll') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')) {
       drupal_add_js("jQuery(document).ready(function(){ jQuery('input[name=field_poll_answer_add_more]').mousedown();});", 'inline');
     }

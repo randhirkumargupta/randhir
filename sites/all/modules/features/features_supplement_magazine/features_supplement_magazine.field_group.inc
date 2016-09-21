@@ -82,6 +82,40 @@ function features_supplement_magazine_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_issue_seo_metatags|node|issue|form';
+  $field_group->group_name = 'group_issue_seo_metatags';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'issue';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'SEO Meta Tags',
+    'weight' => '4',
+    'children' => array(
+      0 => 'metatags',
+      1 => 'path',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'SEO Meta Tags',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'issue-seo-metatags',
+        'classes' => 'group-issue-seo-metatags field-group-div',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_issue_seo_metatags|node|issue|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_issue_supp_img|node|issue|form';
   $field_group->group_name = 'group_issue_supp_img';
   $field_group->entity_type = 'node';
@@ -217,6 +251,39 @@ function features_supplement_magazine_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_magazine_seo_metatags|node|magazine|form';
+  $field_group->group_name = 'group_magazine_seo_metatags';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'magazine';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'SEO Meta Tags',
+    'weight' => '2',
+    'children' => array(
+      0 => 'path',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'SEO Meta Tags',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'magazine-seo-metatags',
+        'classes' => 'group-magazine-seo-metatags field-group-div',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_magazine_seo_metatags|node|magazine|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_supp_basic_settings|node|supplement|form';
   $field_group->group_name = 'group_supp_basic_settings';
   $field_group->entity_type = 'node';
@@ -283,12 +350,47 @@ function features_supplement_magazine_field_group_info() {
   );
   $field_groups['group_supp_import_xml|node|supplement|form'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_supp_seo_metatags|node|supplement|form';
+  $field_group->group_name = 'group_supp_seo_metatags';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'supplement';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'SEO Meta Tags',
+    'weight' => '2',
+    'children' => array(
+      0 => 'metatags',
+      1 => 'path',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'SEO Meta Tags',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'supp-seo-metatags',
+        'classes' => 'group-supp-seo-metatags field-group-div',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_supp_seo_metatags|node|supplement|form'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Basic Settings');
   t('Import XML');
   t('Issue Cover Images');
   t('Magazine Cover Photo');
+  t('SEO Meta Tags');
   t('Supplement Cover Images');
 
   return $field_groups;

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature For Special Auto Review Widget feature.
+ */
+
+include_once 'feature_for_special_auto_review_widget.features.inc';

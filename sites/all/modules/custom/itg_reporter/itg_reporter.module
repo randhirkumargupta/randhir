@@ -58,7 +58,6 @@ function itg_reporter_block_view($delta = '') {
   return $block;
 }
 
-
 /**
  * Implements hook_theme().
  * {@inheritdoc}
@@ -130,7 +129,7 @@ function itg_reporter_after_build($form, &$form_state) {
 
   $tem_tid = taxonomy_get_term_by_name('anchor', NULL);
   $tid = array_pop($tem_tid)->tid;
-  
+
   // alter label name
   $form['title']['#title'] = t('Name');
   // update automatic alias name
@@ -228,23 +227,37 @@ function itg_reporter_get_twitter_handle($twitter) {
   }
 }
 
-
 /**
- * Implement hook_node_update
+ * Implement hook_node_presave
  * @param Object $node
  */
-function itg_reporter_node_update($node) {
-  if ($node->type == 'reporter' && !empty($node->nid)) {
-    $nids = itg_reporter_get_all_story_nid($node->nid);
-    $reporter_name = strtolower($node->title);
-    $reporter_twitter = strtolower($node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
-    foreach ($nids as $value) {
-      $story_node = node_load($value);
-      $story_byline = $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'];
-      $story_twitter = $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
-      $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $reporter_name;
-      $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $reporter_twitter;
-      if ($reporter_name != $story_byline || $reporter_twitter != $story_twitter) {
+function itg_reporter_node_presave($node) {
+  if ($node->type == 'reporter') {
+    $previous_value = node_load($node->nid);
+    $previous_title = $previous_value->title;
+    $new_title = $node->title;
+    $previous_twitter_handle = $previous_value->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+    $new_twitter_handle = $node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+
+    // condition for title update
+    if (($previous_title != $new_title) || ($previous_twitter_handle != $new_twitter_handle)) {
+      $nids = itg_reporter_get_all_story_nid($node->nid);
+      foreach ($nids as $value) {
+        $story_node = node_load($value);
+        // code for title replace
+        $story_byline = $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'];
+        $story_byline_exp = explode(',', trim($story_byline));
+        $final_name_arr = recursive_array_replace($previous_title, $new_title, $story_byline_exp);
+        $final_name = implode(',', $final_name_arr);
+
+        // code for twitter handle replace
+        $story_twitter = $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
+        $story_twitter_exp = explode(',', trim($story_twitter));
+        $final_twitter_arr = recursive_array_replace($previous_twitter_handle, $new_twitter_handle, $story_twitter_exp);
+        $final_twitter = implode(',', $final_twitter_arr);
+
+        $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_name;
+        $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_twitter;
         field_attach_update('node', $story_node);
       }
     }
@@ -252,18 +265,35 @@ function itg_reporter_node_update($node) {
 }
 
 /**
+ * Implement recursive_array_replace
+ * @param string $find
+ * @param string $replace
+ * @param array $array
+ */
+function recursive_array_replace($find, $replace, $array) {
+  if (!is_array($array)) {
+    return str_replace($find, $replace, $array);
+  }
+  $newArray = array();
+  foreach ($array as $key => $value) {
+    $newArray[$key] = recursive_array_replace($find, $replace, $value);
+  }
+  return $newArray;
+}
+
+/**
  * Implement itg_reporter_get_all_story_nid
  * @param int $source_id
  */
-function itg_reporter_get_all_story_nid($source_id){
-    
-    $query = db_select('field_data_field_story_source_id', 'c');
-    $query->fields('c', array('entity_id'));
-    $query->condition('c.field_story_source_id_value', $source_id, '=');
-    $result = $query->execute();
-    while ($record = $result->fetchAssoc()) {
-      $options[] = $record['entity_id'];
-    }
-    
-    return $options;
+function itg_reporter_get_all_story_nid($source_id) {
+
+  $query = db_select('field_data_field_common_by_line_reporter_id', 'c');
+  $query->fields('c', array('entity_id'));
+  $query->condition('c.field_common_by_line_reporter_id_value', '%' . $source_id . '%', 'LIKE');
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $options[] = $record['entity_id'];
+  }
+
+  return $options;
 }

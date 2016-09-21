@@ -42,6 +42,46 @@ function itg_widget_form_views_form_so_sorry_so_sorry_videos_widget_alter(&$form
  *
  * {@inheritdoc}
  */
+function itg_widget_form_views_form_special_auto_review_widget_special_auto_review_widget_list_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_special_auto_review";
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+function itg_widget_form_views_form_yearender_top_news_and_top_videos_yearend_left_widget_list_alter(&$form, &$form_state, $form_id) {
+    $draggable_form = $form['draggableviews'];
+   
+  foreach ($draggable_form as $form_key => $from_node) {
+    // Escape #tree as draggable view proview 1st option tree
+    if (is_integer($form_key)) {
+      $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
+      $form['draggableviews'][$form_key]['custom_text'] = array(
+          "#type" => "textfield",
+          "#size" => '',
+          // get value which is saved into custom_table.
+          '#default_value' => _get_custom_text_value_from_nid($default_value),
+          '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
+      );
+    }
+  }
+  // Js added for alter colum name.
+  drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("#draggableviews-table-yearender-top-news-and-top-videos-yearend-left-widget-list").find("th.tabledrag-hide").html("Label");
+          });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+
+  drupal_add_css('#draggableviews-table-yearender-top-news-and-top-videos-yearend-left-widget-list .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
+  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_yearend_left";
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
 function itg_widget_form_views_form_issue_base_magazin_widget_issue_magazin_widget_list_alter(&$form, &$form_state, $form_id) {
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_issue_magazin";
 }
@@ -244,6 +284,49 @@ function update_itg_widget_order_table_data_for_issue_magazin($form, &$form_stat
  
 }
 
+/**
+ * Function for save new order in custom table itg_widget_order for we may special auto review widget.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function update_itg_widget_order_table_data_for_special_auto_review($form, &$form_state) {
+  // Take draggable view input value after submit the form.
+  $draggable_view_data = $form_state['input']['draggableviews'];
+  $extra_values = array();
+  // Get extra , nid , content type from custom_table because it will further use to insert again.
+  foreach ($draggable_view_data as $key => $value) {
+    db_update('itg_widget_order')
+                ->fields(array('weight' => $value['weight']))
+                 ->condition('widget', 'special_auto_review_content')
+            ->condition('nid', $value['id'])
+                ->execute();
+  }
+ 
+}
+
+/**
+ * Function for save new order in custom table itg_widget_order for we may special auto review widget.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function update_itg_widget_order_table_data_for_yearend_left($form, &$form_state) {
+  // Take draggable view input value after submit the form.
+  $draggable_view_data = $form_state['input']['draggableviews'];
+  $widget = 'yearender_left_news_video';
+  $extra_values = array();
+  // Get extra , nid , content type from custom_table because it will further use to insert again.
+  foreach ($draggable_view_data as $key => $value) {
+    db_update('itg_widget_order')
+                ->fields(array('weight' => $value['weight'],'extra' => $value['custom_text'],))
+                 ->condition('widget', 'yearender_left_news_video')
+            ->condition('nid', $value['id'])
+                ->execute();
+  }
+  
+ 
+}
 
 
 /**

@@ -154,6 +154,13 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
+  $form['year_end_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of year end'),
+      '#default_value' => variable_get('year_end_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
   return system_settings_form($form);
 }
 
@@ -447,6 +454,12 @@ function itg_widget_block_info() {
   $blocks['dont_miss'] = array(
       'info' => t('Widget: Dont Miss form custom table'),
   );
+  $blocks['yearende_left_top_news'] = array(
+      'info' => t('Widget: Year end left top news form custom table'),
+  );
+  $blocks['yearende_left_top_videos'] = array(
+      'info' => t('Widget: Year end left top Videos form custom table'),
+  );
   $blocks['watch_right_now_videos_widget'] = array(
       'info' => t('Widget: Watch right now videos'),
   );
@@ -506,6 +519,10 @@ function itg_widget_block_view($delta = '') {
       $block['content'] = theme("rhs_section_wise_ordering", array("data" => $data));
       break;
     case 'we_may_suggest':
+      $display = get_rhs_block_display_condtion($delta);
+      if (empty($display)) {
+        return;
+      }
       module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
       $info['section'] = '301'; // tid of section
       $info['content_type'] = 'story'; // content type machine name
@@ -538,6 +555,20 @@ function itg_widget_block_view($delta = '') {
       $data = itg_widget_dont_miss_ordering_data($info);
       $block['content'] = theme("dont_miss_widget", array("data" => $data));
       break;
+    case 'yearende_left_top_news':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+      $info['widget_name'] = 'yearender_left_news_video';
+      $data = itg_widget_yearend_top_news_ordering_data($info);
+
+      $block['content'] = theme("year_end_top_news", array("data" => $data));
+      break;
+    case 'yearende_left_top_videos':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+      $info['widget_name'] = 'yearender_left_news_video';
+      $data = itg_widget_yearend_top_videos_ordering_data($info);
+
+      $block['content'] = theme("year_end_top_videos", array("data" => $data));
+      break;
     // Trending videos ordering reordering widget case
     case 'trending_videos_widget':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
@@ -549,6 +580,10 @@ function itg_widget_block_view($delta = '') {
       break;
     // Watch Right Now ordering reordering widget case
     case 'watch_right_now_videos_widget':
+      $display = get_rhs_block_display_condtion($delta);
+      if (empty($display)) {
+        return;
+      }
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'watch_right_now_widget'; // page name
@@ -558,6 +593,11 @@ function itg_widget_block_view($delta = '') {
       break;
     // Top takes videos ordering reordering widget case
     case 'top_takes_videos_widget':
+      $display = get_rhs_block_display_condtion($delta);
+      if (empty($display)) {
+        return;
+      }
+
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
       $info['view_name'] = 'story_widget'; // view name
       $info['page'] = 'top_takes_video_widget'; // page name
@@ -769,6 +809,7 @@ function itg_widget_block_view($delta = '') {
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
   $setting = array();
   $queue_flag = "";
   $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
@@ -846,6 +887,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   );
 
 
+
   if (in_array($form_id, $form_id_array_to_alter)) {
     $form['actions']['submit']['#value'] = t('Confirm');
   }
@@ -854,8 +896,46 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   foreach (forms_uses_checked_content_id() as $forms) {
     //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
   }
+
+  $syndication_form = sydication_field_filter_views_form();
+  if (in_array($form['#id'], $syndication_form)) {
+    $sydication_field_name = 'field_story_syndication_value_1_op';
+    $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
+    if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
+      $sydication_field_name = 'field_story_syndication_value_op';
+      $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
+    }
+    unset($form[$sydication_field_name]['#options']);
+    $form[$sydication_field_name]['#options']['all'] = '- Any -';
+    $form[$sydication_field_name]['#options']['or'] = 'Yes';
+    $form[$sydication_field_name]['#options']['not'] = 'No';
+
+    drupal_add_css('.form-item-field-story-syndication-value-1 , .form-item-field-story-syndication-value {display:none;}', array('type' => 'inline'));
+    drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
+
+    $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
+    $url_without_query_string = end(explode('/', $url_chunk[0]));
+
+    $form['reset'] = array(
+        '#type' => 'markup',
+        '#markup' => l("Reset", $url_without_query_string, array("query" => $query_url)),
+    );
+  }
+
   // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
+}
+
+// Exposed filter forms id
+function sydication_field_filter_views_form() {
+  return array(
+      'views-exposed-form-recipe-management-page',
+      'views-exposed-form-recipe-management-page-1',
+      'views-exposed-form-recipe-management-page-2',
+      'views-exposed-form-strory-menegment-page-1',
+      'views-exposed-form-photo-gallery-management-page-1',
+      'views-exposed-form-videogallery-management-page-1'
+  );
 }
 
 /**
@@ -1022,6 +1102,12 @@ function itg_widget_theme() {
       'personlization_front_end' => array(
           'template' => 'templates/personlization-front-end',
       ),
+      'year_end_top_news' => array(
+          'template' => 'templates/year-end-top-news',
+      ),
+      'year_end_top_videos' => array(
+          'template' => 'templates/year-end-top-videos',
+      ),
   );
   return $themes;
 }
@@ -1045,6 +1131,7 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
+
     case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
@@ -1101,6 +1188,20 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
       $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-special-auto-review-widget-special-auto-review-widget-contents':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-poll-widget-poll-widget-format':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets('poll');
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
@@ -1270,7 +1371,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
       drupal_set_message("Anchor setting not found $link", "error");
     }
   }
-  
+
   if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_widget')) {
     $anchor_tid = variable_get('anchor_id_for_widget');
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
@@ -1306,9 +1407,19 @@ function itg_widget_views_query_alter(&$view, &$query) {
   if ($view->name == 'so_sorry' && $view->current_display == 'most_watched') {
     $query->where[1]['conditions'][3]['value'] = variable_get('so_sorry_category_id_for_widget');
   }
-
   if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
+  }
+
+  if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+  }
+
+  if ($view->current_display == 'yearender' || $view->current_display == 'block_2') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+  }
+  if ($view->current_display == 'yearender' || $view->current_display == 'block_1') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
   }
 }
 
@@ -1333,9 +1444,10 @@ function get_nodequeue_load_queue_by_name($qname) {
  * @return json Autocomplete callback for category manager view
  */
 function itg_widget_anchor_autocomplete_name($string) {
+  $anchor_id = variable_get('anchor_id_for_widget');
   $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
-  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
+  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', $anchor_id);
   $itg_query->condition('n.title', '%' . $string . '%', 'LIKE')
           ->fields('n', array('title'));
   $itg_result = $itg_query->execute();
@@ -1353,9 +1465,10 @@ function itg_widget_anchor_autocomplete_name($string) {
  * @return json Autocomplete callback for category manager view
  */
 function itg_widget_anchor_autocomplete_id($string) {
+  $anchor_id = variable_get('anchor_id_for_widget');
   $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
-  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', '399');
+  $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', $anchor_id);
   $itg_query->condition('n.nid', '%' . $string . '%', 'LIKE')
           ->fields('n', array('nid'));
   $itg_result = $itg_query->execute();
@@ -1558,38 +1671,59 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
 }
 
 /**
+ * Function returns data for cutom tables widgets.
+ * 
+ * @param string $widget_name
+ * @param int $range_max
+ * @param int $range_min
+ * @return array
+ */
+function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $content_type, $range_max, $range_min = 0) {
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+  $query->condition('iwo.widget', $widget_name)
+          ->condition('n.status', 1)
+          ->condition('iwo.content_type', $content_type)
+          ->orderBy('iwo.weight', 'ASC')
+          ->range($range_min, $range_max)
+          ->fields('iwo', array('nid', 'extra', 'weight'));
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $weight = 0;
+  foreach ($result as $data) {
+    $weight +=$data['weight'];
+  }
+
+  if ($weight > 0) {
+    return $result;
+  }
+  else {
+    // Query for renctaly careated node if weight is not saved
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->condition('iwo.widget', $widget_name)
+            ->condition('n.status', 1)
+            ->condition('iwo.content_type', $content_type)
+            ->orderBy('n.nid', 'DESC')
+            ->range($range_min, $range_max)
+            ->fields('iwo', array('nid', 'extra', 'weight'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+}
+
+/**
  * {@inheritdoc}
  */
 function itg_widget_block_view_alter(&$data, $block) {
   $item = menu_get_item();
   $arg = arg();
+
   $page_argument = $item['page_arguments'];
   if ($block->delta == 'programmes-rhs_programmes') {
-    if ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node' && isset($_GET['sid'])) {
-      $data['content'] = array();
+    if ($arg[0] == 'anchors-list' || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name == 'Anchor') || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+      return TRUE;
     }
-    elseif ($page_argument[0]->type == 'story' || $page_argument[0]->type == 'breaking_news') {
-      $data['content'] = array();
-    }
-    elseif ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
-      $data['content'] = array();
-    }
-  }
-
-  if ($block->delta == 'we_may_suggest') {
-    if ($arg[0] == 'node' && !isset($_GET['sid']) && $page_argument[0]->type != 'story' && $page_argument[0]->type != 'breaking_news') {
-      $data['content'] = array();
-    }
-  }
-
-  if ($block->delta == 'watch_right_now_videos_widget') {
-    if ($arg[0] == 'node' && !isset($_GET['sid']) && $page_argument[0]->type != 'story' && $page_argument[0]->type != 'breaking_news') {
-      $data['content'] = array();
-    }
-  }
-
-  if ($block->delta == 'top_takes_videos_widget') {
-    if ($arg[0] == 'node' && !isset($_GET['sid']) && $page_argument[0]->type != 'story' && $page_argument[0]->type != 'breaking_news') {
+    else {
       $data['content'] = array();
     }
   }
@@ -1707,15 +1841,19 @@ function itg_widget_so_sorry_content_nid($title) {
 
 /*
  * This will return selected poll for widget
+ *  @param string $content_type content Type.
+ *  @param string $widget_name keyword for auto suggest.
  */
 
 function get_homepage_current_poll_widget($content_type, $widget_name) {
-  $nodes_already = db_select('itg_widget_order', 'iwo')
-                  ->condition('iwo.content_type', $content_type)
-                  ->condition('iwo.widget', $widget_name)
-                  ->fields('iwo', array('nid'))
-                  ->execute()->fetch();
-  return $nodes_already->nid;
+  $nodes_already = db_select('itg_widget_order', 'iwo');
+  $nodes_already->Join('node', 'n', 'iwo.nid=n.nid');
+  $nodes_already->fields('iwo', array('nid'));
+  $nodes_already->condition('iwo.content_type', $content_type)
+          ->condition('iwo.widget', $widget_name)
+          ->condition('n.status', 1);
+  $res = $nodes_already->execute()->fetch();
+  return $res->nid;
 }
 
 /**
@@ -1888,6 +2026,81 @@ function itg_widget_issuewidgetlist_filter_form_submit($form, $form_state) {
  * @param array $form_state
  */
 function itg_widget_issuewidgetlist_filter_reset($form, $form_state) {
-
   drupal_goto('issue-magazin-widget-list');
+}
+
+/**
+ * display block on page
+ * @return TRUE or FALSE
+ */
+function itg_block_display_condition() {
+  $arg = arg();
+  $is_fron_page = drupal_is_front_page();
+  if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))) {
+    $tpl_name = get_template_name_by_section_name($arg[2]);
+    if (isset($tpl_name)) {
+      return TRUE;
+    }
+  }
+  else if (!empty($is_fron_page)) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * display block on page
+ * @return TRUE or FALSE
+ */
+function get_rhs_block_display_condtion($delta = '') {
+
+  $arg = arg();
+  $item = menu_get_item();
+  $page_argument = $item['page_arguments'];
+  $display_block = itg_block_display_condition();
+
+  switch ($delta) {
+    case 'watch_right_now_videos_widget':
+      if ($arg[0] == 'programmes' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+        return TRUE;
+      }
+      break;
+    case 'top_takes_videos_widget':
+      if ($arg[0] == 'programmes' || ($page_argument[0]->type == 'story') || $display_block == TRUE) {
+        return TRUE;
+      }
+      break;
+    case 'we_may_suggest':
+      if ($arg[0] == 'programmes' || $arg[0] == 'anchors-list' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+        return TRUE;
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook__node_insert().
+ * {@inheritdoc}
+ */
+function itg_widget_node_insert($node) {
+  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    $nid = $node->nid;
+    $cat_id = $node->field_story_category['und'];
+    $order = $node->created;
+
+    foreach ($cat_id as $category) {
+      // Insert into table.
+      $query = db_insert('itg_widget_order')
+              ->fields(array(
+                  'nid' => $nid,
+                  'widget' => 'section_wise_widget',
+                  'content_type' => $node->type,
+                  'cat_id' => $category['tid'],
+                  'weight' => -1 * abs($node->created),
+                  'extra' => "",
+              ))
+              ->execute();
+    }
+  }
 }
