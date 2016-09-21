@@ -8,7 +8,6 @@
  * {@inheritdoc}
  */
 function itg_widget_views_pre_render(&$view) {
-
   if ($view->name == "so_sorry" && $view->current_display == 'so_sorry_videos_widget') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'so-sorry-video-widget-list', array('query' => array('destination' => arg(0))));
@@ -242,6 +241,18 @@ function itg_widget_views_pre_render(&$view) {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Special Auto Review Widget'), 'special-auto-review-widget-lsit');
+      $view->attachment_before = $header_content;
+    }
+  }
+  
+   elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_list') {
+    $header_content = l(t('Search Content'), 'yearend-left-widget-contents');
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Yearender Top News & Top Videos Widget'), 'yearend-left-widget-list');
       $view->attachment_before = $header_content;
     }
   }

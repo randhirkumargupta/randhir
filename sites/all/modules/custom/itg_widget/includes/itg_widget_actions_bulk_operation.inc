@@ -75,7 +75,7 @@ function itg_widget_categories_wise_node_group_validate($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
-  $current_display = $form_state['build_info']['args'][0]->current_display;
+ $current_display = $form_state['build_info']['args'][0]->current_display;
 
   $vals = array();
   // Unique combination using below four.
@@ -97,8 +97,11 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
   }
   elseif ($current_display == 'special_auto_review_widget_contents') {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
-    $dont_miss_content = $form_state;
-    save_special_auto_review_widget_data($dont_miss_content);
+    save_special_auto_review_widget_data($form_state);
+  }
+  elseif ($current_display == 'yearend_left_widget_contents') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+    save_yearender_left_widget_data($form_state);
   }
   elseif ($current_display == 'we_may_suggest_widget') {
     module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
