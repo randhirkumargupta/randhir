@@ -364,6 +364,14 @@ function feature_for_year_end_left_top_news_and_top_video_views_default_views() 
     'story' => 'story',
     'videogallery' => 'videogallery',
   );
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    0 => '427',
+  );
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['path'] = 'yearend-left-widget-contents';
 
   /* Display: Yearender Left News And Videos Widget Order Reorder */
@@ -441,15 +449,15 @@ print \'<a href="move-dont-miss-widget-node/yearender_left_news_video/0/0/\'.$ro
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Sort criterion: Section wise ordering content: weight */
-  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
-  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
