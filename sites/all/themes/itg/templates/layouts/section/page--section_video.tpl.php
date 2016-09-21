@@ -225,7 +225,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
               <div class="sidebar-section-photo">
                 <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad droppable"></div>
+                      <div class="sidebar-ad droppable"><?php print $itg_ad['200*200_section_video_right_bar_ad1'];?></div>
                     </div>              
                   </div>
                 <div class="itg-widget">
@@ -314,7 +314,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                 </div>
                 <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad droppable"></div>
+                      <div class="sidebar-ad droppable"><?php print $itg_ad['200*200_section_video_right_bar_ad2'];?></div>
                     </div>              
                   </div>
               </div>
