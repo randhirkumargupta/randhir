@@ -208,8 +208,9 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
 		$select_secton_field = 'field_ads_select_secton_option';
 		$ads_placeholder_field = 'field_ads_placeholder';
 		if (arg(2) == 'edit' && arg(0) == 'node' && is_numeric(arg(1))) {
-			$section_section_id = $form[$select_secton_field][LANGUAGE_NONE]['#entity']->field_ads_select_secton_option[LANGUAGE_NONE][0]['value'];
+			$select_section_id = $form[$select_secton_field][LANGUAGE_NONE]['#entity']->field_ads_select_secton_option[LANGUAGE_NONE][0]['value'];
 			$section_id = $form[$select_secton_field][LANGUAGE_NONE]['#entity']->field_ads_section_selection[LANGUAGE_NONE][0]['value'];
+				
 		}
 		else {
 			$select_section_id = $form_state['input'][$select_secton_field][LANGUAGE_NONE];
@@ -280,6 +281,7 @@ function itg_ads_value_ajaxs($form, $form_state) {
  * @return array $result
  */
 function itg_ads_placeholder_value($formdata, $id = '') {
+	
 	if ($id == 'Photo') {
 		$section_name = 'page section photo';
 	}
@@ -333,7 +335,7 @@ function itg_ads_placeholder_value($formdata, $id = '') {
 	$query->fields('ap', array('field_ads_placeholder_value'));
 	$query->join('field_data_field_ads_end_date', 'ed', 'ed.entity_id = ap.entity_id');
 	$query->join('field_data_field_ads_section_selection', 'ts', 'ap.entity_id = ts.entity_id');
-	$query->join('`field_data_field_ads_select_secton_option', 'so', 'ap.entity_id = so.entity_id');
+	$query->join('field_data_field_ads_select_secton_option', 'so', 'ap.entity_id = so.entity_id');
 	$query->condition('ts.field_ads_section_selection_value', $id, '=');
 	$query->condition('so.field_ads_select_secton_option_value', $formdata, '=');
 	$query->condition('ed.field_ads_end_date_value', $current_date, '>');
@@ -341,10 +343,12 @@ function itg_ads_placeholder_value($formdata, $id = '') {
 	foreach ($place_code as $row) {
 		$data1[$row->field_ads_placeholder_value] = $row->field_ads_placeholder_value;
 	}
+	
 	if (arg(2) == 'edit') { //Edit case
-
+		
 	//$result = array('1'=>'1');
 		$result = array_diff($data[$id], $data1);
+		//pr($result);
 		$nid = arg(1);
 		$data_placeholder = itg_ads_get_prefilled_value($nid);
 		$data_section = itg_ads_get_prefilled_section($nid);
