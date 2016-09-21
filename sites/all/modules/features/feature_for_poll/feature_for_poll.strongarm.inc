@@ -98,6 +98,9 @@ function feature_for_poll_strongarm() {
         'path' => array(
           'weight' => '1',
         ),
+        'flag' => array(
+          'weight' => '10',
+        ),
       ),
       'display' => array(),
     ),

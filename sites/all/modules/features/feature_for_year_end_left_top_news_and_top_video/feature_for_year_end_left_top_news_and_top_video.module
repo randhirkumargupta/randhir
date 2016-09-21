@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for year end left top news and top video feature.
+ */
+
+include_once 'feature_for_year_end_left_top_news_and_top_video.features.inc';

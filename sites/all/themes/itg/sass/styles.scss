@@ -2548,6 +2548,16 @@ footer{
         @include font(12px);
         color: #8a8a8a;
     }
+    .social-share{
+                display: inline-block;
+                vertical-align: middle;
+                @include social-share;    
+                ul{
+                    li{
+                        padding-right: 4px;                    
+                    }
+                }
+            }
     ul{
         @extend .list-none;
     }
@@ -2741,6 +2751,16 @@ footer{
                             float: left;  
                             padding-left: 20px;
                         }
+                    }
+                }
+            }
+            .social-share{
+                display: inline-block;
+                vertical-align: middle;
+                @include social-share;    
+                ul{
+                    li{
+                        padding-right: 4px;                    
                     }
                 }
             }
@@ -2950,7 +2970,7 @@ footer{
       }
       
   }
-.view-video-list-of-category, .view-video-landing-header, .view-so-sorry{    
+.view-video-list-of-category, .view-video-landing-header, .view-so-sorry, .view-programme-content{    
     .views-exposed-form{
         display: none;
     }
@@ -3033,7 +3053,20 @@ footer{
 }
 .view-photo-list-of-category{
     .view-filters{
-        display: none;
+        .edit-field-story-category-tid-wrapper{
+            display: none;
+        }
+        .views-exposed-widget.views-submit-button{
+            position: absolute;
+            padding: 0;
+            float: none;
+            top: 100px;
+            z-index: 1;
+            left: 50%;
+            .ajax-progress.throbber{
+                background: transparent url(images/tab-loading.gif) no-repeat 0px center;                
+            }
+        }
     }
 }
 /*CCS End Photo landing Page*/
@@ -3117,8 +3150,7 @@ footer{
       font-family: $itg-roboto;
     background-color: #f5f5f5;
     .programe-title{
-      font-size: 22px;
-      font-weight: 700;
+      @include font(20px, null, 700);
       color: #33363b;
     }
     .programe-timing{
@@ -3164,56 +3196,9 @@ footer{
 
 
 .view-programme-content{
-    .view-content{
-        margin: 0 -15px;
-        .programe-list{
-            list-style: none;
-            overflow: hidden;
-            margin-bottom:50px;
-            > .tile-wrapper{
-                padding-top: 15px;
-                padding-bottom: 15px;
-                float: left;
-                overflow: hidden;
-                height: 242px;
-                .tile{
-                    figure{
-                        width: 170px;
-                        height: 127px;
-                        overflow: hidden;
-                        position: relative;
-                        img{
-                          width: 170px;
-                          height: 127px;
-                        }
-                        figcaption{
-                            bottom: 0;
-                            left: 0;
-                            position: absolute;
-                            padding: 5px;
-                            background-color: rgba(0,0,0,.5);
-                            color: #fff;
-                            font-size: 12px;
-                            font-family: Roboto;
-                            .fa{
-                                font-size: 14px;
-                                margin-right: 5px;
-                            }
-                        }
-                    }
-                    .posted-on{
-                        display: block;
-                        font-size: 12px;
-                        color: #b1b1b1;
-                        padding: 8px 0 5px;
-                        font-family: "Roboto Slab";
-                    }
-                    .description{
-                        color: #494949;
-                        font-family: "Roboto Slab";
-                    }
-                }
-            }
+    .view-content{         
+            @include photo-scroll;        
+        .programe-list{            
             .more{
               text-align: right;
               position: relative;
@@ -3651,6 +3636,9 @@ footer{
     }
 }
 .magazin-section{
+    .col-md-6:nth-child(2n+1){
+        clear:left;
+    }
     .section-ordering{
         @include pos(relative);
     }
@@ -3721,7 +3709,7 @@ footer{
 }
 #block-views-so-sorry-the-remix{
     max-width: 370px;
-    margin: 0 auto;
+    margin: 50px auto 0 auto;
     .title{
         background: #000;        
         padding: 10px;
@@ -3759,8 +3747,7 @@ footer{
 .sosorry-social{
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    padding: 15px 0;
-    margin-bottom:50px;
+    padding: 15px 0;    
     ul{
         @extend .list-none;
         li{

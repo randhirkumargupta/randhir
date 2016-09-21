@@ -36,6 +36,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     if (in_array($form_id, $form_id_arr)) {
       $form['field_itg_common_by_line_name']['#attributes']['class'][] = 'element-hidden';
       $form['field_itg_common_by_line_twitter']['#attributes']['class'][] = 'element-hidden';
+      $form['field_common_by_line_reporter_id']['#attributes']['class'][] = 'element-hidden';
     }
   }
 
@@ -364,15 +365,30 @@ function highlight($text, $words, $color = 'yellow', $case = '1') {
  * {@inheritdoc}
  */
 function itg_front_search_node_presave($node) {
+
   //if ($node->type == 'story' || $node->type == 'recipe' || $node->type == 'cooking_tips' || $node->type == 'videogallery' || $node->type == 'food_news') {
   if ($node->type == 'story' || $node->type == 'videogallery') {
-    $reporter_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-    $reporter_node_id = node_load($reporter_id);
-    $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node_id->title);
-    $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node_id->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
-    if ($reporter_node_id->nid > 0) {
-      $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = strtolower($reporter_node_id->nid);
+
+    foreach ($node->field_story_reporter['und'] as $high) {
+      $reporter_id = $high['target_id'];
+      $reporter_node_id = node_load($reporter_id);
+      $reporter_arr_value[] = strtolower($reporter_id);
+      $common_by_line_name[] = strtolower($reporter_node_id->title);
+      $common_by_line_twitter[] = strtolower($reporter_node_id->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
+      // print $high['target_id'];
     }
+
+    $final_repoter_nid_list = implode(',', $reporter_arr_value);
+
+    $final_by_line_name = implode(',', $common_by_line_name);
+
+    $final_by_line_twitter = implode(',', $common_by_line_twitter);
+
+    //$reporter_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    //$reporter_node_id = node_load($reporter_id);
+    $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_by_line_name;
+    $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_by_line_twitter;
+    $node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value'] = $final_repoter_nid_list;
   }
 
   if ($node->type == 'photogallery') {
@@ -387,15 +403,20 @@ function itg_front_search_node_presave($node) {
  * @param string $name
  */
 function itg_get_reporter_list($name) {
-  $reporter_name = db_select('field_data_field_itg_common_by_line_name', 'rpn')
-      ->distinct()
-      ->fields('rpn', array('field_itg_common_by_line_name_value'))
-      ->condition('field_itg_common_by_line_name_value', '%' . $name . '%', 'LIKE')
-      ->execute();
+  $term_array = taxonomy_get_term_by_name('reporter');
+  $term = reset($term_array); # get the first element of the array which is our term object
 
-  while ($record = $reporter_name->fetchAssoc()) {
-    //$options[$prefix . $record['name'] . ':' . $record['tid']] = $record['name'];
-    $options[$record['field_itg_common_by_line_name_value']] = $record['field_itg_common_by_line_name_value'];
+  $reporter_name = db_select('node', 'n');
+  $reporter_name->join('field_data_field_celebrity_pro_occupation', 'rpn', 'n.nid = rpn.entity_id');
+  $reporter_name->fields('n', array('title', 'nid'));
+  $reporter_name->condition('field_celebrity_pro_occupation_tid', $term->tid, '=');
+  $reporter_name->condition('n.type', 'reporter', '=');
+  $reporter_name->condition('n.title', '%' . $name . '%', 'LIKE');
+  $result = $reporter_name->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $r_title = strtolower($record['title']);
+    $options[$r_title] = $r_title;
   }
   drupal_json_output($options);
 }

@@ -8,7 +8,6 @@
  * {@inheritdoc}
  */
 function itg_widget_views_pre_render(&$view) {
-
   if ($view->name == "so_sorry" && $view->current_display == 'so_sorry_videos_widget') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= l(t('Search Content'), 'so-sorry-video-widget-list', array('query' => array('destination' => arg(0))));
@@ -233,37 +232,29 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
-}
-
-/**
- * Function used for showing correct order of anchors.
- * 
- * @return array
- */
-function get_anchor_display_page_order() {
-  $query = db_select('draggableviews_structure', 'ds')
-          ->fields('ds', array('entity_id', 'weight'))
-          ->condition('ds.args', '{"ntype":null}')
-          ->condition('ds.view_name', 'widget_anchors_listing')
-          ->orderBy('ds.weight');
-  return $query->execute()->fetchAll();
-}
-
-/**
- * Make custom order of anchors.
- * 
- * @param array $views_data
- * @return array
- */
-function ordered_anchors($views_data) {
-  $real_order_of_anchors = get_anchor_display_page_order();
-  $new_order_of_anchors = array();
-  foreach ($real_order_of_anchors as $anchor) {
-    foreach ($views_data as $view_anchors) {
-      if ($view_anchors->nid == $anchor->entity_id) {
-        $new_order_of_anchors[] = $view_anchors;
-      }
+  
+ elseif ($view->name == "special_auto_review_widget" && $view->current_display == 'special_auto_review_widget_list') {
+    $header_content = l(t('Search Content'), 'special-auto-review-widget-contents');
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "special_auto_review_widget" && $view->current_display == 'special_auto_review_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Special Auto Review Widget'), 'special-auto-review-widget-lsit');
+      $view->attachment_before = $header_content;
     }
   }
-  return $new_order_of_anchors;
+  
+   elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_list') {
+    $header_content = l(t('Search Content'), 'yearend-left-widget-contents');
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Yearender Top News & Top Videos Widget'), 'yearend-left-widget-list');
+      $view->attachment_before = $header_content;
+    }
+  }
+  
 }

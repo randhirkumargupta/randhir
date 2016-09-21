@@ -510,6 +510,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   height: 100px;
   border-radius: 50%;
   background-color: #d3d6db;
+  overflow: hidden;
 }
 .personalized-user .user-name {
   color: #1a3c8d;
@@ -1006,6 +1007,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   right: 10px;
   margin: 0;
   bottom: 20px;
+}
+#content #block-formblock-ugc .node-ugc-form table td .ajax-progress {
+  display: none;
 }
 #content #block-formblock-ugc .node-ugc-form table + div .field-add-more-submit {
   margin-left: 0;
@@ -1528,6 +1532,26 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   position: absolute;
   z-index: 99;
 }
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id {
+  margin-top: 0;
+}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .past-poll li:last-child,
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .past-poll li {
+  margin-bottom: 10px;
+}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .poll-answer-text {
+  float: left;
+  width: 35%;
+}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .noofvotes, .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .percentage {
+  float: left;
+  width: 30%;
+  padding-left: 10px;
+}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .poll-past-percentage-progess {
+  width: 35%;
+  float: left;
+}
 
 .load-more-wrapper {
   display: inline-block;
@@ -1551,4 +1575,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-size: 16px;
   vertical-align: bottom;
   margin-left: 5px;
+}
+
+.page-personalization .ckeditor_links {
+  display: none !important;
+}
+.page-personalization .block .block-title {
+  font: 400 18px/18px Roboto;
+  text-align: center;
+  margin-bottom: 20px;
 }
