@@ -30,7 +30,16 @@
                 }
 
             });
+            $('#edit-field-ads-section-selection-und').change(function() {
+                $('#edit-field-ads-placeholder-und--3').find('option').remove();
+            });
 
+            $('select[name="field_ads_select_secton_option[und]"]').change(function() {
+                var val = $(this).val();
+                if (val == "_none") { // if section select then template variant should be reset
+                    $('select[name="field_ads_placeholder[und]"]').html("");
+                }
+            });
 
         }
 
