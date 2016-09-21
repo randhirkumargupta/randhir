@@ -48,5 +48,31 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
     }
   }
 
+  $common_byline = $node->field_itg_common_by_line_name['und']['0']['value'];
+  $common_twitter = $node->field_itg_common_by_line_twitter['und']['0']['value'];
+  $common_reporter = $node->field_common_by_line_reporter_id['und']['0']['value'];
+
+  if (isset($node->field_itg_common_by_line_name['und']['0']['value'])) {
+  $story_common = explode(',', trim($common_byline));
+    foreach ($story_common as $story_common_val) {
+    $document->addField('sm_field_itg_common_by_line_name', $story_common_val);
+   
+  }
+  }
   
+  if (isset($node->field_itg_common_by_line_twitter['und']['0']['value'])) {
+  $story_twit = explode(',', trim($common_twitter));
+    foreach ($story_twit as $story_twit_val) {
+    $document->addField('sm_field_itg_common_by_line_twit', $story_twit_val);
+   
+  }
+  }
+  
+  if (isset($node->field_common_by_line_reporter_id['und']['0']['value'])) {
+  $story_common_rep = explode(',', trim($common_reporter));
+    foreach ($story_common_rep as $story_common_rep_val) {
+    $document->addField('sm_field_common_by_line_reporter', $story_common_rep_val);
+   
+  }
+  }
 }
