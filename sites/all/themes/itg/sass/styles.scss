@@ -2548,6 +2548,16 @@ footer{
         @include font(12px);
         color: #8a8a8a;
     }
+    .social-share{
+                display: inline-block;
+                vertical-align: middle;
+                @include social-share;    
+                ul{
+                    li{
+                        padding-right: 4px;                    
+                    }
+                }
+            }
     ul{
         @extend .list-none;
     }
@@ -2741,6 +2751,16 @@ footer{
                             float: left;  
                             padding-left: 20px;
                         }
+                    }
+                }
+            }
+            .social-share{
+                display: inline-block;
+                vertical-align: middle;
+                @include social-share;    
+                ul{
+                    li{
+                        padding-right: 4px;                    
                     }
                 }
             }
