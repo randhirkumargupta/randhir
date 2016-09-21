@@ -124,7 +124,7 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'page') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= l(t('Search Content'), 'section-wise-draggable-content-order', array('query' => array('destination' => arg(0))));
+    //$header_content .= l(t('Search Content'), 'section-wise-draggable-content-order', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
     if (!isset($_GET['category_tid'])) {
 //$view = array();
