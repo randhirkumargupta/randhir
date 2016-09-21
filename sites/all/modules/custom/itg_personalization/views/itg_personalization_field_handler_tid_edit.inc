@@ -70,8 +70,10 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
       '#validate' => array(),
       '#attributes' => array(
             'onclick' => 'jQuery(".sliderfield").find(".ui-slider-range").css("width", "50%");
+              jQuery(".sliderfield-value-field").val("50");
         jQuery(".sliderfield").find(".ui-slider-handle").css("left", "50%");
         jQuery(".sliderfield").find(".sliderfield-display-values-field").text(50); return false;',
+          
           ),
     );
     // Submit to the current page if not a page display.
