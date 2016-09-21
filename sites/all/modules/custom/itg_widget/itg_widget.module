@@ -448,6 +448,12 @@ function itg_widget_block_info() {
     $blocks['dont_miss'] = array(
         'info' => t('Widget: Dont Miss form custom table'),
     );
+    $blocks['yearende_left_top_news'] = array(
+        'info' => t('Widget: Year end left top news form custom table'),
+    );
+    $blocks['yearende_left_top_videos'] = array(
+        'info' => t('Widget: Year end left top Videos form custom table'),
+    );
     $blocks['watch_right_now_videos_widget'] = array(
         'info' => t('Widget: Watch right now videos'),
     );
@@ -542,6 +548,20 @@ function itg_widget_block_view($delta = '') {
             $info['widget_name'] = 'dont_miss_content_widget';
             $data = itg_widget_dont_miss_ordering_data($info);
             $block['content'] = theme("dont_miss_widget", array("data" => $data));
+            break;
+        case 'yearende_left_top_news':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+            $info['widget_name'] = 'yearender_left_news_video';
+            $data = itg_widget_yearend_top_news_ordering_data($info);
+           
+            $block['content'] = theme("year_end_top_news", array("data" => $data));
+            break;
+        case 'yearende_left_top_videos':
+           module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+            $info['widget_name'] = 'yearender_left_news_video';
+            $data = itg_widget_yearend_top_videos_ordering_data($info);
+           
+            $block['content'] = theme("year_end_top_videos", array("data" => $data));
             break;
         // Trending videos ordering reordering widget case
         case 'trending_videos_widget':
@@ -1070,6 +1090,12 @@ function itg_widget_theme() {
         'personlization_front_end' => array(
             'template' => 'templates/personlization-front-end',
         ),
+        'year_end_top_news' => array(
+            'template' => 'templates/year-end-top-news',
+        ),
+        'year_end_top_videos' => array(
+            'template' => 'templates/year-end-top-videos',
+        ),
     );
     return $themes;
 }
@@ -1369,6 +1395,13 @@ function itg_widget_views_query_alter(&$view, &$query) {
     if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
         $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
     }
+    
+    if ($view->current_display == 'yearender' || $view->current_display == 'block_2') {
+        $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    }
+    if ($view->current_display == 'yearender' || $view->current_display == 'block_1') {
+        $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    }
 }
 
 /**
@@ -1616,6 +1649,47 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
         return $result;
     }
 }
+
+/**
+ * Function returns data for cutom tables widgets.
+ * 
+ * @param string $widget_name
+ * @param int $range_max
+ * @param int $range_min
+ * @return array
+ */
+function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $content_type,$range_max, $range_min = 0) {
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->condition('iwo.widget', $widget_name)
+            ->condition('n.status', 1)
+            ->condition('iwo.content_type',$content_type)
+            ->orderBy('iwo.weight', 'ASC')
+            ->range($range_min, $range_max)
+            ->fields('iwo', array('nid', 'extra', 'weight'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $weight = 0;
+    foreach ($result as $data) {
+        $weight +=$data['weight'];
+    }
+
+    if ($weight > 0) {
+        return $result;
+    } else {
+        // Query for renctaly careated node if weight is not saved
+        $query = db_select('itg_widget_order', 'iwo');
+        $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+        $query->condition('iwo.widget', $widget_name)
+                ->condition('n.status', 1)
+                ->condition('iwo.content_type',$content_type)
+                ->orderBy('n.nid', 'DESC')
+                ->range($range_min, $range_max)
+                ->fields('iwo', array('nid', 'extra', 'weight'));
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+}
+
 
 /**
  * {@inheritdoc}
