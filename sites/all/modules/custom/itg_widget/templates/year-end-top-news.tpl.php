@@ -1,5 +1,5 @@
 <?php if (!empty($data)) : global $base_url; ?>
-  <div class="dont-miss">
+  <div class="dont-miss top-news">
     <ul>
       <?php foreach ($data as $key => $node_data) { ?>
         <li class="dont-miss-listing" id="dont-miss-<?php print $key ?>">
@@ -40,4 +40,5 @@
   </div>
 <?php else : ?>
   <span class="no-result-found"><?php print t("Content Not Found") ?></span>
+  
 <?php endif; ?>

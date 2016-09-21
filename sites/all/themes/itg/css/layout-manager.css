@@ -961,3 +961,18 @@ a {
 }
 
 /*End Photo section slider Homepage*/
+/*CSS Start Page Year End page */
+.yearend-page .itg-643 .droppable {
+  min-height: 643px;
+}
+.yearend-page .itg-1550 .droppable {
+  min-height: 1510px;
+}
+.yearend-page .itg-785 .droppable {
+  min-height: 785px;
+}
+.yearend-page .itg-628 .droppable {
+  min-height: 628px;
+}
+
+/*CSS End Page Year End page */
