@@ -130,38 +130,38 @@ function itg_widget_menu() {
  * {@inheritdoc}
  */
 function itg_widgets_custom_variables() {
-    $form = array();
-    $form['program_category_id_for_programmes'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Enter Program Category Id'),
-        '#default_value' => variable_get('program_category_id_for_programmes'),
-        '#required' => TRUE,
-        '#size' => 20,
-        '#maxlength' => 20,
-    );
-    $form['so_sorry_category_id_for_widget'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Enter So Sorry Category Id'),
-        '#default_value' => variable_get('so_sorry_category_id_for_widget'),
-        '#required' => TRUE,
-        '#size' => 20,
-        '#maxlength' => 20,
-    );
-    $form['anchor_id_for_widget'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Enter Occupation for Anchors'),
-        '#default_value' => variable_get('anchor_id_for_widget'),
-        '#size' => 20,
-        '#maxlength' => 20,
-    );
-    $form['year_end_for_widget'] = array(
-        '#type' => 'textfield',
-        '#title' => t('Enter tid of year end'),
-        '#default_value' => variable_get('year_end_for_widget'),
-        '#size' => 20,
-        '#maxlength' => 20,
-    );
-    return system_settings_form($form);
+  $form = array();
+  $form['program_category_id_for_programmes'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter Program Category Id'),
+      '#default_value' => variable_get('program_category_id_for_programmes'),
+      '#required' => TRUE,
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+  $form['so_sorry_category_id_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter So Sorry Category Id'),
+      '#default_value' => variable_get('so_sorry_category_id_for_widget'),
+      '#required' => TRUE,
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+  $form['anchor_id_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter Occupation for Anchors'),
+      '#default_value' => variable_get('anchor_id_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+  $form['year_end_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of year end'),
+      '#default_value' => variable_get('year_end_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+  return system_settings_form($form);
 }
 
 /**
@@ -451,9 +451,14 @@ function itg_widget_block_info() {
       'info' => t('Widget: Featured Video Carousel - Rolling Slider'),
   );
 
-<<<<<<< HEAD
   $blocks['dont_miss'] = array(
       'info' => t('Widget: Dont Miss form custom table'),
+  );
+  $blocks['yearende_left_top_news'] = array(
+      'info' => t('Widget: Year end left top news form custom table'),
+  );
+  $blocks['yearende_left_top_videos'] = array(
+      'info' => t('Widget: Year end left top Videos form custom table'),
   );
   $blocks['watch_right_now_videos_widget'] = array(
       'info' => t('Widget: Watch right now videos'),
@@ -472,34 +477,6 @@ function itg_widget_block_info() {
       'info' => t('So Sorry Social Icons Custom Block'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
-=======
-    $blocks['dont_miss'] = array(
-        'info' => t('Widget: Dont Miss form custom table'),
-    );
-    $blocks['yearende_left_top_news'] = array(
-        'info' => t('Widget: Year end left top news form custom table'),
-    );
-    $blocks['yearende_left_top_videos'] = array(
-        'info' => t('Widget: Year end left top Videos form custom table'),
-    );
-    $blocks['watch_right_now_videos_widget'] = array(
-        'info' => t('Widget: Watch right now videos'),
-    );
-    $blocks['anchor_langing_page_menu'] = array(
-        'info' => t('Anchor landing page menu'),
-    );
-    $blocks['personlization'] = array(
-        'info' => t('Persionlization front end'),
-    );
-    $blocks['home_page_poll_widget_block'] = array(
-        'info' => t('Home Page Poll Widget'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
-    $blocks['sosorry_social_icons_block'] = array(
-        'info' => t('So Sorry Social Icons Custom Block'),
-        'cache' => DRUPAL_CACHE_GLOBAL,
-    );
->>>>>>> 94fae86f57c486163d963fccafa45f50a6ded4e7
 
   return $blocks;
 }
@@ -508,7 +485,6 @@ function itg_widget_block_info() {
  * {@inheritdoc}
  */
 function itg_widget_block_view($delta = '') {
-<<<<<<< HEAD
   $block = array();
   switch ($delta) {
     // Big Story Content.
@@ -579,6 +555,20 @@ function itg_widget_block_view($delta = '') {
       $data = itg_widget_dont_miss_ordering_data($info);
       $block['content'] = theme("dont_miss_widget", array("data" => $data));
       break;
+    case 'yearende_left_top_news':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+      $info['widget_name'] = 'yearender_left_news_video';
+      $data = itg_widget_yearend_top_news_ordering_data($info);
+
+      $block['content'] = theme("year_end_top_news", array("data" => $data));
+      break;
+    case 'yearende_left_top_videos':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+      $info['widget_name'] = 'yearender_left_news_video';
+      $data = itg_widget_yearend_top_videos_ordering_data($info);
+
+      $block['content'] = theme("year_end_top_videos", array("data" => $data));
+      break;
     // Trending videos ordering reordering widget case
     case 'trending_videos_widget':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
@@ -631,144 +621,6 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
 
       drupal_add_js('jQuery(window).load(function() {
-=======
-    $block = array();
-    switch ($delta) {
-        // Big Story Content.
-        case 'big_story_format':
-            module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
-            //$block['subject'] = t('');
-            $info['widget'] = 'big_story_format_widget';
-            $data = itg_widget_big_story_block_data($info);
-            $block['content'] = theme("widget_big_story_format", array("data" => $data));
-            break;
-        // section ordering reordering widget case
-        case 'section_wise_order':
-            module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
-            // value is hardcoded need to be change for dyanamic functionality
-            $info['section'] = '240'; // tid of section
-            $info['content_type'] = ''; // content type machine name
-            // view name which is stored in draggableviews_structure table
-            $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-            //$block['subject'] = t('Section wise ordering from custom table');
-            $data = itg_widget_section_wise_ordering_from_custom_table($info);
-            $block['content'] = theme("section_wise_ordering", array("data" => $data));
-            break;
-        case 'rhs_section_wise_order':
-            module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
-            // value is hardcoded need to be change for dyanamic functionality
-            $info['section'] = '437'; // tid of section
-            $info['content_type'] = ''; // content type machine name
-            // view name which is stored in draggableviews_structure table
-            $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-            //$block['subject'] = t('Section wise ordering from custom table');
-            $data = itg_widget_section_wise_ordering_for_rhs_from_custom_table($info);
-            $block['content'] = theme("rhs_section_wise_ordering", array("data" => $data));
-            break;
-        case 'we_may_suggest':
-            $display = get_rhs_block_display_condtion($delta);            
-            if (empty($display)) {
-              return;
-            }
-            module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
-            $info['section'] = '301'; // tid of section
-            $info['content_type'] = 'story'; // content type machine name
-            $info['view_name'] = 'we_may_suggest_widget';
-            $data = itg_widget_we_may_suggest_ordering_from_custom_table($info);
-            $block['content'] = theme("we_may_suggest", array("data" => $data));
-            break;
-        // Top story ordering reordering widget case
-        case 'top_stories_ordering':
-            module_load_include('inc', 'itg_widget', 'includes/section-odering');
-            $info['view_name'] = 'story_widget'; // view name
-            $info['page'] = 'page_2'; // page name
-            $info['nodequeue'] = 'top_stories';
-            $data = itg_widget_top_stories_ordering_data($info);
-            $block['content'] = theme("top_stories_ordering", array("data" => $data));
-            break;
-        // Top story ordering reordering widget case
-        case 'most_popular':
-            module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
-            $info['view_name'] = 'story_widget'; // view name
-            $info['page'] = 'most_popular_widget'; // page name
-            $info['nodequeue'] = 'most_popular';
-            $data = itg_widget_most_popular_ordering_data($info);
-            $block['content'] = theme("most_popular_widget", array("data" => $data));
-            break;
-        // Top story ordering reordering widget case
-        case 'dont_miss':
-            module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
-            $info['widget_name'] = 'dont_miss_content_widget';
-            $data = itg_widget_dont_miss_ordering_data($info);
-            $block['content'] = theme("dont_miss_widget", array("data" => $data));
-            break;
-        case 'yearende_left_top_news':
-            module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
-            $info['widget_name'] = 'yearender_left_news_video';
-            $data = itg_widget_yearend_top_news_ordering_data($info);
-           
-            $block['content'] = theme("year_end_top_news", array("data" => $data));
-            break;
-        case 'yearende_left_top_videos':
-           module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
-            $info['widget_name'] = 'yearender_left_news_video';
-            $data = itg_widget_yearend_top_videos_ordering_data($info);
-           
-            $block['content'] = theme("year_end_top_videos", array("data" => $data));
-            break;
-        // Trending videos ordering reordering widget case
-        case 'trending_videos_widget':
-            module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
-            $info['view_name'] = 'story_widget'; // view name
-            $info['page'] = 'trending_videos_widget'; // page name
-            $info['nodequeue'] = 'trending_videos';
-            $data = itg_widget_trending_videos_widget_ordering_data($info);
-            $block['content'] = theme("trending_videos_widget", array("data" => $data));
-            break;
-        // Watch Right Now ordering reordering widget case
-        case 'watch_right_now_videos_widget':
-            $display = get_rhs_block_display_condtion($delta);         
-            if (empty($display)) {
-              return;
-            }
-            module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
-            $info['view_name'] = 'story_widget'; // view name
-            $info['page'] = 'watch_right_now_widget'; // page name
-            $info['nodequeue'] = 'watch_right_now';
-            $data = itg_widget_watch_right_now_videos_widget_ordering_data($info);
-            $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
-            break;
-        // Top takes videos ordering reordering widget case
-        case 'top_takes_videos_widget':
-            $display = get_rhs_block_display_condtion($delta);            
-            if (empty($display)) {
-              return;
-            }
-            
-            module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
-            $info['view_name'] = 'story_widget'; // view name
-            $info['page'] = 'top_takes_video_widget'; // page name
-            $info['nodequeue'] = 'top_takes_videos';
-            $data = itg_widget_top_takes_videos_widget_ordering_data($info);
-            $block['content'] = theme("top_takes_videos_widget", array("data" => $data));
-            break;
-        // home page feature ordering reordering widget case
-        case 'home_page_feature':
-            module_load_include('inc', 'itg_widget', 'includes/home-page-feature');
-            $info['view_name'] = 'home_page_feature_widget'; // view name
-            $info['page'] = 'page_2'; // page name
-            $info['nodequeue'] = 'home_page_feature';
-            $data = itg_widget_home_page_feature_data($info);
-            $block['content'] = theme("home_page_feature", array("data" => $data));
-            break;
-        // featured photo carousel reordering widget case
-        case 'featured_photo_carousel':
-            drupal_add_library('flexslider', 'flexslider');
-            libraries_load('flexslider');
-            module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
-
-            drupal_add_js('jQuery(window).load(function() {
->>>>>>> 94fae86f57c486163d963fccafa45f50a6ded4e7
             jQuery(".flexslider").flexslider({
             animation: "slide",
             prevText: "",
@@ -957,81 +809,94 @@ function itg_widget_block_view($delta = '') {
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
-    global $base_url;
-    $setting = array();
-    $queue_flag = "";
-    $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
-    $current_display = isset($form_state['view']->current_display) ? $form_state['view']->current_display : "";
-    /* Load all nodes queues */
-    $queues = nodequeue_load_queues(nodequeue_get_all_qids());
-    switch ($view_name) {
-        // top story
-        case 'story_widget':
-            if ($current_display == 'most_popular') {
-                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
-                $queue_flag = 5; // most popular
-            } elseif ($current_display == 'trending_videos') {
-                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-                $queue_flag = 4; // top story widget qid
-            } elseif ($current_display == 'top_takes_video') {
-                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-                $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('top_takes_videos'); // top story widget qid
-            } elseif ($current_display == 'watch_right_now') {
-                //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-                $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('watch_right_now'); // top story widget qid
-            } else {
-                $queue_flag = 1; // trending_videos widget qid
-            }
-            break;
-        // home page feature
-        case 'home_page_feature_widget':
-            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
-            $queue_flag = 2; // home page feature qid
-            break;
-        // We may suggest
-        case 'we_may_suggest':
-            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
-            $queue_flag = 3; // home page feature qid
-            break;
-        case 'widget_anchors_listing':
-            // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
-            $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('widget_anchor'); // anchor widget nodequeue
-            break;
+  global $base_url;
+  $setting = array();
+  $queue_flag = "";
+  $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
+  $current_display = isset($form_state['view']->current_display) ? $form_state['view']->current_display : "";
+  /* Load all nodes queues */
+  $queues = nodequeue_load_queues(nodequeue_get_all_qids());
+  switch ($view_name) {
+    // top story
+    case 'story_widget':
+      if ($current_display == 'most_popular') {
+        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
+        $queue_flag = 5; // most popular
+      }
+      elseif ($current_display == 'trending_videos') {
+        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+        $queue_flag = 4; // top story widget qid
+      }
+      elseif ($current_display == 'top_takes_video') {
+        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+        $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('top_takes_videos'); // top story widget qid
+      }
+      elseif ($current_display == 'watch_right_now') {
+        //  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
+        $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('watch_right_now'); // top story widget qid
+      }
+      else {
+        $queue_flag = 1; // trending_videos widget qid
+      }
+      break;
+    // home page feature
+    case 'home_page_feature_widget':
+      // watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
+      $queue_flag = 2; // home page feature qid
+      break;
+    // We may suggest
+    case 'we_may_suggest':
+      // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+      $queue_flag = 3; // home page feature qid
+      break;
+    case 'widget_anchors_listing':
+      // watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
+      $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('widget_anchor'); // anchor widget nodequeue
+      break;
 
-        case 'photo_carousel_widget':
-            if ($current_display == 'photo_carousel_list') {
-                //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
-                $queue_flag = get_nodequeue_load_queue_by_name('photo_carousel');
-                ; // photo carousel list widget qid
-            }
-            if ($current_display == 'video_carousel_list') {
-                //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Video Carousel video");
-                $queue_flag = get_nodequeue_load_queue_by_name('video_carousel'); // video carousel list widget qid
-            }
+    case 'photo_carousel_widget':
+      if ($current_display == 'photo_carousel_list') {
+        //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
+        $queue_flag = get_nodequeue_load_queue_by_name('photo_carousel');
+        ; // photo carousel list widget qid
+      }
+      if ($current_display == 'video_carousel_list') {
+        //watchdog("Widget", "Nodequeue bulk operation settings has been found for : Video Carousel video");
+        $queue_flag = get_nodequeue_load_queue_by_name('video_carousel'); // video carousel list widget qid
+      }
 
-            break;
-    }
-    if (!empty($queues[$queue_flag])) {
-        $setting['name'] = $queues[$queue_flag]->name;
-        $setting['qid'] = $queues[$queue_flag]->qid;
-        $setting['title'] = $queues[$queue_flag]->title;
-        // add js for setting
-        drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
-        // pass setting to js for bulk operation
-        drupal_add_js(array('itg_widget' => array('data' => $setting)), 'setting');
-    }
-    // Alter form for confirm message during bulk operation.
-    // Below forms are thoese which are not doing action for nodequeue.
-    // Nodequeue from are being altered form itg_widget.main.js.
-    $form_id_array_to_alter = array(
-        'views_form_section_wise_draggable_content_order_big_story_format',
-        'views_form_section_wise_draggable_content_order_dont_miss_content',
-        'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
-        'views_form_section_wise_draggable_content_order_page',
-    );
+      break;
+  }
+  if (!empty($queues[$queue_flag])) {
+    $setting['name'] = $queues[$queue_flag]->name;
+    $setting['qid'] = $queues[$queue_flag]->qid;
+    $setting['title'] = $queues[$queue_flag]->title;
+    // add js for setting
+    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
+    // pass setting to js for bulk operation
+    drupal_add_js(array('itg_widget' => array('data' => $setting)), 'setting');
+  }
+  // Alter form for confirm message during bulk operation.
+  // Below forms are thoese which are not doing action for nodequeue.
+  // Nodequeue from are being altered form itg_widget.main.js.
+  $form_id_array_to_alter = array(
+      'views_form_section_wise_draggable_content_order_big_story_format',
+      'views_form_section_wise_draggable_content_order_dont_miss_content',
+      'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
+      'views_form_section_wise_draggable_content_order_page',
+  );
 
 
-<<<<<<< HEAD
+
+  if (in_array($form_id, $form_id_array_to_alter)) {
+    $form['actions']['submit']['#value'] = t('Confirm');
+  }
+
+
+  foreach (forms_uses_checked_content_id() as $forms) {
+    //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
+  }
+
   $syndication_form = sydication_field_filter_views_form();
   if (in_array($form['#id'], $syndication_form)) {
     $sydication_field_name = 'field_story_syndication_value_1_op';
@@ -1047,56 +912,30 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
     drupal_add_css('.form-item-field-story-syndication-value-1 , .form-item-field-story-syndication-value {display:none;}', array('type' => 'inline'));
     drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
-=======
-    if (in_array($form_id, $form_id_array_to_alter)) {
-        $form['actions']['submit']['#value'] = t('Confirm');
-    }
->>>>>>> 94fae86f57c486163d963fccafa45f50a6ded4e7
 
+    $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
+    $url_without_query_string = end(explode('/', $url_chunk[0]));
 
-    foreach (forms_uses_checked_content_id() as $forms) {
-        //$form['submit']['#validate'][] = 'session_dependent_custom_form_validation';
-    }
+    $form['reset'] = array(
+        '#type' => 'markup',
+        '#markup' => l("Reset", $url_without_query_string, array("query" => $query_url)),
+    );
+  }
 
-    $syndication_form = sydication_field_filter_views_form();
-    if (in_array($form['#id'], $syndication_form)) {
-        $sydication_field_name = 'field_story_syndication_value_1_op';
-        $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
-        if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
-            $sydication_field_name = 'field_story_syndication_value_op';
-            $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
-        }
-        unset($form[$sydication_field_name]['#options']);
-        $form[$sydication_field_name]['#options']['all'] = '- Any -';
-        $form[$sydication_field_name]['#options']['or'] = 'Yes';
-        $form[$sydication_field_name]['#options']['not'] = 'No';
-
-        drupal_add_css('.form-item-field-story-syndication-value-1 , .form-item-field-story-syndication-value {display:none;}', array('type' => 'inline'));
-        drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
-
-        $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
-        $url_without_query_string = end(explode('/', $url_chunk[0]));
-
-        $form['reset'] = array(
-            '#type' => 'markup',
-            '#markup' => l("Reset", $url_without_query_string, array("query" => $query_url)),
-        );
-    }
-
-    // Assign deafult values in case of checkbox are checked.
-    $form = get_sessions_of_ticked_nodes($form);
+  // Assign deafult values in case of checkbox are checked.
+  $form = get_sessions_of_ticked_nodes($form);
 }
 
 // Exposed filter forms id
 function sydication_field_filter_views_form() {
-    return array(
-        'views-exposed-form-recipe-management-page',
-        'views-exposed-form-recipe-management-page-1',
-        'views-exposed-form-recipe-management-page-2',
-        'views-exposed-form-strory-menegment-page-1',
-        'views-exposed-form-photo-gallery-management-page-1',
-        'views-exposed-form-videogallery-management-page-1'
-    );
+  return array(
+      'views-exposed-form-recipe-management-page',
+      'views-exposed-form-recipe-management-page-1',
+      'views-exposed-form-recipe-management-page-2',
+      'views-exposed-form-strory-menegment-page-1',
+      'views-exposed-form-photo-gallery-management-page-1',
+      'views-exposed-form-videogallery-management-page-1'
+  );
 }
 
 /**
@@ -1211,7 +1050,6 @@ function get_sessions_of_ticked_nodes(&$form) {
  * {@inheritdoc}
  */
 function itg_widget_theme() {
-<<<<<<< HEAD
   $themes = array(
       'section_wise_ordering' => array(
           'template' => 'templates/section-ordering-data',
@@ -1264,70 +1102,14 @@ function itg_widget_theme() {
       'personlization_front_end' => array(
           'template' => 'templates/personlization-front-end',
       ),
+      'year_end_top_news' => array(
+          'template' => 'templates/year-end-top-news',
+      ),
+      'year_end_top_videos' => array(
+          'template' => 'templates/year-end-top-videos',
+      ),
   );
   return $themes;
-=======
-    $themes = array(
-        'section_wise_ordering' => array(
-            'template' => 'templates/section-ordering-data',
-        ),
-        'rhs_section_wise_ordering' => array(
-            'template' => 'templates/rhs-section-ordering-data',
-        ),
-        'top_stories_ordering' => array(
-            'template' => 'templates/top-stories-ordering-data',
-        ),
-        'home_page_feature' => array(
-            'template' => 'templates/home-page-feature',
-        ),
-        'we_may_suggest' => array(
-            'template' => 'templates/we-may-suggest',
-        ),
-        'widget_big_story_format' => array(
-            'template' => 'templates/big-story-format',
-        ),
-        'trending_videos_widget' => array(
-            'template' => 'templates/trending-videos-widget',
-        ),
-        'most_popular_widget' => array(
-            'template' => 'templates/most-popular-widget',
-        ),
-        'featured_photo_carousel' => array(
-            'template' => 'templates/featured-photo-carousel',
-        ),
-        'featured_photo_carousel_rollingslider' => array(
-            'template' => 'templates/featured-photo-carousel-rollingslider',
-        ),
-        'featured_video_carousel' => array(
-            'template' => 'templates/featured-video-carousel',
-        ),
-        'featured_video_carousel_rollingslider' => array(
-            'template' => 'templates/featured-video-carousel-rollingslider',
-        ),
-        'dont_miss_widget' => array(
-            'template' => 'templates/dont-miss-widget',
-        ),
-        'top_takes_videos_widget' => array(
-            'template' => 'templates/top-takes-videos-widget',
-        ),
-        'itg_widget_watch_right_now_videos_widget' => array(
-            'template' => 'templates/watch-right-now-videos-widget',
-        ),
-        'anchor_langing_page_menu' => array(
-            'template' => 'templates/anchor-landing-page-menu',
-        ),
-        'personlization_front_end' => array(
-            'template' => 'templates/personlization-front-end',
-        ),
-        'year_end_top_news' => array(
-            'template' => 'templates/year-end-top-news',
-        ),
-        'year_end_top_videos' => array(
-            'template' => 'templates/year-end-top-videos',
-        ),
-    );
-    return $themes;
->>>>>>> 94fae86f57c486163d963fccafa45f50a6ded4e7
 }
 
 /**
@@ -1625,27 +1407,20 @@ function itg_widget_views_query_alter(&$view, &$query) {
   if ($view->name == 'so_sorry' && $view->current_display == 'most_watched') {
     $query->where[1]['conditions'][3]['value'] = variable_get('so_sorry_category_id_for_widget');
   }
-
-<<<<<<< HEAD
   if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
   }
-=======
-    if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
-        $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
-    }
-    
-    if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
-        $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
-    }
-    
-    if ($view->current_display == 'yearender' || $view->current_display == 'block_2') {
-        $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
-    }
-    if ($view->current_display == 'yearender' || $view->current_display == 'block_1') {
-        $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
-    }
->>>>>>> 94fae86f57c486163d963fccafa45f50a6ded4e7
+
+  if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+  }
+
+  if ($view->current_display == 'yearender' || $view->current_display == 'block_2') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+  }
+  if ($view->current_display == 'yearender' || $view->current_display == 'block_1') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+  }
 }
 
 /**
@@ -1903,38 +1678,38 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
  * @param int $range_min
  * @return array
  */
-function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $content_type,$range_max, $range_min = 0) {
+function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $content_type, $range_max, $range_min = 0) {
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+  $query->condition('iwo.widget', $widget_name)
+          ->condition('n.status', 1)
+          ->condition('iwo.content_type', $content_type)
+          ->orderBy('iwo.weight', 'ASC')
+          ->range($range_min, $range_max)
+          ->fields('iwo', array('nid', 'extra', 'weight'));
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $weight = 0;
+  foreach ($result as $data) {
+    $weight +=$data['weight'];
+  }
+
+  if ($weight > 0) {
+    return $result;
+  }
+  else {
+    // Query for renctaly careated node if weight is not saved
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
             ->condition('n.status', 1)
-            ->condition('iwo.content_type',$content_type)
-            ->orderBy('iwo.weight', 'ASC')
+            ->condition('iwo.content_type', $content_type)
+            ->orderBy('n.nid', 'DESC')
             ->range($range_min, $range_max)
             ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $weight = 0;
-    foreach ($result as $data) {
-        $weight +=$data['weight'];
-    }
-
-    if ($weight > 0) {
-        return $result;
-    } else {
-        // Query for renctaly careated node if weight is not saved
-        $query = db_select('itg_widget_order', 'iwo');
-        $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
-        $query->condition('iwo.widget', $widget_name)
-                ->condition('n.status', 1)
-                ->condition('iwo.content_type',$content_type)
-                ->orderBy('n.nid', 'DESC')
-                ->range($range_min, $range_max)
-                ->fields('iwo', array('nid', 'extra', 'weight'));
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
+    return $result;
+  }
 }
-
 
 /**
  * {@inheritdoc}
