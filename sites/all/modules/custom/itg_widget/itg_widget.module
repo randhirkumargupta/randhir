@@ -507,6 +507,10 @@ function itg_widget_block_view($delta = '') {
             $block['content'] = theme("rhs_section_wise_ordering", array("data" => $data));
             break;
         case 'we_may_suggest':
+            $display = get_rhs_block_display_condtion($delta);            
+            if (empty($display)) {
+              return;
+            }
             module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
             $info['section'] = '301'; // tid of section
             $info['content_type'] = 'story'; // content type machine name
@@ -550,6 +554,10 @@ function itg_widget_block_view($delta = '') {
             break;
         // Watch Right Now ordering reordering widget case
         case 'watch_right_now_videos_widget':
+            $display = get_rhs_block_display_condtion($delta);         
+            if (empty($display)) {
+              return;
+            }
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
             $info['view_name'] = 'story_widget'; // view name
             $info['page'] = 'watch_right_now_widget'; // page name
@@ -559,6 +567,11 @@ function itg_widget_block_view($delta = '') {
             break;
         // Top takes videos ordering reordering widget case
         case 'top_takes_videos_widget':
+            $display = get_rhs_block_display_condtion($delta);            
+            if (empty($display)) {
+              return;
+            }
+            
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
             $info['view_name'] = 'story_widget'; // view name
             $info['page'] = 'top_takes_video_widget'; // page name
@@ -1608,36 +1621,18 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
  * {@inheritdoc}
  */
 function itg_widget_block_view_alter(&$data, $block) {
-    $item = menu_get_item();
-    $arg = arg();
-    $page_argument = $item['page_arguments'];
-    if ($block->delta == 'programmes-rhs_programmes') {
-        if ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name != 'Anchor' && arg(0) == 'node' && isset($_GET['sid'])) {
-            $data['content'] = array();
-        } elseif ($page_argument[0]->type == 'story' || $page_argument[0]->type == 'breaking_news') {
-            $data['content'] = array();
-        } elseif ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
-            $data['content'] = array();
-        }
+  $item = menu_get_item();
+  $arg = arg();
+  
+  $page_argument = $item['page_arguments'];
+  if ($block->delta == 'programmes-rhs_programmes') {   
+    if ($arg[0] == 'anchors-list' || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name == 'Anchor') || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+      return TRUE;
     }
-
-    if ($block->delta == 'we_may_suggest') {
-        if ($arg[0] == 'node' && !isset($_GET['sid']) && $page_argument[0]->type != 'story' && $page_argument[0]->type != 'breaking_news') {
-            $data['content'] = array();
-        }
+    else {
+      $data['content'] = array();
     }
-
-    if ($block->delta == 'watch_right_now_videos_widget') {
-        if ($arg[0] == 'node' && !isset($_GET['sid']) && $page_argument[0]->type != 'story' && $page_argument[0]->type != 'breaking_news') {
-            $data['content'] = array();
-        }
-    }
-
-    if ($block->delta == 'top_takes_videos_widget') {
-        if ($arg[0] == 'node' && !isset($_GET['sid']) && $page_argument[0]->type != 'story' && $page_argument[0]->type != 'breaking_news') {
-            $data['content'] = array();
-        }
-    }
+  }  
 }
 
 /**
@@ -1935,6 +1930,65 @@ function itg_widget_issuewidgetlist_filter_form_submit($form, $form_state) {
  * @param array $form_state
  */
 function itg_widget_issuewidgetlist_filter_reset($form, $form_state) {
-
     drupal_goto('issue-magazin-widget-list');
+}
+
+/**
+ * display block on page
+ * @return TRUE or FALSE
+ */
+function itg_block_display_condition() {
+  $arg = arg();
+  $is_fron_page = drupal_is_front_page();
+  if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))) {
+    $tpl_name = get_template_name_by_section_name($arg[2]);
+    if (isset($tpl_name)) {
+     return TRUE; 
+    }
+  } 
+  else if (!empty($is_fron_page)) {
+    return TRUE;          
+  }
+  
+  return FALSE;
+}
+
+/**
+ * display block on page
+ * @return TRUE or FALSE
+ */
+function get_rhs_block_display_condtion($delta = '') {
+  
+  $arg = arg();
+  $item = menu_get_item();
+  $page_argument = $item['page_arguments'];
+  $display_block = itg_block_display_condition();
+  
+  switch ($delta) {
+    case 'watch_right_now_videos_widget':      
+     if ($arg[0] == 'programmes' 
+          || ($page_argument[0]->type == 'story') 
+          || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) 
+          || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) 
+          || $display_block == TRUE) {
+      return TRUE;
+    }
+    break;
+    case 'top_takes_videos_widget':     
+      if ($arg[0] == 'programmes' 
+              || ($page_argument[0]->type == 'story') 
+              || $display_block == TRUE) {
+        return TRUE;
+      }
+    break;
+    case 'we_may_suggest':     
+      if ($arg[0] == 'programmes' 
+              || $arg[0] == 'anchors-list' 
+              || ($page_argument[0]->type == 'story') 
+              || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) 
+              || $display_block == TRUE) {
+        return TRUE;
+      }
+    break;
+  }
 }

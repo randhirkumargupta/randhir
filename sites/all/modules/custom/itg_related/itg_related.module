@@ -272,7 +272,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           $get_comma_value = implode(',', $get_value);
           $val_str = str_replace(",", " OR ", $get_comma_value);
         }
-        else if ($key == 'sm_field_itg_common_by_line_name' || $key == 'sm_alttext' || $key == 'sm_image_title') {
+        else if ($key == 'sm_field_itg_common_by_line_name' || $key == 'sm_alttext' || $key == 'sm_image_title' || $key == 'sm_field_itg_common_by_line_twit') {
           $quotes_string = '"'.$val.'"';
           $val_str = $quotes_string;
         }
@@ -430,22 +430,26 @@ function itg_get_tag($title) {
   }
 }
 
-
 /**
  * Implement itg_get_twitter_list
  * @param string $name
  */
 function itg_get_twitter_list($name) {
-  $reporter_name = db_select('field_data_field_itg_common_by_line_twitter', 'rpn')
-      ->distinct()
-      ->fields('rpn', array('field_itg_common_by_line_twitter_value'))
-      ->condition('field_itg_common_by_line_twitter_value', '%' . $name . '%', 'LIKE')
-      ->condition('field_itg_common_by_line_twitter_value', 'NULL' , '!=')
-      ->execute();
+  $term_array = taxonomy_get_term_by_name('reporter');
+  $term = reset($term_array); # get the first element of the array which is our term object
 
-  while ($record = $reporter_name->fetchAssoc()) {
-    //$options[$prefix . $record['name'] . ':' . $record['tid']] = $record['name'];
-    $options[$record['field_itg_common_by_line_twitter_value']] = $record['field_itg_common_by_line_twitter_value'];
+  $reporter_name = db_select('node', 'n');
+  $reporter_name->join('field_data_field_celebrity_pro_occupation', 'rpn', 'n.nid = rpn.entity_id');
+  $reporter_name->join('field_data_field_reporter_twitter_handle', 'tw', 'n.nid = tw.entity_id');
+  $reporter_name->fields('tw', array('field_reporter_twitter_handle_value'));
+  $reporter_name->condition('field_celebrity_pro_occupation_tid', $term->tid, '=');
+  $reporter_name->condition('n.type', 'reporter', '=');
+  $reporter_name->condition('tw.field_reporter_twitter_handle_value', '%' . $name . '%', 'LIKE');
+  $result = $reporter_name->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $r_title = strtolower($record['field_reporter_twitter_handle_value']);
+    $options[$r_title] = $r_title;
   }
   drupal_json_output($options);
 }
