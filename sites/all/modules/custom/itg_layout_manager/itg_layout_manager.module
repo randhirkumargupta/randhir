@@ -146,7 +146,7 @@ function itg_layout_manager_block_view($delta = '') {
   
   switch ($delta) {
     case 'header_block':
-      
+      $arg = arg();
       // Code for adds
         drupal_add_js('http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap', array('scope' => 'header'));
        // drupal_add_js('http://static.chartbeat.com/js/chartbeat_mab.js', array('scope' => 'header'));
@@ -156,31 +156,15 @@ function itg_layout_manager_block_view($delta = '') {
       
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
-      
-      $is_fron_page = drupal_is_front_page();      
-      if (!empty($is_fron_page)) {          
-        $page_name = 'Home';
-      }
-      else {
-       $page_name = 'Rest';   
-      }
-      //$page_name = 'Home';
-      $data['itg_top'] = get_ad_script($page_name);      
-
+			$page_name = get_ads_page_name();
+			$data['itg_top'] = get_ad_script($page_name);
       $block['content'] = theme('header_block', array('data' => $data));
       break;
     
     case 'footer_block':  
         
       $data = get_itg_footer_menu();
-      $is_fron_page = drupal_is_front_page();      
-      if (!empty($is_fron_page)) {          
-        $page_name = 'Home';
-      }
-      else {
-       $page_name = 'Rest';   
-      }
-      //$page_name = 'Home';
+      $page_name = get_ads_page_name();
       $data['itg_top'] = get_ad_script($page_name);  
       //$data['itg_top'] = get_ad_script('Home');
       $block['content'] = theme('footer_block', array('data' => $data));
@@ -364,7 +348,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
         $vars['widget_data'] = $data;
         $tpl_name = str_replace('--', '__', $tpl_name);
         $vars['theme_hook_suggestions'][] = $tpl_name;
-        //$vars['itg_ad'] = get_ad_script('Section');
+        $vars['itg_ad'] = get_ad_script($tid_val);
       }
     }
     
@@ -378,4 +362,44 @@ function get_default_section_tpl(){
           //->condition('default', 1);
     $last_tpl = $query->execute()->fetchAll();
     p($last_tpl);
+}
+
+/**
+ * Get tid of section tpl
+ * @return int
+ */
+function get_tid_of_section_tpl($tid) {
+  $query = db_select('itg_layout_tpl', 'tpl');
+  $query->fields('tpl', array('section_name'));  
+  $query->condition('section_name', $tid)
+        ->condition('status', 1);
+  $query->orderBy('tpl.id', 'DESC')->range(0,1);//LIMIT to 1 records
+
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get ads page name
+ * @return $page_name
+ */
+function get_ads_page_name() {
+	$arg = arg();
+	$is_fron_page = drupal_is_front_page();      
+	if (!empty($is_fron_page)) {          
+		$page_name = 'Home';
+	} 
+	else if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))) {
+		$ads_tid = get_tid_of_section_tpl($arg[2]);	
+		if (!empty($ads_tid)) {
+			$page_name = $ads_tid;
+		}
+		else {
+			$page_name = 'Rest';
+		}
+	}
+	else {
+	 $page_name = 'Rest';   
+	}
+	
+	return $page_name;
 }
