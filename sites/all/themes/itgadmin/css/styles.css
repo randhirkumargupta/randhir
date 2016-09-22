@@ -7239,7 +7239,7 @@ div.node #comments h2 {
 .node-story-form .form-type-textfield > label,
 .node-story-form .date-combo > legend,
 .node-story-form .form-type-select > label {
-  padding: 5px;
+  padding: 5px 0;
 }
 .node-story-form .form-type-textfield,
 .node-story-form .form-type-password,
