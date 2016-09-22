@@ -25,6 +25,10 @@ h4{
     font-size: $mobile-h4-font-size;
     line-height: $h4-line-height;
 }
+h4.heading{
+    color: $heading-blue-color;
+    @include itg-font($itg-roboto,$itg-font-bold);
+}
 .list-none{
     list-style-type: none;
 }
