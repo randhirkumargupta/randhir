@@ -168,6 +168,28 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
+    $form['auto_road_trips_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Road Trips'),
+      '#default_value' => variable_get('auto_road_trips_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+    $form['auto_tips_and_tricks_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Tips and Tricks'),
+      '#default_value' => variable_get('auto_tips_and_tricks_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+    $form['auto_slider_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Tips and Tricks'),
+      '#default_value' => variable_get('auto_slider_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+   
   return system_settings_form($form);
 }
 
@@ -1429,11 +1451,22 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
   }
   if ($view->name == 'auto' && $view->current_display == 'block_2') {
-    $query->where[1]['conditions'][3]['value'] = variable_get('auto_for_widget');
+    $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
   }
   if ($view->name == 'auto' && $view->current_display == 'block_1') {
-    $query->where[1]['conditions'][3]['value'] = variable_get('auto_for_widget');
+    $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
   }
+  if ($view->name == 'auto' && $view->current_display == 'block_3') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('auto_road_trips_for_widget');
+  }
+  if ($view->name == 'auto' && $view->current_display == 'block_4') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('auto_tips_and_tricks_for_widget');
+  }
+  if ($view->name == 'auto' && $view->current_display == 'block_5') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('auto_slider_for_widget');
+  }
+  
+  
 }
 
 /**
