@@ -17,6 +17,7 @@ function itg_layout_admin() {
   if (arg(2) == 'preview') {
     $data['preview'] = 'yes';
   }
+  drupal_add_js('jQuery(document).ready(function(){ jQuery(".view-filters").hide(); });', array('scope' => 'footer', 'type' => 'inline'));
   drupal_add_css(drupal_get_path('theme', FRONT_THEME_NAME) . '/css/layout-manager.css');
   
   return theme('itg_layout_admin_page', array('widget_data' => $data));  
