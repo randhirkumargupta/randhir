@@ -43,6 +43,27 @@ function itg_widget_form_views_form_so_sorry_so_sorry_videos_widget_alter(&$form
  * {@inheritdoc}
  */
 function itg_widget_form_views_form_special_auto_review_widget_special_auto_review_widget_list_alter(&$form, &$form_state, $form_id) {
+    
+     $draggable_form = $form['draggableviews'];
+    foreach ($draggable_form as $form_key => $from_node) {
+    // Escape #tree as draggable view proview 1st option tree
+    if (is_integer($form_key)) {
+      $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
+      $form['draggableviews'][$form_key]['custom_text'] = array(
+          "#type" => "textfield",
+          "#size" => '',
+          // get value which is saved into custom_table.
+          '#default_value' => _get_custom_text_value_from_nid($default_value),
+          '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
+      );
+    }
+  }
+  // Js added for alter colum name.
+  drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list").find("th.tabledrag-hide").html("Label");
+          });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+
+  drupal_add_css('#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_special_auto_review";
 }
 
@@ -297,7 +318,7 @@ function update_itg_widget_order_table_data_for_special_auto_review($form, &$for
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     db_update('itg_widget_order')
-                ->fields(array('weight' => $value['weight']))
+                 ->fields(array('weight' => $value['weight'],'extra' => $value['custom_text'],))
                  ->condition('widget', 'special_auto_review_content')
             ->condition('nid', $value['id'])
                 ->execute();
