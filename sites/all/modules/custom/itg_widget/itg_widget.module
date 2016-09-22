@@ -1137,6 +1137,9 @@ function itg_widget_theme() {
         'year_end_top_videos' => array(
             'template' => 'templates/year-end-top-videos',
         ),
+        'auto_reviews' => array(
+            'template' => 'templates/auto-reviews',
+        ),
     );
     return $themes;
 }
