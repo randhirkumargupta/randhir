@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-8 itg-form-main">
     <div id="BasicDetails" class="itg-form-section-wrapper">
-      <h2 class="story-title"><?php print t('Quick File'); ?></h2>
+      <h2 class="story-title active"><?php print t('Quick File'); ?></h2>
       <div class="itg-form-section">
         <?php print drupal_render($form['field_story_magazine_story_issue']); ?>
         <?php print drupal_render($form['field_story_select_magazine']); ?>
@@ -60,14 +60,17 @@
         <?php //unset($form['revision_information']); ?>
       </div>
     </div>
+    <div class="itg-form-action">
+      <?php print drupal_render($form['actions']); ?>
+    </div>
   </div>
   <div class="col-md-4">
     <div class="itg-sidebar-form">
-      <div id="Briefcase">
+      <div id="Briefcase" class="itg-sidebar-form-section">
         <h2 class="story-title"><?php print t('Brief case'); ?></h2>
         <?php print drupal_render($form['field_story_highlights']); ?>
       </div>
-      <div id="Configuration">
+      <div id="Configuration" class="itg-sidebar-form-section">
         <h2 class="story-title"><?php print t('Configuration'); ?></h2>
         <?php print drupal_render($form['field_story_configurations']); ?>
         <?php print drupal_render($form['field_poll_start_date']); ?>
@@ -79,13 +82,13 @@
         <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
         <?php print drupal_render($form['field_common_related_content']); ?>
       </div>
-      <div id="DateTime">
+      <div id="DateTime" class="itg-sidebar-form-section">
         <h2 class="story-title"><?php print t('Date & Time'); ?></h2>
         <?php print drupal_render($form['field_story_schedule_date_time']); ?>
         <?php print drupal_render($form['field_story_expires']); ?> 
         <?php print drupal_render($form['field_story_expiry_date']); ?> 
       </div>
-      <div id="SocialMedia">
+      <div id="SocialMedia" class="itg-sidebar-form-section">
         <h2 class="story-title"><?php print t('Social Media'); ?></h2>
         <?php print drupal_render($form['field_story_social_media_integ']); ?>
         <!-- Facebook fields -->
@@ -99,9 +102,11 @@
         <?php print drupal_render($form['field_story_twitter_video_desc']); ?>  
         <?php print drupal_render($form['field_story_twitter_video']); ?>  
       </div>
+      <div class="metatags-and-remarks">
       <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
       <?php print drupal_render_children($form); ?>
+      </div>
     </div>
   </div>
 </div>
-<div><?php print drupal_render($form['actions']); ?></div>
+
