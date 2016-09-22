@@ -135,7 +135,7 @@ a{
         margin-bottom: 5px;
     }
 }
-.dont-miss{    
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
     /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
@@ -602,3 +602,37 @@ a{
     }
 }
 /*End Photo section slider Homepage*/
+
+/*CSS Start Page Year End page */
+.yearend-page{
+    .itg-643{
+        .droppable{
+            min-height: 643px;   
+        }        
+    }
+    .itg-1550{
+        .droppable{
+            min-height: 1510px;
+        }
+    }
+    .itg-785{
+        .droppable{
+            min-height: 785px;
+        }
+    }
+    .itg-628{
+        .droppable{
+            min-height: 628px;
+        }
+    }
+}
+
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);
+        }
+    }
+}
+/*CSS End Page Year End page */

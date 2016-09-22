@@ -25,6 +25,10 @@ h4{
     font-size: $mobile-h4-font-size;
     line-height: $h4-line-height;
 }
+h4.heading{
+    color: $heading-blue-color;
+    @include itg-font($itg-roboto,$itg-font-bold);
+}
 .list-none{
     list-style-type: none;
 }
@@ -1425,7 +1429,7 @@ footer{
         margin-bottom: 5px;
     }    
 }
-.dont-miss{    
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
     /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
@@ -1457,6 +1461,16 @@ footer{
     }
 }
 /*End Dont miss Home page css*/
+/*CSS Start year end top news*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);
+        }
+    }
+}
+/*CSS End year end top news*/
 /*Start Story page css*/
 @mixin story-profile-pic{
     width: 50px;
@@ -3051,9 +3065,9 @@ footer{
         display: block;
     }
 }
-.view-photo-list-of-category{
-    .view-filters{
-        .edit-field-story-category-tid-wrapper{
+.view-photo-list-of-category, .view-video-list-of-category{
+    .view-filters{        
+        #edit-field-story-category-tid-wrapper{
             display: none;
         }
         .views-exposed-widget.views-submit-button{
@@ -3063,8 +3077,11 @@ footer{
             top: 100px;
             z-index: 1;
             left: 50%;
-            .ajax-progress.throbber{
-                background: transparent url(images/tab-loading.gif) no-repeat 0px center;                
+            .ajax-progress .throbber{
+                background: transparent url(../images/tab-loading.gif) no-repeat 0px center;    
+                height: 30px;
+                width: 30px;
+                float: none;
             }
         }
     }

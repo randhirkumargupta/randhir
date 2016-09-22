@@ -254,9 +254,9 @@ if ($theme != 'itgadmin') {
       </section>
     </main>
 
-      <section class="recommended-for-you">
-       <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization']?></div>
-    </section>
+<!--      <section class="recommended-for-you">
+       <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php //print $widget_data['personlization']?></div>
+      </section>-->
       
  <main id="main" class="container">
       <section id="content" role="main">

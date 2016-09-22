@@ -161,6 +161,35 @@ function itg_widgets_custom_variables() {
         '#size' => 20,
         '#maxlength' => 20,
     );
+    $form['auto_for_widget'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Enter tid of Auto'),
+        '#default_value' => variable_get('auto_for_widget'),
+        '#size' => 20,
+        '#maxlength' => 20,
+    );
+    $form['auto_road_trips_for_widget'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Enter tid of Road Trips'),
+        '#default_value' => variable_get('auto_road_trips_for_widget'),
+        '#size' => 20,
+        '#maxlength' => 20,
+    );
+    $form['auto_tips_and_tricks_for_widget'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Enter tid of Tips and Tricks'),
+        '#default_value' => variable_get('auto_tips_and_tricks_for_widget'),
+        '#size' => 20,
+        '#maxlength' => 20,
+    );
+    $form['auto_slider_for_widget'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Enter tid of Tips and Tricks'),
+        '#default_value' => variable_get('auto_slider_for_widget'),
+        '#size' => 20,
+        '#maxlength' => 20,
+    );
+
     return system_settings_form($form);
 }
 
@@ -471,6 +500,9 @@ function itg_widget_block_info() {
         'info' => t('So Sorry Social Icons Custom Block'),
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
+    $blocks['auto_reviews'] = array(
+        'info' => t('Widget: Auto Reviews form custom table'),
+    );
 
     return $blocks;
 }
@@ -513,9 +545,9 @@ function itg_widget_block_view($delta = '') {
             $block['content'] = theme("rhs_section_wise_ordering", array("data" => $data));
             break;
         case 'we_may_suggest':
-            $display = get_rhs_block_display_condtion($delta);            
+            $display = get_rhs_block_display_condtion($delta);
             if (empty($display)) {
-              return;
+                return;
             }
             module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
             $info['section'] = '301'; // tid of section
@@ -553,14 +585,14 @@ function itg_widget_block_view($delta = '') {
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
             $info['widget_name'] = 'yearender_left_news_video';
             $data = itg_widget_yearend_top_news_ordering_data($info);
-           
+
             $block['content'] = theme("year_end_top_news", array("data" => $data));
             break;
         case 'yearende_left_top_videos':
-           module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
             $info['widget_name'] = 'yearender_left_news_video';
             $data = itg_widget_yearend_top_videos_ordering_data($info);
-           
+
             $block['content'] = theme("year_end_top_videos", array("data" => $data));
             break;
         // Trending videos ordering reordering widget case
@@ -574,9 +606,9 @@ function itg_widget_block_view($delta = '') {
             break;
         // Watch Right Now ordering reordering widget case
         case 'watch_right_now_videos_widget':
-            $display = get_rhs_block_display_condtion($delta);         
+            $display = get_rhs_block_display_condtion($delta);
             if (empty($display)) {
-              return;
+                return;
             }
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
             $info['view_name'] = 'story_widget'; // view name
@@ -587,11 +619,11 @@ function itg_widget_block_view($delta = '') {
             break;
         // Top takes videos ordering reordering widget case
         case 'top_takes_videos_widget':
-            $display = get_rhs_block_display_condtion($delta);            
+            $display = get_rhs_block_display_condtion($delta);
             if (empty($display)) {
-              return;
+                return;
             }
-            
+
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
             $info['view_name'] = 'story_widget'; // view name
             $info['page'] = 'top_takes_video_widget'; // page name
@@ -875,6 +907,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
         'views_form_section_wise_draggable_content_order_page',
     );
+
 
 
     if (in_array($form_id, $form_id_array_to_alter)) {
@@ -1387,20 +1420,34 @@ function itg_widget_views_query_alter(&$view, &$query) {
     if ($view->name == 'so_sorry' && $view->current_display == 'most_watched') {
         $query->where[1]['conditions'][3]['value'] = variable_get('so_sorry_category_id_for_widget');
     }
-
     if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
         $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
     }
-    
+
     if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
         $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
     }
-    
-    if ($view->current_display == 'yearender' || $view->current_display == 'block_2') {
+
+    if ($view->name == 'yearender' && $view->current_display == 'block_2') {
         $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
     }
-    if ($view->current_display == 'yearender' || $view->current_display == 'block_1') {
+    if ($view->name == 'yearender' && $view->current_display == 'block_1') {
         $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    }
+    if ($view->name == 'auto' && $view->current_display == 'block_2') {
+        $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
+    }
+    if ($view->name == 'auto' && $view->current_display == 'block_1') {
+        $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
+    }
+    if ($view->name == 'auto' && $view->current_display == 'block_3') {
+        $query->where[1]['conditions'][2]['value'] = variable_get('auto_road_trips_for_widget');
+    }
+    if ($view->name == 'auto' && $view->current_display == 'block_4') {
+        $query->where[1]['conditions'][2]['value'] = variable_get('auto_tips_and_tricks_for_widget');
+    }
+    if ($view->name == 'auto' && $view->current_display == 'block_5') {
+        $query->where[1]['conditions'][2]['value'] = variable_get('auto_slider_for_widget');
     }
 }
 
@@ -1658,12 +1705,12 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
  * @param int $range_min
  * @return array
  */
-function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $content_type,$range_max, $range_min = 0) {
+function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $content_type, $range_max, $range_min = 0) {
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
             ->condition('n.status', 1)
-            ->condition('iwo.content_type',$content_type)
+            ->condition('iwo.content_type', $content_type)
             ->orderBy('iwo.weight', 'ASC')
             ->range($range_min, $range_max)
             ->fields('iwo', array('nid', 'extra', 'weight'));
@@ -1681,7 +1728,7 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
         $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
         $query->condition('iwo.widget', $widget_name)
                 ->condition('n.status', 1)
-                ->condition('iwo.content_type',$content_type)
+                ->condition('iwo.content_type', $content_type)
                 ->orderBy('n.nid', 'DESC')
                 ->range($range_min, $range_max)
                 ->fields('iwo', array('nid', 'extra', 'weight'));
@@ -1690,23 +1737,38 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
     }
 }
 
-
 /**
  * {@inheritdoc}
  */
 function itg_widget_block_view_alter(&$data, $block) {
-  $item = menu_get_item();
-  $arg = arg();
-  
-  $page_argument = $item['page_arguments'];
-  if ($block->delta == 'programmes-rhs_programmes') {   
-    if ($arg[0] == 'anchors-list' || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name == 'Anchor') || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
-      return TRUE;
+//  $item = menu_get_item();
+//  $arg = arg();
+//
+//  $page_argument = $item['page_arguments'];
+//  if ($block->delta == 'programmes-rhs_programmes') {
+//    if ($arg[0] == 'anchors-list' || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name == 'Anchor') || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+//      return TRUE;
+//    }
+//    else {
+//      $data['content'] = array();
+//    }
+//  }
+
+    $item = menu_get_item();
+    $flag_occupation = array();
+    $arg = arg();
+    $page_argument = $item['page_arguments'];
+    $occupation = $page_argument[0]->field_celebrity_pro_occupation['und'];
+    foreach ($occupation as $occupation_taxonomy) {
+        $flag_occupation[] = $occupation_taxonomy['taxonomy_term']->name;
     }
-    else {
-      $data['content'] = array();
+    if ($block->delta == 'programmes-rhs_programmes') {
+        if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+            return TRUE;
+        } else {
+            $data['content'] = array();
+        }
     }
-  }  
 }
 
 /**
@@ -2012,19 +2074,18 @@ function itg_widget_issuewidgetlist_filter_reset($form, $form_state) {
  * @return TRUE or FALSE
  */
 function itg_block_display_condition() {
-  $arg = arg();
-  $is_fron_page = drupal_is_front_page();
-  if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))) {
-    $tpl_name = get_template_name_by_section_name($arg[2]);
-    if (isset($tpl_name)) {
-     return TRUE; 
+    $arg = arg();
+    $is_fron_page = drupal_is_front_page();
+    if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))) {
+        $tpl_name = get_template_name_by_section_name($arg[2]);
+        if (isset($tpl_name)) {
+            return TRUE;
+        }
+    } else if (!empty($is_fron_page)) {
+        return TRUE;
     }
-  } 
-  else if (!empty($is_fron_page)) {
-    return TRUE;          
-  }
-  
-  return FALSE;
+
+    return FALSE;
 }
 
 /**
@@ -2032,37 +2093,53 @@ function itg_block_display_condition() {
  * @return TRUE or FALSE
  */
 function get_rhs_block_display_condtion($delta = '') {
-  
-  $arg = arg();
-  $item = menu_get_item();
-  $page_argument = $item['page_arguments'];
-  $display_block = itg_block_display_condition();
-  
-  switch ($delta) {
-    case 'watch_right_now_videos_widget':      
-     if ($arg[0] == 'programmes' 
-          || ($page_argument[0]->type == 'story') 
-          || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) 
-          || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) 
-          || $display_block == TRUE) {
-      return TRUE;
+
+    $arg = arg();
+    $item = menu_get_item();
+    $page_argument = $item['page_arguments'];
+    $display_block = itg_block_display_condition();
+
+    switch ($delta) {
+        case 'watch_right_now_videos_widget':
+            if ($arg[0] == 'programmes' || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+                return TRUE;
+            }
+            break;
+        case 'top_takes_videos_widget':
+            if ($arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+                return TRUE;
+            }
+            break;
+        case 'we_may_suggest':
+            if ($arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+                return TRUE;
+            }
+            break;
     }
-    break;
-    case 'top_takes_videos_widget':     
-      if ($arg[0] == 'programmes' 
-              || ($page_argument[0]->type == 'story') 
-              || $display_block == TRUE) {
-        return TRUE;
-      }
-    break;
-    case 'we_may_suggest':     
-      if ($arg[0] == 'programmes' 
-              || $arg[0] == 'anchors-list' 
-              || ($page_argument[0]->type == 'story') 
-              || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) 
-              || $display_block == TRUE) {
-        return TRUE;
-      }
-    break;
-  }
+}
+
+/**
+ * Implements hook__node_insert().
+ * {@inheritdoc}
+ */
+function itg_widget_node_insert($node) {
+    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+        $nid = $node->nid;
+        $cat_id = $node->field_story_category['und'];
+        $order = $node->created;
+
+        foreach ($cat_id as $category) {
+            // Insert into table.
+            $query = db_insert('itg_widget_order')
+                    ->fields(array(
+                        'nid' => $nid,
+                        'widget' => 'section_wise_widget',
+                        'content_type' => $node->type,
+                        'cat_id' => $category['tid'],
+                        'weight' => -1 * abs($node->created),
+                        'extra' => "",
+                    ))
+                    ->execute();
+        }
+    }
 }
