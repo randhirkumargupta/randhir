@@ -1983,7 +1983,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-mega-review-review-values"],
 [id*="field-story-highlights-values"], 
 [id*="field-story-template-quotes-values"], 
-[id*="field-story-template-factoids-values"], 
+[id*="field-story-template-factoids-values"],
+[id*="field-story-reporter-values"],
 [id*="field-story-template-guru-values"]{
   @extend .itg-add-another-item;
 }
@@ -6628,6 +6629,7 @@ div.node{
 #edit-metatags-und-basic{
   border: none;
 }
+[id*="field-story-reporter-values"],
 [id*="field-story-template-quotes-values"], 
 [id*="field-story-template-factoids-values"],
 [id*="field-story-template-guru-values"]{
@@ -6637,6 +6639,8 @@ div.node{
       padding-bottom: 10px;
       .form-type-textfield{
         float: left;
+        margin: 0;
+        padding: 0;
       }
       > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
         margin: 1px 0 0 10px;
@@ -7164,5 +7168,107 @@ div.node{
           display: block;
         }
       }
+  }
+}
+#block-itg-story-story-tab-form-block{display: none;}
+.node-story-form{
+  .itg-form-section-wrapper{
+    border: 1px solid #d9d9d9;
+    margin-top: 20px;
+  }
+  .itg-form-main h2{
+    background-color: #d9d9d9; 
+    cursor: pointer;
+    margin-top: 0;
+    position: relative;
+    &:after{
+      content: '\f055';
+      position: absolute;
+      font-family: 'FontAwesome';
+      font-size: 30px;
+      color: #666;
+      right: 10px;
+    }
+  }
+  input[type="text"], select, input[type="password"]{
+    height: 28px;
+    padding: 5px;
+  }
+  .form-type-textfield > label, 
+  .date-combo > legend, 
+  .form-type-select > label{
+    padding: 5px;
+  }
+  .form-type-textfield, 
+  .form-type-password, 
+  .form-type-select, 
+  .form-type-managed-file, 
+  .form-type-checkboxes, 
+  .form-type-radios, 
+  .form-type-autocomplete-deluxe, 
+  .date-combo, 
+  .form-type-hierarchical-select, 
+  .form-type-textarea{
+    maegin: 10px 0;
+    padding: 0 20px;
+  }
+  .form-type-textfield > label, 
+  .form-type-password > label, 
+  .form-type-textarea > label, 
+  .form-type-select > label, 
+  .form-type-autocomplete-deluxe > label, 
+  .form-type-managed-file > label, 
+  .form-type-radios > label, 
+  .date-combo > legend, 
+  .form-type-hierarchical-select > label, 
+  .form-type-checkboxes > label{
+    width: 200px;
+  }
+  .form-type-textfield > label + div, 
+  .form-type-textarea > label + div, 
+  .form-type-select > label + div, 
+  .form-type-managed-file > label + div, 
+  .form-type-radios > label + div, 
+  .date-combo > legend + div, 
+  .form-type-hierarchical-select > label + div, 
+  .form-type-checkboxes > label + div{
+    padding-left: 200px;
+  }
+  [id*="field-story-reporter-values"]{
+    thead{
+      padding-left: 20px;
+      padding-right: 10px;
+      width: 220px;
+    }
+    tbody tr td{
+      > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+        margin: 0;
+        background: url(../images/remove-item.png) no-repeat;
+        width: 28px;
+        height: 28px;
+        border: none;
+        text-indent: -9999px;
+        margin-left: 10px;
+      }
+    }
+    & + div.clearfix{
+      position: absolute;
+      right: 140px;
+      bottom: 10px;
+      .form-submit{
+        margin: 0;
+        background: url(../images/add-item.png) no-repeat;
+        width: 28px;
+        height: 28px;
+        border: none;
+        text-indent: -9999px;
+      }
+    }
+  }
+  .form-field-name-field-story-reporter{
+    position: relative;
+  }
+  .vertical-tabs ul.vertical-tabs-list{
+    display: none;
   }
 }
