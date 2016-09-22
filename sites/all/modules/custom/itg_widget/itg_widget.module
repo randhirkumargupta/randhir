@@ -829,7 +829,7 @@ function itg_widget_block_view($delta = '') {
 </div>';
             break;
          case 'auto_reviews':
-            module_load_include('inc', 'itg_widget', 'includes/itg_widget_auto_reviews');
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
             $info['widget_name'] = 'special_auto_review_content';
             $data = itg_widget_auto_reviews_ordering_data($info);
 
