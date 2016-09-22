@@ -21,7 +21,7 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   
   $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
   
-  if ($arg1 == 'section') {
+  if ($arg1 == 'section' || $arg1 == 'special') {
     $op = array("" => "-- Section --");
     foreach ($tax as $key => $val) {
       $op[$val->tid] = $val->name;
