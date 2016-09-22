@@ -7182,7 +7182,7 @@ div.node #comments h2 {
 .node-story-form .itg-form-main h2 {
   background-color: #d9d9d9;
   cursor: pointer;
-  margin-top: 0;
+  margin: 0;
   position: relative;
 }
 .node-story-form .itg-form-main h2:after {
@@ -7212,7 +7212,7 @@ div.node #comments h2 {
 .node-story-form .date-combo,
 .node-story-form .form-type-hierarchical-select,
 .node-story-form .form-type-textarea {
-  maegin: 10px 0;
+  margin: 10px 0;
   padding: 0 20px;
 }
 .node-story-form .form-type-textfield > label,
@@ -7242,8 +7242,118 @@ div.node #comments h2 {
   padding-right: 10px;
   width: 220px;
 }
+.node-story-form [id*="field-story-reporter-values"] tbody tr:last-child td {
+  padding-bottom: 0;
+}
 .node-story-form [id*="field-story-reporter-values"] tbody tr td > .form-submit[value="Remove"], .node-story-form [id*="field-story-reporter-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
+  background: url(../images/remove-item.png) no-repeat;
+  border: medium none;
+  height: 18px;
+  margin: 5px 0 0 10px;
+  padding: 0;
+  text-indent: -9999px;
+  width: 18px;
+}
+.node-story-form [id*="field-story-reporter-values"] + div.clearfix {
+  bottom: 5px;
+  position: absolute;
+  right: 163px;
+}
+.node-story-form [id*="field-story-reporter-values"] + div.clearfix .form-submit {
+  background: url(../images/add-item.png) no-repeat;
+  border: medium none;
+  height: 18px;
+  margin: 5px 0 0 10px;
+  padding: 0;
+  text-indent: -9999px;
+  width: 18px;
+}
+.node-story-form .form-field-name-field-story-reporter {
+  position: relative;
+}
+.node-story-form .vertical-tabs ul.vertical-tabs-list {
+  display: none;
+}
+.node-story-form .itg-sidebar-form {
+  background-color: #efefef;
+  border: 1px solid #d9d9d9;
+  margin: 20px 0 0;
+}
+.node-story-form .itg-sidebar-form h2 {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #d9d9d9;
+  margin: 0 0 10px;
+  padding: 8px 15px;
+}
+.node-story-form .itg-sidebar-form .form-item > label {
+  float: none;
+  padding: 0 0 5px;
+}
+.node-story-form .itg-sidebar-form .form-item.form-type-textfield > label, .node-story-form .itg-sidebar-form .form-item.form-type-textarea > label {
+  display: block;
+}
+.node-story-form .itg-sidebar-form .form-item.form-type-textarea .form-textarea-wrapper {
+  padding-left: 0;
+}
+.node-story-form .itg-sidebar-form .form-item.form-type-checkboxes .form-checkboxes {
+  padding: 10px 0 10px 15px;
+}
+.node-story-form .itg-sidebar-form .form-type-textfield,
+.node-story-form .itg-sidebar-form .form-type-password,
+.node-story-form .itg-sidebar-form .form-type-select,
+.node-story-form .itg-sidebar-form .form-type-managed-file,
+.node-story-form .itg-sidebar-form .form-type-checkboxes,
+.node-story-form .itg-sidebar-form .form-type-radios,
+.node-story-form .itg-sidebar-form .form-type-autocomplete-deluxe,
+.node-story-form .itg-sidebar-form .date-combo,
+.node-story-form .itg-sidebar-form .form-type-hierarchical-select,
+.node-story-form .itg-sidebar-form .form-type-textarea {
+  margin: 10px 0;
+  padding: 0 15px;
+}
+.node-story-form .itg-sidebar-form fieldset.date-combo > legend {
+  float: none;
+  display: block;
+  padding: 0 0 5px;
+}
+.node-story-form .itg-sidebar-form fieldset.date-combo > legend + div {
+  padding: 0;
+}
+.node-story-form .itg-sidebar-form .date-no-float {
+  width: 100%;
+}
+.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup {
+  margin-right: 0;
+}
+.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield {
+  float: left;
+  width: 50%;
   margin: 0;
+}
+.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:first-child {
+  padding: 0 10px 0 0;
+  width: 60%;
+}
+.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:last-child {
+  padding: 0;
+  width: 40%;
+}
+.node-story-form .itg-sidebar-form .form-field-name-field-story-highlights {
+  position: relative;
+}
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] thead {
+  display: none;
+}
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody {
+  margin: 0;
+}
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .form-type-textfield {
+  width: 290px;
+  padding-right: 10px;
+}
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"], .node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
+  margin: 10px 0 0;
   background: url(../images/remove-item.png) no-repeat;
   width: 28px;
   height: 28px;
@@ -7251,12 +7361,12 @@ div.node #comments h2 {
   text-indent: -9999px;
   margin-left: 10px;
 }
-.node-story-form [id*="field-story-reporter-values"] + div.clearfix {
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix {
   position: absolute;
-  right: 140px;
+  right: 15px;
   bottom: 10px;
 }
-.node-story-form [id*="field-story-reporter-values"] + div.clearfix .form-submit {
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit {
   margin: 0;
   background: url(../images/add-item.png) no-repeat;
   width: 28px;
@@ -7264,9 +7374,7 @@ div.node #comments h2 {
   border: none;
   text-indent: -9999px;
 }
-.node-story-form .form-field-name-field-story-reporter {
-  position: relative;
-}
-.node-story-form .vertical-tabs ul.vertical-tabs-list {
+
+#region-section-content .view .view-filters {
   display: none;
 }

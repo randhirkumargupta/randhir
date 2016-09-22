@@ -41,7 +41,7 @@
       <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_short_headline']); ?>
         <?php print drupal_render($form['field_story_long_head_line']); ?>
-        <!--<div class="pre-desc"><?php //print t('This title shows on the section page');   ?></div> -->
+        <!--<div class="pre-desc"><?php //print t('This title shows on the section page');    ?></div> -->
         <?php print drupal_render($form['field_story_rating']); ?>
         <?php print drupal_render($form['field_story_new_title']); ?>
         <?php print drupal_render($form['field_story_redirection_url_titl']); ?>
@@ -61,45 +61,47 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4 itg-sidebar-form">
-    <div id="Briefcase">
-      <h2 class="story-title"><?php print t('Brief case'); ?></h2>
-      <?php print drupal_render($form['field_story_highlights']); ?>
-    </div>
-    <div id="Configuration">
-      <h2 class="story-title"><?php print t('Configuration'); ?></h2>
-      <?php print drupal_render($form['field_story_configurations']); ?>
-      <?php print drupal_render($form['field_poll_start_date']); ?>
-      <?php print drupal_render($form['field_story_tv_time']); ?>
-      <?php print drupal_render($form['field_story_featured_name']); ?>
-      <?php print drupal_render($form['field_story_syndication']); ?>
-      <?php print drupal_render($form['field_story_comment_question']); ?>
-      <?php print drupal_render($form['field_story_client_title']); ?>
-      <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
-      <?php print drupal_render($form['field_common_related_content']); ?>
-    </div>
-    <div id="DateTime">
-      <h2 class="story-title"><?php print t('Date & Time'); ?></h2>
-      <?php print drupal_render($form['field_story_schedule_date_time']); ?>
-      <?php print drupal_render($form['field_story_expires']); ?> 
-      <?php print drupal_render($form['field_story_expiry_date']); ?> 
-    </div>
-    <div id="SocialMedia">
-      <h2 class="story-title"><?php print t('Social Media'); ?></h2>
-      <?php print drupal_render($form['field_story_social_media_integ']); ?>
-      <!-- Facebook fields -->
-      <?php print drupal_render($form['field_story_facebook_narrative']); ?>
-      <?php print drupal_render($form['field_story_facebook_image']); ?>
-      <?php print drupal_render($form['field_story_facebook_vdescripti']); ?>
-      <?php print drupal_render($form['field_story_facebook_video']); ?>
-      <!-- Twitter fields -->
-      <?php print drupal_render($form['field_story_tweet']); ?>
-      <?php print drupal_render($form['field_story_tweet_image']); ?>  
-      <?php print drupal_render($form['field_story_twitter_video_desc']); ?>  
-      <?php print drupal_render($form['field_story_twitter_video']); ?>  
-    </div>
+  <div class="col-md-4">
+    <div class="itg-sidebar-form">
+      <div id="Briefcase">
+        <h2 class="story-title"><?php print t('Brief case'); ?></h2>
+        <?php print drupal_render($form['field_story_highlights']); ?>
+      </div>
+      <div id="Configuration">
+        <h2 class="story-title"><?php print t('Configuration'); ?></h2>
+        <?php print drupal_render($form['field_story_configurations']); ?>
+        <?php print drupal_render($form['field_poll_start_date']); ?>
+        <?php print drupal_render($form['field_story_tv_time']); ?>
+        <?php print drupal_render($form['field_story_featured_name']); ?>
+        <?php print drupal_render($form['field_story_syndication']); ?>
+        <?php print drupal_render($form['field_story_comment_question']); ?>
+        <?php print drupal_render($form['field_story_client_title']); ?>
+        <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
+        <?php print drupal_render($form['field_common_related_content']); ?>
+      </div>
+      <div id="DateTime">
+        <h2 class="story-title"><?php print t('Date & Time'); ?></h2>
+        <?php print drupal_render($form['field_story_schedule_date_time']); ?>
+        <?php print drupal_render($form['field_story_expires']); ?> 
+        <?php print drupal_render($form['field_story_expiry_date']); ?> 
+      </div>
+      <div id="SocialMedia">
+        <h2 class="story-title"><?php print t('Social Media'); ?></h2>
+        <?php print drupal_render($form['field_story_social_media_integ']); ?>
+        <!-- Facebook fields -->
+        <?php print drupal_render($form['field_story_facebook_narrative']); ?>
+        <?php print drupal_render($form['field_story_facebook_image']); ?>
+        <?php print drupal_render($form['field_story_facebook_vdescripti']); ?>
+        <?php print drupal_render($form['field_story_facebook_video']); ?>
+        <!-- Twitter fields -->
+        <?php print drupal_render($form['field_story_tweet']); ?>
+        <?php print drupal_render($form['field_story_tweet_image']); ?>  
+        <?php print drupal_render($form['field_story_twitter_video_desc']); ?>  
+        <?php print drupal_render($form['field_story_twitter_video']); ?>  
+      </div>
       <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
       <?php print drupal_render_children($form); ?>
+    </div>
   </div>
 </div>
 <div><?php print drupal_render($form['actions']); ?></div>

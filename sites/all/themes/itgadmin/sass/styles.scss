@@ -7179,7 +7179,7 @@ div.node{
   .itg-form-main h2{
     background-color: #d9d9d9; 
     cursor: pointer;
-    margin-top: 0;
+    margin: 0;
     position: relative;
     &:after{
       content: '\f055';
@@ -7209,7 +7209,7 @@ div.node{
   .date-combo, 
   .form-type-hierarchical-select, 
   .form-type-textarea{
-    maegin: 10px 0;
+    margin: 10px 0;
     padding: 0 20px;
   }
   .form-type-textfield > label, 
@@ -7240,28 +7240,34 @@ div.node{
       padding-right: 10px;
       width: 220px;
     }
+    tbody tr:last-child{
+      td{
+        padding-bottom: 0;
+      }
+    }
     tbody tr td{
       > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
-        margin: 0;
         background: url(../images/remove-item.png) no-repeat;
-        width: 28px;
-        height: 28px;
-        border: none;
+        border: medium none;
+        height: 18px;
+        margin: 5px 0 0 10px;
+        padding: 0;
         text-indent: -9999px;
-        margin-left: 10px;
+        width: 18px;
       }
     }
     & + div.clearfix{
+      bottom: 5px;
       position: absolute;
-      right: 140px;
-      bottom: 10px;
+      right: 163px;
       .form-submit{
-        margin: 0;
         background: url(../images/add-item.png) no-repeat;
-        width: 28px;
-        height: 28px;
-        border: none;
+        border: medium none;
+        height: 18px;
+        margin: 5px 0 0 10px;
+        padding: 0;
         text-indent: -9999px;
+        width: 18px;
       }
     }
   }
@@ -7270,5 +7276,127 @@ div.node{
   }
   .vertical-tabs ul.vertical-tabs-list{
     display: none;
+  }
+  .itg-sidebar-form{
+    background-color: #efefef;
+    border: 1px solid #d9d9d9;
+    margin: 20px 0 0;
+    h2{
+      background: none;
+      border: none;
+      border-bottom: 1px solid #d9d9d9;
+      margin: 0 0 10px;
+      padding: 8px 15px;
+    }
+    .form-item{
+      > label{
+        float: none;
+        padding: 0 0 5px;
+      }
+      &.form-type-textfield, &.form-type-textarea{
+        > label{
+          display: block;
+        }
+      }
+      &.form-type-textarea{
+        .form-textarea-wrapper{
+          padding-left: 0;
+        }
+      }
+      &.form-type-checkboxes{
+        .form-checkboxes{
+          padding: 10px 0 10px 15px;
+        }
+        
+      }
+    }
+    .form-type-textfield, 
+    .form-type-password, 
+    .form-type-select, 
+    .form-type-managed-file, 
+    .form-type-checkboxes, 
+    .form-type-radios, 
+    .form-type-autocomplete-deluxe, 
+    .date-combo, 
+    .form-type-hierarchical-select, 
+    .form-type-textarea{
+      margin: 10px 0;
+      padding: 0 15px;
+    }
+    fieldset.date-combo > legend{
+      float: none;
+      display: block;
+      padding: 0 0 5px;
+      &+div{
+        padding: 0;
+      }
+    }
+    .date-no-float{
+      width: 100%;
+      .form-type-date-popup{
+        margin-right: 0;
+        .date-padding{
+          .form-type-textfield{
+            float: left;
+            width: 50%;
+            margin: 0;
+            &:first-child{
+              padding: 0 10px 0 0;
+              width: 60%;
+            }
+            &:last-child{
+              padding: 0;
+              width: 40%;
+            }
+          }
+        }
+      }
+    }
+    .form-field-name-field-story-highlights{
+      position: relative;
+    }
+    [id*="field-story-highlights-values"]{
+      thead{
+        display: none;
+      }
+      tbody{
+        margin: 0;
+      }
+      tbody tr td{
+        .form-type-textfield{
+          width: 290px;
+          padding-right: 10px;
+        }
+        > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+          margin: 10px 0 0;
+          background: url(../images/remove-item.png) no-repeat;
+          width: 28px;
+          height: 28px;
+          border: none;
+          text-indent: -9999px;
+          margin-left: 10px;
+        }
+      }
+      & + div.clearfix{
+        position: absolute;
+        right: 15px;
+        bottom: 10px;
+        .form-submit{
+          margin: 0;
+          background: url(../images/add-item.png) no-repeat;
+          width: 28px;
+          height: 28px;
+          border: none;
+          text-indent: -9999px;
+        }
+      }
+    }
+  }
+}
+#region-section-content{
+  .view{
+    .view-filters{
+      display: none;
+    }
   }
 }
