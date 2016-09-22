@@ -5,6 +5,7 @@
  *   Redeem points template file.
  */
 ?>
+<?php //p($data); ?>
 <div class="personalized-wrapper">
   <div class="personalized-user-area">
     <div class="personalized-user">
