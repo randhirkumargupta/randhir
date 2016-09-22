@@ -279,6 +279,20 @@
     }
 }
 /*End Dont miss Home page css*/
+/*CSS Start year end top news*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);
+            padding:25px 10px;
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 25px;
+            }
+        }
+    }
+}
+/*CSS End year end top news*/
 
 /*Start photo section slider Homepage*/
 .featured_photo_carousel{
