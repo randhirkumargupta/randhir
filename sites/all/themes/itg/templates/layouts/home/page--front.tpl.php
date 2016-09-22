@@ -8,7 +8,7 @@
  */
 
 
-global $theme;
+global $theme, $user;
 $preview = NULL;
 
 if (arg(2) == 'preview') {
@@ -253,10 +253,12 @@ if ($theme != 'itgadmin') {
     </div>
       </section>
     </main>
-
-      <section class="recommended-for-you">
-       <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization']?></div>
-    </section>
+      
+      <?php if (isset($user->uid)) {?>
+        <section class="recommended-for-you">
+         <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php //print $widget_data['personlization']?></div>
+        </section>
+      <?php } ?>
       
  <main id="main" class="container">
       <section id="content" role="main">

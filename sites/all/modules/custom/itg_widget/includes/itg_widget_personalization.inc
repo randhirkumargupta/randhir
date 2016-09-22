@@ -11,6 +11,7 @@
  * @param array $updates
  */
 function save_itg_widget_personalization_data($updates) {
+    global $user;
   $widget_name = "personalization_widget";
 
   $nids = array_keys($updates);
@@ -20,16 +21,18 @@ function save_itg_widget_personalization_data($updates) {
     db_delete('itg_widget_order')
             ->condition('widget', $widget_name)
             ->condition('nid', $nids, "NOT IN")
+            ->condition('extra',$user->uid)
             ->execute();
   }
   // Update the weight of tids if exists or insert if dont exists.
   foreach ($updates as $termId => $weight) {
     db_merge('itg_widget_order')
-            ->key(array('nid' => $termId, 'widget' => $widget_name))
+            ->key(array('nid' => $termId, 'widget' => $widget_name, 'extra'=> $user->uid))
             ->fields(array(
                 'nid' => $termId,
                 'widget' => $widget_name,
                 'weight' => $weight,
+                'extra'=> $user->uid,
             ))
             ->execute();
   }
@@ -45,16 +48,19 @@ function get_personalization_saved_value($tid) {
   $query = db_select('itg_widget_order', 'iwo');
   $query->addField('iwo', 'weight');
   $query->condition('iwo.nid', $tid);
+  $query->condition('iwo.extra', $user->uid);
   return $query->execute()->fetch();
 }
 
 function get_personalization_front_data() {
+  global $user;
   $new_ordered_data = array();
   // As in table itg_widget_order tid is saved in nid colom.
   // So join field_story_category_tid join is applied on nid.
   $query = db_select('itg_widget_order', 'iwo');
   $query->fields('iwo', array('weight', 'nid'))
           ->condition('iwo.widget', "personalization_widget")
+          ->condition('iwo.extra',$user->uid)
           ->orderBy('iwo.weight', 'DESC')
           ->orderBy('iwo.nid', 'DESC');
   $result = $query->execute()->fetchAll();
