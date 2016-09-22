@@ -129,6 +129,7 @@ function feature_for_yearender_views_default_views() {
   /* Display: Yearender Latest Galleries */
   $handler = $view->new_display('block', 'Yearender Latest Galleries', 'block_2');
   $handler->display->display_options['display_description'] = 'Yearender Latest Galleries';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '5';
@@ -153,6 +154,7 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['fields']['delta']['id'] = 'delta';
   $handler->display->display_options['fields']['delta']['table'] = 'field_data_field_gallery_image';
   $handler->display->display_options['fields']['delta']['field'] = 'delta';
+  $handler->display->display_options['fields']['delta']['group_type'] = 'count_distinct';
   $handler->display->display_options['fields']['delta']['label'] = '';
   $handler->display->display_options['fields']['delta']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
