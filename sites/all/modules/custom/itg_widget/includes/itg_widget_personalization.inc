@@ -21,12 +21,13 @@ function save_itg_widget_personalization_data($updates) {
     db_delete('itg_widget_order')
             ->condition('widget', $widget_name)
             ->condition('nid', $nids, "NOT IN")
+            ->condition('extra',$user->uid)
             ->execute();
   }
   // Update the weight of tids if exists or insert if dont exists.
   foreach ($updates as $termId => $weight) {
     db_merge('itg_widget_order')
-            ->key(array('nid' => $termId, 'widget' => $widget_name))
+            ->key(array('nid' => $termId, 'widget' => $widget_name, 'extra'=> $user->uid))
             ->fields(array(
                 'nid' => $termId,
                 'widget' => $widget_name,
@@ -47,6 +48,7 @@ function get_personalization_saved_value($tid) {
   $query = db_select('itg_widget_order', 'iwo');
   $query->addField('iwo', 'weight');
   $query->condition('iwo.nid', $tid);
+  $query->condition('iwo.extra', $user->uid);
   return $query->execute()->fetch();
 }
 
