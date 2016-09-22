@@ -4069,10 +4069,10 @@ footer .footer-copyright {
   display: block;
 }
 
-.view-photo-list-of-category .view-filters .edit-field-story-category-tid-wrapper {
+.view-photo-list-of-category .view-filters #edit-field-story-category-tid-wrapper, .view-video-list-of-category .view-filters #edit-field-story-category-tid-wrapper {
   display: none;
 }
-.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button {
+.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button, .view-video-list-of-category .view-filters .views-exposed-widget.views-submit-button {
   position: absolute;
   padding: 0;
   float: none;
@@ -4080,8 +4080,11 @@ footer .footer-copyright {
   z-index: 1;
   left: 50%;
 }
-.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button .ajax-progress.throbber {
-  background: transparent url(images/tab-loading.gif) no-repeat 0px center;
+.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button .ajax-progress .throbber, .view-video-list-of-category .view-filters .views-exposed-widget.views-submit-button .ajax-progress .throbber {
+  background: transparent url(../images/tab-loading.gif) no-repeat 0px center;
+  height: 30px;
+  width: 30px;
+  float: none;
 }
 
 /*CCS End Photo landing Page*/

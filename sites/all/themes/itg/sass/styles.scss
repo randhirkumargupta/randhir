@@ -3061,9 +3061,9 @@ footer{
         display: block;
     }
 }
-.view-photo-list-of-category{
-    .view-filters{
-        .edit-field-story-category-tid-wrapper{
+.view-photo-list-of-category, .view-video-list-of-category{
+    .view-filters{        
+        #edit-field-story-category-tid-wrapper{
             display: none;
         }
         .views-exposed-widget.views-submit-button{
@@ -3073,8 +3073,11 @@ footer{
             top: 100px;
             z-index: 1;
             left: 50%;
-            .ajax-progress.throbber{
-                background: transparent url(images/tab-loading.gif) no-repeat 0px center;                
+            .ajax-progress .throbber{
+                background: transparent url(../images/tab-loading.gif) no-repeat 0px center;    
+                height: 30px;
+                width: 30px;
+                float: none;
             }
         }
     }
