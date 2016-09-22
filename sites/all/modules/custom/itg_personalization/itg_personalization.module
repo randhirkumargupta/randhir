@@ -6,10 +6,6 @@
  */
 module_load_all_includes('inc', 'includes/itg_personalization.helper');
 
-function itg_personalization_init() {
-  $data = itg_loyalty_reward_user_details(4);
-  //dpm($data);
-}
 /**
  * Implements hook_permission().
  *

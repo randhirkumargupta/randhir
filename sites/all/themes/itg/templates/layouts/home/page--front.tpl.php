@@ -256,7 +256,7 @@ if ($theme != 'itgadmin') {
       
       <?php if (isset($user->uid)) {?>
         <section class="recommended-for-you">
-         <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php //print $widget_data['personlization']?></div>
+         <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization']?></div>
         </section>
       <?php } ?>
       
