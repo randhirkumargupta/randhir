@@ -9,6 +9,11 @@
  * Implements callback function for product listing page.
  */
 function itg_loyalty_reward_redeem_points() {
+  global $user, $base_url;
+  // Add js file to the page.
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
+  // Pass data to js file.
+  drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url)), array('type' => 'setting'));
   $user_fields = user_load($user->uid);  
   
   // Render user picture.
@@ -29,4 +34,17 @@ function itg_loyalty_reward_redeem_points() {
   $data['logout'] = l(t('Logout'), 'user/logout');  
   
   return theme('itg_loyalty_reward_redeem_points', array('data' => $data));
+}
+
+/**
+ * Add to cart ajax callback.
+ */
+function itg_loyalty_reward_addtocart($node_id = NULL) {
+  // If node is is present then send user to checkout page, else add item into cart.
+  if ($node_id != NULL) {
+    // Do something.
+  }
+  else {
+    p($_POST);
+  }
 }
