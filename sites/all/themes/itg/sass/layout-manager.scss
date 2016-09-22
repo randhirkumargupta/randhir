@@ -135,7 +135,7 @@ a{
         margin-bottom: 5px;
     }
 }
-.dont-miss{    
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
     /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
@@ -623,6 +623,15 @@ a{
     .itg-628{
         .droppable{
             min-height: 628px;
+        }
+    }
+}
+
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);
         }
     }
 }
