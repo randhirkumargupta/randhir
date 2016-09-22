@@ -7637,7 +7637,7 @@ div.node #comments h2 {
   width: 100%;
 }
 .node-story-form .metatags-and-remarks div.description {
-  display: none;
+  display: none !important;
 }
 .node-story-form .img-crt {
   border-radius: 1px;
