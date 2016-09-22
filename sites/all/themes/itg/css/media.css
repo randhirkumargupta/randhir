@@ -324,29 +324,22 @@
 
   /*CSS End story section */
   /*Start Dont miss Home page css*/
-  .dont-miss, #block-itg-widget-yearende-left-top-news .top-news {
+  .dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
     /*padding: 20px 0px 0px 10px;*/
   }
-  .dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing {
+  .dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
     float: left;
     width: 50%;
     padding: 0px 10px 25px 0;
   }
-  .dont-miss ul .dont-miss-listing:nth-child(2n+1), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(2n+1) {
+  .dont-miss ul .dont-miss-listing:nth-child(2n+1), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(2n+1), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(2n+1) {
     clear: left;
   }
-  .dont-miss ul .dont-miss-listing:nth-child(3), .dont-miss ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4) {
+  .dont-miss ul .dont-miss-listing:nth-child(3), .dont-miss ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
     padding-bottom: 0;
   }
 
   /*End Dont miss Home page css*/
-  /*CSS Start year end top news*/
-  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing {
-    float: none;
-    width: 100%;
-  }
-
-  /*CSS End year end top news*/
   /*Start photo section slider Homepage*/
   .featured_photo_carousel .flexslider .flex-direction-nav {
     display: block;
