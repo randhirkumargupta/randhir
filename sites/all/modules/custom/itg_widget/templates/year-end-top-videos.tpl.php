@@ -4,11 +4,11 @@
   <div class="dont-miss top-news">
     <ul>
       <?php foreach ($data as $key => $node_data) { ?>
-        <li class="<?php print $entity['node_load_data']->type ?> trending-videos-list">
-           <?php if (!empty($entity['node_load_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>            
+        <li class="<?php print $node_data['node_load_data']->type ?> trending-videos-list">
+           <?php if (!empty($node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>            
            <div class="dm-pic">
-            <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/".$entity['node_load_data']->nid); ?>">
-            <img src="<?php print image_style_url("widget_very_small", $entity['node_load_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
+            <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/".$node_data['node_load_data']->nid); ?>">
+            <img src="<?php print image_style_url("widget_very_small", $node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
           </a>
            </div>
           <?php
@@ -16,7 +16,7 @@
         else {
           ?>
               <div class="dm-pic">
-          <a class="pic" href="<?php print $base_url . '/' .  drupal_get_path_alias("node/".$entity['node_load_data']->nid); ?>">
+          <a class="pic" href="<?php print $base_url . '/' .  drupal_get_path_alias("node/".$node_data['node_load_data']->nid); ?>">
             <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
           </a>
               </div>
