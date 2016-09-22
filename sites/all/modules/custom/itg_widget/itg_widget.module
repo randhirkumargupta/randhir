@@ -477,6 +477,10 @@ function itg_widget_block_info() {
       'info' => t('So Sorry Social Icons Custom Block'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['sosorry_selected_politoons_block'] = array(
+      'info' => t('So Sorry Selected Politoons Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -800,6 +804,28 @@ function itg_widget_block_view($delta = '') {
         <li><a href="#"><i class="fa fa-rss"></i></a></li>        
     </ul>
 </div>';
+      break;
+    case 'sosorry_selected_politoons_block':
+      $query = db_select('itg_widget_order', 'iwo');
+      $query->addField('iwo', 'nid');
+      $query->condition('iwo.widget', 'politoons_widget');
+      $query->orderBy('iwo.weight', 'DESC');
+      $data = $query->execute()->fetchAll();
+      $table = array();
+      $header = array('S No.', 'Title', 'Politoons Id', 'Action');
+      foreach ($data as $key => $tid) {
+        $taxonomy_data = taxonomy_term_load($tid->nid);
+        $rows[] = array(
+            array('data' => $key),
+            array('data' => $taxonomy_data->name),
+            array('data' => $taxonomy_data->tid),
+            array('data' =>
+                l('<span class="view-link"> View </span>', "taxonomy/term/$taxonomy_data->tid", array('html' => TRUE, 'attributes' => array("target" => array('_blank')))) . " | " .
+                l('<span class="move-link">Remove</span>', "move-dont-miss-widget-node/politoons_widget///$taxonomy_data->tid", array('html' => TRUE))
+            ),
+        );
+      }
+      $block['content'] = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array("class" => array('views-table'))));
       break;
   }
   return $block;
@@ -1131,7 +1157,10 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
-
+    case 'views-exposed-form-politoons-politoons-content':
+      $form['name']['#attributes']['placeholder'] = t('Title');
+      $form['tid_raw']['#attributes']['placeholder'] = t('Politoons ID');
+      break;
     case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
@@ -1420,6 +1449,10 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
   if ($view->current_display == 'yearender' || $view->current_display == 'block_1') {
     $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+  }
+
+  if ($view->name == 'politoons' && $view->current_display == 'politoons_content') {
+    $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
   }
 }
 
