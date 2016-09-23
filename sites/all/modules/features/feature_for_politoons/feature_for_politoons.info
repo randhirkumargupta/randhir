@@ -1,0 +1,13 @@
+name = feature for politoons
+description = feature for politoons
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = image
+dependencies[] = nodequeue
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[image][] = politoons
+features[views_view][] = politoons
+features_exclude[dependencies][ctools] = ctools

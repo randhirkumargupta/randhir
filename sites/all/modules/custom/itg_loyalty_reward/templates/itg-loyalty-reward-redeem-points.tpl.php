@@ -20,8 +20,14 @@
       </div>
     </div>  
     <div class="personalized-user-info">
-        <span>MY CART (3)</span>
-        <span>2,000 POINTS LEFT</span>
+        <div id="my-cart-items">
+          <?php print l(t('MY CART'), 'cart', array('attributes' => array('class' => array('button')))); ?>
+          <span>0</span>
+        </div>
+        <div id="my-remaining-points">          
+          <span></span>
+          POINTS LEFT
+        </div>
     </div>
   </div>
  </div> 
