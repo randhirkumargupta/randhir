@@ -44,8 +44,17 @@ function features_for_loyalty_and_rewards_user_default_permissions() {
   $permissions['loyalty points configuration form'] = array(
     'name' => 'loyalty points configuration form',
     'roles' => array(
-      'Marketing Manager' => 'Marketing Manager',
       'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'itg_loyalty_reward',
+  );
+
+  // Exported permission: 'view product page'.
+  $permissions['view product page'] = array(
+    'name' => 'view product page',
+    'roles' => array(
+      'Front User' => 'Front User',
     ),
     'module' => 'itg_loyalty_reward',
   );

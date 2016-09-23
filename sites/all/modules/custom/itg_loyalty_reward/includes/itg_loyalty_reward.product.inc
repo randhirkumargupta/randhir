@@ -38,13 +38,30 @@ function itg_loyalty_reward_redeem_points() {
 
 /**
  * Add to cart ajax callback.
+ *
+ * @param int $node_id
+ *   Node id of the node.
  */
-function itg_loyalty_reward_addtocart($node_id = NULL) {
+function itg_loyalty_reward_addtocart($node_id = NULL) {  
   // If node is is present then send user to checkout page, else add item into cart.
   if ($node_id != NULL) {
     // Do something.
   }
   else {
-    p($_POST);
+    // Prepare data array for session.
+    $data = array(
+      'mid' => check_plain($_POST['mid']),
+      'title' => check_plain($_POST['title']),
+      'points' => check_plain($_POST['points']),
+    );
+    // Assign cart data to session.
+    $_SESSION['itg_cart'][$data['mid']] = $data;    
   }
+  $cart_total_item = count($_SESSION['itg_cart']);
+  $cart_response = array(
+    'total_item' => $cart_total_item,
+    'mid' => (int) $data['mid'],
+    'code' => 1,
+  );
+  echo drupal_json_encode($cart_response);
 }
