@@ -108,6 +108,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     if ($theme != 'itgadmin') {
       $itg_class = 'itg-front';
     }
+   
 ?>
 <div class="itg-layout-container <?php echo $itg_class; ?>">
    

@@ -64,10 +64,39 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
-  $form['auto_slider_for_widget'] = array(
+  
+   $form['tech_for_widget'] = array(
       '#type' => 'textfield',
-      '#title' => t('Enter tid of Tips and Tricks'),
-      '#default_value' => variable_get('auto_slider_for_widget'),
+      '#title' => t('Enter tid of tech'),
+      '#default_value' => variable_get('tech_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+    $form['tech_tips_for_tech_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Tech Tips'),
+      '#default_value' => variable_get('tech_tips_for_tech_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+     $form['in_depth_for_tech_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Technologies In Depth'),
+      '#default_value' => variable_get('in_depth_for_tech_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+     $form['talking_point_for_tech_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Technologies Talking Point'),
+      '#default_value' => variable_get('talking_point_for_tech_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+     $form['watch_for_tech_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Technologies Watch'),
+      '#default_value' => variable_get('watch_for_tech_widget'),
       '#size' => 20,
       '#maxlength' => 20,
   );
@@ -948,7 +977,30 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][2]['value'] = variable_get('auto_tips_and_tricks_for_widget');
   }
   if ($view->name == 'auto' && $view->current_display == 'block_5') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('auto_slider_for_widget');
+    $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
+  }
+  
+ // Start alter for tech
+   if ($view->name == 'tech' && $view->current_display == 'block_1') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
+  }
+  if ($view->name == 'tech' && $view->current_display == 'block_2') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
+  }
+  if ($view->name == 'tech' && $view->current_display == 'block_3') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('tech_tips_for_tech_widget');
+  }
+  if ($view->name == 'tech' && $view->current_display == 'block_5') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
+  }
+  if ($view->name == 'tech' && $view->current_display == 'block_6') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('in_depth_for_tech_widget');
+  }
+  if ($view->name == 'tech' && $view->current_display == 'block_4') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('talking_point_for_tech_widget');
+  }
+  if ($view->name == 'tech' && $view->current_display == 'block_8') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('watch_for_tech_widget');
   }
 }
 
@@ -1240,6 +1292,49 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
   }
 }
 
+
+/**
+ * Function returns data for cutom tables widgets.
+ * 
+ * @param string $widget_name
+ * @param int $range_max
+ * @param int $range_min
+ * @return array
+ */
+function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $range_max, $range_min = 0) {
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+  $query->condition('iwo.widget', $widget_name)
+          ->condition('n.status', 1)
+           ->condition('iwo.cat_id',  variable_get('auto_for_widget'))
+          
+          ->orderBy('iwo.weight', 'ASC')
+          ->range($range_min, $range_max)
+          ->fields('iwo', array('nid', 'extra', 'weight'));
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $weight = 0;
+  foreach ($result as $data) {
+    $weight +=$data['weight'];
+  }
+
+  if ($weight > 0) {
+    return $result;
+  }
+  else {
+    // Query for renctaly careated node if weight is not saved
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->condition('iwo.widget', $widget_name)
+            ->condition('n.status', 1)
+            ->condition('iwo.cat_id',  variable_get('auto_for_widget'))
+            
+            ->orderBy('n.nid', 'DESC')
+            ->range($range_min, $range_max)
+            ->fields('iwo', array('nid', 'extra', 'weight'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+}
 /**
  * {@inheritdoc}
  */
