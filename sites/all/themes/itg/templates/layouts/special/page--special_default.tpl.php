@@ -49,7 +49,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <?php endif; ?>
           </div>
         <?php endif; ?>
-
+        <!--  
         <?php if ($secondary_menu): ?>
           <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
             <?php
@@ -67,7 +67,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             ?>
           </nav>
         <?php endif; ?>
-
+        -->
         <?php print render($page['header']); ?>
 
       </section>
