@@ -7276,23 +7276,23 @@ div.node #comments h2 {
 .node-story-form .form-type-checkboxes > label + div {
   padding-left: 200px;
 }
-.node-story-form #BasicDetails .form-type-managed-file, .node-story-form #ExpertChunk .form-type-managed-file {
+.node-story-form #browse-image .form-type-managed-file, .node-story-form #ExpertChunk .form-type-managed-file {
   vertical-align: top;
   width: 100%;
   margin: 5px 0;
   min-height: 28px;
   display: inline-block;
 }
-.node-story-form #BasicDetails .form-type-managed-file > label, .node-story-form #ExpertChunk .form-type-managed-file > label {
+.node-story-form #browse-image .form-type-managed-file > label, .node-story-form #ExpertChunk .form-type-managed-file > label {
   padding-top: 4px;
 }
-.node-story-form #BasicDetails .form-type-managed-file .form-managed-file .image-widget-data, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file .image-widget-data {
+.node-story-form #browse-image .form-type-managed-file .form-managed-file .image-widget-data, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file .image-widget-data {
   float: left;
 }
-.node-story-form #BasicDetails .form-type-managed-file .form-managed-file + div.description, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file + div.description {
+.node-story-form #browse-image .form-type-managed-file .form-managed-file + div.description, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file + div.description {
   left: 370px;
 }
-.node-story-form #BasicDetails .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description {
+.node-story-form #browse-image .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description {
   left: 245px;
 }
 .node-story-form [id*="field-story-reporter-values"] thead,
@@ -7713,6 +7713,15 @@ div.node #comments h2 {
 }
 .node-story-form .itg-form-action .form-actions .form-submit:hover, .node-story-form .itg-form-action .form-actions #story_submit_link:hover {
   box-shadow: 0 0 2px #3a8a82;
+}
+.node-story-form a.ckeditor_links {
+  color: #0c8bb1;
+  display: inline-block;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-left: 220px;
+  margin-top: 0;
+  text-decoration: underline;
 }
 
 .page-node-add-story .action-with-title #page-title {

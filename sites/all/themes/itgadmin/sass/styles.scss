@@ -7244,7 +7244,7 @@ div.node{
   .form-type-checkboxes > label + div{
     padding-left: 200px;
   }
-  #BasicDetails .form-type-managed-file, #ExpertChunk .form-type-managed-file{
+  #browse-image .form-type-managed-file, #ExpertChunk .form-type-managed-file{
     vertical-align: top;
     width: 100%;
     margin: 5px 0;
@@ -7722,6 +7722,15 @@ div.node{
         }
       }
     }
+  }
+  a.ckeditor_links {
+    color: #0c8bb1;
+    display: inline-block;
+    font-size: 12px;
+    margin-bottom: 10px;
+    margin-left: 220px;
+    margin-top: 0;
+    text-decoration: underline;
   }
 }
 .page-node-add-story{
