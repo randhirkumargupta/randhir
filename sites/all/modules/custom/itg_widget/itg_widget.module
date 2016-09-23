@@ -204,6 +204,10 @@ function itg_widget_block_info() {
       'info' => t('Widget: Auto Reviews form custom table'),
   );
 
+  $blocks['so_sorry_front_politoons'] = array(
+      'info' => t('So Sorry Politoons'),
+  );
+
   return $blocks;
 }
 
@@ -555,6 +559,12 @@ function itg_widget_block_view($delta = '') {
         );
       }
       $block['content'] = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array("class" => array('views-table'))));
+      break;
+
+    case 'so_sorry_front_politoons':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_so_sorry');
+      $data = itg_widget_so_sorry_politoons_ordering_data();
+      $block['content'] = theme('itg_widget_politoons', array('data' => $data));
       break;
   }
   return $block;
