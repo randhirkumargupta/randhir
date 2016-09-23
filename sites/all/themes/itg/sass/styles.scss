@@ -4008,3 +4008,41 @@ footer{
         border: 1px solid $border-color;
     }    
 }
+
+/*CSS start for year end page*/
+.year-slider{
+     background: #000;
+    padding: 10px;
+    img{
+        width: 750px;
+        height: 539px;
+    }
+    h2{
+        padding:10px 0;
+        a{
+            color: #fff;   
+        }        
+    }
+}
+.yearender{
+    .view-yearender{
+        .view-content{
+            margin-right: -15px;
+            margin-left: -15px;            
+        }
+    }
+    .section-ordering{
+                .pic{
+                    @include pos(relative);
+                    span{
+                        @include pos(absolute, null, null, 0, 0);
+                        background: rgba(0, 0, 0, 0.56);
+                        color: #fff;
+                        @include itg-font($itg-roboto);
+                        font-size: 12px;
+                        padding: 5px 8px;
+                    }
+                }                
+            }
+}
+/*CSS end for year end page*/
