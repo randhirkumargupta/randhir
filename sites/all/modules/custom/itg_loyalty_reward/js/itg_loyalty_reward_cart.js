@@ -25,6 +25,8 @@
                             ++cart_item;
                             $('#my-cart-items span').text(cart_item);
                             $('.' + res.mid).html('<a href="' + base_url + '/cart">GO TO CART</a>');
+                            $('.' + res.mid).parent().parent().clone().appendTo('#my-cart-items');         
+
                         }
                         
                         
