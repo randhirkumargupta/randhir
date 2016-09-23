@@ -120,10 +120,6 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     module_load_include('inc', 'itg_widget', 'includes/itg_issue_base_magazin_widget');
     save_issue_magazin_widget_data($form_state);
   }
-  elseif ($current_display == 'politoons_content') {
-    module_load_include('inc', 'itg_widget', 'includes/itg_widget_politoons_content');
-    save_polittons_widget_data($form_state);
-  }
   else {
     // Logic to skip nodes which are already in itg_widget_order table
     $nodes_already = db_select('itg_widget_order', 'iwo')
