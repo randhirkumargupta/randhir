@@ -649,6 +649,7 @@
       $(this).prev('.widget-title-wrapper.active').find('input[type="text"]').focus();
     });
     
+    
   };
 })(jQuery);
 
@@ -731,6 +732,12 @@ jQuery(document).ready(function(){
     // jquery code for sliding sidebar
     jQuery('body').on('click','.sidebar-trigger',function(){
       jQuery(this).parent().toggleClass('active');
+    });
+    
+    // jQuery code to toggle ITG-STORY Form
+    jQuery('.itg-form-section-wrapper').on('click', 'h2', function(){
+      jQuery(this).next().slideToggle();
+      jQuery(this).toggleClass('active');
     });
     
 });

@@ -36,7 +36,7 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
    * Add to and alter the form.
    */
   function views_form(&$form, &$form_state) {    
-    global $base_url;
+    global $base_url , $user;
     // Create a container for our replacements
     $form[$this->options['id']] = array(
       '#type' => 'container',
@@ -45,7 +45,7 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
     // Iterate over the result and add our replacement fields to the form.
     foreach ($this->view->result as $row_index => $row) {
       // Adding a slider field into form.      
-      $tid_weight = get_personalization_saved_value($row->tid);
+      $tid_weight = get_personalization_saved_value($row->tid , $user->uid);
       $default_value = isset($tid_weight->weight) ? $tid_weight->weight : 50;
       $form[$this->options['id']][$row_index] = array(                
         '#type' => 'slider',

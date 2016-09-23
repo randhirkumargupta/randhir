@@ -16,12 +16,12 @@ function save_dont_miss_widget_data($dont_miss_content) {
   $widget_name = _get_widget_name(' ', "dont_miss_content");
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
-      $node_load_data = node_load($node);
+      //$node_load_data = node_load($node);
       db_insert('itg_widget_order')
               ->fields(array(
                   'nid' => $node,
                   'widget' => $widget_name,
-                  'content_type' => $node_load_data->type,
+                  'content_type' => " ",
                   //'extra' => $field_names[$node],
                   'weight' => 0,
               ))

@@ -164,7 +164,7 @@ function feature_for_special_auto_review_widget_views_default_views() {
   /* Display: Content For : Special Auto Review Widget */
   $handler = $view->new_display('page', 'Content For : Special Auto Review Widget', 'special_auto_review_widget_contents');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Special Auto Review Widget';
+  $handler->display->display_options['title'] = 'Special  Review Widget';
   $handler->display->display_options['display_description'] = 'Content For : Special Auto Review Widget';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
@@ -243,18 +243,6 @@ function feature_for_special_auto_review_widget_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Modified on';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Schedule date & time */
-  $handler->display->display_options['fields']['field_story_schedule_date_time']['id'] = 'field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time']['table'] = 'field_data_field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time']['field'] = 'field_story_schedule_date_time';
-  $handler->display->display_options['fields']['field_story_schedule_date_time']['settings'] = array(
-    'format_type' => 'custom_date_d_m_y_',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_remaining_days' => 0,
-  );
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -384,6 +372,7 @@ function feature_for_special_auto_review_widget_views_default_views() {
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Categories';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'category_tid';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -407,6 +396,8 @@ function feature_for_special_auto_review_widget_views_default_views() {
     18 => 0,
     23 => 0,
     22 => 0,
+    24 => 0,
+    25 => 0,
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
@@ -530,6 +521,60 @@ print \'<a href="move-dont-miss-widget-node/special_auto_review_content/0/0/\'.$
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'special_auto_review_content';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Has taxonomy terms (with depth; <em class="placeholder">Simple hierarchical select</em>) */
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['id'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['table'] = 'node';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['field'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['value'] = '';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Section ';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['required'] = TRUE;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+  );
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
   $handler->display->display_options['path'] = 'special-auto-review-widget-lsit';
   $export['special_auto_review_widget'] = $view;
 

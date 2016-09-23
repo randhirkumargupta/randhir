@@ -783,7 +783,7 @@ function itg_msi_views_query_alter(&$view, &$query) {
     $issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value2'];
     $chk_wid_val = itg_msi_check_magazine_widget($issue_date);
     if(!empty($chk_wid_val)){
-      unset($query->orderby[1]);
+      //unset($query->orderby[1]);
     }else{
       unset($query->where[1]['conditions'][4]);
       unset($query->orderby[0]);

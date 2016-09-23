@@ -257,4 +257,11 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   
+  elseif ($view->name == "politoons" && $view->current_display == 'politoons_content') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Go To Politoons Widget'), 'yearend-left-widget-list');
+      $view->attachment_before = $header_content;
+    }
+  }  
 }
