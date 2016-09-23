@@ -41,7 +41,7 @@ function insert_layout_setting_ajax() {
         $layout_manager_array = get_layout_block_details($publish_tpl_id, $unpublish_tpl_id);
         
         $query_layout_manager = db_insert('itg_layout_manager');
-        $query_layout_manager->fields(array('layout_id', 'widget_name', 'block_name', 'block_title', 'filter_url', 'status'));
+        $query_layout_manager->fields(array('layout_id', 'widget_name', 'block_name', 'block_title', 'widget_info','filter_url', 'status'));
         
         foreach ($layout_manager_array as $record) {
           $query_layout_manager->values($record);
@@ -78,6 +78,7 @@ function insert_layout_setting_ajax() {
         'widget_name' => $widget[0],
         'block_name' => $_GET['block_name'],
         'block_title' => $block_title,
+        'widget_info' => $_GET['widget_info'],
         'filter_url' => $widget[1],
         'status' => true
       ));
@@ -108,7 +109,7 @@ function insert_layout_setting_ajax() {
       $widget = explode('#', $_GET['widget_name']);
     }
     
-    $output = get_itg_widget($widget[0], $widget[1]);   
+    $output = get_itg_widget($widget[0], $_GET['widget_info'], $widget[1]);   
     
     print $output;
   }
@@ -168,7 +169,7 @@ function get_template_id($section_name, $template_name) {
  */
 function get_layout_block_details($layout_id, $id) {
   $query = db_select('itg_layout_manager', 'layout');
-  $query->fields('layout', array('widget_name', 'block_name', 'block_title', 'filter_url', 'status'));  
+  $query->fields('layout', array('widget_name', 'block_name', 'block_title', 'widget_info','filter_url', 'status'));  
   $query->condition('layout_id', $layout_id);  
   $itg_result = $query->execute()->fetchAll();
   

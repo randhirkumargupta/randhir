@@ -24,6 +24,8 @@
                     helper: "clone",
                     drag: function(event, ui) {
                         widget_name = $(this).attr('data-widget');
+                        widget_info = $(this).attr('data-widget-info');
+                        
                         // for category tab
                         category_name_tab = $(this).attr('id');
                         //alert(widget_name);
@@ -74,7 +76,7 @@
                         $.ajax({
                             url: base_url + "/insert-layout-setting-ajax/layout",
                             method: 'post',
-                            data: {block_name: block_name, widget_name: widget_name, section_name: section_name, template_name: template_name, block_title: category_name_tab},
+                            data: {block_name: block_name, widget_name: widget_name, section_name: section_name, template_name: template_name, block_title: category_name_tab, widget_info:widget_info},
                             beforeSend: function() {
 
                                 $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
