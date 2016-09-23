@@ -28,22 +28,24 @@ function save_so_sorry_widget_data($so_sorry_selected_content) {
     foreach ($selected_node as $new_selected_node) {
       $new_data_to_insert[$new_selected_node]['nid'] = $new_selected_node;
     }
-    
+
     $num = db_delete('itg_widget_order')
             ->condition('widget', 'so_sorry_widget')
             ->execute();
-    
+
     foreach ($new_data_to_insert as $key => $nodes) {
 
       $node_weight = $nodes['nid'];
-      if($nodes['weight'] == 0 && isset($nodes['weight'])) {
+      if ($nodes['weight'] == 0 && isset($nodes['weight'])) {
         $node_weight = 0;
-      }else if (is_null($nodes['weight']) || $nodes['weight'] == "") {
+      }
+      else if (is_null($nodes['weight']) || $nodes['weight'] == "") {
         $node_weight = $nodes['nid'];
-      }else {
+      }
+      else {
         $node_weight = $nodes['weight'];
       }
-      
+
       db_insert('itg_widget_order')
               ->fields(array(
                   'nid' => $nodes['nid'],
@@ -71,4 +73,35 @@ function save_so_sorry_widget_data($so_sorry_selected_content) {
     }
   }
 }
- ?>
+
+/**
+ * function to sent block data for politoons for sosorry page.
+ * @return array
+ */
+function itg_widget_so_sorry_politoons_ordering_data() {
+  $block_data = array();
+
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->leftJoin('itg_category_manager', 'icm', 'icm.tid=iwo.nid');
+  $query->addField('iwo', 'nid');
+  $query->condition('iwo.widget', 'politoons_widget');
+  $query->condition('icm.status', 1);
+  $query->range(0, 6);
+  $query->orderBy('iwo.weight');
+
+  $result = $query->execute()->fetchAll();
+
+  foreach ($result as $taxonomy) {
+    $term_data = array();
+    $term_data = taxonomy_term_load($taxonomy->nid);
+    $block_data[] = array(
+        'title' => $term_data->name,
+        'uri' => $term_data->field_sponser_logo['und'][0]['uri'],
+        'term_id' => $term_data->tid,
+    );
+  }
+
+  return $block_data;
+}
+
+?>
