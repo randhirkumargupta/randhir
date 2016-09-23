@@ -66,6 +66,8 @@ h4.heading {
   color: #09619f;
   font-weight: 700;
   font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 15px;
 }
 
 .list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, .poll-banner .detail .social-share ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul {
@@ -1838,9 +1840,40 @@ footer .footer-copyright {
 
 /*End Dont miss Home page css*/
 /*CSS Start year end top news*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
+  background: #f6f6f6;
+}
 #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
   float: none;
   width: 100%;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
+  padding-bottom: 25px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing + .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing + .dont-miss-listing {
+  padding: 0 10px 25px 10px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
+  width: auto;
+  position: relative;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic a, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic a {
+  display: block;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic span, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic span {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-family: "Roboto", sans-serif;
+  padding: 2px 5px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic span i, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic span i {
+  font-size: 16px;
+  font-size: 1rem;
+  vertical-align: middle;
 }
 
 /*CSS End year end top news*/

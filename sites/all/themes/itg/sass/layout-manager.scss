@@ -627,12 +627,26 @@ a{
     }
 }
 
+/*CSS Start year end top news*/
 #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    background: #f6f6f6;
     ul{
         .dont-miss-listing{
             @include float(none);
             @include calculate-width(1);
+            padding:25px 10px;
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 25px;
+            }
+            .pic{
+                width:auto;
+                @include pos(relative);
+                a{
+                    display: block;
+                }                
+            }
         }
     }
 }
+/*CSS End year end top news*/
 /*CSS End Page Year End page */
