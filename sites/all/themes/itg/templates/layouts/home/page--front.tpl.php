@@ -254,7 +254,7 @@ if ($theme != 'itgadmin') {
       </section>
     </main>
       
-      <?php if (isset($user->uid)) {?>
+      <?php if (!empty($user->uid)) {?>
         <section class="recommended-for-you">
          <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization']?></div>
         </section>
@@ -750,7 +750,7 @@ if( $theme != 'itgadmin')
   <?php //print render($page['content']); ?>
   <!--Start third party widgets -->
   <div>
-    
+    <!--
     <div class="vukkul-comment">
     <div id="vuukle_div"></div>            
       <?php 
@@ -760,7 +760,7 @@ if( $theme != 'itgadmin')
        ?>     
     </div>
   </div>
-    
+  -->  
   <!--End third party widgets -->
  
   
