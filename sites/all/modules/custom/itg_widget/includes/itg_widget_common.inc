@@ -620,6 +620,9 @@ function itg_widget_theme() {
       'auto_reviews' => array(
           'template' => 'templates/auto-reviews',
       ),
+      'itg_widget_politoons' => array(
+          'template' => 'templates/itg-widget-politoons',
+      ),
   );
   return $themes;
 }
