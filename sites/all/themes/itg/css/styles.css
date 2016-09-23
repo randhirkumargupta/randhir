@@ -62,6 +62,14 @@ h4 {
   line-height: 18px;
 }
 
+h4.heading {
+  color: #09619f;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
 .list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, .poll-banner .detail .social-share ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul {
   list-style-type: none;
 }
@@ -1772,30 +1780,30 @@ footer .footer-copyright {
   margin-bottom: 5px;
 }
 
-.dont-miss, #block-itg-widget-yearende-left-top-news .top-news {
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
   /*padding: 30px 10px 0px 10px;*/
 }
-.dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul {
+.dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul {
   zoom: 1;
 }
-.dont-miss ul:before, .dont-miss ul:after, #block-itg-widget-yearende-left-top-news .top-news ul:before, #block-itg-widget-yearende-left-top-news .top-news ul:after {
+.dont-miss ul:before, .dont-miss ul:after, #block-itg-widget-yearende-left-top-news .top-news ul:before, #block-itg-widget-yearende-left-top-news .top-news ul:after, #block-itg-widget-yearende-left-top-videos .top-video ul:before, #block-itg-widget-yearende-left-top-videos .top-video ul:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.dont-miss ul:after, #block-itg-widget-yearende-left-top-news .top-news ul:after {
+.dont-miss ul:after, #block-itg-widget-yearende-left-top-news .top-news ul:after, #block-itg-widget-yearende-left-top-videos .top-video ul:after {
   clear: both;
 }
-.dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing {
+.dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
   overflow: hidden;
   padding: 10px;
 }
-.dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic {
+.dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
   float: left;
   margin-right: 15px;
 }
-.dont-miss ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail {
+.dont-miss ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail {
   display: block;
   overflow: hidden;
   font-size: 14px;
@@ -1803,15 +1811,15 @@ footer .footer-copyright {
   line-height: 19px;
   color: #323232;
 }
-.dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing {
+.dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
   width: 100%;
   padding: 0 0px 20px 0;
   border: none;
 }
-.dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic {
+.dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
   width: 46.6%;
 }
-.dont-miss ul .dont-miss-listing .dm-detail h4, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail h4 {
+.dont-miss ul .dont-miss-listing .dm-detail h4, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail h4, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail h4 {
   color: #048cb9;
   margin-bottom: 5px;
   text-transform: uppercase;
@@ -1823,7 +1831,7 @@ footer .footer-copyright {
   text-overflow: ellipsis;
   max-width: 100%;
 }
-.dont-miss ul .dont-miss-listing .dm-detail p, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail p {
+.dont-miss ul .dont-miss-listing .dm-detail p, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail p, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 18px;
@@ -1831,6 +1839,44 @@ footer .footer-copyright {
 }
 
 /*End Dont miss Home page css*/
+/*CSS Start year end top news*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
+  background: #f6f6f6;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
+  float: none;
+  width: 100%;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
+  padding-bottom: 25px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing + .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing + .dont-miss-listing {
+  padding: 0 10px 25px 10px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
+  width: auto;
+  position: relative;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic a, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic a {
+  display: block;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic span, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic span {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-family: "Roboto", sans-serif;
+  padding: 2px 5px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic span i, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic span i {
+  font-size: 16px;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+/*CSS End year end top news*/
 /*Start Story page css*/
 .story-section h1 {
   font-size: 24px;
@@ -4062,10 +4108,10 @@ footer .footer-copyright {
   display: block;
 }
 
-.view-photo-list-of-category .view-filters .edit-field-story-category-tid-wrapper {
+.view-photo-list-of-category .view-filters #edit-field-story-category-tid-wrapper, .view-video-list-of-category .view-filters #edit-field-story-category-tid-wrapper {
   display: none;
 }
-.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button {
+.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button, .view-video-list-of-category .view-filters .views-exposed-widget.views-submit-button {
   position: absolute;
   padding: 0;
   float: none;
@@ -4073,8 +4119,11 @@ footer .footer-copyright {
   z-index: 1;
   left: 50%;
 }
-.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button .ajax-progress.throbber {
-  background: transparent url(images/tab-loading.gif) no-repeat 0px center;
+.view-photo-list-of-category .view-filters .views-exposed-widget.views-submit-button .ajax-progress .throbber, .view-video-list-of-category .view-filters .views-exposed-widget.views-submit-button .ajax-progress .throbber {
+  background: transparent url(../images/tab-loading.gif) no-repeat 0px center;
+  height: 30px;
+  width: 30px;
+  float: none;
 }
 
 /*CCS End Photo landing Page*/

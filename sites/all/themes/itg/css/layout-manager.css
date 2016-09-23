@@ -286,30 +286,30 @@ a {
   margin-bottom: 5px;
 }
 
-.dont-miss {
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
   /*padding: 30px 10px 0px 10px;*/
 }
-.dont-miss ul {
+.dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul {
   zoom: 1;
 }
-.dont-miss ul:before, .dont-miss ul:after {
+.dont-miss ul:before, .dont-miss ul:after, #block-itg-widget-yearende-left-top-news .top-news ul:before, #block-itg-widget-yearende-left-top-news .top-news ul:after, #block-itg-widget-yearende-left-top-videos .top-video ul:before, #block-itg-widget-yearende-left-top-videos .top-video ul:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.dont-miss ul:after {
+.dont-miss ul:after, #block-itg-widget-yearende-left-top-news .top-news ul:after, #block-itg-widget-yearende-left-top-videos .top-video ul:after {
   clear: both;
 }
-.dont-miss ul .dont-miss-listing {
+.dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
   overflow: hidden;
   padding: 10px;
 }
-.dont-miss ul .dont-miss-listing .dm-pic {
+.dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
   float: left;
   margin-right: 15px;
 }
-.dont-miss ul .dont-miss-listing .dm-detail {
+.dont-miss ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail {
   display: block;
   overflow: hidden;
   font-size: 14px;
@@ -317,15 +317,15 @@ a {
   line-height: 19px;
   color: #323232;
 }
-.dont-miss ul .dont-miss-listing {
+.dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
   width: 100%;
   padding: 0 0px 20px 0;
   border: none;
 }
-.dont-miss ul .dont-miss-listing .dm-pic {
+.dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
   width: 46.6%;
 }
-.dont-miss ul .dont-miss-listing .dm-detail h4 {
+.dont-miss ul .dont-miss-listing .dm-detail h4, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail h4, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail h4 {
   color: #048cb9;
   margin-bottom: 5px;
   text-transform: uppercase;
@@ -337,7 +337,7 @@ a {
   text-overflow: ellipsis;
   max-width: 100%;
 }
-.dont-miss ul .dont-miss-listing .dm-detail p {
+.dont-miss ul .dont-miss-listing .dm-detail p, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail p, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail p {
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 18px;
@@ -975,4 +975,25 @@ a {
   min-height: 628px;
 }
 
+/*CSS Start year end top news*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
+  background: #f6f6f6;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
+  float: none;
+  width: 100%;
+  padding: 25px 10px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
+  padding-bottom: 25px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .pic {
+  width: auto;
+  position: relative;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .pic a, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .pic a {
+  display: block;
+}
+
+/*CSS End year end top news*/
 /*CSS End Page Year End page */

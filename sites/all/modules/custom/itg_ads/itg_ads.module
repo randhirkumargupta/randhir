@@ -149,9 +149,15 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
 
 	//  if (function_exists('itg_common_dropdown_supplement')) {
 	if ($template_id == 'Home' || $template_id == 'Rest') {
+		$form['field_ads_select_secton_option'][LANGUAGE_NONE]['#options'] = array('_none' => 'NONE');
+		unset($form['field_ads_select_secton_option']);
+		
+		//$form['field_ads_select_secton_option'][LANGUAGE_NONE]['#default_value'] = array('_none' => '-None-');
 		$form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder_values($template_id, $template_id);
 	}
 	else {
+		//$form['field_ads_select_secton_option'][LANGUAGE_NONE]['#default_value'] = array('_none' => '-None-');
+		//drupal_add_js(' jQuery("select[name="field_ads_select_secton_option[und]"]").html("<option>None</option>");', 'inline');
 //		//Ajax work based on field section selection
 //		$section_selection_field = 'field_ads_section_selection';
 //		$ads_placeholder_field = 'field_ads_placeholder';
