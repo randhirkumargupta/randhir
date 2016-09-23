@@ -188,13 +188,20 @@ function itg_section_widgets_list_delete() {
  * @return array $output
  */
 function itg_update_table() {
+  $check = db_field_exists('itg_layout_tpl', 'layout_type');
+  $check1 = db_field_exists('itg_layout_manager', 'widget_info');
   
-  db_query("ALTER TABLE `itg_layout_tpl` ADD `layout_type` TEXT NOT NULL AFTER `template_name`")->execute();
-  db_query("ALTER TABLE `itg_layout_manager` ADD `widget_info` TEXT NULL AFTER `block_title`")->execute();
-  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'home2' WHERE template_name = 'page--front'")->execute();
-  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'section1' WHERE template_name = 'page--section_photo'")->execute();
-  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'section1' WHERE template_name = 'page--section_default'")->execute();
-  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'section1' WHERE template_name = 'page--section_video'")->execute();
+  if(empty($check)) {
+      db_query("ALTER TABLE `itg_layout_tpl` ADD `layout_type` TEXT NOT NULL AFTER `template_name`")->execute();
+  }
+  if(empty($check1)) {
+   db_query("ALTER TABLE `itg_layout_manager` ADD `widget_info` TEXT NULL AFTER `block_title`")->execute();   
+  }
+  
+  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'home' WHERE template_name = 'page--front'")->execute();
+  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'section' WHERE template_name = 'page--section_photo'")->execute();
+  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'section' WHERE template_name = 'page--section_default'")->execute();
+  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'section' WHERE template_name = 'page--section_video'")->execute();
   
   echo '@@@@';exit;
 }
