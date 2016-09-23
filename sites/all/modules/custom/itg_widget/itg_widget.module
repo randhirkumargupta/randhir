@@ -200,10 +200,6 @@ function itg_widget_block_info() {
       'info' => t('So Sorry Social Icons Custom Block'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['sosorry_selected_politoons_block'] = array(
-      'info' => t('So Sorry Selected Politoons Block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
   $blocks['auto_reviews'] = array(
       'info' => t('Widget: Auto Reviews form custom table'),
   );
@@ -447,7 +443,6 @@ function itg_widget_block_view($delta = '') {
       $data = itg_widget_featured_video_carousel_data($info, 'flexslider');
       $block['content'] = theme("featured_video_carousel", array("data" => $data));
       break;
-
 
     case 'featured_video_carousel_r':
       global $base_url;
