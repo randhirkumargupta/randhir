@@ -161,6 +161,13 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
+  $form['auto_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Auto'),
+      '#default_value' => variable_get('auto_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
   return system_settings_form($form);
 }
 
@@ -1444,15 +1451,21 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
   }
 
-  if ($view->current_display == 'yearender' || $view->current_display == 'block_2') {
+  if ($view->name == 'yearender' && $view->current_display == 'block_2') {
     $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
   }
-  if ($view->current_display == 'yearender' || $view->current_display == 'block_1') {
+  if ($view->name == 'yearender' && $view->current_display == 'block_1') {
     $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
   }
 
   if ($view->name == 'politoons' && $view->current_display == 'politoons_content') {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
+  }
+  if ($view->name == 'auto' && $view->current_display == 'block_2') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('auto_for_widget');
+  }
+  if ($view->name == 'auto' && $view->current_display == 'block_1') {
+    $query->where[1]['conditions'][3]['value'] = variable_get('auto_for_widget');
   }
 }
 
@@ -1749,11 +1762,16 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
  */
 function itg_widget_block_view_alter(&$data, $block) {
   $item = menu_get_item();
+  $flag_occupation = array();
   $arg = arg();
-
   $page_argument = $item['page_arguments'];
+  $occupation = $page_argument[0]->field_celebrity_pro_occupation['und'];
+  foreach ($occupation as $occupation_taxonomy) {
+    $flag_occupation[] = $occupation_taxonomy['taxonomy_term']->name;
+  }
+  
   if ($block->delta == 'programmes-rhs_programmes') {
-    if ($arg[0] == 'anchors-list' || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name == 'Anchor') || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+    if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
       return TRUE;
     }
     else {
