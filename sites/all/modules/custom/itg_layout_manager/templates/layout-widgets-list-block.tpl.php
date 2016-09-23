@@ -2,7 +2,7 @@
 global $theme_key;
 
 //$cf = system_region_list($theme_key, $show = REGIONS_VISIBLE);
-
+//$widget[2] = 'view';
 ?>
 
 
@@ -12,7 +12,9 @@ global $theme_key;
     foreach($data['default_widget'] as $key => $val) {
      $widget = explode('|', $val['value']); 
   ?>
-  <li id="<?php print $widget[0];?>" data-widget="<?php print $widget[1];?>"><span><?php print $widget[0];?></span></li>
+  <li id="<?php print $widget[0];?>" data-widget="<?php print $widget[1];?>" data-widget-info="<?php print $widget[2].'|'.$widget[3].'|'.$widget[4];?>">
+    <span><?php print $widget[0];?></span>
+  </li>
   <?php } ?>
 <!--    <li data-widget="section_wise_order"><span>Section Wise order</span></li>-->
 </ul>

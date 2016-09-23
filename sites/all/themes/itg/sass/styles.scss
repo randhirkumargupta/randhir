@@ -28,6 +28,8 @@ h4{
 h4.heading{
     color: $heading-blue-color;
     @include itg-font($itg-roboto,$itg-font-bold);
+    text-transform: uppercase;
+    margin-bottom: 15px;
 }
 .list-none{
     list-style-type: none;
@@ -1463,10 +1465,37 @@ footer{
 /*End Dont miss Home page css*/
 /*CSS Start year end top news*/
 #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    background: #f6f6f6;
     ul{
         .dont-miss-listing{
             @include float(none);
-            @include calculate-width(1);
+            @include calculate-width(1);            
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 25px;
+            }
+            +.dont-miss-listing{
+                padding:0 10px 25px 10px;
+            }
+            .dm-pic{
+                width:auto;
+                @include pos(relative);
+                a{
+                    display: block;
+                }
+                span{
+                    position: absolute;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.4);
+                    color: $white-color;
+                    @include font(12px);
+                    font-family: $itg-roboto;
+                    padding: 2px 5px;
+                    i{
+                        @include font(16px);
+                        vertical-align: middle;
+                    }
+                }
+            }
         }
     }
 }
