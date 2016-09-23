@@ -28,6 +28,7 @@ function insert_layout_setting_ajax() {
       $query_layout_tpl->fields(array(
         'section_name' => $_GET['section_name'],
         'template_name' => $_GET['template_name'],
+        'layout_type' => $_GET['layout_type'],
         'created_by' => $user->uid,
         'created_date' => time(),
         'status' => 0

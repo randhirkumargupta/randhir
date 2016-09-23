@@ -405,3 +405,52 @@ function get_first_category_of_media_widget($section, $template, $widget_name) {
   foreach($cat_array as $first) break;
   return $filter_url = $first;
 }
+
+function get_default_section_tpl(){
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('section_name', 'template_name'));  
+    $query->condition('status', 1);
+          //->condition('default', 1);
+    $last_tpl = $query->execute()->fetchAll();
+    p($last_tpl);
+}
+
+/**
+ * Get tid of section tpl
+ * @return int
+ */
+function get_tid_of_section_tpl($tid) {
+  $query = db_select('itg_layout_tpl', 'tpl');
+  $query->fields('tpl', array('section_name'));  
+  $query->condition('section_name', $tid)
+        ->condition('status', 1);
+  $query->orderBy('tpl.id', 'DESC')->range(0,1);//LIMIT to 1 records
+
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get ads page name
+ * @return $page_name
+ */
+function get_ads_page_name() {
+	$arg = arg();
+	$is_fron_page = drupal_is_front_page();      
+	if (!empty($is_fron_page)) {          
+		$page_name = 'Home';
+	} 
+	else if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))) {
+		$ads_tid = get_tid_of_section_tpl($arg[2]);	
+		if (!empty($ads_tid)) {
+			$page_name = $ads_tid;
+		}
+		else {
+			$page_name = 'Rest';
+		}
+	}
+	else {
+	 $page_name = 'Rest';   
+	}
+	
+	return $page_name;
+}
