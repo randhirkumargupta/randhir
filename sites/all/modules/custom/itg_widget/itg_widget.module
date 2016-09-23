@@ -538,29 +538,6 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("auto_reviews", array("data" => $data));
       break;
-    case 'sosorry_selected_politoons_block':
-      $query = db_select('itg_widget_order', 'iwo');
-      $query->addField('iwo', 'nid');
-      $query->condition('iwo.widget', 'politoons_widget');
-      $query->orderBy('iwo.weight', 'DESC');
-      $data = $query->execute()->fetchAll();
-      $table = array();
-      $header = array('S No.', 'Title', 'Politoons Id', 'Action');
-      foreach ($data as $key => $tid) {
-        $taxonomy_data = taxonomy_term_load($tid->nid);
-        $rows[] = array(
-            array('data' => $key),
-            array('data' => $taxonomy_data->name),
-            array('data' => $taxonomy_data->tid),
-            array('data' =>
-                l('<span class="view-link"> View </span>', "taxonomy/term/$taxonomy_data->tid", array('html' => TRUE, 'attributes' => array("target" => array('_blank')))) . " | " .
-                l('<span class="move-link">Remove</span>', "move-dont-miss-widget-node/politoons_widget///$taxonomy_data->tid", array('html' => TRUE))
-            ),
-        );
-      }
-      $block['content'] = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array("class" => array('views-table'))));
-      break;
-
     case 'so_sorry_front_politoons':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_so_sorry');
       $data = itg_widget_so_sorry_politoons_ordering_data();
