@@ -971,7 +971,7 @@ function itg_poll_form_home_page_ajax_submit($form, &$form_state) {
   setcookie('visitedPoll', $value, $expire, '/');
   $_SESSION['first_submit_anomoyous'] = 'yes';
   $poll_answer = itg_poll_get_past_data($node_id);
-  $commands[] = ajax_command_replace('.poll-replace-id', $poll_answer);
+  $commands[] = ajax_command_html('.poll-replace-id', $poll_answer);
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
