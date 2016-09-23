@@ -38,6 +38,9 @@ function itg_loyalty_reward_redeem_points() {
 
 /**
  * Add to cart ajax callback.
+ *
+ * @param int $node_id
+ *   Node id of the node.
  */
 function itg_loyalty_reward_addtocart($node_id = NULL) {  
   // If node is is present then send user to checkout page, else add item into cart.
