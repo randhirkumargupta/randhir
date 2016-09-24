@@ -333,7 +333,7 @@ function itg_reporter_get_all_story_nid($source_id) {
 
 /**
  * Implement itg_autocomplete_byline
- * @param array $ids
+ * @param array $id
  */
 function itg_autocomplete_byline($id) {
   
