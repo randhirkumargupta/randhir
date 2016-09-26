@@ -628,7 +628,6 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Kicker */
   $handler->display->display_options['fields']['field_story_kicker_text']['id'] = 'field_story_kicker_text';
   $handler->display->display_options['fields']['field_story_kicker_text']['table'] = 'field_data_field_story_kicker_text';
