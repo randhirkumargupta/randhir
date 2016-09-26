@@ -12,10 +12,11 @@ function itg_loyalty_reward_redeem_points() {
   global $user, $base_url;
   // Add js file to the page.
   drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
-  // Pass data to js file.
-  drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url)), array('type' => 'setting'));
+  // Get added item from db.
+  $mid = _get_cart_item($user->uid);
+  // Pass data to js file.  
+  drupal_add_js(array('itg_loyalty_reward' => array('mid' => $mid, 'base_url' => $base_url)), array('type' => 'setting'));  
   $user_fields = user_load($user->uid);  
-  
   // Render user picture.
   $data['profile_pic'] = theme(
     'image_style',
@@ -23,13 +24,11 @@ function itg_loyalty_reward_redeem_points() {
       'style_name' => 'user_picture',
       'path' => $user_fields->field_user_picture['und'][0]['uri'],
     )
-  );  
-  
+  );    
   // Load user name    
   $f_name = $user_fields->field_first_name['und'][0]['value'];
   $l_name = $user_fields->field_last_name['und'][0]['value'];  
-  $data['full_name'] = $f_name . ' ' . $l_name;
-  
+  $data['full_name'] = $f_name . ' ' . $l_name;  
   // user logout link
   $data['logout'] = l(t('Logout'), 'user/logout');  
   
@@ -42,26 +41,96 @@ function itg_loyalty_reward_redeem_points() {
  * @param int $node_id
  *   Node id of the node.
  */
-function itg_loyalty_reward_addtocart($node_id = NULL) {  
-  // If node is is present then send user to checkout page, else add item into cart.
-  if ($node_id != NULL) {
-    // Do something.
-  }
-  else {
-    // Prepare data array for session.
-    $data = array(
-      'mid' => check_plain($_POST['mid']),
-      'title' => check_plain($_POST['title']),
-      'points' => check_plain($_POST['points']),
+function itg_loyalty_reward_addtocart($node_id, $action = NULL) {    
+  global $user;
+  // Check if node is set.
+  if ($node_id > 0) {
+    $node = node_load($node_id);
+    $node_info_array = array(
+      'nid' => $node->nid,
+      'title' => $node->title,
+      'description' => $node->body['und'][0]['value'],
+      'price' => $node->field_lrp_actual_price['und'][0]['value'],
+      'discounted_price' => $node->field_lrp_discounted_price['und'][0]['value'],
+      'image' => $node->field_lrp_image['und'][0],
+      'points' => $node->field_lrp_loyalty_points['und'][0]['value']
     );
-    // Assign cart data to session.
-    $_SESSION['itg_cart'][$data['mid']] = $data;    
   }
-  $cart_total_item = count($_SESSION['itg_cart']);
-  $cart_response = array(
-    'total_item' => $cart_total_item,
-    'mid' => (int) $data['mid'],
-    'code' => 1,
-  );
-  echo drupal_json_encode($cart_response);
+  // check action.
+  if (isset($node) && $action == NULL) {    
+    $presave = array(
+      'nid' => $node_info_array['nid'],
+      'uid' => $user->uid,
+      'product_name' => $node_info_array['title'],
+      'points' => $node_info_array['points'],
+      'product_information' => serialize($node_info_array),
+      'created' => REQUEST_TIME,
+    );
+    
+    // Insert data to cart table.
+    try {
+      $order_id = db_insert('itg_loyalty_reward_cart')
+        ->fields($presave)
+        ->execute();    
+    }
+    catch (Exception $ex) {
+      watchdog('ITG CART', $ex->getMessage());
+    }
+    // If data u=inserted to cart table.    
+    if ($order_id > 0) {
+      drupal_add_js(array('itg_loyalty_reward' => array('mid' => $node_info_array['nid'])), array('type' => 'setting'));
+    }
+    
+  }
+//  else if ($action == 'checkout') {
+//    // Redirect to cart page.
+//  }
+  
+  drupal_goto('redeem-points', array('query' => array('mid' => $node_info_array['nid'])));
+}
+
+/**
+ * Callback function for cart detail page.
+ *
+ * @global stdObject $user
+ *   User standard object.
+ * @return array
+ *   page remdered array.
+ */
+function itg_loyalty_reward_cart() {
+  global $user;
+  $data = _get_cart_full_details($user->uid);
+      
+  return theme('itg_loyalty_reward_cart', array('data' => $data));
+}
+
+/**
+ * get cart items from database.
+ *
+ * @param int $uid
+ *   Current user id.
+ * @return array
+ *   Array of product details.
+ */
+function _get_cart_full_details($uid) {  
+  $data = array();
+  $itg_query = db_select('itg_loyalty_reward_cart', 'itg');
+  $itg_query->fields('itg', array('product_information'))
+      ->condition('uid', $uid);
+  $itg_result = $itg_query->execute()->fetchAll();
+  foreach ($itg_result as $value) {    
+    $data[] = unserialize($value->product_information);
+  }
+  
+  return $data;
+}
+
+/**
+ * Remove product from cart.
+ *
+ * @param int $nid
+ *   Product id to remove from cart page.
+ */
+function itg_loyalty_reward_removecart($nid) {
+  
 }
