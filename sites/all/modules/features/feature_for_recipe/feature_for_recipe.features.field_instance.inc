@@ -223,45 +223,6 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cooking_tips-field_recipe_syndication'.
-  $field_instances['node-cooking_tips-field_recipe_syndication'] = array(
-    'bundle' => 'cooking_tips',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_recipe_syndication',
-    'label' => 'Syndication',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 14,
-    ),
-  );
-
   // Exported field_instance: 'node-cooking_tips-field_recipe_writer_image'.
   $field_instances['node-cooking_tips-field_recipe_writer_image'] = array(
     'bundle' => 'cooking_tips',
@@ -733,7 +694,7 @@ function feature_for_recipe_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'entityreference_autocomplete_tags',
       'weight' => 6,
     ),
   );
@@ -1101,45 +1062,6 @@ function feature_for_recipe_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance: 'node-food_news-field_recipe_syndication'.
-  $field_instances['node-food_news-field_recipe_syndication'] = array(
-    'bundle' => 'food_news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 11,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_recipe_syndication',
-    'label' => 'Syndication',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 15,
     ),
   );
 
@@ -1568,7 +1490,7 @@ function feature_for_recipe_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'entityreference_autocomplete_tags',
       'weight' => 6,
     ),
   );
@@ -2541,45 +2463,6 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-recipe-field_recipe_syndication'.
-  $field_instances['node-recipe-field_recipe_syndication'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please select Syndication.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_recipe_syndication',
-    'label' => 'Syndication',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 29,
-    ),
-  );
-
   // Exported field_instance: 'node-recipe-field_recipe_time'.
   $field_instances['node-recipe-field_recipe_time'] = array(
     'bundle' => 'recipe',
@@ -3508,7 +3391,7 @@ function feature_for_recipe_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'entityreference_autocomplete_tags',
       'weight' => 11,
     ),
   );
@@ -4076,7 +3959,6 @@ function feature_for_recipe_field_default_field_instances() {
   t('Please select Cuisine type (Chinese, Thai etc.)');
   t('Please select Meal For (No. of people, e.g.1-2, 2-4 etc.)');
   t('Please select Meal Type (e.g. Breakfast, Snacks etc.)');
-  t('Please select Syndication.');
   t('Please select festivals (e.g. Holi, Christmas etc.) ');
   t('Please select food type.');
   t('Please select section.');
