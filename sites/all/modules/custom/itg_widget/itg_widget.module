@@ -201,14 +201,17 @@ function itg_widget_block_info() {
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['auto_reviews'] = array(
-      'info' => t('Widget: Auto Reviews form custom table'),
+      'info' => t('Widget: Auto Reviews from custom table'),
   );
 
   $blocks['so_sorry_front_politoons'] = array(
       'info' => t('So Sorry Politoons'),
   );
    $blocks['tech_reviews'] = array(
-      'info' => t('Widget: Tech Reviews form custom table'),
+      'info' => t('Widget: Tech Reviews from custom table'),
+  );
+   $blocks['tech_most_read'] = array(
+      'info' => t('Widget: Tech most read from custom table'),
   );
 
   return $blocks;
@@ -553,6 +556,15 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("tech_reviews", array("data" => $data));
       break;
+   case 'tech_most_read':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_read');
+      $info['widget_name'] = 'most_read_content';
+        $info['query_var_name'] = 'tech_for_widget';
+      $data = itg_widget_tech_most_read_ordering_data($info);
+     
+      $block['content'] = theme("tech_most_read", array("data" => $data));
+      break;
   }
+ 
   return $block;
 }

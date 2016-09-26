@@ -93,6 +93,13 @@ function itg_widgets_custom_variables() {
         '#size' => 20,
         '#maxlength' => 20,
     );
+    $form['buying_guid_for_tech_widget'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Enter tid of Buying Guid'),
+        '#default_value' => variable_get('buying_guid_for_tech_widget'),
+        '#size' => 20,
+        '#maxlength' => 20,
+    );
     $form['watch_for_tech_widget'] = array(
         '#type' => 'textfield',
         '#title' => t('Enter tid of Technologies Watch'),
@@ -644,6 +651,9 @@ function itg_widget_theme() {
         'tech_reviews' => array(
             'template' => 'templates/auto-reviews',
         ),
+        'tech_most_read' => array(
+            'template' => 'templates/tech-most-read',
+        ),
     );
     return $themes;
 }
@@ -974,14 +984,17 @@ function itg_widget_views_query_alter(&$view, &$query) {
     if ($view->name == 'tech' && $view->current_display == 'block_3') {
         $query->where[1]['conditions'][2]['value'] = variable_get('tech_tips_for_tech_widget');
     }
+      if ($view->name == 'tech' && $view->current_display == 'block_4') {
+        $query->where[1]['conditions'][2]['value'] = variable_get('talking_point_for_tech_widget');
+    }
     if ($view->name == 'tech' && $view->current_display == 'block_5') {
         $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
     }
     if ($view->name == 'tech' && $view->current_display == 'block_6') {
         $query->where[1]['conditions'][2]['value'] = variable_get('in_depth_for_tech_widget');
     }
-    if ($view->name == 'tech' && $view->current_display == 'block_4') {
-        $query->where[1]['conditions'][2]['value'] = variable_get('talking_point_for_tech_widget');
+    if ($view->name == 'tech' && $view->current_display == 'block_7') {
+        $query->where[1]['conditions'][2]['value'] = variable_get('buying_guid_for_tech_widget');
     }
     if ($view->name == 'tech' && $view->current_display == 'block_8') {
         $query->where[1]['conditions'][2]['value'] = variable_get('watch_for_tech_widget');
