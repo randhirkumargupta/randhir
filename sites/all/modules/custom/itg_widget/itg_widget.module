@@ -207,6 +207,9 @@ function itg_widget_block_info() {
   $blocks['so_sorry_front_politoons'] = array(
       'info' => t('So Sorry Politoons'),
   );
+   $blocks['tech_reviews'] = array(
+      'info' => t('Widget: Tech Reviews form custom table'),
+  );
 
   return $blocks;
 }
@@ -565,6 +568,13 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_so_sorry');
       $data = itg_widget_so_sorry_politoons_ordering_data();
       $block['content'] = theme('itg_widget_politoons', array('data' => $data));
+      break;
+   case 'tech_reviews':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
+      $info['widget_name'] = 'special_auto_review_content';
+      $data = itg_widget_tech_reviews_ordering_data($info);
+
+      $block['content'] = theme("tech_reviews", array("data" => $data));
       break;
   }
   return $block;
