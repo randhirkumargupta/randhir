@@ -995,5 +995,124 @@ a {
   display: block;
 }
 
+/*CSS start for year end page*/
+.year-slider {
+  background: #000;
+  padding: 10px;
+}
+.year-slider h2 {
+  padding: 10px 0;
+}
+.year-slider h2 a {
+  color: #fff;
+}
+
+.yearender .view-yearender.view-display-id-block_2 .view-content {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.yearender .view-yearender.view-display-id-block_2 .views-row {
+  margin-bottom: 40px;
+}
+.yearender .view-yearender.view-display-id-block_2 .col-md-6:nth-child(2n+1) {
+  clear: left;
+}
+.yearender .section-ordering .pic {
+  position: relative;
+}
+.yearender .section-ordering .pic span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.56);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  padding: 5px;
+}
+.yearender .section-ordering .pic span i {
+  font-size: 16px;
+  font-size: 1rem;
+}
+.yearender .slick-slider {
+  padding: 10px;
+  background: #000;
+  border: none;
+}
+.yearender .slick-slider .slick-prev {
+  font: normal normal normal 14px/1 FontAwesome;
+  cursor: pointer;
+  width: 24px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0 90px 90px 0;
+  left: 10px;
+  font-size: 0;
+  position: absolute;
+  top: 50%;
+  z-index: 9;
+  border: none;
+  margin-top: -12px;
+}
+.yearender .slick-slider .slick-prev:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.yearender .slick-slider .slick-prev:before {
+  content: '\f053';
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 20px;
+  padding-left: 0;
+  left: 0;
+  position: absolute;
+  top: 16px;
+}
+.yearender .slick-slider .slick-next {
+  font: normal normal normal 14px/1 FontAwesome;
+  cursor: pointer;
+  width: 24px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 90px 0px 0px 90px;
+  right: 10px;
+  font-size: 0;
+  position: absolute;
+  top: 50%;
+  z-index: 9;
+  border: none;
+  margin-top: -12px;
+}
+.yearender .slick-slider .slick-next:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.yearender .slick-slider .slick-next:before {
+  content: '\f054';
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 20px;
+  padding-left: 0;
+  right: 0;
+  position: absolute;
+  top: 16px;
+}
+.yearender .slick-slider ul.slick-dots li {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 6px;
+}
+.yearender .slick-slider ul.slick-dots li button {
+  border: none;
+  cursor: pointer;
+}
+@media screen and (min-width: 769px) {
+  .yearender .slick-slider .slick-next, .yearender .slick-slider .slick-prev {
+    width: 50px;
+    height: 100px;
+    margin-top: -50px;
+  }
+  .yearender .slick-slider .slick-next:before, .yearender .slick-slider .slick-prev:before {
+    top: 38px;
+    font-size: 30px;
+  }
+}
+
+/*CSS end for year end page*/
 /*CSS End year end top news*/
-/*CSS End Page Year End page */

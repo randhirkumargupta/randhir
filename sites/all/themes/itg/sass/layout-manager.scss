@@ -648,5 +648,45 @@ a{
         }
     }
 }
+/*CSS start for year end page*/
+.year-slider{
+    background: #000;
+    padding: 10px;    
+    h2{
+        padding:10px 0;
+        a{
+            color: #fff;   
+        }        
+    }
+}
+.yearender{    
+    .view-yearender.view-display-id-block_2{
+        .view-content{
+            margin-right: -15px;
+            margin-left: -15px;            
+        }
+        .views-row{
+            margin-bottom: 40px;          
+        }
+        @include clear-floating-block(col-md-6);
+    }
+    .section-ordering{
+        .pic{
+            @include pos(relative);
+            span{
+                @include pos(absolute, null, null, 0, 0);
+                background: rgba(0, 0, 0, 0.56);
+                color: #fff;
+                @include itg-font($itg-roboto);
+                font-size: 12px;
+                padding: 5px;
+                i{
+                    @include font(16px);
+                }
+            }
+        }                
+    }
+    @include slider-icon-width-background;    
+}
+/*CSS end for year end page*/
 /*CSS End year end top news*/
-/*CSS End Page Year End page */

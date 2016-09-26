@@ -12,7 +12,7 @@ jQuery(document).ready(function (e) {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
-        fade: false,        
+        fade: false         
     });  
 });
 
