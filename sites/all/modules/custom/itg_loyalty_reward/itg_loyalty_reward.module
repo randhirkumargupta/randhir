@@ -16,7 +16,7 @@ function itg_loyalty_reward_permission() {
     'loyalty points configuration form' => array(
       'title' => t('Loyalty Points configuration Form'),
     ),
-    'view product page' =>array(
+    'view product page' => array(
       'title' => t('View product listing page.')
     ),
   );
@@ -38,7 +38,7 @@ function itg_loyalty_reward_menu() {
   );
   // Redeem points page.
   $items['redeem-points'] = array(
-    'title' => t('Reddem Points'),
+    'title' => 'Reddem Points',
     'page callback' => 'itg_loyalty_reward_redeem_points',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -46,7 +46,7 @@ function itg_loyalty_reward_menu() {
   );
   // Cart page.
   $items['cart'] = array(
-    'title' => t('Shopping Cart'),
+    'title' => 'Shopping Cart',
     'page callback' => 'itg_loyalty_reward_cart',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -63,7 +63,7 @@ function itg_loyalty_reward_menu() {
   // Cart remove product.
   $items['cart/delete/%'] = array(
     'page callback' => 'itg_loyalty_reward_removecart',
-    'page arguments' => array(2),
+    'page arguments' => array(2, 3),
     'access arguments' => array('view product page'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward.product.inc',
