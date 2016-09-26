@@ -29,7 +29,7 @@
                     <span>Item (1)</span>
                     <span><?php print l(t('Delete (X)'), 'cart/delete/' . $cart_detail['nid'] . '/' . $cart_detail['title'], array('query' => array('destination' => arg(0)))); ?></span>
                 </div>
-                <div class="points"><?php print $cart_detail['points']; ?></div>
+                <div class="points"><?php print $cart_detail['points'] . t('Points'); ?></div>
             </div>
         </div>
         <?php $cart_total += $cart_detail['points']; ?> 
