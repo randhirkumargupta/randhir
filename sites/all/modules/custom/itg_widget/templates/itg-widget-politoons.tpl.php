@@ -1,10 +1,14 @@
-
-<?php
-global $base_url;
-print t("CHOOSE YOUR FAVOURITE <span>POLITOONS</span>");
-foreach ($data as $key => $taxonomy) :
+<div class="politoons-sosorry">
+<div class="row">
+    <div class="col-md-12">
+        <?php
+            global $base_url;
+            print t("<h2>CHOOSE YOUR FAVOURITE <span>POLITOONS</span></h2>");
+        ?>
+    </div>
+<?php foreach ($data as $key => $taxonomy) :
   ?>
-  <div class="politoons-<?php echo $key; ?>">
+  <div class="col-md-4 col-xs-6 politoons-<?php echo $key; ?>">
     <?php
     $title = $taxonomy['title'];
     $tid = $taxonomy['term_id'];
@@ -28,3 +32,5 @@ foreach ($data as $key => $taxonomy) :
   </div>
 
 <?php endforeach; ?>
+</div>
+    </div>
