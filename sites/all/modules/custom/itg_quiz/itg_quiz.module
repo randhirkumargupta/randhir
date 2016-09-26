@@ -138,6 +138,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
       $form['field_quiz_add_questions'][LANGUAGE_NONE]['#title'] = '';
       $form['field_quiz_answer_type']['#access'] = FALSE;
       $form['field_quiz_options']['#access'] = FALSE;
+      unset($form['field_quiz_winners'][LANGUAGE_NONE]['#options']['_none']);
       
       
       // After build and custom summit callback
@@ -218,6 +219,9 @@ function itg_quiz_form_after_build($form, &$form_state) {
         '#markup' => '<div style="padding-top: '.$padding.'"><strong>Question ' . $count . ':</strong></div>',
         '#weight' => -1,
     );
+    
+    // Unset weightage "-None-" item from drop down list
+    unset($form['field_quiz_add_questions'][LANGUAGE_NONE][$news]['field_quiz_weightage'][LANGUAGE_NONE]['#options']['_none']);
   }
   
 

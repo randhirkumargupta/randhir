@@ -367,7 +367,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
 
   if ($num == ($form_detail['question_total'] - 1)) {
     $output = '';
-    if($quiz_type == 'immediate'){
+    if($quiz_type == 'immediate') {
 
       //if($quiz_result_type == 'ate'){
         $total_ques_attempt = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL);
