@@ -32,7 +32,7 @@ function itg_quiz_menu() {
   
   $items = array();
   
-  $items['itg-quiz'] = array(
+  $items['itg-quiz/%'] = array(
       'title' => t('Quiz'),
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_quiz_quiz_form'),
@@ -104,12 +104,18 @@ function itg_quiz_block_view($delta = '') {
  * {@inheritdoc}
  */
 function itg_quiz_theme() {
+  $path = drupal_get_path('module', 'itg_quiz') . '/templates';
   $themes = array(
     'quiz_tab_form_display_block' => array(
-      'template' => 'quiz-form-tab-template',
-      'path' => drupal_get_path('module', 'itg_quiz') . '/templates',
-      'variables' => array('data' => NULL),
-    ),   
+          'template' => 'quiz-form-tab-template',
+          'path' => $path,
+          'variables' => array('data' => NULL),
+      ),
+      'itg_quiz_form' => array(
+          'template' => 'itg-quiz-form',
+          'path' => $path,
+          'render element' => 'form',
+      ),
   );
 
   return $themes;
