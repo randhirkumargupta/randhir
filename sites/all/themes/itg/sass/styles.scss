@@ -1463,43 +1463,6 @@ footer{
     }
 }
 /*End Dont miss Home page css*/
-/*CSS Start year end top news*/
-#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
-    background: #f6f6f6;
-    ul{
-        .dont-miss-listing{
-            @include float(none);
-            @include calculate-width(1);            
-            &:nth-child(3), &:nth-child(4){
-                padding-bottom: 25px;
-            }
-            +.dont-miss-listing{
-                padding:0 10px 25px 10px;
-            }
-            .dm-pic{
-                width:auto;
-                @include pos(relative);
-                a{
-                    display: block;
-                }
-                span{
-                    position: absolute;
-                    bottom: 0;
-                    background: rgba(0, 0, 0, 0.4);
-                    color: $white-color;
-                    @include font(12px);
-                    font-family: $itg-roboto;
-                    padding: 2px 5px;
-                    i{
-                        @include font(16px);
-                        vertical-align: middle;
-                    }
-                }
-            }
-        }
-    }
-}
-/*CSS End year end top news*/
 /*Start Story page css*/
 @mixin story-profile-pic{
     width: 50px;
@@ -2828,51 +2791,56 @@ footer{
     color:#aaa8a9;
     background: #171717;     
     .video-landing-header{
-        background: #000;
-        padding: 0 15px 15px 15px;
+        background: transparent;
+        padding:0;
     }
     .video-header-left{
         @include clearfix;
         .video{
             @include float(left);
-            width: 84.5%;
-            padding: 10px;
+            @include calculate-width(1);
+            padding: 0px;
             border:1px solid #242424;
         }
         .social-likes{
             @include float(right);
-            width: 15.5%;
-            background: #1a1a1a;
-            height:474px;
-            overflow: hidden;
+            @include calculate-width(1);
+            background: #1a1a1a;   
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(170, 169, 169, 0.31);
+            margin-bottom: 15px;
             ul{
                 li{
+                   @include float(left);
                     a{
                         display: block;
-                        padding: 20px 5px 20px 10px;
+                        padding:10px 13px 10px 13px;
                         color: #aaa9a9;
                         font-family:$itg-roboto;
                         font-size:12px;
                         i{
                             font-size: 18px;
                             vertical-align: middle;
-                            margin-right: 5px;
+                            margin-right: 5px;                            
                         }
+                        span{
+                                display: none;
+                            }
                         &:hover{
                             background: #363636;
                             color: $white-color;
                         }
-                    }
-                    + li a{
-                        border-top:1px solid #000;
-                    }                    
+                    }                                        
                 }
             }
+        }
+        .iframe-video{
+            padding-bottom: 69%;
         }
     }
     h2{
         color: $white-color;
-        font-size: 24px;
+        @include font(20px);
         margin: 10px 0;
     }
     ul{
@@ -2880,7 +2848,7 @@ footer{
     }   
     .video-header-right{
         position: relative; 
-        height: 474px;
+        padding-bottom:15px;        
         p.upload-date{
             font-size: 12px;
             color: $white-color;
@@ -2895,7 +2863,7 @@ footer{
             position: absolute;
             bottom: 0;
         }
-    }
+    }    
 
 }
 #block-views-video-landing-header-block-1{    
@@ -3850,6 +3818,33 @@ footer{
         }
     }
 }
+.politoons-sosorry{
+    h2{
+        @include font(26px,null,300);        
+        color: #db1314;
+        text-transform: uppercase;
+        span{
+            background: #db1314;
+            color: #fff;
+            padding: 0 5px;
+            font-weight: 700;
+        }
+    }
+    img{
+        height: 88px;
+        width: 88px;
+        border-radius: 100%;
+        border: 1px solid #ddd;
+    }
+    span.title{
+        display: block;
+        @include font(12px,null,500);        
+        color: #000;
+        font-family:$itg-roboto;   
+        text-transform: uppercase;
+        margin-top: 5px;
+    }
+}
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
 #block-itg-layout-manager-header-block{
@@ -4004,7 +3999,82 @@ footer{
     }    
 }
 
-
+/*CSS start for year end page*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    background: #f6f6f6;
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);            
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 25px;
+            }
+            +.dont-miss-listing{
+                padding:0 10px 25px 10px;
+            }
+            .dm-pic{
+                width:auto;
+                @include pos(relative);
+                a{
+                    display: block;
+                }
+                span{
+                    position: absolute;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.4);
+                    color: $white-color;
+                    @include font(12px);
+                    font-family: $itg-roboto;
+                    padding: 2px 5px;
+                    i{
+                        @include font(16px);
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}
+.year-slider{
+    background: #000;
+    padding: 10px;    
+    h2{
+        padding:10px 0;
+        a{
+            color: #fff;   
+        }        
+    }
+}
+.yearender{    
+    .view-yearender.view-display-id-block_2{
+        .view-content{
+            margin-right: -15px;
+            margin-left: -15px;            
+        }
+        .views-row{
+            margin-bottom: 40px;          
+        }
+        @include clear-floating-block(col-md-6);
+    }
+    .section-ordering{
+        .pic{
+            @include pos(relative);
+            span{
+                @include pos(absolute, null, null, 0, 0);
+                background: rgba(0, 0, 0, 0.56);
+                color: #fff;
+                @include itg-font($itg-roboto);
+                font-size: 12px;
+                padding: 5px;
+                i{
+                    @include font(16px);
+                }
+            }
+        }                
+    }
+    @include slider-icon-width-background;    
+}
+/*CSS end for year end page*/
 
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"]{

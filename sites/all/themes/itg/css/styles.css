@@ -1839,44 +1839,6 @@ footer .footer-copyright {
 }
 
 /*End Dont miss Home page css*/
-/*CSS Start year end top news*/
-#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
-  background: #f6f6f6;
-}
-#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
-  float: none;
-  width: 100%;
-}
-#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
-  padding-bottom: 25px;
-}
-#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing + .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing + .dont-miss-listing {
-  padding: 0 10px 25px 10px;
-}
-#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
-  width: auto;
-  position: relative;
-}
-#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic a, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic a {
-  display: block;
-}
-#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic span, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic span {
-  position: absolute;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
-  font-size: 12px;
-  font-size: 0.75rem;
-  font-family: "Roboto", sans-serif;
-  padding: 2px 5px;
-}
-#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic span i, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic span i {
-  font-size: 16px;
-  font-size: 1rem;
-  vertical-align: middle;
-}
-
-/*CSS End year end top news*/
 /*Start Story page css*/
 .story-section h1 {
   font-size: 24px;
@@ -3794,8 +3756,8 @@ footer .footer-copyright {
   background: #171717;
 }
 #block-views-video-landing-header-block .video-landing-header {
-  background: #000;
-  padding: 0 15px 15px 15px;
+  background: transparent;
+  padding: 0;
 }
 #block-views-video-landing-header-block .video-header-left {
   zoom: 1;
@@ -3811,20 +3773,24 @@ footer .footer-copyright {
 }
 #block-views-video-landing-header-block .video-header-left .video {
   float: left;
-  width: 84.5%;
-  padding: 10px;
+  width: 100%;
+  padding: 0px;
   border: 1px solid #242424;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes {
   float: right;
-  width: 15.5%;
+  width: 100%;
   background: #1a1a1a;
-  height: 474px;
-  overflow: hidden;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(170, 169, 169, 0.31);
+  margin-bottom: 15px;
+}
+#block-views-video-landing-header-block .video-header-left .social-likes ul li {
+  float: left;
 }
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
   display: block;
-  padding: 20px 5px 20px 10px;
+  padding: 10px 13px 10px 13px;
   color: #aaa9a9;
   font-family: "Roboto", sans-serif;
   font-size: 12px;
@@ -3834,21 +3800,25 @@ footer .footer-copyright {
   vertical-align: middle;
   margin-right: 5px;
 }
+#block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
+  display: none;
+}
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a:hover {
   background: #363636;
   color: #fff;
 }
-#block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
-  border-top: 1px solid #000;
+#block-views-video-landing-header-block .video-header-left .iframe-video {
+  padding-bottom: 69%;
 }
 #block-views-video-landing-header-block h2 {
   color: #fff;
-  font-size: 24px;
+  font-size: 20px;
+  font-size: 1.25rem;
   margin: 10px 0;
 }
 #block-views-video-landing-header-block .video-header-right {
   position: relative;
-  height: 474px;
+  padding-bottom: 15px;
 }
 #block-views-video-landing-header-block .video-header-right p.upload-date {
   font-size: 12px;
@@ -5148,6 +5118,36 @@ footer .footer-copyright {
   text-align: center;
 }
 
+.politoons-sosorry h2 {
+  font-size: 26px;
+  font-size: 1.625rem;
+  font-weight: 300;
+  color: #db1314;
+  text-transform: uppercase;
+}
+.politoons-sosorry h2 span {
+  background: #db1314;
+  color: #fff;
+  padding: 0 5px;
+  font-weight: 700;
+}
+.politoons-sosorry img {
+  height: 88px;
+  width: 88px;
+  border-radius: 100%;
+  border: 1px solid #ddd;
+}
+.politoons-sosorry span.title {
+  display: block;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #000;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
 #block-itg-layout-manager-header-block .menu-login .user-menu {
@@ -5310,6 +5310,162 @@ footer .footer-copyright {
   border: 1px solid #dddddd;
 }
 
+/*CSS start for year end page*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
+  background: #f6f6f6;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
+  float: none;
+  width: 100%;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
+  padding-bottom: 25px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing + .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing + .dont-miss-listing {
+  padding: 0 10px 25px 10px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
+  width: auto;
+  position: relative;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic a, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic a {
+  display: block;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic span, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic span {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-family: "Roboto", sans-serif;
+  padding: 2px 5px;
+}
+#block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic span i, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic span i {
+  font-size: 16px;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.year-slider {
+  background: #000;
+  padding: 10px;
+}
+.year-slider h2 {
+  padding: 10px 0;
+}
+.year-slider h2 a {
+  color: #fff;
+}
+
+.yearender .view-yearender.view-display-id-block_2 .view-content {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.yearender .view-yearender.view-display-id-block_2 .views-row {
+  margin-bottom: 40px;
+}
+.yearender .view-yearender.view-display-id-block_2 .col-md-6:nth-child(2n+1) {
+  clear: left;
+}
+.yearender .section-ordering .pic {
+  position: relative;
+}
+.yearender .section-ordering .pic span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.56);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  padding: 5px;
+}
+.yearender .section-ordering .pic span i {
+  font-size: 16px;
+  font-size: 1rem;
+}
+.yearender .slick-slider {
+  padding: 10px;
+  background: #000;
+  border: none;
+}
+.yearender .slick-slider .slick-prev {
+  font: normal normal normal 14px/1 FontAwesome;
+  cursor: pointer;
+  width: 24px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0 90px 90px 0;
+  left: 10px;
+  font-size: 0;
+  position: absolute;
+  top: 50%;
+  z-index: 9;
+  border: none;
+  margin-top: -12px;
+}
+.yearender .slick-slider .slick-prev:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.yearender .slick-slider .slick-prev:before {
+  content: '\f053';
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 20px;
+  padding-left: 0;
+  left: 0;
+  position: absolute;
+  top: 16px;
+}
+.yearender .slick-slider .slick-next {
+  font: normal normal normal 14px/1 FontAwesome;
+  cursor: pointer;
+  width: 24px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 90px 0px 0px 90px;
+  right: 10px;
+  font-size: 0;
+  position: absolute;
+  top: 50%;
+  z-index: 9;
+  border: none;
+  margin-top: -12px;
+}
+.yearender .slick-slider .slick-next:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.yearender .slick-slider .slick-next:before {
+  content: '\f054';
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 20px;
+  padding-left: 0;
+  right: 0;
+  position: absolute;
+  top: 16px;
+}
+.yearender .slick-slider ul.slick-dots li {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 6px;
+}
+.yearender .slick-slider ul.slick-dots li button {
+  border: none;
+  cursor: pointer;
+}
+@media screen and (min-width: 769px) {
+  .yearender .slick-slider .slick-next, .yearender .slick-slider .slick-prev {
+    width: 50px;
+    height: 100px;
+    margin-top: -50px;
+  }
+  .yearender .slick-slider .slick-next:before, .yearender .slick-slider .slick-prev:before {
+    top: 38px;
+    font-size: 30px;
+  }
+}
+
+/*CSS end for year end page*/
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"] {
   margin: 0 -15px;

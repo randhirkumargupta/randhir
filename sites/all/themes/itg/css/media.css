@@ -876,9 +876,50 @@
   }
 
   /* CSS End For Program Page */
+  /*CSS start program landing page*/
+  #block-views-video-landing-header-block .video-landing-header {
+    background: #000;
+    padding: 0 15px 15px 15px;
+  }
+  #block-views-video-landing-header-block .video-header-left .video {
+    float: left;
+    width: 84.5%;
+    padding: 10px;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes {
+    float: left;
+    width: 15.5%;
+    height: 474px;
+    overflow: hidden;
+    padding: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li {
+    float: none;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
+    padding: 20px 5px 19px 10px;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
+    display: inline-block;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
+    border-top: 1px solid #000;
+  }
+  #block-views-video-landing-header-block .video-header-right {
+    height: 474px;
+    padding-bottom: 0px;
+  }
+  #block-views-video-landing-header-block h2 {
+    font-size: 24px;
+    font-size: 1.5rem;
+  }
+
+  /*CSS end program landing page*/
 }
 /*End CSS Desktop version*/
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
   #block-itg-layout-manager-header-block .top-nav .main-nav li a {
     padding: 0 15px;
     font-size: 20px;
@@ -930,6 +971,14 @@
   }
   #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li:nth-child(2) {
     border-left: none;
+  }
+
+  #block-views-video-landing-header-block .video-header-left, #block-views-video-landing-header-block .social-likes {
+    width: 100%;
+    float: none;
+  }
+  #block-views-video-landing-header-block .social-likes ul li {
+    float: left;
   }
 }
 @media only screen and (min-width: 640px) {
