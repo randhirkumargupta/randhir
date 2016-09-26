@@ -5118,26 +5118,27 @@ footer .footer-copyright {
   text-align: center;
 }
 
-.politoons-sosorry h2 {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry h2 {
   font-size: 26px;
   font-size: 1.625rem;
   font-weight: 300;
   color: #db1314;
   text-transform: uppercase;
+  margin-bottom: 20px;
 }
-.politoons-sosorry h2 span {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry h2 span {
   background: #db1314;
   color: #fff;
   padding: 0 5px;
   font-weight: 700;
 }
-.politoons-sosorry img {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry img {
   height: 88px;
   width: 88px;
   border-radius: 100%;
   border: 1px solid #ddd;
 }
-.politoons-sosorry span.title {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry span.title {
   display: block;
   font-size: 12px;
   font-size: 0.75rem;
