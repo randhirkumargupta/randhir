@@ -7,7 +7,7 @@
 </div>
 
 <script>
-jQuery(document).ready(function (e) {    
+jQuery(document).ready(function () {    
     jQuery('.year-slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,

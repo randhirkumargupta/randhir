@@ -22,6 +22,11 @@ a{
     color:$black-color;
     text-decoration: none;
 }
+img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+}
 .row{
     @include clearfix;
 }
@@ -649,6 +654,41 @@ a{
     }
 }
 /*CSS start for year end page*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    background: #f6f6f6;
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);            
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 25px;
+            }
+            +.dont-miss-listing{
+                padding:0 10px 25px 10px;
+            }
+            .dm-pic{
+                width:auto;
+                @include pos(relative);
+                a{
+                    display: block;
+                }
+                span{
+                    position: absolute;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.4);
+                    color: $white-color;
+                    @include font(12px);
+                    font-family: $itg-roboto;
+                    padding: 2px 5px;
+                    i{
+                        @include font(16px);
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}
 .year-slider{
     background: #000;
     padding: 10px;    
@@ -684,7 +724,10 @@ a{
                     @include font(16px);
                 }
             }
-        }                
+        }
+        h3{
+            font-family: $itg-roboto;
+        }
     }
     @include slider-icon-width-background;    
 }
