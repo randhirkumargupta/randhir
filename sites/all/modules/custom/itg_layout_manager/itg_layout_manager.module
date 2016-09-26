@@ -79,6 +79,13 @@ function itg_layout_manager_menu() {
       'file' => 'includes/itg_layout_manager.inc',
   );
   
+  $items['itg-update-table'] = array(      
+      'page callback' => 'itg_update_table',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_manager.inc',
+  );
+  
   return $items;
 }
 

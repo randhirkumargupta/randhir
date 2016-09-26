@@ -1,13 +1,11 @@
-name = feature for politoons
-description = feature for politoons
+name = Feature for Tech
+description = Feature for Tech
 core = 7.x
 package = Features
 version = 7.x-1.0
-dependencies[] = image
-dependencies[] = nodequeue
 dependencies[] = views
+dependencies[] = views_customstyle
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
-features[image][] = politoons
-features[views_view][] = so_sorry_politoons
+features[views_view][] = tech
 features_exclude[dependencies][ctools] = ctools
