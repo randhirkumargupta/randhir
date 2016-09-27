@@ -70,42 +70,42 @@
             .main-nav{
                 @include float(left);
                 padding-left: 145px;
-                    li{
-                        &:nth-child(3){
-                            @include pos(relative);
-                            a{
-                                &:before{
-                                    content:'';
-                                    background: url(../images/live-icon.png) no-repeat;
-                                    @include pos(absolute,-11px,null,null,20px);
-                                    width: 28px;
-                                    height: 19px;
-                                } 
-                            }
-                        }
+                li{
+                    &:nth-child(3){
+                        @include pos(relative);
                         a{
-                           padding: 0 35px;
-                           @include font(27px,null,null);
-                           &.active, &:hover{
-                               color:$yellow-color;
-                           }                           
+                            &:before{
+                                content:'';
+                                background: url(../images/live-icon.png) no-repeat;
+                                @include pos(absolute,-11px,null,null,20px);
+                                width: 28px;
+                                height: 19px;
+                            } 
                         }
-                        &:nth-child(2) a{
-                       padding-left: 0;
                     }
+                    a{
+                        padding: 0 35px;
+                        @include font(27px,null,null);
+                        &.active, &:hover{
+                            color:$yellow-color;
+                        }                           
                     }
-                    
+                    &:nth-child(2) a{
+                        padding-left: 0;
+                    }
                 }
+
+            }
             .social-nav{
                 @include pos(relative);
                 @include float(right);
                 a{
-                   .fa{
-                       @include font(23px,null,null);
-                       &.fa-mobile{
-                           @include font(27px,null,null);
-                       }
-                   }
+                    .fa{
+                        @include font(23px,null,null);
+                        &.fa-mobile{
+                            @include font(27px,null,null);
+                        }
+                    }
                 }  
                 .globle-search{
                     @include pos(absolute,null,40px,null,null);
@@ -113,7 +113,7 @@
                     width:0px;
                     overflow:hidden;
                     .search-text{
-                       @include calculate-width(1);
+                        @include calculate-width(1);
                     }                    
                 }
             }
@@ -125,17 +125,17 @@
             display:block !important;
             .menu{
                 padding-left:135px;
-            li{
-                @include float(left);
-                a{
-                    color: $itg-nav-fontcolor;
-                    text-transform: uppercase;
-                    @include itg-font(null, $itg-font-medium);
-                    padding: 0 10px;
-                    border-right: 1px solid $itg-nav-bordercolor;
-                    border-top:none;
-                    height: 37px;
-                    @include font($itg-nav-fontsize,37px,null);                                            
+                li{
+                    @include float(left);
+                    a{
+                        color: $itg-nav-fontcolor;
+                        text-transform: uppercase;
+                        @include itg-font(null, $itg-font-medium);
+                        padding: 0 10px;
+                        border-right: 1px solid $itg-nav-bordercolor;
+                        border-top:none;
+                        height: 37px;
+                        @include font($itg-nav-fontsize,37px,null);                                            
                     }
                 }
             }
@@ -160,7 +160,7 @@
                     overflow:hidden;
                     height:30px;
                     .search-text{
-                       @include calculate-width(1);
+                        @include calculate-width(1);
                     }                    
                 }
             }
@@ -187,49 +187,49 @@
         }
     }
     /*End Footer CSS Desktop version*/
-    
 
-/*Start CSS Top Block Grid Home Page*/    
+
+    /*Start CSS Top Block Grid Home Page*/    
     .top-block{
         .top-colum-1, .top-colum-2, .top-colum-3{
-           padding: 0 15px;
+            padding: 0 15px;
         }
         .top-colum-1{
-           @include float(left);
-           width: 22%; 
+            @include float(left);
+            width: 22%; 
         }
         .top-colum-2{
-           width: 44.8%;
-           @include float(left);
+            width: 44.8%;
+            @include float(left);
         }
         .top-colum-3{
-           width: 33.2%;
-           @include float(right);
+            width: 33.2%;
+            @include float(right);
         }
     }
-	.itg-layout-container .itg-h450-section .droppable{
-    height: 450px;
-}
-.itg-layout-container .itg-h321-section .droppable, 
-.itg-layout-container .top-colum-3 .itg-widget-parent .droppable{
-    height: 321px;
-}
-.itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
-    height: 673px;
-}
-.itg-layout-container .top-colum-3 .droppable{
-    height: 276px;
-}
-.itg-common-section{
-    .droppable{
-        height: 408px;
+    .itg-layout-container .itg-h450-section .droppable{
+        height: 450px;
     }
-}
-.itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
-	margin-bottom:0px;
-}
-/*End CSS Top Block Grid Home Page*/  
-/*Start CSS Big New Home page*/
+    .itg-layout-container .itg-h321-section .droppable, 
+    .itg-layout-container .top-colum-3 .itg-widget-parent .droppable{
+        height: 321px;
+    }
+    .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
+        height: 673px;
+    }
+    .itg-layout-container .top-colum-3 .droppable{
+        height: 276px;
+    }
+    .itg-common-section{
+        .droppable{
+            height: 408px;
+        }
+    }
+    .itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
+        margin-bottom:0px;
+    }
+    /*End CSS Top Block Grid Home Page*/  
+    /*Start CSS Big New Home page*/
     .big-news{        
         .big-story-col-1, .big-story-col-2{
             @include float(left);
@@ -243,8 +243,8 @@
             padding-left: 0;
         }
     }
-/*End CSS Big New Home page*/
-/*Start CSS Featured-news Home Page*/ 
+    /*End CSS Big New Home page*/
+    /*Start CSS Featured-news Home Page*/ 
     .featured-news{
         padding: 5px;
         border:1px solid $border-color;
@@ -253,306 +253,306 @@
             padding: 5px;
         }
     }
-/*End CSS Featured-news Home Page*/  
-/*CSS Start story section */
-.section-ordering{    
-    h3{        
-        @include font(20px);
-    }    
-}
-/*CSS End story section */
-/*Start Dont miss Home page css*/
-.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
-   /*padding: 20px 0px 0px 10px;*/
-    ul{
-        .dont-miss-listing{
-            @include float(left);
-            @include calculate-width(2);
-            padding: 0px 10px 25px 0;
-            &:nth-child(2n+1){
-                clear:left;
-            }
-            &:nth-child(3), &:nth-child(4){
-                padding-bottom: 0;
-            }            
-        }
+    /*End CSS Featured-news Home Page*/  
+    /*CSS Start story section */
+    .section-ordering{    
+        h3{        
+            @include font(20px);
+        }    
     }
-}
-/*End Dont miss Home page css*/
-/*CSS Start year end top news*/
-#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
-    ul{
-        .dont-miss-listing{
-            @include float(none);
-            @include calculate-width(1);
-            padding:25px 10px;
-            &:nth-child(3), &:nth-child(4){
-                padding-bottom: 25px;
+    /*CSS End story section */
+    /*Start Dont miss Home page css*/
+    .dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
+        /*padding: 20px 0px 0px 10px;*/
+        ul{
+            .dont-miss-listing{
+                @include float(left);
+                @include calculate-width(2);
+                padding: 0px 10px 25px 0;
+                &:nth-child(2n+1){
+                    clear:left;
+                }
+                &:nth-child(3), &:nth-child(4){
+                    padding-bottom: 0;
+                }            
             }
         }
     }
-}
-/*CSS End year end top news*/
-
-/*Start photo section slider Homepage*/
-.featured_photo_carousel{
-    .flexslider .flex-direction-nav{
-        display: block;
-    }       
-    .flexslider .slides li .detail .flex-caption{
-        @include font(18px,24px,$itg-font-medium);  
-        padding: 10px;   
-        min-height: 68px;
-        max-height: auto;
-        overflow: initial;
-    }
-    .flexslider .slides li .detail .flex-count{
-        @include pos(absolute,null,null,78px,0px);
-    }
-}
-/*End photo section slider Homepage*/
-/*Start Story page css*/
-.story-section{
-    h1{
-        @include font(34px,42px,700);
-    }
-    .story-left, .story-right{
-        @include float(left);
-    }
-    .story-left{
-        width: 21%;
-        .byline{            
-            @include text-align(center);
-            .profile-pic, .profile-detail{
+    /*End Dont miss Home page css*/
+    /*CSS Start year end top news*/
+    #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+        ul{
+            .dont-miss-listing{
                 @include float(none);
-            } 
-            .profile-pic img{
-                width: 60px;
-                height: 60px;
-            }
-            .profile-detail {
-                width: auto;
-                margin: 0px 0 0 10px;
-                ul {
-                    li{ 
-                        @include float(none);
-                        padding:5px 0;                        
-                        border-bottom: 1px solid #eaeaea;
-                        +li{
-                            border-left: none; 
-                        }
-                        &:last-child{
-                            border-left:none;                            
-                        }
-                    }
-                } 
-                ul.date-update{                    
-                    li{
-                        margin-bottom: 0px;
-                    }   
-                }
-            }
-            ul.social-links{                
-                li{
-                    @include float(left);               
-                    padding:10px 0;
-                }
-            }
-        }
-        .briefcase{
-            margin-top: 50px;
-            h4{
-                font-weight: 700;
-                text-transform: uppercase;
-                margin-bottom: 8px;
-            }
-            ul{
-                li{
-                    background: #f9f9f9;
-                    color: #575757;
-                    padding:12px 8px 20px 8px;
-                    line-height: 18px;
-                    +li{
-                        border-top: 1px solid #eaeaea;
-                        padding:20px 8px;
-                    }
-                    &:before{
-                        display: none;
-                    }
+                @include calculate-width(1);
+                padding:25px 10px;
+                &:nth-child(3), &:nth-child(4){
+                    padding-bottom: 25px;
                 }
             }
         }
     }
-    .story-right{
-        width: 79%;  
-        .byline .profile-detail{
-            margin: 0px 0 0 10px
+    /*CSS End year end top news*/
+
+    /*Start photo section slider Homepage*/
+    .featured_photo_carousel{
+        .flexslider .flex-direction-nav{
+            display: block;
+        }       
+        .flexslider .slides li .detail .flex-caption{
+            @include font(18px,24px,$itg-font-medium);  
+            padding: 10px;   
+            min-height: 68px;
+            max-height: auto;
+            overflow: initial;
+        }
+        .flexslider .slides li .detail .flex-count{
+            @include pos(absolute,null,null,78px,0px);
         }
     }
-    .snap-post{ 
-        padding: 20px 20px 20px 100px;
-         background-size: inherit;
-         .discription{            
-            @include font(22px,30px,700);            
-            @include text-align(center);
-        }
-        .agbutton{
-            margin:20px 0;
-            a{
-             display: inline-block;
-             margin-top: 0;
-            }             
-            @include text-align(center);
-             button{
-                margin: 0 15px;
-                width: 113px;
-                @include font(17px,null,$itg-font-medium);
-            }
-        }
-    }
-    .social-list{
-        li{
-            width: auto;
-            &:nth-child(7){
-                border-left: 1px solid $border-color;
-            }
-        }
-    }
-}
-.buzz-feedback{
-    .story-right{
-        width: 100%
-    }
-    .buzz-section{
+    /*End photo section slider Homepage*/
+    /*Start Story page css*/
+    .story-section{
         h1{
-            @include font(34px);
-            span{                
-                width: 32px;
-                height: 32px;                
-                @include font(24px,34px);                
-            }
+            @include font(34px,42px,700);
         }
-    }
-}
-/*End Story page css*/
-
-/*Start CSS Snap Post*/
-.page-snappost{
-    .spanpost-header{               
-        .spost-left{            
-            @include calculate-width(2);            
+        .story-left, .story-right{
+            @include float(left);
         }
-        .spost-right{            
-            @include calculate-width(2);
-            ul{
-                li{                    
-                    @include font(30px,94px);                    
-                    padding-left: 25px;
-                    img{
-                        width: auto;
+        .story-left{
+            width: 21%;
+            .byline{            
+                @include text-align(center);
+                .profile-pic, .profile-detail{
+                    @include float(none);
+                } 
+                .profile-pic img{
+                    width: 60px;
+                    height: 60px;
+                }
+                .profile-detail {
+                    width: auto;
+                    margin: 0px 0 0 10px;
+                    ul {
+                        li{ 
+                            @include float(none);
+                            padding:5px 0;                        
+                            border-bottom: 1px solid #eaeaea;
+                            +li{
+                                border-left: none; 
+                            }
+                            &:last-child{
+                                border-left:none;                            
+                            }
+                        }
+                    } 
+                    ul.date-update{                    
+                        li{
+                            margin-bottom: 0px;
+                        }   
+                    }
+                }
+                ul.social-links{                
+                    li{
+                        @include float(left);               
+                        padding:10px 0;
                     }
                 }
             }
-        }
-    }
-    .view-content{
-        .views-row{
-            .snap-title{
-                h1{
-                    span{
-                        a{
-                            @include font(30px);
+            .briefcase{
+                margin-top: 50px;
+                h4{
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    margin-bottom: 8px;
+                }
+                ul{
+                    li{
+                        background: #f9f9f9;
+                        color: #575757;
+                        padding:12px 8px 20px 8px;
+                        line-height: 18px;
+                        +li{
+                            border-top: 1px solid #eaeaea;
+                            padding:20px 8px;
+                        }
+                        &:before{
+                            display: none;
                         }
                     }
                 }
             }
-            .snap-post-btm{
-            .snap-button{
-                margin-top:60px;
+        }
+        .story-right{
+            width: 79%;  
+            .byline .profile-detail{
+                margin: 0px 0 0 10px
+            }
+        }
+        .snap-post{ 
+            padding: 20px 20px 20px 100px;
+            background-size: inherit;
+            .discription{            
+                @include font(22px,30px,700);            
+                @include text-align(center);
+            }
+            .agbutton{
+                margin:20px 0;
                 a{
-                    width: 180px;
-                    height: 60px;
-                    @include font(22px,60px);                                                 
-                    &.disagree{
-                         margin-left: 30px; 
-                    }  
+                    display: inline-block;
+                    margin-top: 0;
+                }             
+                @include text-align(center);
+                button{
+                    margin: 0 15px;
+                    width: 113px;
+                    @include font(17px,null,$itg-font-medium);
                 }
             }
-            }
         }
-    }
-}
-/*End CSS Snap Post*/
-
-/*Start css ITG globle search result page*/
-.view-front-end-global-search{
-    .view-content{
-        .search-pic{
-            width: 170px;
-            height: 127px;
-        }
-        .search-detail{
-            h2{
-                @include font(22px,28px); 
-                margin-top:-5px;
-                a{
-                 @include font(22px,28px); 
+        .social-list{
+            li{
+                width: auto;
+                &:nth-child(7){
+                    border-left: 1px solid $border-color;
                 }
             }
-            p{
-               display: block; 
-            }
-        }
-        .social-share{
-            @include social-share;   
-            margin-top:0px;
-        }
-        .other-info{
-            padding-top: 0;
-            margin-top: 15px;
-            overflow:inherit;                    
         }
     }
-    .attachment{
-        .search-menu{
-             white-space: inherit;
-            overflow-x: inherit;
-        }        
-        .count{
-            @include font(30px);
-        }        
-    }
-} 
-/*End css ITG globle search result page*/
-
-
-/*Archive story page*/
-/*Archive story page End*/
-.view-archive-story{
-.view-content{
-        .search-pic{
-            width: 170px;
-            height: 127px;
+    .buzz-feedback{
+        .story-right{
+            width: 100%
         }
-        .search-detail{
-            h2{
-                @include font(22px,28px); 
-                margin-top:-5px;
-                a{
-                 @include font(22px,28px); 
+        .buzz-section{
+            h1{
+                @include font(34px);
+                span{                
+                    width: 32px;
+                    height: 32px;                
+                    @include font(24px,34px);                
                 }
             }
-            p{
-               display: block; 
+        }
+    }
+    /*End Story page css*/
+
+    /*Start CSS Snap Post*/
+    .page-snappost{
+        .spanpost-header{               
+            .spost-left{            
+                @include calculate-width(2);            
+            }
+            .spost-right{            
+                @include calculate-width(2);
+                ul{
+                    li{                    
+                        @include font(30px,94px);                    
+                        padding-left: 25px;
+                        img{
+                            width: auto;
+                        }
+                    }
+                }
+            }
+        }
+        .view-content{
+            .views-row{
+                .snap-title{
+                    h1{
+                        span{
+                            a{
+                                @include font(30px);
+                            }
+                        }
+                    }
+                }
+                .snap-post-btm{
+                    .snap-button{
+                        margin-top:60px;
+                        a{
+                            width: 180px;
+                            height: 60px;
+                            @include font(22px,60px);                                                 
+                            &.disagree{
+                                margin-left: 30px; 
+                            }  
+                        }
+                    }
+                }
             }
         }
     }
-}
-/*Start anchors listing css*/
-.view-widget-anchors-listing {
-    .anchor-listing {
+    /*End CSS Snap Post*/
+
+    /*Start css ITG globle search result page*/
+    .view-front-end-global-search{
+        .view-content{
+            .search-pic{
+                width: 170px;
+                height: 127px;
+            }
+            .search-detail{
+                h2{
+                    @include font(22px,28px); 
+                    margin-top:-5px;
+                    a{
+                        @include font(22px,28px); 
+                    }
+                }
+                p{
+                    display: block; 
+                }
+            }
+            .social-share{
+                @include social-share;   
+                margin-top:0px;
+            }
+            .other-info{
+                padding-top: 0;
+                margin-top: 15px;
+                overflow:inherit;                    
+            }
+        }
+        .attachment{
+            .search-menu{
+                white-space: inherit;
+                overflow-x: inherit;
+            }        
+            .count{
+                @include font(30px);
+            }        
+        }
+    } 
+    /*End css ITG globle search result page*/
+
+
+    /*Archive story page*/
+    /*Archive story page End*/
+    .view-archive-story{
+        .view-content{
+            .search-pic{
+                width: 170px;
+                height: 127px;
+            }
+            .search-detail{
+                h2{
+                    @include font(22px,28px); 
+                    margin-top:-5px;
+                    a{
+                        @include font(22px,28px); 
+                    }
+                }
+                p{
+                    display: block; 
+                }
+            }
+        }
+    }
+    /*Start anchors listing css*/
+    .view-widget-anchors-listing {
+        .anchor-listing {
             .pic{
-                   width: 170px;
+                width: 170px;
             }
             .detail{
                 overflow: hidden; 
@@ -563,289 +563,289 @@
             }
         }
     }
-/*End anchors listing css*/
-/*CSS start sidebar */
-section.sidebar{
-    border: 1px solid #ddd;
-}
-.sidebars{
-    margin-top: 0px;
-}
-.page-sosorry{
+    /*End anchors listing css*/
+    /*CSS start sidebar */
+    section.sidebar{
+        border: 1px solid #ddd;
+    }
+    .sidebars{
+        margin-top: 0px;
+    }
+    .page-sosorry{
         section.sidebar{
-        border: none;
-    }
-}
-/*CSS end sidebar */
-.view-category-wise-content-list{
-    h1{
-        @include font(32px,46px,400);                
-    }    
-    .catagory-listing{        
-        .pic{
-            width: 170px;           
-        }
-        .detail{
-            h3{                            
-                @include font(20px,24px,$itg-font-bold);   
-            }
-            p{
-                display: block;
-            }
+            border: none;
         }
     }
-    .item-list{
-        @include pager;        
-    }    
-}
-/*End category wise content list css*/
+    /*CSS end sidebar */
+    .view-category-wise-content-list{
+        h1{
+            @include font(32px,46px,400);                
+        }    
+        .catagory-listing{        
+            .pic{
+                width: 170px;           
+            }
+            .detail{
+                h3{                            
+                    @include font(20px,24px,$itg-font-bold);   
+                }
+                p{
+                    display: block;
+                }
+            }
+        }
+        .item-list{
+            @include pager;        
+        }    
+    }
+    /*End category wise content list css*/
 
-/*CSS Starts Photo landing page*/
-.view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content{
-    .view-content{      
-        .photo-list{
-            li{
-                padding: 15px;
-                width: 25%; 
-                &:nth-child(2n+1){
-                    clear: none;
-                }
-                &:nth-child(4n+1){
-                    clear: left;
+    /*CSS Starts Photo landing page*/
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content{
+        .view-content{      
+            .photo-list{
+                li{
+                    padding: 15px;
+                    width: 25%; 
+                    &:nth-child(2n+1){
+                        clear: none;
+                    }
+                    &:nth-child(4n+1){
+                        clear: left;
+                    }
                 }
             }
         }
     }
-}
-/*CSS End Photo landing page*/
-/* start side bar common */
-.sidebar-second{
-    .may-be-suggest-container, .top-takes-video-container, .watch-right-now-video{
+    /*CSS End Photo landing page*/
+    /* start side bar common */
+    .sidebar-second{
+        .may-be-suggest-container, .top-takes-video-container, .watch-right-now-video{
+            h3{
+                display: block;
+                span{
+                    padding:45px 20px 10px 30px;   
+                }        
+            }
+            ul{
+                li{
+                    padding:10px 24px 10px 30px;
+                }
+            }
+        }
+    }
+    /* End side bar common */
+
+    /*CSS start program RHS*/
+    .program-rhs{
         h3{
-            display: block;
             span{
-                padding:45px 20px 10px 30px;   
-            }        
+                padding:45px 20px 10px 30px;
+            }
         }
         ul{
-            li{
-                padding:10px 24px 10px 30px;
+            padding: 10px 20px 0 30px;
+        }
+    }
+    /*End start program RHS*/
+
+    /*CSS Start Anchor listing detail page*/
+    #block-views-anchor-landing-page-block{
+        .anchor-left, .anchor-right{
+            @include float(left);
+            @include calculate-width(2);
+        }
+        .anchor-right{
+            padding-left:15px;
+            padding-top:0px;
+        }        
+    }
+    /*CSS End Anchor listing detail page*/
+
+    /*CSS Start Photo landing page*/
+    .region-top{
+        padding: 20px 0 ;    
+        margin-top: -30px;
+    }
+    #block-views-photo-landing-slider-block{
+        h2{
+            margin-bottom: 15px;
+        }
+        .other-details-main {
+            height: 632px;
+            background: #111111;
+            .counter{            
+                padding: 15px 25px;            
+            }
+            .counterslide{
+                .slick-next{
+                    right: 25px;
+                }
+                .slick-prev{
+                    right: 87px;
+                }
             }
         }
-    }
-}
-/* End side bar common */
-
-/*CSS start program RHS*/
-.program-rhs{
-    h3{
-        span{
-            padding:45px 20px 10px 30px;
-        }
-    }
-    ul{
-        padding: 10px 20px 0 30px;
-    }
-}
-/*End start program RHS*/
-
-/*CSS Start Anchor listing detail page*/
-#block-views-anchor-landing-page-block{
-    .anchor-left, .anchor-right{
-        @include float(left);
-        @include calculate-width(2);
-    }
-    .anchor-right{
-        padding-left:15px;
-        padding-top:0px;
-    }        
-}
-/*CSS End Anchor listing detail page*/
-
-/*CSS Start Photo landing page*/
-.region-top{
-    padding: 20px 0 ;    
-    margin-top: -30px;
-}
-#block-views-photo-landing-slider-block{
-    h2{
-        margin-bottom: 15px;
-    }
-    .other-details-main {
-        height: 632px;
-        background: #111111;
-        .counter{            
-            padding: 15px 25px;            
-        }
-        .counterslide{
-            .slick-next{
-                right: 25px;
-            }
-            .slick-prev{
-                right: 87px;
-            }
-        }
-    }
-    .social-icon{
+        .social-icon{
             ul{
-                 padding-left:10px;
+                padding-left:10px;
                 li{
                     a{
-                       padding: 0 15px;
-                       line-height: 55px;
+                        padding: 0 15px;
+                        line-height: 55px;
                     }
                     span.flag-throbber{
                         display: none;
                     }
                 }
             }
-       }
-       .slick-slider .slick-next, .slick-slider .slick-prev{
-           width: 50px;
-           height: 100px;
-           margin-top: -50px;
-           &:before{
+        }
+        .slick-slider .slick-next, .slick-slider .slick-prev{
+            width: 50px;
+            height: 100px;
+            margin-top: -50px;
+            &:before{
                 top: 38px;
                 font-size: 30px;
-           }
-       }  
-       .slick-thumbs{
-           .slick-prev, .slick-next{
-               background: transparent;
-               margin-top: -55px;
-               color:#fff;
-               &:hover{
-               background: transparent;    
-               }
-           }
-       }
-}
-/*CSS End Photo landing page*/
-/*CSS Start magazine-calander RHS*/
-#block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1{    
-    padding: 50px 34px 20px 34px;
-}
-/*CSS End magazine-calander RHS*/
+            }
+        }  
+        .slick-thumbs{
+            .slick-prev, .slick-next{
+                background: transparent;
+                margin-top: -55px;
+                color:#fff;
+                &:hover{
+                    background: transparent;    
+                }
+            }
+        }
+    }
+    /*CSS End Photo landing page*/
+    /*CSS Start magazine-calander RHS*/
+    #block-itg-msi-magazine-calendar, #block-views-latest-issue-magzine-block-1{    
+        padding: 50px 34px 20px 34px;
+    }
+    /*CSS End magazine-calander RHS*/
 
-/*CSS Start So sorry page*/
-.page-sosorry{
-    #block-itg-ads-ad-right-sidebar-1{
-        padding: 30px 34px 30px 34px;
+    /*CSS Start So sorry page*/
+    .page-sosorry{
+        #block-itg-ads-ad-right-sidebar-1{
+            padding: 30px 34px 30px 34px;
+        }
     }
-}
-#block-itg-layout-manager-header-sosorry-block{
-    .sosory-header .sosorryitg{
-        padding: 40px 30px 0 0;   
+    #block-itg-layout-manager-header-sosorry-block{
+        .sosory-header .sosorryitg{
+            padding: 40px 30px 0 0;   
+        }
+        .sosory-footer{
+            text-align: center;   
+            ul li{
+                width: auto;
+                padding:0 20px;
+                margin-bottom: 0px;
+                i{
+                    float: none;
+                }  
+                &:nth-child(2){
+                    border-left: 1px solid #eff94e;
+                    border-right: 1px solid #eff94e;
+                }
+            } 
+        } 
     }
-    .sosory-footer{
-        text-align: center;   
-        ul li{
-            width: auto;
-            padding:0 20px;
-            margin-bottom: 0px;
-            i{
-                float: none;
-            }  
-            &:nth-child(2){
-                border-left: 1px solid #eff94e;
-                border-right: 1px solid #eff94e;
+    .view-so-sorry{
+        h2{
+            @include font(26px,null,300);
+        }
+    }
+    .view-display-id-so_sorry_page{
+        margin:0;
+        h1{
+            font-size: 26px;                        
+        }
+    }
+    /*CSS End So sorry page*/
+    /*CSS Start RHS add block*/
+    #block-itg-ads-ad-right-sidebar-1{    
+        padding: 30px 34px 0;
+    }
+    /*CSS End RHS add block*/
+
+    /*CSS Start Home page Recommended-for-you */
+    .recommended-for-you{
+        #block-itg-widget-personlization{
+            ul.common-list{                                 
+                li.recom-listing{
+                    .pic{
+                        width: auto;
+                    }
+                }
+            }
+            .recommended-slider{
+                button.slick-next, button.slick-prev{
+                    display: block !important;
+                }   
+            }     
+        } 
+    }
+    /*CSS End Home page Recommended-for-you */
+
+    /* CSS Start For Program Page */
+    .programe-container{
+        .program-row{
+            .programe-title{
+                @include font(22px, null, 700);
+            }
+        }
+    }
+    /* CSS End For Program Page */
+
+    /*CSS start program landing page*/
+    #block-views-video-landing-header-block{
+        .video-landing-header{
+            background: #000;
+            padding: 0 15px 15px 15px;    
+        }
+        .video-header-left{
+            .video{
+                @include float(left);
+                width: 84.5%;
+                padding: 10px;
+            }
+            .social-likes  {
+                @include float(left);
+                width: 15.5%;
+                height:474px;
+                overflow: hidden;
+                padding: 0;
+                border-bottom: none;
+                margin-bottom: 0;
+                ul{
+                    li{
+                        @include float(none);
+                        a{
+                            padding:  20px 5px 19px 10px;
+                            span{
+                                display: inline-block;    
+                            } 
+                        }
+                        + li a{
+                            border-top:1px solid #000;
+                        }
+                    }
+                }
             }
         } 
+        .video-header-right{
+            height: 474px;
+            padding-bottom:0px;
+        }
+        h2{
+            @include font(24px);
+        }
+
     } 
-}
-.view-so-sorry{
-    h2{
-        @include font(26px,null,300);
-    }
-}
-.view-display-id-so_sorry_page{
-    margin:0;
-    h1{
-        font-size: 26px;                        
-    }
-}
-/*CSS End So sorry page*/
-/*CSS Start RHS add block*/
-#block-itg-ads-ad-right-sidebar-1{    
-    padding: 30px 34px 0;
-}
-/*CSS End RHS add block*/
-
-/*CSS Start Home page Recommended-for-you */
-.recommended-for-you{
-    #block-itg-widget-personlization{
-        ul.common-list{                                 
-            li.recom-listing{
-                .pic{
-                    width: auto;
-                }
-            }
-        }
-        .recommended-slider{
-          button.slick-next, button.slick-prev{
-            display: block !important;
-            }   
-        }     
-    } 
-}
-/*CSS End Home page Recommended-for-you */
-
-/* CSS Start For Program Page */
-.programe-container{
-    .program-row{
-        .programe-title{
-            @include font(22px, null, 700);
-        }
-    }
-}
-/* CSS End For Program Page */
-
-/*CSS start program landing page*/
-#block-views-video-landing-header-block{
-    .video-landing-header{
-        background: #000;
-        padding: 0 15px 15px 15px;    
-    }
-    .video-header-left{
-        .video{
-            @include float(left);
-            width: 84.5%;
-                padding: 10px;
-        }
-        .social-likes  {
-            @include float(left);
-            width: 15.5%;
-            height:474px;
-            overflow: hidden;
-            padding: 0;
-            border-bottom: none;
-            margin-bottom: 0;
-            ul{
-                li{
-                   @include float(none);
-                    a{
-                        padding:  20px 5px 19px 10px;
-                        span{
-                          display: inline-block;    
-                        } 
-                    }
-                    + li a{
-                        border-top:1px solid #000;
-                    }
-                }
-            }
-        }
-    } 
-    .video-header-right{
-        height: 474px;
-        padding-bottom:0px;
-    }
-    h2{
-        @include font(24px);
-    }
-
-} 
-/*CSS end program landing page*/
+    /*CSS end program landing page*/
 
 
 
@@ -886,14 +886,14 @@ section.sidebar{
         }
     }    
     .top-block .top-colum-2{
-       @include calculate-width(1);
-       margin-bottom: 50px;
+        @include calculate-width(1);
+        margin-bottom: 50px;
     }
     .top-block .top-colum-1, .top-block .top-colum-3{
-       @include calculate-width(2);
-       @include float(left);
+        @include calculate-width(2);
+        @include float(left);
     }
-    
+
     .big-news .big-story-col-1, .big-news .big-story-col-2{
         @include calculate-width(1);
     }
@@ -917,22 +917,22 @@ section.sidebar{
             } 
         } 
     }   
-    
-    
+
+
     #block-views-video-landing-header-block{
         .video-header-left, .social-likes{
             width: 100%;
             float: none;
-    }
-    .social-likes{
-        ul{
-            li{
-                @include float(left);
+        }
+        .social-likes{
+            ul{
+                li{
+                    @include float(left);
+                }
             }
         }
     }
-    }
-    
+
 }
 
 @media only screen and (min-width:640px){

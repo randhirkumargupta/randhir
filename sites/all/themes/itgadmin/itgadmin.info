@@ -68,6 +68,7 @@ stylesheets[all][] = css/styles.css
 ; Optionally add some JavaScripts to your theme.
 
 scripts[] = js/jquery.flexslider.js
+scripts[] = js/slick.js
 scripts[] = js/script.js
 
 
