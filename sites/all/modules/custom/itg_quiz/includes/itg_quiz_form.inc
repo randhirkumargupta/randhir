@@ -59,7 +59,6 @@ function itg_quiz_quiz_form() {
     }
 
     $total_num_of_ques = count($ques_arr);
-    echo $total_num_of_ques;
 
     foreach ($ques_arr as $question_arr) {
 
@@ -178,7 +177,7 @@ function itg_quiz_quiz_form() {
               '#type' => 'hidden',
               '#value' => $question_weightage,
           );
-        }
+      }
 
 
       $form['question_id' . $num] = array(
@@ -243,7 +242,7 @@ function itg_quiz_quiz_form() {
 
     } //End of for loop
 
-    //Quiz global seetings (Hidden variables)
+    // Quiz global seetings (Hidden variables)
     $form['question_total'] = array(
         '#type' => 'hidden',
         '#value' => $total_num_of_ques,
