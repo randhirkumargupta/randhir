@@ -199,7 +199,7 @@ function itg_update_table() {
    db_query("ALTER TABLE `itg_layout_manager` ADD `widget_info` TEXT NULL AFTER `block_title`")->execute();   
   }
    if(empty($check2)) {
-   db_query("ALTER TABLE `itg_section_widgets_list` ADD `widget_type` TEXT NULL AFTER `template_name`")->execute();   
+   db_query("ALTER TABLE `itg_section_widgets_list` ADD `widget_type` TEXT NULL AFTER `category_id`")->execute();   
   }
   
   db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'home' WHERE template_name = 'page--front'")->execute();
