@@ -23,6 +23,10 @@ function itg_loyalty_reward_checkout_form() {
   $data = _get_cart_item($user->uid, 'total');
   
   if ($data >= 1) {
+    // Add js file for validation.
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+    );
     // Prepare form array.
     $form['name'] = array(
       '#title' => t('Name'),
