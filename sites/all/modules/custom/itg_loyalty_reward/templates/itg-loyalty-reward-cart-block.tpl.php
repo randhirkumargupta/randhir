@@ -8,5 +8,5 @@
 ?>
 <div class="cart-total">
     <?php print l(t('MY CART'), 'cart', array('attributes' => array('class' => array('button')))); ?>
-    <span><?php print '(' . count($data) . ')'; ?></span>
+    <span><?php print '(' . $data . ')'; ?></span>
 </div>
