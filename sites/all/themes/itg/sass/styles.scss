@@ -4079,6 +4079,38 @@ footer{
 }
 /*CSS end for year end page*/
 
+/*CSS start special top news*/
+.widget-wrapper.auto-block_2{
+    border: 1px solid $border-color;
+}
+.special-top-news{
+    ul{
+        &.itg-listing{
+            border: none;
+        }
+    }
+}
+/*CSS End special top news*/
+/*CSS start special auto tips and tricks*/
+.auto-tips-n-tricks{
+    ul{
+        li{
+            padding: 18px 0;
+            +li{
+                border-top:1px solid #ddd; 
+            }
+            p.title{
+                a{
+                 font-weight: 700;
+                margin-bottom: 5px; 
+                display: block;
+                }                
+            }
+        }
+    }
+}
+/*CSS End special auto tips and tricks*/
+
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"]{
   margin: 0 -15px;
