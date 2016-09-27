@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <?php
             global $base_url;
-            print t("<h2>CHOOSE YOUR FAVOURITE <span>POLITOONS</span></h2>");
+            print t("<h2>CHOOSE <br/> YOUR FAVOURITE <span>POLITOONS</span></h2>");
         ?>
     </div>
 <?php foreach ($data as $key => $taxonomy) :

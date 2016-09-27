@@ -63,7 +63,7 @@ function itg_widget_form_views_form_special_auto_review_widget_special_auto_revi
                  jQuery("#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list").find("th.tabledrag-hide").html("Label");
           });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
 
-  drupal_add_css('#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
+  drupal_add_css('#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list  .draggableviews-weight {display:none}', 'inline');
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_special_auto_review";
 }
 
