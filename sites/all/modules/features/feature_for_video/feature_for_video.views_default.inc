@@ -844,7 +844,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Content */
+  /* Field: Field: Long Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -931,7 +931,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Content */
+  /* Field: Field: Long Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -2184,6 +2184,9 @@ print \'Status not found.\';
   $handler->display->display_options['filters']['field_story_syndication_value']['id'] = 'field_story_syndication_value';
   $handler->display->display_options['filters']['field_story_syndication_value']['table'] = 'field_data_field_story_syndication';
   $handler->display->display_options['filters']['field_story_syndication_value']['field'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['value'] = array(
+    'Yes' => 'Yes',
+  );
   $handler->display->display_options['filters']['field_story_syndication_value']['group'] = 1;
   $handler->display->display_options['filters']['field_story_syndication_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_syndication_value']['expose']['operator_id'] = 'field_story_syndication_value_op';

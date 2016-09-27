@@ -86,6 +86,10 @@
                 <div class="field-label">Questions Display Sequence:</div>
                 <div class="field-items"><?php echo ucwords($node->field_quiz_display_sequence[LANGUAGE_NONE][0]['value']); ?></div>
               </div>
+              <div class="field">
+                <div class="field-label">Quiz Questions Format:</div>
+                <div class="field-items"><?php echo ucfirst($node->field_survey_questions_format[LANGUAGE_NONE][0]['value']); ?></div>
+              </div>
             </div>
           </div>
         </div>
