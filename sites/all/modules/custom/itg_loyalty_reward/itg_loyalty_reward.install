@@ -182,7 +182,7 @@ function itg_loyalty_reward_schema() {
   $schema['itg_loyalty_reward_cart'] = array(
     'description' => 'Table for saving shopping cart data.',
     'fields' => array(
-      'order_id' => array(
+      'cart_id' => array(
         'description' => 'The Primary Id',
         'type' => 'serial',
         'unsigned' => TRUE,
@@ -229,7 +229,7 @@ function itg_loyalty_reward_schema() {
         'default' => 0
       ),
     ),
-    'primary key' => array('order_id'),
+    'primary key' => array('cart_id'),
   );
   // Order Table
   $schema['itg_loyalty_reward_order'] = array(
@@ -248,14 +248,20 @@ function itg_loyalty_reward_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
-      'cart_id' => array(
-        'description' => 'cart Id',
-        'type' => 'int',
-        'unsigned' => TRUE,
+      'product_information' => array(
+        'type' => 'blob',
+        'size' => 'big',
         'not null' => TRUE,
-        'default' => 0,
-      )
+        'serialize' => TRUE,
+        'description' => 'Serialized data containing the product complete information.',
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
     ),
+    'primary key' => array('order_id'),
   );
 
   return $schema;
