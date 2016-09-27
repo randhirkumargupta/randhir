@@ -188,6 +188,7 @@ function itg_section_widgets_list_delete() {
  * @return array $output
  */
 function itg_update_table() {
+  $check2 = db_field_exists('itg_section_widgets_list', 'widget_type');
   $check = db_field_exists('itg_layout_tpl', 'layout_type');
   $check1 = db_field_exists('itg_layout_manager', 'widget_info');
   
@@ -196,6 +197,9 @@ function itg_update_table() {
   }
   if(empty($check1)) {
    db_query("ALTER TABLE `itg_layout_manager` ADD `widget_info` TEXT NULL AFTER `block_title`")->execute();   
+  }
+   if(empty($check2)) {
+   db_query("ALTER TABLE `itg_section_widgets_list` ADD `widget_type` TEXT NULL AFTER `category_id`")->execute();   
   }
   
   db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'home' WHERE template_name = 'page--front'")->execute();
