@@ -93,6 +93,13 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
+  $form['buying_guid_for_tech_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Buying Guid'),
+      '#default_value' => variable_get('buying_guid_for_tech_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
   $form['watch_for_tech_widget'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter tid of Technologies Watch'),
@@ -583,6 +590,7 @@ function get_sessions_of_ticked_nodes(&$form) {
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
     );
   }
+
   return $form;
 }
 
@@ -653,6 +661,12 @@ function itg_widget_theme() {
       ),
       'itg_widget_politoons' => array(
           'template' => 'templates/itg-widget-politoons',
+      ),
+      'tech_reviews' => array(
+          'template' => 'templates/auto-reviews',
+      ),
+      'tech_most_read' => array(
+          'template' => 'templates/tech-most-read',
       ),
   );
   return $themes;
@@ -992,14 +1006,17 @@ function itg_widget_views_query_alter(&$view, &$query) {
   if ($view->name == 'tech' && $view->current_display == 'block_3') {
     $query->where[1]['conditions'][2]['value'] = variable_get('tech_tips_for_tech_widget');
   }
+  if ($view->name == 'tech' && $view->current_display == 'block_4') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('talking_point_for_tech_widget');
+  }
   if ($view->name == 'tech' && $view->current_display == 'block_5') {
     $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
   }
   if ($view->name == 'tech' && $view->current_display == 'block_6') {
     $query->where[1]['conditions'][2]['value'] = variable_get('in_depth_for_tech_widget');
   }
-  if ($view->name == 'tech' && $view->current_display == 'block_4') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('talking_point_for_tech_widget');
+  if ($view->name == 'tech' && $view->current_display == 'block_7') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('buying_guid_for_tech_widget');
   }
   if ($view->name == 'tech' && $view->current_display == 'block_8') {
     $query->where[1]['conditions'][2]['value'] = variable_get('watch_for_tech_widget');
@@ -1303,12 +1320,12 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
  * @param int $range_min
  * @return array
  */
-function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $range_max, $range_min = 0) {
+function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $var_name, $range_max, $range_min = 0) {
   $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->condition('iwo.widget', $widget_name)
           ->condition('n.status', 1)
-          ->condition('iwo.cat_id', variable_get('auto_for_widget'))
+          ->condition('iwo.cat_id', variable_get($var_name))
           ->orderBy('iwo.weight', 'ASC')
           ->range($range_min, $range_max)
           ->fields('iwo', array('nid', 'extra', 'weight'));
@@ -1327,7 +1344,7 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
             ->condition('n.status', 1)
-            ->condition('iwo.cat_id', variable_get('auto_for_widget'))
+            ->condition('iwo.cat_id', variable_get($var_name))
             ->orderBy('n.nid', 'DESC')
             ->range($range_min, $range_max)
             ->fields('iwo', array('nid', 'extra', 'weight'));

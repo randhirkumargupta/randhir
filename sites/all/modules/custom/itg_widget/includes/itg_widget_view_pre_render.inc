@@ -144,7 +144,7 @@ function itg_widget_views_pre_render(&$view) {
   elseif ($view->name == "section_wise_draggable_content_order" && $view->current_display == 'dont_miss_content') {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Don\'t Miss Widget'), 'dont-miss-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $header_content .= l(t('Don\'t Miss Widget'), 'dont-miss-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }
@@ -220,6 +220,17 @@ function itg_widget_views_pre_render(&$view) {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Yearender Top News & Top Videos Widget'), 'yearend-left-widget-list');
+      $view->attachment_before = $header_content;
+    }
+  }
+  elseif ($view->name == "most_read_widget" && $view->current_display == 'most_read_widget_list') {
+    $header_content = l(t('Search Content'), 'most-read-widget-contents');
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "most_read_widget" && $view->current_display == 'most_read_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Most Read Widget'), 'most-read-widget-list');
       $view->attachment_before = $header_content;
     }
   }

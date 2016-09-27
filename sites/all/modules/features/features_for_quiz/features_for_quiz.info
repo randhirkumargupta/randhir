@@ -70,6 +70,7 @@ features[field_instance][] = node-quiz-field_story_reporter
 features[field_instance][] = node-quiz-field_survey_category
 features[field_instance][] = node-quiz-field_survey_end_date
 features[field_instance][] = node-quiz-field_survey_expity_date
+features[field_instance][] = node-quiz-field_survey_questions_format
 features[field_instance][] = node-quiz-field_survey_start_date
 features[node][] = quiz
 features[user_permission][] = create quiz content

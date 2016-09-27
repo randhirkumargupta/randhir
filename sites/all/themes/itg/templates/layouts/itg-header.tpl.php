@@ -20,7 +20,7 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
 <!--      <div class="menu-login desktop-hide">
         <div class="container ">   
             <div class="user-menu">
-                <a href="#" class="user-icon"><i class="fa fa-user"></i></a>
+                <a href="signup?width=500&height=500&iframe=true" class="user-icon colorbox-load"><i class="fa fa-user"></i></a>
                 <?php
                 //$block = module_invoke('system', 'block_view', 'user-menu');
                // print render($block['content']);
@@ -57,7 +57,7 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
     <div class="menu-login mhide">
         <div class="container ">   
             <div class="user-menu">
-                <a href="#" class="user-icon"><i class="fa fa-user"></i></a>
+                <a href="signup?width=500&height=500&iframe=true" class="user-icon colorbox-load"><i class="fa fa-user"></i></a>
                 <?php
                 $block = module_invoke('system', 'block_view', 'user-menu');
                 print render($block['content']);
