@@ -430,6 +430,66 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = '0 -500 POINTS';
   $handler->display->display_options['link_url'] = 'hfhfhfhgfgf';
+
+  /* Display: 500 - 1000 Points */
+  $handler = $view->new_display('block', '500 - 1000 Points', 'block_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = '500 - 1000 POINTS';
+  $handler->display->display_options['link_url'] = 'hfhfhfhgfgf';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'loyalty_and_rewards' => 'loyalty_and_rewards',
+  );
+  /* Filter criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['min'] = '501';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['max'] = '1000';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['value'] = '500';
+
+  /* Display: 1001 - 10000 Points */
+  $handler = $view->new_display('block', '1001 - 10000 Points', 'block_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = '1001 - 10000 POINTS';
+  $handler->display->display_options['link_url'] = 'hfhfhfhgfgf';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'loyalty_and_rewards' => 'loyalty_and_rewards',
+  );
+  /* Filter criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['min'] = '1001';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['max'] = '10000';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['value'] = '500';
   $export['redeem_points'] = $view;
 
   return $export;
