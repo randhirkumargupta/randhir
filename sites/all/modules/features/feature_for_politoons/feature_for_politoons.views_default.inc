@@ -128,6 +128,7 @@ function feature_for_politoons_views_default_views() {
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Action';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<a href=\'taxonomy/term/[tid]\'><span class=\'view-link\'>View</span></a>';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
