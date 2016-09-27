@@ -277,17 +277,7 @@
       $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
       $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
     });
-
-    
-
-    $('#itg-quiz-quiz-form .quiz-submit').mousedown(function () {
-      $(this).ajaxSuccess(function () {
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    });
-
-
+ 
     $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
     $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
 
