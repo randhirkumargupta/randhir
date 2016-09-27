@@ -27,6 +27,12 @@ function itg_layout_manager_schema() {
         'length' => '255',
         'not null' => FALSE,
       ),
+         'widget_info' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
       'block_name' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
@@ -72,6 +78,12 @@ function itg_layout_manager_schema() {
         'not null' => TRUE,
       ),
       'template_name' => array(
+        'description' => 'TODO: please describe this field!',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+        'layout_type' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'varchar',
         'length' => '255',
