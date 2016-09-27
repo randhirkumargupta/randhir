@@ -17451,7 +17451,7 @@ personalization/saved-items',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17461,7 +17461,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17472,7 +17475,7 @@ movie',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17484,7 +17487,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17505,7 +17511,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17528,7 +17537,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17539,7 +17551,7 @@ sosorry/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17549,7 +17561,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17560,7 +17575,7 @@ movie',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17572,7 +17587,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17583,7 +17601,7 @@ sosorry/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17593,7 +17611,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17604,7 +17625,7 @@ movie',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17616,7 +17637,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17627,7 +17651,7 @@ sosorry/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17637,7 +17661,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17648,7 +17675,7 @@ movie',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17660,7 +17687,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17671,7 +17701,7 @@ sosorry/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17681,7 +17711,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17692,7 +17725,7 @@ movie',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17704,7 +17737,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17715,7 +17751,7 @@ sosorry/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17725,7 +17761,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17736,7 +17775,7 @@ movie',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17748,7 +17787,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -20844,14 +20886,98 @@ sosorry/*',
   'module' => 'views',
   'delta' => 'redeem_points-block_1',
   'theme' => 'itg',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'personalization',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'redeem-points',
   'title' => '',
   'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1462,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1463,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1464,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1465,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1466,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1467,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => 1,
 );
   $export['block_custom'][] = array(
   'bid' => 1,
