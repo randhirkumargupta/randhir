@@ -36,6 +36,7 @@
             var base_url = Drupal.settings.itg_loyalty_reward.base_url;
             $.each(mid, function(index, value) {
                 $('.' + value).parent().html('<div class="' + value +'" ><a href="' + base_url + '/cart">GO TO CART</a></div');
+                $('.' + value).parent().parent().find('.redeem-point a').attr('href', 'cart');
             });            
             // Module code ends.
         }

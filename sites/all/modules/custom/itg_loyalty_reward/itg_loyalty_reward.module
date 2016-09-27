@@ -16,7 +16,7 @@ function itg_loyalty_reward_permission() {
     'loyalty points configuration form' => array(
       'title' => t('Loyalty Points configuration Form'),
     ),
-    'view product page' =>array(
+    'view product page' => array(
       'title' => t('View product listing page.')
     ),
   );
@@ -38,7 +38,7 @@ function itg_loyalty_reward_menu() {
   );
   // Redeem points page.
   $items['redeem-points'] = array(
-    'title' => t('Reddem Points'),
+    'title' => 'Reddem Points',
     'page callback' => 'itg_loyalty_reward_redeem_points',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -46,7 +46,7 @@ function itg_loyalty_reward_menu() {
   );
   // Cart page.
   $items['cart'] = array(
-    'title' => t('Shopping Cart'),
+    'title' => 'Shopping Cart',
     'page callback' => 'itg_loyalty_reward_cart',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -63,10 +63,18 @@ function itg_loyalty_reward_menu() {
   // Cart remove product.
   $items['cart/delete/%'] = array(
     'page callback' => 'itg_loyalty_reward_removecart',
-    'page arguments' => array(2),
+    'page arguments' => array(2, 3),
     'access arguments' => array('view product page'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward.product.inc',
+  );  
+  $items['checkout'] = array(
+    'title' => 'Checkout',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_loyalty_reward_checkout_form'),
+    'access arguments' => array('view product page'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_loyalty_reward.checkout.inc',
   );  
   
   return $items;
@@ -124,11 +132,13 @@ function itg_loyalty_reward_form_alter(&$form, &$form_state, $form_id) {
 
     // Add cancel button
     $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), 'lrp-manage-items', array('attributes' => array('class' => 'button'))),
+      '#markup' => l(t('Cancel'), 'lrp-manage-items', 
+          array('attributes' => array('class' => 'button'))),
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
-    $form['actions']['submit']['#submit'][] = 'itg_loyalty_reward_submit_handler_for_redirect';
+    $form['actions']['submit']['#submit'][] = 
+        'itg_loyalty_reward_submit_handler_for_redirect';
     $form['#after_build'][] = 'itg_loyalty_reward_form_after_build';
   }
 }
@@ -155,7 +165,8 @@ function itg_loyalty_reward_submit_handler_for_redirect($form, &$form_state) {
   }
 
   $form_state['redirect'] = 'lrp-manage-items';
-  drupal_set_message(t('Item <strong>@ideatitle</strong> has been @operation.', array('@ideatitle' => $form_state['node']->title, '@operation' => $op)));
+  drupal_set_message(t('Item <strong>@ideatitle</strong> has been @operation.', 
+      array('@ideatitle' => $form_state['node']->title, '@operation' => $op)));
 }
 
 /**
@@ -184,11 +195,11 @@ function itg_loyalty_reward_form_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   $settings['type'] = ucfirst($type);
   $settings['nid'] = $nid;
-
-  drupal_add_js(array('itg_loyalty_reward' => array('settings' => $settings)), array('type' => 'setting'));
-
+  drupal_add_js(array('itg_loyalty_reward' => array('settings' => $settings)), 
+      array('type' => 'setting'));
   //Add JS for itg_loyalty_reward
-  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') 
+      . '/js/itg_loyalty_reward.js', array('weight' => 1));
 
   //Unset SEF URL field
   $form['path']['#access'] = FALSE;
@@ -208,8 +219,10 @@ function itg_loyalty_reward_views_pre_render(&$view) {
 
   // Add "Add new Item" button on listing page of items
   if ($view->name == "lrp_manage_items") {
-    $header_content_loyalty = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_loyalty .= l(t('Add new Item'), 'node/add/loyalty-and-rewards');
+    $header_content_loyalty = 
+        '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $header_content_loyalty .= l(t('Add new Item'), 
+        'node/add/loyalty-and-rewards');
     $view->attachment_before = $header_content_loyalty;
   }
 }
@@ -364,7 +377,7 @@ function itg_loyalty_reward_block_view($delta = '') {
   $block = array();  
   switch ($delta) {    
     case 'itg_cart_block':
-      $data = _get_cart_item($user->uid);
+      $data = _get_cart_item($user->uid, 'total');
       $block['content'] = theme('itg_loyalty_reward_cart_block', array('data' => $data));
       break;    
   }
@@ -377,18 +390,28 @@ function itg_loyalty_reward_block_view($delta = '') {
  *
  * @param int $uid
  *   User id of current user.
+ * @param string $option
+ *   An optional value th check whether it should return count of full record.
+ *
  * @return array
  *   Array of items.
  */
-function _get_cart_item($uid) {
+function _get_cart_item($uid, $option = NULL) {  
   $itg_query = db_select('itg_loyalty_reward_cart', 'itg');
-  $itg_query->condition('uid', $uid)
-      ->fields('itg', array('nid'));
-  $itg_result = $itg_query->execute()->fetchAll();
-  $data = array();
-  foreach ($itg_result as $value) {    
-    $data[] = $value->nid;
-  }  
+  $itg_query->fields('itg', array('nid'));
+  $itg_query->condition('uid', $uid);      
+  if ($option == 'total') {
+    $data = 0;    
+    $data = $itg_query->execute()->rowCount();    
+  }
+  else {
+    $itg_query->fields('itg', array('nid'));
+    $itg_result = $itg_query->execute()->fetchAll();
+    $data = array();
+    foreach ($itg_result as $value) {    
+      $data[] = $value->nid;
+    }
+  }    
   
   return $data;
 }
