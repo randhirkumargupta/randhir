@@ -63,7 +63,8 @@ function features_for_quiz_field_group_info() {
       4 => 'field_quiz_type',
       5 => 'field_quiz_winners',
       6 => 'field_story_reporter',
-      7 => 'title',
+      7 => 'field_survey_questions_format',
+      8 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(

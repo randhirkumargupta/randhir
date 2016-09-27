@@ -898,7 +898,7 @@ function features_for_quiz_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'entityreference_autocomplete_tags',
       'weight' => 3,
     ),
   );
@@ -996,7 +996,7 @@ function features_for_quiz_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 54,
+      'weight' => 59,
     ),
   );
 
@@ -1035,7 +1035,50 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 53,
+      'weight' => 58,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_survey_questions_format'.
+  $field_instances['node-quiz-field_survey_questions_format'] = array(
+    'bundle' => 'quiz',
+    'default_value' => array(
+      0 => array(
+        'value' => 'All questions at a time',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_survey_questions_format',
+    'label' => 'Quiz Questions Format',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 9,
     ),
   );
 
@@ -1093,7 +1136,7 @@ function features_for_quiz_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 52,
+      'weight' => 57,
     ),
   );
 
@@ -1120,6 +1163,7 @@ function features_for_quiz_field_default_field_instances() {
   t('Questions Display Sequence');
   t('Quiz Expiry Date');
   t('Quiz Instructions');
+  t('Quiz Questions Format');
   t('Quiz Scoring Type');
   t('Quiz Type');
   t('Section');

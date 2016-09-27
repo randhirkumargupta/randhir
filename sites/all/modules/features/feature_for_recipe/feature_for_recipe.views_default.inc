@@ -980,6 +980,9 @@ function feature_for_recipe_views_default_views() {
   $handler->display->display_options['filters']['field_story_syndication_value']['id'] = 'field_story_syndication_value';
   $handler->display->display_options['filters']['field_story_syndication_value']['table'] = 'field_data_field_story_syndication';
   $handler->display->display_options['filters']['field_story_syndication_value']['field'] = 'field_story_syndication_value';
+  $handler->display->display_options['filters']['field_story_syndication_value']['value'] = array(
+    'Yes' => 'Yes',
+  );
   $handler->display->display_options['filters']['field_story_syndication_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_syndication_value']['expose']['operator_id'] = 'field_story_syndication_value_op';
   $handler->display->display_options['filters']['field_story_syndication_value']['expose']['label'] = 'Syndication';
