@@ -218,7 +218,7 @@ function get_custom_feeds_files($nid = NULL, $text = NULL, $feed_type = NULL) {
           $new_text = '';
           for ($i = 0; $i < $iteration; $i++) {
             $return_value_for_sydiation = '';
-            //Fix for ydication images repeated value.
+            //Fix for sydication images repeated value.
             if ($var_array[1][$i] == 'field_gallery_image') {
               $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
               $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_gallery_image']);
@@ -226,7 +226,7 @@ function get_custom_feeds_files($nid = NULL, $text = NULL, $feed_type = NULL) {
             else {
               $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
             }
-              $data_array[] = $return_value_for_sydiation;
+            $data_array[] = $return_value_for_sydiation;
           }
           if (count($var_array[0])) {
             foreach ($var_array[0] as $key => $pattren) {
@@ -270,7 +270,17 @@ function get_generated_feed($message, $var_array, $node, $data_array, $text) {
   if (empty($message)) {
     $iteration = count($var_array[0]);
     for ($i = 0; $i < $iteration; $i++) {
-      $data_array[] = get_node_field_values($node, $var_array[1][$i]);
+      //$data_array[] = get_node_field_values($node, $var_array[1][$i]);
+      $return_value_for_sydiation = '';
+      //Fix for sydication images repeated value.
+      if ($var_array[1][$i] == 'field_gallery_image') {
+        $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+        $return_value_for_sydiation[0] = $field_gallery_image['field_gallery_image'][0];
+      }
+      else {
+        $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+      }
+      $data_array[] = $return_value_for_sydiation;
     }
     if (count($var_array[0])) {
       foreach ($var_array[0] as $key => $pattren) {
