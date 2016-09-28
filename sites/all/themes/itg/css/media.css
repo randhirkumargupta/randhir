@@ -917,6 +917,15 @@
   }
 
   /*CSS end program landing page*/
+  /*css start for special auto page*/
+  .auto-layout-page .itg-top-section .top-colum-1 .droppable, .auto-layout-page .itg-top-section .top-colum-2 .droppable {
+    height: 608px;
+  }
+  .auto-layout-page .itg-top-section .top-colum-3 .droppable {
+    height: 247px;
+  }
+
+  /*css end for special auto page*/
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
