@@ -5468,7 +5468,7 @@ footer .footer-copyright {
 
 /*CSS end for year end page*/
 /*CSS start special auto page */
-.auto-layout-page .widget-wrapper.auto-block_2 {
+.auto-layout-page .widget-wrapper.auto-block_2, .auto-layout-page .widget-wrapper.tech-block_2 {
   border: 1px solid #dddddd;
 }
 .auto-layout-page .widget-wrapper.auto-block_3 {

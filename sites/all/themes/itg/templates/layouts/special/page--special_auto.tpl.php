@@ -224,15 +224,6 @@ if ($theme != 'itgadmin') {
             </div>
         </div>
     
-    </div>
-      </section>
-    </main>
-      
-      
- <main id="main" class="container">
-      <section id="content" role="main">
-
-<div class="itg-layout-container <?php echo $itg_class; ?> auto-layout-page">
   <!--Common section strat here-->
   <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || isset($widget_data['itg-block-6']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-common-section">

@@ -4082,7 +4082,7 @@ footer{
 /*CSS start special auto page */
 .auto-layout-page{
     .widget-wrapper{
-        &.auto-block_2{
+        &.auto-block_2, &.tech-block_2{
             border: 1px solid $border-color;
         } 
         &.auto-block_3{
