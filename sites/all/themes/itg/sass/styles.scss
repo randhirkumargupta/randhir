@@ -4079,9 +4079,15 @@ footer{
 }
 /*CSS end for year end page*/
 
-/*CSS start special top news*/
-.widget-wrapper.auto-block_2{
-    border: 1px solid $border-color;
+/*CSS start special auto page */
+.widget-wrapper{
+    &.auto-block_2{
+       border: 1px solid $border-color;
+   } 
+   &.auto-block_3{
+        background: #f3f3f3;
+        padding: 10px;
+   }
 }
 .special-top-news{
     ul{
@@ -4090,8 +4096,7 @@ footer{
         }
     }
 }
-/*CSS End special top news*/
-/*CSS start special auto tips and tricks*/
+
 .auto-tips-n-tricks{
     ul{
         li{
@@ -4109,7 +4114,23 @@ footer{
         }
     }
 }
-/*CSS End special auto tips and tricks*/
+.auto-road-trip{
+    .trending-videos{
+        padding: 0;
+        border: none; 
+        li{
+            .video-none{
+                &:after{
+                    background: none;
+                }
+            }
+            &.trending-videos-list{
+                padding: 15px 0;
+            }
+        }
+    }    
+}
+/*CSS End special auto page */
 
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"]{

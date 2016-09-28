@@ -5467,17 +5467,19 @@ footer .footer-copyright {
 }
 
 /*CSS end for year end page*/
-/*CSS start special top news*/
+/*CSS start special auto page */
 .widget-wrapper.auto-block_2 {
   border: 1px solid #dddddd;
+}
+.widget-wrapper.auto-block_3 {
+  background: #f3f3f3;
+  padding: 10px;
 }
 
 .special-top-news ul.itg-listing {
   border: none;
 }
 
-/*CSS End special top news*/
-/*CSS start special auto tips and tricks*/
 .auto-tips-n-tricks ul li {
   padding: 18px 0;
 }
@@ -5490,7 +5492,18 @@ footer .footer-copyright {
   display: block;
 }
 
-/*CSS End special auto tips and tricks*/
+.auto-road-trip .trending-videos {
+  padding: 0;
+  border: none;
+}
+.auto-road-trip .trending-videos li .video-none:after {
+  background: none;
+}
+.auto-road-trip .trending-videos li.trending-videos-list {
+  padding: 15px 0;
+}
+
+/*CSS End special auto page */
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"] {
   margin: 0 -15px;

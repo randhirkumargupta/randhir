@@ -847,8 +847,22 @@
     } 
     /*CSS end program landing page*/
 
-
-
+/*css start for special auto page*/
+.auto-layout-page{
+    .itg-top-section{
+        .top-colum-1, .top-colum-2{
+            .droppable{
+                height: 608px;
+            }            
+        }
+        .top-colum-3{
+            .droppable{
+                height: 247px;
+            }
+        }
+    }  
+}
+/*css end for special auto page*/
 
 
 }

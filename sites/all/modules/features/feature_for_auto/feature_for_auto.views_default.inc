@@ -65,11 +65,11 @@ function feature_for_auto_views_default_views() {
     'photogallery' => 'photogallery',
   );
 
-  /* Display: Auto Right Top */
-  $handler = $view->new_display('block', 'Auto Right Top', 'block_1');
+  /* Display: Auto leftTop */
+  $handler = $view->new_display('block', 'Auto leftTop', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Auto Right Top';
-  $handler->display->display_options['display_description'] = 'Auto Right Top';
+  $handler->display->display_options['title'] = 'Auto leftTop';
+  $handler->display->display_options['display_description'] = 'Auto leftTop';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -382,19 +382,21 @@ function feature_for_auto_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'customstyle';
-  $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
+  $handler->display->display_options['style_plugin'] = 'flexslider';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
+    'image_style' => 'photo_carousel_flexslider',
     'image_link' => '',
   );
   /* Field: Content: Title */
