@@ -189,6 +189,12 @@ function get_layout_details($section_name, $template_name, $status) {
   
   foreach ($itg_result as $itg_val) {
     $filter_url = $itg_val->filter_url;
+    // for widget display name
+    if (!empty($itg_val->widget_name)) {
+      $widget_info_array = explode('|', $itg_val->widget_info);
+      $result['widget_display_name'] = '-'.$widget_info_array[1];  
+    }
+    
     $result['widget_name'] = $itg_val->widget_name;
     if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
       $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);

@@ -5118,26 +5118,27 @@ footer .footer-copyright {
   text-align: center;
 }
 
-.politoons-sosorry h2 {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry h2 {
   font-size: 26px;
   font-size: 1.625rem;
   font-weight: 300;
   color: #db1314;
   text-transform: uppercase;
+  margin-bottom: 20px;
 }
-.politoons-sosorry h2 span {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry h2 span {
   background: #db1314;
   color: #fff;
   padding: 0 5px;
   font-weight: 700;
 }
-.politoons-sosorry img {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry img {
   height: 88px;
   width: 88px;
   border-radius: 100%;
   border: 1px solid #ddd;
 }
-.politoons-sosorry span.title {
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry span.title {
   display: block;
   font-size: 12px;
   font-size: 0.75rem;
@@ -5466,6 +5467,43 @@ footer .footer-copyright {
 }
 
 /*CSS end for year end page*/
+/*CSS start special auto page */
+.widget-wrapper.auto-block_2 {
+  border: 1px solid #dddddd;
+}
+.widget-wrapper.auto-block_3 {
+  background: #f3f3f3;
+  padding: 10px;
+}
+
+.special-top-news ul.itg-listing {
+  border: none;
+}
+
+.auto-tips-n-tricks ul li {
+  padding: 18px 0;
+}
+.auto-tips-n-tricks ul li + li {
+  border-top: 1px solid #ddd;
+}
+.auto-tips-n-tricks ul li p.title a {
+  font-weight: 700;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.auto-road-trip .trending-videos {
+  padding: 0;
+  border: none;
+}
+.auto-road-trip .trending-videos li .video-none:after {
+  background: none;
+}
+.auto-road-trip .trending-videos li.trending-videos-list {
+  padding: 15px 0;
+}
+
+/*CSS End special auto page */
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"] {
   margin: 0 -15px;

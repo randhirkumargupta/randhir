@@ -12,7 +12,7 @@
 function itg_layout_admin() {
   
   if (isset($_GET['section']) && isset($_GET['template_name'])) {    
-    $data = get_layout_details($_GET['section'], $_GET['template_name'], 'admin'); 
+    $data = get_layout_details($_GET['section'], $_GET['template_name'], 'admin');    
   }
   if (arg(2) == 'preview') {
     $data['preview'] = 'yes';

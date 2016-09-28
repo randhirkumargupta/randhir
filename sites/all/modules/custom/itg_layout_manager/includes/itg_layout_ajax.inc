@@ -181,6 +181,7 @@ function get_layout_block_details($layout_id, $id) {
     $data['widget_name'] = $row->widget_name;
     $data['block_name'] = $row->block_name;
     $data['block_title'] = $row->block_title;
+    $data['widget_info'] = $row->widget_info;
     $data['filter_url'] = $row->filter_url;
     $data['status'] = $row->status;
     $data_array[] = $data;
