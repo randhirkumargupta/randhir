@@ -59,11 +59,11 @@ function feature_for_tech_views_default_views() {
     'reporter' => 'reporter',
   );
 
-  /* Display: Tech Right Top */
-  $handler = $view->new_display('block', 'Tech Right Top', 'block_1');
+  /* Display: Tech leftTop */
+  $handler = $view->new_display('block', 'Tech leftTop', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Tech Right Top';
-  $handler->display->display_options['display_description'] = 'Tech Right Top';
+  $handler->display->display_options['title'] = 'Tech leftTop';
+  $handler->display->display_options['display_description'] = 'Tech leftTop';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
