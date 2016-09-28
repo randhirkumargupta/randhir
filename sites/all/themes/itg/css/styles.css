@@ -5468,39 +5468,53 @@ footer .footer-copyright {
 
 /*CSS end for year end page*/
 /*CSS start special auto page */
-.widget-wrapper.auto-block_2 {
+.auto-layout-page .widget-wrapper.auto-block_2 {
   border: 1px solid #dddddd;
 }
-.widget-wrapper.auto-block_3 {
+.auto-layout-page .widget-wrapper.auto-block_3 {
   background: #f3f3f3;
   padding: 10px;
 }
-
-.special-top-news ul.itg-listing {
+.auto-layout-page .special-top-news ul.itg-listing {
   border: none;
 }
-
-.auto-tips-n-tricks ul li {
+.auto-layout-page .special-top-news ul li a {
+  position: relative;
+  padding-left: 22px;
+}
+.auto-layout-page .special-top-news ul li a:before {
+  position: absolute;
+  top: 22px;
+  left: 8px;
+  content: '';
+  border-radius: 100%;
+  background: #959595;
+  height: 5px;
+  width: 5px;
+}
+.auto-layout-page .auto-tips-n-tricks ul li {
   padding: 18px 0;
 }
-.auto-tips-n-tricks ul li + li {
+.auto-layout-page .auto-tips-n-tricks ul li + li {
   border-top: 1px solid #ddd;
 }
-.auto-tips-n-tricks ul li p.title a {
+.auto-layout-page .auto-tips-n-tricks ul li p.title a {
   font-weight: 700;
   margin-bottom: 5px;
   display: block;
 }
-
-.auto-road-trip .trending-videos {
+.auto-layout-page .auto-road-trip .trending-videos {
   padding: 0;
   border: none;
 }
-.auto-road-trip .trending-videos li .video-none:after {
+.auto-layout-page .auto-road-trip .trending-videos li .video-none:after {
   background: none;
 }
-.auto-road-trip .trending-videos li.trending-videos-list {
+.auto-layout-page .auto-road-trip .trending-videos li.trending-videos-list {
   padding: 15px 0;
+}
+.auto-layout-page .auto_reviews .widget-title {
+  margin-bottom: 5px;
 }
 
 /*CSS End special auto page */
