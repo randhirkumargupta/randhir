@@ -16,7 +16,71 @@
                 });
             }
             // Checkout page script.
-
+            // validateJobSearch validation function.
+            $("#itg-loyalty-reward-checkout-form").validate({
+                onfocusout: function (element) {
+                    $(element).valid();
+                },
+                ignore: '',
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    var elementName = element.attr('name');
+                    var errorPlaceHolder = '';
+                    switch (elementName) {
+                        case 'field_astro_frequency[und]':
+                            errorPlaceHolder = $('#edit-title').parent();
+                            break;
+                        case 'field_astro_date_range[und][0][value2][date]':
+                            errorPlaceHolder = element.parent().parent();
+                            break;
+                        default:
+                            errorPlaceHolder = element.parent();
+                    }
+                    error.appendTo(errorPlaceHolder);
+                },
+                rules: {
+                    'name': {
+                        required: true
+                    },
+                    'email': {
+                        required: true,
+                        email: true,
+                    },
+                    'phone': {
+                        required: true,                        
+                    },
+                    'address': {
+                        required: true,                        
+                    },
+                    'city': {
+                        required: true,                        
+                    },
+                    'zip_code': {
+                        required: true,                        
+                    }
+                },
+                messages: {
+                    'name': {
+                        required: 'Name field is required.'
+                    },
+                    'email': {
+                        required: 'Email field is required.',
+                        email: 'Please enter a valid email address.'
+                    },
+                    'phone': {
+                        required: 'Phone field is required.'
+                    },
+                    'address': {
+                        required: 'Address field is required.'                        
+                    },
+                    'city': {
+                        required: 'City field is required.'                        
+                    },
+                    'zip_code': {
+                        required: 'City field is required.'                        
+                    }
+                }
+            });            
             // Module code ends.
         }
     };
