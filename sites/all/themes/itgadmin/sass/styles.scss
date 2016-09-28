@@ -7139,6 +7139,7 @@ div.node{
   }
 }
 #menu-item-delete-form{
+  padding-top: 20px;
   #page-title{
     margin-bottom: 30px;
   }
@@ -7777,6 +7778,15 @@ div.node{
   .view{
     .view-filters{
       display: none;
+    }
+  }
+}
+[id*="views-form-so-sorry-so-sorry-videos"]{
+  @extend .confirmation;
+  .form-actions{
+    a{
+      @extend .btn;
+      @extend .btn-cancel;
     }
   }
 }
