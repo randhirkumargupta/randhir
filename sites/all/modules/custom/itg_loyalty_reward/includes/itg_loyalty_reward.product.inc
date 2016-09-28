@@ -124,27 +124,6 @@ function itg_loyalty_reward_cart() {
 }
 
 /**
- * get cart items from database.
- *
- * @param int $uid
- *   Current user id.
- * @return array
- *   Array of product details.
- */
-function _get_cart_full_details($uid) {
-  $data = array();
-  $itg_query = db_select('itg_loyalty_reward_cart', 'itg');
-  $itg_query->fields('itg', array('product_information'))
-      ->condition('uid', $uid);
-  $itg_result = $itg_query->execute()->fetchAll();
-  foreach ($itg_result as $value) {
-    $data[] = unserialize($value->product_information);
-  }
-
-  return $data;
-}
-
-/**
  * Remove product from cart.
  *
  * @param int $nid
@@ -159,4 +138,71 @@ function itg_loyalty_reward_removecart($nid, $name) {
   drupal_set_message(t('The item @product has been deleted from your cart.',
       array('@product' => $name)), 'status');
   drupal_goto('cart');
+}
+
+/**
+ * Implements page callback function for order page.
+ *
+ * @global stdObject $user
+ *   Standard user object.
+ *
+ * @return array
+ *   Themes rendred array.
+ */
+function itg_loyalty_reward_order() {
+  global $user;
+  $header = array(    
+    t('Product Description'),      
+    t('Point'),
+    t('Order No'),
+  );
+  // Get order detail.
+  $rows = _get_order_item();
+  
+  return theme('table', array(
+      'header' => $header, 
+      'rows' => $rows, 
+      'attributes' => array('class' => array('mytable'))  
+    )
+  );  
+}
+
+/**
+ * Get oreder detail from database.
+ *
+ * @global stdObject $user
+ *   Standard user object.
+ *
+ * @return array
+ *   Array of user order details.
+ */
+function _get_order_item() {
+  global $user;
+  $itg_result = array();
+  $itg_query = db_select('itg_loyalty_reward_order', 'itg')
+      ->fields('itg', array('order_id', 'product_information'))
+      ->condition('uid', $user->uid);
+  $itg_result = $itg_query->execute()->fetchAll();  
+  $data = array();
+  foreach ($itg_result as $value) {    
+    $products = unserialize($value->product_information);    
+    foreach ($products['cart-items'] as $product) {
+      $product_pic = theme(
+        'image_style', array(
+          'style_name' => 'magazine_rhs_100x140',
+          'path' => $product['image']['uri'],
+        )
+      );
+      $output = '<div>';
+      $output .= $product_pic . 'Magzine ID: ' . $product['nid'];
+      $output .= '</div>';
+      $data[] = array(
+        $output,
+        $product['points'],
+        $value->order_id,
+      );
+    }
+  }
+  
+  return $data;    
 }

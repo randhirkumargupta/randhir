@@ -76,6 +76,13 @@ function itg_loyalty_reward_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_loyalty_reward.checkout.inc',
   );  
+  $items['order'] = array(
+    'title' => 'Order',
+    'page callback' => 'itg_loyalty_reward_order',    
+    'access arguments' => array('view product page'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_loyalty_reward.product.inc',
+  );  
   
   return $items;
 }
@@ -104,7 +111,7 @@ function itg_loyalty_reward_theme($existing, $type, $theme, $path) {
       'template' => 'itg-loyalty-reward-cart',
       'path' => drupal_get_path('module', 'itg_loyalty_reward') . '/templates',
       'variables' => array('data' => NULL),
-    ),
+    ),    
   );
 
   return $themes;
@@ -413,5 +420,26 @@ function _get_cart_item($uid, $option = NULL) {
     }
   }    
   
+  return $data;
+}
+
+/**
+ * get cart items from database.
+ *
+ * @param int $uid
+ *   Current user id.
+ * @return array
+ *   Array of product details.
+ */
+function _get_cart_full_details($uid) {
+  $data = array();
+  $itg_query = db_select('itg_loyalty_reward_cart', 'itg');
+  $itg_query->fields('itg', array('product_information'))
+      ->condition('uid', $uid);
+  $itg_result = $itg_query->execute()->fetchAll();
+  foreach ($itg_result as $value) {
+    $data[] = unserialize($value->product_information);
+  }
+
   return $data;
 }
