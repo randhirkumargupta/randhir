@@ -234,4 +234,16 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  elseif ($view->name == "feature_content_by_section_widget" && $view->current_display == 'feature_content_section_widget_list') {
+    $header_content = l(t('Search Content'), 'feature-content-section-widget-contents');
+    $view->attachment_before = $header_content;
+  }
+  elseif ($view->name == "feature_content_by_section_widget" && $view->current_display == 'feature_content_section_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Feature Content By Section Widget'), 'feature-content-section-widget-list');
+      $view->attachment_before = $header_content;
+    }
+  }
+ 
 }

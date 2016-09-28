@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for Entertainment feature.
+ */
+
+include_once 'feature_for_entertainment.features.inc';
