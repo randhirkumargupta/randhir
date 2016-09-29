@@ -10,8 +10,19 @@
  * @param array $info
  * @return array
  */
-function itg_widget_section_wise_ordering_from_custom_table($info) {
+function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style = NULL) {
   if (is_array($info)) {
+      $range = 3; 
+    // set range of data here
+      $rangearray=array('auto-road-trip'=>2,'auto-tips-and-tricks'=>3);
+    
+       if(array_key_exists($widget_style, $rangearray))
+       {
+           $range = $rangearray[$widget_style]; 
+      }
+      
+      
+      
     $cat_id = $info['section'];
     $view_name = $info['view_name'];
     $widget_name = _get_widget_name($view_name, 'page');
@@ -24,7 +35,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info) {
             ->condition('n.status', '1')
             ->orderBy('iwo.weight')
             ->groupBy('iwo.nid')
-            ->range(0, 3);
+            ->range(0, $range);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $weight_sum = 0;
     foreach ($result as $data) {
@@ -41,7 +52,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info) {
               ->condition('n.status', '1')
               ->orderBy('n.nid', 'DESC')
               ->groupBy('iwo.nid')
-              ->range(0, 3);
+              ->range(0, $range);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     }
 

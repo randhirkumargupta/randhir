@@ -1817,7 +1817,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-.node-story-form{
+/*.node-story-form{
   #Templates{
     .form-field-type-text{
       margin: 30px 0;
@@ -1874,7 +1874,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .form-field-name-field-common-related-content{
     .form-type-textfield .form-text{max-width: 840px !important;}
   }
-}
+}*/
 .form-field-name-field-astro-date-range{
   @extend .itg-date-range;
 }
@@ -1983,7 +1983,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-mega-review-review-values"],
 [id*="field-story-highlights-values"], 
 [id*="field-story-template-quotes-values"], 
-[id*="field-story-template-factoids-values"], 
+[id*="field-story-template-factoids-values"],
+[id*="field-story-reporter-values"],
 [id*="field-story-template-guru-values"]{
   @extend .itg-add-another-item;
 }
@@ -3594,7 +3595,7 @@ div.node{
 .hierarchical-select-wrapper .dropbox-title{
   text-align: left;
 }
-[id*="field-story-template-buzz-values"]{
+/*[id*="field-story-template-buzz-values"]{
   tbody{
     tr{
       @extend .db;
@@ -3609,7 +3610,7 @@ div.node{
       }
     }
   } 
-}
+}*/
 .edit-link, 
 .view-link, 
 .delete-link, 
@@ -6628,6 +6629,7 @@ div.node{
 #edit-metatags-und-basic{
   border: none;
 }
+[id*="field-story-reporter-values"],
 [id*="field-story-template-quotes-values"], 
 [id*="field-story-template-factoids-values"],
 [id*="field-story-template-guru-values"]{
@@ -6637,6 +6639,8 @@ div.node{
       padding-bottom: 10px;
       .form-type-textfield{
         float: left;
+        margin: 0;
+        padding: 0;
       }
       > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
         margin: 1px 0 0 10px;
@@ -7135,6 +7139,7 @@ div.node{
   }
 }
 #menu-item-delete-form{
+  padding-top: 20px;
   #page-title{
     margin-bottom: 30px;
   }
@@ -7164,5 +7169,694 @@ div.node{
           display: block;
         }
       }
+  }
+}
+#block-itg-story-story-tab-form-block{display: none;}
+.node-story-form{
+  font-family: Roboto;
+  .ajax-progress{
+    display: none;
+  }
+  .itg-form-section-wrapper{
+    border: 1px solid #d9d9d9;
+    margin-top: 20px;
+  }
+  .itg-form-main h2{
+    background-color: #d9d9d9; 
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    &:after{
+      content: '\f055';
+      position: absolute;
+      font-family: 'FontAwesome';
+      font-size: 30px;
+      color: #666;
+      right: 10px;
+    }
+    &.active:after{
+      content: '\f056';
+    }
+  }
+  .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
+    padding-left: 200px;
+  }
+  input[type="text"], select, input[type="password"]{
+    height: 28px;
+    padding: 5px;
+  }
+  .form-type-textfield > label, 
+  .date-combo > legend, 
+  .form-type-select > label{
+    padding: 5px 0;
+  }
+  .form-type-textfield, 
+  .form-type-password, 
+  .form-type-select, 
+  .form-type-managed-file, 
+  .form-type-checkboxes, 
+  .form-type-radios, 
+  .form-type-autocomplete-deluxe, 
+  .date-combo, 
+  .form-type-hierarchical-select, 
+  .form-type-textarea{
+    margin: 10px 0;
+    padding: 0 20px;
+  }
+  .form-type-textfield > label, 
+  .form-type-password > label, 
+  .form-type-textarea > label, 
+  .form-type-select > label, 
+  .form-type-autocomplete-deluxe > label, 
+  .form-type-managed-file > label, 
+  .form-type-radios > label, 
+  .date-combo > legend, 
+  .form-type-hierarchical-select > label, 
+  .form-type-checkboxes > label{
+    width: 200px;
+  }
+  .form-type-textfield > label + div, 
+  .form-type-textarea > label + div, 
+  .form-type-select > label + div, 
+  .form-type-managed-file > label + div, 
+  .form-type-radios > label + div, 
+  .date-combo > legend + div, 
+  .form-type-hierarchical-select > label + div, 
+  .form-type-checkboxes > label + div{
+    padding-left: 200px;
+  }
+  #browse-image .form-type-managed-file, #ExpertChunk .form-type-managed-file{
+    vertical-align: top;
+    width: 100%;
+    margin: 5px 0;
+    min-height: 28px;
+    display: inline-block;
+    > label{
+    padding-top: 4px;
+    }
+    
+    .form-managed-file{
+      .image-widget-data{
+        float: left;
+      }
+      & + div.description{
+        left: 370px;
+      }
+      &.has-image-preview{
+        .image-widget-data div.description{
+          left: 245px;
+        }
+      }
+    } 
+  } 
+  [id*="field-story-reporter-values"], 
+  [id*="field-story-template-quotes-values"], 
+  [id*="field-story-template-factoids-values"], 
+  [id*="field-story-template-buzz-values"], 
+  [id*="field-story-template-guru-values"]{
+    thead{
+      padding-left: 20px;
+      padding-right: 10px;
+      width: 220px;
+    }
+    tbody tr:last-child{
+      td{
+        padding-bottom: 0;
+      }
+    }
+    tbody tr td{
+      > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+        background: url(../images/remove-item.png) no-repeat;
+        border: medium none;
+        height: 18px;
+        margin: 5px 0 0 10px;
+        padding: 0;
+        text-indent: -9999px;
+        width: 18px;
+      }
+    }
+    & + div.clearfix, & + div.description + div.clearfix{
+      bottom: 5px;
+      position: absolute;
+      right: 163px;
+      .form-submit{
+        background: url(../images/add-item.png) no-repeat;
+        border: medium none;
+        height: 18px;
+        margin: 5px 0 0 10px;
+        padding: 0;
+        text-indent: -9999px;
+        width: 18px;
+      }
+    }
+  }
+  [id*="field-story-template-buzz-values"]{
+    tbody{
+      float: left;
+      overflow: visible;
+      position: relative;
+      width: 480px;
+    }
+    tbody tr td{
+      background-color: #d9d9d9;
+      float: left;
+      margin-bottom: 10px;
+      padding: 0;
+      width: 100%;
+      margin-bottom: 10px;
+      > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+        position: absolute;
+        left: 100%;
+        bottom: 4px;
+      }
+      .form-type-textfield{
+        .form-text{
+          max-width: none;
+          width: 100%;
+        }
+      }
+      .form-type-textarea{
+        > label{
+          padding: 0 0 5px;
+          display: block;
+          float: none;
+        }
+        .form-textarea-wrapper{
+          padding-left: 0;
+          width: 100%;
+          .form-textarea{
+            width: 100%;
+            max-width: none;
+          }
+        }
+      }
+      .form-type-managed-file{
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        > label{
+          padding: 0 0 5px;
+          display: block;
+          float: none;
+        }
+        .form-managed-file{
+          padding-left: 0;
+          .image-widget-data{
+            float: left;
+            .form-submit[value="Remove"] {
+              left: 240px;
+              top: 4px;
+            }
+          }
+        }
+      }
+    }
+    & + div.clearfix, & + div.description + div.clearfix{
+      bottom: 15px;
+      position: absolute;
+      right: 15px;
+    }
+  }
+  #Templates{
+    table{
+      margin-bottom: 10px;
+    }
+  }
+  .form-field-type-text, 
+  .form-field-name-field-story-reporter,
+  .form-field-type-field-collection{
+    position: relative;
+  }
+  .vertical-tabs ul.vertical-tabs-list{
+    display: none;
+  }
+  .form-field-name-field-story-issue-date{
+      .form-type-date-popup .date-padding{
+        .form-type-textfield{
+          padding: 0 !important;
+        }
+      }
+    }
+  .itg-sidebar-form{
+    margin: 20px 0 0;
+    .itg-sidebar-form-section{
+      background-color: #d9d9d9;
+      display: inline-block;
+      margin-bottom: 10px;
+      vertical-align: top;
+      width: 100%;
+    }
+    h2{
+      background: none;
+      border: none;
+      margin: 0;
+      padding: 8px 15px;
+    }
+    .form-item{
+      > label{
+        float: none;
+        padding: 0 0 5px;
+      }
+      &.form-type-textfield, 
+      &.form-type-managed-file,
+      &.form-type-textarea{
+        > label{
+          display: block;
+        }
+      }
+      &.form-type-textarea{
+        .form-textarea-wrapper{
+          padding-left: 0;
+        }
+      }
+      &.form-type-checkboxes{
+        .form-checkboxes{
+          padding: 10px 0 10px 15px;
+        }
+        
+      }
+    }
+    .form-type-textfield, 
+    .form-type-password, 
+    .form-type-select, 
+    .form-type-managed-file, 
+    .form-type-checkboxes, 
+    .form-type-radios, 
+    .form-type-autocomplete-deluxe, 
+    .date-combo, 
+    .form-type-hierarchical-select, 
+    .form-type-textarea{
+      margin: 10px 0;
+      padding: 0 15px;
+    }
+    fieldset.date-combo > legend{
+      float: none;
+      display: block;
+      padding: 0 0 5px;
+      &+div{
+        padding: 0;
+      }
+    }
+    .date-no-float{
+      width: 100%;
+      .form-type-date-popup{
+        margin-right: 0;
+        .date-padding{
+          .form-type-textfield{
+            float: left;
+            width: 50%;
+            margin: 0;
+            &:first-child{
+              padding: 0 10px 0 0;
+              width: 60%;
+            }
+            &:last-child{
+              padding: 0;
+              width: 40%;
+              div.description{
+                left: 130px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .form-field-name-field-story-highlights{
+      position: relative;
+    }
+    [id*="field-story-highlights-values"]{
+      thead{
+        display: none;
+      }
+      tbody{
+        margin: 0;
+      }
+      tbody tr td{
+        .form-type-textfield{
+          width: 290px;
+          padding-right: 10px;
+          margin: 0 0 10px;
+        }
+        > .form-submit[value="Remove"], .ajax-new-content > .form-submit[value="Remove"]{
+          background: url(../images/remove-item.png) no-repeat;
+          border: none;
+          height: 18px;
+          margin: 5px 0 0 10px;
+          padding: 0;
+          text-indent: -9999px;
+          width: 18px;
+        }
+      }
+      & + div.clearfix{
+        bottom: 15px;
+        position: absolute;
+        right: 35px;
+        .form-submit{
+          background: url(../images/add-item.png) no-repeat;
+          border: medium none;
+          height: 18px;
+          margin: 0;
+          padding: 0;
+          text-indent: -9999px;
+          width: 18px;
+        }
+      }
+    }
+    #Configuration{
+      h2{
+        padding-bottom: 0;
+      }
+      .form-field-name-field-story-configurations{
+        .form-type-checkboxes{
+          margin-top: 0;
+          > label{
+            display: none;
+          }
+        }
+      }
+    }
+    #DateTime{
+      .form-field-name-field-story-expires{
+        .form-type-checkboxes{
+          > label{
+            float: left;
+            width: 100px;
+            padding: 0;
+          }
+          .form-checkboxes{
+            float: left;
+            padding: 3px;
+          }
+        }
+      }
+      .form-field-name-field-story-expiry-date{
+        float: left;
+        width: 100%;
+      }
+    }
+    #SocialMedia{
+      h2{
+        padding-bottom: 0;
+      }
+      .form-field-name-field-story-social-media-integ{
+        .form-type-checkboxes{
+          margin-top: 0;
+          > label{
+            display: none;
+          }
+        }
+      }
+      .form-field-type-text{
+        div.description{display: none;}
+      }
+      .form-type-managed-file{
+        .form-managed-file{
+          padding-left: 0;
+          min-height: 28px;
+          .image-widget-data{
+            > .form-item{
+              margin: 0;
+            }
+          }
+          &+div.description{
+            left: 160px;
+          }
+          &.has-image-preview{
+            .image-widget-data{
+              float: left;
+              width: 188px;
+              > .form-item{
+                margin: 0 0 10px;
+              }
+              .form-submit[value="Remove"]{
+                background: url(../images/cross_small.png) center center no-repeat;
+                height: 20px;
+                left: 175px;
+                text-indent: -9999px;
+                top: 4px;
+                width: 20px;
+              }
+              div.description{
+                display: none;
+              }
+            }
+          }
+          > .form-submit[value="Remove"]{
+            left: 290px;
+            top: 22px;
+          }
+        }
+      }
+    }
+  }
+  .metatags-and-remarks{
+    background-color: #d9d9d9;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    .node-form-revision-information{
+      .form-type-textarea{
+        margin-top: 0;
+        > label{
+          display: none;
+        }
+      }
+    }
+    .vertical-tabs-panes{
+      > h2{
+        padding-top: 20px;
+        position: relative;
+        &:before{
+          background-color: #fff;
+          content: "";
+          display: inline-block;
+          height: 10px;
+          left: 0;
+          margin: 0;
+          position: absolute;
+          top: 0;
+          vertical-align: top;
+          width: 100%;
+        }
+      }
+    }
+    div.description{
+      display: none !important;
+    }
+  }
+  .img-crt{
+    border-radius: 1px;
+    box-shadow: 0 0 5px #3a8a82;
+    margin: 5px 0 0 220px;
+    text-transform: uppercase;
+    transition: all .3s;
+    &:hover{
+      box-shadow: 0 0 2px #3a8a82;
+    }
+    
+  }
+  .add-to-dropbox.form-submit {
+    border-radius: 1px;
+    box-shadow: 0 0 5px #3a8a82;
+    height: 27px;
+    line-height: 23px;
+    padding: 0 10px;
+    text-transform: uppercase;
+    transition: all .3s;
+    &:hover{
+      box-shadow: 0 0 2px #3a8a82;
+    }
+  }
+  .form-managed-file .image-widget-data{
+    .form-submit[value="Remove"]{
+      left: 250px;
+      top: 4px;
+    }
+    .form-type-textfield{
+      max-width: 250px;
+    }
+  } 
+  .path-form .fieldset-wrapper .form-type-checkbox{
+    position: absolute;
+    right: 20px;
+    top: 0;
+    z-index: 9;
+    left: auto;
+  }
+  .element-invisible{
+    display: none;
+  }
+  .itg-form-action{
+    .form-actions{
+      background: none;
+      border: none;
+      margin: 0;
+      padding: 20px;
+      .button{
+        border-radius: 1px;
+        border: 1px solid #ee4d4d;
+        background-color: #ee4d4d;
+        box-shadow: 0 0 5px #ee4d4d;
+        padding: 0 20px;
+        line-height: 34px;
+        height: 36px;
+        text-transform: uppercase;
+        color: #fff;
+        margin-right: 10px;
+        &:hover{
+          box-shadow: 0 0 2px #ee4d4d;
+        }
+      }
+      .form-submit, #story_submit_link{
+        border-radius: 1px;
+        border: 1px solid #1fb5ad;
+        background-color: #1fb5ad;
+        box-shadow: 0 0 5px #3a8a82;
+        padding: 0 20px;
+        line-height: 34px;
+        height: 36px;
+        text-transform: uppercase;
+        color: #fff;
+        margin-right: 10px;
+        &:hover{
+          box-shadow: 0 0 2px #3a8a82;
+        }
+      }
+    }
+  }
+  a.ckeditor_links {
+    color: #0c8bb1;
+    display: inline-block;
+    font-size: 12px;
+    margin-bottom: 10px;
+    margin-left: 220px;
+    margin-top: 0;
+    text-decoration: underline;
+  }
+}
+.page-node-add-story{
+  .action-with-title #page-title{
+    width: 500px;
+  }
+  .action-with-title.fixed{
+    padding: 10px 0;
+  }
+  .top-actions{
+    .button{
+      border-radius: 1px;
+      border: 1px solid #ee4d4d;
+      background-color: #ee4d4d;
+      box-shadow: 0 0 5px #ee4d4d;
+      padding: 0 20px;
+      line-height: 34px;
+      height: 36px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-right: 0;
+      &:hover{
+        box-shadow: 0 0 2px #ee4d4d;
+      }
+    }
+    .form-submit, a[data-id="story_submit_link"]{
+      border-radius: 1px;
+      border: 1px solid #1fb5ad;
+      background-color: #1fb5ad;
+      box-shadow: 0 0 5px #3a8a82;
+      padding: 0 20px;
+      line-height: 34px;
+      height: 36px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-right: 10px;
+      &:hover{
+        box-shadow: 0 0 2px #3a8a82;
+      }
+    }
+  }
+}
+#region-section-content{
+  .view{
+    .view-filters{
+      display: none;
+    }
+  }
+}
+[id*="views-form-so-sorry-so-sorry-videos"]{
+  @extend .confirmation;
+  .form-actions{
+    a{
+      @extend .btn;
+      @extend .btn-cancel;
+    }
+  }
+}
+[id*="itg-quiz-quiz-form"]{
+  .question-heading{
+    font: 400 20/28px Roboto;
+    color: #000;
+    position: relative;
+    padding-left: 20px;
+    &:before{
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #a00606;
+    }
+  }
+  .answer-container{
+    .form-type-radios{
+      .form-type-radio{
+        position: relative;
+        > label{
+          padding: 10px;
+          border: 1px solid #e1e1e1;
+          display: block;
+          width: calc(100% - 30px);
+          color: #777;
+        }
+        .form-radio{
+          position: absolute;
+          opacity: 0;
+          &:checked + label{
+            background-color: #f6e90b;
+            color: #000;
+          }
+        }
+      }
+    }
+    .quiz-media-container{
+      float: left;
+      width: 170px;
+      margin-right: 20px;
+      .quiz-media-file{
+        height: 127px;
+        margin-bottom: 20px;
+        img{
+          width: 170px;
+          height: 127px;
+        }
+      }
+      & + .form-type-radios{
+        overflow: hidden;
+        .form-type-radio{
+          > label{
+            height: 127px;
+          }
+        }
+      }
+    }
+  }
+  .quiz-submit{
+    background: #1a3c8d none repeat scroll 0 0;
+    border: 1px solid #1a3c8d;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 6px 20px 5px;
+    text-transform: uppercase;
   }
 }

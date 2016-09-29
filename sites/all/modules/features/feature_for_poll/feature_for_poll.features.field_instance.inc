@@ -576,6 +576,51 @@ function feature_for_poll_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-poll-field_poll_itg_state'.
+  $field_instances['node-poll-field_poll_itg_state'] = array(
+    'bundle' => 'poll',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_poll_itg_state',
+    'label' => 'ITG State',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 19,
+    ),
+  );
+
   // Exported field_instance: 'node-poll-field_poll_question'.
   $field_instances['node-poll-field_poll_question'] = array(
     'bundle' => 'poll',
@@ -951,6 +996,7 @@ function feature_for_poll_field_default_field_instances() {
   t('Caption');
   t('Display Result');
   t('End Date');
+  t('ITG State');
   t('Please Search by title.');
   t('Poll Answer');
   t('Poll Answer Image');

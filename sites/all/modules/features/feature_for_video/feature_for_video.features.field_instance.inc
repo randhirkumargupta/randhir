@@ -10,6 +10,49 @@
 function feature_for_video_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance:
+  // 'node-videogallery-field_common_by_line_reporter_id'.
+  $field_instances['node-videogallery-field_common_by_line_reporter_id'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 40,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_common_by_line_reporter_id',
+    'label' => 'common by line reporter id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 48,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_common_related_content'.
   $field_instances['node-videogallery-field_common_related_content'] = array(
     'bundle' => 'videogallery',
@@ -1154,7 +1197,7 @@ function feature_for_video_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'entityreference_autocomplete_tags',
       'weight' => 2,
     ),
   );
@@ -1950,6 +1993,7 @@ function feature_for_video_field_default_field_instances() {
   t('UGC Source ID');
   t('Video');
   t('Video expires');
+  t('common by line reporter id');
   t('common by line twitter');
   t('primary category');
   t('video_duration');

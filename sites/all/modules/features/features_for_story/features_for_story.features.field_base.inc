@@ -195,6 +195,30 @@ function features_for_story_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_common_by_line_reporter_id'.
+  $field_bases['field_common_by_line_reporter_id'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_common_by_line_reporter_id',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_common_related_content'.
   $field_bases['field_common_related_content'] = array(
     'active' => 1,
@@ -1008,33 +1032,6 @@ function features_for_story_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_story_media_files_syndicat'.
-  $field_bases['field_story_media_files_syndicat'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_story_media_files_syndicat',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'Yes' => 'Yes',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
-  );
-
   // Exported field_base: 'field_story_medium_image'.
   $field_bases['field_story_medium_image'] = array(
     'active' => 1,
@@ -1147,7 +1144,7 @@ function features_for_story_field_default_field_bases() {
   // Exported field_base: 'field_story_reporter'.
   $field_bases['field_story_reporter'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_story_reporter',
@@ -1231,13 +1228,17 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
-      'handler' => 'base',
+      'handler' => 'views',
       'handler_settings' => array(
-        'sort' => array(
-          'type' => 'none',
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
         ),
-        'target_bundles' => array(
-          'magazine' => 'magazine',
+        'view' => array(
+          'args' => array(),
+          'display_name' => 'entityreference_1',
+          'view_name' => 'autocomplete_for_magazine',
         ),
       ),
       'target_type' => 'node',

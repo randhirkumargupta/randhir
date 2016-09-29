@@ -324,22 +324,33 @@
 
   /*CSS End story section */
   /*Start Dont miss Home page css*/
-  .dont-miss {
+  .dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
     /*padding: 20px 0px 0px 10px;*/
   }
-  .dont-miss ul .dont-miss-listing {
+  .dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
     float: left;
     width: 50%;
     padding: 0px 10px 25px 0;
   }
-  .dont-miss ul .dont-miss-listing:nth-child(2n+1) {
+  .dont-miss ul .dont-miss-listing:nth-child(2n+1), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(2n+1), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(2n+1) {
     clear: left;
   }
-  .dont-miss ul .dont-miss-listing:nth-child(3), .dont-miss ul .dont-miss-listing:nth-child(4) {
+  .dont-miss ul .dont-miss-listing:nth-child(3), .dont-miss ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
     padding-bottom: 0;
   }
 
   /*End Dont miss Home page css*/
+  /*CSS Start year end top news*/
+  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
+    float: none;
+    width: 100%;
+    padding: 25px 10px;
+  }
+  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
+    padding-bottom: 25px;
+  }
+
+  /*CSS End year end top news*/
   /*Start photo section slider Homepage*/
   .featured_photo_carousel .flexslider .flex-direction-nav {
     display: block;
@@ -865,9 +876,62 @@
   }
 
   /* CSS End For Program Page */
+  /*CSS start program landing page*/
+  #block-views-video-landing-header-block .video-landing-header {
+    background: #000;
+    padding: 0 15px 15px 15px;
+  }
+  #block-views-video-landing-header-block .video-header-left .video {
+    float: left;
+    width: 84.5%;
+    padding: 10px;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes {
+    float: left;
+    width: 15.5%;
+    height: 474px;
+    overflow: hidden;
+    padding: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li {
+    float: none;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
+    padding: 20px 5px 19px 10px;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
+    display: inline-block;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
+    border-top: 1px solid #000;
+  }
+  #block-views-video-landing-header-block .video-header-right {
+    height: 474px;
+    padding-bottom: 0px;
+  }
+  #block-views-video-landing-header-block h2 {
+    font-size: 24px;
+    font-size: 1.5rem;
+  }
+
+  /*CSS end program landing page*/
+  /*css start for special auto page*/
+  .auto-layout-page .itg-top-section .top-colum-1 .droppable, .auto-layout-page .itg-top-section .top-colum-2 .droppable {
+    height: 608px;
+  }
+  .auto-layout-page .itg-top-section .top-colum-3 .droppable {
+    height: 247px;
+  }
+  .auto-layout-page .itg-h450-section .col-md-4 .droppable .widget-wrapper {
+    overflow: auto;
+  }
+
+  /*css end for special auto page*/
 }
 /*End CSS Desktop version*/
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
   #block-itg-layout-manager-header-block .top-nav .main-nav li a {
     padding: 0 15px;
     font-size: 20px;
@@ -919,6 +983,14 @@
   }
   #block-itg-layout-manager-header-sosorry-block .sosory-footer ul li:nth-child(2) {
     border-left: none;
+  }
+
+  #block-views-video-landing-header-block .video-header-left, #block-views-video-landing-header-block .social-likes {
+    width: 100%;
+    float: none;
+  }
+  #block-views-video-landing-header-block .social-likes ul li {
+    float: left;
   }
 }
 @media only screen and (min-width: 640px) {

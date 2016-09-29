@@ -60,7 +60,8 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js');
 
   if ($form_state['step'] == '1') {
-    $ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', 'user/login', array('attributes' => array('target' => '_blank', 'class' => array('')))) . '</div>';
+    $ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', 'user/login', array('attributes' => array('target' => '_blank', 'class' => array('')))) . '</div>'
+        . '<div class="forgot-link">' . l('Forgot password ?', 'forgot-password') . '</div>';
   }
   // Add a wrapper div that will be used by the Form API to update the form using AJAX
   $form['#prefix'] = '<div id="itg_sso_reg_multistep_form">';
@@ -84,8 +85,8 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#type' => 'textfield',
         '#required' => TRUE,
-        '#attributes' => array('placeholder' => t('First Name')),
-        '#prefix' => '<div id="ufname">',
+        '#attributes' => array('placeholder' => t('*First Name')),
+        '#prefix' => '<div class="form-row"><div id="ufname" class="col-xs-6">',
         '#suffix' => '</div>',
       );
 
@@ -94,8 +95,8 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Last Name')),
-        '#prefix' => '<div id="ulname">',
-        '#suffix' => '</div>',
+        '#prefix' => '<div id="ulname" class="col-xs-6">',
+        '#suffix' => '</div></div>',
       );
 
       $form['mail'] = array(
@@ -103,7 +104,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Email')),
-        '#prefix' => '<div id="umail">',
+        '#prefix' => '<div class="form-row"><div id="umail" class="col-xs-6">',
         '#suffix' => '</div>',
       );
 
@@ -113,8 +114,8 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#maxlength' => 10,
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Mobile')),
-        '#prefix' => '<div id="umobile">',
-        '#suffix' => '</div>',
+        '#prefix' => '<div id="umobile" class="col-xs-6">',
+        '#suffix' => '</div></div>',
       );
 
       $form['password'] = array(
@@ -122,9 +123,9 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#id' => 'password',
         '#type' => 'password',
-        '#attributes' => array('placeholder' => t('Password')),
+        '#attributes' => array('placeholder' => t('*Password')),
         '#required' => TRUE,
-        '#prefix' => '<div id="upass">',
+        '#prefix' => '<div class="form-row""><div id="upass" class="col-xs-6">',
         '#suffix' => '</div>',
       );
 
@@ -133,10 +134,10 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#id' => 'password_again',
         '#type' => 'password',
-        '#attributes' => array('placeholder' => t('Re type Password')),
+        '#attributes' => array('placeholder' => t('*Re type Password')),
         '#required' => TRUE,
-        '#prefix' => '<div id="unpass">',
-        '#suffix' => '</div>',
+        '#prefix' => '<div id="unpass" class="col-xs-6">',
+        '#suffix' => '</div></div>',
       );
 
       break;
@@ -183,13 +184,14 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('OTP')),
         '#maxlength' => 4,
-        '#prefix' => '<div id="uotp">',
+        '#prefix' => '<div id="uotp" class="form-row"><div class="col-xs-6">',
+        '#suffix' => '</div>',
       );
 
 
 
       $form['otp_links'] = array(
-        '#markup' => '<div id="otpclickme">Resend OTP</div>',
+        '#markup' => '<div class="col-xs-6"><div id="otpclickme" class="btn-resend">Resend OTP</div></div>',
       );
 
 
@@ -251,7 +253,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   // change butoon value based on step
   if ($form_state['step'] == 1) {
 
-    $button = 'Signup';
+    $button = 'Sign Up';
   }
 
   if ($form_state['step'] == 1) {
@@ -275,6 +277,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       (
       '#type' => 'submit',
       '#value' => t('submit'),
+      '#suffix' => '<div id="skip-link" class="btn-skip">Skip</div>',
       '#ajax' => array
         (
         // We pass in the wrapper we created at the start of the form
@@ -286,14 +289,11 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   }
   
   // add skip link for otp stage
-  if ($form_state['step'] == 2) {
-    $form['skip-link'] = array(
-      '#markup' => '<div id="skip-link">
-      skip
-    </div>
-    ',
-    );
-  }
+//  if ($form_state['step'] == 2) {
+//    $form['skip-link'] = array(
+//      '#suffix' => '<div id="skip-link">skip</div>',
+//    );
+//  }
 
   return $form;
 }

@@ -7759,20 +7759,7 @@ draft-manage-astro',
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-personalization/my-saved-content
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-movie
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -7800,20 +7787,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-personalization/my-saved-content
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-movie
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -7911,20 +7885,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-personalization/my-saved-content
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-movie
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -8078,20 +8039,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-personalization/my-saved-content
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-movie
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -8245,20 +8193,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-personalization/my-saved-content
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-movie
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -8412,20 +8347,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-personalization/my-saved-content
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-movie
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -8579,20 +8501,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-personalization/my-saved-content
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-movie
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -8735,7 +8644,8 @@ sosorry/*',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -8750,7 +8660,8 @@ itg-layout-manager/section',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -8765,7 +8676,8 @@ itg-layout-manager/section',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -8780,7 +8692,8 @@ itg-layout-manager/section',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9049,7 +8962,8 @@ sosorry/*',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9064,7 +8978,8 @@ itg-layout-manager/section',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9079,7 +8994,8 @@ itg-layout-manager/section',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9094,7 +9010,8 @@ itg-layout-manager/section',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9331,9 +9248,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9346,9 +9264,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9361,9 +9280,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9376,9 +9296,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9391,9 +9312,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9406,9 +9328,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9421,9 +9344,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9436,9 +9360,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9451,9 +9376,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9466,9 +9392,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9481,9 +9408,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9496,9 +9424,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9511,9 +9440,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9526,9 +9456,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9541,9 +9472,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9556,9 +9488,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9571,9 +9504,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9586,9 +9520,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9601,9 +9536,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -9616,9 +9552,10 @@ itg-layout-manager/section',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
+  'visibility' => 1,
   'pages' => 'itg-layout-manager/home
-itg-layout-manager/section',
+itg-layout-manager/section
+itg-layout-manager/special',
   'title' => '',
   'cache' => 8,
 );
@@ -10916,19 +10853,7 @@ sosorry/*',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-taxonomy/term/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -11040,19 +10965,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -11308,19 +11221,7 @@ node/*/edit',
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-taxonomy/term/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -11432,19 +11333,7 @@ anchors-list',
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -11672,19 +11561,7 @@ node/*/edit',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-taxonomy/term/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -11796,19 +11673,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -12064,19 +11929,7 @@ node/*/edit',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-taxonomy/term/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -12188,19 +12041,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -12456,19 +12297,7 @@ node/*/edit',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-taxonomy/term/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -12580,19 +12409,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -12848,19 +12665,7 @@ node/*/edit',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-taxonomy/term/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -12972,19 +12777,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -13240,19 +13033,7 @@ node/*/edit',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-taxonomy/term/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -13364,19 +13145,7 @@ anchors-list',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
-user/*
-<front>
-snappost
-personalization
-personalization/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-anchors-list
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => 1,
 );
@@ -17692,7 +17461,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17715,7 +17487,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17736,7 +17511,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17759,7 +17537,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17780,7 +17561,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17803,7 +17587,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17824,7 +17611,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17847,7 +17637,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17868,7 +17661,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17891,7 +17687,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17912,7 +17711,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17935,7 +17737,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17956,7 +17761,10 @@ user/*
 tv-show
 tv-show/*
 <front>
-movie',
+movie
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17979,7 +17787,10 @@ movie
 tv-show/*
 <front>
 sosorry
-sosorry/*',
+sosorry/*
+redeem-points
+cart
+checkout',
   'title' => '',
   'cache' => 8,
 );
@@ -17993,21 +17804,7 @@ sosorry/*',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'personalization
-personalization/*
-user
-user/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-programmes
-videos
-<front>
-itg-survey/*
-itg-survey
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -18021,21 +17818,7 @@ movie',
   'region' => 'sidebar_second',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'personalization
-personalization/*
-user
-user/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-programmes
-videos
-<front>
-itg-survey/*
-itg-survey
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -18049,21 +17832,7 @@ movie',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'personalization
-personalization/*
-user
-user/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-programmes
-videos
-<front>
-itg-survey/*
-itg-survey
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -18077,21 +17846,7 @@ movie',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'personalization
-personalization/*
-user
-user/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-programmes
-videos
-<front>
-itg-survey/*
-itg-survey
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -18105,21 +17860,7 @@ movie',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'personalization
-personalization/*
-user
-user/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-programmes
-videos
-<front>
-itg-survey/*
-itg-survey
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -18133,21 +17874,7 @@ movie',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'personalization
-personalization/*
-user
-user/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-programmes
-videos
-<front>
-itg-survey/*
-itg-survey
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -18161,21 +17888,7 @@ movie',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'personalization
-personalization/*
-user
-user/*
-tv-show
-tv-show/*
-calendar/*/*/magazine.html
-sosorry
-sosorry/*
-programmes
-videos
-<front>
-itg-survey/*
-itg-survey
-movie',
+  'pages' => '',
   'title' => '',
   'cache' => -1,
 );
@@ -20118,7 +19831,7 @@ sosorry/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'sosorry
@@ -20148,7 +19861,7 @@ sosorry/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'sosorry
@@ -20163,7 +19876,7 @@ sosorry/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'sosorry
@@ -20178,7 +19891,7 @@ sosorry/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'sosorry
@@ -20193,7 +19906,7 @@ sosorry/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'sosorry
@@ -20208,12 +19921,1804 @@ sosorry/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'sosorry
 sosorry/*',
   'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1393,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_news',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1394,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_videos',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1395,
+  'module' => 'views',
+  'delta' => 'yearender-block_1',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1396,
+  'module' => 'views',
+  'delta' => 'yearender-block_2',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1397,
+  'module' => 'views',
+  'delta' => 'auto-block_1',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1398,
+  'module' => 'views',
+  'delta' => 'auto-block_2',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1399,
+  'module' => 'views',
+  'delta' => 'auto-block_3',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1400,
+  'module' => 'views',
+  'delta' => 'auto-block_4',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1401,
+  'module' => 'views',
+  'delta' => 'auto-block_5',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1402,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_news',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1403,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_videos',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1404,
+  'module' => 'views',
+  'delta' => 'yearender-block_1',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1405,
+  'module' => 'views',
+  'delta' => 'yearender-block_2',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1406,
+  'module' => 'views',
+  'delta' => 'auto-block_1',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1407,
+  'module' => 'views',
+  'delta' => 'auto-block_2',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1408,
+  'module' => 'views',
+  'delta' => 'auto-block_3',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1409,
+  'module' => 'views',
+  'delta' => 'auto-block_4',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1410,
+  'module' => 'views',
+  'delta' => 'auto-block_5',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1411,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_news',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1412,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_videos',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1413,
+  'module' => 'views',
+  'delta' => 'yearender-block_1',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1414,
+  'module' => 'views',
+  'delta' => 'yearender-block_2',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1415,
+  'module' => 'views',
+  'delta' => 'auto-block_1',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1416,
+  'module' => 'views',
+  'delta' => 'auto-block_2',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1417,
+  'module' => 'views',
+  'delta' => 'auto-block_3',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1418,
+  'module' => 'views',
+  'delta' => 'auto-block_4',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1419,
+  'module' => 'views',
+  'delta' => 'auto-block_5',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1420,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_news',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1421,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_videos',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1422,
+  'module' => 'views',
+  'delta' => 'yearender-block_1',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1423,
+  'module' => 'views',
+  'delta' => 'yearender-block_2',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1424,
+  'module' => 'views',
+  'delta' => 'auto-block_1',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1425,
+  'module' => 'views',
+  'delta' => 'auto-block_2',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1426,
+  'module' => 'views',
+  'delta' => 'auto-block_3',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1427,
+  'module' => 'views',
+  'delta' => 'auto-block_4',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1428,
+  'module' => 'views',
+  'delta' => 'auto-block_5',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1429,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_news',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1430,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_videos',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1431,
+  'module' => 'views',
+  'delta' => 'yearender-block_1',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1432,
+  'module' => 'views',
+  'delta' => 'yearender-block_2',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1433,
+  'module' => 'views',
+  'delta' => 'auto-block_1',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1434,
+  'module' => 'views',
+  'delta' => 'auto-block_2',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1435,
+  'module' => 'views',
+  'delta' => 'auto-block_3',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1436,
+  'module' => 'views',
+  'delta' => 'auto-block_4',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1437,
+  'module' => 'views',
+  'delta' => 'auto-block_5',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1438,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_news',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1439,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_videos',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1440,
+  'module' => 'views',
+  'delta' => 'yearender-block_1',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1441,
+  'module' => 'views',
+  'delta' => 'yearender-block_2',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1442,
+  'module' => 'views',
+  'delta' => 'auto-block_1',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1443,
+  'module' => 'views',
+  'delta' => 'auto-block_2',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1444,
+  'module' => 'views',
+  'delta' => 'auto-block_3',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1445,
+  'module' => 'views',
+  'delta' => 'auto-block_4',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1446,
+  'module' => 'views',
+  'delta' => 'auto-block_5',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1447,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_news',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1448,
+  'module' => 'itg_widget',
+  'delta' => 'yearende_left_top_videos',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1449,
+  'module' => 'views',
+  'delta' => 'yearender-block_1',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1450,
+  'module' => 'views',
+  'delta' => 'yearender-block_2',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1451,
+  'module' => 'views',
+  'delta' => 'auto-block_1',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1452,
+  'module' => 'views',
+  'delta' => 'auto-block_2',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1453,
+  'module' => 'views',
+  'delta' => 'auto-block_3',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1454,
+  'module' => 'views',
+  'delta' => 'auto-block_4',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1455,
+  'module' => 'views',
+  'delta' => 'auto-block_5',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1456,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_cart_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1457,
+  'module' => 'itg_widget',
+  'delta' => 'auto_reviews',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1458,
+  'module' => 'itg_widget',
+  'delta' => 'so_sorry_front_politoons',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1459,
+  'module' => 'itg_widget',
+  'delta' => 'tech_reviews',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1460,
+  'module' => 'itg_widget',
+  'delta' => 'tech_most_read',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1461,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'personalization',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1462,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1463,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1464,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1465,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1466,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1467,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_1',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1468,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_2',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'personalization',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1469,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_3',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'personalization',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1470,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_3',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1471,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_3',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1472,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_3',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1473,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_3',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1474,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_3',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1475,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_3',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1476,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_2',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1477,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_2',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1478,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_2',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1479,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_2',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1480,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_2',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1481,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_2',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'redeem-points',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1482,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_cart_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1483,
+  'module' => 'itg_widget',
+  'delta' => 'auto_reviews',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1484,
+  'module' => 'itg_widget',
+  'delta' => 'so_sorry_front_politoons',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1485,
+  'module' => 'itg_widget',
+  'delta' => 'tech_reviews',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1486,
+  'module' => 'itg_widget',
+  'delta' => 'tech_most_read',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1487,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_cart_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1488,
+  'module' => 'itg_widget',
+  'delta' => 'auto_reviews',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1489,
+  'module' => 'itg_widget',
+  'delta' => 'so_sorry_front_politoons',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1490,
+  'module' => 'itg_widget',
+  'delta' => 'tech_reviews',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1491,
+  'module' => 'itg_widget',
+  'delta' => 'tech_most_read',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1492,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_cart_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1493,
+  'module' => 'itg_widget',
+  'delta' => 'auto_reviews',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1494,
+  'module' => 'itg_widget',
+  'delta' => 'so_sorry_front_politoons',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1495,
+  'module' => 'itg_widget',
+  'delta' => 'tech_reviews',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1496,
+  'module' => 'itg_widget',
+  'delta' => 'tech_most_read',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1497,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_cart_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1498,
+  'module' => 'itg_widget',
+  'delta' => 'auto_reviews',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1499,
+  'module' => 'itg_widget',
+  'delta' => 'so_sorry_front_politoons',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1500,
+  'module' => 'itg_widget',
+  'delta' => 'tech_reviews',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1501,
+  'module' => 'itg_widget',
+  'delta' => 'tech_most_read',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1502,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_cart_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1503,
+  'module' => 'itg_widget',
+  'delta' => 'auto_reviews',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1504,
+  'module' => 'itg_widget',
+  'delta' => 'so_sorry_front_politoons',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1505,
+  'module' => 'itg_widget',
+  'delta' => 'tech_reviews',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1506,
+  'module' => 'itg_widget',
+  'delta' => 'tech_most_read',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1507,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_cart_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1508,
+  'module' => 'itg_widget',
+  'delta' => 'auto_reviews',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1509,
+  'module' => 'itg_widget',
+  'delta' => 'so_sorry_front_politoons',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sosorry
+sosorry/*',
+  'title' => '<none>',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1510,
+  'module' => 'itg_widget',
+  'delta' => 'tech_reviews',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1511,
+  'module' => 'itg_widget',
+  'delta' => 'tech_most_read',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1512,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_loyalty_reward_header',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points
+cart
+checkout
+order',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1513,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_loyalty_reward_header',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'my_cart',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points
+cart
+checkout
+order',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1514,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_loyalty_reward_header',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points
+cart
+checkout
+order',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1515,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_loyalty_reward_header',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points
+cart
+checkout
+order',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1516,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_loyalty_reward_header',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points
+cart
+checkout
+order',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1517,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_loyalty_reward_header',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points
+cart
+checkout
+order',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1518,
+  'module' => 'itg_loyalty_reward',
+  'delta' => 'itg_loyalty_reward_header',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'redeem-points
+cart
+checkout
+order',
+  'title' => '',
   'cache' => 8,
 );
   $export['block_custom'][] = array(

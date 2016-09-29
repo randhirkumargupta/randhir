@@ -46,7 +46,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <?php endif; ?>
           </div>
         <?php endif; ?>
-
+        <!--  
         <?php if ($secondary_menu): ?>
           <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
             <?php
@@ -64,7 +64,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             ?>
           </nav>
         <?php endif; ?>
-
+        -->
         <?php print render($page['header']); ?>
         <?php
           // photo_carousel widget
@@ -224,7 +224,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
               <div class="sidebar-section-photo">
                 <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad droppable"></div>
+                      <div class="sidebar-ad droppable"><?php print $itg_ad['200*200_section_photo_right_bar_ad1'];?></div>
                     </div>              
                   </div>
                 <div class="itg-widget">
@@ -313,7 +313,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                 </div>
                 <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad droppable"></div>
+                      <div class="sidebar-ad droppable"><?php print $itg_ad['200*200_section_photo_right_bar_ad2'];?></div>
                     </div>              
                   </div>
               </div>
