@@ -858,9 +858,21 @@
         .top-colum-3{
             .droppable{
                 height: 247px;
+                .widget-wrapper{
+                    overflow: auto;
+                }
             }
         }
-    }  
+    }
+    .itg-h450-section{        
+        .col-md-4{
+            .droppable{                
+                .widget-wrapper{
+                    overflow: auto;
+                }
+            }
+        }        
+    }
 }
 /*css end for special auto page*/
 
