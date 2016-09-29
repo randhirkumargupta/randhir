@@ -3999,6 +3999,7 @@ div.node{
       position: absolute;
       width: 134px;
       z-index: 99;
+      left: 15px;
     }
     .ajax-progress{
       display: none;
@@ -7218,6 +7219,11 @@ div.node{
   .form-type-checkboxes > label + div{
     padding-left: 200px;
   }
+  .form-type-textfield label + .form-text + span.error, 
+  .form-type-textfield label + #autocomplete + .form-text + span.error, 
+  .form-type-textfield label + .form-text + div.description + span.error{
+    padding-left: 200px;
+  }
   .form-actions{
       background: none;
       border: none;
@@ -7327,6 +7333,11 @@ div.node{
   .date-combo > legend + div, 
   .form-type-hierarchical-select > label + div, 
   .form-type-checkboxes > label + div{
+    padding-left: 200px;
+  }
+  .form-type-textfield label + .form-text + span.error, 
+  .form-type-textfield label + #autocomplete + .form-text + span.error, 
+  .form-type-textfield label + .form-text + div.description + span.error{
     padding-left: 200px;
   }
   #browse-image .form-type-managed-file, #ExpertChunk .form-type-managed-file{
@@ -7453,6 +7464,9 @@ div.node{
             }
           }
         }
+        div.description {
+          left: 175px;
+        }
       }
     }
     & + div.clearfix, & + div.description + div.clearfix{
@@ -7540,6 +7554,11 @@ div.node{
       &+div{
         padding: 0;
       }
+    }
+    .form-type-textfield label + .form-text + span.error, 
+    .form-type-textfield label + #autocomplete + .form-text + span.error, 
+    .form-type-textfield label + .form-text + div.description + span.error{
+      padding-left: 0;
     }
     .date-no-float{
       width: 100%;
@@ -7691,6 +7710,31 @@ div.node{
           }
         }
       }
+    }
+    .form-field-name-field-poll-start-date{
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+      .date-combo{
+        margin: 0;
+      }
+      .date-no-float .form-type-date-popup .date-padding .form-type-textfield{
+        width: 100%;
+      }
+    }
+    .form-field-name-field-story-tv-time{
+      display: inline-block;
+      vertical-align: top;
+      width: 48%;
+      .form-type-select{
+        margin: 0;
+      }
+      .form-item{
+        padding-left: 0;
+        > label{
+          display: block;
+        }
+      } 
     }
   }
   .metatags-and-remarks{
@@ -7964,11 +8008,6 @@ div.node{
     }
   }
   @extend .itg-node-form;
-  .category-manager-basic-details{
-    h2{
-      
-    }
-  }
   .category-manager-selection-details,
   #edit-relations,
   .cotegory-manager-settings{

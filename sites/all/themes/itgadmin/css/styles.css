@@ -4341,6 +4341,7 @@ div.node #comments h2 {
   position: absolute;
   width: 134px;
   z-index: 99;
+  left: 15px;
 }
 #SocialMedia .form-field-type-image .ajax-progress, #SocialMedia .form-field-type-file .ajax-progress {
   display: none;
@@ -7277,6 +7278,13 @@ div.node #comments h2 {
 .node-category-form .form-type-checkboxes > label + div {
   padding-left: 200px;
 }
+.itg-node-form .form-type-textfield label + .form-text + span.error, .node-category-form .form-type-textfield label + .form-text + span.error,
+.itg-node-form .form-type-textfield label + #autocomplete + .form-text + span.error,
+.node-category-form .form-type-textfield label + #autocomplete + .form-text + span.error,
+.itg-node-form .form-type-textfield label + .form-text + div.description + span.error,
+.node-category-form .form-type-textfield label + .form-text + div.description + span.error {
+  padding-left: 200px;
+}
 .itg-node-form .form-actions, .node-category-form .form-actions {
   background: none;
   border: none;
@@ -7387,6 +7395,11 @@ div.node #comments h2 {
 .node-story-form .date-combo > legend + div,
 .node-story-form .form-type-hierarchical-select > label + div,
 .node-story-form .form-type-checkboxes > label + div {
+  padding-left: 200px;
+}
+.node-story-form .form-type-textfield label + .form-text + span.error,
+.node-story-form .form-type-textfield label + #autocomplete + .form-text + span.error,
+.node-story-form .form-type-textfield label + .form-text + div.description + span.error {
   padding-left: 200px;
 }
 .node-story-form #browse-image .form-type-managed-file, .node-story-form #ExpertChunk .form-type-managed-file {
@@ -7527,6 +7540,9 @@ div.node #comments h2 {
   left: 240px;
   top: 4px;
 }
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file div.description {
+  left: 175px;
+}
 .node-story-form [id*="field-story-template-buzz-values"] + div.clearfix, .node-story-form [id*="field-story-template-buzz-values"] + div.description + div.clearfix {
   bottom: 15px;
   position: absolute;
@@ -7595,6 +7611,11 @@ div.node #comments h2 {
 }
 .node-story-form .itg-sidebar-form fieldset.date-combo > legend + div {
   padding: 0;
+}
+.node-story-form .itg-sidebar-form .form-type-textfield label + .form-text + span.error,
+.node-story-form .itg-sidebar-form .form-type-textfield label + #autocomplete + .form-text + span.error,
+.node-story-form .itg-sidebar-form .form-type-textfield label + .form-text + div.description + span.error {
+  padding-left: 0;
 }
 .node-story-form .itg-sidebar-form .date-no-float {
   width: 100%;
@@ -7720,6 +7741,31 @@ div.node #comments h2 {
 .node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file > .form-submit[value="Remove"] {
   left: 290px;
   top: 22px;
+}
+.node-story-form .itg-sidebar-form .form-field-name-field-poll-start-date {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+.node-story-form .itg-sidebar-form .form-field-name-field-poll-start-date .date-combo {
+  margin: 0;
+}
+.node-story-form .itg-sidebar-form .form-field-name-field-poll-start-date .date-no-float .form-type-date-popup .date-padding .form-type-textfield {
+  width: 100%;
+}
+.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time {
+  display: inline-block;
+  vertical-align: top;
+  width: 48%;
+}
+.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-type-select {
+  margin: 0;
+}
+.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-item {
+  padding-left: 0;
+}
+.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-item > label {
+  display: block;
 }
 .node-story-form .metatags-and-remarks {
   background-color: #d9d9d9;
