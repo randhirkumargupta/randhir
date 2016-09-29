@@ -50,6 +50,18 @@
                         $(this).removeClass("gray-bg-layout");
                         // content block id for display content widget
                         var block_name = $(this).find('.data-holder').attr('id');
+                        //  content block style for display content widget
+                        
+                        var splitewidgitname=widget_name.split('#');
+                        if(splitewidgitname[0]=='section_wise_order') {
+                            var widget_style = $(this).find('.data-holder').attr('widget-style');
+                            if(widget_style!="") {
+                               widget_info='custom|'+widget_style;
+                            }
+                            else {
+                              widget_info='custom|common-category-style';  
+                            }
+                        }
                         //alert(block_name);
                         // tamplate section value
                         var section_name = $('#edit-section').val();
