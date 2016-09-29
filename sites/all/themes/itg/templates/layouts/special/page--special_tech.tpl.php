@@ -91,7 +91,7 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?> auto-layout-page">
+<div class="itg-layout-container <?php echo $itg_class; ?> auto-layout-page tech-layout-page">
     <?php if(isset($widget_data['big_story'])) : ?>
     <div class="row">
         <div class="col-md-12">
@@ -177,25 +177,6 @@ if ($theme != 'itgadmin') {
                     <div class="ad-widget">
                       <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']);?></div>
                     </div>
-<!--                    <div class="droppable <?php //print $gray_bg_layout; ?>">
-                      <div class="widget-wrapper <?php //print $widget_data['itg-block-4']['widget_name']; ?>">
-                        <?php //if ($theme != 'itgadmin' || isset($preview)) { ?>
-                          <span class="widget-title"><?php //print $widget_data['itg-block-4']['block_title']; ?></span>
-                        <?php //} ?>
-                         for admin  
-                        <?php //if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                          <div class="widget-settings">
-                            <div class="widget-title-wrapper">
-                              <span class="widget-title" data-id="itg-block-4"><?php //print $widget_data['itg-block-4']['block_title']; ?></span>
-                              <input type="text" maxlength="255" size="30" value="<?php //print $widget_data['itg-block-4']['block_title']; ?>" name="itg-block-4" class="block_title_id" placeholder="Enter Title" />
-                            </div>
-                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                          </div>
-                        <?php //} ?>  
-
-                        <div class="data-holder" id="itg-block-4"><?php //print $widget_data['itg-block-4']['widget']; ?></div>
-                      </div>             
-                    </div>               -->
                   </div>
                 </div>
                     <div class="itg-widget trending-list">
@@ -214,7 +195,7 @@ if ($theme != 'itgadmin') {
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                 </div>  
                               <?php } ?>                   
-                            <div class="data-holder" widget-style="auto-road-trip" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                            <div class="data-holder" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
                           </div>
                         </div>
                       </div>
@@ -303,6 +284,88 @@ if ($theme != 'itgadmin') {
     </div>
   <?php } ?>
   
+  
+  
+  <?php if (isset($widget_data['itg-block-10']['widget_name']) || isset($widget_data['itg-block-11']['widget_name']) || isset($widget_data['itg-block-12']['widget_name']) || $theme == 'itgadmin') { ?>
+    <div class="row itg-common-section">
+
+        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name'].$widget_data['itg-block-10']['widget_display_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-10']['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data['itg-block-10']['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="itg-block-10"><?php print $widget_data['itg-block-10']['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-10']['block_title']; ?>" name="itg-block-10" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="itg-block-10"><?php print $widget_data['itg-block-10']['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>  
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data['itg-block-11']['widget_name'].$widget_data['itg-block-11']['widget_display_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="itg-block-11"><?php print $widget_data['itg-block-11']['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-11']['block_title']; ?>" name="itg-block-11" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="itg-block-11"><?php print $widget_data['itg-block-11']['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data['itg-block-12']['widget_name'].$widget_data['itg-block-12']['widget_display_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-12']['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data['itg-block-12']['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="itg-block-12"><?php print $widget_data['itg-block-12']['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-12']['block_title']; ?>" name="itg-block-12" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="itg-block-12"><?php print $widget_data['itg-block-12']['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>          
+        </div>
+
+    </div>
+  <?php } ?>
+  
+  
+  
   <!--End of Common section-->
     
   <!--Don't miss and Ad section starts here-->
@@ -386,7 +449,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-9" widget-style="auto-tips-and-tricks"><?php print $widget_data['itg-block-9']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-9"><?php print $widget_data['itg-block-9']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  
@@ -394,6 +457,114 @@ if ($theme != 'itgadmin') {
      </div>
   <?php } ?>
   <!--Photo slider and Watch now section starts here--> 
+  
+<!--  Tech 2nd last row start here-->
+ <?php if (isset($widget_data['itg-block-13']['widget_name']) || isset($widget_data['itg-block-14']['widget_name']) || $theme == 'itgadmin') { ?>
+    <div class="row itg-h385-section">
+        <div class="col-md-8 col-sm-12 col-xs-12 mt-50">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data['itg-block-13']['widget_name'].$widget_data['itg-block-13']['widget_display_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-13']['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data['itg-block-13']['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="itg-block-13"><?php print $widget_data['itg-block-13']['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-13']['block_title']; ?>" name="itg-block-13" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="itg-block-13"><?php print $widget_data['itg-block-13']['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>  
+        </div>
+         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data['itg-block-14']['widget_name'].$widget_data['itg-block-14']['widget_display_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-14']['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data['itg-block-14']['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="itg-block-14"><?php print $widget_data['itg-block-14']['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-14']['block_title']; ?>" name="itg-block-14" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="itg-block-14"><?php print $widget_data['itg-block-14']['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>  
+        </div>
+     </div>
+  <?php } ?>
+  <!--Tech 2nd last row End here-->
+  
+  <!--Tech last row start here-->
+ <?php if (isset($widget_data['itg-block-15']['widget_name']) || isset($widget_data['itg-block-16']['widget_name']) || $theme == 'itgadmin') { ?>
+    <div class="row itg-h450-section">
+        <div class="col-md-8 col-sm-12 col-xs-12 mt-50">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data['itg-block-15']['widget_name'].$widget_data['itg-block-15']['widget_display_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-15']['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data['itg-block-15']['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="itg-block-15"><?php print $widget_data['itg-block-15']['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-15']['block_title']; ?>" name="itg-block-15" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="itg-block-15"><?php print $widget_data['itg-block-15']['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>  
+        </div>
+         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
+            <div class="itg-widget">
+              <div class="droppable <?php print $gray_bg_layout; ?>">
+               <div class="widget-wrapper <?php print $widget_data['itg-block-16']['widget_name'].$widget_data['itg-block-16']['widget_display_name']; ?>">
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-16']['block_title'])) { ?>
+                     <span class="widget-title"><?php print $widget_data['itg-block-16']['block_title']; ?></span>
+                  <?php } ?>
+                     <!-- for admin  -->
+                  <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <span class="widget-title" data-id="itg-block-16"><?php print $widget_data['itg-block-16']['block_title']; ?></span>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-16']['block_title']; ?>" name="itg-block-16" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    </div>
+                   <?php } ?>  
+                  
+                    <div class="data-holder" id="itg-block-16"><?php print $widget_data['itg-block-16']['widget']; ?></div>
+                  </div>             
+                </div>               
+            </div>  
+        </div>
+     </div>
+  <?php } ?>
+  <!--  Tech last row End here--> 
+  
+  
 </div>
 
   <?php //print render($page['content']); ?>

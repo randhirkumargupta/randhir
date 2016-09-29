@@ -375,7 +375,7 @@ img{
     .top-block{
         .top-colum-1, .top-colum-2, .top-colum-3{
             padding: 0 15px;
-            min-height: 672px;
+/*            min-height: 672px;*/
         }
         .top-colum-1{
             @include float(left);
@@ -750,7 +750,7 @@ img{
             }
         }
     }
-    .itg-h450-section{        
+/*    .itg-h450-section{        
         .col-md-4{
             .droppable{                
                 .widget-wrapper{
@@ -758,7 +758,7 @@ img{
                 }
             }
         }        
-    }
+    }*/
     .widget-wrapper{
         &.auto-block_2{
             border: 1px solid $border-color;
