@@ -1230,6 +1230,18 @@ footer{
 }
 /*End CSS section story Home page*/
 /*Start CSS trending-videos Home  page*/
+.video-icon{
+    @extend .pos-rel;
+    &:after{
+        background: url(../images/video-icon-small.png) no-repeat;
+        content:"";
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
+    }
+}
 .trending-videos{
     @extend .list-none;
     border: 1px solid $border-color;
@@ -1237,16 +1249,7 @@ footer{
     @include listing-with-image(trending-videos-list,left,10px,pic,title);
     li{
         .pic{
-            @extend .pos-rel;
-            &:after{
-                background: url(../images/video-icon-small.png) no-repeat;
-                content:"";
-                width: 18px;
-                height: 18px;
-                position: absolute;
-                left: 5px;
-                bottom: 5px;
-            }
+            @extend .video-icon;
         }
         &+li{
             border-top: 1px solid $border-color;
@@ -1424,7 +1427,7 @@ footer{
 }
 /*End Search page css*/
 /*Start Dont miss Home page css*/
-.dont_miss{
+.dont_miss, .tech_reviews, .auto_reviews{
     .widget-title{
         @include pos(relative);
         @include display-inline;
@@ -4150,6 +4153,13 @@ footer{
         .droppable {
             height: 385px;
         }
+        .section_wise_order-buying-guid{
+            .widget-title{
+                @include pos(absolute);                
+                top: 10px;
+                left: 10px;
+            }
+        }
     }  
     .itg-h396-section{        
         .droppable {
@@ -4157,7 +4167,7 @@ footer{
             background: #f3f3f3;
             padding: 10px;
         }
-        .tech-block_6{            
+        .section_wise_order-in-depth{            
             .widget-title{
                 @include pos(absolute);                
                 top: 10px;
@@ -4168,6 +4178,9 @@ footer{
 }
 .tech-layout-page{
     .buying-guides{
+        a{
+            display: block;
+        }
         h3{
             padding: 10px 0;
             border-bottom: 1px solid $border-color;
@@ -4177,10 +4190,11 @@ footer{
             @extend .list-none;
             li{
                 span{
-                    color: #b00202;
-                    @include font(12px);
-                    margin-bottom: 5px;
-                    display: block;
+                   a{
+                       color: #b00202;
+                       @include font(12px);
+                       margin-bottom: 5px;                       
+                    }
                 }
                 &:first-child{
                     padding-bottom:15px;
@@ -4214,6 +4228,31 @@ footer{
             }
         }
     }
+    /*Start photo section slider*/
+    .tech-block_5{
+        a{
+            color:#fff;
+        }
+        .flexslider .flex-direction-nav{
+            display: block;
+        }       
+        .flexslider .slides li{
+            &:hover a{
+                color: #fff;
+            }
+            .detail .flex-caption{
+                @include font(18px,24px,$itg-font-medium);  
+                padding: 10px;   
+                min-height: 68px;
+                max-height: auto;
+                overflow: initial;            
+            }   
+        }
+        .flexslider .slides li .detail .flex-count{
+            @include pos(absolute,null,null,78px,0px);
+        }
+    }
+    /*End photo section slider*/
 }
 
 /*CSS End special tech page */

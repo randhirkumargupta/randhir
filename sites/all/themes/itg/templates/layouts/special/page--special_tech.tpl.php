@@ -91,7 +91,7 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?> auto-layout-page tech-layout-page">
+<div class="itg-layout-container <?php echo $itg_class; ?> tech-layout-page">
     <?php if(isset($widget_data['big_story'])) : ?>
     <div class="row">
         <div class="col-md-12">

@@ -196,7 +196,7 @@ img {
   float: right;
 }
 
-.pos-rel, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox input[type="checkbox"], #comments .comment, .form-managed-file, .trending-videos li .pic, .top-takes-video-container ul li.top-takes-video .pic, .watch-right-now-video ul li.watch-right-now-list .pic, .rhs-section-ordering ul li.rhs-section-item-container .pic {
+.pos-rel, .answer-container .form-type-checkboxes div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox, .answer-container div.rating .form-type-checkbox input[type="checkbox"], #comments .comment, .form-managed-file, .video-icon, .trending-videos li .pic, .top-takes-video-container ul li.top-takes-video .pic, .watch-right-now-video ul li.watch-right-now-list .pic, .rhs-section-ordering ul li.rhs-section-item-container .pic {
   position: relative;
 }
 
@@ -1469,6 +1469,16 @@ footer .footer-copyright {
 
 /*End CSS section story Home page*/
 /*Start CSS trending-videos Home  page*/
+.video-icon:after, .trending-videos li .pic:after {
+  background: url(../images/video-icon-small.png) no-repeat;
+  content: "";
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+}
+
 .trending-videos {
   border: 1px solid #dddddd;
   padding-top: 10px;
@@ -1488,15 +1498,6 @@ footer .footer-copyright {
   font-size: 0.875rem;
   line-height: 19px;
   color: #323232;
-}
-.trending-videos li .pic:after {
-  background: url(../images/video-icon-small.png) no-repeat;
-  content: "";
-  width: 18px;
-  height: 18px;
-  position: absolute;
-  left: 5px;
-  bottom: 5px;
 }
 .trending-videos li + li {
   border-top: 1px solid #dddddd;
@@ -1773,7 +1774,7 @@ footer .footer-copyright {
 
 /*End Search page css*/
 /*Start Dont miss Home page css*/
-.dont_miss .widget-title {
+.dont_miss .widget-title, .tech_reviews .widget-title, .auto_reviews .widget-title {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -5522,28 +5523,39 @@ footer .footer-copyright {
 .itg-layout-container .itg-h385-section .droppable {
   height: 385px;
 }
+.itg-layout-container .itg-h385-section .section_wise_order-buying-guid .widget-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
 .itg-layout-container .itg-h396-section .droppable {
   height: 396px;
   background: #f3f3f3;
   padding: 10px;
 }
-.itg-layout-container .itg-h396-section .tech-block_6 .widget-title {
+.itg-layout-container .itg-h396-section .section_wise_order-in-depth .widget-title {
   position: absolute;
   top: 10px;
   left: 10px;
 }
 
+.tech-layout-page {
+  /*Start photo section slider*/
+  /*End photo section slider*/
+}
+.tech-layout-page .buying-guides a {
+  display: block;
+}
 .tech-layout-page .buying-guides h3 {
   padding: 10px 0;
   border-bottom: 1px solid #dddddd;
   margin-bottom: 15px;
 }
-.tech-layout-page .buying-guides ul li span {
+.tech-layout-page .buying-guides ul li span a {
   color: #b00202;
   font-size: 12px;
   font-size: 0.75rem;
   margin-bottom: 5px;
-  display: block;
 }
 .tech-layout-page .buying-guides ul li:first-child {
   padding-bottom: 15px;
@@ -5566,6 +5578,30 @@ footer .footer-copyright {
   float: left;
   margin-bottom: 0;
   margin-right: 10px;
+}
+.tech-layout-page .tech-block_5 a {
+  color: #fff;
+}
+.tech-layout-page .tech-block_5 .flexslider .flex-direction-nav {
+  display: block;
+}
+.tech-layout-page .tech-block_5 .flexslider .slides li:hover a {
+  color: #fff;
+}
+.tech-layout-page .tech-block_5 .flexslider .slides li .detail .flex-caption {
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 24px;
+  padding: 10px;
+  min-height: 68px;
+  max-height: auto;
+  overflow: initial;
+}
+.tech-layout-page .tech-block_5 .flexslider .slides li .detail .flex-count {
+  position: absolute;
+  bottom: 78px;
+  left: 0px;
 }
 
 /*CSS End special tech page */
