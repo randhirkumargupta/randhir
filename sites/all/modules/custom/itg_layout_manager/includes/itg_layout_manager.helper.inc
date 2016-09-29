@@ -87,7 +87,7 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   $widget_info = explode('|', $widget_info);
   
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
-    return create_setion_widgets($filter_url);
+    return create_setion_widgets($filter_url, $widget_info[1]);
   }
   elseif (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
     return create_setion_widget2($filter_url);
@@ -354,7 +354,7 @@ function get_widgets_poll_list() {
  * @param $section_id
  * @return array
  */
-function create_setion_widgets($section_id) {
+function create_setion_widgets($section_id, $widget_style = NULL) {
   module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
   // value is hardcoded need to be change for dyanamic functionality
   $info['section'] = $section_id; // tid of section
@@ -363,9 +363,9 @@ function create_setion_widgets($section_id) {
   $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
   $block['subject'] = t('Section wise ordering from custom table');
   
-  $data = itg_widget_section_wise_ordering_from_custom_table($info);
+  $data = itg_widget_section_wise_ordering_from_custom_table($info, $widget_style);
   
-  return theme("section_wise_ordering", array("data" => $data));
+  return theme("section_wise_ordering", array("data" => $data, "widget_style" => $widget_style));
 }
 
 /**
