@@ -1799,3 +1799,64 @@ body.has-cart-popup {
   padding: 6px 20px 5px;
   text-transform: uppercase;
 }
+
+/* CSS for forgot password */
+[id*="itg_sso_reg_multistep_form"] ul.messages__list {
+  padding-left: 18px;
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+[id*="itg_user_forgot_password_multistep_form"] {
+  margin: 0 -15px;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-text {
+  width: 100%;
+  height: 36px;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper {
+  padding: 15px;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  position: relative;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper .form-submit, [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .btn-skip {
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 16px;
+  height: 38px;
+  width: 200px;
+  text-align: center;
+  line-height: 35px;
+  margin-right: 20px;
+  text-transform: capitalize;
+  display: inline-block;
+  vertical-align: top;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper .ajax-progress {
+  left: 217px;
+  top: 20px;
+  position: absolute;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper .ajax-progress .message {
+  display: none;
+}
+[id*="itg_user_forgot_password_multistep_form"] #ufname {
+  padding: 0 15px;
+}
+[id*="itg_user_forgot_password_multistep_form"] #otpclickme {
+  cursor: pointer;
+  display: inline-block;
+  line-height: 36px;
+  vertical-align: middle;
+}
+[id*="itg_user_forgot_password_multistep_form"] #otp_success {
+  color: #009c00;
+  display: inline-block;
+  padding: 15px 15px 0;
+  vertical-align: top;
+  width: 100%;
+}
