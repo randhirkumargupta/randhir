@@ -4085,7 +4085,7 @@ footer{
 /*CSS start special auto page */
 .auto-layout-page{
     .widget-wrapper{
-        &.auto-block_2, &.tech-block_2{
+        &.auto-block_2{
             border: 1px solid $border-color;
         } 
         &.auto-block_3{
@@ -4145,10 +4145,35 @@ footer{
             margin-bottom: 5px;
         }   
     }
+     /*Start photo section slider*/
+    .auto-block_5{
+        a{
+            color:#fff;
+        }
+        .flexslider .flex-direction-nav{
+            display: block;
+        }       
+        .flexslider .slides li{
+            &:hover a{
+                color: #fff;
+            }
+            .detail .flex-caption{
+                @include font(18px,24px,$itg-font-medium);  
+                padding: 10px;   
+                min-height: 68px;
+                max-height: auto;
+                overflow: initial;            
+            }   
+        }
+        .flexslider .slides li .detail .flex-count{
+            @include pos(absolute,null,null,78px,0px);
+        }
+    }
+    /*End photo section slider*/
 }
 /*CSS End special auto page */
 /*CSS Start special tech page */
-.itg-layout-container{        
+.tech-layout-page{
     .itg-h385-section{
         .droppable {
             height: 385px;
@@ -4173,8 +4198,24 @@ footer{
             }
         }
     }
-}
-.tech-layout-page{
+    .widget-wrapper{
+        &.tech-block_2{
+            border: 1px solid $border-color;
+        } 
+    }
+     .special-top-news{
+        ul{
+            &.itg-listing{
+                border: none;
+            }
+            li{
+                a{
+                    @include before-icon-list(5px,5px,22px,8px,#959595,100%);
+                    padding-left: 22px;
+                }
+            }
+        }
+    }
     .buying-guides{
         a{
             display: block;
