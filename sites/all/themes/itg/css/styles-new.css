@@ -1589,12 +1589,17 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 /* CSS for redeem points */
 [id*="block-views-redeem-points-block"] {
   position: relative;
+  margin-top: 45px;
 }
 [id*="block-views-redeem-points-block"] .block-title {
   font: 500 24px/30px Roboto;
   border-bottom: 1px solid #d8d8d8;
   padding-bottom: 15px;
   margin-bottom: 20px;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .view-content {
+  margin: 0 -15px;
+  overflow: hidden;
 }
 [id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper {
   padding: 15px;
