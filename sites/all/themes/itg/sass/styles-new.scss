@@ -1502,6 +1502,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 /* CSS for redeem points */
 [id*="block-views-redeem-points-block"]{
   position: relative;
+  margin-top: 45px;
   .block-title{
     font: 500 24px/30px Roboto;
     border-bottom: 1px solid #d8d8d8;
@@ -1509,6 +1510,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     margin-bottom: 20px;
   }
   .view-redeem-points{
+    .view-content{
+      margin: 0 -15px;
+      overflow: hidden;
+    }
     .product-wrapper{
       padding: 15px;
       text-align: center;

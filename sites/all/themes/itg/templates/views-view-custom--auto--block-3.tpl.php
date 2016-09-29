@@ -17,7 +17,7 @@
             ?>
         <li class="trending-videos-list">
                 <span class="pic video-none <?php echo $video_class; ?>"><?php print $row['field_story_extra_large_image']; ?></span>
-                <spna><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></span>
+                <span><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></span>
             </li>
         <?php }; ?>
     </ul>
