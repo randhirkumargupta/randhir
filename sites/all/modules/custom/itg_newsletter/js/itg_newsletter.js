@@ -19,14 +19,6 @@
                 $('#edit-field-newsl-add-news-und-0-remove-button').hide();
             }
 
-            //Hide left side vertical tabs in case of simple users
-            if (uid != 1) {
-                $('.field-edit-link').hide();
-                $('#edit-body-und-0-format').hide();
-                $('.vertical-tabs-list').hide();
-                $('#edit-metatags').show();
-            }
-
             //Hide/Sho Automatic and manual fields
             if ($("input[name='field_newsl_newsletter_type[und]']:checked").val() === 'automatic') {
 
