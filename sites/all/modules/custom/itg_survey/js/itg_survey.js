@@ -6,9 +6,17 @@
   Drupal.behaviors.itg_survey = {
     attach: function(context, settings) {
       
-      //Hide left side vertical tabs in case of simple users
       var uid = settings.itg_survey.settings.uid;
       var nid = settings.itg_survey.settings.nid;
+      
+      //Hide left side vertical tabs in case of simple users
+      if (uid != 1) {
+        $('.field-edit-link').hide();
+        $('#edit-body-und-0-format').hide();
+        $('.vertical-tabs-list').hide();
+        $('#edit-metatags').show();
+        
+      }
 
       if(nid == '' || nid == null){
         if($('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
@@ -34,13 +42,8 @@
       //Collect values assigned in settings array 
       var type = settings.itg_survey.settings.type;
 
-      //Restrict print issue date to select previous date in magazine form 
+      // Make date fields readonly
       if (type === 'Survey') {
-        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, #edit-field-survey-end-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-2, #edit-field-survey-end-date-und-0-value-datepicker-popup-3').datepicker({
-          changeYear: true,
-          minDate: '0',
-          readOnly: true
-        });
         $('#edit-field-survey-start-date-und-0-value-datepicker-popup-0, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-end-date-und-0-value-datepicker-popup-0, #edit-field-survey-end-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-2, #edit-field-survey-end-date-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
 

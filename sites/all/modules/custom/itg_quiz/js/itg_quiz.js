@@ -10,7 +10,15 @@
       var uid = settings.itg_quiz.settings.uid;
       var nid = settings.itg_quiz.settings.nid;
       var type = settings.itg_quiz.settings.type;
-
+      
+      // If user is not drupal admin
+      if (uid != 1) {
+        $('.field-edit-link').hide();
+        $('#edit-body-und-0-format').hide();
+        $('.vertical-tabs-list').hide();
+        $('#edit-metatags').show();
+      }
+   
      // Hide "Remove" button initially which comes after clicking of "Add More"
       if(nid == '' || nid == null) {
        if($('input[name="field_quiz_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_quiz_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
@@ -20,10 +28,6 @@
          
       // JS for date fields 
       if (type === 'Quiz') {
-        $('#edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup-1').datepicker({
-          changeYear: true,
-          minDate: '0',
-        });
         $('#edit-field-survey-start-date-und-0-value-datepicker-popup, #edit-field-survey-start-date-und-0-value-datepicker-popup-1, #edit-field-survey-start-date-und-0-value-datepicker-popup-2, #edit-field-survey-start-date-und-0-value-datepicker-popup-3, #edit-field-survey-end-date-und-0-value-datepicker-popup-1, #edit-field-survey-end-date-und-0-value-datepicker-popup, #edit-field-survey-end-date-und-0-value-datepicker-popup-2, #edit-field-survey-end-date-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
       
@@ -81,3 +85,7 @@
     }
   };
 })(jQuery, Drupal, this, this.document);
+
+JQuery('#edit-submit').mousedown(function (){
+  alert(1);
+});

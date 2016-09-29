@@ -13,6 +13,16 @@
       var nid = settings.itg_print_team.settings.nid;
       var print_media = settings.itg_print_team.settings.print_media;
 
+      // Hide left side vertical tabs in case of simple users
+      if (uid != 1) {
+        $('.field-edit-link').hide();
+        $('#edit-body-und-0-format').hide();
+        $('.vertical-tabs-list').hide();
+        $('#edit-metatags').show();
+        $("#edit-metatags-und-advanced").hide();
+        $(".form-item-metatags-und-abstract-value").hide();
+      }
+
       // Make posted by filter field empty on click of reset button
       $('#edit-reset').click(function() {
         $('.views-widget-filter-uid #edit-uid').val('');
