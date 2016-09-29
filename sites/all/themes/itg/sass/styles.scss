@@ -4145,6 +4145,31 @@ footer{
             margin-bottom: 5px;
         }   
     }
+     /*Start photo section slider*/
+    .auto-block_5{
+        a{
+            color:#fff;
+        }
+        .flexslider .flex-direction-nav{
+            display: block;
+        }       
+        .flexslider .slides li{
+            &:hover a{
+                color: #fff;
+            }
+            .detail .flex-caption{
+                @include font(18px,24px,$itg-font-medium);  
+                padding: 10px;   
+                min-height: 68px;
+                max-height: auto;
+                overflow: initial;            
+            }   
+        }
+        .flexslider .slides li .detail .flex-count{
+            @include pos(absolute,null,null,78px,0px);
+        }
+    }
+    /*End photo section slider*/
 }
 /*CSS End special auto page */
 /*CSS Start special tech page */

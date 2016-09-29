@@ -878,23 +878,23 @@ img {
 
 /*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
-.featured_photo_carousel .widget-title, .tech-block_5 .widget-title {
+.featured_photo_carousel .widget-title, .tech-block_5 .widget-title, .auto-block_5 .widget-title {
   position: absolute;
   top: 10px;
   left: 10px;
 }
-.featured_photo_carousel .flexslider, .tech-block_5 .flexslider {
+.featured_photo_carousel .flexslider, .tech-block_5 .flexslider, .auto-block_5 .flexslider {
   border: none;
   margin: 0;
 }
-.featured_photo_carousel .flexslider .slides li, .tech-block_5 .flexslider .slides li {
+.featured_photo_carousel .flexslider .slides li, .tech-block_5 .flexslider .slides li, .auto-block_5 .flexslider .slides li {
   position: relative;
 }
-.featured_photo_carousel .flexslider .slides li .detail, .tech-block_5 .flexslider .slides li .detail {
+.featured_photo_carousel .flexslider .slides li .detail, .tech-block_5 .flexslider .slides li .detail, .auto-block_5 .flexslider .slides li .detail {
   width: 100%;
   font-family: "Roboto", sans-serif;
 }
-.featured_photo_carousel .flexslider .slides li .detail .flex-caption, .tech-block_5 .flexslider .slides li .detail .flex-caption {
+.featured_photo_carousel .flexslider .slides li .detail .flex-caption, .tech-block_5 .flexslider .slides li .detail .flex-caption, .auto-block_5 .flexslider .slides li .detail .flex-caption {
   padding: 10px 10px;
   background: #000;
   color: #fff;
@@ -905,7 +905,7 @@ img {
   width: auto;
   height: 66px;
 }
-.featured_photo_carousel .flexslider .slides li .detail .flex-count, .tech-block_5 .flexslider .slides li .detail .flex-count {
+.featured_photo_carousel .flexslider .slides li .detail .flex-count, .tech-block_5 .flexslider .slides li .detail .flex-count, .auto-block_5 .flexslider .slides li .detail .flex-count {
   position: absolute;
   bottom: 78px;
   left: 0px;
@@ -921,10 +921,10 @@ img {
   padding: 0 10px;
   height: 23px;
 }
-.featured_photo_carousel .flexslider .flex-control-nav, .tech-block_5 .flexslider .flex-control-nav {
+.featured_photo_carousel .flexslider .flex-control-nav, .tech-block_5 .flexslider .flex-control-nav, .auto-block_5 .flexslider .flex-control-nav {
   display: none;
 }
-.featured_photo_carousel .flexslider .flex-count, .tech-block_5 .flexslider .flex-count {
+.featured_photo_carousel .flexslider .flex-count, .tech-block_5 .flexslider .flex-count, .auto-block_5 .flexslider .flex-count {
   display: inline-block;
   vertical-align: top;
   background: #000;
@@ -934,14 +934,14 @@ img {
   font-size: 0.75rem;
   margin-bottom: 10px;
 }
-.featured_photo_carousel .flexslider .flex-count i, .tech-block_5 .flexslider .flex-count i {
+.featured_photo_carousel .flexslider .flex-count i, .tech-block_5 .flexslider .flex-count i, .auto-block_5 .flexslider .flex-count i {
   margin-right: 5px;
 }
-.featured_photo_carousel .flexslider .flex-direction-nav a, .tech-block_5 .flexslider .flex-direction-nav a {
+.featured_photo_carousel .flexslider .flex-direction-nav a, .tech-block_5 .flexslider .flex-direction-nav a, .auto-block_5 .flexslider .flex-direction-nav a {
   display: block;
   opacity: 1;
 }
-.featured_photo_carousel .flexslider .flex-direction-nav a:before, .tech-block_5 .flexslider .flex-direction-nav a:before {
+.featured_photo_carousel .flexslider .flex-direction-nav a:before, .tech-block_5 .flexslider .flex-direction-nav a:before, .auto-block_5 .flexslider .flex-direction-nav a:before {
   font: normal normal normal 14px/1 FontAwesome;
   font-size: 30px;
   display: inline-block;
@@ -953,16 +953,16 @@ img {
   line-height: 40px;
   text-align: center;
 }
-.featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev, .tech-block_5 .flexslider .flex-direction-nav a.flex-prev {
+.featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev, .tech-block_5 .flexslider .flex-direction-nav a.flex-prev, .auto-block_5 .flexslider .flex-direction-nav a.flex-prev {
   left: 0;
 }
-.featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev:before, .tech-block_5 .flexslider .flex-direction-nav a.flex-prev:before {
+.featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev:before, .tech-block_5 .flexslider .flex-direction-nav a.flex-prev:before, .auto-block_5 .flexslider .flex-direction-nav a.flex-prev:before {
   content: '\f104';
 }
-.featured_photo_carousel .flexslider .flex-direction-nav a.flex-next, .tech-block_5 .flexslider .flex-direction-nav a.flex-next {
+.featured_photo_carousel .flexslider .flex-direction-nav a.flex-next, .tech-block_5 .flexslider .flex-direction-nav a.flex-next, .auto-block_5 .flexslider .flex-direction-nav a.flex-next {
   right: 0;
 }
-.featured_photo_carousel .flexslider .flex-direction-nav a.flex-next:before, .tech-block_5 .flexslider .flex-direction-nav a.flex-next:before {
+.featured_photo_carousel .flexslider .flex-direction-nav a.flex-next:before, .tech-block_5 .flexslider .flex-direction-nav a.flex-next:before, .auto-block_5 .flexslider .flex-direction-nav a.flex-next:before {
   content: '\f105';
 }
 
@@ -1161,6 +1161,10 @@ img {
 
 /*CSS end for year end page*/
 /*CSS start special auto page */
+.itg-layout-container.auto-layout-page {
+  /*Start photo section slider*/
+  /*End photo section slider*/
+}
 .itg-layout-container.auto-layout-page .itg-top-section .top-colum-1 .droppable, .itg-layout-container.auto-layout-page .itg-top-section .top-colum-2 .droppable {
   height: 608px;
 }
@@ -1168,6 +1172,9 @@ img {
   height: 247px;
 }
 .itg-layout-container.auto-layout-page .itg-top-section .top-colum-3 .droppable .widget-wrapper {
+  overflow: auto;
+}
+.itg-layout-container.auto-layout-page .itg-h450-section .col-md-4 .droppable .widget-wrapper {
   overflow: auto;
 }
 .itg-layout-container.auto-layout-page .itg-h321-section .auto_reviews {
@@ -1221,6 +1228,30 @@ img {
 }
 .itg-layout-container.auto-layout-page .auto_reviews .widget-title {
   margin-bottom: 5px;
+}
+.itg-layout-container.auto-layout-page .auto-block_5 a {
+  color: #fff;
+}
+.itg-layout-container.auto-layout-page .auto-block_5 .flexslider .flex-direction-nav {
+  display: block;
+}
+.itg-layout-container.auto-layout-page .auto-block_5 .flexslider .slides li:hover a {
+  color: #fff;
+}
+.itg-layout-container.auto-layout-page .auto-block_5 .flexslider .slides li .detail .flex-caption {
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 24px;
+  padding: 10px;
+  min-height: 68px;
+  max-height: auto;
+  overflow: initial;
+}
+.itg-layout-container.auto-layout-page .auto-block_5 .flexslider .slides li .detail .flex-count {
+  position: absolute;
+  bottom: 78px;
+  left: 0px;
 }
 
 /*CSS End special auto page */

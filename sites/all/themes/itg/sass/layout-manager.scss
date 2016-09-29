@@ -526,7 +526,7 @@ img{
 }
 /*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
-.featured_photo_carousel, .tech-block_5{
+.featured_photo_carousel, .tech-block_5, .auto-block_5{
     .widget-title{
         @include pos(absolute,10px,null,null,10px);        
     }
@@ -750,6 +750,9 @@ img{
             }
         }
     }
+    .itg-h450-section .col-md-4 .droppable .widget-wrapper {
+        overflow: auto;
+    }
     .itg-h321-section .auto_reviews{        
         padding: 5px 20px 8px;
         background-color: #f3f3f3;
@@ -816,6 +819,31 @@ img{
             margin-bottom: 5px;
         }   
     }
+     /*Start photo section slider*/
+    .auto-block_5{
+        a{
+            color:#fff;
+        }
+        .flexslider .flex-direction-nav{
+            display: block;
+        }       
+        .flexslider .slides li{
+            &:hover a{
+                color: #fff;
+            }
+            .detail .flex-caption{
+                @include font(18px,24px,$itg-font-medium);  
+                padding: 10px;   
+                min-height: 68px;
+                max-height: auto;
+                overflow: initial;            
+            }   
+        }
+        .flexslider .slides li .detail .flex-count{
+            @include pos(absolute,null,null,78px,0px);
+        }
+    }
+    /*End photo section slider*/
 }
 
 /*CSS End special auto page */

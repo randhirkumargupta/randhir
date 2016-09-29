@@ -5469,6 +5469,10 @@ footer .footer-copyright {
 
 /*CSS end for year end page*/
 /*CSS start special auto page */
+.auto-layout-page {
+  /*Start photo section slider*/
+  /*End photo section slider*/
+}
 .auto-layout-page .widget-wrapper.auto-block_2 {
   border: 1px solid #dddddd;
 }
@@ -5516,6 +5520,30 @@ footer .footer-copyright {
 }
 .auto-layout-page .auto_reviews .widget-title {
   margin-bottom: 5px;
+}
+.auto-layout-page .auto-block_5 a {
+  color: #fff;
+}
+.auto-layout-page .auto-block_5 .flexslider .flex-direction-nav {
+  display: block;
+}
+.auto-layout-page .auto-block_5 .flexslider .slides li:hover a {
+  color: #fff;
+}
+.auto-layout-page .auto-block_5 .flexslider .slides li .detail .flex-caption {
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 24px;
+  padding: 10px;
+  min-height: 68px;
+  max-height: auto;
+  overflow: initial;
+}
+.auto-layout-page .auto-block_5 .flexslider .slides li .detail .flex-count {
+  position: absolute;
+  bottom: 78px;
+  left: 0px;
 }
 
 /*CSS End special auto page */
