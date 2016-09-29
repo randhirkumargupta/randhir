@@ -13,7 +13,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
  * Implements hook_init.
  * {@inheritdoc}
  */
-function itg_quiz_init() {
+function itg_common_init() {
   global $user;
   
   // Hide metatags extra fields
