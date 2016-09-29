@@ -192,7 +192,12 @@ function get_layout_details($section_name, $template_name, $status) {
     // for widget display name
     if (!empty($itg_val->widget_name)) {
       $widget_info_array = explode('|', $itg_val->widget_info);
+      if($widget_info_array[1]!="")
+      {
       $result['widget_display_name'] = '-'.$widget_info_array[1];  
+      }else{
+          $result['widget_display_name'] = "";  
+      }
     }
     
     $result['widget_name'] = $itg_val->widget_name;
