@@ -258,6 +258,23 @@ function itg_story_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-highlights-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
+    
+    
+    // hide remove button of first field on add form 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-template-guru-und-0-remove-button").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    
+    // hide remove button of first field on add form 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-template-quotes-und-0-remove-button").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+    
+    // hide remove button of first field on add form 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  
   }
 
 
@@ -484,19 +501,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     )
   );
 
-  // code for client Title field show and hide
-  $form['field_story_client_title']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
-    )
-  );
-
-  // code for media field show and hide
-  $form['field_story_media_files_syndicat']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_story_syndication[und][Yes]"]' => array('checked' => TRUE),
-    )
-  );
+  
 
   // code for Magazine kicker * field show and hide
   $form['field_story_magazine_kicker_text']['#states'] = array(

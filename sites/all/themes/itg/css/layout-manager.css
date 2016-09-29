@@ -636,7 +636,7 @@ img {
   /*Start CSS Top Block Grid Home Page*/
   .top-block .top-colum-1, .top-block .top-colum-2, .top-block .top-colum-3 {
     padding: 0 15px;
-    min-height: 672px;
+    /*            min-height: 672px;*/
   }
   .top-block .top-colum-1 {
     float: left;
@@ -1161,6 +1161,17 @@ img {
 
 /*CSS end for year end page*/
 /*CSS start special auto page */
+.itg-layout-container.auto-layout-page {
+  /*    .itg-h450-section{        
+          .col-md-4{
+              .droppable{                
+                  .widget-wrapper{
+                      overflow: auto;
+                  }
+              }
+          }        
+      }*/
+}
 .itg-layout-container.auto-layout-page .itg-top-section .top-colum-1 .droppable, .itg-layout-container.auto-layout-page .itg-top-section .top-colum-2 .droppable {
   height: 608px;
 }
@@ -1168,9 +1179,6 @@ img {
   height: 247px;
 }
 .itg-layout-container.auto-layout-page .itg-top-section .top-colum-3 .droppable .widget-wrapper {
-  overflow: auto;
-}
-.itg-layout-container.auto-layout-page .itg-h450-section .col-md-4 .droppable .widget-wrapper {
   overflow: auto;
 }
 .itg-layout-container.auto-layout-page .widget-wrapper.auto-block_2 {
