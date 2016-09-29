@@ -70,7 +70,7 @@ h4.heading {
   margin-bottom: 15px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, .poll-banner .detail .social-share ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul {
+.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, .poll-banner .detail .social-share ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul {
   list-style-type: none;
 }
 
@@ -5518,6 +5518,32 @@ footer .footer-copyright {
 }
 
 /*CSS End special auto page */
+/*CSS Start special tech page */
+.itg-layout-container .itg-h385-section .droppable {
+  height: 385px;
+}
+
+.tech-layout-page .buying-guides h3 {
+  padding: 10px 0;
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 15px;
+}
+.tech-layout-page .buying-guides ul li span {
+  color: #b00202;
+  font-size: 12px;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+  display: block;
+}
+.tech-layout-page .buying-guides ul li:first-child {
+  padding-bottom: 15px;
+}
+.tech-layout-page .buying-guides ul li + li {
+  padding: 15px 0;
+  border-top: 1px solid #dddddd;
+}
+
+/*CSS End special tech page */
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"] {
   margin: 0 -15px;

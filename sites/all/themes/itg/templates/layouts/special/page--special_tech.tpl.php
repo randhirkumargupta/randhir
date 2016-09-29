@@ -91,7 +91,7 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?> auto-layout-page">
+<div class="itg-layout-container <?php echo $itg_class; ?> auto-layout-page tech-layout-page">
     <?php if(isset($widget_data['big_story'])) : ?>
     <div class="row">
         <div class="col-md-12">
@@ -460,7 +460,7 @@ if ($theme != 'itgadmin') {
   
 <!--  Tech 2nd last row start here-->
  <?php if (isset($widget_data['itg-block-13']['widget_name']) || isset($widget_data['itg-block-14']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row itg-h450-section">
+    <div class="row itg-h385-section">
         <div class="col-md-8 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -562,7 +562,7 @@ if ($theme != 'itgadmin') {
         </div>
      </div>
   <?php } ?>
-  <!--  Tech last row End here-->
+  <!--  Tech last row End here--> 
   
   
 </div>

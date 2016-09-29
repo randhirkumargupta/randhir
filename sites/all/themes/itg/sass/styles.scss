@@ -4144,6 +4144,44 @@ footer{
     }
 }
 /*CSS End special auto page */
+/*CSS Start special tech page */
+.itg-layout-container{        
+    .itg-h385-section{
+        .droppable {
+            height: 385px;
+        }
+    }  
+}
+.tech-layout-page{
+    .buying-guides{
+        h3{
+            padding: 10px 0;
+            border-bottom: 1px solid $border-color;
+            margin-bottom: 15px;
+        }
+        ul{
+            @extend .list-none;
+            li{
+                span{
+                    color: #b00202;
+                    @include font(12px);
+                    margin-bottom: 10px;
+                    display: block;
+                }
+                &:first-child{
+                    padding-bottom:15px;
+                }
+                +li{
+                    padding:15px 0;
+                    border-top:1px solid $border-color;    
+                }
+                
+            }
+        }
+    }    
+}
+
+/*CSS End special tech page */
 
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"]{
