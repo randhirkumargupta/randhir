@@ -226,12 +226,12 @@ function itg_story_node_validate($node, $form, &$form_state) {
     }
 
     // Code for issue exit or not.
-    if (!empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
-      $issue = itg_story_checked_issue($node->field_story_issue_date[LANGUAGE_NONE][0]['value']);
-      if (!$issue) {
-        form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue dose not exit."));
-      }
-    }
+//    if (!empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
+//      $issue = itg_story_checked_issue($node->field_story_issue_date[LANGUAGE_NONE][0]['value']);
+//      if (!$issue) {
+//        form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue dose not exit."));
+//      }
+//    }
 
     // Code for category validation.
     if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid'])) {
@@ -258,25 +258,30 @@ function itg_story_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-highlights-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-    
-    
+
+
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-template-guru-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-    
+
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-template-quotes-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-    
+
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  
   }
-
+  
+  // checked autoalias checkbox on node edit form
+  if (isset($form['#node']->nid)) {
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-path-pathauto").attr("checked", true);            
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
 
   $form['field_story_select_magazine']['und']['#title'] = t('Select magazine') . '<span class="form-required" title="This field is required."> *</span>';
   $form['field_story_magazine_kicker_text']['und']['#title'] = t('Magazine kicker') . '<span class="form-required" title="This field is required."> *</span>';
