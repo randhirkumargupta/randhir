@@ -5469,7 +5469,7 @@ footer .footer-copyright {
 
 /*CSS end for year end page*/
 /*CSS start special auto page */
-.auto-layout-page .widget-wrapper.auto-block_2, .auto-layout-page .widget-wrapper.tech-block_2 {
+.auto-layout-page .widget-wrapper.auto-block_2 {
   border: 1px solid #dddddd;
 }
 .auto-layout-page .widget-wrapper.auto-block_3 {
@@ -5520,26 +5520,45 @@ footer .footer-copyright {
 
 /*CSS End special auto page */
 /*CSS Start special tech page */
-.itg-layout-container .itg-h385-section .droppable {
+.tech-layout-page {
+  /*Start photo section slider*/
+  /*End photo section slider*/
+}
+.tech-layout-page .itg-h385-section .droppable {
   height: 385px;
 }
-.itg-layout-container .itg-h385-section .section_wise_order-buying-guid .widget-title {
+.tech-layout-page .itg-h385-section .section_wise_order-buying-guid .widget-title {
   position: absolute;
 }
-.itg-layout-container .itg-h396-section .droppable {
+.tech-layout-page .itg-h396-section .droppable {
   height: 396px;
   background: #f3f3f3;
   padding: 10px;
 }
-.itg-layout-container .itg-h396-section .section_wise_order-in-depth .widget-title {
+.tech-layout-page .itg-h396-section .section_wise_order-in-depth .widget-title {
   position: absolute;
   top: 10px;
   left: 10px;
 }
-
-.tech-layout-page {
-  /*Start photo section slider*/
-  /*End photo section slider*/
+.tech-layout-page .widget-wrapper.tech-block_2 {
+  border: 1px solid #dddddd;
+}
+.tech-layout-page .special-top-news ul.itg-listing {
+  border: none;
+}
+.tech-layout-page .special-top-news ul li a {
+  position: relative;
+  padding-left: 22px;
+}
+.tech-layout-page .special-top-news ul li a:before {
+  position: absolute;
+  top: 22px;
+  left: 8px;
+  content: '';
+  border-radius: 100%;
+  background: #959595;
+  height: 5px;
+  width: 5px;
 }
 .tech-layout-page .buying-guides a {
   display: block;
