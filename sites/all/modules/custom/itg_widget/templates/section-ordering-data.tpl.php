@@ -234,6 +234,107 @@ if ($widget_style == 'auto-road-trip') {
     </div>
 
 
+<?php } else if ($widget_style == 'oscar-news') { ?>
+    <div class="row buying-guides tech-in-depth">
+        <div class="col-md-6">
+            <?php
+            foreach ($data as $count => $entity) {
+                $video_class = "";
+                if (strtolower($entity->type) != 'videogallery') {
+                    $video_class = 'video-none';
+                }
+                $desc = $entity->title;
+                if ($entity->field_gallery_kicer['und'][0]['value'] != "") {
+                    $desc = strip_tags($entity->field_gallery_kicer['und'][0]['value']);
+                }
+
+                if ($entity->field_story_kicker_text['und'][0]['value'] != "") {
+                    $desc = strip_tags($entity->field_story_kicker_text['und'][0]['value']);
+                }
+
+
+
+
+                if ($count == 0) {
+                    if ((!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
+                        $extra_large_image_url = image_style_url("anchors_landing", $entity->field_story_extra_large_image['und'][0]['uri']);
+                    }
+                    ?>
+                    <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
+                        <span class="pic  <?php echo $video_class; ?>"><img src="<?php echo $extra_large_image_url; ?>"></span>
+                    </a>
+                    <h3><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
+                    <?php
+                } else if ($count >0) {
+                    if ((!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
+                        $extra_large_image_url = image_style_url("video_landing_page_170_x_127", $entity->field_story_extra_large_image['und'][0]['uri']);
+                    }
+                    ?>
+                    <ul>
+                        <li>
+                            <span class="pic  <?php echo $video_class; ?>"> <a class="pic  <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
+                                    <img src="<?php echo $extra_large_image_url; ?>">
+                                </a></span>
+
+                            <p><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
+                        </li>            
+                    </ul>
+                    <?php
+                }
+            }
+            ?>
+
+        </div>
+
+        
+
+    </div>
+
+
+<?php } else if ($widget_style == 'oscar-features') { ?>
+    <div class="row buying-guides tech-in-depth">
+        <div class="col-md-6">
+            <?php
+            $coun=1;
+            foreach ($data as $count => $entity) {
+                $video_class = "";
+                if (strtolower($entity->type) != 'videogallery') {
+                    $video_class = 'video-none';
+                }
+                $desc = $entity->title;
+                if ($entity->field_gallery_kicer['und'][0]['value'] != "") {
+                    $desc = strip_tags($entity->field_gallery_kicer['und'][0]['value']);
+                }
+
+                if ($entity->field_story_kicker_text['und'][0]['value'] != "") {
+                    $desc = strip_tags($entity->field_story_kicker_text['und'][0]['value']);
+                }
+
+                    if ((!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
+                        $extra_large_image_url = image_style_url("video_landing_page_170_x_127", $entity->field_story_extra_large_image['und'][0]['uri']);
+                    }
+                    ?>
+                    <ul>
+                        <li>
+                            <span class="pic  <?php echo $video_class; ?>"> <a class="pic  <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
+                                    <img src="<?php echo $extra_large_image_url; ?>">
+                                </a></span>
+
+                            <p><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
+                        </li>            
+                    </ul>
+                    <?php
+               $coun++;
+            }
+            ?>
+
+        </div>
+
+        
+
+    </div>
+
+
 <?php } else if ($widget_style == 'tech-tips') { ?>
 
     <div class="tech-trip">
