@@ -2466,9 +2466,6 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   }
   .hierarchical-select-wrapper .hierarchical-select .selects{float: none;}
   .hierarchical-select-wrapper .hierarchical-select .selects .form-select{max-width: 170px;}
-  .metatags-form{
-    @extend .hide;
-  }
   .field-name-field-sponser-logo{
     .form-managed-file .image-widget-data .form-submit[value="Remove"]{
       left: 550px;
@@ -6385,7 +6382,7 @@ div.node{
   }
 }
 .itg-h321-section{
-  .dont_miss{
+  .auto_reviews, .tech_reviews, .dont_miss{
     height: 100%;
     padding: 5px 20px 8px;
     background-color: #f3f3f3;
