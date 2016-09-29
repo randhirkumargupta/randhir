@@ -8,7 +8,15 @@
 
       var uid = settings.itg_notification.settings.uid;
       var nid = settings.itg_notification.settings.nid;
-
+     
+      // If user is not drupal admin
+      if (uid !== 1) {
+        $('.field-edit-link').hide();
+        $('#edit-body-und-0-format').hide();
+        $('.vertical-tabs-list').hide();
+        $('#edit-metatags').show();
+      }
+      
       $('input[name="field_ntf_schedule[und][0][value][date]"]').prop("readonly", true);
       $('#edit-field-cm-display-title-und-0-value').prop("readonly", true);
       

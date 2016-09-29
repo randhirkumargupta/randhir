@@ -9,6 +9,14 @@
       //Hide left side vertical tabs in case of simple users
       var uid = settings.itg_survey.settings.uid;
       var nid = settings.itg_survey.settings.nid;
+ 
+      if (uid != 1) {
+        $('.field-edit-link').hide();
+        $('#edit-body-und-0-format').hide();
+        $('.vertical-tabs-list').hide();
+        $('#edit-metatags').show();
+        
+      }
 
       if(nid == '' || nid == null){
         if($('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
