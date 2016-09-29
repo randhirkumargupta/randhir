@@ -226,12 +226,12 @@ function itg_story_node_validate($node, $form, &$form_state) {
     }
 
     // Code for issue exit or not.
-//    if (!empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
-//      $issue = itg_story_checked_issue($node->field_story_issue_date[LANGUAGE_NONE][0]['value']);
-//      if (!$issue) {
-//        form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue dose not exit."));
-//      }
-//    }
+    if (!empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
+      $issue = itg_story_checked_issue($node->field_story_issue_date[LANGUAGE_NONE][0]['value']);
+      if (!$issue) {
+        form_set_error('edit-field-story-issue-date-und-0-value-datepicker-popup-0', t("Issue dose not exit."));
+      }
+    }
 
     // Code for category validation.
     if (empty($node->field_story_category[LANGUAGE_NONE][0]['tid'])) {
