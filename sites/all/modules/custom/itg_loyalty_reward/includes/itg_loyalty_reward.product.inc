@@ -24,8 +24,16 @@ function itg_loyalty_reward_redeem_points() {
  *   Node id of the node.
  */
 function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
+  global $user;
   // Check if node is set.
   if ($node_id > 0) {
+    // Check if product is already in cart.
+    $itg_result = 0;
+    $itg_query = db_select('itg_loyalty_reward_cart', 'itg')
+        ->fields('itg', array('nid', 'quintity'))
+        ->condition('uid', $user->uid)
+        ->condition('nid', $node_id);
+    $itg_result = $itg_query->execute()->fetchObject();        
     $node = node_load($node_id);
     $node_info_array = array(
       'nid' => $node->nid,
@@ -34,24 +42,60 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
       'price' => $node->field_lrp_actual_price['und'][0]['value'],
       'discounted_price' => $node->field_lrp_discounted_price['und'][0]['value'],
       'image' => $node->field_lrp_image['und'][0],
-      'points' => $node->field_lrp_loyalty_points['und'][0]['value']
+      'points' => $node->field_lrp_loyalty_points['und'][0]['value'],
     );
+    if ($node_id == $itg_result->nid) {
+      $quantity = $itg_result->quintity + 1;
+      // Update item on cart page.
+      _update_cart_item($node->nid, $user->uid, $quantity);
+    }
+    else {
+      $node_info_array['quantity'] = 1;
+    }
   }
   // check action.
   if (isset($node) && $action == NULL) {
     // Insert product into cart.
-    _insert_product_into_cart($node_info_array);
-    // Redirect to product listing page.
-    drupal_set_message(t('Product added to cart successfully.') 
+    $response = _insert_product_into_cart($node_info_array);    
+    if ($response == 1) {
+      drupal_set_message(t('Product added to cart successfully.') 
       . l(t('GO TO CART'), 'cart'), 'status');
+    }
+    else {
+      drupal_set_message(t('Something went wrong please try after some time.') 
+      , 'error');
+    }
+    // Redirect to product listing page.    
     drupal_goto('redeem-points');
   }
   elseif (isset($node) && $action == 'buy-now') {
     // Insert product into cart.
-    _insert_product_into_cart($node_info_array);
-    // Redirect to cart page.
-    drupal_goto('cart');
+    $response = _insert_product_into_cart($node_info_array);
+    if ($response == 0) {
+      drupal_set_message(t('Something went wrong please try after some time.') 
+      , 'error');
+      // Redirect to cart page.
+      drupal_goto('redeem-points');
+    }    
   }
+}
+
+/**
+ * Update items quantity on cart.
+ *
+ * @param int $nid
+ *   Node if of the product.
+ * @param int $uid
+ *   User id of the user.
+ */
+function _update_cart_item($nid, $uid, $quantity) {
+  $itg_query = db_update('itg_loyalty_reward_cart')
+      ->fields(array('quintity' => $quantity))
+      ->condition('nid', $nid)
+      ->condition('uid', $uid)
+      ->execute();
+  drupal_set_message('Item updated on cart successfully.', 'status');
+  drupal_goto('redeem-points');
 }
 
 /**
@@ -67,6 +111,7 @@ function _insert_product_into_cart($node_info_array) {
   // Prepare array for inserting data into cart.
   $presave = array(
     'nid' => $node_info_array['nid'],
+    'quintity' => $node_info_array['quantity'],
     'uid' => $user->uid,
     'product_name' => $node_info_array['title'],
     'points' => $node_info_array['points'],
@@ -78,15 +123,14 @@ function _insert_product_into_cart($node_info_array) {
     $order_id = db_insert('itg_loyalty_reward_cart')
         ->fields($presave)
         ->execute();
+    $response = 1;    
   }
   catch (Exception $ex) {
     watchdog('ITG CART', $ex->getMessage());
+    $response = 0;
   }
-  // If data u=inserted to cart table.    
-  if ($order_id > 0) {
-    drupal_add_js(array('itg_loyalty_reward' => 
-      array('mid' => $node_info_array['nid'])), array('type' => 'setting'));    
-  }
+
+  return $response;
 }
 
 /**
