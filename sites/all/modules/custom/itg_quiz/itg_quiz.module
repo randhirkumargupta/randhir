@@ -286,6 +286,25 @@ function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
 /*******************************Node Related hooks*****************************/
 
 /**
+ * Implement hook_node_presave
+ *  
+ * {@inheritdoc}
+ */
+function itg_quiz_node_presave($node){
+  
+  // Publish/unpublish functionality for quiz
+  if ($node->type == 'quiz') {
+    if ($node->is_new == 1) {
+      $node->status = $node->field_quuiz_publish[LANGUAGE_NONE][0]['value'] ? 1: 0;
+    }
+    else {
+      $node->status = $node->field_quuiz_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+      field_attach_update('node', $node);
+    }
+  }
+}
+
+/**
  * Implements hook_node_validate.
  * {@inheritdoc}
  */
@@ -322,10 +341,10 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
         }
 
         if ($count_ans_text < 2) {
-          form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>@question</strong>?', array('@question' => $question_txt)));
+          form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>@question</strong>', array('@question' => $question_txt)));
         }
         if (!$correct_ans_available) {
-          form_set_error('field_quiz_options_answer', t('Please mark correct answer for question <strong>@question</strong>?', array('@question' => $question_txt)));
+          form_set_error('field_quiz_options_answer', t('Please mark correct answer for question <strong>@question</strong>', array('@question' => $question_txt)));
         }
       }
     }

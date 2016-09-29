@@ -26,6 +26,7 @@ function itg_loyalty_reward_checkout_form() {
     // Add js file for validation.
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
+      drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js',
     );
     // Prepare form array.
     $form['name'] = array(
@@ -133,5 +134,42 @@ function itg_loyalty_reward_checkout_form_validate($form, &$form_state) {
  * {@inheritdoc}.
  */
 function itg_loyalty_reward_checkout_form_submit($form, &$form_state) {
-  //Prepare array for saving product information.
+  global $user;
+  //Prepare array for saving product information.  
+  $inputs = $form_state['values'];
+  // Prepare user info.
+  $data['user_info'] = array(
+    'name' => $inputs['name'],
+    'email' => $inputs['email'],
+    'phone' => $inputs['phone'],
+    'address' => $inputs['addess'],
+    'city' => $inputs['city'],
+    'zip_code' => $inputs['zip_code'],    
+  );
+  // Get product info.
+  $cart_detail = _get_cart_full_details($user->uid);  
+  $data['cart-items'] = $cart_detail;
+  
+  // Save data into order table.
+  $presave = array(
+    'uid' => $user->uid,
+    'product_information' => serialize($data),
+    'created' => REQUEST_TIME,
+  );
+  $order_placed = 0;
+  try {
+    $order_placed = db_insert('itg_loyalty_reward_order')
+      ->fields($presave)
+      ->execute();
+  }
+  catch (Exception $ex) {
+    watchdog('ITG Order', $ex->getMessage());
+  }
+  if ($order_placed > 0) {
+    $flush_cart = db_delete('itg_loyalty_reward_cart')
+        ->condition('uid', $user->uid)
+        ->execute();
+    drupal_set_message('Your order has been placed', 'status');
+  }
+  drupal_goto('redeem-points');
 }
