@@ -2335,7 +2335,7 @@ footer{
 /* End side bar common */
 
 /*Start photo section slider Homepage*/
-.featured_photo_carousel{
+.featured_photo_carousel, .tech-block_5, .auto-block_5{
     .widget-title{
         @include pos(absolute,10px,null,null,10px);        
     }
@@ -4151,6 +4151,20 @@ footer{
             height: 385px;
         }
     }  
+    .itg-h396-section{        
+        .droppable {
+            height: 396px;
+            background: #f3f3f3;
+            padding: 10px;
+        }
+        .tech-block_6{            
+            .widget-title{
+                @include pos(absolute);                
+                top: 10px;
+                left: 10px;
+            }
+        }
+    }
 }
 .tech-layout-page{
     .buying-guides{
@@ -4165,7 +4179,7 @@ footer{
                 span{
                     color: #b00202;
                     @include font(12px);
-                    margin-bottom: 10px;
+                    margin-bottom: 5px;
                     display: block;
                 }
                 &:first-child{
@@ -4178,7 +4192,28 @@ footer{
                 
             }
         }
-    }    
+    }  
+    .tech-trip{
+        .trending-videos {
+            border: none; 
+            padding-top:0; 
+            .trending-videos-list{
+                padding: 10px 0;
+            }
+        }
+    }
+    .tech-in-depth{
+        ul{
+            li{
+                overflow:hidden;
+                span{
+                    float: left;                
+                    margin-bottom: 0;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
 }
 
 /*CSS End special tech page */
