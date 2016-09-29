@@ -396,7 +396,7 @@ function feature_for_auto_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'photgallery_landing_slider_753x543',
+    'image_style' => 'image_750x363',
     'image_link' => '',
   );
   /* Field: Content: Title */

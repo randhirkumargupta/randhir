@@ -1722,3 +1722,67 @@ body.has-cart-popup{
     text-transform: uppercase;
   }
 }
+
+/* CSS for forgot password */
+
+[id*="itg_sso_reg_multistep_form"]{
+  ul.messages__list{
+    padding-left: 18px;
+    font-size: 14px;
+    font-family: Roboto;
+  }
+}
+[id*="itg_user_forgot_password_multistep_form"]{
+    margin: 0 -15px;
+    .form-text{
+        width: 100%;
+        height: 36px;
+    }
+    
+    .form-wrapper{
+        padding: 15px;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        position: relative;
+        .form-submit, .btn-skip{
+            background-color: #000;
+            border: 1px solid #000;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 16px;
+            height: 38px;
+            width: 200px;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 20px;
+            text-transform: capitalize;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .ajax-progress{
+            left: 217px;
+            top: 20px;
+            position: absolute;
+            .message{
+                display: none;
+            }
+        }
+    }
+    #ufname{
+      padding: 0 15px;
+    }
+    #otpclickme{
+        cursor: pointer;
+        display: inline-block;
+        line-height: 36px;
+        vertical-align: middle;
+    }
+    #otp_success{
+        color: #009c00;
+        display: inline-block;
+        padding: 15px 15px 0;
+        vertical-align: top;
+        width: 100%;
+    }
+}

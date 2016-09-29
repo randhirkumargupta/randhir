@@ -17,11 +17,11 @@ function itg_common_init() {
   global $user;
   
   // Hide metatags extra fields
-  if ($user->uid != 1) {
-    if ((arg(0) == 'node' && arg(1) == 'add') || (arg(0) == 'node' && arg(2) == 'edit')) {
-      drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_metatags.js');
-    }
-  }
+//  if ($user->uid != 1) {
+//    if ((arg(0) == 'node' && arg(1) == 'add') || (arg(0) == 'node' && arg(2) == 'edit')) {
+//      drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_metatags.js');
+//    }
+//  }
 }
 
 /**
@@ -85,9 +85,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
          $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
          $form['field_story_ugc_source_id']['#attributes']['class'][] = 'element-hidden';
          $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
-         
 
-         // add common hidden type field
+      // add common hidden type field
          $type = $form['type']['#value'];
          $form['ntype'] = array(
              '#title' => t('Ntype'),
