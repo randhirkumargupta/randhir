@@ -4155,9 +4155,7 @@ footer{
         }
         .section_wise_order-buying-guid{
             .widget-title{
-                @include pos(absolute);                
-                top: 10px;
-                left: 10px;
+                @include pos(absolute);                                
             }
         }
     }  
