@@ -293,37 +293,37 @@
       $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').find('.button-remove').trigger('mousedown');
       $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').find('.form-text').val('');
       if (selvalue == "Text") {
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
       }
       if (selvalue == "Video") {
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').show();
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
       }
       if (selvalue == "Photo") {
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').show();
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
       }
     });
     $('.field-name-field-quiz-option select').each(function () {
       var selvalue = $(this).val();
       if (selvalue == "Text") {
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
       }
       if (selvalue == "Video") {
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').show();
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
       }
       if (selvalue == "Photo") {
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').show();
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
       }
     });
     $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
