@@ -479,7 +479,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-13"><?php print $widget_data['itg-block-13']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-13" widget-style="buying-guid" ><?php print $widget_data['itg-block-13']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  
@@ -502,7 +502,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-14"><?php print $widget_data['itg-block-14']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-14" widget-style="tech-tips" ><?php print $widget_data['itg-block-14']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  
@@ -532,7 +532,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-15"><?php print $widget_data['itg-block-15']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-15" widget-style="in-depth"><?php print $widget_data['itg-block-15']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  
@@ -555,7 +555,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-16"><?php print $widget_data['itg-block-16']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-16" widget-style="talking-point"><?php print $widget_data['itg-block-16']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  

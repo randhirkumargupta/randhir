@@ -10,6 +10,21 @@
 module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 
 /**
+ * Implements hook_init.
+ * {@inheritdoc}
+ */
+function itg_common_init() {
+  global $user;
+  
+  // Hide metatags extra fields
+  if ($user->uid != 1) {
+    if ((arg(0) == 'node' && arg(1) == 'add') || (arg(0) == 'node' && arg(2) == 'edit')) {
+      drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_metatags.js');
+    }
+  }
+}
+
+/**
  * Helper function to populate the second dropdown.
  * @param string $id
  * @return array $data
@@ -70,9 +85,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
          $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
          $form['field_story_ugc_source_id']['#attributes']['class'][] = 'element-hidden';
          $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
-         
 
-         // add common hidden type field
+      // add common hidden type field
          $type = $form['type']['#value'];
          $form['ntype'] = array(
              '#title' => t('Ntype'),
@@ -82,12 +96,6 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
              '#value' => $type,
          );
      }
-
-      // Add JS to hide Advance seeting from all content type forms
-      drupal_add_js('jQuery(document).ready(function() {                  
-         jQuery("#edit-metatags-und-advanced").hide();
-         jQuery(".form-item-metatags-und-abstract-value").hide();
-      });', array('type' => 'inline', 'scope' => 'footer'));
     }
 
     // Set title on Preview
@@ -249,11 +257,6 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
   
     $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
     $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
-
-    drupal_add_js('jQuery(document).ready(function() {
-             jQuery(".vertical-tabs-list").hide();
-             jQuery("#edit-metatags").show();              
-           });', array('type' => 'inline', 'scope' => 'footer'));
 
     return $form;
 }

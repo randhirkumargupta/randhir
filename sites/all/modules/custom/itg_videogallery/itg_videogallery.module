@@ -1100,9 +1100,10 @@ function itg_videogallery_ftp_used_video($before_time) {
   $query->join('itg_dailymotion_ftp_video', 'itg_ftp_video', 'itg_ftp_video.fid = f_video.field_upload_video_fid');
   $query->fields('itg_ftp_video', array('fid'));
   $query->join('file_managed', 'fm', 'fm.fid = f_video.field_upload_video_fid');
+  $query->join('dailymotion_response_details', 'drd', 'drd.fid = f_video.field_upload_video_fid');
   $query->fields('fm', array('filename', 'filesize'));
   if (!empty($before_time) && is_numeric($before_time)) {
-    $query->condition('fm.timestamp', $before_time, '>');
+    $query->condition('drd.upload_time', $before_time, '>');
   }
   $results = $query->execute();
   foreach ($results as $result) {
