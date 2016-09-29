@@ -19,6 +19,7 @@ features[field_instance][] = node-reporter-field_reporter_twitter_handle
 features[field_instance][] = node-reporter-field_story_category
 features[field_instance][] = node-reporter-field_story_expert_name
 features[field_instance][] = node-reporter-field_story_extra_large_image
+features[field_instance][] = node-reporter-field_story_new_title
 features[node][] = reporter
 features[variable][] = menu_options_reporter
 features[variable][] = menu_parent_reporter
