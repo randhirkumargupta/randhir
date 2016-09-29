@@ -358,7 +358,7 @@ function itgadmin_preprocess_page(&$vars) {
    
   // Add tpl for related content view page
 
-  if (arg(0) == 'related-content' || arg(0) == 'getimagetocroper' || arg(0) == 'searchimage' || arg(0) == 'imagetotag' || arg(0) == 'imagetagedit' || arg(0) == 'video-status' || (arg(0)== 'itg-layout-manager' && arg(2)=='preview')) {
+  if (arg(0) == 'related-content' || arg(0) == 'getimagetocroper' || arg(0) == 'searchimage' || arg(0) == 'imagetotag' || arg(0) == 'imagetagedit' || arg(0) == 'video-status' || (arg(0)== 'itg-layout-manager' && arg(2)=='preview') || arg(0) == 'dailymotion-ftp-template') {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
   
