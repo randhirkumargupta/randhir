@@ -70,7 +70,7 @@ h4.heading {
   margin-bottom: 15px;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, .poll-banner .detail .social-share ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul {
+.list-none, #block-itg-layout-manager-header-block ul, #block-itg-layout-manager-header-block .head-live-tv ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .view-front-end-global-search .view-content .social-share ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .live-block .breaking-section .social-share ul, .poll-wrapper .social-share ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, .poll-banner .detail .social-share ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .view-archive-story .view-content .social-share ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul {
   list-style-type: none;
 }
 
@@ -5468,42 +5468,82 @@ footer .footer-copyright {
 
 /*CSS end for year end page*/
 /*CSS start special auto page */
-.widget-wrapper.auto-block_2 {
+.auto-layout-page .widget-wrapper.auto-block_2, .auto-layout-page .widget-wrapper.tech-block_2 {
   border: 1px solid #dddddd;
 }
-.widget-wrapper.auto-block_3 {
+.auto-layout-page .widget-wrapper.auto-block_3 {
   background: #f3f3f3;
   padding: 10px;
 }
-
-.special-top-news ul.itg-listing {
+.auto-layout-page .special-top-news ul.itg-listing {
   border: none;
 }
-
-.auto-tips-n-tricks ul li {
+.auto-layout-page .special-top-news ul li a {
+  position: relative;
+  padding-left: 22px;
+}
+.auto-layout-page .special-top-news ul li a:before {
+  position: absolute;
+  top: 22px;
+  left: 8px;
+  content: '';
+  border-radius: 100%;
+  background: #959595;
+  height: 5px;
+  width: 5px;
+}
+.auto-layout-page .auto-tips-n-tricks ul li {
   padding: 18px 0;
 }
-.auto-tips-n-tricks ul li + li {
+.auto-layout-page .auto-tips-n-tricks ul li + li {
   border-top: 1px solid #ddd;
 }
-.auto-tips-n-tricks ul li p.title a {
+.auto-layout-page .auto-tips-n-tricks ul li p.title a {
   font-weight: 700;
   margin-bottom: 5px;
   display: block;
 }
-
-.auto-road-trip .trending-videos {
+.auto-layout-page .auto-road-trip .trending-videos {
   padding: 0;
   border: none;
 }
-.auto-road-trip .trending-videos li .video-none:after {
+.auto-layout-page .auto-road-trip .trending-videos li .video-none:after {
   background: none;
 }
-.auto-road-trip .trending-videos li.trending-videos-list {
+.auto-layout-page .auto-road-trip .trending-videos li.trending-videos-list {
   padding: 15px 0;
+}
+.auto-layout-page .auto_reviews .widget-title {
+  margin-bottom: 5px;
 }
 
 /*CSS End special auto page */
+/*CSS Start special tech page */
+.itg-layout-container .itg-h385-section .droppable {
+  height: 385px;
+}
+
+.tech-layout-page .buying-guides h3 {
+  padding: 10px 0;
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 15px;
+}
+.tech-layout-page .buying-guides ul li span {
+  color: #b00202;
+  font-size: 12px;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+  display: block;
+}
+.tech-layout-page .buying-guides ul li:first-child {
+  padding-bottom: 15px;
+}
+.tech-layout-page .buying-guides ul li + li {
+  padding: 15px 0;
+  border-top: 1px solid #dddddd;
+}
+
+/*CSS End special tech page */
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"] {
   margin: 0 -15px;

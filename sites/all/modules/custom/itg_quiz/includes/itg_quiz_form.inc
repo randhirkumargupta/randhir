@@ -20,31 +20,51 @@ function itg_quiz_quiz_form() {
     // Add JS for front
     drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_front.js');
     
-    $start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
-    if(time() < $start_date) {
-        $form['no_quiz_attempt'] = array(
-        '#type' => 'markup',
-        '#markup' => '<h2>You can not attempt quiz today. Quiz start date is: ' .date('d/m/Y', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])).'</h2>',
-        );
+    // If quiz is not published
+    if (!$node->status) {
+      $form['survey_status'] = array(
+          '#type' => 'markup',
+          '#markup' => '<h2>This Quiz is not published!</h2>',
+      );
+      return $form;
     }
-    else {
+    
+    // Quiz start date and expiry date restrictions
+    $quiz_start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
+    $quiz_expiry_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours');
+    if (time() < $quiz_start_date) {
+      $form['quiz_start_status'] = array(
+          '#type' => 'markup',
+          '#markup' => '<h2>You can not attempt this quiz today! Start Date: ' . date('d/m/Y', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])) . '</h2>',
+      );
+      return $form;
+    }
+    if(time() > $quiz_expiry_date) {
+       $form['quiz_expiry_status'] = array(
+         '#type' => 'markup',
+         '#markup' => '<h2>This Quiz has been expired!</h2>',
+      );
+       return $form;
+     }
+
+    // Creation of quiz form 
     $num = 0;
     $form = array();
 
-    //Quiz global settings
+    // Quiz global settings
     $question_display = $node->field_quiz_display_sequence[LANGUAGE_NONE][0]['value'];
     $quiz_no_of_winners = $node->field_quiz_winners[LANGUAGE_NONE][0]['value'];
     $quiz_type = $node->field_quiz_type[LANGUAGE_NONE][0]['value']; //immediate/contest_type
     $quiz_result_type = $node->field_quiz_immediate_result[LANGUAGE_NONE][0]['value']; //qwr/ate
     $quiz_score_type = $node->field_quiz_type[LANGUAGE_NONE][0]['value'];
     
-    $quiz_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
-    
     // Add JS for one question at a time
+    $quiz_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
     if($quiz_question_format == 'One question at a time') {
       drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz_questions.js');
     }
     
+    // If question display type is "random", shuffle the array
     if($question_display == 'random') {
       foreach ($node->field_quiz_add_questions[LANGUAGE_NONE] as $ques_arr_for_shuffle){
         $ques_arr_shuffle[] = $ques_arr_for_shuffle['value'];
@@ -58,74 +78,89 @@ function itg_quiz_quiz_form() {
       $ques_arr = $node->field_quiz_add_questions[LANGUAGE_NONE];
     }
 
+    // Count total no. of questions for a quiz
     $total_num_of_ques = count($ques_arr);
 
+    // Parent loop for generate quiz form
     foreach ($ques_arr as $question_arr) {
 
-      //Question Info
+      // Question Details
       $question_detail = entity_load('field_collection_item', array($question_arr['value']));
-
       $question = $question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value'];
       $question_weightage = $question_detail[$question_arr['value']]->field_quiz_weightage[LANGUAGE_NONE][0]['value'];
 
-      $skip_question[$num] = 'yes';
-
-      //If any question is required, show required sign(*) for that question
-      if ($skip_question[$num] == 'yes') {
-        $required = '';
-      } else {
-        $required = '<span style="color:red">*</span>';
-      }
-
-
-      //Answer Info
+      // Answer type segregation
       $answer_type_type = $question_detail[$question_arr['value']]->field_quiz_answer_type[LANGUAGE_NONE][0]['value'];
       if( $answer_type_type == 'single_correct') {
         $answer_type = 'radios';
       } else {
         $answer_type = 'checkboxes';
       }
-
+      
+      // Loop for answer details
+      $all_ans_options_media = '';
+      $answer_option = $question_detail[$question_arr['value']]->field_quiz_option[LANGUAGE_NONE][0]['value'];
       foreach($question_detail[$question_arr['value']]->field_quiz_options_answer[LANGUAGE_NONE] as $ans_option) {
         $ans_option_arr = entity_load('field_collection_item', array($ans_option['value']));
-        foreach($ans_option_arr[$ans_option['value']]->field_quiz_answer_text[LANGUAGE_NONE] as $final_ans_op){
-          $all_ans_options[$num][$ans_option['value'].'-'.$final_ans_op['value']] = $final_ans_op['value'];
-        }
+        
+        // Prepare array of answer options
+        foreach ($ans_option_arr[$ans_option['value']]->field_quiz_answer_text[LANGUAGE_NONE] as $final_ans_op) {
+           $all_ans_options[$num][$ans_option['value'] . '-' . $final_ans_op['value']] = $final_ans_op['value'];
+         }
 
+         // Photo options
+         if ($answer_option == 'Photo') {
+            foreach ($ans_option_arr[$ans_option['value']]->field_quiz_answer_image[LANGUAGE_NONE] as $final_ans_op) {
+              $all_ans_options_media .= '<div class="quiz-media-file">' . theme('image_style', array('style_name' => 'thumbnail', 'path' => $final_ans_op['uri'])) . '</div>';
+            }
+          }
+
+         // Video options
+         if ($answer_option == 'Video') {
+           foreach ($ans_option_arr[$ans_option['value']]->field_quiz_answer_video[LANGUAGE_NONE] as $final_ans_op) {
+             $all_ans_options_media .= '<div class="quiz-media-file"><video width="130" height="100" controls="controls">
+               <source src="' . $final_ans_op['uri'] . '" type="video/mp4"> 
+                <object> 
+                  <embed  src="' . $final_ans_op['uri'] . '"> 
+                </object> 
+               </video></div>';
+           }
+         }
+
+        // Prepare array of correct answers
         foreach($ans_option_arr[$ans_option['value']]->field_quiz_correct_answer[LANGUAGE_NONE] as $currect_ans) {
            if($currect_ans['value'] == 'Yes') {
-            $currect_ans_op[$num][] = $ans_option['value'];
+            $correct_ans_op[$num][] = $ans_option['value'];
            }
         }
       }
 
-      //Media info
+      //Media information
       $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
-
       $media_type = strtolower(substr(strrchr($media, '.'), 1));
       $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
 
-      //Submit button text
-      
+      // Submit button text
       if (($total_num_of_ques - 1) === $num) {
         $button_text = 'Submit';
       } else {
         $button_text = 'Next';
       }
 
-      //Show error message, if user tries to skip required question
+      // Show error message, if user tries to skip required question
       $form['messages'] = array(
           '#prefix' => '<div style="color:red" id="messages">',
           '#suffix' => '</div>'
       );
       
-      // Question container
+      // Main container
       $form['question_container' . $num] = array(
             '#type' => 'markup',
             '#markup' => '',
             '#prefix' => '<div id="question-container-' . $num . '" class="question-container">'
       );
       
+      // Show current question no.
       if ($quiz_question_format == 'One question at a time') {
         $form['question_number' . $num] = array(
             '#type' => 'markup',
@@ -133,12 +168,13 @@ function itg_quiz_quiz_form() {
         );
       }
 
-      //Prepare Question and Answer form
+      // Question text
       $form['question_heading' . $num] = array(
           '#type' => 'markup',
-          '#markup' => '<div class="question-heading">'.$question . ' '.$required.'</div>',
+          '#markup' => '<div class="question-heading">'.$question .'</div>',
       );
       
+      // Question Media Section
       if(!empty($media_type)) {
         if($media_type == 'jpg' || $media_type == 'jpeg' || $media_type == 'png' || $media_type == 'gif'){
           $form['media' . $num] = array(
@@ -151,7 +187,7 @@ function itg_quiz_quiz_form() {
           $form['media' . $num] = array(
               '#type' => 'markup',
               '#prefix' => '<div>',
-              '#markup' => '<video width="140" height="145" controls="controls">
+              '#markup' => '<video width="300" height="220" controls="controls">
                <source src="' . $media . '" type="video/mp4"> 
                 <object> 
                   <embed  src="' . $media . '"> 
@@ -162,23 +198,51 @@ function itg_quiz_quiz_form() {
          }
       }
 
+      // Answer Section
+      $form['answer' . $num] = array(
+          '#type' => 'markup',
+          '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
+      );
+
+      if ($answer_option == 'Photo' || $answer_option == 'Video') {
+          $form['answer_option' . $num] = array(
+              '#prefix' => '<div class="quiz-media-container">' . $all_ans_options_media . '</div>',
+              '#title' => t(''),
+              '#type' => $answer_type,
+              '#options' => $all_ans_options[$num],
+              '#suffix' => '</div>',
+          );
+        } else {
+          $form['answer_option' . $num] = array(
+              '#title' => t(''),
+              '#type' => $answer_type,
+              '#options' => $all_ans_options[$num],
+              '#suffix' => '</div>',
+          );
+      }
+      
+      $form['correct_answer' . $num] = array(
+            '#type' => 'hidden',
+            '#value' => $correct_ans_op[$num],
+      );
+      
+      // Hidden variables
       $form['question' . $num] = array(
           '#type' => 'hidden',
           '#value' => $question,
       );
 
       if ($quiz_score_type == 'normal') {
-          $form['question_weightage_' . $question_arr['value']] = array(
-              '#type' => 'hidden',
-              '#value' => 1,
-          );
-        } else {
-          $form['question_weightage_' . $question_arr['value']] = array(
-              '#type' => 'hidden',
-              '#value' => $question_weightage,
-          );
+        $form['question_weightage_' . $question_arr['value']] = array(
+            '#type' => 'hidden',
+            '#value' => 1,
+        );
+      } else {
+        $form['question_weightage_' . $question_arr['value']] = array(
+            '#type' => 'hidden',
+            '#value' => $question_weightage,
+        );
       }
-
 
       $form['question_id' . $num] = array(
           '#type' => 'hidden',
@@ -187,51 +251,32 @@ function itg_quiz_quiz_form() {
 
       $form['question_skip' . $num] = array(
           '#type' => 'hidden',
-          '#value' => $skip_question[$num],
-          '#attributes' => array('id' => array('question-skip-'.$num), 'class' => array('question-skip'))
+          '#value' => 'yes',
+          '#attributes' => array('id' => array('question-skip-' . $num), 'class' => array('question-skip'))
       );
 
       $form['question_type' . $num] = array(
           '#type' => 'hidden',
           '#value' => $answer_type,
-          '#attributes' => array('id' => array('question-type-'.$num))
+          '#attributes' => array('id' => array('question-type-' . $num))
       );
 
-      $form['answer' . $num] = array(
-          '#type' => 'markup',
-          '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
-          //'#markup' => '<h2 class="answer-heading">Answer: ' . $required . '</h2> ',
-      );
-
-      $form['correct_answer' . $num] = array(
-          '#type' => 'hidden',
-          '#value' => $currect_ans_op[$num],
-      );
-
-      $form['answer_option' . $num] = array(
-          '#title' => t(''),
-          '#type' => $answer_type,
-          '#options' => $all_ans_options[$num],
-          '#suffix' => '</div>',
-      );
-
-      //Nex button for all questions
+      // Next button for all questions, if type is "One question at a time"
       if ($quiz_question_format == 'One question at a time') {
-        $form['quiz_submit_' . $num] = array(
-          '#type' => 'submit',
-          '#value' => $button_text,
-          '#name' => 'quizsubmit_' . $num,
-          '#suffix' => '</div>',
-          '#ajax' => array(
-              'callback' => 'quiz_form_ajax_handler',
-              'effect' => 'fade',
-          ),
-
-            '#attributes' => array('class' => array('quiz-submit'))
-        );
-      }
+          $form['quiz_submit_' . $num] = array(
+              '#type' => 'submit',
+              '#value' => $button_text,
+              '#name' => 'quizsubmit_' . $num,
+              '#suffix' => '</div>',
+              '#ajax' => array(
+                  'callback' => 'quiz_form_ajax_handler',
+                  'effect' => 'fade',
+              ),
+              '#attributes' => array('class' => array('quiz-submit'))
+          );
+        }
       
-      if($quiz_question_format == 'All questions at a time') {
+      if ($quiz_question_format == 'All questions at a time') {
           $form['close_question_container' . $num] = array(
               '#type' => 'markup',
               '#markup' => '</div>',
@@ -240,9 +285,9 @@ function itg_quiz_quiz_form() {
 
       $num++;
 
-    } //End of for loop
+    } //End of main loop
 
-    // Quiz global seetings (Hidden variables)
+    // Variables for a quiz (Hidden variables)
     $form['question_total'] = array(
         '#type' => 'hidden',
         '#value' => $total_num_of_ques,
@@ -288,7 +333,7 @@ function itg_quiz_quiz_form() {
         '#value' => $quiz_result_type,
     );
     
-   // Render a single submit button, if all questions are showing at once
+   // Single submit button, if all questions are showing at once
    if($quiz_question_format == 'All questions at a time') {
      $form['quiz_submit_' . $num] = array(
           '#type' => 'submit',
@@ -301,7 +346,6 @@ function itg_quiz_quiz_form() {
           '#attributes' => array('class' => array('quiz-submit'))
       );
     }
-   }
   } 
   else { 
     drupal_not_found();
@@ -319,7 +363,7 @@ function itg_quiz_quiz_form() {
 function itg_quiz_quiz_form_submit($form, &$form_state){
   global $user;
 
-  //Quiz global setting
+  // Quiz main variables
   $quiz_type = $form_state['values']['quiz_type'];
   $quiz_result_type = $form_state['values']['quiz_resut_type'];
 
@@ -328,7 +372,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
   $btn_num_arr = explode('_', $form_state['clicked_button']['#name']);
   $num = $btn_num_arr[1];
 
-  //Extract user type
+  // Extract user type
   if ($user->uid) {
     $user_type = 'authenticated';
   } else {
@@ -341,7 +385,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
   }
 
 
-//Insert each question and answer in to DB
+  //Insert each question and answer in to DB
   if ($form_state['values']['question_type' . $num] == 'radios') {
    $ans_op_arr = explode('-', $form_state['values']['answer_option' . $num]);
    if($ans_op_arr[0] == $form_state['values']['correct_answer' . $num][0]){
@@ -424,9 +468,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
 
   if ($num == ($form_detail['question_total'] - 1)) {
     $output = '';
-    if($quiz_type == 'immediate') {
-
-      //if($quiz_result_type == 'ate'){
+    if ($quiz_type == 'immediate') {
         $total_ques_attempt = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL);
         $correct_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
         $incorrect_answer = $total_ques_attempt - $correct_answer;
@@ -437,34 +479,16 @@ function itg_quiz_quiz_form_submit($form, &$form_state){
         <div class = "quiz-contest-result"><span>Incorrect Answer:</span> ' . $incorrect_answer . '</div>
         <div class = "quiz-contest-result"><span>Total Score:</span> ' . $total_score . '</div>';
 
-
-        //Display Winners List
-//        $winners_list = itg_quiz_winners_list($form_state['values']['nid'], $form_state['values']['no_of_winners']);
-//        $output .= '<div class = "quiz-contest-result"><strong>Winners List:</strong></div>';
-//        if (count($winners_list) < 1) {
-//          $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp; No winner found!</div>';
-//        } else {
-//          $i = 1;
-//          foreach ($winners_list as $key => $value) {
-//            $output .= '<div class = "quiz-contest-result">&nbsp;&nbsp;' . $i . '. ' . $value . '</div>';
-//            $i++;
-//          }
-//        }
-
         $output .= '</div>';
         drupal_set_message($output, 'message');
-
-      //} else {
-       // drupal_set_message(t('Thank you for attempting our quiz.'));
-      //}
-
-    } else {
+    }
+    else {
      drupal_set_message(t('Thank you for attempting our quiz. Once our quiz will be finished, you would get an email with winner\'s name.'));
     }
 
   }
 
-  //Insert quiz in to DB on final submit
+  // Insert quiz & user info into DB on final submit
   if(strtolower($form_state['clicked_button']['#value']) == 'submit'){
     db_insert('itg_quiz_user')
             ->fields(array(

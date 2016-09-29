@@ -924,6 +924,9 @@
   .auto-layout-page .itg-top-section .top-colum-3 .droppable {
     height: 247px;
   }
+  .auto-layout-page .itg-h450-section .col-md-4 .droppable .widget-wrapper {
+    overflow: auto;
+  }
 
   /*css end for special auto page*/
 }
