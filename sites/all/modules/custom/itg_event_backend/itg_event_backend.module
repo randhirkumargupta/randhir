@@ -646,7 +646,6 @@ function itg_event_backend_get_session_photo_video($daywise){
 
 function itg_event_backend_menu(){
    $items['itg-event-test'] = array(
-    'title' => 'api callback menu',
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
   );
