@@ -28,12 +28,7 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
   // Check if node is set.
   if ($node_id > 0) {
     // Check if product is already in cart.
-    $itg_result = 0;
-    $itg_query = db_select('itg_loyalty_reward_cart', 'itg')
-        ->fields('itg', array('nid', 'quintity'))
-        ->condition('uid', $user->uid)
-        ->condition('nid', $node_id);
-    $itg_result = $itg_query->execute()->fetchObject();        
+    $itg_result = _check_product_into_cart($user->uid, $node_id);        
     $node = node_load($node_id);
     $node_info_array = array(
       'nid' => $node->nid,
@@ -44,7 +39,7 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
       'image' => $node->field_lrp_image['und'][0],
       'points' => $node->field_lrp_loyalty_points['und'][0]['value'],
     );
-    if ($node_id == $itg_result->nid) {
+    if ($node_id == $itg_result->nid && $action == NULL) {
       $quantity = $itg_result->quintity + 1;
       // Update item on cart page.
       _update_cart_item($node->nid, $user->uid, $quantity);
@@ -69,15 +64,31 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
     drupal_goto('redeem-points');
   }
   elseif (isset($node) && $action == 'buy-now') {
+    if ($node_id == $itg_result->nid) {
+      drupal_goto('cart');
+    }
     // Insert product into cart.
     $response = _insert_product_into_cart($node_info_array);
     if ($response == 0) {
       drupal_set_message(t('Something went wrong please try after some time.') 
-      , 'error');
+      , 'error');      
       // Redirect to cart page.
       drupal_goto('redeem-points');
-    }    
+    }
+    // Redirect to cart page.
+    drupal_goto('cart');
   }
+}
+
+function _check_product_into_cart($uid, $nid) {
+  $itg_result = 0;
+    $itg_query = db_select('itg_loyalty_reward_cart', 'itg')
+        ->fields('itg', array('nid', 'quintity'))
+        ->condition('uid', $uid)
+        ->condition('nid', $nid);
+    $itg_result = $itg_query->execute()->fetchObject();
+    
+    return $itg_result;
 }
 
 /**
@@ -107,6 +118,7 @@ function _update_cart_item($nid, $uid, $quantity) {
  *   product details.
  */
 function _insert_product_into_cart($node_info_array) {
+  //p($node_info_array);
   global $user;
   // Prepare array for inserting data into cart.
   $presave = array(
@@ -144,7 +156,7 @@ function _insert_product_into_cart($node_info_array) {
 function itg_loyalty_reward_cart() {
   global $user;
   $data = _get_cart_full_details($user->uid);
-
+  
   return theme('itg_loyalty_reward_cart', array('data' => $data));
 }
 
@@ -210,20 +222,20 @@ function _get_order_item() {
   $itg_result = $itg_query->execute()->fetchAll();  
   $data = array();
   foreach ($itg_result as $value) {    
-    $products = unserialize($value->product_information);    
-    foreach ($products['cart-items'] as $product) {
+    $products = unserialize($value->product_information);        
+    foreach ($products['cart-items'] as $product) {      
       $product_pic = theme(
         'image_style', array(
           'style_name' => 'magazine_rhs_100x140',
-          'path' => $product['image']['uri'],
+          'path' => $product['product']['image']['uri'],
         )
       );
       $output = '<div>';
-      $output .= $product_pic . 'Magzine ID: ' . $product['nid'];
+      $output .= $product_pic . 'Magzine ID: ' . $product['product']['nid'];
       $output .= '</div>';
       $data[] = array(
         $output,
-        $product['points'],
+        $product['product']['points'],
         $value->order_id,
       );
     }

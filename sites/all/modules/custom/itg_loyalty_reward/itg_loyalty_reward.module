@@ -38,7 +38,7 @@ function itg_loyalty_reward_menu() {
   );
   // Redeem points page.
   $items['redeem-points'] = array(
-    'title' => 'Reddem Points',
+    'title' => 'Redeem Points',
     'page callback' => 'itg_loyalty_reward_redeem_points',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -67,7 +67,7 @@ function itg_loyalty_reward_menu() {
     'access arguments' => array('view product page'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward.product.inc',
-  );
+  );  
   $items['checkout'] = array(
     'title' => 'Checkout',
     'page callback' => 'drupal_get_form',
@@ -82,6 +82,19 @@ function itg_loyalty_reward_menu() {
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_loyalty_reward.product.inc',
+  );
+  $items['test-points'] = array(
+    'title' => 'Test Points',
+    'page callback' => 'itg_loyalty_reward_testpoints',
+    'access arguments' => array('view product page'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_loyalty_reward_earn.point.inc',
+  );
+  $items['earn-loyalty-point'] = array(
+    'page callback' => 'itg_loyalty_reward_earnpoint',    
+    'access arguments' => array('view product page'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_loyalty_reward_earn.point.inc',
   );
 
   return $items;
@@ -450,11 +463,14 @@ function _get_cart_item($uid, $option = NULL) {
 function _get_cart_full_details($uid) {
   $data = array();
   $itg_query = db_select('itg_loyalty_reward_cart', 'itg');
-  $itg_query->fields('itg', array('product_information'))
+  $itg_query->fields('itg', array('product_information', 'quintity'))
       ->condition('uid', $uid);
   $itg_result = $itg_query->execute()->fetchAll();
   foreach ($itg_result as $value) {
-    $data[] = unserialize($value->product_information);
+    $data[] = array(
+      'product' => unserialize($value->product_information),
+      'quantity' => $value->quintity
+    );    
   }
 
   return $data;

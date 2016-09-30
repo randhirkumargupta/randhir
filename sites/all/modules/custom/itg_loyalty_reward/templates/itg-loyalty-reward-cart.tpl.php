@@ -14,25 +14,26 @@
                 $product_pic = theme(
                     'image_style', array(
                   'style_name' => 'magazine_rhs_100x140',
-                  'path' => $cart_detail['image']['uri'],
+                  'path' => $cart_detail['product']['image']['uri'],
                     )
                 );
                 print $product_pic;
                 ?>
             </div>
             <div class="product-details">
-                <span>Title: <?php print $cart_detail['title']; ?></span>
-                <span>Magzine ID: <?php print $cart_detail['nid']; ?></span>                
+                <span>Title: <?php print $cart_detail['product']['title']; ?></span>
+                <span>Magzine ID: <?php print $cart_detail['product']['nid']; ?></span>                
             </div>
             <div class="cart-action">
                 <div class="cart-action-links">
-                    <span>Item (1)</span>
-                    <span><?php print l(t('Delete (X)'), 'cart/delete/' . $cart_detail['nid'] . '/' . $cart_detail['title'], array('query' => array('destination' => arg(0)))); ?></span>
+                    <span>Item (<?php print $cart_detail['quantity']; ?>)</span>
+                    <span><?php print l(t('Delete (X)'), 'cart/delete/' . $cart_detail['product']['nid'] . '/' . $cart_detail['product']['title'], array('query' => array('destination' => arg(0)))); ?></span>
                 </div>
-                <div class="points"><?php print $cart_detail['points'] . t('Points'); ?></div>
+                <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
+                <div class="points"><?php print $item_total . ' ' . t('Points'); ?></div>
             </div>
         </div>
-        <?php $cart_total += $cart_detail['points']; ?> 
+        <?php $cart_total += $item_total; ?> 
       <?php endforeach; ?>
       <div class="cart-total-block">
           <div class="grand-total">GRAND TOTAL <span><?php print $cart_total; ?> Points</span></div>
