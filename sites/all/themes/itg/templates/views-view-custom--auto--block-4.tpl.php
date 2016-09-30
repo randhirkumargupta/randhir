@@ -12,7 +12,7 @@
             ?><li>
                 <p class="title"><?php echo $row['title']; ?></p>
 
-                <p>The whole country is rejoicing the arrival of the monsoons thanks to the fact that it gives respite from the scorching heat. But it also brings a lot of other issues. Here is how you should be ready.<?php echo mb_strimwidth(strip_tags($desc), 0, 150, ".."); ?></p>
+                <p><?php echo mb_strimwidth(strip_tags($desc), 0, 150, ".."); ?></p>
             </li>
 
 
