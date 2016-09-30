@@ -88,10 +88,10 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
       // add common hidden type field
          $type = $form['type']['#value'];
-         $form['ntype'] = array(
-             '#title' => t('Ntype'),
+         $form['ndtype'] = array(
+             '#title' => t('Ndtype'),
              '#type' => 'hidden',
-             '#id' => 'ntype',
+             '#id' => 'ndtype',
              '#description' => t(''),
              '#value' => $type,
          );

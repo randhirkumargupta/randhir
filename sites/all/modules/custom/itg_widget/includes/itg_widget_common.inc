@@ -127,6 +127,12 @@ function itg_widgets_custom_variables() {
       '#default_value' => variable_get('entertainment_oscar_features_for_widget'),
       '#size' => 20,
       '#maxlength' => 20,
+  );$form['movie_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of movie'),
+      '#default_value' => variable_get('movie_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
   );
   
   return system_settings_form($form);
@@ -1053,6 +1059,9 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
    if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
     $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_for_widget');
+  }
+   if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider'|| $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top')) {
+    $query->where[1]['conditions'][2]['value'] = variable_get('movie_for_widget');
   }
  //pr($query->where[1]); 
 }
