@@ -1542,17 +1542,16 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         vertical-align: top;
         font: 600 14px/18px Roboto;
         height: 30px;
-        padding: 5px 15px;
+        padding: 5px 10px;
         position: relative;
         margin: 0 5px;
         &:before{
-          content: '\f06b';
-          position: absolute;
+          content: '\f07a';
           font-family: 'FontAwesome';
-          font-size: 16px;
-          top: 5px;
-          color: #fff;
-          left: 10px;
+          font-size: 18px;
+          color: #777;
+          vertical-align: top;
+          margin-right: 5px;
         }
       }
       .btn-redeem-points{
@@ -1564,8 +1563,15 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         vertical-align: top;
         font: 600 14px/18px Roboto;
         height: 30px;
-        padding: 5px 15px;
+        padding: 5px 10px;
         margin: 0 5px;
+        &:before{
+          content: '\f06b';
+          font-family: 'FontAwesome';
+          font-size: 18px;
+          color: #fff;
+          margin-right: 5px;
+        }
       }
       &:hover{
         box-shadow: 0 0 20px 0 #bbb;
@@ -1800,6 +1806,9 @@ body.has-cart-popup{
   header{
     margin-bottom: 0;
   }
+  #page-title{
+    display: none;
+  }
 }
 #block-itg-loyalty-reward-itg-loyalty-reward-header{
   background-color: #eaebed;
@@ -1859,6 +1868,57 @@ body.has-cart-popup{
         font: 400 14px/18px Roboto;
         color: #777;
         margin: 0 12px 0 15px;
+      }
+    }
+  }
+}
+.cart-detail .cart-row{
+  margin-bottom: 30px;
+}
+.cart-checkout-list{
+  padding: 15px 0;
+  border: 1px solid #dbdbdb;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  .product-details{
+    font: 400 15px/18px Roboto;
+    color: #000;
+    > div{
+      padding-bottom: 8px;
+      span{
+        float: left;
+        width: 150px;
+      }
+      strong{
+        font-weight: 500;
+        display: block;
+        overflow: hidden;
+      }
+    }
+  }
+  .cart-action{
+    text-align: center;
+    > div{
+      display: inline-block;
+      vertical-align: top;
+      font: 400 16px/24px Roboto;
+      color: #2f2f2f;
+      &.cart-action-links{
+        display: block;
+        span:after{
+          content: '|';
+          display: inline-block;
+          vertical-align: middle;
+          margin: 0 10px;
+        }
+      }
+      &.points{
+        border: 1px solid #dbdbdb;
+        padding: 5px;
+        width: 165px;
+        max-width: 100%;
+        margin-top: 15px;
       }
     }
   }
