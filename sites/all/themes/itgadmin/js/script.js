@@ -730,6 +730,29 @@ jQuery(document).ready(function(){
       jQuery(this).toggleClass('active');
     });
     
+    // jQuery code to toggle Cotegory manager form
+    jQuery('.category-manager-basic-details h2').addClass('active');
+    jQuery('.category-manager-basic-details, .category-manager-selection-details, .cotegory-manager-settings').on('click', 'h2', function(){
+      var titleHeight = jQuery(this).outerHeight(true);
+      jQuery(this).toggleClass('active');
+      if(jQuery(this).hasClass('active')){
+        jQuery(this).parent().css('height', 'auto');
+      }
+      else{
+        jQuery(this).parent().css('height', titleHeight);
+      }
+    });
+    jQuery('#edit-relations').on('click', 'legend', function(){
+      var titleHeight = jQuery(this).outerHeight(true);
+      jQuery(this).toggleClass('active');
+      if(jQuery(this).hasClass('active')){
+        jQuery(this).parent().css('height', 'auto');
+      }
+      else{
+        jQuery(this).parent().css('height', titleHeight);
+      }
+    });
+    
 });
 
 

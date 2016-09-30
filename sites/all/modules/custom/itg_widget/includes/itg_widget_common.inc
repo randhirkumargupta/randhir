@@ -107,7 +107,28 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
-
+    $form['entertainment_oscar_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Entertainment Oscar Watch'),
+      '#default_value' => variable_get('entertainment_oscar_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+    $form['entertainment_oscar_news_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Entertainment Oscar News Watch'),
+      '#default_value' => variable_get('entertainment_oscar_news_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+    $form['entertainment_oscar_features_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of Entertainment Features Watch'),
+      '#default_value' => variable_get('entertainment_oscar_features_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+  
   return system_settings_form($form);
 }
 
@@ -1021,6 +1042,19 @@ function itg_widget_views_query_alter(&$view, &$query) {
   if ($view->name == 'tech' && $view->current_display == 'block_8') {
     $query->where[1]['conditions'][2]['value'] = variable_get('watch_for_tech_widget');
   }
+  if ($view->name == 'special_entertainment' && $view->current_display == 'entertainment_oscar_news') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_news_for_widget');
+  }
+  if ($view->name == 'special_entertainment' && $view->current_display == 'entertainment_oscar_features') {
+    $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_features_for_widget');
+  }
+   if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos'|| $view->current_display == 'oscar_photos')) {
+    $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_for_widget');
+  }
+   if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
+    $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_for_widget');
+  }
+ //pr($query->where[1]); 
 }
 
 /**

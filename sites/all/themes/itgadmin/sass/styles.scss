@@ -2466,9 +2466,6 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   }
   .hierarchical-select-wrapper .hierarchical-select .selects{float: none;}
   .hierarchical-select-wrapper .hierarchical-select .selects .form-select{max-width: 170px;}
-  .metatags-form{
-    @extend .hide;
-  }
   .field-name-field-sponser-logo{
     .form-managed-file .image-widget-data .form-submit[value="Remove"]{
       left: 550px;
@@ -3999,6 +3996,7 @@ div.node{
       position: absolute;
       width: 134px;
       z-index: 99;
+      left: 15px;
     }
     .ajax-progress{
       display: none;
@@ -6384,7 +6382,7 @@ div.node{
   }
 }
 .itg-h321-section{
-  .dont_miss{
+  .auto_reviews, .tech_reviews, .dont_miss{
     height: 100%;
     padding: 5px 20px 8px;
     background-color: #f3f3f3;
@@ -7172,38 +7170,11 @@ div.node{
   }
 }
 #block-itg-story-story-tab-form-block{display: none;}
-.node-story-form{
-  font-family: Roboto;
-  .ajax-progress{
-    display: none;
-  }
-  .itg-form-section-wrapper{
-    border: 1px solid #d9d9d9;
-    margin-top: 20px;
-  }
-  .itg-form-main h2{
-    background-color: #d9d9d9; 
-    cursor: pointer;
-    margin: 0;
-    position: relative;
-    &:after{
-      content: '\f055';
-      position: absolute;
-      font-family: 'FontAwesome';
-      font-size: 30px;
-      color: #666;
-      right: 10px;
-    }
-    &.active:after{
-      content: '\f056';
-    }
-  }
-  .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
-    padding-left: 200px;
-  }
+.itg-node-form{
   input[type="text"], select, input[type="password"]{
     height: 28px;
-    padding: 5px;
+    padding: 0 5px;
+    line-height: 26px;
   }
   .form-type-textfield > label, 
   .date-combo > legend, 
@@ -7243,6 +7214,127 @@ div.node{
   .date-combo > legend + div, 
   .form-type-hierarchical-select > label + div, 
   .form-type-checkboxes > label + div{
+    padding-left: 200px;
+  }
+  .form-type-textfield label + .form-text + span.error, 
+  .form-type-textfield label + #autocomplete + .form-text + span.error, 
+  .form-type-textfield label + .form-text + div.description + span.error{
+    padding-left: 200px;
+  }
+  .form-actions{
+      background: none;
+      border: none;
+      margin: 0;
+      padding: 20px;
+      .button{
+        border-radius: 1px;
+        border: 1px solid #ee4d4d;
+        background-color: #ee4d4d;
+        box-shadow: 0 0 5px #ee4d4d;
+        padding: 0 20px;
+        line-height: 34px;
+        height: 36px;
+        text-transform: uppercase;
+        color: #fff;
+        margin-right: 10px;
+        &:hover{
+          box-shadow: 0 0 2px #ee4d4d;
+        }
+      }
+      .form-submit, #story_submit_link{
+        border-radius: 1px;
+        border: 1px solid #1fb5ad;
+        background-color: #1fb5ad;
+        box-shadow: 0 0 5px #3a8a82;
+        padding: 0 20px;
+        line-height: 34px;
+        height: 36px;
+        text-transform: uppercase;
+        color: #fff;
+        margin-right: 10px;
+        &:hover{
+          box-shadow: 0 0 2px #3a8a82;
+        }
+      }
+    }
+}
+.node-story-form{
+  font-family: Roboto;
+  .ajax-progress{
+    display: none;
+  }
+  .itg-form-section-wrapper{
+    border: 1px solid #d9d9d9;
+    margin-top: 20px;
+  }
+  .itg-form-main h2{
+    background-color: #d9d9d9; 
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    &:after{
+      content: '\f055';
+      position: absolute;
+      font-family: 'FontAwesome';
+      font-size: 30px;
+      color: #666;
+      right: 10px;
+    }
+    &.active:after{
+      content: '\f056';
+    }
+  }
+  .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
+    padding-left: 200px;
+  }
+  input[type="text"], select, input[type="password"]{
+    height: 28px;
+    padding: 5px;
+    line-height: 26px;
+  }
+  .form-type-textfield > label, 
+  .date-combo > legend, 
+  .form-type-select > label{
+    padding: 5px 0;
+  }
+  .form-type-textfield, 
+  .form-type-password, 
+  .form-type-select, 
+  .form-type-managed-file, 
+  .form-type-checkboxes, 
+  .form-type-radios, 
+  .form-type-autocomplete-deluxe, 
+  .date-combo, 
+  .form-type-hierarchical-select, 
+  .form-type-textarea{
+    margin: 10px 0;
+    padding: 0 20px;
+  }
+  .form-type-textfield > label, 
+  .form-type-password > label, 
+  .form-type-textarea > label, 
+  .form-type-select > label, 
+  .form-type-autocomplete-deluxe > label, 
+  .form-type-managed-file > label, 
+  .form-type-radios > label, 
+  .date-combo > legend, 
+  .form-type-hierarchical-select > label, 
+  .form-type-checkboxes > label{
+    width: 200px;
+  }
+  .form-type-textfield > label + div, 
+  .form-type-textarea > label + div, 
+  .form-type-select > label + div, 
+  .form-type-managed-file > label + div, 
+  .form-type-radios > label + div, 
+  .date-combo > legend + div, 
+  .form-type-hierarchical-select > label + div, 
+  .form-type-checkboxes > label + div{
+    padding-left: 200px;
+  }
+  .form-type-textfield label + .form-text + span.error, 
+  .form-type-textfield label + #autocomplete + .form-text + span.error, 
+  .form-type-textfield label + .form-text + div.description + span.error{
     padding-left: 200px;
   }
   #browse-image .form-type-managed-file, #ExpertChunk .form-type-managed-file{
@@ -7369,6 +7461,9 @@ div.node{
             }
           }
         }
+        div.description {
+          left: 175px;
+        }
       }
     }
     & + div.clearfix, & + div.description + div.clearfix{
@@ -7456,6 +7551,11 @@ div.node{
       &+div{
         padding: 0;
       }
+    }
+    .form-type-textfield label + .form-text + span.error, 
+    .form-type-textfield label + #autocomplete + .form-text + span.error, 
+    .form-type-textfield label + .form-text + div.description + span.error{
+      padding-left: 0;
     }
     .date-no-float{
       width: 100%;
@@ -7608,6 +7708,31 @@ div.node{
         }
       }
     }
+    .form-field-name-field-poll-start-date{
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+      .date-combo{
+        margin: 0;
+      }
+      .date-no-float .form-type-date-popup .date-padding .form-type-textfield{
+        width: 100%;
+      }
+    }
+    .form-field-name-field-story-tv-time{
+      display: inline-block;
+      vertical-align: top;
+      width: 48%;
+      .form-type-select{
+        margin: 0;
+      }
+      .form-item{
+        padding-left: 0;
+        > label{
+          display: block;
+        }
+      } 
+    }
   }
   .metatags-and-remarks{
     background-color: #d9d9d9;
@@ -7734,7 +7859,7 @@ div.node{
     text-decoration: underline;
   }
 }
-.page-node-add-story{
+.page-node-add-story, .node-type-story, .page-admin-structure-taxonomy-category-management{
   .action-with-title #page-title{
     width: 500px;
   }
@@ -7788,5 +7913,109 @@ div.node{
       @extend .btn;
       @extend .btn-cancel;
     }
+  }
+}
+[id*="itg-quiz-quiz-form"]{
+  .question-heading{
+    font: 400 20/28px Roboto;
+    color: #000;
+    position: relative;
+    padding-left: 20px;
+    &:before{
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #a00606;
+    }
+  }
+  .answer-container{
+    .form-type-radios{
+      .form-type-radio{
+        position: relative;
+        > label{
+          padding: 10px;
+          border: 1px solid #e1e1e1;
+          display: block;
+          width: calc(100% - 30px);
+          color: #777;
+        }
+        .form-radio{
+          position: absolute;
+          opacity: 0;
+          &:checked + label{
+            background-color: #f6e90b;
+            color: #000;
+          }
+        }
+      }
+    }
+    .quiz-media-container{
+      float: left;
+      width: 170px;
+      margin-right: 20px;
+      .quiz-media-file{
+        height: 127px;
+        margin-bottom: 20px;
+        img{
+          width: 170px;
+          height: 127px;
+        }
+      }
+      & + .form-type-radios{
+        overflow: hidden;
+        .form-type-radio{
+          > label{
+            height: 127px;
+          }
+        }
+      }
+    }
+  }
+  .quiz-submit{
+    background: #1a3c8d none repeat scroll 0 0;
+    border: 1px solid #1a3c8d;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 6px 20px 5px;
+    text-transform: uppercase;
+  }
+}
+/* CSS for node-category-form */
+.node-category-form{
+  h2, fieldset#edit-relations legend{
+    background-color: #d9d9d9; 
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    &:after{
+      content: '\f055';
+      position: absolute;
+      font-family: 'FontAwesome';
+      font-size: 30px;
+      color: #666;
+      right: 10px;
+    }
+    &.active:after{
+      content: '\f056';
+    }
+  }
+  @extend .itg-node-form;
+  .category-manager-selection-details,
+  #edit-relations,
+  .cotegory-manager-settings{
+    height: 46px;
+  }
+  .category-manager-basic-details, 
+  .category-manager-selection-details,
+  #edit-relations,
+  .cotegory-manager-settings{
+    overflow: hidden;
+    margin-top: 20px;
+    -webkit-transition: scale
   }
 }

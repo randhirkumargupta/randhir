@@ -269,7 +269,7 @@
     }
 }
 .itg-h321-section{
-    .auto_reviews, .dont_miss{
+    .tech_reviews, .auto_reviews, .dont_miss{
         height: 100%;
         padding: 5px 20px 8px;
         background-color: #f3f3f3;
@@ -1502,6 +1502,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 /* CSS for redeem points */
 [id*="block-views-redeem-points-block"]{
   position: relative;
+  margin-top: 45px;
   .block-title{
     font: 500 24px/30px Roboto;
     border-bottom: 1px solid #d8d8d8;
@@ -1509,6 +1510,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     margin-bottom: 20px;
   }
   .view-redeem-points{
+    .view-content{
+      margin: 0 -15px;
+      overflow: hidden;
+    }
     .product-wrapper{
       padding: 15px;
       text-align: center;
@@ -1646,4 +1651,138 @@ body.has-cart-popup{
         margin: 0 5px;
       }
   }
+}
+[id*="itg-quiz-quiz-form"]{
+  .question-heading{
+    font: 400 20/28px Roboto;
+    color: #000;
+    position: relative;
+    padding-left: 20px;
+    &:before{
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #a00606;
+    }
+  }
+  .answer-container{
+    .form-type-radios{
+      .form-type-radio{
+        position: relative;
+        > label{
+          padding: 10px;
+          border: 1px solid #e1e1e1;
+          display: block;
+          width: calc(100% - 30px);
+          color: #777;
+        }
+        .form-radio{
+          position: absolute;
+          opacity: 0;
+          &:checked + label{
+            background-color: #f6e90b;
+            color: #000;
+          }
+        }
+      }
+    }
+    .quiz-media-container{
+      float: left;
+      width: 170px;
+      margin-right: 20px;
+      .quiz-media-file{
+        height: 127px;
+        margin-bottom: 20px;
+        img{
+          width: 170px;
+          height: 127px;
+        }
+      }
+      & + .form-type-radios{
+        overflow: hidden;
+        .form-type-radio{
+          > label{
+            height: 127px;
+          }
+        }
+      }
+    }
+  }
+  .quiz-submit{
+    background: #1a3c8d none repeat scroll 0 0;
+    border: 1px solid #1a3c8d;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 6px 20px 5px;
+    text-transform: uppercase;
+  }
+}
+
+/* CSS for forgot password */
+
+[id*="itg_sso_reg_multistep_form"]{
+  ul.messages__list{
+    padding-left: 18px;
+    font-size: 14px;
+    font-family: Roboto;
+  }
+}
+[id*="itg_user_forgot_password_multistep_form"]{
+    margin: 0 -15px;
+    .form-text{
+        width: 100%;
+        height: 36px;
+    }
+    
+    .form-wrapper{
+        padding: 15px;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        position: relative;
+        .form-submit, .btn-skip{
+            background-color: #000;
+            border: 1px solid #000;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 16px;
+            height: 38px;
+            width: 200px;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 20px;
+            text-transform: capitalize;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .ajax-progress{
+            left: 217px;
+            top: 20px;
+            position: absolute;
+            .message{
+                display: none;
+            }
+        }
+    }
+    #ufname{
+      padding: 0 15px;
+    }
+    #otpclickme{
+        cursor: pointer;
+        display: inline-block;
+        line-height: 36px;
+        vertical-align: middle;
+    }
+    #otp_success{
+        color: #009c00;
+        display: inline-block;
+        padding: 15px 15px 0;
+        vertical-align: top;
+        width: 100%;
+    }
 }

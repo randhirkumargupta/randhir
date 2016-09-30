@@ -98,6 +98,9 @@ function features_for_quiz_strongarm() {
         'path' => array(
           'weight' => '5',
         ),
+        'xmlsitemap' => array(
+          'weight' => '6',
+        ),
       ),
       'display' => array(),
     ),
