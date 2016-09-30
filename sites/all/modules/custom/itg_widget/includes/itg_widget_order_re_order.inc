@@ -35,17 +35,15 @@ function itg_widget_form_views_form_so_sorry_so_sorry_videos_widget_alter(&$form
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_so_sorry";
 }
 
-
-
 /**
  * Implements hook_form_FORM_ID_alter().
  *
  * {@inheritdoc}
  */
 function itg_widget_form_views_form_special_auto_review_widget_special_auto_review_widget_list_alter(&$form, &$form_state, $form_id) {
-    
-     $draggable_form = $form['draggableviews'];
-    foreach ($draggable_form as $form_key => $from_node) {
+
+  $draggable_form = $form['draggableviews'];
+  foreach ($draggable_form as $form_key => $from_node) {
     // Escape #tree as draggable view proview 1st option tree
     if (is_integer($form_key)) {
       $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
@@ -73,7 +71,7 @@ function itg_widget_form_views_form_special_auto_review_widget_special_auto_revi
  * {@inheritdoc}
  */
 function itg_widget_form_views_form_most_read_widget_most_read_widget_list_alter(&$form, &$form_state, $form_id) {
-       
+
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_most_read";
 }
 
@@ -83,8 +81,8 @@ function itg_widget_form_views_form_most_read_widget_most_read_widget_list_alter
  * {@inheritdoc}
  */
 function itg_widget_form_views_form_yearender_top_news_and_top_videos_yearend_left_widget_list_alter(&$form, &$form_state, $form_id) {
-    $draggable_form = $form['draggableviews'];
-   
+  $draggable_form = $form['draggableviews'];
+
   foreach ($draggable_form as $form_key => $from_node) {
     // Escape #tree as draggable view proview 1st option tree
     if (is_integer($form_key)) {
@@ -291,7 +289,6 @@ function update_itg_widget_order_table_data_for_so_sorry($form, &$form_state) {
   }
 }
 
-
 /**
  * Function for save new order in custom table itg_widget_order for we may suggest widget.
  *
@@ -306,12 +303,11 @@ function update_itg_widget_order_table_data_for_issue_magazin($form, &$form_stat
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     db_update('itg_widget_order')
-                ->fields(array('weight' => $value['weight']))
-                 ->condition('widget', 'issue_magazin_widget')
+            ->fields(array('weight' => $value['weight']))
+            ->condition('widget', 'issue_magazin_widget')
             ->condition('nid', $value['id'])
-                ->execute();
+            ->execute();
   }
- 
 }
 
 /**
@@ -327,12 +323,11 @@ function update_itg_widget_order_table_data_for_special_auto_review($form, &$for
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     db_update('itg_widget_order')
-                 ->fields(array('weight' => $value['weight'],'extra' => $value['custom_text'],))
-                 ->condition('widget', 'special_auto_review_content')
+            ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
+            ->condition('widget', 'special_auto_review_content')
             ->condition('nid', $value['id'])
-                ->execute();
+            ->execute();
   }
- 
 }
 
 /**
@@ -349,12 +344,11 @@ function update_itg_widget_order_table_data_for_most_read($form, &$form_state) {
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     db_update('itg_widget_order')
-                 ->fields(array('weight' => $value['weight'],))
-                 ->condition('widget', 'most_read_content')
+            ->fields(array('weight' => $value['weight'],))
+            ->condition('widget', 'most_read_content')
             ->condition('nid', $value['id'])
-                ->execute();
+            ->execute();
   }
- 
 }
 
 /**
@@ -371,15 +365,12 @@ function update_itg_widget_order_table_data_for_yearend_left($form, &$form_state
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     db_update('itg_widget_order')
-                ->fields(array('weight' => $value['weight'],'extra' => $value['custom_text'],))
-                 ->condition('widget', 'yearender_left_news_video')
+            ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
+            ->condition('widget', 'yearender_left_news_video')
             ->condition('nid', $value['id'])
-                ->execute();
+            ->execute();
   }
-  
- 
 }
-
 
 /**
  * {@inheritdoc}
@@ -395,6 +386,7 @@ function itg_widget_form_views_form_story_widget_photo_carousel_alter(&$form, &$
  * @param array $form_state
  */
 function update_itg_widget_order_table_data($form, &$form_state) {
+  
   // Current display for indentifing the view page (Widget name).
   $current_display = $form_state['build_info']['args'][0]->current_display;
   // Below view_name will use to get widget name.
@@ -415,42 +407,21 @@ function update_itg_widget_order_table_data($form, &$form_state) {
       $weight_track_flag = TRUE;
     }
   }
+  
   // IF we got there is changes made in draggable view order.
-  if ($weight_track_flag) {
-    // watchdog("widget", "Change made in order");
-    // First delete all the data from itg_widget_order table of combination
-    foreach ($draggable_view_data as $key => $node_data) {
-      //if (!empty($node_data['id']) && !empty($content_type) && !empty($widget) && !empty($cat_id)) {
-      //$node_type = node_load($node_data['id']);  
-      $num_deleted = db_delete('itg_widget_order')
-              ->condition('nid', $node_data['id'])
-              //->condition('content_type', $node_type->type)
-              ->condition('widget', $widget)
-              ->condition('cat_id', $cat_id)
-              ->execute();
-      if ($num_deleted) {
-        // watchdog("widget", "Delete action has been performed");
-      }
-      //}
-    }
-
+  if (1) {
     // Now insert new entry in itg_widget_order table of combination
     foreach ($draggable_view_data as $key => $node_data) {
-      if (!empty($node_data['id']) && !empty($content_type) && !empty($widget) && !empty($cat_id)) {
-        $is_inserted = db_insert('itg_widget_order')
-                ->fields(array(
-                    'nid' => $node_data['id'],
-                    'widget' => $widget,
-                    'content_type' => $content_type,
-                    'cat_id' => $cat_id,
-                    'weight' => $node_data['weight'],
-                ))
-                ->execute();
-        if ($is_inserted) {
-          // watchdog("widget", "Insert action has been performed");
-          drupal_set_message(t("Ordering has been saved."));
-        }
-      }
+      $DBWriteStatus = db_merge('itg_widget_order')
+              ->key(array(
+                  'nid' => $node_data['id'],
+                  'widget' => $widget,
+                  'cat_id' => $cat_id,
+              ))
+              ->fields(array(
+                  'weight' => $node_data['weight'],
+              ))
+              ->execute();
     }
   }
   // If there is not chnages found in draggable view order then simply give an message.

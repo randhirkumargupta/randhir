@@ -466,7 +466,42 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         '#markup' => l("Reset", $url_without_query_string, array("query" => $query_url)),
     );
   }
+  if ($form_id == 'views_form_section_wise_content_ordering_list_page') {
 
+//    $view = views_get_current_view();
+//    $total_rows = $view->total_rows;
+
+    $itg_widget_order_data = db_select('itg_widget_order', 'iwo')
+                    ->fields('iwo', array('weight', 'nid'))
+                    ->condition('cat_id', $_GET['category_tid'])
+                    ->condition('widget', 'section_wise_widget')
+                    ->execute()->fetchAll();
+    
+    
+    //Prepare weight crosspond to nid.
+    $select_map_array = array();
+     foreach($itg_widget_order_data as $order_data) {
+       $select_map_array[$order_data->nid] = $order_data->weight;
+     }
+     
+    // Prepare weights in array. 
+    $select_map_array_weight = array();
+     foreach($itg_widget_order_data as $order_data) {
+       $select_map_array_weight[] = $order_data->weight;
+     }
+     
+     
+    foreach ($form['draggableviews'] as $key => $weight) {
+     // echo $key."</br>";
+      // make options to weight drop down equal to saved weight value.
+      $form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc($select_map_array_weight);
+      //$form['draggableviews'][$key]['weight']['#options'] = array($key => $key);
+      // make default selected value as saved in database.
+      $form['draggableviews'][$key]['weight']['#default_value'] = $select_map_array[$form['draggableviews'][$key]['id']['#value']];
+      $form['draggableviews'][$key]['weight']['#validated'] = true;
+    }
+  }
+  drupal_add_css("select.draggableviews-weight {display:none !important}","inline");
   // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
@@ -1098,7 +1133,9 @@ function itg_widget_preprocess_views_view(&$vars) {
   );
   if (in_array($view_name, $widget_views)) {
     $vars['classes_array'][] = 'widgets-view';
-    //drupal_add_css('td.tabledrag-hide {display: block !important;}' , 'inline');
+    drupal_add_css('td.tabledrag-hide  {display: inline-block !important;}', 'inline');
+    drupal_add_css('th.tabledrag-hide  {display: inline-block !important;}', 'inline');
+    drupal_add_css('.tabledrag-handle  {display: inline-block !important;}', 'inline');
   }
 }
 
