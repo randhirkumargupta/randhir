@@ -30,6 +30,11 @@ h4.heading{
     @include itg-font($itg-roboto,$itg-font-bold);
     text-transform: uppercase;
     margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    a{
+        color:#09619f;
+    }
 }
 .list-none{
     list-style-type: none;
@@ -1434,7 +1439,7 @@ footer{
         margin-bottom: 5px;
     }    
 }
-.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video, .osscar-video{    
     /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
@@ -4006,7 +4011,7 @@ footer{
 }
 
 /*CSS start for year end page*/
-#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video, .osscar-video{
     background: #f6f6f6;
     ul{
         .dont-miss-listing{
@@ -4293,8 +4298,57 @@ footer{
     }
     /*End photo section slider*/
 }
-
 /*CSS End special tech page */
+
+/*CSS start for special osscar*/
+.oscar-layout-page{
+    .osscar-video{
+        background: transparent;   
+        ul .dont-miss-listing + .dont-miss-listing {
+            padding: 0 0px 25px 0px;
+        }
+    }    
+    .oscor-photo{
+        .col-md-6{
+            margin-bottom: 30px;
+        
+        .title{
+            h3{
+                padding: 15px;
+                color: #000;
+                font-size: 18px;
+                background: #fabd1e;
+            }
+        }
+        }
+    }
+    .oscar-features{
+        .col-md-6{
+            overflow: hidden;
+            margin-bottom: 30px;
+            .pic{
+                float: left;
+                margin-right: 15px;
+            }
+
+        }
+
+    }
+    .oscar-news{
+        a{
+            display: block;
+        }
+        h3{
+            font-weight: 700;
+            margin: 10px 0 25px 0px;
+        }
+        p{
+            padding-top: 10px;
+        }
+    }
+}
+/*CSS end for special osscar*/
+
 
 /* Sign Up and Login Form CSS */
 [id*="itg-sso-reg-multistep-form"]{
