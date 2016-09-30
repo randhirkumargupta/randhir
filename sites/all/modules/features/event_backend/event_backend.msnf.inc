@@ -29,8 +29,10 @@ function event_backend_msnf_step_info() {
       5 => 'field_config_sponsors',
       6 => 'field_config_video',
       7 => 'field_force_registration_open',
-      8 => 'path',
-      9 => 'additional_settings',
+      8 => 'field_associate_event_photo',
+      9 => 'field_associate_event_video',
+      10 => 'path',
+      11 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(

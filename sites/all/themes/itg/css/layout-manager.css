@@ -1370,3 +1370,18 @@ img {
 }
 
 /*CSS End special tech page */
+/*CSS Start for oscar page*/
+.oscar-layout-page .itg-h747-section .droppable {
+  height: 747px;
+}
+.oscar-layout-page .itg-h735-section .droppable {
+  height: 735px;
+}
+.oscar-layout-page .itg-h625-section .droppable {
+  height: 625px;
+}
+.oscar-layout-page .itg-h305-section .droppable {
+  height: 305px;
+}
+
+/*CSS End for oscar page*/
