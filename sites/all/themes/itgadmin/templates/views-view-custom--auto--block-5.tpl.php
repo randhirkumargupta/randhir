@@ -31,10 +31,9 @@
 
  <li><?php print $row['field_story_extra_large_image'];?> 
       <div class="detail">
-        <p><?php print $row['delta'];?></p>
-        <p><?php print ucfirst($row['title']);?></p>
-      </div>
-  
+         <p class="flex-count"><i class="fa fa-camera"></i> <?php print $row['delta'];?> Images</p>
+        <p class="flex-caption"><?php print ucfirst($row['title']);?></p>
+      </div>  
  </li>
 <?php }; ?>
 </ul>
