@@ -1543,7 +1543,17 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         font: 600 14px/18px Roboto;
         height: 30px;
         padding: 5px 15px;
+        position: relative;
         margin: 0 5px;
+        &:before{
+          content: '\f06b';
+          position: absolute;
+          font-family: 'FontAwesome';
+          font-size: 16px;
+          top: 5px;
+          color: #fff;
+          left: 10px;
+        }
       }
       .btn-redeem-points{
         background-color: #a00606;
@@ -1670,8 +1680,8 @@ body.has-cart-popup{
     }
   }
   .answer-container{
-    .form-type-radios{
-      .form-type-radio{
+    .form-type-radios, .form-type-checkboxes{
+      .form-type-radio, .form-type-checkbox{
         position: relative;
         > label{
           padding: 10px;
@@ -1680,7 +1690,7 @@ body.has-cart-popup{
           width: calc(100% - 30px);
           color: #777;
         }
-        .form-radio{
+        .form-radio, .form-checkbox{
           position: absolute;
           opacity: 0;
           &:checked + label{
@@ -1702,9 +1712,9 @@ body.has-cart-popup{
           height: 127px;
         }
       }
-      & + .form-type-radios{
+      & + .form-type-radios, & + .form-type-checkboxes{
         overflow: hidden;
-        .form-type-radio{
+        .form-type-radio, .form-type-checkbox{
           > label{
             height: 127px;
           }
@@ -1785,4 +1795,71 @@ body.has-cart-popup{
         vertical-align: top;
         width: 100%;
     }
+}
+.page-redeem-points{
+  header{
+    margin-bottom: 0;
+  }
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header{
+  background-color: #eaebed;
+  padding: 5px 0;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  .cart-user{
+    float: left;
+    max-width: 300px;
+    text-align: center;
+    .user-pic {
+      background-color: #d3d6db;
+      border-radius: 50%;
+      display: inline-block;
+      height: 60px;
+      overflow: hidden;
+      vertical-align: top;
+      width: 60px;
+    }
+    .user-name {
+      color: #1a3c8d;
+      font: 500 15px/18px Roboto;
+      padding: 5px 0 0;
+      text-transform: uppercase;
+    }
+    .logout-link a {
+      color: #777;
+      font: 400 12px/12px Roboto;
+    }
+  }
+  .header-cart{
+    float: right;
+    list-style: none;
+    padding-top: 40px;
+    li{
+      float: left;
+      font: 400 14px/18px Roboto;
+      color: #777;
+      .cart-total{
+        > a{
+          color: #777;
+          .fa{
+            vertical-align: top;
+            font-size: 16px;
+          }
+        }
+      }
+      &#my-remaining-points{
+        span{
+          color: #1a3c8d;
+          font: 500 14px/18px Roboto;
+        }
+      }
+      & + li:before{
+        content: '|';
+        font: 400 14px/18px Roboto;
+        color: #777;
+        margin: 0 12px 0 15px;
+      }
+    }
+  }
 }

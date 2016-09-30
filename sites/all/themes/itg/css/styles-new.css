@@ -1631,7 +1631,17 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 600 14px/18px Roboto;
   height: 30px;
   padding: 5px 15px;
+  position: relative;
   margin: 0 5px;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .btn-add-cart:before {
+  content: '\f06b';
+  position: absolute;
+  font-family: 'FontAwesome';
+  font-size: 16px;
+  top: 5px;
+  color: #fff;
+  left: 10px;
 }
 [id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .btn-redeem-points {
   background-color: #a00606;
@@ -1753,21 +1763,21 @@ body.has-cart-popup {
   border-radius: 50%;
   background-color: #a00606;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox {
   position: relative;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio > label {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox > label {
   padding: 10px;
   border: 1px solid #e1e1e1;
   display: block;
   width: calc(100% - 30px);
   color: #777;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-checkbox {
   position: absolute;
   opacity: 0;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio:checked + label {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-checkbox:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-checkbox:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-checkbox:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-checkbox:checked + label {
   background-color: #f6e90b;
   color: #000;
 }
@@ -1784,10 +1794,10 @@ body.has-cart-popup {
   width: 170px;
   height: 127px;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios {
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-checkboxes {
   overflow: hidden;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-radio > label {
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-checkboxes .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-checkboxes .form-type-checkbox > label {
   height: 127px;
 }
 [id*="itg-quiz-quiz-form"] .quiz-submit {
@@ -1859,4 +1869,67 @@ body.has-cart-popup {
   padding: 15px 15px 0;
   vertical-align: top;
   width: 100%;
+}
+
+.page-redeem-points header {
+  margin-bottom: 0;
+}
+
+#block-itg-loyalty-reward-itg-loyalty-reward-header {
+  background-color: #eaebed;
+  padding: 5px 0;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user {
+  float: left;
+  max-width: 300px;
+  text-align: center;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user .user-pic {
+  background-color: #d3d6db;
+  border-radius: 50%;
+  display: inline-block;
+  height: 60px;
+  overflow: hidden;
+  vertical-align: top;
+  width: 60px;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user .user-name {
+  color: #1a3c8d;
+  font: 500 15px/18px Roboto;
+  padding: 5px 0 0;
+  text-transform: uppercase;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user .logout-link a {
+  color: #777;
+  font: 400 12px/12px Roboto;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart {
+  float: right;
+  list-style: none;
+  padding-top: 40px;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li {
+  float: left;
+  font: 400 14px/18px Roboto;
+  color: #777;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li .cart-total > a {
+  color: #777;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li .cart-total > a .fa {
+  vertical-align: top;
+  font-size: 16px;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li#my-remaining-points span {
+  color: #1a3c8d;
+  font: 500 14px/18px Roboto;
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li + li:before {
+  content: '|';
+  font: 400 14px/18px Roboto;
+  color: #777;
+  margin: 0 12px 0 15px;
 }
