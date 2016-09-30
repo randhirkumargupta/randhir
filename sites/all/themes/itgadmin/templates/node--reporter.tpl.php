@@ -23,6 +23,7 @@
           <?php
         }
         ?>
+        
         <?php
         if (!empty($node->field_reporter_twitter_handle[LANGUAGE_NONE][0][value])) {
           ?>
@@ -43,7 +44,17 @@
           <?php
         }
         ?>
-
+        
+        <?php
+        if (!empty($node->field_story_new_title[LANGUAGE_NONE][0][value])) {
+          ?>
+          <div class="field">
+              <div class="field-label"><?php print t('Designation:'); ?></div>
+              <div class="field-items"><?php print $node->field_story_new_title[LANGUAGE_NONE][0][value]; ?></div>
+          </div>
+          <?php
+        }
+        ?>
 
         <?php
         $occupation = $content['field_celebrity_pro_occupation'];

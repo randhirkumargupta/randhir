@@ -77,6 +77,11 @@ function itg_preprocess_page(&$variables) {
       unset($variables['page']['content']['system_main']);
     }
   }
+  
+  // add condition to hide header and footer for signup, forgot-password page
+  if (($arg[0] == 'forgot-password' || $arg[0] == 'signup' )) {
+    $variables['theme_hook_suggestions'][] = 'page__removeheader';
+  }
 }
 
 /**

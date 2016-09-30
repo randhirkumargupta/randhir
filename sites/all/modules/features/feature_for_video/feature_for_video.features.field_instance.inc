@@ -1197,7 +1197,7 @@ function feature_for_video_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'entityreference_autocomplete_tags',
       'weight' => 2,
     ),
   );

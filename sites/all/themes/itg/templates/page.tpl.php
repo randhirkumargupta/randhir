@@ -47,6 +47,7 @@
         $cls = 'col-md-8';
     endif; ?>
   <?php print render($page['top']); ?>
+  <?php print render($page['my_cart']); ?>
   <main id="main" class="container">
     <div class="row">
     <section id="content" class="<?php echo $cls;?>" role="main">
@@ -57,7 +58,7 @@
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
-        <h1 class="page__title title" id="page-title"><?php //print $title; ?></h1>
+        <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>

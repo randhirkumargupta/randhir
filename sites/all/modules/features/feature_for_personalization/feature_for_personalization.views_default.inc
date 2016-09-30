@@ -49,6 +49,7 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Content type */
   $handler->display->display_options['fields']['field_ugc_ctype']['id'] = 'field_ugc_ctype';
   $handler->display->display_options['fields']['field_ugc_ctype']['table'] = 'field_data_field_ugc_ctype';

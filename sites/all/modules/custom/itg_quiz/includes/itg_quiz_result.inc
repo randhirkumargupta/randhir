@@ -6,7 +6,6 @@
 function itg_quiz_user_list() {
   global $user;
   $node = node_load(arg(1));
-  $nid = arg(1);
   
   if ($node->type == 'quiz') {
     $output = '';
@@ -14,14 +13,16 @@ function itg_quiz_user_list() {
     //Send mail link is visible only for site admin, editor and main admin
     if(in_array('Site Admin', array_values($user->roles))  
        || in_array('administrator', array_values($user->roles)) 
-       || in_array('Editor', array_values($user->roles))){
-      $send_mail = l(t("Send Mail"),"quiz-winners-mail/".$nid);
+      // || in_array('Editor', array_values($user->roles))
+      ) {
+      
+      $send_mail = l(t("Send Mail"),"quiz-winners-mail/".$node->nid);
     } 
     else {
       $send_mail = '';
     }
     
-    $output.= '<div align="right">'.$send_mail.'</div>
+    $output.= '<div><strong>'.  itg_common_get_node_title(arg(1)).'</strong></div><div align="right">'.$send_mail.'</div>
       <table class="views-table">
         <thead>        
           <tr>
@@ -63,6 +64,6 @@ function itg_quiz_user_list() {
       $output.= '</tbody></table><p>&nbsp;</p>';
       return $output;
   } else {
-    drupal_access_denied();
+    drupal_not_found();
   }
 }

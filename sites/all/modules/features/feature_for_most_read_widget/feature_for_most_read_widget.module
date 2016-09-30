@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature For Most Read Widget feature.
+ */
+
+include_once 'feature_for_most_read_widget.features.inc';

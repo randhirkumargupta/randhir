@@ -63,11 +63,28 @@ function itg_widget_form_views_form_special_auto_review_widget_special_auto_revi
                  jQuery("#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list").find("th.tabledrag-hide").html("Label");
           });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
 
-  drupal_add_css('#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
+  drupal_add_css('#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list  .draggableviews-weight {display:none}', 'inline');
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_special_auto_review";
 }
 
-
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+function itg_widget_form_views_form_most_read_widget_most_read_widget_list_alter(&$form, &$form_state, $form_id) {
+       
+  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_most_read";
+}
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+function itg_widget_form_views_form_feature_content_by_section_widget_feature_content_section_widget_list_alter(&$form, &$form_state, $form_id) {
+       
+  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_feature_content_by_section";
+}
 /**
  * Implements hook_form_FORM_ID_alter().
  *
@@ -320,6 +337,50 @@ function update_itg_widget_order_table_data_for_special_auto_review($form, &$for
     db_update('itg_widget_order')
                  ->fields(array('weight' => $value['weight'],'extra' => $value['custom_text'],))
                  ->condition('widget', 'special_auto_review_content')
+            ->condition('nid', $value['id'])
+                ->execute();
+  }
+ 
+}
+
+/**
+ * Function for save new order in custom table itg_widget_order for Most Read.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function update_itg_widget_order_table_data_for_most_read($form, &$form_state) {
+  // Take draggable view input value after submit the form.
+  $draggable_view_data = $form_state['input']['draggableviews'];
+  $extra_values = array();
+
+  // Get extra , nid , content type from custom_table because it will further use to insert again.
+  foreach ($draggable_view_data as $key => $value) {
+    db_update('itg_widget_order')
+                 ->fields(array('weight' => $value['weight'],))
+                 ->condition('widget', 'most_read_content')
+            ->condition('nid', $value['id'])
+                ->execute();
+  }
+ 
+}
+
+/**
+ * Function for save new order in custom table itg_widget_order for Most Read.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function update_itg_widget_order_table_data_for_feature_content_by_section($form, &$form_state) {
+  // Take draggable view input value after submit the form.
+  $draggable_view_data = $form_state['input']['draggableviews'];
+  $extra_values = array();
+
+  // Get extra , nid , content type from custom_table because it will further use to insert again.
+  foreach ($draggable_view_data as $key => $value) {
+    db_update('itg_widget_order')
+                 ->fields(array('weight' => $value['weight'],))
+                 ->condition('widget', 'feature_content_by_section')
             ->condition('nid', $value['id'])
                 ->execute();
   }

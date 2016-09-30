@@ -16,6 +16,7 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   global $base_url;
   
   $settings['base_url'] = $base_url;
+  $settings['layout_type'] = $arg1;
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));  
   drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1));  
   

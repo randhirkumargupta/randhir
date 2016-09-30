@@ -244,7 +244,7 @@ function features_for_survey_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -257,7 +257,7 @@ function features_for_survey_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Survey End Date */
+  /* Field: Content: Timeline */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -426,6 +426,51 @@ function features_for_survey_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'manage-survey';
+  $translatables['manage_survey'] = array(
+    t('Master'),
+    t('Manage Survey'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('No Result Found!'),
+    t('author'),
+    t('S.No'),
+    t('Author uid'),
+    t('Nid'),
+    t('Type'),
+    t('First name'),
+    t('Last name'),
+    t('Survey Title'),
+    t('Section'),
+    t('Posted By'),
+    t('[field_first_name] [field_last_name]'),
+    t('Start Date '),
+    t('End Date'),
+    t('Modified On'),
+    t('Status'),
+    t('Published'),
+    t('Un-Published'),
+    t('Anonymous Vote'),
+    t('Authenticated Vote'),
+    t('Survey Result'),
+    t('View'),
+    t('<span class="view-link">[view_node]</span>'),
+    t('Edit'),
+    t('<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>'),
+    t('Actions'),
+    t('Category'),
+    t('Page'),
+  );
   $export['manage_survey'] = $view;
 
   return $export;

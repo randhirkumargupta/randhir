@@ -6,7 +6,8 @@
 (function($) {
     Drupal.behaviors.itg_layout = {
         attach: function(context, settings) {
-
+            var layout_type = settings.itg_story.settings.layout_type;
+            
             // after error display
             if ($('.messages--error').html() != null) {
                 return false;
@@ -24,6 +25,8 @@
                     helper: "clone",
                     drag: function(event, ui) {
                         widget_name = $(this).attr('data-widget');
+                        widget_info = $(this).attr('data-widget-info');
+                        
                         // for category tab
                         category_name_tab = $(this).attr('id');
                         //alert(widget_name);
@@ -31,8 +34,10 @@
                 });
 
                 $(".droppable").droppable({
+                    
                     hoverClass: "drop-hover",
                     drop: function(event, ui) {
+                        
                         var ad_class = $(this).attr('class');
 
                         if (ad_class == 'sidebar-ad droppable ui-droppable') { // code change by avanish
@@ -41,10 +46,22 @@
                         }
                         //alert(widget_name);
 
-
+                        
                         $(this).removeClass("gray-bg-layout");
                         // content block id for display content widget
                         var block_name = $(this).find('.data-holder').attr('id');
+                        //  content block style for display content widget
+                        
+                        var splitewidgitname=widget_name.split('#');
+                        if(splitewidgitname[0]=='section_wise_order') {
+                            var widget_style = $(this).find('.data-holder').attr('widget-style');
+                            if(widget_style != "" && widget_style != "undefined") {
+                               widget_info ='custom|'+widget_style;
+                            }
+                            else {
+                              widget_info = 'custom|common-category-style';  
+                            }
+                        }
                         //alert(block_name);
                         // tamplate section value
                         var section_name = $('#edit-section').val();
@@ -61,7 +78,7 @@
                             return false;
                         }
 
-
+                        
 
                         if (display_area) {
                             var content_place = display_area;
@@ -69,12 +86,12 @@
                         else {
                             var content_place = block_name;
                         }
-
+                        
                         var base_url = settings.itg_story.settings.base_url;
                         $.ajax({
                             url: base_url + "/insert-layout-setting-ajax/layout",
                             method: 'post',
-                            data: {block_name: block_name, widget_name: widget_name, section_name: section_name, template_name: template_name, block_title: category_name_tab},
+                            data: {block_name: block_name, widget_name: widget_name, section_name: section_name, template_name: template_name, layout_type:layout_type, block_title: category_name_tab, widget_info:widget_info},
                             beforeSend: function() {
 
                                 $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
@@ -115,7 +132,7 @@
                 $.ajax({
                     url: base_url + "/insert-layout-setting-ajax/publish",
                     method: 'post',
-                    data: {status_val: 1, section_name: section_name, template_name: template_name},
+                    data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
                     beforeSend: function() {
                         $('.itg-ajax-loader').show();
                     },
@@ -137,7 +154,7 @@
                 $.ajax({
                     url: base_url + "/insert-layout-setting-ajax/delete",
                     method: 'post',
-                    data: {status_val: 1, section_name: section_name, template_name: template_name},
+                    data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
                     beforeSend: function() {
                         $('.itg-ajax-loader').show();
                     },
@@ -170,7 +187,7 @@
                 $.ajax({
                     url: base_url + "/insert-layout-setting-ajax/title",
                     method: 'post',
-                    data: {block_name: block_id, section_name: section_name, template_name: template_name, block_title: block_title},
+                    data: {block_name: block_id, section_name: section_name, template_name: template_name, layout_type:layout_type, block_title: block_title},
                     beforeSend: function() {
                         $('.block_title_id').addClass('input-loader');
                     },
@@ -195,7 +212,7 @@
                     $.ajax({
                         url: base_url + "/section-widgets-ajax/insert",
                         method: 'post',
-                        data: {cid: 1, section_name: section_name, template_name: template_name, category_name: category_name, widgets_type: widgets_type},
+                        data: {cid: 1, section_name: section_name, template_name: template_name, layout_type:layout_type, category_name: category_name, widgets_type: widgets_type},
                         beforeSend: function() {
                             $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
@@ -226,7 +243,7 @@
                     $.ajax({
                         url: base_url + "/section-widgets-ajax/insert",
                         method: 'post',
-                        data: {cid: 1, section_name: section_name, template_name: template_name, category_name: category_name, widgets_type: widgets_type},
+                        data: {cid: 1, section_name: section_name, template_name: template_name, layout_type:layout_type, category_name: category_name, widgets_type: widgets_type},
                         beforeSend: function() {
                             $('#section_widget2_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },
@@ -251,7 +268,7 @@
                 $.ajax({
                     url: base_url + "/section-widgets-ajax/delete",
                     method: 'post',
-                    data: {id: widget_id, section_name: section_name, template_name: template_name, },
+                    data: {id: widget_id, section_name: section_name, template_name: template_name, layout_type:layout_type },
                     beforeSend: function() {
                         $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                     },
@@ -272,7 +289,7 @@
                 $.ajax({
                     url: base_url + "/section-widgets-ajax/delete",
                     method: 'post',
-                    data: {id: widget_id, section_name: section_name, template_name: template_name, },
+                    data: {id: widget_id, section_name: section_name, template_name: template_name, layout_type:layout_type },
                     beforeSend: function() {
                         $('#section_widget2_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                     },
@@ -305,7 +322,7 @@
                 $.ajax({
                     url: base_url + "/insert-layout-setting-ajax/widget_delete",
                     method: 'post',
-                    data: {block_name: block_id, section_name: section_name, template_name: template_name},
+                    data: {block_name: block_id, section_name: section_name, template_name: template_name, layout_type:layout_type},
                     beforeSend: function() {
                         $('#' + block_id).addClass('input-loader');
                     },
@@ -329,7 +346,7 @@
                     jQuery.ajax({
                         url: base_url + "/insert-layout-setting-ajax/widget_delete",
                         method: 'post',
-                        data: {block_name: block_id, section_name: section_name, template_name: template_name},
+                        data: {block_name: block_id, section_name: section_name, template_name: template_name, layout_type:layout_type},
                         beforeSend: function() {
                             jQuery('#' + block_id).addClass('input-loader');
                         },

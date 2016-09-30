@@ -8,21 +8,15 @@
         <?php print drupal_render($form['field_story_select_supplement']); ?>
         <?php print drupal_render($form['field_story_issue_date']); ?>
         <?php print drupal_render($form['title']); ?>
+        <?php print drupal_render($form['field_story_magazine_headline']); ?>
+        <?php print drupal_render($form['field_story_category']); ?>
+        <?php print drupal_render($form['field_primary_cat_data']); ?>
+        <?php print drupal_render($form['field_story_kicker_text']); ?> 
+        <?php print drupal_render($form['field_story_magazine_kicker_text']); ?>
+        <?php print drupal_render($form['body']); ?>
         <?php print drupal_render($form['field_story_reporter']); ?>
         <div id="reporter-details"></div>
         <?php print drupal_render($form['field_stroy_city']); ?>
-        <?php print drupal_render($form['field_story_category']); ?>
-        <?php print drupal_render($form['field_primary_cat_data']); ?>
-        <?php print drupal_render($form['field_story_extra_large_image']); ?>
-        <div class="pre-desc"><?php print t('This image will be resized by the system into pre-defined dimensions'); ?></div>    
-        <?php print drupal_render($form['field_story_large_image']); ?>
-        <?php print drupal_render($form['field_story_medium_image']); ?>
-        <?php print drupal_render($form['field_story_small_image']); ?>
-        <?php print drupal_render($form['field_story_extra_small_image']); ?>
-        <?php print drupal_render($form['field_story_kicker_text']); ?> 
-        <?php print drupal_render($form['body']); ?>
-        <?php print drupal_render($form['field_story_magazine_kicker_text']); ?>
-        <?php print drupal_render($form['field_story_magazine_headline']); ?>
         <?php print drupal_render($form['field_story_itg_tags']); ?>
       </div>
     </div>
@@ -34,6 +28,17 @@
         <?php print drupal_render($form['field_story_template_quotes']); ?>
         <?php print drupal_render($form['field_story_template_factoids']); ?>
         <?php print drupal_render($form['field_story_template_buzz']); ?>
+      </div>
+    </div>
+    <div id="browse-image" class="itg-form-section-wrapper">
+      <h2 class="story-title"><?php print t('Browse Image'); ?></h2>
+      <div class="itg-form-section hide">
+        <?php print drupal_render($form['field_story_extra_large_image']); ?>
+        <div class="pre-desc"><?php print t('This image will be resized by the system into pre-defined dimensions'); ?></div>    
+        <?php print drupal_render($form['field_story_large_image']); ?>
+        <?php print drupal_render($form['field_story_medium_image']); ?>
+        <?php print drupal_render($form['field_story_small_image']); ?>
+        <?php print drupal_render($form['field_story_extra_small_image']); ?>
       </div>
     </div>
     <div id="StoryContent" class="itg-form-section-wrapper">
@@ -67,7 +72,7 @@
   <div class="col-md-4">
     <div class="itg-sidebar-form">
       <div id="Briefcase" class="itg-sidebar-form-section">
-        <h2 class="story-title"><?php print t('Brief case'); ?></h2>
+        <h2 class="story-title"><?php print t('Briefcase'); ?></h2>
         <?php print drupal_render($form['field_story_highlights']); ?>
       </div>
       <div id="Configuration" class="itg-sidebar-form-section">

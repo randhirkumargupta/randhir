@@ -76,6 +76,9 @@ function features_for_loyalty_and_rewards_strongarm() {
         'path' => array(
           'weight' => '9',
         ),
+        'flag' => array(
+          'weight' => '10',
+        ),
       ),
       'display' => array(),
     ),

@@ -30,9 +30,9 @@ function generate_custom_pattern_feed($data) {
   $nids = isset($data['syndication']) ? unserialize($data['syndication']) : array();
   $client = isset($data['client_title']) ? $data['client_title'] : "";
   $content_type = isset($data['web_property']) ? $data['web_property'] : "";
-  
+
   // As known magazine is story content.
-  if($content_type == 'magazine') {
+  if ($content_type == 'magazine') {
     $content_type = 'story';
   }
   $feed_type = isset($data['feed_type']) ? $data['feed_type'] : "";
@@ -217,7 +217,16 @@ function get_custom_feeds_files($nid = NULL, $text = NULL, $feed_type = NULL) {
           $iteration = count($var_array[0]);
           $new_text = '';
           for ($i = 0; $i < $iteration; $i++) {
-            $data_array[] = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+            $return_value_for_sydiation = '';
+            //Fix for sydication images repeated value.
+            if ($var_array[1][$i] == 'field_gallery_image') {
+              $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+              $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_gallery_image']);
+            }
+            else {
+              $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+            }
+            $data_array[] = $return_value_for_sydiation;
           }
           if (count($var_array[0])) {
             foreach ($var_array[0] as $key => $pattren) {
@@ -261,7 +270,17 @@ function get_generated_feed($message, $var_array, $node, $data_array, $text) {
   if (empty($message)) {
     $iteration = count($var_array[0]);
     for ($i = 0; $i < $iteration; $i++) {
-      $data_array[] = get_node_field_values($node, $var_array[1][$i]);
+      //$data_array[] = get_node_field_values($node, $var_array[1][$i]);
+      $return_value_for_sydiation = '';
+      //Fix for sydication images repeated value.
+      if ($var_array[1][$i] == 'field_gallery_image') {
+        $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+        $return_value_for_sydiation[0] = $field_gallery_image['field_gallery_image'][0];
+      }
+      else {
+        $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+      }
+      $data_array[] = $return_value_for_sydiation;
     }
     if (count($var_array[0])) {
       foreach ($var_array[0] as $key => $pattren) {
@@ -428,15 +447,18 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
         case 'value':
           /* Its very importent to convert text into xml standard so using htmlspecialchars with ENT_XML1 */
           if ($field_name == 'field_gallery_image') {
+            $temp_requred_value = array();
             foreach ($entity->field_gallery_image['und'] as $key => $fid) {
               /* Loop Only once */
-              if ($key != 0)
-                break;
               $value = $entity->field_gallery_image['und'][$key]['value'];
               $field_collection_item = entity_load('field_collection_item', array($value));
-              $field_collection_item_uri = $field_collection_item[$value]->field_images[LANGUAGE_NONE][0]['uri'];
-              $required_value[] = file_create_url($field_collection_item_uri);
+              // Only Synicated images ar required
+              if ($field_collection_item[$value]->field_image_syndication['und'][0]['value'] == 'yes') {
+                $field_collection_item_uri = $field_collection_item[$value]->field_images[LANGUAGE_NONE][0]['uri'];
+                $temp_requred_value[] = file_create_url($field_collection_item_uri);
+              }
             }
+            $required_value['field_gallery_image'] = $temp_requred_value;
           }
           else {
             $required_value[] = "<![CDATA[" . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . "]]>";
@@ -651,7 +673,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_validate(&
     }
     watchdog('debug', "Total " . count($result) . " results founds for combination");
   }
-  
+
   // For retaing value of markup field.
   $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
   #check for all valid variables

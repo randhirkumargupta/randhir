@@ -287,7 +287,7 @@
   background-color: #f3f3f3;
 }
 
-.itg-h321-section .dont_miss {
+.itg-h321-section .tech_reviews, .itg-h321-section .auto_reviews, .itg-h321-section .dont_miss {
   height: 100%;
   padding: 5px 20px 8px;
   background-color: #f3f3f3;
@@ -1584,4 +1584,279 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 400 18px/18px Roboto;
   text-align: center;
   margin-bottom: 20px;
+}
+
+/* CSS for redeem points */
+[id*="block-views-redeem-points-block"] {
+  position: relative;
+  margin-top: 45px;
+}
+[id*="block-views-redeem-points-block"] .block-title {
+  font: 500 24px/30px Roboto;
+  border-bottom: 1px solid #d8d8d8;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .view-content {
+  margin: 0 -15px;
+  overflow: hidden;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper {
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #dedede;
+  margin: 15px 0;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .product-title {
+  text-transform: uppercase;
+  font: 400 16px/18px Roboto;
+  padding-top: 15px;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .redeem-points {
+  text-transform: uppercase;
+  font: 600 18px/18px Roboto;
+  padding-top: 5px;
+  color: #a00606;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .product-actions {
+  padding-top: 30px;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .btn-add-cart {
+  background-color: #eaebed;
+  border: 1px solid #e1e1e1;
+  border-radius: 1px;
+  color: #777;
+  display: inline-block;
+  vertical-align: top;
+  font: 600 14px/18px Roboto;
+  height: 30px;
+  padding: 5px 15px;
+  margin: 0 5px;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .btn-redeem-points {
+  background-color: #a00606;
+  border: 1px solid #820000;
+  border-radius: 1px;
+  color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  font: 600 14px/18px Roboto;
+  height: 30px;
+  padding: 5px 15px;
+  margin: 0 5px;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper:hover {
+  box-shadow: 0 0 20px 0 #bbb;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .more-link {
+  position: absolute;
+  right: 0;
+  top: 9px;
+}
+[id*="block-views-redeem-points-block"] .view-redeem-points .more-link a {
+  color: #777;
+  font-family: Roboto;
+}
+
+body.has-cart-popup {
+  overflow: hidden;
+}
+
+.cart-popup-wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+.cart-popup-wrapper .cart-popup {
+  background-color: #fff;
+  left: 0;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 30px 15px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 870px;
+}
+.cart-popup-wrapper .cart-popup .cart-close {
+  color: #777;
+  font-size: 22px;
+  position: absolute;
+  right: 12px;
+  top: 10px;
+}
+.cart-popup-wrapper .cart-popup h2 {
+  font: 400 28px/30px Roboto;
+  color: #000;
+}
+.cart-popup-wrapper .cart-popup p {
+  color: #676767;
+  font: 400 14px/22px Roboto;
+  margin: 10px 0;
+}
+.cart-popup-wrapper .cart-popup .redeem-points strong {
+  font: 400 18px/28px Roboto;
+  color: #000;
+}
+.cart-popup-wrapper .cart-popup .redeem-points span {
+  display: block;
+  font: 600 18px/28px Roboto;
+  padding-top: 5px;
+  color: #a00606;
+}
+.cart-popup-wrapper .cart-popup .cart-actions {
+  padding-top: 30px;
+}
+.cart-popup-wrapper .cart-popup .btn-add-cart {
+  background-color: #eaebed;
+  border: 1px solid #e1e1e1;
+  border-radius: 1px;
+  color: #777;
+  display: inline-block;
+  vertical-align: top;
+  font: 600 14px/18px Roboto;
+  height: 30px;
+  padding: 5px 15px;
+  margin: 0 5px;
+}
+.cart-popup-wrapper .cart-popup .btn-redeem-points {
+  background-color: #a00606;
+  border: 1px solid #820000;
+  border-radius: 1px;
+  color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  font: 600 14px/18px Roboto;
+  height: 30px;
+  padding: 5px 15px;
+  margin: 0 5px;
+}
+
+[id*="itg-quiz-quiz-form"] .question-heading {
+  font: 400 20/28px Roboto;
+  color: #000;
+  position: relative;
+  padding-left: 20px;
+}
+[id*="itg-quiz-quiz-form"] .question-heading:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #a00606;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio {
+  position: relative;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio > label {
+  padding: 10px;
+  border: 1px solid #e1e1e1;
+  display: block;
+  width: calc(100% - 30px);
+  color: #777;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio {
+  position: absolute;
+  opacity: 0;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio:checked + label {
+  background-color: #f6e90b;
+  color: #000;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container {
+  float: left;
+  width: 170px;
+  margin-right: 20px;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container .quiz-media-file {
+  height: 127px;
+  margin-bottom: 20px;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container .quiz-media-file img {
+  width: 170px;
+  height: 127px;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios {
+  overflow: hidden;
+}
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-radio > label {
+  height: 127px;
+}
+[id*="itg-quiz-quiz-form"] .quiz-submit {
+  background: #1a3c8d none repeat scroll 0 0;
+  border: 1px solid #1a3c8d;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 6px 20px 5px;
+  text-transform: uppercase;
+}
+
+/* CSS for forgot password */
+[id*="itg_sso_reg_multistep_form"] ul.messages__list {
+  padding-left: 18px;
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+[id*="itg_user_forgot_password_multistep_form"] {
+  margin: 0 -15px;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-text {
+  width: 100%;
+  height: 36px;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper {
+  padding: 15px;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  position: relative;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper .form-submit, [id*="itg_user_forgot_password_multistep_form"] .form-wrapper .btn-skip {
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 16px;
+  height: 38px;
+  width: 200px;
+  text-align: center;
+  line-height: 35px;
+  margin-right: 20px;
+  text-transform: capitalize;
+  display: inline-block;
+  vertical-align: top;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper .ajax-progress {
+  left: 217px;
+  top: 20px;
+  position: absolute;
+}
+[id*="itg_user_forgot_password_multistep_form"] .form-wrapper .ajax-progress .message {
+  display: none;
+}
+[id*="itg_user_forgot_password_multistep_form"] #ufname {
+  padding: 0 15px;
+}
+[id*="itg_user_forgot_password_multistep_form"] #otpclickme {
+  cursor: pointer;
+  display: inline-block;
+  line-height: 36px;
+  vertical-align: middle;
+}
+[id*="itg_user_forgot_password_multistep_form"] #otp_success {
+  color: #009c00;
+  display: inline-block;
+  padding: 15px 15px 0;
+  vertical-align: top;
+  width: 100%;
 }
