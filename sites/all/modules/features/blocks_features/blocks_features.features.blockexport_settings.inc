@@ -17451,7 +17451,7 @@ personalization/saved-items',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17463,7 +17463,6 @@ tv-show/*
 <front>
 movie
 redeem-points
-cart
 checkout',
   'title' => '',
   'cache' => 8,
@@ -17513,7 +17512,6 @@ tv-show/*
 <front>
 movie
 redeem-points
-cart
 checkout',
   'title' => '',
   'cache' => 8,
@@ -17551,7 +17549,7 @@ checkout',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17563,7 +17561,6 @@ tv-show/*
 <front>
 movie
 redeem-points
-cart
 checkout',
   'title' => '',
   'cache' => 8,
@@ -17601,7 +17598,7 @@ checkout',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17613,7 +17610,6 @@ tv-show/*
 <front>
 movie
 redeem-points
-cart
 checkout',
   'title' => '',
   'cache' => 8,
@@ -17651,7 +17647,7 @@ checkout',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17663,7 +17659,6 @@ tv-show/*
 <front>
 movie
 redeem-points
-cart
 checkout',
   'title' => '',
   'cache' => 8,
@@ -17701,7 +17696,7 @@ checkout',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17713,7 +17708,6 @@ tv-show/*
 <front>
 movie
 redeem-points
-cart
 checkout',
   'title' => '',
   'cache' => 8,
@@ -17751,7 +17745,7 @@ checkout',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17763,7 +17757,6 @@ tv-show/*
 <front>
 movie
 redeem-points
-cart
 checkout',
   'title' => '',
   'cache' => 8,
@@ -21609,7 +21602,7 @@ sosorry/*',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'redeem-points
@@ -21643,7 +21636,7 @@ order',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'redeem-points
@@ -21660,7 +21653,7 @@ order',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'redeem-points
@@ -21677,7 +21670,7 @@ order',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'redeem-points
@@ -21694,7 +21687,7 @@ order',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'redeem-points
@@ -21711,7 +21704,7 @@ order',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'redeem-points
@@ -21720,6 +21713,132 @@ checkout
 order',
   'title' => '',
   'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1519,
+  'module' => 'itg_event_backend',
+  'delta' => 'program_tab_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1520,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_4',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'cart',
+  'title' => 'Other Items',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1521,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_1',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1522,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_4',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'cart',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1523,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_4',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'cart',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1524,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_4',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'cart',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1525,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_4',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'cart',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1526,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_4',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'cart',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1527,
+  'module' => 'views',
+  'delta' => 'redeem_points-block_4',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'cart',
+  'title' => '',
+  'cache' => 1,
 );
   $export['block_custom'][] = array(
   'bid' => 1,
