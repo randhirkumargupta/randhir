@@ -1802,10 +1802,19 @@ body.has-cart-popup{
         width: 100%;
     }
 }
+.page-cart,
 .page-redeem-points{
   header{
     margin-bottom: 0;
   }
+}
+.page-cart{
+  #page-title{
+    margin-top: 30px;
+    text-transform: uppercase;
+  }
+}
+.page-redeem-points{
   #page-title{
     display: none;
   }
