@@ -50,20 +50,7 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
-  $form['auto_road_trips_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Road Trips'),
-      '#default_value' => variable_get('auto_road_trips_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['auto_tips_and_tricks_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Tips and Tricks'),
-      '#default_value' => variable_get('auto_tips_and_tricks_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
+  
 
   $form['tech_for_widget'] = array(
       '#type' => 'textfield',
@@ -72,41 +59,7 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
-  $form['tech_tips_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Tech Tips'),
-      '#default_value' => variable_get('tech_tips_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['in_depth_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Technologies In Depth'),
-      '#default_value' => variable_get('in_depth_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['talking_point_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Technologies Talking Point'),
-      '#default_value' => variable_get('talking_point_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['buying_guid_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Buying Guid'),
-      '#default_value' => variable_get('buying_guid_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['watch_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Technologies Watch'),
-      '#default_value' => variable_get('watch_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
+ 
     $form['entertainment_oscar_for_widget'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter tid of Entertainment Oscar Watch'),
@@ -1013,12 +966,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
   if ($view->name == 'auto' && $view->current_display == 'block_1') {
     $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
   }
-  if ($view->name == 'auto' && $view->current_display == 'block_3') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('auto_road_trips_for_widget');
-  }
-  if ($view->name == 'auto' && $view->current_display == 'block_4') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('auto_tips_and_tricks_for_widget');
-  }
+ 
   if ($view->name == 'auto' && $view->current_display == 'block_5') {
     $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
   }
@@ -1030,23 +978,13 @@ function itg_widget_views_query_alter(&$view, &$query) {
   if ($view->name == 'tech' && $view->current_display == 'block_2') {
     $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
   }
-  if ($view->name == 'tech' && $view->current_display == 'block_3') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('tech_tips_for_tech_widget');
-  }
-  if ($view->name == 'tech' && $view->current_display == 'block_4') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('talking_point_for_tech_widget');
-  }
+  
   if ($view->name == 'tech' && $view->current_display == 'block_5') {
     $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
   }
-  if ($view->name == 'tech' && $view->current_display == 'block_6') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('in_depth_for_tech_widget');
-  }
-  if ($view->name == 'tech' && $view->current_display == 'block_7') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('buying_guid_for_tech_widget');
-  }
+  
   if ($view->name == 'tech' && $view->current_display == 'block_8') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('watch_for_tech_widget');
+    $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
   }
   if ($view->name == 'special_entertainment' && $view->current_display == 'entertainment_oscar_news') {
     $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_news_for_widget');
