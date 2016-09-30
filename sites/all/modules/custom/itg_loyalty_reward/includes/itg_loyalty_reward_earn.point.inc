@@ -61,7 +61,7 @@ function itg_loyalty_reward_earnpoint() {
   if ($unique_exp_key != '') {
     // Add point into user point table.
     
-    itg_loyalty_reward_add_point($user->uid, $unique_exp_key);
+    //itg_loyalty_reward_add_point($user->uid, $unique_exp_key);
   }
   else {
     $itg_query = db_insert('itg_lrp_pointer_key')
@@ -70,8 +70,7 @@ function itg_loyalty_reward_earnpoint() {
   }
   
   
-  if ($itg_query >= 1) {
-    
+  if ($itg_query >= 1) {    
     echo drupal_json_encode(array('code' => 1));
   }
   else {
