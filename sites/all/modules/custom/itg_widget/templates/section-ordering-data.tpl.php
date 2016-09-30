@@ -219,6 +219,7 @@ if ($widget_style == 'auto-road-trip') {
                             <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
                                     <img src="<?php echo $extra_large_image_url; ?>">
                                 </a></span>  
+                            
                             <p><?php echo l(mb_strimwidth($desc, 0, 145, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
                         </li>   
                         <?php

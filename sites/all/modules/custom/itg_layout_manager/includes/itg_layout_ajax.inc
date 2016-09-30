@@ -103,9 +103,9 @@ function insert_layout_setting_ajax() {
         
       }
     }
-    
+   
     // Set widget in block
-    
+   
     if (isset($_GET['widget_name'])) {
       $widget = explode('#', $_GET['widget_name']);
     }

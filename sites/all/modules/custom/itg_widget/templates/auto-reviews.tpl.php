@@ -51,6 +51,7 @@
       <?php } ?>
     </ul>
   </div>
+
 <?php else : ?>
   <span class="no-result-found"><?php print t("Content Not Found") ?></span>
 <?php endif; ?>
