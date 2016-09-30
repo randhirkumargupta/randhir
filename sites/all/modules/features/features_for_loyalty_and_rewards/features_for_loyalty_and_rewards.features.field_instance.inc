@@ -105,6 +105,45 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-loyalty_and_rewards-field_lrp_category'.
+  $field_instances['node-loyalty_and_rewards-field_lrp_category'] = array(
+    'bundle' => 'loyalty_and_rewards',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_lrp_category',
+    'label' => 'Category',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 14,
+    ),
+  );
+
   // Exported field_instance: 'node-loyalty_and_rewards-field_lrp_completed'.
   $field_instances['node-loyalty_and_rewards-field_lrp_completed'] = array(
     'bundle' => 'loyalty_and_rewards',
@@ -474,6 +513,7 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Actual Price');
+  t('Category');
   t('Completed(Sold out)');
   t('Discounted Price');
   t('Image');

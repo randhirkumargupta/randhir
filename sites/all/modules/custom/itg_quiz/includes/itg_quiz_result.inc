@@ -13,7 +13,8 @@ function itg_quiz_user_list() {
     //Send mail link is visible only for site admin, editor and main admin
     if(in_array('Site Admin', array_values($user->roles))  
        || in_array('administrator', array_values($user->roles)) 
-       || in_array('Editor', array_values($user->roles))) {
+      // || in_array('Editor', array_values($user->roles))
+      ) {
       
       $send_mail = l(t("Send Mail"),"quiz-winners-mail/".$node->nid);
     } 

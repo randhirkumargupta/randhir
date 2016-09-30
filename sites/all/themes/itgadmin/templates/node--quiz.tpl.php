@@ -266,6 +266,18 @@
  </div> 
       
 <?php } ?>
+  <div class="content-node-view">
+      <div class="expert-details content-box">
+        <h2><?php echo t('Publish/Unpublish'); ?></h2>
+        <div class="content-details">
+          <div class="field">
+            <div class="field-label">Published:</div>
+            <div class="field-items"><?php echo $node->status ? 'Yes':'No'; ?></div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
 </div>   
   <?php endif; ?>
 

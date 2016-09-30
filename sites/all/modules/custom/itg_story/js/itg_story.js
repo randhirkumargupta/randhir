@@ -59,6 +59,24 @@
                     $("#edit-field-story-facebook-narrative-und-0-value").val('');
                 }
             });
+            
+            
+            // Code for tv field value set Null
+            $('#edit-field-story-configurations-und-tv').click(function() {
+                if ($("#edit-field-story-configurations-und-tv").is(":not(:checked)")) {
+                    $("#edit-field-poll-start-date-und-0-value-datepicker-popup-0").val('');
+                    $('[name="field_story_tv_time[und]"]').val('_none');
+                }
+            });
+            
+            // auto fill time when user remove time in expiry date field
+            d = new Date();
+            datetext = d.getHours() + ":" + d.getMinutes();
+            $('#edit-field-story-expiry-date-und-0-value-timeEntry-popup-1').blur(function () {
+                if ($("#edit-field-story-expiry-date-und-0-value-timeEntry-popup-1").val() == '') {
+                    $("#edit-field-story-expiry-date-und-0-value-timeEntry-popup-1").val(datetext);
+                }
+            });
 
             // Code for tweet field value set Null
             $('#edit-field-story-social-media-integ-und-twitter').click(function() {

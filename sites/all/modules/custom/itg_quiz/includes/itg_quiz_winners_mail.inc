@@ -22,13 +22,14 @@ function itg_quiz_winners_mail_list() {
 
     $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
-      drupal_set_message('Mail has been sent successfully.');
+      drupal_set_message(t('Mail has been sent successfully.'));
       drupal_goto('quiz-user-list/'.$nid);
     }
     else {
       $error_msg = 'Failed to send the email!';
       watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-      return FALSE;
+      drupal_set_message(t($error_msg), 'error');
+      drupal_goto('quiz-user-list/'.$nid);
     }
 }
 
