@@ -1,7 +1,8 @@
 <?php if (!empty($data)) : global $base_url; ?>
   <div class="dont-miss">
     <ul>
-      <?php foreach ($data as $key => $node_data) { ?>
+      <?php foreach ($data as $key => $node_data) { 
+        ?>
         <li class="dont-miss-listing" id="dont-miss-<?php print $key ?>">
           <?php if (!empty($node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
             <div class="dm-pic">
@@ -30,8 +31,21 @@
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['node_load_data']->nid ?>">
                 <?php echo l(mb_strimwidth($node_data['node_load_data']->title, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
               </p>
-            <?php endif; ?>
-
+              <?php  
+             endif; 
+             if ($node_data['node_load_data']->field_gallery_kicer['und'][0]['value'] != "") {
+                    $desc = strip_tags($node_data['node_load_data']->field_gallery_kicer['und'][0]['value']);
+                }
+                
+             if ($node_data['node_load_data']->field_story_kicker_text['und'][0]['value'] != "") {
+                    $desc = strip_tags($node_data['node_load_data']->field_story_kicker_text['und'][0]['value']);
+                }
+                if($desc != "")
+                {?>
+               <p class="review-desc review-desc-<?php echo $node_data['node_load_data']->nid ?>">
+                <?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
+              </p>
+                <?php } ?>
           </div>
         </li>
       <?php } ?>
