@@ -95,9 +95,9 @@
                     }
                 });
             }
-            
+
             // Code for points earning callbacks.
-            $('.share, .like, .visit').on('click', function() {
+            $('.share, .like, .visit').on('click', function () {
                 //console.log(Drupal.settings.itg_loyalty_reward);
                 var base_url = Drupal.settings.itg_loyalty_reward.base_url;
                 var event_type = $(this).attr('class');
@@ -105,14 +105,34 @@
                     url: base_url + '/earn-loyalty-point',
                     type: 'POST',
                     dataType: 'JSON',
-                    data: {'type' : event_type},
-                    success: function(itg) {
+                    data: {'type': event_type},
+                    success: function (itg) {
                         console.log(itg);
                     }
                 });
             });
             // Code end for points earning callbacks.
-            
+
+            // Code for product page.
+            if ($('body').hasClass('page-product')) {
+                $("#edit-itg-points").appendTo("#edit-field-lrp-loyalty-points-value-wrapper");
+                $('#edit-itg-points').on('change', function () {
+                    var points = $(this).find('option:selected').val();
+                    var spliteed_points = points.split("-");
+                    $('#edit-field-lrp-loyalty-points-value-min').val(spliteed_points[0]);
+                    $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
+                });
+            }
+            $('#views-exposed-form-product-page').on('submit', function (event) {
+                var points = $('#edit-itg-points').find('option:selected').val();
+                var spliteed_points = points.split("-");
+                $('#edit-field-lrp-loyalty-points-value-min').val(spliteed_points[0]);
+                $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
+
+            });
+
+            // Code end for product page.
+
             // Module code ends.
         }
     };

@@ -22,7 +22,7 @@ function itg_quiz_user_list() {
       $send_mail = '';
     }
     
-    $output.= '<div align="right">'.$send_mail.'</div>
+    $output.= '<div><strong>'.  itg_common_get_node_title(arg(1)).'</strong></div><div align="right">'.$send_mail.'</div>
       <table class="views-table">
         <thead>        
           <tr>

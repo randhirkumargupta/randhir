@@ -3,14 +3,14 @@
 <?php if (!empty($data)) : global $base_url; ?>
     <div class="dont-miss top-video">
         <ul>
-            <?php foreach ($data as $key => $node_data) { ?>
+            <?php foreach ($data as $key => $node_data) {  ?>
                 <li class="<?php print $node_data['node_load_data']->type ?> dont-miss-listing">
                     <?php if (!empty($node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>            
                         <div class="dm-pic">
                             <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $node_data['node_load_data']->nid); ?>">
                                 <img src="<?php print image_style_url("widget_very_small", $node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
                             </a>
-                            <span><i class="fa fa-play-circle"></i> 12:30</span>
+                            <span><i class="fa fa-play-circle"></i> <?php echo $node_data['node_load_data']->field_video_duration['und'][0]['value'];?></span>
                         </div>
                         <?php
                     } else {
