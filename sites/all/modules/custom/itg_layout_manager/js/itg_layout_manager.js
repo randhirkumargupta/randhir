@@ -55,11 +55,11 @@
                         var splitewidgitname=widget_name.split('#');
                         if(splitewidgitname[0]=='section_wise_order') {
                             var widget_style = $(this).find('.data-holder').attr('widget-style');
-                            if(widget_style!="") {
-                               widget_info='custom|'+widget_style;
+                            if(widget_style != "" && widget_style != "undefined") {
+                               widget_info ='custom|'+widget_style;
                             }
                             else {
-                              widget_info='custom|common-category-style';  
+                              widget_info = 'custom|common-category-style';  
                             }
                         }
                         //alert(block_name);

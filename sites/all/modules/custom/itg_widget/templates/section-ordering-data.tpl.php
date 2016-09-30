@@ -95,13 +95,13 @@ if ($widget_style == 'auto-road-trip') {
                     
             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>">  </a>
                   
-                    <h3><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
+                    <h3><?php echo l(mb_strimwidth($desc, 0, 145, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
                 <?php } else if ($count == 1) {
                     ?>
                     <ul>
                         <li>
                             <span class="title"><?php echo l(mb_strimwidth(ucfirst($entity->title), 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></span>
-                            <p><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
+                            <p><?php echo l(mb_strimwidth($desc, 0, 145, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
                         </li>            
                     </ul>
                     <?php
@@ -129,7 +129,7 @@ if ($widget_style == 'auto-road-trip') {
 
                         <li>
                             <span class="title"><?php echo l(mb_strimwidth(ucfirst($entity->title), 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></span>
-                            <p><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
+                            <p><?php echo l(mb_strimwidth($desc, 0, 145, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
                         </li>   
                         <?php
                     }
@@ -173,7 +173,7 @@ if ($widget_style == 'auto-road-trip') {
                    
             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>"> </a></span>
                    
-                    <h3><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
+                    <h3><?php echo l(mb_strimwidth($desc, 0, 145, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
                     <?php
                 } else if ($count == 1) {
                     if ((!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
@@ -186,7 +186,7 @@ if ($widget_style == 'auto-road-trip') {
                                     <img src="<?php echo $extra_large_image_url; ?>">
                                 </a></span>
 
-                            <p><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
+                            <p><?php echo l(mb_strimwidth($desc, 0, 145, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
                         </li>            
                     </ul>
                     <?php
@@ -219,7 +219,8 @@ if ($widget_style == 'auto-road-trip') {
                             <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
                                     <img src="<?php echo $extra_large_image_url; ?>">
                                 </a></span>  
-                            <p><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
+                            
+                            <p><?php echo l(mb_strimwidth($desc, 0, 145, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
                         </li>   
                         <?php
                     }
