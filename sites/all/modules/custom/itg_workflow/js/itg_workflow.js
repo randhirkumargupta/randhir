@@ -39,12 +39,12 @@ jQuery(document).ready(function() {
        jQuery("#edit-submit").click();*/
        
        var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];
-       var ntype = jQuery('[name="ntype"]').val();
+       var ndtype = jQuery('[name="ndtype"]').val();
        
        if (story_state == 'published' || story_state == 'needs_review') {
            
-           if(ntype) {
-           var msg = confirm("Hope you have Previewed the " + ntype + " before submitting. Do you want to continue to submit?");
+           if(ndtype) {
+           var msg = confirm("Hope you have Previewed the " + ndtype + " before submitting. Do you want to continue to submit?");
        }
        
            if (msg == true) {
@@ -57,18 +57,29 @@ jQuery(document).ready(function() {
         
     });
 
-    jQuery('.edit-submit-class').click(function() {                 
+    jQuery('.edit-submit-class').click(function() { 
+       
+        if(jQuery(this).hasClass('btn-trigger') == true)
+        {
+           
+             return false; 
+        }
+        else
+        {
+        var ndtype = jQuery('[name="ndtype"]').val();
         var moderation_state = jQuery("#edit-workbench-moderation-state-new").val();
         if (moderation_state == 'published') { 
-            if(ntype) {
-           var msg = confirm("Hope you have Previewed the " + ntype + "before submitting. Do you want to continue to submit?");
+            if(ndtype) {
+           var msg = confirm("Hope you have Previewed the " + ndtype + " before submitting. Do you want to continue to submit?");
             }
            if (msg == true) {
                return true;
            }
            return false; 
         }
-        return true;                     
+        return true;  
+    }
+    
     });                  
 });
 
