@@ -38,9 +38,11 @@
         <?php $cart_total += $item_total; ?> 
       <?php endforeach; ?>
       <div class="cart-total-block">
-          <div class="grand-total">GRAND TOTAL <span><?php print $cart_total; ?> Points</span></div>
+        <div class="cart-total-inner">
+          <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
           <div class="checkout"><?php print l(t('REDEEM POINTS'), 'checkout'); ?></div>
-          <div class="points-balance">Balance after redemption <span>2,000 Points</span>
+          <div class="points-balance"><span>Balance after redemption</span><span>2,000 Points</span></div>
+        </div>
       </div>
     <?php else: ?>
       <?php print t('There are no items in this cart.') ?>

@@ -1932,3 +1932,50 @@ body.has-cart-popup{
     }
   }
 }
+.cart-total-block{
+  background-color: #ededed;
+  padding: 25px 15px;
+  text-align: center;
+  .cart-total-inner{
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .grand-total{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    padding-bottom: 15px;
+    strong{
+      font: 500 16px/18px Roboto;
+      &:first-child{
+        float: left;
+      }
+      &:last-child{
+        float: right;
+      }
+    }
+  }
+  .points-balance{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    padding-top: 15px;
+    span{
+      font: 400 16px/18px Roboto;
+      &:first-child{
+        float: left;
+      }
+      &:last-child{
+        float: right;
+      }
+    }
+  }
+  .checkout a{
+    display: block;
+    padding: 10px;
+    font: 500 22px/22px Roboto;
+    background-color: #a00606;
+    box-shadow: 2px 2px 0 #000;
+    color: #fff;
+  }
+}
