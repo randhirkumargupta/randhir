@@ -1986,7 +1986,7 @@ body.has-cart-popup {
   content: '|';
   display: inline-block;
   vertical-align: middle;
-  margin: 0 10px;
+  margin: 0 8px 0 11px;
 }
 .cart-checkout-list .cart-action > div.points {
   border: 1px solid #dbdbdb;
