@@ -6,7 +6,7 @@
           <?php if (!empty($node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
             <div class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">
-                <img src="<?php print image_style_url("widget_small", $node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
+                <img src="<?php print image_style_url("widget_very_small", $node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
               </a>
             </div>
             <?php
@@ -15,7 +15,7 @@
             ?>
             <div class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">
-                <img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+             <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
               </a>
             </div>
           <?php } ?>
