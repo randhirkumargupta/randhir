@@ -237,8 +237,7 @@ function _get_order_item() {
         $output,
         $product['product']['points'],
         $value->order_id,
-      );
-      dpm($product['product']);
+      );      
     }
   }
   
