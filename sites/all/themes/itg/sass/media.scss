@@ -6,189 +6,237 @@
         width: 100%;
     }
 }
-/*Start header CSS Desktop version*/
-@media only screen and (min-width:769px){    
+
+@media only screen and (max-width:1024px){
     h1{    
-        font-size: $h1-font-size;
-        line-height: $h1-line-height;
+        font-size: $mobile-h1-font-size;
+        line-height: $mobile-h1-line-height;
         font-weight: $itg-font-bold;
     }
     h2{
-        font-size: $h2-font-size;
-        line-height: $h2-line-height;
+        font-size: $mobile-h2-font-size;
+        line-height: $mobile-h2-line-height;
         font-weight: $itg-font-bold;
     }
     h3{
-        font-size: $h3-font-size;
+        font-size: $mobile-h3-font-size;
         line-height: $h3-line-height;
     }
     h4{
-        font-size: $h4-font-size;
+        font-size: $mobile-h4-font-size;
         line-height: $h4-line-height;
     }    
+
+    #block-itg-layout-manager-header-block{ 
+        .top-nav{ 
+            .main-nav {
+                li {
+                    a{
+                        padding: 0 15px;
+                        @include font(20px);
+                    }
+                    &:nth-child(3) a:before{
+                        top: -6px;
+                        left: 0;
+                    }
+                }
+            }
+        }
+        .navigation{
+            .menu {
+                margin-left: 135px;
+                margin-right: 50px;
+                padding-left: 0;
+                white-space: nowrap;
+                overflow-x: scroll;
+                li{
+                    @include display-inline;
+                    float: none;
+                }
+            }
+        }
+    } 
+}   
+
+
+@media only screen and (max-width:768px){
     .mhide{
-        display: block;
+        display: none;
     }
     .desktop-hide{
-        display: none;   
+        display: block;
     }
     .list-none{
         list-style-type: none;
     }
-    header{
-        margin-bottom: 30px;
-    }
     #block-itg-layout-manager-header-block{
-        /*height:220px;*/
-        .header-top{           
-            height: 163px;
-        }
+        header{
+            margin-bottom: 15px;
+        }    
         .logo{
-            width: auto;
-            top: -15px;
-            a{
-                display: block;    
-                overflow: hidden;
-            }
+            width:67px;
+            @include pos(absolute,-30px,null,null,10px);
             img{
-                background: #000;
-                padding-left: 4px;
-                padding-right: 0px;
-                vertical-align: top;
-                margin-bottom: -2px;
+                max-width: 100%;
             }
         }
         .top-nav{
-            padding: 0 15px 0 15px;
-            margin:25px auto 15px auto; 
-            float: none;
-            @include clearfix;
-            background:transparent;
-            ul li.desktop-hide{
-                display: none;
+            padding: 0;  
+            width: 100%;
+            background: $red-bg;    
+            margin-top: 7px;
+            text-align: right;
+            height: 28px;
+            line-height: 28px;
+            margin-bottom: 0;
+            .main-nav li.desktop-hide {
+               display: none;
+            }
+            ul{
+                list-style-type: none;
+                li{
+                    @include display-inline;
+                    a{
+                        text-decoration: none;
+                        text-transform: uppercase;
+                        font-size: 15px;
+                        @include itg-font(null,$itg-font-medium);
+                        padding-right:10px;
+                        .fa{
+                            font-size: 20px;
+                            line-height: 28px;
+                            vertical-align: top;
+                        }
+                    } 
+                }
             }
             .main-nav{
-                @include float(left);
-                padding-left: 145px;
+                padding-left:0;
+                float:none;
                 li{
-                    &:nth-child(3){
-                        @include pos(relative);
-                        a{
-                            &:before{
-                                content:'';
-                                background: url(../images/live-icon.png) no-repeat;
-                                @include pos(absolute,-11px,null,null,20px);
-                                width: 28px;
-                                height: 19px;
-                            } 
-                        }
-                    }
                     a{
-                        padding: 0 35px;
-                        @include font(27px,null,null);
-                        &.active, &:hover{
-                            color:$yellow-color;
-                        }                           
+                        font-size: 15px;
                     }
-                    &:nth-child(2) a{
-                        padding-left: 0;
-                    }
+                    &:nth-child(3) a:before{
+                        display: none;
+                    }       
                 }
-
-            }
-            .social-nav{
+            } 
+        }
+        .navigation{    
+            background: $red-bg;
+            display:none;
+            margin-top:0;
+            .container{
                 @include pos(relative);
-                @include float(right);
-                a{
-                    .fa{
-                        @include font(23px,null,null);
-                        &.fa-mobile{
-                            @include font(27px,null,null);
+            }
+            .menu{
+                @include clearfix;  
+                margin: 0px;        
+                padding-left: 0;
+                white-space: pre-wrap;
+                overflow-x: inherit; 
+                li{
+                    @include calculate-width(1);
+                    a{
+                        border-top: 1px solid #900505;
+                        border-right: none;
+                        display: block;
+                        height:30px;
+                        line-height: 30px;
+                        padding: 0 15px;
+                        &.active, &:hover{
+                            color: $yellow-color;
+                        }
+                    } 
+                    &.all-menu{
+                        a{
+                            border-right: none;
+                            i{
+                                @include font(22px);
+                                color: #131212;
+                                vertical-align: middle;
+                            }
                         }
                     }
-                }  
-                .globle-search{
-                    @include pos(absolute,null,40px,null,null);
-                    @include transition(all 0.5s ease-in-out );
-                    width:0px;
-                    overflow:hidden;
-                    .search-text{
-                        @include calculate-width(1);
-                    }                    
-                }
-            }
-
-        }
-        .navigation{
-            @include clearfix;
-            margin-top: 20px;
-            display:block !important;
-            .menu{
-                padding-left:135px;
-                li{
-                    @include float(left);
-                    a{
-                        color: $itg-nav-fontcolor;
-                        text-transform: uppercase;
-                        @include itg-font(null, $itg-font-medium);
-                        padding: 0 10px;
-                        border-right: 1px solid $itg-nav-bordercolor;
-                        border-top:none;
-                        height: 37px;
-                        @include font($itg-nav-fontsize,37px,null);                                            
+                    &.sponser-link a{
+                        background: $yellow-bg;
+                        color: $black-color;
                     }
                 }
             }
+            ul{
+
+                &#newlist{
+                    position: absolute;
+                    right: 0;
+                    z-index: 99;
+                    background: #a00606;
+                    display: none;
+                }
+            }
+        }
+        .head-live-tv{
+            text-align:right;
+            padding: 0 10px;
+            margin-top: -10px;
+            @include pos(relative);
+            ul{
+                list-style-type: none;
+                li{
+                    display: inline-block;
+                    vertical-align: bottom;
+                    padding-left: 15px;
+                    a{
+                        i{
+                            font-size: 18px;
+                        }
+                    }
+                }
+            }
+            .globle-search{
+                @include pos(absolute,0px,94px,null,null);
+                @include transition(all 0.5s ease-in-out );
+                width:0px;
+                overflow:hidden;                        
+                .search-text{
+                    height:25px;
+                    line-height:25px;
+                }                    
+            }
         }
     }
-    /*End header CSS Desktop version*/
-    /*Start Footer CSS Desktop version*/
-    footer{
-        .footer-top{
-            .footer-top-link{
-                @include float(left);
-            }
-            .footer-social-link{
-                .fa{
-                    @include font(24px,null,null);
-                    vertical-align: middle;
-                } 
-                .globle-search{
-                    @include pos(absolute,6px,110px,null,null);
-                    @include transition(all 0.5s ease-in-out );
-                    width:0px;
-                    overflow:hidden;
-                    height:30px;
-                    .search-text{
-                        @include calculate-width(1);
-                    }                    
-                }
-            }
-            .footer-expand-icon{
-                right: 15px;
-            }
-        } 
-        .footer-bottom{
-            .cell{
-                @include calculate-width(6);
-                margin-bottom: 0;
-                &:nth-child(2n+1) {
-                    clear: none;
-                }
-            }
-            /*.first-cell{
-                width: 30%;
-                h4{
-                    @include float(left);
-                    @include calculate-width(2);
-                    margin-bottom: 0;
-                }
-            }*/
+
+/*footer*/
+footer {
+    .footer-top{
+        .footer-top-link{
+            float: none;        
         }
     }
-    /*End Footer CSS Desktop version*/
+    .footer-bottom{
+        .cell{
+            width: 50%;
+            margin-bottom: 20px;
+            &:nth-child(2n+1){
+                clear: left;
+            }
+        }
+    }
+}
 
 
+
+
+}
+
+
+
+/*Start header CSS Desktop version*/
+@media only screen and (min-width:769px){        
+    .list-none{
+        list-style-type: none;
+    }
     /*Start CSS Top Block Grid Home Page*/    
     .top-block{
         .top-colum-1, .top-colum-2, .top-colum-3{
@@ -847,67 +895,38 @@
     } 
     /*CSS end program landing page*/
 
-/*css start for special auto page*/
-.auto-layout-page{
-    .itg-top-section{
-        .top-colum-1, .top-colum-2{
-            .droppable{
-                height: 608px;
-            }            
-        }
-        .top-colum-3{
-            .droppable{
-                height: 247px;               
+    /*css start for special auto page*/
+    .auto-layout-page{
+        .itg-top-section{
+            .top-colum-1, .top-colum-2{
+                .droppable{
+                    height: 608px;
+                }            
             }
-        }
-    }
-    .itg-h450-section{        
-        .col-md-4{
-            .droppable{                
-                .widget-wrapper{
-                    overflow: auto;
+            .top-colum-3{
+                .droppable{
+                    height: 247px;               
                 }
             }
-        }        
+        }
+        .itg-h450-section{        
+            .col-md-4{
+                .droppable{                
+                    .widget-wrapper{
+                        overflow: auto;
+                    }
+                }
+            }        
+        }
     }
-}
-/*css end for special auto page*/
+    /*css end for special auto page*/
 
 
 }
 /*End CSS Desktop version*/
 
 
-@media only screen and (min-width:768px) and (max-width:1200px){
-    #block-itg-layout-manager-header-block{ 
-        .top-nav{ 
-            .main-nav {
-                li {
-                    a{
-                        padding: 0 15px;
-                        @include font(20px);
-                    }
-                    &:nth-child(3) a:before{
-                        top: -6px;
-                        left: 0;
-                    }
-                }
-            }
-        }
-        .navigation{
-            .menu {
-                margin-left: 135px;
-                margin-right: 50px;
-                padding-left: 0;
-                white-space: nowrap;
-                overflow-x: scroll;
-                li{
-                    @include display-inline;
-                    float: none;
-                }
-            }
-        }
-    }    
+@media only screen and (min-width:768px) and (max-width:1200px){   
     .top-block .top-colum-2{
         @include calculate-width(1);
         margin-bottom: 50px;
