@@ -1981,6 +1981,7 @@ body.has-cart-popup{
 }
 [id*="itg-user-forgot-password-multistep-form"]{
   .form-type-password-confirm{
+    padding: 0 15px;
     > label{
       display: none;
     }
