@@ -406,51 +406,6 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-loyalty_and_rewards-field_poll_itg_state'.
-  $field_instances['node-loyalty_and_rewards-field_poll_itg_state'] = array(
-    'bundle' => 'loyalty_and_rewards',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_poll_itg_state',
-    'label' => 'Other Item',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'display_label' => 1,
-      ),
-      'type' => 'options_onoff',
-      'weight' => 13,
-    ),
-  );
-
   // Exported field_instance:
   // 'node-loyalty_and_rewards-field_story_expiry_date'.
   $field_instances['node-loyalty_and_rewards-field_story_expiry_date'] = array(
@@ -518,7 +473,6 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
   t('Discounted Price');
   t('Image');
   t('Loyalty Points');
-  t('Other Item');
   t('Product Count');
   t('Product Description');
   t('Product Expiry Date');
