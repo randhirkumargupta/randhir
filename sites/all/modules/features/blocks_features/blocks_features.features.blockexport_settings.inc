@@ -17463,7 +17463,8 @@ tv-show/*
 <front>
 movie
 redeem-points
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17474,7 +17475,7 @@ checkout',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17489,7 +17490,8 @@ sosorry
 sosorry/*
 redeem-points
 cart
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17512,7 +17514,8 @@ tv-show/*
 <front>
 movie
 redeem-points
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17538,7 +17541,8 @@ sosorry
 sosorry/*
 redeem-points
 cart
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17561,7 +17565,8 @@ tv-show/*
 <front>
 movie
 redeem-points
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17572,7 +17577,7 @@ checkout',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17587,7 +17592,8 @@ sosorry
 sosorry/*
 redeem-points
 cart
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17610,7 +17616,8 @@ tv-show/*
 <front>
 movie
 redeem-points
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17621,7 +17628,7 @@ checkout',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17636,7 +17643,8 @@ sosorry
 sosorry/*
 redeem-points
 cart
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17659,7 +17667,8 @@ tv-show/*
 <front>
 movie
 redeem-points
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17670,7 +17679,7 @@ checkout',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17685,7 +17694,8 @@ sosorry
 sosorry/*
 redeem-points
 cart
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17708,7 +17718,8 @@ tv-show/*
 <front>
 movie
 redeem-points
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17719,7 +17730,7 @@ checkout',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17734,7 +17745,8 @@ sosorry
 sosorry/*
 redeem-points
 cart
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17757,7 +17769,8 @@ tv-show/*
 <front>
 movie
 redeem-points
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -17768,7 +17781,7 @@ checkout',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17783,7 +17796,8 @@ sosorry
 sosorry/*
 redeem-points
 cart
-checkout',
+checkout
+product',
   'title' => '',
   'cache' => 8,
 );
@@ -21719,12 +21733,12 @@ order',
   'module' => 'itg_event_backend',
   'delta' => 'program_tab_block',
   'theme' => 'itg',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'content',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
   'title' => '',
   'cache' => 8,
 );
@@ -21747,12 +21761,12 @@ order',
   'module' => 'views',
   'delta' => 'program_schedule-block_1',
   'theme' => 'itg',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'content',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
   'title' => '',
   'cache' => -1,
 );
@@ -21763,12 +21777,12 @@ order',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'cart',
   'title' => '',
-  'cache' => 1,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1523,
@@ -21777,12 +21791,12 @@ order',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'cart',
   'title' => '',
-  'cache' => 1,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1524,
@@ -21791,12 +21805,12 @@ order',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'cart',
   'title' => '',
-  'cache' => 1,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1525,
@@ -21805,12 +21819,12 @@ order',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'cart',
   'title' => '',
-  'cache' => 1,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1526,
@@ -21819,12 +21833,12 @@ order',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'cart',
   'title' => '',
-  'cache' => 1,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1527,
@@ -21833,10 +21847,626 @@ order',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'cart',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1528,
+  'module' => 'itg_event_backend',
+  'delta' => 'program_tab_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1529,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_1',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1530,
+  'module' => 'itg_event_backend',
+  'delta' => 'program_tab_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1531,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_1',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1532,
+  'module' => 'itg_event_backend',
+  'delta' => 'program_tab_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1533,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_1',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1534,
+  'module' => 'itg_event_backend',
+  'delta' => 'program_tab_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1535,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_1',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1536,
+  'module' => 'itg_event_backend',
+  'delta' => 'program_tab_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1537,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_1',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1538,
+  'module' => 'itg_event_backend',
+  'delta' => 'program_tab_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1539,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_1',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1540,
+  'module' => 'views',
+  'delta' => 'event_associate_video-block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1541,
+  'module' => 'views',
+  'delta' => 'event_associate_video-block_1',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1542,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1543,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_1',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1544,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_2',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1545,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_3',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1546,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_4',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'content',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1547,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_5',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1548,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_3',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1549,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_3',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1550,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_3',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1551,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_3',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1552,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_3',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1553,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_3',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1554,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_4',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1555,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_4',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1556,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_4',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1557,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_4',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1558,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_4',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1559,
+  'module' => 'views',
+  'delta' => 'program_schedule-block_4',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1560,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1561,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1562,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1563,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1564,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1565,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1566,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_1',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1567,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_1',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1568,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_1',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1569,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_1',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1570,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_1',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 1571,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_1',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'itg-event-test/*',
   'title' => '',
   'cache' => 1,
 );

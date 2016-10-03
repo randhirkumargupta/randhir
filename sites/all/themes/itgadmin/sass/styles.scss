@@ -7633,6 +7633,36 @@ div.node{
             display: none;
           }
         }
+        .form-item-field-story-configurations-und-set-as-featured{
+          position: relative;
+          margin: 5px 0;
+          
+          label{
+            border-radius: 2px;
+            padding: 5px 10px 5px 32px;
+            background-color: #000;
+            color: #1fb5ad;
+            display: inline-block;
+            vertical-align: top;
+            &:before{
+              content: '\f096';
+              position: absolute;
+              font-family: 'FontAwesome';
+              font-size: 20px;
+              top: 5px;
+              color: #1fb5ad;
+              left: 10px;
+            }
+          }
+          .form-checkbox{
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            &:checked + label:before{
+              content: '\f046';
+            }
+          }
+        }
       }
     }
     #DateTime{
@@ -7933,8 +7963,8 @@ div.node{
     }
   }
   .answer-container{
-    .form-type-radios{
-      .form-type-radio{
+    .form-type-radios, .form-type-checkboxes{
+      .form-type-radio, .form-type-checkbox{
         position: relative;
         > label{
           padding: 10px;
@@ -7943,7 +7973,7 @@ div.node{
           width: calc(100% - 30px);
           color: #777;
         }
-        .form-radio{
+        .form-radio, .form-checkbox{
           position: absolute;
           opacity: 0;
           &:checked + label{
@@ -7965,9 +7995,9 @@ div.node{
           height: 127px;
         }
       }
-      & + .form-type-radios{
+      & + .form-type-radios, & + .form-type-checkboxes{
         overflow: hidden;
-        .form-type-radio{
+        .form-type-radio, .form-type-checkbox{
           > label{
             height: 127px;
           }

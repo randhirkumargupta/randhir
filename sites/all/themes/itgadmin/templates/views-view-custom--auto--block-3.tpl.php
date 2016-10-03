@@ -3,8 +3,8 @@
         <?php
         foreach ($rows as $index => $row) {
             $video_class = "";
-            if (strtolower($row['type']) == 'videogallery') {
-                $video_class = 'content-video';
+            if (strtolower($row['type']) != 'videogallery') {
+                $video_class = 'video-none';
             }
             $desc = $row['title'];
             if ($row['field_story_kicker_text'] != "") {
@@ -16,8 +16,8 @@
             }
             ?>
         <li class="trending-videos-list">
-                <span class="pic video-none <?php echo $video_class; ?>"><?php print $row['field_story_extra_large_image']; ?></span>
-                <spna><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></span>
+                <div class="pic <?php echo $video_class; ?>"><?php print $row['field_story_extra_large_image']; ?><span><i class="fa fa-play-circle"></i> <?php echo $row['field_video_duration'];?></div>
+                <span><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></span>
             </li>
         <?php }; ?>
     </ul>
