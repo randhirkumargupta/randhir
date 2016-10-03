@@ -7349,6 +7349,9 @@ div.node #comments h2 {
 .node-story-form .itg-form-main h2.active:after {
   content: '\f056';
 }
+.node-story-form .itg-form-main h2 + div {
+  overflow: visible !important;
+}
 .node-story-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story {
   padding-left: 200px;
 }

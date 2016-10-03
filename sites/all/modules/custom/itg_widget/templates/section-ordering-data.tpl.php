@@ -439,7 +439,7 @@ if ($widget_style == 'auto-road-trip') {
                     <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
                         <span class="pic  <?php echo $video_class; ?>"><img src="<?php echo $extra_large_image_url; ?>"></span>
                     </a>
-                    <h3><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
+                    <h3><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
             </div>
                     <?php
                 } else if ($count >0) {
@@ -452,7 +452,7 @@ if ($widget_style == 'auto-road-trip') {
                         <img src="<?php echo $extra_large_image_url; ?>">
                     </a></span>
 
-                <p><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>                      
+                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>                      
             </div>
                     <?php
                 }
@@ -494,7 +494,7 @@ if ($widget_style == 'auto-road-trip') {
                                     <img src="<?php echo $extra_large_image_url; ?>">
                                 </a></span>
 
-                            <p><?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
+                            <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
                       </div>
                     <?php
                $coun++;
@@ -540,7 +540,7 @@ if ($widget_style == 'auto-road-trip') {
                     <?php }
                     ?>
 
-                    <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 150, ".."); ?></span></a>
+                    <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></span></a>
                 </li>
     <?php } ?>
         </ul>
@@ -590,7 +590,7 @@ if ($widget_style == 'auto-road-trip') {
                         print '<h3>' . ucfirst($reporter->title) . '</h3>';
                     }
                     ?>
-                    <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 150, ".."); ?></span></a>
+                    <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></span></a>
                 </li>
     <?php } ?>
         </ul>
@@ -626,7 +626,7 @@ if ($widget_style == 'auto-road-trip') {
                     <?php endif; ?>
                 <?php if ($count != 0) : ?>
                     <p class="<?php print $entity->type ?> section-order-<?php print $entity->nid ?>">
-                    <?php echo l(mb_strimwidth($entity->title, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
+                    <?php echo l(mb_strimwidth($entity->title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
                     </p>
             <?php endif; ?>
         <?php } ?>

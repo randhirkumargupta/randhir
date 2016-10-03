@@ -1979,3 +1979,14 @@ body.has-cart-popup{
     color: #fff;
   }
 }
+[id*="itg-user-forgot-password-multistep-form"]{
+  .form-type-password-confirm{
+    padding: 0 15px;
+    > label{
+      display: none;
+    }
+    .form-item-pass-pass1{
+      margin-bottom: 10px;
+    }
+  }
+}
