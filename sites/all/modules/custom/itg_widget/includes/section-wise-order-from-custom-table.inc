@@ -14,7 +14,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
   if (is_array($info)) {
       $range = 3; 
     // set range of data here
-      $rangearray=array('auto-road-trip'=>2,'auto-tips-and-tricks'=>3,'buying-guid'=>6,'tech-tips'=>4,'in-depth'=>6,'talking-point'=>4 , 'oscar-news'=>5 , 'oscar-features'=>6);
+      $rangearray=array('auto-road-trip'=>2,'auto-tips-and-tricks'=>3,'buying-guid'=>6,'tech-tips'=>4,'in-depth'=>6,'talking-point'=>4 , 'movies-lifestyle'=>7 , 'movies-celebrities'=>7 ,'oscar-news'=>5 , 'oscar-features'=>6);
     
        if(array_key_exists($widget_style, $rangearray))
        {
