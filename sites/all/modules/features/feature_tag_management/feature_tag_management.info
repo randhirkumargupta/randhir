@@ -27,4 +27,4 @@ features[user_permission][] = edit terms in tags
 features[user_permission][] = export taxonomy by csv
 features[user_permission][] = import taxonomy by csv
 features[views_view][] = tags_management
-project path = /home/user/Downloads/arun
+project path = /home/arun/Downloads/arun

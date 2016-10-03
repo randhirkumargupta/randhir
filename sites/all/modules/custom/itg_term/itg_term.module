@@ -32,7 +32,7 @@ function itg_term_menu_alter(&$items) {
   $items['autocomplete_deluxe/taxonomy']['page callback'] = 'itg_term_autocomplete_deluxe_taxonomy_callback';
 }
 /**
- * callback itg_term_autocomplete_deluxe_taxonomy_callback
+ * Custom taxonomy callback, which also accepts an empty string search.
  * @return json
  */
 function itg_term_autocomplete_deluxe_taxonomy_callback($field_name, $tags_typed = '', $limit = 10) {
