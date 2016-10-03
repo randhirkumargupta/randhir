@@ -47,15 +47,14 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
     }
 
     if ($weight_sum == 0) {
-      $query = db_select('itg_widget_order', 'iwo');
-      $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+      $query = db_select('node', 'n');
+      $query->leftJoin('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
+       $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
       $query->fields('iwo', array('nid', 'weight'))
-              ->condition('iwo.cat_id', $cat_id)
-              // fix for getting all content type
-              ->condition('iwo.widget', $widget_name)
+             ->condition('tx.tid', $cat_id)
               ->condition('n.status', '1')
               ->orderBy('n.nid', 'DESC')
-              ->groupBy('iwo.nid')
+              ->groupBy('n.nid')
               ->range(0, $range);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -65,6 +64,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       $entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
       $entity_data[] = $entity_info[$entity_data_node['nid']];
     }
+  
     return $entity_data;
   }
 }
@@ -108,16 +108,15 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
     }
 
     if ($weight_sum == 0) {
-      $query = db_select('itg_widget_order', 'iwo');
-      $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+      $query = db_select('node', 'n');
+      $query->leftJoin('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
+       $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
       $query->fields('iwo', array('nid', 'weight'))
-              ->condition('iwo.cat_id', $cat_id)
-              // fix for getting all content type
-              ->condition('iwo.widget', $widget_name)
+             ->condition('tx.tid', $cat_id)
               ->condition('n.type', $content)
               ->condition('n.status', '1')
               ->orderBy('n.nid', 'DESC')
-              ->groupBy('iwo.nid')
+              ->groupBy('n.nid')
               ->range(0, $range);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     }
