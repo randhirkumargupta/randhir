@@ -6,7 +6,7 @@
           <?php if (!empty($node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
             <div class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">
-                <img src="<?php print image_style_url("widget_small", $node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
+                <img src="<?php print image_style_url("widget_very_small", $node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
               </a>
             </div>
             <?php
@@ -28,7 +28,7 @@
 
             <?php if (!empty($node_data['node_load_data']->title)) : ?>    
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['node_load_data']->nid ?>">
-                <?php echo l(mb_strimwidth($node_data['node_load_data']->title, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
+                <?php echo l(mb_strimwidth($node_data['node_load_data']->title, 0, 110, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
               </p>
                 <?php echo mb_strimwidth($node_data['node_load_data']->body['und'][0]['value'], 0, 250, "..") ?>
             <?php endif; ?>
