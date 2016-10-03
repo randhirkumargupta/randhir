@@ -36,7 +36,7 @@ function feature_category_management_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => '',
+        'classes' => 'category-manager-basic-details',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -46,7 +46,7 @@ function feature_category_management_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_cm_basic_details|taxonomy_term|category_management|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -72,7 +72,7 @@ function feature_category_management_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => '',
+        'classes' => 'category-manager-selection-details',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -82,7 +82,7 @@ function feature_category_management_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_cm_selection_details|taxonomy_term|category_management|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -108,7 +108,7 @@ function feature_category_management_field_group_info() {
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
-        'classes' => '',
+        'classes' => 'cotegory-manager-settings',
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h2',
@@ -118,7 +118,7 @@ function feature_category_management_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_cm_settings|taxonomy_term|category_management|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   // Translatables
   // Included for use with string extractors like potx.

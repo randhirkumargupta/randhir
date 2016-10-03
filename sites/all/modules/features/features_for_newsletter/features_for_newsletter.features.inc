@@ -41,7 +41,7 @@ function features_for_newsletter_node_info() {
       'base' => 'node_content',
       'description' => t('Created to manage newsletter templates.'),
       'has_title' => '1',
-      'title_label' => t('Subject Line/Template Line'),
+      'title_label' => t('Subject Line/Template Name'),
       'help' => '',
     ),
   );

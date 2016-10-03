@@ -7,6 +7,6 @@
  */
 ?>
 <div class="cart-total">
-    <?php print l(t('MY CART'), 'cart', array('attributes' => array('class' => array('button')))); ?>
+    <?php print l(t('<i class="fa fa-shopping-cart" aria-hidden="true"></i> MY CART'), 'cart', array('html'=> true)); ?>
     <span><?php print '(' . $data . ')'; ?></span>
 </div>

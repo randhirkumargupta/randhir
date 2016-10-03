@@ -2,7 +2,8 @@
 
 module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_mail');
 module_load_include('inc', 'itg_sso_reg', 'includes/common_fn');
-define("ITG_USER_FRONT_USER_ROLE", 25);
+module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_form');
+
 
 function itg_sso_reg_menu() {
 
@@ -450,7 +451,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
         ),
         'roles' => array(
           2 => 'authenticated',
-          ITG_USER_FRONT_USER_ROLE => 'Front User',
+          FRONT_USER => 'Front User',
         ),
       );
 
