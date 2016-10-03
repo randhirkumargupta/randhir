@@ -325,7 +325,7 @@ $root-font-size: 16px;
 @mixin social-share{
     $break-mobile :768px;
     ul{
-        @extend .list-none;
+        list-style-type: none;
         li{
             @include display-inline;
             padding-right: 8px;
