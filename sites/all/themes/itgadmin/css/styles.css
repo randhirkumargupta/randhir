@@ -7685,6 +7685,35 @@ div.node #comments h2 {
 .node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes > label {
   display: none;
 }
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured {
+  position: relative;
+  margin: 5px 0;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label {
+  border-radius: 2px;
+  padding: 5px 10px 5px 32px;
+  background-color: #000;
+  color: #1fb5ad;
+  display: inline-block;
+  vertical-align: top;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label:before {
+  content: '\f096';
+  position: absolute;
+  font-family: 'FontAwesome';
+  font-size: 20px;
+  top: 5px;
+  color: #1fb5ad;
+  left: 10px;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox:checked + label:before {
+  content: '\f046';
+}
 .node-story-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes > label {
   float: left;
   width: 100px;
@@ -7940,21 +7969,21 @@ div.node #comments h2 {
   border-radius: 50%;
   background-color: #a00606;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox {
   position: relative;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio > label {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox > label {
   padding: 10px;
   border: 1px solid #e1e1e1;
   display: block;
   width: calc(100% - 30px);
   color: #777;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-checkbox {
   position: absolute;
   opacity: 0;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio:checked + label {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-checkbox:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-checkbox:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-checkbox:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-checkbox:checked + label {
   background-color: #f6e90b;
   color: #000;
 }
@@ -7971,10 +8000,10 @@ div.node #comments h2 {
   width: 170px;
   height: 127px;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios {
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-checkboxes {
   overflow: hidden;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-radio > label {
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-checkboxes .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-checkboxes .form-type-checkbox > label {
   height: 127px;
 }
 [id*="itg-quiz-quiz-form"] .quiz-submit {
