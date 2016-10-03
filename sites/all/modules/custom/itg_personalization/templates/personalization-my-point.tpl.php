@@ -9,8 +9,12 @@
 <div class="preference-container">
     <div class="header-point">
       <span>Total Earned so For : <strong><?php print $data['total_earned_so_far']; ?></strong></span>
-        <span>Redeemed Points : <strong><?php print $data['redeemed_points']; ?></strong></span>
-        <span>Remaining Points : <strong><?php print $data['total_earned_so_far'] - $data['redeemed_points']; ?></strong></span>
+      <?php 
+        print l(t('<span>Redeemed Points : <strong>@total_earned</strong></span>', 
+            array('@total_earned' => $data['redeemed_points'])), 'order', array('html' => TRUE));
+        print l(t('<span>Remaining Points : <strong>@remaining</strong></span>', 
+            array('@remaining' => $data['total_earned_so_far'] - $data['redeemed_points'])), 'redeem-points', array('html' => TRUE));
+      ?>        
     </div>
     <table class="unit-description">
       <thead>
