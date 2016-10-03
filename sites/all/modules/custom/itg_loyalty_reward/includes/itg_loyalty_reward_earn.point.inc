@@ -26,7 +26,7 @@ function itg_loyalty_reward_testpoints() {
   $output .= '<div class="ol-register" style="cursor:pointer">Online Registration for Any Events<span></span></div>';
   $output .= '<div class="participate" style="cursor:pointer">Participation in Poll/Campaign/Survey<span></span></div>';
   $output .= '<div class="raf" style="cursor:pointer">Refer a Friend<span></span></div>';  
-  $output .=  time() + (1 * 24 * 60 * 60) . '|';
+  
   $output .=  date('Y-m-d', strtotime("+2 days"));
   $output .= '</div>';
   
@@ -38,8 +38,65 @@ function itg_loyalty_reward_testpoints() {
  */
 function itg_loyalty_reward_earnpoint() {
   global $user;
+  // Check user unique expiration key.
+  $unique_exp_key = itg_loyalty_reward_unique_expiration($user->uid);
   $time_span = variable_get('lrp_loyality_points_expiry');
   $inputs = $_POST;
+  $presave = array(
+    'uid' => $user->uid,
+    'pointer_key' => uniqid('itg'),
+    'created' => REQUEST_TIME,
+    'expiry_date' => time() + ($time_span * 24 * 60 * 60),
+  );
+  $point_presave = array(
+    'uid' => $user->uid,
+    'loyalty_type' => check_plain($inputs['type']),
+    'loyalty_points' => 5,
+    'pointer_key' => $presave['pointer_key'],
+    'node_id' => 1,
+    'created' => REQUEST_TIME,
+  );
   
-  echo drupal_json_encode($inputs);
+  // Check if expiry key is availbal and not expired.
+  if ($unique_exp_key != '') {
+    // Add point into user point table.
+    
+    //itg_loyalty_reward_add_point($user->uid, $unique_exp_key);
+  }
+  else {
+    $itg_query = db_insert('itg_lrp_pointer_key')
+      ->fields($presave)
+      ->execute();
+  }
+  
+  
+  if ($itg_query >= 1) {    
+    echo drupal_json_encode(array('code' => 1));
+  }
+  else {
+    echo drupal_json_encode(array('code' => 0));
+  }  
+}
+
+/**
+ * Get unique key for expiry date.
+ *
+ * @param int $uid
+ *   User id of the user.
+ *
+ * @return string
+ *   Unique expiration key.
+ */
+function itg_loyalty_reward_unique_expiration($uid) {
+  $itg_result = '';
+  $itg_query = db_select('itg_lrp_pointer_key', 'itg');
+  $itg_query->fields('itg', array('pointer_key'))
+      ->condition('uid', $uid)
+      ->condition('expiry_date', REQUEST_TIME, '>=');
+  $itg_result = $itg_query->execute()->fetchField();
+  if ($itg_result != '') {
+    return $itg_result;
+  }
+  
+  return $itg_result;  
 }
