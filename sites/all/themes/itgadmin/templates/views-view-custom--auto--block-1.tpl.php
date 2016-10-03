@@ -15,17 +15,19 @@
     {
        $video_class='content-video'; 
     }
-   if($index==0){?>
+   if($index==0){
+     
+       ?>
     <div class="featured-post featured-post-first <?php echo $video_class;?>">
-        <?php print $row['field_story_extra_large_image'];?>    
-        <h2><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h2>           
+        <?php print $row['field_story_extra_large_image_1'];$desc="dkjasfl dsflk jdsflajdlas fjdlsk flsdf ldksjfl dsfjklj flksdj fl dsfds fl fjlds jflj aldsj fljsdl fjdlskj"?>    
+        <h2><?php echo l(mb_strimwidth(strip_tags($desc), 0, 80, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h2>           
     </div>
        
        
        
    <?php }else{ ?>
     <div class="featured-post <?php echo $video_class;?>"><?php print $row['field_story_extra_large_image'];?>
-        <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>
+        <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0,80, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>
     </div>
     
    <?php } ?>

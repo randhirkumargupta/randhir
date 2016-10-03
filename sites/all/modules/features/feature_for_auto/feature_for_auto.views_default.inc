@@ -129,6 +129,17 @@ function feature_for_auto_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['id'] = 'field_story_extra_large_image_1';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['settings'] = array(
+    'image_style' => 'magazine_top_three_story_237x133',
+    'image_link' => '',
+  );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
