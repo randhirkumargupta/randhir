@@ -1,21 +1,21 @@
 <?php
 /**
  * @file
- * feature_for_auto.views_default.inc
+ * feature_for_movie.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function feature_for_auto_views_default_views() {
+function feature_for_movie_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'auto';
+  $view->name = 'special_movie';
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Auto';
+  $view->human_name = 'Special Movie';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -65,11 +65,11 @@ function feature_for_auto_views_default_views() {
     'photogallery' => 'photogallery',
   );
 
-  /* Display: Auto leftTop */
-  $handler = $view->new_display('block', 'Auto leftTop', 'block_1');
+  /* Display: Movie Left Top */
+  $handler = $view->new_display('block', 'Movie Left Top', 'movie_left_top');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Auto leftTop';
-  $handler->display->display_options['display_description'] = 'Auto leftTop';
+  $handler->display->display_options['title'] = 'Movie Left Top';
+  $handler->display->display_options['display_description'] = 'Movie Left Top';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -163,14 +163,14 @@ function feature_for_auto_views_default_views() {
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid']['field'] = 'tid';
   $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '429',
+    0 => '442',
   );
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
 
   /* Display: Top News */
-  $handler = $view->new_display('block', 'Top News', 'block_2');
+  $handler = $view->new_display('block', 'Top News', 'movie_top_news');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Auto Right Top';
+  $handler->display->display_options['title'] = 'Top News';
   $handler->display->display_options['display_description'] = 'Top News';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
@@ -233,160 +233,15 @@ function feature_for_auto_views_default_views() {
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid']['field'] = 'tid';
   $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '429',
+    0 => '442',
   );
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
 
-  /* Display: Road Trips */
-  $handler = $view->new_display('block', 'Road Trips', 'block_3');
+  /* Display: Movie Photo Slider */
+  $handler = $view->new_display('block', 'Movie Photo Slider', 'movie_photo_slider');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Auto Road Trips';
-  $handler->display->display_options['display_description'] = 'Road Trips';
-  $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'customstyle';
-  $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => '',
-  );
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['label'] = '';
-  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: Content: Kicker */
-  $handler->display->display_options['fields']['field_story_kicker_text']['id'] = 'field_story_kicker_text';
-  $handler->display->display_options['fields']['field_story_kicker_text']['table'] = 'field_data_field_story_kicker_text';
-  $handler->display->display_options['fields']['field_story_kicker_text']['field'] = 'field_story_kicker_text';
-  $handler->display->display_options['fields']['field_story_kicker_text']['label'] = '';
-  $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Content: Description */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
-  $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
-  $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
-  $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
-  $handler->display->display_options['fields']['field_story_expert_description']['label'] = '';
-  $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'story' => 'story',
-    'videogallery' => 'videogallery',
-    'photogallery' => 'photogallery',
-  );
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '430',
-  );
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
-
-  /* Display: Tips and Tricks */
-  $handler = $view->new_display('block', 'Tips and Tricks', 'block_4');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Auto Right Top';
-  $handler->display->display_options['display_description'] = 'Tips and Tricks';
-  $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'customstyle';
-  $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Kicker */
-  $handler->display->display_options['fields']['field_story_kicker_text']['id'] = 'field_story_kicker_text';
-  $handler->display->display_options['fields']['field_story_kicker_text']['table'] = 'field_data_field_story_kicker_text';
-  $handler->display->display_options['fields']['field_story_kicker_text']['field'] = 'field_story_kicker_text';
-  $handler->display->display_options['fields']['field_story_kicker_text']['label'] = '';
-  $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Content: Description */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'story' => 'story',
-    'videogallery' => 'videogallery',
-    'photogallery' => 'photogallery',
-  );
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '431',
-  );
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
-
-  /* Display: Auto photo slider */
-  $handler = $view->new_display('block', 'Auto photo slider', 'block_5');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Auto Slider';
-  $handler->display->display_options['display_description'] = 'Auto photo slider';
+  $handler->display->display_options['title'] = 'Movie Photo Slider';
+  $handler->display->display_options['display_description'] = 'Movie Photo Slider';
   $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
@@ -446,10 +301,10 @@ function feature_for_auto_views_default_views() {
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid']['field'] = 'tid';
   $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '429',
+    0 => '442',
   );
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
-  $export['auto'] = $view;
+  $export['special_movie'] = $view;
 
   return $export;
 }

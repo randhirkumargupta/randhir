@@ -45,7 +45,7 @@
                 if($desc != "")
                 {?>
                <p class="review-desc review-desc-<?php echo $node_data['node_load_data']->nid ?>">
-                <?php echo l(mb_strimwidth($desc, 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
+                <?php echo l(mb_strimwidth($desc, 0, 130, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
               </p>
                 <?php } ?>
           </div>
