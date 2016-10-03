@@ -1542,8 +1542,17 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         vertical-align: top;
         font: 600 14px/18px Roboto;
         height: 30px;
-        padding: 5px 15px;
+        padding: 5px 10px;
+        position: relative;
         margin: 0 5px;
+        &:before{
+          content: '\f07a';
+          font-family: 'FontAwesome';
+          font-size: 18px;
+          color: #777;
+          vertical-align: top;
+          margin-right: 5px;
+        }
       }
       .btn-redeem-points{
         background-color: #a00606;
@@ -1554,8 +1563,15 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         vertical-align: top;
         font: 600 14px/18px Roboto;
         height: 30px;
-        padding: 5px 15px;
+        padding: 5px 10px;
         margin: 0 5px;
+        &:before{
+          content: '\f06b';
+          font-family: 'FontAwesome';
+          font-size: 18px;
+          color: #fff;
+          margin-right: 5px;
+        }
       }
       &:hover{
         box-shadow: 0 0 20px 0 #bbb;
@@ -1670,8 +1686,8 @@ body.has-cart-popup{
     }
   }
   .answer-container{
-    .form-type-radios{
-      .form-type-radio{
+    .form-type-radios, .form-type-checkboxes{
+      .form-type-radio, .form-type-checkbox{
         position: relative;
         > label{
           padding: 10px;
@@ -1680,7 +1696,7 @@ body.has-cart-popup{
           width: calc(100% - 30px);
           color: #777;
         }
-        .form-radio{
+        .form-radio, .form-checkbox{
           position: absolute;
           opacity: 0;
           &:checked + label{
@@ -1702,9 +1718,9 @@ body.has-cart-popup{
           height: 127px;
         }
       }
-      & + .form-type-radios{
+      & + .form-type-radios, & + .form-type-checkboxes{
         overflow: hidden;
-        .form-type-radio{
+        .form-type-radio, .form-type-checkbox{
           > label{
             height: 127px;
           }
@@ -1785,4 +1801,192 @@ body.has-cart-popup{
         vertical-align: top;
         width: 100%;
     }
+}
+.page-cart,
+.page-redeem-points{
+  header{
+    margin-bottom: 0;
+  }
+}
+.page-cart{
+  #page-title{
+    margin-top: 30px;
+    text-transform: uppercase;
+  }
+}
+.page-redeem-points{
+  #page-title{
+    display: none;
+  }
+}
+#block-itg-loyalty-reward-itg-loyalty-reward-header{
+  background-color: #eaebed;
+  padding: 5px 0;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  .cart-user{
+    float: left;
+    max-width: 300px;
+    text-align: center;
+    .user-pic {
+      background-color: #d3d6db;
+      border-radius: 50%;
+      display: inline-block;
+      height: 60px;
+      overflow: hidden;
+      vertical-align: top;
+      width: 60px;
+    }
+    .user-name {
+      color: #1a3c8d;
+      font: 500 15px/18px Roboto;
+      padding: 5px 0 0;
+      text-transform: uppercase;
+    }
+    .logout-link a {
+      color: #777;
+      font: 400 12px/12px Roboto;
+    }
+  }
+  .header-cart{
+    float: right;
+    list-style: none;
+    padding-top: 40px;
+    li{
+      float: left;
+      font: 400 14px/18px Roboto;
+      color: #777;
+      .cart-total{
+        > a{
+          color: #777;
+          .fa{
+            vertical-align: top;
+            font-size: 16px;
+          }
+        }
+      }
+      &#my-remaining-points{
+        span{
+          color: #1a3c8d;
+          font: 500 14px/18px Roboto;
+        }
+      }
+      & + li:before{
+        content: '|';
+        font: 400 14px/18px Roboto;
+        color: #777;
+        margin: 0 12px 0 15px;
+      }
+    }
+  }
+}
+.cart-detail .cart-row{
+  margin-bottom: 30px;
+}
+.cart-checkout-list{
+  padding: 15px 0;
+  border: 1px solid #dbdbdb;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  .product-details{
+    font: 400 15px/18px Roboto;
+    color: #000;
+    > div{
+      padding-bottom: 8px;
+      span{
+        float: left;
+        width: 150px;
+      }
+      strong{
+        font-weight: 500;
+        display: block;
+        overflow: hidden;
+      }
+    }
+  }
+  .cart-action{
+    text-align: center;
+    > div{
+      display: inline-block;
+      vertical-align: top;
+      font: 400 16px/24px Roboto;
+      color: #2f2f2f;
+      &.cart-action-links{
+        display: block;
+        span:after{
+          content: '|';
+          display: inline-block;
+          vertical-align: middle;
+          margin: 0 8px 0 11px;
+        }
+      }
+      &.points{
+        border: 1px solid #dbdbdb;
+        padding: 5px;
+        width: 165px;
+        max-width: 100%;
+        margin-top: 15px;
+      }
+    }
+  }
+}
+.cart-total-block{
+  background-color: #ededed;
+  padding: 25px 15px;
+  text-align: center;
+  .cart-total-inner{
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .grand-total{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    padding-bottom: 15px;
+    strong{
+      font: 500 16px/18px Roboto;
+      &:first-child{
+        float: left;
+      }
+      &:last-child{
+        float: right;
+      }
+    }
+  }
+  .points-balance{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    padding-top: 15px;
+    span{
+      font: 400 16px/18px Roboto;
+      &:first-child{
+        float: left;
+      }
+      &:last-child{
+        float: right;
+      }
+    }
+  }
+  .checkout a{
+    display: block;
+    padding: 10px;
+    font: 500 22px/22px Roboto;
+    background-color: #a00606;
+    box-shadow: 2px 2px 0 #000;
+    color: #fff;
+  }
+}
+[id*="itg-user-forgot-password-multistep-form"]{
+  .form-type-password-confirm{
+    padding: 0 15px;
+    > label{
+      display: none;
+    }
+    .form-item-pass-pass1{
+      margin-bottom: 10px;
+    }
+  }
 }

@@ -373,6 +373,7 @@ function itgadmin_preprocess_page(&$vars) {
       , 'poll-format-widget-list'
       , 'dont-miss-widget-list'
       , 'video-status'
+      , 'related-content'
   );
   if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
