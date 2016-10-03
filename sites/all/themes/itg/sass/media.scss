@@ -60,6 +60,9 @@
 
 
 @media only screen and (max-width:768px){
+    header {
+     margin-bottom: 15px;
+    }
     .mhide{
         display: none;
     }
@@ -78,6 +81,8 @@
             @include pos(absolute,-30px,null,null,10px);
             img{
                 max-width: 100%;
+                padding-left: 0;
+                background: transparent;
             }
         }
         .top-nav{
@@ -89,8 +94,15 @@
             height: 28px;
             line-height: 28px;
             margin-bottom: 0;
-            .main-nav li.desktop-hide {
-               display: none;
+            .main-nav {
+                li{
+                    a{
+                        padding: 0 10px;
+                    }
+                    &.desktop-hide {
+                        display: inline-block;
+                    }      
+                }
             }
             ul{
                 list-style-type: none;
@@ -198,7 +210,8 @@
                 @include pos(absolute,0px,94px,null,null);
                 @include transition(all 0.5s ease-in-out );
                 width:0px;
-                overflow:hidden;                        
+                overflow:hidden;
+                z-index: 1;
                 .search-text{
                     height:25px;
                     line-height:25px;
@@ -224,8 +237,22 @@ footer {
         }
     }
 }
-
-
+/*Start CSS Top Block Grid Home Page*/  
+.top-block{
+ .top-colum-1, .top-colum-2, .top-colum-3{
+        padding: 0 15px;
+        @include calculate-width(1);        
+    }       
+}
+ .itg-layout-container .itg-h450-section .droppable,  .itg-layout-container .itg-h321-section .droppable, 
+    .itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
+    .itg-layout-container .itg-top-section .top-colum-2 .droppable,
+    .itg-layout-container .itg-top-section .top-colum-1 .droppable,
+    .itg-layout-container .top-colum-3 .droppable,
+    .itg-common-section .droppable{
+        height: auto;
+    }      
+/*End CSS Top Block Grid Home Page*/  
 
 
 }
@@ -237,46 +264,6 @@ footer {
     .list-none{
         list-style-type: none;
     }
-    /*Start CSS Top Block Grid Home Page*/    
-    .top-block{
-        .top-colum-1, .top-colum-2, .top-colum-3{
-            padding: 0 15px;
-        }
-        .top-colum-1{
-            @include float(left);
-            width: 22%; 
-        }
-        .top-colum-2{
-            width: 44.8%;
-            @include float(left);
-        }
-        .top-colum-3{
-            width: 33.2%;
-            @include float(right);
-        }
-    }
-    .itg-layout-container .itg-h450-section .droppable{
-        height: 450px;
-    }
-    .itg-layout-container .itg-h321-section .droppable, 
-    .itg-layout-container .top-colum-3 .itg-widget-parent .droppable{
-        height: 321px;
-    }
-    .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
-        height: 673px;
-    }
-    .itg-layout-container .top-colum-3 .droppable{
-        height: 276px;
-    }
-    .itg-common-section{
-        .droppable{
-            height: 408px;
-        }
-    }
-    .itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
-        margin-bottom:0px;
-    }
-    /*End CSS Top Block Grid Home Page*/  
     /*Start CSS Big New Home page*/
     .big-news{        
         .big-story-col-1, .big-story-col-2{
