@@ -6,6 +6,7 @@
  * 
  */
 ksort($data);
+$output = '<div class="program-sub-title">Program Schedule</div>';
 foreach ($data as $key => $value) {
   $output .= '<div class="' . $key . '">' . $key . '</div>';
 }
