@@ -190,8 +190,11 @@ function itg_loyalty_reward_order() {
   global $user;
   $header = array(    
     t('Product Description'),      
-    t('Point'),
-    t('Order No'),
+    t('Points per unit'),
+    t('Quantity'),
+    t('Total Points'),
+    t('Order No'),    
+    t('Date of Purchase'),    
   );
   // Get order detail.
   $rows = _get_order_item();
@@ -200,7 +203,7 @@ function itg_loyalty_reward_order() {
       'header' => $header, 
       'rows' => $rows, 
       'attributes' => array('class' => array('mytable'))  
-    )
+    )    
   );  
 }
 
@@ -217,13 +220,13 @@ function _get_order_item() {
   global $user;
   $itg_result = array();
   $itg_query = db_select('itg_loyalty_reward_order', 'itg')
-      ->fields('itg', array('order_id', 'product_information'))
+      ->fields('itg', array('order_id', 'product_information', 'created'))
       ->condition('uid', $user->uid);
   $itg_result = $itg_query->execute()->fetchAll();  
   $data = array();
   foreach ($itg_result as $value) {    
-    $products = unserialize($value->product_information);        
-    foreach ($products['cart-items'] as $product) {      
+    $products = unserialize($value->product_information);    
+    foreach ($products['cart-items'] as $product) {            
       $product_pic = theme(
         'image_style', array(
           'style_name' => 'magazine_rhs_100x140',
@@ -236,7 +239,10 @@ function _get_order_item() {
       $data[] = array(
         $output,
         $product['product']['points'],
+        $product['quantity'],
+        $product['product']['points'] * $product['quantity'],
         $value->order_id,
+        format_date($value->created, 'custom_date_d_m_y_'),        
       );      
     }
   }
