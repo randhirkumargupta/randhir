@@ -10,10 +10,10 @@
     <div class="header-point">
       <span>Total Earned so For : <strong><?php print $data['total_earned_so_far']; ?></strong></span>
       <?php 
-        print l(t('<span>Redeemed Points : <strong>@total_earned</strong></span>', 
-            array('@total_earned' => $data['redeemed_points'])), 'order', array('html' => TRUE));
-        print l(t('<span>Remaining Points : <strong>@remaining</strong></span>', 
-            array('@remaining' => $data['total_earned_so_far'] - $data['redeemed_points'])), 'redeem-points', array('html' => TRUE));
+        print '<span>' . l(t('Redeemed Points : <strong>@total_earned</strong></span>', 
+            array('@total_earned' => $data['redeemed_points'])), 'order', array('html' => TRUE)) . '</span>';
+        print '<span>' . l(t('Remaining Points : <strong>@remaining</strong>', 
+            array('@remaining' => $data['total_earned_so_far'] - $data['redeemed_points'])), 'redeem-points', array('html' => TRUE)) . '</span>';
       ?>        
     </div>
     <table class="unit-description">
