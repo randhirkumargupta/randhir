@@ -38,7 +38,7 @@ function features_for_newsletter_field_default_field_bases() {
         'view' => array(
           'args' => array(),
           'display_name' => 'entityreference_1',
-          'view_name' => 'story_and_photo_id',
+          'view_name' => 'story_id',
         ),
       ),
       'target_type' => 'node',
