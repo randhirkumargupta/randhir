@@ -4,20 +4,11 @@ module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_mail');
 module_load_include('inc', 'itg_sso_reg', 'includes/common_fn');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_form');
 
-/*
- * Implement hook_init
+/**
+ * Implements hook_menu
+ * 
+ * {@inheritdoc}
  */
-
-function itg_sso_reg_init() {
-  
-  global $user;
-  
-  $settings['uid'] = $user->uid ? $user->uid : 0;
-  drupal_add_js(array('itg_popup' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_popup.js');
-}
-
-
 function itg_sso_reg_menu() {
 
   $items['signup'] = array(
