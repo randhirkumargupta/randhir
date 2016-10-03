@@ -51,7 +51,7 @@ function feature_category_management_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'metatag_enable_taxonomy_term__category_management';
-  $strongarm->value = TRUE;
+  $strongarm->value = 1;
   $export['metatag_enable_taxonomy_term__category_management'] = $strongarm;
 
   return $export;
