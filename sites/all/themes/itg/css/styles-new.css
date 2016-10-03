@@ -2050,3 +2050,10 @@ body.has-cart-popup {
   box-shadow: 2px 2px 0 #000;
   color: #fff;
 }
+
+[id*="itg-user-forgot-password-multistep-form"] .form-type-password-confirm > label {
+  display: none;
+}
+[id*="itg-user-forgot-password-multistep-form"] .form-type-password-confirm .form-item-pass-pass1 {
+  margin-bottom: 10px;
+}
