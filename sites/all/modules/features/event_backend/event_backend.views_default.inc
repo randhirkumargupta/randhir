@@ -1501,7 +1501,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '6';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -1577,15 +1577,30 @@ echo itg_event_registration_registered_user_detail($row->nid);
 
   /* Display: Associate video sub block */
   $handler = $view->new_display('block', 'Associate video sub block', 'block_1');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'magazine_rhs_100x140',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
@@ -1701,17 +1716,31 @@ echo itg_event_registration_registered_user_detail($row->nid);
 
   /* Display: Associate event photo sub block */
   $handler = $view->new_display('block', 'Associate event photo sub block', 'block_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'magazine_top_issue_172x240',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -1758,7 +1787,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
-  /* Field: Field: Session Title  */
+  /* Field: Field: Short Description */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -1836,6 +1865,15 @@ echo itg_event_registration_registered_user_detail($row->nid);
 
   /* Display: program page block */
   $handler = $view->new_display('block', 'program page block', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Session wise Coverage';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = 'Program Schedule';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Field collection item: Start Time */
   $handler->display->display_options['fields']['field_start_time']['id'] = 'field_start_time';
@@ -1852,7 +1890,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Session Title  */
+  /* Field: Field: Short Description */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -1909,20 +1947,38 @@ echo itg_event_registration_registered_user_detail($row->nid);
 
   /* Display: Block 2 */
   $handler = $view->new_display('block', 'Block 2', 'block_2');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
   $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'thumbnail',
@@ -1932,6 +1988,8 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['label'] = '';
+  $handler->display->display_options['fields']['field_story_new_title']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
@@ -1963,35 +2021,56 @@ echo itg_event_registration_registered_user_detail($row->nid);
 
   /* Display: speaker page */
   $handler = $view->new_display('block', 'speaker page', 'block_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Speakers';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Program Schedule (field_program_schedule) */
+  $handler->display->display_options['relationships']['field_program_schedule_value']['id'] = 'field_program_schedule_value';
+  $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
+  $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
+  $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['target'] = '_blank';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'thumbnail',
-    'image_link' => 'content',
+  /* Field: Field collection item: Select Speaker */
+  $handler->display->display_options['fields']['field_select_speaker']['id'] = 'field_select_speaker';
+  $handler->display->display_options['fields']['field_select_speaker']['table'] = 'field_data_field_select_speaker';
+  $handler->display->display_options['fields']['field_select_speaker']['field'] = 'field_select_speaker';
+  $handler->display->display_options['fields']['field_select_speaker']['relationship'] = 'field_program_schedule_value';
+  $handler->display->display_options['fields']['field_select_speaker']['label'] = '';
+  $handler->display->display_options['fields']['field_select_speaker']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_select_speaker']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_select_speaker']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_select_speaker']['settings'] = array(
+    'link' => 0,
   );
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Field: Content: New title */
-  $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
-  $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
-  $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
-  $handler->display->display_options['fields']['field_story_new_title']['label'] = '';
-  $handler->display->display_options['fields']['field_story_new_title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_select_speaker']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_select_speaker']['separator'] = '+';
+  /* Field: Field collection item: Select Speaker */
+  $handler->display->display_options['fields']['field_select_speaker_1']['id'] = 'field_select_speaker_1';
+  $handler->display->display_options['fields']['field_select_speaker_1']['table'] = 'field_data_field_select_speaker';
+  $handler->display->display_options['fields']['field_select_speaker_1']['field'] = 'field_select_speaker';
+  $handler->display->display_options['fields']['field_select_speaker_1']['relationship'] = 'field_program_schedule_value';
+  $handler->display->display_options['fields']['field_select_speaker_1']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['field_select_speaker_1']['label'] = '';
+  $handler->display->display_options['fields']['field_select_speaker_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_select_speaker_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_select_speaker_1']['separator'] = ', ';
+  /* Field: Global: View */
+  $handler->display->display_options['fields']['view']['id'] = 'view';
+  $handler->display->display_options['fields']['view']['table'] = 'views';
+  $handler->display->display_options['fields']['view']['field'] = 'view';
+  $handler->display->display_options['fields']['view']['label'] = '';
+  $handler->display->display_options['fields']['view']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view']['view'] = 'program_schedule';
+  $handler->display->display_options['fields']['view']['display'] = 'block_6';
+  $handler->display->display_options['fields']['view']['arguments'] = '[%field_select_speaker]';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -1999,6 +2078,16 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['nid']['default_argument_options']['code'] = 'return arg(1);';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -2013,16 +2102,8 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'reporter' => 'reporter',
+    'event_backend' => 'event_backend',
   );
-  /* Filter criterion: Content: Occupation (field_celebrity_pro_occupation) */
-  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['id'] = 'field_celebrity_pro_occupation_tid';
-  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['table'] = 'field_data_field_celebrity_pro_occupation';
-  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['field'] = 'field_celebrity_pro_occupation_tid';
-  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['value'] = array(
-    0 => '498',
-  );
-  $handler->display->display_options['filters']['field_celebrity_pro_occupation_tid']['vocabulary'] = 'itg_occupation';
 
   /* Display: sponsor page block */
   $handler = $view->new_display('block', 'sponsor page block', 'block_4');
@@ -2094,18 +2175,26 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Field: Field: Category Icon */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['label'] = '';
   $handler->display->display_options['fields']['field_sponser_logo']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_sponser_logo']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_sponser_logo']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_sponser_logo']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_sponser_logo']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_sponser_logo']['settings'] = array(
     'image_style' => 'thumbnail',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
@@ -2138,6 +2227,67 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'sponsor' => 'sponsor',
+  );
+
+  /* Display: speaker sub block */
+  $handler = $view->new_display('block', 'speaker sub block', 'block_6');
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => 'thumbnail',
+    'image_link' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
+  /* Field: Content: New title */
+  $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'reporter' => 'reporter',
   );
   $export['program_schedule'] = $view;
 
