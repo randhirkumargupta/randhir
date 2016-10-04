@@ -1613,6 +1613,46 @@ body.has-cart-popup{
     top: 50%;
     transform: translateY(-50%);
     width: 870px;
+    .pic{
+      text-align: center;
+      position: relative;
+      span {
+        background-color: #9d9d9d;
+        color: #fff;
+        display: inline-block;
+        padding: 8px;
+        position: relative;
+        vertical-align: top;
+        width: 212px;
+        font: 500 14px/18px Roboto;
+        &:before {
+          border-color: transparent #2f2f2f transparent transparent;
+          border-style: solid;
+          border-width: 20px 20px 0 0;
+          content: "";
+          height: 0;
+          left: 0;
+          position: absolute;
+          top: -20px;
+          width: 0;
+        }
+        &:after {
+          border-color: transparent transparent #2f2f2f;
+          border-style: solid;
+          border-width: 0 20px 20px 0;
+          content: "";
+          height: 0;
+          position: absolute;
+          right: 0;
+          top: -20px;
+          width: 0;
+        }
+      }
+    }
+    img{
+      width: 172px;
+      height: 240px;
+    }
     .cart-close{
       color: #777;
       font-size: 22px;
@@ -1655,6 +1695,14 @@ body.has-cart-popup{
         height: 30px;
         padding: 5px 15px;
         margin: 0 5px;
+        &:before{
+          content: '\f07a';
+          font-family: 'FontAwesome';
+          font-size: 18px;
+          color: #777;
+          vertical-align: top;
+          margin-right: 5px;
+        }
       }
       .btn-redeem-points{
         background-color: #a00606;
@@ -1667,6 +1715,13 @@ body.has-cart-popup{
         height: 30px;
         padding: 5px 15px;
         margin: 0 5px;
+        &:before{
+          content: '\f06b';
+          font-family: 'FontAwesome';
+          font-size: 18px;
+          color: #fff;
+          margin-right: 5px;
+        }
       }
   }
 }
@@ -2015,6 +2070,12 @@ body.has-cart-popup{
   }
   .product-wrapper{
     box-shadow: none;
+    .product-pic{
+      img{
+        width: 123px;
+        height: 172px;
+      }
+    }
   }
   .flexslider{
     border: none;
@@ -2060,4 +2121,49 @@ body.has-cart-popup{
       }
     }
   } 
+}
+[id*="itg-loyalty-reward-checkout-form"]{
+  margin: 20px 0;
+  max-width: 600px;
+  .form-type-textfield{
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    label{
+      width: 150px;
+      padding: 0 20px;
+      font: 300 14px/36px Roboto;
+      background-color: #fbfbfb;
+      border-right: 1px solid #e0e0e0;
+      z-index: 99;
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+    }
+    .form-text{
+      position: absolute;
+      left: 0;
+      top: 0;
+      border: none;
+      width: 100%;
+      height: 100%;
+      padding-left: 160px;
+      z-index: 9;
+    }
+  }
+  .form-submit{
+    background: url(../images/btn-blue.png) no-repeat;
+    height: 41px;
+    border: none;
+    width: 170px;
+    font: 300 20px/28px Roboto;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+  }
 }
