@@ -6,7 +6,11 @@
  */
 
 /**
- * Implements menu callback function for test earn points.
+ * Implements menu callback function for test earn points. 
+ * 
+ * @global stdObject $user
+ *
+ * @return string
  */
 function itg_loyalty_reward_testpoints() {
   global $base_url;
@@ -35,6 +39,8 @@ function itg_loyalty_reward_testpoints() {
 
 /**
  * Implements callback function for points earning.
+ * 
+ * @global stdObject $user
  */
 function itg_loyalty_reward_earnpoint() {
   global $user;
@@ -88,14 +94,15 @@ function itg_loyalty_reward_earnpoint() {
 /**
  * Insert points into point table.
  *
+ * @global stdObject $user
  * @param array $presave
  *   Mixed array for inserting data.
  */
 function itg_loyalty_reward_add_point($presave, $op) {
-global $user;  
+  global $user;
   $itg_query = db_insert('itg_lrp_loyalty_points')
       ->fields($presave)
-      ->execute();  
+      ->execute();
   if ($itg_query >= 1 && $op == 'new') {
     $point_presave = array(
       'uid' => $presave['uid'],
@@ -109,14 +116,14 @@ global $user;
         ->fields($point_presave)
         ->execute();
   }
-  elseif ($itg_query >= 1 && $op == 'update') {    
+  elseif ($itg_query >= 1 && $op == 'update') {
     $itg_result = new stdClass();
     $itg_query = db_select('itg_loyalty_reward_point_history', 'itg');
     $itg_query->fields('itg', array('id', 'total_point'))
         ->condition('uid', $user->uid)
         ->condition('pointer_key', $presave['pointer_key']);
-    $itg_result = $itg_query->execute()->fetchObject();            
-    
+    $itg_result = $itg_query->execute()->fetchObject();
+
     // Add point to existing point.
     $new_point = $itg_result->total_point + $presave['loyalty_points'];
     // Update new points on table.
