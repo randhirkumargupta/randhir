@@ -1608,6 +1608,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #dedede;
   margin: 15px 0;
 }
+.view-redeem-points .product-wrapper .product-pic span, .view-product .product-wrapper .product-pic span {
+  display: none;
+}
 .view-redeem-points .product-wrapper .product-title, .view-product .product-wrapper .product-title {
   text-transform: uppercase;
   font: 400 16px/18px Roboto;
@@ -2125,7 +2128,7 @@ body.has-cart-popup {
   margin: 0;
 }
 
-.page-cart section.sidebar {
+.page-cart section.sidebar, .page-order section.sidebar {
   border: none;
 }
 
@@ -2142,6 +2145,9 @@ body.has-cart-popup {
 #block-views-redeem-points-block-4 .product-wrapper .product-pic img {
   width: 123px;
   height: 172px;
+}
+#block-views-redeem-points-block-4 .product-wrapper .product-pic span {
+  display: none;
 }
 #block-views-redeem-points-block-4 .flexslider {
   border: none;
@@ -2230,4 +2236,58 @@ body.has-cart-popup {
   color: #fff;
   cursor: pointer;
   margin-top: 10px;
+}
+
+.page-order header {
+  margin-bottom: 0;
+}
+.page-order table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 15px/20px Roboto;
+  margin: 30px 0;
+}
+.page-order table th {
+  background-color: #d9d9d9;
+  font: 500 15px/20px Roboto;
+}
+.page-order table td {
+  border-bottom: 1px solid #d9d9d9;
+  vertical-align: top;
+}
+.page-order table td + td {
+  font-size: 13px;
+}
+.page-order table td .checkout-inner img {
+  float: left;
+  margin-right: 10px;
+  width: 41px;
+  height: 58px;
+}
+.page-order table td .checkout-inner .checkout-inner-details {
+  overflow: hidden;
+}
+.page-order table td .checkout-inner .checkout-inner-details span {
+  float: left;
+  width: 130px;
+}
+.page-order table th, .page-order table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.view-product .view-filters {
+  text-align: right;
+}
+.view-product .view-filters form {
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+.view-product .view-filters form .form-submit {
+  display: inline-block;
+  vertical-align: top;
+  background-color: #1a3c8d;
+  color: #fff;
+  padding: 10px;
 }

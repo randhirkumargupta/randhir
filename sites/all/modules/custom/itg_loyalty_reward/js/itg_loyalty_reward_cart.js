@@ -7,11 +7,11 @@
         attach: function (context, settings) {
             // Module code start.
             // Code to show detail popup
-            $('.view-redeem-points').on('click', '.product-pic', function () {
+            $('.product-wrapper').on('click', '.product-pic', function () {
                 var pic = $(this).html();
-                var added_on = "April 25, 2016";
+                var added_on = $(this).children('span').html();
                 var title = $(this).siblings('.product-title').html();
-                var desc = "Cras ex mauris; euismod vitae hendrerit ac, molestie nec mi. Vestibulum felis nisl; volutpat eget nisl nec, accumsan ultricies turpis. Donec et lectus ut ex maximus aliquam vel non nulla.";
+                var desc = $(this).siblings('.product-description').html();
                 var redeem_points = $(this).siblings('.redeem-points').html();
                 var actions = $(this).siblings('.product-actions').html();
                 var popup_html = '<div class="cart-popup-wrapper">\n\
