@@ -14,6 +14,7 @@ var astroFlag = 0;
 var sDateFlag = 1;
 var dynamicId = '';
 var dynamicAudioId = '';
+var dynamicFlag = 1;
 var colorboxFlag = 1;
 var dailymotionFlag = 1;
 var uploadName = '';
@@ -335,6 +336,7 @@ var uploadName = '';
 
                 jQuery(document).on("click", "#content-enable-button", function (event) {
                     event.preventDefault();
+                    dynamicFlag = 1;
                     var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
                     var edate = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
                     if (sdate == '') {
@@ -531,17 +533,18 @@ var uploadName = '';
 
                 });
             } else {
-                jQuery(".field-name-field-service-audio-keyword").hide();
-                jQuery(".field-name-field-service-video-keyword").hide();
+                if(dynamicFlag == 1) {
+                    jQuery(".field-name-field-service-audio-keyword").hide();
+                    jQuery(".field-name-field-service-video-keyword").hide();
+                    dynamicFlag++;
+                }
                 // for video
                 jQuery(".mobile-video-fields input").on('click', function (event) {
                     event.preventDefault();
-                    // if (uploadName.indexOf("files[field_service_content_und_") >= 0) {
                     var uploadId = jQuery(this).attr("name").split('files[field_service_content_und_')[1].split('_field_service_video_und_0]')[0];
                     dynamicId = "div[id^='edit-field-service-content-und-" + uploadId + "-field-service-video']";
                     dynamicUploadButtonName = "input[name^='field_service_content_und_" + uploadId + "_field_service_video']";
                     dynamicUploadImage = "input[name='field_service_content[und][" + uploadId + "][field_service_video][und][0][fid]']";
-                    // }
 
                     // for video seach popup
                     jQuery('.video-ftp').trigger('click');
