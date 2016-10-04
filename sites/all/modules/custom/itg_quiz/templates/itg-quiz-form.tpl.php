@@ -28,7 +28,7 @@ else {
     </div>
     <div class="profile-detail">
       <ul>
-        <li class="title"><?php echo $byline_name; ?></li>
+        <li class="title" style="line-height: 15px"><?php echo $byline_name; ?> |</li>
         <li class="twitter"><?php echo $byline_twitter_handler; ?></li>
       </ul>
       <ul class="date-update">
