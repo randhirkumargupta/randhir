@@ -837,7 +837,49 @@ function features_for_newsletter_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 7,
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-newsletter_templates-field_news_title'.
+  $field_instances['node-newsletter_templates-field_news_title'] = array(
+    'bundle' => 'newsletter_templates',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please enter subject line.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_news_title',
+    'label' => 'Subject Line',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
     ),
   );
 
@@ -913,7 +955,7 @@ function features_for_newsletter_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -956,7 +998,7 @@ function features_for_newsletter_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -1032,7 +1074,7 @@ function features_for_newsletter_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -1075,7 +1117,7 @@ function features_for_newsletter_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -1105,6 +1147,7 @@ function features_for_newsletter_field_default_field_instances() {
   t('Please choose newsletter frequency.');
   t('Please choose newsletter type.');
   t('Please enter header headline.');
+  t('Please enter subject line.');
   t('Please select date.');
   t('Please select day.');
   t('Please select template for this newsletter.');
@@ -1113,6 +1156,7 @@ function features_for_newsletter_field_default_field_instances() {
   t('Property (Website Name)');
   t('Schedule');
   t('Select Template');
+  t('Subject Line');
   t('Thumbnail');
   t('Time');
   t('Title');
