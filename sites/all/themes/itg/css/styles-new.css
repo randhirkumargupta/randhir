@@ -1597,31 +1597,35 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding-bottom: 15px;
   margin-bottom: 20px;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .view-content {
+
+.view-redeem-points .view-content, .view-product .view-content {
   margin: 0 -15px;
   overflow: hidden;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper {
+.view-redeem-points .product-wrapper, .view-product .product-wrapper {
   padding: 15px;
   text-align: center;
   border: 1px solid #dedede;
   margin: 15px 0;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .product-title {
+.view-redeem-points .product-wrapper .product-title, .view-product .product-wrapper .product-title {
   text-transform: uppercase;
   font: 400 16px/18px Roboto;
   padding-top: 15px;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .redeem-points {
+.view-redeem-points .product-wrapper .product-description, .view-product .product-wrapper .product-description {
+  display: none;
+}
+.view-redeem-points .product-wrapper .redeem-points, .view-product .product-wrapper .redeem-points {
   text-transform: uppercase;
   font: 600 18px/18px Roboto;
   padding-top: 5px;
   color: #a00606;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .product-actions {
+.view-redeem-points .product-wrapper .product-actions, .view-product .product-wrapper .product-actions {
   padding-top: 30px;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .btn-add-cart {
+.view-redeem-points .product-wrapper .btn-add-cart, .view-product .product-wrapper .btn-add-cart {
   background-color: #eaebed;
   border: 1px solid #e1e1e1;
   border-radius: 1px;
@@ -1634,7 +1638,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   position: relative;
   margin: 0 5px;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .btn-add-cart:before {
+.view-redeem-points .product-wrapper .btn-add-cart:before, .view-product .product-wrapper .btn-add-cart:before {
   content: '\f07a';
   font-family: 'FontAwesome';
   font-size: 18px;
@@ -1642,7 +1646,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   vertical-align: top;
   margin-right: 5px;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .btn-redeem-points {
+.view-redeem-points .product-wrapper .btn-redeem-points, .view-product .product-wrapper .btn-redeem-points {
   background-color: #a00606;
   border: 1px solid #820000;
   border-radius: 1px;
@@ -1654,22 +1658,22 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 5px 10px;
   margin: 0 5px;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper .btn-redeem-points:before {
+.view-redeem-points .product-wrapper .btn-redeem-points:before, .view-product .product-wrapper .btn-redeem-points:before {
   content: '\f06b';
   font-family: 'FontAwesome';
   font-size: 18px;
   color: #fff;
   margin-right: 5px;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .product-wrapper:hover {
+.view-redeem-points .product-wrapper:hover, .view-product .product-wrapper:hover {
   box-shadow: 0 0 20px 0 #bbb;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .more-link {
+.view-redeem-points .more-link, .view-product .more-link {
   position: absolute;
   right: 0;
   top: 9px;
 }
-[id*="block-views-redeem-points-block"] .view-redeem-points .more-link a {
+.view-redeem-points .more-link a, .view-product .more-link a {
   color: #777;
   font-family: Roboto;
 }

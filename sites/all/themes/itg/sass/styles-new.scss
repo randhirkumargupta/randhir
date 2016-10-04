@@ -1509,86 +1509,88 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     padding-bottom: 15px;
     margin-bottom: 20px;
   }
-  .view-redeem-points{
-    .view-content{
-      margin: 0 -15px;
-      overflow: hidden;
+}
+.view-redeem-points, .view-product{
+  .view-content{
+    margin: 0 -15px;
+    overflow: hidden;
+  }
+  .product-wrapper{
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #dedede;
+    margin: 15px 0;
+    .product-title{
+      text-transform: uppercase;
+      font: 400 16px/18px Roboto;
+      padding-top: 15px;
     }
-    .product-wrapper{
-      padding: 15px;
-      text-align: center;
-      border: 1px solid #dedede;
-      margin: 15px 0;
-      .product-title{
-        text-transform: uppercase;
-        font: 400 16px/18px Roboto;
-        padding-top: 15px;
-      }
-      .redeem-points{
-        text-transform: uppercase;
-        font: 600 18px/18px Roboto;
-        padding-top: 5px;
-        color: #a00606;
-      }
-      .product-actions{
-        padding-top: 30px;
-      }
-      .btn-add-cart{
-        background-color: #eaebed;
-        border: 1px solid #e1e1e1;
-        border-radius: 1px;
+    .product-description{
+      display: none;
+    }
+    .redeem-points{
+      text-transform: uppercase;
+      font: 600 18px/18px Roboto;
+      padding-top: 5px;
+      color: #a00606;
+    }
+    .product-actions{
+      padding-top: 30px;
+    }
+    .btn-add-cart{
+      background-color: #eaebed;
+      border: 1px solid #e1e1e1;
+      border-radius: 1px;
+      color: #777;
+      display: inline-block;
+      vertical-align: top;
+      font: 600 14px/18px Roboto;
+      height: 30px;
+      padding: 5px 10px;
+      position: relative;
+      margin: 0 5px;
+      &:before{
+        content: '\f07a';
+        font-family: 'FontAwesome';
+        font-size: 18px;
         color: #777;
-        display: inline-block;
         vertical-align: top;
-        font: 600 14px/18px Roboto;
-        height: 30px;
-        padding: 5px 10px;
-        position: relative;
-        margin: 0 5px;
-        &:before{
-          content: '\f07a';
-          font-family: 'FontAwesome';
-          font-size: 18px;
-          color: #777;
-          vertical-align: top;
-          margin-right: 5px;
-        }
+        margin-right: 5px;
       }
-      .btn-redeem-points{
-        background-color: #a00606;
-        border: 1px solid #820000;
-        border-radius: 1px;
+    }
+    .btn-redeem-points{
+      background-color: #a00606;
+      border: 1px solid #820000;
+      border-radius: 1px;
+      color: #fff;
+      display: inline-block;
+      vertical-align: top;
+      font: 600 14px/18px Roboto;
+      height: 30px;
+      padding: 5px 10px;
+      margin: 0 5px;
+      &:before{
+        content: '\f06b';
+        font-family: 'FontAwesome';
+        font-size: 18px;
         color: #fff;
-        display: inline-block;
-        vertical-align: top;
-        font: 600 14px/18px Roboto;
-        height: 30px;
-        padding: 5px 10px;
-        margin: 0 5px;
-        &:before{
-          content: '\f06b';
-          font-family: 'FontAwesome';
-          font-size: 18px;
-          color: #fff;
-          margin-right: 5px;
-        }
-      }
-      &:hover{
-        box-shadow: 0 0 20px 0 #bbb;
+        margin-right: 5px;
       }
     }
-    .more-link{
-      position: absolute;
-      right: 0;
-      top: 9px;
-      a{
-        color: #777;
-        font-family: Roboto;
-      }
+    &:hover{
+      box-shadow: 0 0 20px 0 #bbb;
+    }
+  }
+  .more-link{
+    position: absolute;
+    right: 0;
+    top: 9px;
+    a{
+      color: #777;
+      font-family: Roboto;
     }
   }
 }
-
 body.has-cart-popup{
   overflow: hidden;
 }
