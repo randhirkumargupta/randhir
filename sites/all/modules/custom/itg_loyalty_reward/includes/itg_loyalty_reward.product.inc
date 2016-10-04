@@ -189,12 +189,9 @@ function itg_loyalty_reward_removecart($nid, $name) {
 function itg_loyalty_reward_order() {
   global $user;
   $header = array(    
-    t('Product Description'),      
-    t('Points per unit'),
-    t('Quantity'),
-    t('Total Points'),
+    t('Product Description'),
+    t('Points'),
     t('Order No'),    
-    t('Date of Purchase'),    
   );
   // Get order detail.
   $rows = _get_order_item();
@@ -235,14 +232,13 @@ function _get_order_item() {
       );
       $output = '<div>';
       $output .= $product_pic . 'Magzine ID: ' . $product['product']['nid'];
+      $output .= 'Quantity: ' . $product['quantity'];
+      $output .= 'Date of Purchase: ' . format_date($value->created, 'custom_date_d_m_y_');
       $output .= '</div>';
       $data[] = array(
-        $output,
-        $product['product']['points'],
-        $product['quantity'],
+        $output,              
         $product['product']['points'] * $product['quantity'],
-        $value->order_id,
-        format_date($value->created, 'custom_date_d_m_y_'),        
+        $value->order_id,                
       );      
     }
   }
