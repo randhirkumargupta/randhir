@@ -1,4 +1,4 @@
-<div class="year-slider">
+<div class="year-slider">    
     <?php foreach($rows as $index => $row): ?>
     <div><?php print $row['field_story_extra_large_image'];?>
         <h2><?php print ucfirst($row['title']);?></h2>
@@ -15,5 +15,4 @@ jQuery(document).ready(function () {
         fade: false         
     });  
 });
-
 </script>
