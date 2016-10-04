@@ -195,7 +195,7 @@ function itg_layout_manager_block_view($delta = '') {
     case 'layout_widget_list_block':      
       $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);      
       if (empty($template_id)) {
-        $widget_array['default_widget'] = get_all_widgets_list_by_setting_page();
+        $widget_array['default_widget'] = get_all_widgets_list_by_setting_page('default');
       }
       
       $widget_array['poll_widget'] = get_widgets_poll_list();
@@ -249,8 +249,8 @@ function itg_layout_manager_block_view($delta = '') {
       $block['content'] = theme('layout_custom_widgets_list_block', array('data' => $widget_array));
     break;
     
-    case 'layout_special_widget_list_block':      
-      $widget_array['special_widget'] = get_all_widgets_list_by_setting_page();
+    case 'layout_special_widget_list_block':
+      $widget_array['special_widget'] = get_all_widgets_list_by_setting_page('Special');
       $block['content'] = theme('layout_special_widgets_list_block', array('data' => $widget_array));
     break;
     
@@ -333,6 +333,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
     'layout_special_widgets_list_block' => array(
       'arguments' => array('form' => NULL),
       'template' => 'layout-special-widgets-list-block',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
+    'html_custom_widget' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-html-custom-widget',      
       'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
     ),
   );
