@@ -62,6 +62,7 @@ features[field_instance][] = node-newsletter-field_newsl_time
 features[field_instance][] = node-newsletter-field_newsl_website_name
 features[field_instance][] = node-newsletter-field_survey_start_date
 features[field_instance][] = node-newsletter_templates-body
+features[field_instance][] = node-newsletter_templates-field_news_title
 features[field_instance][] = node-newsletter_templates-field_newst_banner
 features[field_instance][] = node-newsletter_templates-field_newst_header_headline
 features[field_instance][] = node-newsletter_templates-field_newst_logo

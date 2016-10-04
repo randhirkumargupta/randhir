@@ -7042,6 +7042,7 @@ div.node{
 .node-astro-form,
 .node-issue-form,
 .node-newsletter-form,
+.node-recipe-form,
 .node-newsletter_templates-form,
 .node-mega_review_critic-form{
   @extend .image-repo-browse;
@@ -8051,4 +8052,12 @@ div.node{
     margin-top: 20px;
     -webkit-transition: scale
   }
+}
+.page-node-add-recipe{
+  .form-managed-file .image-widget-data{
+    float: left;
+    .form-submit[value="Remove"]{
+      left: 375px;
+    }
+  } 
 }
