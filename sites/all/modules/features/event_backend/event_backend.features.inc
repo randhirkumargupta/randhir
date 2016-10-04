@@ -24,6 +24,60 @@ function event_backend_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function event_backend_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: event_364x205.
+  $styles['event_364x205'] = array(
+    'label' => 'event_364x205',
+    'effects' => array(
+      10 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 364,
+          'height' => 205,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: event_speaker_168x168.
+  $styles['event_speaker_168x168'] = array(
+    'label' => 'event_speaker_168x168',
+    'effects' => array(
+      12 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 168,
+          'height' => 168,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: event_speaker_program_72x72.
+  $styles['event_speaker_program_72x72'] = array(
+    'label' => 'event_speaker_program_72x72',
+    'effects' => array(
+      11 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 72,
+          'height' => 72,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function event_backend_node_info() {
