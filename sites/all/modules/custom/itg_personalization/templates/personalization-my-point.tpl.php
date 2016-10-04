@@ -32,11 +32,7 @@
           <td class="unit-point-item"><?php print $value['earned_points']; ?></td>
         </tr>
         <?php endforeach; ?>
-      </tbody>
-        
-        
-        
-        
+      </tbody>     
     </table>
 </div>
 

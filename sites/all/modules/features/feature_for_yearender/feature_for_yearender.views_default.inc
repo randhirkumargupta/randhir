@@ -28,6 +28,8 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -49,6 +51,10 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -84,6 +90,12 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Section wise ordering content: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
+  $handler->display->display_options['filters']['content_type']['group'] = 1;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -91,28 +103,17 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'photogallery' => 'photogallery',
-  );
-  /* Filter criterion: Content: Set As Featured (field_featured) */
-  $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
-  $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
-  $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
-  $handler->display->display_options['filters']['field_featured_value']['value'] = array(
-    'yes' => 'yes',
-  );
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '427',
-  );
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
+  /* Filter criterion: Section wise ordering content: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['value'] = '428';
 
   /* Display: Yearender Latest Galleries */
   $handler = $view->new_display('block', 'Yearender Latest Galleries', 'block_2');
@@ -122,7 +123,7 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['offset'] = '5';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['row_class'] = 'col-md-6 col-sm-6 col-xs-12';
@@ -184,28 +185,23 @@ function feature_for_yearender_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'photogallery' => 'photogallery',
-  );
-  /* Filter criterion: Content: Set As Featured (field_featured) */
-  $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
-  $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
-  $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
-  $handler->display->display_options['filters']['field_featured_value']['value'] = array(
-    'yes' => 'yes',
-  );
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '427',
-  );
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
+  /* Filter criterion: Section wise ordering content: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
+  $handler->display->display_options['filters']['content_type']['group'] = 1;
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
+  /* Filter criterion: Section wise ordering content: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['value'] = '428';
   $export['yearender'] = $view;
 
   return $export;

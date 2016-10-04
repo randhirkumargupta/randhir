@@ -270,6 +270,54 @@ function itg_loyalty_reward_schema() {
     ),
     'primary key' => array('order_id'),
   );
+  // Points total and remaining information.
+  $schema['itg_loyalty_reward_point_history'] = array(
+    'description' => 'Table for storing user point history.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The Primary Id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'total_point' => array(
+        'description' => 'User total earn point.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'redeemed_point' => array(
+        'description' => 'User redeemed point.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'remaining_point' => array(
+        'description' => 'User remaining point.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'pointer_key' => array(
+        'description' => 'Pointer key',
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+    ),
+    'primary key' => array('id'),
+  );
 
   return $schema;
 }

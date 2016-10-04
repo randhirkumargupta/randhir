@@ -280,7 +280,10 @@ function file_ajax_upload() {
     $form['#suffix'] .= '<span class="ajax-new-content"></span>';
   }
 
-  $output = theme('status_messages') . drupal_render($form);
+  // Patch applied for remove AJAX form error messages by ved
+  $form['#prefix'] .= '<div class="file-upload-js-error">' . theme('status_messages') . '</div>';
+  $output = drupal_render($form);
+  // End patch
   $js = drupal_add_js();
   $settings = call_user_func_array('array_merge_recursive', $js['settings']['data']);
 

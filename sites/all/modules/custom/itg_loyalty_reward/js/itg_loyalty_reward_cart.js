@@ -107,7 +107,7 @@
                     dataType: 'JSON',
                     data: {'type': event_type},
                     success: function (itg) {
-                        console.log(itg);
+                        
                     }
                 });
             });
