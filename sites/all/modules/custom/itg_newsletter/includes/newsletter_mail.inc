@@ -14,6 +14,7 @@
 function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
 
   $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
+  
   // TODO: Define globally
   $user_email_arr = array('neha.rani@kelltontech.com', 'gourav.walia@kelltontech.com');
   $user_email_str = implode(',', $user_email_arr);
@@ -28,7 +29,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
 
   $params = array(
     'body' => $mail_content,
-    'subject' => 'India Today Newsletter | ' . $template_node->title,
+    'subject' => 'India Today Newsletter | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'],
   );
 
   $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
