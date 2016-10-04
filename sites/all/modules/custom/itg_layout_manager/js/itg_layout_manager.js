@@ -126,6 +126,7 @@
             $('#layout-button-save').click(function() {
 
                 var base_url = settings.itg_story.settings.base_url;
+                var layout_type_url = settings.itg_story.settings.layout_type;
                 var section_name = $('#edit-section').val();
                 var template_name = $('#edit-template-name').val();
 
@@ -140,7 +141,7 @@
                         if (section_name == 'home_page') {
                             var dis_url = "/itg-layout-manager/home?section=home_page&template_name=page--front";
                         } else {
-                            var dis_url = "/itg-layout-list";
+                            var dis_url = "/itg-layout-list/"+layout_type_url;
                         }
                         window.location.href = base_url + dis_url;
                     }
