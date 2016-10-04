@@ -447,7 +447,7 @@ if ($widget_style == 'auto-road-trip') {
                         $extra_large_image_url = image_style_url("widget_small", $entity->field_story_extra_large_image['und'][0]['uri']);
                     }
                     ?>
-            <div class="col-md-6">                   
+            <div class="col-md-6 col-sm-6 col-xs-6">                   
                 <span class="pic  <?php echo $video_class; ?>"> <a class="pic  <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
                         <img src="<?php echo $extra_large_image_url; ?>">
                     </a></span>
