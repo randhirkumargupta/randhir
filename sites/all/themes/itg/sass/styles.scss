@@ -4701,4 +4701,25 @@ footer{
             }
     }        
 }
+#block-views-program-schedule-block-4{
+    h2{
+        font-size: 20px;
+        border-bottom: 1px solid $border-color;
+        text-transform: uppercase;
+        font-family: $itg-robotoslab;
+        margin-bottom: 30px;
+        padding-bottom: 10px;
+    
+    }
+}
+#block-views-event-photo-slider-block{
+    ul{
+        @extend .list-none;
+    }
+    h2{
+        font-size: 24px;
+        color: #ef3c24;
+        font-family: $itg-robotoslab;
+    }
+}
 /*CSS end for event page index*/
