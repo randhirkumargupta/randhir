@@ -184,14 +184,14 @@ footerMain();
            jQuery(this).append("<li><span class='more-link'>More</span></li>");
         }
     });
-   jQuery('.more-link').click(function(){
+   jQuery('.footer-bottom .more-link').click(function(){
         jQuery(this).parents('ul').find('li.hidelist').slideToggle();
         jQuery(this).toggleClass('active');
         jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
         if(jQuery(this).hasClass('active')){
-            jQuery('.more-link').text('Less');
+            jQuery('.footer-bottom .more-link').text('Less');
         } else{
-            jQuery('.more-link').text('More');
+            jQuery('.footer-bottom .more-link').text('More');
         }
     });
     }
