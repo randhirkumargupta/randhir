@@ -348,10 +348,13 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'counter' => 'counter',
+    'field_news_title' => 'field_news_title',
     'title' => 'title',
     'field_newst_header_headline' => 'field_newst_header_headline',
     'field_newst_main_headline' => 'field_newst_main_headline',
     'created' => 'created',
+    'changed' => 'changed',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
@@ -359,6 +362,18 @@ function features_for_newsletter_views_default_views() {
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_news_title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -382,6 +397,13 @@ function features_for_newsletter_views_default_views() {
     ),
     'created' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -422,11 +444,16 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S.No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Field: Title */
+  $handler->display->display_options['fields']['field_news_title']['id'] = 'field_news_title';
+  $handler->display->display_options['fields']['field_news_title']['table'] = 'field_data_field_news_title';
+  $handler->display->display_options['fields']['field_news_title']['field'] = 'field_news_title';
+  $handler->display->display_options['fields']['field_news_title']['label'] = 'Subject Line';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Subject Line';
+  $handler->display->display_options['fields']['title']['label'] = 'Template Name';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
@@ -557,6 +584,7 @@ function features_for_newsletter_views_default_views() {
     t('No Result Found!'),
     t('S.No'),
     t('Subject Line'),
+    t('Template Name'),
     t('Header Headline'),
     t('Main Headline'),
     t('-'),

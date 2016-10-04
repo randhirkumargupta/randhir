@@ -162,13 +162,16 @@ function features_for_newsletter_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '6',
+          'weight' => '7',
         ),
         'title' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'path' => array(
-          'weight' => '5',
+          'weight' => '6',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '9',
         ),
       ),
       'display' => array(),
