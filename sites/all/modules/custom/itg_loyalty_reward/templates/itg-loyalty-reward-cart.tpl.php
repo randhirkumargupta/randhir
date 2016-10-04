@@ -14,7 +14,7 @@
                 <?php
                 $product_pic = theme(
                     'image_style', array(
-                  'style_name' => 'magazine_rhs_100x140',
+                  'style_name' => 'cart_172x240',
                   'path' => $cart_detail['product']['image']['uri'],
                     )
                 );
