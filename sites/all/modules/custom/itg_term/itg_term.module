@@ -372,9 +372,8 @@ function itg_term_views_pre_render(&$view) {
 
         if (isset($_SESSION['messages']['warning'])) {
           unset($_SESSION['messages']['warning']);
-
           // To override message
-          drupal_set_message(t('Warnings have been reported during import process (bad formatted)'), 'warning');
+          //drupal_set_message(t('Warnings have been reported during import process (bad formatted)'), 'warning');
         }
 
         drupal_set_message(t('Terms are imported into vocabulary "tags".'));
