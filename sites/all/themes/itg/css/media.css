@@ -78,6 +78,17 @@
     vertical-align: top;
     float: none;
   }
+
+  /*    special event page css start here*/
+  .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2, .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2 {
+    height: auto;
+    margin-bottom: 50px;
+  }
+  .tech-layout-page .auto-block-3 .itg-widget-child .droppable, .auto-layout-page .auto-block-3 .itg-widget-child .droppable {
+    height: auto;
+  }
+
+  /*    special event page css start here*/
 }
 @media only screen and (max-width: 768px) {
   header {
@@ -276,6 +287,46 @@
   }
 
   /*End CSS Top Block Grid Home Page*/
+  /*css start special event page for osscar*/
+  .oscar-layout-page .left-side {
+    margin-bottom: 50px;
+  }
+  .oscar-layout-page .oscor-photo {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  .oscar-layout-page .oscor-photo .col-md-6 {
+    margin: 0px;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .oscar-layout-page .oscor-photo .col-md-6 .title h3 {
+    white-space: pre-wrap;
+  }
+  .oscar-layout-page .oscor-photo .col-md-6 :nth-child(n+3) {
+    margin-top: 0;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider {
+    padding-bottom: 20px;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li {
+    padding: 10px;
+    width: 100% !important;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li img {
+    float: left;
+    margin-right: 10px;
+    width: 145px;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider i {
+    color: #ccc;
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+  }
+
+  /*css end special event page for osscar*/
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {
