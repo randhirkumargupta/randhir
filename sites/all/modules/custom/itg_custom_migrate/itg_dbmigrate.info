@@ -1,0 +1,13 @@
+name = ITG db migrate
+description = Itg db migrate module.
+core = 7.x
+
+package = ITG
+
+dependencies[] = migrate
+
+files[] = itg_dbmigrate.module
+files[] = includes/itg_migrate.category.inc
+files[] = includes/itg_migrate.story.inc
+files[] = includes/itg_migrate.files.inc
+files[] = includes/itg_migrate.user.inc

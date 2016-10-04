@@ -47,8 +47,8 @@
           <div class="field-items"><?php echo ucfirst(itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'])); ?></div>
         </div>
       <?php
-      if (isset($node->op) && $node->op == 'Preview'){
-        if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic'){ ?>
+      if (isset($node->op) && $node->op == 'Preview') {
+        if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') { ?>
           <div class="field">
             <div class="field-label">Frequency:</div>
             <div class="field-items"><?php echo ucwords($node->field_newsl_frequency[LANGUAGE_NONE][0]['value']); ?></div>
