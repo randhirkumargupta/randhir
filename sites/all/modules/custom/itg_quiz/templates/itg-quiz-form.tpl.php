@@ -61,4 +61,9 @@ else {
   <div class="<?php echo $form_class; ?>">
     <?php print drupal_render_children($form); ?>
   </div>
+  <?php
+  if (function_exists('taboola_view')) {
+    taboola_view();
+  }
+  ?>
 </div>
