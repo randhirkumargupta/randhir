@@ -235,7 +235,7 @@ if ($widget_style == 'auto-road-trip') {
     </div>
 
 
-<?php }else if ($widget_style == 'movies-celebrities') { ?>
+<?php } else if ($widget_style == 'movies-celebrities') { ?>
     <div class="row buying-guides tech-in-depth">
         <div class="col-md-6">
             <?php
@@ -322,7 +322,7 @@ if ($widget_style == 'auto-road-trip') {
     </div>
 
 
-<?php }else if ($widget_style == 'movies-lifestyle') { ?>
+<?php } else if ($widget_style == 'movies-lifestyle') { ?>
     <div class="row buying-guides tech-in-depth">
         <div class="col-md-6">
             <?php

@@ -45,6 +45,10 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -217,6 +221,12 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -224,14 +234,13 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'videogallery' => 'videogallery',
   );
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '440',
-  );
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Section wise ordering content: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['value'] = '430';
+  $handler->display->display_options['filters']['cat_id']['group'] = 1;
 
   /* Display: Entertainment Oscar Features */
   $handler = $view->new_display('block', 'Entertainment Oscar Features', 'entertainment_oscar_features');
@@ -351,7 +360,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'magazine_top_three_story_237x133',
+    'image_style' => 'anchors_landing',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -377,14 +386,16 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'photogallery' => 'photogallery',
   );
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '440',
-  );
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  /* Filter criterion: Section wise ordering content: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['value'] = '430';
 
   /* Display: Entertainment Oscar Slider */
   $handler = $view->new_display('block', 'Entertainment Oscar Slider', 'entertainment_oscar_slider');
