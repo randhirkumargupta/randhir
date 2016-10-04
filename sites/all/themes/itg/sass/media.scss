@@ -56,6 +56,23 @@
             }
         }
     } 
+    
+/*    special event page css start here*/
+    .tech-layout-page, .auto-layout-page{
+    .auto-block-1, .auto-block-2{
+        height: auto; 
+        margin-bottom: 50px;
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: auto;                
+            }
+        }
+    }
+}
+  /*    special event page css start here*/  
+    
 }   
 
 
@@ -256,6 +273,25 @@ footer {
 
 /*css start special event page for osscar*/
 .oscar-layout-page{
+    .left-side{
+        margin-bottom: 50px;
+    }
+    .oscor-photo{
+        overflow: auto;
+        white-space: nowrap;
+         .col-md-6 {
+            margin: 0px;
+            float: none;
+            display: inline-block;
+            vertical-align: top;  
+            .title h3{
+                white-space: pre-wrap;   
+            }
+            :nth-child(n+3){
+                margin-top: 0;
+            }
+        }
+    }
     .oscar-slider{
         .bottom-slider{
             padding-bottom:20px;
@@ -277,6 +313,7 @@ footer {
         }
     }
 }
+
 /*css end special event page for osscar*/
 }
 

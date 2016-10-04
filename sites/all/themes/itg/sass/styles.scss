@@ -4157,7 +4157,27 @@ footer{
 /*CSS end for year end page*/
 
 /*CSS start special auto page */
-.auto-layout-page{
+.auto-layout-page{     
+    .auto-block-1, .auto-block-2{
+        height: 605px;
+        overflow: hidden;
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 245px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-2{
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }
     .widget-wrapper{
         &.auto-block_2{
             border: 1px solid $border-color;
@@ -4169,9 +4189,10 @@ footer{
     }
     .special-top-news{
         ul{
-            &.itg-listing{
+            padding-top:20px !important;
+/*            &.itg-listing{
                 border: none;
-            }
+            }*/
             li{
                 a{
                     @include before-icon-list(5px,5px,22px,8px,#959595,100%);
@@ -4248,6 +4269,26 @@ footer{
 /*CSS End special auto page */
 /*CSS Start special tech page */
 .tech-layout-page{
+    .auto-block-1, .auto-block-2{
+        height: 672px;
+        overflow: hidden;
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 300px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-2{
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }
     .itg-h385-section{
         .droppable {
             height: 385px;
@@ -4279,9 +4320,10 @@ footer{
     }
      .special-top-news{
         ul{
-            &.itg-listing{
+                padding-top: 20px !important;
+/*            &.itg-listing{
                 border: none;
-            }
+            }*/
             li{
                 a{
                     @include before-icon-list(5px,5px,22px,8px,#959595,100%);
