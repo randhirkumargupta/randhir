@@ -170,5 +170,5 @@ function itg_loyalty_reward_checkout_form_submit($form, &$form_state) {
       ->execute();
     drupal_set_message('Your order has been placed', 'status');
   }
-  drupal_goto('redeem-points');
+  drupal_goto('order');
 }

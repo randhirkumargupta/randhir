@@ -370,18 +370,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
   if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))&& $theme == FRONT_THEME_NAME) {   
      drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
-    drupal_add_js('             
-       (function($){
-            $(window).on("load",function(){
-                $(".defalt-bar").mCustomScrollbar({
-                    axis:"x",                    
-                });       
-            });
- })(jQuery);
- jQuery(document).ready(function(){
-    var getLength = jQuery(".oscar-slider .bottom-slider li").length;    
-    jQuery(".oscar-slider .bottom-slider ul").css("width", getLength*188 +"px");
-});', array('type' => 'inline', 'scope' => 'footer'));
+    drupal_add_js('', array('type' => 'inline', 'scope' => 'footer'));
     $query = db_select('taxonomy_term_hierarchy', 'tth');
     $query->fields('tth', array('parent'));
     $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = tth.tid');
