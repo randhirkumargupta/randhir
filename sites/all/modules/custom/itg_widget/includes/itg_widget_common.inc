@@ -996,7 +996,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_for_widget');
   }
 
-   if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider'|| $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top')) {
+   if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider'|| $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top' || $view->current_display == 'special_movie_video')) {
     $query->where[1]['conditions'][3]['value'] = variable_get('movie_for_widget');
 
   }
@@ -1707,12 +1707,12 @@ function get_rhs_block_display_condtion($delta = '') {
       }
       break;
     case 'top_takes_videos_widget':
-      if ($arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+      if ($arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
         return TRUE;
       }
       break;
     case 'we_may_suggest':
-      if ($arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+      if ($arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
         return TRUE;
       }
       break;

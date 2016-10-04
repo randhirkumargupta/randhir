@@ -22,6 +22,7 @@ features[field_instance][] = node-loyalty_and_rewards-field_lrp_discounted_price
 features[field_instance][] = node-loyalty_and_rewards-field_lrp_image
 features[field_instance][] = node-loyalty_and_rewards-field_lrp_loyalty_points
 features[field_instance][] = node-loyalty_and_rewards-field_lrp_product_count
+features[field_instance][] = node-loyalty_and_rewards-field_poll_itg_state
 features[field_instance][] = node-loyalty_and_rewards-field_story_expiry_date
 features[node][] = loyalty_and_rewards
 features[user_permission][] = create loyalty_and_rewards content
