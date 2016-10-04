@@ -467,11 +467,12 @@ function update_itg_widget_order_table_data($form, &$form_state) {
     // Now insert new entry in itg_widget_order table of combination
     foreach ($draggable_view_data as $key => $node_data) {
       if (!empty($node_data['id']) && !empty($content_type) && !empty($widget) && !empty($cat_id)) {
+        $node_load_data = node_load($node_data['id']);
         $is_inserted = db_insert('itg_widget_order')
                 ->fields(array(
                     'nid' => $node_data['id'],
                     'widget' => $widget,
-                    'content_type' => $content_type,
+                    'content_type' => $node_load_data->type,
                     'cat_id' => $cat_id,
                     'weight' => $node_data['weight'],
                 ))
