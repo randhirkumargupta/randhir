@@ -41,7 +41,7 @@ foreach ($data as $key => $value) {
       $spk_detail = itg_event_backend_get_speaker_details($speaker['target_id']);
       $output .= '<div class="profile-detail"><label>Speaker:</label>';
       $spk_title = '<div class="speaker-title">' . l(t($spk_detail[0]->title), "node/".$spk_detail[0]->nid, array("attributes" => array("target" => "_blank"))) . '</div>';
-      $img = '<img src=' . image_style_url("thumbnail", $spk_detail[0]->uri).'/>';
+      $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri).'/>';
       $output .= '<div class="speaker-image">'.l($img ,"node/".$spk_detail[0]->nid, array("attributes" => array("target" => "_blank"), "html" => TRUE)).'</div>';
       $output .= '<div class="speaker-designation">'. $spk_title . $spk_detail[0]->field_story_new_title_value.'</div></div>';
     }
@@ -51,7 +51,7 @@ foreach ($data as $key => $value) {
   $output .= $output_time . '</div>';
 }
 ?>
-<h3>Session wise coverage</h3>
+<h2>Session wise coverage</h2>
 <div class="program-sub-title">Program Schedule</div>
 <?php
 print '<div class="top-tab"><ul>'.$tabs.'</ul></div>';
@@ -64,9 +64,16 @@ jQuery(document).ready(function(){
         jQuery('.top-tab li').removeClass('active');
         jQuery(this).addClass('active');        
         jQuery('.common-class').hide();
-        var getVal = jQuery(this).attr('data-tag');
-        console.log(getVal);
+        var getVal = jQuery(this).attr('data-tag');        
         jQuery('.'+getVal).show();
+    });
+    
+    jQuery('.view-event-photo-slider ul').slick({
+        infinite: true,    
+        autoplay:true,
+        dots: false,
+        prevArrow: false,
+        nextArrow: false
     });
 });
 </script>
