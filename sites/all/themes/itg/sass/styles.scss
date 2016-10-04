@@ -32,6 +32,7 @@ h4.heading{
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
+    font-size:16px;
     a{
         color:$heading-blue-color;
     }
@@ -4471,7 +4472,7 @@ footer{
                         color: #fff;
                     } 
                 }
-            }
+            }            
         }
     }
 }
@@ -4760,11 +4761,13 @@ footer{
                 font-weight: 600;
                 vertical-align: middle;
                 &.image{
-                    width: 72px;
+                    img{
+                     width: 72px;
                     height: 72px;
                     border-radius: 100%;
                     border: 2px solid #ef3c24;
-                    display: inline-block;
+                    display: inline-block;   
+                    }                    
                 }
                 span{
                     display: block;

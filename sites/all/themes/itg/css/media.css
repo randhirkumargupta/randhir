@@ -276,6 +276,27 @@
   }
 
   /*End CSS Top Block Grid Home Page*/
+  /*css start special event page for osscar*/
+  .oscar-layout-page .oscar-slider .bottom-slider {
+    padding-bottom: 20px;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li {
+    padding: 10px;
+    width: 100% !important;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li img {
+    float: left;
+    margin-right: 10px;
+    width: 145px;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider i {
+    color: #ccc;
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+  }
+
+  /*css end special event page for osscar*/
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {

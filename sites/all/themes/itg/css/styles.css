@@ -70,6 +70,7 @@ h4.heading {
   margin-bottom: 15px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
+  font-size: 16px;
 }
 h4.heading a {
   color: #09619f;
@@ -6164,7 +6165,7 @@ footer .footer-copyright {
   font-weight: 600;
   vertical-align: middle;
 }
-#block-views-program-schedule-block-1 .content-list ul.profile-detail li.image {
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
   width: 72px;
   height: 72px;
   border-radius: 100%;
