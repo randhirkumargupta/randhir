@@ -1,3 +1,6 @@
+<div class="row">
+<div class="col-md-8">
+    <div class="auto-block-1">
 <div class="featured-news">
 
     <?php
@@ -31,9 +34,14 @@
     <?php } ?>
 
     <?php } ?>
+</div>
+        </div>    
+    </div>
+    <div class="col-md-4">
+        <div class="auto-block-2">
     <div class="special-top-news">
 
-        <ul class="itg-listing" style="padding-top: 0px;">   
+        <ul class="itg-listing">   
 <?php
 
 foreach ($rows as $index => $row) {
@@ -61,4 +69,6 @@ foreach ($rows as $index => $row) {
         </ul>
 
     </div>
+        </div>
 </div>
+    </div>
