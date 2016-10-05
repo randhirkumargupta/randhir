@@ -974,18 +974,17 @@ function itg_widget_views_query_alter(&$view, &$query) {
   if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_8')) {
     global $theme;
    
-     if($theme!='seven')
-     {
+     
     if ($theme == FRONT_THEME_NAME) {
         $section = arg(2);
     }
     else {
      $section = $_GET['section']; 
     }
-    
+    //p($section);
     $query->where[1]['conditions'][3]['value'] = $section;
     
-   }
+   
   }
   
 
