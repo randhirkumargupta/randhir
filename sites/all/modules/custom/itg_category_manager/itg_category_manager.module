@@ -344,8 +344,20 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
             $form['term-state-wrap'] = array(
                 '#type' => 'fieldset',
                 '#title' => t('Term Status'),
-                '#weight' => 4,
+                '#weight' => 5,
+                '#suffix' => '</div></div>',
             );
+            $form['itg_open_close'] = array(
+              '#type' => 'markup',
+              '#markup' => '<div class="cotegory-manager-settings"><h2>Settings</h2><div class="setting-div">',
+              '#weight' => 0,
+            );
+            dpm($form);
+            $form['field_cm_hide_cat_from_home']['#weight'] = 1;
+            $form['field_cm_hide_cat_from_search']['#weight'] = 2;
+            $form['field_cm_no_follow']['#weight'] = 3;
+            $form['field_cm_sponsored_category']['#weight'] = 4;            
+            $form['relations']['#weight'] = 6;
             $form['term-state-wrap']['term_state'] = array(
                 '#prefix' => '<div class="itg-term-state"><label>' . t('Term State') . '</label>',
                 '#type' => 'checkbox',
@@ -367,7 +379,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
                                 ':input[name="term_state"]' => array('checked' => FALSE),
                             ),
                         ),
-                        '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module', 'views') . '/images/status-active.gif" />',
+                        '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module', 'views') . '/images/status-active.gif" /></div>',
                     );
                 } else {
                     $form['term-state-wrap']['term_state']['#suffix'] = '<div class="status-message">' . t('This category is currently in inactive mode.') . '</div>';
