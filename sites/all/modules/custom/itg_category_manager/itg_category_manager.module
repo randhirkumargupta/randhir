@@ -351,8 +351,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
               '#type' => 'markup',
               '#markup' => '<div class="cotegory-manager-settings"><h2>Settings</h2><div class="setting-div">',
               '#weight' => 0,
-            );
-            dpm($form);
+            );            
             $form['field_cm_hide_cat_from_home']['#weight'] = 1;
             $form['field_cm_hide_cat_from_search']['#weight'] = 2;
             $form['field_cm_no_follow']['#weight'] = 3;
