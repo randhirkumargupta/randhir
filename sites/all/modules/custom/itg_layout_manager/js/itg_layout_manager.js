@@ -109,6 +109,8 @@
                                 }
 
                                 $('#' + content_place).html(data);
+                                //code by sunil
+                                
                                 //code by avanish
                                 if (widget_name == 'featured_photo_carousel') {
                                     jQuery(".flexslider").flexslider({
