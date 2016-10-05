@@ -6264,3 +6264,30 @@ footer .footer-copyright {
 }
 
 /*CSS end for event page index*/
+/*CSS start for education page*/
+.education-layout-page .itg-layout-672 .droppable {
+  height: 672px;
+  overflow: hidden;
+}
+.education-layout-page .itg-layout-672 .itg-widget-child .droppable {
+  height: 310px;
+  overflow: hidden;
+}
+.education-layout-page .itg-layout-565 .droppable {
+  height: 565px;
+  overflow: hidden;
+}
+.education-layout-page .itg-layout-565 .itg-widget-parent .droppable {
+  height: 225px;
+  overflow: hidden;
+}
+.education-layout-page .itg-layout-565 .itg-widget-child .droppable {
+  height: 305px;
+  overflow: hidden;
+}
+.education-layout-page .itg-common-section .ad-widget {
+  height: 382px;
+  overflow: hidden;
+}
+
+/*CSS end for education page*/
