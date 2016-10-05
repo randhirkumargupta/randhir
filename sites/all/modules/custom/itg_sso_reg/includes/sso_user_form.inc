@@ -444,7 +444,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
  */
 function itg_sso_reg_multistep_form_skip_submit($form, &$form_state) {
  // $form_state['step'] --;
-  print $form_state['values']['domain_info'];
+  
   $form_state['step'] = 4;
   // Because this is a multi-step form, we always need to rebuild the form
   // on every step, even after submission. This allows our form to be completely
