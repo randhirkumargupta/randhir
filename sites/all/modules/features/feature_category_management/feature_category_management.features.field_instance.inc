@@ -43,7 +43,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 12,
     ),
   );
 
@@ -183,7 +183,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 13,
     ),
   );
 
@@ -217,7 +217,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 21,
     ),
   );
 
@@ -251,7 +251,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 20,
     ),
   );
 
@@ -285,7 +285,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 18,
     ),
   );
 
@@ -324,43 +324,6 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'taxonomy_term-category_management-field_description'.
-  $field_instances['taxonomy_term-category_management-field_description'] = array(
-    'bundle' => 'category_management',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 10,
-      ),
-    ),
-    'entity_type' => 'taxonomy_term',
-    'exclude_cv' => 0,
-    'field_name' => 'field_description',
-    'label' => 'Description',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 9,
-    ),
-  );
-
-  // Exported field_instance:
   // 'taxonomy_term-category_management-field_set_as_featured_cate'.
   $field_instances['taxonomy_term-category_management-field_set_as_featured_cate'] = array(
     'bundle' => 'category_management',
@@ -390,7 +353,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 19,
     ),
   );
 
@@ -462,7 +425,7 @@ function feature_category_management_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
+      'weight' => 14,
     ),
   );
 
@@ -499,7 +462,7 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 15,
     ),
   );
 
@@ -508,7 +471,6 @@ function feature_category_management_field_default_field_instances() {
   t(' Program Timing');
   t('Category Icon');
   t('Content Type');
-  t('Description');
   t('Display Title');
   t('Hide Category form home');
   t('Hide Category from search');
