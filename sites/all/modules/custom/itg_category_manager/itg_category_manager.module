@@ -321,11 +321,10 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
 
 //Relation treatment
             $form['relations']['#title'] = 'Section and Categories';
-            $form['relations']['#weight'] = 2;
+            
             $form['relations']['parent']['#title'] = t('Select Section');
             $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
-            $form['relations']['#collapsible'] = 0;
-            unset($form['relations']['weight']);
+            $form['relations']['#collapsible'] = 0;            
 
 //Non-editable fields in edit mode
             if (arg(3) == 'edit') {
@@ -355,8 +354,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
             $form['field_cm_hide_cat_from_home']['#weight'] = 1;
             $form['field_cm_hide_cat_from_search']['#weight'] = 2;
             $form['field_cm_no_follow']['#weight'] = 3;
-            $form['field_cm_sponsored_category']['#weight'] = 4;            
-            $form['relations']['#weight'] = 6;
+            $form['field_cm_sponsored_category']['#weight'] = 4;                        
             $form['term-state-wrap']['term_state'] = array(
                 '#prefix' => '<div class="itg-term-state"><label>' . t('Term State') . '</label>',
                 '#type' => 'checkbox',

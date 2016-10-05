@@ -21,7 +21,7 @@ function feature_category_management_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Basic Details',
-    'weight' => '0',
+    'weight' => '-1',
     'children' => array(
       0 => 'field_cm_display_title',
       1 => 'field_cm_redirection_url',
@@ -46,7 +46,7 @@ function feature_category_management_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups[''] = $field_group;
+  $field_groups['group_cm_basic_details|taxonomy_term|category_management|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -59,7 +59,7 @@ function feature_category_management_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Selection Details',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'field_cm_select_type',
       1 => 'field_cm_select_template',
@@ -82,7 +82,7 @@ function feature_category_management_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups[''] = $field_group;
+  $field_groups['group_cm_selection_details|taxonomy_term|category_management|form'] = $field_group;
 
   // Translatables
   // Included for use with string extractors like potx.
