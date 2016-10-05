@@ -961,43 +961,65 @@ function itg_widget_views_query_alter(&$view, &$query) {
   if ($view->name == 'yearender' && $view->current_display == 'block_1') {
     $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
   }
-  if ($view->name == 'auto' && $view->current_display == 'block_2') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
-  }
-  if ($view->name == 'auto' && $view->current_display == 'block_1') {
-    $query->where[1]['conditions'][3]['value'] = variable_get('auto_for_widget');
-  }
-
-  if ($view->name == 'auto' && $view->current_display == 'block_5') {
-    $query->where[1]['conditions'][3]['value'] = variable_get('auto_for_widget');
-  }
+  
 
   // Start alter for tech
-  if ($view->name == 'tech' && $view->current_display == 'block_1') {
-    $query->where[1]['conditions'][3]['value'] = variable_get('tech_for_widget');
+  if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_8')) {
+    global $theme;
+   
+     if($theme!='seven')
+     {
+    if ($theme == FRONT_THEME_NAME) {
+        $section = arg(2);
+    }
+    else {
+     $section = $_GET['section']; 
+    }
+    
+    $query->where[1]['conditions'][3]['value'] = $section;
+   }
   }
-  if ($view->name == 'tech' && $view->current_display == 'block_2') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
-  }
-
-  if ($view->name == 'tech' && $view->current_display == 'block_5') {
-    $query->where[1]['conditions'][3]['value'] = variable_get('tech_for_widget');
-  }
-
-  if ($view->name == 'tech' && $view->current_display == 'block_8') {
-    $query->where[1]['conditions'][3]['value'] = variable_get('tech_for_widget');
-  }
-
   
+
    if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos'|| $view->current_display == 'oscar_photos')) {
-    $query->where[1]['conditions'][3]['value'] = variable_get('entertainment_oscar_for_widget');
+    if($theme!='seven')
+     {
+    if ($theme == FRONT_THEME_NAME) {
+        $section = arg(2);
+    }
+    else {
+     $section = $_GET['section']; 
+    }
+    
+    $query->where[1]['conditions'][3]['value'] = $section;
+   }
   }
   if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
-    $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_for_widget');
+   if($theme!='seven')
+     {
+    if ($theme == FRONT_THEME_NAME) {
+        $section = arg(2);
+    }
+    else {
+     $section = $_GET['section']; 
+    }
+    
+    $query->where[1]['conditions'][2]['value'] = $section;
+   }
   }
 
    if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider'|| $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top' || $view->current_display == 'special_movie_video')) {
-    $query->where[1]['conditions'][3]['value'] = variable_get('movie_for_widget');
+    if($theme!='seven')
+     {
+    if ($theme == FRONT_THEME_NAME) {
+        $section = arg(2);
+    }
+    else {
+     $section = $_GET['section']; 
+    }
+    
+    $query->where[1]['conditions'][3]['value'] = $section;
+   }
 
   }
 

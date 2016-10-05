@@ -11,11 +11,11 @@ function feature_for_movie_special_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'special_movie';
+  $view->name = 'movie_special';
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Special Movie';
+  $view->human_name = 'movie special';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -175,7 +175,7 @@ function feature_for_movie_special_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '430';
+  $handler->display->display_options['filters']['cat_id']['value'] = '434';
 
   /* Display: Top News */
   $handler = $view->new_display('block', 'Top News', 'movie_top_news');
@@ -379,7 +379,7 @@ function feature_for_movie_special_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '430';
-  $export['special_movie'] = $view;
+  $export['movie_special'] = $view;
 
   return $export;
 }
