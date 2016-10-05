@@ -5601,6 +5601,15 @@ footer .footer-copyright {
   height: 245px;
   overflow: hidden;
 }
+.auto-layout-page .auto-block-1 {
+  border: 1px solid #ddd;
+}
+.auto-layout-page .auto-block-1 .featured-news {
+  border: none;
+}
+.auto-layout-page .auto-block-2 {
+  border: 1px solid #ddd;
+}
 .auto-layout-page .auto-block-2 .special-top-news {
   position: relative;
 }
@@ -5616,9 +5625,9 @@ footer .footer-copyright {
 }
 .auto-layout-page .special-top-news ul {
   padding-top: 20px !important;
-  /*            &.itg-listing{
-                  border: none;
-              }*/
+}
+.auto-layout-page .special-top-news ul.itg-listing {
+  border: none;
 }
 .auto-layout-page .special-top-news ul li a {
   position: relative;
@@ -5693,9 +5702,18 @@ footer .footer-copyright {
   height: 672px;
   overflow: hidden;
 }
+.tech-layout-page .auto-block-1 {
+  border: 1px solid #ddd;
+}
+.tech-layout-page .auto-block-1 .featured-news {
+  border: none;
+}
 .tech-layout-page .auto-block-3 .itg-widget-child .droppable {
-  height: 300px;
+  height: 311px;
   overflow: hidden;
+}
+.tech-layout-page .auto-block-2 {
+  border: 1px solid #ddd;
 }
 .tech-layout-page .auto-block-2 .special-top-news {
   position: relative;
@@ -5724,9 +5742,9 @@ footer .footer-copyright {
 }
 .tech-layout-page .special-top-news ul {
   padding-top: 20px !important;
-  /*            &.itg-listing{
-                  border: none;
-              }*/
+}
+.tech-layout-page .special-top-news ul.itg-listing {
+  border: none;
 }
 .tech-layout-page .special-top-news ul li a {
   position: relative;
@@ -5749,11 +5767,17 @@ footer .footer-copyright {
 .tech-layout-page .tech_most_read .widget-title {
   margin-bottom: 10px;
 }
-.tech-layout-page #block-itg-widget-tech-most-read ul li {
+.tech-layout-page #block-itg-widget-tech-most-read ul li.dont-miss-listing {
   width: 100%;
   overflow: hidden;
   padding: 12px 0 15px;
   border-bottom: 1px solid #dddddd;
+}
+.tech-layout-page #block-itg-widget-tech-most-read ul li.dont-miss-listing:first-child {
+  padding-top: 0;
+}
+.tech-layout-page #block-itg-widget-tech-most-read ul li.dont-miss-listing .dm-pic {
+  width: auto;
 }
 .tech-layout-page .buying-guides a {
   display: block;
@@ -5814,6 +5838,12 @@ footer .footer-copyright {
   position: absolute;
   bottom: 78px;
   left: 0px;
+}
+.tech-layout-page .tech-block_8 .widget-title {
+  margin-bottom: 5px;
+}
+.tech-layout-page .techwatch.osscar-video ul .dont-miss-listing {
+  padding: 0 0 10px 0;
 }
 
 /*CSS End special tech page */
