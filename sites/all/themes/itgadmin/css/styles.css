@@ -8062,3 +8062,8 @@ div.node #comments h2 {
 .page-node-add-recipe .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   left: 375px;
 }
+
+.node-category-form #edit-term-state-wrap .itg-term-state > label {
+  padding: 0 20px;
+  width: 220px;
+}
