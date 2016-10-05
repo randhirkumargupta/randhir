@@ -1608,15 +1608,16 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #dedede;
   margin: 15px 0;
 }
-.view-redeem-points .product-wrapper .product-pic span, .view-product .product-wrapper .product-pic span {
-  display: none;
+.view-redeem-points .product-wrapper .product-pic, .view-product .product-wrapper .product-pic {
+  height: 172px;
+  cursor: pointer;
 }
 .view-redeem-points .product-wrapper .product-title, .view-product .product-wrapper .product-title {
   text-transform: uppercase;
   font: 400 16px/18px Roboto;
   padding-top: 15px;
 }
-.view-redeem-points .product-wrapper .product-description, .view-product .product-wrapper .product-description {
+.view-redeem-points .product-wrapper .product-description, .view-redeem-points .product-wrapper .post-date, .view-product .product-wrapper .product-description, .view-product .product-wrapper .post-date {
   display: none;
 }
 .view-redeem-points .product-wrapper .redeem-points, .view-product .product-wrapper .redeem-points {
@@ -1941,6 +1942,7 @@ body.has-cart-popup {
 
 .page-cart header,
 .page-checkout header,
+.page-product header,
 .page-redeem-points header {
   margin-bottom: 0;
 }
@@ -2128,7 +2130,7 @@ body.has-cart-popup {
   margin: 0;
 }
 
-.page-cart section.sidebar, .page-order section.sidebar {
+.page-cart section.sidebar, .page-order section.sidebar, .page-checkout section.sidebar {
   border: none;
 }
 
@@ -2241,6 +2243,9 @@ body.has-cart-popup {
 .page-order header {
   margin-bottom: 0;
 }
+.page-order .messages--status {
+  margin-top: 30px;
+}
 .page-order table {
   width: 100%;
   border-collapse: collapse;
@@ -2257,6 +2262,7 @@ body.has-cart-popup {
 }
 .page-order table td + td {
   font-size: 13px;
+  font-weight: 600;
 }
 .page-order table td .checkout-inner img {
   float: left;
@@ -2284,10 +2290,24 @@ body.has-cart-popup {
   vertical-align: top;
   text-align: left;
 }
+.view-product .view-filters form .views-exposed-form label {
+  display: none;
+}
+.view-product .view-filters form .views-submit-button {
+  padding-right: 10px;
+}
+.view-product .view-filters form .views-submit-button + .views-submit-button {
+  padding-right: 0;
+}
 .view-product .view-filters form .form-submit {
   display: inline-block;
   vertical-align: top;
   background-color: #1a3c8d;
   color: #fff;
-  padding: 10px;
+  padding: 0 10px;
+  border: 1px solid #1a3c8d;
+  cursor: pointer;
+  height: 32px;
+  text-transform: uppercase;
+  margin: 0;
 }
