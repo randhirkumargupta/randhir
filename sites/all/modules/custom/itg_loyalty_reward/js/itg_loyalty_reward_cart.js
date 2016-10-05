@@ -9,7 +9,7 @@
             // Code to show detail popup
             $('.product-wrapper').on('click', '.product-pic', function () {
                 var pic = $(this).html();
-                var added_on = $(this).children('span').html();
+                var added_on = $(this).siblings('.post-date').html();
                 var title = $(this).siblings('.product-title').html();
                 var desc = $(this).siblings('.product-description').html();
                 var redeem_points = $(this).siblings('.redeem-points').html();
