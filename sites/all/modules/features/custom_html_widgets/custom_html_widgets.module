@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Custom html widgets feature.
+ */
+
+include_once 'custom_html_widgets.features.inc';

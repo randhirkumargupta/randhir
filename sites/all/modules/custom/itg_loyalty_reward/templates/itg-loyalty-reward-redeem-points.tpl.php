@@ -5,10 +5,8 @@
  *   Redeem points template file.
  */
 ?>
-<?php //p($data); ?>
-<div class="personalized-wrapper">
-  <div class="personalized-user-area">
-    <div class="personalized-user">
+<div class="container">
+    <div class="cart-user">
       <div class="user-pic">
       <?php print $data['profile_pic']; ?>
       </div>
@@ -19,10 +17,16 @@
         <?php print $data['logout']; ?>
       </div>
     </div>  
-    <div class="personalized-user-info">
-        <span>MY CART (3)</span>
-        <span>2,000 POINTS LEFT</span>
-    </div>
-  </div>
+    <ul class="header-cart">
+        <li id="my-cart-items">          
+          <?php
+            $block = module_invoke('itg_loyalty_reward', 'block_view', 'itg_cart_block');
+            print render($block['content']);
+          ?>                      
+        </li>
+        <li id="my-remaining-points">          
+          <span>1234</span> POINTS LEFT
+        </li>
+    </ul>
  </div> 
 

@@ -22,11 +22,16 @@ a{
     color:$black-color;
     text-decoration: none;
 }
+img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+}
 .row{
     @include clearfix;
 }
 .mt-50{
-  margin-top: 50px;
+    margin-top: 50px;
 }
 /*.dropped{
     background: #fff;
@@ -42,36 +47,36 @@ a{
     @include story-tag(22px,22px);   
 }
 /*Start CSS Top Story Home Page*/
-    .tab-buttons {
-        @include clearfix;
-        @include tab-buttons;
-    }
-    .tab-data{        
-      &.tab-data-2{
+.tab-buttons {
+    @include clearfix;
+    @include tab-buttons;
+}
+.tab-data{        
+    &.tab-data-2{
         display: none;
-      }
     }
-    .itg-listing{
-        border: 1px solid #dddddd;
-        list-style: none;
-        li{
-            @include tab-listing;        
-            a{
+}
+.itg-listing{
+    border: 1px solid #dddddd;
+    list-style: none;
+    li{
+        @include tab-listing;        
+        a{
             padding:15px;
         }
         &:before{
             display: none;
         }
-        }
-        
     }
+
+}
 /*End CSS Top Story Home page*/
 
 /*Start CSS Featured New Home page*/
 .itg-featured-news{
-  border: 1px solid $tab-primary-border-color;
-  height: 672px;
-  overflow: hidden;
+    border: 1px solid $tab-primary-border-color;
+    height: 672px;
+    overflow: hidden;
 }
 /*Start CSS Featured New Home page*/
 .featured-news{
@@ -101,13 +106,13 @@ a{
 
 /*Start CSS Top AD*/
 .top-ad{
-  border: 1px solid $tab-primary-border-color;
-  .pic{
-    background-color: #f3f3f3;
-    width: 300px; 
-    height: 250px;
-    margin: 35px auto;
-  }
+    border: 1px solid $tab-primary-border-color;
+    .pic{
+        background-color: #f3f3f3;
+        width: 300px; 
+        height: 250px;
+        margin: 35px auto;
+    }
 }
 /*End CSS*/
 /*Start CSS section story Home page*/
@@ -135,7 +140,7 @@ a{
         margin-bottom: 5px;
     }
 }
-.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video, .osscar-video{    
     /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
@@ -182,12 +187,12 @@ a{
         }
         li{
             &.may-we-suggest{
-             padding:10px 0;   
+                padding:10px 0;   
             }            
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -207,9 +212,9 @@ a{
         @include listing-with-image(top-takes-video,right,10px,pic,title);
         li{
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -244,9 +249,9 @@ a{
         li{
             padding:0 10px;
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             }
         }
@@ -260,25 +265,25 @@ a{
         @include listing-with-image(rhs-section-item-container,left,10px,pic,title);
         li{
             &.rhs-section-item-container{
-             padding:10px 0; 
-             .pic{
-                position: relative;
-            &:after{
-                background: url(../images/video-icon-small.png) no-repeat;
-                content:"";
-                width: 18px;
-                height: 18px;
-                position: absolute;
-                right: 5px;
-                bottom: 5px;
-            }
-        }
-             
+                padding:10px 0; 
+                .pic{
+                    position: relative;
+                    &:after{
+                        background: url(../images/video-icon-small.png) no-repeat;
+                        content:"";
+                        width: 18px;
+                        height: 18px;
+                        position: absolute;
+                        right: 5px;
+                        bottom: 5px;
+                    }
+                }
+
             }            
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -315,7 +320,7 @@ a{
                 top: 0;
                 left: 0;
                 width: 214px;
-                 z-index: 1;
+                z-index: 1;
             }
         }
         .top-colum-1{
@@ -365,29 +370,29 @@ a{
             }
         }
     }  
-    
-  /*Start CSS Top Block Grid Home Page*/    
+
+    /*Start CSS Top Block Grid Home Page*/    
     .top-block{
         .top-colum-1, .top-colum-2, .top-colum-3{
-           padding: 0 15px;
-           min-height: 672px;
+            padding: 0 15px;
+/*            min-height: 672px;*/
         }
         .top-colum-1{
-           @include float(left);
-           width: 22%; 
+            @include float(left);
+            width: 22%; 
         }
         .top-colum-2{
-           width: 44.8%;
-          @include float(left);
+            width: 44.8%;
+            @include float(left);
         }
         .top-colum-3{
-           width: 33.2%;
-           @include float(right);
+            width: 33.2%;
+            @include float(right);
         }
     }
-/*End CSS Top Block Grid Home Page*/
+    /*End CSS Top Block Grid Home Page*/
 
-/*Start CSS Featured-news Home Page*/ 
+    /*Start CSS Featured-news Home Page*/ 
     .featured-news{
         padding: 5px;
         border:1px solid $border-color;
@@ -396,20 +401,20 @@ a{
             padding: 5px;
         }
     }
-/*End CSS Featured-news Home Page*/  
-/*Start Dont miss Home page css*/
-.dont-miss{        
-    ul{
-        .dont-miss-listing{
-            @include float(left);
-            @include calculate-width(2);            
-            &:nth-child(2n+1){
-                clear:left;
+    /*End CSS Featured-news Home Page*/  
+    /*Start Dont miss Home page css*/
+    .dont-miss{        
+        ul{
+            .dont-miss-listing{
+                @include float(left);
+                @include calculate-width(2);            
+                &:nth-child(2n+1){
+                    clear:left;
+                }
             }
         }
     }
-}
-/*End Dont miss Home page css*/
+    /*End Dont miss Home page css*/
 }
 
 
@@ -428,12 +433,12 @@ a{
         }
         li{
             &.may-we-suggest{
-             padding:10px 0;   
+                padding:10px 0;   
             }            
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -454,25 +459,25 @@ a{
         @include listing-with-image(top-takes-video,right,10px,pic,title);
         li{
             &.top-takes-video{
-             padding:10px 0; 
-             .pic{
-            position: relative;
-            &:after{
-                background: url(../images/video-icon-small.png) no-repeat;
-                content:"";
-                width: 18px;
-                height: 18px;
-                position: absolute;
-                right: 5px;
-                bottom: 5px;
-            }
-        }
-             
+                padding:10px 0; 
+                .pic{
+                    position: relative;
+                    &:after{
+                        background: url(../images/video-icon-small.png) no-repeat;
+                        content:"";
+                        width: 18px;
+                        height: 18px;
+                        position: absolute;
+                        right: 5px;
+                        bottom: 5px;
+                    }
+                }
+
             }            
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -511,9 +516,9 @@ a{
             }
             padding:10px 0;
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             }
         }
@@ -521,7 +526,7 @@ a{
 }
 /*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
-.featured_photo_carousel{
+.featured_photo_carousel, .tech-block_5, .auto-block_5{
     .widget-title{
         @include pos(absolute,10px,null,null,10px);        
     }
@@ -627,12 +632,545 @@ a{
     }
 }
 
+/*CSS Start year end top news*/
 #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    background: #f6f6f6;
     ul{
         .dont-miss-listing{
             @include float(none);
             @include calculate-width(1);
+            padding:25px 10px;
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 25px;
+            }
+            .pic{
+                width:auto;
+                @include pos(relative);
+                a{
+                    display: block;
+                }                
+            }
         }
     }
 }
-/*CSS End Page Year End page */
+/*CSS start for year end page*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video, .osscar-video{
+    background: #f6f6f6;
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);            
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 25px;
+            }
+            +.dont-miss-listing{
+                padding:0 10px 25px 10px;
+            }
+            .dm-pic{
+                width:auto;
+                @include pos(relative);
+                a{
+                    display: block;
+                }
+                span{
+                    position: absolute;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.4);
+                    color: $white-color;
+                    @include font(12px);
+                    font-family: $itg-roboto;
+                    padding: 2px 5px;
+                    i{
+                        @include font(16px);
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}
+.year-slider{
+    background: #000;
+    padding: 10px;    
+    h2{
+        padding:10px 0;
+        a{
+            color: #fff;   
+        }        
+    }
+}
+.yearender{    
+    .view-yearender.view-display-id-block_2{
+        .view-content{
+            margin-right: -15px;
+            margin-left: -15px;            
+        }
+        .views-row{
+            margin-bottom: 40px;          
+        }
+        @include clear-floating-block(col-md-6);
+    }
+    .section-ordering{
+        .pic{
+            @include pos(relative);
+            span{
+                @include pos(absolute, null, null, 0, 0);
+                background: rgba(0, 0, 0, 0.56);
+                color: #fff;
+                @include itg-font($itg-roboto);
+                font-size: 12px;
+                padding: 5px;
+                i{
+                    @include font(16px);
+                }
+            }
+        }
+        h3{
+            font-family: $itg-roboto;
+        }
+    }
+    @include slider-icon-width-background;    
+}
+/*CSS end for year end page*/
+
+/*CSS start special auto page */
+.itg-layout-container.auto-layout-page{
+    .m-bottom40{
+        margin-bottom: 40px;
+    }
+     .itg-layout-605{
+        height: 605px;
+        overflow: hidden;
+    }
+    .auto-block-1, .auto-block-2{
+        height: 605px;
+        overflow: hidden;
+    }
+    .auto-block-1{
+        border: 1px solid #ddd;  
+        .featured-news{
+            border: none;
+        }
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 245px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-2{
+        border: 1px solid #ddd;
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }    
+    .itg-h450-section .col-md-4 .droppable .widget-wrapper {
+        overflow: auto;
+    }
+    .itg-h321-section .auto_reviews{        
+        padding: 5px 20px 8px;
+        background-color: #f3f3f3;
+    }
+    .widget-wrapper{
+        &.auto-block_2{
+            border: 1px solid $border-color;
+        } 
+        &.auto-block_3{
+            background: #f3f3f3;
+            padding: 10px;
+        }
+    }
+    .special-top-news{
+        ul{
+            &.itg-listing{
+                border: none;
+            }
+            
+            li{
+                a{
+                    @include before-icon-list(5px,5px,22px,8px,#959595,100%);
+                    padding-left: 22px;
+                }
+            }
+        }
+    }
+
+    .auto-tips-n-tricks{
+        ul{
+            li{
+                padding: 18px 0;
+                +li{
+                    border-top:1px solid #ddd; 
+                }
+                p.title{
+                    a{
+                        font-weight: 700;
+                        margin-bottom: 5px; 
+                        display: block;
+                    }                
+                }
+            }
+        }
+    }
+    .auto-road-trip{
+        .trending-videos{
+            padding: 0;
+            border: none; 
+            li{
+                .video-none{
+                    &:after{
+                        background: none;
+                    }
+                }
+                &.trending-videos-list{
+                    padding: 15px 0;
+                }
+            }
+        }    
+    }
+    .auto_reviews{
+        .widget-title{
+            margin-bottom: 5px;
+        }   
+    }
+     /*Start photo section slider*/
+    .auto-block_5{
+        a{
+            color:#fff;
+        }
+        .flexslider .flex-direction-nav{
+            display: block;
+        }       
+        .flexslider .slides li{
+            &:hover a{
+                color: #fff;
+            }
+            .detail .flex-caption{
+                @include font(18px,24px,$itg-font-medium);  
+                padding: 10px;   
+                min-height: 68px;
+                max-height: auto;
+                overflow: initial;            
+            }   
+        }
+        .flexslider .slides li .detail .flex-count{
+            @include pos(absolute,null,null,78px,0px);
+        }
+    }
+    /*End photo section slider*/
+}
+
+/*CSS End special auto page */
+/*CSS Start special tech page */
+.tech-layout-page{
+    .m-bottom40{
+        margin-bottom: 40px;
+    }
+     .itg-layout-672{
+        height: 672px;
+        overflow: hidden;
+    }
+    .auto-block-1, .auto-block-2{
+        height: 672px;
+        overflow: hidden;
+    }
+    .auto-block-1{
+        border: 1px solid #ddd;  
+        .featured-news{
+            border: none;
+        }
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 311px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-2{
+         border: 1px solid #ddd;
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }
+     .itg-h385-section{
+        .droppable {
+            height: 385px;
+        }
+/*        .section_wise_order-buying-guid{
+            .widget-title{
+                @include pos(absolute);                                
+            }
+        }*/
+    }  
+    .itg-h396-section{        
+        .droppable {
+            height: 396px;
+            background: #f3f3f3;
+            padding: 10px;
+        }
+/*        .section_wise_order-in-depth{            
+            .widget-title{
+                @include pos(absolute);                
+                top: 10px;
+                left: 10px;
+            }
+        }*/
+    }
+    .widget-wrapper{
+        &.tech-block_2{
+            border: 1px solid $border-color;
+        } 
+    }
+    .itg-h321-section .auto_reviews{        
+        padding: 5px 20px 8px;
+        background-color: #f3f3f3;
+    }
+     .special-top-news{
+        ul{
+            &.itg-listing{
+                border: none;
+            }
+            li{
+                a{
+                    @include before-icon-list(5px,5px,22px,8px,#959595,100%);
+                    padding-left: 22px;
+                }
+            }
+        }
+    }
+    .tech_most_read{
+        border: 1px solid #ddd;
+        padding: 10px;
+        .widget-title{
+            margin-bottom: 10px;
+        }        
+    }
+    #block-itg-widget-tech-most-read{
+        ul{
+            li.dont-miss-listing{
+                &:first-child{
+                    padding-top: 0;
+                }
+                @include calculate-width(1);
+                overflow: hidden;
+                padding:12px 0 15px;
+                border-bottom: 1px solid $border-color;
+                .dm-pic{
+                   width: auto;
+                }
+            }
+        }
+    }
+    .buying-guides{
+        a{
+            display: block;
+        }
+        h3{
+            padding: 10px 0;
+            border-bottom: 1px solid $border-color;
+            margin-bottom: 15px;
+        }
+        ul{
+            @extend .list-none;
+            li{
+                span{
+                   a{
+                       color: #b00202;
+                       @include font(12px);
+                       margin-bottom: 5px;                       
+                    }
+                }
+                &:first-child{
+                    padding-bottom:15px;
+                }
+                +li{
+                    padding:15px 0;
+                    border-top:1px solid $border-color;    
+                }
+                
+            }
+        }
+    }  
+    .tech-trip{
+        .trending-videos {
+            border: none; 
+            padding-top:0; 
+            .trending-videos-list{
+                padding: 10px 0;
+            }
+        }
+    }
+    .tech-in-depth{
+        ul{
+            li{
+                overflow:hidden;
+                span{
+                    float: left;                
+                    margin-bottom: 0;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    /*Start photo section slider*/
+    .tech-block_5{
+        a{
+            color:#fff;
+        }
+        .flexslider .flex-direction-nav{
+            display: block;
+        }       
+        .flexslider .slides li{
+            &:hover a{
+                color: #fff;
+            }
+            .detail .flex-caption{
+                @include font(18px,24px,$itg-font-medium);  
+                padding: 10px;   
+                min-height: 68px;
+                max-height: auto;
+                overflow: initial;            
+            }   
+        }
+        .flexslider .slides li .detail .flex-count{
+            @include pos(absolute,null,null,78px,0px);
+        }
+    }
+    /*End photo section slider*/
+    .techwatch.osscar-video ul .dont-miss-listing{
+        padding:0 0 10px 0;
+    }
+}
+
+/*CSS End special tech page */
+
+
+/*CSS Start for oscar page*/
+.oscar-layout-page{
+    .itg-h747-section{        
+        .droppable {
+            height: 747px;            
+        }
+    }
+    .itg-h735-section{        
+        .droppable {
+            height: 735px;            
+        }
+    }
+     .itg-h625-section{        
+        .droppable {
+            height: 625px;            
+        }
+    }
+    .itg-h305-section{        
+        .droppable {
+            height: 305px;            
+        }
+    }
+}
+/*CSS start for special osscar*/
+.oscar-layout-page{
+    .osscar-video{
+        background: transparent;   
+        ul .dont-miss-listing + .dont-miss-listing {
+            padding: 0 0px 25px 0px;
+        }
+    }    
+    .oscor-photo{
+        .col-md-6{
+            margin-top: 0px;
+            &:nth-child(n+3){
+                margin-top: 30px;
+            }
+        
+        .title{
+            h3{
+                padding: 15px;
+                color: #000;
+                font-size: 18px;
+                background-image:
+                    linear-gradient(
+                    #fdcf2e, #fabb1d
+                );
+                font-weight: 700;
+            }
+        }
+        }
+    }
+    .oscar-features{
+        .col-md-6{
+            overflow: hidden;
+            margin-top: 0px;
+            &:nth-child(n+3){
+                margin-top: 30px;
+            }
+            span{
+                @include display-inline;
+                float: left;
+                margin-right: 15px;
+            }
+
+        }
+    }
+    .oscar-news{
+        a{
+            display: block;
+        }
+        h3{
+            font-weight: 700;
+            margin: 10px 0 25px 0px;
+        }
+        p{
+            padding-top: 10px;
+        }
+    }
+    .oscar-slider{
+        .top-slider{
+            background: #000;
+            padding: 10px 10px 0 10px;           
+            .common-img{
+                display: none;
+            }
+             .first-image{
+                display: block;
+            }
+        }
+        .bottom-slider { 
+            background: #171717;
+            ul{
+                overflow: hidden;
+                li{                
+                    background: #171717;
+                    padding: 25px 10px;
+                    width: 188px;
+                    float: left;
+                    height: 262px;                
+                p{
+                    margin-top: 10px;
+                }
+                a{
+                    color:#b4b4b4;
+                }
+                &:hover{
+                    background: #393939;
+                    a{
+                        color: #fff;
+                    } 
+                }
+            }
+            }            
+        }
+    }
+}
+/*CSS end for special osscar*/
+/*CSS End for oscar page*/

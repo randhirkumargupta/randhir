@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * @file
  *   Product listing page callback and other settings. 
  */
@@ -11,40 +11,239 @@
 function itg_loyalty_reward_redeem_points() {
   global $user, $base_url;
   // Add js file to the page.
-  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
-  // Pass data to js file.
-  drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url)), array('type' => 'setting'));
-  $user_fields = user_load($user->uid);  
-  
-  // Render user picture.
-  $data['profile_pic'] = theme(
-    'image_style',
-    array(
-      'style_name' => 'user_picture',
-      'path' => $user_fields->field_user_picture['und'][0]['uri'],
-    )
-  );  
-  
-  // Load user name    
-  $f_name = $user_fields->field_first_name['und'][0]['value'];
-  $l_name = $user_fields->field_last_name['und'][0]['value'];  
-  $data['full_name'] = $f_name . ' ' . $l_name;
-  
-  // user logout link
-  $data['logout'] = l(t('Logout'), 'user/logout');  
-  
-  return theme('itg_loyalty_reward_redeem_points', array('data' => $data));
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') 
+      . '/js/itg_loyalty_reward_cart.js');  
+
+  return '';
 }
 
 /**
  * Add to cart ajax callback.
+ *
+ * @param int $node_id
+ *   Node id of the node.
  */
-function itg_loyalty_reward_addtocart($node_id = NULL) {
-  // If node is is present then send user to checkout page, else add item into cart.
-  if ($node_id != NULL) {
-    // Do something.
+function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
+  global $user;
+  // Check if node is set.
+  if ($node_id > 0) {
+    // Check if product is already in cart.
+    $itg_result = _check_product_into_cart($user->uid, $node_id);        
+    $node = node_load($node_id);
+    $node_info_array = array(
+      'nid' => $node->nid,
+      'title' => $node->title,
+      'description' => $node->body['und'][0]['value'],
+      'price' => $node->field_lrp_actual_price['und'][0]['value'],
+      'discounted_price' => $node->field_lrp_discounted_price['und'][0]['value'],
+      'image' => $node->field_lrp_image['und'][0],
+      'points' => $node->field_lrp_loyalty_points['und'][0]['value'],
+    );
+    if ($node_id == $itg_result->nid && $action == NULL) {
+      $quantity = $itg_result->quintity + 1;
+      // Update item on cart page.
+      _update_cart_item($node->nid, $user->uid, $quantity);
+    }
+    else {
+      $node_info_array['quantity'] = 1;
+    }
   }
-  else {
-    p($_POST);
+  // check action.
+  if (isset($node) && $action == NULL) {
+    // Insert product into cart.
+    $response = _insert_product_into_cart($node_info_array);    
+    if ($response == 1) {
+      drupal_set_message(t('Product added to cart successfully.') 
+      . l(t('GO TO CART'), 'cart'), 'status');
+    }
+    else {
+      drupal_set_message(t('Something went wrong please try after some time.') 
+      , 'error');
+    }
+    // Redirect to product listing page.    
+    drupal_goto('redeem-points');
   }
+  elseif (isset($node) && $action == 'buy-now') {
+    if ($node_id == $itg_result->nid) {
+      drupal_goto('cart');
+    }
+    // Insert product into cart.
+    $response = _insert_product_into_cart($node_info_array);
+    if ($response == 0) {
+      drupal_set_message(t('Something went wrong please try after some time.') 
+      , 'error');      
+      // Redirect to cart page.
+      drupal_goto('redeem-points');
+    }
+    // Redirect to cart page.
+    drupal_goto('cart');
+  }
+}
+
+function _check_product_into_cart($uid, $nid) {
+  $itg_result = 0;
+    $itg_query = db_select('itg_loyalty_reward_cart', 'itg')
+        ->fields('itg', array('nid', 'quintity'))
+        ->condition('uid', $uid)
+        ->condition('nid', $nid);
+    $itg_result = $itg_query->execute()->fetchObject();
+    
+    return $itg_result;
+}
+
+/**
+ * Update items quantity on cart.
+ *
+ * @param int $nid
+ *   Node if of the product.
+ * @param int $uid
+ *   User id of the user.
+ */
+function _update_cart_item($nid, $uid, $quantity) {
+  $itg_query = db_update('itg_loyalty_reward_cart')
+      ->fields(array('quintity' => $quantity))
+      ->condition('nid', $nid)
+      ->condition('uid', $uid)
+      ->execute();
+  drupal_set_message('Item updated on cart successfully.', 'status');
+  drupal_goto('redeem-points');
+}
+
+/**
+ * Insert product to shopping cart.
+ *
+ * @global stdObject $user
+ *   User oject containing user details.
+ * @param array $node_info_array
+ *   product details.
+ */
+function _insert_product_into_cart($node_info_array) {
+  //p($node_info_array);
+  global $user;
+  // Prepare array for inserting data into cart.
+  $presave = array(
+    'nid' => $node_info_array['nid'],
+    'quintity' => $node_info_array['quantity'],
+    'uid' => $user->uid,
+    'product_name' => $node_info_array['title'],
+    'points' => $node_info_array['points'],
+    'product_information' => serialize($node_info_array),
+    'created' => REQUEST_TIME,
+  );
+  // Insert data to cart table.
+  try {
+    $order_id = db_insert('itg_loyalty_reward_cart')
+        ->fields($presave)
+        ->execute();
+    $response = 1;    
+  }
+  catch (Exception $ex) {
+    watchdog('ITG CART', $ex->getMessage());
+    $response = 0;
+  }
+
+  return $response;
+}
+
+/**
+ * Callback function for cart detail page.
+ *
+ * @global stdObject $user
+ *   User standard object.
+ * @return array
+ *   page remdered array.
+ */
+function itg_loyalty_reward_cart() {
+  global $user;
+  $data = _get_cart_full_details($user->uid);
+  
+  return theme('itg_loyalty_reward_cart', array('data' => $data));
+}
+
+/**
+ * Remove product from cart.
+ *
+ * @param int $nid
+ *   Product id to remove from cart page.
+ */
+function itg_loyalty_reward_removecart($nid, $name) {
+  global $user;
+  $itg_query = db_delete('itg_loyalty_reward_cart');
+  $itg_query->condition('nid', $nid)
+      ->condition('uid', $user->uid)
+      ->execute();
+  drupal_set_message(t('The item @product has been deleted from your cart.',
+      array('@product' => $name)), 'status');
+  drupal_goto('cart');
+}
+
+/**
+ * Implements page callback function for order page.
+ *
+ * @global stdObject $user
+ *   Standard user object.
+ *
+ * @return array
+ *   Themes rendred array.
+ */
+function itg_loyalty_reward_order() {
+  global $user;
+  $header = array(    
+    t('Product Description'),
+    t('Points'),
+    t('Order No'),    
+  );
+  // Get order detail.
+  $rows = _get_order_item();
+  
+  return theme('table', array(
+      'header' => $header, 
+      'rows' => $rows, 
+      'attributes' => array('class' => array('mytable'))  
+    )    
+  );  
+}
+
+/**
+ * Get oreder detail from database.
+ *
+ * @global stdObject $user
+ *   Standard user object.
+ *
+ * @return array
+ *   Array of user order details.
+ */
+function _get_order_item() {
+  global $user;
+  $itg_result = array();
+  $itg_query = db_select('itg_loyalty_reward_order', 'itg')
+      ->fields('itg', array('order_id', 'product_information', 'created'))
+      ->condition('uid', $user->uid);
+  $itg_result = $itg_query->execute()->fetchAll();  
+  $data = array();
+  foreach ($itg_result as $value) {    
+    $products = unserialize($value->product_information);    
+    foreach ($products['cart-items'] as $product) {            
+      $product_pic = theme(
+        'image_style', array(
+          'style_name' => 'cart_172x240',
+          'path' => $product['product']['image']['uri'],
+        )
+      );
+      $output = '<div class="checkout-details">';
+      $output = '<div class="checkout-inner">';
+      $output .= $product_pic . '<div class="checkout-inner-details"><div><span>Magzine ID: </span><strong>' . $product['product']['nid'] . '</strong></div>';
+      $output .= '<div><span>Quantity: </span><strong>' . $product['quantity'] . '</strong></div>';
+      $output .= '<div><span>Date of Purchase: </span><strong>' . format_date($value->created, 'custom_date_d_m_y_') . '</strong></div></div>';
+      $output .= '</div>';
+      $output .= '</div>';
+      $data[] = array(
+        $output,              
+        $product['product']['points'] * $product['quantity'],
+        $value->order_id,                
+      );      
+    }
+  }
+  
+  return $data;    
 }

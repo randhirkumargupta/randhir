@@ -91,18 +91,13 @@ function itg_ads_theme($existing, $type, $theme, $path) {
  */
 function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form_id) {
 	$formdata = NULL;
-	
+
 	// Hide the template variant field temporary
 	unset($form['field_ads_template_variants']);
 	$form['#attached']['js'] = array(
 		drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js',
 	);
-	
-	// Hide the template variant field temporary
-	unset($form['field_ads_template_variants']);
-	$form['#attached']['js'] = array(
-		drupal_get_path('module', 'itg_ads') . '/js/itg_ads.js',
-	);
+
 	$form['#after_build'][] = 'itg_common_cancel_button';
 
 	// Custom callback on submit button
@@ -121,7 +116,7 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
 			':input[name="field_ads_template_selection[und]"]' => array('value' => 'Section'),
 		)
 	);
-		
+
 	// Ajax work based on field template selection
 	$template_selection_field = 'field_ads_template_selection';
 	$ads_placeholder_field = 'field_ads_placeholder';
@@ -151,36 +146,11 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
 	if ($template_id == 'Home' || $template_id == 'Rest') {
 		$form['field_ads_select_secton_option'][LANGUAGE_NONE]['#options'] = array('_none' => 'NONE');
 		unset($form['field_ads_select_secton_option']);
-		
+
 		//$form['field_ads_select_secton_option'][LANGUAGE_NONE]['#default_value'] = array('_none' => '-None-');
 		$form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder_values($template_id, $template_id);
 	}
 	else {
-		//$form['field_ads_select_secton_option'][LANGUAGE_NONE]['#default_value'] = array('_none' => '-None-');
-		//drupal_add_js(' jQuery("select[name="field_ads_select_secton_option[und]"]").html("<option>None</option>");', 'inline');
-//		//Ajax work based on field section selection
-//		$section_selection_field = 'field_ads_section_selection';
-//		$ads_placeholder_field = 'field_ads_placeholder';
-//		// set section selection on edit and trigger action
-//		if (isset($form[$section_selection_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
-//			$section_id = $form[$section_selection_field][LANGUAGE_NONE]['#default_value'][0];
-//		}
-//		else {
-//			$section_id = $form_state['input'][$section_selection_field][LANGUAGE_NONE];
-//		}
-//
-//		// add ajax on template selection field
-//		$form[$section_selection_field][LANGUAGE_NONE]['#ajax'] = array(
-//			'event' => 'change',
-//			'callback' => 'itg_ads_value_ajax',
-//			'wrapper' => $ads_placeholder_field . '_replace',
-//		);
-//		$form['field_ads_placeholder']['#validated'] = TRUE;
-//
-//		// Setup Ads placeholder field select
-//		$form[$ads_placeholder_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $ads_placeholder_field . '_replace">';
-//		$form[$ads_placeholder_field][LANGUAGE_NONE]['#suffix'] = '</div>';
-//		$form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder_value($section_id, $section_id);
 
 		//Ajax work based on field section selection
 		$section_selection_field = 'field_ads_section_selection';
@@ -204,19 +174,16 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
 		// Setup Ads placeholder field select
 		$form[$ads_placeholder_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $ads_placeholder_field . '_replace">';
 		$form[$ads_placeholder_field][LANGUAGE_NONE]['#suffix'] = '</div>';
-//		$form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder($form, $section_id);
-//		$form['field_ads_placeholder'][LANGUAGE_NONE]['#options'] = array('-none-' => 'None');
 		if ($section_id == 'Photo' || $section_id == 'Video' || $section_id == 'Default') {
-			$form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder($form, $section_id);		
-		}		
-		
-				//Ajax work based on field select section option
+			$form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder($form, $section_id);
+		}
+
+		//Ajax work based on field select section option.
 		$select_secton_field = 'field_ads_select_secton_option';
 		$ads_placeholder_field = 'field_ads_placeholder';
 		if (arg(2) == 'edit' && arg(0) == 'node' && is_numeric(arg(1))) {
 			$select_section_id = $form[$select_secton_field][LANGUAGE_NONE]['#entity']->field_ads_select_secton_option[LANGUAGE_NONE][0]['value'];
 			$section_id = $form[$select_secton_field][LANGUAGE_NONE]['#entity']->field_ads_section_selection[LANGUAGE_NONE][0]['value'];
-				
 		}
 		else {
 			$select_section_id = $form_state['input'][$select_secton_field][LANGUAGE_NONE];
@@ -234,19 +201,17 @@ function itg_ads_form_ads_management_node_form_alter(&$form, &$form_state, $form
 		$form[$ads_placeholder_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $ads_placeholder_field . '_replace">';
 		$form[$ads_placeholder_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 		$form[$ads_placeholder_field][LANGUAGE_NONE]['#options'] = itg_ads_placeholder_value($select_section_id, $section_id);
-		
-		}
+	}
 	if (arg(2) == 'edit') {
 		$db_options = $form_state['build_info']['args'][0]->field_ads_placeholder['und'][0]['value'];
 		$form['field_ads_placeholder']['und']['#options'][$db_options] = $db_options;
 		$form['field_ads_placeholder']['und']['#default_value'] = array($db_options);
-		
+
 		$db_option = $form_state['build_info']['args'][0]->field_ads_select_secton_option['und'][0]['value'];
 		$term = taxonomy_term_load($db_option);
 		$term_data = $term->name;
 		$form['field_ads_select_secton_option']['und']['#options'][$db_option] = t($term_data);
 		$form['field_ads_select_secton_option']['und']['#default_value'] = $db_option;
-		//pr ($db_option);
 	}
 }
 
@@ -287,7 +252,7 @@ function itg_ads_value_ajaxs($form, $form_state) {
  * @return array $result
  */
 function itg_ads_placeholder_value($formdata, $id = '') {
-	
+
 	if ($id == 'Photo') {
 		$section_name = 'page section photo';
 	}
@@ -305,22 +270,14 @@ function itg_ads_placeholder_value($formdata, $id = '') {
 		$dat = $id;
 	}
 
-	$url_val = $_SERVER["HTTP_REFERER"];
-	global $base_url;
-	$trimm = trim($url_val, $base_url);
-	$arr = explode("/", $trimm);
-	$arrr = explode("?", $arr[2]);
-
 	// Fetch query for Ads Placeholder
 	$select = t('- None -');
 	$data = array('_none' => $select);
 	$data1 = array();
 	$current_date = date("Y-m-d H:i:s");
-	$vocab_name = 'Ads template placeholder';
 	$query = db_select('taxonomy_term_data', 'tt');
 	$query->join('taxonomy_vocabulary', 'tv', 'tv.vid = tt.vid');
 	$query->join('field_data_field_ads_placeholder_values', 'fdapv', 'fdapv.entity_id = tt.tid');
-//	$query->condition('tv.name', $vocab_name, '=');
 	$query->condition('tt.name', $section_name, '=');
 	$query->fields('tt', array('tid', 'name'));
 	$query->fields('fdapv', array('field_ads_placeholder_values_value'));
@@ -349,12 +306,9 @@ function itg_ads_placeholder_value($formdata, $id = '') {
 	foreach ($place_code as $row) {
 		$data1[$row->field_ads_placeholder_value] = $row->field_ads_placeholder_value;
 	}
-	
+
 	if (arg(2) == 'edit') { //Edit case
-		
-	//$result = array('1'=>'1');
 		$result = array_diff($data[$id], $data1);
-		//pr($result);
 		$nid = arg(1);
 		$data_placeholder = itg_ads_get_prefilled_value($nid);
 		$data_section = itg_ads_get_prefilled_section($nid);
@@ -365,7 +319,6 @@ function itg_ads_placeholder_value($formdata, $id = '') {
 	else { // Add case 
 		$result = array_diff($data[$id], $data1);
 	}
-	//$result = array_diff($data[$id], $data1);
 
 	return $result;
 }
@@ -387,12 +340,6 @@ function itg_ads_placeholder_values($formdata, $id = '') {
 	if (!is_null($formdata)) {
 		$dat = $formdata;
 	}
-
-	$url_val = $_SERVER["HTTP_REFERER"];
-	global $base_url;
-	$trimm = trim($url_val, $base_url);
-	$arr = explode("/", $trimm);
-	$arrr = explode("?", $arr[2]);
 
 	// Fetch query for Ads Placeholder
 	$select = t('- None -');
@@ -428,9 +375,9 @@ function itg_ads_placeholder_values($formdata, $id = '') {
 		$data1[$row->field_ads_placeholder_value] = $row->field_ads_placeholder_value;
 	}
 
-	if ($arrr[0] == 'edit') { //Edit case
+	if (arg(2) == 'edit') { //Edit case
 		$result = array_diff($data[$id], $data1);
-		$nid = $arr[1];
+		$nid = arg(1);
 		$data_placeholder = itg_ads_get_prefilled_value($nid);
 		$data_template = itg_ads_get_prefilled($nid);
 
@@ -450,6 +397,7 @@ function itg_ads_placeholder_values($formdata, $id = '') {
  */
 function itg_ads_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 	if ($form["#id"] == 'views-exposed-form-manage-ads-page') {
+		$form['field_ads_end_date_value']['value']['#date_format'] = 'd/m/Y';
 		$form['title']['#autocomplete_path'] = 'content-title-list/ads_management/autocomplete';
 		$form['title']['#attributes'] = array('placeholder' => t('Placeholder Title'));
 	}
@@ -461,14 +409,14 @@ function itg_ads_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_ads_views_pre_render(&$view) {
 	if ($view->name == "manage_ads") {
-		// Get user information.
+		//Get user information.
 		global $user;
 		$header_content = '';
 		if (!in_array('Intern', $user->roles) && !in_array('Author/Guest', $user->roles) && !in_array('Subeditor/Sr.Sub', $user->roles)) {
 			$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
 			$header_content .= l(t('Create Ads Placeholder'), 'node/add/ads-management', array('query' => array('destination' => arg(0))));
 		}
-	$view->attachment_before = $header_content;
+		$view->attachment_before = $header_content;
 	}
 }
 
@@ -524,7 +472,7 @@ function itg_ads_node_validate($node, $form, &$form_state) {
  */
 function itg_ads_show_ad_image() {
 	$node = node_load(arg(1));
-	
+
 	return theme('itg_ads', array('data' => $node));
 }
 
@@ -535,40 +483,40 @@ function itg_ads_show_ad_image() {
  */
 function get_ad_script($page_type) {
 	if (($page_type == 'Home') || ($page_type == 'Rest')) {
-	$current_date = date("Y-m-d H:i:s");
-	$query = db_select('field_data_field_ads_ad_code', 'ac');
-	$query->fields('ac', array('field_ads_ad_code_value'));
-	$query->fields('f', array('field_ads_placeholder_value'));
-	$query->join('field_data_field_ads_template_selection', 'ts', 'ac.entity_id = ts.entity_id');
-	$query->join('field_data_field_ads_placeholder', 'f', 'ac.entity_id = f.entity_id');
-	$query->join('field_data_field_ads_end_date', 'ed', 'ed.entity_id = ac.entity_id');
-	$query->join('field_data_field_ads_start_date', 'sd', 'sd.entity_id = ac.entity_id');
-	$query->condition('ts.field_ads_template_selection_value', $page_type, '=');
-	$query->condition('sd.field_ads_start_date_value', $current_date, '<=');
-	$query->condition('ed.field_ads_end_date_value', $current_date, '>');
-	$script_code = $query->execute()->fetchAll();
-	foreach ($script_code as $row) {
-		$arr[$row->field_ads_placeholder_value] = $row->field_ads_ad_code_value;
-	}
+		$current_date = date("Y-m-d H:i:s");
+		$query = db_select('field_data_field_ads_ad_code', 'ac');
+		$query->fields('ac', array('field_ads_ad_code_value'));
+		$query->fields('f', array('field_ads_placeholder_value'));
+		$query->join('field_data_field_ads_template_selection', 'ts', 'ac.entity_id = ts.entity_id');
+		$query->join('field_data_field_ads_placeholder', 'f', 'ac.entity_id = f.entity_id');
+		$query->join('field_data_field_ads_end_date', 'ed', 'ed.entity_id = ac.entity_id');
+		$query->join('field_data_field_ads_start_date', 'sd', 'sd.entity_id = ac.entity_id');
+		$query->condition('ts.field_ads_template_selection_value', $page_type, '=');
+		$query->condition('sd.field_ads_start_date_value', $current_date, '<=');
+		$query->condition('ed.field_ads_end_date_value', $current_date, '>');
+		$script_code = $query->execute()->fetchAll();
+		foreach ($script_code as $row) {
+			$arr[$row->field_ads_placeholder_value] = $row->field_ads_ad_code_value;
+		}
 	}
 	else {
-	$current_date = date("Y-m-d H:i:s");
-	$query = db_select('field_data_field_ads_ad_code', 'ac');
-	$query->fields('ac', array('field_ads_ad_code_value'));
-	$query->fields('f', array('field_ads_placeholder_value'));
-	$query->join('field_data_field_ads_select_secton_option', 'ts', 'ac.entity_id = ts.entity_id');
-	$query->join('field_data_field_ads_placeholder', 'f', 'ac.entity_id = f.entity_id');
-	$query->join('field_data_field_ads_end_date', 'ed', 'ed.entity_id = ac.entity_id');
-	$query->join('field_data_field_ads_start_date', 'sd', 'sd.entity_id = ac.entity_id');
-	$query->condition('ts.field_ads_select_secton_option_value', $page_type, '=');
-	$query->condition('sd.field_ads_start_date_value', $current_date, '<=');
-	$query->condition('ed.field_ads_end_date_value', $current_date, '>');
-	$script_code = $query->execute()->fetchAll();
-	foreach ($script_code as $row) {
-		$arr[$row->field_ads_placeholder_value] = $row->field_ads_ad_code_value;
+		$current_date = date("Y-m-d H:i:s");
+		$query = db_select('field_data_field_ads_ad_code', 'ac');
+		$query->fields('ac', array('field_ads_ad_code_value'));
+		$query->fields('f', array('field_ads_placeholder_value'));
+		$query->join('field_data_field_ads_select_secton_option', 'ts', 'ac.entity_id = ts.entity_id');
+		$query->join('field_data_field_ads_placeholder', 'f', 'ac.entity_id = f.entity_id');
+		$query->join('field_data_field_ads_end_date', 'ed', 'ed.entity_id = ac.entity_id');
+		$query->join('field_data_field_ads_start_date', 'sd', 'sd.entity_id = ac.entity_id');
+		$query->condition('ts.field_ads_select_secton_option_value', $page_type, '=');
+		$query->condition('sd.field_ads_start_date_value', $current_date, '<=');
+		$query->condition('ed.field_ads_end_date_value', $current_date, '>');
+		$script_code = $query->execute()->fetchAll();
+		foreach ($script_code as $row) {
+			$arr[$row->field_ads_placeholder_value] = $row->field_ads_ad_code_value;
+		}
 	}
-	}
-	
+
 	return $arr;
 }
 
@@ -585,7 +533,7 @@ function itg_ads_get_prefilled_value($nid) {
 	foreach ($place_code as $row) {
 		$data2[$row->field_ads_placeholder_value] = $row->field_ads_placeholder_value;
 	}
-	
+
 	return $data2;
 }
 
@@ -603,7 +551,7 @@ function itg_ads_get_prefilled($nid) {
 	foreach ($place_code as $row) {
 		$data3[$row->field_ads_template_selection_value] = $row->field_ads_template_selection_value;
 	}
-	
+
 	return $data3;
 }
 
@@ -621,12 +569,17 @@ function itg_ads_get_prefilled_section($nid) {
 	foreach ($place_code as $row) {
 		$data3[$row->field_ads_section_selection_value] = $row->field_ads_section_selection_value;
 	}
-	
+
 	return $data3;
 }
 
+/**
+ * Custom function to populate the second dropdown.
+ * @param string $formdata
+ * @param string $id
+ * @return array $result
+ */
 function itg_ads_placeholder($form, $id = '') {
-	//$form['field_ads_placeholder'][LANGUAGE_NONE]['#options'] = array('-none-' => 'None');
 	if ($id == 'Photo') {
 		$temp_name = 'page--section_photo';
 	}
@@ -640,7 +593,6 @@ function itg_ads_placeholder($form, $id = '') {
 	// Fetch query for Ads Placeholder
 	$select = t('- None -');
 	$data['_none'] = '- None -';
-	//$result = array('_none' => '- None -');
 	$query = db_select('taxonomy_term_data', 'tt');
 	$query->join('itg_layout_tpl', 'tv', 'tv.section_name = tt.tid');
 	$query->condition('tv.template_name', $temp_name, '=');
@@ -649,18 +601,8 @@ function itg_ads_placeholder($form, $id = '') {
 	$script_code = $query->execute()->fetchAll();
 	foreach ($script_code as $val) {
 		$data[$val->tid] = $val->name;
-//		if ($val->template_name == 'page--section_default') {
-//			$data['Default'][$val->tid] = $val->name;
-//		}
-//		if ($val->template_name == 'page--section_photo') {
-//			$data['Photo'][$val->tid] = $val->name;
-//		}
-//		if ($val->template_name == 'page--section_video') {
-//			$data['Video'][$val->tid] = $val->name;
-//		}
 	}
-
 	$results = $data;
-	
+
 	return $results;
 }

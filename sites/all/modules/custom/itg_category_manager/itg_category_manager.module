@@ -331,7 +331,9 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
             if (arg(3) == 'edit') {
                 $form['name']['#attributes'] = array('readonly' => 'readonly');
                 $form['field_cm_redirection_url']['#disabled'] = TRUE;
-                $form['field_cm_select_type']['#disabled'] = TRUE;
+                if ($user->uid != 1) {
+                  $form['field_cm_select_type']['#disabled'] = TRUE;
+                }                
                 $form['field_cm_hide_cat_from_home']['#disabled'] = TRUE;
                 $form['field_cm_hide_cat_from_search']['#disabled'] = TRUE;
                 $form['field_cm_no_follow']['#disabled'] = TRUE;
@@ -974,7 +976,7 @@ function itg_category_manager_views_data() {
  */
 function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
   
-  if ($form['#term']['vocabulary_machine_name'] == 'category_management' && $form_id == 'taxonomy_form_term') {
+  if ($form['#vocabulary']->machine_name == 'category_management' && $form_id == 'taxonomy_form_term') {
     
     $select_template_type = 'field_cm_select_template_type';
     $select_template = 'field_cm_select_template';
@@ -1079,8 +1081,13 @@ jQuery(".primary-radio").each(function()
         jQuery(".prim-html").children("span").each(function(){
           var gettoptext=jQuery(this).find(".primary-text").text();
           var selectvalue=jQuery(this).find(".select-prim").val();
-          
-        makeradio = "<input class=primary-radio name=primary_radio type=radio  value="+selectvalue+">";
+       
+          if(jQuery("#edit-field-primary-category-und-0-value").val()==selectvalue)
+          {
+          checkedto="checked=checked";
+          } else { checkedto="";}
+     
+        makeradio = "<input "+checkedto+" class=primary-radio name=primary_radio type=radio  value="+selectvalue+">";
                         
                          jQuery(".dropbox-entry").each(function(){
                             var gettrtext=jQuery(this).children("td:first").text();

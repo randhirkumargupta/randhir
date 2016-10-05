@@ -277,17 +277,7 @@
       $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
       $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
     });
-
-    
-
-    $('#itg-quiz-quiz-form .quiz-submit').mousedown(function () {
-      $(this).ajaxSuccess(function () {
-        $('.question-container').hide();
-        $(this).parents('.question-container').next().show();
-      });
-    });
-
-
+ 
     $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
     $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
 
@@ -303,37 +293,37 @@
       $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').find('.button-remove').trigger('mousedown');
       $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').find('.form-text').val('');
       if (selvalue == "Text") {
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
       }
       if (selvalue == "Video") {
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').show();
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
       }
       if (selvalue == "Photo") {
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').show();
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
       }
     });
     $('.field-name-field-quiz-option select').each(function () {
       var selvalue = $(this).val();
       if (selvalue == "Text") {
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
       }
       if (selvalue == "Video") {
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').show();
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
       }
       if (selvalue == "Photo") {
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-image').show();
+        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').show();
         $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
-        $(this).parent().parent().parent().find('.field-name-field-quiz-answer-text').hide();
       }
     });
     $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
@@ -649,6 +639,7 @@
       $(this).prev('.widget-title-wrapper.active').find('input[type="text"]').focus();
     });
     
+    
   };
 })(jQuery);
 
@@ -733,6 +724,35 @@ jQuery(document).ready(function(){
       jQuery(this).parent().toggleClass('active');
     });
     
+    // jQuery code to toggle ITG-STORY Form
+    jQuery('.itg-form-section-wrapper').on('click', 'h2', function(){
+      jQuery(this).next().slideToggle();
+      jQuery(this).toggleClass('active');
+    });
+    
+    // jQuery code to toggle Cotegory manager form
+    jQuery('.category-manager-basic-details h2').addClass('active');
+    jQuery('.category-manager-basic-details, .category-manager-selection-details, .cotegory-manager-settings').on('click', 'h2', function(){
+      var titleHeight = jQuery(this).outerHeight(true);
+      jQuery(this).toggleClass('active');
+      if(jQuery(this).hasClass('active')){
+        jQuery(this).parent().css('height', 'auto');
+      }
+      else{
+        jQuery(this).parent().css('height', titleHeight);
+      }
+    });
+    jQuery('#edit-relations').on('click', 'legend', function(){
+      var titleHeight = jQuery(this).outerHeight(true);
+      jQuery(this).toggleClass('active');
+      if(jQuery(this).hasClass('active')){
+        jQuery(this).parent().css('height', 'auto');
+      }
+      else{
+        jQuery(this).parent().css('height', titleHeight);
+      }
+    });
+    
 });
 
 
@@ -775,5 +795,7 @@ jQuery(document).ready(function() {
             jQuery(this).find('i.fa-minus-circle').show();
         }
     });
+    
+    jQuery('.auto-block_1 .widget-settings, .tech-block_1 .widget-settings').prependTo('.auto-block-2 .special-top-news');
     
 });

@@ -79,6 +79,13 @@ function itg_layout_manager_menu() {
       'file' => 'includes/itg_layout_manager.inc',
   );
   
+  $items['itg-update-table'] = array(      
+      'page callback' => 'itg_update_table',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_layout_manager.inc',
+  );
+  
   return $items;
 }
 
@@ -133,6 +140,16 @@ function itg_layout_manager_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['layout_custom_widget_list_block'] = array(
+    'info' => t('Layout custom widget list block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  $blocks['layout_special_widget_list_block'] = array(
+    'info' => t('Layout Special widget list block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -147,26 +164,25 @@ function itg_layout_manager_block_view($delta = '') {
   switch ($delta) {
     case 'header_block':
       $arg = arg();
-      // Code for adds
-        drupal_add_js('http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap', array('scope' => 'header'));
-       // drupal_add_js('http://static.chartbeat.com/js/chartbeat_mab.js', array('scope' => 'header'));
-        drupal_add_js('http://xp1.zedo.com/client/xp1/fmos.js', array('scope' => 'header'));
-        drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads_header_script.js', array('scope' => 'header'));
-      // end
+      // Code for ads
+      drupal_add_js('http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap', array('scope' => 'header'));
+      // drupal_add_js('http://static.chartbeat.com/js/chartbeat_mab.js', array('scope' => 'header'));
+      drupal_add_js('http://xp1.zedo.com/client/xp1/fmos.js', array('scope' => 'header'));
+      drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads_header_script.js', array('scope' => 'header'));      
       
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
 			$page_name = get_ads_page_name();
 			$data['itg_top'] = get_ad_script($page_name);
+      
       $block['content'] = theme('header_block', array('data' => $data));
       break;
     
-    case 'footer_block':  
-        
+    case 'footer_block':
       $data = get_itg_footer_menu();
       $page_name = get_ads_page_name();
       $data['itg_top'] = get_ad_script($page_name);  
-      //$data['itg_top'] = get_ad_script('Home');
+      
       $block['content'] = theme('footer_block', array('data' => $data));
       break;
           
@@ -179,7 +195,7 @@ function itg_layout_manager_block_view($delta = '') {
     case 'layout_widget_list_block':      
       $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);      
       if (empty($template_id)) {
-        $widget_array['default_widget'] = get_all_widgets_list_by_setting_page();
+        $widget_array['default_widget'] = get_all_widgets_list_by_setting_page('Template widgets list');
       }
       
       $widget_array['poll_widget'] = get_widgets_poll_list();
@@ -227,6 +243,17 @@ function itg_layout_manager_block_view($delta = '') {
     case 'header_sosorry_block':      
       $block['content'] = theme('header_so_sorry_block', array('data' => $data));
       break;
+    
+    case 'layout_custom_widget_list_block':      
+      $widget_array['custom_widget'] = get_html_custom_widget_list();
+      $block['content'] = theme('layout_custom_widgets_list_block', array('data' => $widget_array));
+    break;
+    
+    case 'layout_special_widget_list_block':
+      $widget_array['special_widget'] = get_all_widgets_list_by_setting_page('Special');
+      
+      $block['content'] = theme('layout_special_widgets_list_block', array('data' => $widget_array));
+    break;
     
   }
   
@@ -299,6 +326,21 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
       'template' => 'itg-header-sosorry',
       'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
     ),
+    'layout_custom_widgets_list_block' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-custom-widgets-list-block',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
+    'layout_special_widgets_list_block' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-special-widgets-list-block',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
+    'html_custom_widget' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-html-custom-widget',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
   );
   
   return $themes;
@@ -327,7 +369,9 @@ function itg_layout_manager_preprocess_page(&$vars) {
   
   //section template display on front
   if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))&& $theme == FRONT_THEME_NAME) {   
-    
+     drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+    drupal_add_js('', array('type' => 'inline', 'scope' => 'footer'));
     $query = db_select('taxonomy_term_hierarchy', 'tth');
     $query->fields('tth', array('parent'));
     $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = tth.tid');
@@ -355,51 +399,3 @@ function itg_layout_manager_preprocess_page(&$vars) {
   }
 }
 
-function get_default_section_tpl(){
-    $query = db_select('itg_layout_tpl', 'tpl');
-    $query->fields('tpl', array('section_name', 'template_name'));  
-    $query->condition('status', 1);
-          //->condition('default', 1);
-    $last_tpl = $query->execute()->fetchAll();
-    p($last_tpl);
-}
-
-/**
- * Get tid of section tpl
- * @return int
- */
-function get_tid_of_section_tpl($tid) {
-  $query = db_select('itg_layout_tpl', 'tpl');
-  $query->fields('tpl', array('section_name'));  
-  $query->condition('section_name', $tid)
-        ->condition('status', 1);
-  $query->orderBy('tpl.id', 'DESC')->range(0,1);//LIMIT to 1 records
-
-  return $query->execute()->fetchField();
-}
-
-/**
- * Get ads page name
- * @return $page_name
- */
-function get_ads_page_name() {
-	$arg = arg();
-	$is_fron_page = drupal_is_front_page();      
-	if (!empty($is_fron_page)) {          
-		$page_name = 'Home';
-	} 
-	else if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))) {
-		$ads_tid = get_tid_of_section_tpl($arg[2]);	
-		if (!empty($ads_tid)) {
-			$page_name = $ads_tid;
-		}
-		else {
-			$page_name = 'Rest';
-		}
-	}
-	else {
-	 $page_name = 'Rest';   
-	}
-	
-	return $page_name;
-}

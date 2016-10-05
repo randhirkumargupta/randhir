@@ -278,6 +278,41 @@ function features_for_newsletter_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'manage-newsletter';
+  $translatables['manage_newsletter'] = array(
+    t('Master'),
+    t('Manage Newsletter'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('No Result Found!'),
+    t('author'),
+    t('S.No'),
+    t('Template'),
+    t('Newsletter Type'),
+    t('Uid'),
+    t('First name'),
+    t('Last name'),
+    t('Posted By'),
+    t('[field_first_name] [field_last_name]'),
+    t('Created Date'),
+    t('Modified On'),
+    t('View'),
+    t('<span class="view-link">[view_node]</span>'),
+    t('Edit'),
+    t('<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>'),
+    t('Actions'),
+    t('Page'),
+  );
   $export['manage_newsletter'] = $view;
 
   $view = new view();
@@ -313,10 +348,13 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'counter' => 'counter',
+    'field_news_title' => 'field_news_title',
     'title' => 'title',
     'field_newst_header_headline' => 'field_newst_header_headline',
     'field_newst_main_headline' => 'field_newst_main_headline',
     'created' => 'created',
+    'changed' => 'changed',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
     'delete_node' => 'nothing',
@@ -324,6 +362,18 @@ function features_for_newsletter_views_default_views() {
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
+    'counter' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_news_title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -347,6 +397,13 @@ function features_for_newsletter_views_default_views() {
     ),
     'created' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -387,11 +444,16 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S.No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Field: Title */
+  $handler->display->display_options['fields']['field_news_title']['id'] = 'field_news_title';
+  $handler->display->display_options['fields']['field_news_title']['table'] = 'field_data_field_news_title';
+  $handler->display->display_options['fields']['field_news_title']['field'] = 'field_news_title';
+  $handler->display->display_options['fields']['field_news_title']['label'] = 'Subject Line';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Subject Line';
+  $handler->display->display_options['fields']['title']['label'] = 'Template Name';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
@@ -503,6 +565,40 @@ function features_for_newsletter_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'manage-newsletter-templates';
+  $translatables['manage_newsletter_templates'] = array(
+    t('Master'),
+    t('Manage Newsletter Templates'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('No Result Found!'),
+    t('S.No'),
+    t('Subject Line'),
+    t('Template Name'),
+    t('Header Headline'),
+    t('Main Headline'),
+    t('-'),
+    t('Created Date'),
+    t('Modified On'),
+    t('View'),
+    t('<span class="view-link">[view_node]</span>'),
+    t('Edit'),
+    t('<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>'),
+    t('Delete'),
+    t('<span class ="views-action-separator"> | </span> <span class="delete-link">[delete_node]</span>'),
+    t('Actions'),
+    t('Page'),
+  );
   $export['manage_newsletter_templates'] = $view;
 
   $view = new view();
@@ -575,6 +671,25 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'entityreference_fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $translatables['story_and_photo_id'] = array(
+    t('Master'),
+    t('Autocomplete Story and Photo Id'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Page'),
+    t('Entity Reference'),
+  );
   $export['story_and_photo_id'] = $view;
 
   $view = new view();
@@ -643,6 +758,25 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'entityreference_fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $translatables['story_id'] = array(
+    t('Master'),
+    t('Story Id'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Page'),
+    t('Entity Reference'),
+  );
   $export['story_id'] = $view;
 
   return $export;

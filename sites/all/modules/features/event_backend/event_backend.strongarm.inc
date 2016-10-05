@@ -145,10 +145,10 @@ function event_backend_strongarm() {
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '46',
+          'weight' => '48',
         ),
         'additional_settings' => array(
-          'weight' => '47',
+          'weight' => '49',
         ),
       ),
       'display' => array(),

@@ -32,7 +32,7 @@ function itg_quiz_menu() {
   
   $items = array();
   
-  $items['itg-quiz'] = array(
+  $items['itg-quiz/%'] = array(
       'title' => t('Quiz'),
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_quiz_quiz_form'),
@@ -43,7 +43,7 @@ function itg_quiz_menu() {
   );
   
   $items['quiz-user-list/%'] = array(
-      'title' => t('Quiz User List'),
+      'title' => t('Quiz Users List'),
       'page callback' => 'itg_quiz_user_list',
       'access callback' => TRUE,
       'file' => 'includes/itg_quiz_result.inc',
@@ -104,12 +104,18 @@ function itg_quiz_block_view($delta = '') {
  * {@inheritdoc}
  */
 function itg_quiz_theme() {
+  $path = drupal_get_path('module', 'itg_quiz') . '/templates';
   $themes = array(
     'quiz_tab_form_display_block' => array(
-      'template' => 'quiz-form-tab-template',
-      'path' => drupal_get_path('module', 'itg_quiz') . '/templates',
-      'variables' => array('data' => NULL),
-    ),   
+          'template' => 'quiz-form-tab-template',
+          'path' => $path,
+          'variables' => array('data' => NULL),
+      ),
+      'itg_quiz_form' => array(
+          'template' => 'itg-quiz-form',
+          'path' => $path,
+          'render element' => 'form',
+      ),
   );
 
   return $themes;
@@ -138,6 +144,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
       $form['field_quiz_add_questions'][LANGUAGE_NONE]['#title'] = '';
       $form['field_quiz_answer_type']['#access'] = FALSE;
       $form['field_quiz_options']['#access'] = FALSE;
+      unset($form['field_quiz_winners'][LANGUAGE_NONE]['#options']['_none']);
       
       
       // After build and custom summit callback
@@ -218,6 +225,9 @@ function itg_quiz_form_after_build($form, &$form_state) {
         '#markup' => '<div style="padding-top: '.$padding.'"><strong>Question ' . $count . ':</strong></div>',
         '#weight' => -1,
     );
+    
+    // Unset weightage "-None-" item from drop down list
+    unset($form['field_quiz_add_questions'][LANGUAGE_NONE][$news]['field_quiz_weightage'][LANGUAGE_NONE]['#options']['_none']);
   }
   
 
@@ -276,34 +286,103 @@ function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) 
 /*******************************Node Related hooks*****************************/
 
 /**
+ * Implement hook_node_presave
+ *  
+ * {@inheritdoc}
+ */
+function itg_quiz_node_presave($node){
+  
+  // Publish/unpublish functionality for quiz
+  if ($node->type == 'quiz') {
+    if ($node->is_new == 1) {
+      $node->status = $node->field_quuiz_publish[LANGUAGE_NONE][0]['value'] ? 1: 0;
+    }
+    else {
+      $node->status = $node->field_quuiz_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+      field_attach_update('node', $node);
+    }
+  }
+}
+
+/**
  * Implements hook_node_validate.
  * {@inheritdoc}
  */
 function itg_quiz_node_validate($node, $form, &$form_state) {
 
-  // Date validation for start date and end date.
   if ($node->type == 'quiz') {
+    
+    // Validation for date
     if (!empty($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
       if (strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']) > strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])) {
-        form_set_error('field_quiz_end_date', t('Quiz end date must be greater or equal to start date.'));
+        form_set_error('field_quiz_end_date', t('Quiz end date must be greater than or equal to start date.'));
       }
     }
 
-    // Add validation for answer options(Every question must have atleast two answer options with one correct answer).
+    // Validation for answer options(Every question must have atleast two answer options with one correct answer).
+    $text_missing_photo = FALSE;
+    $text_missing_video = FALSE;
+    $photo_is_missing_itself = FALSE;
+    $video_is_missing_itself = FALSE;
+    
     foreach ($node->field_quiz_add_questions[LANGUAGE_NONE] as $key => $question_arr) {
       $question_txt = $question_arr['field_survey_question'][LANGUAGE_NONE][0]['value'];
+      $answer_option_type = $question_arr['field_quiz_option'][LANGUAGE_NONE][0]['value'];
 
       if (is_numeric($key)) {
-   
+        
         // Validation for answer options
         $count_ans_text = 0;
-        foreach ($question_arr['field_quiz_options_answer'][LANGUAGE_NONE] as $correct_ans_arr) {
-          if (!empty($correct_ans_arr['field_quiz_answer_text'][LANGUAGE_NONE][0]['value'])) {
+        $count_ans_photo = 0;
+        $count_ans_video = 0;
+
+        foreach ($question_arr['field_quiz_options_answer'][LANGUAGE_NONE] as $answers_arr) {
+          
+          // Validation for text
+          if (!empty($answers_arr['field_quiz_answer_text'][LANGUAGE_NONE][0]['value'])) {
             $count_ans_text++;
+          }
+
+          // Count no.of photos uploaded for a question
+          if ($answer_option_type == 'Photo') {
+            if (is_numeric($answers_arr['field_quiz_answer_image'][LANGUAGE_NONE][0]['fid']) && !empty($answers_arr['field_quiz_answer_image'][LANGUAGE_NONE][0]['fid'])) {
+              $count_ans_photo++;
+            }
+          }
+
+          // Count no.of videos uploaded for a question
+          if ($answer_option_type == 'Video') {
+            if (is_numeric($answers_arr['field_quiz_answer_video'][LANGUAGE_NONE][0]['fid']) && !empty($answers_arr['field_quiz_answer_video'][LANGUAGE_NONE][0]['fid'])) {
+              $count_ans_video++;
+            }
           }
         }
         
-         // Validation for correct answer
+        // Create flag to validate answer options for photo type
+        if ($answer_option_type == 'Photo') {
+          if ($count_ans_photo > $count_ans_text) {
+            $text_missing_photo = TRUE;
+          }
+
+          if ($count_ans_text > $count_ans_photo) {
+            $photo_is_missing_itself = TRUE;
+          }
+        }
+        
+         // Create flag to validate answer options for video type
+        if ($answer_option_type == 'Video') {
+          if ($count_ans_video > $count_ans_text) {
+            $text_missing_video = TRUE;
+          }
+
+          if ($count_ans_text > $count_ans_video) {
+            $video_is_missing_itself = TRUE;
+          }
+        }
+        
+       
+        
+        // Validation for correct answer
         $correct_ans_available = FALSE;
         foreach ($question_arr['field_quiz_options_answer'][LANGUAGE_NONE] as $correct_ans_arr) {
           if (!empty($correct_ans_arr['field_quiz_correct_answer'][LANGUAGE_NONE][0]['value'])) {
@@ -311,11 +390,40 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
           }
         }
 
+        // Show error message for text
         if ($count_ans_text < 2) {
-          form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>@question</strong>?', array('@question' => $question_txt)));
+          form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
         }
+
+        // Show error message for photos
+        if ($answer_option_type == 'Photo') {
+          if ($count_ans_photo < 2) {
+            form_set_error('field_quiz_options_answer', t('Please provide atleast two answer photos for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+          }
+          if ($text_missing_photo) {
+            form_set_error('field_quiz_options_answer', t('Please provide answer text for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+          }
+          if ($photo_is_missing_itself) {
+            form_set_error('field_quiz_options_answer', t('Please provide answer photo for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+          }
+        }
+        
+        // Show error message for videos
+        if ($answer_option_type == 'Video') {
+          if ($count_ans_video < 2) {
+            form_set_error('field_quiz_options_answer', t('Please provide atleast two answer videos for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+          }
+          if ($text_missing_video) {
+            form_set_error('field_quiz_options_answer', t('Please provide answer text for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+          }
+          if ($video_is_missing_itself) {
+            form_set_error('field_quiz_options_answer', t('Please provide answer video for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+          }
+        }
+
+        // Show error message for correct answer
         if (!$correct_ans_available) {
-          form_set_error('field_quiz_options_answer', t('Please mark correct answer for question <strong>@question</strong>?', array('@question' => $question_txt)));
+          form_set_error('field_quiz_options_answer', t('Please mark correct answer for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
         }
       }
     }

@@ -325,7 +325,7 @@ $root-font-size: 16px;
 @mixin social-share{
     $break-mobile :768px;
     ul{
-        @extend .list-none;
+        list-style-type: none;
         li{
             @include display-inline;
             padding-right: 8px;
@@ -376,4 +376,91 @@ $root-font-size: 16px;
             }
         }
      }
+}
+@mixin slider-icon-width-background{
+    .slick-slider{
+        padding: 10px;
+        background: #000;
+        border: none;   
+        .slick-prev{
+            font: normal normal normal 14px/1 FontAwesome;
+            cursor: pointer;
+            width: 24px;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 0 90px 90px 0;
+            left: 10px;
+            font-size: 0;
+            position: absolute;
+            top: 50%;
+            z-index: 9;
+            border: none;
+            margin-top:-12px;
+            &:hover{
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+            &:before{
+                content: '\f053';
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: 20px;
+                padding-left: 0;
+                left: 0;
+                position: absolute;
+                top: 16px;
+            }
+        }
+        .slick-next{
+            font: normal normal normal 14px/1 FontAwesome;
+            cursor: pointer;
+            width: 24px;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 90px 0px 0px 90px;
+            right: 10px;
+            font-size: 0;
+            position: absolute;
+            top: 50%;
+            z-index: 9;
+            border: none;
+            margin-top:-12px;
+            &:hover{
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+            &:before{            
+                content: '\f054';
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: 20px;
+                padding-left: 0;
+                right: 0;
+                position: absolute;
+                top: 16px;
+            }
+        }
+        ul.slick-dots li {
+            @include display-inline;
+            padding: 10px 6px;
+            button{
+                border: none;   
+                cursor: pointer;
+            }    
+        }
+    }
+    @media screen and (min-width: 769px) {
+    .slick-slider .slick-next, .slick-slider .slick-prev{
+           width: 50px;
+           height: 100px;
+           margin-top: -50px;
+           &:before{
+                top: 38px;
+                font-size: 30px;
+           }
+       } 
+    }
+}
+@mixin clear-floating-block($float-class){
+    .#{$float-class}{
+        &:nth-child(2n+1){
+            clear: left;
+        }
+    }    
 }

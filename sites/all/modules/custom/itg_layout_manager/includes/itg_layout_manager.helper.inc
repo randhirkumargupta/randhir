@@ -46,13 +46,13 @@ function get_itg_footer_menu() {
  * @param string $template_name 
  * @return array
  */
-function get_all_widgets_list_by_setting_page() {
+function get_all_widgets_list_by_setting_page($title) {
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'));  
-  $query->condition('type', 'itg_template_widgets');        
+  $query->condition('type', 'itg_template_widgets');
+  $query->condition('title', $title);
   $query->orderBy('n.nid', 'DESC')->range(0,1);//LIMIT to 1 records
   $nid = $query->execute()->fetchField();
-  
   $node = node_load($nid);
   $widget_array = $node->field_itg_widget_name[LANGUAGE_NONE];
   
@@ -82,15 +82,20 @@ function check_template_of_section($section_name, $template_name) {
  * @param string $widget_name 
  * @return array $render_array
  */
-function get_itg_widget($widget_name, $filter_url = NULL) {
+function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NULL) {
+  
+  $widget_info = explode('|', $widget_info);
   
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
-    return create_setion_widgets($filter_url);
+    return create_setion_widgets($filter_url, $widget_info[1]);
   }
-  elseif (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
+  else if (isset($widget_name) && $widget_name == 'custom_html_widget') {
+    return get_html_custom_widget($filter_url);    
+  }
+  else if (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
     return create_setion_widget2($filter_url);
   }
-  elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {   
+  else if (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {   
     if (isset($widget_name) && ($widget_name == 'photo_list_of_category')) {
       $block = 'block';
     }
@@ -100,6 +105,9 @@ function get_itg_widget($widget_name, $filter_url = NULL) {
     }
     
     return views_embed_view($widget_name, $block, $filter_url);
+  }
+  else if ($widget_info[0] == 'view') {
+    return views_embed_view($widget_name, $widget_info[1], $widget_info[2]);
   }
   else {      
     $block = block_load('itg_widget', $widget_name);
@@ -167,7 +175,7 @@ function get_layout_details($section_name, $template_name, $status) {
   
   //Get layout setting details info
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-  $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', 'filter_url'));  
+  $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', 'widget_info', 'filter_url'));  
   $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
   $itg_query->condition('layout_tpl.section_name', $section_name);    
   $itg_query->condition('layout_tpl.template_name', $template_name);
@@ -184,6 +192,17 @@ function get_layout_details($section_name, $template_name, $status) {
   
   foreach ($itg_result as $itg_val) {
     $filter_url = $itg_val->filter_url;
+    // for widget display name
+    if (!empty($itg_val->widget_name)) {
+      $widget_info_array = explode('|', $itg_val->widget_info);
+      if($widget_info_array[1] !="" &&  $widget_info_array[1] !="undefined")
+      {
+      $result['widget_display_name'] = '-'.$widget_info_array[1];  
+      }else{
+          $result['widget_display_name'] = "";  
+      }
+    }
+    
     $result['widget_name'] = $itg_val->widget_name;
     if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
       $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
@@ -209,7 +228,7 @@ function get_layout_details($section_name, $template_name, $status) {
     if (isset($itg_val->widget_name)) {
       // get widget block
       //p($filter_url);
-      $widget = get_itg_widget($itg_val->widget_name, $filter_url);
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
     } 
     else {
       $widget = '<p>Drag template widgets here !</p>';
@@ -261,7 +280,7 @@ function category_widget_list($itg_result, $widget_name) {
     $content = '<ul id="templates-widget2-section" class="no-bullet pd-10 templates-widgets">';
 
     foreach ($itg_result as $row) {    
-      $content .= '<li id="'.$row->category_name.'" data-widget="'.$widget_name.'#'.$row->category_id.'">'
+      $content .= '<li id="'.$row->category_name.'" data-widget="'.$widget_name.'#'.$row->category_id.'" data-widget-info="">'
               . '<span>'.$row->category_name.' ('.$row->category_id.')</span>'
               . '<span><a class="layout-section-widget2-delete" href="javascript:void(0)" data-widget="'.$row->id.'">X</a></span>'
               . '</li>';
@@ -273,7 +292,7 @@ function category_widget_list($itg_result, $widget_name) {
     $content = '<ul id="templates-widgets-section" class="no-bullet pd-10 templates-widgets">';
   
     foreach ($itg_result as $row) {    
-      $content .= '<li id="'.$row->category_name.'" data-widget="'.$widget_name.'#'.$row->category_id.'">'
+      $content .= '<li id="'.$row->category_name.'" data-widget="'.$widget_name.'#'.$row->category_id.'" data-widget-info="">'
               . '<span>'.$row->category_name.' ('.$row->category_id.')</span>'
               . '<span><a class="layout-section-delete" href="javascript:void(0)" data-widget="'.$row->id.'">X</a></span>'
               . '</li>';
@@ -343,7 +362,7 @@ function get_widgets_poll_list() {
  * @param $section_id
  * @return array
  */
-function create_setion_widgets($section_id) {
+function create_setion_widgets($section_id, $widget_style = NULL) {
   module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
   // value is hardcoded need to be change for dyanamic functionality
   $info['section'] = $section_id; // tid of section
@@ -352,9 +371,9 @@ function create_setion_widgets($section_id) {
   $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
   $block['subject'] = t('Section wise ordering from custom table');
   
-  $data = itg_widget_section_wise_ordering_from_custom_table($info);
+  $data = itg_widget_section_wise_ordering_from_custom_table($info, $widget_style);
   
-  return theme("section_wise_ordering", array("data" => $data));
+  return theme("section_wise_ordering", array("data" => $data, "widget_style" => $widget_style));
 }
 
 /**
@@ -399,4 +418,83 @@ function get_first_category_of_media_widget($section, $template, $widget_name) {
   ksort($cat_array);
   foreach($cat_array as $first) break;
   return $filter_url = $first;
+}
+
+function get_default_section_tpl(){
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('section_name', 'template_name'));  
+    $query->condition('status', 1);
+          //->condition('default', 1);
+    $last_tpl = $query->execute()->fetchAll();
+    p($last_tpl);
+}
+
+/**
+ * Get tid of section tpl
+ * @return int
+ */
+function get_tid_of_section_tpl($tid) {
+  $query = db_select('itg_layout_tpl', 'tpl');
+  $query->fields('tpl', array('section_name'));  
+  $query->condition('section_name', $tid)
+        ->condition('status', 1);
+  $query->orderBy('tpl.id', 'DESC')->range(0,1);//LIMIT to 1 records
+
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get ads page name
+ * @return $page_name
+ */
+function get_ads_page_name() {
+	$arg = arg();
+	$is_fron_page = drupal_is_front_page();      
+	if (!empty($is_fron_page)) {          
+		$page_name = 'Home';
+	} 
+	else if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))) {
+		$ads_tid = get_tid_of_section_tpl($arg[2]);	
+		if (!empty($ads_tid)) {
+			$page_name = $ads_tid;
+		}
+		else {
+			$page_name = 'Rest';
+		}
+	}
+	else {
+	 $page_name = 'Rest';   
+	}
+	
+	return $page_name;
+}
+
+/**
+ * Get all html_custom widgets list for layout setting page
+ * @return array
+ */
+function get_html_custom_widget_list() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));  
+  $query->condition('type', 'custom_html_widgets');        
+  $itg_result = $query->execute()->fetchAll();
+  
+  $rows = array();
+  
+  foreach ($itg_result as $row) {
+    $widget[$row->nid] = $row->title;
+  }
+  
+  return $widget;
+}
+
+
+/**
+ * Get html_custom widgets for layout
+ * @return theme
+ */
+function get_html_custom_widget($nid) {
+  $node = node_load($nid); 
+  $html_code = $node->body[LANGUAGE_NONE][0]['value'];  
+  return theme("html_custom_widget", array("data" => $html_code));  
 }
