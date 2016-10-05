@@ -32,6 +32,7 @@ h4.heading{
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
+    font-size:16px;
     a{
         color:$heading-blue-color;
     }
@@ -4156,7 +4157,34 @@ footer{
 /*CSS end for year end page*/
 
 /*CSS start special auto page */
-.auto-layout-page{
+.auto-layout-page{     
+    .auto-block-1, .auto-block-2{
+        height: 605px;
+        overflow: hidden;
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 245px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-1{
+        border: 1px solid #ddd;  
+        .featured-news{
+            border: none;
+        }
+    }
+    .auto-block-2{
+        border: 1px solid #ddd;
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }
     .widget-wrapper{
         &.auto-block_2{
             border: 1px solid $border-color;
@@ -4168,6 +4196,7 @@ footer{
     }
     .special-top-news{
         ul{
+            padding-top:20px !important;
             &.itg-listing{
                 border: none;
             }
@@ -4247,6 +4276,33 @@ footer{
 /*CSS End special auto page */
 /*CSS Start special tech page */
 .tech-layout-page{
+    .auto-block-1, .auto-block-2{
+        height: 672px;
+        overflow: hidden;
+    }
+    .auto-block-1{
+        border: 1px solid #ddd;  
+        .featured-news{
+            border: none;
+        }
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 311px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-2{
+        border: 1px solid #ddd;
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }
     .itg-h385-section{
         .droppable {
             height: 385px;
@@ -4278,6 +4334,7 @@ footer{
     }
      .special-top-news{
         ul{
+                padding-top: 20px !important;
             &.itg-listing{
                 border: none;
             }
@@ -4298,11 +4355,17 @@ footer{
     }
     #block-itg-widget-tech-most-read{
         ul{
-            li{
+            li.dont-miss-listing{
+                &:first-child{
+                    padding-top: 0;
+                }
                 @include calculate-width(1);
                 overflow: hidden;
                 padding:12px 0 15px;
                 border-bottom: 1px solid $border-color;
+                .dm-pic{
+                   width: auto;
+                }
             }
         }
     }
@@ -4380,8 +4443,16 @@ footer{
         .flexslider .slides li .detail .flex-count{
             @include pos(absolute,null,null,78px,0px);
         }
-    }
+    }    
     /*End photo section slider*/
+    .tech-block_8{
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .techwatch.osscar-video ul .dont-miss-listing{
+        padding:0 0 10px 0;
+    }
 }
 /*CSS End special tech page */
 
@@ -4471,7 +4542,7 @@ footer{
                         color: #fff;
                     } 
                 }
-            }
+            }            
         }
     }
 }
@@ -4760,11 +4831,13 @@ footer{
                 font-weight: 600;
                 vertical-align: middle;
                 &.image{
-                    width: 72px;
+                    img{
+                     width: 72px;
                     height: 72px;
                     border-radius: 100%;
                     border: 2px solid #ef3c24;
-                    display: inline-block;
+                    display: inline-block;   
+                    }                    
                 }
                 span{
                     display: block;

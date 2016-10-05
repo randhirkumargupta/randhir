@@ -796,4 +796,6 @@ jQuery(document).ready(function() {
         }
     });
     
+    jQuery('.auto-block_1 .widget-settings, .tech-block_1 .widget-settings').prependTo('.auto-block-2 .special-top-news');
+    
 });
