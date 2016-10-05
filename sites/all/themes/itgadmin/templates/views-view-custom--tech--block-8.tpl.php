@@ -1,4 +1,4 @@
- <div class="osscar-video">
+ <div class="techwatch osscar-video">
      <ul class="">  
 <?php foreach($rows as $index => $row){
     $desc=$row['title'];
