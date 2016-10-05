@@ -746,6 +746,13 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
+    case 'views-exposed-form-yearender-top-news-and-top-videos-yearend-left-widget-contents':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
     case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
       $form['title']['#attributes']['placeholder'] = t('Anchor name');
       $form['title']['#autocomplete_path'] = 'anchor-list/autocomplete';
