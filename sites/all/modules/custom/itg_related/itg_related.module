@@ -287,7 +287,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
       $i++;
     }
-    elseif ($_GET['q'] == 'online-archive-story') {
+    elseif (empty($_GET['bundle_name']) && $_GET['q'] == 'online-archive-story') {
       $search_array = $query->getSolrParams();
       $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
         $val_str = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
