@@ -25,7 +25,6 @@ features[field_base][] = field_description
 features[field_base][] = field_set_as_featured_cate
 features[field_group][] = group_cm_basic_details|taxonomy_term|category_management|form
 features[field_group][] = group_cm_selection_details|taxonomy_term|category_management|form
-features[field_group][] = group_cm_settings|taxonomy_term|category_management|form
 features[field_instance][] = taxonomy_term-category_management-field_cm_display_title
 features[field_instance][] = taxonomy_term-category_management-field_cm_hide_cat_from_home
 features[field_instance][] = taxonomy_term-category_management-field_cm_hide_cat_from_search
