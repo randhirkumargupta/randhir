@@ -457,23 +457,23 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
                     ->condition('cat_id', $_GET['category_tid'])
                     ->condition('widget', 'section_wise_widget')
                     ->execute()->fetchAll();
-    
-    
+
+
     //Prepare weight crosspond to nid.
     $select_map_array = array();
-     foreach($itg_widget_order_data as $order_data) {
-       $select_map_array[$order_data->nid] = $order_data->weight;
-     }
-     
+    foreach ($itg_widget_order_data as $order_data) {
+      $select_map_array[$order_data->nid] = $order_data->weight;
+    }
+
     // Prepare weights in array. 
     $select_map_array_weight = array();
-     foreach($itg_widget_order_data as $order_data) {
-       $select_map_array_weight[] = $order_data->weight;
-     }
-     
-     
+    foreach ($itg_widget_order_data as $order_data) {
+      $select_map_array_weight[] = $order_data->weight;
+    }
+
+
     foreach ($form['draggableviews'] as $key => $weight) {
-     // echo $key."</br>";
+      // echo $key."</br>";
       // make options to weight drop down equal to saved weight value.
       $form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc($select_map_array_weight);
       //$form['draggableviews'][$key]['weight']['#options'] = array($key => $key);
@@ -482,7 +482,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
       $form['draggableviews'][$key]['weight']['#validated'] = true;
     }
   }
-  drupal_add_css("select.draggableviews-weight {display:none !important}","inline");
+  drupal_add_css("select.draggableviews-weight {display:none !important}", "inline");
   // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
@@ -1023,19 +1023,17 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][3]['value'] = variable_get('tech_for_widget');
   }
 
-  
-   if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos'|| $view->current_display == 'oscar_photos')) {
+
+  if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos' || $view->current_display == 'oscar_photos')) {
     $query->where[1]['conditions'][3]['value'] = variable_get('entertainment_oscar_for_widget');
   }
   if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
     $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_for_widget');
   }
 
-   if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider'|| $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top' || $view->current_display == 'special_movie_video')) {
+  if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider' || $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top' || $view->current_display == 'special_movie_video')) {
     $query->where[1]['conditions'][3]['value'] = variable_get('movie_for_widget');
-
   }
-
 }
 
 /**
@@ -1767,6 +1765,14 @@ function itg_widget_node_insert($node) {
     $order = $node->created;
 
     foreach ($cat_id as $category) {
+      
+      // Get max weight for perticular category.
+      $max_query = db_select('itg_widget_order');
+      $max_query->addExpression('MAX(weight)');
+      $max_query->condition('cat_id' , $category['tid']);
+      $max_query->condition('widget' , 'section_wise_widget');
+      $max_result = $max_query->execute()->fetchField();
+      
       // Insert into table.
       $query = db_insert('itg_widget_order')
               ->fields(array(
@@ -1774,7 +1780,7 @@ function itg_widget_node_insert($node) {
                   'widget' => 'section_wise_widget',
                   'content_type' => $node->type,
                   'cat_id' => $category['tid'],
-                  'weight' => -1 * abs($node->created),
+                  'weight' => ++$max_result,
                   'extra' => "",
               ))
               ->execute();
@@ -1814,14 +1820,14 @@ function itg_widget_node_update($node) {
     $new_weight_to_be_inserted = array();
 
     foreach ($updated_categories as $category) {
-      $new_weight_to_be_inserted[$category] = -1*$order;
+      $new_weight_to_be_inserted[$category] = -1 * $order;
       foreach ($result as $db_values) {
         if ($db_values->cat_id == $category) {
           $new_weight_to_be_inserted[$category] = $db_values->weight;
         }
       }
     }
-    
+
 
     foreach ($new_weight_to_be_inserted as $category_tid => $weight) {
       $query = db_merge('itg_widget_order')

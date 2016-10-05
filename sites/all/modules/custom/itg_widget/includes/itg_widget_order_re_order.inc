@@ -426,39 +426,20 @@ function update_itg_widget_order_table_data($form, &$form_state) {
   $widget = _get_widget_name($view_name, $current_display);
   // Take draggable view input value after submit the form.
   $draggable_view_data = $form_state['input']['draggableviews'];
-  // Content type from url.
-  $content_type = $_GET['type'];
   // Category tid from url.
   $cat_id = $_GET['category_tid'];
-  // If user dont make changes in draggable view then all the weights remain zero.
-  // So check is required here. If al weight are 0 then do not execute query w.r.t. into itg_widget_order table.
-  $weight_track_flag = FALSE;
+  // Now insert new entry in itg_widget_order table of combination
   foreach ($draggable_view_data as $key => $node_data) {
-    if ($node_data['weight'] > 0) {
-      // Found changes in draggable view content
-      $weight_track_flag = TRUE;
-    }
-  }
-
-  // IF we got there is changes made in draggable view order.
-  if (1) {
-    // Now insert new entry in itg_widget_order table of combination
-    foreach ($draggable_view_data as $key => $node_data) {
-      $DBWriteStatus = db_merge('itg_widget_order')
-              ->key(array(
-                  'nid' => $node_data['id'],
-                  'widget' => $widget,
-                  'cat_id' => $cat_id,
-              ))
-              ->fields(array(
-                  'weight' => $node_data['weight'],
-              ))
-              ->execute();
-    }
-  }
-  // If there is not chnages found in draggable view order then simply give an message.
-  else {
-    drupal_set_message(t("This ordering is already saved."));
+    $DBWriteStatus = db_merge('itg_widget_order')
+            ->key(array(
+                'nid' => $node_data['id'],
+                'widget' => $widget,
+                'cat_id' => $cat_id,
+            ))
+            ->fields(array(
+                'weight' => $node_data['weight'],
+            ))
+            ->execute();
   }
 }
 
