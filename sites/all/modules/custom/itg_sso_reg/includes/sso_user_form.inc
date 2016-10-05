@@ -253,7 +253,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#title' => '',
         '#description' => '',
         '#id' => '',
-        '#type' => 'textfield',
+        '#type' => 'hidden',
         '#value' => $form_state['values']['domain_info'],
         '#attributes' => array('placeholder' => t('')),
         
