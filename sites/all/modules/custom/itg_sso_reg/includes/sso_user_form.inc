@@ -298,7 +298,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
     );
   }
   // We only want a submit button if we are on the last step of the form
-  if ($form_state['step'] ==2) {
+  if ($form_state['step'] == 2) {
 
     $form['buttons']['submit'] = array
       (
