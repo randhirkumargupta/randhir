@@ -8,9 +8,12 @@
 
       // If one question at a time
       $('#itg-quiz-quiz-form .quiz-submit').mousedown(function() {
+        var quizTaken = $('body').find('input[name="quiz_taken"]').val();
         $(this).ajaxSuccess(function() {
-          $('.question-container').hide();
-          $(this).parents('.question-container').next().show();
+          if (quizTaken == 'no') {
+            $('.question-container').hide();
+            $(this).parents('.question-container').next().show();
+          }
         });
       });
     }

@@ -50,6 +50,14 @@ function itg_quiz_quiz_form() {
     // Creation of quiz form 
     $num = 0;
     $form = array();
+    
+    // Check this survey has been attempted by current user OR not.
+    $cookie_name = 'Drupal_visitor_itgcms_quiz_' . $node->nid;
+    if (isset($_COOKIE[$cookie_name])) {
+      $quiz_taken = 'yes';
+    } else {
+      $quiz_taken = 'no';
+    }
 
     // Quiz global settings
     $question_display = $node->field_quiz_display_sequence[LANGUAGE_NONE][0]['value'];
@@ -322,6 +330,11 @@ function itg_quiz_quiz_form() {
         '#type' => 'hidden',
         '#value' => $node->title,
     );
+    
+    $form['quiz_taken'] = array(
+        '#type' => 'hidden',
+        '#value' => $quiz_taken
+    );
 
     $form['quiz_type'] = array(
         '#type' => 'hidden',
@@ -353,6 +366,18 @@ function itg_quiz_quiz_form() {
 
   $form['#theme'] = array('itg_quiz_form', $node);
   return $form;
+}
+
+/**
+ * Validate function of quiz form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_quiz_quiz_form_validate($form, &$form_state) {
+  $cookie_name = 'Drupal_visitor_itgcms_quiz_' . $form_state['values']['nid'];
+  if (isset($_COOKIE[$cookie_name])) {
+    form_set_error('answer_option', t('Sorry! You can not proceed, you have already attempted this quiz.'));
+  } 
 }
 
 /**
@@ -528,7 +553,9 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
       unset($_SESSION['score_radios']);
       unset($_SESSION['score_checkboxes']);
       unset($_SESSION['quiz_unique_key']);
-
+      
+      // Set coockie for current quiz attempted by user
+      user_cookie_save(array('itgcms_quiz_'.$form_state['values']['nid'] => 1));
   }
 }
 
