@@ -1523,6 +1523,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     .product-pic{
       height: 172px;
       cursor: pointer;
+      img{
+        width: 123px;
+        height: 172px;
+      }
     }
     .product-title{
       text-transform: uppercase;

@@ -1612,6 +1612,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   height: 172px;
   cursor: pointer;
 }
+.view-redeem-points .product-wrapper .product-pic img, .view-product .product-wrapper .product-pic img {
+  width: 123px;
+  height: 172px;
+}
 .view-redeem-points .product-wrapper .product-title, .view-product .product-wrapper .product-title {
   text-transform: uppercase;
   font: 400 16px/18px Roboto;
