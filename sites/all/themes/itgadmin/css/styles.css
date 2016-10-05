@@ -8066,6 +8066,17 @@ div.node #comments h2 {
 .node-category-form #edit-term-state-wrap {
   padding: 0 20px;
 }
+.node-category-form #edit-term-state-wrap .form-item-term-state {
+  position: relative;
+}
+.node-category-form #edit-term-state-wrap .form-item-term-state div.description {
+  display: none;
+  /*      @extend .desc-popup;
+        left: 600px;*/
+}
+.node-category-form #edit-term-state-wrap .form-item-term-state:hover div.description {
+  /*        display: block;*/
+}
 
 .node-category-form #edit-term-state-wrap .itg-term-state > label {
   padding: 0 20px;
