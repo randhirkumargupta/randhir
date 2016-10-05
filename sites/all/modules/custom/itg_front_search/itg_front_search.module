@@ -111,7 +111,8 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     $form['hash']['#size'] = 5;
     $form['hash']['#multiple'] = TRUE;
   } if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'archive_story') {
-
+    
+    $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
     $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $request_url_array = explode('/', $_SERVER['REQUEST_URI']);
     if (is_array($request_url_array) && count($request_url_array) > 0) {
@@ -128,7 +129,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
         $hash = '2e1u4m';
       }
     }
-
+    
     $form['bundle_name']['#default_value'] = 'Story';
     $form['bundle_name']['#value'] = 'Story';
     $form['hash']['#default_value'] = $hash;
@@ -137,6 +138,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       '#type' => 'date_popup',
       '#title' => t('From'),
       '#date_format' => 'Y-m-d',
+      '#default_value' => $dat_1_day_ago, 
       '#date_year_range' => '-1:+1',
       '#description' => '',
       '#size' => 10,
@@ -284,13 +286,18 @@ function itg_front_search_views_pre_render(&$view) {
           }
         }
         $_GET['hash'] = $hash;
+        if(empty($_GET['ds_changed']['date'])) {
+          $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
+          $_GET['ds_changed']['date'] = $dat_1_day_ago;
+        }
+       // pr($_GET);
         $url .= l($val, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
       }
       else {
         $url .= l($key, $search_url, array('query' => $_GET, 'attributes' => array('class' => $lnk_class))) . ' ';
       }
     }
-
+    
     $form['suggest_links'] = array(
       '#markup' => $url,
       '#prefix' => '<div class="suggest_links">',
