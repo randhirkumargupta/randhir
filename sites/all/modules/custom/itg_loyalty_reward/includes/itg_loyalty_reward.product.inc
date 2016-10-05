@@ -230,10 +230,12 @@ function _get_order_item() {
           'path' => $product['product']['image']['uri'],
         )
       );
-      $output = '<div>';
-      $output .= $product_pic . 'Magzine ID: ' . $product['product']['nid'];
-      $output .= 'Quantity: ' . $product['quantity'];
-      $output .= 'Date of Purchase: ' . format_date($value->created, 'custom_date_d_m_y_');
+      $output = '<div class="checkout-details">';
+      $output = '<div class="checkout-inner">';
+      $output .= $product_pic . '<div class="checkout-inner-details"><div><span>Magzine ID: </span><strong>' . $product['product']['nid'] . '</strong></div>';
+      $output .= '<div><span>Quantity: </span><strong>' . $product['quantity'] . '</strong></div>';
+      $output .= '<div><span>Date of Purchase: </span><strong>' . format_date($value->created, 'custom_date_d_m_y_') . '</strong></div></div>';
+      $output .= '</div>';
       $output .= '</div>';
       $data[] = array(
         $output,              
