@@ -228,24 +228,6 @@ jQuery(document).ready(function () {
     jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
     jQuery('.auto-block_1 .widget-title, .tech-block_1 .widget-title').prependTo('.auto-block-2 .special-top-news');
     
-//    Event oscar page as discus with sharvan 
-    var winWidth = window.innerWidth;
-            if(winWidth > 680){
-            var getLength = jQuery(".oscar-slider .bottom-slider li").length;    
-            jQuery(".oscar-slider .bottom-slider ul").css("width", getLength*188 +"px");                
-                    jQuery(".defalt-bar").mCustomScrollbar({
-                        axis:"x",                    
-                    });                       
-            }else{
-                jQuery(".oscar-slider .bottom-slider ul").slick({
-                    vertical: true,
-                    slidesToShow: 2,
-                    dots: false,
-                    nextArrow:"<i class='fa fa-chevron-down'></i>",
-                    prevArrow:"<i class='fa fa-chevron-up'></i>"                    
-                });
-            }
-
     
     
     

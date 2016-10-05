@@ -106,7 +106,7 @@ if ($theme != 'itgadmin') {
             <div class="">
               <div class="itg-widget">
                   <div class="droppable itg-layout-672 <?php print $gray_bg_layout; ?>">
-                  <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
+                  <div id="tech-new-block" class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
                       <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-1']['block_title'])) { ?>
                                 <span class="widget-title"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
                                  <?php } ?>

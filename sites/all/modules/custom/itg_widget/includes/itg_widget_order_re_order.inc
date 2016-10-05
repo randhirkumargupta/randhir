@@ -51,7 +51,7 @@ function itg_widget_form_views_form_special_auto_review_widget_special_auto_revi
           "#type" => "textfield",
           "#size" => '',
           // get value which is saved into custom_table.
-          '#default_value' => _get_custom_text_value_from_nid($default_value),
+          '#default_value' => _get_custom_text_value_from_nid($default_value,'special_auto_review_content'),
           '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
       );
     }
@@ -101,7 +101,7 @@ function itg_widget_form_views_form_yearender_top_news_and_top_videos_yearend_le
           "#type" => "textfield",
           "#size" => '',
           // get value which is saved into custom_table.
-          '#default_value' => _get_custom_text_value_from_nid($default_value),
+          '#default_value' => _get_custom_text_value_from_nid($default_value,'yearender_left_news_video'),
           '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
       );
     }
@@ -449,11 +449,12 @@ function update_itg_widget_order_table_data($form, &$form_state) {
  * @param int $nid
  * @return array
  */
-function _get_custom_text_value_from_nid($nid) {
+function _get_custom_text_value_from_nid($nid,$widget='dont_miss_content_widget') {
   $result = db_select('itg_widget_order', 'iwo')
                   ->fields('iwo', array('extra'))
                   ->condition('iwo.nid', $nid)
-                  ->condition('iwo.widget', 'dont_miss_content_widget')
+                  ->condition('iwo.widget', $widget)
                   ->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['extra'];
 }
+
