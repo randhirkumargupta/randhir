@@ -287,11 +287,39 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
       $i++;
     }
+    elseif (empty($_GET['bundle_name']) && $_GET['q'] == 'online-archive-story') {
+      $search_array = $query->getSolrParams();
+      $dat_1_day_ago = date('Y-m-d', strtotime('-1 days'));
+        $val_str = '[' . $dat_1_day_ago . 'T00:00:00Z/DAY TO ' . $dat_1_day_ago . 'T00:00:00Z/DAY+1DAY]';
+         $request_url_array = explode('/', $_SERVER['REQUEST_URI']);
+        if (is_array($request_url_array) && count($request_url_array) > 0) {
+          if (in_array('dev', $request_url_array)) {
+            $hash = '5fyeg7';
+          }
+          elseif (in_array('qa', $request_url_array)) {
+            $hash = '2e1u4m';
+          }
+          elseif (in_array('stage', $request_url_array)) {
+            $hash = 'e49it8';
+          }
+          else {
+            $hash = '2e1u4m';
+          }
+        }
+        $str = 'bundle_name:(Story) AND ';
+        $str .= 'hash:(' . $hash . ') AND ';
+        $str .= 'ds_changed:(' . $val_str . ')';
+      $query->replaceParam("fq", '(' . $str . ')');
+    }
   }
+
+
   
   if ($_GET['q'] == 'site-search') {
     $str = ltrim(trim($str), "AND");
   }
+  
+  
 
   if ($_GET['q'] == 'searchimage') {
     $search_array = $query->getSolrParams();
@@ -309,7 +337,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $query->replaceParam("fq", '(' . $str . ')');
     }
   }
-  //p($query->getSolrParams());
+ // pr($query->getSolrParams());
 }
 
 /**

@@ -127,7 +127,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     <div class="widget-settings">
                       <div class="widget-title-wrapper">
                         <?php if (isset($widget_data['itg-block-1']['block_title'])) {?>
-                        <span class="widget-title" data-id="itg-block-1"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
+<!--                        <span class="widget-title" data-id="itg-block-1"><?php print $widget_data['itg-block-1']['block_title']; ?></span>-->
                         <?php } ?>
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id" placeholder="Enter Title" />
                       </div>
