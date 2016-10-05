@@ -50,20 +50,7 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
-  $form['auto_road_trips_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Road Trips'),
-      '#default_value' => variable_get('auto_road_trips_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['auto_tips_and_tricks_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Tips and Tricks'),
-      '#default_value' => variable_get('auto_tips_and_tricks_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
+
 
   $form['tech_for_widget'] = array(
       '#type' => 'textfield',
@@ -72,63 +59,36 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
-  $form['tech_tips_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Tech Tips'),
-      '#default_value' => variable_get('tech_tips_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['in_depth_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Technologies In Depth'),
-      '#default_value' => variable_get('in_depth_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['talking_point_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Technologies Talking Point'),
-      '#default_value' => variable_get('talking_point_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['buying_guid_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Buying Guid'),
-      '#default_value' => variable_get('buying_guid_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['watch_for_tech_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Technologies Watch'),
-      '#default_value' => variable_get('watch_for_tech_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-    $form['entertainment_oscar_for_widget'] = array(
+
+  $form['entertainment_oscar_for_widget'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter tid of Entertainment Oscar Watch'),
       '#default_value' => variable_get('entertainment_oscar_for_widget'),
       '#size' => 20,
       '#maxlength' => 20,
   );
-    $form['entertainment_oscar_news_for_widget'] = array(
+  $form['entertainment_oscar_news_for_widget'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter tid of Entertainment Oscar News Watch'),
       '#default_value' => variable_get('entertainment_oscar_news_for_widget'),
       '#size' => 20,
       '#maxlength' => 20,
   );
-    $form['entertainment_oscar_features_for_widget'] = array(
+  $form['entertainment_oscar_features_for_widget'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter tid of Entertainment Features Watch'),
       '#default_value' => variable_get('entertainment_oscar_features_for_widget'),
       '#size' => 20,
       '#maxlength' => 20,
   );
-  
+  $form['movie_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of movie'),
+      '#default_value' => variable_get('movie_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+
   return system_settings_form($form);
 }
 
@@ -1040,56 +1000,42 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
   }
   if ($view->name == 'auto' && $view->current_display == 'block_1') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
+    $query->where[1]['conditions'][3]['value'] = variable_get('auto_for_widget');
   }
-  if ($view->name == 'auto' && $view->current_display == 'block_3') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('auto_road_trips_for_widget');
-  }
-  if ($view->name == 'auto' && $view->current_display == 'block_4') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('auto_tips_and_tricks_for_widget');
-  }
+
   if ($view->name == 'auto' && $view->current_display == 'block_5') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('auto_for_widget');
+    $query->where[1]['conditions'][3]['value'] = variable_get('auto_for_widget');
   }
 
   // Start alter for tech
   if ($view->name == 'tech' && $view->current_display == 'block_1') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
+    $query->where[1]['conditions'][3]['value'] = variable_get('tech_for_widget');
   }
   if ($view->name == 'tech' && $view->current_display == 'block_2') {
     $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
   }
-  if ($view->name == 'tech' && $view->current_display == 'block_3') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('tech_tips_for_tech_widget');
-  }
-  if ($view->name == 'tech' && $view->current_display == 'block_4') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('talking_point_for_tech_widget');
-  }
+
   if ($view->name == 'tech' && $view->current_display == 'block_5') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('tech_for_widget');
+    $query->where[1]['conditions'][3]['value'] = variable_get('tech_for_widget');
   }
-  if ($view->name == 'tech' && $view->current_display == 'block_6') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('in_depth_for_tech_widget');
-  }
-  if ($view->name == 'tech' && $view->current_display == 'block_7') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('buying_guid_for_tech_widget');
-  }
+
   if ($view->name == 'tech' && $view->current_display == 'block_8') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('watch_for_tech_widget');
+    $query->where[1]['conditions'][3]['value'] = variable_get('tech_for_widget');
   }
-  if ($view->name == 'special_entertainment' && $view->current_display == 'entertainment_oscar_news') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_news_for_widget');
-  }
-  if ($view->name == 'special_entertainment' && $view->current_display == 'entertainment_oscar_features') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_features_for_widget');
-  }
+
+  
    if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos'|| $view->current_display == 'oscar_photos')) {
+    $query->where[1]['conditions'][3]['value'] = variable_get('entertainment_oscar_for_widget');
+  }
+  if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
     $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_for_widget');
   }
-   if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
-    $query->where[1]['conditions'][2]['value'] = variable_get('entertainment_oscar_for_widget');
+
+   if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider'|| $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top' || $view->current_display == 'special_movie_video')) {
+    $query->where[1]['conditions'][3]['value'] = variable_get('movie_for_widget');
+
   }
- //pr($query->where[1]); 
+
 }
 
 /**
@@ -1798,12 +1744,12 @@ function get_rhs_block_display_condtion($delta = '') {
       }
       break;
     case 'top_takes_videos_widget':
-      if ($arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+      if ($arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
         return TRUE;
       }
       break;
     case 'we_may_suggest':
-      if ($arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+      if ($arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
         return TRUE;
       }
       break;
@@ -1829,6 +1775,63 @@ function itg_widget_node_insert($node) {
                   'content_type' => $node->type,
                   'cat_id' => $category['tid'],
                   'weight' => -1 * abs($node->created),
+                  'extra' => "",
+              ))
+              ->execute();
+    }
+  }
+}
+
+/**
+ * Implements hook__node_insert().
+ * {@inheritdoc}
+ */
+function itg_widget_node_update($node) {
+  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    $nid = $node->nid;
+    $cat_id = $node->field_story_category['und'];
+    $order = $node->created;
+    $updated_categories = array();
+
+    $query = db_select('itg_widget_order', 'iwo')
+            ->fields('iwo', array('cat_id', 'weight'))
+            ->condition('iwo.widget', 'section_wise_widget')
+            ->condition('iwo.nid', $nid)
+            ->groupBy('iwo.cat_id');
+
+    $result = $query->execute()->fetchAll();
+
+    foreach ($cat_id as $category) {
+      $updated_categories[] = $category['tid'];
+    }
+
+    // Delete unused category from table.
+    $strg = implode(',', $updated_categories);
+    $sqlInsert = "DELETE from {itg_widget_order} where widget='section_wise_widget' and nid = '" . $nid . "' and cat_id not in ($strg)";
+    db_query($sqlInsert);
+
+
+    $new_weight_to_be_inserted = array();
+
+    foreach ($updated_categories as $category) {
+      $new_weight_to_be_inserted[$category] = -1*$order;
+      foreach ($result as $db_values) {
+        if ($db_values->cat_id == $category) {
+          $new_weight_to_be_inserted[$category] = $db_values->weight;
+        }
+      }
+    }
+    
+
+    foreach ($new_weight_to_be_inserted as $category_tid => $weight) {
+      $query = db_merge('itg_widget_order')
+              ->key(array('nid' => $nid, 'widget' => 'section_wise_widget', 'cat_id' => $category_tid))
+              ->fields(array(
+                  'nid' => $nid,
+                  'widget' => 'section_wise_widget',
+                  'content_type' => $node->type,
+                  'cat_id' => $category_tid,
+                  'weight' => $weight,
                   'extra' => "",
               ))
               ->execute();

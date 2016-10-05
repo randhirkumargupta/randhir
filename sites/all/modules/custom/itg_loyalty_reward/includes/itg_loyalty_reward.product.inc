@@ -189,9 +189,9 @@ function itg_loyalty_reward_removecart($nid, $name) {
 function itg_loyalty_reward_order() {
   global $user;
   $header = array(    
-    t('Product Description'),      
-    t('Point'),
-    t('Order No'),
+    t('Product Description'),
+    t('Points'),
+    t('Order No'),    
   );
   // Get order detail.
   $rows = _get_order_item();
@@ -200,7 +200,7 @@ function itg_loyalty_reward_order() {
       'header' => $header, 
       'rows' => $rows, 
       'attributes' => array('class' => array('mytable'))  
-    )
+    )    
   );  
 }
 
@@ -217,27 +217,31 @@ function _get_order_item() {
   global $user;
   $itg_result = array();
   $itg_query = db_select('itg_loyalty_reward_order', 'itg')
-      ->fields('itg', array('order_id', 'product_information'))
+      ->fields('itg', array('order_id', 'product_information', 'created'))
       ->condition('uid', $user->uid);
   $itg_result = $itg_query->execute()->fetchAll();  
   $data = array();
   foreach ($itg_result as $value) {    
-    $products = unserialize($value->product_information);        
-    foreach ($products['cart-items'] as $product) {      
+    $products = unserialize($value->product_information);    
+    foreach ($products['cart-items'] as $product) {            
       $product_pic = theme(
         'image_style', array(
-          'style_name' => 'magazine_rhs_100x140',
+          'style_name' => 'cart_172x240',
           'path' => $product['product']['image']['uri'],
         )
       );
-      $output = '<div>';
-      $output .= $product_pic . 'Magzine ID: ' . $product['product']['nid'];
+      $output = '<div class="checkout-details">';
+      $output = '<div class="checkout-inner">';
+      $output .= $product_pic . '<div class="checkout-inner-details"><div><span>Magzine ID: </span><strong>' . $product['product']['nid'] . '</strong></div>';
+      $output .= '<div><span>Quantity: </span><strong>' . $product['quantity'] . '</strong></div>';
+      $output .= '<div><span>Date of Purchase: </span><strong>' . format_date($value->created, 'custom_date_d_m_y_') . '</strong></div></div>';
+      $output .= '</div>';
       $output .= '</div>';
       $data[] = array(
-        $output,
-        $product['product']['points'],
-        $value->order_id,
-      );
+        $output,              
+        $product['product']['points'] * $product['quantity'],
+        $value->order_id,                
+      );      
     }
   }
   

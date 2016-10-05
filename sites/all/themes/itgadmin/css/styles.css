@@ -474,6 +474,7 @@ img {
 .node-astro-form .form-field-type-image .image-widget-data,
 .node-issue-form .form-field-type-image .image-widget-data,
 .node-newsletter-form .form-field-type-image .image-widget-data,
+.node-recipe-form .form-field-type-image .image-widget-data,
 .node-newsletter_templates-form .form-field-type-image .image-widget-data,
 .node-mega_review_critic-form .form-field-type-image .image-widget-data, #main, .header, .header .container, .form-type-autocomplete-deluxe div.autocomplete-deluxe-container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .breadcrumb ol li, .user-role a, .dashboard-tab li, [id*="field-task-task-idea-values"] + div.clearfix, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, #block-itg-event-backend-event-backend-tab-form-block .block-itg-story-list a, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating .form-type-checkbox, [id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox, [id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox input[type="checkbox"], [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox input[type="checkbox"], .itg-popup .popup-head, [id*="itg-social-media-form"] > div .form-item-itg-smi .form-item, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twit-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twit-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-video-upload, .view-category-manager .cmd-heading, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, .photogallery-list.flexslider, .photogallery-list.flexslider .slides li, #comments .comment, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2, [id*="field-survey-add-questions-values"] > tbody > tr > td, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, .edit-link,
@@ -1225,6 +1226,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-astro-form .form-field-type-image .form-type-managed-file > label,
 .node-issue-form .form-field-type-image .form-type-managed-file > label,
 .node-newsletter-form .form-field-type-image .form-type-managed-file > label,
+.node-recipe-form .form-field-type-image .form-type-managed-file > label,
 .node-newsletter_templates-form .form-field-type-image .form-type-managed-file > label,
 .node-mega_review_critic-form .form-field-type-image .form-type-managed-file > label {
   padding-bottom: 5px;
@@ -1237,6 +1239,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-astro-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-issue-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-newsletter-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-recipe-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-newsletter_templates-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-mega_review_critic-form .form-field-type-image .image-widget-data .form-submit[value="Remove"] {
   left: 400px;
@@ -1248,6 +1251,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-astro-form .form-field-type-image a.filefield-sources-imce-browse,
 .node-issue-form .form-field-type-image a.filefield-sources-imce-browse,
 .node-newsletter-form .form-field-type-image a.filefield-sources-imce-browse,
+.node-recipe-form .form-field-type-image a.filefield-sources-imce-browse,
 .node-newsletter_templates-form .form-field-type-image a.filefield-sources-imce-browse,
 .node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse {
   height: 100%;
@@ -1263,6 +1267,7 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-astro-form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-issue-form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-newsletter-form .form-field-type-image a.filefield-sources-imce-browse:after,
+.node-recipe-form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-newsletter_templates-form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse:after {
   background-color: #fff;
@@ -7349,6 +7354,9 @@ div.node #comments h2 {
 .node-story-form .itg-form-main h2.active:after {
   content: '\f056';
 }
+.node-story-form .itg-form-main h2 + div {
+  overflow: visible !important;
+}
 .node-story-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story {
   padding-left: 200px;
 }
@@ -7685,6 +7693,35 @@ div.node #comments h2 {
 .node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes > label {
   display: none;
 }
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured {
+  position: relative;
+  margin: 5px 0;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label {
+  border-radius: 2px;
+  padding: 5px 10px 5px 32px;
+  background-color: #000;
+  color: #1fb5ad;
+  display: inline-block;
+  vertical-align: top;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label:before {
+  content: '\f096';
+  position: absolute;
+  font-family: 'FontAwesome';
+  font-size: 20px;
+  top: 5px;
+  color: #1fb5ad;
+  left: 10px;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+}
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox:checked + label:before {
+  content: '\f046';
+}
 .node-story-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes > label {
   float: left;
   width: 100px;
@@ -7940,21 +7977,21 @@ div.node #comments h2 {
   border-radius: 50%;
   background-color: #a00606;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox {
   position: relative;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio > label {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox > label {
   padding: 10px;
   border: 1px solid #e1e1e1;
   display: block;
   width: calc(100% - 30px);
   color: #777;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-radio, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-checkbox {
   position: absolute;
   opacity: 0;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio:checked + label {
+[id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio .form-checkbox:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox .form-checkbox:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio .form-checkbox:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-radio:checked + label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox .form-checkbox:checked + label {
   background-color: #f6e90b;
   color: #000;
 }
@@ -7971,10 +8008,10 @@ div.node #comments h2 {
   width: 170px;
   height: 127px;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios {
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-checkboxes {
   overflow: hidden;
 }
-[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-radio > label {
+[id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-radios .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-checkboxes .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container + .form-type-checkboxes .form-type-checkbox > label {
   height: 127px;
 }
 [id*="itg-quiz-quiz-form"] .quiz-submit {
@@ -8017,4 +8054,11 @@ div.node #comments h2 {
   overflow: hidden;
   margin-top: 20px;
   -webkit-transition: scale;
+}
+
+.page-node-add-recipe .form-managed-file .image-widget-data {
+  float: left;
+}
+.page-node-add-recipe .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+  left: 375px;
 }

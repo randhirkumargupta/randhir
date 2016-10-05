@@ -140,6 +140,16 @@ function itg_layout_manager_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['layout_custom_widget_list_block'] = array(
+    'info' => t('Layout custom widget list block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  $blocks['layout_special_widget_list_block'] = array(
+    'info' => t('Layout Special widget list block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -234,6 +244,16 @@ function itg_layout_manager_block_view($delta = '') {
       $block['content'] = theme('header_so_sorry_block', array('data' => $data));
       break;
     
+    case 'layout_custom_widget_list_block':      
+      $widget_array['custom_widget'] = get_html_custom_widget_list();
+      $block['content'] = theme('layout_custom_widgets_list_block', array('data' => $widget_array));
+    break;
+    
+    case 'layout_special_widget_list_block':      
+      $widget_array['special_widget'] = get_all_widgets_list_by_setting_page();
+      $block['content'] = theme('layout_special_widgets_list_block', array('data' => $widget_array));
+    break;
+    
   }
   
   return $block;
@@ -305,6 +325,16 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
       'template' => 'itg-header-sosorry',
       'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
     ),
+    'layout_custom_widgets_list_block' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-custom-widgets-list-block',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
+    'layout_special_widgets_list_block' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-special-widgets-list-block',      
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',     
+    ),
   );
   
   return $themes;
@@ -333,7 +363,9 @@ function itg_layout_manager_preprocess_page(&$vars) {
   
   //section template display on front
   if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]))&& $theme == FRONT_THEME_NAME) {   
-    
+     drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+    drupal_add_js('', array('type' => 'inline', 'scope' => 'footer'));
     $query = db_select('taxonomy_term_hierarchy', 'tth');
     $query->fields('tth', array('parent'));
     $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = tth.tid');
@@ -360,3 +392,4 @@ function itg_layout_manager_preprocess_page(&$vars) {
     
   }
 }
+

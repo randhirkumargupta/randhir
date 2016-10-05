@@ -735,21 +735,29 @@ img{
 
 /*CSS start special auto page */
 .itg-layout-container.auto-layout-page{
-    .itg-top-section{
-        .top-colum-1, .top-colum-2{
-            .droppable{
-                height: 608px;
-            }            
-        }
-        .top-colum-3{
-            .droppable{
-                height: 247px;
-                .widget-wrapper{
-                    overflow: auto;
-                }
+    .m-bottom40{
+        margin-bottom: 40px;
+    }
+        .itg-layout-605{
+        height: 605px;
+        overflow: hidden;
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 245px;
+                overflow: hidden;
             }
         }
     }
+    .auto-block-2{
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }    
     .itg-h450-section .col-md-4 .droppable .widget-wrapper {
         overflow: auto;
     }
@@ -849,6 +857,29 @@ img{
 /*CSS End special auto page */
 /*CSS Start special tech page */
 .tech-layout-page{
+    .m-bottom40{
+        margin-bottom: 40px;
+    }
+     .itg-layout-672{
+        height: 672px;
+        overflow: hidden;
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 300px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-2{
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }
      .itg-h385-section{
         .droppable {
             height: 385px;
@@ -999,4 +1030,99 @@ img{
         }
     }
 }
+/*CSS start for special osscar*/
+.oscar-layout-page{
+    .osscar-video{
+        background: transparent;   
+        ul .dont-miss-listing + .dont-miss-listing {
+            padding: 0 0px 25px 0px;
+        }
+    }    
+    .oscor-photo{
+        .col-md-6{
+            margin-top: 0px;
+            &:nth-child(n+3){
+                margin-top: 30px;
+            }
+        
+        .title{
+            h3{
+                padding: 15px;
+                color: #000;
+                font-size: 18px;
+                background-image:
+                    linear-gradient(
+                    #fdcf2e, #fabb1d
+                );
+                font-weight: 700;
+            }
+        }
+        }
+    }
+    .oscar-features{
+        .col-md-6{
+            overflow: hidden;
+            margin-top: 0px;
+            &:nth-child(n+3){
+                margin-top: 30px;
+            }
+            span{
+                @include display-inline;
+                float: left;
+                margin-right: 15px;
+            }
+
+        }
+    }
+    .oscar-news{
+        a{
+            display: block;
+        }
+        h3{
+            font-weight: 700;
+            margin: 10px 0 25px 0px;
+        }
+        p{
+            padding-top: 10px;
+        }
+    }
+    .oscar-slider{
+        .top-slider{
+            background: #000;
+            padding: 10px 10px 0 10px;           
+            .common-img{
+                display: none;
+            }
+             .first-image{
+                display: block;
+            }
+        }
+        .bottom-slider { 
+            background: #171717;
+            ul{
+                overflow: hidden;
+                li{                
+                    background: #171717;
+                    padding: 25px 10px;
+                    width: 188px;
+                    float: left;
+                    height: 262px;                
+                p{
+                    margin-top: 10px;
+                }
+                a{
+                    color:#b4b4b4;
+                }
+                &:hover{
+                    background: #393939;
+                    a{
+                        color: #fff;
+                    } 
+                }
+            }
+            }            
+        }
+    }
+}
+/*CSS end for special osscar*/
 /*CSS End for oscar page*/

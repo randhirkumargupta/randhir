@@ -7,17 +7,17 @@
         attach: function (context, settings) {
             // Module code start.
             // Code to show detail popup
-            $('.view-redeem-points').on('click', '.product-pic', function () {
+            $('.product-wrapper').on('click', '.product-pic', function () {
                 var pic = $(this).html();
-                var added_on = "April 25, 216";
+                var added_on = $(this).children('span').html();
                 var title = $(this).siblings('.product-title').html();
-                var desc = "Cras ex mauris; euismod vitae hendrerit ac, molestie nec mi. Vestibulum felis nisl; volutpat eget nisl nec, accumsan ultricies turpis. Donec et lectus ut ex maximus aliquam vel non nulla.";
+                var desc = $(this).siblings('.product-description').html();
                 var redeem_points = $(this).siblings('.redeem-points').html();
                 var actions = $(this).siblings('.product-actions').html();
                 var popup_html = '<div class="cart-popup-wrapper">\n\
                                 <div class="cart-popup"><a class="cart-close" href="javascript:;"><i class="fa fa-times" aria-hidden="true"></i></a>\n\
-                                <div class="col-md-3">' + pic + '</div>\n\
-                                <div class="col-md-9"><h2>' + title + '</h2><p>' + desc + '</p>\n\
+                                <div class="col-md-4 pic">' + pic + '<span>' + added_on + '</span></div>\n\
+                                <div class="col-md-8"><h2>' + title + '</h2><p>' + desc + '</p>\n\
                                 <div class="redeem-points"><strong>You can claim this product for:</strong><span>' + redeem_points + '</span></div>\n\
                                 <div class="cart-actions">' + actions + '</div></div></div></div>';
                 $('body').addClass('has-cart-popup').remove('.cart-popup-wrapper');
@@ -95,9 +95,9 @@
                     }
                 });
             }
-            
+
             // Code for points earning callbacks.
-            $('.share, .like, .visit').on('click', function() {
+            $('.share, .like, .visit').on('click', function () {
                 //console.log(Drupal.settings.itg_loyalty_reward);
                 var base_url = Drupal.settings.itg_loyalty_reward.base_url;
                 var event_type = $(this).attr('class');
@@ -105,14 +105,34 @@
                     url: base_url + '/earn-loyalty-point',
                     type: 'POST',
                     dataType: 'JSON',
-                    data: {'type' : event_type},
-                    success: function(itg) {
-                        console.log(itg);
+                    data: {'type': event_type},
+                    success: function (itg) {
+                        
                     }
                 });
             });
             // Code end for points earning callbacks.
-            
+
+            // Code for product page.
+            if ($('body').hasClass('page-product')) {
+                $("#edit-itg-points").appendTo("#edit-field-lrp-loyalty-points-value-wrapper");
+                $('#edit-itg-points').on('change', function () {
+                    var points = $(this).find('option:selected').val();
+                    var spliteed_points = points.split("-");
+                    $('#edit-field-lrp-loyalty-points-value-min').val(spliteed_points[0]);
+                    $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
+                });
+            }
+            $('#views-exposed-form-product-page').on('submit', function (event) {
+                var points = $('#edit-itg-points').find('option:selected').val();
+                var spliteed_points = points.split("-");
+                $('#edit-field-lrp-loyalty-points-value-min').val(spliteed_points[0]);
+                $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
+
+            });
+
+            // Code end for product page.
+
             // Module code ends.
         }
     };

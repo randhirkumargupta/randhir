@@ -8,37 +8,41 @@
     <?php if (count($data) > 0): ?>
       <?php $cart_total = 0; ?>
       <?php foreach ($data as $key => $cart_detail): ?>    
-        <div class="row">
-            <div class="cart-image">
+        <div class="cart-row">
+        <div class="cart-checkout-list">
+            <div class="cart-image col-md-2 col-sm-2">
                 <?php
                 $product_pic = theme(
                     'image_style', array(
-                  'style_name' => 'magazine_rhs_100x140',
+                  'style_name' => 'cart_172x240',
                   'path' => $cart_detail['product']['image']['uri'],
                     )
                 );
                 print $product_pic;
                 ?>
             </div>
-            <div class="product-details">
-                <span>Title: <?php print $cart_detail['product']['title']; ?></span>
-                <span>Magzine ID: <?php print $cart_detail['product']['nid']; ?></span>                
+            <div class="product-details col-md-6 col-sm-6">
+              <div><span>Title:</span><strong><?php print $cart_detail['product']['title']; ?></strong></div>
+              <div><span>Magzine ID:</span><strong><?php print $cart_detail['product']['nid']; ?></strong></div>              
             </div>
-            <div class="cart-action">
+            <div class="cart-action col-md-4 col-sm-4">
                 <div class="cart-action-links">
                     <span>Item (<?php print $cart_detail['quantity']; ?>)</span>
-                    <span><?php print l(t('Delete (X)'), 'cart/delete/' . $cart_detail['product']['nid'] . '/' . $cart_detail['product']['title'], array('query' => array('destination' => arg(0)))); ?></span>
+                    <?php print l(t('Delete (X)'), 'cart/delete/' . $cart_detail['product']['nid'] . '/' . $cart_detail['product']['title'], array('query' => array('destination' => arg(0)))); ?>
                 </div>
                 <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
                 <div class="points"><?php print $item_total . ' ' . t('Points'); ?></div>
             </div>
+          </div>
         </div>
         <?php $cart_total += $item_total; ?> 
       <?php endforeach; ?>
       <div class="cart-total-block">
-          <div class="grand-total">GRAND TOTAL <span><?php print $cart_total; ?> Points</span></div>
+        <div class="cart-total-inner">
+          <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
           <div class="checkout"><?php print l(t('REDEEM POINTS'), 'checkout'); ?></div>
-          <div class="points-balance">Balance after redemption <span>2,000 Points</span>
+          <div class="points-balance"><span>Balance after redemption</span><span>2,000 Points</span></div>
+        </div>
       </div>
     <?php else: ?>
       <?php print t('There are no items in this cart.') ?>

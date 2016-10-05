@@ -315,16 +315,29 @@ function features_for_loyalty_and_rewards_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Product';
+  $handler->display->display_options['title'] = 'Products';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'view product page';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'col-md-4';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Result Found!';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -361,17 +374,27 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_default_classes'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_lrp_image']['id'] = 'field_lrp_image';
   $handler->display->display_options['fields']['field_lrp_image']['table'] = 'field_data_field_lrp_image';
   $handler->display->display_options['fields']['field_lrp_image']['field'] = 'field_lrp_image';
   $handler->display->display_options['fields']['field_lrp_image']['label'] = '';
+  $handler->display->display_options['fields']['field_lrp_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_lrp_image']['element_type'] = '0';
   $handler->display->display_options['fields']['field_lrp_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_lrp_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_lrp_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_lrp_image']['settings'] = array(
-    'image_style' => 'magazine_rhs_100x140',
+    'image_style' => 'cart_172x240',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -379,6 +402,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['label'] = '';
+  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title_1']['element_type'] = '0';
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_1']['element_default_classes'] = FALSE;
@@ -388,6 +412,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['field_lrp_loyalty_points']['table'] = 'field_data_field_lrp_loyalty_points';
   $handler->display->display_options['fields']['field_lrp_loyalty_points']['field'] = 'field_lrp_loyalty_points';
   $handler->display->display_options['fields']['field_lrp_loyalty_points']['label'] = '';
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_lrp_loyalty_points']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_lrp_loyalty_points']['alter']['text'] = '[field_lrp_loyalty_points] POINTS';
   $handler->display->display_options['fields']['field_lrp_loyalty_points']['element_type'] = '0';
@@ -397,14 +422,23 @@ function features_for_loyalty_and_rewards_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'ADD TO CART';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'cart/add/[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn-add-cart';
   $handler->display->display_options['fields']['nothing']['element_type'] = 'div';
   $handler->display->display_options['fields']['nothing']['element_class'] = '[nid]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
@@ -414,13 +448,31 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'REDEEM POINTS';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now';
+  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn-redeem-points';
   $handler->display->display_options['fields']['nothing_1']['element_type'] = 'div';
   $handler->display->display_options['fields']['nothing_1']['element_class'] = 'redeem-point';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = '';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="product-wrapper">
+<div class="product-pic">[field_lrp_image]<span>[created]</span></div>
+<div class="product-title">[title_1]</div>
+<div class="product-description">[body]</div>
+<div class="redeem-points">[field_lrp_loyalty_points]</div>
+<div class="product-actions">[nothing][nothing_1]</div>
+</div>';
+  $handler->display->display_options['fields']['nothing_2']['element_type'] = '0';
+  $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing_2']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['nothing_2']['element_default_classes'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -478,6 +530,8 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['min'] = '0';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['max'] = '500';
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['expose']['operator_id'] = 'field_lrp_loyalty_points_value_op';
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['expose']['label'] = 'Points';
@@ -551,6 +605,15 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_type'] = '0';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_lrp_image']['id'] = 'field_lrp_image';
   $handler->display->display_options['fields']['field_lrp_image']['table'] = 'field_data_field_lrp_image';
@@ -562,7 +625,215 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['field_lrp_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_lrp_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_lrp_image']['settings'] = array(
-    'image_style' => 'magazine_rhs_100x140',
+    'image_style' => 'cart_172x240',
+    'image_link' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Loyalty Points */
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['id'] = 'field_lrp_loyalty_points';
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['table'] = 'field_data_field_lrp_loyalty_points';
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['field'] = 'field_lrp_loyalty_points';
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['label'] = '';
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['alter']['text'] = '[field_lrp_loyalty_points] POINTS';
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_lrp_loyalty_points']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 0,
+  );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'ADD TO CART';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'cart/add/[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['rel'] = '[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn-add-cart';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = '';
+  $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'REDEEM POINTS';
+  $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now';
+  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn-redeem-points';
+  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = '';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="product-wrapper">
+<div class="product-pic">[field_lrp_image]<span>[created]</span></div>
+<div class="product-title">[title]</div>
+<div class="product-description">[body]</div>
+<div class="redeem-points">[field_lrp_loyalty_points]</div>
+<div class="product-actions">[nothing][nothing_1]</div>
+</div>';
+  $handler->display->display_options['fields']['nothing_2']['element_type'] = '0';
+  $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing_2']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['nothing_2']['element_default_classes'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'loyalty_and_rewards' => 'loyalty_and_rewards',
+  );
+  /* Filter criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['value'] = '500';
+
+  /* Display: 0 - 500 Points */
+  $handler = $view->new_display('block', '0 - 500 Points', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = '0 -500 POINTS';
+  $handler->display->display_options['defaults']['link_display'] = FALSE;
+  $handler->display->display_options['link_display'] = 'custom_url';
+  $handler->display->display_options['link_url'] = 'product/0-500';
+
+  /* Display: 501 - 1000 Points */
+  $handler = $view->new_display('block', '501 - 1000 Points', 'block_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = '501 - 1000 POINTS';
+  $handler->display->display_options['defaults']['link_display'] = FALSE;
+  $handler->display->display_options['link_display'] = 'custom_url';
+  $handler->display->display_options['link_url'] = 'product/501-1000';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'loyalty_and_rewards' => 'loyalty_and_rewards',
+  );
+  /* Filter criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['min'] = '501';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['max'] = '1000';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['value'] = '500';
+
+  /* Display: 1001 - 10000 Points */
+  $handler = $view->new_display('block', '1001 - 10000 Points', 'block_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = '1001 - 10000 POINTS';
+  $handler->display->display_options['defaults']['link_display'] = FALSE;
+  $handler->display->display_options['link_display'] = 'custom_url';
+  $handler->display->display_options['link_url'] = 'product/1001-10000';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'loyalty_and_rewards' => 'loyalty_and_rewards',
+  );
+  /* Filter criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['min'] = '1001';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['max'] = '10000';
+  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['value'] = '500';
+
+  /* Display: Others */
+  $handler = $view->new_display('block', 'Others', 'block_4');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'flexslider';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_type'] = '0';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['field_lrp_image']['id'] = 'field_lrp_image';
+  $handler->display->display_options['fields']['field_lrp_image']['table'] = 'field_data_field_lrp_image';
+  $handler->display->display_options['fields']['field_lrp_image']['field'] = 'field_lrp_image';
+  $handler->display->display_options['fields']['field_lrp_image']['label'] = '';
+  $handler->display->display_options['fields']['field_lrp_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lrp_image']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_lrp_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_lrp_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_lrp_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_lrp_image']['settings'] = array(
+    'image_style' => 'cart_172x240',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -632,47 +903,6 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing_2']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['nothing_2']['element_default_classes'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'loyalty_and_rewards' => 'loyalty_and_rewards',
-  );
-  /* Filter criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['value'] = '500';
-
-  /* Display: 0 - 500 Points */
-  $handler = $view->new_display('block', '0 - 500 Points', 'block_1');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = '0 -500 POINTS';
-  $handler->display->display_options['defaults']['link_display'] = FALSE;
-  $handler->display->display_options['link_display'] = 'custom_url';
-  $handler->display->display_options['link_url'] = 'product?field_lrp_category_value=All&field_lrp_loyalty_points_value[min]=0&field_lrp_loyalty_points_value[max]=500';
-
-  /* Display: 501 - 1000 Points */
-  $handler = $view->new_display('block', '501 - 1000 Points', 'block_2');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = '501 - 1000 POINTS';
-  $handler->display->display_options['defaults']['link_display'] = FALSE;
-  $handler->display->display_options['link_display'] = 'custom_url';
-  $handler->display->display_options['link_url'] = 'product?field_lrp_category_value=All&field_lrp_loyalty_points_value[min]=501&field_lrp_loyalty_points_value[max]=1000';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -689,46 +919,13 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'loyalty_and_rewards' => 'loyalty_and_rewards',
   );
-  /* Filter criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = 'between';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['min'] = '501';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['max'] = '1000';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['value'] = '500';
-
-  /* Display: 1001 - 10000 Points */
-  $handler = $view->new_display('block', '1001 - 10000 Points', 'block_3');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = '1001 - 10000 POINTS';
-  $handler->display->display_options['defaults']['link_display'] = FALSE;
-  $handler->display->display_options['link_display'] = 'custom_url';
-  $handler->display->display_options['link_url'] = 'product?field_lrp_category_value=All&field_lrp_loyalty_points_value[min]=1001&field_lrp_loyalty_points_value[max]=10000';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'loyalty_and_rewards' => 'loyalty_and_rewards',
+  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
+  $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
+  $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
+  $handler->display->display_options['filters']['field_poll_itg_state_value']['value'] = array(
+    1 => '1',
   );
-  /* Filter criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = 'between';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['min'] = '1001';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['max'] = '10000';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['value'] = '500';
   $export['redeem_points'] = $view;
 
   return $export;

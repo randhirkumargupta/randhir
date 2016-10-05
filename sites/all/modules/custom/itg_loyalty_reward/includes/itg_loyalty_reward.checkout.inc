@@ -148,15 +148,14 @@ function itg_loyalty_reward_checkout_form_submit($form, &$form_state) {
   );
   // Get product info.
   $cart_detail = _get_cart_full_details($user->uid);  
-  $data['cart-items'] = $cart_detail;
-  
+  $data['cart-items'] = $cart_detail;  
   // Save data into order table.
   $presave = array(
     'uid' => $user->uid,
     'product_information' => serialize($data),
     'created' => REQUEST_TIME,
   );
-  $order_placed = 0;
+  $order_placed = 0;  
   try {
     $order_placed = db_insert('itg_loyalty_reward_order')
       ->fields($presave)
@@ -167,9 +166,9 @@ function itg_loyalty_reward_checkout_form_submit($form, &$form_state) {
   }
   if ($order_placed > 0) {
     $flush_cart = db_delete('itg_loyalty_reward_cart')
-        ->condition('uid', $user->uid)
-        ->execute();
+      ->condition('uid', $user->uid)
+      ->execute();
     drupal_set_message('Your order has been placed', 'status');
   }
-  drupal_goto('redeem-points');
+  drupal_goto('order');
 }

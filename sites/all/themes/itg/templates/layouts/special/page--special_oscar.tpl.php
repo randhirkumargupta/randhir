@@ -94,14 +94,14 @@ if ($theme != 'itgadmin') {
 <div class="itg-layout-container <?php echo $itg_class; ?> oscar-layout-page">   
     
     <div class="row">
-        <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="col-md-8 col-sm-12 col-xs-12 left-side">
    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row">
         <div class="col-md-12 itg-h747-section">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
-                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-1']['block_title'])) { ?>
+                 <?php /*<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-1']['block_title'])) { ?>
                    <h4 class="heading"><?php print $widget_data['itg-block-1']['block_title']; ?></h4>
                   <?php } ?>
                      <!-- for admin  -->
@@ -113,7 +113,7 @@ if ($theme != 'itgadmin') {
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                     </div>
-                   <?php } ?>  
+                   <?php } ?>  */ ?>
                   
                     <div class="data-holder" id="itg-block-1"><?php print $widget_data['itg-block-1']['widget']; ?></div>
                   </div>             
@@ -172,7 +172,7 @@ if ($theme != 'itgadmin') {
         </div>
         
         
-        <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="col-md-4 col-sm-12 col-xs-12 right-side">
             <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || $theme == 'itgadmin') { ?>
             <div class="row">
                 <div class="col-md-12">                    

@@ -67,7 +67,7 @@ function itg_loyalty_reward_menu() {
     'access arguments' => array('view product page'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward.product.inc',
-  );  
+  );
   $items['checkout'] = array(
     'title' => 'Checkout',
     'page callback' => 'drupal_get_form',
@@ -77,7 +77,7 @@ function itg_loyalty_reward_menu() {
     'file' => 'includes/itg_loyalty_reward.checkout.inc',
   );
   $items['order'] = array(
-    'title' => 'Order',
+    'title' => 'Redemption History',
     'page callback' => 'itg_loyalty_reward_order',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -91,7 +91,7 @@ function itg_loyalty_reward_menu() {
     'file' => 'includes/itg_loyalty_reward_earn.point.inc',
   );
   $items['earn-loyalty-point'] = array(
-    'page callback' => 'itg_loyalty_reward_earnpoint',    
+    'page callback' => 'itg_loyalty_reward_earnpoint',
     'access arguments' => array('view product page'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward_earn.point.inc',
@@ -232,13 +232,12 @@ function itg_loyalty_reward_form_after_build($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_loyalty_reward_views_pre_render(&$view) {
-
   // Add "Add new Item" button on listing page of items
   if ($view->name == "lrp_manage_items") {
     $header_content_loyalty = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_loyalty .= l(t('Add new Item'), 'node/add/loyalty-and-rewards');
     $view->attachment_before = $header_content_loyalty;
-  }
+  }  
 }
 
 /**
@@ -246,12 +245,27 @@ function itg_loyalty_reward_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
   if ($form['#id'] == 'views-exposed-form-lrp-manage-items-page') {
-
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/loyalty_and_rewards/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Product Title'));
+  }
+  if ($form['#id'] == 'views-exposed-form-product-page') {
+    $arg = arg();
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js',
+    );
+    $form['itg-points'] = array(
+      '#type' => 'select',
+      '#options' => array(
+        '0-500' => '0-500',
+        '501-1000' => '501-1000',
+        '1001-10000' => '1001-10000'
+      ),
+      '#default_value' => $arg[1],
+    );    
+    $form['field_lrp_loyalty_points_value']['#prefix'] = '<div style="display:none">';
+    $form['field_lrp_loyalty_points_value']['#suffix'] = '</div>';
   }
 }
 
@@ -470,8 +484,25 @@ function _get_cart_full_details($uid) {
     $data[] = array(
       'product' => unserialize($value->product_information),
       'quantity' => $value->quintity
-    );    
+    );
   }
 
   return $data;
+}
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_loyalty_reward_views_query_alter(&$view, &$query) {
+  $arg = arg();
+  if ($view->name === 'product' && !isset($_GET['field_lrp_category_value']) && ($arg[1] == '0-500' || $arg[1] == '501-1000' || $arg[1] == '1001-10000')) {
+    $filter_value = explode('-', $arg[1]);
+    $query->where[1]['conditions'][2] = array(
+      'field' => 'field_data_field_lrp_loyalty_points.field_lrp_loyalty_points_value',
+      'value' => $filter_value,
+      'operator' => 'BETWEEN',
+    );
+  }
 }

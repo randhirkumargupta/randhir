@@ -74,15 +74,17 @@ function itg_widget_form_views_form_most_read_widget_most_read_widget_list_alter
 
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_most_read";
 }
+
 /**
  * Implements hook_form_FORM_ID_alter().
  *
  * {@inheritdoc}
  */
 function itg_widget_form_views_form_feature_content_by_section_widget_feature_content_section_widget_list_alter(&$form, &$form_state, $form_id) {
-       
+
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_feature_content_by_section";
 }
+
 /**
  * Implements hook_form_FORM_ID_alter().
  *
@@ -121,6 +123,7 @@ function itg_widget_form_views_form_yearender_top_news_and_top_videos_yearend_le
 function itg_widget_form_views_form_issue_base_magazin_widget_issue_magazin_widget_list_alter(&$form, &$form_state, $form_id) {
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_issue_magazin";
 }
+
 /**
  * Function to alter dont miss widget form.
  *
@@ -373,12 +376,11 @@ function update_itg_widget_order_table_data_for_feature_content_by_section($form
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     db_update('itg_widget_order')
-                 ->fields(array('weight' => $value['weight'],))
-                 ->condition('widget', 'feature_content_by_section')
+            ->fields(array('weight' => $value['weight'],))
+            ->condition('widget', 'feature_content_by_section')
             ->condition('nid', $value['id'])
-                ->execute();
+            ->execute();
   }
- 
 }
 
 /**
@@ -416,7 +418,7 @@ function itg_widget_form_views_form_story_widget_photo_carousel_alter(&$form, &$
  * @param array $form_state
  */
 function update_itg_widget_order_table_data($form, &$form_state) {
-  
+
   // Current display for indentifing the view page (Widget name).
   $current_display = $form_state['build_info']['args'][0]->current_display;
   // Below view_name will use to get widget name.
@@ -437,7 +439,7 @@ function update_itg_widget_order_table_data($form, &$form_state) {
       $weight_track_flag = TRUE;
     }
   }
-  
+
   // IF we got there is changes made in draggable view order.
   if (1) {
     // Now insert new entry in itg_widget_order table of combination

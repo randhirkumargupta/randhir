@@ -581,21 +581,21 @@ function itg_event_backend_program_schedule_tab() {
   $counter = 0;
   foreach ($node->field_program_schedule[LANGUAGE_NONE] as $program_schedule) {
     $ans_detail = entity_load('field_collection_item', array($program_schedule['value']));
-    $keys = explode(':', $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value']);
-    
+    $old_keys = explode(':', $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value']);
+    $keys = explode('Day-', $old_keys[0]);
     if ($ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'] != $key) {
-      $val[$keys[0]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-      $val[$keys[0]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
-      $val[$keys[0]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-      $val[$keys[0]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-      $val[$keys[0]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
+      $val[$keys[1]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      $val[$keys[1]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
+      $val[$keys[1]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+      $val[$keys[1]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+      $val[$keys[1]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
     }
     else {
-      $val[$keys[0]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-      $val[$keys[0]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
-      $val[$keys[0]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-      $val[$keys[0]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-      $val[$keys[0]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
+      $val[$keys[1]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      $val[$keys[1]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
+      $val[$keys[1]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+      $val[$keys[1]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+      $val[$keys[1]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
     }
     $key = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
     $counter++;
@@ -646,7 +646,6 @@ function itg_event_backend_get_session_photo_video($daywise){
 
 function itg_event_backend_menu(){
    $items['itg-event-test'] = array(
-    'title' => 'api callback menu',
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
   );

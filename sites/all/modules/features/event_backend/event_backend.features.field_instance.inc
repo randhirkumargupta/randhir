@@ -600,6 +600,96 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event_backend-field_associate_event_photo'.
+  $field_instances['node-event_backend-field_associate_event_photo'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 25,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_associate_event_photo',
+    'label' => 'Associate Event Photo',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 46,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_associate_event_video'.
+  $field_instances['node-event_backend-field_associate_event_video'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 26,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_associate_event_video',
+    'label' => 'Associate Event Video',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 47,
+    ),
+  );
+
   // Exported field_instance: 'node-event_backend-field_associate_sponsors'.
   $field_instances['node-event_backend-field_associate_sponsors'] = array(
     'bundle' => 'event_backend',
@@ -1820,7 +1910,8 @@ function event_backend_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -1850,6 +1941,8 @@ function event_backend_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Associate Event Photo');
+  t('Associate Event Video');
   t('Associate Sponsors');
   t('Associate Story');
   t('Audio');
