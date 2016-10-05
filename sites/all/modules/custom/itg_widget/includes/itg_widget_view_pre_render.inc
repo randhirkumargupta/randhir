@@ -207,7 +207,7 @@ function itg_widget_views_pre_render(&$view) {
   elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
 //      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Yearender Top News & Top Videos Widget'), 'yearend-left-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $header_content .= l(t('Year End Top News & Video'), 'yearend-left-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }

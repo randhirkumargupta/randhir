@@ -71,8 +71,21 @@
         }
     }
 }
-  /*    special event page css start here*/  
-    
+/*special event page css start here*/  
+/*css start snappost page*/
+.page-snappost .view-content .views-row .snap-post-btm{
+    .snap-button{        
+        a{
+            width: 160px;
+        }
+    }    
+}
+.page-snappost .spanpost-header .spost-right ul li{
+        font-size: 27px;
+        padding-left:10px;
+    }
+/*css End snappost page*/  
+  
 }   
 
 
@@ -315,6 +328,79 @@ footer {
 }
 
 /*css end special event page for osscar*/
+
+/*css start snappost page*/
+ .page-snappost{
+        .spanpost-header{               
+            .spost-left{            
+                @include calculate-width(1);            
+            }
+            .spost-right{            
+                @include calculate-width(1);
+                ul{
+                    li{     
+                         @include font(18px,54px);                                             
+                        padding-left: 10px;
+                        img{
+                             width: 50px;
+                        }
+                    }
+                }
+            }
+        }
+        .view-content{
+            .views-row{
+                .snap-title{
+                    h1{
+                        span{
+                            a{
+                               @include font(22px,null,400);   
+                            }
+                        }
+                    }
+                }
+                .snap-post-btm{
+                    .snap-button{
+                        margin-top:30px;
+                        a{
+                            width: 120px;
+                            height: 40px;                            
+                           @include font(16px,40px);                                                  
+                            &.disagree{
+                                margin-left: 20px; 
+                            }  
+                        }
+                    }
+                }
+            }
+        }
+    }
+.page-snappost .view-content .views-row .snap-post-btm{
+    .snap-button{
+        float: none;
+        width: 100%;
+        a{
+            width: 130px;
+        }
+    }
+    .snap-social{
+        width:100%;
+        float: none;
+        overflow: hidden;
+        ul{
+            width:100%;
+            float: none;
+          li {    
+            width: 32%;
+            text-align: center;
+            }
+        } 
+    }
+}
+/*css end snappost page*/
+
+
+
 }
 
 
@@ -531,53 +617,6 @@ footer {
     }
     /*End Story page css*/
 
-    /*Start CSS Snap Post*/
-    .page-snappost{
-        .spanpost-header{               
-            .spost-left{            
-                @include calculate-width(2);            
-            }
-            .spost-right{            
-                @include calculate-width(2);
-                ul{
-                    li{                    
-                        @include font(30px,94px);                    
-                        padding-left: 25px;
-                        img{
-                            width: auto;
-                        }
-                    }
-                }
-            }
-        }
-        .view-content{
-            .views-row{
-                .snap-title{
-                    h1{
-                        span{
-                            a{
-                                @include font(30px);
-                            }
-                        }
-                    }
-                }
-                .snap-post-btm{
-                    .snap-button{
-                        margin-top:60px;
-                        a{
-                            width: 180px;
-                            height: 60px;
-                            @include font(22px,60px);                                                 
-                            &.disagree{
-                                margin-left: 30px; 
-                            }  
-                        }
-                    }
-                }
-            }
-        }
-    }
-    /*End CSS Snap Post*/
 
     /*Start css ITG globle search result page*/
     .view-front-end-global-search{

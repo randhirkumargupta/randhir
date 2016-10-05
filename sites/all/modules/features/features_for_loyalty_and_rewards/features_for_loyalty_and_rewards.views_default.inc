@@ -463,8 +463,9 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_2']['label'] = '';
   $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="product-wrapper">
-<div class="product-pic">[field_lrp_image]<span>[created]</span></div>
+<div class="product-pic">[field_lrp_image]</div>
 <div class="product-title">[title_1]</div>
+<div class="post-date">[created]</div>
 <div class="product-description">[body]</div>
 <div class="redeem-points">[field_lrp_loyalty_points]</div>
 <div class="product-actions">[nothing][nothing_1]</div>
@@ -693,8 +694,9 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_2']['label'] = '';
   $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="product-wrapper">
-<div class="product-pic">[field_lrp_image]<span>[created]</span></div>
+<div class="product-pic">[field_lrp_image]</div>
 <div class="product-title">[title]</div>
+<div class="post-date">[created]</div>
 <div class="product-description">[body]</div>
 <div class="redeem-points">[field_lrp_loyalty_points]</div>
 <div class="product-actions">[nothing][nothing_1]</div>
@@ -836,6 +838,22 @@ function features_for_loyalty_and_rewards_views_default_views() {
     'image_style' => 'cart_172x240',
     'image_link' => '',
   );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -896,6 +914,8 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="product-wrapper">
 <div class="product-pic">[field_lrp_image]</div>
 <div class="product-title">[title]</div>
+<div class="product-description">[body]</div>
+<div class="post-date">[created]</div>
 <div class="redeem-points">[field_lrp_loyalty_points]</div>
 <div class="product-actions">[nothing][nothing_1]</div>
 </div>';

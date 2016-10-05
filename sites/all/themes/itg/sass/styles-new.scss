@@ -1523,6 +1523,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     .product-pic{
       height: 172px;
       cursor: pointer;
+      img{
+        width: 123px;
+        height: 172px;
+      }
     }
     .product-title{
       text-transform: uppercase;
@@ -2276,7 +2280,7 @@ body.has-cart-popup{
         .forgot-link{
             display: inline-block;
             vertical-align: middle;
-            margin: 7px;
+            margin: 15px;
             color: #333;
         }
         .form-submit{
@@ -2304,6 +2308,15 @@ body.has-cart-popup{
         div.description{
             font-size: 12px;
             color: #8d8d8d;
+        }
+        .form-item-remember-me{
+          .form-checkbox{
+            float: left;
+            margin: 2px 5px 0 0;
+          }
+          label{
+            font-size: 14px;
+          }
         }
     }
     .social-share{

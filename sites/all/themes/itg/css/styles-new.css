@@ -1612,6 +1612,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   height: 172px;
   cursor: pointer;
 }
+.view-redeem-points .product-wrapper .product-pic img, .view-product .product-wrapper .product-pic img {
+  width: 123px;
+  height: 172px;
+}
 .view-redeem-points .product-wrapper .product-title, .view-product .product-wrapper .product-title {
   text-transform: uppercase;
   font: 400 16px/18px Roboto;
@@ -2335,7 +2339,7 @@ body.has-cart-popup {
 .page-user form .forgot-link {
   display: inline-block;
   vertical-align: middle;
-  margin: 7px;
+  margin: 15px;
   color: #333;
 }
 .page-user form .form-submit {
@@ -2367,6 +2371,13 @@ body.has-cart-popup {
 .page-user form div.description {
   font-size: 12px;
   color: #8d8d8d;
+}
+.page-user form .form-item-remember-me .form-checkbox {
+  float: left;
+  margin: 2px 5px 0 0;
+}
+.page-user form .form-item-remember-me label {
+  font-size: 14px;
 }
 .page-user .social-share {
   display: inline-block;
