@@ -1169,7 +1169,7 @@ function itg_widget_preprocess_views_view(&$vars) {
     $vars['classes_array'][] = 'widgets-view';
     drupal_add_css('td.tabledrag-hide  {display: inline-block !important;}', 'inline');
     drupal_add_css('th.tabledrag-hide  {display: inline-block !important;}', 'inline');
-    drupal_add_css('.tabledrag-handle  {display: inline-block !important;}', 'inline');
+    //drupal_add_css('.tabledrag-handle  {display: inline-block !important;}', 'inline');
   }
 }
 
