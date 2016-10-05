@@ -6,10 +6,10 @@ global $theme_key;
 ?>
 
 
-<h2 class="block-title">Template widgets <span><i class="fa fa-plus-circle hide"></i><i class="fa fa-minus-circle"></i></span></h2>
+<h2 class="block-title">Special widgets <span><i class="fa fa-plus-circle hide"></i><i class="fa fa-minus-circle"></i></span></h2>
 <ul id="templates-widgets" class="no-bullet pd-10 templates-widgets">
   <?php 
-    foreach($data['default_widget'] as $key => $val) {
+    foreach($data['special_widget'] as $key => $val) {
      $widget = explode('|', $val['value']); 
   ?>
   <li id="<?php print $widget[0];?>" data-widget="<?php print $widget[1];?>" data-widget-info="<?php print $widget[2].'|'.$widget[3].'|'.$widget[4];?>">
