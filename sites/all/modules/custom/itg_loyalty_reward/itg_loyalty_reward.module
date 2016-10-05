@@ -254,15 +254,18 @@ function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, 
     $arg = arg();
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js',
-    );
+    );    
+    $form['field_lrp_category_value']['#options']['All'] = 'Category';
     $form['itg-points'] = array(
       '#type' => 'select',
       '#options' => array(
+        '' => 'Points',
         '0-500' => '0-500',
         '501-1000' => '501-1000',
         '1001-10000' => '1001-10000'
       ),
       '#default_value' => $arg[1],
+      '#required' => TRUE,
     );    
     $form['field_lrp_loyalty_points_value']['#prefix'] = '<div style="display:none">';
     $form['field_lrp_loyalty_points_value']['#suffix'] = '</div>';
