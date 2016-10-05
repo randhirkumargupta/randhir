@@ -976,7 +976,8 @@ function itg_widget_views_query_alter(&$view, &$query) {
      $section = $_GET['section']; 
     }
     
-    $query->where[1]['conditions'][3]['value'] = $section;
+    //$query->where[1]['conditions'][3]['value'] = $section;
+    $query->where[1]['conditions'][3]['value'] = 414;
    }
   }
   
