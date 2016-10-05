@@ -53,7 +53,6 @@ function get_all_widgets_list_by_setting_page($title) {
   $query->condition('title', $title);
   $query->orderBy('n.nid', 'DESC')->range(0,1);//LIMIT to 1 records
   $nid = $query->execute()->fetchField();
-  
   $node = node_load($nid);
   $widget_array = $node->field_itg_widget_name[LANGUAGE_NONE];
   

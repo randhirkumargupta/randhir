@@ -355,8 +355,6 @@ function itgadmin_preprocess_page(&$vars) {
   $page_url_except_header_footer = array(
       'getimagetocroper'
       , 'searchimage'
-      , 'itg-layout-manager'
-      , 'preview'
       , 'imagetotag'
       , 'imagetagedit'
       , 'anchor-list-order-reorder'
