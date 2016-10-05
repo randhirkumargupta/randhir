@@ -45,7 +45,7 @@ function itg_widget_yearend_top_news_ordering_data($info) {
   $data = '';
   if (!empty($info)) {
     $widget_name = $info['widget_name'];
-    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name,'story', DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE);
+    $result = get_view_nodes_form_custom_table_for_yearend_widgets($widget_name,'story', 5, DONT_MISS_MIN_RANGE);
     $entity_data = array();
     foreach ($result as $entity_data_node) {
       $entity_data[] = array("node_load_data" => node_load($entity_data_node['nid']), "custom_label" => $entity_data_node['extra']);
