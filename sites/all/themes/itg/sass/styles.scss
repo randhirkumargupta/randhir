@@ -4870,3 +4870,45 @@ footer{
     }    
 }
 /*CSS end for event page index*/
+
+
+/*CSS start for education page*/
+.education-layout-page{    
+    .itg-layout-672{
+        .droppable{
+            height: 672px;
+            overflow: hidden;
+        }
+        .itg-widget-child{
+            .droppable{
+            height: 310px;
+            overflow: hidden;
+        }
+        }
+    }
+    .itg-layout-565{
+        .droppable{
+            height: 565px;
+            overflow: hidden;
+        }
+        .itg-widget-parent{
+            .droppable {
+                height: 225px;
+                overflow: hidden;
+            }
+        }
+        .itg-widget-child{
+            .droppable {
+                height: 305px;
+                overflow: hidden;
+            }
+        }
+    }
+    .itg-common-section{
+        .ad-widget {
+            height: 382px;
+            overflow: hidden;
+        }
+    }
+}
+/*CSS end for education page*/
