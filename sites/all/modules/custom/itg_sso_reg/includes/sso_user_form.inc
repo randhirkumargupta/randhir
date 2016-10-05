@@ -120,8 +120,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       elseif (isset($form_state['storage']['step_2'])) {
         $default_value = $form_state['storage']['step_2'];
       }
-
-
+      
       // if mail value is blank assign dummy mail
       if (isset($form_state['values']['mail']) && !empty($form_state['values']['mail'])) {
         $mail = $form_state['values']['mail'];
@@ -254,7 +253,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#title' => '',
         '#description' => '',
         '#id' => '',
-        '#type' => 'hidden',
+        '#type' => 'textfield',
         '#value' => $form_state['values']['domain_info'],
         '#attributes' => array('placeholder' => t('')),
         
@@ -316,30 +315,6 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
     );
   }
   
-   /*if ($form_state['step'] == 2) {
-    $form['buttons']['skip'] = array
-      (
-      '#type' => 'submit',
-      '#value' => t('skip'),
-      // Setting #limit_validation_errors to an empty array
-      // ensures that the form fields are not validated when
-      // the back button is used. Otherwise, we will get errors
-      // We need to create a #submit function for this button, or else
-      // #limit_validation_errors has no effect. So we create a submit
-      // function specifically for this submit button.
-      '#limit_validation_errors' => array(),
-      '#submit' => array('itg_sso_reg_multistep_form_skip_submit'),
-      '#ajax' => array
-        (
-        // We pass in the wrapper we created at the start of the form
-        'wrapper' => 'itg_sso_reg_multistep_form',
-        // We pass a callback function we will use later to render the form for the user
-        'callback' => 'itg_sso_reg_multistep_form_ajax_callback',
-      ),
-    );
-  }*/
-
-
   return $form;
 }
 
@@ -442,26 +417,12 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
  * Implements hook_form_submit().
  * {@inheritdoc}
  */
-function itg_sso_reg_multistep_form_skip_submit($form, &$form_state) {
- // $form_state['step'] --;
-  
-  $form_state['step'] = 4;
-  // Because this is a multi-step form, we always need to rebuild the form
-  // on every step, even after submission. This allows our form to be completely
-  // Ajaxified without ever requiring a page load.
-  $form_state['rebuild'] = TRUE;
-}
-
-/**
- * Implements hook_form_submit().
- * {@inheritdoc}
- */
 function itg_sso_reg_multistep_form_submit($form, &$form_state) {
   // First we determine which step we are on, and save the
   // submitted values to $form_state['storage']. This will
   // allow our submitted values to persist.
   $step = $form_state['step'];
-
+ 
   $form_state['storage']['step_' . $step] = $form_state['values']['step_' . $step];
 
   // Check to see if the next/forward button was clicked
