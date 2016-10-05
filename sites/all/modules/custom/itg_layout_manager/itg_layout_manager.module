@@ -164,7 +164,7 @@ function itg_layout_manager_block_view($delta = '') {
   switch ($delta) {
     case 'header_block':
       $arg = arg();
-      // Code for adds
+      // Code for ads
       drupal_add_js('http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap', array('scope' => 'header'));
       // drupal_add_js('http://static.chartbeat.com/js/chartbeat_mab.js', array('scope' => 'header'));
       drupal_add_js('http://xp1.zedo.com/client/xp1/fmos.js', array('scope' => 'header'));
