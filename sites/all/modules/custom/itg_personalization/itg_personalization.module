@@ -143,6 +143,7 @@ function itg_personalization_block_info() {
  * {@inheritdoc}.
  */
 function itg_personalization_block_view($delta = '') {
+  global $user;
   $block = array();  
   switch ($delta) {
     // Load personalized menu tab.
@@ -158,7 +159,7 @@ function itg_personalization_block_view($delta = '') {
       $block['content'] .= '<div id="target-content"></div>';      
       break;    
     case 'user_my_point':      
-      $data = itg_loyalty_reward_user_details(4);
+      $data = itg_loyalty_reward_user_details($user->uid);
       $data['unit_description'][] = array(
         'activity_name' => 'Content Share',
         'points_per_activity' => '05',
