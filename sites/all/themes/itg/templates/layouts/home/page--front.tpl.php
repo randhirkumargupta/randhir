@@ -854,7 +854,7 @@ if($theme != 'itgadmin')
 }
 
 ?>
-<?php if(!empty(PARENT_SSO) && PARENT_SSO == '1') { ?>
+<?php if($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
 <script>
 window.addEventListener("message", function(ev) {
     if (ev.data.message === "requestResult") {
