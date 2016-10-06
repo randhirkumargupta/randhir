@@ -323,11 +323,10 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
 
 //Relation treatment
       $form['relations']['#title'] = 'Section and Categories';
-
       $form['relations']['parent']['#title'] = t('Select Section');
       $form['relations']['parent']['#description'] = '<p>' . t('Please select &#60;root&#62; for section.') . '</p>';
       $form['relations']['#collapsible'] = 0;
-
+      unset($form['relations']['weight']);
 //Non-editable fields in edit mode
       if (arg(3) == 'edit') {
         $form['name']['#attributes'] = array('readonly' => 'readonly');
