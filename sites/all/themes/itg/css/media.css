@@ -100,6 +100,21 @@
   }
 
   /*css End snappost page*/
+  /*CSS Start Photo and video header crusal page*/
+  #block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r {
+    background: #171717;
+    padding: 30px 0 0 0;
+  }
+
+  .itg-region {
+    padding: 0;
+  }
+  .itg-region ul {
+    overflow: auto;
+    vertical-align: top;
+  }
+
+  /*CSS End Photo and video header crusal page*/
 }
 @media only screen and (max-width: 768px) {
   header {
@@ -858,6 +873,9 @@
   }
   #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-prev {
     right: 87px;
+  }
+  #block-views-photo-landing-slider-block .other-details-main .caption {
+    padding: 0 20px;
   }
   #block-views-photo-landing-slider-block .social-icon ul {
     padding-left: 10px;
