@@ -94,7 +94,7 @@ if ($theme != 'itgadmin') {
 <div class="itg-layout-container <?php echo $itg_class; ?> oscar-layout-page">   
     
     <div class="row">
-        <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="col-md-8 col-sm-12 col-xs-12 left-side">
    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row">
         <div class="col-md-12 itg-h747-section">
@@ -172,7 +172,7 @@ if ($theme != 'itgadmin') {
         </div>
         
         
-        <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="col-md-4 col-sm-12 col-xs-12 right-side">
             <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || $theme == 'itgadmin') { ?>
             <div class="row">
                 <div class="col-md-12">                    

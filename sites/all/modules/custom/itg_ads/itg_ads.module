@@ -397,6 +397,7 @@ function itg_ads_placeholder_values($formdata, $id = '') {
  */
 function itg_ads_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 	if ($form["#id"] == 'views-exposed-form-manage-ads-page') {
+		$form['field_ads_end_date_value']['value']['#date_format'] = 'd/m/Y';
 		$form['title']['#autocomplete_path'] = 'content-title-list/ads_management/autocomplete';
 		$form['title']['#attributes'] = array('placeholder' => t('Placeholder Title'));
 	}

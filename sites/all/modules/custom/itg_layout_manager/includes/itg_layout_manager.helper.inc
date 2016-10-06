@@ -46,13 +46,13 @@ function get_itg_footer_menu() {
  * @param string $template_name 
  * @return array
  */
-function get_all_widgets_list_by_setting_page() {
+function get_all_widgets_list_by_setting_page($title) {
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'));  
-  $query->condition('type', 'itg_template_widgets');        
+  $query->condition('type', 'itg_template_widgets');
+  $query->condition('title', $title);
   $query->orderBy('n.nid', 'DESC')->range(0,1);//LIMIT to 1 records
   $nid = $query->execute()->fetchField();
-  
   $node = node_load($nid);
   $widget_array = $node->field_itg_widget_name[LANGUAGE_NONE];
   
@@ -89,10 +89,13 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
     return create_setion_widgets($filter_url, $widget_info[1]);
   }
-  elseif (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
+  else if (isset($widget_name) && $widget_name == 'custom_html_widget') {
+    return get_html_custom_widget($filter_url);    
+  }
+  else if (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
     return create_setion_widget2($filter_url);
   }
-  elseif (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {   
+  else if (isset($widget_name) && ($widget_name == 'photo_list_of_category' || $widget_name == 'video_list_of_category')) {   
     if (isset($widget_name) && ($widget_name == 'photo_list_of_category')) {
       $block = 'block';
     }
@@ -203,6 +206,7 @@ function get_layout_details($section_name, $template_name, $status) {
     $result['widget_name'] = $itg_val->widget_name;
     if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
       $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      $result['more_url'] = l('More[+]', 'taxonomy/term/'.$filter_url);
     }else {
       $result['block_title'] = $itg_val->block_title; //for default widgets
     }
@@ -473,7 +477,7 @@ function get_ads_page_name() {
 function get_html_custom_widget_list() {
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title'));  
-  $query->condition('type', 'custom-html-widgets');        
+  $query->condition('type', 'custom_html_widgets');        
   $itg_result = $query->execute()->fetchAll();
   
   $rows = array();
@@ -483,4 +487,15 @@ function get_html_custom_widget_list() {
   }
   
   return $widget;
+}
+
+
+/**
+ * Get html_custom widgets for layout
+ * @return theme
+ */
+function get_html_custom_widget($nid) {
+  $node = node_load($nid); 
+  $html_code = $node->body[LANGUAGE_NONE][0]['value'];  
+  return theme("html_custom_widget", array("data" => $html_code));  
 }

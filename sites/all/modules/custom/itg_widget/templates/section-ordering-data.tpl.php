@@ -95,7 +95,7 @@ if ($widget_style == 'auto-road-trip') {
                     
             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>">  </a>
                   
-                    <h3><?php echo l(mb_strimwidth($desc, 0, 120, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
+                    <h3><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
                 <?php } else if ($count == 1) {
                     ?>
                     <ul>
@@ -173,7 +173,7 @@ if ($widget_style == 'auto-road-trip') {
                    
             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>"> </a></span>
                    
-                    <h3><?php echo l(mb_strimwidth($desc, 0, 120, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
+                    <h3><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
                     <?php
                 } else if ($count == 1) {
                     if ((!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
@@ -447,7 +447,7 @@ if ($widget_style == 'auto-road-trip') {
                         $extra_large_image_url = image_style_url("widget_small", $entity->field_story_extra_large_image['und'][0]['uri']);
                     }
                     ?>
-            <div class="col-md-6">                   
+            <div class="col-md-6 col-sm-6 col-xs-6">                   
                 <span class="pic  <?php echo $video_class; ?>"> <a class="pic  <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
                         <img src="<?php echo $extra_large_image_url; ?>">
                     </a></span>
@@ -589,13 +589,51 @@ if ($widget_style == 'auto-road-trip') {
                     if ($reporter->title != "") {
                         print '<h4>' . ucfirst( mb_strimwidth($reporter->title, 0, 50, "..")) . '</h4>';
                     }
-                    $desc="The fireworks are over and now it's time for Olympic athletes to take centre stage in Rio de Janei this s kjsah asd klds";
+                    
                     ?>
                     <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 70, ".."); ?></span></a>
                 </li>
     <?php } ?>
         </ul>
     </div>
+
+<?php } else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') { ?>
+
+   <?php if (!empty($data)) : global $base_url; ?>
+        <div class="section-ordering">
+            <?php
+            $extra_large_image_url = "";
+            foreach ($data as $count => $entity) {
+                if ($count == 0 && (!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
+                    $extra_large_image_url = image_style_url("section_ordering_widget", $entity->field_story_extra_large_image['und'][0]['uri']);
+                }
+                ?>
+            <?php if ($count == 0) : ?>
+                    <?php if (!empty($extra_large_image_url)) { ?>
+                        <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
+                            <img  src="<?php print $extra_large_image_url ?>" />
+                        </a>
+                    <?php
+                } else {
+                    ?>
+                        <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
+                            <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                        </a>
+                    <?php } ?>
+                    <h3 class="frist-heading heading-<?php echo $entity->nid ?> <?php echo $entity->type ?> ">
+                    <?php echo l(mb_strimwidth($entity->title, 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
+                    </h3>
+                    <?php endif; ?>
+                <?php if ($count != 0) : ?>
+                    <p class="<?php print $entity->type ?> section-order-<?php print $entity->nid ?>">
+                    <?php echo l(mb_strimwidth($entity->title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
+                    </p>
+            <?php endif; ?>
+        <?php } ?>
+        </div>
+    <?php else : ?>
+        <span class="no-result-found"><?php print t("Content Not Found") ?></span>
+    <?php endif; ?>
 
 <?php } else {
     ?>

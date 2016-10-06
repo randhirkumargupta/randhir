@@ -18,6 +18,7 @@ var dynamicFlag = 1;
 var colorboxFlag = 1;
 var dailymotionFlag = 1;
 var uploadName = '';
+var frequencyFlag = 1;
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
@@ -101,6 +102,7 @@ var uploadName = '';
             var description_message = jQuery('textarea#edit-field-service-content-und-12-field-story-expert-description-und-0-value--2').html();
             if (description_message) {
                 $("#widget-ajex-loader").css("display", "none");
+                dynamicFlag = 1;
             }
 
             jQuery.fn.content_create_custom_js = function () {
@@ -337,6 +339,9 @@ var uploadName = '';
                 jQuery(document).on("click", "#content-enable-button", function (event) {
                     event.preventDefault();
                     dynamicFlag = 1;
+                    // reset button set
+                    jQuery('#edit-field-service-frequency-date').after(jQuery("#reset-date-button"));
+
                     var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
                     var edate = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
                     if (sdate == '') {
@@ -460,23 +465,30 @@ var uploadName = '';
             jQuery('#content-enable-button').removeAttr('disabled');
             jQuery('#reset-date-button').removeAttr('disabled');
 
-
             jQuery('#vas-service-content-node-form').submit(function () {
                 var frequency_from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
                 var frequency_end_date = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
-                if (frequency_from_date == '') {
+                frequencyFlag++;
+                if (frequency_from_date == '' && frequencyFlag == 2) {
                     alert("Please enter start date.");
                     jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
                     jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
                     jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
                     return false;
-                } else if (frequency_end_date == '') {
+                } else if (frequency_end_date == '' && frequencyFlag == 2) {
                     alert("Please enter end date.");
                     jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
                     jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
                     jQuery('.form-item-field-service-frequency-date-und-0-value2').append('<span class="error">Please enter end date.</span>');
                     return false;
                 }
+                if (frequency_from_date == '' && frequency_end_date == '') {
+                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
+                    return false;
+                }
+
             });
 
 
@@ -533,7 +545,7 @@ var uploadName = '';
 
                 });
             } else {
-                if(dynamicFlag == 1) {
+                if (dynamicFlag == 1) {
                     jQuery(".field-name-field-service-audio-keyword").hide();
                     jQuery(".field-name-field-service-video-keyword").hide();
                     dynamicFlag++;
@@ -552,7 +564,6 @@ var uploadName = '';
                     jQuery('.used-unused-select').val('unused');
                     jQuery('.used-unused-select').trigger('change');
                     jQuery('.time-filter').hide();
-
                     if (colorboxFlag == 1) {
                         var data = jQuery('.browse-ftp').html();
                         jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%", fixed: true, onComplete: function () {
@@ -560,8 +571,6 @@ var uploadName = '';
                             }});
                         colorboxFlag++;
                     }
-
-
                 });
                 // for Audio
                 jQuery(".mobile-audio-fields a").on('click', function () {
@@ -569,6 +578,11 @@ var uploadName = '';
                     dynamicAudioId = "div[id^='edit-field-service-content-und-" + uploadId + "-field-service-audio']";
                 });
             }
+
+            // onclose colorbox
+            jQuery("#cboxClose").on('click', function () {
+                colorboxFlag = 1;
+            });
 
             jQuery(document).ajaxSuccess(function (event, xhr, settings) {
                 if (settings.url.indexOf('field_service_video') >= 0) {
