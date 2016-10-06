@@ -361,7 +361,7 @@ function itg_story_create_breaking_news($story_node) {
  * {@inheritdoc}
  */
 function itg_story_node_insert($node) {
-  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft') {
+  if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft' && isset($node->field_story_configurations[LANGUAGE_NONE])) {
     foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
       if ($val['value'] == 'breaking_news') {
         itg_story_create_breaking_news($node);

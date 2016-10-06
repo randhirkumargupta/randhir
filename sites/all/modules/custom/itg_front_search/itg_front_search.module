@@ -368,27 +368,28 @@ function itg_front_search_node_presave($node) {
 
   //if ($node->type == 'story' || $node->type == 'recipe' || $node->type == 'cooking_tips' || $node->type == 'videogallery' || $node->type == 'food_news') {
   if ($node->type == 'story' || $node->type == 'videogallery') {
+    if (isset($node->field_story_reporter['und'])) {
+      foreach ($node->field_story_reporter['und'] as $high) {
+        $reporter_id = $high['target_id'];
+        $reporter_node_id = node_load($reporter_id);
+        $reporter_arr_value[] = strtolower($reporter_id);
+        $common_by_line_name[] = strtolower($reporter_node_id->title);
+        $common_by_line_twitter[] = strtolower($reporter_node_id->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
+        // print $high['target_id'];
+      }
 
-    foreach ($node->field_story_reporter['und'] as $high) {
-      $reporter_id = $high['target_id'];
-      $reporter_node_id = node_load($reporter_id);
-      $reporter_arr_value[] = strtolower($reporter_id);
-      $common_by_line_name[] = strtolower($reporter_node_id->title);
-      $common_by_line_twitter[] = strtolower($reporter_node_id->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value']);
-      // print $high['target_id'];
+      $final_repoter_nid_list = implode(',', $reporter_arr_value);
+
+      $final_by_line_name = implode(',', $common_by_line_name);
+
+      $final_by_line_twitter = implode(',', $common_by_line_twitter);
+
+      //$reporter_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+      //$reporter_node_id = node_load($reporter_id);
+      $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_by_line_name;
+      $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_by_line_twitter;
+      $node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value'] = $final_repoter_nid_list;
     }
-
-    $final_repoter_nid_list = implode(',', $reporter_arr_value);
-
-    $final_by_line_name = implode(',', $common_by_line_name);
-
-    $final_by_line_twitter = implode(',', $common_by_line_twitter);
-
-    //$reporter_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-    //$reporter_node_id = node_load($reporter_id);
-    $node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_by_line_name;
-    $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_by_line_twitter;
-    $node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value'] = $final_repoter_nid_list;
   }
 
   if ($node->type == 'photogallery') {
