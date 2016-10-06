@@ -774,6 +774,13 @@ $autocomplete_path = autocomplete_for_widgets($_GET['type']);
 $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
 $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
 break;
+case 'views-exposed-form-feature-content-by-section-widget-feature-content-section-widget-contents':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type']);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
 case 'views-exposed-form-poll-widget-poll-widget-format':
 $form['title']['#attributes']['placeholder'] = t('Content Title');
 $form['nid']['#attributes']['placeholder'] = t('Content ID');
