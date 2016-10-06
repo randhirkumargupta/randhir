@@ -8,7 +8,7 @@
  */
 
 ?>
-<?php if(!empty('PARENT_SSO') && PARENT_SSO == 'YES') { ?>
+<?php if($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
 <script>
 window.addEventListener("message", function(ev) {
     if (ev.data.message === "requestResult") {

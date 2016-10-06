@@ -31,9 +31,6 @@ define('EXTRA_SECTION_CARDS', 21);
 define('SECTION_TAB', 20);
 define('FRONT_USER', 25);
 
-if ($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') {
-  define('PARENT_SSO', 'YES');
-}
 
 /**
  * Function for debugging arrays and objects.
