@@ -60,7 +60,7 @@ function itg_sso_reg_otp_callback() {
   $email = $_POST['email'];
   $rand_otp = $_POST['otp'];
   $source = $_POST['source'];
-  print $otp_exist = itg_sso_otp_check($mobile, $email, $source);
+  $otp_exist = itg_sso_otp_check($mobile, $email, $source);
 
   if ($otp_exist) {
     $otp = db_update('itg_sso_reg_otp_info');
