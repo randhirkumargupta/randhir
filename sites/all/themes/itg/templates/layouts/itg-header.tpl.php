@@ -62,7 +62,7 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
 
                 if ($user->uid == 0 || $_GET['q'] != 'user') {
                   ?>
-                  <?php if (!empty(PARENT_SSO) && PARENT_SSO == 'YES') { ?>
+                  <?php if ($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
                 <a onclick="window.open('http://dev.indiatodayonline.in/saml_login/other/domain_info', '_blank', 'location=yes,height=490,width=550,scrollbars=yes,status=yes');" class="user-icon"><i class="fa fa-user"></i></a>    
                 
                   <?php }
