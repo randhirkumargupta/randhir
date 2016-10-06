@@ -8061,6 +8061,22 @@ div.node{
     }
   } 
 }
+.node-category-form #edit-term-state-wrap{
+  padding: 0 20px;
+  .form-item-term-state{
+    position: relative;
+    div.description{
+      display: none;
+/*      @extend .desc-popup;
+      left: 600px;*/
+    }
+    &:hover{
+      div.description{
+/*        display: block;*/
+      }
+    }
+  }
+}
 .node-category-form #edit-term-state-wrap .itg-term-state > label {
     padding: 0 20px;
     width: 220px;

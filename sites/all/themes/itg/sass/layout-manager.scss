@@ -33,6 +33,9 @@ img{
 .mt-50{
     margin-top: 50px;
 }
+.m-bottom40{
+        margin-bottom: 40px;
+    }
 /*.dropped{
     background: #fff;
 }*/
@@ -738,7 +741,7 @@ img{
     .m-bottom40{
         margin-bottom: 40px;
     }
-     .itg-layout-605{
+    .itg-layout-605{
         height: 605px;
         overflow: hidden;
     }
@@ -868,9 +871,7 @@ img{
 /*CSS End special auto page */
 /*CSS Start special tech page */
 .tech-layout-page{
-    .m-bottom40{
-        margin-bottom: 40px;
-    }
+    
      .itg-layout-672{
         height: 672px;
         overflow: hidden;
@@ -1174,3 +1175,47 @@ img{
 }
 /*CSS end for special osscar*/
 /*CSS End for oscar page*/
+
+
+/*CSS start for education page*/
+.education-layout-page{    
+    .itg-layout-672{
+        .droppable{
+            height: 672px;
+            overflow: hidden;
+        }
+        .itg-widget-child{
+            .droppable{
+            height: 310px;
+            overflow: hidden;
+        }
+        }
+    }
+    .itg-layout-565{
+        .droppable{
+            height: 565px;
+            overflow: hidden;
+        }
+        .itg-widget-parent{
+            .droppable {
+                height: 225px;
+                overflow: hidden;
+            }
+        }
+        .itg-widget-child{
+            .droppable {
+                height: 305px;
+                overflow: hidden;
+            }
+        }
+    }
+    .itg-common-section{
+        .ad-widget {
+            height: 382px;
+            overflow: hidden;
+        }
+    }
+}
+/*CSS end for education page*/
+
+
