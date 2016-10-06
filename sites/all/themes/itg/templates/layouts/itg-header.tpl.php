@@ -57,7 +57,21 @@ foreach($data['itg_main_manu_header'] as $key => $val) {
     <div class="menu-login mhide">
         <div class="container ">   
             <div class="user-menu">
-                <a href="signup?width=500&height=500&iframe=true" class="user-icon colorbox-load"><i class="fa fa-user"></i></a>
+                <?php
+                global $user;
+
+                if ($user->uid == 0 || $_GET['q'] != 'user') {
+                  ?>
+                  <?php if (!empty('PARENT_SSO') && PARENT_SSO == 'YES') { ?>
+                <a onclick="window.open('http://dev.indiatodayonline.in/saml_login/other/domain_info', '_blank', 'location=yes,height=490,width=550,scrollbars=yes,status=yes');" class="user-icon"><i class="fa fa-user"></i></a>    
+                
+                  <?php }
+                  else { ?>
+                <a onclick="Go()" class="user-icon"><i class="fa fa-user"></i></a>
+                 
+                      <?php }
+                    } ?>
+                
                 <?php
                 $block = module_invoke('system', 'block_view', 'user-menu');
                 print render($block['content']);

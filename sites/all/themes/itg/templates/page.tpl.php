@@ -6,8 +6,19 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-?>
 
+?>
+<?php if(!empty('PARENT_SSO') && PARENT_SSO == 'YES') { ?>
+<script>
+window.addEventListener("message", function(ev) {
+    if (ev.data.message === "requestResult") {
+        // ev.source is the opener
+        ev.source.postMessage({ message: "deliverResult", result: true }, "*");
+    }   
+});
+
+</script>
+<?php } ?>
 <div id="page">
     <header class="header" id="header" role="banner">
             <section class="header-top">
