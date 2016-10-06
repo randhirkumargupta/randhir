@@ -401,6 +401,11 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
                  this.value = this.value.replace(/[^0-9\.]/g,'');
                   });            
           });", array('type' => 'inline', 'scope' => 'footer'));
+    
+    if ($form['#id'] == 'views-exposed-form-custom-html-widgets-list-page') {
+      $form['title']['#autocomplete_path'] = 'content-title-list/custom_html_widgets/autocomplete';
+      $form['title']['#attributes'] = array('placeholder' => t('Widget name'));      
+    }
 }
 
 /**
@@ -743,11 +748,11 @@ function itg_common_managesite_validate($form, &$form_state) {
  * Implement hook_views_pre_render
  * @param Object $view
  */
-function itg_common_views_pre_render(&$view) {
+function itg_common_views_pre_render(&$view) {  
   
-  //Add "Create recipe" button on listing page of recipe
-  if ($view->name == "custom_html_widgets_list") {    
-    $header_content = '<span class="create_cooking_tips">' . l(t('Create custom html widgets'), 'node/add/custom-html-widgets', array('query' => array('destination' => 'custom-html-widgets-list'))) . '&nbsp;</span>';    
+  if ($view->name == "custom_html_widgets_list") {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= '<span class="create_cooking_tips">' . l(t('Create custom html widgets'), 'node/add/custom-html-widgets', array('query' => array('destination' => 'custom-html-widgets-list'))) . '&nbsp;</span>';    
     $view->attachment_before = $header_content;
   }
  
