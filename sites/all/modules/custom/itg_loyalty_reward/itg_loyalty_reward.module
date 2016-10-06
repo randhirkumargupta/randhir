@@ -377,7 +377,7 @@ function itg_loyalty_reward_user_details($uid) {
   $itg_query->groupBy('itg.loyalty_type');
   $itg_result = $itg_query->execute()->fetchAll();
   foreach ($itg_result as $value) {
-    p($value);
+    //p($value);
   }
   $user_details = array(
     'total_earned_so_far' => 500,

@@ -1,5 +1,14 @@
 <?php
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
 function itg_sso_reg_multistep_form($form, &$form_state) {
+  $arg = arg();
+  if(!empty($arg[1]) && $arg[1] == 'domain_info') {
+    $appnd_to_lnk = '/'.$arg[1];
+  }
 // If $form_state['step'] is not set, we set it to 1
   $form_state['step'] = isset($form_state['step']) ? $form_state['step'] : 1;
   global $user, $base_url;
@@ -11,7 +20,8 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js');
 
   if ($form_state['step'] == '1') {
-    $ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', 'user/login', array('attributes' => array('target' => '_blank', 'class' => array('')))) . '</div>';
+    $fn_link = 'saml_login/other'.$appnd_to_lnk;
+    $ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
   }
   // Add a wrapper div that will be used by the Form API to update the form using AJAX
   $form['#prefix'] = '<div id="itg_sso_reg_multistep_form">';
@@ -29,6 +39,15 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         $default_value = $form_state['storage']['step_1'];
       }
 
+      $form['domain_info'] = array(
+        '#title' => '',
+        '#description' => '',
+        '#id' => '',
+        '#type' => 'hidden',
+        '#value' => $arg[1],
+        '#attributes' => array('placeholder' => t('')),
+        
+      );
 
       $form['fname'] = array(
         '#title' => 'First Name',
@@ -101,8 +120,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       elseif (isset($form_state['storage']['step_2'])) {
         $default_value = $form_state['storage']['step_2'];
       }
-
-
+      
       // if mail value is blank assign dummy mail
       if (isset($form_state['values']['mail']) && !empty($form_state['values']['mail'])) {
         $mail = $form_state['values']['mail'];
@@ -111,6 +129,16 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         $mail = $form_state['values']['fname'] . '@' . 'indiatoday.com';
       }
 
+      $form['domain_info'] = array(
+        '#title' => '',
+        '#description' => '',
+        '#id' => '',
+        '#type' => 'hidden',
+        '#value' => $form_state['values']['domain_info'],
+        '#attributes' => array('placeholder' => t('')),
+        
+      );
+      
       $form['step2mail'] = array(
         '#title' => '',
         '#description' => '',
@@ -141,9 +169,13 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
 
 
       $form['otp_links'] = array(
-        '#markup' => '<div class="col-xs-6"><div id="otpclickme" class="btn-resend">Resend OTP</div></div>',
+        '#prefix' => '<div class="col-xs-6">',
+        '#markup' => '<div id="otpclickme" class="btn-resend">Resend OTP</div>',
       );
-
+      $form['loader'] = array(
+        '#markup' => '<div id="ajax-loader" style="display:none"><img src="' . base_path() . path_to_theme() . '/images/loader.svg" alt=""/></div>',
+        '#suffix' => '</div>',
+      );
 
 
       $form['otp_success'] = array(
@@ -151,12 +183,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#suffix' => '</div>',
       );
 
-      $form['loader'] = array(
-        '#markup' => '<div id="ajax-loader" style="display:none">
-      <img src="' . base_path() . path_to_theme() . '/images/loader.svg" alt=""/>
-      </div>
-    ',
-      );
+      
 
       break;
 
@@ -169,11 +196,36 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       elseif (isset($form_state['storage']['step_3'])) {
         $default_value = $form_state['storage']['step_3'];
       }
-
+      
+      if (!empty($form_state['values']['domain_info'])) {
+        $append_lnk = '/'.$form_state['values']['domain_info'];
+      }
+      else
+      {
+        $append_lnk = '';
+      }
+        $fn_link = 'saml_login/other' . $append_lnk;
+        $ext_div = '<div class="sign-in-link">' . l('Click here to sign in', $fn_link, array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
+      
+      $form['domain_info'] = array(
+        '#title' => '',
+        '#description' => '',
+        '#id' => '',
+        '#type' => 'hidden',
+        '#value' => $form_state['values']['domain_info'],
+        '#attributes' => array('placeholder' => t('')),
+        
+      );
+      
       $form['thank-you'] = array(
-        '#markup' => '<div id="email-sucess">You are registered sucessfully please check your mail for further information!</div>',
+        '#markup' => '<div id="email-sucess">You are registered successfully please check your mail for further information!</div>',
       );
 
+      $form['sgn-link'] = array(
+        '#markup' => $ext_div,
+      );
+      
+      
       break;
 
     // Step 4
@@ -185,11 +237,35 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       elseif (isset($form_state['storage']['step_4'])) {
         $default_value = $form_state['storage']['step_4'];
       }
-
+      
+      if (!empty($form_state['values']['domain_info'])) {
+        $append_lnk = '/'.$form_state['values']['domain_info'];
+      }
+      else
+      {
+        $append_lnk = '';
+      }
+        $fn_link = 'saml_login/other' . $append_lnk;
+        $ext_div = '<div class="sign-in-link">' . l('Click here to sign in', $fn_link, array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
+      
+      $form['domain_info'] = array(
+        '#title' => '',
+        '#description' => '',
+        '#id' => '',
+        '#type' => 'hidden',
+        '#value' => $form_state['values']['domain_info'],
+        '#attributes' => array('placeholder' => t('')),
+        
+      );
+      
       $form['thank-you'] = array(
         '#markup' => '<div id="mobile-success">You are registered sucessfully!</div>',
       );
-
+      
+      $form['sgn-link'] = array(
+        '#markup' => $ext_div,
+      );
+      
       break;
   }
 
@@ -221,13 +297,13 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
     );
   }
   // We only want a submit button if we are on the last step of the form
-  if ($form_state['step'] ==2) {
+  if ($form_state['step'] == 2) {
 
     $form['buttons']['submit'] = array
       (
       '#type' => 'submit',
       '#value' => t('submit'),
-      '#suffix' => '<div id="skip-link" class="btn-skip">Skip</div>',
+      '#suffix' => '',
       '#ajax' => array
         (
         // We pass in the wrapper we created at the start of the form
@@ -238,16 +314,13 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
     );
   }
   
-  // add skip link for otp stage
-//  if ($form_state['step'] == 2) {
-//    $form['skip-link'] = array(
-//      '#suffix' => '<div id="skip-link">skip</div>',
-//    );
-//  }
-
   return $form;
 }
 
+/**
+ * Implements hook_validate().
+ * {@inheritdoc}
+ */
 function itg_sso_reg_multistep_form_validate($form, &$form_state) {
   // First we set up a switch for each of our three steps
   if (empty($form_state['values']['mobile'])) {
@@ -339,21 +412,16 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
   }
 }
 
-function itg_sso_reg_multistep_form_back_submit($form, &$form_state) {
-  $form_state['step'] --;
-
-  // Because this is a multi-step form, we always need to rebuild the form
-  // on every step, even after submission. This allows our form to be completely
-  // Ajaxified without ever requiring a page load.
-  $form_state['rebuild'] = TRUE;
-}
-
+/**
+ * Implements hook_form_submit().
+ * {@inheritdoc}
+ */
 function itg_sso_reg_multistep_form_submit($form, &$form_state) {
   // First we determine which step we are on, and save the
   // submitted values to $form_state['storage']. This will
   // allow our submitted values to persist.
   $step = $form_state['step'];
-
+ 
   $form_state['storage']['step_' . $step] = $form_state['values']['step_' . $step];
 
   // Check to see if the next/forward button was clicked
@@ -440,6 +508,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
       }
     }
   }
+  
   // Check to see if the final step has been submitted
   elseif (isset($form_state['values']['submit']) && $form_state['values']['op'] == $form_state['values']['submit']) {
     // Here we will collect the data and show the submitted values to the user in a message.
@@ -455,6 +524,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
     $form_state['step'] = 4;
     $form_state['storage'] = array();
   }
+  
 
   // As in ajax_form_multistep_form_back_submit(), we need to set
   // $form_state['rebuild'] to TRUE, in able to ensure that our

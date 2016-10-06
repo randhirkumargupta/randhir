@@ -3,6 +3,37 @@
 module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_mail');
 module_load_include('inc', 'itg_sso_reg', 'includes/common_fn');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_form');
+module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
+
+/*
+ * Implement hook_init
+ */
+
+function itg_sso_reg_init() {
+
+  global $user;
+  if (array_key_exists(FRONT_USER, $user->roles)) {
+    $settings = array();
+    if ($user->uid > 0) {
+
+      $arg = arg(2);
+    }
+
+    if (!empty($arg)) {
+      $fin = $arg;
+    }
+    else {
+      $fin = arg(2);
+    }
+
+
+    $settings['uid'] = $user->uid ? $user->uid : 0;
+    $settings['check_sso_url'] = $fin;
+    drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js');
+  }
+  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js');
+}
 
 /**
  * Implements hook_menu
@@ -62,7 +93,7 @@ function itg_sso_reg_user_mail($key, &$message, $params) {
     case 'send_mail_to_sso_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -74,5 +105,3 @@ function itg_sso_reg_user_mail($key, &$message, $params) {
       break;
   }
 }
-
-
