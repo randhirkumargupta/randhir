@@ -218,7 +218,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       );
       
       $form['thank-you'] = array(
-        '#markup' => '<div id="email-sucess">You are registered sucessfully please check your mail for further information!</div>',
+        '#markup' => '<div id="email-sucess">You are registered successfully please check your mail for further information!</div>',
       );
 
       $form['sgn-link'] = array(
