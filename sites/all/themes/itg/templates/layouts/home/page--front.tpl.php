@@ -854,3 +854,14 @@ if($theme != 'itgadmin')
 }
 
 ?>
+<?php if($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
+<script>
+window.addEventListener("message", function(ev) {
+    if (ev.data.message === "requestResult") {
+        // ev.source is the opener
+        ev.source.postMessage({ message: "deliverResult", result: true }, "*");
+    }   
+});
+
+</script>
+<?php } ?>
