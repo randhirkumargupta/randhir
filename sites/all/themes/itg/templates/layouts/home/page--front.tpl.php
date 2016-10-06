@@ -854,3 +854,14 @@ if($theme != 'itgadmin')
 }
 
 ?>
+<?php if(!empty('PARENT_SSO') && PARENT_SSO == 'YES') { ?>
+<script>
+window.addEventListener("message", function(ev) {
+    if (ev.data.message === "requestResult") {
+        // ev.source is the opener
+        ev.source.postMessage({ message: "deliverResult", result: true }, "*");
+    }   
+});
+
+</script>
+<?php } ?>

@@ -37,7 +37,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
             // fix for getting all content type
             ->condition('iwo.widget', $widget_name)
             ->condition('n.status', '1')
-            ->orderBy('iwo.weight')
+            ->orderBy('iwo.weight','DESC')
             ->groupBy('iwo.nid')
             ->range(0, $range);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -147,7 +147,7 @@ function itg_widget_section_wise_ordering_for_rhs_from_custom_table($info) {
             // fix for getting all content type
             ->condition('iwo.widget', $widget_name)
             ->condition('n.status', '1')
-            ->orderBy('iwo.weight')
+            ->orderBy('iwo.weight','DESC')
             ->range(0, 5);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $entity_data = array();
