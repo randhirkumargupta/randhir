@@ -304,7 +304,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '430';
+  $handler->display->display_options['filters']['cat_id']['value'] = '434';
 
   /* Display: byline */
   $handler = $view->new_display('block', 'byline', 'block_9');

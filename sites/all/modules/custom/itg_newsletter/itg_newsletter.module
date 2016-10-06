@@ -20,8 +20,8 @@ function itg_newsletter_menu() {
   );
 
   $items['test_mail'] = array(
-    'page callback' => '_update_newsletter_cron_tbl',
-    'file' => 'includes/newsletter_mail.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_newslatter_register_form'),
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -36,6 +36,10 @@ function itg_newsletter_menu() {
 function itg_newsletter_block_info() {
   $blocks['newsletter_tab_form_block'] = array(
     'info' => t('Newsletter Form Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['register_for_more_updates'] = array(
+    'info' => t('Register for more updates'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
@@ -55,6 +59,10 @@ function itg_newsletter_block_view($delta = '') {
     case 'newsletter_tab_form_block':
       $block['content'] = theme('newsletter_tab_form_display_block', array('data' => $data));
       break;
+     case 'register_for_more_updates':
+      $block['subject'] = '<div class="register_updates">REGISTER FOR MORE UPDATES</div>';
+      $block['content'] = register_for_more_updates();
+    break;
   }
 
   return $block;
@@ -630,4 +638,114 @@ function itg_newsletter_get_top_stories() {
     $nids[] = $records['nid'];
   }
   return $nids;
+}
+
+
+/***************************Resgister for more updates*********************************/
+
+/**
+ * Callback function of register_for_more_updates form
+ */
+function register_for_more_updates() {
+  $output = drupal_get_form('itg_newslatter_register_form');
+  return drupal_render($output);
+}
+
+/**
+ * Create register_for_more_updates form
+ */
+function itg_newslatter_register_form() {
+  $form = array();
+
+  $form['messages'] = array(
+    '#prefix' => '<div style="color:red" id="messages">',
+    '#suffix' => '</div>'
+  );
+
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Name',
+    '#attributes' => array('placeholder' => 'Name'),
+    '#required' => TRUE,
+  );
+
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Email Id',
+    '#attributes' => array('placeholder' => 'Email Id'),
+    '#required' => TRUE,
+  );
+  $form['mobile'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Mobile No',
+    '#attributes' => array('placeholder' => 'Mobile No'),
+    '#required' => TRUE,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Register'),
+    '#ajax' => array(
+      'callback' => 'itg_newslatter_register_custom_submit',
+      'effect' => "fade",
+    ),
+  );
+  
+  drupal_add_js("jQuery(document).ready(function(){ jQuery('#itg-newslatter-register-form label').hide(); });",'inline'); 
+  return $form;
+}
+
+/**
+ * Validate function of register_for_more_updates form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_newslatter_register_form_validate($form, &$form_state) {
+  $email = $form_state['values']['email'];
+  $mobile = $form_state['values']['mobile'];
+  if (isset($mobile) && strlen($mobile) > 0 && !preg_match('/^[0-9]{9,10}$/', $mobile)) {
+    form_set_error('mobile', t('Your Mobile Numbers should contain 10 digits'));
+  }
+  if (!empty($email) && !valid_email_address($email)) {
+    form_set_error('email', 'Sorry. Your email address,' . $email . ' is not valid.');
+  }
+}
+
+/**
+ * Submit handler for register_for_more_updates form
+ * @param Array $form
+ * @param Array $form_state
+ */
+function itg_newslatter_register_form_submit($form, &$form_state) {
+  $name = $form_state['values']['name'];
+  $email = $form_state['values']['email'];
+  $mobile = $form_state['values']['mobile'];
+
+    // Insert data in to itg_newslatter_update_details table
+    $query = db_insert('itg_newslatter_update_details');
+    $query->fields(array(
+      'name' => $name,
+      'email' => $email,
+      'mobile' => $mobile,
+      'section' => 'newslatter',
+      'created' => time()
+    ));
+    $query->execute();
+   drupal_set_message(t('You have been registered successfully!'));
+}
+
+/**
+ * Submit handler of Ajax
+ * @param Array $form
+ * @param Array $form_state
+ * @return Array
+ */
+function itg_newslatter_register_custom_submit($form, &$form_state) {
+
+  $commands = array();
+  $commands[] = ajax_command_replace('#messages', '<div id="messages">' . theme('status_messages') . '</div>');
+  return array(
+    '#type' => 'ajax',
+    '#commands' => $commands
+  );
 }

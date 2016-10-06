@@ -59,7 +59,7 @@ foreach ($rows as $index => $row) {
     if ($index > 2) {
     
         ?>
-    <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 140, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
+    <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
 
 
      <?php } ?>

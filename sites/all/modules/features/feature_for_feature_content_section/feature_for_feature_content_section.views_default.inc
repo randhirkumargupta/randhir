@@ -164,7 +164,7 @@ function feature_for_feature_content_section_views_default_views() {
   /* Display: Content For : Feature Content By Section Widget */
   $handler = $view->new_display('page', 'Content For : Feature Content By Section Widget', 'feature_content_section_widget_contents');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Content For : Most Read Widget';
+  $handler->display->display_options['title'] = 'Feature Content By Section Widget';
   $handler->display->display_options['display_description'] = 'Content For : Feature Content By Section Widget';
   $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['defaults']['access'] = FALSE;
@@ -419,13 +419,6 @@ function feature_for_feature_content_section_views_default_views() {
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
   $handler->display->display_options['filters']['type_1']['table'] = 'node';
@@ -436,21 +429,6 @@ function feature_for_feature_content_section_views_default_views() {
     'photogallery' => 'photogallery',
   );
   $handler->display->display_options['filters']['type_1']['group'] = 1;
-  /* Filter criterion: Content: Set As Featured (field_featured) */
-  $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
-  $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
-  $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
-  $handler->display->display_options['filters']['field_featured_value']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_featured_value']['group'] = 2;
-  /* Filter criterion: Content: Configurations (field_story_configurations) */
-  $handler->display->display_options['filters']['field_story_configurations_value']['id'] = 'field_story_configurations_value';
-  $handler->display->display_options['filters']['field_story_configurations_value']['table'] = 'field_data_field_story_configurations';
-  $handler->display->display_options['filters']['field_story_configurations_value']['field'] = 'field_story_configurations_value';
-  $handler->display->display_options['filters']['field_story_configurations_value']['operator'] = 'not empty';
-  $handler->display->display_options['filters']['field_story_configurations_value']['value'] = array(
-    'set_as_featured' => 'set_as_featured',
-  );
-  $handler->display->display_options['filters']['field_story_configurations_value']['group'] = 2;
   $handler->display->display_options['path'] = 'feature-content-section-widget-contents';
 
   /* Display: Feature Content By Section Order Reorder */

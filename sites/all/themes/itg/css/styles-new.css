@@ -214,7 +214,6 @@
   font-family: 'Roboto', sans-serif;
 }
 #block-views-photo-landing-slider-block .other-details-main .caption {
-  padding: 0 20px;
   min-height: 150px;
 }
 #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-prev, #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-next {
@@ -1595,7 +1594,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 500 24px/30px Roboto;
   border-bottom: 1px solid #d8d8d8;
   padding-bottom: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .view-redeem-points .view-content, .view-product .view-content {
@@ -1606,7 +1605,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 15px;
   text-align: center;
   border: 1px solid #dedede;
-  margin: 15px 0;
+  margin: 20px 0;
 }
 .view-redeem-points .product-wrapper .product-pic, .view-product .product-wrapper .product-pic {
   height: 172px;
@@ -1672,6 +1671,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-size: 18px;
   color: #fff;
   margin-right: 5px;
+  vertical-align: top;
 }
 .view-redeem-points .product-wrapper:hover, .view-product .product-wrapper:hover {
   box-shadow: 0 0 20px 0 #bbb;
@@ -1750,6 +1750,8 @@ body.has-cart-popup {
 .cart-popup-wrapper .cart-popup img {
   width: 172px;
   height: 240px;
+  display: block;
+  margin: 0 auto;
 }
 .cart-popup-wrapper .cart-popup .cart-close {
   color: #777;
@@ -1818,6 +1820,7 @@ body.has-cart-popup {
   font-size: 18px;
   color: #fff;
   margin-right: 5px;
+  vertical-align: top;
 }
 
 [id*="itg-quiz-quiz-form"] .question-heading {
@@ -1943,6 +1946,10 @@ body.has-cart-popup {
   vertical-align: top;
   width: 100%;
 }
+[id*="itg_user_forgot_password_multistep_form"] .messages--status {
+  margin-top: 20px;
+  padding: 0 15px;
+}
 
 .page-cart header,
 .page-checkout header,
@@ -1962,7 +1969,7 @@ body.has-cart-popup {
 
 #block-itg-loyalty-reward-itg-loyalty-reward-header {
   background-color: #eaebed;
-  padding: 5px 0;
+  padding: 10px 0;
   display: inline-block;
   vertical-align: top;
   width: 100%;
@@ -2120,6 +2127,9 @@ body.has-cart-popup {
   color: #fff;
 }
 
+[id*="itg-user-forgot-password-multistep-form"] {
+  padding-top: 20px;
+}
 [id*="itg-user-forgot-password-multistep-form"] .form-type-password-confirm {
   padding: 0 15px;
 }
@@ -2297,11 +2307,8 @@ body.has-cart-popup {
 .view-product .view-filters form .views-exposed-form label {
   display: none;
 }
-.view-product .view-filters form .views-submit-button {
-  padding-right: 10px;
-}
-.view-product .view-filters form .views-submit-button + .views-submit-button {
-  padding-right: 0;
+.view-product .view-filters form .views-exposed-form .views-exposed-widget {
+  padding: 10px 0 0 10px;
 }
 .view-product .view-filters form .form-submit {
   display: inline-block;
@@ -2343,8 +2350,8 @@ body.has-cart-popup {
   color: #333;
 }
 .page-user form .form-submit {
-  background: #000 none repeat scroll 0 0;
-  border: 1px solid #000;
+  background-color: #000 !important;
+  border: 1px solid #000 !important;
   height: 50px;
   width: 243px;
 }
@@ -2460,4 +2467,133 @@ body.has-cart-popup {
 }
 .page-user .messages--error .messages__list {
   padding-left: 15px;
+}
+
+[id*="itg-sso-reg-multistep-form"] #email-sucess, [id*="itg-sso-reg-multistep-form"] #thank-you, [id*="itg-sso-reg-multistep-form"] #mobile-success, [id*="itg-user-forgot-password-multistep-form"] #email-sucess, [id*="itg-user-forgot-password-multistep-form"] #thank-you, [id*="itg-user-forgot-password-multistep-form"] #mobile-success {
+  color: #009c00;
+  margin: 20px 0;
+}
+
+.sign-in-link {
+  padding: 20px;
+}
+.sign-in-link .signup-link {
+  float: left;
+}
+
+#fotp {
+  padding: 0 15px;
+}
+#fotp .form-item-fotp {
+  max-width: 60%;
+  float: left;
+}
+#fotp #forgototpclickme {
+  margin: 9px 20px;
+  float: left;
+}
+#fotp #ajax-loader {
+  float: left;
+  max-width: 25px;
+  margin-top: 5px;
+}
+#fotp #forgot_otp_success {
+  float: left;
+  width: 100%;
+  margin: 5px 0;
+  font-size: 12px;
+  color: #009c00;
+}
+
+#uotp #ajax-loader {
+  float: left;
+  max-width: 25px;
+  margin: 5px 0 0 20px;
+}
+#uotp #otpclickme {
+  float: left;
+}
+
+/* Responsive CSS */
+@media all and (max-width: 767px) {
+  [id*="block-views-redeem-points-block"] .block-title {
+    font: 500 18px/24px Roboto;
+  }
+
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user {
+    width: 50%;
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart {
+    max-width: 48%;
+    text-align: right;
+    padding-top: 25px;
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li {
+    padding-bottom: 10px;
+    float: none;
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li + li:before {
+    display: none;
+  }
+
+  .view-redeem-points .more-link, .view-product .more-link {
+    top: 3px;
+    font-size: 13px;
+  }
+  .view-redeem-points .view-content .col-md-4 + .col-md-4 .product-wrapper, .view-product .view-content .col-md-4 + .col-md-4 .product-wrapper {
+    margin: 50px 0 0;
+  }
+  .view-redeem-points .product-wrapper, .view-product .product-wrapper {
+    padding: 15px 10px;
+  }
+  .view-redeem-points .product-wrapper .product-title, .view-product .product-wrapper .product-title {
+    font-size: 14px;
+  }
+  .view-redeem-points .product-wrapper .redeem-points, .view-product .product-wrapper .redeem-points {
+    font-size: 16px;
+  }
+  .view-redeem-points .product-wrapper .btn-add-cart, .view-redeem-points .product-wrapper .btn-redeem-points, .view-product .product-wrapper .btn-add-cart, .view-product .product-wrapper .btn-redeem-points {
+    font: 500 13px/18px Roboto;
+    padding: 5px 8px;
+    margin: 0;
+  }
+  .view-redeem-points .product-wrapper .btn-add-cart, .view-product .product-wrapper .btn-add-cart {
+    margin-right: 8px;
+  }
+
+  .page-order table th, .page-order table td {
+    padding: 10px 5px;
+  }
+  .page-order table td .checkout-inner {
+    font-size: 13px;
+  }
+  .page-order table td .checkout-inner img {
+    margin: 0;
+    float: none;
+  }
+  .page-order table td .checkout-inner .checkout-inner-details span {
+    width: 110px;
+  }
+
+  .cart-popup-wrapper .cart-popup {
+    margin: auto;
+    max-height: 96%;
+    max-width: 96%;
+    overflow-y: auto;
+    text-align: center;
+  }
+  .cart-popup-wrapper .cart-popup h2 {
+    margin-top: 30px;
+  }
+  .cart-popup-wrapper .cart-popup .cart-actions {
+    padding-bottom: 30px;
+  }
+  .cart-popup-wrapper .cart-popup .cart-actions .btn-add-cart, .cart-popup-wrapper .cart-popup .cart-actions .btn-redeem-points {
+    font: 500 13px/18px Roboto;
+    padding: 5px 8px;
+    margin: 0;
+  }
+  .cart-popup-wrapper .cart-popup .cart-actions .btn-add-cart {
+    margin-right: 8px;
+  }
 }
