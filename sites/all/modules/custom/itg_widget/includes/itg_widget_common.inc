@@ -669,6 +669,9 @@ $themes = array(
  'year_end_top_news' => array(
 'template' => 'templates/year-end-top-news',
  ),
+ 'how_made_it' => array(
+'template' => 'templates/how-made-it',
+ ),
  'year_end_top_videos' => array(
 'template' => 'templates/year-end-top-videos',
  ),
@@ -768,6 +771,13 @@ $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
 $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
 break;
 case 'views-exposed-form-special-auto-review-widget-special-auto-review-widget-contents':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type']);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
+case 'views-exposed-form-special-how-i-made-it-special-how-made-it-widget-contentsyear_end_top_news':
 $form['title']['#attributes']['placeholder'] = t('Content Title');
 $form['nid']['#attributes']['placeholder'] = t('Content ID');
 $autocomplete_path = autocomplete_for_widgets($_GET['type']);
@@ -1013,7 +1023,7 @@ $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget')
 
 
 // Start alter for tech
-if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_8')) {
+if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_2' || $view->current_display == 'block_8')) {
 global $theme;
 
 if ($theme != 'seven') {
