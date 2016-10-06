@@ -106,9 +106,6 @@ function itg_widget_views_pre_render(&$view) {
     //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     //$header_content .= l(t('Search Content'), 'section-wise-draggable-content-order', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
-    if (!isset($_GET['category_tid'])) {
-//$view = array();
-    }
   }
   elseif ($view->name == "photo_carousel_widget" && $view->current_display == 'photo_carousel_list') {
     if (!isset($_POST['views_bulk_operations'])) {
