@@ -362,9 +362,8 @@ function itg_users_views_pre_render(&$view) {
       session_destroy();
       drupal_goto($_SERVER['HTTP_REFERER']);
     }
-    else
-    {
-    $_GET['destination'] = 'user';
+    else {
+      $_GET['destination'] = 'user';
     }
   }
 
