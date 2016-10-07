@@ -114,6 +114,11 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'][] = 'itg_survey_form_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_survey_form_custom_submit_callback';
     }
+    
+    // Hide add token field from survey, quiz and poll form
+    if($form_id == 'survey_node_form' || $form_id == 'quiz_node_form' || $form_id == 'poll_node_form') {
+      $form['field_pqs_add_token']['#access'] = FALSE;
+    }
 }
 
 /**
@@ -244,9 +249,15 @@ function itg_survey_node_presave($node){
  */
 function itg_survey_node_insert($node) {
   
-  if($node->type == 'survey'){
+  if($node->type == 'survey') {
     // Insert in to survey notification table
     itg_survey_insert_notification_details($node->nid, strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']), 'insert');
+  }
+  
+  // Add token value
+  if ($node->type == 'poll' || $node->type == 'quiz' || $node->type == 'survey') {
+    $node->field_pqs_add_token[LANGUAGE_NONE][0]['value'] = '[ITG:' . strtoupper($node->type) . ':' . $node->nid . ']';
+    field_attach_update('node', $node);
   }
 }
 
@@ -256,7 +267,7 @@ function itg_survey_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_survey_node_update($node) {
-  
+
   if($node->type == 'survey'){
     // Update date in survey notification table, if updated
     itg_survey_insert_notification_details($node->nid, strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']), 'update');

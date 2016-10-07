@@ -866,6 +866,48 @@ function feature_for_poll_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-poll-field_pqs_add_token'.
+  $field_instances['node-poll-field_pqs_add_token'] = array(
+    'bundle' => 'poll',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 17,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_pqs_add_token',
+    'label' => 'Add Token',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 21,
+    ),
+  );
+
   // Exported field_instance: 'node-poll-field_result_format'.
   $field_instances['node-poll-field_result_format'] = array(
     'bundle' => 'poll',
@@ -992,6 +1034,7 @@ function feature_for_poll_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add Token');
   t('Associate poll');
   t('Caption');
   t('Display Result');
