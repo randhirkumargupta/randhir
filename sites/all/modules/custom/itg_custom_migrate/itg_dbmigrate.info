@@ -11,3 +11,4 @@ files[] = includes/itg_migrate.category.inc
 files[] = includes/itg_migrate.story.inc
 files[] = includes/itg_migrate.files.inc
 files[] = includes/itg_migrate.user.inc
+files[] = includes/itg_migrate.byline.inc
