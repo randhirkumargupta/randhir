@@ -23,7 +23,7 @@
             
                 <li data-tag="image-tab-<?php echo $index; ?>">
                     <?php print $row['field_story_extra_large_image_1']; ?>
-                    <p class="title"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
+                    <p class="title"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
                 </li>
             <?php }; ?>
         </ul>
