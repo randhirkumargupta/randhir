@@ -85,6 +85,21 @@
         padding-left:10px;
     }
 /*css End snappost page*/  
+
+
+/*CSS Start Photo and video header crusal page*/
+#block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r {
+    background: #171717;
+    padding: 30px 0 0 0;
+}
+.itg-region{
+    padding: 0;
+    ul{
+        overflow: auto;
+        vertical-align: top;
+    }
+}
+/*CSS End Photo and video header crusal page*/
   
 }   
 
@@ -818,6 +833,9 @@ footer {
                 .slick-prev{
                     right: 87px;
                 }
+            }
+            .caption {
+                padding: 0 20px;
             }
         }
         .social-icon{

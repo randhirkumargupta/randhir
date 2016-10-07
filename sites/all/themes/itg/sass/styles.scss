@@ -2852,6 +2852,11 @@ footer{
         }
     }
 }
+.home_page_poll_widget_block{
+    .widget-title{
+        @include pos(absolute);   
+    }    
+}
 /*End Poll Landing page*/
 
 /*CSS for hover effect on anchor for itg-layout-container */
@@ -4908,6 +4913,52 @@ footer{
         .ad-widget {
             height: 382px;
             overflow: hidden;
+        }
+    }
+    .itg-295-layout{
+        .droppable {
+                height: 295px;
+                overflow: hidden;
+            }
+    }
+    .itg-325-layout{
+        .droppable, .ad-widget{
+                height: 325px;
+                overflow: hidden;
+            }
+    }
+    .itg-345-layout{
+        .droppable {
+                height: 345px;
+                overflow: hidden;
+            }
+    }
+    .with-shadow{        
+        -moz-box-shadow: 0 0 5px #999;
+        -webkit-box-shadow: 0 0 5px #999;        
+    }
+    .from-the-magazine{
+        background: #f3f3f3;
+        padding:10px;
+        .magazine-detail{
+            margin-bottom:10px;
+        h3{
+            @include font(18px,24px,null);
+            margin-bottom:5px;
+        }
+        img{
+            @include float(left);
+            margin-right: 10px;
+        }
+        .small-detail{
+            overflow: hidden;
+        }         
+        }
+        > p{
+            padding: 10px 0;            
+        }
+        > p + p{            
+            border-top: 1px solid #ddd;                        
         }
     }
 }

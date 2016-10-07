@@ -3860,6 +3860,10 @@ footer .footer-copyright {
   padding-right: 4px;
 }
 
+.home_page_poll_widget_block .widget-title {
+  position: absolute;
+}
+
 /*End Poll Landing page*/
 /*CSS for hover effect on anchor for itg-layout-container */
 .itg-layout-container ul li:hover a {
@@ -6288,6 +6292,48 @@ footer .footer-copyright {
 .education-layout-page .itg-common-section .ad-widget {
   height: 382px;
   overflow: hidden;
+}
+.education-layout-page .itg-295-layout .droppable {
+  height: 295px;
+  overflow: hidden;
+}
+.education-layout-page .itg-325-layout .droppable, .education-layout-page .itg-325-layout .ad-widget {
+  height: 325px;
+  overflow: hidden;
+}
+.education-layout-page .itg-345-layout .droppable {
+  height: 345px;
+  overflow: hidden;
+}
+.education-layout-page .with-shadow {
+  -moz-box-shadow: 0 0 5px #999;
+  -webkit-box-shadow: 0 0 5px #999;
+}
+.education-layout-page .from-the-magazine {
+  background: #f3f3f3;
+  padding: 10px;
+}
+.education-layout-page .from-the-magazine .magazine-detail {
+  margin-bottom: 10px;
+}
+.education-layout-page .from-the-magazine .magazine-detail h3 {
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 24px;
+  margin-bottom: 5px;
+}
+.education-layout-page .from-the-magazine .magazine-detail img {
+  float: left;
+  margin-right: 10px;
+}
+.education-layout-page .from-the-magazine .magazine-detail .small-detail {
+  overflow: hidden;
+}
+.education-layout-page .from-the-magazine > p {
+  padding: 10px 0;
+}
+.education-layout-page .from-the-magazine > p + p {
+  border-top: 1px solid #ddd;
 }
 
 /*CSS end for education page*/
