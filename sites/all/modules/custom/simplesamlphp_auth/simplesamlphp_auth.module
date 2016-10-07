@@ -251,7 +251,7 @@ function simplesamlphp_auth_init() {
 
   // Load simpleSAMLphp, configuration and metadata.
   $_simplesamlphp_auth_as = new SimpleSAML_Auth_Simple($myval);
-  var_dump($_simplesamlphp_auth_as);
+  //var_dump($_simplesamlphp_auth_as);
   $_simplesamlphp_auth_saml_attributes = $_simplesamlphp_auth_as->getAttributes();
 
   if ($user->uid == 0) {
