@@ -1531,6 +1531,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       text-transform: uppercase;
       font: 400 16px/18px Roboto;
       padding-top: 15px;
+      height: 51px;
+      overflow: hidden;
     }
     .product-description, .post-date{
       display: none;
@@ -1799,6 +1801,7 @@ body.has-cart-popup{
   .quiz-submit{
     background: #1a3c8d none repeat scroll 0 0;
     border: 1px solid #1a3c8d;
+    border-radius: 0;
     color: #fff;
     cursor: pointer;
     font-size: 12px;
@@ -1995,6 +1998,9 @@ body.has-cart-popup{
           vertical-align: middle;
           margin: 0 8px 0 11px;
         }
+        a:hover{
+          color: #a00606;
+        }
       }
       &.points{
         border: 1px solid #dbdbdb;
@@ -2020,7 +2026,8 @@ body.has-cart-popup{
     width: 100%;
     padding-bottom: 15px;
     strong{
-      font: 500 16px/18px Roboto;
+      font: 600 16px/18px Roboto;
+      color: #000;
       &:first-child{
         float: left;
       }
@@ -2036,6 +2043,7 @@ body.has-cart-popup{
     padding-top: 15px;
     span{
       font: 400 16px/18px Roboto;
+      color: #000;
       &:first-child{
         float: left;
       }
@@ -2465,7 +2473,7 @@ body.has-cart-popup{
 
 /* Responsive CSS */
 @media all and(max-width: 767px){
-  
+  /* Responsive CSS For Loyalty and Rewards */
   [id*="block-views-redeem-points-block"]{
     .block-title{
       font: 500 18px/24px Roboto;
@@ -2564,5 +2572,40 @@ body.has-cart-popup{
       }
     }
   }
-  
+  /* End of Loyalty and Rewards */
+  /* Responsive CSS For Quiz And Survey */
+  .survey-form-main-container{
+    .byline{
+      .social-info{
+        display: none;
+      }
+      .profile-pic{
+        margin-right: 10px;
+      }
+      .profile-detail {
+        float: none;
+        overflow: hidden;
+        margin: 0;
+        width: auto;
+        padding: 0;
+      }
+    }
+  } 
+  [id*="itg-quiz-quiz-form"]{
+    .answer-container{
+      padding-left: 0;
+      .form-type-checkboxes, .form-type-radios{
+        .form-type-checkbox, .form-type-radio{
+          > label{
+            width: 100%;
+          }
+        }
+      }
+      .quiz-media-container{
+        width: 130px;
+        margin-right: 10px;
+      }
+    }
+  }    
+  /* End of Quiz And Survey */
 }
