@@ -491,6 +491,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
           $rand_otp = rand(0, 9999);
           if (function_exists(itg_sso_first_time_otp_insert)) {
             itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
+            itg_sso_sms_send($rand_otp, $mobile);
           }
         }
 

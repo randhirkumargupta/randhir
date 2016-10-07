@@ -353,19 +353,10 @@ function itg_users_views_pre_render(&$view) {
  * Implements hook_user_logout
  *
  */
-  function itg_users_user_logout($account) {
+function itg_users_user_logout($account) {
 
-    $url = $_SERVER['HTTP_REFERER'];
-    $parse = parse_url($url);
-    // condition to check for main host
-    if($parse['host'] != 'dev.indiatodayonline.in') {
-      session_destroy();
-      drupal_goto($_SERVER['HTTP_REFERER']);
-    }
-    else {
-      $_GET['destination'] = 'user';
-    }
-  }
+  $_GET['destination'] = 'user';
+}
 
 /*
  * Implements itg_users_role_delegation
