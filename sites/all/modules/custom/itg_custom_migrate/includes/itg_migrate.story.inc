@@ -126,78 +126,78 @@ class ItgStoryMigration extends XMLMigration {
 //    $this->addFieldMapping('field_story_category', 'select_supplement')->xpath('select_supplement');
 //    $this->addFieldMapping('field_primary_category', 'issue_date')->xpath('issue_date');
     $this->addFieldMapping('field_story_kicker_text', 'longheadline')->xpath('longheadline');
-//    $this->addFieldMapping('body', 'byline')->xpath('byline');
-//    $this->addFieldMapping('field_story_magazine_kicker_text', 'city')->xpath('city');
-//    $this->addFieldMapping('field_story_magazine_headline', 'categories')->xpath('categories'); //multi
-//    $this->addFieldMapping('field_story_itg_tags', 'primarycategory')->xpath('primarycategory');
-//    $this->addFieldMapping('field_story_short_headline', 'extralargeimage')->xpath('extralargeimage');
-//    $this->addFieldMapping('field_story_long_head_line', 'largeimage')->xpath('largeimage');
-//    $this->addFieldMapping('field_story_rating', 'mediumimage')->xpath('mediumimage');
-//    $this->addFieldMapping('field_story_new_title', 'smallimage')->xpath('smallimage');
-//    $this->addFieldMapping('field_story_redirection_url_titl', 'extrasmallimage')->xpath('extrasmallimage');
-//    $this->addFieldMapping('field_story_courtesy', 'storykicker')->xpath('storykicker');
-//    $this->addFieldMapping('field_story_snap_post', 'storybody')->xpath('storybody');
-//
-//    $this->addFieldMapping('field_story_courtesy', 'magazinekicker')->xpath('magazinekicker');
-//    $this->addFieldMapping('field_story_courtesy', 'magazineheadline')->xpath('magazineheadline');
-//    $this->addFieldMapping('field_story_courtesy', 'tags')->xpath('tags'); //multi
-//    $this->addFieldMapping('field_story_courtesy', 'shortheadline')->xpath('shortheadline');
-//    $this->addFieldMapping('field_story_courtesy', 'storytitle')->xpath('storytitle');
-//    $this->addFieldMapping('field_story_courtesy', 'storyrating')->xpath('storyrating');
-//    $this->addFieldMapping('field_story_courtesy', 'newtitle')->xpath('newtitle');
-//    $this->addFieldMapping('field_story_courtesy', 'redirectionurl')->xpath('redirectionurl');
-//    $this->addFieldMapping('field_story_courtesy', 'courtesy')->xpath('courtesy');
-//    $this->addFieldMapping('field_story_courtesy', 'snappost')->xpath('snappost');
-//
-//    $this->addFieldMapping('field_story_courtesy', 'facebook')->xpath('socialmediaintegration/facebook');
-//    $this->addFieldMapping('field_story_courtesy', 'facebook_instant_article')->xpath('socialmediaintegration/facebook_instant_article');
-//    $this->addFieldMapping('field_story_courtesy', 'twitter')->xpath('socialmediaintegration/twitter');
-//
-//    $this->addFieldMapping('field_story_courtesy', 'facebooknarrative')->xpath('facebooknarrative');
-//    $this->addFieldMapping('field_story_courtesy', 'facebookimage')->xpath('facebookimage');
-//    $this->addFieldMapping('field_story_courtesy', 'facebookvideonarrative')->xpath('facebookvideonarrative');
-//    $this->addFieldMapping('field_story_courtesy', 'facebookvideo')->xpath('facebookvideo');
-//    $this->addFieldMapping('field_story_courtesy', 'twitternarrative')->xpath('twitternarrative');
-//    $this->addFieldMapping('field_story_courtesy', 'twitterimage')->xpath('twitterimage');
-//    $this->addFieldMapping('field_story_courtesy', 'twittervideodescription')->xpath('twittervideodescription');
-//
-//    $this->addFieldMapping('field_story_courtesy', 'twittervideo')->xpath('twittervideo');
-//    $this->addFieldMapping('field_story_courtesy', 'syndication')->xpath('syndication');
-//    $this->addFieldMapping('field_story_courtesy', 'mediafiles')->xpath('mediafiles');
-//    $this->addFieldMapping('field_story_courtesy', 'client_title')->xpath('client_title');
-//
-//    $this->addFieldMapping('field_story_courtesy', 'breakingnews')->xpath('configurations/breakingnews');
-//    $this->addFieldMapping('field_story_courtesy', 'googlestandout')->xpath('configurations/googlestandout');
-//    $this->addFieldMapping('field_story_courtesy', 'comment')->xpath('configurations/comment');
-//    $this->addFieldMapping('field_story_courtesy', 'mediumstylecomment')->xpath('configurations/mediumstylecomment');
-//    $this->addFieldMapping('field_story_courtesy', 'displaylock')->xpath('configurations/displaylock');
-//
-//    $this->addFieldMapping('field_story_courtesy', 'commentquestion')->xpath('commentquestion');
-//    $this->addFieldMapping('field_story_courtesy', 'featuredname')->xpath('featuredname');
-//    $this->addFieldMapping('field_story_courtesy', 'relatedcontents')->xpath('relatedcontents'); //multi
-//    $this->addFieldMapping('field_story_courtesy', 'scheduledatetime')->xpath('scheduledatetime');
-//    $this->addFieldMapping('field_story_courtesy', 'storyexpires')->xpath('storyexpires');
-//
-//    $this->addFieldMapping('field_story_courtesy', 'storyexpirydate')->xpath('storyexpirydate');
-//    $this->addFieldMapping('field_story_courtesy', 'selectlisticletemplates')->xpath('selectlisticletemplates');
-//    //$this->addFieldMapping('field_story_courtesy', 'listicle_content')->xpath('listicle_content');//multi
-//   // $this->addFieldMapping('field_story_courtesy', 'quotes')->xpath('quotes'); //multi
-//   // $this->addFieldMapping('field_story_courtesy', 'factoids_content')->xpath('factoids_content'); //multi
-//    //$this->addFieldMapping('field_story_courtesy', 'buzz_content')->xpath('buzz_content');//fieldcollection
-//    $this->addFieldMapping('field_story_courtesy', 'briefcase_content')->xpath('briefcase_content'); //multi
-//    $this->addFieldMapping('field_story_courtesy', 'expertname')->xpath('expertname');
-//    $this->addFieldMapping('field_story_courtesy', 'expertimage')->xpath('expertimage');
-//    $this->addFieldMapping('field_story_courtesy', 'expertdescription')->xpath('expertdescription');
-//    $this->addFieldMapping('field_story_courtesy', 'archive')->xpath('archive');
-//    $this->addFieldMapping('field_story_courtesy', 'common_by_line_name')->xpath('common_by_line_name');
-//    $this->addFieldMapping('field_story_courtesy', 'common_by_line_twitter')->xpath('common_by_line_twitter');
-//    $this->addFieldMapping('field_story_courtesy', 'associatetvdate')->xpath('associatetvdate');
-//    $this->addFieldMapping('field_story_courtesy', 'associatetvtime')->xpath('associatetvtime');
-//
-//    $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
-//    $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
-//    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
-//    $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
+    $this->addFieldMapping('body', 'byline')->xpath('byline');
+    $this->addFieldMapping('field_story_magazine_kicker_text', 'city')->xpath('city');
+    $this->addFieldMapping('field_story_magazine_headline', 'categories')->xpath('categories'); //multi
+    $this->addFieldMapping('field_story_itg_tags', 'primarycategory')->xpath('primarycategory');
+    $this->addFieldMapping('field_story_short_headline', 'extralargeimage')->xpath('extralargeimage');
+    $this->addFieldMapping('field_story_long_head_line', 'largeimage')->xpath('largeimage');
+    $this->addFieldMapping('field_story_rating', 'mediumimage')->xpath('mediumimage');
+    $this->addFieldMapping('field_story_new_title', 'smallimage')->xpath('smallimage');
+    $this->addFieldMapping('field_story_redirection_url_titl', 'extrasmallimage')->xpath('extrasmallimage');
+    $this->addFieldMapping('field_story_courtesy', 'storykicker')->xpath('storykicker');
+    $this->addFieldMapping('field_story_snap_post', 'storybody')->xpath('storybody');
+
+    $this->addFieldMapping('field_story_courtesy', 'magazinekicker')->xpath('magazinekicker');
+    $this->addFieldMapping('field_story_courtesy', 'magazineheadline')->xpath('magazineheadline');
+    $this->addFieldMapping('field_story_courtesy', 'tags')->xpath('tags'); //multi
+    $this->addFieldMapping('field_story_courtesy', 'shortheadline')->xpath('shortheadline');
+    $this->addFieldMapping('field_story_courtesy', 'storytitle')->xpath('storytitle');
+    $this->addFieldMapping('field_story_courtesy', 'storyrating')->xpath('storyrating');
+    $this->addFieldMapping('field_story_courtesy', 'newtitle')->xpath('newtitle');
+    $this->addFieldMapping('field_story_courtesy', 'redirectionurl')->xpath('redirectionurl');
+    $this->addFieldMapping('field_story_courtesy', 'courtesy')->xpath('courtesy');
+    $this->addFieldMapping('field_story_courtesy', 'snappost')->xpath('snappost');
+
+    $this->addFieldMapping('field_story_courtesy', 'facebook')->xpath('socialmediaintegration/facebook');
+    $this->addFieldMapping('field_story_courtesy', 'facebook_instant_article')->xpath('socialmediaintegration/facebook_instant_article');
+    $this->addFieldMapping('field_story_courtesy', 'twitter')->xpath('socialmediaintegration/twitter');
+
+    $this->addFieldMapping('field_story_courtesy', 'facebooknarrative')->xpath('facebooknarrative');
+    $this->addFieldMapping('field_story_courtesy', 'facebookimage')->xpath('facebookimage');
+    $this->addFieldMapping('field_story_courtesy', 'facebookvideonarrative')->xpath('facebookvideonarrative');
+    $this->addFieldMapping('field_story_courtesy', 'facebookvideo')->xpath('facebookvideo');
+    $this->addFieldMapping('field_story_courtesy', 'twitternarrative')->xpath('twitternarrative');
+    $this->addFieldMapping('field_story_courtesy', 'twitterimage')->xpath('twitterimage');
+    $this->addFieldMapping('field_story_courtesy', 'twittervideodescription')->xpath('twittervideodescription');
+
+    $this->addFieldMapping('field_story_courtesy', 'twittervideo')->xpath('twittervideo');
+    $this->addFieldMapping('field_story_courtesy', 'syndication')->xpath('syndication');
+    $this->addFieldMapping('field_story_courtesy', 'mediafiles')->xpath('mediafiles');
+    $this->addFieldMapping('field_story_courtesy', 'client_title')->xpath('client_title');
+
+    $this->addFieldMapping('field_story_courtesy', 'breakingnews')->xpath('configurations/breakingnews');
+    $this->addFieldMapping('field_story_courtesy', 'googlestandout')->xpath('configurations/googlestandout');
+    $this->addFieldMapping('field_story_courtesy', 'comment')->xpath('configurations/comment');
+    $this->addFieldMapping('field_story_courtesy', 'mediumstylecomment')->xpath('configurations/mediumstylecomment');
+    $this->addFieldMapping('field_story_courtesy', 'displaylock')->xpath('configurations/displaylock');
+
+    $this->addFieldMapping('field_story_courtesy', 'commentquestion')->xpath('commentquestion');
+    $this->addFieldMapping('field_story_courtesy', 'featuredname')->xpath('featuredname');
+    $this->addFieldMapping('field_story_courtesy', 'relatedcontents')->xpath('relatedcontents'); //multi
+    $this->addFieldMapping('field_story_courtesy', 'scheduledatetime')->xpath('scheduledatetime');
+    $this->addFieldMapping('field_story_courtesy', 'storyexpires')->xpath('storyexpires');
+
+    $this->addFieldMapping('field_story_courtesy', 'storyexpirydate')->xpath('storyexpirydate');
+    $this->addFieldMapping('field_story_courtesy', 'selectlisticletemplates')->xpath('selectlisticletemplates');
+    //$this->addFieldMapping('field_story_courtesy', 'listicle_content')->xpath('listicle_content');//multi
+   // $this->addFieldMapping('field_story_courtesy', 'quotes')->xpath('quotes'); //multi
+   // $this->addFieldMapping('field_story_courtesy', 'factoids_content')->xpath('factoids_content'); //multi
+    //$this->addFieldMapping('field_story_courtesy', 'buzz_content')->xpath('buzz_content');//fieldcollection
+    $this->addFieldMapping('field_story_courtesy', 'briefcase_content')->xpath('briefcase_content'); //multi
+    $this->addFieldMapping('field_story_courtesy', 'expertname')->xpath('expertname');
+    $this->addFieldMapping('field_story_courtesy', 'expertimage')->xpath('expertimage');
+    $this->addFieldMapping('field_story_courtesy', 'expertdescription')->xpath('expertdescription');
+    $this->addFieldMapping('field_story_courtesy', 'archive')->xpath('archive');
+    $this->addFieldMapping('field_story_courtesy', 'common_by_line_name')->xpath('common_by_line_name');
+    $this->addFieldMapping('field_story_courtesy', 'common_by_line_twitter')->xpath('common_by_line_twitter');
+    $this->addFieldMapping('field_story_courtesy', 'associatetvdate')->xpath('associatetvdate');
+    $this->addFieldMapping('field_story_courtesy', 'associatetvtime')->xpath('associatetvtime');
+
+    $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
+    $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
+    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
+    $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
   }
 
   public function prepareRow($row) {
