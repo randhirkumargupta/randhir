@@ -15,6 +15,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
  */
 function itg_common_init() {
   global $user;
+  
 
   // Hide metatags extra fields
 //  if ($user->uid != 1) {
