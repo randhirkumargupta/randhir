@@ -180,6 +180,9 @@ function itg_widget_block_info() {
   $blocks['yearende_left_top_news'] = array(
       'info' => t('Widget: Year end left top news form custom table'),
   );
+  $blocks['education_how_made_id'] = array(
+      'info' => t('Widget: How I Made it form custom table'),
+  );
   $blocks['yearende_left_top_videos'] = array(
       'info' => t('Widget: Year end left top Videos form custom table'),
   );
@@ -300,6 +303,13 @@ function itg_widget_block_view($delta = '') {
       $data = itg_widget_yearend_top_news_ordering_data($info);
 
       $block['content'] = theme("year_end_top_news", array("data" => $data));
+      break;
+   case 'education_how_made_id':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_how_i_made_it');
+      $info['widget_name'] = 'special_how_made_it_content';
+      $data = itg_widget_how_made_it_ordering_data($info);
+      
+      $block['content'] = theme("how_made_it", array("data" => $data));
       break;
     case 'yearende_left_top_videos':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
