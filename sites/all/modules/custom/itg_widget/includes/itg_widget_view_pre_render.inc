@@ -200,6 +200,13 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+   elseif ($view->name == "special_how_i_made_it" && $view->current_display == 'special_how_made_it_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+    //  $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Special How I Made It Widget'), 'special-how-made-it-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $view->attachment_before = $header_content;
+    }
+  }
  
   elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {

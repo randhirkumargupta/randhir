@@ -614,78 +614,82 @@ function get_sessions_of_ticked_nodes(&$form) {
  * {@inheritdoc}
  */
 function itg_widget_theme() {
-  $themes = array(
-    'section_wise_ordering' => array(
-      'template' => 'templates/section-ordering-data',
-    ),
-    'rhs_section_wise_ordering' => array(
-      'template' => 'templates/rhs-section-ordering-data',
-    ),
-    'top_stories_ordering' => array(
-      'template' => 'templates/top-stories-ordering-data',
-    ),
-    'home_page_feature' => array(
-      'template' => 'templates/home-page-feature',
-    ),
-    'we_may_suggest' => array(
-      'template' => 'templates/we-may-suggest',
-    ),
-    'widget_big_story_format' => array(
-      'template' => 'templates/big-story-format',
-    ),
-    'trending_videos_widget' => array(
-      'template' => 'templates/trending-videos-widget',
-    ),
-    'most_popular_widget' => array(
-      'template' => 'templates/most-popular-widget',
-    ),
-    'featured_photo_carousel' => array(
-      'template' => 'templates/featured-photo-carousel',
-    ),
-    'featured_photo_carousel_rollingslider' => array(
-      'template' => 'templates/featured-photo-carousel-rollingslider',
-    ),
-    'featured_video_carousel' => array(
-      'template' => 'templates/featured-video-carousel',
-    ),
-    'featured_video_carousel_rollingslider' => array(
-      'template' => 'templates/featured-video-carousel-rollingslider',
-    ),
-    'dont_miss_widget' => array(
-      'template' => 'templates/dont-miss-widget',
-    ),
-    'top_takes_videos_widget' => array(
-      'template' => 'templates/top-takes-videos-widget',
-    ),
-    'itg_widget_watch_right_now_videos_widget' => array(
-      'template' => 'templates/watch-right-now-videos-widget',
-    ),
-    'anchor_langing_page_menu' => array(
-      'template' => 'templates/anchor-landing-page-menu',
-    ),
-    'personlization_front_end' => array(
-      'template' => 'templates/personlization-front-end',
-    ),
-    'year_end_top_news' => array(
-      'template' => 'templates/year-end-top-news',
-    ),
-    'year_end_top_videos' => array(
-      'template' => 'templates/year-end-top-videos',
-    ),
-    'auto_reviews' => array(
-      'template' => 'templates/auto-reviews',
-    ),
-    'itg_widget_politoons' => array(
-      'template' => 'templates/itg-widget-politoons',
-    ),
-    'tech_reviews' => array(
-      'template' => 'templates/auto-reviews',
-    ),
-    'tech_most_read' => array(
-      'template' => 'templates/tech-most-read',
-    ),
-  );
-  return $themes;
+
+$themes = array(
+'section_wise_ordering' => array(
+'template' => 'templates/section-ordering-data',
+ ),
+ 'rhs_section_wise_ordering' => array(
+'template' => 'templates/rhs-section-ordering-data',
+ ),
+ 'top_stories_ordering' => array(
+'template' => 'templates/top-stories-ordering-data',
+ ),
+ 'home_page_feature' => array(
+'template' => 'templates/home-page-feature',
+ ),
+ 'we_may_suggest' => array(
+'template' => 'templates/we-may-suggest',
+ ),
+ 'widget_big_story_format' => array(
+'template' => 'templates/big-story-format',
+ ),
+ 'trending_videos_widget' => array(
+'template' => 'templates/trending-videos-widget',
+ ),
+ 'most_popular_widget' => array(
+'template' => 'templates/most-popular-widget',
+ ),
+ 'featured_photo_carousel' => array(
+'template' => 'templates/featured-photo-carousel',
+ ),
+ 'featured_photo_carousel_rollingslider' => array(
+'template' => 'templates/featured-photo-carousel-rollingslider',
+ ),
+ 'featured_video_carousel' => array(
+'template' => 'templates/featured-video-carousel',
+ ),
+ 'featured_video_carousel_rollingslider' => array(
+'template' => 'templates/featured-video-carousel-rollingslider',
+ ),
+ 'dont_miss_widget' => array(
+'template' => 'templates/dont-miss-widget',
+ ),
+ 'top_takes_videos_widget' => array(
+'template' => 'templates/top-takes-videos-widget',
+ ),
+ 'itg_widget_watch_right_now_videos_widget' => array(
+'template' => 'templates/watch-right-now-videos-widget',
+ ),
+ 'anchor_langing_page_menu' => array(
+'template' => 'templates/anchor-landing-page-menu',
+ ),
+ 'personlization_front_end' => array(
+'template' => 'templates/personlization-front-end',
+ ),
+ 'year_end_top_news' => array(
+'template' => 'templates/year-end-top-news',
+ ),
+ 'how_made_it' => array(
+'template' => 'templates/how-made-it',
+ ),
+ 'year_end_top_videos' => array(
+'template' => 'templates/year-end-top-videos',
+ ),
+ 'auto_reviews' => array(
+'template' => 'templates/auto-reviews',
+ ),
+ 'itg_widget_politoons' => array(
+'template' => 'templates/itg-widget-politoons',
+ ),
+ 'tech_reviews' => array(
+'template' => 'templates/auto-reviews',
+ ),
+ 'tech_most_read' => array(
+'template' => 'templates/tech-most-read',
+ ),
+);
+return $themes;
 }
 
 /**
@@ -699,124 +703,133 @@ function get_required_data_from_entity_id($entity_id) {
  * {@inheritdoc}
  */
 function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  switch ($form['#id']) {
-    case 'views-exposed-form-home-page-feature-widget-page-1':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      break;
 
-    case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE, 'story');
-      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      break;
-    case 'views-exposed-form-story-widget-most-popular':
-    case 'views-exposed-form-story-widget-page-1':
-      $form['title']['#attributes']['placeholder'] = t('Story Title');
-      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Story ID');
-      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
-      break;
-    case 'views-exposed-form-photo-carousel-widget-photo-carousel-list':
-      $form['title']['#attributes']['placeholder'] = t('Photo Gallery Title');
-      $form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Photo Gallery ID');
-      $form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
-      break;
-    case 'views-exposed-form-photo-carousel-widget-video-carousel-list':
-      $form['title']['#attributes']['placeholder'] = t('Video Gallery Title');
-      $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Video Gallery ID');
-      $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
-      break;
-    case 'views-exposed-form-story-widget-trending-videos':
-    case 'views-exposed-form-story-widget-top-takes-video':
-    case 'views-exposed-form-story-widget-watch-right-now':
-      $form['title']['#attributes']['placeholder'] = t('Video Title');
-      $form['nid']['#attributes']['placeholder'] = t('Video ID');
-      $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
-      $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
-      break;
-    case 'views-exposed-form-so-sorry-so-sorry-videos':
-      $cat_setting = trim(variable_get('so_sorry_category_id_for_widget'));
-      if (strlen($cat_setting) <= 0) {
-        $setting_link = l("Click Here", "admin/settings/custom-variables");
-        drupal_set_message("Setting not found for autocomplete. Please $setting_link", "error");
-      }
-      $form['title']['#attributes']['placeholder'] = t('Video Title');
-      $form['nid']['#attributes']['placeholder'] = t('Video ID');
-      $form['title']['#autocomplete_path'] = 'so-sorry-content-title/autocomplete';
-      $form['nid']['#autocomplete_path'] = 'so-sorry-content-nid/autocomplete';
-      break;
-    case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
-      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      break;
-    case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      break;
-    case 'views-exposed-form-special-auto-review-widget-special-auto-review-widget-contents':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      break;
-    case 'views-exposed-form-feature-content-by-section-widget-feature-content-section-widget-contents':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      break;
-    case 'views-exposed-form-poll-widget-poll-widget-format':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $autocomplete_path = autocomplete_for_widgets('poll');
-      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      break;
-    case 'views-exposed-form-yearender-top-news-and-top-videos-yearend-left-widget-contents':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      break;
-    case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
-      $form['title']['#attributes']['placeholder'] = t('Anchor name');
-      $form['title']['#autocomplete_path'] = 'anchor-list/autocomplete';
-      $form['nid']['#attributes']['placeholder'] = t('Anchor ID');
-      $form['nid']['#autocomplete_path'] = 'anchor-list-nid/autocomplete';
-      break;
-    case 'views-exposed-form-section-wise-draggable-content-order-page':
-      $form['title']['#attributes']['placeholder'] = t('Content Title');
-      $form['nid']['#attributes']['placeholder'] = t('Content ID');
-      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      $form['#validate'][] = 'custom_section_wise_validate';
-      break;
-    case 'views-exposed-form-section-wise-content-ordering-list-page':
-      $form['#validate'][] = 'custom_section_wise_validate';
-      break;
-  }
+switch ($form['#id']) {
+case 'views-exposed-form-home-page-feature-widget-page-1':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type']);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
 
-  if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
-    $form['#info']['filter-shs_term_node_tid_depth']['label'] = 'Section';
-  }
+case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE, 'story');
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
+case 'views-exposed-form-story-widget-most-popular':
+case 'views-exposed-form-story-widget-page-1':
+$form['title']['#attributes']['placeholder'] = t('Story Title');
+$form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+$form['nid']['#attributes']['placeholder'] = t('Story ID');
+$form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
+break;
+case 'views-exposed-form-photo-carousel-widget-photo-carousel-list':
+$form['title']['#attributes']['placeholder'] = t('Photo Gallery Title');
+$form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
+$form['nid']['#attributes']['placeholder'] = t('Photo Gallery ID');
+$form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
+break;
+case 'views-exposed-form-photo-carousel-widget-video-carousel-list':
+$form['title']['#attributes']['placeholder'] = t('Video Gallery Title');
+$form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
+$form['nid']['#attributes']['placeholder'] = t('Video Gallery ID');
+$form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
+break;
+case 'views-exposed-form-story-widget-trending-videos':
+case 'views-exposed-form-story-widget-top-takes-video':
+case 'views-exposed-form-story-widget-watch-right-now':
+$form['title']['#attributes']['placeholder'] = t('Video Title');
+$form['nid']['#attributes']['placeholder'] = t('Video ID');
+$form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
+$form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
+break;
+case 'views-exposed-form-so-sorry-so-sorry-videos':
+$cat_setting = trim(variable_get('so_sorry_category_id_for_widget'));
+if (strlen($cat_setting) <= 0) {
+$setting_link = l("Click Here", "admin/settings/custom-variables");
+drupal_set_message("Setting not found for autocomplete. Please $setting_link", "error");
+}
+$form['title']['#attributes']['placeholder'] = t('Video Title');
+$form['nid']['#attributes']['placeholder'] = t('Video ID');
+$form['title']['#autocomplete_path'] = 'so-sorry-content-title/autocomplete';
+$form['nid']['#autocomplete_path'] = 'so-sorry-content-nid/autocomplete';
+break;
+case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
+case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type']);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
+case 'views-exposed-form-special-auto-review-widget-special-auto-review-widget-contents':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type']);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
+case 'views-exposed-form-special-how-i-made-it-special-how-made-it-widget-contentsyear_end_top_news':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type']);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
+case 'views-exposed-form-feature-content-by-section-widget-feature-content-section-widget-contents':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type']);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
+case 'views-exposed-form-poll-widget-poll-widget-format':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets('poll');
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
+case 'views-exposed-form-yearender-top-news-and-top-videos-yearend-left-widget-contents':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type']);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+break;
+case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
+$form['title']['#attributes']['placeholder'] = t('Anchor name');
+$form['title']['#autocomplete_path'] = 'anchor-list/autocomplete';
+$form['nid']['#attributes']['placeholder'] = t('Anchor ID');
+$form['nid']['#autocomplete_path'] = 'anchor-list-nid/autocomplete';
+break;
+case 'views-exposed-form-section-wise-draggable-content-order-page':
+$form['title']['#attributes']['placeholder'] = t('Content Title');
+$form['nid']['#attributes']['placeholder'] = t('Content ID');
+$autocomplete_path = autocomplete_for_widgets($_GET['type']);
+$form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+$form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+$form['#validate'][] = 'custom_section_wise_validate';
+break;
+case 'views-exposed-form-section-wise-content-ordering-list-page':
+$form['#validate'][] = 'custom_section_wise_validate';
+break;
+}
+
+if (isset($form['#info']['filter-shs_term_node_tid_depth']) &&!empty($form['#info']['filter-shs_term_node_tid_depth'])) {
+$form['#info']['filter-shs_term_node_tid_depth']['label'] = 'Section';
+}
+
 }
 
 /**
@@ -1013,59 +1026,61 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
 
 // Start alter for tech
-  if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_8')) {
-    global $theme;
+if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_2' || $view->current_display == 'block_8')) {
+global $theme;
 
-    if ($theme != 'seven') {
-      if ($theme == FRONT_THEME_NAME) {
-        $section = arg(2);
-      }
-      else {
-        $section = $_GET['section'];
-      }
+if ($theme != 'seven') {
+if ($theme == FRONT_THEME_NAME) {
+$section = arg(2);
+}
+else {
+$section = $_GET['section'];
+}
 
-      $query->where[1]['conditions'][3]['value'] = $section;
-    }
-  }
+$query->where[1]['conditions'][3]['value'] = $section;
+}
+
+}
 
 
-  if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos' || $view->current_display == 'oscar_photos')) {
-    if ($theme != 'seven') {
-      if ($theme == FRONT_THEME_NAME) {
-        $section = arg(2);
-      }
-      else {
-        $section = $_GET['section'];
-      }
+if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos' || $view->current_display == 'oscar_photos')) {
+if ($theme != 'seven') {
+if ($theme == FRONT_THEME_NAME) {
+$section = arg(2);
+}
+else {
+$section = $_GET['section'];
+}
 
-      $query->where[1]['conditions'][3]['value'] = $section;
-    }
-  }
-  if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
-    if ($theme != 'seven') {
-      if ($theme == FRONT_THEME_NAME) {
-        $section = arg(2);
-      }
-      else {
-        $section = $_GET['section'];
-      }
+$query->where[1]['conditions'][3]['value'] = $section;
+}
+}
+if ($view->name == 'special_entertainment' && ($view->current_display == 'entertainment_oscar_slider')) {
+if ($theme != 'seven') {
+if ($theme == FRONT_THEME_NAME) {
+$section = arg(2);
+}
+else {
+$section = $_GET['section'];
+}
 
-      $query->where[1]['conditions'][2]['value'] = $section;
-    }
-  }
+$query->where[1]['conditions'][2]['value'] = $section;
+}
+}
 
-  if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider' || $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top' || $view->current_display == 'special_movie_video')) {
-    if ($theme != 'seven') {
-      if ($theme == FRONT_THEME_NAME) {
-        $section = arg(2);
-      }
-      else {
-        $section = $_GET['section'];
-      }
+if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider' || $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top' || $view->current_display == 'special_movie_video')) {
+if ($theme != 'seven') {
+if ($theme == FRONT_THEME_NAME) {
+$section = arg(2);
+}
+else {
+$section = $_GET['section'];
+}
 
-      $query->where[1]['conditions'][3]['value'] = $section;
-    }
-  }
+$query->where[1]['conditions'][3]['value'] = $section;
+}
+}
+
 }
 
 /**
