@@ -7,8 +7,8 @@ if ($widget_style == 'auto-road-trip') {
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
-                if (strtolower($entity->type) != 'videogallery') {
-                    $video_class = 'video-none';
+                if (strtolower($entity->type) == 'videogallery') {
+                    $video_class = 'video-icon';
                 }
 
                 $desc = $entity->title;
@@ -46,8 +46,8 @@ if ($widget_style == 'auto-road-trip') {
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
-                if (strtolower($entity->type) != 'videogallery') {
-                    $video_class = 'video-none';
+                if (strtolower($entity->type) == 'videogallery') {
+                    $video_class = 'video-icon';
                 }
 
 
@@ -76,7 +76,7 @@ if ($widget_style == 'auto-road-trip') {
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
-                if (strtolower($entity->type) != 'videogallery') {
+                if (strtolower($entity->type) == 'videogallery') {
                     $video_class = 'video-icon';
                 }
                 $desc = $entity->title;
@@ -151,7 +151,7 @@ if ($widget_style == 'auto-road-trip') {
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
-                if (strtolower($entity->type) != 'videogallery') {
+                if (strtolower($entity->type) == 'videogallery') {
                     $video_class = 'video-icon';
                 }
                 $desc = $entity->title;
@@ -242,7 +242,7 @@ if ($widget_style == 'auto-road-trip') {
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
-                if (strtolower($entity->type) != 'videogallery') {
+                if (strtolower($entity->type) == 'videogallery') {
                     $video_class = 'video-icon';
                 }
                 $desc = $entity->title;
@@ -328,7 +328,7 @@ if ($widget_style == 'auto-road-trip') {
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
-                if (strtolower($entity->type) != 'videogallery') {
+                if (strtolower($entity->type) == 'videogallery') {
                     $video_class = 'video-icon';
                 }
                 $desc = $entity->title;
@@ -414,8 +414,8 @@ if ($widget_style == 'auto-road-trip') {
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
-                if (strtolower($entity->type) != 'videogallery') {
-                    $video_class = 'video-none';
+                if (strtolower($entity->type) == 'videogallery') {
+                    $video_class = 'video-icon';
                 }
                 $desc = $entity->title;
                 if ($entity->field_gallery_kicer['und'][0]['value'] != "") {
@@ -472,8 +472,8 @@ if ($widget_style == 'auto-road-trip') {
         $coun = 1;
         foreach ($data as $count => $entity) {
             $video_class = "";
-            if (strtolower($entity->type) != 'videogallery') {
-                $video_class = 'video-none';
+            if (strtolower($entity->type) == 'videogallery') {
+                $video_class = 'video-icon';
             }
             $desc = $entity->title;
             if ($entity->field_gallery_kicer['und'][0]['value'] != "") {
@@ -493,7 +493,7 @@ if ($widget_style == 'auto-road-trip') {
                         <img src="<?php echo $extra_large_image_url; ?>">
                     </a></span>
 
-                <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
+                <p><?php echo l(mb_strimwidth($desc, 0, 80, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
             </div>
             <?php
             $coun++;
@@ -512,8 +512,8 @@ if ($widget_style == 'auto-road-trip') {
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
-                if (strtolower($entity->type) != 'videogallery') {
-                    $video_class = 'video-none';
+                if (strtolower($entity->type) == 'videogallery') {
+                    $video_class = 'video-icon';
                 }
 
                 $desc = $entity->title;
@@ -555,8 +555,8 @@ if ($widget_style == 'auto-road-trip') {
                 $reporter = "";
                 $extra_large_image_url = "";
                 $video_class = "";
-                if (strtolower($entity->type) != 'videogallery') {
-                    $video_class = 'video-none';
+                if (strtolower($entity->type) == 'videogallery') {
+                    $video_class = 'video-icon';
                 }
 
                 $desc = $entity->title;
