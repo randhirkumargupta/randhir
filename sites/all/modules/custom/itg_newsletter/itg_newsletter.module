@@ -706,13 +706,13 @@ function itg_newslatter_register_form_validate($form, &$form_state) {
     form_set_error('mobile', t('Your Mobile Numbers should contain 10 digits'));
   }
   if (!empty($email) && !valid_email_address($email)) {
-    form_set_error('email', 'Sorry. Your email address,' . $email . ' is not valid.');
+    form_set_error('email', 'Invalid email address!');
   }
 
-  if (!empty($email) && !empty($mobile)) {
-    $updates_check = itg_newslatter_register_more_updates_check($email, $mobile);
+  if (!empty($email)) {
+    $updates_check = itg_newslatter_register_more_updates_check($email);
     if (!empty($updates_check) && $updates_check > 0) {
-      form_set_error('email', 'Your email address ' . $email . ' or Mobile ' . $mobile . ' already register.');
+      form_set_error('email', 'This email address is already registered!');
     }
   }
 }
@@ -762,12 +762,9 @@ function itg_newslatter_register_custom_submit($form, &$form_state) {
  * @param int $mobile
  * @return int
  */
-function itg_newslatter_register_more_updates_check($email, $mobile) {
+function itg_newslatter_register_more_updates_check($email) {
   return $query = db_select('itg_newslatter_update_details', 'd')
       ->fields('d', array('id'));
-  $db_or = db_or();
-  $db_or->condition('email', $email, '=');
-  $db_or->condition('mobile', $mobile, '=');
-  $query->condition($db_or);
+  $query->condition('email', $email, '=');
   $query->range(0, 1)->execute()->rowCount();
 }
