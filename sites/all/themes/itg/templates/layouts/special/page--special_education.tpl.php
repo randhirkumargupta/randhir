@@ -131,7 +131,7 @@ if ($theme != 'itgadmin') {
                 </div>
                     <div class="itg-widget trending-list">
                         
-                      <div class="itg-widget-child">
+                      <div class="itg-widget-child shadow-on">
                         <div class="droppable <?php print $gray_bg_layout; ?>">
                           <div class="widget-wrapper <?php print $widget_data['itg-block-3']['widget_name'].$widget_data['itg-block-3']['widget_display_name']; ?>">
                              <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-3']['block_title'])) { ?>
@@ -164,9 +164,9 @@ if ($theme != 'itgadmin') {
     <div class="row itg-common-section itg-layout-565">
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
+               <div class="widget-wrapper section_wise_order <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-4']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-4']['block_title']; ?></span>
                   <?php } ?>
@@ -181,7 +181,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-4" widget-style="edu-exam"><?php print $widget_data['itg-block-4']['widget']; ?><span><?php print $widget_data['itg-block-4']['more_url']; ?></span></div>
+                    <div class="data-holder" id="itg-block-4" widget-style="edu-exam"><?php print $widget_data['itg-block-4']['widget']; ?><span class="more"><?php print $widget_data['itg-block-4']['more_url']; ?></span></div>
                   </div> 
                   
                 </div>               
@@ -189,9 +189,9 @@ if ($theme != 'itgadmin') {
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'].$widget_data['itg-block-5']['widget_display_name']; ?>">
+               <div class="widget-wrapper section_wise_order <?php print $widget_data['itg-block-5']['widget_name'].$widget_data['itg-block-5']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
                   <?php } ?>
@@ -206,7 +206,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-5"  widget-style="edu-gov-jobs"><?php print $widget_data['itg-block-5']['widget']; ?><span><?php print $widget_data['itg-block-5']['more_url']; ?></span></div>
+                    <div class="data-holder" id="itg-block-5"  widget-style="edu-gov-jobs"><?php print $widget_data['itg-block-5']['widget']; ?><span class="more"><?php print $widget_data['itg-block-5']['more_url']; ?></span></div>
                   </div>             
                 </div>               
             </div>
@@ -215,7 +215,7 @@ if ($theme != 'itgadmin') {
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 m-bottom40">
-                        <div class="itg-widget-parent">
+                        <div class="itg-widget-parent shadow-on">
                             <div class="droppable <?php print $gray_bg_layout; ?>">
                                 <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'] . $widget_data['itg-block-6']['widget_display_name']; ?>">
                                     <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-6']['block_title'])) { ?>
@@ -239,7 +239,7 @@ if ($theme != 'itgadmin') {
                 </div>
                 
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="itg-widget-child">
+                        <div class="itg-widget-child shadow-on">
                             <div class="droppable <?php print $gray_bg_layout; ?>">
                                 <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'] . $widget_data['itg-block-6']['widget_display_name']; ?>">
                                     <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-6']['block_title'])) { ?>
@@ -268,10 +268,10 @@ if ($theme != 'itgadmin') {
     </div>
   <?php } ?>
   <?php if (isset($widget_data['itg-block-16']['widget_name']) || isset($widget_data['itg-block-17']['widget_name']) || isset($widget_data['itg-block-18']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row itg-common-section">
+    <div class="row itg-common-section itg-295-layout">
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-16']['widget_name'].$widget_data['itg-block-16']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-16']['block_title'])) { ?>
@@ -288,14 +288,14 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-16" widget-style="edu-notification"><?php print $widget_data['itg-block-16']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-16']['block_title'])) { ?><span><?php print $widget_data['itg-block-16']['more_url'];  ?></span><?php } ?></div>
+                    <div class="data-holder" id="itg-block-16" widget-style="edu-notification"><?php print $widget_data['itg-block-16']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-16']['block_title'])) { ?><span class="more"><?php print $widget_data['itg-block-16']['more_url'];  ?></span><?php } ?></div>
                   </div>             
                 </div>               
             </div>  
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-17']['widget_name'].$widget_data['itg-block-17']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-17']['block_title'])) { ?>
@@ -336,7 +336,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-18" widget-style="edu-tips-and-trick"><?php print $widget_data['itg-block-18']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-18']['block_title'])) { ?><span><?php print $widget_data['itg-block-18']['more_url']; ?></span><?php } ?></div>
+                     <div class="data-holder" id="itg-block-18" widget-style="edu-tips-and-trick"><?php print $widget_data['itg-block-18']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-18']['block_title'])) { ?><span class="more"><?php print $widget_data['itg-block-18']['more_url']; ?></span><?php } ?></div>
                   </div>             
                 </div>               
             </div>          
@@ -345,10 +345,10 @@ if ($theme != 'itgadmin') {
     </div>
   <?php } ?>
    <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row itg-common-section">
+    <div class="row itg-common-section itg-325-layout">
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'].$widget_data['itg-block-7']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-7']['block_title'])) { ?>
@@ -365,14 +365,14 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-7" widget-style="edu-featurefilia"><?php print $widget_data['itg-block-7']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-7']['block_title'])) { ?><span><?php print $widget_data['itg-block-7']['more_url']; ?></span><?php } ?></div>
+                    <div class="data-holder" id="itg-block-7" widget-style="edu-featurefilia"><?php print $widget_data['itg-block-7']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-7']['block_title'])) { ?><span class="more"><?php print $widget_data['itg-block-7']['more_url']; ?></span><?php } ?></div>
                   </div>             
                 </div>               
             </div>  
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name'].$widget_data['itg-block-8']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-8']['block_title'])) { ?>
@@ -389,14 +389,14 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-8" widget-style="edu-jobs-and-career" ><?php print $widget_data['itg-block-8']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-8']['block_title'])) { ?><span><?php print $widget_data['itg-block-8']['more_url']; ?></span><?php } ?></div>
+                    <div class="data-holder" id="itg-block-8" widget-style="edu-jobs-and-career" ><?php print $widget_data['itg-block-8']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-8']['block_title'])) { ?><span class="more"><?php print $widget_data['itg-block-8']['more_url']; ?></span><?php } ?></div>
                   </div>             
                 </div>               
             </div>
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget-parent m-bottom40">
+            <div class="itg-widget-parent">
                   <div class="itg-widget">
                     <div class="ad-widget">
                       <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']);?></div>
@@ -406,13 +406,13 @@ if ($theme != 'itgadmin') {
 
     </div>
   <?php } ?>
-  
+    </div>
   
    <?php if (isset($widget_data['itg-block-10']['widget_name']) || isset($widget_data['itg-block-11']['widget_name']) || isset($widget_data['itg-block-12']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row itg-common-section">
+    <div class="row itg-common-section itg-345-layout">
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name'].$widget_data['itg-block-10']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-10']['block_title'])) { ?>
@@ -429,14 +429,14 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-10" widget-style="edu-sample-paper"><?php print $widget_data['itg-block-10']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-10']['block_title'])) { ?><span><?php print $widget_data['itg-block-10']['more_url']; ?></span><?php } ?></div>
+                    <div class="data-holder" id="itg-block-10" widget-style="edu-sample-paper"><?php print $widget_data['itg-block-10']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-10']['block_title'])) { ?><span class="more"><?php print $widget_data['itg-block-10']['more_url']; ?></span><?php } ?></div>
                   </div>             
                 </div>               
             </div>  
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-11']['widget_name'].$widget_data['itg-block-11']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title'])) { ?>
@@ -488,7 +488,7 @@ if ($theme != 'itgadmin') {
   
   
    <?php if (isset($widget_data['itg-block-13']['widget_name']) || isset($widget_data['itg-block-14']['widget_name']) || isset($widget_data['itg-block-15']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row itg-common-section">
+    <div class="row itg-common-section itg-345-layout">
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
             <div class="itg-widget">
@@ -508,14 +508,14 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-13" widget-style="edu-from-the-magazine"><?php print $widget_data['itg-block-13']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-13']['block_title'])) { ?><span><?php print $widget_data['itg-block-13']['more_url']; ?></span> <?php } ?></div>
+                    <div class="data-holder" id="itg-block-13" widget-style="edu-from-the-magazine"><?php print $widget_data['itg-block-13']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-13']['block_title'])) { ?><span class="more"><?php print $widget_data['itg-block-13']['more_url']; ?></span> <?php } ?></div>
                   </div>             
                 </div>               
             </div>  
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-14']['widget_name'].$widget_data['itg-block-14']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-14']['block_title'])) { ?>
@@ -532,14 +532,14 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-14" widget-style="edu-plan-your-career"><?php print $widget_data['itg-block-14']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-14']['block_title'])) { ?><span><?php print $widget_data['itg-block-14']['more_url']; ?></span><?php } ?></div>
+                    <div class="data-holder" id="itg-block-14" widget-style="edu-plan-your-career"><?php print $widget_data['itg-block-14']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-14']['block_title'])) { ?><span class="more"><?php print $widget_data['itg-block-14']['more_url']; ?></span><?php } ?></div>
                   </div>             
                 </div>               
             </div>
         </div>
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
-            <div class="itg-widget">
+            <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-15']['widget_name'].$widget_data['itg-block-15']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-15']['block_title'])) { ?>
@@ -556,7 +556,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-15" ><?php print $widget_data['itg-block-15']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-15']['block_title'])) { ?><span><?php print $widget_data['itg-block-15']['more_url']; ?></span><?php } ?></div>
+                    <div class="data-holder" id="itg-block-15" ><?php print $widget_data['itg-block-15']['widget']; ?> <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-15']['block_title'])) { ?><span class="more"><?php print $widget_data['itg-block-15']['more_url']; ?></span><?php } ?></div>
                   </div>             
                 </div>               
             </div>          
@@ -565,12 +565,9 @@ if ($theme != 'itgadmin') {
     </div>
   <?php } ?>
   
-  
   <!--End of Common section-->
-    
-  
-  
 </div>
+  
 
   <?php //print render($page['content']); ?>
   <!--Start third party widgets -->
