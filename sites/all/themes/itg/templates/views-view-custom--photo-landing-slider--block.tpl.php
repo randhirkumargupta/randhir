@@ -8,13 +8,13 @@
                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-comment"></i></a></li>
                 <li><a href="#"><i class="fa fa-link"></i></a></li>
-                <li><a href="#"><i class="fa fa-share"></i></a></li>
+                <li class="mhide"><a href="#"><i class="fa fa-share"></i></a></li>
                 <?php global $user; ?>
                   <?php if ($user->uid > 0): ?>
                      <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>                      
-                     <li><?php print $read_later; ?></li>
+                     <li class="mhide"><?php print $read_later; ?></li>
                   <?php else: ?>
-                     <?php print '<li>' . l('<i class="fa fa-bookmark"></i>fdffd', 'user/login', array('html' => TRUE)) . '</li>'; ?>
+                     <?php print '<li class="mhide">' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE)) . '</li>'; ?>
                 <?php endif; ?>                  
             </ul>
         </div>

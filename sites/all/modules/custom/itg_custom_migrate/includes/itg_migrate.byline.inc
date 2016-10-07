@@ -72,7 +72,7 @@ class ItgBylineMigration extends XMLMigration {
     
     $this->addFieldMapping('title', 'title')->xpath('title');
     
-    $this->addFieldMapping('field_story_category', 'categories')->xpath('categories/category');
+    //$this->addFieldMapping('field_story_category', 'categories')->xpath('categories/category');
     $this->addFieldMapping('field_reporter_email_id', 'reporter_email_id')->xpath('reporter_email_id');
     $this->addFieldMapping('field_reporter_twitter_handle', 'reporter_twitter_handle')->xpath('reporter_twitter_handle');
     $this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');    

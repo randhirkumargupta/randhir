@@ -33,6 +33,9 @@ img{
 .mt-50{
     margin-top: 50px;
 }
+.m-top{
+    margin-top: 10px;
+}
 .m-bottom40{
         margin-bottom: 40px;
     }
@@ -1208,14 +1211,102 @@ img{
                 overflow: hidden;
             }
         }
+    }   
+    .itg-295-layout{
+        .droppable {
+                height: 295px;
+                overflow: hidden;
+            }
     }
-    .itg-common-section{
-        .ad-widget {
-            height: 382px;
+    .itg-325-layout{
+        .droppable, .ad-widget{
+                height: 325px;
+                overflow: hidden;
+            }       
+    }
+    .itg-345-layout{
+        .droppable {
+                height: 345px;
+                overflow: hidden;
+            }
+    }
+    .from-the-magazine{
+        background: #f3f3f3;
+        padding:10px;        
+        .magazine-detail{
+            margin-bottom:10px;
+        h3{
+            @include font(18px,24px,null);
+            margin-bottom:5px;
+        }
+        img{
+            @include float(left);
+            margin-right: 10px;
+        }
+        .small-detail{
             overflow: hidden;
+        }         
+        }
+        > p{
+            padding: 10px 0;            
+        }
+        > p + p{            
+            border-top: 1px solid #ddd;                        
         }
     }
 }
 /*CSS end for education page*/
 
 
+/*CSS start sport home page*/
+.sport-home-layout-page{
+    .droppable {
+        overflow: hidden;
+    }
+    .itg-layout-615{
+        .droppable {
+            height: 615px;            
+        }
+    }
+    .itg-layout-225{
+        .droppable {
+            height: 225px;            
+        }
+    }
+    .itg-layout-300{
+        .droppable {
+            height: 300px;            
+        }
+    }
+    .itg-layout-485{
+        .droppable {
+            height: 485px;            
+        }
+    }
+    .itg-layout-195{
+        .droppable {
+            height: 195px;            
+        }
+    }
+    .itg-layout-260{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-375{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-315{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-340{
+        .droppable {
+            height: 260px;            
+        }
+    }
+}
+/*CSS End sport home page*/

@@ -370,7 +370,7 @@ function itgadmin_preprocess_page(&$vars) {
       , 'video-list-widget-listing'
       , 'issue-magazin-widget-list'
       , 'poll-format-widget-list'
-      , 'dont-miss-widget-list'
+      , 'special-how-made-it-widget-list'
       , 'video-status'
       , 'related-content'
       , 'feature-content-section-widget-list'
