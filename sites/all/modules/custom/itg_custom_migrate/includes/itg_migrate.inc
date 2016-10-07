@@ -43,6 +43,9 @@ function itg_dbmigrate_migrate_api() {
       'itg_story' => array(
         'title' => t('Itg story Imports'),
       ),
+       'itg_byline' => array(
+        'title' => t('Itg byline Imports'),
+      ),
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -57,7 +60,11 @@ function itg_dbmigrate_migrate_api() {
       'ItgStory' => array(
         'class_name' => 'ItgStoryMigration',
         'group_name' => 'itg_story',
-      ), 
+      ),
+      'ItgByline' => array(
+        'class_name' => 'ItgBylineMigration',
+        'group_name' => 'itg_byline',
+      ),
     ),
     
   );

@@ -162,6 +162,7 @@ function itg_sso_user_activate_callback() {
         ->execute();
     
     print '<div class="activate-message">Your Account Activated Sucessfully, Please login to continue !</div>';
+    drupal_goto('http://dev.indiatodayonline.in/');
   }
 }
 

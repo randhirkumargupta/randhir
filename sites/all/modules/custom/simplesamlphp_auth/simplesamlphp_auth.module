@@ -783,6 +783,9 @@ function _simplesamlphp_auth_get_authname() {
   if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.id_str']))) {
     $seg = $_simplesamlphp_auth_saml_attributes['twitter.id_str'][0];
   }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.id']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook.id'][0];
+  }
   else
   {
     $seg = $_simplesamlphp_auth_saml_attributes[variable_get('simplesamlphp_auth_unique_id', 'eduPersonPrincipalName')][0];
@@ -817,6 +820,9 @@ function _simplesamlphp_auth_get_default_name($account) {
 
   if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.id_str']))) {
     $seg = 'twitter.screen_name';
+  }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.id']))) {
+    $seg = 'facebook.name';
   }
   else
   {
@@ -853,6 +859,9 @@ function _simplesamlphp_auth_get_mail() {
   global $seg;
   if (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['twitter.id_str']))) {
     $seg = $_simplesamlphp_auth_saml_attributes['twitter_screen_n_realm'];
+  }
+  elseif (isset($_simplesamlphp_auth_saml_attributes) && (!empty($_simplesamlphp_auth_saml_attributes['facebook.id']))) {
+    $seg = $_simplesamlphp_auth_saml_attributes['facebook_user'];
   }
   else
   {

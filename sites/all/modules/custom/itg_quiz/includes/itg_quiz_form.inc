@@ -188,14 +188,14 @@ function itg_quiz_quiz_form() {
           $form['media' . $num] = array(
               '#type' => 'markup',
               '#prefix' => '<div>',
-              '#markup' => '<img src="'.$media_path.'" width="400"/>',
+              '#markup' => '<img src="'.$media_path.'" width="740"/>',
               '#suffix' => '</div>',
           );
         } else {
           $form['media' . $num] = array(
               '#type' => 'markup',
               '#prefix' => '<div>',
-              '#markup' => '<video width="300" height="220" controls="controls">
+              '#markup' => '<video width="730" height="500" controls="controls">
                <source src="' . $media . '" type="video/mp4"> 
                 <object> 
                   <embed  src="' . $media . '"> 
@@ -508,7 +508,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
         $correct_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
         $incorrect_answer = $total_ques_attempt - $correct_answer;
         
-        $output = '<div class = "quiz-contest-result-container"> <h2 style="font-size:18px; font-weight:bold; margin: 10px 0px 10px 0px">Thank you for attempting our quiz. Result is given below:</h2>
+        $output = '<div class = "quiz-contest-result-container"> <div class="quiz-question-thankyou-msg">Thank you for attempting our quiz. Result is given below:</div>
         <div class = "quiz-contest-result"><span>Total Question  Attempted:</span> ' . $total_ques_attempt . '</div>
         <div class = "quiz-contest-result"><span>Correct Answer:</span> ' . $correct_answer . '</div>
         <div class = "quiz-contest-result"><span>Incorrect Answer:</span> ' . $incorrect_answer . '</div>

@@ -396,45 +396,6 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['path'] = 'manage-quiz';
-  $translatables['manage_quiz'] = array(
-    t('Master'),
-    t('Manage Quiz'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('No Result Found!'),
-    t('S.No'),
-    t('Nid'),
-    t('Quiz Title'),
-    t('Quiz id'),
-    t('Category'),
-    t('Start Date'),
-    t('End Date'),
-    t('Created Date'),
-    t('Modified On'),
-    t('Published'),
-    t('Question'),
-    t('View User List'),
-    t('View'),
-    t('<span class="view-link">View</span>'),
-    t('Edit link'),
-    t('<span class="edit-link">[edit_node]</span>'),
-    t('Delete link'),
-    t('<span class="delete-link">[delete_node]</span>'),
-    t('Actions'),
-    t('Title'),
-    t('Page'),
-  );
   $export['manage_quiz'] = $view;
 
   $view = new view();
@@ -499,26 +460,6 @@ function features_for_quiz_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'display-question/%';
-  $translatables['question_list'] = array(
-    t('Master'),
-    t('Question list'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('Add Quiz Question'),
-    t('All'),
-    t('Page'),
-  );
   $export['question_list'] = $view;
 
   return $export;
