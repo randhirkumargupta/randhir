@@ -165,7 +165,7 @@ function features_for_quiz_field_default_field_instances() {
   $field_instances['field_collection_item-field_quiz_add_questions-field_survey_add_media'] = array(
     'bundle' => 'field_quiz_add_questions',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image width should be more than 740px for proper view.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -197,7 +197,7 @@ function features_for_quiz_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 'imce',
-            'plupload' => 0,
+            'itg_image_repository' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1235,6 +1235,7 @@ function features_for_quiz_field_default_field_instances() {
   t('Byline');
   t('Correct Answer');
   t('If user selects, normal; first added questions will appear on top for front end user. And if user selects ‘Random’ quiz questions will appear on random basis.');
+  t('Image width should be more than 740px for proper view.');
   t('Immediate Result');
   t('It will be like guidelines to quiz and will be displayed to front end user.');
   t('It will define the maximum number of options available for each question.');
