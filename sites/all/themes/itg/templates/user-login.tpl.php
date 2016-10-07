@@ -11,7 +11,7 @@ if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
 <?php if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) { ?>
 <div class="social-share">
 <a href="saml_login/twitter/<?php echo $shr; ?>" class="sso-twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
-<a href="#" class="sso-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+<a href="saml_login/facebook/<?php echo $shr; ?>" class="sso-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
 </div>
 <?php print '<div class="sign-border"><span>Or sign in using your email address</span></div>';
  } else { ?>
