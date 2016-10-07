@@ -43,6 +43,7 @@
             <?php endif; ?>
 
           </div>
+            <span class="more"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">More[+]</a></span>
         </li>
       <?php } ?>
     </ul>
