@@ -661,7 +661,7 @@ if ($widget_style == 'auto-road-trip') {
         <?php
         $extra_large_image_url = "";
         foreach ($data as $count => $entity) {
-$desc="";
+       $desc="";
 
             if ($count == 0 && (!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
                 $extra_large_image_url = image_style_url("magazine_rhs_100x140", $entity->field_story_extra_large_image['und'][0]['uri']);
