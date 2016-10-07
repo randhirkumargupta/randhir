@@ -87,9 +87,16 @@ function insert_layout_setting_ajax() {
     } 
     else {
       if ($arg[1] == 'title') {
+          if($_GET['widget_info']!="")
+          {
         db_update('itg_layout_manager')
             ->fields(array('block_title' => $_GET['block_title'],'widget_info' => $_GET['widget_info']))
             ->condition('id', $layout_id)->execute();
+          } else {
+               db_update('itg_layout_manager')
+            ->fields(array('block_title' => $_GET['block_title']))
+            ->condition('id', $layout_id)->execute();
+          }
       } else if ($arg[1] == 'widget_delete') {
         //p($layout_id);
         db_delete('itg_layout_manager')->condition('id', $layout_id)->execute();
@@ -97,9 +104,16 @@ function insert_layout_setting_ajax() {
         $block_title = $_GET['block_title'];
         $widget = explode('#', $_GET['widget_name']);
         //watchdog("test shravan@", '<pre>'. print_r($_GET, TRUE) .'</pre>'); 
+        if($_GET['widget_info']!="")
+          {
         db_update('itg_layout_manager')
               ->fields(array('widget_name' => $widget[0], 'block_title' => $block_title, 'widget_info' => $_GET['widget_info'],'filter_url' => $widget[1]))              
               ->condition('id', $layout_id)->execute();
+          } else {
+                db_update('itg_layout_manager')
+              ->fields(array('widget_name' => $widget[0], 'block_title' => $block_title,'filter_url' => $widget[1]))              
+              ->condition('id', $layout_id)->execute();
+          }
         
       }
     }

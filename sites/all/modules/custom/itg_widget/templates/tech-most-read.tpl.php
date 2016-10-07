@@ -28,9 +28,9 @@
 
             <?php if (!empty($node_data['node_load_data']->title)) : ?>    
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['node_load_data']->nid ?>">
-                <?php echo l(mb_strimwidth($node_data['node_load_data']->title, 0, 110, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
+                <?php echo l(mb_strimwidth($node_data['node_load_data']->title, 0, 50, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
               </p>
-                <?php echo mb_strimwidth($node_data['node_load_data']->body['und'][0]['value'], 0, 250, "..") ?>
+                <?php echo mb_strimwidth(strip_tags($node_data['node_load_data']->body['und'][0]['value']), 0, 70, "..") ?>
             <?php endif; ?>
 
           </div>
