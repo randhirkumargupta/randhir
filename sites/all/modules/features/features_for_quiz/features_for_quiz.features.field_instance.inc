@@ -514,6 +514,48 @@ function features_for_quiz_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-quiz-field_pqs_add_token'.
+  $field_instances['node-quiz-field_pqs_add_token'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_pqs_add_token',
+    'label' => 'Add Token',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-quiz-field_quiz_add_questions'.
   $field_instances['node-quiz-field_quiz_add_questions'] = array(
     'bundle' => 'quiz',
@@ -1183,6 +1225,7 @@ function features_for_quiz_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Add Media');
   t('Add Quiz Question');
+  t('Add Token');
   t('Answer Details');
   t('Answer Options');
   t('Answer Photo');
