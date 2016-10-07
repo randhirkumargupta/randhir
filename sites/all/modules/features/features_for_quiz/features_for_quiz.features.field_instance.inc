@@ -165,7 +165,7 @@ function features_for_quiz_field_default_field_instances() {
   $field_instances['field_collection_item-field_quiz_add_questions-field_survey_add_media'] = array(
     'bundle' => 'field_quiz_add_questions',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image width should be more than 740px for proper view.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -197,7 +197,7 @@ function features_for_quiz_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 'imce',
-            'plupload' => 0,
+            'itg_image_repository' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -511,6 +511,48 @@ function features_for_quiz_field_default_field_instances() {
       ),
       'type' => 'text_textarea_with_summary',
       'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_pqs_add_token'.
+  $field_instances['node-quiz-field_pqs_add_token'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_pqs_add_token',
+    'label' => 'Add Token',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
     ),
   );
 
@@ -1183,6 +1225,7 @@ function features_for_quiz_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Add Media');
   t('Add Quiz Question');
+  t('Add Token');
   t('Answer Details');
   t('Answer Options');
   t('Answer Photo');
@@ -1192,6 +1235,7 @@ function features_for_quiz_field_default_field_instances() {
   t('Byline');
   t('Correct Answer');
   t('If user selects, normal; first added questions will appear on top for front end user. And if user selects ‘Random’ quiz questions will appear on random basis.');
+  t('Image width should be more than 740px for proper view.');
   t('Immediate Result');
   t('It will be like guidelines to quiz and will be displayed to front end user.');
   t('It will define the maximum number of options available for each question.');

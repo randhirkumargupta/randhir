@@ -26,8 +26,8 @@ function features_for_survey_field_group_info() {
       0 => 'body',
       1 => 'field_survey_question_display',
       2 => 'field_story_reporter',
-      3 => 'field_survey_questions_format',
-      4 => 'field_supp_publish',
+      3 => 'field_supp_publish',
+      4 => 'field_survey_questions_format',
       5 => 'title',
     ),
     'format_type' => 'div',
@@ -96,8 +96,9 @@ function features_for_survey_field_group_info() {
     'label' => 'SEO Meta Tags',
     'weight' => '6',
     'children' => array(
-      0 => 'metatags',
-      1 => 'path',
+      0 => 'field_pqs_add_token',
+      1 => 'metatags',
+      2 => 'path',
     ),
     'format_type' => 'div',
     'format_settings' => array(
