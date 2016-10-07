@@ -129,7 +129,7 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('body', 'byline')->xpath('byline');
     $this->addFieldMapping('field_story_magazine_kicker_text', 'city')->xpath('city');
     $this->addFieldMapping('field_story_magazine_headline', 'categories')->xpath('categories'); //multi
-    $this->addFieldMapping('field_story_itg_tags', 'primarycategory')->xpath('primarycategory');
+    //$this->addFieldMapping('field_story_itg_tags', 'primarycategory')->xpath('primarycategory');
     $this->addFieldMapping('field_story_short_headline', 'extralargeimage')->xpath('extralargeimage');
     $this->addFieldMapping('field_story_long_head_line', 'largeimage')->xpath('largeimage');
     $this->addFieldMapping('field_story_rating', 'mediumimage')->xpath('mediumimage');
@@ -181,8 +181,8 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_courtesy', 'storyexpirydate')->xpath('storyexpirydate');
     $this->addFieldMapping('field_story_courtesy', 'selectlisticletemplates')->xpath('selectlisticletemplates');
     //$this->addFieldMapping('field_story_courtesy', 'listicle_content')->xpath('listicle_content');//multi
-   // $this->addFieldMapping('field_story_courtesy', 'quotes')->xpath('quotes'); //multi
-   // $this->addFieldMapping('field_story_courtesy', 'factoids_content')->xpath('factoids_content'); //multi
+    // $this->addFieldMapping('field_story_courtesy', 'quotes')->xpath('quotes'); //multi
+    // $this->addFieldMapping('field_story_courtesy', 'factoids_content')->xpath('factoids_content'); //multi
     //$this->addFieldMapping('field_story_courtesy', 'buzz_content')->xpath('buzz_content');//fieldcollection
     $this->addFieldMapping('field_story_courtesy', 'briefcase_content')->xpath('briefcase_content'); //multi
     $this->addFieldMapping('field_story_courtesy', 'expertname')->xpath('expertname');
@@ -203,7 +203,7 @@ class ItgStoryMigration extends XMLMigration {
   public function prepareRow($row) {
     // prepare row for listicle
     $data_listicle = '';
-    if (isset($row->xml->listicle_content->listicle)) {
+    if (isset($row->xml->listicle_content->listicle) && !empty($row->xml->listicle_content->listicle)) {
       foreach ($row->xml->listicle_content->listicle as $final_listicle) {
         $data_listicle[]['value'] = (string) $final_listicle;
       }
@@ -212,7 +212,7 @@ class ItgStoryMigration extends XMLMigration {
     // end prepare row for listicle
     // prepare row for quote
     $data_quotes = '';
-    if (isset($row->xml->quotes->quote)) {
+    if (isset($row->xml->quotes->quote) && !empty($row->xml->quotes->quote)) {
       foreach ($row->xml->quotes->quote as $final_quote) {
         $data_quotes[]['value'] = (string) $final_quote;
       }
@@ -221,22 +221,74 @@ class ItgStoryMigration extends XMLMigration {
     // end prepare row for quote
     // prepare row for factoids
     $data_factoids = '';
-    if (isset($row->xml->factoids_content->factoids)) {
+    if (isset($row->xml->factoids_content->factoids) && !empty($row->xml->factoids_content->factoids)) {
       foreach ($row->xml->factoids_content->factoids as $final_factoids) {
         $data_factoids[]['value'] = (string) $final_factoids;
       }
     }
     $row->factoids_new = $data_factoids;
     // end prepare row for factoids
+    // Category migrate
+    $data_category = '';
+
+    if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
+      foreach ($row->xml->categories->category as $final_category) {
+        $source_cid = (string) $final_category;
+        $orignal_category = get_itg_destination_id($source_cid);
+        $data_category[]['tid'] = $orignal_category;
+      }
+    }
+    $row->category_new = $data_category;
+    // End category migrate
+    // Story tags migration
+    $data_tags = '';
+
+    if (isset($row->xml->tags->tag) && !empty($row->xml->tags->tag)) {
+      foreach ($row->xml->tags->tag as $final_tags) {
+        $source_tags = (string) $final_tags;
+        $orignal_tag = get_itg_destination_id($source_tags);
+        $data_tags[]['tid'] = $orignal_tag;
+      }
+    }
+    $row->tag_new = $data_tags;
+    // End story tags migration
+    // Brifcase migration
+    $data_brifcase = '';
+
+    if (isset($row->xml->briefcase_content->briefcase) && !empty($row->xml->briefcase_content->briefcase)) {
+      foreach ($row->xml->briefcase_content->briefcase as $final_briefcase) {
+        $source_briefcase = (string) $final_briefcase;
+        $orignal_briefcase = get_itg_destination_id($source_briefcase);
+        $data_brifcase[]['tid'] = $orignal_tag;
+      }
+    }
+    $row->brifcase_new = $data_brifcase;
+    // End Brifcase migration
     //$row->status = $row->xml->publicationName;
     return TRUE;
   }
 
   public function prepare($node, stdClass $row) {
     $node->teaser = (string) $row->xml->description;
-    $node->field_story_template_guru[LANGUAGE_NONE] = $row->listicle_new;
-    $node->field_story_template_quotes[LANGUAGE_NONE] = $row->quotes_new;
-    $node->field_story_template_factoids[LANGUAGE_NONE] = $row->factoids_new;
+    if (!empty($row->listicle_new)) {
+      $node->field_story_template_guru[LANGUAGE_NONE] = $row->listicle_new;
+    }
+    if (!empty($row->quotes_new)) {
+      $node->field_story_template_quotes[LANGUAGE_NONE] = $row->quotes_new;
+    }
+    if (!empty($row->factoids_new)) {
+      $node->field_story_template_factoids[LANGUAGE_NONE] = $row->factoids_new;
+    }
+    if (!empty($row->brifcase_new)) {
+      $node->field_story_highlights[LANGUAGE_NONE] = $row->brifcase_new;
+    }
+    if (!empty($row->category_new)) {
+      $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
+    }
+    if (!empty($row->tag_new)) {
+      $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
+    }
+    $node->uid = 1;
   }
 
   public function complete($entity, $row) {
