@@ -232,7 +232,8 @@ if ($theme != 'itgadmin') {
                                         </div>
                                     <?php } ?>  
 
-                                    <div class="data-holder" id="itg-block-6"><?php print $widget_data['itg-block-6']['widget']; ?></div>
+                                    <div class="data-holder" id="itg-block-6"><?php $block = module_invoke('itg_newsletter', 'block_view', 'register_for_more_updates');
+  print render($block['content']); ?></div>
                                 </div>             
                             </div>               
                         </div>
