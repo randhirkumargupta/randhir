@@ -59,10 +59,10 @@ function itg_newsletter_block_view($delta = '') {
     case 'newsletter_tab_form_block':
       $block['content'] = theme('newsletter_tab_form_display_block', array('data' => $data));
       break;
-     case 'register_for_more_updates':
+    case 'register_for_more_updates':
       $block['subject'] = '<div class="register_updates">REGISTER FOR MORE UPDATES</div>';
       $block['content'] = register_for_more_updates();
-    break;
+      break;
   }
 
   return $block;
@@ -84,7 +84,8 @@ function itg_newsletter_theme($existing, $type, $theme, $path) {
   return $themes;
 }
 
-/***************************Form Related hooks*********************************/
+/* * *************************Form Related hooks******************************** */
+
 /**
  * Implement hook_form_alter
  * {@inheritdoc}
@@ -260,7 +261,7 @@ function itg_newsletter_form_after_build($form, &$form_state) {
   return $form;
 }
 
-/*******************************View Related hooks*****************************/
+/* * *****************************View Related hooks**************************** */
 
 /**
  * Implement hook_views_pre_render
@@ -355,7 +356,6 @@ function itg_newsletter_node_insert($node) {
               $date_time = date('Y-m-d', strtotime('next ' . strtolower($node->field_newsl_day[LANGUAGE_NONE][0]['value']))) . ' ' . $node->field_newsl_time[LANGUAGE_NONE][0]['value'] . ':00:00';
               $scheduled_time = strtotime($date_time);
             }
-
           }
 
           if ($frequency == 'monthly') {
@@ -439,14 +439,14 @@ function itg_newsletter_node_update($node) {
 
         //Update cron table
         db_update('itg_cron_newsletter')
-          ->fields(array(
-            'type' => $newsletter_type,
-            'scheduled_time' => $scheduled_time,
-            'frequency' => $frequency,
-            'status' => 0,
-          ))
-          ->condition('nid', $node->nid, '=')
-          ->execute();
+            ->fields(array(
+              'type' => $newsletter_type,
+              'scheduled_time' => $scheduled_time,
+              'frequency' => $frequency,
+              'status' => 0,
+            ))
+            ->condition('nid', $node->nid, '=')
+            ->execute();
       }
 
       break;
@@ -502,9 +502,9 @@ function itg_newsletter_check_existence_frequency($frequency, $newsletter_conten
   $query->join('field_data_field_newsl_frequency', 'nf', 'nf.entity_id = n.nid');
   $query->join('field_data_field_newsl_newsletter_content', 'nc', 'nc.entity_id = n.nid');
   $query->fields('n', array('nid'))
-    ->condition('nt.field_newsl_newsletter_type_value', 'automatic', '=')
-    ->condition('nf.field_newsl_frequency_value', $frequency, '=')
-    ->condition('nc.field_newsl_newsletter_content_value', $newsletter_content, '=');
+      ->condition('nt.field_newsl_newsletter_type_value', 'automatic', '=')
+      ->condition('nf.field_newsl_frequency_value', $frequency, '=')
+      ->condition('nc.field_newsl_newsletter_content_value', $newsletter_content, '=');
   $result = $query->execute();
   $nid = $result->fetchObject()->nid;
 
@@ -582,9 +582,9 @@ function itg_newsletter_send_automatic_newsletter() {
   // For manual
   $query = db_select('itg_cron_newsletter', 'cn');
   $query->fields('cn')
-    ->condition('cn.status', 0, '=')
-    ->condition('cn.type', 'manual', '=')
-    ->condition('cn.scheduled_time', time(), '<=');
+      ->condition('cn.status', 0, '=')
+      ->condition('cn.type', 'manual', '=')
+      ->condition('cn.scheduled_time', time(), '<=');
   $result = $query->execute();
 
   while ($record = $result->fetchAssoc()) {
@@ -602,9 +602,9 @@ function itg_newsletter_send_automatic_newsletter() {
   // For Automatic
   $query_auto = db_select('itg_cron_newsletter', 'cn');
   $query_auto->fields('cn')
-    ->condition('cn.status', 0, '=')
-    ->condition('cn.type', 'automatic', '=')
-    ->condition('cn.scheduled_time', time(), '<=');
+      ->condition('cn.status', 0, '=')
+      ->condition('cn.type', 'automatic', '=')
+      ->condition('cn.scheduled_time', time(), '<=');
   $result_auto = $query_auto->execute();
 
   while ($record_auto = $result_auto->fetchAssoc()) {
@@ -627,10 +627,10 @@ function itg_newsletter_send_automatic_newsletter() {
 function itg_newsletter_get_top_stories() {
   $query = db_select('node', 'n');
   $query->fields('n')
-    ->condition('n.status', 1, '=')
-    ->condition('n.type', 'story', '=')
-    ->orderBy('n.nid', 'DESC')
-    ->range(0, 20);
+      ->condition('n.status', 1, '=')
+      ->condition('n.type', 'story', '=')
+      ->orderBy('n.nid', 'DESC')
+      ->range(0, 20);
 
   $result = $query->execute();
 
@@ -640,8 +640,7 @@ function itg_newsletter_get_top_stories() {
   return $nids;
 }
 
-
-/***************************Resgister for more updates*********************************/
+/* * *************************Resgister for more updates******************************** */
 
 /**
  * Callback function of register_for_more_updates form
@@ -690,8 +689,8 @@ function itg_newslatter_register_form() {
       'effect' => "fade",
     ),
   );
-  
-  drupal_add_js("jQuery(document).ready(function(){ jQuery('#itg-newslatter-register-form label').hide(); });",'inline'); 
+
+  drupal_add_js("jQuery(document).ready(function(){ jQuery('#itg-newslatter-register-form label').hide(); });", 'inline');
   return $form;
 }
 
@@ -707,7 +706,14 @@ function itg_newslatter_register_form_validate($form, &$form_state) {
     form_set_error('mobile', t('Your Mobile Numbers should contain 10 digits'));
   }
   if (!empty($email) && !valid_email_address($email)) {
-    form_set_error('email', 'Sorry. Your email address,' . $email . ' is not valid.');
+    form_set_error('email', 'Invalid email address!');
+  }
+
+  if (!empty($email)) {
+    $updates_check = itg_newslatter_register_more_updates_check($email);
+    if (!empty($updates_check) && $updates_check > 0) {
+      form_set_error('email', 'This email address is already registered!');
+    }
   }
 }
 
@@ -721,17 +727,17 @@ function itg_newslatter_register_form_submit($form, &$form_state) {
   $email = $form_state['values']['email'];
   $mobile = $form_state['values']['mobile'];
 
-    // Insert data in to itg_newslatter_update_details table
-    $query = db_insert('itg_newslatter_update_details');
-    $query->fields(array(
-      'name' => $name,
-      'email' => $email,
-      'mobile' => $mobile,
-      'section' => 'newslatter',
-      'created' => time()
-    ));
-    $query->execute();
-   drupal_set_message(t('You have been registered successfully!'));
+  // Insert data in to itg_newslatter_update_details table
+  $query = db_insert('itg_newslatter_update_details');
+  $query->fields(array(
+    'name' => $name,
+    'email' => $email,
+    'mobile' => $mobile,
+    'section' => 'newslatter',
+    'created' => time()
+  ));
+  $query->execute();
+  drupal_set_message(t('You have been registered successfully!'));
 }
 
 /**
@@ -748,4 +754,17 @@ function itg_newslatter_register_custom_submit($form, &$form_state) {
     '#type' => 'ajax',
     '#commands' => $commands
   );
+}
+
+/**
+ * Get check register more updates for mobile & email.
+ * @param string $email
+ * @param int $mobile
+ * @return int
+ */
+function itg_newslatter_register_more_updates_check($email) {
+  return $query = db_select('itg_newslatter_update_details', 'd')
+      ->fields('d', array('id'));
+  $query->condition('email', $email, '=');
+  $query->range(0, 1)->execute()->rowCount();
 }
