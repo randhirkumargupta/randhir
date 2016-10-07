@@ -20,7 +20,7 @@ class ItgBylineMigration extends XMLMigration {
       'occupation' => t('occupation'),
       'categories' => t('categories'),
       'picture' => t('picture'),
-      //'designation' => t('designation'),
+      'designation' => t('designation'),
       'about' => t('about'),
       'sefurl' => t('Sefurl'),
       'pagetitle' => t('Page title'),
@@ -37,7 +37,7 @@ class ItgBylineMigration extends XMLMigration {
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/data/byline';
+    $item_xpath = '/byline';
     
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /story/item/id.
@@ -76,14 +76,14 @@ class ItgBylineMigration extends XMLMigration {
     $this->addFieldMapping('field_reporter_email_id', 'reporter_email_id')->xpath('reporter_email_id');
     $this->addFieldMapping('field_reporter_twitter_handle', 'reporter_twitter_handle')->xpath('reporter_twitter_handle');
     $this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');    
-    //$this->addFieldMapping('field_story_new_title', 'designation')->xpath('designation');
+    $this->addFieldMapping('field_story_new_title', 'designation')->xpath('designation');
     $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');
     $this->addFieldMapping('body', 'about')->xpath('about');
     
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
-    $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
+    //$this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
 
   }
 }
