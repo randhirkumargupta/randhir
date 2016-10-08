@@ -66,8 +66,14 @@ function itg_widget_tech_reviews_ordering_data($info) {
     $data = '';
     if (!empty($info)) {
         $widget_name = $info['widget_name'];
-         $var_name = $info['var_name'];
-        $result = get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,  $var_name, DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE);
+        if(isset($_GET['section']) && !empty($_GET['section']))
+        {
+            $selction_name='section';
+        }else{
+            $selction_name='section_name';
+        }
+         $cat_id = $_GET[$selction_name];
+        $result = get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,  $cat_id, DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE);
         $entity_data = array();
         foreach ($result as $entity_data_node) {
             $entity_data[] = array("node_load_data" => node_load($entity_data_node['nid']), "custom_label" => $entity_data_node['extra']);
