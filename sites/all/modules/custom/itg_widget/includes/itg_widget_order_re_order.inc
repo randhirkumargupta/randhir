@@ -51,7 +51,7 @@ function itg_widget_form_views_form_special_auto_review_widget_special_auto_revi
           "#type" => "textfield",
           "#size" => '',
           // get value which is saved into custom_table.
-          '#default_value' => _get_custom_text_value_from_nid($default_value,'special_auto_review_content'),
+          '#default_value' => _get_custom_text_value_from_nid($default_value, 'special_auto_review_content'),
           '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
       );
     }
@@ -64,7 +64,6 @@ function itg_widget_form_views_form_special_auto_review_widget_special_auto_revi
   drupal_add_css('#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_special_auto_review";
 }
-
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -82,7 +81,7 @@ function itg_widget_form_views_form_special_how_i_made_it_special_how_made_widge
           "#type" => "textfield",
           "#size" => '',
           // get value which is saved into custom_table.
-          '#default_value' => _get_custom_text_value_from_nid($default_value,'special_how_made_it_content'),
+          '#default_value' => _get_custom_text_value_from_nid($default_value, 'special_how_made_it_content'),
           '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
       );
     }
@@ -95,6 +94,7 @@ function itg_widget_form_views_form_special_how_i_made_it_special_how_made_widge
   drupal_add_css('#draggableviews-table-special-how-i-made-it-special-how-made-widget-list .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_special_how_i_made_it_review";
 }
+
 /**
  * Implements hook_form_FORM_ID_alter().
  *
@@ -131,7 +131,7 @@ function itg_widget_form_views_form_yearender_top_news_and_top_videos_yearend_le
           "#type" => "textfield",
           "#size" => '',
           // get value which is saved into custom_table.
-          '#default_value' => _get_custom_text_value_from_nid($default_value,'yearender_left_news_video'),
+          '#default_value' => _get_custom_text_value_from_nid($default_value, 'yearender_left_news_video'),
           '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
       );
     }
@@ -480,16 +480,23 @@ function update_itg_widget_order_table_data($form, &$form_state) {
   $cat_id = $_GET['category_tid'];
   // Now insert new entry in itg_widget_order table of combination
   foreach ($draggable_view_data as $key => $node_data) {
-    $DBWriteStatus = db_merge('itg_widget_order')
-            ->key(array(
-                'nid' => $node_data['id'],
-                'widget' => $widget,
-                'cat_id' => $cat_id,
-            ))
-            ->fields(array(
-                'weight' => $node_data['weight'],
-            ))
-            ->execute();
+    try {
+     db_merge('itg_widget_order')
+              ->key(array(
+                  'nid' => $node_data['id'],
+                  'widget' => $widget,
+                  'cat_id' => $cat_id,
+              ))
+              ->fields(array(
+                  'weight' => $node_data['weight'],
+                  'nid' => $node_data['id'],
+                  'widget' => $widget,
+                  'cat_id' => $cat_id,
+              ))
+              ->execute();
+    } catch (Exception $ex) {
+      drupal_set_message($ex->getMessage());
+    }
   }
 }
 
@@ -499,7 +506,7 @@ function update_itg_widget_order_table_data($form, &$form_state) {
  * @param int $nid
  * @return array
  */
-function _get_custom_text_value_from_nid($nid,$widget='dont_miss_content_widget') {
+function _get_custom_text_value_from_nid($nid, $widget = 'dont_miss_content_widget') {
   $result = db_select('itg_widget_order', 'iwo')
                   ->fields('iwo', array('extra'))
                   ->condition('iwo.nid', $nid)
@@ -507,4 +514,3 @@ function _get_custom_text_value_from_nid($nid,$widget='dont_miss_content_widget'
                   ->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['extra'];
 }
-

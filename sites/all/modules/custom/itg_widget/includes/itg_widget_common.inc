@@ -133,34 +133,32 @@ function itg_widget_setids() {
 }
 
 function remove_extra_data() {
-//    $widget = array(
-////      'widget_anchors_listing',
-////      'home_page_feature_widget',
-////      'story_widget',
+    $widget = array(
+//      'widget_anchors_listing',
+//      'home_page_feature_widget',
+//      'story_widget',
 //        'section_wise_content_ordering_list',
-////      'section_wise_draggable_content_order',
-////      'big_story_format_widget',
+//      'section_wise_draggable_content_order',
+//      'big_story_format_widget',
 //        'dont_miss_content_widget',
 //        'dont_miss_content',
-////      'section_wise_widget',
-////      'we_may_suggest_widget',
-////      'section_wise_content_ordering',
-////      'widget_anchors_listing',
-////      'category_wise_content_list',
-////     'photo_carousel_widget',
-//  );
-//  foreach ($widget as $view_name) {
-//    $num_deleted = db_delete('draggableviews_structure')
-//            ->condition('view_name', $view_name)
-//            ->condition('view_display', 'dont_miss_content')
-//            ->execute();
-//
-//    $num_deleted = db_delete('itg_widget_order')
-//            ->condition('widget', $view_name)
-//            ->execute();
-//  }
+      'section_wise_widget',
+//      'we_may_suggest_widget',
+//      'section_wise_content_ordering',
+//      'widget_anchors_listing',
+//      'category_wise_content_list',
+//     'photo_carousel_widget',
+  );
+  foreach ($widget as $view_name) {
+    $num_deleted = db_delete('draggableviews_structure')
+            ->condition('view_name', $view_name)
+            ->condition('view_display', 'dont_miss_content')
+            ->execute();
 
-  db_query("UPDATE itg_widget_order SET weight = ABS( weight ) WHERE weight <0");
+    $num_deleted = db_delete('itg_widget_order')
+            ->condition('widget', $view_name)
+            ->execute();
+  }
 }
 
 /**
@@ -459,8 +457,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
                     ->condition('cat_id', $_GET['category_tid'])
                     ->condition('widget', 'section_wise_widget')
                     ->execute()->fetchAll();
-
-
+//pr($itg_widget_order_data);
 //Prepare weight crosspond to nid.
     $select_map_array = array();
     foreach ($itg_widget_order_data as $order_data) {
@@ -485,6 +482,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     }
   }
   drupal_add_css("select.draggableviews-weight {display:none !important}", "inline");
+  drupal_add_css("#draggableviews-table-section-wise-content-ordering-list-page .tabledrag-handle {display:none !important}", "inline");
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
@@ -824,6 +822,10 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
     case 'views-exposed-form-section-wise-content-ordering-list-page':
+      global $messages;
+      if($_GET['category_tid'] == 0) {
+        drupal_add_css(".messages--error {display:none}","inline");
+      }
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
   }
@@ -1816,6 +1818,19 @@ function get_rhs_block_display_condtion($delta = '') {
   }
 }
 
+function insert_all_node_in_widegt_table() {
+
+    $nodes = db_select('node', 'n')
+                    ->fields('n', array('nid'))
+                    ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
+                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach($nodes as $data) {
+      $node = node_load($data['nid']);
+      itg_widget_node_insert($node);
+    }
+
+}
+
 /**
  * Implements hook__node_insert().
  * {@inheritdoc}
@@ -1824,7 +1839,6 @@ function itg_widget_node_insert($node) {
   if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
     $nid = $node->nid;
     $cat_id = $node->field_story_category['und'];
-    $order = $node->created;
     if (isset($node->field_story_category['und'])) {
       foreach ($cat_id as $category) {
 
