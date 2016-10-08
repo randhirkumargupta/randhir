@@ -351,7 +351,6 @@ function itgadmin_preprocess_page(&$vars) {
     drupal_set_title('');
   }
 
-  if (arg(0) == 'related-content' || arg(0) == 'getimagetocroper' || arg(0) == 'searchimage' || arg(0) == 'imagetotag' || arg(0) == 'imagetagedit' || arg(0) == 'video-status' || (arg(0)== 'itg-layout-manager' && arg(2)=='preview')) {
   // Add tpl for related content view page
   $page_url_except_header_footer = array(
       'getimagetocroper'
@@ -374,6 +373,7 @@ function itgadmin_preprocess_page(&$vars) {
       , 'dont-miss-widget-list'
       , 'video-status'
       , 'related-content'
+      , 'menu-manager'
   );
   if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
@@ -383,7 +383,6 @@ function itgadmin_preprocess_page(&$vars) {
   if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs' || ($vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
-}
 }
 
 /**
