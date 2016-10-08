@@ -770,6 +770,14 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
             $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
             break;
+           case 'views-exposed-form-most-read-widget-most-read-widget-contents':
+            $form['title']['#attributes']['placeholder'] = t('Content Title');
+            $form['nid']['#attributes']['placeholder'] = t('Content ID');
+            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+            break;
+      
         case 'views-exposed-form-special-how-i-made-it-special-how-made-it-widget-contentsyear_end_top_news':
             $form['title']['#attributes']['placeholder'] = t('Content Title');
             $form['nid']['#attributes']['placeholder'] = t('Content ID');
@@ -1056,6 +1064,23 @@ function itg_widget_views_query_alter(&$view, &$query) {
                 $section = $_GET['section_name'];
             }
 
+            $query->where[1]['conditions'][2]['value'] = $section;
+        }
+    }
+    
+     if ($view->name == 'sports' && ($view->current_display == 'sport_homepage_videos')) {
+        global $theme;
+        if ($theme != 'seven') {
+            if ($theme == FRONT_THEME_NAME) {
+                $section = arg(2);
+            } else {
+                $section = $_GET['section'];
+            }
+            if(empty($section))
+            {
+                $section = $_GET['section_name'];
+            }
+       // p($section);
             $query->where[1]['conditions'][2]['value'] = $section;
         }
     }
@@ -1375,14 +1400,14 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
  * @param int $range_min
  * @return array
  */
-function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $var_name, $range_max, $range_min = 0) {
+function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $cat_id, $range_max, $range_min = 0) {
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
     $query->condition('iwo.widget', $widget_name)
             ->condition('n.status', 1)
-            ->condition('tx.tid', variable_get($var_name))
-            ->orderBy('iwo.weight', 'DESC')
+            ->condition('tx.tid', $cat_id)
+            ->orderBy('iwo.weight', 'ASC')
             ->range($range_min, $range_max)
             ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -1400,8 +1425,8 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
         $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
         $query->condition('iwo.widget', $widget_name)
                 ->condition('n.status', 1)
-                ->condition('tx.tid', variable_get($var_name))
-                ->orderBy('n.nid', 'DESC')
+                ->condition('tx.tid', $cat_id)
+                ->orderBy('n.nid', 'ASC')
                 ->range($range_min, $range_max)
                 ->fields('iwo', array('nid', 'extra', 'weight'));
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
