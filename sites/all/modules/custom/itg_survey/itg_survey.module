@@ -114,6 +114,11 @@ function itg_survey_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'][] = 'itg_survey_form_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_survey_form_custom_submit_callback';
     }
+    
+    // Hide add token field from survey, quiz and poll form
+    if($form_id == 'survey_node_form' || $form_id == 'quiz_node_form' || $form_id == 'poll_node_form') {
+      $form['field_pqs_add_token']['#access'] = FALSE;
+    }
 }
 
 /**
@@ -244,9 +249,15 @@ function itg_survey_node_presave($node){
  */
 function itg_survey_node_insert($node) {
   
-  if($node->type == 'survey'){
+  if($node->type == 'survey') {
     // Insert in to survey notification table
     itg_survey_insert_notification_details($node->nid, strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']), 'insert');
+  }
+  
+  // Add token value
+  if ($node->type == 'poll' || $node->type == 'quiz' || $node->type == 'survey') {
+    $node->field_pqs_add_token[LANGUAGE_NONE][0]['value'] = '[ITG:' . strtoupper($node->type) . ':' . $node->nid . ']';
+    field_attach_update('node', $node);
   }
 }
 
@@ -256,7 +267,7 @@ function itg_survey_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_survey_node_update($node) {
-  
+
   if($node->type == 'survey'){
     // Update date in survey notification table, if updated
     itg_survey_insert_notification_details($node->nid, strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']), 'update');
@@ -531,7 +542,7 @@ function itg_survey_get_answer_type_name($name){
 }
 
 /**
- * Access denied for expired survey
+ * Access denied for expired survey and quiz
  * @param object $node
  * @param string $op
  * @param array $account
@@ -540,24 +551,22 @@ function itg_survey_get_answer_type_name($name){
 function itg_survey_node_access($node, $op, $account) {
   global $user;
   
+  // If user in not super admin
   if (!in_array('Site Admin', $user->roles)) {
-    $curr_time = strtotime(date('Y-m-d') . ' 00:00:00');
     
-    $survey_start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
-    $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
+    // Check for survey and quiz
+    if ($node->type == 'survey' || $node->type == 'quiz') {
+      $curr_time = strtotime(date('Y-m-d') . ' 00:00:00');
+      $survey_start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
+      $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);
 
-    $node_edit = FALSE;
-
-    if ($curr_time > $survey_end_date) {
-      $node_edit = TRUE;
-    }
-    
-    if ($curr_time >= $survey_start_date) {
-      $node_edit = TRUE;
-    }
-
-    if (isset($node->type) && ($node->type == 'survey' || $node->type == 'quiz') && $node_edit) {
-      if ($op == 'update') {
+      $node_edit = FALSE;
+      if (($curr_time >= $survey_start_date) || ($curr_time > $survey_end_date)) {
+        $node_edit = TRUE;
+      }
+      
+      // If condition is true, user doesn't allow to see node
+      if (($node_edit && $op == 'update') || user_is_anonymous()) {
         return NODE_ACCESS_DENY;
       }
     }

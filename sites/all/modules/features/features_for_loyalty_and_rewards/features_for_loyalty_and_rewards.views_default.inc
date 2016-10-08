@@ -315,12 +315,14 @@ function features_for_loyalty_and_rewards_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Product';
+  $handler->display->display_options['title'] = 'Products';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'view product page';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '12';
   $handler->display->display_options['style_plugin'] = 'default';
@@ -329,6 +331,13 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Result Found!';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -365,6 +374,15 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_default_classes'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_lrp_image']['id'] = 'field_lrp_image';
   $handler->display->display_options['fields']['field_lrp_image']['table'] = 'field_data_field_lrp_image';
@@ -376,7 +394,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['field_lrp_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_lrp_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_lrp_image']['settings'] = array(
-    'image_style' => 'magazine_rhs_100x140',
+    'image_style' => 'cart_172x240',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -447,6 +465,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="product-wrapper">
 <div class="product-pic">[field_lrp_image]</div>
 <div class="product-title">[title_1]</div>
+<div class="post-date">[created]</div>
 <div class="product-description">[body]</div>
 <div class="redeem-points">[field_lrp_loyalty_points]</div>
 <div class="product-actions">[nothing][nothing_1]</div>
@@ -587,6 +606,15 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_type'] = '0';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_lrp_image']['id'] = 'field_lrp_image';
   $handler->display->display_options['fields']['field_lrp_image']['table'] = 'field_data_field_lrp_image';
@@ -598,7 +626,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['field_lrp_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_lrp_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_lrp_image']['settings'] = array(
-    'image_style' => 'magazine_rhs_100x140',
+    'image_style' => 'cart_172x240',
     'image_link' => '',
   );
   /* Field: Content: Title */
@@ -668,6 +696,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="product-wrapper">
 <div class="product-pic">[field_lrp_image]</div>
 <div class="product-title">[title]</div>
+<div class="post-date">[created]</div>
 <div class="product-description">[body]</div>
 <div class="redeem-points">[field_lrp_loyalty_points]</div>
 <div class="product-actions">[nothing][nothing_1]</div>
@@ -806,9 +835,25 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['field_lrp_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_lrp_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_lrp_image']['settings'] = array(
-    'image_style' => 'magazine_rhs_100x140',
+    'image_style' => 'cart_172x240',
     'image_link' => '',
   );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -869,6 +914,8 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="product-wrapper">
 <div class="product-pic">[field_lrp_image]</div>
 <div class="product-title">[title]</div>
+<div class="product-description">[body]</div>
+<div class="post-date">[created]</div>
 <div class="redeem-points">[field_lrp_loyalty_points]</div>
 <div class="product-actions">[nothing][nothing_1]</div>
 </div>';
@@ -892,7 +939,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'loyalty_and_rewards' => 'loyalty_and_rewards',
   );
-  /* Filter criterion: Broken/missing handler */
+  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';

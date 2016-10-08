@@ -128,17 +128,15 @@ Drupal.behaviors.my_custom_behavior = {
 
 
 jQuery(document).ready(function () {
-    jQuery(".top_stories_ordering .block-itg-widget").mousemove(function (e) {
+    jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {        
         var h = jQuery(this).height() + 13;
 //        alert(h);
         var offset = jQuery(this).offset();
         var position = (e.pageY - offset.top) / jQuery(this).height();
         if (position < 0.20) {
-
             jQuery(this).stop().animate({scrollTop: 0}, 1000);
         }
         else if (position > 0.70) {
-
             jQuery(this).stop().animate({scrollTop: h}, 1000);
         }
     });
@@ -226,6 +224,10 @@ jQuery(document).ready(function () {
     
     //Add header for so-sorry page
     jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
+    jQuery('.auto-block_1 .widget-title, .tech-block_1 .widget-title').prependTo('.auto-block-2 .special-top-news');
+    
+    
+    
     
   });
 

@@ -1,5 +1,5 @@
 /*
- * @file itg_sso.js
+ * @file itg_sso_reg.js
  * Contains all functionality related to SSO
  */
 

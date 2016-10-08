@@ -370,11 +370,16 @@ function itgadmin_preprocess_page(&$vars) {
       , 'video-list-widget-listing'
       , 'issue-magazin-widget-list'
       , 'poll-format-widget-list'
-      , 'dont-miss-widget-list'
+      , 'special-how-made-it-widget-list'
       , 'video-status'
       , 'related-content'
-      , 'menu-manager'
+      , 'feature-content-section-widget-list'
+      , 'most-read-widget-list'
+      , 'yearend-left-widget-list'
+      , 'special-auto-review-widget-lsit'
+      , 'issue-magazin-widget-list'
   );
+  
   if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }

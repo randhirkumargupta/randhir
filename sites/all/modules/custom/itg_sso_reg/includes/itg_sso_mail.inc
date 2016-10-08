@@ -6,7 +6,7 @@
  */
 function itg_sso_get_mail_content($account, $to) {
   
-  $mail_content = itg_sso_notification_mail_content($account);
+   $mail_content = itg_sso_notification_mail_content($account);
 
   $params = array(
       'body' => $mail_content,
@@ -14,7 +14,7 @@ function itg_sso_get_mail_content($account, $to) {
     );
 
    
-    $mail = drupal_mail('itg_sso_reg_user_mail', 'send_mail_to_sso_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    $mail = drupal_mail('itg_sso_reg_user', 'send_mail_to_sso_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     if ($mail['result']) {
       return TRUE;
     }

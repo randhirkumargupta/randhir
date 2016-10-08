@@ -11,11 +11,11 @@ function feature_for_movie_special_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'special_movie';
+  $view->name = 'movie_special';
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Special Movie';
+  $view->human_name = 'movie special';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -29,7 +29,10 @@ function feature_for_movie_special_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Title */
@@ -50,6 +53,11 @@ function feature_for_movie_special_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -62,8 +70,13 @@ function feature_for_movie_special_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'photogallery' => 'photogallery',
+    'videogallery' => 'videogallery',
   );
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
 
   /* Display: Movie Left Top */
   $handler = $view->new_display('block', 'Movie Left Top', 'movie_left_top');
@@ -167,7 +180,7 @@ function feature_for_movie_special_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '430';
+  $handler->display->display_options['filters']['cat_id']['value'] = '434';
 
   /* Display: Top News */
   $handler = $view->new_display('block', 'Top News', 'movie_top_news');
@@ -308,7 +321,70 @@ function feature_for_movie_special_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '430';
-  $export['special_movie'] = $view;
+
+  /* Display: Movie Video */
+  $handler = $view->new_display('block', 'Movie Video', 'special_movie_video');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Movie Video';
+  $handler->display->display_options['display_description'] = 'Movie Video';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => 'video_landing_page_170_x_127',
+    'image_link' => '',
+  );
+  /* Field: Content: video_duration */
+  $handler->display->display_options['fields']['field_video_duration']['id'] = 'field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['table'] = 'field_data_field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
+  $handler->display->display_options['fields']['field_video_duration']['label'] = '';
+  $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'videogallery' => 'videogallery',
+  );
+  /* Filter criterion: Section wise ordering content: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  /* Filter criterion: Section wise ordering content: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['value'] = '430';
+  $export['movie_special'] = $view;
 
   return $export;
 }

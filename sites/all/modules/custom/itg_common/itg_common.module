@@ -16,6 +16,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 function itg_common_init() {
   global $user;
   
+
   // Hide metatags extra fields
 //  if ($user->uid != 1) {
 //    if ((arg(0) == 'node' && arg(1) == 'add') || (arg(0) == 'node' && arg(2) == 'edit')) {
@@ -96,6 +97,13 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
              '#value' => $type,
          );
      }
+    }
+    
+    if ($form_id == 'custom_html_widgets_node_form') {
+      // remove space from title search field.
+        drupal_add_js('jQuery(document).ready(function() {                  
+                        jQuery(".vertical-tabs").hide();
+          });', array('type' => 'inline', 'scope' => 'footer'));
     }
 
     // Set title on Preview
@@ -394,6 +402,11 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
                  this.value = this.value.replace(/[^0-9\.]/g,'');
                   });            
           });", array('type' => 'inline', 'scope' => 'footer'));
+    
+    if ($form['#id'] == 'views-exposed-form-custom-html-widgets-list-page') {
+      $form['title']['#autocomplete_path'] = 'content-title-list/custom_html_widgets/autocomplete';
+      $form['title']['#attributes'] = array('placeholder' => t('Widget name'));      
+    }
 }
 
 /**
@@ -730,4 +743,18 @@ function itg_common_managesite_validate($form, &$form_state) {
             form_set_error('field_reporter_email_id', t('Please enter valid email address.'));
         }
     }
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_common_views_pre_render(&$view) {  
+  
+  if ($view->name == "custom_html_widgets_list") {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= '<span class="create_cooking_tips">' . l(t('Create custom html widgets'), 'node/add/custom-html-widgets', array('query' => array('destination' => 'custom-html-widgets-list'))) . '&nbsp;</span>';    
+    $view->attachment_before = $header_content;
+  }
+ 
 }

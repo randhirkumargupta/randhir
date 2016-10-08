@@ -426,22 +426,20 @@ function itg_photogallery_form_field_gallery_image_form_alter(&$form, &$form_sta
  * {@inheritdoc}
  */
 function itg_photogallery_node_presave($node) {
-  //p($node->field_featured[LANGUAGE_NONE][0]['value']);
-  foreach ($node->field_gallery_image['und']as $delta => $field) {
-    //p($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value']);
-    if ($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value'] == 'yes') {
-      $node->field_story_syndication[LANGUAGE_NONE][0]['value'] = 'yes';
+  if ($node->type == 'photogallery' && isset($node->field_gallery_image['und'])) {
+    foreach ($node->field_gallery_image['und']as $delta => $field) {
+      if ($node->field_gallery_image[LANGUAGE_NONE][$delta]['field_image_syndication'][LANGUAGE_NONE][0]['value'] == 'yes') {
+        $node->field_story_syndication[LANGUAGE_NONE][0]['value'] = 'yes';
+      }
     }
   }
-  
 }
-
 
 /**
  * {@inheritdoc}
  */
 function itg_photogallery_node_view($node, $view_mode, $langcode) {
-  if($node->type == 'photogallery'){
+  if($node->type == 'photogallery' && $_GET['category'] != ''){
     // Category view on landing page
     drupal_add_js("jQuery('#block-itg-photogallery-photo-menu-landing-block ul li').live('click', function(){
                var section_id = jQuery(this).val();

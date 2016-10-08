@@ -33,6 +33,12 @@ img{
 .mt-50{
     margin-top: 50px;
 }
+.m-top{
+    margin-top: 10px;
+}
+.m-bottom40{
+        margin-bottom: 40px;
+    }
 /*.dropped{
     background: #fff;
 }*/
@@ -140,7 +146,7 @@ img{
         margin-bottom: 5px;
     }
 }
-.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video, .osscar-video{    
     /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
@@ -654,7 +660,7 @@ img{
     }
 }
 /*CSS start for year end page*/
-#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video, .osscar-video{
     background: #f6f6f6;
     ul{
         .dont-miss-listing{
@@ -735,21 +741,40 @@ img{
 
 /*CSS start special auto page */
 .itg-layout-container.auto-layout-page{
-    .itg-top-section{
-        .top-colum-1, .top-colum-2{
-            .droppable{
-                height: 608px;
-            }            
+    .m-bottom40{
+        margin-bottom: 40px;
+    }
+    .itg-layout-605{
+        height: 605px;
+        overflow: hidden;
+    }
+    .auto-block-1, .auto-block-2{
+        height: 605px;
+        overflow: hidden;
+    }
+    .auto-block-1{
+        border: 1px solid #ddd;  
+        .featured-news{
+            border: none;
         }
-        .top-colum-3{
-            .droppable{
-                height: 247px;
-                .widget-wrapper{
-                    overflow: auto;
-                }
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 245px;
+                overflow: hidden;
             }
         }
     }
+    .auto-block-2{
+        border: 1px solid #ddd;
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }    
     .itg-h450-section .col-md-4 .droppable .widget-wrapper {
         overflow: auto;
     }
@@ -849,6 +874,38 @@ img{
 /*CSS End special auto page */
 /*CSS Start special tech page */
 .tech-layout-page{
+    
+     .itg-layout-672{
+        height: 672px;
+        overflow: hidden;
+    }
+    .auto-block-1, .auto-block-2{
+        height: 672px;
+        overflow: hidden;
+    }
+    .auto-block-1{
+        border: 1px solid #ddd;  
+        .featured-news{
+            border: none;
+        }
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 311px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-2{
+         border: 1px solid #ddd;
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }
      .itg-h385-section{
         .droppable {
             height: 385px;
@@ -891,6 +948,29 @@ img{
                 a{
                     @include before-icon-list(5px,5px,22px,8px,#959595,100%);
                     padding-left: 22px;
+                }
+            }
+        }
+    }
+    .tech_most_read{
+        border: 1px solid #ddd;
+        padding: 10px;
+        .widget-title{
+            margin-bottom: 10px;
+        }        
+    }
+    #block-itg-widget-tech-most-read{
+        ul{
+            li.dont-miss-listing{
+                &:first-child{
+                    padding-top: 0;
+                }
+                @include calculate-width(1);
+                overflow: hidden;
+                padding:12px 0 15px;
+                border-bottom: 1px solid $border-color;
+                .dm-pic{
+                   width: auto;
                 }
             }
         }
@@ -971,6 +1051,9 @@ img{
         }
     }
     /*End photo section slider*/
+    .techwatch.osscar-video ul .dont-miss-listing{
+        padding:0 0 10px 0;
+    }
 }
 
 /*CSS End special tech page */
@@ -1095,3 +1178,263 @@ img{
 }
 /*CSS end for special osscar*/
 /*CSS End for oscar page*/
+
+
+/*CSS start for education page*/
+.education-layout-page{    
+    .droppable{
+        overflow: hidden;
+    }
+    .itg-layout-672{
+        .droppable{
+            height: 672px;            
+            .auto-block-1, .auto-block-2{
+                height: 672px;
+                overflow: hidden;
+            }
+            .auto-block-1{
+                border: 1px solid #ddd;
+                .featured-news{
+                    border: none;
+                }
+            }
+        }        
+        .itg-widget-child{
+            .droppable{
+            height: 310px;            
+            }
+        }        
+    }
+    .itg-layout-565{
+        .droppable{
+            height: 565px;            
+        }
+        .itg-widget-parent{
+            .droppable {
+                height: 225px;                
+            }
+        }
+        .itg-widget-child{
+            .droppable {
+                height: 305px;                
+            }
+        }
+    }
+    .itg-common-section{
+        .ad-widget {
+            height: 382px;            
+        }
+    }
+    .itg-295-layout{
+        .droppable {
+                height: 295px;                
+            }
+    }
+    .itg-325-layout{
+        .droppable, .ad-widget{
+                height: 325px;                
+            }
+    }
+    .itg-345-layout{
+        .droppable {
+                height: 345px;                
+            }
+    }
+    .more{
+                display: block;
+                text-align: right;                
+                font-weight: 700;
+                font-size: 12px;
+                padding: 10px 0;
+            }
+    .shadow-on{        
+        -moz-box-shadow: 0 0 5px #d4cdcd;
+        -webkit-box-shadow: 0 0 5px #d4cdcd;  
+        box-shadow: 0 0 5px #d4cdcd;
+        .section-ordering{
+            h3{
+                padding: 10px;   
+            }   
+            p{
+                padding: 12px 15px 12px 25px;
+                &:before{
+                  left:10px;  
+                }
+            }
+        }
+        .more{
+            padding: 10px 20px 10px 0px;
+        }
+    }
+    .section_wise_order-edu-from-the-magazine{
+        background: #f3f3f3;
+        padding:10px;
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .from-the-magazine{        
+        .magazine-detail{
+            margin-bottom:10px;
+            overflow: hidden;
+        h3{
+            @include font(18px,24px,null);
+            margin-bottom:5px;
+        }
+        img{
+            @include float(left);
+            margin-right: 10px;
+        }               
+        }
+        > p{
+            padding: 10px 0;            
+        }
+        > p + p{            
+            border-top: 1px solid #ddd;                        
+        }
+    }
+/*    .special-top-news{
+        border: 1px solid #ddd;
+    }*/
+
+    .auto-block-2{
+        border: 1px solid #ddd;
+        .special-top-news {
+            position: relative;
+            padding-top:20px;            
+            .widget-title {
+                position: absolute;
+            }
+            .itg-listing{
+                border: none;
+            }
+        }
+    }
+    .education_how_made_id{
+        padding: 10px;
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .how-made-it{
+        ul{
+            @extend .list-none;
+            li{
+             padding: 10px 0;
+            .dm-pic{
+                @include float(left);
+                margin-right: 15px;
+            }
+            .dm-detail{
+                overflow: hidden;
+                .title{
+                    font-weight: 700;
+                    margin-bottom: 5px;
+                }
+            }
+            + li{               
+                border-top: 1px solid #ddd;
+            }            
+        }
+        }        
+    }
+    .section_wise_order-edu-tips-and-trick{
+        overflow: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+    .auto-tips-n-tricks{
+        ul{
+            li{
+                padding: 18px 0;
+                +li{
+                    border-top:1px solid #ddd; 
+                }
+                p.title{
+                    a{
+                        font-weight: 700;
+                        margin-bottom: 5px; 
+                        display: block;
+                    }                
+                }
+            }
+        }
+    }  
+    .tech-block_2{
+        padding: 10px;
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .osscar-video{
+        background:transparent;
+        ul .dont-miss-listing{
+        padding:0 0px 10px 0;
+            + .dont-miss-listing {
+                padding:0px;
+            }   
+        }
+    }
+    .section_wise_order-edu-sample-paper, .section_wise_order-edu-notification, .section_wise_order-edu-featurefilia, .section_wise_order-edu-jobs-and-career{
+        .section-ordering{
+            p:first-child{
+                border: none;
+            }
+        }
+    }
+}
+/*CSS end for education page*/
+
+
+/*CSS start sport home page*/
+.sport-home-layout-page{    
+    .droppable {
+        overflow: hidden;
+    }
+    .itg-layout-615{
+        .droppable {
+            height: 615px;            
+        }
+    }
+    .itg-layout-225{
+        .droppable {
+            height: 225px;            
+        }
+    }
+    .itg-layout-300{
+        .droppable {
+            height: 300px;            
+        }
+    }
+    .itg-layout-485{
+        .droppable {
+            height: 485px;            
+        }
+    }
+    .itg-layout-195{
+        .droppable {
+            height: 195px;            
+        }
+    }
+    .itg-layout-260{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-375{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-315{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-340{
+        .droppable {
+            height: 260px;            
+        }
+    }
+}
+/*CSS End sport home page*/

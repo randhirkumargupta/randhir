@@ -99,6 +99,10 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
     save_special_auto_review_widget_data($form_state);
   }
+  elseif ($current_display == 'special_how_made_it_widget_contents') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_how_i_made_it');
+    save_special_how_i_made_it_widget_data($form_state);
+  }
   elseif ($current_display == 'yearend_left_widget_contents') {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
     save_yearender_left_widget_data($form_state);

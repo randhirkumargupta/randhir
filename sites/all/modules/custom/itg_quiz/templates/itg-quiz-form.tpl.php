@@ -28,7 +28,7 @@ else {
     </div>
     <div class="profile-detail">
       <ul>
-        <li class="title"><?php echo $byline_name; ?></li>
+        <li class="title" style="line-height: 15px"><?php echo $byline_name; ?> |</li>
         <li class="twitter"><?php echo $byline_twitter_handler; ?></li>
       </ul>
       <ul class="date-update">
@@ -58,7 +58,13 @@ else {
   </div>
   
   <!-- Render survey form -->
-  <div class="<?php echo $form_class; ?>">
+  <div class="<?php echo $form_class; ?>" style="margin-bottom: 30px">
     <?php print drupal_render_children($form); ?>
   </div>
+  
+  <?php
+  if (function_exists('taboola_view')) {
+    taboola_view();
+  }
+  ?>
 </div>

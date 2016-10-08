@@ -214,7 +214,6 @@
   font-family: 'Roboto', sans-serif;
 }
 #block-views-photo-landing-slider-block .other-details-main .caption {
-  padding: 0 20px;
   min-height: 150px;
 }
 #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-prev, #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-next {
@@ -1595,7 +1594,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 500 24px/30px Roboto;
   border-bottom: 1px solid #d8d8d8;
   padding-bottom: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .view-redeem-points .view-content, .view-product .view-content {
@@ -1606,14 +1605,24 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 15px;
   text-align: center;
   border: 1px solid #dedede;
-  margin: 15px 0;
+  margin: 20px 0;
+}
+.view-redeem-points .product-wrapper .product-pic, .view-product .product-wrapper .product-pic {
+  height: 172px;
+  cursor: pointer;
+}
+.view-redeem-points .product-wrapper .product-pic img, .view-product .product-wrapper .product-pic img {
+  width: 123px;
+  height: 172px;
 }
 .view-redeem-points .product-wrapper .product-title, .view-product .product-wrapper .product-title {
   text-transform: uppercase;
   font: 400 16px/18px Roboto;
   padding-top: 15px;
+  height: 51px;
+  overflow: hidden;
 }
-.view-redeem-points .product-wrapper .product-description, .view-product .product-wrapper .product-description {
+.view-redeem-points .product-wrapper .product-description, .view-redeem-points .product-wrapper .post-date, .view-product .product-wrapper .product-description, .view-product .product-wrapper .post-date {
   display: none;
 }
 .view-redeem-points .product-wrapper .redeem-points, .view-product .product-wrapper .redeem-points {
@@ -1664,6 +1673,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-size: 18px;
   color: #fff;
   margin-right: 5px;
+  vertical-align: top;
 }
 .view-redeem-points .product-wrapper:hover, .view-product .product-wrapper:hover {
   box-shadow: 0 0 20px 0 #bbb;
@@ -1702,6 +1712,48 @@ body.has-cart-popup {
   top: 50%;
   transform: translateY(-50%);
   width: 870px;
+}
+.cart-popup-wrapper .cart-popup .pic {
+  text-align: center;
+  position: relative;
+}
+.cart-popup-wrapper .cart-popup .pic span {
+  background-color: #9d9d9d;
+  color: #fff;
+  display: inline-block;
+  padding: 8px;
+  position: relative;
+  vertical-align: top;
+  width: 212px;
+  font: 500 14px/18px Roboto;
+}
+.cart-popup-wrapper .cart-popup .pic span:before {
+  border-color: transparent #2f2f2f transparent transparent;
+  border-style: solid;
+  border-width: 20px 20px 0 0;
+  content: "";
+  height: 0;
+  left: 0;
+  position: absolute;
+  top: -20px;
+  width: 0;
+}
+.cart-popup-wrapper .cart-popup .pic span:after {
+  border-color: transparent transparent #2f2f2f;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  content: "";
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: -20px;
+  width: 0;
+}
+.cart-popup-wrapper .cart-popup img {
+  width: 172px;
+  height: 240px;
+  display: block;
+  margin: 0 auto;
 }
 .cart-popup-wrapper .cart-popup .cart-close {
   color: #777;
@@ -1744,6 +1796,14 @@ body.has-cart-popup {
   padding: 5px 15px;
   margin: 0 5px;
 }
+.cart-popup-wrapper .cart-popup .btn-add-cart:before {
+  content: '\f07a';
+  font-family: 'FontAwesome';
+  font-size: 18px;
+  color: #777;
+  vertical-align: top;
+  margin-right: 5px;
+}
 .cart-popup-wrapper .cart-popup .btn-redeem-points {
   background-color: #a00606;
   border: 1px solid #820000;
@@ -1755,6 +1815,14 @@ body.has-cart-popup {
   height: 30px;
   padding: 5px 15px;
   margin: 0 5px;
+}
+.cart-popup-wrapper .cart-popup .btn-redeem-points:before {
+  content: '\f06b';
+  font-family: 'FontAwesome';
+  font-size: 18px;
+  color: #fff;
+  margin-right: 5px;
+  vertical-align: top;
 }
 
 [id*="itg-quiz-quiz-form"] .question-heading {
@@ -1813,6 +1881,7 @@ body.has-cart-popup {
 [id*="itg-quiz-quiz-form"] .quiz-submit {
   background: #1a3c8d none repeat scroll 0 0;
   border: 1px solid #1a3c8d;
+  border-radius: 0;
   color: #fff;
   cursor: pointer;
   font-size: 12px;
@@ -1880,9 +1949,14 @@ body.has-cart-popup {
   vertical-align: top;
   width: 100%;
 }
+[id*="itg_user_forgot_password_multistep_form"] .messages--status {
+  margin-top: 20px;
+  padding: 0 15px;
+}
 
 .page-cart header,
 .page-checkout header,
+.page-product header,
 .page-redeem-points header {
   margin-bottom: 0;
 }
@@ -1898,7 +1972,7 @@ body.has-cart-popup {
 
 #block-itg-loyalty-reward-itg-loyalty-reward-header {
   background-color: #eaebed;
-  padding: 5px 0;
+  padding: 10px 0;
   display: inline-block;
   vertical-align: top;
   width: 100%;
@@ -2000,6 +2074,9 @@ body.has-cart-popup {
   vertical-align: middle;
   margin: 0 8px 0 11px;
 }
+.cart-checkout-list .cart-action > div.cart-action-links a:hover {
+  color: #a00606;
+}
 .cart-checkout-list .cart-action > div.points {
   border: 1px solid #dbdbdb;
   padding: 5px;
@@ -2024,7 +2101,8 @@ body.has-cart-popup {
   padding-bottom: 15px;
 }
 .cart-total-block .grand-total strong {
-  font: 500 16px/18px Roboto;
+  font: 600 16px/18px Roboto;
+  color: #000;
 }
 .cart-total-block .grand-total strong:first-child {
   float: left;
@@ -2040,6 +2118,7 @@ body.has-cart-popup {
 }
 .cart-total-block .points-balance span {
   font: 400 16px/18px Roboto;
+  color: #000;
 }
 .cart-total-block .points-balance span:first-child {
   float: left;
@@ -2056,6 +2135,9 @@ body.has-cart-popup {
   color: #fff;
 }
 
+[id*="itg-user-forgot-password-multistep-form"] {
+  padding-top: 20px;
+}
 [id*="itg-user-forgot-password-multistep-form"] .form-type-password-confirm {
   padding: 0 15px;
 }
@@ -2070,7 +2152,7 @@ body.has-cart-popup {
   margin: 0;
 }
 
-.page-cart section.sidebar {
+.page-cart section.sidebar, .page-order section.sidebar, .page-checkout section.sidebar {
   border: none;
 }
 
@@ -2083,6 +2165,13 @@ body.has-cart-popup {
 }
 #block-views-redeem-points-block-4 .product-wrapper {
   box-shadow: none;
+}
+#block-views-redeem-points-block-4 .product-wrapper .product-pic img {
+  width: 123px;
+  height: 172px;
+}
+#block-views-redeem-points-block-4 .product-wrapper .product-pic span {
+  display: none;
 }
 #block-views-redeem-points-block-4 .flexslider {
   border: none;
@@ -2125,4 +2214,424 @@ body.has-cart-popup {
 }
 #block-views-redeem-points-block-4 .flexslider:hover .flex-direction-nav .flex-next:before, #block-views-redeem-points-block-4 .flexslider .flex-direction-nav .flex-next:before {
   left: 13px;
+}
+
+[id*="itg-loyalty-reward-checkout-form"] {
+  margin: 20px 0;
+  max-width: 600px;
+}
+[id*="itg-loyalty-reward-checkout-form"] .form-type-textfield {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-loyalty-reward-checkout-form"] .form-type-textfield label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 99;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+[id*="itg-loyalty-reward-checkout-form"] .form-type-textfield .form-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 160px;
+  z-index: 9;
+}
+[id*="itg-loyalty-reward-checkout-form"] .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/28px Roboto;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.page-order header {
+  margin-bottom: 0;
+}
+.page-order .messages--status {
+  margin-top: 30px;
+}
+.page-order table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 15px/20px Roboto;
+  margin: 30px 0;
+}
+.page-order table th {
+  background-color: #d9d9d9;
+  font: 500 15px/20px Roboto;
+}
+.page-order table td {
+  border-bottom: 1px solid #d9d9d9;
+  vertical-align: top;
+}
+.page-order table td + td {
+  font-size: 13px;
+  font-weight: 600;
+}
+.page-order table td .checkout-inner img {
+  float: left;
+  margin-right: 10px;
+  width: 41px;
+  height: 58px;
+}
+.page-order table td .checkout-inner .checkout-inner-details {
+  overflow: hidden;
+}
+.page-order table td .checkout-inner .checkout-inner-details span {
+  float: left;
+  width: 130px;
+}
+.page-order table th, .page-order table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.view-product .view-filters {
+  text-align: right;
+}
+.view-product .view-filters form {
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+.view-product .view-filters form .views-exposed-form label {
+  display: none;
+}
+.view-product .view-filters form .views-exposed-form .views-exposed-widget {
+  padding: 10px 0 0 10px;
+}
+.view-product .view-filters form .form-submit {
+  display: inline-block;
+  vertical-align: top;
+  background-color: #1a3c8d;
+  color: #fff;
+  padding: 0 10px;
+  border: 1px solid #1a3c8d;
+  cursor: pointer;
+  height: 32px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.page-user form {
+  font-family: Roboto;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.page-user form h2 {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+  margin-bottom: 10px;
+}
+.page-user form label {
+  display: block;
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+.page-user form .form-type-password, .page-user form .form-actions {
+  margin-top: 10px;
+}
+.page-user form .forgot-link {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 15px;
+  color: #333;
+}
+.page-user form .form-submit {
+  background-color: #000 !important;
+  border: 1px solid #000 !important;
+  height: 50px;
+  width: 243px;
+}
+.page-user form .bottom-link {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 12px;
+}
+.page-user form .bottom-link .sso-forgot-link {
+  float: left;
+  color: #a6a6a6;
+}
+.page-user form .bottom-link .sso-register-link {
+  float: right;
+  color: #a6a6a6;
+}
+.page-user form .form-text {
+  width: 100%;
+  height: 42px;
+  font: 400 14px/normal Roboto;
+}
+.page-user form div.description {
+  font-size: 12px;
+  color: #8d8d8d;
+}
+.page-user form .form-item-remember-me .form-checkbox {
+  float: left;
+  margin: 2px 5px 0 0;
+}
+.page-user form .form-item-remember-me label {
+  font-size: 14px;
+}
+.page-user .social-share {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+.page-user .social-share a {
+  border-radius: 5px;
+  float: left;
+  height: 50px;
+  color: #fff;
+  padding: 0 15px 0 55px;
+  overflow: hidden;
+  font: 400 16px/48px Roboto;
+}
+.page-user .social-share a + a {
+  margin-left: 10px;
+}
+.page-user .social-share a .fa {
+  width: 45px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 48px;
+  text-align: center;
+}
+.page-user .social-share a.sso-twitter {
+  background-color: #1daee3;
+  position: relative;
+}
+.page-user .social-share a.sso-twitter .fa {
+  background-color: #1ca4d6;
+  font-size: 25px;
+}
+.page-user .social-share a.sso-facebook {
+  background-color: #3b5998;
+  position: relative;
+}
+.page-user .social-share a.sso-facebook .fa {
+  background-color: #37528c;
+  font-size: 25px;
+}
+.page-user .sign-border {
+  text-align: center;
+  position: relative;
+  margin: 30px 0;
+}
+.page-user .sign-border span {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #fff;
+  padding: 0 10px;
+  font: 300 16px/18px Roboto;
+  color: #777;
+  position: relative;
+  z-index: 9;
+}
+.page-user .sign-border:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5px;
+  bottom: 0;
+  margin: auto;
+  width: 96%;
+  height: 1px;
+  background-color: #e9e9e9;
+  z-index: 1;
+}
+.page-user .login-wrapper {
+  padding: 0;
+  border: none;
+  background: none;
+}
+.page-user .messages--status, .page-user .messages--error {
+  max-width: 440px;
+  margin: 0 auto;
+}
+.page-user .messages--error .messages__list {
+  padding-left: 15px;
+}
+
+[id*="itg-sso-reg-multistep-form"] #email-sucess, [id*="itg-sso-reg-multistep-form"] #thank-you, [id*="itg-sso-reg-multistep-form"] #mobile-success, [id*="itg-user-forgot-password-multistep-form"] #email-sucess, [id*="itg-user-forgot-password-multistep-form"] #thank-you, [id*="itg-user-forgot-password-multistep-form"] #mobile-success {
+  color: #009c00;
+  margin: 20px 0;
+}
+
+.sign-in-link {
+  padding: 20px;
+}
+.sign-in-link .signup-link {
+  float: left;
+}
+
+#fotp {
+  padding: 0 15px;
+}
+#fotp .form-item-fotp {
+  max-width: 60%;
+  float: left;
+}
+#fotp #forgototpclickme {
+  margin: 9px 20px;
+  float: left;
+}
+#fotp #ajax-loader {
+  float: left;
+  max-width: 25px;
+  margin-top: 5px;
+}
+#fotp #forgot_otp_success {
+  float: left;
+  width: 100%;
+  margin: 5px 0;
+  font-size: 12px;
+  color: #009c00;
+}
+
+#uotp #ajax-loader {
+  float: left;
+  max-width: 25px;
+  margin: 5px 0 0 20px;
+}
+#uotp #otpclickme {
+  float: left;
+}
+
+/* Responsive CSS */
+@media all and (max-width: 767px) {
+  /* Responsive CSS For Loyalty and Rewards */
+  [id*="block-views-redeem-points-block"] .block-title {
+    font: 500 18px/24px Roboto;
+  }
+
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user {
+    width: 50%;
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart {
+    max-width: 48%;
+    text-align: right;
+    padding-top: 25px;
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li {
+    padding-bottom: 10px;
+    float: none;
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li + li:before {
+    display: none;
+  }
+
+  .view-redeem-points .more-link, .view-product .more-link {
+    top: 3px;
+    font-size: 13px;
+  }
+  .view-redeem-points .view-content .col-md-4 + .col-md-4 .product-wrapper, .view-product .view-content .col-md-4 + .col-md-4 .product-wrapper {
+    margin: 50px 0 0;
+  }
+  .view-redeem-points .product-wrapper, .view-product .product-wrapper {
+    padding: 15px 10px;
+  }
+  .view-redeem-points .product-wrapper .product-title, .view-product .product-wrapper .product-title {
+    font-size: 14px;
+  }
+  .view-redeem-points .product-wrapper .redeem-points, .view-product .product-wrapper .redeem-points {
+    font-size: 16px;
+  }
+  .view-redeem-points .product-wrapper .btn-add-cart, .view-redeem-points .product-wrapper .btn-redeem-points, .view-product .product-wrapper .btn-add-cart, .view-product .product-wrapper .btn-redeem-points {
+    font: 500 13px/18px Roboto;
+    padding: 5px 8px;
+    margin: 0;
+  }
+  .view-redeem-points .product-wrapper .btn-add-cart, .view-product .product-wrapper .btn-add-cart {
+    margin-right: 8px;
+  }
+
+  .page-order table th, .page-order table td {
+    padding: 10px 5px;
+  }
+  .page-order table td .checkout-inner {
+    font-size: 13px;
+  }
+  .page-order table td .checkout-inner img {
+    margin: 0;
+    float: none;
+  }
+  .page-order table td .checkout-inner .checkout-inner-details span {
+    width: 110px;
+  }
+
+  .cart-popup-wrapper .cart-popup {
+    margin: auto;
+    max-height: 96%;
+    max-width: 96%;
+    overflow-y: auto;
+    text-align: center;
+  }
+  .cart-popup-wrapper .cart-popup h2 {
+    margin-top: 30px;
+  }
+  .cart-popup-wrapper .cart-popup .cart-actions {
+    padding-bottom: 30px;
+  }
+  .cart-popup-wrapper .cart-popup .cart-actions .btn-add-cart, .cart-popup-wrapper .cart-popup .cart-actions .btn-redeem-points {
+    font: 500 13px/18px Roboto;
+    padding: 5px 8px;
+    margin: 0;
+  }
+  .cart-popup-wrapper .cart-popup .cart-actions .btn-add-cart {
+    margin-right: 8px;
+  }
+
+  /* End of Loyalty and Rewards */
+  /* Responsive CSS For Quiz And Survey */
+  .survey-form-main-container .byline .social-info {
+    display: none;
+  }
+  .survey-form-main-container .byline .profile-pic {
+    margin-right: 10px;
+  }
+  .survey-form-main-container .byline .profile-detail {
+    float: none;
+    overflow: hidden;
+    margin: 0;
+    width: auto;
+    padding: 0;
+  }
+
+  [id*="itg-quiz-quiz-form"] .answer-container {
+    padding-left: 0;
+  }
+  [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio > label {
+    width: 100%;
+  }
+  [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container {
+    width: 130px;
+    margin-right: 10px;
+  }
+
+  /* End of Quiz And Survey */
 }
