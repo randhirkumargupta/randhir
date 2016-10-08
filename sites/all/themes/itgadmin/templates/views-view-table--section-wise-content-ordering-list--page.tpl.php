@@ -52,9 +52,9 @@
           </td>
           <?php } else { ?>
           <td>
-            <div class="custom-weight-draggable">
-              <input type="number" min="0" name="draggableviews[<?php print $row_count ?>][weight]" value="<?php print $row['weight']; ?>">
-            <?php  print $content; ?>
+            <div class="custom-weight-draggable" style="display: inline-block !important;">
+              <input type="number" min="0" required="required" name="draggableviews[<?php print $row_count ?>][weight]" value="<?php print $row['weight']; ?>">
+              <?php  print $content; ?>
             </div>
           </td>
           <?php } ?>
