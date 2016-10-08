@@ -15,7 +15,7 @@
         }
         $video_class = "";
         if (strtolower($row['type']) == 'videogallery') {
-            $video_class = 'content-video';
+            $video_class = 'video-icon';
         }
         if ($index == 0) {
             ?>
