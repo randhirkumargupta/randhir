@@ -61,7 +61,6 @@ features[field_instance][] = node-poll-field_poll_question
 features[field_instance][] = node-poll-field_poll_question_image
 features[field_instance][] = node-poll-field_poll_question_video
 features[field_instance][] = node-poll-field_poll_start_date
-features[field_instance][] = node-poll-field_pqs_add_token
 features[field_instance][] = node-poll-field_result_format
 features[field_instance][] = node-poll-field_show_end_date
 features[field_instance][] = node-poll-field_story_url
