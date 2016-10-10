@@ -20,7 +20,7 @@ function itg_loyalty_reward_testpoints() {
   drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url),
       ), array('type' => 'setting'));
 
-  $output = '<div>';
+  $output = '<div>';  
   $output .= '<div class="share" style="cursor:pointer">Content Share <span></span></div>';
   $output .= '<div class="like" style="cursor:pointer">Content Like<span></span></div>';
   $output .= '<div class="visit" style="cursor:pointer">Content Visit<span></span></div>';
@@ -29,9 +29,7 @@ function itg_loyalty_reward_testpoints() {
   $output .= '<div class="ugc" style="cursor:pointer">UGC Contribution<span></span></div>';
   $output .= '<div class="ol-register" style="cursor:pointer">Online Registration for Any Events<span></span></div>';
   $output .= '<div class="participate" style="cursor:pointer">Participation in Poll/Campaign/Survey<span></span></div>';
-  $output .= '<div class="raf" style="cursor:pointer">Refer a Friend<span></span></div>';
-
-  $output .= date('Y-m-d', strtotime("+2 days"));
+  $output .= '<div class="raf" style="cursor:pointer">Refer a Friend<span></span></div>';  
   $output .= '</div>';
 
   return $output;
@@ -51,8 +49,8 @@ function itg_loyalty_reward_earnpoint() {
   $dedicated_point = itg_loyalty_reward_dedicated_point(check_plain($inputs['type']));
   $point_presave = array(
     'uid' => $user->uid,
-    'loyalty_type' => check_plain($inputs['type']),
-    'loyalty_points' => $dedicated_point,
+    'loyalty_type' => $dedicated_point['label'],
+    'loyalty_points' => $dedicated_point['point'],
     'pointer_key' => $unique_exp_key != '' ? $unique_exp_key : '',
     'node_id' => 1,
     'created' => REQUEST_TIME,
@@ -108,7 +106,7 @@ function itg_loyalty_reward_add_point($presave, $op) {
       'uid' => $presave['uid'],
       'total_point' => $presave['loyalty_points'],
       'redeemed_point' => 0,
-      'remaining_point' => 0,
+      'remaining_point' => $presave['loyalty_points'],
       'pointer_key' => $presave['pointer_key'],
     );
     // Inser into point history table.
@@ -117,44 +115,14 @@ function itg_loyalty_reward_add_point($presave, $op) {
         ->execute();
   }
   elseif ($itg_query >= 1 && $op == 'update') {
-    $itg_result = new stdClass();
-    $itg_query = db_select('itg_loyalty_reward_point_history', 'itg');
-    $itg_query->fields('itg', array('id', 'total_point'))
-        ->condition('uid', $user->uid)
-        ->condition('pointer_key', $presave['pointer_key']);
-    $itg_result = $itg_query->execute()->fetchObject();
-
-    // Add point to existing point.
-    $new_point = $itg_result->total_point + $presave['loyalty_points'];
     // Update new points on table.
     $itg_query = db_update('itg_loyalty_reward_point_history')
-        ->fields(array('total_point' => $new_point))
-        ->condition('id', $itg_result->id)
+        ->fields(array('total_point' => $presave['loyalty_points']))
+        ->expression('total_point', 'total_point + :loyalty', array(':loyalty' => $presave['loyalty_points']))
+        ->expression('remaining_point', 'remaining_point + :loyalty', array(':loyalty' => $presave['loyalty_points']))
+        ->condition('pointer_key', $presave['pointer_key'])
         ->execute();
   }
-}
-
-/**
- * Get unique key for expiry date.
- *
- * @param int $uid
- *   User id of the user.
- *
- * @return string
- *   Unique expiration key.
- */
-function itg_loyalty_reward_unique_expiration($uid) {
-  $itg_result = '';
-  $itg_query = db_select('itg_lrp_pointer_key', 'itg');
-  $itg_query->fields('itg', array('pointer_key'))
-      ->condition('uid', $uid)
-      ->condition('expiry_date', REQUEST_TIME, '>=');
-  $itg_result = $itg_query->execute()->fetchField();
-  if ($itg_result != '') {
-    return $itg_result;
-  }
-
-  return $itg_result;
 }
 
 /**
@@ -166,17 +134,44 @@ function itg_loyalty_reward_unique_expiration($uid) {
  * @return int
  *   Return points specified for given trigger.
  */
-function itg_loyalty_reward_dedicated_point($type) {
+function itg_loyalty_reward_dedicated_point($type) {  
   $data = array(
-    'share' => variable_get(lrp_content_share),
-    'like' => variable_get(lrp_content_like),
-    'visit' => variable_get(lrp_content_visit),
-    'follow' => variable_get(lrp_follow_itg_on_social_sites),
-    'ns' => variable_get(lrp_newsletter_subscription),
-    'ugc' => variable_get(lrp_ugc_contribution),
-    'ol-register' => variable_get(lrp_online_registration_for_any_events),
-    'participate' => variable_get(lrp_participation_in_poll_campaign_survey),
-    'raf' => variable_get(lrp_refer_a_friend),
+    'share' => array(
+      'label' => 'Content Share',
+      'point' => variable_get('lrp_content_share'),
+    ),
+    'like' => array(
+      'label' => 'Content Like',
+      'point' => variable_get('lrp_content_like'),
+    ),
+    'visit' => array(
+      'label' => 'Content Visit',
+      'point' => variable_get('lrp_content_visit'),
+    ),
+    'follow' => array(
+      'label' => 'Content Follow',
+      'point' => variable_get('lrp_follow_itg_on_social_sites'),
+    ),
+    'ns' => array(
+      'label' => 'Newsletter Subscription',
+      'point' => variable_get('lrp_newsletter_subscription'),
+    ),
+    'ugc' => array(
+      'label' => 'UGC Contribution',
+      'point' => variable_get('lrp_ugc_contribution'),
+    ),
+    'ol-register' => array(
+      'label' => 'Online Registration for Any Events',
+      'point' => variable_get('lrp_online_registration_for_any_events'),
+    ),    
+    'participate' => array(
+      'label' => 'Participation in Poll/Campaign/Survey',
+      'point' => variable_get('lrp_participation_in_poll_campaign_survey'),
+    ),
+    'raf' => array(
+      'label' => 'Refer a Friend',
+      'point' => variable_get('lrp_refer_a_friend'),
+    ),
   );
 
   return $data[$type];

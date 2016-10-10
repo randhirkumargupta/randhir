@@ -126,3 +126,7 @@ window.addEventListener("message", function(ev) {
 </div>
 
 <?php print render($page['bottom']); ?>
+<?php global $base_url; ?>
+<div id="widget-ajex-loader" style="display: none">
+    <img class="widget-loader" align="center" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
+</div>
