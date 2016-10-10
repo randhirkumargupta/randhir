@@ -6448,10 +6448,19 @@ footer .footer-copyright {
   display: none;
 }
 .education-layout-page #itg-newslatter-register-form .form-type-textfield {
-  margin-bottom: 10px;
+  margin: 0 0 10px;
+  padding: 0;
 }
 .education-layout-page #itg-newslatter-register-form .form-type-textfield input[type="text"] {
   width: 100%;
+}
+.education-layout-page #itg-newslatter-register-form .form-type-textfield span.error {
+  background: #fff none repeat scroll 0 0;
+  color: red;
+  position: absolute;
+  right: 12px;
+  top: -9px;
+  padding-left: 0;
 }
 .education-layout-page #itg-newslatter-register-form input[type="submit"] {
   background: #000;
