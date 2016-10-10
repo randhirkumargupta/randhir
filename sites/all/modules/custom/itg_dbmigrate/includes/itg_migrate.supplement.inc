@@ -9,8 +9,6 @@ class ItgSupplementMigration extends XMLMigration {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Supplement)');
     
-    
-    
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
       'title' => t('Title'),
@@ -75,5 +73,14 @@ class ItgSupplementMigration extends XMLMigration {
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
 
+  }
+  
+  public function prepare($node, stdClass $row) {
+    
+    $old_magazine = (string) $row->xml->magazine;
+    $new_magazine = get_itg_destination_id('migrate_map_itgmagazine', $old_magazine);
+    $node->field_supp_select_magazine[LANGUAGE_NONE][]['target_id'] = $new_magazine;
+    
+    $node->uid = 1;
   }
 }

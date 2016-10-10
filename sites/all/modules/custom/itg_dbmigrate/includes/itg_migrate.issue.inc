@@ -9,8 +9,6 @@ class ItgIssueMigration extends XMLMigration {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Issue)');
     
-    
-    
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
       'issue_date' => t('Issue date'),
@@ -77,10 +75,23 @@ class ItgIssueMigration extends XMLMigration {
     $this->addFieldMapping('field_issue_supp_large_image', 'supplement_largecoverimage')->xpath('supplement_largecoverimage');
     $this->addFieldMapping('field_issue_supp_small_image', 'supplement_smallcoverimage')->xpath('supplement_smallcoverimage');
     
+    // for meta tags
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
 
+  }  
+  
+  public function prepare($node, stdClass $row) {
+    $old_magazine = (string) $row->xml->magazine;
+    $new_magazine = get_itg_destination_id('migrate_map_itgmagazine', $old_magazine);
+    $node->field_issue_magazine[LANGUAGE_NONE][]['target_id'] = $new_magazine;
+    
+    $old_supplement = (string) $row->xml->supplement;
+    $new_supplement = get_itg_destination_id('migrate_map_itgsupplement', $old_supplement);
+    $node->field_issue_supplement[LANGUAGE_NONE][]['target_id'] = $new_supplement;
+    
+    $node->uid = 1;
   }
 }
