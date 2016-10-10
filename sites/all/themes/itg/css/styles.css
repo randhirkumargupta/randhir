@@ -5617,6 +5617,7 @@ footer .footer-copyright {
   border: 1px solid #ddd;
 }
 .auto-layout-page .auto-block-2 .special-top-news {
+  overflow: hidden;
   position: relative;
 }
 .auto-layout-page .auto-block-2 .special-top-news .widget-title {
@@ -5723,6 +5724,7 @@ footer .footer-copyright {
 }
 .tech-layout-page .auto-block-2 .special-top-news {
   position: relative;
+  overflow: hidden;
 }
 .tech-layout-page .auto-block-2 .special-top-news .widget-title {
   position: absolute;
@@ -5747,7 +5749,7 @@ footer .footer-copyright {
   border: 1px solid #dddddd;
 }
 .tech-layout-page .special-top-news ul {
-  padding-top: 20px !important;
+  padding-top: 20px;
 }
 .tech-layout-page .special-top-news ul.itg-listing {
   border: none;
@@ -6303,7 +6305,7 @@ footer .footer-copyright {
   height: 225px;
 }
 .education-layout-page .itg-layout-565 .itg-widget-child .droppable {
-  height: 305px;
+  height: 300px;
 }
 .education-layout-page .itg-common-section .ad-widget {
   height: 382px;
@@ -6373,13 +6375,14 @@ footer .footer-copyright {
 }
 .education-layout-page .auto-block-2 .special-top-news {
   position: relative;
-  padding-top: 20px;
+  overflow: hidden;
 }
-.education-layout-page .auto-block-2 .special-top-news .widget-title {
+.education-layout-page .auto-block-2 .special-top-news .widget-title, .education-layout-page .auto-block-2 .special-top-news .widget-settings {
   position: absolute;
 }
 .education-layout-page .auto-block-2 .special-top-news .itg-listing {
   border: none;
+  padding-top: 20px;
 }
 .education-layout-page .education_how_made_id {
   padding: 10px;
@@ -6438,6 +6441,30 @@ footer .footer-copyright {
 .education-layout-page .section_wise_order-edu-sample-paper .section-ordering p:first-child, .education-layout-page .section_wise_order-edu-notification .section-ordering p:first-child, .education-layout-page .section_wise_order-edu-featurefilia .section-ordering p:first-child, .education-layout-page .section_wise_order-edu-jobs-and-career .section-ordering p:first-child {
   border: none;
 }
+.education-layout-page .itg-newaletter {
+  padding: 15px;
+}
+.education-layout-page #itg-newslatter-register-form .messages.error {
+  display: none;
+}
+.education-layout-page #itg-newslatter-register-form .form-type-textfield {
+  margin-bottom: 10px;
+}
+.education-layout-page #itg-newslatter-register-form .form-type-textfield input[type="text"] {
+  width: 100%;
+}
+.education-layout-page #itg-newslatter-register-form input[type="submit"] {
+  background: #000;
+  border: none;
+  color: #fff;
+  width: 130px;
+  height: 30px;
+  line-height: 30px;
+  text-transform: uppercase;
+  font-family: roboto-slab;
+  font-size: 18px;
+  border-radius: 5px;
+}
 
 /*CSS end for education page*/
 /*CSS start sport home page*/
@@ -6480,3 +6507,108 @@ footer .footer-copyright {
 }
 
 /*CSS End sport home page*/
+/*CSS start for movie page*/
+.movie-layout-page .itg-layout-580 .droppable {
+  height: 580px;
+}
+.movie-layout-page .itg-layout-580 .droppable .auto-block-1, .movie-layout-page .itg-layout-580 .droppable .auto-block-2 {
+  height: 580px;
+  overflow: hidden;
+}
+.movie-layout-page .itg-layout-580 .droppable .auto-block-1 {
+  border: 1px solid #ddd;
+}
+.movie-layout-page .itg-layout-580 .droppable .auto-block-1 .featured-news {
+  border: none;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .droppable {
+  height: 210px;
+}
+.movie-layout-page .itg-layout-580 .auto-block-2 {
+  border: 1px solid #ddd;
+}
+.movie-layout-page .itg-layout-580 .auto-block-2 .special-top-news {
+  position: relative;
+  overflow: hidden;
+}
+.movie-layout-page .itg-layout-580 .auto-block-2 .special-top-news .widget-title {
+  position: absolute;
+}
+.movie-layout-page .itg-layout-580 .auto-block-2 .special-top-news ul.itg-listing {
+  border: none;
+  padding-top: 20px;
+}
+.movie-layout-page .tech-block_5 .widget-title {
+  top: 0;
+  left: 15px;
+}
+.movie-layout-page .tech-block_5 .flexslider li {
+  position: relative;
+}
+.movie-layout-page .tech-block_5 .flexslider li .detail {
+  position: absolute;
+  bottom: 0;
+}
+.movie-layout-page .tech-block_5 .flexslider li .detail .flex-count {
+  display: none;
+}
+.movie-layout-page .tech-block_5 .flexslider li .detail .flex-caption {
+  background: rgba(255, 255, 255, 0.74);
+  font-size: 20px;
+  font-weight: 700;
+}
+.movie-layout-page .tech-block_5 .flexslider .flex-direction-nav {
+  display: block;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+.movie-layout-page .tech-block_5 .flexslider .flex-direction-nav a {
+  width: 20px;
+  height: 20px;
+}
+.movie-layout-page .tech-block_5 .flexslider .flex-direction-nav a:before {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 20px;
+  background: #000;
+}
+.movie-layout-page .tech-block_8 .widget-title {
+  margin-bottom: 5px;
+}
+.movie-layout-page .osscar-video {
+  background: transparent;
+}
+.movie-layout-page .osscar-video ul .dont-miss-listing {
+  padding: 0 0px 10px 0;
+}
+.movie-layout-page .osscar-video ul .dont-miss-listing + .dont-miss-listing {
+  padding: 0px;
+}
+.movie-layout-page .section_wise_order-movies-celebrities .widget-title, .movie-layout-page .section_wise_order-movies-lifestyle .widget-title {
+  position: absolute;
+}
+.movie-layout-page .tech-in-depth ul li {
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+.movie-layout-page .tech-in-depth ul li span {
+  float: left;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+.movie-layout-page .tech-in-depth ul li + li {
+  padding: 15px 0;
+}
+.movie-layout-page .itg-h396-section .widget-wrapper {
+  background: #f1f1f1;
+  padding: 10px;
+}
+.movie-layout-page .itg-h396-section .widget-title {
+  top: 10px;
+  left: 10px;
+}
+
+/*CSS End for movie page*/

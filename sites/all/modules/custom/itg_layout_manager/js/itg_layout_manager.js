@@ -111,7 +111,7 @@
                                 $('#' + content_place).html(data);
                                 //code by sunil
                                 //console.log("here i am");
-                                jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
+                                jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
                                 //code by avanish
                                 if (widget_name == 'featured_photo_carousel') {
                                     jQuery(".flexslider").flexslider({

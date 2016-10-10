@@ -224,7 +224,7 @@ jQuery(document).ready(function () {
     
     //Add header for so-sorry page
     jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
-    jQuery('.auto-block_1 .widget-title, .tech-block_1 .widget-title').prependTo('.auto-block-2 .special-top-news');
+   jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title').prependTo('.auto-block-2 .special-top-news');
     
     
     

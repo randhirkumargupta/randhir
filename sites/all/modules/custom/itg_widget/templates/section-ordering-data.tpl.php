@@ -238,7 +238,7 @@ if ($widget_style == 'auto-road-trip') {
 
 <?php } else if ($widget_style == 'movies-celebrities') { ?>
     <div class="row buying-guides tech-in-depth">
-        <div class="col-md-6">
+        <div class="col-md-6 section-ordering">
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
@@ -269,14 +269,8 @@ if ($widget_style == 'auto-road-trip') {
                     <?php
                 } else if ($count == 1 || $count == 2) {
                     ?>
-                    <ul>
-                        <li>
-
-
-                            <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
-                        </li>            
-                    </ul>
-                    <?php
+                    <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
+                   <?php
                 }
             }
             ?>
@@ -324,7 +318,7 @@ if ($widget_style == 'auto-road-trip') {
 
 <?php } else if ($widget_style == 'movies-lifestyle') { ?>
     <div class="row buying-guides tech-in-depth">
-        <div class="col-md-6">
+        <div class="col-md-6 section-ordering">
             <?php
             foreach ($data as $count => $entity) {
                 $video_class = "";
@@ -355,13 +349,11 @@ if ($widget_style == 'auto-road-trip') {
                     <?php
                 } else if ($count == 1 || $count == 2) {
                     ?>
-                    <ul>
-                        <li>
+                    
 
 
                             <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
-                        </li>            
-                    </ul>
+                       
                     <?php
                 }
             }
