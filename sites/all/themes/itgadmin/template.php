@@ -171,6 +171,11 @@ function itgadmin_menu_link(array $variables) {
   $element = $variables['element'];
   $sub_menu = '';
 
+
+  if ($element['#theme'] == 'menu_link__menu_menu_manager') {
+    $element['#localized_options']['attributes']['class'][] = "colorbox-load";
+  }
+  
   if ($element['#below']) {
     $sub_menu = drupal_render($element['#below']);
   }
@@ -379,8 +384,8 @@ function itgadmin_preprocess_page(&$vars) {
       , 'special-auto-review-widget-lsit'
       , 'issue-magazin-widget-list'
   );
-  
-  if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
+
+  if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
   }
 
