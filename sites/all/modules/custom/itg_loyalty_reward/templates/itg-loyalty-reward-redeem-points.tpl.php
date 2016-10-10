@@ -25,7 +25,7 @@
           ?>                      
         </li>
         <li id="my-remaining-points">          
-          <span>1234</span> POINTS LEFT
+          <span><?php print empty($data['remaining_point']) ? 0 : $data['remaining_point']; ?></span> POINTS LEFT
         </li>
     </ul>
  </div> 
