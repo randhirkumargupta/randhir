@@ -93,88 +93,44 @@ if ($theme != 'itgadmin') {
 
 <div class="itg-layout-container <?php echo $itg_class; ?> movie-layout-page">    
 
-    <div class="row itg-top-section">
+     <div class="row itg-top-section itg-layout-580">
+        
         <div class="top-block">
-
-            <div class="top-colum-2">
+        <div class="col-md-8">
+            <div class="">
               <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
-                  <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
+                  <div id="movie-new-block" class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
+                      <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-1']['block_title'])) { ?>
+                                <span class="widget-title"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
+                                 <?php } ?>
+                              <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                <div class="widget-settings">
+                                  <div class="widget-title-wrapper">
+                                    <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id" placeholder="Enter Title" />
+                                  </div>
+                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                </div>  
+                              <?php } ?>    
                     <div class="data-holder" id="itg-block-1"><?php print $widget_data['itg-block-1']['widget']; ?></div>
                   </div>                     
                 </div>
               </div>
             </div>
-
-            <div class="top-colum-1">
-                <div class="itg-widget">
-                    <div class="top-n-most-popular-stories">
-<!--                        <div class="tab-buttons">
-                            <span data-class="itg-block-2" data-id="tab-data-1" class="active">
-                                <?php 
-//                                if (!$widget_data['itg-block-2']['block_title']) { 
-//                                    print 'Tab 1';
-//                                } else {
-//                                    print $widget_data['itg-block-2']['block_title'];
-//                                } ?>
-                            </span>
-                            <span data-class="itg-block-3" data-id="tab-data-2">
-                              <?php 
-//                              if (!$widget_data['itg-block-3']['block_title']) { 
-//                                    print 'Tab 2';
-//                                } else {
-//                                    print $widget_data['itg-block-3']['block_title'];
-//                                } ?>
-                            </span>
-                        </div>-->
-                        <div class="itg-widget-child tab-data tab-data-1">
-                          <div class="droppable <?php print $gray_bg_layout; ?>">
-                            <div class="widget-wrapper <?php print $widget_data['itg-block-2']['widget_name'].$widget_data['itg-block-2']['widget_display_name']; ?>">
-                                <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-2']['block_title'])) { ?>
-                                    <span class="widget-title"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
-                                 <?php } ?>
-                              <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                                <div class="widget-settings">
-                                  <div class="widget-title-wrapper">
-                                    <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
-                                  </div>
-                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                </div>  
-                              <?php } ?>                   
-                              <div class="data-holder" id="itg-block-2"><?php print $widget_data['itg-block-2']['widget']; ?></div>
-                            </div>
-                          </div>
-                        </div>
-<!--                        <div class="itg-widget-child tab-data tab-data-2 hide">
-                          <div class="droppable <?php //print $gray_bg_layout; ?>"> 
-                            <div class="widget-wrapper <?php //print $widget_data['itg-block-3']['widget_name']; ?>">
-                              <?php //if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                                <div class="widget-settings">
-                                  <div class="widget-title-wrapper">
-                                    <input type="text" maxlength="255" size="30" value="<?php //print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />
-                                  </div>
-                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                </div>  
-                              <?php //} ?>                   
-                              <div class="data-holder" id="itg-block-3"><?php //print $widget_data['itg-block-3']['widget']; ?></div>
-                            </div>
-                          </div>  
-                        </div>-->
-                    </div>
-                </div>
-            </div>
-
-            <div class="top-colum-3">
-                <div class="itg-widget-parent m-bottom40">
+        </div>
+            <div class="col-md-4">
+            <div class="auto-block-3">
+                <div class="row">
+                <div class="itg-widget-parent m-bottom40 col-md-12 col-sm-6 col-xs-12">
                   <div class="itg-widget">
                     <div class="ad-widget">
                       <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']);?></div>
                     </div>
+
                   </div>
                 </div>
-                    <div class="itg-widget trending-list">
-                        
-                      <div class="itg-widget-child">
+                    <div class="itg-widget trending-list col-md-12 col-sm-6 col-xs-12">                        
+                      <div class="itg-widget-child shadow-on">
                         <div class="droppable <?php print $gray_bg_layout; ?>">
                           <div class="widget-wrapper <?php print $widget_data['itg-block-3']['widget_name'].$widget_data['itg-block-3']['widget_display_name']; ?>">
                              <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-3']['block_title'])) { ?>
@@ -188,12 +144,14 @@ if ($theme != 'itgadmin') {
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                 </div>  
                               <?php } ?>                   
-                            <div class="data-holder" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                            <div class="data-holder" widget-style="auto-road-trip" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
                           </div>
                         </div>
                       </div>
                       
                     </div>
+                </div>
+                </div>
                 </div>
             </div>
         </div>

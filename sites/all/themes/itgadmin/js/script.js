@@ -797,6 +797,6 @@ jQuery(document).ready(function() {
     });
     
     //tech and auto new block title tig admin
-    jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
+    jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
     
 });

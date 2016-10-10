@@ -31,7 +31,7 @@
 
             <?php if (!empty($title)) : ?>    
               <p class="title">
-                <?php echo l(mb_strimwidth($title, 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
+                <?php echo l(mb_strimwidth($title, 0, 30, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
               </p>
               <p><?php 
                 $desc=$node_data['node_load_data']->field_story_kicker_text['und'][0]['value'];

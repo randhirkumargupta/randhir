@@ -308,6 +308,13 @@ function itg_loyalty_reward_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'cart_point' => array(
+        'description' => 'Point spent into cart.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'pointer_key' => array(
         'description' => 'Pointer key',
         'type' => 'varchar',

@@ -97,7 +97,7 @@
             }
 
             // Code for points earning callbacks.
-            $('.share, .like, .visit').on('click', function () {
+            $('.share, .like, .visit, .follow, .ns, .ugc, .ol-register, .participate, .raf').on('click', function () {
                 //console.log(Drupal.settings.itg_loyalty_reward);
                 var base_url = Drupal.settings.itg_loyalty_reward.base_url;
                 var event_type = $(this).attr('class');
@@ -106,8 +106,11 @@
                     type: 'POST',
                     dataType: 'JSON',
                     data: {'type': event_type},
+                    beforeSend: function (xhr) {
+                        test_loader_show();
+                    },
                     success: function (itg) {
-                        
+                        test_loader_hide();
                     }
                 });
             });
@@ -130,6 +133,18 @@
                 $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
 
             });
+            // Display loader onclick of add to cart link.
+            $('.btn-add-cart, .itg-remove-product').on('click', function() {
+                test_loader_show();
+            });
+            
+            function test_loader_show() {                
+                $('#widget-ajex-loader').show();                
+            }
+            function test_loader_hide() {                
+                $('#widget-ajex-loader').hide();
+            }
+
 
             // Code end for product page.
 
