@@ -13,8 +13,8 @@ module_load_include('inc', 'itg_dbmigrate', 'includes/itg_migrate');
  * @param int $sourceid
  * @return int destination id
  */
-function get_itg_destination_id($sourceid) {
-  $query = db_select('migrate_map_itgcategory', 'mmap');
+function get_itg_destination_id($table_name, $sourceid) {
+  $query = db_select($table_name, 'mmap');
   $query->fields('mmap', array('destid1'));  
   $query->condition('sourceid1', $sourceid);
   
