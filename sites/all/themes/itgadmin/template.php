@@ -383,6 +383,7 @@ function itgadmin_preprocess_page(&$vars) {
       , 'yearend-left-widget-list'
       , 'special-auto-review-widget-lsit'
       , 'issue-magazin-widget-list'
+      , 'menu-manager'
   );
 
   if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
