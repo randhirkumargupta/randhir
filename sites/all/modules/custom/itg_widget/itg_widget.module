@@ -103,7 +103,7 @@ function itg_widget_menu() {
   );
 
   $items['test_function_callback'] = array(
-      'page callback' => 'get_personalization_front_data', // load the croper according to size!.
+      'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
       'type' => MENU_CALLBACK,
       'access arguments' => array('access content'),
   );

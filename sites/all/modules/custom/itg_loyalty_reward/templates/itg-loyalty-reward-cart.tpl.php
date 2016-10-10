@@ -26,11 +26,14 @@
               <div><span>Magzine ID:</span><strong><?php print $cart_detail['product']['nid']; ?></strong></div>              
             </div>
             <div class="cart-action col-md-4 col-sm-4">
+                <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
                 <div class="cart-action-links">
                     <span>Item (<?php print $cart_detail['quantity']; ?>)</span>
-                    <?php print l(t('Delete (X)'), 'cart/delete/' . $cart_detail['product']['nid'] . '/' . $cart_detail['product']['title'], array('query' => array('destination' => arg(0)))); ?>
-                </div>
-                <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
+                    <?php print l(t('Delete (X)'), 'cart/delete/' . 
+                        $cart_detail['product']['nid'] . '/' . 
+                        str_replace(' ', '_', strtolower($cart_detail['product']['title']) . 
+                        '/' . $item_total), array('attributes' => array('class' => array('itg-remove-product')),'query' => array('destination' => arg(0)))); ?>
+                </div>                
                 <div class="points"><?php print $item_total . ' ' . t('Points'); ?></div>
             </div>
           </div>

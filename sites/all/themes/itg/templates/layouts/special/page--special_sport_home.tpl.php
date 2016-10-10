@@ -89,7 +89,10 @@ if ($theme != 'itgadmin') {
         
 <?php } ?>
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
- 
+ <?php if ($theme == 'itgadmin')
+   {
+ echo l('IPL Pages', $base_url . '/' . drupal_get_path_alias("itg-basic-page-list/{$_GET["section"]}"));
+ } ?>
 
 <div class="itg-layout-container <?php echo $itg_class; ?> sport-home-layout-page">   
     
@@ -171,7 +174,7 @@ if ($theme != 'itgadmin') {
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                 </div>  
                               <?php } ?>    
-                    <div class="data-holder" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-3" widget-style="sport-column"><?php print $widget_data['itg-block-3']['widget']; ?></div>
                   </div>                     
                 </div>
               </div>
