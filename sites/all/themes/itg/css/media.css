@@ -116,6 +116,26 @@
 
   /*CSS End Photo and video header crusal page*/
 }
+@media only screen and (max-width: 991px) {
+  /*CSS start education page special*/
+  .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
+    height: auto;
+  }
+
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
+    margin-bottom: 50px;
+  }
+
+  .education-layout-page .auto-block-3 .m-bottom40 {
+    margin-bottom: 0;
+  }
+
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news {
+    margin: 0;
+  }
+
+  /*CSS end education page special*/
+}
 @media only screen and (max-width: 768px) {
   header {
     margin-bottom: 15px;
@@ -410,6 +430,12 @@
   }
 
   /*css end snappost page*/
+  /*CSS start education page special*/
+  .education-layout-page .auto-block-3 .m-bottom40 {
+    margin-bottom: 40px;
+  }
+
+  /*CSS end education page special*/
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {

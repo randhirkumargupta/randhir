@@ -4187,6 +4187,7 @@ footer{
     .auto-block-2{
         border: 1px solid #ddd;
         .special-top-news{
+            overflow: hidden;
             position: relative;
             .widget-title{
                 position: absolute;
@@ -4306,6 +4307,7 @@ footer{
         border: 1px solid #ddd;
         .special-top-news{
             position: relative;
+            overflow: hidden;
             .widget-title{
                 position: absolute;
             }
@@ -4342,7 +4344,7 @@ footer{
     }
      .special-top-news{
         ul{
-                padding-top: 20px !important;
+            padding-top: 20px;
             &.itg-listing{
                 border: none;
             }
@@ -4918,7 +4920,7 @@ footer{
         }
         .itg-widget-child{
             .droppable {
-                height: 305px;                
+                height: 300px;                
             }
         }
     }
@@ -5002,13 +5004,14 @@ footer{
     .auto-block-2{
         border: 1px solid #ddd;
         .special-top-news {
-            position: relative;
-            padding-top:20px;            
-            .widget-title {
+            position: relative;            
+            overflow: hidden;
+            .widget-title, .widget-settings {
                 position: absolute;
             }
             .itg-listing{
                 border: none;
+                padding-top:20px; 
             }
         }
     }
@@ -5084,6 +5087,32 @@ footer{
             }
         }
     }
+    .itg-newaletter{
+        padding: 15px;
+    }
+    #itg-newslatter-register-form{
+        .messages.error{
+            display: none;
+        }
+        .form-type-textfield{
+            margin-bottom:10px;
+            input[type="text"]{
+                width: 100%;
+            }
+        }
+        input[type="submit"]{
+            background: #000;
+            border: none;
+            color: #fff;
+            width: 130px;
+            height: 30px;
+            line-height: 30px;
+            text-transform: uppercase;
+            font-family: roboto-slab;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+    }
 }
 /*CSS end for education page*/
 /*CSS start sport home page*/
@@ -5145,3 +5174,128 @@ footer{
     }
 }
 /*CSS End sport home page*/
+
+/*CSS start for movie page*/
+.movie-layout-page{
+    .itg-layout-580{
+        .droppable{
+            height: 580px;
+            .auto-block-1, .auto-block-2{
+                height: 580px;
+                overflow: hidden;
+            }
+            .auto-block-1{
+                border: 1px solid #ddd;
+                .featured-news{
+                    border: none;
+                }
+            }
+        }  
+        .itg-widget-child{
+            .droppable{
+             height: 210px;            
+            }
+        }
+        .auto-block-2{
+                border: 1px solid #ddd;
+                .special-top-news{
+                    position: relative;
+                    overflow: hidden;
+                    .widget-title{
+                        position: absolute;
+                    }
+                    ul.itg-listing {
+                        border: none;
+                        padding-top: 20px;
+                    }
+                }
+            }        
+    }
+    .tech-block_5{
+        .widget-title{
+            top: 0;
+            left: 15px;   
+        }
+            .flexslider{
+                li{
+                    @include pos(relative);
+                    .detail{
+                        position: absolute;
+                        bottom: 0;
+                        .flex-count{
+                            display: none;   
+                        }
+                        .flex-caption{
+                            background: rgba(255, 255, 255, 0.74);
+                            font-size: 20px;
+                            font-weight: 700;
+                        }
+                    }                
+                }
+                .flex-direction-nav{
+                    display: block;
+                    position:absolute;
+                    top:50%;
+                    width: 100%;
+                    a{
+                        width: 20px;
+                        height: 20px;
+                        &:before{
+                            width: 20px;
+                            height: 20px;
+                            line-height: 20px;
+                            font-size: 20px;
+                            background: #000;
+                        }
+                    }
+                }   
+            }        
+    }
+    .tech-block_8{        
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .osscar-video{
+        background:transparent;
+        ul .dont-miss-listing{
+        padding:0 0px 10px 0;
+            + .dont-miss-listing {
+                padding:0px;
+            }   
+        }
+    }
+    .section_wise_order-movies-celebrities, .section_wise_order-movies-lifestyle{
+        .widget-title{
+            position: absolute;
+        }
+    }
+    .tech-in-depth{
+        ul{
+            li{
+                overflow:hidden;
+                border-bottom: 1px solid #ddd;
+                padding-bottom:15px;
+                span{
+                    float: left;                
+                    margin-bottom: 0;
+                    margin-right: 10px;                    
+                }
+                + li{
+                    padding: 15px 0;
+                }
+            }
+        }
+    }
+    .itg-h396-section{
+        .widget-wrapper{
+            background: #f1f1f1;
+            padding: 10px;
+        }        
+        .widget-title{
+            top:10px;
+            left:10px;
+        }
+    }
+}
+/*CSS End for movie page*/
