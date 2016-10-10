@@ -2,26 +2,19 @@
 
 
 /**
- * ItgBylineMigration extends XMLMigration 
+ * ItgSupplementMigration extends XMLMigration 
  */
-class ItgBylineMigration extends XMLMigration {
+class ItgSupplementMigration extends XMLMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
-    $this->description = t('XML feed (multi items) of content (Byline)');
-    
-    
+    $this->description = t('XML feed (multi items) of content (Supplement)');
     
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'title' => t('title'),
-      'reporter_email_id' => t('reporter_email_id'),
-      'reporter_twitter_handle' => t('reporter_twitter_handle'),
-      'facebook_page' => t('facebook_page'),
-      'occupation' => t('occupation'),
-      'categories' => t('categories'),
-      'picture' => t('picture'),
-      //'designation' => t('designation'),
-      'about' => t('about'),
+      'title' => t('Title'),
+      'selectmagazine' => t('Select Magazine'),
+      'issue' => t('Issue date'),
+      'publish' => t('Publish date'),      
       'sefurl' => t('Sefurl'),
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
@@ -33,11 +26,11 @@ class ItgBylineMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'byline.xml';
+    $items_url = $xml_folder . 'supplement.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/data/byline';
+    $item_xpath = '/data/supplement';
     
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /story/item/id.
@@ -46,7 +39,7 @@ class ItgBylineMigration extends XMLMigration {
     $items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
     $this->source = new MigrateSourceMultiItems($items_class, $fields);
 
-    $this->destination = new MigrateDestinationNode('reporter');
+    $this->destination = new MigrateDestinationNode('supplement');
 
     // The source ID here is the one retrieved from each data item in the XML
     // file, and used to identify specific items
@@ -71,19 +64,23 @@ class ItgBylineMigration extends XMLMigration {
     // /categories/category/name)
     
     $this->addFieldMapping('title', 'title')->xpath('title');
-    
-    $this->addFieldMapping('field_story_category', 'categories')->xpath('categories/category');
-    $this->addFieldMapping('field_reporter_email_id', 'reporter_email_id')->xpath('reporter_email_id');
-    $this->addFieldMapping('field_reporter_twitter_handle', 'reporter_twitter_handle')->xpath('reporter_twitter_handle');
-    $this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');    
-    //$this->addFieldMapping('field_story_new_title', 'designation')->xpath('designation');
-    $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');
-    $this->addFieldMapping('body', 'about')->xpath('about');
+    $this->addFieldMapping('field_supp_select_magazine', 'selectmagazine')->xpath('selectmagazine');
+    $this->addFieldMapping('field_supp_issue', 'issue')->xpath('issue');
+    $this->addFieldMapping('field_supp_publish', 'publish')->xpath('publish');
     
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
 
+  }
+  
+  public function prepare($node, stdClass $row) {
+    
+    $old_magazine = (string) $row->xml->magazine;
+    $new_magazine = get_itg_destination_id('migrate_map_itgmagazine', $old_magazine);
+    $node->field_supp_select_magazine[LANGUAGE_NONE][]['target_id'] = $new_magazine;
+    
+    $node->uid = 1;
   }
 }

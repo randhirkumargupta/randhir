@@ -2852,6 +2852,11 @@ footer{
         }
     }
 }
+.home_page_poll_widget_block{
+    .widget-title{
+        @include pos(absolute);   
+    }    
+}
 /*End Poll Landing page*/
 
 /*CSS for hover effect on anchor for itg-layout-container */
@@ -4464,7 +4469,7 @@ footer{
     .osscar-video{
         background: transparent;   
         ul .dont-miss-listing + .dont-miss-listing {
-            padding: 0 0px 25px 0px;
+            padding: 25px 0px 0px 0px;
         }
     }    
     .oscor-photo{
@@ -4512,7 +4517,12 @@ footer{
             margin: 10px 0 25px 0px;
         }
         p{
-            padding-top: 10px;
+            padding-top: 10px;                      
+        }
+        .col-md-6 {                        
+            &:nth-child(n+3){
+                margin-top: 30px;
+            }  
         }
     }
     .oscar-slider{
@@ -4874,41 +4884,264 @@ footer{
 
 /*CSS start for education page*/
 .education-layout-page{    
+    .droppable{
+        overflow: hidden;
+    }
     .itg-layout-672{
         .droppable{
-            height: 672px;
-            overflow: hidden;
-        }
+            height: 672px;            
+            .auto-block-1, .auto-block-2{
+                height: 672px;
+                overflow: hidden;
+            }
+            .auto-block-1{
+                border: 1px solid #ddd;
+                .featured-news{
+                    border: none;
+                }
+            }
+        }        
         .itg-widget-child{
             .droppable{
-            height: 310px;
-            overflow: hidden;
-        }
-        }
+            height: 310px;            
+            }
+        }        
     }
     .itg-layout-565{
         .droppable{
-            height: 565px;
-            overflow: hidden;
+            height: 565px;            
         }
         .itg-widget-parent{
             .droppable {
-                height: 225px;
-                overflow: hidden;
+                height: 225px;                
             }
         }
         .itg-widget-child{
             .droppable {
-                height: 305px;
-                overflow: hidden;
+                height: 305px;                
             }
         }
     }
     .itg-common-section{
         .ad-widget {
-            height: 382px;
+            height: 382px;            
+        }
+    }
+    .itg-295-layout{
+        .droppable {
+                height: 295px;                
+            }
+    }
+    .itg-325-layout{
+        .droppable, .ad-widget{
+                height: 325px;                
+            }
+    }
+    .itg-345-layout{
+        .droppable {
+                height: 345px;                
+            }
+    }
+    .more{
+                display: block;
+                text-align: right;                
+                font-weight: 700;
+                font-size: 12px;
+                padding: 10px 0;
+            }
+    .shadow-on{        
+        -moz-box-shadow: 0 0 5px #d4cdcd;
+        -webkit-box-shadow: 0 0 5px #d4cdcd;  
+        box-shadow: 0 0 5px #d4cdcd;
+        .section-ordering{
+            h3{
+                padding: 10px;   
+            }   
+            p{
+                padding: 12px 15px 12px 25px;
+                &:before{
+                  left:10px;  
+                }
+            }
+        }
+        .more{
+            padding: 10px 20px 10px 0px;
+        }
+    }
+    .section_wise_order-edu-from-the-magazine{
+        background: #f3f3f3;
+        padding:10px;
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .from-the-magazine{        
+        .magazine-detail{
+            margin-bottom:10px;
             overflow: hidden;
+        h3{
+            @include font(18px,24px,null);
+            margin-bottom:5px;
+        }
+        img{
+            @include float(left);
+            margin-right: 10px;
+        }               
+        }
+        > p{
+            padding: 10px 0;            
+        }
+        > p + p{            
+            border-top: 1px solid #ddd;                        
+        }
+    }
+/*    .special-top-news{
+        border: 1px solid #ddd;
+    }*/
+
+    .auto-block-2{
+        border: 1px solid #ddd;
+        .special-top-news {
+            position: relative;
+            padding-top:20px;            
+            .widget-title {
+                position: absolute;
+            }
+            .itg-listing{
+                border: none;
+            }
+        }
+    }
+    .education_how_made_id{
+        padding: 10px;
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .how-made-it{
+        ul{
+            @extend .list-none;
+            li{
+             padding: 10px 0;
+            .dm-pic{
+                @include float(left);
+                margin-right: 15px;
+            }
+            .dm-detail{
+                overflow: hidden;
+                .title{
+                    font-weight: 700;
+                    margin-bottom: 5px;
+                }
+            }
+            + li{               
+                border-top: 1px solid #ddd;
+            }            
+        }
+        }        
+    }
+    .section_wise_order-edu-tips-and-trick{
+        overflow: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+    .auto-tips-n-tricks{
+        ul{
+            li{
+                padding: 18px 0;
+                +li{
+                    border-top:1px solid #ddd; 
+                }
+                p.title{
+                    a{
+                        font-weight: 700;
+                        margin-bottom: 5px; 
+                        display: block;
+                    }                
+                }
+            }
+        }
+    }  
+    .tech-block_2{
+        padding: 10px;
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .osscar-video{
+        background:transparent;
+        ul .dont-miss-listing{
+        padding:0 0px 10px 0;
+            + .dont-miss-listing {
+                padding:0px;
+            }   
+        }
+    }
+    .section_wise_order-edu-sample-paper, .section_wise_order-edu-notification, .section_wise_order-edu-featurefilia, .section_wise_order-edu-jobs-and-career{
+        .section-ordering{
+            p:first-child{
+                border: none;
+            }
         }
     }
 }
 /*CSS end for education page*/
+/*CSS start sport home page*/
+.sport-home-layout-page{  
+    .widget-title {
+        display: block;
+        font-weight: 700;
+        background: #5585f6;
+        font-size: 16px;
+        padding: 0 10px;
+    }
+    .droppable {
+        overflow: hidden;
+    }
+    .itg-layout-615{
+        .droppable {
+            height: 615px;            
+        }
+    }
+    .itg-layout-225{
+        .droppable {
+            height: 225px;            
+        }
+    }
+    .itg-layout-300{
+        .droppable {
+            height: 300px;            
+        }
+    }
+    .itg-layout-485{
+        .droppable {
+            height: 485px;            
+        }
+    }
+    .itg-layout-195{
+        .droppable {
+            height: 195px;            
+        }
+    }
+    .itg-layout-260{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-375{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-315{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-340{
+        .droppable {
+            height: 260px;            
+        }
+    }
+}
+/*CSS End sport home page*/

@@ -1025,7 +1025,7 @@ function itg_mobile_services_menu() {
 
   $items['mobile_services/feed/%'] = array(
     'page callback' => 'itg_mobile_get_feed_byurl',
-    'access arguments' => array('access itg story'),
+    'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_mobile_services.inc',
   );

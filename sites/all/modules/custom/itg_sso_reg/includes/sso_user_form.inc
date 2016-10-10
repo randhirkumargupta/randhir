@@ -169,9 +169,13 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
 
 
       $form['otp_links'] = array(
-        '#markup' => '<div class="col-xs-6"><div id="otpclickme" class="btn-resend">Resend OTP</div></div>',
+        '#prefix' => '<div class="col-xs-6">',
+        '#markup' => '<div id="otpclickme" class="btn-resend">Resend OTP</div>',
       );
-
+      $form['loader'] = array(
+        '#markup' => '<div id="ajax-loader" style="display:none"><img src="' . base_path() . path_to_theme() . '/images/loader.svg" alt=""/></div>',
+        '#suffix' => '</div>',
+      );
 
 
       $form['otp_success'] = array(
@@ -179,12 +183,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#suffix' => '</div>',
       );
 
-      $form['loader'] = array(
-        '#markup' => '<div id="ajax-loader" style="display:none">
-      <img src="' . base_path() . path_to_theme() . '/images/loader.svg" alt=""/>
-      </div>
-    ',
-      );
+      
 
       break;
 
@@ -219,7 +218,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       );
       
       $form['thank-you'] = array(
-        '#markup' => '<div id="email-sucess">You are registered sucessfully please check your mail for further information!</div>',
+        '#markup' => '<div id="email-sucess">You are registered successfully please check your mail for further information!</div>',
       );
 
       $form['sgn-link'] = array(
@@ -492,6 +491,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
           $rand_otp = rand(0, 9999);
           if (function_exists(itg_sso_first_time_otp_insert)) {
             itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
+            itg_sso_sms_send($rand_otp, $mobile);
           }
         }
 

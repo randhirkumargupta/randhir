@@ -132,8 +132,9 @@ function features_for_quiz_field_group_info() {
     'label' => 'SEO Meta Tags',
     'weight' => '5',
     'children' => array(
-      0 => 'metatags',
-      1 => 'path',
+      0 => 'field_pqs_add_token',
+      1 => 'metatags',
+      2 => 'path',
     ),
     'format_type' => 'div',
     'format_settings' => array(

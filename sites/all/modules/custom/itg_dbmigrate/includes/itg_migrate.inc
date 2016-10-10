@@ -43,6 +43,33 @@ function itg_dbmigrate_migrate_api() {
       'itg_story' => array(
         'title' => t('Itg story Imports'),
       ),
+       'itg_byline' => array(
+        'title' => t('Itg byline Imports'),
+      ),
+      'itg_magazine' => array(
+        'title' => t('Itg magazine Imports'),
+      ),
+       'itg_issue' => array(
+        'title' => t('Itg issue Imports'),
+      ),
+      'itg_supplement' => array(
+        'title' => t('Itg Supplement Imports'),
+      ),
+      'itg_foodnews' => array(
+        'title' => t('Itg Food News Imports'),
+      ),
+      'itg_city' => array(
+        'title' => t('Itg city Imports'),
+      ),
+      'itg_tags' => array(
+        'title' => t('Itg tags Imports'),
+      ),
+      'itg_sponsor' => array(
+        'title' => t('Itg sponsor Imports'),
+      ),
+      'itg_sbreaking_news' => array(
+        'title' => t('Itg breaking news Imports'),
+      ),
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -57,7 +84,43 @@ function itg_dbmigrate_migrate_api() {
       'ItgStory' => array(
         'class_name' => 'ItgStoryMigration',
         'group_name' => 'itg_story',
-      ), 
+      ),
+      'ItgByline' => array(
+        'class_name' => 'ItgBylineMigration',
+        'group_name' => 'itg_byline',
+      ),
+      'ItgMagazine' => array(
+        'class_name' => 'ItgMagazineMigration',
+        'group_name' => 'itg_magazine',
+      ),
+      'ItgIssue' => array(
+        'class_name' => 'ItgIssueMigration',
+        'group_name' => 'itg_issue',
+      ),
+      'ItgSupplement' => array(
+        'class_name' => 'ItgSupplementMigration',
+        'group_name' => 'itg_supplement',
+      ),
+      'ItgFoodNews' => array(
+        'class_name' => 'ItgFoodNewsMigration',
+        'group_name' => 'itg_foodnews',
+      ),
+      'ItgCity' => array(
+        'class_name' => 'ItgCityMigration',
+        'group_name' => 'itg_city',
+      ),
+      'ItgTags' => array(
+        'class_name' => 'ItgTagsMigration',
+        'group_name' => 'itg_tags',
+      ),
+      'ItgSponsor' => array(
+        'class_name' => 'ItgSponsorMigration',
+        'group_name' => 'itg_sponsor',
+      ),
+      'ItgBreakingNews' => array(
+        'class_name' => 'ItgBreakingNewsMigration',
+        'group_name' => 'itg_sbreaking_news',
+      ),
     ),
     
   );
