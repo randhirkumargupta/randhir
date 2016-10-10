@@ -67,20 +67,7 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
-  $form['entertainment_oscar_news_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Entertainment Oscar News Watch'),
-      '#default_value' => variable_get('entertainment_oscar_news_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
-  $form['entertainment_oscar_features_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Entertainment Features Watch'),
-      '#default_value' => variable_get('entertainment_oscar_features_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
-  );
+  
   $form['movie_for_widget'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter tid of movie'),
@@ -89,6 +76,20 @@ function itg_widgets_custom_variables() {
       '#maxlength' => 20,
   );
 
+    $form['ipl_points_tally_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter nid of ipl points tally'),
+      '#default_value' => variable_get('ipl_points_tally_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+      $form['ipl_top_performer_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter nid of ipl tip performer'),
+      '#default_value' => variable_get('ipl_top_performer_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
   return system_settings_form($form);
 }
 
@@ -1121,6 +1122,18 @@ function itg_widget_views_query_alter(&$view, &$query) {
       $query->where[1]['conditions'][3]['value'] = $section;
     }
   }
+  
+  if ($view->name == 'sport_ipl' && $view->current_display == 'points_tally') {
+   
+
+      $query->where[1]['conditions'][1]['value'] = variable_get('ipl_points_tally_for_widget');
+    }
+     if ($view->name == 'sport_ipl' && $view->current_display == 'top_performers') {
+   
+
+      $query->where[1]['conditions'][1]['value'] = variable_get('ipl_top_performer_for_widget');
+    }
+ 
 }
 
 /**
