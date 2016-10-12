@@ -35,7 +35,7 @@ CKEDITOR.dialog.add('surveyDialog', function(editor) {
             label: 'Get Survey',
             title: 'Survey',
             onClick: function() {
-              editor.popup(Drupal.settings.basePath + '/pqs/associate-with-story/survey', 400, 600);
+              editor.popup(Drupal.settings.basePath + 'pqs/associate-with-story/survey', 400, 600);
             }
           }
         ]

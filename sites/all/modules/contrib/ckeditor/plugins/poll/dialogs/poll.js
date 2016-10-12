@@ -36,7 +36,7 @@ CKEDITOR.dialog.add('pollDialog', function(editor) {
             label: 'Get Polls',
             title: 'Poll',
             onClick: function() {
-              editor.popup(Drupal.settings.basePath + '/pqs/associate-with-story/poll', 400, 600);
+              editor.popup(Drupal.settings.basePath + 'pqs/associate-with-story/poll', 400, 600);
               
             }
           },
