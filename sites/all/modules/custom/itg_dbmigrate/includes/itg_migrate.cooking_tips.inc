@@ -82,11 +82,7 @@ class ItgCookingTipsMigration extends XMLMigration {
     $this->addFieldMapping('body', 'description')->xpath('description');
     $this->addFieldMapping('field_story_syndication', 'syndication')->xpath('syndication');
     $this->addFieldMapping('field_story_short_headline', 'shortheadline')->xpath('shortheadline');
-    $this->addFieldMapping('field_story_client_title', 'clienttitle')->xpath('clienttitle');
-    
-    // for category
-    $this->addFieldMapping('field_story_category', 'categories')->xpath('categories/category');
-    $this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
+    $this->addFieldMapping('field_stroy_city', 'city')->xpath('city');
     
     // for image
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');    
@@ -101,5 +97,40 @@ class ItgCookingTipsMigration extends XMLMigration {
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
 
+  }
+  
+  public function prepareRow($row) {
+    // Category migrate
+    $data_category = '';
+
+    if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
+      foreach ($row->xml->categories->category as $final_category) {
+        $source_cid = (string) $final_category;
+        $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
+        $data_category[]['tid'] = $orignal_category;
+      }
+    }
+    
+    $row->category_new = $data_category;
+    // End category migrate
+  }
+  
+  public function prepare($node, stdClass $row) {
+    // for category
+    if (!empty($row->category_new)) {
+      $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
+    }
+    
+    // for byline
+    $old_byline = (string) $row->xml->byline;
+    $new_byline = get_itg_destination_id('migrate_map_itgbyline', $old_byline);
+    $node->field_story_reporter[LANGUAGE_NONE][]['target_id'] = $new_byline;
+    
+    // for city
+    $old_city = (string) $row->xml->city;
+    $new_city = get_itg_destination_id('migrate_map_itgcity', $old_city);    
+    $node->field_stroy_city[LANGUAGE_NONE][]['tid'] = (string) $row->xml->city;
+    
+    $node->uid = 1;
   }
 }
