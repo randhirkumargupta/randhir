@@ -758,3 +758,14 @@ function itg_common_views_pre_render(&$view) {
   }
  
 }
+
+/**
+ * Implement itg_common_tweet_button
+ * @param string $title
+ */
+function itg_common_tweet_button($title) {  
+  
+  return '<a class="twitter-share-button"
+                                 href="https://twitter.com/intent/tweet?text='.$title.'" data-via="indiatoday">
+                                  Tweet</a>';
+}
