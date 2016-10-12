@@ -478,6 +478,13 @@ function update_itg_widget_order_table_data($form, &$form_state) {
   $draggable_view_data = $form_state['input']['draggableviews'];
   // Category tid from url.
   $cat_id = $_GET['category_tid'];
+  $type_in_url = $_GET['type'];
+  $actual_weight_type = 'All';
+  $types = array("story","videogallery","photogallery");
+  if(in_array($type_in_url, $types)) {
+    $actual_weight_type = $type_in_url;
+  }
+  
   // Now insert new entry in itg_widget_order table of combination
   foreach ($draggable_view_data as $key => $node_data) {
     try {
@@ -486,12 +493,14 @@ function update_itg_widget_order_table_data($form, &$form_state) {
                   'nid' => $node_data['id'],
                   'widget' => $widget,
                   'cat_id' => $cat_id,
+                  'content_type'=>$actual_weight_type,
               ))
               ->fields(array(
                   'weight' => $node_data['weight'],
                   'nid' => $node_data['id'],
                   'widget' => $widget,
                   'cat_id' => $cat_id,
+                  'content_type'=>$actual_weight_type,
               ))
               ->execute();
     } catch (Exception $ex) {
