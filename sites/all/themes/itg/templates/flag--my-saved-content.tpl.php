@@ -61,7 +61,7 @@
       $flag_icon = '';
       break;
     case 'videogallery':
-      $flag_text = 'Watch Later';
+      $flag_text = '<span>Watch Later</span>';
       $flag_icon = '<i class="fa fa-clock-o"></i>';
       break;
   }
