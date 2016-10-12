@@ -1436,7 +1436,8 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
  * @return array
  */
 function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $cat_id, $range_max, $range_min = 0) {
-  $query = db_select('itg_widget_order', 'iwo');
+  //p($cat_id);
+    $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
   $query->condition('iwo.widget', $widget_name)
