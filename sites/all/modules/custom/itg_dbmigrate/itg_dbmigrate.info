@@ -18,3 +18,4 @@ files[] = includes/itg_migrate.supplement.inc
 files[] = includes/itg_migrate.food_news.inc
 files[] = includes/itg_migrate.city.inc
 files[] = includes/itg_migrate.tags.inc
+files[] = includes/itg_migrate.astro.inc
