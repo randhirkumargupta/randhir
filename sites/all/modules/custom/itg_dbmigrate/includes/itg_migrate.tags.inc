@@ -72,6 +72,7 @@ class ItgTagsMigration extends XMLMigration {
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
     $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
     
+    
     //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
     //$this->addFieldMapping('metatag_robots', 'nodeword_robots');
 
