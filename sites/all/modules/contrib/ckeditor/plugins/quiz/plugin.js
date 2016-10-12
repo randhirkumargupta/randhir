@@ -1,64 +1,34 @@
-/*
-Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.html or http://ckeditor.com/license
-*/
-
 /**
- * @file Plugin for quiz
+ * Plugin file for quiz
  */
-( function() {
-  CKEDITOR.plugins.add( 'quiz',
-  {
-    init: function( editor )
-    {
-      //adding button
-      editor.ui.addButton( 'IMCE',
-      {
-        label: 'IMCE',
-        command: 'IMCEWindow',
-        icon: this.path + 'images/icon.png'
-      });
 
-      //opening imce window
-      editor.addCommand( 'IMCEWindow', {
-        exec : function () {
-           editor.popup(Drupal.settings.basePath + '/pqs/associate-with-story/quiz', 400, 600);
-        }
-      });
+// Register the plugin within the editor.
+CKEDITOR.plugins.add( 'quiz', {
 
-      //add editor function
-      editor._.filebrowserFnIMCE = CKEDITOR.tools.addFunction( setFile, editor );
+	// Register the icons.
+	icons: 'quiz',
 
-      //function which receive imce response
-      window.ckeditor_setFile = function (file, win) {
-        var cfunc = win.location.href.split('&');
-        for (var x in cfunc) {
-          if (cfunc[x].match(/^CKEditorFuncNum=\d+$/)) {
-            cfunc = cfunc[x].split('=');
-            break;
-          }
-        }
-        CKEDITOR.tools.callFunction(cfunc[1], file);
-        win.close();
-      };
+	// The plugin initialization logic goes inside this method.
+	init: function( editor ) {
 
-    }
-  } );
-  function setFile(file) {
-    var sel = this.getSelection(),
-    text = sel.getSelectedText();
-    if (file.width != 0 && file.height != 0) {
-      if (text) {
-        this.insertHtml('<a href="' + document.location.protocol + '//'+ document.location.host +  file.url + '">' + text + '</a>');
-      } else {
-        this.insertHtml('<img src="' + file.url + '" style="width:' + file.width + 'px;height:' + file.height + 'px;" alt="' + file.name + '" />');
-      }
-    } else {
-      if (text) {
-        this.insertHtml('<a href="' +document.location.protocol + '//'+ document.location.host + file.url + '">' + text + '</a>');
-      } else {
-        this.insertHtml('<a href="' + document.location.protocol + '//'+ document.location.host +  file.url + '">' + file.name + '</a>');
-      }
-    }
-  }
-} )();
+		// Define an editor command that opens our dialog window.
+		editor.addCommand( 'quiz', new CKEDITOR.dialogCommand( 'quizDialog' ) );
+
+		// Create a toolbar button that executes the above command.
+		editor.ui.addButton( 'quiz', {
+
+			// The text part of the button (if available) and the tooltip.
+			label: 'Insert Quiz',
+
+			// The command to execute on click.
+			command: 'quiz',
+      icon: this.path + 'icons/quiz.png',
+
+			// The button placement in the toolbar (toolbar group name).
+			toolbar: 'insert'
+		});
+
+		// Register our dialog file -- this.path is the plugin folder path.
+		CKEDITOR.dialog.add( 'quizDialog', this.path + 'dialogs/quiz.js' );
+	}
+});

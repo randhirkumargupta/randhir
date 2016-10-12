@@ -1289,7 +1289,10 @@ footer{
         @include pos(absolute);   
     }    
 }
-.section-ordering{    
+.section-ordering{ 
+    a{
+        display: block;
+    }
     h3{
         padding: 15px 0;
         @include font(20px);
@@ -3109,6 +3112,9 @@ footer{
                         color: #494949;              
                     }
                 }
+                &:nth-child(2n+1){
+                    clear: left;
+                }
             }
         }
     }
@@ -3126,9 +3132,12 @@ footer{
         max-height: 210px;
         overflow-y: hidden;        
     }
-    .photo-list li{
+    .view-content .photo-list li{
         height: 210px;
         overflow: hidden;
+        &:nth-child(2n+1){
+                    clear: none;
+                }
     }
 }
 
@@ -5097,6 +5106,7 @@ footer{
         .form-type-textfield{
             margin:0 0 10px;
             padding:0;
+            @include pos(relative);
             input[type="text"]{
                 width: 100%;
             }

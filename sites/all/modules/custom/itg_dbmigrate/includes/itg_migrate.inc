@@ -70,6 +70,15 @@ function itg_dbmigrate_migrate_api() {
       'itg_sbreaking_news' => array(
         'title' => t('Itg breaking news Imports'),
       ),
+      'itg_cooking_tips' => array(
+        'title' => t('Itg Cooking Tips Imports'),
+      ),
+      'itg_astro' => array(
+        'title' => t('Itg astro Imports'),
+      ),
+      'itg_recipe' => array(
+        'title' => t('Itg recipe Imports'),
+      ),
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -120,6 +129,18 @@ function itg_dbmigrate_migrate_api() {
       'ItgBreakingNews' => array(
         'class_name' => 'ItgBreakingNewsMigration',
         'group_name' => 'itg_sbreaking_news',
+      ),
+      'ItgCookingTips' => array(
+        'class_name' => 'ItgCookingTipsMigration',
+        'group_name' => 'itg_cooking_tips',
+      ),
+      'ItgAstro' => array(
+        'class_name' => 'ItgAstroMigration',
+        'group_name' => 'itg_astro',
+      ),
+      'ItgRecipe' => array(
+        'class_name' => 'ItgRecipeMigration',
+        'group_name' => 'itg_recipe',
       ),
     ),
     

@@ -725,7 +725,7 @@ function itg_survey_get_mail_content($node, $user){
  */
 function itg_survey_pqs_associate_with_story() {
   $type = arg(2);
-    
+    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1));
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title'))
         ->condition('n.status', '1', '=')
@@ -741,20 +741,22 @@ function itg_survey_pqs_associate_with_story() {
       $title = $record['title'];
     }
     
-    $options[$type.'-'.$record['nid']] = $title;
+    $options['[ITG:'.strtoupper($type).':'.$record['nid'].']'] = $title;
   }
   
   $form = array();
   $form['pqs-listing'] = array(
       '#type' => 'checkboxes',
       '#options' => $options,
-      '#prefix' => '<div style="margin:10px 0px 10px 20px"><strong style="padding-top:10px"> Please select to associate with story:</strong>'    
+      '#prefix' => '<div style="margin:10px 0px 10px 20px"><strong style="padding-top:10px"> Please select to associate with story:</strong>'
   );
-  $form['pqs-submit'] = array(
-      '#type' => 'submit',
-      '#value' => 'Associate',
-      '#attributes' => array('style' => 'width:100px; height: 30px;'),
-      '#suffix' => '</div>' 
+
+  $form['html'] = array(
+      '#type' => 'markup',
+      '#markup' => '<span id="add-pqs" class="button">Add</span>',
+      '#tree' => true,
+      '#suffix' => '</div>'
   );
+
   return $form;
 }
