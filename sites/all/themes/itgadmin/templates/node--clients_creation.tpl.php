@@ -57,7 +57,12 @@
                             <h2><?php print t('Sharing Mode'); ?></h2>
                             <?php
                             if (trim($node->field_content_sharing_mode[LANGUAGE_NONE][0]['value']) == 1) {
-                              print render($content['field_service_fetch_link']);
+                              print '<div class="field field-name-field-service-fetch-link field-type-text field-label-above"><div class="field-label">Fetch link:&nbsp;</div><div class="field-items"><div class="field-item even">';
+                              print "<a href='".$node->field_service_fetch_link[LANGUAGE_NONE][0]['value']."'>Sharing url</a>";
+                              global $base_url;
+                              $protected_url = $base_url . '/admin/config/system/protected_pages';
+                              print "  <div class='protected_url'><a href='". $protected_url ."'>Protected url</a></div>";
+                              print '</div></div></div>';
                             }
                             else if (trim($node->field_content_sharing_mode[LANGUAGE_NONE][0]['value']) == 2) {
                               print render($content['field_ftp_ip_address']);

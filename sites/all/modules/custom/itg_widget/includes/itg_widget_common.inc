@@ -67,7 +67,7 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
-  
+
   $form['movie_for_widget'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter tid of movie'),
@@ -76,17 +76,24 @@ function itg_widgets_custom_variables() {
       '#maxlength' => 20,
   );
 
-    $form['ipl_points_tally_for_widget'] = array(
+  $form['ipl_points_tally_for_widget'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter nid of ipl points tally'),
       '#default_value' => variable_get('ipl_points_tally_for_widget'),
       '#size' => 20,
       '#maxlength' => 20,
   );
-      $form['ipl_top_performer_for_widget'] = array(
+  $form['ipl_top_performer_for_widget'] = array(
       '#type' => 'textfield',
       '#title' => t('Enter nid of ipl tip performer'),
       '#default_value' => variable_get('ipl_top_performer_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
+  $form['ipl_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of ipl'),
+      '#default_value' => variable_get('ipl_for_widget'),
       '#size' => 20,
       '#maxlength' => 20,
   );
@@ -449,13 +456,19 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     );
   }
   if ($form_id == 'views_form_section_wise_content_ordering_list_page') {
-
+    $type_in_url = $_GET['type'];
+    $actual_weight_type = 'All';
+    $types = array("story", "videogallery", "photogallery");
+    if (in_array($type_in_url, $types)) {
+      $actual_weight_type = $type_in_url;
+    }
 //    $view = views_get_current_view();
 //    $total_rows = $view->total_rows;
 
     $itg_widget_order_data = db_select('itg_widget_order', 'iwo')
                     ->fields('iwo', array('weight', 'nid'))
                     ->condition('cat_id', $_GET['category_tid'])
+                    ->condition('content_type', $actual_weight_type)
                     ->condition('widget', 'section_wise_widget')
                     ->execute()->fetchAll();
 //pr($itg_widget_order_data);
@@ -470,8 +483,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     foreach ($itg_widget_order_data as $order_data) {
       $select_map_array_weight[] = $order_data->weight;
     }
-
-
+    
     foreach ($form['draggableviews'] as $key => $weight) {
 // echo $key."</br>";
 // make options to weight drop down equal to saved weight value.
@@ -482,8 +494,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
       $form['draggableviews'][$key]['weight']['#validated'] = true;
     }
   }
-  drupal_add_css("select.draggableviews-weight {display:none !important}", "inline");
-  drupal_add_css("#draggableviews-table-section-wise-content-ordering-list-page .tabledrag-handle {display:none !important}", "inline");
+  //drupal_add_css("select.draggableviews-weight {display:none !important}", "inline");
+  //drupal_add_css("#draggableviews-table-section-wise-content-ordering-list-page .tabledrag-handle {display:none !important}", "inline");
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
@@ -834,6 +846,10 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       if ($_GET['category_tid'] == 0) {
         drupal_add_css(".messages--error {display:none}", "inline");
       }
+      // handle expose content type of itg_widget_order table.
+      $form['content_type']['#default_value'] = 'all';
+      $form['content_type']['#value'] = 'all';
+      drupal_add_css("#edit-content-type-wrapper {display:none}",'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
   }
@@ -1122,18 +1138,29 @@ function itg_widget_views_query_alter(&$view, &$query) {
       $query->where[1]['conditions'][3]['value'] = $section;
     }
   }
-  
+
   if ($view->name == 'sport_ipl' && $view->current_display == 'points_tally') {
-   
 
-      $query->where[1]['conditions'][1]['value'] = variable_get('ipl_points_tally_for_widget');
-    }
-     if ($view->name == 'sport_ipl' && $view->current_display == 'top_performers') {
-   
 
-      $query->where[1]['conditions'][1]['value'] = variable_get('ipl_top_performer_for_widget');
+    $query->where[1]['conditions'][1]['value'] = variable_get('ipl_points_tally_for_widget');
+  }
+  if ($view->name == 'sport_ipl' && $view->current_display == 'top_performers') {
+
+
+    $query->where[1]['conditions'][1]['value'] = variable_get('ipl_top_performer_for_widget');
+  }
+
+  if ($view->name == 'section_wise_content_ordering_list' && $view->current_display == 'page') {
+    $content_value_for_query = "All";
+    if(isset($_GET['type'])) {
+      $content_value_for_query = $_GET['type'];
+      if($content_value_for_query == 'All') {
+        $query->where[1]['conditions'][4]['field'] = 'itg_widget_order.content_type';
+        $query->where[1]['conditions'][4]['operator'] = 'LIKE';
+      }
     }
- 
+    $query->where[1]['conditions'][4]['value'] = $content_value_for_query;
+  }
 }
 
 /**
@@ -1436,7 +1463,8 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
  * @return array
  */
 function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $cat_id, $range_max, $range_min = 0) {
-  $query = db_select('itg_widget_order', 'iwo');
+  //p($cat_id);
+    $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
   $query->condition('iwo.widget', $widget_name)
