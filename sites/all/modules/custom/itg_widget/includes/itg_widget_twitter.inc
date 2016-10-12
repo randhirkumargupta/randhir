@@ -9,7 +9,6 @@
  * get tweets
  */
 function ipl_tweets() {
-    drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js');
     drupal_add_js("jQuery(document).ready(function() {
          ! function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0],
