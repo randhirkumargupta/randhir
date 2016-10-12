@@ -361,13 +361,26 @@ function update_itg_widget_order_table_data_for_special_auto_review($form, &$for
   // Take draggable view input value after submit the form.
   $draggable_view_data = $form_state['input']['draggableviews'];
   $extra_values = array();
+  $weightcount=0;
+  foreach ($draggable_view_data as $key => $value) {
+      $weightcount = $datacount+$value['weight'];
+  }
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
+      if($weightcount > 0)
+      {
     db_update('itg_widget_order')
             ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
             ->condition('widget', 'special_auto_review_content')
             ->condition('nid', $value['id'])
             ->execute();
+      } else {
+          db_update('itg_widget_order')
+            ->fields(array( 'extra' => $value['custom_text'],))
+            ->condition('widget', 'special_auto_review_content')
+            ->condition('nid', $value['id'])
+            ->execute();
+      }
   }
 }
 
