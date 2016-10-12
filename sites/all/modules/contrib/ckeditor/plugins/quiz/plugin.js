@@ -22,7 +22,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
       //opening imce window
       editor.addCommand( 'IMCEWindow', {
         exec : function () {
-           editor.popup(Drupal.settings.basePath + '/pqs/associate-with-story/quiz', 400, 600);
+           editor.popup(Drupal.settings.basePath + 'pqs/associate-with-story/quiz?CKEditorFuncNum=' + editor._.filebrowserFnIMCE, 400, 600);
         }
       });
 
