@@ -6,13 +6,7 @@
     <?php
     foreach ($rows as $index => $row) {
         $desc = $row['title'];
-        if ($row['field_story_kicker_text'] != "") {
-            $desc = $row['field_story_kicker_text'];
-        } else if ($row['field_story_kicker_text'] == "" && $row['body'] != "") {
-            $desc = $row['body'];
-        } else if ($row['field_story_expert_description'] != "") {
-            $desc = $row['field_story_expert_description'];
-        }
+        
         $video_class = "";
         if (strtolower($row['type']) == 'videogallery') {
             $video_class = 'video-icon';
@@ -47,15 +41,7 @@
 foreach ($rows as $index => $row) {
     
     $desc = $row['title'];
-    if ($row['field_story_kicker_text'] != "") {
-        $desc = $row['field_story_kicker_text'];
-    } else if ($row['field_story_kicker_text'] == "" && $row['body'] != "") {
-        $desc = $row['body'];
-    } else if ($row['field_story_expert_description'] != "") {
-        $desc = $row['field_story_expert_description'];
-    }
-
-
+   
     if ($index > 2) {
     
         ?>
