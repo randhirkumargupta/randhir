@@ -1883,3 +1883,31 @@ img {
 }
 
 /*CSS End for movie page*/
+/* CSS For Election Page */
+.election-page .left-side > .row {
+  margin-bottom: 50px;
+}
+.election-page .left-side .itg-graph .droppable {
+  height: 410px;
+}
+.election-page .left-side .itg-325-layout .droppable {
+  height: 325px;
+}
+.election-page .left-side .itg-map .droppable {
+  height: 375px;
+}
+.election-page .left-side .itg-most-popular .droppable {
+  height: 705px;
+}
+.election-page .left-side .itg-photo .droppable {
+  height: 484px;
+}
+.election-page .right-side .itg-320 .droppable {
+  height: 320px;
+}
+.election-page .right-side .itg-484 .droppable {
+  height: 484px;
+}
+.election-page .right-side .itg-460 .droppable {
+  height: 460px;
+}
