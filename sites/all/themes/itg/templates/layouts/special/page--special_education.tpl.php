@@ -201,7 +201,7 @@ if ($theme != 'itgadmin') {
 
                <div class="widget-wrapper section_wise_order <?php print $widget_data['itg-block-5']['widget_name'].$widget_data['itg-block-5']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-5']['block_title'])) { ?>
-1
+
                      <span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->

@@ -1,5 +1,5 @@
 name = Feature for Sport
-description = Feature for Sport and basic page list 
+description = Feature for Sport and basic page list
 core = 7.x
 package = Features
 version = 7.x-1.0

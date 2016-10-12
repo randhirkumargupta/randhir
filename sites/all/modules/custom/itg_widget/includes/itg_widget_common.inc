@@ -90,6 +90,13 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
+  $form['ipl_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of ipl'),
+      '#default_value' => variable_get('ipl_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
   return system_settings_form($form);
 }
 
@@ -1456,7 +1463,8 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
  * @return array
  */
 function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $cat_id, $range_max, $range_min = 0) {
-  $query = db_select('itg_widget_order', 'iwo');
+  //p($cat_id);
+    $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
   $query->condition('iwo.widget', $widget_name)
