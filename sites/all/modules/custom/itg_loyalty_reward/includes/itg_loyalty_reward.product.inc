@@ -50,7 +50,7 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
     if ($node_id == $itg_result->nid && $action == NULL) {
       $quantity = $itg_result->quintity + 1;
       // Update item on cart page.
-      _update_cart_item($node->nid, $user->uid, $quantity, $node_info_array['points'], $redirect);
+      _update_cart_item($node->nid, $user->uid, $quantity, $node_info_array, $redirect);
     }
     else {
       $node_info_array['quantity'] = 1;
@@ -103,16 +103,15 @@ function _check_product_into_cart($uid, $nid) {
  * @param int $uid
  *   User id of the user.
  */
-function _update_cart_item($nid, $uid, $quantity, $points, $redirect) {
+function _update_cart_item($nid, $uid, $quantity, $node_info_array, $redirect) {
   $itg_query = db_update('itg_loyalty_reward_cart')
       ->fields(array('quintity' => $quantity))
       ->condition('nid', $nid)
       ->condition('uid', $uid)
       ->execute();
   // Update points
-  itg_loyalty_reward_update_point($uid, $points);
-  // Set update message.
-  drupal_set_message('Item updated on cart successfully.', 'status');
+  itg_loyalty_reward_update_point($uid, $node_info_array['points']);    
+  $_SESSION['cart_after_popup'] = $node_info_array;
   drupal_goto($redirect);
 }
 
@@ -162,11 +161,15 @@ function _insert_product_into_cart($node_info_array) {
         ->execute();
     // Update points.
     itg_loyalty_reward_update_point($user->uid, $node_info_array['points']);
-    $response = 1;
+    $response = 1;    
   }
   catch (Exception $ex) {
     watchdog('ITG CART', $ex->getMessage());
     $response = 0;
+  }
+  
+  if ($response != 0) {
+    $_SESSION['cart_after_popup'] = $node_info_array;
   }
 
   return $response;
