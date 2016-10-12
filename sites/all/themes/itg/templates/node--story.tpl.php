@@ -201,6 +201,7 @@
           }
           print $buzz_output;
         }
+         $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         ?>
       
       <!-- condition for buzz end -->      
@@ -216,7 +217,8 @@
                         js = d.createElement(s); js.id = id;
                         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1050682001621663";
                         fjs.parentNode.insertBefore(js, fjs);
-                      }(document, 'script', 'facebook-jssdk'));</script><div class="fb-share-button" data-href="http://itgcms.drupallocal.dev/content/test-multibyline" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
+                      }(document, 'script', 'facebook-jssdk'));</script>
+                      <div class="fb-share-button" data-href="<?php print $actual_link; ?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
                   <li class="mhide"><?php print itg_common_tweet_button($node->title); ?></li>
                   <li class="mhide"><!-- Place this tag in your head or just before your close body tag. -->
                       <script src="https://apis.google.com/js/platform.js" async defer></script>
