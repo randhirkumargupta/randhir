@@ -41,7 +41,7 @@
                   <a href="../../../../../../html/itgcms/sites/all/themes/itg/templates/flag--my-saved-content.tpl.php"></a>
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
-                      <?php  $twitter_handle = $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
+                      <?php  $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
                       $twitter_handle = str_replace('@', '', $twitter_handle);
                       if(!empty($twitter_handle)) {
                       ?>
@@ -112,7 +112,7 @@
               <div class="profile-detail">
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
-                      <?php  $twitter_handle = $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
+                      <?php  $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
                       $twitter_handle = str_replace('@', '', $twitter_handle);
                       if(!empty($twitter_handle)) {
                       ?>
@@ -209,9 +209,20 @@
           <div class="social-list">
             <ul>
                 <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                <li class="mhide"><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
-                <li class="mhide"><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
-                <li class="mhide"><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
+                <li class="mhide"><div id="fb-root"></div>
+                      <script>(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1050682001621663";
+                        fjs.parentNode.insertBefore(js, fjs);
+                      }(document, 'script', 'facebook-jssdk'));</script><div class="fb-share-button" data-href="http://itgcms.drupallocal.dev/content/test-multibyline" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
+                  <li class="mhide"><?php print itg_common_tweet_button($node->title); ?></li>
+                  <li class="mhide"><!-- Place this tag in your head or just before your close body tag. -->
+                      <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+                      <!-- Place this tag where you want the share button to render. -->
+                      <div class="g-plus" data-action="share" data-annotation="bubble"></div></li>
                 <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
                 <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>
