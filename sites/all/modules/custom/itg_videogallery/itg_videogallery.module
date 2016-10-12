@@ -621,20 +621,20 @@ function itg_videogallery_get_video($fid) {
  * Implements hook_node_access().
  * {@inheritdoc}
  */
-function itg_videogallery_node_access($node, $op, $account) {
-  if ($account->uid == 0) {
-    $current_time = time();
-    $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
-    $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
-    if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
-      return NODE_ACCESS_ALLOW;
-    }
-    elseif (($current_time > $video_expire_date || $current_time < $video_schedule_date) && ($node->type == 'videogallery') && ($op == 'view')) {
-      return NODE_ACCESS_DENY;
-    }
-  }
-  return NODE_ACCESS_IGNORE;
-}
+//function itg_videogallery_node_access($node, $op, $account) {
+//  if ($account->uid == 0) {
+//    $current_time = time();
+//    $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+//    $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+//    if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
+//      return NODE_ACCESS_ALLOW;
+//    }
+//    elseif (($current_time > $video_expire_date || $current_time < $video_schedule_date) && ($node->type == 'videogallery') && ($op == 'view')) {
+//      return NODE_ACCESS_DENY;
+//    }
+//  }
+//  return NODE_ACCESS_IGNORE;
+//}
 
 /**
  * Implements hook_node_validate().
@@ -990,18 +990,26 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
     //drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery-1.11.0.min', array('scope' => 'footer'));
     drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
-    drupal_add_js('             
-       (function($){
-            $(window).on("load",function(){
-                $(".defalt-bar").mCustomScrollbar({
-                    axis:"x",
-                    
-                });       
-            });
- })(jQuery);
- jQuery(document).ready(function(){
-    var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;    
+    $classnext = "<i class='fa fa-chevron-down'></i>";
+    $classprev = "<i class='fa fa-chevron-up'></i>";
+    drupal_add_js('                    
+ jQuery(document).ready(function(){    
+     var winWidth = window.innerWidth;
+      if(winWidth > 680){
+      var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;    
     jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", getLength*190 +"px");
+    jQuery(".defalt-bar").mCustomScrollbar({
+                    axis:"x",                    
+                });
+    }else{
+    jQuery("#block-views-video-landing-header-block-1 ul.photo-list").slick({
+                    vertical: true,
+                    slidesToShow: 4,
+                    dots: false,
+                    nextArrow:"'. $classnext .'",
+                    prevArrow:"' . $classprev. '" 
+                });
+    }
 });', array('type' => 'inline', 'scope' => 'footer'));
 
     // Category view on landing page
