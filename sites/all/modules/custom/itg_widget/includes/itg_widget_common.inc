@@ -90,6 +90,13 @@ function itg_widgets_custom_variables() {
       '#size' => 20,
       '#maxlength' => 20,
   );
+  $form['ipl_for_widget'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Enter tid of ipl'),
+      '#default_value' => variable_get('ipl_for_widget'),
+      '#size' => 20,
+      '#maxlength' => 20,
+  );
   return system_settings_form($form);
 }
 
