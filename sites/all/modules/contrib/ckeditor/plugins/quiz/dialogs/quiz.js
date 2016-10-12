@@ -35,7 +35,7 @@ CKEDITOR.dialog.add('quizDialog', function(editor) {
             label: 'Get Quiz',
             title: 'Quiz',
             onClick: function() {
-              editor.popup(Drupal.settings.basePath + '/pqs/associate-with-story/quiz', 400, 600);
+              editor.popup(Drupal.settings.basePath + 'pqs/associate-with-story/quiz', 400, 600);
             }
           }
         ]
