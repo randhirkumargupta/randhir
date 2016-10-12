@@ -6450,6 +6450,7 @@ footer .footer-copyright {
 .education-layout-page #itg-newslatter-register-form .form-type-textfield {
   margin: 0 0 10px;
   padding: 0;
+  position: relative;
 }
 .education-layout-page #itg-newslatter-register-form .form-type-textfield input[type="text"] {
   width: 100%;

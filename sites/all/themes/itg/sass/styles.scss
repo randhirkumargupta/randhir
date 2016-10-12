@@ -5097,6 +5097,7 @@ footer{
         .form-type-textfield{
             margin:0 0 10px;
             padding:0;
+            @include pos(relative);
             input[type="text"]{
                 width: 100%;
             }
