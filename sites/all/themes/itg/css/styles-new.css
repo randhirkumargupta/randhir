@@ -1496,7 +1496,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: none;
 }
 .home_page_poll_widget_block .poll-data form {
-  text-align: center;
+  text-align: left;
   padding-bottom: 20px;
 }
 .home_page_poll_widget_block .poll-data form label {
@@ -1507,7 +1507,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .home_page_poll_widget_block .poll-data form .form-radios .form-item {
   display: inline-block;
   vertical-align: top;
-  margin: 0 10px;
+  margin-bottom: 5px;
+  padding-bottom: 0;
+  width: 49%;
 }
 .home_page_poll_widget_block .poll-data form .form-radios .form-item .form-radio {
   float: left;
@@ -1523,8 +1525,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-weight: 500;
   font-family: Roboto;
   margin-top: 20px;
-  font-size: 500;
   color: #323232;
+  margin: 0 auto;
+  display: inherit;
 }
 
 .home_page_poll_widget_block .widget-settings {
