@@ -1,23 +1,25 @@
 /*
- * @file itg_survey.js
+ * @file itg_associate_story_ckeditor.js
  */
 
 (function($) {
-  Drupal.behaviors.itg_survey = {
-    attach: function(context, settings) {
+  Drupal.behaviors.itg_associate_story_ckeditor = {
+    attach: function() {
       
-    $('#submit-ass').on('click',function(){
-        var appendtext="";
-       $('.form-checkbox').each(function(){
-           if($(this).is(':checked'))
-           {
-               appendtext=appendtext+$(this).val()+',';
-           }
-           
-       })
-       window.opener.document.getElementById("edit-body-und-0-value").value=appendtext;
-    })
-      
+      $('#add-pqs').on('click', function() {
+        
+        var appendText = "";
+        $('.form-checkbox').each(function() {
+          if ($(this).is(':checked'))
+          {
+            appendText = appendText + $(this).val() + ',';
+          }
+
+        });
+        appendText = appendText.slice(0,-1);
+        window.opener.document.getElementById("cke_199_textInput").value = appendText;
+        window.close();
+      });
     }
   };
 })(jQuery, Drupal, this, this.document);
