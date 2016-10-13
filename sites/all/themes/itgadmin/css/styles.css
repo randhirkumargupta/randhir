@@ -200,7 +200,7 @@ img {
 [id*="field-story-reporter-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-videogallery-video-upload-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-pti-print-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, [id*="itg-social-media-form"] > div > a, #comments .comment-form .form-actions .form-submit[value="Cancel"], [id*="field-survey-add-questions-values"] > tbody > tr > td > .form-submit, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit, .node-vas_service_content-form #reset-date-button, .operation-form .form-actions .form-submit + a, #views-form-blogs-management-page .form-actions .form-submit + a,
 #views-form-strory-menegment-page .form-actions .form-submit + a, #views-form-podcast-management-page .form-actions .form-submit + a,
-#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
+#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
 [id*="field-program-schedule-values"] + div.clearfix .form-submit,
 [id*="field-associate-sponsors-values"] + div.clearfix .form-submit,
 [id*="field-event-highlights-values"] + div.clearfix .form-submit,
@@ -336,7 +336,7 @@ img {
 [id*="field-story-reporter-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-videogallery-video-upload-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-pti-print-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, [id*="itg-social-media-form"] > div > a, #comments .comment-form .form-actions .form-submit[value="Cancel"], [id*="field-survey-add-questions-values"] > tbody > tr > td > .form-submit, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit, .node-vas_service_content-form #reset-date-button, .operation-form .form-actions .form-submit + a, #views-form-blogs-management-page .form-actions .form-submit + a,
 #views-form-strory-menegment-page .form-actions .form-submit + a, #views-form-podcast-management-page .form-actions .form-submit + a,
-#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
+#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
 [id*="field-program-schedule-values"] + div.clearfix .form-submit,
 [id*="field-associate-sponsors-values"] + div.clearfix .form-submit,
 [id*="field-event-highlights-values"] + div.clearfix .form-submit,
@@ -583,7 +583,7 @@ html.js fieldset.collapsed {
 [id*="field-story-reporter-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-videogallery-video-upload-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-pti-print-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, [id*="itg-social-media-form"] > div > a, #comments .comment-form .form-actions .form-submit[value="Cancel"], [id*="field-survey-add-questions-values"] > tbody > tr > td > .form-submit, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit, .node-vas_service_content-form #reset-date-button, .operation-form .form-actions .form-submit + a, #views-form-blogs-management-page .form-actions .form-submit + a,
 #views-form-strory-menegment-page .form-actions .form-submit + a, #views-form-podcast-management-page .form-actions .form-submit + a,
-#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a {
+#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a {
   background-color: #33a26d;
   border: 1px solid #197e4e;
   color: #fff;
@@ -656,7 +656,7 @@ html.js fieldset.collapsed {
 [id*="field-story-reporter-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, [id*="field-videogallery-video-upload-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, [id*="field-pti-print-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, .view .attachment a:hover, .ugc-action .reject-ugc:hover, .ugc-action .manage-ugc:hover, [id*="itg-social-media-form"] > div > a:hover, #comments .comment-form .form-actions .form-submit[value="Cancel"]:hover, [id*="field-survey-add-questions-values"] > tbody > tr > td > .form-submit:hover, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit:hover, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit:hover, .node-vas_service_content-form #reset-date-button:hover, .operation-form .form-actions .form-submit + a:hover, #views-form-blogs-management-page .form-actions .form-submit + a:hover,
 #views-form-strory-menegment-page .form-actions .form-submit + a:hover, #views-form-podcast-management-page .form-actions .form-submit + a:hover,
-#views-form-videogallery-management-page .form-actions .form-submit + a:hover, #edit-preview-changes:hover, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:hover {
+#views-form-videogallery-management-page .form-actions .form-submit + a:hover, #edit-preview-changes:hover, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:hover, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a:hover {
   background-color: #197e4e;
   border-color: #197e4e;
   color: #fff;
@@ -5072,7 +5072,7 @@ div.node #comments h2 {
 .top-actions #views-form-strory-menegment-page .form-actions .form-submit + a:last-child,
 #views-form-strory-menegment-page .form-actions .top-actions .form-submit + a:last-child, .top-actions #views-form-podcast-management-page .form-actions .form-submit + a:last-child, #views-form-podcast-management-page .form-actions .top-actions .form-submit + a:last-child,
 .top-actions #views-form-videogallery-management-page .form-actions .form-submit + a:last-child,
-#views-form-videogallery-management-page .form-actions .top-actions .form-submit + a:last-child, .top-actions #edit-preview-changes:last-child, .top-actions [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:last-child, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .top-actions a:last-child {
+#views-form-videogallery-management-page .form-actions .top-actions .form-submit + a:last-child, .top-actions #edit-preview-changes:last-child, .top-actions [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:last-child, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .top-actions a:last-child, .top-actions .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a:last-child, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li .top-actions a:last-child {
   margin-right: 0;
 }
 
@@ -8089,4 +8089,27 @@ div.node #comments h2 {
 
 .itg_menu_manager_form #edit-submit {
   margin-left: 250px;
+}
+
+.page-itg-menu-manager #content {
+  position: relative;
+}
+.page-itg-menu-manager #content #block-menu-menu-menu-manager {
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+.page-itg-menu-manager #content #block-menu-menu-menu-manager > h2 {
+  display: none;
+}
+.page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu {
+  list-style: none;
+}
+.page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li {
+  float: left;
+  margin-left: 10px;
+}
+.page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a {
+  padding: 7px 12px;
+  text-transform: capitalize;
 }
