@@ -1931,7 +1931,7 @@ footer .footer-copyright {
   border: none;
 }
 .dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic, .osscar-video ul .dont-miss-listing .dm-pic {
-  width: 46.6%;
+  width: 125px;
 }
 .dont-miss ul .dont-miss-listing .dm-pic a, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic a, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic a, .osscar-video ul .dont-miss-listing .dm-pic a {
   display: block;
@@ -3953,7 +3953,7 @@ footer .footer-copyright {
   color: #fff;
   font-size: 20px;
   font-size: 1.25rem;
-  margin: 10px 0;
+  padding: 10px 0;
 }
 #block-views-video-landing-header-block .video-header-right {
   position: relative;
@@ -4129,9 +4129,9 @@ footer .footer-copyright {
   clear: both;
 }
 .view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li {
-  padding: 15px 10px;
+  padding: 15px;
   float: left;
-  width: 50%;
+  width: 25%;
 }
 .view-video-list-of-category .view-content .photo-list li .tile figure, .view-video-landing-header .view-content .photo-list li .tile figure, .view-so-sorry .view-content .photo-list li .tile figure, .view-programme-content .view-content .photo-list li .tile figure {
   max-width: 100%;
@@ -4161,7 +4161,7 @@ footer .footer-copyright {
 .view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a, .view-so-sorry .view-content .photo-list li .tile a, .view-programme-content .view-content .photo-list li .tile a {
   color: #494949;
 }
-.view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-video-landing-header .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1) {
+.view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-video-landing-header .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1) {
   clear: left;
 }
 

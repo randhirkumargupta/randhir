@@ -186,10 +186,11 @@ function _insert_product_into_cart($node_info_array) {
 function itg_loyalty_reward_cart() {
   global $user;
   // Add js file.
-  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
-  $data = _get_cart_full_details($user->uid);
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');  
+  $data = _get_cart_full_details($user->uid);  
+  $remain_point = itg_loyalty_reward_remaining_point($user->uid);  
 
-  return theme('itg_loyalty_reward_cart', array('data' => $data));
+  return theme('itg_loyalty_reward_cart', array('data' => $data, 'remain_point' => $remain_point));
 }
 
 /**
