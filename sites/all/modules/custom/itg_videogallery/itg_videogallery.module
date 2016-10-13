@@ -621,20 +621,20 @@ function itg_videogallery_get_video($fid) {
  * Implements hook_node_access().
  * {@inheritdoc}
  */
-//function itg_videogallery_node_access($node, $op, $account) {
-//  if ($account->uid == 0) {
-//    $current_time = time();
-//    $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
-//    $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
-//    if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
-//      return NODE_ACCESS_ALLOW;
-//    }
-//    elseif (($current_time > $video_expire_date || $current_time < $video_schedule_date) && ($node->type == 'videogallery') && ($op == 'view')) {
-//      return NODE_ACCESS_DENY;
-//    }
-//  }
-//  return NODE_ACCESS_IGNORE;
-//}
+function itg_videogallery_node_access($node, $op, $account) {
+  if ($account->uid == 0) {
+    $current_time = time();
+    $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+    $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+    if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
+      return NODE_ACCESS_ALLOW;
+    }
+    elseif (($current_time > $video_expire_date || $current_time < $video_schedule_date) && ($node->type == 'videogallery') && ($op == 'view')) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
 
 /**
  * Implements hook_node_validate().

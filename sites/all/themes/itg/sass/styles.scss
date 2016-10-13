@@ -1523,7 +1523,7 @@ footer{
             padding: 0 0px 20px 0;
             border:none; 
             .dm-pic{
-                width: 46.6%;
+                width: 125px;
                 a{
                     display: block;
                 }
@@ -2941,7 +2941,7 @@ footer{
     h2{
         color: $white-color;
         @include font(20px);
-        margin: 10px 0;
+        padding: 10px 0;
     }
     ul{
         @extend .list-none;
@@ -3091,9 +3091,9 @@ footer{
             margin:0 -10px;
             @include clearfix;
             li{
-                padding: 15px 10px;
+                padding: 15px;
                 float: left;
-                width:50%;
+                width:25%;
                 .tile{
                     figure{
                         max-width: 100%;              
@@ -3123,10 +3123,10 @@ footer{
                     a{
                         color: #494949;              
                     }
-                }
-                &:nth-child(2n+1){
-                    clear: left;
-                }
+                }                
+                    &:nth-child(4n+1){
+                        clear: left;
+                    }                
             }
         }
     }
