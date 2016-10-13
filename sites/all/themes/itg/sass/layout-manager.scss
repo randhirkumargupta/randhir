@@ -93,11 +93,15 @@ img{
         @include float(left);
         @include calculate-width(2);
         padding:5px;
-        &:hover a{
-            color:$blue-color;
+        a{
+            display: block;
+            margin-bottom: 10px;
+            &:hover{
+                color:$blue-color;
+            }
         }
-        img{
-            padding-bottom: 10px;
+        
+        img{            
             @include calculate-width(1);
         }
         &.featured-post-first{
@@ -157,6 +161,9 @@ img{
             border:none; 
             .dm-pic{
                 width: 46.6%;
+                a{
+                    display: block;
+                }
             }            
             .dm-detail{
                 h4{
@@ -552,6 +559,12 @@ img{
                         @include font(18px,24px,$itg-font-medium);    
                         width: auto;
                         height: 66px;
+                        a{
+                            color: #fff;
+                            &:hover{
+                            color: #f1f1f1;    
+                            }
+                        }
                     }
                     .flex-count{
                         @include pos(absolute,null,null,78px,0px);
@@ -1491,8 +1504,54 @@ img{
         }  
         .itg-widget-child{
             .droppable{
-             height: 210px;            
+             height: 218px;            
             }
+            .tech-block_5{
+        .widget-title{
+            top: 0;
+            left: 15px;   
+        }
+            .flexslider{
+                li{
+                    @include pos(relative);
+                    .detail{
+                        position: absolute;
+                        bottom: 0;
+                        .flex-count{
+                            display: none;   
+                        }
+                        .flex-caption{
+                            background: rgba(255, 255, 255, 0.74);
+                            font-size: 20px;
+                            font-weight: 700;
+                            a{
+                                color: #000;
+                                &:hover{
+                                    color: #193984;
+                                }
+                            }
+                        }
+                    }                
+                }
+                .flex-direction-nav{
+                    display: block;
+                    position:absolute;
+                    top:50%;
+                    width: 100%;
+                    a{
+                        width: 20px;
+                        height: 20px;
+                        &:before{
+                            width: 20px;
+                            height: 20px;
+                            line-height: 20px;
+                            font-size: 20px;
+                            background: #000;
+                        }
+                    }
+                }   
+            }        
+    }
         }
         .auto-block-2{
                 border: 1px solid #ddd;
@@ -1518,49 +1577,13 @@ img{
         .droppable{
             height: 396px;
         }
-    }
-    .tech-block_5{
-        .widget-title{
-            top: 0;
-            left: 15px;   
+        .widget-settings{
+            top:10px;
+            left:10px;
         }
-            .flexslider{
-                li{
-                    @include pos(relative);
-                    .detail{
-                        position: absolute;
-                        bottom: 0;
-                        .flex-count{
-                            display: none;   
-                        }
-                        .flex-caption{
-                            background: rgba(255, 255, 255, 0.74);
-                            font-size: 20px;
-                            font-weight: 700;
-                        }
-                    }                
-                }
-                .flex-direction-nav{
-                    display: block;
-                    position:absolute;
-                    top:50%;
-                    width: 100%;
-                    a{
-                        width: 20px;
-                        height: 20px;
-                        &:before{
-                            width: 20px;
-                            height: 20px;
-                            line-height: 20px;
-                            font-size: 20px;
-                            background: #000;
-                        }
-                    }
-                }   
-            }        
-    }
+    }    
     .tech-block_8{        
-        .widget-title{
+        .widget-title, .widget-settings{
             margin-bottom: 5px;
         }
     }
@@ -1574,8 +1597,9 @@ img{
         }
     }
     .section_wise_order-movies-celebrities, .section_wise_order-movies-lifestyle{
-        .widget-title{
+        .widget-settings{
             position: absolute;
+            z-index: 1;
         }
     }
     .tech-in-depth{
