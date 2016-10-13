@@ -139,14 +139,11 @@ class ItgStoryMigration extends XMLMigration {
 //
     $this->addFieldMapping('field_story_magazine_kicker_text', 'magazinekicker')->xpath('magazinekicker');
     $this->addFieldMapping('field_story_magazine_headline', 'magazineheadline')->xpath('magazineheadline');
-//    
-//    $this->addFieldMapping('field_story_courtesy', 'storytitle')->xpath('storytitle');
     $this->addFieldMapping('field_story_rating', 'storyrating')->xpath('storyrating');
     $this->addFieldMapping('field_story_new_title', 'newtitle')->xpath('newtitle');
     $this->addFieldMapping('field_story_redirection_url_titl', 'redirectionurl')->xpath('redirectionurl');
     $this->addFieldMapping('field_story_courtesy', 'courtesy')->xpath('courtesy');
     $this->addFieldMapping('field_story_snap_post', 'snappost')->xpath('snappost');
-//
     $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
     $this->addFieldMapping('field_story_facebook_image', 'facebookimage')->xpath('facebookimage');
     $this->addFieldMapping('field_story_facebook_vdescripti', 'facebookvideonarrative')->xpath('facebookvideonarrative');
@@ -154,7 +151,6 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_tweet', 'twitternarrative')->xpath('twitternarrative');
     $this->addFieldMapping('field_story_tweet_image', 'twitterimage')->xpath('twitterimage');
     $this->addFieldMapping('field_story_twitter_video_desc', 'twittervideodescription')->xpath('twittervideodescription');
-//
     $this->addFieldMapping('field_story_twitter_video', 'twittervideo')->xpath('twittervideo');
     $this->addFieldMapping('field_story_syndication', 'syndication')->xpath('syndication');
     $this->addFieldMapping('field_story_media_files_syndicat', 'mediafiles')->xpath('mediafiles');
@@ -165,7 +161,6 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_common_related_content', 'relatedcontents')->xpath('relatedcontents');
     $this->addFieldMapping('field_story_schedule_date_time', 'scheduledatetime')->xpath('scheduledatetime');
     $this->addFieldMapping('field_story_expires', 'storyexpires')->xpath('storyexpires');
-//
     $this->addFieldMapping('field_story_expiry_date', 'storyexpirydate')->xpath('storyexpirydate');
     $this->addFieldMapping('field_story_templates', 'selectlisticletemplates')->xpath('selectlisticletemplates');
     $this->addFieldMapping('field_story_expert_name', 'expertname')->xpath('expertname');
@@ -253,14 +248,6 @@ class ItgStoryMigration extends XMLMigration {
     }
     elseif ((string) $row->xml->selectlisticletemplates == 2) {
       $row->xml->selectlisticletemplates = 'number_list';
-    }
-    // Syndication checkbox
-    if ((string) $row->xml->syndication == 'yes') {
-      $row->xml->syndication = 'Yes';
-    }
-    // Mediafiles
-    if ((string) $row->xml->mediafiles == 'yes') {
-      $row->xml->mediafiles = 'Yes';
     }
     //Story expire
     if ((string) $row->xml->storyexpires == true) {
@@ -396,8 +383,11 @@ class ItgStoryMigration extends XMLMigration {
     if(!empty($row->featuredname)){
       $node->field_story_featured_name[LANGUAGE_NONE][0]['tid'] = (string) $row->featuredname;
     }
+    if(!empty($row->city)){
+      $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = (string) $row->city;
+    }
   
-    $node->uid = 1;
+    $node->uid = 291;
   }
 
   public function complete($entity, $row) {
