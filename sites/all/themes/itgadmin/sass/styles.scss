@@ -8090,3 +8090,11 @@ div.node{
     }
   }
 }
+.itg_menu_manager_form{
+  @extend .node-form;
+  #edit-submit{
+    @extend .btn;
+    @extend .btn-save;
+    margin-left: 250px;
+  }
+}
