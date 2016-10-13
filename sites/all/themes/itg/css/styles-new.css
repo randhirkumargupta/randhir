@@ -214,7 +214,6 @@
   font-family: 'Roboto', sans-serif;
 }
 #block-views-photo-landing-slider-block .other-details-main .caption {
-  padding: 0 20px;
   min-height: 150px;
 }
 #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-prev, #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-next {
@@ -1497,7 +1496,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: none;
 }
 .home_page_poll_widget_block .poll-data form {
-  text-align: center;
+  text-align: left;
   padding-bottom: 20px;
 }
 .home_page_poll_widget_block .poll-data form label {
@@ -1508,7 +1507,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .home_page_poll_widget_block .poll-data form .form-radios .form-item {
   display: inline-block;
   vertical-align: top;
-  margin: 0 10px;
+  margin-bottom: 5px;
+  padding-bottom: 0;
+  width: 49%;
 }
 .home_page_poll_widget_block .poll-data form .form-radios .form-item .form-radio {
   float: left;
@@ -1524,8 +1525,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-weight: 500;
   font-family: Roboto;
   margin-top: 20px;
-  font-size: 500;
   color: #323232;
+  margin: 0 auto;
+  display: inherit;
 }
 
 .home_page_poll_widget_block .widget-settings {
@@ -1595,7 +1597,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 500 24px/30px Roboto;
   border-bottom: 1px solid #d8d8d8;
   padding-bottom: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .view-redeem-points .view-content, .view-product .view-content {
@@ -1606,7 +1608,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding: 15px;
   text-align: center;
   border: 1px solid #dedede;
-  margin: 15px 0;
+  margin: 20px 0;
 }
 .view-redeem-points .product-wrapper .product-pic, .view-product .product-wrapper .product-pic {
   height: 172px;
@@ -1620,6 +1622,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   text-transform: uppercase;
   font: 400 16px/18px Roboto;
   padding-top: 15px;
+  height: 51px;
+  overflow: hidden;
 }
 .view-redeem-points .product-wrapper .product-description, .view-redeem-points .product-wrapper .post-date, .view-product .product-wrapper .product-description, .view-product .product-wrapper .post-date {
   display: none;
@@ -1672,6 +1676,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-size: 18px;
   color: #fff;
   margin-right: 5px;
+  vertical-align: top;
 }
 .view-redeem-points .product-wrapper:hover, .view-product .product-wrapper:hover {
   box-shadow: 0 0 20px 0 #bbb;
@@ -1750,6 +1755,8 @@ body.has-cart-popup {
 .cart-popup-wrapper .cart-popup img {
   width: 172px;
   height: 240px;
+  display: block;
+  margin: 0 auto;
 }
 .cart-popup-wrapper .cart-popup .cart-close {
   color: #777;
@@ -1818,6 +1825,7 @@ body.has-cart-popup {
   font-size: 18px;
   color: #fff;
   margin-right: 5px;
+  vertical-align: top;
 }
 
 [id*="itg-quiz-quiz-form"] .question-heading {
@@ -1876,6 +1884,7 @@ body.has-cart-popup {
 [id*="itg-quiz-quiz-form"] .quiz-submit {
   background: #1a3c8d none repeat scroll 0 0;
   border: 1px solid #1a3c8d;
+  border-radius: 0;
   color: #fff;
   cursor: pointer;
   font-size: 12px;
@@ -1943,6 +1952,10 @@ body.has-cart-popup {
   vertical-align: top;
   width: 100%;
 }
+[id*="itg_user_forgot_password_multistep_form"] .messages--status {
+  margin-top: 20px;
+  padding: 0 15px;
+}
 
 .page-cart header,
 .page-checkout header,
@@ -1962,7 +1975,7 @@ body.has-cart-popup {
 
 #block-itg-loyalty-reward-itg-loyalty-reward-header {
   background-color: #eaebed;
-  padding: 5px 0;
+  padding: 10px 0;
   display: inline-block;
   vertical-align: top;
   width: 100%;
@@ -2064,6 +2077,9 @@ body.has-cart-popup {
   vertical-align: middle;
   margin: 0 8px 0 11px;
 }
+.cart-checkout-list .cart-action > div.cart-action-links a:hover {
+  color: #a00606;
+}
 .cart-checkout-list .cart-action > div.points {
   border: 1px solid #dbdbdb;
   padding: 5px;
@@ -2088,7 +2104,8 @@ body.has-cart-popup {
   padding-bottom: 15px;
 }
 .cart-total-block .grand-total strong {
-  font: 500 16px/18px Roboto;
+  font: 600 16px/18px Roboto;
+  color: #000;
 }
 .cart-total-block .grand-total strong:first-child {
   float: left;
@@ -2104,6 +2121,7 @@ body.has-cart-popup {
 }
 .cart-total-block .points-balance span {
   font: 400 16px/18px Roboto;
+  color: #000;
 }
 .cart-total-block .points-balance span:first-child {
   float: left;
@@ -2120,6 +2138,9 @@ body.has-cart-popup {
   color: #fff;
 }
 
+[id*="itg-user-forgot-password-multistep-form"] {
+  padding-top: 20px;
+}
 [id*="itg-user-forgot-password-multistep-form"] .form-type-password-confirm {
   padding: 0 15px;
 }
@@ -2297,11 +2318,8 @@ body.has-cart-popup {
 .view-product .view-filters form .views-exposed-form label {
   display: none;
 }
-.view-product .view-filters form .views-submit-button {
-  padding-right: 10px;
-}
-.view-product .view-filters form .views-submit-button + .views-submit-button {
-  padding-right: 0;
+.view-product .view-filters form .views-exposed-form .views-exposed-widget {
+  padding: 10px 0 0 10px;
 }
 .view-product .view-filters form .form-submit {
   display: inline-block;
@@ -2343,8 +2361,8 @@ body.has-cart-popup {
   color: #333;
 }
 .page-user form .form-submit {
-  background: #000 none repeat scroll 0 0;
-  border: 1px solid #000;
+  background-color: #000 !important;
+  border: 1px solid #000 !important;
   height: 50px;
   width: 243px;
 }
@@ -2460,4 +2478,272 @@ body.has-cart-popup {
 }
 .page-user .messages--error .messages__list {
   padding-left: 15px;
+}
+
+[id*="itg-sso-reg-multistep-form"] #email-sucess, [id*="itg-sso-reg-multistep-form"] #thank-you, [id*="itg-sso-reg-multistep-form"] #mobile-success, [id*="itg-user-forgot-password-multistep-form"] #email-sucess, [id*="itg-user-forgot-password-multistep-form"] #thank-you, [id*="itg-user-forgot-password-multistep-form"] #mobile-success {
+  color: #009c00;
+  margin: 20px 0;
+}
+
+.sign-in-link {
+  padding: 20px;
+}
+.sign-in-link .signup-link {
+  float: left;
+}
+
+#fotp {
+  padding: 0 15px;
+}
+#fotp .form-item-fotp {
+  max-width: 60%;
+  float: left;
+}
+#fotp #forgototpclickme {
+  margin: 9px 20px;
+  float: left;
+}
+#fotp #ajax-loader {
+  float: left;
+  max-width: 25px;
+  margin-top: 5px;
+}
+#fotp #forgot_otp_success {
+  float: left;
+  width: 100%;
+  margin: 5px 0;
+  font-size: 12px;
+  color: #009c00;
+}
+
+#uotp #ajax-loader {
+  float: left;
+  max-width: 25px;
+  margin: 5px 0 0 20px;
+}
+#uotp #otpclickme {
+  float: left;
+}
+
+/* Responsive CSS */
+@media all and (max-width: 767px) {
+  /* Responsive CSS For Loyalty and Rewards */
+  [id*="block-views-redeem-points-block"] .block-title {
+    font: 500 18px/24px Roboto;
+  }
+
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user {
+    width: 50%;
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart {
+    max-width: 48%;
+    text-align: right;
+    padding-top: 25px;
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li {
+    padding-bottom: 10px;
+    float: none;
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li + li:before {
+    display: none;
+  }
+
+  .view-redeem-points .more-link, .view-product .more-link {
+    top: 3px;
+    font-size: 13px;
+  }
+  .view-redeem-points .view-content .col-md-4 + .col-md-4 .product-wrapper, .view-product .view-content .col-md-4 + .col-md-4 .product-wrapper {
+    margin: 50px 0 0;
+  }
+  .view-redeem-points .product-wrapper, .view-product .product-wrapper {
+    padding: 15px 10px;
+  }
+  .view-redeem-points .product-wrapper .product-title, .view-product .product-wrapper .product-title {
+    font-size: 14px;
+  }
+  .view-redeem-points .product-wrapper .redeem-points, .view-product .product-wrapper .redeem-points {
+    font-size: 16px;
+  }
+  .view-redeem-points .product-wrapper .btn-add-cart, .view-redeem-points .product-wrapper .btn-redeem-points, .view-product .product-wrapper .btn-add-cart, .view-product .product-wrapper .btn-redeem-points {
+    font: 500 13px/18px Roboto;
+    padding: 5px 8px;
+    margin: 0;
+  }
+  .view-redeem-points .product-wrapper .btn-add-cart, .view-product .product-wrapper .btn-add-cart {
+    margin-right: 8px;
+  }
+
+  .page-order table th, .page-order table td {
+    padding: 10px 5px;
+  }
+  .page-order table td .checkout-inner {
+    font-size: 13px;
+  }
+  .page-order table td .checkout-inner img {
+    margin: 0;
+    float: none;
+  }
+  .page-order table td .checkout-inner .checkout-inner-details span {
+    width: 110px;
+  }
+
+  .cart-popup-wrapper .cart-popup {
+    margin: auto;
+    max-height: 96%;
+    max-width: 96%;
+    overflow-y: auto;
+    text-align: center;
+  }
+  .cart-popup-wrapper .cart-popup h2 {
+    margin-top: 30px;
+  }
+  .cart-popup-wrapper .cart-popup .cart-actions {
+    padding-bottom: 30px;
+  }
+  .cart-popup-wrapper .cart-popup .cart-actions .btn-add-cart, .cart-popup-wrapper .cart-popup .cart-actions .btn-redeem-points {
+    font: 500 13px/18px Roboto;
+    padding: 5px 8px;
+    margin: 0;
+  }
+  .cart-popup-wrapper .cart-popup .cart-actions .btn-add-cart {
+    margin-right: 8px;
+  }
+
+  /* End of Loyalty and Rewards */
+  /* Responsive CSS For Quiz And Survey */
+  .survey-form-main-container .byline .social-info {
+    display: none;
+  }
+  .survey-form-main-container .byline .profile-pic {
+    margin-right: 10px;
+  }
+  .survey-form-main-container .byline .profile-detail {
+    float: none;
+    overflow: hidden;
+    margin: 0;
+    width: auto;
+    padding: 0;
+  }
+
+  [id*="itg-quiz-quiz-form"] .answer-container {
+    padding-left: 0;
+  }
+  [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes .form-type-radio > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-checkbox > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-radios .form-type-radio > label {
+    width: 100%;
+  }
+  [id*="itg-quiz-quiz-form"] .answer-container .quiz-media-container {
+    width: 130px;
+    margin-right: 10px;
+  }
+
+  /* End of Quiz And Survey */
+}
+[id*="protected-pages-enter-password"] fieldset {
+  border: none;
+  font: 14px/18px Roboto;
+}
+[id*="protected-pages-enter-password"] fieldset .fieldset-description {
+  font-size: 16px;
+}
+[id*="protected-pages-enter-password"] fieldset .form-type-password {
+  margin: 20px 0;
+}
+[id*="protected-pages-enter-password"] fieldset .form-type-password label {
+  float: left;
+  padding: 7px 0;
+  width: 200px;
+}
+[id*="protected-pages-enter-password"] fieldset .form-type-password .form-text {
+  width: 280px;
+  max-width: 100%;
+}
+[id*="protected-pages-enter-password"] fieldset .form-submit {
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  height: 32px;
+  margin-left: 200px;
+  padding: 3px 20px 5px;
+  vertical-align: top;
+  font-family: Roboto;
+}
+
+[id*="itg-mobile-services-search-form"] {
+  font: 14px/18px Roboto;
+}
+[id*="itg-mobile-services-search-form"] .container-inline-date {
+  clear: none;
+  float: left;
+}
+[id*="itg-mobile-services-search-form"] .container-inline-date .form-type-date-popup > label {
+  display: block;
+  padding-bottom: 5px;
+}
+[id*="itg-mobile-services-search-form"] .container-inline-date .form-type-date-popup .form-type-textfield > label {
+  display: none;
+}
+[id*="itg-mobile-services-search-form"] .container-inline-date .description {
+  clear: none;
+  font-size: 11px;
+}
+[id*="itg-mobile-services-search-form"] .form-submit {
+  background-color: #1fb5ad;
+  border: 1px solid #1fb5ad;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  font-family: Roboto;
+  font-size: 14px;
+  margin-top: 23px;
+  padding: 4px 10px 6px;
+  vertical-align: top;
+  width: 75px;
+}
+[id*="itg-mobile-services-search-form"] a.button {
+  background-color: #fff;
+  border: 1px solid #1fb5ad;
+  border-radius: 4px;
+  color: #1fb5ad;
+  display: inline-block;
+  height: 32px;
+  margin: 23px 0 0 10px;
+  padding: 5px 10px;
+  text-align: center;
+  vertical-align: top;
+  width: 75px;
+}
+
+.page-mobile-services-feed table .views-table {
+  width: 100%;
+  max-width: 860px;
+  border-collapse: collapse;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+.page-mobile-services-feed table .views-table th {
+  background-color: #1a3c8d;
+  color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+.page-mobile-services-feed table .views-table th:first-child {
+  border-radius: 5px 0 0 0;
+  border-left: 1px solid #e0e0e0;
+  min-width: 300px;
+  text-align: left;
+}
+.page-mobile-services-feed table .views-table th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #e0e0e0;
+}
+.page-mobile-services-feed table .views-table td {
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+.page-mobile-services-feed table .views-table th, .page-mobile-services-feed table .views-table td {
+  padding: 10px;
+  max-width: 300px;
+  font: 300 16px/22px Roboto;
 }

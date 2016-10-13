@@ -24,13 +24,17 @@
 
           <div class="dm-detail">
 
-            <?php if (!empty($node_data['custom_label'])) : ?>
+           <?php /*if (!empty($node_data['custom_label'])) : ?>
              <h4><?php print $node_data['custom_label']; ?></h4>
+            <?php endif; */?>
+             <?php $title=$node_data['node_load_data']->title;
+            if (!empty($node_data['custom_label'])) : ?>
+             <?php $title= $node_data['custom_label']; ?>
             <?php endif; ?>
 
-            <?php if (!empty($node_data['node_load_data']->title)) : ?>    
+            <?php if (!empty($title)) : ?>    
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['node_load_data']->nid ?>">
-                <?php echo l(mb_strimwidth($node_data['node_load_data']->title, 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
+                <?php echo l(mb_strimwidth($title, 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
               </p>
                 <?php 
                 $desc=$node_data['node_load_data']->field_story_kicker_text['und'][0]['value'];

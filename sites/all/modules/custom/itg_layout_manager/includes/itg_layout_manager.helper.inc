@@ -206,6 +206,7 @@ function get_layout_details($section_name, $template_name, $status) {
     $result['widget_name'] = $itg_val->widget_name;
     if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
       $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      $result['more_url'] = l('More[+]', 'taxonomy/term/'.$filter_url);
     }else {
       $result['block_title'] = $itg_val->block_title; //for default widgets
     }

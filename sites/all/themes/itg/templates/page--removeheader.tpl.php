@@ -15,7 +15,7 @@
   <main id="main">
     
     <section id="content" class="container" role="main">
-      
+      <?php print $messages; ?>
       <?php print render($page['content']); ?>
       
     </section>

@@ -6,16 +6,10 @@
     <?php
     foreach ($rows as $index => $row) {
         $desc = $row['title'];
-        if ($row['field_story_kicker_text'] != "") {
-            $desc = $row['field_story_kicker_text'];
-        } else if ($row['field_story_kicker_text'] == "" && $row['body'] != "") {
-            $desc = $row['body'];
-        } else if ($row['field_story_expert_description'] != "") {
-            $desc = $row['field_story_expert_description'];
-        }
+        
         $video_class = "";
         if (strtolower($row['type']) == 'videogallery') {
-            $video_class = 'content-video';
+            $video_class = 'video-icon';
         }
         if ($index == 0) {
             ?>
@@ -47,19 +41,11 @@
 foreach ($rows as $index => $row) {
     
     $desc = $row['title'];
-    if ($row['field_story_kicker_text'] != "") {
-        $desc = $row['field_story_kicker_text'];
-    } else if ($row['field_story_kicker_text'] == "" && $row['body'] != "") {
-        $desc = $row['body'];
-    } else if ($row['field_story_expert_description'] != "") {
-        $desc = $row['field_story_expert_description'];
-    }
-
-
+   
     if ($index > 2) {
     
         ?>
-    <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 140, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
+    <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
 
 
      <?php } ?>

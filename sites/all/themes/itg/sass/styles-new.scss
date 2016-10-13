@@ -188,7 +188,6 @@
             font-family:'Roboto', sans-serif;             
         }
         .caption{
-            padding: 0 20px;
             min-height: 150px;
         }
 
@@ -1404,7 +1403,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
     }
     form{
-      text-align: center;
+      text-align: left;
       padding-bottom: 20px;
       label{
         display: inline-block;
@@ -1413,9 +1412,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
       .form-radios{
         .form-item{
-          display: inline-block;
-          vertical-align: top;
-          margin: 0 10px;
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 5px;
+            padding-bottom: 0;
+            width: 49%;
           .form-radio{
             float: left;
             margin: 3px 2px 0 0;
@@ -1432,9 +1433,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         height: 36px;
         font-weight: 500;
         font-family: Roboto;
-        margin-top: 20px;
-        font-size: 500;
+        margin-top: 20px;        
         color: #323232;
+        margin: 0 auto;
+        display: inherit;
       }
   }
 }
@@ -1507,7 +1509,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     font: 500 24px/30px Roboto;
     border-bottom: 1px solid #d8d8d8;
     padding-bottom: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 }
 .view-redeem-points, .view-product{
@@ -1519,7 +1521,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     padding: 15px;
     text-align: center;
     border: 1px solid #dedede;
-    margin: 15px 0;
+    margin: 20px 0;
     .product-pic{
       height: 172px;
       cursor: pointer;
@@ -1532,6 +1534,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       text-transform: uppercase;
       font: 400 16px/18px Roboto;
       padding-top: 15px;
+      height: 51px;
+      overflow: hidden;
     }
     .product-description, .post-date{
       display: none;
@@ -1583,6 +1587,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         font-size: 18px;
         color: #fff;
         margin-right: 5px;
+        vertical-align: top;
       }
     }
     &:hover{
@@ -1660,6 +1665,8 @@ body.has-cart-popup{
     img{
       width: 172px;
       height: 240px;
+      display: block;
+      margin: 0 auto;
     }
     .cart-close{
       color: #777;
@@ -1729,6 +1736,7 @@ body.has-cart-popup{
           font-size: 18px;
           color: #fff;
           margin-right: 5px;
+          vertical-align: top;
         }
       }
   }
@@ -1796,6 +1804,7 @@ body.has-cart-popup{
   .quiz-submit{
     background: #1a3c8d none repeat scroll 0 0;
     border: 1px solid #1a3c8d;
+    border-radius: 0;
     color: #fff;
     cursor: pointer;
     font-size: 12px;
@@ -1866,6 +1875,10 @@ body.has-cart-popup{
         vertical-align: top;
         width: 100%;
     }
+    .messages--status{
+      margin-top: 20px;
+      padding: 0 15px;
+    }
 }
 .page-cart,
 .page-checkout,
@@ -1888,7 +1901,7 @@ body.has-cart-popup{
 }
 #block-itg-loyalty-reward-itg-loyalty-reward-header{
   background-color: #eaebed;
-  padding: 5px 0;
+  padding: 10px 0;
   display: inline-block;
   vertical-align: top;
   width: 100%;
@@ -1988,6 +2001,9 @@ body.has-cart-popup{
           vertical-align: middle;
           margin: 0 8px 0 11px;
         }
+        a:hover{
+          color: #a00606;
+        }
       }
       &.points{
         border: 1px solid #dbdbdb;
@@ -2013,7 +2029,8 @@ body.has-cart-popup{
     width: 100%;
     padding-bottom: 15px;
     strong{
-      font: 500 16px/18px Roboto;
+      font: 600 16px/18px Roboto;
+      color: #000;
       &:first-child{
         float: left;
       }
@@ -2029,6 +2046,7 @@ body.has-cart-popup{
     padding-top: 15px;
     span{
       font: 400 16px/18px Roboto;
+      color: #000;
       &:first-child{
         float: left;
       }
@@ -2047,6 +2065,7 @@ body.has-cart-popup{
   }
 }
 [id*="itg-user-forgot-password-multistep-form"]{
+  padding-top: 20px;
   .form-type-password-confirm{
     padding: 0 15px;
     > label{
@@ -2235,11 +2254,8 @@ body.has-cart-popup{
         label{
           display: none;
         }
-      }
-      .views-submit-button{
-        padding-right: 10px;
-        & + .views-submit-button{
-          padding-right: 0;
+        .views-exposed-widget{
+          padding: 10px 0 0 10px;
         }
       }
       .form-submit{
@@ -2284,8 +2300,8 @@ body.has-cart-popup{
             color: #333;
         }
         .form-submit{
-          background: #000 none repeat scroll 0 0;
-          border: 1px solid #000;
+          background-color: #000 !important;
+          border: 1px solid #000 !important;
           height: 50px;
           width: 243px;
         }
@@ -2403,4 +2419,310 @@ body.has-cart-popup{
             padding-left: 15px;
         }
     }
+}
+[id*="itg-sso-reg-multistep-form"], [id*="itg-user-forgot-password-multistep-form"]{
+  #email-sucess, #thank-you, #mobile-success{
+    color: #009c00;
+    margin: 20px 0;
+  }
+}
+.sign-in-link{
+  padding: 20px;
+  .signup-link{
+    float: left;
+  }
+}
+#fotp{
+  padding: 0 15px;
+  .form-item-fotp{
+    max-width: 60%;
+    float: left;
+  }
+  #forgototpclickme{
+    margin: 9px 20px;
+    float: left;
+  }
+  #ajax-loader {
+    float: left;
+    max-width: 25px;
+    margin-top: 5px;
+  }
+  #forgot_otp_success{
+    float: left;
+    width: 100%;
+    margin: 5px 0;
+    font-size: 12px;
+    color: #009c00;
+  }
+}
+#uotp{
+  #ajax-loader {
+    float: left;
+    max-width: 25px;
+    margin: 5px 0 0 20px;
+  }
+  #otpclickme{
+    float: left;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* Responsive CSS */
+@media all and(max-width: 767px){
+  /* Responsive CSS For Loyalty and Rewards */
+  [id*="block-views-redeem-points-block"]{
+    .block-title{
+      font: 500 18px/24px Roboto;
+    }
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header{
+    .cart-user{
+      width: 50%;
+    }
+    .header-cart{
+      max-width: 48%;
+      text-align: right;
+      padding-top: 25px;
+      li{
+        padding-bottom: 10px;
+        float: none;
+        & + li:before{
+          display: none;
+        }
+      }
+    }
+  }
+  .view-redeem-points, .view-product{
+    .more-link{
+      top: 3px;
+      font-size: 13px;
+    }
+    .view-content{
+      .col-md-4{
+        & + .col-md-4{
+          .product-wrapper{
+            margin: 50px 0 0;
+          }
+        }
+      }
+    }
+    .product-wrapper{
+      padding: 15px 10px;
+      .product-title{
+        font-size: 14px;
+      }
+      .redeem-points{
+        font-size: 16px;
+      }
+      .btn-add-cart, .btn-redeem-points{
+        font: 500 13px/18px Roboto;
+        padding: 5px 8px;
+        margin: 0;
+      }
+      .btn-add-cart{
+        margin-right: 8px;
+      }
+    }
+  }
+  .page-order{
+    table{
+      th, td{
+        padding: 10px 5px;
+      }
+      td{
+        .checkout-inner{
+          font-size: 13px;
+          img{
+            margin: 0;
+            float: none;
+          }
+          .checkout-inner-details{
+            span{
+              width: 110px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .cart-popup-wrapper{
+    .cart-popup{
+      margin: auto;
+      max-height: 96%;
+      max-width: 96%;
+      overflow-y: auto;
+      text-align: center;
+      h2{
+        margin-top: 30px;
+      }
+      .cart-actions{
+        padding-bottom: 30px;
+        .btn-add-cart, .btn-redeem-points{
+          font: 500 13px/18px Roboto;
+          padding: 5px 8px;
+          margin: 0;
+        }
+        .btn-add-cart{
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+  /* End of Loyalty and Rewards */
+  /* Responsive CSS For Quiz And Survey */
+  .survey-form-main-container{
+    .byline{
+      .social-info{
+        display: none;
+      }
+      .profile-pic{
+        margin-right: 10px;
+      }
+      .profile-detail {
+        float: none;
+        overflow: hidden;
+        margin: 0;
+        width: auto;
+        padding: 0;
+      }
+    }
+  } 
+  [id*="itg-quiz-quiz-form"]{
+    .answer-container{
+      padding-left: 0;
+      .form-type-checkboxes, .form-type-radios{
+        .form-type-checkbox, .form-type-radio{
+          > label{
+            width: 100%;
+          }
+        }
+      }
+      .quiz-media-container{
+        width: 130px;
+        margin-right: 10px;
+      }
+    }
+  }    
+  /* End of Quiz And Survey */
+}
+[id*="protected-pages-enter-password"]{
+  fieldset{
+    border: none;
+    font: 14px/18px Roboto;
+    .fieldset-description{
+      font-size: 16px;
+    }
+    .form-type-password{
+      margin: 20px 0;
+      label{
+        float: left;
+        padding: 7px 0;
+        width: 200px;
+      }
+      .form-text{
+        width: 280px;
+        max-width: 100%;
+      }
+    }
+    .form-submit{
+      background-color: #000;
+      border: 1px solid #000;
+      border-radius: 3px;
+      color: #fff;
+      display: inline-block;
+      font-size: 14px;
+      height: 32px;
+      margin-left: 200px;
+      padding: 3px 20px 5px;
+      vertical-align: top;
+      font-family: Roboto;
+    }
+  }
+}
+[id*="itg-mobile-services-search-form"]{
+  font: 14px/18px Roboto;
+  .container-inline-date {
+      clear: none;
+      float: left;
+      .form-type-date-popup{
+        > label {
+          display: block;
+          padding-bottom: 5px;
+        }
+        .form-type-textfield > label {
+          display: none;
+        }
+      } 
+      .description {
+        clear: none;
+        font-size: 11px;
+      }
+  }
+  .form-submit{
+    background-color: #1fb5ad;
+    border: 1px solid #1fb5ad;
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    font-family: Roboto;
+    font-size: 14px;
+    margin-top: 23px;
+    padding: 4px 10px 6px;
+    vertical-align: top;
+    width: 75px;
+  }
+  a.button{
+    background-color: #fff;
+    border: 1px solid #1fb5ad;
+    border-radius: 4px;
+    color: #1fb5ad;
+    display: inline-block;
+    height: 32px;
+    margin: 23px 0 0 10px;
+    padding: 5px 10px;
+    text-align: center;
+    vertical-align: top;
+    width: 75px;
+  }
+  
+}
+.page-mobile-services-feed table{
+  .views-table{
+    width: 100%;
+    max-width: 860px;
+    border-collapse: collapse;
+    border-radius: 5px;
+    margin: 0 auto;
+    th{
+      background-color: #1a3c8d;
+      color: #fff;
+      border-top: 1px solid #e0e0e0;
+      &:first-child{
+        border-radius: 5px 0 0 0;
+        border-left: 1px solid #e0e0e0;
+        min-width: 300px;
+        text-align: left;
+      }
+      &:last-child{
+        border-radius: 0 5px 0 0;
+        border-right: 1px solid #e0e0e0;
+      }
+    }
+    td{
+      border: 1px solid #e0e0e0;
+      text-align: center;
+    }
+    th, td{
+      padding: 10px;
+      max-width: 300px;
+      font: 300 16px/22px Roboto;
+    }
+  }
 }

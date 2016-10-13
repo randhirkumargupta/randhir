@@ -106,9 +106,6 @@ function itg_widget_views_pre_render(&$view) {
     //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     //$header_content .= l(t('Search Content'), 'section-wise-draggable-content-order', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
-    if (!isset($_GET['category_tid'])) {
-//$view = array();
-    }
   }
   elseif ($view->name == "photo_carousel_widget" && $view->current_display == 'photo_carousel_list') {
     if (!isset($_POST['views_bulk_operations'])) {
@@ -199,7 +196,14 @@ function itg_widget_views_pre_render(&$view) {
   elseif ($view->name == "special_auto_review_widget" && $view->current_display == 'special_auto_review_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
     //  $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Special Auto Review Widget'), 'special-auto-review-widget-lsit' , array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $header_content .= l(t('Special Review Widget'), 'special-auto-review-widget-lsit' , array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $view->attachment_before = $header_content;
+    }
+  }
+   elseif ($view->name == "special_how_i_made_it" && $view->current_display == 'special_how_made_it_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+    //  $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Special How I Made It Widget'), 'special-how-made-it-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }

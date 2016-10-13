@@ -161,11 +161,12 @@ function feature_for_special_auto_review_widget_views_default_views() {
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
 
-  /* Display: Content For : Special Auto Review Widget */
-  $handler = $view->new_display('page', 'Content For : Special Auto Review Widget', 'special_auto_review_widget_contents');
+  /* Display: Content For : Special  Review Widget */
+  $handler = $view->new_display('page', 'Content For : Special  Review Widget', 'special_auto_review_widget_contents');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Special  Review Widget';
-  $handler->display->display_options['display_description'] = 'Content For : Special Auto Review Widget';
+  $handler->display->display_options['display_description'] = 'Content For : Special  Review Widget';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -175,6 +176,9 @@ function feature_for_special_auto_review_widget_views_default_views() {
     20 => '20',
     10 => '10',
   );
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
@@ -210,7 +214,7 @@ function feature_for_special_auto_review_widget_views_default_views() {
       'postpone_processing' => 0,
       'skip_confirmation' => 1,
       'override_label' => 1,
-      'label' => 'Add to Special Auto Review Widget',
+      'label' => 'Add to Special  Review Widget',
     ),
   );
   /* Field: Content: Title */
@@ -250,6 +254,14 @@ function feature_for_special_auto_review_widget_views_default_views() {
   $handler->display->display_options['fields']['view_node']['label'] = 'Action';
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]  </span> ';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['fields']['nid_1']['table'] = 'node';
+  $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid_1']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['nid_1']['label'] = '';
+  $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Title */
@@ -419,9 +431,9 @@ function feature_for_special_auto_review_widget_views_default_views() {
   );
   $handler->display->display_options['path'] = 'special-auto-review-widget-contents';
 
-  /* Display: Special  Auto Review Order Reorder */
-  $handler = $view->new_display('page', 'Special  Auto Review Order Reorder', 'special_auto_review_widget_list');
-  $handler->display->display_options['display_description'] = 'Special  Auto Review Order Reorder';
+  /* Display: Special   Review Order Reorder */
+  $handler = $view->new_display('page', 'Special   Review Order Reorder', 'special_auto_review_widget_list');
+  $handler->display->display_options['display_description'] = 'Special  Review Order Reorder';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';

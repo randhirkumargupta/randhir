@@ -844,7 +844,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Long Description */
+  /* Field: Field: Content */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -926,12 +926,13 @@ if(module_exists(\'itg_videogallery\')) {
 $vid = itg_videogallery_get_videoid($row->fid);
 }
 ?>
-<iframe frameborder="0" width="613" height="448"
+<div class="iframe-video">
+<iframe frameborder="0"
 src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mute=1&ui-start-screen-info"
-allowfullscreen></iframe>';
+allowfullscreen></iframe></div>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Long Description */
+  /* Field: Field: Content */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -954,7 +955,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
   $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<i class="fa fa-clock-o"></i> Watch Later
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<i class="fa fa-clock-o"></i> <span>Watch Later</span>
 ';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'user/login';
@@ -984,20 +985,20 @@ allowfullscreen></iframe>';
         <div class="video">[php]</div>
         <div class="social-likes">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> 585</a></li>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>585</span></a></li>
                 <li>[ops]</li>
-                <li><a href="#"><i class="fa fa-facebook"></i> Share</a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
-                <li><a href="#"><i class="fa fa-envelope"></i> Email</a></li>
-                <li><a href="#"><i class="fa fa-link"></i> Embed</a></li>
-                <li><a href="#"><i class="fa fa-comment"></i> Comment</a></li>
-<li><a href="#"><i class="fa fa-share"></i>Submit Video</a></li>
+                <li><a href="#"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
+                <li><a href="#"><i class="fa fa-envelope"></i> <span>Email</span></a></li>
+                <li class="mhide"><a href="#"><i class="fa fa-link"></i> <span>Embed</span></a></li>
+                <li><a href="#"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
+<li class="mhide"><a href="#"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>
             </ul>
         </div>
     </div>
     <div class="col-md-4 video-header-right"><p>[field_story_expert_description]</p>
         <p class="upload-date">[timestamp]</p>
-<div class="ads"></div>
+<div class="ads mhide"></div>
     </div>
 </div>
     </div>

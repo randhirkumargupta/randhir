@@ -225,3 +225,41 @@ Version   :  1.0
 .carousel .slides .spinner { background : #000 url("../images/loading.gif") no-repeat center; /* video preloader */ }
 
 
+@media only screen and (max-width:1024px){
+    .carousel .slides .slideItem{
+        position: inherit;
+    }
+    .carousel .slides .slideItem span.overlay{
+        opacity: 0;
+        background: transparent;
+    }   
+    .carousel .slides .slideItem span{
+        opacity: 1;
+    }
+    .carousel .slides .slideItem span.pic-tit{
+        font-size: 18px;    
+        margin-top: 15px;
+        display: block;
+        line-height: 22px;
+    }
+    .carousel .slides .slideItem span.flex-count{
+        display: none;
+    }
+    .carousel .slick-dots{
+        padding:20px 10px 10px;
+        text-align: center;
+    }
+    .carousel .slick-dots li{
+        display: inline-block;
+        vertical-align: top;
+          padding: 0 4px;
+    }
+    .carousel .slick-dots li button{
+        background: #fff;
+        border: none;
+        width: 12px;
+        height: 12px;
+        border-radius: 100%;
+        text-indent: -99999em;      
+    }
+}

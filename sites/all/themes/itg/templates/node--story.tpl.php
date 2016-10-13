@@ -41,7 +41,7 @@
                   <a href="../../../../../../html/itgcms/sites/all/themes/itg/templates/flag--my-saved-content.tpl.php"></a>
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
-                      <?php  $twitter_handle = $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
+                      <?php  $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
                       $twitter_handle = str_replace('@', '', $twitter_handle);
                       if(!empty($twitter_handle)) {
                       ?>
@@ -112,7 +112,7 @@
               <div class="profile-detail">
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
-                      <?php  $twitter_handle = $node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
+                      <?php  $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
                       $twitter_handle = str_replace('@', '', $twitter_handle);
                       if(!empty($twitter_handle)) {
                       ?>
@@ -201,6 +201,11 @@
           }
           print $buzz_output;
         }
+        
+        // prepare url for sharing
+         $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+         $short_url = shorten_url($actual_link, 'goo.gl');
+         $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
         ?>
       
       <!-- condition for buzz end -->      
@@ -209,9 +214,57 @@
           <div class="social-list">
             <ul>
                 <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                <li class="mhide"><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
-                <li class="mhide"><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
-                <li class="mhide"><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
+                <li class="mhide"><div id="fb-root"></div>
+                      <script>(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
+                        fjs.parentNode.insertBefore(js, fjs);
+                      }(document, 'script', 'facebook-jssdk'));</script>
+                      <a onclick='gogogo("<?php print $short_url;?>", "<?php print $node->title; ?>", "", "<?php print $image;?>")'><i class="fa fa-facebook"></i></a></li>
+ 
+
+<script>
+function gogogo(linkurl, title, desc, image) {
+  FB.ui({
+    method: 'feed',
+    link: linkurl,
+    picture: image,
+    name: title,
+    //caption: desc,
+    description: desc
+  });
+}
+  
+</script>
+<?php
+function _cg_tweet_share($short_url, $message = '') {
+    $twitter_msg = strip_tags($node->title);
+    $twitter_share = 'http://twitter.com/share?text=' . urlencode($twitter_msg) . '&url=' . urlencode($short_url). '&via=indiatoday';
+    return $twitter_share;
+}
+?>
+<!-- script for twitter sharing -->
+<script type="text/javascript">
+  function twitter_popup() {
+    newwindow=window.open('<?php echo addslashes(_cg_tweet_share()); ?>','indiatoday','height=500,width=550,left=440,top=250');
+    if (window.focus) {newwindow.focus()}
+    return false;
+  }
+</script>
+<!-- twitter sharing end here -->
+
+<script>
+function googleplusbtn(url, titile, img) {
+  sharelink = "https://plus.google.com/share?url="+url+"&title=ankush";
+  newwindow=window.open(sharelink,'indiatoday','height=400,width=600,left=440,top=250');
+  if (window.focus) {newwindow.focus()}                                                                                                                                
+  return false;
+}   
+</script>
+<li class="mhide"><a href="javascript:" onclick="twitter_popup()"><i class="fa fa-twitter"></i></a></li>
+                <li class="mhide"><a title="share on google+" href="#" onclick='return googleplusbtn("<?php print $short_url;?>", "<?php print $node->title; ?>","<?php print $image;?>")'><i class="fa fa-google-plus"></i></a></li>
                 <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
                 <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>
@@ -247,6 +300,13 @@
               }
            ?>
       
+      <?php 
+           if (function_exists(global_comment_last_record)) {
+                 $last_record = global_comment_last_record();
+                 $config_name = trim($last_record[0]->config_name);
+               }
+               if($config_name == 'vukkul') {
+               ?>
       <div class="vukkul-comment">
 
             <div id="vuukle_div"></div>
@@ -258,7 +318,14 @@
               ?>
      
         </div>
-
+               <?php } 
+               if($config_name == 'other') {
+               ?>
+      <div id="other-comment">
+        <?php print render($content['comment_form']); ?>
+        <?php print render($content['comments']); ?>
+        </div>
+               <?php } ?>
   </div>
 </div>
 <?php endif; ?>

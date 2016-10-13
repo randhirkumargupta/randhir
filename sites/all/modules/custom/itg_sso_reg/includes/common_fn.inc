@@ -60,7 +60,7 @@ function itg_sso_reg_otp_callback() {
   $email = $_POST['email'];
   $rand_otp = $_POST['otp'];
   $source = $_POST['source'];
-  print $otp_exist = itg_sso_otp_check($mobile, $email, $source);
+  $otp_exist = itg_sso_otp_check($mobile, $email, $source);
 
   if ($otp_exist) {
     $otp = db_update('itg_sso_reg_otp_info');
@@ -72,7 +72,10 @@ function itg_sso_reg_otp_callback() {
     ));
     
     $otp->execute();
-
+    
+    if (!empty($mobile)) {
+      $mail_content = itg_sso_sms_send($rand_otp, $mobile);
+    }
     //$mail_content = itg_sso_get_mail_content($otp, $email);
   }
 }
@@ -159,6 +162,7 @@ function itg_sso_user_activate_callback() {
         ->execute();
     
     print '<div class="activate-message">Your Account Activated Sucessfully, Please login to continue !</div>';
+    drupal_goto('http://dev.indiatodayonline.in/');
   }
 }
 
@@ -183,3 +187,20 @@ function itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, $source) {
               ->execute();
 }
 
+/**
+ * Implements itg_sso_sms_send
+ * @param int $otp
+ * @param int $mobile
+ */
+
+function itg_sso_sms_send($otp, $mobile) {
+
+  $runfile = "http://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=361347&username=9811668984&password=tpwaw&senderid=INDTDY&Text=Your%20otp%20is%20".$otp."&To=".$mobile;
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $runfile);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_URL, $runfile);
+  $content = curl_exec($ch);
+  curl_close($ch);
+  
+}
