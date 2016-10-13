@@ -238,11 +238,14 @@ img {
   width: 50%;
   padding: 5px;
 }
-.featured-news .featured-post:hover a {
+.featured-news .featured-post a {
+  display: block;
+  margin-bottom: 10px;
+}
+.featured-news .featured-post a:hover {
   color: #193984;
 }
 .featured-news .featured-post img {
-  padding-bottom: 10px;
   width: 100%;
 }
 .featured-news .featured-post.featured-post-first {
@@ -338,6 +341,9 @@ img {
 }
 .dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic, .osscar-video ul .dont-miss-listing .dm-pic {
   width: 46.6%;
+}
+.dont-miss ul .dont-miss-listing .dm-pic a, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic a, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic a, .osscar-video ul .dont-miss-listing .dm-pic a {
+  display: block;
 }
 .dont-miss ul .dont-miss-listing .dm-detail h4, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail h4, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail h4, .osscar-video ul .dont-miss-listing .dm-detail h4 {
   color: #048cb9;
@@ -912,6 +918,12 @@ img {
   line-height: 24px;
   width: auto;
   height: 66px;
+}
+.featured_photo_carousel .flexslider .slides li .detail .flex-caption a, .tech-block_5 .flexslider .slides li .detail .flex-caption a, .auto-block_5 .flexslider .slides li .detail .flex-caption a {
+  color: #fff;
+}
+.featured_photo_carousel .flexslider .slides li .detail .flex-caption a:hover, .tech-block_5 .flexslider .slides li .detail .flex-caption a:hover, .auto-block_5 .flexslider .slides li .detail .flex-caption a:hover {
+  color: #f1f1f1;
 }
 .featured_photo_carousel .flexslider .slides li .detail .flex-count, .tech-block_5 .flexslider .slides li .detail .flex-count, .auto-block_5 .flexslider .slides li .detail .flex-count {
   position: absolute;
@@ -1793,7 +1805,49 @@ img {
   border: none;
 }
 .movie-layout-page .itg-layout-580 .itg-widget-child .droppable {
-  height: 210px;
+  height: 218px;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .widget-title {
+  top: 0;
+  left: 15px;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li {
+  position: relative;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail {
+  position: absolute;
+  bottom: 0;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-count {
+  display: none;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption {
+  background: rgba(255, 255, 255, 0.74);
+  font-size: 20px;
+  font-weight: 700;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption a {
+  color: #000;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption a:hover {
+  color: #193984;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav {
+  display: block;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a {
+  width: 20px;
+  height: 20px;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a:before {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 20px;
+  background: #000;
 }
 .movie-layout-page .itg-layout-580 .auto-block-2 {
   border: 1px solid #ddd;
@@ -1809,43 +1863,17 @@ img {
   border: none;
   padding-top: 20px;
 }
-.movie-layout-page .tech-block_5 .widget-title {
-  top: 0;
-  left: 15px;
+.movie-layout-page .itg-h385-section .droppable {
+  height: 385px;
 }
-.movie-layout-page .tech-block_5 .flexslider li {
-  position: relative;
+.movie-layout-page .itg-h396-section .droppable {
+  height: 396px;
 }
-.movie-layout-page .tech-block_5 .flexslider li .detail {
-  position: absolute;
-  bottom: 0;
+.movie-layout-page .itg-h396-section .widget-settings {
+  top: 10px;
+  left: 10px;
 }
-.movie-layout-page .tech-block_5 .flexslider li .detail .flex-count {
-  display: none;
-}
-.movie-layout-page .tech-block_5 .flexslider li .detail .flex-caption {
-  background: rgba(255, 255, 255, 0.74);
-  font-size: 20px;
-  font-weight: 700;
-}
-.movie-layout-page .tech-block_5 .flexslider .flex-direction-nav {
-  display: block;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-}
-.movie-layout-page .tech-block_5 .flexslider .flex-direction-nav a {
-  width: 20px;
-  height: 20px;
-}
-.movie-layout-page .tech-block_5 .flexslider .flex-direction-nav a:before {
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  font-size: 20px;
-  background: #000;
-}
-.movie-layout-page .tech-block_8 .widget-title {
+.movie-layout-page .tech-block_8 .widget-title, .movie-layout-page .tech-block_8 .widget-settings {
   margin-bottom: 5px;
 }
 .movie-layout-page .osscar-video {
@@ -1857,8 +1885,9 @@ img {
 .movie-layout-page .osscar-video ul .dont-miss-listing + .dont-miss-listing {
   padding: 0px;
 }
-.movie-layout-page .section_wise_order-movies-celebrities .widget-title, .movie-layout-page .section_wise_order-movies-lifestyle .widget-title {
+.movie-layout-page .section_wise_order-movies-celebrities .widget-settings, .movie-layout-page .section_wise_order-movies-lifestyle .widget-settings {
   position: absolute;
+  z-index: 1;
 }
 .movie-layout-page .tech-in-depth ul li {
   overflow: hidden;

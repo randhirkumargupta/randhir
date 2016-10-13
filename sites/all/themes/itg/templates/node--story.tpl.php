@@ -201,8 +201,11 @@
           }
           print $buzz_output;
         }
+        
+        // prepare url for sharing
          $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
          $short_url = shorten_url($actual_link, 'goo.gl');
+         $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
         ?>
       
       <!-- condition for buzz end -->      
@@ -219,15 +222,15 @@
                         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
                         fjs.parentNode.insertBefore(js, fjs);
                       }(document, 'script', 'facebook-jssdk'));</script>
-                      <div class="fb-share-button" data-href="<?php print $short_url; ?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
+                      <a onclick='gogogo("<?php print $short_url;?>", "<?php print $node->title; ?>", "", "<?php print $image;?>")'><i class="fa fa-facebook"></i></a></li>
  
-<button onclick="gogogo('assdfs', 'alfl', 'alfmnl')">Share me, please</button>
+
 <script>
-function gogogo(linkurl, title, desc) {
+function gogogo(linkurl, title, desc, image) {
   FB.ui({
     method: 'feed',
-    link: 'http://devindiatodayonline.in',
-    picture: 'http://dev.indiatodayonline.in/sites/default/files/styles/widget_very_small/public/gallery/Unique-And-Beautiful-Wallpaper-HD.jpg',
+    link: linkurl,
+    picture: image,
     name: title,
     //caption: desc,
     description: desc
@@ -235,18 +238,33 @@ function gogogo(linkurl, title, desc) {
 }
   
 </script>
-  
+<?php
+function _cg_tweet_share($short_url, $message = '') {
+    $twitter_msg = strip_tags($node->title);
+    $twitter_share = 'http://twitter.com/share?text=' . urlencode($twitter_msg) . '&url=' . urlencode($short_url). '&via=indiatoday';
+    return $twitter_share;
+}
+?>
 <!-- script for twitter sharing -->
 <script type="text/javascript">
-  function twitter_popup($short_url, $title) {
-    newwindow=window.open('<?php echo addslashes('http://twitter.com/share?text=' . urlencode($title) . '&url=' . urlencode($short_url). '&via=indiatoday'); ?>','indiatoday','height=300,width=550,left=440,top=250');
+  function twitter_popup() {
+    newwindow=window.open('<?php echo addslashes(_cg_tweet_share()); ?>','indiatoday','height=500,width=550,left=440,top=250');
     if (window.focus) {newwindow.focus()}
     return false;
   }
 </script>
 <!-- twitter sharing end here -->
-                <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print $short_url;?>', '<?php print strip_tags($node->title); ?>')">Twitter</a></li>
-                <li class="mhide"><div class="g-plus" data-action="share" data-annotation="bubble"></div></li>
+
+<script>
+function googleplusbtn(url, titile, img) {
+  sharelink = "https://plus.google.com/share?url="+url+"&title=ankush";
+  newwindow=window.open(sharelink,'indiatoday','height=400,width=600,left=440,top=250');
+  if (window.focus) {newwindow.focus()}                                                                                                                                
+  return false;
+}   
+</script>
+<li class="mhide"><a href="javascript:" onclick="twitter_popup()"><i class="fa fa-twitter"></i></a></li>
+                <li class="mhide"><a title="share on google+" href="#" onclick='return googleplusbtn("<?php print $short_url;?>", "<?php print $node->title; ?>","<?php print $image;?>")'><i class="fa fa-google-plus"></i></a></li>
                 <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
                 <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>

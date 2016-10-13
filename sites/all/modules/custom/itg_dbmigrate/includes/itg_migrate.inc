@@ -77,7 +77,10 @@ function itg_dbmigrate_migrate_api() {
         'title' => t('Itg astro Imports'),
       ),
       'itg_recipe' => array(
-        'title' => t('Itg recipe Imports'),
+        'title' => t('Itg recipe Imports'),//pending
+      ),
+      'itg_photogallery' => array(
+        'title' => t('Itg Photogallery Imports'),
       ),
     ),
 
@@ -141,6 +144,10 @@ function itg_dbmigrate_migrate_api() {
       'ItgRecipe' => array(
         'class_name' => 'ItgRecipeMigration',
         'group_name' => 'itg_recipe',
+      ),
+      'ItgPhotogallery' => array(
+        'class_name' => 'ItgPhotogalleryMigration',
+        'group_name' => 'itg_photogallery',
       ),
     ),
     
