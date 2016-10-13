@@ -236,12 +236,17 @@ function gogogo(linkurl, title, desc) {
   
 </script>
   
-                <li class="mhide"><?php print itg_common_tweet_button($node->title, $short_url); ?></li>
-                  <li class="mhide"><!-- Place this tag in your head or just before your close body tag. -->
-                      <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-                      <!-- Place this tag where you want the share button to render. -->
-                      <div class="g-plus" data-action="share" data-annotation="bubble"></div></li>
+<!-- script for twitter sharing -->
+<script type="text/javascript">
+  function twitter_popup($short_url, $title, $medium) {
+    newwindow=window.open('<?php echo addslashes('http://twitter.com/share?text=' . urlencode($title) . '&url=' . urlencode($short_url). '&via=indiatoday'); ?>','indiatoday','height=300,width=550,left=440,top=250');
+    if (window.focus) {newwindow.focus()}
+    return false;
+  }
+</script>
+<!-- twitter sharing end here -->
+                <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print $short_url;?>', '<?php print strip_tags($node->title); ?>', 'indiatoday')">Twitter</a></li>
+                <li class="mhide"><div class="g-plus" data-action="share" data-annotation="bubble"></div></li>
                 <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
                 <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>
