@@ -690,7 +690,6 @@ function itg_event_backend_views_query_alter(&$view, &$query) {
             'value' => $start_date,
             'operator' => '>',
           );
-
           array_push($query->where[1]['conditions'], $event_start_where_condition);
         }
         elseif ($event_type == 2) {
