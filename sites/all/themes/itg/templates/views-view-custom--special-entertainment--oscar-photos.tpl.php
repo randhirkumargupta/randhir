@@ -2,14 +2,7 @@
 <div class="row">
 <?php foreach($rows as $index => $row){
     $desc=$row['title'];
-    if($row['field_story_kicker_text']!="")
-    {
-        $desc = $row['field_story_kicker_text'];
-    }else if($row['field_story_kicker_text']=="" && $row['body']!=""){
-         $desc = $row['body'];
-    }else if($row['field_story_expert_description']!=""){
-        $desc = $row['field_story_expert_description'];
-    }
+   
    
   ?>
     <div class="col-md-6">

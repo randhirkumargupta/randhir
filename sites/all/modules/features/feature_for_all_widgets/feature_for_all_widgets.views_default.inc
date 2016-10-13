@@ -534,6 +534,42 @@ function feature_for_all_widgets_views_default_views() {
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  /* Filter criterion: Section wise ordering content: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['content_type']['expose']['operator_id'] = 'content_type_op';
+  $handler->display->display_options['filters']['content_type']['expose']['label'] = 'Content type';
+  $handler->display->display_options['filters']['content_type']['expose']['operator'] = 'content_type_op';
+  $handler->display->display_options['filters']['content_type']['expose']['identifier'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'section-wise-content-ordering-list';
 
   /* Display: We may suggest widget ordering */

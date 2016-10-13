@@ -1547,6 +1547,9 @@ footer .footer-copyright {
   position: absolute;
 }
 
+.section-ordering a {
+  display: block;
+}
 .section-ordering h3 {
   padding: 15px 0;
   font-size: 20px;
@@ -4146,6 +4149,9 @@ footer .footer-copyright {
 .view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a, .view-so-sorry .view-content .photo-list li .tile a, .view-programme-content .view-content .photo-list li .tile a {
   color: #494949;
 }
+.view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-video-landing-header .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1) {
+  clear: left;
+}
 
 .view-video-landing-header .view-content .photo-list li .tile a {
   color: #b4b4b4;
@@ -4159,9 +4165,12 @@ footer .footer-copyright {
   max-height: 210px;
   overflow-y: hidden;
 }
-.view-video-landing-header .photo-list li {
+.view-video-landing-header .view-content .photo-list li {
   height: 210px;
   overflow: hidden;
+}
+.view-video-landing-header .view-content .photo-list li:nth-child(2n+1) {
+  clear: none;
 }
 
 /*CSS End Video landing Header*/

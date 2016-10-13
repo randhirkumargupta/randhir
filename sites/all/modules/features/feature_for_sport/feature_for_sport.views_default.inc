@@ -161,7 +161,10 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '24';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Title */
@@ -288,6 +291,80 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
   $handler->display->display_options['filters']['nid']['value']['value'] = '2005';
+
+  /* Display: photo list of category */
+  $handler = $view->new_display('page', 'photo list of category', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'photo list of category';
+  $handler->display->display_options['display_description'] = 'photo list of category';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'customstyle';
+  $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => 'video_landing_page_170_x_127',
+    'image_link' => 'content',
+  );
+  /* Field: Content: Gallery Image (field_gallery_image:delta) */
+  $handler->display->display_options['fields']['delta']['id'] = 'delta';
+  $handler->display->display_options['fields']['delta']['table'] = 'field_data_field_gallery_image';
+  $handler->display->display_options['fields']['delta']['field'] = 'delta';
+  $handler->display->display_options['fields']['delta']['group_type'] = 'count';
+  $handler->display->display_options['fields']['delta']['label'] = '';
+  $handler->display->display_options['fields']['delta']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['delta']['separator'] = '';
+  $handler->display->display_options['fields']['delta']['format_plural'] = TRUE;
+  $handler->display->display_options['fields']['delta']['format_plural_singular'] = '1 image';
+  $handler->display->display_options['fields']['delta']['format_plural_plural'] = '@count images';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'itg';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Section */
+  $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Section (field_story_category) */
+  $handler->display->display_options['arguments']['field_story_category_tid']['id'] = 'field_story_category_tid';
+  $handler->display->display_options['arguments']['field_story_category_tid']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['arguments']['field_story_category_tid']['field'] = 'field_story_category_tid';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['code'] = 'return $_GET[\'category\'];';
+  $handler->display->display_options['arguments']['field_story_category_tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_story_category_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_story_category_tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'photo-list';
   $export['sport_ipl'] = $view;
 
   return $export;
