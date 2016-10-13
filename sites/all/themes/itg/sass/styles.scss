@@ -4384,6 +4384,9 @@ footer{
                 border-bottom: 1px solid $border-color;
                 .dm-pic{
                    width: auto;
+                   a{
+                       display: block;
+                   }
                 }
             }
         }
@@ -5229,6 +5232,16 @@ footer{
                     }
                 }
             }        
+    }
+    .itg-h385-section{
+        .droppable{
+            height: 385px;
+        }
+    }
+    .itg-h396-section{
+        .droppable{
+            height: 385px;
+        }
     }
     .tech-block_5{
         .widget-title{
