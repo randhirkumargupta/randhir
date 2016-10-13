@@ -27,33 +27,27 @@
 
           <div class="dm-detail">
 
-            <?php $title=$node_data['node_load_data']->title;
-            if (!empty($node_data['custom_label'])) : ?>
-             <?php $title= $node_data['custom_label']; ?>
+            <?php if (!empty($node_data['custom_label'])) : ?>
+              <h4><?php print $node_data['custom_label']; ?></h4>
             <?php endif; ?>
 
-            <?php if (!empty($title)) : ?> 
+            <?php if (!empty($node_data['node_load_data']->title)) : ?> 
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/".$node_data["node_load_data"]->nid); ?>">
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['node_load_data']->nid ?>">
                
-                   <h4><?php echo mb_strimwidth($title, 0, 55, "..");?></h4>
+                   <?php echo mb_strimwidth($node_data['node_load_data']->title, 0, 110, "..");?>
                    </p></a>
               <?php  
              endif; 
-             if ($node_data['node_load_data']->field_gallery_kicer['und'][0]['value'] != "") {
-                    $desc = strip_tags($node_data['node_load_data']->field_gallery_kicer['und'][0]['value']);
-                }
-                
-             if ($node_data['node_load_data']->field_story_kicker_text['und'][0]['value'] != "") {
-                    $desc = strip_tags($node_data['node_load_data']->field_story_kicker_text['und'][0]['value']);
-                }
+            
+            /*        $desc = $node_data['node_load_data']->title;
                 
                 if($desc != "")
                 {?>
                <p class="review-desc review-desc-<?php echo $node_data['node_load_data']->nid ?>">
                 <?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
               </p>
-                <?php } ?>
+                <?php } */ ?>
           </div>
         </li>
       <?php } ?>

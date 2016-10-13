@@ -358,6 +358,7 @@ footer {
 
 /*css end special event page for osscar*/
 
+
 /*css start snappost page*/
  .page-snappost{
         .spanpost-header{               
@@ -434,9 +435,65 @@ footer {
 }
 /*CSS end education page special*/
 
+/*css start side bar section for video and photo*/
+.default-video .sidebar-section-photo, .default-photo .sidebar-section-photo{
+ border: none;   
+}
+/*css end side bar section for video and photo*/
 
 
 }
+
+@media only screen and (max-width:680px){ 
+    /*CSS start video landing page*/
+    #block-views-video-landing-header-block-1{
+        padding-bottom:0;
+        .view-header {
+            background: #171717;
+            padding:0;
+        }
+        .view-video-landing-header{
+            .defalt-bar{
+                overflow: inherit;
+            }
+            .view-content {
+                background: #171717;
+                padding: 0; 
+                overflow-x: inherit; 
+                .photo-list{
+                    max-height:inherit;                        
+                    li{
+                        margin-bottom: 20px;
+    padding: 0 10px;
+    height: auto;
+    width:100%;
+    .tile{
+                      figure{
+                        width: 144px;
+                        float: left;
+                        margin-right: 15px;    
+                        }    
+                    }                    
+                    } 
+                     i{
+                color: #ccc;
+                font-size: 25px;
+                text-align: center;
+                width: 100%;
+                &.fa-chevron-up{
+                    margin-bottom: 20px;
+                }
+                &.fa-chevron-down{
+                     margin-bottom: 10px;
+                }
+            }
+                } 
+            }
+        } 
+    }
+/*CSS end video landing page*/
+}
+
 
 
 

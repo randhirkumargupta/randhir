@@ -94,7 +94,7 @@ class ItgBylineMigration extends XMLMigration {
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
         $source_cid = (string) $final_category;
-        $orignal_category = get_itg_destination_id($source_cid);
+        $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
         $data_category[]['tid'] = $orignal_category;
       }
     }

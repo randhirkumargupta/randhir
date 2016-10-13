@@ -1,5 +1,5 @@
 /**
- * Plungin for poll
+ * Plungin for survey
  * @param {type} string
  * 
  */
@@ -9,10 +9,10 @@ function capitalise(string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-CKEDITOR.dialog.add('pollDialog', function(editor) {
+CKEDITOR.dialog.add('surveyDialog', function(editor) {
   return {
     // Basic properties of the dialog window: title, minimum size.
-    title: 'Poll',
+    title: 'Survey',
     minWidth: 400,
     minHeight: 200,
     
@@ -22,24 +22,22 @@ CKEDITOR.dialog.add('pollDialog', function(editor) {
         // Definition of the Basic Settings dialog tab (page).
         id: 'tab-basic',
         label: 'Basic Settings',
-       
+
         elements: [
           {
             type: 'text',
-            id: 'inset-polls-nid',
-            label: 'Poll',
-            className: 'polls-a',
+            id: 'inset-survey-nid',
+            label: 'Survey',
             validate: CKEDITOR.dialog.validate.notEmpty("This field cannot be empty.")
           },
           {
             type: 'button',
-            label: 'Get Polls',
-            title: 'Poll',
+            label: 'Get Survey',
+            title: 'Survey',
             onClick: function() {
-              editor.popup(Drupal.settings.basePath + 'pqs/associate-with-story/poll', 400, 600);
-              
+              editor.popup(Drupal.settings.basePath + 'pqs/associate-with-story/survey', 400, 600);
             }
-          },
+          }
         ]
       }
 
@@ -55,10 +53,10 @@ CKEDITOR.dialog.add('pollDialog', function(editor) {
       // Create a new <div> element.
       var dropcap = editor.document.createElement('div');
 
-      var title = dialog.getValueOf('tab-basic', 'inset-polls-nid');
+      var title = dialog.getValueOf('tab-basic', 'inset-survey-nid');
 
       // Set element attribute and text by getting the defined field values.
-      dropcap.setAttribute('class', 'poll');
+      dropcap.setAttribute('class', 'survey');
 
       dropcap.setText(title);
 

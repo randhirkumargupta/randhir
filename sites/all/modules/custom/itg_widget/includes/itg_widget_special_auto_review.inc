@@ -66,6 +66,8 @@ function itg_widget_tech_reviews_ordering_data($info) {
     $data = '';
     if (!empty($info)) {
         $widget_name = $info['widget_name'];
+        global $theme;
+     
         if(isset($_GET['section']) && !empty($_GET['section']))
         {
             $selction_name='section';
@@ -73,6 +75,9 @@ function itg_widget_tech_reviews_ordering_data($info) {
             $selction_name='section_name';
         }
          $cat_id = $_GET[$selction_name];
+          if ($theme == FRONT_THEME_NAME) {
+          $cat_id = arg(2);
+         }
         $result = get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,  $cat_id, DONT_MISS_MAX_RANGE, DONT_MISS_MIN_RANGE);
         $entity_data = array();
         foreach ($result as $entity_data_node) {
