@@ -202,9 +202,11 @@
           print $buzz_output;
         }
         
+         
         // prepare url for sharing
          $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
          $short_url = shorten_url($actual_link, 'goo.gl');
+         $fb_title = addslashes($node->title);
          $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
         ?>
       
@@ -222,7 +224,7 @@
                         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
                         fjs.parentNode.insertBefore(js, fjs);
                       }(document, 'script', 'facebook-jssdk'));</script>
-                      <a onclick="gogogo('<?php print $actual_link;?>', '<?php print $node->title; ?>', '', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                      <a onclick="gogogo('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
  
 
 <script>
@@ -265,7 +267,7 @@ function googleplusbtn(url, title, img) {
 }   
 </script>
 <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $short_url;?>')"><i class="fa fa-google-plus"></i></a></li>
+                <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
                 <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>
