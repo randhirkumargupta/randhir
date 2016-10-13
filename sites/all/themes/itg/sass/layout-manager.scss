@@ -1597,3 +1597,54 @@ img{
     }
 }
 /*CSS End for movie page*/
+
+/* CSS For Election Page */
+.election-page{
+  .left-side{
+    > .row{
+      margin-bottom: 50px;
+    }
+    .itg-graph{
+      .droppable{
+        height: 410px;
+      }
+    }
+    .itg-325-layout{
+      .droppable{
+        height: 325px;
+      }
+    }
+    .itg-map{
+      .droppable{
+        height: 375px;
+      }
+    }
+    .itg-most-popular{
+      .droppable{
+        height: 705px;
+      }
+    }
+    .itg-photo{
+      .droppable{
+        height: 484px;
+      }
+    }
+  }
+  .right-side{
+    .itg-320{
+      .droppable{
+        height: 320px;
+      }
+    }
+    .itg-484{
+      .droppable{
+        height: 484px;
+      }
+    }
+    .itg-460{
+      .droppable{
+        height: 460px;
+      }
+    }
+  }
+}

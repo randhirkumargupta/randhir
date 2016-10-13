@@ -45,6 +45,7 @@ function save_most_read_widget_data($most_read_content) {
  */
 function itg_widget_tech_most_read_ordering_data($info) {
     $data = '';
+global $theme;
     if (!empty($info)) {
         $widget_name = $info['widget_name'];
         $var_name = $info['query_var_name'];
@@ -55,7 +56,9 @@ function itg_widget_tech_most_read_ordering_data($info) {
             $selction_name='section_name';
         }
        $cat_id = $_GET[$selction_name];
-
+        if ($theme == FRONT_THEME_NAME) {
+          $cat_id = arg(2);
+         }
         
         $result = get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $cat_id, 3, 0);
         $entity_data = array();
