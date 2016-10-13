@@ -222,7 +222,7 @@
                         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
                         fjs.parentNode.insertBefore(js, fjs);
                       }(document, 'script', 'facebook-jssdk'));</script>
-                      <a onclick="gogogo('<?php print urlencode($actual_link);?>', '<?php print urlencode($node->title); ?>', '', '<?php print urlencode($image);?>')"><i class="fa fa-facebook"></i></a></li>
+                      <a onclick="gogogo('<?php print $actual_link;?>', '<?php print $node->title; ?>', '', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
  
 
 <script>
