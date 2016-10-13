@@ -51,7 +51,7 @@
                         // content block id for display content widget
                         var block_name = $(this).find('.data-holder').attr('id');
                         //  content block style for display content widget
-                        
+                        var wid_name=widget_name;
                         var splitewidgitname=widget_name.split('#');
                         if(splitewidgitname[0]=='section_wise_order') {
                             var widget_style = $(this).find('.data-holder').attr('widget-style');
@@ -61,6 +61,7 @@
                             else {
                               widget_info = 'custom|common-category-style';  
                             }
+                            wid_name='section_wise_order';
                         }
                         //alert(block_name);
                         // tamplate section value
@@ -102,7 +103,7 @@
                                 $('input[name = ' + block_name + ']').val(category_name_tab);
                                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
                                 $('.tab-buttons span[data-class="' + block_name + '"]').html(category_name_tab);
-                                $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + widget_name);
+                                $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
                                 //$('#block_name').html(category_name_tab);
                                 if (display_area) {
                                     $('#' + block_name).html(category_name_tab);
