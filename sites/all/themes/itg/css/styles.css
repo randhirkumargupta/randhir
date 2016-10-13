@@ -6557,6 +6557,12 @@ footer .footer-copyright {
   border: none;
   padding-top: 20px;
 }
+.movie-layout-page .itg-h385-section .droppable {
+  height: 385px;
+}
+.movie-layout-page .itg-h396-section .droppable {
+  height: 385px;
+}
 .movie-layout-page .tech-block_5 .widget-title {
   top: 0;
   left: 15px;
