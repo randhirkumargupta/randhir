@@ -99,10 +99,24 @@
         vertical-align: top;
     }
 }
-/*CSS End Photo and video header crusal page*/
-  
+/*CSS End Photo and video header crusal page*/  
 }   
-
+@media only screen and (max-width:991px){
+/*CSS start education page special*/
+.education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
+    height: auto;
+}
+.education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
+    margin-bottom: 50px;
+}
+.education-layout-page .auto-block-3 .m-bottom40{
+    margin-bottom: 0;
+}
+.education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news{
+    margin: 0;
+}
+/*CSS end education page special*/
+}
 
 @media only screen and (max-width:768px){
     header {
@@ -344,6 +358,7 @@ footer {
 
 /*css end special event page for osscar*/
 
+
 /*css start snappost page*/
  .page-snappost{
         .spanpost-header{               
@@ -414,9 +429,71 @@ footer {
 }
 /*css end snappost page*/
 
+/*CSS start education page special*/
+.education-layout-page .auto-block-3 .m-bottom40{
+    margin-bottom: 40px;
+}
+/*CSS end education page special*/
+
+/*css start side bar section for video and photo*/
+.default-video .sidebar-section-photo, .default-photo .sidebar-section-photo{
+ border: none;   
+}
+/*css end side bar section for video and photo*/
 
 
 }
+
+@media only screen and (max-width:680px){ 
+    /*CSS start video landing page*/
+    #block-views-video-landing-header-block-1{
+        padding-bottom:0;
+        .view-header {
+            background: #171717;
+            padding:0;
+        }
+        .view-video-landing-header{
+            .defalt-bar{
+                overflow: inherit;
+            }
+            .view-content {
+                background: #171717;
+                padding: 0; 
+                overflow-x: inherit; 
+                .photo-list{
+                    max-height:inherit;                        
+                    li{
+                        margin-bottom: 20px;
+    padding: 0 10px;
+    height: auto;
+    width:100%;
+    .tile{
+                      figure{
+                        width: 144px;
+                        float: left;
+                        margin-right: 15px;    
+                        }    
+                    }                    
+                    } 
+                     i{
+                color: #ccc;
+                font-size: 25px;
+                text-align: center;
+                width: 100%;
+                &.fa-chevron-up{
+                    margin-bottom: 20px;
+                }
+                &.fa-chevron-down{
+                     margin-bottom: 10px;
+                }
+            }
+                } 
+            }
+        } 
+    }
+/*CSS end video landing page*/
+}
+
 
 
 

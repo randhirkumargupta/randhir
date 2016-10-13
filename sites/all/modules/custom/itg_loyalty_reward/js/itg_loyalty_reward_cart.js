@@ -40,20 +40,15 @@
                         var elementName = element.attr('name');
                         var errorPlaceHolder = '';
                         switch (elementName) {
-                            case 'field_astro_frequency[und]':
-                                errorPlaceHolder = $('#edit-title').parent();
-                                break;
-                            case 'field_astro_date_range[und][0][value2][date]':
-                                errorPlaceHolder = element.parent().parent();
-                                break;
                             default:
-                                errorPlaceHolder = element.parent();
+                                errorPlaceHolder = element.parent().parent().parent();
                         }
                         error.appendTo(errorPlaceHolder);
                     },
                     rules: {
                         'name': {
-                            required: true
+                            required: true,
+                            lettersonly: true
                         },
                         'email': {
                             required: true,
@@ -61,27 +56,38 @@
                         },
                         'phone': {
                             required: true,
+                            minlength: 10,
+                            maxlength: 10,
+                            number: true
                         },
                         'address': {
                             required: true,
+                            alphanumeric: true
                         },
                         'city': {
                             required: true,
+                            lettersonly: true
                         },
                         'zip_code': {
                             required: true,
+                            minlength: 6,
+                            maxlength: 6,
+                            number: true
                         }
                     },
                     messages: {
                         'name': {
-                            required: 'Name field is required.'
+                            required: 'Name field is required.',
                         },
                         'email': {
                             required: 'Email field is required.',
-                            email: 'Please enter a valid email address.'
+                            fullemail: 'Please enter a valid Email Address.'
                         },
                         'phone': {
-                            required: 'Phone field is required.'
+                            required: 'Phone field is required.',
+                            maxlength: 'Please enter valid Phone Number.',
+                            minlength: 'Please enter valid Phone Number.',
+                            number: 'Please enter valid Phone Number'
                         },
                         'address': {
                             required: 'Address field is required.'
@@ -90,14 +96,27 @@
                             required: 'City field is required.'
                         },
                         'zip_code': {
-                            required: 'City field is required.'
+                            required: 'Zip Code field is required.',
+                            maxlength: 'Please enter valid Zip Code.',
+                            minlength: 'Please enter valid Zip Code.',
+                            number: 'Please enter valid Zip Code.'
                         }
                     }
                 });
+                jQuery.validator.addMethod("lettersonly", function (value, element) {
+                    return this.optional(element) || /^[a-z\s]+$/i.test(value.trim());
+                }, "Please enter letters only.");
+                $.validator.addMethod("alphanumeric", function (value, element) {
+                    return this.optional(element) || /^[a-z0-9\-\s]+$/i.test(value);
+                }, "Address must contain only letters, numbers, or dashes.");
+                $.validator.addMethod("fullemail", function (value, element) {
+                    return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+                }, "Address must contain only letters, numbers, or dashes.");
             }
 
+
             // Code for points earning callbacks.
-            $('.share, .like, .visit').on('click', function () {
+            $('.share, .like, .visit, .follow, .ns, .ugc, .ol-register, .participate, .raf').on('click', function () {
                 //console.log(Drupal.settings.itg_loyalty_reward);
                 var base_url = Drupal.settings.itg_loyalty_reward.base_url;
                 var event_type = $(this).attr('class');
@@ -106,8 +125,11 @@
                     type: 'POST',
                     dataType: 'JSON',
                     data: {'type': event_type},
+                    beforeSend: function (xhr) {
+                        test_loader_show();
+                    },
                     success: function (itg) {
-                        
+                        test_loader_hide();
                     }
                 });
             });
@@ -130,6 +152,18 @@
                 $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
 
             });
+            // Display loader onclick of add to cart link.
+            $('.btn-add-cart, .itg-remove-product').on('click', function () {
+                test_loader_show();
+            });
+
+            function test_loader_show() {
+                $('#widget-ajex-loader').show();
+            }
+            function test_loader_hide() {
+                $('#widget-ajex-loader').hide();
+            }
+
 
             // Code end for product page.
 

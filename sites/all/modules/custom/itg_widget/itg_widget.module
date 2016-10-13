@@ -103,7 +103,7 @@ function itg_widget_menu() {
   );
 
   $items['test_function_callback'] = array(
-      'page callback' => 'get_personalization_front_data', // load the croper according to size!.
+      'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
       'type' => MENU_CALLBACK,
       'access arguments' => array('access content'),
   );
@@ -216,9 +216,12 @@ function itg_widget_block_info() {
    $blocks['tech_most_read'] = array(
       'info' => t('Widget: Tech most read from custom table'),
   );
-    $blocks['movies_reviews'] = array(
+  $blocks['movies_reviews'] = array(
       'info' => t('Widget:  Movies Reviews from custom table'),
   );
+  $blocks['ipl_tweets'] = array(
+    'info' => t('IPL Tweets')
+  );  
 
   return $blocks;
 }
@@ -610,7 +613,13 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("auto_reviews", array("data" => $data));
       break;
+  case 'ipl_tweets':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');  
+      $block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
+      $block['content'] = ipl_tweets();
+      break;
   }
+  
  
   return $block;
 }

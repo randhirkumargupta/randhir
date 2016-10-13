@@ -1403,7 +1403,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
     }
     form{
-      text-align: center;
+      text-align: left;
       padding-bottom: 20px;
       label{
         display: inline-block;
@@ -1412,9 +1412,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
       .form-radios{
         .form-item{
-          display: inline-block;
-          vertical-align: top;
-          margin: 0 10px;
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 5px;
+            padding-bottom: 0;
+            width: 49%;
           .form-radio{
             float: left;
             margin: 3px 2px 0 0;
@@ -1431,9 +1433,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         height: 36px;
         font-weight: 500;
         font-family: Roboto;
-        margin-top: 20px;
-        font-size: 500;
+        margin-top: 20px;        
         color: #323232;
+        margin: 0 auto;
+        display: inherit;
       }
   }
 }
