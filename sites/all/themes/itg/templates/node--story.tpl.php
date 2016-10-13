@@ -201,7 +201,11 @@
           }
           print $buzz_output;
         }
+        
+        // prepare url for sharing
          $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+         $short_url = shorten_url($actual_link, 'goo.gl');
+         $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
         ?>
       
       <!-- condition for buzz end -->      
@@ -215,16 +219,53 @@
                         var js, fjs = d.getElementsByTagName(s)[0];
                         if (d.getElementById(id)) return;
                         js = d.createElement(s); js.id = id;
-                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1050682001621663";
+                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
                         fjs.parentNode.insertBefore(js, fjs);
                       }(document, 'script', 'facebook-jssdk'));</script>
-                      <div class="fb-share-button" data-href="<?php print $actual_link; ?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
-                  <li class="mhide"><?php print itg_common_tweet_button($node->title); ?></li>
-                  <li class="mhide"><!-- Place this tag in your head or just before your close body tag. -->
-                      <script src="https://apis.google.com/js/platform.js" async defer></script>
+                      <a onclick="gogogo('<?php print $actual_link;?>', '<?php print $node->title; ?>', '', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+ 
 
-                      <!-- Place this tag where you want the share button to render. -->
-                      <div class="g-plus" data-action="share" data-annotation="bubble"></div></li>
+<script>
+function gogogo(linkurl, title, desc, image) {
+  FB.ui({
+    method: 'feed',
+    link: linkurl,
+    picture: image,
+    name: title,
+    //caption: desc,
+    description: desc
+  });
+}
+  
+</script>
+<?php
+//function _cg_tweet_share($twitter_msg, $actual_link) {
+//    $twitter_msg = strip_tags($twitter_msg);
+//    $twitter_share = 'http://twitter.com/share?text=' . urlencode(strip_tags($twitter_msg)) . '&url=' . urlencode(shorten_url($actual_link, 'goo.gl')). '&via=indiatoday';
+//    return $twitter_share;
+//}
+?>
+<!-- script for twitter sharing -->
+<script type="text/javascript">
+  function twitter_popup(title, url) {
+    tweetlink = "http://twitter.com/share?text="+title+"&url="+url+"&via=indiatoday";
+    newwindow=window.open(tweetlink,'indiatoday','height=500,width=550,left=440,top=250');
+    if (window.focus) {newwindow.focus()}
+    return false;
+  }
+</script>
+<!-- twitter sharing end here -->
+
+<script>
+function googleplusbtn(url, title, img) {
+  sharelink = "https://plus.google.com/share?url="+url;
+  newwindow=window.open(sharelink,'indiatoday','height=400,width=600,left=440,top=250');
+  if (window.focus) {newwindow.focus()}                                                                                                                                
+  return false;
+}   
+</script>
+<li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $short_url;?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
                 <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>
