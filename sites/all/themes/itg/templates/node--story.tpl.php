@@ -202,6 +202,7 @@
           print $buzz_output;
         }
          $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+         $short_url = shorten_url($actual_link, 'goo.gl');
         ?>
       
       <!-- condition for buzz end -->      
@@ -218,8 +219,35 @@
                         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1050682001621663";
                         fjs.parentNode.insertBefore(js, fjs);
                       }(document, 'script', 'facebook-jssdk'));</script>
-                      <div class="fb-share-button" data-href="<?php print $actual_link; ?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
-                  <li class="mhide"><?php print itg_common_tweet_button($node->title); ?></li>
+                      <div class="fb-share-button" data-href="<?php print $short_url; ?>" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
+                
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+</script>
+
+<button onclick="gogogo('assdfs', 'alfl', 'alfmnl')">Share me, please</button>
+<script>
+function gogogo(linkurl, title, desc) {
+  FB.ui({
+    method: 'feed',
+    link: 'http://devindiatodayonline.in',
+    picture: 'http://dev.indiatodayonline.in/sites/default/files/styles/widget_very_small/public/gallery/Unique-And-Beautiful-Wallpaper-HD.jpg',
+    name: title,
+    //caption: desc,
+    description: desc
+  });
+}
+  
+</script>
+  
+                <li class="mhide"><?php print itg_common_tweet_button($node->title, $short_url); ?></li>
                   <li class="mhide"><!-- Place this tag in your head or just before your close body tag. -->
                       <script src="https://apis.google.com/js/platform.js" async defer></script>
 

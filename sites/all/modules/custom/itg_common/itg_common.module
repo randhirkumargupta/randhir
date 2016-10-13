@@ -763,9 +763,16 @@ function itg_common_views_pre_render(&$view) {
  * Implement itg_common_tweet_button
  * @param string $title
  */
-function itg_common_tweet_button($title) {  
+function itg_common_tweet_button($title, $link) {  
   
   return '<a class="twitter-share-button"
-                                 href="https://twitter.com/intent/tweet?text='.$title.'" data-via="indiatoday">
-                                  Tweet</a>';
+  href="https://twitter.com/share"
+  data-size="large"
+  data-url="'.$link.'"
+  data-via="indiatoday"
+  data-related="twitterapi,twitter"
+  data-hashtags=""
+  data-text="'.$title.'">
+Tweet
+</a>';
 }
