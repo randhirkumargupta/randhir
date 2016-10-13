@@ -35,7 +35,8 @@ CKEDITOR.dialog.add('surveyDialog', function(editor) {
             label: 'Get Survey',
             title: 'Survey',
             onClick: function() {
-              editor.popup(window.location.host + '/pqs/associate-with-story/survey', 400, 600);
+              var bas_path = window.location.origin?window.location.origin+'/':window.location.protocol+'/'+window.location.host+'/';
+              editor.popup(bas_path + 'pqs/associate-with-story/survey', 400, 600);
             }
           }
         ]
