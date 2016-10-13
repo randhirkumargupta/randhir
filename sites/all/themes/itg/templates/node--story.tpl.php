@@ -222,7 +222,7 @@
                         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
                         fjs.parentNode.insertBefore(js, fjs);
                       }(document, 'script', 'facebook-jssdk'));</script>
-                      <a onclick='gogogo("<?php print $short_url;?>", "<?php print $node->title; ?>", "", "<?php print $image;?>")'><i class="fa fa-facebook"></i></a></li>
+                      <a onclick="gogogo('<?php print $short_url;?>', '<?php print $node->title; ?>', '', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
  
 
 <script>
@@ -257,14 +257,14 @@ function _cg_tweet_share($short_url, $message = '') {
 
 <script>
 function googleplusbtn(url, titile, img) {
-  sharelink = "https://plus.google.com/share?url="+url+"&title=ankush";
+  sharelink = "https://plus.google.com/share?url="+url;
   newwindow=window.open(sharelink,'indiatoday','height=400,width=600,left=440,top=250');
   if (window.focus) {newwindow.focus()}                                                                                                                                
   return false;
 }   
 </script>
 <li class="mhide"><a href="javascript:" onclick="twitter_popup()"><i class="fa fa-twitter"></i></a></li>
-                <li class="mhide"><a title="share on google+" href="#" onclick='return googleplusbtn("<?php print $short_url;?>", "<?php print $node->title; ?>","<?php print $image;?>")'><i class="fa fa-google-plus"></i></a></li>
+                <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $short_url;?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
                 <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>
