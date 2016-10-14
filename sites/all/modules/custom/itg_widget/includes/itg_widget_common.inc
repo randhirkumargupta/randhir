@@ -429,6 +429,11 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
             $sydication_field_name = 'field_story_syndication_value_op';
             $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
         }
+        
+        if($form['#id'] == 'views-exposed-form-recipe-management-page') {
+          $query_url = array("field_story_syndication_value_1_op" => "all");
+        }
+        
         unset($form[$sydication_field_name]['#options']);
         $form[$sydication_field_name]['#options']['all'] = '- Any -';
         $form[$sydication_field_name]['#options']['or'] = 'Yes';
