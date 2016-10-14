@@ -2,6 +2,11 @@
 @import "itg-variables";
 @import "itg-mixins";
 @media only screen and (max-width:1200px){
+     body{
+        -webkit-text-size-adjust: none;
+        -moz-text-size-adjust: none;
+        text-size-adjust: none;
+    }
     #block-views-photo-landing-slider-block{
         width: 100%;
     }
@@ -441,6 +446,28 @@ footer {
 }
 /*css end side bar section for video and photo*/
 
+ /*CSS Starts Photo landing page*/
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content{
+        .view-content{      
+            .photo-list{
+                li{ 
+                    @include calculate-width(3);
+                    padding:15px 10px;
+                    &:nth-child(4n+1){
+                        clear: none;
+                    }
+                    &:nth-child(3n+1){
+                        clear: left;
+                    }
+                }
+            }
+        }
+    }
+    /*CSS End Photo landing page*/
+
+
+
+
 
 }
 
@@ -475,9 +502,9 @@ footer {
                         }    
                     }                    
                     } 
-                     i{
+                     > i{
                 color: #ccc;
-                font-size: 25px;
+                font-size: 20px;
                 text-align: center;
                 width: 100%;
                 &.fa-chevron-up{
@@ -495,7 +522,25 @@ footer {
 }
 
 
-
+@media only screen and (max-width:560px){ 
+    /*CSS Starts Photo landing page*/
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content{
+        .view-content{      
+            .photo-list{
+                li{       
+                    @include calculate-width(2);
+                    &:nth-child(3n+1){
+                        clear: none;
+                    }
+                    &:nth-child(2n+1){
+                        clear: left;
+                    }
+                }
+            }
+        }
+    }
+    /*CSS End Photo landing page*/
+}
 
 /*Start header CSS Desktop version*/
 @media only screen and (min-width:769px){        
@@ -539,6 +584,9 @@ footer {
         /*padding: 20px 0px 0px 10px;*/
         ul{
             .dont-miss-listing{
+                .dm-pic{
+                    width: 170px;                
+                }
                 @include float(left);
                 @include calculate-width(2);
                 padding: 0px 10px 25px 0;
@@ -568,7 +616,7 @@ footer {
     /*CSS End year end top news*/
 
     /*Start photo section slider Homepage*/
-    .featured_photo_carousel{
+    .featured_photo_carousel, .tech-block_5, .auto-block_5{
         .flexslider .flex-direction-nav{
             display: block;
         }       
@@ -825,25 +873,7 @@ footer {
         }    
     }
     /*End category wise content list css*/
-
-    /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content{
-        .view-content{      
-            .photo-list{
-                li{
-                    padding: 15px;
-                    width: 25%; 
-                    &:nth-child(2n+1){
-                        clear: none;
-                    }
-                    &:nth-child(4n+1){
-                        clear: left;
-                    }
-                }
-            }
-        }
-    }
-    /*CSS End Photo landing page*/
+   
     /* start side bar common */
     .sidebar-second{
         .may-be-suggest-container, .top-takes-video-container, .watch-right-now-video{

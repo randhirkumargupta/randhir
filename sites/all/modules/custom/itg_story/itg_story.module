@@ -136,8 +136,15 @@ function itg_story_form_custom_callback($form, &$form_state) {
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-
-  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+  
+  $request_destination = $_REQUEST['destination'];
+  $redirect_path = $_REQUEST['destination'];
+  
+  if($request_destination == 'published-story') {
+    $redirect_path .=  "?field_story_syndication_value_op=all";
+  }
+  
+  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
 }
 
 /**
@@ -614,19 +621,19 @@ function get_breaking_id($breaking_id) {
  */
 function itg_common_tv_time($id = '') {
 
-  $final_id = date('Y/m/d', strtotime($id));
-  if (function_exists('mongodb')) {
-    $db = mongodb();
-    $people = $db->tv_schedule;
-    $date = $final_id;
-    $cond = array('program date' => $date);
-    $cursor = $people->find($cond);
-    // Fetch query for supplements
-    $select = t('- None -');
-    $data = array('_none' => $select);
-    foreach ($cursor as $document) {
-      $data[$document['time']] = $document['time'];
-    }
-    return $data;
-  }
+//  $final_id = date('Y/m/d', strtotime($id));
+//  if (function_exists('mongodb')) {
+//    $db = mongodb();
+//    $people = $db->tv_schedule;
+//    $date = $final_id;
+//    $cond = array('program date' => $date);
+//    $cursor = $people->find($cond);
+//    // Fetch query for supplements
+//    $select = t('- None -');
+//    $data = array('_none' => $select);
+//    foreach ($cursor as $document) {
+//      $data[$document['time']] = $document['time'];
+//    }
+//    return $data;
+//  }
 }
