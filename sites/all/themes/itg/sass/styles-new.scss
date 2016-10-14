@@ -2693,13 +2693,12 @@ body.has-cart-popup{
   }
   
 }
-.page-mobile-services-feed table{
+.page-mobile-services-feed{
   .views-table{
-    width: 100%;
-    max-width: 860px;
     border-collapse: collapse;
-    border-radius: 5px;
-    margin: 0 auto;
+    font: 400 14px/18px Roboto;
+    margin: 40px 0 30px;
+    width: 100%;
     th{
       background-color: #1a3c8d;
       color: #fff;
@@ -2707,7 +2706,6 @@ body.has-cart-popup{
       &:first-child{
         border-radius: 5px 0 0 0;
         border-left: 1px solid #e0e0e0;
-        min-width: 300px;
         text-align: left;
       }
       &:last-child{

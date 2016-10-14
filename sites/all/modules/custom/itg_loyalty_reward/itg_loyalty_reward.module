@@ -6,6 +6,7 @@
  * Contains functionality for loyalty and rewards point.
  *
  */
+module_load_include('inc', 'itg_loyalty_reward', 'includes/itg_loyalty_reward_earn.point');
 
 /**
  * Implement hook_permission
