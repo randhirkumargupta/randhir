@@ -4494,9 +4494,12 @@ footer{
 .oscar-layout-page{
     .osscar-video{
         background: transparent;   
-        ul .dont-miss-listing + .dont-miss-listing {
+        ul .dont-miss-listing{
+         padding:0; 
+            + .dont-miss-listing {
             padding: 25px 0px 0px 0px;
         }
+        } 
     }    
     .oscor-photo{
         .col-md-6{
@@ -4504,7 +4507,9 @@ footer{
             &:nth-child(n+3){
                 margin-top: 30px;
             }
-        
+            :nth-child(2n+1){
+                clear: left;
+            }        
         .title{
             h3{
                 padding: 15px;
@@ -5187,6 +5192,20 @@ footer{
                     }
                 }
             }
+            .auto-block-2{
+        border: 1px solid #ddd;
+        .special-top-news{
+            position: relative;
+            overflow: hidden;
+            .widget-title{
+                position: absolute;
+            }
+            .itg-listing{
+                padding-top: 20px;
+                border: none;
+            }
+        }
+    }
     }
     .itg-layout-225{
         .droppable {
@@ -5233,12 +5252,25 @@ footer{
     }
     .section_wise_order-sport-column{
         .trending-videos{
-            border: none;                         
-           + .trending-videos-list{
-                border-top: none;
-                padding: 30px 0 0 0;           
+            border: none;
+                .trending-videos-list{
+                border: none;    
+                padding:0;
+                + .trending-videos-list{
+                    border-top: none;
+                    padding: 30px 0 0 0;           
+                }     
             }
+
         }        
+    }
+    .tech-block_5{
+        .widget-title{
+         @include pos(relative);
+         left: 0;
+         top: 0;
+         margin-bottom: 10px;
+        }
     }
 }
 /*CSS End sport home page*/
@@ -5385,6 +5417,6 @@ footer{
             top:10px;
             left:10px;
         }
-    }
+    }    
 }
 /*CSS End for movie page*/

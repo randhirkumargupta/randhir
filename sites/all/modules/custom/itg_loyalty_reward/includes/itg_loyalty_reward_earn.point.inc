@@ -40,19 +40,24 @@ function itg_loyalty_reward_testpoints() {
  * 
  * @global stdObject $user
  */
-function itg_loyalty_reward_earnpoint() {
+function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL) {
   global $user;
   // Check user unique expiration key.
   $unique_exp_key = itg_loyalty_reward_unique_expiration($user->uid);
   $time_span = variable_get('lrp_loyality_points_expiry');
-  $inputs = $_POST;
+  if (isset($_POST['type'])) {
+    $inputs = $_POST;    
+  }
+  else {
+    $inputs['type'] = $type;    
+  }  
   $dedicated_point = itg_loyalty_reward_dedicated_point(check_plain($inputs['type']));
   $point_presave = array(
     'uid' => $user->uid,
     'loyalty_type' => $dedicated_point['label'],
     'loyalty_points' => $dedicated_point['point'],
     'pointer_key' => $unique_exp_key != '' ? $unique_exp_key : '',
-    'node_id' => 1,
+    'node_id' => $nid != NULL ? $nid : 0,
     'created' => REQUEST_TIME,
   );
   $flag = '';
