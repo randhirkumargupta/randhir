@@ -49,7 +49,7 @@ class itg_personalization_field_handler_tid_edit extends views_handler_field {
       $default_value = isset($tid_weight->weight) ? $tid_weight->weight : 50;
       $form['markup'] = array(
         '#type' => 'markup',
-        '#markup' => '<div><span>Low</span><span>High</span></div>',
+        '#markup' => '<div class="personalization-low-high"><span>Low</span><span>High</span></div>',
       );
       $form[$this->options['id']][$row_index] = array(                
         '#type' => 'slider',

@@ -586,6 +586,11 @@ function forms_uses_checked_content_id() {
         'views_form_photo_carousel_widget_photo_carousel_list',
         'views_form_photo_carousel_widget_video_carousel_list',
         'views_form_so_sorry_so_sorry_videos',
+        'views_form_special_auto_review_widget_special_auto_review_widget_contents',
+        'views_form_special_how_i_made_it_special_how_made_it_widget_contents' ,
+        'views_form_yearender_top_news_and_top_videos_yearend_left_widget_contents' ,
+        'views_form_most_read_widget_most_read_widget_contents' ,
+        'views_form_issue_base_magazin_widget_issue_base_magazin_widget' ,
     );
 }
 
@@ -1204,6 +1209,11 @@ function itg_widget_preprocess_views_view(&$vars) {
         'section_wise_draggable_content_order',
         'photo_carousel_widget',
         'so_sorry',
+        'special_auto_review_widget' ,
+        'special_how_i_made_it' ,
+        'yearender_top_news_and_top_videos' ,
+        'most_read_widget' ,
+        'issue_base_magazin_widget' ,
     );
     if (in_array($view_name, $widget_views)) {
         $vars['classes_array'][] = 'widgets-view';
