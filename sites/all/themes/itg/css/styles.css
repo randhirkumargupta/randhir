@@ -6624,6 +6624,93 @@ footer .footer-copyright {
 .sport-home-layout-page .sports-video ul figure {
   margin-bottom: 10px;
 }
+.sport-home-layout-page .poll-wrapper .poll-data {
+  border: none;
+  padding: 10px;
+}
+.sport-home-layout-page .poll-wrapper .active-poll-title h2 {
+  font-size: 17px;
+  font-size: 1.0625rem;
+}
+.sport-home-layout-page .poll-wrapper .active-poll-title .updated-msg {
+  display: none;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id {
+  margin-top: 10px;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .form-submit {
+  background: #000;
+  border: 1px solid #000;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 18px;
+  box-shadow: 4px 4px 0 #00b3e6;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:last-child {
+  margin-bottom: 0;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(1) .poll-progress-bar {
+  background-color: #cc0000;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(2) .poll-progress-bar {
+  background-color: #000099;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(3) .poll-progress-bar {
+  background-color: #ffcc00;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(4) .poll-progress-bar {
+  background-color: #cc0000;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(5) .poll-progress-bar {
+  background-color: #000099;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(6) .poll-progress-bar {
+  background-color: #ffcc00;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(7) .poll-progress-bar {
+  background-color: #cc0000;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(8) .poll-progress-bar {
+  background-color: #000099;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(9) .poll-progress-bar {
+  background-color: #ffcc00;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(10) .poll-progress-bar {
+  background-color: #cc0000;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(11) .poll-progress-bar {
+  background-color: #000099;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li:nth-child(12) .poll-progress-bar {
+  background-color: #ffcc00;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .past-poll li .poll-progress-bar {
+  display: inline-block;
+  vertical-align: top;
+  height: 18px;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .poll-answer-text {
+  float: left;
+  width: 100px;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .noofvotes, .sport-home-layout-page .poll-wrapper .poll-replace-id .percentage {
+  float: left;
+  width: 100px;
+  padding-left: 20px;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id .poll-past-percentage-progess {
+  width: 120px;
+  float: left;
+}
 
 /*CSS End sport home page*/
 /*CSS start for movie page*/

@@ -1443,6 +1443,10 @@ img{
         font-size: 16px;
         padding: 0 10px;
     }
+    .widget-settings{
+        display: block;        
+        background: #5585f6;
+    }
     .droppable {
         overflow: hidden;
     }
@@ -1473,7 +1477,7 @@ img{
             position: relative;
             overflow: hidden;
             .widget-title{
-                position: absolute;
+/*                position: absolute;*/
             }
             .itg-listing{
                 padding-top: 20px;
@@ -1486,7 +1490,7 @@ img{
         .droppable {
             height: 225px;            
         }
-        .widget-title{
+        .widget-settings{
             margin-bottom: 10px;
         }
     }
@@ -1554,8 +1558,7 @@ img{
         .widget-title{
          @include pos(relative);
          left: 0;
-         top: 0;
-         margin-bottom: 10px;
+         top: 0;         
         }
         .view-content{
             padding: 5px;
@@ -1621,6 +1624,98 @@ img{
                 margin-bottom: 10px;
             }            
         }   
+    }
+    .poll-wrapper{ 
+        .poll-data{
+            border: none;
+            padding: 10px;            
+        }
+        .active-poll-title{
+            h2{
+                @include font(17px);
+            }
+            .updated-msg{
+                display: none;
+            }
+        }
+        .poll-replace-id{
+            margin-top:10px;
+            .form-submit {
+                background: #000;
+                border: 1px solid #000;
+                color: #fff;
+                text-transform: uppercase;
+                cursor: pointer;
+                padding: 12px;
+                font-size: 18px;
+                box-shadow: 4px 4px 0 #00b3e6;
+            }
+            .past-poll{
+                li{
+                    width: 100%;
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-bottom: 10px;
+                    &:last-child{
+                        margin-bottom: 0;
+                    }
+                    &:nth-child(1) .poll-progress-bar{
+                        background-color: #cc0000;
+                    }
+                    &:nth-child(2) .poll-progress-bar{
+                        background-color: #000099;
+                    }
+                    &:nth-child(3) .poll-progress-bar{
+                        background-color: #ffcc00;
+                    }
+                    &:nth-child(4) .poll-progress-bar{
+                        background-color: #cc0000;
+                    }
+                    &:nth-child(5) .poll-progress-bar{
+                        background-color: #000099;
+                    }
+                    &:nth-child(6) .poll-progress-bar{
+                        background-color: #ffcc00;
+                    }
+                    &:nth-child(7) .poll-progress-bar{
+                        background-color: #cc0000;
+                    }
+                    &:nth-child(8) .poll-progress-bar{
+                        background-color: #000099;
+                    }
+                    &:nth-child(9) .poll-progress-bar{
+                        background-color: #ffcc00;
+                    }
+                    &:nth-child(10) .poll-progress-bar{
+                        background-color: #cc0000;
+                    }
+                    &:nth-child(11) .poll-progress-bar{
+                        background-color: #000099;
+                    }
+                    &:nth-child(12) .poll-progress-bar{
+                        background-color: #ffcc00;
+                    }
+                    .poll-progress-bar{
+                        display: inline-block;
+                        vertical-align: top;
+                        height: 18px;
+                    }
+                }
+            }
+            .poll-answer-text{
+                float: left;
+                width: 100px;
+            }
+            .noofvotes, .percentage{
+                float: left;
+                width: 100px;
+                padding-left: 20px;
+            }
+            .poll-past-percentage-progess{
+                width: 120px;
+                float: left;
+            }
+        } 
     }
 }
 /*CSS End sport home page*/
