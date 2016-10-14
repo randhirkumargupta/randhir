@@ -348,6 +348,10 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['title'] = 'Oscar Photos';
   $handler->display->display_options['display_description'] = 'Oscar Photos';
   $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
@@ -408,7 +412,38 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '430';
+  $handler->display->display_options['filters']['cat_id']['value'] = '439';
+  $handler->display->display_options['filters']['cat_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['cat_id']['expose']['operator_id'] = 'cat_id_op';
+  $handler->display->display_options['filters']['cat_id']['expose']['label'] = 'Category';
+  $handler->display->display_options['filters']['cat_id']['expose']['operator'] = 'cat_id_op';
+  $handler->display->display_options['filters']['cat_id']['expose']['identifier'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+  );
 
   /* Display: Entertainment Oscar Slider */
   $handler = $view->new_display('block', 'Entertainment Oscar Slider', 'entertainment_oscar_slider');
@@ -516,7 +551,12 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '445';
+  $handler->display->display_options['filters']['cat_id']['value'] = '516';
+  /* Filter criterion: Section wise ordering content: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
   $export['special_entertainment'] = $view;
 
   return $export;

@@ -396,7 +396,8 @@ function itg_menu_manager_form_submit($form, &$form_state) {
                 'url_type' => $url_type,
                 'menu_name' => "blank",
                 'section_id' => $sections,
-                'tid' => $term_id
+                'tid' => $term_id,
+                'created' => time(),
             ))
             ->execute();
 

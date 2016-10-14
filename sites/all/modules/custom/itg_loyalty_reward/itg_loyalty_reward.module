@@ -6,6 +6,7 @@
  * Contains functionality for loyalty and rewards point.
  *
  */
+module_load_include('inc', 'itg_loyalty_reward', 'includes/itg_loyalty_reward_earn.point');
 
 /**
  * Implement hook_permission
@@ -37,8 +38,7 @@ function itg_loyalty_reward_menu() {
     'file' => 'includes/itg_loyalty_reward_points_form.inc',
   );
   // Redeem points page.
-  $items['redeem-points'] = array(
-    'title' => 'Redeem Points',
+  $items['redeem-points'] = array(    
     'page callback' => 'itg_loyalty_reward_redeem_points',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -46,7 +46,7 @@ function itg_loyalty_reward_menu() {
   );
   // Cart page.
   $items['cart'] = array(
-    'title' => 'Shopping Cart',
+    'title' => 'SHOPPING CART',
     'page callback' => 'itg_loyalty_reward_cart',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -77,7 +77,7 @@ function itg_loyalty_reward_menu() {
     'file' => 'includes/itg_loyalty_reward.checkout.inc',
   );
   $items['order'] = array(
-    'title' => 'Redemption History',
+    'title' => 'REDEMPTION HISTORY',
     'page callback' => 'itg_loyalty_reward_order',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -123,7 +123,7 @@ function itg_loyalty_reward_theme($existing, $type, $theme, $path) {
     'itg_loyalty_reward_cart' => array(
       'template' => 'itg-loyalty-reward-cart',
       'path' => drupal_get_path('module', 'itg_loyalty_reward') . '/templates',
-      'variables' => array('data' => NULL),
+      'variables' => array('data' => NULL, 'remain_point' => NULL),
     ),
   );
 
@@ -455,8 +455,7 @@ function itg_loyalty_reward_block_view($delta = '') {
       $l_name = $user_fields->field_last_name['und'][0]['value'];
       $data['full_name'] = $f_name . ' ' . $l_name;
       // user logout link
-      $item_after = isset($_SESSION['cart_after_popup']) ? is_array($_SESSION['cart_after_popup']) ? $_SESSION['cart_after_popup'] : 0 : 0;
-      //drupal_set_message('<pre>' . print_r($item_after, TRUE) . '</pre>', 'status');
+      $data['item_after'] = isset($_SESSION['cart_after_popup']) ? is_array($_SESSION['cart_after_popup']) ? $_SESSION['cart_after_popup'] : 0 : 0;      
       $data['logout'] = l(t('Logout'), 'user/logout');
       $block['content'] = theme('itg_loyalty_reward_redeem_points', array('data' => $data));
   }

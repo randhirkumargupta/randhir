@@ -6803,6 +6803,13 @@ div.node{
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
   margin-top: 0px;
+  line-height: 18px;
+  padding-left: 0;
+}
+.survey-form-main-container .byline .profile-detail ul li.twitter:before {
+  content: '|';
+  margin: 0 5px 0 0;
+  color: #999;
 }
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
@@ -8089,4 +8096,40 @@ div.node{
       }
     }
   }
+}
+.itg_menu_manager_form{
+  @extend .node-form;
+  .form-submit{
+    @extend .btn;
+    @extend .btn-save;
+    margin-left: 250px;
+  }
+}
+.page-itg-menu-manager{
+  #content{
+    position: relative;
+    #block-menu-menu-menu-manager{
+      position: absolute;
+      right: 10px;
+      top: 0;
+      > h2{
+        display: none;
+      }
+      ul.menu{
+        list-style: none;
+        li{
+          float: left;
+          margin-left: 10px;
+          a{
+            @extend .btn;
+            padding: 7px 12px;
+            text-transform: capitalize;
+          }
+        }
+      }
+    }
+  }
+}
+.view-menu-manager{
+  h2{text-transform: capitalize;}
 }
