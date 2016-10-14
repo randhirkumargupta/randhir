@@ -548,6 +548,13 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
     $form['title']['#autocomplete_path'] = 'content-title-list/sponsor/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-2') {
+    $form['event_type'] = array(
+      '#type' => 'select',
+      '#title' => t('Event Type'),
+      '#options' => array('0' => t('--SELECT--'), '1' => t('Upcoming'), '2' => t('Live')),
+    );
+  }
 }
 
 /**
@@ -654,4 +661,65 @@ function itg_event_backend_menu(){
 
 function itg_event_backend_page(){
   return '';
+}
+
+/**
+ * Implementation of hook_views_query_alter
+ * @param object reference $view
+ * @param object reference $query
+ */
+function itg_event_backend_views_query_alter(&$view, &$query) {
+  if (isset($view->name) && $view->name === 'Event_backend') {
+    if (isset($_GET['event_type'])) {
+      $event_type = $_GET['event_type'];
+      if (!empty($event_type)) {
+        $join = new views_join;
+        $join->construct('field_data_field_event_start_date', 'node', // left table
+            'nid', // left field
+            'entity_id', // field
+            '', 'LEFT'
+        );
+
+        // Add join to query; 'node' is the left table name
+        $view->query->add_relationship('field_data_field_event_start_date', $join, 'node');
+
+        if ($event_type == 1) {
+          $start_date = date("Y-m-d", strtotime("- 1 day"));
+          $program_where_condition = array(
+            'field' => "field_data_field_event_start_date.field_event_start_date_value",
+            'value' => $start_date,
+            'operator' => '>',
+          );
+          array_push($query->where[1]['conditions'], $event_start_where_condition);
+        }
+        elseif ($event_type == 2) {
+          $joins = new views_join;
+          $joins->construct('field_data_field_event_close_date', 'node', // left table
+              'nid', // left field
+              'entity_id', // field
+              '', 'LEFT'
+          );
+
+          // Add join to query; 'node' is the left table name
+          $view->query->add_relationship('field_data_field_event_close_date', $joins, 'node');
+
+          $start_date = date("Y-m-d", strtotime("- 1 day"));
+          $end_date = date("Y-m-d", strtotime("+ 1 day"));
+          $event_start_where_condition = array(
+            'field' => "field_data_field_event_start_date.field_event_start_date_value",
+            'value' => $start_date,
+            'operator' => '>=',
+          );
+          $event_end_where_condition = array(
+            'field' => "field_data_field_event_close_date.field_event_close_date_value",
+            'value' => $end_date,
+            'operator' => '<=',
+          );
+
+          array_push($query->where[1]['conditions'], $event_start_where_condition);
+          array_push($query->where[1]['conditions'], $event_end_where_condition);
+        }
+      }
+    }
+  }
 }
