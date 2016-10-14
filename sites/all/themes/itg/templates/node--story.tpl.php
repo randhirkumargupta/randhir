@@ -196,7 +196,7 @@
             $buzz_output.= '<div class="buzz-img"><div class="social-share">
               <ul>
               <li><a href="#" class="share"><i class="fa fa-share-alt"></i></a></li>
-              <li><a onclick="gogogo('."'".$actual_link."'".', '."'".  addslashes($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])."'".', '."'".$share_desc."'".', '."'".$share_image."'".')" class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a onclick="gogogo('."'".$actual_link."'".', '."'".  addslashes(htmlspecialchars($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'], ENT_QUOTES))."'".', '."'".$share_desc."'".', '."'".$share_image."'".')" class="facebook"><i class="fa fa-facebook"></i></a></li>
               <li><a href="javascript:" onclick="twitter_popup('."'".urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])."'".', '."'".urlencode($short_url)."'".')" class="twitter"><i class="fa fa-twitter"></i></a></li>
               <li><a title="share on google+" href="#" onclick="return googleplusbtn('."'".$actual_link."'".')" class="google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
