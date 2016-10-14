@@ -3081,7 +3081,7 @@ footer{
     }
 
 }
-.view-video-list-of-category, .view-video-landing-header, .view-so-sorry, .view-programme-content{    
+.view-video-list-of-category, .view-video-landing-header, .view-so-sorry, .view-programme-content, .sports-video{    
     .views-exposed-form{
         display: none;
     }
@@ -5227,27 +5227,38 @@ footer{
     }
     .itg-layout-195{
         .droppable {
-            height: 195px;            
+            height: 195px; 
+            border-left: 1px solid $border-color;
+            border-right: 1px solid $border-color;
         }
     }
     .itg-layout-260{
         .droppable {
-            height: 260px;            
+            height: 260px;       
+            border-left: 1px solid $border-color;
+            border-right: 1px solid $border-color;
         }
     }
     .itg-layout-375{
         .droppable {
-            height: 260px;            
+            height: 375px; 
+             border-left: 1px solid $border-color;
+            border-right: 1px solid $border-color;
         }
     }
     .itg-layout-315{
         .droppable {
-            height: 260px;            
+            height: 315px;      
+             border-left: 1px solid $border-color;
+            border-right: 1px solid $border-color;
         }
     }
     .itg-layout-340{
         .droppable {
-            height: 260px;            
+            height: 340px;   
+            border-left: 1px solid $border-color;
+            border-right: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
         }
     }
     .section_wise_order-sport-column{
@@ -5271,6 +5282,25 @@ footer{
          top: 0;
          margin-bottom: 10px;
         }
+        .view-content{
+            padding: 5px;
+            .flexslider{
+                box-shadow: 0 0 5px #cecdcd;
+                padding: 10px;
+                border-radius: 0;
+            }
+        }
+    }
+    .sports-video{
+        .view-content .photo-list li{
+            padding: 0 15px;
+        }
+        ul{
+            @extend .list-none;
+            figure{
+                margin-bottom: 10px;
+            }            
+        }   
     }
 }
 /*CSS End sport home page*/
