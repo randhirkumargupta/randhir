@@ -1232,6 +1232,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           &.twitter{
             color: #0783ec;
             margin-top: 0px;
+            line-height: 18px;
+            padding-left: 0;
+            &:before{
+              content: '|';
+              margin: 0 5px 0 0;
+              color: #999;
+            }
           }
           &.title{
             color: #6b6b6b;
