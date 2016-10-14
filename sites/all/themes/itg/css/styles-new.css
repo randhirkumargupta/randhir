@@ -1751,6 +1751,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #777;
   font-family: Roboto;
 }
+.view-redeem-points .more-link a:hover, .view-product .more-link a:hover {
+  color: #1a3c8d;
+}
 
 body.has-cart-popup {
   overflow: hidden;

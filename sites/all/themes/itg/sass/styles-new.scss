@@ -1655,6 +1655,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     a{
       color: #777;
       font-family: Roboto;
+      &:hover{
+        color: #1a3c8d;
+      }
     }
   }
 }
