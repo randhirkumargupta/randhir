@@ -24,25 +24,18 @@
 
           <span class="dm-detail">
 
-            <?php $title=$node_data['node_load_data']->title; 
-            if (!empty($node_data['custom_label'])) : ?>
-            <?php $title= $node_data['custom_label']; ?>
+              <?php if (!empty($node_data['custom_label'])) : ?>
+              <p class="title"><?php print $node_data['custom_label']; ?></p>
             <?php endif; ?>
 
-            <?php if (!empty($title)) : ?>    
-              <p class="title">
-                <?php echo l(mb_strimwidth($title, 0, 30, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
-              </p>
+          <?php if (!empty($node_data['node_load_data']->title)) : ?> 
+             
               <p><?php 
-                $desc=$node_data['node_load_data']->field_story_kicker_text['und'][0]['value'];
-                            if($desc=="")
-                            {
-                                $desc=$node_data['node_load_data']->body['und'][0]['value'];
-                            }
-                                
-                            echo mb_strimwidth(strip_tags($desc), 0, 70, "..") ;?>
+                $desc=$node_data['node_load_data']->title;
+                     echo l(mb_strimwidth($desc, 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}")) ?>
+                  </p>           
             <?php endif; ?>
-              </p>
+             
 
           </span>
             <span class="more"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">More[+]</a></span>
