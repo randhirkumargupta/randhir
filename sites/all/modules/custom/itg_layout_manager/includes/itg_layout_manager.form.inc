@@ -87,7 +87,6 @@ function itg_layout_manager_page_setting_form_validate($form, &$form_state) {
  */
 function itg_layout_manager_filter_form($form, &$form_state) {
   $form = array();
-  
   $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);  
   
   $op = array("_none" => "-- All --");
@@ -115,7 +114,7 @@ function itg_layout_manager_filter_form($form, &$form_state) {
     '#type' => 'submit',
     '#attributes' => array('class' => array('layout-apply')),
     '#prefix' => '<div class = "layout-filter-btn">',
-    '#suffix' => '<a class="layout-reset" href="' . base_path() . 'itg-layout-list">Reset</a></div>',
+    '#suffix' => '<a class="layout-reset" href="' . base_path() . 'itg-layout-list/'.arg(1).'">Reset</a></div>',
   );
   
   return $form;
@@ -127,7 +126,7 @@ function itg_layout_manager_filter_form($form, &$form_state) {
  */
 function itg_layout_manager_filter_form_submit($form, &$form_state) {
   $form_state['redirect'] = array(
-    'itg-layout-list',
+    'itg-layout-list/'.arg(1).'',
       array(
         'query' => array(
           'section' => $form_state['values']['section'],
