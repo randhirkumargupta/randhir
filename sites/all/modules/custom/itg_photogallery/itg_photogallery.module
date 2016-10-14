@@ -84,8 +84,14 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-
-  $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+ $request_destination = $_REQUEST['destination'];
+  $redirect_path = $_REQUEST['destination'];
+  
+  if($request_destination == 'published-photogallery') {
+    $redirect_path .=  "?field_story_syndication_value_op=all";
+  }
+  
+  $msg = itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
 }
 
 /**
@@ -95,18 +101,23 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
  * @return array $form
  */
 function itg_photogallery_after_build($form, &$form_state) {
+  $query_array = array();
     $form['field_gallery_image'][LANGUAGE_NONE]['#title']=$form['field_gallery_image'][LANGUAGE_NONE]['#title'].' <span title="This field is required." class="form-required">*</span>
 ';
   if (!isset($_REQUEST['destination'])) {
     $destination = '';
       } else {
-          $destination_array = explode('?', $_REQUEST['destination']);
-          $destination = $destination_array[0];
-      }
-  $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        $destination_array = explode('?', $_REQUEST['destination']);
+        $destination = $destination_array[0];
+        if( $destination == 'published-photogallery' ) {
+            $query_array = array("field_story_syndication_value_op"=> "all");
+        }
+    }
+
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array("query"=> $query_array,'attributes' => array('class' => 'button'))),
         '#weight' => 20,
-      );
+    );
   global $user, $base_url;
   unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
   unset($form['metatags']['intro_text']['#markup']);
