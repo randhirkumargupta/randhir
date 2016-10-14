@@ -4,7 +4,14 @@
 <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { 
             $class_buzz = 'buzz-feedback';
         }
-?>
+
+        // prepare url for sharing
+         $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+         $short_url = shorten_url($actual_link, 'goo.gl');
+         $fb_title = addslashes($node->title);
+         $share_desc = '';
+         $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+        ?>
 <div class="story-section <?php print $class_buzz;?>">
   <div class='<?php print $classes ?>'>
       <?php //pr($node); ?> 
@@ -59,10 +66,10 @@
                       <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
                   </ul>
                   <ul class="social-links mhide">
-                      <li><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
-                      <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
-                      <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
-                      <li><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
+                      <li><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a> <!--<span>958</span>--></li>
+                      <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a> <!--<span>8523</span>--></li>
+                      <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a> <!--<span>7258</span>--></li>
+                      <li><a href="#"><i class="fa fa-comment"></i></a> <!--<span>1522</span>--></li>
                       <?php global $user; ?>
                       <?php if ($user->uid > 0): ?>
                          <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
@@ -179,18 +186,21 @@
             $field_collection_id = $buzz_item['value'];
             $entity = entity_load('field_collection_item', array($field_collection_id));
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+            $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+            $share_uri = $file->uri;
+            print $share_image = file_create_url($share_uri);
             $img = '<img src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
             if(!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
             if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
             $buzz_output.= '<div class="buzz-img"><div class="social-share">
-          <ul>
+              <ul>
               <li><a href="#" class="share"><i class="fa fa-share-alt"></i></a></li>
-              <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
-          </ul>
-      </div>' . $img . '</div>';
+              <li><a onclick="gogogo('."'".$actual_link."'".', '."'".  addslashes($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])."'".', '."'".$share_desc."'".', '."'".$share_image."'".')" class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="javascript:" onclick="twitter_popup('."'".urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])."'".', '."'".urlencode($short_url)."'".')" class="twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a title="share on google+" href="#" onclick="return googleplusbtn('."'".$actual_link."'".')" class="google"><i class="fa fa-google-plus"></i></a></li>
+              </ul>
+          </div>' . $img . '</div>';
             }
             if(!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
             $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
@@ -202,10 +212,6 @@
           print $buzz_output;
         }
         
-        // prepare url for sharing
-         $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-         $short_url = shorten_url($actual_link, 'goo.gl');
-         $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
         ?>
       
       <!-- condition for buzz end -->      
@@ -214,58 +220,9 @@
           <div class="social-list">
             <ul>
                 <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                <li class="mhide"><div id="fb-root"></div>
-                      <script>(function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                        js = d.createElement(s); js.id = id;
-                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
-                        fjs.parentNode.insertBefore(js, fjs);
-                      }(document, 'script', 'facebook-jssdk'));</script>
-                      <a onclick="gogogo('<?php print $actual_link;?>', '<?php print $node->title; ?>', '', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
- 
-
-<script>
-function gogogo(linkurl, title, desc, image) {
-  FB.ui({
-    method: 'feed',
-    link: linkurl,
-    picture: image,
-    name: title,
-    //caption: desc,
-    description: desc
-  });
-}
-  
-</script>
-<?php
-//function _cg_tweet_share($twitter_msg, $actual_link) {
-//    $twitter_msg = strip_tags($twitter_msg);
-//    $twitter_share = 'http://twitter.com/share?text=' . urlencode(strip_tags($twitter_msg)) . '&url=' . urlencode(shorten_url($actual_link, 'goo.gl')). '&via=indiatoday';
-//    return $twitter_share;
-//}
-?>
-<!-- script for twitter sharing -->
-<script type="text/javascript">
-  function twitter_popup(title, url) {
-    tweetlink = "http://twitter.com/share?text="+title+"&url="+url+"&via=indiatoday";
-    newwindow=window.open(tweetlink,'indiatoday','height=500,width=550,left=440,top=250');
-    if (window.focus) {newwindow.focus()}
-    return false;
-  }
-</script>
-<!-- twitter sharing end here -->
-
-<script>
-function googleplusbtn(url, title, img) {
-  sharelink = "https://plus.google.com/share?url="+url;
-  newwindow=window.open(sharelink,'indiatoday','height=400,width=600,left=440,top=250');
-  if (window.focus) {newwindow.focus()}                                                                                                                                
-  return false;
-}   
-</script>
-<li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $short_url;?>')"><i class="fa fa-google-plus"></i></a></li>
+                <li class="mhide"><div id="fb-root"></div><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
                 <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
                 <li><span>Edited by</span> Arunava Chatterjee</li>
@@ -330,3 +287,47 @@ function googleplusbtn(url, title, img) {
   </div>
 </div>
 <?php endif; ?>
+<!-- script for facebook sharing -->
+<script>(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
+                        fjs.parentNode.insertBefore(js, fjs);
+                      }(document, 'script', 'facebook-jssdk'));</script>
+<script>
+function gogogo(linkurl, title, desc, image) {
+  FB.ui({
+    method: 'feed',
+    link: linkurl,
+    picture: image,
+    name: title,
+    //caption: desc,
+    description: desc
+  });
+}
+  
+</script>
+<!-- facebook sharing end here -->
+
+<!-- script for twitter sharing -->
+<script type="text/javascript">
+  function twitter_popup(title, url) {
+    tweetlink = "http://twitter.com/share?text="+title+"&url="+url+"&via=indiatoday";
+    newwindow=window.open(tweetlink,'indiatoday','height=500,width=550,left=440,top=250');
+    if (window.focus) {newwindow.focus()}
+    return false;
+  }
+</script>
+<!-- twitter sharing end here -->
+
+<!-- script for google sharing -->
+<script>
+function googleplusbtn(url, title, img) {
+  sharelink = "https://plus.google.com/share?url="+url;
+  newwindow=window.open(sharelink,'indiatoday','height=400,width=600,left=440,top=250');
+  if (window.focus) {newwindow.focus()}                                                                                                                                
+  return false;
+}   
+</script>
+<!-- google sharing end here -->
