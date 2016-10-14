@@ -2820,6 +2820,14 @@ body.has-cart-popup {
   width: 100%;
   z-index: 99999;
 }
+#widget-ajex-loader img {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 
 .cart-dropdown {
   font: 14px/18px Roboto;
