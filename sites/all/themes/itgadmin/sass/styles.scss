@@ -8090,3 +8090,36 @@ div.node{
     }
   }
 }
+.itg_menu_manager_form{
+  @extend .node-form;
+  #edit-submit{
+    @extend .btn;
+    @extend .btn-save;
+    margin-left: 250px;
+  }
+}
+.page-itg-menu-manager{
+  #content{
+    position: relative;
+    #block-menu-menu-menu-manager{
+      position: absolute;
+      right: 10px;
+      top: 0;
+      > h2{
+        display: none;
+      }
+      ul.menu{
+        list-style: none;
+        li{
+          float: left;
+          margin-left: 10px;
+          a{
+            @extend .btn;
+            padding: 7px 12px;
+            text-transform: capitalize;
+          }
+        }
+      }
+    }
+  }
+}

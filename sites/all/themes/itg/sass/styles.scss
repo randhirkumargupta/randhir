@@ -1268,11 +1268,14 @@ footer{
         @include float(left);
         @include calculate-width(2);
         padding:5px;
-        &:hover a{
-            color:$blue-color;
+         a{
+            display: block;
+            margin-bottom: 10px;
+            &:hover{
+                color:$blue-color;
+            }
         }
-        img{
-            padding-bottom: 10px;
+        img{            
             @include calculate-width(1);
         }
         &.featured-post-first{
@@ -1520,7 +1523,10 @@ footer{
             padding: 0 0px 20px 0;
             border:none; 
             .dm-pic{
-                width: 46.6%;
+                width: 125px;
+                a{
+                    display: block;
+                }
             }            
             .dm-detail{
                 h4{
@@ -2439,6 +2445,12 @@ footer{
                         width: auto; 
                         max-height: 45px;
                         overflow: hidden;
+                        a{
+                            color: #fff;
+                            &:hover{
+                            color: #f1f1f1;    
+                            }
+                        }
                     }
                     .flex-count{
                         @include pos(absolute,null,null,49px,0px);
@@ -2929,7 +2941,7 @@ footer{
     h2{
         color: $white-color;
         @include font(20px);
-        margin: 10px 0;
+        padding: 10px 0;
     }
     ul{
         @extend .list-none;
@@ -3079,9 +3091,9 @@ footer{
             margin:0 -10px;
             @include clearfix;
             li{
-                padding: 15px 10px;
+                padding: 15px;
                 float: left;
-                width:50%;
+                width:25%;
                 .tile{
                     figure{
                         max-width: 100%;              
@@ -3111,10 +3123,10 @@ footer{
                     a{
                         color: #494949;              
                     }
-                }
-                &:nth-child(2n+1){
-                    clear: left;
-                }
+                }                
+                    &:nth-child(4n+1){
+                        clear: left;
+                    }                
             }
         }
     }
@@ -4384,6 +4396,9 @@ footer{
                 border-bottom: 1px solid $border-color;
                 .dm-pic{
                    width: auto;
+                   a{
+                       display: block;
+                   }
                 }
             }
         }
@@ -5212,25 +5227,9 @@ footer{
         }  
         .itg-widget-child{
             .droppable{
-             height: 210px;            
+             height: 218px;            
             }
-        }
-        .auto-block-2{
-                border: 1px solid #ddd;
-                .special-top-news{
-                    position: relative;
-                    overflow: hidden;
-                    .widget-title{
-                        position: absolute;
-                    }
-                    ul.itg-listing {
-                        border: none;
-                        padding-top: 20px;
-                    }
-                }
-            }        
-    }
-    .tech-block_5{
+             .tech-block_5{
         .widget-title{
             top: 0;
             left: 15px;   
@@ -5248,6 +5247,12 @@ footer{
                             background: rgba(255, 255, 255, 0.74);
                             font-size: 20px;
                             font-weight: 700;
+                            a{
+                                color: #000;
+                                &:hover{
+                                    color: #193984;
+                                }
+                            }
                         }
                     }                
                 }
@@ -5270,6 +5275,36 @@ footer{
                 }   
             }        
     }
+        }
+        .auto-block-2{
+                border: 1px solid #ddd;
+                .special-top-news{
+                    position: relative;
+                    overflow: hidden;
+                    .widget-title{
+                        position: absolute;
+                    }
+                    ul.itg-listing {
+                        border: none;
+                        padding-top: 20px;
+                    }
+                }
+            }        
+    }
+    .itg-h385-section{
+        .droppable{
+            height: 385px;
+        }
+    }
+    .itg-h396-section{
+        .droppable{
+            height: 385px;
+        }
+        .widget-title{
+            top:10px;
+            left:10px;
+        }
+    }   
     .tech-block_8{        
         .widget-title{
             margin-bottom: 5px;
@@ -5287,6 +5322,7 @@ footer{
     .section_wise_order-movies-celebrities, .section_wise_order-movies-lifestyle{
         .widget-title{
             position: absolute;
+            z-index: 1;
         }
     }
     .tech-in-depth{

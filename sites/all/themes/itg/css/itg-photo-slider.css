@@ -255,11 +255,14 @@ Version   :  1.0
           padding: 0 4px;
     }
     .carousel .slick-dots li button{
-        background: #fff;
+        background: #808080;
         border: none;
         width: 12px;
         height: 12px;
         border-radius: 100%;
         text-indent: -99999em;      
+    }
+    .carousel .slick-dots li.slick-active button{
+        background: #fff;
     }
 }

@@ -484,8 +484,11 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
             $form['draggableviews'][$key]['weight']['#validated'] = true;
         }
     }
-    //drupal_add_css("select.draggableviews-weight {display:none !important}", "inline");
-    //drupal_add_css("#draggableviews-table-section-wise-content-ordering-list-page .tabledrag-handle {display:none !important}", "inline");
+
+    drupal_add_css("select.draggableviews-weight {display:none !important}", "inline");
+    drupal_add_css("#draggableviews-table-section-wise-content-ordering-list-page .tabledrag-handle {display:none !important}", "inline");
+
+  
 // Assign deafult values in case of checkbox are checked.
     $form = get_sessions_of_ticked_nodes($form);
 }
@@ -1083,7 +1086,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
         }
     }
 
-    if ($view->name == 'sports' && ($view->current_display == 'sport_homepage_videos')) {
+    if ($view->name == 'sport_ipl' && ($view->current_display == 'ipl_video')) {
         global $theme;
         if ($theme != 'seven') {
             if ($theme == FRONT_THEME_NAME) {
@@ -1095,25 +1098,10 @@ function itg_widget_views_query_alter(&$view, &$query) {
                 $section = $_GET['section_name'];
             }
             // p($section);
-            $query->where[1]['conditions'][2]['value'] = $section;
-        }
-    }
-
-    if ($view->name == 'special_movie' && ($view->current_display == 'movie_photo_slider' || $view->current_display == 'movie_top_news' || $view->current_display == 'movie_left_top' || $view->current_display == 'special_movie_video')) {
-        global $theme;
-        if ($theme != 'seven') {
-            if ($theme == FRONT_THEME_NAME) {
-                $section = arg(2);
-            } else {
-                $section = $_GET['section'];
-            }
-            if (empty($section)) {
-                $section = $_GET['section_name'];
-            }
-
             $query->where[1]['conditions'][3]['value'] = $section;
-        }
+       }
     }
+
 
     if ($view->name == 'sport_ipl' && $view->current_display == 'points_tally') {
 
@@ -1358,36 +1346,35 @@ function draggable_views_nodes_for_widgets($view_name, $page, $expire_date, $ran
  * @param int $range_min
  * @return array
  */
-function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, $range_min = 0) {
-    $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
-    $query->condition('iwo.widget', $widget_name)
-            ->condition('n.status', 1)
-            ->orderBy('iwo.weight', 'DESC')
-            ->range($range_min, $range_max)
-            ->fields('iwo', array('nid', 'extra', 'weight'));
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $weight = 0;
-    foreach ($result as $data) {
-        $weight +=$data['weight'];
-    }
-
-    if ($weight > 0) {
-        return $result;
-    } else {
-// Query for renctaly careated node if weight is not saved
-        $query = db_select('itg_widget_order', 'iwo');
-        $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
-        $query->condition('iwo.widget', $widget_name)
-                ->condition('n.status', 1)
-                ->orderBy('n.nid', 'DESC')
-                ->range($range_min, $range_max)
-                ->fields('iwo', array('nid', 'extra', 'weight'));
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
+ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, $range_min = 0 , $order_by = 'DESC') {
+$query = db_select('itg_widget_order', 'iwo');
+$query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+$query->condition('iwo.widget', $widget_name)
+->condition('n.status', 1)
+->orderBy('iwo.weight', $order_by)
+->range($range_min, $range_max)
+->fields('iwo', array('nid', 'extra', 'weight'));
+$result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+$weight = 0;
+foreach ($result as $data) {
+$weight +=$data['weight'];
 }
-
+if ($weight > 0) {
+return $result;
+}
+else {
+// Query for renctaly careated node if weight is not saved
+$query = db_select('itg_widget_order', 'iwo');
+$query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+$query->condition('iwo.widget', $widget_name)
+->condition('n.status', 1)
+->orderBy('n.nid', $order_by)
+->range($range_min, $range_max)
+->fields('iwo', array('nid', 'extra', 'weight'));
+$result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+return $result;
+}
+}
 /**
  * Function returns data for cutom tables widgets.
  * 

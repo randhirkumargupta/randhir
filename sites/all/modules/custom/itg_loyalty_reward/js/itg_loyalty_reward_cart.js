@@ -13,12 +13,13 @@
                 var title = $(this).siblings('.product-title').html();
                 var desc = $(this).siblings('.product-description').html();
                 var redeem_points = $(this).siblings('.redeem-points').html();
+                redeem_points = parseInt(redeem_points);
                 var actions = $(this).siblings('.product-actions').html();
                 var popup_html = '<div class="cart-popup-wrapper">\n\
                                 <div class="cart-popup"><a class="cart-close" href="javascript:;"><i class="fa fa-times" aria-hidden="true"></i></a>\n\
                                 <div class="col-md-4 pic">' + pic + '<span>' + added_on + '</span></div>\n\
                                 <div class="col-md-8"><h2>' + title + '</h2><p>' + desc + '</p>\n\
-                                <div class="redeem-points"><strong>You can claim this product for:</strong><span>' + redeem_points + '</span></div>\n\
+                                <div class="redeem-points"><strong>You can claim this product for:</strong><span>' + redeem_points + ' Reward Points only</span></div>\n\
                                 <div class="cart-actions">' + actions + '</div></div></div></div>';
                 $('body').addClass('has-cart-popup').remove('.cart-popup-wrapper');
                 $('body').append(popup_html);
@@ -41,7 +42,7 @@
                         var errorPlaceHolder = '';
                         switch (elementName) {
                             default:
-                                errorPlaceHolder = element.parent().parent().parent();
+                                errorPlaceHolder = element.parent();
                         }
                         error.appendTo(errorPlaceHolder);
                     },
