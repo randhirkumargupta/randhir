@@ -1316,6 +1316,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
   margin-top: 0px;
+  line-height: 18px;
+  padding-left: 0;
+}
+.survey-form-main-container .byline .profile-detail ul li.twitter:before {
+  content: '|';
+  margin: 0 5px 0 0;
+  color: #999;
 }
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
