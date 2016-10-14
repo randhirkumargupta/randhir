@@ -371,7 +371,6 @@
             list-style: none;
             overflow: hidden;
             li{
-                width: 50%;
                 padding: 15px 10px;
                 float: left;                                
                 .tile{
@@ -405,7 +404,7 @@
                         font-family: "Roboto Slab";
                     }
                 }
-                &:nth-child(2n+1){
+                &:nth-child(4n+1){
                     clear: left;
                 }
             }
@@ -1002,13 +1001,23 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     margin: 0 auto;
     max-width: 765px;
     #views-form-personalization-my-preferences-block{
+      .personalization-low-high{
+        padding: 40px 30px 0 205px;
+        color: #8d8d8d;
+        span:last-child{
+          float: right;
+        }
+      }
       table{
-        width: 100%;
-        margin: 40px 30px;
+        margin: 0 auto;
+        width: calc(100% - 60px);
+        max-width: 100%;
         td{
           padding: 10px 0;
-          vertical-align: bottom;
+          vertical-align: middle;
           &.views-field-name{
+            width: 175px;
+            padding-right: 10px;
             a{
               color: #000;
               font-size: 17px;
@@ -1017,6 +1026,31 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           }
         }
       }
+      .sliderfield-display-values-field{
+        padding-bottom: 5px;
+      }
+      .ui-slider-horizontal{
+        border-radius: 0;
+        width: 100% !important;
+        .ui-slider-handle{
+          cursor: pointer;
+          height: 20px;
+          position: absolute;
+          width: 10px;
+          z-index: 2;
+          bottom: 0;
+          margin: auto 0 auto -5px;
+          top: 0;
+          border-color: #8d8d8d;
+        }
+        .ui-slider-range {
+          background: #1a3c8d; /* For browsers that do not support gradients */
+          background: -webkit-linear-gradient(-90deg, #1a3c8d, #fff); /* For Safari 5.1 to 6.0 */
+          background: -o-linear-gradient(-90deg, #1a3c8d, #fff); /* For Opera 11.1 to 12.0 */
+          background: -moz-linear-gradient(-90deg, #1a3c8d, #fff); /* For Firefox 3.6 to 15 */
+          background: linear-gradient(-90deg, #1a3c8d, #fff); /* Standard syntax */
+        }
+      } 
       .form-actions{
         padding: 20px 0;
         text-align: center;
@@ -1498,6 +1532,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 
 .page-personalization{
+  header{
+    margin-bottom: 0;
+  }
+  #main{
+    max-width: none;
+  }
    .ckeditor_links{
       display: none !important;
     }
@@ -1505,6 +1545,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     font: 400 18px/18px Roboto;
     text-align: center;
     margin-bottom: 20px;
+  }
+  .personalized-wrapper{
+    margin: 0 -15px;
+  }
+  .region-personalization{
+    max-width: 1170px;
+    margin: 0 auto;
   }
 } 
 
@@ -1608,6 +1655,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     a{
       color: #777;
       font-family: Roboto;
+      &:hover{
+        color: #1a3c8d;
+      }
     }
   }
 }
@@ -1943,6 +1993,7 @@ body.has-cart-popup{
     li{
       float: left;
       font: 400 14px/18px Roboto;
+      position: relative;
       color: #777;
       .cart-total{
         > a{
@@ -2728,6 +2779,83 @@ body.has-cart-popup{
       padding: 10px;
       max-width: 300px;
       font: 300 16px/22px Roboto;
+    }
+  }
+}
+#widget-ajex-loader{
+  background: rgba(0,0,0,.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99999;
+}
+.cart-dropdown {
+  font: 14px/18px Roboto;
+  background-color: #fff;
+  box-shadow: 0 0 15px #999;
+  left: 0;
+  top: 20px;
+  padding: 15px 15px 10px;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 305px;
+  z-index: 999;
+  &:after{
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px;
+    border-color: #fff transparent transparent transparent;
+    position: absolute;
+    left: 0;
+    top: -14px;
+    right: 0;
+    margin: 0 auto;
+  }
+  .cart-dropdown-pic {
+    float: left;
+    margin-right: 20px;
+    max-width: 93px;
+    img{
+      vertical-align: top;
+    }
+  }
+  .cart-dropdown-details {
+    overflow: hidden;
+  }
+  .cart-dropdown-title {
+    color: #000;
+    font: 16px/20px Roboto;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+  }
+  .cart-dropdown-added {
+    color: #b3b3b3;
+  }
+  .btn-redeem-points{
+    background-color: #a00606;
+    border: 1px solid #820000;
+    border-radius: 1px;
+    color: #fff;
+    display: inline-block;
+    vertical-align: top;
+    font: 400 13px/18px Roboto;
+    height: 28px;
+    padding: 5px 10px;
+    margin-top: 20px;
+  }
+  .cart-dropdown-view-cart{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    border-top: 1px solid #d8d8d8;
+    text-align: center;
+    a{
+      font-size: 12px;
+      color: #afafa;
     }
   }
 }
