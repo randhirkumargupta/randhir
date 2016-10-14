@@ -188,7 +188,7 @@
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
             $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
             $share_uri = $file->uri;
-            print $share_image = file_create_url($share_uri);
+            $share_image = file_create_url($share_uri);
             $img = '<img src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
             if(!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
