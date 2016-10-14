@@ -46,6 +46,11 @@ function itg_menu_manager_menu() {
   return $items;
 }
 
+/**
+ * Function is used to delete row in itg_menu_manager.
+ * @param int $tid
+ * @return type
+ */
 function remove_from_menu_manager($tid) {
   if (is_numeric($tid)) {
     db_delete('itg_menu_manager')->condition('id', $tid)->execute();
@@ -69,6 +74,9 @@ function itg_menu_manager_permission() {
   );
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_form($form, &$form_state) {
 
   reset($options);
@@ -184,6 +192,9 @@ function itg_menu_manager_form($form, &$form_state) {
   return $form;
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_form_validate($form, &$form_state) {
   $values = $form_state['values'];
   $url_type = $values['url_type'];
@@ -216,6 +227,11 @@ function itg_menu_manager_form_validate($form, &$form_state) {
   }
 }
 
+/**
+ * Function return string matched child element of vocuvolary category_management.
+ * @param string $string
+ * @return json
+ */
 function itg_menu_manager_get_child_under_category_management($string) {
   $vocuvolary = taxonomy_vocabulary_machine_name_load('category_management');
   $options_source = taxonomy_get_tree($vocuvolary->vid);
@@ -241,6 +257,11 @@ function itg_menu_manager_get_child_under_category_management($string) {
   return drupal_json_output($children);
 }
 
+/**
+ * Function create options for itg_menu_manager field.
+ * @param string $machine_name
+ * @return array
+ */
 function itg_menu_manager_get_taxonomy_term_options($machine_name) {
   $options = array();
 
@@ -260,6 +281,12 @@ function itg_menu_manager_get_taxonomy_term_options($machine_name) {
   return $options;
 }
 
+/**
+ * Function returns matched child of term.
+ * @param int $tid
+ * @param string $string
+ * @return json
+ */
 function itg_menu_manager_get_child($tid, $string) {
   if (!empty($tid) && $tid) {
     $term = array();
@@ -288,6 +315,13 @@ function itg_menu_manager_get_child($tid, $string) {
   }
 }
 
+/**
+ * Ajax callback funtion which replace tite field for autocomplete path.
+ * @global array $messages
+ * @param array $form
+ * @param type $form_state
+ * @return array
+ */
 function get_section_update($form, &$form_state) {
   global $messages;
   unset($messages);
@@ -362,6 +396,9 @@ function add_or_remove_autocomplete($form, $form_state) {
   return $form;
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_form_submit($form, &$form_state) {
   $values = $form_state['values'];
   $url_type = filter_xss($values['url_type']);
@@ -411,8 +448,14 @@ function itg_menu_manager_form_submit($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_menu_manager_block_info() {
-  $blocks['menu_manager'] = array(
-      'info' => t('Menu manager'),
+  $blocks['second_level_menu'] = array(
+      'info' => t('Second Level Menu'),
+      'cache' => DRUPAL_NO_CACHE
+  );
+
+  $blocks['third_level_menu'] = array(
+      'info' => t('Third Level Menu'),
+      'cache' => DRUPAL_NO_CACHE
   );
   return $blocks;
 }
@@ -423,11 +466,50 @@ function itg_menu_manager_block_info() {
 function itg_menu_manager_block_view($delta = '') {
   $block = array();
   switch ($delta) {
-    // Big Story Content.
-    case 'menu_manager':
-      $block['content'] = "asdasd"; //drupal_get_form('tabledrag_example_simple_form');
+    case 'second_level_menu':
+      $second_level_menu = get_second_level_menu();
+      $block['content'] = theme('second_level_menu', array("data" => $second_level_menu));
+      break;
+    case 'third_level_menu':
+      $third_level_menu = get_third_level_menu();
+      $block['content'] = theme('third_level_menu', array("data" => $third_level_menu));
       break;
   }
+}
+
+function itg_menu_manager_theme() {
+  return array(
+      'second_level_menu' => array(
+          'template' => 'templates/second-level-menu',
+      ),
+      
+      'third_level_menu' => array(
+          'template' => 'templates/third-level-menu',
+      ),
+  );
+}
+/**
+ * function returns array of second level menu
+ * @return type
+ */
+function get_second_level_menu() {
+  $query = db_select('itg_menu_manager', 'imm')
+          ->fields('imm')
+          ->condition('imm.menu_level', 'second')
+          ->orderBy('imm.weight', 'DESC');
+  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * function returns array of third level menu
+ * @return type
+ */
+function get_third_level_menu() {
+  $query = db_select('itg_menu_manager', 'imm')
+          ->fields('imm')
+          ->condition('imm.menu_level', 'third')
+          ->orderBy('imm.weight', 'DESC');
+  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /**
@@ -440,6 +522,9 @@ function itg_menu_manager_views_api() {
   );
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_views_data() {
 
   $data['itg_menu_manager']['table']['group'] = t('Menu Manager');
@@ -528,7 +613,7 @@ function itg_menu_manager_views_data() {
           'handler' => 'views_handler_argument_string',
       ),
   );
-  
+
   $data['itg_menu_manager']['url_type'] = array(
       'title' => t('Url Type'),
       'help' => t('Its stores url type value internal or external'),
@@ -600,12 +685,18 @@ function itg_menu_manager_views_data() {
   return $data;
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_form_menu_manager_menu_manager_page') {
     $form['actions']['submit']['#submit'][] = 'itg_menu_manager_custom_submit';
   }
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_custom_submit($form, &$form_state) {
   // Current display for indentifing the view page (Widget name).
   $current_display = $form_state['build_info']['args'][0]->current_display;
@@ -632,6 +723,9 @@ function itg_menu_manager_custom_submit($form, &$form_state) {
   }
 }
 
+/**
+ * {@inheritdoc}
+ */
 function itg_menu_manager_views_pre_render(&$view) {
   if ($view->name == "menu_manager" && $view->current_display == 'menu_manager_page') {
     $header_content = "<h2>" . arg(1) . " level menu ordering</h2>";

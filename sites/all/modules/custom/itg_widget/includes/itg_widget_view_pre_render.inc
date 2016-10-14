@@ -154,9 +154,9 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "widget_anchors_listing" && $view->current_display == 'anchors_listing_widget') {
     if (!isset($_POST['views_bulk_operations'])) {
-      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Search Content'), 'anchor-list', array('query' => array('destination' => arg(0))));
-      $view->attachment_before = $header_content;
+//      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+//      $header_content .= l(t('Search Content'), 'anchor-list', array('query' => array('destination' => arg(0))));
+//      $view->attachment_before = $header_content;
     }
   }
   elseif ($view->name == "widget_anchors_listing" && $view->current_display == 'anchors_display_page') {
