@@ -6803,6 +6803,13 @@ div.node{
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
   margin-top: 0px;
+  line-height: 18px;
+  padding-left: 0;
+}
+.survey-form-main-container .byline .profile-detail ul li.twitter:before {
+  content: '|';
+  margin: 0 5px 0 0;
+  color: #999;
 }
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
@@ -8092,7 +8099,7 @@ div.node{
 }
 .itg_menu_manager_form{
   @extend .node-form;
-  #edit-submit{
+  .form-submit{
     @extend .btn;
     @extend .btn-save;
     margin-left: 250px;
@@ -8122,4 +8129,7 @@ div.node{
       }
     }
   }
+}
+.view-menu-manager{
+  h2{text-transform: capitalize;}
 }
