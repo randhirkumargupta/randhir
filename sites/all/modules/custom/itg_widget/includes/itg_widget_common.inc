@@ -1057,6 +1057,14 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
             $query->where[1]['conditions'][3]['value'] = $section;
         }
+        drupal_add_js('
+            jQuery(".flexslider").flexslider({
+            animation: "slide",
+            prevText: "",
+            nextText: "",
+          
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
+      );
     }
 
 
@@ -1442,6 +1450,7 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
             ->condition('n.status', 1)
             ->condition('tx.tid', $cat_id)
             ->orderBy('iwo.weight', 'ASC')
+            ->orderBy('n.nid', 'DESC')
             ->range($range_min, $range_max)
             ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -1460,7 +1469,7 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
         $query->condition('iwo.widget', $widget_name)
                 ->condition('n.status', 1)
                 ->condition('tx.tid', $cat_id)
-                ->orderBy('n.nid', 'ASC')
+                ->orderBy('n.nid', 'DESC')
                 ->range($range_min, $range_max)
                 ->fields('iwo', array('nid', 'extra', 'weight'));
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
