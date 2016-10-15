@@ -14,6 +14,7 @@ dependencies[] = imagefield_crop
 dependencies[] = itg_story
 dependencies[] = number
 dependencies[] = path
+dependencies[] = views
 features[ckeditor_profile][] = CKEditor Global Profile
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0

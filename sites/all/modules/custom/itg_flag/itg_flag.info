@@ -1,0 +1,8 @@
+name = ITG Flag
+description = "ITG Flag Management Module"
+core = 7.x
+package = ITG
+
+files[] = itg_flag.module
+
+
