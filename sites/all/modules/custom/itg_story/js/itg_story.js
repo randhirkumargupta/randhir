@@ -69,11 +69,28 @@
                 }
             });
             
+            
             // auto fill time when user remove time in expiry date field
             d = new Date();
             datetext = d.getHours() + ":" + d.getMinutes();
             $('#edit-field-story-expiry-date-und-0-value-timeEntry-popup-1').blur(function () {
                 if ($("#edit-field-story-expiry-date-und-0-value-timeEntry-popup-1").val() == '') {
+                    $("#edit-field-story-expiry-date-und-0-value-timeEntry-popup-1").val(datetext);
+                }
+            });
+            
+            
+            // code for uncheck expiry date
+                var newdate = new Date();
+                newdate.setDate(newdate.getDate() + 7);
+                var dd = newdate.getDate();
+                var mm = newdate.getMonth() + 1;
+                var yy = newdate.getFullYear();
+                var someFormattedDate = mm + '/' + dd + '/' + yy;
+                
+            $('#edit-field-story-expires-und-yes').click(function () {
+                if ($("#edit-field-story-expires-und-yes").is(":not(:checked)")) {
+                    $("#edit-field-story-expiry-date-und-0-value-datepicker-popup-0").val(someFormattedDate);
                     $("#edit-field-story-expiry-date-und-0-value-timeEntry-popup-1").val(datetext);
                 }
             });
