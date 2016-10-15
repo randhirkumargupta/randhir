@@ -3262,6 +3262,7 @@ footer .footer-copyright {
 }
 .featured_photo_carousel .data-holder, .tech-block_5 .data-holder, .auto-block_5 .data-holder {
   max-width: 750px;
+  background-color: #fff;
   overflow: hidden;
 }
 .featured_photo_carousel .flexslider, .tech-block_5 .flexslider, .auto-block_5 .flexslider {
@@ -5755,9 +5756,10 @@ footer .footer-copyright {
 }
 .tech-layout-page .auto-block-2 {
   border: 1px solid #ddd;
+  position: relative;
 }
 .tech-layout-page .auto-block-2 .special-top-news {
-  position: relative;
+  height: 100%;
   overflow: hidden;
 }
 .tech-layout-page .auto-block-2 .special-top-news .widget-title {
