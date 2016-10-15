@@ -333,10 +333,10 @@ function user_management_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'plupload' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
