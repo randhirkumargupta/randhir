@@ -2428,12 +2428,22 @@ footer{
     .widget-title{
         @include pos(absolute,10px,null,null,10px);        
     }
+    .data-holder{
+      max-width: 750px;
+      overflow: hidden;
+    }
     .flexslider{
         border:none;
         margin:0;
+        max-width: 650px;
+        width: 100%;
+        .flex-viewport{
+          overflow: visible !important;
+        }
         .slides{
             li{
                 @include pos(relative);
+                border-right: 1px solid #fff;
                 .detail{                   
                     @include calculate-width(1);
                     font-family: $itg-roboto;
@@ -2490,23 +2500,26 @@ footer{
                 display: inline-block;                
                 color: #fff;    
                 background: #67aaef;
-                Z-INDEX: 1;
-                WIDTH: 40px;
+                z-index: 1;
+                width: 40px;
                 height: 40px;
                 line-height: 40px;
                 text-align: center;
             }
             &.flex-prev{
-                left: 0;
-                &:before{
-                    content: '\f104';
-                }
+              left: auto;
+              right: 0;
+              border-right: 1px solid #1a3c8d;
+              width: 41px;
+              &:before{
+                  content: '\f104';
+              }
             }
             &.flex-next{
-                right: 0;
-                &:before{
-                    content: '\f105';
-                }
+              right: -40px;
+              &:before{
+                  content: '\f105';
+              }
             }
         }
     }
