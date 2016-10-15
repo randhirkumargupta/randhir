@@ -3260,12 +3260,23 @@ footer .footer-copyright {
   top: 10px;
   left: 10px;
 }
+.featured_photo_carousel .data-holder, .tech-block_5 .data-holder, .auto-block_5 .data-holder {
+  max-width: 750px;
+  background-color: #fff;
+  overflow: hidden;
+}
 .featured_photo_carousel .flexslider, .tech-block_5 .flexslider, .auto-block_5 .flexslider {
   border: none;
   margin: 0;
+  max-width: 650px;
+  width: 100%;
+}
+.featured_photo_carousel .flexslider .flex-viewport, .tech-block_5 .flexslider .flex-viewport, .auto-block_5 .flexslider .flex-viewport {
+  overflow: visible !important;
 }
 .featured_photo_carousel .flexslider .slides li, .tech-block_5 .flexslider .slides li, .auto-block_5 .flexslider .slides li {
   position: relative;
+  border-right: 1px solid #fff;
 }
 .featured_photo_carousel .flexslider .slides li .detail, .tech-block_5 .flexslider .slides li .detail, .auto-block_5 .flexslider .slides li .detail {
   width: 100%;
@@ -3331,20 +3342,23 @@ footer .footer-copyright {
   display: inline-block;
   color: #fff;
   background: #67aaef;
-  Z-INDEX: 1;
-  WIDTH: 40px;
+  z-index: 1;
+  width: 40px;
   height: 40px;
   line-height: 40px;
   text-align: center;
 }
 .featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev, .tech-block_5 .flexslider .flex-direction-nav a.flex-prev, .auto-block_5 .flexslider .flex-direction-nav a.flex-prev {
-  left: 0;
+  left: auto;
+  right: 0;
+  border-right: 1px solid #1a3c8d;
+  width: 41px;
 }
 .featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev:before, .tech-block_5 .flexslider .flex-direction-nav a.flex-prev:before, .auto-block_5 .flexslider .flex-direction-nav a.flex-prev:before {
   content: '\f104';
 }
 .featured_photo_carousel .flexslider .flex-direction-nav a.flex-next, .tech-block_5 .flexslider .flex-direction-nav a.flex-next, .auto-block_5 .flexslider .flex-direction-nav a.flex-next {
-  right: 0;
+  right: -40px;
 }
 .featured_photo_carousel .flexslider .flex-direction-nav a.flex-next:before, .tech-block_5 .flexslider .flex-direction-nav a.flex-next:before, .auto-block_5 .flexslider .flex-direction-nav a.flex-next:before {
   content: '\f105';
@@ -5742,9 +5756,10 @@ footer .footer-copyright {
 }
 .tech-layout-page .auto-block-2 {
   border: 1px solid #ddd;
+  position: relative;
 }
 .tech-layout-page .auto-block-2 .special-top-news {
-  position: relative;
+  height: 100%;
   overflow: hidden;
 }
 .tech-layout-page .auto-block-2 .special-top-news .widget-title {

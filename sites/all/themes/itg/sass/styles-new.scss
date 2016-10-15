@@ -2470,7 +2470,7 @@ body.has-cart-popup{
     }
     .messages--status, .messages--error{
         max-width: 440px;
-        margin: 0 auto;
+        margin: 20px auto 0;
     }
     .messages--error{
         .messages__list{
@@ -2865,5 +2865,26 @@ body.has-cart-popup{
       font-size: 12px;
       color: #afafa;
     }
+  }
+}
+
+@media all and (max-width: 1024px){
+  .featured_photo_carousel .flexslider .slides li, 
+  .tech-block_5 .flexslider .slides li, 
+  .auto-block_5 .flexslider .slides li{
+    border-right: none;
+  }
+  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev, 
+  .tech-block_5 .flexslider .flex-direction-nav a.flex-prev, 
+  .auto-block_5 .flexslider .flex-direction-nav a.flex-prev{
+    left: 0;
+    right: auto;
+    border-right: none;
+    width: 40px;
+  }
+  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-next, 
+  .tech-block_5 .flexslider .flex-direction-nav a.flex-next, 
+  .auto-block_5 .flexslider .flex-direction-nav a.flex-next{
+    right: 0;
   }
 }
