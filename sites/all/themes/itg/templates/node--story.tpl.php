@@ -188,7 +188,7 @@
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
             $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
             $share_uri = $file->uri;
-            print $share_image = file_create_url($share_uri);
+            $share_image = file_create_url($share_uri);
             $img = '<img src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
             if(!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
@@ -196,7 +196,7 @@
             $buzz_output.= '<div class="buzz-img"><div class="social-share">
               <ul>
               <li><a href="#" class="share"><i class="fa fa-share-alt"></i></a></li>
-              <li><a onclick="gogogo('."'".$actual_link."'".', '."'".  addslashes($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])."'".', '."'".$share_desc."'".', '."'".$share_image."'".')" class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a onclick="gogogo('."'".$actual_link."'".', '."'".  addslashes(htmlspecialchars($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'], ENT_QUOTES))."'".', '."'".$share_desc."'".', '."'".$share_image."'".')" class="facebook"><i class="fa fa-facebook"></i></a></li>
               <li><a href="javascript:" onclick="twitter_popup('."'".urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])."'".', '."'".urlencode($short_url)."'".')" class="twitter"><i class="fa fa-twitter"></i></a></li>
               <li><a title="share on google+" href="#" onclick="return googleplusbtn('."'".$actual_link."'".')" class="google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
@@ -229,12 +229,20 @@
                 <li><a href="#">follow the Story</a></li>
             </ul>
           </div>
-          
+              
               <?php if(!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
               <div class="snap-post">
                   <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
-
-                  <div class="agbutton"><button>Agree</button> <button>DisAgree</button> <a href="<?php echo $base_url;?>/snappost">More from Snap post</a></div>
+                  <?php $like = itg_flag_get_count(arg(1), 'like_count');
+                  $dislike = itg_flag_get_count(arg(1), 'dislike_count');
+                  if(!empty($like)) {
+                    $like_count = '('.$like.')';
+                  }
+                  if(!empty($dislike)) {
+                    $dislike_count = '('.$dislike.')';
+                  }
+                  ?>
+                  <div class="agbutton"><button id="like_count" rel="<?php print arg(1); ?>">Like</button> <span id="no-of-likes"><?php print $like_count; ?></span> <button id="dislike_count" rel="<?php print arg(1); ?>">Dislike</button> <span id="no-of-dislikes"><?php print $dislike_count; ?></span> <a href="<?php echo $base_url;?>/snappost"> More from Snap post</a><p id="voted"></p></div>
               </div>
               <?php } ?>
               <div class="tags">

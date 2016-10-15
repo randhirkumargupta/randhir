@@ -276,16 +276,19 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
  * @return array
  */
 function itg_common_cancel_button($form, &$form_state) {
-
+    $query_array = array();
     if (!isset($_REQUEST['destination'])) {
         $destination = '';
     } else {
         $destination_array = explode('?', $_REQUEST['destination']);
         $destination = $destination_array[0];
+        if( $destination == 'published-story' || $destination == 'published-video') {
+            $query_array = array("field_story_syndication_value_op"=> "all");
+        }
     }
 
     $form['actions']['cancel'] = array(
-        '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+        '#markup' => l(t('Cancel'), $destination, array("query"=> $query_array,'attributes' => array('class' => 'button'))),
         '#weight' => 20,
     );
 

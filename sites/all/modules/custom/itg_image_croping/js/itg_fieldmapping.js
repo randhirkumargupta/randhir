@@ -20,49 +20,50 @@
         jQuery('#tagit').css({top: mouseY, left: mouseX});
         jQuery('#tagname').focus();
     });
-var mTimer=null;
+    var mTimer = null;
     // Save button click - save tags
     jQuery('#file-preview').on('click', '#btnsavetag', function() {
-          window.clearTimeout(mTimer); 
-          mTimer=window.setTimeout(function() {
-          
-        name = jQuery('#tagname').val();
-        tagurl = jQuery('#tagurl').val();
-      
-     if(tagurl!="")
-     {
-        if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
-            jQuery('.web-error').hide();
-            showloader();
-            jQuery.ajax({
-                url: Drupal.settings.basePath + 'savetags',
-                type: 'post',
-                data: {'pic_id': image_fiedlid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
-                success: function(data) {
-                    var objdata = jQuery.parseJSON(data);
-                    if (objdata.status == 1)
-                    {
+        window.clearTimeout(mTimer);
+        mTimer = window.setTimeout(function() {
 
-                        jQuery('#tagit').remove();
-                        viewtag(image_fiedlid);
+            name = jQuery('#tagname').val();
+            tagurl = jQuery('#tagurl').val();
 
-                    }
+            if (tagurl != "")
+            {
+                if (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(tagurl)) {
+                    jQuery('.web-error').hide();
+                    showloader();
+                    jQuery.ajax({
+                        url: Drupal.settings.basePath + 'savetags',
+                        type: 'post',
+                        data: {'pic_id': image_fiedlid, 'name': name, 'url': tagurl, 'pic_x': mouseX, 'pic_y': mouseY, 'type': 'insert'},
+                        success: function(data) {
+                            var objdata = jQuery.parseJSON(data);
+                            if (objdata.status == 1)
+                            {
 
-                },
-                error: function(xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
+                                jQuery('#tagit').remove();
+                                viewtag(image_fiedlid);
+
+                            }
+
+                        },
+                        error: function(xhr, desc, err) {
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError:" + err);
+                        }
+                    });
+                } else {
+                    jQuery('.web-error').html('Enter currect url').show();
+                    return false;
                 }
-            });
-        }else {
-            jQuery('.web-error').html('Enter currect url').show();
-            return false;
-        }} else {
-            jQuery('.web-error').html('Enter url').show();
-            return false;
-        }
+            } else {
+                jQuery('.web-error').html('Enter url').show();
+                return false;
+            }
 
- }, 200);
+        }, 200);
     });
 //  cancel image
     jQuery('.cancel-image').click(function() {
@@ -152,10 +153,10 @@ var mTimer=null;
                 var img = jQuery('#imgtag').find('img');
                 var id = jQuery(img).attr('id');
                 //get tags if present
-                
+
                 jQuery('#tagit').remove();
                 viewtag(image_fiedlid);
-           
+
 
 
             }
@@ -263,16 +264,20 @@ var mTimer=null;
                         var imagetitle = jQuery('#imgtag img').attr('src');
                         var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
                     }
- 
-                    image_title=image_title.replace(/%20/g, " ");
-                    image_alttext=image_alttext.replace(/%20/g, " ");
+
+                    image_title = image_title.replace(/%20/g, " ");
+                    image_alttext = image_alttext.replace(/%20/g, " ");
 
                     setTimeout(function() {
                         parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
                         parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+                        var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
                         var captionid = getbame + '[field_image_caption][und][0][value]';
                         captionid = captionid.replace('[field_images][und][0]', "");
+                        var captionid1 = getbame + '[field_credit][und][0][value]';
+                        captionid1 = captionid1.replace('[field_images][und][0]', "");
                         parent.jQuery('[name="' + captionid + '"]').val(image_title);
+                        parent.jQuery('[name="' + captionid1 + '"]').val(credit);
                         hideloader();
                         parent.jQuery.colorbox.close();
                     }, 500);

@@ -13,6 +13,8 @@ if (isset($_GET['sid']) && !empty($_GET['sid'])) {
 }
 if (itg_videogallery_get_categoryparent($_GET['category']) == FALSE && isset($_GET['category']) && isset($_GET['sid'])) {
   print '<ul class="video_landing_menu">' . $output . '</ul>';
+}elseif (itg_videogallery_get_categoryparent($_GET['category']) == TRUE && isset($_GET['category']) && isset($_GET['sid'])) {
+  print '<ul class="video_landing_menu">' . $output . '</ul>';
 }
 elseif (itg_videogallery_get_categoryparent($_GET['category']) == TRUE && empty($_GET['sid'])) {
   $term_load = taxonomy_term_load($_GET['category']);

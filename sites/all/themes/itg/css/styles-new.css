@@ -388,7 +388,6 @@
   overflow: hidden;
 }
 .view-photo-list-of-category .view-content .photo-list li {
-  width: 50%;
   padding: 15px 10px;
   float: left;
 }
@@ -421,7 +420,7 @@
   color: #494949;
   font-family: "Roboto Slab";
 }
-.view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1) {
+.view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1) {
   clear: left;
 }
 
@@ -1031,18 +1030,60 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin: 0 auto;
   max-width: 765px;
 }
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high {
+  padding: 40px 30px 0 205px;
+  color: #8d8d8d;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:last-child {
+  float: right;
+}
 .view-personalization-my-preferences #views-form-personalization-my-preferences-block table {
-  width: 100%;
-  margin: 40px 30px;
+  margin: 0 auto;
+  width: calc(100% - 60px);
+  max-width: 100%;
 }
 .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td {
   padding: 10px 0;
-  vertical-align: bottom;
+  vertical-align: middle;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name {
+  width: 175px;
+  padding-right: 10px;
 }
 .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name a {
   color: #000;
   font-size: 17px;
   text-transform: uppercase;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .sliderfield-display-values-field {
+  padding-bottom: 5px;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .ui-slider-horizontal {
+  border-radius: 0;
+  width: 100% !important;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .ui-slider-horizontal .ui-slider-handle {
+  cursor: pointer;
+  height: 20px;
+  position: absolute;
+  width: 10px;
+  z-index: 2;
+  bottom: 0;
+  margin: auto 0 auto -5px;
+  top: 0;
+  border-color: #8d8d8d;
+}
+.view-personalization-my-preferences #views-form-personalization-my-preferences-block .ui-slider-horizontal .ui-slider-range {
+  background: #1a3c8d;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(-90deg, #1a3c8d, #fff);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(-90deg, #1a3c8d, #fff);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(-90deg, #1a3c8d, #fff);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(-90deg, #1a3c8d, #fff);
+  /* Standard syntax */
 }
 .view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions {
   padding: 20px 0;
@@ -1316,6 +1357,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
   margin-top: 0px;
+  line-height: 18px;
+  padding-left: 0;
+}
+.survey-form-main-container .byline .profile-detail ul li.twitter:before {
+  content: '|';
+  margin: 0 5px 0 0;
+  color: #999;
 }
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
@@ -1579,6 +1627,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin-left: 5px;
 }
 
+.page-personalization header {
+  margin-bottom: 0;
+}
+.page-personalization #main {
+  max-width: none;
+}
 .page-personalization .ckeditor_links {
   display: none !important;
 }
@@ -1586,6 +1640,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 400 18px/18px Roboto;
   text-align: center;
   margin-bottom: 20px;
+}
+.page-personalization .personalized-wrapper {
+  margin: 0 -15px;
+}
+.page-personalization .region-personalization {
+  max-width: 1170px;
+  margin: 0 auto;
 }
 
 /* CSS for redeem points */
@@ -1689,6 +1750,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .view-redeem-points .more-link a, .view-product .more-link a {
   color: #777;
   font-family: Roboto;
+}
+.view-redeem-points .more-link a:hover, .view-product .more-link a:hover {
+  color: #1a3c8d;
 }
 
 body.has-cart-popup {
@@ -2012,6 +2076,7 @@ body.has-cart-popup {
 #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li {
   float: left;
   font: 400 14px/18px Roboto;
+  position: relative;
   color: #777;
 }
 #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li .cart-total > a {
@@ -2744,4 +2809,91 @@ body.has-cart-popup {
   padding: 10px;
   max-width: 300px;
   font: 300 16px/22px Roboto;
+}
+
+#widget-ajex-loader {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99999;
+}
+#widget-ajex-loader img {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.cart-dropdown {
+  font: 14px/18px Roboto;
+  background-color: #fff;
+  box-shadow: 0 0 15px #999;
+  left: 0;
+  top: 20px;
+  padding: 15px 15px 10px;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 305px;
+  z-index: 999;
+}
+.cart-dropdown:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px;
+  border-color: #fff transparent transparent transparent;
+  position: absolute;
+  left: 0;
+  top: -14px;
+  right: 0;
+  margin: 0 auto;
+}
+.cart-dropdown .cart-dropdown-pic {
+  float: left;
+  margin-right: 20px;
+  max-width: 93px;
+}
+.cart-dropdown .cart-dropdown-pic img {
+  vertical-align: top;
+}
+.cart-dropdown .cart-dropdown-details {
+  overflow: hidden;
+}
+.cart-dropdown .cart-dropdown-title {
+  color: #000;
+  font: 16px/20px Roboto;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+}
+.cart-dropdown .cart-dropdown-added {
+  color: #b3b3b3;
+}
+.cart-dropdown .btn-redeem-points {
+  background-color: #a00606;
+  border: 1px solid #820000;
+  border-radius: 1px;
+  color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  font: 400 13px/18px Roboto;
+  height: 28px;
+  padding: 5px 10px;
+  margin-top: 20px;
+}
+.cart-dropdown .cart-dropdown-view-cart {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  border-top: 1px solid #d8d8d8;
+  text-align: center;
+}
+.cart-dropdown .cart-dropdown-view-cart a {
+  font-size: 12px;
+  color: #afafa;
 }

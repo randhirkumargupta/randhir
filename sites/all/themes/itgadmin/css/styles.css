@@ -147,7 +147,7 @@ img {
 .view-manage-users #views-form-photo-carousel-widget-video-carousel-list .form-actions .form-submit, .view-manage-users [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .form-submit, .operation-form .form-actions .form-submit, #views-form-blogs-management-page .form-actions .form-submit,
 #views-form-strory-menegment-page .form-actions .form-submit, #views-form-podcast-management-page .form-actions .form-submit,
 #views-form-videogallery-management-page .form-actions .form-submit, #itg-tv-schedule-form .form-actions .form-submit, .node-print_team_integration-form #edit-submit, .page-admin-structure-menu-manage #menu-overview-form .form-actions #edit-actions-submit, #views-form-photo-carousel-widget-photo-carousel-list .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form #edit-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -283,7 +283,7 @@ img {
 .view-manage-users #views-form-photo-carousel-widget-video-carousel-list .form-actions .form-submit, .view-manage-users [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .form-submit, .operation-form .form-actions .form-submit, #views-form-blogs-management-page .form-actions .form-submit,
 #views-form-strory-menegment-page .form-actions .form-submit, #views-form-podcast-management-page .form-actions .form-submit,
 #views-form-videogallery-management-page .form-actions .form-submit, #itg-tv-schedule-form .form-actions .form-submit, .node-print_team_integration-form #edit-submit, .page-admin-structure-menu-manage #menu-overview-form .form-actions #edit-actions-submit, #views-form-photo-carousel-widget-photo-carousel-list .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form #edit-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -530,7 +530,7 @@ html.js fieldset.collapsed {
 .view-manage-users #views-form-photo-carousel-widget-video-carousel-list .form-actions .form-submit, .view-manage-users [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .form-submit, .operation-form .form-actions .form-submit, #views-form-blogs-management-page .form-actions .form-submit,
 #views-form-strory-menegment-page .form-actions .form-submit, #views-form-podcast-management-page .form-actions .form-submit,
 #views-form-videogallery-management-page .form-actions .form-submit, #itg-tv-schedule-form .form-actions .form-submit, .node-print_team_integration-form #edit-submit, .page-admin-structure-menu-manage #menu-overview-form .form-actions #edit-actions-submit, #views-form-photo-carousel-widget-photo-carousel-list .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form #edit-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -603,7 +603,7 @@ html.js fieldset.collapsed {
 .view-manage-users #views-form-photo-carousel-widget-video-carousel-list .form-actions .form-submit:hover, .view-manage-users [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .form-submit:hover, .operation-form .form-actions .form-submit:hover, #views-form-blogs-management-page .form-actions .form-submit:hover,
 #views-form-strory-menegment-page .form-actions .form-submit:hover, #views-form-podcast-management-page .form-actions .form-submit:hover,
 #views-form-videogallery-management-page .form-actions .form-submit:hover, #itg-tv-schedule-form .form-actions .form-submit:hover, .node-print_team_integration-form #edit-submit:hover, .page-admin-structure-menu-manage #menu-overview-form .form-actions #edit-actions-submit:hover, #views-form-photo-carousel-widget-photo-carousel-list .form-actions #edit-submit:hover,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form #edit-submit:hover, .form-submit[value="Save as Draft"]:hover,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
 .form-submit[value="Save"]:hover,
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
@@ -666,7 +666,7 @@ html.js fieldset.collapsed {
 .view-manage-users #views-form-photo-carousel-widget-video-carousel-list .form-actions .form-submit, .view-manage-users [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .form-submit, .operation-form .form-actions .form-submit, #views-form-blogs-management-page .form-actions .form-submit,
 #views-form-strory-menegment-page .form-actions .form-submit, #views-form-podcast-management-page .form-actions .form-submit,
 #views-form-videogallery-management-page .form-actions .form-submit, #itg-tv-schedule-form .form-actions .form-submit, .node-print_team_integration-form #edit-submit, .page-admin-structure-menu-manage #menu-overview-form .form-actions #edit-actions-submit, #views-form-photo-carousel-widget-photo-carousel-list .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form #edit-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -681,7 +681,7 @@ html.js fieldset.collapsed {
 .view-manage-users #views-form-photo-carousel-widget-video-carousel-list .form-actions .form-submit:hover, .view-manage-users [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .form-submit:hover, .operation-form .form-actions .form-submit:hover, #views-form-blogs-management-page .form-actions .form-submit:hover,
 #views-form-strory-menegment-page .form-actions .form-submit:hover, #views-form-podcast-management-page .form-actions .form-submit:hover,
 #views-form-videogallery-management-page .form-actions .form-submit:hover, #itg-tv-schedule-form .form-actions .form-submit:hover, .node-print_team_integration-form #edit-submit:hover, .page-admin-structure-menu-manage #menu-overview-form .form-actions #edit-actions-submit:hover, #views-form-photo-carousel-widget-photo-carousel-list .form-actions #edit-submit:hover,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form #edit-submit:hover, .form-submit[value="Save as Draft"]:hover,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
 .form-submit[value="Save"]:hover,
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
@@ -4973,7 +4973,7 @@ div.node #comments h2 {
 .top-actions #views-form-videogallery-management-page .form-actions .form-submit:last-child,
 #views-form-videogallery-management-page .form-actions .top-actions .form-submit:last-child, .top-actions #itg-tv-schedule-form .form-actions .form-submit:last-child, #itg-tv-schedule-form .form-actions .top-actions .form-submit:last-child, .top-actions .node-print_team_integration-form #edit-submit:last-child, .node-print_team_integration-form .top-actions #edit-submit:last-child, .top-actions .page-admin-structure-menu-manage #menu-overview-form .form-actions #edit-actions-submit:last-child, .page-admin-structure-menu-manage #menu-overview-form .form-actions .top-actions #edit-actions-submit:last-child, .top-actions #views-form-photo-carousel-widget-photo-carousel-list .form-actions #edit-submit:last-child, #views-form-photo-carousel-widget-photo-carousel-list .form-actions .top-actions #edit-submit:last-child,
 .top-actions #views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:last-child,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions .top-actions #edit-submit:last-child, .page-submit-idea .top-actions .form-submit:last-child, .top-actions #menu-item-delete-form .form-actions #edit-submit:last-child, #menu-item-delete-form .form-actions .top-actions #edit-submit:last-child, .top-actions .itg_menu_manager_form #edit-submit:last-child, .itg_menu_manager_form .top-actions #edit-submit:last-child, .top-actions .form-submit[value="Save as Draft"]:last-child,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions .top-actions #edit-submit:last-child, .page-submit-idea .top-actions .form-submit:last-child, .top-actions #menu-item-delete-form .form-actions #edit-submit:last-child, #menu-item-delete-form .form-actions .top-actions #edit-submit:last-child, .top-actions .itg_menu_manager_form .form-submit:last-child, .itg_menu_manager_form .top-actions .form-submit:last-child, .top-actions .form-submit[value="Save as Draft"]:last-child,
 .top-actions .form-submit[value="Save"]:last-child,
 .top-actions .form-submit[value="Create"]:last-child,
 .top-actions .form-submit[value="Update"]:last-child,
@@ -6878,6 +6878,14 @@ div.node #comments h2 {
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
   margin-top: 0px;
+  line-height: 18px;
+  padding-left: 0;
+}
+
+.survey-form-main-container .byline .profile-detail ul li.twitter:before {
+  content: '|';
+  margin: 0 5px 0 0;
+  color: #999;
 }
 
 .survey-form-main-container .byline .profile-detail ul li.title {
@@ -8087,7 +8095,7 @@ div.node #comments h2 {
   padding-left: 220px;
 }
 
-.itg_menu_manager_form #edit-submit {
+.itg_menu_manager_form .form-submit {
   margin-left: 250px;
 }
 
@@ -8111,5 +8119,9 @@ div.node #comments h2 {
 }
 .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a {
   padding: 7px 12px;
+  text-transform: capitalize;
+}
+
+.view-menu-manager h2 {
   text-transform: capitalize;
 }
