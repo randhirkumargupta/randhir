@@ -23,7 +23,6 @@ function user_management_user_default_permissions() {
   $permissions['access content'] = array(
     'name' => 'access content',
     'roles' => array(
-      'Front User' => 'Front User',
       'SEO' => 'SEO',
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
@@ -358,7 +357,6 @@ function user_management_user_default_permissions() {
       'Author/Guest' => 'Author/Guest',
       'Copy Editor' => 'Copy Editor',
       'Editor' => 'Editor',
-      'Front User' => 'Front User',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
@@ -390,7 +388,6 @@ function user_management_user_default_permissions() {
     'roles' => array(
       'Author/Guest' => 'Author/Guest',
       'Editor' => 'Editor',
-      'Front User' => 'Front User',
       'Intern' => 'Intern',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
