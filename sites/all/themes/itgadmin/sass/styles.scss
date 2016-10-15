@@ -2919,7 +2919,7 @@ fieldset#edit-select{
 }
 .confirmation{
   @extend .node-form;
-  a#edit-cancel{
+  a#edit-cancel, a.active{
     @extend .btn-cancel;
     @extend .dib;
     @extend .vtop;
@@ -6564,7 +6564,11 @@ div.node{
         display: block;
     }*/
 }
-#views-form-photo-carousel-widget-photo-carousel-list, 
+#views-form-photo-carousel-widget-photo-carousel-list,
+#views-form-special-how-i-made-it-special-how-made-it-widget-contents,
+#views-form-special-auto-review-widget-special-auto-review-widget-contents,
+#views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents,
+#views-form-most-read-widget-most-read-widget-contents,
 #views-form-photo-carousel-widget-video-carousel-list{
   @extend .confirmation;
   .form-actions{
@@ -8145,4 +8149,5 @@ div.node{
 #draggableviews-table-photo-carousel-widget-photo-carousel .tabledrag-hide {display:none !important}
 #draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {display:none !important}
 #draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {display:none !important}
+#draggableviews-table-issue-base-magazin-widget-issue-magazin-widget-list .tabledrag-hide {display:none !important}
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-image-caption textarea{height: 50px;}
