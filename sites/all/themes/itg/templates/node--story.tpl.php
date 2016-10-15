@@ -229,12 +229,20 @@
                 <li><a href="#">follow the Story</a></li>
             </ul>
           </div>
-          
+              
               <?php if(!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
               <div class="snap-post">
                   <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
-
-                  <div class="agbutton"><button>Agree</button> <button>DisAgree</button> <a href="<?php echo $base_url;?>/snappost">More from Snap post</a></div>
+                  <?php $like = itg_flag_get_count(arg(1), 'like_count');
+                  $dislike = itg_flag_get_count(arg(1), 'dislike_count');
+                  if(!empty($like)) {
+                    $like_count = '('.$like.')';
+                  }
+                  if(!empty($dislike)) {
+                    $dislike_count = '('.$dislike.')';
+                  }
+                  ?>
+                  <div class="agbutton"><button id="like_count" rel="<?php print arg(1); ?>">Like</button> <span id="no-of-likes"><?php print $like_count; ?></span> <button id="dislike_count" rel="<?php print arg(1); ?>">Dislike</button> <span id="no-of-dislikes"><?php print $dislike_count; ?></span> <a href="<?php echo $base_url;?>/snappost"> More from Snap post</a><p id="voted"></p></div>
               </div>
               <?php } ?>
               <div class="tags">
