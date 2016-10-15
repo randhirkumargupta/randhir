@@ -303,6 +303,7 @@ function itg_widget_block_view($delta = '') {
       $info['widget_name'] = 'dont_miss_content_widget';
       $data = itg_widget_dont_miss_ordering_data($info);
       $block['content'] = theme("dont_miss_widget", array("data" => $data));
+      drupal_add_css("");
       break;
     case 'yearende_left_top_news':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');

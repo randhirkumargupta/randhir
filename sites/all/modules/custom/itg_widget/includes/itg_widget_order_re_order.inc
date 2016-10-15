@@ -194,44 +194,56 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_dont_miss
 function update_itg_widget_order_table_data_for_dont_miss($form, &$form_state) {
   // Take draggable view input value after submit the form.
   $draggable_view_data = $form_state['input']['draggableviews'];
-  $widget = 'dont_miss_content_widget';
-  $extra_values = array();
-  // Get extra , nid , content type from custom_table because it will further use to insert again.
-  foreach ($draggable_view_data as $key => $value) {
-    $result = db_select('itg_widget_order')
-                    ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
-                    ->condition('widget', $widget)
-                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $extra_values = $result;
+  $total_changed_weight = 0;
+
+  foreach ($draggable_view_data as $weight_cal_key => $weight) {
+    $total_changed_weight = $weight['weight'] + $total_changed_weight;
   }
 
-  // Make draggable array with extra and content type , which is recived above.
-  foreach ($extra_values as $key => $value) {
-    foreach ($draggable_view_data as $draggable_node_key => $draggable_nodes) {
-      if ($draggable_nodes['id'] == $value['nid']) {
-        $draggable_view_data[$key]['extra'] = $value['custom_text'];
-        $draggable_view_data[$key]['content_type'] = $value['content_type'];
+  if ($total_changed_weight) {
+
+    $widget = 'dont_miss_content_widget';
+    $extra_values = array();
+    // Get extra , nid , content type from custom_table because it will further use to insert again.
+    foreach ($draggable_view_data as $key => $value) {
+      $result = db_select('itg_widget_order')
+                      ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
+                      ->condition('widget', $widget)
+                      ->execute()->fetchAll(PDO::FETCH_ASSOC);
+      $extra_values = $result;
+    }
+
+    // Make draggable array with extra and content type , which is recived above.
+    foreach ($extra_values as $key => $value) {
+      foreach ($draggable_view_data as $draggable_node_key => $draggable_nodes) {
+        if ($draggable_nodes['id'] == $value['nid']) {
+          $draggable_view_data[$key]['extra'] = $value['custom_text'];
+          $draggable_view_data[$key]['content_type'] = $value['content_type'];
+        }
       }
     }
-  }
 
-  // Delete all entry of widget dont_miss_content_widget as we have all the array of already inserted data.
-  db_delete('itg_widget_order')
-          ->condition('widget', 'dont_miss_content_widget')
-          ->execute();
-
-  // Now insert again with updated values.
-  foreach ($draggable_view_data as $key => $node_data) {
-    db_insert('itg_widget_order')
-            ->fields(array(
-                'nid' => $node_data['id'],
-                'widget' => $widget,
-                'content_type' => $node_data['content_type'],
-                'cat_id' => '0',
-                'weight' => $node_data['weight'],
-                'extra' => $node_data['custom_text'],
-            ))
+    // Delete all entry of widget dont_miss_content_widget as we have all the array of already inserted data.
+    db_delete('itg_widget_order')
+            ->condition('widget', 'dont_miss_content_widget')
             ->execute();
+
+    // Now insert again with updated values.
+    foreach ($draggable_view_data as $key => $node_data) {
+      db_insert('itg_widget_order')
+              ->fields(array(
+                  'nid' => $node_data['id'],
+                  'widget' => $widget,
+                  'content_type' => $node_data['content_type'],
+                  'cat_id' => '0',
+                  'weight' => $node_data['weight'],
+                  'extra' => $node_data['custom_text'],
+              ))
+              ->execute();
+    }
+  }
+  else {
+    drupal_set_message("This order already saved.");
   }
 }
 
@@ -361,26 +373,26 @@ function update_itg_widget_order_table_data_for_special_auto_review($form, &$for
   // Take draggable view input value after submit the form.
   $draggable_view_data = $form_state['input']['draggableviews'];
   $extra_values = array();
-  $weightcount=0;
+  $weightcount = 0;
   foreach ($draggable_view_data as $key => $value) {
-      $weightcount = $datacount+$value['weight'];
+    $weightcount = $datacount + $value['weight'];
   }
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
-      if($weightcount > 0)
-      {
-    db_update('itg_widget_order')
-            ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
-            ->condition('widget', 'special_auto_review_content')
-            ->condition('nid', $value['id'])
-            ->execute();
-      } else {
-          db_update('itg_widget_order')
-            ->fields(array( 'extra' => $value['custom_text'],))
-            ->condition('widget', 'special_auto_review_content')
-            ->condition('nid', $value['id'])
-            ->execute();
-      }
+    if ($weightcount > 0) {
+      db_update('itg_widget_order')
+              ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
+              ->condition('widget', 'special_auto_review_content')
+              ->condition('nid', $value['id'])
+              ->execute();
+    }
+    else {
+      db_update('itg_widget_order')
+              ->fields(array('extra' => $value['custom_text'],))
+              ->condition('widget', 'special_auto_review_content')
+              ->condition('nid', $value['id'])
+              ->execute();
+    }
   }
 }
 
@@ -493,27 +505,27 @@ function update_itg_widget_order_table_data($form, &$form_state) {
   $cat_id = $_GET['category_tid'];
   $type_in_url = $_GET['type'];
   $actual_weight_type = 'All';
-  $types = array("story","videogallery","photogallery");
-  if(in_array($type_in_url, $types)) {
+  $types = array("story", "videogallery", "photogallery");
+  if (in_array($type_in_url, $types)) {
     $actual_weight_type = $type_in_url;
   }
-  
+
   // Now insert new entry in itg_widget_order table of combination
   foreach ($draggable_view_data as $key => $node_data) {
     try {
-     db_merge('itg_widget_order')
+      db_merge('itg_widget_order')
               ->key(array(
                   'nid' => $node_data['id'],
                   'widget' => $widget,
                   'cat_id' => $cat_id,
-                  'content_type'=>$actual_weight_type,
+                  'content_type' => $actual_weight_type,
               ))
               ->fields(array(
                   'weight' => $node_data['weight'],
                   'nid' => $node_data['id'],
                   'widget' => $widget,
                   'cat_id' => $cat_id,
-                  'content_type'=>$actual_weight_type,
+                  'content_type' => $actual_weight_type,
               ))
               ->execute();
     } catch (Exception $ex) {
