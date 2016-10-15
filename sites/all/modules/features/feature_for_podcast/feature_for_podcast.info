@@ -41,7 +41,6 @@ features[field_instance][] = node-podcast-field_story_category
 features[field_instance][] = node-podcast-field_story_extra_large_image
 features[field_instance][] = node-podcast-field_story_extra_small_image
 features[field_instance][] = node-podcast-field_story_itg_tags
-features[field_instance][] = node-podcast-field_story_kicker_text
 features[field_instance][] = node-podcast-field_story_large_image
 features[field_instance][] = node-podcast-field_story_medium_image
 features[field_instance][] = node-podcast-field_story_node_identity
