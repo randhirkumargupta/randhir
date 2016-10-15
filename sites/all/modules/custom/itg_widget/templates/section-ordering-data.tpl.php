@@ -375,7 +375,7 @@ if ($widget_style == 'auto-road-trip') {
                                 <img src="<?php echo $extra_large_image_url; ?>">
                             </a></span>
 
-                        <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>                      
+                        <p><?php echo l(mb_strimwidth($desc, 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>                      
                     </div>
                     <?php
                 }
