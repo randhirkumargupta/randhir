@@ -2539,7 +2539,7 @@ body.has-cart-popup {
 }
 .page-user .messages--status, .page-user .messages--error {
   max-width: 440px;
-  margin: 0 auto;
+  margin: 20px auto 0;
 }
 .page-user .messages--error .messages__list {
   padding-left: 15px;
