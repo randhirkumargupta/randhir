@@ -12,6 +12,7 @@
  * @param string $form_id
  */
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
+   
   if ($form_id == 'photogallery_node_form') {
     //code for common syndication field hide
     drupal_add_js('jQuery(document).ready(function() {
@@ -259,6 +260,7 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
     $form_state['rebuild'] = TRUE;
   }
   $node = drupal_rebuild_form('photogallery_node_form', $form_state, $old_form = NULL);
+
   $fids = array();
   foreach ($node['upload']['#value'] as $img) {
     // Save media file.
@@ -287,11 +289,13 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
   }
   $key_val = 0;
   foreach ($fids as $file_id) {
+      
     $file_ids[$key_val]['fid'] = $file_id->fid;
     $file_ids[$key_val]['filename'] = $file_id->filename;
     $key_val++;
   }
   $i = 0;
+
   foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
     if (!isset($filed_collection->field_images['und'])) {
       
@@ -301,6 +305,10 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['alt'] = $file_ids[$i]['filename'];
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['title'] = $file_ids[$i]['filename'];
      // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_gallery_small_image['und'][0]['fid'] = $file_ids[$i]['fid'];   
+      if($file_ids[$i]['filename']!="")
+      {
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_credit['und'][0]['value'] = $_POST['field_credit_name']['und'][0]['value'];
+      }
       $i++;
     }
   }
