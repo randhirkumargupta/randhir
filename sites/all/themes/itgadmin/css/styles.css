@@ -1890,7 +1890,7 @@ div.vertical-tabs .form-textarea-wrapper {
   padding: 0 15px 30px;
 }
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) {
-  min-height: 396px;
+  min-height: 418px;
   border: 1px solid #d9d9d9;
 }
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .messages--error {
@@ -8124,4 +8124,56 @@ div.node #comments h2 {
 
 .view-menu-manager h2 {
   text-transform: capitalize;
+}
+
+#draggableviews-table-story-widget-most-popular-widget .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-so-sorry-so-sorry-videos-widget .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-widget-anchors-listing-anchors-listing-widget .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-home-page-feature-widget-page-2 .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-section-wise-content-ordering-list-we-may-suggest-widget .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-story-widget-page-2 .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-story-widget-trending-videos-widget .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-story-widget-top-takes-video-widget .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-story-widget-watch-right-now-widget .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-photo-carousel-widget-photo-carousel .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {
+  display: none !important;
+}
+
+#draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {
+  display: none !important;
+}
+
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-image-caption textarea {
+  height: 50px;
 }
