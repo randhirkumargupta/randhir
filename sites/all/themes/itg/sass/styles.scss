@@ -5186,6 +5186,9 @@ footer{
 .view-sport-ipl{
     @include pager;
 }
+.section-sport-ipl{
+    background: url('../images/sports-bg.png') no-repeat center 135px;
+}
 .sport-home-layout-page{  
     .widget-title {
         @include blue-title;

@@ -6580,6 +6580,10 @@ footer .footer-copyright {
   display: none;
 }
 
+.section-sport-ipl {
+  background: url("../images/sports-bg.png") no-repeat center 135px;
+}
+
 .sport-home-layout-page .widget-title {
   display: block;
   font-weight: 500;
