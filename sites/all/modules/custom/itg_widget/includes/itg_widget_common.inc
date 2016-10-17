@@ -1432,16 +1432,19 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
  * @param int $range_min
  * @return array
  */
-function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $range_max, $range_min = 0, $order_by = 'ASC') {
+function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat_id,$range_max, $range_min = 0, $order_by = 'ASC') {
   $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
   $query->condition('iwo.widget', $widget_name)
           ->condition('n.status', 1)
-          ->orderBy('iwo.weight', $order_by)
-           ->orderBy('n.nid', 'DESC')
+           ->condition('tx.tid', $cat_id)
+          ->orderBy('iwo.weight', 'ASC')
+          ->orderBy('n.nid', 'DESC')
           ->range($range_min, $range_max)
           ->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
   $weight = 0;
   foreach ($result as $data) {
     $weight +=$data['weight'];
@@ -1476,7 +1479,7 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
   $query->condition('iwo.widget', $widget_name)
           ->condition('n.status', 1)
           ->condition('iwo.content_type', $content_type)
-          ->orderBy('iwo.weight', 'DESC')
+          ->orderBy('iwo.weight', 'ASC')
           ->range($range_min, $range_max)
           ->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -1495,7 +1498,7 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
     $query->condition('iwo.widget', $widget_name)
             ->condition('n.status', 1)
             ->condition('iwo.content_type', $content_type)
-            ->orderBy('n.nid', 'DESC')
+            ->orderBy('n.nid', 'ASC')
             ->range($range_min, $range_max)
             ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

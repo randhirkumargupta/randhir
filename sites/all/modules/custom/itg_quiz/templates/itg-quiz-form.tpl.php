@@ -4,6 +4,7 @@
  */
 global $base_url;
 $node = $form['node']['#value'];
+$from_story = $form['from_story']['#value'];
 $byline_node = node_load($node->field_story_reporter[LANGUAGE_NONE][0]['target_id']);
 
 $byline_name = $byline_node->title;
@@ -19,8 +20,8 @@ else {
   $form_class = 'survey-form-wrapper-one';
 }
 ?>
-<div class="survey-form-main-container">
-  <h1 class="survey-title"><?php echo $node->title; ?></h1>
+<div class="survey-form-main-container" style="margin:10px 0px 10px 0px;">
+  <h1 class="survey-title"><?php echo 'Quiz: '. $node->title; ?></h1>
   <div class="survey-description"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
   <div class="byline">
     <div class="profile-pic">
@@ -63,8 +64,10 @@ else {
   </div>
   
   <?php
-  if (function_exists('taboola_view')) {
-    taboola_view();
+  if ($from_story != 'yes') {
+    if (function_exists('taboola_view')) {
+      taboola_view();
+    }
   }
   ?>
 </div>
