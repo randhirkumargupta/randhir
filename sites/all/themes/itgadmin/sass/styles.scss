@@ -1989,8 +1989,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-template-guru-values"]{
   @extend .itg-add-another-item;
 }
-[id*="field-erf-registration-fee-values"], 
-[id*="field-mega-review-review-values"],
+[id*="field-erf-registration-fee-values"],
 [id*="field-story-highlights-values"]{
   thead{
     @extend .hide;
@@ -8173,5 +8172,41 @@ div.node{
       max-width: 125px;
       margin-right: 10px;
     }
+  }
+}
+.node-mega_review_critic-form{
+  [id*="field-story-reporter-values"]{
+    thead{
+      display: block;
+    }
+    tbody{
+      overflow: visible;
+      tr{
+        td{
+          .form-type-textfield{
+            > label{display: none;}
+          }
+        }
+      }
+    }
+  }
+  [id*="field-mega-review-review-values"]{
+    > tbody > tr > td{
+      float: left;
+      border: 1px solid #d8d8d8;
+      margin-bottom: 30px;
+      padding: 0;
+      > .form-submit, > .ajax-new-content > .form-submit{margin-bottom: 30px;}
+    }
+    & + div.clearfix{
+      .ajax-progress, .form-submit{
+        margin-top: -15px;
+      }
+    } 
+  }
+}
+.node-type-mega-review-critic, .page-node-add-mega-review-critic{
+  .action-with-title #page-title{
+    width: 730px;
   }
 }
