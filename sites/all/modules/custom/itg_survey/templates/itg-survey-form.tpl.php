@@ -19,8 +19,8 @@ else {
   $form_class = 'survey-form-wrapper-one';
 }
 ?>
-<div class="survey-form-main-container">
-  <h1 class="survey-title"><?php echo $node->title; ?></h1>
+<div class="survey-form-main-container" style="margin: 10px 0px 10px 0px;">
+  <h1 class="survey-title"><?php echo 'Survey: '.$node->title; ?></h1>
   <div class="survey-description"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
   <div class="byline">
     <div class="profile-pic">
