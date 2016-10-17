@@ -464,3 +464,12 @@ $root-font-size: 16px;
         }
     }    
 }
+
+@mixin blue-title{
+        display: block;
+        font-weight: 500;
+        background: #5585f6;
+        font-size: 16px;
+        padding: 0 10px;
+        @include calculate-width(1);
+}
