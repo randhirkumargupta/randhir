@@ -111,7 +111,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
    
 ?>
 <div class="itg-layout-container <?php echo $itg_class; ?>">
-   
+   <?php $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
+  print render($block['content']); ?>
     <div class="row yearend-page">
         <div class="col-md-8 col-sm-8 col-sx-12 left-side">
             <div class="itg-643">

@@ -442,10 +442,10 @@ function itg_category_manager_term_validate($form, &$form_state) {
   }
 
 
-  if ($form_state['values']['parent'][0] == 0 && $form_state['values']['field_cm_select_type']['und'][0]['value'] == NULL) {
-
-    form_set_error('field_cm_select_type', t('Content Type field is required for root.'));
-  }
+//  if ($form_state['values']['parent'][0] == 0 && $form_state['values']['field_cm_select_type']['und'][0]['value'] == NULL) {
+//
+//    form_set_error('field_cm_select_type', t('Content Type field is required for root.'));
+//  }
 
   if ($form_state['values']['field_user_city']['und'][0]['value'] != NULL) {
     if (!preg_match('/^([01]?[0-9]|2[0-3])(:[0-5][0-9]){1}$/', $form_state['values']['field_user_city']['und'][0]['value'])) {
