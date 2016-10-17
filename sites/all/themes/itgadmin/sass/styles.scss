@@ -1551,6 +1551,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-podcast-admin-menu,
 #block-menu-menu-print-team-menu,
 #block-menu-menu-videogallery-admin-menu,
+#block-menu-menu-event-backend,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -8151,3 +8152,15 @@ div.node{
 #draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {display:none !important}
 #draggableviews-table-issue-base-magazin-widget-issue-magazin-widget-list .tabledrag-hide {display:none !important}
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-image-caption textarea{height: 50px;}
+[id*="views-exposed-form-Event-backend-page"]{
+  .views-submit-button{
+    [id*="edit-submit-event-backend"]{
+      margin-top: 26px;
+    }
+    .custom-event-type{
+      float: left;
+      max-width: 125px;
+      margin-right: 10px;
+    }
+  }
+}
