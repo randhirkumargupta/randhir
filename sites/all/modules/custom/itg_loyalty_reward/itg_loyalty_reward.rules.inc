@@ -28,9 +28,10 @@ function itg_loyalty_reward_rules_action_info() {
  *
  * @param type $node
  *   Standard node object.
+ * @param int $ugc_node
+ *   Node id of the old ugc node.
  */
-function itg_loyalty_reward_ugc_content_points($node, $ugc_node) {
-  watchdog('UGC NEW NODE', '<pre>' . print_r($node, TRUE) . '</pre>');
-  watchdog('UGC OLD NODE', '<pre>' . print_r($ugc_node, TRUE) . '</pre>');
-  itg_loyalty_reward_earnpoint($node->nid, 'ugc');
+function itg_loyalty_reward_ugc_content_points($node, $ugc_node) {  
+  $ugc_user = node_load($ugc_node);
+  itg_loyalty_reward_earnpoint($node->nid, 'ugc', $ugc_user->uid);
 }

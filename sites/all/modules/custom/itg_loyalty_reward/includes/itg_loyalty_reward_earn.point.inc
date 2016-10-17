@@ -42,8 +42,14 @@ function itg_loyalty_reward_testpoints() {
  */
 function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL) {
   global $user;
+  if ($uid != NULL) {
+    $user_id = $uid;
+  }
+  else {
+    $user_id = $user->uid;
+  }
   // Check user unique expiration key.
-  $unique_exp_key = itg_loyalty_reward_unique_expiration($user->uid);
+  $unique_exp_key = itg_loyalty_reward_unique_expiration($user_id);
   $time_span = variable_get('lrp_loyality_points_expiry');
   if (isset($_POST['type'])) {
     $inputs = $_POST;    
@@ -53,7 +59,7 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL) {
   }  
   $dedicated_point = itg_loyalty_reward_dedicated_point(check_plain($inputs['type']));
   $point_presave = array(
-    'uid' => $user->uid,
+    'uid' => $user_id,
     'loyalty_type' => $dedicated_point['label'],
     'loyalty_points' => $dedicated_point['point'],
     'pointer_key' => $unique_exp_key != '' ? $unique_exp_key : '',
@@ -69,7 +75,7 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL) {
   }
   else {
     $presave = array(
-      'uid' => $user->uid,
+      'uid' => $user_id,
       'pointer_key' => uniqid('itg'),
       'created' => REQUEST_TIME,
       'expiry_date' => time() + ($time_span * 24 * 60 * 60),
@@ -97,12 +103,12 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL) {
 /**
  * Insert points into point table.
  *
- * @global stdObject $user
  * @param array $presave
  *   Mixed array for inserting data.
+ * @param string $op
+ *   Type of operation. 'new' and 'update'.
  */
-function itg_loyalty_reward_add_point($presave, $op) {
-  global $user;
+function itg_loyalty_reward_add_point($presave, $op) {  
   $itg_query = db_insert('itg_lrp_loyalty_points')
       ->fields($presave)
       ->execute();
