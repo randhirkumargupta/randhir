@@ -40,7 +40,7 @@ function itg_loyalty_reward_testpoints() {
  * 
  * @global stdObject $user
  */
-function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL) {
+function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL) {
   global $user;
   // Check user unique expiration key.
   $unique_exp_key = itg_loyalty_reward_unique_expiration($user->uid);
