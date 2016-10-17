@@ -8,6 +8,8 @@
  * @see https://drupal.org/node/1728164
  */
 global $base_url;
+$share_page_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$short_url = shorten_url($share_page_link, 'goo.gl');
 ?>
 		<style>
 			#slider-range{width:750px;}
@@ -89,7 +91,7 @@ if (!empty($content)):
             rsort($field_collection_ids);
 
             foreach ($field_collection_ids as $breaking_item) {
-
+                $fb_title = urlencode($entity[$field_collection_id]->field_breaking_tile['und'][0]['value']);
                 $breaking_output.= '<div class="breaking-section">';
 
                 $field_collection_id = $breaking_item;
@@ -98,7 +100,7 @@ if (!empty($content)):
                 $pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
                 $pub_time2 = str_replace(":","",$pub_time);
                 $breaking_output.= '<div class="dwrap" timevalue="'.$pub_time2.'" tcount="'.count($field_collection_ids).'"><div class="breaking-date">' . $pub_display_time . '</div>';
-                $breaking_output.= '<div class="breaking-discription">' . $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'] . '</div><div class="social-share"><ul><li><a class="share" href="#"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>';
+                $breaking_output.= '<div class="breaking-discription">' . $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'] . '</div><div class="social-share"><ul><li><a class="share" href="#"><i class="fa fa-share-alt"></i></a></li><li><a onclick="gogogo('."'".$share_page_link."'".', '."'".  $fb_title."'".')" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="javascript:" onclick="twitter_popup('."'".urlencode(strip_tags($entity[$field_collection_id]->field_breaking_tile['und'][0]['value']))."'".', '."'".urlencode($short_url)."'".')" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" href="#" onclick="return googleplusbtn('."'".$share_page_link."'".')" class="google"></a></li></ul></div>';
                 $breaking_output.= '</div></div>';
             }
             $breaking_output .= '<span class="no-record" style="display:none">No Record Found</span>';
