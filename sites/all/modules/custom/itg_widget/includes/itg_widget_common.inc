@@ -1422,6 +1422,46 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
   }
 }
 
+
+
+/**
+ * Function returns data for cutom tables widgets.
+ * 
+ * @param string $widget_name
+ * @param int $range_max
+ * @param int $range_min
+ * @return array
+ */
+function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $range_max, $range_min = 0, $order_by = 'ASC') {
+  $query = db_select('itg_widget_order', 'iwo');
+  $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+  $query->condition('iwo.widget', $widget_name)
+          ->condition('n.status', 1)
+          ->orderBy('iwo.weight', $order_by)
+           ->orderBy('n.nid', 'DESC')
+          ->range($range_min, $range_max)
+          ->fields('iwo', array('nid', 'extra', 'weight'));
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $weight = 0;
+  foreach ($result as $data) {
+    $weight +=$data['weight'];
+  }
+  if ($weight > 0) {
+    return $result;
+  }
+  else {
+// Query for renctaly careated node if weight is not saved
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->condition('iwo.widget', $widget_name)
+            ->condition('n.status', 1)
+            ->orderBy('n.nid', 'DESC')
+            ->range($range_min, $range_max)
+            ->fields('iwo', array('nid', 'extra', 'weight'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+}
 /**
  * Function returns data for cutom tables widgets.
  * 

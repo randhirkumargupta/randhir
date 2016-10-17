@@ -22,6 +22,7 @@
  *
  * @ingroup views_templates
  */
+
 ?>
 <div class="container">
     <?php foreach ($fields as $id => $field): ?>
@@ -36,8 +37,21 @@
     <?php endforeach; ?>
     <div class="snap-post-btm">
         <div class="snap-button">
-            <a href="#" class="agree"><i class="fa fa-thumbs-o-up"></i> AGREE</a>
-            <a href="#" class="disagree"><i class="fa fa-thumbs-o-down"></i> DISAGREE</a>
+            
+            <?php $like = itg_flag_get_count($row->nid, 'like_count');
+                  $dislike = itg_flag_get_count($row->nid, 'dislike_count');
+                  if(!empty($like)) {
+                    $like_count = '('.$like.')';
+                  }
+                  if(!empty($dislike)) {
+                    $dislike_count = '('.$dislike.')';
+                  }
+                  $pid= "voted_".$row->nid;
+                  $like= "no-of-likes_".$row->nid;
+                  $dislike= "no-of-dislikes_".$row->nid;
+                  ?>
+        <button id="like_count" rel="<?php print $row->nid; ?>" class="agree">Like</button> <span id="<?php print $like;?>"><?php print $like_count; ?></span> <button id="dislike_count" rel="<?php print $row->nid; ?>" class="disagree">Dislike</button> <span id="<?php print $dislike;?>"><?php print $dislike_count; ?></span> 
+        <p id="<?php print $pid; ?>"></p>
         </div>
         <div class="snap-social">
             <ul>
