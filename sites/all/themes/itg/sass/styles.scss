@@ -3095,7 +3095,7 @@ footer{
     }
 
 }
-.view-video-list-of-category, .view-video-landing-header, .view-so-sorry, .view-programme-content, .sports-video{    
+.view-video-list-of-category, .view-video-landing-header, .view-so-sorry, .view-programme-content, .sports-video, .sports-photo{    
     .views-exposed-form{
         display: none;
     }
@@ -5175,13 +5175,20 @@ footer{
 }
 /*CSS end for education page*/
 /*CSS start sport home page*/
+.sports-video, .sports-photo{
+    margin-top: -15px;
+}
+.siderbar-sport, #block-itg-widget-ipl-tweets{
+    .widget-title {
+        @include blue-title;
+    }
+}
+.view-sport-ipl{
+    @include pager;
+}
 .sport-home-layout-page{  
     .widget-title {
-        display: block;
-        font-weight: 500;
-        background: #5585f6;
-        font-size: 16px;
-        padding: 0 10px;
+        @include blue-title;
     }
     .droppable {
         overflow: hidden;
@@ -5407,6 +5414,38 @@ footer{
                 width: 120px;
                 float: left;
             }
+            input[type="radio"] {
+    display:none;
+}
+input[type="radio"] + label {    
+    padding-left: 25px;
+    position: relative;
+}
+input[type="radio"] + label:before, input[type="radio"] + label:after{
+    display:inline-block;
+    width:15px;
+    height:15px;    
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+    position: absolute;
+    top:3px;
+    left: 0;
+    content: '';
+}
+
+input[type="radio"] + label:before{
+     background-color:#c0c0c0;
+}
+
+input[type="radio"]:checked + label:after{
+    background-color: #333;
+    width: 7px;
+    height: 7px;
+    top: 7px;
+    left: 4px;
+}
         } 
     }
 }
