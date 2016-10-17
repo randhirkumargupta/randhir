@@ -200,28 +200,29 @@ function itg_live_tv_node_validate($node, $form, &$form_state) {
  */
 function itg_live_tv_views_pre_render(&$view) {
   global $user, $base_url;
-
-  $settings = array();
-  $settings['base_url'] = $base_url;
-  $settings['uid'] = $user->uid;
-  drupal_add_js(array('itg_live_tv' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_live_tv') . '/js/itg_live_tv.js', array('weight' => 1));
+  
   // condition for view name
   if ($view->name == "live_tv_integration") {
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    $settings['uid'] = $user->uid;
+    drupal_add_js(array('itg_live_tv' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_live_tv') . '/js/itg_live_tv.js', array('weight' => 1));
+
     $header_content_breaking = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_breaking .= l('Create Live tv integration', 'node/add/live-tv-integration', array('query' => array('destination' => 'live-tv-integration')));
     $view->attachment_before = $header_content_breaking;
   }
-if(isset($view->result) && !empty($view->result)){
-  foreach ($view->result as $live_result) {
-    if(!empty($live_result->field_field_live_tv_device)){
-    $errors = array_filter($live_result->field_field_live_tv_device);
-    if (empty($errors)) {
-      $live_result->field_field_live_tv_device[0]['rendered']['#markup'] = 'Not Activated';
-    }
+  if (isset($view->result) && !empty($view->result)) {
+    foreach ($view->result as $live_result) {
+      if (!empty($live_result->field_field_live_tv_device)) {
+        $errors = array_filter($live_result->field_field_live_tv_device);
+        if (empty($errors)) {
+          $live_result->field_field_live_tv_device[0]['rendered']['#markup'] = 'Not Activated';
+        }
+      }
     }
   }
-}
 }
 
 /**
