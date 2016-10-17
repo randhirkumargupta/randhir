@@ -23,9 +23,10 @@ function ipl_tweets() {
       
     });", array('type' => 'inline', 'scope' => 'footer'));
 
-    return '<a class="twitter-timeline"
-  data-widget-id="349125700000829440"
-  href="https://twitter.com/IPL"
-  width="500"
-  height="500" data-chrome="nofooter">IPL TWEETS</a>';
+//    return '<a class="twitter-timeline"
+//  data-widget-id="349125700000829440"
+//  href="https://twitter.com/IPL"
+//  width="500"
+//  height="500" data-chrome="nofooter">IPL TWEETS</a>
+return '<span class="widget-title">IPL TWEETS</span> ';
 }
