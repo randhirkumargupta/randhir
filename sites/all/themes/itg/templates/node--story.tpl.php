@@ -241,8 +241,11 @@
                   if(!empty($dislike)) {
                     $dislike_count = '('.$dislike.')';
                   }
+                  $pid= "voted_".arg(1);
+                  $like= "no-of-likes_".arg(1);
+                  $dislike= "no-of-dislikes_".arg(1);
                   ?>
-                  <div class="agbutton"><button id="like_count" rel="<?php print arg(1); ?>">Like</button> <span id="no-of-likes"><?php print $like_count; ?></span> <button id="dislike_count" rel="<?php print arg(1); ?>">Dislike</button> <span id="no-of-dislikes"><?php print $dislike_count; ?></span> <a href="<?php echo $base_url;?>/snappost"> More from Snap post</a><p id="voted"></p></div>
+                  <div class="agbutton"><button id="like_count" rel="<?php print arg(1); ?>">Like</button> <span id="<?php print $like;?>"><?php print $like_count; ?></span> <button id="dislike_count" rel="<?php print arg(1); ?>">Dislike</button> <span id="<?php print $dislike;?>"><?php print $dislike_count; ?></span> <a href="<?php echo $base_url;?>/snappost"> More from Snap post</a><p id="<?php print $pid;?>"></p></div>
               </div>
               <?php } ?>
               <div class="tags">
