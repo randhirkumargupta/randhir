@@ -12,6 +12,13 @@ if (isset($_GET['sid']) && !empty($_GET['sid'])) {
       $output .= '<li value="' . $menu->filter_url . '"><a href="javascript:void(0)" class="NULL">' . $menu->name . '</a></li>';
     endforeach;
   }
+}else{
+     $node = itg_videogallery_get_term(arg(1));
+   if(in_array(variable_get('ipl_for_widget'), $node))
+   {
+      print '<h3><span class="ipl-other-video">Other Gallery</span></h3>';  
+      
+   }
 }
 
 print '<ul class="photo_landing_menu">' . $output . '</ul>';
