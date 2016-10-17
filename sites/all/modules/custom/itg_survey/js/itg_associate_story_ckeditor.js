@@ -19,6 +19,7 @@
         appendText = appendText.slice(0,-1);
         var curr_url = window.location.href;
         var type = curr_url.split('/').pop();
+        alert(type);
         if(type == 'poll') {
           var element_id = window.opener.document.getElementsByClassName("cke_dialog_ui_input_text")[1].getAttribute("id");
         }
