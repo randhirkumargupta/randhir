@@ -76,7 +76,7 @@ h4.heading a {
   color: #09619f;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-program-schedule-block-1 ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-program-schedule-block-1 ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul {
   list-style-type: none;
 }
 
@@ -6530,13 +6530,18 @@ footer .footer-copyright {
   margin-top: -15px;
 }
 
-.siderbar-sport .widget-title, #block-itg-widget-ipl-tweets .widget-title {
+.siderbar-sport .widget-title, .siderbar-sport h2.block-title, #block-itg-widget-ipl-tweets .widget-title, #block-itg-widget-ipl-tweets h2.block-title {
   display: block;
   font-weight: 500;
   background: #5585f6;
   font-size: 16px;
   padding: 0 10px;
   width: 100%;
+}
+.siderbar-sport h2.block-title, #block-itg-widget-ipl-tweets h2.block-title {
+  line-height: normal;
+  color: #fff;
+  text-transform: uppercase;
 }
 
 .view-sport-ipl ul.pager {
@@ -6591,6 +6596,9 @@ footer .footer-copyright {
   font-size: 16px;
   padding: 0 10px;
   width: 100%;
+}
+.sport-home-layout-page .siderbar-sport .widget-title, .sport-home-layout-page .siderbar-sport .h2.block-title {
+  display: none;
 }
 .sport-home-layout-page .droppable {
   overflow: hidden;
@@ -6939,3 +6947,43 @@ footer .footer-copyright {
 }
 
 /*CSS End for movie page*/
+/*css start special page*/
+#block-itg-menu-manager-third-level-menu {
+  background: #1b1b1b;
+  zoom: 1;
+  height: 60px;
+  overflow: hidden;
+}
+#block-itg-menu-manager-third-level-menu:before, #block-itg-menu-manager-third-level-menu:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-itg-menu-manager-third-level-menu:after {
+  clear: both;
+}
+#block-itg-menu-manager-third-level-menu ul {
+  padding-top: 30px;
+  float: right;
+}
+#block-itg-menu-manager-third-level-menu ul li {
+  display: inline-block;
+  vertical-align: top;
+}
+#block-itg-menu-manager-third-level-menu ul li a {
+  color: #fff;
+  padding: 0 10px;
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+#block-itg-menu-manager-third-level-menu ul li a:hover {
+  background: #ededed;
+  color: #000;
+}
+
+/*css end special page*/

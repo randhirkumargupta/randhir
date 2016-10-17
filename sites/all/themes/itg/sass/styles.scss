@@ -5179,8 +5179,13 @@ footer{
     margin-top: -15px;
 }
 .siderbar-sport, #block-itg-widget-ipl-tweets{
-    .widget-title {
+    .widget-title, h2.block-title {
         @include blue-title;
+    }
+    h2.block-title{
+        line-height: normal;
+        color: #fff;
+        text-transform: uppercase;
     }
 }
 .view-sport-ipl{
@@ -5192,6 +5197,11 @@ footer{
 .sport-home-layout-page{  
     .widget-title {
         @include blue-title;
+    }
+    .siderbar-sport{
+        .widget-title, .h2.block-title{
+            display: none;
+        }         
     }
     .droppable {
         overflow: hidden;
@@ -5599,3 +5609,34 @@ input[type="radio"]:checked + label:after{
     }    
 }
 /*CSS End for movie page*/
+
+/*css start special page*/
+#block-itg-menu-manager-third-level-menu{
+    background: #1b1b1b;
+    @include clearfix;
+    height:60px;
+    overflow:hidden;
+    ul{        
+        @extend .list-none;
+        padding-top: 30px;
+        @include float(right);
+        li{
+            @include display-inline;
+            a{
+                    color: #fff;
+    padding: 0 10px;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-transform: uppercase;
+    font-family: $itg-roboto;
+    font-weight: 500;
+                &:hover{
+                    background: #ededed;
+                    color:#000;
+                }
+            }
+        }
+    }
+}
+/*css end special page*/
