@@ -12,8 +12,7 @@
  */
 function itg_personalization_edit_profile_form() {
   global $user;
-  $user_detail = user_load($user->uid);  
-  dpm($user_detail);
+  $user_detail = user_load($user->uid);    
   $form['fname'] = array(
     '#title' => t('First Name'),
     '#type' => 'textfield',
