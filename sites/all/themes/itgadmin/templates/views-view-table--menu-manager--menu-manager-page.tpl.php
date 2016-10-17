@@ -28,7 +28,7 @@
     <thead>
       <tr>
           <?php foreach ($header as $field => $label): ?>
-          <th <?php ($field == 'weight' || $field == 'id') ? print "style='display:none'" : print ""; ?> <?php if ($header_classes[$field]) {
+          <th <?php ($field == 'weight' || $field == 'id' || $field =='tid') ? print "style='display:none'" : print ""; ?> <?php if ($header_classes[$field]) {
           print 'class="' . $header_classes[$field] . '" ';
         } ?> scope="col">
     <?php print $label; ?>
@@ -85,7 +85,7 @@
         }
         else {
           ?>
-            <td <?php ($field == 'weight' || $field == 'id') ? print "style='display:none'" : print ""; ?> <?php if ($field_classes[$field][$row_count]) {
+            <td <?php ($field == 'weight' || $field == 'id' || $field =='tid') ? print "style='display:none'" : print ""; ?> <?php if ($field_classes[$field][$row_count]) {
             print 'class="' . $field_classes[$field][$row_count] . '" ';
           } ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
       <?php print $content; ?>
