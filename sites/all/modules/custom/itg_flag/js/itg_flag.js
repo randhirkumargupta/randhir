@@ -30,14 +30,14 @@
                              
                             $('#widget-ajex-loader').hide();
                             if (obj.type == 'like_count') {
-                            $("#no-of-likes").html("(" + obj.count + ")");
+                            $("#no-of-likes_"+obj.nd_id).html("(" + obj.count + ")");
                         }
                         if (obj.type == 'dislike_count') {
-                            $("#no-of-dislikes").html("(" + obj.count + ")");
+                            $("#no-of-dislikes_"+obj.nd_id).html("(" + obj.count + ")");
                         }
                         if (obj.error == 'error') {
-                            
-                            $("#voted").html('You have already voted').show(0).delay(2000).hide(1000);
+                           
+                            $("#voted_"+obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
                         }
                         }
                     });
