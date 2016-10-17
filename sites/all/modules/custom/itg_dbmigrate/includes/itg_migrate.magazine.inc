@@ -67,7 +67,8 @@ class ItgMagazineMigration extends XMLMigration {
     $this->addFieldMapping('field_print_magazine_issue_date', 'magazine_issue_date')->xpath('magazine_issue_date');//m/d/Y
     $this->addFieldMapping('field_magazine_publish', 'magazine_publish')->xpath('magazine_publish');    
     $this->addFieldMapping('field_magazine_cover_photo', 'magazine_cover_photo')->xpath('magazine_cover_photo');
-    
+    $this->addFieldMapping('field_magazine_cover_photo:alt', 'cover_alt')->xpath('cover_alt');
+    $this->addFieldMapping('field_magazine_cover_photo:title', 'cover_title')->xpath('cover_title');
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
