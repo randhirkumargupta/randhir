@@ -4175,6 +4175,15 @@ div.node{
     .ajax-progress-throbber{
       @extend .hide;
     }
+    .field-name-field-service-audio-keyword{
+      padding-left: 220px;
+      .form-type-textfield{
+        margin-top: 10px;
+        > label{
+          width: 93px;
+        }
+      }
+    }
   }
   .field-name-field-service-audio, 
   .field-name-field-service-video{

@@ -4627,6 +4627,15 @@ div.node #comments h2 {
   margin-left: 250px;
   margin-bottom: 30px;
 }
+.node-vas_service_content-form .form-field-name-field-service-content .field-name-field-service-audio-keyword {
+  padding-left: 220px;
+}
+.node-vas_service_content-form .form-field-name-field-service-content .field-name-field-service-audio-keyword .form-type-textfield {
+  margin-top: 10px;
+}
+.node-vas_service_content-form .form-field-name-field-service-content .field-name-field-service-audio-keyword .form-type-textfield > label {
+  width: 93px;
+}
 .node-vas_service_content-form td .field-name-field-story-large-image .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   left: 500px;
 }
