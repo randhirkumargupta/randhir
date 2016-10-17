@@ -8406,3 +8406,12 @@ div.node #comments h2 {
 .node-type-mega-review-critic .action-with-title #page-title, .page-node-add-mega-review-critic .action-with-title #page-title {
   width: 730px;
 }
+
+[id*="views-exposed-form-menu-manager-menu-manager-page"] .views-submit-button .form-type-select {
+  float: left;
+  max-width: 125px;
+}
+[id*="views-exposed-form-menu-manager-menu-manager-page"] .views-submit-button .form-submit {
+  margin-left: 10px !important;
+  margin-top: 26px !important;
+}
