@@ -266,29 +266,8 @@ if ($theme != 'itgadmin') {
                                                     </div>
     <?php } ?>  
 
-                                                <div class="data-holder" id="itg-block-6" widget-style="oscar-news"><?php //print $widget_data['itg-block-6']['widget']; ?>
-                                                 <table style="width: 100%; text-align: center; margin-top: 10px;">
-                                                        <tr>
-                                                            <td style="color:#d71920; padding-bottom: 10px;">Teams</td>
-                                                            <td style="color:#d71920; padding-bottom: 10px;">Points</td>
-                                                            <td style="color:#d71920; padding-bottom: 10px;">Net Run Rate</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr>                                                         
-                                                    </table>
+                                                <div class="data-holder" id="itg-block-6" widget-style="oscar-news"><?php print $widget_data['itg-block-6']['widget']; ?>
+                                                 
                                                 </div>
                                             </div>             
                                         </div>               
@@ -314,40 +293,9 @@ if ($theme != 'itgadmin') {
     <?php } ?>  
 
                                                 <div class="data-holder" id="itg-block-7">
-                                                    <table style="width: 100%; text-align: center; margin-top: 10px;">
-                                                        <tr>
-                                                            <td style="color:#d71920; padding-bottom: 10px;">Teams</td>
-                                                            <td style="color:#d71920; padding-bottom: 10px;">Points</td>
-                                                            <td style="color:#d71920; padding-bottom: 10px;">Net Run Rate</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr>  
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr> 
-                                                        <tr>
-                                                            <td style="padding-bottom: 10px;">England</td>
-                                                            <td style="padding-bottom: 10px;">15</td>
-                                                            <td style="padding-bottom: 10px;">+0.223</td>
-                                                        </tr> 
-                                                    </table>
+                                                   
                                                     
-                                                    <?php //print views_embed_view('sport_ipl','points_tally',""); ?></div>
+                                                    <?php print views_embed_view('sport_ipl','points_tally',""); ?></div>
                                             </div>             
                                         </div>               
                                     </div>  
@@ -372,8 +320,8 @@ if ($theme != 'itgadmin') {
                                                     </div>
     <?php } ?>  
 
-                                                <div class="data-holder" id="itg-block-8"><?php //print views_embed_view('sport_ipl','top_performers',""); ?>
-                                                 <table style="width: 100%; text-align: center; margin-top: 10px;">
+                                                <div class="data-holder" id="itg-block-8"><?php print views_embed_view('sport_ipl','top_performers',""); ?>
+<!--                                                 <table style="width: 100%; text-align: center; margin-top: 10px;">
                                                         <tr>
                                                             <td style="color:#d71920; padding-bottom: 10px;">Teams</td>
                                                             <td style="color:#d71920; padding-bottom: 10px;">Points</td>
@@ -404,7 +352,7 @@ if ($theme != 'itgadmin') {
                                                             <td style="padding-bottom: 10px;">15</td>
                                                             <td style="padding-bottom: 10px;">+0.223</td>
                                                         </tr> 
-                                                    </table>
+                                                    </table>-->
                                                 </div>
                                             </div>             
                                         </div>               
