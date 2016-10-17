@@ -2920,12 +2920,14 @@ fieldset#edit-select{
 }
 .confirmation{
   @extend .node-form;
-  a#edit-cancel, a.active{
-    @extend .btn-cancel;
-    @extend .dib;
-    @extend .vtop;
-    padding: 6px 12px;
-    border-radius: 4px;
+  .form-actions{
+    a#edit-cancel, a.active{
+      @extend .btn-cancel;
+      @extend .dib;
+      @extend .vtop;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
   }
 }
 .user-configurations{
@@ -8166,7 +8168,7 @@ div.node{
     [id*="edit-submit-event-backend"]{
       margin-top: 26px;
     }
-    .custom-event-type{
+    #custom-event-type{
       float: left;
       max-width: 125px;
       margin-right: 10px;

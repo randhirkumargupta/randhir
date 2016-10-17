@@ -90,13 +90,13 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL) {
   }
   // Set ajax response code.
   if ($flag == 'new_key') {
-    echo drupal_json_encode(array('code' => 1));
+    watchdog('Loyalty Points', drupal_json_encode(array('code' => 1)));    
   }
   elseif ($flag == 'old_key') {
-    echo drupal_json_encode(array('code' => 2));
+    watchdog('Loyalty Points', drupal_json_encode(array('code' => 2)));    
   }
   else {
-    echo drupal_json_encode(array('code' => 0));
+    watchdog('Loyalty Points', drupal_json_encode(array('code' => 0)));    
   }
 }
 

@@ -167,7 +167,41 @@
       
       
       
-      <div class="description"><?php print render($content['body']); ?></div>
+      <div class="description">
+          <?php
+          $story_body = $node->body['und'][0]['value'];
+
+          if (strpos($story_body,'[ITG:SURVEY:')) {
+            if ( preg_match ('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)){
+                  $survey_nid = $matches_survey[1];
+              }
+            $story_body = str_replace('[ITG:SURVEY:'.$survey_nid.']', '', $story_body);
+          }
+
+          if (strpos($story_body,'[ITG:QUIZ:')) {
+            if ( preg_match ('/ITG:QUIZ:([0-9]+)/', $story_body, $matches_quiz)){
+                  $quiz_nid = $matches_quiz[1];
+            }
+           $story_body = str_replace('[ITG:QUIZ:'.$quiz_nid.']', '', $story_body);
+          }
+
+          // Print story body
+          print $story_body;
+
+          // If survey is associated with story, render survey form
+          if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
+            $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:'.$survey_nid.']'), $story_body);
+            print $story_body_survey;
+          }
+
+          // If quiz is associated with story, render quiz form
+          if (strpos($node->body['und'][0]['value'], '[ITG:QUIZ:')) {
+            $story_body_quiz = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:QUIZ:'.$quiz_nid.']'), $story_body);
+            print $story_body_quiz;
+          } 
+         ?>
+      
+      </div>
       
       </div>
           

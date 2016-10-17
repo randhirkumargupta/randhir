@@ -4125,34 +4125,34 @@ footer .footer-copyright {
   padding-left: 0;
 }
 
-.view-video-list-of-category .views-exposed-form, .view-video-landing-header .views-exposed-form, .view-so-sorry .views-exposed-form, .view-programme-content .views-exposed-form, .sports-video .views-exposed-form {
+.view-video-list-of-category .views-exposed-form, .view-video-landing-header .views-exposed-form, .view-so-sorry .views-exposed-form, .view-programme-content .views-exposed-form, .sports-video .views-exposed-form, .sports-photo .views-exposed-form {
   display: none;
 }
-.view-video-list-of-category .view-content .photo-list, .view-video-landing-header .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .sports-video .view-content .photo-list {
+.view-video-list-of-category .view-content .photo-list, .view-video-landing-header .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .sports-video .view-content .photo-list, .sports-photo .view-content .photo-list {
   list-style: none;
   margin: 0 -10px;
   zoom: 1;
 }
-.view-video-list-of-category .view-content .photo-list:before, .view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:before, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:before, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:before, .view-programme-content .view-content .photo-list:after, .sports-video .view-content .photo-list:before, .sports-video .view-content .photo-list:after {
+.view-video-list-of-category .view-content .photo-list:before, .view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:before, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:before, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:before, .view-programme-content .view-content .photo-list:after, .sports-video .view-content .photo-list:before, .sports-video .view-content .photo-list:after, .sports-photo .view-content .photo-list:before, .sports-photo .view-content .photo-list:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:after, .sports-video .view-content .photo-list:after {
+.view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:after, .sports-video .view-content .photo-list:after, .sports-photo .view-content .photo-list:after {
   clear: both;
 }
-.view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .sports-video .view-content .photo-list li {
+.view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .sports-video .view-content .photo-list li, .sports-photo .view-content .photo-list li {
   padding: 15px;
   float: left;
   width: 25%;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure, .view-video-landing-header .view-content .photo-list li .tile figure, .view-so-sorry .view-content .photo-list li .tile figure, .view-programme-content .view-content .photo-list li .tile figure, .sports-video .view-content .photo-list li .tile figure {
+.view-video-list-of-category .view-content .photo-list li .tile figure, .view-video-landing-header .view-content .photo-list li .tile figure, .view-so-sorry .view-content .photo-list li .tile figure, .view-programme-content .view-content .photo-list li .tile figure, .sports-video .view-content .photo-list li .tile figure, .sports-photo .view-content .photo-list li .tile figure {
   max-width: 100%;
   overflow: hidden;
   position: relative;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure figcaption, .view-video-landing-header .view-content .photo-list li .tile figure figcaption, .view-so-sorry .view-content .photo-list li .tile figure figcaption, .view-programme-content .view-content .photo-list li .tile figure figcaption, .sports-video .view-content .photo-list li .tile figure figcaption {
+.view-video-list-of-category .view-content .photo-list li .tile figure figcaption, .view-video-landing-header .view-content .photo-list li .tile figure figcaption, .view-so-sorry .view-content .photo-list li .tile figure figcaption, .view-programme-content .view-content .photo-list li .tile figure figcaption, .sports-video .view-content .photo-list li .tile figure figcaption, .sports-photo .view-content .photo-list li .tile figure figcaption {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -4162,20 +4162,20 @@ footer .footer-copyright {
   font-size: 12px;
   font-family: Roboto;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-video-landing-header .view-content .photo-list li .tile figure figcaption .fa, .view-so-sorry .view-content .photo-list li .tile figure figcaption .fa, .view-programme-content .view-content .photo-list li .tile figure figcaption .fa, .sports-video .view-content .photo-list li .tile figure figcaption .fa {
+.view-video-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-video-landing-header .view-content .photo-list li .tile figure figcaption .fa, .view-so-sorry .view-content .photo-list li .tile figure figcaption .fa, .view-programme-content .view-content .photo-list li .tile figure figcaption .fa, .sports-video .view-content .photo-list li .tile figure figcaption .fa, .sports-photo .view-content .photo-list li .tile figure figcaption .fa {
   font-size: 14px;
   margin-right: 5px;
 }
-.view-video-list-of-category .view-content .photo-list li .tile .posted-on, .view-video-landing-header .view-content .photo-list li .tile .posted-on, .view-so-sorry .view-content .photo-list li .tile .posted-on, .view-programme-content .view-content .photo-list li .tile .posted-on, .sports-video .view-content .photo-list li .tile .posted-on {
+.view-video-list-of-category .view-content .photo-list li .tile .posted-on, .view-video-landing-header .view-content .photo-list li .tile .posted-on, .view-so-sorry .view-content .photo-list li .tile .posted-on, .view-programme-content .view-content .photo-list li .tile .posted-on, .sports-video .view-content .photo-list li .tile .posted-on, .sports-photo .view-content .photo-list li .tile .posted-on {
   display: block;
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
 }
-.view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a, .view-so-sorry .view-content .photo-list li .tile a, .view-programme-content .view-content .photo-list li .tile a, .sports-video .view-content .photo-list li .tile a {
+.view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a, .view-so-sorry .view-content .photo-list li .tile a, .view-programme-content .view-content .photo-list li .tile a, .sports-video .view-content .photo-list li .tile a, .sports-photo .view-content .photo-list li .tile a {
   color: #494949;
 }
-.view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-video-landing-header .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .sports-video .view-content .photo-list li:nth-child(4n+1) {
+.view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-video-landing-header .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .sports-video .view-content .photo-list li:nth-child(4n+1), .sports-photo .view-content .photo-list li:nth-child(4n+1) {
   clear: left;
 }
 
@@ -6526,12 +6526,67 @@ footer .footer-copyright {
 
 /*CSS end for education page*/
 /*CSS start sport home page*/
+.sports-video, .sports-photo {
+  margin-top: -15px;
+}
+
+.siderbar-sport .widget-title, #block-itg-widget-ipl-tweets .widget-title {
+  display: block;
+  font-weight: 500;
+  background: #5585f6;
+  font-size: 16px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.view-sport-ipl ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.view-sport-ipl ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-sport-ipl ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.view-sport-ipl ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.view-sport-ipl ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.view-sport-ipl ul.pager li.pager-next a, .view-sport-ipl ul.pager li.pager-last a, .view-sport-ipl ul.pager li.pager-first a, .view-sport-ipl ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.view-sport-ipl ul.pager li.pager-next.pager-first.first, .view-sport-ipl ul.pager li.pager-next.pager-last.last, .view-sport-ipl ul.pager li.pager-last.pager-first.first, .view-sport-ipl ul.pager li.pager-last.pager-last.last, .view-sport-ipl ul.pager li.pager-first.pager-first.first, .view-sport-ipl ul.pager li.pager-first.pager-last.last, .view-sport-ipl ul.pager li.pager-previous.pager-first.first, .view-sport-ipl ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
+
 .sport-home-layout-page .widget-title {
   display: block;
   font-weight: 500;
   background: #5585f6;
   font-size: 16px;
   padding: 0 10px;
+  width: 100%;
 }
 .sport-home-layout-page .droppable {
   overflow: hidden;
@@ -6725,6 +6780,36 @@ footer .footer-copyright {
 .sport-home-layout-page .poll-wrapper .poll-replace-id .poll-past-percentage-progess {
   width: 120px;
   float: left;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id input[type="radio"] {
+  display: none;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id input[type="radio"] + label {
+  padding-left: 25px;
+  position: relative;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id input[type="radio"] + label:before, .sport-home-layout-page .poll-wrapper .poll-replace-id input[type="radio"] + label:after {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  cursor: pointer;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 0;
+  content: '';
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id input[type="radio"] + label:before {
+  background-color: #c0c0c0;
+}
+.sport-home-layout-page .poll-wrapper .poll-replace-id input[type="radio"]:checked + label:after {
+  background-color: #333;
+  width: 7px;
+  height: 7px;
+  top: 7px;
+  left: 4px;
 }
 
 /*CSS End sport home page*/
