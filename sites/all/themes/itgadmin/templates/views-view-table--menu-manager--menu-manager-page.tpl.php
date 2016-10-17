@@ -98,11 +98,3 @@
 <?php endforeach; ?>
   </tbody>
 </table>
-<style>
-  .tabledrag-hide {
-    display: inline-block !important;
-  }
-  select.draggableviews-weight {
-    display: inline-block !important;
-  }
-</style>
