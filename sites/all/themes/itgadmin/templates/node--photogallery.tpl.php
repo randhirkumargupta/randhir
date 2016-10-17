@@ -120,7 +120,7 @@ foreach ($items as $imagecollection):
       if (module_exists('itg_photogallery')) {
         $res_id = $imagecollection['field_photo_byline'][LANGUAGE_NONE][0]['target_id'];
         $res_val = itg_photogallery_byline_photoby('node', $res_id);
-        $output .= '<div class="image-description"><span>' . $res_val . '</span></div></div>';
+        $output .= '<div class="image-description"><span>' . $res_val . '</span></div>';
       }
     }
 
