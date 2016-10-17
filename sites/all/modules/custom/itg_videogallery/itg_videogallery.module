@@ -519,8 +519,14 @@ function itg_videogallery_submit_status_message(&$form, $form_state) {
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
-
-  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $_REQUEST['destination']);
+  $request_destination = $_REQUEST['destination'];
+  $redirect_path = $_REQUEST['destination'];
+  
+  if($request_destination == 'published-video') {
+    $redirect_path .=  "?field_story_syndication_value_op=all";
+  }
+  
+  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
 }
 
 /**
@@ -1177,7 +1183,7 @@ function itg_videogallery_views_query_alter(&$view, &$query) {
       $parent = taxonomy_get_parents($_GET['category']);
       $key = key($parent);
       $parent_name = $parent[$key]->name;
-      if ($parent[$key]->name == 'program') {
+      if ($parent[$key]->name == 'program' && empty($_GET['sid']) && empty($_GET['category'])) {
         $query->where[0]['conditions'][0]['value'][':field_data_field_story_category_field_story_category_tid'] = NULL;
       }
     }

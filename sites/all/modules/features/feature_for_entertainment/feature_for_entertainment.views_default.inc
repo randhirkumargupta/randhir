@@ -234,14 +234,12 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
   $handler->display->display_options['filters']['widget']['group'] = 1;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'videogallery' => 'videogallery',
-  );
-  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Section wise ordering content: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'videogallery';
+  $handler->display->display_options['filters']['content_type']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
@@ -396,23 +394,24 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'photogallery' => 'photogallery',
-  );
+  /* Filter criterion: Section wise ordering content: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
+  $handler->display->display_options['filters']['content_type']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Widget */
   $handler->display->display_options['filters']['widget']['id'] = 'widget';
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '439';
+  $handler->display->display_options['filters']['cat_id']['group'] = 1;
   $handler->display->display_options['filters']['cat_id']['exposed'] = TRUE;
   $handler->display->display_options['filters']['cat_id']['expose']['operator_id'] = 'cat_id_op';
   $handler->display->display_options['filters']['cat_id']['expose']['label'] = 'Category';
@@ -551,12 +550,12 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '516';
+  $handler->display->display_options['filters']['cat_id']['value'] = '517';
   /* Filter criterion: Section wise ordering content: Content type */
   $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
   $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
+  $handler->display->display_options['filters']['content_type']['value'] = 'all';
   $export['special_entertainment'] = $view;
 
   return $export;

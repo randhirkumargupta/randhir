@@ -1158,7 +1158,7 @@ div.vertical-tabs {
       td:nth-child(2){
         @extend .pos-rel;
         @extend .fleft;
-        min-height: 396px;
+        min-height: 418px;
         @extend .full;
         border: 1px solid #d9d9d9;
         .messages--error{
@@ -2919,7 +2919,7 @@ fieldset#edit-select{
 }
 .confirmation{
   @extend .node-form;
-  a#edit-cancel{
+  a#edit-cancel, a.active{
     @extend .btn-cancel;
     @extend .dib;
     @extend .vtop;
@@ -6564,7 +6564,11 @@ div.node{
         display: block;
     }*/
 }
-#views-form-photo-carousel-widget-photo-carousel-list, 
+#views-form-photo-carousel-widget-photo-carousel-list,
+#views-form-special-how-i-made-it-special-how-made-it-widget-contents,
+#views-form-special-auto-review-widget-special-auto-review-widget-contents,
+#views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents,
+#views-form-most-read-widget-most-read-widget-contents,
 #views-form-photo-carousel-widget-video-carousel-list{
   @extend .confirmation;
   .form-actions{
@@ -8133,3 +8137,17 @@ div.node{
 .view-menu-manager{
   h2{text-transform: capitalize;}
 }
+#draggableviews-table-story-widget-most-popular-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-so-sorry-so-sorry-videos-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-widget-anchors-listing-anchors-listing-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-home-page-feature-widget-page-2 .tabledrag-hide {display:none !important}
+#draggableviews-table-section-wise-content-ordering-list-we-may-suggest-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-story-widget-page-2 .tabledrag-hide {display:none !important}
+#draggableviews-table-story-widget-trending-videos-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-story-widget-top-takes-video-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-story-widget-watch-right-now-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-photo-carousel-widget-photo-carousel .tabledrag-hide {display:none !important}
+#draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {display:none !important}
+#draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {display:none !important}
+#draggableviews-table-issue-base-magazin-widget-issue-magazin-widget-list .tabledrag-hide {display:none !important}
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-image-caption textarea{height: 50px;}

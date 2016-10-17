@@ -63,12 +63,13 @@ function features_for_story_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
     'field_name' => 'field_buzz_description',
     'label' => 'Buzz Description',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -1021,7 +1022,7 @@ function features_for_story_field_default_field_instances() {
     'settings' => array(
       'default_value' => 'strtotime',
       'default_value2' => 'same',
-      'default_value_code' => '+90 years',
+      'default_value_code' => '+7 days',
       'default_value_code2' => '',
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,

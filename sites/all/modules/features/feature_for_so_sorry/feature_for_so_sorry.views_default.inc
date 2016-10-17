@@ -362,9 +362,7 @@ function feature_for_so_sorry_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    5 => '5',
     6 => '6',
-    8 => '8',
     20 => '20',
     10 => '10',
   );
@@ -729,9 +727,7 @@ function feature_for_so_sorry_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    5 => '5',
     6 => '6',
-    8 => '8',
     20 => '20',
     10 => '10',
   );

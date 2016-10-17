@@ -2539,7 +2539,7 @@ body.has-cart-popup {
 }
 .page-user .messages--status, .page-user .messages--error {
   max-width: 440px;
-  margin: 0 auto;
+  margin: 20px auto 0;
 }
 .page-user .messages--error .messages__list {
   padding-left: 15px;
@@ -2820,6 +2820,14 @@ body.has-cart-popup {
   width: 100%;
   z-index: 99999;
 }
+#widget-ajex-loader img {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 
 .cart-dropdown {
   font: 14px/18px Roboto;
@@ -2888,4 +2896,27 @@ body.has-cart-popup {
 .cart-dropdown .cart-dropdown-view-cart a {
   font-size: 12px;
   color: #afafa;
+}
+
+@media all and (max-width: 1024px) {
+  .featured_photo_carousel .flexslider .slides li,
+  .tech-block_5 .flexslider .slides li,
+  .auto-block_5 .flexslider .slides li {
+    border-right: none;
+  }
+
+  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev,
+  .tech-block_5 .flexslider .flex-direction-nav a.flex-prev,
+  .auto-block_5 .flexslider .flex-direction-nav a.flex-prev {
+    left: 0;
+    right: auto;
+    border-right: none;
+    width: 40px;
+  }
+
+  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-next,
+  .tech-block_5 .flexslider .flex-direction-nav a.flex-next,
+  .auto-block_5 .flexslider .flex-direction-nav a.flex-next {
+    right: 0;
+  }
 }

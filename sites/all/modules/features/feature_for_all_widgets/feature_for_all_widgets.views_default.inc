@@ -818,6 +818,7 @@ print \'<a href="move-dont-miss-widget-node/we_may_suggest_widget/\'.$_GET[\'typ
   $handler = $view->new_display('page', 'Widget: Don\'t miss', 'dont_miss_content');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Don\'t Miss Widget Order Reorder';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -829,8 +830,6 @@ print \'<a href="move-dont-miss-widget-node/we_may_suggest_widget/\'.$_GET[\'typ
   );
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
@@ -970,7 +969,6 @@ print \'<a href="move-dont-miss-widget-node/we_may_suggest_widget/\'.$_GET[\'typ
   $handler->display->display_options['fields']['draggableviews']['relationship'] = 'nid';
   $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['draggableviews']['hierarchy_handler'] = 'draggableviews_hierarchy_handler_native';
   $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -1050,6 +1048,10 @@ print \'<a href="move-dont-miss-widget-node/dont_miss_content_widget/0/0/\'.$dat
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['sorts']['weight_1']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'draggableviews_structure';
@@ -1057,10 +1059,6 @@ print \'<a href="move-dont-miss-widget-node/dont_miss_content_widget/0/0/\'.$dat
   $handler->display->display_options['sorts']['weight']['relationship'] = 'nid';
   $handler->display->display_options['sorts']['weight']['draggableviews_setting_view'] = 'section_wise_content_ordering_list:dont_miss_content';
   $handler->display->display_options['sorts']['weight']['draggableviews_setting_new_items_bottom_list'] = 1;
-  /* Sort criterion: Section wise ordering content: weight */
-  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
-  $handler->display->display_options['sorts']['weight_1']['table'] = 'itg_widget_order';
-  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
