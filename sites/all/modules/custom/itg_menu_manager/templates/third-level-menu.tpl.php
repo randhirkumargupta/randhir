@@ -1,5 +1,11 @@
 <?php
-$section_banner_data = taxonomy_term_load(arg(2));
+if(isset($_GET['section']) && !empty($_GET['section']))
+{
+    $cat_id=$_GET['section'];
+} else{
+    $cat_id=arg(2);
+}
+$section_banner_data = taxonomy_term_load($cat_id);
 $uri = $section_banner_data->field_cm_category_banner['und'][0]['uri'];
 $src = file_create_url($uri);
 if(!empty($src)) {
