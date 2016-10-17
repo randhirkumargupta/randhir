@@ -747,7 +747,7 @@ function itg_survey_pqs_generatetokens() {
   $form = array();
   $form['pqs-listing-heading'] = array(
       '#type' => 'markup',
-      '#markup' => '<strong style="padding-top:10px"> Please select to associate with story:</strong>',
+      '#markup' => '<div style="padding-top:10px; padding-bottom:10px"><h2> Please Select '.ucfirst($type).' to Associate With Story:</h2></div>',
       '#prefix' => '<div style="margin:10px 0px 10px 20px">'
   );
   
@@ -758,7 +758,7 @@ function itg_survey_pqs_generatetokens() {
 
   $form['html'] = array(
       '#type' => 'markup',
-      '#markup' => '<span id="add-pqs" class="button">Add</span>',
+      '#markup' => '<div style="margin-top:10px"><span id="add-pqs" class="button">Add</span></div>',
       '#tree' => true,
       '#suffix' => '</div>'
   );
