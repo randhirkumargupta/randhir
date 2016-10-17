@@ -28,7 +28,7 @@ function feature_category_management_strongarm() {
           'weight' => '11',
         ),
         'description' => array(
-          'weight' => '16',
+          'weight' => '17',
         ),
       ),
       'display' => array(),

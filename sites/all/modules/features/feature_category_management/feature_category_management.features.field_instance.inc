@@ -11,6 +11,111 @@ function feature_category_management_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_cm_category_banner'.
+  $field_instances['taxonomy_term-category_management-field_cm_category_banner'] = array(
+    'bundle' => 'category_management',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 14,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_category_banner',
+    'label' => 'Category Banner',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 1,
+      'default_image' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => 'category_banner',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 1,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 1,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 23,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_cm_category_color'.
+  $field_instances['taxonomy_term-category_management-field_cm_category_color'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'color_field',
+        'settings' => array(),
+        'type' => 'color_field_default_formatter',
+        'weight' => 13,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_category_color',
+    'label' => 'Category Color',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'color_field',
+      'settings' => array(),
+      'type' => 'color_field_plain_text',
+      'weight' => 22,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_cm_display_title'.
   $field_instances['taxonomy_term-category_management-field_cm_display_title'] = array(
     'bundle' => 'category_management',
@@ -462,13 +567,15 @@ function feature_category_management_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t(' Program Timing');
+  t('Category Banner');
+  t('Category Color');
   t('Category Icon');
   t('Content Type');
   t('Display Title');
