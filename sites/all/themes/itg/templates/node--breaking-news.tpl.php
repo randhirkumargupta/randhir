@@ -11,10 +11,7 @@ global $base_url;
 $share_page_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 $short_url = shorten_url($share_page_link, 'goo.gl');
 ?>
-		<style>
-			#slider-range{width:750px;}
-			#slider-range,#time{margin:10px;display:block;}
-		</style>
+	
 <div class="live-block">
 
 <?php
