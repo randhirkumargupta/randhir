@@ -8,7 +8,7 @@
     $db_target = $menu_data['db_data']['target'];
     $tid = $menu_data['db_data']['tid'];
     // if tid is not 0 then its internal url
-    if ($tid) {
+    if ($tid && $url_type == 'internal') {
       $link_url = "taxonomy/term/$tid";
     }
     else {
