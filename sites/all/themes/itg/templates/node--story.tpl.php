@@ -167,7 +167,41 @@
       
       
       
-      <div class="description"><?php print render($content['body']); ?></div>
+      <div class="description">
+          <?php
+          $story_body = $node->body['und'][0]['value'];
+
+          if (strpos($story_body,'[ITG:SURVEY:')) {
+            if ( preg_match ('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)){
+                  $survey_nid = $matches_survey[1];
+              }
+            $story_body = str_replace('[ITG:SURVEY:'.$survey_nid.']', '', $story_body);
+          }
+
+          if (strpos($story_body,'[ITG:QUIZ:')) {
+            if ( preg_match ('/ITG:QUIZ:([0-9]+)/', $story_body, $matches_quiz)){
+                  $quiz_nid = $matches_quiz[1];
+            }
+           $story_body = str_replace('[ITG:QUIZ:'.$quiz_nid.']', '', $story_body);
+          }
+
+          // Print story body
+          print $story_body;
+
+          // If survey is associated with story, render survey form
+          if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
+            $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:'.$survey_nid.']'), $story_body);
+            print $story_body_survey;
+          }
+
+          // If quiz is associated with story, render quiz form
+          if (strpos($node->body['und'][0]['value'], '[ITG:QUIZ:')) {
+            $story_body_quiz = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:QUIZ:'.$quiz_nid.']'), $story_body);
+            print $story_body_quiz;
+          } 
+         ?>
+      
+      </div>
       
       </div>
           
@@ -241,8 +275,11 @@
                   if(!empty($dislike)) {
                     $dislike_count = '('.$dislike.')';
                   }
+                  $pid= "voted_".arg(1);
+                  $like= "no-of-likes_".arg(1);
+                  $dislike= "no-of-dislikes_".arg(1);
                   ?>
-                  <div class="agbutton"><button id="like_count" rel="<?php print arg(1); ?>">Like</button> <span id="no-of-likes"><?php print $like_count; ?></span> <button id="dislike_count" rel="<?php print arg(1); ?>">Dislike</button> <span id="no-of-dislikes"><?php print $dislike_count; ?></span> <a href="<?php echo $base_url;?>/snappost"> More from Snap post</a><p id="voted"></p></div>
+                  <div class="agbutton"><button id="like_count" rel="<?php print arg(1); ?>">Like</button> <span id="<?php print $like;?>"><?php print $like_count; ?></span> <button id="dislike_count" rel="<?php print arg(1); ?>">Dislike</button> <span id="<?php print $dislike;?>"><?php print $dislike_count; ?></span> <a href="<?php echo $base_url;?>/snappost"> More from Snap post</a><p id="<?php print $pid;?>"></p></div>
               </div>
               <?php } ?>
               <div class="tags">
@@ -295,47 +332,3 @@
   </div>
 </div>
 <?php endif; ?>
-<!-- script for facebook sharing -->
-<script>(function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                        js = d.createElement(s); js.id = id;
-                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
-                        fjs.parentNode.insertBefore(js, fjs);
-                      }(document, 'script', 'facebook-jssdk'));</script>
-<script>
-function gogogo(linkurl, title, desc, image) {
-  FB.ui({
-    method: 'feed',
-    link: linkurl,
-    picture: image,
-    name: title,
-    //caption: desc,
-    description: desc
-  });
-}
-  
-</script>
-<!-- facebook sharing end here -->
-
-<!-- script for twitter sharing -->
-<script type="text/javascript">
-  function twitter_popup(title, url) {
-    tweetlink = "http://twitter.com/share?text="+title+"&url="+url+"&via=indiatoday";
-    newwindow=window.open(tweetlink,'indiatoday','height=500,width=550,left=440,top=250');
-    if (window.focus) {newwindow.focus()}
-    return false;
-  }
-</script>
-<!-- twitter sharing end here -->
-
-<!-- script for google sharing -->
-<script>
-function googleplusbtn(url, title, img) {
-  sharelink = "https://plus.google.com/share?url="+url;
-  newwindow=window.open(sharelink,'indiatoday','height=400,width=600,left=440,top=250');
-  if (window.focus) {newwindow.focus()}                                                                                                                                
-  return false;
-}   
-</script>
-<!-- google sharing end here -->

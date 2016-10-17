@@ -449,14 +449,14 @@
 
   /*css end side bar section for video and photo*/
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .sports-video .view-content .photo-list li, .sports-photo .view-content .photo-list li {
     width: 33.33333%;
     padding: 15px 10px;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .sports-video .view-content .photo-list li:nth-child(4n+1), .sports-photo .view-content .photo-list li:nth-child(4n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .sports-video .view-content .photo-list li:nth-child(3n+1), .sports-photo .view-content .photo-list li:nth-child(3n+1) {
     clear: left;
   }
 
@@ -510,13 +510,13 @@
 }
 @media only screen and (max-width: 560px) {
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .sports-video .view-content .photo-list li, .sports-photo .view-content .photo-list li {
     width: 50%;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .sports-video .view-content .photo-list li:nth-child(3n+1), .sports-photo .view-content .photo-list li:nth-child(3n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1), .sports-video .view-content .photo-list li:nth-child(2n+1), .sports-photo .view-content .photo-list li:nth-child(2n+1) {
     clear: left;
   }
 

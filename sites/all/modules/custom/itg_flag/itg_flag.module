@@ -40,7 +40,7 @@ function itg_flag_details() {
   $nd_id = $_POST['nd_id'];
   $typ = $_POST['typ'];
   if(isset($_COOKIE['likeDislike'."_".$nd_id])) {
-    $response = array('error' => 'error');
+    $response = array('error' => 'error', 'nd_id' => $nd_id);
     print json_encode($response);
   }
   else
@@ -60,7 +60,7 @@ function itg_flag_details() {
     itg_flag_insert_count($nd_id, $typ, $pre_count);
   }
 
-  $response = array('type' => $typ, 'count' => $pre_count);
+  $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id);
   print json_encode($response);
   }
 }
