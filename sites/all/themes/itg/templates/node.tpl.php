@@ -40,9 +40,5 @@
   <?php print render($content['links']); ?>
 
   <?php print render($content['comments']); ?>
-  <?php global $user; ?>  
-  <?php if ($view_mode == 'full' && in_array('Front User', $user->roles)): ?>
-    <?php itg_loyalty_reward_earnpoint($node->nid, 'visit'); ?>
-  <?php endif; ?>
 
 </article>
