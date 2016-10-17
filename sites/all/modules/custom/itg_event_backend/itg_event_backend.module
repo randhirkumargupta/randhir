@@ -520,7 +520,7 @@ function itg_event_backend_block_view($delta = '') {
  * {@inheritdoc}
  */
 function itg_event_backend_views_pre_render(&$view) {
-  if ($view->name == "Event_backend" && $view->current_display == 'page') {
+  if ($view->name == "Event_backend" && ($view->current_display == 'page' || $view->current_display == 'page_2')) {
     $event_content = '';
     $event_content .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $event_content .= l(t('Create Event'), 'node/add/event-backend');

@@ -30,6 +30,8 @@
   <li class="my-credits">
     <?php echo l(t('My Credits'), 'personalization/my-credits'); ?>      
   </li>
-  <li class="edit-profile"><a href="javascript:;"><?php print t('Edit Profile'); ?></a></li>
+  <li class="edit-profile">
+      <?php echo l(t('Edit Profile'), 'personalization/edit-profile/general-settings'); ?>      
+  </li>
 </ul>
 
