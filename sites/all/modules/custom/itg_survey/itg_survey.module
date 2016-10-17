@@ -745,10 +745,15 @@ function itg_survey_pqs_generatetokens() {
   }
   
   $form = array();
+  $form['pqs-listing-heading'] = array(
+      '#type' => 'markup',
+      '#markup' => '<strong style="padding-top:10px"> Please select to associate with story:</strong>',
+      '#prefix' => '<div style="margin:10px 0px 10px 20px">'
+  );
+  
   $form['pqs-listing'] = array(
       '#type' => 'checkboxes',
       '#options' => $options,
-      '#prefix' => '<div style="margin:10px 0px 10px 20px"><strong style="padding-top:10px"> Please select to associate with story:</strong>'
   );
 
   $form['html'] = array(
