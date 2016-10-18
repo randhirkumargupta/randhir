@@ -1,13 +1,13 @@
 <?php
 /*
  * @file
- *   Cart detail page template file. 
+ *   Cart order summary page template file. 
  */
 ?>
 <div class="cart-detail">
-    <?php if (count($data) > 0): ?>
+    <?php if (count($data['product_detail']) > 0): ?>
       <?php $cart_total = 0; ?>
-      <?php foreach ($data as $key => $cart_detail): ?>    
+      <?php foreach ($data['product_detail'] as $key => $cart_detail): ?>    
         <div class="cart-row">
         <div class="cart-checkout-list">
             <div class="cart-image col-md-2 col-sm-2">
@@ -42,13 +42,36 @@
       <?php endforeach; ?>
       <div class="cart-total-block">
         <div class="cart-total-inner">
+            <h2>Address</h2>
+            <address>
+              <span><?php echo $data['user_detail']['name']; ?></span>
+              <span><?php echo $data['user_detail']['mail']; ?></span>
+              <span><?php echo $data['user_detail']['address']; ?></span>
+            </address>
+            <div id="change-address"><?php echo t('Change Address') ?></div>
+        </div>
+      </div>
+    <div>All the update regarding the order will be sent on <?php echo $data['user_detail']['mail']; ?> </div>
+    <div class="cart-total-block">
+        <div class="cart-total-inner">
           <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
-          <div class="checkout"><?php print l(t('REDEEM POINTS'), 'order-summary'); ?></div>
+          <div class="checkout"><?php print l(t('REDEEM POINTS'), 'place-order'); ?></div>
           <div class="points-balance"><span>Balance after redemption</span><span><?php print number_format($remain_point); ?> Points</span></div>
         </div>
       </div>
+    <?php
+      $block = module_invoke('itg_ads', 'block_view', 'ad_right_sidebar_1');      
+      print render($block['content']);
+    ?>
     <?php else: ?>
       <?php print t('There are no items in this cart.') ?>
       <?php print l('Continue Shopping', 'redeem-points', array('attributes' => array('class' => array('button')))); ?>
     <?php endif; ?>
+</div>
+<div id="change-address-popup">
+  <?php
+    $block = module_invoke('itg_loyalty_reward', 'block_view', 'itg_loyalty_reward_address_form');
+    print render($block['subject']);
+    print render($block['content']);
+  ?>
 </div>

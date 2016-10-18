@@ -7,7 +7,7 @@ if (isset($_GET['section']) && !empty($_GET['section'])) {
 }
 else if (isset($node_load->field_page_section['und'][0]['tid']) && $node_load->field_page_section['und'][0]['tid'] == variable_get('ipl_for_widget')) {
     $cat_id = variable_get('ipl_for_widget');
-    $ipl_link = "LIVE TV";
+    $ipl_link = "<button><i class='fa fa-circle'></i> LIVE TV</button>";
     $cat_flag = TRUE;
 }
 else if ($cat_flag == FALSE) {
@@ -40,13 +40,14 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
         }
         ?>
       </div>
-        <?php
+        
+       
+      <div class="col-md-8">
+          <?php
           if(!empty($ipl_link) && strlen($ipl_link)>0) {
               print $ipl_link;
           }
         ?>
-       
-      <div class="col-md-8">
         <ul class="third-level-menu">
           <?php foreach ($data as $key => $menu_data) : ?>
             <?php            
