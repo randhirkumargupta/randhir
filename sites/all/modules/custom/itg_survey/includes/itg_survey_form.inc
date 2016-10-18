@@ -35,7 +35,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     if(!$node->status) {
       $form['survey_status'] = array(
         '#type' => 'markup',
-        '#markup' => '<h2>This survey is not published!</h2>',
+        '#markup' => '<div style="margin-top:10px"><h2>This survey is not published!</h2></div>',
      );
       return $form;
     }
@@ -44,7 +44,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
    if(time() > $survey_expiry_date) {
       $form['survey_expiry_status'] = array(
         '#type' => 'markup',
-        '#markup' => '<h2>This survey has been expired!</h2>',
+        '#markup' => '<div style="margin-top:10px"><h2>This survey has been expired!</h2></div>',
      );
       return $form;
     }

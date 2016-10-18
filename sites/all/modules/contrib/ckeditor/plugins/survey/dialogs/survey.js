@@ -28,6 +28,7 @@ CKEDITOR.dialog.add('surveyDialog', function(editor) {
             type: 'text',
             id: 'inset-survey-nid',
             label: 'Survey',
+            className: 'survey-txt',
             validate: CKEDITOR.dialog.validate.notEmpty("This field cannot be empty.")
           },
           {

@@ -28,7 +28,7 @@ CKEDITOR.dialog.add('pollDialog', function(editor) {
             type: 'text',
             id: 'inset-polls-nid',
             label: 'Poll',
-            className: 'polls-a',
+            className: 'polls-txt',
             validate: CKEDITOR.dialog.validate.notEmpty("This field cannot be empty.")
           },
           {
