@@ -37,6 +37,7 @@ function itg_flag_menu() {
  * Implements itg_flag_details
  */
 function itg_flag_details() {
+  global $user;
   $nd_id = $_POST['nd_id'];
   $typ = $_POST['typ'];
   if(isset($_COOKIE['likeDislike'."_".$nd_id])) {
@@ -55,9 +56,15 @@ function itg_flag_details() {
   }
   if (!empty($nid)) {
     itg_flag_upd_count($nd_id, $typ, $pre_count);
+    if (in_array('Front User', $user->roles) && $typ == 'like_count') {
+      itg_loyalty_reward_earnpoint($nd_id, 'like', $user->uid);
+    }
   }
   if (empty($nid)) {
     itg_flag_insert_count($nd_id, $typ, $pre_count);
+    if (in_array('Front User', $user->roles) && $typ == 'like_count') {
+      itg_loyalty_reward_earnpoint($nd_id, 'like', $user->uid);
+    }
   }
 
   $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id);
