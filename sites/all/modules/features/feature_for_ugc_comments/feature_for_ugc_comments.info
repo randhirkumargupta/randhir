@@ -9,6 +9,7 @@ features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[user_permission][] = access comments
 features[user_permission][] = access edit ugc comment
+features[user_permission][] = access global comment configuration
 features[user_permission][] = access ugc comment approve link
 features[user_permission][] = access ugc comment view
 features[user_permission][] = administer comments
