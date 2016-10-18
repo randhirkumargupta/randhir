@@ -1501,7 +1501,11 @@ img {
 .oscar-layout-page .oscor-photo .col-md-6:nth-child(n+3) {
   margin-top: 30px;
 }
+.oscar-layout-page .oscor-photo .col-md-6:nth-child(2n+1) {
+  clear: left;
+}
 .oscar-layout-page .oscor-photo .col-md-6 .title h3 {
+  height: 78px;
   padding: 15px;
   color: #000;
   font-size: 18px;
@@ -1530,6 +1534,15 @@ img {
 }
 .oscar-layout-page .oscar-news p {
   padding-top: 10px;
+}
+.oscar-layout-page .oscar-news .col-md-12 span {
+  display: block;
+}
+.oscar-layout-page .oscar-news .col-md-6:nth-child(n+4) {
+  margin-top: 30px;
+}
+.oscar-layout-page .oscar-news .col-md-6:nth-child(3n+1) {
+  clear: left;
 }
 .oscar-layout-page .oscar-slider .top-slider {
   background: #000;

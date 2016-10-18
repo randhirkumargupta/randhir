@@ -57,8 +57,8 @@ $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0][
                   $dislike= "no-of-dislikes_".$row->nid;
                   
                   ?>
-        <button id="like_count" rel="<?php print $row->nid; ?>" class="agree">Like</button> <span id="<?php print $like;?>"><?php print $like_count; ?></span> <button id="dislike_count" rel="<?php print $row->nid; ?>" class="disagree">Dislike</button> <span id="<?php print $dislike;?>"><?php print $dislike_count; ?></span> 
-        <p id="<?php print $pid; ?>"></p>
+        <button id="like_count" rel="<?php print $row->nid; ?>" class="agree"><i class="fa fa-thumbs-o-up"></i> Like <span id="<?php print $like;?>"><?php print $like_count; ?></span></button> <button id="dislike_count" rel="<?php print $row->nid; ?>" class="disagree"><i class="fa fa-thumbs-o-down"></i> Dislike <span id="<?php print $dislike;?>"><?php print $dislike_count; ?></span> </button>
+        <p class="error-msg" id="<?php print $pid; ?>"></p>
         </div>
         <div class="snap-social">
             <ul>
