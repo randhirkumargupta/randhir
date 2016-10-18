@@ -4522,11 +4522,12 @@ footer{
             &:nth-child(n+3){
                 margin-top: 30px;
             }
-            :nth-child(2n+1){
+            &:nth-child(2n+1){
                 clear: left;
             }        
-        .title{
+        .title{                       
             h3{
+                height:78px;
                 padding: 15px;
                 color: #000;
                 font-size: 18px;
@@ -4573,7 +4574,10 @@ footer{
         .col-md-6 {                        
             &:nth-child(n+4){
                 margin-top: 30px;
-            }  
+            }
+            &:nth-child(3n+1){
+                clear: left;
+            } 
         }
     }
     .oscar-slider{
@@ -5611,11 +5615,13 @@ input[type="radio"]:checked + label:after{
 /*CSS End for movie page*/
 
 /*css start special page*/
-#block-itg-menu-manager-third-level-menu{
-    background: #1b1b1b;
+#block-itg-menu-manager-third-level-menu{    
     @include clearfix;
     height:60px;
     overflow:hidden;
+    img{
+        padding-top: 10px;
+    }
     ul{        
         @extend .list-none;
         padding-top: 30px;
@@ -5623,15 +5629,15 @@ input[type="radio"]:checked + label:after{
         li{
             @include display-inline;
             a{
-                    color: #fff;
-    padding: 0 10px;
-    display: block;
-    height: 30px;
-    line-height: 30px;
-    text-transform: uppercase;
-    font-family: $itg-roboto;
-    font-weight: 500;
-                &:hover{
+                color: #fff;
+                padding: 0 10px;
+                display: block;
+                height: 30px;
+                line-height: 30px;
+                text-transform: uppercase;
+                font-family: $itg-roboto;
+                font-weight: 500;
+                &:hover, .active{
                     background: #ededed;
                     color:#000;
                 }

@@ -331,8 +331,11 @@
                 float: none;
                 display: inline-block;
                 vertical-align: top;  
-                .title h3{
-                    white-space: pre-wrap;   
+                .title{                    
+                    h3{
+                        height: inherit;
+                        white-space: pre-wrap;   
+                    }
                 }
                 :nth-child(n+3){
                     margin-top: 0;

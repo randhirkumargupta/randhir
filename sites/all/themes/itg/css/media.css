@@ -354,6 +354,7 @@
     vertical-align: top;
   }
   .oscar-layout-page .oscor-photo .col-md-6 .title h3 {
+    height: inherit;
     white-space: pre-wrap;
   }
   .oscar-layout-page .oscor-photo .col-md-6 :nth-child(n+3) {
