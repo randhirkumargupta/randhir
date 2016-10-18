@@ -46,8 +46,19 @@ function itg_preprocess_comment(&$variables) {
   if ($node->type == 'story' || $node->type == 'blog') {
     $variables['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
     $variables['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
-
-    $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['author'], '!datetime' => $variables['created']));
+    if ($comment->uid != 0) {
+      $user = user_load($comment->uid);
+      if (!empty($user->field_first_name[LANGUAGE_NONE][0]['value'])) {
+        $submit_name = $user->field_first_name[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $submit_name = $variables['author'];
+      }
+    }
+    else {
+      $submit_name = $variables['author'];
+    }
+    $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $submit_name, '!datetime' => $variables['created']));
   }
 }
 

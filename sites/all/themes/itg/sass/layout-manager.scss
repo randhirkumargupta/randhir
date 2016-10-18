@@ -1123,9 +1123,12 @@ img{
             &:nth-child(n+3){
                 margin-top: 30px;
             }
-        
-        .title{
+            &:nth-child(2n+1){
+                clear: left;
+            }         
+        .title{            
             h3{
+                height:78px;
                 padding: 15px;
                 color: #000;
                 font-size: 18px;
@@ -1163,6 +1166,19 @@ img{
         }
         p{
             padding-top: 10px;
+        }
+        .col-md-12{
+            span{
+                display: block;
+            }
+        }
+        .col-md-6 {                        
+            &:nth-child(n+4){
+                margin-top: 30px;
+            }
+            &:nth-child(3n+1){
+                clear: left;
+            } 
         }
     }
     .oscar-slider{

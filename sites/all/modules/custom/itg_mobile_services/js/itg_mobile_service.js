@@ -27,7 +27,9 @@ var frequencyFlag = 1;
                 $("#widget-ajex-loader").css("display", "block");
                 jQuery('#edit-field-service-content-und-add-more').mousedown();
             };
-
+            
+            // hide vertical-tabs
+            jQuery('.vertical-tabs').hide();
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
                 jQuery(".field-type-text.field-name-field-client-short-description.field-widget-text-textfield.form-wrapper").hide();
                 jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
@@ -452,7 +454,7 @@ var frequencyFlag = 1;
                     var nid = jQuery('#edit-field-service-association-title-und').val();
                     jQuery.ajax({
                         type: "POST",
-                        url: Drupal.settings.basePath + 'countchar_validation',
+                        url: Drupal.settings.itg_mobile_services.settings.basePath + '/countchar_validation',
                         data: 'nidvalue=' + nid,
                         success: function (msg) {
                             maxLen = parseInt(msg);
@@ -685,46 +687,13 @@ var frequencyFlag = 1;
                 });
             });
 
-            // new code
-            if (dailymotionFlag == 1) {
-                jQuery('document').ready(function () {
-                    jQuery('.used-unused-select').live('change', function () {
-                        jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-                        var select_value = jQuery(this).val();
-                        if (select_value == 'used') {
-                            jQuery('.time-filter').show();
-                            jQuery('.time-filter-select').val('-all-');
-                        } else {
-                            jQuery('.time-filter').hide();
-                        }
-                        var base_url = Drupal.settings.basePath;
-                        jQuery.ajax({
-                            url: base_url + '/dailymotion-ftp-videos-post',
-                            type: 'post',
-                            data: {'case': select_value},
-                            success: function (data) {
-                                jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
-                                jQuery('.video-options-wrapper').html(data);
-
-                            },
-                            error: function (xhr, desc, err) {
-                                console.log(xhr);
-                                console.log("Details: " + desc + "\nError:" + err);
-                            }
-                        });
-
-                    });
-                });
-                dailymotionFlag++;
-            }
-
 
             // Time filter ajax
             jQuery('document').ready(function () {
                 jQuery('.time-filter-select').live('change', function () {
                     jQuery('#loader-data img').show();
                     var select_value = jQuery(this).val();
-                    var base_url = Drupal.settings.basePath;
+                    var base_url = Drupal.settings.itg_mobile_services.settings.basePath;
                     jQuery.ajax({
                         url: base_url + '/dailymotion-video-time-filter',
                         type: 'post',
@@ -754,3 +723,35 @@ function days_in_month(month, year) {
     return new Date(year, month, 0).getDate();
 }
 
+// new code
+    if (dailymotionFlag == 1) {
+        jQuery('document').ready(function () {
+            jQuery('.used-unused-select').live('change', function () {
+                jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                var select_value = jQuery(this).val();
+                if (select_value == 'used') {
+                    jQuery('.time-filter').show();
+                    jQuery('.time-filter-select').val('-all-');
+                } else {
+                    jQuery('.time-filter').hide();
+                }
+                var base_url = Drupal.settings.itg_mobile_services.settings.basePath;
+                jQuery.ajax({
+                    url: base_url + '/dailymotion-ftp-videos-post',
+                    type: 'post',
+                    data: {'case': select_value},
+                    success: function (data) {
+                        jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+                        jQuery('.video-options-wrapper').html(data);
+
+                    },
+                    error: function (xhr, desc, err) {
+                        console.log(xhr);
+                        console.log("Details: " + desc + "\nError:" + err);
+                    }
+                });
+
+            });
+        });
+        dailymotionFlag++;
+    }
