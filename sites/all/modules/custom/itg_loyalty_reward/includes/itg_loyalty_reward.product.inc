@@ -300,6 +300,12 @@ function _get_order_item() {
   return $data;
 }
 
+/**
+ * Callback function for order summary page.
+ *
+ * @global stdObject $user
+ * @return array
+ */
 function itg_loyalty_reward_order_summary() {
   global $user;
   // Add js file.
@@ -316,6 +322,11 @@ function itg_loyalty_reward_order_summary() {
   return theme('cart_order_summary', array('data' => $data, 'remain_point' => $remain_point));
 }
 
+/**
+ * Callback function for order confirmation page.
+ *
+ * @return array
+ */
 function itg_loyalty_reward_order_confirmation() {
   
   return theme('cart_order_confirmation', array('data' => $data));
