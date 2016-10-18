@@ -28,6 +28,7 @@ CKEDITOR.dialog.add('quizDialog', function(editor) {
             type: 'text',
             id: 'inset-quiz-nid',
             label: 'Quiz',
+            className: 'quiz-txt',
             validate: CKEDITOR.dialog.validate.notEmpty("This field cannot be empty.")
           },
           {
