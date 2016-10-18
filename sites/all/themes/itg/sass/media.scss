@@ -732,6 +732,9 @@
                     width: 113px;
                     @include font(17px,null,$itg-font-medium);
                 }
+                p.error-msg{
+                    padding-left: 140px;
+                }
             }
         }
         .social-list{

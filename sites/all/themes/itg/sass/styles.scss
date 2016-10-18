@@ -1765,6 +1765,14 @@ footer{
                 @include itg-font($itg-robotoslab);
                 margin-right:10px;
                 cursor: pointer;
+                span{
+                    @include font(14px);
+                }
+            }
+            p.error-msg{                
+                color: #13d21a;                
+                margin-top: 10px;
+                text-align: left;
             }
         }
     }
@@ -2113,7 +2121,7 @@ footer{
                     margin-top:60px;
                     @include float(left);
                     @include calculate-width(2);
-                    a{
+                    button{
                         width: 180px;
                         height: 60px;
                         border: 2px solid $white-color;
@@ -2123,9 +2131,16 @@ footer{
                         @include font(22px,60px);                                              
                         color: #000;
                         box-shadow: 1px 7px 15px #2f2f2f;
+                        background: transparent;
+                        cursor: pointer;
                         &.disagree{
                             margin-left: 30px;
                         }
+                    }
+                    .error-msg{
+                        margin-top: 20px;
+                        font-size: 15px;
+                        color: green;   
                     }
                 }
                 .snap-social{
@@ -5616,9 +5631,11 @@ input[type="radio"]:checked + label:after{
 
 /*css start special page*/
 #block-itg-menu-manager-third-level-menu{    
-    @include clearfix;
-    height:60px;
+    @include clearfix;    
     overflow:hidden;
+    .menu-wrapper{
+        height:60px;
+    }
     img{
         padding-top: 10px;
     }
@@ -5642,6 +5659,23 @@ input[type="radio"]:checked + label:after{
                     color:#000;
                 }
             }
+        }
+    }
+    button{
+        border-radius: 3px;
+        background: #ebebeb;
+        border: 1px solid #ebebeb;
+        width: 90px;
+        height: 30px;
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 15px;
+        cursor: pointer;
+        i{
+            color: #e10000;
+            font-size: 8px;
+            vertical-align: top;
+            padding-top: 5px;
         }
     }
 }

@@ -711,6 +711,9 @@
     font-size: 1.0625rem;
     font-weight: 500;
   }
+  .story-section .snap-post .agbutton p.error-msg {
+    padding-left: 140px;
+  }
   .story-section .social-list li {
     width: auto;
   }

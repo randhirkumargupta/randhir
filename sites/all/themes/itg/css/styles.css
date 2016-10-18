@@ -2243,6 +2243,15 @@ footer .footer-copyright {
   margin-right: 10px;
   cursor: pointer;
 }
+.story-section .snap-post .agbutton button span {
+  font-size: 14px;
+  font-size: 0.875rem;
+}
+.story-section .snap-post .agbutton p.error-msg {
+  color: #13d21a;
+  margin-top: 10px;
+  text-align: left;
+}
 .story-section .tags {
   padding: 25px 0px;
 }
@@ -2820,7 +2829,7 @@ footer .footer-copyright {
   float: left;
   width: 50%;
 }
-.page-snappost .view-content .views-row .snap-post-btm .snap-button a {
+.page-snappost .view-content .views-row .snap-post-btm .snap-button button {
   width: 180px;
   height: 60px;
   border: 2px solid #fff;
@@ -2833,9 +2842,16 @@ footer .footer-copyright {
   line-height: 60px;
   color: #000;
   box-shadow: 1px 7px 15px #2f2f2f;
+  background: transparent;
+  cursor: pointer;
 }
-.page-snappost .view-content .views-row .snap-post-btm .snap-button a.disagree {
+.page-snappost .view-content .views-row .snap-post-btm .snap-button button.disagree {
   margin-left: 30px;
+}
+.page-snappost .view-content .views-row .snap-post-btm .snap-button .error-msg {
+  margin-top: 20px;
+  font-size: 15px;
+  color: green;
 }
 .page-snappost .view-content .views-row .snap-post-btm .snap-social {
   float: right;
@@ -6954,7 +6970,6 @@ footer .footer-copyright {
 /*css start special page*/
 #block-itg-menu-manager-third-level-menu {
   zoom: 1;
-  height: 60px;
   overflow: hidden;
 }
 #block-itg-menu-manager-third-level-menu:before, #block-itg-menu-manager-third-level-menu:after {
@@ -6965,6 +6980,9 @@ footer .footer-copyright {
 }
 #block-itg-menu-manager-third-level-menu:after {
   clear: both;
+}
+#block-itg-menu-manager-third-level-menu .menu-wrapper {
+  height: 60px;
 }
 #block-itg-menu-manager-third-level-menu img {
   padding-top: 10px;
@@ -6990,6 +7008,23 @@ footer .footer-copyright {
 #block-itg-menu-manager-third-level-menu ul li a:hover, #block-itg-menu-manager-third-level-menu ul li a .active {
   background: #ededed;
   color: #000;
+}
+#block-itg-menu-manager-third-level-menu button {
+  border-radius: 3px;
+  background: #ebebeb;
+  border: 1px solid #ebebeb;
+  width: 90px;
+  height: 30px;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 15px;
+  cursor: pointer;
+}
+#block-itg-menu-manager-third-level-menu button i {
+  color: #e10000;
+  font-size: 8px;
+  vertical-align: top;
+  padding-top: 5px;
 }
 
 /*css end special page*/
