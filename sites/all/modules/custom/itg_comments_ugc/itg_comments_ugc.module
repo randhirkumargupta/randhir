@@ -189,6 +189,10 @@ function itg_comments_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['author']['homepage']['#access'] = FALSE;
       break;
     
+    case 'comment_node_videogallery_form':
+      $form['author']['homepage']['#access'] = FALSE;
+      break;
+    
   }
 }
 
