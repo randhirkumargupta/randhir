@@ -75,4 +75,13 @@ class ItgMagazineMigration extends XMLMigration {
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
 
   }
+  
+  /*public function prepareRow($row) {
+    if (isset($row->xml->magazine_issue_date) && !empty($row->xml->magazine_issue_date)) {
+      $issue_time = (string) $row->xml->magazine_issue_date;
+      $issue_date_time = date('d/m/Y H:i', $issue_time);
+      $row->xml->magazine_issue_date = $issue_date_time;
+    }
+    return TRUE;
+  }*/
 }
