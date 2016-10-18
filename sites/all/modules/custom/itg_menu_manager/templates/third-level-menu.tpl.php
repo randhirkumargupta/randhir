@@ -1,15 +1,35 @@
 <?php
+$ipl_link = "";
+$cat_flag = FALSE;
 if (isset($_GET['section']) && !empty($_GET['section'])) {
   $cat_id = $_GET['section'];
+  $cat_flag = TRUE;
 }
-else {
+else if (isset($node_load->field_page_section['und'][0]['tid']) && $node_load->field_page_section['und'][0]['tid'] == variable_get('ipl_for_widget')) {
+    $cat_id = variable_get('ipl_for_widget');
+    $ipl_link = "LIVE TV";
+    $cat_flag = TRUE;
+}
+else if ($cat_flag == FALSE) {
   $cat_id = arg(2);
 }
+if($cat_id=="")
+{
+   $node = itg_videogallery_get_term(arg(1));
+   
+   if(in_array(variable_get('ipl_for_widget'), $node))
+   {
+   $cat_id=variable_get('ipl_for_widget');
+   }  
+}
+
 $section_banner_data = taxonomy_term_load($cat_id);
 $uri = $section_banner_data->field_cm_category_banner['und'][0]['uri'];
 $src = file_create_url($uri);
 $field_cm_category_color = ($section_banner_data->field_cm_category_color['und'][0]['rgb']) ? $section_banner_data->field_cm_category_color['und'][0]['rgb'] : "#595959";
 ?>
+ <?php if(!empty($data[0]['db_data']) || (!empty($src) && isset($uri)))
+        {?>
 <div class="menu-wrapper" style="background: <?php print $field_cm_category_color; ?>">
   <div class="container">
     <div class="row">
@@ -20,10 +40,16 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
         }
         ?>
       </div>
+        <?php
+          if(!empty($ipl_link) && strlen($ipl_link)>0) {
+              print $ipl_link;
+          }
+        ?>
+       
       <div class="col-md-8">
         <ul class="third-level-menu">
           <?php foreach ($data as $key => $menu_data) : ?>
-            <?php
+            <?php            
             $link_url = "";
             $target = "_self";
             $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $menu_data['db_data']['title'];
@@ -46,6 +72,8 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
           <?php endforeach; ?>
         </ul>
       </div>
+        
     </div>
   </div>
 </div>
+<?php } ?>
