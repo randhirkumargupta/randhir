@@ -86,9 +86,12 @@ if ($theme != 'itgadmin') {
 
             <?php } ?>
             <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
+            
             <?php
             if ($theme == 'itgadmin') {
-                echo l('IPL Pages', $base_url . '/' . drupal_get_path_alias("itg-basic-page-list/{$_GET["section"]}"));
+                print '<div class="sport-main-title">';
+                echo l('IPL Pages', $base_url . '/' . drupal_get_path_alias("itg-basic-page-list/{$_GET["section"]}"), array('attributes' => array('class' => 'add-more')));
+                 print '</div>';
             }
             ?>
 

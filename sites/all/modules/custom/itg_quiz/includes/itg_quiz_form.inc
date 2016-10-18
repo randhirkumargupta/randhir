@@ -32,7 +32,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     if (!$node->status) {
       $form['survey_status'] = array(
           '#type' => 'markup',
-          '#markup' => '<h2>This Quiz is not published!</h2>',
+          '#markup' => '<div style="margin-top:10px"><h2>Quiz "'.$node->title.'" is not published!</h2></div>',
       );
       return $form;
     }
@@ -43,14 +43,14 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     if (time() < $quiz_start_date) {
       $form['quiz_start_status'] = array(
           '#type' => 'markup',
-          '#markup' => '<h2>You can not attempt this quiz today! Start Date: ' . date('d/m/Y', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])) . '</h2>',
+          '#markup' => '<div style="margin-top:10px"><h2>You can not attempt quiz "'.$node->title.'!" Start Date: ' . date('d/m/Y', strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value'])) . '</h2></div>',
       );
       return $form;
     }
     if(time() > $quiz_expiry_date) {
        $form['quiz_expiry_status'] = array(
          '#type' => 'markup',
-         '#markup' => '<h2>This Quiz has been expired!</h2>',
+         '#markup' => '<div style="margin-top:10px"><h2>Quiz "'.$node->title.'" has been expired!</h2></div>',
       );
        return $form;
      }
