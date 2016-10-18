@@ -225,7 +225,10 @@ function itg_widget_block_info() {
   );
   $blocks['ipl_tweets'] = array(
     'info' => t('IPL Tweets')
-  );  
+  ); 
+   $blocks['live_score'] = array(
+    'info' => t('Live Score')
+  ); 
 
   return $blocks;
 }
@@ -627,6 +630,12 @@ function itg_widget_block_view($delta = '') {
       //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
         $block['subject'] = '';
       $block['content'] = ipl_tweets();
+      break;
+  case 'live_score':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_live_score');  
+     
+        $block['subject'] = '';
+      $block['content'] = live_score();
       break;
   }
   
