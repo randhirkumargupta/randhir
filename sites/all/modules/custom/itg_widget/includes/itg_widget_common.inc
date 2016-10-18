@@ -714,6 +714,9 @@ function itg_widget_theme() {
       'tech_most_read' => array(
           'template' => 'templates/tech-most-read',
       ),
+      'live_score_data' => array(
+          'template' => 'templates/live-score-data',
+      ),
   );
   return $themes;
 }
