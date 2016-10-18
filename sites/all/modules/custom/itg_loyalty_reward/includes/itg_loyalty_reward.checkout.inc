@@ -26,7 +26,7 @@ function itg_loyalty_reward_checkout_form() {
   $f_name = $user_fields->field_first_name['und'][0]['value'];
   $l_name = $user_fields->field_last_name['und'][0]['value'];
   // Check cart value.
-  $data = _get_cart_item($user->uid, 'total');  
+  $data = _get_cart_item($user->uid, 'total');
   if ($data >= 1) {
     // Add js file for validation.
     $form['#attached']['js'] = array(
@@ -53,10 +53,10 @@ function itg_loyalty_reward_checkout_form() {
       '#required' => TRUE,
     );
     $form['phone'] = array(
-      '#title' => t('Phone'),
+      '#title' => t('Mobile'),
       '#type' => 'textfield',
       '#attributes' => array(
-        'placeholder' => t('Phone Number'),
+        'placeholder' => t('Mobile'),
       ),
       '#required' => TRUE,
     );
@@ -68,19 +68,19 @@ function itg_loyalty_reward_checkout_form() {
       ),
       '#required' => TRUE,
     );
-    $form['city'] = array(
-      '#title' => t('City'),
-      '#type' => 'textfield',
-      '#attributes' => array(
-        'placeholder' => t('City'),
-      ),
-      '#required' => TRUE,
-    );
+//    $form['city'] = array(
+//      '#title' => t('City'),
+//      '#type' => 'textfield',
+//      '#attributes' => array(
+//        'placeholder' => t('City'),
+//      ),
+//      '#required' => TRUE,
+//    );
     $form['zip_code'] = array(
       '#title' => t('Zip Code'),
       '#type' => 'textfield',
       '#attributes' => array(
-        'placeholder' => t('Zip Code'),
+        'placeholder' => t('Pincode'),
       ),
       '#required' => TRUE,
     );
@@ -139,50 +139,50 @@ function itg_loyalty_reward_checkout_form_validate($form, &$form_state) {
  * {@inheritdoc}.
  */
 function itg_loyalty_reward_checkout_form_submit($form, &$form_state) {
-  global $user;    
+  global $user;
   //Prepare array for saving product information.  
-  $inputs = $form_state['values'];
+  //$inputs = $form_state['values'];
   // Prepare user info.
-  $data['user_info'] = array(
-    'name' => $inputs['name'],
-    'email' => $inputs['email'],
-    'phone' => $inputs['phone'],
-    'address' => $inputs['addess'],
-    'city' => $inputs['city'],
-    'zip_code' => $inputs['zip_code'],
-  );
-  // Get product info.
-  $cart_detail = _get_cart_full_details($user->uid);
-  $data['cart-items'] = $cart_detail;
-  // Save data into order table.
-  $presave = array(
-    'uid' => $user->uid,
-    'product_information' => serialize($data),
-    'created' => REQUEST_TIME,
-  );
-  $order_placed = 0;
-  try {
-    $order_placed = db_insert('itg_loyalty_reward_order')
-        ->fields($presave)
-        ->execute();
-    $unique_key = itg_loyalty_reward_unique_expiration($user->uid);
-    $total_point = _cart_total_point($user->uid);
-    $itg_query = db_update('itg_loyalty_reward_point_history');
-    $itg_query->fields(array('redeemed_point' => $total_point, 'cart_point' => 0))
-        ->condition('pointer_key', $unique_key)
-        ->expression('redeemed_point', 'redeemed_point + :point', array(':point' => $total_point))        
-        ->execute();
-  }
-  catch (Exception $ex) {
-    watchdog('ITG Order', $ex->getMessage());
-  }
-  if ($order_placed > 0) {
-    $flush_cart = db_delete('itg_loyalty_reward_cart')
-        ->condition('uid', $user->uid)
-        ->execute();
-    drupal_set_message('Your order has been placed', 'status');
-  }
-  drupal_goto('order');
+//  $data['user_info'] = array(
+//    'name' => $inputs['name'],
+//    'email' => $inputs['email'],
+//    'phone' => $inputs['phone'],
+//    'address' => $inputs['addess'],
+//    'city' => $inputs['city'],
+//    'zip_code' => $inputs['zip_code'],
+//  );
+//  // Get product info.
+//  $cart_detail = _get_cart_full_details($user->uid);
+//  $data['cart-items'] = $cart_detail;
+//  // Save data into order table.
+//  $presave = array(
+//    'uid' => $user->uid,
+//    'product_information' => serialize($data),
+//    'created' => REQUEST_TIME,
+//  );
+//  $order_placed = 0;
+//  try {
+//    $order_placed = db_insert('itg_loyalty_reward_order')
+//        ->fields($presave)
+//        ->execute();
+//    $unique_key = itg_loyalty_reward_unique_expiration($user->uid);
+//    $total_point = _cart_total_point($user->uid);
+//    $itg_query = db_update('itg_loyalty_reward_point_history');
+//    $itg_query->fields(array('redeemed_point' => $total_point, 'cart_point' => 0))
+//        ->condition('pointer_key', $unique_key)
+//        ->expression('redeemed_point', 'redeemed_point + :point', array(':point' => $total_point))        
+//        ->execute();
+//  }
+//  catch (Exception $ex) {
+//    watchdog('ITG Order', $ex->getMessage());
+//  }
+//  if ($order_placed > 0) {
+//    $flush_cart = db_delete('itg_loyalty_reward_cart')
+//        ->condition('uid', $user->uid)
+//        ->execute();
+//    drupal_set_message('Your order has been placed', 'status');
+//  }
+//  drupal_goto('order');
 }
 
 /**
@@ -215,5 +215,61 @@ function _cart_total_point($uid, $op = NULL) {
   }
   else {
     return $itg_result_cart;
-  } 
+  }
+}
+
+/**
+ * Page callback function for order place page.
+ *
+ * @global stdObject $user
+ */
+function itg_loyalty_reward_place_order() {
+  global $user;
+  $user_detail = user_load($user->uid);
+  $fname = $user_detail->field_first_name['und'][0]['value'];
+  $lname = $user_detail->field_last_name['und'][0]['value'];
+  $data['user_info'] = array(
+    'name' => $fname . ' ' . $lname,
+    'email' => $user_detail->mail,
+    'phone' => $user_detail->field_mobile_number['und'][0]['value'],
+    'address' => $user_detail->field_short_description['und'][0]['value'],
+    'city' => $inputs['city'],
+    'zip_code' => 462011,
+  );
+  // Get product info.
+  $cart_detail = _get_cart_full_details($user->uid);
+  $data['cart-items'] = $cart_detail;  
+  // Save data into order table.
+  $presave = array(
+    'uid' => $user->uid,
+    'product_information' => serialize($data),
+    'created' => REQUEST_TIME,
+  );
+  $order_placed = 0;
+  try {
+    $order_placed = db_insert('itg_loyalty_reward_order')
+        ->fields($presave)
+        ->execute();
+    $unique_key = itg_loyalty_reward_unique_expiration($user->uid);
+    $total_point = _cart_total_point($user->uid);
+    $itg_query = db_update('itg_loyalty_reward_point_history');
+    $itg_query->fields(array('redeemed_point' => $total_point, 'cart_point' => 0))
+        ->condition('pointer_key', $unique_key)
+        ->expression('redeemed_point', 'redeemed_point + :point', array(':point' => $total_point))
+        ->execute();
+  }
+  catch (Exception $ex) {
+    watchdog('ITG Order', $ex->getMessage());
+    drupal_set_message('Something went wrong please try after some time.', 'error');
+  }
+  if ($order_placed > 0) {
+    $flush_cart = db_delete('itg_loyalty_reward_cart')
+        ->condition('uid', $user->uid)
+        ->execute();
+    // Set cart order into session for order confirmation page.
+    $_SESSION['placed-item'] = $cart_detail;
+    drupal_set_message('Your order has been placed', 'status');
+    drupal_goto('order-confirmation');
+  }
+  drupal_goto('order-confirmation');
 }

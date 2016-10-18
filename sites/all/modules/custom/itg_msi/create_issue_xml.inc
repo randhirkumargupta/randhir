@@ -38,9 +38,11 @@ function _create_issue_using_xmlfile($node, $op) {
       }
     }
   } else {
-    foreach ($file as $result) {
-      sleep(1);
-      _create_issue_process($result['fid'], $node_info, $node);
+    if (!empty($file)) {
+      foreach ($file as $result) {
+        sleep(1);
+        _create_issue_process($result['fid'], $node_info, $node);
+      }
     }
   }
 }

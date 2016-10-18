@@ -67,11 +67,21 @@ class ItgMagazineMigration extends XMLMigration {
     $this->addFieldMapping('field_print_magazine_issue_date', 'magazine_issue_date')->xpath('magazine_issue_date');//m/d/Y
     $this->addFieldMapping('field_magazine_publish', 'magazine_publish')->xpath('magazine_publish');    
     $this->addFieldMapping('field_magazine_cover_photo', 'magazine_cover_photo')->xpath('magazine_cover_photo');
-    
+    $this->addFieldMapping('field_magazine_cover_photo:alt', 'cover_alt')->xpath('cover_alt');
+    $this->addFieldMapping('field_magazine_cover_photo:title', 'cover_title')->xpath('cover_title');
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
 
   }
+  
+  /*public function prepareRow($row) {
+    if (isset($row->xml->magazine_issue_date) && !empty($row->xml->magazine_issue_date)) {
+      $issue_time = (string) $row->xml->magazine_issue_date;
+      $issue_date_time = date('d/m/Y H:i', $issue_time);
+      $row->xml->magazine_issue_date = $issue_date_time;
+    }
+    return TRUE;
+  }*/
 }
