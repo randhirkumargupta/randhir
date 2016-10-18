@@ -722,8 +722,12 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
   // Extract user type
   if ($user->uid) {
     $user_type = 'authenticated';
+    $user_name = $user->name;
+    $user_mail = $user->mail;
   } else {
     $user_type = 'anonymous';
+    $user_name = 'Anonymous User';
+    $user_mail = 'anonymous.user@indiatoday.com';
   }
 
   //Set a session for a quiz(Will be same for all questions during a quiz) 
@@ -863,8 +867,8 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
         ->fields(array(
             'uid' => $user->uid,
             'nid' => $form_state['values']['nid'],
-            'user_name' => $user->name,
-            'user_email' => $user->mail,
+            'user_name' => $user_name,
+            'user_email' => $user_mail,
             'quiz_title' => $form_state['values']['quiz_title'],
             'quiz_score' => $total_score ? $total_score : 0,
             'ques_attempt' => itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL),
