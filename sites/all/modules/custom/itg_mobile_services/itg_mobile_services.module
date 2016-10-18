@@ -169,6 +169,18 @@ function itg_mobile_services_form_alter(&$form, &$form_state, $form_id) {
       $form['metatags']['#type'] = 'hidden';
       // hide preview button
       variable_set('node_preview_vas-service-content', '0');
+      if(isset($form['#node'])) {
+        $target_id = $form['#node']->{'field_service_association_title'}[LANGUAGE_NONE][0]['target_id'];
+        $astro_service = itg_mobile_services_check_astro_service($target_id);
+      }
+      
+      if((!empty($_GET['type']) && $_GET['type'] == 'astro') || !empty($astro_service)) {
+        $title = empty($form['nid']['#value']) ? 'Create Astro Vas Service Content' : 'Edit Astro Vas Service Content';
+      }
+      else {
+        $title = empty($form['nid']['#value']) ? 'Create Vas Service Content' : 'Edit Vas Service Content';
+      }
+      drupal_set_title(t($title));
       $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'service-content-listing', array(
           'attributes' => array(
