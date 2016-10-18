@@ -754,6 +754,7 @@ function itg_survey_pqs_generatetokens() {
   $form['pqs-listing'] = array(
       '#type' => 'checkboxes',
       '#options' => $options,
+      '#attributes' => array('class' => array('pqs-listing-options'))
   );
 
   $form['html'] = array(
