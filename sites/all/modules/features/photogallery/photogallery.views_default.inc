@@ -1201,11 +1201,13 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'photogallery' => 'photogallery',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -1245,6 +1247,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['nid']['id'] = 'nid';
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['group'] = 1;
   $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
   $handler->display->display_options['filters']['nid']['expose']['label'] = 'Gallery ID';
@@ -1278,6 +1281,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['filters']['field_story_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_story_category_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_story_category_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['operator_id'] = 'field_story_category_tid_op';
   $handler->display->display_options['filters']['field_story_category_tid']['expose']['label'] = 'Category';
@@ -1307,23 +1311,6 @@ function photogallery_views_default_views() {
   );
   $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['field_story_category_tid']['error_message'] = FALSE;
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
-  $handler->display->display_options['filters']['is_current']['value'] = '1';
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    'published' => 'published',
-  );
-  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
-  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
-  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
-  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
   /* Filter criterion: Content: Syndication (field_story_syndication) */
   $handler->display->display_options['filters']['field_story_syndication_value']['id'] = 'field_story_syndication_value';
   $handler->display->display_options['filters']['field_story_syndication_value']['table'] = 'field_data_field_story_syndication';
@@ -1331,6 +1318,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['field_story_syndication_value']['value'] = array(
     'Yes' => 'Yes',
   );
+  $handler->display->display_options['filters']['field_story_syndication_value']['group'] = 1;
   $handler->display->display_options['filters']['field_story_syndication_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_story_syndication_value']['expose']['operator_id'] = 'field_story_syndication_value_op';
   $handler->display->display_options['filters']['field_story_syndication_value']['expose']['label'] = 'Syndication';
@@ -1364,6 +1352,26 @@ function photogallery_views_default_views() {
     25 => 0,
     26 => 0,
   );
+  /* Filter criterion: Workbench Moderation: Current */
+  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['value'] = '1';
+  $handler->display->display_options['filters']['is_current']['group'] = 1;
+  /* Filter criterion: Workbench Moderation: State */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['value'] = array(
+    'published' => 'published',
+  );
+  $handler->display->display_options['filters']['state']['group'] = 1;
+  /* Filter criterion: Content: Are you sure you want to Archive? (field_story_archive) */
+  $handler->display->display_options['filters']['field_story_archive_value']['id'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
+  $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
+  $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_story_archive_value']['group'] = 1;
   $handler->display->display_options['path'] = 'published-photogallery';
 
   /* Display: My Un Published Photogallery */
