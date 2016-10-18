@@ -28,11 +28,29 @@ function custom_html_widgets_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any page content'.
+  $permissions['delete any page content'] = array(
+    'name' => 'delete any page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own custom_html_widgets content'.
   $permissions['delete own custom_html_widgets content'] = array(
     'name' => 'delete own custom_html_widgets content',
     'roles' => array(
       'Editor' => 'Editor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own page content'.
+  $permissions['delete own page content'] = array(
+    'name' => 'delete own page content',
+    'roles' => array(
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
