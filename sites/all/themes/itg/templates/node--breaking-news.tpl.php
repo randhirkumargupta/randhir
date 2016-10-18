@@ -91,7 +91,7 @@ if (!empty($content)):
                 $breaking_output.= '<div class="breaking-section">';
                 $field_collection_id = $breaking_item;
                 $entity = entity_load('field_collection_item', array($field_collection_id));
-                $fb = strip_tags(trim($entity[$field_collection_id]->field_breaking_tile['und'][0]['value']));
+                $fb = addslashes(strip_tags(trim($entity[$field_collection_id]->field_breaking_tile['und'][0]['value'])));
                 $fb_title = str_replace( array( "\n", "\r" ), array( "\\n", "\\r" ), $fb );
                 $pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
                 $pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
