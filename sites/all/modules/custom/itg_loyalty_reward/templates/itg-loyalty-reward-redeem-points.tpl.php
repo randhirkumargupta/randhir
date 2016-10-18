@@ -17,8 +17,8 @@
         <?php print $data['logout']; ?>
       </div>
     </div>  
-    <ul class="header-cart">
-        <li id="my-cart-items">          
+    <ul class="header-cart">        
+        <li id="my-cart-items"> 
           <?php
             $block = module_invoke('itg_loyalty_reward', 'block_view', 'itg_cart_block');
             print render($block['content']);
@@ -72,6 +72,7 @@
         <li id="my-remaining-points">          
           <span><?php print empty($data['remaining_point']) ? 0 : $data['remaining_point']; ?></span> POINTS LEFT
         </li>
+        <li><span><?php print l(t('MY HISTORY'), 'order'); ?></span></li>
     </ul>
         
  </div> 
