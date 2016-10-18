@@ -354,6 +354,7 @@
     vertical-align: top;
   }
   .oscar-layout-page .oscor-photo .col-md-6 .title h3 {
+    height: inherit;
     white-space: pre-wrap;
   }
   .oscar-layout-page .oscor-photo .col-md-6 :nth-child(n+3) {
@@ -709,6 +710,9 @@
     font-size: 17px;
     font-size: 1.0625rem;
     font-weight: 500;
+  }
+  .story-section .snap-post .agbutton p.error-msg {
+    padding-left: 140px;
   }
   .story-section .social-list li {
     width: auto;

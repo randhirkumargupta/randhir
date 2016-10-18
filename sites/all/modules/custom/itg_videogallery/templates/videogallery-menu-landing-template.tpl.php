@@ -23,7 +23,7 @@ elseif (itg_videogallery_get_categoryparent($_GET['category']) == TRUE && empty(
     $node = itg_videogallery_get_term(arg(1));
    if(in_array(variable_get('ipl_for_widget'), $node))
    {
-      print '<h3><span class="ipl-other-video">Other Video</span></h3>';  
+      print '<div class="siderbar-sport"><span class="widget-title">Other Video</span></div>';  
       
    }else {
     

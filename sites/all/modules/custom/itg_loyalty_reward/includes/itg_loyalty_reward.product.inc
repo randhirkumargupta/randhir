@@ -269,7 +269,8 @@ function _get_order_item() {
   $itg_result = array();
   $itg_query = db_select('itg_loyalty_reward_order', 'itg')
       ->fields('itg', array('order_id', 'product_information', 'created'))
-      ->condition('uid', $user->uid);
+      ->condition('uid', $user->uid)
+      ->orderBy('order_id', 'desc');
   $itg_result = $itg_query->execute()->fetchAll();
   $data = array();
   foreach ($itg_result as $value) {
@@ -297,4 +298,36 @@ function _get_order_item() {
   }
 
   return $data;
+}
+
+/**
+ * Callback function for order summary page.
+ *
+ * @global stdObject $user
+ * @return array
+ */
+function itg_loyalty_reward_order_summary() {
+  global $user;
+  // Add js file.
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');  
+  $user_detail = user_load($user->uid);  
+  $data['product_detail'] = _get_cart_full_details($user->uid);  
+  $fname = $user_detail->field_first_name['und'][0]['value'];
+  $lname = $user_detail->field_last_name['und'][0]['value'];
+  $data['user_detail']['name'] = $fname . ' ' . $lname;
+  $data['user_detail']['mail'] = $user_detail->mail;
+  $data['user_detail']['address'] = $user_detail->field_short_description['und'][0]['value'];
+  $remain_point = itg_loyalty_reward_remaining_point($user->uid);  
+  
+  return theme('cart_order_summary', array('data' => $data, 'remain_point' => $remain_point));
+}
+
+/**
+ * Callback function for order confirmation page.
+ *
+ * @return array
+ */
+function itg_loyalty_reward_order_confirmation() {
+  
+  return theme('cart_order_confirmation', array('data' => $data));
 }
