@@ -30,7 +30,6 @@ var frequencyFlag = 1;
             
             // hide vertical-tabs
             jQuery('.vertical-tabs').hide();
-            
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
                 jQuery(".field-type-text.field-name-field-client-short-description.field-widget-text-textfield.form-wrapper").hide();
                 jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
@@ -455,7 +454,7 @@ var frequencyFlag = 1;
                     var nid = jQuery('#edit-field-service-association-title-und').val();
                     jQuery.ajax({
                         type: "POST",
-                        url: Drupal.settings.basePath + 'countchar_validation',
+                        url: Drupal.settings.itg_mobile_services.settings.basePath + '/countchar_validation',
                         data: 'nidvalue=' + nid,
                         success: function (msg) {
                             maxLen = parseInt(msg);
@@ -694,7 +693,7 @@ var frequencyFlag = 1;
                 jQuery('.time-filter-select').live('change', function () {
                     jQuery('#loader-data img').show();
                     var select_value = jQuery(this).val();
-                    var base_url = Drupal.settings.basePath;
+                    var base_url = Drupal.settings.itg_mobile_services.settings.basePath;
                     jQuery.ajax({
                         url: base_url + '/dailymotion-video-time-filter',
                         type: 'post',
@@ -736,7 +735,7 @@ function days_in_month(month, year) {
                 } else {
                     jQuery('.time-filter').hide();
                 }
-                var base_url = Drupal.settings.basePath;
+                var base_url = Drupal.settings.itg_mobile_services.settings.basePath;
                 jQuery.ajax({
                     url: base_url + '/dailymotion-ftp-videos-post',
                     type: 'post',

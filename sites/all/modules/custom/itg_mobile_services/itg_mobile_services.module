@@ -620,10 +620,12 @@ function itg_mobile_clients_validator($form, &$form_state) {
  * @return array
  */
 function itg_service_association_after_build($form, &$form_state) {
+  global $base_url;
   $form['field_service_association_title'][LANGUAGE_NONE]['#options'] = itg_mobile_services_get_service_list();
   $form_state['redirect'] = 'service-association-listing';
   $settings['service_association_form'] = TRUE;
   $settings['service_form'] = TRUE;
+  $settings['basePath'] = $base_url;
   drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form['path']['#access'] = FALSE;
@@ -639,7 +641,8 @@ function itg_service_association_after_build($form, &$form_state) {
  * @return array
  */
 function itg_service_content_after_build($form, &$form_state) {
-
+  global $base_url;
+  $settings['basePath'] = $base_url;
   if (isset($form_state['values']['field_service_association_title'][LANGUAGE_NONE])) {
     if (is_array($form_state['values']['field_service_association_title'][LANGUAGE_NONE])) {
       $association_nid = isset($form_state['values']['field_service_association_title'][LANGUAGE_NONE][0]) ? (int) $form_state['values']['field_service_association_title'][LANGUAGE_NONE][0] : '';
@@ -789,9 +792,11 @@ function itg_mobile_service_after_submit($form, $form_state) {
  * @return array
  */
 function itg_mobile_client_after_build($form, &$form_state) {
+  global $base_url;
   $form['path']['#access'] = FALSE;
   $settings = array();
   $settings['service_form'] = FALSE;
+  $settings['basePath'] = $base_url;
   drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
   $form_state['redirect'] = 'clients-listing';
@@ -805,8 +810,10 @@ function itg_mobile_client_after_build($form, &$form_state) {
  * @return array
  */
 function itg_mobile_service_after_build($form, &$form_state) {
+  global $base_url;
   $settings = array();
   $settings['service_form'] = TRUE;
+  $settings['basePath'] = $base_url;
   drupal_add_js(array('itg_mobile_newservice' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_new_service.js', array('weight' => 4, 'scope' => 'footer'));
 
@@ -1288,6 +1295,7 @@ function itg_mobile_services_field_attach_form($entity_type, $entity, &$form, &$
  * @param array $form_state
  */
 function itg_mobile_services_field_add_more_submit($form, &$form_state) {
+  global $base_url;
   $button = $form_state['triggering_element'];
   // Go one level up in the form, to the widgets container.
   $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
@@ -1366,6 +1374,7 @@ function itg_mobile_services_field_add_more_submit($form, &$form_state) {
   }
   unset($_SESSION['field_astro_zodiac']);
   $settings['service_content_first_row_hide'] = TRUE;
+  $settings['basePath'] = $base_url;
   drupal_add_js(array('itg_mobile_services' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_mobile_services') . '/js/itg_mobile_service.js', array('weight' => 3, 'scope' => 'footer'));
 }
@@ -1493,7 +1502,7 @@ function itg_mobile_services_check_astro_service($entity_id) {
  * @param int $service_frequency_id
  */
 function itg_mobile_content_reset_callback($association_nid, $service_frequency_id) {
-
+  global $base_url;  
   if (is_numeric($association_nid)) {
     $result = get_service_association($association_nid);
     $name = '';
@@ -1522,7 +1531,7 @@ function itg_mobile_content_reset_callback($association_nid, $service_frequency_
         $content_type_val = str_replace(' ', '', trim(strtolower($content_result)));
         $content_format .= $content_type_val . ',';
       }
-
+      $settings['basePath'] = $base_url;
       $settings['session_service_title'] = $service_title;
       $settings['session_content_format'] = $content_format;
       $settings['session_client_name'] = $name;
