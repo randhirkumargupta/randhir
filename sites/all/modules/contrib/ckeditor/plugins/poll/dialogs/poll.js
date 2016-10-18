@@ -37,6 +37,10 @@ CKEDITOR.dialog.add('pollDialog', function(editor) {
             title: 'Poll',
             onClick: function() {
               var bas_path = window.location.origin?window.location.origin+'/':window.location.protocol+'/'+window.location.host+'/';
+   
+              if(bas_path == 'http://localhost/') {
+                bas_path = bas_path+'itgcms/';
+              }
               editor.popup(bas_path + 'pqs/associate-with-story/poll', 400, 600);
               
             }

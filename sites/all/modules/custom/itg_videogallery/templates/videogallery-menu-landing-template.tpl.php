@@ -20,6 +20,15 @@ elseif (itg_videogallery_get_categoryparent($_GET['category']) == TRUE && empty(
   $term_load = taxonomy_term_load($_GET['category']);
   print '<h3><span>Other Episodes From ' . $term_load->name . '</span></h3>';
 }if (empty($_GET['category'])) {
+    $node = itg_videogallery_get_term(arg(1));
+   if(in_array(variable_get('ipl_for_widget'), $node))
+   {
+      print '<h3><span class="ipl-other-video">Other Video</span></h3>';  
+      
+   }else {
+    
+    
   print '<h3><span>Other Video Galleries</span></h3>';
+   }
 }
 ?>

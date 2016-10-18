@@ -1551,6 +1551,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-podcast-admin-menu,
 #block-menu-menu-print-team-menu,
 #block-menu-menu-videogallery-admin-menu,
+#block-menu-menu-event-backend,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -1988,8 +1989,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-template-guru-values"]{
   @extend .itg-add-another-item;
 }
-[id*="field-erf-registration-fee-values"], 
-[id*="field-mega-review-review-values"],
+[id*="field-erf-registration-fee-values"],
 [id*="field-story-highlights-values"]{
   thead{
     @extend .hide;
@@ -2919,12 +2919,14 @@ fieldset#edit-select{
 }
 .confirmation{
   @extend .node-form;
-  a#edit-cancel, a.active{
-    @extend .btn-cancel;
-    @extend .dib;
-    @extend .vtop;
-    padding: 6px 12px;
-    border-radius: 4px;
+  .form-actions{
+    a#edit-cancel, a.active{
+      @extend .btn-cancel;
+      @extend .dib;
+      @extend .vtop;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
   }
 }
 .user-configurations{
@@ -4173,6 +4175,15 @@ div.node{
   .form-field-name-field-service-content{
     .ajax-progress-throbber{
       @extend .hide;
+    }
+    .field-name-field-service-audio-keyword{
+      padding-left: 220px;
+      .form-type-textfield{
+        margin-top: 10px;
+        > label{
+          width: 93px;
+        }
+      }
     }
   }
   .field-name-field-service-audio, 
@@ -8151,3 +8162,63 @@ div.node{
 #draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {display:none !important}
 #draggableviews-table-issue-base-magazin-widget-issue-magazin-widget-list .tabledrag-hide {display:none !important}
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-image-caption textarea{height: 50px;}
+[id*="views-exposed-form-Event-backend-page"]{
+  .views-submit-button{
+    [id*="edit-submit-event-backend"]{
+      margin-top: 26px;
+    }
+    #custom-event-type{
+      float: left;
+      max-width: 125px;
+      margin-right: 10px;
+    }
+  }
+}
+.node-mega_review_critic-form{
+  [id*="field-story-reporter-values"]{
+    thead{
+      display: block;
+    }
+    tbody{
+      overflow: visible;
+      tr{
+        td{
+          .form-type-textfield{
+            > label{display: none;}
+          }
+        }
+      }
+    }
+  }
+  [id*="field-mega-review-review-values"]{
+    > tbody > tr > td{
+      float: left;
+      border: 1px solid #d8d8d8;
+      margin-bottom: 30px;
+      padding: 0;
+      > .form-submit, > .ajax-new-content > .form-submit{margin-bottom: 30px;}
+    }
+    & + div.clearfix{
+      .ajax-progress, .form-submit{
+        margin-top: -15px;
+      }
+    } 
+  }
+}
+.node-type-mega-review-critic, .page-node-add-mega-review-critic{
+  .action-with-title #page-title{
+    width: 730px;
+  }
+}
+[id*="views-exposed-form-menu-manager-menu-manager-page"]{
+  .views-submit-button{
+    .form-type-select{
+      float: left;
+      max-width: 125px;
+    }
+    .form-submit{
+      margin-left: 10px !important;
+      margin-top: 26px !important;
+    }
+  }
+}

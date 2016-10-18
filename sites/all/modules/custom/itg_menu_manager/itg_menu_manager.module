@@ -367,8 +367,8 @@ function decide_section($form, &$form_state) {
   if ($url_type == 'external') {
     unset($form['title']['#ajax']);
     unset($form['title']['#autocomplete_path']);
-    $form['sections']['#prefix'] = '<div style="display:none">';
-    $form['sections']['#sufix'] = '</div>';
+//    $form['sections']['#prefix'] = '<div style="display:none">';
+//    $form['sections']['#sufix'] = '</div>';
   }
 
   if ($sections == 0 && $menu_level == 'third' && $url_type == 'internal') {
@@ -411,6 +411,10 @@ function itg_menu_manager_form_submit($form, &$form_state) {
   $max_query = db_select('itg_menu_manager');
   $max_query->addExpression('MAX(weight)');
   $max_query->condition('menu_level', $menu_level);
+  // condition during menu level
+  if ($menu_level == 'third') {
+    $max_query->condition('section_id', $sections);
+  }
   $max_result = $max_query->execute()->fetchField();
 
   $order = ++$max_result;
@@ -420,25 +424,42 @@ function itg_menu_manager_form_submit($form, &$form_state) {
   // get tid
   $term_tid_array = explode("tid:", $matches[1][0]);
   // In case of external url we didnt got tid so mannualy give a tid.
-  $term_id = ($term_tid_array[1]) ? $term_tid_array[1] : 0;
+  $term_id = ($term_tid_array[1]) ? trim($term_tid_array[1]) : time();
 
   try {
-    db_insert('itg_menu_manager')
-            ->fields(array(
-                'title' => $title,
-                'url' => $url,
-                'target' => $target,
-                'menu_level' => $menu_level,
-                'weight' => $order,
-                'url_type' => $url_type,
-                'menu_name' => "blank",
-                'section_id' => $sections,
-                'tid' => $term_id,
-                'created' => time(),
-            ))
-            ->execute();
 
-    drupal_set_message("Menu has been saved");
+    if (1) {
+      db_insert('itg_menu_manager')
+              ->fields(array(
+                  'title' => $title,
+                  'url' => $url,
+                  'target' => $target,
+                  'menu_level' => $menu_level,
+                  'weight' => $order,
+                  'url_type' => $url_type,
+                  'menu_name' => "blank",
+                  'section_id' => $sections,
+                  'tid' => trim($term_id),
+                  'created' => time(),
+              ))
+              ->execute();
+    }
+//    else {
+//      db_insert('itg_menu_manager')
+//              ->fields(array(
+//                  'title' => $title,
+//                  'url' => $url,
+//                  'target' => $target,
+//                  'menu_level' => $menu_level,
+//                  'weight' => $order,
+//                  'url_type' => $url_type,
+//                  'menu_name' => "blank",
+//                  'section_id' => $sections,
+//                  'tid' => time(),
+//                  'created' => time(),
+//              ))
+//              ->execute();
+//    }
   } catch (Exception $ex) {
     drupal_set_message($ex->getMessage());
   }
@@ -468,13 +489,27 @@ function itg_menu_manager_block_view($delta = '') {
   switch ($delta) {
     case 'second_level_menu':
       $second_level_menu = get_second_level_menu();
-      $block['content'] = theme('second_level_menu', array("data" => $second_level_menu));
+      foreach ($second_level_menu as $db_data) {
+        $temp_data = array();
+        $temp_data['db_data'] = $db_data;
+        $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+        $data[] = $temp_data;
+      }
+      $block['content'] = theme('second_level_menu', array("data" => $data));
       break;
     case 'third_level_menu':
       $third_level_menu = get_third_level_menu();
-      $block['content'] = theme('third_level_menu', array("data" => $third_level_menu));
+      $data = array();
+      foreach ($third_level_menu as $db_data) {
+        $temp_data = array();
+        $temp_data['db_data'] = $db_data;
+        $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+        $data[] = $temp_data;
+      }
+      $block['content'] = theme('third_level_menu', array("data" => $data));
       break;
   }
+  return $block;
 }
 
 function itg_menu_manager_theme() {
@@ -482,12 +517,12 @@ function itg_menu_manager_theme() {
       'second_level_menu' => array(
           'template' => 'templates/second-level-menu',
       ),
-      
       'third_level_menu' => array(
           'template' => 'templates/third-level-menu',
       ),
   );
 }
+
 /**
  * function returns array of second level menu
  * @return type
@@ -496,7 +531,7 @@ function get_second_level_menu() {
   $query = db_select('itg_menu_manager', 'imm')
           ->fields('imm')
           ->condition('imm.menu_level', 'second')
-          ->orderBy('imm.weight', 'DESC');
+          ->orderBy('imm.weight', 'ASC');
   return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -505,11 +540,24 @@ function get_second_level_menu() {
  * @return type
  */
 function get_third_level_menu() {
-  $query = db_select('itg_menu_manager', 'imm')
-          ->fields('imm')
-          ->condition('imm.menu_level', 'third')
-          ->orderBy('imm.weight', 'DESC');
-  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $arg = arg();
+  $section_id = 0;
+  // condition for itg theme
+  if (isset($arg[2])) {
+    $section_id = $arg[2];
+  }
+  // condition for itgadmin theme
+  else if (isset($_GET['section'])) {
+    $section_id = $_GET['section'];
+  }
+  if ($section_id) {
+    $query = db_select('itg_menu_manager', 'imm')
+            ->fields('imm')
+            ->condition('imm.menu_level', 'third')
+            ->condition('imm.section_id', $section_id)
+            ->orderBy('imm.weight', 'ASC');
+    return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
 
 /**
@@ -689,8 +737,26 @@ function itg_menu_manager_views_data() {
  * {@inheritdoc}
  */
 function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
+  
   if ($form_id == 'views_form_menu_manager_menu_manager_page') {
     $form['actions']['submit']['#submit'][] = 'itg_menu_manager_custom_submit';
+  }
+  
+  if ($form_id == 'views_exposed_form') {
+    $view = $form_state['view'];
+    if ($view->name == "menu_manager" && $view->current_display == 'menu_manager_page') {
+      drupal_add_css("#edit-section-id-wrapper {display:none}" , "inline");
+      if (arg(1) == 'third') {
+        drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js', 'file');
+        $options = itg_menu_manager_get_taxonomy_term_options('category_management');
+        $form['section_child'] = array(
+            '#title' => 'Section',
+            '#type' => 'select',
+            '#options' => $options,
+            '#weight' => -99,
+        );
+      }
+    }
   }
 }
 
@@ -705,20 +771,60 @@ function itg_menu_manager_custom_submit($form, &$form_state) {
   $draggable_view_data = $form_state['input']['draggableviews'];
   // Category tid from url.
   $menu_level = arg(1);
-  // Now insert new entry in itg_widget_order table of combination
-  foreach ($draggable_view_data as $key => $menu_data) {
-    try {
-      db_merge('itg_menu_manager')
-              ->key(array(
-                  'tid' => $menu_data['id'],
-                  'menu_level' => $menu_level,
-              ))
-              ->fields(array(
-                  'weight' => $menu_data['weight'],
-              ))
-              ->execute();
-    } catch (Exception $ex) {
-      drupal_set_message($ex->getMessage());
+  if ($menu_level == 'second') {
+    $total_changed_weight = 0;
+
+    foreach ($draggable_view_data as $weight_cal_key => $weight) {
+      $total_changed_weight = $weight['weight'] + $total_changed_weight;
+    }
+
+    if ($total_changed_weight) {
+      // Now insert new entry in itg_widget_order table of combination
+      foreach ($draggable_view_data as $key => $menu_data) {
+        try {
+          db_merge('itg_menu_manager')
+                  ->key(array(
+                      'tid' => $menu_data['id'],
+                      'menu_level' => $menu_level,
+                  ))
+                  ->fields(array(
+                      'weight' => $menu_data['weight'],
+                  ))
+                  ->execute();
+          drupal_set_message("Order has been updated");
+        } catch (Exception $ex) {
+          drupal_set_message($ex->getMessage());
+        }
+      }
+    }
+  }
+  else if ($menu_level == 'third') {
+    $section_id = $_GET['section_id'];
+    $total_changed_weight = 0;
+
+    foreach ($draggable_view_data as $weight_cal_key => $weight) {
+      $total_changed_weight = $weight['weight'] + $total_changed_weight;
+    }
+
+    if ($total_changed_weight) {
+      // Now insert new entry in itg_widget_order table of combination
+      foreach ($draggable_view_data as $key => $menu_data) {
+        try {
+          db_merge('itg_menu_manager')
+                  ->key(array(
+                      'tid' => trim($menu_data['id']),
+                      'menu_level' => trim($menu_level),
+                      'section_id' => trim($section_id),
+                  ))
+                  ->fields(array(
+                      'weight' => $menu_data['weight'],
+                  ))
+                  ->execute();
+          drupal_set_message("Order has been updated");
+        } catch (Exception $ex) {
+          drupal_set_message($ex->getMessage());
+        }
+      }
     }
   }
 }
@@ -729,7 +835,13 @@ function itg_menu_manager_custom_submit($form, &$form_state) {
 function itg_menu_manager_views_pre_render(&$view) {
   if ($view->name == "menu_manager" && $view->current_display == 'menu_manager_page') {
     $header_content = "<h2>" . arg(1) . " level menu ordering</h2>";
-    $header_content .= '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $count = 0;
+    if((arg(1) == 'third' && !isset($_GET['section_child'])) && $_GET['section_child']==0) {
+      unset($view->result);
+    } else {
+      $count = $view->total_rows;
+    }
+    $header_content .= '<span class="count">Count (' . $count . ') </span>';
     $view->attachment_before = $header_content;
   }
 }

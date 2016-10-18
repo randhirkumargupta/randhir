@@ -24,10 +24,20 @@ class ItgStoryMigration extends XMLMigration {
       'categories' => t('categories'), //multi
       'primarycategory' => t('primarycategory'),
       'extralargeimage' => t('extralargeimage'),
+      'extra_large_alt' => t('extra_large_alt'),
+      'extra_large_title' => t('extra_large_title'),
       'largeimage' => t('largeimage'),
+      'large_title' => t('large_title'),
+      'large_alt' => t('large_alt'),
       'mediumimage' => t('mediumimage'),
+      'mediumimage_alt' => t('mediumimage_alt'),
+      'mediumimage_title' => t('mediumimage_title'),
       'smallimage' => t('smallimage'),
+      'smallimage_alt' => t('smallimage_alt'),
+      'smallimage_title' => t('smallimage_title'),
       'extrasmallimage' => t('extrasmallimage'),
+      'extra_small_alt' => t('extra_small_alt'),
+      'extra_small_title' => t('extra_small_title'),
       'storykicker' => t('storykicker'),
       'storybody' => t('storybody'),
       'magazinekicker' => t('magazinekicker'),
@@ -43,10 +53,14 @@ class ItgStoryMigration extends XMLMigration {
       'socialmediaintegration' => t('socialmediaintegration'), //checkbox
       'facebooknarrative' => t('facebooknarrative'),
       'facebookimage' => t('facebookimage'),
+      'facebookimage_alt' => t('facebookimage_alt'),
+      'facebookimage_title' => t('facebookimage_title'),
       'facebookvideonarrative' => t('facebookvideonarrative'),
       'facebookvideo' => t('facebookvideo'),
       'twitternarrative' => t('twitternarrative'),
       'twitterimage' => t('twitterimage'),
+      'twitterimage_alt' => t('twitterimage_alt'),
+      'twitterimage_title' => t('twitterimage_title'),
       'twittervideodescription' => t('twittervideodescription'),
       'twittervideo' => t('twittervideo'),
       'syndication' => t('syndication'),
@@ -67,6 +81,8 @@ class ItgStoryMigration extends XMLMigration {
       'briefcase_content' => t('briefcase_content'), //multi
       'expertname' => t('expertname'),
       'expertimage' => t('expertimage'),
+      'expert_alt' => t('expert_alt'),
+      'expert_title' => t('expert_title'),
       'expertdescription' => t('expertdescription'),
       'archive' => t('archive'),
       'common_by_line_name' => t('common_by_line_name'),
@@ -130,10 +146,20 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_stroy_city', 'city')->xpath('city'); //id
     $this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
+     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
+    $this->addFieldMapping('field_story_extra_large_image:title', 'extra_large_title')->xpath('extra_large_title');
     $this->addFieldMapping('field_story_large_image', 'largeimage')->xpath('largeimage');
+    $this->addFieldMapping('field_story_large_image:alt', 'large_alt')->xpath('large_alt');
+    $this->addFieldMapping('field_story_large_image:title', 'large_title')->xpath('large_title');
     $this->addFieldMapping('field_story_medium_image', 'mediumimage')->xpath('mediumimage');
+    $this->addFieldMapping('field_story_medium_image:alt', 'mediumimage_alt')->xpath('mediumimage_alt');
+    $this->addFieldMapping('field_story_medium_image:title', 'mediumimage_title')->xpath('mediumimage_title');
     $this->addFieldMapping('field_story_small_image', 'smallimage')->xpath('smallimage');
+    $this->addFieldMapping('field_story_small_image:alt', 'smallimage_alt')->xpath('smallimage_alt');
+    $this->addFieldMapping('field_story_small_image:title', 'smallimage_title')->xpath('smallimage_title');
     $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
+    $this->addFieldMapping('field_story_extra_small_image:alt', 'extra_small_alt')->xpath('extra_small_alt');
+    $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');
     $this->addFieldMapping('field_story_kicker_text', 'storykicker')->xpath('storykicker');
     $this->addFieldMapping('body', 'storybody')->xpath('storybody');
 //
@@ -146,10 +172,14 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_snap_post', 'snappost')->xpath('snappost');
     $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
     $this->addFieldMapping('field_story_facebook_image', 'facebookimage')->xpath('facebookimage');
+    $this->addFieldMapping('field_story_facebook_image:alt', 'facebookimage_alt')->xpath('facebookimage_alt');
+    $this->addFieldMapping('field_story_facebook_image:title', 'facebookimage_title')->xpath('facebookimage_title');
     $this->addFieldMapping('field_story_facebook_vdescripti', 'facebookvideonarrative')->xpath('facebookvideonarrative');
     $this->addFieldMapping('field_story_facebook_video', 'facebookvideo')->xpath('facebookvideo');
     $this->addFieldMapping('field_story_tweet', 'twitternarrative')->xpath('twitternarrative');
     $this->addFieldMapping('field_story_tweet_image', 'twitterimage')->xpath('twitterimage');
+    $this->addFieldMapping('field_story_tweet_image:alt', 'twitterimage_alt')->xpath('twitterimage_alt');
+    $this->addFieldMapping('field_story_tweet_image:title', 'twitterimage_title')->xpath('twitterimage_title');
     $this->addFieldMapping('field_story_twitter_video_desc', 'twittervideodescription')->xpath('twittervideodescription');
     $this->addFieldMapping('field_story_twitter_video', 'twittervideo')->xpath('twittervideo');
     $this->addFieldMapping('field_story_syndication', 'syndication')->xpath('syndication');
@@ -165,6 +195,8 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_templates', 'selectlisticletemplates')->xpath('selectlisticletemplates');
     $this->addFieldMapping('field_story_expert_name', 'expertname')->xpath('expertname');
     $this->addFieldMapping('field_story_expert_image', 'expertimage')->xpath('expertimage');
+    $this->addFieldMapping('field_story_expert_image:alt', 'expert_alt')->xpath('expert_alt');
+    $this->addFieldMapping('field_story_expert_image:title', 'expert_title')->xpath('expert_title');
     $this->addFieldMapping('field_story_expert_description', 'expertdescription')->xpath('expertdescription');
     $this->addFieldMapping('field_story_archive', 'archive')->xpath('archive');
     $this->addFieldMapping('field_poll_start_date', 'associatetvdate')->xpath('associatetvdate');
@@ -399,6 +431,8 @@ class ItgStoryMigration extends XMLMigration {
         $image_url = (string) $value->image;
         $file = file_save_data(file_get_contents($image_url), file_default_scheme() . '://' . basename($image_url), FILE_EXISTS_RENAME);
         $file->status = 1;
+        $file->alt = (string) $value->buzz_alt;
+        $file->title = (string) $value->buzz_title;
         $image = (array) $file;
         $description = (string) $value->description;
         $values = array(
