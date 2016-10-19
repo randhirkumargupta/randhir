@@ -49,7 +49,8 @@
                 }
             }); 
           
-
+          $('#edit-pass-pass1').attr('autocomplete','off');
+          $('#edit-pass-pass2').attr('autocomplete','off');
         }
 
     };
