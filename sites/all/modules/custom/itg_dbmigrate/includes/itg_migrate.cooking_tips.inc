@@ -1,5 +1,4 @@
 <?php
-//pending
 
 /**
  * ItgCookingTipsMigration extends XMLMigration 
@@ -83,6 +82,7 @@ class ItgCookingTipsMigration extends XMLMigration {
     $this->addFieldMapping('field_story_syndication', 'syndication')->xpath('syndication');
     $this->addFieldMapping('field_story_short_headline', 'shortheadline')->xpath('shortheadline');
     $this->addFieldMapping('field_story_client_title', 'clienttitle')->xpath('clienttitle');
+    
     // for image
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage'); 
     $this->addFieldMapping('field_story_extra_large_image:alt', 'extralargeimage_alt')->xpath('extralargeimage_alt');
