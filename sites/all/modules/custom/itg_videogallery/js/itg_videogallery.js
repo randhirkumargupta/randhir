@@ -64,17 +64,17 @@
             });
             $('.plupload_container').removeAttr("title");
             // Display Byline details
-            $('#edit-field-story-reporter-und-0-target-id').blur(function() {
-                var base_url = Drupal.settings.basePath;
-                $.ajax({
-                    url: base_url + "/reporter-details-ajax",
-                    method: 'post',
-                    data: {'reporter_id': $('#edit-field-story-reporter-und-0-target-id').val()},
-                    success: function(data) {
-                        $('#reporter-details').html(data);
-                    }
-                });
-            });
+//            $('#edit-field-story-reporter-und-0-target-id').blur(function() {
+//                var base_url = Drupal.settings.basePath;
+//                $.ajax({
+//                    url: base_url + "/reporter-details-ajax",
+//                    method: 'post',
+//                    data: {'reporter_id': $('#edit-field-story-reporter-und-0-target-id').val()},
+//                    success: function(data) {
+//                        $('#reporter-details').html(data);
+//                    }
+//                });
+//            });
             // FTP browse js
             $('document').ready(function() {
                 var old_vid = $("input[name='field_upload_video[und][0][fid]']").val();
