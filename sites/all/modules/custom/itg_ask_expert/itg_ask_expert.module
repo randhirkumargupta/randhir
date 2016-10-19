@@ -433,7 +433,7 @@ function itg_custom_ask_an_expert_form_submit($form, &$form_state) {
   node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
   $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
   $node->uid = $user->uid;
-  $node->status = 0; //(1 or 0): published or not
+  $node->status = 1; //(1 or 0): published or not
   $node->promote = 0; //(1 or 0): promoted to front page
   $node->comment = 0; // 0 = comments disabled, 1 = read only, 2 = read/write
   // Term reference (taxonomy) field
