@@ -3701,7 +3701,7 @@ fieldset#edit-select .form-submit {
 }
 
 .audio-div {
-  position: relative;
+  padding-top: 10px;
 }
 
 .view-content > .item-list > ul > li > .category-manager-details {
@@ -8423,4 +8423,8 @@ div.node #comments h2 {
   font-weight: bold;
   padding: 30px 0;
   text-align: right;
+}
+
+.story-node-form [id*="field-story-reporter-values"] tbody {
+  overflow: visible;
 }

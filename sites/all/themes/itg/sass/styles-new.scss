@@ -1126,6 +1126,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       strong{
         font-weight: 500;
       }
+      a{
+        color: #1a3c8d;
+      }
     }
   }
   
@@ -2804,7 +2807,7 @@ body.has-cart-popup{
   background-color: #fff;
   box-shadow: 0 0 15px #999;
   left: 0;
-  top: 20px;
+  top: 30px;
   padding: 15px 15px 10px;
   position: absolute;
   transform: translateX(-50%);
@@ -2816,10 +2819,10 @@ body.has-cart-popup{
     height: 0;
     border-style: solid;
     border-width: 15px;
-    border-color: #fff transparent transparent transparent;
+    border-color: transparent transparent #fff transparent;
     position: absolute;
-    left: 0;
-    top: -14px;
+    left: 75px;
+    top: -20px;
     right: 0;
     margin: 0 auto;
   }
