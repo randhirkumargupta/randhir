@@ -8164,7 +8164,7 @@ div.node{
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-image-caption textarea{height: 50px;}
 [id*="views-exposed-form-Event-backend-page"]{
   .views-submit-button{
-    [id*="edit-submit-event-backend"]{
+    .form-submit{
       margin-top: 26px;
     }
     #custom-event-type{
@@ -8220,5 +8220,17 @@ div.node{
       margin-left: 10px !important;
       margin-top: 26px !important;
     }
+  }
+}
+[id*="comment-global-config"]{
+  .form-submit{
+    @extend .btn;
+    @extend .btn-save;
+    margin-left: 250px;
+  }
+  #pre-record{
+    font-weight: bold;
+    padding: 30px 0;
+    text-align: right;
   }
 }
