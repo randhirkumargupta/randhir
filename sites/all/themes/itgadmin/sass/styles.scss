@@ -3072,7 +3072,7 @@ fieldset#edit-select{
 .details-parent{position: absolute; bottom: 0; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
 .details-parent .photo-title{font-size: 16px;}
 .details-parent .photo-title, .details-parent .image-description, .details-parent .photo-credit{overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-.audio-div{position: relative;}
+.audio-div{padding-top: 10px;}
 .view-content > .item-list > ul > li > .category-manager-details{background-color: #efefef;}
 .show{display: block;}
 .hide{display: none;}

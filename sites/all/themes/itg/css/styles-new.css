@@ -1200,6 +1200,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 #block-itg-personalization-user-my-point .header-point span strong {
   font-weight: 500;
 }
+#block-itg-personalization-user-my-point .header-point span a {
+  color: #1a3c8d;
+}
 
 /* End of Personalization CSS */
 /* CSS For Error Pages */

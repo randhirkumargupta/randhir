@@ -3701,7 +3701,7 @@ fieldset#edit-select .form-submit {
 }
 
 .audio-div {
-  position: relative;
+  padding-top: 10px;
 }
 
 .view-content > .item-list > ul > li > .category-manager-details {
