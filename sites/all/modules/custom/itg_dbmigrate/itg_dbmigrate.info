@@ -21,3 +21,4 @@ files[] = includes/itg_migrate.tags.inc
 files[] = includes/itg_migrate.photogallery.inc
 files[] = includes/itg_migrate.cooking_tips.inc
 files[] = includes/itg_migrate.videogallery.inc
+files[] = includes/itg_migrate.megareview.inc
