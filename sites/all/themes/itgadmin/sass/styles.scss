@@ -8234,3 +8234,10 @@ div.node{
     text-align: right;
   }
 }
+.story-node-form{
+  [id*="field-story-reporter-values"]{
+    tbody{
+      overflow: visible;
+    }
+  }
+}
