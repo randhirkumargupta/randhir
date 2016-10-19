@@ -6706,19 +6706,24 @@ footer .footer-copyright {
   border-top: none;
   padding: 30px 0 0 0;
 }
+.sport-home-layout-page .tech-block_5 {
+  /*        .view-content{
+              padding: 5px;
+              .flexslider{
+                  box-shadow: 0 0 5px #cecdcd;
+                  padding: 10px;
+                  border-radius: 0;
+              }
+          }*/
+}
+.sport-home-layout-page .tech-block_5 .data-holder {
+  max-width: inherit;
+}
 .sport-home-layout-page .tech-block_5 .widget-title {
   position: relative;
   left: 0;
   top: 0;
   margin-bottom: 10px;
-}
-.sport-home-layout-page .tech-block_5 .view-content {
-  padding: 5px;
-}
-.sport-home-layout-page .tech-block_5 .view-content .flexslider {
-  box-shadow: 0 0 5px #cecdcd;
-  padding: 10px;
-  border-radius: 0;
 }
 .sport-home-layout-page .sports-video .view-content .photo-list li {
   padding: 0 15px;

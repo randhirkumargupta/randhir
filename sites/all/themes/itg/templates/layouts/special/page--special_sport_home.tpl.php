@@ -239,7 +239,7 @@ if ($theme != 'itgadmin') {
 
 
                     <div class="col-md-4 col-sm-12 col-xs-12 right-side">
-<?php if (isset($widget_data['itg-block-6']['widget_name']) || isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || isset($widget_data['itg-block-10']['widget_name']) || $theme == 'itgadmin') { ?>
+<?php //if (isset($widget_data['itg-block-6']['widget_name']) || isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || isset($widget_data['itg-block-10']['widget_name']) || $theme == 'itgadmin') { ?>
                             <div class="row">
                                 <div class="col-md-12">                    
                                     <div class="itg-widget-parent">
@@ -269,7 +269,7 @@ if ($theme != 'itgadmin') {
                                                     </div>
     <?php } ?>  
 
-                                                <div class="data-holder" id="itg-block-6" widget-style="oscar-news"><?php print $widget_data['itg-block-6']['widget']; ?>
+                                                <div class="data-holder" id="itg-block-6" widget-style="oscar-news"><?php $block = module_invoke('itg_widget', 'block_view', 'live_score');print render($block['content']); ?>
                                                  
                                                 </div>
                                             </div>             
@@ -414,7 +414,7 @@ if ($theme != 'itgadmin') {
 
                             </div>
 
-<?php } ?>
+<?php //} ?>
                     </div>
 
                 </div>

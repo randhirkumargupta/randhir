@@ -635,7 +635,9 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_live_score');  
      
         $block['subject'] = '';
-      $block['content'] = live_score();
+      $data = live_score();
+
+       $block['content'] = theme("live_score_data", array("data" => $data));
       break;
   }
   
