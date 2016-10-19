@@ -5330,20 +5330,23 @@ footer{
         }        
     }
     .tech-block_5{
+        .data-holder{
+            max-width: inherit;
+        }
         .widget-title{
          @include pos(relative);
          left: 0;
          top: 0;
          margin-bottom: 10px;
         }
-        .view-content{
+/*        .view-content{
             padding: 5px;
             .flexslider{
                 box-shadow: 0 0 5px #cecdcd;
                 padding: 10px;
                 border-radius: 0;
             }
-        }
+        }*/
     }
     .sports-video{
         .view-content .photo-list li{

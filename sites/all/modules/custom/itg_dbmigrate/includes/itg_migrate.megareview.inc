@@ -4,7 +4,7 @@
 /**
  * ItgVideogalleryMigration extends XMLMigration 
  */
-class ItgVideogalleryMigration extends XMLMigration {
+class ItgMegareviewMigration extends XMLMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Videogallery)');

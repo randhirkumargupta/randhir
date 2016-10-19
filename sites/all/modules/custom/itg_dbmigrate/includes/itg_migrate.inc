@@ -85,6 +85,9 @@ function itg_dbmigrate_migrate_api() {
       'itg_videogallery' => array(
         'title' => t('Itg Videogallery Imports'),
       ),
+      'itg_megareview' => array(
+        'title' => t('Itg Megareview Imports'),
+      ),
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -155,6 +158,10 @@ function itg_dbmigrate_migrate_api() {
       'ItgVideogallery' => array(
         'class_name' => 'ItgVideogalleryMigration',
         'group_name' => 'itg_videogallery',
+      ),
+      'ItgMegareview' => array(
+        'class_name' => 'ItgMegareviewMigration',
+        'group_name' => 'itg_megareview',
       ),
     ),
     
