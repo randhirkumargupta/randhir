@@ -102,12 +102,12 @@ foreach ($items as $imagecollection):
       if (!empty($imgfid)) {
         $imguri = _itg_photogallery_fid($imgfid);
         $style = 'photogallery_slide';
-        $output .='<img src="' . image_style_url($style, $imguri) . '"/>';
+        $output .='<img src="' . image_style_url($style, $imguri) . '"/><div class="details-parent">';
       }
     }
 
     if (isset($imagecollection['field_image_caption'][LANGUAGE_NONE]) && !empty($imagecollection['field_image_caption'][LANGUAGE_NONE][0]['value'])) {
-      $output .= '<div class="details-parent"><div class="photo-title"><strong>' . $imagecollection['field_image_caption'][LANGUAGE_NONE][0]['value'] . '</strong></div>';
+      $output .= '<div class="photo-title"><strong>' . $imagecollection['field_image_caption'][LANGUAGE_NONE][0]['value'] . '</strong></div>';
     }
 
     if (isset($imagecollection['field_credit'][LANGUAGE_NONE]) && !empty($imagecollection['field_credit'][LANGUAGE_NONE][0]['value'])) {
@@ -141,7 +141,7 @@ foreach ($items as $imagecollection):
         }
       }
     }
-    $output .= '</li>';
+    $output .= '</div></li>';
   }
 endforeach;
       if (isset($output) && !empty($output)):

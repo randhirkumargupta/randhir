@@ -267,7 +267,8 @@ if ($theme != 'itgadmin') {
                                         </div>
                                     <?php } ?>  
 
-                                    <div class="data-holder" id="itg-block-19"><?php print $widget_data['itg-block-19']['widget']; ?></div>
+                                    <div class="data-holder" id="itg-block-19"><?php $block = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');
+  print render($block['content']); ?></div>
                                 </div>             
                             </div>               
                         </div>

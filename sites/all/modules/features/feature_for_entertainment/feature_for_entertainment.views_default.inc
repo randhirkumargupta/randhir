@@ -451,7 +451,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['display_description'] = 'Entertainment Oscar Slider';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '8';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
@@ -468,7 +468,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'image_750x363',
+    'image_style' => 'image750x447',
     'image_link' => 'content',
   );
   /* Field: Content: Title */
