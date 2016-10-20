@@ -92,9 +92,7 @@ if ($theme != 'itgadmin') {
  
 
 <div class="itg-layout-container <?php echo $itg_class; ?> education-layout-page">
-   
-<?php $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
-  print render($block['content']); ?>
+
     <div class="row itg-top-section itg-layout-672">
         
         <div class="top-block">

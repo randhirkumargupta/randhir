@@ -12,6 +12,7 @@
 
 <?php
 global $theme;
+$live_url="";
 $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';
@@ -20,6 +21,19 @@ if (arg(2) == 'preview') {
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
+$device = itg_live_tv_company('web');
+            if (!empty($device[0])) {
+              $live_tv_get_details = node_load($device[0]);
+              $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
+              if (filter_var($live_url, FILTER_VALIDATE_URL)) {
+                
+               
+                $live_url='<iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>';
+                
+                
+              }
+             
+            }
 ?>
 
 <!--------------------------------Code for Front tpl---------------------------------------->
@@ -117,7 +131,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-1']['block_title'])) { ?>
+<?php if (($theme != 'itgadmin' || isset($preview)) && !empty($live_url)) { ?>
                         <h4 class="heading"><?php print $widget_data['itg-block-1']['block_title']; ?></h4>
                       <?php } ?>
                       <!-- for admin  -->
@@ -133,7 +147,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         </div>
 <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-1"><?php print $widget_data['itg-block-1']['widget']; ?></div>
+                      <div class="data-holder" id="itg-block-1"><?php print $live_url; ?></div>
                     </div>             
                   </div>
                 </div>
