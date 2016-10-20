@@ -27,15 +27,6 @@
     <div class='column-main'><div class='column-wrapper'>
   <?php endif; ?>
 
-  <?php if (!empty($title_prefix)) print render($title_prefix); ?>
-
-  <?php if (!empty($title) && !$page): ?>
-    <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
-      <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-      <a href="<?php print $node_url ?>"><?php print $title ?></a>
-    </h2>
-  <?php endif; ?>
-
   <?php if (!empty($title_suffix)) print render($title_suffix); ?>
 
   <?php if (!empty($content)): ?>
@@ -56,6 +47,8 @@
                 <div class="field-label">Quiz Type:</div>
                 <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $node->field_quiz_type[LANGUAGE_NONE][0]['value'])); ?></div>
               </div>
+              
+              <?php if($node->field_quiz_type[LANGUAGE_NONE][0]['value'] == 'immediate') { ?>
               <div class="field">
                 <div class="field-label">Immediate Result:</div>
                 <div class="field-items">
@@ -69,6 +62,22 @@
                   ?>
                 </div>
               </div>
+              <?php } else { ?>
+              <div class="field">
+                <div class="field-label">Winners:</div>
+                <div class="field-items">
+                  <?php
+                  if (empty($node->field_quiz_winners[LANGUAGE_NONE][0]['value'])) {
+                    echo 'None';
+                  }
+                  else {
+                    echo $node->field_quiz_winners[LANGUAGE_NONE][0]['value'];
+                  }
+                  ?>
+                </div>
+              </div>
+              
+              <?php } ?>
               <div class="field">
                 <div class="field-label">Quiz Scoring Type:</div>
                 <div class="field-items"><?php echo ucwords($node->field_quiz_scoring_type[LANGUAGE_NONE][0]['value']); ?></div>
@@ -76,6 +85,10 @@
               <div class="field">
                 <div class="field-label">Questions Display Sequence:</div>
                 <div class="field-items"><?php echo ucwords($node->field_quiz_display_sequence[LANGUAGE_NONE][0]['value']); ?></div>
+              </div>
+              <div class="field">
+                <div class="field-label">Quiz Questions Format:</div>
+                <div class="field-items"><?php echo ucfirst($node->field_survey_questions_format[LANGUAGE_NONE][0]['value']); ?></div>
               </div>
             </div>
           </div>
@@ -253,6 +266,18 @@
  </div> 
       
 <?php } ?>
+  <div class="content-node-view">
+      <div class="expert-details content-box">
+        <h2><?php echo t('Publish/Unpublish'); ?></h2>
+        <div class="content-details">
+          <div class="field">
+            <div class="field-label">Published:</div>
+            <div class="field-items"><?php echo $node->status ? 'Yes':'No'; ?></div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
 </div>   
   <?php endif; ?>
 

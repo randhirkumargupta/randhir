@@ -6,8 +6,19 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-?>
 
+?>
+<?php if($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
+<script>
+window.addEventListener("message", function(ev) {
+    if (ev.data.message === "requestResult") {
+        // ev.source is the opener
+        ev.source.postMessage({ message: "deliverResult", result: true }, "*");
+    }   
+});
+
+</script>
+<?php } ?>
 <div id="page">
     <header class="header" id="header" role="banner">
             <section class="header-top">
@@ -16,10 +27,7 @@
                 <div class="logo">
                     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
                 </div>
-                    <?php endif; ?>
-                    <div class="login-link desktop-hide">
-            <a href="/user">Login</a>
-          </div> 
+                    <?php endif; ?>                    
                     </div>
                 
                 <?php if ($site_name || $site_slogan): ?>
@@ -34,23 +42,7 @@
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
-                <?php if ($secondary_menu): ?>
-                    <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
-                        <?php
-                        print theme('links__system_secondary_menu', array(
-                            'links' => $secondary_menu,
-                            'attributes' => array(
-                                'class' => array('links', 'inline', 'clearfix'),
-                            ),
-                            'heading' => array(
-                                'text' => $secondary_menu_heading,
-                                'level' => 'h2',
-                                'class' => array('element-invisible'),
-                            ),
-                        ));
-                        ?>
-                    </nav>
-                <?php endif; ?>
+                
                 <?php print render($page['header']); ?>
                     
             </section>
@@ -66,6 +58,7 @@
         $cls = 'col-md-8';
     endif; ?>
   <?php print render($page['top']); ?>
+  <?php print render($page['my_cart']); ?>
   <main id="main" class="container">
     <div class="row">
     <section id="content" class="<?php echo $cls;?>" role="main">
@@ -76,7 +69,7 @@
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
-        <h1 class="page__title title" id="page-title"><?php //print $title; ?></h1>
+        <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
@@ -86,6 +79,8 @@
         <ul class="action-links"><?php print render($action_links); ?></ul>
       <?php endif; ?>
       <?php print render($page['content']); ?>
+      <?php print render($page['content_bottom']); ?>
+      <?php print render($page['personalization']); ?>
       <?php print $feed_icons; ?>
     </section>
     <?php if (false): ?>
@@ -131,3 +126,7 @@
 </div>
 
 <?php print render($page['bottom']); ?>
+<?php global $base_url; ?>
+<div id="widget-ajex-loader" style="display: none">
+    <img class="widget-loader" align="center" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
+</div>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Rss feed title</title>
+        <link>http://www.example.com</link>
+        <description>Rss feed description here</description>
+        <item>
+            <title>{{{node_title}}}</title>
+            <guid isPermaLink="true">{{{node_permalink}}}</guid>
+            <description>{{{field_story_expert_description}}}</description>
+            <category>{{{field_story_category}}}</category>
+            <pubDate>{{{node_published_date}}}</pubDate>
+            <author>{{{node_author}}}</author>
+        </item>
+    </channel>
+</rss>

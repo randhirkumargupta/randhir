@@ -22,12 +22,23 @@ a{
     color:$black-color;
     text-decoration: none;
 }
+img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+}
 .row{
     @include clearfix;
 }
 .mt-50{
-  margin-top: 50px;
+    margin-top: 50px;
 }
+.m-top{
+    margin-top: 10px;
+}
+.m-bottom40{
+        margin-bottom: 40px;
+    }
 /*.dropped{
     background: #fff;
 }*/
@@ -42,36 +53,36 @@ a{
     @include story-tag(22px,22px);   
 }
 /*Start CSS Top Story Home Page*/
-    .tab-buttons {
-        @include clearfix;
-        @include tab-buttons;
-    }
-    .tab-data{        
-      &.tab-data-2{
+.tab-buttons {
+    @include clearfix;
+    @include tab-buttons;
+}
+.tab-data{        
+    &.tab-data-2{
         display: none;
-      }
     }
-    .itg-listing{
-        border: 1px solid #dddddd;
-        list-style: none;
-        li{
-            @include tab-listing;        
-            a{
+}
+.itg-listing{
+    border: 1px solid #dddddd;
+    list-style: none;
+    li{
+        @include tab-listing;        
+        a{
             padding:15px;
         }
         &:before{
             display: none;
         }
-        }
-        
     }
+
+}
 /*End CSS Top Story Home page*/
 
 /*Start CSS Featured New Home page*/
 .itg-featured-news{
-  border: 1px solid $tab-primary-border-color;
-  height: 672px;
-  overflow: hidden;
+    border: 1px solid $tab-primary-border-color;
+    height: 672px;
+    overflow: hidden;
 }
 /*Start CSS Featured New Home page*/
 .featured-news{
@@ -82,11 +93,15 @@ a{
         @include float(left);
         @include calculate-width(2);
         padding:5px;
-        &:hover a{
-            color:$blue-color;
+        a{
+            display: block;
+            margin-bottom: 10px;
+            &:hover{
+                color:$blue-color;
+            }
         }
-        img{
-            padding-bottom: 10px;
+        
+        img{            
             @include calculate-width(1);
         }
         &.featured-post-first{
@@ -101,13 +116,13 @@ a{
 
 /*Start CSS Top AD*/
 .top-ad{
-  border: 1px solid $tab-primary-border-color;
-  .pic{
-    background-color: #f3f3f3;
-    width: 300px; 
-    height: 250px;
-    margin: 35px auto;
-  }
+    border: 1px solid $tab-primary-border-color;
+    .pic{
+        background-color: #f3f3f3;
+        width: 300px; 
+        height: 250px;
+        margin: 35px auto;
+    }
 }
 /*End CSS*/
 /*Start CSS section story Home page*/
@@ -135,7 +150,7 @@ a{
         margin-bottom: 5px;
     }
 }
-.dont-miss{    
+.dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video, .osscar-video{    
     /*padding: 30px 10px 0px 10px;*/
     ul{
         @include clearfix;
@@ -146,6 +161,9 @@ a{
             border:none; 
             .dm-pic{
                 width: 46.6%;
+                a{
+                    display: block;
+                }
             }            
             .dm-detail{
                 h4{
@@ -182,12 +200,12 @@ a{
         }
         li{
             &.may-we-suggest{
-             padding:10px 0;   
+                padding:10px 0;   
             }            
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -207,9 +225,9 @@ a{
         @include listing-with-image(top-takes-video,right,10px,pic,title);
         li{
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -244,9 +262,9 @@ a{
         li{
             padding:0 10px;
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             }
         }
@@ -260,25 +278,25 @@ a{
         @include listing-with-image(rhs-section-item-container,left,10px,pic,title);
         li{
             &.rhs-section-item-container{
-             padding:10px 0; 
-             .pic{
-                position: relative;
-            &:after{
-                background: url(../images/video-icon-small.png) no-repeat;
-                content:"";
-                width: 18px;
-                height: 18px;
-                position: absolute;
-                right: 5px;
-                bottom: 5px;
-            }
-        }
-             
+                padding:10px 0; 
+                .pic{
+                    position: relative;
+                    &:after{
+                        background: url(../images/video-icon-small.png) no-repeat;
+                        content:"";
+                        width: 18px;
+                        height: 18px;
+                        position: absolute;
+                        right: 5px;
+                        bottom: 5px;
+                    }
+                }
+
             }            
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -315,7 +333,7 @@ a{
                 top: 0;
                 left: 0;
                 width: 214px;
-                 z-index: 1;
+                z-index: 1;
             }
         }
         .top-colum-1{
@@ -365,29 +383,29 @@ a{
             }
         }
     }  
-    
-  /*Start CSS Top Block Grid Home Page*/    
+
+    /*Start CSS Top Block Grid Home Page*/    
     .top-block{
         .top-colum-1, .top-colum-2, .top-colum-3{
-           padding: 0 15px;
-           min-height: 672px;
+            padding: 0 15px;
+/*            min-height: 672px;*/
         }
         .top-colum-1{
-           @include float(left);
-           width: 22%; 
+            @include float(left);
+            width: 22%; 
         }
         .top-colum-2{
-           width: 44.8%;
-          @include float(left);
+            width: 44.8%;
+            @include float(left);
         }
         .top-colum-3{
-           width: 33.2%;
-           @include float(right);
+            width: 33.2%;
+            @include float(right);
         }
     }
-/*End CSS Top Block Grid Home Page*/
+    /*End CSS Top Block Grid Home Page*/
 
-/*Start CSS Featured-news Home Page*/ 
+    /*Start CSS Featured-news Home Page*/ 
     .featured-news{
         padding: 5px;
         border:1px solid $border-color;
@@ -396,20 +414,20 @@ a{
             padding: 5px;
         }
     }
-/*End CSS Featured-news Home Page*/  
-/*Start Dont miss Home page css*/
-.dont-miss{        
-    ul{
-        .dont-miss-listing{
-            @include float(left);
-            @include calculate-width(2);            
-            &:nth-child(2n+1){
-                clear:left;
+    /*End CSS Featured-news Home Page*/  
+    /*Start Dont miss Home page css*/
+    .dont-miss{        
+        ul{
+            .dont-miss-listing{
+                @include float(left);
+                @include calculate-width(2);            
+                &:nth-child(2n+1){
+                    clear:left;
+                }
             }
         }
     }
-}
-/*End Dont miss Home page css*/
+    /*End Dont miss Home page css*/
 }
 
 
@@ -428,12 +446,12 @@ a{
         }
         li{
             &.may-we-suggest{
-             padding:10px 0;   
+                padding:10px 0;   
             }            
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -454,25 +472,25 @@ a{
         @include listing-with-image(top-takes-video,right,10px,pic,title);
         li{
             &.top-takes-video{
-             padding:10px 0; 
-             .pic{
-            position: relative;
-            &:after{
-                background: url(../images/video-icon-small.png) no-repeat;
-                content:"";
-                width: 18px;
-                height: 18px;
-                position: absolute;
-                right: 5px;
-                bottom: 5px;
-            }
-        }
-             
+                padding:10px 0; 
+                .pic{
+                    position: relative;
+                    &:after{
+                        background: url(../images/video-icon-small.png) no-repeat;
+                        content:"";
+                        width: 18px;
+                        height: 18px;
+                        position: absolute;
+                        right: 5px;
+                        bottom: 5px;
+                    }
+                }
+
             }            
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             } 
         }
@@ -511,9 +529,9 @@ a{
             }
             padding:10px 0;
             &+li{
-               border-top: 1px solid $border-color;
-           }
-           &:last-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
                 border-bottom: 1px solid $border-color;
             }
         }
@@ -521,7 +539,7 @@ a{
 }
 /*End Watch right Now suggest End*/
 /*Start photo section slider Homepage*/
-.featured_photo_carousel{
+.featured_photo_carousel, .tech-block_5, .auto-block_5{
     .widget-title{
         @include pos(absolute,10px,null,null,10px);        
     }
@@ -541,6 +559,12 @@ a{
                         @include font(18px,24px,$itg-font-medium);    
                         width: auto;
                         height: 66px;
+                        a{
+                            color: #fff;
+                            &:hover{
+                            color: #f1f1f1;    
+                            }
+                        }
                     }
                     .flex-count{
                         @include pos(absolute,null,null,78px,0px);
@@ -602,3 +626,1059 @@ a{
     }
 }
 /*End Photo section slider Homepage*/
+
+/*CSS Start Page Year End page */
+.yearend-page{
+    .itg-643{
+        .droppable{
+            min-height: 643px;   
+        }        
+    }
+    .itg-1550{
+        .droppable{
+            min-height: 1510px;
+        }
+    }
+    .itg-785{
+        .droppable{
+            min-height: 785px;
+        }
+    }
+    .itg-628{
+        .droppable{
+            min-height: 628px;
+        }
+    }
+}
+
+/*CSS Start year end top news*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+    background: #f6f6f6;
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);
+            padding:25px 10px;
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 25px;
+            }
+            .pic{
+                width:auto;
+                @include pos(relative);
+                a{
+                    display: block;
+                }                
+            }
+        }
+    }
+}
+/*CSS start for year end page*/
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video, .osscar-video{
+    background: #f6f6f6;
+    ul{
+        .dont-miss-listing{
+            @include float(none);
+            @include calculate-width(1);            
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 25px;
+            }
+            +.dont-miss-listing{
+                padding:0 10px 25px 10px;
+            }
+            .dm-pic{
+                width:auto;
+                @include pos(relative);
+                a{
+                    display: block;
+                }
+                span{
+                    position: absolute;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.4);
+                    color: $white-color;
+                    @include font(12px);
+                    font-family: $itg-roboto;
+                    padding: 2px 5px;
+                    i{
+                        @include font(16px);
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}
+.year-slider{
+    background: #000;
+    padding: 10px;    
+    h2{
+        padding:10px 0;
+        a{
+            color: #fff;   
+        }        
+    }
+}
+.yearender{    
+    .view-yearender.view-display-id-block_2{
+        .view-content{
+            margin-right: -15px;
+            margin-left: -15px;            
+        }
+        .views-row{
+            margin-bottom: 40px;          
+        }
+        @include clear-floating-block(col-md-6);
+    }
+    .section-ordering{
+        .pic{
+            @include pos(relative);
+            span{
+                @include pos(absolute, null, null, 0, 0);
+                background: rgba(0, 0, 0, 0.56);
+                color: #fff;
+                @include itg-font($itg-roboto);
+                font-size: 12px;
+                padding: 5px;
+                i{
+                    @include font(16px);
+                }
+            }
+        }
+        h3{
+            font-family: $itg-roboto;
+        }
+    }
+    @include slider-icon-width-background;    
+}
+/*CSS end for year end page*/
+
+/*CSS start special auto page */
+.itg-layout-container.auto-layout-page{
+    .m-bottom40{
+        margin-bottom: 40px;
+    }
+    .itg-layout-605{
+        height: 605px;
+        overflow: hidden;
+    }
+    .auto-block-1, .auto-block-2{
+        height: 605px;
+        overflow: hidden;
+    }
+    .auto-block-1{
+        border: 1px solid #ddd;  
+        .featured-news{
+            border: none;
+        }
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 245px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-2{
+        border: 1px solid #ddd;
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }    
+    .itg-h450-section .col-md-4 .droppable .widget-wrapper {
+        overflow: auto;
+    }
+    .itg-h321-section .auto_reviews{        
+        padding: 5px 20px 8px;
+        background-color: #f3f3f3;
+    }
+    .widget-wrapper{
+        &.auto-block_2{
+            border: 1px solid $border-color;
+        } 
+        &.auto-block_3{
+            background: #f3f3f3;
+            padding: 10px;
+        }
+    }
+    .special-top-news{
+        ul{
+            &.itg-listing{
+                border: none;
+            }
+            
+            li{
+                a{
+                    @include before-icon-list(5px,5px,22px,8px,#959595,100%);
+                    padding-left: 22px;
+                }
+            }
+        }
+    }
+
+    .auto-tips-n-tricks{
+        ul{
+            li{
+                padding: 18px 0;
+                +li{
+                    border-top:1px solid #ddd; 
+                }
+                p.title{
+                    a{
+                        font-weight: 700;
+                        margin-bottom: 5px; 
+                        display: block;
+                    }                
+                }
+            }
+        }
+    }
+    .auto-road-trip{
+        .trending-videos{
+            padding: 0;
+            border: none; 
+            li{
+                .video-none{
+                    &:after{
+                        background: none;
+                    }
+                }
+                &.trending-videos-list{
+                    padding: 15px 0;
+                }
+            }
+        }    
+    }
+    .auto_reviews{
+        .widget-title{
+            margin-bottom: 5px;
+        }   
+    }
+     /*Start photo section slider*/
+    .auto-block_5{
+        a{
+            color:#fff;
+        }
+        .flexslider .flex-direction-nav{
+            display: block;
+        }       
+        .flexslider .slides li{
+            &:hover a{
+                color: #fff;
+            }
+            .detail .flex-caption{
+                @include font(18px,24px,$itg-font-medium);  
+                padding: 10px;   
+                min-height: 68px;
+                max-height: auto;
+                overflow: initial;            
+            }   
+        }
+        .flexslider .slides li .detail .flex-count{
+            @include pos(absolute,null,null,78px,0px);
+        }
+    }
+    /*End photo section slider*/
+}
+
+/*CSS End special auto page */
+/*CSS Start special tech page */
+.tech-layout-page{
+    
+     .itg-layout-672{
+        height: 672px;
+        overflow: hidden;
+    }
+    .auto-block-1, .auto-block-2{
+        height: 672px;
+        overflow: hidden;
+    }
+    .auto-block-1{
+        border: 1px solid #ddd;  
+        .featured-news{
+            border: none;
+        }
+    }
+    .auto-block-3{
+        .itg-widget-child{
+            .droppable {
+                height: 311px;
+                overflow: hidden;
+            }
+        }
+    }
+    .auto-block-2{
+         border: 1px solid #ddd;
+        .special-top-news{
+            position: relative;
+            .widget-title{
+                position: absolute;
+            }
+        }
+    }
+     .itg-h385-section{
+        .droppable {
+            height: 385px;
+        }
+/*        .section_wise_order-buying-guid{
+            .widget-title{
+                @include pos(absolute);                                
+            }
+        }*/
+    }  
+    .itg-h396-section{        
+        .droppable {
+            height: 396px;
+            background: #f3f3f3;
+            padding: 10px;
+        }
+/*        .section_wise_order-in-depth{            
+            .widget-title{
+                @include pos(absolute);                
+                top: 10px;
+                left: 10px;
+            }
+        }*/
+    }
+    .widget-wrapper{
+        &.tech-block_2{
+            border: 1px solid $border-color;
+        } 
+    }
+    .itg-h321-section .auto_reviews{        
+        padding: 5px 20px 8px;
+        background-color: #f3f3f3;
+    }
+     .special-top-news{
+        ul{
+            &.itg-listing{
+                border: none;
+            }
+            li{
+                a{
+                    @include before-icon-list(5px,5px,22px,8px,#959595,100%);
+                    padding-left: 22px;
+                }
+            }
+        }
+    }
+    .tech_most_read{
+        border: 1px solid #ddd;
+        padding: 10px;
+        .widget-title{
+            margin-bottom: 10px;
+        }        
+    }
+    #block-itg-widget-tech-most-read{
+        ul{
+            li.dont-miss-listing{
+                &:first-child{
+                    padding-top: 0;
+                }
+                @include calculate-width(1);
+                overflow: hidden;
+                padding:12px 0 15px;
+                border-bottom: 1px solid $border-color;
+                .dm-pic{
+                   width: auto;
+                }
+            }
+        }
+    }
+    .buying-guides{
+        a{
+            display: block;
+        }
+        h3{
+            padding: 10px 0;
+            border-bottom: 1px solid $border-color;
+            margin-bottom: 15px;
+        }
+        ul{
+            @extend .list-none;
+            li{
+                span{
+                   a{
+                       color: #b00202;
+                       @include font(12px);
+                       margin-bottom: 5px;                       
+                    }
+                }
+                &:first-child{
+                    padding-bottom:15px;
+                }
+                +li{
+                    padding:15px 0;
+                    border-top:1px solid $border-color;    
+                }
+                
+            }
+        }
+    }  
+    .tech-trip{
+        .trending-videos {
+            border: none; 
+            padding-top:0; 
+            .trending-videos-list{
+                padding: 10px 0;
+            }
+        }
+    }
+    .tech-in-depth{
+        ul{
+            li{
+                overflow:hidden;
+                span{
+                    float: left;                
+                    margin-bottom: 0;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    /*Start photo section slider*/
+    .tech-block_5{
+        a{
+            color:#fff;
+        }
+        .flexslider .flex-direction-nav{
+            display: block;
+        }       
+        .flexslider .slides li{
+            &:hover a{
+                color: #fff;
+            }
+            .detail .flex-caption{
+                @include font(18px,24px,$itg-font-medium);  
+                padding: 10px;   
+                min-height: 68px;
+                max-height: auto;
+                overflow: initial;            
+            }   
+        }
+        .flexslider .slides li .detail .flex-count{
+            @include pos(absolute,null,null,78px,0px);
+        }
+    }
+    /*End photo section slider*/
+    .techwatch.osscar-video ul .dont-miss-listing{
+        padding:0 0 10px 0;
+    }
+}
+
+/*CSS End special tech page */
+
+
+/*CSS Start for oscar page*/
+.oscar-layout-page{
+    .itg-h747-section{        
+        .droppable {
+            height: 747px;            
+        }
+    }
+    .itg-h735-section{        
+        .droppable {
+            height: 735px;            
+        }
+    }
+     .itg-h625-section{        
+        .droppable {
+            height: 625px;            
+        }
+    }
+    .itg-h305-section{        
+        .droppable {
+            height: 305px;            
+        }
+    }
+}
+/*CSS start for special osscar*/
+.oscar-layout-page{
+    .osscar-video{
+        background: transparent;   
+        ul .dont-miss-listing + .dont-miss-listing {
+            padding: 0 0px 25px 0px;
+        }
+    }    
+    .oscor-photo{
+        .col-md-6{
+            margin-top: 0px;
+            &:nth-child(n+3){
+                margin-top: 30px;
+            }
+        
+        .title{
+            h3{
+                padding: 15px;
+                color: #000;
+                font-size: 18px;
+                background-image:
+                    linear-gradient(
+                    #fdcf2e, #fabb1d
+                );
+                font-weight: 700;
+            }
+        }
+        }
+    }
+    .oscar-features{
+        .col-md-6{
+            overflow: hidden;
+            margin-top: 0px;
+            &:nth-child(n+3){
+                margin-top: 30px;
+            }
+            span{
+                @include display-inline;
+                float: left;
+                margin-right: 15px;
+            }
+
+        }
+    }
+    .oscar-news{
+        a{
+            display: block;
+        }
+        h3{
+            font-weight: 700;
+            margin: 10px 0 25px 0px;
+        }
+        p{
+            padding-top: 10px;
+        }
+    }
+    .oscar-slider{
+        .top-slider{
+            background: #000;
+            padding: 10px 10px 0 10px;           
+            .common-img{
+                display: none;
+            }
+             .first-image{
+                display: block;
+            }
+        }
+        .bottom-slider { 
+            background: #171717;
+            ul{
+                overflow: hidden;
+                li{                
+                    background: #171717;
+                    padding: 25px 10px;
+                    width: 188px;
+                    float: left;
+                    height: 262px;                
+                p{
+                    margin-top: 10px;
+                }
+                a{
+                    color:#b4b4b4;
+                }
+                &:hover{
+                    background: #393939;
+                    a{
+                        color: #fff;
+                    } 
+                }
+            }
+            }            
+        }
+    }
+}
+/*CSS end for special osscar*/
+/*CSS End for oscar page*/
+
+
+/*CSS start for education page*/
+.education-layout-page{    
+    .droppable{
+        overflow: hidden;
+    }
+    .itg-layout-672{
+        .droppable{
+            height: 672px;            
+            .auto-block-1, .auto-block-2{
+                height: 672px;
+                overflow: hidden;
+            }
+            .auto-block-1{
+                border: 1px solid #ddd;
+                .featured-news{
+                    border: none;
+                }
+            }
+        }        
+        .itg-widget-child{
+            .droppable{
+            height: 310px;            
+            }
+        }        
+    }
+    .itg-layout-565{
+        .droppable{
+            height: 565px;            
+        }
+        .itg-widget-parent{
+            .droppable {
+                height: 225px;                
+            }
+        }
+        .itg-widget-child{
+            .droppable {
+                height: 305px;                
+            }
+        }
+    }
+    .itg-common-section{
+        .ad-widget {
+            height: 382px;            
+        }
+    }
+    .itg-295-layout{
+        .droppable {
+                height: 295px;                
+            }
+    }
+    .itg-325-layout{
+        .droppable, .ad-widget{
+                height: 325px;                
+            }
+    }
+    .itg-345-layout{
+        .droppable {
+                height: 345px;                
+            }
+    }
+    .more{
+                display: block;
+                text-align: right;                
+                font-weight: 700;
+                font-size: 12px;
+                padding: 10px 0;
+            }
+    .shadow-on{        
+        -moz-box-shadow: 0 0 5px #d4cdcd;
+        -webkit-box-shadow: 0 0 5px #d4cdcd;  
+        box-shadow: 0 0 5px #d4cdcd;
+        .section-ordering{
+            h3{
+                padding: 10px;   
+            }   
+            p{
+                padding: 12px 15px 12px 25px;
+                &:before{
+                  left:10px;  
+                }
+            }
+        }
+        .more{
+            padding: 10px 20px 10px 0px;
+        }
+    }
+    .section_wise_order-edu-from-the-magazine{
+        background: #f3f3f3;
+        padding:10px;
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .from-the-magazine{        
+        .magazine-detail{
+            margin-bottom:10px;
+            overflow: hidden;
+        h3{
+            @include font(18px,24px,null);
+            margin-bottom:5px;
+        }
+        img{
+            @include float(left);
+            margin-right: 10px;
+        }               
+        }
+        > p{
+            padding: 10px 0;            
+        }
+        > p + p{            
+            border-top: 1px solid #ddd;                        
+        }
+    }
+/*    .special-top-news{
+        border: 1px solid #ddd;
+    }*/
+
+    .auto-block-2{
+        border: 1px solid #ddd;
+        .special-top-news {
+            position: relative;
+            padding-top:20px;            
+            .widget-title, .widget-settings{
+                position: absolute;
+            }
+            .itg-listing{
+                border: none;
+            }
+        }
+    }
+    .education_how_made_id{
+        padding: 10px;
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .how-made-it{
+        ul{
+            @extend .list-none;
+            li{
+             padding: 10px 0;
+            .dm-pic{
+                @include float(left);
+                margin-right: 15px;
+            }
+            .dm-detail{
+                overflow: hidden;
+                .title{
+                    font-weight: 700;
+                    margin-bottom: 5px;
+                }
+            }
+            + li{               
+                border-top: 1px solid #ddd;
+            }            
+        }
+        }        
+    }
+    .section_wise_order-edu-tips-and-trick{
+        overflow: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+    .auto-tips-n-tricks{
+        ul{
+            li{
+                padding: 18px 0;
+                +li{
+                    border-top:1px solid #ddd; 
+                }
+                p.title{
+                    a{
+                        font-weight: 700;
+                        margin-bottom: 5px; 
+                        display: block;
+                    }                
+                }
+            }
+        }
+    }  
+    .tech-block_2{
+        padding: 10px;
+        .widget-title{
+            margin-bottom: 5px;
+        }
+    }
+    .osscar-video{
+        background:transparent;
+        ul .dont-miss-listing{
+        padding:0 0px 10px 0;
+            + .dont-miss-listing {
+                padding:0px;
+            }   
+        }
+    }
+    .section_wise_order-edu-sample-paper, .section_wise_order-edu-notification, .section_wise_order-edu-featurefilia, .section_wise_order-edu-jobs-and-career{
+        .section-ordering{
+            p:first-child{
+                border: none;
+            }
+        }
+    }
+    .itg-newaletter{
+        padding: 15px;
+    }
+    #itg-newslatter-register-form{
+        .messages.error{
+            display: none;
+        }
+        .form-type-textfield{
+            margin: 0 0 10px;
+            padding: 0;
+            input[type="text"]{
+                width: 100%;
+            }
+            span.error{
+                background: #fff none repeat scroll 0 0;
+                color: red;
+                position: absolute;
+                right: 12px;
+                top: -9px;   
+                padding-left: 0;
+            }
+        }
+        input[type="submit"]{
+            background: #000;
+            border: none;
+            color: #fff;
+            width: 130px;
+            height: 30px;
+            line-height: 30px;
+            text-transform: uppercase;
+            font-family: roboto-slab;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+    }
+}
+/*CSS end for education page*/
+
+
+/*CSS start sport home page*/
+.sport-home-layout-page{    
+    .droppable {
+        overflow: hidden;
+    }
+    .itg-layout-615{
+        .droppable {
+            height: 615px;            
+        }
+    }
+    .itg-layout-225{
+        .droppable {
+            height: 225px;            
+        }
+    }
+    .itg-layout-300{
+        .droppable {
+            height: 300px;            
+        }
+    }
+    .itg-layout-485{
+        .droppable {
+            height: 485px;            
+        }
+    }
+    .itg-layout-195{
+        .droppable {
+            height: 195px;            
+        }
+    }
+    .itg-layout-260{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-375{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-315{
+        .droppable {
+            height: 260px;            
+        }
+    }
+    .itg-layout-340{
+        .droppable {
+            height: 260px;            
+        }
+    }
+}
+/*CSS End sport home page*/
+/*CSS start for movie page*/
+.movie-layout-page{
+    .itg-layout-580{
+        .droppable{
+            height: 580px;
+            .auto-block-1, .auto-block-2{
+                height: 580px;
+                overflow: hidden;
+            }
+            .auto-block-1{
+                border: 1px solid #ddd;
+                .featured-news{
+                    border: none;
+                }
+            }
+        }  
+        .itg-widget-child{
+            .droppable{
+             height: 218px;            
+            }
+            .tech-block_5{
+        .widget-title{
+            top: 0;
+            left: 15px;   
+        }
+            .flexslider{
+                li{
+                    @include pos(relative);
+                    .detail{
+                        position: absolute;
+                        bottom: 0;
+                        .flex-count{
+                            display: none;   
+                        }
+                        .flex-caption{
+                            background: rgba(255, 255, 255, 0.74);
+                            font-size: 20px;
+                            font-weight: 700;
+                            a{
+                                color: #000;
+                                &:hover{
+                                    color: #193984;
+                                }
+                            }
+                        }
+                    }                
+                }
+                .flex-direction-nav{
+                    display: block;
+                    position:absolute;
+                    top:50%;
+                    width: 100%;
+                    a{
+                        width: 20px;
+                        height: 20px;
+                        &:before{
+                            width: 20px;
+                            height: 20px;
+                            line-height: 20px;
+                            font-size: 20px;
+                            background: #000;
+                        }
+                    }
+                }   
+            }        
+    }
+        }
+        .auto-block-2{
+                border: 1px solid #ddd;
+                .special-top-news{
+                    position: relative;
+                    overflow: hidden;
+                    .widget-title, .widget-settings{
+                        position: absolute;
+                    }
+                    ul.itg-listing {
+                        border: none;
+                        padding-top: 20px;
+                    }
+                }
+            }        
+    }
+    .itg-h385-section{
+        .droppable{
+            height: 385px;
+            }
+    }
+     .itg-h396-section{
+        .droppable{
+            height: 396px;
+        }
+        .widget-settings{
+            top:10px;
+            left:10px;
+        }
+    }    
+    .tech-block_8{        
+        .widget-title, .widget-settings{
+            margin-bottom: 5px;
+        }
+    }
+    .osscar-video{
+        background:transparent;
+        ul .dont-miss-listing{
+        padding:0 0px 10px 0;
+            + .dont-miss-listing {
+                padding:0px;
+            }   
+        }
+    }
+    .section_wise_order-movies-celebrities, .section_wise_order-movies-lifestyle{
+        .widget-settings{
+            position: absolute;
+            z-index: 1;
+        }
+    }
+    .tech-in-depth{
+        ul{
+            li{
+                overflow:hidden;
+                border-bottom: 1px solid #ddd;
+                padding-bottom:15px;
+                span{
+                    float: left;                
+                    margin-bottom: 0;
+                    margin-right: 10px;                    
+                }
+                + li{
+                    padding: 15px 0;
+                }
+            }
+        }
+    }
+    .itg-h396-section{
+        .widget-wrapper{
+            background: #f1f1f1;
+            padding: 10px;
+        }        
+        .widget-title{
+            top:10px;
+            left:10px;
+        }
+    }
+}
+/*CSS End for movie page*/
+
+/* CSS For Election Page */
+.election-page{
+  .left-side{
+    > .row{
+      margin-bottom: 50px;
+    }
+    .itg-graph{
+      .droppable{
+        height: 410px;
+      }
+    }
+    .itg-325-layout{
+      .droppable{
+        height: 325px;
+      }
+    }
+    .itg-map{
+      .droppable{
+        height: 375px;
+      }
+    }
+    .itg-most-popular{
+      .droppable{
+        height: 705px;
+      }
+    }
+    .itg-photo{
+      .droppable{
+        height: 484px;
+      }
+    }
+  }
+  .right-side{
+    .itg-320{
+      .droppable{
+        height: 320px;
+      }
+    }
+    .itg-484{
+      .droppable{
+        height: 484px;
+      }
+    }
+    .itg-460{
+      .droppable{
+        height: 460px;
+      }
+    }
+  }
+}

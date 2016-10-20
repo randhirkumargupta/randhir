@@ -271,40 +271,6 @@ function astro_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_astro_zodiac-field_astro_zodiac_sign_name'.
-  $field_instances['field_collection_item-field_astro_zodiac-field_astro_zodiac_sign_name'] = array(
-    'bundle' => 'field_astro_zodiac',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please select zodiac sign name.',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_astro_zodiac_sign_name',
-    'label' => 'Zodiac Sign Name',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 0,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_astro_zodiac-field_audio'.
   $field_instances['field_collection_item-field_astro_zodiac-field_audio'] = array(
     'bundle' => 'field_astro_zodiac',
@@ -1057,6 +1023,48 @@ function astro_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-astro-field_primary_category_html_text'.
+  $field_instances['node-astro-field_primary_category_html_text'] = array(
+    'bundle' => 'astro',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html_text',
+    'label' => 'Primary category textarea',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 21,
+    ),
+  );
+
   // Exported field_instance: 'node-astro-field_story_category'.
   $field_instances['node-astro-field_story_category'] = array(
     'bundle' => 'astro',
@@ -1283,8 +1291,8 @@ function astro_feature_field_default_field_instances() {
   t('Node Identity');
   t('Numerology Values');
   t('Panchaang-Calendar');
-  t('Please select zodiac sign name.');
   t('Primary category html');
+  t('Primary category textarea');
   t('Select Frequency');
   t('Select Number');
   t('Select Program');
@@ -1294,7 +1302,6 @@ function astro_feature_field_default_field_instances() {
   t('Video Thumbnail');
   t('Zodiac');
   t('Zodiac Sign');
-  t('Zodiac Sign Name');
   t('primary category');
 
   return $field_instances;

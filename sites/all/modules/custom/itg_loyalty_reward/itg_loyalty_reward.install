@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file : itg_loyalty_reward.install
  */
@@ -10,125 +11,319 @@
  */
 function itg_loyalty_reward_schema() {
   $schema['itg_lrp_loyalty_points'] = array(
-      'description' => 'Table for Loyalty Points.',
-      'fields' => array(
-          'id' => array(
-              'description' => 'Primary id.',
-              'type' => 'serial',
-              'unsigned' => TRUE,
-              'not null' => TRUE,
-          ),
-          'uid' => array(
-              'description' => 'User id.',
-              'type' => 'int',
-              'unsigned' => TRUE,
-              'not null' => TRUE,
-              'default' => 0,
-          ),
-          'loyalty_type' => array(
-              'description' => 'Loyalty Type.',
-              'type' => 'varchar',
-              'length' => 255,
-              'not null' => TRUE,
-              'default' => '',
-          ),
-          'loyalty_points' => array(
-              'description' => 'Loyalty points.',
-              'type' => 'int',
-              'unsigned' => TRUE,
-              'not null' => TRUE,
-              'default' => 0,
-          ),
-          'expiry' => array(
-              'type' => 'int',
-              'not null' => TRUE,
-              'default' => 0
-          ),
-          'created' => array(
-              'type' => 'int',
-              'not null' => TRUE,
-              'default' => 0
-          ),
+    'description' => 'Table for Loyalty Points.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary id.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
       ),
-      'primary key' => array('id'),
+      'uid' => array(
+        'description' => 'User id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'loyalty_type' => array(
+        'description' => 'Loyalty Type.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'loyalty_points' => array(
+        'description' => 'Loyalty points.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'pointer_key' => array(
+        'description' => 'Pointer key',
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'node_id' => array(
+        'description' => 'Node Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('id'),
   );
 
-  $schema['itg_lrp_redeemed_points'] = array(
-      'description' => 'Table for Redeemed Points.',
-      'fields' => array(
-          'id' => array(
-              'description' => 'Primary id.',
-              'type' => 'serial',
-              'unsigned' => TRUE,
-              'not null' => TRUE,
-          ),
-          'uid' => array(
-              'description' => 'User id.',
-              'type' => 'int',
-              'unsigned' => TRUE,
-              'not null' => TRUE,
-              'default' => 0,
-          ),
-          'redeemed_points' => array(
-              'description' => 'Redeemed points.',
-              'type' => 'int',
-              'unsigned' => TRUE,
-              'not null' => TRUE,
-              'default' => 0,
-          ),
-          'created' => array(
-              'type' => 'int',
-              'not null' => TRUE,
-              'default' => 0
-          ),
+  // Pointer key table
+  $schema['itg_lrp_pointer_key'] = array(
+    'description' => 'Table for mapping pointer key for expiry date.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary id.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
       ),
-      'primary key' => array('id'),
+      'uid' => array(
+        'description' => 'User id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'pointer_key' => array(
+        'description' => 'Pointer key',
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'expiry_date' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('id'),
   );
-  
+
+//  $schema['itg_lrp_redeemed_points'] = array(
+//    'description' => 'Table for Redeemed Points.',
+//    'fields' => array(
+//      'id' => array(
+//        'description' => 'Primary id.',
+//        'type' => 'serial',
+//        'unsigned' => TRUE,
+//        'not null' => TRUE,
+//      ),
+//      'uid' => array(
+//        'description' => 'User id.',
+//        'type' => 'int',
+//        'unsigned' => TRUE,
+//        'not null' => TRUE,
+//        'default' => 0,
+//      ),
+//      'redeemed_points' => array(
+//        'description' => 'Redeemed points.',
+//        'type' => 'int',
+//        'unsigned' => TRUE,
+//        'not null' => TRUE,
+//        'default' => 0,
+//      ),
+//      'created' => array(
+//        'type' => 'int',
+//        'not null' => TRUE,
+//        'default' => 0
+//      ),
+//    ),
+//    'primary key' => array('id'),
+//  );
+
   $schema['itg_loyalty_reward_cron'] = array(
-      'description' => 'Table for itg_loyalty_reward module',
-      'fields' => array(
-          'id' => array(
-              'description' => 'The Primary Id',
-              'type' => 'serial',
-              'unsigned' => TRUE,
-              'not null' => TRUE,
-          ),
-          'nid' => array(
-              'description' => 'Node Id',
-              'type' => 'int',
-              'unsigned' => TRUE,
-              'not null' => TRUE,
-              'default' => 0,
-          ),
-          'type' => array(
-              'description' => 'Node Type',
-              'type' => 'varchar',
-              'length' => 255,
-              'not null' => TRUE,
-              'default' => '',
-          ),
-          'scheduled_time' => array(
-              'description' => 'Cron Scheduled Time',
-              'type' => 'varchar',
-              'length' => 255,
-              'not null' => TRUE,
-              'default' => '',
-          ),
-          'status' => array(
-              'description' => 'Status',
-              'type' => 'int',
-              'unsigned' => TRUE,
-              'not null' => TRUE,
-              'default' => 0,
-          ),
-          'created' => array(
-              'type' => 'int',
-              'not null' => TRUE,
-              'default' => 0
-          ),
+    'description' => 'Table for itg_loyalty_reward module',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The Primary Id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
       ),
-      'primary key' => array('id'),
+      'nid' => array(
+        'description' => 'Node Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'type' => array(
+        'description' => 'Node Type',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'scheduled_time' => array(
+        'description' => 'Cron Scheduled Time',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'status' => array(
+        'description' => 'Status',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  // Shopping cart table.
+  $schema['itg_loyalty_reward_cart'] = array(
+    'description' => 'Table for saving shopping cart data.',
+    'fields' => array(
+      'cart_id' => array(
+        'description' => 'The Primary Id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Node Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'quintity' => array(
+        'description' => 'Product Quantity',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid' => array(
+        'description' => 'user Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'product_name' => array(
+        'description' => 'Product Name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'points' => array(
+        'description' => 'Points need to redeem this product.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'product_information' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Serialized data containing the product complete information.',
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('cart_id'),
+  );
+  // Order Table
+  $schema['itg_loyalty_reward_order'] = array(
+    'description' => 'Table for storing user order.',
+    'fields' => array(
+      'order_id' => array(
+        'description' => 'The Primary Id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'product_information' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Serialized data containing the product complete information.',
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+    'primary key' => array('order_id'),
+  );
+  // Points total and remaining information.
+  $schema['itg_loyalty_reward_point_history'] = array(
+    'description' => 'Table for storing user point history.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The Primary Id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user Id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'total_point' => array(
+        'description' => 'User total earn point.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'redeemed_point' => array(
+        'description' => 'User redeemed point.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'remaining_point' => array(
+        'description' => 'User remaining point.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'cart_point' => array(
+        'description' => 'Point spent into cart.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'pointer_key' => array(
+        'description' => 'Pointer key',
+        'type' => 'varchar',
+        'length' => 30,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+    ),
+    'primary key' => array('id'),
   );
 
   return $schema;

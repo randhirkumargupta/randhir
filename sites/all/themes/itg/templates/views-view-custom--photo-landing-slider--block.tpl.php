@@ -1,5 +1,25 @@
 <div class="row">
-    <h2><?php print $row['title']; ?></h2>
+    <div class="col-md-12">
+        <h2><?php print $row['title']; ?></h2>    
+        <div class="social-icon desktop-hide">
+            <ul>
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-comment"></i></a></li>
+                <li><a href="#"><i class="fa fa-link"></i></a></li>
+                <li class="mhide"><a href="#"><i class="fa fa-share"></i></a></li>
+                <?php global $user; ?>
+                  <?php if ($user->uid > 0): ?>
+                     <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>                      
+                     <li class="mhide"><?php print $read_later; ?></li>
+                  <?php else: ?>
+                     <?php print '<li class="mhide">' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE)) . '</li>'; ?>
+                <?php endif; ?>                  
+            </ul>
+        </div>
+    </div>
+    
     <div class="col-md-8">
         <ul class="slickslide">
             <?php foreach ($rows as $index => $row): ?>
@@ -21,7 +41,8 @@
             </ul>
         </div>
     </div>
-    <div class="col-md-4 other-details-main">
+    <div class="col-md-4">
+        <div class="other-details-main">
         <ul class="counterslide">
             <?php foreach ($rows as $index => $row): ?>
                 <li>
@@ -37,7 +58,7 @@
             <?php endforeach; ?>
         </ul>
         
-        <div class="social-icon">
+        <div class="social-icon mhide">
             <ul>
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
@@ -45,18 +66,20 @@
                 <li><a href="#"><i class="fa fa-comment"></i></a></li>
                 <li><a href="#"><i class="fa fa-link"></i></a></li>
                 <li><a href="#"><i class="fa fa-share"></i></a></li>
-                <li><a href="#"><i class="fa fa-bookmark"></i></a></li>
+                <?php global $user; ?>
+                  <?php if ($user->uid > 0): ?>                     
+                     <li><?php print $read_later; ?></li>
+                  <?php else: ?>
+                     <?php print '<li>' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE)) . '</li>'; ?>
+                <?php endif; ?>
             </ul>
-            
-            
-            
         </div>
         
         
         <div class="photo-ad">       
         </div>
         
-        
+    </div>
     </div>
 </div>
 
@@ -74,9 +97,10 @@ jQuery(document).ready(function (e) {
         slidesToShow: 7,
         slidesToScroll: 1,
         asNavFor: '.slickslide, .counterslide',
-        dots: true,
+        dots: false,
         centerMode: false,
-        focusOnSelect: true
+        arrows: true,
+        variableWidth: true
     });
         
     jQuery('.counterslide').slick({

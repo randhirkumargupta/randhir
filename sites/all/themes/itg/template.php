@@ -77,6 +77,15 @@ function itg_preprocess_page(&$variables) {
       unset($variables['page']['content']['system_main']);
     }
   }
+  
+  // add condition to hide header and footer for signup, forgot-password page
+  if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
+    $variables['theme_hook_suggestions'][] = 'page__removeheader';
+  }
+  
+  if ($arg[0] == 'signup' || $arg[0] == 'forgot-password') {
+    $variables['theme_hook_suggestions'][] = 'page__removeheader';
+  }
 }
 
 /**
@@ -104,3 +113,4 @@ function itg_breadcrumb($variables) {
   }
   return $crumbs;
 }
+

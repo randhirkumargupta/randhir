@@ -32,6 +32,57 @@ function ads_features_field_default_field_bases() {
     'type' => 'text_long',
   );
 
+  // Exported field_base: 'field_ads_body_close'.
+  $field_bases['field_ads_body_close'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ads_body_close',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
+  // Exported field_base: 'field_ads_device_selection'.
+  $field_bases['field_ads_device_selection'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ads_device_selection',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'mobile' => 'Mobile',
+        'website' => 'Website',
+        'both' => 'Both',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_ads_end_date'.
   $field_bases['field_ads_end_date'] = array(
     'active' => 1,
@@ -104,10 +155,7 @@ function ads_features_field_default_field_bases() {
     'locked' => 0,
     'module' => 'list',
     'settings' => array(
-      'allowed_values' => array(
-        '200_200' => '200*200',
-        '400_400' => '400*400',
-      ),
+      'allowed_values' => array(),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
@@ -117,7 +165,7 @@ function ads_features_field_default_field_bases() {
   // Exported field_base: 'field_ads_section_selection'.
   $field_bases['field_ads_section_selection'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ads_section_selection',
@@ -125,22 +173,47 @@ function ads_features_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'taxonomy',
+    'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'category_management',
-          'parent' => 0,
-        ),
+        'Photo' => 'Section Photo',
+        'Video' => 'Section Video',
+        'Default' => 'Section Default',
       ),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
+    'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_ads_select_secton_option'.
+  $field_bases['field_ads_select_secton_option'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ads_select_secton_option',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_ads_short_description'.

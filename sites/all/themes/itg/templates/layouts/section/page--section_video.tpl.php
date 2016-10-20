@@ -14,6 +14,10 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';  
 }
+
+if ($theme == 'itgadmin' && !isset($preview)) {
+    $gray_bg_layout = 'gray-bg-layout';
+}
 ?>
 
 <!--------------------------------Code for Front tpl---------------------------------------->
@@ -26,10 +30,7 @@ if (arg(2) == 'preview') {
             <div class="logo">
               <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
             </div>
-          <?php endif; ?>
-          <div class="login-link desktop-hide">
-            <a href="/user">Login</a>
-          </div> 
+          <?php endif; ?>         
         </div>
 
         <?php if ($site_name || $site_slogan): ?>
@@ -45,7 +46,7 @@ if (arg(2) == 'preview') {
             <?php endif; ?>
           </div>
         <?php endif; ?>
-
+        <!--  
         <?php if ($secondary_menu): ?>
           <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
             <?php
@@ -63,7 +64,7 @@ if (arg(2) == 'preview') {
             ?>
           </nav>
         <?php endif; ?>
-
+        -->
         <?php print render($page['header']); ?>
         <?php
           // photo_carousel widget
@@ -96,22 +97,28 @@ if (arg(2) == 'preview') {
                   <?php if (isset($widget_data[$blockid]['block_title'])) { ?>
                     <li>                     
                       <?php
-                        $category_url = arg();
-                        if ($widget_data[$blockid]['cat_id'] == $_GET['category']) {
-                          $class_active = 'menu-active';
-                        }
-                        else {
-                          $class_active = ''; 
-                        }
+//                        $category_url = arg();
+//                        if (isset($_GET['category']) && $widget_data[$blockid]['cat_id'] == $_GET['category']) {                          
+//                          $class_active = 'menu-active set-offset';
+//                          
+//                        }
+//                        elseif (!isset($_GET['category']) && $count == 1) {
+//                          $class_active = 'menu-active'; 
+//                        } else {
+//                           $class_active = '';
+//                        }
                         print l($widget_data[$blockid]['block_title'], 
-                                $category_url,
+                                'javascript:void(0)',
                                    array(
+                                     'external' => TRUE,
                                      'attributes' => array(                                      
-                                       'class' => $class_active
+                                       
+                                       'data-anchor' => $widget_data[$blockid]['cat_id'],
+                                       'class' => 'active',
                                      ), 
-                                     'query' => array(
-                                       'category' =>$widget_data[$blockid]['cat_id']
-                                     ),
+//                                     'query' => array(
+//                                       'category' =>$widget_data[$blockid]['cat_id'],
+//                                     ),
                                    )
                                );
                       ?>
@@ -124,11 +131,20 @@ if (arg(2) == 'preview') {
               <?php } ?>              
             </ul>
             <?php
-//drupal_add_js("jQuery('.video_landing_menu li').click(function(){
-//               var section_id = jQuery(this).val();
-//               jQuery('#edit-field-story-category-tid').val(section_id); 
-//               jQuery('#edit-field-story-category-tid').trigger('change');
-//           });", array('type' => 'inline', 'scope' => 'footer'));
+drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
+               var section_id = jQuery(this).attr('data-anchor');
+               jQuery('.video_landing_menu li a').removeClass('menu-active');
+               jQuery('#edit-field-story-category-tid').val(section_id); 
+               jQuery('#edit-field-story-category-tid').trigger('change');
+               jQuery(this).addClass('menu-active');
+           });", array('type' => 'inline', 'scope' => 'footer'));
+
+ drupal_add_js("jQuery(document).ready(function(){
+               var section_id = jQuery('.video_landing_menu li a:first').attr('data-anchor');
+               jQuery('#edit-field-story-category-tid').val(section_id); 
+               jQuery('#edit-field-story-category-tid').trigger('change');
+               jQuery('.video_landing_menu li a:first').addClass('menu-active');
+           });", array('type' => 'inline', 'scope' => 'footer'));
 ?>
             <div class="slide-icon scroll-arrow-left"><i class="fa fa-angle-right ll"></i></div>
           </div>
@@ -159,7 +175,7 @@ if (arg(2) == 'preview') {
         $itg_class = 'itg-front';
       }
       ?>
-      <div class="itg-layout-container <?php echo $itg_class; ?>">
+      <div class="itg-layout-container <?php echo $itg_class; ?> default-video">
         <?php if ($theme == 'itgadmin') { ?>
         <div class="row">
           <div class="col-md-12">
@@ -207,6 +223,11 @@ if (arg(2) == 'preview') {
           </div>
           <div class="col-md-4">
               <div class="sidebar-section-photo">
+                <div class="itg-widget">
+                    <div class="ad-widget">
+                      <div class="sidebar-ad droppable"><?php print $itg_ad['200*200_section_video_right_bar_ad1'];?></div>
+                    </div>              
+                  </div>
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-21']['widget_name']; ?>">
@@ -291,6 +312,11 @@ if (arg(2) == 'preview') {
                     </div>             
                   </div>               
                 </div>
+                <div class="itg-widget">
+                    <div class="ad-widget">
+                      <div class="sidebar-ad droppable"><?php print $itg_ad['200*200_section_video_right_bar_ad2'];?></div>
+                    </div>              
+                  </div>
               </div>
           </div>
         </div>
@@ -332,8 +358,8 @@ if (arg(2) == 'preview') {
 
       <?php if ($sidebar_first || $sidebar_second): ?>
         <aside class="sidebars">
-    <?php print $sidebar_first; ?>
-    <?php print $sidebar_second; ?>
+    <?php //print $sidebar_first; ?>
+    <?php //print $sidebar_second; ?>
         </aside>
     <?php endif; ?>
     </main>

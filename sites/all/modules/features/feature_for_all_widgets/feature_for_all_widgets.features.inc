@@ -32,6 +32,51 @@ function feature_for_all_widgets_image_default_styles() {
     ),
   );
 
+  // Exported image style: big_story_widget.
+  $styles['big_story_widget'] = array(
+    'label' => 'big_story_widget',
+    'effects' => array(
+      7 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 645,
+          'height' => 363,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: home_page_feature_large.
+  $styles['home_page_feature_large'] = array(
+    'label' => 'home_page_feature_large',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 486,
+          'height' => 282,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: home_page_feature_small.
+  $styles['home_page_feature_small'] = array(
+    'label' => 'home_page_feature_small',
+    'effects' => array(
+      3 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 237,
+          'height' => 133,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: section_ordering_widget.
   $styles['section_ordering_widget'] = array(
     'label' => 'section_ordering_widget',

@@ -27,6 +27,9 @@ define('CATEGORY_MANAGMENT', 4);
 define('EXPERT', 21);
 define('ITGDATE', 'd/m/Y');
 define('FRONT_THEME_NAME', 'itg');
+define('EXTRA_SECTION_CARDS', 21);
+define('SECTION_TAB', 20);
+define('FRONT_USER', 25);
 
 
 /**

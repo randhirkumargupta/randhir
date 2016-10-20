@@ -43,7 +43,7 @@ else {
 // Title
 
 $updated = $data['updated'];
-$title = '<div class="active-poll-title"><h2>'.t($data['title']).'</h2><div class="updated-msg">'.$updated.'</div></div>';
+$title = '<div class="active-poll-title"><h2>'.t($data['title']).'</h2><div class="updated-msg">'.$updated.' <div class="social-share"><ul><li><a class="share" href="#"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div></div></div>';
 
 // Getting current index
 

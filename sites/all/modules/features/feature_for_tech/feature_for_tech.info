@@ -1,0 +1,13 @@
+name = Feature for Tech
+description = Feature for Tech
+core = 7.x
+package = Features
+version = 7.x-1.1
+dependencies[] = image
+dependencies[] = views
+dependencies[] = views_customstyle
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[image][] = image_750x363
+features[views_view][] = tech
+features_exclude[dependencies][ctools] = ctools

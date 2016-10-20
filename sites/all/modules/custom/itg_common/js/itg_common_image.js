@@ -60,8 +60,4 @@
 
         }
     }
-jQuery( document ).ajaxComplete(function( event, xhr, settings ) {
-  var html=jQuery('.image-fullname').find('a').attr('target', '_blank');
-});
-
 })(jQuery);

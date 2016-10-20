@@ -1,0 +1,5 @@
+name = ITG Personalization
+description = User personalized content.
+core = 7.x
+files[] = views/itg_personalization_field_handler_tid_edit.inc
+package = ITG

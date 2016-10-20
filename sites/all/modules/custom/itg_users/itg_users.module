@@ -354,6 +354,7 @@ function itg_users_views_pre_render(&$view) {
  *
  */
 function itg_users_user_logout($account) {
+
   $_GET['destination'] = 'user';
 }
 
@@ -458,15 +459,20 @@ function itg_users_theme($existing, $type, $theme, $path) {
  */
 function itg_users_user_login(&$edit, $account) {
   $role_count = count($account->roles);
+  
   //p($account->roles);
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
-  if (!array_key_exists(ADMINISTRATOR, $account->roles)) {
+  if (!array_key_exists(ADMINISTRATOR, $account->roles) && !array_key_exists(FRONT_USER, $account->roles)) {
     if (!isset($_GET['destination']) && arg(1) != "reset") {
       $_GET['destination'] = 'cms-user-dashboard'; // Redirect user to dashboard page after login
     }
   }
+//  if (array_key_exists(FRONT_USER, $account->roles)) {
+//    $_GET['destination'] = 'personalization/saved-items';
+//    
+//  }
   if ($role_count < 3) {
     if (array_key_exists(EXPERT, $account->roles)) {
       if (arg(1) != "reset") {

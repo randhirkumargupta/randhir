@@ -62,7 +62,9 @@ function features_for_quiz_field_group_info() {
       3 => 'field_quiz_scoring_type',
       4 => 'field_quiz_type',
       5 => 'field_quiz_winners',
-      6 => 'title',
+      6 => 'field_story_reporter',
+      7 => 'field_survey_questions_format',
+      8 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -127,15 +129,16 @@ function features_for_quiz_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Meta Tags',
+    'label' => 'SEO Meta Tags',
     'weight' => '5',
     'children' => array(
-      0 => 'metatags',
-      1 => 'path',
+      0 => 'field_pqs_add_token',
+      1 => 'metatags',
+      2 => 'path',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Meta Tags',
+      'label' => 'SEO Meta Tags',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => 'tab-quiz-metatags',
@@ -150,6 +153,39 @@ function features_for_quiz_field_group_info() {
     ),
   );
   $field_groups['group_quiz_metatags|node|quiz|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_quiz_publish_unpublish|node|quiz|form';
+  $field_group->group_name = 'group_quiz_publish_unpublish';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'quiz';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Publish/Unpublish',
+    'weight' => '4',
+    'children' => array(
+      0 => 'field_quuiz_publish',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Publish/Unpublish',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'tab-quiz-publish-unpublish',
+        'classes' => 'group-quiz-publish-unpublish field-group-div',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_quiz_publish_unpublish|node|quiz|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -190,7 +226,8 @@ function features_for_quiz_field_group_info() {
   t('Basic Settings');
   t('Categorization');
   t('Date Settings');
-  t('Meta Tags');
+  t('Publish/Unpublish');
+  t('SEO Meta Tags');
 
   return $field_groups;
 }

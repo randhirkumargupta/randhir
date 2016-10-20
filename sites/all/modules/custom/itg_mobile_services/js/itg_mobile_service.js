@@ -11,19 +11,27 @@ var firstDate = 1;
 var fixedDate = '';
 var maxLen = 0;
 var astroFlag = 0;
+var sDateFlag = 1;
+var dynamicId = '';
+var dynamicAudioId = '';
+var dynamicFlag = 1;
+var colorboxFlag = 1;
+var dailymotionFlag = 1;
+var uploadName = '';
+var frequencyFlag = 1;
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
         attach: function (context, settings) {
-
             jQuery.fn.mobile_astro_custom_js = function () {
+                $("#widget-ajex-loader").css("display", "block");
                 jQuery('#edit-field-service-content-und-add-more').mousedown();
             };
 
             if (Drupal.settings.itg_mobile_services.settings.astro_service) {
                 jQuery(".field-type-text.field-name-field-client-short-description.field-widget-text-textfield.form-wrapper").hide();
                 jQuery('#edit-field-service-content-und-0-field-service-content-date-und-0-value-datepicker-popup-1').val('');
-                jQuery("input[id*='field-service-content-date-und-0-value']").hide();
+                jQuery("[id*='field-service-content-date']").hide();
                 astroFlag = 1;
             }
             if (Drupal.settings.itg_mobile_services.settings.service_content_first_row_hide) {
@@ -49,7 +57,6 @@ var astroFlag = 0;
             jQuery('.field-name-field-story-large-image').hide();
             jQuery('.field-name-field-service-audio').hide();
             jQuery('.field-name-field-service-video').hide();
-
 
             jQuery('input[name="field_service_content_add_more"]').hide();
 
@@ -80,7 +87,7 @@ var astroFlag = 0;
                     } else {
                         jQuery('#content-enable-button').show();
                     }
-                    
+
                     session++;
                 } else {
                     jQuery('#edit-field-service-frequency-date').hide();
@@ -90,6 +97,12 @@ var astroFlag = 0;
                 // hide defaut 
                 jQuery("#edit-field-service-frequency-date-und-0-show-todate").prop('checked', true);
                 jQuery('#edit-field-service-frequency-date').hide();
+            }
+
+            var description_message = jQuery('textarea#edit-field-service-content-und-12-field-story-expert-description-und-0-value--2').html();
+            if (description_message) {
+                $("#widget-ajex-loader").css("display", "none");
+                dynamicFlag = 1;
             }
 
             jQuery.fn.content_create_custom_js = function () {
@@ -169,8 +182,12 @@ var astroFlag = 0;
                 }
                 if (selectedVal > 1) {
                     jQuery('#edit-field-service-frequency-date').show();
-                    $('#edit-field-service-content').show();
                 }
+            }
+
+            var service_asso = jQuery("#edit-field-service-association-title-und option:selected").val();
+            if (service_asso != '_none' && service_asso > 1) {
+                $('#edit-field-service-content').show();
             }
 
             jQuery('#edit-field-service-frequency-und input[type="radio"]').click(function () {
@@ -181,9 +198,14 @@ var astroFlag = 0;
                     jQuery('#edit-field-service-frequency-date').hide();
                     jQuery('#edit-field-service-content-und-0-remove-button').hide();
                     jQuery('#edit-field-service-content-und-add-more').hide();
-                    jQuery("#edit-field-service-content tbody tr:first").css("display", "block");
+
                     var today_date = custom_today_date();
-                    jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                    if (astroFlag == 1) {
+                        jQuery("#edit-field-service-content tbody tr:first").css("display", "hide");
+                    } else {
+                        jQuery("#edit-field-service-content tbody tr:first").css("display", "block");
+                        jQuery('input[name="field_service_content[und][0][field_service_content_date][und][0][value][date]"]').val(today_date);
+                    }
                     jQuery('input[name="field_service_frequency_date[und][0][value][date]"]').val(today_date);
                     jQuery('input[name="field_service_frequency_date[und][0][value2][date]"]').val(today_date);
                 } else if ($(this).attr("value") == "2") {
@@ -310,9 +332,16 @@ var astroFlag = 0;
                 jQuery('#edit-field-service-content-add-more-number').val(diff);
             }
 
+
             if (genrateFlag == 1) {
+
+
                 jQuery(document).on("click", "#content-enable-button", function (event) {
                     event.preventDefault();
+                    dynamicFlag = 1;
+                    // reset button set
+                    jQuery('#edit-field-service-frequency-date').after(jQuery("#reset-date-button"));
+
                     var sdate = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
                     var edate = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
                     if (sdate == '') {
@@ -334,6 +363,7 @@ var astroFlag = 0;
                         return false;
                     }
 
+
                     if (genrateFlag == 1) {
                         jQuery("#edit-field-service-association-title-und, #edit-field-footer-und-0-value--2, #edit-field-service-frequency-date-und-0-value-datepicker-popup-1, #edit-field-service-frequency-date-und-0-value2-datepicker-popup-1").addClass("itg-disabled");
                         jQuery('#edit-field-service-frequency-und').addClass('itg-disabled-radio');
@@ -347,10 +377,13 @@ var astroFlag = 0;
                             //lots more code
                         }, 3000);
                         genrateFlag++;
+
                     }
+
                 });
             }
 
+            jQuery("input[id*='field-client-short-description-und']").attr("placeholder", "Title");
             jQuery('#edit-field-service-content textarea').attr("placeholder", "Content Text");
 
             function set_dates() {
@@ -429,6 +462,38 @@ var astroFlag = 0;
                 }
             });
 
+            jQuery('#content-enable-button').removeAttr('disabled');
+            jQuery('#reset-date-button').removeAttr('disabled');
+
+            jQuery('#vas-service-content-node-form').submit(function () {
+                var frequency_from_date = jQuery('#edit-field-service-frequency-date-und-0-value-datepicker-popup-1').val();
+                var frequency_end_date = jQuery('#edit-field-service-frequency-date-und-0-value2-datepicker-popup-1').val();
+                frequencyFlag++;
+                if (frequency_from_date == '' && frequencyFlag == 2) {
+                    alert("Please enter start date.");
+                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
+                    return false;
+                } else if (frequency_end_date == '' && frequencyFlag == 2) {
+                    alert("Please enter end date.");
+                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2').append('<span class="error">Please enter end date.</span>');
+                    return false;
+                }
+                if (frequency_from_date == '' && frequency_end_date == '') {
+                    jQuery(".form-item-field-service-frequency-date-und-0-value-date span").empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value2 span').empty('');
+                    jQuery('.form-item-field-service-frequency-date-und-0-value-date').append('<span class="error">Please enter start date.</span>');
+                    return false;
+                }
+
+            });
+
+
+
+
 
             jQuery('.field-name-field-story-expert-description .form-textarea').on('keyup', function () {
                 if (Drupal.settings.itg_mobile_services.settings.countchar) {
@@ -442,6 +507,243 @@ var astroFlag = 0;
                 remain = maxLen - parseInt(tlength);
                 jQuery('#custom_service_content_' + string[5]).text(remain + ' characters remaining out of ' + maxLen);
             });
+
+
+            // remove disable for video upload button
+            jQuery("input[name*='field_service_video_und_0_upload_button']").removeAttr('disabled');
+
+            if (Drupal.settings.itg_mobile_services.settings.service_content_edit_mode) {
+                jQuery('#content-enable-button').hide();
+                // for video
+                jQuery(".mobile-video-fields input").on('click', function (event) {
+                    event.preventDefault();
+                    var uploadId = jQuery(this).attr("name").split('files[field_service_content_und_')[1].split('_field_service_video_und_0]')[0];
+                    dynamicId = "div[id^='edit-field-service-content-und-" + uploadId + "-field-service-video']";
+                    dynamicUploadButtonName = "input[name^='field_service_content_und_" + uploadId + "_field_service_video']";
+                    dynamicUploadImage = "input[name='field_service_content[und][" + uploadId + "][field_service_video][und][0][fid]']";
+
+                    // for video seach popup
+                    jQuery('.video-ftp').trigger('click');
+                    jQuery('.video-local').removeClass('active');
+                    jQuery('.used-unused-select').val('unused');
+                    jQuery('.used-unused-select').trigger('change');
+                    jQuery('.time-filter').hide();
+
+                    if (colorboxFlag == 1) {
+                        var data = jQuery('.browse-ftp').html();
+                        jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%", fixed: true, onComplete: function () {
+
+                            }});
+                        colorboxFlag++;
+                    }
+
+                });
+                // for Audio
+                jQuery(".mobile-audio-fields a").on('click', function () {
+                    var uploadId = jQuery(this).next().attr('name').split('field_service_content[und][')[1].split('][field_service_audio][und][0][filefield_imce][button]')[0];
+                    dynamicAudioId = "div[id^='edit-field-service-content-und-" + uploadId + "-field-service-audio']";
+
+                });
+            } else {
+                if (dynamicFlag == 1) {
+                    jQuery(".field-name-field-service-audio-keyword").hide();
+                    jQuery(".field-name-field-service-video-keyword").hide();
+                    dynamicFlag++;
+                }
+                // for video
+                jQuery(".mobile-video-fields input").on('click', function (event) {
+                    event.preventDefault();
+                    var uploadId = jQuery(this).attr("name").split('files[field_service_content_und_')[1].split('_field_service_video_und_0]')[0];
+                    dynamicId = "div[id^='edit-field-service-content-und-" + uploadId + "-field-service-video']";
+                    dynamicUploadButtonName = "input[name^='field_service_content_und_" + uploadId + "_field_service_video']";
+                    dynamicUploadImage = "input[name='field_service_content[und][" + uploadId + "][field_service_video][und][0][fid]']";
+
+                    // for video seach popup
+                    jQuery('.video-ftp').trigger('click');
+                    jQuery('.video-local').removeClass('active');
+                    jQuery('.used-unused-select').val('unused');
+                    jQuery('.used-unused-select').trigger('change');
+                    jQuery('.time-filter').hide();
+                    if (colorboxFlag == 1) {
+                        var data = jQuery('.browse-ftp').html();
+                        jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%", fixed: true, onComplete: function () {
+
+                            }});
+                        colorboxFlag++;
+                    }
+                });
+                // for Audio
+                jQuery(".mobile-audio-fields a").on('click', function () {
+                    var uploadId = jQuery(this).next().attr('name').split('field_service_content[und][')[1].split('][field_service_audio][und][0][filefield_imce][button]')[0];
+                    dynamicAudioId = "div[id^='edit-field-service-content-und-" + uploadId + "-field-service-audio']";
+                });
+            }
+
+            // onclose colorbox
+            jQuery("#cboxClose").on('click', function () {
+                colorboxFlag = 1;
+            });
+
+            jQuery(document).ajaxSuccess(function (event, xhr, settings) {
+                if (settings.url.indexOf('field_service_video') >= 0) {
+                    jQuery(dynamicId).show();
+                }
+                if (settings.url.indexOf('field_service_audio') >= 0) {
+                    jQuery(dynamicAudioId).show();
+                }
+            });
+
+
+            /////////////////// for video seach popup //////////////////////////////////////////
+
+            $('.browse-ftp').hide();
+
+            $('.ftp-server a').click(function () {
+                var vid = $('#edit-video-browse-select .form-radio:checked').val();
+                if (vid !== "" && !$.isNumeric(vid)) {
+                    alert('Please select video file.');
+                } else {
+                    console.log(dynamicUploadImage);
+                    $(dynamicUploadImage).val(vid);
+                    jQuery(dynamicUploadButtonName).mousedown();
+                    $.colorbox.close();
+                    dailymotionFlag = 1;
+                    colorboxFlag = 1;
+                    setTimeout(function () {
+                        $('#edit-video-browse-select .form-radio').prop('checked', false);
+                    }, 1000);
+                }
+            });
+            // popup show hide
+            $(".video-local").click(function () {
+                $(".local_browse").show();
+                $(".ftp-server").hide();
+                $(".video_filters").hide();
+                $('.video-ftp').removeClass('active');
+                $(this).addClass('active');
+            });
+            $(".video-ftp").click(function () {
+                $(".local_browse").hide();
+                $(".ftp-server").show();
+                $(".video_filters").show();
+                $(this).addClass('active');
+                $('.video-local').removeClass('active');
+                $('.used-unused-select').val('unused');
+                $('.used-unused-select').trigger('change');
+
+            });
+            $(".browse-local").click(function () {
+                $("#edit-field-upload-video-und-0-upload").show();
+                $("#edit-field-upload-video-und-0-upload-button").show();
+                $("#edit-field-upload-video-und-0-upload").trigger('click');
+                $("#edit-field-upload-video-und-0-upload").change(function () {
+                    $("#edit-field-upload-video-und-0-upload-button").mousedown();
+                    $.colorbox.close();
+                    dailymotionFlag = 1;
+                    colorboxFlag = 1;
+                });
+            });
+            // check ajax upload button
+
+            $('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
+                if (form_build_id = settings.url.match(/file\/ajax\/field_upload_video\d*\/(.*)$/)) {
+
+                    if ($('#videogallery-node-form').find("input[name='field_upload_video_und_0_remove_button']").val() == 'Remove') {
+                        $(".browse-ftp-click").hide();
+                        $('.browse-video-form label').hide();
+                        $('#edit-field-upload-video label:first').show();
+
+                    } else {
+
+                        $(".browse-ftp-click").show();
+                        $("input[name='field_video_duration[und][0][value]']").val('');
+
+                        $('.browse-video-form label').show();
+                        $('#edit-field-upload-video label:first').hide();
+                    }
+                }
+
+            });
+
+            jQuery('document').ready(function () {
+                jQuery('.browse-ftp-click').click(function () {
+                    var old_vid = jQuery("input[name='field_upload_video[und][0][fid]']").val();
+                    if (old_vid != 0) {
+
+                    } else {
+                        jQuery('.video-ftp').trigger('click');
+                        jQuery('.video-local').removeClass('active');
+                        jQuery('.used-unused-select').val('unused');
+                        jQuery('.used-unused-select').trigger('change');
+                        jQuery('.time-filter').hide();
+                        var data = jQuery('.browse-ftp').html();
+                        //  jQuery.colorbox({width: "80%", height: "80%",fixed: true});
+                        jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%", fixed: true, onComplete: function () {
+
+                            }});
+                    }
+                });
+            });
+
+            // new code
+            if (dailymotionFlag == 1) {
+                jQuery('document').ready(function () {
+                    jQuery('.used-unused-select').live('change', function () {
+                        jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                        var select_value = jQuery(this).val();
+                        if (select_value == 'used') {
+                            jQuery('.time-filter').show();
+                            jQuery('.time-filter-select').val('-all-');
+                        } else {
+                            jQuery('.time-filter').hide();
+                        }
+                        var base_url = Drupal.settings.basePath;
+                        jQuery.ajax({
+                            url: base_url + '/dailymotion-ftp-videos-post',
+                            type: 'post',
+                            data: {'case': select_value},
+                            success: function (data) {
+                                jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+                                jQuery('.video-options-wrapper').html(data);
+
+                            },
+                            error: function (xhr, desc, err) {
+                                console.log(xhr);
+                                console.log("Details: " + desc + "\nError:" + err);
+                            }
+                        });
+
+                    });
+                });
+                dailymotionFlag++;
+            }
+
+
+            // Time filter ajax
+            jQuery('document').ready(function () {
+                jQuery('.time-filter-select').live('change', function () {
+                    jQuery('#loader-data img').show();
+                    var select_value = jQuery(this).val();
+                    var base_url = Drupal.settings.basePath;
+                    jQuery.ajax({
+                        url: base_url + '/dailymotion-video-time-filter',
+                        type: 'post',
+                        data: {'back_time': select_value},
+                        success: function (data) {
+                            jQuery('#loader-data img').hide();
+                            jQuery('.video-options-wrapper').html(data);
+
+                        },
+                        error: function (xhr, desc, err) {
+                            console.log(xhr);
+                            console.log("Details: " + desc + "\nError:" + err);
+                        }
+                    });
+
+                });
+            });
+
+
         }
     }
 })(jQuery);

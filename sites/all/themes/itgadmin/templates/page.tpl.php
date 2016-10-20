@@ -136,7 +136,7 @@ if (!in_array('administrator', $user->roles)) {
                 $node = node_load(arg(1));
             }
 
-            if ((arg(0) == 'node') && ((arg(1) == 'add' && arg(2) == 'story')  || ($node->type == 'story' && arg(2) && arg(2) != 'revision')) ) {
+            if ((arg(0) == 'node') && ((arg(1) == 'add' )  || ( arg(2) && arg(2) != 'revision')) ) {
                 ?>
                 <div class="action-with-title">
                     <?php print render($title_prefix); ?>
@@ -144,11 +144,11 @@ if (!in_array('administrator', $user->roles)) {
                     <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
                     <?php endif; ?>
                         <?php print render($title_suffix); ?>
-                    <div class="top-actions">
+<!--                    <div class="top-actions">
                         <span class="btn btn-save" data-id="edit-submit">Save</span>
                         <span class="btn btn-preview" data-id="edit-preview">Preview</span>
                         <a class="btn btn-cancel mr-0" href="<?php print $base_url;  ?>/mydraft-story">Cancel</a>
-                    </div>
+                    </div>-->
                     <?php print render($page['form_tab']); ?>
                 </div>
             <?php } else { ?>

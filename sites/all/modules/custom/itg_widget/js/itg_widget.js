@@ -38,6 +38,18 @@ Drupal.behaviors.itg_widgets = {
                 }
             }
         });
+
+        jQuery(".add-so-sorry-extra-data").click(function() {
+            var extra_type = jQuery(this).val();
+            var nid = jQuery(this).attr('data-nid');
+            window.location.replace("add-so-sorry-extra-data/" + nid + "/" + extra_type);
+            jQuery("#widget-ajex-loader").css("display", "block");
+        });
+
+        jQuery(".remove-so-sorry-extra-data").click(function() {
+            jQuery("#widget-ajex-loader").css("display", "block");
+        });
+
         // This code use form check/uncheck all check box function
         jQuery('.widgets-view .vbo-table-select-all').click(function() {
 
@@ -171,7 +183,16 @@ Drupal.behaviors.itg_widgets = {
         //jQuery(".widgets-view .view-link").css("text-transform","capitalize");
 
         jQuery(".view-section-wise-content-ordering-list span.move-link").on('click', function() {
-            if (confirm("Are you sure you want to move this content ?")) {
+            if (confirm("Are you sure you want to remove this content ?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+
+        jQuery(".view-display-id-poll_widget_list span.move-link").on('click', function() {
+            if (confirm("Are you sure you want to remove this content ?")) {
                 return true;
             }
             else {
@@ -196,3 +217,10 @@ var get_url_parameter = function get_url_parameter(sParam) {
         }
     }
 };
+
+
+jQuery(document).ready(function() {
+    jQuery(".custom-weight-draggable input[type=number]").change(function(){
+        jQuery(this).next().children().find('option').remove().end().append('<option value="'+jQuery(this).val()+'">'+jQuery(this).val()+'</option>').val(jQuery(this).val());
+    });
+});

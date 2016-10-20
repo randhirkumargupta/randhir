@@ -1,0 +1,54 @@
+<?php
+/**
+ * @file : itg_notification.install
+ * Install functions for notification
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store notification information
+ * @return array
+ */
+function itg_notification_schema() {
+  
+  $schema['itg_notification'] = array(
+      'description' => 'Table for notification.',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The primary key.',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'nid' => array(
+              'description' => 'Node id.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'scheduled' => array(
+              'description' => 'Scheduled Date',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'status' => array(
+              'description' => 'Notification Status.',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  return $schema;
+}

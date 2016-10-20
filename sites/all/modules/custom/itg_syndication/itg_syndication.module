@@ -35,8 +35,6 @@ function itg_syndication_menu() {
 }
 
 
-
-
 /**
  * Implement hook_permissions()
  */
@@ -978,6 +976,8 @@ function itg_magazine_custom_callback($mag_id = NULL) {
 
 
   if (empty($_POST['magazine'])) {
+    $select = t('- None -');
+    $data = array('' => $select);
     foreach ($itg_result as $itg_val) {
       $dt = date('Y-m-d', strtotime($itg_val->title));
       $data[$dt] = date('d/m/Y', strtotime($itg_val->title));
@@ -985,7 +985,7 @@ function itg_magazine_custom_callback($mag_id = NULL) {
     return $data;
   }
   else {
-    $drop = '<option value="_none">- Select -</option>';
+    $drop = '<option value="">- Select -</option>';
     foreach ($itg_result as $itg_val) {
       $dt = date('Y-m-d', strtotime($itg_val->title));
       $data[$dt] = date('d/m/Y', strtotime($itg_val->title));

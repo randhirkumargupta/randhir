@@ -165,7 +165,7 @@ function features_for_quiz_field_default_field_instances() {
   $field_instances['field_collection_item-field_quiz_add_questions-field_survey_add_media'] = array(
     'bundle' => 'field_quiz_add_questions',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Image width should be more than 740px for proper view.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -197,7 +197,7 @@ function features_for_quiz_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 'imce',
-            'plupload' => 0,
+            'itg_image_repository' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -281,10 +281,10 @@ function features_for_quiz_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_quiz_answer_image',
-    'label' => 'Answer',
+    'label' => 'Answer Photo',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -292,7 +292,7 @@ function features_for_quiz_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -304,10 +304,11 @@ function features_for_quiz_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -315,7 +316,7 @@ function features_for_quiz_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -350,7 +351,7 @@ function features_for_quiz_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_quiz_answer_text',
-    'label' => 'Answer',
+    'label' => 'Answer Text',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -386,13 +387,13 @@ function features_for_quiz_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_quiz_answer_video',
-    'label' => 'Answer',
+    'label' => 'Answer Video',
     'required' => 0,
     'settings' => array(
       'description_field' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'txt',
+      'file_extensions' => 'mp4 mov mpg wmv smf svi 3gp flv avi mkv',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -404,11 +405,12 @@ function features_for_quiz_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 0,
+            'imce' => 'imce',
+            'itg_image_repository' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -416,7 +418,7 @@ function features_for_quiz_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 0,
+            'imce_mode' => 1,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -512,6 +514,48 @@ function features_for_quiz_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-quiz-field_pqs_add_token'.
+  $field_instances['node-quiz-field_pqs_add_token'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_pqs_add_token',
+    'label' => 'Add Token',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-quiz-field_quiz_add_questions'.
   $field_instances['node-quiz-field_quiz_add_questions'] = array(
     'bundle' => 'quiz',
@@ -598,7 +642,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 49,
+      'weight' => 8,
     ),
   );
 
@@ -641,7 +685,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -684,7 +728,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -727,7 +771,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 48,
+      'weight' => 7,
     ),
   );
 
@@ -770,7 +814,7 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -852,6 +896,90 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_quuiz_publish'.
+  $field_instances['node-quiz-field_quuiz_publish'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 17,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_quuiz_publish',
+    'label' => 'Publish',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_story_reporter'.
+  $field_instances['node-quiz-field_story_reporter'] = array(
+    'bundle' => 'quiz',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_reporter',
+    'label' => 'Byline',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
       'weight' => 3,
     ),
   );
@@ -941,7 +1069,7 @@ function features_for_quiz_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -949,7 +1077,7 @@ function features_for_quiz_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 54,
+      'weight' => 59,
     ),
   );
 
@@ -988,7 +1116,50 @@ function features_for_quiz_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 53,
+      'weight' => 58,
+    ),
+  );
+
+  // Exported field_instance: 'node-quiz-field_survey_questions_format'.
+  $field_instances['node-quiz-field_survey_questions_format'] = array(
+    'bundle' => 'quiz',
+    'default_value' => array(
+      0 => array(
+        'value' => 'All questions at a time',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_survey_questions_format',
+    'label' => 'Quiz Questions Format',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 9,
     ),
   );
 
@@ -1038,7 +1209,7 @@ function features_for_quiz_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -1046,7 +1217,7 @@ function features_for_quiz_field_default_field_instances() {
         'year_range' => '-0:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 52,
+      'weight' => 57,
     ),
   );
 
@@ -1054,12 +1225,17 @@ function features_for_quiz_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Add Media');
   t('Add Quiz Question');
-  t('Answer');
+  t('Add Token');
   t('Answer Details');
   t('Answer Options');
+  t('Answer Photo');
+  t('Answer Text');
   t('Answer Type');
+  t('Answer Video');
+  t('Byline');
   t('Correct Answer');
   t('If user selects, normal; first added questions will appear on top for front end user. And if user selects ‘Random’ quiz questions will appear on random basis.');
+  t('Image width should be more than 740px for proper view.');
   t('Immediate Result');
   t('It will be like guidelines to quiz and will be displayed to front end user.');
   t('It will define the maximum number of options available for each question.');
@@ -1068,10 +1244,12 @@ function features_for_quiz_field_default_field_instances() {
   t('Please add quiz question.');
   t('Please select quiz validity end date.');
   t('Please select quiz validity start date.');
+  t('Publish');
   t('Question');
   t('Questions Display Sequence');
   t('Quiz Expiry Date');
   t('Quiz Instructions');
+  t('Quiz Questions Format');
   t('Quiz Scoring Type');
   t('Quiz Type');
   t('Section');

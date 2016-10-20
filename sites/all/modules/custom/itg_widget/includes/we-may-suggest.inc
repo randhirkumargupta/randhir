@@ -4,7 +4,7 @@
  * @file
  * home page feature ordering and reordering
  */
-
+module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 /**
  * function to get data of nodes in sequence which is saved in draggableviews_structure table
  * @param array $info
@@ -13,14 +13,7 @@
 function itg_widget_we_may_suggest_ordering_from_custom_table($info) {
   if (is_array($info)) {
     $widget_name = _get_widget_name(NULL, 'we_may_suggest_widget');
-    $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
-    $query->fields('iwo', array('nid'));
-    $query->condition('iwo.widget', $widget_name);
-    $query->condition('n.status', '1');
-    $query->orderBy('iwo.weight');
-    $query->range(0, 4);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $result = get_view_nodes_form_custom_table_for_widgets($widget_name, MAY_WE_SUGGEST_MAX_RANGE, MAY_WE_SUGGEST_MIN_RANGE , 'ASC');
     $entity_data = array();
     foreach ($result as $entity_data_node) {
       $entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
@@ -35,7 +28,7 @@ function itg_widget_we_may_suggest_ordering_from_custom_table($info) {
  *
  * @param array $dont_miss_content
  */
-function save_we_may_suggest_widget_data($we_may_suggest_content) {
+function  save_we_may_suggest_widget_data($we_may_suggest_content) {
   $selected_node = $we_may_suggest_content['selection'];
 
   $already_nodes = db_select('itg_widget_order', 'iwo')

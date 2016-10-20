@@ -25,7 +25,10 @@ function features_for_survey_field_group_info() {
     'children' => array(
       0 => 'body',
       1 => 'field_survey_question_display',
-      2 => 'title',
+      2 => 'field_story_reporter',
+      3 => 'field_supp_publish',
+      4 => 'field_survey_questions_format',
+      5 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -56,7 +59,7 @@ function features_for_survey_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Date Settings',
-    'weight' => '3',
+    'weight' => '2',
     'children' => array(
       0 => 'field_survey_end_date',
       1 => 'field_survey_start_date',
@@ -90,15 +93,16 @@ function features_for_survey_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Meta Tags',
-    'weight' => '5',
+    'label' => 'SEO Meta Tags',
+    'weight' => '6',
     'children' => array(
-      0 => 'metatags',
-      1 => 'path',
+      0 => 'field_pqs_add_token',
+      1 => 'metatags',
+      2 => 'path',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Meta Tags',
+      'label' => 'SEO Meta Tags',
       'instance_settings' => array(
         'required_fields' => 0,
         'id' => 'metatags-wrapper',
@@ -150,6 +154,39 @@ function features_for_survey_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_survey_related_content|node|survey|form';
+  $field_group->group_name = 'group_survey_related_content';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'survey';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Related Content',
+    'weight' => '5',
+    'children' => array(
+      0 => 'field_common_related_content',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Related Content',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'survey-related-content',
+        'classes' => 'group-survey-related-content field-group-div',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_survey_related_content|node|survey|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_survey_section|node|survey|form';
   $field_group->group_name = 'group_survey_section';
   $field_group->entity_type = 'node';
@@ -158,7 +195,7 @@ function features_for_survey_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Categorization',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'field_survey_category',
     ),
@@ -186,7 +223,8 @@ function features_for_survey_field_group_info() {
   t('Basic Settings');
   t('Categorization');
   t('Date Settings');
-  t('Meta Tags');
+  t('Related Content');
+  t('SEO Meta Tags');
 
   return $field_groups;
 }

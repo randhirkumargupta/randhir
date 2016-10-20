@@ -237,6 +237,48 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_common_by_line_reporter_id'.
+  $field_instances['node-story-field_common_by_line_reporter_id'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 79,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_common_by_line_reporter_id',
+    'label' => 'common by line reporter id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 73,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_common_related_content'.
   $field_instances['node-story-field_common_related_content'] = array(
     'bundle' => 'story',
@@ -361,6 +403,64 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_poll_start_date'.
+  $field_instances['node-story-field_poll_start_date'] = array(
+    'bundle' => 'story',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 74,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_poll_start_date',
+    'label' => 'Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'Y/m/d - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 66,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_primary_category'.
   $field_instances['node-story-field_primary_category'] = array(
     'bundle' => 'story',
@@ -443,6 +543,48 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_primary_category_html_text'.
+  $field_instances['node-story-field_primary_category_html_text'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 77,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html_text',
+    'label' => 'Primary category textarea',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 71,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_archive'.
   $field_instances['node-story-field_story_archive'] = array(
     'bundle' => 'story',
@@ -518,48 +660,6 @@ function features_for_story_field_default_field_instances() {
       'settings' => array(),
       'type' => 'taxonomy_hs',
       'weight' => 45,
-    ),
-  );
-
-  // Exported field_instance: 'node-story-field_story_client_title'.
-  $field_instances['node-story-field_story_client_title'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Client title',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 48,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_client_title',
-    'label' => 'Client title',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 25,
     ),
   );
 
@@ -1798,45 +1898,6 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-story-field_story_media_files_syndicat'.
-  $field_instances['node-story-field_story_media_files_syndicat'] = array(
-    'bundle' => 'story',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 53,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_media_files_syndicat',
-    'label' => 'Media Files',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 26,
-    ),
-  );
-
   // Exported field_instance: 'node-story-field_story_medium_image'.
   $field_instances['node-story-field_story_medium_image'] = array(
     'bundle' => 'story',
@@ -2119,7 +2180,7 @@ function features_for_story_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'entityreference_autocomplete_tags',
       'weight' => 14,
     ),
   );
@@ -2807,6 +2868,45 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_tv_time'.
+  $field_instances['node-story-field_story_tv_time'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 76,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_tv_time',
+    'label' => 'Time',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 69,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_tweet'.
   $field_instances['node-story-field_story_tweet'] = array(
     'bundle' => 'story',
@@ -3035,6 +3135,52 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_ugc_source_id'.
+  $field_instances['node-story-field_story_ugc_source_id'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 78,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_story_ugc_source_id',
+    'label' => 'UGC Source ID',
+    'required' => FALSE,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 72,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_stroy_city'.
   $field_instances['node-story-field_stroy_city'] = array(
     'bundle' => 'story',
@@ -3085,13 +3231,13 @@ function features_for_story_field_default_field_instances() {
   t('Buzz Description');
   t('Byline');
   t('City');
-  t('Client title');
   t('Comment');
   t('Comment Question');
   t('Comment question');
   t('Common by line');
   t('Configurations');
   t('Courtesy');
+  t('Date');
   t('Expert Name');
   t('Expert description');
   t('Expert image');
@@ -3119,11 +3265,11 @@ function features_for_story_field_default_field_instances() {
   t('Magazine Kicker Text');
   t('Magazine headline');
   t('Magazine kicker');
-  t('Media Files');
   t('Medium image');
   t('New title');
   t('Node Identity');
   t('Primary category html');
+  t('Primary category textarea');
   t('Quotes');
   t('Redirection URL');
   t('Related Content');
@@ -3152,11 +3298,14 @@ function features_for_story_field_default_field_instances() {
   t('This headline shows on the homepage');
   t('This is the redirection URL for the New Title added above (url format: https://www.w3schools.com)');
   t('This title will append after the main Story headline on the homepage');
+  t('Time');
   t('Tweet');
   t('Twitter Image');
   t('Twitter Video');
   t('Twitter Video Description');
   t('Twitter narrative');
+  t('UGC Source ID');
+  t('common by line reporter id');
   t('common by line twitter');
   t('primary category');
 

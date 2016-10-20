@@ -16,12 +16,13 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   global $base_url;
   
   $settings['base_url'] = $base_url;
+  $settings['layout_type'] = $arg1;
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));  
   drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_layout_manager.js', array('weight' => 1));  
   
   $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
   
-  if ($arg1 == 'section') {
+  if ($arg1 == 'section' || $arg1 == 'special') {
     $op = array("" => "-- Section --");
     foreach ($tax as $key => $val) {
       $op[$val->tid] = $val->name;
@@ -137,7 +138,7 @@ function itg_layout_manager_filter_form_submit($form, &$form_state) {
 }
 
 /**
- * Implementation of hook_form
+ * Implementation of hook_form for section cards
  * {@inheritdoc}
  */
 function layout_section_widgets_search_form($form, &$form_state) {
@@ -167,6 +168,35 @@ function layout_section_widgets_search_form($form, &$form_state) {
   
   $form['section_save'] = array(
     '#markup' => '<a data-tabwidget='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',
+    '#weight' => 20,
+  );  
+
+  return $form;
+}
+
+/**
+ * Implementation of hook_form for section_widgets
+ * {@inheritdoc}
+ */
+function layout_section_widget2_search_form($form, &$form_state) {
+  
+  if ($_GET['template_name'] != 'page--front' ) {
+    $arg = $_GET['section'];
+  }
+  
+  
+  $widgets_type = 'section_widget2_wise_order';
+  
+  $form['section_widget2_name'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'itg_category_autocomplete_list/'.$arg,
+    '#maxlength' => 128,
+  );  
+  
+  $form['section_widget2_save'] = array(
+    '#markup' => '<a data-section-widget2='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section_widget2-save">+</a>',
     '#weight' => 20,
   );  
 
