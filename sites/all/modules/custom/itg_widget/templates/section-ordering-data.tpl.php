@@ -375,7 +375,7 @@ if ($widget_style == 'auto-road-trip') {
                                 <img src="<?php echo $extra_large_image_url; ?>">
                             </a></span>
 
-                        <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>                      
+                        <p><?php echo l(mb_strimwidth($desc, 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>                      
                     </div>
                     <?php
                 }
@@ -689,7 +689,7 @@ if ($widget_style == 'auto-road-trip') {
                 } else {
                     ?>
                         <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
-                            <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                            <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
                         </a>
                 <?php } ?>
                     <h3 class="frist-heading heading-<?php echo $entity->nid ?> <?php echo $entity->type ?> ">

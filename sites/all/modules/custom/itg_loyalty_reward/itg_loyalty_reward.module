@@ -6,6 +6,8 @@
  * Contains functionality for loyalty and rewards point.
  *
  */
+module_load_include('inc', 'itg_loyalty_reward', 'includes/itg_loyalty_reward_earn.point');
+module_load_include('inc', 'itg_loyalty_reward', 'includes/itg_loyalty_reward.checkout');
 
 /**
  * Implement hook_permission
@@ -89,11 +91,31 @@ function itg_loyalty_reward_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_loyalty_reward_earn.point.inc',
   );
+  $items['order-summary'] = array(
+    'title' => 'ORDER SUMMARY',
+    'page callback' => 'itg_loyalty_reward_order_summary',
+    'access arguments' => array('view product page'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_loyalty_reward.product.inc',
+  );
+  $items['order-confirmation'] = array(
+    'title' => 'ORDER CONFIRMATION',
+    'page callback' => 'itg_loyalty_reward_order_confirmation',
+    'access arguments' => array('view product page'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_loyalty_reward.product.inc',
+  );
   $items['earn-loyalty-point'] = array(
     'page callback' => 'itg_loyalty_reward_earnpoint',
     'access arguments' => array('view product page'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward_earn.point.inc',
+  );
+  $items['place-order'] = array(
+    'page callback' => 'itg_loyalty_reward_place_order',
+    'access arguments' => array('view product page'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_loyalty_reward.checkout.inc',
   );
 
   return $items;
@@ -123,6 +145,16 @@ function itg_loyalty_reward_theme($existing, $type, $theme, $path) {
       'template' => 'itg-loyalty-reward-cart',
       'path' => drupal_get_path('module', 'itg_loyalty_reward') . '/templates',
       'variables' => array('data' => NULL, 'remain_point' => NULL),
+    ),
+    'cart_order_summary' => array(
+      'template' => 'itg-cart-order-summary',
+      'path' => drupal_get_path('module', 'itg_loyalty_reward') . '/templates',
+      'variables' => array('data' => NULL, 'remain_point' => NULL),
+    ),
+    'cart_order_confirmation' => array(
+      'template' => 'itg-cart-order-confirmation',
+      'path' => drupal_get_path('module', 'itg_loyalty_reward') . '/templates',
+      'variables' => array('data' => NULL),
     ),
   );
 
@@ -421,6 +453,11 @@ function itg_loyalty_reward_block_info() {
     'info' => t('Loyalty Redumption Header'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  // Change Address form block.
+  $blocks['itg_loyalty_reward_address_form'] = array(
+    'info' => t('Change Address'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -457,6 +494,12 @@ function itg_loyalty_reward_block_view($delta = '') {
       $data['item_after'] = isset($_SESSION['cart_after_popup']) ? is_array($_SESSION['cart_after_popup']) ? $_SESSION['cart_after_popup'] : 0 : 0;      
       $data['logout'] = l(t('Logout'), 'user/logout');
       $block['content'] = theme('itg_loyalty_reward_redeem_points', array('data' => $data));
+      break;
+    case 'itg_loyalty_reward_address_form':
+      $block = array(
+        'content' => drupal_get_form('itg_loyalty_reward_checkout_form'),
+        'subject' => t('Change Address'),
+      );
   }
 
   return $block;

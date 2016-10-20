@@ -98,7 +98,11 @@
                                 $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
                             },
                             success: function(data) {
-
+                                      var splitewigitinfo= widget_info.split('|');
+                                      if(splitewigitinfo[1] !="")
+                                      {
+                                         wid_name=wid_name+'-'+ splitewigitinfo[1];
+                                      }
                                 // for category tab widget
                                 $('input[name = ' + block_name + ']').val(category_name_tab);
                                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
@@ -114,7 +118,8 @@
                                 //console.log("here i am");
                                 jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
                                 //code by avanish
-                                if (widget_name == 'featured_photo_carousel') {
+                              
+                                if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1]== 'block_5') {
                                     jQuery(".flexslider").flexslider({
                                         animation: "slide",
                                         prevText: "",

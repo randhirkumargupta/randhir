@@ -171,10 +171,13 @@ function itg_comments_ugc_edit_comment_form_submit($form, &$form_state) {
  * @param type $form_id  
  */
 function itg_comments_ugc_form_alter(&$form, &$form_state, $form_id) {
- 
+ global $user;
  switch ($form_id)  {
     case 'comment_node_story_form':
       $form['author']['homepage']['#access'] = FALSE;
+      if($user->uid) {
+      $form['author']['#access'] = FALSE;
+      }
       break;
     
     case 'comment_node_page_form':
@@ -183,10 +186,23 @@ function itg_comments_ugc_form_alter(&$form, &$form_state, $form_id) {
     
     case 'comment_node_blog_form':
       $form['author']['homepage']['#access'] = FALSE;
+      if($user->uid) {
+      $form['author']['#access'] = FALSE;
+      }
       break;
     
     case 'comment_node_photogallery_form':
       $form['author']['homepage']['#access'] = FALSE;
+      if($user->uid) {
+      $form['author']['#access'] = FALSE;
+      }
+      break;
+    
+    case 'comment_node_videogallery_form':
+      $form['author']['homepage']['#access'] = FALSE;
+      if($user->uid) {
+      $form['author']['#access'] = FALSE;
+      }
       break;
     
   }

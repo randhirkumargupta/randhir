@@ -362,9 +362,7 @@ function feature_for_so_sorry_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    5 => '5',
     6 => '6',
-    8 => '8',
     20 => '20',
     10 => '10',
   );
@@ -386,15 +384,10 @@ function feature_for_so_sorry_views_default_views() {
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_story_category' => 'field_story_category',
-    'field_story_source_type' => 'field_story_source_type',
     'nothing' => 'nothing',
     'changed' => 'changed',
-    'field_story_schedule_date_time' => 'field_story_schedule_date_time',
-    'state' => 'state',
     'view_node' => 'nothing_1',
-    'edit_node' => 'nothing_1',
     'nothing_1' => 'nothing_1',
-    'delete_node' => 'nothing_1',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -446,13 +439,6 @@ function feature_for_so_sorry_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_source_type' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'nothing' => array(
       'align' => '',
       'separator' => '',
@@ -465,36 +451,12 @@ function feature_for_so_sorry_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_story_schedule_date_time' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'state' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'edit_node' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'delete_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -729,9 +691,7 @@ function feature_for_so_sorry_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    5 => '5',
     6 => '6',
-    8 => '8',
     20 => '20',
     10 => '10',
   );
@@ -882,13 +842,6 @@ function feature_for_so_sorry_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S. No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Draggableviews: Content */
-  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['table'] = 'node';
-  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';

@@ -28,6 +28,7 @@ CKEDITOR.dialog.add('quizDialog', function(editor) {
             type: 'text',
             id: 'inset-quiz-nid',
             label: 'Quiz',
+            className: 'quiz-txt',
             validate: CKEDITOR.dialog.validate.notEmpty("This field cannot be empty.")
           },
           {
@@ -35,7 +36,10 @@ CKEDITOR.dialog.add('quizDialog', function(editor) {
             label: 'Get Quiz',
             title: 'Quiz',
             onClick: function() {
-              var bas_path = window.location.origin?window.location.origin+'/':window.location.protocol+'/'+window.location.host+'/';
+              var bas_path = window.location.origin ? window.location.origin + '/' : window.location.protocol + '/' + window.location.host + '/';
+               if(bas_path == 'http://localhost/') {
+                bas_path = bas_path+'itgcms/';
+              }
               editor.popup(bas_path + 'pqs/associate-with-story/quiz', 400, 600);
             }
           }

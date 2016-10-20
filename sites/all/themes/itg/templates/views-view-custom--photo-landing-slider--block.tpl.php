@@ -1,11 +1,21 @@
+<?php
+// configuration for social sharing
+$photo_node = node_load(arg(1));
+$f_collection = entity_load('field_collection_item', array($photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']));
+$actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$short_url = shorten_url($actual_link, 'goo.gl');
+$share_title = addslashes($photo_node->title);
+$share_desc = '';
+$image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']]->field_images[LANGUAGE_NONE][0]['uri']);
+?>
 <div class="row">
     <div class="col-md-12">
         <h2><?php print $row['title']; ?></h2>    
         <div class="social-icon desktop-hide">
             <ul>
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-comment"></i></a></li>
                 <li><a href="#"><i class="fa fa-link"></i></a></li>
                 <li class="mhide"><a href="#"><i class="fa fa-share"></i></a></li>
@@ -60,9 +70,9 @@
         
         <div class="social-icon mhide">
             <ul>
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-comment"></i></a></li>
                 <li><a href="#"><i class="fa fa-link"></i></a></li>
                 <li><a href="#"><i class="fa fa-share"></i></a></li>

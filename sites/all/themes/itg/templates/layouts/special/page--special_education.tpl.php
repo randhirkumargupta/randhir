@@ -93,7 +93,8 @@ if ($theme != 'itgadmin') {
 
 <div class="itg-layout-container <?php echo $itg_class; ?> education-layout-page">
    
-
+<?php $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
+  print render($block['content']); ?>
     <div class="row itg-top-section itg-layout-672">
         
         <div class="top-block">
@@ -266,7 +267,8 @@ if ($theme != 'itgadmin') {
                                         </div>
                                     <?php } ?>  
 
-                                    <div class="data-holder" id="itg-block-19"><?php print $widget_data['itg-block-19']['widget']; ?></div>
+                                    <div class="data-holder" id="itg-block-19"><?php $block = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');
+  print render($block['content']); ?></div>
                                 </div>             
                             </div>               
                         </div>

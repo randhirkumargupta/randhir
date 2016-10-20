@@ -225,29 +225,34 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'photogallery' => 'photogallery',
-  );
+  /* Filter criterion: Section wise ordering content: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
+  $handler->display->display_options['filters']['content_type']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Widget */
   $handler->display->display_options['filters']['widget']['id'] = 'widget';
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '430';
+  $handler->display->display_options['filters']['cat_id']['group'] = 1;
 
   /* Display: Watch */
   $handler = $view->new_display('block', 'Watch', 'block_8');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Tech Tips';
   $handler->display->display_options['display_description'] = 'Watch';
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -283,6 +288,10 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
   $handler->display->display_options['fields']['field_video_duration']['label'] = '';
   $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -292,23 +301,24 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'videogallery' => 'videogallery',
-  );
+  /* Filter criterion: Section wise ordering content: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'Videogallery';
+  $handler->display->display_options['filters']['content_type']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Widget */
   $handler->display->display_options['filters']['widget']['id'] = 'widget';
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '434';
+  $handler->display->display_options['filters']['cat_id']['group'] = 1;
 
   /* Display: byline */
   $handler = $view->new_display('block', 'byline', 'block_9');
@@ -393,23 +403,24 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'videogallery' => 'videogallery',
-  );
+  /* Filter criterion: Section wise ordering content: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'Videogallery';
+  $handler->display->display_options['filters']['content_type']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Widget */
   $handler->display->display_options['filters']['widget']['id'] = 'widget';
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
   /* Filter criterion: Section wise ordering content: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '443';
+  $handler->display->display_options['filters']['cat_id']['group'] = 1;
   $export['tech'] = $view;
 
   return $export;
