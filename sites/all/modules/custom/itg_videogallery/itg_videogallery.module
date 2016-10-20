@@ -427,6 +427,14 @@ function itg_videogallery_custom_validate($form, &$form_state) {
 function itg_videogallery_after_build($form, &$form_state) {
 
     global $user, $base_url;
+    
+    if (!isset($form['#node']->nid)) {
+    // hide remove button of first field on add form 
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
