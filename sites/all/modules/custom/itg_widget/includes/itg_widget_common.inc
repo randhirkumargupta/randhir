@@ -1094,6 +1094,24 @@ function itg_widget_views_query_alter(&$view, &$query) {
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
     );
   }
+  if ($view->name == 'budget' && ($view->current_display == 'budget_election_latest' )) {
+    global $theme;
+
+    if ($theme != 'seven') {
+      if ($theme == FRONT_THEME_NAME) {
+        $section = arg(2);
+      }
+      else {
+        $section = $_GET['section'];
+      }
+      if (empty($section)) {
+        $section = $_GET['section_name'];
+      }
+
+      $query->where[1]['conditions'][3]['value'] = $section;
+    }
+    
+  }
 
 
   if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos' || $view->current_display == 'oscar_photos')) {
