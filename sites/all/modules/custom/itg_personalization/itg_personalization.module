@@ -6,6 +6,7 @@
  */
 module_load_all_includes('inc', 'includes/itg_personalization.helper');
 module_load_all_includes('inc', 'includes/itg_personalization_profile.edit');
+module_load_all_includes('inc', 'includes/itg_personalization_refer.friend');
 
 /**
  * Implements hook_permission().
@@ -39,7 +40,7 @@ function itg_personalization_menu() {
     'page callback' => 'itg_personalization_home_page',
     'access arguments' => array('view personalized content'),    
     'type' => MENU_NORMAL_ITEM,
-  );    
+  );  
   
   return $items;
 }
@@ -138,6 +139,10 @@ function itg_personalization_block_info() {
     'info' => t('Edit Profile'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['personalization_refer_friend'] = array(
+    'info' => t('Refer a friend'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -171,6 +176,11 @@ function itg_personalization_block_view($delta = '') {
       $block = array(
         'subject' => t('Edit Profile'),
         'content' => drupal_get_form('itg_personalization_edit_profile_form'),
+      );
+      break;
+    case 'personalization_refer_friend':
+      $block = array(
+        'content' => drupal_get_form('itg_personalization_refer_a_friend_form'),
       );
   }
 
