@@ -130,7 +130,6 @@ function itg_sso_user_login_form_validate(&$form, &$form_state) {
 /**
  * Get uid by name
  * @param sring $name
- * @return boolean
  */
 function itg_sso_get_user_id($name) {
   $itg_query = db_select('users', 'su')
