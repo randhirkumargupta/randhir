@@ -111,7 +111,6 @@ function itg_sso_reg_user_mail($key, &$message, $params) {
  * {@inheritdoc}
  */
 function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
-  //pr($_GET['ReturnTo']);
   if ($form_id == 'user_login' && !empty($_GET['ReturnTo'])) {
     array_unshift($form['#validate'], 'itg_sso_user_login_form_validate');
   }
