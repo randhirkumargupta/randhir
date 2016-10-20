@@ -341,7 +341,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state) {
     '#type' => 'textarea', //you can find a list of available types in the form api
     '#title' => t(''),
     '#prefix' => '<div id="question">',
-    '#suffix' => '</div>',
+    '#suffix' => '<p>160 out of 160 characters</p></div>',
     '#maxlength' => 160,
     '#attributes' => array(
       'placeholder' => 'Ask your question here',
@@ -371,7 +371,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state) {
   );
 
   $form['cat_id'] = array(
-    '#type' => 'textfield', //you can find a list of available types in the form api
+    '#type' => 'hidden', //you can find a list of available types in the form api
     '#title' => t(''),
     '#value' => $cat_id,
   );
