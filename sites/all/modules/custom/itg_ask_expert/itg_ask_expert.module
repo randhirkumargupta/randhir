@@ -322,7 +322,17 @@ function itg_ask_expert_block_view($delta = '') {
  */
 function itg_custom_ask_an_expert_form($form, &$form_state) {
 
-  global $user, $base_url;
+  global $user, $base_url, $theme;
+   if(isset($_GET['section']) && !empty($_GET['section']))
+        {
+            $selction_name='section';
+        }else{
+            $selction_name='section_name';
+        }
+       $cat_id = $_GET[$selction_name];
+        if ($theme == FRONT_THEME_NAME) {
+          $cat_id = arg(2);
+         }
 
   $form['#prefix'] = '<div id="expert_global_config">';
   $form['#suffix'] = '</div>';
@@ -363,7 +373,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state) {
   $form['cat_id'] = array(
     '#type' => 'textfield', //you can find a list of available types in the form api
     '#title' => t(''),
-    '#value' => '147',
+    '#value' => $cat_id,
   );
 
   $form['submit_button'] = array(
