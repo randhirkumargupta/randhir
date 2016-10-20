@@ -8234,10 +8234,17 @@ div.node{
     text-align: right;
   }
 }
-.story-node-form{
+.node-story-form{
   [id*="field-story-reporter-values"]{
     tbody{
       overflow: visible;
+    }
+  }
+}
+.node-quiz-form{
+  [id*="field-story-reporter-values"]{
+    td {
+      .form-type-textfield > label{display: none;}
     }
   }
 }

@@ -8425,6 +8425,10 @@ div.node #comments h2 {
   text-align: right;
 }
 
-.story-node-form [id*="field-story-reporter-values"] tbody {
+.node-story-form [id*="field-story-reporter-values"] tbody {
   overflow: visible;
+}
+
+.node-quiz-form [id*="field-story-reporter-values"] td .form-type-textfield > label {
+  display: none;
 }
