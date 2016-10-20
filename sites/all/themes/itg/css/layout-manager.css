@@ -1785,8 +1785,8 @@ img {
   cursor: pointer;
 }
 .education-layout-page .ask-question {
-  font-family: roboto-slab;
   padding: 15px;
+  font-family: roboto-slab;
 }
 .education-layout-page .ask-question .form-type-textarea, .education-layout-page .ask-question .form-type-textfield {
   margin: 0;
@@ -1809,6 +1809,11 @@ img {
   left: auto;
   top: auto;
   width: 110px;
+  font-family: roboto-slab;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form textarea {
+  font-family: roboto-slab;
+  height: 65px;
 }
 .education-layout-page .ask-question #itg-custom-ask-an-expert-form #question p {
   color: #000;
@@ -1834,6 +1839,7 @@ img {
   text-transform: uppercase;
   width: 90px;
   cursor: pointer;
+  font-family: roboto-slab;
 }
 
 /*CSS end for education page*/

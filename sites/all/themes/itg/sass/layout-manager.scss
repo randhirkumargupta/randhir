@@ -1462,9 +1462,9 @@ img{
             cursor: pointer;
         }
     }
-   .ask-question{
-       font-family: roboto-slab;
+       .ask-question{
         padding:15px;
+        font-family: roboto-slab;
         .form-type-textarea, .form-type-textfield{
             margin: 0;
             padding: 0;            
@@ -1476,14 +1476,19 @@ img{
                 left: auto;
                 top:auto;
                 width: 110px;
+                font-family: roboto-slab;
+            }
+            textarea{
+                font-family: roboto-slab;
+                height: 65px;
             }
             #question{
                 p{
-                color: #000;
-                font-size: 12px;
-                margin-bottom: 20px;
-                margin-top: 10px;
-            }
+                    color: #000;
+                    font-size: 12px;
+                    margin-bottom: 20px;
+                    margin-top: 10px;
+                }
             }
             #askname, #askemail, input[type="submit"]{
                 float: left;
@@ -1492,7 +1497,7 @@ img{
             #askemail{
                 margin: 0 12px;
             }
-           input[type="submit"]{
+            input[type="submit"]{
                 background: #000 none repeat scroll 0 0;
                 border: medium none;
                 border-radius: 5px;
@@ -1502,7 +1507,8 @@ img{
                 line-height: 29px;
                 text-transform: uppercase;
                 width: 90px;
-                 cursor: pointer;
+                cursor: pointer;
+                font-family: roboto-slab;
             }
         }        
     }
