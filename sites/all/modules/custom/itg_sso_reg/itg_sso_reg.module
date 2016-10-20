@@ -105,3 +105,39 @@ function itg_sso_reg_user_mail($key, &$message, $params) {
       break;
   }
 }
+
+/**
+ * Implements hook_form_alter().
+ * {@inheritdoc}
+ */
+function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
+  //pr($_GET['ReturnTo']);
+  if ($form_id == 'user_login' && !empty($_GET['ReturnTo'])) {
+    array_unshift($form['#validate'], 'itg_sso_user_login_form_validate');
+  }
+}
+
+/**
+ * Implements itg_sso_user_login_form_validate().
+ */
+function itg_sso_user_login_form_validate(&$form, &$form_state) {
+  $sso_role_id = itg_sso_get_user_id(trim($form_state['values']['name']));
+  $sso_user = user_load($sso_role_id);
+  if (!array_key_exists(FRONT_USER, $sso_user->roles)) {
+    form_set_error('name', 'Invalid credentials !');
+  }
+}
+
+/**
+ * Get uid by name
+ * @param sring $name
+ * @return boolean
+ */
+function itg_sso_get_user_id($name) {
+  $itg_query = db_select('users', 'su')
+      ->fields('su', array('uid'))
+      ->condition('name', $name, '=');
+  $itg_result = $itg_query->execute()->fetchField();
+
+  return $itg_result;
+}
