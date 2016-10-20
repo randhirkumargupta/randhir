@@ -2,23 +2,26 @@
 //pending
 
 /**
- * ItgVideogalleryMigration extends XMLMigration 
+ * ItgMegareviewMigration extends XMLMigration 
  */
 class ItgMegareviewMigration extends XMLMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
-    $this->description = t('XML feed (multi items) of content (Videogallery)');
+    $this->description = t('XML feed (multi items) of content (Mega review)');
 
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'long_headline' => t('longheadline'),
-      'shortheadline' => t('shortheadline'),
+      'movietitle' => t('Movie Title'),
+      'megareviewtype' => t('Mega Review Type'),
       'video' => t('Video'),
-      'city' => t('city'),
-      'courtesy' => t('courtesy'),
-      'anchor' => t('anchor'),
-      'categories' => t('categories'),//multi
-      'primarycategory' => t('primarycategory'),
+      'cast' => t('Cast'),
+      'director' => t('Director'),
+      'movieplot' => t('Movie Plot'),
+      'youtubeurl' => t('Youtube Url'),//multi
+      'associatevideo' => t('Associate Video'),
+      'associatephotogallery' => t('Associate Photo Gallery'),
+      'twitterhandletagwidget' => t('Twitter handle & tag (widget)'),
+      'associate_photo_gallery' => t('Associate Photo Gallery'),
       'extralargeimage' => t('extralargeimage'),
       'extra_large_alt' => t('extra_large_alt'),
       'extra_large_title' => t('extra_large_title'),
@@ -34,28 +37,7 @@ class ItgMegareviewMigration extends XMLMigration {
       'extrasmallimage' => t('extrasmallimage'),
       'extra_small_alt' => t('extra_small_alt'),
       'extra_small_title' => t('extra_small_title'),
-      'tags' => t('tags'),//multi
-      'courtesy' => t('courtesy'),
-      'socialmediaintegration' => t('socialmediaintegration'),//checkbox
-      'facebooknarrative' => t('facebooknarrative'),
-      'facebookimage' => t('facebookimage'),
-      'facebookimage_alt' => t('facebookimage_alt'),
-      'facebookimage_title' => t('facebookimage_title'),
-      'twitternarrative' => t('twitternarrative'),
-      'twitterimage' => t('twitterimage'),
-      'twitterimage_alt' => t('twitterimage_alt'),
-      'twitterimage_title' => t('twitterimage_title'),
-      'shortdescription' => t('shortdescription'),
-      'longdescription' => t('longdescription'),
-      'syndication' => t('syndication'),
-      'archive' => t('archive'),
-      'video_duration' => t('video_duration'),
-      'primarycategory' => t('primarycategory'),
-      'configurations' => t('configurations'),//checkbox
-      'commentquestion' => t('commentquestion'),
-      'relatedcontents' => t('relatedcontents'),//multi
-      'expirydate' => t('expirydate'),
-      'scheduledatetime' => t('scheduledatetime'),
+      'reviews' => t('Review'),//Fieldcollection
       'sefurl' => t('Sefurl'),
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
@@ -68,11 +50,11 @@ class ItgMegareviewMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'videogallery.xml';
+    $items_url = $xml_folder . 'mega_review_critic.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/videogallery';
+    $item_xpath = '/megareviewcritic';
     
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /story/item/id.
@@ -81,7 +63,7 @@ class ItgMegareviewMigration extends XMLMigration {
     $items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
     $this->source = new MigrateSourceMultiItems($items_class, $fields);
 
-    $this->destination = new MigrateDestinationNode('videogallery');
+    $this->destination = new MigrateDestinationNode('mega_review_critic');
 
     // The source ID here is the one retrieved from each data item in the XML
     // file, and used to identify specific items
@@ -104,19 +86,14 @@ class ItgMegareviewMigration extends XMLMigration {
     // item xpath since each item xml chunk is processed individually.
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
-    $this->addFieldMapping('title', 'long_headline')->xpath('long_headline');
-    $this->addFieldMapping('field_story_short_headline', 'shortheadline')->xpath('shortheadline');
-    //$this->addFieldMapping('field_story_reporter', 'byline')->xpath('byline');
-    // Byline mapped in prepare
-    $this->addFieldMapping('field_stroy_city', 'city')->xpath('city');
-    $this->addFieldMapping('field_story_courtesy', 'courtesy')->xpath('courtesy');
-    $this->addFieldMapping('field_video_anchor', 'anchor')->xpath('anchor');
-    // configuration mapped in prepare
-    $this->addFieldMapping('field_story_comment_question', 'commentquestion')->xpath('commentquestion');
-    $this->addFieldMapping('field_story_schedule_date_time', 'scheduledatetime')->xpath('scheduledatetime');
-    $this->addFieldMapping('field_story_expiry_date', 'expirydate')->xpath('expirydate');
-    $this->addFieldMapping('field_story_expires', 'videoexpires')->xpath('videoexpires');
-    // Image field 
+    $this->addFieldMapping('title', 'movietitle')->xpath('movietitle');
+    $this->addFieldMapping('field_mega_review_director', 'director')->xpath('director');
+    $this->addFieldMapping('field_mega_review_movie_plot', 'movieplot')->xpath('movieplot');
+    $this->addFieldMapping('field_mega_review_youtube_url', 'youtubeurl')->xpath('youtubeurl');
+    //$this->addFieldMapping('field_mega_review_video', 'associatevideo')->xpath('associatevideo'); // Video
+    $this->addFieldMapping('field_mega_review_photo_gallery', 'associatephotogallery')->xpath('associatephotogallery');
+    $this->addFieldMapping('field_mega_review_twitter', 'twitterhandletagwidget')->xpath('twitterhandletagwidget');
+    // Image field
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
     $this->addFieldMapping('field_story_extra_large_image:title', 'extra_large_title')->xpath('extra_large_title');
@@ -131,45 +108,12 @@ class ItgMegareviewMigration extends XMLMigration {
     $this->addFieldMapping('field_story_small_image:title', 'smallimage_title')->xpath('smallimage_title');
     $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
     $this->addFieldMapping('field_story_extra_small_image:alt', 'extra_small_alt')->xpath('extra_small_alt');
-    $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');
-    
-    // Tags mapped in prepare
-    // Social media integration mapped in prepare
-    
-    // Facebook and twitter image
-    $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
-    $this->addFieldMapping('field_story_facebook_image', 'facebookimage')->xpath('facebookimage');
-    $this->addFieldMapping('field_story_facebook_image:alt', 'facebookimage_alt')->xpath('facebookimage_alt');
-    $this->addFieldMapping('field_story_facebook_image:title', 'facebookimage_title')->xpath('facebookimage_title');
-    $this->addFieldMapping('field_story_tweet', 'twitternarrative')->xpath('twitternarrative');
-    $this->addFieldMapping('field_story_tweet_image', 'twitterimage')->xpath('twitterimage');
-    $this->addFieldMapping('field_story_tweet_image:alt', 'twitterimage_alt')->xpath('twitterimage_alt');
-    $this->addFieldMapping('field_story_tweet_image:title', 'twitterimage_title')->xpath('twitterimage_title');
-    
-    // Video migrate
-    // $this->addFieldMapping('field_upload_video', 'video')->xpath('video');
-   
-    $this->addFieldMapping('field_story_expert_name', 'shortdescription')->xpath('shortdescription');
-    $this->addFieldMapping('field_story_expert_description', 'longdescription')->xpath('longdescription');
-    
-    // Section mapped in prepare
-    
-    $this->addFieldMapping('field_story_syndication', 'syndication')->xpath('syndication');
-    
-    // Dailymotion playlist pending only one category save
-    
-    $this->addFieldMapping('field_story_archive', 'archive')->xpath('archive');
-    
-    //video duration
-    $this->addFieldMapping('field_video_duration', 'video_duration')->xpath('video_duration');
-    $this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
-    $this->addFieldMapping('field_common_related_content', 'relatedcontent')->xpath('relatedcontent');
-    
+    $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');   
   }
   
    public function prepareRow($row) {
     // Category migrate
-    $data_category = '';
+   /* $data_category = '';
 
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
@@ -191,98 +135,50 @@ class ItgMegareviewMigration extends XMLMigration {
     }
     $row->tag_new = $data_tags;
 
-    //social media integration checkboxes
-    if (isset($row->xml->socialmediaintegration) && !empty($row->xml->socialmediaintegration)) {
-      foreach ($row->xml->socialmediaintegration as $key => $social_option) {
-        if ((string) $social_option->facebook == true) {
-          $final_social[]['value'] = 'facebook';
-        }
-        if ((string) $social_option->facebook_instant_article == true) {
-          $final_social[]['value'] = 'facebook_instant_article';
-        }
-        if ((string) $social_option->twitter == true) {
-          $final_social[]['value'] = 'twitter';
-        }
-      }
-    }
-    $row->final_social_checkbox = $final_social;
-    // Configuration settings
-
-    if (isset($row->xml->configurations) && !empty($row->xml->configurations)) {
-      foreach ($row->xml->configurations as $key => $option) {
-        if ((string) $option->googlestandout == true) {
-          $final_option[]['value'] = 'google_standout';
-        }
-        if ((string) $option->comment == true) {
-          $final_option[]['value'] = 'comment';
-        }
-      }
-    }
-    $row->final_config_option = $final_option;
-
-    // Primary category
-    if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
-      $source_cid = (string) $row->xml->primarycategory;
-      $orignal_pcategory = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
-      $row->xml->primarycategory = $orignal_pcategory;
-    }
-
-    // Videogallery Date
-    if (isset($row->xml->storyexpirydate) && !empty($row->xml->storyexpirydate)) {
-      $expire_time = (string) $row->xml->storyexpirydate;
-      $expire_date_time = date('m/d/Y H:i', $expire_time);
-      $row->xml->storyexpirydate = $expire_date_time;
-    }
-    if (isset($row->xml->scheduledatetime) && !empty($row->xml->scheduledatetime)) {
-      $schedule_time = (string) $row->xml->scheduledatetime;
-      $schedule_date_time = date('m/d/Y H:i', $schedule_time);
-      $row->xml->scheduledatetime = $schedule_date_time;
-    }
-    
-    //Byline associate with story
-    $data_byline = '';
-    if (isset($row->xml->bylines->byline) && !empty($row->xml->bylines->byline)) {
-      foreach ($row->xml->bylines->byline as $final_byline) {
-        $source_bid = (string) $final_byline;
-        $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
-        $data_byline[]['target_id'] = $orignal_byline;
-      }
-    }
-    $row->byline_new = $data_byline;
-      // Related content
-    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
-      foreach($row->xml->relatedcontents->relatedcontent as $related){
-        $related_content .= (string) $related.', ';
-      }
-      $final_related_content = rtrim($related_content, ', ');
-      $row->xml->relatedcontents = $final_related_content;
-    }
-
-    return TRUE;
+    return TRUE; */
   }
 
   public function prepare($node, stdClass $row) {
-    $node->teaser = (string) $row->xml->description;
-    if (!empty($row->category_new)) {
-      $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
-    }
-    if (!empty($row->tag_new)) {
-      $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
-    }
-    if (!empty($row->final_config_option)) {
-      $node->field_video_configurations[LANGUAGE_NONE] = $row->final_config_option;
-    }
-    if (!empty($row->final_social_checkbox)) {
-      $node->field_story_social_media_integ[LANGUAGE_NONE] = $row->final_social_checkbox;
-    }
-    if (!empty($row->byline_new)) {
-      $node->field_story_reporter[LANGUAGE_NONE] = $row->byline_new;
-    }
-    if(!empty($row->city)){
-      $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = (string) $row->city;
-    }
-  
+    $node->teaser = (string) $row->xml->description;  
     $node->uid = 291;
   }
+  
+   public function complete($entity, $row) {
+    $node = node_load($entity->nid);
+    $key = 0;
+    
+    if (isset($row->xml->reviews->review) && !empty($row->xml->reviews->review)) {
+      foreach ($row->xml->reviews->review as $value) {
+        $headline = (string) $value->headline;
+        $data_reviewer = '';
+        if (isset($row->xml->reviews->review->reviewers->reviewer) && !empty($row->xml->reviews->review->reviewers->reviewer)) {
+          foreach ($row->xml->reviews->review->reviewers->reviewer as $final_byline) {
+            $source_bid = (string) $final_byline;
+            $orignal_byline = get_itg_destination_id('migrate_map_itgbyline', $source_bid);
+            $data_reviewer[]['target_id'] = $orignal_byline;
+          }
+        }
+        $review_url_link = (string) $value->review_url_link;
+        $description = (string) $value->review_description;
+        $rating = (string) $value->rating;
+        $values = array(
+          'field_name' => 'field_mega_review_review',
+          'field_buzz_headline' => array(LANGUAGE_NONE => array(array('value' => $headline))),
+          'field_story_reporter' => array(LANGUAGE_NONE => $data_reviewer),
+          'field_mega_review_url_link' => array(LANGUAGE_NONE => array(array('value' => $review_url_link))),
+          'field_mega_review_description' => array(LANGUAGE_NONE => array(array('value' => $description))),
+          'field_story_rating' => array(LANGUAGE_NONE => array(array('value' => $rating))),
+        );
+        $field_collection_item = entity_create('field_collection_item', $values);
+        $field_collection_item->setHostEntity('node', $node);
+        
+        $field_collection_item->save(TRUE);
+        
+        $node->field_mega_review_review[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
+        $key++;
+      }
+      field_attach_update('node', $node);
+    }
+   }
 
 }

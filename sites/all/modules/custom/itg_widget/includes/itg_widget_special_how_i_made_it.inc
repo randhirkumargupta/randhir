@@ -44,6 +44,7 @@ function save_special_how_i_made_it_widget_data($auto_review_content) {
  * @return array
  */
 function itg_widget_how_made_it_ordering_data($info) {
+    global $theme;
   $data = '';
   if (!empty($info)) {
     $widget_name = $info['widget_name'];
