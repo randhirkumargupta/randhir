@@ -5197,7 +5197,7 @@ footer{
 .sports-video, .sports-photo{
     margin-top: -15px;
 }
-.siderbar-sport, #block-itg-widget-ipl-tweets{
+.siderbar-sport, #block-itg-widget-ipl-tweets, #block-itg-widget-live-score{
     .widget-title, h2.block-title {
         @include blue-title;
     }
@@ -5482,8 +5482,47 @@ input[type="radio"]:checked + label:after{
     left: 4px;
 }
         } 
-    }
+    }    
 }
+.live-scorecard{
+        text-align: center;   
+        font-family:$itg-roboto;
+        padding-bottom:20px;
+        h4{
+            padding:15px 0 5px 0;
+            span{
+                color:#d72229;                
+            }
+        }
+        .match-location{
+            color:#676767;
+            font-size: 12px;
+        }
+        .batteamscore{
+            color:#d72229;
+            font-size: 40px;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+        .crrrunrate{
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+            letter-spacing: -1px;
+            color:#626262;
+            .crrrunover{
+                display: block;                
+                color:#000;
+            }
+        }
+        .score{
+            margin: 20px 0;
+            .batteam{
+                @include font(12px,null,700);
+                color: #000;                
+            }
+        }
+    }
 /*CSS End sport home page*/
 
 /*CSS start for movie page*/

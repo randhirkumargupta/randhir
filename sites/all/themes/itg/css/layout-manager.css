@@ -2048,6 +2048,44 @@ img {
   width: 120px;
   float: left;
 }
+.sport-home-layout-page .live-scorecard {
+  text-align: center;
+}
+.sport-home-layout-page .live-scorecard h4 {
+  padding: 15px 0 5px 0;
+}
+.sport-home-layout-page .live-scorecard h4 span {
+  color: #d72229;
+}
+.sport-home-layout-page .live-scorecard .match-location {
+  color: #676767;
+  font-size: 12px;
+}
+.sport-home-layout-page .live-scorecard .batteamscore {
+  color: #d72229;
+  font-size: 40px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+.sport-home-layout-page .live-scorecard .crrrunrate {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  color: #626262;
+}
+.sport-home-layout-page .live-scorecard .crrrunrate .crrrunover {
+  display: block;
+  color: #000;
+}
+.sport-home-layout-page .live-scorecard .score {
+  margin: 20px 0;
+}
+.sport-home-layout-page .live-scorecard .score .batteam {
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #000;
+}
 
 /*CSS End sport home page*/
 /*CSS start for movie page*/
