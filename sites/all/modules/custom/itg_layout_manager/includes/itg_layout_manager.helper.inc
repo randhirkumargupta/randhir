@@ -204,8 +204,11 @@ function get_layout_details($section_name, $template_name, $status) {
     }
     
     $result['widget_name'] = $itg_val->widget_name;
+    $result['block_title']="";
     if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
-      $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      if (!empty($itg_val->block_title)) {
+        $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      }
       $result['more_url'] = l('More[+]', 'taxonomy/term/'.$filter_url);
     }else {
       $result['block_title'] = $itg_val->block_title; //for default widgets
@@ -228,7 +231,7 @@ function get_layout_details($section_name, $template_name, $status) {
     
     if (isset($itg_val->widget_name)) {
       // get widget block
-      //p($filter_url);
+     
       $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
     } 
     else {

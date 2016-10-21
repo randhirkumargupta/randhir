@@ -23,6 +23,11 @@
  *
  * @ingroup views_templates
  */
+
+// configuration for social sharing
+$short_url = shorten_url($row->url, 'goo.gl');
+$share_title = addslashes($row->label);
+$share_desc = '';
 ?>
 <?php foreach ($fields as $id => $field): ?>
   <?php if (!empty($field->separator)): ?>
@@ -35,4 +40,4 @@
   <?php print $field->wrapper_suffix; ?>
 <?php endforeach; ?>
 
-<div class="social-share"><ul><li><a class="share" href="#"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>
+<div class="social-share"><ul><li><a class="share" href="#"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>
