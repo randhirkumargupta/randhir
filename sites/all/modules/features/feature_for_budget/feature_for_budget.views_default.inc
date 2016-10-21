@@ -191,7 +191,7 @@ function feature_for_budget_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => '',
+    'image_style' => 'video_landing_page_170_x_127',
     'image_link' => '',
   );
   /* Field: Content: Extra large image */
@@ -202,7 +202,7 @@ function feature_for_budget_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['settings'] = array(
-    'image_style' => '',
+    'image_style' => 'anchors_landing',
     'image_link' => '',
   );
   /* Field: Content: Nid */
