@@ -35,7 +35,7 @@ function itg_loyalty_reward_checkout_form() {
     );
     // Prepare form array.
     $form['name'] = array(
-      '#title' => t('Name'),
+//      '#title' => t('Name'),
       '#type' => 'textfield',
       '#attributes' => array(
         'placeholder' => t('Name'),
@@ -44,7 +44,7 @@ function itg_loyalty_reward_checkout_form() {
       '#required' => TRUE,
     );
     $form['email'] = array(
-      '#title' => t('Email'),
+//      '#title' => t('Email'),
       '#type' => 'textfield',
       '#attributes' => array(
         'placeholder' => t('Email'),
@@ -53,7 +53,7 @@ function itg_loyalty_reward_checkout_form() {
       '#required' => TRUE,
     );
     $form['phone'] = array(
-      '#title' => t('Mobile'),
+//      '#title' => t('Mobile'),
       '#type' => 'textfield',
       '#attributes' => array(
         'placeholder' => t('Mobile'),
@@ -61,8 +61,8 @@ function itg_loyalty_reward_checkout_form() {
       '#required' => TRUE,
     );
     $form['address'] = array(
-      '#title' => t('Address'),
-      '#type' => 'textfield',
+//      '#title' => t('Address'),
+      '#type' => 'textarea',
       '#attributes' => array(
         'placeholder' => t('Address'),
       ),
@@ -77,7 +77,7 @@ function itg_loyalty_reward_checkout_form() {
 //      '#required' => TRUE,
 //    );
     $form['zip_code'] = array(
-      '#title' => t('Zip Code'),
+//      '#title' => t('Zip Code'),
       '#type' => 'textfield',
       '#attributes' => array(
         'placeholder' => t('Pincode'),
