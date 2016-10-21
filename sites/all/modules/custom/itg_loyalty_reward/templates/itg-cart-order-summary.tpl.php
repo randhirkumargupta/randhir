@@ -15,7 +15,8 @@
       <?php foreach ($data['product_detail'] as $key => $cart_detail): ?>    
         
         <div class="cart-checkout-list">
-            <div class="cart-image col-md-2 col-sm-2">
+            <div class="col-md-8 col-sm-8">
+              <div class="cart-image">
                 <?php
                 $product_pic = theme(
                     'image_style', array(
@@ -25,10 +26,8 @@
                 );
                 print $product_pic;
                 ?>
-            </div>
-            <div class="product-details col-md-6 col-sm-6">
-              <div><span>Title:</span><strong><?php print $cart_detail['product']['title']; ?></strong></div>
-              <div><span>Magzine ID:</span><strong><?php print $cart_detail['product']['nid']; ?></strong></div>              
+              </div>
+              <div class="prd-title"><?php print $cart_detail['product']['title']; ?></div>   
             </div>
             <div class="cart-action col-md-4 col-sm-4">
                 <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
