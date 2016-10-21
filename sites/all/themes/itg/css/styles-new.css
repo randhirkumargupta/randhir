@@ -2849,7 +2849,7 @@ body.has-cart-popup {
   border-color: transparent transparent #fff transparent;
   position: absolute;
   left: 75px;
-  top: -20px;
+  top: -24px;
   right: 0;
   margin: 0 auto;
 }
@@ -2872,6 +2872,7 @@ body.has-cart-popup {
 }
 .cart-dropdown .cart-dropdown-added {
   color: #b3b3b3;
+  display: block;
 }
 .cart-dropdown .btn-redeem-points {
   background-color: #a00606;
@@ -2890,11 +2891,13 @@ body.has-cart-popup {
   vertical-align: top;
   width: 100%;
   border-top: 1px solid #d8d8d8;
+  padding-top: 10px;
+  margin-top: 15px;
   text-align: center;
 }
 .cart-dropdown .cart-dropdown-view-cart a {
   font-size: 12px;
-  color: #afafa;
+  color: #afafaf;
 }
 
 @media all and (max-width: 1024px) {
