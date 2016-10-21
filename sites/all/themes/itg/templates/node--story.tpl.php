@@ -184,6 +184,12 @@
             }
            $story_body = str_replace('[ITG:QUIZ:'.$quiz_nid.']', '', $story_body);
           }
+          if (strpos($story_body,'[ITG:POLL:')) {
+            if ( preg_match ('/ITG:POLL:([0-9]+)/', $story_body, $matches_poll)){
+                  $poll_nid = $matches_poll[1];
+            }
+           $story_body = str_replace('[ITG:POLL:'.$poll_nid.']', '', $story_body);
+          }
 
           // Print story body
           print $story_body;
@@ -198,6 +204,11 @@
           if (strpos($node->body['und'][0]['value'], '[ITG:QUIZ:')) {
             $story_body_quiz = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:QUIZ:'.$quiz_nid.']'), $story_body);
             print $story_body_quiz;
+          } 
+          // If Poll Associated with story node.
+          if (strpos($node->body['und'][0]['value'], '[ITG:POLL:')) {
+            $story_body_poll = str_replace($story_body, itg_survey_pqs_associate_poll_with_story($poll_nid), $story_body);
+            print $story_body_poll;
           } 
          ?>
       

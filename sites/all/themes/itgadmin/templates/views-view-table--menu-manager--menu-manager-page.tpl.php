@@ -18,37 +18,43 @@
  * @ingroup views_templates
  */
 ?>
-<table <?php if ($classes) {
+<table <?php
+if ($classes) {
   print 'class="' . $classes . '" ';
-} ?><?php print $attributes; ?>>
-  <?php if (!empty($title) || !empty($caption)) : ?>
+}
+?><?php print $attributes; ?>>
+    <?php if (!empty($title) || !empty($caption)) : ?>
     <caption><?php print $caption . $title; ?></caption>
   <?php endif; ?>
-<?php if (!empty($header)) : ?>
+  <?php if (!empty($header)) : ?>
     <thead>
       <tr>
-          <?php foreach ($header as $field => $label): ?>
-          <th <?php ($field == 'weight' || $field == 'id' || $field =='tid') ? print "style='display:none'" : print ""; ?> <?php if ($header_classes[$field]) {
-          print 'class="' . $header_classes[$field] . '" ';
-        } ?> scope="col">
-    <?php print $label; ?>
+        <?php foreach ($header as $field => $label): ?>
+          <th <?php ($field == 'weight' || $field == 'id' || $field == 'tid') ? print "style='display:none'"  : print ""; ?> <?php
+          if ($header_classes[$field]) {
+            print 'class="' . $header_classes[$field] . '" ';
+          }
+          ?> scope="col">
+              <?php print $label; ?>
           </th>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
       </tr>
     </thead>
-    <?php endif; ?>
+  <?php endif; ?>
   <tbody>
-      <?php
-      $limit = 2 * count($rows);
-      foreach ($rows as $row_count => $row):
-        ?>
-      <tr <?php if ($row_classes[$row_count]) {
+    <?php
+    $limit = 2 * count($rows);
+    foreach ($rows as $row_count => $row):
+      ?>
+      <tr <?php
+      if ($row_classes[$row_count]) {
         print 'class="' . implode(' ', $row_classes[$row_count]) . '"';
-      } ?>>
-            <?php foreach ($row as $field => $content): ?>
-              <?php
-              if ($field == 'draggableviews') {
-                ?>
+      }
+      ?>>
+          <?php foreach ($row as $field => $content): ?>
+            <?php
+            if ($field == 'draggableviews') {
+              ?>
             <td style="display: none">
               <select class="draggableviews-weight form-select" id="edit-draggableviews-2-weight" name="draggableviews[<?php print $row_count ?>][weight]">
                 <?php
@@ -76,25 +82,36 @@
           }
           else if ($field == 'nothing') {
             $arg = arg();
+            $destination = '';
             global $base_url;
+            if ($arg[1] == 'third') {
+              $link = l("<span class='delete-link'>Remove</span>", $base_url . "/itg-menu-manager-remove/" . $row['id'], array("html"=>TRUE,"attributes" => array("class" => array("menu-manager-delete")), "query" => array("delete_path" => "menu-manager/third", "section_id" => $_GET['section_id'], "section_child" => $_GET['section_child'])));
+            }
+            else {
+              $link = l("<span class='delete-link'>Remove</span>", $base_url . "/itg-menu-manager-remove/" . $row['id'], array("html"=>TRUE , "attributes" => array("class" => array("menu-manager-delete")) ,"query" => array("destination" => "menu-manager/second")));
+            }
             ?>
             <td>
-              <a class="menu-manager-delete" href="<?php print $base_url; ?>/itg-menu-manager-remove/<?php print $row['id'] ?>?destination=menu-manager/<?php print $arg[1]; ?>">Remove</a>
+              <?php print $link; ?>
+              ||
+              <a class="menu-manager-edit" href="<?php print $base_url; ?>/itg-menu-manager/?edit_id=<?php print $row['id'] ?>&term_id=<?php print $row['tid'] ?>"><span class="edit-link">Edit</span></a>
             </td>
-        <?php
-        }
-        else {
+            <?php
+          }
+          else {
+            ?>
+            <td <?php ($field == 'weight' || $field == 'id' || $field == 'tid') ? print "style='display:none'"  : print ""; ?> <?php
+            if ($field_classes[$field][$row_count]) {
+              print 'class="' . $field_classes[$field][$row_count] . '" ';
+            }
+            ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
+                <?php print $content; ?>
+            </td>
+            <?php
+          }
           ?>
-            <td <?php ($field == 'weight' || $field == 'id' || $field =='tid') ? print "style='display:none'" : print ""; ?> <?php if ($field_classes[$field][$row_count]) {
-            print 'class="' . $field_classes[$field][$row_count] . '" ';
-          } ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
-      <?php print $content; ?>
-            </td>
-      <?php
-    }
-    ?>
-  <?php endforeach; ?>
+        <?php endforeach; ?>
       </tr>
-<?php endforeach; ?>
+    <?php endforeach; ?>
   </tbody>
 </table>
