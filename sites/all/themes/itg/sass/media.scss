@@ -2,7 +2,7 @@
 @import "itg-variables";
 @import "itg-mixins";
 @media only screen and (max-width:1200px){
-     body{
+    body{
         -webkit-text-size-adjust: none;
         -moz-text-size-adjust: none;
         text-size-adjust: none;
@@ -61,71 +61,71 @@
             }
         }
     } 
-    
-/*    special event page css start here*/
+
+    /*    special event page css start here*/
     .tech-layout-page, .auto-layout-page{
-    .auto-block-1, .auto-block-2{
-        height: auto; 
-        margin-bottom: 50px;
-    }
-    .auto-block-3{
-        .itg-widget-child{
-            .droppable {
-                height: auto;                
+        .auto-block-1, .auto-block-2{
+            height: auto; 
+            margin-bottom: 50px;
+        }
+        .auto-block-3{
+            .itg-widget-child{
+                .droppable {
+                    height: auto;                
+                }
             }
         }
     }
-}
-/*special event page css start here*/  
-/*css start snappost page*/
-.page-snappost .view-content .views-row .snap-post-btm{
-    .snap-button{        
-        a{
-            width: 160px;
-        }
-    }    
-}
-.page-snappost .spanpost-header .spost-right ul li{
+    /*special event page css start here*/  
+    /*css start snappost page*/
+    .page-snappost .view-content .views-row .snap-post-btm{
+        .snap-button{        
+            a{
+                width: 160px;
+            }
+        }    
+    }
+    .page-snappost .spanpost-header .spost-right ul li{
         font-size: 27px;
         padding-left:10px;
     }
-/*css End snappost page*/  
+    /*css End snappost page*/  
 
 
-/*CSS Start Photo and video header crusal page*/
-#block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r {
-    background: #171717;
-    padding: 30px 0 0 0;
-}
-.itg-region{
-    padding: 0;
-    ul{
-        overflow: auto;
-        vertical-align: top;
+    /*CSS Start Photo and video header crusal page*/
+    #block-itg-widget-featured-photo-carousel-r, #block-itg-widget-featured-video-carousel-r {
+        background: #171717;
+        padding: 30px 0 0 0;
     }
-}
-/*CSS End Photo and video header crusal page*/  
+    .itg-region{
+        padding: 0;
+        ul{
+            overflow: auto;
+            vertical-align: top;
+        }
+    }
+    /*CSS End Photo and video header crusal page*/  
 }   
 @media only screen and (max-width:991px){
-/*CSS start education page special*/
-.education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
-    height: auto;
-}
-.education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
-    margin-bottom: 50px;
-}
-.education-layout-page .auto-block-3 .m-bottom40{
-    margin-bottom: 0;
-}
-.education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news{
-    margin: 0;
-}
-/*CSS end education page special*/
+    /*CSS start education page special*/
+    .education-layout-page .itg-layout-672 .droppable, .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
+        height: auto;
+    }
+    .education-layout-page .itg-layout-672 .droppable .auto-block-1, .education-layout-page .itg-layout-672 .droppable .auto-block-2{
+        margin-bottom: 50px;
+    }
+    .education-layout-page .auto-block-3 .m-bottom40{
+        margin-bottom: 0;
+    }
+    .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news{
+        margin: 0;
+    }
+    /*CSS end education page special*/
 }
 
 @media only screen and (max-width:768px){
     header {
-     margin-bottom: 15px;
+        margin-bottom: 15px;
     }
     .mhide{
         display: none;
@@ -284,88 +284,111 @@
         }
     }
 
-/*footer*/
-footer {
-    .footer-top{
-        .footer-top-link{
-            float: none;        
+    /*footer*/
+    footer {
+        .footer-top{
+            .footer-top-link{
+                float: none;        
+            }
         }
-    }
-    .footer-bottom{
-        .cell{
-            width: 50%;
-            margin-bottom: 20px;
-            &:nth-child(2n+1){
-                clear: left;
+        .footer-bottom{
+            .cell{
+                width: 50%;
+                margin-bottom: 20px;
+                &:nth-child(2n+1){
+                    clear: left;
+                }
             }
         }
     }
-}
-/*Start CSS Top Block Grid Home Page*/  
-.top-block{
- .top-colum-1, .top-colum-2, .top-colum-3{
-        padding: 0 15px;
-        @include calculate-width(1);        
-    }       
-}
- .itg-layout-container .itg-h450-section .droppable,  .itg-layout-container .itg-h321-section .droppable, 
+    /*Start CSS Top Block Grid Home Page*/  
+    .top-block{
+        .top-colum-1, .top-colum-2, .top-colum-3{
+            padding: 0 15px;
+            @include calculate-width(1);        
+        }       
+    }
+    .itg-layout-container .itg-h450-section .droppable,  .itg-layout-container .itg-h321-section .droppable, 
     .itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
     .itg-layout-container .itg-top-section .top-colum-2 .droppable,
     .itg-layout-container .itg-top-section .top-colum-1 .droppable,
     .itg-layout-container .top-colum-3 .droppable,
-    .itg-common-section .droppable{
+    .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
+    .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
+    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable{
         height: auto;
     }      
-/*End CSS Top Block Grid Home Page*/  
+    /*End CSS Top Block Grid Home Page*/  
 
-/*css start special event page for osscar*/
-.oscar-layout-page{
-    .left-side{
-        margin-bottom: 50px;
-    }
-    .oscor-photo{
-        overflow: auto;
-        white-space: nowrap;
-         .col-md-6 {
-            margin: 0px;
-            float: none;
-            display: inline-block;
-            vertical-align: top;  
-            .title h3{
-                white-space: pre-wrap;   
-            }
-            :nth-child(n+3){
+    /*css start special event page for osscar*/
+    .oscar-layout-page{
+        .left-side{
+            margin-bottom: 50px;
+        }
+        .oscar-features .col-md-6{
+            margin-bottom:20px;
+            &:nth-child(n+3){
                 margin-top: 0;
             }
         }
-    }
-    .oscar-slider{
-        .bottom-slider{
-            padding-bottom:20px;
-            li{
-               padding: 10px; 
-               width:100% !important;
-               img{
-                    float: left;
-                    margin-right: 10px;
-                    width: 145px;
-               }
+        .oscar-news{
+            h3{
+                @include font(20px);
             }
-            i{
-                color: #ccc;
-                font-size: 25px;
-                text-align: center;
-                width: 100%;
+        }
+        .oscor-photo{
+            overflow: auto;
+            white-space: nowrap;
+            .row{
+                margin: 0;
+            }
+            .col-md-6 {                
+                margin: 0px;
+                float: none;
+                @include display-inline;
+                width: 300px;
+                padding: 0;
+                .title{                    
+                    h3{
+                        min-height: 60px;
+                        white-space: pre-wrap;
+                        font-size: 16px;
+                        line-height: 22px;
+                        padding: 10px;
+                    }
+                }
+                &:nth-child(n+3){
+                    margin-top: 0;
+                }
+            }
+        }
+        .oscar-slider{
+            .bottom-slider{
+                padding-bottom:20px;
+                li{
+                    padding: 10px; 
+                    width:100% !important;
+                    img{
+                        float: left;
+                        margin-right: 10px;
+                        width: 145px;
+                    }
+                }
+                i{
+                    color: #ccc;
+                    font-size: 25px;
+                    text-align: center;
+                    width: 100%;
+                }
             }
         }
     }
-}
 
-/*css end special event page for osscar*/
+    /*css end special event page for osscar*/
 
 
-/*css start snappost page*/
- .page-snappost{
+    /*css start snappost page*/
+    .page-snappost{
         .spanpost-header{               
             .spost-left{            
                 @include calculate-width(1);            
@@ -374,10 +397,10 @@ footer {
                 @include calculate-width(1);
                 ul{
                     li{     
-                         @include font(18px,54px);                                             
+                        @include font(18px,54px);                                             
                         padding-left: 10px;
                         img{
-                             width: 50px;
+                            width: 50px;
                         }
                     }
                 }
@@ -389,7 +412,7 @@ footer {
                     h1{
                         span{
                             a{
-                               @include font(22px,null,400);   
+                                @include font(22px,null,400);   
                             }
                         }
                     }
@@ -400,7 +423,7 @@ footer {
                         a{
                             width: 120px;
                             height: 40px;                            
-                           @include font(16px,40px);                                                  
+                            @include font(16px,40px);                                                  
                             &.disagree{
                                 margin-left: 20px; 
                             }  
@@ -410,44 +433,44 @@ footer {
             }
         }
     }
-.page-snappost .view-content .views-row .snap-post-btm{
-    .snap-button{
-        float: none;
-        width: 100%;
-        a{
-            width: 130px;
+    .page-snappost .view-content .views-row .snap-post-btm{
+        .snap-button{
+            float: none;
+            width: 100%;
+            a{
+                width: 130px;
+            }
         }
-    }
-    .snap-social{
-        width:100%;
-        float: none;
-        overflow: hidden;
-        ul{
+        .snap-social{
             width:100%;
             float: none;
-          li {    
-            width: 32%;
-            text-align: center;
-            }
-        } 
+            overflow: hidden;
+            ul{
+                width:100%;
+                float: none;
+                li {    
+                    width: 32%;
+                    text-align: center;
+                }
+            } 
+        }
     }
-}
-/*css end snappost page*/
+    /*css end snappost page*/
 
-/*CSS start education page special*/
-.education-layout-page .auto-block-3 .m-bottom40{
-    margin-bottom: 40px;
-}
-/*CSS end education page special*/
+    /*CSS start education page special*/
+    .education-layout-page .auto-block-3 .m-bottom40{
+        margin-bottom: 40px;
+    }
+    /*CSS end education page special*/
 
-/*css start side bar section for video and photo*/
-.default-video .sidebar-section-photo, .default-photo .sidebar-section-photo{
- border: none;   
-}
-/*css end side bar section for video and photo*/
+    /*css start side bar section for video and photo*/
+    .default-video .sidebar-section-photo, .default-photo .sidebar-section-photo{
+        border: none;   
+    }
+    /*css end side bar section for video and photo*/
 
- /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content{
+    /*CSS Starts Photo landing page*/
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{
         .view-content{      
             .photo-list{
                 li{ 
@@ -465,7 +488,34 @@ footer {
     }
     /*CSS End Photo landing page*/
 
-
+/*css starts sport page*/
+.sport-home-layout-page .itg-layout-615 .auto-block-1{
+    margin-bottom: 50px;
+}
+.sport-home-layout-page{  
+.right-side{
+    .col-md-12{
+        .ad-widget{
+            margin-top: 40px;
+        }
+        .droppable {
+            margin-top: 40px;
+            border-bottom: 1px solid #ddd;
+        }        
+    }
+}
+.sports-video{
+        .view-content{            
+            .photo-list{
+                margin:0;
+                li{
+                    padding: 0 5px;
+                }
+            }   
+        }            
+    }
+}
+/*css end sport page*/
 
 
 
@@ -491,40 +541,40 @@ footer {
                     max-height:inherit;                        
                     li{
                         margin-bottom: 20px;
-    padding: 0 10px;
-    height: auto;
-    width:100%;
-    .tile{
-                      figure{
-                        width: 144px;
-                        float: left;
-                        margin-right: 15px;    
-                        }    
-                    }                    
+                        padding: 0 10px;
+                        height: auto;
+                        width:100%;
+                        .tile{
+                            figure{
+                                width: 144px;
+                                float: left;
+                                margin-right: 15px;    
+                            }    
+                        }                    
                     } 
-                     > i{
-                color: #ccc;
-                font-size: 20px;
-                text-align: center;
-                width: 100%;
-                &.fa-chevron-up{
-                    margin-bottom: 20px;
-                }
-                &.fa-chevron-down{
-                     margin-bottom: 10px;
-                }
-            }
+                    > i{
+                        color: #ccc;
+                        font-size: 20px;
+                        text-align: center;
+                        width: 100%;
+                        &.fa-chevron-up{
+                            margin-bottom: 20px;
+                        }
+                        &.fa-chevron-down{
+                            margin-bottom: 10px;
+                        }
+                    }
                 } 
             }
         } 
     }
-/*CSS end video landing page*/
+    /*CSS end video landing page*/
 }
 
 
 @media only screen and (max-width:560px){ 
     /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content{
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{
         .view-content{      
             .photo-list{
                 li{       
@@ -729,6 +779,9 @@ footer {
                     width: 113px;
                     @include font(17px,null,$itg-font-medium);
                 }
+                p.error-msg{
+                    padding-left: 140px;
+                }
             }
         }
         .social-list{
@@ -873,7 +926,7 @@ footer {
         }    
     }
     /*End category wise content list css*/
-   
+
     /* start side bar common */
     .sidebar-second{
         .may-be-suggest-container, .top-takes-video-container, .watch-right-now-video{

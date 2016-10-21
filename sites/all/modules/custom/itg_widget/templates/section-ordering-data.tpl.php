@@ -375,7 +375,7 @@ if ($widget_style == 'auto-road-trip') {
                                 <img src="<?php echo $extra_large_image_url; ?>">
                             </a></span>
 
-                        <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>                      
+                        <p><?php echo l(mb_strimwidth($desc, 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>                      
                     </div>
                     <?php
                 }
@@ -422,7 +422,7 @@ if ($widget_style == 'auto-road-trip') {
     </div>
 
 
-<?php } else if ($widget_style == 'tech-tips') { ?>
+<?php } else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' || $widget_style == 'budget-reactions' || $widget_style == 'election-other-story') { ?>
 
     <div class="tech-trip">
         <ul class="trending-videos">
@@ -435,7 +435,6 @@ if ($widget_style == 'auto-road-trip') {
                 }
 
                 $desc = $entity->title;
-
                 
                 ?>
                 <li class="trending-videos-list">
@@ -453,6 +452,76 @@ if ($widget_style == 'auto-road-trip') {
                     ?>
 
                     <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></span></a>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+
+<?php }  else if ($widget_style == 'home-watch' ) { ?>
+ 
+    <div class="tech-trip">
+       <div class="techwatch osscar-video">
+
+            <?php
+            foreach ($data as $count => $entity) {
+                $video_class = "";
+                if (strtolower($entity->type) == 'videogallery') {
+                    $video_class = 'video-icon';
+                }
+
+                $desc = $entity->title;
+                
+                ?>
+                <li class="dont-miss-listing">
+                    <?php
+                    if ((!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
+                        $extra_large_image_url = image_style_url("video_landing_page_170_x_127", $entity->field_story_extra_large_image['und'][0]['uri']);
+                    }
+                    ?>
+
+                    <?php if (!empty($extra_large_image_url)) { ?>
+
+                        <span class="pic video-icon"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a></span>
+
+                    <?php }
+                    ?>
+
+                    <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></span></a>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+
+<?php } else if ($widget_style == 'budget-decoded' ) { ?>
+
+    <div class="tech-trip">
+        <ul class="trending-videos">
+
+            <?php
+            foreach ($data as $count => $entity) {
+                $video_class = "";
+                if (strtolower($entity->type) == 'videogallery') {
+                    $video_class = 'video-icon';
+                }
+
+                $desc = $entity->title;
+                
+                ?>
+                <li class="trending-videos-list">
+                    <?php
+                    if ((!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
+                        $extra_large_image_url = image_style_url("home_page_feature_small", $entity->field_story_extra_large_image['und'][0]['uri']);
+                    }
+                    ?>
+
+                    <?php if (!empty($extra_large_image_url)) { ?>
+
+                        <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a></span>
+
+                    <?php }
+                    ?>
+
+                    <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 65, ".."); ?></span></a>
                 </li>
             <?php } ?>
         </ul>
@@ -689,7 +758,7 @@ if ($widget_style == 'auto-road-trip') {
                 } else {
                     ?>
                         <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
-                            <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                            <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
                         </a>
                 <?php } ?>
                     <h3 class="frist-heading heading-<?php echo $entity->nid ?> <?php echo $entity->type ?> ">

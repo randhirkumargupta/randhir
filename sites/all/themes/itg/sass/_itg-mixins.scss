@@ -370,6 +370,7 @@ $root-font-size: 16px;
             li{               
                 @include display-inline;
                 float: none;
+                width: inherit;
                 a{
                     white-space: initial;
                 }
@@ -463,4 +464,13 @@ $root-font-size: 16px;
             clear: left;
         }
     }    
+}
+
+@mixin blue-title{
+        display: block;
+        font-weight: 500;
+        background: #5585f6;
+        font-size: 16px;
+        padding: 0 10px;
+        @include calculate-width(1);
 }

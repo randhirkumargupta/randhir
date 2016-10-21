@@ -754,7 +754,7 @@ jQuery(document).ready(function() {
         }
     });
     jQuery(".menu-manager-delete").click(function() {
-        var r = confirm("Press a button");
+        var r = confirm("Are you sure want to delete.");
         if (r == true) {
             return true;
         } else {

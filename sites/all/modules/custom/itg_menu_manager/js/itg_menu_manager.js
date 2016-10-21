@@ -38,9 +38,15 @@ jQuery(".itg_menu_manager_form").ready(function() {
             jQuery(document).ajaxStart(function() {
                 jQuery("#widget-ajex-loader").show();
             });
-            $(document).ajaxSuccess(function() {
+            jQuery(document).ajaxSuccess(function() {
                 $("#widget-ajex-loader").css("display", "none");
             });
+            
+            jQuery("#edit-section-child").on('change', function() {
+                var section_chlid = jQuery(this).val();
+                jQuery("#edit-section-id").val(section_chlid);
+            })
+
         }
     };
 })(jQuery);

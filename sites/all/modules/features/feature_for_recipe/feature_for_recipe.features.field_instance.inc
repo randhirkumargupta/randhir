@@ -35,7 +35,7 @@ function feature_for_recipe_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'body',
     'label' => 'Description',
     'required' => 1,
@@ -733,7 +733,7 @@ function feature_for_recipe_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete_tags',
+      'type' => 'entityreference_autocomplete',
       'weight' => 6,
     ),
   );
@@ -921,7 +921,7 @@ function feature_for_recipe_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'body',
     'label' => 'Description',
     'required' => 1,
@@ -1568,7 +1568,7 @@ function feature_for_recipe_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete_tags',
+      'type' => 'entityreference_autocomplete',
       'weight' => 6,
     ),
   );
@@ -3473,7 +3473,7 @@ function feature_for_recipe_field_default_field_instances() {
     'bundle' => 'recipe',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter Byline.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3508,7 +3508,7 @@ function feature_for_recipe_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete_tags',
+      'type' => 'entityreference_autocomplete',
       'weight' => 11,
     ),
   );
@@ -4059,7 +4059,6 @@ function feature_for_recipe_field_default_field_instances() {
   t('Meal type');
   t('Medium image');
   t('Node Identity');
-  t('Please enter Byline.');
   t('Please enter Calorie Count, Numeric value will be entered.
 ');
   t('Please enter Courtesy.');

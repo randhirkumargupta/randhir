@@ -4,7 +4,7 @@
  }
  
 ?>
-<h3><span>Other Albums</span></h3>
+<h3><span>Other Gallery</span></h3>
 <ul class="photo-list">
 <?php foreach($rows as $index => $row): ?>
     <li class="col-md-3">

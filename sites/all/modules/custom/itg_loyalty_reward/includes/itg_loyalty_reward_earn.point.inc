@@ -40,19 +40,30 @@ function itg_loyalty_reward_testpoints() {
  * 
  * @global stdObject $user
  */
-function itg_loyalty_reward_earnpoint() {
+function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL) {
   global $user;
+  if ($uid != NULL) {
+    $user_id = $uid;
+  }
+  else {
+    $user_id = $user->uid;
+  }
   // Check user unique expiration key.
-  $unique_exp_key = itg_loyalty_reward_unique_expiration($user->uid);
+  $unique_exp_key = itg_loyalty_reward_unique_expiration($user_id);
   $time_span = variable_get('lrp_loyality_points_expiry');
-  $inputs = $_POST;
+  if (isset($_POST['type'])) {
+    $inputs = $_POST;    
+  }
+  else {
+    $inputs['type'] = $type;    
+  }  
   $dedicated_point = itg_loyalty_reward_dedicated_point(check_plain($inputs['type']));
   $point_presave = array(
-    'uid' => $user->uid,
+    'uid' => $user_id,
     'loyalty_type' => $dedicated_point['label'],
     'loyalty_points' => $dedicated_point['point'],
     'pointer_key' => $unique_exp_key != '' ? $unique_exp_key : '',
-    'node_id' => 1,
+    'node_id' => $nid != NULL ? $nid : 0,
     'created' => REQUEST_TIME,
   );
   $flag = '';
@@ -64,7 +75,7 @@ function itg_loyalty_reward_earnpoint() {
   }
   else {
     $presave = array(
-      'uid' => $user->uid,
+      'uid' => $user_id,
       'pointer_key' => uniqid('itg'),
       'created' => REQUEST_TIME,
       'expiry_date' => time() + ($time_span * 24 * 60 * 60),
@@ -79,25 +90,25 @@ function itg_loyalty_reward_earnpoint() {
   }
   // Set ajax response code.
   if ($flag == 'new_key') {
-    echo drupal_json_encode(array('code' => 1));
+    watchdog('Loyalty Points', drupal_json_encode(array('code' => 1)));    
   }
   elseif ($flag == 'old_key') {
-    echo drupal_json_encode(array('code' => 2));
+    watchdog('Loyalty Points', drupal_json_encode(array('code' => 2)));    
   }
   else {
-    echo drupal_json_encode(array('code' => 0));
+    watchdog('Loyalty Points', drupal_json_encode(array('code' => 0)));    
   }
 }
 
 /**
  * Insert points into point table.
  *
- * @global stdObject $user
  * @param array $presave
  *   Mixed array for inserting data.
+ * @param string $op
+ *   Type of operation. 'new' and 'update'.
  */
-function itg_loyalty_reward_add_point($presave, $op) {
-  global $user;
+function itg_loyalty_reward_add_point($presave, $op) {  
   $itg_query = db_insert('itg_lrp_loyalty_points')
       ->fields($presave)
       ->execute();

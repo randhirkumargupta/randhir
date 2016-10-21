@@ -4,7 +4,14 @@
 <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { 
             $class_buzz = 'buzz-feedback';
         }
-?>
+
+        // prepare url for sharing
+         $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+         $short_url = shorten_url($actual_link, 'goo.gl');
+         $fb_title = addslashes($node->title);
+         $share_desc = '';
+         $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+        ?>
 <div class="story-section <?php print $class_buzz;?>">
   <div class='<?php print $classes ?>'>
       <?php //pr($node); ?> 
@@ -59,10 +66,10 @@
                       <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name;  ?></li>
                   </ul>
                   <ul class="social-links mhide">
-                      <li><a href="#"><i class="fa fa-facebook"></i></a> <span>958</span></li>
-                      <li><a href="#"><i class="fa fa-twitter"></i></a> <span>8523</span></li>
-                      <li><a href="#"><i class="fa fa-google-plus"></i></a> <span>7258</span></li>
-                      <li><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
+                      <li><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a> <!--<span>958</span>--></li>
+                      <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a> <!--<span>8523</span>--></li>
+                      <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a> <!--<span>7258</span>--></li>
+                      <li><a href="#"><i class="fa fa-comment"></i></a> <!--<span>1522</span>--></li>
                       <?php global $user; ?>
                       <?php if ($user->uid > 0): ?>
                          <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
@@ -160,7 +167,52 @@
       
       
       
-      <div class="description"><?php print render($content['body']); ?></div>
+      <div class="description">
+          <?php
+          $story_body = $node->body['und'][0]['value'];
+
+          if (strpos($story_body,'[ITG:SURVEY:')) {
+            if ( preg_match ('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)){
+                  $survey_nid = $matches_survey[1];
+              }
+            $story_body = str_replace('[ITG:SURVEY:'.$survey_nid.']', '', $story_body);
+          }
+
+          if (strpos($story_body,'[ITG:QUIZ:')) {
+            if ( preg_match ('/ITG:QUIZ:([0-9]+)/', $story_body, $matches_quiz)){
+                  $quiz_nid = $matches_quiz[1];
+            }
+           $story_body = str_replace('[ITG:QUIZ:'.$quiz_nid.']', '', $story_body);
+          }
+          if (strpos($story_body,'[ITG:POLL:')) {
+            if ( preg_match ('/ITG:POLL:([0-9]+)/', $story_body, $matches_poll)){
+                  $poll_nid = $matches_poll[1];
+            }
+           $story_body = str_replace('[ITG:POLL:'.$poll_nid.']', '', $story_body);
+          }
+
+          // Print story body
+          print $story_body;
+
+          // If survey is associated with story, render survey form
+          if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
+            $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:'.$survey_nid.']'), $story_body);
+            print $story_body_survey;
+          }
+
+          // If quiz is associated with story, render quiz form
+          if (strpos($node->body['und'][0]['value'], '[ITG:QUIZ:')) {
+            $story_body_quiz = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:QUIZ:'.$quiz_nid.']'), $story_body);
+            print $story_body_quiz;
+          } 
+          // If Poll Associated with story node.
+          if (strpos($node->body['und'][0]['value'], '[ITG:POLL:')) {
+            $story_body_poll = str_replace($story_body, itg_survey_pqs_associate_poll_with_story($poll_nid), $story_body);
+            print $story_body_poll;
+          } 
+         ?>
+      
+      </div>
       
       </div>
           
@@ -179,18 +231,21 @@
             $field_collection_id = $buzz_item['value'];
             $entity = entity_load('field_collection_item', array($field_collection_id));
             $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+            $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+            $share_uri = $file->uri;
+            $share_image = file_create_url($share_uri);
             $img = '<img src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
             if(!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
             $buzz_output.= '<h1><span>'.$buzz.'</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
             if(!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
             $buzz_output.= '<div class="buzz-img"><div class="social-share">
-          <ul>
+              <ul>
               <li><a href="#" class="share"><i class="fa fa-share-alt"></i></a></li>
-              <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
-          </ul>
-      </div>' . $img . '</div>';
+              <li><a onclick="gogogo('."'".$actual_link."'".', '."'".  addslashes(htmlspecialchars($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'], ENT_QUOTES))."'".', '."'".$share_desc."'".', '."'".$share_image."'".')" class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="javascript:" onclick="twitter_popup('."'".urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])."'".', '."'".urlencode($short_url)."'".')" class="twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a title="share on google+" href="#" onclick="return googleplusbtn('."'".$actual_link."'".')" class="google"><i class="fa fa-google-plus"></i></a></li>
+              </ul>
+          </div>' . $img . '</div>';
             }
             if(!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
             $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
@@ -202,12 +257,6 @@
           print $buzz_output;
         }
         
-         
-        // prepare url for sharing
-         $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-         $short_url = shorten_url($actual_link, 'goo.gl');
-         $fb_title = addslashes($node->title);
-         $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
         ?>
       
       <!-- condition for buzz end -->      
@@ -216,57 +265,8 @@
           <div class="social-list">
             <ul>
                 <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                <li class="mhide"><div id="fb-root"></div>
-                      <script>(function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                        js = d.createElement(s); js.id = id;
-                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
-                        fjs.parentNode.insertBefore(js, fjs);
-                      }(document, 'script', 'facebook-jssdk'));</script>
-                      <a onclick="gogogo('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
- 
-
-<script>
-function gogogo(linkurl, title, desc, image) {
-  FB.ui({
-    method: 'feed',
-    link: linkurl,
-    picture: image,
-    name: title,
-    //caption: desc,
-    description: desc
-  });
-}
-  
-</script>
-<?php
-//function _cg_tweet_share($twitter_msg, $actual_link) {
-//    $twitter_msg = strip_tags($twitter_msg);
-//    $twitter_share = 'http://twitter.com/share?text=' . urlencode(strip_tags($twitter_msg)) . '&url=' . urlencode(shorten_url($actual_link, 'goo.gl')). '&via=indiatoday';
-//    return $twitter_share;
-//}
-?>
-<!-- script for twitter sharing -->
-<script type="text/javascript">
-  function twitter_popup(title, url) {
-    tweetlink = "http://twitter.com/share?text="+title+"&url="+url+"&via=indiatoday";
-    newwindow=window.open(tweetlink,'indiatoday','height=500,width=550,left=440,top=250');
-    if (window.focus) {newwindow.focus()}
-    return false;
-  }
-</script>
-<!-- twitter sharing end here -->
-
-<script>
-function googleplusbtn(url, title, img) {
-  sharelink = "https://plus.google.com/share?url="+url;
-  newwindow=window.open(sharelink,'indiatoday','height=400,width=600,left=440,top=250');
-  if (window.focus) {newwindow.focus()}                                                                                                                                
-  return false;
-}   
-</script>
-<li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li class="mhide"><div id="fb-root"></div><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                 <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
                 <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
@@ -274,12 +274,23 @@ function googleplusbtn(url, title, img) {
                 <li><a href="#">follow the Story</a></li>
             </ul>
           </div>
-          
+              
               <?php if(!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
               <div class="snap-post">
                   <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
-
-                  <div class="agbutton"><button>Agree</button> <button>DisAgree</button> <a href="<?php echo $base_url;?>/snappost">More from Snap post</a></div>
+                  <?php $like = itg_flag_get_count(arg(1), 'like_count');
+                  $dislike = itg_flag_get_count(arg(1), 'dislike_count');
+                  if(!empty($like)) {
+                    $like_count = '('.$like.')';
+                  }
+                  if(!empty($dislike)) {
+                    $dislike_count = '('.$dislike.')';
+                  }
+                  $pid= "voted_".arg(1);
+                  $like= "no-of-likes_".arg(1);
+                  $dislike= "no-of-dislikes_".arg(1);
+                  ?>
+                  <div class="agbutton"><button id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like;?>"><?php print $like_count; ?></span> </button> <button id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike;?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url;?>/snappost"> More from Snap post</a><p class="error-msg" id="<?php print $pid;?>"></p></div>
               </div>
               <?php } ?>
               <div class="tags">

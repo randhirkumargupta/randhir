@@ -32,6 +32,11 @@
             <td class="unit-point-item"><?php print ucfirst($value['earned_points']); ?></td>
         </tr>
         <?php endforeach; ?>
+        <tr>
+            <td class="unit-point-item"></td>
+            <td class="unit-point-item"><strong><?php print t('Total Earned Points'); ?></strong></td>
+            <td class="unit-point-item"><strong><?php print $data['total_earned_so_far']; ?></strong></td>
+        </tr>
       </tbody>     
     </table>
 </div>

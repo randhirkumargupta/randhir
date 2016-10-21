@@ -43,7 +43,7 @@
       <div class="cart-total-block">
         <div class="cart-total-inner">
           <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
-          <div class="checkout"><?php print l(t('REDEEM POINTS'), 'checkout'); ?></div>
+          <div class="checkout"><?php print l(t('REDEEM POINTS'), 'order-summary'); ?></div>
           <div class="points-balance"><span>Balance after redemption</span><span><?php print number_format($remain_point); ?> Points</span></div>
         </div>
       </div>

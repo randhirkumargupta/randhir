@@ -8,6 +8,7 @@ dependencies[] = features
 dependencies[] = features_for_story
 dependencies[] = field_collection_fieldset
 dependencies[] = flexslider_views
+dependencies[] = hs_taxonomy
 dependencies[] = image
 dependencies[] = list
 dependencies[] = metatag

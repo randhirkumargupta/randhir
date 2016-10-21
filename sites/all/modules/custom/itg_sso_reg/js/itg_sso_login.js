@@ -12,11 +12,12 @@
 
             if (uid) {
                 //self.opener.location.reload(); 
-                if (check_sso_link) {
-                   
-                    opener.location.reload();
+                if (check_sso_link && opener) {
+                    
+                        opener.location.reload();
+                    
                 }
-               window.close();
+                window.close();
             }
 
 

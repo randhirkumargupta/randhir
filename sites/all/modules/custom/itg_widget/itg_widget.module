@@ -199,6 +199,10 @@ function itg_widget_block_info() {
       'info' => t('Home Page Poll Widget'),
       'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['sport_poll_widget_block'] = array(
+      'info' => t('Sport Page Poll Widget'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   $blocks['sosorry_social_icons_block'] = array(
       'info' => t('So Sorry Social Icons Custom Block'),
       'cache' => DRUPAL_CACHE_GLOBAL,
@@ -221,7 +225,13 @@ function itg_widget_block_info() {
   );
   $blocks['ipl_tweets'] = array(
     'info' => t('IPL Tweets')
-  );  
+  );
+  $blocks['budget_tweets'] = array(
+    'info' => t('Budget Tweets')
+  );
+   $blocks['live_score'] = array(
+    'info' => t('Live Score')
+  ); 
 
   return $blocks;
 }
@@ -299,6 +309,7 @@ function itg_widget_block_view($delta = '') {
       $info['widget_name'] = 'dont_miss_content_widget';
       $data = itg_widget_dont_miss_ordering_data($info);
       $block['content'] = theme("dont_miss_widget", array("data" => $data));
+      drupal_add_css("");
       break;
     case 'yearende_left_top_news':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
@@ -567,6 +578,10 @@ function itg_widget_block_view($delta = '') {
       $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
       $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
       break;
+   case 'sport_poll_widget_block':
+      $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
+      $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
+      break;
     case 'sosorry_social_icons_block':
       $block['content'] = '<div class="sosorry-social">
     <ul>
@@ -615,11 +630,55 @@ function itg_widget_block_view($delta = '') {
       break;
   case 'ipl_tweets':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');  
-      $block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
+      //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
+        $block['subject'] = '';
       $block['content'] = ipl_tweets();
+      break;
+  case 'budget_tweets':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');  
+      //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
+        $block['subject'] = '';
+      $block['content'] = budget_tweets();
+      break;
+  case 'live_score':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_live_score');  
+     
+        $block['subject'] = '';
+      $data = live_score();
+
+       $block['content'] = theme("live_score_data", array("data" => $data));
       break;
   }
   
  
   return $block;
+}
+/**
+ * File provide get highlights widget data.
+ *
+ * @param array $info
+ */
+function itg_widget_highlights_block_data($info) {
+  $widget_name ='highlights_widget';
+  global $theme;
+     
+        if(isset($_GET['section']) && !empty($_GET['section']))
+        {
+            $selction_name='section';
+        }else{
+            $selction_name='section_name';
+        }
+         $cat_id = $_GET[$selction_name];
+          if ($theme == FRONT_THEME_NAME) {
+          $cat_id = arg(2);
+         }
+  $data = array();
+  
+  if (!empty($widget_name)) {
+    $result = get_view_nodes_form_custom_table_for_widgets_by_category($widget_name,$cat_id, 1, 0);
+    foreach ($result as $entity_data_node) {
+      $entity_data = array("node_data" => node_load($entity_data_node['nid']), "related" => $entity_data_node['extra']);
+    }
+    return $entity_data;
+  }
 }
