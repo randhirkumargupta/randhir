@@ -1092,6 +1092,8 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
       $query->where[1]['conditions'][3]['value'] = $section;
     }
+    if( $view->current_display == 'block_5' )
+    {
     drupal_add_js('
             jQuery(".flexslider").flexslider({
             animation: "slide",
@@ -1100,6 +1102,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
           
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
     );
+    }
   }
   if ($view->name == 'budget' && ($view->current_display == 'budget_election_latest' || $view->current_display=='budget_top_news' )) {
     global $theme;
