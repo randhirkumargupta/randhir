@@ -3107,3 +3107,362 @@ body.has-cart-popup {
   top: 10px;
   width: 20px;
 }
+
+[id*="itg-personalization-edit-profile-form"] {
+  max-width: 780px;
+  margin: 0 auto;
+  background-color: #f8f8f8;
+}
+[id*="itg-personalization-edit-profile-form"] > div {
+  text-align: left;
+  padding: 40px 0;
+  max-width: 480px;
+  width: 100%;
+  vertical-align: top;
+  display: inline-block;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype {
+  text-align: center;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype .form-select {
+  width: 450px;
+  height: 44px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 3px 0 #ccc;
+  color: #bababa;
+  font: 300 16px/normal Roboto;
+  text-align: center;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield .form-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 160px;
+  z-index: 9;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-select {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-select label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-select .form-select {
+  position: absolute;
+  left: 150px;
+  top: 0;
+  border: none;
+  width: 328px;
+  height: 100%;
+  z-index: 9;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea label {
+  width: 150px;
+  height: 128px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea-wrapper {
+  padding-left: 150px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea {
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes > label {
+  font: 300 14px/18px Roboto;
+  color: #757575;
+  display: block;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes {
+  padding: 10px 0;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox {
+  display: inline-block;
+  margin-right: 30px;
+  vertical-align: top;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label {
+  font: 400 13px/18px Roboto;
+  vertical-align: top;
+  color: #757575;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios > label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px 0 0 5px;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio {
+  float: left;
+  margin: 0 0 0 40px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio label {
+  font: 300 14px/36px Roboto;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup div.description {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 150px;
+  z-index: 9;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding label {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield {
+  margin: 0;
+  height: 100%;
+  border: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield .form-text {
+  width: 100%;
+  height: 100%;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup > label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file label {
+  width: 150px;
+  height: 125px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  float: left;
+  position: relative;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file {
+  width: 100%;
+  padding: 10px 10px 10px 160px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
+  width: 100px;
+  background-color: #ededed;
+  border: 1px solid #bababa;
+  height: 28px;
+  float: right;
+  cursor: pointer;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .ajax-progress-throbber {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file div.description {
+  color: #5f5f5f;
+  font: 400 12px/16px Roboto;
+  margin-top: 35px;
+  padding-left: 160px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 240px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file a {
+  font: 400 14px/18px Roboto;
+  color: #757575;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file + .form-submit {
+  color: #ee4d4d;
+  font: 400 13px/18px Roboto;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data {
+  float: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield {
+  max-width: 200px;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  overflow: hidden;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield .form-text {
+  border: 1px solid #ddd;
+  height: 34px;
+  padding: 5px;
+  position: static;
+  width: 100%;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield div.description {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-submit[value="Remove"] {
+  color: #ee4d4d;
+  font-size: 13px;
+  left: 550px;
+  position: absolute;
+  top: 16px;
+  cursor: pointer;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-actions {
+  padding: 20px 0;
+  text-align: center;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-actions .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/28px Roboto;
+  color: #fff;
+  cursor: pointer;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-actions a.button {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/41px Roboto;
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+}
+[id*="itg-personalization-edit-profile-form"] > div table td {
+  position: relative;
+}
+[id*="itg-personalization-edit-profile-form"] > div table td > .form-submit[value="Remove"], [id*="itg-personalization-edit-profile-form"] > div table td .ajax-new-content > .form-submit[value="Remove"] {
+  position: absolute;
+  right: 10px;
+  margin: 0;
+  bottom: 20px;
+}
+[id*="itg-personalization-edit-profile-form"] > div table td .ajax-progress {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div table + div .field-add-more-submit {
+  margin-left: 0;
+}
+[id*="itg-personalization-edit-profile-form"] > div .messages.error.file-upload-js-error {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div input[type="file"] {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+[id*="itg-personalization-edit-profile-form"] > div [id*="edit-submit"] {
+  background: transparent url("../images/btn-blue.png") no-repeat scroll 0 0;
+  border: medium none;
+  color: #fff;
+  cursor: pointer;
+  font: 300 20px/28px Roboto;
+  height: 41px;
+  width: 170px;
+}
