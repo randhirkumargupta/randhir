@@ -1101,7 +1101,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
     );
   }
-  if ($view->name == 'budget' && ($view->current_display == 'budget_election_latest' )) {
+  if ($view->name == 'budget' && ($view->current_display == 'budget_election_latest' || $view->current_display=='budget_top_news' )) {
     global $theme;
 
     if ($theme != 'seven') {
