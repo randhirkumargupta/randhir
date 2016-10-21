@@ -120,6 +120,10 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_poll');
     save_poll_widget_data($form_state);
   }
+  elseif ($current_display == 'highlights_widget_conent') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_highlights');
+    save_highlights_widget_data($form_state);
+  }
   elseif ($current_display == 'issue_base_magazin_widget') {
     module_load_include('inc', 'itg_widget', 'includes/itg_issue_base_magazin_widget');
     save_issue_magazin_widget_data($form_state);
