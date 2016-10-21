@@ -10,7 +10,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h2><?php print $row['title']; ?></h2>    
+        <h2><?php print $rows[0]['title']; ?></h2>    
         <div class="social-icon desktop-hide">
             <ul>
                 <li><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
