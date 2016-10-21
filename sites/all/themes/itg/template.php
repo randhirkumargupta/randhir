@@ -100,19 +100,19 @@ function itg_preprocess_page(&$variables) {
   }
   
   // Access domain
-  $format = domain_select_format();
-  foreach (domain_domains() as $data) {
-    if ($data['valid'] || user_access('access inactive domains')) {
-      $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
-    }
-  }
-  
-  // Add another page.tpl file for existing domains
-  $parse = parse_url($base_url);
-
-  if(in_array($parse['host'], $options)){
-    $variables['theme_hook_suggestions'][] = 'page__event_domain';
-  }
+//  $format = domain_select_format();
+//  foreach (domain_domains() as $data) {
+//    if ($data['valid'] || user_access('access inactive domains')) {
+//      $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
+//    }
+//  }
+//  
+//  // Add another page.tpl file for existing domains
+//  $parse = parse_url($base_url);
+//
+//  if(in_array($parse['host'], $options)){
+//    $variables['theme_hook_suggestions'][] = 'page__event_domain';
+//  }
 }
 
 /**
