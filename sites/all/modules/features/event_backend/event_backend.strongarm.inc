@@ -139,16 +139,22 @@ function event_backend_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '34',
+          'weight' => '8',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '48',
+          'weight' => '14',
         ),
         'additional_settings' => array(
-          'weight' => '49',
+          'weight' => '15',
+        ),
+        'domain' => array(
+          'weight' => '16',
+        ),
+        'redirect' => array(
+          'weight' => '30',
         ),
       ),
       'display' => array(),
@@ -276,6 +282,27 @@ function event_backend_strongarm() {
   $strongarm->name = 'node_submitted_sponsor';
   $strongarm->value = 0;
   $export['node_submitted_sponsor'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_event_backend_pattern';
+  $strongarm->value = 'event/[node:title]';
+  $export['pathauto_node_event_backend_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_sponsor_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_sponsor_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_sponsor_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_sponsor_pattern'] = $strongarm;
 
   return $export;
 }
