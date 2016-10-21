@@ -11,13 +11,13 @@ jQuery(".itg_menu_manager_form").ajaxSuccess(function(event, xhr, settings) {
     var url_type = jQuery("input[name=url_type]").val();
     if (menu_level_val == 'third' && section_value == 0) {
         jQuery("input[type=text]").val("");
-        jQuery("input[name=title]").attr("disabled", "disabled");
+        //jQuery("input[name=title]").attr("disabled", "disabled");
         jQuery("input[name=url]").attr("disabled", "disabled");
         jQuery("div#decided-section").css("display", "inline-block !important");
     }
 
     if (menu_level_val == 'second') {
-        jQuery("input[name=title]").removeAttr("disabled");
+        //jQuery("input[name=title]").removeAttr("disabled");
         jQuery("input[name=url]").removeAttr("disabled");
     }
 
@@ -28,7 +28,7 @@ jQuery(".itg_menu_manager_form").ajaxSuccess(function(event, xhr, settings) {
 
 
 jQuery(".itg_menu_manager_form").ready(function() {
-    jQuery("#itg-menu-manager-form input[type=text]").attr("disabled", "disabled");
+    //jQuery("#itg-menu-manager-form input[type=text]").attr("disabled", "disabled");
 });
 
 
