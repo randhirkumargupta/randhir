@@ -1119,6 +1119,25 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
     
   }
+  //  condition for election most popular
+   if ($view->name == 'most_popular' && ($view->current_display == 'elections_most_popular' )) {
+    global $theme;
+
+    if ($theme != 'seven') {
+      if ($theme == FRONT_THEME_NAME) {
+        $section = arg(2);
+      }
+      else {
+        $section = $_GET['section'];
+      }
+      if (empty($section)) {
+        $section = $_GET['section_name'];
+      }
+
+      $query->where[1]['conditions'][3]['value'] = $section;
+    }
+    
+  }
 
 
   if ($view->name == 'special_entertainment' && ($view->current_display == 'oscar_videos' || $view->current_display == 'oscar_photos')) {

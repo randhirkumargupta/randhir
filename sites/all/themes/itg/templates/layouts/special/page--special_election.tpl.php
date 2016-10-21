@@ -12,11 +12,20 @@
 
 <?php
 global $theme;
+$live_url = "";
 $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
-
+$highlights = itg_widget_highlights_block_data();
+$device = itg_live_tv_company('web');
+if (!empty($device[0])) {
+    $live_tv_get_details = node_load($device[0]);
+    $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
+    if (filter_var($live_url, FILTER_VALIDATE_URL)) {
+        $live_url = '<iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>';
+    }
+}
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
@@ -109,7 +118,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
       }
       ?>
       <div class="itg-layout-container <?php echo $itg_class; ?>">
-
+ <?php
+                if (!empty($highlights['node_data']->title)) {
+                    echo '<span class="title-highlights"><h2>' . mb_strimwidth($highlights['node_data']->title, 0, 90, ".."). '</h2><span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span></span>';
+                }
+                ?>
         <div class="row election-page">
           <div class="col-md-8 col-sm-8 col-sx-12 left-side">
             <div class="row itg-graph">
@@ -164,6 +177,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 </div>
               </div>
             </div>
+              <?php if ($theme == 'itgadmin' || (!empty($live_url) || $highlights['node_data']->field_story_highlights['und'][0]['value'] !="" )) { ?>
             <div class="row itg-325-layout">
               <div class="col-md-6">
                 <div class="itg-widget">
@@ -185,7 +199,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         </div>
 <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                      <div class="data-holder" id="itg-block-3"><?php print $live_url; ?></div>
                     </div>             
                   </div>
                 </div>
@@ -210,12 +224,30 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         </div>
 <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-4"><?php print $widget_data['itg-block-4']['widget']; ?></div>
+                      <div class="data-holder" id="itg-block-4"> <div class="auto-block-2">
+                <div class="special-top-news">
+
+                    <ul class="itg-listing">   
+                        <?php
+                        foreach ($highlights['node_data']->field_story_highlights['und'] as $index => $row) {
+
+                            $desc = $row['value'];
+                            ?>
+                            <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$highlights['node_data']->nid}")) ?></li>
+
+                        <?php } ?>
+
+                </ul>
+
+                </div>
+
+                    </div></div>
                     </div>             
                   </div>
                 </div>
               </div>
             </div>
+              <?php } ?>
             <div class="row itg-map">
               <div class="col-md-6">
                 <div class="itg-widget">
@@ -262,7 +294,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         </div>
 <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-6"><?php print $widget_data['itg-block-6']['widget']; ?></div>
+                      <div class="data-holder" widget-style="election-other-story" id="itg-block-6"><?php print $widget_data['itg-block-6']['widget']; ?></div>
                     </div>             
                   </div>
                 </div>
