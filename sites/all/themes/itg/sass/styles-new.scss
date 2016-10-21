@@ -1074,8 +1074,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   .unit-description{
     width: 100%;
     border-collapse: collapse;
+    border: 1px solid #e0e0e0;
     border-radius: 5px;
     margin: 0 auto;
+    tr{
+      border-bottom: 1px solid #e0e0e0;
+    }
     th, td{
       padding: 10px;
       max-width: 300px;
@@ -1099,7 +1103,6 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
     }
     td{
-      border: 1px solid #e0e0e0;
       text-align: center;
       &:first-child{
         text-align: left;
@@ -1125,6 +1128,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
       strong{
         font-weight: 500;
+      }
+      a{
+        color: #1a3c8d;
       }
     }
   }
@@ -1450,6 +1456,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         display: inline-block;
         vertical-align: top;
         padding: 0;
+        text-transform: uppercase;
+        font-family: roboto;
       }
       .form-radios{
         .form-item{
@@ -1468,7 +1476,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     .poll-replace-id .form-submit{
         width: 100px;
         height: 36px;
-        background-color: #ccc;
+        background-color: #e3e3e3;
         border: none;
         width: 100px;
         height: 36px;
@@ -1478,6 +1486,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         color: #323232;
         margin: 0 auto;
         display: inherit;
+        font-size: 14px;
       }
   }
 }
@@ -2212,48 +2221,33 @@ body.has-cart-popup{
   } 
 }
 [id*="itg-loyalty-reward-checkout-form"]{
-  margin: 20px 0;
-  max-width: 600px;
-  .form-type-textfield{
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    position: relative;
+  padding: 20px;
+  > div > .form-item{
+    margin-bottom: 15px;
+  }
+  .form-text{
+    height: 42px;
+    border: 1px solid #d9d9d9;
     width: 100%;
-    margin: 10px 0;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    label{
-      width: 150px;
-      padding: 0 20px;
-      font: 300 14px/36px Roboto;
-      background-color: #fbfbfb;
-      border-right: 1px solid #e0e0e0;
-      z-index: 99;
-      position: relative;
-      display: inline-block;
-      vertical-align: top;
-    }
-    .form-text{
-      position: absolute;
-      left: 0;
-      top: 0;
-      border: none;
-      width: 100%;
-      height: 100%;
-      padding-left: 160px;
-      z-index: 9;
-    }
+    font: 400 14px/18px Roboto;
+  }
+  .form-textarea{
+    height: 82px;
+    border: 1px solid #d9d9d9;
+    width: 100%;
+    font: 400 14px/18px Roboto;
   }
   .form-submit{
-    background: url(../images/btn-blue.png) no-repeat;
-    height: 41px;
-    border: none;
-    width: 170px;
-    font: 300 20px/28px Roboto;
+    background-color: #000;
+    border: 1px solid #000;
+    border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    margin-top: 10px;
+    font: 400 14px/28px Roboto;
+    height: 50px;
+    padding: 0 20px;
+    margin-top: 5px;
+    width: auto;
   }
 }
 .page-order{
@@ -2804,7 +2798,7 @@ body.has-cart-popup{
   background-color: #fff;
   box-shadow: 0 0 15px #999;
   left: 0;
-  top: 20px;
+  top: 30px;
   padding: 15px 15px 10px;
   position: absolute;
   transform: translateX(-50%);
@@ -2816,10 +2810,10 @@ body.has-cart-popup{
     height: 0;
     border-style: solid;
     border-width: 15px;
-    border-color: #fff transparent transparent transparent;
+    border-color: transparent transparent #fff transparent;
     position: absolute;
-    left: 0;
-    top: -14px;
+    left: 75px;
+    top: -20px;
     right: 0;
     margin: 0 auto;
   }
@@ -2886,5 +2880,150 @@ body.has-cart-popup{
   .tech-block_5 .flexslider .flex-direction-nav a.flex-next, 
   .auto-block_5 .flexslider .flex-direction-nav a.flex-next{
     right: 0;
+  }
+}
+
+.page-order-confirmation{
+  #main{
+    padding: 50px 0;
+  }
+  .thankyou-block{
+    text-align: center;
+    h2{
+      font: 500 24px/32px Roboto;
+      color: #464646;
+    }
+    p{
+      font: 400 15px/24px Roboto;
+      color: #a8a8a8;
+      padding: 10px 0 30px;
+    }
+  }
+  .order-summary-block{
+    border: 1px solid #dedede;
+    h3{
+      font: 500 20px/28px Roboto;
+      color: #464646;
+      padding: 10px;
+      text-align: center;
+    }
+    .order-id{
+      background-color: #f3f3f3;
+      border: solid #dedede;
+      border-width: 1px 0;
+      padding: 8px 20px;
+      color: #828282;
+      font: 400 15px/18px Roboto;
+      span{
+        font: 500 14px/18px Roboto;
+        color: #000;
+      }
+    }
+  }
+  section.sidebar{
+    border: none;
+    #block-itg-ads-ad-right-sidebar-1 {
+      border: 1px solid #ddd;
+      padding: 30px;
+    }
+  }
+}
+
+.page-order-summary{
+  header{
+    margin: 0;
+  }
+  #main{
+    padding: 50px 0;
+  }
+  .order-address-wrapper{
+    background-color: #ededed;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    padding: 15px 0;
+    h3{
+      font: 500 20px/28px Roboto;
+      color: #000;
+      padding-bottom: 5px;
+    }
+    address{
+      font: normal 400 15px/22px Roboto;
+      color: #000;
+      span{
+        display: block;
+      }
+    }
+    #change-address{
+      display: block;
+      padding: 7px 10px;
+      font: 500 20px/20px Roboto;
+      background-color: #ccc;
+      box-shadow: 2px 2px 0 #000;
+      color: #000;
+      cursor: pointer;
+      max-width: 240px;
+      text-align: center;
+      text-transform: uppercase;
+      margin: 30px 0;
+    }
+  }
+  .sent-on-message{
+    font: normal 400 15px/20px Roboto;
+    color: #000;
+    padding: 15px 20px;
+    span{
+      color: #0c9ae3;
+    }
+  }
+  .itg-ads-block{
+    padding: 30px;
+    border: 1px solid #dedede;
+    text-align: center;
+  }
+  .cart-total-block{
+    background-color: #fff;
+    border: 1px solid #dedede;
+    margin-bottom: 30px;
+  }
+}
+#change-address-popup{
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
+  .popup-inner{
+    width: 100%;
+    max-width: 370px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 480px;
+    h2{
+      color: #474747;
+      font: normal 400 23px/18px Roboto;
+      background-color: #ececec;
+      padding: 13px;
+    }
+  }
+  .close-popup{
+    color: #868686;
+    font-size: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    top: 10px;
+    width: 20px;
   }
 }

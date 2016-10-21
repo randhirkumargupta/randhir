@@ -230,5 +230,12 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  elseif ($view->name == "highlights_widget" && $view->current_display == 'highlights_widget_conent') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Highlights Content By Section Widget'), 'highlights-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $view->attachment_before = $header_content;
+    }
+  }
  
 }

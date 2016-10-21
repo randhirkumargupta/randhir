@@ -120,6 +120,14 @@ Drupal.behaviors.my_custom_behavior = {
     }
     placeHolder('#edit-keyword-wrapper > label', '#edit-keyword-wrapper');
     
+    
+    // Open and Close popup jQuery on Order Summary page
+    $('body').on('click', '#change-address', function(){
+      $('body').find('#change-address-popup').show();
+    });
+    $('#change-address-popup').on('click', '.close-popup', function(){
+      $(this).closest('#change-address-popup').hide();
+    });
   }
 };
 

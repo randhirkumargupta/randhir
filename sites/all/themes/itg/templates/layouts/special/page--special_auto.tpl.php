@@ -92,8 +92,7 @@ if ($theme != 'itgadmin') {
  
 
 <div class="itg-layout-container <?php echo $itg_class; ?> auto-layout-page">
-    <?php $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
-  print render($block['content']); ?>
+    
     <?php if(isset($widget_data['big_story'])) : ?>
     <div class="row">
         <div class="col-md-12">

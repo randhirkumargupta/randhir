@@ -1021,8 +1021,9 @@ footer{
                     height: 37px;
                     line-height: 37px;
                     border-right: 1px solid $footer-border-color;
-                    font-size: 17px;
+                    font-size: 16px;
                     display: block;
+                    text-transform: uppercase;
                 }
             }
         }
@@ -1615,8 +1616,7 @@ footer{
                 @include clearfix;
                 li{  
                     @include float(left);
-                    padding: 0 5px;
-                    border-right: 1px solid #ddd;
+                    padding: 0 5px;                    
                     span.share-count{
                         display: block;
                         @include font(44px,44px,500);
@@ -1856,7 +1856,10 @@ footer{
         @include font(12px);
         padding-bottom: 10px;
         border-bottom: 1px solid #cdcdcd;
-        margin-bottom: 35px;                             
+        margin-bottom: 35px;   
+        .profile-detail ul li{
+            border-right: 1px solid #ddd;
+        }
     }    
     .buzz-section{
         margin:60px 0;
@@ -3110,7 +3113,7 @@ footer{
     }
 
 }
-.view-video-list-of-category, .view-video-landing-header, .view-so-sorry, .view-programme-content, .sports-video, .sports-photo{    
+.view-video-list-of-category, .view-video-landing-header, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{    
     .views-exposed-form{
         display: none;
     }
@@ -4973,7 +4976,7 @@ footer{
         }        
         .itg-widget-child{
             .droppable{
-            height: 310px;            
+                height: 310px;            
             }
         }        
     }
@@ -5163,11 +5166,12 @@ footer{
             display: none;
         }
         .form-type-textfield{
-            margin:0 0 10px;
+            margin:0 0 15px;
             padding:0;
             @include pos(relative);
             input[type="text"]{
                 width: 100%;
+                height: 35px;
             }
             span.error{
                 background: #fff none repeat scroll 0 0;
@@ -5189,15 +5193,66 @@ footer{
             font-family: roboto-slab;
             font-size: 18px;
             border-radius: 5px;
+            cursor: pointer;
         }
+    }
+    .ask-question{
+        padding:15px;
+        font-family: roboto-slab;
+        .form-type-textarea, .form-type-textfield{
+            margin: 0;
+            padding: 0;            
+        }
+        #itg-custom-ask-an-expert-form{
+            @include clearfix;
+            input[type="text"]{
+                position: static;
+                left: auto;
+                top:auto;
+                width: 110px;
+                font-family: roboto-slab;
+            }
+            textarea{
+                font-family: roboto-slab;
+                height: 65px;
+            }
+            #question{
+                p{
+                    color: #000;
+                    font-size: 12px;
+                    margin-bottom: 20px;
+                    margin-top: 10px;
+                }
+            }
+            #askname, #askemail, input[type="submit"]{
+                float: left;
+                width: 33%;
+            }
+            #askemail{
+                margin: 0 12px;
+            }
+            input[type="submit"]{
+                background: #000 none repeat scroll 0 0;
+                border: medium none;
+                border-radius: 5px;
+                color: #fff;                
+                font-size: 16px;
+                height: 32px;
+                line-height: 29px;
+                text-transform: uppercase;
+                width: 90px;
+                cursor: pointer;
+                font-family: roboto-slab;
+            }
+        }        
     }
 }
 /*CSS end for education page*/
 /*CSS start sport home page*/
-.sports-video, .sports-photo{
+.page-sports-video, .page-sports-photo{
     margin-top: -15px;
 }
-.siderbar-sport, #block-itg-widget-ipl-tweets{
+.siderbar-sport, #block-itg-widget-ipl-tweets, #block-itg-widget-live-score{
     .widget-title, h2.block-title {
         @include blue-title;
     }
@@ -5247,19 +5302,20 @@ footer{
                 }
             }
             .auto-block-2{
-        border: 1px solid #ddd;
-        .special-top-news{
-            position: relative;
-            overflow: hidden;
-            .widget-title{
-                position: absolute;
+                border: 1px solid #ddd;
+                .special-top-news{
+                    position: relative;
+                    overflow: hidden;
+                    height: 100%;
+                    .widget-title{
+                        position: absolute;
+                    }
+                    .itg-listing{
+                        padding-top: 20px;
+                        border: none;
+                    }
+                }
             }
-            .itg-listing{
-                padding-top: 20px;
-                border: none;
-            }
-        }
-    }
     }
     .itg-layout-225{
         .droppable {
@@ -5349,9 +5405,12 @@ footer{
         }*/
     }
     .sports-video{
-        .view-content .photo-list li{
-            padding: 0 15px;
-        }
+        .view-content{
+            @include photo-scroll;
+          .photo-list li{
+                padding: 0 15px;
+            }  
+        } 
         ul{
             @extend .list-none;
             figure{
@@ -5482,8 +5541,47 @@ input[type="radio"]:checked + label:after{
     left: 4px;
 }
         } 
-    }
+    }    
 }
+.live-scorecard{
+        text-align: center;   
+        font-family:$itg-roboto;
+        padding-bottom:20px;
+        h4{
+            padding:15px 0 5px 0;
+            span{
+                color:#d72229;                
+            }
+        }
+        .match-location{
+            color:#676767;
+            font-size: 12px;
+        }
+        .batteamscore{
+            color:#d72229;
+            font-size: 40px;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+        .crrrunrate{
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+            letter-spacing: -1px;
+            color:#626262;
+            .crrrunover{
+                display: block;                
+                color:#000;
+            }
+        }
+        .score{
+            margin: 20px 0;
+            .batteam{
+                @include font(12px,null,700);
+                color: #000;                
+            }
+        }
+    }
 /*CSS End sport home page*/
 
 /*CSS start for movie page*/
@@ -5683,3 +5781,8 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*css end special page*/
+/*css start taboola page*/
+.taboola{
+    margin-top: 40px;
+}
+/*css end taboola page*/

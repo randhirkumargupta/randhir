@@ -1,4 +1,4 @@
-<div class="sports-photo">
+<div class="page-sports-photo">
 <div class="view-content">
     <ul class="photo-list"> 
         <?php foreach ($rows as $index => $row) {

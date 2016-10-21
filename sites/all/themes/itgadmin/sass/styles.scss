@@ -2547,50 +2547,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-.itg-popup{
-  @extend .hide;
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  @extend .full;
-  z-index: 99999;
-  .popup-content{
-    width: 800px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px #000;
-    background-color: #fff;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    max-height: 500px;
-  }
-  .popup-head{
-    @extend .pos-rel;
-    padding: 20px;
-    border-bottom: 1px solid #d9d9d9;
-  }
-  .popup-body{
-    padding: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  .itg-close-popup{
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid #d00b26;
-    background: url('../images/cross_small.png') center center no-repeat #fff;
-    text-indent: -9999px;
-  }
-}
+
 [id*="itg-social-media-form"]{
   > div{
     .form-item-itg-smi{
@@ -3072,7 +3029,7 @@ fieldset#edit-select{
 .details-parent{position: absolute; bottom: 0; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
 .details-parent .photo-title{font-size: 16px;}
 .details-parent .photo-title, .details-parent .image-description, .details-parent .photo-credit{overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-.audio-div{position: relative;}
+.audio-div{padding-top: 10px;}
 .view-content > .item-list > ul > li > .category-manager-details{background-color: #efefef;}
 .show{display: block;}
 .hide{display: none;}
@@ -7023,6 +6980,8 @@ div.node{
         display: inline-block;
         vertical-align: top;
         padding: 0;
+        text-transform: uppercase;
+        font-family: roboto;
       }
       .form-radios{
         .form-item{
@@ -7039,7 +6998,7 @@ div.node{
     .poll-replace-id .form-submit{
         width: 100px;
         height: 36px;
-        background-color: #ccc;
+        background-color: #e3e3e3;
         border: none;
         width: 100px;
         height: 36px;
@@ -7048,6 +7007,7 @@ div.node{
         margin-top: 20px;
         font-size: 500;
         color: #323232;
+        font-size: 14px;
       }
   }
 }
@@ -8164,7 +8124,7 @@ div.node{
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-image-caption textarea{height: 50px;}
 [id*="views-exposed-form-Event-backend-page"]{
   .views-submit-button{
-    [id*="edit-submit-event-backend"]{
+    .form-submit{
       margin-top: 26px;
     }
     #custom-event-type{
@@ -8219,6 +8179,32 @@ div.node{
     .form-submit{
       margin-left: 10px !important;
       margin-top: 26px !important;
+    }
+  }
+}
+[id*="comment-global-config"]{
+  .form-submit{
+    @extend .btn;
+    @extend .btn-save;
+    margin-left: 250px;
+  }
+  #pre-record{
+    font-weight: bold;
+    padding: 30px 0;
+    text-align: right;
+  }
+}
+.node-story-form{
+  [id*="field-story-reporter-values"]{
+    tbody{
+      overflow: visible;
+    }
+  }
+}
+.node-quiz-form{
+  [id*="field-story-reporter-values"]{
+    td {
+      .form-type-textfield > label{display: none;}
     }
   }
 }

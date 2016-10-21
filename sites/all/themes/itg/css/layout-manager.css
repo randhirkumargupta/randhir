@@ -1756,11 +1756,12 @@ img {
   display: none;
 }
 .education-layout-page #itg-newslatter-register-form .form-type-textfield {
-  margin: 0 0 10px;
+  margin: 0 0 15px;
   padding: 0;
 }
 .education-layout-page #itg-newslatter-register-form .form-type-textfield input[type="text"] {
   width: 100%;
+  height: 35px;
 }
 .education-layout-page #itg-newslatter-register-form .form-type-textfield span.error {
   background: #fff none repeat scroll 0 0;
@@ -1781,6 +1782,64 @@ img {
   font-family: roboto-slab;
   font-size: 18px;
   border-radius: 5px;
+  cursor: pointer;
+}
+.education-layout-page .ask-question {
+  padding: 15px;
+  font-family: roboto-slab;
+}
+.education-layout-page .ask-question .form-type-textarea, .education-layout-page .ask-question .form-type-textfield {
+  margin: 0;
+  padding: 0;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form {
+  zoom: 1;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form:before, .education-layout-page .ask-question #itg-custom-ask-an-expert-form:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form:after {
+  clear: both;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form input[type="text"] {
+  position: static;
+  left: auto;
+  top: auto;
+  width: 110px;
+  font-family: roboto-slab;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form textarea {
+  font-family: roboto-slab;
+  height: 65px;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form #question p {
+  color: #000;
+  font-size: 12px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form #askname, .education-layout-page .ask-question #itg-custom-ask-an-expert-form #askemail, .education-layout-page .ask-question #itg-custom-ask-an-expert-form input[type="submit"] {
+  float: left;
+  width: 33%;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form #askemail {
+  margin: 0 12px;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form input[type="submit"] {
+  background: #000 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  height: 32px;
+  line-height: 29px;
+  text-transform: uppercase;
+  width: 90px;
+  cursor: pointer;
+  font-family: roboto-slab;
 }
 
 /*CSS end for education page*/
@@ -2047,6 +2106,44 @@ img {
 .sport-home-layout-page .poll-wrapper .poll-replace-id .poll-past-percentage-progess {
   width: 120px;
   float: left;
+}
+.sport-home-layout-page .live-scorecard {
+  text-align: center;
+}
+.sport-home-layout-page .live-scorecard h4 {
+  padding: 15px 0 5px 0;
+}
+.sport-home-layout-page .live-scorecard h4 span {
+  color: #d72229;
+}
+.sport-home-layout-page .live-scorecard .match-location {
+  color: #676767;
+  font-size: 12px;
+}
+.sport-home-layout-page .live-scorecard .batteamscore {
+  color: #d72229;
+  font-size: 40px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+.sport-home-layout-page .live-scorecard .crrrunrate {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  color: #626262;
+}
+.sport-home-layout-page .live-scorecard .crrrunrate .crrrunover {
+  display: block;
+  color: #000;
+}
+.sport-home-layout-page .live-scorecard .score {
+  margin: 20px 0;
+}
+.sport-home-layout-page .live-scorecard .score .batteam {
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #000;
 }
 
 /*CSS End sport home page*/
