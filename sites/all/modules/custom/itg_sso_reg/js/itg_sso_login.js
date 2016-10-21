@@ -14,12 +14,8 @@
                 //self.opener.location.reload(); 
                 if (check_sso_link) {
                     
-                    try {
                         opener.location.reload();
-                    }
-                    catch (err) {
-
-                    }
+                    
                 }
                 window.close();
             }
