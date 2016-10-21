@@ -524,7 +524,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-13"><?php print $widget_data['itg-block-13']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-13" widget-style="home-watch"><?php print $widget_data['itg-block-13']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  
