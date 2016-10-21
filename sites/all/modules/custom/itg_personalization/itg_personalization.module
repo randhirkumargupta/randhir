@@ -40,7 +40,12 @@ function itg_personalization_menu() {
     'page callback' => 'itg_personalization_home_page',
     'access arguments' => array('view personalized content'),    
     'type' => MENU_NORMAL_ITEM,
-  );  
+  );
+  $items['itg-validate-by-usermail'] = array(
+    'page callback' => 'itg_personalization_validate_by_usermail',
+    'access arguments' => array('view personalized content'),
+    'type' => MENU_CALLBACK,
+  );
   
   return $items;
 }
