@@ -142,6 +142,7 @@ function itg_personalization_refer_a_friend_form_validate($form, &$form_state) {
  */
 function itg_personalization_refer_a_friend_form_submit($form, &$form_state) {
   global $user;
+  $response = 0;
   $input = $form_state['values']['friend_fieldset'];
   try {
     $itg_query = db_insert('itg_lrp_refer_friend')
@@ -156,11 +157,25 @@ function itg_personalization_refer_a_friend_form_submit($form, &$form_state) {
         'created' => REQUEST_TIME,
       );
       $itg_query->values($presave);
+      $mail_data[] = array(
+        'name' => $presave['friend_name'],
+        'mail' => $presave['mail'],
+        'key' => $presave['referral_key'],
+      );
     }
     $itg_query->execute();
+    $response = 1;
   }
   catch (Exception $ex) {
     drupal_set_message($ex->getMessage(), 'error');
+  }
+  // Send mail to users.
+  if ($response) {
+    for ($i = 0; $i < $form_state['values']['total_friend']; ++$i) {
+      $data['link'] = l(t('Click here to register'), 'user/register', array('query' => array('referral_key' => $mail_data[$i]['key']), 'attributes' => array('target' => '_blank')));
+      $data['name'] = $mail_data[$i]['name'];
+      itg_common_get_mail_content($data, $mail_data[$i]['mail']);
+    }
   }
 }
 
