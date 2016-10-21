@@ -104,7 +104,6 @@ var frequencyFlag = 1;
             var description_message = jQuery('textarea#edit-field-service-content-und-12-field-story-expert-description-und-0-value--2').html();
             if (description_message) {
                 $("#widget-ajex-loader").css("display", "none");
-                dynamicFlag = 1;
             }
 
             jQuery.fn.content_create_custom_js = function () {
@@ -726,6 +725,7 @@ function days_in_month(month, year) {
 // new code
     if (dailymotionFlag == 1) {
         jQuery('document').ready(function () {
+             dynamicFlag = 1;
             jQuery('.used-unused-select').live('change', function () {
                 jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                 var select_value = jQuery(this).val();

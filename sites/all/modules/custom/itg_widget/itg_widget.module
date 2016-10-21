@@ -122,10 +122,27 @@ function itg_widget_menu() {
       'access arguments' => array('access administrator'),
       'type' => MENU_NORMAL_ITEM,
   );
-
+  
+  $items['cheaper-dearer'] = array(
+    'title' => 'Cheaper Dearer',
+    'page callback' => 'abc',
+    'access callback' => TRUE,
+  );  
   return $items;
 }
 
+function abc() {
+  $query = db_select('taxonomy_term_data', 'td');
+  $query->leftJoin('taxonomy_vocabulary', 'v', 'td.vid=v.vid');
+  $query->fields('td', array('name', 'vid', 'tid'));
+ // $query->fields('v', array('taxonomy_term','machine_name'))
+   $query->condition('v.machine_name', 'cheaper_dearer')
+      ->range(0, 5);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  pr($result);
+  
+  return 'Welcome';
+}
 /**
  * {@inheritdoc}
  */
@@ -226,14 +243,16 @@ function itg_widget_block_info() {
   $blocks['ipl_tweets'] = array(
     'info' => t('IPL Tweets')
   );  
-
+  $blocks['cheaper_dearer'] = array(
+      'info' => t('Widget: cheaper dearer for budget save at custom table'),
+  );
   return $blocks;
 }
 
 /**
  * {@inheritdoc}
  */
-function itg_widget_block_view($delta = '') {
+function itg_widget_block_view($delta = '') { 
   $block = array();
   switch ($delta) {
     // Big Story Content.
@@ -627,6 +646,11 @@ function itg_widget_block_view($delta = '') {
       //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
         $block['subject'] = '';
       $block['content'] = ipl_tweets();
+      break;
+  case 'cheaper_dearer': 
+     // module_load_include('inc', 'itg_widget', 'includes/cheaper-dearer-save-custom-table');
+     // $data = itg_widget_get_taxonomy_for_cheaper();
+      $block['content'] = theme('itg_widget_cheaper', array('data' => $data));
       break;
   }
   
