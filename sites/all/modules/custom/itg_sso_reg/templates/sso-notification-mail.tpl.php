@@ -1,6 +1,6 @@
 <?php 
 /**
- * Template file to send mail on user registeration
+ * Template file to send mail on user Activation
  * @file: sso-notification-mail.tpl.php
  */
 
