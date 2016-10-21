@@ -1433,10 +1433,11 @@ img{
             display: none;
         }
         .form-type-textfield{
-            margin: 0 0 10px;
+            margin: 0 0 15px;
             padding: 0;
             input[type="text"]{
                 width: 100%;
+                height: 35px;
             }
             span.error{
                 background: #fff none repeat scroll 0 0;
@@ -1458,7 +1459,58 @@ img{
             font-family: roboto-slab;
             font-size: 18px;
             border-radius: 5px;
+            cursor: pointer;
         }
+    }
+       .ask-question{
+        padding:15px;
+        font-family: roboto-slab;
+        .form-type-textarea, .form-type-textfield{
+            margin: 0;
+            padding: 0;            
+        }
+        #itg-custom-ask-an-expert-form{
+            @include clearfix;
+            input[type="text"]{
+                position: static;
+                left: auto;
+                top:auto;
+                width: 110px;
+                font-family: roboto-slab;
+            }
+            textarea{
+                font-family: roboto-slab;
+                height: 65px;
+            }
+            #question{
+                p{
+                    color: #000;
+                    font-size: 12px;
+                    margin-bottom: 20px;
+                    margin-top: 10px;
+                }
+            }
+            #askname, #askemail, input[type="submit"]{
+                float: left;
+                width: 33%;
+            }
+            #askemail{
+                margin: 0 12px;
+            }
+            input[type="submit"]{
+                background: #000 none repeat scroll 0 0;
+                border: medium none;
+                border-radius: 5px;
+                color: #fff;                
+                font-size: 16px;
+                height: 32px;
+                line-height: 29px;
+                text-transform: uppercase;
+                width: 90px;
+                cursor: pointer;
+                font-family: roboto-slab;
+            }
+        }        
     }
 }
 /*CSS end for education page*/

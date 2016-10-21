@@ -1,4 +1,4 @@
-<div class="sports-video">
+<div class="page-sports-video">
     <div class="view-content">
         <ul class="photo-list row">
             <?php
