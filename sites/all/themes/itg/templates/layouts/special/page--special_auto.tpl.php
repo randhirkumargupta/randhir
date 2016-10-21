@@ -326,11 +326,12 @@ if ($theme != 'itgadmin') {
                 </div>               
             </div>  
         </div>
+        <?php print $widget_data['itg-block-9']['block_title'];?>
          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
-              <div class="droppable <?php print $gray_bg_layout; ?>">
+              <div class="droppable <?php  print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name'].$widget_data['itg-block-9']['widget_display_name']; ?>">
-                 <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-9']['block_title'])) { ?>
+                 <?php if (($theme != 'itgadmin' || isset($preview)) && (!empty($widget_data['itg-block-9']['block_title']))) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-9']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->

@@ -146,6 +146,19 @@ function itgadmin_preprocess_comment(&$vars) {
   }
 }
 
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function itgadmin_preprocess_html(&$variables) {
+  // Make sure current page is node/nid
+  // It will even if use aliases.
+//  pr($variables);
+//  pr(arg());
+//  if(arg(0) == 'menu-manager' && arg(1) == 'second'){
+//    $variables['head_title'] = "Test";
+//  }
+}
 /**
  * Preprocessor for theme('textfield').
  */
@@ -383,7 +396,6 @@ function itgadmin_preprocess_page(&$vars) {
       , 'yearend-left-widget-list'
       , 'special-auto-review-widget-lsit'
       , 'issue-magazin-widget-list'
-      , 'menu-manager'
       , 'most-popular-widget-order-reorder'
       , 'dont-miss-widget-list'
   );

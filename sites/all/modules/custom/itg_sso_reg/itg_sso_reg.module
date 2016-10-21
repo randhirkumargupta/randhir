@@ -83,7 +83,7 @@ function itg_sso_reg_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * Send mail to sso user, when email id is valid
+ * Implements hook_mail
  * @param string $key
  * @param string $message
  * @param array $params
