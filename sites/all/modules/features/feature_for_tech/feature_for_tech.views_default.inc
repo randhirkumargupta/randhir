@@ -69,6 +69,10 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Tech leftTop';
   $handler->display->display_options['display_description'] = 'Tech leftTop';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
@@ -90,7 +94,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'home_page_feature_small',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -143,8 +147,16 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['settings'] = array(
     'image_style' => 'magazine_top_three_story_237x133',
-    'image_link' => 'content',
+    'image_link' => '',
   );
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['fields']['nid_1']['table'] = 'node';
+  $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid_1']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['nid_1']['label'] = '';
+  $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

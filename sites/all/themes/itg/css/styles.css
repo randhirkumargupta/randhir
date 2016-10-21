@@ -1180,8 +1180,9 @@ footer .footer-top ul li a {
   height: 37px;
   line-height: 37px;
   border-right: 1px solid #111111;
-  font-size: 17px;
+  font-size: 16px;
   display: block;
+  text-transform: uppercase;
 }
 footer .footer-top .footer-expand-icon {
   position: absolute;
@@ -2052,7 +2053,6 @@ footer .footer-copyright {
 .story-section .byline .profile-detail ul li {
   float: left;
   padding: 0 5px;
-  border-right: 1px solid #ddd;
 }
 .story-section .byline .profile-detail ul li span.share-count {
   display: block;
@@ -2352,6 +2352,9 @@ footer .footer-copyright {
   padding-bottom: 10px;
   border-bottom: 1px solid #cdcdcd;
   margin-bottom: 35px;
+}
+.buzz-feedback .byline .profile-detail ul li {
+  border-right: 1px solid #ddd;
 }
 .buzz-feedback .buzz-section {
   margin: 60px 0;
@@ -4141,34 +4144,34 @@ footer .footer-copyright {
   padding-left: 0;
 }
 
-.view-video-list-of-category .views-exposed-form, .view-video-landing-header .views-exposed-form, .view-so-sorry .views-exposed-form, .view-programme-content .views-exposed-form, .sports-video .views-exposed-form, .sports-photo .views-exposed-form {
+.view-video-list-of-category .views-exposed-form, .view-video-landing-header .views-exposed-form, .view-so-sorry .views-exposed-form, .view-programme-content .views-exposed-form, .page-sports-video .views-exposed-form, .page-sports-photo .views-exposed-form {
   display: none;
 }
-.view-video-list-of-category .view-content .photo-list, .view-video-landing-header .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .sports-video .view-content .photo-list, .sports-photo .view-content .photo-list {
+.view-video-list-of-category .view-content .photo-list, .view-video-landing-header .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .page-sports-video .view-content .photo-list, .page-sports-photo .view-content .photo-list {
   list-style: none;
   margin: 0 -10px;
   zoom: 1;
 }
-.view-video-list-of-category .view-content .photo-list:before, .view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:before, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:before, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:before, .view-programme-content .view-content .photo-list:after, .sports-video .view-content .photo-list:before, .sports-video .view-content .photo-list:after, .sports-photo .view-content .photo-list:before, .sports-photo .view-content .photo-list:after {
+.view-video-list-of-category .view-content .photo-list:before, .view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:before, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:before, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:before, .view-programme-content .view-content .photo-list:after, .page-sports-video .view-content .photo-list:before, .page-sports-video .view-content .photo-list:after, .page-sports-photo .view-content .photo-list:before, .page-sports-photo .view-content .photo-list:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:after, .sports-video .view-content .photo-list:after, .sports-photo .view-content .photo-list:after {
+.view-video-list-of-category .view-content .photo-list:after, .view-video-landing-header .view-content .photo-list:after, .view-so-sorry .view-content .photo-list:after, .view-programme-content .view-content .photo-list:after, .page-sports-video .view-content .photo-list:after, .page-sports-photo .view-content .photo-list:after {
   clear: both;
 }
-.view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .sports-video .view-content .photo-list li, .sports-photo .view-content .photo-list li {
+.view-video-list-of-category .view-content .photo-list li, .view-video-landing-header .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li {
   padding: 15px;
   float: left;
   width: 25%;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure, .view-video-landing-header .view-content .photo-list li .tile figure, .view-so-sorry .view-content .photo-list li .tile figure, .view-programme-content .view-content .photo-list li .tile figure, .sports-video .view-content .photo-list li .tile figure, .sports-photo .view-content .photo-list li .tile figure {
+.view-video-list-of-category .view-content .photo-list li .tile figure, .view-video-landing-header .view-content .photo-list li .tile figure, .view-so-sorry .view-content .photo-list li .tile figure, .view-programme-content .view-content .photo-list li .tile figure, .page-sports-video .view-content .photo-list li .tile figure, .page-sports-photo .view-content .photo-list li .tile figure {
   max-width: 100%;
   overflow: hidden;
   position: relative;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure figcaption, .view-video-landing-header .view-content .photo-list li .tile figure figcaption, .view-so-sorry .view-content .photo-list li .tile figure figcaption, .view-programme-content .view-content .photo-list li .tile figure figcaption, .sports-video .view-content .photo-list li .tile figure figcaption, .sports-photo .view-content .photo-list li .tile figure figcaption {
+.view-video-list-of-category .view-content .photo-list li .tile figure figcaption, .view-video-landing-header .view-content .photo-list li .tile figure figcaption, .view-so-sorry .view-content .photo-list li .tile figure figcaption, .view-programme-content .view-content .photo-list li .tile figure figcaption, .page-sports-video .view-content .photo-list li .tile figure figcaption, .page-sports-photo .view-content .photo-list li .tile figure figcaption {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -4178,20 +4181,20 @@ footer .footer-copyright {
   font-size: 12px;
   font-family: Roboto;
 }
-.view-video-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-video-landing-header .view-content .photo-list li .tile figure figcaption .fa, .view-so-sorry .view-content .photo-list li .tile figure figcaption .fa, .view-programme-content .view-content .photo-list li .tile figure figcaption .fa, .sports-video .view-content .photo-list li .tile figure figcaption .fa, .sports-photo .view-content .photo-list li .tile figure figcaption .fa {
+.view-video-list-of-category .view-content .photo-list li .tile figure figcaption .fa, .view-video-landing-header .view-content .photo-list li .tile figure figcaption .fa, .view-so-sorry .view-content .photo-list li .tile figure figcaption .fa, .view-programme-content .view-content .photo-list li .tile figure figcaption .fa, .page-sports-video .view-content .photo-list li .tile figure figcaption .fa, .page-sports-photo .view-content .photo-list li .tile figure figcaption .fa {
   font-size: 14px;
   margin-right: 5px;
 }
-.view-video-list-of-category .view-content .photo-list li .tile .posted-on, .view-video-landing-header .view-content .photo-list li .tile .posted-on, .view-so-sorry .view-content .photo-list li .tile .posted-on, .view-programme-content .view-content .photo-list li .tile .posted-on, .sports-video .view-content .photo-list li .tile .posted-on, .sports-photo .view-content .photo-list li .tile .posted-on {
+.view-video-list-of-category .view-content .photo-list li .tile .posted-on, .view-video-landing-header .view-content .photo-list li .tile .posted-on, .view-so-sorry .view-content .photo-list li .tile .posted-on, .view-programme-content .view-content .photo-list li .tile .posted-on, .page-sports-video .view-content .photo-list li .tile .posted-on, .page-sports-photo .view-content .photo-list li .tile .posted-on {
   display: block;
   font-size: 12px;
   color: #b1b1b1;
   padding: 8px 0 5px;
 }
-.view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a, .view-so-sorry .view-content .photo-list li .tile a, .view-programme-content .view-content .photo-list li .tile a, .sports-video .view-content .photo-list li .tile a, .sports-photo .view-content .photo-list li .tile a {
+.view-video-list-of-category .view-content .photo-list li .tile a, .view-video-landing-header .view-content .photo-list li .tile a, .view-so-sorry .view-content .photo-list li .tile a, .view-programme-content .view-content .photo-list li .tile a, .page-sports-video .view-content .photo-list li .tile a, .page-sports-photo .view-content .photo-list li .tile a {
   color: #494949;
 }
-.view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-video-landing-header .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .sports-video .view-content .photo-list li:nth-child(4n+1), .sports-photo .view-content .photo-list li:nth-child(4n+1) {
+.view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-video-landing-header .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .page-sports-video .view-content .photo-list li:nth-child(4n+1), .page-sports-photo .view-content .photo-list li:nth-child(4n+1) {
   clear: left;
 }
 
@@ -4415,6 +4418,7 @@ footer .footer-copyright {
     display: inline-block;
     vertical-align: top;
     float: none;
+    width: inherit;
   }
   .view-programme-content .view-content .photo-list li a {
     white-space: initial;
@@ -5215,6 +5219,7 @@ footer .footer-copyright {
     display: inline-block;
     vertical-align: top;
     float: none;
+    width: inherit;
   }
   #block-views-so-sorry-most-watched .view-so-sorry .view-content .photo-list li a {
     white-space: initial;
@@ -6516,12 +6521,13 @@ footer .footer-copyright {
   display: none;
 }
 .education-layout-page #itg-newslatter-register-form .form-type-textfield {
-  margin: 0 0 10px;
+  margin: 0 0 15px;
   padding: 0;
   position: relative;
 }
 .education-layout-page #itg-newslatter-register-form .form-type-textfield input[type="text"] {
   width: 100%;
+  height: 35px;
 }
 .education-layout-page #itg-newslatter-register-form .form-type-textfield span.error {
   background: #fff none repeat scroll 0 0;
@@ -6542,11 +6548,69 @@ footer .footer-copyright {
   font-family: roboto-slab;
   font-size: 18px;
   border-radius: 5px;
+  cursor: pointer;
+}
+.education-layout-page .ask-question {
+  padding: 15px;
+  font-family: roboto-slab;
+}
+.education-layout-page .ask-question .form-type-textarea, .education-layout-page .ask-question .form-type-textfield {
+  margin: 0;
+  padding: 0;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form {
+  zoom: 1;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form:before, .education-layout-page .ask-question #itg-custom-ask-an-expert-form:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form:after {
+  clear: both;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form input[type="text"] {
+  position: static;
+  left: auto;
+  top: auto;
+  width: 110px;
+  font-family: roboto-slab;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form textarea {
+  font-family: roboto-slab;
+  height: 65px;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form #question p {
+  color: #000;
+  font-size: 12px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form #askname, .education-layout-page .ask-question #itg-custom-ask-an-expert-form #askemail, .education-layout-page .ask-question #itg-custom-ask-an-expert-form input[type="submit"] {
+  float: left;
+  width: 33%;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form #askemail {
+  margin: 0 12px;
+}
+.education-layout-page .ask-question #itg-custom-ask-an-expert-form input[type="submit"] {
+  background: #000 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  height: 32px;
+  line-height: 29px;
+  text-transform: uppercase;
+  width: 90px;
+  cursor: pointer;
+  font-family: roboto-slab;
 }
 
 /*CSS end for education page*/
 /*CSS start sport home page*/
-.sports-video, .sports-photo {
+.page-sports-video, .page-sports-photo {
   margin-top: -15px;
 }
 
@@ -6649,6 +6713,7 @@ footer .footer-copyright {
 .sport-home-layout-page .itg-layout-615 .auto-block-2 .special-top-news {
   position: relative;
   overflow: hidden;
+  height: 100%;
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-2 .special-top-news .widget-title {
   position: absolute;
@@ -6724,6 +6789,21 @@ footer .footer-copyright {
   left: 0;
   top: 0;
   margin-bottom: 10px;
+}
+@media screen and (max-width: 768px) {
+  .sport-home-layout-page .sports-video .view-content .photo-list {
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+  .sport-home-layout-page .sports-video .view-content .photo-list li {
+    display: inline-block;
+    vertical-align: top;
+    float: none;
+    width: inherit;
+  }
+  .sport-home-layout-page .sports-video .view-content .photo-list li a {
+    white-space: initial;
+  }
 }
 .sport-home-layout-page .sports-video .view-content .photo-list li {
   padding: 0 15px;
@@ -7075,3 +7155,9 @@ footer .footer-copyright {
 }
 
 /*css end special page*/
+/*css start taboola page*/
+.taboola {
+  margin-top: 40px;
+}
+
+/*css end taboola page*/

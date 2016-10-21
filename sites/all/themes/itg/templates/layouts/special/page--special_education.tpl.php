@@ -92,9 +92,7 @@ if ($theme != 'itgadmin') {
  
 
 <div class="itg-layout-container <?php echo $itg_class; ?> education-layout-page">
-   
-<?php $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
-  print render($block['content']); ?>
+
     <div class="row itg-top-section itg-layout-672">
         
         <div class="top-block">
@@ -168,9 +166,7 @@ if ($theme != 'itgadmin') {
         <div class="col-md-4 col-sm-6 col-xs-12 mt-50">
             <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
-
               
-
                <div class="widget-wrapper section_wise_order <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-4']['block_title'])) { ?>
 
@@ -267,7 +263,7 @@ if ($theme != 'itgadmin') {
                                         </div>
                                     <?php } ?>  
 
-                                    <div class="data-holder" id="itg-block-19"><?php $block = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');
+                                    <div class="data-holder ask-question" id="itg-block-19"><?php $block = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');
   print render($block['content']); ?></div>
                                 </div>             
                             </div>               
