@@ -82,6 +82,12 @@ function itg_dbmigrate_migrate_api() {
       'itg_photogallery' => array(
         'title' => t('Itg Photogallery Imports'),
       ),
+      'itg_videogallery' => array(
+        'title' => t('Itg Videogallery Imports'),
+      ),
+      'itg_megareview' => array(
+        'title' => t('Itg Megareview Imports'),
+      ),
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -148,6 +154,14 @@ function itg_dbmigrate_migrate_api() {
       'ItgPhotogallery' => array(
         'class_name' => 'ItgPhotogalleryMigration',
         'group_name' => 'itg_photogallery',
+      ),
+      'ItgVideogallery' => array(
+        'class_name' => 'ItgVideogalleryMigration',
+        'group_name' => 'itg_videogallery',
+      ),
+      'ItgMegareview' => array(
+        'class_name' => 'ItgMegareviewMigration',
+        'group_name' => 'itg_megareview',
       ),
     ),
     

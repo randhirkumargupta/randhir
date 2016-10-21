@@ -212,6 +212,7 @@ features_exclude[dependencies][strongarm] = strongarm
 features_exclude[dependencies][taxonomy] = taxonomy
 features_exclude[dependencies][workbench_moderation] = workbench_moderation
 features_exclude[dependencies][shs] = shs
+features_exclude[dependencies][views] = views
 features_exclude[field_instance][taxonomy_term-category_management-field_cm_display_title] = taxonomy_term-category_management-field_cm_display_title
 features_exclude[field_instance][taxonomy_term-category_management-field_cm_select_type] = taxonomy_term-category_management-field_cm_select_type
 features_exclude[taxonomy][category_management] = category_management

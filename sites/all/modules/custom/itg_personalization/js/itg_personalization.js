@@ -43,9 +43,7 @@ jQuery(document).ready(function () {
                 jQuery('.form-field-name-field-user-message').hide();
         }
         
-    });
-    // Remove not required options from ugc_content_type.
-    jQuery("#edit-field-ugc-ctype-und option[value='podcast']").remove();
+    });    
     // Change text of select option.
     jQuery("#edit-field-ugc-ctype-und option[value='photogallery']").text('Photogallery');
     jQuery("#edit-field-ugc-ctype-und option[value='videogallery']").text('Videogallery');

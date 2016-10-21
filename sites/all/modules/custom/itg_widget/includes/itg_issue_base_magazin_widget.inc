@@ -28,6 +28,6 @@ function save_issue_magazin_widget_data($issue_data) {
                     ->execute();
         }
         drupal_set_message(t("Nodes has been saved"));
-        drupal_goto('issue-magazin-widget-list');
+       // drupal_goto('issue-magazin-widget-list');
     }
 }

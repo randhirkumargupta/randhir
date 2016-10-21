@@ -332,7 +332,7 @@ function feature_for_podcast_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'exclude_cv' => 0,
+    'exclude_cv' => 1,
     'field_name' => 'field_podcast_kicker_message',
     'label' => 'Kicker Message',
     'required' => 1,

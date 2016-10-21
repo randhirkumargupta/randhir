@@ -17,6 +17,9 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       $rangearray=array('auto-road-trip'=>2 ,
           'auto-tips-and-tricks'=>3 ,
           'edu-exam'=>4 ,
+          'budget-reactions'=>4,
+          'india-inc-on-budget'=>4,
+          'budget-decoded'=>3,
           'edu-featurefilia'=>4 ,
           'edu-jobs-and-career'=>4 ,
           'edu-tips-and-trick'=>10 ,
@@ -54,6 +57,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
             ->condition('iwo.cat_id', $cat_id)
             // fix for getting all content type
             ->condition('iwo.widget', $widget_name)
+            ->condition('iwo.content_type', 'All')
             ->condition('n.status', '1')
             ->orderBy('iwo.weight','DESC')
             ->groupBy('iwo.nid')
@@ -71,6 +75,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       $query->fields('iwo', array('nid', 'weight'))
              ->condition('tx.tid', $cat_id)
               ->condition('n.status', '1')
+              ->condition('iwo.content_type', 'All')
               ->orderBy('n.nid', 'DESC')
               ->groupBy('n.nid')
               ->range(0, $range);

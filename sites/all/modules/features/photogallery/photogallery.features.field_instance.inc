@@ -92,7 +92,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_credit',
-    'label' => 'Credit',
+    'label' => 'Credit/Source',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -587,7 +587,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_credit_to_all',
-    'label' => 'Credit to all',
+    'label' => 'Credit/Source',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -1078,7 +1078,7 @@ function photogallery_field_default_field_instances() {
     'bundle' => 'photogallery',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Section',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2525,9 +2525,8 @@ function photogallery_field_default_field_instances() {
   t('Common Audio');
   t('Common Audio file');
   t('Common by line');
-  t('Credit');
   t('Credit Name');
-  t('Credit to all');
+  t('Credit/Source');
   t('Extra large image');
   t('Extra small image');
   t('Facebook Video');

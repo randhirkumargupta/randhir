@@ -1158,7 +1158,7 @@ div.vertical-tabs {
       td:nth-child(2){
         @extend .pos-rel;
         @extend .fleft;
-        min-height: 396px;
+        min-height: 418px;
         @extend .full;
         border: 1px solid #d9d9d9;
         .messages--error{
@@ -1551,6 +1551,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-podcast-admin-menu,
 #block-menu-menu-print-team-menu,
 #block-menu-menu-videogallery-admin-menu,
+#block-menu-menu-event-backend,
 #block-menu-menu-story-content-admin-menu{
   @extend .content-block-menu;
 }
@@ -1988,8 +1989,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-template-guru-values"]{
   @extend .itg-add-another-item;
 }
-[id*="field-erf-registration-fee-values"], 
-[id*="field-mega-review-review-values"],
+[id*="field-erf-registration-fee-values"],
 [id*="field-story-highlights-values"]{
   thead{
     @extend .hide;
@@ -2547,50 +2547,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-.itg-popup{
-  @extend .hide;
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  @extend .full;
-  z-index: 99999;
-  .popup-content{
-    width: 800px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px #000;
-    background-color: #fff;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    max-height: 500px;
-  }
-  .popup-head{
-    @extend .pos-rel;
-    padding: 20px;
-    border-bottom: 1px solid #d9d9d9;
-  }
-  .popup-body{
-    padding: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  .itg-close-popup{
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid #d00b26;
-    background: url('../images/cross_small.png') center center no-repeat #fff;
-    text-indent: -9999px;
-  }
-}
+
 [id*="itg-social-media-form"]{
   > div{
     .form-item-itg-smi{
@@ -2919,12 +2876,14 @@ fieldset#edit-select{
 }
 .confirmation{
   @extend .node-form;
-  a#edit-cancel{
-    @extend .btn-cancel;
-    @extend .dib;
-    @extend .vtop;
-    padding: 6px 12px;
-    border-radius: 4px;
+  .form-actions{
+    a#edit-cancel, a.active{
+      @extend .btn-cancel;
+      @extend .dib;
+      @extend .vtop;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
   }
 }
 .user-configurations{
@@ -3070,7 +3029,7 @@ fieldset#edit-select{
 .details-parent{position: absolute; bottom: 0; width: 100%; padding: 10px 20px 20px; background-color: rgba(0,0,0,.5); color: #fff; box-sizing: border-box; text-align: left;}
 .details-parent .photo-title{font-size: 16px;}
 .details-parent .photo-title, .details-parent .image-description, .details-parent .photo-credit{overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-.audio-div{position: relative;}
+.audio-div{padding-top: 10px;}
 .view-content > .item-list > ul > li > .category-manager-details{background-color: #efefef;}
 .show{display: block;}
 .hide{display: none;}
@@ -4173,6 +4132,15 @@ div.node{
   .form-field-name-field-service-content{
     .ajax-progress-throbber{
       @extend .hide;
+    }
+    .field-name-field-service-audio-keyword{
+      padding-left: 220px;
+      .form-type-textfield{
+        margin-top: 10px;
+        > label{
+          width: 93px;
+        }
+      }
     }
   }
   .field-name-field-service-audio, 
@@ -6564,7 +6532,11 @@ div.node{
         display: block;
     }*/
 }
-#views-form-photo-carousel-widget-photo-carousel-list, 
+#views-form-photo-carousel-widget-photo-carousel-list,
+#views-form-special-how-i-made-it-special-how-made-it-widget-contents,
+#views-form-special-auto-review-widget-special-auto-review-widget-contents,
+#views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents,
+#views-form-most-read-widget-most-read-widget-contents,
 #views-form-photo-carousel-widget-video-carousel-list{
   @extend .confirmation;
   .form-actions{
@@ -6803,6 +6775,13 @@ div.node{
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
   margin-top: 0px;
+  line-height: 18px;
+  padding-left: 0;
+}
+.survey-form-main-container .byline .profile-detail ul li.twitter:before {
+  content: '|';
+  margin: 0 5px 0 0;
+  color: #999;
 }
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
@@ -7001,6 +6980,8 @@ div.node{
         display: inline-block;
         vertical-align: top;
         padding: 0;
+        text-transform: uppercase;
+        font-family: roboto;
       }
       .form-radios{
         .form-item{
@@ -7017,7 +6998,7 @@ div.node{
     .poll-replace-id .form-submit{
         width: 100px;
         height: 36px;
-        background-color: #ccc;
+        background-color: #e3e3e3;
         border: none;
         width: 100px;
         height: 36px;
@@ -7026,6 +7007,7 @@ div.node{
         margin-top: 20px;
         font-size: 500;
         color: #323232;
+        font-size: 14px;
       }
   }
 }
@@ -8092,7 +8074,7 @@ div.node{
 }
 .itg_menu_manager_form{
   @extend .node-form;
-  #edit-submit{
+  .form-submit{
     @extend .btn;
     @extend .btn-save;
     margin-left: 250px;
@@ -8120,6 +8102,109 @@ div.node{
           }
         }
       }
+    }
+  }
+}
+.view-menu-manager{
+  h2{text-transform: capitalize;}
+}
+#draggableviews-table-story-widget-most-popular-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-so-sorry-so-sorry-videos-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-widget-anchors-listing-anchors-listing-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-home-page-feature-widget-page-2 .tabledrag-hide {display:none !important}
+#draggableviews-table-section-wise-content-ordering-list-we-may-suggest-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-story-widget-page-2 .tabledrag-hide {display:none !important}
+#draggableviews-table-story-widget-trending-videos-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-story-widget-top-takes-video-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-story-widget-watch-right-now-widget .tabledrag-hide {display:none !important}
+#draggableviews-table-photo-carousel-widget-photo-carousel .tabledrag-hide {display:none !important}
+#draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {display:none !important}
+#draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {display:none !important}
+#draggableviews-table-issue-base-magazin-widget-issue-magazin-widget-list .tabledrag-hide {display:none !important}
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-image-caption textarea{height: 50px;}
+[id*="views-exposed-form-Event-backend-page"]{
+  .views-submit-button{
+    .form-submit{
+      margin-top: 26px;
+    }
+    #custom-event-type{
+      float: left;
+      max-width: 125px;
+      margin-right: 10px;
+    }
+  }
+}
+.node-mega_review_critic-form{
+  [id*="field-story-reporter-values"]{
+    thead{
+      display: block;
+    }
+    tbody{
+      overflow: visible;
+      tr{
+        td{
+          .form-type-textfield{
+            > label{display: none;}
+          }
+        }
+      }
+    }
+  }
+  [id*="field-mega-review-review-values"]{
+    > tbody > tr > td{
+      float: left;
+      border: 1px solid #d8d8d8;
+      margin-bottom: 30px;
+      padding: 0;
+      > .form-submit, > .ajax-new-content > .form-submit{margin-bottom: 30px;}
+    }
+    & + div.clearfix{
+      .ajax-progress, .form-submit{
+        margin-top: -15px;
+      }
+    } 
+  }
+}
+.node-type-mega-review-critic, .page-node-add-mega-review-critic{
+  .action-with-title #page-title{
+    width: 730px;
+  }
+}
+[id*="views-exposed-form-menu-manager-menu-manager-page"]{
+  .views-submit-button{
+    .form-type-select{
+      float: left;
+      max-width: 125px;
+    }
+    .form-submit{
+      margin-left: 10px !important;
+      margin-top: 26px !important;
+    }
+  }
+}
+[id*="comment-global-config"]{
+  .form-submit{
+    @extend .btn;
+    @extend .btn-save;
+    margin-left: 250px;
+  }
+  #pre-record{
+    font-weight: bold;
+    padding: 30px 0;
+    text-align: right;
+  }
+}
+.node-story-form{
+  [id*="field-story-reporter-values"]{
+    tbody{
+      overflow: visible;
+    }
+  }
+}
+.node-quiz-form{
+  [id*="field-story-reporter-values"]{
+    td {
+      .form-type-textfield > label{display: none;}
     }
   }
 }
