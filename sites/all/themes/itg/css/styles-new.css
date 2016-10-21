@@ -1147,8 +1147,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 #block-itg-personalization-user-my-point .unit-description {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid #e0e0e0;
   border-radius: 5px;
   margin: 0 auto;
+}
+#block-itg-personalization-user-my-point .unit-description tr {
+  border-bottom: 1px solid #e0e0e0;
 }
 #block-itg-personalization-user-my-point .unit-description th, #block-itg-personalization-user-my-point .unit-description td {
   padding: 10px;
@@ -1173,7 +1177,6 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border-right: 1px solid #e0e0e0;
 }
 #block-itg-personalization-user-my-point .unit-description td {
-  border: 1px solid #e0e0e0;
   text-align: center;
 }
 #block-itg-personalization-user-my-point .unit-description td:first-child {
@@ -1554,6 +1557,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: inline-block;
   vertical-align: top;
   padding: 0;
+  text-transform: uppercase;
+  font-family: roboto;
 }
 .home_page_poll_widget_block .poll-data form .form-radios .form-item {
   display: inline-block;
@@ -1569,7 +1574,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .home_page_poll_widget_block .poll-data .poll-replace-id .form-submit {
   width: 100px;
   height: 36px;
-  background-color: #ccc;
+  background-color: #e3e3e3;
   border: none;
   width: 100px;
   height: 36px;
@@ -1579,6 +1584,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #323232;
   margin: 0 auto;
   display: inherit;
+  font-size: 14px;
 }
 
 .home_page_poll_widget_block .widget-settings {
@@ -2288,49 +2294,34 @@ body.has-cart-popup {
 }
 
 [id*="itg-loyalty-reward-checkout-form"] {
-  margin: 20px 0;
-  max-width: 600px;
+  padding: 20px;
 }
-[id*="itg-loyalty-reward-checkout-form"] .form-type-textfield {
-  display: inline-block;
-  vertical-align: top;
-  overflow: hidden;
-  position: relative;
+[id*="itg-loyalty-reward-checkout-form"] > div > .form-item {
+  margin-bottom: 15px;
+}
+[id*="itg-loyalty-reward-checkout-form"] .form-text {
+  height: 42px;
+  border: 1px solid #d9d9d9;
   width: 100%;
-  margin: 10px 0;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
+  font: 400 14px/18px Roboto;
 }
-[id*="itg-loyalty-reward-checkout-form"] .form-type-textfield label {
-  width: 150px;
-  padding: 0 20px;
-  font: 300 14px/36px Roboto;
-  background-color: #fbfbfb;
-  border-right: 1px solid #e0e0e0;
-  z-index: 99;
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-}
-[id*="itg-loyalty-reward-checkout-form"] .form-type-textfield .form-text {
-  position: absolute;
-  left: 0;
-  top: 0;
-  border: none;
+[id*="itg-loyalty-reward-checkout-form"] .form-textarea {
+  height: 82px;
+  border: 1px solid #d9d9d9;
   width: 100%;
-  height: 100%;
-  padding-left: 160px;
-  z-index: 9;
+  font: 400 14px/18px Roboto;
 }
 [id*="itg-loyalty-reward-checkout-form"] .form-submit {
-  background: url(../images/btn-blue.png) no-repeat;
-  height: 41px;
-  border: none;
-  width: 170px;
-  font: 300 20px/28px Roboto;
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 4px;
   color: #fff;
   cursor: pointer;
-  margin-top: 10px;
+  font: 400 14px/28px Roboto;
+  height: 50px;
+  padding: 0 20px;
+  margin-top: 5px;
+  width: auto;
 }
 
 .page-order header {
@@ -2922,4 +2913,145 @@ body.has-cart-popup {
   .auto-block_5 .flexslider .flex-direction-nav a.flex-next {
     right: 0;
   }
+}
+.page-order-confirmation #main {
+  padding: 50px 0;
+}
+.page-order-confirmation .thankyou-block {
+  text-align: center;
+}
+.page-order-confirmation .thankyou-block h2 {
+  font: 500 24px/32px Roboto;
+  color: #464646;
+}
+.page-order-confirmation .thankyou-block p {
+  font: 400 15px/24px Roboto;
+  color: #a8a8a8;
+  padding: 10px 0 30px;
+}
+.page-order-confirmation .order-summary-block {
+  border: 1px solid #dedede;
+}
+.page-order-confirmation .order-summary-block h3 {
+  font: 500 20px/28px Roboto;
+  color: #464646;
+  padding: 10px;
+  text-align: center;
+}
+.page-order-confirmation .order-summary-block .order-id {
+  background-color: #f3f3f3;
+  border: solid #dedede;
+  border-width: 1px 0;
+  padding: 8px 20px;
+  color: #828282;
+  font: 400 15px/18px Roboto;
+}
+.page-order-confirmation .order-summary-block .order-id span {
+  font: 500 14px/18px Roboto;
+  color: #000;
+}
+.page-order-confirmation section.sidebar {
+  border: none;
+}
+.page-order-confirmation section.sidebar #block-itg-ads-ad-right-sidebar-1 {
+  border: 1px solid #ddd;
+  padding: 30px;
+}
+
+.page-order-summary header {
+  margin: 0;
+}
+.page-order-summary #main {
+  padding: 50px 0;
+}
+.page-order-summary .order-address-wrapper {
+  background-color: #ededed;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 15px 0;
+}
+.page-order-summary .order-address-wrapper h3 {
+  font: 500 20px/28px Roboto;
+  color: #000;
+  padding-bottom: 5px;
+}
+.page-order-summary .order-address-wrapper address {
+  font: normal 400 15px/22px Roboto;
+  color: #000;
+}
+.page-order-summary .order-address-wrapper address span {
+  display: block;
+}
+.page-order-summary .order-address-wrapper #change-address {
+  display: block;
+  padding: 7px 10px;
+  font: 500 20px/20px Roboto;
+  background-color: #ccc;
+  box-shadow: 2px 2px 0 #000;
+  color: #000;
+  cursor: pointer;
+  max-width: 240px;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 30px 0;
+}
+.page-order-summary .sent-on-message {
+  font: normal 400 15px/20px Roboto;
+  color: #000;
+  padding: 15px 20px;
+}
+.page-order-summary .sent-on-message span {
+  color: #0c9ae3;
+}
+.page-order-summary .itg-ads-block {
+  padding: 30px;
+  border: 1px solid #dedede;
+  text-align: center;
+}
+.page-order-summary .cart-total-block {
+  background-color: #fff;
+  border: 1px solid #dedede;
+  margin-bottom: 30px;
+}
+
+#change-address-popup {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
+}
+#change-address-popup .popup-inner {
+  width: 100%;
+  max-width: 370px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #000;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-height: 480px;
+}
+#change-address-popup .popup-inner h2 {
+  color: #474747;
+  font: normal 400 23px/18px Roboto;
+  background-color: #ececec;
+  padding: 13px;
+}
+#change-address-popup .close-popup {
+  color: #868686;
+  font-size: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  text-align: center;
+  top: 10px;
+  width: 20px;
 }
