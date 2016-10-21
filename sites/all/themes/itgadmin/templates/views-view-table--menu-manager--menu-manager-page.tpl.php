@@ -79,7 +79,9 @@
             global $base_url;
             ?>
             <td>
-              <a class="menu-manager-delete" href="<?php print $base_url; ?>/itg-menu-manager-remove/<?php print $row['id'] ?>?destination=menu-manager/<?php print $arg[1]; ?>">Remove</a>
+              <a class="menu-manager-delete" href="<?php print $base_url; ?>/itg-menu-manager-remove/<?php print $row['id'] ?>?destination=menu-manager/<?php print $arg[1]; ?>"><span class="delete-link">Remove</span></a>
+              ||
+              <a class="menu-manager-edit" href="<?php print $base_url; ?>/itg-menu-manager/?edit_id=<?php print $row['id'] ?>&term_id=<?php print $row['tid'] ?>"><span class="edit-link">Edit</span></a>
             </td>
         <?php
         }
