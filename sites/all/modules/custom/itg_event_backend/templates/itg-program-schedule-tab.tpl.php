@@ -1,9 +1,17 @@
 <?php
 /**
  * @file
- * Theme implementation for poll form in tab display.
- * 
+ * Theme implementation for poll form in tab display. 
  */
+global $base_url;
+$actual_host_name = itg_event_get_host_name();
+if($actual_host_name) {
+  $baseurl = $actual_host_name.'/';
+}
+else {
+  $baseurl = $base_url.'/';
+}
+
 ksort($data);
 foreach ($data as $key => $value) {
   $tabs .= '<li data-tag="Day-' . $key . '" class="Day-' . $key . '">Day ' . $key . '</li>';
@@ -46,9 +54,9 @@ foreach ($data as $key => $value) {
             foreach ($program['speaker'] as $speaker) {
               $spk_detail = itg_event_backend_get_speaker_details($speaker['target_id']);
               print '<div class="profile-loop"><label>Speaker:</label>';
-              $spk_title = '<div class="speaker-title">' . l(t($spk_detail[0]->title), "node/" . $spk_detail[0]->nid, array("attributes" => array("target" => "_blank"))) . '</div>';
+              $spk_title = '<div class="speaker-title"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank">'.$spk_detail[0]->title.'</a></div>';
               $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . '/>';
-              print '<div class="speaker-image">' . l($img, "node/" . $spk_detail[0]->nid, array("attributes" => array("target" => "_blank"), "html" => TRUE)) . '</div>';
+              print '<div class="speaker-image"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank">'.$img.'</a></div>';
               print '<div class="speaker-designation">' . $spk_title . $spk_detail[0]->field_story_new_title_value . '</div></div>';
             }
             ?>
@@ -58,23 +66,4 @@ foreach ($data as $key => $value) {
     }
     print '</div>';
   }
-
-  drupal_add_js("jQuery(document).ready(function(){
-    jQuery('.top-tab li').eq(0).addClass('active');
-    jQuery('.top-tab li').click(function(){        
-        jQuery('.top-tab li').removeClass('active');
-        jQuery(this).addClass('active');        
-        jQuery('.common-class').hide();
-        var getVal = jQuery(this).attr('data-tag');        
-        jQuery('.'+getVal).show();
-    });
-    
-    jQuery('.view-event-photo-slider ul').slick({
-        infinite: true,    
-        autoplay:true,
-        dots: false,
-        prevArrow: false,
-        nextArrow: false
-    });
-});", array('type' => 'inline', 'scope' => 'footer'));
   ?>

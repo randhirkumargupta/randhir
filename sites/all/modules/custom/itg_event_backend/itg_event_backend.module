@@ -595,8 +595,8 @@ function itg_event_backend_node_access($node, $op, $account) {
  * Implement function for get program schedule on home page
  */
 function itg_event_backend_program_schedule_tab() {
-  $node = node_load(arg(1));
-  //p($field_program_schedule);
+  $event_id = itg_event_backend_get_event_node();
+  $node = node_load($event_id);
   $counter = 0;
   foreach ($node->field_program_schedule[LANGUAGE_NONE] as $program_schedule) {
     $ans_detail = entity_load('field_collection_item', array($program_schedule['value']));
@@ -668,9 +668,29 @@ function itg_event_backend_menu(){
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
   );
+   $items['programme'] = array(
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
+  );
+   $items['speakers'] = array(
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
+  );
+   $items['sponsors'] = array(
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
+  );
+   $items['flashback'] = array(
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
+  );
    return $items;
 }
 
+/**
+ * Return value for all tabs
+ * @return string
+ */
 function itg_event_backend_page(){
   return '';
 }
@@ -775,5 +795,33 @@ function itg_event_backend_views_query_alter(&$view, &$query) {
         }
       }
     }
+  }
+}
+
+/**
+ * Return event id using domain
+ * @global string $base_url
+ * @return int
+ */
+function itg_event_backend_get_event_node(){
+  global $base_url;
+  $query = db_select('redirect', 'red');
+  $query->fields('red', array('source'));
+  $query->condition('redirect', $base_url, '=');
+  $result = $query->execute()->fetchField();
+  $event_id = explode('node/', $result);
+  return $event_id[1];
+}
+
+/**
+ * Get actual hostname, while host is virtual host
+ * @return boolean
+ */
+function itg_event_get_host_name() {
+  $host_name = db_query("SELECT subdomain, scheme FROM {domain} WHERE domain_id = :domain_id", array(':domain_id' => 1))->fetchAll();
+  if (!empty($host_name)) {
+    return $host_name[0]->scheme.'://'.$host_name[0]->subdomain;
+  } else {
+    return FALSE;
   }
 }
