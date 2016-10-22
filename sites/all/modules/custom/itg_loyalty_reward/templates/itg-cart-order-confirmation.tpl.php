@@ -36,7 +36,7 @@
                     </div>
                   </div>
                   <div class="col-md-5">
-                    <div class="delivery-by">Standard Delivery by Mon, 3rd Oct</div>
+                    <div class="delivery-by">Standard delivery time is 5-7 business days.</div>
                   </div>  
                     <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
                     <?php $cart_total += $item_total; ?>
