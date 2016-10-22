@@ -13,6 +13,8 @@
   <h2 class="story-title active">Gallery Basic details</h2>
   <div class="itg-form-section">
   <?php print drupal_render($form['title']); ?>
+  <?php print drupal_render($form['field_story_category']); ?>
+  <?php print drupal_render($form['field_primary_cat_data']); ?>
   <?php print drupal_render($form['field_gallery_kicer']); ?>
   <!--<div class="description">This title shows on the section page</div> -->
   </div>
@@ -55,13 +57,14 @@
   <h2 class="story-title">Configuration</h2>
   <?php print drupal_render($form['field_featured']); ?>
   <?php print drupal_render($form['field_story_itg_tags']); ?>
+  <?php print drupal_render($form['field_common_related_content']); ?>
 </div>
-<div id="Categorization" class="itg-sidebar-form-section">
+<!--<div id="Categorization" class="itg-sidebar-form-section">
   <h2 class="story-title">Categorization</h2>
-  <?php print drupal_render($form['field_story_category']); ?>
-  <?php print drupal_render($form['field_primary_cat_data']); ?>
-</div>
-<div id="SocialMedia" class="itg-sidebar-form-section">
+  <?php //print drupal_render($form['field_story_category']); ?>
+  <?php //print drupal_render($form['field_primary_cat_data']); ?>
+</div>-->
+<div id="SocialMedia" class="itg-sidebar-form-section image-repo-browse">
   <h2 class="story-title"><?php print t('Social Media'); ?></h2>
   <?php print drupal_render($form['field_story_social_media_integ']); ?>
   <!-- Facebook fields -->
@@ -78,10 +81,7 @@
   
 </div>
 
-<div id="Relatedcontent" class="itg-sidebar-form-section">
-  <h2 class="story-title">Related content</h2>
-  <?php print drupal_render($form['field_common_related_content']); ?>
-</div>
+
 <div class="metatags-and-remarks">
     <h2 class="story-title"><?php print t('Remarks'); ?></h2>
     <?php print drupal_render_children($form); ?> 
