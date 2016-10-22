@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * @file
  *   This is personalized conent module for user content.
  */
@@ -36,9 +36,9 @@ function itg_personalization_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
   $items['personalization/%'] = array(
-    'title' => 'Personalization - Saved Items',    
+    'title' => 'Personalization - Saved Items',
     'page callback' => 'itg_personalization_home_page',
-    'access arguments' => array('view personalized content'),    
+    'access arguments' => array('view personalized content'),
     'type' => MENU_NORMAL_ITEM,
   );
   $items['itg-validate-by-usermail'] = array(
@@ -46,7 +46,7 @@ function itg_personalization_menu() {
     'access arguments' => array('view personalized content'),
     'type' => MENU_CALLBACK,
   );
-  
+
   return $items;
 }
 
@@ -64,25 +64,24 @@ function itg_personalization_home_page() {
   $data = array();
   drupal_add_js(drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js');
   // Load user fields
-  $user_fields = user_load($user->uid);  
-  
+  $user_fields = user_load($user->uid);
+
   // Render user picture.
   $data['profile_pic'] = theme(
-    'image_style',
-    array(
-      'style_name' => 'user_picture',
-      'path' => $user_fields->field_user_picture['und'][0]['uri'],
-    )
-  );  
-  
+      'image_style', array(
+    'style_name' => 'user_picture',
+    'path' => $user_fields->field_user_picture['und'][0]['uri'],
+      )
+  );
+
   // Load user name    
   $f_name = $user_fields->field_first_name['und'][0]['value'];
-  $l_name = $user_fields->field_last_name['und'][0]['value'];  
+  $l_name = $user_fields->field_last_name['und'][0]['value'];
   $data['full_name'] = $f_name . ' ' . $l_name;
-  
+
   // user logout link
-  $data['logout'] = l(t('Logout'), 'user/logout');  
-  
+  $data['logout'] = l(t('Logout'), 'user/logout');
+
   return theme('personalization_userpage', array('data' => $data));
 }
 
@@ -97,22 +96,27 @@ function itg_personalization_theme() {
       'template' => 'itg-personalizaton-home',
       'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
       'variables' => array('data' => NULL),
-    ),    
+    ),
     'personalization_menu_tab' => array(
       'template' => 'itg-personalizaton-menu-tab',
       'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
       'variables' => array('data' => NULL),
-    ),    
+    ),
     'personalization_saved_content_tab' => array(
       'template' => 'itg-personalizaton-saved_content_menu-tab',
       'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
       'variables' => array('data' => NULL),
-    ),    
+    ),
     'personalization_my_point' => array(
       'template' => 'personalization-my-point',
       'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
       'variables' => array('data' => NULL),
-    ),    
+    ),
+    'personalization_edit_profile' => array(
+      'template' => 'personalization-edit-profile',
+      'path' => drupal_get_path('module', 'itg_personalization') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
 
   return $themes;
@@ -135,7 +139,7 @@ function itg_personalization_block_info() {
   $blocks['user_saved_content'] = array(
     'info' => t('Personalized saved content data'),
     'cache' => DRUPAL_CACHE_GLOBAL,
-  );  
+  );
   $blocks['user_my_point'] = array(
     'info' => t('Personalized My Points'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -159,34 +163,38 @@ function itg_personalization_block_info() {
  */
 function itg_personalization_block_view($delta = '') {
   global $user;
-  $block = array();  
+  $block = array();
+  $output = '<ul class="profile-edit-tab">';
+  $output .= '<li>' . l(t('General Settings'), 'personalization/edit-profile/general-settings') . '</li>';
+  $output .= '<li>' . l(t('Change Password'), 'personalization/edit-profile/change-password') . '</li>';
+  $output .= '<li>' . l(t('Refer a Friend'), 'personalization/edit-profile/refer-a-friend') . '</li>';
+  $output .= '</ul>';
   switch ($delta) {
     // Load personalized menu tab.
     case 'personalized_content_menu_tab':
       $block['content'] = theme('personalization_menu_tab');
       break;
     // Load personalized saved content menu tab.
-    case 'personalized_saved_content':      
+    case 'personalized_saved_content':
       $block['content'] = theme('personalization_saved_content_tab');
       break;
-    case 'user_saved_content':      
-      $block['content'] = '<div id="target"></div>';      
-      $block['content'] .= '<div id="target-content"></div>';      
-      break;    
-    case 'user_my_point':      
-      $data = itg_loyalty_reward_user_details($user->uid);      
+    case 'user_saved_content':
+      $block['content'] = '<div id="target"></div>';
+      $block['content'] .= '<div id="target-content"></div>';
+      break;
+    case 'user_my_point':
+      $data = itg_loyalty_reward_user_details($user->uid);
       $block['content'] = theme('personalization_my_point', array('data' => $data));
       break;
     case 'personalization_edit_profile':
-      $block = array(
-        'subject' => t('Edit Profile'),
-        'content' => drupal_get_form('itg_personalization_edit_profile_form'),
-      );
+      $data['tab'] = $output;
+      $data['form'] = drupal_get_form('itg_personalization_edit_profile_form');
+      $block['content'] = theme('personalization_edit_profile', array('data' => $data));        
       break;
     case 'personalization_refer_friend':
-      $block = array(
-        'content' => drupal_get_form('itg_personalization_refer_a_friend_form'),
-      );
+      $data['tab'] = $output;
+      $data['form'] = drupal_get_form('itg_personalization_refer_a_friend_form');
+      $block['content'] = theme('personalization_edit_profile', array('data' => $data));      
   }
 
   return $block;
@@ -198,8 +206,8 @@ function itg_personalization_block_view($delta = '') {
  * {@inheritdoc}.
  */
 function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
-  $arg = arg();   
-  if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {    
+  $arg = arg();
+  if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
     // Hide user name field.
     $form['field_user_name']['#prefix'] = '<div style="display: none;">';
     $form['field_user_name']['#suffix'] = '</div>';
@@ -211,7 +219,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     $form['field_user_city']['#suffix'] = '</div>';
     // Hide section field.    
     $form['field_section']['#prefix'] = '<div style="display: none;">';
-    $form['field_section']['#suffix'] = '</div>';    
+    $form['field_section']['#suffix'] = '</div>';
     // Set field visibility for category field.
     $form['field_section']['#states'] = array(
       'visible' => array(
@@ -223,13 +231,13 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
       'visible' => array(
         ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
       ),
-    );    
+    );
     // Set visibility for submit buttons.
     $form['actions']['#states'] = array(
       'visible' => array(
         ':input[name="field_ugc_ctype[und]"]' => array('!value' => '_none'),
       ),
-    );            
+    );
     // Set field visibility for tags field.
     $form['field_story_client_title']['#states'] = array(
       'visible' => array(
@@ -237,9 +245,9 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
       ),
     );
     // Change placeholder of ugc type field.
-    $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');    
-    $form['#after_build'][] = 'itg_personalization_after_build';    
-    unset($form['field_ugc_ctype']['und']['#title']);    
+    $form['field_ugc_ctype']['und']['#options']['_none'] = t('What do you want to submit today?');
+    $form['#after_build'][] = 'itg_personalization_after_build';
+    unset($form['field_ugc_ctype']['und']['#title']);
   }
 }
 
@@ -257,7 +265,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
 function itg_personalization_after_build($form, &$form_state) {
   // Add astric to upload image field.
   $form['field_ugc_personalization_photo']['und'][0]['field_ugc_upload_photo']['und'][0]['#title'] = t('Upload Photo <span class="form-required" title="This field is required."> *</span>');
-  
+
   return $form;
 }
 
@@ -275,7 +283,7 @@ function itg_personalization_flag_text($nid) {
   $itg_query->fields('n', array('type'))
       ->condition('nid', $nid);
   $itg_result = $itg_query->execute()->fetchField();
-  
+
   return $itg_result;
 }
 
@@ -283,17 +291,17 @@ function itg_personalization_flag_text($nid) {
  * Implements hook_views_pre_render().
  *
  * {@inheritdoc}.
- */ 
-function itg_personalization_views_pre_render(&$view) {  
-  if ($view->name == 'personalization_my_content') {    
+ */
+function itg_personalization_views_pre_render(&$view) {
+  if ($view->name == 'personalization_my_content') {
     foreach ($view->result as $key => $value) {
-      if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {        
+      if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {
         $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Pending';
       }
-      if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {        
+      if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {
         $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Rejected';
       }
-      if ($view->result[$key]->node_status == '0' && $view->result[$key]->field_field_story_source_type[0]['raw']['value'] == '1') {        
+      if ($view->result[$key]->node_status == '0' && $view->result[$key]->field_field_story_source_type[0]['raw']['value'] == '1') {
         $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Approved';
       }
     }
@@ -316,11 +324,11 @@ function itg_personalization_views_api() {
  * Callback for itg_mobile_services_field_add_more_submit
  * @param array $form
  * @param array $form_state
- */ 
+ */
 function itg_personalization_field_add_more_submit($form, &$form_state) {
   if (isset($_SESSION['personalization_node'])) {
-    $personalization_node = $_SESSION['personalization_node'];  
-  }  
+    $personalization_node = $_SESSION['personalization_node'];
+  }
   $button = $form_state['triggering_element'];
   // Go one level up in the form, to the widgets container.
   $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
@@ -338,16 +346,16 @@ function itg_personalization_field_add_more_submit($form, &$form_state) {
     $form_state['rebuild'] = TRUE;
   }
   $node = drupal_rebuild_form('photogallery_node_form', $form_state, $old_form = NULL);
-  
-  $i = 0;  
+
+  $i = 0;
   foreach ($form_state['field']['field_gallery_image']['und']['entity'] as $key => $filed_collection) {
     if (!isset($filed_collection->field_images['und']) && $i >= 1) {
-      $collection_id = $personalization_node->field_ugc_personalization_photo['und'][$i]['value'];        
-      $collection_value = field_collection_item_load($collection_id);      
+      $collection_id = $personalization_node->field_ugc_personalization_photo['und'][$i]['value'];
+      $collection_value = field_collection_item_load($collection_id);
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_caption['und'][0]['value'] = $collection_value->field_story_short_headline['und'][0]['value'];
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $collection_value->field_ugc_upload_photo['und'][0]['fid'];
       $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['alt'] = $collection_value->field_ugc_upload_photo['und'][0]['alt'];
-      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['title'] = $collection_value->field_ugc_upload_photo['und'][0]['title'];      
+      $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['title'] = $collection_value->field_ugc_upload_photo['und'][0]['title'];
     }
     $i++;
   }

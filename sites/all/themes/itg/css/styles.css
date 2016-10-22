@@ -5171,6 +5171,7 @@ footer .footer-copyright {
   display: inline-block;
   vertical-align: top;
   padding: 0px 15px 0 0;
+  border-bottom: 1px solid #dddddd;
 }
 
 /*CSS End RHS add block*/
@@ -5735,6 +5736,7 @@ footer .footer-copyright {
 .auto-layout-page .auto-block-2 .special-top-news {
   overflow: hidden;
   position: relative;
+  height: 100%;
 }
 .auto-layout-page .auto-block-2 .special-top-news .widget-title {
   position: absolute;
@@ -5765,6 +5767,9 @@ footer .footer-copyright {
   background: #959595;
   height: 5px;
   width: 5px;
+}
+.auto-layout-page .auto-tips-n-tricks ul {
+  list-style: none;
 }
 .auto-layout-page .auto-tips-n-tricks ul li {
   padding: 18px 0;

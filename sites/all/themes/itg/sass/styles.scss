@@ -3810,6 +3810,7 @@ footer{
 #block-itg-ads-ad-right-sidebar-1{
     @include display-inline;
     padding:0px 15px 0 0;
+    border-bottom: 1px solid $border-color;
 }
 /*CSS End RHS add block*/
 /*CSS Start So sorry page*/
@@ -4259,6 +4260,7 @@ footer{
         .special-top-news{
             overflow: hidden;
             position: relative;
+            height:100%;
             .widget-title{
                 position: absolute;
             }
@@ -4290,6 +4292,7 @@ footer{
 
     .auto-tips-n-tricks{
         ul{
+            list-style: none;
             li{
                 padding: 18px 0;
                 +li{

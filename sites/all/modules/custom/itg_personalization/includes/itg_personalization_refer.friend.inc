@@ -11,16 +11,7 @@
  * {@inheritdoc}.
  */
 function itg_personalization_refer_a_friend_form($form, &$form_state) {
-  global $base_url;
-  $output = '<ul class="profile-edit-tab">';
-  $output .= '<li>' . l(t('General Settings'), 'personalization/edit-profile/general-settings') . '</li>';
-  $output .= '<li>' . l(t('Change Password'), 'personalization/edit-profile/change-password') . '</li>';
-  $output .= '<li>' . l(t('Refer a Friend'), 'personalization/edit-profile/refer-a-friend') . '</li>';
-  $output .= '</ul>';
-  $form['tab'] = array(
-    '#type' => 'markup',
-    '#markup' => $output,
-  );
+  global $base_url;  
   $form['#tree'] = TRUE;
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js',
