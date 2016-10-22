@@ -4292,6 +4292,10 @@ footer{
             }
         }
     }
+    .section_wise_order-auto-road-trip{
+        background: #f3f3f3;
+        padding: 10px;
+    }
     .auto-road-trip{
         .trending-videos{
             padding: 0;
@@ -4619,7 +4623,8 @@ footer{
                 background: #171717;
                 padding: 25px 10px;
                 width: 188px;
-                float: left;                            
+                float: left; 
+                height: 276px;
                 p{
                     margin-top: 10px;
                 }
@@ -5947,3 +5952,27 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*Budget page css end*/
+
+
+/*css start mscroll bar changes*/
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar{
+    height: 12px;
+    margin: 3px auto;
+    background-color:#f7f7f7;
+    background-image: linear-gradient(#a1a1a1,#d1d1d1);
+    border: 1px solid #c6c6c6;
+    opacity: 1;
+}
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail{        
+    height: 18px;
+    margin: 0 auto;    
+    width: 98%;    
+    background-image: linear-gradient(#0b0b0b,#171717);
+    border: 1px solid #2c2c2c;
+    opacity: 1;
+}
+.mCSB_scrollTools.mCSB_scrollTools_horizontal{
+    margin-bottom: 10px;
+}
+
+/*css end mscroll bar changes*/
