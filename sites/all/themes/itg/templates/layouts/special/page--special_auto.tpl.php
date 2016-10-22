@@ -325,9 +325,8 @@ if ($theme != 'itgadmin') {
                   </div>             
                 </div>               
             </div>  
-        </div>
-        <?php print $widget_data['itg-block-9']['block_title'];?>
-         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
+        </div>        
+        <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="droppable <?php  print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name'].$widget_data['itg-block-9']['widget_display_name']; ?>">

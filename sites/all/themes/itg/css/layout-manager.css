@@ -1024,7 +1024,7 @@ img {
   min-height: 1510px;
 }
 .yearend-page .itg-785 .droppable {
-  min-height: 785px;
+  min-height: 400px;
 }
 .yearend-page .itg-628 .droppable {
   min-height: 628px;
@@ -1285,6 +1285,10 @@ img {
   font-weight: 700;
   margin-bottom: 5px;
   display: block;
+}
+.itg-layout-container.auto-layout-page .section_wise_order-auto-road-trip {
+  background: #f3f3f3;
+  padding: 10px;
 }
 .itg-layout-container.auto-layout-page .auto-road-trip .trending-videos {
   padding: 0;
