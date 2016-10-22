@@ -884,6 +884,13 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
       
       // Set coockie for current quiz attempted by user
       user_cookie_save(array('itgcms_quiz_'.$form_state['values']['nid'] => 1));
+      
+      // Call loyalty & rewards function to save points for a user
+      if(function_exists('itg_loyalty_reward_earnpoint')) {
+        if($user->uid) {
+          itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+        }
+      }
   }
 }
 
