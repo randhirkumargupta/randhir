@@ -7486,23 +7486,23 @@ div.node #comments h2 {
   box-shadow: 0 0 2px #3a8a82;
 }
 
-.node-story-form {
+.node-story-form, .node-photogallery-form {
   font-family: Roboto;
 }
-.node-story-form .ajax-progress {
+.node-story-form .ajax-progress, .node-photogallery-form .ajax-progress {
   display: none;
 }
-.node-story-form .itg-form-section-wrapper {
+.node-story-form .itg-form-section-wrapper, .node-photogallery-form .itg-form-section-wrapper {
   border: 1px solid #d9d9d9;
   margin-top: 20px;
 }
-.node-story-form .itg-form-main h2 {
+.node-story-form .itg-form-main h2, .node-photogallery-form .itg-form-main h2 {
   background-color: #d9d9d9;
   cursor: pointer;
   margin: 0;
   position: relative;
 }
-.node-story-form .itg-form-main h2:after {
+.node-story-form .itg-form-main h2:after, .node-photogallery-form .itg-form-main h2:after {
   content: '\f055';
   position: absolute;
   font-family: 'FontAwesome';
@@ -7510,23 +7510,25 @@ div.node #comments h2 {
   color: #666;
   right: 10px;
 }
-.node-story-form .itg-form-main h2.active:after {
+.node-story-form .itg-form-main h2.active:after, .node-photogallery-form .itg-form-main h2.active:after {
   content: '\f056';
 }
-.node-story-form .itg-form-main h2 + div {
+.node-story-form .itg-form-main h2 + div, .node-photogallery-form .itg-form-main h2 + div {
   overflow: visible !important;
 }
-.node-story-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story {
+.node-story-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story, .node-photogallery-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story {
   padding-left: 200px;
 }
-.node-story-form input[type="text"], .node-story-form select, .node-story-form input[type="password"] {
+.node-story-form input[type="text"], .node-story-form select, .node-story-form input[type="password"], .node-photogallery-form input[type="text"], .node-photogallery-form select, .node-photogallery-form input[type="password"] {
   height: 28px;
   padding: 5px;
   line-height: 26px;
 }
 .node-story-form .form-type-textfield > label,
 .node-story-form .date-combo > legend,
-.node-story-form .form-type-select > label {
+.node-story-form .form-type-select > label, .node-photogallery-form .form-type-textfield > label,
+.node-photogallery-form .date-combo > legend,
+.node-photogallery-form .form-type-select > label {
   padding: 5px 0;
 }
 .node-story-form .form-type-textfield,
@@ -7538,7 +7540,16 @@ div.node #comments h2 {
 .node-story-form .form-type-autocomplete-deluxe,
 .node-story-form .date-combo,
 .node-story-form .form-type-hierarchical-select,
-.node-story-form .form-type-textarea {
+.node-story-form .form-type-textarea, .node-photogallery-form .form-type-textfield,
+.node-photogallery-form .form-type-password,
+.node-photogallery-form .form-type-select,
+.node-photogallery-form .form-type-managed-file,
+.node-photogallery-form .form-type-checkboxes,
+.node-photogallery-form .form-type-radios,
+.node-photogallery-form .form-type-autocomplete-deluxe,
+.node-photogallery-form .date-combo,
+.node-photogallery-form .form-type-hierarchical-select,
+.node-photogallery-form .form-type-textarea {
   margin: 10px 0;
   padding: 0 20px;
 }
@@ -7551,7 +7562,16 @@ div.node #comments h2 {
 .node-story-form .form-type-radios > label,
 .node-story-form .date-combo > legend,
 .node-story-form .form-type-hierarchical-select > label,
-.node-story-form .form-type-checkboxes > label {
+.node-story-form .form-type-checkboxes > label, .node-photogallery-form .form-type-textfield > label,
+.node-photogallery-form .form-type-password > label,
+.node-photogallery-form .form-type-textarea > label,
+.node-photogallery-form .form-type-select > label,
+.node-photogallery-form .form-type-autocomplete-deluxe > label,
+.node-photogallery-form .form-type-managed-file > label,
+.node-photogallery-form .form-type-radios > label,
+.node-photogallery-form .date-combo > legend,
+.node-photogallery-form .form-type-hierarchical-select > label,
+.node-photogallery-form .form-type-checkboxes > label {
   width: 200px;
 }
 .node-story-form .form-type-textfield > label + div,
@@ -7561,38 +7581,51 @@ div.node #comments h2 {
 .node-story-form .form-type-radios > label + div,
 .node-story-form .date-combo > legend + div,
 .node-story-form .form-type-hierarchical-select > label + div,
-.node-story-form .form-type-checkboxes > label + div {
+.node-story-form .form-type-checkboxes > label + div, .node-photogallery-form .form-type-textfield > label + div,
+.node-photogallery-form .form-type-textarea > label + div,
+.node-photogallery-form .form-type-select > label + div,
+.node-photogallery-form .form-type-managed-file > label + div,
+.node-photogallery-form .form-type-radios > label + div,
+.node-photogallery-form .date-combo > legend + div,
+.node-photogallery-form .form-type-hierarchical-select > label + div,
+.node-photogallery-form .form-type-checkboxes > label + div {
   padding-left: 200px;
 }
 .node-story-form .form-type-textfield label + .form-text + span.error,
 .node-story-form .form-type-textfield label + #autocomplete + .form-text + span.error,
-.node-story-form .form-type-textfield label + .form-text + div.description + span.error {
+.node-story-form .form-type-textfield label + .form-text + div.description + span.error, .node-photogallery-form .form-type-textfield label + .form-text + span.error,
+.node-photogallery-form .form-type-textfield label + #autocomplete + .form-text + span.error,
+.node-photogallery-form .form-type-textfield label + .form-text + div.description + span.error {
   padding-left: 200px;
 }
-.node-story-form #browse-image .form-type-managed-file, .node-story-form #ExpertChunk .form-type-managed-file {
+.node-story-form #browse-image .form-type-managed-file, .node-story-form #ExpertChunk .form-type-managed-file, .node-photogallery-form #browse-image .form-type-managed-file, .node-photogallery-form #ExpertChunk .form-type-managed-file {
   vertical-align: top;
   width: 100%;
   margin: 5px 0;
   min-height: 28px;
   display: inline-block;
 }
-.node-story-form #browse-image .form-type-managed-file > label, .node-story-form #ExpertChunk .form-type-managed-file > label {
+.node-story-form #browse-image .form-type-managed-file > label, .node-story-form #ExpertChunk .form-type-managed-file > label, .node-photogallery-form #browse-image .form-type-managed-file > label, .node-photogallery-form #ExpertChunk .form-type-managed-file > label {
   padding-top: 4px;
 }
-.node-story-form #browse-image .form-type-managed-file .form-managed-file .image-widget-data, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file .image-widget-data {
+.node-story-form #browse-image .form-type-managed-file .form-managed-file .image-widget-data, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file .image-widget-data, .node-photogallery-form #browse-image .form-type-managed-file .form-managed-file .image-widget-data, .node-photogallery-form #ExpertChunk .form-type-managed-file .form-managed-file .image-widget-data {
   float: left;
 }
-.node-story-form #browse-image .form-type-managed-file .form-managed-file + div.description, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file + div.description {
+.node-story-form #browse-image .form-type-managed-file .form-managed-file + div.description, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file + div.description, .node-photogallery-form #browse-image .form-type-managed-file .form-managed-file + div.description, .node-photogallery-form #ExpertChunk .form-type-managed-file .form-managed-file + div.description {
   left: 370px;
 }
-.node-story-form #browse-image .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description {
+.node-story-form #browse-image .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description, .node-story-form #ExpertChunk .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description, .node-photogallery-form #browse-image .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description, .node-photogallery-form #ExpertChunk .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description {
   left: 245px;
 }
 .node-story-form [id*="field-story-reporter-values"] thead,
 .node-story-form [id*="field-story-template-quotes-values"] thead,
 .node-story-form [id*="field-story-template-factoids-values"] thead,
 .node-story-form [id*="field-story-template-buzz-values"] thead,
-.node-story-form [id*="field-story-template-guru-values"] thead {
+.node-story-form [id*="field-story-template-guru-values"] thead, .node-photogallery-form [id*="field-story-reporter-values"] thead,
+.node-photogallery-form [id*="field-story-template-quotes-values"] thead,
+.node-photogallery-form [id*="field-story-template-factoids-values"] thead,
+.node-photogallery-form [id*="field-story-template-buzz-values"] thead,
+.node-photogallery-form [id*="field-story-template-guru-values"] thead {
   padding-left: 20px;
   padding-right: 10px;
   width: 220px;
@@ -7601,7 +7634,11 @@ div.node #comments h2 {
 .node-story-form [id*="field-story-template-quotes-values"] tbody tr:last-child td,
 .node-story-form [id*="field-story-template-factoids-values"] tbody tr:last-child td,
 .node-story-form [id*="field-story-template-buzz-values"] tbody tr:last-child td,
-.node-story-form [id*="field-story-template-guru-values"] tbody tr:last-child td {
+.node-story-form [id*="field-story-template-guru-values"] tbody tr:last-child td, .node-photogallery-form [id*="field-story-reporter-values"] tbody tr:last-child td,
+.node-photogallery-form [id*="field-story-template-quotes-values"] tbody tr:last-child td,
+.node-photogallery-form [id*="field-story-template-factoids-values"] tbody tr:last-child td,
+.node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr:last-child td,
+.node-photogallery-form [id*="field-story-template-guru-values"] tbody tr:last-child td {
   padding-bottom: 0;
 }
 .node-story-form [id*="field-story-reporter-values"] tbody tr td > .form-submit[value="Remove"], .node-story-form [id*="field-story-reporter-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
@@ -7612,7 +7649,15 @@ div.node #comments h2 {
 .node-story-form [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"],
 .node-story-form [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 .node-story-form [id*="field-story-template-guru-values"] tbody tr td > .form-submit[value="Remove"],
-.node-story-form [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
+.node-story-form [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .node-photogallery-form [id*="field-story-reporter-values"] tbody tr td > .form-submit[value="Remove"], .node-photogallery-form [id*="field-story-reporter-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+.node-photogallery-form [id*="field-story-template-quotes-values"] tbody tr td > .form-submit[value="Remove"],
+.node-photogallery-form [id*="field-story-template-quotes-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+.node-photogallery-form [id*="field-story-template-factoids-values"] tbody tr td > .form-submit[value="Remove"],
+.node-photogallery-form [id*="field-story-template-factoids-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+.node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"],
+.node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
+.node-photogallery-form [id*="field-story-template-guru-values"] tbody tr td > .form-submit[value="Remove"],
+.node-photogallery-form [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
   background: url(../images/remove-item.png) no-repeat;
   border: medium none;
   height: 18px;
@@ -7629,7 +7674,15 @@ div.node #comments h2 {
 .node-story-form [id*="field-story-template-buzz-values"] + div.clearfix,
 .node-story-form [id*="field-story-template-buzz-values"] + div.description + div.clearfix,
 .node-story-form [id*="field-story-template-guru-values"] + div.clearfix,
-.node-story-form [id*="field-story-template-guru-values"] + div.description + div.clearfix {
+.node-story-form [id*="field-story-template-guru-values"] + div.description + div.clearfix, .node-photogallery-form [id*="field-story-reporter-values"] + div.clearfix, .node-photogallery-form [id*="field-story-reporter-values"] + div.description + div.clearfix,
+.node-photogallery-form [id*="field-story-template-quotes-values"] + div.clearfix,
+.node-photogallery-form [id*="field-story-template-quotes-values"] + div.description + div.clearfix,
+.node-photogallery-form [id*="field-story-template-factoids-values"] + div.clearfix,
+.node-photogallery-form [id*="field-story-template-factoids-values"] + div.description + div.clearfix,
+.node-photogallery-form [id*="field-story-template-buzz-values"] + div.clearfix,
+.node-photogallery-form [id*="field-story-template-buzz-values"] + div.description + div.clearfix,
+.node-photogallery-form [id*="field-story-template-guru-values"] + div.clearfix,
+.node-photogallery-form [id*="field-story-template-guru-values"] + div.description + div.clearfix {
   bottom: 5px;
   position: absolute;
   right: 163px;
@@ -7642,7 +7695,15 @@ div.node #comments h2 {
 .node-story-form [id*="field-story-template-buzz-values"] + div.clearfix .form-submit,
 .node-story-form [id*="field-story-template-buzz-values"] + div.description + div.clearfix .form-submit,
 .node-story-form [id*="field-story-template-guru-values"] + div.clearfix .form-submit,
-.node-story-form [id*="field-story-template-guru-values"] + div.description + div.clearfix .form-submit {
+.node-story-form [id*="field-story-template-guru-values"] + div.description + div.clearfix .form-submit, .node-photogallery-form [id*="field-story-reporter-values"] + div.clearfix .form-submit, .node-photogallery-form [id*="field-story-reporter-values"] + div.description + div.clearfix .form-submit,
+.node-photogallery-form [id*="field-story-template-quotes-values"] + div.clearfix .form-submit,
+.node-photogallery-form [id*="field-story-template-quotes-values"] + div.description + div.clearfix .form-submit,
+.node-photogallery-form [id*="field-story-template-factoids-values"] + div.clearfix .form-submit,
+.node-photogallery-form [id*="field-story-template-factoids-values"] + div.description + div.clearfix .form-submit,
+.node-photogallery-form [id*="field-story-template-buzz-values"] + div.clearfix .form-submit,
+.node-photogallery-form [id*="field-story-template-buzz-values"] + div.description + div.clearfix .form-submit,
+.node-photogallery-form [id*="field-story-template-guru-values"] + div.clearfix .form-submit,
+.node-photogallery-form [id*="field-story-template-guru-values"] + div.description + div.clearfix .form-submit {
   background: url(../images/add-item.png) no-repeat;
   border: medium none;
   height: 18px;
@@ -7651,13 +7712,13 @@ div.node #comments h2 {
   text-indent: -9999px;
   width: 18px;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody {
+.node-story-form [id*="field-story-template-buzz-values"] tbody, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody {
   float: left;
   overflow: visible;
   position: relative;
   width: 480px;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td {
   background-color: #d9d9d9;
   float: left;
   margin-bottom: 10px;
@@ -7665,97 +7726,99 @@ div.node #comments h2 {
   width: 100%;
   margin-bottom: 10px;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"], .node-story-form [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"], .node-story-form [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td > .form-submit[value="Remove"], .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
   position: absolute;
   left: 100%;
   bottom: 4px;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textfield .form-text {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textfield .form-text, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textfield .form-text {
   max-width: none;
   width: 100%;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textarea > label {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textarea > label, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textarea > label {
   padding: 0 0 5px;
   display: block;
   float: none;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textarea .form-textarea-wrapper {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textarea .form-textarea-wrapper, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textarea .form-textarea-wrapper {
   padding-left: 0;
   width: 100%;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textarea .form-textarea-wrapper .form-textarea {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textarea .form-textarea-wrapper .form-textarea, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-textarea .form-textarea-wrapper .form-textarea {
   width: 100%;
   max-width: none;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file {
   display: inline-block;
   vertical-align: top;
   width: 100%;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file > label {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file > label, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file > label {
   padding: 0 0 5px;
   display: block;
   float: none;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file .form-managed-file {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file .form-managed-file, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file .form-managed-file {
   padding-left: 0;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file .form-managed-file .image-widget-data {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file .form-managed-file .image-widget-data, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file .form-managed-file .image-widget-data {
   float: left;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file .form-managed-file .image-widget-data .form-submit[value="Remove"], .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   left: 240px;
   top: 4px;
 }
-.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file div.description {
+.node-story-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file div.description, .node-photogallery-form [id*="field-story-template-buzz-values"] tbody tr td .form-type-managed-file div.description {
   left: 175px;
 }
-.node-story-form [id*="field-story-template-buzz-values"] + div.clearfix, .node-story-form [id*="field-story-template-buzz-values"] + div.description + div.clearfix {
+.node-story-form [id*="field-story-template-buzz-values"] + div.clearfix, .node-story-form [id*="field-story-template-buzz-values"] + div.description + div.clearfix, .node-photogallery-form [id*="field-story-template-buzz-values"] + div.clearfix, .node-photogallery-form [id*="field-story-template-buzz-values"] + div.description + div.clearfix {
   bottom: 15px;
   position: absolute;
   right: 15px;
 }
-.node-story-form #Templates table {
+.node-story-form #Templates table, .node-photogallery-form #Templates table {
   margin-bottom: 10px;
 }
 .node-story-form .form-field-type-text,
 .node-story-form .form-field-name-field-story-reporter,
-.node-story-form .form-field-type-field-collection {
+.node-story-form .form-field-type-field-collection, .node-photogallery-form .form-field-type-text,
+.node-photogallery-form .form-field-name-field-story-reporter,
+.node-photogallery-form .form-field-type-field-collection {
   position: relative;
 }
-.node-story-form .vertical-tabs ul.vertical-tabs-list {
+.node-story-form .vertical-tabs ul.vertical-tabs-list, .node-photogallery-form .vertical-tabs ul.vertical-tabs-list {
   display: none;
 }
-.node-story-form .form-field-name-field-story-issue-date .form-type-date-popup .date-padding .form-type-textfield {
+.node-story-form .form-field-name-field-story-issue-date .form-type-date-popup .date-padding .form-type-textfield, .node-photogallery-form .form-field-name-field-story-issue-date .form-type-date-popup .date-padding .form-type-textfield {
   padding: 0 !important;
 }
-.node-story-form .itg-sidebar-form {
+.node-story-form .itg-sidebar-form, .node-photogallery-form .itg-sidebar-form {
   margin: 20px 0 0;
 }
-.node-story-form .itg-sidebar-form .itg-sidebar-form-section {
+.node-story-form .itg-sidebar-form .itg-sidebar-form-section, .node-photogallery-form .itg-sidebar-form .itg-sidebar-form-section {
   background-color: #d9d9d9;
   display: inline-block;
   margin-bottom: 10px;
   vertical-align: top;
   width: 100%;
 }
-.node-story-form .itg-sidebar-form h2 {
+.node-story-form .itg-sidebar-form h2, .node-photogallery-form .itg-sidebar-form h2 {
   background: none;
   border: none;
   margin: 0;
   padding: 8px 15px;
 }
-.node-story-form .itg-sidebar-form .form-item > label {
+.node-story-form .itg-sidebar-form .form-item > label, .node-photogallery-form .itg-sidebar-form .form-item > label {
   float: none;
   padding: 0 0 5px;
 }
-.node-story-form .itg-sidebar-form .form-item.form-type-textfield > label, .node-story-form .itg-sidebar-form .form-item.form-type-managed-file > label, .node-story-form .itg-sidebar-form .form-item.form-type-textarea > label {
+.node-story-form .itg-sidebar-form .form-item.form-type-textfield > label, .node-story-form .itg-sidebar-form .form-item.form-type-managed-file > label, .node-story-form .itg-sidebar-form .form-item.form-type-textarea > label, .node-photogallery-form .itg-sidebar-form .form-item.form-type-textfield > label, .node-photogallery-form .itg-sidebar-form .form-item.form-type-managed-file > label, .node-photogallery-form .itg-sidebar-form .form-item.form-type-textarea > label {
   display: block;
 }
-.node-story-form .itg-sidebar-form .form-item.form-type-textarea .form-textarea-wrapper {
+.node-story-form .itg-sidebar-form .form-item.form-type-textarea .form-textarea-wrapper, .node-photogallery-form .itg-sidebar-form .form-item.form-type-textarea .form-textarea-wrapper {
   padding-left: 0;
 }
-.node-story-form .itg-sidebar-form .form-item.form-type-checkboxes .form-checkboxes {
+.node-story-form .itg-sidebar-form .form-item.form-type-checkboxes .form-checkboxes, .node-photogallery-form .itg-sidebar-form .form-item.form-type-checkboxes .form-checkboxes {
   padding: 10px 0 10px 15px;
 }
 .node-story-form .itg-sidebar-form .form-type-textfield,
@@ -7767,60 +7830,71 @@ div.node #comments h2 {
 .node-story-form .itg-sidebar-form .form-type-autocomplete-deluxe,
 .node-story-form .itg-sidebar-form .date-combo,
 .node-story-form .itg-sidebar-form .form-type-hierarchical-select,
-.node-story-form .itg-sidebar-form .form-type-textarea {
+.node-story-form .itg-sidebar-form .form-type-textarea, .node-photogallery-form .itg-sidebar-form .form-type-textfield,
+.node-photogallery-form .itg-sidebar-form .form-type-password,
+.node-photogallery-form .itg-sidebar-form .form-type-select,
+.node-photogallery-form .itg-sidebar-form .form-type-managed-file,
+.node-photogallery-form .itg-sidebar-form .form-type-checkboxes,
+.node-photogallery-form .itg-sidebar-form .form-type-radios,
+.node-photogallery-form .itg-sidebar-form .form-type-autocomplete-deluxe,
+.node-photogallery-form .itg-sidebar-form .date-combo,
+.node-photogallery-form .itg-sidebar-form .form-type-hierarchical-select,
+.node-photogallery-form .itg-sidebar-form .form-type-textarea {
   margin: 10px 0;
   padding: 0 15px;
 }
-.node-story-form .itg-sidebar-form fieldset.date-combo > legend {
+.node-story-form .itg-sidebar-form fieldset.date-combo > legend, .node-photogallery-form .itg-sidebar-form fieldset.date-combo > legend {
   float: none;
   display: block;
   padding: 0 0 5px;
 }
-.node-story-form .itg-sidebar-form fieldset.date-combo > legend + div {
+.node-story-form .itg-sidebar-form fieldset.date-combo > legend + div, .node-photogallery-form .itg-sidebar-form fieldset.date-combo > legend + div {
   padding: 0;
 }
 .node-story-form .itg-sidebar-form .form-type-textfield label + .form-text + span.error,
 .node-story-form .itg-sidebar-form .form-type-textfield label + #autocomplete + .form-text + span.error,
-.node-story-form .itg-sidebar-form .form-type-textfield label + .form-text + div.description + span.error {
+.node-story-form .itg-sidebar-form .form-type-textfield label + .form-text + div.description + span.error, .node-photogallery-form .itg-sidebar-form .form-type-textfield label + .form-text + span.error,
+.node-photogallery-form .itg-sidebar-form .form-type-textfield label + #autocomplete + .form-text + span.error,
+.node-photogallery-form .itg-sidebar-form .form-type-textfield label + .form-text + div.description + span.error {
   padding-left: 0;
 }
-.node-story-form .itg-sidebar-form .date-no-float {
+.node-story-form .itg-sidebar-form .date-no-float, .node-photogallery-form .itg-sidebar-form .date-no-float {
   width: 100%;
 }
-.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup {
+.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup, .node-photogallery-form .itg-sidebar-form .date-no-float .form-type-date-popup {
   margin-right: 0;
 }
-.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield {
+.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield, .node-photogallery-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield {
   float: left;
   width: 50%;
   margin: 0;
 }
-.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:first-child {
+.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:first-child, .node-photogallery-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:first-child {
   padding: 0 10px 0 0;
   width: 60%;
 }
-.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:last-child {
+.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:last-child, .node-photogallery-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:last-child {
   padding: 0;
   width: 40%;
 }
-.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:last-child div.description {
+.node-story-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:last-child div.description, .node-photogallery-form .itg-sidebar-form .date-no-float .form-type-date-popup .date-padding .form-type-textfield:last-child div.description {
   left: 130px;
 }
-.node-story-form .itg-sidebar-form .form-field-name-field-story-highlights {
+.node-story-form .itg-sidebar-form .form-field-name-field-story-highlights, .node-photogallery-form .itg-sidebar-form .form-field-name-field-story-highlights {
   position: relative;
 }
-.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] thead {
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] thead, .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] thead {
   display: none;
 }
-.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody {
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody, .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody {
   margin: 0;
 }
-.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .form-type-textfield {
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .form-type-textfield, .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .form-type-textfield {
   width: 290px;
   padding-right: 10px;
   margin: 0 0 10px;
 }
-.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"], .node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"], .node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td > .form-submit[value="Remove"], .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"] {
   background: url(../images/remove-item.png) no-repeat;
   border: none;
   height: 18px;
@@ -7829,12 +7903,12 @@ div.node #comments h2 {
   text-indent: -9999px;
   width: 18px;
 }
-.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix {
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix, .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix {
   bottom: 15px;
   position: absolute;
   right: 35px;
 }
-.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit {
+.node-story-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit, .node-photogallery-form .itg-sidebar-form [id*="field-story-highlights-values"] + div.clearfix .form-submit {
   background: url(../images/add-item.png) no-repeat;
   border: medium none;
   height: 18px;
@@ -7843,20 +7917,20 @@ div.node #comments h2 {
   text-indent: -9999px;
   width: 18px;
 }
-.node-story-form .itg-sidebar-form #Configuration h2 {
+.node-story-form .itg-sidebar-form #Configuration h2, .node-photogallery-form .itg-sidebar-form #Configuration h2 {
   padding-bottom: 0;
 }
-.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes {
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes, .node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes {
   margin-top: 0;
 }
-.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes > label {
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes > label, .node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-type-checkboxes > label {
   display: none;
 }
-.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured {
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured, .node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured {
   position: relative;
   margin: 5px 0;
 }
-.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label {
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label, .node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label {
   border-radius: 2px;
   padding: 5px 10px 5px 32px;
   background-color: #000;
@@ -7864,7 +7938,7 @@ div.node #comments h2 {
   display: inline-block;
   vertical-align: top;
 }
-.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label:before {
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label:before, .node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured label:before {
   content: '\f096';
   position: absolute;
   font-family: 'FontAwesome';
@@ -7873,57 +7947,57 @@ div.node #comments h2 {
   color: #1fb5ad;
   left: 10px;
 }
-.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox {
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox, .node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox {
   position: absolute;
   left: 0;
   opacity: 0;
 }
-.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox:checked + label:before {
+.node-story-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox:checked + label:before, .node-photogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-configurations .form-item-field-story-configurations-und-set-as-featured .form-checkbox:checked + label:before {
   content: '\f046';
 }
-.node-story-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes > label {
+.node-story-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes > label, .node-photogallery-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes > label {
   float: left;
   width: 100px;
   padding: 0;
 }
-.node-story-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes .form-checkboxes {
+.node-story-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes .form-checkboxes, .node-photogallery-form .itg-sidebar-form #DateTime .form-field-name-field-story-expires .form-type-checkboxes .form-checkboxes {
   float: left;
   padding: 3px;
 }
-.node-story-form .itg-sidebar-form #DateTime .form-field-name-field-story-expiry-date {
+.node-story-form .itg-sidebar-form #DateTime .form-field-name-field-story-expiry-date, .node-photogallery-form .itg-sidebar-form #DateTime .form-field-name-field-story-expiry-date {
   float: left;
   width: 100%;
 }
-.node-story-form .itg-sidebar-form #SocialMedia h2 {
+.node-story-form .itg-sidebar-form #SocialMedia h2, .node-photogallery-form .itg-sidebar-form #SocialMedia h2 {
   padding-bottom: 0;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-field-name-field-story-social-media-integ .form-type-checkboxes {
+.node-story-form .itg-sidebar-form #SocialMedia .form-field-name-field-story-social-media-integ .form-type-checkboxes, .node-photogallery-form .itg-sidebar-form #SocialMedia .form-field-name-field-story-social-media-integ .form-type-checkboxes {
   margin-top: 0;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-field-name-field-story-social-media-integ .form-type-checkboxes > label {
+.node-story-form .itg-sidebar-form #SocialMedia .form-field-name-field-story-social-media-integ .form-type-checkboxes > label, .node-photogallery-form .itg-sidebar-form #SocialMedia .form-field-name-field-story-social-media-integ .form-type-checkboxes > label {
   display: none;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-field-type-text div.description {
+.node-story-form .itg-sidebar-form #SocialMedia .form-field-type-text div.description, .node-photogallery-form .itg-sidebar-form #SocialMedia .form-field-type-text div.description {
   display: none;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file {
+.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file, .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file {
   padding-left: 0;
   min-height: 28px;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file .image-widget-data > .form-item {
+.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file .image-widget-data > .form-item, .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file .image-widget-data > .form-item {
   margin: 0;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file + div.description {
+.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file + div.description, .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file + div.description {
   left: 160px;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data {
+.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data, .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data {
   float: left;
   width: 188px;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data > .form-item {
+.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data > .form-item, .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data > .form-item {
   margin: 0 0 10px;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data .form-submit[value="Remove"] {
+.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data .form-submit[value="Remove"] {
   background: url(../images/cross_small.png) center center no-repeat;
   height: 20px;
   left: 175px;
@@ -7931,55 +8005,55 @@ div.node #comments h2 {
   top: 4px;
   width: 20px;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description {
+.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description, .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file.has-image-preview .image-widget-data div.description {
   display: none;
 }
-.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file > .form-submit[value="Remove"] {
+.node-story-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file > .form-submit[value="Remove"], .node-photogallery-form .itg-sidebar-form #SocialMedia .form-type-managed-file .form-managed-file > .form-submit[value="Remove"] {
   left: 290px;
   top: 22px;
 }
-.node-story-form .itg-sidebar-form .form-field-name-field-poll-start-date {
+.node-story-form .itg-sidebar-form .form-field-name-field-poll-start-date, .node-photogallery-form .itg-sidebar-form .form-field-name-field-poll-start-date {
   display: inline-block;
   vertical-align: top;
   width: 50%;
 }
-.node-story-form .itg-sidebar-form .form-field-name-field-poll-start-date .date-combo {
+.node-story-form .itg-sidebar-form .form-field-name-field-poll-start-date .date-combo, .node-photogallery-form .itg-sidebar-form .form-field-name-field-poll-start-date .date-combo {
   margin: 0;
 }
-.node-story-form .itg-sidebar-form .form-field-name-field-poll-start-date .date-no-float .form-type-date-popup .date-padding .form-type-textfield {
+.node-story-form .itg-sidebar-form .form-field-name-field-poll-start-date .date-no-float .form-type-date-popup .date-padding .form-type-textfield, .node-photogallery-form .itg-sidebar-form .form-field-name-field-poll-start-date .date-no-float .form-type-date-popup .date-padding .form-type-textfield {
   width: 100%;
 }
-.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time {
+.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time, .node-photogallery-form .itg-sidebar-form .form-field-name-field-story-tv-time {
   display: inline-block;
   vertical-align: top;
   width: 48%;
 }
-.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-type-select {
+.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-type-select, .node-photogallery-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-type-select {
   margin: 0;
 }
-.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-item {
+.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-item, .node-photogallery-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-item {
   padding-left: 0;
 }
-.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-item > label {
+.node-story-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-item > label, .node-photogallery-form .itg-sidebar-form .form-field-name-field-story-tv-time .form-item > label {
   display: block;
 }
-.node-story-form .metatags-and-remarks {
+.node-story-form .metatags-and-remarks, .node-photogallery-form .metatags-and-remarks {
   background-color: #d9d9d9;
   display: inline-block;
   vertical-align: top;
   width: 100%;
 }
-.node-story-form .metatags-and-remarks .node-form-revision-information .form-type-textarea {
+.node-story-form .metatags-and-remarks .node-form-revision-information .form-type-textarea, .node-photogallery-form .metatags-and-remarks .node-form-revision-information .form-type-textarea {
   margin-top: 0;
 }
-.node-story-form .metatags-and-remarks .node-form-revision-information .form-type-textarea > label {
+.node-story-form .metatags-and-remarks .node-form-revision-information .form-type-textarea > label, .node-photogallery-form .metatags-and-remarks .node-form-revision-information .form-type-textarea > label {
   display: none;
 }
-.node-story-form .metatags-and-remarks .vertical-tabs-panes > h2 {
+.node-story-form .metatags-and-remarks .vertical-tabs-panes > h2, .node-photogallery-form .metatags-and-remarks .vertical-tabs-panes > h2 {
   padding-top: 20px;
   position: relative;
 }
-.node-story-form .metatags-and-remarks .vertical-tabs-panes > h2:before {
+.node-story-form .metatags-and-remarks .vertical-tabs-panes > h2:before, .node-photogallery-form .metatags-and-remarks .vertical-tabs-panes > h2:before {
   background-color: #fff;
   content: "";
   display: inline-block;
@@ -7991,20 +8065,20 @@ div.node #comments h2 {
   vertical-align: top;
   width: 100%;
 }
-.node-story-form .metatags-and-remarks div.description {
+.node-story-form .metatags-and-remarks div.description, .node-photogallery-form .metatags-and-remarks div.description {
   display: none !important;
 }
-.node-story-form .img-crt {
+.node-story-form .img-crt, .node-photogallery-form .img-crt {
   border-radius: 1px;
   box-shadow: 0 0 5px #3a8a82;
   margin: 5px 0 0 220px;
   text-transform: uppercase;
   transition: all .3s;
 }
-.node-story-form .img-crt:hover {
+.node-story-form .img-crt:hover, .node-photogallery-form .img-crt:hover {
   box-shadow: 0 0 2px #3a8a82;
 }
-.node-story-form .add-to-dropbox.form-submit {
+.node-story-form .add-to-dropbox.form-submit, .node-photogallery-form .add-to-dropbox.form-submit {
   border-radius: 1px;
   box-shadow: 0 0 5px #3a8a82;
   height: 27px;
@@ -8013,33 +8087,33 @@ div.node #comments h2 {
   text-transform: uppercase;
   transition: all .3s;
 }
-.node-story-form .add-to-dropbox.form-submit:hover {
+.node-story-form .add-to-dropbox.form-submit:hover, .node-photogallery-form .add-to-dropbox.form-submit:hover {
   box-shadow: 0 0 2px #3a8a82;
 }
-.node-story-form .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+.node-story-form .form-managed-file .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   left: 250px;
   top: 4px;
 }
-.node-story-form .form-managed-file .image-widget-data .form-type-textfield {
+.node-story-form .form-managed-file .image-widget-data .form-type-textfield, .node-photogallery-form .form-managed-file .image-widget-data .form-type-textfield {
   max-width: 250px;
 }
-.node-story-form .path-form .fieldset-wrapper .form-type-checkbox {
+.node-story-form .path-form .fieldset-wrapper .form-type-checkbox, .node-photogallery-form .path-form .fieldset-wrapper .form-type-checkbox {
   position: absolute;
   right: 20px;
   top: 0;
   z-index: 9;
   left: auto;
 }
-.node-story-form .element-invisible {
+.node-story-form .element-invisible, .node-photogallery-form .element-invisible {
   display: none;
 }
-.node-story-form .itg-form-action .form-actions {
+.node-story-form .itg-form-action .form-actions, .node-photogallery-form .itg-form-action .form-actions {
   background: none;
   border: none;
   margin: 0;
   padding: 20px;
 }
-.node-story-form .itg-form-action .form-actions .button {
+.node-story-form .itg-form-action .form-actions .button, .node-photogallery-form .itg-form-action .form-actions .button {
   border-radius: 1px;
   border: 1px solid #ee4d4d;
   background-color: #ee4d4d;
@@ -8051,10 +8125,10 @@ div.node #comments h2 {
   color: #fff;
   margin-right: 10px;
 }
-.node-story-form .itg-form-action .form-actions .button:hover {
+.node-story-form .itg-form-action .form-actions .button:hover, .node-photogallery-form .itg-form-action .form-actions .button:hover {
   box-shadow: 0 0 2px #ee4d4d;
 }
-.node-story-form .itg-form-action .form-actions .form-submit, .node-story-form .itg-form-action .form-actions #story_submit_link {
+.node-story-form .itg-form-action .form-actions .form-submit, .node-story-form .itg-form-action .form-actions #story_submit_link, .node-photogallery-form .itg-form-action .form-actions .form-submit, .node-photogallery-form .itg-form-action .form-actions #story_submit_link {
   border-radius: 1px;
   border: 1px solid #1fb5ad;
   background-color: #1fb5ad;
@@ -8066,10 +8140,10 @@ div.node #comments h2 {
   color: #fff;
   margin-right: 10px;
 }
-.node-story-form .itg-form-action .form-actions .form-submit:hover, .node-story-form .itg-form-action .form-actions #story_submit_link:hover {
+.node-story-form .itg-form-action .form-actions .form-submit:hover, .node-story-form .itg-form-action .form-actions #story_submit_link:hover, .node-photogallery-form .itg-form-action .form-actions .form-submit:hover, .node-photogallery-form .itg-form-action .form-actions #story_submit_link:hover {
   box-shadow: 0 0 2px #3a8a82;
 }
-.node-story-form a.ckeditor_links {
+.node-story-form a.ckeditor_links, .node-photogallery-form a.ckeditor_links {
   color: #0c8bb1;
   display: inline-block;
   font-size: 12px;
