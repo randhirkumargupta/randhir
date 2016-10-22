@@ -8499,13 +8499,31 @@ div.node #comments h2 {
   text-decoration: underline;
 }
 
-.page-node-add-story .action-with-title #page-title, .node-type-story .action-with-title #page-title, .page-admin-structure-taxonomy-category-management .action-with-title #page-title {
+.page-node-add-story .action-with-title #page-title,
+.node-type-story .action-with-title #page-title,
+.page-node-add-videogallery .action-with-title #page-title,
+.node-type-videogallery .action-with-title #page-title,
+.page-node-add-photogallery .action-with-title #page-title,
+.node-type-photogallery .action-with-title #page-title,
+.page-admin-structure-taxonomy-category-management .action-with-title #page-title {
   width: 500px;
 }
-.page-node-add-story .action-with-title.fixed, .node-type-story .action-with-title.fixed, .page-admin-structure-taxonomy-category-management .action-with-title.fixed {
+.page-node-add-story .action-with-title.fixed,
+.node-type-story .action-with-title.fixed,
+.page-node-add-videogallery .action-with-title.fixed,
+.node-type-videogallery .action-with-title.fixed,
+.page-node-add-photogallery .action-with-title.fixed,
+.node-type-photogallery .action-with-title.fixed,
+.page-admin-structure-taxonomy-category-management .action-with-title.fixed {
   padding: 10px 0;
 }
-.page-node-add-story .top-actions .button, .node-type-story .top-actions .button, .page-admin-structure-taxonomy-category-management .top-actions .button {
+.page-node-add-story .top-actions .button,
+.node-type-story .top-actions .button,
+.page-node-add-videogallery .top-actions .button,
+.node-type-videogallery .top-actions .button,
+.page-node-add-photogallery .top-actions .button,
+.node-type-photogallery .top-actions .button,
+.page-admin-structure-taxonomy-category-management .top-actions .button {
   border-radius: 1px;
   border: 1px solid #ee4d4d;
   background-color: #ee4d4d;
@@ -8517,10 +8535,28 @@ div.node #comments h2 {
   color: #fff;
   margin-right: 0;
 }
-.page-node-add-story .top-actions .button:hover, .node-type-story .top-actions .button:hover, .page-admin-structure-taxonomy-category-management .top-actions .button:hover {
+.page-node-add-story .top-actions .button:hover,
+.node-type-story .top-actions .button:hover,
+.page-node-add-videogallery .top-actions .button:hover,
+.node-type-videogallery .top-actions .button:hover,
+.page-node-add-photogallery .top-actions .button:hover,
+.node-type-photogallery .top-actions .button:hover,
+.page-admin-structure-taxonomy-category-management .top-actions .button:hover {
   box-shadow: 0 0 2px #ee4d4d;
 }
-.page-node-add-story .top-actions .form-submit, .page-node-add-story .top-actions a[data-id="story_submit_link"], .node-type-story .top-actions .form-submit, .node-type-story .top-actions a[data-id="story_submit_link"], .page-admin-structure-taxonomy-category-management .top-actions .form-submit, .page-admin-structure-taxonomy-category-management .top-actions a[data-id="story_submit_link"] {
+.page-node-add-story .top-actions .form-submit, .page-node-add-story .top-actions a[data-id="story_submit_link"],
+.node-type-story .top-actions .form-submit,
+.node-type-story .top-actions a[data-id="story_submit_link"],
+.page-node-add-videogallery .top-actions .form-submit,
+.page-node-add-videogallery .top-actions a[data-id="story_submit_link"],
+.node-type-videogallery .top-actions .form-submit,
+.node-type-videogallery .top-actions a[data-id="story_submit_link"],
+.page-node-add-photogallery .top-actions .form-submit,
+.page-node-add-photogallery .top-actions a[data-id="story_submit_link"],
+.node-type-photogallery .top-actions .form-submit,
+.node-type-photogallery .top-actions a[data-id="story_submit_link"],
+.page-admin-structure-taxonomy-category-management .top-actions .form-submit,
+.page-admin-structure-taxonomy-category-management .top-actions a[data-id="story_submit_link"] {
   border-radius: 1px;
   border: 1px solid #1fb5ad;
   background-color: #1fb5ad;
@@ -8532,7 +8568,19 @@ div.node #comments h2 {
   color: #fff;
   margin-right: 10px;
 }
-.page-node-add-story .top-actions .form-submit:hover, .page-node-add-story .top-actions a[data-id="story_submit_link"]:hover, .node-type-story .top-actions .form-submit:hover, .node-type-story .top-actions a[data-id="story_submit_link"]:hover, .page-admin-structure-taxonomy-category-management .top-actions .form-submit:hover, .page-admin-structure-taxonomy-category-management .top-actions a[data-id="story_submit_link"]:hover {
+.page-node-add-story .top-actions .form-submit:hover, .page-node-add-story .top-actions a[data-id="story_submit_link"]:hover,
+.node-type-story .top-actions .form-submit:hover,
+.node-type-story .top-actions a[data-id="story_submit_link"]:hover,
+.page-node-add-videogallery .top-actions .form-submit:hover,
+.page-node-add-videogallery .top-actions a[data-id="story_submit_link"]:hover,
+.node-type-videogallery .top-actions .form-submit:hover,
+.node-type-videogallery .top-actions a[data-id="story_submit_link"]:hover,
+.page-node-add-photogallery .top-actions .form-submit:hover,
+.page-node-add-photogallery .top-actions a[data-id="story_submit_link"]:hover,
+.node-type-photogallery .top-actions .form-submit:hover,
+.node-type-photogallery .top-actions a[data-id="story_submit_link"]:hover,
+.page-admin-structure-taxonomy-category-management .top-actions .form-submit:hover,
+.page-admin-structure-taxonomy-category-management .top-actions a[data-id="story_submit_link"]:hover {
   box-shadow: 0 0 2px #3a8a82;
 }
 
