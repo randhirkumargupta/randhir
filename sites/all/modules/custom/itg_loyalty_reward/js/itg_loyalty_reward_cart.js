@@ -30,8 +30,8 @@
             });
             // Checkout page script.
             // validateJobSearch validation function.
-            if ($('body').hasClass('page-checkout')) {
-                $("#itg-loyalty-reward-checkout-form").validate({
+            if ($('body').hasClass('page-order-summary')) {
+                $("#itg-loyalty-reward-address-form").validate({
                     onfocusout: function (element) {
                         $(element).valid();
                     },
@@ -46,29 +46,11 @@
                         }
                         error.appendTo(errorPlaceHolder);
                     },
-                    rules: {
-                        'name': {
-                            required: true,
-                            lettersonly: true
-                        },
-                        'email': {
-                            required: true,
-                            email: true,
-                        },
-                        'phone': {
-                            required: true,
-                            minlength: 10,
-                            maxlength: 10,
-                            number: true
-                        },
+                    rules: {                        
                         'address': {
                             required: true,
                             alphanumeric: true
-                        },
-                        'city': {
-                            required: true,
-                            lettersonly: true
-                        },
+                        },                        
                         'zip_code': {
                             required: true,
                             minlength: 6,
@@ -76,26 +58,10 @@
                             number: true
                         }
                     },
-                    messages: {
-                        'name': {
-                            required: 'Name field is required.',
-                        },
-                        'email': {
-                            required: 'Email field is required.',
-                            fullemail: 'Please enter a valid Email Address.'
-                        },
-                        'phone': {
-                            required: 'Phone field is required.',
-                            maxlength: 'Please enter valid Phone Number.',
-                            minlength: 'Please enter valid Phone Number.',
-                            number: 'Please enter valid Phone Number'
-                        },
+                    messages: {                        
                         'address': {
                             required: 'Address field is required.'
-                        },
-                        'city': {
-                            required: 'City field is required.'
-                        },
+                        },                        
                         'zip_code': {
                             required: 'Zip Code field is required.',
                             maxlength: 'Please enter valid Zip Code.',
