@@ -4260,6 +4260,7 @@ footer{
         .special-top-news{
             overflow: hidden;
             position: relative;
+            height:100%;
             .widget-title{
                 position: absolute;
             }
@@ -4291,6 +4292,7 @@ footer{
 
     .auto-tips-n-tricks{
         ul{
+            @extend .list-none;
             li{
                 padding: 18px 0;
                 +li{
