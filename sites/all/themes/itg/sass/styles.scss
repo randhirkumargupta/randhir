@@ -4292,7 +4292,7 @@ footer{
 
     .auto-tips-n-tricks{
         ul{
-            @extend .list-none;
+            list-style: none;
             li{
                 padding: 18px 0;
                 +li{
