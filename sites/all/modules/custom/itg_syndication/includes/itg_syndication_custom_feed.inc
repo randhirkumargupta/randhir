@@ -5,7 +5,7 @@
  * @param string $feed_type
  * @param string $body
  */
-define(DEFAULT_URL, "http://");
+//define(DEFAULT_URL, "http://");
 
 function isValidFeed($feed_type, $body) {
   $return = FALSE;
@@ -438,7 +438,7 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
           $fid_value = $values['fid'];
           $file_load = file_load($fid_value);
           $file_url = file_create_url($file_load->uri);
-          $required_value[] = (strlen($file_url) > 8) ? $file_url : DEFAULT_URL;
+          $required_value[] = (strlen($file_url) > 8) ? $file_url : 'http://';
           break;
         case 'uid':
           $uid_values = entity_load('user', $values['uid']);
