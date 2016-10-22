@@ -148,5 +148,15 @@ function event_backend_user_default_permissions() {
     'module' => 'scheduler',
   );
 
+  // Exported permission: 'set domain access'.
+  $permissions['set domain access'] = array(
+    'name' => 'set domain access',
+    'roles' => array(
+      'Site Admin' => 'Site Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'domain',
+  );
+
   return $permissions;
 }

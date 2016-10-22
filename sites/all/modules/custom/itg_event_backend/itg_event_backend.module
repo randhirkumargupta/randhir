@@ -468,6 +468,10 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
       'variables' => array('data' => NULL),
     ),
+   'tweet_right_sidebar_event' => array(
+			'template' => 'tweet-right-sidebar-event',
+			'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+		),
   );
   return $themes;
 }
@@ -490,7 +494,14 @@ function itg_event_backend_block_info() {
     'info' => t('Program Schedule Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-
+	$blocks['ad_right_sidebar_event'] = array(
+		'info' => t('Ad right sidebar event'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
+ $blocks['tweet_right_sidebar_event'] = array(
+		'info' => t('Tweet Right Sidebar Event'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
   return $blocks;
 }
 
@@ -510,6 +521,14 @@ function itg_event_backend_block_view($delta = '') {
     case 'program_tab_block':
       $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab()));
       break;
+    case 'ad_right_sidebar_event':
+			$page_name = 'Rest';
+			$data['itg_ad'] = get_ad_script($page_name);
+			$block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
+			break;
+    case 'tweet_right_sidebar_event':
+			$block['content'] = theme('tweet_right_sidebar_event');
+			break;
   }
 
   return $block;
@@ -818,10 +837,12 @@ function itg_event_backend_get_event_node(){
  * @return boolean
  */
 function itg_event_get_host_name() {
-  $host_name = db_query("SELECT subdomain, scheme FROM {domain} WHERE domain_id = :domain_id", array(':domain_id' => 1))->fetchAll();
-  if (!empty($host_name)) {
-    return $host_name[0]->scheme.'://'.$host_name[0]->subdomain;
-  } else {
-    return FALSE;
+  if (module_exists('domain')) {
+    $host_name = db_query("SELECT subdomain, scheme FROM {domain} WHERE domain_id = :domain_id", array(':domain_id' => 1))->fetchAll();
+    if (!empty($host_name)) {
+      return $host_name[0]->scheme . '://' . $host_name[0]->subdomain;
+    } else {
+      return FALSE;
+    }
   }
 }
