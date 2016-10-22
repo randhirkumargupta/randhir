@@ -7484,6 +7484,7 @@ div.node{
         }
       }
     }
+      
   .itg-sidebar-form{
     margin: 20px 0 0;
     .itg-sidebar-form-section{
@@ -7884,7 +7885,13 @@ div.node{
     text-decoration: underline;
   }
 }
-.page-node-add-story, .node-type-story, .page-admin-structure-taxonomy-category-management{
+.page-node-add-story, 
+.node-type-story, 
+.page-node-add-videogallery,
+.node-type-videogallery,
+.page-node-add-photogallery,
+.node-type-photogallery,
+.page-admin-structure-taxonomy-category-management{
   .action-with-title #page-title{
     width: 500px;
   }
