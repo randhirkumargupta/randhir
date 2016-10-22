@@ -12,16 +12,7 @@
  */
 function itg_personalization_edit_profile_form() {
   global $user;
-  $user_detail = user_load($user->uid);    
-  $output = '<ul class="profile-edit-tab">';
-  $output .= '<li>' . l(t('General Settings'), 'personalization/edit-profile/general-settings') . '</li>';
-  $output .= '<li>' . l(t('Change Password'), 'personalization/edit-profile/change-password') . '</li>';
-  $output .= '<li>' . l(t('Refer a Friend'), 'personalization/edit-profile/refer-a-friend') . '</li>';
-  $output .= '</ul>';
-  $form['tab'] = array(
-    '#type' => 'markup',
-    '#markup' => $output,
-  );
+  $user_detail = user_load($user->uid);      
   $form['fname'] = array(
     '#title' => t('First Name'),
     '#type' => 'textfield',
