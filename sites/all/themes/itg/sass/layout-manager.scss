@@ -237,6 +237,19 @@ img{
 /*End top-takes-video suggest End*/
 
 /*Start CSS trending-videos Home  page*/
+.video-icon{
+    @include display-inline;
+    position: relative;
+    &:after{
+        background: url(../images/video-icon-small.png) no-repeat;
+        content:"";
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
+    }
+}
 .trending-videos{
     @extend .list-none;
     border: 1px solid $border-color;
@@ -655,7 +668,7 @@ img{
     }
     .itg-785{
         .droppable{
-            min-height: 785px;
+            min-height: 400px;
         }
     }
     .itg-628{
@@ -849,6 +862,10 @@ img{
                 }
             }
         }
+    }
+    .section_wise_order-auto-road-trip{
+        background: #f3f3f3;
+        padding: 10px;
     }
     .auto-road-trip{
         .trending-videos{
@@ -1433,10 +1450,11 @@ img{
             display: none;
         }
         .form-type-textfield{
-            margin: 0 0 10px;
+            margin: 0 0 15px;
             padding: 0;
             input[type="text"]{
                 width: 100%;
+                height: 35px;
             }
             span.error{
                 background: #fff none repeat scroll 0 0;
@@ -1458,7 +1476,58 @@ img{
             font-family: roboto-slab;
             font-size: 18px;
             border-radius: 5px;
+            cursor: pointer;
         }
+    }
+       .ask-question{
+        padding:15px;
+        font-family: roboto-slab;
+        .form-type-textarea, .form-type-textfield{
+            margin: 0;
+            padding: 0;            
+        }
+        #itg-custom-ask-an-expert-form{
+            @include clearfix;
+            input[type="text"]{
+                position: static;
+                left: auto;
+                top:auto;
+                width: 110px;
+                font-family: roboto-slab;
+            }
+            textarea{
+                font-family: roboto-slab;
+                height: 65px;
+            }
+            #question{
+                p{
+                    color: #000;
+                    font-size: 12px;
+                    margin-bottom: 20px;
+                    margin-top: 10px;
+                }
+            }
+            #askname, #askemail, input[type="submit"]{
+                float: left;
+                width: 33%;
+            }
+            #askemail{
+                margin: 0 12px;
+            }
+            input[type="submit"]{
+                background: #000 none repeat scroll 0 0;
+                border: medium none;
+                border-radius: 5px;
+                color: #fff;                
+                font-size: 16px;
+                height: 32px;
+                line-height: 29px;
+                text-transform: uppercase;
+                width: 90px;
+                cursor: pointer;
+                font-family: roboto-slab;
+            }
+        }        
     }
 }
 /*CSS end for education page*/
@@ -1988,3 +2057,163 @@ img{
     }
   }
 }
+
+
+/*Budget page css start*/
+.budget-page-layout{
+    .droppable{
+        overflow: hidden;
+    }
+    .itg-325-layout{
+        .droppable{
+            height: 325px;
+        }
+    }
+    .itg-530-layout{
+        .droppable{
+            height: 530px;
+        }
+    }
+    .itg-370-layout{
+        .droppable{
+            height: 370px;
+        }
+    }
+     .itg-480-layout{
+        .droppable{
+            height: 480px;
+        }
+        .itg-widget-parent{
+            .droppable{
+                height: 160px;
+            }    
+        }
+        .itg-widget-child{
+            .droppable{
+                height: 283px;
+            }    
+        }
+    }
+    .itg-715-layout{
+        .droppable{
+            height: 715px;
+        }       
+        .itg-widget-child{
+            .droppable{
+                height: 343px;
+            }    
+        }
+    }
+    h1{
+        .disc-share{
+            a{
+                font-size: 20px;
+                color: #b6b6b6;
+            }
+        }
+    }
+     .highlight{
+        overflow:auto;
+    }
+    .budget-ad{
+        margin-top: 25px;
+    }
+    iframe{
+        width: 100%;
+    }
+    .special-top-bg{
+        background: #fbfbfb;
+        height: 530px;
+    }
+    .itg-listing{
+        border: none;
+    }
+    .section_wise_order .widget-settings{
+        @include pos(relative);
+    }
+    .trending-videos{
+        padding: 0;
+        border: none;
+        li{
+           &.trending-videos-list{
+            padding: 0;            
+            + li{
+                    border-top:none;
+                    padding-top: 20px;
+                }
+            }
+        }                
+    }
+    .osscar-video{
+        background: transparent;
+        ul .dont-miss-listing{
+            padding: 0;
+            +.dont-miss-listing{
+                padding: 30px 0 0 0;
+            }
+        }
+    }
+    .latest{
+        p{
+            margin-top: 10px;
+        }
+        .col-md-3{
+            margin-bottom:40px;
+            &:nth-child(4n+1){
+                clear: left;
+            }
+        }
+    }
+    .featured-news{
+        padding: 0;
+        border: none;
+        margin: 0 -15px;
+        .featured-post{
+            padding: 10px 15px 0px 15px;
+        }
+    }
+    .video-icon{
+        display: block;
+    }
+    .slider-budget{
+        background:#000;
+        height: 326px;
+        h3{
+            padding: 12px;
+            a{
+                color: #fff;                   
+            }
+        }
+        li{
+            &:hover{
+                    a{
+                        color: #f1f1f1;   
+                    }                    
+                }
+        }
+        .slick-dots{
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 15px;
+            li {
+                @include display-inline;
+                padding: 0 2px;
+                button{
+                    height: 15px;
+                    width: 15px;
+                    background: #fff;
+                    border: none;
+                    border-radius: 50% 50%;
+                    text-indent: 999999px;
+                    cursor: pointer;
+                }
+                &.slick-active{
+                    button{
+                         background: #fcf903;                        
+                    }
+                }                
+            }
+        }
+    }
+}
+/*Budget page css end*/

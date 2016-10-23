@@ -111,8 +111,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
    
 ?>
 <div class="itg-layout-container <?php echo $itg_class; ?>">
-   <?php $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
-  print render($block['content']); ?>
+   
     <div class="row yearend-page">
         <div class="col-md-8 col-sm-8 col-sx-12 left-side">
             <div class="itg-643">
@@ -138,7 +137,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
                     <div class="widget-settings">
                       <div class="widget-title-wrapper">
-                        <?php if (isset($widget_data['itg-block-2']['block_title'])) {?>
+                        <?php if (!empty($widget_data['itg-block-2']['block_title'])) {?>
                         <span class="widget-title" data-id="itg-block-2"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
                         <?php } ?>
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
@@ -176,7 +175,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                 <div class="widget-settings">
                                     <div class="widget-title-wrapper">
-                                        <?php if (isset($widget_data['itg-block-3']['block_title'])) { ?>
+                                        <?php if (!empty($widget_data['itg-block-3']['block_title'])) { ?>
                                             <span class="widget-title" data-id="itg-block-3"><?php print $widget_data['itg-block-3']['block_title']; ?></span>
                                         <?php } ?>
                                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />
@@ -211,7 +210,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                 <div class="widget-settings">
                                     <div class="widget-title-wrapper">
-                                        <?php if (isset($widget_data['itg-block-4']['block_title'])) { ?>
+                                        <?php if (!empty($widget_data['itg-block-4']['block_title'])) { ?>
                                             <span class="widget-title" data-id="itg-block-4"><?php print $widget_data['itg-block-4']['block_title']; ?></span>
                                         <?php } ?>
                                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-4']['block_title']; ?>" name="itg-block-4" class="block_title_id" placeholder="Enter Title" />
@@ -272,12 +271,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         </div>
       <?php } ?>
 
-      <?php if ($sidebar_first || $sidebar_second): ?>
-        <aside class="sidebars">
-          <?php print $sidebar_first; ?>
-          <?php print $sidebar_second; ?>
-        </aside>
-      <?php endif; ?>
     </main>
 
 

@@ -1,7 +1,8 @@
 <?php
 /**
  * Get Mail content
- * @param array $node
+ * @param array $account
+ * @param string $to
  * @return string
  */
 function itg_sso_get_mail_content($account, $to) {

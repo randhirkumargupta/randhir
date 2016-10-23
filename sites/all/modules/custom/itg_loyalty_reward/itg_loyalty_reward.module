@@ -497,8 +497,8 @@ function itg_loyalty_reward_block_view($delta = '') {
       break;
     case 'itg_loyalty_reward_address_form':
       $block = array(
-        'content' => drupal_get_form('itg_loyalty_reward_checkout_form'),
-        'subject' => t('Change Address'),
+        'content' => drupal_get_form('itg_loyalty_reward_address_form'),
+        'subject' => t('<h2>Change Address</h2>'),
       );
   }
 

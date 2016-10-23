@@ -25,6 +25,7 @@
                     helper: "clone",
                     drag: function(event, ui) {
                         widget_name = $(this).attr('data-widget');
+                        
                         widget_info = $(this).attr('data-widget-info');
                         
                         // for category tab
@@ -107,7 +108,8 @@
                                 $('input[name = ' + block_name + ']').val(category_name_tab);
                                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
                                 $('.tab-buttons span[data-class="' + block_name + '"]').html(category_name_tab);
-                                $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
+                                //$('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
+                        
                                 //$('#block_name').html(category_name_tab);
                                 if (display_area) {
                                     $('#' + block_name).html(category_name_tab);
@@ -126,6 +128,12 @@
                                         nextText: "",
                                     });
                                 }
+                                jQuery('.year-slider').slick({
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    arrows: true,
+                                    fade: false         
+                                });  
                             }
                         });
                     }

@@ -786,6 +786,44 @@ function itg_survey_pqs_associate_with_story($token) {
    print drupal_render($form);
 }
 
+function itg_survey_pqs_associate_poll_with_story($nid){
+  
+  $node = node_load($nid);
+  $poll_banner_image = '';
+  if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
+    $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
+  }
+  else {
+    $poll_banner_image = '';
+  }
+  
+  $poll_image_exist_class = '';
+
+  foreach ($node->field_poll_answer['und'] as $row) {
+    $item_id[] = $row['value']; // fieldcollection id
+  }
+// instant or after complete
+
+  $fieldcollect = entity_load('field_collection_item', $item_id);
+  if (is_array($fieldcollect) && count($fieldcollect) > 0) {
+    $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
+    $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
+    if (isset($poll_answer_image) && $poll_answer_image > 0) {
+      $poll_image_exist_class = 'poll-option-image';
+    }
+    else {
+      $poll_image_exist_class = '';
+    }
+  }
+
+
+  $polls_info['poll_banner_image'] = $poll_banner_image;
+  $polls_info['nid'] = $nid;
+  $polls_info['title'] = $node->title;
+  $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
+  $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
+  return theme('itg_poll_homepage_forms', array('data' => $polls_info));
+}
 
 /**
  * Validate function of survey form
@@ -1045,6 +1083,13 @@ function itg_survey_survey_form_submit($form, &$form_state) {
             ->execute();
     
     unset($_SESSION['survey_unique_key']);
+
+    // Call loyalty & rewards function to save points for a user
+    if(function_exists('itg_loyalty_reward_earnpoint')) {
+      if($user->uid) {
+        itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+      }
+    }
   }
 
   // Display message on final submit.

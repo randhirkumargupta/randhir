@@ -2547,50 +2547,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
 }
-.itg-popup{
-  @extend .hide;
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  @extend .full;
-  z-index: 99999;
-  .popup-content{
-    width: 800px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px #000;
-    background-color: #fff;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    max-height: 500px;
-  }
-  .popup-head{
-    @extend .pos-rel;
-    padding: 20px;
-    border-bottom: 1px solid #d9d9d9;
-  }
-  .popup-body{
-    padding: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  .itg-close-popup{
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid #d00b26;
-    background: url('../images/cross_small.png') center center no-repeat #fff;
-    text-indent: -9999px;
-  }
-}
+
 [id*="itg-social-media-form"]{
   > div{
     .form-item-itg-smi{
@@ -6491,10 +6448,10 @@ div.node{
 }
 .browse-video-form{
   .ftp_browse_field{
-    padding: 0 30px;
+    padding: 0 20px;
     label{
       float: left;
-      width: 220px;
+      width: 200px;
       padding-top: 0;
     }
     .browse-ftp-click{
@@ -7023,6 +6980,8 @@ div.node{
         display: inline-block;
         vertical-align: top;
         padding: 0;
+        text-transform: uppercase;
+        font-family: roboto;
       }
       .form-radios{
         .form-item{
@@ -7039,7 +6998,7 @@ div.node{
     .poll-replace-id .form-submit{
         width: 100px;
         height: 36px;
-        background-color: #ccc;
+        background-color: #e3e3e3;
         border: none;
         width: 100px;
         height: 36px;
@@ -7048,6 +7007,7 @@ div.node{
         margin-top: 20px;
         font-size: 500;
         color: #323232;
+        font-size: 14px;
       }
   }
 }
@@ -7281,7 +7241,10 @@ div.node{
       }
     }
 }
-.node-story-form{
+
+.node-story-form, 
+.node-videogallery-form,
+.node-photogallery-form{
   font-family: Roboto;
   .ajax-progress{
     display: none;
@@ -7306,9 +7269,12 @@ div.node{
     &.active:after{
       content: '\f056';
     }
-    & + div{
-      overflow: visible !important;
+/*    & + div{
+      overflow: hidden !important;
     }
+    &.active + div{
+      overflow: visible !important;
+    }*/
   }
   .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
     padding-left: 200px;
@@ -7518,6 +7484,7 @@ div.node{
         }
       }
     }
+      
   .itg-sidebar-form{
     margin: 20px 0 0;
     .itg-sidebar-form-section{
@@ -7789,6 +7756,9 @@ div.node{
         }
       } 
     }
+    .form-type-autocomplete-deluxe{
+      > label{display: block;}
+    }
   }
   .metatags-and-remarks{
     background-color: #d9d9d9;
@@ -7915,7 +7885,13 @@ div.node{
     text-decoration: underline;
   }
 }
-.page-node-add-story, .node-type-story, .page-admin-structure-taxonomy-category-management{
+.page-node-add-story, 
+.node-type-story, 
+.page-node-add-videogallery,
+.node-type-videogallery,
+.page-node-add-photogallery,
+.node-type-photogallery,
+.page-admin-structure-taxonomy-category-management{
   .action-with-title #page-title{
     width: 500px;
   }
@@ -8234,10 +8210,49 @@ div.node{
     text-align: right;
   }
 }
-.story-node-form{
+.node-story-form{
   [id*="field-story-reporter-values"]{
     tbody{
       overflow: visible;
+    }
+  }
+}
+.node-quiz-form{
+  [id*="field-story-reporter-values"]{
+    td {
+      .form-type-textfield > label{display: none;}
+    }
+  }
+}
+.node-photogallery-form{
+  .form-type-plupload {
+    margin-left: 220px;
+    margin-right: 20px;
+    margin-top: 30px;
+  }
+  [id*="field-gallery-image-values"] thead {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 220px;
+  }
+  [id*="field-gallery-image-values"] tbody {
+    margin: 0 -7px;
+    width: 548px;
+  }
+  [id*="field-gallery-image-values"] tbody tr {
+    padding: 0 7px 15px;
+    width: 33%;
+  }
+  input[name="field_gallery_image_add_more"] {
+    margin: 0 0 10px 220px;
+  }
+  .form-field-name-field-featured{
+    position: relative;
+    .form-type-checkboxes{
+      .form-checkboxes{
+        float: left;
+        padding: 1px 5px 0 0 !important;
+      }
     }
   }
 }

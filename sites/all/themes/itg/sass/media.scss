@@ -313,7 +313,9 @@
     .itg-layout-container .itg-top-section .top-colum-2 .droppable,
     .itg-layout-container .itg-top-section .top-colum-1 .droppable,
     .itg-layout-container .top-colum-3 .droppable,
-    .itg-common-section .droppable{
+    .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
+    .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
+    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable{
         height: auto;
     }      
     /*End CSS Top Block Grid Home Page*/  
@@ -323,21 +325,39 @@
         .left-side{
             margin-bottom: 50px;
         }
+        .oscar-features .col-md-6{
+            margin-bottom:20px;
+            &:nth-child(n+3){
+                margin-top: 0;
+            }
+        }
+        .oscar-news{
+            h3{
+                @include font(20px);
+            }
+        }
         .oscor-photo{
             overflow: auto;
             white-space: nowrap;
-            .col-md-6 {
+            .row{
+                margin: 0;
+            }
+            .col-md-6 {                
                 margin: 0px;
                 float: none;
-                display: inline-block;
-                vertical-align: top;  
+                @include display-inline;
+                width: 300px;
+                padding: 0;
                 .title{                    
                     h3{
-                        height: inherit;
-                        white-space: pre-wrap;   
+                        min-height: 60px;
+                        white-space: pre-wrap;
+                        font-size: 16px;
+                        line-height: 22px;
+                        padding: 10px;
                     }
                 }
-                :nth-child(n+3){
+                &:nth-child(n+3){
                     margin-top: 0;
                 }
             }
@@ -450,7 +470,7 @@
     /*css end side bar section for video and photo*/
 
     /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .sports-video, .sports-photo{
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{
         .view-content{      
             .photo-list{
                 li{ 
@@ -468,7 +488,34 @@
     }
     /*CSS End Photo landing page*/
 
-
+/*css starts sport page*/
+.sport-home-layout-page .itg-layout-615 .auto-block-1{
+    margin-bottom: 50px;
+}
+.sport-home-layout-page{  
+.right-side{
+    .col-md-12{
+        .ad-widget{
+            margin-top: 40px;
+        }
+        .droppable {
+            margin-top: 40px;
+            border-bottom: 1px solid #ddd;
+        }        
+    }
+}
+.sports-video{
+        .view-content{            
+            .photo-list{
+                margin:0;
+                li{
+                    padding: 0 5px;
+                }
+            }   
+        }            
+    }
+}
+/*css end sport page*/
 
 
 
@@ -527,7 +574,7 @@
 
 @media only screen and (max-width:560px){ 
     /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .sports-video, .sports-photo{
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{
         .view-content{      
             .photo-list{
                 li{       
@@ -1032,7 +1079,7 @@
     /*CSS End So sorry page*/
     /*CSS Start RHS add block*/
     #block-itg-ads-ad-right-sidebar-1{    
-        padding: 30px 34px 0;
+        padding: 30px 34px;
     }
     /*CSS End RHS add block*/
 

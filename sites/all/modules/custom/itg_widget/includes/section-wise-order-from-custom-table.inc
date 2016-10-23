@@ -17,6 +17,11 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       $rangearray=array('auto-road-trip'=>2 ,
           'auto-tips-and-tricks'=>3 ,
           'edu-exam'=>4 ,
+          'budget-reactions'=>4,
+          'election-other-story'=>4 ,
+          'home-watch'=>3,
+          'india-inc-on-budget'=>4,
+          'budget-decoded'=>3,
           'edu-featurefilia'=>4 ,
           'edu-jobs-and-career'=>4 ,
           'edu-tips-and-trick'=>10 ,
@@ -41,6 +46,10 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       if($widget_style=='talking-point')
       {
           return itg_widget_section_wise_ordering_from_custom_table_by_content($info, 'story',$widget_style);
+      }
+      if($widget_style=='home-watch')
+      {
+          return itg_widget_section_wise_ordering_from_custom_table_by_content($info, 'videogallery',$widget_style);
       }
       
       
@@ -98,7 +107,30 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
   if (is_array($info)) {
       $range = 3; 
     // set range of data here
-      $rangearray=array('auto-road-trip'=>2,'auto-tips-and-tricks'=>3,'buying-guid'=>6,'tech-tips'=>4,'in-depth'=>6,'talking-point'=>4 , 'oscar-news'=>5 , 'oscar-features'=>6);
+     $rangearray=array('auto-road-trip'=>2 ,
+          'auto-tips-and-tricks'=>3 ,
+          'edu-exam'=>4 ,
+          'budget-reactions'=>4,
+          'election-other-story'=>4 ,
+          'home-watch'=>3,
+          'india-inc-on-budget'=>4,
+          'budget-decoded'=>3,
+          'edu-featurefilia'=>4 ,
+          'edu-jobs-and-career'=>4 ,
+          'edu-tips-and-trick'=>10 ,
+          'edu-sample-paper'=>5 ,
+          'edu-from-the-magazine'=>4 ,
+          'edu-gov-jobs'=>4 ,
+          'buying-guid'=>6 ,
+          'edu-notification'=>4 ,
+          'tech-tips'=>4 ,
+          'sport-column'=>3 ,
+          'in-depth'=>6 ,
+          'talking-point'=>4 ,
+          'movies-lifestyle'=>7 ,
+          'movies-celebrities'=>7 ,
+          'oscar-news'=>5 , 
+          'oscar-features'=>6);
     
        if(array_key_exists($widget_style, $rangearray))
        {

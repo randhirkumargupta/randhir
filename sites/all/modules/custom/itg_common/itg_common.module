@@ -8,6 +8,7 @@
  *
  */
 module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
+module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
 
 /**
  * Implements hook_init.
@@ -417,11 +418,13 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * {@inheritdoc}
  */
 function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-    if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form') {
+  pr($form_state['build_info']['form_id']);
+    if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form') {
         $element['#datepicker_options'] = array(
             'minDate' => "+0D",
         );
         $element['date'] = date_popup_process_date_part($element);
+        p('hi');
     }
 }
 
@@ -761,3 +764,43 @@ function itg_common_views_pre_render(&$view) {
   }
  
 }
+
+/**
+ * Implements hook_mail().
+ *
+ * {@inheritdoc}. 
+ */
+function itg_common_mail($key, &$message, $params) {  
+  switch ($key) {    
+    case 'refer_a_friend':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * {@inheritdoc}.
+ */
+function itg_common_theme() {
+  $themes = array(    
+    'itg_personalization_refer_friend_mail' => array(
+      'template' => 'itg-refer-friend-mail',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+  );
+
+  return $themes;
+} 

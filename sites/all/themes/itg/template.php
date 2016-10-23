@@ -80,6 +80,7 @@ function itg_preprocess_field(&$vars) {
  * {@inheritdoc}
  */
 function itg_preprocess_page(&$variables) {
+  global $base_url; $base_root;
   $arg = arg();
   if ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
     $term = taxonomy_term_load($arg[2]);
@@ -97,7 +98,25 @@ function itg_preprocess_page(&$variables) {
   if ($arg[0] == 'signup' || $arg[0] == 'forgot-password') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
+  
+  // Access domain
+  if (function_exists('domain_select_format')) {
+    $format = domain_select_format();
+    foreach (domain_domains() as $data) {
+      if ($data['valid'] || user_access('access inactive domains')) {
+        $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
+      }
+    }
+
+    // Add another page.tpl file for existing domains
+    $parse = parse_url($base_url);
+
+    if (in_array($parse['host'], $options)) {
+      $variables['theme_hook_suggestions'][] = 'page__event_domain';
+    }
+  }
 }
+
 
 /**
  * {@inheritdoc}

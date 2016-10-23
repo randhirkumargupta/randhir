@@ -370,6 +370,7 @@ $root-font-size: 16px;
             li{               
                 @include display-inline;
                 float: none;
+                width: inherit;
                 a{
                     white-space: initial;
                 }
