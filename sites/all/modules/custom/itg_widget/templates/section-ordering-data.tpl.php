@@ -442,7 +442,7 @@ else if ($widget_style == 'in-depth') { ?>
 
 
         <?php }
-        else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' || $widget_style == 'budget-reactions' || $widget_style == 'election-other-story') { ?>
+        else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' || $widget_style == 'budget-reactions' || $widget_style == 'election-other-story' || $widget_style=='home-shows') { ?>
 
     <div class="tech-trip">
         <ul class="trending-videos">
