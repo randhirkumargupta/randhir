@@ -199,7 +199,9 @@ jQuery('document').ready(function() {
         } else {
             jQuery('.time-filter').hide();
         }
-        var base_url = settings.itg_videogallery.settings.base_url;
+        
+        var base_url = Drupal.settings.baseUrl.baseUrl;
+        //console.log(base_url);
         jQuery.ajax({
             url: base_url + '/dailymotion-ftp-videos-post',
             type: 'post',
@@ -223,7 +225,7 @@ jQuery('document').ready(function() {
     jQuery('.time-filter-select').live('change', function() {
         jQuery('#loader-data img').show();
         var select_value = jQuery(this).val();
-        var base_url = settings.itg_videogallery.settings.base_url;
+        var base_url = Drupal.settings.baseUrl.baseUrl;
         jQuery.ajax({
             url: base_url + '/dailymotion-video-time-filter',
             type: 'post',
@@ -241,3 +243,5 @@ jQuery('document').ready(function() {
 
     });
 });
+
+
