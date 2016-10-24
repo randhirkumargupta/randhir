@@ -33,6 +33,6 @@
   <?php print drupal_render($form['field_story_category']); ?>
    <?php print drupal_render($form['field_primary_cat_data']); ?>
 </div>
-<h2 id="title-metatags" class="story-title"><?php echo t('SEO Meta Tags'); ?></h2>
+
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

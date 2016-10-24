@@ -15,24 +15,24 @@
                         ?>
                         <div class="featured-post featured-post-first">
                             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>"><?php print $row['field_story_extra_large_image_1']; ?>    </a>
-                            <h2><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h2>           
+                            <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>           
                         </div>
 
-                    <?php }
-                    else if ($index > 0 && $index <= 2) { ?>
-                <div class="featured-post"> <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>"><?php print $row['field_story_extra_large_image']; ?></a>
-                            <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>
+                    <?php } else if ($index > 0 && $index <= 2) {
+                        ?>
+                        <div class="featured-post"> <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>"><?php print $row['field_story_extra_large_image']; ?></a>
+                            <p><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
                         </div>
 
                     <?php } ?>
 
-<?php } ?>
+                <?php } ?>
             </div>
         </div>    
     </div>
     <div class="col-md-6">
         <div class="auto-block-2">
-            <div class="special-top-news">
+            <div class="special-top-news special-top-bg">
 
                 <ul class="itg-listing">   
                     <?php

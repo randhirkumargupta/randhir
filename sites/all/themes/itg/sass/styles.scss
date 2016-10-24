@@ -1311,6 +1311,7 @@ footer{
 /*End CSS section story Home page*/
 /*Start CSS trending-videos Home  page*/
 .video-icon{
+    @include display-inline;
     @extend .pos-rel;
     &:after{
         background: url(../images/video-icon-small.png) no-repeat;
@@ -2343,6 +2344,7 @@ footer{
         border:none;
         margin: 20px 0 10px 0;
         @include calculate-width(1);
+        font-family: $itg-roboto;
         &.ui-slider-horizontal{            
             height: 30px;
             .ui-slider-handle{
@@ -2357,6 +2359,7 @@ footer{
                 font-size: 15px;
                 color: #323232;
                 cursor: move;
+                background-image: linear-gradient(#f5f3f2,#e7e5e4);
             }
         }
         &.ui-widget-content{
@@ -3194,14 +3197,17 @@ footer{
 /*video and photo rolling slider end*/
 
 /*CCS start Photo landing Page*/
-#block-views-photo-list-of-category-block-2{
+#block-views-photo-list-of-category-block-2, .view-photo-list-of-category{
     @include sidebar-heading;
     h3{
         display: block;
     }
 }
 .view-photo-list-of-category, .view-video-list-of-category{
-    .view-filters{        
+    .view-filters{
+        .views-exposed-form{
+            display: block;
+        }
         #edit-field-story-category-tid-wrapper{
             display: none;
         }
@@ -3220,6 +3226,7 @@ footer{
             }
         }
     }
+    @include pager;
 }
 /*CCS End Photo landing Page*/
 
@@ -3803,6 +3810,7 @@ footer{
 #block-itg-ads-ad-right-sidebar-1{
     @include display-inline;
     padding:0px 15px 0 0;
+    border-bottom: 1px solid $border-color;
 }
 /*CSS End RHS add block*/
 /*CSS Start So sorry page*/
@@ -3872,8 +3880,8 @@ footer{
     }    
 }
 .sosory-video{
-    padding: 10px;
-    background: #000;
+    border: 10px solid #000;
+    border-bottom: none;
 }
 #block-views-so-sorry-most-watched{
     margin-top: 50px;
@@ -3926,6 +3934,16 @@ footer{
         list-style-type: none;
         text-align: center;
         margin-top: 25px;
+        li{
+            @include display-inline;
+            position: relative;
+            .ajax-progress-throbber{
+                position: absolute;
+                z-index: 1;
+                right: -60px;
+                top: 10px;
+            }
+        }
         a{
             background: #db0e0f;
             color: #fff;
@@ -4242,6 +4260,7 @@ footer{
         .special-top-news{
             overflow: hidden;
             position: relative;
+            height:100%;
             .widget-title{
                 position: absolute;
             }
@@ -4273,6 +4292,7 @@ footer{
 
     .auto-tips-n-tricks{
         ul{
+            list-style: none;
             li{
                 padding: 18px 0;
                 +li{
@@ -4287,6 +4307,10 @@ footer{
                 }
             }
         }
+    }
+    .section_wise_order-auto-road-trip{
+        background: #f3f3f3;
+        padding: 10px;
     }
     .auto-road-trip{
         .trending-videos{
@@ -4615,7 +4639,8 @@ footer{
                 background: #171717;
                 padding: 25px 10px;
                 width: 188px;
-                float: left;                            
+                float: left; 
+                height: 276px;
                 p{
                     margin-top: 10px;
                 }
@@ -4951,6 +4976,29 @@ footer{
         }
 
     }    
+}
+#block-menu-menu-event-menu{
+    background: #000;   
+    ul{
+      @extend .list-none;
+      @include clearfix;
+      margin:0 auto;
+      max-width: 1200px;
+      li{
+          @include float(left);
+          a{
+              color:#f7ee23;
+              font-size: 15px;
+              padding: 0 10px;
+              text-transform: uppercase;
+            height: 50px;
+               line-height: 50px;
+              &:hover{
+                  color:#fff;
+              }
+          }
+      }
+    }
 }
 /*CSS end for event page index*/
 
@@ -5786,3 +5834,184 @@ input[type="radio"]:checked + label:after{
     margin-top: 40px;
 }
 /*css end taboola page*/
+
+/*Budget page css start*/
+.budget-page-layout{
+    .droppable{
+        overflow: hidden;
+    }
+    .itg-325-layout{
+        .droppable{
+            height: 325px;
+        }
+    }
+    .itg-530-layout{
+        .droppable{
+            height: 530px;
+        }
+    }
+    .itg-370-layout{
+        .droppable{
+            height: 370px;
+        }
+    }
+     .itg-480-layout{
+        .droppable{
+            height: 480px;
+        }
+        .itg-widget-parent{
+            .droppable{
+                height: 160px;
+            }    
+        }
+        .itg-widget-child{
+            .droppable{
+                height: 283px;
+            }    
+        }
+    }
+    .itg-715-layout{
+        .droppable{
+            height: 715px;
+        }       
+        .itg-widget-child{
+            .droppable{
+                height: 343px;
+            }    
+        }
+    }
+    h1{
+        .disc-share{
+            a{
+                font-size: 20px;
+                color: #b6b6b6;
+            }
+        }
+    }
+    .budget-ad{
+        margin-top: 25px;
+    }
+    iframe{
+        width: 100%;
+    }
+    .highlight{
+        overflow:auto;
+    }
+    .special-top-bg{
+        background: #fbfbfb;
+        height: 530px;
+    }
+    .itg-listing{
+        border: none;
+    }
+    .section_wise_order .widget-settings{
+        @include pos(relative);
+    }
+    .trending-videos{
+        padding: 0;
+        border: none;
+        li{
+           &.trending-videos-list{
+            padding: 0;            
+            + li{
+                    border-top:none;
+                    padding-top: 20px;
+                }
+            }
+        }                
+    }
+    .osscar-video{
+        background: transparent;
+        ul .dont-miss-listing{
+            padding: 0;
+            +.dont-miss-listing{
+                padding: 30px 0 0 0;
+            }
+        }
+    }
+    .latest{
+        p{
+            margin-top: 10px;
+        }
+        .col-md-3{
+            margin-bottom:40px;
+            &:nth-child(4n+1){
+                clear: left;
+            }
+        }
+    }
+    .featured-news{
+        padding: 0;
+        border: none;
+        margin: 0 -15px;
+        .featured-post{
+            padding: 10px 15px 0px 15px;
+        }
+    }
+    .video-icon{
+        display: block;
+    }
+    .slider-budget{
+        background:#000;
+        height: 326px;
+        h3{
+            padding: 12px;
+            a{
+                color: #fff;                   
+            }
+        }
+        .slick-dots{
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 15px;
+            li {
+                @include display-inline;
+                padding: 0 2px;
+                button{
+                    height: 15px;
+                    width: 15px;
+                    background: #fff;
+                    border: none;
+                    border-radius: 50% 50%;
+                    text-indent: 999999px;
+                    cursor: pointer;
+                }
+                &.slick-active{
+                    button{
+                         background: #fcf903;                        
+                    }
+                }
+                &:hover{
+                    a{
+                        color: #f1f1f1;   
+                    }                    
+                }
+            }
+        }
+    }
+}
+/*Budget page css end*/
+
+
+/*css start mscroll bar changes*/
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar{
+    height: 12px;
+    margin: 3px auto;
+    background-color:#f7f7f7;
+    background-image: linear-gradient(#a1a1a1,#d1d1d1);
+    border: 1px solid #c6c6c6;
+    opacity: 1;
+}
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail{        
+    height: 18px;
+    margin: 0 auto;    
+    width: 98%;    
+    background-image: linear-gradient(#0b0b0b,#171717);
+    border: 1px solid #2c2c2c;
+    opacity: 1;
+}
+.mCSB_scrollTools.mCSB_scrollTools_horizontal{
+    margin-bottom: 10px;
+}
+
+/*css end mscroll bar changes*/

@@ -7,16 +7,16 @@
     Drupal.behaviors.itg_videogallery = {
         attach: function(context, settings) {
             var uid = settings.itg_videogallery.settings.uid;
-            jQuery('#edit-path').show();
+            
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
-            if (uid != 1) {
-                $('.vertical-tabs-list').hide();
-                $('#edit-metatags').show();
-                $('#edit-metatags-und-advanced').hide();
-                $('.fieldset-description').hide();
-                $('#edit-metatags p').hide();
-            }
+//            if (uid != 1) {
+//                $('.vertical-tabs-list').hide();
+//                $('#edit-metatags').show();
+//                $('#edit-metatags-und-advanced').hide();
+//                $('.fieldset-description').hide();
+//                $('#edit-metatags p').hide();
+//            }
 
             // Code for client Title field value set Null
             $('#edit-field-story-configurations-und-syndication').click(function() {
@@ -65,7 +65,7 @@
             $('.plupload_container').removeAttr("title");
             // Display Byline details
 //            $('#edit-field-story-reporter-und-0-target-id').blur(function() {
-//                var base_url = Drupal.settings.basePath;
+//                var base_url = settings.itg_videogallery.settings.base_url;
 //                $.ajax({
 //                    url: base_url + "/reporter-details-ajax",
 //                    method: 'post',
@@ -199,7 +199,7 @@ jQuery('document').ready(function() {
         } else {
             jQuery('.time-filter').hide();
         }
-        var base_url = Drupal.settings.basePath;
+        var base_url = settings.itg_videogallery.settings.base_url;
         jQuery.ajax({
             url: base_url + '/dailymotion-ftp-videos-post',
             type: 'post',
@@ -223,7 +223,7 @@ jQuery('document').ready(function() {
     jQuery('.time-filter-select').live('change', function() {
         jQuery('#loader-data img').show();
         var select_value = jQuery(this).val();
-        var base_url = Drupal.settings.basePath;
+        var base_url = settings.itg_videogallery.settings.base_url;
         jQuery.ajax({
             url: base_url + '/dailymotion-video-time-filter',
             type: 'post',

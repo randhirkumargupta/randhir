@@ -12,7 +12,7 @@
  */
 function itg_personalization_edit_profile_form() {
   global $user;
-  $user_detail = user_load($user->uid);    
+  $user_detail = user_load($user->uid);      
   $form['fname'] = array(
     '#title' => t('First Name'),
     '#type' => 'textfield',
@@ -34,14 +34,20 @@ function itg_personalization_edit_profile_form() {
     '#type' => 'textfield',
     '#maxlength' => 255,
     '#required' => TRUE,
-    '#attributes' => array('placeholder' => 'E.g., abc@example.com'),
+    '#attributes' => array(
+      'placeholder' => 'E.g., abc@example.com',
+      'readonly' => TRUE
+    ),
     '#default_value' => $user_detail->mail,
   );
   $form['mobile'] = array(
     '#title' => t('Mobile'),
     '#type' => 'textfield',
     '#maxlength' => 255,
-    '#attributes' => array('placeholder' => 'E.g., +91 9999999999'),
+    '#attributes' => array(
+      'placeholder' => 'E.g., +91 9999999999',
+      'readonly' => TRUE,
+    ),
     '#default_value' => $user_detail->field_mobile_number['und'][0]['value'],
   );
   $form['dob'] = array(
@@ -91,6 +97,12 @@ function itg_personalization_edit_profile_form() {
     '#type' => 'textarea',
     '#default_value' => $user_detail->field_short_description['und'][0]['value'],
   );
+  $form['zip_code'] = array(
+    '#title' => t('Picode'),
+    '#type' => 'textfield',
+    '#attributes' => array('placeholder' => 'E.g., 122016'),
+    '#default_value' => $user_detail->field_user_picode['und'][0]['value'],
+  );
   $form['news_letter'] = array(
     '#title' => t('Subscribe Our Newsletters'),
     '#type' => 'checkboxes',
@@ -132,6 +144,9 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
   if (!is_numeric($form_state['values']['mobile'])) {
     form_set_error('mobile', t('Please enter valid mobile number.'));
   }
+  if (!is_numeric($form_state['values']['zip_code'])) {
+    form_set_error('zip_code', t('Please enter valid Pincode.'));
+  }
 }
 
 /**
@@ -143,30 +158,59 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   global $user;
   $inputs = $form_state['values'];  
   $user_detail = user_load($user->uid);
+  
   // Update First Name.
-  $user_detail->field_first_name['und'][0]['value'] = check_plain($inputs['fname']);
+  if (!empty($inputs['fname'])) {
+    $user_detail->field_first_name['und'][0]['value'] = check_plain($inputs['fname']);
+  }
+  
   // Update Last Name.
-  $user_detail->field_last_name['und'][0]['value'] = check_plain($inputs['lname']);
-  // Update mail field.
-  $user_detail->mail = check_plain($inputs['mail']);
-  // Update mobile field.
-  $user_detail->field_mobile_number['und'][0]['value'] = check_plain($inputs['mobile']);
+  if (!empty($inputs['lname'])) {
+    $user_detail->field_last_name['und'][0]['value'] = check_plain($inputs['lname']);
+  } 
+  
   // Update dob field.
-  $user_detail->field_story_issue_date['und'][0]['value'] = check_plain($inputs['dob']);
+  if (!empty($inputs['dob'])) {
+    $user_detail->field_story_issue_date['und'][0]['value'] = check_plain($inputs['dob']);
+  }
+  
   // Update gender field.
-  $user_detail->field_user_gender['und'][0]['value'] = check_plain($inputs['gender']);
+  if (!empty($inputs['gender'])) {
+    $user_detail->field_user_gender['und'][0]['value'] = check_plain($inputs['gender']);
+  }
+  
   // Update profile pic
-  $user_detail->field_user_picture['und'][0]['fid'] = check_plain($inputs['profile_pic']);
+  if (!empty($inputs['profile_pic'])) {
+    $user_detail->field_user_picture['und'][0]['fid'] = check_plain($inputs['profile_pic']);
+  }
+  
   // Update Qualification field.
-  $user_detail->field_user_qualification['und'][0]['tid'] = check_plain($inputs['qualification']);
+  if (!empty($inputs['qualification'])) {
+    $user_detail->field_user_qualification['und'][0]['tid'] = check_plain($inputs['qualification']);
+  }
+  
   // Update address field.
-  $user_detail->field_short_description['und'][0]['value'] = check_plain($inputs['address']);
+  if (!empty($inputs['address'])) {
+    $user_detail->field_short_description['und'][0]['value'] = check_plain($inputs['address']);
+  }
+  
+  // Update zipcode field.
+  if (!empty($inputs['zip_code'])) {
+    $user_detail->field_user_pincode['und'][0]['value'] = check_plain($inputs['zip_code']);
+  }
+  
   //Update News Letters field.  
-  foreach ($inputs['news_letter'] as $value) {    
+  $flag = FALSE;
+  foreach ($inputs['news_letter'] as $value) {
+    $flag = TRUE;
     if ($value != '0') {      
       $data[]['value'] = $value;
     }
-  }  
-  $user_detail->field_subscribe_for_newsletter['und'] = $data;  
+  }
+  if ($flag) {
+    $user_detail->field_subscribe_for_newsletter['und'] = $data;
+  }
+  
+  // Save user object.
   user_save($user_detail);
 }

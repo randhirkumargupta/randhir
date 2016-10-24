@@ -106,6 +106,9 @@ regions[footer]         = Footer
 regions[bottom]         = Page bottom
 regions[top]            = Page top
 regions[my_cart]        = My Cart
+regions[sidebar_second_event] = Second sidebar event
+regions[content_event]        = Content event
+regions[header_event]         = Header event
 
 ; The page_top and page_bottom regions are hidden, which means they will not
 ; show up on the blocks administration page. But they are required in order for
