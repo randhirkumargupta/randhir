@@ -101,12 +101,20 @@ function itg_personalization_edit_profile_form() {
     '#title' => t('Picode'),
     '#type' => 'textfield',
     '#attributes' => array('placeholder' => 'E.g., 122016'),
-    '#default_value' => $user_detail->field_user_picode['und'][0]['value'],
+    '#default_value' => $user_detail->field_user_pincode['und'][0]['value'],
   );
+  // create default value for newsletter subscription.
+  $data = array();
+  if (isset($user_detail->field_subscribe_for_newsletter['und']) && is_array($user_detail->field_subscribe_for_newsletter['und'])) {
+    foreach ($user_detail->field_subscribe_for_newsletter['und'] as $option) {
+      $data[] = $option['value'];
+    }
+  }
   $form['news_letter'] = array(
     '#title' => t('Subscribe Our Newsletters'),
     '#type' => 'checkboxes',
     '#options' => drupal_map_assoc(array('India Today', 'Aaj Tak', 'Business Today')),    
+    '#default_value' => $data,
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -143,10 +151,7 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
   }
   if (!is_numeric($form_state['values']['mobile'])) {
     form_set_error('mobile', t('Please enter valid mobile number.'));
-  }
-  if (!is_numeric($form_state['values']['zip_code'])) {
-    form_set_error('zip_code', t('Please enter valid Pincode.'));
-  }
+  }  
 }
 
 /**
@@ -185,7 +190,7 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   }
   
   // Update Qualification field.
-  if (!empty($inputs['qualification'])) {
+  if (!empty($inputs['qualification']) && $inputs['qualification'] !== '_none') {
     $user_detail->field_user_qualification['und'][0]['tid'] = check_plain($inputs['qualification']);
   }
   
@@ -205,6 +210,7 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
     $flag = TRUE;
     if ($value != '0') {      
       $data[]['value'] = $value;
+      itg_loyalty_reward_earnpoint(0, 'ns', $user->uid, $value);
     }
   }
   if ($flag) {
