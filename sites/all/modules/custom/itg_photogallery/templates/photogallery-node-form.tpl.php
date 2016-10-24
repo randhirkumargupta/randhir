@@ -16,10 +16,11 @@
   <?php print drupal_render($form['field_story_category']); ?>
   <?php print drupal_render($form['field_primary_cat_data']); ?>
   <?php print drupal_render($form['field_gallery_kicer']); ?>
+  <?php print drupal_render($form['field_story_itg_tags']); ?>
   <!--<div class="description">This title shows on the section page</div> -->
   </div>
 </div>
-<div id="BrowseMedia" class="itg-form-section-wrapper">
+<div id="BrowseMedia" class="itg-form-section-wrapper browse-media-file">
   <h2 class="story-title">Gallery Cover Image</h2>
   <div class="itg-form-section hide">
   <?php print drupal_render($form['field_story_extra_large_image']); ?>
@@ -56,7 +57,6 @@
         <div id="Configuration" class="itg-sidebar-form-section">
   <h2 class="story-title">Configuration</h2>
   <?php print drupal_render($form['field_featured']); ?>
-  <?php print drupal_render($form['field_story_itg_tags']); ?>
   <?php print drupal_render($form['field_common_related_content']); ?>
 </div>
 <!--<div id="Categorization" class="itg-sidebar-form-section">
