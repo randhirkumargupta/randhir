@@ -16,8 +16,6 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
  */
 function itg_common_init() {
   global $user;
-  
-
   // Hide metatags extra fields
 //  if ($user->uid != 1) {
 //    if ((arg(0) == 'node' && arg(1) == 'add') || (arg(0) == 'node' && arg(2) == 'edit')) {
@@ -87,6 +85,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
          $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
          $form['field_story_ugc_source_id']['#attributes']['class'][] = 'element-hidden';
          $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
+         $form['field_common_related_content']['#attributes']['class'][] = 'element-hidden';
 
       // add common hidden type field
          $type = $form['type']['#value'];
@@ -395,14 +394,12 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * Implement hook_date_popup_process_alter().
  * {@inheritdoc}
  */
-function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-  //pr($form_state['build_info']['form_id']);
+function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {  
     if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form') {
         $element['#datepicker_options'] = array(
             'minDate' => "+0D",
         );
-        $element['date'] = date_popup_process_date_part($element);
-        //p('hi');
+        $element['date'] = date_popup_process_date_part($element);        
     }
 }
 

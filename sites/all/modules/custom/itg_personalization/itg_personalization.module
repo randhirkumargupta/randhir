@@ -189,12 +189,12 @@ function itg_personalization_block_view($delta = '') {
     case 'personalization_edit_profile':
       $data['tab'] = $output;
       $data['form'] = drupal_get_form('itg_personalization_edit_profile_form');
-      $block['content'] = theme('personalization_edit_profile', array('data' => $data));        
+      $block['content'] = theme('personalization_edit_profile', array('data' => $data));
       break;
     case 'personalization_refer_friend':
       $data['tab'] = $output;
       $data['form'] = drupal_get_form('itg_personalization_refer_a_friend_form');
-      $block['content'] = theme('personalization_edit_profile', array('data' => $data));      
+      $block['content'] = theme('personalization_edit_profile', array('data' => $data));
   }
 
   return $block;
@@ -359,4 +359,39 @@ function itg_personalization_field_add_more_submit($form, &$form_state) {
     }
     $i++;
   }
+}
+
+/**
+ * If someone registering on site from referral link then give points to user.
+ *
+ * @param string $key
+ *   Unique referral key.
+ */
+function itg_personalization_reddem_referfriend($key) {
+  try {
+    // Update status of the referral link. 
+    $itg_query = db_update('itg_lrp_refer_friend')
+        ->fields(array('status' => 1))
+        ->condition('referral_key', $key)
+        ->condition('status', 0);
+    $itg_result = $itg_query->execute();    
+  }
+  catch (Exception $ex) {
+    drupal_set_message($ex->getMessage(), 'error');
+  }
+  if ($itg_result) {
+    try {
+      $itg_query = db_select('itg_lrp_refer_friend', 'u');
+    $itg_query->fields('u', array('uid'))
+        ->condition('referral_key', $key)
+        ->condition('status', 1);
+    $itg_result = $itg_query->execute()->fetchField();
+    }
+    catch (Exception $ex) {
+      drupal_set_message($ex->getMessage(), 'error');
+    }
+    if ($itg_result) {
+      itg_loyalty_reward_earnpoint(0, 'raf', $itg_result);
+    }
+  } 
 }
