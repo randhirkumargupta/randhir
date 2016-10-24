@@ -101,7 +101,7 @@ function itg_personalization_edit_profile_form() {
     '#title' => t('Picode'),
     '#type' => 'textfield',
     '#attributes' => array('placeholder' => 'E.g., 122016'),
-    '#default_value' => $user_detail->field_user_picode['und'][0]['value'],
+    '#default_value' => $user_detail->field_user_pincode['und'][0]['value'],
   );
   // create default value for newsletter subscription.
   $data = array();
@@ -151,10 +151,7 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
   }
   if (!is_numeric($form_state['values']['mobile'])) {
     form_set_error('mobile', t('Please enter valid mobile number.'));
-  }
-  if (!is_numeric($form_state['values']['zip_code'])) {
-    form_set_error('zip_code', t('Please enter valid Pincode.'));
-  }
+  }  
 }
 
 /**
