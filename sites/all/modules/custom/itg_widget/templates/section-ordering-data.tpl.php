@@ -732,7 +732,7 @@ else if ($widget_style == 'in-depth') { ?>
                                     else {
                                         ?>
                                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
-                                    <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                                    <img  height="140" width="100" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
                                 </a>
                 <?php } ?>
                             <div class="small-detail">
