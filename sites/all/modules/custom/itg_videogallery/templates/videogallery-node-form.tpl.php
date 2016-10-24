@@ -77,7 +77,7 @@
   <div class="col-md-4">
     <div class="itg-sidebar-form">
       <div id="Configuration" class="itg-sidebar-form-section">
-        <h2 class="story-title"><?php print t('Configuration'); ?></h2>
+<!--        <h2 class="story-title"><?php //print t('Configuration'); ?></h2>-->
         <?php print drupal_render($form['field_video_configurations']); ?>
         <?php print drupal_render($form['field_story_comment_question']); ?>
         <?php print drupal_render($form['field_story_syndication']); ?>
