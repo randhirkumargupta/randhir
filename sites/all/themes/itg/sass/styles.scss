@@ -1550,6 +1550,32 @@ footer{
     }
 }
 /*End Dont miss Home page css*/
+/*css start watch now home page */
+.watch-video-home{
+    .widget-title{
+        position: relative;
+        margin-bottom: 5px;
+    }
+    .osscar-video{
+        background: transparent;
+        .home-watch-new{
+            ul{
+                .dont-miss-listing {
+                    @include pos(relative);
+                    padding-bottom:0;
+                    + .dont-miss-listing{                    
+                        padding: 10px 0 0 0;                       
+                    } 
+                    @include video-left-border-bottom;
+                }
+            } 
+        }
+    }    
+}
+
+
+/*css end watch now home page */
+
 /*Start Story page css*/
 @mixin story-profile-pic{
     width: 50px;
@@ -5313,7 +5339,7 @@ footer{
 .view-sport-ipl{
     @include pager;
 }
-.section-sport-ipl{
+.section-sport-ipl-bg{
     background: url('../images/sports-bg.png') no-repeat center 135px;
 }
 .sport-home-layout-page{  
@@ -5385,35 +5411,35 @@ footer{
     }
     .itg-layout-195{
         .droppable {
-            height: 195px; 
+            min-height: 195px; 
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-260{
         .droppable {
-            height: 260px;       
+            min-height: 260px;       
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-375{
         .droppable {
-            height: 375px; 
+            min-height: 375px; 
              border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-315{
         .droppable {
-            height: 315px;      
+            min-height: 315px;      
              border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-340{
         .droppable {
-            height: 340px;   
+            min-height: 340px;   
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
             border-bottom: 1px solid $border-color;
@@ -5992,7 +6018,13 @@ input[type="radio"]:checked + label:after{
 }
 /*Budget page css end*/
 
-
+/*pic icon not avilable*/
+.pic-no-icon{    
+    &:after{
+        background: none;
+    }               
+}
+/*pic icon not avilable*/
 /*css start mscroll bar changes*/
 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar{
     height: 12px;
