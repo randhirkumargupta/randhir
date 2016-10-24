@@ -259,10 +259,8 @@ function itg_cooking_tips_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-  
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  }  
+ 
   //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
   $settings = array();
   $settings['base_url'] = $base_url;
@@ -316,10 +314,8 @@ function itg_food_news_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-  
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  }  
+ 
   //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
   $settings = array();
   $settings['base_url'] = $base_url;
@@ -370,10 +366,8 @@ function itg_recipe_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+  }  
   
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
   //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
   $settings = array();
   $settings['base_url'] = $base_url;

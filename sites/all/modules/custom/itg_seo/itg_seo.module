@@ -61,3 +61,63 @@ function itg_seo_theme() {
 
   return $themes;
 }
+
+
+/**
+ * Implements hook_form_alter().
+ * {@inheritdoc}
+ */
+function itg_seo_form_alter(&$form, &$form_state, $form_id) {
+  
+   // Extra meta tags element hide from form
+    if ($form_id == 'mega_review_critic_node_form' 
+            || $form_id == 'story_node_form' 
+            || $form_id == 'itg_celebrity_profile_node_form' 
+            || $form_id == 'blog_node_form' 
+            || $form_id == 'podcast_node_form' 
+            || $form_id == 'videogallery_node_form' 
+            || $form_id == 'photogallery_node_form'
+            || $form_id == 'breaking_news_node_form'
+            || $form_id == 'reporter_node_form'
+            || $form_id == 'recipe_node_form'
+            || $form_id == 'cooking_tips_node_form'
+            || $form_id == 'food_news_node_form'
+            || $form_id == 'astro_node_form'
+            || $form_id == 'live_tv_integration_node_form'
+            || $form_id == 'ask_an_expert_node_form') {
+      if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+        $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+      }      
+    }
+    
+    if ($form_id == 'syndication_client_node_form' 
+            || $form_id == 'syndication_rule_node_form'
+            || $form_id == 'syndication_feed_from_pattern_node_form'
+            || $form_id == 'ads_management_node_form'
+            || $form_id == 'task_idea_allocation_tracking_node_form'
+            || $form_id == 'ugc_node_form'
+            || $form_id == 'notification_node_form') {
+      $form['additional_settings']['#access'] = FALSE;
+    }
+}
+
+/**
+ * Extra meta tags element hide from form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_meta_tags_extra_element_hide($form, &$form_state) {
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_metatags.js');
+    unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
+    unset($form['metatags']['intro_text']['#markup']);
+    
+    // Add code after metatag updation
+    unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
+    unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
+  
+    $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
+    $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
+
+    return $form;
+}

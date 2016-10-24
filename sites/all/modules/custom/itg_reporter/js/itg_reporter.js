@@ -10,14 +10,6 @@
             var ntype = settings.itg_reporter.settings.ntype;
             var anchor = settings.itg_reporter.settings.anchor;
 
-            // code to hide body text format filter 
-            if (uid != 1 && ntype) {
-                $('.vertical-tabs-list').hide();
-                $('#edit-metatags').show();
-                $('#edit-metatags-und-advanced').hide();
-            }
-
-
             var intialcelebrityvalue = $('#edit-field-celebrity-pro-occupation-und').val();
             if (intialcelebrityvalue) {
                 var initialhasexist = intialcelebrityvalue.indexOf(anchor) != -1;
@@ -25,10 +17,8 @@
             if (initialhasexist) {
                 $('#edit-field-story-category').show();
             }
-            else
-            {
-                $('#edit-field-story-category').hide();
-                
+            else {
+                $('#edit-field-story-category').hide();                
             }
             $('#edit-field-celebrity-pro-occupation-und').change(function () {
                 var celebrityvalue = $('#edit-field-celebrity-pro-occupation-und').val();

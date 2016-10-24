@@ -93,7 +93,7 @@ if ($classes) {
             ?>
             <td>
               <?php print $link; ?>
-              ||
+              |
               <a class="menu-manager-edit" href="<?php print $base_url; ?>/itg-menu-manager/?edit_id=<?php print $row['id'] ?>&term_id=<?php print $row['tid'] ?>"><span class="edit-link">Edit</span></a>
             </td>
             <?php
