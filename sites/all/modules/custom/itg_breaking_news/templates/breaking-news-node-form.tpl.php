@@ -29,6 +29,7 @@
   <?php print drupal_render($form['field_display_on']); ?>
   <?php print drupal_render($form['field_section']); ?>
              </div>
+<?php print drupal_render($form['field_story_itg_tags']); ?>
 
 <div id="BrowseMedia">
   <h2 class="story-title">Browse Media</h2>
@@ -51,7 +52,7 @@
 </div>
 
 
-<h2 id="title-metatags" class="story-title"><?php echo t('SEO Meta Tags'); ?></h2>
-<?php print drupal_render($form['field_story_itg_tags']); ?>
+<!--<h2 id="title-metatags" class="story-title"><?php //echo t('SEO Meta Tags'); ?></h2>-->
+
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

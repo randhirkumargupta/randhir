@@ -6,11 +6,7 @@
 (function ($) {
     Drupal.behaviors.itg_podcast = {
         attach: function (context, settings) {
-            var uid = settings.itg_podcast.settings.uid;
-            if (uid != 1) {
-
-            }
-            jQuery('#edit-path').show();    
+            //var uid = settings.itg_podcast.settings.uid;
             
         }
 

@@ -588,7 +588,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
            jQuery(".variables-tabs div").css("display","none");
            jQuery(".variables-tabs div#tab-"+selected).css("display","block");
         });
-        jQuery(".vertical-tabs").css("display","none");
+        //jQuery(".vertical-tabs").css("display","none");
         jQuery("#edit-body-und-0-value").css({"min-width":"900px","height":"400px"});
     });', 'inline');
 

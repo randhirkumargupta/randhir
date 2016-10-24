@@ -22,10 +22,7 @@
             var uid = settings.itg_recipe.settings.uid;
             if (uid != 1) {
                 $('#edit-body-und-0-format').hide();
-                $('#edit-field-recipe-description-und-0-format').hide();
-                $('#edit-metatags').show();
-                $('.vertical-tabs-list').hide();
-                $('#edit-metatags-und-advanced').hide();
+                $('#edit-field-recipe-description-und-0-format').hide();                
             }
             // Code for facebook field value set Null
                  $('#edit-field-story-social-media-integ-und-facebook').click(function() {                     

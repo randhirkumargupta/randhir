@@ -7,16 +7,16 @@
     Drupal.behaviors.itg_videogallery = {
         attach: function(context, settings) {
             var uid = settings.itg_videogallery.settings.uid;
-            jQuery('#edit-path').show();
+            
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
-            if (uid != 1) {
-                $('.vertical-tabs-list').hide();
-                $('#edit-metatags').show();
-                $('#edit-metatags-und-advanced').hide();
-                $('.fieldset-description').hide();
-                $('#edit-metatags p').hide();
-            }
+//            if (uid != 1) {
+//                $('.vertical-tabs-list').hide();
+//                $('#edit-metatags').show();
+//                $('#edit-metatags-und-advanced').hide();
+//                $('.fieldset-description').hide();
+//                $('#edit-metatags p').hide();
+//            }
 
             // Code for client Title field value set Null
             $('#edit-field-story-configurations-und-syndication').click(function() {
