@@ -92,6 +92,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 
     <!--<a onclick="window.open('http://itgcms.drupallocal.dev/saml_login/other/domain_info', '_blank', 'location=yes,height=490,width=550,scrollbars=yes,status=yes', 'top=' + tops + ', left=' + left);" class="user-icon"><i class="fa fa-user"></i></a> -->
             <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://dev.indiatodayonline.in/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://dev.indiatodayonline.in/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
           <?php }
           else {
