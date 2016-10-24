@@ -49,12 +49,13 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <?php endforeach; ?>
             </ul>
         </div>
-        <?php print $row['field_images']; ?>
+       <?php foreach ($rows as $index => $row): ?>
         <?php if (!empty($row['field_photo_by'])) { ?>
             <p class="photo-by">photo:<?php print $row['field_photo_by']; ?></p>
         <?php } elseif (!empty($row['field_photo_by_1'])) { ?>
             <p class="photo-by">photo<?php print $row['field_photo_by_1']; ?></p>
         <?php } ?>
+            <?php endforeach; ?>
     </div>
     <div class="col-md-4">
         <div class="other-details-main">
