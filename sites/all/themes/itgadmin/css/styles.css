@@ -9050,3 +9050,7 @@ div.node #comments h2 {
 .node-videogallery-form .itg-sidebar-form #Configuration .form-type-checkboxes > label {
   display: none;
 }
+
+[id="edit-field-story-reporter"] table tbody {
+  overflow: visible !important;
+}
