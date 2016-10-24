@@ -3,10 +3,15 @@
         <ul>
             <?php
             foreach ($rows as $index => $row) {
+                
+                    $video_class = "";
+                    if (strtolower($row['type']) == 'videogallery') {
+                        $video_class = 'video-icon';
+                    }
                 $first_image="";
                 if($index==0)
                 {
-                    $first_image="first-image";
+                    $first_image="first-image ".$video_class;
                 }
                 ?>
             <li class="<?php echo $first_image; ?> image-tab-<?php echo $index; ?> common-img"><?php print $row['field_story_extra_large_image']; ?></li>
@@ -21,7 +26,7 @@
                 $desc = $row['title'];                                
                 ?>
             
-                <li data-tag="image-tab-<?php echo $index; ?>">
+                <li data-tag="image-tab-<?php echo $index; ?>" class="<?php echo $video_class;?>">
                     <?php print $row['field_story_extra_large_image_1']; ?>
                     <p class="title"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
                 </li>

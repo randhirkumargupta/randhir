@@ -7,7 +7,7 @@
                 foreach ($rows as $index => $row) {
                     $desc = $row['title'];
 
-                    $video_class = "";
+                    $video_class = "pic-no-icon";
                     if (strtolower($row['type']) == 'videogallery') {
                         $video_class = 'video-icon';
                     }
