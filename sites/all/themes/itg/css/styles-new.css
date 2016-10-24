@@ -279,6 +279,11 @@
 #block-views-photo-landing-slider-block .social-icon.desktop-hide {
   margin: 10px 0;
 }
+#block-views-photo-landing-slider-block .photoby {
+  font-size: 14px;
+  color: #626262;
+  margin-top: 10px;
+}
 
 .itg-h450-section .widget-wrapper {
   height: 100%;
