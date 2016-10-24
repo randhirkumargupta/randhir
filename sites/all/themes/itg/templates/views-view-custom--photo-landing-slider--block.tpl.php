@@ -35,12 +35,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
             <?php foreach ($rows as $index => $row): ?>
                 <li>
                     <figure>
-                        <?php print $row['field_images']; ?>
-                      <?php if(!empty($row['field_photo_by'])){ ?>
-                        <figcaption><?php print $row['field_photo_by']; ?></figcaption>
-                      <?php } else { ?>
-                        <figcaption><?php print $row['field_photo_by_1']; ?></figcaption>
-                      <?php } ?>
+                        <?php print $row['field_images']; ?>                    
                     </figure>
                 </li>
             <?php endforeach; ?>
@@ -54,6 +49,12 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <?php endforeach; ?>
             </ul>
         </div>
+        <?php print $row['field_images']; ?>
+        <?php if (!empty($row['field_photo_by'])) { ?>
+            <p class="photo-by">photo:<?php print $row['field_photo_by']; ?></p>
+        <?php } elseif (!empty($row['field_photo_by_1'])) { ?>
+            <p class="photo-by">photo<?php print $row['field_photo_by_1']; ?></p>
+        <?php } ?>
     </div>
     <div class="col-md-4">
         <div class="other-details-main">
