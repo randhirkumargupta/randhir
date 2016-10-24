@@ -4969,12 +4969,12 @@ footer{
             }            
             padding-top: 20px;
             text-align: left;
-            text-transform: uppercase;            
+            text-transform: uppercase;  
+            @include clearfix;
             li{              
                 width: 33%;
-                color:#000;
-                display: inline-block;
-                float: none;
+                color:#000;                
+                float: left;
                 font-weight: 600;
                 vertical-align: middle;
                 &.image{
@@ -5048,13 +5048,15 @@ footer{
     border: 1px solid #ddd;
 }
 #block-views-program-schedule-block-4{
-    > .views-row{      
+    .views-row{
+        .views-row{
             text-align: center;
             border: 1px solid #ddd;
             padding: 10px;
             &:nth-child(4n+1){
                 clear: left;
             }      
+            }
     }
 }
 .sign-and-win-contest, .event-registration-link{
@@ -5093,6 +5095,11 @@ footer{
             color: #ef3c24;
         }
     }
+}
+#block-views-program-schedule-block-7{
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 30px;
 }
 
 /*CSS end for event page index*/

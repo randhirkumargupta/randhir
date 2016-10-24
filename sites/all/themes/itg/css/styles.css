@@ -6411,16 +6411,25 @@ footer .footer-copyright {
   padding-top: 20px;
   text-align: left;
   text-transform: uppercase;
+  zoom: 1;
 }
 #block-views-program-schedule-block-1 .content-list ul.profile-detail:first-child {
   margin-top: 20px;
   border-top: 2px solid #aaaaaa;
 }
+#block-views-program-schedule-block-1 .content-list ul.profile-detail:before, #block-views-program-schedule-block-1 .content-list ul.profile-detail:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-views-program-schedule-block-1 .content-list ul.profile-detail:after {
+  clear: both;
+}
 #block-views-program-schedule-block-1 .content-list ul.profile-detail li {
   width: 33%;
   color: #000;
-  display: inline-block;
-  float: none;
+  float: left;
   font-weight: 600;
   vertical-align: middle;
 }
@@ -6501,12 +6510,12 @@ footer .footer-copyright {
   border: 1px solid #ddd;
 }
 
-#block-views-program-schedule-block-4 > .views-row {
+#block-views-program-schedule-block-4 .views-row .views-row {
   text-align: center;
   border: 1px solid #ddd;
   padding: 10px;
 }
-#block-views-program-schedule-block-4 > .views-row:nth-child(4n+1) {
+#block-views-program-schedule-block-4 .views-row .views-row:nth-child(4n+1) {
   clear: left;
 }
 
@@ -6546,6 +6555,12 @@ footer .footer-copyright {
 }
 #block-itg-event-backend-event-registration .tc-txt span {
   color: #ef3c24;
+}
+
+#block-views-program-schedule-block-7 {
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 30px;
 }
 
 /*CSS end for event page index*/
