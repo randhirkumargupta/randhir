@@ -140,7 +140,9 @@ function itg_related_views_pre_render(&$view) {
       }
 
       $splittedsite = explode("/", $related_result->site);
-      $related_result->site = strtoupper($splittedsite[3]);
+      $explode_site = explode(".", $splittedsite[2]);
+      $related_result->site = strtoupper($explode_site[0]);
+      
     }
   }
 }
