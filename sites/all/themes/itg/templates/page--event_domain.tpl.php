@@ -11,6 +11,7 @@ $banner_img = drupal_get_path('module', 'itg_event_backend').'/event_banner.png'
 ?>
 
 <div id="page">
+  <div class="event-sidebar">
     <header class="header" id="header" role="banner">
             <section class="header-top">
                 <div class="container header-logo">
@@ -114,7 +115,7 @@ $banner_img = drupal_get_path('module', 'itg_event_backend').'/event_banner.png'
   </main>
 
   <?php print render($page['footer']); ?>
-
+</div>
 </div>
 
 <?php print render($page['bottom']); ?>
