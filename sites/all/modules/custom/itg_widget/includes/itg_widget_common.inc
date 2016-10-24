@@ -503,7 +503,24 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   drupal_add_css("select.draggableviews-weight {display:none !important}", "inline");
   drupal_add_css("#draggableviews-table-section-wise-content-ordering-list-page .tabledrag-handle {display:none !important}", "inline");
 
+ if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_auto_review_widget' && ($form_state['view']->current_display == 'special_auto_review_widget_contents' || $form_state['view']->current_display =='special_auto_review_widget_list')) {
+        
+     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        
+        foreach ($tax as $key => $term) {
 
+            if (!itg_category_manager_term_state($term->tid)) {
+                unset($tax[$key]);
+            }
+        }
+
+        $op = array("All" => " - None -");
+        foreach ($tax as $key => $val) {
+            $op[$val->tid] = $val->name;
+        }
+        unset($form['category_tid']['#options']);
+        $form['category_tid']['#options'] = $op;
+    }
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
