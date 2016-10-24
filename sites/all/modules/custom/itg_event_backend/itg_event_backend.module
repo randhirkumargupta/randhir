@@ -468,6 +468,22 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
       'variables' => array('data' => NULL),
     ),
+   'tweet_right_sidebar_event' => array(
+			'template' => 'tweet-right-sidebar-event',
+			'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+		),
+   'event_registration' => array(
+          'template' => 'event-registration',
+          'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+    ),
+   'event_sign_and_win' => array(
+          'template' => 'event-sign-and-win',
+          'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+    ),
+   'event_flashback' => array(
+          'template' => 'event-flashback',
+          'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+    ),  
   );
   return $themes;
 }
@@ -490,7 +506,27 @@ function itg_event_backend_block_info() {
     'info' => t('Program Schedule Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-
+	$blocks['ad_right_sidebar_event'] = array(
+		'info' => t('Ad right sidebar event'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
+ $blocks['tweet_right_sidebar_event'] = array(
+		'info' => t('Tweet Right Sidebar Event'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
+  $blocks['event_registration'] = array(
+		'info' => t('Event Registration'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
+  $blocks['event_sign_and_win'] = array(
+		'info' => t('Event Sign And Win'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
+  $blocks['event_flashback'] = array(
+		'info' => t('Event Flashback'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
+  
   return $blocks;
 }
 
@@ -509,6 +545,23 @@ function itg_event_backend_block_view($delta = '') {
       break;
     case 'program_tab_block':
       $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab()));
+      break;
+    case 'ad_right_sidebar_event':
+			$page_name = 'Rest';
+			$data['itg_ad'] = get_ad_script($page_name);
+			$block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
+			break;
+    case 'tweet_right_sidebar_event':
+			$block['content'] = theme('tweet_right_sidebar_event');
+			break;
+    case 'event_registration':
+      $block['content'] = theme('event_registration');
+      break;
+    case 'event_sign_and_win':
+      $block['content'] = theme('event_sign_and_win');
+      break;
+    case 'event_flashback':
+      $block['content'] = theme('event_flashback');
       break;
   }
 
@@ -665,26 +718,30 @@ function itg_event_backend_get_session_photo_video($daywise){
 
 function itg_event_backend_menu(){
    $items['itg-event-test'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   $items['programme'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+  $items['programme'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   $items['speakers'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+  $items['speakers'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   $items['sponsors'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+  $items['sponsors'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   $items['flashback'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+  $items['sign-and-win'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   return $items;
+  $items['flashback'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  return $items;
 }
 
 /**
@@ -818,10 +875,50 @@ function itg_event_backend_get_event_node(){
  * @return boolean
  */
 function itg_event_get_host_name() {
-  $host_name = db_query("SELECT subdomain, scheme FROM {domain} WHERE domain_id = :domain_id", array(':domain_id' => 1))->fetchAll();
-  if (!empty($host_name)) {
-    return $host_name[0]->scheme.'://'.$host_name[0]->subdomain;
-  } else {
-    return FALSE;
+  if (module_exists('domain')) {
+    $host_name = db_query("SELECT subdomain, scheme FROM {domain} WHERE domain_id = :domain_id", array(':domain_id' => 1))->fetchAll();
+    if (!empty($host_name)) {
+      return $host_name[0]->scheme . '://' . $host_name[0]->subdomain;
+    } else {
+      return FALSE;
+    }
   }
+}
+
+/**
+ * Vikul content
+ * @param int $nid
+ * @return string
+ */
+function itg_event_backend_vukkul_content($nid) {
+  $page_id = $nid;
+  $node = node_load($page_id);
+  $user_details = user_load($node->uid);
+  $event_author_name = $user_details->name;
+  $n_title = "Event: ".$node->title;
+  $unique_id = $node->type . '_' . $node->nid;
+  $author = base64_encode($event_author_name);
+  drupal_add_js('http://vuukle.com/js/vuukle.js', external);
+  $output = '<script type="text/javascript">
+
+               var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
+
+               var SECTION_TAGS =  "Event";
+
+               var ARTICLE_TITLE = "' . $n_title . '";
+
+               var GA_CODE = "UA-795349-17";
+
+               var VUUKLE_API_KEY = "dc34b5cc-453d-468a-96ae-075a66cd9eb7";
+
+               var TRANSLITERATE_LANGUAGE_CODE = ""; //"en" for English, "hi" for hindi
+
+               var VUUKLE_COL_CODE = "d00b26";
+
+               var ARTICLE_AUTHORS = "' . $author . '";
+
+               create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
+
+               </script>';
+  return $output;
 }

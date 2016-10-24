@@ -68,6 +68,7 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
     drupal_goto($redirect);
   }
   elseif (isset($node) && $action == 'buy-now') {
+    unset($_REQUEST['destination']);
     if ($node_id == $itg_result->nid) {
       drupal_goto('cart');
     }
@@ -77,7 +78,7 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
       drupal_set_message(t('Something went wrong please try after some time.')
           , 'error');
       // Redirect to cart page.
-      drupal_goto($redirect);
+      drupal_goto('redeem-points');
     }
     // Redirect to cart page.
     drupal_goto('cart');

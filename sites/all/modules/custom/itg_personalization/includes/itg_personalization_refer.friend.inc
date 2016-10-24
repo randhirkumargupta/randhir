@@ -11,7 +11,7 @@
  * {@inheritdoc}.
  */
 function itg_personalization_refer_a_friend_form($form, &$form_state) {
-  global $base_url;
+  global $base_url;  
   $form['#tree'] = TRUE;
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_personalization') . '/js/itg_personalization.js',

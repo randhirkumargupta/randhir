@@ -7,7 +7,7 @@
  * @see https://drupal.org/node/1728148
  */
 global $base_url;
-//$banner_img = drupal_get_path('module', 'itg_event_backend').'/event_banner.jpg';
+$banner_img = drupal_get_path('module', 'itg_event_backend').'/event_banner.png';
 ?>
 
 <div id="page">
@@ -16,8 +16,8 @@ global $base_url;
                 <div class="container header-logo">
               <?php if ($logo): ?>
                 <div class="logo">
-<!--                  <img src="<?php echo $base_url.'/'.$banner_img; ?>" width="100%" height="50%"/>-->
-                    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+                  <a href="<?php print $base_url; ?>" title="<?php print t('Home'); ?>" rel="home"><img src="<?php echo $base_url.'/'.$banner_img; ?>" width="100%"/></a>
+<!--                    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>-->
                 </div>
                     <?php endif; ?>                    
                     </div>

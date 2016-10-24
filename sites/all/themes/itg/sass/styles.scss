@@ -2344,6 +2344,7 @@ footer{
         border:none;
         margin: 20px 0 10px 0;
         @include calculate-width(1);
+        font-family: $itg-roboto;
         &.ui-slider-horizontal{            
             height: 30px;
             .ui-slider-handle{
@@ -2358,6 +2359,7 @@ footer{
                 font-size: 15px;
                 color: #323232;
                 cursor: move;
+                background-image: linear-gradient(#f5f3f2,#e7e5e4);
             }
         }
         &.ui-widget-content{
@@ -3195,7 +3197,7 @@ footer{
 /*video and photo rolling slider end*/
 
 /*CCS start Photo landing Page*/
-#block-views-photo-list-of-category-block-2{
+#block-views-photo-list-of-category-block-2, .view-photo-list-of-category{
     @include sidebar-heading;
     h3{
         display: block;
@@ -3224,6 +3226,7 @@ footer{
             }
         }
     }
+    @include pager;
 }
 /*CCS End Photo landing Page*/
 
@@ -3807,6 +3810,7 @@ footer{
 #block-itg-ads-ad-right-sidebar-1{
     @include display-inline;
     padding:0px 15px 0 0;
+    border-bottom: 1px solid $border-color;
 }
 /*CSS End RHS add block*/
 /*CSS Start So sorry page*/
@@ -3930,6 +3934,16 @@ footer{
         list-style-type: none;
         text-align: center;
         margin-top: 25px;
+        li{
+            @include display-inline;
+            position: relative;
+            .ajax-progress-throbber{
+                position: absolute;
+                z-index: 1;
+                right: -60px;
+                top: 10px;
+            }
+        }
         a{
             background: #db0e0f;
             color: #fff;
@@ -4246,6 +4260,7 @@ footer{
         .special-top-news{
             overflow: hidden;
             position: relative;
+            height:100%;
             .widget-title{
                 position: absolute;
             }
@@ -4277,6 +4292,7 @@ footer{
 
     .auto-tips-n-tricks{
         ul{
+            list-style: none;
             li{
                 padding: 18px 0;
                 +li{
@@ -4291,6 +4307,10 @@ footer{
                 }
             }
         }
+    }
+    .section_wise_order-auto-road-trip{
+        background: #f3f3f3;
+        padding: 10px;
     }
     .auto-road-trip{
         .trending-videos{
@@ -4619,7 +4639,8 @@ footer{
                 background: #171717;
                 padding: 25px 10px;
                 width: 188px;
-                float: left;                            
+                float: left; 
+                height: 276px;
                 p{
                     margin-top: 10px;
                 }
@@ -4955,6 +4976,29 @@ footer{
         }
 
     }    
+}
+#block-menu-menu-event-menu{
+    background: #000;   
+    ul{
+      @extend .list-none;
+      @include clearfix;
+      margin:0 auto;
+      max-width: 1200px;
+      li{
+          @include float(left);
+          a{
+              color:#f7ee23;
+              font-size: 15px;
+              padding: 0 10px;
+              text-transform: uppercase;
+            height: 50px;
+               line-height: 50px;
+              &:hover{
+                  color:#fff;
+              }
+          }
+      }
+    }
 }
 /*CSS end for event page index*/
 
@@ -5947,3 +5991,27 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*Budget page css end*/
+
+
+/*css start mscroll bar changes*/
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar{
+    height: 12px;
+    margin: 3px auto;
+    background-color:#f7f7f7;
+    background-image: linear-gradient(#a1a1a1,#d1d1d1);
+    border: 1px solid #c6c6c6;
+    opacity: 1;
+}
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail{        
+    height: 18px;
+    margin: 0 auto;    
+    width: 98%;    
+    background-image: linear-gradient(#0b0b0b,#171717);
+    border: 1px solid #2c2c2c;
+    opacity: 1;
+}
+.mCSB_scrollTools.mCSB_scrollTools_horizontal{
+    margin-bottom: 10px;
+}
+
+/*css end mscroll bar changes*/
