@@ -6372,7 +6372,7 @@ footer .footer-copyright {
   margin-bottom: 15px;
 }
 
-.event-sidebar section.sidebar {
+.event-sidebar aside.sidebar {
   border: 1px solid #ddd;
 }
 
@@ -6520,7 +6520,7 @@ footer .footer-copyright {
   margin-bottom: 50px;
 }
 
-#block-itg-event-backend-event-sign-and-win h1 {
+#block-itg-event-backend-event-sign-and-win h1, #block-itg-event-backend-event-registration h1 {
   font-family: "Roboto Slab", sans-serif;
   font-size: 50px;
   margin-bottom: 40px;
@@ -7494,7 +7494,7 @@ footer .footer-copyright {
 /*Budget page css end*/
 /*pic icon not avilable*/
 .pic-no-icon:after {
-  background: none;
+  display: none;
 }
 
 /*pic icon not avilable*/

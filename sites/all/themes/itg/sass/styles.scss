@@ -4926,7 +4926,7 @@ footer{
     }
 }
 .event-sidebar{
-    section.sidebar {
+    aside.sidebar {
         border: 1px solid #ddd;
     }   
 }
@@ -5066,7 +5066,7 @@ footer{
     font-weight: 700;
     margin-bottom: 50px;
 }
-#block-itg-event-backend-event-sign-and-win{
+#block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
     h1{
         font-family: $itg-robotoslab;
         font-size: 50px;
@@ -6090,7 +6090,7 @@ input[type="radio"]:checked + label:after{
 /*pic icon not avilable*/
 .pic-no-icon{    
     &:after{
-        background: none;
+        display: none;
     }               
 }
 /*pic icon not avilable*/
