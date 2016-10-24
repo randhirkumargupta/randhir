@@ -479,9 +479,9 @@ else if ($widget_style == 'in-depth') { ?>
         <?php }
         else if ($widget_style == 'home-watch') { ?>
 
-    <div class="tech-trip">
-        <div class="techwatch osscar-video">
-
+    <div class="tech-trip osscar-video">
+        <div class="home-watch-new">
+            <ul class="">
                 <?php
                 foreach ($data as $count => $entity) {
                     $video_class = "pic-no-icon";
@@ -500,12 +500,12 @@ else if ($widget_style == 'in-depth') { ?>
 
         <?php if (!empty($extra_large_image_url)) { ?>
 
-                        <span class="pic video-icon"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a></span>
+                        <span class="dm-pic"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a> <span><i class="fa fa-play-circle"></i> </span></span>
 
         <?php }
         ?>
 
-                    <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></span></a>
+                        <span class="dm-detail"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></a></span>
                 </li>
                 <?php } ?>
             </ul>
