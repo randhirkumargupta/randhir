@@ -121,11 +121,7 @@ function itg_photogallery_after_build($form, &$form_state) {
     '#weight' => 20,
   );
   global $user, $base_url;
-  unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
-  unset($form['metatags']['intro_text']['#markup']);
-  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -135,7 +131,7 @@ function itg_photogallery_after_build($form, &$form_state) {
     drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
   }
   drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 3));
-  $form['additional_settings']['group']['#groups']['additional_settings'][4]['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
+  
   return $form;
 }
 

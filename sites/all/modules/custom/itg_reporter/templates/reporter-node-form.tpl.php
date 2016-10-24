@@ -12,6 +12,6 @@
     
 </div>
 
-<h2 id="title-metatags" class="story-title"><?php echo t('SEO Meta Tags'); ?></h2>
+<!--<h2 id="title-metatags" class="story-title"><?php // echo t('SEO Meta Tags'); ?></h2>-->
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>
