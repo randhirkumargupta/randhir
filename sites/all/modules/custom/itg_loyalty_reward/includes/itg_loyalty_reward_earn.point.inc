@@ -36,14 +36,51 @@ function itg_loyalty_reward_testpoints() {
 }
 
 /**
+ * Validate news letter points.\
+ *
+ * @param int $user
+ * @param string $type
+ * @param string $news_letter
+ * @return boolean
+ */
+function itg_loyalty_reward_newsletter_point($user, $type, $news_letter) {  
+  $itg_result = '';
+  $dedicated_point = itg_loyalty_reward_dedicated_point($type);
+  $itg_query = db_select('itg_lrp_loyalty_points', 'p')
+      ->fields('p', array('newsletter'))      
+      ->condition('uid', $user)
+      ->condition('loyalty_type', $dedicated_point['label']);
+  $itg_result = $itg_query->execute()->fetchAll();
+  // If newsletter subscription is first time then earn point else not.
+  foreach ($itg_result as $value) {
+    if ($value->newsletter == $news_letter) {     
+      return TRUE;
+    }    
+  }
+}
+
+/**
  * Implements callback function for points earning.
  * 
  * @global stdObject $user
+ * @param int $nid
+ * @param string $type
+ * @param int $uid
+ * @param string $news_l
+ * @return
  */
-function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL) {
+function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL, $news_l = NULL) {
   global $user;
+  $ns_validate = FALSE;
   if ($uid != NULL) {
     $user_id = $uid;
+    switch ($type) {
+      case 'ns':
+        $ns_validate = itg_loyalty_reward_newsletter_point($uid, $type, $news_l);
+        if ($ns_validate) {
+          return;
+        }
+    }
   }
   else {
     $user_id = $user->uid;
@@ -66,6 +103,9 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL) {
     'node_id' => $nid != NULL ? $nid : 0,
     'created' => REQUEST_TIME,
   );
+  if ($news_l != NULL) {
+    $point_presave['newsletter'] = $news_l;        
+  }
   $flag = '';
   // Check if expiry key is availbal and not expired.
   if ($unique_exp_key != '') {
