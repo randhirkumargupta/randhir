@@ -5048,15 +5048,13 @@ footer{
     border: 1px solid #ddd;
 }
 #block-views-program-schedule-block-4{
-    .views-row{
-        .views-row{
+    > .views-row{      
             text-align: center;
             border: 1px solid #ddd;
             padding: 10px;
             &:nth-child(4n+1){
                 clear: left;
-            }
-        }
+            }      
     }
 }
 /*CSS end for event page index*/

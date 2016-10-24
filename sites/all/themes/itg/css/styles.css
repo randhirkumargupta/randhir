@@ -6501,12 +6501,12 @@ footer .footer-copyright {
   border: 1px solid #ddd;
 }
 
-#block-views-program-schedule-block-4 .views-row .views-row {
+#block-views-program-schedule-block-4 > .views-row {
   text-align: center;
   border: 1px solid #ddd;
   padding: 10px;
 }
-#block-views-program-schedule-block-4 .views-row .views-row:nth-child(4n+1) {
+#block-views-program-schedule-block-4 > .views-row:nth-child(4n+1) {
   clear: left;
 }
 
