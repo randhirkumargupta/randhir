@@ -4875,7 +4875,7 @@ footer{
         }
     }
 }
-#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block{
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
     h2{
         font-size: 20px;
         border-bottom: 1px solid $border-color;
@@ -5057,6 +5057,44 @@ footer{
             }      
     }
 }
+.sign-and-win-contest, .event-registration-link{
+    background: #ef3c24;
+    color: #fff;
+    font-size: 30px;
+    padding: 15px 10px;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+#block-itg-event-backend-event-sign-and-win{
+    h1{
+        font-family: $itg-robotoslab;
+        font-size: 50px;
+        margin-bottom: 40px;
+    }
+}
+#block-itg-event-backend-event-registration{
+    margin-bottom:70px;
+    .buy-ticket-txt {
+        margin: 30px 0;
+        text-align: center;
+        line-height: 22px;
+        font-size: 16px;
+        font-weight: 700;
+        a{
+            color: #ef3c24;
+        }
+    }
+    .tc-txt {
+        padding: 15px;
+        background: #f1f1f1;
+        border: 1px solid #ddd;
+        span{
+            color: #ef3c24;
+        }
+    }
+}
+
 /*CSS end for event page index*/
 
 

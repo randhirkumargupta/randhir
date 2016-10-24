@@ -6326,7 +6326,7 @@ footer .footer-copyright {
   color: #fff;
 }
 
-#block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2 {
+#block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2 {
   font-size: 20px;
   border-bottom: 1px solid #dddddd;
   text-transform: uppercase;
@@ -6508,6 +6508,44 @@ footer .footer-copyright {
 }
 #block-views-program-schedule-block-4 > .views-row:nth-child(4n+1) {
   clear: left;
+}
+
+.sign-and-win-contest, .event-registration-link {
+  background: #ef3c24;
+  color: #fff;
+  font-size: 30px;
+  padding: 15px 10px;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+#block-itg-event-backend-event-sign-and-win h1 {
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 50px;
+  margin-bottom: 40px;
+}
+
+#block-itg-event-backend-event-registration {
+  margin-bottom: 70px;
+}
+#block-itg-event-backend-event-registration .buy-ticket-txt {
+  margin: 30px 0;
+  text-align: center;
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: 700;
+}
+#block-itg-event-backend-event-registration .buy-ticket-txt a {
+  color: #ef3c24;
+}
+#block-itg-event-backend-event-registration .tc-txt {
+  padding: 15px;
+  background: #f1f1f1;
+  border: 1px solid #ddd;
+}
+#block-itg-event-backend-event-registration .tc-txt span {
+  color: #ef3c24;
 }
 
 /*CSS end for event page index*/
