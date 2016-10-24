@@ -78,4 +78,5 @@ function  save_we_may_suggest_widget_data($we_may_suggest_content) {
               ))->execute();
     }
   }
+//  return true;
 }
