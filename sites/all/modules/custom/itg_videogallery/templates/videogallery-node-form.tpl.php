@@ -10,6 +10,7 @@
         <?php print drupal_render($form['field_story_reporter']); ?>
         <div id="reporter-details"></div>
         <?php print drupal_render($form['field_stroy_city']); ?>
+        <?php print drupal_render($form['field_story_itg_tags']); ?>
         <?php print drupal_render($form['field_story_courtesy']); ?>
         <?php print drupal_render($form['field_video_anchor']); ?>
       </div>
@@ -60,7 +61,7 @@
       </div>
     </div>
 
-    <div id="Imageupload" class="itg-form-section-wrapper">
+    <div id="Imageupload" class="itg-form-section-wrapper browse-media-file">
       <h2 class="story-title"><?php print t('Image'); ?></h2>
       <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_extra_large_image']); ?> 
@@ -81,7 +82,6 @@
         <?php print drupal_render($form['field_video_configurations']); ?>
         <?php print drupal_render($form['field_story_comment_question']); ?>
         <?php print drupal_render($form['field_story_syndication']); ?>
-        <?php print drupal_render($form['field_story_itg_tags']); ?>
         <?php print drupal_render($form['field_dailymotion_playlist']); ?>
         <?php print drupal_render($form['field_story_schedule_date_time']); ?>
         <?php print drupal_render($form['field_story_expires']); ?> 
