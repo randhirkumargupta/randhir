@@ -357,7 +357,7 @@
         }
         $('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
         
-        if(!$('div').hasClass('browse-media-file')){
+        
           $('.image-widget').each(function() {
             var filename = $(this).find('.file').html();
             var filesize = $(this).find('.file-size').html();
@@ -367,7 +367,7 @@
             }
             $(this).find('.image-widget-data .file, .image-widget-data .file-size').remove();
           });
-        }
+        
         
         $('.image-widget-data').find('.form-text').each(function() {
             var plaholderText = $(this).prev().text();
