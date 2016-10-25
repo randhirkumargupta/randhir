@@ -5299,6 +5299,7 @@ footer{
             + .dont-miss-listing {
                 padding:0px;
             }   
+            @include video-left-border-bottom;
         }
     }
     .section_wise_order-edu-sample-paper, .section_wise_order-edu-notification, .section_wise_order-edu-featurefilia, .section_wise_order-edu-jobs-and-career{
