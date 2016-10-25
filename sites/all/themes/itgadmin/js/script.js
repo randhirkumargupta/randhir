@@ -760,6 +760,7 @@ jQuery(document).ready(function() {
     jQuery(".menu-manager-delete").click(function() {
         var r = confirm("Are you sure want to delete.");
         if (r == true) {
+            jQuery("#widget-ajex-loader").css("display","block");
             return true;
         } else {
             return false;
