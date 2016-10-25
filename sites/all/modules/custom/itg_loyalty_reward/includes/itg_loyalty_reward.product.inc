@@ -42,10 +42,14 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL) {
     );
     // Check if user has valid points to redeem product.
     $remaining_point = itg_loyalty_reward_remaining_point($user->uid);
-    if ($remaining_point < $node_info_array['points']) {
+    if ($remaining_point < $node_info_array['points'] && $action = 'buy-now') {
+      drupal_set_message(t('Insufficient points to redeem this product.'), 'error');
+      drupal_goto('redeem-points');
+    }
+    elseif ($remaining_point < $node_info_array['points']) {
       drupal_set_message(t('Insufficient points to redeem this product.'), 'error');
       drupal_goto($redirect);
-    }
+    }    
 
     if ($node_id == $itg_result->nid && $action == NULL) {
       $quantity = $itg_result->quintity + 1;
@@ -318,6 +322,7 @@ function itg_loyalty_reward_order_summary() {
   $data['user_detail']['name'] = $fname . ' ' . $lname;
   $data['user_detail']['mail'] = $user_detail->mail;
   $data['user_detail']['address'] = $user_detail->field_short_description['und'][0]['value'];
+  $data['user_detail']['pincode'] = $user_detail->field_user_pincode['und'][0]['value'];
   $remain_point = itg_loyalty_reward_remaining_point($user->uid);  
   
   return theme('cart_order_summary', array('data' => $data, 'remain_point' => $remain_point));

@@ -3469,7 +3469,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3491,7 +3492,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3513,7 +3515,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3535,7 +3538,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3557,7 +3561,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3579,7 +3584,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -4854,7 +4860,7 @@ ugc-published-blog',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-blogs
@@ -4877,7 +4883,7 @@ ugc-published-blog',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-blogs
@@ -4900,7 +4906,7 @@ ugc-published-blog',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-blogs
@@ -4923,7 +4929,7 @@ ugc-published-blog',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'unpublished-blogs
@@ -5885,7 +5891,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11108,7 +11115,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11448,7 +11456,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11816,7 +11825,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12184,7 +12194,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12552,7 +12563,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12920,7 +12932,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13288,7 +13301,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13522,7 +13536,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13559,7 +13574,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13971,7 +13987,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14035,7 +14052,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14071,7 +14089,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14107,7 +14126,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14143,7 +14163,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -22207,7 +22228,8 @@ sign-and-win',
   'region' => 'content_event',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22249,7 +22271,8 @@ sign-and-win',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22263,7 +22286,8 @@ sign-and-win',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22277,7 +22301,8 @@ sign-and-win',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22291,7 +22316,8 @@ sign-and-win',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22305,7 +22331,8 @@ sign-and-win',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22319,7 +22346,8 @@ sign-and-win',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -27886,12 +27914,12 @@ manage-event-backend-type',
   'module' => 'itg_event_backend',
   'delta' => 'event_registration',
   'theme' => 'itg',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'content_event',
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'event-registration',
   'title' => '',
   'cache' => 8,
 );
@@ -27932,8 +27960,8 @@ manage-event-backend-type',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'event-registration',
   'title' => '',
   'cache' => 8,
 );
@@ -27974,8 +28002,8 @@ manage-event-backend-type',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'event-registration',
   'title' => '',
   'cache' => 8,
 );
@@ -28016,8 +28044,8 @@ manage-event-backend-type',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'event-registration',
   'title' => '',
   'cache' => 8,
 );
@@ -28058,8 +28086,8 @@ manage-event-backend-type',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'event-registration',
   'title' => '',
   'cache' => 8,
 );
@@ -28100,8 +28128,8 @@ manage-event-backend-type',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'event-registration',
   'title' => '',
   'cache' => 8,
 );
@@ -28142,8 +28170,8 @@ manage-event-backend-type',
   'weight' => 0,
   'region' => -1,
   'custom' => 0,
-  'visibility' => 0,
-  'pages' => '',
+  'visibility' => 1,
+  'pages' => 'event-registration',
   'title' => '',
   'cache' => 8,
 );
@@ -28174,6 +28202,125 @@ manage-event-backend-type',
   'pages' => 'flashback',
   'title' => '<none>',
   'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1970,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1971,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1972,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1973,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1974,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1975,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1976,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
 );
   $export['block_custom'][] = array(
   'bid' => 1,

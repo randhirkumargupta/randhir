@@ -357,7 +357,7 @@
         }
         $('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
         
-        if(!$('div').hasClass('browse-media-file')){
+        
           $('.image-widget').each(function() {
             var filename = $(this).find('.file').html();
             var filesize = $(this).find('.file-size').html();
@@ -367,7 +367,7 @@
             }
             $(this).find('.image-widget-data .file, .image-widget-data .file-size').remove();
           });
-        }
+        
         
         $('.image-widget-data').find('.form-text').each(function() {
             var plaholderText = $(this).prev().text();
@@ -731,8 +731,9 @@ jQuery(document).ready(function() {
 
     // jQuery code to toggle ITG-STORY Form
     jQuery('.itg-form-section-wrapper').on('click', 'h2', function() {
-        jQuery(this).next().slideToggle();
-        jQuery(this).toggleClass('active');
+      jQuery(this).toggleClass('active');
+      jQuery(this).next().slideToggle();
+        
     });
 
     // jQuery code to toggle Cotegory manager form
@@ -760,6 +761,7 @@ jQuery(document).ready(function() {
     jQuery(".menu-manager-delete").click(function() {
         var r = confirm("Are you sure want to delete.");
         if (r == true) {
+            jQuery("#widget-ajex-loader").css("display","block");
             return true;
         } else {
             return false;

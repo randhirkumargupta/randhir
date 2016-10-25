@@ -377,6 +377,7 @@ function itgadmin_preprocess_page(&$vars) {
       , 'imagetagedit'
       , 'anchor-list-order-reorder'
       , 'big-story-widget-list'
+      , 'highlights-widget-list'
       , 'photo-list-widget-listing'
       , 'home-page-feature-widget'
       , 'we-may-suggest-content-ordering-list'

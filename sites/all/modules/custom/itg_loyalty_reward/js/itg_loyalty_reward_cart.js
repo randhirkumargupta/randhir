@@ -120,7 +120,7 @@
 
             });
             // Display loader onclick of add to cart link.
-            $('.btn-add-cart, .itg-remove-product').on('click', function () {
+            $('.btn-add-cart, .itg-remove-product, .btn-redeem-points').on('click', function () {
                 test_loader_show();
             });
 
