@@ -6687,16 +6687,39 @@ div.node #comments h2 {
   margin: 20px 0 0;
 }
 .ftp-server #edit-video-browse-select .ftp_video_radio {
-  padding: 20px 20px 10px 0;
-  margin: 0;
+  position: relative;
+  padding: 0;
+  margin: 0 15px 15px 0;
+  width: 120px;
+  height: 120px;
+  border: 1px solid #d9d9d9;
+}
+.ftp-server #edit-video-browse-select .ftp_video_radio label {
+  background: url(../images/default_for_all.png) no-repeat left top/100% auto;
+  font-size: 12px;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  padding: 80px 5px 0;
+  position: absolute;
+  text-overflow: ellipsis;
+  top: 0;
+  white-space: nowrap;
   width: 100%;
 }
 .ftp-server #edit-video-browse-select .ftp_video_radio .form-radio {
   float: left;
-  margin: 2px;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 999;
 }
 .ftp-server #edit-video-browse-select .ftp_video_radio .file_size {
-  margin-left: 30px;
+  color: #ababab;
+  display: block;
+  margin-left: 0;
 }
 .ftp-server > a {
   margin-top: 20px;

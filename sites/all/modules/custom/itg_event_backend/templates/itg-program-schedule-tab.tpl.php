@@ -16,7 +16,11 @@ ksort($data);
 foreach ($data as $key => $value) {
   $tabs .= '<li data-tag="Day-' . $key . '" class="Day-' . $key . '">Day ' . $key . '</li>';
 }
+
+$banner_img = drupal_get_path('module', 'itg_event_backend').'/event_home_banner.jpeg';
 ?>
+<div style="margin-bottom: 20px;"><img src="<?php echo $base_url.'/'.$banner_img; ?>" width="100%"/></div>
+<h2 class="block-title">Session wise coverage</h2>
 <div class="program-sub-title">Program Schedule</div>
 <?php
 print '<div class="top-tab"><ul>' . $tabs . '</ul></div>';
