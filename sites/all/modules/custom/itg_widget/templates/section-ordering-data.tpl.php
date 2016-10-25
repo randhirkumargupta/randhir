@@ -724,7 +724,7 @@ else if ($widget_style == 'in-depth') { ?>
                         <?php if ($count == 0) : ?>
                         <div class="magazine-detail">
 
-                            <?php $extra_large_image_url="";if (!empty($extra_large_image_url)) { ?>
+                            <?php if (!empty($extra_large_image_url)) { ?>
                                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
                                     <img  src="<?php print $extra_large_image_url ?>" />
                                 </a>
@@ -775,7 +775,7 @@ else if ($widget_style == 'in-depth') { ?>
                     }
                     ?>
             <?php if ($count == 0) : ?>
-                <?php $extra_large_image_url="";if (!empty($extra_large_image_url)) { ?>
+                <?php if (!empty($extra_large_image_url)) { ?>
                             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
                                 <img  src="<?php print $extra_large_image_url ?>" />
                             </a>
