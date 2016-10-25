@@ -7,7 +7,7 @@
 <div class="order-confirmation">
     <div class="thankyou-block">
         <h2>Thank you for your order</h2>
-        <p>Your order has been processed. Once the item is shipped, you will 
+        <p>Your order has been processed and is being processed. Once the item is shipped, you will 
             receive an email with details.
         </p>
     </div>
