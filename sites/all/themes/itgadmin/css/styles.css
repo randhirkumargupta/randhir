@@ -7570,12 +7570,6 @@ div.node #comments h2 {
   cursor: pointer;
   margin: 0;
   position: relative;
-  /*    & + div{
-        overflow: hidden !important;
-      }
-      &.active + div{
-        overflow: visible !important;
-      }*/
 }
 .node-story-form .itg-form-main h2:after,
 .node-videogallery-form .itg-form-main h2:after,
@@ -7591,6 +7585,11 @@ div.node #comments h2 {
 .node-videogallery-form .itg-form-main h2.active:after,
 .node-photogallery-form .itg-form-main h2.active:after {
   content: '\f056';
+}
+.node-story-form .itg-form-main h2.active + div,
+.node-videogallery-form .itg-form-main h2.active + div,
+.node-photogallery-form .itg-form-main h2.active + div {
+  overflow: visible !important;
 }
 .node-story-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story,
 .node-videogallery-form .form-item-field-story-magazine-story-issue-und-magazine-issue-story,
