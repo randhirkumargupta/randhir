@@ -1429,10 +1429,16 @@ img{
     .osscar-video{
         background:transparent;
         ul .dont-miss-listing{
-        padding:0 0px 10px 0;
+            padding:0;
             + .dont-miss-listing {
-                padding:0px;
+                padding-top: 10px;
             }   
+            @include video-left-border-bottom;
+            &:last-child{
+                &:after{
+                    display: inline-block;
+                }
+            }
         }
     }
     .section_wise_order-edu-sample-paper, .section_wise_order-edu-notification, .section_wise_order-edu-featurefilia, .section_wise_order-edu-jobs-and-career{
