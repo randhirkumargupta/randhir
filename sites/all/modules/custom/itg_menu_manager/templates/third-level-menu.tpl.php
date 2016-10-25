@@ -9,10 +9,15 @@ else if (isset($node_load->field_page_section['und'][0]['tid']) && $node_load->f
     $cat_id = variable_get('ipl_for_widget');
     $ipl_link = "<button><i class='fa fa-circle'></i> LIVE TV</button>";
     $cat_flag = TRUE;
-}
+}else if (arg(0)=='photo-list' || arg(0)=='video-list') {
+    $cat_id = variable_get('ipl_for_widget');
+     $ipl_link = "<button><i class='fa fa-circle'></i> LIVE TV</button>";
+    $cat_flag = TRUE;
+  }
 else if ($cat_flag == FALSE) {
   $cat_id = arg(2);
 }
+
 if($cat_id=="")
 {
    $node = itg_videogallery_get_term(arg(1));
