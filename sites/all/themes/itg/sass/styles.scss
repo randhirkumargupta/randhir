@@ -4926,8 +4926,8 @@ footer{
     }
 }
 .event-sidebar{
-    aside.sidebar {
-        border: 1px solid #ddd;
+    section.sidebar {
+        border: none;
     }   
 }
 #block-views-event-associate-video-block{
@@ -5421,7 +5421,7 @@ footer{
 .sport-home-layout-page{  
     .widget-title {
         @include blue-title;
-    }
+    }    
     .siderbar-sport{
         .widget-title, .h2.block-title{
             display: none;
@@ -5453,8 +5453,8 @@ footer{
             }
             .auto-block-2{
                 border: 1px solid #ddd;
-                .special-top-news{
-                    position: relative;
+                position: relative;
+                .special-top-news{                   
                     overflow: hidden;
                     height: 100%;
                     .widget-title{
@@ -5537,7 +5537,15 @@ footer{
     }
     .tech-block_5{
         .data-holder{
-            max-width: inherit;
+            max-width: inherit;                           
+            background: #fff;
+            box-shadow: 0 0 5px #ccc;
+            margin: 3px;
+            height: auto;
+            .view-content{
+                margin: 10px;
+                overflow: hidden;
+            }            
         }
         .widget-title{
          @include pos(relative);
@@ -5905,7 +5913,7 @@ input[type="radio"]:checked + label:after{
                 text-transform: uppercase;
                 font-family: $itg-roboto;
                 font-weight: 500;
-                &:hover, .active{
+                &:hover, &.active{
                     background: #ededed;
                     color:#000;
                 }

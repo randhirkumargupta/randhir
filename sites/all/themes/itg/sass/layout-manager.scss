@@ -1550,6 +1550,10 @@ img{
         display: block;        
         background: #5585f6;
     }
+    .widget-trigger{
+        @include pos(absolute, 0, 0,null,null);
+        background: #5585f6;
+    }
     .droppable {
         overflow: hidden;
     }
@@ -1576,8 +1580,8 @@ img{
             }
             .auto-block-2{
         border: 1px solid #ddd;
-        .special-top-news{
-            position: relative;
+         position: relative;
+        .special-top-news{           
             overflow: hidden;
             .widget-title{
 /*                position: absolute;*/
@@ -1609,35 +1613,35 @@ img{
     }
     .itg-layout-195{
         .droppable {
-            height: 195px; 
+            min-height: 195px; 
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-260{
         .droppable {
-            height: 260px;       
+            min-height: 260px;       
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-375{
         .droppable {
-            height: 375px; 
+            min-height: 375px; 
              border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-315{
         .droppable {
-            height: 315px;      
+            min-height: 315px;      
              border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-340{
         .droppable {
-            height: 340px;   
+            min-height: 340px;   
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
             border-bottom: 1px solid $border-color;
@@ -1659,7 +1663,15 @@ img{
     }
     .tech-block_5{
         .data-holder{
-            max-width: inherit;
+           max-width: inherit;                           
+            background: #fff;
+            box-shadow: 0 0 5px #ccc;
+            margin: 3px;
+            height: auto;
+            .view-content{
+                margin: 10px;
+                overflow: hidden;
+            } 
         }
         .widget-title{
          @include pos(relative);
