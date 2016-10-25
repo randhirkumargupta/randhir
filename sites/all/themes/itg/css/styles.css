@@ -5634,9 +5634,29 @@ footer .footer-copyright {
   color: #fff;
 }
 
+.yearender .pager.pager--infinite-scroll {
+  text-align: center;
+}
+.yearender .pager.pager--infinite-scroll a {
+  background: #f6f6f6;
+  display: inline-block;
+  vertical-align: top;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+}
 .yearender .view-yearender.view-display-id-block_2 .view-content {
   margin-right: -15px;
   margin-left: -15px;
+  zoom: 1;
+}
+.yearender .view-yearender.view-display-id-block_2 .view-content:before, .yearender .view-yearender.view-display-id-block_2 .view-content:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.yearender .view-yearender.view-display-id-block_2 .view-content:after {
+  clear: both;
 }
 .yearender .view-yearender.view-display-id-block_2 .views-row {
   margin-bottom: 40px;
