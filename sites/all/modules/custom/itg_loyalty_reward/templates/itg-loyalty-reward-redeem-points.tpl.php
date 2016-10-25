@@ -52,7 +52,7 @@
                 <div class="btn-redeem-points">
                 <?php
                 // Print points.
-                echo $data['item_after']['points'] . ' POINTS REDEEM';
+                echo $data['item_after']['points'] . ' POINTS REDEEMED';
                 ?>
                 </div>
               </div>
