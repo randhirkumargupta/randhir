@@ -243,4 +243,12 @@ jQuery(document).ready(function() {
     jQuery(".custom-weight-draggable input[type=number]").change(function() {
         jQuery(this).next().children().find('option').remove().end().append('<option value="' + jQuery(this).val() + '">' + jQuery(this).val() + '</option>').val(jQuery(this).val());
     });
+//    jQuery("#edit-actionitg-widget-categories-wise-node-group").click(function(e){
+//        e.preventDefault();
+//        if(confirm("Are you sure want to perform action.")) {
+//            return ture;
+//        } else {
+//            return false;
+//        }
+//    });
 });
