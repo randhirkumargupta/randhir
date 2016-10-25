@@ -632,6 +632,9 @@ function get_third_level_menu() {
   else if (isset($node_data->field_page_section['und'][0]['tid']) && $node_data->field_page_section['und'][0]['tid'] == variable_get('ipl_for_widget')) {
     $section_id = variable_get('ipl_for_widget');
   }
+   else if ($arg[0]=='photo-list' || $arg[0]=='video-list') {
+    $section_id = variable_get('ipl_for_widget');
+  }
   else if ($section_id == "") {
     $node = itg_videogallery_get_term(arg(1));
 
