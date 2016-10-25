@@ -32,6 +32,14 @@ foreach ($data as $key => $value) {
     foreach ($value as $program) {
       $media = $program["daywise"] . '--' . $program["session_title"] . '--' . $program["start_time"] . '--' . $program["end_time"];
       $session_result = itg_event_backend_get_session_photo_video($media);
+      $story_title = itg_event_backend_get_session_story_title($media);
+      $output_story_title = '';
+      foreach ($story_title['story_title'] as $title) {
+        if (!empty($title)) {
+          $output_story_title = '<p style="margin-bottom:10px"><i class="fa fa-story-title"></i>'.$title.'</p>';
+        }
+      }
+      
       $output_photo = '';
       foreach ($session_result['photo'] as $session) {
         if (!empty($session)) {
@@ -52,7 +60,7 @@ foreach ($data as $key => $value) {
       }
       ?>
       <div class="side-right"><div class="title"><?php print $program["session_title"]; ?></div> 
-        <div class="listing-detail"><div class="section-part"><?php print $output_photo . ' ' . $output_video . ' ' . $output_audio; ?></div>
+        <div class="listing-detail"><div class="section-part"><?php print $output_story_title. ' '. $output_photo . ' ' . $output_video . ' ' . $output_audio; ?></div>
           <div class="profile-detail">
             <?php
             foreach ($program['speaker'] as $speaker) {

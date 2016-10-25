@@ -1042,6 +1042,12 @@ allowfullscreen></iframe>';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'php';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['code'] = 'if(isset($_GET[\'category\']) && isset($_GET[\'sid\'])){
 return $_GET[\'category\'];
+}else{
+$node = itg_videogallery_get_term(arg(1));
+   if(in_array(variable_get(\'ipl_for_widget\'), $node))
+   {
+return variable_get(\'ipl_for_widget\');
+}
 }';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['format'] = 'default_summary';
