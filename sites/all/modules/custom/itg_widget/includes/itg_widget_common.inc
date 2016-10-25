@@ -1708,12 +1708,16 @@ function itg_widget_block_view_alter(&$data, $block) {
   }
 
   if ($block->delta == 'programmes-rhs_programmes') {
+      if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+       $data['content'] = array();
+    }else{
     if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
       return TRUE;
     }
     else {
       $data['content'] = array();
     }
+  }
   }
 
   if ($block->delta == 'sport_ipl-top_performers' || $block->delta == 'sport_ipl-points_tally' || $block->delta == 'ipl_tweets' || $block->delta == 'live_score') {

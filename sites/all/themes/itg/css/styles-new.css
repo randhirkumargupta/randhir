@@ -191,7 +191,7 @@
   cursor: pointer;
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider {
-  padding: 0 30px 10px;
+  padding: 0 45px 10px;
 }
 #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li {
   padding: 0 5px;
@@ -2035,6 +2035,12 @@ body.has-cart-popup {
   padding: 0 15px;
 }
 
+.page-cart div.message,
+.page-checkout div.message,
+.page-product div.message,
+.page-redeem-points div.message {
+  margin-top: 20px;
+}
 .page-cart header,
 .page-checkout header,
 .page-product header,
@@ -2857,6 +2863,12 @@ body.has-cart-popup {
   top: -24px;
   right: 0;
   margin: 0 auto;
+}
+.cart-dropdown .cart-dropdown-close {
+  position: absolute;
+  right: 5px;
+  top: 3px;
+  cursor: pointer;
 }
 .cart-dropdown .cart-dropdown-pic {
   float: left;

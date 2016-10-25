@@ -165,7 +165,7 @@
     }
     .slick-thumbs{
         .slick-thumbs-slider{
-            padding: 0 30px 10px;            
+            padding: 0 45px 10px;            
             li{
                 padding: 0 5px;
                 cursor: pointer;
@@ -1955,6 +1955,9 @@ body.has-cart-popup{
 .page-checkout,
 .page-product,
 .page-redeem-points{
+  div.message{
+    margin-top: 20px;
+  }
   header{
     margin-bottom: 0;
   }
@@ -2826,6 +2829,12 @@ body.has-cart-popup{
     top: -24px;
     right: 0;
     margin: 0 auto;
+  }
+  .cart-dropdown-close{
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    cursor: pointer;
   }
   .cart-dropdown-pic {
     float: left;

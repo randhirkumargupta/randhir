@@ -49,6 +49,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <?php endforeach; ?>
             </ul>
         </div>
+        <div class="photo-by-slider">
        <?php foreach ($rows as $index => $row): ?>
         <?php if (!empty($row['field_photo_by'])) { ?>
             <p class="photo-by">photo:<?php print $row['field_photo_by']; ?></p>
@@ -56,13 +57,13 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
             <p class="photo-by">photo<?php print $row['field_photo_by_1']; ?></p>
         <?php } ?>
             <?php endforeach; ?>
+        </div>
     </div>
     <div class="col-md-4">
         <div class="other-details-main">
         <ul class="counterslide">
             <?php foreach ($rows as $index => $row): ?>
                 <li>
-
                     <div class="other-details">
                         <div class="counter">
                             <i class="fa fa-camera" aria-hidden="true"></i>
@@ -107,16 +108,17 @@ jQuery(document).ready(function (e) {
         slidesToScroll: 1,
         arrows: true,
         fade: false,
-        asNavFor: '.slick-thumbs-slider, .counterslide'
+        asNavFor: '.slick-thumbs-slider, .counterslide, .photo-by-slider'
     });
     jQuery('.slick-thumbs-slider').slick({
         slidesToShow: 7,
         slidesToScroll: 1,
-        asNavFor: '.slickslide, .counterslide',
+        asNavFor: '.slickslide, .counterslide, .photo-by-slider',
         dots: false,
         centerMode: false,
         arrows: true,
-        variableWidth: true
+        variableWidth: true,
+        focusOnSelect: true
     });
         
     jQuery('.counterslide').slick({
@@ -124,7 +126,14 @@ jQuery(document).ready(function (e) {
         slidesToScroll: 1,
         arrows: true,
         fade: true,
-        asNavFor: '.slick-thumbs-slider, .slickslide'
+        asNavFor: '.slick-thumbs-slider, .slickslide, .photo-by-slider'
+    });
+    jQuery('.photo-by-slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slick-thumbs-slider, .slickslide, .counterslide'
     });
 });
 

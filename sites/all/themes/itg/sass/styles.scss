@@ -4230,11 +4230,21 @@ footer{
         }        
     }
 }
-.yearender{    
+.yearender{
+    .pager.pager--infinite-scroll{
+        text-align: center;
+        a{
+            background: #f6f6f6;
+            @include display-inline;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+        }
+    }
     .view-yearender.view-display-id-block_2{
         .view-content{
             margin-right: -15px;
-            margin-left: -15px;            
+            margin-left: -15px;  
+            @include clearfix;
         }
         .views-row{
             margin-bottom: 40px;          
@@ -4926,8 +4936,8 @@ footer{
     }
 }
 .event-sidebar{
-    aside.sidebar {
-        border: 1px solid #ddd;
+    section.sidebar {
+        border: none;
     }   
 }
 #block-views-event-associate-video-block{
@@ -5109,6 +5119,9 @@ footer{
 .education-layout-page{    
     .droppable{
         overflow: hidden;
+    }
+    .defalt-placeholder-magazin{
+        height: 140px;
     }
     .itg-layout-672{
         .droppable{
@@ -5295,10 +5308,16 @@ footer{
     .osscar-video{
         background:transparent;
         ul .dont-miss-listing{
-        padding:0 0px 10px 0;
+            padding:0;
             + .dont-miss-listing {
-                padding:0px;
+                padding-top: 10px;
             }   
+            @include video-left-border-bottom;
+            &:last-child{
+                &:after{
+                    display: inline-block;
+                }
+            }
         }
     }
     .section_wise_order-edu-sample-paper, .section_wise_order-edu-notification, .section_wise_order-edu-featurefilia, .section_wise_order-edu-jobs-and-career{
@@ -5421,7 +5440,7 @@ footer{
 .sport-home-layout-page{  
     .widget-title {
         @include blue-title;
-    }
+    }    
     .siderbar-sport{
         .widget-title, .h2.block-title{
             display: none;
@@ -5453,8 +5472,8 @@ footer{
             }
             .auto-block-2{
                 border: 1px solid #ddd;
-                .special-top-news{
-                    position: relative;
+                position: relative;
+                .special-top-news{                   
                     overflow: hidden;
                     height: 100%;
                     .widget-title{
@@ -5537,7 +5556,15 @@ footer{
     }
     .tech-block_5{
         .data-holder{
-            max-width: inherit;
+            max-width: inherit;                           
+            background: #fff;
+            box-shadow: 0 0 5px #ccc;
+            margin: 3px;
+            height: auto;
+            .view-content{
+                margin: 10px;
+                overflow: hidden;
+            }            
         }
         .widget-title{
          @include pos(relative);
@@ -5905,7 +5932,7 @@ input[type="radio"]:checked + label:after{
                 text-transform: uppercase;
                 font-family: $itg-roboto;
                 font-weight: 500;
-                &:hover, .active{
+                &:hover, &.active{
                     background: #ededed;
                     color:#000;
                 }
@@ -6121,5 +6148,9 @@ input[type="radio"]:checked + label:after{
 .mCSB_scrollTools.mCSB_scrollTools_horizontal{
     margin-bottom: 10px;
 }
-
 /*css end mscroll bar changes*/
+/*css start defalt image */
+.defalt-placeholder-img{
+    height: none;
+}
+/*css end defalt image */
