@@ -6573,6 +6573,9 @@ footer .footer-copyright {
 .education-layout-page .droppable {
   overflow: hidden;
 }
+.education-layout-page .defalt-placeholder-magazin {
+  height: 140px;
+}
 .education-layout-page .itg-layout-672 .droppable {
   height: 672px;
 }
@@ -6724,11 +6727,11 @@ footer .footer-copyright {
   background: transparent;
 }
 .education-layout-page .osscar-video ul .dont-miss-listing {
-  padding: 0 0px 10px 0;
+  padding: 0;
   position: relative;
 }
 .education-layout-page .osscar-video ul .dont-miss-listing + .dont-miss-listing {
-  padding: 0px;
+  padding-top: 10px;
 }
 .education-layout-page .osscar-video ul .dont-miss-listing:after {
   position: absolute;
@@ -6742,6 +6745,9 @@ footer .footer-copyright {
 }
 .education-layout-page .osscar-video ul .dont-miss-listing:last-child:after {
   display: none;
+}
+.education-layout-page .osscar-video ul .dont-miss-listing:last-child:after {
+  display: inline-block;
 }
 .education-layout-page .section_wise_order-edu-sample-paper .section-ordering p:first-child, .education-layout-page .section_wise_order-edu-notification .section-ordering p:first-child, .education-layout-page .section_wise_order-edu-featurefilia .section-ordering p:first-child, .education-layout-page .section_wise_order-edu-jobs-and-career .section-ordering p:first-child {
   border: none;
@@ -7559,3 +7565,9 @@ footer .footer-copyright {
 }
 
 /*css end mscroll bar changes*/
+/*css start defalt image */
+.defalt-placeholder-img {
+  height: none;
+}
+
+/*css end defalt image */
