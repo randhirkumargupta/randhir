@@ -25,7 +25,7 @@
           ?> 
           <?php if ($data['item_after'] != 0): ?>
           <div class="cart-dropdown">
-            
+            <span class="cart-dropdown-close"><i class="fa fa-times" aria-hidden="true"></i></span>
               <?php 
                 $product_pic = theme(
                   'image_style', array(

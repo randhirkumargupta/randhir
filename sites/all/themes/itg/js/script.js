@@ -128,6 +128,11 @@ Drupal.behaviors.my_custom_behavior = {
     $('#change-address-popup').on('click', '.close-popup', function(){
       $(this).closest('#change-address-popup').hide();
     });
+    
+    // jQuery code to close cart dropdown popup
+    $('body').on('click', '.cart-dropdown-close', function(){
+      $(this).parent().hide();
+    });
   }
 };
 
