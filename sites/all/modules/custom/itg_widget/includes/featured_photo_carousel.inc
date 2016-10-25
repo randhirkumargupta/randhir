@@ -40,7 +40,7 @@ function itg_widget_featured_photo_carousel_data_fetch($result, $slider_type) {
   global $base_url;
   $style = '';
   if ($slider_type == 'flexslider') {
-    $style = 'photo_carousel_flexslider';
+    $style = 'image_750x363';
   }
   if ($slider_type == 'rolling') {
     $style = 'photo_carousel_rollingslider';
