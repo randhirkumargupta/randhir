@@ -6447,6 +6447,40 @@ div.node{
         top: 0;
         white-space: nowrap;
         width: 100%;
+        &:before{
+          border-radius: 50%;
+          bottom: 0;
+          background-color: #fff;
+          border: 1px solid #1fb5ad;
+          color: #1fb5ad;
+          content: "\f00c";
+          font-family: "FontAwesome";
+          font-size: 28px;
+          height: 50px;
+          left: 0;
+          line-height: 50px;
+          margin: auto;
+          overflow: hidden;
+          position: absolute;
+          right: 0;
+          text-align: center;
+          top: 150px;
+          width: 50px;
+          z-index: 9;
+          opacity: 0;
+          transition: all .3s;
+        }
+        &:after{
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,.5);
+          opacity: 0;
+          transition: all .3s;
+        }
       }
       .form-radio{
         float: left;
@@ -6456,6 +6490,10 @@ div.node{
         position: absolute;
         width: 100%;
         z-index: 999;
+        &:checked + label:before, &:checked + label:after{
+          top: 0;
+          opacity: 1;
+        }
       }
       .file_size{
         color: #ababab;
@@ -8382,6 +8420,22 @@ div.node{
               width: 100%;
               height: 92px;
             }
+            .image-fullname{
+              color: #ababab;
+              font-size: 12px;
+              margin: 0;
+              overflow: hidden;
+              padding-bottom: 5px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              pointer-events: none;
+              width: 100%;
+              a {
+                color: #2f2f2f;
+                display: block;
+                text-decoration: none;
+              }
+            }
           }
           > .image-widget-data{
             height: 100px;
@@ -8397,26 +8451,7 @@ div.node{
                 display: none;
               }
             }
-            span.file{
-              display: block;
-              font-size: 12px;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              .file-icon{
-                display: none;
-              }
-              a{
-                pointer-events: none;
-                cursor: default;
-                color: #2f2f2f;
-              }
-            }
-            span.file-size{
-              display: block;
-              font-size: 10px;
-              padding-bottom: 5px;
-            }
+            
             .form-type-textfield{
               padding: 0;
               .form-text{
@@ -8463,5 +8498,16 @@ div.node{
 [id="edit-field-story-reporter"]{
   table tbody{
     overflow: visible !important;
+  }
+}
+[id*="views-exposed-form-section-wise-content-ordering-list-page"]{
+  .views-submit-button{
+    a.button{
+      @extend .add-more-wbg;
+      height: 36px;
+      margin-left: 10px;
+      padding: 10px 12px 6px;
+      font-weight: 400;
+    }
   }
 }
