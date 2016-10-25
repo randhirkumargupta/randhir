@@ -7,7 +7,7 @@
  * Contains functionality for Live TV.
  *
  */
-
+module_load_include('inc', 'itg_live_tv', 'includes/itg_live_tv_front');
 /**
  * Implements hook_menu().
  * @return array
