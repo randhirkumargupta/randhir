@@ -490,6 +490,7 @@ else if ($widget_style == 'in-depth') { ?>
                     }
 
                     $desc = $entity->title;
+                    
                     ?>
                 <li class="dont-miss-listing">
                     <?php
@@ -500,7 +501,7 @@ else if ($widget_style == 'in-depth') { ?>
 
         <?php if (!empty($extra_large_image_url)) { ?>
 
-                        <span class="dm-pic"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a> <span><i class="fa fa-play-circle"></i> </span></span>
+                        <span class="dm-pic"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a> <span><i class="fa fa-play-circle"></i> <?php echo $entity->field_video_duration['und'][0]['value'];?></span></span>
 
         <?php }
         ?>
