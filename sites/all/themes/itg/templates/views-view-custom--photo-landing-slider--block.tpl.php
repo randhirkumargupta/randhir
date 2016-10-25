@@ -62,7 +62,6 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         <ul class="counterslide">
             <?php foreach ($rows as $index => $row): ?>
                 <li>
-
                     <div class="other-details">
                         <div class="counter">
                             <i class="fa fa-camera" aria-hidden="true"></i>

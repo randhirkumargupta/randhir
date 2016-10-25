@@ -6372,8 +6372,8 @@ footer .footer-copyright {
   margin-bottom: 15px;
 }
 
-.event-sidebar aside.sidebar {
-  border: 1px solid #ddd;
+.event-sidebar section.sidebar {
+  border: none;
 }
 
 #block-views-event-associate-video-block img {
@@ -6927,9 +6927,9 @@ footer .footer-copyright {
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-2 {
   border: 1px solid #ddd;
+  position: relative;
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-2 .special-top-news {
-  position: relative;
   overflow: hidden;
   height: 100%;
 }
@@ -7001,6 +7001,14 @@ footer .footer-copyright {
 }
 .sport-home-layout-page .tech-block_5 .data-holder {
   max-width: inherit;
+  background: #fff;
+  box-shadow: 0 0 5px #ccc;
+  margin: 3px;
+  height: auto;
+}
+.sport-home-layout-page .tech-block_5 .data-holder .view-content {
+  margin: 10px;
+  overflow: hidden;
 }
 .sport-home-layout-page .tech-block_5 .widget-title {
   position: relative;
@@ -7350,7 +7358,7 @@ footer .footer-copyright {
   font-family: "Roboto", sans-serif;
   font-weight: 500;
 }
-#block-itg-menu-manager-third-level-menu ul li a:hover, #block-itg-menu-manager-third-level-menu ul li a .active {
+#block-itg-menu-manager-third-level-menu ul li a:hover, #block-itg-menu-manager-third-level-menu ul li a.active {
   background: #ededed;
   color: #000;
 }

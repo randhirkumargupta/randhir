@@ -9009,6 +9009,22 @@ div.node #comments h2 {
   width: 100%;
   height: 92px;
 }
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname {
+  color: #ababab;
+  font-size: 12px;
+  margin: 0;
+  overflow: hidden;
+  padding-bottom: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+  width: 100%;
+}
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname a, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file .image-preview .image-fullname a {
+  color: #2f2f2f;
+  display: block;
+  text-decoration: none;
+}
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data {
   height: 100px;
   float: none  !important;
@@ -9023,26 +9039,6 @@ div.node #comments h2 {
 }
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse:after, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data a.filefield-sources-imce-browse:after {
   display: none;
-}
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data span.file, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data span.file {
-  display: block;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data span.file .file-icon, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data span.file .file-icon {
-  display: none;
-}
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data span.file a, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data span.file a {
-  pointer-events: none;
-  cursor: default;
-  color: #2f2f2f;
-}
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data span.file-size, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data span.file-size {
-  display: block;
-  font-size: 10px;
-  padding-bottom: 5px;
 }
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file > .image-widget-data .form-type-textfield {
   padding: 0;
