@@ -108,7 +108,9 @@
                                 $('input[name = ' + block_name + ']').val(category_name_tab);
                                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
                                 $('.tab-buttons span[data-class="' + block_name + '"]').html(category_name_tab);
-                                //$('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
+                                if(wid_name=='sport_poll_widget_block'){
+                                $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
+                            }
                         
                                 //$('#block_name').html(category_name_tab);
                                 if (display_area) {
