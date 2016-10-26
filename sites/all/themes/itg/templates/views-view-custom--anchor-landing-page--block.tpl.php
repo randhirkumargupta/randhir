@@ -26,6 +26,12 @@ global $base_url
             <a href="#" class="anchor-action read-less"> Less[-]</a>
         <?php } ?>
       </div>  
+        <div class="social-icon">
+            <ul>                
+                <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
+                <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+            </ul>
+        </div>
     </div>
   </div>
 </div>

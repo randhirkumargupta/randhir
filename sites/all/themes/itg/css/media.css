@@ -549,6 +549,11 @@
 
   /*CSS end video landing page*/
 }
+@media only screen and (max-width: 640px) {
+  #block-views-anchor-landing-page-block .anchor-left {
+    width: 50%;
+  }
+}
 @media only screen and (max-width: 560px) {
   /*CSS Starts Photo landing page*/
   .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li {
@@ -562,6 +567,14 @@
   }
 
   /*CSS End Photo landing page*/
+}
+@media only screen and (max-width: 480px) {
+  #block-views-anchor-landing-page-block .anchor-left {
+    width: 100%;
+  }
+  #block-views-anchor-landing-page-block .anchor-right {
+    padding-top: 15px;
+  }
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {
@@ -986,17 +999,6 @@
   }
 
   /*End start program RHS*/
-  /*CSS Start Anchor listing detail page*/
-  #block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
-    float: left;
-    width: 50%;
-  }
-  #block-views-anchor-landing-page-block .anchor-right {
-    padding-left: 15px;
-    padding-top: 0px;
-  }
-
-  /*CSS End Anchor listing detail page*/
   /*CSS Start Photo landing page*/
   .region-top {
     padding: 20px 0;
@@ -1094,6 +1096,13 @@
     font-size: 26px;
   }
 
+  #block-itg-widget-so-sorry-front-politoons .col-md-4:nth-child(3n+1) {
+    clear: left;
+  }
+  #block-itg-widget-so-sorry-front-politoons .col-md-4:nth-child(2n+1) {
+    clear: none;
+  }
+
   /*CSS End So sorry page*/
   /*CSS Start RHS add block*/
   #block-itg-ads-ad-right-sidebar-1 {
@@ -1166,8 +1175,14 @@
   .auto-layout-page .itg-top-section .top-colum-3 .droppable {
     height: 247px;
   }
+  .auto-layout-page .itg-h450-section .col-md-4 .droppable {
+    padding: 10px;
+    background: #f3f3f3;
+  }
   .auto-layout-page .itg-h450-section .col-md-4 .droppable .widget-wrapper {
     overflow: auto;
+    height: auto;
+    max-height: 100%;
   }
 
   /*css end for special auto page*/
@@ -1212,17 +1227,4 @@
   #block-views-video-landing-header-block .social-likes ul li {
     float: left;
   }
-}
-@media only screen and (min-width: 640px) {
-  /*CSS Start Anchor listing detail page*/
-  #block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
-    float: left;
-    width: 50%;
-  }
-  #block-views-anchor-landing-page-block .anchor-right {
-    padding-left: 15px;
-    padding-top: 0px;
-  }
-
-  /*CSS End Anchor listing detail page*/
 }

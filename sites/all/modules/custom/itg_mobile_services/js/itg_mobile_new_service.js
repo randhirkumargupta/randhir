@@ -23,7 +23,10 @@
                     lineNumbers: true
                 });
             };
-
+            
+             // hide vertical-tabs
+            jQuery('.vertical-tabs').hide();
+            
             // default hide FTP label
             jQuery('#itg-group-service-ftp').hide();
             $('.form-item-field-service-fetch-link-und-0-value').hide();
