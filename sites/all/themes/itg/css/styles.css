@@ -472,7 +472,7 @@ header {
   font-size: 0.875rem;
   line-height: 37px;
 }
-#block-itg-layout-manager-header-block .navigation .menu li a:hover {
+#block-itg-layout-manager-header-block .navigation .menu li a.active, #block-itg-layout-manager-header-block .navigation .menu li a:hover {
   color: #ffc106;
 }
 #block-itg-layout-manager-header-block .navigation ul li.sponser-link a {
