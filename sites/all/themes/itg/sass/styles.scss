@@ -350,7 +350,7 @@ header{
                         height: 37px;
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
-                        &:hover{
+                        &.active, &:hover{
                                 color: #ffc106;
                         }
                     }
