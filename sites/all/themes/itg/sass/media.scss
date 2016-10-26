@@ -570,7 +570,13 @@
     }
     /*CSS end video landing page*/
 }
-
+@media only screen and (max-width:640px){
+    #block-views-anchor-landing-page-block{
+        .anchor-left{
+            @include calculate-width(2);
+        }   
+    }
+}
 
 @media only screen and (max-width:560px){ 
     /*CSS Starts Photo landing page*/
@@ -590,6 +596,17 @@
         }
     }
     /*CSS End Photo landing page*/
+}
+
+@media only screen and (max-width:480px){
+    #block-views-anchor-landing-page-block{
+        .anchor-left{
+            @include calculate-width(1);
+        }
+        .anchor-right{
+            padding-top: 15px;
+        }
+    }
 }
 
 /*Start header CSS Desktop version*/
@@ -958,19 +975,6 @@
     }
     /*End start program RHS*/
 
-    /*CSS Start Anchor listing detail page*/
-    #block-views-anchor-landing-page-block{
-        .anchor-left, .anchor-right{
-            @include float(left);
-            @include calculate-width(2);
-        }
-        .anchor-right{
-            padding-left:15px;
-            padding-top:0px;
-        }        
-    }
-    /*CSS End Anchor listing detail page*/
-
     /*CSS Start Photo landing page*/
     .region-top{
         padding: 20px 0 ;    
@@ -1076,6 +1080,16 @@
             font-size: 26px;                        
         }
     }
+    #block-itg-widget-so-sorry-front-politoons{
+        .col-md-4{
+            &:nth-child(3n+1){
+                clear: left;
+            }   
+            &:nth-child(2n+1){
+                clear: none;
+            }
+        }
+    }
     /*CSS End So sorry page*/
     /*CSS Start RHS add block*/
     #block-itg-ads-ad-right-sidebar-1{    
@@ -1175,9 +1189,13 @@
         }
         .itg-h450-section{        
             .col-md-4{
-                .droppable{                
+                .droppable{  
+                    padding: 10px;
+                    background: #f3f3f3;                   
                     .widget-wrapper{
                         overflow: auto;
+                        height: auto;
+                        max-height: 100%;
                     }
                 }
             }        
@@ -1239,19 +1257,4 @@
         }
     }
 
-}
-
-@media only screen and (min-width:640px){
-    /*CSS Start Anchor listing detail page*/
-    #block-views-anchor-landing-page-block{
-        .anchor-left, .anchor-right{
-            @include float(left);
-            @include calculate-width(2);
-        }
-        .anchor-right{
-            padding-left:15px;
-            padding-top:0px;
-        }        
-    }
-    /*CSS End Anchor listing detail page*/
 }
