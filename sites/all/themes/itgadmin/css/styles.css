@@ -6992,14 +6992,12 @@ div.node #comments h2 {
 
 /* CSS For Survey */
 .survey-form-main-container h1 {
-  font-size: 24px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 30px;
+  font: 500 34px/34px Roboto;
 }
 
 .survey-form-main-container .survey-description {
-  color: #bebebe;
+  color: #929292;
+  font: 400 14px/20px Roboto;
   margin-top: 10px;
 }
 
@@ -7074,7 +7072,6 @@ div.node #comments h2 {
 .survey-form-main-container .byline .profile-detail ul li span.share-count {
   display: block;
   font-size: 44px;
-  font-size: 2.75rem;
   font-weight: 500;
   line-height: 44px;
   color: #bebebe;
@@ -7086,23 +7083,20 @@ div.node #comments h2 {
 
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
+  font: 400 12px/18px Roboto;
   margin-top: 0px;
-  line-height: 18px;
   padding-left: 0;
 }
 
 .survey-form-main-container .byline .profile-detail ul li.twitter:before {
   content: '|';
   margin: 0 5px 0 0;
-  color: #999;
+  color: #6b6b6b;
 }
 
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
-  font-size: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 20px;
+  font: 700 12px/20px Roboto;
 }
 
 .survey-form-main-container .byline .profile-detail ul li.mailto {
