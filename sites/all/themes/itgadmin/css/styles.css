@@ -8862,7 +8862,7 @@ div.node #comments h2 {
 }
 
 [id*="views-exposed-form-Event-backend-page"] .views-submit-button .form-submit {
-  margin-top: 26px;
+  margin-top: 26px !important;
 }
 [id*="views-exposed-form-Event-backend-page"] .views-submit-button #custom-event-type {
   float: left;
@@ -9103,8 +9103,21 @@ div.node #comments h2 {
   width: auto;
 }
 
-.node-videogallery-form .itg-sidebar-form #Configuration .form-type-checkboxes > label {
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-video-configurations .form-type-checkboxes > label {
   display: none;
+}
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-expires .form-type-checkboxes {
+  vertical-align: top;
+  width: 100%;
+  display: inline-block;
+}
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-expires .form-type-checkboxes > label, .node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-expires .form-type-checkboxes > label + div {
+  float: left;
+  width: auto;
+  padding: 0;
+}
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-expires .form-type-checkboxes .form-checkbox {
+  margin: 3px 5px;
 }
 
 [id="edit-field-story-reporter"] table tbody {
