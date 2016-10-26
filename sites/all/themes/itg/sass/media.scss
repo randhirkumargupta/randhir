@@ -1081,12 +1081,14 @@
         }
     }
     #block-itg-widget-so-sorry-front-politoons{
-        .col-md-4{
-            &:nth-child(3n+1){
-                clear: left;
-            }   
-            &:nth-child(2n+1){
-                clear: none;
+        .politoons-sosorry {
+            .col-md-4{
+                &:nth-child(3n+1){
+                    clear: left;
+                }   
+                &:nth-child(2n+1){
+                    clear: none;
+                }
             }
         }
     }

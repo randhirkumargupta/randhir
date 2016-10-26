@@ -1096,10 +1096,10 @@
     font-size: 26px;
   }
 
-  #block-itg-widget-so-sorry-front-politoons .col-md-4:nth-child(3n+1) {
+  #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(3n+1) {
     clear: left;
   }
-  #block-itg-widget-so-sorry-front-politoons .col-md-4:nth-child(2n+1) {
+  #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(2n+1) {
     clear: none;
   }
 
