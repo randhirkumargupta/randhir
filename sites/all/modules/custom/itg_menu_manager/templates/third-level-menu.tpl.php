@@ -1,5 +1,6 @@
 <?php
 $ipl_link = "";
+
 $cat_flag = FALSE;
 if (isset($_GET['section']) && !empty($_GET['section'])) {
   $cat_id = $_GET['section'];
@@ -79,8 +80,13 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
             if (trim($db_target) == 'new_window') {
               $target = "_blank";
             }
+            $active='';
+            if(end(explode('/',$link_url)) ==  arg(0)){
+                $active='active';
+            }
+            
             ?>
-            <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key")))); ?></li>
+            <li class="<?php echo $active;?>"><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key")))); ?></li>
           <?php endforeach; ?>
         </ul>
       </div>
