@@ -4,7 +4,7 @@
             <?php
             foreach ($rows as $index => $row) {
                 
-                    $video_class = "";
+                    $video_class = "pic-no-icon";
                     if (strtolower($row['type']) == 'videogallery') {
                         $video_class = 'video-icon';
                     }
@@ -23,7 +23,11 @@
         <ul>
             <?php
             foreach ($rows as $index => $row) {
-                $desc = $row['title'];                                
+                $desc = $row['title'];   
+                 $video_class = "pic-no-icon";
+                    if (strtolower($row['type']) == 'videogallery') {
+                        $video_class = 'video-icon';
+                    }
                 ?>
             
                 <li data-tag="image-tab-<?php echo $index; ?>" class="<?php echo $video_class;?>">
