@@ -1,5 +1,6 @@
 <?php
 $ipl_link = "";
+
 $cat_flag = FALSE;
 if (isset($_GET['section']) && !empty($_GET['section'])) {
   $cat_id = $_GET['section'];
@@ -7,11 +8,18 @@ if (isset($_GET['section']) && !empty($_GET['section'])) {
 }
 else if (isset($node_load->field_page_section['und'][0]['tid']) && $node_load->field_page_section['und'][0]['tid'] == variable_get('ipl_for_widget')) {
     $cat_id = variable_get('ipl_for_widget');
-    $ipl_link = "<button><i class='fa fa-circle'></i> LIVE TV</button>";
+     drupal_add_js('jQuery(document).ready(function() {                  
+                           jQuery(".live-tv").click(function(){
+
+                   window.location.href=jQuery("#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3)").find("a").attr("href");
+                      });
+          });', array('type' => 'inline', 'scope' => 'footer'));
+    
+    $ipl_link = "<button class='live-tv'><i class='fa fa-circle'></i> LIVE TV</button>";
     $cat_flag = TRUE;
 }else if (arg(0)=='photo-list' || arg(0)=='video-list') {
     $cat_id = variable_get('ipl_for_widget');
-     $ipl_link = "<button><i class='fa fa-circle'></i> LIVE TV</button>";
+     $ipl_link = "<button class='live-tv'><i class='fa fa-circle'></i> LIVE TV</button>";
     $cat_flag = TRUE;
   }
 else if ($cat_flag == FALSE) {
@@ -22,6 +30,7 @@ if($cat_id==variable_get('ipl_for_widget'))
     drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
           });', array('type' => 'inline', 'scope' => 'footer'));
+    
 }
 
 if($cat_id=="")
@@ -79,8 +88,13 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
             if (trim($db_target) == 'new_window') {
               $target = "_blank";
             }
+            $active='';
+            if(end(explode('/',$link_url)) ==  arg(0)){
+                $active='active';
+            }
+            
             ?>
-            <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key")))); ?></li>
+            <li class="<?php echo $active;?>"><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key")))); ?></li>
           <?php endforeach; ?>
         </ul>
       </div>

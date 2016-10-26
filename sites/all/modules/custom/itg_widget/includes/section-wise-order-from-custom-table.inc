@@ -151,7 +151,7 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
             ->condition('iwo.widget', $widget_name)
              ->condition('n.type', $content)
             ->condition('n.status', '1')
-            ->orderBy('iwo.weight')
+             ->orderBy('iwo.weight','DESC')
             ->groupBy('iwo.nid')
             ->range(0, $range);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

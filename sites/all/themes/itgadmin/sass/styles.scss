@@ -8199,7 +8199,7 @@ div.node{
 [id*="views-exposed-form-Event-backend-page"]{
   .views-submit-button{
     .form-submit{
-      margin-top: 26px;
+      margin-top: 26px !important;
     }
     #custom-event-type{
       float: left;
@@ -8486,8 +8486,17 @@ div.node{
 .node-videogallery-form{
   .itg-sidebar-form{
     #Configuration{
-      .form-type-checkboxes{
+      .form-field-name-field-video-configurations .form-type-checkboxes{
         > label{display: none;}
+      }
+      .form-field-name-field-story-expires{
+        .form-type-checkboxes{
+          vertical-align: top;
+          width: 100%;
+          display: inline-block;
+          > label, > label + div{float: left; width: auto; padding: 0;}
+          .form-checkbox{margin: 3px 5px;}
+        }
       }
     }
   }

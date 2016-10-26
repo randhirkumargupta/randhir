@@ -535,7 +535,7 @@ else if ($widget_style == 'in-depth') { ?>
 
         <?php if (!empty($extra_large_image_url)) { ?>
 
-                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> <span><i class="fa fa-play-circle"></i> <?php echo $entity->field_video_duration;?></span></a>
+                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /></a>
 
         <?php }
         ?>
