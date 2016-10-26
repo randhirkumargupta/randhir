@@ -522,6 +522,43 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         unset($form['category_tid']['#options']);
         $form['category_tid']['#options'] = $op;
     }
+    if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display =='most_read_widget_list')) {
+        
+     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        
+        foreach ($tax as $key => $term) {
+
+            if (!itg_category_manager_term_state($term->tid)) {
+                unset($tax[$key]);
+            }
+        }
+
+        $op = array("All" => " - None -");
+        foreach ($tax as $key => $val) {
+            $op[$val->tid] = $val->name;
+        }
+        unset($form['category_tid']['#options']);
+        $form['category_tid']['#options'] = $op;
+    }
+    if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display =='special_how_made_widget_list')) {
+        
+     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+        
+        foreach ($tax as $key => $term) {
+
+            if (!itg_category_manager_term_state($term->tid)) {
+                unset($tax[$key]);
+            }
+        }
+
+        $op = array("All" => " - None -");
+        foreach ($tax as $key => $val) {
+            $op[$val->tid] = $val->name;
+        }
+        unset($form['category_tid']['#options']);
+        $form['category_tid']['#options'] = $op;
+    }
+
 
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
