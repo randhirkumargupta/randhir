@@ -1573,6 +1573,7 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, 
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
         ->condition('n.status', 1)
+        ->condition('iwo.cat_id', $category)
         ->orderBy('n.nid', 'DESC')
         ->range($range_min, $range_max)
         ->fields('iwo', array('nid', 'extra', 'weight'));
