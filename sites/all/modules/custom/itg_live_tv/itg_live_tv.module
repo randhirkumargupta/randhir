@@ -8,6 +8,7 @@
  *
  */
 module_load_include('inc', 'itg_live_tv', 'includes/itg_live_tv_front');
+
 /**
  * Implements hook_menu().
  * @return array
@@ -67,6 +68,15 @@ function itg_live_tv_theme($existing, $type, $theme, $path) {
       'template' => 'live-tv-integration-node-form',
       'path' => drupal_get_path('module', 'itg_live_tv') . '/templates',
       'render element' => 'form',
+    ),
+    'image_style_outside_files' => array(
+      'variables' => array(
+        'style_name' => NULL,
+        'path' => NULL,
+        'alt' => '',
+        'title' => NULL,
+        'attributes' => array(),
+      ),
     ),
   );
 
@@ -132,7 +142,7 @@ function itg_live_tv_after_build($form, &$form_state) {
   drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-live-tv-device").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  
+
   // alter label name
   if (isset($form['#node']->nid)) {
     $form['title']['#title'] = t('Company');
@@ -200,7 +210,7 @@ function itg_live_tv_node_validate($node, $form, &$form_state) {
  */
 function itg_live_tv_views_pre_render(&$view) {
   global $user, $base_url;
-  
+
   // condition for view name
   if ($view->name == "live_tv_integration") {
     $settings = array();
@@ -260,7 +270,7 @@ function itg_live_tv_details() {
   }
 }
 
-  /**
+/**
  * Implements itg_live_tv_company
  * @param string $device
  * @return array

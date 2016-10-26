@@ -16,3 +16,22 @@ function itg_live_tv_views_query_alter(&$view, &$query) {
     }
   }
 }
+
+
+/**
+ * This theme function is designed to deal with the limitation that
+ * theme_image_style does not work with images outside the files directory.
+ * 
+ * Usage is the same as theme_image_style.
+ * 
+ * @param $variables
+ */
+function theme_image_style_outside_files($variables) {
+  $styled_path = image_style_path($variables['style_name'], $variables['path']);
+  if (!file_exists($styled_path)) {
+    $style = image_style_load($variables['style_name']);
+    image_style_create_derivative($style, $variables['path'], $styled_path);
+  }
+  $variables['path'] = $styled_path;
+  return theme('image', $variables);
+}
