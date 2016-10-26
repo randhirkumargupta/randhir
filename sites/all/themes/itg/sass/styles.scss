@@ -4230,11 +4230,21 @@ footer{
         }        
     }
 }
-.yearender{    
+.yearender{
+    .pager.pager--infinite-scroll{
+        text-align: center;
+        a{
+            background: #f6f6f6;
+            @include display-inline;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+        }
+    }
     .view-yearender.view-display-id-block_2{
         .view-content{
             margin-right: -15px;
-            margin-left: -15px;            
+            margin-left: -15px;  
+            @include clearfix;
         }
         .views-row{
             margin-bottom: 40px;          
@@ -5110,6 +5120,9 @@ footer{
     .droppable{
         overflow: hidden;
     }
+    .defalt-placeholder-magazin{
+        height: 140px;
+    }
     .itg-layout-672{
         .droppable{
             height: 672px;            
@@ -5295,10 +5308,16 @@ footer{
     .osscar-video{
         background:transparent;
         ul .dont-miss-listing{
-        padding:0 0px 10px 0;
+            padding:0;
             + .dont-miss-listing {
-                padding:0px;
+                padding-top: 10px;
             }   
+            @include video-left-border-bottom;
+            &:last-child{
+                &:after{
+                    display: inline-block;
+                }
+            }
         }
     }
     .section_wise_order-edu-sample-paper, .section_wise_order-edu-notification, .section_wise_order-edu-featurefilia, .section_wise_order-edu-jobs-and-career{
@@ -6129,5 +6148,9 @@ input[type="radio"]:checked + label:after{
 .mCSB_scrollTools.mCSB_scrollTools_horizontal{
     margin-bottom: 10px;
 }
-
 /*css end mscroll bar changes*/
+/*css start defalt image */
+.defalt-placeholder-img{
+    height: none;
+}
+/*css end defalt image */
