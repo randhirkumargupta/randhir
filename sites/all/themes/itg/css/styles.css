@@ -76,7 +76,7 @@ h4.heading a {
   color: #09619f;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul {
   list-style-type: none;
 }
 
@@ -472,7 +472,7 @@ header {
   font-size: 0.875rem;
   line-height: 37px;
 }
-#block-itg-layout-manager-header-block .navigation .menu li a:hover {
+#block-itg-layout-manager-header-block .navigation .menu li a.active, #block-itg-layout-manager-header-block .navigation .menu li a:hover {
   color: #ffc106;
 }
 #block-itg-layout-manager-header-block .navigation ul li.sponser-link a {
@@ -3097,6 +3097,7 @@ footer .footer-copyright {
   zoom: 1;
   padding: 10px;
   font-family: "Roboto", sans-serif;
+  overflow: hidden;
 }
 #block-views-anchor-landing-page-block .anchor:before, #block-views-anchor-landing-page-block .anchor:after {
   content: "";
@@ -3107,13 +3108,18 @@ footer .footer-copyright {
 #block-views-anchor-landing-page-block .anchor:after {
   clear: both;
 }
-#block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
-  float: none;
-  width: 100%;
+#block-views-anchor-landing-page-block .anchor-left {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  width: auto;
 }
 #block-views-anchor-landing-page-block .anchor-right {
   padding-left: 0px;
-  padding-top: 15px;
+  padding-top: 0px;
+  font-size: 14px;
+  color: #818181;
+  line-height: 22px;
 }
 #block-views-anchor-landing-page-block .anchor-right a.active {
   font-size: 22px;
@@ -3126,6 +3132,15 @@ footer .footer-copyright {
   color: #a00606;
   font-size: 12px;
   font-size: 0.75rem;
+}
+#block-views-anchor-landing-page-block .anchor-right .social-icon ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 10px 0 0;
+}
+#block-views-anchor-landing-page-block .anchor-right .social-icon ul li i {
+  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 /*CSS End Anchor listing detail page*/
@@ -5423,6 +5438,13 @@ footer .footer-copyright {
   text-transform: uppercase;
   margin-top: 5px;
 }
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(2n+1) {
+  clear: left;
+}
 
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
@@ -6097,12 +6119,26 @@ footer .footer-copyright {
 .oscar-layout-page .oscar-slider .top-slider {
   background: #000;
   padding: 10px 10px 0 10px;
+  position: relative;
 }
 .oscar-layout-page .oscar-slider .top-slider .common-img {
   display: none;
 }
 .oscar-layout-page .oscar-slider .top-slider .first-image {
   display: block;
+}
+.oscar-layout-page .oscar-slider .top-slider span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 40px;
+  margin-left: -35px;
+  margin-top: -30px;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.59);
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 .oscar-layout-page .oscar-slider .bottom-slider {
   background: #171717;
@@ -6538,6 +6574,18 @@ footer .footer-copyright {
 #block-views-program-schedule-block-4 .views-row .views-row:nth-child(4n+1) {
   clear: left;
 }
+#block-views-program-schedule-block-4 .views-row .views-row img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
 
 .sign-and-win-contest, .event-registration-link {
   background: #ef3c24;
@@ -6595,6 +6643,12 @@ footer .footer-copyright {
 }
 .education-layout-page .defalt-placeholder-magazin {
   height: 140px;
+}
+.education-layout-page .custom_html_widget {
+  padding: 10px;
+}
+.education-layout-page .grey-bg {
+  background: #f3f3f3;
 }
 .education-layout-page .itg-layout-672 .droppable {
   height: 672px;
@@ -6686,10 +6740,11 @@ footer .footer-copyright {
 }
 .education-layout-page .auto-block-2 {
   border: 1px solid #ddd;
+  position: relative;
 }
 .education-layout-page .auto-block-2 .special-top-news {
-  position: relative;
   overflow: hidden;
+  height: 100%;
 }
 .education-layout-page .auto-block-2 .special-top-news .widget-title, .education-layout-page .auto-block-2 .special-top-news .widget-settings {
   position: absolute;
@@ -6929,6 +6984,9 @@ footer .footer-copyright {
 
 .section-sport-ipl-bg {
   background: url("../images/sports-bg.png") no-repeat center 135px;
+}
+.section-sport-ipl-bg main.container {
+  background: #fff;
 }
 
 .sport-home-layout-page .widget-title {

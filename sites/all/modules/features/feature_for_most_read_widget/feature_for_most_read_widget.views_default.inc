@@ -419,7 +419,9 @@ function feature_for_most_read_widget_views_default_views() {
     24 => 0,
     25 => 0,
   );
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['type'] = 'select';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['hierarchy'] = 1;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -520,6 +522,12 @@ print \'<a href="move-dont-miss-widget-node/most_read_content/0/0/\'.$row->nid.\
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Draggableviews: Weight */
+  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['sorts']['weight_1']['table'] = 'draggableviews_structure';
+  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight_1']['draggableviews_setting_view'] = 'most_read_widget:most_read_widget_list';
+  $handler->display->display_options['sorts']['weight_1']['draggableviews_setting_new_items_bottom_list'] = 1;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
@@ -548,13 +556,11 @@ print \'<a href="move-dont-miss-widget-node/most_read_content/0/0/\'.$row->nid.\
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['id'] = 'shs_term_node_tid_depth';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['table'] = 'node';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['field'] = 'shs_term_node_tid_depth';
-  $handler->display->display_options['filters']['shs_term_node_tid_depth']['value'] = '';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
-  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Section ';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Section';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
-  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'shs_term_node_tid_depth';
-  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['required'] = TRUE;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'category_tid';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -580,8 +586,11 @@ print \'<a href="move-dont-miss-widget-node/most_read_content/0/0/\'.$row->nid.\
     22 => 0,
     24 => 0,
     25 => 0,
+    26 => 0,
   );
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['type'] = 'select';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['hierarchy'] = 1;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
   $handler->display->display_options['path'] = 'most-read-widget-list';
   $export['most_read_widget'] = $view;
