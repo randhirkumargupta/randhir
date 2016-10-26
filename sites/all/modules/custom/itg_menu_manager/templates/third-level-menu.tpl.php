@@ -10,9 +10,9 @@ else if (isset($node_load->field_page_section['und'][0]['tid']) && $node_load->f
     $cat_id = variable_get('ipl_for_widget');
      drupal_add_js('jQuery(document).ready(function() {                  
                            jQuery(".live-tv").click(function(){
-                      
-                   window.location.href=jQuery("#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3)").attr("href");
-                        });
+
+                   window.location.href=jQuery("#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3)").find("a").attr("href");
+                      });
           });', array('type' => 'inline', 'scope' => 'footer'));
     
     $ipl_link = "<button class='live-tv'><i class='fa fa-circle'></i> LIVE TV</button>";
