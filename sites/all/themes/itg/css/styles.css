@@ -76,7 +76,7 @@ h4.heading a {
   color: #09619f;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul {
   list-style-type: none;
 }
 
@@ -3097,6 +3097,7 @@ footer .footer-copyright {
   zoom: 1;
   padding: 10px;
   font-family: "Roboto", sans-serif;
+  overflow: hidden;
 }
 #block-views-anchor-landing-page-block .anchor:before, #block-views-anchor-landing-page-block .anchor:after {
   content: "";
@@ -3107,13 +3108,18 @@ footer .footer-copyright {
 #block-views-anchor-landing-page-block .anchor:after {
   clear: both;
 }
-#block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
-  float: none;
-  width: 100%;
+#block-views-anchor-landing-page-block .anchor-left {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  width: auto;
 }
 #block-views-anchor-landing-page-block .anchor-right {
   padding-left: 0px;
-  padding-top: 15px;
+  padding-top: 0px;
+  font-size: 14px;
+  color: #818181;
+  line-height: 22px;
 }
 #block-views-anchor-landing-page-block .anchor-right a.active {
   font-size: 22px;
@@ -3126,6 +3132,15 @@ footer .footer-copyright {
   color: #a00606;
   font-size: 12px;
   font-size: 0.75rem;
+}
+#block-views-anchor-landing-page-block .anchor-right .social-icon ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 10px 0 0;
+}
+#block-views-anchor-landing-page-block .anchor-right .social-icon ul li i {
+  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 /*CSS End Anchor listing detail page*/
@@ -5423,6 +5438,12 @@ footer .footer-copyright {
   text-transform: uppercase;
   margin-top: 5px;
 }
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4 {
+  margin-bottom: 20px;
+}
+#block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(2n+1) {
+  clear: left;
+}
 
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
@@ -6109,11 +6130,14 @@ footer .footer-copyright {
   position: absolute;
   top: 50%;
   left: 50%;
-  font-size: 60px;
-  margin-left: -24px;
+  font-size: 40px;
+  margin-left: -35px;
   margin-top: -30px;
   color: #fff;
   cursor: pointer;
+  background: rgba(0, 0, 0, 0.59);
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 .oscar-layout-page .oscar-slider .bottom-slider {
   background: #171717;
@@ -6715,10 +6739,11 @@ footer .footer-copyright {
 }
 .education-layout-page .auto-block-2 {
   border: 1px solid #ddd;
+  position: relative;
 }
 .education-layout-page .auto-block-2 .special-top-news {
-  position: relative;
   overflow: hidden;
+  height: 100%;
 }
 .education-layout-page .auto-block-2 .special-top-news .widget-title, .education-layout-page .auto-block-2 .special-top-news .widget-settings {
   position: absolute;

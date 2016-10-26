@@ -2306,14 +2306,21 @@ footer{
         @include clearfix;
         padding: 10px;
         font-family: $itg-roboto;
+        overflow: hidden;
     }
-    .anchor-left, .anchor-right{
-        @include float(none);
-        @include calculate-width(1);
+    
+    .anchor-left{
+        float: left;
+            margin-right: 15px;
+            margin-bottom: 5px;  
+            width: auto;
     }
     .anchor-right{
         padding-left:0px;
-        padding-top:15px;
+        padding-top:0px;
+        font-size: 14px;
+        color: #818181;
+        line-height: 22px;
         a.active{
             @include font(22px,30px,700);            
             color: #33363b;
@@ -2321,6 +2328,18 @@ footer{
         a{
             color: #a00606;
             @include font(12px);
+        }
+        .social-icon{
+            ul{
+                @extend .list-none;
+                li{
+                    @include display-inline;
+                    padding: 10px 10px 0 0;
+                    i{
+                        @include font(20px);
+                    }
+                }
+            }
         }
     }
 }
@@ -4028,6 +4047,12 @@ footer{
             text-transform: uppercase;
             margin-top: 5px;
         }
+        .col-md-4{
+            margin-bottom:20px;            
+            &:nth-child(2n+1){
+                clear: left;
+            }
+        }
     }
 }
 /*CSS End So sorry page*/
@@ -4673,11 +4698,14 @@ footer{
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                font-size: 60px;    
-                margin-left: -24px;
+                font-size: 40px;
+                margin-left: -35px;
                 margin-top: -30px;
                 color: #fff;
                 cursor: pointer;
+                background: rgba(0, 0, 0, 0.59);    
+                padding: 10px 20px;
+                border-radius: 5px;
             }
         }
         .bottom-slider { 
@@ -5266,9 +5294,10 @@ footer{
 
     .auto-block-2{
         border: 1px solid #ddd;
-        .special-top-news {
-            position: relative;            
+        position: relative;            
+        .special-top-news {                            
             overflow: hidden;
+            height: 100%;
             .widget-title, .widget-settings {
                 position: absolute;
             }
