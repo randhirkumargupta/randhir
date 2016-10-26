@@ -6097,12 +6097,23 @@ footer .footer-copyright {
 .oscar-layout-page .oscar-slider .top-slider {
   background: #000;
   padding: 10px 10px 0 10px;
+  position: relative;
 }
 .oscar-layout-page .oscar-slider .top-slider .common-img {
   display: none;
 }
 .oscar-layout-page .oscar-slider .top-slider .first-image {
   display: block;
+}
+.oscar-layout-page .oscar-slider .top-slider span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 60px;
+  margin-left: -24px;
+  margin-top: -30px;
+  color: #fff;
+  cursor: pointer;
 }
 .oscar-layout-page .oscar-slider .bottom-slider {
   background: #171717;
@@ -6538,6 +6549,18 @@ footer .footer-copyright {
 #block-views-program-schedule-block-4 .views-row .views-row:nth-child(4n+1) {
   clear: left;
 }
+#block-views-program-schedule-block-4 .views-row .views-row img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
 
 .sign-and-win-contest, .event-registration-link {
   background: #ef3c24;
@@ -6595,6 +6618,12 @@ footer .footer-copyright {
 }
 .education-layout-page .defalt-placeholder-magazin {
   height: 140px;
+}
+.education-layout-page .custom_html_widget {
+  padding: 10px;
+}
+.education-layout-page .grey-bg {
+  background: #f3f3f3;
 }
 .education-layout-page .itg-layout-672 .droppable {
   height: 672px;

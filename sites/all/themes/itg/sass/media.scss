@@ -1175,9 +1175,13 @@
         }
         .itg-h450-section{        
             .col-md-4{
-                .droppable{                
+                .droppable{  
+                    padding: 10px;
+                    background: #f3f3f3;                   
                     .widget-wrapper{
                         overflow: auto;
+                        height: auto;
+                        max-height: 100%;
                     }
                 }
             }        
