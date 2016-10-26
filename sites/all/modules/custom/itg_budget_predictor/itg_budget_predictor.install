@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ITG budget predictor.
+ */
+
+/**
+ * Implementation of hook_schema
+ * 
+ * @access public
+ * @return array
+ */
+function itg_budget_predictor_schema() {
+    $schema = array();
+    $schema['itg_budget_predictor'] = array(
+        'description' => 'Table to save custom predictor of budget',
+        'fields' => array(
+          'budget_id' => array(
+            'description' => t('budget id'),
+            'type' => 'serial',
+            'not null' => TRUE,
+          ),
+          'entity_id' => array(
+            'description' => t('entity id'),
+            'type' => 'int',
+            'size' => 'medium',
+            'not null' => TRUE,
+          ),
+          'ranking_value' => array(
+            'description' => t('ranking value'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'ranking_column' => array(
+            'description' => t('ranking column'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'budget_type' => array(
+            'description' => t('budget type'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'user_id' => array(
+            'description' => t('user id'),
+            'type' => 'int',
+            'not null' => TRUE,
+          ),
+          'status' => array(
+            'description' => t('status'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'timestamp' => array(
+            'description' => t('timestamp'),
+            'type' => 'varchar',
+            'length' => '100',
+            'not null' => TRUE,
+          ),
+          'ip_address' => array(
+            'description' => t('ip address'),
+            'type' => 'varchar',
+            'length' => '15',
+            'not null' => TRUE,
+          ),
+        ),
+        'primary key' => array('budget_id'),
+      );
+    return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_budget_predictor_uninstall() {
+    drupal_uninstall_schema('itg_budget_predictor');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_budget_predictor_update_7001() {
+    cache_clear_all(NULL, 'cache_menu');
+}

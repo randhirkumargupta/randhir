@@ -1,0 +1,4 @@
+name = ITG Budget Predictor
+description = "ITG Budget Predictor Module"
+core = 7.x
+package = ITG
