@@ -16,9 +16,6 @@ function itg_notification_form_alter(&$form, &$form_state, $form_id) {
   // Alter for "notification"
   if ($form_id == 'notification_node_form') {
     
-    // Unset metatags
-    unset($form['#metatags']);
-    
     // Add cancel button
     $form['actions']['cancel'] = array(
         '#markup' => l(t('Cancel'), 'manage-notifications', array('attributes' => array('class' => 'button'))),
@@ -91,14 +88,7 @@ function itg_notification_form_after_build($form, &$form_state) {
   // Add JS for itg_notification
   drupal_add_js(drupal_get_path('module', 'itg_notification') . '/js/itg_notification.js', array('weight' => 1));
 
-  // Unset SEF URL field
-  $form['path']['#access'] = FALSE;
-
-  // Unset metatag description
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
-  unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
-  
+    
   return $form;
 }
 

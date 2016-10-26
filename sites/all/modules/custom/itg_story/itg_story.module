@@ -7,7 +7,7 @@
  * Provides customizations and functions for Story.
  *
  */
-
+module_load_include('inc', 'itg_story', 'includes/itg_story.helper');
 
 /**
  * Implements hook_menu().
@@ -46,6 +46,18 @@ function itg_story_menu() {
   );
 
   return $items;
+}
+
+/**
+ * Implements hook_permission.
+ */
+function itg_story_permission() {
+  return array(
+    'access itg story' => array(
+      'title' => t('story permission'),
+      'description' => t('story permission.'),
+    ),
+  );
 }
 
 
@@ -108,18 +120,16 @@ function itg_story_theme($existing, $type, $theme, $path) {
  */
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
-    case 'story_node_form':
-      
+    case 'story_node_form':      
       $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
       unset($form['actions']['preview_changes']);
       unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
       $form['#after_build'][] = 'itg_story_after_build';
       $form['actions']['submit']['#submit'][] = 'itg_story_form_custom_callback';
-      break;
-  
-  }
-        $form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
-
+      break;  
+    }
+    
+   $form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
 }
 
 /**
@@ -144,7 +154,9 @@ function itg_story_form_custom_callback($form, &$form_state) {
     $redirect_path .=  "?field_story_syndication_value_op=all";
   }
   
-  itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
+  if (function_exists('itg_custom_message')) {
+    itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path);
+  }
 }
 
 /**
@@ -182,7 +194,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
  * {@inheritdoc}
  */
 function itg_story_node_validate($node, $form, &$form_state) {
-//return TRUE;
+
   // Code for redirection url validation
   if ($node->type == 'story') {
 
@@ -257,33 +269,14 @@ function itg_story_after_build($form, &$form_state) {
 
   global $user, $base_url;
   if (!isset($form['#node']->nid)) {
-    // hide remove button of first field on add form 
+    // hide remove button of first field on add form
     drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
-
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-highlights-und-0-remove-button").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
-
-
-    // hide remove button of first field on add form 
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-template-guru-und-0-remove-button").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
-
-    // hide remove button of first field on add form 
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-template-quotes-und-0-remove-button").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
-
-    // hide remove button of first field on add form 
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
-    
-    drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
+              jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
+              jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();
+              jQuery("#edit-field-story-template-guru-und-0-remove-button").hide();
+              jQuery("#edit-field-story-template-quotes-und-0-remove-button").hide();
+              jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();
+              jQuery("#edit-field-story-reporter-und-0-remove-button").hide();
             });', array('type' => 'inline', 'scope' => 'footer'));
   }
   
@@ -306,66 +299,6 @@ function itg_story_after_build($form, &$form_state) {
   return $form;
 }
 
-/**
- * Implements hook_permission.
- */
-function itg_story_permission() {
-  return array(
-    'access itg story' => array(
-      'title' => t('story permission'),
-      'description' => t('story permission.'),
-    ),
-  );
-}
-
-/**
- * Breaking news create after story create.
- * @param string $story_node
- */
-function itg_story_create_breaking_news($story_node) {
-  global $user;
-
-  $node = new stdClass();
-  $node->title = $story_node->title;
-  $node->type = "breaking_news";
-
-  node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
-
-  $node->language = LANGUAGE_NONE;
-  $node->field_content_type[LANGUAGE_NONE][0]['value'] = 'Story';
-  $node->field_type[LANGUAGE_NONE][0]['value'] = 'Breaking News';
-  $node->field_source[LANGUAGE_NONE][0]['value'] = $story_node->nid;
-  $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = $story_node->field_stroy_city[LANGUAGE_NONE][0]['tid'];
-  $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
-
-  // get selected taxonomy of node
-  $story_taxonomy = $story_node->field_story_category[LANGUAGE_NONE];
-
-  foreach ($story_taxonomy as $value1) {
-    $story_array[] = $value1['tid'];
-  }
-
-  //get all parent category
-  $taxonomy_parent = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  foreach ($taxonomy_parent as $key => $value) {
-    $taxonomy_parent_array[] = $value->tid;
-  }
-
-  // after intersect
-  $taxonomy_result = array_intersect($taxonomy_parent_array, $story_array);
-
-  foreach ($taxonomy_result as $key1 => $tax_id) {
-    $node->field_section[LANGUAGE_NONE][]['tid'] = $tax_id;
-  }
-
-  $node->uid = $user->uid;
-  $node->status = 1; //(1 or 0): Published or not
-  $node->promote = 0; //(1 or 0): Promoted to front page
-  $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-
-  node_save($node);
-
-}
 
 /**
  * Implements hook_node_insert
@@ -416,16 +349,14 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   }
   else {
     $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
-  }
-  
+  }  
   
   if (isset($form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
     $date_val = $form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value'];
   }
   else {
     $date_val = $form_state['input'][$tv_date_field][LANGUAGE_NONE][0]['value']['date'];
-  }
-  
+  }  
 
   // add ajax on magazine field
   $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
@@ -458,7 +389,6 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     $form[$tv_time_field][LANGUAGE_NONE]['#default_value'] = $form['#node']->field_story_tv_time[LANGUAGE_NONE][0]['value'];
     // $form[$tv_time_field]['#validated'] = TRUE;
   }
-
 
   // code for story expiry date field show and hide
   $form['field_story_expiry_date']['#states'] = array(
@@ -515,9 +445,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
     'visible' => array(
       ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
     )
-  );
-
-  
+  );  
 
   // code for Magazine kicker * field show and hide
   $form['field_story_magazine_kicker_text']['#states'] = array(
@@ -539,7 +467,6 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
 
   $form['field_story_posted_by_twitter']['#default_value'] = $user->mail;
   $form['field_story_posted_by_instagram']['#default_value'] = $user->mail;
-
 
 }
 
@@ -581,63 +508,4 @@ function itg_story_library_alter(&$libraries, $module) {
     $library = drupal_get_path('module', 'itg_story') . '/js/autocomplete.limit.js';
     $libraries['drupal.autocomplete']['js'][$library] = array('group' => JS_DEFAULT);
   }
-}
-
-/**
- * Implements function for issue exit or not
- * @param string $issue_date
- * @return bool
- */
-function itg_story_checked_issue($issue_date) {
-  $result = db_select('node', 'node')
-    ->fields('node', array('title'))
-    ->condition('title', $issue_date, '=')
-    ->condition('type', 'issue', '=')
-    ->execute()->fetchAssoc();
-
-  if (empty($result['title'])) {
-    return FALSE;
-  }
-
-  return TRUE;
-}
-
-
-/**
- * Get breakingnews  id
- * @param int $breaking_id
- * @return int $itg_result
- */
-function get_breaking_id($breaking_id) {  
-  $query = db_select('field_data_field_source', 'fs');
-  $query->fields('fs', array('entity_id'));  
-  $query->condition('fs.bundle', 'breaking_news');
-  $query->condition('fs.field_source_value', $breaking_id);
-  $itg_result = $query->execute()->fetchField();
-  
-  return $itg_result;
-}
-
-/**
- * Helper function to populate the second dropdown.
- * @param string $id
- * @return array $data
- */
-function itg_common_tv_time($id = '') {
-
-//  $final_id = date('Y/m/d', strtotime($id));
-//  if (function_exists('mongodb')) {
-//    $db = mongodb();
-//    $people = $db->tv_schedule;
-//    $date = $final_id;
-//    $cond = array('program date' => $date);
-//    $cursor = $people->find($cond);
-//    // Fetch query for supplements
-//    $select = t('- None -');
-//    $data = array('_none' => $select);
-//    foreach ($cursor as $document) {
-//      $data[$document['time']] = $document['time'];
-//    }
-//    return $data;
-//  }
 }

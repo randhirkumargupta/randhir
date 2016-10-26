@@ -509,7 +509,7 @@ if ($theme != 'itgadmin') {
          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php print $widget_data['itg-block-13']['widget_name']; ?>">
+               <div class="widget-wrapper watch-video-home <?php print $widget_data['itg-block-13']['widget_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-13']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-13']['block_title']; ?></span>
                   <?php } ?>
@@ -558,7 +558,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-14"><?php print $widget_data['itg-block-14']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-14" ><?php print $widget_data['itg-block-14']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  
@@ -606,7 +606,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-16"><?php print $widget_data['itg-block-16']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-16" widget-style="home-shows"><?php print $widget_data['itg-block-16']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>          

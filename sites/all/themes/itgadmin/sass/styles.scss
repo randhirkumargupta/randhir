@@ -6429,15 +6429,76 @@ div.node{
     .ftp_video_radio{
       @extend .dib;
       @extend .vtop;
-      padding: 20px 20px 10px 0;
-      margin: 0;
-      width: 100%;
+      position: relative;
+      padding: 0;
+      margin: 0 15px 15px 0;
+      width: 120px;
+      height: 120px;
+      border: 1px solid #d9d9d9;
+      label{
+        background: url(../images/default_for_all.png) no-repeat left top / 100% auto;
+        font-size: 12px;
+        height: 100%;
+        left: 0;
+        overflow: hidden;
+        padding: 80px 5px 0;
+        position: absolute;
+        text-overflow: ellipsis;
+        top: 0;
+        white-space: nowrap;
+        width: 100%;
+        &:before{
+          border-radius: 50%;
+          bottom: 0;
+          background-color: #fff;
+          border: 1px solid #1fb5ad;
+          color: #1fb5ad;
+          content: "\f00c";
+          font-family: "FontAwesome";
+          font-size: 28px;
+          height: 50px;
+          left: 0;
+          line-height: 50px;
+          margin: auto;
+          overflow: hidden;
+          position: absolute;
+          right: 0;
+          text-align: center;
+          top: 150px;
+          width: 50px;
+          z-index: 9;
+          opacity: 0;
+          transition: all .3s;
+        }
+        &:after{
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,.5);
+          opacity: 0;
+          transition: all .3s;
+        }
+      }
       .form-radio{
         float: left;
-        margin: 2px;
+        height: 100%;
+        margin: 0;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 999;
+        &:checked + label:before, &:checked + label:after{
+          top: 0;
+          opacity: 1;
+        }
       }
       .file_size{
-        margin-left: 30px;
+        color: #ababab;
+        display: block;
+        margin-left: 0;
       }
     }
   }
@@ -7269,12 +7330,9 @@ div.node{
     &.active:after{
       content: '\f056';
     }
-/*    & + div{
-      overflow: hidden !important;
-    }
     &.active + div{
       overflow: visible !important;
-    }*/
+    }
   }
   .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
     padding-left: 200px;
@@ -7842,7 +7900,7 @@ div.node{
       background: none;
       border: none;
       margin: 0;
-      padding: 20px;
+      padding: 20px 0;
       .button{
         border-radius: 1px;
         border: 1px solid #ee4d4d;
@@ -8224,6 +8282,7 @@ div.node{
     }
   }
 }
+
 .node-photogallery-form{
   .form-type-plupload {
     margin-left: 220px;
@@ -8253,6 +8312,199 @@ div.node{
         float: left;
         padding: 1px 5px 0 0 !important;
       }
+    }
+  }
+  
+}
+.node-videogallery-form, .node-photogallery-form{
+  .browse-media-file{
+    .itg-form-section{
+      height: 250px;
+      position: relative;
+      > .generate-image{
+        position: absolute;
+        left: 15px;
+        bottom: 40px;
+        z-index: 10;
+        .img-crt{
+          margin: 0;
+          + .pre-desc {
+            left: 155px;
+            width: 225px;
+          }
+        }
+        &+.generate-image-error{
+          bottom: 15px;
+          left: 0;
+          padding: 0 15px;
+          position: absolute;
+          width: 100%;
+        }
+      }
+    }
+    .form-field-type-image{
+      display: inline-block;
+      margin-left: -3px;
+      padding: 15px 0 0 15px;
+      vertical-align: top;
+      width: 150px;
+      &#edit-field-story-extra-large-image{
+        margin-left: 0;
+        .image-widget-data{
+          float: none !important;
+        }
+        .form-type-managed-file{
+          &.has-image-parent{
+            .form-managed-file{
+              > .image-widget-data{
+                position: static !important;
+                .form-submit[value="Remove"]{
+                  left: 114px;
+                  width: 20px;
+                  height: 20px;
+                  background: url(../images/cross_small.png) center center no-repeat;
+                  text-indent: -9999;
+                }
+              }
+            }
+          }
+        }
+      } 
+      .form-type-managed-file{
+        margin: 0;
+        padding: 0;
+        position: relative;
+        border: 1px solid #d9d9d9;
+        &.has-image-parent{
+          height: 132px;
+          overflow: hidden;
+          z-index: 9999;
+          background-color: #fff;
+          transition: all .3s;
+          &:hover {
+            box-shadow: 0 0 10px #888;
+            height: 244px !important;
+            transform: scale(1.1);
+          }
+          .form-managed-file{
+            > .image-widget-data{
+              position: static !important;
+              .form-submit[value="Remove"]{
+                left: 114px;
+                width: 20px;
+                height: 20px;
+                background: url(../images/cross_small.png) center center no-repeat;
+                text-indent: -9999;
+              }
+            }
+          }
+        }
+        > label{
+          background-color: #dedede;
+          display: block;
+          float: none;
+          font-size: 12px;
+          z-index: 9;
+          width: 100%;
+          padding: 5px; 
+        }
+        .form-managed-file{
+          padding: 5px;
+          .image-preview{
+            float: none;
+            padding: 0;
+            img{
+              width: 100%;
+              height: 92px;
+            }
+            .image-fullname{
+              color: #ababab;
+              font-size: 12px;
+              margin: 0;
+              overflow: hidden;
+              padding-bottom: 5px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              pointer-events: none;
+              width: 100%;
+              a {
+                color: #2f2f2f;
+                display: block;
+                text-decoration: none;
+              }
+            }
+          }
+          > .image-widget-data{
+            height: 100px;
+            float: none  !important;
+            a.filefield-sources-imce-browse{
+              background: url(../images/default_for_all.png) no-repeat left top / 100% auto;
+              color: #0c8bb1;
+              font-size: 12px;
+              padding-top: 84px;
+              text-align: center;
+              text-transform: uppercase;
+              &:after{
+                display: none;
+              }
+            }
+            
+            .form-type-textfield{
+              padding: 0;
+              .form-text{
+                font-size: 12px;
+              }
+            }
+            .form-submit[value="Remove"]{
+              left: 114px;
+              width: 20px;
+              height: 20px;
+              background: url(../images/cross_small.png) center center no-repeat;
+              text-indent: -9999px;
+            }
+          }
+          & + div.description{
+            left: 145px;
+          }
+        }
+      }
+    }
+  }
+}
+.node-photogallery-form .form-field-name-field-featured .form-type-checkboxes .form-checkboxes + div.description{left: 145px;}
+[id*="views-form-photo-gallery-management-page"]{
+  @extend .confirmation;
+  .form-type-checkboxes > label{
+    float: none;
+    width: auto;
+  }
+  .form-submit{
+    @extend .btn;
+    @extend .btn-save;
+  }
+}
+.node-videogallery-form{
+  .itg-sidebar-form{
+    #Configuration{
+      .form-type-checkboxes{
+        > label{display: none;}
+      }
+    }
+  }
+}
+[id="edit-field-story-reporter"]{
+  table tbody{
+    overflow: visible !important;
+  }
+}
+[id*="views-exposed-form-section-wise-content-ordering-list-page"]{
+  .views-submit-button{
+    a.button{
+      @extend .add-more-wbg;
+      height: 36px;
+      margin-left: 10px;
+      padding: 10px 12px 6px;
+      font-weight: 400;
     }
   }
 }

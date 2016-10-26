@@ -1550,6 +1550,32 @@ footer{
     }
 }
 /*End Dont miss Home page css*/
+/*css start watch now home page */
+.watch-video-home{
+    .widget-title{
+        position: relative;
+        margin-bottom: 5px;
+    }
+    .osscar-video{
+        background: transparent;
+        .home-watch-new{
+            ul{
+                .dont-miss-listing {
+                    @include pos(relative);
+                    padding-bottom:0;
+                    + .dont-miss-listing{                    
+                        padding: 10px 0 0 0;                       
+                    } 
+                    @include video-left-border-bottom;
+                }
+            } 
+        }
+    }    
+}
+
+
+/*css end watch now home page */
+
 /*Start Story page css*/
 @mixin story-profile-pic{
     width: 50px;
@@ -4204,11 +4230,21 @@ footer{
         }        
     }
 }
-.yearender{    
+.yearender{
+    .pager.pager--infinite-scroll{
+        text-align: center;
+        a{
+            background: #f6f6f6;
+            @include display-inline;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+        }
+    }
     .view-yearender.view-display-id-block_2{
         .view-content{
             margin-right: -15px;
-            margin-left: -15px;            
+            margin-left: -15px;  
+            @include clearfix;
         }
         .views-row{
             margin-bottom: 40px;          
@@ -4758,6 +4794,7 @@ footer{
                 font-weight: 500;
                 font-family:$itg-roboto;
                 margin-top:15px;
+                margin-bottom:15px;
                 .section-part{
                     @include float(left);
                     width:55.5%;
@@ -4772,17 +4809,7 @@ footer{
                 }
                 .profile-detail{
                     @include float(right);
-                    width:44.5%;
-                    border-left: 1px solid #ddd;
-                    padding-left: 30px;
-                    @include pos(relative);
-                    &:before{
-                        background: url('../images/event-profile-detail-icon.jpg');
-                        width: 9px;
-                        height: 8px;
-                        content: '';
-                        @include pos(absolute,21px,null,null,-1px);
-                    }
+                    width:44.5%;                                        
                     label{
                        color:#d71921;    
                         display: block;
@@ -4806,6 +4833,19 @@ footer{
                         .speaker-title{
                             font-weight: 700;
                         }                        
+                    }
+                    .profile-loop{
+                        margin-bottom: 20px;
+                         border-left: 1px solid #ddd; 
+                         padding-left: 30px; 
+                         @include pos(relative);
+                    &:before{
+                        background: url('../images/event-profile-detail-icon.jpg');
+                        width: 9px;
+                        height: 8px;
+                        content: '';
+                        @include pos(absolute,21px,null,null,-1px);
+                    }
                     }
                 }
             }
@@ -4845,7 +4885,7 @@ footer{
         }
     }
 }
-#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block{
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
     h2{
         font-size: 20px;
         border-bottom: 1px solid $border-color;
@@ -4858,23 +4898,29 @@ footer{
 }
 #block-views-program-schedule-block-3{    
     .views-row{
-            @include text-align(center);
-            font-family: roboto;
-            color:#ef2a24;
-            font-weight: 700;
-            text-transform: uppercase;   
-            img{
-                width: 166px;
-                height: 166px;
-                border-radius: 100%;
-            }
-            a{
-                font-size: 15px;                 
-                margin-top: 10px;
-                display: block;
-                color:#000;
-                margin-bottom: 5px;
-            }
+        @include text-align(center);
+        font-family: roboto;
+        color:#ef2a24;
+        font-weight: 700;
+        text-transform: uppercase;   
+        img{
+            width: 166px;
+            height: 166px;
+            border-radius: 100%;
+        }
+        a{
+            font-size: 15px;                 
+            margin-top: 10px;
+            display: block;
+            color:#000;
+            margin-bottom: 5px;
+        }
+        &:nth-child(4n+1){
+            clear:left;
+        }
+        .views-row{
+            margin-bottom: 30px;
+        }
     }        
 }
 #block-views-event-photo-slider-block, #block-views-event-associate-video-block{
@@ -4891,7 +4937,7 @@ footer{
 }
 .event-sidebar{
     section.sidebar {
-        border: 1px solid #ddd;
+        border: none;
     }   
 }
 #block-views-event-associate-video-block{
@@ -4933,12 +4979,12 @@ footer{
             }            
             padding-top: 20px;
             text-align: left;
-            text-transform: uppercase;            
+            text-transform: uppercase;  
+            @include clearfix;
             li{              
                 width: 33%;
-                color:#000;
-                display: inline-block;
-                float: none;
+                color:#000;                
+                float: left;
                 font-weight: 600;
                 vertical-align: middle;
                 &.image{
@@ -4961,7 +5007,7 @@ footer{
                         color:#6e6e6e;
                     }
                 }
-            }
+            }            
         }
         .date-display-range{
             color: #000;
@@ -4991,15 +5037,81 @@ footer{
               font-size: 15px;
               padding: 0 10px;
               text-transform: uppercase;
-            height: 50px;
-               line-height: 50px;
-              &:hover{
+                height: 50px;
+                line-height: 50px;
+              &:hover, &.active{
                   color:#fff;
               }
           }
       }
     }
 }
+#block-itg-event-backend-ad-right-sidebar-event {
+    padding: 30px;
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+    margin-bottom: 30px;
+}
+#block-itg-event-backend-tweet-right-sidebar-event {
+    padding: 15px 30px;
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+}
+#block-views-program-schedule-block-4{
+    .views-row{
+        .views-row{
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 10px;
+            &:nth-child(4n+1){
+                clear: left;
+            }      
+            }
+    }
+}
+.sign-and-win-contest, .event-registration-link{
+    background: #ef3c24;
+    color: #fff;
+    font-size: 30px;
+    padding: 15px 10px;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+#block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
+    h1{
+        font-family: $itg-robotoslab;
+        font-size: 50px;
+        margin-bottom: 40px;
+    }
+}
+#block-itg-event-backend-event-registration{
+    margin-bottom:70px;
+    .buy-ticket-txt {
+        margin: 30px 0;
+        text-align: center;
+        line-height: 22px;
+        font-size: 16px;
+        font-weight: 700;
+        a{
+            color: #ef3c24;
+        }
+    }
+    .tc-txt {
+        padding: 15px;
+        background: #f1f1f1;
+        border: 1px solid #ddd;
+        span{
+            color: #ef3c24;
+        }
+    }
+}
+#block-views-program-schedule-block-7{
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 30px;
+}
+
 /*CSS end for event page index*/
 
 
@@ -5007,6 +5119,9 @@ footer{
 .education-layout-page{    
     .droppable{
         overflow: hidden;
+    }
+    .defalt-placeholder-magazin{
+        height: 140px;
     }
     .itg-layout-672{
         .droppable{
@@ -5193,10 +5308,16 @@ footer{
     .osscar-video{
         background:transparent;
         ul .dont-miss-listing{
-        padding:0 0px 10px 0;
+            padding:0;
             + .dont-miss-listing {
-                padding:0px;
+                padding-top: 10px;
             }   
+            @include video-left-border-bottom;
+            &:last-child{
+                &:after{
+                    display: inline-block;
+                }
+            }
         }
     }
     .section_wise_order-edu-sample-paper, .section_wise_order-edu-notification, .section_wise_order-edu-featurefilia, .section_wise_order-edu-jobs-and-career{
@@ -5313,13 +5434,13 @@ footer{
 .view-sport-ipl{
     @include pager;
 }
-.section-sport-ipl{
+.section-sport-ipl-bg{
     background: url('../images/sports-bg.png') no-repeat center 135px;
 }
 .sport-home-layout-page{  
     .widget-title {
         @include blue-title;
-    }
+    }    
     .siderbar-sport{
         .widget-title, .h2.block-title{
             display: none;
@@ -5351,8 +5472,8 @@ footer{
             }
             .auto-block-2{
                 border: 1px solid #ddd;
-                .special-top-news{
-                    position: relative;
+                position: relative;
+                .special-top-news{                   
                     overflow: hidden;
                     height: 100%;
                     .widget-title{
@@ -5385,35 +5506,35 @@ footer{
     }
     .itg-layout-195{
         .droppable {
-            height: 195px; 
+            min-height: 195px; 
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-260{
         .droppable {
-            height: 260px;       
+            min-height: 260px;       
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-375{
         .droppable {
-            height: 375px; 
+            min-height: 375px; 
              border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-315{
         .droppable {
-            height: 315px;      
+            min-height: 315px;      
              border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-340{
         .droppable {
-            height: 340px;   
+            min-height: 340px;   
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
             border-bottom: 1px solid $border-color;
@@ -5435,7 +5556,15 @@ footer{
     }
     .tech-block_5{
         .data-holder{
-            max-width: inherit;
+            max-width: inherit;                           
+            background: #fff;
+            box-shadow: 0 0 5px #ccc;
+            margin: 3px;
+            height: auto;
+            .view-content{
+                margin: 10px;
+                overflow: hidden;
+            }            
         }
         .widget-title{
          @include pos(relative);
@@ -5803,7 +5932,7 @@ input[type="radio"]:checked + label:after{
                 text-transform: uppercase;
                 font-family: $itg-roboto;
                 font-weight: 500;
-                &:hover, .active{
+                &:hover, &.active{
                     background: #ededed;
                     color:#000;
                 }
@@ -5992,7 +6121,13 @@ input[type="radio"]:checked + label:after{
 }
 /*Budget page css end*/
 
-
+/*pic icon not avilable*/
+.pic-no-icon{    
+    &:after{
+        display: none;
+    }               
+}
+/*pic icon not avilable*/
 /*css start mscroll bar changes*/
 .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar{
     height: 12px;
@@ -6013,5 +6148,9 @@ input[type="radio"]:checked + label:after{
 .mCSB_scrollTools.mCSB_scrollTools_horizontal{
     margin-bottom: 10px;
 }
-
 /*css end mscroll bar changes*/
+/*css start defalt image */
+.defalt-placeholder-img{
+    height: none;
+}
+/*css end defalt image */

@@ -3469,7 +3469,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3491,7 +3492,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3513,7 +3515,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3535,7 +3538,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3557,7 +3561,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3579,7 +3584,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -4820,7 +4826,7 @@ my-queue-blogs
 in-queue-blogs
 archive-blogs
 my-rejected-blogs
-ugc-blogs',
+ugc-published-blog',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -4843,7 +4849,7 @@ my-queue-blogs
 in-queue-blogs
 archive-blogs
 my-rejected-blogs
-ugc-blogs',
+ugc-published-blog',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -4866,7 +4872,7 @@ my-queue-blogs
 in-queue-blogs
 archive-blogs
 my-rejected-blogs
-ugc-blogs',
+ugc-published-blog',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -4889,7 +4895,7 @@ my-queue-blogs
 in-queue-blogs
 archive-blogs
 my-rejected-blogs
-ugc-blogs',
+ugc-published-blog',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -4912,7 +4918,7 @@ my-queue-blogs
 in-queue-blogs
 archive-blogs
 my-rejected-blogs
-ugc-blogs',
+ugc-published-blog',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -4935,7 +4941,7 @@ my-queue-blogs
 in-queue-blogs
 archive-blogs
 my-rejected-blogs
-ugc-blogs',
+ugc-published-blog',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -5699,9 +5705,9 @@ node/*/edit',
   'module' => 'itg_photogallery',
   'delta' => 'photogallery_tab_form_block',
   'theme' => 'itgadmin',
-  'status' => 1,
+  'status' => 0,
   'weight' => -38,
-  'region' => 'form_tab',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/photogallery
@@ -5820,7 +5826,7 @@ my-queue-blogs
 in-queue-blogs
 archive-blogs
 my-rejected-blogs
-ugc-blogs',
+ugc-published-blog',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -5885,7 +5891,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11108,7 +11115,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11448,7 +11456,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11816,7 +11825,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12184,7 +12194,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12552,7 +12563,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12920,7 +12932,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13288,7 +13301,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13522,7 +13536,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13559,7 +13574,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13971,7 +13987,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14035,7 +14052,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14071,7 +14089,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14107,7 +14126,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14143,7 +14163,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14280,9 +14301,9 @@ node/*/edit',
   'module' => 'itg_videogallery',
   'delta' => 'videogallery_tab_form_block',
   'theme' => 'itgadmin',
-  'status' => 1,
+  'status' => 0,
   'weight' => 0,
-  'region' => 'form_tab',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'node/add/videogallery
@@ -21796,7 +21817,10 @@ order-summary',
   'visibility' => 0,
   'pages' => 'sponsors
 programme
-speakers',
+speakers
+event-registration
+flashback
+sign-and-win',
   'title' => '',
   'cache' => 8,
 );
@@ -21938,7 +21962,10 @@ checkout',
   'visibility' => 0,
   'pages' => 'sponsors
 programme
-speakers',
+speakers
+event-registration
+flashback
+sign-and-win',
   'title' => '',
   'cache' => 8,
 );
@@ -21968,7 +21995,10 @@ speakers',
   'visibility' => 0,
   'pages' => 'sponsors
 programme
-speakers',
+speakers
+event-registration
+flashback
+sign-and-win',
   'title' => '',
   'cache' => 8,
 );
@@ -21998,7 +22028,10 @@ speakers',
   'visibility' => 0,
   'pages' => 'sponsors
 programme
-speakers',
+speakers
+event-registration
+flashback
+sign-and-win',
   'title' => '',
   'cache' => 8,
 );
@@ -22028,7 +22061,10 @@ speakers',
   'visibility' => 0,
   'pages' => 'sponsors
 programme
-speakers',
+speakers
+event-registration
+flashback
+sign-and-win',
   'title' => '',
   'cache' => 8,
 );
@@ -22058,7 +22094,10 @@ speakers',
   'visibility' => 0,
   'pages' => 'sponsors
 programme
-speakers',
+speakers
+event-registration
+flashback
+sign-and-win',
   'title' => '',
   'cache' => 8,
 );
@@ -22088,7 +22127,10 @@ speakers',
   'visibility' => 0,
   'pages' => 'sponsors
 programme
-speakers',
+speakers
+event-registration
+flashback
+sign-and-win',
   'title' => '',
   'cache' => 8,
 );
@@ -22186,7 +22228,8 @@ speakers',
   'region' => 'content_event',
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22228,7 +22271,8 @@ speakers',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22242,7 +22286,8 @@ speakers',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22256,7 +22301,8 @@ speakers',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22270,7 +22316,8 @@ speakers',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22284,7 +22331,8 @@ speakers',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -22298,7 +22346,8 @@ speakers',
   'region' => -1,
   'custom' => 0,
   'visibility' => 1,
-  'pages' => 'speakers',
+  'pages' => 'speakers
+event-registration',
   'title' => '',
   'cache' => -1,
 );
@@ -27858,6 +27907,419 @@ manage-event-backend-type',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1949,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_registration',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'content_event',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'event-registration',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1950,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_sign_and_win',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'content_event',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sign-and-win',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1951,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_flashback',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'content_event',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'flashback',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1952,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_registration',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'event-registration',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1953,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_sign_and_win',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sign-and-win',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1954,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_flashback',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'flashback',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1955,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_registration',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'event-registration',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1956,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_sign_and_win',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sign-and-win',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1957,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_flashback',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'flashback',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1958,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_registration',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'event-registration',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1959,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_sign_and_win',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sign-and-win',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1960,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_flashback',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'flashback',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1961,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_registration',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'event-registration',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1962,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_sign_and_win',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sign-and-win',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1963,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_flashback',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'flashback',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1964,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_registration',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'event-registration',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1965,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_sign_and_win',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sign-and-win',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1966,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_flashback',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'flashback',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1967,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_registration',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'event-registration',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1968,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_sign_and_win',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'sign-and-win',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1969,
+  'module' => 'itg_event_backend',
+  'delta' => 'event_flashback',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'flashback',
+  'title' => '<none>',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 1970,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1971,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1972,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1973,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1974,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1975,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 1976,
+  'module' => 'menu',
+  'delta' => 'menu-recipe-admin-menu',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'ugc-published-recipe
+recipe-management
+recipe-management/*
+draft-recipe-management',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block_custom'][] = array(

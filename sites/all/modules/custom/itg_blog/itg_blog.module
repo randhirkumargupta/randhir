@@ -23,15 +23,19 @@ function itg_blog_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_blog_views_pre_render(&$view) {
-
   if ($view->name == "manage_blogs") {
     $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content_blog .= l(t('Post new Blog'), 'node/add/blog', array('query' => array('destination' => 'manage-blogs')));
     $view->attachment_before = $header_content_blog;
   }
-
   if ($view->name == "blogs_management") {
     $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $view->attachment_before = $header_content_blog;
+  }
+  // Add create link on header of the ugc tab view.
+  if ($view->name == 'blog_ugc_tab') {
+    $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content_blog .= l(t('Post new Blog'), 'node/add/blog', array('query' => array('destination' => 'manage-blogs')));
     $view->attachment_before = $header_content_blog;
   }
 }
@@ -92,9 +96,7 @@ function itg_blog_form_custom_callback($form, &$form_state) {
 function itg_blog_after_build($form, &$form_state) {
 
   global $user, $base_url;
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
-
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -131,8 +133,8 @@ function itg_blog_theme($existing, $type, $theme, $path) {
  * Implement hook_form_views_exposed_form_alter
  * {@inheritdoc}
  */
-function itg_blog_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  if ($form["#id"] == 'views-exposed-form-manage-blogs-page' || $form["#id"] == 'views-exposed-form-blogs-management-page' || $form['#id'] == 'views-exposed-form-blogs-management-page-1' || $form['#id'] == 'views-exposed-form-blogs-management-page-2' || $form['#id'] == 'views-exposed-form-blogs-management-page-3' || $form['#id'] == 'views-exposed-form-blogs-management-page-5' || $form['#id'] == 'views-exposed-form-blogs-management-page-6' || $form['#id'] == 'views-exposed-form-blogs-management-page-7' || $form['#id'] == 'views-exposed-form-blogs-management-page-4' || $form['#id'] == 'views-exposed-form-blogs-management-page-10') {
+function itg_blog_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {  
+  if ($form["#id"] == 'views-exposed-form-manage-blogs-page' || $form["#id"] == 'views-exposed-form-blogs-management-page' || $form['#id'] == 'views-exposed-form-blogs-management-page-1' || $form['#id'] == 'views-exposed-form-blogs-management-page-2' || $form['#id'] == 'views-exposed-form-blogs-management-page-3' || $form['#id'] == 'views-exposed-form-blogs-management-page-5' || $form['#id'] == 'views-exposed-form-blogs-management-page-6' || $form['#id'] == 'views-exposed-form-blogs-management-page-7' || $form['#id'] == 'views-exposed-form-blogs-management-page-4' || $form['#id'] == 'views-exposed-form-blogs-management-page-10' || $form['#id'] == 'views-exposed-form-blog-ugc-tab-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/blog/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
     $form['nid']['#autocomplete_path'] = 'content-nid-list/blog/autocomplete';

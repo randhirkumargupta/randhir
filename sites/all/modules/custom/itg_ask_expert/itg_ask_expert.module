@@ -95,11 +95,7 @@ function itg_ask_expert_node_access($node, $op, $account) {
  */
 function itg_ask_expert_after_build($form, &$form_state) {
   global $user, $base_url;
-  // update automatic alias name
-  $form['path']['pathauto']['#title'] = 'Generate automatic Sef URL';
-  //Unset metatag description
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;

@@ -249,9 +249,7 @@ function itg_astro_after_build($form, &$form_state) {
     '#weight' => 20,
   );
 
-  // Send variable to itg_astro.js file.
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  // Send variable to itg_astro.js file.  
 
   $settings = array();
   $settings['uid'] = $user->uid;

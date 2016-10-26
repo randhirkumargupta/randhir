@@ -1053,12 +1053,14 @@ function itg_videogallery_ajax_ftp_video() {
     if ($case == 'used') {
         $used_video = itg_videogallery_ftp_used_video();
         foreach ($used_video as $key => $u_video) {
-            $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video['filename'] . '</input><span class="file_size">' . $u_video['filesize'] . ' MB</span></span>';
+           // $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video['filename'] . '</input><span class="file_size">' . $u_video['filesize'] . ' MB</span></span>';
+           $val .=  '<span class="ftp_video_radio"><input id = "video_id_'.$key.'" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_'.$key.'">' . $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
         }
     } elseif ($case == 'unused') {
         $unused_video = itg_videogallery_ftp_unused_video();
         foreach ($unused_video as $key => $un_video) {
-            $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $un_video['filename'] . '</input><span class="file_size">' . $un_video['filesize'] . ' MB</span></span>';
+            //$val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $un_video['filename'] . '</input><span class="file_size">' . $un_video['filesize'] . ' MB</span></span>';
+            $val .= '<span class="ftp_video_radio"><input id = "video_id_'.$key.'" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_'.$key.'">' . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
         }
     }
     if (empty($val)) {
@@ -1081,7 +1083,7 @@ function itg_videogallery_ajax_time_filter_video() {
         }
         $used_video = itg_videogallery_ftp_used_video($before_time);
         foreach ($used_video as $key => $u_video) {
-            $val .= '<span class="ftp_video_radio"><input type="radio" name="video-form" class="form-radio" value="' . $key . '">' . $u_video['filename'] . '</input><span class="file_size">' . $u_video['filesize'] . ' MB</span></span>';
+            $val .= '<span class="ftp_video_radio"><input id = "video_id_'.$key.'" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_'.$key.'">' . $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
         }
     }
     if (empty($val)) {

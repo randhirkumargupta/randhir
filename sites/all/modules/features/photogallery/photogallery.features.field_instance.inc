@@ -69,7 +69,7 @@ function photogallery_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -177,7 +177,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -268,13 +268,13 @@ function photogallery_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 6,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_by',
-    'label' => 'Photo by',
+    'label' => 'Photo By',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -288,8 +288,8 @@ function photogallery_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 4,
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 3,
     ),
   );
 
@@ -875,7 +875,7 @@ function photogallery_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 25,
+        'weight' => 56,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -887,14 +887,9 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_by',
-    'label' => 'Photo by',
+    'label' => 'Photo By',
     'required' => 0,
     'settings' => array(
-      'behaviors' => array(
-        'taxonomy-index' => array(
-          'status' => TRUE,
-        ),
-      ),
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
@@ -907,7 +902,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 15,
+      'weight' => 56,
     ),
   );
 
@@ -2544,7 +2539,7 @@ function photogallery_field_default_field_instances() {
   t('Large image');
   t('Medium image');
   t('Node Identity');
-  t('Photo by');
+  t('Photo By');
   t('Posted By Instagram');
   t('Posted by Twitter');
   t('Posted by facebook');

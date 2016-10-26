@@ -10,11 +10,8 @@
       var nid = settings.itg_notification.settings.nid;
      
       // If user is not drupal admin
-      if (uid !== 1) {
-        $('.field-edit-link').hide();
-        $('#edit-body-und-0-format').hide();
-        $('.vertical-tabs-list').hide();
-        $('#edit-metatags').show();
+      if (uid !== 1) {        
+        $('#edit-body-und-0-format').hide();       
       }
       
       $('input[name="field_ntf_schedule[und][0][value][date]"]').prop("readonly", true);
