@@ -4230,11 +4230,21 @@ footer{
         }        
     }
 }
-.yearender{    
+.yearender{
+    .pager.pager--infinite-scroll{
+        text-align: center;
+        a{
+            background: #f6f6f6;
+            @include display-inline;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+        }
+    }
     .view-yearender.view-display-id-block_2{
         .view-content{
             margin-right: -15px;
-            margin-left: -15px;            
+            margin-left: -15px;  
+            @include clearfix;
         }
         .views-row{
             margin-bottom: 40px;          
