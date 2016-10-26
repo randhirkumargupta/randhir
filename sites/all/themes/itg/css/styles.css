@@ -6930,6 +6930,9 @@ footer .footer-copyright {
 .section-sport-ipl-bg {
   background: url("../images/sports-bg.png") no-repeat center 135px;
 }
+.section-sport-ipl-bg .container {
+  background: #fff;
+}
 
 .sport-home-layout-page .widget-title {
   display: block;
