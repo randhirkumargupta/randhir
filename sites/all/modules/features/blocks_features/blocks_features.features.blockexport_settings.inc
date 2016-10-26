@@ -3469,7 +3469,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3491,7 +3492,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3513,7 +3515,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3535,7 +3538,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3557,7 +3561,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -3579,7 +3584,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -5885,7 +5891,8 @@ my-published-photogallery
 my-queue-photogallery
 in-queue-photogallery
 archive-photogallery
-my-rejected-photogallery',
+my-rejected-photogallery
+ugc-published-photogallery',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11108,7 +11115,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11448,7 +11456,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -11816,7 +11825,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12184,7 +12194,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12552,7 +12563,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -12920,7 +12932,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13288,7 +13301,8 @@ my-published-podcast
 my-queue-podcast
 in-queue-podcast
 archive-podcast
-my-rejected-podcast',
+my-rejected-podcast
+ugc-published-podcast',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13522,7 +13536,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13559,7 +13574,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -13971,7 +13987,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14035,7 +14052,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14071,7 +14089,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14107,7 +14126,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -14143,7 +14163,8 @@ published-video
 my-rejected-video
 my-unpublished-video
 unpublished-video
-archive-video',
+archive-video
+ugc-published-video',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -22247,7 +22268,7 @@ event-registration',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'speakers
@@ -22262,7 +22283,7 @@ event-registration',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'speakers
@@ -22277,7 +22298,7 @@ event-registration',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'speakers
@@ -22292,7 +22313,7 @@ event-registration',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'speakers
@@ -22307,7 +22328,7 @@ event-registration',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'speakers
@@ -22322,7 +22343,7 @@ event-registration',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'speakers
@@ -27937,7 +27958,7 @@ manage-event-backend-type',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'event-registration',
@@ -27979,7 +28000,7 @@ manage-event-backend-type',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'event-registration',
@@ -28021,7 +28042,7 @@ manage-event-backend-type',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'event-registration',
@@ -28063,7 +28084,7 @@ manage-event-backend-type',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'event-registration',
@@ -28105,7 +28126,7 @@ manage-event-backend-type',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'event-registration',
@@ -28147,7 +28168,7 @@ manage-event-backend-type',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'event-registration',
@@ -28206,7 +28227,7 @@ draft-recipe-management',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'ugc-published-recipe
@@ -28240,7 +28261,7 @@ draft-recipe-management',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'ugc-published-recipe
@@ -28257,7 +28278,7 @@ draft-recipe-management',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'ugc-published-recipe
@@ -28274,7 +28295,7 @@ draft-recipe-management',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'ugc-published-recipe
@@ -28291,7 +28312,7 @@ draft-recipe-management',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'ugc-published-recipe

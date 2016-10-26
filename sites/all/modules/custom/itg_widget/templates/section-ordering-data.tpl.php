@@ -490,6 +490,7 @@ else if ($widget_style == 'in-depth') { ?>
                     }
 
                     $desc = $entity->title;
+                    
                     ?>
                 <li class="dont-miss-listing">
                     <?php
@@ -500,7 +501,7 @@ else if ($widget_style == 'in-depth') { ?>
 
         <?php if (!empty($extra_large_image_url)) { ?>
 
-                        <span class="dm-pic"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a> <span><i class="fa fa-play-circle"></i> </span></span>
+                        <span class="dm-pic"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a> <span><i class="fa fa-play-circle"></i> <?php echo $entity->field_video_duration['und'][0]['value'];?></span></span>
 
         <?php }
         ?>
@@ -509,7 +510,7 @@ else if ($widget_style == 'in-depth') { ?>
                 </li>
                 <?php } ?>
             </ul>
-        </div>
+        </div></div>
 
             <?php }
             else if ($widget_style == 'budget-decoded') { ?>
@@ -649,7 +650,7 @@ else if ($widget_style == 'in-depth') { ?>
                     }
                     ?>
                     <?php if ($count == 0) : ?>
-                        <?php if (!empty($extra_large_image_url)) { ?>
+                        <?php $extra_large_image_url="";if (!empty($extra_large_image_url)) { ?>
                             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
                                 <img  src="<?php print $extra_large_image_url ?>" />
                             </a>
@@ -658,7 +659,7 @@ else if ($widget_style == 'in-depth') { ?>
                         else {
                             ?>
                             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
-                                <img  src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                                <img height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
                             </a>
                     <?php } ?>
                         <h3 class="frist-heading heading-<?php echo $entity->nid ?> <?php echo $entity->type ?> ">
@@ -732,7 +733,7 @@ else if ($widget_style == 'in-depth') { ?>
                                     else {
                                         ?>
                                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
-                                    <img  height="140" width="100" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                                    <img class="defalt-placeholder-magazin"  height="140" width="100" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
                                 </a>
                 <?php } ?>
                             <div class="small-detail">

@@ -7330,12 +7330,9 @@ div.node{
     &.active:after{
       content: '\f056';
     }
-/*    & + div{
-      overflow: hidden !important;
-    }
     &.active + div{
       overflow: visible !important;
-    }*/
+    }
   }
   .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
     padding-left: 200px;
