@@ -519,8 +519,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         foreach ($tax as $key => $val) {
             $op[$val->tid] = $val->name;
         }
-       // unset($form['category_tid']['#options']);
-        //$form['category_tid']['#options'] = $op;
+        unset($form['category_tid']['#options']);
+        $form['category_tid']['#options'] = $op;
     }
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display =='most_read_widget_list')) {
         
@@ -537,8 +537,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         foreach ($tax as $key => $val) {
             $op[$val->tid] = $val->name;
         }
-       // unset($form['category_tid']['#options']);
-        //$form['category_tid']['#options'] = $op;
+        unset($form['category_tid']['#options']);
+        $form['category_tid']['#options'] = $op;
     }
     if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display =='special_how_made_widget_list')) {
         
@@ -555,8 +555,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         foreach ($tax as $key => $val) {
             $op[$val->tid] = $val->name;
         }
-       // unset($form['category_tid']['#options']);
-       // $form['category_tid']['#options'] = $op;
+        unset($form['category_tid']['#options']);
+        $form['category_tid']['#options'] = $op;
     }
 
 

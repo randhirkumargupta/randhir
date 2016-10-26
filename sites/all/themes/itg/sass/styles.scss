@@ -4048,7 +4048,8 @@ footer{
             margin-top: 5px;
         }
         .col-md-4{
-            margin-bottom:20px;            
+            margin-bottom:20px;
+            text-align: center;          
             &:nth-child(2n+1){
                 clear: left;
             }
@@ -5494,7 +5495,7 @@ footer{
 }
 .section-sport-ipl-bg{
     background: url('../images/sports-bg.png') no-repeat center 135px;
-    .container{
+    main.container{
         background: #fff;
     }
 }
