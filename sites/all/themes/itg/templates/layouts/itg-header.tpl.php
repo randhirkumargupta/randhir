@@ -61,9 +61,13 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
           $url_type = $menu_data['db_data']['url_type'];
           $db_target = $menu_data['db_data']['target'];
           $tid = $menu_data['db_data']['tid'];
+          $active_cls = "notactive";
           // if tid is not 0 then its internal url
           if ($tid && $url_type == 'internal') {
             $link_url = "taxonomy/term/$tid";
+            if($link_url == current_path()) {
+              $active_cls = "active";
+            }
           }
           else {
             $link_url = $menu_data['db_data']['url'];
@@ -73,7 +77,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
             $target = "_blank";
           }
           ?>
-          <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key")))); ?></li>
+          <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key" , "$active_cls")))); ?></li>
         <?php endforeach; ?>
       </ul>
       <?php //print drupal_render($data['itg_main_manu_header']); ?>            
