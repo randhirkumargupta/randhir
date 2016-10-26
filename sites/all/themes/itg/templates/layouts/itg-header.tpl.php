@@ -54,10 +54,11 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
       <ul class="second-level-menu menu">
         <?php $menu_manager = $data['menu_manager']; 
         foreach ($menu_manager as $key => $menu_data) :  ?>
-          <?php
+          <?php  
+          $title_array = explode("[tid", $menu_data['db_data']['title']);
           $link_url = "";
           $target = "_self";
-          $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $menu_data['db_data']['title'];
+          $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name :  $title_array[0];
           $url_type = $menu_data['db_data']['url_type'];
           $db_target = $menu_data['db_data']['target'];
           $tid = $menu_data['db_data']['tid'];
