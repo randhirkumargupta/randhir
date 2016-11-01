@@ -2479,8 +2479,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .question-container{
     @extend .hide;
     .question-heading{
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 500;
+      color: #6e6e6e;
     }
     &#question-container-0{
       @extend .db;
@@ -2493,7 +2494,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
   .answer-container{
-    padding: 10px 0;
+    padding: 0;
     @extend .dib;
     @extend .full;
     .answer-heading{
@@ -2508,6 +2509,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         @extend .db;
         margin: 0;
         &.form-type-radio{
+          padding-left: 10px;
           .form-radio{
             @extend .fleft;
             margin: 1px 5px 0 0;
@@ -2515,11 +2517,19 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         }
       }
       &.form-type-textfield{
-        margin: 10px 0;
+        margin: 0 0 10px;
+        .form-text{
+          width: 516px;
+          max-width: 100%;
+          height: 42px;
+          font: 400 14px/18px Roboto;
+          color: #322323;
+        }
       }
     }
     .form-type-checkboxes{
-      > label{width: 200px; @extend .dib; @extend .vmid;}
+      padding-left: 10px;
+      > label{width: 200px; @extend .dib; @extend .vmid; color: #323232; font: 400 14px/18px "Roboto Slab";}
       div.rating{
         @extend .fleft; 
         @extend .full;
@@ -2533,7 +2543,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     div.rating{
       @extend .db; @extend .vmid;
       .form-type-checkbox{
-        @extend .pos-rel; @extend .dib;
+        @extend .pos-rel; @extend .dib; margin-bottom: 0;
         &:before{
           content: '\f005'; color: #ddd; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;
         }
@@ -6850,6 +6860,16 @@ div.node{
 }
 .survey-form-main-container .byline .profile-detail ul.date-update li {
   margin-bottom: 7px;
+  color: #989898;
+  font: 400 12px/18px Roboto;
+  padding: 0;
+}
+.survey-form-main-container .byline .profile-detail ul.date-update li + li:before {
+  content: '|';
+  margin: 0 5px;
+  color: #989898;
+  display: inline-block;
+  vertical-align: top;
 }
 .survey-form-main-container .byline .profile-detail ul.social-links {
   zoom: 1;
@@ -6890,6 +6910,7 @@ div.node{
 .survey-form-main-container .byline .social-info {
   float: right;
   width: 200px;
+  font: 400 12px/18px Roboto;
 }
 .survey-form-main-container .byline .social-info span {
   float: left;
@@ -6909,9 +6930,8 @@ div.node{
   font-family: Roboto;
 }
 .question-container .question-heading {
-  font-size: 18px;
-  color: #666;
-  font-weight: 500;
+  font: normal 500 20px/28px Roboto;
+  color: #6e6e6e;
   margin: 10px 0;
 }
 .question-container .question-number {
@@ -6923,9 +6943,7 @@ div.node{
   font: 500 14px/18px Roboto;
 }
 .question-container .answer-container {
-  padding-left: 10px;
   position: relative;
-  margin-bottom: 10px;
 }
 .question-container .answer-container .survey-media {
   position: absolute;
@@ -6934,12 +6952,16 @@ div.node{
   right: 0;
 }
 .question-container .answer-container > .form-item .form-item {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 }
 .question-container .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 3px 5px 0 0;
 }
-
+.question-container .answer-container > .form-item .form-item.form-type-radio > label, 
+.question-container .answer-container > .form-item .form-item.form-type-checkbox > label{
+  font: 400 14px/18px 'Roboto Slab';
+  color: #323232;
+}
 .survey-form-wrapper-all .question-container {
   display: block;
 }
@@ -6961,11 +6983,12 @@ div.node{
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 16px;
+  font-size: 18px;
   font-family: Roboto;
   color: #fff;
-  font-weight: 300;
+  font-weight: 400;
   margin-right: 20px;
+  margin-top: 50px;
   cursor: pointer;
 }
 [id*="itg-survey-survey-form"] .success-message, [id*="itg-survey-survey-form"] .messages--status {

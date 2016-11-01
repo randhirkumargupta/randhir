@@ -3121,14 +3121,15 @@ div.image-widget-data .ajax-progress-throbber {
   margin: 20px 0;
 }
 [id*="itg-survey-survey-form"] .question-container .question-heading, [id*="itg-quiz-quiz-form"] .question-container .question-heading {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
+  color: #6e6e6e;
 }
 [id*="itg-survey-survey-form"] .question-container .ajax-progress-throbber, [id*="itg-quiz-quiz-form"] .question-container .ajax-progress-throbber {
   position: static;
 }
 [id*="itg-survey-survey-form"] .answer-container, [id*="itg-quiz-quiz-form"] .answer-container {
-  padding: 10px 0;
+  padding: 0;
 }
 [id*="itg-survey-survey-form"] .answer-container .answer-heading, [id*="itg-quiz-quiz-form"] .answer-container .answer-heading {
   font-size: 14px;
@@ -3142,18 +3143,36 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item {
   margin: 0;
 }
+[id*="itg-survey-survey-form"] .answer-container > .form-item .form-item.form-type-radio, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item.form-type-radio {
+  padding-left: 10px;
+}
 [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 1px 5px 0 0;
 }
 [id*="itg-survey-survey-form"] .answer-container > .form-item.form-type-textfield, [id*="itg-quiz-quiz-form"] .answer-container > .form-item.form-type-textfield {
-  margin: 10px 0;
+  margin: 0 0 10px;
+}
+[id*="itg-survey-survey-form"] .answer-container > .form-item.form-type-textfield .form-text, [id*="itg-quiz-quiz-form"] .answer-container > .form-item.form-type-textfield .form-text {
+  width: 516px;
+  max-width: 100%;
+  height: 42px;
+  font: 400 14px/18px Roboto;
+  color: #322323;
+}
+[id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes {
+  padding-left: 10px;
 }
 [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes > label {
   width: 200px;
+  color: #323232;
+  font: 400 14px/18px "Roboto Slab";
 }
 [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating {
   padding: 0;
   margin: 10px 0;
+}
+[id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox {
+  margin-bottom: 0;
 }
 [id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox:before, [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox:before {
   content: '\f005';
@@ -7105,6 +7124,17 @@ div.node #comments h2 {
 
 .survey-form-main-container .byline .profile-detail ul.date-update li {
   margin-bottom: 7px;
+  color: #989898;
+  font: 400 12px/18px Roboto;
+  padding: 0;
+}
+
+.survey-form-main-container .byline .profile-detail ul.date-update li + li:before {
+  content: '|';
+  margin: 0 5px;
+  color: #989898;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .survey-form-main-container .byline .profile-detail ul.social-links {
@@ -7155,6 +7185,7 @@ div.node #comments h2 {
 .survey-form-main-container .byline .social-info {
   float: right;
   width: 200px;
+  font: 400 12px/18px Roboto;
 }
 
 .survey-form-main-container .byline .social-info span {
@@ -7179,9 +7210,8 @@ div.node #comments h2 {
 }
 
 .question-container .question-heading {
-  font-size: 18px;
-  color: #666;
-  font-weight: 500;
+  font: normal 500 20px/28px Roboto;
+  color: #6e6e6e;
   margin: 10px 0;
 }
 
@@ -7195,9 +7225,7 @@ div.node #comments h2 {
 }
 
 .question-container .answer-container {
-  padding-left: 10px;
   position: relative;
-  margin-bottom: 10px;
 }
 
 .question-container .answer-container .survey-media {
@@ -7208,11 +7236,17 @@ div.node #comments h2 {
 }
 
 .question-container .answer-container > .form-item .form-item {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 }
 
 .question-container .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 3px 5px 0 0;
+}
+
+.question-container .answer-container > .form-item .form-item.form-type-radio > label,
+.question-container .answer-container > .form-item .form-item.form-type-checkbox > label {
+  font: 400 14px/18px 'Roboto Slab';
+  color: #323232;
 }
 
 .survey-form-wrapper-all .question-container {
@@ -7236,11 +7270,12 @@ div.node #comments h2 {
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 16px;
+  font-size: 18px;
   font-family: Roboto;
   color: #fff;
-  font-weight: 300;
+  font-weight: 400;
   margin-right: 20px;
+  margin-top: 50px;
   cursor: pointer;
 }
 

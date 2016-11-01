@@ -635,14 +635,20 @@ header {
   margin: 1px 5px 0 0;
 }
 .answer-container > .form-item.form-type-textfield {
-  margin: 10px 0;
+  margin: 0 0 10px;
 }
 .answer-container .form-type-checkboxes > label {
   width: 200px;
+  color: #323232;
+  font: 400 14px/18px "Roboto Slab";
 }
 .answer-container .form-type-checkboxes div.rating {
   padding: 0;
   margin: 10px 0;
+}
+.answer-container .form-type-checkboxes div.rating .form-type-checkbox {
+  padding-left: 0;
+  margin-bottom: 0;
 }
 .answer-container div.rating .form-type-checkbox:before {
   content: '\f005';
@@ -688,7 +694,7 @@ header {
   margin: 1px 5px 0 0;
 }
 .answer-container > .form-item.form-type-textfield {
-  margin: 10px 0;
+  margin: 0 0 10px;
 }
 .answer-container .form-type-checkboxes > label {
   width: 200px;

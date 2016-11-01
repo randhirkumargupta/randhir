@@ -546,18 +546,22 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
+            
         }
     }
     .form-type-checkboxes{
-        > label{width: 200px; @extend .dib; @extend .vmid;}
+        > label{width: 200px; @extend .dib; @extend .vmid; color: #323232; font: 400 14px/18px "Roboto Slab";}
         div.rating{
             @extend .fleft; 
             @extend .full;
             padding: 0;
             margin: 10px 0;
             .form-type-checkbox{
-                @extend .pos-rel; @extend .dib;
+                @extend .pos-rel; 
+                @extend .dib;
+                padding-left: 0;
+                margin-bottom: 0;
             }
         }
     }
@@ -601,7 +605,7 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
         }
     }
     .form-type-checkboxes{
