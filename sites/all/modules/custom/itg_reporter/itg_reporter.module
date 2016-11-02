@@ -350,9 +350,8 @@ function itg_reporter_get_all_story_nid($source_id) {
  * @param array $id
  */
 function itg_autocomplete_byline($id) {
-  
   $reporter_name = db_select('node', 'n');
-  $reporter_name->join('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
+  $reporter_name->leftJoin('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
   $reporter_name->fields('n', array('title', 'nid'));
   $reporter_name->fields('re', array('field_reporter_email_id_value'));
   $reporter_name->condition('n.type', 'reporter', '=');
@@ -362,7 +361,12 @@ function itg_autocomplete_byline($id) {
    $record = $result->fetchAssoc();
    $r_title = ucfirst($record['title']);
    $r_nid = strtolower($record['nid']);
+   if(!empty($record['field_reporter_email_id_value'])) {
    $name_format = $r_title.'('.$record['field_reporter_email_id_value'].')('.$r_nid.')';
+   }
+   else {
+     $name_format = $r_title.'('.$r_nid.')';
+   }
   
  return $name_format;
 }
