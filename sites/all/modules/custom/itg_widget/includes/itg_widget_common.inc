@@ -2191,6 +2191,14 @@ function get_max_weight($tid, $type) {
   return $max_result;
 }
 
+function get_max_weight_for_special($type) {
+  $max_query = db_select('itg_widget_order');
+  $max_query->addExpression('MAX(weight)');
+  $max_query->condition('widget', $type);
+  $max_result = $max_query->execute()->fetchField();
+  return $max_result;
+}
+
 /**
  * Implements hook__node_insert().
  * {@inheritdoc}

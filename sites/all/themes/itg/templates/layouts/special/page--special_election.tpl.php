@@ -331,7 +331,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               <div class="col-md-12">
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
-                    <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name']; ?>">
+                    <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name'].$widget_data['itg-block-8']['widget_display_name']; ?>">
 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-8']['block_title'])) { ?>
                         <h4 class="heading"><?php print $widget_data['itg-block-8']['block_title']; ?></h4>
                       <?php } ?>
@@ -410,7 +410,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                       </div>
                     <?php } ?>  
 
-                    <div class="data-holder" id="itg-block-10"><?php print $widget_data['itg-block-10']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-10" widget-style="election-so-sorry"><?php print $widget_data['itg-block-10']['widget']; ?></div>
                   </div>             
                 </div>               
               </div> 
@@ -435,7 +435,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                       </div>
                     <?php } ?>  
 
-                    <div class="data-holder" id="itg-block-11"><?php print $widget_data['itg-block-11']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-11"><?php $block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
+                                        print render($block['content']); ?></div>
                   </div>             
                 </div>               
               </div> 
@@ -516,12 +517,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         </div>
   <?php } ?>
 
-      <?php if ($sidebar_first || $sidebar_second): ?>
-        <aside class="sidebars">
-        <?php print $sidebar_first; ?>
-          <?php print $sidebar_second; ?>
-        </aside>
-        <?php endif; ?>
+      
     </main>
 
 
