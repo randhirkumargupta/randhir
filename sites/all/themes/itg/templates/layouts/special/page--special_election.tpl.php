@@ -410,7 +410,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                       </div>
                     <?php } ?>  
 
-                    <div class="data-holder" id="itg-block-10"><?php print $widget_data['itg-block-10']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-10" widget-style="election-so-sorry"><?php print $widget_data['itg-block-10']['widget']; ?></div>
                   </div>             
                 </div>               
               </div> 
