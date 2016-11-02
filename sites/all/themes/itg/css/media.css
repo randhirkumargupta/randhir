@@ -76,13 +76,6 @@
     margin-left: 135px;
     margin-right: 50px;
     padding-left: 0;
-    white-space: nowrap;
-    overflow-x: scroll;
-  }
-  #block-itg-layout-manager-header-block .navigation .menu li {
-    display: inline-block;
-    vertical-align: top;
-    float: none;
   }
 
   /*    special event page css start here*/

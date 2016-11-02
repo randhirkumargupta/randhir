@@ -51,13 +51,7 @@
             .menu {
                 margin-left: 135px;
                 margin-right: 50px;
-                padding-left: 0;
-                white-space: nowrap;
-                overflow-x: scroll;
-                li{
-                    @include display-inline;
-                    float: none;
-                }
+                padding-left: 0;                               
             }
         }
     } 

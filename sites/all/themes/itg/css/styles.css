@@ -454,8 +454,12 @@ header {
 #block-itg-layout-manager-header-block .navigation:after {
   clear: both;
 }
+#block-itg-layout-manager-header-block .navigation .container {
+  position: relative;
+}
 #block-itg-layout-manager-header-block .navigation .menu {
   padding-left: 135px;
+  padding-right: 50px;
 }
 #block-itg-layout-manager-header-block .navigation .menu li {
   float: left;
@@ -465,9 +469,10 @@ header {
   text-transform: uppercase;
   font-weight: 500;
   padding: 0 10px;
-  border-right: 1px solid #680101;
+  /*                        border-right: 1px solid $itg-nav-bordercolor;*/
   border-top: none;
   height: 37px;
+  position: relative;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 37px;
@@ -475,12 +480,42 @@ header {
 #block-itg-layout-manager-header-block .navigation .menu li a.active, #block-itg-layout-manager-header-block .navigation .menu li a:hover {
   color: #ffc106;
 }
+#block-itg-layout-manager-header-block .navigation .menu li a:after {
+  position: absolute;
+  content: '';
+  height: 100%;
+  background: #680101;
+  width: 1px;
+  right: 0;
+}
 #block-itg-layout-manager-header-block .navigation ul li.sponser-link a {
   background: #ffc106;
   color: #323232;
 }
 #block-itg-layout-manager-header-block .navigation ul li.sponser-link a:hover {
   color: #323232;
+}
+#block-itg-layout-manager-header-block .navigation .all-menu i {
+  font-size: 7px;
+  color: #000;
+}
+#block-itg-layout-manager-header-block .navigation ul#newlist {
+  padding-left: 0;
+  padding-right: 0;
+  position: absolute;
+  top: 37px;
+  right: 50px;
+  z-index: 10;
+  background: #a00606;
+  display: none;
+}
+#block-itg-layout-manager-header-block .navigation ul#newlist li {
+  float: none;
+  border: none;
+  border-bottom: 1px solid #000;
+}
+#block-itg-layout-manager-header-block .navigation ul#newlist li a {
+  display: block;
 }
 
 /*End header css*/
@@ -5454,6 +5489,18 @@ footer .footer-copyright {
 
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
+#block-itg-layout-manager-header-block .second-level-menu.menu {
+  zoom: 1;
+}
+#block-itg-layout-manager-header-block .second-level-menu.menu:before, #block-itg-layout-manager-header-block .second-level-menu.menu:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-itg-layout-manager-header-block .second-level-menu.menu:after {
+  clear: both;
+}
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
 }

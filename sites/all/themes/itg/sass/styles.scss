@@ -336,8 +336,12 @@ header{
             @include clearfix;
             margin-top: 20px;            
             background: #a00606;
+            .container{
+                @include pos(relative);
+            }
             .menu{
                 padding-left:135px;
+                padding-right:50px;
                 li{
                     @include float(left);
                     a{
@@ -345,13 +349,22 @@ header{
                         text-transform: uppercase;
                         @include itg-font(null, $itg-font-medium);
                         padding: 0 10px;
-                        border-right: 1px solid $itg-nav-bordercolor;
+/*                        border-right: 1px solid $itg-nav-bordercolor;*/
                         border-top:none;
                         height: 37px;
+                        @include pos(relative);
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
                         &.active, &:hover{
                                 color: #ffc106;
+                        }
+                        &:after{
+                            position: absolute;
+                            content: '';
+                            height: 100%;
+                            background: #680101;
+                            width: 1px;
+                            right: 0;
                         }
                     }
                 }
@@ -364,6 +377,30 @@ header{
                      color: #323232;
                   }
               }  
+            }
+            .all-menu{
+                i{
+                    font-size: 7px;
+                    color: #000;
+                }
+            }
+            ul#newlist{
+                padding-left: 0;
+                padding-right: 0;
+                position: absolute;
+                top: 37px;
+                right: 50px;
+                z-index: 10;
+                background: #a00606;
+                display:none;
+                li{                    
+                    float: none;
+                    border: none;
+                    border-bottom: 1px solid #000;
+                    a{
+                        display: block;
+                    }
+                }
             }
         }
     
@@ -4063,6 +4100,9 @@ footer{
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
 #block-itg-layout-manager-header-block{
+    .second-level-menu.menu{
+        @include clearfix;
+    }
     .menu-login{
         .user-menu{
             @include pos(relative);
