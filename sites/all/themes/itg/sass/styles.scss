@@ -350,7 +350,7 @@ header{
                         height: 37px;
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
-                        &:hover{
+                        &.active, &:hover{
                                 color: #ffc106;
                         }
                     }
@@ -546,18 +546,22 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
+            
         }
     }
     .form-type-checkboxes{
-        > label{width: 200px; @extend .dib; @extend .vmid;}
+        > label{width: 200px; @extend .dib; @extend .vmid; color: #323232; font: 400 14px/18px "Roboto Slab";}
         div.rating{
             @extend .fleft; 
             @extend .full;
             padding: 0;
             margin: 10px 0;
             .form-type-checkbox{
-                @extend .pos-rel; @extend .dib;
+                @extend .pos-rel; 
+                @extend .dib;
+                padding-left: 0;
+                margin-bottom: 0;
             }
         }
     }
@@ -601,7 +605,7 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
         }
     }
     .form-type-checkboxes{
@@ -4048,7 +4052,8 @@ footer{
             margin-top: 5px;
         }
         .col-md-4{
-            margin-bottom:20px;            
+            margin-bottom:20px;
+            text-align: center;          
             &:nth-child(2n+1){
                 clear: left;
             }
@@ -5494,7 +5499,7 @@ footer{
 }
 .section-sport-ipl-bg{
     background: url('../images/sports-bg.png') no-repeat center 135px;
-    .container{
+    main.container{
         background: #fff;
     }
 }

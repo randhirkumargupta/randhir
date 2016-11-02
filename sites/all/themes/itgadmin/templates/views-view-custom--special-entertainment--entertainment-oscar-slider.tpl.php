@@ -11,7 +11,7 @@
                 $first_image="";
                 if($index==0)
                 {
-                    $first_image="first-image ".$video_class;
+                    $first_image="first-image";
                 }
                 ?>
             <li class="<?php echo $first_image; ?> image-tab-<?php echo $index; ?> common-img"><?php print $row['field_story_extra_large_image']; ?><?php if (strtolower($row['type']) == 'videogallery') {print '<span class="osccar-play-icon"><i class="fa fa-play" aria-hidden="true"></i></span>';}?></li>

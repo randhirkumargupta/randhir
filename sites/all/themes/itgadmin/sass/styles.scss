@@ -428,7 +428,7 @@ ul.pager{
   }
 }
 .image-repo-browse{
-  .form-field-type-image{
+  .form-field-type-image, .field-type-image{
     .form-type-managed-file > label {
       padding-bottom: 5px;
       padding-top: 5px;
@@ -2479,8 +2479,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .question-container{
     @extend .hide;
     .question-heading{
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 500;
+      color: #6e6e6e;
     }
     &#question-container-0{
       @extend .db;
@@ -2493,7 +2494,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
   .answer-container{
-    padding: 10px 0;
+    padding: 0;
     @extend .dib;
     @extend .full;
     .answer-heading{
@@ -2508,6 +2509,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         @extend .db;
         margin: 0;
         &.form-type-radio{
+          padding-left: 10px;
           .form-radio{
             @extend .fleft;
             margin: 1px 5px 0 0;
@@ -2515,11 +2517,19 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         }
       }
       &.form-type-textfield{
-        margin: 10px 0;
+        margin: 0 0 10px;
+        .form-text{
+          width: 516px;
+          max-width: 100%;
+          height: 42px;
+          font: 400 14px/18px Roboto;
+          color: #322323;
+        }
       }
     }
     .form-type-checkboxes{
-      > label{width: 200px; @extend .dib; @extend .vmid;}
+      padding-left: 10px;
+      > label{width: 200px; @extend .dib; @extend .vmid; color: #323232; font: 400 14px/18px "Roboto Slab";}
       div.rating{
         @extend .fleft; 
         @extend .full;
@@ -2533,7 +2543,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     div.rating{
       @extend .db; @extend .vmid;
       .form-type-checkbox{
-        @extend .pos-rel; @extend .dib;
+        @extend .pos-rel; @extend .dib; margin-bottom: 0;
         &:before{
           content: '\f005'; color: #ddd; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;
         }
@@ -6756,13 +6766,11 @@ div.node{
 
 /* CSS For Survey */
 .survey-form-main-container h1 {
-  font-size: 24px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 30px;
+  font: 500 34px/34px Roboto;
 }
 .survey-form-main-container .survey-description {
-  color: #bebebe;
+  color: #929292;
+  font: 400 14px/20px Roboto;
   margin-top: 10px;
 }
 .survey-form-main-container .byline {
@@ -6825,7 +6833,6 @@ div.node{
 .survey-form-main-container .byline .profile-detail ul li span.share-count {
   display: block;
   font-size: 44px;
-  font-size: 2.75rem;
   font-weight: 500;
   line-height: 44px;
   color: #bebebe;
@@ -6835,27 +6842,34 @@ div.node{
 }
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
+  font: 400 12px/18px Roboto;
   margin-top: 0px;
-  line-height: 18px;
   padding-left: 0;
 }
 .survey-form-main-container .byline .profile-detail ul li.twitter:before {
   content: '|';
   margin: 0 5px 0 0;
-  color: #999;
+  color: #6b6b6b;
 }
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
-  font-size: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 20px;
+  font: 700 12px/20px Roboto;
 }
 .survey-form-main-container .byline .profile-detail ul li.mailto {
   text-transform: uppercase;
 }
 .survey-form-main-container .byline .profile-detail ul.date-update li {
   margin-bottom: 7px;
+  color: #989898;
+  font: 400 12px/18px Roboto;
+  padding: 0;
+}
+.survey-form-main-container .byline .profile-detail ul.date-update li + li:before {
+  content: '|';
+  margin: 0 5px;
+  color: #989898;
+  display: inline-block;
+  vertical-align: top;
 }
 .survey-form-main-container .byline .profile-detail ul.social-links {
   zoom: 1;
@@ -6896,6 +6910,7 @@ div.node{
 .survey-form-main-container .byline .social-info {
   float: right;
   width: 200px;
+  font: 400 12px/18px Roboto;
 }
 .survey-form-main-container .byline .social-info span {
   float: left;
@@ -6915,9 +6930,8 @@ div.node{
   font-family: Roboto;
 }
 .question-container .question-heading {
-  font-size: 18px;
-  color: #666;
-  font-weight: 500;
+  font: normal 500 20px/28px Roboto;
+  color: #6e6e6e;
   margin: 10px 0;
 }
 .question-container .question-number {
@@ -6929,9 +6943,7 @@ div.node{
   font: 500 14px/18px Roboto;
 }
 .question-container .answer-container {
-  padding-left: 10px;
   position: relative;
-  margin-bottom: 10px;
 }
 .question-container .answer-container .survey-media {
   position: absolute;
@@ -6940,12 +6952,16 @@ div.node{
   right: 0;
 }
 .question-container .answer-container > .form-item .form-item {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 }
 .question-container .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 3px 5px 0 0;
 }
-
+.question-container .answer-container > .form-item .form-item.form-type-radio > label, 
+.question-container .answer-container > .form-item .form-item.form-type-checkbox > label{
+  font: 400 14px/18px 'Roboto Slab';
+  color: #323232;
+}
 .survey-form-wrapper-all .question-container {
   display: block;
 }
@@ -6967,11 +6983,12 @@ div.node{
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 16px;
+  font-size: 18px;
   font-family: Roboto;
   color: #fff;
-  font-weight: 300;
+  font-weight: 400;
   margin-right: 20px;
+  margin-top: 50px;
   cursor: pointer;
 }
 [id*="itg-survey-survey-form"] .success-message, [id*="itg-survey-survey-form"] .messages--status {
@@ -7086,6 +7103,9 @@ div.node{
 .node-issue-form,
 .node-newsletter-form,
 .node-recipe-form,
+.node-sponsor-form,
+.page-admin-people form,
+.page-user form,
 .node-newsletter_templates-form,
 .node-mega_review_critic-form{
   @extend .image-repo-browse;
@@ -8109,11 +8129,11 @@ div.node{
     -webkit-transition: scale
   }
 }
-.page-node-add-recipe{
+.page-node-add-recipe, {
   .form-managed-file .image-widget-data{
     float: left;
     .form-submit[value="Remove"]{
-      left: 375px;
+      left: 400px;
     }
   } 
 }
@@ -8514,6 +8534,48 @@ div.node{
       margin-left: 10px;
       padding: 10px 12px 6px;
       font-weight: 400;
+    }
+  }
+}
+[id*="protected-pages-configure"]{
+  fieldset{
+    border: none;
+    > legend{
+      background-color: #fefafb;
+      border-bottom: 1px solid #d9d9d9;
+      border-top: 1px solid #d9d9d9;
+      font-size: 18px;
+      line-height: 28px;
+      margin: 15px 0;
+      padding: 8px 20px;
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+    }
+    .fieldset-description{
+      padding: 8px 20px 0;
+    }
+    .form-submit{
+      margin-left: 250px;
+      margin-bottom: 20px;
+    }
+    table{
+      @extend .views-table;
+    }
+  }
+}
+[id*="protected-pages-enter-password"]{
+  fieldset{
+    border: none;
+    .form-type-password{
+      > label{
+        padding-top: 8px;
+      }
+    }
+    .form-submit{
+      @extend .btn;
+      @extend .btn-save;
+      margin-left: 250px;
     }
   }
 }

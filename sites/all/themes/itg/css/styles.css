@@ -472,7 +472,7 @@ header {
   font-size: 0.875rem;
   line-height: 37px;
 }
-#block-itg-layout-manager-header-block .navigation .menu li a:hover {
+#block-itg-layout-manager-header-block .navigation .menu li a.active, #block-itg-layout-manager-header-block .navigation .menu li a:hover {
   color: #ffc106;
 }
 #block-itg-layout-manager-header-block .navigation ul li.sponser-link a {
@@ -635,14 +635,20 @@ header {
   margin: 1px 5px 0 0;
 }
 .answer-container > .form-item.form-type-textfield {
-  margin: 10px 0;
+  margin: 0 0 10px;
 }
 .answer-container .form-type-checkboxes > label {
   width: 200px;
+  color: #323232;
+  font: 400 14px/18px "Roboto Slab";
 }
 .answer-container .form-type-checkboxes div.rating {
   padding: 0;
   margin: 10px 0;
+}
+.answer-container .form-type-checkboxes div.rating .form-type-checkbox {
+  padding-left: 0;
+  margin-bottom: 0;
 }
 .answer-container div.rating .form-type-checkbox:before {
   content: '\f005';
@@ -688,7 +694,7 @@ header {
   margin: 1px 5px 0 0;
 }
 .answer-container > .form-item.form-type-textfield {
-  margin: 10px 0;
+  margin: 0 0 10px;
 }
 .answer-container .form-type-checkboxes > label {
   width: 200px;
@@ -5440,6 +5446,7 @@ footer .footer-copyright {
 }
 #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4 {
   margin-bottom: 20px;
+  text-align: center;
 }
 #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(2n+1) {
   clear: left;
@@ -6984,7 +6991,7 @@ footer .footer-copyright {
 .section-sport-ipl-bg {
   background: url("../images/sports-bg.png") no-repeat center 135px;
 }
-.section-sport-ipl-bg .container {
+.section-sport-ipl-bg main.container {
   background: #fff;
 }
 
