@@ -8534,3 +8534,45 @@ div.node{
     }
   }
 }
+[id*="protected-pages-configure"]{
+  fieldset{
+    border: none;
+    > legend{
+      background-color: #fefafb;
+      border-bottom: 1px solid #d9d9d9;
+      border-top: 1px solid #d9d9d9;
+      font-size: 18px;
+      line-height: 28px;
+      margin: 15px 0;
+      padding: 8px 20px;
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+    }
+    .fieldset-description{
+      padding: 8px 20px 0;
+    }
+    .form-submit{
+      margin-left: 250px;
+      margin-bottom: 20px;
+    }
+    table{
+      @extend .views-table;
+    }
+  }
+}
+[id*="protected-pages-enter-password"]{
+  fieldset{
+    border: none;
+    .form-type-password{
+      > label{
+        padding-top: 8px;
+      }
+    }
+    .form-submit{
+      @extend .btn;
+      @extend .btn-save;
+      margin-left: 250px;
+    }
+  }
+}
