@@ -204,8 +204,7 @@
                 @include clearfix;  
                 margin: 0px;        
                 padding-left: 0;
-                white-space: pre-wrap;
-                overflow-x: inherit; 
+                padding-right: 0;
                 li{
                     @include calculate-width(1);
                     a{
@@ -217,6 +216,9 @@
                         padding: 0 15px;
                         &.active, &:hover{
                             color: $yellow-color;
+                        }
+                        &:after{
+                            display: none;
                         }
                     } 
                     &.all-menu{
@@ -232,7 +234,7 @@
                     &.sponser-link a{
                         background: $yellow-bg;
                         color: $black-color;
-                    }
+                    }                    
                 }
             }
             ul{

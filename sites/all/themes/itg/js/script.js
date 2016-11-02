@@ -258,14 +258,9 @@ jQuery(document).ready(function () {
     jQuery('.mobile-nav').click(function () {
         jQuery('.navigation').slideToggle();
     });    
-    jQuery(document).on('click', '.all-menu', function () {
-        if(jQuery('#newlist').is(':visible')){
-            jQuery('#newlist').stop().slideDown();
-        }else{
-            jQuery('#newlist').stop().slideUp();
-        }        
-    });
-    
+     jQuery('.all-menu').click(function () {
+       jQuery('#newlist').stop().slideToggle();     
+    });    
     var menuBuilder = function(){        
         var menuWidth, Totalwidth, liLength, clickHere;
 	menuWidth = jQuery('.second-level-menu.menu').width();	        
@@ -293,9 +288,14 @@ jQuery(document).ready(function () {
                     jQuery(this).addClass('hide');
 		}
 	});        
-    };
-    jQuery(window).resize(menuBuilder);
-    menuBuilder();    
+    };    
+    var winWidth = jQuery(window).width();
+    console.log(winWidth);
+    if(winWidth > 770){
+        jQuery(window).resize(menuBuilder);
+        menuBuilder();    
+    }
+      
 });
 
 
