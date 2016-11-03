@@ -108,7 +108,9 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#default_value'] = $node->title;
       $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;
       $form['field_story_kicker_text'][LANGUAGE_NONE][0]['value']['#default_value'] = $node->title;
-      $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $url_nid;
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#prefix'] = '<div style="display: none">';
+      $form['field_story_ugc_source_id'][LANGUAGE_NONE][0]['value']['#suffix'] = '</div>';
       $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#default_value'] = 'UGC';
       $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $node->field_section[LANGUAGE_NONE][0]['tid'];
       foreach ($form['field_podcast_audio_upload']['und'] as $delta => $field) {
@@ -598,7 +600,7 @@ function itg_ugc_node_insert($node) {
     $title = $node->title;
 
     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
-    if ($node->type == 'story' || $node->type == 'videogallery') {
+    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type = 'podcast') {
       $source_id = $node->field_story_ugc_source_id[LANGUAGE_NONE][0]['value'];
     }
     else {
