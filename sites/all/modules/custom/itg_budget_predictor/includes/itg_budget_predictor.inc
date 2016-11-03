@@ -49,7 +49,53 @@ function itg_budget_predictor_get_taxonomy() {
     }
     
     $entity_data['ranking'] = $ranking_array;
-    return $entity_data;
+    
+    
+    global $base_url, $user;
+    $title = 'Budget Predictor';
+    $actual_link = $base_url . '/budget-predictor';
+    $budget_type = '1';
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+    $column1 = '';
+    $column2 = '';
+    $column3 = '';
+
+    $column4 = '';
+    $user_id = $user->uid;
+    foreach ($entity_data as $key => $node_data) {
+        $tid = $node_data['tid'];
+        $name = $node_data['name'];
+        $fid = $node_data['image'];
+        $file = file_load($fid);
+        $uri = $file->uri;
+        if ($tid) {
+            $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
+        }
+    }
+    foreach ($entity_data['ranking'] as $keys => $values) {
+        $entity_id = $values['entity_id'];
+        $fid = get_ranking_fid($entity_id);
+        $file = file_load($fid);
+        $uri = $file->uri;
+        if ($values['ranking_column'] == '1') {
+            $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
+        }
+        if ($values['ranking_column'] == '2') {
+            $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
+        }
+        if ($values['ranking_column'] == '3') {
+            $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
+        }
+    }
+
+    
+        $budget_data['column1'] = $column1;
+        $budget_data['column2'] = $column2;
+        $budget_data['column3'] = $column3;
+        $budget_data['column4'] = $column4;
+        $budget_data['title'] = $title;
+        $budget_data['actual_link'] = $base_url . '/budget-predictor';
+    return $budget_data;
 }
 
 /**
