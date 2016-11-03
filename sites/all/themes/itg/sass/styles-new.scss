@@ -256,10 +256,9 @@
                 margin: 10px 0;
             }
         }
-        .photoby{
+        .photo-by{
             font-size: 14px;
             color: #626262;
-            margin-top: 10px;
         }
 
 }
@@ -835,6 +834,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           padding-left: 160px;
           z-index: 9;
         }
+          span.error{
+            position: absolute;
+            right: 5px;
+            top: 8px;
+            z-index: 9;
+          }
       }
       .form-type-textarea{
         display: inline-block;
@@ -1136,6 +1141,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
       a{
         color: #1a3c8d;
+        &:hover{
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -3508,4 +3516,62 @@ body.has-cart-popup{
 }
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox{
   padding: 0;
+}
+.page-personalization-my-following{
+    .region-personalization{text-align: center;}
+    #block-views-follow-tags-block,
+    #block-views-follow-tags-block-1{
+        display: inline-block;
+        vertical-align: top;
+        width: 400px;
+        padding: 50px 0;
+        .view-follow-tags{
+            .views-row{
+                padding:10px;
+                text-align: left;
+                background: #fefefe;
+                border: 1px solid #d9d9d9;
+                position: relative;
+                margin: 15px;
+                border-radius: 5px;
+                .views-field-name{
+                    padding-right: 75px;
+                    font: 400 16px/20px Roboto;
+                }
+                .views-field-ops{
+                    font: 400 14px/20px Roboto;
+                    position: absolute;
+                    right: 5px;
+                    top: 10px;
+                    a{
+                        color: #1a3c8d;
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.continue-shopping a {
+  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #a00606;
+  color: #fff;
+  font: 400 14px/18px Roboto;
+}
+.continue-shopping {
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+}
+.cart-detail{
+  a.button{
+    color: #1a3c8d;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }
