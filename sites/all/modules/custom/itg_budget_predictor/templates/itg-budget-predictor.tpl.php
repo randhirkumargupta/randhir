@@ -1,46 +1,17 @@
 <?php
-if (!empty($data)) {
-    global $base_url, $user;
-    $budget_type = '1';
-    $ip_address = $_SERVER['REMOTE_ADDR'];
-    $column1 = '';
-    $column2 = '';
-    $column3 = '';
-
-    $column4 = '';
-    $user_id = $user->uid;
-    foreach ($data as $key => $node_data) {
-        $tid = $node_data['tid'];
-        $name = $node_data['name'];
-        $fid = $node_data['image'];
-        $file = file_load($fid);
-        $uri = $file->uri;
-        if ($tid) {
-            $column4 .= '<li id="entry_' . $tid . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
-        }
-    }
-    foreach ($data['ranking'] as $keys => $values) {
-        $entity_id = $values['entity_id'];
-        $fid = get_ranking_fid($entity_id);
-        $file = file_load($fid);
-        $uri = $file->uri;
-        if ($values['ranking_column'] == '1') {
-            $column1 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
-        }
-        if ($values['ranking_column'] == '2') {
-            $column2 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
-        }
-        if ($values['ranking_column'] == '3') {
-            $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
-        }
-    }
+if (count($data) > 0 && is_array($data)) {
+    $column1 = $data['column1'];
+    $column2 = $data['column2'];
+    $column3 = $data['column3'];
+    $column4 = $data['column4'];
+    $title   = $data['title'];
+    $actual_link = $data['actual_link'];
 }
-
 ?>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; utf-8" />
-        <title>Budget Predictor</title>
+        <title><?php print $title; ?></title>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
 
@@ -53,28 +24,40 @@ if (!empty($data)) {
 
         <p class="success" style="display:none;">Success</p>
         <div id="ranking-content">
-            <div id="ranking-label">CHEAPER</div>    
+            <div id="ranking-label">Cheaper</div>    
             <ul id="sortable1" class="connectedSortable">
                 <?php echo $column1; ?>
             </ul>
         </div>
         <div id="ranking-content">
-            <div id="ranking-label">DEARER</div>    
+            <div id="ranking-label">Dearer</div>    
             <ul id="sortable2" class="connectedSortable">
                 <?php echo $column2; ?>
             </ul>
         </div>
         <div id="ranking-content">
-            <div id="ranking-label">NONE</div>    
+            <div id="ranking-label">Same</div>    
             <ul id="sortable3" class="connectedSortable">
                 <?php echo $column3; ?>
             </ul>
         </div>
         <div id="ranking-content">
-            <div id="ranking-label"></div>    
+            <div id="ranking-label">ITEMS</div>    
             <ul id="sortable4" class="connectedSortable">
                 <?php echo $column4; ?>
             </ul>
         </div>
+        
+           <div class="social-list">
+            <ul>
+                <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>SHARE</span></li>
+                <li class="mhide"><div id="fb-root"></div><a onclick="badget_fb_share('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li class="mhide"><a href="javascript:" onclick="badget_twitter_share('<?php print urlencode($title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li class="mhide"><a title="share on google+" href="#" onclick="return badget_google_plus_share('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
+                <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
+                <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
+            </ul>
+          </div>
+        
     </body>
 </html>
