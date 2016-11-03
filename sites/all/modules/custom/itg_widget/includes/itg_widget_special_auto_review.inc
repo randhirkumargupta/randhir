@@ -22,6 +22,8 @@ function save_special_auto_review_widget_data($auto_review_content) {
                     ->condition('widget', $widget_name)
                     ->condition('nid', $node)
                     ->execute();
+             $max_weight=get_max_weight_for_special($widget_name);
+
             db_insert('itg_widget_order')
                     ->fields(array(
                         'nid' => $node,
@@ -29,7 +31,7 @@ function save_special_auto_review_widget_data($auto_review_content) {
                         'cat_id' => $_GET['category_tid'],
                         'content_type' => $node_load_data->type,
                         //'extra' => $field_names[$node],
-                        'weight' => 0,
+                        'weight' => ++$max_weight,
                     ))
                     ->execute();
         }

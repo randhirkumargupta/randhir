@@ -672,6 +672,7 @@ function itg_widget_highlights_block_data($info) {
           if ($theme == FRONT_THEME_NAME) {
           $cat_id = arg(2);
          }
+        
   $data = array();
   
   if (!empty($widget_name)) {
