@@ -91,7 +91,7 @@ function feature_for_most_election_popular_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '<img src="http://qa.indiatodayonline.in/sites/all/themes/itg/images/default_for_all.png" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'home_page_feature_small',
+    'image_style' => 'video_landing_page_170_x_127',
     'image_link' => '',
   );
   /* Field: Content: Title */
