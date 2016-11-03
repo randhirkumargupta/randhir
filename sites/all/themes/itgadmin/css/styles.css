@@ -9269,3 +9269,7 @@ div.node #comments h2 {
 [id*="protected-pages-enter-password"] fieldset .form-submit {
   margin-left: 250px;
 }
+
+[id*="draggableviews-table"] thead th.views-field-counter {
+  white-space: nowrap;
+}

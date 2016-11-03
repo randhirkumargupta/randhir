@@ -8579,3 +8579,8 @@ div.node{
     }
   }
 }
+[id*="draggableviews-table"]{
+  thead th.views-field-counter{
+    white-space: nowrap;
+  }
+}
