@@ -88,6 +88,28 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
   $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'itg_follow';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Taxonomy vocabulary: Machine name */
+  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['value'] = array(
+    'tags' => 'tags',
+  );
+  /* Filter criterion: Taxonomy term: Set As Featured (field_set_as_featured_cate) */
+  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['id'] = 'field_set_as_featured_cate_value';
+  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['table'] = 'field_data_field_set_as_featured_cate';
+  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['field'] = 'field_set_as_featured_cate_value';
+  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['value'] = array(
+    'Yes' => 'Yes',
+  );
+  /* Filter criterion: Flags: Flagged */
+  $handler->display->display_options['filters']['flagged']['id'] = 'flagged';
+  $handler->display->display_options['filters']['flagged']['table'] = 'flagging';
+  $handler->display->display_options['filters']['flagged']['field'] = 'flagged';
+  $handler->display->display_options['filters']['flagged']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['filters']['flagged']['value'] = '0';
 
   /* Display: Following */
   $handler = $view->new_display('block', 'Following', 'block_1');
@@ -107,6 +129,14 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  /* Field: Flags: Flag link */
+  $handler->display->display_options['fields']['ops']['id'] = 'ops';
+  $handler->display->display_options['fields']['ops']['table'] = 'flagging';
+  $handler->display->display_options['fields']['ops']['field'] = 'ops';
+  $handler->display->display_options['fields']['ops']['relationship'] = 'flag_content_rel';
+  $handler->display->display_options['fields']['ops']['label'] = '';
+  $handler->display->display_options['fields']['ops']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['ops']['link_type'] = 'normal';
   $export['follow_tags'] = $view;
 
   $view = new view();
