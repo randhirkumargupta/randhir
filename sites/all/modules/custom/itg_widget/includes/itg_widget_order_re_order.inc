@@ -61,7 +61,7 @@ function itg_widget_form_views_form_special_auto_review_widget_special_auto_revi
                  jQuery("#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list").find("th.tabledrag-hide").html("Label");
           });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
 
-  drupal_add_css('#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
+  drupal_add_css('#draggableviews-table-special-auto-review-widget-special-auto-review-widget-list .tabledrag-hide {display:table-cell !important;} .draggableviews-weight {display:none}', 'inline');
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_special_auto_review";
 }
 
@@ -91,7 +91,7 @@ function itg_widget_form_views_form_special_how_i_made_it_special_how_made_widge
                  jQuery("#draggableviews-table-special-how-i-made-it-special-how-made-widget-list").find("th.tabledrag-hide").html("Label");
           });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
 
-  drupal_add_css('#draggableviews-table-special-how-i-made-it-special-how-made-widget-list .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
+  drupal_add_css('#draggableviews-table-special-how-i-made-it-special-how-made-widget-list .tabledrag-hide {display:table-cell !important;} .draggableviews-weight {display:none}', 'inline');
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_special_how_i_made_it_review";
 }
 
@@ -141,7 +141,7 @@ function itg_widget_form_views_form_yearender_top_news_and_top_videos_yearend_le
                  jQuery("#draggableviews-table-yearender-top-news-and-top-videos-yearend-left-widget-list").find("th.tabledrag-hide").html("Label");
           });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
 
-  drupal_add_css('#draggableviews-table-yearender-top-news-and-top-videos-yearend-left-widget-list .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
+  drupal_add_css('#draggableviews-table-yearender-top-news-and-top-videos-yearend-left-widget-list .tabledrag-hide {display:table-cell !important;} .draggableviews-weight {display:none}', 'inline');
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_yearend_left";
 }
 
@@ -181,7 +181,7 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_dont_miss
                  jQuery("#draggableviews-table-section-wise-content-ordering-list-dont-miss-content").find("th.tabledrag-hide").html("Label");
           });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
 
-  drupal_add_css('#draggableviews-table-section-wise-content-ordering-list-dont-miss-content .tabledrag-hide {display:block !important;} .draggableviews-weight {display:none}', 'inline');
+  drupal_add_css('#draggableviews-table-section-wise-content-ordering-list-dont-miss-content .tabledrag-hide {display:table-cell !important;} .draggableviews-weight {display:none}', 'inline');
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_dont_miss";
 }
 
