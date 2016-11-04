@@ -279,10 +279,9 @@
 #block-views-photo-landing-slider-block .social-icon.desktop-hide {
   margin: 10px 0;
 }
-#block-views-photo-landing-slider-block .photoby {
+#block-views-photo-landing-slider-block .photo-by {
   font-size: 14px;
   color: #626262;
-  margin-top: 10px;
 }
 
 .itg-h450-section .widget-wrapper {
@@ -875,6 +874,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding-left: 160px;
   z-index: 9;
 }
+#content #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  z-index: 9;
+}
 #content #block-formblock-ugc .node-ugc-form .form-type-textarea {
   display: inline-block;
   vertical-align: top;
@@ -1210,6 +1215,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 #block-itg-personalization-user-my-point .header-point span a {
   color: #1a3c8d;
+}
+#block-itg-personalization-user-my-point .header-point span a:hover {
+  text-decoration: underline;
 }
 
 /* End of Personalization CSS */
@@ -3526,4 +3534,67 @@ body.has-cart-popup {
 
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox {
   padding: 0;
+}
+
+.page-personalization-my-following .region-personalization {
+  text-align: center;
+}
+.page-personalization-my-following #block-views-follow-tags-block,
+.page-personalization-my-following #block-views-follow-tags-block-1 {
+  display: inline-block;
+  vertical-align: top;
+  width: 400px;
+  padding: 50px 0;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row {
+  padding: 10px;
+  text-align: left;
+  background: #fefefe;
+  border: 1px solid #d9d9d9;
+  position: relative;
+  margin: 15px;
+  border-radius: 5px;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-name,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-name {
+  padding-right: 75px;
+  font: 400 16px/20px Roboto;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops {
+  font: 400 14px/20px Roboto;
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops a,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops a {
+  color: #1a3c8d;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops a:hover,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops a:hover {
+  text-decoration: underline;
+}
+
+.continue-shopping a {
+  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #a00606;
+  color: #fff;
+  font: 400 14px/18px Roboto;
+}
+
+.continue-shopping {
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+}
+
+.cart-detail a.button {
+  color: #1a3c8d;
+}
+.cart-detail a.button:hover {
+  text-decoration: underline;
 }
