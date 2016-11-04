@@ -53,7 +53,7 @@
         </div>
         <?php print drupal_render($form['field_video_duration']); ?>
         <div class="browse-video-form"><?php print drupal_render($form['field_upload_video']); ?>
-          <div class="ftp_browse_field"><label for="edit-field-upload-video-und-0-upload">Video <span title="This field is required." class="form-required">*</span></label><span class="browse-ftp-click">Browse Video</span></div>
+<!--          <div class="ftp_browse_field"><label for="edit-field-upload-video-und-0-upload">Video <span title="This field is required." class="form-required">*</span></label><span class="browse-ftp-click">Browse Video</span></div>-->
           <span class="error vid-error"></span>
         </div>
         <?php print drupal_render($form['field_story_expert_name']); ?>
