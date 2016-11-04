@@ -14,19 +14,19 @@
  */
 function itg_reporter_menu() {
 
-  $items['content-email-list/%/autocomplete'] = array(
-    'page callback' => 'itg_reporter_get_content_email',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
+    $items['content-email-list/%/autocomplete'] = array(
+        'page callback' => 'itg_reporter_get_content_email',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
-  $items['content-twitter-list/%/autocomplete'] = array(
-    'page callback' => 'itg_reporter_get_twitter_handle',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
+    $items['content-twitter-list/%/autocomplete'] = array(
+        'page callback' => 'itg_reporter_get_twitter_handle',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
-  return $items;
+    return $items;
 }
 
 /**
@@ -34,12 +34,12 @@ function itg_reporter_menu() {
  * @return array
  */
 function itg_reporter_block_info() {
-  $blocks['reporter_tab_form_block'] = array(
-    'info' => t('Reporter Form Tab Block'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['reporter_tab_form_block'] = array(
+        'info' => t('Reporter Form Tab Block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  return $blocks;
+    return $blocks;
 }
 
 /**
@@ -47,15 +47,15 @@ function itg_reporter_block_info() {
  * {@inheritdoc}
  */
 function itg_reporter_block_view($delta = '') {
-  $block = array();
+    $block = array();
 
-  switch ($delta) {
-    case 'reporter_tab_form_block':
-      $block['content'] = theme('reporter_tab_form_display_block', array('data' => ''));
-      break;
-  }
+    switch ($delta) {
+        case 'reporter_tab_form_block':
+            $block['content'] = theme('reporter_tab_form_display_block', array('data' => ''));
+            break;
+    }
 
-  return $block;
+    return $block;
 }
 
 /**
@@ -63,21 +63,21 @@ function itg_reporter_block_view($delta = '') {
  * {@inheritdoc}
  */
 function itg_reporter_theme($existing, $type, $theme, $path) {
-  $themes = array(
-    'reporter_tab_form_display_block' => array(
-      'template' => 'reporter-form-tab-template',
-      'path' => drupal_get_path('module', 'itg_reporter') . '/templates',
-      'variables' => array('data' => NULL),
-    ),
-    'reporter_node_form' => array(
-      'arguments' => array('form' => NULL),
-      'template' => 'reporter-node-form',
-      'path' => drupal_get_path('module', 'itg_reporter') . '/templates',
-      'render element' => 'form',
-    ),
-  );
+    $themes = array(
+        'reporter_tab_form_display_block' => array(
+            'template' => 'reporter-form-tab-template',
+            'path' => drupal_get_path('module', 'itg_reporter') . '/templates',
+            'variables' => array('data' => NULL),
+        ),
+        'reporter_node_form' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'reporter-node-form',
+            'path' => drupal_get_path('module', 'itg_reporter') . '/templates',
+            'render element' => 'form',
+        ),
+    );
 
-  return $themes;
+    return $themes;
 }
 
 /**
@@ -85,84 +85,82 @@ function itg_reporter_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
-  global $user;
+    global $user;
 
-  if ($form_id == 'reporter_node_form') {
-    $node_type = $form['#node']->type;
-    // code to change page title on node edit
-    if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
-      if ($node_type == 'reporter') {
-        $node_type = ucfirst('Byline');
-        $node_title = $form['#node']->title;
-        $edit_title = t('Edit ') . $node_type . ' - ' . $node_title;
-        drupal_set_title($edit_title);
-      }
-    }
-    else {
-      $node_type = ucfirst('Byline');
-      $add_title = t('Create ') . $node_type;
-      drupal_set_title($add_title);
-    }
-
-    $form['#after_build'][] = 'itg_reporter_after_build';
-
-    $destination = 'byline-list';
-    $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-      '#weight' => 21,
-      '#value' => t('Cancel'),
-    );
-  }
-  
-  $frm_array = array('cooking_tips_node_form', 'story_node_form', 'videogallery_node_form', 'food_news_node_form', 'recipe_node_form', 'survey_node_form', 'quiz_node_form', 'photogallery_node_form');
-  if (in_array($form_id, $frm_array)) {
-    foreach ($form['field_story_reporter'][LANGUAGE_NONE] as $key => $buzz_item) {
-      if (!empty($buzz_item['target_id']['#default_value'])) {
-        preg_match('#\((.*?)\)#', $buzz_item['target_id']['#default_value'], $match);
-        $form['field_story_reporter'][LANGUAGE_NONE][$key]['target_id']['#default_value'] = itg_autocomplete_byline($match[1]);
-      }
-    }
-   
-   if (!empty($form['field_photo_by'][LANGUAGE_NONE]['#default_value'])) {
-        preg_match('#\((.*?)\)#', $form['field_photo_by'][LANGUAGE_NONE]['#default_value'], $match);
-        $form['field_photo_by'][LANGUAGE_NONE]['#default_value'] = itg_autocomplete_byline($match[1]);
-      }
-      
-  }
-  
-
-  if ($form_id == 'photogallery_node_form') {
-    foreach ($form['field_gallery_image']['und'] as $key => $val) {
-      if (isset($val['field_photo_byline']['und'])) {
-        if (isset($val['field_photo_byline']['und']['#default_value']) && !empty($val['field_photo_byline']['und']['#default_value'])) {
-          $exp_val = explode(',', $val['field_photo_byline']['und']['#default_value']);
-          $final_name = array();
-          foreach ($exp_val as $chuck) {
-            preg_match('#\((.*?)\)#', $chuck, $match);
-            $final_name[] = itg_autocomplete_byline($match[1]);
-          }
-          $final_implode = implode(', ', $final_name);
-          $form['field_gallery_image']['und'][$key]['field_photo_byline']['und']['#default_value'] = $final_implode;
+    if ($form_id == 'reporter_node_form') {
+        $node_type = $form['#node']->type;
+        // code to change page title on node edit
+        if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
+            if ($node_type == 'reporter') {
+                $node_type = ucfirst('Byline');
+                $node_title = $form['#node']->title;
+                $edit_title = t('Edit ') . $node_type . ' - ' . $node_title;
+                drupal_set_title($edit_title);
+            }
         }
-      }
-    }
-    
-    foreach ($form['field_gallery_image']['und'] as $key => $val) {
-      if (isset($val['field_photo_by']['und'])) {
-        if (isset($val['field_photo_by']['und']['#default_value']) && !empty($val['field_photo_by']['und']['#default_value'])) {
-          $exp_val = explode(',', $val['field_photo_by']['und']['#default_value']);
-          $final_name = array();
-          foreach ($exp_val as $chuck) {
-            preg_match('#\((.*?)\)#', $chuck, $match);
-            $final_name[] = itg_autocomplete_byline($match[1]);
-          }
-          $final_implode = implode(', ', $final_name);
-          $form['field_gallery_image']['und'][$key]['field_photo_by']['und']['#default_value'] = $final_implode;
+        else {
+            $node_type = ucfirst('Byline');
+            $add_title = t('Create ') . $node_type;
+            drupal_set_title($add_title);
         }
-      }
+
+        $form['#after_build'][] = 'itg_reporter_after_build';
+
+        $destination = 'byline-list';
+        $form['actions']['cancel'] = array(
+            '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+            '#weight' => 21,
+            '#value' => t('Cancel'),
+        );
     }
-    
-  }
+
+    $frm_array = array('cooking_tips_node_form', 'story_node_form', 'videogallery_node_form', 'food_news_node_form', 'recipe_node_form', 'survey_node_form', 'quiz_node_form', 'photogallery_node_form');
+    if (in_array($form_id, $frm_array)) {
+        foreach ($form['field_story_reporter'][LANGUAGE_NONE] as $key => $buzz_item) {
+            if (!empty($buzz_item['target_id']['#default_value'])) {
+                preg_match('#\((.*?)\)#', $buzz_item['target_id']['#default_value'], $match);
+                $form['field_story_reporter'][LANGUAGE_NONE][$key]['target_id']['#default_value'] = itg_autocomplete_byline($match[1]);
+            }
+        }
+
+        if (!empty($form['field_photo_by'][LANGUAGE_NONE]['#default_value'])) {
+            preg_match('#\((.*?)\)#', $form['field_photo_by'][LANGUAGE_NONE]['#default_value'], $match);
+            $form['field_photo_by'][LANGUAGE_NONE]['#default_value'] = itg_autocomplete_byline($match[1]);
+        }
+    }
+
+
+    if ($form_id == 'photogallery_node_form') {
+        foreach ($form['field_gallery_image']['und'] as $key => $val) {
+            if (isset($val['field_photo_byline']['und'])) {
+                if (isset($val['field_photo_byline']['und']['#default_value']) && !empty($val['field_photo_byline']['und']['#default_value'])) {
+                    $exp_val = explode(',', $val['field_photo_byline']['und']['#default_value']);
+                    $final_name = array();
+                    foreach ($exp_val as $chuck) {
+                        preg_match('#\((.*?)\)#', $chuck, $match);
+                        $final_name[] = itg_autocomplete_byline($match[1]);
+                    }
+                    $final_implode = implode(', ', $final_name);
+                    $form['field_gallery_image']['und'][$key]['field_photo_byline']['und']['#default_value'] = $final_implode;
+                }
+            }
+        }
+
+        foreach ($form['field_gallery_image']['und'] as $key => $val) {
+            if (isset($val['field_photo_by']['und'])) {
+                if (isset($val['field_photo_by']['und']['#default_value']) && !empty($val['field_photo_by']['und']['#default_value'])) {
+                    $exp_val = explode(',', $val['field_photo_by']['und']['#default_value']);
+                    $final_name = array();
+                    foreach ($exp_val as $chuck) {
+                        preg_match('#\((.*?)\)#', $chuck, $match);
+                        $final_name[] = itg_autocomplete_byline($match[1]);
+                    }
+                    $final_implode = implode(', ', $final_name);
+                    $form['field_gallery_image']['und'][$key]['field_photo_by']['und']['#default_value'] = $final_implode;
+                }
+            }
+        }
+    }
 }
 
 /**
@@ -173,25 +171,27 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_reporter_after_build($form, &$form_state) {
 
-  global $user, $base_url;
+    global $user, $base_url;
 
-  // get anchor id based on category name
+    // get anchor id based on category name
 
-  $tem_tid = taxonomy_get_term_by_name('anchor', NULL);
-  $tid = array_pop($tem_tid)->tid;
+    $tem_tid = taxonomy_get_term_by_name('anchor', NULL);
+    $tid = array_pop($tem_tid)->tid;
+    $tem_tid_poli = taxonomy_get_term_by_name('politician', NULL);
+    $tid_poli = array_pop($tem_tid_poli)->tid;
+    // alter label name
+    $form['title']['#title'] = t('Name');
 
-  // alter label name
-  $form['title']['#title'] = t('Name');
-  
-  $settings = array();
-  $settings['base_url'] = $base_url;
-  $settings['uid'] = $user->uid;
-  $settings['anchor'] = $tid;
-  $settings['ntype'] = $form['type']['#value'];
-  drupal_add_js(array('itg_reporter' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js');
+    $settings = array();
+    $settings['base_url'] = $base_url;
+    $settings['uid'] = $user->uid;
+    $settings['politician'] = $tid_poli;
+    $settings['anchor'] = $tid;
+    $settings['ntype'] = $form['type']['#value'];
+    drupal_add_js(array('itg_reporter' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js');
 
-  return $form;
+    return $form;
 }
 
 /**
@@ -199,10 +199,10 @@ function itg_reporter_after_build($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_reporter_views_pre_render(&$view) {
-  if ($view->name == "byline_list") {
-    $header_content = l(t('Create Byline'), 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
-    $view->attachment_before = $header_content;
-  }
+    if ($view->name == "byline_list") {
+        $header_content = l(t('Create Byline'), 'node/add/reporter', array('query' => array('destination' => 'byline-list')));
+        $view->attachment_before = $header_content;
+    }
 }
 
 /**
@@ -211,14 +211,14 @@ function itg_reporter_views_pre_render(&$view) {
  */
 function itg_reporter_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
-  if ($form['#id'] == 'views-exposed-form-byline-list-page') {
-    $form['title']['#autocomplete_path'] = 'content-title-list/reporter/autocomplete';
-    $form['title']['#attributes'] = array('placeholder' => t('Name'));
-    $form['field_reporter_email_id_value']['#autocomplete_path'] = 'content-email-list/reporter/autocomplete';
-    $form['field_reporter_email_id_value']['#attributes'] = array('placeholder' => t('Email id'));
-    $form['field_reporter_twitter_handle_value']['#autocomplete_path'] = 'content-twitter-list/reporter/autocomplete';
-    $form['field_reporter_twitter_handle_value']['#attributes'] = array('placeholder' => t('Twitter Handle'));
-  }
+    if ($form['#id'] == 'views-exposed-form-byline-list-page') {
+        $form['title']['#autocomplete_path'] = 'content-title-list/reporter/autocomplete';
+        $form['title']['#attributes'] = array('placeholder' => t('Name'));
+        $form['field_reporter_email_id_value']['#autocomplete_path'] = 'content-email-list/reporter/autocomplete';
+        $form['field_reporter_email_id_value']['#attributes'] = array('placeholder' => t('Email id'));
+        $form['field_reporter_twitter_handle_value']['#autocomplete_path'] = 'content-twitter-list/reporter/autocomplete';
+        $form['field_reporter_twitter_handle_value']['#attributes'] = array('placeholder' => t('Twitter Handle'));
+    }
 }
 
 /**
@@ -227,24 +227,24 @@ function itg_reporter_form_views_exposed_form_alter(&$form, &$form_state, $form_
  */
 function itg_reporter_get_content_email($email) {
 
-  if (strlen(trim($email)) > 0) {
-    $content_type = arg(1);
-    $options = '';
-    $email = strtolower(trim($email));
-    $query = db_select('field_data_field_reporter_email_id', 'fe');
-    $query->fields('fe', array('field_reporter_email_id_value'));
-    $query->condition('field_reporter_email_id_value', '%' . $email . '%', 'LIKE');
-    $query->condition('fe.bundle', $content_type, '=');
-    $query->range(0, 20);
+    if (strlen(trim($email)) > 0) {
+        $content_type = arg(1);
+        $options = '';
+        $email = strtolower(trim($email));
+        $query = db_select('field_data_field_reporter_email_id', 'fe');
+        $query->fields('fe', array('field_reporter_email_id_value'));
+        $query->condition('field_reporter_email_id_value', '%' . $email . '%', 'LIKE');
+        $query->condition('fe.bundle', $content_type, '=');
+        $query->range(0, 20);
 
-    $result = $query->execute();
+        $result = $query->execute();
 
-    while ($record = $result->fetchAssoc()) {
-      $options[$record['field_reporter_email_id_value']] = $record['field_reporter_email_id_value'];
+        while ($record = $result->fetchAssoc()) {
+            $options[$record['field_reporter_email_id_value']] = $record['field_reporter_email_id_value'];
+        }
+
+        drupal_json_output($options);
     }
-
-    drupal_json_output($options);
-  }
 }
 
 /**
@@ -253,24 +253,24 @@ function itg_reporter_get_content_email($email) {
  */
 function itg_reporter_get_twitter_handle($twitter) {
 
-  if (strlen(trim($twitter)) > 0) {
-    $content_type = arg(1);
-    $options = '';
-    $twitter = strtolower(trim($twitter));
-    $query = db_select('field_data_field_reporter_twitter_handle', 'ft');
-    $query->fields('ft', array('field_reporter_twitter_handle_value'));
-    $query->condition('field_reporter_twitter_handle_value', '%' . $twitter . '%', 'LIKE');
-    $query->condition('ft.bundle', $content_type, '=');
-    $query->range(0, 20);
+    if (strlen(trim($twitter)) > 0) {
+        $content_type = arg(1);
+        $options = '';
+        $twitter = strtolower(trim($twitter));
+        $query = db_select('field_data_field_reporter_twitter_handle', 'ft');
+        $query->fields('ft', array('field_reporter_twitter_handle_value'));
+        $query->condition('field_reporter_twitter_handle_value', '%' . $twitter . '%', 'LIKE');
+        $query->condition('ft.bundle', $content_type, '=');
+        $query->range(0, 20);
 
-    $result = $query->execute();
+        $result = $query->execute();
 
-    while ($record = $result->fetchAssoc()) {
-      $options[$record['field_reporter_twitter_handle_value']] = $record['field_reporter_twitter_handle_value'];
+        while ($record = $result->fetchAssoc()) {
+            $options[$record['field_reporter_twitter_handle_value']] = $record['field_reporter_twitter_handle_value'];
+        }
+
+        drupal_json_output($options);
     }
-
-    drupal_json_output($options);
-  }
 }
 
 /**
@@ -278,36 +278,36 @@ function itg_reporter_get_twitter_handle($twitter) {
  * @param Object $node
  */
 function itg_reporter_node_presave($node) {
-  if ($node->type == 'reporter') {
-    $previous_value = node_load($node->nid);
-    $previous_title = $previous_value->title;
-    $new_title = $node->title;
-    $previous_twitter_handle = $previous_value->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-    $new_twitter_handle = $node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+    if ($node->type == 'reporter') {
+        $previous_value = node_load($node->nid);
+        $previous_title = $previous_value->title;
+        $new_title = $node->title;
+        $previous_twitter_handle = $previous_value->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+        $new_twitter_handle = $node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
 
-    // condition for title update
-    if (($previous_title != $new_title) || ($previous_twitter_handle != $new_twitter_handle)) {
-      $nids = itg_reporter_get_all_story_nid($node->nid);
-      foreach ($nids as $value) {
-        $story_node = node_load($value);
-        // code for title replace
-        $story_byline = $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'];
-        $story_byline_exp = explode(',', trim($story_byline));
-        $final_name_arr = recursive_array_replace($previous_title, $new_title, $story_byline_exp);
-        $final_name = implode(',', $final_name_arr);
+        // condition for title update
+        if (($previous_title != $new_title) || ($previous_twitter_handle != $new_twitter_handle)) {
+            $nids = itg_reporter_get_all_story_nid($node->nid);
+            foreach ($nids as $value) {
+                $story_node = node_load($value);
+                // code for title replace
+                $story_byline = $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'];
+                $story_byline_exp = explode(',', trim($story_byline));
+                $final_name_arr = recursive_array_replace($previous_title, $new_title, $story_byline_exp);
+                $final_name = implode(',', $final_name_arr);
 
-        // code for twitter handle replace
-        $story_twitter = $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
-        $story_twitter_exp = explode(',', trim($story_twitter));
-        $final_twitter_arr = recursive_array_replace($previous_twitter_handle, $new_twitter_handle, $story_twitter_exp);
-        $final_twitter = implode(',', $final_twitter_arr);
+                // code for twitter handle replace
+                $story_twitter = $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'];
+                $story_twitter_exp = explode(',', trim($story_twitter));
+                $final_twitter_arr = recursive_array_replace($previous_twitter_handle, $new_twitter_handle, $story_twitter_exp);
+                $final_twitter = implode(',', $final_twitter_arr);
 
-        $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_name;
-        $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_twitter;
-        field_attach_update('node', $story_node);
-      }
+                $story_node->field_itg_common_by_line_name[LANGUAGE_NONE][0]['value'] = $final_name;
+                $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_twitter;
+                field_attach_update('node', $story_node);
+            }
+        }
     }
-  }
 }
 
 /**
@@ -317,14 +317,14 @@ function itg_reporter_node_presave($node) {
  * @param array $array
  */
 function recursive_array_replace($find, $replace, $array) {
-  if (!is_array($array)) {
-    return str_replace($find, $replace, $array);
-  }
-  $newArray = array();
-  foreach ($array as $key => $value) {
-    $newArray[$key] = recursive_array_replace($find, $replace, $value);
-  }
-  return $newArray;
+    if (!is_array($array)) {
+        return str_replace($find, $replace, $array);
+    }
+    $newArray = array();
+    foreach ($array as $key => $value) {
+        $newArray[$key] = recursive_array_replace($find, $replace, $value);
+    }
+    return $newArray;
 }
 
 /**
@@ -333,36 +333,39 @@ function recursive_array_replace($find, $replace, $array) {
  */
 function itg_reporter_get_all_story_nid($source_id) {
 
-  $query = db_select('field_data_field_common_by_line_reporter_id', 'c');
-  $query->fields('c', array('entity_id'));
-  $query->condition('c.field_common_by_line_reporter_id_value', '%' . $source_id . '%', 'LIKE');
-  $result = $query->execute();
-  while ($record = $result->fetchAssoc()) {
-    $options[] = $record['entity_id'];
-  }
+    $query = db_select('field_data_field_common_by_line_reporter_id', 'c');
+    $query->fields('c', array('entity_id'));
+    $query->condition('c.field_common_by_line_reporter_id_value', '%' . $source_id . '%', 'LIKE');
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+        $options[] = $record['entity_id'];
+    }
 
-  return $options;
+    return $options;
 }
-
 
 /**
  * Implement itg_autocomplete_byline
  * @param array $id
  */
 function itg_autocomplete_byline($id) {
-  
-  $reporter_name = db_select('node', 'n');
-  $reporter_name->join('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
-  $reporter_name->fields('n', array('title', 'nid'));
-  $reporter_name->fields('re', array('field_reporter_email_id_value'));
-  $reporter_name->condition('n.type', 'reporter', '=');
-  $reporter_name->condition('n.nid', $id , '=');
-  $result = $reporter_name->execute();
-  //$name_format = array();
-   $record = $result->fetchAssoc();
-   $r_title = ucfirst($record['title']);
-   $r_nid = strtolower($record['nid']);
-   $name_format = $r_title.'('.$record['field_reporter_email_id_value'].')('.$r_nid.')';
-  
- return $name_format;
+    $reporter_name = db_select('node', 'n');
+    $reporter_name->leftJoin('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
+    $reporter_name->fields('n', array('title', 'nid'));
+    $reporter_name->fields('re', array('field_reporter_email_id_value'));
+    $reporter_name->condition('n.type', 'reporter', '=');
+    $reporter_name->condition('n.nid', $id, '=');
+    $result = $reporter_name->execute();
+    //$name_format = array();
+    $record = $result->fetchAssoc();
+    $r_title = ucfirst($record['title']);
+    $r_nid = strtolower($record['nid']);
+    if (!empty($record['field_reporter_email_id_value'])) {
+        $name_format = $r_title . '(' . $record['field_reporter_email_id_value'] . ')(' . $r_nid . ')';
+    }
+    else {
+        $name_format = $r_title . '(' . $r_nid . ')';
+    }
+
+    return $name_format;
 }

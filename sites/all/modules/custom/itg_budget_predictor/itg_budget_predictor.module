@@ -23,7 +23,7 @@ function itg_budget_predictor_menu() {
  * Custom callback for itg_budget_predictor
  */
 function itg_budget_predictor_custom() {
-  return 'Welcome';
+  return 'CHEAPER/DEARER';
 }
 
 /**

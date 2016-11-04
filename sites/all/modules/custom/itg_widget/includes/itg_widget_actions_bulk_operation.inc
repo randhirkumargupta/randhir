@@ -132,6 +132,10 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_read');
     save_most_read_widget_data($form_state);
   }
+  elseif ($current_display == 'special_key_candidate_widget_contents') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_key_candidate');
+    save_key_candidate_data($form_state);
+  }
   elseif ($current_display == 'feature_content_section_widget_contents') {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_feature_content_section');
     save_feature_content_section_widget_data($form_state);
