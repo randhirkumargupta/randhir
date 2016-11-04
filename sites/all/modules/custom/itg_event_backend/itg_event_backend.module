@@ -13,6 +13,8 @@
  * {@inheritdoc}
  */
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
+  
+  // Form alter for event backend node
   if ($form_id == "event_backend_node_form") {
     $form['#after_build'][] = 'itg_event_backend_after_build';
     array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
@@ -68,13 +70,45 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       $_SESSION['current_step'] = $form_state['storage']['step'];
     }
   }
+  
+  // Form alter for sponsor node
   if ($form_id == 'sponsor_node_form') {
     $form['actions']['submit']['#submit'][] = 'itg_sponsor_alter_submit_status_message';
     $form['#after_build'][] = 'itg_event_backend_sponsor';
     $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), 'manage-sponsor', array('attributes' => array('class' => 'button'))),
-      '#weight' => 20,
+        '#markup' => l(t('Cancel'), 'manage-sponsor', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
     );
+  }
+
+  // Form alter for event configurations node
+  if ($form_id == 'event_configurations_node_form') {
+    if (module_exists('domain')) {
+      $format = domain_select_format();
+      foreach (domain_domains() as $data) {
+        if ($data['valid'] || user_access('access inactive domains')) {
+          $options[$data['sitename']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
+        }
+      }
+    }
+    
+    unset($form['title']);
+    unset($form['#metatags']);
+    unset($form['actions']['preview']);
+    
+    // Prepare domain drop-down
+    $domain_selected_value = $form['field_ec_select_domain'][LANGUAGE_NONE]['#entity']->field_ec_select_domain[LANGUAGE_NONE][0]['value'];
+    if($domain_selected_value) {
+      $form['field_ec_select_domain'][LANGUAGE_NONE]['#default_value'] = $domain_selected_value;
+    }
+    $form['field_ec_select_domain'][LANGUAGE_NONE]['#options'] = $options;
+    
+    $form['#after_build'][] = 'itg_event_backend_event_configurations_after_build';
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'manage-event-configuration', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+    );
+
   }
 }
 
@@ -216,6 +250,18 @@ function itg_event_backend_sponsor($form, &$form_state) {
 }
 
 /**
+ * Custom functions form after build for "event_configurations"
+ * @param array $form
+ * @param array $form_state
+ * @return boolean
+ */
+function itg_event_backend_event_configurations_after_build($form, &$form_state) {
+  $form['field_ec_select_domain'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
+  $form['path']['#access'] = FALSE;
+  return $form;
+}
+
+/**
  * After build for Event backend form.
  * @param array $form
  * @param array $form_state
@@ -312,7 +358,7 @@ function itg_event_backend_after_build($form, &$form_state) {
     $form['actions']['submit2']['#access'] = FALSE;
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
-    $form['path']['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
+    $form['metatags']['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
   }
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
     $form['actions']['submit']['#access'] = TRUE;
@@ -585,6 +631,12 @@ function itg_event_backend_views_pre_render(&$view) {
     $sponsor_content .= l(t('Create Sponsor'), 'node/add/sponsor', array('query' => array('destination' => 'manage-sponsor')));
     $view->attachment_before = $sponsor_content;
   }
+  if ($view->name == "manage_event_configuration") {
+    $event_conf = '';
+    $event_conf .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $event_conf .= l(t('Configure New Event'), 'node/add/event-configurations', array('query' => array('destination' => 'manage-event-configuration')));
+    $view->attachment_before = $event_conf;
+  }
 }
 
 /**
@@ -620,6 +672,47 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
     );
   }
   
+}
+
+/**
+ * Implementation of hook_node_presave
+ * {@inheritdoc}
+ */
+function itg_event_backend_node_presave($node) {
+  if ($node->type == 'event_configurations') {
+    $node->title = $node->field_ec_select_domain[LANGUAGE_NONE][0]['value'];
+  }
+}
+
+/**
+ * Implementation of hook_node_validate
+ * {@inheritdoc}
+ */
+function itg_event_backend_node_validate($node) {
+  if ($node->type == 'event_configurations') {
+    if (arg(2) != 'edit') {
+      $current_domain = $node->field_ec_select_domain[LANGUAGE_NONE][0]['value'];
+      $already_configured_domains = itg_event_backend_get_all_configure_domain();
+      if (in_array($current_domain, $already_configured_domains)) {
+        form_set_error('field_ec_select_domain', t('This domain is already configured, please edit and modify existing domain.'));
+      }
+    }
+  }
+}
+
+/**
+ * Get all configured domains
+ * @return type
+ */
+function itg_event_backend_get_all_configure_domain() {
+  $query = db_select('field_data_field_ec_select_domain', 'd');
+  $query->fields('d', array('field_ec_select_domain_value'));
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $domains[] = $record['field_ec_select_domain_value'];
+  }
+  return $domains;
 }
 
 /**
@@ -942,4 +1035,17 @@ function itg_event_backend_vukkul_content($nid) {
 
                </script>';
   return $output;
+}
+
+/**
+ * Get host node
+ * @param string $host
+ * @return object
+ */
+function itg_event_backend_get_host_node($host) {
+      $query = db_select('node', 'n')
+            ->fields('n', array('nid'))
+            ->condition('n.title', $host, '=');
+
+    return node_load($query->execute()->fetchField());
 }

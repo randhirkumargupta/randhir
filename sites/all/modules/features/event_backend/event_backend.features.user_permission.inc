@@ -152,6 +152,7 @@ function event_backend_user_default_permissions() {
   $permissions['set domain access'] = array(
     'name' => 'set domain access',
     'roles' => array(
+      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
