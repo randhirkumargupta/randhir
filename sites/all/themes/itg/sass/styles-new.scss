@@ -256,10 +256,9 @@
                 margin: 10px 0;
             }
         }
-        .photoby{
+        .photo-by{
             font-size: 14px;
             color: #626262;
-            margin-top: 10px;
         }
 
 }
@@ -835,6 +834,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           padding-left: 160px;
           z-index: 9;
         }
+          span.error{
+            position: absolute;
+            right: 5px;
+            top: 8px;
+            z-index: 9;
+          }
       }
       .form-type-textarea{
         display: inline-block;
@@ -1136,6 +1141,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
       a{
         color: #1a3c8d;
+        &:hover{
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -2520,8 +2528,11 @@ body.has-cart-popup{
         background: none;
     }
     .messages--status, .messages--error{
-        max-width: 440px;
-        margin: 20px auto 0;
+        background-color: #fefafb;
+        border: 1px solid red;
+        margin: 20px auto;
+        max-width: 540px;
+        padding: 10px;
     }
     .messages--error{
         .messages__list{
@@ -3508,4 +3519,64 @@ body.has-cart-popup{
 }
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox{
   padding: 0;
+}
+.page-personalization-my-following{
+    .region-personalization{text-align: center;}
+    #block-views-follow-tags-block,
+    #block-views-follow-tags-block-1{
+        display: inline-block;
+        vertical-align: top;
+        width: 400px;
+        padding: 50px 0;
+        .view-follow-tags{
+            .views-row{
+                padding:10px;
+                text-align: left;
+                border: 1px solid #d9d9d9;
+                position: relative;
+                margin: 15px;
+                border-radius: 5px;
+                &:hover{
+                  background-color: #efefef;
+                }
+                .views-field-name{
+                    padding-right: 75px;
+                    font: 400 16px/20px Roboto;
+                }
+                .views-field-ops{
+                    font: 400 14px/20px Roboto;
+                    position: absolute;
+                    right: 5px;
+                    top: 10px;
+                    a{
+                        color: #1a3c8d;
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.cart-detail .continue-shopping a {
+  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #a00606;
+  color: #fff;
+  font: 400 14px/18px Roboto;
+}
+.continue-shopping {
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+}
+.cart-detail{
+  a.button{
+    color: #1a3c8d;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }

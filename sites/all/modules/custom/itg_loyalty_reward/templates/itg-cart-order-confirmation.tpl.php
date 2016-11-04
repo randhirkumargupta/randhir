@@ -7,7 +7,7 @@
 <div class="order-confirmation">
     <div class="thankyou-block">
         <h2>Thank you for your order</h2>
-        <p>Your order has been processed and is being processed. Once the item is shipped, you will 
+        <p>Your order has been placed and is being processed. Once the item is shipped, you will
             receive an email with details.
         </p>
     </div>
@@ -41,7 +41,7 @@
                     <?php $item_total = $cart_detail['product']['points'] * $cart_detail['quantity']; ?>
                     <?php $cart_total += $item_total; ?>
                   <div class="col-md-3">
-                    <div class="total-points"><?php echo $item_total; ?></div>
+                    <div class="total-points"><?php echo number_format($item_total) . t(' Points'); ?></div>
                   </div>
                 </div>
             <?php endforeach; ?>
