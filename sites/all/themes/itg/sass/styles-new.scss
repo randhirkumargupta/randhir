@@ -2528,8 +2528,11 @@ body.has-cart-popup{
         background: none;
     }
     .messages--status, .messages--error{
-        max-width: 440px;
-        margin: 20px auto 0;
+        background-color: #fefafb;
+        border: 1px solid red;
+        margin: 20px auto;
+        max-width: 540px;
+        padding: 10px;
     }
     .messages--error{
         .messages__list{
@@ -3529,11 +3532,13 @@ body.has-cart-popup{
             .views-row{
                 padding:10px;
                 text-align: left;
-                background: #fefefe;
                 border: 1px solid #d9d9d9;
                 position: relative;
                 margin: 15px;
                 border-radius: 5px;
+                &:hover{
+                  background-color: #efefef;
+                }
                 .views-field-name{
                     padding-right: 75px;
                     font: 400 16px/20px Roboto;
@@ -3554,7 +3559,7 @@ body.has-cart-popup{
         }
     }
 }
-.continue-shopping a {
+.cart-detail .continue-shopping a {
   padding: 5px;
   display: inline-block;
   vertical-align: top;
