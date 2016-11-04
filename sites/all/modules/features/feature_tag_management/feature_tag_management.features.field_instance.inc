@@ -10,39 +10,6 @@
 function feature_tag_management_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'taxonomy_term-tags-field_set_as_featured_cate'.
-  $field_instances['taxonomy_term-tags-field_set_as_featured_cate'] = array(
-    'bundle' => 'tags',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 5,
-      ),
-    ),
-    'entity_type' => 'taxonomy_term',
-    'exclude_cv' => 0,
-    'field_name' => 'field_set_as_featured_cate',
-    'label' => 'Set As Featured',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 42,
-    ),
-  );
-
   // Exported field_instance: 'taxonomy_term-tags-field_tags_display'.
   $field_instances['taxonomy_term-tags-field_tags_display'] = array(
     'bundle' => 'tags',
@@ -120,7 +87,6 @@ function feature_tag_management_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Feature Tags');
-  t('Set As Featured');
   t('Tag Status');
 
   return $field_instances;

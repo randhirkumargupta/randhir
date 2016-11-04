@@ -68,11 +68,11 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['filters']['machine_name']['value'] = array(
     'tags' => 'tags',
   );
-  /* Filter criterion: Taxonomy term: Set As Featured (field_set_as_featured_cate) */
-  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['id'] = 'field_set_as_featured_cate_value';
-  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['table'] = 'field_data_field_set_as_featured_cate';
-  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['field'] = 'field_set_as_featured_cate_value';
-  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['value'] = array(
+  /* Filter criterion: Taxonomy term: Feature Tags (field_tags_display) */
+  $handler->display->display_options['filters']['field_tags_display_value']['id'] = 'field_tags_display_value';
+  $handler->display->display_options['filters']['field_tags_display_value']['table'] = 'field_data_field_tags_display';
+  $handler->display->display_options['filters']['field_tags_display_value']['field'] = 'field_tags_display_value';
+  $handler->display->display_options['filters']['field_tags_display_value']['value'] = array(
     'Yes' => 'Yes',
   );
 
@@ -97,11 +97,11 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['filters']['machine_name']['value'] = array(
     'tags' => 'tags',
   );
-  /* Filter criterion: Taxonomy term: Set As Featured (field_set_as_featured_cate) */
-  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['id'] = 'field_set_as_featured_cate_value';
-  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['table'] = 'field_data_field_set_as_featured_cate';
-  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['field'] = 'field_set_as_featured_cate_value';
-  $handler->display->display_options['filters']['field_set_as_featured_cate_value']['value'] = array(
+  /* Filter criterion: Taxonomy term: Feature Tags (field_tags_display) */
+  $handler->display->display_options['filters']['field_tags_display_value']['id'] = 'field_tags_display_value';
+  $handler->display->display_options['filters']['field_tags_display_value']['table'] = 'field_data_field_tags_display';
+  $handler->display->display_options['filters']['field_tags_display_value']['field'] = 'field_tags_display_value';
+  $handler->display->display_options['filters']['field_tags_display_value']['value'] = array(
     'Yes' => 'Yes',
   );
   /* Filter criterion: Flags: Flagged */
