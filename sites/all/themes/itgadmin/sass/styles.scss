@@ -1548,6 +1548,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-ugc-comment-menu,
 #block-menu-menu-astro-content-admin-menu,
 #block-menu-menu-recipe-content-admin-menu,
+#block-menu-menu-recipe-admin-menu,
 #block-menu-menu-podcast-admin-menu,
 #block-menu-menu-print-team-menu,
 #block-menu-menu-videogallery-admin-menu,
@@ -5744,7 +5745,7 @@ div.node{
   border-top: 1px solid #d9d9d9;
   margin-bottom: 50px;
   padding: 0 30px 25px;
-  #edit-submit{margin-top: 38px;}
+  [id*="edit-submit"]{margin-top: 38px;}
 }
 .widget-loader{
   bottom: 0;
@@ -8595,5 +8596,19 @@ div.node{
         display: none;
       }
     }
+  }
+}
+
+[id*="domain-form"]{
+  .form-submit{
+    @extend .btn;
+    @extend .btn-save;
+    margin-left: 250px;
+  }
+}
+[id*="node-event_configurations-form"]{
+  .form-field-type-color-field-rgb{
+    padding: 0 30px;
+    margin: 30px 0;
   }
 }
