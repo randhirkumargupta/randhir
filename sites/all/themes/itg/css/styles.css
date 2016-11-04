@@ -510,10 +510,11 @@ header {
   padding-right: 0;
   position: absolute;
   top: 37px;
-  right: 50px;
   z-index: 10;
   background: #a00606;
   display: none;
+  margin-left: 0;
+  margin-right: 0;
 }
 #block-itg-layout-manager-header-block .navigation ul#newlist li {
   float: none;
