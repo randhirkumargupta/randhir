@@ -2528,8 +2528,11 @@ body.has-cart-popup{
         background: none;
     }
     .messages--status, .messages--error{
-        max-width: 440px;
-        margin: 20px auto 0;
+        background-color: #fefafb;
+        border: 1px solid red;
+        margin: 20px auto;
+        max-width: 540px;
+        padding: 10px;
     }
     .messages--error{
         .messages__list{

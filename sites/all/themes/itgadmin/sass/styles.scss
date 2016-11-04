@@ -8584,3 +8584,13 @@ div.node{
     white-space: nowrap;
   }
 }
+.node-survey-form{
+  [id*="field-story-reporter-values"]{
+    thead tr th label{padding-top: 8px;}
+    .form-type-textfield{
+      > label{
+        display: none;
+      }
+    }
+  }
+}

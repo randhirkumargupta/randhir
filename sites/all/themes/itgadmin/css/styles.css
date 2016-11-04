@@ -9273,3 +9273,10 @@ div.node #comments h2 {
 [id*="draggableviews-table"] thead th.views-field-counter {
   white-space: nowrap;
 }
+
+.node-survey-form [id*="field-story-reporter-values"] thead tr th label {
+  padding-top: 8px;
+}
+.node-survey-form [id*="field-story-reporter-values"] .form-type-textfield > label {
+  display: none;
+}
