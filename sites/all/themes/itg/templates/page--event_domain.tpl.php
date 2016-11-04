@@ -2,18 +2,24 @@
 /**
  * @file
  * Returns the HTML for a single Drupal page.
- *
- * Complete documentation for this file is available online.
- * @see https://drupal.org/node/1728148
  */
+
 global $base_url;
-$banner_img = drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
+$actual_host = explode('://', $base_url);
+$host_node = itg_event_backend_get_host_node($actual_host[1]);
+$banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $host_node->field_ec_event_banner[LANGUAGE_NONE][0]['uri']);
+$banner_image = $host_node->field_ec_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
+
+// Css variables
+$menu_background_color = $host_node->field_ec_menu_background_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_menu_background_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+$heading_background_color = $host_node->field_ec_heading_bck_color[LANGUAGE_NONE][0]['rgb'];
+$font_color = $host_node->field_ec_font_color[LANGUAGE_NONE][0]['rgb'];
 ?>
 
 <div id="page">
   <div class="event-sidebar">
     <header class="header" id="header" role="banner">
-      <a href="<?php print $base_url; ?>" title="<?php print t('Home'); ?>" rel="home"><img src="<?php echo $base_url.'/'.$banner_img; ?>" width="100%"/></a>
+      <a href="<?php print $base_url; ?>" title="<?php print t('Home'); ?>" rel="home"><img src="<?php echo $banner_image; ?>" width="100%"/></a>
             <section class="header-top">
                 <div class="container header-logo">
               <?php if ($logo): ?>
@@ -37,7 +43,7 @@ $banner_img = drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg
                     </div>
                 <?php endif; ?>
                 
-                <?php print render($page['header_event']); ?>
+              <div class="event-menu" style="background: <?php print $menu_background_color; ?>"> <?php print render($page['header_event']); ?></div>
                     
             </section>
         </header>
