@@ -32,7 +32,7 @@ img {
   margin: 0;
 }
 
-.mt-10, ul.pager, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, .newsletter-templates {
+.mt-10, ul.pager, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table, .newsletter-templates {
   margin-top: 10px;
 }
 
@@ -159,7 +159,7 @@ img {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -318,7 +318,7 @@ img {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -446,7 +446,7 @@ img {
 #block-menu-menu-print-team-menu > .menu,
 #block-menu-menu-videogallery-admin-menu > .menu,
 #block-menu-menu-event-backend > .menu,
-#block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text, .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-quiz-add-questions-values"], [id*="field-task-task-idea-values"] tbody tr td, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), #block-itg-event-backend-event-backend-tab-form-block .block-itg-story-list, [id*="field-event-media-values"] > tbody > tr, [class*="node-type-"] .node .field, [class*="page-node-"] .node .field, .node-type-print-team-integration.section-content .-content .field, .node-preview .field, .node-category-form fieldset#edit-relations legend, [id*="itg-survey-survey-form"] .answer-container, [id*="itg-quiz-quiz-form"] .answer-container, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-social-media-form"] > div .form-item-itg-smi, [id*="itg-social-media-form"] > div .form-item-itg-smi span.error, [id*="itg-social-media-form"] > div fieldset legend, [id*="field-program-schedule-values"] > tbody > tr, .view-category-manager .view-content .item-list, .view-category-manager .view-content .item-list ul li .term-wrapper, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr,
+#block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text, .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-quiz-add-questions-values"], [id*="field-task-task-idea-values"] tbody tr td, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), #block-itg-event-backend-event-backend-tab-form-block .block-itg-story-list, [id*="field-event-media-values"] > tbody > tr, [class*="node-type-"] .node .field, [class*="page-node-"] .node .field, .node-type-print-team-integration.section-content .-content .field, .node-preview .field, .node-category-form fieldset#edit-relations legend, [id*="itg-survey-survey-form"] .answer-container, [id*="itg-quiz-quiz-form"] .answer-container, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-social-media-form"] > div .form-item-itg-smi, [id*="itg-social-media-form"] > div .form-item-itg-smi span.error, [id*="itg-social-media-form"] > div fieldset legend, [id*="field-program-schedule-values"] > tbody > tr, .view-category-manager .view-content .item-list, .view-category-manager .view-content .item-list ul li .term-wrapper, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element,
@@ -525,8 +525,23 @@ img {
 .node-issue-form .form-field-type-image .image-widget-data,
 .node-newsletter-form .form-field-type-image .image-widget-data,
 .node-recipe-form .form-field-type-image .image-widget-data,
+.node-sponsor-form .form-field-type-image .image-widget-data,
+.page-admin-people form .form-field-type-image .image-widget-data,
+.page-user form .form-field-type-image .image-widget-data,
 .node-newsletter_templates-form .form-field-type-image .image-widget-data,
-.node-mega_review_critic-form .form-field-type-image .image-widget-data, #main, .header, .header .container, .form-type-autocomplete-deluxe div.autocomplete-deluxe-container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .breadcrumb ol li, .user-role a, .dashboard-tab li, [id*="field-task-task-idea-values"] + div.clearfix, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, #block-itg-event-backend-event-backend-tab-form-block .block-itg-story-list a, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating .form-type-checkbox, [id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox, [id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox input[type="checkbox"], [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox input[type="checkbox"], [id*="itg-social-media-form"] > div .form-item-itg-smi .form-item, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twit-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twit-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-video-upload, .view-category-manager .cmd-heading, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload,
+.node-mega_review_critic-form .form-field-type-image .image-widget-data, .image-repo-browse .field-type-image .image-widget-data, .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data, .node-notification-form .field-type-image .image-widget-data,
+.node-food_news-form .field-type-image .image-widget-data,
+.node-cooking_tips-form .field-type-image .image-widget-data,
+.node-reporter-form .field-type-image .image-widget-data,
+.node-astro-form .field-type-image .image-widget-data,
+.node-issue-form .field-type-image .image-widget-data,
+.node-newsletter-form .field-type-image .image-widget-data,
+.node-recipe-form .field-type-image .image-widget-data,
+.node-sponsor-form .field-type-image .image-widget-data,
+.page-admin-people form .field-type-image .image-widget-data,
+.page-user form .field-type-image .image-widget-data,
+.node-newsletter_templates-form .field-type-image .image-widget-data,
+.node-mega_review_critic-form .field-type-image .image-widget-data, #main, .header, .header .container, .form-type-autocomplete-deluxe div.autocomplete-deluxe-container, .form-type-password, div.form-type-password-confirm, div.vertical-tabs, .form-type-textfield, .form-field-type-taxonomy-term-reference, .form-type-select, .form-type-checkboxes, .form-type-radios, .form-type-textarea, .form-type-managed-file, .form-type-managed-file .filefield-source, .generate-image, [id*="field-gallery-image-values"] tbody tr td:nth-child(2), [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .image-widget-data, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .path-form .fieldset-wrapper, .form-type-plupload, #block-menu-menu-admin-left-menu, #block-menu-menu-admin-left-menu > .menu > li, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded > a, #block-menu-menu-admin-left-menu > .menu > li:hover > .menu li.expanded, .breadcrumb ol li, .user-role a, .dashboard-tab li, [id*="field-task-task-idea-values"] + div.clearfix, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), .form-field-name-field-quiz-add-questions, #block-itg-event-backend-event-backend-tab-form-block .block-itg-story-list a, .node-category-form #edit-term-state-wrap .itg-term-state .form-type-checkbox, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating .form-type-checkbox, [id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox, [id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox input[type="checkbox"], [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox input[type="checkbox"], [id*="itg-social-media-form"] > div .form-item-itg-smi .form-item, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-fb-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twit-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twit-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-twitter-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instagram-video-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-img-upload, [id*="itg-social-media-form"] > div .form-type-managed-file #edit-itg-instant-video-upload, .view-category-manager .cmd-heading, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, .photogallery-list.flexslider, .photogallery-list.flexslider .slides li, #comments .comment, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-answer-option-2, [id*="field-survey-add-questions-values"] > tbody > tr > td, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content, .edit-link,
 .view-link,
 .delete-link,
@@ -588,7 +603,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -669,7 +684,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit:hover,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit:hover,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit:hover,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, [id*="comment-global-config"] .form-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, [id*="comment-global-config"] .form-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-submit:hover, [id*="protected-pages-enter-password"] fieldset .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
 .form-submit[value="Save"]:hover,
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
@@ -740,7 +755,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -763,7 +778,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit:hover,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit:hover,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit:hover,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, [id*="comment-global-config"] .form-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, [id*="comment-global-config"] .form-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-submit:hover, [id*="protected-pages-enter-password"] fieldset .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
 .form-submit[value="Save"]:hover,
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
@@ -1335,8 +1350,23 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-issue-form .form-field-type-image .form-type-managed-file > label,
 .node-newsletter-form .form-field-type-image .form-type-managed-file > label,
 .node-recipe-form .form-field-type-image .form-type-managed-file > label,
+.node-sponsor-form .form-field-type-image .form-type-managed-file > label,
+.page-admin-people form .form-field-type-image .form-type-managed-file > label,
+.page-user form .form-field-type-image .form-type-managed-file > label,
 .node-newsletter_templates-form .form-field-type-image .form-type-managed-file > label,
-.node-mega_review_critic-form .form-field-type-image .form-type-managed-file > label {
+.node-mega_review_critic-form .form-field-type-image .form-type-managed-file > label, .image-repo-browse .field-type-image .form-type-managed-file > label, .node-photogallery-form #BrowseMedia .field-type-image .form-type-managed-file > label, .node-notification-form .field-type-image .form-type-managed-file > label,
+.node-food_news-form .field-type-image .form-type-managed-file > label,
+.node-cooking_tips-form .field-type-image .form-type-managed-file > label,
+.node-reporter-form .field-type-image .form-type-managed-file > label,
+.node-astro-form .field-type-image .form-type-managed-file > label,
+.node-issue-form .field-type-image .form-type-managed-file > label,
+.node-newsletter-form .field-type-image .form-type-managed-file > label,
+.node-recipe-form .field-type-image .form-type-managed-file > label,
+.node-sponsor-form .field-type-image .form-type-managed-file > label,
+.page-admin-people form .field-type-image .form-type-managed-file > label,
+.page-user form .field-type-image .form-type-managed-file > label,
+.node-newsletter_templates-form .field-type-image .form-type-managed-file > label,
+.node-mega_review_critic-form .field-type-image .form-type-managed-file > label {
   padding-bottom: 5px;
   padding-top: 5px;
 }
@@ -1348,8 +1378,23 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-issue-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-newsletter-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-recipe-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-sponsor-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
+.page-admin-people form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
+.page-user form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
 .node-newsletter_templates-form .form-field-type-image .image-widget-data .form-submit[value="Remove"],
-.node-mega_review_critic-form .form-field-type-image .image-widget-data .form-submit[value="Remove"] {
+.node-mega_review_critic-form .form-field-type-image .image-widget-data .form-submit[value="Remove"], .image-repo-browse .field-type-image .image-widget-data .form-submit[value="Remove"], .node-photogallery-form #BrowseMedia .field-type-image .image-widget-data .form-submit[value="Remove"], .node-notification-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-food_news-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-cooking_tips-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-reporter-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-astro-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-issue-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-newsletter-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-recipe-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-sponsor-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.page-admin-people form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.page-user form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-newsletter_templates-form .field-type-image .image-widget-data .form-submit[value="Remove"],
+.node-mega_review_critic-form .field-type-image .image-widget-data .form-submit[value="Remove"] {
   left: 400px;
 }
 .image-repo-browse .form-field-type-image a.filefield-sources-imce-browse, .node-photogallery-form #BrowseMedia .form-field-type-image a.filefield-sources-imce-browse, .node-notification-form .form-field-type-image a.filefield-sources-imce-browse,
@@ -1360,8 +1405,23 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-issue-form .form-field-type-image a.filefield-sources-imce-browse,
 .node-newsletter-form .form-field-type-image a.filefield-sources-imce-browse,
 .node-recipe-form .form-field-type-image a.filefield-sources-imce-browse,
+.node-sponsor-form .form-field-type-image a.filefield-sources-imce-browse,
+.page-admin-people form .form-field-type-image a.filefield-sources-imce-browse,
+.page-user form .form-field-type-image a.filefield-sources-imce-browse,
 .node-newsletter_templates-form .form-field-type-image a.filefield-sources-imce-browse,
-.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse {
+.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse, .image-repo-browse .field-type-image a.filefield-sources-imce-browse, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse, .node-notification-form .field-type-image a.filefield-sources-imce-browse,
+.node-food_news-form .field-type-image a.filefield-sources-imce-browse,
+.node-cooking_tips-form .field-type-image a.filefield-sources-imce-browse,
+.node-reporter-form .field-type-image a.filefield-sources-imce-browse,
+.node-astro-form .field-type-image a.filefield-sources-imce-browse,
+.node-issue-form .field-type-image a.filefield-sources-imce-browse,
+.node-newsletter-form .field-type-image a.filefield-sources-imce-browse,
+.node-recipe-form .field-type-image a.filefield-sources-imce-browse,
+.node-sponsor-form .field-type-image a.filefield-sources-imce-browse,
+.page-admin-people form .field-type-image a.filefield-sources-imce-browse,
+.page-user form .field-type-image a.filefield-sources-imce-browse,
+.node-newsletter_templates-form .field-type-image a.filefield-sources-imce-browse,
+.node-mega_review_critic-form .field-type-image a.filefield-sources-imce-browse {
   height: 100%;
   left: 0;
   position: absolute;
@@ -1376,8 +1436,23 @@ ul.pager li.pager-next a, ul.pager li.pager-last a, ul.pager li.pager-first a, u
 .node-issue-form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-newsletter-form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-recipe-form .form-field-type-image a.filefield-sources-imce-browse:after,
+.node-sponsor-form .form-field-type-image a.filefield-sources-imce-browse:after,
+.page-admin-people form .form-field-type-image a.filefield-sources-imce-browse:after,
+.page-user form .form-field-type-image a.filefield-sources-imce-browse:after,
 .node-newsletter_templates-form .form-field-type-image a.filefield-sources-imce-browse:after,
-.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse:after {
+.node-mega_review_critic-form .form-field-type-image a.filefield-sources-imce-browse:after, .image-repo-browse .field-type-image a.filefield-sources-imce-browse:after, .node-photogallery-form #BrowseMedia .field-type-image a.filefield-sources-imce-browse:after, .node-notification-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-food_news-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-cooking_tips-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-reporter-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-astro-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-issue-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-newsletter-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-recipe-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-sponsor-form .field-type-image a.filefield-sources-imce-browse:after,
+.page-admin-people form .field-type-image a.filefield-sources-imce-browse:after,
+.page-user form .field-type-image a.filefield-sources-imce-browse:after,
+.node-newsletter_templates-form .field-type-image a.filefield-sources-imce-browse:after,
+.node-mega_review_critic-form .field-type-image a.filefield-sources-imce-browse:after {
   background-color: #fff;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
@@ -2519,25 +2594,25 @@ div.image-widget-data .ajax-progress-throbber {
   font-style: normal;
 }
 
-.views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview {
+.views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table {
   border-collapse: collapse;
   border: 1px solid #d9d9d9;
   text-align: left;
 }
-.views-table th, [id*="field-newsl-add-news-values"] th, .variables-and-field-container .variables table th, .page-admin-structure-menu-manage #menu-overview th, .views-table td, [id*="field-newsl-add-news-values"] td, .variables-and-field-container .variables table td, .page-admin-structure-menu-manage #menu-overview td {
+.views-table th, [id*="field-newsl-add-news-values"] th, .variables-and-field-container .variables table th, .page-admin-structure-menu-manage #menu-overview th, [id*="protected-pages-configure"] fieldset table th, .views-table td, [id*="field-newsl-add-news-values"] td, .variables-and-field-container .variables table td, .page-admin-structure-menu-manage #menu-overview td, [id*="protected-pages-configure"] fieldset table td {
   padding: 8px 5px;
   max-width: 200px;
 }
-.views-table th a, [id*="field-newsl-add-news-values"] th a, .variables-and-field-container .variables table th a, .page-admin-structure-menu-manage #menu-overview th a, .views-table td a, [id*="field-newsl-add-news-values"] td a, .variables-and-field-container .variables table td a, .page-admin-structure-menu-manage #menu-overview td a {
+.views-table th a, [id*="field-newsl-add-news-values"] th a, .variables-and-field-container .variables table th a, .page-admin-structure-menu-manage #menu-overview th a, [id*="protected-pages-configure"] fieldset table th a, .views-table td a, [id*="field-newsl-add-news-values"] td a, .variables-and-field-container .variables table td a, .page-admin-structure-menu-manage #menu-overview td a, [id*="protected-pages-configure"] fieldset table td a {
   color: #0c8bb1;
 }
-.views-table thead, [id*="field-newsl-add-news-values"] thead, .variables-and-field-container .variables table thead, .page-admin-structure-menu-manage #menu-overview thead {
+.views-table thead, [id*="field-newsl-add-news-values"] thead, .variables-and-field-container .variables table thead, .page-admin-structure-menu-manage #menu-overview thead, [id*="protected-pages-configure"] fieldset table thead {
   background-color: #f6f6f6;
 }
-.views-table thead th, [id*="field-newsl-add-news-values"] thead th, .variables-and-field-container .variables table thead th, .page-admin-structure-menu-manage #menu-overview thead th {
+.views-table thead th, [id*="field-newsl-add-news-values"] thead th, .variables-and-field-container .variables table thead th, .page-admin-structure-menu-manage #menu-overview thead th, [id*="protected-pages-configure"] fieldset table thead th {
   font-weight: 500;
 }
-.views-table tbody td, [id*="field-newsl-add-news-values"] tbody td, .variables-and-field-container .variables table tbody td, .page-admin-structure-menu-manage #menu-overview tbody td {
+.views-table tbody td, [id*="field-newsl-add-news-values"] tbody td, .variables-and-field-container .variables table tbody td, .page-admin-structure-menu-manage #menu-overview tbody td, [id*="protected-pages-configure"] fieldset table tbody td {
   border-top: 1px solid #f6f6f6;
 }
 
@@ -3121,14 +3196,15 @@ div.image-widget-data .ajax-progress-throbber {
   margin: 20px 0;
 }
 [id*="itg-survey-survey-form"] .question-container .question-heading, [id*="itg-quiz-quiz-form"] .question-container .question-heading {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
+  color: #6e6e6e;
 }
 [id*="itg-survey-survey-form"] .question-container .ajax-progress-throbber, [id*="itg-quiz-quiz-form"] .question-container .ajax-progress-throbber {
   position: static;
 }
 [id*="itg-survey-survey-form"] .answer-container, [id*="itg-quiz-quiz-form"] .answer-container {
-  padding: 10px 0;
+  padding: 0;
 }
 [id*="itg-survey-survey-form"] .answer-container .answer-heading, [id*="itg-quiz-quiz-form"] .answer-container .answer-heading {
   font-size: 14px;
@@ -3142,18 +3218,36 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item {
   margin: 0;
 }
+[id*="itg-survey-survey-form"] .answer-container > .form-item .form-item.form-type-radio, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item.form-type-radio {
+  padding-left: 10px;
+}
 [id*="itg-survey-survey-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio, [id*="itg-quiz-quiz-form"] .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 1px 5px 0 0;
 }
 [id*="itg-survey-survey-form"] .answer-container > .form-item.form-type-textfield, [id*="itg-quiz-quiz-form"] .answer-container > .form-item.form-type-textfield {
-  margin: 10px 0;
+  margin: 0 0 10px;
+}
+[id*="itg-survey-survey-form"] .answer-container > .form-item.form-type-textfield .form-text, [id*="itg-quiz-quiz-form"] .answer-container > .form-item.form-type-textfield .form-text {
+  width: 516px;
+  max-width: 100%;
+  height: 42px;
+  font: 400 14px/18px Roboto;
+  color: #322323;
+}
+[id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes {
+  padding-left: 10px;
 }
 [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes > label, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes > label {
   width: 200px;
+  color: #323232;
+  font: 400 14px/18px "Roboto Slab";
 }
 [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating {
   padding: 0;
   margin: 10px 0;
+}
+[id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox, [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox {
+  margin-bottom: 0;
 }
 [id*="itg-survey-survey-form"] .answer-container div.rating .form-type-checkbox:before, [id*="itg-quiz-quiz-form"] .answer-container div.rating .form-type-checkbox:before {
   content: '\f005';
@@ -5076,13 +5170,15 @@ div.node #comments h2 {
   padding-top: 0;
 }
 
-#views-form-manage-users-page .views-table th, #views-form-manage-users-page [id*="field-newsl-add-news-values"] th, #views-form-manage-users-page .variables-and-field-container .variables table th, .variables-and-field-container .variables #views-form-manage-users-page table th, #views-form-manage-users-page .page-admin-structure-menu-manage #menu-overview th, .page-admin-structure-menu-manage #views-form-manage-users-page #menu-overview th,
+#views-form-manage-users-page .views-table th, #views-form-manage-users-page [id*="field-newsl-add-news-values"] th, #views-form-manage-users-page .variables-and-field-container .variables table th, .variables-and-field-container .variables #views-form-manage-users-page table th, #views-form-manage-users-page .page-admin-structure-menu-manage #menu-overview th, .page-admin-structure-menu-manage #views-form-manage-users-page #menu-overview th, #views-form-manage-users-page [id*="protected-pages-configure"] fieldset table th, [id*="protected-pages-configure"] fieldset #views-form-manage-users-page table th,
 #views-form-manage-users-page .views-table td,
 #views-form-manage-users-page [id*="field-newsl-add-news-values"] td,
 #views-form-manage-users-page .variables-and-field-container .variables table td,
 .variables-and-field-container .variables #views-form-manage-users-page table td,
 #views-form-manage-users-page .page-admin-structure-menu-manage #menu-overview td,
-.page-admin-structure-menu-manage #views-form-manage-users-page #menu-overview td {
+.page-admin-structure-menu-manage #views-form-manage-users-page #menu-overview td,
+#views-form-manage-users-page [id*="protected-pages-configure"] fieldset table td,
+[id*="protected-pages-configure"] fieldset #views-form-manage-users-page table td {
   max-width: 170px;
 }
 
@@ -5113,7 +5209,7 @@ div.node #comments h2 {
 .top-actions #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit:last-child,
 #views-form-most-read-widget-most-read-widget-contents .form-actions .top-actions #edit-submit:last-child,
 .top-actions #views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:last-child,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions .top-actions #edit-submit:last-child, .page-submit-idea .top-actions .form-submit:last-child, .top-actions #menu-item-delete-form .form-actions #edit-submit:last-child, #menu-item-delete-form .form-actions .top-actions #edit-submit:last-child, .top-actions .itg_menu_manager_form .form-submit:last-child, .itg_menu_manager_form .top-actions .form-submit:last-child, .top-actions [id*="comment-global-config"] .form-submit:last-child, [id*="comment-global-config"] .top-actions .form-submit:last-child, .top-actions [id*="views-form-photo-gallery-management-page"] .form-submit:last-child, [id*="views-form-photo-gallery-management-page"] .top-actions .form-submit:last-child, .top-actions .form-submit[value="Save as Draft"]:last-child,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions .top-actions #edit-submit:last-child, .page-submit-idea .top-actions .form-submit:last-child, .top-actions #menu-item-delete-form .form-actions #edit-submit:last-child, #menu-item-delete-form .form-actions .top-actions #edit-submit:last-child, .top-actions .itg_menu_manager_form .form-submit:last-child, .itg_menu_manager_form .top-actions .form-submit:last-child, .top-actions [id*="comment-global-config"] .form-submit:last-child, [id*="comment-global-config"] .top-actions .form-submit:last-child, .top-actions [id*="views-form-photo-gallery-management-page"] .form-submit:last-child, [id*="views-form-photo-gallery-management-page"] .top-actions .form-submit:last-child, .top-actions [id*="protected-pages-enter-password"] fieldset .form-submit:last-child, [id*="protected-pages-enter-password"] fieldset .top-actions .form-submit:last-child, .top-actions .form-submit[value="Save as Draft"]:last-child,
 .top-actions .form-submit[value="Save"]:last-child,
 .top-actions .form-submit[value="Create"]:last-child,
 .top-actions .form-submit[value="Update"]:last-child,
@@ -6992,14 +7088,12 @@ div.node #comments h2 {
 
 /* CSS For Survey */
 .survey-form-main-container h1 {
-  font-size: 24px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 30px;
+  font: 500 34px/34px Roboto;
 }
 
 .survey-form-main-container .survey-description {
-  color: #bebebe;
+  color: #929292;
+  font: 400 14px/20px Roboto;
   margin-top: 10px;
 }
 
@@ -7074,7 +7168,6 @@ div.node #comments h2 {
 .survey-form-main-container .byline .profile-detail ul li span.share-count {
   display: block;
   font-size: 44px;
-  font-size: 2.75rem;
   font-weight: 500;
   line-height: 44px;
   color: #bebebe;
@@ -7086,23 +7179,20 @@ div.node #comments h2 {
 
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
+  font: 400 12px/18px Roboto;
   margin-top: 0px;
-  line-height: 18px;
   padding-left: 0;
 }
 
 .survey-form-main-container .byline .profile-detail ul li.twitter:before {
   content: '|';
   margin: 0 5px 0 0;
-  color: #999;
+  color: #6b6b6b;
 }
 
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
-  font-size: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 20px;
+  font: 700 12px/20px Roboto;
 }
 
 .survey-form-main-container .byline .profile-detail ul li.mailto {
@@ -7111,6 +7201,17 @@ div.node #comments h2 {
 
 .survey-form-main-container .byline .profile-detail ul.date-update li {
   margin-bottom: 7px;
+  color: #989898;
+  font: 400 12px/18px Roboto;
+  padding: 0;
+}
+
+.survey-form-main-container .byline .profile-detail ul.date-update li + li:before {
+  content: '|';
+  margin: 0 5px;
+  color: #989898;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .survey-form-main-container .byline .profile-detail ul.social-links {
@@ -7161,6 +7262,7 @@ div.node #comments h2 {
 .survey-form-main-container .byline .social-info {
   float: right;
   width: 200px;
+  font: 400 12px/18px Roboto;
 }
 
 .survey-form-main-container .byline .social-info span {
@@ -7185,9 +7287,8 @@ div.node #comments h2 {
 }
 
 .question-container .question-heading {
-  font-size: 18px;
-  color: #666;
-  font-weight: 500;
+  font: normal 500 20px/28px Roboto;
+  color: #6e6e6e;
   margin: 10px 0;
 }
 
@@ -7201,9 +7302,7 @@ div.node #comments h2 {
 }
 
 .question-container .answer-container {
-  padding-left: 10px;
   position: relative;
-  margin-bottom: 10px;
 }
 
 .question-container .answer-container .survey-media {
@@ -7214,11 +7313,17 @@ div.node #comments h2 {
 }
 
 .question-container .answer-container > .form-item .form-item {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 }
 
 .question-container .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 3px 5px 0 0;
+}
+
+.question-container .answer-container > .form-item .form-item.form-type-radio > label,
+.question-container .answer-container > .form-item .form-item.form-type-checkbox > label {
+  font: 400 14px/18px 'Roboto Slab';
+  color: #323232;
 }
 
 .survey-form-wrapper-all .question-container {
@@ -7242,11 +7347,12 @@ div.node #comments h2 {
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 16px;
+  font-size: 18px;
   font-family: Roboto;
   color: #fff;
-  font-weight: 300;
+  font-weight: 400;
   margin-right: 20px;
+  margin-top: 50px;
   cursor: pointer;
 }
 
@@ -8747,7 +8853,7 @@ div.node #comments h2 {
   float: left;
 }
 .page-node-add-recipe .form-managed-file .image-widget-data .form-submit[value="Remove"] {
-  left: 375px;
+  left: 400px;
 }
 
 .node-category-form #edit-term-state-wrap {
@@ -8862,7 +8968,7 @@ div.node #comments h2 {
 }
 
 [id*="views-exposed-form-Event-backend-page"] .views-submit-button .form-submit {
-  margin-top: 26px;
+  margin-top: 26px !important;
 }
 [id*="views-exposed-form-Event-backend-page"] .views-submit-button #custom-event-type {
   float: left;
@@ -9103,8 +9209,21 @@ div.node #comments h2 {
   width: auto;
 }
 
-.node-videogallery-form .itg-sidebar-form #Configuration .form-type-checkboxes > label {
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-video-configurations .form-type-checkboxes > label {
   display: none;
+}
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-expires .form-type-checkboxes {
+  vertical-align: top;
+  width: 100%;
+  display: inline-block;
+}
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-expires .form-type-checkboxes > label, .node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-expires .form-type-checkboxes > label + div {
+  float: left;
+  width: auto;
+  padding: 0;
+}
+.node-videogallery-form .itg-sidebar-form #Configuration .form-field-name-field-story-expires .form-type-checkboxes .form-checkbox {
+  margin: 3px 5px;
 }
 
 [id="edit-field-story-reporter"] table tbody {
@@ -9116,4 +9235,37 @@ div.node #comments h2 {
   margin-left: 10px;
   padding: 10px 12px 6px;
   font-weight: 400;
+}
+
+[id*="protected-pages-configure"] fieldset {
+  border: none;
+}
+[id*="protected-pages-configure"] fieldset > legend {
+  background-color: #fefafb;
+  border-bottom: 1px solid #d9d9d9;
+  border-top: 1px solid #d9d9d9;
+  font-size: 18px;
+  line-height: 28px;
+  margin: 15px 0;
+  padding: 8px 20px;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+[id*="protected-pages-configure"] fieldset .fieldset-description {
+  padding: 8px 20px 0;
+}
+[id*="protected-pages-configure"] fieldset .form-submit {
+  margin-left: 250px;
+  margin-bottom: 20px;
+}
+
+[id*="protected-pages-enter-password"] fieldset {
+  border: none;
+}
+[id*="protected-pages-enter-password"] fieldset .form-type-password > label {
+  padding-top: 8px;
+}
+[id*="protected-pages-enter-password"] fieldset .form-submit {
+  margin-left: 250px;
 }

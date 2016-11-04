@@ -32,7 +32,7 @@ else {
         <li class="twitter"><?php echo $byline_twitter_handler; ?></li>
       </ul>
       <ul class="date-update">
-        <li><?php echo $created_date; ?> | </li>
+        <li><?php echo $created_date; ?></li>
         <li>UPDATED <?php echo $updated_date; ?> IST </li>
       </ul>
     </div>

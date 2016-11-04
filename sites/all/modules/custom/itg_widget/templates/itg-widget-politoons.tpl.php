@@ -6,6 +6,8 @@
             print t("<h2>CHOOSE <br/> YOUR FAVOURITE <span>POLITOONS</span></h2>");
         ?>
     </div>
+</div>
+    <div class="row">
 <?php foreach ($data as $key => $taxonomy) :
   ?>
   <div class="col-md-4 col-xs-6 politoons-<?php echo $key; ?>">

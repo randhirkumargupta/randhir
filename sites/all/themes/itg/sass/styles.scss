@@ -350,7 +350,7 @@ header{
                         height: 37px;
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
-                        &:hover{
+                        &.active, &:hover{
                                 color: #ffc106;
                         }
                     }
@@ -546,18 +546,22 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
+            
         }
     }
     .form-type-checkboxes{
-        > label{width: 200px; @extend .dib; @extend .vmid;}
+        > label{width: 200px; @extend .dib; @extend .vmid; color: #323232; font: 400 14px/18px "Roboto Slab";}
         div.rating{
             @extend .fleft; 
             @extend .full;
             padding: 0;
             margin: 10px 0;
             .form-type-checkbox{
-                @extend .pos-rel; @extend .dib;
+                @extend .pos-rel; 
+                @extend .dib;
+                padding-left: 0;
+                margin-bottom: 0;
             }
         }
     }
@@ -601,7 +605,7 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
         }
     }
     .form-type-checkboxes{
@@ -2306,14 +2310,21 @@ footer{
         @include clearfix;
         padding: 10px;
         font-family: $itg-roboto;
+        overflow: hidden;
     }
-    .anchor-left, .anchor-right{
-        @include float(none);
-        @include calculate-width(1);
+    
+    .anchor-left{
+        float: left;
+            margin-right: 15px;
+            margin-bottom: 5px;  
+            width: auto;
     }
     .anchor-right{
         padding-left:0px;
-        padding-top:15px;
+        padding-top:0px;
+        font-size: 14px;
+        color: #818181;
+        line-height: 22px;
         a.active{
             @include font(22px,30px,700);            
             color: #33363b;
@@ -2321,6 +2332,18 @@ footer{
         a{
             color: #a00606;
             @include font(12px);
+        }
+        .social-icon{
+            ul{
+                @extend .list-none;
+                li{
+                    @include display-inline;
+                    padding: 10px 10px 0 0;
+                    i{
+                        @include font(20px);
+                    }
+                }
+            }
         }
     }
 }
@@ -4028,6 +4051,13 @@ footer{
             text-transform: uppercase;
             margin-top: 5px;
         }
+        .col-md-4{
+            margin-bottom:20px;
+            text-align: center;          
+            &:nth-child(2n+1){
+                clear: left;
+            }
+        }
     }
 }
 /*CSS End So sorry page*/
@@ -4661,12 +4691,26 @@ footer{
     .oscar-slider{
         .top-slider{
             background: #000;
-            padding: 10px 10px 0 10px;           
+            padding: 10px 10px 0 10px;    
+            @include pos(relative);
             .common-img{
                 display: none;
             }
              .first-image{
                 display: block;
+            }
+            span{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                font-size: 40px;
+                margin-left: -35px;
+                margin-top: -30px;
+                color: #fff;
+                cursor: pointer;
+                background: rgba(0, 0, 0, 0.59);    
+                padding: 10px 20px;
+                border-radius: 5px;
             }
         }
         .bottom-slider { 
@@ -5063,9 +5107,21 @@ footer{
             text-align: center;
             border: 1px solid #ddd;
             padding: 10px;
-            &:nth-child(4n+1){
-                clear: left;
-            }      
+                &:nth-child(4n+1){
+                    clear: left;
+                }
+                img{
+                    max-height: 100%;  
+                    max-width: 100%; 
+                    width: auto;
+                    height: auto;
+                    position: absolute;  
+                    top: 0;  
+                    bottom: 0;  
+                    left: 0;  
+                    right: 0;  
+                    margin: auto;
+                }
             }
     }
 }
@@ -5122,6 +5178,12 @@ footer{
     }
     .defalt-placeholder-magazin{
         height: 140px;
+    }
+    .custom_html_widget{
+        padding: 10px;
+    }
+    .grey-bg{
+       background: #f3f3f3;
     }
     .itg-layout-672{
         .droppable{
@@ -5237,9 +5299,10 @@ footer{
 
     .auto-block-2{
         border: 1px solid #ddd;
-        .special-top-news {
-            position: relative;            
+        position: relative;            
+        .special-top-news {                            
             overflow: hidden;
+            height: 100%;
             .widget-title, .widget-settings {
                 position: absolute;
             }
@@ -5436,6 +5499,9 @@ footer{
 }
 .section-sport-ipl-bg{
     background: url('../images/sports-bg.png') no-repeat center 135px;
+    main.container{
+        background: #fff;
+    }
 }
 .sport-home-layout-page{  
     .widget-title {
