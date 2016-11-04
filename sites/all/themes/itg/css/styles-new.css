@@ -279,10 +279,9 @@
 #block-views-photo-landing-slider-block .social-icon.desktop-hide {
   margin: 10px 0;
 }
-#block-views-photo-landing-slider-block .photoby {
+#block-views-photo-landing-slider-block .photo-by {
   font-size: 14px;
   color: #626262;
-  margin-top: 10px;
 }
 
 .itg-h450-section .widget-wrapper {
@@ -875,6 +874,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding-left: 160px;
   z-index: 9;
 }
+#content #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  z-index: 9;
+}
 #content #block-formblock-ugc .node-ugc-form .form-type-textarea {
   display: inline-block;
   vertical-align: top;
@@ -1211,6 +1216,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 #block-itg-personalization-user-my-point .header-point span a {
   color: #1a3c8d;
 }
+#block-itg-personalization-user-my-point .header-point span a:hover {
+  text-decoration: underline;
+}
 
 /* End of Personalization CSS */
 /* CSS For Error Pages */
@@ -1288,13 +1296,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 /* End of Load More CSS */
 /* CSS For Survey */
 .survey-form-main-container h1 {
-  font-size: 24px;
-  font-size: 1.5rem;
+  font-size: 34px;
+  font-size: 2.125rem;
   font-weight: 700;
-  line-height: 30px;
+  line-height: 34px;
 }
 .survey-form-main-container .survey-description {
-  color: #bebebe;
+  color: #929292;
+  font: 400 14px/20px Roboto;
   margin-top: 10px;
 }
 .survey-form-main-container .byline {
@@ -1338,7 +1347,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   margin-top: 5px;
   font-size: 12px;
   font-size: 0.75rem;
-  line-height: 12px;
+  line-height: 20px;
   zoom: 1;
 }
 .survey-form-main-container .byline .profile-detail ul:before, .survey-form-main-container .byline .profile-detail ul:after {
@@ -1374,7 +1383,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .survey-form-main-container .byline .profile-detail ul li.twitter:before {
   content: '|';
   margin: 0 5px 0 0;
-  color: #999;
+  color: #6b6b6b;
 }
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
@@ -1388,6 +1397,15 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .survey-form-main-container .byline .profile-detail ul.date-update li {
   margin-bottom: 7px;
+  padding: 0;
+  color: #989898;
+}
+.survey-form-main-container .byline .profile-detail ul.date-update li + li:before {
+  content: '|';
+  margin: 0 5px;
+  color: #989898;
+  display: inline-block;
+  vertical-align: top;
 }
 .survey-form-main-container .byline .profile-detail ul.social-links {
   zoom: 1;
@@ -1448,9 +1466,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-family: Roboto;
 }
 .question-container .question-heading {
-  font-size: 18px;
-  color: #666;
+  font-size: 20px;
   font-weight: 500;
+  color: #6e6e6e;
 }
 .question-container .question-heading span {
   font-size: 14px;
@@ -1464,8 +1482,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 500 14px/18px Roboto;
 }
 .question-container .answer-container {
-  padding-left: 10px;
   position: relative;
+  padding: 0;
 }
 .question-container .answer-container .survey-media {
   position: absolute;
@@ -1474,15 +1492,45 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   right: 0;
 }
 .question-container .answer-container > .form-item .form-item {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
+}
+.question-container .answer-container > .form-item .form-item.form-type-radio {
+  padding-left: 10px;
 }
 .question-container .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 3px 5px 0 0;
+}
+.question-container .answer-container > .form-item .form-item.form-type-radio > label {
+  color: #323232;
+  font: 400 14px/18px "Roboto Slab";
+}
+.question-container .answer-container > .form-item .form-item.form-type-checkbox {
+  padding-left: 10px;
+}
+.question-container .answer-container > .form-item .form-item.form-type-checkbox .form-checkbox {
+  margin: 3px 5px 0 0;
+}
+.question-container .answer-container > .form-item .form-item.form-type-checkbox > label {
+  color: #323232;
+  font: 400 14px/18px "Roboto Slab";
+}
+.question-container .answer-container .form-type-checkboxs > label {
+  color: #323232;
+  font: 400 14px/18px "Roboto Slab";
 }
 .question-container .answer-container .form-type-textfield > label {
   float: left;
   padding: 8px 20px 0 0;
   width: 220px;
+  color: #323232;
+  font: 400 14px/18px "Roboto Slab";
+}
+.question-container .answer-container .form-type-textfield .form-text {
+  width: 516px;
+  max-width: 100%;
+  height: 42px;
+  font: 400 14px/18px Roboto;
+  color: #322323;
 }
 
 .survey-form-wrapper-all .question-container {
@@ -2548,8 +2596,11 @@ body.has-cart-popup {
   background: none;
 }
 .page-user .messages--status, .page-user .messages--error {
-  max-width: 440px;
-  margin: 20px auto 0;
+  background-color: #fefafb;
+  border: 1px solid red;
+  margin: 20px auto;
+  max-width: 540px;
+  padding: 10px;
 }
 .page-user .messages--error .messages__list {
   padding-left: 15px;
@@ -3482,4 +3533,71 @@ body.has-cart-popup {
   font: 300 20px/28px Roboto;
   height: 41px;
   width: 170px;
+}
+
+.question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox {
+  padding: 0;
+}
+
+.page-personalization-my-following .region-personalization {
+  text-align: center;
+}
+.page-personalization-my-following #block-views-follow-tags-block,
+.page-personalization-my-following #block-views-follow-tags-block-1 {
+  display: inline-block;
+  vertical-align: top;
+  width: 400px;
+  padding: 50px 0;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row {
+  padding: 10px;
+  text-align: left;
+  background: #fefefe;
+  border: 1px solid #d9d9d9;
+  position: relative;
+  margin: 15px;
+  border-radius: 5px;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-name,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-name {
+  padding-right: 75px;
+  font: 400 16px/20px Roboto;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops {
+  font: 400 14px/20px Roboto;
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops a,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops a {
+  color: #1a3c8d;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-ops a:hover,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops a:hover {
+  text-decoration: underline;
+}
+
+.continue-shopping a {
+  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #a00606;
+  color: #fff;
+  font: 400 14px/18px Roboto;
+}
+
+.continue-shopping {
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+}
+
+.cart-detail a.button {
+  color: #1a3c8d;
+}
+.cart-detail a.button:hover {
+  text-decoration: underline;
 }

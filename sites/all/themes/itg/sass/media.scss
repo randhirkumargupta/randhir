@@ -51,13 +51,7 @@
             .menu {
                 margin-left: 135px;
                 margin-right: 50px;
-                padding-left: 0;
-                white-space: nowrap;
-                overflow-x: scroll;
-                li{
-                    @include display-inline;
-                    float: none;
-                }
+                padding-left: 0;                               
             }
         }
     } 
@@ -210,8 +204,7 @@
                 @include clearfix;  
                 margin: 0px;        
                 padding-left: 0;
-                white-space: pre-wrap;
-                overflow-x: inherit; 
+                padding-right: 0;
                 li{
                     @include calculate-width(1);
                     a{
@@ -224,6 +217,9 @@
                         &.active, &:hover{
                             color: $yellow-color;
                         }
+                        &:after{
+                            display: none;
+                        }
                     } 
                     &.all-menu{
                         a{
@@ -234,11 +230,11 @@
                                 vertical-align: middle;
                             }
                         }
-                    }
+                    } 
                     &.sponser-link a{
                         background: $yellow-bg;
                         color: $black-color;
-                    }
+                    }                    
                 }
             }
             ul{

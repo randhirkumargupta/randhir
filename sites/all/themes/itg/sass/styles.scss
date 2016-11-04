@@ -336,8 +336,12 @@ header{
             @include clearfix;
             margin-top: 20px;            
             background: #a00606;
+            .container{
+                @include pos(relative);
+            }
             .menu{
                 padding-left:135px;
+                padding-right:50px;
                 li{
                     @include float(left);
                     a{
@@ -345,13 +349,22 @@ header{
                         text-transform: uppercase;
                         @include itg-font(null, $itg-font-medium);
                         padding: 0 10px;
-                        border-right: 1px solid $itg-nav-bordercolor;
+/*                        border-right: 1px solid $itg-nav-bordercolor;*/
                         border-top:none;
                         height: 37px;
+                        @include pos(relative);
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
                         &.active, &:hover{
                                 color: #ffc106;
+                        }
+                        &:after{
+                            position: absolute;
+                            content: '';
+                            height: 100%;
+                            background: #680101;
+                            width: 1px;
+                            right: 0;
                         }
                     }
                 }
@@ -364,6 +377,31 @@ header{
                      color: #323232;
                   }
               }  
+            }
+            .all-menu{
+                cursor: pointer;
+                i{
+                    font-size: 7px;
+                    color: #000;
+                }
+            }
+            ul#newlist{
+                padding-left: 0;
+                padding-right: 0;
+                position: absolute;
+                top: 37px;
+                right: 50px;
+                z-index: 10;
+                background: #a00606;
+                display:none;
+                li{                    
+                    float: none;
+                    border: none;
+                    border-bottom: 1px solid #000;
+                    a{
+                        display: block;
+                    }
+                }
             }
         }
     
@@ -546,18 +584,22 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
+            
         }
     }
     .form-type-checkboxes{
-        > label{width: 200px; @extend .dib; @extend .vmid;}
+        > label{width: 200px; @extend .dib; @extend .vmid; color: #323232; font: 400 14px/18px "Roboto Slab";}
         div.rating{
             @extend .fleft; 
             @extend .full;
             padding: 0;
             margin: 10px 0;
             .form-type-checkbox{
-                @extend .pos-rel; @extend .dib;
+                @extend .pos-rel; 
+                @extend .dib;
+                padding-left: 0;
+                margin-bottom: 0;
             }
         }
     }
@@ -601,7 +643,7 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
         }
     }
     .form-type-checkboxes{
@@ -4059,6 +4101,9 @@ footer{
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
 #block-itg-layout-manager-header-block{
+    .second-level-menu.menu{
+        @include clearfix;
+    }
     .menu-login{
         .user-menu{
             @include pos(relative);
@@ -5228,8 +5273,8 @@ footer{
     }
     .itg-325-layout{
         .droppable, .ad-widget{
-                height: 325px;                
-            }
+            height: 325px;                
+        }       
     }
     .itg-345-layout{
         .droppable {
@@ -5237,12 +5282,12 @@ footer{
             }
     }
     .more{
-                display: block;
-                text-align: right;                
-                font-weight: 700;
-                font-size: 12px;
-                padding: 10px 0;
-            }
+        display: block;
+        text-align: right;                
+        font-weight: 700;
+        font-size: 12px;
+        padding: 10px 0;
+    }
     .shadow-on{        
         -moz-box-shadow: 0 0 5px #d4cdcd;
         -webkit-box-shadow: 0 0 5px #d4cdcd;  
@@ -6216,3 +6261,122 @@ input[type="radio"]:checked + label:after{
     height: none;
 }
 /*css end defalt image */
+
+/* CSS For Election Page */
+.election-page{  
+    h1{
+        margin-top:60px;
+        .disc-share{
+            a{
+                font-size: 20px;
+                color: #b6b6b6;
+            }
+        }
+    }
+    .left-side{
+        .itg-415-layout{
+            .droppable{
+                height: 415px;
+            }
+        }
+        .itg-325-layout{
+            .droppable, iframe{
+                height: 325px;
+            }
+            iframe{
+                @include calculate-width(1);
+            }
+        }
+        .itg-map{
+            .droppable{
+                height: 375px;
+            }
+        }
+        .itg-most-popular{
+            .droppable{
+                min-height:180px;
+            }
+        }
+        .itg-photo{
+            .droppable{
+                height: 494px;
+            }
+        }           
+    }
+  .right-side{
+    .itg-325{
+      .droppable{
+        height: 325px;
+      }
+    }
+    .itg-484{
+      .droppable{
+        height: 484px;
+      }
+    }
+    .itg-460{
+      .droppable{
+        height: 460px;
+      }
+    }
+    .ad-widget{
+        border: none;
+    }
+    .election-topadd .ad-widget{        
+        margin-top: 103px;
+        padding-bottom: 0;
+        margin-bottom: 90px;
+    }
+  }
+  .itg-listing {
+    border: none;
+}
+.highlight {
+    overflow: auto;
+}
+.trending-videos{
+        padding: 0;
+        border: none;
+        li{
+           &.trending-videos-list{
+            padding: 0;            
+            + li{
+                    border-top:none;
+                    padding-top: 20px;
+                }
+            }
+        }                
+    }
+    .itg-most-popular{
+        .most_popular{
+            border: none;
+            p{
+                margin-top:10px; 
+            }
+        }
+        .col-md-3{
+            margin-bottom:30px;
+            &:nth-child(4n+1){
+                clear: left;
+            }
+        }
+    }
+   .osscar-video{
+        background: transparent;
+        ul .dont-miss-listing{
+            padding: 0;
+            +.dont-miss-listing{
+                padding: 30px 0 0 0;
+            }
+        }
+    }
+    .tech-block_5 .data-holder{        
+        background: #303030;
+        max-width: inherit;
+        .view-content{
+            margin: 10px;
+            overflow: hidden;
+        }
+    }
+}
+/* CSS For Election Page End */
