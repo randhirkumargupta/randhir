@@ -8537,7 +8537,7 @@ div.node{
     }
   }
 }
-[id*="protected-pages-configure"]{
+[id*="protected-pages-configure"], [id*="protected-pages-edit"]{
   fieldset{
     border: none;
     > legend{
@@ -8562,6 +8562,9 @@ div.node{
     table{
       @extend .views-table;
     }
+    div.form-type-password-confirm div.password-suggestions{
+      margin-bottom: 10px;
+    }
   }
 }
 [id*="protected-pages-enter-password"]{
@@ -8576,6 +8579,21 @@ div.node{
       @extend .btn;
       @extend .btn-save;
       margin-left: 250px;
+    }
+  }
+}
+[id*="draggableviews-table"]{
+  thead th.views-field-counter{
+    white-space: nowrap;
+  }
+}
+.node-survey-form{
+  [id*="field-story-reporter-values"]{
+    thead tr th label{padding-top: 8px;}
+    .form-type-textfield{
+      > label{
+        display: none;
+      }
     }
   }
 }

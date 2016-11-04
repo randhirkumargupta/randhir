@@ -32,7 +32,7 @@ img {
   margin: 0;
 }
 
-.mt-10, ul.pager, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table, .newsletter-templates {
+.mt-10, ul.pager, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table, [id*="protected-pages-edit"] fieldset table, .newsletter-templates {
   margin-top: 10px;
 }
 
@@ -446,7 +446,7 @@ img {
 #block-menu-menu-print-team-menu > .menu,
 #block-menu-menu-videogallery-admin-menu > .menu,
 #block-menu-menu-event-backend > .menu,
-#block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text, .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-quiz-add-questions-values"], [id*="field-task-task-idea-values"] tbody tr td, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), #block-itg-event-backend-event-backend-tab-form-block .block-itg-story-list, [id*="field-event-media-values"] > tbody > tr, [class*="node-type-"] .node .field, [class*="page-node-"] .node .field, .node-type-print-team-integration.section-content .-content .field, .node-preview .field, .node-category-form fieldset#edit-relations legend, [id*="itg-survey-survey-form"] .answer-container, [id*="itg-quiz-quiz-form"] .answer-container, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-social-media-form"] > div .form-item-itg-smi, [id*="itg-social-media-form"] > div .form-item-itg-smi span.error, [id*="itg-social-media-form"] > div fieldset legend, [id*="field-program-schedule-values"] > tbody > tr, .view-category-manager .view-content .item-list, .view-category-manager .view-content .item-list ul li .term-wrapper, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr,
+#block-menu-menu-story-content-admin-menu > .menu, .block-itg-story-list, .views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table, [id*="protected-pages-edit"] fieldset table, .view .view-filters .container-inline-date .form-item, .view .view-filters .views-exposed-form .views-exposed-widget .form-text, .view .view-filters .views-exposed-form .views-exposed-widget .form-select, .dashboard-tab, [id*="field-quiz-add-questions-values"], [id*="field-task-task-idea-values"] tbody tr td, [id*="field-quiz-add-questions-values"] tbody .field-name-field-quiz-options-answer table tr td:nth-child(2), #block-itg-event-backend-event-backend-tab-form-block .block-itg-story-list, [id*="field-event-media-values"] > tbody > tr, [class*="node-type-"] .node .field, [class*="page-node-"] .node .field, .node-type-print-team-integration.section-content .-content .field, .node-preview .field, .node-category-form fieldset#edit-relations legend, [id*="itg-survey-survey-form"] .answer-container, [id*="itg-quiz-quiz-form"] .answer-container, [id*="itg-survey-survey-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-quiz-quiz-form"] .answer-container .form-type-checkboxes div.rating, [id*="itg-social-media-form"] > div .form-item-itg-smi, [id*="itg-social-media-form"] > div .form-item-itg-smi span.error, [id*="itg-social-media-form"] > div fieldset legend, [id*="field-program-schedule-values"] > tbody > tr, .view-category-manager .view-content .item-list, .view-category-manager .view-content .item-list ul li .term-wrapper, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr,
 [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr, [id*="edit-field-supp-import-xml"] .form-type-managed-file .filefield-sources-list,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file .filefield-sources-list, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload,
 [id*="edit-field-field-issue-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload, [id*="edit-field-supp-import-xml"] .form-type-managed-file div.filefield-source.filefield-source-plupload .form-type-plupload > label + div.plupload-element,
@@ -2594,25 +2594,25 @@ div.image-widget-data .ajax-progress-throbber {
   font-style: normal;
 }
 
-.views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table {
+.views-table, [id*="field-newsl-add-news-values"], .variables-and-field-container .variables table, .page-admin-structure-menu-manage #menu-overview, [id*="protected-pages-configure"] fieldset table, [id*="protected-pages-edit"] fieldset table {
   border-collapse: collapse;
   border: 1px solid #d9d9d9;
   text-align: left;
 }
-.views-table th, [id*="field-newsl-add-news-values"] th, .variables-and-field-container .variables table th, .page-admin-structure-menu-manage #menu-overview th, [id*="protected-pages-configure"] fieldset table th, .views-table td, [id*="field-newsl-add-news-values"] td, .variables-and-field-container .variables table td, .page-admin-structure-menu-manage #menu-overview td, [id*="protected-pages-configure"] fieldset table td {
+.views-table th, [id*="field-newsl-add-news-values"] th, .variables-and-field-container .variables table th, .page-admin-structure-menu-manage #menu-overview th, [id*="protected-pages-configure"] fieldset table th, [id*="protected-pages-edit"] fieldset table th, .views-table td, [id*="field-newsl-add-news-values"] td, .variables-and-field-container .variables table td, .page-admin-structure-menu-manage #menu-overview td, [id*="protected-pages-configure"] fieldset table td, [id*="protected-pages-edit"] fieldset table td {
   padding: 8px 5px;
   max-width: 200px;
 }
-.views-table th a, [id*="field-newsl-add-news-values"] th a, .variables-and-field-container .variables table th a, .page-admin-structure-menu-manage #menu-overview th a, [id*="protected-pages-configure"] fieldset table th a, .views-table td a, [id*="field-newsl-add-news-values"] td a, .variables-and-field-container .variables table td a, .page-admin-structure-menu-manage #menu-overview td a, [id*="protected-pages-configure"] fieldset table td a {
+.views-table th a, [id*="field-newsl-add-news-values"] th a, .variables-and-field-container .variables table th a, .page-admin-structure-menu-manage #menu-overview th a, [id*="protected-pages-configure"] fieldset table th a, [id*="protected-pages-edit"] fieldset table th a, .views-table td a, [id*="field-newsl-add-news-values"] td a, .variables-and-field-container .variables table td a, .page-admin-structure-menu-manage #menu-overview td a, [id*="protected-pages-configure"] fieldset table td a, [id*="protected-pages-edit"] fieldset table td a {
   color: #0c8bb1;
 }
-.views-table thead, [id*="field-newsl-add-news-values"] thead, .variables-and-field-container .variables table thead, .page-admin-structure-menu-manage #menu-overview thead, [id*="protected-pages-configure"] fieldset table thead {
+.views-table thead, [id*="field-newsl-add-news-values"] thead, .variables-and-field-container .variables table thead, .page-admin-structure-menu-manage #menu-overview thead, [id*="protected-pages-configure"] fieldset table thead, [id*="protected-pages-edit"] fieldset table thead {
   background-color: #f6f6f6;
 }
-.views-table thead th, [id*="field-newsl-add-news-values"] thead th, .variables-and-field-container .variables table thead th, .page-admin-structure-menu-manage #menu-overview thead th, [id*="protected-pages-configure"] fieldset table thead th {
+.views-table thead th, [id*="field-newsl-add-news-values"] thead th, .variables-and-field-container .variables table thead th, .page-admin-structure-menu-manage #menu-overview thead th, [id*="protected-pages-configure"] fieldset table thead th, [id*="protected-pages-edit"] fieldset table thead th {
   font-weight: 500;
 }
-.views-table tbody td, [id*="field-newsl-add-news-values"] tbody td, .variables-and-field-container .variables table tbody td, .page-admin-structure-menu-manage #menu-overview tbody td, [id*="protected-pages-configure"] fieldset table tbody td {
+.views-table tbody td, [id*="field-newsl-add-news-values"] tbody td, .variables-and-field-container .variables table tbody td, .page-admin-structure-menu-manage #menu-overview tbody td, [id*="protected-pages-configure"] fieldset table tbody td, [id*="protected-pages-edit"] fieldset table tbody td {
   border-top: 1px solid #f6f6f6;
 }
 
@@ -5170,7 +5170,7 @@ div.node #comments h2 {
   padding-top: 0;
 }
 
-#views-form-manage-users-page .views-table th, #views-form-manage-users-page [id*="field-newsl-add-news-values"] th, #views-form-manage-users-page .variables-and-field-container .variables table th, .variables-and-field-container .variables #views-form-manage-users-page table th, #views-form-manage-users-page .page-admin-structure-menu-manage #menu-overview th, .page-admin-structure-menu-manage #views-form-manage-users-page #menu-overview th, #views-form-manage-users-page [id*="protected-pages-configure"] fieldset table th, [id*="protected-pages-configure"] fieldset #views-form-manage-users-page table th,
+#views-form-manage-users-page .views-table th, #views-form-manage-users-page [id*="field-newsl-add-news-values"] th, #views-form-manage-users-page .variables-and-field-container .variables table th, .variables-and-field-container .variables #views-form-manage-users-page table th, #views-form-manage-users-page .page-admin-structure-menu-manage #menu-overview th, .page-admin-structure-menu-manage #views-form-manage-users-page #menu-overview th, #views-form-manage-users-page [id*="protected-pages-configure"] fieldset table th, [id*="protected-pages-configure"] fieldset #views-form-manage-users-page table th, #views-form-manage-users-page [id*="protected-pages-edit"] fieldset table th, [id*="protected-pages-edit"] fieldset #views-form-manage-users-page table th,
 #views-form-manage-users-page .views-table td,
 #views-form-manage-users-page [id*="field-newsl-add-news-values"] td,
 #views-form-manage-users-page .variables-and-field-container .variables table td,
@@ -5178,7 +5178,9 @@ div.node #comments h2 {
 #views-form-manage-users-page .page-admin-structure-menu-manage #menu-overview td,
 .page-admin-structure-menu-manage #views-form-manage-users-page #menu-overview td,
 #views-form-manage-users-page [id*="protected-pages-configure"] fieldset table td,
-[id*="protected-pages-configure"] fieldset #views-form-manage-users-page table td {
+[id*="protected-pages-configure"] fieldset #views-form-manage-users-page table td,
+#views-form-manage-users-page [id*="protected-pages-edit"] fieldset table td,
+[id*="protected-pages-edit"] fieldset #views-form-manage-users-page table td {
   max-width: 170px;
 }
 
@@ -9237,10 +9239,10 @@ div.node #comments h2 {
   font-weight: 400;
 }
 
-[id*="protected-pages-configure"] fieldset {
+[id*="protected-pages-configure"] fieldset, [id*="protected-pages-edit"] fieldset {
   border: none;
 }
-[id*="protected-pages-configure"] fieldset > legend {
+[id*="protected-pages-configure"] fieldset > legend, [id*="protected-pages-edit"] fieldset > legend {
   background-color: #fefafb;
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #d9d9d9;
@@ -9252,12 +9254,15 @@ div.node #comments h2 {
   vertical-align: top;
   width: 100%;
 }
-[id*="protected-pages-configure"] fieldset .fieldset-description {
+[id*="protected-pages-configure"] fieldset .fieldset-description, [id*="protected-pages-edit"] fieldset .fieldset-description {
   padding: 8px 20px 0;
 }
-[id*="protected-pages-configure"] fieldset .form-submit {
+[id*="protected-pages-configure"] fieldset .form-submit, [id*="protected-pages-edit"] fieldset .form-submit {
   margin-left: 250px;
   margin-bottom: 20px;
+}
+[id*="protected-pages-configure"] fieldset div.form-type-password-confirm div.password-suggestions, [id*="protected-pages-edit"] fieldset div.form-type-password-confirm div.password-suggestions {
+  margin-bottom: 10px;
 }
 
 [id*="protected-pages-enter-password"] fieldset {
@@ -9268,4 +9273,15 @@ div.node #comments h2 {
 }
 [id*="protected-pages-enter-password"] fieldset .form-submit {
   margin-left: 250px;
+}
+
+[id*="draggableviews-table"] thead th.views-field-counter {
+  white-space: nowrap;
+}
+
+.node-survey-form [id*="field-story-reporter-values"] thead tr th label {
+  padding-top: 8px;
+}
+.node-survey-form [id*="field-story-reporter-values"] .form-type-textfield > label {
+  display: none;
 }

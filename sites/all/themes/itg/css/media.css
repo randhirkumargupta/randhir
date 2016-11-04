@@ -76,13 +76,6 @@
     margin-left: 135px;
     margin-right: 50px;
     padding-left: 0;
-    white-space: nowrap;
-    overflow-x: scroll;
-  }
-  #block-itg-layout-manager-header-block .navigation .menu li {
-    display: inline-block;
-    vertical-align: top;
-    float: none;
   }
 
   /*    special event page css start here*/
@@ -230,8 +223,7 @@
     zoom: 1;
     margin: 0px;
     padding-left: 0;
-    white-space: pre-wrap;
-    overflow-x: inherit;
+    padding-right: 0;
   }
   #block-itg-layout-manager-header-block .navigation .menu:before, #block-itg-layout-manager-header-block .navigation .menu:after {
     content: "";
@@ -255,6 +247,9 @@
   }
   #block-itg-layout-manager-header-block .navigation .menu li a.active, #block-itg-layout-manager-header-block .navigation .menu li a:hover {
     color: #ffc106;
+  }
+  #block-itg-layout-manager-header-block .navigation .menu li a:after {
+    display: none;
   }
   #block-itg-layout-manager-header-block .navigation .menu li.all-menu a {
     border-right: none;
