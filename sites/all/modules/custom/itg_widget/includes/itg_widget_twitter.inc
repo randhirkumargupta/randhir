@@ -60,3 +60,34 @@ function budget_tweets() {
  ';
      
 }
+
+
+/*
+ * get tweets election
+ */
+function election_tweets() {
+
+    drupal_add_js("jQuery(document).ready(function() {
+         ! function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+        p = /^http:/.test(d.location) ? 'http' : 'https';
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + '://platform.twitter.com/widgets.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, 'script', 'twitter-wjs');
+      
+    });", array('type' => 'inline', 'scope' => 'footer'));
+
+    return '
+<a class="twitter-timeline"
+  href="https://twitter.com/TwitterDev"
+  data-width="300"
+  data-height="300">
+Tweets by @TwitterDev
+</a> ';
+     
+}
+

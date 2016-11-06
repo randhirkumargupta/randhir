@@ -336,8 +336,12 @@ header{
             @include clearfix;
             margin-top: 20px;            
             background: #a00606;
+            .container{
+                @include pos(relative);
+            }
             .menu{
                 padding-left:135px;
+                padding-right:50px;
                 li{
                     @include float(left);
                     a{
@@ -345,15 +349,33 @@ header{
                         text-transform: uppercase;
                         @include itg-font(null, $itg-font-medium);
                         padding: 0 10px;
-                        border-right: 1px solid $itg-nav-bordercolor;
+/*                        border-right: 1px solid $itg-nav-bordercolor;*/
                         border-top:none;
                         height: 37px;
+                        @include pos(relative);
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
-                        &:hover{
+                        &.active, &:hover{
                                 color: #ffc106;
                         }
+                        &:after{
+                            position: absolute;
+                            content: '';
+                            height: 100%;
+                            background: #680101;
+                            width: 1px;
+                            right: 0;
+                        }
                     }
+                }
+                &#newlist{
+                    li{
+                        a{
+                         &:after{
+                            display: none;
+                         }   
+                        }                        
+                    }   
                 }
             }
             ul li.sponser-link{
@@ -364,6 +386,32 @@ header{
                      color: #323232;
                   }
               }  
+            }
+            .all-menu{
+                cursor: pointer;
+                i{
+                    font-size: 7px;
+                    color: #000;
+                }
+            }
+            ul#newlist{
+                padding-left: 0;
+                padding-right: 0;
+                position: absolute;
+                top: 37px;                
+                z-index: 10;
+                background: #a00606;
+                display:none;
+                margin-left:0;
+                margin-right:0;
+                li{                    
+                    float: none;
+                    border: none;
+                    border-bottom: 1px solid #000;
+                    a{
+                        display: block;
+                    }
+                }
             }
         }
     
@@ -546,18 +594,22 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
+            
         }
     }
     .form-type-checkboxes{
-        > label{width: 200px; @extend .dib; @extend .vmid;}
+        > label{width: 200px; @extend .dib; @extend .vmid; color: #323232; font: 400 14px/18px "Roboto Slab";}
         div.rating{
             @extend .fleft; 
             @extend .full;
             padding: 0;
             margin: 10px 0;
             .form-type-checkbox{
-                @extend .pos-rel; @extend .dib;
+                @extend .pos-rel; 
+                @extend .dib;
+                padding-left: 0;
+                margin-bottom: 0;
             }
         }
     }
@@ -601,7 +653,7 @@ header{
             }
         }
         &.form-type-textfield{
-            margin: 10px 0;
+            margin: 0 0 10px;
         }
     }
     .form-type-checkboxes{
@@ -1212,6 +1264,7 @@ footer{
                     border-right: 1px solid #606060;
                     @include font(16px,15px,null);
                     @include display-inline;
+                    cursor: pointer;
                 }
                 &:last-child{
                     a{
@@ -1521,11 +1574,12 @@ footer{
         @include clearfix;
         @include listing-with-image(dont-miss-listing,left,15px,dm-pic,dm-detail);
         .dont-miss-listing{            
-            @include calculate-width(1);
-            padding: 0 0px 20px 0;
+            @include float(left);
+            @include calculate-width(2);
+            padding: 0px 10px 25px 0;
             border:none; 
             .dm-pic{
-                width: 125px;
+                width: 170px;
                 a{
                     display: block;
                 }
@@ -1546,6 +1600,12 @@ footer{
                     color: #333;
                 }
             }
+            &:nth-child(2n+1){
+                clear:left;
+            }
+            &:nth-child(3), &:nth-child(4){
+                padding-bottom: 0;
+            } 
         }
     }
 }
@@ -2306,14 +2366,21 @@ footer{
         @include clearfix;
         padding: 10px;
         font-family: $itg-roboto;
+        overflow: hidden;
     }
-    .anchor-left, .anchor-right{
-        @include float(none);
-        @include calculate-width(1);
+    
+    .anchor-left{
+        float: left;
+            margin-right: 15px;
+            margin-bottom: 5px;  
+            width: auto;
     }
     .anchor-right{
         padding-left:0px;
-        padding-top:15px;
+        padding-top:0px;
+        font-size: 14px;
+        color: #818181;
+        line-height: 22px;
         a.active{
             @include font(22px,30px,700);            
             color: #33363b;
@@ -2321,6 +2388,18 @@ footer{
         a{
             color: #a00606;
             @include font(12px);
+        }
+        .social-icon{
+            ul{
+                @extend .list-none;
+                li{
+                    @include display-inline;
+                    padding: 10px 10px 0 0;
+                    i{
+                        @include font(20px);
+                    }
+                }
+            }
         }
     }
 }
@@ -4028,11 +4107,21 @@ footer{
             text-transform: uppercase;
             margin-top: 5px;
         }
+        .col-md-4{
+            margin-bottom:20px;
+            text-align: center;          
+            &:nth-child(2n+1){
+                clear: left;
+            }
+        }
     }
 }
 /*CSS End So sorry page*/
 /*CSS Start user login header*/
 #block-itg-layout-manager-header-block{
+    .second-level-menu.menu{
+        @include clearfix;
+    }
     .menu-login{
         .user-menu{
             @include pos(relative);
@@ -4190,10 +4279,7 @@ footer{
     ul{
         .dont-miss-listing{
             @include float(none);
-            @include calculate-width(1);            
-            &:nth-child(3), &:nth-child(4){
-                padding-bottom: 25px;
-            }
+            @include calculate-width(1);                       
             +.dont-miss-listing{
                 padding:0 10px 25px 10px;
             }
@@ -4220,6 +4306,16 @@ footer{
         }
     }
 }
+#block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+     ul{
+        .dont-miss-listing{
+            padding: 10px 10px 25px 10px;
+            +.dont-miss-listing{
+                padding:0 10px 25px 10px;
+            }
+        }
+     }
+}
 .year-slider{
     background: #000;
     padding: 10px;    
@@ -4233,11 +4329,14 @@ footer{
 .yearender{
     .pager.pager--infinite-scroll{
         text-align: center;
+        list-style-type: none;
         a{
-            background: #f6f6f6;
+            background: #d6d6d6;
             @include display-inline;
             padding: 5px 10px;
-            border: 1px solid #ddd;
+            font-family: roboto;
+            border-radius: 3px;
+            margin-bottom: 50px;
         }
     }
     .view-yearender.view-display-id-block_2{
@@ -4661,12 +4760,26 @@ footer{
     .oscar-slider{
         .top-slider{
             background: #000;
-            padding: 10px 10px 0 10px;           
+            padding: 10px 10px 0 10px;    
+            @include pos(relative);
             .common-img{
                 display: none;
             }
              .first-image{
                 display: block;
+            }
+            span{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                font-size: 40px;
+                margin-left: -35px;
+                margin-top: -30px;
+                color: #fff;
+                cursor: pointer;
+                background: rgba(0, 0, 0, 0.59);    
+                padding: 10px 20px;
+                border-radius: 5px;
             }
         }
         .bottom-slider { 
@@ -4798,6 +4911,10 @@ footer{
                 .section-part{
                     @include float(left);
                     width:55.5%;
+                    padding-right: 10px;
+                    p{
+                        margin-bottom: 10px;
+                    }
                     a{
                     color:#d71921;  
                     width: 32%;
@@ -4878,7 +4995,7 @@ footer{
                 font-weight: 700;
                 cursor: pointer;
                 &.active{
-                    background: #a00606;
+                    background: #a00606 !important;
                     color:#fff;
                 }
             }
@@ -4893,7 +5010,7 @@ footer{
         font-family: $itg-robotoslab;
         margin-bottom: 30px;
         padding-bottom: 10px;    
-        font-weight: 500;
+        font-weight: 700;
     }
 }
 #block-views-program-schedule-block-3{    
@@ -4942,13 +5059,13 @@ footer{
 }
 #block-views-event-associate-video-block{
     img{
-       border: 5px solid #e9e9e9;
+       border: 7px solid #e9e9e9; 
     }
     .video-list{
         @include pos(relative);
         margin-bottom:20px;
         &:before{
-            @include pos(absolute,null,25px,8px,null);
+            @include pos(absolute,null,40px,10px,null);
             content: '';
             background: url(../images/youtube-icon.png) no-repeat;
             width: 18px;
@@ -4957,6 +5074,11 @@ footer{
     }
 }
 #block-views-program-schedule-block-1{
+    .col-md-6{
+        &:nth-child(2n+1){
+            clear: left;
+        }
+    }
     ul{
         @extend .list-none;
     }
@@ -5023,8 +5145,7 @@ footer{
 
     }    
 }
-#block-menu-menu-event-menu{
-    background: #000;   
+#block-menu-menu-event-menu{   
     ul{
       @extend .list-none;
       @include clearfix;
@@ -5063,9 +5184,23 @@ footer{
             text-align: center;
             border: 1px solid #ddd;
             padding: 10px;
-            &:nth-child(4n+1){
-                clear: left;
-            }      
+            height: 85px;
+            position: relative;
+                &:nth-child(4n+1){
+                    clear: left;
+                }
+                img{
+                    max-height: 100%;  
+                    max-width: 100%; 
+                    width: auto;
+                    height: auto;
+                    position: absolute;  
+                    top: 0;  
+                    bottom: 0;  
+                    left: 0;  
+                    right: 0;  
+                    margin: auto;
+                }
             }
     }
 }
@@ -5123,6 +5258,12 @@ footer{
     .defalt-placeholder-magazin{
         height: 140px;
     }
+    .custom_html_widget{
+        padding: 10px;
+    }
+    .grey-bg{
+       background: #f3f3f3;
+    }
     .itg-layout-672{
         .droppable{
             height: 672px;            
@@ -5170,8 +5311,8 @@ footer{
     }
     .itg-325-layout{
         .droppable, .ad-widget{
-                height: 325px;                
-            }
+            height: 325px;                
+        }       
     }
     .itg-345-layout{
         .droppable {
@@ -5179,12 +5320,12 @@ footer{
             }
     }
     .more{
-                display: block;
-                text-align: right;                
-                font-weight: 700;
-                font-size: 12px;
-                padding: 10px 0;
-            }
+        display: block;
+        text-align: right;                
+        font-weight: 700;
+        font-size: 12px;
+        padding: 10px 0;
+    }
     .shadow-on{        
         -moz-box-shadow: 0 0 5px #d4cdcd;
         -webkit-box-shadow: 0 0 5px #d4cdcd;  
@@ -5237,9 +5378,10 @@ footer{
 
     .auto-block-2{
         border: 1px solid #ddd;
-        .special-top-news {
-            position: relative;            
+        position: relative;            
+        .special-top-news {                            
             overflow: hidden;
+            height: 100%;
             .widget-title, .widget-settings {
                 position: absolute;
             }
@@ -5436,6 +5578,9 @@ footer{
 }
 .section-sport-ipl-bg{
     background: url('../images/sports-bg.png') no-repeat center 135px;
+    main.container{
+        background: #fff;
+    }
 }
 .sport-home-layout-page{  
     .widget-title {
@@ -6154,3 +6299,122 @@ input[type="radio"]:checked + label:after{
     height: none;
 }
 /*css end defalt image */
+
+/* CSS For Election Page */
+.election-page{  
+    h1{
+        margin-top:60px;
+        .disc-share{
+            a{
+                font-size: 20px;
+                color: #b6b6b6;
+            }
+        }
+    }
+    .left-side{
+        .itg-415-layout{
+            .droppable{
+                height: 415px;
+            }
+        }
+        .itg-325-layout{
+            .droppable, iframe{
+                height: 325px;
+            }
+            iframe{
+                @include calculate-width(1);
+            }
+        }
+        .itg-map{
+            .droppable{
+                height: 375px;
+            }
+        }
+        .itg-most-popular{
+            .droppable{
+                min-height:180px;
+            }
+        }
+        .itg-photo{
+            .droppable{
+                height: 494px;
+            }
+        }           
+    }
+  .right-side{
+    .itg-325{
+      .droppable{
+        height: 325px;
+      }
+    }
+    .itg-484{
+      .droppable{
+        height: 484px;
+      }
+    }
+    .itg-460{
+      .droppable{
+        height: 460px;
+      }
+    }
+    .ad-widget{
+        border: none;
+    }
+    .election-topadd .ad-widget{        
+        margin-top: 103px;
+        padding-bottom: 0;
+        margin-bottom: 90px;
+    }
+  }
+  .itg-listing {
+    border: none;
+}
+.highlight {
+    overflow: auto;
+}
+.trending-videos{
+        padding: 0;
+        border: none;
+        li{
+           &.trending-videos-list{
+            padding: 0;            
+            + li{
+                    border-top:none;
+                    padding-top: 20px;
+                }
+            }
+        }                
+    }
+    .itg-most-popular{
+        .most_popular{
+            border: none;
+            p{
+                margin-top:10px; 
+            }
+        }
+        .col-md-3{
+            margin-bottom:30px;
+            &:nth-child(4n+1){
+                clear: left;
+            }
+        }
+    }
+   .osscar-video{
+        background: transparent;
+        ul .dont-miss-listing{
+            padding: 0;
+            +.dont-miss-listing{
+                padding: 30px 0 0 0;
+            }
+        }
+    }
+    .tech-block_5 .data-holder{        
+        background: #303030;
+        max-width: inherit;
+        .view-content{
+            margin: 10px;
+            overflow: hidden;
+        }
+    }
+}
+/* CSS For Election Page End */

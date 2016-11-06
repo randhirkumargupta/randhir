@@ -105,6 +105,7 @@ features[msnf_step][] = step_sponsor|node|event_backend
 features[node][] = event_backend
 features[node][] = sponsor
 features[taxonomy][] = sponsor
+features[user_permission][] = administer domains
 features[user_permission][] = create event_backend content
 features[user_permission][] = create sponsor content
 features[user_permission][] = delete any event_backend content

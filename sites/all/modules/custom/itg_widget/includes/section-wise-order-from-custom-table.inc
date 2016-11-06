@@ -25,6 +25,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
           'budget-decoded'=>3,
           'edu-featurefilia'=>4 ,
           'edu-jobs-and-career'=>4 ,
+          'election-so-sorry'=>1 ,
           'edu-tips-and-trick'=>10 ,
           'edu-sample-paper'=>5 ,
           'edu-from-the-magazine'=>4 ,
@@ -48,11 +49,11 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       {
           return itg_widget_section_wise_ordering_from_custom_table_by_content($info, 'story',$widget_style);
       }
-      if($widget_style=='home-watch')
+      if($widget_style=='home-watch' || $widget_style=='election-so-sorry')
       {
           return itg_widget_section_wise_ordering_from_custom_table_by_content($info, 'videogallery',$widget_style);
       }
-      
+       
       
       
     $cat_id = $info['section'];
@@ -112,12 +113,14 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
           'auto-tips-and-tricks'=>3 ,
           'edu-exam'=>4 ,
           'budget-reactions'=>4,
+          'home-shows'=>4,
           'election-other-story'=>4 ,
           'home-watch'=>3,
           'india-inc-on-budget'=>4,
           'budget-decoded'=>3,
           'edu-featurefilia'=>4 ,
           'edu-jobs-and-career'=>4 ,
+          'election-so-sorry'=>1 ,
           'edu-tips-and-trick'=>10 ,
           'edu-sample-paper'=>5 ,
           'edu-from-the-magazine'=>4 ,
@@ -151,7 +154,7 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
             ->condition('iwo.widget', $widget_name)
              ->condition('n.type', $content)
             ->condition('n.status', '1')
-            ->orderBy('iwo.weight')
+             ->orderBy('iwo.weight','DESC')
             ->groupBy('iwo.nid')
             ->range(0, $range);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
