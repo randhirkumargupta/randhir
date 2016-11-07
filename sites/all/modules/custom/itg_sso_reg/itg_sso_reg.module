@@ -209,19 +209,20 @@ function itg_sso_logout_form_submit(&$form, &$form_state) {
  * {@inheritdoc}
  */
 function itguser_logout() {
-  
-$domain_array = array('http://qa.indiatodayonline.in', 
-                        'http://staging.indiatodayonline.in','http://dev.indiatodayonline.in'
-      );
-  
-  foreach($domain_array as $key => $val) {
-    $content .= '<iframe src="'.$val.'/user/logout" id="iframe"></iframe>';    
+  global $user;
+
+  if ($user->uid > 0) {
+    $domain_array = array('http://qa.indiatodayonline.in',
+      'http://staging.indiatodayonline.in', 'http://dev.indiatodayonline.in'
+    );
+
+    foreach ($domain_array as $key => $val) {
+      $content .= '<iframe src="' . $val . '/user/logout" id="iframe"></iframe>';
+    }
+
+    echo $content;
   }
-  
-  echo $content;
-  
+  else {
+    drupal_access_denied();
+  }
 }
-
-
-
-
