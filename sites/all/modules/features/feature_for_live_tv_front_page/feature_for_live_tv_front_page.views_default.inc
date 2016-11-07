@@ -133,8 +133,8 @@ function feature_for_live_tv_front_page_views_default_views() {
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
 
-  /* Display: live tv */
-  $handler = $view->new_display('page', 'live tv', 'page');
+  /* Display: Aaj tak live tv */
+  $handler = $view->new_display('page', 'Aaj tak live tv', 'page');
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';

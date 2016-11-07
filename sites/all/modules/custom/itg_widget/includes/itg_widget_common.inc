@@ -785,6 +785,12 @@ function itg_widget_theme() {
     'live_score_data' => array(
       'template' => 'templates/live-score-data',
     ),
+    'at_sirf_web_per_widget' => array(
+      'template' => 'templates/at-sirf-web-per-widget',
+    ),
+    'at_widget_big_story_format' => array(
+      'template' => 'templates/at-big-story-format',
+    ),
   );
   return $themes;
 }
@@ -931,6 +937,27 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       $form['#validate'][] = 'custom_section_wise_validate';
+      break;
+    case 'views-exposed-form-at-section-wise-draggable-content-order-at-sirf-web-per':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE, 'story');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-at-aapka-poll-at-aapka-vote-widget-content':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets('poll');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-at-big-story-at-big-story-format':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
     case 'views-exposed-form-section-wise-content-ordering-list-page':
       global $messages;

@@ -46,6 +46,15 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
   );
 
 
+  // Adding extra field for related content.
+  if ($current_display == 'big_story_format' && ($_GET['type'] != 'story' || !isset($_GET['type']))) {
+    $form['related_content'] = array(
+      '#type' => 'textfield',
+      '#title' => t("Related content."),
+      '#attributes' => array("placeholder" => t("Enter node id 123,1024,777")),
+      '#description' => t("Node ids must be comma seperated values ex 123,1024,777."),
+    );
+  }
   // work done for aaj tak.
   if ($current_display == 'at_big_story_format' && ($_GET['type'] == 'breaking_news' || !isset($_GET['type']))) {
     $form['related_content'] = array(
