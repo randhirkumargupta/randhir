@@ -133,6 +133,30 @@ Drupal.behaviors.my_custom_behavior = {
     $('body').on('click', '.cart-dropdown-close', function(){
       $(this).parent().hide();
     });
+    // jQuery code to close activate message popup
+    $('.activate-message').on('click', '.close-popup', function(){
+      $(this).parent().parent().hide();
+    });
+    
+    // jQuery code to get url parameters
+      var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split('=');
+
+          if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+          }
+        }
+      };
+      var activate_account = getUrlParameter('active');
+      if(activate_account == true){
+        $('.activate-message').show();
+      }
   }
 };
 
@@ -297,18 +321,15 @@ jQuery(document).ready(function () {
     var eventMenu = function(){    
          winWidth = jQuery(window).width();  
          if(winWidth < 1024){
-            jQuery('#block-menu-menu-event-menu').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>'); 
-        }
-        jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function(){            
-            jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
-        });
+            jQuery('#block-menu-menu-event-menu').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');        
+            jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function(){            
+                jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
+            });
+         }
     };
    
     eventMenu();
     jQuery(window).resize(eventMenu);
-    
-    
-    
       
 });
 

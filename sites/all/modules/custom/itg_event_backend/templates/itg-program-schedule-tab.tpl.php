@@ -6,10 +6,11 @@
 global $base_url;
 $actual_host = explode('://', $base_url);
 $host_node = itg_event_backend_get_host_node($actual_host[1]);
+
 // Css variables
-$menu_background_color = $host_node->field_ec_menu_background_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_menu_background_color[LANGUAGE_NONE][0]['rgb'] : '#000';
-$heading_background_color = $host_node->field_ec_heading_bck_color[LANGUAGE_NONE][0]['rgb'];
-$font_color = $host_node->field_ec_font_color[LANGUAGE_NONE][0]['rgb'];
+$heading_background_color = $host_node->field_ec_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
+$font_color = $host_node->field_ec_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';
+$content_font_color = $host_node->field_ec_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
 
 $actual_host_name = itg_event_get_host_name();
 if($actual_host_name) {
@@ -43,7 +44,7 @@ foreach ($data as $key => $value) {
       $output_story_title = '';
       foreach ($story_title['story_title'] as $title) {
         if (!empty($title)) {
-          $output_story_title = '<p><i class="fa fa-story-title"></i>'.$title.'</p>';
+          $output_story_title = '<p style="color:'.$content_font_color.'"><i class="fa fa-story-title"></i>'.$title.'</p>';
         }
       }
       
@@ -73,10 +74,10 @@ foreach ($data as $key => $value) {
             foreach ($program['speaker'] as $speaker) {
               $spk_detail = itg_event_backend_get_speaker_details($speaker['target_id']);
               print '<div class="profile-loop"><label style="color:'.$font_color.'">Speaker:</label>';
-              $spk_title = '<div class="speaker-title"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank">'.$spk_detail[0]->title.'</a></div>';
+              $spk_title = '<div class="speaker-title"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank" style="color:'.$content_font_color.'">'.$spk_detail[0]->title.'</a></div>';
               $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . '/>';
               print '<div class="speaker-image"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank">'.$img.'</a></div>';
-              print '<div class="speaker-designation">' . $spk_title . $spk_detail[0]->field_story_new_title_value . '</div></div>';
+              print '<div class="speaker-designation" style="color:'.$content_font_color.'">' . $spk_title . $spk_detail[0]->field_story_new_title_value . '</div></div>';
             }
             ?>
           </div></div></div> 

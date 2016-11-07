@@ -12,8 +12,6 @@ $banner_image = $host_node->field_ec_event_banner[LANGUAGE_NONE][0]['uri'] ? $ba
 
 // Css variables
 $menu_background_color = $host_node->field_ec_menu_background_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_menu_background_color[LANGUAGE_NONE][0]['rgb'] : '#000';
-$heading_background_color = $host_node->field_ec_heading_bck_color[LANGUAGE_NONE][0]['rgb'];
-$font_color = $host_node->field_ec_font_color[LANGUAGE_NONE][0]['rgb'];
 ?>
 
 <div id="page">
