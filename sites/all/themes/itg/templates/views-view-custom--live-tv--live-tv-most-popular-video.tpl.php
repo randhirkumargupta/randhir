@@ -31,8 +31,9 @@
       <div class="video-anchor">
         <?php print $output['field_video_anchor'] ?>
       </div>
-      <div class="created">
-        <?php print $output['created'] ?>
+      <div class="changed">
+        <?php print $output['changed'] ?>
+        <?php print t("IST");?>
       </div>
     </div>
   <?php endforeach; ?>

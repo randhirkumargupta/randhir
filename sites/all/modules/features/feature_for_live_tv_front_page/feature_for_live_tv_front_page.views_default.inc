@@ -84,34 +84,32 @@ function feature_for_live_tv_front_page_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Field: Content: Ad Code */
+  /* Field: Content: Web */
   $handler->display->display_options['fields']['field_ads_ad_code']['id'] = 'field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['table'] = 'field_data_field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['field'] = 'field_ads_ad_code';
-  $handler->display->display_options['fields']['field_ads_ad_code']['label'] = 'Web';
   $handler->display->display_options['fields']['field_ads_ad_code']['element_label_colon'] = FALSE;
-  /* Field: Content: Header script */
+  /* Field: Content: Web Mobil */
   $handler->display->display_options['fields']['field_ads_header_script']['id'] = 'field_ads_header_script';
   $handler->display->display_options['fields']['field_ads_header_script']['table'] = 'field_data_field_ads_header_script';
   $handler->display->display_options['fields']['field_ads_header_script']['field'] = 'field_ads_header_script';
-  $handler->display->display_options['fields']['field_ads_header_script']['label'] = 'Web Mobil';
   $handler->display->display_options['fields']['field_ads_header_script']['element_label_colon'] = FALSE;
-  /* Field: Field: Content */
+  /* Field: Field: Long Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['label'] = 'iOS';
   $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
-  /* Field: Field: Description */
+  /* Field: Field: Android */
   $handler->display->display_options['fields']['field_mega_review_description']['id'] = 'field_mega_review_description';
   $handler->display->display_options['fields']['field_mega_review_description']['table'] = 'field_data_field_mega_review_description';
   $handler->display->display_options['fields']['field_mega_review_description']['field'] = 'field_mega_review_description';
-  $handler->display->display_options['fields']['field_mega_review_description']['label'] = 'Android';
   $handler->display->display_options['fields']['field_mega_review_description']['element_label_colon'] = FALSE;
-  /* Field: Content: Window */
+  /* Field: Content: Ingredients */
   $handler->display->display_options['fields']['field_recipe_ingredients']['id'] = 'field_recipe_ingredients';
   $handler->display->display_options['fields']['field_recipe_ingredients']['table'] = 'field_data_field_recipe_ingredients';
   $handler->display->display_options['fields']['field_recipe_ingredients']['field'] = 'field_recipe_ingredients';
+  $handler->display->display_options['fields']['field_recipe_ingredients']['label'] = 'Window';
   $handler->display->display_options['fields']['field_recipe_ingredients']['element_label_colon'] = FALSE;
   /* Field: Content: device */
   $handler->display->display_options['fields']['field_live_tv_device']['id'] = 'field_live_tv_device';
@@ -146,34 +144,33 @@ function feature_for_live_tv_front_page_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Ad Code */
+  /* Field: Content: Web */
   $handler->display->display_options['fields']['field_ads_ad_code']['id'] = 'field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['table'] = 'field_data_field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['field'] = 'field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['label'] = '';
   $handler->display->display_options['fields']['field_ads_ad_code']['element_label_colon'] = FALSE;
-  /* Field: Content: Header script */
+  /* Field: Content: Web Mobil */
   $handler->display->display_options['fields']['field_ads_header_script']['id'] = 'field_ads_header_script';
   $handler->display->display_options['fields']['field_ads_header_script']['table'] = 'field_data_field_ads_header_script';
   $handler->display->display_options['fields']['field_ads_header_script']['field'] = 'field_ads_header_script';
-  $handler->display->display_options['fields']['field_ads_header_script']['label'] = 'Web Mobil';
   $handler->display->display_options['fields']['field_ads_header_script']['element_label_colon'] = FALSE;
-  /* Field: Field: Content */
+  /* Field: Field: Long Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['label'] = 'iOS';
   $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
-  /* Field: Field: Description */
+  /* Field: Field: Android */
   $handler->display->display_options['fields']['field_mega_review_description']['id'] = 'field_mega_review_description';
   $handler->display->display_options['fields']['field_mega_review_description']['table'] = 'field_data_field_mega_review_description';
   $handler->display->display_options['fields']['field_mega_review_description']['field'] = 'field_mega_review_description';
-  $handler->display->display_options['fields']['field_mega_review_description']['label'] = 'Android';
   $handler->display->display_options['fields']['field_mega_review_description']['element_label_colon'] = FALSE;
-  /* Field: Content: Window */
+  /* Field: Content: Ingredients */
   $handler->display->display_options['fields']['field_recipe_ingredients']['id'] = 'field_recipe_ingredients';
   $handler->display->display_options['fields']['field_recipe_ingredients']['table'] = 'field_data_field_recipe_ingredients';
   $handler->display->display_options['fields']['field_recipe_ingredients']['field'] = 'field_recipe_ingredients';
+  $handler->display->display_options['fields']['field_recipe_ingredients']['label'] = 'Window';
   $handler->display->display_options['fields']['field_recipe_ingredients']['element_label_colon'] = FALSE;
   /* Field: Content: device */
   $handler->display->display_options['fields']['field_live_tv_device']['id'] = 'field_live_tv_device';
@@ -309,6 +306,8 @@ function feature_for_live_tv_front_page_views_default_views() {
 
   /* Display: live tv : Latest Video */
   $handler = $view->new_display('block', 'live tv : Latest Video', 'live_tv_latest_block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Live tv: latest video';
   $handler->display->display_options['display_description'] = 'live tv : Latest Video';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
@@ -362,14 +361,14 @@ function feature_for_live_tv_front_page_views_default_views() {
   $handler->display->display_options['fields']['field_video_anchor']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = '';
-  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'itg_time';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['changed']['date_format'] = 'itg_time';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -399,6 +398,8 @@ function feature_for_live_tv_front_page_views_default_views() {
 
   /* Display: live tv :  Latest Program */
   $handler = $view->new_display('block', 'live tv :  Latest Program', 'live_tv_latest_program');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Live tv: Latest Program';
   $handler->display->display_options['display_description'] = 'live tv : Latest Program';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
@@ -451,14 +452,14 @@ function feature_for_live_tv_front_page_views_default_views() {
   $handler->display->display_options['fields']['field_video_anchor']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = '';
-  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'itg_time';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['changed']['date_format'] = 'itg_time';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
@@ -536,14 +537,14 @@ function feature_for_live_tv_front_page_views_default_views() {
   $handler->display->display_options['fields']['field_video_anchor']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = '';
-  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'itg_time';
-  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['changed']['date_format'] = 'itg_time';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
