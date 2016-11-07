@@ -604,6 +604,8 @@
   /*start event page*/
   #block-itg-event-backend-program-tab-block .event-listing .side-right {
     width: 81%;
+    border-left: 1px dashed #9f9f9f;
+    padding-left: 10px;
   }
   #block-itg-event-backend-program-tab-block .event-listing .side-right .title {
     font-size: 13px;

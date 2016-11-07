@@ -5101,15 +5101,13 @@ footer{
             text-align: left;
             text-transform: uppercase;  
             @include clearfix;
-            li{              
-                width: 33%;
-                color:#000;                
+            li{                                                  
                 float: left;
                 font-weight: 600;
                 vertical-align: middle;
                 &.image{
                     img{
-                     width: 72px;
+                    width: 72px;
                     height: 72px;
                     border-radius: 100%;
                     border: 2px solid #ef3c24;
@@ -5122,15 +5120,23 @@ footer{
                     padding-left: 15px;
                     &.title, &.designation{
                         @include font(12px);
-                    }
-                    &.designation{
-                        color:#6e6e6e;
-                    }
+                    }                    
+                }
+                &:nth-child(1){
+                    width: 28%;
+                    padding-top: 25px;
+                }
+                &:nth-child(2){
+                    width: 24%;
+                    text-align: center;
+                }
+                &:nth-child(3){
+                    width: 48%;
+                    padding-top: 8px;
                 }
             }            
         }
-        .date-display-range{
-            color: #000;
+        .date-display-range{            
             font-family:$itg-roboto;
             font-weight: 900;
             font-size: 18px;
