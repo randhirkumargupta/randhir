@@ -141,6 +141,17 @@
   }
 
   /*End Dont miss Home page css*/
+  /*start Event page registration*/
+  #block-itg-event-backend-event-registration h1, #block-itg-event-backend-event-sign-and-win h1 {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  .event-registration-link, .sign-and-win-contest {
+    margin-bottom: 30px;
+  }
+
+  /* Event page registration end*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
