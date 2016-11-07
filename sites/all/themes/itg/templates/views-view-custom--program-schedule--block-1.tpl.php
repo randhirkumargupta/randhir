@@ -2,13 +2,14 @@
 
 
 global $base_url;
-$actual_host = explode('://', $base_url);
-$host_node = itg_event_backend_get_host_node($actual_host[1]);
+$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
+$host_node_arr = explode('/', $host_detail['source']);
+$host_node = node_load($host_node_arr[1]);
 
 // Css variables
-$heading_background_color = $host_node->field_ec_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
-$font_color = $host_node->field_ec_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';
-$content_font_color = $host_node->field_ec_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+$heading_background_color = $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
+$font_color = $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';
+$content_font_color = $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
 drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-content a').css('color', '".$content_font_color."'); });",'inline');
 ?>
 
