@@ -256,7 +256,9 @@ function itg_event_backend_sponsor($form, &$form_state) {
  * @return boolean
  */
 function itg_event_backend_event_configurations_after_build($form, &$form_state) {
-  $form['field_ec_select_domain'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
+  if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
+    $form['field_ec_select_domain'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
+  }
   $form['path']['#access'] = FALSE;
   return $form;
 }

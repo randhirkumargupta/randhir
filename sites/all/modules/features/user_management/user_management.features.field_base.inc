@@ -218,6 +218,24 @@ function user_management_field_default_field_bases() {
     'type' => 'image',
   );
 
+  // Exported field_base: 'field_user_pincode'.
+  $field_bases['field_user_pincode'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_user_pincode',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
   // Exported field_base: 'field_user_qualification'.
   $field_bases['field_user_qualification'] = array(
     'active' => 1,

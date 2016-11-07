@@ -99,6 +99,50 @@
         }
     }
     /*CSS End Photo and video header crusal page*/  
+    
+/*Css start year end page*/
+    .yearender h2{
+        font-size: 18px;
+        line-height: 22px;
+    }
+    #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+        ul{
+            .dont-miss-listing{
+                padding:10px 10px 25px 10px;
+               .dm-pic{
+                    width: 124px;                
+                } 
+            }
+        }
+    }    
+/*Css end year end page*/   
+/*Start Dont miss Home page css*/
+    .dont-miss{            
+        ul{
+            .dont-miss-listing{
+               .dm-pic{
+                    width: 124px;                
+                }                
+                @include calculate-width(1);
+                padding: 0px 0px 20px 0;  
+                &:nth-child(3){
+                    padding-bottom: 20px;
+                }
+            }
+        }
+    }
+    /*End Dont miss Home page css*/
+    /*start Event page registration*/
+    #block-itg-event-backend-event-registration, #block-itg-event-backend-event-sign-and-win{
+        h1{
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+    }
+    .event-registration-link, .sign-and-win-contest{
+        margin-bottom: 30px;
+    }
+    /* Event page registration end*/
 }   
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
@@ -114,7 +158,7 @@
     .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news{
         margin: 0;
     }
-    /*CSS end education page special*/
+    /*CSS end education page special*/    
 }
 
 @media only screen and (max-width:768px){
@@ -315,7 +359,6 @@
         height: auto;
     }      
     /*End CSS Top Block Grid Home Page*/  
-
     /*css start special event page for osscar*/
     .oscar-layout-page{
         .left-side{
@@ -641,42 +684,7 @@
             @include font(20px);
         }    
     }
-    /*CSS End story section */
-    /*Start Dont miss Home page css*/
-    .dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
-        /*padding: 20px 0px 0px 10px;*/
-        ul{
-            .dont-miss-listing{
-                .dm-pic{
-                    width: 170px;                
-                }
-                @include float(left);
-                @include calculate-width(2);
-                padding: 0px 10px 25px 0;
-                &:nth-child(2n+1){
-                    clear:left;
-                }
-                &:nth-child(3), &:nth-child(4){
-                    padding-bottom: 0;
-                }            
-            }
-        }
-    }
-    /*End Dont miss Home page css*/
-    /*CSS Start year end top news*/
-    #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
-        ul{
-            .dont-miss-listing{
-                @include float(none);
-                @include calculate-width(1);
-                padding:25px 10px;
-                &:nth-child(3), &:nth-child(4){
-                    padding-bottom: 25px;
-                }
-            }
-        }
-    }
-    /*CSS End year end top news*/
+    /*CSS End story section */        
 
     /*Start photo section slider Homepage*/
     .featured_photo_carousel, .tech-block_5, .auto-block_5{

@@ -81,7 +81,7 @@ $font_color = $host_node->field_ec_font_color[LANGUAGE_NONE][0]['rgb'];
       <?php print render($page['content_event']); ?>
       <?php print render($page['content_bottom']); ?>
       <?php print render($page['personalization']); ?>
-      <?php print $feed_icons; ?>
+      <?php //print $feed_icons; ?>
     </section>
     <?php if (false): ?>
     <div id="navigation">

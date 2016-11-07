@@ -114,6 +114,44 @@
   }
 
   /*CSS End Photo and video header crusal page*/
+  /*Css start year end page*/
+  .yearender h2 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
+    padding: 10px 10px 25px 10px;
+  }
+  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+
+  /*Css end year end page*/
+  /*Start Dont miss Home page css*/
+  .dont-miss ul .dont-miss-listing {
+    width: 100%;
+    padding: 0px 0px 20px 0;
+  }
+  .dont-miss ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(3) {
+    padding-bottom: 20px;
+  }
+
+  /*End Dont miss Home page css*/
+  /*start Event page registration*/
+  #block-itg-event-backend-event-registration h1, #block-itg-event-backend-event-sign-and-win h1 {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  .event-registration-link, .sign-and-win-contest {
+    margin-bottom: 30px;
+  }
+
+  /* Event page registration end*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -609,37 +647,6 @@
   }
 
   /*CSS End story section */
-  /*Start Dont miss Home page css*/
-  .dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
-    /*padding: 20px 0px 0px 10px;*/
-  }
-  .dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
-    float: left;
-    width: 50%;
-    padding: 0px 10px 25px 0;
-  }
-  .dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
-    width: 170px;
-  }
-  .dont-miss ul .dont-miss-listing:nth-child(2n+1), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(2n+1), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(2n+1) {
-    clear: left;
-  }
-  .dont-miss ul .dont-miss-listing:nth-child(3), .dont-miss ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
-    padding-bottom: 0;
-  }
-
-  /*End Dont miss Home page css*/
-  /*CSS Start year end top news*/
-  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
-    float: none;
-    width: 100%;
-    padding: 25px 10px;
-  }
-  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
-    padding-bottom: 25px;
-  }
-
-  /*CSS End year end top news*/
   /*Start photo section slider Homepage*/
   .featured_photo_carousel .flexslider .flex-direction-nav, .tech-block_5 .flexslider .flex-direction-nav, .auto-block_5 .flexslider .flex-direction-nav {
     display: block;
