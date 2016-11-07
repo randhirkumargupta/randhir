@@ -331,7 +331,7 @@ jQuery(document).ready(function () {
     };
    
     eventMenu();
-    jQuery(window).resize(eventMenu);
+    //jQuery(window).resize(eventMenu);
       
 });
 
