@@ -8,7 +8,7 @@
  */
 
 ?>
-<?php if($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
+<?php if($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 <script>
 window.addEventListener("message", function(ev) {
     if (ev.data.message === "requestResult") {
@@ -139,6 +139,3 @@ window.addEventListener("message", function(ev) {
 
 <?php print render($page['bottom']); ?>
 <?php global $base_url; ?>
-<div id="widget-ajex-loader" style="display: none">
-    <img class="widget-loader" align="center" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
-</div>

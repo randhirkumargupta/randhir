@@ -1998,10 +1998,6 @@ body.has-cart-popup{
         vertical-align: top;
         width: 100%;
     }
-    .messages--status{
-      margin-top: 20px;
-      padding: 0 15px;
-    }
 }
 .page-cart,
 .page-checkout,
@@ -2561,6 +2557,7 @@ body.has-cart-popup{
   #forgototpclickme{
     margin: 9px 20px;
     float: left;
+    cursor: pointer;
   }
   #ajax-loader {
     float: left;
@@ -3578,5 +3575,92 @@ body.has-cart-popup{
     &:hover{
       text-decoration: underline;
     }
+  }
+}
+
+/* CSS class to extend for success message */
+.itg-success-message{
+  margin: 15px;
+  border: 1px solid #009c00;
+  padding: 10px;
+  &:before{
+    content: '\f00c';
+    color: #009c00;
+    margin-right: 10px;
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+}
+.itg-error-message{
+  margin: 15px;
+  border: 1px solid red;
+  padding: 10px;
+}
+#email-sucess, #mobile-success{
+  @extend .itg-success-message;
+}
+[id*="itg_user_forgot_password_multistep_form"] .messages--status{
+  @extend .itg-success-message;
+}
+#thank-you{
+  a{
+    @extend .itg-success-message;
+    display: block;
+  }
+}
+.activate-message{
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  .message-body{
+    background-color: #fff;
+    left: 0;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 30px 15px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    text-align: center;
+    .close-popup{
+      cursor: pointer;
+      height: 20px;
+      position: absolute;
+      right: 0;
+      text-align: center;
+      top: 0;
+      width: 20px;
+      .fa {
+        display: inline-block;
+        font: 16px/18px FontAwesome;
+        text-rendering: auto;
+        vertical-align: top;
+      }
+    }
+  }
+}
+[id*="itg-sso-reg-multistep-form"] .email-or-mobile{
+  position: relative;
+  &:after{
+    content: 'OR';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 25px;
+    margin: 0 auto;
+    width: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    font-family: Roboto;
+    font-weight: 500;
   }
 }

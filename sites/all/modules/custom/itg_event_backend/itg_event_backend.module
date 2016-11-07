@@ -636,6 +636,7 @@ function itg_event_backend_views_pre_render(&$view) {
   if ($view->name == "manage_event_configuration") {
     $event_conf = '';
     $event_conf .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $event_conf .= l(t('Add Event Domain'), 'admin/structure/domain/create', array('query' => array('destination' => 'manage-event-configuration')));
     $event_conf .= l(t('Configure New Event'), 'node/add/event-configurations', array('query' => array('destination' => 'manage-event-configuration')));
     $view->attachment_before = $event_conf;
   }
@@ -737,6 +738,16 @@ function itg_event_backend_node_access($node, $op, $account) {
     }
   }
   return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implements hook_node_update
+ * @param object $node
+ */
+function itg_event_backend_node_update($node) {
+  if ($node->type == 'event_backend') {
+    itg_event_backend_insert_into_redirect($node);
+  }
 }
 
 /**
@@ -992,13 +1003,67 @@ function itg_event_backend_get_event_node(){
  */
 function itg_event_get_host_name() {
   if (module_exists('domain')) {
-    $host_name = db_query("SELECT subdomain, scheme FROM {domain} WHERE domain_id = :domain_id", array(':domain_id' => 1))->fetchAll();
-    if (!empty($host_name)) {
-      return $host_name[0]->scheme . '://' . $host_name[0]->subdomain;
+    $query = db_select('domain', 'd');
+    $query->fields('d', array('subdomain', 'scheme'));
+    $query->condition('domain_id', 1, '=');
+    $result = $query->execute()->fetchAssoc();
+    return $result['scheme'] . '://' . $result['subdomain'];
+  }
+}
+
+/**
+ * Get domain using domain id
+ * @return boolean
+ */
+function itg_event_backend_get_domain($domain_id) {
+  if (module_exists('domain')) {
+    $query = db_select('domain', 'd');
+    $query->fields('d', array('subdomain'));
+    $query->condition('domain_id', $domain_id, '=');
+    $result = $query->execute()->fetchField();
+    if ($result) {
+      return $result;
     } else {
       return FALSE;
     }
   }
+}
+
+/**
+ * Get redirect table value
+ * @param string $c_name
+ * @param string $c_val
+ * @return array
+ */
+function itg_event_backend_get_redirect_record($c_name, $c_val) {
+  $query = db_select('redirect', 'r')
+      ->fields('r');
+  $query->condition('r.' . $c_name, $c_val, '=');
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $records['source'] = $record['source'];
+    $records['redirect'] = $record['redirect'];
+  }
+  return $records;
+}
+
+/**
+ * Get all domains associated with nodes
+ * @param string $except_this_node
+ * @return array
+ */
+function itg_event_backend_get_redirect_all_domains($except_this_node = NULL) {
+  $query = db_select('redirect', 'r')
+      ->fields('r');
+  if($except_this_node) {
+    $query->condition('r.source', $except_this_node, '!=');
+  }
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $redirect_arr = explode('://', $record['redirect']);
+    $records[] = $redirect_arr[1];
+  }
+  return $records;
 }
 
 /**
@@ -1050,4 +1115,45 @@ function itg_event_backend_get_host_node($host) {
             ->condition('n.title', $host, '=');
 
     return node_load($query->execute()->fetchField());
+}
+
+/**
+ * Insert into redirect and domain table 
+ * @global object $user
+ * @param object $node
+ */
+function itg_event_backend_insert_into_redirect($node) {
+  
+  global $user;
+  $domain = itg_event_backend_get_domain($node->domains);
+
+  if ($domain) {
+    $path = 'http://' . $domain;
+
+    // Prepare for redirect table
+    $redirect = new stdClass();
+    redirect_object_prepare($redirect);
+    $redirect->source = 'node/' . $node->nid;
+    $redirect->redirect = $path;
+    $redirect->language = 'und';
+    $hash = redirect_hash($redirect);
+    $redirect->hash = $hash;
+    $redirect->uid = $user->uid;
+    $redirect->type = 'redirect';
+    $redirect->access = time();
+    $redirect->count = 1;
+    $redirect->status = 1;
+
+    // Prepare for domain source table
+    $domain_source = new stdClass();
+    redirect_object_prepare($domain_source);
+    $domain_source->nid = $node->nid;
+    $domain_source->domain_id = '-' . $node->domains;
+
+    $existing = redirect_load_by_hash($hash);
+    if (!$existing) {
+      drupal_write_record('redirect', $redirect);
+      drupal_write_record('domain_source', $domain_source);
+    }
+  }
 }

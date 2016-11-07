@@ -18,14 +18,16 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
 
   drupal_add_js(array('itg_sso_reg' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js');
-
-  if ($form_state['step'] == '1') {
+  
+  $step_ext_div = '';
+  
+  if (isset($form_state['step']) && ($form_state['step'] == '1')) {
     $fn_link = 'saml_login/other'.$appnd_to_lnk;
-    $ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
+    $step_ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
   }
   // Add a wrapper div that will be used by the Form API to update the form using AJAX
   $form['#prefix'] = '<div id="itg_sso_reg_multistep_form">';
-  $form['#suffix'] = $ext_div . '</div>';
+  $form['#suffix'] = $step_ext_div . '</div>';
 
   // Depending on which step of the form we are on, we output different form fields
   switch ($form_state['step']) {
@@ -73,10 +75,10 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Email'), 'autocomplete' => 'off'),
-        '#prefix' => '<div class="form-row"><div id="umail" class="col-xs-6">',
+        '#prefix' => '<div class="form-row email-or-mobile"><div id="umail" class="col-xs-6">',
         '#suffix' => '</div>',
       );
-
+      
       $form['mobile'] = array(
         '#title' => 'Mobile',
         '#description' => '',
