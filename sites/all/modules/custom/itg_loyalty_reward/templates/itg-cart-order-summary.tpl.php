@@ -53,6 +53,7 @@
               <span><?php echo $data['user_detail']['name']; ?></span>
               <span><?php echo $data['user_detail']['mail']; ?></span>
               <span><?php echo $data['user_detail']['address']; ?></span>
+              <span><?php echo $data['user_detail']['pincode']; ?></span>
             </address>
             
         </div>

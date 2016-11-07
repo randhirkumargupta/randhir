@@ -85,16 +85,16 @@ if ($classes) {
             $destination = '';
             global $base_url;
             if ($arg[1] == 'third') {
-              $link = l("<span class='delete-link'>Remove</span>", $base_url . "/itg-menu-manager-remove/" . $row['id'], array("html"=>TRUE,"attributes" => array("class" => array("menu-manager-delete")), "query" => array("delete_path" => "menu-manager/third", "section_id" => $_GET['section_id'], "section_child" => $_GET['section_child'])));
+              $link = l("<span class='delete-link'>Remove</span>", $base_url . "/itg-menu-manager-remove/" . $row['id'], array("html" => TRUE, "attributes" => array("class" => array("menu-manager-delete")), "query" => array("delete_path" => "menu-manager/third", "section_id" => $_GET['section_id'], "section_child" => $_GET['section_child'])));
             }
             else {
-              $link = l("<span class='delete-link'>Remove</span>", $base_url . "/itg-menu-manager-remove/" . $row['id'], array("html"=>TRUE , "attributes" => array("class" => array("menu-manager-delete")) ,"query" => array("destination" => "menu-manager/second")));
+              $link = l("<span class='delete-link'>Remove</span>", $base_url . "/itg-menu-manager-remove/" . $row['id'], array("html" => TRUE, "attributes" => array("class" => array("menu-manager-delete")), "query" => array("destination" => "menu-manager/second")));
             }
             ?>
             <td>
               <?php print $link; ?>
               |
-              <a class="menu-manager-edit" href="<?php print $base_url; ?>/itg-menu-manager/?edit_id=<?php print $row['id'] ?>&term_id=<?php print $row['tid'] ?>"><span class="edit-link">Edit</span></a>
+              <a class="menu-manager-edit" href="<?php print $base_url; ?>/itg-menu-manager/?edit_id=<?php print $row['id'] ?>&term_id=<?php print $row['tid'] ?>&prev_page=<?php print arg(0) . "/" . arg(1) ?>"><span class="edit-link">Edit</span></a>
             </td>
             <?php
           }

@@ -92,12 +92,14 @@ function feature_for_reporter_views_default_views() {
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_reporter_email_id']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_reporter_email_id']['alter']['text'] = '([field_reporter_email_id])';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title] ([field_reporter_email_id])';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title] [field_reporter_email_id]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Has taxonomy term ID */
@@ -236,7 +238,7 @@ return $tid;';
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['label'] = 'Byline\'s Email id';
-  /* Field: Content: Reporter Twitter Handle */
+  /* Field: Content: Twitter Handle */
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['id'] = 'field_reporter_twitter_handle';
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['table'] = 'field_data_field_reporter_twitter_handle';
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['field'] = 'field_reporter_twitter_handle';
@@ -392,7 +394,7 @@ return $tid;';
   $handler->display->display_options['fields']['field_reporter_email_id']['id'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
-  /* Field: Content: Reporter Twitter Handle */
+  /* Field: Content: Twitter Handle */
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['id'] = 'field_reporter_twitter_handle';
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['table'] = 'field_data_field_reporter_twitter_handle';
   $handler->display->display_options['fields']['field_reporter_twitter_handle']['field'] = 'field_reporter_twitter_handle';
@@ -518,7 +520,7 @@ return $tid;';
     23 => 0,
     22 => 0,
   );
-  /* Filter criterion: Content: Reporter Twitter Handle (field_reporter_twitter_handle) */
+  /* Filter criterion: Content: Twitter Handle (field_reporter_twitter_handle) */
   $handler->display->display_options['filters']['field_reporter_twitter_handle_value']['id'] = 'field_reporter_twitter_handle_value';
   $handler->display->display_options['filters']['field_reporter_twitter_handle_value']['table'] = 'field_data_field_reporter_twitter_handle';
   $handler->display->display_options['filters']['field_reporter_twitter_handle_value']['field'] = 'field_reporter_twitter_handle_value';

@@ -17,12 +17,11 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
   global $user;
   // validate cart total.
   $cart_total_valid = _cart_total_point($user->uid, 'compare');
-  if (!$cart_total_valid) {
-    drupal_set_message('You do not have enough point to checkout.', 'error');
-    drupal_goto('personalization/my-credits');
+  if (!$cart_total_valid) {    
+    drupal_goto('cart');
   }
   // Load user fields.
-  $user_fields = user_load($user->uid);  
+  $user_fields = user_load($user->uid);
   $f_name = $user_fields->field_first_name['und'][0]['value'];
   $l_name = $user_fields->field_last_name['und'][0]['value'];
   // Check cart value.
@@ -75,7 +74,7 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
         'placeholder' => t('Pincode'),
       ),
       '#required' => TRUE,
-      '#default_value' => $user_fields->field_mobile_number['und'][0]['value']['field_user_pincode'],
+      '#default_value' => $user_fields->field_user_pincode['und'][0]['value'],
     );
     $form['submit'] = array(
       '#type' => 'submit',
@@ -120,8 +119,8 @@ function itg_loyalty_reward_address_form_submit($form, &$form_state) {
   $inputs = $form_state['values'];  
   // Get product info.
   $user_fields = user_load($user->uid);
-  $user_fields->field_short_description['und'][0]['value'] = $inputs['address'];    
-  $user_fields->field_mobile_number['und'][0]['value'] = $inputs['zip_code'];  
+  $user_fields->field_short_description['und'][0]['value'] = $inputs['address'];
+  $user_fields->field_user_pincode['und'][0]['value'] = $inputs['zip_code'];
   user_save($user_fields);
   drupal_set_message('Address has been successfully updated.', 'status');
 }

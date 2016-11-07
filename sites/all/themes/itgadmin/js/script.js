@@ -356,7 +356,9 @@
             $('.img-crt, .pre-desc').wrapAll('<div class="generate-image"></div>');
         }
         $('.form-field-name-field-credit-to-all, .form-field-name-field-credit-name').wrapAll('<div class="credit-to-all"></div>');
-        $('.image-widget').each(function() {
+        
+        
+          $('.image-widget').each(function() {
             var filename = $(this).find('.file').html();
             var filesize = $(this).find('.file-size').html();
             var fullname = filename + filesize;
@@ -364,7 +366,9 @@
                 $(this).find('.image-preview').append('<div class="image-fullname">' + fullname + '</div>');
             }
             $(this).find('.image-widget-data .file, .image-widget-data .file-size').remove();
-        });
+          });
+        
+        
         $('.image-widget-data').find('.form-text').each(function() {
             var plaholderText = $(this).prev().text();
             $(this).attr('placeholder', plaholderText);
@@ -489,7 +493,7 @@
         });
 
         $('body').find('.image-preview').parent().addClass('has-image-preview');
-
+        $('body').find('.image-preview').parent().parent().addClass('has-image-parent');
         // Reset form Data
         function itg_clear_form_data(class_name) {
             jQuery("." + class_name).find(':input').each(function() {
@@ -727,8 +731,9 @@ jQuery(document).ready(function() {
 
     // jQuery code to toggle ITG-STORY Form
     jQuery('.itg-form-section-wrapper').on('click', 'h2', function() {
-        jQuery(this).next().slideToggle();
-        jQuery(this).toggleClass('active');
+      jQuery(this).toggleClass('active');
+      jQuery(this).next().slideToggle();
+        
     });
 
     // jQuery code to toggle Cotegory manager form
@@ -756,6 +761,7 @@ jQuery(document).ready(function() {
     jQuery(".menu-manager-delete").click(function() {
         var r = confirm("Are you sure want to delete.");
         if (r == true) {
+            jQuery("#widget-ajex-loader").css("display","block");
             return true;
         } else {
             return false;

@@ -13,6 +13,8 @@
  * {@inheritdoc}
  */
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
+  
+  // Form alter for event backend node
   if ($form_id == "event_backend_node_form") {
     $form['#after_build'][] = 'itg_event_backend_after_build';
     array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
@@ -68,13 +70,45 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       $_SESSION['current_step'] = $form_state['storage']['step'];
     }
   }
+  
+  // Form alter for sponsor node
   if ($form_id == 'sponsor_node_form') {
     $form['actions']['submit']['#submit'][] = 'itg_sponsor_alter_submit_status_message';
     $form['#after_build'][] = 'itg_event_backend_sponsor';
     $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), 'manage-sponsor', array('attributes' => array('class' => 'button'))),
-      '#weight' => 20,
+        '#markup' => l(t('Cancel'), 'manage-sponsor', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
     );
+  }
+
+  // Form alter for event configurations node
+  if ($form_id == 'event_configurations_node_form') {
+    if (module_exists('domain')) {
+      $format = domain_select_format();
+      foreach (domain_domains() as $data) {
+        if ($data['valid'] || user_access('access inactive domains')) {
+          $options[$data['sitename']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
+        }
+      }
+    }
+    
+    unset($form['title']);
+    unset($form['#metatags']);
+    unset($form['actions']['preview']);
+    
+    // Prepare domain drop-down
+    $domain_selected_value = $form['field_ec_select_domain'][LANGUAGE_NONE]['#entity']->field_ec_select_domain[LANGUAGE_NONE][0]['value'];
+    if($domain_selected_value) {
+      $form['field_ec_select_domain'][LANGUAGE_NONE]['#default_value'] = $domain_selected_value;
+    }
+    $form['field_ec_select_domain'][LANGUAGE_NONE]['#options'] = $options;
+    
+    $form['#after_build'][] = 'itg_event_backend_event_configurations_after_build';
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'manage-event-configuration', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+    );
+
   }
 }
 
@@ -216,6 +250,20 @@ function itg_event_backend_sponsor($form, &$form_state) {
 }
 
 /**
+ * Custom functions form after build for "event_configurations"
+ * @param array $form
+ * @param array $form_state
+ * @return boolean
+ */
+function itg_event_backend_event_configurations_after_build($form, &$form_state) {
+  if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
+    $form['field_ec_select_domain'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
+  }
+  $form['path']['#access'] = FALSE;
+  return $form;
+}
+
+/**
  * After build for Event backend form.
  * @param array $form
  * @param array $form_state
@@ -312,7 +360,7 @@ function itg_event_backend_after_build($form, &$form_state) {
     $form['actions']['submit2']['#access'] = FALSE;
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
-    $form['path']['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
+    $form['metatags']['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
   }
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
     $form['actions']['submit']['#access'] = TRUE;
@@ -472,6 +520,18 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
 			'template' => 'tweet-right-sidebar-event',
 			'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
 		),
+   'event_registration' => array(
+          'template' => 'event-registration',
+          'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+    ),
+   'event_sign_and_win' => array(
+          'template' => 'event-sign-and-win',
+          'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+    ),
+   'event_flashback' => array(
+          'template' => 'event-flashback',
+          'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+    ),  
   );
   return $themes;
 }
@@ -502,6 +562,19 @@ function itg_event_backend_block_info() {
 		'info' => t('Tweet Right Sidebar Event'),
 		'cache' => DRUPAL_CACHE_GLOBAL,
 	);
+  $blocks['event_registration'] = array(
+		'info' => t('Event Registration'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
+  $blocks['event_sign_and_win'] = array(
+		'info' => t('Event Sign And Win'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
+  $blocks['event_flashback'] = array(
+		'info' => t('Event Flashback'),
+		'cache' => DRUPAL_CACHE_GLOBAL,
+	);
+  
   return $blocks;
 }
 
@@ -529,6 +602,15 @@ function itg_event_backend_block_view($delta = '') {
     case 'tweet_right_sidebar_event':
 			$block['content'] = theme('tweet_right_sidebar_event');
 			break;
+    case 'event_registration':
+      $block['content'] = theme('event_registration');
+      break;
+    case 'event_sign_and_win':
+      $block['content'] = theme('event_sign_and_win');
+      break;
+    case 'event_flashback':
+      $block['content'] = theme('event_flashback');
+      break;
   }
 
   return $block;
@@ -550,6 +632,12 @@ function itg_event_backend_views_pre_render(&$view) {
     $sponsor_content .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $sponsor_content .= l(t('Create Sponsor'), 'node/add/sponsor', array('query' => array('destination' => 'manage-sponsor')));
     $view->attachment_before = $sponsor_content;
+  }
+  if ($view->name == "manage_event_configuration") {
+    $event_conf = '';
+    $event_conf .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    $event_conf .= l(t('Configure New Event'), 'node/add/event-configurations', array('query' => array('destination' => 'manage-event-configuration')));
+    $view->attachment_before = $event_conf;
   }
 }
 
@@ -586,6 +674,47 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
     );
   }
   
+}
+
+/**
+ * Implementation of hook_node_presave
+ * {@inheritdoc}
+ */
+function itg_event_backend_node_presave($node) {
+  if ($node->type == 'event_configurations') {
+    $node->title = $node->field_ec_select_domain[LANGUAGE_NONE][0]['value'];
+  }
+}
+
+/**
+ * Implementation of hook_node_validate
+ * {@inheritdoc}
+ */
+function itg_event_backend_node_validate($node) {
+  if ($node->type == 'event_configurations') {
+    if (arg(2) != 'edit') {
+      $current_domain = $node->field_ec_select_domain[LANGUAGE_NONE][0]['value'];
+      $already_configured_domains = itg_event_backend_get_all_configure_domain();
+      if (in_array($current_domain, $already_configured_domains)) {
+        form_set_error('field_ec_select_domain', t('This domain is already configured, please edit and modify existing domain.'));
+      }
+    }
+  }
+}
+
+/**
+ * Get all configured domains
+ * @return type
+ */
+function itg_event_backend_get_all_configure_domain() {
+  $query = db_select('field_data_field_ec_select_domain', 'd');
+  $query->fields('d', array('field_ec_select_domain_value'));
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $domains[] = $record['field_ec_select_domain_value'];
+  }
+  return $domains;
 }
 
 /**
@@ -682,28 +811,53 @@ function itg_event_backend_get_session_photo_video($daywise){
  return $session;
 }
 
+/**
+ * Implement function to get associated story
+ * @return array
+ */
+function itg_event_backend_get_session_story_title($daywise){
+  
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_event_highlights', 'eh', 'n.nid = eh.entity_id');
+  $query->join('field_data_field_programe_title', 'pt', 'pt.entity_id = eh.field_event_highlights_value');
+  $query->fields('pt', array('field_programe_title_value'));
+  $query->fields('eh', array('field_event_highlights_value'));
+  $query->condition('pt.field_programe_title_value', $daywise, '=');
+  $result = $query->execute();
+ 
+  foreach($result as $value){
+    $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
+    $session['story_title'][] = itg_common_get_node_title($daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id']);
+  }
+ return $session;
+}
+
 function itg_event_backend_menu(){
    $items['itg-event-test'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   $items['programme'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+  $items['programme'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   $items['speakers'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+  $items['speakers'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   $items['sponsors'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+  $items['sponsors'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   $items['flashback'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
+  $items['sign-and-win'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
   );
-   return $items;
+  $items['flashback'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  return $items;
 }
 
 /**
@@ -845,4 +999,55 @@ function itg_event_get_host_name() {
       return FALSE;
     }
   }
+}
+
+/**
+ * Vikul content
+ * @param int $nid
+ * @return string
+ */
+function itg_event_backend_vukkul_content($nid) {
+  $page_id = $nid;
+  $node = node_load($page_id);
+  $user_details = user_load($node->uid);
+  $event_author_name = $user_details->name;
+  $n_title = "Event: ".$node->title;
+  $unique_id = $node->type . '_' . $node->nid;
+  $author = base64_encode($event_author_name);
+  drupal_add_js('http://vuukle.com/js/vuukle.js', external);
+  $output = '<script type="text/javascript">
+
+               var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
+
+               var SECTION_TAGS =  "Event";
+
+               var ARTICLE_TITLE = "' . $n_title . '";
+
+               var GA_CODE = "UA-795349-17";
+
+               var VUUKLE_API_KEY = "dc34b5cc-453d-468a-96ae-075a66cd9eb7";
+
+               var TRANSLITERATE_LANGUAGE_CODE = ""; //"en" for English, "hi" for hindi
+
+               var VUUKLE_COL_CODE = "d00b26";
+
+               var ARTICLE_AUTHORS = "' . $author . '";
+
+               create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
+
+               </script>';
+  return $output;
+}
+
+/**
+ * Get host node
+ * @param string $host
+ * @return object
+ */
+function itg_event_backend_get_host_node($host) {
+      $query = db_select('node', 'n')
+            ->fields('n', array('nid'))
+            ->condition('n.title', $host, '=');
+
+    return node_load($query->execute()->fetchField());
 }

@@ -217,7 +217,7 @@ function itg_podcast_custom_submit($form, &$form_state) {
  * @return object
  */
 function itg_podcast_dailymotion_api() {
-require_once 'includes/Dailymotion.php';
+  require_once 'includes/Dailymotion.php';
   $user_name = variable_get('dailymotion_username', '');
   $password = variable_get('dailymotion_password', '');
   $api_key = variable_get('dailymotion_apikey', '');
@@ -446,8 +446,20 @@ function itg_podcast_after_build($form, &$form_state) {
  * Implement hook_form_FORM_ID_alter().
  * {@inheritdoc}
  */
-function itg_podcast_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  $form_id_arr = array('views-exposed-form-manage-podcast-page', 'views-exposed-form-podcast-management-page', 'views-exposed-form-podcast-management-page-1', 'views-exposed-form-podcast-management-page-2', 'views-exposed-form-podcast-management-page-3', 'views-exposed-form-podcast-management-page-5', 'views-exposed-form-podcast-management-page-6', 'views-exposed-form-podcast-management-page-7', 'views-exposed-form-podcast-management-page-4', 'views-exposed-form-podcast-management-page-10');
+function itg_podcast_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {  
+  $form_id_arr = array(
+    'views-exposed-form-manage-podcast-page',
+    'views-exposed-form-podcast-management-page',
+    'views-exposed-form-podcast-management-page-1',
+    'views-exposed-form-podcast-management-page-2',
+    'views-exposed-form-podcast-management-page-3',
+    'views-exposed-form-podcast-management-page-5',
+    'views-exposed-form-podcast-management-page-6',
+    'views-exposed-form-podcast-management-page-7',
+    'views-exposed-form-podcast-management-page-4',
+    'views-exposed-form-podcast-management-page-10',
+    'views-exposed-form-podcast-management-page-8',
+  );
   if (in_array($form['#id'], $form_id_arr)) {
     $form['title']['#autocomplete_path'] = 'content-title-list/podcast/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
