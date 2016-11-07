@@ -1016,10 +1016,10 @@ function itg_event_get_host_name() {
  * @return boolean
  */
 function itg_event_backend_get_domain($domain_id) {
-    if (module_exists('domain')) {
+    if (module_exists('domain') && !empty($domain_id)) {
         $query = db_select('domain', 'd');
         $query->fields('d', array('subdomain'));
-        $query->condition('domain_id', $domain_id, '=');
+        $query->condition('d.domain_id', $domain_id, '=');
         $result = $query->execute()->fetchField();
         if ($result) {
             return $result;
