@@ -51,13 +51,7 @@
             .menu {
                 margin-left: 135px;
                 margin-right: 50px;
-                padding-left: 0;
-                white-space: nowrap;
-                overflow-x: scroll;
-                li{
-                    @include display-inline;
-                    float: none;
-                }
+                padding-left: 0;                               
             }
         }
     } 
@@ -105,6 +99,40 @@
         }
     }
     /*CSS End Photo and video header crusal page*/  
+    
+/*Css start year end page*/
+    .yearender h2{
+        font-size: 18px;
+        line-height: 22px;
+    }
+    #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
+        ul{
+            .dont-miss-listing{
+                padding:10px 10px 25px 10px;
+               .dm-pic{
+                    width: 124px;                
+                } 
+            }
+        }
+    }    
+/*Css end year end page*/   
+/*Start Dont miss Home page css*/
+    .dont-miss{            
+        ul{
+            .dont-miss-listing{
+               .dm-pic{
+                    width: 124px;                
+                }                
+                @include calculate-width(1);
+                padding: 0px 0px 20px 0;  
+                &:nth-child(3){
+                    padding-bottom: 20px;
+                }
+            }
+        }
+    }
+    /*End Dont miss Home page css*/
+    
 }   
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
@@ -120,7 +148,7 @@
     .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news{
         margin: 0;
     }
-    /*CSS end education page special*/
+    /*CSS end education page special*/    
 }
 
 @media only screen and (max-width:768px){
@@ -210,8 +238,7 @@
                 @include clearfix;  
                 margin: 0px;        
                 padding-left: 0;
-                white-space: pre-wrap;
-                overflow-x: inherit; 
+                padding-right: 0;
                 li{
                     @include calculate-width(1);
                     a{
@@ -224,6 +251,9 @@
                         &.active, &:hover{
                             color: $yellow-color;
                         }
+                        &:after{
+                            display: none;
+                        }
                     } 
                     &.all-menu{
                         a{
@@ -234,11 +264,11 @@
                                 vertical-align: middle;
                             }
                         }
-                    }
+                    } 
                     &.sponser-link a{
                         background: $yellow-bg;
                         color: $black-color;
-                    }
+                    }                    
                 }
             }
             ul{
@@ -319,7 +349,6 @@
         height: auto;
     }      
     /*End CSS Top Block Grid Home Page*/  
-
     /*css start special event page for osscar*/
     .oscar-layout-page{
         .left-side{
@@ -570,7 +599,13 @@
     }
     /*CSS end video landing page*/
 }
-
+@media only screen and (max-width:640px){
+    #block-views-anchor-landing-page-block{
+        .anchor-left{
+            @include calculate-width(2);
+        }   
+    }
+}
 
 @media only screen and (max-width:560px){ 
     /*CSS Starts Photo landing page*/
@@ -590,6 +625,17 @@
         }
     }
     /*CSS End Photo landing page*/
+}
+
+@media only screen and (max-width:480px){
+    #block-views-anchor-landing-page-block{
+        .anchor-left{
+            @include calculate-width(1);
+        }
+        .anchor-right{
+            padding-top: 15px;
+        }
+    }
 }
 
 /*Start header CSS Desktop version*/
@@ -628,42 +674,7 @@
             @include font(20px);
         }    
     }
-    /*CSS End story section */
-    /*Start Dont miss Home page css*/
-    .dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{    
-        /*padding: 20px 0px 0px 10px;*/
-        ul{
-            .dont-miss-listing{
-                .dm-pic{
-                    width: 170px;                
-                }
-                @include float(left);
-                @include calculate-width(2);
-                padding: 0px 10px 25px 0;
-                &:nth-child(2n+1){
-                    clear:left;
-                }
-                &:nth-child(3), &:nth-child(4){
-                    padding-bottom: 0;
-                }            
-            }
-        }
-    }
-    /*End Dont miss Home page css*/
-    /*CSS Start year end top news*/
-    #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video{
-        ul{
-            .dont-miss-listing{
-                @include float(none);
-                @include calculate-width(1);
-                padding:25px 10px;
-                &:nth-child(3), &:nth-child(4){
-                    padding-bottom: 25px;
-                }
-            }
-        }
-    }
-    /*CSS End year end top news*/
+    /*CSS End story section */        
 
     /*Start photo section slider Homepage*/
     .featured_photo_carousel, .tech-block_5, .auto-block_5{
@@ -958,19 +969,6 @@
     }
     /*End start program RHS*/
 
-    /*CSS Start Anchor listing detail page*/
-    #block-views-anchor-landing-page-block{
-        .anchor-left, .anchor-right{
-            @include float(left);
-            @include calculate-width(2);
-        }
-        .anchor-right{
-            padding-left:15px;
-            padding-top:0px;
-        }        
-    }
-    /*CSS End Anchor listing detail page*/
-
     /*CSS Start Photo landing page*/
     .region-top{
         padding: 20px 0 ;    
@@ -1076,6 +1074,18 @@
             font-size: 26px;                        
         }
     }
+    #block-itg-widget-so-sorry-front-politoons{
+        .politoons-sosorry {
+            .col-md-4{
+                &:nth-child(3n+1){
+                    clear: left;
+                }   
+                &:nth-child(2n+1){
+                    clear: none;
+                }
+            }
+        }
+    }
     /*CSS End So sorry page*/
     /*CSS Start RHS add block*/
     #block-itg-ads-ad-right-sidebar-1{    
@@ -1175,9 +1185,13 @@
         }
         .itg-h450-section{        
             .col-md-4{
-                .droppable{                
+                .droppable{  
+                    padding: 10px;
+                    background: #f3f3f3;                   
                     .widget-wrapper{
                         overflow: auto;
+                        height: auto;
+                        max-height: 100%;
                     }
                 }
             }        
@@ -1239,19 +1253,4 @@
         }
     }
 
-}
-
-@media only screen and (min-width:640px){
-    /*CSS Start Anchor listing detail page*/
-    #block-views-anchor-landing-page-block{
-        .anchor-left, .anchor-right{
-            @include float(left);
-            @include calculate-width(2);
-        }
-        .anchor-right{
-            padding-left:15px;
-            padding-top:0px;
-        }        
-    }
-    /*CSS End Anchor listing detail page*/
 }

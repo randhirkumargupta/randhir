@@ -6,7 +6,7 @@
  */
 ?>
 
-<div style="width:350px;">
+<div style="width:310px;">
   <a class="twitter-timeline"  href="https://twitter.com/sachin_rt" data-widget-id="689754170983723008">Tweets by @sachin_rt</a>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location) ? 'http' : 'https';
       if (!d.getElementById(id)) {

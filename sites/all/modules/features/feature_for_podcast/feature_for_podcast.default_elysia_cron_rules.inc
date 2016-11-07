@@ -18,7 +18,7 @@ function feature_for_podcast_default_elysia_cron_rules() {
   $cron_rule->rule = '4 0 * * *';
   $cron_rule->weight = NULL;
   $cron_rule->context = NULL;
-  $cron_rules['audio_file_delete'] = $cron_rule;
+  $cron_rules[''] = $cron_rule;
 
   return $cron_rules;
 

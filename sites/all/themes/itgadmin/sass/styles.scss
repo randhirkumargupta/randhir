@@ -428,7 +428,7 @@ ul.pager{
   }
 }
 .image-repo-browse{
-  .form-field-type-image{
+  .form-field-type-image, .field-type-image{
     .form-type-managed-file > label {
       padding-bottom: 5px;
       padding-top: 5px;
@@ -1548,6 +1548,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-ugc-comment-menu,
 #block-menu-menu-astro-content-admin-menu,
 #block-menu-menu-recipe-content-admin-menu,
+#block-menu-menu-recipe-admin-menu,
 #block-menu-menu-podcast-admin-menu,
 #block-menu-menu-print-team-menu,
 #block-menu-menu-videogallery-admin-menu,
@@ -2479,8 +2480,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .question-container{
     @extend .hide;
     .question-heading{
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 500;
+      color: #6e6e6e;
     }
     &#question-container-0{
       @extend .db;
@@ -2493,7 +2495,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
   }
   .answer-container{
-    padding: 10px 0;
+    padding: 0;
     @extend .dib;
     @extend .full;
     .answer-heading{
@@ -2508,6 +2510,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         @extend .db;
         margin: 0;
         &.form-type-radio{
+          padding-left: 10px;
           .form-radio{
             @extend .fleft;
             margin: 1px 5px 0 0;
@@ -2515,11 +2518,19 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         }
       }
       &.form-type-textfield{
-        margin: 10px 0;
+        margin: 0 0 10px;
+        .form-text{
+          width: 516px;
+          max-width: 100%;
+          height: 42px;
+          font: 400 14px/18px Roboto;
+          color: #322323;
+        }
       }
     }
     .form-type-checkboxes{
-      > label{width: 200px; @extend .dib; @extend .vmid;}
+      padding-left: 10px;
+      > label{width: 200px; @extend .dib; @extend .vmid; color: #323232; font: 400 14px/18px "Roboto Slab";}
       div.rating{
         @extend .fleft; 
         @extend .full;
@@ -2533,7 +2544,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     div.rating{
       @extend .db; @extend .vmid;
       .form-type-checkbox{
-        @extend .pos-rel; @extend .dib;
+        @extend .pos-rel; @extend .dib; margin-bottom: 0;
         &:before{
           content: '\f005'; color: #ddd; width: 18px; height: 18px; text-align: center; font: normal normal normal 18px/18px FontAwesome; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale; position: absolute; left: 0; top: 0; z-index: 5;
         }
@@ -5734,7 +5745,7 @@ div.node{
   border-top: 1px solid #d9d9d9;
   margin-bottom: 50px;
   padding: 0 30px 25px;
-  #edit-submit{margin-top: 38px;}
+  [id*="edit-submit"]{margin-top: 38px;}
 }
 .widget-loader{
   bottom: 0;
@@ -6429,15 +6440,76 @@ div.node{
     .ftp_video_radio{
       @extend .dib;
       @extend .vtop;
-      padding: 20px 20px 10px 0;
-      margin: 0;
-      width: 100%;
+      position: relative;
+      padding: 0;
+      margin: 0 15px 15px 0;
+      width: 120px;
+      height: 120px;
+      border: 1px solid #d9d9d9;
+      label{
+        background: url(../images/default_for_all.png) no-repeat left top / 100% auto;
+        font-size: 12px;
+        height: 100%;
+        left: 0;
+        overflow: hidden;
+        padding: 80px 5px 0;
+        position: absolute;
+        text-overflow: ellipsis;
+        top: 0;
+        white-space: nowrap;
+        width: 100%;
+        &:before{
+          border-radius: 50%;
+          bottom: 0;
+          background-color: #fff;
+          border: 1px solid #1fb5ad;
+          color: #1fb5ad;
+          content: "\f00c";
+          font-family: "FontAwesome";
+          font-size: 28px;
+          height: 50px;
+          left: 0;
+          line-height: 50px;
+          margin: auto;
+          overflow: hidden;
+          position: absolute;
+          right: 0;
+          text-align: center;
+          top: 150px;
+          width: 50px;
+          z-index: 9;
+          opacity: 0;
+          transition: all .3s;
+        }
+        &:after{
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,.5);
+          opacity: 0;
+          transition: all .3s;
+        }
+      }
       .form-radio{
         float: left;
-        margin: 2px;
+        height: 100%;
+        margin: 0;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 999;
+        &:checked + label:before, &:checked + label:after{
+          top: 0;
+          opacity: 1;
+        }
       }
       .file_size{
-        margin-left: 30px;
+        color: #ababab;
+        display: block;
+        margin-left: 0;
       }
     }
   }
@@ -6695,13 +6767,11 @@ div.node{
 
 /* CSS For Survey */
 .survey-form-main-container h1 {
-  font-size: 24px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 30px;
+  font: 500 34px/34px Roboto;
 }
 .survey-form-main-container .survey-description {
-  color: #bebebe;
+  color: #929292;
+  font: 400 14px/20px Roboto;
   margin-top: 10px;
 }
 .survey-form-main-container .byline {
@@ -6764,7 +6834,6 @@ div.node{
 .survey-form-main-container .byline .profile-detail ul li span.share-count {
   display: block;
   font-size: 44px;
-  font-size: 2.75rem;
   font-weight: 500;
   line-height: 44px;
   color: #bebebe;
@@ -6774,27 +6843,34 @@ div.node{
 }
 .survey-form-main-container .byline .profile-detail ul li.twitter {
   color: #0783ec;
+  font: 400 12px/18px Roboto;
   margin-top: 0px;
-  line-height: 18px;
   padding-left: 0;
 }
 .survey-form-main-container .byline .profile-detail ul li.twitter:before {
   content: '|';
   margin: 0 5px 0 0;
-  color: #999;
+  color: #6b6b6b;
 }
 .survey-form-main-container .byline .profile-detail ul li.title {
   color: #6b6b6b;
-  font-size: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 20px;
+  font: 700 12px/20px Roboto;
 }
 .survey-form-main-container .byline .profile-detail ul li.mailto {
   text-transform: uppercase;
 }
 .survey-form-main-container .byline .profile-detail ul.date-update li {
   margin-bottom: 7px;
+  color: #989898;
+  font: 400 12px/18px Roboto;
+  padding: 0;
+}
+.survey-form-main-container .byline .profile-detail ul.date-update li + li:before {
+  content: '|';
+  margin: 0 5px;
+  color: #989898;
+  display: inline-block;
+  vertical-align: top;
 }
 .survey-form-main-container .byline .profile-detail ul.social-links {
   zoom: 1;
@@ -6835,6 +6911,7 @@ div.node{
 .survey-form-main-container .byline .social-info {
   float: right;
   width: 200px;
+  font: 400 12px/18px Roboto;
 }
 .survey-form-main-container .byline .social-info span {
   float: left;
@@ -6854,9 +6931,8 @@ div.node{
   font-family: Roboto;
 }
 .question-container .question-heading {
-  font-size: 18px;
-  color: #666;
-  font-weight: 500;
+  font: normal 500 20px/28px Roboto;
+  color: #6e6e6e;
   margin: 10px 0;
 }
 .question-container .question-number {
@@ -6868,9 +6944,7 @@ div.node{
   font: 500 14px/18px Roboto;
 }
 .question-container .answer-container {
-  padding-left: 10px;
   position: relative;
-  margin-bottom: 10px;
 }
 .question-container .answer-container .survey-media {
   position: absolute;
@@ -6879,12 +6953,16 @@ div.node{
   right: 0;
 }
 .question-container .answer-container > .form-item .form-item {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 }
 .question-container .answer-container > .form-item .form-item.form-type-radio .form-radio {
   margin: 3px 5px 0 0;
 }
-
+.question-container .answer-container > .form-item .form-item.form-type-radio > label, 
+.question-container .answer-container > .form-item .form-item.form-type-checkbox > label{
+  font: 400 14px/18px 'Roboto Slab';
+  color: #323232;
+}
 .survey-form-wrapper-all .question-container {
   display: block;
 }
@@ -6906,11 +6984,12 @@ div.node{
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 16px;
+  font-size: 18px;
   font-family: Roboto;
   color: #fff;
-  font-weight: 300;
+  font-weight: 400;
   margin-right: 20px;
+  margin-top: 50px;
   cursor: pointer;
 }
 [id*="itg-survey-survey-form"] .success-message, [id*="itg-survey-survey-form"] .messages--status {
@@ -7025,6 +7104,9 @@ div.node{
 .node-issue-form,
 .node-newsletter-form,
 .node-recipe-form,
+.node-sponsor-form,
+.page-admin-people form,
+.page-user form,
 .node-newsletter_templates-form,
 .node-mega_review_critic-form{
   @extend .image-repo-browse;
@@ -7269,12 +7351,9 @@ div.node{
     &.active:after{
       content: '\f056';
     }
-/*    & + div{
-      overflow: hidden !important;
-    }
     &.active + div{
       overflow: visible !important;
-    }*/
+    }
   }
   .form-item-field-story-magazine-story-issue-und-magazine-issue-story{
     padding-left: 200px;
@@ -7842,7 +7921,7 @@ div.node{
       background: none;
       border: none;
       margin: 0;
-      padding: 20px;
+      padding: 20px 0;
       .button{
         border-radius: 1px;
         border: 1px solid #ee4d4d;
@@ -8051,11 +8130,11 @@ div.node{
     -webkit-transition: scale
   }
 }
-.page-node-add-recipe{
+.page-node-add-recipe, {
   .form-managed-file .image-widget-data{
     float: left;
     .form-submit[value="Remove"]{
-      left: 375px;
+      left: 400px;
     }
   } 
 }
@@ -8141,7 +8220,7 @@ div.node{
 [id*="views-exposed-form-Event-backend-page"]{
   .views-submit-button{
     .form-submit{
-      margin-top: 26px;
+      margin-top: 26px !important;
     }
     #custom-event-type{
       float: left;
@@ -8224,6 +8303,7 @@ div.node{
     }
   }
 }
+
 .node-photogallery-form{
   .form-type-plupload {
     margin-left: 220px;
@@ -8254,5 +8334,281 @@ div.node{
         padding: 1px 5px 0 0 !important;
       }
     }
+  }
+  
+}
+.node-videogallery-form, .node-photogallery-form{
+  .browse-media-file{
+    .itg-form-section{
+      height: 250px;
+      position: relative;
+      > .generate-image{
+        position: absolute;
+        left: 15px;
+        bottom: 40px;
+        z-index: 10;
+        .img-crt{
+          margin: 0;
+          + .pre-desc {
+            left: 155px;
+            width: 225px;
+          }
+        }
+        &+.generate-image-error{
+          bottom: 15px;
+          left: 0;
+          padding: 0 15px;
+          position: absolute;
+          width: 100%;
+        }
+      }
+    }
+    .form-field-type-image{
+      display: inline-block;
+      margin-left: -3px;
+      padding: 15px 0 0 15px;
+      vertical-align: top;
+      width: 150px;
+      &#edit-field-story-extra-large-image{
+        margin-left: 0;
+        .image-widget-data{
+          float: none !important;
+        }
+        .form-type-managed-file{
+          &.has-image-parent{
+            .form-managed-file{
+              > .image-widget-data{
+                position: static !important;
+                .form-submit[value="Remove"]{
+                  left: 114px;
+                  width: 20px;
+                  height: 20px;
+                  background: url(../images/cross_small.png) center center no-repeat;
+                  text-indent: -9999;
+                }
+              }
+            }
+          }
+        }
+      } 
+      .form-type-managed-file{
+        margin: 0;
+        padding: 0;
+        position: relative;
+        border: 1px solid #d9d9d9;
+        &.has-image-parent{
+          height: 132px;
+          overflow: hidden;
+          z-index: 9999;
+          background-color: #fff;
+          transition: all .3s;
+          &:hover {
+            box-shadow: 0 0 10px #888;
+            height: 244px !important;
+            transform: scale(1.1);
+          }
+          .form-managed-file{
+            > .image-widget-data{
+              position: static !important;
+              .form-submit[value="Remove"]{
+                left: 114px;
+                width: 20px;
+                height: 20px;
+                background: url(../images/cross_small.png) center center no-repeat;
+                text-indent: -9999;
+              }
+            }
+          }
+        }
+        > label{
+          background-color: #dedede;
+          display: block;
+          float: none;
+          font-size: 12px;
+          z-index: 9;
+          width: 100%;
+          padding: 5px; 
+        }
+        .form-managed-file{
+          padding: 5px;
+          .image-preview{
+            float: none;
+            padding: 0;
+            img{
+              width: 100%;
+              height: 92px;
+            }
+            .image-fullname{
+              color: #ababab;
+              font-size: 12px;
+              margin: 0;
+              overflow: hidden;
+              padding-bottom: 5px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              pointer-events: none;
+              width: 100%;
+              a {
+                color: #2f2f2f;
+                display: block;
+                text-decoration: none;
+              }
+            }
+          }
+          > .image-widget-data{
+            height: 100px;
+            float: none  !important;
+            a.filefield-sources-imce-browse{
+              background: url(../images/default_for_all.png) no-repeat left top / 100% auto;
+              color: #0c8bb1;
+              font-size: 12px;
+              padding-top: 84px;
+              text-align: center;
+              text-transform: uppercase;
+              &:after{
+                display: none;
+              }
+            }
+            
+            .form-type-textfield{
+              padding: 0;
+              .form-text{
+                font-size: 12px;
+              }
+            }
+            .form-submit[value="Remove"]{
+              left: 114px;
+              width: 20px;
+              height: 20px;
+              background: url(../images/cross_small.png) center center no-repeat;
+              text-indent: -9999px;
+            }
+          }
+          & + div.description{
+            left: 145px;
+          }
+        }
+      }
+    }
+  }
+}
+.node-photogallery-form .form-field-name-field-featured .form-type-checkboxes .form-checkboxes + div.description{left: 145px;}
+[id*="views-form-photo-gallery-management-page"]{
+  @extend .confirmation;
+  .form-type-checkboxes > label{
+    float: none;
+    width: auto;
+  }
+  .form-submit{
+    @extend .btn;
+    @extend .btn-save;
+  }
+}
+.node-videogallery-form{
+  .itg-sidebar-form{
+    #Configuration{
+      .form-field-name-field-video-configurations .form-type-checkboxes{
+        > label{display: none;}
+      }
+      .form-field-name-field-story-expires{
+        .form-type-checkboxes{
+          vertical-align: top;
+          width: 100%;
+          display: inline-block;
+          > label, > label + div{float: left; width: auto; padding: 0;}
+          .form-checkbox{margin: 3px 5px;}
+        }
+      }
+    }
+  }
+}
+[id="edit-field-story-reporter"]{
+  table tbody{
+    overflow: visible !important;
+  }
+}
+[id*="views-exposed-form-section-wise-content-ordering-list-page"]{
+  .views-submit-button{
+    a.button{
+      @extend .add-more-wbg;
+      height: 36px;
+      margin-left: 10px;
+      padding: 10px 12px 6px;
+      font-weight: 400;
+    }
+  }
+}
+[id*="protected-pages-configure"], [id*="protected-pages-edit"]{
+  fieldset{
+    border: none;
+    > legend{
+      background-color: #fefafb;
+      border-bottom: 1px solid #d9d9d9;
+      border-top: 1px solid #d9d9d9;
+      font-size: 18px;
+      line-height: 28px;
+      margin: 15px 0;
+      padding: 8px 20px;
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+    }
+    .fieldset-description{
+      padding: 8px 20px 0;
+    }
+    .form-submit{
+      margin-left: 250px;
+      margin-bottom: 20px;
+    }
+    table{
+      @extend .views-table;
+    }
+    div.form-type-password-confirm div.password-suggestions{
+      margin-bottom: 10px;
+    }
+  }
+}
+[id*="protected-pages-enter-password"]{
+  fieldset{
+    border: none;
+    .form-type-password{
+      > label{
+        padding-top: 8px;
+      }
+    }
+    .form-submit{
+      @extend .btn;
+      @extend .btn-save;
+      margin-left: 250px;
+    }
+  }
+}
+[id*="draggableviews-table"]{
+  thead th.views-field-counter{
+    white-space: nowrap;
+  }
+}
+.node-survey-form{
+  [id*="field-story-reporter-values"]{
+    thead tr th label{padding-top: 8px;}
+    .form-type-textfield{
+      > label{
+        display: none;
+      }
+    }
+  }
+}
+
+[id*="domain-form"]{
+  .form-submit{
+    @extend .btn;
+    @extend .btn-save;
+    margin-left: 250px;
+  }
+}
+[id*="node-event_configurations-form"]{
+  .form-field-type-color-field-rgb{
+    padding: 0 30px;
+    margin: 30px 0;
   }
 }

@@ -67,9 +67,21 @@ window.addEventListener("message", function(ev) {
       <?php endif; ?>
      
       <a id="main-content"></a>
+      <!-- Page title for specific page -->
+      <?php $arg = arg(); ?>
+      <?php
+          switch ($arg[0]) {
+              case 'product':
+              case 'cart':
+              case 'order':
+              case 'order-summary':
+                  $flag = TRUE;
+                  break;
+          }
+      ?>
       <?php print render($title_prefix); ?>
-      <?php if ($title): ?>
-        <h1 class="page__title title" id="page-title"><?php //print $title; ?></h1>
+      <?php if ($title && $flag): ?>
+        <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>

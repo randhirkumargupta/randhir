@@ -505,7 +505,7 @@ function itg_poll_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_poll_views_pre_render(&$view) {
-  if ($view->name == "poll_listing" && ($view->current_display == 'page' || $view->current_display == 'page_1')) {
+  if ($view->name == "poll_listing" && ($view->current_display == 'page' || $view->current_display == 'page_1' || $view->current_display == 'page_2')) {
     $poll_content = '';
     $poll_content .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $poll_content .= l(t('Create Poll'), 'node/add/poll', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
@@ -747,8 +747,16 @@ function itg_poll_get_past_data($nid) {
       }
     }
   }
-
+  //pr(date('Y-m-d H:i:s'));
+ 
+if($node->field_display_result[LANGUAGE_NONE][0]['value']==1)
+{
   return '<ul class="past-poll">' . $outputnew . '</ul>';
+}else if($node->field_display_result[LANGUAGE_NONE][0]['value']==2 && $node->field_poll_end_date[LANGUAGE_NONE][0]['value']<= date('Y-m-d H:i:s')){
+      return '<ul class="past-poll">' . $outputnew . '</ul>';
+}else{
+   return '<ul class="past-poll">You will get the result after poll compilation</ul>';   
+}
 }
 
 /**

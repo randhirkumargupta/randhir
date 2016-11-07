@@ -5,6 +5,7 @@ package = Features
 version = 7.x-1.0
 dependencies[] = features
 dependencies[] = features_for_story
+dependencies[] = features_for_survey
 dependencies[] = strongarm
 dependencies[] = text
 dependencies[] = views

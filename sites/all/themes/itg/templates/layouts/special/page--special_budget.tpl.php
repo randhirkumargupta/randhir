@@ -19,6 +19,7 @@ if (arg(2) == 'preview') {
 }
 $highlights = itg_widget_highlights_block_data();
 
+
 if ($theme == 'itgadmin' && !isset($preview)) {
     $gray_bg_layout = 'gray-bg-layout';
 }
@@ -126,7 +127,7 @@ if (!empty($device[0])) {
                 }
                 ?>
                 <div class="row itg-325-layout">
-                    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || $theme == 'itgadmin') { ?>
+                    <?php if ($live_url!="" || !empty($highlights['node_data']->field_story_highlights['und']) || $theme == 'itgadmin') { ?>
                         <div class="col-md-4 mt-50">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
