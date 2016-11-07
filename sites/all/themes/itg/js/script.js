@@ -283,8 +283,8 @@ jQuery(document).ready(function () {
 		}
 	});
         //postion
-        var posAllmenu = jQuery('.all-menu').position();
-        jQuery('#newlist').css('left', posAllmenu.left - 39 + 'px');
+        var posAllmenu = jQuery('.all-menu').position();        
+        jQuery('body').find('#newlist').css('left', posAllmenu.left - 39 + 'px');
     };    
     var winWidth = jQuery(window).width();    
     if(winWidth > 770){

@@ -5020,9 +5020,7 @@ footer{
         color:#ef2a24;
         font-weight: 700;
         text-transform: uppercase;   
-        img{
-            width: 166px;
-            height: 166px;
+        img{            
             border-radius: 100%;
         }
         a{
@@ -5185,6 +5183,7 @@ footer{
             border: 1px solid #ddd;
             padding: 10px;
             height: 85px;
+            margin-bottom: 40px;
             position: relative;
                 &:nth-child(4n+1){
                     clear: left;
