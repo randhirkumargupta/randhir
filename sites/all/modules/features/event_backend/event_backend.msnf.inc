@@ -130,7 +130,7 @@ function event_backend_msnf_step_info() {
   $export['step_highlights|node|event_backend'] = $msnf;
 
   $msnf = new stdClass();
-  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->disabled = TRUE; /* Edit this to true to make a default msnf disabled initially */
   $msnf->api_version = 1;
   $msnf->identifier = 'step_last|node|event_backend';
   $msnf->step_name = 'step_last';

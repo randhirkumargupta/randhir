@@ -3603,12 +3603,12 @@ body.has-cart-popup {
 }
 
 /* CSS class to extend for success message */
-.itg-success-message, #email-sucess, #mobile-success, [id*="itg_user_forgot_password_multistep_form"] .messages--status, .thank-you a {
+.itg-success-message, #email-sucess, #mobile-success, [id*="itg_user_forgot_password_multistep_form"] .messages--status, #thank-you a {
   margin: 15px;
   border: 1px solid #009c00;
   padding: 10px;
 }
-.itg-success-message:before, #email-sucess:before, #mobile-success:before, [id*="itg_user_forgot_password_multistep_form"] .messages--status:before, .thank-you a:before {
+.itg-success-message:before, #email-sucess:before, #mobile-success:before, [id*="itg_user_forgot_password_multistep_form"] .messages--status:before, #thank-you a:before {
   content: '\f00c';
   color: #009c00;
   margin-right: 10px;
@@ -3623,6 +3623,63 @@ body.has-cart-popup {
   padding: 10px;
 }
 
-.thank-you a {
+#thank-you a {
   display: block;
+}
+
+.activate-message {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+.activate-message .message-body {
+  background-color: #fff;
+  left: 0;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 30px 15px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  text-align: center;
+}
+.activate-message .message-body .close-popup {
+  cursor: pointer;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 20px;
+}
+.activate-message .message-body .close-popup .fa {
+  display: inline-block;
+  font: 16px/18px FontAwesome;
+  text-rendering: auto;
+  vertical-align: top;
+}
+
+[id*="itg-sso-reg-multistep-form"] .email-or-mobile {
+  position: relative;
+}
+[id*="itg-sso-reg-multistep-form"] .email-or-mobile:after {
+  content: 'OR';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 25px;
+  margin: 0 auto;
+  width: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  font-family: Roboto;
+  font-weight: 500;
 }
