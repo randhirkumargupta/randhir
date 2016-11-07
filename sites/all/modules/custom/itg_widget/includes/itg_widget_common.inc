@@ -504,6 +504,62 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   drupal_add_css("#draggableviews-table-section-wise-content-ordering-list-page .tabledrag-handle {display:none !important}", "inline");
 
 
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_auto_review_widget' && ($form_state['view']->current_display == 'special_auto_review_widget_contents' || $form_state['view']->current_display == 'special_auto_review_widget_list')) {
+
+    $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
+    }
+
+    $op = array("All" => " - None -");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+    unset($form['category_tid']['#options']);
+    $form['category_tid']['#options'] = $op;
+  }
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display == 'most_read_widget_list')) {
+
+    $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
+    }
+
+    $op = array("All" => " - None -");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+    unset($form['category_tid']['#options']);
+    $form['category_tid']['#options'] = $op;
+  }
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
+
+    $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
+    }
+
+    $op = array("All" => " - None -");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+    unset($form['category_tid']['#options']);
+    $form['category_tid']['#options'] = $op;
+  }
+
+
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
@@ -553,11 +609,22 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
 
 // Add a node id contianer just below the bulk operation.
   if (isset($form['select']['action::nodequeue_add_action'])) {
-    $form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container"></div>';
+    $form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
   }
 
   if (isset($form['select']['action::itg_widget_categories_wise_node_group'])) {
-    $form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '<div class="nodes_id_container"></div>';
+
+    $form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
+//    $form['select']['action::itg_widget_categories_wise_node_group']['#ajax'] = array(
+//      'callback' => "itg_widget_categories_wise_node_group_submit",
+//      'wrapper' => "edit-actionitg-widget-categories-wise-node-group",
+//      'method' => 'replace',
+//      'effect' => 'fade',
+//      'event'=> 'click'
+//    );
+//    $form['select']['action::itg_widget_categories_wise_node_group']['#attributes'] = array(
+//      'onclick' => 'return alert("test")',
+//    );
   }
 }
 
@@ -873,6 +940,10 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       // handle expose content type of itg_widget_order table.
       $form['content_type']['#default_value'] = 'all';
       $form['content_type']['#value'] = 'all';
+      $form['Canlce'] = array(
+        '#type' => 'markup',
+        '#markup' => l('Reset', 'section-wise-content-ordering-list', array("attributes" => array("class" => array("button")), "query" => array("category_tid" => 0))),
+      );
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
@@ -1510,6 +1581,7 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, 
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
         ->condition('n.status', 1)
+        ->condition('iwo.cat_id', $category)
         ->orderBy('n.nid', 'DESC')
         ->range($range_min, $range_max)
         ->fields('iwo', array('nid', 'extra', 'weight'));
@@ -1682,11 +1754,16 @@ function itg_widget_block_view_alter(&$data, $block) {
   }
 
   if ($block->delta == 'programmes-rhs_programmes') {
-    if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
-      return TRUE;
+    if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+      $data['content'] = array();
     }
     else {
-      $data['content'] = array();
+      if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+        return TRUE;
+      }
+      else {
+        $data['content'] = array();
+      }
     }
   }
 
@@ -2119,6 +2196,14 @@ function get_max_weight($tid, $type) {
   $max_query->condition('cat_id', $tid);
   $max_query->condition('content_type', $type);
   $max_query->condition('widget', 'section_wise_widget');
+  $max_result = $max_query->execute()->fetchField();
+  return $max_result;
+}
+
+function get_max_weight_for_special($type) {
+  $max_query = db_select('itg_widget_order');
+  $max_query->addExpression('MAX(weight)');
+  $max_query->condition('widget', $type);
   $max_result = $max_query->execute()->fetchField();
   return $max_result;
 }

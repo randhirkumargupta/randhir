@@ -54,16 +54,21 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
       <ul class="second-level-menu menu">
         <?php $menu_manager = $data['menu_manager']; 
         foreach ($menu_manager as $key => $menu_data) :  ?>
-          <?php
+          <?php  
+          $title_array = explode("[tid", $menu_data['db_data']['title']);
           $link_url = "";
           $target = "_self";
-          $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $menu_data['db_data']['title'];
+          $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name :  $title_array[0];
           $url_type = $menu_data['db_data']['url_type'];
           $db_target = $menu_data['db_data']['target'];
           $tid = $menu_data['db_data']['tid'];
+          $active_cls = "notactive";
           // if tid is not 0 then its internal url
           if ($tid && $url_type == 'internal') {
             $link_url = "taxonomy/term/$tid";
+            if($link_url == current_path()) {
+              $active_cls = "active";
+            }
           }
           else {
             $link_url = $menu_data['db_data']['url'];
@@ -73,7 +78,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
             $target = "_blank";
           }
           ?>
-          <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key")))); ?></li>
+          <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key" , "$active_cls")))); ?></li>
         <?php endforeach; ?>
       </ul>
       <?php //print drupal_render($data['itg_main_manu_header']); ?>            
@@ -92,6 +97,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 
     <!--<a onclick="window.open('http://itgcms.drupallocal.dev/saml_login/other/domain_info', '_blank', 'location=yes,height=490,width=550,scrollbars=yes,status=yes', 'top=' + tops + ', left=' + left);" class="user-icon"><i class="fa fa-user"></i></a> -->
             <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://dev.indiatodayonline.in/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://dev.indiatodayonline.in/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
           <?php }
           else {

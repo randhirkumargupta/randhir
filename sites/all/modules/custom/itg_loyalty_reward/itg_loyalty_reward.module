@@ -98,8 +98,7 @@ function itg_loyalty_reward_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_loyalty_reward.product.inc',
   );
-  $items['order-confirmation'] = array(
-    'title' => 'ORDER CONFIRMATION',
+  $items['order-confirmation'] = array(    
     'page callback' => 'itg_loyalty_reward_order_confirmation',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -276,17 +275,20 @@ function itg_loyalty_reward_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
   if ($form['#id'] == 'views-exposed-form-lrp-manage-items-page') {
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/loyalty_and_rewards/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Product Title'));
   }
-  if ($form['#id'] == 'views-exposed-form-product-page') {
+  if ($form['#id'] == 'views-exposed-form-product-page') {    
     $arg = arg();
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js',
     );
+    drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url)), array('type' => 'setting'));
     $form['field_lrp_category_value']['#options']['All'] = 'Category';
+    $form['reset']['#attributes'] = array('id' => array('product-reset'));
     $form['itg-points'] = array(
       '#type' => 'select',
       '#options' => array(

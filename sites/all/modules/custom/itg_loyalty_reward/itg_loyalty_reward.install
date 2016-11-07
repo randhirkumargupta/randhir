@@ -54,6 +54,13 @@ function itg_loyalty_reward_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'newsletter' => array(
+        'description' => 'Name of the newsletter subscribed by user.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
       'created' => array(
         'type' => 'int',
         'not null' => TRUE,

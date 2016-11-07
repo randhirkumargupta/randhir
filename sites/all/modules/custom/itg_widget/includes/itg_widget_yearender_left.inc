@@ -21,13 +21,15 @@ function save_yearender_left_widget_data($yearender_left) {
             ->condition('widget', $widget_name)
             ->condition('nid', $node)
             ->execute();
+                   $max_weight=get_max_weight_for_special($widget_name);
+
       db_insert('itg_widget_order')
               ->fields(array(
                   'nid' => $node,
                   'widget' => $widget_name,
                   'content_type' => $node_load_data->type,
                   //'extra' => $field_names[$node],
-                  'weight' => 0,
+                  'weight' => ++$max_weight,
               ))
               ->execute();
     }

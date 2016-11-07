@@ -211,7 +211,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'image_750x363',
-    'image_link' => '',
+    'image_link' => 'content',
   );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -406,6 +406,12 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
   $handler->display->display_options['fields']['field_video_duration']['label'] = '';
   $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

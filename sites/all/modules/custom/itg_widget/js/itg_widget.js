@@ -6,6 +6,26 @@
 Drupal.behaviors.itg_widgets = {
     attach: function(context, settings) {
 
+//        jQuery('#edit-actionitg-widget-categories-wise-node-group').click(function() {
+//            if (confirm('Are you sure?'))
+//                return true;
+//            else
+//                return false;
+//        });
+
+//        var events = jQuery('#edit-actionitg-widget-categories-wise-node-group').data('events'); // Get the jQuery events.
+//        console.log(events);
+        //jQuery('#edit-actionitg-widget-categories-wise-node-group').unbind('mousedown'); // Remove the click events.
+//        jQuery('#edit-actionitg-widget-categories-wise-node-group').mousedown(function() {
+//            if (confirm('Are you sure you want to delete that?')) {
+//                //jQuery("#views-form-section-wise-draggable-content-order-we-may-suggest-widget").submit();
+//                return true;
+//            }
+//            // Prevent default action.
+//            return false;
+//        });
+        
+        
         jQuery(".remove_from_nodequeue_draggable_view").click(function() {
             var nid = jQuery(this).attr("data-nid");
             var qid = jQuery(this).attr("data-queueid");
@@ -220,7 +240,15 @@ var get_url_parameter = function get_url_parameter(sParam) {
 
 
 jQuery(document).ready(function() {
-    jQuery(".custom-weight-draggable input[type=number]").change(function(){
-        jQuery(this).next().children().find('option').remove().end().append('<option value="'+jQuery(this).val()+'">'+jQuery(this).val()+'</option>').val(jQuery(this).val());
+    jQuery(".custom-weight-draggable input[type=number]").change(function() {
+        jQuery(this).next().children().find('option').remove().end().append('<option value="' + jQuery(this).val() + '">' + jQuery(this).val() + '</option>').val(jQuery(this).val());
     });
+//    jQuery("#edit-actionitg-widget-categories-wise-node-group").click(function(e){
+//        e.preventDefault();
+//        if(confirm("Are you sure want to perform action.")) {
+//            return ture;
+//        } else {
+//            return false;
+//        }
+//    });
 });

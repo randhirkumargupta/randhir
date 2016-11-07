@@ -461,7 +461,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'REDEEM POINTS';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now?destination=[current_path]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now';
   $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn-redeem-points';
   $handler->display->display_options['fields']['nothing_1']['element_type'] = 'div';
   $handler->display->display_options['fields']['nothing_1']['element_class'] = 'redeem-point';
@@ -719,7 +719,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'REDEEM POINTS';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now?destination=[current_path]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now';
   $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn-redeem-points';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
@@ -1000,7 +1000,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'REDEEM POINTS';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now?destination=[current_path]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now';
   $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn-redeem-points';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;

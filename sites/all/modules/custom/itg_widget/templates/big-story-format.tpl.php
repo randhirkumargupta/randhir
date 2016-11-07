@@ -36,24 +36,26 @@
         <p>
           <!-- Story -->
           <?php if (!empty($data['node_data']->field_story_kicker_text['und'][0]['value'])) : ?>
-            <?php 
+            <?php
             // prepare configuration for sharing
             $share_desc = mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..');
-            print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..'); ?>
+            print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..');
+            ?>
           <?php endif; ?>
           <!-- Live blog -->
           <?php if (!empty($data['node_data']->field_label['und'][0]['value'])) : ?>
-            <?php 
+            <?php
             // prepare configuration for sharing
             $share_desc = mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..');
-            print mb_strimwidth($data['node_data']->field_label['und'][0]['value'], 0, 165, '..'); ?>
+            print mb_strimwidth($data['node_data']->field_label['und'][0]['value'], 0, 165, '..');
+            ?>
           <?php endif; ?>
 
         </p>
         <div class="share-new">
           <ul>
-            <li><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
+            <li><a onclick="gogogo('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
             <li><a href="#" title=""><?php echo t('Follow the Story'); ?></a></li>
           </ul>
         </div>
@@ -61,17 +63,15 @@
           <ul>
             <?php
             $extra = $data['related'];
+            // Its remaining to use solr here to get title form other server.
             $realted_nodes = json_decode($extra);
             foreach ($realted_nodes as $related_node) {
-              $url = "http://52.76.214.186";
-              foreach ($related_node as $server => $data_id) {
-                $url .= "/$server";
+              foreach ($related_node as $node_id => $data_id) {
                 $data_data = node_load($data_id);
-                $alise = drupal_get_path_alias("node/$data_data->nid");
-                $url .= "/$alise";
-                $new_url = strtolower($url);
+                $alise = drupal_get_path_alias("node/$data_id");
+                $url = ($alise) ? $alise : "#";
                 if (!empty($data_data->title)) :
-                  print "<li>" . l(mb_strimwidth($data_data->title, 0, 210, '..'), $new_url) . "</li>";
+                  print "<li>" . l(mb_strimwidth($data_data->title, 0, 210, '..'), $url) . "</li>";
                   $url = "";
                 endif;
               }

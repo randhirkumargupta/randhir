@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_menu() {
+  $items = array();
+  $items['budget-predictor'] = array(
+      'page callback' => 'itg_budget_predictor_custom', 
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  $items['ajax/budget-ranking'] = array(
+      'page callback' => 'itg_budget_predictor_update_budget',
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_budget_predictor.inc',
+      'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+/**
+ * Custom callback for itg_budget_predictor
+ */
+function itg_budget_predictor_custom() {
+  return 'CHEAPER/DEARER';
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_block_info() {
+  $blocks['cheaper_dearer'] = array(
+      'info' => t('Widget: Cheaper dearer for budget predictor'),
+  );
+  return $blocks;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+      case 'cheaper_dearer': 
+      module_load_include('inc', 'itg_budget_predictor', 'includes/itg_budget_predictor');
+      /* JS library  added to Cheaper dearer */
+      drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/itg_budget_predictor.js', 'file');    
+      $data = itg_budget_predictor_get_taxonomy();
+      $block['content'] = theme('itg_budget_predictor_cheaper', array('data' => $data));
+      break;
+  }
+  return $block;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_budget_predictor_theme() {
+  $themes = array(
+      'itg_budget_predictor_cheaper' => array(
+          'template' => 'templates/itg-budget-predictor',
+      ),
+  );
+  return $themes;
+}

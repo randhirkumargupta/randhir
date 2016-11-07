@@ -84,7 +84,10 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
             || $form_id == 'food_news_node_form'
             || $form_id == 'astro_node_form'
             || $form_id == 'live_tv_integration_node_form'
-            || $form_id == 'ask_an_expert_node_form') {
+            || $form_id == 'ask_an_expert_node_form'
+            || $form_id == 'event_configurations_node_form'
+            || $form_id == 'event_backend_node_form'
+            ) {
       if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
         $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
       }      
@@ -107,7 +110,7 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  * @return array
  */
-function itg_meta_tags_extra_element_hide($form, &$form_state) {
+function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_metatags.js');
     unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
     unset($form['metatags']['intro_text']['#markup']);
@@ -117,7 +120,10 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
     unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
   
     $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
-    $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
+    
+    if($form['#form_id'] != 'event_backend_node_form') {
+      $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
+    }
 
     return $form;
 }

@@ -1429,10 +1429,16 @@ img{
     .osscar-video{
         background:transparent;
         ul .dont-miss-listing{
-        padding:0 0px 10px 0;
+            padding:0;
             + .dont-miss-listing {
-                padding:0px;
+                padding-top: 10px;
             }   
+            @include video-left-border-bottom;
+            &:last-child{
+                &:after{
+                    display: inline-block;
+                }
+            }
         }
     }
     .section_wise_order-edu-sample-paper, .section_wise_order-edu-notification, .section_wise_order-edu-featurefilia, .section_wise_order-edu-jobs-and-career{
@@ -1550,6 +1556,10 @@ img{
         display: block;        
         background: #5585f6;
     }
+    .widget-trigger{
+        @include pos(absolute, 0, 0,null,null);
+        background: #5585f6;
+    }
     .droppable {
         overflow: hidden;
     }
@@ -1576,8 +1586,8 @@ img{
             }
             .auto-block-2{
         border: 1px solid #ddd;
-        .special-top-news{
-            position: relative;
+         position: relative;
+        .special-top-news{           
             overflow: hidden;
             .widget-title{
 /*                position: absolute;*/
@@ -1609,35 +1619,35 @@ img{
     }
     .itg-layout-195{
         .droppable {
-            height: 195px; 
+            min-height: 195px; 
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-260{
         .droppable {
-            height: 260px;       
+            min-height: 260px;       
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-375{
         .droppable {
-            height: 375px; 
+            min-height: 375px; 
              border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-315{
         .droppable {
-            height: 315px;      
+            min-height: 315px;      
              border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
         }
     }
     .itg-layout-340{
         .droppable {
-            height: 340px;   
+            min-height: 340px;   
             border-left: 1px solid $border-color;
             border-right: 1px solid $border-color;
             border-bottom: 1px solid $border-color;
@@ -1659,7 +1669,15 @@ img{
     }
     .tech-block_5{
         .data-holder{
-            max-width: inherit;
+           max-width: inherit;                           
+            background: #fff;
+            box-shadow: 0 0 5px #ccc;
+            margin: 3px;
+            height: auto;
+            .view-content{
+                margin: 10px;
+                overflow: hidden;
+            } 
         }
         .widget-title{
          @include pos(relative);
@@ -2008,41 +2026,50 @@ img{
 /*CSS End for movie page*/
 
 /* CSS For Election Page */
-.election-page{
-  .left-side{
-    > .row{
-      margin-bottom: 50px;
+.election-page{ 
+    h1{
+        margin-top:60px;
+        .disc-share{
+            a{
+                font-size: 20px;
+                color: #b6b6b6;
+            }
+        }
     }
-    .itg-graph{
-      .droppable{
-        height: 410px;
-      }
+    .left-side{
+        .itg-415-layout{
+            .droppable{
+                height: 415px;
+            }
+        }
+        .itg-325-layout{
+            .droppable, iframe{
+                height: 325px;
+            }
+            iframe{
+                @include calculate-width(1);
+            }
+        }
+        .itg-map{
+            .droppable{
+                height: 375px;
+            }
+        }
+        .itg-most-popular{
+            .droppable{
+                min-height:180px;
+            }
+        }
+        .itg-photo{
+            .droppable{
+                height: 474px;
+            }
+        }           
     }
-    .itg-325-layout{
+  .right-side{
+    .itg-325{
       .droppable{
         height: 325px;
-      }
-    }
-    .itg-map{
-      .droppable{
-        height: 375px;
-      }
-    }
-    .itg-most-popular{
-      .droppable{
-        height: 705px;
-      }
-    }
-    .itg-photo{
-      .droppable{
-        height: 484px;
-      }
-    }
-  }
-  .right-side{
-    .itg-320{
-      .droppable{
-        height: 320px;
       }
     }
     .itg-484{
@@ -2055,9 +2082,74 @@ img{
         height: 460px;
       }
     }
+    .ad-widget{
+        border: none;
+    }
+    .election-topadd .ad-widget{        
+        margin-top: 103px;
+        padding-bottom: 0;
+        margin-bottom: 90px;
+    }
   }
+  .itg-listing {
+    border: none;
 }
-
+.highlight {
+    overflow: auto;
+}
+.trending-videos{
+        padding: 0;
+        border: none;
+        li{
+           &.trending-videos-list{
+            padding: 0;            
+            + li{
+                    border-top:none;
+                    padding-top: 20px;
+                }
+            }
+        }                
+    }
+    .itg-most-popular{
+        .most_popular{
+            border: none;
+            p{
+                margin-top:10px; 
+            }
+        }
+        .col-md-3{
+            margin-bottom:30px;
+            &:nth-child(4n+1){
+                clear: left;
+            }
+        }
+    }
+   .osscar-video{
+        background: transparent;
+        ul .dont-miss-listing{
+            padding: 0;
+            +.dont-miss-listing{
+                padding: 30px 0 0 0;
+            }
+        }
+    }
+    .tech-block_5 .data-holder{        
+        background: #303030;
+        max-width: inherit;
+        .view-content{
+            margin: 10px;
+            overflow: hidden;
+        }
+    }
+    .itg-map{
+        .section_wise_order{
+            .widget-settings{
+                @include pos(relative);
+            }
+        }
+    }
+}
+/* CSS For Election Page End */
 
 /*Budget page css start*/
 .budget-page-layout{
