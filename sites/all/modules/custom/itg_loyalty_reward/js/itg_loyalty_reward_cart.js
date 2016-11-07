@@ -132,8 +132,7 @@
             $('.btn-add-cart, .itg-remove-product, .btn-redeem-points').on('click', function () {
                 if (!$(this).hasClass('no-loader')) {
                   test_loader_show();                  
-                }
-                
+                }                
             });
 
             function test_loader_show() {
