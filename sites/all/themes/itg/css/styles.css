@@ -7406,32 +7406,36 @@ footer .footer-copyright {
   top: 0;
   left: 15px;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li {
   position: relative;
+  border: none;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail {
   position: absolute;
   bottom: 0;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-count {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-count {
   display: none;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption {
   background: rgba(255, 255, 255, 0.74);
   font-size: 20px;
   font-weight: 700;
-}
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  min-height: inherit;
   color: #000;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption a:hover {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a {
+  color: #000;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a:hover {
   color: #193984;
 }
 .movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav {
   display: block;
-  position: absolute;
-  top: 50%;
-  width: 100%;
 }
 .movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a {
   width: 20px;
@@ -7444,11 +7448,18 @@ footer .footer-copyright {
   font-size: 20px;
   background: #000;
 }
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-prev {
+  left: 0;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-next {
+  right: 0;
+}
 .movie-layout-page .itg-layout-580 .auto-block-2 {
   border: 1px solid #ddd;
+  position: relative;
 }
 .movie-layout-page .itg-layout-580 .auto-block-2 .special-top-news {
-  position: relative;
+  height: 100%;
   overflow: hidden;
 }
 .movie-layout-page .itg-layout-580 .auto-block-2 .special-top-news .widget-title {
@@ -7476,9 +7487,9 @@ footer .footer-copyright {
 }
 .movie-layout-page .osscar-video ul .dont-miss-listing {
   padding: 0 0px 10px 0;
-}
-.movie-layout-page .osscar-video ul .dont-miss-listing + .dont-miss-listing {
-  padding: 0px;
+  /*+ .dont-miss-listing {
+              padding:0px;
+          }   */
 }
 .movie-layout-page .section_wise_order-movies-celebrities .widget-title, .movie-layout-page .section_wise_order-movies-lifestyle .widget-title {
   position: absolute;

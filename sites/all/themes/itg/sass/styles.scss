@@ -5940,8 +5940,10 @@ input[type="radio"]:checked + label:after{
             left: 15px;   
         }
             .flexslider{
+                .slides{
                 li{
                     @include pos(relative);
+                    border:none;
                     .detail{
                         position: absolute;
                         bottom: 0;
@@ -5952,6 +5954,12 @@ input[type="radio"]:checked + label:after{
                             background: rgba(255, 255, 255, 0.74);
                             font-size: 20px;
                             font-weight: 700;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 100%;
+                            min-height: inherit;
+                            color:#000;
                             a{
                                 color: #000;
                                 &:hover{
@@ -5961,11 +5969,9 @@ input[type="radio"]:checked + label:after{
                         }
                     }                
                 }
+                }
                 .flex-direction-nav{
-                    display: block;
-                    position:absolute;
-                    top:50%;
-                    width: 100%;
+                    display: block;                    
                     a{
                         width: 20px;
                         height: 20px;
@@ -5976,6 +5982,12 @@ input[type="radio"]:checked + label:after{
                             font-size: 20px;
                             background: #000;
                         }
+                        &.flex-prev{
+                            left: 0;
+                        }
+                        &.flex-next{
+                            right: 0;
+                        }
                     }
                 }   
             }        
@@ -5983,8 +5995,9 @@ input[type="radio"]:checked + label:after{
         }
         .auto-block-2{
                 border: 1px solid #ddd;
+                 position: relative;
                 .special-top-news{
-                    position: relative;
+                   height:100%;
                     overflow: hidden;
                     .widget-title{
                         position: absolute;
@@ -6019,9 +6032,9 @@ input[type="radio"]:checked + label:after{
         background:transparent;
         ul .dont-miss-listing{
         padding:0 0px 10px 0;
-            + .dont-miss-listing {
+    /*+ .dont-miss-listing {
                 padding:0px;
-            }   
+            }   */
         }
     }
     .section_wise_order-movies-celebrities, .section_wise_order-movies-lifestyle{

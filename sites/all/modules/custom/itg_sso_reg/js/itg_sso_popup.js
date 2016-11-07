@@ -43,7 +43,7 @@ function Go(windowWidth, windowHeight, windowOuterHeight, wname, features, site_
             // we're here when the child window has been navigated away or closed
             if (child.closed) {
                 clearInterval(interval);
-                window.location.reload();
+                window.location.reload(true);
                 return;
             }
             // navigated to another domain  
