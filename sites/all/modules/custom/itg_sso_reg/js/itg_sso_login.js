@@ -15,7 +15,7 @@
                 //self.opener.location.reload(); 
                 if (check_sso_link && opener) {
                     
-                        opener.location.reload();
+                        opener.location.reload(true);
                     
                 }
                 window.close();
