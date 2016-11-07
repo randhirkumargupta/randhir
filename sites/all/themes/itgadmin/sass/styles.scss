@@ -8606,9 +8606,16 @@ div.node{
     margin-left: 250px;
   }
 }
-[id*="node-event_configurations-form"]{
+.node-event_configurations-form{
   .form-field-type-color-field-rgb{
     padding: 0 30px;
     margin: 30px 0;
+    label{
+      float: left;
+      width: 220px;
+    }
+  }
+  .form-field-type-image{
+    @extend .Browse-upload;
   }
 }
