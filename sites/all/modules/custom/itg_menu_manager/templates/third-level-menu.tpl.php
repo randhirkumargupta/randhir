@@ -29,6 +29,9 @@ if($cat_id==variable_get('ipl_for_widget'))
 {
     drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
+                        
+                        jQuery("#block-itg-ads-ad-right-sidebar-1").hide();
+                       
           });', array('type' => 'inline', 'scope' => 'footer'));
     
 }
