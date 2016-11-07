@@ -155,7 +155,7 @@ jQuery(document).ready(function () {
     });
     
 //header menu add icon for mobile
-//jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
 //    var navValue = jQuery('.navigation .menu li').length;
 //    if (navValue > 13) {
 //        jQuery('.navigation .menu li').eq(12).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-ellipsis-h"></i></li>');
@@ -171,12 +171,6 @@ jQuery(document).ready(function () {
 //        });
 //    }
     
-    jQuery(document).on('click','.all-menu', function(){
-        jQuery('#newlist').slideToggle();
-    });
-    jQuery('.mobile-nav').click(function(){              
-        jQuery('.navigation').slideToggle();
-    });
     
 //ITG footer
 footerMain();
@@ -258,9 +252,9 @@ jQuery(document).ready(function () {
     jQuery('.mobile-nav').click(function () {
         jQuery('.navigation').slideToggle();
     });    
-     jQuery('.all-menu').click(function () {
-       jQuery('#newlist').stop().slideToggle();     
-    });    
+    jQuery(document).on('click','.all-menu', function(){
+        jQuery('#newlist').slideToggle();
+    });   
     var menuBuilder = function(){        
         var menuWidth, Totalwidth, liLength, clickHere;
 	menuWidth = jQuery('.second-level-menu.menu').width();	        
@@ -287,10 +281,12 @@ jQuery(document).ready(function () {
                     jQuery('#newlist').append(html);
                     jQuery(this).addClass('hide');
 		}
-	});        
+	});
+        //postion
+        var posAllmenu = jQuery('.all-menu').position();
+        jQuery('#newlist').css('left', posAllmenu.left - 39 + 'px');
     };    
-    var winWidth = jQuery(window).width();
-    console.log(winWidth);
+    var winWidth = jQuery(window).width();    
     if(winWidth > 770){
         jQuery(window).resize(menuBuilder);
         menuBuilder();    

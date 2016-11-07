@@ -44,8 +44,7 @@
                       }
                       ?>
                   </div>
-              <div class="profile-detail">
-                  <a href="../../../../../../html/itgcms/sites/all/themes/itg/templates/flag--my-saved-content.tpl.php"></a>
+              <div class="profile-detail">                  
                   <ul>
                       <li class="title"><?php print $reporter_node->title; ?></li>
                       <?php  $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];

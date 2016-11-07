@@ -87,7 +87,7 @@ else if ($widget_style == 'buying-guid') {
 
                     <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>">  </a>
 
-                    <h3><?php echo l(mb_strimwidth(ucfirst($desc), 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
+                    <h3><?php echo l(mb_strimwidth(ucfirst($desc), 0, 75, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></h3>
                     <?php
                 }
                 else if ($count == 1) {

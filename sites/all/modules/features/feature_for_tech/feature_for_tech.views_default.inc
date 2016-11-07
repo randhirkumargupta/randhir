@@ -406,6 +406,12 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_video_duration']['field'] = 'field_video_duration';
   $handler->display->display_options['fields']['field_video_duration']['label'] = '';
   $handler->display->display_options['fields']['field_video_duration']['element_label_colon'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

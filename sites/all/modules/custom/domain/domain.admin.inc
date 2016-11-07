@@ -428,7 +428,7 @@ function domain_form($form, &$form_state, $domain = array(), $arguments = array(
     }
   }
   $form = array();
-  drupal_set_title(t('Edit !domain', array('!domain' => $domain['subdomain'])));
+  //drupal_set_title(t('Edit !domain', array('!domain' => $domain['subdomain'])));
   $form['#domain'] = $domain;
   // The $arguments array allows other modules to pass values to change the behavior
   // of submit and validate functions.
@@ -449,7 +449,8 @@ function domain_form($form, &$form_state, $domain = array(), $arguments = array(
     '#maxlength' => 80,
     '#required' => TRUE,
     '#default_value' => $domain['subdomain'],
-    '#description' => t('The allowed domain, using the full <em>path.example.com</em> format.') . '<br />' . t('Leave off the http:// and the trailing slash and do not include any paths.') . '<br />' . $description
+    '#description' => t('Example: path.example.com')
+    //'#description' => t('The allowed domain, using the full <em>path.example.com</em> format.') . '<br />' . t('Leave off the http:// and the trailing slash and do not include any paths.') . '<br />' . $description
   );
   $form['machine_name'] = array(
     '#type' => 'machine_name',
@@ -490,20 +491,20 @@ function domain_form($form, &$form_state, $domain = array(), $arguments = array(
       $next_weight = $record['weight'];
     }
   }
-  $form['weight'] = array(
-    '#type' => 'weight',
-    '#title' => t('Weight'),
-    '#required' => TRUE,
-    '#delta' => count(domain_domains()) + 1,
-    '#default_value' => isset($domain['weight']) ? $domain['weight'] : $next_weight + 1,
-    '#description' => t('The sort order for this record. Lower values display first.'),
-  );
-  $form['is_default'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Default domain'),
-    '#default_value' => isset($domain['is_default']) ? $domain['is_default'] : 0,
-    '#description' => t('If a URL request fails to match a domain record, the settings for this domain will be used.'),
-  );
+//  $form['weight'] = array(
+//    '#type' => 'weight',
+//    '#title' => t('Weight'),
+//    '#required' => TRUE,
+//    '#delta' => count(domain_domains()) + 1,
+//    '#default_value' => isset($domain['weight']) ? $domain['weight'] : $next_weight + 1,
+//    '#description' => t('The sort order for this record. Lower values display first.'),
+//  );
+//  $form['is_default'] = array(
+//    '#type' => 'checkbox',
+//    '#title' => t('Default domain'),
+//    '#default_value' => isset($domain['is_default']) ? $domain['is_default'] : 0,
+//    '#description' => t('If a URL request fails to match a domain record, the settings for this domain will be used.'),
+//  );
   // If the server did not respond properly, do not allow this record to be set
   // as the default domain.
   if ($error) {
@@ -514,7 +515,7 @@ function domain_form($form, &$form_state, $domain = array(), $arguments = array(
       '#default_value' => 0,
     );
   }
-  $form['submit'] = array('#type' => 'submit', '#value' => t('Save domain record'), '#prefix' => '<br />');
+  $form['submit'] = array('#type' => 'submit', '#value' => t('Save Domain'), '#prefix' => '<br />');
   $form['#validate'][] = 'domain_form_validate';
   $form['#redirect'] = array('admin/structure/domain/view');
   return $form;

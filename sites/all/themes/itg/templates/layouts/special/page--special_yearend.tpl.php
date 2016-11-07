@@ -113,7 +113,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 <div class="itg-layout-container <?php echo $itg_class; ?>">
    
     <div class="row yearend-page">
-        <div class="col-md-8 col-sm-8 col-sx-12 left-side">
+        <div class="col-md-8 col-sm-12 col-sx-12 left-side">
             <div class="itg-643">
                 
                 <div class="itg-widget">
@@ -155,7 +155,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             
             </div> 
         </div>    
-        <div class="col-md-4 col-sm-4 col-sx-12 right-side">        
+        <div class="col-md-4 col-sm-12 col-sx-12 right-side">        
             <div class="">
               <div class="itg-widget">
                     <div class="ad-widget droppable">

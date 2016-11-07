@@ -32,8 +32,9 @@ function event_backend_msnf_step_info() {
       8 => 'field_associate_event_photo',
       9 => 'field_associate_event_video',
       10 => 'domain',
-      11 => 'path',
-      12 => 'additional_settings',
+      11 => 'metatags',
+      12 => 'path',
+      13 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(
