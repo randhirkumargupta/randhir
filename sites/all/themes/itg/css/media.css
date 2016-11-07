@@ -172,6 +172,26 @@
   }
 
   /*CSS end education page special*/
+  /* start Event page mobile nav*/
+  #block-menu-menu-event-menu .mobile-nav {
+    color: #fff;
+    font-size: 30px;
+    padding: 0 15px;
+    height: 40px;
+    line-height: 40px;
+  }
+  #block-menu-menu-event-menu ul {
+    display: none;
+  }
+  #block-menu-menu-event-menu ul li {
+    float: none;
+  }
+  #block-menu-menu-event-menu ul li a {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  /* end Event page mobile nav*/
 }
 @media only screen and (max-width: 768px) {
   header {

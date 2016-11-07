@@ -158,7 +158,30 @@
     .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news{
         margin: 0;
     }
-    /*CSS end education page special*/    
+    /*CSS end education page special*/  
+    
+/* start Event page mobile nav*/
+#block-menu-menu-event-menu{
+    .mobile-nav{
+        color: #fff;
+        font-size: 30px;
+        padding: 0 15px;
+        height: 40px;
+        line-height: 40px;        
+    }
+    ul{
+        display:none;
+        li{
+            float: none;
+            a{
+                height: 40px;
+                line-height: 40px;
+            }
+        }
+    }
+}
+/* end Event page mobile nav*/
+    
 }
 
 @media only screen and (max-width:768px){
