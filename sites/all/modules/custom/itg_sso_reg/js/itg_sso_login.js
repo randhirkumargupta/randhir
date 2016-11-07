@@ -31,7 +31,7 @@
                         $('#widget-ajex-loader').show();
                         setTimeout(function () {// wait for 5 secs(2)
                             window.location = base_url;
-                        }, 15000);
+                        }, 20000);
                     }
                 });
             });
