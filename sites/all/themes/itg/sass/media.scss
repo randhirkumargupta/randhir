@@ -158,7 +158,30 @@
     .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news{
         margin: 0;
     }
-    /*CSS end education page special*/    
+    /*CSS end education page special*/  
+    
+/* start Event page mobile nav*/
+#block-menu-menu-event-menu{
+    .mobile-nav{
+        color: #fff;
+        font-size: 30px;
+        padding: 0 15px;
+        height: 40px;
+        line-height: 40px;        
+    }
+    ul{
+        display:none;
+        li{
+            float: none;
+            a{
+                height: 40px;
+                line-height: 40px;
+            }
+        }
+    }
+}
+/* end Event page mobile nav*/
+    
 }
 
 @media only screen and (max-width:768px){
@@ -556,8 +579,6 @@
 }
 /*css end sport page*/
 
-
-
 }
 
 @media only screen and (max-width:680px){ 
@@ -608,6 +629,80 @@
         } 
     }
     /*CSS end video landing page*/
+/*start event page*/
+#block-itg-event-backend-program-tab-block{
+    .event-listing{ 
+        .side-right{
+            width: 81%;
+            .title{
+                @include font(13px);
+            }
+            .listing-detail{ 
+                .section-part{
+                   @include float(none);
+                   @include calculate-width(1);
+                   margin-bottom: 10px;
+                   a{
+                       width: 49%;
+                   }
+                }
+                .profile-detail{
+                   @include float(none);
+                   @include calculate-width(1); 
+                   .profile-loop{
+                       padding-left: 0;
+                       border-left:none;
+                       &:before{
+                           display: none;
+                       }
+                   }
+                }
+            }
+        }
+    }
+}
+
+#block-views-program-schedule-block-1{
+    .content-list{
+        ul.profile-detail{
+            li{
+                &:first-child{
+                    width: 28%;
+                    padding-top: 15px;
+                    font-size: 12px;
+
+                }
+                &:nth-child(2){
+                    width: 26%;
+                    text-align: center;
+                }
+                &:nth-child(3){
+                    width: 45%;
+                }
+            }
+        }
+    }
+}
+#block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
+    h1{
+        font-size: 20px;
+    }
+    .buy-ticket-txt{
+        text-align: left;
+    }
+}
+.sign-and-win-contest, .event-registration-link{    
+    font-size: 15px;
+    padding: 5px 5px;
+    text-align: center;
+    font-weight: 500;    
+}
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
+    h2{
+        margin-bottom: 15px;
+    }
+}
+/*End event page*/
 }
 @media only screen and (max-width:640px){
     #block-views-anchor-landing-page-block{

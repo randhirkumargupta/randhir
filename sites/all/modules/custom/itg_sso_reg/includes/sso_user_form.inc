@@ -75,13 +75,8 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Email'), 'autocomplete' => 'off'),
-        '#prefix' => '<div class="form-row"><div id="umail" class="col-xs-6">',
+        '#prefix' => '<div class="form-row email-or-mobile"><div id="umail" class="col-xs-6">',
         '#suffix' => '</div>',
-      );
-      
-      $form['orcon'] = array(
-        '#prefix' => '<div id="orcon">OR</div>',
-        
       );
       
       $form['mobile'] = array(
@@ -91,7 +86,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Mobile'), 'autocomplete' => 'off'),
         '#prefix' => '<div id="umobile" class="col-xs-6">',
-        '#suffix' => '</div></div></div>',
+        '#suffix' => '</div></div>',
       );
 
       $form['password'] = array(

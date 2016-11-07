@@ -30,7 +30,7 @@ define('FRONT_THEME_NAME', 'itg');
 define('EXTRA_SECTION_CARDS', 21);
 define('SECTION_TAB', 20);
 define('FRONT_USER', 25);
-define('PARENT_SSO', 'itgcms.drupallocal.dev');
+define('PARENT_SSO', 'dev.indiatodayonline.in');
 
 
 /**
