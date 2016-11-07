@@ -14,88 +14,88 @@
 function itg_widgets_custom_variables() {
   $form = array();
   $form['program_category_id_for_programmes'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter Program Category Id'),
-      '#default_value' => variable_get('program_category_id_for_programmes'),
-      '#required' => TRUE,
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter Program Category Id'),
+    '#default_value' => variable_get('program_category_id_for_programmes'),
+    '#required' => TRUE,
+    '#size' => 20,
+    '#maxlength' => 20,
   );
   $form['so_sorry_category_id_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter So Sorry Category Id'),
-      '#default_value' => variable_get('so_sorry_category_id_for_widget'),
-      '#required' => TRUE,
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter So Sorry Category Id'),
+    '#default_value' => variable_get('so_sorry_category_id_for_widget'),
+    '#required' => TRUE,
+    '#size' => 20,
+    '#maxlength' => 20,
   );
   $form['anchor_id_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter Occupation for Anchors'),
-      '#default_value' => variable_get('anchor_id_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter Occupation for Anchors'),
+    '#default_value' => variable_get('anchor_id_for_widget'),
+    '#size' => 20,
+    '#maxlength' => 20,
   );
   $form['year_end_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of year end'),
-      '#default_value' => variable_get('year_end_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter tid of year end'),
+    '#default_value' => variable_get('year_end_for_widget'),
+    '#size' => 20,
+    '#maxlength' => 20,
   );
   $form['auto_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Auto'),
-      '#default_value' => variable_get('auto_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter tid of Auto'),
+    '#default_value' => variable_get('auto_for_widget'),
+    '#size' => 20,
+    '#maxlength' => 20,
   );
 
 
   $form['tech_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of tech'),
-      '#default_value' => variable_get('tech_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter tid of tech'),
+    '#default_value' => variable_get('tech_for_widget'),
+    '#size' => 20,
+    '#maxlength' => 20,
   );
 
   $form['entertainment_oscar_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of Entertainment Oscar Watch'),
-      '#default_value' => variable_get('entertainment_oscar_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter tid of Entertainment Oscar Watch'),
+    '#default_value' => variable_get('entertainment_oscar_for_widget'),
+    '#size' => 20,
+    '#maxlength' => 20,
   );
 
   $form['movie_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of movie'),
-      '#default_value' => variable_get('movie_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter tid of movie'),
+    '#default_value' => variable_get('movie_for_widget'),
+    '#size' => 20,
+    '#maxlength' => 20,
   );
 
   $form['ipl_points_tally_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter nid of ipl points tally'),
-      '#default_value' => variable_get('ipl_points_tally_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter nid of ipl points tally'),
+    '#default_value' => variable_get('ipl_points_tally_for_widget'),
+    '#size' => 20,
+    '#maxlength' => 20,
   );
   $form['ipl_top_performer_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter nid of ipl tip performer'),
-      '#default_value' => variable_get('ipl_top_performer_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter nid of ipl tip performer'),
+    '#default_value' => variable_get('ipl_top_performer_for_widget'),
+    '#size' => 20,
+    '#maxlength' => 20,
   );
   $form['ipl_for_widget'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Enter tid of ipl'),
-      '#default_value' => variable_get('ipl_for_widget'),
-      '#size' => 20,
-      '#maxlength' => 20,
+    '#type' => 'textfield',
+    '#title' => t('Enter tid of ipl'),
+    '#default_value' => variable_get('ipl_for_widget'),
+    '#size' => 20,
+    '#maxlength' => 20,
   );
   return system_settings_form($form);
 }
@@ -148,9 +148,9 @@ function remove_extra_data() {
 //        'section_wise_content_ordering_list',
 //      'section_wise_draggable_content_order',
 //      'big_story_format_widget',
-        'dont_miss_content_widget',
-        'dont_miss_content',
-      'section_wise_widget',
+    'dont_miss_content_widget',
+    'dont_miss_content',
+    'section_wise_widget',
 //      'we_may_suggest_widget',
 //      'section_wise_content_ordering',
 //      'widget_anchors_listing',
@@ -159,13 +159,13 @@ function remove_extra_data() {
   );
   foreach ($widget as $view_name) {
     $num_deleted = db_delete('draggableviews_structure')
-            ->condition('view_name', $view_name)
-            ->condition('view_display', 'dont_miss_content')
-            ->execute();
+        ->condition('view_name', $view_name)
+        ->condition('view_display', 'dont_miss_content')
+        ->execute();
 
     $num_deleted = db_delete('itg_widget_order')
-            ->condition('widget', $view_name)
-            ->execute();
+        ->condition('widget', $view_name)
+        ->execute();
   }
 }
 
@@ -180,9 +180,9 @@ function remove_extra_data() {
 function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, $nid) {
   if (!empty($widget_name) && !empty($nid)) {
     $num = db_delete('itg_widget_order')
-            ->condition('nid', $nid)
-            ->condition('widget', $widget_name)
-            ->execute();
+        ->condition('nid', $nid)
+        ->condition('widget', $widget_name)
+        ->execute();
     if ($num) {
       drupal_set_message(t("Node has been moved"));
       drupal_goto($_SERVER['HTTP_REFERER']);
@@ -205,11 +205,11 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
 function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
   if (!empty($widget_name) && !empty($cat_tid) && !empty($nid)) {
     $num = db_delete('itg_widget_order')
-            ->condition('nid', $nid)
+        ->condition('nid', $nid)
 //->condition('content_type', $content_type)
-            ->condition('cat_id', $cat_tid)
-            ->condition('widget', $widget_name)
-            ->execute();
+        ->condition('cat_id', $cat_tid)
+        ->condition('widget', $widget_name)
+        ->execute();
     if ($num) {
       drupal_set_message(t("Node has been moved"));
       drupal_goto($_SERVER['HTTP_REFERER']);
@@ -224,10 +224,10 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
  */
 function remove_extra_field_value_for_so_sorry($nid) {
   $num_updated = db_update('itg_widget_order')
-          ->fields(array('extra' => " "))
-          ->condition('nid', $nid)
-          ->condition('widget', 'so_sorry_widget')
-          ->execute();
+      ->fields(array('extra' => " "))
+      ->condition('nid', $nid)
+      ->condition('widget', 'so_sorry_widget')
+      ->execute();
 //drupal_set_message(t("Node has been moved"));
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
@@ -241,23 +241,23 @@ function remove_extra_field_value_for_so_sorry($nid) {
 function add_extra_field_value_for_so_sorry($nid, $extra) {
 // Handling only single nid can be either feature or remix;
   $so_sorry_extra_nodes = db_select('itg_widget_order', 'iwo')
-                  ->condition('iwo.extra', $extra)
-                  ->fields('iwo', array('nid'))
-                  ->execute()->fetchAll(PDO::FETCH_ASSOC);
+          ->condition('iwo.extra', $extra)
+          ->fields('iwo', array('nid'))
+          ->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($so_sorry_extra_nodes as $key => $nids) {
     db_update('itg_widget_order')
-            ->fields(array('extra' => " "))
-            ->condition('nid', $nids['nid'])
-            ->condition('widget', 'so_sorry_widget')
-            ->execute();
+        ->fields(array('extra' => " "))
+        ->condition('nid', $nids['nid'])
+        ->condition('widget', 'so_sorry_widget')
+        ->execute();
   }
 
   db_update('itg_widget_order')
-          ->fields(array('extra' => $extra))
-          ->condition('nid', $nid)
-          ->condition('widget', 'so_sorry_widget')
-          ->execute();
+      ->fields(array('extra' => $extra))
+      ->condition('nid', $nid)
+      ->condition('widget', 'so_sorry_widget')
+      ->execute();
 
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
@@ -291,11 +291,11 @@ function draggable_view_node_delete_section($view_name, $page_name, $nid, $secti
   if (!empty($view_name) && !empty($page_name) && !empty($nid) && !empty($section_tid) && !empty($type)) {
     $args = '{"field_story_category_tid":"' . $section_tid . '","type":"' . $type . '"}';
     $num_deleted = db_delete('draggableviews_structure')
-            ->condition('view_name', $view_name)
-            ->condition('view_display', $page_name)
-            ->condition('entity_id', $nid)
-            ->condition('args', $args)
-            ->execute();
+        ->condition('view_name', $view_name)
+        ->condition('view_display', $page_name)
+        ->condition('entity_id', $nid)
+        ->condition('args', $args)
+        ->execute();
     return $num_deleted;
   }
 }
@@ -331,10 +331,10 @@ function remove_from_widgets($nid, $qid, $view_name, $page_name) {
 function draggable_view_node_delete($view_name, $page_name, $nid) {
   if (!empty($view_name) && !empty($page_name) && !empty($nid)) {
     $num_deleted = db_delete('draggableviews_structure')
-            ->condition('view_name', $view_name)
-            ->condition('view_display', $page_name)
-            ->condition('entity_id', $nid)
-            ->execute();
+        ->condition('view_name', $view_name)
+        ->condition('view_display', $page_name)
+        ->condition('entity_id', $nid)
+        ->execute();
     return $num_deleted;
   }
 }
@@ -414,10 +414,10 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 // Below forms are thoese which are not doing action for nodequeue.
 // Nodequeue from are being altered form itg_widget.main.js.
   $form_id_array_to_alter = array(
-      'views_form_section_wise_draggable_content_order_big_story_format',
-      'views_form_section_wise_draggable_content_order_dont_miss_content',
-      'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
-      'views_form_section_wise_draggable_content_order_page',
+    'views_form_section_wise_draggable_content_order_big_story_format',
+    'views_form_section_wise_draggable_content_order_dont_miss_content',
+    'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
+    'views_form_section_wise_draggable_content_order_page',
   );
 
 
@@ -456,8 +456,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $url_without_query_string = end(explode('/', $url_chunk[0]));
 
     $form['reset'] = array(
-        '#type' => 'markup',
-        '#markup' => l("Reset", $url_without_query_string, array("query" => $query_url)),
+      '#type' => 'markup',
+      '#markup' => l("Reset", $url_without_query_string, array("query" => $query_url)),
     );
   }
   if ($form_id == 'views_form_section_wise_content_ordering_list_page') {
@@ -471,11 +471,11 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 //    $total_rows = $view->total_rows;
 
     $itg_widget_order_data = db_select('itg_widget_order', 'iwo')
-                    ->fields('iwo', array('weight', 'nid'))
-                    ->condition('cat_id', $_GET['category_tid'])
-                    ->condition('content_type', $actual_weight_type)
-                    ->condition('widget', 'section_wise_widget')
-                    ->execute()->fetchAll();
+            ->fields('iwo', array('weight', 'nid'))
+            ->condition('cat_id', $_GET['category_tid'])
+            ->condition('content_type', $actual_weight_type)
+            ->condition('widget', 'section_wise_widget')
+            ->execute()->fetchAll();
 //pr($itg_widget_order_data);
 //Prepare weight crosspond to nid.
     $select_map_array = array();
@@ -511,12 +511,12 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 // Exposed filter forms id
 function sydication_field_filter_views_form() {
   return array(
-      'views-exposed-form-recipe-management-page',
-      'views-exposed-form-recipe-management-page-1',
-      'views-exposed-form-recipe-management-page-2',
-      'views-exposed-form-strory-menegment-page-1',
-      'views-exposed-form-photo-gallery-management-page-1',
-      'views-exposed-form-videogallery-management-page-1'
+    'views-exposed-form-recipe-management-page',
+    'views-exposed-form-recipe-management-page-1',
+    'views-exposed-form-recipe-management-page-2',
+    'views-exposed-form-strory-menegment-page-1',
+    'views-exposed-form-photo-gallery-management-page-1',
+    'views-exposed-form-videogallery-management-page-1'
   );
 }
 
@@ -572,7 +572,7 @@ function itg_widget_custom_session_destory($form, &$form_state) {
   $_SESSION[$form['#form_id']] = array();
   unset($_SESSION[$form['#form_id']]);
   return array(
-      'form_values' => $form_state['values'],
+    'form_values' => $form_state['values'],
   );
 }
 
@@ -584,24 +584,25 @@ function itg_widget_custom_session_destory($form, &$form_state) {
  */
 function forms_uses_checked_content_id() {
   return array(
-      'views_form_story_widget_page_1',
-      'views_form_widget_anchors_listing_anchors_listing_page',
-      'views_form_section_wise_draggable_content_order_dont_miss_content',
-      'views_form_home_page_feature_widget_page_1',
-      'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
-      'views_form_story_widget_most_popular',
-      'views_form_section_wise_draggable_content_order_page',
-      'views_form_story_widget_trending_videos',
-      'views_form_story_widget_top_takes_video',
-      'views_form_story_widget_watch_right_now',
-      'views_form_photo_carousel_widget_photo_carousel_list',
-      'views_form_photo_carousel_widget_video_carousel_list',
-      'views_form_so_sorry_so_sorry_videos',
-      'views_form_special_auto_review_widget_special_auto_review_widget_contents',
-      'views_form_special_how_i_made_it_special_how_made_it_widget_contents',
-      'views_form_yearender_top_news_and_top_videos_yearend_left_widget_contents',
-      'views_form_most_read_widget_most_read_widget_contents',
-      'views_form_issue_base_magazin_widget_issue_base_magazin_widget',
+    'views_form_story_widget_page_1',
+    'views_form_widget_anchors_listing_anchors_listing_page',
+    'views_form_section_wise_draggable_content_order_dont_miss_content',
+    'views_form_home_page_feature_widget_page_1',
+    'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
+    'views_form_story_widget_most_popular',
+    'views_form_section_wise_draggable_content_order_page',
+    'views_form_story_widget_trending_videos',
+    'views_form_story_widget_top_takes_video',
+    'views_form_story_widget_watch_right_now',
+    'views_form_photo_carousel_widget_photo_carousel_list',
+    'views_form_photo_carousel_widget_video_carousel_list',
+    'views_form_so_sorry_so_sorry_videos',
+    'views_form_special_auto_review_widget_special_auto_review_widget_contents',
+    'views_form_special_how_i_made_it_special_how_made_it_widget_contents',
+    'views_form_yearender_top_news_and_top_videos_yearend_left_widget_contents',
+    'views_form_most_read_widget_most_read_widget_contents',
+    'views_form_issue_base_magazin_widget_issue_base_magazin_widget',
+    'views_form_at_section_wise_draggable_content_order_at_sirf_web_per',
   );
 }
 
@@ -642,81 +643,81 @@ function get_sessions_of_ticked_nodes(&$form) {
 function itg_widget_theme() {
 
   $themes = array(
-      'section_wise_ordering' => array(
-          'template' => 'templates/section-ordering-data',
-      ),
-      'rhs_section_wise_ordering' => array(
-          'template' => 'templates/rhs-section-ordering-data',
-      ),
-      'top_stories_ordering' => array(
-          'template' => 'templates/top-stories-ordering-data',
-      ),
-      'home_page_feature' => array(
-          'template' => 'templates/home-page-feature',
-      ),
-      'we_may_suggest' => array(
-          'template' => 'templates/we-may-suggest',
-      ),
-      'widget_big_story_format' => array(
-          'template' => 'templates/big-story-format',
-      ),
-      'trending_videos_widget' => array(
-          'template' => 'templates/trending-videos-widget',
-      ),
-      'most_popular_widget' => array(
-          'template' => 'templates/most-popular-widget',
-      ),
-      'featured_photo_carousel' => array(
-          'template' => 'templates/featured-photo-carousel',
-      ),
-      'featured_photo_carousel_rollingslider' => array(
-          'template' => 'templates/featured-photo-carousel-rollingslider',
-      ),
-      'featured_video_carousel' => array(
-          'template' => 'templates/featured-video-carousel',
-      ),
-      'featured_video_carousel_rollingslider' => array(
-          'template' => 'templates/featured-video-carousel-rollingslider',
-      ),
-      'dont_miss_widget' => array(
-          'template' => 'templates/dont-miss-widget',
-      ),
-      'top_takes_videos_widget' => array(
-          'template' => 'templates/top-takes-videos-widget',
-      ),
-      'itg_widget_watch_right_now_videos_widget' => array(
-          'template' => 'templates/watch-right-now-videos-widget',
-      ),
-      'anchor_langing_page_menu' => array(
-          'template' => 'templates/anchor-landing-page-menu',
-      ),
-      'personlization_front_end' => array(
-          'template' => 'templates/personlization-front-end',
-      ),
-      'year_end_top_news' => array(
-          'template' => 'templates/year-end-top-news',
-      ),
-      'how_made_it' => array(
-          'template' => 'templates/how-made-it',
-      ),
-      'year_end_top_videos' => array(
-          'template' => 'templates/year-end-top-videos',
-      ),
-      'auto_reviews' => array(
-          'template' => 'templates/auto-reviews',
-      ),
-      'itg_widget_politoons' => array(
-          'template' => 'templates/itg-widget-politoons',
-      ),
-      'tech_reviews' => array(
-          'template' => 'templates/auto-reviews',
-      ),
-      'tech_most_read' => array(
-          'template' => 'templates/tech-most-read',
-      ),
-      'live_score_data' => array(
-          'template' => 'templates/live-score-data',
-      ),
+    'section_wise_ordering' => array(
+      'template' => 'templates/section-ordering-data',
+    ),
+    'rhs_section_wise_ordering' => array(
+      'template' => 'templates/rhs-section-ordering-data',
+    ),
+    'top_stories_ordering' => array(
+      'template' => 'templates/top-stories-ordering-data',
+    ),
+    'home_page_feature' => array(
+      'template' => 'templates/home-page-feature',
+    ),
+    'we_may_suggest' => array(
+      'template' => 'templates/we-may-suggest',
+    ),
+    'widget_big_story_format' => array(
+      'template' => 'templates/big-story-format',
+    ),
+    'trending_videos_widget' => array(
+      'template' => 'templates/trending-videos-widget',
+    ),
+    'most_popular_widget' => array(
+      'template' => 'templates/most-popular-widget',
+    ),
+    'featured_photo_carousel' => array(
+      'template' => 'templates/featured-photo-carousel',
+    ),
+    'featured_photo_carousel_rollingslider' => array(
+      'template' => 'templates/featured-photo-carousel-rollingslider',
+    ),
+    'featured_video_carousel' => array(
+      'template' => 'templates/featured-video-carousel',
+    ),
+    'featured_video_carousel_rollingslider' => array(
+      'template' => 'templates/featured-video-carousel-rollingslider',
+    ),
+    'dont_miss_widget' => array(
+      'template' => 'templates/dont-miss-widget',
+    ),
+    'top_takes_videos_widget' => array(
+      'template' => 'templates/top-takes-videos-widget',
+    ),
+    'itg_widget_watch_right_now_videos_widget' => array(
+      'template' => 'templates/watch-right-now-videos-widget',
+    ),
+    'anchor_langing_page_menu' => array(
+      'template' => 'templates/anchor-landing-page-menu',
+    ),
+    'personlization_front_end' => array(
+      'template' => 'templates/personlization-front-end',
+    ),
+    'year_end_top_news' => array(
+      'template' => 'templates/year-end-top-news',
+    ),
+    'how_made_it' => array(
+      'template' => 'templates/how-made-it',
+    ),
+    'year_end_top_videos' => array(
+      'template' => 'templates/year-end-top-videos',
+    ),
+    'auto_reviews' => array(
+      'template' => 'templates/auto-reviews',
+    ),
+    'itg_widget_politoons' => array(
+      'template' => 'templates/itg-widget-politoons',
+    ),
+    'tech_reviews' => array(
+      'template' => 'templates/auto-reviews',
+    ),
+    'tech_most_read' => array(
+      'template' => 'templates/tech-most-read',
+    ),
+    'live_score_data' => array(
+      'template' => 'templates/live-score-data',
+    ),
   );
   return $themes;
 }
@@ -836,7 +837,7 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       break;
-  case 'views-exposed-form-highlights-widget-highlights-widget-conent':
+    case 'views-exposed-form-highlights-widget-highlights-widget-conent':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
       $autocomplete_path = autocomplete_for_widgets('breaking_news');
@@ -962,8 +963,8 @@ function _get_widget_name($view_name, $page_name) {
  */
 function itg_widget_views_api() {
   return array(
-      'api' => 3,
-      'path' => drupal_get_path('module', 'itg_widget') . '/includes/views',
+    'api' => 3,
+    'path' => drupal_get_path('module', 'itg_widget') . '/includes/views',
   );
 }
 
@@ -978,6 +979,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
     unset($query->tables['node']['field_data_field_type']);
     unset($query->where[1]['conditions'][2]);
   }
+  // Aaj tak big sotry
+  if ($view->name == 'at_big_story' && $view->current_display == 'at_big_story_format' && ( $_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
+    unset($query->table_queue['field_data_field_type']);
+    unset($query->tables['node']['field_data_field_type']);
+    unset($query->where[1]['conditions'][2]);
+  }
   if ($view->name == 'programmes' && ($view->current_display == 'page' || $view->current_display == 'rhs_programmes')) {
     $program_cat_value = variable_get('program_category_id_for_programmes');
     if (strlen($program_cat_value) <= 0) {
@@ -988,9 +995,9 @@ function itg_widget_views_query_alter(&$view, &$query) {
       drupal_set_message("Program category setting not found $link", "error");
     }
     $program_where_condition = array(
-        'field' => 'taxonomy_term_hierarchy.parent',
-        'value' => $program_cat_value,
-        'operator' => '=',
+      'field' => 'taxonomy_term_hierarchy.parent',
+      'value' => $program_cat_value,
+      'operator' => '=',
     );
     array_push($query->where[1]['conditions'], $program_where_condition);
   }
@@ -1092,19 +1099,18 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
       $query->where[1]['conditions'][3]['value'] = $section;
     }
-    if( $view->current_display == 'block_5' )
-    {
-    drupal_add_js('
+    if ($view->current_display == 'block_5') {
+      drupal_add_js('
             jQuery(".flexslider").flexslider({
             animation: "slide",
             prevText: "",
             nextText: "",
           
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
-    );
+      );
     }
   }
-  if ($view->name == 'budget' && ($view->current_display == 'budget_election_latest' || $view->current_display=='budget_top_news' )) {
+  if ($view->name == 'budget' && ($view->current_display == 'budget_election_latest' || $view->current_display == 'budget_top_news' )) {
     global $theme;
 
     if ($theme != 'seven') {
@@ -1120,10 +1126,9 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
       $query->where[1]['conditions'][3]['value'] = $section;
     }
-    
   }
   //  condition for election most popular
-   if ($view->name == 'most_popular' && ($view->current_display == 'elections_most_popular' )) {
+  if ($view->name == 'most_popular' && ($view->current_display == 'elections_most_popular' )) {
     global $theme;
 
     if ($theme != 'seven') {
@@ -1139,7 +1144,6 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
       $query->where[1]['conditions'][3]['value'] = $section;
     }
-    
   }
 
 
@@ -1244,7 +1248,7 @@ function itg_widget_anchor_autocomplete_name($string) {
   $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
   $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', $anchor_id);
   $itg_query->condition('n.title', '%' . $string . '%', 'LIKE')
-          ->fields('n', array('title'));
+      ->fields('n', array('title'));
   $itg_result = $itg_query->execute();
   $result = array();
   foreach ($itg_result as $value) {
@@ -1265,7 +1269,7 @@ function itg_widget_anchor_autocomplete_id($string) {
   $itg_query->leftJoin('field_data_field_celebrity_pro_occupation', 'occuptoin', 'occuptoin.entity_id=n.nid');
   $itg_query->condition('occuptoin.field_celebrity_pro_occupation_tid', $anchor_id);
   $itg_query->condition('n.nid', '%' . $string . '%', 'LIKE')
-          ->fields('n', array('nid'));
+      ->fields('n', array('nid'));
   $itg_result = $itg_query->execute();
   $result = array();
   foreach ($itg_result as $value) {
@@ -1283,18 +1287,19 @@ function itg_widget_anchor_autocomplete_id($string) {
 function itg_widget_preprocess_views_view(&$vars) {
   $view_name = $vars['view']->name;
   $widget_views = array(
-      'widget_anchors_listing',
-      'home_page_feature_widget',
-      'story_widget',
-      'section_wise_content_ordering_list',
-      'section_wise_draggable_content_order',
-      'photo_carousel_widget',
-      'so_sorry',
-      'special_auto_review_widget',
-      'special_how_i_made_it',
-      'yearender_top_news_and_top_videos',
-      'most_read_widget',
-      'issue_base_magazin_widget',
+    'widget_anchors_listing',
+    'home_page_feature_widget',
+    'story_widget',
+    'section_wise_content_ordering_list',
+    'section_wise_draggable_content_order',
+    'photo_carousel_widget',
+    'so_sorry',
+    'special_auto_review_widget',
+    'special_how_i_made_it',
+    'yearender_top_news_and_top_videos',
+    'most_read_widget',
+    'issue_base_magazin_widget',
+    'at_section_wise_draggable_content_order'
   );
   if (in_array($view_name, $widget_views)) {
     $vars['classes_array'][] = 'widgets-view';
@@ -1321,7 +1326,7 @@ function itg_widget_preprocess_node(&$vars) {
   if ($vars['type'] == 'reporter' && in_array('Anchor', $occupation)) {
 
     drupal_add_js(
-            "jQuery(document).ready(function(){
+        "jQuery(document).ready(function(){
 jQuery('.read-more , .full-content').click(function(){
 jQuery('.less-content').toggle();
 jQuery('.full-content').toggle();
@@ -1446,10 +1451,10 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
   $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->condition('iwo.widget', $widget_name)
-          ->condition('n.status', 1)
-          ->orderBy('iwo.weight', $order_by)
-          ->range($range_min, $range_max)
-          ->fields('iwo', array('nid', 'extra', 'weight'));
+      ->condition('n.status', 1)
+      ->orderBy('iwo.weight', $order_by)
+      ->range($range_min, $range_max)
+      ->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $weight = 0;
   foreach ($result as $data) {
@@ -1463,15 +1468,14 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
-            ->condition('n.status', 1)
-            ->orderBy('n.nid', 'DESC')
-            ->range($range_min, $range_max)
-            ->fields('iwo', array('nid', 'extra', 'weight'));
+        ->condition('n.status', 1)
+        ->orderBy('n.nid', 'DESC')
+        ->range($range_min, $range_max)
+        ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
 }
-
 
 /**
  * Function returns data for cutom tables widgets.
@@ -1481,16 +1485,16 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
  * @param int $range_min
  * @return array
  */
-function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, $category,$range_max, $range_min = 0, $order_by = 'ASC') {
-   
+function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, $category, $range_max, $range_min = 0, $order_by = 'ASC') {
+
   $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->condition('iwo.widget', $widget_name)
-          ->condition('n.status', 1)
-          ->condition('iwo.cat_id',$category)
-          ->orderBy('iwo.weight', $order_by)
-         ->range($range_min, $range_max)
-          ->fields('iwo', array('nid', 'extra', 'weight'));
+      ->condition('n.status', 1)
+      ->condition('iwo.cat_id', $category)
+      ->orderBy('iwo.weight', $order_by)
+      ->range($range_min, $range_max)
+      ->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   $weight = 0;
@@ -1505,16 +1509,14 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, 
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
-            ->condition('n.status', 1)
-            ->orderBy('n.nid', 'DESC')
-            ->range($range_min, $range_max)
-            ->fields('iwo', array('nid', 'extra', 'weight'));
+        ->condition('n.status', 1)
+        ->orderBy('n.nid', 'DESC')
+        ->range($range_min, $range_max)
+        ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
 }
-
-
 
 /**
  * Function returns data for cutom tables widgets.
@@ -1524,17 +1526,17 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, 
  * @param int $range_min
  * @return array
  */
-function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat_id,$range_max, $range_min = 0, $order_by = 'ASC') {
+function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat_id, $range_max, $range_min = 0, $order_by = 'ASC') {
   $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
-   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
+  $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
   $query->condition('iwo.widget', $widget_name)
-          ->condition('n.status', 1)
-           ->condition('tx.tid', $cat_id)
-          ->orderBy('iwo.weight', 'ASC')
-          ->orderBy('n.nid', 'DESC')
-          ->range($range_min, $range_max)
-          ->fields('iwo', array('nid', 'extra', 'weight'));
+      ->condition('n.status', 1)
+      ->condition('tx.tid', $cat_id)
+      ->orderBy('iwo.weight', 'ASC')
+      ->orderBy('n.nid', 'DESC')
+      ->range($range_min, $range_max)
+      ->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   $weight = 0;
@@ -1549,14 +1551,15 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
-            ->condition('n.status', 1)
-            ->orderBy('n.nid', 'DESC')
-            ->range($range_min, $range_max)
-            ->fields('iwo', array('nid', 'extra', 'weight'));
+        ->condition('n.status', 1)
+        ->orderBy('n.nid', 'DESC')
+        ->range($range_min, $range_max)
+        ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
 }
+
 /**
  * Function returns data for cutom tables widgets.
  * 
@@ -1569,11 +1572,11 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
   $query = db_select('itg_widget_order', 'iwo');
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->condition('iwo.widget', $widget_name)
-          ->condition('n.status', 1)
-          ->condition('iwo.content_type', $content_type)
-          ->orderBy('iwo.weight', 'ASC')
-          ->range($range_min, $range_max)
-          ->fields('iwo', array('nid', 'extra', 'weight'));
+      ->condition('n.status', 1)
+      ->condition('iwo.content_type', $content_type)
+      ->orderBy('iwo.weight', 'ASC')
+      ->range($range_min, $range_max)
+      ->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $weight = 0;
   foreach ($result as $data) {
@@ -1588,11 +1591,11 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
-            ->condition('n.status', 1)
-            ->condition('iwo.content_type', $content_type)
-            ->orderBy('n.nid', 'ASC')
-            ->range($range_min, $range_max)
-            ->fields('iwo', array('nid', 'extra', 'weight'));
+        ->condition('n.status', 1)
+        ->condition('iwo.content_type', $content_type)
+        ->orderBy('n.nid', 'ASC')
+        ->range($range_min, $range_max)
+        ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
@@ -1612,12 +1615,12 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
   $query->condition('iwo.widget', $widget_name)
-          ->condition('n.status', 1)
-          ->condition('tx.tid', $cat_id)
-          ->orderBy('iwo.weight', 'ASC')
-          ->orderBy('n.nid', 'DESC')
-          ->range($range_min, $range_max)
-          ->fields('iwo', array('nid', 'extra', 'weight'));
+      ->condition('n.status', 1)
+      ->condition('tx.tid', $cat_id)
+      ->orderBy('iwo.weight', 'ASC')
+      ->orderBy('n.nid', 'DESC')
+      ->range($range_min, $range_max)
+      ->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $weight = 0;
   foreach ($result as $data) {
@@ -1633,11 +1636,11 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
     $query->condition('iwo.widget', $widget_name)
-            ->condition('n.status', 1)
-            ->condition('tx.tid', $cat_id)
-            ->orderBy('n.nid', 'DESC')
-            ->range($range_min, $range_max)
-            ->fields('iwo', array('nid', 'extra', 'weight'));
+        ->condition('n.status', 1)
+        ->condition('tx.tid', $cat_id)
+        ->orderBy('n.nid', 'DESC')
+        ->range($range_min, $range_max)
+        ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
@@ -1819,8 +1822,8 @@ function get_homepage_current_poll_widget($content_type, $widget_name) {
   $nodes_already->Join('node', 'n', 'iwo.nid=n.nid');
   $nodes_already->fields('iwo', array('nid'));
   $nodes_already->condition('iwo.content_type', $content_type)
-          ->condition('iwo.widget', $widget_name)
-          ->condition('n.status', 1);
+      ->condition('iwo.widget', $widget_name)
+      ->condition('n.status', 1);
   $res = $nodes_already->execute()->fetch();
   return $res->nid;
 }
@@ -1888,20 +1891,20 @@ function itg_widget_issuewidget_filter_form($form, $form_state) {
   }
 
   $form['content_title'] = array(
-      '#title' => t('Content Title'),
-      '#type' => 'select',
-      '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
-      '#options' => $options,
+    '#title' => t('Content Title'),
+    '#type' => 'select',
+    '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
+    '#options' => $options,
   );
   $form['items_per_page'] = array(
-      '#title' => t('Items per page '),
-      '#type' => 'select',
-      '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
-      '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+    '#title' => t('Items per page '),
+    '#type' => 'select',
+    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
   );
   $form['alt_button'] = array(
-      '#type' => 'submit',
-      '#value' => t('Apply'),
+    '#type' => 'submit',
+    '#value' => t('Apply'),
   );
   $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'), '#submit' => array('itg_widget_issuewidget_filter_reset'),);
 
@@ -1953,20 +1956,20 @@ function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
   }
 
   $form['content_title'] = array(
-      '#title' => t('Content Title'),
-      '#type' => 'select',
-      '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
-      '#options' => $options,
+    '#title' => t('Content Title'),
+    '#type' => 'select',
+    '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
+    '#options' => $options,
   );
   $form['items_per_page'] = array(
-      '#title' => t('Items per page '),
-      '#type' => 'select',
-      '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
-      '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+    '#title' => t('Items per page '),
+    '#type' => 'select',
+    '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
   );
   $form['alt_button'] = array(
-      '#type' => 'submit',
-      '#value' => t('Apply'),
+    '#type' => 'submit',
+    '#value' => t('Apply'),
   );
   $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'), '#submit' => array('itg_widget_issuewidgetlist_filter_reset'),);
 
@@ -2061,9 +2064,9 @@ function get_rhs_block_display_condtion($delta = '') {
 function insert_all_node_in_widegt_table() {
 
   $nodes = db_select('node', 'n')
-                  ->fields('n', array('nid'))
-                  ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
-                  ->execute()->fetchAll(PDO::FETCH_ASSOC);
+          ->fields('n', array('nid'))
+          ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
+          ->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($nodes as $data) {
     $node = node_load($data['nid']);
     itg_widget_node_insert($node);
@@ -2083,28 +2086,28 @@ function itg_widget_node_insert($node) {
         $max_result = get_max_weight($category['tid'], $node->type);
 
         $query = db_insert('itg_widget_order')
-                ->fields(array(
-                    'nid' => $nid,
-                    'widget' => 'section_wise_widget',
-                    'content_type' => $node->type,
-                    'cat_id' => $category['tid'],
-                    'weight' => ++$max_result,
-                    'extra' => "",
-                ))
-                ->execute();
+            ->fields(array(
+              'nid' => $nid,
+              'widget' => 'section_wise_widget',
+              'content_type' => $node->type,
+              'cat_id' => $category['tid'],
+              'weight' => ++$max_result,
+              'extra' => "",
+            ))
+            ->execute();
 
         $max_result_all = get_max_weight($category['tid'], "All");
 
         $query_all = db_insert('itg_widget_order')
-                ->fields(array(
-                    'nid' => $nid,
-                    'widget' => 'section_wise_widget',
-                    'content_type' => "All",
-                    'cat_id' => $category['tid'],
-                    'weight' => ++$max_result_all,
-                    'extra' => "",
-                ))
-                ->execute();
+            ->fields(array(
+              'nid' => $nid,
+              'widget' => 'section_wise_widget',
+              'content_type' => "All",
+              'cat_id' => $category['tid'],
+              'weight' => ++$max_result_all,
+              'extra' => "",
+            ))
+            ->execute();
       }
     }
   }
@@ -2132,10 +2135,10 @@ function itg_widget_node_update($node) {
     $updated_categories = array();
     $node_type = $node->type;
     $query = db_select('itg_widget_order', 'iwo')
-            ->fields('iwo', array('cat_id', 'weight'))
-            ->condition('iwo.widget', 'section_wise_widget')
-            ->condition('iwo.nid', $nid)
-            ->groupBy('iwo.cat_id');
+        ->fields('iwo', array('cat_id', 'weight'))
+        ->condition('iwo.widget', 'section_wise_widget')
+        ->condition('iwo.nid', $nid)
+        ->groupBy('iwo.cat_id');
 
     $result = $query->execute()->fetchAll();
 
@@ -2171,26 +2174,26 @@ function itg_widget_node_update($node) {
 function manage_widget_order_during_node_update($nid, $category_tid, $node_type) {
   $max_result = get_max_weight($category_tid, $node_type);
   $check_existing_query = db_select('itg_widget_order', 'iwo')
-                  ->fields('iwo', array('nid'))
-                  ->condition('iwo.content_type', $node_type)
-                  ->condition('iwo.nid', $nid)
-                  ->condition('iwo.widget', 'section_wise_widget')
-                  ->condition('iwo.cat_id', $category_tid)->execute();
+          ->fields('iwo', array('nid'))
+          ->condition('iwo.content_type', $node_type)
+          ->condition('iwo.nid', $nid)
+          ->condition('iwo.widget', 'section_wise_widget')
+          ->condition('iwo.cat_id', $category_tid)->execute();
 
   $db_count = $check_existing_query->rowCount();
 
   if ($db_count == 0) {
     try {
       $query = db_insert('itg_widget_order')
-              ->fields(array(
-                  'nid' => $nid,
-                  'widget' => 'section_wise_widget',
-                  'content_type' => $node_type,
-                  'cat_id' => $category_tid,
-                  'weight' => ++$max_result,
-                  'extra' => "",
-              ))
-              ->execute();
+          ->fields(array(
+            'nid' => $nid,
+            'widget' => 'section_wise_widget',
+            'content_type' => $node_type,
+            'cat_id' => $category_tid,
+            'weight' => ++$max_result,
+            'extra' => "",
+          ))
+          ->execute();
     } catch (Exception $ex) {
       drupal_set_message($ex->getMessage());
     }

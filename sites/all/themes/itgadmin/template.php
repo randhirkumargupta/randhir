@@ -146,7 +146,6 @@ function itgadmin_preprocess_comment(&$vars) {
   }
 }
 
-
 /**
  * Implements hook_preprocess_html().
  */
@@ -159,6 +158,7 @@ function itgadmin_preprocess_html(&$variables) {
 //    $variables['head_title'] = "Test";
 //  }
 }
+
 /**
  * Preprocessor for theme('textfield').
  */
@@ -188,7 +188,7 @@ function itgadmin_menu_link(array $variables) {
   if ($element['#theme'] == 'menu_link__menu_menu_manager') {
     $element['#localized_options']['attributes']['class'][] = "colorbox-load";
   }
-  
+
   if ($element['#below']) {
     $sub_menu = drupal_render($element['#below']);
   }
@@ -371,33 +371,35 @@ function itgadmin_preprocess_page(&$vars) {
 
   // Add tpl for related content view page
   $page_url_except_header_footer = array(
-      'getimagetocroper'
-      , 'searchimage'
-      , 'imagetotag'
-      , 'imagetagedit'
-      , 'anchor-list-order-reorder'
-      , 'big-story-widget-list'
-      , 'photo-list-widget-listing'
-      , 'home-page-feature-widget'
-      , 'we-may-suggest-content-ordering-list'
-      , 'story-list-widget-listing'
-      , 'top-takes-video-widget-order-reorder'
-      , 'trending-video-widget-order-reorder'
-      , 'watch-right-now-video-widget-order-reorder'
-      , 'so-sorry-video-widget-order-reorder'
-      , 'video-list-widget-listing'
-      , 'issue-magazin-widget-list'
-      , 'poll-format-widget-list'
-      , 'special-how-made-it-widget-list'
-      , 'video-status'
-      , 'related-content'
-      , 'feature-content-section-widget-list'
-      , 'most-read-widget-list'
-      , 'yearend-left-widget-list'
-      , 'special-auto-review-widget-lsit'
-      , 'issue-magazin-widget-list'
-      , 'most-popular-widget-order-reorder'
-      , 'dont-miss-widget-list'
+    'getimagetocroper'
+    , 'searchimage'
+    , 'imagetotag'
+    , 'imagetagedit'
+    , 'anchor-list-order-reorder'
+    , 'big-story-widget-list'
+    , 'photo-list-widget-listing'
+    , 'home-page-feature-widget'
+    , 'we-may-suggest-content-ordering-list'
+    , 'story-list-widget-listing'
+    , 'top-takes-video-widget-order-reorder'
+    , 'trending-video-widget-order-reorder'
+    , 'watch-right-now-video-widget-order-reorder'
+    , 'so-sorry-video-widget-order-reorder'
+    , 'video-list-widget-listing'
+    , 'issue-magazin-widget-list'
+    , 'poll-format-widget-list'
+    , 'special-how-made-it-widget-list'
+    , 'video-status'
+    , 'related-content'
+    , 'feature-content-section-widget-list'
+    , 'most-read-widget-list'
+    , 'yearend-left-widget-list'
+    , 'special-auto-review-widget-lsit'
+    , 'issue-magazin-widget-list'
+    , 'most-popular-widget-order-reorder'
+    , 'dont-miss-widget-list'
+    , 'at-sirf-web-per-content-ordering-list'
+    , 'at-aapka-vote-widget-list'
   );
 
   if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
