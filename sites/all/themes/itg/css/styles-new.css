@@ -3688,8 +3688,13 @@ body.has-cart-popup {
   font-weight: 500;
 }
 
-.page-cart #block-itg-ads-ad-right-sidebar-1 {
+.page-cart #block-itg-ads-ad-right-sidebar-1, .page-order #block-itg-ads-ad-right-sidebar-1 {
   border: 1px solid #dddddd;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.page-order h1 {
   margin-top: 30px;
 }
 
