@@ -11,7 +11,7 @@ module_load_include('inc', 'itg_menu_manager', 'include/itg_menu_manager');
  * {@inheritdoc}
  */
 function itg_menu_manager_menu() {
-  
+
   $items['itg-menu-manager'] = array(
     'title' => t('Create Menu'),
     'description' => t('Create Menu'),
@@ -159,7 +159,7 @@ function itg_menu_manager_form($form, &$form_state) {
     '#suffix' => '</div>',
     '#ajax' => array(
       'callback' => 'get_url_of_current_term',
-      'wrapper' => 'url-of-current-term',
+      'wrapper' => 'entire_form',
     ),
     '#default_value' => ($default_values['title']) ? $default_values['title'] : "",
     '#required' => TRUE,
@@ -210,7 +210,7 @@ function itg_menu_manager_form($form, &$form_state) {
   }
   $form['cancle'] = array(
     '#type' => 'markup',
-    '#markup' => l('Cancle', $destination, array("attributes" => array("class" => array("button")))),
+    '#markup' => l('cancle', $destination, array("attributes" => array("class" => array("button")))),
   );
 
   $form['#attributes'] = array(
@@ -223,6 +223,11 @@ function itg_menu_manager_form($form, &$form_state) {
   if (!$edit_id) {
     drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js', 'file');
   }
+  
+  if($form_state['values']['url_type'] == 'external') {
+    unset($form['title']['#ajax']);
+  }
+  
   return $form;
 }
 
@@ -373,16 +378,15 @@ function get_section_update($form, &$form_state) {
  * @return string
  */
 function get_url_of_current_term($form, &$form_state) {
-  unset($form_state['input']['url'], $form_state['values']['url']);
+  //unset($form_state['input']['url'], $form_state['values']['url']);
   $title = $form_state['values']['title'];
   // get values beween squre breaket.
   preg_match_all("/\[([^\]]*)\]/", $title, $matches);
   // get tid
   $term_tid_array = explode("tid:", $matches[1][0]);
   $link = drupal_lookup_path('alias', 'taxonomy/term/' . trim($term_tid_array[1]));
-  $form['url']['#value'] = $link;
-  $form_builder = form_builder($form['#id'], $form['url'], $form_state);
-  return $form_builder;
+  $form['url']['#value'] = !empty($link) ? $link : $form_state['values']['url'] ;
+  return $form;
 }
 
 /**

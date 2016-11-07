@@ -504,60 +504,60 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   drupal_add_css("#draggableviews-table-section-wise-content-ordering-list-page .tabledrag-handle {display:none !important}", "inline");
 
 
- if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_auto_review_widget' && ($form_state['view']->current_display == 'special_auto_review_widget_contents' || $form_state['view']->current_display =='special_auto_review_widget_list')) {
-        
-     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-        
-        foreach ($tax as $key => $term) {
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_auto_review_widget' && ($form_state['view']->current_display == 'special_auto_review_widget_contents' || $form_state['view']->current_display == 'special_auto_review_widget_list')) {
 
-            if (!itg_category_manager_term_state($term->tid)) {
-                unset($tax[$key]);
-            }
-        }
+    $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
-        $op = array("All" => " - None -");
-        foreach ($tax as $key => $val) {
-            $op[$val->tid] = $val->name;
-        }
-        unset($form['category_tid']['#options']);
-        $form['category_tid']['#options'] = $op;
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
     }
-    if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display =='most_read_widget_list')) {
-        
-     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-        
-        foreach ($tax as $key => $term) {
 
-            if (!itg_category_manager_term_state($term->tid)) {
-                unset($tax[$key]);
-            }
-        }
-
-        $op = array("All" => " - None -");
-        foreach ($tax as $key => $val) {
-            $op[$val->tid] = $val->name;
-        }
-        unset($form['category_tid']['#options']);
-        $form['category_tid']['#options'] = $op;
+    $op = array("All" => " - None -");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
     }
-    if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display =='special_how_made_widget_list')) {
-        
-     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-        
-        foreach ($tax as $key => $term) {
+    unset($form['category_tid']['#options']);
+    $form['category_tid']['#options'] = $op;
+  }
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display == 'most_read_widget_list')) {
 
-            if (!itg_category_manager_term_state($term->tid)) {
-                unset($tax[$key]);
-            }
-        }
+    $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
-        $op = array("All" => " - None -");
-        foreach ($tax as $key => $val) {
-            $op[$val->tid] = $val->name;
-        }
-        unset($form['category_tid']['#options']);
-        $form['category_tid']['#options'] = $op;
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
     }
+
+    $op = array("All" => " - None -");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+    unset($form['category_tid']['#options']);
+    $form['category_tid']['#options'] = $op;
+  }
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
+
+    $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
+    }
+
+    $op = array("All" => " - None -");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+    unset($form['category_tid']['#options']);
+    $form['category_tid']['#options'] = $op;
+  }
 
 
 // Assign deafult values in case of checkbox are checked.
@@ -941,7 +941,7 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['content_type']['#value'] = 'all';
       $form['Canlce'] = array(
         '#type' => 'markup',
-        '#markup' => l('Reset', 'section-wise-content-ordering-list' , array("attributes"=>array("class"=>array("button")),"query"=>array("category_tid"=>0))),
+        '#markup' => l('Reset', 'section-wise-content-ordering-list', array("attributes" => array("class" => array("button")), "query" => array("category_tid" => 0))),
       );
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
@@ -1746,16 +1746,17 @@ function itg_widget_block_view_alter(&$data, $block) {
   }
 
   if ($block->delta == 'programmes-rhs_programmes') {
-      if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
-       $data['content'] = array();
-    }else{
-    if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
-      return TRUE;
-    }
-    else {
+    if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
       $data['content'] = array();
     }
-  }
+    else {
+      if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+        return TRUE;
+      }
+      else {
+        $data['content'] = array();
+      }
+    }
   }
 
   if ($block->delta == 'sport_ipl-top_performers' || $block->delta == 'sport_ipl-points_tally' || $block->delta == 'ipl_tweets' || $block->delta == 'live_score') {
@@ -2274,4 +2275,53 @@ function manage_widget_order_during_node_update($nid, $category_tid, $node_type)
       drupal_set_message($ex->getMessage());
     }
   }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_widget_taxonomy_term_insert($term) {
+  $flag = FALSE;
+  foreach ($term->parent as $parents) {
+    if ($parents == variable_get('so_sorry_category_id_for_widget')) {
+      $flag = TRUE;
+      continue;
+    }
+  }
+  if ($flag) {
+    $max_weight = get_max_weight_of_politoons();
+    db_insert('draggableviews_structure')
+        ->fields(array(
+          'entity_id' => $term->tid,
+          'view_name' => 'so_sorry_politoons',
+          'view_display' => 'so_sorry_politoons',
+          'args' => '[]',
+          'parent' => 0,
+          'weight' => ++$max_weight,
+        ))
+        ->execute();
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_widget_taxonomy_term_delete($term) {
+  db_delete('draggableviews_structure')
+      ->condition('entity_id', $term->tid)
+      ->condition('view_name', 'so_sorry_politoons')
+      ->condition('view_display', 'so_sorry_politoons')
+      ->execute();
+}
+
+/**
+ * {@inheritdoc}
+ */
+function get_max_weight_of_politoons() {
+  $max_query = db_select('draggableviews_structure');
+  $max_query->addExpression('MAX(weight)');
+  $max_query->condition('view_name', 'so_sorry_politoons');
+  $max_query->condition('view_display', 'so_sorry_politoons');
+  $max_result = $max_query->execute()->fetchField();
+  return $max_result;
 }
