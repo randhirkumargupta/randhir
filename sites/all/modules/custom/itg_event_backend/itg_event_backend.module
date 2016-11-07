@@ -1003,12 +1003,11 @@ function itg_event_backend_get_event_node(){
  */
 function itg_event_get_host_name() {
   if (module_exists('domain')) {
-    $host_name = db_query("SELECT subdomain, scheme FROM {domain} WHERE domain_id = :domain_id", array(':domain_id' => 1))->fetchAll();
-    if (!empty($host_name)) {
-      return $host_name[0]->scheme . '://' . $host_name[0]->subdomain;
-    } else {
-      return FALSE;
-    }
+    $query = db_select('domain', 'd');
+    $query->fields('d', array('subdomain', 'scheme'));
+    $query->condition('domain_id', 1, '=');
+    $result = $query->execute()->fetchAssoc();
+    return $result['scheme'] . '://' . $result['subdomain'];
   }
 }
 
@@ -1018,9 +1017,12 @@ function itg_event_get_host_name() {
  */
 function itg_event_backend_get_domain($domain_id) {
   if (module_exists('domain')) {
-    $host_name = db_query("SELECT subdomain FROM {domain} WHERE domain_id = :domain_id", array(':domain_id' => $domain_id))->fetchAll();
-    if (!empty($host_name)) {
-      return $host_name[0]->subdomain;
+    $query = db_select('domain', 'd');
+    $query->fields('d', array('subdomain'));
+    $query->condition('domain_id', $domain_id, '=');
+    $result = $query->execute()->fetchField();
+    if ($result) {
+      return $result;
     } else {
       return FALSE;
     }
