@@ -2078,10 +2078,6 @@ body.has-cart-popup {
   vertical-align: top;
   width: 100%;
 }
-[id*="itg_user_forgot_password_multistep_form"] .messages--status {
-  margin-top: 20px;
-  padding: 0 15px;
-}
 
 .page-cart div.message,
 .page-checkout div.message,
@@ -2628,6 +2624,7 @@ body.has-cart-popup {
 #fotp #forgototpclickme {
   margin: 9px 20px;
   float: left;
+  cursor: pointer;
 }
 #fotp #ajax-loader {
   float: left;
@@ -3603,4 +3600,29 @@ body.has-cart-popup {
 }
 .cart-detail a.button:hover {
   text-decoration: underline;
+}
+
+/* CSS class to extend for success message */
+.itg-success-message, #email-sucess, #mobile-success, [id*="itg_user_forgot_password_multistep_form"] .messages--status, .thank-you a {
+  margin: 15px;
+  border: 1px solid #009c00;
+  padding: 10px;
+}
+.itg-success-message:before, #email-sucess:before, #mobile-success:before, [id*="itg_user_forgot_password_multistep_form"] .messages--status:before, .thank-you a:before {
+  content: '\f00c';
+  color: #009c00;
+  margin-right: 10px;
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.itg-error-message {
+  margin: 15px;
+  border: 1px solid red;
+  padding: 10px;
+}
+
+.thank-you a {
+  display: block;
 }
