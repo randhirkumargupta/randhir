@@ -89,7 +89,7 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
               $target = "_blank";
             }
             $active='';
-            if(end(explode('/',$link_url)) ==  arg(0)){
+            if(end(explode('/',$link_url)) ==  arg(1)){
                 $active='active';
             }
             
