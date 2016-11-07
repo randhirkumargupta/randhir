@@ -154,7 +154,7 @@ Drupal.behaviors.my_custom_behavior = {
         }
       };
       var activate_account = getUrlParameter('active');
-      if(activate_account == true){
+      if(activate_account){
         $('.activate-message').show();
       }
   }
