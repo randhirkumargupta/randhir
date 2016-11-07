@@ -21,7 +21,7 @@
                 window.close();
             }
             // code for logout 
-            $("a#myhref").attr('href', 'javascript:void(0)');
+            jQuery("a#myhref").attr('href', 'javascript:void(0)');
 
             jQuery('#myhref').on('click', function() {
                 //Call Ajax

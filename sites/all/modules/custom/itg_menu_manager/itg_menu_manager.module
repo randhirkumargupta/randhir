@@ -655,9 +655,9 @@ function get_third_level_menu() {
     }
   }
 
-  if (in_array(arg(1), $links_array)) {
-    return;
-  }
+//  if (in_array(arg(1), $links_array)) {
+//    return;
+//  }
 
   if ($section_id) {
     $query = db_select('itg_menu_manager', 'imm')
