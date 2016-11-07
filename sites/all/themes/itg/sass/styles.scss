@@ -5020,9 +5020,7 @@ footer{
         color:#ef2a24;
         font-weight: 700;
         text-transform: uppercase;   
-        img{
-            width: 166px;
-            height: 166px;
+        img{            
             border-radius: 100%;
         }
         a{
@@ -5057,20 +5055,20 @@ footer{
         border: none;
     }   
 }
-#block-views-event-associate-video-block{
-    img{
-       border: 7px solid #e9e9e9; 
-    }
+#block-views-event-associate-video-block{    
     .video-list{
         @include pos(relative);
         margin-bottom:20px;
-        &:before{
-            @include pos(absolute,null,40px,10px,null);
-            content: '';
-            background: url(../images/youtube-icon.png) no-repeat;
-            width: 18px;
-            height: 13px;
-        }        
+        .field-content{
+             border: 7px solid #e9e9e9; 
+            &:before{
+               @include pos(absolute,null,28px,10px,null);
+               content: '';
+               background: url(../images/youtube-icon.png) no-repeat;
+               width: 18px;
+               height: 13px;
+           }   
+        }                
     }
 }
 #block-views-program-schedule-block-1{
@@ -5185,6 +5183,7 @@ footer{
             border: 1px solid #ddd;
             padding: 10px;
             height: 85px;
+            margin-bottom: 40px;
             position: relative;
                 &:nth-child(4n+1){
                     clear: left;
