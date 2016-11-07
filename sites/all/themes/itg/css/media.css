@@ -601,6 +601,66 @@
   }
 
   /*CSS end video landing page*/
+  /*start event page*/
+  #block-itg-event-backend-program-tab-block .event-listing .side-right {
+    width: 81%;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title {
+    font-size: 13px;
+    font-size: 0.8125rem;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .section-part {
+    float: none;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .section-part a {
+    width: 49%;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail {
+    float: none;
+    width: 100%;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop {
+    padding-left: 0;
+    border-left: none;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop:before {
+    display: none;
+  }
+
+  #block-views-program-schedule-block-1 .content-list ul.profile-detail li:first-child {
+    width: 28%;
+    padding-top: 15px;
+    font-size: 12px;
+  }
+  #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
+    width: 26%;
+    text-align: center;
+  }
+  #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
+    width: 45%;
+  }
+
+  #block-itg-event-backend-event-sign-and-win h1, #block-itg-event-backend-event-registration h1 {
+    font-size: 20px;
+  }
+  #block-itg-event-backend-event-sign-and-win .buy-ticket-txt, #block-itg-event-backend-event-registration .buy-ticket-txt {
+    text-align: left;
+  }
+
+  .sign-and-win-contest, .event-registration-link {
+    font-size: 15px;
+    padding: 5px 5px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  #block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2 {
+    margin-bottom: 15px;
+  }
+
+  /*End event page*/
 }
 @media only screen and (max-width: 640px) {
   #block-views-anchor-landing-page-block .anchor-left {
