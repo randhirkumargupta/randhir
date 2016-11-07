@@ -210,7 +210,7 @@ function itg_menu_manager_form($form, &$form_state) {
   }
   $form['cancle'] = array(
     '#type' => 'markup',
-    '#markup' => l('cancle', $destination, array("attributes" => array("class" => array("button")))),
+    '#markup' => l('Cancle', $destination, array("attributes" => array("class" => array("button")))),
   );
 
   $form['#attributes'] = array(
