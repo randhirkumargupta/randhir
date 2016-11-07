@@ -300,16 +300,17 @@ jQuery(document).ready(function () {
                         clickHere=1;
                     }
                     if(jQuery('#newlist').length===0){
-                        jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');
+                        jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');                        
                     }
                     var html='<li>'+jQuery(this).html()+'</li>';
                     jQuery('#newlist').append(html);
                     jQuery(this).addClass('hide');
+                    //postion
+                    var posAllmenu = jQuery('.all-menu').position();        
+                    jQuery('body').find('#newlist').css('left', posAllmenu.left - 39 + 'px');
 		}
 	});
-        //postion
-        var posAllmenu = jQuery('.all-menu').position();        
-        jQuery('body').find('#newlist').css('left', posAllmenu.left - 39 + 'px');
+        
     };    
     winWidth = jQuery(window).width();    
     if(winWidth > 770){

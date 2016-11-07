@@ -4125,7 +4125,9 @@ footer{
     .menu-login{
         .user-menu{
             @include pos(relative);
-            a.user-icon{
+            a{
+                cursor: pointer;
+                &.user-icon{
                 position: absolute;
                 right: 0;
                 background: #ffc106;
@@ -4136,6 +4138,7 @@ footer{
                 top: -39px;                
                 text-align: center;
                 font-size: 28px;
+            }
             }
             ul.menu{
                 position: absolute;
