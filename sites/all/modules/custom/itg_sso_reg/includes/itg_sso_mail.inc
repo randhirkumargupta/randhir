@@ -7,7 +7,7 @@
  */
 function itg_sso_get_mail_content($account, $to) {
   
-   $mail_content = itg_sso_notification_mail_content($account);
+   print $mail_content = itg_sso_notification_mail_content($account);
 
   $params = array(
       'body' => $mail_content,
