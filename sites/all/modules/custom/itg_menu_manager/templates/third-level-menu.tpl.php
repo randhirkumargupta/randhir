@@ -29,6 +29,9 @@ if($cat_id==variable_get('ipl_for_widget'))
 {
     drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
+                        
+                        jQuery("#block-itg-ads-ad-right-sidebar-1").hide();
+                       
           });', array('type' => 'inline', 'scope' => 'footer'));
     
 }
@@ -89,7 +92,7 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
               $target = "_blank";
             }
             $active='';
-            if(end(explode('/',$link_url)) ==  arg(0)){
+            if(end(explode('/',$link_url)) ==  arg(1)){
                 $active='active';
             }
             
