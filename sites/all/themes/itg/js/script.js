@@ -136,6 +136,7 @@ Drupal.behaviors.my_custom_behavior = {
     // jQuery code to close activate message popup
     $('.activate-message').on('click', '.close-popup', function(){
       $(this).parent().parent().hide();
+      window.location = window.location.href.split('?')[0];
     });
     
     // jQuery code to get url parameters
