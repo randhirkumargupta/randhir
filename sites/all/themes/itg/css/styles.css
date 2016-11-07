@@ -5519,6 +5519,9 @@ footer .footer-copyright {
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
 }
+#block-itg-layout-manager-header-block .menu-login .user-menu a {
+  cursor: pointer;
+}
 #block-itg-layout-manager-header-block .menu-login .user-menu a.user-icon {
   position: absolute;
   right: 0;
@@ -6479,8 +6482,6 @@ footer .footer-copyright {
   text-transform: uppercase;
 }
 #block-views-program-schedule-block-3 .views-row img {
-  width: 166px;
-  height: 166px;
   border-radius: 100%;
 }
 #block-views-program-schedule-block-3 .views-row a {
@@ -6511,16 +6512,16 @@ footer .footer-copyright {
   border: none;
 }
 
-#block-views-event-associate-video-block img {
-  border: 7px solid #e9e9e9;
-}
 #block-views-event-associate-video-block .video-list {
   position: relative;
   margin-bottom: 20px;
 }
-#block-views-event-associate-video-block .video-list:before {
+#block-views-event-associate-video-block .video-list .field-content {
+  border: 7px solid #e9e9e9;
+}
+#block-views-event-associate-video-block .video-list .field-content:before {
   position: absolute;
-  right: 40px;
+  right: 28px;
   bottom: 10px;
   content: '';
   background: url(../images/youtube-icon.png) no-repeat;
@@ -6565,8 +6566,6 @@ footer .footer-copyright {
   clear: both;
 }
 #block-views-program-schedule-block-1 .content-list ul.profile-detail li {
-  width: 33%;
-  color: #000;
   float: left;
   font-weight: 600;
   vertical-align: middle;
@@ -6587,11 +6586,19 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
 }
-#block-views-program-schedule-block-1 .content-list ul.profile-detail li span.designation {
-  color: #6e6e6e;
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(1) {
+  width: 28%;
+  padding-top: 25px;
+}
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
+  width: 24%;
+  text-align: center;
+}
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
+  width: 48%;
+  padding-top: 8px;
 }
 #block-views-program-schedule-block-1 .content-list .date-display-range {
-  color: #000;
   font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-size: 18px;
@@ -6650,6 +6657,7 @@ footer .footer-copyright {
   border: 1px solid #ddd;
   padding: 10px;
   height: 85px;
+  margin-bottom: 40px;
   position: relative;
 }
 #block-views-program-schedule-block-4 .views-row .views-row:nth-child(4n+1) {

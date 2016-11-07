@@ -93,16 +93,15 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 
         if ($user->uid == 0 || $_GET['q'] != 'user') {
           ?>
-          <?php if ($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
+          <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 
-    <!--<a onclick="window.open('http://itgcms.drupallocal.dev/saml_login/other/domain_info', '_blank', 'location=yes,height=490,width=550,scrollbars=yes,status=yes', 'top=' + tops + ', left=' + left);" class="user-icon"><i class="fa fa-user"></i></a> -->
-            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://dev.indiatodayonline.in/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
-            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://dev.indiatodayonline.in/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
           <?php }
           else {
             ?>
-            <a onclick="Go(550, 500, 50, 'indiatoday')" class="user-icon"><i class="fa fa-user"></i></a>
+            <a onclick="Go(550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>')" class="user-icon"><i class="fa fa-user"></i></a>
 
           <?php }
         }

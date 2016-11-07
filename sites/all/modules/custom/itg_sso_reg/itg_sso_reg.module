@@ -11,7 +11,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 
 function itg_sso_reg_init() {
 
-  global $user;
+  global $user, $base_url;
   if (array_key_exists(FRONT_USER, $user->roles)) {
     $settings = array();
     if ($user->uid > 0) {
@@ -26,13 +26,15 @@ function itg_sso_reg_init() {
       $fin = arg(2);
     }
 
-
     $settings['uid'] = $user->uid ? $user->uid : 0;
     $settings['check_sso_url'] = $fin;
+    $settings['base_url'] = $base_url;
     drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js');
   }
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js');
+  
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js');
+  
 }
 
 /**
@@ -71,6 +73,12 @@ function itg_sso_reg_menu() {
     'page arguments' => array('itg_sso_logout_form'),
     'access arguments' => array('administer itg_sso_logout settings'),
     'type' => MENU_NORMAL_ITEM,
+  );
+  
+   $items['itguserlogout'] = array(
+    'page callback' => 'itguser_logout',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
   );
 
   return $items;
@@ -193,4 +201,27 @@ function itg_sso_logout_form_submit(&$form, &$form_state) {
   variable_set('signout-domain', $form_state['values']['signout']);
   $id_event = variable_get('signout-domain', '');
   drupal_set_message($id_event.' saved successfully!');
+}
+
+/**
+ * Implements callback for itguserlogout.
+ * {@inheritdoc}
+ */
+function itguser_logout() {
+  global $user;
+
+  if ($user->uid > 0) {
+    $domain_array = array('http://qa.indiatodayonline.in',
+      'http://staging.indiatodayonline.in', 'http://dev.indiatodayonline.in'
+    );
+
+    foreach ($domain_array as $key => $val) {
+      $content .= '<iframe src="' . $val . '/user/logout" id="iframe"></iframe>';
+    }
+
+    echo $content;
+  }
+  else {
+    drupal_access_denied();
+  }
 }

@@ -68,19 +68,19 @@ function features_for_event_configuration_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'domain' => array(
-          'weight' => '6',
-        ),
-        'metatags' => array(
-          'weight' => '9',
-        ),
-        'title' => array(
-          'weight' => '5',
-        ),
-        'path' => array(
           'weight' => '7',
         ),
-        'redirect' => array(
+        'metatags' => array(
+          'weight' => '10',
+        ),
+        'title' => array(
+          'weight' => '6',
+        ),
+        'path' => array(
           'weight' => '8',
+        ),
+        'redirect' => array(
+          'weight' => '9',
         ),
       ),
       'display' => array(),
