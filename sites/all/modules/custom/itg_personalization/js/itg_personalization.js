@@ -53,7 +53,7 @@ jQuery(document).ready(function () {
 
     // Hide remove button
     jQuery('input[name="field_ugc_personalization_photo_und_0_remove_button"]').hide();
-    base_url = Drupal.settings.itg_personalization.base_url;
+    var base_url = '';
     // Validate refer a friend form.    
     if (jQuery('body').hasClass('page-personalization-edit-profile-refer-a-friend')) {
         jQuery("#itg-personalization-refer-a-friend-form").validate({
