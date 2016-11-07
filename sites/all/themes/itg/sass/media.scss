@@ -634,6 +634,8 @@
     .event-listing{ 
         .side-right{
             width: 81%;
+            border-left: 1px dashed #9f9f9f;
+            padding-left: 10px;
             .title{
                 @include font(13px);
             }
