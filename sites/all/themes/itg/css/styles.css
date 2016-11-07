@@ -5519,6 +5519,9 @@ footer .footer-copyright {
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
 }
+#block-itg-layout-manager-header-block .menu-login .user-menu a {
+  cursor: pointer;
+}
 #block-itg-layout-manager-header-block .menu-login .user-menu a.user-icon {
   position: absolute;
   right: 0;
