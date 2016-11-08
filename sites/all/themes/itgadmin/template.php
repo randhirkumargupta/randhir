@@ -397,6 +397,7 @@ function itgadmin_preprocess_page(&$vars) {
       , 'yearend-left-widget-list'
       , 'special-auto-review-widget-lsit'
       , 'issue-magazin-widget-list'
+      , 'special-key-candidate-widget-list'
       , 'most-popular-widget-order-reorder'
       , 'dont-miss-widget-list'
   );

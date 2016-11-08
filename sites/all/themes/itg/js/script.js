@@ -136,6 +136,7 @@ Drupal.behaviors.my_custom_behavior = {
     // jQuery code to close activate message popup
     $('.activate-message').on('click', '.close-popup', function(){
       $(this).parent().parent().hide();
+      window.location = window.location.href.split('?')[0];
     });
     
     // jQuery code to get url parameters
@@ -154,7 +155,7 @@ Drupal.behaviors.my_custom_behavior = {
         }
       };
       var activate_account = getUrlParameter('active');
-      if(activate_account == true){
+      if(activate_account){
         $('.activate-message').show();
       }
   }
@@ -300,16 +301,17 @@ jQuery(document).ready(function () {
                         clickHere=1;
                     }
                     if(jQuery('#newlist').length===0){
-                        jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');
+                        jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');                        
                     }
                     var html='<li>'+jQuery(this).html()+'</li>';
                     jQuery('#newlist').append(html);
                     jQuery(this).addClass('hide');
+                    //postion
+                    var posAllmenu = jQuery('.all-menu').position();        
+                    jQuery('body').find('#newlist').css('left', posAllmenu.left - 39 + 'px');
 		}
 	});
-        //postion
-        var posAllmenu = jQuery('.all-menu').position();        
-        jQuery('body').find('#newlist').css('left', posAllmenu.left - 39 + 'px');
+        
     };    
     winWidth = jQuery(window).width();    
     if(winWidth > 770){
@@ -329,7 +331,7 @@ jQuery(document).ready(function () {
     };
    
     eventMenu();
-    jQuery(window).resize(eventMenu);
+    //jQuery(window).resize(eventMenu);
       
 });
 

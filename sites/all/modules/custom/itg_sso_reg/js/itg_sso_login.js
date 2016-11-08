@@ -14,31 +14,25 @@
             if (uid) {
                 //self.opener.location.reload(); 
                 if (check_sso_link && opener) {
-                    
-                        opener.location.reload();
-                    
+
+                    opener.location.reload(true);
+
                 }
                 window.close();
             }
             // code for logout 
-            $("a#myhref").attr('href', 'javascript:void(0)');
+            jQuery("a#myhref").attr('href', 'javascript:void(0)');
 
-            jQuery('#myhref').on('click', function() {
+            jQuery('#myhref').on('click', function () {
                 //Call Ajax
                 jQuery.ajax({
-                    url: base_url+'/itguserlogout',
-                    //type: 'post',
-                    //mozSystem: true ,
-                    //dataType: 'JSON',
-                    success: function(data) {
-                        $('#widget-ajex-loader').show();
-                       // alert('@@@');
-                         //location.reload();
-                        //window.location = base_url+"/user/logout";
-                        //$('span.count').html(' : ' + data);
-                         setTimeout(function () {// wait for 5 secs(2)
-                              window.location = base_url;
-                          }, 15000);
+                    url: base_url + '/itguserlogout',
+                    success: function (data) {
+                        jQuery('#iframe-display').html(data);
+                        jQuery('#widget-ajex-loader').show();
+                        setTimeout(function () {// wait for 5 secs(2)
+                            window.location = base_url;
+                        }, 20000);
                     }
                 });
             });
