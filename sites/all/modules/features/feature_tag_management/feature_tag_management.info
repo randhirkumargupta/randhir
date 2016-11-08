@@ -20,7 +20,6 @@ features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[field_base][] = field_tags_display
 features[field_base][] = field_tags_status
-features[field_instance][] = taxonomy_term-tags-field_set_as_featured_cate
 features[field_instance][] = taxonomy_term-tags-field_tags_display
 features[field_instance][] = taxonomy_term-tags-field_tags_status
 features[flag][] = itg_follow

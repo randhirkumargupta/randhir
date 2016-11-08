@@ -10,9 +10,10 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
  */
 
 function itg_sso_reg_init() {
-
-  global $user;
+ /* required for future */ 
+/*  global $user, $base_url;
   if (array_key_exists(FRONT_USER, $user->roles)) {
+    print $user->uid;
     $settings = array();
     if ($user->uid > 0) {
 
@@ -26,13 +27,15 @@ function itg_sso_reg_init() {
       $fin = arg(2);
     }
 
-
     $settings['uid'] = $user->uid ? $user->uid : 0;
     $settings['check_sso_url'] = $fin;
+    $settings['base_url'] = $base_url;
     drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js');
-  }
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js');
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
+  } */
+  
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js');
+  
 }
 
 /**
@@ -63,8 +66,37 @@ function itg_sso_reg_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['admin/config/administration/logout-config'] = array(
+    'title' => 'ITG SSO logout Setting Form',
+    'description' => 'ITG SSO logout Setting Form ',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sso_logout_form'),
+    'access arguments' => array('administer itg_sso_logout settings'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+   $items['itguserlogout'] = array(
+    'page callback' => 'itguser_logout',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
+}
+
+/**
+ * Implement hook_permissions()
+ * 
+ * @return array
+ */
+function itg_sso_reg_permission() {
+  return array(
+    'administer itg_sso_logout settings' => array(
+      'title' => t('Edit sso signout setting'),
+      'description' => t('Using this permission user can edit signout setting.'),
+    )
+  );
 }
 
 /**
@@ -138,4 +170,57 @@ function itg_sso_get_user_id($name) {
   $itg_result = $itg_query->execute()->fetchField();
 
   return $itg_result;
+}
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
+function itg_sso_logout_form($form, &$form_state) {
+  $form = array();
+  $form['signout'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter Domain'),
+    '#default_value' => variable_get('signout-domain', ''),
+    '#description' => t("Please enter domain with comma seprated list (Ex: http://www.example.com)"),
+  );
+  
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save!'),
+  );
+  
+  return $form;
+//   return system_settings_form($form);
+}
+
+/**
+ * Implements hook_form_submit().
+ * {@inheritdoc}
+ */
+function itg_sso_logout_form_submit(&$form, &$form_state) {
+  variable_set('signout-domain', $form_state['values']['signout']);
+  $id_event = variable_get('signout-domain', '');
+  drupal_set_message($id_event.' saved successfully!');
+}
+
+/**
+ * Implements callback for itguserlogout.
+ * {@inheritdoc}
+ */
+function itguser_logout() {
+  global $user;
+
+  if ($user->uid > 0) {
+    $domains = variable_get('signout-domain', '');
+    $domain_array = explode(',', $domains);
+    foreach ($domain_array as $key => $val) {
+      $content .= '<iframe src="' . $val . '/user/logout" id="iframe"></iframe>';
+    }
+
+    echo $content;
+  }
+  else {
+    drupal_access_denied();
+  }
 }

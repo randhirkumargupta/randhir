@@ -1548,6 +1548,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 #block-menu-menu-ugc-comment-menu,
 #block-menu-menu-astro-content-admin-menu,
 #block-menu-menu-recipe-content-admin-menu,
+#block-menu-menu-recipe-admin-menu,
 #block-menu-menu-podcast-admin-menu,
 #block-menu-menu-print-team-menu,
 #block-menu-menu-videogallery-admin-menu,
@@ -5744,7 +5745,7 @@ div.node{
   border-top: 1px solid #d9d9d9;
   margin-bottom: 50px;
   padding: 0 30px 25px;
-  #edit-submit{margin-top: 38px;}
+  [id*="edit-submit"]{margin-top: 38px;}
 }
 .widget-loader{
   bottom: 0;
@@ -8537,7 +8538,7 @@ div.node{
     }
   }
 }
-[id*="protected-pages-configure"]{
+[id*="protected-pages-configure"], [id*="protected-pages-edit"]{
   fieldset{
     border: none;
     > legend{
@@ -8562,6 +8563,9 @@ div.node{
     table{
       @extend .views-table;
     }
+    div.form-type-password-confirm div.password-suggestions{
+      margin-bottom: 10px;
+    }
   }
 }
 [id*="protected-pages-enter-password"]{
@@ -8577,5 +8581,41 @@ div.node{
       @extend .btn-save;
       margin-left: 250px;
     }
+  }
+}
+[id*="draggableviews-table"]{
+  thead th.views-field-counter{
+    white-space: nowrap;
+  }
+}
+.node-survey-form{
+  [id*="field-story-reporter-values"]{
+    thead tr th label{padding-top: 8px;}
+    .form-type-textfield{
+      > label{
+        display: none;
+      }
+    }
+  }
+}
+
+[id*="domain-form"]{
+  .form-submit{
+    @extend .btn;
+    @extend .btn-save;
+    margin-left: 250px;
+  }
+}
+.node-event_configurations-form, .node-event_backend-form{
+  .form-field-type-color-field-rgb{
+    padding: 0 30px;
+    margin: 30px 0;
+    label{
+      float: left;
+      width: 220px;
+    }
+  }
+  .form-field-type-image{
+    @extend .Browse-upload;
   }
 }

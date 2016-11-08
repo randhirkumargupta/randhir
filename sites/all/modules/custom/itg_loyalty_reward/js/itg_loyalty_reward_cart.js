@@ -80,7 +80,16 @@
                     return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
                 }, "Address must contain only letters, numbers, or dashes.");
             }
-
+            
+            // Redirect user to redeem points page after clicking on reset button.
+            if ($('body').hasClass('page-product')) {
+              var base_url = Drupal.settings.itg_loyalty_reward.base_url;  
+              $('#product-reset').on('click', function(event) {
+                  event.preventDefault();
+                  test_loader_show();
+                  window.location.href = base_url + '/redeem-points';
+              });
+            }
 
             // Code for points earning callbacks.
             $('.share, .like, .visit, .follow, .ns, .ugc, .ol-register, .participate, .raf').on('click', function () {
@@ -121,7 +130,9 @@
             });
             // Display loader onclick of add to cart link.
             $('.btn-add-cart, .itg-remove-product, .btn-redeem-points').on('click', function () {
-                test_loader_show();
+                if (!$(this).hasClass('no-loader')) {
+                  test_loader_show();                  
+                }                
             });
 
             function test_loader_show() {

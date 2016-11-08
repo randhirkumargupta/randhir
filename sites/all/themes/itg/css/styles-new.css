@@ -837,6 +837,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 #content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype .form-select {
   width: 450px;
+  max-width: 100%;
   height: 44px;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -989,19 +990,21 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   text-align: center;
 }
 #content #block-formblock-ugc .node-ugc-form .form-actions .form-submit {
-  background: url(../images/btn-blue.png) no-repeat;
+  background: url(../images/btn-blue.png) 0 0/100% 100% no-repeat;
   height: 41px;
   border: none;
   width: 170px;
+  max-width: 40%;
   font: 300 20px/28px Roboto;
   color: #fff;
   cursor: pointer;
 }
 #content #block-formblock-ugc .node-ugc-form .form-actions a.button {
-  background: url(../images/btn-blue.png) no-repeat;
+  background: url(../images/btn-blue.png) 0 0/100% 100% no-repeat;
   height: 41px;
   border: none;
   width: 170px;
+  max-width: 40%;
   font: 300 20px/41px Roboto;
   display: inline-block;
   vertical-align: top;
@@ -2078,10 +2081,6 @@ body.has-cart-popup {
   vertical-align: top;
   width: 100%;
 }
-[id*="itg_user_forgot_password_multistep_form"] .messages--status {
-  margin-top: 20px;
-  padding: 0 15px;
-}
 
 .page-cart div.message,
 .page-checkout div.message,
@@ -2596,8 +2595,11 @@ body.has-cart-popup {
   background: none;
 }
 .page-user .messages--status, .page-user .messages--error {
-  max-width: 440px;
-  margin: 20px auto 0;
+  background-color: #fefafb;
+  border: 1px solid red;
+  margin: 20px auto;
+  max-width: 540px;
+  padding: 10px;
 }
 .page-user .messages--error .messages__list {
   padding-left: 15px;
@@ -2625,6 +2627,7 @@ body.has-cart-popup {
 #fotp #forgototpclickme {
   margin: 9px 20px;
   float: left;
+  cursor: pointer;
 }
 #fotp #ajax-loader {
   float: left;
@@ -3032,6 +3035,7 @@ body.has-cart-popup {
 .page-order-confirmation section.sidebar #block-itg-ads-ad-right-sidebar-1 {
   border: 1px solid #ddd;
   padding: 30px;
+  width: 100%;
 }
 .page-order-confirmation .cart-checkout-list {
   border: none;
@@ -3550,11 +3554,14 @@ body.has-cart-popup {
 .page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row {
   padding: 10px;
   text-align: left;
-  background: #fefefe;
   border: 1px solid #d9d9d9;
   position: relative;
   margin: 15px;
   border-radius: 5px;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row:hover,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row:hover {
+  background-color: #efefef;
 }
 .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags .views-row .views-field-name,
 .page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-name {
@@ -3577,7 +3584,7 @@ body.has-cart-popup {
   text-decoration: underline;
 }
 
-.continue-shopping a {
+.cart-detail .continue-shopping a {
   padding: 5px;
   display: inline-block;
   vertical-align: top;
@@ -3597,4 +3604,213 @@ body.has-cart-popup {
 }
 .cart-detail a.button:hover {
   text-decoration: underline;
+}
+
+/* CSS class to extend for success message */
+.itg-success-message, #email-sucess, #mobile-success, [id*="itg_user_forgot_password_multistep_form"] .messages--status, #thank-you a {
+  margin: 15px;
+  border: 1px solid #009c00;
+  padding: 10px;
+}
+.itg-success-message:before, #email-sucess:before, #mobile-success:before, [id*="itg_user_forgot_password_multistep_form"] .messages--status:before, #thank-you a:before {
+  content: '\f00c';
+  color: #009c00;
+  margin-right: 10px;
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.itg-error-message {
+  margin: 15px;
+  border: 1px solid red;
+  padding: 10px;
+}
+
+#thank-you a {
+  display: block;
+}
+
+.activate-message {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+.activate-message .message-body {
+  background-color: #fff;
+  left: 0;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 30px 15px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  text-align: center;
+}
+.activate-message .message-body .close-popup {
+  cursor: pointer;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 20px;
+}
+.activate-message .message-body .close-popup .fa {
+  display: inline-block;
+  font: 16px/18px FontAwesome;
+  text-rendering: auto;
+  vertical-align: top;
+}
+
+[id*="itg-sso-reg-multistep-form"] .email-or-mobile {
+  position: relative;
+}
+[id*="itg-sso-reg-multistep-form"] .email-or-mobile:after {
+  content: 'OR';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 25px;
+  margin: 0 auto;
+  width: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  font-family: Roboto;
+  font-weight: 500;
+}
+
+.page-cart #block-itg-ads-ad-right-sidebar-1, .page-order #block-itg-ads-ad-right-sidebar-1 {
+  border: 1px solid #dddddd;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.page-order h1 {
+  margin-top: 30px;
+}
+
+#block-itg-event-backend-event-registration h2 {
+  color: #000;
+  border-bottom-color: #c9c9c9;
+}
+
+#content .node-event_registration-form .form-item {
+  margin: 20px 0;
+}
+#content .node-event_registration-form .form-type-textfield > label, #content .node-event_registration-form .form-type-textarea > label, #content .node-event_registration-form .form-type-select > label {
+  width: 180px;
+  padding-right: 10px;
+  font-size: 15px;
+  color: #000;
+}
+#content .node-event_registration-form #autocomplete {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+#content .node-event_registration-form #autocomplete ul {
+  text-align: left;
+}
+#content .node-event_registration-form #autocomplete ul li {
+  text-align: left;
+  padding: 5px;
+}
+#content .node-event_registration-form div.description, #content .node-event_registration-form .form-type-textarea > label + div, #content .node-event_registration-form span.error {
+  padding-left: 180px;
+}
+#content .node-event_registration-form .form-type-radios > label + div .form-item {
+  display: inline-block;
+  vertical-align: top;
+}
+#content .node-event_registration-form .form-type-radios > label + div .form-item .form-radio {
+  float: left;
+}
+#content .node-event_registration-form .form-type-radios > label + div .form-item label {
+  width: auto;
+}
+#content .node-event_registration-form .form-actions {
+  padding-left: 180px;
+}
+#content .node-event_registration-form .form-actions .form-submit {
+  background-color: #ef3c24;
+  width: auto;
+  margin: 0 5px;
+  font: 400 18px/22px 'Roboto Slab';
+  height: 35px;
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+}
+#content .node-event_registration-form .form-actions .form-submit:hover {
+  background-color: #ef3c24;
+  border: none;
+}
+#content .node-event_registration-form .form-actions a.button {
+  display: inline-block;
+  vertical-align: top;
+  background-color: #ef3c24;
+  text-align: center;
+  width: auto;
+  margin: 0 5px;
+  font: 400 18px/28px 'Roboto Slab';
+  height: 35px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 4px 15px;
+  border-radius: 5px;
+}
+
+/* Responsive CSS Personalization pages */
+@media all and (max-width: 767px) {
+  .page-personalization .personalized-wrapper .personalized-user-area, .page-personalization .personalized-wrapper .personalized-user, .page-personalization .personalized-wrapper .personalized-user-info {
+    display: inline-block;
+    height: auto;
+    vertical-align: top;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-info span {
+    padding: 0 12px;
+  }
+
+  .block-itg-personalization .saved-item-tab, .block-itg-personalization .personal-menu-tab {
+    width: 100%;
+  }
+  .block-itg-personalization .personal-menu-tab {
+    border: none;
+  }
+  .block-itg-personalization .personal-menu-tab li {
+    float: none;
+    border: none;
+    border-top: 1px solid #c6c6c6;
+  }
+
+  #block-itg-personalization-personalized-saved-content {
+    overflow-x: auto;
+  }
+  #block-itg-personalization-personalized-saved-content .saved-item-tab {
+    margin: 30px 0;
+    white-space: nowrap;
+  }
+  #block-itg-personalization-personalized-saved-content .saved-item-tab li {
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+  }
+  #block-itg-personalization-personalized-saved-content .saved-item-tab li + li {
+    margin-left: -3px;
+  }
+
+  .view-personalization-my-content .view-content {
+    overflow-x: auto;
+  }
+  .view-personalization-my-content .views-table th:first-child {
+    min-width: 100px;
+  }
 }

@@ -52,9 +52,9 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         <div class="photo-by-slider">
        <?php foreach ($rows as $index => $row): ?>
         <?php if (!empty($row['field_photo_by'])) { ?>
-            <p class="photo-by">photo:<?php print $row['field_photo_by']; ?></p>
+            <p class="photo-by">PHOTO: <?php print $row['field_photo_by']; ?></p>
         <?php } elseif (!empty($row['field_photo_by_1'])) { ?>
-            <p class="photo-by">photo<?php print $row['field_photo_by_1']; ?></p>
+            <p class="photo-by">PHOTO: <?php print $row['field_photo_by_1']; ?></p>
         <?php } ?>
             <?php endforeach; ?>
         </div>

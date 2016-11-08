@@ -2026,41 +2026,50 @@ img{
 /*CSS End for movie page*/
 
 /* CSS For Election Page */
-.election-page{
-  .left-side{
-    > .row{
-      margin-bottom: 50px;
+.election-page{ 
+    h1{
+        margin-top:60px;
+        .disc-share{
+            a{
+                font-size: 20px;
+                color: #b6b6b6;
+            }
+        }
     }
-    .itg-graph{
-      .droppable{
-        height: 410px;
-      }
+    .left-side{
+        .itg-415-layout{
+            .droppable{
+                height: 415px;
+            }
+        }
+        .itg-325-layout{
+            .droppable, iframe{
+                height: 325px;
+            }
+            iframe{
+                @include calculate-width(1);
+            }
+        }
+        .itg-map{
+            .droppable{
+                height: 375px;
+            }
+        }
+        .itg-most-popular{
+            .droppable{
+                min-height:180px;
+            }
+        }
+        .itg-photo{
+            .droppable{
+                height: 474px;
+            }
+        }           
     }
-    .itg-325-layout{
+  .right-side{
+    .itg-325{
       .droppable{
         height: 325px;
-      }
-    }
-    .itg-map{
-      .droppable{
-        height: 375px;
-      }
-    }
-    .itg-most-popular{
-      .droppable{
-        height: 705px;
-      }
-    }
-    .itg-photo{
-      .droppable{
-        height: 484px;
-      }
-    }
-  }
-  .right-side{
-    .itg-320{
-      .droppable{
-        height: 320px;
       }
     }
     .itg-484{
@@ -2073,9 +2082,74 @@ img{
         height: 460px;
       }
     }
+    .ad-widget{
+        border: none;
+    }
+    .election-topadd .ad-widget{        
+        margin-top: 103px;
+        padding-bottom: 0;
+        margin-bottom: 90px;
+    }
   }
+  .itg-listing {
+    border: none;
 }
-
+.highlight {
+    overflow: auto;
+}
+.trending-videos{
+        padding: 0;
+        border: none;
+        li{
+           &.trending-videos-list{
+            padding: 0;            
+            + li{
+                    border-top:none;
+                    padding-top: 20px;
+                }
+            }
+        }                
+    }
+    .itg-most-popular{
+        .most_popular{
+            border: none;
+            p{
+                margin-top:10px; 
+            }
+        }
+        .col-md-3{
+            margin-bottom:30px;
+            &:nth-child(4n+1){
+                clear: left;
+            }
+        }
+    }
+   .osscar-video{
+        background: transparent;
+        ul .dont-miss-listing{
+            padding: 0;
+            +.dont-miss-listing{
+                padding: 30px 0 0 0;
+            }
+        }
+    }
+    .tech-block_5 .data-holder{        
+        background: #303030;
+        max-width: inherit;
+        .view-content{
+            margin: 10px;
+            overflow: hidden;
+        }
+    }
+    .itg-map{
+        .section_wise_order{
+            .widget-settings{
+                @include pos(relative);
+            }
+        }
+    }
+}
+/* CSS For Election Page End */
 
 /*Budget page css start*/
 .budget-page-layout{
