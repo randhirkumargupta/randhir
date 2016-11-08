@@ -797,6 +797,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         text-align: center;
         .form-select{
           width: 450px;
+          max-width: 100%;
           height: 44px;
           border-radius: 5px;
           border: 1px solid rgba(0,0,0,.20);
@@ -951,19 +952,21 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         padding: 20px 0;
         text-align: center;
         .form-submit{
-          background: url(../images/btn-blue.png) no-repeat;
+          background: url(../images/btn-blue.png) 0 0 / 100% 100% no-repeat;
           height: 41px;
           border: none;
           width: 170px;
+          max-width: 40%;
           font: 300 20px/28px Roboto;
           color: #fff;
           cursor: pointer;
         }
         a.button{
-          background: url(../images/btn-blue.png) no-repeat;
+          background: url(../images/btn-blue.png) 0 0 / 100% 100% no-repeat;
           height: 41px;
           border: none;
           width: 170px;
+          max-width: 40%;
           font: 300 20px/41px Roboto;
           display: inline-block;
           vertical-align: top;
@@ -1998,10 +2001,6 @@ body.has-cart-popup{
         vertical-align: top;
         width: 100%;
     }
-    .messages--status{
-      margin-top: 20px;
-      padding: 0 15px;
-    }
 }
 .page-cart,
 .page-checkout,
@@ -2561,6 +2560,7 @@ body.has-cart-popup{
   #forgototpclickme{
     margin: 9px 20px;
     float: left;
+    cursor: pointer;
   }
   #ajax-loader {
     float: left;
@@ -3005,6 +3005,7 @@ body.has-cart-popup{
     #block-itg-ads-ad-right-sidebar-1 {
       border: 1px solid #ddd;
       padding: 30px;
+      width: 100%;
     }
   }
   .cart-checkout-list{
@@ -3578,5 +3579,223 @@ body.has-cart-popup{
     &:hover{
       text-decoration: underline;
     }
+  }
+}
+
+/* CSS class to extend for success message */
+.itg-success-message{
+  margin: 15px;
+  border: 1px solid #009c00;
+  padding: 10px;
+  &:before{
+    content: '\f00c';
+    color: #009c00;
+    margin-right: 10px;
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+}
+.itg-error-message{
+  margin: 15px;
+  border: 1px solid red;
+  padding: 10px;
+}
+#email-sucess, #mobile-success{
+  @extend .itg-success-message;
+}
+[id*="itg_user_forgot_password_multistep_form"] .messages--status{
+  @extend .itg-success-message;
+}
+#thank-you{
+  a{
+    @extend .itg-success-message;
+    display: block;
+  }
+}
+.activate-message{
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  .message-body{
+    background-color: #fff;
+    left: 0;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 30px 15px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    text-align: center;
+    .close-popup{
+      cursor: pointer;
+      height: 20px;
+      position: absolute;
+      right: 0;
+      text-align: center;
+      top: 0;
+      width: 20px;
+      .fa {
+        display: inline-block;
+        font: 16px/18px FontAwesome;
+        text-rendering: auto;
+        vertical-align: top;
+      }
+    }
+  }
+}
+[id*="itg-sso-reg-multistep-form"] .email-or-mobile{
+  position: relative;
+  &:after{
+    content: 'OR';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 25px;
+    margin: 0 auto;
+    width: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    font-family: Roboto;
+    font-weight: 500;
+  }
+}
+.page-cart, .page-order{
+  #block-itg-ads-ad-right-sidebar-1{
+    border: 1px solid #dddddd;
+    margin-top: 30px;
+    width: 100%;
+  }
+}
+.page-order{
+  h1{
+    margin-top: 30px;
+  }
+}
+#block-itg-event-backend-event-registration h2{
+  color: #000;
+  border-bottom-color: #c9c9c9;
+}
+#content .node-event_registration-form{
+  .form-item{
+    margin: 20px 0;
+  }
+  .form-type-textfield > label, .form-type-textarea > label, .form-type-select > label{
+    width: 180px;
+    padding-right: 10px;
+    font-size: 15px;
+    color: #000;
+  }
+  #autocomplete{
+    border: 1px solid #ddd;
+    text-align: left;
+    ul{
+      text-align: left;
+      li{
+        text-align: left;
+        padding: 5px;
+      }
+    }
+  }
+  div.description, .form-type-textarea > label + div, span.error{
+    padding-left: 180px;
+  }
+  .form-type-radios > label + div{
+    .form-item{
+      display: inline-block;
+      vertical-align: top;
+      .form-radio{
+        float: left;
+      }
+      label{
+        width: auto;
+      }
+    }
+  }
+  .form-actions{
+    padding-left: 180px;
+    .form-submit{
+      background-color: #ef3c24;
+      width: auto;
+      margin: 0 5px;
+      font: 400 18px/22px 'Roboto Slab';
+      height: 35px;
+      text-align: center;
+      text-transform: uppercase;
+      border: none;
+      &:hover{
+        background-color: #ef3c24;
+        border: none;
+      }
+    }
+    a.button{
+      display: inline-block;
+      vertical-align: top;
+      background-color: #ef3c24;
+      text-align: center;
+      width: auto;
+      margin: 0 5px;
+      font: 400 18px/28px 'Roboto Slab';
+      height: 35px;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 4px 15px;
+      border-radius: 5px;
+    }
+  }
+}
+
+
+
+
+/* Responsive CSS Personalization pages */
+@media all and (max-width: 767px){
+  .page-personalization{
+    .personalized-wrapper{
+      .personalized-user-area, .personalized-user, .personalized-user-info {
+        display: inline-block;
+        height: auto; 
+        vertical-align: top;
+      }
+      .personalized-user-info span{padding: 0 12px;}
+    }
+  } 
+  .block-itg-personalization{
+    .saved-item-tab, .personal-menu-tab{
+      width: 100%;
+    }
+    .personal-menu-tab{
+      border: none;
+      li{float: none; border: none; border-top: 1px solid #c6c6c6;}
+    }
+  } 
+  #block-itg-personalization-personalized-saved-content{
+    overflow-x: auto;
+    .saved-item-tab{
+      margin: 30px 0;
+      white-space: nowrap;
+      li{
+        float: none;
+        display: inline-block;
+        vertical-align: top;
+        + li{margin-left: -3px;}
+      }
+    }
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype .form-select{}
+  .view-personalization-my-content{
+    .view-content{overflow-x: auto;}
+    .views-table th:first-child{min-width: 100px;}
+  }
+  #content #block-formblock-ugc .node-ugc-form{
+
   }
 }

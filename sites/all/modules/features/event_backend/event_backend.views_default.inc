@@ -2023,7 +2023,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'photo_landing_slider_thumb_88_86',
+    'image_style' => '110x82',
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
@@ -2382,11 +2382,12 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Designation */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['relationship'] = 'field_select_speaker_target_id';
+  $handler->display->display_options['fields']['field_story_new_title']['label'] = 'New title';
   /* Field: Field collection item: Select Speaker */
   $handler->display->display_options['fields']['field_select_speaker']['id'] = 'field_select_speaker';
   $handler->display->display_options['fields']['field_select_speaker']['table'] = 'field_data_field_select_speaker';
@@ -2469,7 +2470,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
     'image_style' => 'event_speaker_program_72x72',
     'image_link' => '',
   );
-  /* Field: Content: New title */
+  /* Field: Content: Designation */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -2778,7 +2779,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Designation */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';

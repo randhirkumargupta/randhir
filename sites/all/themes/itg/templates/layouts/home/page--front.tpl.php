@@ -854,7 +854,7 @@ if($theme != 'itgadmin')
 }
 
 ?>
-<?php if($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
+<?php if($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 <script>
 window.addEventListener("message", function(ev) {
     if (ev.data.message === "requestResult") {
@@ -865,3 +865,10 @@ window.addEventListener("message", function(ev) {
 
 </script>
 <?php } ?>
+
+<div class="activate-message">
+  <div class="message-body">
+    <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
+    <p>Your Account Activated Sucessfully!</p>
+  </div>
+</div>

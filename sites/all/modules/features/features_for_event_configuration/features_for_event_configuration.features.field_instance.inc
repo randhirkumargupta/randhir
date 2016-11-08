@@ -10,6 +10,46 @@
 function features_for_event_configuration_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance:
+  // 'node-event_configurations-field_ec_content_font_color'.
+  $field_instances['node-event_configurations-field_ec_content_font_color'] = array(
+    'bundle' => 'event_configurations',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'color_field',
+        'settings' => array(),
+        'type' => 'color_field_default_formatter',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_ec_content_font_color',
+    'label' => 'Content Font Color',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'color_field',
+      'settings' => array(),
+      'type' => 'color_field_default_widget',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-event_configurations-field_ec_event_banner'.
   $field_instances['node-event_configurations-field_ec_event_banner'] = array(
     'bundle' => 'event_configurations',
@@ -99,7 +139,7 @@ function features_for_event_configuration_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_ec_font_color',
-    'label' => 'Font Color',
+    'label' => 'Highlighted Font Color',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -236,9 +276,10 @@ function features_for_event_configuration_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Content Font Color');
   t('Event Banner');
-  t('Font Color');
   t('Heading Background Color');
+  t('Highlighted Font Color');
   t('Menu Background Color');
   t('Please select domain.');
   t('Select Domain');

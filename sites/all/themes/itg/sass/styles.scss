@@ -4125,7 +4125,9 @@ footer{
     .menu-login{
         .user-menu{
             @include pos(relative);
-            a.user-icon{
+            a{
+                cursor: pointer;
+                &.user-icon{
                 position: absolute;
                 right: 0;
                 background: #ffc106;
@@ -4136,6 +4138,7 @@ footer{
                 top: -39px;                
                 text-align: center;
                 font-size: 28px;
+            }
             }
             ul.menu{
                 position: absolute;
@@ -5020,9 +5023,7 @@ footer{
         color:#ef2a24;
         font-weight: 700;
         text-transform: uppercase;   
-        img{
-            width: 166px;
-            height: 166px;
+        img{            
             border-radius: 100%;
         }
         a{
@@ -5057,20 +5058,20 @@ footer{
         border: none;
     }   
 }
-#block-views-event-associate-video-block{
-    img{
-       border: 7px solid #e9e9e9; 
-    }
+#block-views-event-associate-video-block{    
     .video-list{
         @include pos(relative);
         margin-bottom:20px;
-        &:before{
-            @include pos(absolute,null,40px,10px,null);
-            content: '';
-            background: url(../images/youtube-icon.png) no-repeat;
-            width: 18px;
-            height: 13px;
-        }        
+        .field-content{
+             border: 7px solid #e9e9e9; 
+            &:before{
+               @include pos(absolute,null,28px,10px,null);
+               content: '';
+               background: url(../images/youtube-icon.png) no-repeat;
+               width: 18px;
+               height: 13px;
+           }   
+        }                
     }
 }
 #block-views-program-schedule-block-1{
@@ -5103,15 +5104,13 @@ footer{
             text-align: left;
             text-transform: uppercase;  
             @include clearfix;
-            li{              
-                width: 33%;
-                color:#000;                
+            li{                                                  
                 float: left;
                 font-weight: 600;
                 vertical-align: middle;
                 &.image{
                     img{
-                     width: 72px;
+                    width: 72px;
                     height: 72px;
                     border-radius: 100%;
                     border: 2px solid #ef3c24;
@@ -5124,15 +5123,23 @@ footer{
                     padding-left: 15px;
                     &.title, &.designation{
                         @include font(12px);
-                    }
-                    &.designation{
-                        color:#6e6e6e;
-                    }
+                    }                    
+                }
+                &:nth-child(1){
+                    width: 28%;
+                    padding-top: 25px;
+                }
+                &:nth-child(2){
+                    width: 24%;
+                    text-align: center;
+                }
+                &:nth-child(3){
+                    width: 48%;
+                    padding-top: 8px;
                 }
             }            
         }
-        .date-display-range{
-            color: #000;
+        .date-display-range{            
             font-family:$itg-roboto;
             font-weight: 900;
             font-size: 18px;
@@ -5185,6 +5192,7 @@ footer{
             border: 1px solid #ddd;
             padding: 10px;
             height: 85px;
+            margin-bottom: 40px;
             position: relative;
                 &:nth-child(4n+1){
                     clear: left;
@@ -5932,8 +5940,10 @@ input[type="radio"]:checked + label:after{
             left: 15px;   
         }
             .flexslider{
+                .slides{
                 li{
                     @include pos(relative);
+                    border:none;
                     .detail{
                         position: absolute;
                         bottom: 0;
@@ -5944,6 +5954,12 @@ input[type="radio"]:checked + label:after{
                             background: rgba(255, 255, 255, 0.74);
                             font-size: 20px;
                             font-weight: 700;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 100%;
+                            min-height: inherit;
+                            color:#000;
                             a{
                                 color: #000;
                                 &:hover{
@@ -5953,11 +5969,9 @@ input[type="radio"]:checked + label:after{
                         }
                     }                
                 }
+                }
                 .flex-direction-nav{
-                    display: block;
-                    position:absolute;
-                    top:50%;
-                    width: 100%;
+                    display: block;                    
                     a{
                         width: 20px;
                         height: 20px;
@@ -5968,6 +5982,12 @@ input[type="radio"]:checked + label:after{
                             font-size: 20px;
                             background: #000;
                         }
+                        &.flex-prev{
+                            left: 0;
+                        }
+                        &.flex-next{
+                            right: 0;
+                        }
                     }
                 }   
             }        
@@ -5975,8 +5995,9 @@ input[type="radio"]:checked + label:after{
         }
         .auto-block-2{
                 border: 1px solid #ddd;
+                 position: relative;
                 .special-top-news{
-                    position: relative;
+                   height:100%;
                     overflow: hidden;
                     .widget-title{
                         position: absolute;
@@ -6011,9 +6032,9 @@ input[type="radio"]:checked + label:after{
         background:transparent;
         ul .dont-miss-listing{
         padding:0 0px 10px 0;
-            + .dont-miss-listing {
+    /*+ .dont-miss-listing {
                 padding:0px;
-            }   
+            }   */
         }
     }
     .section_wise_order-movies-celebrities, .section_wise_order-movies-lifestyle{

@@ -31,10 +31,15 @@ function event_backend_msnf_step_info() {
       7 => 'field_force_registration_open',
       8 => 'field_associate_event_photo',
       9 => 'field_associate_event_video',
-      10 => 'domain',
-      11 => 'metatags',
-      12 => 'path',
-      13 => 'additional_settings',
+      10 => 'field_e_menu_bck_color',
+      11 => 'field_e_heading_bck_color',
+      12 => 'field_e_highlighted_font_color',
+      13 => 'field_e_content_font_color',
+      14 => 'field_e_event_banner',
+      15 => 'domain',
+      16 => 'metatags',
+      17 => 'path',
+      18 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -130,7 +135,7 @@ function event_backend_msnf_step_info() {
   $export['step_highlights|node|event_backend'] = $msnf;
 
   $msnf = new stdClass();
-  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->disabled = TRUE; /* Edit this to true to make a default msnf disabled initially */
   $msnf->api_version = 1;
   $msnf->identifier = 'step_last|node|event_backend';
   $msnf->step_name = 'step_last';
