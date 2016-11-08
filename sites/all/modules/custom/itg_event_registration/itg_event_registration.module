@@ -32,10 +32,10 @@ function itg_event_registration_menu() {
 
   $items['event-registration'] = array(
     'title' => 'Event Registration',
-    'page callback' => 'itg_event_registration_form',
+    'page callback' => 'itg_event_reg_form',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_event_registration.inc',
+    //'type' => MENU_CALLBACK,
+    //'file' => 'includes/itg_event_registration.inc',
   );
 
   $items['event-registration/users-list/%'] = array(
@@ -47,6 +47,16 @@ function itg_event_registration_menu() {
     'file' => 'includes/itg_event_registration.inc',
   );
   return $items;
+}
+
+function itg_event_reg_form() {
+  return '';
+}
+
+function itg_event_backend_registration_form() {
+  module_load_include('inc', 'itg_event_registration', 'includes/itg_event_registration');
+  $form = drupal_get_form('itg_event_registration_form');
+  print drupal_render($form);
 }
 
 /**
@@ -72,9 +82,9 @@ function itg_event_registration_theme() {
 function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'event_registration_node_form') {
-    $current_event_nid = $_GET['event_id'];
-    $max_delta = $form['field_erf_registration_fee'][LANGUAGE_NONE]['#max_delta'] + 1;
 
+    $current_event_nid = itg_event_registration_get_event_nid();
+    $max_delta = $form['field_erf_registration_fee'][LANGUAGE_NONE]['#max_delta'] + 1;
     $node = node_load($current_event_nid);
     $no_of_tickets = $node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
 
@@ -186,7 +196,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       $form['field_erf_total_fee']['#disabled'] = TRUE;
     }
 
-    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $_GET['event_id'];
+    $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $current_event_nid;
     $form['field_story_source_id']['#access'] = TRUE;
 
     // Call function after form build
@@ -203,26 +213,13 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
  */
 function itg_event_registration_form_after_build($form, &$form_state) {
   global $user, $base_url;
-
-  // Extract type of node
-  if (arg(0) == 'node') {
-    if (arg(1) == 'add') {
-      $type = arg(2);
-      $nid = '';
-    }
-    else {
-      $node = node_load(arg(1));
-      $type = $node->type;
-      $nid = arg(1);
-    }
-  }
+  $current_event_nid = itg_event_registration_get_event_nid();
 
   // Array used in event_registration.js
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
-  $settings['type'] = ucfirst($type);
-  $settings['nid'] = $nid;
+  $settings['nid'] = $current_event_nid;
 
   drupal_add_js(array('itg_event_registration' => array('settings' => $settings)), array('type' => 'setting'));
 
@@ -235,7 +232,7 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   }
 
   // If limited tickets are available
-  $current_event_nid = $_GET['event_id'];
+  
   $event_node = node_load($current_event_nid);
   $no_of_tickets = $event_node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
 
@@ -301,14 +298,16 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
     unset($_SESSION['messages']);
   }
 
+  $current_event_nid = itg_event_registration_get_event_nid();
+
   // Set Redirection after completion of event registration form
-  if (!empty($_GET['event_id'])) {
-    $form_state['redirect'] = array('event-registration', array('query' => array('event_id' => $_GET['event_id'])));
+  if (!empty($current_event_nid)) {
+    $form_state['redirect'] = array('event-registration', array('query' => array('event_id' => $current_event_nid)));
   }
   else {
     $form_state['redirect'] = 'event-registration';
   }
-  $event_name = itg_common_get_node_title($_GET['event_id']);
+  $event_name = itg_common_get_node_title($current_event_nid);
   drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
 }
 
@@ -457,4 +456,16 @@ function itg_event_registration_get_total_registration($nid) {
   // Total count for an event
   $total_registration_users = $registration_main_users + $registration_group_users;
   return (int)$total_registration_users;
+}
+
+/**
+ * Get event nid using host
+ * @global string $base_url
+ * @return int
+ */
+function itg_event_registration_get_event_nid() {
+  global $base_url;
+  $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
+  $host_node_arr = explode('/', $host_detail['source']);
+  return $host_node_arr[1];
 }
