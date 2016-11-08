@@ -29,6 +29,21 @@ function event_backend_views_api($module = NULL, $api = NULL) {
 function event_backend_image_default_styles() {
   $styles = array();
 
+  // Exported image style: 110x82.
+  $styles['110x82'] = array(
+    'label' => '110x82',
+    'effects' => array(
+      11 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 110,
+          'height' => 82,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: event_364x205.
   $styles['event_364x205'] = array(
     'label' => 'event_364x205',

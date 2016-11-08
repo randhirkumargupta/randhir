@@ -5519,6 +5519,9 @@ footer .footer-copyright {
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
 }
+#block-itg-layout-manager-header-block .menu-login .user-menu a {
+  cursor: pointer;
+}
 #block-itg-layout-manager-header-block .menu-login .user-menu a.user-icon {
   position: absolute;
   right: 0;
@@ -6479,8 +6482,6 @@ footer .footer-copyright {
   text-transform: uppercase;
 }
 #block-views-program-schedule-block-3 .views-row img {
-  width: 166px;
-  height: 166px;
   border-radius: 100%;
 }
 #block-views-program-schedule-block-3 .views-row a {
@@ -6511,16 +6512,16 @@ footer .footer-copyright {
   border: none;
 }
 
-#block-views-event-associate-video-block img {
-  border: 7px solid #e9e9e9;
-}
 #block-views-event-associate-video-block .video-list {
   position: relative;
   margin-bottom: 20px;
 }
-#block-views-event-associate-video-block .video-list:before {
+#block-views-event-associate-video-block .video-list .field-content {
+  border: 7px solid #e9e9e9;
+}
+#block-views-event-associate-video-block .video-list .field-content:before {
   position: absolute;
-  right: 40px;
+  right: 28px;
   bottom: 10px;
   content: '';
   background: url(../images/youtube-icon.png) no-repeat;
@@ -6565,8 +6566,6 @@ footer .footer-copyright {
   clear: both;
 }
 #block-views-program-schedule-block-1 .content-list ul.profile-detail li {
-  width: 33%;
-  color: #000;
   float: left;
   font-weight: 600;
   vertical-align: middle;
@@ -6587,11 +6586,19 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
 }
-#block-views-program-schedule-block-1 .content-list ul.profile-detail li span.designation {
-  color: #6e6e6e;
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(1) {
+  width: 28%;
+  padding-top: 25px;
+}
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
+  width: 24%;
+  text-align: center;
+}
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
+  width: 48%;
+  padding-top: 8px;
 }
 #block-views-program-schedule-block-1 .content-list .date-display-range {
-  color: #000;
   font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-size: 18px;
@@ -6650,6 +6657,7 @@ footer .footer-copyright {
   border: 1px solid #ddd;
   padding: 10px;
   height: 85px;
+  margin-bottom: 40px;
   position: relative;
 }
 #block-views-program-schedule-block-4 .views-row .views-row:nth-child(4n+1) {
@@ -7398,32 +7406,36 @@ footer .footer-copyright {
   top: 0;
   left: 15px;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li {
   position: relative;
+  border: none;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail {
   position: absolute;
   bottom: 0;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-count {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-count {
   display: none;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption {
   background: rgba(255, 255, 255, 0.74);
   font-size: 20px;
   font-weight: 700;
-}
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  min-height: inherit;
   color: #000;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption a:hover {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a {
+  color: #000;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a:hover {
   color: #193984;
 }
 .movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav {
   display: block;
-  position: absolute;
-  top: 50%;
-  width: 100%;
 }
 .movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a {
   width: 20px;
@@ -7436,11 +7448,18 @@ footer .footer-copyright {
   font-size: 20px;
   background: #000;
 }
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-prev {
+  left: 0;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-next {
+  right: 0;
+}
 .movie-layout-page .itg-layout-580 .auto-block-2 {
   border: 1px solid #ddd;
+  position: relative;
 }
 .movie-layout-page .itg-layout-580 .auto-block-2 .special-top-news {
-  position: relative;
+  height: 100%;
   overflow: hidden;
 }
 .movie-layout-page .itg-layout-580 .auto-block-2 .special-top-news .widget-title {
@@ -7468,9 +7487,9 @@ footer .footer-copyright {
 }
 .movie-layout-page .osscar-video ul .dont-miss-listing {
   padding: 0 0px 10px 0;
-}
-.movie-layout-page .osscar-video ul .dont-miss-listing + .dont-miss-listing {
-  padding: 0px;
+  /*+ .dont-miss-listing {
+              padding:0px;
+          }   */
 }
 .movie-layout-page .section_wise_order-movies-celebrities .widget-title, .movie-layout-page .section_wise_order-movies-lifestyle .widget-title {
   position: absolute;
