@@ -3688,9 +3688,84 @@ body.has-cart-popup {
   font-weight: 500;
 }
 
-.page-cart #block-itg-ads-ad-right-sidebar-1 {
+.page-cart #block-itg-ads-ad-right-sidebar-1, .page-order #block-itg-ads-ad-right-sidebar-1 {
   border: 1px solid #dddddd;
   margin-top: 30px;
+  width: 100%;
+}
+
+.page-order h1 {
+  margin-top: 30px;
+}
+
+#block-itg-event-backend-event-registration h2 {
+  color: #000;
+  border-bottom-color: #c9c9c9;
+}
+
+#content .node-event_registration-form .form-item {
+  margin: 20px 0;
+}
+#content .node-event_registration-form .form-type-textfield > label, #content .node-event_registration-form .form-type-textarea > label, #content .node-event_registration-form .form-type-select > label {
+  width: 180px;
+  padding-right: 10px;
+  font-size: 15px;
+  color: #000;
+}
+#content .node-event_registration-form #autocomplete {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+#content .node-event_registration-form #autocomplete ul {
+  text-align: left;
+}
+#content .node-event_registration-form #autocomplete ul li {
+  text-align: left;
+  padding: 5px;
+}
+#content .node-event_registration-form div.description, #content .node-event_registration-form .form-type-textarea > label + div, #content .node-event_registration-form span.error {
+  padding-left: 180px;
+}
+#content .node-event_registration-form .form-type-radios > label + div .form-item {
+  display: inline-block;
+  vertical-align: top;
+}
+#content .node-event_registration-form .form-type-radios > label + div .form-item .form-radio {
+  float: left;
+}
+#content .node-event_registration-form .form-type-radios > label + div .form-item label {
+  width: auto;
+}
+#content .node-event_registration-form .form-actions {
+  padding-left: 180px;
+}
+#content .node-event_registration-form .form-actions .form-submit {
+  background-color: #ef3c24;
+  width: auto;
+  margin: 0 5px;
+  font: 400 18px/22px 'Roboto Slab';
+  height: 35px;
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+}
+#content .node-event_registration-form .form-actions .form-submit:hover {
+  background-color: #ef3c24;
+  border: none;
+}
+#content .node-event_registration-form .form-actions a.button {
+  display: inline-block;
+  vertical-align: top;
+  background-color: #ef3c24;
+  text-align: center;
+  width: auto;
+  margin: 0 5px;
+  font: 400 18px/28px 'Roboto Slab';
+  height: 35px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 4px 15px;
+  border-radius: 5px;
 }
 
 /* Responsive CSS Personalization pages */
