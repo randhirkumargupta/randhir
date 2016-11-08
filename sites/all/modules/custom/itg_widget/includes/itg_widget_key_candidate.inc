@@ -13,7 +13,12 @@ module_load_include('inc', 'itg_widget', 'itg_widget.helper');
  * @param array $auto_review_content
  */
 function save_key_candidate_data($auto_review_content) {
+
     $selected_node = $auto_review_content['selection'];
+    if($auto_review_content['values']['state_value']==0)
+    {
+         drupal_set_message(t('Node not added Select state'), 'error');
+    } else {
     $widget_name = "key_candidate";
     if (count($selected_node)) {
         foreach ($selected_node as $node) {
@@ -28,7 +33,7 @@ function save_key_candidate_data($auto_review_content) {
                     ->fields(array(
                         'nid' => $node,
                         'widget' => $widget_name,
-                        'cat_id' => $_GET['category_tid'],
+                        'cat_id' => $auto_review_content['values']['state_value'],
                         'content_type' => $node_load_data->type,
                         //'extra' => $field_names[$node],
                         'weight' => ++$max_weight,
@@ -37,35 +42,6 @@ function save_key_candidate_data($auto_review_content) {
         }
         drupal_set_message(t("Nodes has been saved"));
     }
-}
-
-/**
- * Funtion to get block data.
- *
- * @param array $info
- * @return array
- */
-function itg_widget_how_made_it_ordering_data($info) {
-    global $theme;
-  $data = '';
-  if (!empty($info)) {
-    $widget_name = $info['widget_name'];
-     if(isset($_GET['section']) && !empty($_GET['section']))
-        {
-            $selction_name='section';
-        }else{
-            $selction_name='section_name';
-        }
-       $cat_id = $_GET[$selction_name];
-        if ($theme == FRONT_THEME_NAME) {
-          $cat_id = arg(2);
-         }
-    $result = get_view_nodes_form_custom_table_for_widgets_special($widget_name,$cat_id, HOW_MADE_MAX_RANGE, HOW_MADE_MIN_RANGE);
-
-    $entity_data = array();
-    foreach ($result as $entity_data_node) {
-      $entity_data[] = array("node_load_data" => node_load($entity_data_node['nid']), "custom_label" => $entity_data_node['extra']);
     }
-    return $entity_data;
-  }
 }
+
