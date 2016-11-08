@@ -456,7 +456,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter a valid email id.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -498,7 +498,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please select city.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -540,7 +540,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter your company/organization name.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -582,7 +582,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please select country.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -624,7 +624,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter designation.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -670,7 +670,7 @@ function features_for_event_registration_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Please select gender title.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -689,7 +689,7 @@ function features_for_event_registration_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_erf_gender',
-    'label' => 'Gender Title',
+    'label' => 'Gender',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -709,7 +709,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter your valid ID number.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -752,7 +752,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter your mailing address.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -794,7 +794,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter mobile number.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -880,8 +880,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter postal code.
-<b>Allowed:</b> 6 digit numeric value.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -974,7 +973,7 @@ function features_for_event_registration_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Please select your id type.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1013,7 +1012,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please select state.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1144,7 +1143,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please enter last name.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1309,27 +1308,14 @@ function features_for_event_registration_field_default_field_instances() {
   t('Designation');
   t('Email');
   t('First name');
+  t('Gender');
   t('Gender Title');
   t('ID Number');
   t('Last name');
   t('Mailing Address');
   t('Mobile');
-  t('Please enter a valid email id.');
-  t('Please enter designation.');
-  t('Please enter last name.');
-  t('Please enter mobile number.');
-  t('Please enter postal code.
-<b>Allowed:</b> 6 digit numeric value.');
-  t('Please enter your company/organization name.');
-  t('Please enter your mailing address.');
-  t('Please enter your valid ID number.');
-  t('Please select city.');
   t('Please select country for this state.');
-  t('Please select country.');
-  t('Please select gender title.');
   t('Please select state for this city.');
-  t('Please select state.');
-  t('Please select your id type.');
   t('Postal Code');
   t('Registration Fee');
   t('Select County');

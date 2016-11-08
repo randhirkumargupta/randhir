@@ -80,8 +80,8 @@ function itg_personalization_home_page() {
   $data['full_name'] = $f_name . ' ' . $l_name;
 
   // user logout link
-  $data['logout'] = l(t('Logout'), 'user/logout');
-
+  //$data['logout'] = '<a href="javascript:void(0)" id="myhref">Logout</a>';
+  //$data['logout'] = l('Log out', 'user/logout');
   return theme('personalization_userpage', array('data' => $data));
 }
 

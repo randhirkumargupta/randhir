@@ -133,6 +133,31 @@ Drupal.behaviors.my_custom_behavior = {
     $('body').on('click', '.cart-dropdown-close', function(){
       $(this).parent().hide();
     });
+    // jQuery code to close activate message popup
+    $('.activate-message').on('click', '.close-popup', function(){
+      $(this).parent().parent().hide();
+      window.location = window.location.href.split('?')[0];
+    });
+    
+    // jQuery code to get url parameters
+      var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split('=');
+
+          if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+          }
+        }
+      };
+      var activate_account = getUrlParameter('active');
+      if(activate_account){
+        $('.activate-message').show();
+      }
   }
 };
 
@@ -248,7 +273,8 @@ jQuery(window).load(function () {
 
 
 
-jQuery(document).ready(function () {    
+jQuery(document).ready(function () {   
+    var winWidth;
     jQuery('.mobile-nav').click(function () {
         jQuery('.navigation').slideToggle();
     });    
@@ -275,22 +301,37 @@ jQuery(document).ready(function () {
                         clickHere=1;
                     }
                     if(jQuery('#newlist').length===0){
-                        jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');
+                        jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');                        
                     }
                     var html='<li>'+jQuery(this).html()+'</li>';
                     jQuery('#newlist').append(html);
                     jQuery(this).addClass('hide');
+                    //postion
+                    var posAllmenu = jQuery('.all-menu').position();        
+                    jQuery('body').find('#newlist').css('left', posAllmenu.left - 39 + 'px');
 		}
 	});
-        //postion
-        var posAllmenu = jQuery('.all-menu').position();
-        jQuery('#newlist').css('left', posAllmenu.left - 39 + 'px');
+        
     };    
-    var winWidth = jQuery(window).width();    
+    winWidth = jQuery(window).width();    
     if(winWidth > 770){
         jQuery(window).resize(menuBuilder);
         menuBuilder();    
     }
+    
+    
+    var eventMenu = function(){    
+         winWidth = jQuery(window).width();  
+         if(winWidth < 1024){
+            jQuery('#block-menu-menu-event-menu').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');        
+            jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function(){            
+                jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
+            });
+         }
+    };
+   
+    eventMenu();
+    //jQuery(window).resize(eventMenu);
       
 });
 
