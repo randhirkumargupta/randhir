@@ -10,9 +10,10 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
  */
 
 function itg_sso_reg_init() {
-
+  
   global $user, $base_url;
   if (array_key_exists(FRONT_USER, $user->roles)) {
+    print $user->uid;
     $settings = array();
     if ($user->uid > 0) {
 
@@ -211,10 +212,8 @@ function itguser_logout() {
   global $user;
 
   if ($user->uid > 0) {
-    $domain_array = array('http://qa.indiatodayonline.in',
-      'http://staging.indiatodayonline.in', 'http://dev.indiatodayonline.in'
-    );
-
+    $domains = variable_get('signout-domain', '');
+    $domain_array = explode(',', $domains);
     foreach ($domain_array as $key => $val) {
       $content .= '<iframe src="' . $val . '/user/logout" id="iframe"></iframe>';
     }
