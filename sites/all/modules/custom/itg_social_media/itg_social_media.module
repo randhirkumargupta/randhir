@@ -98,7 +98,7 @@ function itg_social_media_menu() {
  * Implements hook_form_alter()
  * {@inheritdoc}
  */
-function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {   
+function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {     
   switch ($form['#id']) {
     case 'views-exposed-form-social-media-logs-page':      
       $form['created']['min'] = array(        
@@ -121,18 +121,19 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       $form['status']['#options'][0] = 'Unpublished';     
       
       break;
-
+    
+    case 'views-exposed-form-report-filed-content-page':
     case 'views-exposed-form-browse-content-page':
       $form['created']['min'] = array(        
         '#type' => 'date_popup',
         '#date_format' => 'd/m/Y',
-        '#date_year_range' => '-3:+3',
+        '#date_year_range' => '-20:+3',
         '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date')),        
       );
       $form['created']['max'] = array(        
         '#type' => 'date_popup',
         '#date_format' => 'd/m/Y',
-        '#date_year_range' => '-3:+3',
+        '#date_year_range' => '0:+3',
         '#attributes' => array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date')),        
       );      
       
