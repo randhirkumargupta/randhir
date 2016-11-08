@@ -163,6 +163,29 @@ function itg_layout_manager_block_view($delta = '') {
 
   switch ($delta) {
     case 'header_block':
+      global $user, $base_url;
+  if (array_key_exists(FRONT_USER, $user->roles)) {
+        print $user->uid;
+        $settings = array();
+        if ($user->uid > 0) {
+
+          $arg = arg(2);
+        }
+
+        if (!empty($arg)) {
+          $fin = $arg;
+        }
+        else {
+          $fin = arg(2);
+        }
+
+        $settings['uid'] = $user->uid ? $user->uid : 0;
+        $settings['check_sso_url'] = $fin;
+        $settings['base_url'] = $base_url;
+        drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
+        drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
+      }
+
       $arg = arg();
       // Code for ads
       drupal_add_js('http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap', array('scope' => 'header'));
