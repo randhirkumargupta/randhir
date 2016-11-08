@@ -115,7 +115,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     unset($form['#metatags']);
     unset($form['actions']['preview']);
 
-    $form['title']['#description'] = t('Please enter first name.');
+    //$form['title']['#description'] = t('Please enter first name.');
 
     $destination = array('event-registration', array('query' => array('event_id' => $current_event_nid)));
     $form['actions']['cancel'] = array(
