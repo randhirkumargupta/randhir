@@ -30,7 +30,7 @@ function itg_sso_reg_init() {
     $settings['check_sso_url'] = $fin;
     $settings['base_url'] = $base_url;
     drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
+    drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('type' => 'inline', 'cache' => FALSE));
   }
   
     drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js');
@@ -211,10 +211,8 @@ function itguser_logout() {
   global $user;
 
   if ($user->uid > 0) {
-    $domain_array = array('http://qa.indiatodayonline.in',
-      'http://staging.indiatodayonline.in', 'http://dev.indiatodayonline.in'
-    );
-
+    $domains = variable_get('signout-domain', '');
+    $domain_array = explode(',', $domains);
     foreach ($domain_array as $key => $val) {
       $content .= '<iframe src="' . $val . '/user/logout" id="iframe"></iframe>';
     }
