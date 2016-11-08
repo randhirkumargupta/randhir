@@ -3689,20 +3689,44 @@ body.has-cart-popup{
     margin: 20px 0;
   }
   .form-type-textfield > label, .form-type-textarea > label, .form-type-select > label{
-    width: 130px;
+    width: 180px;
     padding-right: 10px;
     font-size: 15px;
     color: #000;
   }
+  .form-type-textfield #autocomplete{
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  div.description, .form-type-textarea > label + div, span.error{
+    padding-left: 180px;
+  }
+  .form-type-radios > label + div{
+    .form-item{
+      display: inline-block;
+      vertical-align: top;
+      .form-radio{
+        float: left;
+      }
+      label{
+        width: auto;
+      }
+    }
+  }
   .form-actions{
-    padding: 0;
+    padding-left: 180px;
     .form-submit{
       background-color: #ef3c24;
       width: 150px;
       margin: 0 5px;
-      font: 400 22px/28px 'Roboto Slab';
+      font: 400 22px/22px 'Roboto Slab';
       height: 35px;
       text-align: center;
+      border: none;
+      &:hover{
+        background-color: #ef3c24;
+        border: none;
+      }
     }
     a.button{
       display: inline-block;
@@ -3713,6 +3737,10 @@ body.has-cart-popup{
       margin: 0 5px;
       font: 400 22px/28px 'Roboto Slab';
       height: 35px;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 4px 0;
+      border-radius: 5px;
     }
   }
 }
