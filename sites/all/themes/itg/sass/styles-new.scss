@@ -3694,9 +3694,16 @@ body.has-cart-popup{
     font-size: 15px;
     color: #000;
   }
-  .form-type-textfield #autocomplete{
+  #autocomplete{
     border: 1px solid #ddd;
     text-align: left;
+    ul{
+      text-align: left;
+      li{
+        text-align: left;
+        padding: 5px;
+      }
+    }
   }
   div.description, .form-type-textarea > label + div, span.error{
     padding-left: 180px;
@@ -3717,11 +3724,12 @@ body.has-cart-popup{
     padding-left: 180px;
     .form-submit{
       background-color: #ef3c24;
-      width: 150px;
+      width: auto;
       margin: 0 5px;
-      font: 400 22px/22px 'Roboto Slab';
+      font: 400 18px/22px 'Roboto Slab';
       height: 35px;
       text-align: center;
+      text-transform: uppercase;
       border: none;
       &:hover{
         background-color: #ef3c24;
@@ -3733,13 +3741,13 @@ body.has-cart-popup{
       vertical-align: top;
       background-color: #ef3c24;
       text-align: center;
-      width: 150px;
+      width: auto;
       margin: 0 5px;
-      font: 400 22px/28px 'Roboto Slab';
+      font: 400 18px/28px 'Roboto Slab';
       height: 35px;
       text-transform: uppercase;
       color: #fff;
-      padding: 4px 0;
+      padding: 4px 15px;
       border-radius: 5px;
     }
   }
