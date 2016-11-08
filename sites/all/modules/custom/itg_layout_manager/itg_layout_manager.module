@@ -165,7 +165,7 @@ function itg_layout_manager_block_view($delta = '') {
     case 'header_block':
       global $user, $base_url;
   if (array_key_exists(FRONT_USER, $user->roles)) {
-        print $user->uid;
+        
         $settings = array();
         if ($user->uid > 0) {
 
