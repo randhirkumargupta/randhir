@@ -3680,6 +3680,78 @@ body.has-cart-popup{
     margin-top: 30px;
   }
 }
+#block-itg-event-backend-event-registration h2{
+  color: #000;
+  border-bottom-color: #c9c9c9;
+}
+#content .node-event_registration-form{
+  .form-item{
+    margin: 20px 0;
+  }
+  .form-type-textfield > label, .form-type-textarea > label, .form-type-select > label{
+    width: 180px;
+    padding-right: 10px;
+    font-size: 15px;
+    color: #000;
+  }
+  #autocomplete{
+    border: 1px solid #ddd;
+    text-align: left;
+    ul{
+      text-align: left;
+      li{
+        text-align: left;
+        padding: 5px;
+      }
+    }
+  }
+  div.description, .form-type-textarea > label + div, span.error{
+    padding-left: 180px;
+  }
+  .form-type-radios > label + div{
+    .form-item{
+      display: inline-block;
+      vertical-align: top;
+      .form-radio{
+        float: left;
+      }
+      label{
+        width: auto;
+      }
+    }
+  }
+  .form-actions{
+    padding-left: 180px;
+    .form-submit{
+      background-color: #ef3c24;
+      width: auto;
+      margin: 0 5px;
+      font: 400 18px/22px 'Roboto Slab';
+      height: 35px;
+      text-align: center;
+      text-transform: uppercase;
+      border: none;
+      &:hover{
+        background-color: #ef3c24;
+        border: none;
+      }
+    }
+    a.button{
+      display: inline-block;
+      vertical-align: top;
+      background-color: #ef3c24;
+      text-align: center;
+      width: auto;
+      margin: 0 5px;
+      font: 400 18px/28px 'Roboto Slab';
+      height: 35px;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 4px 15px;
+      border-radius: 5px;
+    }
+  }
+}
 
 
 

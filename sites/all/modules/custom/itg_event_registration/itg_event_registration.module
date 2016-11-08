@@ -115,14 +115,17 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     unset($form['#metatags']);
     unset($form['actions']['preview']);
 
-    $form['title']['#description'] = t('Please enter first name.');
+    //$form['title']['#description'] = t('Please enter first name.');
 
     $destination = array('event-registration', array('query' => array('event_id' => $current_event_nid)));
-    $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-      '#weight' => 1,
-      '#value' => t('Cancel'),
-    );
+    
+    if ($form_state['storage']['step'] != 'step_erf_basic_details') {
+      $form['actions']['cancel'] = array(
+          '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+          '#weight' => 1,
+          '#value' => t('Cancel'),
+      );
+    }
 
     // Check for oreder summary tab "step_erf_order_summary"
     if ($form_state['storage']['step'] == 'step_erf_order_summary') {
@@ -240,13 +243,13 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   $tickets_available = $no_of_tickets - $total_registered_users;
 
   if ($tickets_available < 10) {
-    if ($form_state['storage']['step'] == 'step_erf_basic_details') {
-      $form['ticket_available_text'] = array(
-        '#type' => 'item',
-        '#markup' => '<div class="ticket-avaible-text">Tickets available for this event: <strong>' . ($tickets_available) . '</strong></div>',
-        '#weight' => -100,
-      );
-    }
+//    if ($form_state['storage']['step'] == 'step_erf_basic_details') {
+//      $form['ticket_available_text'] = array(
+//        '#type' => 'item',
+//        '#markup' => '<div class="ticket-avaible-text">Tickets available for this event: <strong>' . ($tickets_available) . '</strong></div>',
+//        '#weight' => -100,
+//      );
+//    }
 
     $registration_type = $event_node->field_event_type[LANGUAGE_NONE][0]['value'];
 
