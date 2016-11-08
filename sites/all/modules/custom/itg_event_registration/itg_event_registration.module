@@ -240,13 +240,13 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   $tickets_available = $no_of_tickets - $total_registered_users;
 
   if ($tickets_available < 10) {
-    if ($form_state['storage']['step'] == 'step_erf_basic_details') {
-      $form['ticket_available_text'] = array(
-        '#type' => 'item',
-        '#markup' => '<div class="ticket-avaible-text">Tickets available for this event: <strong>' . ($tickets_available) . '</strong></div>',
-        '#weight' => -100,
-      );
-    }
+//    if ($form_state['storage']['step'] == 'step_erf_basic_details') {
+//      $form['ticket_available_text'] = array(
+//        '#type' => 'item',
+//        '#markup' => '<div class="ticket-avaible-text">Tickets available for this event: <strong>' . ($tickets_available) . '</strong></div>',
+//        '#weight' => -100,
+//      );
+//    }
 
     $registration_type = $event_node->field_event_type[LANGUAGE_NONE][0]['value'];
 
