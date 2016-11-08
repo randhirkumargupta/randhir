@@ -28,7 +28,8 @@
                 jQuery.ajax({
                     url: base_url + '/itguserlogout',
                     success: function (data) {
-                        $('#widget-ajex-loader').show();
+                        jQuery('#iframe-display').html(data);
+                        jQuery('#widget-ajex-loader').show();
                         setTimeout(function () {// wait for 5 secs(2)
                             window.location = base_url;
                         }, 20000);
