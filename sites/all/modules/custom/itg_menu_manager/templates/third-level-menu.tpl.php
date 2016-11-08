@@ -92,12 +92,15 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
               $target = "_blank";
             }
             $active='';
-            if(end(explode('/',$link_url)) ==  arg(1)){
+            $arg1 = arg(1);
+            $urlalise= drupal_get_path_alias("node/$arg1");
+            $real_path_alise = ($urlalise) ? $urlalise : "node/$arg1";
+            if(end(explode('/',$link_url)) ==  $real_path_alise){
                 $active='active';
             }
             
             ?>
-            <li class="<?php echo $active;?>"><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key")))); ?></li>
+            <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key" , $active)))); ?></li>
           <?php endforeach; ?>
         </ul>
       </div>
