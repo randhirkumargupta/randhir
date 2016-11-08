@@ -8,12 +8,13 @@
  * Render event registration form
  * @return string|bool
  */
-function itg_event_registration_form() {
+function itg_event_registration_form($form, &$form_state) {
   
-  $node = node_load($_GET['event_id']);
+  $event_id = itg_event_registration_get_event_nid();
+  $node = node_load($event_id);
+
   $no_of_tickets = $node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
   $event_type = $node->field_event_type[LANGUAGE_NONE][0]['value'];
-
   // Check for published node, registration is allowed for published event only.
   if ($node->status == 1) {
     if ($event_type == 'invite') {
@@ -32,7 +33,7 @@ function itg_event_registration_form() {
         return 'Registration has been closed for event <strong>' . ucwords($node->title) . '</strong>.';
       } 
       else {
-        $total_registration_users = itg_event_registration_get_total_registration($_GET['event_id']);
+        $total_registration_users = itg_event_registration_get_total_registration($event_id);
 
         // If registration has been reached to no. of tickets, stop more registration
         if ($total_registration_users >= $no_of_tickets) {

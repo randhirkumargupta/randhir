@@ -604,7 +604,8 @@ function itg_event_backend_block_view($delta = '') {
             $block['content'] = theme('tweet_right_sidebar_event');
             break;
         case 'event_registration':
-            $block['content'] = theme('event_registration');
+          module_load_include('inc', 'itg_event_registration', 'includes/itg_event_registration');
+            $block['content'] = itg_event_registration_form();
             break;
         case 'event_sign_and_win':
             $block['content'] = theme('event_sign_and_win');
