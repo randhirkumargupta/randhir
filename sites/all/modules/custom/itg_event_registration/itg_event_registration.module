@@ -118,11 +118,14 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     //$form['title']['#description'] = t('Please enter first name.');
 
     $destination = array('event-registration', array('query' => array('event_id' => $current_event_nid)));
-    $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
-      '#weight' => 1,
-      '#value' => t('Cancel'),
-    );
+    
+    if ($form_state['storage']['step'] != 'step_erf_basic_details') {
+      $form['actions']['cancel'] = array(
+          '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+          '#weight' => 1,
+          '#value' => t('Cancel'),
+      );
+    }
 
     // Check for oreder summary tab "step_erf_order_summary"
     if ($form_state['storage']['step'] == 'step_erf_order_summary') {
