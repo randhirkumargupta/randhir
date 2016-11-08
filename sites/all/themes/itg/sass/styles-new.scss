@@ -3680,6 +3680,42 @@ body.has-cart-popup{
     margin-top: 30px;
   }
 }
+#block-itg-event-backend-event-registration h2{
+  color: #000;
+  border-bottom-color: #c9c9c9;
+}
+#content .node-event_registration-form{
+  .form-item{
+    margin: 20px 0;
+  }
+  .form-type-textfield > label, .form-type-textarea > label, .form-type-select > label{
+    width: 130px;
+    padding-right: 10px;
+    font-size: 15px;
+    color: #000;
+  }
+  .form-actions{
+    padding: 0;
+    .form-submit{
+      background-color: #ef3c24;
+      width: 150px;
+      margin: 0 5px;
+      font: 400 22px/28px 'Roboto Slab';
+      height: 35px;
+      text-align: center;
+    }
+    a.button{
+      display: inline-block;
+      vertical-align: top;
+      background-color: #ef3c24;
+      text-align: center;
+      width: 150px;
+      margin: 0 5px;
+      font: 400 22px/28px 'Roboto Slab';
+      height: 35px;
+    }
+  }
+}
 
 
 
