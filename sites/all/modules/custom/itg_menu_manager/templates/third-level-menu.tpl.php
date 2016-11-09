@@ -68,7 +68,7 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
       <div class="col-md-8">
           <?php
           if(!empty($ipl_link) && strlen($ipl_link)>0) {
-              print $ipl_link;
+              //print $ipl_link;
           }
         ?>
         <ul class="third-level-menu">

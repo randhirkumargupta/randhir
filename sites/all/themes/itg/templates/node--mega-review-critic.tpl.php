@@ -34,11 +34,50 @@
     // We hide the comments and links now so that we can render them later.
     hide($content['comments']);
     hide($content['links']);
-    print render($content);
+    //print render($content);    
   ?>
-
-  <?php print render($content['links']); ?>
+  <!-- Title -->
+  <?php print $node->title; ?>
+  
+  <!-- Large Image -->
+  <?php
+  $large_image = theme(
+    'image_style', 
+    array(
+      'style_name' => 'cart_172x240',
+      'path' => $node->field_story_extra_large_image['und'][0]['uri'],
+    )
+  );
+  print $large_image;
+  ?>
+  <!-- Print reviews -->
+  <?php foreach ($node->field_mega_review_review['und'] as $field_collection): ?>    
+    <?php $reviews = entity_load('field_collection_item', array($field_collection['value'])) ?>    
+    <!-- Review Headline -->
+    <?php print $reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value']; ?>
+    <!-- Byline reporter -->
+    <?php print t('By') . $reviews[$field_collection['value']]->field_story_reporter['und'][0]['value']; ?>
+    <!-- Created date -->
+    <?php print format_date($node->created, 'custom', 'F d, Y'); ?>
+    <!-- Ratings -->
+    <?php print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value']; ?>
+    <!-- Review description -->
+    <?php print $reviews[$field_collection['value']]->field_mega_review_description['und'][0]['value']; ?>
+  <?php endforeach; ?>
+  <!-- Print video -->
+  <?php print render($content['field_mega_review_youtube_url']); ?>
+  <!-- Photos -->
+  <?php
+    $small_image = theme(
+      'image_style',
+      array(
+        'style_name' => 'cart_172x240',
+        'path' => $node->field_story_small_image['und'][0]['uri'],
+      )  
+    );
     
-  <?php print render($content['comments']); ?>
-
+    print $small_image;
+  ?>
+  <?php print render($content['links']); ?>    
+  <?php print render($content['comments']); ?>  
 </article>
