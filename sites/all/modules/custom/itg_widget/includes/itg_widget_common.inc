@@ -1169,8 +1169,19 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
   }
 
+
   if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
-    $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    if (!empty($_GET['nid']) && empty($_GET['title'])) {
+      $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
+    } if (empty($_GET['nid']) && !empty($_GET['title'])) {
+      $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
+    }
+    else if (!empty($_GET['nid']) && !empty($_GET['title'])) {
+      $query->where[1]['conditions'][5]['value'] = variable_get('year_end_for_widget');
+    }
+    else if (empty($_GET['nid']) && empty($_GET['title'])) {
+      $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    }
   }
 
   if ($view->name == 'yearender' && $view->current_display == 'block_2') {
@@ -1661,7 +1672,8 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
 
 /**
  * Function returns data for cutom tables widgets.
- * 
+ *   }
+
  * @param string $widget_name
  * @param int $range_max
  * @param int $range_min
@@ -1780,12 +1792,14 @@ function itg_widget_block_view_alter(&$data, $block) {
     $ipl_category[] = $category['tid'];
   }
 
+
+
   if ($block->delta == 'programmes-rhs_programmes') {
     if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
       $data['content'] = array();
     }
     else {
-      if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+      if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
         return TRUE;
       }
       else {
