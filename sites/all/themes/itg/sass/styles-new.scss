@@ -3764,6 +3764,7 @@ body.has-cart-popup{
         display: inline-block;
         height: auto; 
         vertical-align: top;
+         width: 100%;
       }
       .personalized-user-info span{padding: 0 12px;}
     }
@@ -3790,7 +3791,81 @@ body.has-cart-popup{
       }
     }
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype .form-select{}
+  #content #block-formblock-ugc .node-ugc-form{
+    .form-type-textfield{
+      border: none;
+      overflow: visible;
+      border-radius: 0;
+      label{
+        background-color: #fff;
+        border-right: medium none;
+        display: block;
+        font: 300 14px/28px Roboto;
+        padding: 0;
+        position: relative;
+        width: 100%;
+        z-index: 99;
+      }
+      .form-text {
+        border: 1px solid #e0e0e0;
+        padding-left: 10px;
+        height: auto;
+        position: static;
+      }
+    }
+    .form-type-textarea{
+      border: none;
+      overflow: visible;
+      border-radius: 0;
+      label{
+        background-color: #fff;
+        border-right: medium none;
+        display: block;
+        font: 300 14px/28px Roboto;
+        padding: 0;
+        position: relative;
+        width: 100%;
+        z-index: 99;
+        height: auto;
+        float: none;
+      }
+      .form-textarea-wrapper {
+        height: auto;
+        padding-left: 0;
+        position: static;
+      }
+    }
+    .form-field-type-file, .field-type-image, .form-field-type-image{
+      .form-type-managed-file{
+        border: none;
+        overflow: visible;
+        border-radius: 0;
+        label{
+          background-color: #fff;
+          border-right: medium none;
+          display: block;
+          font: 300 14px/28px Roboto;
+          padding: 0;
+          position: relative;
+          width: 100%;
+          z-index: 99;
+          height: auto;
+          float: none;
+        }
+        .form-managed-file {
+          padding: 0;
+          position: static;
+        }
+        input[type="file"]{
+          max-width: 185px;
+        }
+        div.description{
+          margin-top: 3px;
+          padding: 0;
+        }
+      }
+    }
+  } 
   .view-personalization-my-content{
     .view-content{overflow-x: auto;}
     .views-table th:first-child{min-width: 100px;}

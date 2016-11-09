@@ -3774,6 +3774,7 @@ body.has-cart-popup {
     display: inline-block;
     height: auto;
     vertical-align: top;
+    width: 100%;
   }
   .page-personalization .personalized-wrapper .personalized-user-info span {
     padding: 0 12px;
@@ -3805,6 +3806,78 @@ body.has-cart-popup {
   }
   #block-itg-personalization-personalized-saved-content .saved-item-tab li + li {
     margin-left: -3px;
+  }
+
+  #content #block-formblock-ugc .node-ugc-form .form-type-textfield {
+    border: none;
+    overflow: visible;
+    border-radius: 0;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-type-textfield label {
+    background-color: #fff;
+    border-right: medium none;
+    display: block;
+    font: 300 14px/28px Roboto;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    z-index: 99;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
+    border: 1px solid #e0e0e0;
+    padding-left: 10px;
+    height: auto;
+    position: static;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-type-textarea {
+    border: none;
+    overflow: visible;
+    border-radius: 0;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-type-textarea label {
+    background-color: #fff;
+    border-right: medium none;
+    display: block;
+    font: 300 14px/28px Roboto;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    z-index: 99;
+    height: auto;
+    float: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper {
+    height: auto;
+    padding-left: 0;
+    position: static;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file, #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file {
+    border: none;
+    overflow: visible;
+    border-radius: 0;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file label, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file label, #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file label {
+    background-color: #fff;
+    border-right: medium none;
+    display: block;
+    font: 300 14px/28px Roboto;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    z-index: 99;
+    height: auto;
+    float: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file, #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file {
+    padding: 0;
+    position: static;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file input[type="file"], #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file input[type="file"], #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file input[type="file"] {
+    max-width: 185px;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file div.description, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.description, #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.description {
+    margin-top: 3px;
+    padding: 0;
   }
 
   .view-personalization-my-content .view-content {
