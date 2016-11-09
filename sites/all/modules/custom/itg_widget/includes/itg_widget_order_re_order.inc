@@ -31,6 +31,16 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_we_may_su
  *
  * {@inheritdoc}
  */
+function itg_widget_form_views_form_key_candidate_special_key_candidate_widget_list_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_key_candidate";
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
 function itg_widget_form_views_form_so_sorry_so_sorry_videos_widget_alter(&$form, &$form_state, $form_id) {
   $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_so_sorry";
 }
@@ -387,6 +397,43 @@ function update_itg_widget_order_table_data_for_issue_magazin($form, &$form_stat
             ->execute();
     }
     
+  }
+  
+}
+/**
+ * Function for save new order in custom table itg_widget_order for we may suggest widget.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function update_itg_widget_order_table_data_for_key_candidate($form, &$form_state) {
+  // Take draggable view input value after submit the form.
+  
+  $draggable_view_data = $form_state['input']['draggableviews'];
+
+  $extra_values = array();
+  $weightcount = 0;
+  foreach ($draggable_view_data as $key => $value) {
+    $weightcount = $datacount + $value['weight'];
+  }
+  // Get extra , nid , content type from custom_table because it will further use to insert again.
+  foreach ($draggable_view_data as $key => $value) {
+      
+    if ($weightcount > 0) {
+        $electionstatus='node-'.$value['id'];
+      db_update('itg_widget_order')
+              ->fields(array('weight' => $value['weight'], 'extra' => $form_state['input'][$electionstatus],))
+              ->condition('widget', 'key_candidate')
+              ->condition('nid', $value['id'])
+              ->execute();
+    }
+    else {
+      db_update('itg_widget_order')
+              ->fields(array('extra' => $form_state['input'][$electionstatus],))
+              ->condition('widget', 'key_candidate')
+              ->condition('nid', $value['id'])
+              ->execute();
+    }
   }
   
 }
