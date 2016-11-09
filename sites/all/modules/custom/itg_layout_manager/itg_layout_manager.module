@@ -14,7 +14,7 @@ module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.he
 module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_manager.form');
 
 function itg_layout_manager_init() {
-  
+    
 }
 
 /**
@@ -23,75 +23,75 @@ function itg_layout_manager_init() {
  */
 function itg_layout_manager_menu() {
 
-  $items['itg-layout-manager'] = array(
-      'page callback' => 'itg_layout_admin',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_manager.inc',
-  );
+    $items['itg-layout-manager'] = array(
+        'page callback' => 'itg_layout_admin',
+        'access arguments' => array('access itg story'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_manager.inc',
+    );
 
-  $items['insert-layout-setting-ajax'] = array(
-      'page callback' => 'insert_layout_setting_ajax',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_ajax.inc',
-  );
+    $items['insert-layout-setting-ajax'] = array(
+        'page callback' => 'insert_layout_setting_ajax',
+        'access arguments' => array('access itg story'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_ajax.inc',
+    );
 
-  $items['itg-layout-list'] = array(
-      'page callback' => 'itg_layout_list',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_manager.inc',
-  );
+    $items['itg-layout-list'] = array(
+        'page callback' => 'itg_layout_list',
+        'access arguments' => array('access itg story'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_manager.inc',
+    );
 
-  $items['section-widgets-ajax/%'] = array(
-      'page callback' => 'section_widgets_ajax',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_autocomplete.inc',
-  );
+    $items['section-widgets-ajax/%'] = array(
+        'page callback' => 'section_widgets_ajax',
+        'access arguments' => array('access itg story'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_autocomplete.inc',
+    );
 
-  // Autocomplete callback for category name
-  $items['itg_category_autocomplete_list/%'] = array(
-      'page callback' => 'itg_category_autocomplete_list',
-      'access arguments' => array('access itg story'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_autocomplete.inc',
-  );
+    // Autocomplete callback for category name
+    $items['itg_category_autocomplete_list/%'] = array(
+        'page callback' => 'itg_category_autocomplete_list',
+        'access arguments' => array('access itg story'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_autocomplete.inc',
+    );
 
-  $items['itg-admin-layout-list'] = array(
-      'page callback' => 'itg_layout_list_delete',
-      'access arguments' => array('access administrator'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_manager.inc',
-  );
-  $items['itg-delete-layout/%'] = array(
-      'page callback' => 'itg_layout_delete',
-      'access arguments' => array('access administrator'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_manager.inc',
-  );
+    $items['itg-admin-layout-list'] = array(
+        'page callback' => 'itg_layout_list_delete',
+        'access arguments' => array('access administrator'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_manager.inc',
+    );
+    $items['itg-delete-layout/%'] = array(
+        'page callback' => 'itg_layout_delete',
+        'access arguments' => array('access administrator'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_manager.inc',
+    );
 
-  $items['section-widgets-list-delete'] = array(
-      'page callback' => 'itg_section_widgets_list_delete',
-      'access arguments' => array('access administrator'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_manager.inc',
-  );
+    $items['section-widgets-list-delete'] = array(
+        'page callback' => 'itg_section_widgets_list_delete',
+        'access arguments' => array('access administrator'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_manager.inc',
+    );
 
-  $items['itg-update-table'] = array(
-      'page callback' => 'itg_update_table',
-      'access arguments' => array('access administrator'),
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_layout_manager.inc',
-  );
-  $items['gethomecarddata'] = array(
+    $items['itg-update-table'] = array(
+        'page callback' => 'itg_update_table',
+        'access arguments' => array('access administrator'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_layout_manager.inc',
+    );
+    $items['gethomecarddata'] = array(
         'page callback' => 'itg_layout_gethomecarddata', // se for get the tags by tagid on image.
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
 
-  return $items;
+    return $items;
 }
 
 /**
@@ -100,62 +100,62 @@ function itg_layout_manager_menu() {
  */
 function itg_layout_manager_block_info() {
 
-  $blocks['header_block'] = array(
-      'info' => t('Header Block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['header_block'] = array(
+        'info' => t('Header Block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  $blocks['footer_block'] = array(
-      'info' => t('Footer Block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['footer_block'] = array(
+        'info' => t('Footer Block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  $blocks['layout_manager_form_block'] = array(
-      'info' => t('Layout manager form Block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['layout_manager_form_block'] = array(
+        'info' => t('Layout manager form Block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  $blocks['layout_widget_list_block'] = array(
-      'info' => t('Layout widget list block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['layout_widget_list_block'] = array(
+        'info' => t('Layout widget list block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  $blocks['layout_button_block'] = array(
-      'info' => t('Layout button block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  // for section cards
-  $blocks['layout_section_widgets'] = array(
-      'info' => t('Layout section widget block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  // for section widgets
-  $blocks['layout_section_widget2'] = array(
-      'info' => t('Layout section widget2 block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['layout_button_block'] = array(
+        'info' => t('Layout button block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+    // for section cards
+    $blocks['layout_section_widgets'] = array(
+        'info' => t('Layout section widget block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+    // for section widgets
+    $blocks['layout_section_widget2'] = array(
+        'info' => t('Layout section widget2 block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  $blocks['header_snap_post_block'] = array(
-      'info' => t('Snap post Header Block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['header_snap_post_block'] = array(
+        'info' => t('Snap post Header Block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  $blocks['header_sosorry_block'] = array(
-      'info' => t('So sorry Header Block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['header_sosorry_block'] = array(
+        'info' => t('So sorry Header Block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  $blocks['layout_custom_widget_list_block'] = array(
-      'info' => t('Layout custom widget list block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['layout_custom_widget_list_block'] = array(
+        'info' => t('Layout custom widget list block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  $blocks['layout_special_widget_list_block'] = array(
-      'info' => t('Layout Special widget list block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+    $blocks['layout_special_widget_list_block'] = array(
+        'info' => t('Layout Special widget list block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
-  return $blocks;
+    return $blocks;
 }
 
 /**
@@ -164,137 +164,137 @@ function itg_layout_manager_block_info() {
  */
 function itg_layout_manager_block_view($delta = '') {
 
-  $block = array();
+    $block = array();
 
-  switch ($delta) {
-    case 'header_block':
-      
-      $arg = arg();
-      // Code for ads
-      drupal_add_js('http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap', array('scope' => 'header'));
-      // drupal_add_js('http://static.chartbeat.com/js/chartbeat_mab.js', array('scope' => 'header'));
-      drupal_add_js('http://xp1.zedo.com/client/xp1/fmos.js', array('scope' => 'header'));
-      drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads_header_script.js', array('scope' => 'header'));
+    switch ($delta) {
+        case 'header_block':
 
-      $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
-      $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
-      $page_name = get_ads_page_name();
-      $data['itg_top'] = get_ad_script($page_name);
-      if (function_exists('get_second_level_menu')) {
-        $second_level_menu = get_second_level_menu();
-        foreach ($second_level_menu as $db_data) {
-          $temp_data = array();
-          $temp_data['db_data'] = $db_data;
-          $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
-          $data['menu_manager'][] = $temp_data;
-        }
-      }
-      $block['content'] = theme('header_block', array('data' => $data));
-      break;
+            $arg = arg();
+            // Code for ads
+            drupal_add_js('http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap', array('scope' => 'header'));
+            // drupal_add_js('http://static.chartbeat.com/js/chartbeat_mab.js', array('scope' => 'header'));
+            drupal_add_js('http://xp1.zedo.com/client/xp1/fmos.js', array('scope' => 'header'));
+            drupal_add_js(drupal_get_path('module', 'itg_ads') . '/js/itg_ads_header_script.js', array('scope' => 'header'));
 
-    case 'footer_block':
-      /* code for sso login */
-      global $user, $base_url;
-      if (array_key_exists(FRONT_USER, $user->roles)) {
-        
-        $settings = array();
-        if ($user->uid > 0) {
+            $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
+            $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
+            $page_name = get_ads_page_name();
+            $data['itg_top'] = get_ad_script($page_name);
+            if (function_exists('get_second_level_menu')) {
+                $second_level_menu = get_second_level_menu();
+                foreach ($second_level_menu as $db_data) {
+                    $temp_data = array();
+                    $temp_data['db_data'] = $db_data;
+                    $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+                    $data['menu_manager'][] = $temp_data;
+                }
+            }
+            $block['content'] = theme('header_block', array('data' => $data));
+            break;
 
-          $arg = arg(2);
-        }
+        case 'footer_block':
+            /* code for sso login */
+            global $user, $base_url;
+            if (array_key_exists(FRONT_USER, $user->roles)) {
 
-        if (!empty($arg)) {
-          $fin = $arg;
-        }
-        else {
-          $fin = arg(2);
-        }
+                $settings = array();
+                if ($user->uid > 0) {
 
-        $settings['uid'] = $user->uid ? $user->uid : 0;
-        $settings['check_sso_url'] = $fin;
-        $settings['base_url'] = $base_url;
-        drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
-        drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
-      }
-      /* end here */
-      $data = get_itg_footer_menu();
-      $page_name = get_ads_page_name();
-      $data['itg_top'] = get_ad_script($page_name);
+                    $arg = arg(2);
+                }
 
-      $block['content'] = theme('footer_block', array('data' => $data));
-      break;
+                if (!empty($arg)) {
+                    $fin = $arg;
+                }
+                else {
+                    $fin = arg(2);
+                }
 
-    case 'layout_manager_form_block':
-      $layout_form = drupal_get_form('itg_layout_manager_page_setting_form');
-      $data['layout_form'] = drupal_render($layout_form);
-      $block['content'] = theme('layout_manager_block', array('data' => $data));
-      break;
-    // for admin widgets list in side bar
-    case 'layout_widget_list_block':
-      $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);
-      if (empty($template_id)) {
-        $widget_array['default_widget'] = get_all_widgets_list_by_setting_page('Template widgets list');
-      }
+                $settings['uid'] = $user->uid ? $user->uid : 0;
+                $settings['check_sso_url'] = $fin;
+                $settings['base_url'] = $base_url;
+                drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
+                drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
+            }
+            /* end here */
+            $data = get_itg_footer_menu();
+            $page_name = get_ads_page_name();
+            $data['itg_top'] = get_ad_script($page_name);
 
-      $widget_array['poll_widget'] = get_widgets_poll_list();
-      $block['content'] = theme('layout_widgets_list_block', array('data' => $widget_array));
-      break;
+            $block['content'] = theme('footer_block', array('data' => $data));
+            break;
 
-    case 'layout_button_block':
-      $block['content'] = theme('layout_buttons_block', array('data' => ''));
-      break;
-    // for section cards list in admin side bar
-    case 'layout_section_widgets':
-      $section_widgets_form = drupal_get_form('layout_section_widgets_search_form');
-      $data['section_widgets_form'] = drupal_render($section_widgets_form);
-      //condition base change widget
-      if ($_GET["template_name"] == 'page--section_photo') {
-        $widgets_type = 'photo_list_of_category';
-      }
-      elseif ($_GET["template_name"] == 'page--section_video') {
-        $widgets_type = 'video_list_of_category';
-      }
-      else {
-        $widgets_type = 'section_wise_order';
-      }
+        case 'layout_manager_form_block':
+            $layout_form = drupal_get_form('itg_layout_manager_page_setting_form');
+            $data['layout_form'] = drupal_render($layout_form);
+            $block['content'] = theme('layout_manager_block', array('data' => $data));
+            break;
+        // for admin widgets list in side bar
+        case 'layout_widget_list_block':
+            $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);
+            if (empty($template_id)) {
+                $widget_array['default_widget'] = get_all_widgets_list_by_setting_page('Template widgets list');
+            }
 
-      $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
+            $widget_array['poll_widget'] = get_widgets_poll_list();
+            $block['content'] = theme('layout_widgets_list_block', array('data' => $widget_array));
+            break;
 
-      $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
-      break;
-    // for section widgets list in admin side bar
-    case 'layout_section_widget2':
-      $section_widgets_form = drupal_get_form('layout_section_widget2_search_form');
-      $data['section_widget2_form'] = drupal_render($section_widgets_form);
+        case 'layout_button_block':
+            $block['content'] = theme('layout_buttons_block', array('data' => ''));
+            break;
+        // for section cards list in admin side bar
+        case 'layout_section_widgets':
+            $section_widgets_form = drupal_get_form('layout_section_widgets_search_form');
+            $data['section_widgets_form'] = drupal_render($section_widgets_form);
+            //condition base change widget
+            if ($_GET["template_name"] == 'page--section_photo') {
+                $widgets_type = 'photo_list_of_category';
+            }
+            elseif ($_GET["template_name"] == 'page--section_video') {
+                $widgets_type = 'video_list_of_category';
+            }
+            else {
+                $widgets_type = 'section_wise_order';
+            }
 
-      $widgets_type = 'section_widget2_wise_order';
+            $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
 
-      $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
+            $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
+            break;
+        // for section widgets list in admin side bar
+        case 'layout_section_widget2':
+            $section_widgets_form = drupal_get_form('layout_section_widget2_search_form');
+            $data['section_widget2_form'] = drupal_render($section_widgets_form);
 
-      $block['content'] = theme('layout_section_widget2_block', array('data' => $data));
-      break;
+            $widgets_type = 'section_widget2_wise_order';
 
-    case 'header_snap_post_block':
-      $block['content'] = theme('header_snap_post_block', array('data' => $data));
-      break;
+            $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
 
-    case 'header_sosorry_block':
-      $block['content'] = theme('header_so_sorry_block', array('data' => $data));
-      break;
+            $block['content'] = theme('layout_section_widget2_block', array('data' => $data));
+            break;
 
-    case 'layout_custom_widget_list_block':
-      $widget_array['custom_widget'] = get_html_custom_widget_list();
-      $block['content'] = theme('layout_custom_widgets_list_block', array('data' => $widget_array));
-      break;
+        case 'header_snap_post_block':
+            $block['content'] = theme('header_snap_post_block', array('data' => $data));
+            break;
 
-    case 'layout_special_widget_list_block':
-      $widget_array['special_widget'] = get_all_widgets_list_by_setting_page('Special');
+        case 'header_sosorry_block':
+            $block['content'] = theme('header_so_sorry_block', array('data' => $data));
+            break;
 
-      $block['content'] = theme('layout_special_widgets_list_block', array('data' => $widget_array));
-      break;
-  }
+        case 'layout_custom_widget_list_block':
+            $widget_array['custom_widget'] = get_html_custom_widget_list();
+            $block['content'] = theme('layout_custom_widgets_list_block', array('data' => $widget_array));
+            break;
 
-  return $block;
+        case 'layout_special_widget_list_block':
+            $widget_array['special_widget'] = get_all_widgets_list_by_setting_page('Special');
+
+            $block['content'] = theme('layout_special_widgets_list_block', array('data' => $widget_array));
+            break;
+    }
+
+    return $block;
 }
 
 /**
@@ -303,84 +303,84 @@ function itg_layout_manager_block_view($delta = '') {
  */
 function itg_layout_manager_theme($existing, $type, $theme, $path) {
 
-  $template_name = isset($_GET['template_name']) ? $_GET['template_name'] : "";
+    $template_name = isset($_GET['template_name']) ? $_GET['template_name'] : "";
 
-  if (!empty($template_name)) {
-    $layout = array(
-        'arguments' => array('form' => NULL),
-        'template' => $template_name,
-        'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts/' . arg(1)
+    if (!empty($template_name)) {
+        $layout = array(
+            'arguments' => array('form' => NULL),
+            'template' => $template_name,
+            'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts/' . arg(1)
+        );
+    }
+    else {
+        $layout = array();
+    }
+
+    $themes = array(
+        'footer_block' => array(
+            'variable' => array('data' => NULL),
+            'template' => 'itg-footer',
+            'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+        ),
+        'header_block' => array(
+            'variable' => array('data' => NULL),
+            'template' => 'itg-header',
+            'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+        ),
+        'layout_manager_block' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'layout-manager-form-block',
+            'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+        ),
+        'itg_layout_admin_page' => $layout,
+        'layout_widgets_list_block' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'layout-widgets-list-block',
+            'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+        ),
+        'layout_buttons_block' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'layout-buttons-block',
+            'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+        ),
+        'layout_section_widgets_block' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'layout-section-widgets-block',
+            'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+        ),
+        'layout_section_widget2_block' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'layout-section-widget2-block',
+            'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+        ),
+        'header_snap_post_block' => array(
+            'variable' => array('data' => NULL),
+            'template' => 'itg-header-snap-post',
+            'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+        ),
+        'header_so_sorry_block' => array(
+            'variable' => array('data' => NULL),
+            'template' => 'itg-header-sosorry',
+            'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+        ),
+        'layout_custom_widgets_list_block' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'layout-custom-widgets-list-block',
+            'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+        ),
+        'layout_special_widgets_list_block' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'layout-special-widgets-list-block',
+            'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+        ),
+        'html_custom_widget' => array(
+            'arguments' => array('form' => NULL),
+            'template' => 'layout-html-custom-widget',
+            'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+        ),
     );
-  }
-  else {
-    $layout = array();
-  }
 
-  $themes = array(
-      'footer_block' => array(
-          'variable' => array('data' => NULL),
-          'template' => 'itg-footer',
-          'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
-      ),
-      'header_block' => array(
-          'variable' => array('data' => NULL),
-          'template' => 'itg-header',
-          'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
-      ),
-      'layout_manager_block' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'layout-manager-form-block',
-          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-      ),
-      'itg_layout_admin_page' => $layout,
-      'layout_widgets_list_block' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'layout-widgets-list-block',
-          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-      ),
-      'layout_buttons_block' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'layout-buttons-block',
-          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-      ),
-      'layout_section_widgets_block' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'layout-section-widgets-block',
-          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-      ),
-      'layout_section_widget2_block' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'layout-section-widget2-block',
-          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-      ),
-      'header_snap_post_block' => array(
-          'variable' => array('data' => NULL),
-          'template' => 'itg-header-snap-post',
-          'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
-      ),
-      'header_so_sorry_block' => array(
-          'variable' => array('data' => NULL),
-          'template' => 'itg-header-sosorry',
-          'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
-      ),
-      'layout_custom_widgets_list_block' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'layout-custom-widgets-list-block',
-          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-      ),
-      'layout_special_widgets_list_block' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'layout-special-widgets-list-block',
-          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-      ),
-      'html_custom_widget' => array(
-          'arguments' => array('form' => NULL),
-          'template' => 'layout-html-custom-widget',
-          'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
-      ),
-  );
-
-  return $themes;
+    return $themes;
 }
 
 /**
@@ -388,71 +388,75 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_layout_gethomecarddata() {
-  global $theme;
-  $arg = arg();
-  $sectinno=end(explode('-', $_POST['section_ids']));
+    global $theme;
+    $arg = arg();
+    $sectinno = end(explode('-', $_POST['section_ids']));
 
-  $is_fron_page = drupal_is_front_page();
+    $is_fron_page = drupal_is_front_page();
 
-  if($sectinno==16)
-    {
-      $sectinno=20;  
+    if ($sectinno == 16) {
+        $sectinno = 20;
     }
-    $widget_name1 = 'itg-block-'.($sectinno);
-  $widget_name2 = 'itg-block-'.($sectinno+1);
-  $widget_name3 = 'itg-block-'.($sectinno+2);  
-  $block_name=array($widget_name1,$widget_name2,$widget_name3);
+    if ($sectinno == 20) {
+        $widget_name1 = 'itg-block-' . ($sectinno);
+        $widget_name2 = 'itg-block-' . ($sectinno + 1);
+        $widget_name3 = 'itg-block-' . ($sectinno + 2);
+    }
+    else {
+        $widget_name1 = 'itg-block-' . ($sectinno + 1);
+        $widget_name2 = 'itg-block-' . ($sectinno + 2);
+        $widget_name3 = 'itg-block-' . ($sectinno + 3);
+    }
+    $block_name = array($widget_name1, $widget_name2, $widget_name3);
     $section = 'home_page';
     $template_name = 'page--front';
-    $data = get_layout_details_by_block_name($section, $template_name, 'front',$block_name);
-    
-   $widget_data = $data;
+    $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
 
-    if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name']))
-    {
-   print '<div class="row itg-common-section mt-50 "  id="content-section-widget">
+    $widget_data = $data;
 
-        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-'.$widget_name1.'">
+    if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
+        print '<div class="row itg-common-section mt-50 "  id="content-section-widget">
+
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name1 . '">
             <div class="itg-widget">
-              <div class="droppable '.$gray_bg_layout.'">
-               <div class="widget-wrapper '. $widget_data[$widget_name1]['widget_name'].'">';
-                if ( !empty($widget_data[$widget_name1]['block_title'])) { 
-                     print '<span class="widget-title">'.$widget_data[$widget_name1]['block_title'].'</span>';
-                
-                }
-                 
-                  
-                   print' <div class="data-holder" id="'.$widget_name1.'">'.$widget_data[$widget_name1]['widget'].'</div>
+              <div class="droppable ' . $gray_bg_layout . '">
+               <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
+        if (!empty($widget_data[$widget_name1]['block_title'])) {
+            print '<span class="widget-title">' . $widget_data[$widget_name1]['block_title'] . '</span>';
+        }
+
+
+        print' <div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div>
                   </div>             
                 </div>               
             </div>  
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-'.$widget_name2.'">
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name2 . '">
             <div class="itg-widget">
-              <div class="droppable '.$gray_bg_layout.'">
-               <div class="widget-wrapper '.$widget_data[$widget_name2]['widget_name'].'">';
-                if (!empty($widget_data[$widget_name2]['block_title'])) { 
-                    print' <span class="widget-title">'.$widget_data[$widget_name2]['block_title'].'</span>';
-                  } 
-                    
-                  print '
-                    <div class="data-holder" id="'.$widget_name2.'">'.$widget_data[$widget_name2]['widget'].'</div>
+              <div class="droppable ' . $gray_bg_layout . '">
+               <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
+        if (!empty($widget_data[$widget_name2]['block_title'])) {
+            print' <span class="widget-title">' . $widget_data[$widget_name2]['block_title'] . '</span>';
+        }
+
+        print '
+                    <div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div>
                   </div>             
                 </div>               
             </div>
         </div>';
 
-        print '<div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-'.$widget_name3.'">
+        print '<div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name3 . '">
             <div class="itg-widget">
-              <div class="droppable '.$gray_bg_layout.'">
-               <div class="widget-wrapper '.$widget_data[$widget_name3]['widget_name'].'">';
-                if (!empty($widget_data[$widget_name3]['block_title'])) { 
-                    print' <span class="widget-title">'.$widget_data[$widget_name3]['block_title'].'</span>';
-                  } 
-                    
-                  print '
-                    <div class="data-holder" id="'.$widget_name3.'">'.$widget_data[$widget_name3]['widget'].'</div>
+              <div class="droppable ' . $gray_bg_layout . '">
+               <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';
+        if (!empty($widget_data[$widget_name3]['block_title'])) {
+            print' <span class="widget-title">' . $widget_data[$widget_name3]['block_title'] . '</span>';
+        }
+
+        print '
+                    <div class="data-holder" id="' . $widget_name3 . '">' . $widget_data[$widget_name3]['widget'] . '</div>
                   </div>             
                 </div>               
             </div>
@@ -460,11 +464,12 @@ function itg_layout_gethomecarddata() {
          <div class="load-more-wrapper-fornt">
         <a href="javascript:void(0)" class="add-more-block-fornt">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
       </div></div>';
-    } else{
-        itg_layout_gethomecarddata_new($sectinno+3);
+    }
+    else {
+        itg_layout_gethomecarddata_new($sectinno + 3);
     }
 
- exit();
+    exit();
 }
 
 /**
@@ -472,64 +477,62 @@ function itg_layout_gethomecarddata() {
  * {@inheritdoc}
  */
 function itg_layout_gethomecarddata_new($sectinno) {
-  global $theme;
-  $arg = arg();
- 
-    $widget_name1 = 'itg-block-'.($sectinno);
-  $widget_name2 = 'itg-block-'.($sectinno+1);
-  $widget_name3 = 'itg-block-'.($sectinno+2);  
-  $block_name=array($widget_name1,$widget_name2,$widget_name3);
+    global $theme;
+    $arg = arg();
+
+    $widget_name1 = 'itg-block-' . ($sectinno);
+    $widget_name2 = 'itg-block-' . ($sectinno + 1);
+    $widget_name3 = 'itg-block-' . ($sectinno + 2);
+    $block_name = array($widget_name1, $widget_name2, $widget_name3);
     $section = 'home_page';
     $template_name = 'page--front';
-    $data = get_layout_details_by_block_name($section, $template_name, 'front',$block_name);
-    
-   $widget_data = $data;
+    $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
 
-    if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name']))
-    {
-   print '<div class="row itg-common-section mt-50 "  id="content-section-widget">
+    $widget_data = $data;
 
-        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-'.$widget_name1.'">
+    if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
+        print '<div class="row itg-common-section mt-50 "  id="content-section-widget">
+
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name1 . '">
             <div class="itg-widget">
-              <div class="droppable '.$gray_bg_layout.'">
-               <div class="widget-wrapper '. $widget_data[$widget_name1]['widget_name'].'">';
-                if ( !empty($widget_data[$widget_name1]['block_title'])) { 
-                     print '<span class="widget-title">'.$widget_data[$widget_name1]['block_title'].'</span>';
-                
-                }
-                 
-                  
-                   print' <div class="data-holder" id="'.$widget_name1.'">'.$widget_data[$widget_name1]['widget'].'</div>
+              <div class="droppable ' . $gray_bg_layout . '">
+               <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
+        if (!empty($widget_data[$widget_name1]['block_title'])) {
+            print '<span class="widget-title">' . $widget_data[$widget_name1]['block_title'] . '</span>';
+        }
+
+
+        print' <div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div>
                   </div>             
                 </div>               
             </div>  
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-'.$widget_name2.'">
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name2 . '">
             <div class="itg-widget">
-              <div class="droppable '.$gray_bg_layout.'">
-               <div class="widget-wrapper '.$widget_data[$widget_name2]['widget_name'].'">';
-                if (!empty($widget_data[$widget_name2]['block_title'])) { 
-                    print' <span class="widget-title">'.$widget_data[$widget_name2]['block_title'].'</span>';
-                  } 
-                    
-                  print '
-                    <div class="data-holder" id="'.$widget_name2.'">'.$widget_data[$widget_name2]['widget'].'</div>
+              <div class="droppable ' . $gray_bg_layout . '">
+               <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
+        if (!empty($widget_data[$widget_name2]['block_title'])) {
+            print' <span class="widget-title">' . $widget_data[$widget_name2]['block_title'] . '</span>';
+        }
+
+        print '
+                    <div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div>
                   </div>             
                 </div>               
             </div>
         </div>';
 
-        print '<div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-'.$widget_name3.'">
+        print '<div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name3 . '">
             <div class="itg-widget">
-              <div class="droppable '.$gray_bg_layout.'">
-               <div class="widget-wrapper '.$widget_data[$widget_name3]['widget_name'].'">';
-                if (!empty($widget_data[$widget_name3]['block_title'])) { 
-                    print' <span class="widget-title">'.$widget_data[$widget_name3]['block_title'].'</span>';
-                  } 
-                    
-                  print '
-                    <div class="data-holder" id="'.$widget_name3.'">'.$widget_data[$widget_name3]['widget'].'</div>
+              <div class="droppable ' . $gray_bg_layout . '">
+               <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';
+        if (!empty($widget_data[$widget_name3]['block_title'])) {
+            print' <span class="widget-title">' . $widget_data[$widget_name3]['block_title'] . '</span>';
+        }
+
+        print '
+                    <div class="data-holder" id="' . $widget_name3 . '">' . $widget_data[$widget_name3]['widget'] . '</div>
                   </div>             
                 </div>               
             </div>
@@ -537,11 +540,12 @@ function itg_layout_gethomecarddata_new($sectinno) {
          <div class="load-more-wrapper-fornt">
         <a href="javascript:void(0)" class="add-more-block-fornt">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
       </div></div>';
-    } else{
+    }
+    else {
         
     }
 
- exit();
+    exit();
 }
 
 /**
@@ -549,48 +553,48 @@ function itg_layout_gethomecarddata_new($sectinno) {
  * {@inheritdoc}
  */
 function itg_layout_manager_preprocess_page(&$vars) {
-  global $theme;
-  $arg = arg();
+    global $theme;
+    $arg = arg();
 
-  $is_fron_page = drupal_is_front_page();
+    $is_fron_page = drupal_is_front_page();
 
-  if (!empty($is_fron_page) && $theme == FRONT_THEME_NAME) {
-    $section = 'home_page';
-    $template_name = 'page--front';
-    $data = get_layout_details($section, $template_name, 'front');
-    $data['big_story'] = get_itg_widget('big_story_format');
-    $data['personlization'] = get_itg_widget('personlization');
-    $vars['widget_data'] = $data;
-    $vars['itg_ad'] = get_ad_script('Home');
-  }
-
-  //section template display on front
-  if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) && $theme == FRONT_THEME_NAME) {
-    drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
-    drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
-    drupal_add_js('', array('type' => 'inline', 'scope' => 'footer'));
-    $query = db_select('taxonomy_term_hierarchy', 'tth');
-    $query->fields('tth', array('parent'));
-    $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = tth.tid');
-    $query->condition('tth.tid', $arg[2]);
-    $query->condition('ttd.vid', 4);
-    $parent_id = $query->execute()->fetchField();
-    if ($parent_id == 0) {
-      $tpl_name = get_template_name_by_section_name($arg[2]);
-      $tid_val = $arg[2]; //section id
-      /* if (!isset($tpl_name)) {
-        $tid_val = '';
-        $tpl_name = '';
-        }
-       */
-      if (isset($tpl_name)) {
-        drupal_set_title('');
-        $data = get_layout_details($tid_val, $tpl_name, 'front');
+    if (!empty($is_fron_page) && $theme == FRONT_THEME_NAME) {
+        $section = 'home_page';
+        $template_name = 'page--front';
+        $data = get_layout_details($section, $template_name, 'front');
+        $data['big_story'] = get_itg_widget('big_story_format');
+        $data['personlization'] = get_itg_widget('personlization');
         $vars['widget_data'] = $data;
-        $tpl_name = str_replace('--', '__', $tpl_name);
-        $vars['theme_hook_suggestions'][] = $tpl_name;
-        $vars['itg_ad'] = get_ad_script($tid_val);
-      }
+        $vars['itg_ad'] = get_ad_script('Home');
     }
-  }
+
+    //section template display on front
+    if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) && $theme == FRONT_THEME_NAME) {
+        drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+        drupal_add_js('', array('type' => 'inline', 'scope' => 'footer'));
+        $query = db_select('taxonomy_term_hierarchy', 'tth');
+        $query->fields('tth', array('parent'));
+        $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = tth.tid');
+        $query->condition('tth.tid', $arg[2]);
+        $query->condition('ttd.vid', 4);
+        $parent_id = $query->execute()->fetchField();
+        if ($parent_id == 0) {
+            $tpl_name = get_template_name_by_section_name($arg[2]);
+            $tid_val = $arg[2]; //section id
+            /* if (!isset($tpl_name)) {
+              $tid_val = '';
+              $tpl_name = '';
+              }
+             */
+            if (isset($tpl_name)) {
+                drupal_set_title('');
+                $data = get_layout_details($tid_val, $tpl_name, 'front');
+                $vars['widget_data'] = $data;
+                $tpl_name = str_replace('--', '__', $tpl_name);
+                $vars['theme_hook_suggestions'][] = $tpl_name;
+                $vars['itg_ad'] = get_ad_script($tid_val);
+            }
+        }
+    }
 }
