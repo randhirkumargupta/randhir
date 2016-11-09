@@ -344,6 +344,21 @@ function draggable_view_node_delete($view_name, $page_name, $nid) {
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
+
+  if ($form_id == 'views_form_key_candidate_special_key_candidate_widget_contents') {
+    $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+    $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+    $states_neame[] = 'Select';
+    foreach ($terms as $values) {
+      $states_neame[$values->tid] = $values->name;
+    }
+    $form['state_value'] = array(
+      '#type' => 'select',
+      '#title' => 'State',
+      '#options' => $states_neame,
+        //'#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+    );
+  }
   $setting = array();
   $queue_flag = "";
   $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
@@ -503,7 +518,6 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   drupal_add_css("select.draggableviews-weight {display:none !important}", "inline");
   drupal_add_css("#draggableviews-table-section-wise-content-ordering-list-page .tabledrag-handle {display:none !important}", "inline");
 
-
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_auto_review_widget' && ($form_state['view']->current_display == 'special_auto_review_widget_contents' || $form_state['view']->current_display == 'special_auto_review_widget_list')) {
 
     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
@@ -514,16 +528,9 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         unset($tax[$key]);
       }
     }
-
-    $op = array("All" => " - None -");
-    foreach ($tax as $key => $val) {
-      $op[$val->tid] = $val->name;
-    }
-    unset($form['category_tid']['#options']);
-    $form['category_tid']['#options'] = $op;
   }
-  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display == 'most_read_widget_list')) {
 
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display == 'most_read_widget_list')) {
     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
     foreach ($tax as $key => $term) {
@@ -532,7 +539,6 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         unset($tax[$key]);
       }
     }
-
     $op = array("All" => " - None -");
     foreach ($tax as $key => $val) {
       $op[$val->tid] = $val->name;
@@ -540,6 +546,26 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     unset($form['category_tid']['#options']);
     $form['category_tid']['#options'] = $op;
   }
+
+
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
+    $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
+    }
+    $op = array("All" => " - None -");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+    unset($form['category_tid']['#options']);
+    $form['category_tid']['#options'] = $op;
+  }
+
+
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
 
     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
@@ -927,6 +953,15 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
       $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      $form['#validate'][] = 'custom_section_wise_validate';
+      break;
+    case 'views-exposed-form-key-candidate-special-key-candidate-widget-contents':
+    case 'views-exposed-form-key-candidate-special-key-candidate-widget-list':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets('reporter');
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       $form['#validate'][] = 'custom_section_wise_validate';
