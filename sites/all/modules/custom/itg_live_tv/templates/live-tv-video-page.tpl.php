@@ -17,5 +17,7 @@
             </ul>
         </div>
      <?php 
-     //itg_live_tv_page_video_category();
+     $current_time_program_tid = itg_live_tv_page_video_category();
+     
      ?>
+<div class="latest-livetv-video"><h2>Latest Video</h2><?php print views_embed_view('programme_content_live_tv', 'block_1', $current_time_program_tid); ?></div>

@@ -46,6 +46,6 @@ global $base_url;
           <?php endif; ?>
         </div>
       </div>
-<div class="program_data"><?php print views_embed_view('programme_content', 'block', $row['tid']); ?></div>
+<div class="program_data"><?php print views_embed_view('programme_content_live_tv', 'block', $row['tid']); ?></div>
     <?php } endforeach; ?>
 </div>
