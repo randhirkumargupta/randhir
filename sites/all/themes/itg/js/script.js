@@ -330,8 +330,7 @@ jQuery(document).ready(function () {
          }
     };
    
-    eventMenu();
-    //jQuery(window).resize(eventMenu);
+    eventMenu();    
       
 });
 
