@@ -22,7 +22,7 @@ function feature_live_tv_front_page_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'programmes';
+  $handler->display->display_options['title'] = 'Live Tv';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -79,8 +79,8 @@ function feature_live_tv_front_page_views_default_views() {
   );
   $handler->display->display_options['filters']['machine_name']['group'] = 1;
 
-  /* Display: Programmes */
-  $handler = $view->new_display('page', 'Programmes', 'page');
+  /* Display: Live Tv */
+  $handler = $view->new_display('page', 'Live Tv', 'page');
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Taxonomy term: Parent term */
   $handler->display->display_options['relationships']['parent']['id'] = 'parent';
