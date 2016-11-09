@@ -17,5 +17,5 @@
             </ul>
         </div>
      <?php 
-     itg_live_tv_page_video_category();
+     //itg_live_tv_page_video_category();
      ?>
