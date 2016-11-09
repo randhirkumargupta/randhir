@@ -1159,7 +1159,21 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
 
     if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
-        $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+       if(!empty($_GET['nid']) && empty($_GET['title']))
+       {
+            $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
+       } if(empty($_GET['nid']) && !empty($_GET['title']))
+       {
+            $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
+       } else if(!empty($_GET['nid']) && !empty($_GET['title']))
+       {
+        $query->where[1]['conditions'][5]['value'] = variable_get('year_end_for_widget');
+
+       } else if(empty($_GET['nid']) && empty($_GET['title'])){
+                   $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+
+       }
+       
     }
 
     if ($view->name == 'yearender' && $view->current_display == 'block_2') {

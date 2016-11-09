@@ -1,57 +1,72 @@
 
-<?php foreach($rows as $index => $row){
+<?php
+foreach ($rows as $index => $row) {
 
-$consti[]=$row['cat_id'];
+    $consti[] = $row['cat_id'];
 }
 
-$resultdata=  array_unique($consti);
-   ?>
+$resultdata = array_unique($consti);
+?>
 <div class="key-candidate">
 
-    <div class="list-state">   <?php       foreach ($resultdata as $mainids)
-    {
-      
-      $term_data = taxonomy_term_load($mainids);  
-      print '<span data-tag="kc-'.$term_data->tid.'">'.ucfirst($term_data->name).'</span>';
-    }?>
+    <div class="list-state">   <?php
+        foreach ($resultdata as $key => $mainids) {
+            $firstactive = "";
+            if ($key == 0) {
+                $firstactive = "active";
+            }
+            $term_data = taxonomy_term_load($mainids);
+            print '<span class="' . $firstactive . '" data-tag="kc-' . $term_data->tid . '">' . ucfirst($term_data->name) . '</span>';
+        }
+        ?>
     </div> 
-<?php foreach($rows as $index => $row){
-$term_data = taxonomy_term_load($row['cat_id']);
+    <?php
+    foreach ($rows as $index => $row) {
+        $term_data = taxonomy_term_load($row['cat_id']);
+        $first_show = "";
+            if ($index == 0) {
+                $first_show = "key-candidate-detail-first";
+            }
+        ?> 
 
-   ?> 
+        <div class="key-candidate-detail <?php echo $first_show;?>" id="kc-<?php echo $term_data->tid; ?>">
+            <ul>
+                <li><?php print $row['field_story_extra_large_image']; ?></li>
+                <li>
+                    <p class="candidate-name"><?php print ucfirst($row['title']); ?></p>
+                    <p class="constituancy"><?php print ucfirst($row['field_constituancy']); ?></p>
+                </li>
+                <li>
 
-    <div class="key-candidate-detail" id="kc-<?php echo $term_data->tid;?>">
-     <ul>
-         <li><?php print $row['field_story_extra_large_image'];?></li>
-         <li>
-             <p class="candidate-name"><?php print ucfirst($row['title']);?></p>
-             <p class="constituancy"><?php print ucfirst($row['field_constituancy']);?></p>
-         </li>
-         <li>
-             <p class="status"><i class="fa fa-thumbs-o-up"></i></p>              
-             <?php if($row['extra']!="")
-      {
-           print '<p class="'.$row['extra'].'" ></p>';
-      
-      }?>
-         </li>         
-     </ul>
-     
- </div>
+                    <?php
+                    if ($row['extra'] == "Win") {
+                        print ' <p class="status green"><i class="fa fa-thumbs-o-up"></i></p><p class="">Win</p>';
+                    } else if ($row['extra'] == "Lost")
+                    {
+                        print ' <p class="status red"><i class="fa fa-thumbs-o-down"></i></p><p class="">Lost</p>';
+                    }
+                    else if ($row['extra'] == "Lead")
+                    {
+                        print ' <p class="status green"><i class="fa fa-thumbs-o-yellow"></i></p><p class="">Leading</p>';
+                    }
+                    ?>
+                </li>         
+            </ul>
+
+        </div>
 <?php }; ?>
 
-     
- </div>
+
+</div>
 
 <script>
-jQuery(document).ready(function(){    
-   jQuery(".key-candidate .list-state span").click(function(){
-        jQuery(".key-candidate .list-state span").removeClass('active');
-        jQuery(this).addClass('active');
-        jQuery('.key-candidate-detail').hide();
-        var getval = jQuery(this).attr('data-tag');
-        jQuery('#'+getval).show();
-    });     
-});
+    jQuery(document).ready(function() {
+        jQuery(".key-candidate .list-state span").click(function() {
+            jQuery(".key-candidate .list-state span").removeClass('active');
+            jQuery(this).addClass('active');
+            jQuery('.key-candidate-detail').hide();
+            var getval = jQuery(this).attr('data-tag');
+            jQuery('#' + getval).show();
+        });
+    });
 </script>
-    
