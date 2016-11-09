@@ -1067,13 +1067,13 @@ function itg_widget_views_api() {
  * {@inheritdoc}
  */
 function itg_widget_views_query_alter(&$view, &$query) {
-    global $user;
-    if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
-        unset($query->table_queue['field_data_field_type']);
-        unset($query->tables['node']['field_data_field_type']);
-        unset($query->where[1]['conditions'][2]);
-    }
-    if ($view->name == 'programmes' && ($view->current_display == 'page' || $view->current_display == 'rhs_programmes')) {
+  global $user;
+  if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
+    unset($query->table_queue['field_data_field_type']);
+    unset($query->tables['node']['field_data_field_type']);
+    unset($query->where[1]['conditions'][2]);
+  }
+  if (($view->name == 'programmes' || $view->name == 'live_tv_programs') && ($view->current_display == 'page' || $view->current_display == 'rhs_programmes')) {
         $program_cat_value = variable_get('program_category_id_for_programmes');
         if (strlen($program_cat_value) <= 0) {
 // Link should display only adminstrator.
@@ -1159,7 +1159,21 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
 
     if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
-        $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+       if(!empty($_GET['nid']) && empty($_GET['title']))
+       {
+            $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
+       } if(empty($_GET['nid']) && !empty($_GET['title']))
+       {
+            $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
+       } else if(!empty($_GET['nid']) && !empty($_GET['title']))
+       {
+        $query->where[1]['conditions'][5]['value'] = variable_get('year_end_for_widget');
+
+       } else if(empty($_GET['nid']) && empty($_GET['title'])){
+                   $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+
+       }
+       
     }
 
     if ($view->name == 'yearender' && $view->current_display == 'block_2') {
@@ -1774,7 +1788,7 @@ function itg_widget_block_view_alter(&$data, $block) {
             $data['content'] = array();
         }
         else {
-            if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+            if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
                 return TRUE;
             }
             else {

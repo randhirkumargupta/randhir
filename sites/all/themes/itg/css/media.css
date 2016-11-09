@@ -152,6 +152,64 @@
   }
 
   /* Event page registration end*/
+  /*start css footer*/
+  footer .footer-top .footer-top-link {
+    float: none;
+  }
+  footer .footer-top .footer-social-link {
+    width: 280px;
+    position: relative;
+    margin: 0 auto;
+    float: none;
+    padding-right: 0;
+  }
+  footer .footer-top .footer-social-link .globle-search {
+    right: 50px;
+  }
+
+  /*end css footer*/
+  /*start css home page*/
+  .top-block .top-colum-2, .top-block .top-colum-1 {
+    float: left;
+  }
+
+  .top-block .top-colum-2 {
+    width: 62%;
+  }
+
+  .top-block .top-colum-1 {
+    width: 38%;
+  }
+
+  .top-block .top-colum-3 {
+    width: 100%;
+  }
+  .top-block .top-colum-3 > .itg-widget-parent {
+    float: left;
+    width: 48%;
+  }
+  .top-block .top-colum-3 .trending-list {
+    float: right;
+    width: 48%;
+  }
+
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    width: 50%;
+    float: left;
+  }
+
+  .watch-video-home .osscar-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+
+  .itg-layout-container .itg-top-section .top-colum-2 .droppable {
+    height: auto;
+  }
+  .itg-layout-container .itg-h450-section .droppable {
+    height: 350px;
+  }
+
+  /* End css home page*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -555,6 +613,15 @@
   }
 
   /*css end sport page*/
+  /*start event page*/
+  #block-views-program-schedule-block-3 .views-row:nth-child(4n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(3n+1) {
+    clear: left;
+  }
+
+  /*end event page*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -663,6 +730,35 @@
   }
 
   /*End event page*/
+  /*Home page start css*/
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    width: 100%;
+    float: none;
+  }
+
+  .big-news .big-story-col-2 {
+    padding-top: 15px;
+  }
+
+  .top-block .top-colum-3 > .itg-widget-parent {
+    float: none;
+    width: 100%;
+  }
+  .top-block .top-colum-3 .trending-list {
+    float: none;
+    width: 100%;
+  }
+
+  /*Home page end css*/
+  /*start event page*/
+  #block-views-program-schedule-block-3 .views-row:nth-child(3n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*end event page*/
 }
 @media only screen and (max-width: 640px) {
   #block-views-anchor-landing-page-block .anchor-left {
@@ -690,6 +786,16 @@
   #block-views-anchor-landing-page-block .anchor-right {
     padding-top: 15px;
   }
+
+  /*start event page*/
+  #block-views-program-schedule-block-3 .views-row:nth-child(2n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(1n+1) {
+    clear: left;
+  }
+
+  /*end event page*/
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {
@@ -1273,25 +1379,6 @@
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
-  .top-block .top-colum-2 {
-    width: 100%;
-    margin-bottom: 50px;
-  }
-
-  .top-block .top-colum-1, .top-block .top-colum-3 {
-    width: 50%;
-    float: left;
-  }
-
-  .big-news .big-story-col-1, .big-news .big-story-col-2 {
-    width: 100%;
-  }
-
-  .big-news .big-story-col-2 {
-    padding-top: 20px;
-    padding-left: 15px;
-  }
-
   .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget {
     overflow: scroll;
     height: 663px;

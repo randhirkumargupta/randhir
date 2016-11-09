@@ -26,6 +26,11 @@ function itg_image_search_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
+ $items['get_dimension'] = array(
+        'page callback' => 'itg_image_search_get_dimension', // make image tags edit
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
 
     return $items;
@@ -89,5 +94,23 @@ function itg_image_search_saveimage() {
 
     (array) $file;
     print json_encode($file);
+    exit();
+}
+
+function itg_image_search_get_dimension() {
+
+    $image_url = $_POST['imageurl'];
+    if (strpos($image_url, 'styles/thumbnail')) {
+        $image_url = str_replace('styles/thumbnail/public/', '', $image_url);
+    }
+    $image_name = $_POST['field_name'];
+    if ($image_name == "") {
+        $image_name = time();
+    }
+    list($width, $height) = getimagesize($image_url);
+    $returndata=array('Width'=>$width,'height'=>$height);
+      print '<span class="image-dim">'.$width.'X'.$height.'</span>';
+    
+  
     exit();
 }

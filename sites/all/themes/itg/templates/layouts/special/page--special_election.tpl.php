@@ -385,7 +385,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                       </div>
                     <?php } ?> 
-                    <div class="data-holder" id="itg-block-9"><img src="./sites/all/themes/itg/images/key-candidate.jpg"/><?php print $widget_data['itg-block-9']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-9"><?php print $widget_data['itg-block-9']['widget']; ?></div>
                   </div>             
                 </div>               
               </div>

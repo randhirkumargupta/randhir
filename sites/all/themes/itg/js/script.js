@@ -271,6 +271,45 @@ jQuery(window).load(function () {
     }      
 });
 
+jQuery(document).ready(function () {  
+ jQuery('.add-more-block-fornt').live('click', function() {
+ 	var section_ids="";
+ 	jQuery(this).remove();
+ 	jQuery('.sectioncart').each(function(){
+ 		 section_ids=jQuery(this).attr('id');
+ 	});
+ 	
+        jQuery.ajax({
+            url: Drupal.settings.basePath + 'gethomecarddata',
+            type: 'post',
+            beforeSend: function() {
+               jQuery('#widget-ajex-loader').show();
+            },
+            data: {'section_ids': section_ids,},
+            success: function(data) {
+
+             if(data=="")
+             {
+              jQuery('.no-more-card').show();
+             } else {
+              jQuery('#second-section-card').append(data); 
+
+          }
+           jQuery('#widget-ajex-loader').hide();
+           //  alert(data);  
+
+            },
+            complete: function() {
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+
+    });
+});
+
 
 
 jQuery(document).ready(function () {   
@@ -330,8 +369,7 @@ jQuery(document).ready(function () {
          }
     };
    
-    eventMenu();
-    //jQuery(window).resize(eventMenu);
+    eventMenu();    
       
 });
 
