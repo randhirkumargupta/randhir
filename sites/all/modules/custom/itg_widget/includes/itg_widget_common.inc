@@ -1774,7 +1774,7 @@ function itg_widget_block_view_alter(&$data, $block) {
             $data['content'] = array();
         }
         else {
-            if ($arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+            if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('Anchor', $flag_occupation)) || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
                 return TRUE;
             }
             else {
