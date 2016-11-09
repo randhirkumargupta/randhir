@@ -1067,13 +1067,13 @@ function itg_widget_views_api() {
  * {@inheritdoc}
  */
 function itg_widget_views_query_alter(&$view, &$query) {
-    global $user;
-    if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
-        unset($query->table_queue['field_data_field_type']);
-        unset($query->tables['node']['field_data_field_type']);
-        unset($query->where[1]['conditions'][2]);
-    }
-    if ($view->name == 'programmes' && ($view->current_display == 'page' || $view->current_display == 'rhs_programmes')) {
+  global $user;
+  if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
+    unset($query->table_queue['field_data_field_type']);
+    unset($query->tables['node']['field_data_field_type']);
+    unset($query->where[1]['conditions'][2]);
+  }
+  if (($view->name == 'programmes' || $view->name == 'live_tv_programs') && ($view->current_display == 'page' || $view->current_display == 'rhs_programmes')) {
         $program_cat_value = variable_get('program_category_id_for_programmes');
         if (strlen($program_cat_value) <= 0) {
 // Link should display only adminstrator.

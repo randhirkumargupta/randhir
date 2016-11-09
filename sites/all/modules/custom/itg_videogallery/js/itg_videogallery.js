@@ -167,81 +167,81 @@
 
     };
 })(jQuery, Drupal, this, this.document);
-
-jQuery('document').ready(function() {
-    jQuery('.browse-ftp-click').click(function() {
-        var old_vid = jQuery("input[name='field_upload_video[und][0][fid]']").val();
-        if (old_vid != 0) {
-
-        } else {
-            jQuery('.video-ftp').trigger('click');
-            jQuery('.video-local').removeClass('active');
-            jQuery('.used-unused-select').val('unused');
-            jQuery('.used-unused-select').trigger('change');
-            jQuery('.time-filter').hide();
-            var data = jQuery('.browse-ftp').html();
-            //  jQuery.colorbox({width: "80%", height: "80%",fixed: true});
-            jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%", fixed: true, onComplete: function() {
-
-                }});
-        }
-    });
-});
-
-// new code
-jQuery('document').ready(function() {
-    jQuery('.used-unused-select').live('change', function() {
-        jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-        var select_value = jQuery(this).val();
-        if (select_value == 'used') {
-            jQuery('.time-filter').show();
-            jQuery('.time-filter-select').val('-all-');
-        } else {
-            jQuery('.time-filter').hide();
-        }
-        
-        var base_url = Drupal.settings.baseUrl.baseUrl;
-        //console.log(base_url);
-        jQuery.ajax({
-            url: base_url + '/dailymotion-ftp-videos-post',
-            type: 'post',
-            data: {'case': select_value},
-            success: function(data) {
-                jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
-                jQuery('.video-options-wrapper').html(data);
-
-            },
-            error: function(xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
-            }
-        });
-
-    });
-});
-
-// Time filter ajax
-jQuery('document').ready(function() {
-    jQuery('.time-filter-select').live('change', function() {
-        jQuery('#loader-data img').show();
-        var select_value = jQuery(this).val();
-        var base_url = Drupal.settings.baseUrl.baseUrl;
-        jQuery.ajax({
-            url: base_url + '/dailymotion-video-time-filter',
-            type: 'post',
-            data: {'back_time': select_value},
-            success: function(data) {
-                jQuery('#loader-data img').hide();
-                jQuery('.video-options-wrapper').html(data);
-
-            },
-            error: function(xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
-            }
-        });
-
-    });
-});
-
-
+//
+//jQuery('document').ready(function() {
+//    jQuery('.browse-ftp-click').click(function() {
+//        var old_vid = jQuery("input[name='field_upload_video[und][0][fid]']").val();
+//        if (old_vid != 0) {
+//
+//        } else {
+//            jQuery('.video-ftp').trigger('click');
+//            jQuery('.video-local').removeClass('active');
+//            jQuery('.used-unused-select').val('unused');
+//            jQuery('.used-unused-select').trigger('change');
+//            jQuery('.time-filter').hide();
+//            var data = jQuery('.browse-ftp').html();
+//            //  jQuery.colorbox({width: "80%", height: "80%",fixed: true});
+//            jQuery.colorbox({html: "" + data + "", width: "80%", height: "80%", fixed: true, onComplete: function() {
+//
+//                }});
+//        }
+//    });
+//});
+//
+//// new code
+//jQuery('document').ready(function() {
+//    jQuery('.used-unused-select').live('change', function() {
+//        jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+//        var select_value = jQuery(this).val();
+//        if (select_value == 'used') {
+//            jQuery('.time-filter').show();
+//            jQuery('.time-filter-select').val('-all-');
+//        } else {
+//            jQuery('.time-filter').hide();
+//        }
+//        
+//        var base_url = Drupal.settings.baseUrl.baseUrl;
+//        //console.log(base_url);
+//        jQuery.ajax({
+//            url: base_url + '/dailymotion-ftp-videos-post',
+//            type: 'post',
+//            data: {'case': select_value},
+//            success: function(data) {
+//                jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+//                jQuery('.video-options-wrapper').html(data);
+//
+//            },
+//            error: function(xhr, desc, err) {
+//                console.log(xhr);
+//                console.log("Details: " + desc + "\nError:" + err);
+//            }
+//        });
+//
+//    });
+//});
+//
+//// Time filter ajax
+//jQuery('document').ready(function() {
+//    jQuery('.time-filter-select').live('change', function() {
+//        jQuery('#loader-data img').show();
+//        var select_value = jQuery(this).val();
+//        var base_url = Drupal.settings.baseUrl.baseUrl;
+//        jQuery.ajax({
+//            url: base_url + '/dailymotion-video-time-filter',
+//            type: 'post',
+//            data: {'back_time': select_value},
+//            success: function(data) {
+//                jQuery('#loader-data img').hide();
+//                jQuery('.video-options-wrapper').html(data);
+//
+//            },
+//            error: function(xhr, desc, err) {
+//                console.log(xhr);
+//                console.log("Details: " + desc + "\nError:" + err);
+//            }
+//        });
+//
+//    });
+//});
+//
+//
