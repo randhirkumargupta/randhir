@@ -41,11 +41,12 @@ foreach ($data as $key => $value) {
     foreach ($value as $program) {
       $media = $program["daywise"] . '--' . $program["session_title"] . '--' . $program["start_time"] . '--' . $program["end_time"];
       $session_result = itg_event_backend_get_session_photo_video($media);
-      $story_title = itg_event_backend_get_session_story_title($media);
+      $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
       $output_story_title = '';
+      
       foreach ($story_title['story_title'] as $title) {
         if (!empty($title)) {
-          $output_story_title = '<p style="color:'.$content_font_color.'"><i class="fa fa-story-title"></i>'.$title.'</p>';
+          $output_story_title = '<p><i class="fa fa-story-title"></i>'.$title.'</p>';
         }
       }
       
@@ -81,7 +82,9 @@ foreach ($data as $key => $value) {
               print '<div class="speaker-designation" style="color:'.$content_font_color.'">' . $spk_title . $spk_detail[0]->field_story_new_title_value . '</div></div>';
             }
             ?>
-          </div></div></div> 
+          </div>
+        </div>
+      </div> 
       <div class="side-left"><div class="time" style="color:<?php print $font_color; ?>"><?php print $program["start_time"] . ' to ' . $program["end_time"]; ?> </div></div>
       <?php
     }
