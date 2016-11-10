@@ -4139,6 +4139,57 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
     margin-top: 3px;
     padding: 0;
   }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .file-widget span.file a {
+    max-width: 50%;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .file-widget .form-submit[value="Remove"] {
+    left: auto;
+    right: 0;
+    top: 27px;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data {
+    position: relative;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file {
+    font-size: 12px;
+    left: 0;
+    overflow: hidden;
+    padding: 80px 0 0;
+    position: absolute;
+    text-overflow: ellipsis;
+    top: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file img {
+    display: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file-size {
+    display: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-submit[value="Remove"] {
+    left: auto;
+    right: 0;
+    top: -1px;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield {
+    left: 0;
+    max-width: none;
+    padding-left: 105px;
+    position: absolute;
+    top: 18px;
+    width: 100%;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield label {
+    display: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield + .form-type-textfield {
+    top: 49px;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield .form-text {
+    height: 26px;
+    padding: 0 5px;
+  }
 
   .view-personalization-my-content .view-content {
     overflow-x: auto;

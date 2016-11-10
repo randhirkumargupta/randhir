@@ -4052,13 +4052,57 @@ article.node-mega-review-critic{
         }
       }
     }
+    .form-field-type-file{
+      .file-widget span.file a{max-width: 50%;}
+      .file-widget .form-submit[value="Remove"]{
+        left: auto;
+        right: 0;
+        top: 27px;
+      }
+    }
+    .form-field-type-image{
+      .image-preview + .image-widget-data{
+        position: relative;
+        span.file{
+          font-size: 12px;
+          left: 0;
+          overflow: hidden;
+          padding: 80px 0 0;
+          position: absolute;
+          text-overflow: ellipsis;
+          top: 0;
+          width: 100%;
+          img{display: none;}
+          pointer-events: none;
+        }
+        span.file-size{display: none;}
+        .form-submit[value="Remove"]{
+          left: auto;
+          right: 0;
+          top: -1px;
+        }
+        .form-type-textfield{
+          left: 0;
+          max-width: none;
+          padding-left: 105px;
+          position: absolute;
+          top: 18px;
+          width: 100%;
+          label{display: none;}
+          & + .form-type-textfield{
+            top: 49px;
+          }
+          .form-text{
+            height: 26px;
+            padding: 0 5px;
+          }
+        }
+      }
+    }
   } 
   .view-personalization-my-content{
     .view-content{overflow-x: auto;}
     .views-table th:first-child{min-width: 100px;}
-  }
-  #content #block-formblock-ugc .node-ugc-form{
-
   }
   article.node-mega-review-critic .movie-review-wrapper .movie-trailer, 
   article.node-mega-review-critic .movie-review-wrapper .movie-review-text{width: 100%;}
