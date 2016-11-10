@@ -81,7 +81,7 @@
     })
 
 
-jQuery('.view-content img').live('mouseenter', function (e) {
+jQuery('.view-content #easyPaginate img').live('mouseenter', function (e) {
     var timeout;
       var datathis=jQuery(this);
         var getimageurl = datathis.attr('src');
