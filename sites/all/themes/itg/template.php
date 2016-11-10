@@ -143,4 +143,3 @@ function itg_breadcrumb($variables) {
   }
   return $crumbs;
 }
-

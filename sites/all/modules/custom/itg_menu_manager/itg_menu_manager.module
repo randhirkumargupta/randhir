@@ -11,7 +11,7 @@ module_load_include('inc', 'itg_menu_manager', 'include/itg_menu_manager');
  * {@inheritdoc}
  */
 function itg_menu_manager_menu() {
-  
+
   $items['itg-menu-manager'] = array(
     'title' => t('Create Menu'),
     'description' => t('Create Menu'),
@@ -121,6 +121,7 @@ function itg_menu_manager_form($form, &$form_state) {
       'callback' => 'add_or_remove_autocomplete',
       'wrapper' => 'entire_form',
     ),
+    '#description' => t('internal menu type will search "title" from category pool and external will not search.'),
     '#required' => TRUE,
   );
 
@@ -143,7 +144,7 @@ function itg_menu_manager_form($form, &$form_state) {
     '#title' => t('Section'),
     '#ajax' => array(
       'callback' => 'get_section_update',
-      'wrapper' => 'referral_provider',
+      'wrapper' => 'entire_form',
     ),
     '#options' => ($edit_id && $default_values['menu_level'] == 'third') ? itg_menu_manager_get_taxonomy_term_options('category_management') : $options,
     '#prefix' => '<div id="decided-section">',
@@ -159,7 +160,7 @@ function itg_menu_manager_form($form, &$form_state) {
     '#suffix' => '</div>',
     '#ajax' => array(
       'callback' => 'get_url_of_current_term',
-      'wrapper' => 'url-of-current-term',
+      'wrapper' => 'entire_form',
     ),
     '#default_value' => ($default_values['title']) ? $default_values['title'] : "",
     '#required' => TRUE,
@@ -190,10 +191,18 @@ function itg_menu_manager_form($form, &$form_state) {
       'same_window' => 'Same Window',
       'new_window' => 'New Window',
     ),
+    '#description' => t('Same window will open "MENU" in current tab and New window will open "MENU" in new tab'),
     '#default_value' => ($default_values['target']) ? $default_values['target'] : "same_window",
     '#required' => TRUE,
   );
 
+  $form['sponsored_category'] = array(
+    '#title' => t('Sponsored category'),
+    '#type' => 'checkboxes',
+    '#description' => t('Sponsored category is applicable for only second level menu. Value saved for third level menu will not appear on front end.'),
+    '#default_value' => ($default_values['extra'] == "Yes") ? array("Yes") : array(),
+    '#options' => array('Yes' => t('Yes')),
+  );
 
   // Submit Button
   $form['submit'] = array(
@@ -210,7 +219,7 @@ function itg_menu_manager_form($form, &$form_state) {
   }
   $form['cancle'] = array(
     '#type' => 'markup',
-    '#markup' => l('Cancle', $destination, array("attributes" => array("class" => array("button")))),
+    '#markup' => l('Cancel', $destination, array("attributes" => array("class" => array("button")))),
   );
 
   $form['#attributes'] = array(
@@ -222,6 +231,14 @@ function itg_menu_manager_form($form, &$form_state) {
 
   if (!$edit_id) {
     drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg_menu_manager.js', 'file');
+  }
+
+  if ($form_state['values']['url_type'] == 'external' || $default_values['url_type'] == 'external') {
+    unset($form['title']['#ajax']);
+  }
+
+  if ($default_values['menu_level'] == 'second') {
+    unset($form['title']['#autocomplete_path']);
   }
   return $form;
 }
@@ -360,9 +377,17 @@ function get_section_update($form, &$form_state) {
   global $messages;
   unset($messages);
   unset($form_state['input']['title'], $form_state['values']['title']);
-  $section = $form_state['values']['sections'];
-  $form['title']['#autocomplete_path'] = 'itg-menu-manager/get-child/autocomplete/' . $section;
-  return form_builder($form['#id'], $form['title'], $form_state);
+  $section = $form_state['values']['sections'];  
+  // In case of internal category pool search is reaquired but not in external case.
+  if ($form_state['values']['url_type'] == 'internal') {
+    //p($form_state['values']['url_type']);
+    $form['title']['#autocomplete_path'] = 'itg-menu-manager/get-child/autocomplete/' . $section;
+  }
+  else {
+    // Unset autocomplete_path if already attached from ajax.
+    unset($form['title']['#autocomplete_path']);
+  }
+  return $form;
 }
 
 /**
@@ -373,16 +398,15 @@ function get_section_update($form, &$form_state) {
  * @return string
  */
 function get_url_of_current_term($form, &$form_state) {
-  unset($form_state['input']['url'], $form_state['values']['url']);
+  //unset($form_state['input']['url'], $form_state['values']['url']);
   $title = $form_state['values']['title'];
   // get values beween squre breaket.
   preg_match_all("/\[([^\]]*)\]/", $title, $matches);
   // get tid
   $term_tid_array = explode("tid:", $matches[1][0]);
   $link = drupal_lookup_path('alias', 'taxonomy/term/' . trim($term_tid_array[1]));
-  $form['url']['#value'] = $link;
-  $form_builder = form_builder($form['#id'], $form['url'], $form_state);
-  return $form_builder;
+  $form['url']['#value'] = !empty($link) ? $link : $form_state['values']['url'];
+  return $form;
 }
 
 /**
@@ -448,6 +472,8 @@ function itg_menu_manager_form_submit($form, &$form_state) {
   $title = filter_xss($values['title']);
   $url = filter_xss($values['url']);
   $target = filter_xss($values['url_window']);
+  $sponsored_category = $values['sponsored_category']['Yes'];
+  $is_sponsored = ($sponsored_category) ? $sponsored_category : "No";
   $edit_id = isset($_GET['edit_id']) ? intval(trim($_GET['edit_id'])) : FALSE;
 
   if ($edit_id) {
@@ -470,6 +496,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'section_id' => $sections,
             'tid' => $term_id,
             'created' => time(),
+            'extra' => $is_sponsored,
               )
           )->condition('id', $edit_id, "=")->execute();
 
@@ -519,6 +546,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'section_id' => $sections,
             'tid' => trim($term_id),
             'created' => time(),
+            'extra' => $is_sponsored,
           ))
           ->execute();
       if ($menu_level == 'second') {
@@ -655,9 +683,9 @@ function get_third_level_menu() {
     }
   }
 
-  if (in_array(arg(1), $links_array)) {
-    return;
-  }
+//  if (in_array(arg(1), $links_array)) {
+//    return;
+//  }
 
   if ($section_id) {
     $query = db_select('itg_menu_manager', 'imm')

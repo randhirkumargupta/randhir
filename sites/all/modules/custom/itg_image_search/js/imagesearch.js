@@ -81,5 +81,47 @@
     })
 
 
+jQuery('.view-content img').live('mouseenter', function (e) {
+    var timeout;
+      var datathis=jQuery(this);
+        var getimageurl = datathis.attr('src');
+        //alert(getimageurl);
+        var altdata = jQuery(this).attr('alt');
+        var titledata = jQuery(this).attr('title');
+        var fieldname = parent.jQuery('#field_name').val();
+        parent.jQuery('#img_alttext').val(altdata);
+        parent.jQuery('#img_title').val(titledata);
+         timeout = setTimeout(function () { 
+        jQuery.ajax({
+            url: Drupal.settings.basePath + 'get_dimension',
+            type: 'post',
+            beforeSend: function() {
+                datathis.after('<div class="throbbing"></div>');
+            },
+            data: {'imageurl': getimageurl, 'field_name': fieldname},
+            success: function(data) {
+                 jQuery('.image-dim').remove();
+                 jQuery('.throbbing').remove();
+                 
+                datathis.after(data);
+               parent.jQuery('#loader-data').hide();
+              
+            },
+            complete: function() {
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+
+     }, 2000 );
+     jQuery(e.target).live('mouseleave', function () {
+         clearTimeout(timeout);
+     });
+});
+
+
+    
 
 })(jQuery);

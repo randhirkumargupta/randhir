@@ -6,7 +6,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 }
 ?>
 <div class="header-ads mhide">
- <!--   <img src="<?php //print base_path()  ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
+ <!--   <img src="<?php //print base_path()         ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
   <?php print ($data['itg_top']['200*200_header']); ?>
 </div>                               
 
@@ -52,21 +52,26 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
   <nav class="navigation">
     <div class="container">
       <ul class="second-level-menu menu">
-        <?php $menu_manager = $data['menu_manager']; 
-        foreach ($menu_manager as $key => $menu_data) :  ?>
-          <?php  
+        <?php
+        $menu_manager = $data['menu_manager'];
+        $load_parent = taxonomy_get_parents(arg(2));
+        $parent_key_of_third_level = isset(array_keys($load_parent)[0]) ? array_keys($load_parent)[0] : 0;
+        foreach ($menu_manager as $key => $menu_data) :
+          ?>
+          <?php
           $title_array = explode("[tid", $menu_data['db_data']['title']);
           $link_url = "";
           $target = "_self";
-          $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name :  $title_array[0];
+          $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $title_array[0];
           $url_type = $menu_data['db_data']['url_type'];
           $db_target = $menu_data['db_data']['target'];
           $tid = $menu_data['db_data']['tid'];
-          $active_cls = "notactive";
+          $active_cls = $parent_class = "notactive";
+          $sponsored_class = ($menu_data['db_data']['extra'] == 'Yes') ? "sponsored-active" : "";
           // if tid is not 0 then its internal url
-          if ($tid && $url_type == 'internal') {
+          if (($tid && $url_type == 'internal')) {
             $link_url = "taxonomy/term/$tid";
-            if($link_url == current_path()) {
+            if ($link_url == current_path()) {
               $active_cls = "active";
             }
           }
@@ -77,11 +82,15 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
           if (trim($db_target) == 'new_window') {
             $target = "_blank";
           }
+          
+          if($tid == $parent_key_of_third_level) {
+            $parent_class = "active";
+          }
           ?>
-          <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key" , "$active_cls")))); ?></li>
-        <?php endforeach; ?>
+          <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class , $parent_class)))); ?></li>
+        <?php endforeach;?>
       </ul>
-      <?php //print drupal_render($data['itg_main_manu_header']); ?>            
+      <?php //print drupal_render($data['itg_main_manu_header']);    ?>            
     </div>         
   </nav>
 
@@ -93,18 +102,19 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 
         if ($user->uid == 0 || $_GET['q'] != 'user') {
           ?>
-          <?php if ($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
+          <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 
-    <!--<a onclick="window.open('http://itgcms.drupallocal.dev/saml_login/other/domain_info', '_blank', 'location=yes,height=490,width=550,scrollbars=yes,status=yes', 'top=' + tops + ', left=' + left);" class="user-icon"><i class="fa fa-user"></i></a> -->
-            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://dev.indiatodayonline.in/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
-            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://dev.indiatodayonline.in/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
-          <?php }
+            <?php
+          }
           else {
             ?>
-            <a onclick="Go(550, 500, 50, 'indiatoday')" class="user-icon"><i class="fa fa-user"></i></a>
+            <a onclick="Go(550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>')" class="user-icon"><i class="fa fa-user"></i></a>
 
-          <?php }
+            <?php
+          }
         }
         ?>
 

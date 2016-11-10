@@ -76,7 +76,7 @@ h4.heading a {
   color: #09619f;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul {
   list-style-type: none;
 }
 
@@ -487,6 +487,7 @@ header {
   background: #680101;
   width: 1px;
   right: 0;
+  top: 0;
 }
 #block-itg-layout-manager-header-block .navigation .menu#newlist li a:after {
   display: none;
@@ -5519,6 +5520,9 @@ footer .footer-copyright {
 #block-itg-layout-manager-header-block .menu-login .user-menu {
   position: relative;
 }
+#block-itg-layout-manager-header-block .menu-login .user-menu a {
+  cursor: pointer;
+}
 #block-itg-layout-manager-header-block .menu-login .user-menu a.user-icon {
   position: absolute;
   right: 0;
@@ -6479,8 +6483,6 @@ footer .footer-copyright {
   text-transform: uppercase;
 }
 #block-views-program-schedule-block-3 .views-row img {
-  width: 166px;
-  height: 166px;
   border-radius: 100%;
 }
 #block-views-program-schedule-block-3 .views-row a {
@@ -6511,16 +6513,16 @@ footer .footer-copyright {
   border: none;
 }
 
-#block-views-event-associate-video-block img {
-  border: 7px solid #e9e9e9;
-}
 #block-views-event-associate-video-block .video-list {
   position: relative;
   margin-bottom: 20px;
 }
-#block-views-event-associate-video-block .video-list:before {
+#block-views-event-associate-video-block .video-list .field-content {
+  border: 7px solid #e9e9e9;
+}
+#block-views-event-associate-video-block .video-list .field-content:before {
   position: absolute;
-  right: 40px;
+  right: 28px;
   bottom: 10px;
   content: '';
   background: url(../images/youtube-icon.png) no-repeat;
@@ -6565,8 +6567,6 @@ footer .footer-copyright {
   clear: both;
 }
 #block-views-program-schedule-block-1 .content-list ul.profile-detail li {
-  width: 33%;
-  color: #000;
   float: left;
   font-weight: 600;
   vertical-align: middle;
@@ -6587,11 +6587,19 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
 }
-#block-views-program-schedule-block-1 .content-list ul.profile-detail li span.designation {
-  color: #6e6e6e;
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(1) {
+  width: 28%;
+  padding-top: 25px;
+}
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
+  width: 24%;
+  text-align: center;
+}
+#block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
+  width: 48%;
+  padding-top: 8px;
 }
 #block-views-program-schedule-block-1 .content-list .date-display-range {
-  color: #000;
   font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-size: 18px;
@@ -6650,6 +6658,7 @@ footer .footer-copyright {
   border: 1px solid #ddd;
   padding: 10px;
   height: 85px;
+  margin-bottom: 40px;
   position: relative;
 }
 #block-views-program-schedule-block-4 .views-row .views-row:nth-child(4n+1) {
@@ -7398,32 +7407,36 @@ footer .footer-copyright {
   top: 0;
   left: 15px;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li {
   position: relative;
+  border: none;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail {
   position: absolute;
   bottom: 0;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-count {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-count {
   display: none;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption {
   background: rgba(255, 255, 255, 0.74);
   font-size: 20px;
   font-weight: 700;
-}
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  min-height: inherit;
   color: #000;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider li .detail .flex-caption a:hover {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a {
+  color: #000;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a:hover {
   color: #193984;
 }
 .movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav {
   display: block;
-  position: absolute;
-  top: 50%;
-  width: 100%;
 }
 .movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a {
   width: 20px;
@@ -7436,11 +7449,18 @@ footer .footer-copyright {
   font-size: 20px;
   background: #000;
 }
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-prev {
+  left: 0;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-next {
+  right: 0;
+}
 .movie-layout-page .itg-layout-580 .auto-block-2 {
   border: 1px solid #ddd;
+  position: relative;
 }
 .movie-layout-page .itg-layout-580 .auto-block-2 .special-top-news {
-  position: relative;
+  height: 100%;
   overflow: hidden;
 }
 .movie-layout-page .itg-layout-580 .auto-block-2 .special-top-news .widget-title {
@@ -7468,9 +7488,9 @@ footer .footer-copyright {
 }
 .movie-layout-page .osscar-video ul .dont-miss-listing {
   padding: 0 0px 10px 0;
-}
-.movie-layout-page .osscar-video ul .dont-miss-listing + .dont-miss-listing {
-  padding: 0px;
+  /*+ .dont-miss-listing {
+              padding:0px;
+          }   */
 }
 .movie-layout-page .section_wise_order-movies-celebrities .widget-title, .movie-layout-page .section_wise_order-movies-lifestyle .widget-title {
   position: absolute;
@@ -7759,6 +7779,13 @@ footer .footer-copyright {
 .election-page .right-side .itg-325 .droppable {
   height: 325px;
 }
+.election-page .right-side .itg-325 .most_popular {
+  border: none;
+  overflow: inherit;
+}
+.election-page .right-side .itg-325 .data-holder {
+  overflow: auto;
+}
 .election-page .right-side .itg-484 .droppable {
   height: 484px;
 }
@@ -7818,6 +7845,103 @@ footer .footer-copyright {
 .election-page .tech-block_5 .data-holder .view-content {
   margin: 10px;
   overflow: hidden;
+}
+.election-page .key-candidate {
+  font-family: "Roboto", sans-serif;
+}
+.election-page .key-candidate .most_popular {
+  border: none;
+}
+.election-page .key-candidate .list-state {
+  margin: 0 0px 20px 0px;
+}
+.election-page .key-candidate .list-state span {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  vertical-align: top;
+}
+.election-page .key-candidate .list-state span:hover, .election-page .key-candidate .list-state span.active {
+  background: #1b60a3;
+  color: #fff;
+}
+.election-page .key-candidate .key-candidate-detail {
+  font-family: "Roboto", sans-serif;
+  display: none;
+}
+.election-page .key-candidate .key-candidate-detail ul {
+  zoom: 1;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.election-page .key-candidate .key-candidate-detail ul:before, .election-page .key-candidate .key-candidate-detail ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.election-page .key-candidate .key-candidate-detail ul:after {
+  clear: both;
+}
+.election-page .key-candidate .key-candidate-detail ul li {
+  float: left;
+}
+.election-page .key-candidate .key-candidate-detail ul li:nth-child(1) {
+  width: 25%;
+}
+.election-page .key-candidate .key-candidate-detail ul li:nth-child(2) {
+  width: 60%;
+  padding-top: 12px;
+}
+.election-page .key-candidate .key-candidate-detail ul li:nth-child(3) {
+  width: 15%;
+}
+.election-page .key-candidate .key-candidate-detail ul li .candidate-name {
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.election-page .key-candidate .key-candidate-detail ul li .constituancy {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  color: #8f8f8f;
+}
+.election-page .key-candidate .key-candidate-detail ul li img {
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 0 5px #ccc;
+  display: inline-block;
+  height: 63px;
+  margin-left: 2px;
+  padding: 5px;
+  width: 63px;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status {
+  width: 35px;
+  height: 35px;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 35px;
+  color: #fff;
+  font-size: 28px;
+  background: #ccc;
+  margin-top: 12px;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.green {
+  background: #418b32;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.red {
+  background: #d80a02;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.yellow {
+  background: #efc107;
+}
+.election-page .key-candidate .key-candidate-detail.key-candidate-detail-first {
+  display: block;
 }
 
 /* CSS For Election Page End */

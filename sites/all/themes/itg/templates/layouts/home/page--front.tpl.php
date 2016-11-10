@@ -533,10 +533,13 @@ if ($theme != 'itgadmin') {
   <?php } ?>
   <!--Photo slider and Watch now section starts here--> 
 
-
+<?php if ($theme != 'itgadmin')
+{
+print '<div id="second-section-card">';
+}?>
 <!--Common section strat here-->
 <?php if (isset($widget_data['itg-block-14']['widget_name']) || isset($widget_data['itg-block-15']['widget_name']) || isset($widget_data['itg-block-16']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row itg-common-section">
+    <div class="row itg-common-section" >
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
             <div class="itg-widget">
@@ -588,7 +591,7 @@ if ($theme != 'itgadmin') {
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+        <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-itg-block-16">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-16']['widget_name']; ?>">
@@ -611,16 +614,25 @@ if ($theme != 'itgadmin') {
                 </div>               
             </div>          
         </div>
-
+<?php if($theme == 'itgadmin') { ?>
       <div class="load-more-wrapper">
         <a href="javascript:void(0)" class="add-more-block">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
       </div>
+<?php } else { ?>
+    <div class="load-more-wrapper-fornt">
+        <a href="javascript:void(0)" class="add-more-block-fornt">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+      </div>
+<?php } ?>
     </div>
 <?php } ?>
 <!--End of Common section-->  
-
+<?php if ($theme != 'itgadmin')
+{
+print '</div>';
+}?>
 <!--Common section add more strat here-->
-<?php $count_widget = 19; ?>
+<?php if($theme == 'itgadmin'){
+    $count_widget = 19; ?>
 <?php $last_val = 0;
 $divcounter=1;
 $divcou=0;
@@ -650,7 +662,7 @@ if( $theme != 'itgadmin')
 ?>
 <div class="row itg-common-section mt-50 show-on-add" <?php echo $display_style; ?> id="content-section-widget-<?php print $divcounter;?>">
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-<?php echo $widget_name1;?>">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data[$widget_name1]['widget_name']; ?>">
@@ -675,7 +687,7 @@ if( $theme != 'itgadmin')
             </div>  
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-<?php echo $widget_name2;?>">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data[$widget_name2]['widget_name']; ?>">
@@ -700,7 +712,7 @@ if( $theme != 'itgadmin')
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-<?php echo $widget_name3;?>">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data[$widget_name3]['widget_name']; ?>">
@@ -737,9 +749,9 @@ if( $theme != 'itgadmin')
 <?php } ?>
 
 <?php $count_widget = 3 + $count_widget;$divcounter++; ?>
-<?php } ?>
+<?php } }?>
   <!--End of Common section-->
-  
+  <div class="no-more-card" style="display:none">No More Result Found.</div>
 
   <!--Load More Loader
   <div class="load-more">
@@ -854,7 +866,7 @@ if($theme != 'itgadmin')
 }
 
 ?>
-<?php if($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
+<?php if($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 <script>
 window.addEventListener("message", function(ev) {
     if (ev.data.message === "requestResult") {
@@ -865,3 +877,10 @@ window.addEventListener("message", function(ev) {
 
 </script>
 <?php } ?>
+
+<div class="activate-message">
+  <div class="message-body">
+    <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
+    <p>Your Account Activated Sucessfully!</p>
+  </div>
+</div>

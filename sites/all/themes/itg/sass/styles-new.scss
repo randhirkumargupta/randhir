@@ -797,6 +797,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         text-align: center;
         .form-select{
           width: 450px;
+          max-width: 100%;
           height: 44px;
           border-radius: 5px;
           border: 1px solid rgba(0,0,0,.20);
@@ -951,19 +952,21 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         padding: 20px 0;
         text-align: center;
         .form-submit{
-          background: url(../images/btn-blue.png) no-repeat;
+          background: url(../images/btn-blue.png) 0 0 / 100% 100% no-repeat;
           height: 41px;
           border: none;
           width: 170px;
+          max-width: 40%;
           font: 300 20px/28px Roboto;
           color: #fff;
           cursor: pointer;
         }
         a.button{
-          background: url(../images/btn-blue.png) no-repeat;
+          background: url(../images/btn-blue.png) 0 0 / 100% 100% no-repeat;
           height: 41px;
           border: none;
           width: 170px;
+          max-width: 40%;
           font: 300 20px/41px Roboto;
           display: inline-block;
           vertical-align: top;
@@ -1464,6 +1467,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     margin-right: 20px;
     cursor: pointer;
   }
+  .survey-form-wrapper-all{
+    .form-submit{display: block; margin: 0 auto;}
+  }
   .success-message, .messages--status{
     font-size: 18px;
   }
@@ -1573,13 +1579,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     float: left;
   }
 }
-.load-more-wrapper{
+.load-more-wrapper, .load-more-wrapper-front{
   display: inline-block;
   vertical-align: top;
   width: 100%;
   padding: 10px;
   text-align: center;
-  .add-more-block, .removes-more-block{
+  .add-more-block, .add-more-block-front, .removes-more-block{
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
@@ -1997,10 +2003,6 @@ body.has-cart-popup{
         padding: 15px 15px 0;
         vertical-align: top;
         width: 100%;
-    }
-    .messages--status{
-      margin-top: 20px;
-      padding: 0 15px;
     }
 }
 .page-cart,
@@ -2561,6 +2563,7 @@ body.has-cart-popup{
   #forgototpclickme{
     margin: 9px 20px;
     float: left;
+    cursor: pointer;
   }
   #ajax-loader {
     float: left;
@@ -3005,6 +3008,7 @@ body.has-cart-popup{
     #block-itg-ads-ad-right-sidebar-1 {
       border: 1px solid #ddd;
       padding: 30px;
+      width: 100%;
     }
   }
   .cart-checkout-list{
@@ -3578,5 +3582,429 @@ body.has-cart-popup{
     &:hover{
       text-decoration: underline;
     }
+  }
+}
+
+/* CSS class to extend for success message */
+.itg-success-message{
+  margin: 15px;
+  border: 1px solid #009c00;
+  padding: 10px;
+  &:before{
+    content: '\f00c';
+    color: #009c00;
+    margin-right: 10px;
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+}
+.itg-error-message{
+  margin: 15px;
+  border: 1px solid red;
+  padding: 10px;
+}
+#email-sucess, #mobile-success{
+  @extend .itg-success-message;
+}
+[id*="itg_user_forgot_password_multistep_form"] .messages--status{
+  @extend .itg-success-message;
+}
+#thank-you{
+  a{
+    @extend .itg-success-message;
+    display: block;
+  }
+}
+.activate-message{
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  .message-body{
+    background-color: #fff;
+    left: 0;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 30px 15px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    text-align: center;
+    .close-popup{
+      cursor: pointer;
+      height: 20px;
+      position: absolute;
+      right: 0;
+      text-align: center;
+      top: 0;
+      width: 20px;
+      .fa {
+        display: inline-block;
+        font: 16px/18px FontAwesome;
+        text-rendering: auto;
+        vertical-align: top;
+      }
+    }
+  }
+}
+[id*="itg-sso-reg-multistep-form"] .email-or-mobile{
+  position: relative;
+  &:after{
+    content: 'OR';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 25px;
+    margin: 0 auto;
+    width: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    font-family: Roboto;
+    font-weight: 500;
+  }
+}
+.page-cart, .page-order{
+  #block-itg-ads-ad-right-sidebar-1{
+    border: 1px solid #dddddd;
+    margin-top: 30px;
+    width: 100%;
+  }
+}
+.page-order{
+  h1{
+    margin-top: 30px;
+  }
+}
+#block-itg-event-backend-event-registration h2{
+  color: #000;
+  border-bottom-color: #c9c9c9;
+}
+#content .node-event_registration-form{
+  .form-item{
+    margin: 20px 0;
+  }
+  .form-type-textfield > label, .form-type-textarea > label, .form-type-select > label{
+    width: 180px;
+    padding-right: 10px;
+    font-size: 15px;
+    color: #000;
+  }
+  #autocomplete{
+    border: 1px solid #ddd;
+    text-align: left;
+    ul{
+      text-align: left;
+      li{
+        text-align: left;
+        padding: 5px;
+      }
+    }
+  }
+  div.description, .form-type-textarea > label + div, span.error{
+    padding-left: 180px;
+  }
+  .form-type-radios > label + div{
+    .form-item{
+      display: inline-block;
+      vertical-align: top;
+      .form-radio{
+        float: left;
+      }
+      label{
+        width: auto;
+      }
+    }
+  }
+  .form-actions{
+    padding-left: 180px;
+    .form-submit{
+      background-color: #ef3c24;
+      width: auto;
+      margin: 0 5px;
+      font: 400 18px/22px 'Roboto Slab';
+      height: 35px;
+      text-align: center;
+      text-transform: uppercase;
+      border: none;
+      &:hover{
+        background-color: #ef3c24;
+        border: none;
+      }
+    }
+    a.button{
+      display: inline-block;
+      vertical-align: top;
+      background-color: #ef3c24;
+      text-align: center;
+      width: auto;
+      margin: 0 5px;
+      font: 400 18px/28px 'Roboto Slab';
+      height: 35px;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 4px 15px;
+      border-radius: 5px;
+    }
+  }
+}
+/* CSS For node-mega-review-critic */
+article.node-mega-review-critic{
+  header{display: none;}
+  h1{
+    font: 700 34px/42px Roboto;
+    color: #323232;
+  }
+  .rating-and-social-wrapper{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    .movie-rating{
+      float: left;
+      width: 111px;
+      height: 60px;
+      padding: 20px 0;
+      position: relative;
+      background: url(../images/rating-grey.png) 0 20px no-repeat;
+      &:after{
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url(../images/rating-red.png) 0 20px no-repeat;
+        height: 60px;
+        width: 0;
+      }
+    }
+    div[data-star-value="10%"]:after{width: 10px;}
+    div[data-star-value="20%"]:after{width: 22px;}
+    div[data-star-value="30%"]:after{width: 33px;}
+    div[data-star-value="40%"]:after{width: 46px;}
+    div[data-star-value="50%"]:after{width: 56px;}
+    div[data-star-value="60%"]:after{width: 68px;}
+    div[data-star-value="70%"]:after{width: 79px;}
+    div[data-star-value="80%"]:after{width: 90px;}
+    div[data-star-value="90%"]:after{width: 102px;}
+    div[data-star-value="100%"]:after{width: 111px;}
+    .social-info{
+      float: left;
+      width: 200px;
+      padding: 5px 10px;
+      span{
+        float: left;
+        width: 25%;
+        padding: 5px;
+        text-align: center;
+        .fa{
+          font-size: 18px;
+          line-height: 22px;
+          color: #c0c0c0;
+        }
+        dfn{
+          font: normal 400 12px/18px Roboto;
+          display: block;
+          color: #989898;
+        }
+      }
+    }
+  }
+  .movie-review-wrapper{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 30px;
+    width: 100%;
+    .movie-trailer{
+      height: 271px;
+      background-color: #ddd;
+      float: left;
+      width: 483px;
+    }
+    .movie-review-text{
+      height: 271px;
+      background-color: #000;
+      overflow: hidden;
+      .review-row{
+        padding: 10px 10px 0;
+        color: #a0a0a0;
+        .review-label{
+          font: normal 300 14px/16px Roboto;
+          float: left;
+          width: 60px;
+        }
+        .review-txt{
+          display: block;
+          font: 400 14px/16px Roboto;
+          overflow: hidden;
+        }
+      }
+      .movie-reviewer{
+        margin: 10px 20px 0;
+        padding-top: 4px;
+        border-top: 1px solid rgba(255, 255, 255, .20);
+        h3{
+          font: 700 14px/23px Roboto;
+          color: #ffc106;
+        }
+        p{
+          font: 400 12px/23px Roboto;
+          color: #a0a0a0;
+        }
+        &.movie-reviewer-other{
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .other-reviews{
+    margin: 10px 0;
+    h2{font: 700 16px/27px Roboto;}
+    .other-reviews-posted-on{
+      font: 400 13px/27px Roboto;
+      .other-reviews-by{
+        font-style: italic;
+        color: #a00606;
+        margin-right: 20px;
+      }
+      .other-reviews-date{
+        color: #b7b7b7;
+        margin-right: 20px;
+      }
+    }
+    .other-reviews-row{
+      border-top: 1px solid #e5e5e5;
+      padding: 10px 0;
+    }
+    .other-reviews-desc{
+      font: 400 15px/27px 'Roboto Slab';
+      color: #212121;
+      margin-top: 10px;
+    }
+  }
+}
+
+
+
+/* Responsive CSS Personalization pages */
+@media all and (max-width: 767px){
+  .page-personalization{
+    .personalized-wrapper{
+      .personalized-user-area, .personalized-user, .personalized-user-info {
+        display: inline-block;
+        height: auto; 
+        vertical-align: top;
+         width: 100%;
+      }
+      .personalized-user-info span{padding: 0 12px;}
+    }
+  } 
+  .block-itg-personalization{
+    .saved-item-tab, .personal-menu-tab{
+      width: 100%;
+    }
+    .personal-menu-tab{
+      border: none;
+      li{float: none; border: none; border-top: 1px solid #c6c6c6;}
+    }
+  } 
+  #block-itg-personalization-personalized-saved-content{
+    overflow-x: auto;
+    .saved-item-tab{
+      margin: 30px 0;
+      white-space: nowrap;
+      li{
+        float: none;
+        display: inline-block;
+        vertical-align: top;
+        + li{margin-left: -3px;}
+      }
+    }
+  }
+  #content #block-formblock-ugc .node-ugc-form{
+    .form-type-textfield{
+      border: none;
+      overflow: visible;
+      border-radius: 0;
+      label{
+        background-color: #fff;
+        border-right: medium none;
+        display: block;
+        font: 300 14px/28px Roboto;
+        padding: 0;
+        position: relative;
+        width: 100%;
+        z-index: 99;
+      }
+      .form-text {
+        border: 1px solid #e0e0e0;
+        padding-left: 10px;
+        height: auto;
+        position: static;
+      }
+    }
+    .form-type-textarea{
+      border: none;
+      overflow: visible;
+      border-radius: 0;
+      label{
+        background-color: #fff;
+        border-right: medium none;
+        display: block;
+        font: 300 14px/28px Roboto;
+        padding: 0;
+        position: relative;
+        width: 100%;
+        z-index: 99;
+        height: auto;
+        float: none;
+      }
+      .form-textarea-wrapper {
+        height: auto;
+        padding-left: 0;
+        position: static;
+      }
+    }
+    .form-field-type-file, .field-type-image, .form-field-type-image{
+      .form-type-managed-file{
+        border: none;
+        overflow: visible;
+        border-radius: 0;
+        label{
+          background-color: #fff;
+          border-right: medium none;
+          display: block;
+          font: 300 14px/28px Roboto;
+          padding: 0;
+          position: relative;
+          width: 100%;
+          z-index: 99;
+          height: auto;
+          float: none;
+        }
+        .form-managed-file {
+          padding: 0;
+          position: static;
+        }
+        input[type="file"]{
+          max-width: 185px;
+        }
+        div.description{
+          margin-top: 3px;
+          padding: 0;
+        }
+      }
+    }
+  } 
+  .view-personalization-my-content{
+    .view-content{overflow-x: auto;}
+    .views-table th:first-child{min-width: 100px;}
+  }
+  #content #block-formblock-ugc .node-ugc-form{
+
   }
 }

@@ -51,8 +51,8 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
     $form['related_content'] = array(
         '#type' => 'textfield',
         '#title' => t("Related content."),
-        '#attributes' => array("placeholder" => t("Enter node id 123,1024,777")),
-        '#description' => t("Node ids must be comma seperated values ex 123,1024,777."),
+        '#attributes' => array("placeholder" => t("Enter node id by server prefix")),
+        '#description' => t("Node ids must be comma seperated values ex server1_123,server2_1024, server3_777."),
     );
   }
   return $form;

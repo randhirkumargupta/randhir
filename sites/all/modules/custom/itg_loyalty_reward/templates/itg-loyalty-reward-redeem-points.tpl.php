@@ -49,7 +49,7 @@
                 // Print statis message.
                 echo '<span class="cart-dropdown-added"> has been added to your cart</span>';
                 ?>
-                <div class="btn-redeem-points">
+                <div class="btn-redeem-points no-loader">
                 <?php
                 // Print points.
                 echo $data['item_after']['points'] . ' POINTS REDEEMED';
