@@ -22,25 +22,33 @@ $event_config_video = $node->field_config_video[LANGUAGE_NONE][0]['value'];
   if ($event_config_home) {
     print '<span class="event-menu-home">'.l('Home', $base_url).'</span>';
   }
+  
   if ($event_config_programme) {
     print '<span class="event-menu-programme">'.l('Programme', 'programme').'</span>';
   }
+  
   if ($event_config_speakers) {
     print '<span class="event-menu-speakers">'.l('Speakers', 'speakers').'</span>';
   }
+  
   print '<span class="event-menu-registration">'.l('Registration', 'event-registration').'</span>';
+  
   if ($event_config_sponsors) {
     print '<span class="event-menu-sponsors">'.l('Sponsors', 'sponsors').'</span>';
   }
+  
+  if ($event_config_photo) {
+    print '<span class="event-menu-photo">'.l('Photo', '#').'</span>';
+  }
+  
+  if ($event_config_video) {
+    print '<span class="event-menu-vedio">'.l('Video', '#').'</span>';
+  }
+  
   if ($event_config_flashback) {
     print '<span class="event-menu-fashback">'.l('Fashback', 'flashback').'</span>';
   }
-  if ($event_config_flashback) {
-    print '<span class="event-menu-fashback">'.l('Fashback', 'flashback').'</span>';
-  }
-  if ($event_config_flashback) {
-    print '<span class="event-menu-fashback">'.l('Fashback', 'flashback').'</span>';
-  }
+
   ?>
 <span class="event-menu-home"><?php print l('Sing and Win', 'sing-and-win'); ?></span>
   <span class="event-menu-vanue-detail">
