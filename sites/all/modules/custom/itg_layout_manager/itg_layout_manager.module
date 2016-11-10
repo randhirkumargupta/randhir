@@ -204,9 +204,17 @@ function itg_layout_manager_block_view($delta = '') {
         else {
           $fin = arg(2);
         }
-
+        
+        if(arg(0) == 'user') {
+          $user_arg = arg(0);
+        }
+        else {
+          $user_arg = 'othuser';
+        }
+        
         $settings['uid'] = $user->uid ? $user->uid : 0;
         $settings['check_sso_url'] = $fin;
+        $settings['user_arg'] = $user_arg;
         $settings['base_url'] = $base_url;
         drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
         drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
