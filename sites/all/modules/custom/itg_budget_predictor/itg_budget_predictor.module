@@ -76,7 +76,7 @@ function itg_budget_predictor_custom() {
     if(count(array_intersect($user->roles, $allowed_roles)) > 0){
              drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
         }
-   
+
     drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
     drupal_add_js(array('itg_budget_predictor' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/itg_budget_predictor.js', array('weight' => 4, 'scope' => 'footer'));
