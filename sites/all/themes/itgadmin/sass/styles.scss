@@ -8418,11 +8418,11 @@ div.node{
             > .image-widget-data{
               position: static !important;
               .form-submit[value="Remove"]{
-                left: 114px;
+                left: 114px !important;
                 width: 20px;
                 height: 20px;
                 background: url(../images/cross_small.png) center center no-repeat;
-                text-indent: -9999;
+                text-indent: -9999px;
               }
             }
           }
