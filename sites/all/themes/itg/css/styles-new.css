@@ -4089,6 +4089,10 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
     height: auto;
     position: static;
   }
+  #content #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
+    position: static;
+    padding-left: 0;
+  }
   #content #block-formblock-ugc .node-ugc-form .form-type-textarea {
     border: none;
     overflow: visible;
@@ -4147,32 +4151,32 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
     right: 0;
     top: 27px;
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data {
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data {
     position: relative;
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file {
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data span.file {
     font-size: 12px;
     left: 0;
     overflow: hidden;
-    padding: 80px 0 0;
+    padding: 75px 0 0;
     position: absolute;
     text-overflow: ellipsis;
     top: 0;
     width: 100%;
     pointer-events: none;
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file img {
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file img, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data span.file img {
     display: none;
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file-size {
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file-size, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data span.file-size {
     display: none;
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-submit[value="Remove"] {
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-submit[value="Remove"], #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-submit[value="Remove"] {
     left: auto;
     right: 0;
     top: -1px;
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield {
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-type-textfield {
     left: 0;
     max-width: none;
     padding-left: 105px;
@@ -4180,13 +4184,14 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
     top: 18px;
     width: 100%;
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield label {
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield label, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-type-textfield label {
     display: none;
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield + .form-type-textfield {
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield + .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-type-textfield + .form-type-textfield {
     top: 49px;
+    margin: 0 !important;
   }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield .form-text {
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield .form-text, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-type-textfield .form-text {
     height: 26px;
     padding: 0 5px;
   }
@@ -4212,6 +4217,40 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
     border-left: none;
     margin-left: 0;
     border-top: 1px solid #ddd;
+  }
+
+  #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
+    margin-top: 0;
+  }
+
+  #content #block-formblock-ugc .node-ugc-form table td > .form-submit[value="Remove"],
+  #content #block-formblock-ugc .node-ugc-form table td .ajax-new-content > .form-submit[value="Remove"] {
+    position: static;
+  }
+
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high {
+    padding: 30px 0 0;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table {
+    width: 100%;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table tr {
+    display: inline-block;
+    padding-bottom: 20px;
+    vertical-align: top;
+    width: 100%;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td {
+    padding: 10px 0;
+    display: block;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name {
+    width: auto;
+    padding: 0;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-submit, .view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-reset {
+    background-size: 100% 100%;
+    width: 120px;
   }
 }
 @media all and (max-width: 480px) {

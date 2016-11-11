@@ -27,24 +27,24 @@ function itg_event_registration_form($form, &$form_state) {
       $event_reg_close_date = strtotime($node->field_registration_close_date[LANGUAGE_NONE][0]['value']);
 
       if ($current_date < $event_reg_start_date) {
-        return 'Registration for event <strong>' . ucwords($node->title) . '</strong> has not started yet. Start date is: ' . date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']));
+        return itg_event_registration_get_status_message($node, 'not_started');
       } 
       elseif ($current_date > $event_reg_close_date) {
-        return 'Registration has been closed for event <strong>' . ucwords($node->title) . '</strong>.';
+        if($node->field_force_registration_open[LANGUAGE_NONE][0]['value']) {
+          return itg_event_registration_get_form();
+        }
+        else {
+          return itg_event_registration_get_status_message($node, 'closed');
+        }
       } 
       else {
         $total_registration_users = itg_event_registration_get_total_registration($event_id);
-
-        // If registration has been reached to no. of tickets, stop more registration
         if ($total_registration_users >= $no_of_tickets) {
-          drupal_set_message(t('Tickets are not available for an event <strong>@eventname</strong>.', array('@eventname' => $node->title)));
+          return itg_event_registration_get_status_message($node, 'tickets_not_available');
           return '';
         }
         else {
-          module_load_include('inc', 'node', 'node.pages');
-          $form = node_add('event_registration');
-          $form['#cache'] = TRUE;
-          return $form;
+          return itg_event_registration_get_form();
         }
       }
     }
