@@ -482,6 +482,13 @@ function itg_manage_budget() {
     '#value' => t('Submit'),
   );
   
+  $destination = 'manage-budget-list';
+
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), $destination),
+    '#weight' => 20,
+  );
+  
   return $form;
 }
 
