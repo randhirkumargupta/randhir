@@ -6804,6 +6804,13 @@ div.node #comments h2 {
   height: 120px;
   border: 1px solid #d9d9d9;
 }
+.ftp-server #edit-video-browse-select .ftp_video_radio img {
+  height: 67%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
 .ftp-server #edit-video-browse-select .ftp_video_radio label {
   background: url(../images/default_for_all.png) no-repeat left top/100% auto;
   font-size: 12px;
@@ -9112,11 +9119,11 @@ div.node #comments h2 {
   position: static !important;
 }
 .node-videogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
-  left: 114px;
+  left: 114px !important;
   width: 20px;
   height: 20px;
   background: url(../images/cross_small.png) center center no-repeat;
-  text-indent: -9999;
+  text-indent: -9999px;
 }
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file {
   margin: 0;
