@@ -66,13 +66,29 @@ function itg_event_backend_registration_form() {
  *   an array with templates information and other array variables
  */
 function itg_event_registration_theme() {
-  return array(
-    'event_registration_tab_form_display_block' => array(
-      'template' => 'event-registration-form-tab',
-      'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
-      'variables' => array('data' => NULL),
-    ),
+  $theme = array(
+      'event_registration_tab_form_display_block' => array(
+          'template' => 'event-registration-form-tab',
+          'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+          'variables' => array('data' => NULL),
+      ),
+      'event_registration_closed' => array(
+          'template' => 'event-registration-closed',
+          'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+          'variables' => array('node' => NULL),
+      ),
+      'event_registration_not_started' => array(
+          'template' => 'event-registration-not-started',
+          'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+          'variables' => array('node' => NULL),
+      ),
+      'event_registration_tickets_not_available' => array(
+          'template' => 'event-registration-tickets-not-available',
+          'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+          'variables' => array('node' => NULL),
+      ),
   );
+  return $theme;
 }
 
 /**
@@ -471,4 +487,25 @@ function itg_event_registration_get_event_nid() {
   $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
   $host_node_arr = explode('/', $host_detail['source']);
   return $host_node_arr[1];
+}
+
+/**
+ * Call templete file for registration status message
+ * @param string $message_type
+ * @return type
+ */
+function itg_event_registration_get_status_message($node, $message_type) {
+  return theme('event_registration_'.$message_type, array('node' => $node));
+}
+
+function itg_event_registration_get_form() {
+  module_load_include('inc', 'node', 'node.pages');
+  $form = node_add('event_registration');
+  $form['#cache'] = TRUE;
+  $form['cutomtext'] = array(
+      '#type' => 'item',
+      '#markup' => '<div class="event-registration-main-container"><div class="tc-txt"><span>*T&C:</span> Living Media India Ltd. reserves the right to terminate, extend or change this offer or any part thereof at any times. It also reserves the right to accept or reject any or all forms received at their absolute discretion without assigning any reason.  </span></div></div>',
+      '#weight' => 100,
+  );
+  return $form;
 }
