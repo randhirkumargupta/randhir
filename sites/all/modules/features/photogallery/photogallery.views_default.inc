@@ -3995,17 +3995,6 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['counter']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Content: Photo By */
-  $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
-  $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
-  $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
-  $handler->display->display_options['fields']['field_photo_by']['relationship'] = 'field_gallery_image_value';
-  $handler->display->display_options['fields']['field_photo_by']['label'] = '';
-  $handler->display->display_options['fields']['field_photo_by']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_photo_by']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_photo_by']['settings'] = array(
-    'link' => 0,
-  );
   /* Field: Field collection item: Image */
   $handler->display->display_options['fields']['field_images_1']['id'] = 'field_images_1';
   $handler->display->display_options['fields']['field_images_1']['table'] = 'field_data_field_images';
@@ -4017,6 +4006,21 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_images_1']['settings'] = array(
     'image_style' => 'photo_landing_slider_thumb_88_86',
     'image_link' => '',
+  );
+  /* Field: Field collection item: Photo By */
+  $handler->display->display_options['fields']['field_photo_byline']['id'] = 'field_photo_byline';
+  $handler->display->display_options['fields']['field_photo_byline']['table'] = 'field_data_field_photo_byline';
+  $handler->display->display_options['fields']['field_photo_byline']['field'] = 'field_photo_byline';
+  $handler->display->display_options['fields']['field_photo_byline']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Photo By */
+  $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
+  $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
+  $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
+  $handler->display->display_options['fields']['field_photo_by']['settings'] = array(
+    'link' => 0,
   );
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';

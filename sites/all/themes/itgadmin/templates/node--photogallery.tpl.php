@@ -110,11 +110,11 @@ foreach ($items as $imagecollection):
       $output .= '<div class="photo-title"><strong>' . $imagecollection['field_image_caption'][LANGUAGE_NONE][0]['value'] . '</strong></div>';
     }
 
-    if (isset($imagecollection['field_credit'][LANGUAGE_NONE]) && !empty($imagecollection['field_credit'][LANGUAGE_NONE][0]['value'])) {
-      $output .= '<div class="photo-credit"><span>' . $imagecollection['field_credit'][LANGUAGE_NONE][0]['value'] . '</span></div>';
-    } elseif (isset($node->field_credit_name[LANGUAGE_NONE][0]) && isset($node->field_credit_to_all[LANGUAGE_NONE][0])) {
-      $output .= '<div class="photo-credit"><span>' . $node->field_credit_name['und'][0]['value'] . '</span></div>';
-    }
+//    if (isset($imagecollection['field_credit'][LANGUAGE_NONE]) && !empty($imagecollection['field_credit'][LANGUAGE_NONE][0]['value'])) {
+//      $output .= '<div class="photo-credit"><span>' . $imagecollection['field_credit'][LANGUAGE_NONE][0]['value'] . '</span></div>';
+//    } elseif (isset($node->field_credit_name[LANGUAGE_NONE][0]) && isset($node->field_credit_to_all[LANGUAGE_NONE][0])) {
+//      $output .= '<div class="photo-credit"><span>' . $node->field_credit_name['und'][0]['value'] . '</span></div>';
+//    }
 
     if (isset($imagecollection['field_photo_byline'][LANGUAGE_NONE]) && !empty($imagecollection['field_photo_byline'][LANGUAGE_NONE][0]['target_id'])) {
       if (module_exists('itg_photogallery')) {
@@ -122,6 +122,10 @@ foreach ($items as $imagecollection):
         $res_val = itg_photogallery_byline_photoby('node', $res_id);
         $output .= '<div class="image-description"><span>' . $res_val . '</span></div>';
       }
+    }else{
+      $res_id = $node->field_photo_by[LANGUAGE_NONE][0]['target_id'];
+       $res_val = itg_photogallery_byline_photoby('node', $res_id);
+      $output .= '<div class="image-description"><span>' . $res_val . '</span></div>';
     }
 
     if (module_exists('itg_photogallery')) {
