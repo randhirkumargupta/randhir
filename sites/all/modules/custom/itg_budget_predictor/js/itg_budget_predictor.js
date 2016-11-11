@@ -5,38 +5,40 @@
 
 Drupal.behaviors.itg_budget_predictor = {
     attach: function (context, settings) {
-        //alert('hi = ' +Drupal.settings.itg_budget_predictor.settings.basePath);
         jQuery(function ()
         {
-            var isUpdated;
-            var year = Drupal.settings.itg_budget_predictor.settings.year;
-            jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
-            {
-                connectWith: '.connectedSortable',
-                update: function (event, ui) {
-                    isUpdated = true;
-                },
-                stop: function (event, ui) {
-                    if (isUpdated == true) {
-                        //Do Something
-                        jQuery.ajax(
-                                {
-                                    type: "POST",
-                                    url: Drupal.settings.itg_budget_predictor.settings.basePath + '/ajax/budget-ranking/' + year,
-                                    data:
-                                            {
-                                                sort1: jQuery("#sortable1").sortable('serialize'),
-                                                sort2: jQuery("#sortable2").sortable('serialize'),
-                                                sort3: jQuery("#sortable3").sortable('serialize')
-                                            },
-                                    success: function (html)
+            if(Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {
+                var isUpdated;
+                var year = Drupal.settings.itg_budget_predictor.settings.year;
+                jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
+                {
+                    connectWith: '.connectedSortable',
+                    update: function (event, ui) {
+                        isUpdated = true;
+                    },
+                    stop: function (event, ui) {
+                        if (isUpdated == true) {
+                            //Do Something
+                            jQuery.ajax(
                                     {
-                                        jQuery('.success').fadeIn(500);
-                                    }
-                                });
+                                        type: "POST",
+                                        url: Drupal.settings.itg_budget_predictor.settings.basePath + '/ajax/budget-ranking/' + year,
+                                        data:
+                                                {
+                                                    sort1: jQuery("#sortable1").sortable('serialize'),
+                                                    sort2: jQuery("#sortable2").sortable('serialize'),
+                                                    sort3: jQuery("#sortable3").sortable('serialize')
+                                                },
+                                        success: function (html)
+                                        {
+                                            jQuery('.success').fadeIn(500);
+                                        }
+                                    });
+                        }
                     }
-                }
-            }).disableSelection();
+                }).disableSelection();
+            }
+            
         });
 
     }
