@@ -1,0 +1,15 @@
+name = Feature for Reports
+description = Views and module settings for ITG Reports.
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = charts
+dependencies[] = charts_google
+dependencies[] = features
+dependencies[] = itg_reports
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[user_permission][] = view report dashboard
+features[views_view][] = report_filed_content
+features_exclude[dependencies][ctools] = ctools

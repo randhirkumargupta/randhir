@@ -9147,11 +9147,11 @@ div.node #comments h2 {
   position: static !important;
 }
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
-  left: 114px;
+  left: 114px !important;
   width: 20px;
   height: 20px;
   background: url(../images/cross_small.png) center center no-repeat;
-  text-indent: -9999;
+  text-indent: -9999px;
 }
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file > label, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file > label {
   background-color: #dedede;
@@ -9316,4 +9316,9 @@ div.node #comments h2 {
 .node-event_configurations-form .form-field-type-color-field-rgb label, .node-event_backend-form .form-field-type-color-field-rgb label {
   float: left;
   width: 220px;
+}
+
+.page-user .field-name-field-user-section,
+.page-admin-people-create .field-name-field-user-section {
+  display: none;
 }
