@@ -120,27 +120,35 @@
     <!-- Created date -->
     <span class="other-reviews-date"><?php print format_date($node->created, 'custom', 'F d, Y'); ?></span>
     <!-- Ratings -->
-    <span class="other-reviews-rating"><?php print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value']; ?></span>
+    <span class="other-reviews-rating" data-star-value="<?php print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>
     </div>
     <!-- Review description -->
     <div class="other-reviews-desc"><?php print $reviews[$field_collection['value']]->field_mega_review_description['und'][0]['value']; ?></div>
   </div>
   <?php endforeach; ?>
     </div>
-  <!-- Print video -->
-  <?php print render($content['field_mega_review_youtube_url']); ?>
-  <!-- Photos -->
-  <?php
-    $small_image = theme(
-      'image_style',
-      array(
+  <div class="photos-videos-wrapper">
+    <!-- Print video -->
+    <div class="movie-videos">
+      <h3><span>MOVIE VIDEOS</span></h3>
+      <?php print render($content['field_mega_review_youtube_url']); ?>
+    </div>
+
+    <!-- Photos -->
+    <div class="movie-photos">
+      <h3><span>MOVIE PHOTOS</span></h3>
+      <?php
+      $small_image = theme(
+        'image_style', array(
         'style_name' => 'cart_172x240',
         'path' => $node->field_story_small_image['und'][0]['uri'],
-      )  
-    );
-    
-    print $small_image;
-  ?>
+        )
+      );
+
+      print $small_image;
+      ?>
+    </div>
+  </div>
   <?php print render($content['links']); ?>    
   <?php print render($content['comments']); ?>  
 </article>

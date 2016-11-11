@@ -210,6 +210,12 @@
   }
 
   /* End css home page*/
+  /*sider bar css start*/
+  #block-itg-ads-ad-right-sidebar-1 {
+    padding: 0;
+  }
+
+  /*sider bar css end*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -497,11 +503,18 @@
   .oscar-layout-page .oscar-slider .bottom-slider li {
     padding: 10px;
     width: 100% !important;
+    height: auto;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li a.video-icon {
+    float: left;
   }
   .oscar-layout-page .oscar-slider .bottom-slider li img {
     float: left;
     margin-right: 10px;
     width: 145px;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li p {
+    margin-top: 0;
   }
   .oscar-layout-page .oscar-slider .bottom-slider i {
     color: #ccc;
@@ -581,14 +594,14 @@
 
   /*css end side bar section for video and photo*/
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 33.33333%;
     padding: 15px 10px;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .page-sports-video .view-content .photo-list li:nth-child(4n+1), .page-sports-photo .view-content .photo-list li:nth-child(4n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .page-sports-video .view-content .photo-list li:nth-child(4n+1), .page-sports-photo .view-content .photo-list li:nth-child(4n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(4n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
     clear: left;
   }
 
@@ -622,6 +635,15 @@
   }
 
   /*end event page*/
+  /*Start css program live page*/
+  #block-itg-live-tv-live-tv-video-page .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
+    clear: none;
+  }
+
+  /*End css program live page*/
+  #block-itg-menu-manager-third-level-menu .col-md-8 {
+    display: none;
+  }
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -759,6 +781,48 @@
   }
 
   /*end event page*/
+  /*css start live tv page*/
+  #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list li {
+    padding: 10px;
+    height: auto;
+    width: 100% !important;
+  }
+  #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list li figure {
+    float: left;
+    margin-right: 10px;
+    width: 145px;
+  }
+  #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list i.slick-arrow {
+    color: #ccc;
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv {
+    padding: 10px;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon, #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+    width: 100%;
+    float: none;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li {
+    display: inline-block;
+    vertical-align: top;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li a {
+    border-bottom: none;
+    padding: 10px;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li a i {
+    font-size: 20px;
+    font-size: 1.25rem;
+    padding-right: 5px;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li a span {
+    display: none;
+  }
+
+  /*css end live tv page*/
 }
 @media only screen and (max-width: 640px) {
   #block-views-anchor-landing-page-block .anchor-left {
@@ -767,13 +831,13 @@
 }
 @media only screen and (max-width: 560px) {
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 50%;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1), .page-sports-video .view-content .photo-list li:nth-child(2n+1), .page-sports-photo .view-content .photo-list li:nth-child(2n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1), .page-sports-video .view-content .photo-list li:nth-child(2n+1), .page-sports-photo .view-content .photo-list li:nth-child(2n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(2n+1) {
     clear: left;
   }
 
@@ -1296,7 +1360,7 @@
   /*CSS End So sorry page*/
   /*CSS Start RHS add block*/
   #block-itg-ads-ad-right-sidebar-1 {
-    padding: 30px 34px;
+    width: 100%;
   }
 
   /*CSS End RHS add block*/
