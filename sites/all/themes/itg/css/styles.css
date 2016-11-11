@@ -6641,13 +6641,15 @@ footer .footer-copyright {
 }
 #block-menu-menu-event-menu .event-detail {
   background: #ef3c24;
+  color: #fff;
+  text-align: center;
 }
 #block-menu-menu-event-menu .event-detail .event-str-date {
   font-size: 24px;
   display: block;
   text-align: center;
   text-transform: uppercase;
-  padding: 5px 0;
+  padding: 7px 0;
   font-weight: 700;
 }
 #block-menu-menu-event-menu .event-detail .event-vanue-detail-place {

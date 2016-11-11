@@ -3587,6 +3587,63 @@ body.has-cart-popup {
 .page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags .views-row .views-field-ops a:hover {
   text-decoration: underline;
 }
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-current,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-item a,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-item a:hover,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-next a, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-last a, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-first a, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-previous a,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-next a,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-last a,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-first a,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-next.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-next.pager-last.last, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-last.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-last.pager-last.last, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-first.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-first.pager-last.last, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-previous.pager-first.first, .page-personalization-my-following #block-views-follow-tags-block .view-follow-tags ul.pager li.pager-previous.pager-last.last,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-next.pager-first.first,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-next.pager-last.last,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-last.pager-first.first,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-last.pager-last.last,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-first.pager-first.first,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-first.pager-last.last,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-previous.pager-first.first,
+.page-personalization-my-following #block-views-follow-tags-block-1 .view-follow-tags ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
 
 .cart-detail .continue-shopping a {
   padding: 5px;
@@ -4028,6 +4085,10 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
   padding-left: 15px;
 }
 
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
 /* Responsive CSS Personalization pages */
 @media all and (max-width: 767px) {
   .page-personalization .personalized-wrapper .personalized-user-area, .page-personalization .personalized-wrapper .personalized-user, .page-personalization .personalized-wrapper .personalized-user-info {
@@ -4252,11 +4313,32 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
     background-size: 100% 100%;
     width: 120px;
   }
+
+  .page-personalization-my-following #block-views-follow-tags-block,
+  .page-personalization-my-following #block-views-follow-tags-block-1 {
+    width: 100%;
+    padding: 50px 0 0;
+  }
+
+  #block-itg-personalization-user-my-point .header-point {
+    padding: 20px 0;
+  }
+  #block-itg-personalization-user-my-point .header-point span {
+    padding: 5px 0;
+    display: block;
+  }
+  #block-itg-personalization-user-my-point .header-point span + span:before {
+    display: none;
+  }
 }
 @media all and (max-width: 480px) {
   .photos-videos-wrapper .movie-videos,
   .photos-videos-wrapper .movie-photos {
     width: 100%;
     padding: 0;
+  }
+
+  #block-itg-personalization-user-my-point .unit-description th:first-child {
+    min-width: 240px;
   }
 }
