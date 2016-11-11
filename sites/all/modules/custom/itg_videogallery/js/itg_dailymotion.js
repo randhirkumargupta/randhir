@@ -30,15 +30,15 @@
             });
             // Browse Local
             $(".browse-local").click(function() {
-                parent.jQuery("#" + video_field_id + "").show();
-                parent.jQuery("#" + video_field_id + "-button").show();
                 parent.jQuery("#" + video_field_id + "").trigger('click');
                 parent.jQuery("#" + video_field_id + "").change(function() {
+                    parent.jQuery("#" + video_field_id + "").show();
+                    parent.jQuery("#" + video_field_id + "-button").show();
                     parent.jQuery("#" + video_field_id + "-button").mousedown();
                     parent.jQuery.colorbox.close();
                 });
             });
-
+            
 
             // popup show hide
             $(".video-local").click(function() {

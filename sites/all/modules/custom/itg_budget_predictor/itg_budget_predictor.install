@@ -98,6 +98,11 @@ function itg_budget_predictor_schema() {
             'type' => 'text',
             'not null' => true,
           ),
+          'budget_message' => array(
+            'description' => t('Success message'),
+            'type' => 'text',
+            'not null' => true,
+          ),
           'budget_year' => array(
             'description' => t('Year'),
             'type' => 'varchar',
