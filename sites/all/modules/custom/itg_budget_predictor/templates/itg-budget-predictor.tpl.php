@@ -13,9 +13,7 @@
     $budget_message_flag = $data['budget_message_flag'];
    
 ?>
-
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
-        <style type="text/css">
+      <style type="text/css">
             #sortable1, #sortable2, #sortable3, #sortable4 { width:15%; min-height:400px; border:1px solid #ccc; background:#f3f3f3;list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; }
             #sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li { display:block; background:#e3e3e3; cursor:move;margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em;}
             *{margin:0;padding:0;}
@@ -79,4 +77,3 @@
 <?php
     }
 ?>
-    

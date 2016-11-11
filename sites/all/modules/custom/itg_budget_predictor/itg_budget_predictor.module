@@ -6,37 +6,38 @@
 function itg_budget_predictor_menu() {
   $items = array();
   $items['budget-predictor/%'] = array(
+      'title' => 'Cheaper / Dearer',
       'page callback' => 'itg_budget_predictor_custom', 
       'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+      'access callback' => 'user_is_logged_in',
   );
   $items['ajax/budget-ranking/%'] = array(
       'page callback' => 'itg_budget_predictor_update_budget',
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_budget_predictor.inc',
-      'access arguments' => array('access content'),
+      'access callback' => 'user_is_logged_in',
   );
   $items['budget-save'] = array(
       'page callback' => 'itg_budget_crop_image',
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_budget_predictor.inc',
-      'access arguments' => array('access content'),
+      'access callback' => 'user_is_logged_in',
   );
   $items['budget-download'] = array(
       'page callback' => 'itg_budget_download_image',
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_budget_predictor.inc',
-      'access arguments' => array('access content'),
+      'access callback' => 'user_is_logged_in',
   );
   $items['budget-predictor-list'] = array(
     'page callback' => 'itg_budget_predictor_list',
-    'access arguments' => array('access content'),
+    'access callback' => 'user_is_logged_in',
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_budget_predictor.inc',
   );
   $items['manage-budget-list'] = array(
     'page callback' => 'itg_budget_manage_list',
-    'access arguments' => array('access content'),
+    'access callback' => 'user_is_logged_in',
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_budget_predictor.inc',
   );
@@ -44,7 +45,7 @@ function itg_budget_predictor_menu() {
     'title' => 'Manage Budget Predictor',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_manage_budget'),
-    'access arguments' => array('access content'),
+    'access callback' => 'user_is_logged_in',
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_budget_predictor.inc',
   );
@@ -55,20 +56,28 @@ function itg_budget_predictor_menu() {
  * Custom callback for itg_budget_predictor
  */
 function itg_budget_predictor_custom() {
-      module_load_include('inc', 'itg_budget_predictor', 'includes/itg_budget_predictor');
-      global $base_url;    
-      $year = arg(1);    
-      $budget_status = check_budget($year);
-      $data = itg_budget_predictor_get_taxonomy();
-      $settings = array();
-      $settings['stopPredictor'] = '1';
-      if($budget_status['status'] == 1 && empty($data['file_names'])) {
-          $data['file_name'] = $base_url . '/' . $data['file_names'];
-          $settings['stopPredictor'] = '2';
-      }
+    module_load_include('inc', 'itg_budget_predictor', 'includes/itg_budget_predictor');
+    global $base_url, $user;
+    $user_id = $user->uid;
+    $allowed_roles = array('Editor', 'Site Admin', 'administrator');
+
+    $year = arg(1);    
+    $budget_status = check_budget($year);
+    $data = itg_budget_predictor_get_taxonomy();
+    $settings = array();
+    $settings['stopPredictor'] = '1';
+    if($budget_status['status'] == 1 && empty($data['file_names'])) {
+        $data['file_name'] = $base_url . '/' . $data['file_names'];
+        $settings['stopPredictor'] = '2';
+    }
     /* JS library  added to Cheaper dearer */
     $settings['basePath'] = $base_url;
     $settings['year'] = arg(1);
+    if(count(array_intersect($user->roles, $allowed_roles)) > 0){
+             drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
+        }
+   
+    drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
     drupal_add_js(array('itg_budget_predictor' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/itg_budget_predictor.js', array('weight' => 4, 'scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/html2canvas.js', 'file');    
