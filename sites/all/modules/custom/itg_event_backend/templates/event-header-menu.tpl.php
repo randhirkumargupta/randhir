@@ -17,42 +17,48 @@ $event_config_photo = $node->field_config_photo[LANGUAGE_NONE][0]['value'];
 $event_config_video = $node->field_config_video[LANGUAGE_NONE][0]['value'];
 
 ?>
-<div class="event-header-menu-container">
+<div id="block-menu-menu-event-menu" class="container event-header-menu-container">
+    <div class="row">
+        <div class="col-md-8"><ul class="menu">
   <?php 
   if ($event_config_home) {
-    print '<span class="event-menu-home">'.l('Home', $base_url).'</span>';
+    print '<li>'.l('Home', $base_url).'</li>';
   }
   
   if ($event_config_programme) {
-    print '<span class="event-menu-programme">'.l('Programme', 'programme').'</span>';
+    print '<li>'.l('Programme', 'programme').'</li>';
   }
   
   if ($event_config_speakers) {
-    print '<span class="event-menu-speakers">'.l('Speakers', 'speakers').'</span>';
+    print '<li>'.l('Speakers', 'speakers').'</li>';
   }
   
-  print '<span class="event-menu-registration">'.l('Registration', 'event-registration').'</span>';
+  print '<li>'.l('Registration', 'event-registration').'</li>';
   
   if ($event_config_sponsors) {
-    print '<span class="event-menu-sponsors">'.l('Sponsors', 'sponsors').'</span>';
+    print '<li>'.l('Sponsors', 'sponsors').'</li>';
   }
   
   if ($event_config_photo) {
-    print '<span class="event-menu-photo">'.l('Photo', '#').'</span>';
+    print '<li>'.l('Photo', '#').'</li>';
   }
   
   if ($event_config_video) {
-    print '<span class="event-menu-vedio">'.l('Video', '#').'</span>';
+    print '<li>'.l('Video', '#').'</li>';
   }
   
   if ($event_config_flashback) {
-    print '<span class="event-menu-fashback">'.l('Fashback', 'flashback').'</span>';
+    print '<li>'.l('Fashback', 'flashback').'</li>';
   }
 
   ?>
-<span class="event-menu-home"><?php print l('Sing and Win', 'sing-and-win'); ?></span>
-  <span class="event-menu-vanue-detail">
-    <span class="event-vanue-detail-date"><?php print $event_start_date; ?></span>
-    <span class="event-vanue-detail-place"><?php print $event_location; ?></span>
-  </span>
+<li><?php print l('Sing and Win', 'sing-and-win'); ?></li>
+</ul></div>
+        <div class="col-md-4">
+            <div class="event-detail">
+                <span class="event-str-date"><?php print $event_start_date; ?> </span>
+                <span class="event-vanue-detail-place"><?php print $event_location; ?></span>                
+            </div>            
+        </div>        
+    </div>
 </div>

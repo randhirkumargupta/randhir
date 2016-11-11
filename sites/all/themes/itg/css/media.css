@@ -216,6 +216,19 @@
   }
 
   /*sider bar css end*/
+  /*css start poll page*/
+  .poll-banner .detail .detail-content, .poll-banner .detail .voting-data {
+    float: none;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .poll-banner .voting-data {
+    margin-bottom: 0px;
+    padding-top: 20px;
+    border-top: 1px solid #ececec;
+  }
+
+  /*css end poll page*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/

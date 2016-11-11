@@ -5174,6 +5174,24 @@ footer{
           }
       }
     }
+    .event-detail{
+        background: #ef3c24;
+        .event-str-date{
+            font-size: 24px;
+            display: block;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 5px 0;
+            font-weight: 700;
+        }
+        .event-vanue-detail-place{
+            background: #000;
+            padding: 0px 35px;
+            font-size: 12px;
+            text-transform: uppercase;
+            @include display-inline;
+        }
+    }
 }
 #block-itg-event-backend-ad-right-sidebar-event {
     padding: 30px;
