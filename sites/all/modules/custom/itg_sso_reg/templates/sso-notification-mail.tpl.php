@@ -28,7 +28,7 @@ $activate_link = $activate_url_info.'/user-activate/'.$user_id;
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <tr>
-        <td style="padding: 10px 20px;">Dear User, <?php print $activate_link; ?></td>
+        <td style="padding: 10px 20px;">Dear User, </td>
       </tr>
       <tr>
         <td style="padding: 10px 20px;">You are registered successfully.</td>
