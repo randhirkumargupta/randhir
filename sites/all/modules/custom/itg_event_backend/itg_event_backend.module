@@ -501,6 +501,10 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
             'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
             'variables' => array('data' => NULL),
         ),
+        'event_header_menu' => array(
+            'template' => 'event-header-menu',
+            'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+        ),
         'sponsor_node_form' => array(
             'arguments' => array('form' => NULL),
             'template' => 'sponsor-node-form',
@@ -546,7 +550,10 @@ function itg_event_backend_block_info() {
         'info' => t('event backend Form Tab Block'),
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
-
+    $blocks['event_header_menu'] = array(
+        'info' => t('Event Header Menu'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
     $blocks['sponsor_tab_form_block'] = array(
         'info' => t('sponsor Form Tab Block'),
         'cache' => DRUPAL_CACHE_GLOBAL,
@@ -588,6 +595,9 @@ function itg_event_backend_block_view($delta = '') {
     switch ($delta) {
         case 'event_backend_tab_form_block':
             $block['content'] = theme('itg_event_backend_tab_form_display_block', array('data' => ''));
+            break;
+        case 'event_header_menu':
+            $block['content'] = theme('event_header_menu', array('data' => ''));
             break;
         case 'sponsor_tab_form_block':
             $block['content'] = theme('itg_event_sponsor_tab_form_display_block', array('data' => ''));
@@ -675,32 +685,6 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
             '#title' => t('Closed'),
             '#value' => 'closed'
         );
-    }
-}
-
-/**
- * Implementation of hook_node_presave
- * {@inheritdoc}
- */
-function itg_event_backend_node_presave($node) {
-    if ($node->type == 'event_configurations') {
-        $node->title = $node->field_ec_select_domain[LANGUAGE_NONE][0]['value'];
-    }
-}
-
-/**
- * Implementation of hook_node_validate
- * {@inheritdoc}
- */
-function itg_event_backend_node_validate($node) {
-    if ($node->type == 'event_configurations') {
-        if (arg(2) != 'edit') {
-            $current_domain = $node->field_ec_select_domain[LANGUAGE_NONE][0]['value'];
-            $already_configured_domains = itg_event_backend_get_all_configure_domain();
-            if (in_array($current_domain, $already_configured_domains)) {
-                form_set_error('field_ec_select_domain', t('This domain is already configured, please edit and modify existing domain.'));
-            }
-        }
     }
 }
 
@@ -827,19 +811,23 @@ function itg_event_backend_get_session_photo_video($daywise) {
  * Implement function to get associated story
  * @return array
  */
-function itg_event_backend_get_session_story_title($daywise) {
+function itg_event_backend_get_session_story_title($daywise, $font_color) {
 
     $query = db_select('node', 'n');
     $query->join('field_data_field_event_highlights', 'eh', 'n.nid = eh.entity_id');
     $query->join('field_data_field_programe_title', 'pt', 'pt.entity_id = eh.field_event_highlights_value');
     $query->fields('pt', array('field_programe_title_value'));
+    $query->fields('n', array('nid'));
     $query->fields('eh', array('field_event_highlights_value'));
     $query->condition('pt.field_programe_title_value', $daywise, '=');
     $result = $query->execute();
 
     foreach ($result as $value) {
         $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
-        $session['story_title'][] = itg_common_get_node_title($daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id']);
+        $story_nid = $daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id'];
+        $story_title = itg_common_get_node_title($story_nid);
+        $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
+       
     }
     return $session;
 }
@@ -861,7 +849,7 @@ function itg_event_backend_menu() {
         'page callback' => 'itg_event_backend_page',
         'access callback' => TRUE,
     );
-    $items['sign-and-win'] = array(
+    $items['sing-and-win'] = array(
         'page callback' => 'itg_event_backend_page',
         'access callback' => TRUE,
     );
@@ -988,14 +976,23 @@ function itg_event_backend_views_query_alter(&$view, &$query) {
  * @global string $base_url
  * @return int
  */
-function itg_event_backend_get_event_node() {
-    global $base_url;
+function itg_event_backend_get_event_node($whole_node = NULL) {
+ global $base_url;
+  if (module_exists('redirect')) {
     $query = db_select('redirect', 'red');
     $query->fields('red', array('source'));
     $query->condition('redirect', $base_url, '=');
     $result = $query->execute()->fetchField();
     $event_id = explode('node/', $result);
-    return $event_id[1];
+    
+    if(!empty($whole_node)) {
+      return node_load($event_id[1]); // Returns whole node
+    }
+    else {
+      return $event_id[1]; // Event nid
+    }
+    
+  }
 }
 
 /**
@@ -1104,19 +1101,6 @@ function itg_event_backend_vukkul_content($nid) {
 
                </script>';
     return $output;
-}
-
-/**
- * Get host node
- * @param string $host
- * @return object
- */
-function itg_event_backend_get_host_node($host) {
-    $query = db_select('node', 'n')
-            ->fields('n', array('nid'))
-            ->condition('n.title', $host, '=');
-
-    return node_load($query->execute()->fetchField());
 }
 
 /**
