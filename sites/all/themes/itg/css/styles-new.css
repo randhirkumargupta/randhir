@@ -3794,6 +3794,7 @@ article.node-mega-review-critic .rating-and-social-wrapper .movie-rating {
   background: url(../images/rating-grey.png) 0 20px no-repeat;
 }
 article.node-mega-review-critic .rating-and-social-wrapper .movie-rating:after {
+  content: '';
   position: absolute;
   left: 0;
   top: 0;
@@ -3835,6 +3836,8 @@ article.node-mega-review-critic .rating-and-social-wrapper .social-info {
   float: left;
   width: 200px;
   padding: 5px 10px;
+  border-left: 1px solid #c0c0c0;
+  margin-left: 20px;
 }
 article.node-mega-review-critic .rating-and-social-wrapper .social-info span {
   float: left;
@@ -3862,15 +3865,17 @@ article.node-mega-review-critic .movie-review-wrapper .movie-trailer {
   height: 271px;
   background-color: #ddd;
   float: left;
-  width: 483px;
+  width: 63%;
 }
 article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
-  height: 271px;
   background-color: #000;
-  overflow: hidden;
+  float: left;
+  height: 271px;
+  overflow-y: auto;
+  width: 37%;
 }
 article.node-mega-review-critic .movie-review-wrapper .movie-review-text .review-row {
-  padding: 10px 10px 0;
+  padding: 10px 8px 0;
   color: #a0a0a0;
 }
 article.node-mega-review-critic .movie-review-wrapper .movie-review-text .review-row .review-label {
@@ -3917,6 +3922,54 @@ article.node-mega-review-critic .other-reviews .other-reviews-posted-on .other-r
   color: #b7b7b7;
   margin-right: 20px;
 }
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on .other-reviews-rating {
+  display: inline-block;
+  vertical-align: top;
+  width: 80px;
+  height: 13px;
+  margin-top: 5px;
+  position: relative;
+  background: url(../images/rating-grey.png) 0 0/80px auto no-repeat;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on .other-reviews-rating:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: url(../images/rating-red.png) 0 0/80px auto no-repeat;
+  height: 13px;
+  width: 0;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="10%"]:after {
+  width: 7.8px;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="20%"]:after {
+  width: 16px;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="30%"]:after {
+  width: 24px;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="40%"]:after {
+  width: 32px;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="50%"]:after {
+  width: 41px;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="60%"]:after {
+  width: 48px;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="70%"]:after {
+  width: 57px;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="80%"]:after {
+  width: 65px;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="90%"]:after {
+  width: 74px;
+}
+article.node-mega-review-critic .other-reviews .other-reviews-posted-on span[data-star-value="100%"]:after {
+  width: 80px;
+}
 article.node-mega-review-critic .other-reviews .other-reviews-row {
   border-top: 1px solid #e5e5e5;
   padding: 10px 0;
@@ -3925,6 +3978,54 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
   font: 400 15px/27px 'Roboto Slab';
   color: #212121;
   margin-top: 10px;
+}
+
+.photos-videos-wrapper {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+.photos-videos-wrapper .movie-videos, .photos-videos-wrapper .movie-photos {
+  float: left;
+  width: 50%;
+}
+.photos-videos-wrapper .movie-videos h3, .photos-videos-wrapper .movie-photos h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  display: none;
+  position: relative;
+}
+.photos-videos-wrapper .movie-videos h3 span, .photos-videos-wrapper .movie-photos h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+.photos-videos-wrapper .movie-videos h3:before, .photos-videos-wrapper .movie-photos h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
+.photos-videos-wrapper .movie-videos h3, .photos-videos-wrapper .movie-photos h3 {
+  display: block;
+}
+.photos-videos-wrapper .movie-videos h3 span, .photos-videos-wrapper .movie-photos h3 span {
+  padding-left: 0;
+  padding-top: 20px;
+}
+.photos-videos-wrapper .movie-videos {
+  padding-right: 15px;
+}
+.photos-videos-wrapper .movie-photos {
+  padding-left: 15px;
 }
 
 /* Responsive CSS Personalization pages */
@@ -4038,11 +4139,85 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
     margin-top: 3px;
     padding: 0;
   }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .file-widget span.file a {
+    max-width: 50%;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .file-widget .form-submit[value="Remove"] {
+    left: auto;
+    right: 0;
+    top: 27px;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data {
+    position: relative;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file {
+    font-size: 12px;
+    left: 0;
+    overflow: hidden;
+    padding: 80px 0 0;
+    position: absolute;
+    text-overflow: ellipsis;
+    top: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file img {
+    display: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file-size {
+    display: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-submit[value="Remove"] {
+    left: auto;
+    right: 0;
+    top: -1px;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield {
+    left: 0;
+    max-width: none;
+    padding-left: 105px;
+    position: absolute;
+    top: 18px;
+    width: 100%;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield label {
+    display: none;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield + .form-type-textfield {
+    top: 49px;
+  }
+  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield .form-text {
+    height: 26px;
+    padding: 0 5px;
+  }
 
   .view-personalization-my-content .view-content {
     overflow-x: auto;
   }
   .view-personalization-my-content .views-table th:first-child {
     min-width: 100px;
+  }
+
+  article.node-mega-review-critic .movie-review-wrapper .movie-trailer,
+  article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
+    width: 100%;
+  }
+
+  article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
+    height: auto;
+  }
+
+  article.node-mega-review-critic .rating-and-social-wrapper .social-info {
+    width: 100%;
+    border-left: none;
+    margin-left: 0;
+    border-top: 1px solid #ddd;
+  }
+}
+@media all and (max-width: 480px) {
+  .photos-videos-wrapper .movie-videos,
+  .photos-videos-wrapper .movie-photos {
+    width: 100%;
+    padding: 0;
   }
 }
