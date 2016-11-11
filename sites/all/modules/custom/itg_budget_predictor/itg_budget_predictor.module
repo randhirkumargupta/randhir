@@ -84,10 +84,6 @@ function itg_budget_predictor_theme() {
           'variables' => array('data' => NULL),
           'template' => 'templates/itg-budget-predictor',
       ),
-      'itg_budget_predictor_test' => array(
-          'variables' => array('id' => NULL, 'name' => 'arun'), // This is the list of the variables that will be passed to the template file. 
-          'template' => 'templates/itg-budget-test',
-      ),
   );
   return $themes;
 }
