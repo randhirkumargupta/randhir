@@ -5,16 +5,48 @@
  */
 function itg_budget_predictor_menu() {
   $items = array();
-  $items['budget-predictor'] = array(
+  $items['budget-predictor/%'] = array(
       'page callback' => 'itg_budget_predictor_custom', 
       'type' => MENU_CALLBACK,
       'access arguments' => array('access content'),
   );
-  $items['ajax/budget-ranking'] = array(
+  $items['ajax/budget-ranking/%'] = array(
       'page callback' => 'itg_budget_predictor_update_budget',
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_budget_predictor.inc',
       'access arguments' => array('access content'),
+  );
+  $items['budget-save'] = array(
+      'page callback' => 'itg_budget_crop_image',
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_budget_predictor.inc',
+      'access arguments' => array('access content'),
+  );
+  $items['budget-download'] = array(
+      'page callback' => 'itg_budget_download_image',
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_budget_predictor.inc',
+      'access arguments' => array('access content'),
+  );
+  $items['budget-predictor-list'] = array(
+    'page callback' => 'itg_budget_predictor_list',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+  );
+  $items['manage-budget-list'] = array(
+    'page callback' => 'itg_budget_manage_list',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+  );
+  $items['manage-budget-predictor'] = array(
+    'title' => 'Manage Budget Predictor',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_manage_budget'),
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_budget_predictor.inc',
   );
   return $items;
 }
@@ -23,34 +55,24 @@ function itg_budget_predictor_menu() {
  * Custom callback for itg_budget_predictor
  */
 function itg_budget_predictor_custom() {
-  return 'CHEAPER/DEARER';
-}
-
-/**
- * {@inheritdoc}
- */
-function itg_budget_predictor_block_info() {
-  $blocks['cheaper_dearer'] = array(
-      'info' => t('Widget: Cheaper dearer for budget predictor'),
-  );
-  return $blocks;
-}
-
-/**
- * {@inheritdoc}
- */
-function itg_budget_predictor_block_view($delta = '') {
-  $block = array();
-  switch ($delta) {
-      case 'cheaper_dearer': 
       module_load_include('inc', 'itg_budget_predictor', 'includes/itg_budget_predictor');
-      /* JS library  added to Cheaper dearer */
-      drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/itg_budget_predictor.js', 'file');    
+      global $base_url;    
+      $year = arg(1);    
+      $budget_status = check_budget($year);
       $data = itg_budget_predictor_get_taxonomy();
-      $block['content'] = theme('itg_budget_predictor_cheaper', array('data' => $data));
-      break;
-  }
-  return $block;
+      $settings = array();
+      $settings['stopPredictor'] = '1';
+      if($budget_status['status'] == 1 && empty($data['file_names'])) {
+          $data['file_name'] = $base_url . '/' . $data['file_names'];
+          $settings['stopPredictor'] = '2';
+      }
+    /* JS library  added to Cheaper dearer */
+    $settings['basePath'] = $base_url;
+    $settings['year'] = arg(1);
+    drupal_add_js(array('itg_budget_predictor' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/itg_budget_predictor.js', array('weight' => 4, 'scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/html2canvas.js', 'file');    
+  return theme('itg_budget_predictor_cheaper', array('data' => $data));
 }
 
 /**
@@ -59,7 +81,12 @@ function itg_budget_predictor_block_view($delta = '') {
 function itg_budget_predictor_theme() {
   $themes = array(
       'itg_budget_predictor_cheaper' => array(
+          'variables' => array('data' => NULL),
           'template' => 'templates/itg-budget-predictor',
+      ),
+      'itg_budget_predictor_test' => array(
+          'variables' => array('id' => NULL, 'name' => 'arun'), // This is the list of the variables that will be passed to the template file. 
+          'template' => 'templates/itg-budget-test',
       ),
   );
   return $themes;
