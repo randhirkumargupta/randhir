@@ -321,7 +321,7 @@
                if($config_name == 'vukkul') {
                ?>
       <div class="vukkul-comment">
-
+            <div id="vuukle-emote"></div>
             <div id="vuukle_div"></div>
             
              <?php 

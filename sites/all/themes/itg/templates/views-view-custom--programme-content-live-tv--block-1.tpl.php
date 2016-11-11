@@ -1,4 +1,4 @@
-<div class="programe-list">
+<div class="programe-list defalt-bar">
     <ul class="photo-list">
   <?php
   $url = "#";

@@ -40,14 +40,14 @@ $resultdata = array_unique($consti);
 
                     <?php
                     if ($row['extra'] == "Win") {
-                        print ' <p class="status green"><i class="fa fa-thumbs-o-up"></i></p><p class="">Win</p>';
+                        print ' <p class="status green"><i class="fa fa-thumbs-o-up"></i><span>WIN</span></p>';
                     } else if ($row['extra'] == "Lost")
                     {
-                        print ' <p class="status red"><i class="fa fa-thumbs-o-down"></i></p><p class="">Lost</p>';
+                        print ' <p class="status red"><i class="fa fa-thumbs-o-down"></i><span>LOST</span></p>';
                     }
                     else if ($row['extra'] == "Lead")
                     {
-                        print ' <p class="status green"><i class="fa fa-thumbs-o-yellow"></i></p><p class="">Leading</p>';
+                        print ' <p class="status green"><i class="fa fa-thumbs-o-yellow"></i><span>LEAD</span></p>';
                     }
                     ?>
                 </li>         
