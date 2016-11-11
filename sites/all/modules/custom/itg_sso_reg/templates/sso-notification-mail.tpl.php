@@ -7,7 +7,14 @@
 global $base_url;
 
 $user_id = base64_encode($account->uid);
-$activate_link = $base_url.'/user-activate/'.$user_id;
+$url_info = base64_decode($url_info);
+if (!empty($url_info)) {
+  $activate_url_info = rtrim($url_info,"/");;
+}
+else {
+  $activate_url_info = PARENT_SSO;
+}
+$activate_link = $activate_url_info.'/user-activate/'.$user_id;
 
 ?> 
 
@@ -21,7 +28,7 @@ $activate_link = $base_url.'/user-activate/'.$user_id;
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <tr>
-        <td style="padding: 10px 20px;">Dear User,</td>
+        <td style="padding: 10px 20px;">Dear User, <?php print $activate_link; ?></td>
       </tr>
       <tr>
         <td style="padding: 10px 20px;">You are registered successfully.</td>
