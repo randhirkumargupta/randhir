@@ -3,11 +3,13 @@
  * This is used for widgets setting
  */
 
-Drupal.behaviors.itg_widgets = {
+Drupal.behaviors.itg_budget_predictor = {
     attach: function (context, settings) {
-        $(function ()
+        //alert('hi = ' +Drupal.settings.itg_budget_predictor.settings.basePath);
+        jQuery(function ()
         {
             var isUpdated;
+            var year = Drupal.settings.itg_budget_predictor.settings.year;
             jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
             {
                 connectWith: '.connectedSortable',
@@ -20,7 +22,7 @@ Drupal.behaviors.itg_widgets = {
                         jQuery.ajax(
                                 {
                                     type: "POST",
-                                    url: "ajax/budget-ranking",
+                                    url: Drupal.settings.itg_budget_predictor.settings.basePath + '/ajax/budget-ranking/' + year,
                                     data:
                                             {
                                                 sort1: jQuery("#sortable1").sortable('serialize'),
@@ -79,3 +81,15 @@ function badget_google_plus_share(url, title, img) {
   return false;
 }   
 
+function captureCurrentDiv()
+{
+        html2canvas([document.getElementById('main-container-budget')], {   
+                onrendered: function(canvas)  
+                {
+                        var img = canvas.toDataURL()
+                        jQuery.post("/budget-save", {data: img}, function (file) {
+                            window.location.reload();
+                        });   
+                }
+        });
+}
