@@ -46,11 +46,11 @@
                         }
                         error.appendTo(errorPlaceHolder);
                     },
-                    rules: {                        
+                    rules: {
                         'address': {
                             required: true,
                             alphanumeric: true
-                        },                        
+                        },
                         'zip_code': {
                             required: true,
                             minlength: 6,
@@ -58,10 +58,10 @@
                             number: true
                         }
                     },
-                    messages: {                        
+                    messages: {
                         'address': {
                             required: 'Address field is required.'
-                        },                        
+                        },
                         'zip_code': {
                             required: 'Zip Code field is required.',
                             maxlength: 'Please enter valid Zip Code.',
@@ -80,15 +80,15 @@
                     return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
                 }, "Address must contain only letters, numbers, or dashes.");
             }
-            
+
             // Redirect user to redeem points page after clicking on reset button.
             if ($('body').hasClass('page-product')) {
-              var base_url = Drupal.settings.itg_loyalty_reward.base_url;  
-              $('#product-reset').on('click', function(event) {
-                  event.preventDefault();
-                  test_loader_show();
-                  window.location.href = base_url + '/redeem-points';
-              });
+                var base_url = Drupal.settings.itg_loyalty_reward.base_url;
+                $('#product-reset').on('click', function (event) {
+                    event.preventDefault();
+                    test_loader_show();
+                    window.location.href = base_url + '/redeem-points';
+                });
             }
 
             // Code for points earning callbacks.
@@ -129,10 +129,20 @@
 
             });
             // Display loader onclick of add to cart link.
-            $('.btn-add-cart, .itg-remove-product, .btn-redeem-points').on('click', function () {
+            $('.btn-add-cart, .itg-remove-product, .btn-redeem-points').on('click', function (event) {
+                // Donot sho loader.
                 if (!$(this).hasClass('no-loader')) {
-                  test_loader_show();                  
-                }                
+                    test_loader_show();
+                }
+
+                // Show popup when someone clock on delete button.
+                if ($(this).hasClass('itg-remove-product')) {
+                    var r = confirm("Do you really want to delete this product!");
+                    if (r == false) {
+                      test_loader_hide();  
+                      event.preventDefault();  
+                    }
+                }
             });
 
             function test_loader_show() {
