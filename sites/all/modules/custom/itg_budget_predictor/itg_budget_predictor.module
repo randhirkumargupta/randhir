@@ -67,9 +67,11 @@ function itg_budget_predictor_custom() {
     $settings = array();
     $settings['stopPredictor'] = '1';
     if($budget_status['status'] == 1 && empty($data['file_names'])) {
-        $data['file_name'] = $base_url . '/' . $data['file_names'];
         $settings['stopPredictor'] = '2';
+    } else {
+      $data['file_name'] = $base_url . '/sites/default/files/' . $data['file_names'];
     }
+    
     /* JS library  added to Cheaper dearer */
     $settings['basePath'] = $base_url;
     $settings['year'] = arg(1);
