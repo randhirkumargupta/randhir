@@ -144,8 +144,8 @@ drupal_add_js("jQuery(document).ready(function(){
         infinite: true,    
         autoplay:true,
         dots: false,
-        prevArrow: false,
-        nextArrow: false
+        prevArrow: true,
+        nextArrow: true
     });
 });", array('type' => 'inline', 'scope' => 'footer'));
 ?>
