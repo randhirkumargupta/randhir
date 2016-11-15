@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * @file
  * Default theme implementation to display a node.
@@ -33,53 +34,16 @@
  * 
  * @ingroup themeable
  */
-$sponser_logo = $node->field_sponser_logo[LANGUAGE_NONE][0]['uri'];
 ?>
-<a href="javascript:;" class="close-preview">&nbsp;</a>
-<?php if (!empty($pre_object)) print render($pre_object) ?>
+<?php if (isset($node->op)): ?>
+<h3 class="show">Preview full version</h3>
+<?php endif; ?>
+<a class="close-preview" href="javascript:;"> </a>
+<div class="node node-preview">
+  <div class="field"><div class="field-label">Title: </div><div class="field-items"><?php print $node->title; ?></div></div>
+  <div class="field"><div class="field-label">HTML: </div><div class="field-items"><?php print $node->body[LANGUAGE_NONE][0]['value'] ?></div></div>
+  
 
-<div class='<?php print $classes ?> clearfix' <?php print ($attributes) ?>>
-  <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
-    <div class='column-side'><div class='column-wrapper'>
-  <?php endif; ?>
-
-  <?php if (!empty($submitted)): ?>
-    <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
-  <?php endif; ?>
-
-  <?php if (!empty($links)): ?>
-    <div class='<?php print $hook ?>-links clearfix'>
-      <?php print render($links) ?>
-    </div>
-  <?php endif; ?>
-
-  <?php if ($layout && (!empty($submitted) || !empty($links))): ?>
-    </div></div>
-  <?php endif; ?>
-
-  <?php if ($layout): ?>
-    <div class='column-main'><div class='column-wrapper'>
-  <?php endif; ?>
-  <div class="sponsor-detail-container">
-    <h2>Sponsors</h2>
-    <div class="sponsor-detail">
-      <div class="pic"><?php print theme('image_style', array('style_name' => 'thumbnail', 'path' => $sponser_logo)); ?></div>
-      <div class="detail">
-        <div class="title"><?php print $title; ?></div>
-        <?php print $node->body[LANGUAGE_NONE][0]['value']; ?>
-      </div>
     </div>
   </div>
-
-  <?php if (!empty($title_suffix)) print render($title_suffix); ?>
-
-  <?php if (!empty($content)): ?>
-           
-  <?php endif; ?>
-
-  <?php if ($layout): ?>
-    </div></div>
-  <?php endif; ?>
 </div>
-
-<?php if (!empty($post_object)) print render($post_object) ?>
