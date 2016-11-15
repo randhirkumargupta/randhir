@@ -20,10 +20,17 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
 <div id="page">
   <div class="event-sidebar">
     <header class="header" id="header" role="banner">
-            <section class="header-top" style="background-image: url('<?php echo $banner_image; ?>')">
+            <section class="header-top">
+              <div class="event-header-banner">
+                <img src="<?php echo $banner_image; ?>" alt="">
+              <div class="event-add-header">
+                
               <?php 
                 print itg_event_backend_header_add_block();
               ?>
+              </div>   
+              </div>
+               
               <div class="container header-logo">
                 <?php if ($logo): ?>
                   <div class="logo"></div>

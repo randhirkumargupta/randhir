@@ -1360,7 +1360,7 @@ footer .footer-copyright {
 }
 
 .itg-common-section .droppable {
-  height: 408px;
+  min-height: 408px;
 }
 
 .itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable {
@@ -4014,6 +4014,10 @@ footer .footer-copyright {
 .home_page_poll_widget_block .widget-title {
   position: absolute;
 }
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .get-result {
+  padding-bottom: 10px;
+  color: green;
+}
 
 /*End Poll Landing page*/
 /*CSS for hover effect on anchor for itg-layout-container */
@@ -6309,6 +6313,16 @@ footer .footer-copyright {
 
 /* End of CSS */
 /*CSS start for event page index*/
+.event-sidebar .section.header-top .event-header-banner {
+  position: relative;
+  text-align: center;
+}
+.event-sidebar .section.header-top .event-header-banner .event-add-header {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+}
+
 #block-itg-event-backend-program-tab-block {
   zoom: 1;
 }
