@@ -81,7 +81,7 @@
     })
 
 
-jQuery('.view-content img').live('mouseenter', function (e) {
+jQuery('.view-content #easyPaginate img').live('mouseenter', function (e) {
     var timeout;
       var datathis=jQuery(this);
         var getimageurl = datathis.attr('src');
@@ -117,6 +117,7 @@ jQuery('.view-content img').live('mouseenter', function (e) {
 
      }, 2000 );
      jQuery(e.target).live('mouseleave', function () {
+         jQuery('.image-dim').remove();
          clearTimeout(timeout);
      });
 });
