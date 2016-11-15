@@ -2898,19 +2898,27 @@ footer{
     }
 }
 .poll-banner{ 
-    font-family: $itg-roboto;
-    @include listing-with-image(poll-list,left,20px,pic,detail);
+    font-family: $itg-roboto;    
     ul{
         @extend .list-none;
     }
     .poll-list{            
         padding:0 0 30px 0; 
+        @include clearfix;        
+        .pic{
+            float: left;
+            margin-right: 20px;
+            width: 22%;
+        }
     }
-    .detail{
-        @include clearfix;
-        .detail-content{
-            @include float(left);
-            width: 55%;
+    .detail{          
+        @include font(14px);        
+        line-height: 19px;
+        color: #323232;
+        float: left;
+        padding-right: 10px;
+        width: 41.5%;
+        .detail-content{            
             color:#8a8a8a;
             h4{
                 @include font(18px,24px,$itg-font-bold);
@@ -2920,10 +2928,22 @@ footer{
             .vota, .time{
                 @include font(12px);
             }
+        }        
+        .social-share{
+            display: inline-block;
+            vertical-align: middle;
+            @include social-share;    
+            ul{
+                li{
+                    padding-right: 4px;                    
+                }
+            }
         }
+    }
+    .poll-list{
         .voting-data{
             @include float(right);
-            width: 45%;
+            width: 32.5%;
             .past-poll{
                 li{
                     margin-bottom: 20px;
@@ -2985,7 +3005,7 @@ footer{
                     }
                     .noofvotes, .percentage{
                         float: left;
-                        width: 80px;
+                        width: 70px;
                         padding-left: 20px;
                     }
                     .poll-past-percentage-progess{
@@ -2996,17 +3016,7 @@ footer{
                 }
             }
         }
-        .social-share{
-            display: inline-block;
-            vertical-align: middle;
-            @include social-share;    
-            ul{
-                li{
-                    padding-right: 4px;                    
-                }
-            }
         }
-    }
 }
 .home_page_poll_widget_block{
     .widget-title{
@@ -4951,6 +4961,7 @@ footer{
                         vertical-align: middle;
                         padding-left: 15px;
                         color: #6e6e6e;
+                        font-weight: normal;
                         .speaker-title{
                             font-weight: 700;
                         }                        
