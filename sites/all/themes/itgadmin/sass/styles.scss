@@ -8628,3 +8628,47 @@ div.node{
 }
 .page-user .field-name-field-user-section, 
 .page-admin-people-create .field-name-field-user-section{display: none;}
+.page-manage-budget-list, .page-budget-predictor-list{
+  table{
+    caption{
+      text-align: right;
+      padding-bottom: 5px;
+      a{
+        @extend .btn;
+      }
+    }
+  }
+}
+[id*="itg-manage-budget"]{
+  .form-submit{
+    @extend .btn;
+    margin-left: 30px;
+    & + a{
+      @extend .button;
+    }
+  }
+}
+.view-searchimage .search-img-list img + span{
+  position: relative;
+  margin: 0 0 0 -100px;
+  width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  background: #ccc;
+  padding: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 1px 1px 5px 0 #666;
+}
+.view-searchimage .search-img-list img + div.throbbing{
+  display: inline-block;
+  vertical-align: top;
+}
+.page-created-task-list{
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created{
+    width: 220px;
+  }
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-field_task_team_member_target_id{
+    width: 280px;
+  }
+}
