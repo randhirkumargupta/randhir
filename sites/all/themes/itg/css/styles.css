@@ -6493,7 +6493,7 @@ footer .footer-copyright {
   color: #fff;
 }
 
-#block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2 {
+#block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2, .sponsor-detail h2 {
   font-size: 20px;
   border-bottom: 1px solid #dddddd;
   text-transform: uppercase;
@@ -6771,6 +6771,33 @@ footer .footer-copyright {
   font-weight: 600;
   line-height: 24px;
   margin-bottom: 30px;
+}
+
+.sponsor-detail-container .sponsor-detail {
+  overflow: hidden;
+  padding: 10px;
+}
+.sponsor-detail-container .sponsor-detail .pic {
+  float: left;
+  margin-right: 10px;
+}
+.sponsor-detail-container .sponsor-detail .detail {
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 19px;
+  color: #323232;
+}
+.sponsor-detail-container .pic {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+.sponsor-detail-container .title {
+  font-size: 20px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 26px;
 }
 
 /*CSS end for event page index*/
