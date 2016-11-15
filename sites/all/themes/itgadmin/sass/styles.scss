@@ -8648,3 +8648,19 @@ div.node{
     }
   }
 }
+.view-searchimage .search-img-list img + span{
+  position: relative;
+  margin: 0 0 0 -100px;
+  width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  background: #ccc;
+  padding: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 1px 1px 5px 0 #666;
+}
+.view-searchimage .search-img-list img + div.throbbing{
+  display: inline-block;
+  vertical-align: top;
+}
