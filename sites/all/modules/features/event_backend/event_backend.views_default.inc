@@ -2198,7 +2198,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'event_364x205',
+    'image_style' => 'anchors_landing',
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;

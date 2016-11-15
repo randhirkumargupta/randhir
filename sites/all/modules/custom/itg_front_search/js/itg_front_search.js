@@ -82,6 +82,14 @@
                         speed: 300,
                         slidesToShow: 7,
                         slidesToScroll: 1,
+                         responsive: [  
+                                       {
+                                          breakpoint: 600,
+                                          settings: {
+                                            slidesToShow: 5                                            
+                                          }
+                                        }
+                                      ]
                     });
                 }
                 

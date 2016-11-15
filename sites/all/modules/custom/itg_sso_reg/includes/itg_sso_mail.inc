@@ -5,9 +5,9 @@
  * @param string $to
  * @return string
  */
-function itg_sso_get_mail_content($account, $to) {
+function itg_sso_get_mail_content($account, $to, $url_info) {
   
-   $mail_content = itg_sso_notification_mail_content($account);
+   $mail_content = itg_sso_notification_mail_content($account, $url_info);
 
   $params = array(
       'body' => $mail_content,
@@ -32,6 +32,6 @@ function itg_sso_get_mail_content($account, $to) {
  * @param object $node
  * @return type
  */
-function itg_sso_notification_mail_content($account) {
-  return theme('itg_sso_notification_mail', array('account' => $account));
+function itg_sso_notification_mail_content($account, $url_info) {
+  return theme('itg_sso_notification_mail', array('account' => $account, 'url_info' => $url_info));
 }

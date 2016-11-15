@@ -506,6 +506,19 @@ function itg_common_get_node_title($nid) {
 }
 
 /**
+ * Get node type using nid
+ * @param int $nid
+ * @return string
+ */
+function itg_common_get_node_type($nid) {
+    $query = db_select('node', 'n')
+            ->fields('n', array('type'))
+            ->condition('n.nid', $nid, '=');
+
+    return $query->execute()->fetchField();
+}
+
+/**
  * Get node count.
  * @param string $content_type
  * @param int $uid

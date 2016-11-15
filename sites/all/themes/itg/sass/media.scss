@@ -204,6 +204,44 @@
     /* End css home page*/
     
     
+    /*sider bar css start*/
+    #block-itg-ads-ad-right-sidebar-1{
+        padding: 0;
+    }
+    /*sider bar css end*/
+    
+    /*css start poll page*/
+    .poll-banner{
+        .detail {
+            width: auto;
+            display: block;
+            overflow: hidden;
+            float: none;
+            padding-right: 0px; 
+            .detail-content{
+                h4{
+                    @include font(15px,20px);
+                }
+            }
+        }
+        .poll-list{
+            .pic{
+                width: 145px; 
+                margin-right: 10px;
+            }
+            .voting-data{                
+                float: none;
+                @include calculate-width(1);
+                overflow: hidden;
+                padding-top: 15px;
+            }            
+        }                
+    }
+    
+    /*css end poll page*/    
+    
+    
+
 }   
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
@@ -491,10 +529,17 @@
                 li{
                     padding: 10px; 
                     width:100% !important;
+                    height: auto;
+                    a.video-icon{
+                        @include float(left);
+                    }
                     img{
                         float: left;
                         margin-right: 10px;
                         width: 145px;
+                    }
+                    p{
+                        margin-top:0;
                     }
                 }
                 i{
@@ -593,7 +638,7 @@
     /*css end side bar section for video and photo*/
 
     /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
         .view-content{      
             .photo-list{
                 li{ 
@@ -650,6 +695,108 @@
     }
 }
 /*end event page*/
+
+/*Start css program live page*/
+#block-itg-live-tv-live-tv-video-page .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
+    clear: none;
+}
+/*End css program live page*/
+
+#block-itg-menu-manager-third-level-menu{
+    .col-md-8{
+        display: none;
+    }
+}
+
+/*Start css online archive story page*/
+.view-archive-story{
+    .archive-header{
+        border:none;
+        margin: 0 -15px;
+        #archive-story-date-slider, .archive-calender-custom{
+            float: none;
+            width: 100%;
+        }
+        .archive-calender-custom{
+            text-align: right;
+        }
+        #archive-story-date-slider{
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            ul{
+                padding: 0 20px;
+            }
+            .slick-prev, .slick-next{
+                width: 20px;
+            }         
+        }
+        .archive-calender-custom .views-exposed-form .views-exposed-widget{
+            padding: 10px 0 0 0;
+        }
+    }
+    .view-content li.itg-search-list{
+        border-bottom: 1px solid #ddd;       
+    }
+}
+
+/*End css online archive story page*/
+/*css start poll page*/
+.poll-wrapper{
+    .poll-data{
+         padding: 5px;
+         .poll-banner-image{
+            max-width: 145px;
+            margin-right: 8px;
+         }
+    }
+    .active-poll-title h2{
+        @include font(17px,20px);
+    }
+}
+    .poll-banner{
+        .detail {            
+            .detail-content{
+                h4{
+                    @include font(15px,20px);
+                }
+            }
+        }
+        .poll-list{
+            .pic{
+                
+            }
+            .voting-data{
+                
+            }            
+        }
+        .vota-time.desktop-hide{
+            width: 100%;
+            color: #8a8a8a;
+            font-size: 12px;
+            clear:both;
+            @include calculate-width(1);
+            padding-top: 15px;
+            div{
+                @include display-inline;   
+                margin-bottom: 10px;
+            }
+            .social-share{
+                display: inline-block;
+                vertical-align: middle;
+                @include social-share;    
+                ul{
+                    li{
+                        padding-right: 4px;                    
+                    }
+                }
+            }
+        }
+    }
+    
+    /*css end poll page*/  
+
+
+
 
 }
 
@@ -807,8 +954,51 @@
     }
 }
 /*end event page*/
-
-
+/*css start live tv page*/
+#block-itg-live-tv-live-tv-video-page{
+    .latest-livetv-video .photo-list{    
+    li{
+        padding: 10px;         
+        height: auto;
+        width:100% !important;
+        figure{
+            float: left;
+            margin-right: 10px;
+            width: 145px;
+        }
+    }
+    i.slick-arrow{
+        color: #ccc;
+        font-size: 25px;
+        text-align: center;
+        width: 100%;
+    }
+    }
+    .program-livetv{
+        padding: 10px;
+        .social-icon, .live_tv_video{
+            @include calculate-width(1);
+            @include float(none);
+        }
+        .social-icon {
+            li{
+                @include display-inline;
+                a{
+                    border-bottom: none;
+                    padding: 10px;
+                    i{
+                        @include font(20px);
+                        padding-right: 5px;
+                    }
+                    span{
+                        display: none;
+                    }
+                }                
+            }
+        }
+    }
+}
+/*css end live tv page*/
 }
 @media only screen and (max-width:640px){
     #block-views-anchor-landing-page-block{
@@ -820,7 +1010,7 @@
 
 @media only screen and (max-width:560px){ 
     /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
         .view-content{      
             .photo-list{
                 li{       
@@ -1309,8 +1499,8 @@
     }
     /*CSS End So sorry page*/
     /*CSS Start RHS add block*/
-    #block-itg-ads-ad-right-sidebar-1{    
-        padding: 30px 34px;
+    #block-itg-ads-ad-right-sidebar-1{           
+        @include calculate-width(1);
     }
     /*CSS End RHS add block*/
 

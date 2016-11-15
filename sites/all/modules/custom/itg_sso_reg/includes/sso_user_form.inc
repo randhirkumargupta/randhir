@@ -8,6 +8,10 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   $arg = arg();
   if(!empty($arg[1]) && $arg[1] == 'domain_info') {
     $appnd_to_lnk = '/'.$arg[1];
+    $domain_arg = $arg[1];
+  }
+  if(!empty($arg[1]) && $arg[1] != 'domain_info') {
+    $url_arg = $arg[1];
   }
 // If $form_state['step'] is not set, we set it to 1
   $form_state['step'] = isset($form_state['step']) ? $form_state['step'] : 1;
@@ -28,6 +32,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   // Add a wrapper div that will be used by the Form API to update the form using AJAX
   $form['#prefix'] = '<div id="itg_sso_reg_multistep_form">';
   $form['#suffix'] = $step_ext_div . '</div>';
+  $form['#attributes'] = array('autocomplete' => 'off');
 
   // Depending on which step of the form we are on, we output different form fields
   switch ($form_state['step']) {
@@ -46,7 +51,17 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#id' => '',
         '#type' => 'hidden',
-        '#value' => $arg[1],
+        '#value' => $domain_arg,
+        '#attributes' => array('placeholder' => t('')),
+        
+      );
+      
+      $form['url_info'] = array(
+        '#title' => '',
+        '#description' => '',
+        '#id' => '',
+        '#type' => 'hidden',
+        '#value' => $url_arg,
         '#attributes' => array('placeholder' => t('')),
         
       );
@@ -488,7 +503,10 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
         if (empty($form_state['values']['mobile'])) {
           // _user_mail_notify($op, $account);
           if (function_exists(itg_sso_get_mail_content)) {
-            $mail_content = itg_sso_get_mail_content($account, $mail);
+            if(!empty($form_state['values']['url_info'])) {
+              $url_info = $form_state['values']['url_info'];
+            }
+            $mail_content = itg_sso_get_mail_content($account, $mail, $url_info);
           }
           itg_user_mapping_activate($account->uid);
         }
