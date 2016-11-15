@@ -272,7 +272,7 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).ready(function () {  
- jQuery('.add-more-block-fornt').live('click', function() {
+ jQuery('.add-more-block-front').live('click', function() {
  	var section_ids="";
         var elementobj=jQuery(this);
         jQuery(this).html('<img src="./sites/all/themes/itg/images/tab-loading.gif"/>')
