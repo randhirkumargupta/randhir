@@ -4897,6 +4897,19 @@ footer{
 }
 /* End of CSS */
 /*CSS start for event page index*/
+.event-sidebar {
+    .section.header-top{               
+        .event-header-banner{            
+            @include pos(relative);
+            text-align: center;
+            .event-add-header{
+                position: absolute;
+                top: 45px;
+                width: 100%;
+            }
+        }        
+    }
+}
 #block-itg-event-backend-program-tab-block{    
     ul{
         @extend .list-none;

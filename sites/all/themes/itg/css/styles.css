@@ -6313,6 +6313,16 @@ footer .footer-copyright {
 
 /* End of CSS */
 /*CSS start for event page index*/
+.event-sidebar .section.header-top .event-header-banner {
+  position: relative;
+  text-align: center;
+}
+.event-sidebar .section.header-top .event-header-banner .event-add-header {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+}
+
 #block-itg-event-backend-program-tab-block {
   zoom: 1;
 }
