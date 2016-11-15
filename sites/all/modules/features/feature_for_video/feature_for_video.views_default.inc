@@ -924,6 +924,8 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['label'] = '';
   $handler->display->display_options['fields']['field_story_expert_description']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_expert_description']['alter']['max_length'] = '120';
+  $handler->display->display_options['fields']['field_story_expert_description']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
   /* Field: File: Upload date */
   $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';

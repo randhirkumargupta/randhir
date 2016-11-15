@@ -6446,6 +6446,13 @@ div.node{
       width: 120px;
       height: 120px;
       border: 1px solid #d9d9d9;
+      img {
+        height: 67%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
       label{
         background: url(../images/default_for_all.png) no-repeat left top / 100% auto;
         font-size: 12px;
@@ -8380,11 +8387,11 @@ div.node{
               > .image-widget-data{
                 position: static !important;
                 .form-submit[value="Remove"]{
-                  left: 114px;
+                  left: 114px !important;
                   width: 20px;
                   height: 20px;
                   background: url(../images/cross_small.png) center center no-repeat;
-                  text-indent: -9999;
+                  text-indent: -9999px;
                 }
               }
             }
@@ -8411,11 +8418,11 @@ div.node{
             > .image-widget-data{
               position: static !important;
               .form-submit[value="Remove"]{
-                left: 114px;
+                left: 114px !important;
                 width: 20px;
                 height: 20px;
                 background: url(../images/cross_small.png) center center no-repeat;
-                text-indent: -9999;
+                text-indent: -9999px;
               }
             }
           }
@@ -8619,3 +8626,5 @@ div.node{
     @extend .Browse-upload;
   }
 }
+.page-user .field-name-field-user-section, 
+.page-admin-people-create .field-name-field-user-section{display: none;}

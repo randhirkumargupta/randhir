@@ -7,6 +7,10 @@ if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $shr = '';
   }
 }
+
+if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+$referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
+}
 ?>
 <?php if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) { ?>
 <div class="social-share">
@@ -32,7 +36,7 @@ if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
                  else
                  {
                    $forgot = 'forgot-password';
-                   $signup = 'signup';
+                   $signup = 'signup'.$referer;
                  }
           print '<div class="bottom-link">'. l('Forgot Your Password?',$forgot, array('attributes' => array('class' => 'sso-forgot-link')));
           print l('New Here ? Signup',$signup, array('attributes' => array('class' => 'sso-register-link')));

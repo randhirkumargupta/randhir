@@ -209,6 +209,26 @@
         padding: 0;
     }
     /*sider bar css end*/
+    
+    /*css start poll page*/
+    .poll-banner{
+        .detail {
+            .detail-content, .voting-data{
+                @include float(none);
+                @include calculate-width(1);
+                margin-bottom: 20px;
+            }
+        }
+        .voting-data{
+            margin-bottom: 0px;
+            padding-top:20px;
+            border-top: 1px solid #ececec;
+        }
+    }
+    
+    /*css end poll page*/    
+    
+    
 
 }   
 @media only screen and (max-width:991px){
@@ -676,6 +696,38 @@
     }
 }
 
+/*Start css online archive story page*/
+.view-archive-story{
+    .archive-header{
+        border:none;
+        margin: 0 -15px;
+        #archive-story-date-slider, .archive-calender-custom{
+            float: none;
+            width: 100%;
+        }
+        .archive-calender-custom{
+            text-align: right;
+        }
+        #archive-story-date-slider{
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            ul{
+                padding: 0 20px;
+            }
+            .slick-prev, .slick-next{
+                width: 20px;
+            }         
+        }
+        .archive-calender-custom .views-exposed-form .views-exposed-widget{
+            padding: 10px 0 0 0;
+        }
+    }
+    .view-content li.itg-search-list{
+        border-bottom: 1px solid #ddd;       
+    }
+}
+
+/*End css online archive story page*/
 
 }
 
