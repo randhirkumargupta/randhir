@@ -7044,8 +7044,7 @@ div.node{
     .active-poll-title{
       background-color: #000;
       float: left;
-      width: 100%;
-      height: 68px;
+      width: 100%;      
       margin-bottom: 11px;
       overflow: hidden;
       h2{
@@ -8310,7 +8309,6 @@ div.node{
     }
   }
 }
-
 .node-photogallery-form{
   .form-type-plupload {
     margin-left: 220px;
@@ -8605,7 +8603,6 @@ div.node{
     }
   }
 }
-
 [id*="domain-form"]{
   .form-submit{
     @extend .btn;
@@ -8672,3 +8669,4 @@ div.node{
     width: 280px;
   }
 }
+.browse-video-form .ftp_browse_field div.description{padding: 3px 0 0 200px;}
