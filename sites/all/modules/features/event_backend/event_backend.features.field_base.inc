@@ -619,7 +619,7 @@ function event_backend_field_default_field_bases() {
     'module' => 'color_field',
     'settings' => array(
       'allow_empty' => 0,
-      'palette' => '#a00606',
+      'palette' => '#eee',
       'show_buttons' => 0,
       'show_input' => 1,
       'show_palette' => 1,
