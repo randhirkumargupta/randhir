@@ -151,8 +151,8 @@ drupal_add_js("jQuery(document).ready(function(){
         infinite: true,    
         autoplay:true,
         dots: false,
-        prevArrow: false,
-        nextArrow: false
+        prevArrow: '<i class=\"fa fa-angle-left slick-prev\"></i>',
+        nextArrow: '<i class=\"fa fa-angle-right slick-next\"></i>'
     });
 });", array('type' => 'inline', 'scope' => 'footer'));
 ?>
