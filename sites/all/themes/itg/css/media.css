@@ -217,15 +217,27 @@
 
   /*sider bar css end*/
   /*css start poll page*/
-  .poll-banner .detail .detail-content, .poll-banner .detail .voting-data {
+  .poll-banner .detail {
+    width: auto;
+    display: block;
+    overflow: hidden;
+    float: none;
+    padding-right: 0px;
+  }
+  .poll-banner .detail .detail-content h4 {
+    font-size: 15px;
+    font-size: 0.9375rem;
+    line-height: 20px;
+  }
+  .poll-banner .poll-list .pic {
+    width: 145px;
+    margin-right: 10px;
+  }
+  .poll-banner .poll-list .voting-data {
     float: none;
     width: 100%;
-    margin-bottom: 20px;
-  }
-  .poll-banner .voting-data {
-    margin-bottom: 0px;
-    padding-top: 20px;
-    border-top: 1px solid #ececec;
+    overflow: hidden;
+    padding-top: 15px;
   }
 
   /*css end poll page*/
@@ -688,6 +700,89 @@
   }
 
   /*End css online archive story page*/
+  /*css start poll page*/
+  .poll-wrapper .poll-data {
+    padding: 5px;
+  }
+  .poll-wrapper .poll-data .poll-banner-image {
+    max-width: 145px;
+    margin-right: 8px;
+  }
+  .poll-wrapper .active-poll-title h2 {
+    font-size: 17px;
+    font-size: 1.0625rem;
+    line-height: 20px;
+  }
+
+  .poll-banner .detail .detail-content h4 {
+    font-size: 15px;
+    font-size: 0.9375rem;
+    line-height: 20px;
+  }
+  .poll-banner .vota-time.desktop-hide {
+    width: 100%;
+    color: #8a8a8a;
+    font-size: 12px;
+    clear: both;
+    width: 100%;
+    padding-top: 15px;
+  }
+  .poll-banner .vota-time.desktop-hide div {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul {
+    list-style-type: none;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li {
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 8px;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a {
+    background: #000;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    display: block;
+    color: #fff;
+    text-align: center;
+    line-height: 23px;
+  }
+}
+@media only screen and (max-width: 768px) and (min-width: 768px) {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.share {
+    color: #d0d0d0;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.share, .poll-banner .vota-time.desktop-hide .social-share ul li a.google {
+    background: transparent;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.facebook {
+    background: #0b4887;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.twitter {
+    background: #05a3d2;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.google {
+    background: url(../images/google-icon.jpg) no-repeat center center;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li {
+    padding-right: 4px;
+  }
+
+  /*css end poll page*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
