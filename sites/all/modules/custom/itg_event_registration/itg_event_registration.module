@@ -134,7 +134,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     //$form['title']['#description'] = t('Please enter first name.');
 
     $destination = array('event-registration', array('query' => array('event_id' => $current_event_nid)));
-    
+
     if ($form_state['storage']['step'] != 'step_erf_basic_details') {
       $form['actions']['cancel'] = array(
           '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
@@ -245,6 +245,12 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   // Add JS for Event Registration
   drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
 
+   $form['event_registration_title'] = array(
+        '#type' => 'item',
+        '#markup' => '<div class="event-registration-title"><h2>REGISTRATION</h2></div>',
+        '#weight' => -100,
+      );
+  
   // Hide submit button for all steps except last one
   if ($form_state['storage']['step'] == 'step_erf_company_details') {
     unset($form['actions']['submit']);
