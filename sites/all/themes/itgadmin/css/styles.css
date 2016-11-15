@@ -9387,3 +9387,7 @@ div.node #comments h2 {
 .page-created-task-list .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-field_task_team_member_target_id {
   width: 280px;
 }
+
+.browse-video-form .ftp_browse_field div.description {
+  padding: 3px 0 0 200px;
+}
