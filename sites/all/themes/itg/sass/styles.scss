@@ -5056,7 +5056,7 @@ footer{
         }
     }
 }
-#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail{
     h2{
         font-size: 20px;
         border-bottom: 1px solid $border-color;
@@ -5327,6 +5327,16 @@ footer{
     font-weight: 600;
     line-height: 24px;
     margin-bottom: 30px;
+}
+.sponsor-detail-container{
+    @include listing-with-image(sponsor-detail,left,10px,pic,detail);
+    .pic{
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+    .title{
+        @include font(20px,26px,700);
+    }
 }
 
 /*CSS end for event page index*/
