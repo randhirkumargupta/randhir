@@ -274,7 +274,9 @@ jQuery(window).load(function () {
 jQuery(document).ready(function () {  
  jQuery('.add-more-block-fornt').live('click', function() {
  	var section_ids="";
- 	jQuery(this).remove();
+        var elementobj=jQuery(this);
+        jQuery(this).html('<img src="./sites/all/themes/itg/images/tab-loading.gif"/>')
+ 	//jQuery(this).remove();
  	jQuery('.sectioncart').each(function(){
  		 section_ids=jQuery(this).attr('id');
  	});
@@ -283,7 +285,7 @@ jQuery(document).ready(function () {
             url: Drupal.settings.basePath + 'gethomecarddata',
             type: 'post',
             beforeSend: function() {
-               jQuery('#widget-ajex-loader').show();
+              // jQuery('#widget-ajex-loader').show();
             },
             data: {'section_ids': section_ids,},
             success: function(data) {
@@ -295,7 +297,7 @@ jQuery(document).ready(function () {
               jQuery('#second-section-card').append(data); 
 
           }
-           jQuery('#widget-ajex-loader').hide();
+           elementobj.remove();
            //  alert(data);  
 
             },

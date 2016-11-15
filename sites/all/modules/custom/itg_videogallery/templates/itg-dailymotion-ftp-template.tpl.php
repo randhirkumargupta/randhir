@@ -56,3 +56,4 @@ $file_field_name = $_GET['file_filed_name'];
  drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_dailymotion.js', array('weight' => 1));
  
 ?>
+<script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery.easyPaginate.js"></script>
