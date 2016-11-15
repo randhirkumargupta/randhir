@@ -4898,7 +4898,7 @@ footer{
 /* End of CSS */
 /*CSS start for event page index*/
 .event-sidebar {
-    .section.header-top{               
+    .header-top{               
         .event-header-banner{            
             @include pos(relative);
             text-align: center;
@@ -4908,6 +4908,28 @@ footer{
                 width: 100%;
             }
         }        
+    }
+}
+.view-event-photo-slider{
+    .slick-slider {
+        .slick-prev, .slick-next{
+            background: #000 none repeat scroll 0 0;
+            color: #fff;
+            cursor: pointer;
+            font-size: 25px;
+            height: 25px;
+            line-height: 25px;
+            margin-top: -12px;
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            width: 25px;
+            z-index: 1;
+        }
+        .slick-next{
+            right: 0;
+            left: auto;
+        }
     }
 }
 #block-itg-event-backend-program-tab-block{    
@@ -5152,7 +5174,10 @@ footer{
                     padding-left: 15px;
                     &.title, &.designation{
                         @include font(12px);
-                    }                    
+                    }
+                    &.designation{
+                        font-weight: normal;
+                    }
                 }
                 &:nth-child(1){
                     width: 28%;
