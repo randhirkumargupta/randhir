@@ -3,6 +3,7 @@
 module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_mail');
 module_load_include('inc', 'itg_sso_reg', 'includes/common_fn');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_form');
+module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_change_password');
 module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 
 /*
@@ -49,6 +50,14 @@ function itg_sso_reg_menu() {
     'title' => 'Sign up',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sso_reg_multistep_form'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['sso-user/change-password'] = array(
+    'title' => 'Change Password',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sso_reg_password_form'),
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -106,7 +115,7 @@ function itg_sso_reg_permission() {
 function itg_sso_reg_theme($existing, $type, $theme, $path) {
   $themes = array(
     'itg_sso_notification_mail' => array(
-      'variables' => array('account' => NULL),
+      'variables' => array('account' => NULL, 'url_info' => NULL),
       'template' => 'templates/sso-notification-mail',
     )
   );

@@ -50,6 +50,12 @@ function itg_budget_predictor_schema() {
             'type' => 'int',
             'not null' => TRUE,
           ),
+          'file_name' => array(
+            'description' => t('file name'),
+            'type' => 'varchar',
+            'length' => '255',
+            'not null' => TRUE,
+          ),
           'status' => array(
             'description' => t('status'),
             'type' => 'int',
@@ -71,6 +77,54 @@ function itg_budget_predictor_schema() {
         ),
         'primary key' => array('budget_id'),
       );
+    
+    // manage budget
+    $schema['itg_manage_budget'] = array(
+        'description' => 'Table to manage budget',
+        'fields' => array(
+          'id' => array(
+            'description' => t('budget_id'),
+            'type' => 'serial',
+            'not null' => TRUE,
+          ),
+          'budget_title' => array(
+            'description' => t('Title'),
+            'type' => 'varchar',
+            'length' => '255',
+            'not null' => TRUE,
+          ),
+          'budget_description' => array(
+            'description' => t('Description'),
+            'type' => 'text',
+            'not null' => true,
+          ),
+          'budget_message' => array(
+            'description' => t('Success message'),
+            'type' => 'text',
+            'not null' => true,
+          ),
+          'budget_year' => array(
+            'description' => t('Year'),
+            'type' => 'varchar',
+            'length' => '100',
+            'not null' => TRUE,
+          ),  
+          'status' => array(
+            'description' => t('status'),
+            'type' => 'int',
+            'size' => 'tiny',
+            'not null' => TRUE,
+          ),
+          'created_date' => array(
+            'description' => t('Created date'),
+            'type' => 'varchar',
+            'length' => '100',
+            'not null' => TRUE,
+          ),
+        ),
+        'primary key' => array('id'),
+      );
+    
     return $schema;
 }
 
@@ -79,6 +133,7 @@ function itg_budget_predictor_schema() {
  */
 function itg_budget_predictor_uninstall() {
     drupal_uninstall_schema('itg_budget_predictor');
+    drupal_uninstall_schema('itg_manage_budget');
 }
 
 /**

@@ -16,6 +16,7 @@
             array('@remaining' => $data['remaining_point'])), 'redeem-points', array('html' => TRUE)) . '</span>';
       ?>        
     </div>
+  <div class="overflow-x-auto">
     <table class="unit-description">
       <thead>
         <tr>
@@ -39,5 +40,6 @@
         </tr>
       </tbody>     
     </table>
+  </div>
 </div>
 

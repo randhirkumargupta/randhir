@@ -182,6 +182,28 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   $user_fields = user_load($user->uid);
+  
+  // alter the section for election xml 
+  if ($form_id == 'election_graph_xml_node_form') {
+    
+   
+    $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+    foreach ($tax as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($tax[$key]);
+      }
+      
+    }
+
+    $op = array("_none" => "Select Category");
+    foreach ($tax as $key => $val) {
+      $op[$val->tid] = $val->name;
+    }
+
+    $form['field_section']['#title'] = array('All' => '- Any -');
+    $form['field_section']['und']['#options'] = $op;
+  }
 
   if ($form_id == 'ugc_node_form') {
     if ($user->uid != '1') {

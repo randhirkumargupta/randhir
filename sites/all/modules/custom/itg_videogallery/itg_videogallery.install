@@ -134,3 +134,16 @@ function itg_videogallery_uninstall() {
   variable_del('dailymotion_secretkey');
   drupal_set_message(t('Video Gallery module was successfully uninstalled.'));
 }
+
+/**
+ * Implements hook_update_n()
+ * Add another coloumn in "dailymotion_response_details" table
+ */
+function itg_videogallery_update_751(){
+  $field = array(
+    'type' => 'text',
+    'size' => 'big',
+    'description' => 'video thumbnail url from ',
+  );
+  db_add_field('dailymotion_response_details', 'dailymotion_thumb_url', $field);
+}

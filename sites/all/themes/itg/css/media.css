@@ -152,6 +152,95 @@
   }
 
   /* Event page registration end*/
+  /*start css footer*/
+  footer .footer-top .footer-top-link {
+    float: none;
+  }
+  footer .footer-top .footer-social-link {
+    width: 280px;
+    position: relative;
+    margin: 0 auto;
+    float: none;
+    padding-right: 0;
+  }
+  footer .footer-top .footer-social-link .globle-search {
+    right: 50px;
+  }
+
+  /*end css footer*/
+  /*start css home page*/
+  .top-block .top-colum-2, .top-block .top-colum-1 {
+    float: left;
+  }
+
+  .top-block .top-colum-2 {
+    width: 62%;
+  }
+
+  .top-block .top-colum-1 {
+    width: 38%;
+  }
+
+  .top-block .top-colum-3 {
+    width: 100%;
+  }
+  .top-block .top-colum-3 > .itg-widget-parent {
+    float: left;
+    width: 48%;
+  }
+  .top-block .top-colum-3 .trending-list {
+    float: right;
+    width: 48%;
+  }
+
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    width: 50%;
+    float: left;
+  }
+
+  .watch-video-home .osscar-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+
+  .itg-layout-container .itg-top-section .top-colum-2 .droppable {
+    height: auto;
+  }
+  .itg-layout-container .itg-h450-section .droppable {
+    height: 350px;
+  }
+
+  /* End css home page*/
+  /*sider bar css start*/
+  #block-itg-ads-ad-right-sidebar-1 {
+    padding: 0;
+  }
+
+  /*sider bar css end*/
+  /*css start poll page*/
+  .poll-banner .detail {
+    width: auto;
+    display: block;
+    overflow: hidden;
+    float: none;
+    padding-right: 0px;
+  }
+  .poll-banner .detail .detail-content h4 {
+    font-size: 15px;
+    font-size: 0.9375rem;
+    line-height: 20px;
+  }
+  .poll-banner .poll-list .pic {
+    width: 145px;
+    margin-right: 10px;
+  }
+  .poll-banner .poll-list .voting-data {
+    float: none;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 15px;
+  }
+
+  /*css end poll page*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -439,11 +528,18 @@
   .oscar-layout-page .oscar-slider .bottom-slider li {
     padding: 10px;
     width: 100% !important;
+    height: auto;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li a.video-icon {
+    float: left;
   }
   .oscar-layout-page .oscar-slider .bottom-slider li img {
     float: left;
     margin-right: 10px;
     width: 145px;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li p {
+    margin-top: 0;
   }
   .oscar-layout-page .oscar-slider .bottom-slider i {
     color: #ccc;
@@ -523,14 +619,14 @@
 
   /*css end side bar section for video and photo*/
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 33.33333%;
     padding: 15px 10px;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .page-sports-video .view-content .photo-list li:nth-child(4n+1), .page-sports-photo .view-content .photo-list li:nth-child(4n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .page-sports-video .view-content .photo-list li:nth-child(4n+1), .page-sports-photo .view-content .photo-list li:nth-child(4n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(4n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
     clear: left;
   }
 
@@ -555,6 +651,138 @@
   }
 
   /*css end sport page*/
+  /*start event page*/
+  #block-views-program-schedule-block-3 .views-row:nth-child(4n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(3n+1) {
+    clear: left;
+  }
+
+  /*end event page*/
+  /*Start css program live page*/
+  #block-itg-live-tv-live-tv-video-page .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
+    clear: none;
+  }
+
+  /*End css program live page*/
+  #block-itg-menu-manager-third-level-menu .col-md-8 {
+    display: none;
+  }
+
+  /*Start css online archive story page*/
+  .view-archive-story .archive-header {
+    border: none;
+    margin: 0 -15px;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider, .view-archive-story .archive-header .archive-calender-custom {
+    float: none;
+    width: 100%;
+  }
+  .view-archive-story .archive-header .archive-calender-custom {
+    text-align: right;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider ul {
+    padding: 0 20px;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider .slick-prev, .view-archive-story .archive-header #archive-story-date-slider .slick-next {
+    width: 20px;
+  }
+  .view-archive-story .archive-header .archive-calender-custom .views-exposed-form .views-exposed-widget {
+    padding: 10px 0 0 0;
+  }
+  .view-archive-story .view-content li.itg-search-list {
+    border-bottom: 1px solid #ddd;
+  }
+
+  /*End css online archive story page*/
+  /*css start poll page*/
+  .poll-wrapper .poll-data {
+    padding: 5px;
+  }
+  .poll-wrapper .poll-data .poll-banner-image {
+    max-width: 145px;
+    margin-right: 8px;
+  }
+  .poll-wrapper .active-poll-title h2 {
+    font-size: 17px;
+    font-size: 1.0625rem;
+    line-height: 20px;
+  }
+
+  .poll-banner .detail .detail-content h4 {
+    font-size: 15px;
+    font-size: 0.9375rem;
+    line-height: 20px;
+  }
+  .poll-banner .vota-time.desktop-hide {
+    width: 100%;
+    color: #8a8a8a;
+    font-size: 12px;
+    clear: both;
+    width: 100%;
+    padding-top: 15px;
+  }
+  .poll-banner .vota-time.desktop-hide div {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul {
+    list-style-type: none;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li {
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 8px;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a {
+    background: #000;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    display: block;
+    color: #fff;
+    text-align: center;
+    line-height: 23px;
+  }
+}
+@media only screen and (max-width: 768px) and (min-width: 768px) {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.share {
+    color: #d0d0d0;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.share, .poll-banner .vota-time.desktop-hide .social-share ul li a.google {
+    background: transparent;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.facebook {
+    background: #0b4887;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.twitter {
+    background: #05a3d2;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.google {
+    background: url(../images/google-icon.jpg) no-repeat center center;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li {
+    padding-right: 4px;
+  }
+
+  /*css end poll page*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -663,6 +891,77 @@
   }
 
   /*End event page*/
+  /*Home page start css*/
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    width: 100%;
+    float: none;
+  }
+
+  .big-news .big-story-col-2 {
+    padding-top: 15px;
+  }
+
+  .top-block .top-colum-3 > .itg-widget-parent {
+    float: none;
+    width: 100%;
+  }
+  .top-block .top-colum-3 .trending-list {
+    float: none;
+    width: 100%;
+  }
+
+  /*Home page end css*/
+  /*start event page*/
+  #block-views-program-schedule-block-3 .views-row:nth-child(3n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*end event page*/
+  /*css start live tv page*/
+  #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list li {
+    padding: 10px;
+    height: auto;
+    width: 100% !important;
+  }
+  #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list li figure {
+    float: left;
+    margin-right: 10px;
+    width: 145px;
+  }
+  #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list i.slick-arrow {
+    color: #ccc;
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv {
+    padding: 10px;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon, #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+    width: 100%;
+    float: none;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li {
+    display: inline-block;
+    vertical-align: top;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li a {
+    border-bottom: none;
+    padding: 10px;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li a i {
+    font-size: 20px;
+    font-size: 1.25rem;
+    padding-right: 5px;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li a span {
+    display: none;
+  }
+
+  /*css end live tv page*/
 }
 @media only screen and (max-width: 640px) {
   #block-views-anchor-landing-page-block .anchor-left {
@@ -671,13 +970,13 @@
 }
 @media only screen and (max-width: 560px) {
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 50%;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1), .page-sports-video .view-content .photo-list li:nth-child(2n+1), .page-sports-photo .view-content .photo-list li:nth-child(2n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1), .page-sports-video .view-content .photo-list li:nth-child(2n+1), .page-sports-photo .view-content .photo-list li:nth-child(2n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(2n+1) {
     clear: left;
   }
 
@@ -690,6 +989,16 @@
   #block-views-anchor-landing-page-block .anchor-right {
     padding-top: 15px;
   }
+
+  /*start event page*/
+  #block-views-program-schedule-block-3 .views-row:nth-child(2n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(1n+1) {
+    clear: left;
+  }
+
+  /*end event page*/
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {
@@ -1190,7 +1499,7 @@
   /*CSS End So sorry page*/
   /*CSS Start RHS add block*/
   #block-itg-ads-ad-right-sidebar-1 {
-    padding: 30px 34px;
+    width: 100%;
   }
 
   /*CSS End RHS add block*/
@@ -1273,25 +1582,6 @@
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
-  .top-block .top-colum-2 {
-    width: 100%;
-    margin-bottom: 50px;
-  }
-
-  .top-block .top-colum-1, .top-block .top-colum-3 {
-    width: 50%;
-    float: left;
-  }
-
-  .big-news .big-story-col-1, .big-news .big-story-col-2 {
-    width: 100%;
-  }
-
-  .big-news .big-story-col-2 {
-    padding-top: 20px;
-    padding-left: 15px;
-  }
-
   .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget {
     overflow: scroll;
     height: 663px;
