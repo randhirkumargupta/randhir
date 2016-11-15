@@ -3560,6 +3560,7 @@ body.has-cart-popup{
                     }
                 }
             }
+            @include pager;
         }
     }
 }
@@ -3940,7 +3941,9 @@ article.node-mega-review-critic{
     padding-left: 15px;
   }
 }
-
+.overflow-x-auto{
+  overflow-x: auto;
+}
 
 
 /* Responsive CSS Personalization pages */
@@ -4153,11 +4156,28 @@ article.node-mega-review-critic{
       }
     }
   }  
+  .page-personalization-my-following #block-views-follow-tags-block, 
+  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; padding: 50px 0 0;}
+  #block-itg-personalization-user-my-point{
+    .header-point{
+      padding: 20px 0;
+      span{
+        padding: 5px 0;
+        display: block;
+        & + span{
+          &:before{display: none;}
+        }
+      }
+    }
+  }
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 
   .photos-videos-wrapper .movie-photos{
     width: 100%;
     padding: 0;
+  }
+  #block-itg-personalization-user-my-point .unit-description th:first-child{
+    min-width: 240px;
   }
 }
