@@ -216,6 +216,19 @@
   }
 
   /*sider bar css end*/
+  /*css start poll page*/
+  .poll-banner .detail .detail-content, .poll-banner .detail .voting-data {
+    float: none;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .poll-banner .voting-data {
+    margin-bottom: 0px;
+    padding-top: 20px;
+    border-top: 1px solid #ececec;
+  }
+
+  /*css end poll page*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -644,6 +657,37 @@
   #block-itg-menu-manager-third-level-menu .col-md-8 {
     display: none;
   }
+
+  /*Start css online archive story page*/
+  .view-archive-story .archive-header {
+    border: none;
+    margin: 0 -15px;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider, .view-archive-story .archive-header .archive-calender-custom {
+    float: none;
+    width: 100%;
+  }
+  .view-archive-story .archive-header .archive-calender-custom {
+    text-align: right;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider ul {
+    padding: 0 20px;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider .slick-prev, .view-archive-story .archive-header #archive-story-date-slider .slick-next {
+    width: 20px;
+  }
+  .view-archive-story .archive-header .archive-calender-custom .views-exposed-form .views-exposed-widget {
+    padding: 10px 0 0 0;
+  }
+  .view-archive-story .view-content li.itg-search-list {
+    border-bottom: 1px solid #ddd;
+  }
+
+  /*End css online archive story page*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/

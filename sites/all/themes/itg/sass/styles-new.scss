@@ -3560,6 +3560,7 @@ body.has-cart-popup{
                     }
                 }
             }
+            @include pager;
         }
     }
 }
@@ -3940,7 +3941,9 @@ article.node-mega-review-critic{
     padding-left: 15px;
   }
 }
-
+.overflow-x-auto{
+  overflow-x: auto;
+}
 
 
 /* Responsive CSS Personalization pages */
@@ -3998,6 +4001,10 @@ article.node-mega-review-critic{
         padding-left: 10px;
         height: auto;
         position: static;
+      }
+      span.error{
+        position: static;
+        padding-left: 0;
       }
     }
     .form-type-textarea{
@@ -4060,14 +4067,14 @@ article.node-mega-review-critic{
         top: 27px;
       }
     }
-    .form-field-type-image{
+    .form-field-type-image, .field-type-image{
       .image-preview + .image-widget-data{
         position: relative;
         span.file{
           font-size: 12px;
           left: 0;
           overflow: hidden;
-          padding: 80px 0 0;
+          padding: 75px 0 0;
           position: absolute;
           text-overflow: ellipsis;
           top: 0;
@@ -4091,6 +4098,7 @@ article.node-mega-review-critic{
           label{display: none;}
           & + .form-type-textfield{
             top: 49px;
+            margin: 0 !important;
           }
           .form-text{
             height: 26px;
@@ -4113,11 +4121,63 @@ article.node-mega-review-critic{
     margin-left: 0;
     border-top: 1px solid #ddd;
   }
+  #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item{
+    margin-top: 0;
+  }
+  #content #block-formblock-ugc .node-ugc-form table td > .form-submit[value="Remove"], 
+  #content #block-formblock-ugc .node-ugc-form table td .ajax-new-content > .form-submit[value="Remove"]{position: static;}
+  .view-personalization-my-preferences{
+    #views-form-personalization-my-preferences-block{
+      .personalization-low-high{
+        padding: 30px 0 0;
+      }
+      table{
+        width: 100%;
+        tr{
+          display: inline-block;
+          padding-bottom: 20px;
+          vertical-align: top;
+          width: 100%;
+        }
+        td{
+          padding: 10px 0;
+          display: block;
+          &.views-field-name{
+            width: auto;
+            padding: 0;
+          }
+        }
+      }
+      .form-actions{
+        .form-submit, .form-reset{
+          background-size: 100% 100%;
+          width: 120px;
+        }
+      }
+    }
+  }  
+  .page-personalization-my-following #block-views-follow-tags-block, 
+  .page-personalization-my-following #block-views-follow-tags-block-1{width: 100%; padding: 50px 0 0;}
+  #block-itg-personalization-user-my-point{
+    .header-point{
+      padding: 20px 0;
+      span{
+        padding: 5px 0;
+        display: block;
+        & + span{
+          &:before{display: none;}
+        }
+      }
+    }
+  }
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 
   .photos-videos-wrapper .movie-photos{
     width: 100%;
     padding: 0;
+  }
+  #block-itg-personalization-user-my-point .unit-description th:first-child{
+    min-width: 240px;
   }
 }

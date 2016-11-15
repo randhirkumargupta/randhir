@@ -1,0 +1,62 @@
+<?php
+
+/** 
+ * @file
+ *   Display front user reports to administrator user.
+ */
+
+/**
+ * Implements hook_init().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_init() {
+  
+}
+
+/**
+ * Implements hook_permission().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_permission() {
+  return array(
+    'view report dashboard' => array(
+      'title' => t('ITG Reports')
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_menu() {
+  // Menu links for cms report user dashboard.
+  $items['itg-report-dashboard'] = array(
+    'title' => 'User Dashboard',
+    'page callback' => 'itg_report_user_dashboard',
+    'access arguments' => array('view report dashboard'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_reports.helper.inc',
+  );
+  
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_reports_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'itg_reports_dashboard' => array(
+      'variables' => array('data' => NULL),
+      'template' => 'templates/itg-reports-dashboard',
+    ),    
+  );
+
+  return $themes;
+}
+

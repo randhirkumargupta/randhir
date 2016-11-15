@@ -30,7 +30,7 @@ function feature_for_live_tv_integration_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'Web' => 'Web',
-        'Mobile' => 'Mobile',
+        'Web Mobile' => 'Web Mobile',
         'iOS' => 'iOS',
         'Android' => 'Android',
         'Window' => 'Window',
