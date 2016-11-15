@@ -71,7 +71,6 @@ function itg_budget_predictor_custom() {
     } else {
       $data['file_name'] = $base_url . '/sites/default/files/' . $data['file_names'];
     }
-    
     /* JS library  added to Cheaper dearer */
     $settings['basePath'] = $base_url;
     $settings['year'] = arg(1);
