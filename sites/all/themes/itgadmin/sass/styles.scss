@@ -8664,3 +8664,11 @@ div.node{
   display: inline-block;
   vertical-align: top;
 }
+.page-created-task-list{
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created{
+    width: 220px;
+  }
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-field_task_team_member_target_id{
+    width: 280px;
+  }
+}
