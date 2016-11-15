@@ -14,22 +14,21 @@ $banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $ban
 
 // Css variables
 $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+
 ?>
 
 <div id="page">
   <div class="event-sidebar">
     <header class="header" id="header" role="banner">
-      <a href="<?php print $base_url; ?>" title="<?php print t('Home'); ?>" rel="home"><img src="<?php echo $banner_image; ?>" width="100%"/></a>
-            <section class="header-top">
-                <div class="container header-logo">
-              <?php if ($logo): ?>
-                <div class="logo">
-                  
-<!--                    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>-->
-                </div>
-                    <?php endif; ?>                    
-                    </div>
-                
+            <section class="header-top" style="background-image: url('<?php echo $banner_image; ?>')">
+              <?php 
+                print itg_event_backend_header_add_block();
+              ?>
+              <div class="container header-logo">
+                <?php if ($logo): ?>
+                  <div class="logo"></div>
+                <?php endif; ?>                    
+              </div>
                 <?php if ($site_name || $site_slogan): ?>
                     <div class="header__name-and-slogan" id="name-and-slogan">
                         <?php if ($site_name): ?>
