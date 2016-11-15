@@ -1318,6 +1318,85 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
     $query->where[1]['conditions'][4]['value'] = $content_value_for_query;
   }
+
+  if ($view->name == 'at_category_wise_content_list' && $view->current_display == 'at_category_wise_content_list_story_block') {
+    $not_in = array();
+    $views = views_get_view('at_category_wise_content_list');
+    $views->set_display('at_section_wise_content_listing');
+    $views->pre_execute();
+    $views->execute('at_section_wise_content_listing');
+    $view_result = $views->result;
+    foreach ($view_result as $view_data) {
+      $not_in[] = $view_data->nid;
+    }
+    foreach ($not_in as $key => $nid) {
+      $not_in_array_condition = array(
+        'field' => 'node.nid',
+        'value' => $nid,
+        'operator' => '!=',
+      );
+      $query->where[1]['conditions'][] = $not_in_array_condition;
+    }
+  }
+  
+  if ($view->name == 'at_category_wise_content_list' && $view->current_display == 'at_category_wise_content_list_story_block') {
+    $not_in = array();
+    $views = views_get_view('at_category_wise_content_list');
+    $views->set_display('at_section_wise_content_listing');
+    $views->pre_execute();
+    $views->execute('at_section_wise_content_listing');
+    $view_result = $views->result;
+    foreach ($view_result as $view_data) {
+      $not_in[] = $view_data->nid;
+    }
+    foreach ($not_in as $key => $nid) {
+      $not_in_array_condition = array(
+        'field' => 'node.nid',
+        'value' => $nid,
+        'operator' => '!=',
+      );
+      $query->where[1]['conditions'][] = $not_in_array_condition;
+    }
+  }
+  
+  if ($view->name == 'at_category_wise_content_list' && $view->current_display == 'at_category_wise_content_list_video_block') {
+    $not_in = array();
+    $views = views_get_view('at_category_wise_content_list');
+    $views->set_display('at_section_wise_content_listing');
+    $views->pre_execute();
+    $views->execute('at_section_wise_content_listing');
+    $view_result = $views->result;
+    foreach ($view_result as $view_data) {
+      $not_in[] = $view_data->nid;
+    }
+    foreach ($not_in as $key => $nid) {
+      $not_in_array_condition = array(
+        'field' => 'node.nid',
+        'value' => $nid,
+        'operator' => '!=',
+      );
+      $query->where[1]['conditions'][] = $not_in_array_condition;
+    }
+  }
+  if ($view->name == 'at_category_wise_content_list' && $view->current_display == 'at_category_wise_content_list_photo_block') {
+    $not_in = array();
+    $views = views_get_view('at_category_wise_content_list');
+    $views->set_display('at_section_wise_content_listing');
+    $views->pre_execute();
+    $views->execute('at_section_wise_content_listing');
+    $view_result = $views->result;
+    foreach ($view_result as $view_data) {
+      $not_in[] = $view_data->nid;
+    }
+    foreach ($not_in as $key => $nid) {
+      $not_in_array_condition = array(
+        'field' => 'node.nid',
+        'value' => $nid,
+        'operator' => '!=',
+      );
+      $query->where[1]['conditions'][] = $not_in_array_condition;
+    }
+  }
 }
 
 /**

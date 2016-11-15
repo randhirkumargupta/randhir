@@ -2452,11 +2452,22 @@ function domain_form_alter(&$form, &$form_state, $form_id) {
   $options = array();
   // Get the display format of the form element.
   $format = domain_select_format();
+  $seleted_domain_id = ltrim($form['#node']->domain_source, '-');
+
+  $arg = arg();
+  if($arg[2] == 'edit') {
+    $except_this_node = 'node/'.$arg[1];
+    $all_redirect_records = itg_event_backend_get_redirect_all_domains($except_this_node);
+  }
+  
   foreach (domain_domains() as $data) {
     // The domain must be valid.
     if ($data['valid'] || user_access('access inactive domains')) {
+      
       // Checkboxes must be filtered, select lists should not.
-      $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
+      if(!in_array($data['sitename'], $all_redirect_records)) {
+        $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
+      }
     }
   }
   // If the user is a site admin, show the form, otherwise pass it silently.
@@ -2482,15 +2493,28 @@ function domain_form_alter(&$form, &$form_state, $form_id) {
       } else {
         $form['domain']['domain_wrapper']['#prefix'] = '<h2 id="title-domain-conf" class="story-title">Domain Configuration</h2>';
       }
+      
+      //Generate options(checkboxes) to associate node with domain
+      
       $form['domain']['domains'] = array(
-          '#type' => empty($format) ? 'checkboxes' : 'select',
+          '#type' => 'select',
           '#title' => t('Publish to'),
           '#options' => $options,
           '#required' => TRUE,
           '#weight' => 100,
           '#description' => t('Select which affiliates can access this content.'),
-          '#default_value' => (isset($form['#node']->domains)) ? $form['#node']->domains : $defaults['domain_id'],
+          '#default_value' => (isset($seleted_domain_id)) ? $seleted_domain_id : $defaults['domain_id'],
       );
+            
+//      $form['domain']['domains'] = array(
+//          '#type' => empty($format) ? 'checkboxes' : 'select',
+//          '#title' => t('Publish to'),
+//          '#options' => $options,
+//          '#required' => TRUE,
+//          '#weight' => 100,
+//          '#description' => t('Select which affiliates can access this content.'),
+//          '#default_value' => (isset($form['#node']->domains)) ? $form['#node']->domains : $defaults['domain_id'],
+//      );
     }
     if ($format) {
       $form['domain']['domains']['#multiple'] = TRUE;

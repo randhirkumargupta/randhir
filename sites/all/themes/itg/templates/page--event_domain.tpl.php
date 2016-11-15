@@ -5,15 +5,15 @@
  */
 
 global $base_url;
-$actual_host = explode('://', $base_url);
-$host_node = itg_event_backend_get_host_node($actual_host[1]);
-$banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $host_node->field_ec_event_banner[LANGUAGE_NONE][0]['uri']);
-$banner_image = $host_node->field_ec_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
+$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
+$host_node_arr = explode('/', $host_detail['source']);
+$host_node = node_load($host_node_arr[1]);
+
+$banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
+$banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
 
 // Css variables
-$menu_background_color = $host_node->field_ec_menu_background_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_ec_menu_background_color[LANGUAGE_NONE][0]['rgb'] : '#000';
-$heading_background_color = $host_node->field_ec_heading_bck_color[LANGUAGE_NONE][0]['rgb'];
-$font_color = $host_node->field_ec_font_color[LANGUAGE_NONE][0]['rgb'];
+$menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';
 ?>
 
 <div id="page">

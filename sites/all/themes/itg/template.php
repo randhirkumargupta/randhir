@@ -99,8 +99,8 @@ function itg_preprocess_page(&$variables) {
   if ($arg[0] == 'signup' || $arg[0] == 'forgot-password') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
-  
-  if($arg[0] == 'live-tv') {
+
+  if ($arg[0] == 'live-tv') {
     $variables['theme_hook_suggestions'][] = 'page__no_sidebar';
   }
 

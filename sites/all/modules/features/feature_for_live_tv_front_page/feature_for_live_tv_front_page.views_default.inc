@@ -84,32 +84,34 @@ function feature_for_live_tv_front_page_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Field: Content: Web */
+  /* Field: Content: Ad Code */
   $handler->display->display_options['fields']['field_ads_ad_code']['id'] = 'field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['table'] = 'field_data_field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['field'] = 'field_ads_ad_code';
+  $handler->display->display_options['fields']['field_ads_ad_code']['label'] = 'Web';
   $handler->display->display_options['fields']['field_ads_ad_code']['element_label_colon'] = FALSE;
-  /* Field: Content: Web Mobil */
+  /* Field: Content: Header script */
   $handler->display->display_options['fields']['field_ads_header_script']['id'] = 'field_ads_header_script';
   $handler->display->display_options['fields']['field_ads_header_script']['table'] = 'field_data_field_ads_header_script';
   $handler->display->display_options['fields']['field_ads_header_script']['field'] = 'field_ads_header_script';
+  $handler->display->display_options['fields']['field_ads_header_script']['label'] = 'Web Mobil';
   $handler->display->display_options['fields']['field_ads_header_script']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: Content */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['label'] = 'iOS';
   $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
-  /* Field: Field: Android */
+  /* Field: Field: Description */
   $handler->display->display_options['fields']['field_mega_review_description']['id'] = 'field_mega_review_description';
   $handler->display->display_options['fields']['field_mega_review_description']['table'] = 'field_data_field_mega_review_description';
   $handler->display->display_options['fields']['field_mega_review_description']['field'] = 'field_mega_review_description';
+  $handler->display->display_options['fields']['field_mega_review_description']['label'] = 'Android';
   $handler->display->display_options['fields']['field_mega_review_description']['element_label_colon'] = FALSE;
-  /* Field: Content: Ingredients */
+  /* Field: Content: Window */
   $handler->display->display_options['fields']['field_recipe_ingredients']['id'] = 'field_recipe_ingredients';
   $handler->display->display_options['fields']['field_recipe_ingredients']['table'] = 'field_data_field_recipe_ingredients';
   $handler->display->display_options['fields']['field_recipe_ingredients']['field'] = 'field_recipe_ingredients';
-  $handler->display->display_options['fields']['field_recipe_ingredients']['label'] = 'Window';
   $handler->display->display_options['fields']['field_recipe_ingredients']['element_label_colon'] = FALSE;
   /* Field: Content: device */
   $handler->display->display_options['fields']['field_live_tv_device']['id'] = 'field_live_tv_device';
@@ -144,33 +146,34 @@ function feature_for_live_tv_front_page_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Web */
+  /* Field: Content: Ad Code */
   $handler->display->display_options['fields']['field_ads_ad_code']['id'] = 'field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['table'] = 'field_data_field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['field'] = 'field_ads_ad_code';
   $handler->display->display_options['fields']['field_ads_ad_code']['label'] = '';
   $handler->display->display_options['fields']['field_ads_ad_code']['element_label_colon'] = FALSE;
-  /* Field: Content: Web Mobil */
+  /* Field: Content: Header script */
   $handler->display->display_options['fields']['field_ads_header_script']['id'] = 'field_ads_header_script';
   $handler->display->display_options['fields']['field_ads_header_script']['table'] = 'field_data_field_ads_header_script';
   $handler->display->display_options['fields']['field_ads_header_script']['field'] = 'field_ads_header_script';
+  $handler->display->display_options['fields']['field_ads_header_script']['label'] = 'Web Mobil';
   $handler->display->display_options['fields']['field_ads_header_script']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: Content */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['label'] = 'iOS';
   $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
-  /* Field: Field: Android */
+  /* Field: Field: Description */
   $handler->display->display_options['fields']['field_mega_review_description']['id'] = 'field_mega_review_description';
   $handler->display->display_options['fields']['field_mega_review_description']['table'] = 'field_data_field_mega_review_description';
   $handler->display->display_options['fields']['field_mega_review_description']['field'] = 'field_mega_review_description';
+  $handler->display->display_options['fields']['field_mega_review_description']['label'] = 'Android';
   $handler->display->display_options['fields']['field_mega_review_description']['element_label_colon'] = FALSE;
-  /* Field: Content: Ingredients */
+  /* Field: Content: Window */
   $handler->display->display_options['fields']['field_recipe_ingredients']['id'] = 'field_recipe_ingredients';
   $handler->display->display_options['fields']['field_recipe_ingredients']['table'] = 'field_data_field_recipe_ingredients';
   $handler->display->display_options['fields']['field_recipe_ingredients']['field'] = 'field_recipe_ingredients';
-  $handler->display->display_options['fields']['field_recipe_ingredients']['label'] = 'Window';
   $handler->display->display_options['fields']['field_recipe_ingredients']['element_label_colon'] = FALSE;
   /* Field: Content: device */
   $handler->display->display_options['fields']['field_live_tv_device']['id'] = 'field_live_tv_device';
@@ -394,7 +397,7 @@ function feature_for_live_tv_front_page_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '425';
-  $handler->display->display_options['block_description'] = 'live tv: latest video';
+  $handler->display->display_options['block_description'] = 'live tv: Jarur Dekhe';
 
   /* Display: live tv :  Latest Program */
   $handler = $view->new_display('block', 'live tv :  Latest Program', 'live_tv_latest_program');
@@ -485,7 +488,7 @@ function feature_for_live_tv_front_page_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '639';
-  $handler->display->display_options['block_description'] = 'Live tv: Latest Program';
+  $handler->display->display_options['block_description'] = 'Live tv: Aapke Liye';
 
   /* Display: Live TV :  Most Popular Video */
   $handler = $view->new_display('block', 'Live TV :  Most Popular Video', 'live_tv_most_popular_video');
@@ -567,7 +570,7 @@ function feature_for_live_tv_front_page_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'videogallery' => 'videogallery',
   );
-  $handler->display->display_options['block_description'] = 'Live TV :  Most Popular Video';
+  $handler->display->display_options['block_description'] = 'Live TV :  Anya Khabre';
   $export['live_tv'] = $view;
 
   return $export;

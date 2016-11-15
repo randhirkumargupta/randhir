@@ -109,7 +109,7 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   else if ($widget_info[0] == 'view') {
     return views_embed_view($widget_name, $widget_info[1], $widget_info[2]);
   }
-  else {      
+  else {
     $block = block_load('itg_widget', $widget_name);
     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
     return render($render_array);

@@ -123,7 +123,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
 
 
-    if ($form_id != 'ask_an_expert_node_form') {
+    if ($form_id != 'ask_an_expert_node_form' && $form_id != 'event_registration_node_form') {
       if (isset($form['title']['#title'])) {
         $form['title']['#description'] = $form['title']['#title'];
       }

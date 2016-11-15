@@ -33,7 +33,7 @@ if (!empty($data)) : global $base_url;
   </div>
   <div class="big-story-updated">
     <?php
-    print date("h:s", $db_node->changed);
+    print date("h:s", $db_node->changed). " " .t("IST");
     ?>
   </div>
 <?php endif; ?>
