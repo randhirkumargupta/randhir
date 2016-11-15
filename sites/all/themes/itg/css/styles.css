@@ -1360,7 +1360,7 @@ footer .footer-copyright {
 }
 
 .itg-common-section .droppable {
-  height: 408px;
+  min-height: 408px;
 }
 
 .itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable {
@@ -4013,6 +4013,10 @@ footer .footer-copyright {
 
 .home_page_poll_widget_block .widget-title {
   position: absolute;
+}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id .get-result {
+  padding-bottom: 10px;
+  color: green;
 }
 
 /*End Poll Landing page*/
