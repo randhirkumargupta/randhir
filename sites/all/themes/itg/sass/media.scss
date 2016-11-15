@@ -143,6 +143,93 @@
         margin-bottom: 30px;
     }
     /* Event page registration end*/
+    /*start css footer*/   
+    footer .footer-top{
+        .footer-top-link{
+           float: none; 
+        }
+        .footer-social-link{
+            width: 280px;
+            position: relative;
+            margin: 0 auto;
+            float: none; 
+            padding-right:0; 
+            .globle-search{
+                right: 50px;
+            }
+        }  
+    } 
+    /*end css footer*/
+    /*start css home page*/   
+    .top-block .top-colum-2, .top-block .top-colum-1{        
+        @include float(left);
+    }
+    .top-block .top-colum-2{
+        width: 62%;
+    }
+    .top-block .top-colum-1{
+        width: 38%;
+    }
+     .top-block .top-colum-3{
+        @include calculate-width(1);
+        > .itg-widget-parent{
+             @include float(left);
+            width: 48%;
+        }
+        .trending-list{
+             @include float(right);
+            width: 48%;
+        }
+    }
+    .big-news .big-story-col-1, .big-news .big-story-col-2{
+        @include calculate-width(2);
+         @include float(left);
+    }    
+    .watch-video-home .osscar-video ul .dont-miss-listing .dm-pic{
+        width: 124px
+    }
+    .itg-layout-container{
+        .itg-top-section{ 
+            .top-colum-2{ 
+                .droppable{
+                    height: auto;
+                }
+            }
+        }
+        .itg-h450-section .droppable{
+            height: 350px;
+        }
+    }  
+    
+    /* End css home page*/
+    
+    
+    /*sider bar css start*/
+    #block-itg-ads-ad-right-sidebar-1{
+        padding: 0;
+    }
+    /*sider bar css end*/
+    
+    /*css start poll page*/
+    .poll-banner{
+        .detail {
+            .detail-content, .voting-data{
+                @include float(none);
+                @include calculate-width(1);
+                margin-bottom: 20px;
+            }
+        }
+        .voting-data{
+            margin-bottom: 0px;
+            padding-top:20px;
+            border-top: 1px solid #ececec;
+        }
+    }
+    
+    /*css end poll page*/    
+    
+    
+
 }   
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
@@ -430,10 +517,17 @@
                 li{
                     padding: 10px; 
                     width:100% !important;
+                    height: auto;
+                    a.video-icon{
+                        @include float(left);
+                    }
                     img{
                         float: left;
                         margin-right: 10px;
                         width: 145px;
+                    }
+                    p{
+                        margin-top:0;
                     }
                 }
                 i{
@@ -532,7 +626,7 @@
     /*css end side bar section for video and photo*/
 
     /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
         .view-content{      
             .photo-list{
                 li{ 
@@ -578,6 +672,62 @@
     }
 }
 /*css end sport page*/
+
+/*start event page*/
+#block-views-program-schedule-block-3 .views-row{
+    &:nth-child(4n+1){
+        clear: none;    
+    }    
+    &:nth-child(3n+1){
+        clear: left;
+    }
+}
+/*end event page*/
+
+/*Start css program live page*/
+#block-itg-live-tv-live-tv-video-page .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
+    clear: none;
+}
+/*End css program live page*/
+
+#block-itg-menu-manager-third-level-menu{
+    .col-md-8{
+        display: none;
+    }
+}
+
+/*Start css online archive story page*/
+.view-archive-story{
+    .archive-header{
+        border:none;
+        margin: 0 -15px;
+        #archive-story-date-slider, .archive-calender-custom{
+            float: none;
+            width: 100%;
+        }
+        .archive-calender-custom{
+            text-align: right;
+        }
+        #archive-story-date-slider{
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            ul{
+                padding: 0 20px;
+            }
+            .slick-prev, .slick-next{
+                width: 20px;
+            }         
+        }
+        .archive-calender-custom .views-exposed-form .views-exposed-widget{
+            padding: 10px 0 0 0;
+        }
+    }
+    .view-content li.itg-search-list{
+        border-bottom: 1px solid #ddd;       
+    }
+}
+
+/*End css online archive story page*/
 
 }
 
@@ -705,6 +855,81 @@
     }
 }
 /*End event page*/
+/*Home page start css*/
+.big-news .big-story-col-1, .big-news .big-story-col-2{
+    @include calculate-width(1);
+    @include float(none);
+}
+.big-news .big-story-col-2{
+    padding-top: 15px;
+}
+.top-block .top-colum-3 {
+    > .itg-widget-parent{
+        @include float(none);
+        @include calculate-width(1);   
+    }    
+    .trending-list{
+        @include float(none);
+        @include calculate-width(1);
+    }
+}
+
+/*Home page end css*/
+/*start event page*/
+#block-views-program-schedule-block-3 .views-row{
+    &:nth-child(3n+1){
+        clear: none;    
+    }    
+    &:nth-child(2n+1){
+        clear: left;
+    }
+}
+/*end event page*/
+/*css start live tv page*/
+#block-itg-live-tv-live-tv-video-page{
+    .latest-livetv-video .photo-list{    
+    li{
+        padding: 10px;         
+        height: auto;
+        width:100% !important;
+        figure{
+            float: left;
+            margin-right: 10px;
+            width: 145px;
+        }
+    }
+    i.slick-arrow{
+        color: #ccc;
+        font-size: 25px;
+        text-align: center;
+        width: 100%;
+    }
+    }
+    .program-livetv{
+        padding: 10px;
+        .social-icon, .live_tv_video{
+            @include calculate-width(1);
+            @include float(none);
+        }
+        .social-icon {
+            li{
+                @include display-inline;
+                a{
+                    border-bottom: none;
+                    padding: 10px;
+                    i{
+                        @include font(20px);
+                        padding-right: 5px;
+                    }
+                    span{
+                        display: none;
+                    }
+                }                
+            }
+        }
+    }
+}
+/*css end live tv page*/
 }
 @media only screen and (max-width:640px){
     #block-views-anchor-landing-page-block{
@@ -716,7 +941,7 @@
 
 @media only screen and (max-width:560px){ 
     /*CSS Starts Photo landing page*/
-    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{
+    .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
         .view-content{      
             .photo-list{
                 li{       
@@ -743,6 +968,16 @@
             padding-top: 15px;
         }
     }
+    /*start event page*/
+    #block-views-program-schedule-block-3 .views-row{
+        &:nth-child(2n+1){
+            clear: none;    
+        }    
+        &:nth-child(1n+1){
+            clear: left;
+        }
+    }
+    /*end event page*/
 }
 
 /*Start header CSS Desktop version*/
@@ -1195,8 +1430,8 @@
     }
     /*CSS End So sorry page*/
     /*CSS Start RHS add block*/
-    #block-itg-ads-ad-right-sidebar-1{    
-        padding: 30px 34px;
+    #block-itg-ads-ad-right-sidebar-1{           
+        @include calculate-width(1);
     }
     /*CSS End RHS add block*/
 
@@ -1311,23 +1546,7 @@
 /*End CSS Desktop version*/
 
 
-@media only screen and (min-width:768px) and (max-width:1200px){   
-    .top-block .top-colum-2{
-        @include calculate-width(1);
-        margin-bottom: 50px;
-    }
-    .top-block .top-colum-1, .top-block .top-colum-3{
-        @include calculate-width(2);
-        @include float(left);
-    }
-
-    .big-news .big-story-col-1, .big-news .big-story-col-2{
-        @include calculate-width(1);
-    }
-    .big-news .big-story-col-2{
-        padding-top: 20px;
-        padding-left: 15px;   
-    }
+@media only screen and (min-width:768px) and (max-width:1200px){       
     .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget{
         overflow: scroll;
         height: 663px;

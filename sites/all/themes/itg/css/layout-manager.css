@@ -93,7 +93,7 @@ img {
 /*.dropped{
     background: #fff;
 }*/
-.list-none, .may-be-suggest-container ul, .top-takes-video-container ul, .trending-videos, .watch-right-now-video ul, .rhs-section-ordering ul, .tech-layout-page .buying-guides ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul {
+.list-none, .may-be-suggest-container ul, .top-takes-video-container ul, .trending-videos, .watch-right-now-video ul, .rhs-section-ordering ul, .tech-layout-page .buying-guides ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, .election-page .key-candidate ul {
   list-style-type: none;
 }
 
@@ -2410,6 +2410,103 @@ img {
 }
 .election-page .itg-map .section_wise_order .widget-settings {
   position: relative;
+}
+.election-page .key-candidate {
+  font-family: "Roboto", sans-serif;
+}
+.election-page .key-candidate .most_popular {
+  border: none;
+}
+.election-page .key-candidate .list-state {
+  margin: 0 0px 20px 0px;
+}
+.election-page .key-candidate .list-state span {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  vertical-align: top;
+}
+.election-page .key-candidate .list-state span:hover, .election-page .key-candidate .list-state span.active {
+  background: #1b60a3;
+  color: #fff;
+}
+.election-page .key-candidate .key-candidate-detail {
+  font-family: "Roboto", sans-serif;
+  display: none;
+}
+.election-page .key-candidate .key-candidate-detail ul {
+  zoom: 1;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.election-page .key-candidate .key-candidate-detail ul:before, .election-page .key-candidate .key-candidate-detail ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.election-page .key-candidate .key-candidate-detail ul:after {
+  clear: both;
+}
+.election-page .key-candidate .key-candidate-detail ul li {
+  float: left;
+}
+.election-page .key-candidate .key-candidate-detail ul li:nth-child(1) {
+  width: 25%;
+}
+.election-page .key-candidate .key-candidate-detail ul li:nth-child(2) {
+  width: 60%;
+  padding-top: 12px;
+}
+.election-page .key-candidate .key-candidate-detail ul li:nth-child(3) {
+  width: 15%;
+}
+.election-page .key-candidate .key-candidate-detail ul li .candidate-name {
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.election-page .key-candidate .key-candidate-detail ul li .constituancy {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  color: #8f8f8f;
+}
+.election-page .key-candidate .key-candidate-detail ul li img {
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 0 5px #ccc;
+  display: inline-block;
+  height: 63px;
+  margin-left: 2px;
+  padding: 5px;
+  width: 63px;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status {
+  width: 35px;
+  height: 35px;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 35px;
+  color: #fff;
+  font-size: 28px;
+  background: #ccc;
+  margin-top: 12px;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.green {
+  background: #418b32;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.red {
+  background: #d80a02;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.yellow {
+  background: #efc107;
+}
+.election-page .key-candidate .key-candidate-detail.key-candidate-detail-first {
+  display: block;
 }
 
 /* CSS For Election Page End */

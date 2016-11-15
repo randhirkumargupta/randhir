@@ -365,6 +365,7 @@ header{
                             background: #680101;
                             width: 1px;
                             right: 0;
+                            top:0;
                         }
                     }
                 }
@@ -3221,7 +3222,7 @@ footer{
     }
 
 }
-.view-video-list-of-category, .view-video-landing-header, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo{    
+.view-video-list-of-category, .view-video-landing-header, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, #block-itg-live-tv-live-tv-video-page, .view-programme-content-live-tv{    
     .views-exposed-form{
         display: none;
     }
@@ -3914,8 +3915,8 @@ footer{
 /*CSS Start RHS add block*/
 #block-itg-ads-ad-right-sidebar-1{
     @include display-inline;
-    padding:0px 15px 0 0;
-    border-bottom: 1px solid $border-color;
+     padding: 30px 34px;
+    border-bottom: 1px solid $border-color;   
 }
 /*CSS End RHS add block*/
 /*CSS Start So sorry page*/
@@ -5173,6 +5174,26 @@ footer{
           }
       }
     }
+    .event-detail{
+        background: #ef3c24;
+        color: #fff;
+        text-align: center;
+        .event-str-date{
+            font-size: 24px;
+            display: block;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 7px 0;
+            font-weight: 700;
+        }
+        .event-vanue-detail-place{
+            background: #000;
+            padding: 0px 35px;
+            font-size: 12px;
+            text-transform: uppercase;
+            @include display-inline;
+        }
+    }
 }
 #block-itg-event-backend-ad-right-sidebar-event {
     padding: 30px;
@@ -6367,6 +6388,13 @@ input[type="radio"]:checked + label:after{
       .droppable{
         height: 325px;
       }
+      .most_popular{
+          border:none;
+           overflow: inherit;
+      }
+      .data-holder{
+          overflow: auto;
+      }
     }
     .itg-484{
       .droppable{
@@ -6437,5 +6465,202 @@ input[type="radio"]:checked + label:after{
             overflow: hidden;
         }
     }
+     .key-candidate{
+         font-family: $itg-roboto;
+        .most_popular{
+             border: none;
+        }
+        ul{
+             @extend .list-none;
+        }         
+        .list-state{
+            margin:0 0px 20px 0px;            
+            span{
+                cursor: pointer;
+                display: inline-block;
+                font-size: 12px;
+                font-weight: 700;
+                padding: 2px 6px;
+                text-transform: uppercase;
+                vertical-align: top;
+                &:hover, &.active{
+                    background: #1b60a3;
+                    color:#fff;
+                }
+            }
+        }
+        .key-candidate-detail{
+            font-family: $itg-roboto;
+            display:none;
+            ul{
+                @include clearfix;
+                 border-bottom: 1px solid $border-color;
+                 padding-bottom: 10px;
+                 margin-bottom:10px;
+                li{
+                    @include float(left);                                       
+                    &:nth-child(1){
+                        width: 25%;
+                    }
+                    &:nth-child(2){
+                        width: 60%;
+                        padding-top: 12px;
+                    }
+                    &:nth-child(3){
+                        width: 15%;
+                    }
+                    .candidate-name{
+                        @include font(14px,null,700);                        
+                    }
+                    .constituancy{
+                        @include font(13px);
+                        color:#8f8f8f;
+                    }
+                    img{
+                        background: #fff;
+                        border-radius: 100%;
+                        box-shadow: 0 0 5px #ccc;
+                        display: inline-block;
+                        height: 63px;
+                        margin-left: 2px;
+                        padding: 5px;
+                        width: 63px;
+                    }
+                    .status{
+                        font-size: 15px;
+                        font-weight: 700;
+                        i{                        
+                            width: 35px;
+                            height: 35px;                        
+                            border-radius: 3px;
+                            text-align: center;
+                            line-height: 35px;
+                            color: #fff;
+                            font-size: 28px;
+                            background: #ccc;
+                            margin-top: 12px;
+                        }
+                        &.green{
+                            i{
+                                background: #418b32;
+                            }
+                            color:#418b32;
+                        }
+                        &.red{
+                            i{
+                                background: #d80a02;
+                            }
+                            color:#418b32;
+                        }
+                        &.yellow{
+                            i{
+                                background: #efc107;
+                            }
+                            color:#418b32;
+                        }
+                    }
+                }
+            }
+            &.key-candidate-detail-first{
+                display: block;
+            }
+        }
+    }
 }
 /* CSS For Election Page End */
+
+
+/*Start CSS LIVE tv */
+#block-itg-live-tv-live-tv-video-page{
+    ul{
+        @extend .list-none;
+    }
+    .program-livetv{
+        background: #000;
+        padding: 15px 0px 75px 15px;
+        @include clearfix;       
+        .live_tv_video{
+            @include float(left);
+            width: 82%;
+            iframe{
+                width: 100%;
+                height: 50vh;
+            }
+        }
+        .social-icon{
+            @include float(right);   
+            width: 18%;
+            a{
+                color: #aaa9a9;
+                font-size: 13px;
+                padding: 20px 15px;
+                display: block;
+                font-family: roboto;
+                border-bottom: 1px solid #1a1a1a;
+                i{
+                    @include font(24px);
+                    vertical-align: middle;
+                    padding-right: 5px;
+                }
+                &:hover{
+                    color:#fff;
+                    background: #131313;
+                }
+            }            
+        }
+    }
+    .latest-livetv-video{
+        background: #171717;
+        padding: 15px;
+        h4{
+            font-size: 14px;
+            color:#eaeaea;
+            text-transform: uppercase;
+        }
+        .photo-list li{
+            height: 245px;
+            width:190px;
+            &:hover{
+                background: #393939;                
+            }
+            .tile a{
+                color: #b4b4b4;
+                margin-top: 10px;
+                display: block;
+            }
+            &:nth-child(4n+1){
+                clear: none;
+            }
+        }
+    }
+}
+.view-live-tv-programs{   
+    @include sidebar-heading;  
+    h3{
+        display: block;
+        margin-bottom: 20px;
+        span{
+            padding-left: 0;            
+        }
+    }
+    .program_data{
+        margin-bottom: 50px;
+    }
+    .program-row{
+        @include pos(relative);  
+        margin-bottom: 10px;
+    }
+    .toggle-icon{
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        margin-top: -10px;
+        font-size: 20px;
+        cursor: pointer;
+        color:#717171;
+        span{
+            display: none;
+        }
+    }
+}
+/*eND CSS LIVE tv */
