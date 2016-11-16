@@ -9413,3 +9413,13 @@ div.node #comments h2 {
 #videoupload #loader-data.loader_overlay {
   display: block;
 }
+
+.browse-media-file.active {
+  padding-bottom: 30px;
+}
+
+.itg-form-main .itg-form-action {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}

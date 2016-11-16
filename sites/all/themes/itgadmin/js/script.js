@@ -733,6 +733,7 @@ jQuery(document).ready(function() {
     jQuery('.itg-form-section-wrapper').on('click', 'h2', function() {
       jQuery(this).toggleClass('active');
       jQuery(this).next().slideToggle();
+      jQuery(this).parent().toggleClass('active');
     });
 
     // jQuery code to toggle Cotegory manager form
