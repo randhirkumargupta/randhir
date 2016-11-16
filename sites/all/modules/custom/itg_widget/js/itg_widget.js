@@ -202,7 +202,7 @@ Drupal.behaviors.itg_widgets = {
         jQuery(".widgets-view .view-link").parent().attr("target", "_blank");
         //jQuery(".widgets-view .view-link").css("text-transform","capitalize");
 
-        jQuery(".view-section-wise-content-ordering-list span.move-link").on('click', function() {
+        jQuery(".view-section-wise-content-ordering-list span.move-link , .view-at-section-wise-content-ordering-list span.move-link").on('click', function() {
             if (confirm("Are you sure you want to remove this content ?")) {
                 return true;
             }

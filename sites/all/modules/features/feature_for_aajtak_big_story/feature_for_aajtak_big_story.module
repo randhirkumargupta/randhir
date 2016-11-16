@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for aajtak big story feature.
+ */
+
+include_once 'feature_for_aajtak_big_story.features.inc';

@@ -50,6 +50,15 @@ function itg_widget_form_views_form_so_sorry_so_sorry_videos_widget_alter(&$form
  *
  * {@inheritdoc}
  */
+function itg_widget_form_views_form_at_section_wise_content_ordering_list_at_sirf_web_per_widget_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = "update_itg_at_widget_order_table_data_for_sirf_web_per";
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
 function itg_widget_form_views_form_special_auto_review_widget_special_auto_review_widget_list_alter(&$form, &$form_state, $form_id) {
 
   $draggable_form = $form['draggableviews'];
@@ -58,11 +67,11 @@ function itg_widget_form_views_form_special_auto_review_widget_special_auto_revi
     if (is_integer($form_key)) {
       $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
       $form['draggableviews'][$form_key]['custom_text'] = array(
-          "#type" => "textfield",
-          "#size" => '',
-          // get value which is saved into custom_table.
-          '#default_value' => _get_custom_text_value_from_nid($default_value, 'special_auto_review_content'),
-          '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
+        "#type" => "textfield",
+        "#size" => '',
+        // get value which is saved into custom_table.
+        '#default_value' => _get_custom_text_value_from_nid($default_value, 'special_auto_review_content'),
+        '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
       );
     }
   }
@@ -88,11 +97,11 @@ function itg_widget_form_views_form_special_how_i_made_it_special_how_made_widge
     if (is_integer($form_key)) {
       $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
       $form['draggableviews'][$form_key]['custom_text'] = array(
-          "#type" => "textfield",
-          "#size" => '',
-          // get value which is saved into custom_table.
-          '#default_value' => _get_custom_text_value_from_nid($default_value, 'special_how_made_it_content'),
-          '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
+        "#type" => "textfield",
+        "#size" => '',
+        // get value which is saved into custom_table.
+        '#default_value' => _get_custom_text_value_from_nid($default_value, 'special_how_made_it_content'),
+        '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
       );
     }
   }
@@ -138,11 +147,11 @@ function itg_widget_form_views_form_yearender_top_news_and_top_videos_yearend_le
     if (is_integer($form_key)) {
       $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
       $form['draggableviews'][$form_key]['custom_text'] = array(
-          "#type" => "textfield",
-          "#size" => '',
-          // get value which is saved into custom_table.
-          '#default_value' => _get_custom_text_value_from_nid($default_value, 'yearender_left_news_video'),
-          '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
+        "#type" => "textfield",
+        "#size" => '',
+        // get value which is saved into custom_table.
+        '#default_value' => _get_custom_text_value_from_nid($default_value, 'yearender_left_news_video'),
+        '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
       );
     }
   }
@@ -178,11 +187,11 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_dont_miss
     if (is_integer($form_key)) {
       $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
       $form['draggableviews'][$form_key]['custom_text'] = array(
-          "#type" => "textfield",
-          "#size" => '',
-          // get value which is saved into custom_table.
-          '#default_value' => _get_custom_text_value_from_nid($default_value),
-          '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
+        "#type" => "textfield",
+        "#size" => '',
+        // get value which is saved into custom_table.
+        '#default_value' => _get_custom_text_value_from_nid($default_value),
+        '#attributes' => array("placeholder" => array(t("Please Enter A Label"))),
       );
     }
   }
@@ -252,7 +261,7 @@ function update_itg_widget_order_table_data_for_dont_miss($form, &$form_state) {
 //              ->execute();
 //    }
 //  }
-  
+
   $weightcount = 0;
   foreach ($draggable_view_data as $key => $value) {
     $weightcount = $datacount + $value['weight'];
@@ -261,20 +270,19 @@ function update_itg_widget_order_table_data_for_dont_miss($form, &$form_state) {
   foreach ($draggable_view_data as $key => $value) {
     if ($weightcount > 0) {
       db_update('itg_widget_order')
-              ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
-              ->condition('widget', 'dont_miss_content_widget')
-              ->condition('nid', $value['id'])
-              ->execute();
+          ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
+          ->condition('widget', 'dont_miss_content_widget')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
     else {
       db_update('itg_widget_order')
-              ->fields(array('extra' => $value['custom_text'],))
-              ->condition('widget', 'dont_miss_content_widget')
-              ->condition('nid', $value['id'])
-              ->execute();
+          ->fields(array('extra' => $value['custom_text'],))
+          ->condition('widget', 'dont_miss_content_widget')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
   }
-  
 }
 
 /**
@@ -291,9 +299,9 @@ function update_itg_widget_order_table_data_for_we_may_suggest($form, &$form_sta
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     $result = db_select('itg_widget_order')
-                    ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
-                    ->condition('widget', $widget)
-                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
+            ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
+            ->condition('widget', $widget)
+            ->execute()->fetchAll(PDO::FETCH_ASSOC);
     $extra_values = $result;
   }
   // Make draggable array with extra and content type , which is recived above.
@@ -307,20 +315,20 @@ function update_itg_widget_order_table_data_for_we_may_suggest($form, &$form_sta
 
   // Delete all entry of widget dont_miss_content_widget as we have all the array of already inserted data.
   db_delete('itg_widget_order')
-          ->condition('widget', $widget)
-          ->execute();
+      ->condition('widget', $widget)
+      ->execute();
 
   // Now insert again with updated values.
   foreach ($draggable_view_data as $key => $node_data) {
     db_insert('itg_widget_order')
-            ->fields(array(
-                'nid' => $node_data['id'],
-                'widget' => $widget,
-                'content_type' => ($node_data['content_type']) ? $node_data['content_type'] : "",
-                'cat_id' => '0',
-                'weight' => $node_data['weight'],
-            ))
-            ->execute();
+        ->fields(array(
+          'nid' => $node_data['id'],
+          'widget' => $widget,
+          'content_type' => ($node_data['content_type']) ? $node_data['content_type'] : "",
+          'cat_id' => '0',
+          'weight' => $node_data['weight'],
+        ))
+        ->execute();
   }
 }
 
@@ -338,9 +346,9 @@ function update_itg_widget_order_table_data_for_so_sorry($form, &$form_state) {
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     $result = db_select('itg_widget_order')
-                    ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
-                    ->condition('widget', $widget)
-                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
+            ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
+            ->condition('widget', $widget)
+            ->execute()->fetchAll(PDO::FETCH_ASSOC);
     $extra_values = $result;
   }
   // Make draggable array with extra and content type , which is recived above.
@@ -354,21 +362,21 @@ function update_itg_widget_order_table_data_for_so_sorry($form, &$form_state) {
   }
   // Delete all entry of widget so_sorry_widget as we have all the array of already inserted data.
   db_delete('itg_widget_order')
-          ->condition('widget', $widget)
-          ->execute();
+      ->condition('widget', $widget)
+      ->execute();
 
   // Now insert again with updated values.
   foreach ($draggable_view_data as $key => $node_data) {
     db_insert('itg_widget_order')
-            ->fields(array(
-                'nid' => $node_data['id'],
-                'widget' => $widget,
-                'content_type' => ($node_data['content_type']) ? $node_data['content_type'] : "",
-                'cat_id' => '0',
-                'weight' => $node_data['weight'],
-                'extra' => $node_data['extra'],
-            ))
-            ->execute();
+        ->fields(array(
+          'nid' => $node_data['id'],
+          'widget' => $widget,
+          'content_type' => ($node_data['content_type']) ? $node_data['content_type'] : "",
+          'cat_id' => '0',
+          'weight' => $node_data['weight'],
+          'extra' => $node_data['extra'],
+        ))
+        ->execute();
   }
 }
 
@@ -390,15 +398,13 @@ function update_itg_widget_order_table_data_for_issue_magazin($form, &$form_stat
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     if ($weightcount > 0) {
-       db_update('itg_widget_order')
-            ->fields(array('weight' => $value['weight']))
-            ->condition('widget', 'issue_magazin_widget')
-            ->condition('nid', $value['id'])
-            ->execute();
+      db_update('itg_widget_order')
+          ->fields(array('weight' => $value['weight']))
+          ->condition('widget', 'issue_magazin_widget')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
-    
   }
-  
 }
 /**
  * Function for save new order in custom table itg_widget_order for we may suggest widget.
@@ -456,17 +462,17 @@ function update_itg_widget_order_table_data_for_special_auto_review($form, &$for
   foreach ($draggable_view_data as $key => $value) {
     if ($weightcount > 0) {
       db_update('itg_widget_order')
-              ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
-              ->condition('widget', 'special_auto_review_content')
-              ->condition('nid', $value['id'])
-              ->execute();
+          ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
+          ->condition('widget', 'special_auto_review_content')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
     else {
       db_update('itg_widget_order')
-              ->fields(array('extra' => $value['custom_text'],))
-              ->condition('widget', 'special_auto_review_content')
-              ->condition('nid', $value['id'])
-              ->execute();
+          ->fields(array('extra' => $value['custom_text'],))
+          ->condition('widget', 'special_auto_review_content')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
   }
 }
@@ -481,7 +487,7 @@ function update_itg_widget_order_table_data_for_special_how_i_made_it_review($fo
   // Take draggable view input value after submit the form.
   $draggable_view_data = $form_state['input']['draggableviews'];
   $extra_values = array();
-  
+
   $weightcount = 0;
   foreach ($draggable_view_data as $key => $value) {
     $weightcount = $datacount + $value['weight'];
@@ -490,20 +496,19 @@ function update_itg_widget_order_table_data_for_special_how_i_made_it_review($fo
   foreach ($draggable_view_data as $key => $value) {
     if ($weightcount > 0) {
       db_update('itg_widget_order')
-              ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
-              ->condition('widget', 'special_how_made_it_content')
-              ->condition('nid', $value['id'])
-              ->execute();
+          ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
+          ->condition('widget', 'special_how_made_it_content')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
     else {
       db_update('itg_widget_order')
-              ->fields(array('extra' => $value['custom_text'],))
-              ->condition('widget', 'special_how_made_it_content')
-              ->condition('nid', $value['id'])
-              ->execute();
+          ->fields(array('extra' => $value['custom_text'],))
+          ->condition('widget', 'special_how_made_it_content')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
   }
- 
 }
 
 /**
@@ -517,22 +522,20 @@ function update_itg_widget_order_table_data_for_most_read($form, &$form_state) {
   $draggable_view_data = $form_state['input']['draggableviews'];
   $extra_values = array();
 
-   $weightcount = 0;
+  $weightcount = 0;
   foreach ($draggable_view_data as $key => $value) {
     $weightcount = $datacount + $value['weight'];
   }
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     if ($weightcount > 0) {
-       db_update('itg_widget_order')
-            ->fields(array('weight' => $value['weight'],))
-            ->condition('widget', 'most_read_content')
-            ->condition('nid', $value['id'])
-            ->execute();
+      db_update('itg_widget_order')
+          ->fields(array('weight' => $value['weight'],))
+          ->condition('widget', 'most_read_content')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
-   
   }
-  
 }
 
 /**
@@ -549,10 +552,10 @@ function update_itg_widget_order_table_data_for_feature_content_by_section($form
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
     db_update('itg_widget_order')
-            ->fields(array('weight' => $value['weight'],))
-            ->condition('widget', 'feature_content_by_section')
-            ->condition('nid', $value['id'])
-            ->execute();
+        ->fields(array('weight' => $value['weight'],))
+        ->condition('widget', 'feature_content_by_section')
+        ->condition('nid', $value['id'])
+        ->execute();
   }
 }
 
@@ -574,20 +577,19 @@ function update_itg_widget_order_table_data_for_yearend_left($form, &$form_state
   foreach ($draggable_view_data as $key => $value) {
     if ($weightcount > 0) {
       db_update('itg_widget_order')
-              ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
-              ->condition('widget', 'yearender_left_news_video')
-              ->condition('nid', $value['id'])
-              ->execute();
+          ->fields(array('weight' => $value['weight'], 'extra' => $value['custom_text'],))
+          ->condition('widget', 'yearender_left_news_video')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
     else {
       db_update('itg_widget_order')
-              ->fields(array('extra' => $value['custom_text'],))
-              ->condition('widget', 'yearender_left_news_video')
-              ->condition('nid', $value['id'])
-              ->execute();
+          ->fields(array('extra' => $value['custom_text'],))
+          ->condition('widget', 'yearender_left_news_video')
+          ->condition('nid', $value['id'])
+          ->execute();
     }
   }
-  
 }
 
 /**
@@ -625,20 +627,20 @@ function update_itg_widget_order_table_data($form, &$form_state) {
   foreach ($draggable_view_data as $key => $node_data) {
     try {
       db_merge('itg_widget_order')
-              ->key(array(
-                  'nid' => $node_data['id'],
-                  'widget' => $widget,
-                  'cat_id' => $cat_id,
-                  'content_type' => $actual_weight_type,
-              ))
-              ->fields(array(
-                  'weight' => $node_data['weight'],
-                  'nid' => $node_data['id'],
-                  'widget' => $widget,
-                  'cat_id' => $cat_id,
-                  'content_type' => $actual_weight_type,
-              ))
-              ->execute();
+          ->key(array(
+            'nid' => $node_data['id'],
+            'widget' => $widget,
+            'cat_id' => $cat_id,
+            'content_type' => $actual_weight_type,
+          ))
+          ->fields(array(
+            'weight' => $node_data['weight'],
+            'nid' => $node_data['id'],
+            'widget' => $widget,
+            'cat_id' => $cat_id,
+            'content_type' => $actual_weight_type,
+          ))
+          ->execute();
     } catch (Exception $ex) {
       drupal_set_message($ex->getMessage());
     }
@@ -653,9 +655,56 @@ function update_itg_widget_order_table_data($form, &$form_state) {
  */
 function _get_custom_text_value_from_nid($nid, $widget = 'dont_miss_content_widget') {
   $result = db_select('itg_widget_order', 'iwo')
-                  ->fields('iwo', array('extra'))
-                  ->condition('iwo.nid', $nid)
-                  ->condition('iwo.widget', $widget)
-                  ->execute()->fetchAll(PDO::FETCH_ASSOC);
+          ->fields('iwo', array('extra'))
+          ->condition('iwo.nid', $nid)
+          ->condition('iwo.widget', $widget)
+          ->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['extra'];
+}
+
+/**
+ * Function for save new order in custom table itg_widget_order for we may suggest widget.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function update_itg_at_widget_order_table_data_for_sirf_web_per($form, &$form_state) {
+  // Take draggable view input value after submit the form.
+  $draggable_view_data = $form_state['input']['draggableviews'];
+  $widget = 'at_sirf_web_per_widget';
+  $extra_values = array();
+  // Get extra , nid , content type from custom_table because it will further use to insert again.
+  foreach ($draggable_view_data as $key => $value) {
+    $result = db_select('itg_widget_order')
+            ->fields('itg_widget_order', array('extra', 'nid', 'content_type'))
+            ->condition('widget', $widget)
+            ->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $extra_values = $result;
+  }
+  // Make draggable array with extra and content type , which is recived above.
+  foreach ($extra_values as $key => $value) {
+    foreach ($draggable_view_data as $draggable_node_key => $draggable_nodes) {
+      if ($draggable_nodes['id'] == $value['nid']) {
+        $draggable_view_data[$key]['content_type'] = ($value['content_type']) ? $value['content_type'] : "";
+      }
+    }
+  }
+
+  // Delete all entry of widget dont_miss_content_widget as we have all the array of already inserted data.
+  db_delete('itg_widget_order')
+      ->condition('widget', $widget)
+      ->execute();
+
+  // Now insert again with updated values.
+  foreach ($draggable_view_data as $key => $node_data) {
+    db_insert('itg_widget_order')
+        ->fields(array(
+          'nid' => $node_data['id'],
+          'widget' => $widget,
+          'content_type' => ($node_data['content_type']) ? $node_data['content_type'] : "",
+          'cat_id' => '0',
+          'weight' => $node_data['weight'],
+        ))
+        ->execute();
+  }
 }

@@ -16,14 +16,14 @@
 function itg_theme() {
   $items = array();
   $items['user_login'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-login',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-login',
   );
   $items['user_pass'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-pass',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-pass',
   );
   return $items;
 }
@@ -80,7 +80,8 @@ function itg_preprocess_field(&$vars) {
  * {@inheritdoc}
  */
 function itg_preprocess_page(&$variables) {
-  global $base_url; $base_root;
+  global $base_url;
+  $base_root;
   $arg = arg();
   if ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
     $term = taxonomy_term_load($arg[2]);
@@ -89,16 +90,20 @@ function itg_preprocess_page(&$variables) {
       unset($variables['page']['content']['system_main']);
     }
   }
-  
+
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
-  
+
   if ($arg[0] == 'signup' || $arg[0] == 'forgot-password') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
-  
+
+  if ($arg[0] == 'live-tv') {
+    $variables['theme_hook_suggestions'][] = 'page__no_sidebar';
+  }
+
   // Access domain
   if (function_exists('domain_select_format')) {
     $format = domain_select_format();
@@ -116,7 +121,6 @@ function itg_preprocess_page(&$variables) {
     }
   }
 }
-
 
 /**
  * {@inheritdoc}

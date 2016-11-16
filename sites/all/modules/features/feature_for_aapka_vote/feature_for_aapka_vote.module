@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for aapka vote feature.
+ */
+
+include_once 'feature_for_aapka_vote.features.inc';
