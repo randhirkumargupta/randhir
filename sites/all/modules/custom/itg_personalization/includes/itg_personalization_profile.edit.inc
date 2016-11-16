@@ -220,3 +220,4 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   // Save user object.
   user_save($user_detail);
 }
+?>
