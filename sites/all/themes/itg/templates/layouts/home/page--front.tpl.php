@@ -619,8 +619,8 @@ print '<div id="second-section-card">';
         <a href="javascript:void(0)" class="add-more-block">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
       </div>
 <?php } else { ?>
-    <div class="load-more-wrapper-fornt">
-        <a href="javascript:void(0)" class="add-more-block-fornt">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+    <div class="load-more-wrapper-front">
+        <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
       </div>
 <?php } ?>
     </div>

@@ -4,7 +4,7 @@
  */
 
 
-function Go(windowWidth, windowHeight, windowOuterHeight, wname, features, site_url) {
+function Go(windowWidth, windowHeight, windowOuterHeight, wname, features, site_url, pass_arg) {
 
     var centerLeft = parseInt((window.screen.availWidth - windowWidth) / 2);
     var centerTop = parseInt(((window.screen.availHeight - windowHeight) / 2) - windowOuterHeight);
@@ -16,7 +16,11 @@ function Go(windowWidth, windowHeight, windowOuterHeight, wname, features, site_
     else {
         misc_features = ', status=no, location=no, scrollbars=yes, resizable=yes';
     }
-    var child = window.open("http://"+site_url+"/saml_login/other", wname, windowFeatures);
+    
+    if (pass_arg){
+        pass_arg = pass_arg;
+    }
+    var child = window.open("http://"+site_url+ pass_arg, wname, windowFeatures);
 
     var leftDomain = false;
     var interval = setInterval(function () {

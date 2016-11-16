@@ -6445,8 +6445,16 @@ div.node{
       margin: 0 15px 15px 0;
       width: 120px;
       height: 120px;
-      border: 1px solid #d9d9d9;
+      img {
+        height: 67%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
       label{
+        border: 1px solid #d9d9d9;
+        box-shadow: 0 0 5px 1px #666;
         background: url(../images/default_for_all.png) no-repeat left top / 100% auto;
         font-size: 12px;
         height: 100%;
@@ -6499,6 +6507,7 @@ div.node{
         margin: 0;
         opacity: 0;
         position: absolute;
+        cursor: pointer;
         width: 100%;
         z-index: 999;
         &:checked + label:before, &:checked + label:after{
@@ -6638,7 +6647,7 @@ div.node{
     width: 100%;
     z-index: 99999;
 }
-.loader_overlay{
+/*.loader_overlay{
   background-color: rgba(0,0,0,.5);
   display: block;
   height: 100%;
@@ -6646,7 +6655,7 @@ div.node{
   position: absolute;
   top: 0;
   width: 100%;
-}
+}*/
 #itg-image-croping-crop-form{
   .form-item-aspect-ratio{
     @extend .dib;
@@ -7037,8 +7046,7 @@ div.node{
     .active-poll-title{
       background-color: #000;
       float: left;
-      width: 100%;
-      height: 68px;
+      width: 100%;      
       margin-bottom: 11px;
       overflow: hidden;
       h2{
@@ -8303,7 +8311,6 @@ div.node{
     }
   }
 }
-
 .node-photogallery-form{
   .form-type-plupload {
     margin-left: 220px;
@@ -8380,11 +8387,11 @@ div.node{
               > .image-widget-data{
                 position: static !important;
                 .form-submit[value="Remove"]{
-                  left: 114px;
+                  left: 114px !important;
                   width: 20px;
                   height: 20px;
                   background: url(../images/cross_small.png) center center no-repeat;
-                  text-indent: -9999;
+                  text-indent: -9999px;
                 }
               }
             }
@@ -8411,11 +8418,11 @@ div.node{
             > .image-widget-data{
               position: static !important;
               .form-submit[value="Remove"]{
-                left: 114px;
+                left: 114px !important;
                 width: 20px;
                 height: 20px;
                 background: url(../images/cross_small.png) center center no-repeat;
-                text-indent: -9999;
+                text-indent: -9999px;
               }
             }
           }
@@ -8598,7 +8605,6 @@ div.node{
     }
   }
 }
-
 [id*="domain-form"]{
   .form-submit{
     @extend .btn;
@@ -8618,4 +8624,68 @@ div.node{
   .form-field-type-image{
     @extend .Browse-upload;
   }
+}
+.page-user .field-name-field-user-section, 
+.page-admin-people-create .field-name-field-user-section{display: none;}
+.page-manage-budget-list, .page-budget-predictor-list{
+  table{
+    caption{
+      text-align: right;
+      padding-bottom: 5px;
+      a{
+        @extend .btn;
+      }
+    }
+  }
+}
+[id*="itg-manage-budget"]{
+  .form-submit{
+    @extend .btn;
+    margin-left: 30px;
+    & + a{
+      @extend .button;
+    }
+  }
+}
+.view-searchimage .search-img-list img + span{
+  position: relative;
+  margin: 0 0 0 -100px;
+  width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  background: #ccc;
+  padding: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 1px 1px 5px 0 #666;
+}
+.view-searchimage .search-img-list img + div.throbbing{
+  display: inline-block;
+  vertical-align: top;
+}
+.page-created-task-list{
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created{
+    width: 220px;
+  }
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-field_task_team_member_target_id{
+    width: 280px;
+  }
+}
+.browse-video-form .ftp_browse_field div.description{padding: 3px 0 0 200px;}
+#videoupload #loader-data{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.38);
+  height: 100%;
+  z-index: 9999;
+  text-align: center;
+  color: #fff;
+  padding-top: 150px;
+  font-size: 18px;
+  display: none;
+}
+#videoupload #loader-data.loader_overlay{
+  display: block;
 }

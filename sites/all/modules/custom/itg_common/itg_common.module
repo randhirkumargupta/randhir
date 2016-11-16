@@ -506,6 +506,19 @@ function itg_common_get_node_title($nid) {
 }
 
 /**
+ * Get node type using nid
+ * @param int $nid
+ * @return string
+ */
+function itg_common_get_node_type($nid) {
+    $query = db_select('node', 'n')
+            ->fields('n', array('type'))
+            ->condition('n.nid', $nid, '=');
+
+    return $query->execute()->fetchField();
+}
+
+/**
  * Get node count.
  * @param string $content_type
  * @param int $uid
@@ -735,6 +748,11 @@ function itg_common_views_pre_render(&$view) {
   if ($view->name == "custom_html_widgets_list") {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= '<span class="create_cooking_tips">' . l(t('Create custom html widgets'), 'node/add/custom-html-widgets', array('query' => array('destination' => 'custom-html-widgets-list'))) . '&nbsp;</span>';    
+    $view->attachment_before = $header_content;
+  }
+   if ($view->name == "election_xml_list") {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= '<span class="create_cooking_tips">' . l(t('Create Election XML'), 'node/add/election-graph-xml', array('query' => array('destination' => 'election-xml-list'))) . '&nbsp;</span>';    
     $view->attachment_before = $header_content;
   }
  

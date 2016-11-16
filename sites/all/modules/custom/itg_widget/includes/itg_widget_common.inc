@@ -453,10 +453,11 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
       $sydication_field_name = 'field_story_syndication_value_op';
       $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
+      drupal_add_css(".form-item-field-story-syndication-value {display:none !important}" ,"inline");
     }
-
     if ($form['#id'] == 'views-exposed-form-recipe-management-page') {
       $query_url = array("field_story_syndication_value_1_op" => "all");
+      drupal_add_css(".form-item-field-story-syndication-value-1 {display:none !important}" ,"inline");
     }
 
     unset($form[$sydication_field_name]['#options']);
@@ -1253,6 +1254,23 @@ function itg_widget_views_query_alter(&$view, &$query) {
       }
 
       $query->where[1]['conditions'][3]['value'] = $section;
+    }
+  }
+   if ($view->name == 'most_popular' && ($view->current_display == 'election_graph' )) {
+    global $theme;
+
+    if ($theme != 'seven') {
+      if ($theme == FRONT_THEME_NAME) {
+        $section = arg(2);
+      }
+      else {
+        $section = $_GET['section'];
+      }
+      if (empty($section)) {
+        $section = $_GET['section_name'];
+      }
+
+      $query->where[1]['conditions'][1]['value'] = $section;
     }
   }
 

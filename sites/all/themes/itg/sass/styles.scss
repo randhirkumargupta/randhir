@@ -1204,7 +1204,7 @@ footer{
     }
     .itg-common-section{
         .droppable{
-            height: 408px;
+            min-height: 408px;
         }
     }
     .itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
@@ -2898,19 +2898,27 @@ footer{
     }
 }
 .poll-banner{ 
-    font-family: $itg-roboto;
-    @include listing-with-image(poll-list,left,20px,pic,detail);
+    font-family: $itg-roboto;    
     ul{
         @extend .list-none;
     }
     .poll-list{            
         padding:0 0 30px 0; 
+        @include clearfix;        
+        .pic{
+            float: left;
+            margin-right: 20px;
+            width: 22%;
+        }
     }
-    .detail{
-        @include clearfix;
-        .detail-content{
-            @include float(left);
-            width: 55%;
+    .detail{          
+        @include font(14px);        
+        line-height: 19px;
+        color: #323232;
+        float: left;
+        padding-right: 10px;
+        width: 41.5%;
+        .detail-content{            
             color:#8a8a8a;
             h4{
                 @include font(18px,24px,$itg-font-bold);
@@ -2920,10 +2928,22 @@ footer{
             .vota, .time{
                 @include font(12px);
             }
+        }        
+        .social-share{
+            display: inline-block;
+            vertical-align: middle;
+            @include social-share;    
+            ul{
+                li{
+                    padding-right: 4px;                    
+                }
+            }
         }
+    }
+    .poll-list{
         .voting-data{
             @include float(right);
-            width: 45%;
+            width: 32.5%;
             .past-poll{
                 li{
                     margin-bottom: 20px;
@@ -2985,7 +3005,7 @@ footer{
                     }
                     .noofvotes, .percentage{
                         float: left;
-                        width: 80px;
+                        width: 70px;
                         padding-left: 20px;
                     }
                     .poll-past-percentage-progess{
@@ -2996,22 +3016,16 @@ footer{
                 }
             }
         }
-        .social-share{
-            display: inline-block;
-            vertical-align: middle;
-            @include social-share;    
-            ul{
-                li{
-                    padding-right: 4px;                    
-                }
-            }
         }
-    }
 }
 .home_page_poll_widget_block{
     .widget-title{
         @include pos(absolute);   
     }    
+    .poll-wrapper .poll-data .poll-replace-id .get-result{
+        padding-bottom: 10px;
+        color: green;
+    }
 }
 /*End Poll Landing page*/
 
@@ -4883,6 +4897,41 @@ footer{
 }
 /* End of CSS */
 /*CSS start for event page index*/
+.event-sidebar {
+    .header-top{               
+        .event-header-banner{            
+            @include pos(relative);
+            text-align: center;
+            .event-add-header{
+                position: absolute;
+                top: 45px;
+                width: 100%;
+            }
+        }        
+    }
+}
+.view-event-photo-slider{
+    .slick-slider {
+        .slick-prev, .slick-next{
+            background: #000 none repeat scroll 0 0;
+            color: #fff;
+            cursor: pointer;
+            font-size: 25px;
+            height: 25px;
+            line-height: 25px;
+            margin-top: -12px;
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            width: 25px;
+            z-index: 1;
+        }
+        .slick-next{
+            right: 0;
+            left: auto;
+        }
+    }
+}
 #block-itg-event-backend-program-tab-block{    
     ul{
         @extend .list-none;
@@ -4951,6 +5000,7 @@ footer{
                         vertical-align: middle;
                         padding-left: 15px;
                         color: #6e6e6e;
+                        font-weight: normal;
                         .speaker-title{
                             font-weight: 700;
                         }                        
@@ -5006,7 +5056,7 @@ footer{
         }
     }
 }
-#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration{
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container{
     h2{
         font-size: 20px;
         border-bottom: 1px solid $border-color;
@@ -5124,7 +5174,10 @@ footer{
                     padding-left: 15px;
                     &.title, &.designation{
                         @include font(12px);
-                    }                    
+                    }
+                    &.designation{
+                        font-weight: normal;
+                    }
                 }
                 &:nth-child(1){
                     width: 28%;
@@ -5173,6 +5226,26 @@ footer{
               }
           }
       }
+    }
+    .event-detail{
+        background: #ef3c24;
+        color: #fff;
+        text-align: center;
+        .event-str-date{
+            font-size: 24px;
+            display: block;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 7px 0;
+            font-weight: 700;
+        }
+        .event-vanue-detail-place{
+            background: #000;
+            padding: 0px 35px;
+            font-size: 12px;
+            text-transform: uppercase;
+            @include display-inline;
+        }
     }
 }
 #block-itg-event-backend-ad-right-sidebar-event {
@@ -5254,6 +5327,16 @@ footer{
     font-weight: 600;
     line-height: 24px;
     margin-bottom: 30px;
+}
+.sponsor-detail-container{
+    @include listing-with-image(sponsor-detail,left,10px,pic,detail);
+    .pic{
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+    .title{
+        @include font(20px,26px,700);
+    }
 }
 
 /*CSS end for event page index*/
