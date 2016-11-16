@@ -731,7 +731,9 @@ jQuery(document).ready(function() {
 
     // jQuery code to toggle ITG-STORY Form
     jQuery('.itg-form-section-wrapper').on('click', 'h2', function() {
-      jQuery(this).toggleClass('active');
+      setTimeout(function(){
+        jQuery(this).toggleClass('active');
+      }, 10);
       jQuery(this).next().slideToggle();
         
     });
