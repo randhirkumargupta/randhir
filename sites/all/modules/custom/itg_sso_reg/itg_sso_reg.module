@@ -61,6 +61,13 @@ function itg_sso_reg_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['password-success'] = array(
+    'title' => '',
+    'page callback' => 'itg_sso_reg_password_success',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   $items['otpajaxcallback'] = array(
     'title' => 'Test form',
@@ -200,7 +207,7 @@ function itg_sso_logout_form($form, &$form_state) {
   );
   
   return $form;
-//   return system_settings_form($form);
+
 }
 
 /**
@@ -231,5 +238,22 @@ function itguser_logout() {
   }
   else {
     drupal_access_denied();
+  }
+}
+
+/**
+ * Implements itg_sso_reg_password_success().
+ */
+function itg_sso_reg_password_success() {
+  if (user_is_anonymous()) {
+    return drupal_access_denied();
+  }
+  else {
+    $form['password_success'] = array(
+      '#prefix' => '<div class="password-success">',
+      '#markup' => 'Your passsword has been changed successfully</div>',
+    );
+
+    return $form;
   }
 }

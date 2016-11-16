@@ -1,20 +1,28 @@
 <div class="page-sports-photo">
-<div class="view-content">
+  <div class="view-content">
     <ul class="photo-list"> 
-        <?php foreach ($rows as $index => $row) {
-            ?>
+      <?php
+      foreach ($rows as $index => $row) {
+        if (!empty($row['field_story_extra_large_image'])) {
+          $img = $row['field_story_extra_large_image'];
+        }
+        else {
+          global $base_url;
+          $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_video.jpg' />";
+        }
+        ?>
 
-            <li class="col-md-3">
+        <li class="col-md-3">
 
-                <div class="tile">
-                    <figure><?php print $row['field_story_extra_large_image']; ?>
-                        <figcaption><i class="fa fa-camera"></i> <?php echo $row['delta']; ?></figcaption>
-                    </figure>
-                    <span class="posted-on"><?php echo $row['created']; ?></span>
-                    <?php print ucfirst($row['title']); ?>
-                </div>         
-            </li>
-        <?php }; ?>
+          <div class="tile">
+            <figure><?php print $img; ?>
+              <figcaption><i class="fa fa-camera"></i> <?php echo $row['delta']; ?></figcaption>
+            </figure>
+            <span class="posted-on"><?php echo $row['created']; ?></span>
+  <?php print ucfirst($row['title']); ?>
+          </div>         
+        </li>
+<?php }; ?>
     </ul>
-</div>
+  </div>
 </div>
