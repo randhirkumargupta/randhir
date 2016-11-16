@@ -1161,7 +1161,7 @@ function itg_videogallery_ajax_ftp_video() {
   //echo '<div id="edit-video-browse-select">' . $val . '</div>';
   echo '<div id="edit-video-browse-select">' . $val . '</div><script>jQuery("#edit-video-browse-select").easyPaginate({
 		paginateElement: ".ftp_video_radio",
-		elementsPerPage: 7,
+		elementsPerPage: 21,
 		effect: "climb"
 	});</script>';
 
@@ -1191,7 +1191,7 @@ function itg_videogallery_ajax_time_filter_video() {
   //echo '<div id="edit-video-browse-select">' . $val . '</div>';
   echo '<div id="edit-video-browse-select">' . $val . '</div><script>jQuery("#edit-video-browse-select").easyPaginate({
 		paginateElement: ".ftp_video_radio",
-		elementsPerPage: 7,
+		elementsPerPage: 21,
 		effect: "climb"
 	});</script>';
 
@@ -1210,7 +1210,10 @@ function itg_videogallery_ftp_used_video($before_time = NULL) {
   $query->distinct();
   $query->condition('fu.type', 'node', '=');
   $query->condition('uri', db_like('public://dailymotion_video_dir/') . '%', LIKE);
-  $query->condition('dailymotion_thumb_url', 'deleted_video_dailymotion', '!=');
+  $db_or = db_or();
+  $db_or->condition('drd.dailymotion_thumb_url', 'deleted_video_dailymotion', '!=');
+  $db_or->condition(db_or()->isNull('drd.dailymotion_thumb_url'));
+  $query->condition($db_or);
   if (!empty($before_time) && is_numeric($before_time)) {
     $query->condition('drd.upload_time', $before_time, '>');
   }
