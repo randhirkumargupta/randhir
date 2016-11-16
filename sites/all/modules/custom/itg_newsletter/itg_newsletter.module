@@ -768,3 +768,18 @@ function itg_newslatter_register_more_updates_check($email) {
   $query->condition('email', $email, '=');
   $query->range(0, 1)->execute()->rowCount();
 }
+
+/**
+ * Get Email address of users who has subscribed for newsletter
+ * @return array
+ */
+function itg_newslatter_get_subscribe_users_email() {
+  $query = db_select('users', 'u');
+  $query->join('field_data_field_subscribe_for_newsletter', 'ns', 'ns.entity_id = u.uid');
+  $query->fields('u', array('mail'));
+  $result = $query->execute();
+  while ($records = $result->fetchAssoc()) {
+    $user_emails[] = $records['mail'];
+  }
+  return $user_emails;
+}

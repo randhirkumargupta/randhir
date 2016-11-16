@@ -1035,16 +1035,20 @@ function event_backend_field_default_field_instances() {
   // Exported field_instance: 'node-event_backend-field_e_content_font_color'.
   $field_instances['node-event_backend-field_e_content_font_color'] = array(
     'bundle' => 'event_backend',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => '#000',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'color_field',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'color_field_default_formatter',
-        'weight' => 30,
+        'type' => 'text_default',
+        'weight' => 36,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1060,14 +1064,17 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'color_field',
-      'settings' => array(),
-      'type' => 'color_field_default_widget',
-      'weight' => 22,
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 30,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 23,
     ),
   );
 
@@ -1139,16 +1146,20 @@ function event_backend_field_default_field_instances() {
   // Exported field_instance: 'node-event_backend-field_e_heading_bck_color'.
   $field_instances['node-event_backend-field_e_heading_bck_color'] = array(
     'bundle' => 'event_backend',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => '#eee',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'color_field',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'color_field_default_formatter',
-        'weight' => 28,
+        'type' => 'text_default',
+        'weight' => 34,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1164,14 +1175,17 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'color_field',
-      'settings' => array(),
-      'type' => 'color_field_default_widget',
-      'weight' => 20,
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 30,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 21,
     ),
   );
 
@@ -1179,16 +1193,20 @@ function event_backend_field_default_field_instances() {
   // 'node-event_backend-field_e_highlighted_font_color'.
   $field_instances['node-event_backend-field_e_highlighted_font_color'] = array(
     'bundle' => 'event_backend',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => '#ef2a24',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'color_field',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'color_field_default_formatter',
-        'weight' => 29,
+        'type' => 'text_default',
+        'weight' => 35,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1204,30 +1222,37 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'color_field',
-      'settings' => array(),
-      'type' => 'color_field_default_widget',
-      'weight' => 21,
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 30,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 22,
     ),
   );
 
   // Exported field_instance: 'node-event_backend-field_e_menu_bck_color'.
   $field_instances['node-event_backend-field_e_menu_bck_color'] = array(
     'bundle' => 'event_backend',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => '#000000',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'color_field',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'color_field_default_formatter',
-        'weight' => 27,
+        'type' => 'text_default',
+        'weight' => 32,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1243,14 +1268,155 @@ function event_backend_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'color_field',
-      'settings' => array(),
-      'type' => 'color_field_default_widget',
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 30,
+      ),
+      'type' => 'text_textfield',
       'weight' => 19,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_e_menu_font_color'.
+  $field_instances['node-event_backend-field_e_menu_font_color'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => array(
+      0 => array(
+        'value' => '#FFFF00',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 33,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_e_menu_font_color',
+    'label' => 'Menu Font Color',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 30,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_e_program_title_color'.
+  $field_instances['node-event_backend-field_e_program_title_color'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => array(
+      0 => array(
+        'value' => '#000',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 38,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_e_program_title_color',
+    'label' => 'Program Title color',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 30,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 25,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_e_tab_color'.
+  $field_instances['node-event_backend-field_e_tab_color'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => array(
+      0 => array(
+        'value' => '#a00606',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 37,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_e_tab_color',
+    'label' => 'Tab Color',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 30,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 24,
     ),
   );
 
@@ -2192,9 +2358,11 @@ function event_backend_field_default_field_instances() {
   t('Kicker Text');
   t('Master Title');
   t('Menu Background Color');
+  t('Menu Font Color');
   t('No. of Tickets');
   t('Photo');
   t('Program Schedule');
+  t('Program Title color');
   t('Programme');
   t('Registration Close Date');
   t('Registration start date');
@@ -2207,6 +2375,7 @@ function event_backend_field_default_field_instances() {
   t('Sponsor Type');
   t('Sponsors');
   t('Start Time');
+  t('Tab Color');
   t('The complete description of the event.');
   t('This displays information about the event.');
   t('Values – Paid, Free and Invite');
