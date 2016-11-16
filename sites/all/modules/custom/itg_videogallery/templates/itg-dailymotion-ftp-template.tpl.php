@@ -4,14 +4,14 @@
  * Theme implementation for story form in tab display.
  * 
  */
-
+global $base_url;
 ?>
 <div id="videoupload">
   <div class="browse-ftp">
     <div id="itg_video_content">
       <div class="video-ftp active"><?php print t('Server'); ?></div>
       <div class="video-local"><?php print t('Local Browse'); ?></div>
-      <div id="loader-data"><img class="widget-loader" style="display: none" align="center" src="<?php echo base_path(); ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
+      <div id="loader-data"><img class="widget-loader" style="display: none" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>
 
       <div class="ftp-server">
         <div class="video_filters">
@@ -47,7 +47,7 @@
 <?php 
 $field_id = $_GET['input_filed'];
 $file_field_name = $_GET['file_filed_name'];
- global $base_url;
+ 
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['video_field_id'] = $field_id;
