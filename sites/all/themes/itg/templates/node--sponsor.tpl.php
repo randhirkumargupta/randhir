@@ -33,7 +33,7 @@
  * 
  * @ingroup themeable
  */
-
+$sponser_logo = $node->field_sponser_logo[LANGUAGE_NONE][0]['uri'];
 ?>
 <a href="javascript:;" class="close-preview">&nbsp;</a>
 <?php if (!empty($pre_object)) print render($pre_object) ?>
@@ -60,14 +60,16 @@
   <?php if ($layout): ?>
     <div class='column-main'><div class='column-wrapper'>
   <?php endif; ?>
-        <h2>Sponsors</h2>
-  <?php
-  $sponser_logo = $node->field_sponser_logo[LANGUAGE_NONE][0]['uri'];
-  print $title;
-  print theme('image_style', array('style_name' => 'thumbnail', 'path' => $sponser_logo));
-  print $node->body[LANGUAGE_NONE][0]['value'];
-
-  ?>
+  <div class="sponsor-detail-container">
+    <h2>Sponsors</h2>
+    <div class="sponsor-detail">
+      <div class="pic"><?php print theme('image_style', array('style_name' => 'thumbnail', 'path' => $sponser_logo)); ?></div>
+      <div class="detail">
+        <div class="title"><?php print $title; ?></div>
+        <?php print $node->body[LANGUAGE_NONE][0]['value']; ?>
+      </div>
+    </div>
+  </div>
 
   <?php if (!empty($title_suffix)) print render($title_suffix); ?>
 

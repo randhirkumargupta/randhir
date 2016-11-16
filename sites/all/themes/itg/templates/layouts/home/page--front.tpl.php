@@ -620,7 +620,7 @@ print '<div id="second-section-card">';
       </div>
 <?php } else { ?>
     <div class="load-more-wrapper-fornt">
-        <a href="javascript:void(0)" class="add-more-block-fornt">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
       </div>
 <?php } ?>
     </div>
