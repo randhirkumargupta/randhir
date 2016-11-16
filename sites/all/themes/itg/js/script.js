@@ -158,6 +158,12 @@ Drupal.behaviors.my_custom_behavior = {
       if(activate_account){
         $('.activate-message').show();
       }
+      
+      /* code to show change password popup */
+      var change_password = getUrlParameter('pass');
+      if(change_password){
+        $('.activate-message').show();
+      }
   }
 };
 

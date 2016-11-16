@@ -111,7 +111,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
           }
           else {
             ?>
-            <a onclick="Go(550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>')" class="user-icon"><i class="fa fa-user"></i></a>
+            <a onclick="Go(550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>','/saml_login/other')" class="user-icon"><i class="fa fa-user"></i></a>
 
             <?php
           }
