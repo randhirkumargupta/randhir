@@ -8,7 +8,7 @@
         attach: function (context, settings) {
             var uid = settings.itg_flag.settings.uid;
             var base_url = settings.itg_flag.settings.base_url;
-            //alert(base_url);
+            
             $('#like_count,#dislike_count').click(function (event) {
                 
                 var nd_id = jQuery(this).attr('rel');
@@ -43,6 +43,33 @@
                     });
                
             });
+            
+            // code for related content hide show
+            
+           $('.hide_sh').click(function (event) {
+               var obj = jQuery(this);
+                var nd_id = jQuery(this).attr('rel');
+                var post_data = "&nd_id="+ nd_id;
+
+                    $.ajax({
+                        'url': base_url + '/related-details-ajax',
+                        'data': post_data,
+                        'cache': false,
+                        'type': 'POST',
+                        // dataType: 'json',
+                        beforeSend: function () {
+                           
+                        },
+                        'success': function (result)
+                        {
+                            obj.next('.nxt').html(result);
+                         ///obj.html(result);
+                        }
+                    });
+               
+            }); 
+            
+            // end here
         }
 
     };
