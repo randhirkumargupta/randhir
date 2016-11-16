@@ -6,6 +6,21 @@
  * Contains functionality for Front end.
  *
  */
+
+/**
+ * Implements hook_menu().
+ * @return array
+ */
+function itg_front_end_common_menu() {
+  $items['related-details-ajax'] = array(
+    'page callback' => 'itg_related_hide_show_details',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
 /**
  * Implements hook_block_info().
  * @return array
@@ -156,4 +171,113 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
     drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
     drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
   }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ * {@inheritdoc}
+ */
+function itg_front_end_common_views_pre_render(&$view) {
+  global $base_url;
+  if (isset($view->name) && ($view->name == "related_photogallery") && ($view->current_display == 'page_1')) {
+    global $user, $base_url;
+    foreach ($view->result as $related_video_result) {
+      $cat_id = taxonomy_term_load($related_video_result->field_field_primary_category[0]['raw']['value']);
+      $related_video_result->field_field_primary_category[0]['rendered']['#markup'] = $cat_id->name;
+    }
+  }
+}
+
+
+/**
+ * Implement hook_form_alter
+ * {@inheritdoc}
+ */
+//function itg_front_end_common_form_alter(&$form, &$form_state, $form_id) {
+//   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'sambandhit_khabre' && $form_state['view']->current_display == 'page') {
+//    //$form['entity_id']['#access'] = false;
+//    $arg = arg();
+//    $related_content = itg_get_related_content($arg[1]);
+//    $related_content = explode(',', $related_content);
+//    foreach($related_content as $fn_result) {
+//      $related_content = explode('_', $fn_result);
+//      $final_related [] = $related_content[1];
+//    }
+//    $final_related = implode(' OR ', $final_related);
+//    $form['entity_id']['#value'] = $final_related;
+//  }
+//}
+
+/**
+ * Custom function to fetch related content.
+ * @param int $nid
+ */
+function itg_get_related_content($nid) {
+
+  $query = db_select('field_data_field_common_related_content', 'tt');
+  $query->fields('tt', array('field_common_related_content_value'));
+  $query->condition('tt.entity_id', $nid, '=');
+  $related_result = $query->execute()->fetchField();
+  return $related_result;
+}
+
+/**
+ * Implements make_hin_str().
+ * @param string $str
+ */
+function make_hin_str($str) {
+  $engStr = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'UPDATED');
+  $hinStr = array('रविवार', 'सोमवार', 'मंगलवार', 'बुधवार', 'गुरुवार', 'शुक्रवार', 'शनिवार', 'जनवरी', 'फरवरी', 'मार्च', 'अप्रैल', 'जून', 'मई', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर', 'जनवरी', 'फरवरी', 'मार्च', 'अप्रैल', 'जून', 'मई', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर', 'अप्डैटिड');
+  $converted = str_replace($engStr, $hinStr, $str);
+  return $converted;
+}
+
+/**
+ * Implements itg_front_end_node_weight().
+ * @param int $nid
+ * @param string $view_name
+ * @param string $view_display
+ */
+function itg_front_end_node_weight($nid, $view_name, $view_display) {
+  $query = db_select('draggableviews_structure', 'ds');
+  $query->fields('ds', array('dvid'));
+  $query->condition('ds.view_name', $view_name, '=');
+  $query->condition('ds.view_display', $view_display, '=');
+  $query->condition('ds.entity_id', $nid, '=');
+  $weight_result = $query->execute()->fetchField();
+  return $weight_result;
+}
+
+/**
+ * Implements itg_get_previousnext_weight().
+ * @param int $vvid
+ * @param string $view_name
+ * @param string $view_display
+ */
+function itg_get_previousnext_weight($vvid, $view_name, $view_display) {
+  $query = db_select('draggableviews_structure', 'ds');
+  $query->fields('ds', array('entity_id'));
+  $query->condition('ds.view_name', $view_name, '=');
+  $query->condition('ds.view_display', $view_display, '=');
+  $query->condition('ds.dvid', $vvid, '=');
+  $weight_result = $query->execute()->fetchField();
+  return $weight_result;
+}
+
+
+/**
+ * Implements itg_flag_details
+ */
+function itg_related_hide_show_details() {
+  global $user;
+  $nd_id = $_POST['nd_id'];
+  $related_content = itg_get_related_content($nd_id);
+                  $related_content = explode(',', $related_content);
+                  foreach ($related_content as $fn_result) {
+                    $related_content = explode('_', $fn_result);
+                    $final_related [] = $related_content[1];
+                  }
+                  $final_related = implode(' OR ', $final_related);
+  echo views_embed_view('sambandhit_khabre', 'page', $final_related);
+  exit;
 }
