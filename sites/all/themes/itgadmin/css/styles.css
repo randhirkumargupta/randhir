@@ -6812,7 +6812,6 @@ div.node #comments h2 {
 }
 .ftp-server #edit-video-browse-select .ftp_video_radio label {
   border: 1px solid #d9d9d9;
-  box-shadow: 0 0 5px 1px #666;
   background: url(../images/default_for_all.png) no-repeat left top/100% auto;
   font-size: 12px;
   height: 100%;
@@ -6868,6 +6867,9 @@ div.node #comments h2 {
   cursor: pointer;
   width: 100%;
   z-index: 999;
+}
+.ftp-server #edit-video-browse-select .ftp_video_radio .form-radio:hover + label, .ftp-server #edit-video-browse-select .ftp_video_radio .form-radio:checked + label {
+  box-shadow: 0 0 5px 1px #666;
 }
 .ftp-server #edit-video-browse-select .ftp_video_radio .form-radio:checked + label:before, .ftp-server #edit-video-browse-select .ftp_video_radio .form-radio:checked + label:after {
   top: 0;
