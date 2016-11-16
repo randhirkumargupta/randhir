@@ -6802,7 +6802,6 @@ div.node #comments h2 {
   margin: 0 15px 15px 0;
   width: 120px;
   height: 120px;
-  border: 1px solid #d9d9d9;
 }
 .ftp-server #edit-video-browse-select .ftp_video_radio img {
   height: 67%;
@@ -6812,6 +6811,8 @@ div.node #comments h2 {
   width: 100%;
 }
 .ftp-server #edit-video-browse-select .ftp_video_radio label {
+  border: 1px solid #d9d9d9;
+  box-shadow: 0 0 5px 1px #666;
   background: url(../images/default_for_all.png) no-repeat left top/100% auto;
   font-size: 12px;
   height: 100%;
@@ -6864,6 +6865,7 @@ div.node #comments h2 {
   margin: 0;
   opacity: 0;
   position: absolute;
+  cursor: pointer;
   width: 100%;
   z-index: 999;
 }
@@ -6976,16 +6978,15 @@ div.node #comments h2 {
   z-index: 99999;
 }
 
-.loader_overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+/*.loader_overlay{
+  background-color: rgba(0,0,0,.5);
   display: block;
   height: 100%;
   left: 0;
   position: absolute;
   top: 0;
   width: 100%;
-}
-
+}*/
 #itg-image-croping-crop-form .form-item-aspect-ratio {
   padding: 0;
   text-align: center;
@@ -9390,4 +9391,23 @@ div.node #comments h2 {
 
 .browse-video-form .ftp_browse_field div.description {
   padding: 3px 0 0 200px;
+}
+
+#videoupload #loader-data {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.38);
+  height: 100%;
+  z-index: 9999;
+  text-align: center;
+  color: #fff;
+  padding-top: 150px;
+  font-size: 18px;
+  display: none;
+}
+
+#videoupload #loader-data.loader_overlay {
+  display: block;
 }
