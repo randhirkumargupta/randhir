@@ -68,7 +68,6 @@ $budget_message_flag = $data['budget_message_flag'];
           <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
       </ul>
   </div>
-  
   <?php if (empty($file_name)) { ?>
     <button type="button" onclick="captureCurrentDiv()">Save Budget</button>
   <?php

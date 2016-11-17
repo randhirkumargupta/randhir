@@ -128,7 +128,6 @@ function itg_budget_predictor_schema() {
         ),
         'primary key' => array('id'),
       );
-    
     return $schema;
 }
 
