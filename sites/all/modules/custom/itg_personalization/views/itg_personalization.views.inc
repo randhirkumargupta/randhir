@@ -7,7 +7,7 @@
  * Implements hook_views_data_alter().
  *
  * @param $data
- *   Information about Views' tables and fields.
+ *   Information about Views tables and fields.
  */
 function itg_personalization_views_data_alter(&$data) {  
   // Add the Title form field to the node-related fields.

@@ -6686,11 +6686,16 @@ div.node #comments h2 {
 #itg_video_content .ftp-server, #itg_video_content .local_browse {
   padding: 20px 0;
 }
+#itg_video_content .ftp-server .video_filters > div {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+#itg_video_content .ftp-server .video_filters .reset_video_filter {
+  margin-top: 2px;
+}
 #itg_video_content .ftp-server .video_filters label {
   margin-right: 5px;
-}
-#itg_video_content .ftp-server .video_filters .time-filter {
-  margin-left: 20px;
 }
 #itg_video_content .attach-video, #itg_video_content .browse-local {
   margin-top: 20px;

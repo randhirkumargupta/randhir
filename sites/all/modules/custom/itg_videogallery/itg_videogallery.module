@@ -624,6 +624,11 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+  $items['dailymotion-video-search-filter'] = array(
+    'page callback' => 'itg_videogallery_ajax_time_search_video',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   $items['dailymotion-ftp-template'] = array(
     'page callback' => 'itg_videogallery_ftp_template',
     'access arguments' => array('access content'),
@@ -1171,7 +1176,10 @@ function itg_videogallery_ajax_ftp_video() {
  * Implements function for time filter ajax
  */
 function itg_videogallery_ajax_time_filter_video() {
-  $back_time = $_POST['back_time'];
+  $ajax_data = $_POST['back_time'];
+  $filters = explode('@', $ajax_data);
+  $back_time = $filters[0];
+  $searh_key = $filters[1];
   $val = '';
   if ($back_time) {
     if (is_numeric($back_time)) {
@@ -1180,7 +1188,7 @@ function itg_videogallery_ajax_time_filter_video() {
     elseif ($before_time == '-all-') {
       $before_time = '-all-';
     }
-    $used_video = itg_videogallery_ftp_used_video($before_time);
+    $used_video = itg_videogallery_ftp_used_video($before_time, $searh_key);
     foreach ($used_video as $key => $u_video) {
       $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' .'<img src="'.$u_video['thumb_url'].'">'. $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
     }
@@ -1196,12 +1204,51 @@ function itg_videogallery_ajax_time_filter_video() {
 	});</script>';
 
 }
+/**
+ * Implements function for video search filter ajax
+ */
+function itg_videogallery_ajax_time_search_video() {
+  $ajax_data = $_POST['back_time'];
+  $filters = explode('@', $ajax_data);
+  $search_key = $filters[1];
+  if($filters[0] == 'used'){
+    $back_time = $filters[2];
+     $val = '';
+  if ($back_time) {
+    if (is_numeric($back_time)) {
+      $before_time = time() - (60 * 60 * $back_time);
+    }
+    elseif ($back_time == '-all-') {
+      $before_time = '-all-';
+    }
+    $used_video = itg_videogallery_ftp_used_video($before_time, $search_key);
+    foreach ($used_video as $key => $u_video) {
+      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' .'<img src="'.$u_video['thumb_url'].'">'. $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
+    }
+  }
+  }elseif($filters[0] == 'unused'){
+    $unused_video = itg_videogallery_ftp_unused_video($search_key);
+    foreach ($unused_video as $key => $un_video) {
+      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' .  $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
+    }
+  }
+  if (empty($val)) {
+    $val = "Result not found.";
+  }
+ 
+  echo '<div id="edit-video-browse-select">' . $val . '</div><script>jQuery("#edit-video-browse-select").easyPaginate({
+		paginateElement: ".ftp_video_radio",
+		elementsPerPage: 21,
+		effect: "climb"
+	});</script>';
+
+}
 
 /**
  * Implement function for get used video on FTP
  * @return array new function
  */
-function itg_videogallery_ftp_used_video($before_time = NULL) {
+function itg_videogallery_ftp_used_video($before_time = NULL, $searh_key = NULL) {
   $query = db_select('file_managed', 'fm');
   $query->fields('fm', array('fid', 'filesize', 'filename'));
   $query->Join('file_usage', 'fu', 'fu.fid = fm.fid');
@@ -1217,6 +1264,9 @@ function itg_videogallery_ftp_used_video($before_time = NULL) {
   if (!empty($before_time) && is_numeric($before_time)) {
     $query->condition('drd.upload_time', $before_time, '>');
   }
+  if(!empty($searh_key)){
+    $query->condition('fm.filename', '%' . db_like($searh_key) . '%', LIKE);
+  }
   $results = $query->execute();
   foreach ($results as $result) {
     $used_video[$result->fid]['filename'] = $result->filename;
@@ -1230,7 +1280,7 @@ function itg_videogallery_ftp_used_video($before_time = NULL) {
  * Implement function for get unused video on FTP
  * @return array
  */
-function itg_videogallery_ftp_unused_video() {
+function itg_videogallery_ftp_unused_video($search_key = NULL) {
   $connection_id = itg_videogallery_ftp_video_list();
   ftp_pasv($connection_id, true);
   $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
@@ -1240,25 +1290,27 @@ function itg_videogallery_ftp_unused_video() {
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
     if (isset($extension) && $extension == 'mp4') {
-      $new_file[] = itg_videogallery_ftp_unused_file($file_array[1]);
+      $new_file[] = 'public://dailymotion_video_dir/'.$file_array[1];
     }
   }
-  foreach ($new_file as $final_file) {
-    if (!empty($final_file['filename'])) {
-      $options[$final_file['fid']]['filename'] = $final_file['filename'];
-      $options[$final_file['fid']]['filesize'] = number_format($final_file['filesize'] / (1024 * 1024), 2);
+  $ftp_current_videos = itg_videogallery_ftp_unused_file($new_file, $search_key);
+  foreach ($ftp_current_videos as $final_file) {
+    if (!empty($final_file->filename)) {
+      $options[$final_file->fid]['filename'] = $final_file->filename;
+      $options[$final_file->fid]['filesize'] = number_format($final_file->filesize / (1024 * 1024), 2);
     }
   }
   return $options;
 }
+
+
 
 /**
  * Implements function for get unused files.
  * @param string $filename
  * @return array
  */
-function itg_videogallery_ftp_unused_file($filename) {
-  $uri = 'public://dailymotion_video_dir/' . $filename;
+function itg_videogallery_ftp_unused_file($filename, $search_key = NULL) {
   $query = db_select('file_managed', 'fm');
   $query->fields('fm', array('fid'));
   $query->Join('file_usage', 'fu', 'fu.fid = fm.fid');
@@ -1278,11 +1330,15 @@ function itg_videogallery_ftp_unused_file($filename) {
   $query->distinct();
   $query->condition('fu.type', 'file', '=');
   $query->condition('fm.fid', $used_fid, 'NOT IN');
-  $query->condition('fm.uri', $uri, '=');
-  $query->range(0, 1);
-  $result_unused = $query->execute()->fetchAssoc();
+  $query->condition('fm.uri', $filename, 'IN');
+  if(!empty($search_key)){
+     $query->condition('fm.filename', '%'. db_like($search_key) . '%', LIKE);
+  }  
+  $result_unused = $query->execute()->fetchAll();
   return $result_unused;
 }
+
+
 
 /**
  * Implements hook_views_query_alter()
