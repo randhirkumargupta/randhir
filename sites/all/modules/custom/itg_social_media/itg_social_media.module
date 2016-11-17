@@ -120,9 +120,8 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       $form['status']['#options'][1] = 'Published';
       $form['status']['#options'][0] = 'Unpublished';     
       
-      break;
+      break;  
     
-    case 'views-exposed-form-report-filed-content-page':
     case 'views-exposed-form-browse-content-page':
       $form['created']['min'] = array(        
         '#type' => 'date_popup',
