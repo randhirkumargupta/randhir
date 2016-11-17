@@ -15,12 +15,16 @@ global $base_url;
 
       <div class="ftp-server">
         <div class="video_filters">
-          <label><?php echo t('Filter') ?>:</label><select class="used-unused-select">
+          <div class="video-search">
+            <label><?php echo t('Search by title'); ?>:</label><input type="text" id="video_text_search" onkeyup="videosearch()"/>
+          </div>
+          <label><?php echo t('Filter By') ?>:</label><select class="used-unused-select">
               <option value="unused"><?php print t("Un Published"); ?></option>
               <option value="used"><?php print t("Published"); ?></option>
             </select>
+          
           <div class="time-filter">
-            <label><?php echo t('Last uploaded') ?>:</label><select class="time-filter-select">
+            <label><?php echo t('Time range') ?>:</label><select class="time-filter-select">
                 <option value="-all-"><?php print t("All"); ?></option>  
                 <option value="2"><?php print t("2 Hours"); ?></option>
                 <option value="4"><?php print t("4 Hours"); ?></option>
@@ -28,6 +32,9 @@ global $base_url;
                 <option value="10"><?php print t("10 Hours"); ?></option>
                 <option value="24"><?php print t("24 Hours"); ?></option>
               </select>
+          </div>
+          <div class="reset_video_filter">
+            <span class="button reset_video_filters">Reset</span>
           </div>
         </div>
         <div class="video-options-wrapper"></div>
