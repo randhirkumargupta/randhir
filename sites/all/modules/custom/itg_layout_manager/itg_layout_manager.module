@@ -193,6 +193,21 @@ function itg_layout_manager_block_view($delta = '') {
             break;
 
         case 'footer_block':
+            /* code for change password, email, mobile confirmation popup */
+          
+            if (arg(0) == 'personalization') {
+              // change message according to argument
+            if(!empty($_GET['pass']) && ($_GET['pass'] == 'success')) {
+              $change_pass_msg = 'Your password has been changed successfully!';
+            }
+            $pop_output = '<div class = "activate-message">';
+            $pop_output.= '<div class = "message-body">';
+            $pop_output.= '<p>'.$change_pass_msg.'</p>';
+            $pop_output.= '<a href = "javascript:void(0)" class = "close-pass-popup">ok</a>';
+            $pop_output.= '</div></div>';
+            print $pop_output;
+            }
+            
             /* code for sso login */
             global $user, $base_url;
             if (array_key_exists(FRONT_USER, $user->roles)) {
@@ -210,16 +225,17 @@ function itg_layout_manager_block_view($delta = '') {
                     $fin = arg(2);
                 }
                 
-                if(arg(0) == 'user') {
-                  $user_arg = arg(0);
-                }
-                else {
-                  $user_arg = 'othuser';
+                // condition for change password
+                
+                if(arg(0) == 'password-success') {
+                  $change_arg = arg(1);
+                  
                 }
                 
                 $settings['uid'] = $user->uid ? $user->uid : 0;
                 $settings['check_sso_url'] = $fin;
-                $settings['user_arg'] = $user_arg;
+                $settings['user_arg'] = arg(0);
+                $settings['change_arg'] = $change_arg;
                 $settings['base_url'] = $base_url;
                 drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
                 drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE));
@@ -469,8 +485,8 @@ function itg_layout_gethomecarddata() {
                 </div>               
             </div>
         </div>
-         <div class="load-more-wrapper-fornt">
-        <a href="javascript:void(0)" class="add-more-block-fornt">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+         <div class="load-more-wrapper-front">
+        <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
       </div></div>';
     }
     else {
@@ -545,8 +561,8 @@ function itg_layout_gethomecarddata_new($sectinno) {
                 </div>               
             </div>
         </div>
-         <div class="load-more-wrapper-fornt">
-        <a href="javascript:void(0)" class="add-more-block-fornt">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+         <div class="load-more-wrapper-front">
+        <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
       </div></div>';
     }
     else {

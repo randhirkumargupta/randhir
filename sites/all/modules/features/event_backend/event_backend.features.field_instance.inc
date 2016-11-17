@@ -1353,7 +1353,7 @@ function event_backend_field_default_field_instances() {
     'bundle' => 'event_backend',
     'default_value' => array(
       0 => array(
-        'rgb' => '#a00606',
+        'rgb' => '#eeeeee',
       ),
     ),
     'deleted' => 0,

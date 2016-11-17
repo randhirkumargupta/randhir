@@ -95,7 +95,7 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
   
-  if ($arg[0] == 'signup' || $arg[0] == 'forgot-password') {
+  if ($arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'password-success') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
   
