@@ -7,7 +7,6 @@
 
 /**
  * Implementation of hook_schema
- * 
  * @access public
  * @return array
  */
