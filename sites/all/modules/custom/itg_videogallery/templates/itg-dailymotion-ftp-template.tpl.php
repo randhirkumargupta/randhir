@@ -18,11 +18,13 @@ global $base_url;
           <div class="video-search">
             <label><?php echo t('Search by title'); ?>:</label><input type="text" id="video_text_search" onkeyup="videosearch()"/>
           </div>
-          <label><?php echo t('Filter By') ?>:</label><select class="used-unused-select">
+          <div class="video-select">
+            <label><?php echo t('Filter By') ?>:</label>
+            <select class="used-unused-select">
               <option value="unused"><?php print t("Un Published"); ?></option>
               <option value="used"><?php print t("Published"); ?></option>
             </select>
-          
+          </div>
           <div class="time-filter">
             <label><?php echo t('Time range') ?>:</label><select class="time-filter-select">
                 <option value="-all-"><?php print t("All"); ?></option>  

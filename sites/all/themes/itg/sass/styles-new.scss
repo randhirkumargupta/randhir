@@ -3944,6 +3944,49 @@ article.node-mega-review-critic{
 .overflow-x-auto{
   overflow-x: auto;
 }
+.page-sso-user{
+  #sso_password_form{
+    .pg-title{
+      padding: 15px;
+      font-size: 22px;
+      border-bottom: 1px solid #d9d9d9;
+      margin-bottom: 15px;
+    }
+    span.error{
+      display: block !important;
+    }
+    .form-item{
+      margin: 20px 0;
+      label{
+        display: block;
+        padding-bottom: 5px;
+      }
+      label[for="edit-pass"]{display: none;}
+    }
+
+    div.password-suggestions{
+      width: 100%;
+      ul{
+        padding: 10px 20px;
+      }
+    }
+    .form-submit{
+      background-color: #000;
+      border: 1px solid #000;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 6px 12px;
+      text-align: center;
+      white-space: nowrap;
+      height: 50px;
+      width: 33%;
+      margin-bottom: 20px;
+    }
+  }
+}
 
 
 /* Responsive CSS Personalization pages */
@@ -3966,6 +4009,22 @@ article.node-mega-review-critic{
     .personal-menu-tab{
       border: none;
       li{float: none; border: none; border-top: 1px solid #c6c6c6;}
+    }
+    .profile-edit-tab{
+      list-style: none;
+      max-width: 780px;
+      margin: 0 auto;
+      li{
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 2px;
+        a{
+          padding: 10px 20px;
+          display: block;
+          background: #f8f8f8;
+          border-radius: 10px 10px 0 0;
+        }
+      }
     }
   } 
   #block-itg-personalization-personalized-saved-content{

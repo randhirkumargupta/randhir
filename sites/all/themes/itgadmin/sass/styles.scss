@@ -6308,11 +6308,18 @@ div.node{
   }
   .ftp-server{
     .video_filters{
+      > div{
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 10px;
+      }
+      .reset_video_filter {
+        margin-top: 2px;
+      }
       label{
         margin-right: 5px;
       }
       .time-filter{
-        margin-left: 20px;
         @extend .dib;
         @extend .vtop;
       }
