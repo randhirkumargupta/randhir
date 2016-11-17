@@ -2052,6 +2052,17 @@ footer .footer-copyright {
 }
 
 /*css end watch now home page */
+/*css start homepage show*/
+.home-shows .trending-videos {
+  border: none;
+  padding-top: 25px;
+}
+.home-shows .trending-videos .trending-videos-list {
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+/*css end homepage show*/
 /*Start Story page css*/
 .story-section h1 {
   font-size: 24px;

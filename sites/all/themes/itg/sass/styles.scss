@@ -1639,8 +1639,21 @@ footer{
     }    
 }
 
-
 /*css end watch now home page */
+
+/*css start homepage show*/
+.home-shows{
+    .trending-videos {
+        border: none;
+        padding-top: 25px;
+        .trending-videos-list {
+            overflow: hidden;
+            padding: 10px 0;
+        }
+    }
+}
+/*css end homepage show*/
+
 
 /*Start Story page css*/
 @mixin story-profile-pic{
