@@ -89,7 +89,7 @@
 
   /*special event page css start here*/
   /*css start snappost page*/
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button button {
     width: 160px;
   }
 
@@ -241,6 +241,12 @@
   }
 
   /*css end poll page*/
+  /*    css start osscar page */
+  .oscar-layout-page .osscar-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+
+  /*    css start osscar page */
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -482,6 +488,10 @@
     height: auto;
   }
 
+  .itg-layout-container .itg-common-section .home-page-poll-block-wrap .droppable {
+    min-height: inherit;
+  }
+
   /*End CSS Top Block Grid Home Page*/
   /*css start special event page for osscar*/
   .oscar-layout-page .left-side {
@@ -573,23 +583,20 @@
   .page-snappost .view-content .views-row .snap-post-btm .snap-button {
     margin-top: 30px;
   }
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button button {
     width: 120px;
     height: 40px;
     font-size: 16px;
     font-size: 1rem;
     line-height: 40px;
   }
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a.disagree {
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button button.disagree {
     margin-left: 20px;
   }
 
   .page-snappost .view-content .views-row .snap-post-btm .snap-button {
     float: none;
     width: 100%;
-  }
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
-    width: 130px;
   }
   .page-snappost .view-content .views-row .snap-post-btm .snap-social {
     width: 100%;
