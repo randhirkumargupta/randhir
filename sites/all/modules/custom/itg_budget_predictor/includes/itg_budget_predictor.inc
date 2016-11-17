@@ -109,6 +109,7 @@ function itg_budget_predictor_get_taxonomy() {
     $budget_data['budget_title'] = $check_budget['budget_title'];
     $budget_data['budget_description'] = $check_budget['budget_description'];
     $budget_data['budget_message'] = $check_budget['budget_message'];
+    $budget_data['budget_social_message'] = $check_budget['budget_social_message'];
     $budget_data['budget_message_flag'] = ($check_budget_status) ? 1 : '';
   } else {
     $budget_data['exist'] = '';
@@ -426,7 +427,7 @@ function itg_manage_budget() {
     $query = db_select('itg_manage_budget', 'm');
     $query->condition('m.id', $action, '=');
     # get the desired fields from the database
-    $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_message', 'budget_year', 'status'));
+    $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_message', 'budget_social_message','budget_year', 'status'));
     # execute the query
     $results = $query->execute()->fetchObject();
   } else {
@@ -453,11 +454,18 @@ function itg_manage_budget() {
     '#required' => TRUE
   );
 
+  $form['budget_social_message'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Social message'),
+    '#default_value' => ($results->budget_social_message) ? $results->budget_social_message : '',
+    '#required' => TRUE
+  );
+  
   $form['budget_year'] = array(
     '#type' => 'select',
     '#title' => t('Select Budget Year'),
-    '#options' => array('2015' => '2015', '2016' => '2016'),
-    '#default_value' => ($results->budget_year) ? $results->budget_year : '',
+    '#options' => array(date('Y') => date('Y'), date('Y', strtotime('+1 year')) => date('Y', strtotime('+1 year'))),
+    '#default_value' => ($results->budget_year) ? $results->budget_year : date('Y'),
     '#required' => TRUE
   );
 
@@ -465,7 +473,7 @@ function itg_manage_budget() {
     '#type' => 'radios',
     '#title' => t('Budget status'),
     '#options' => array(1 => "Show", 2 => "Off"),
-    '#default_value' => ($results->status) ? $results->status : '',
+    '#default_value' => ($results->status) ? $results->status : 2,
     '#required' => TRUE
   );
 
@@ -496,6 +504,7 @@ function itg_manage_budget_submit($form, &$form_state) {
   $budget_title = $form_state['values']['budget_title'];
   $budget_description = $form_state['values']['budget_description'];
   $budget_message = $form_state['values']['budget_message'];
+  $budget_social_message = $form_state['values']['budget_social_message'];
   $budget_year = $form_state['values']['budget_year'];
   $budget_status = $form_state['values']['budget_status'];
   $budget_action = $form_state['values']['budget_action'];
@@ -505,6 +514,7 @@ function itg_manage_budget_submit($form, &$form_state) {
           'budget_title' => $budget_title,
           'budget_description' => $budget_description,
           'budget_message' => $budget_message,
+          'budget_social_message' => $budget_social_message,
           'budget_year' => $budget_year,
           'status' => $budget_status,
         ))
@@ -517,6 +527,7 @@ function itg_manage_budget_submit($form, &$form_state) {
           'budget_title' => $budget_title,
           'budget_description' => $budget_description,
           'budget_message' => $budget_message,
+          'budget_social_message' => $budget_social_message,
           'budget_year' => $budget_year,
           'status' => $budget_status,
           'created_date' => REQUEST_TIME,
@@ -579,7 +590,7 @@ function itg_budget_download_image() {
  */
 function check_budget($year) {
   $query = db_select('itg_manage_budget', 'm');
-  $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_message', 'status'));
+  $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_message', 'budget_social_message', 'status'));
   $query->condition('m.budget_year', $year);
   $record = $query->range(0, 1)->execute()->fetchAssoc();
   return $record;
