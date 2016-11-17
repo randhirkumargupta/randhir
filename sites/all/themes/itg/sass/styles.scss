@@ -1204,7 +1204,12 @@ footer{
     }
     .itg-common-section{
         .droppable{
-            min-height: 408px;
+            height: 408px;
+        }
+        .home-page-poll-block-wrap{
+         .droppable{
+                min-height: 408px;
+            }   
         }
     }
     .itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
@@ -2421,6 +2426,11 @@ footer{
         margin-bottom: 10px;
         line-height: 22px;
     }
+    > .social-share{
+        margin-bottom: 10px;
+        @include font(18px);
+        @include social-share;
+    }
     .disc-share{
         a{
             font-size: 20px;
@@ -2440,6 +2450,12 @@ footer{
             color: #9f9f9f;
             @include font(12px);
             margin-bottom: 5px;
+        }
+        .breaking-discription{
+            iframe{
+                width: 100%;
+                height: 55vh;
+            }
         }
         .social-share{
             margin-top:10px;
