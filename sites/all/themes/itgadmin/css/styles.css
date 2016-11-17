@@ -6686,11 +6686,16 @@ div.node #comments h2 {
 #itg_video_content .ftp-server, #itg_video_content .local_browse {
   padding: 20px 0;
 }
+#itg_video_content .ftp-server .video_filters > div {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+#itg_video_content .ftp-server .video_filters .reset_video_filter {
+  margin-top: 2px;
+}
 #itg_video_content .ftp-server .video_filters label {
   margin-right: 5px;
-}
-#itg_video_content .ftp-server .video_filters .time-filter {
-  margin-left: 20px;
 }
 #itg_video_content .attach-video, #itg_video_content .browse-local {
   margin-top: 20px;
@@ -6812,7 +6817,6 @@ div.node #comments h2 {
 }
 .ftp-server #edit-video-browse-select .ftp_video_radio label {
   border: 1px solid #d9d9d9;
-  box-shadow: 0 0 5px 1px #666;
   background: url(../images/default_for_all.png) no-repeat left top/100% auto;
   font-size: 12px;
   height: 100%;
@@ -6868,6 +6872,9 @@ div.node #comments h2 {
   cursor: pointer;
   width: 100%;
   z-index: 999;
+}
+.ftp-server #edit-video-browse-select .ftp_video_radio .form-radio:hover + label, .ftp-server #edit-video-browse-select .ftp_video_radio .form-radio:checked + label {
+  box-shadow: 0 0 5px 1px #666;
 }
 .ftp-server #edit-video-browse-select .ftp_video_radio .form-radio:checked + label:before, .ftp-server #edit-video-browse-select .ftp_video_radio .form-radio:checked + label:after {
   top: 0;
@@ -9410,4 +9417,14 @@ div.node #comments h2 {
 
 #videoupload #loader-data.loader_overlay {
   display: block;
+}
+
+.browse-media-file.active {
+  padding-bottom: 30px;
+}
+
+.itg-form-main .itg-form-action {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
 }

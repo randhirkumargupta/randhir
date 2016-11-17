@@ -6308,11 +6308,18 @@ div.node{
   }
   .ftp-server{
     .video_filters{
+      > div{
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 10px;
+      }
+      .reset_video_filter {
+        margin-top: 2px;
+      }
       label{
         margin-right: 5px;
       }
       .time-filter{
-        margin-left: 20px;
         @extend .dib;
         @extend .vtop;
       }
@@ -6454,7 +6461,6 @@ div.node{
       }
       label{
         border: 1px solid #d9d9d9;
-        box-shadow: 0 0 5px 1px #666;
         background: url(../images/default_for_all.png) no-repeat left top / 100% auto;
         font-size: 12px;
         height: 100%;
@@ -6510,6 +6516,9 @@ div.node{
         cursor: pointer;
         width: 100%;
         z-index: 999;
+        &:hover + label, &:checked + label{
+          box-shadow: 0 0 5px 1px #666;
+        }
         &:checked + label:before, &:checked + label:after{
           top: 0;
           opacity: 1;
@@ -8689,3 +8698,7 @@ div.node{
 #videoupload #loader-data.loader_overlay{
   display: block;
 }
+.browse-media-file.active{
+  padding-bottom: 30px;
+}
+.itg-form-main .itg-form-action{display: inline-block; vertical-align: top; width: 100%;}
