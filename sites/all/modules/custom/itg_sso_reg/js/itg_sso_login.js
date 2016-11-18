@@ -27,6 +27,11 @@
                     window.opener.location = 'http://'+check_change_arg+'/personalization/edit-profile/general-settings?pass=success';
                     window.close();
                 }
+                
+                if (check_user_arg == 'complete-page') {
+                    window.opener.location = 'http://'+check_change_arg+'/personalization/edit-profile/general-settings?email=success';
+                    window.close();
+                }
             }
             // code for logout 
             jQuery("a#myhref").attr('href', 'javascript:void(0)');

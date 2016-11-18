@@ -185,6 +185,46 @@ img{
     }
 }
 /*End Dont miss Home page css*/
+/*css start watch now home page */
+.watch-video-home{
+    .widget-settings{
+        position: relative !important;
+        margin-bottom: 5px;
+    }
+    .osscar-video{
+        background: transparent;
+        .home-watch-new{
+            ul{
+                .dont-miss-listing {
+                    @include pos(relative);
+                    padding-bottom:0;
+                    + .dont-miss-listing{                    
+                        padding: 10px 0 0 0;                       
+                    } 
+                    @include video-left-border-bottom;
+                }
+            } 
+        }
+    }    
+}
+
+/*css end watch now home page */
+
+/*css start homepage show*/
+.home-shows{
+    .trending-videos {
+        border: none;
+        padding-top: 25px;
+        .trending-videos-list {
+            overflow: hidden;
+            padding: 10px 0;
+        }
+    }
+}
+/*css end homepage show*/
+
+
+
 /*Start May we suggest css*/
 .we_may_suggest{
     span.widget-title{
@@ -387,6 +427,12 @@ img{
             .droppable{
                 height: 382px;
                 overflow: hidden;
+            }
+            .home-page-poll-block-wrap{
+                .droppable{
+                    min-height: 382px;
+                    height: inherit;
+                }   
             }
             &.row-3{
                 .droppable{
