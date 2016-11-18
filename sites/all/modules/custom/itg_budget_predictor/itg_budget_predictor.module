@@ -41,6 +41,12 @@ function itg_budget_predictor_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_budget_predictor.inc',
   );
+  $items['budget-download-excel'] = array(
+    'page callback' => 'itg_budget_download_excel',
+    'access callback' => 'user_is_logged_in',
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_budget_predictor.inc',
+  );
   $items['manage-budget-predictor'] = array(
     'title' => 'Manage Budget Predictor',
     'page callback' => 'drupal_get_form',

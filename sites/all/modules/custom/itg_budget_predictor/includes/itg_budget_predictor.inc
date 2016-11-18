@@ -297,7 +297,10 @@ function itg_budget_predictor_list() {
   global $base_url;
   $build = array();
   $query = db_select('itg_budget_predictor', 'p')->extend('PagerDefault');
-
+  if (isset($_GET['budget_year'])) {
+    $timestamp = $_GET['budget_year'];
+    $query->where('YEAR(FROM_UNIXTIME(p.timestamp)) = :timestamp', array(':timestamp' => $timestamp));
+  } 
   $query->condition('p.status', 1, '=')
       ->condition('p.budget_type', 1, '=')
       ->groupBy('p.user_id');
@@ -329,11 +332,12 @@ function itg_budget_predictor_list() {
     $i++;
   }
 
-  $caption_table_edit = l(t('List Of Budget'), 'manage-budget-list');
+  $caption_table_edit = l(t('List Of Budget'), 'manage-budget-list') . "&nbsp;" . l(t('Download Excel'), 'budget-download-excel', array('query' => array('budget_year' => $_GET['budget_year'])));
   // Format and print out the table.
   $output = theme('table', array('header' => $header, 'rows' => $rows, 'caption' => $caption_table_edit, 'attributes' => array('class' => array('views-table'))));
 
   $build['content'] = array(
+    'itg_budget_predictor_search' => drupal_get_form('itg_budget_predictor_search_form'),
     'itg_budget_predictor_content' => array(
       '#markup' => $output,
     ),
@@ -345,6 +349,52 @@ function itg_budget_predictor_list() {
   );
 
   return $build;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @return string
+ */
+function itg_budget_predictor_search_form($form, &$form_state) {
+  global $base_url;
+  for($i=date('Y'); $i >=2015; $i--) {
+    $year[$i] = $i;
+  }
+  $form['#method'] = 'get';
+  $form['budget_year'] = array(
+    '#type' => 'select',
+    '#title' => t('Budget year'),
+    '#options' => $year,
+    '#default_value' => isset($_GET['budget_year']) ? $_GET['budget_year'] : '',
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+  
+  $url = $base_url . '/budget-predictor-list';
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Reset'), $url, array(
+      'attributes' => array(
+        'class' => 'button custom-url-search'
+      )
+    )),
+    '#weight' => 9,
+    '#value' => t('Reset')
+  );
+  return $form;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param array $form_state
+ */
+function itg_budget_predictor_search_form_submit($form, &$form_state) {
+  $form_state['rebuild'] = TRUE;
 }
 
 /**
@@ -610,4 +660,30 @@ function check_budget_status($timestamp) {
   # execute the query
   $results = $query->execute()->fetchObject();
   return $results->budget_id;
+}
+
+/**
+ * Download Excel
+ */
+function itg_budget_download_excel() {
+  $timestamp = $_GET['budget_year'];
+  $query = db_select('itg_budget_predictor', 'p');
+  if($timestamp) {
+    $query->where('YEAR(FROM_UNIXTIME(p.timestamp)) = :timestamp', array(':timestamp' => $timestamp));
+  }
+  $query->fields('p', array('user_id'))->groupBy('p.user_id');
+  # execute the query
+  $result = $query->execute()->fetchAll();
+  $name = date('d-m-y') . '-budget-usermail-list.xls';
+  header("Content-type:application/vnd.ms-excel;name='excel'");
+  header("Content-Disposition: attachment; filename=$name");
+  header("Pragma: no-cache");
+  header("Expires: 0");
+  echo "Mail";
+  echo "\015\012";
+  foreach ($result as $row) {
+    $mail = user_load($row->user_id)->mail;
+    echo $mail;
+    echo "\015\012";
+  }
 }
