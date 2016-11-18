@@ -1,10 +1,10 @@
-<link rel="stylesheet" type="text/css" href="<?php echo $base_url.'/'.drupal_get_path('module', 'itg_image_croping') . '/css/itg_tagging.css';?>">
 	
 
 <?php $url = file_create_url($data->uri);
  global $base_url;
 ?>
- 
+ <link rel="stylesheet" type="text/css" href="<?php echo $base_url.'/'.drupal_get_path('module', 'itg_image_croping') . '/css/itg_tagging.css';?>">
+
 <div id="container">
     <div id="imgtag"> 
 
@@ -26,7 +26,7 @@
 
 drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/jquery.min.js', array('
   type' => 'file', 'scope' => 'content'));
-drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_imageedit.js', array('
+drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_image_front.js', array('
   type' => 'file', 'scope' => 'content'));
 
 print $js = drupal_get_js('content');
