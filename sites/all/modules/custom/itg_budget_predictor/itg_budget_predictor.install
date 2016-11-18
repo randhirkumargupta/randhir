@@ -95,17 +95,17 @@ function itg_budget_predictor_schema() {
           'budget_description' => array(
             'description' => t('Description'),
             'type' => 'text',
-            'not null' => true,
+            'not null' => TRUE,
           ),
           'budget_message' => array(
             'description' => t('Success message'),
             'type' => 'text',
-            'not null' => true,
+            'not null' => TRUE,
           ),
           'budget_social_message' => array(
             'description' => t('Social message'),
             'type' => 'text',
-            'not null' => true,
+            'not null' => TRUE,
           ),
           'budget_year' => array(
             'description' => t('Year'),

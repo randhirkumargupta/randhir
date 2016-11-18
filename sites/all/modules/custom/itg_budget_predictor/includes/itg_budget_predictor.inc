@@ -28,7 +28,8 @@ function itg_budget_predictor_get_taxonomy() {
     $querys->where('YEAR(FROM_UNIXTIME(r.timestamp)) = :timestamp', array(':timestamp' => $timestamp));
     if (empty($check_budget_status)) {
       $querys->condition('r.user_id', $user_id);
-    } else {
+    } 
+    else {
       $querys->condition('r.status', 2);
     }
 
@@ -111,7 +112,8 @@ function itg_budget_predictor_get_taxonomy() {
     $budget_data['budget_message'] = $check_budget['budget_message'];
     $budget_data['budget_social_message'] = $check_budget['budget_social_message'];
     $budget_data['budget_message_flag'] = ($check_budget_status) ? 1 : '';
-  } else {
+  } 
+  else {
     $budget_data['exist'] = '';
   }
 
@@ -129,7 +131,8 @@ function itg_budget_predictor_update_budget() {
   $allowed_roles = array('Editor', 'Site Admin', 'administrator');
   if (count(array_intersect($user->roles, $allowed_roles)) > 0) {
     $budget_status = 2;
-  } else {
+  } 
+  else {
     $budget_status = 1;
   }
   $budget_type = 1;
@@ -160,7 +163,8 @@ function itg_budget_predictor_update_budget() {
             'ip_address' => $ip_address,
           ))
           ->execute();
-    } else {
+    } 
+    else {
       db_update('itg_budget_predictor')
           ->fields(array(
             'ranking_value' => $key,
@@ -192,7 +196,8 @@ function itg_budget_predictor_update_budget() {
             'ip_address' => $ip_address,
           ))
           ->execute();
-    } else {
+    } 
+    else {
       db_update('itg_budget_predictor')
           ->fields(array(
             'ranking_value' => $key,
@@ -221,7 +226,8 @@ function itg_budget_predictor_update_budget() {
             'ip_address' => $ip_address,
           ))
           ->execute();
-    } else {
+    } 
+    else {
       db_update('itg_budget_predictor')
           ->fields(array(
             'ranking_value' => $key,
@@ -480,7 +486,8 @@ function itg_manage_budget() {
     $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_message', 'budget_social_message','budget_year', 'status'));
     # execute the query
     $results = $query->execute()->fetchObject();
-  } else {
+  } 
+  else {
     $action = '';
   }
   $form = array();
@@ -571,7 +578,8 @@ function itg_manage_budget_submit($form, &$form_state) {
         ->condition('id', $budget_action, '=')
         ->execute();
     drupal_set_message(t('The form has been updated'));
-  } else {
+  } 
+  else {
     db_insert('itg_manage_budget')
         ->fields(array(
           'budget_title' => $budget_title,
