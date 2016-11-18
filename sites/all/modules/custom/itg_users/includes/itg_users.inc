@@ -43,12 +43,12 @@ function itg_users_block_user() {
   $query->fields('u', array('uid'));
   $query->fields('de', array('field_story_expiry_date_value'));
   $result = $query->execute();
-
+  // get curent date for compare expiry date
+  $current_date = date('Y-m-d');
   while ($user_record = $result->fetchAssoc()) {
     $user_id = $user_record['uid'];
     $user_exp_date = strtotime($user_record['field_story_expiry_date_value']);
     $user_exp_date = date('Y-m-d', $user_exp_date);
-    $current_date = date('Y-m-d');
 
     if ($user_exp_date == $current_date) {
       // block user
