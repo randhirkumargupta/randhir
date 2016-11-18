@@ -164,6 +164,12 @@ Drupal.behaviors.my_custom_behavior = {
       if(change_password){
         $('.activate-message').show();
       }
+      
+      /* code to show change email mobile popup */
+      var change_email_mobile = getUrlParameter('email');
+      if(change_email_mobile){
+        $('.activate-message').show();
+      }
   }
 };
 
