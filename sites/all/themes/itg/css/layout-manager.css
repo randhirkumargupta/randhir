@@ -365,6 +365,48 @@ img {
 }
 
 /*End Dont miss Home page css*/
+/*css start watch now home page */
+.watch-video-home .widget-settings {
+  position: relative !important;
+  margin-bottom: 5px;
+}
+.watch-video-home .osscar-video {
+  background: transparent;
+}
+.watch-video-home .osscar-video .home-watch-new ul .dont-miss-listing {
+  position: relative;
+  padding-bottom: 0;
+  position: relative;
+}
+.watch-video-home .osscar-video .home-watch-new ul .dont-miss-listing + .dont-miss-listing {
+  padding: 10px 0 0 0;
+}
+.watch-video-home .osscar-video .home-watch-new ul .dont-miss-listing:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 1PX;
+  background: #DDD;
+  left: 0;
+  bottom: 0px;
+  z-index: 1;
+}
+.watch-video-home .osscar-video .home-watch-new ul .dont-miss-listing:last-child:after {
+  display: none;
+}
+
+/*css end watch now home page */
+/*css start homepage show*/
+.home-shows .trending-videos {
+  border: none;
+  padding-top: 25px;
+}
+.home-shows .trending-videos .trending-videos-list {
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+/*css end homepage show*/
 /*Start May we suggest css*/
 .we_may_suggest span.widget-title {
   position: relative;
@@ -656,6 +698,10 @@ img {
   .itg-layout-container .itg-common-section .droppable {
     height: 382px;
     overflow: hidden;
+  }
+  .itg-layout-container .itg-common-section .home-page-poll-block-wrap .droppable {
+    min-height: 382px;
+    height: inherit;
   }
   .itg-layout-container .itg-common-section.row-3 .droppable {
     height: 320px;

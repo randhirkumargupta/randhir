@@ -164,6 +164,12 @@ Drupal.behaviors.my_custom_behavior = {
       if(change_password){
         $('.activate-message').show();
       }
+      
+      /* code to show change email mobile popup */
+      var change_email_mobile = getUrlParameter('email');
+      if(change_email_mobile){
+        $('.activate-message').show();
+      }
   }
 };
 
@@ -375,9 +381,15 @@ jQuery(document).ready(function () {
                 jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
             });
          }
-    };
-   
+    };   
     eventMenu();    
+      
+   //social share animation effects   
+   jQuery('.social-share ul').children().not(":first").hide();
+   jQuery('.social-share li').click(function(){   
+       jQuery('.social-share li').show();        
+   });
+      
       
 });
 
