@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for sirf web per feature.
+ */
+
+include_once 'feature_for_sirf_web_per.features.inc';

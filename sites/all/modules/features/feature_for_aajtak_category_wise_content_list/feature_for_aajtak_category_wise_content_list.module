@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for aajtak category wise content list on recency feature.
+ */
+
+include_once 'feature_for_aajtak_category_wise_content_list.features.inc';

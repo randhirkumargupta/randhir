@@ -37,3 +37,6 @@ define('HOME_PAGE_FEATURE_MAX_RANGE', 3);
 define('HOME_PAGE_FEATURE_MIN_RANGE', 0);
 define('HOW_MADE_MAX_RANGE', 2);
 define('HOW_MADE_MIN_RANGE', 0);
+
+define('SIRF_WEB_PER_MAX_RANGE', 12);
+define('SIRF_WEB_PER_MIN_RANGE', 0);

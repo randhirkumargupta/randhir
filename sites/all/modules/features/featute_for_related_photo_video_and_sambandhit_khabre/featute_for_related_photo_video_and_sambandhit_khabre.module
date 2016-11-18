@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Featute for related photo, video and Sambandhit Khabre feature.
+ */
+
+include_once 'featute_for_related_photo_video_and_sambandhit_khabre.features.inc';

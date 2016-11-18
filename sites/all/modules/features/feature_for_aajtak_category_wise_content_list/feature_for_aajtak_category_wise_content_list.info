@@ -1,0 +1,13 @@
+name = feature for aajtak category wise content list on recency
+description = feature for aajtak category wise content list on recency
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = image
+dependencies[] = views
+dependencies[] = views_customstyle
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[image][] = aaj_tak_category_wise_content
+features[views_view][] = at_category_wise_content_list
+features_exclude[dependencies][ctools] = ctools

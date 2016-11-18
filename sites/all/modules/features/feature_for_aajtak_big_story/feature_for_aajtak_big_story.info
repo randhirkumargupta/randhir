@@ -1,0 +1,13 @@
+name = feature for aajtak big story
+description = feature for aajtak big story
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = image
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[image][] = at_big_story
+features[views_view][] = at_big_story
+features[views_view][] = at_big_story_ordering_list
+features_exclude[dependencies][ctools] = ctools

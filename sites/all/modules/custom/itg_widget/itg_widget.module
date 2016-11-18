@@ -36,91 +36,91 @@ function itg_widget_init() {
 function itg_widget_menu() {
   $items = array();
   $items['remove_from_widgets/%/%/%/%'] = array(
-      'page callback' => 'remove_from_widgets',
-      'page arguments' => array(1, 2, 3, 4),
-      'access arguments' => array('administer nodequeue'),
+    'page callback' => 'remove_from_widgets',
+    'page arguments' => array(1, 2, 3, 4),
+    'access arguments' => array('administer nodequeue'),
   );
   $items['remove_from_widgets_section/%/%/%/%/%/%'] = array(
-      'page callback' => 'remove_from_widgets_with_section',
-      'page arguments' => array(1, 2, 3, 4, 5, 6),
-      'access arguments' => array('administer nodequeue'),
+    'page callback' => 'remove_from_widgets_with_section',
+    'page arguments' => array(1, 2, 3, 4, 5, 6),
+    'access arguments' => array('administer nodequeue'),
   );
   $items['move-widget-node/%/%/%/%'] = array(
-      'page callback' => 'move_node_from_widget',
-      'page arguments' => array(1, 2, 3, 4),
-      'access arguments' => array('administer nodequeue'),
+    'page callback' => 'move_node_from_widget',
+    'page arguments' => array(1, 2, 3, 4),
+    'access arguments' => array('administer nodequeue'),
   );
 
   $items['remove-so-sorry-extra-data/%'] = array(
-      'page callback' => 'remove_extra_field_value_for_so_sorry',
-      'page arguments' => array(1),
-      'access arguments' => array('administer nodequeue'),
+    'page callback' => 'remove_extra_field_value_for_so_sorry',
+    'page arguments' => array(1),
+    'access arguments' => array('administer nodequeue'),
   );
 
   $items['add-so-sorry-extra-data/%/%'] = array(
-      'page callback' => 'add_extra_field_value_for_so_sorry',
-      'page arguments' => array(1, 2),
-      'access arguments' => array('administer nodequeue'),
+    'page callback' => 'add_extra_field_value_for_so_sorry',
+    'page arguments' => array(1, 2),
+    'access arguments' => array('administer nodequeue'),
   );
 
   $items['move-dont-miss-widget-node/%/%/%/%'] = array(
-      'page callback' => 'move_node_from_dont_miss_widget',
-      'page arguments' => array(1, 2, 3, 4),
-      'access arguments' => array('administer nodequeue'),
+    'page callback' => 'move_node_from_dont_miss_widget',
+    'page arguments' => array(1, 2, 3, 4),
+    'access arguments' => array('administer nodequeue'),
   );
   $items['anchor-list/autocomplete'] = array(
-      'page callback' => 'itg_widget_anchor_autocomplete_name',
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_widget_anchor_autocomplete_name',
+    'access arguments' => array('access content'),
   );
   $items['anchor-list-nid/autocomplete'] = array(
-      'page callback' => 'itg_widget_anchor_autocomplete_id',
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_widget_anchor_autocomplete_id',
+    'access arguments' => array('access content'),
   );
   $items['node-list-title/autocomplete'] = array(
-      'page callback' => 'itg_widget_all_content_title',
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_widget_all_content_title',
+    'access arguments' => array('access content'),
   );
   $items['node-list-nid/autocomplete'] = array(
-      'page callback' => 'itg_widget_all_content_nid',
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_widget_all_content_nid',
+    'access arguments' => array('access content'),
   );
   $items['so-sorry-content-title/autocomplete'] = array(
-      'page callback' => 'itg_widget_so_sorry_content_title',
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_widget_so_sorry_content_title',
+    'access arguments' => array('access content'),
   );
   $items['so-sorry-content-nid/autocomplete'] = array(
-      'page callback' => 'itg_widget_so_sorry_content_nid',
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_widget_so_sorry_content_nid',
+    'access arguments' => array('access content'),
   );
   $items['remove-extra-data'] = array(
-      'page callback' => 'remove_extra_data',
-      'access arguments' => array('access administrator'),
+    'page callback' => 'remove_extra_data',
+    'access arguments' => array('access administrator'),
   );
   $items['setids'] = array(
-      'page callback' => 'itg_widget_setids', // load the croper according to size!.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_widget_setids', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['test_function_callback'] = array(
-      'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['issue_filter_widget'] = array(
-      'page callback' => 'itg_widget_issuewidget_filter_form', // load the croper according to size!.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
+    'page callback' => 'itg_widget_issuewidget_filter_form', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
   );
 
   $items['admin/settings/custom-variables'] = array(
-      'title' => 'Custom variables',
-      'description' => 'Custom variables settings page',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('itg_widgets_custom_variables'),
-      'access arguments' => array('access administrator'),
-      'type' => MENU_NORMAL_ITEM,
+    'title' => 'Custom variables',
+    'description' => 'Custom variables settings page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_widgets_custom_variables'),
+    'access arguments' => array('access administrator'),
+    'type' => MENU_NORMAL_ITEM,
   );
 
   return $items;
@@ -131,97 +131,97 @@ function itg_widget_menu() {
  */
 function itg_widget_block_info() {
   $blocks['top_stories_ordering'] = array(
-      'info' => t('Widget: Top Stories Ordering'),
+    'info' => t('Widget: Top Stories Ordering'),
   );
   $blocks['trending_videos_widget'] = array(
-      'info' => t('Widget: Trending videos widgets'),
+    'info' => t('Widget: Trending videos widgets'),
   );
   $blocks['top_takes_videos_widget'] = array(
-      'info' => t('Widget: Top Takes videos widgets'),
+    'info' => t('Widget: Top Takes videos widgets'),
   );
   $blocks['home_page_feature'] = array(
-      'info' => t('Widget: Home Page Feature'),
+    'info' => t('Widget: Home Page Feature'),
   );
   $blocks['we_may_suggest'] = array(
-      'info' => t('Widget: We May Suggest'),
+    'info' => t('Widget: We May Suggest'),
   );
   $blocks['section_wise_order'] = array(
-      'info' => t('Widget: Section wise ordering form custom table'),
+    'info' => t('Widget: Section wise ordering form custom table'),
   );
   $blocks['rhs_section_wise_order'] = array(
-      'info' => t('Widget: RHS Section wise content ordering from custom table'),
+    'info' => t('Widget: RHS Section wise content ordering from custom table'),
   );
   $blocks['big_story_format'] = array(
-      'info' => t('Widget: Big story form custom table'),
+    'info' => t('Widget: Big story form custom table'),
   );
   $blocks['most_popular'] = array(
-      'info' => t('Widget: Most popular form custom table'),
+    'info' => t('Widget: Most popular form custom table'),
   );
 
   $blocks['featured_photo_carousel'] = array(
-      'info' => t('Widget: Featured Photo Carousel - Flexslider'),
+    'info' => t('Widget: Featured Photo Carousel - Flexslider'),
   );
 
   $blocks['featured_photo_carousel_r'] = array(
-      'info' => t('Widget: Featured Photo Carousel - Rolling Slider'),
+    'info' => t('Widget: Featured Photo Carousel - Rolling Slider'),
   );
 
   $blocks['featured_video_carousel'] = array(
-      'info' => t('Widget: Featured Video Carousel - Flexslider'),
+    'info' => t('Widget: Featured Video Carousel - Flexslider'),
   );
 
   $blocks['featured_video_carousel_r'] = array(
-      'info' => t('Widget: Featured Video Carousel - Rolling Slider'),
+    'info' => t('Widget: Featured Video Carousel - Rolling Slider'),
   );
 
   $blocks['dont_miss'] = array(
-      'info' => t('Widget: Dont Miss form custom table'),
+    'info' => t('Widget: Dont Miss form custom table'),
   );
   $blocks['yearende_left_top_news'] = array(
-      'info' => t('Widget: Year end left top news form custom table'),
+    'info' => t('Widget: Year end left top news form custom table'),
   );
   $blocks['education_how_made_id'] = array(
-      'info' => t('Widget: How I Made it form custom table'),
+    'info' => t('Widget: How I Made it form custom table'),
   );
   $blocks['yearende_left_top_videos'] = array(
-      'info' => t('Widget: Year end left top Videos form custom table'),
+    'info' => t('Widget: Year end left top Videos form custom table'),
   );
   $blocks['watch_right_now_videos_widget'] = array(
-      'info' => t('Widget: Watch right now videos'),
+    'info' => t('Widget: Watch right now videos'),
   );
   $blocks['anchor_langing_page_menu'] = array(
-      'info' => t('Anchor landing page menu'),
+    'info' => t('Anchor landing page menu'),
   );
   $blocks['personlization'] = array(
-      'info' => t('Persionlization front end'),
+    'info' => t('Persionlization front end'),
   );
   $blocks['home_page_poll_widget_block'] = array(
-      'info' => t('Home Page Poll Widget'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
+    'info' => t('Home Page Poll Widget'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['sport_poll_widget_block'] = array(
-      'info' => t('Sport Page Poll Widget'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
+    'info' => t('Sport Page Poll Widget'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['sosorry_social_icons_block'] = array(
-      'info' => t('So Sorry Social Icons Custom Block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
+    'info' => t('So Sorry Social Icons Custom Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['auto_reviews'] = array(
-      'info' => t('Widget: Auto Reviews from custom table'),
+    'info' => t('Widget: Auto Reviews from custom table'),
   );
 
   $blocks['so_sorry_front_politoons'] = array(
-      'info' => t('So Sorry Politoons'),
+    'info' => t('So Sorry Politoons'),
   );
-   $blocks['tech_reviews'] = array(
-      'info' => t('Widget: Tech Reviews from custom table'),
+  $blocks['tech_reviews'] = array(
+    'info' => t('Widget: Tech Reviews from custom table'),
   );
-   $blocks['tech_most_read'] = array(
-      'info' => t('Widget: Tech most read from custom table'),
+  $blocks['tech_most_read'] = array(
+    'info' => t('Widget: Tech most read from custom table'),
   );
   $blocks['movies_reviews'] = array(
-      'info' => t('Widget:  Movies Reviews from custom table'),
+    'info' => t('Widget:  Movies Reviews from custom table'),
   );
   $blocks['ipl_tweets'] = array(
     'info' => t('IPL Tweets')
@@ -229,10 +229,20 @@ function itg_widget_block_info() {
   $blocks['budget_tweets'] = array(
     'info' => t('Budget Tweets')
   );
-   $blocks['live_score'] = array(
+  $blocks['live_score'] = array(
     'info' => t('Live Score')
-  ); 
-
+  );
+  $blocks['sirf_web_per'] = array(
+    'info' => t('Widget: Sirf web per'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['aapka_vote_widget'] = array(
+    'info' => t('Aapka vote widget'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['aaj_tak_big_story'] = array(
+    'info' => t('Aaj tak big story'),
+  );
   return $blocks;
 }
 
@@ -318,11 +328,11 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("year_end_top_news", array("data" => $data));
       break;
-   case 'education_how_made_id':
+    case 'education_how_made_id':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_how_i_made_it');
       $info['widget_name'] = 'special_how_made_it_content';
       $data = itg_widget_how_made_it_ordering_data($info);
-      
+
       $block['content'] = theme("how_made_it", array("data" => $data));
       break;
     case 'yearende_left_top_videos':
@@ -578,7 +588,7 @@ function itg_widget_block_view($delta = '') {
       $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
       $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
       break;
-   case 'sport_poll_widget_block':
+    case 'sport_poll_widget_block':
       $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
       $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
       break;
@@ -604,79 +614,97 @@ function itg_widget_block_view($delta = '') {
       $data = itg_widget_so_sorry_politoons_ordering_data();
       $block['content'] = theme('itg_widget_politoons', array('data' => $data));
       break;
-   case 'tech_reviews':
+    case 'tech_reviews':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
       $info['widget_name'] = 'special_auto_review_content';
-      $info['var_name']='tech_for_widget';
+      $info['var_name'] = 'tech_for_widget';
       $data = itg_widget_tech_reviews_ordering_data($info);
 
       $block['content'] = theme("tech_reviews", array("data" => $data));
       break;
-   case 'tech_most_read':
+    case 'tech_most_read':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_read');
       $info['widget_name'] = 'most_read_content';
-        $info['query_var_name'] = 'tech_for_widget';
+      $info['query_var_name'] = 'tech_for_widget';
       $data = itg_widget_tech_most_read_ordering_data($info);
-     
+
       $block['content'] = theme("tech_most_read", array("data" => $data));
       break;
-  case 'movies_reviews':
+    case 'movies_reviews':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
       $info['widget_name'] = 'special_auto_review_content';
-      $info['var_name']='movie_for_widget';
+      $info['var_name'] = 'movie_for_widget';
       $data = itg_widget_movies_reviews_ordering_data($info);
 
       $block['content'] = theme("auto_reviews", array("data" => $data));
       break;
-  case 'ipl_tweets':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');  
+    case 'ipl_tweets':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');
       //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
-        $block['subject'] = '';
+      $block['subject'] = '';
       $block['content'] = ipl_tweets();
       break;
-  case 'budget_tweets':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');  
+    case 'budget_tweets':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');
       //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
-        $block['subject'] = '';
+      $block['subject'] = '';
       $block['content'] = budget_tweets();
       break;
-  case 'live_score':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_live_score');  
-     
-        $block['subject'] = '';
+    case 'live_score':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_live_score');
+
+      $block['subject'] = '';
       $data = live_score();
 
-       $block['content'] = theme("live_score_data", array("data" => $data));
+      $block['content'] = theme("live_score_data", array("data" => $data));
+      break;
+    case 'sirf_web_per':
+      module_load_include('inc', 'itg_widget', 'includes/itg_at_widget_sirf_web_per');
+      $info['widget'] = 'at_sirf_web_per_widget';
+      $data = itg_widget_sirf_web_per_data($info);
+      $block['content'] = theme("at_sirf_web_per_widget", array("data" => $data));
+      break;
+    case 'aapka_vote_widget':
+      module_load_include('inc', 'itg_widget', 'includes/itg_widget_common');
+      $selected_poll_widget = get_homepage_current_poll_widget('poll', 'at_aapka_vote_widget');
+      $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
+      break;
+    case 'aaj_tak_big_story':
+      module_load_include('inc', 'itg_widget', 'includes/itg_at_widget_big_story');
+      $info['widget'] = 'at_big_story_format_widget';
+      $data = itg_at_widget_big_story_block_data($info);
+      $block['content'] = theme("at_widget_big_story_format", array("data" => $data));
       break;
   }
-  
- 
+
+
   return $block;
 }
+
 /**
  * File provide get highlights widget data.
  *
  * @param array $info
  */
 function itg_widget_highlights_block_data($info) {
-  $widget_name ='highlights_widget';
+  $widget_name = 'highlights_widget';
   global $theme;
-     
-        if(isset($_GET['section']) && !empty($_GET['section']))
-        {
-            $selction_name='section';
-        }else{
-            $selction_name='section_name';
-        }
-         $cat_id = $_GET[$selction_name];
-          if ($theme == FRONT_THEME_NAME) {
-          $cat_id = arg(2);
-         }
-        
+
+  if (isset($_GET['section']) && !empty($_GET['section'])) {
+    $selction_name = 'section';
+  }
+  else {
+    $selction_name = 'section_name';
+  }
+  $cat_id = $_GET[$selction_name];
+  if ($theme == FRONT_THEME_NAME) {
+    $cat_id = arg(2);
+  }
+
   $data = array();
-  
+
   if (!empty($widget_name)) {
-    $result = get_view_nodes_form_custom_table_for_widgets_by_category($widget_name,$cat_id, 1, 0);
+    $result = get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, $cat_id, 1, 0);
     foreach ($result as $entity_data_node) {
       $entity_data = array("node_data" => node_load($entity_data_node['nid']), "related" => $entity_data_node['extra']);
     }

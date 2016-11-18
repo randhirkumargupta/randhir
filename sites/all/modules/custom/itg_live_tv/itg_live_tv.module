@@ -7,6 +7,7 @@
  * Contains functionality for Live TV.
  *
  */
+module_load_include('inc', 'itg_live_tv', 'includes/itg_live_tv_front');
 
 /**
  * Implements hook_menu().
@@ -75,6 +76,15 @@ function itg_live_tv_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_live_tv') . '/templates',
       'render element' => 'form',
     ),
+    'image_style_outside_files' => array(
+      'variables' => array(
+        'style_name' => NULL,
+        'path' => NULL,
+        'alt' => '',
+        'title' => NULL,
+        'attributes' => array(),
+        ),
+      ),
     'live_tv_video_page_block' => array(
       'arguments' => array('form' => NULL),
       'template' => 'live-tv-video-page',
