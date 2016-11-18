@@ -330,7 +330,7 @@ jQuery(document).ready(function () {
     });   
     var menuBuilder = function(){        
         var menuWidth, Totalwidth, liLength, clickHere;
-	menuWidth = jQuery('.second-level-menu.menu').width();	        
+	menuWidth = jQuery('.second-level-menu.menu').width()-10;        
 	Totalwidth = jQuery('.all-menu').outerWidth();
 	clickHere = 0;
 	if(jQuery('#newlist').length > 0){
@@ -379,9 +379,11 @@ jQuery(document).ready(function () {
     eventMenu();    
       
    //social share animation effects   
-   jQuery('.social-share ul').children().not(":first").hide();
+   jQuery('.social-share ul').each(function(){
+       jQuery(this).children().not(":first").hide();       
+   })
    jQuery('.social-share li').click(function(){   
-       jQuery('.social-share li').show();        
+       jQuery(this).nextAll('li').show();
    });
       
       
