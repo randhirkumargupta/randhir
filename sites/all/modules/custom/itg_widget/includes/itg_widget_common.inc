@@ -1130,15 +1130,6 @@ function itg_widget_views_query_alter(&$view, &$query) {
     array_push($query->where[1]['conditions'], $program_where_condition);
   }
 
-  if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_page') {
-// Handling the query if other videos are clicked but those are not feature.
-// But they are in itg_widget_order table as well as widget value is equal to so_sorry_widget
-    $arg = arg();
-    if (isset($arg[1])) {
-      unset($query->where[1]['conditions'][1]);
-    }
-  }
-
   if ($view->name == 'anchor_option_view') {
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
   }
@@ -1188,6 +1179,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_page') {
+    // Handling the query if other videos are clicked but those are not feature.
+    // But they are in itg_widget_order table as well as widget value is equal to so_sorry_widget
+    $arg = arg();
+    if (isset($arg[1])) {
+      unset($query->where[1]['conditions'][1]);
+    }
     foreach ($query->where[1]['conditions'] as $keys => $condtions) {
       if ($condtions['field'] == 'taxonomy_index.tid') {
         $query->where[1]['conditions'][$keys]['value'] = variable_get('so_sorry_category_id_for_widget');
@@ -1200,12 +1197,62 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'so_sorry' && $view->current_display == 'most_watched') {
+    $arg = arg();
     $query->where[1]['conditions'][3]['value'] = variable_get('so_sorry_category_id_for_widget');
+
+    if (empty($arg[1])) {
+      // Logic to skip or add feature video in most viewed list.
+      $count_feature = count_sosorry_feature();
+      if ($count_feature == 0) {
+        $recent_created_nid_for_sorry = get_recent_created_node_for_sosorry();
+        $not_in_array_condition = array(
+          'field' => 'node.nid',
+          'value' => $recent_created_nid_for_sorry,
+          'operator' => '!=',
+        );
+        $query->where[1]['conditions'][] = $not_in_array_condition;
+      }
+      else {
+        $feature_value = get_feature_nid_in_sosorry();
+        $not_in_array_condition = array(
+          'field' => 'node.nid',
+          'value' => $feature_value,
+          'operator' => '!=',
+        );
+        $query->where[1]['conditions'][] = $not_in_array_condition;
+      }
+    }
   }
   if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
-  }
+    // Skip all nodes which are in most viewed.
+    // Not need to handle feature video because its has been already altered.
+    // This code must be below the most viewed query alter.
+    // Result of most viewed page allways needs to skiped.
+    $result = views_get_view_result('so_sorry', 'most_watched');
+    //array_push($result, $std_obj);
+    foreach ($result as $data) {
+      if (isset($data->nid)) {
+        $not_in_array_condition = array(
+          'field' => 'node.nid',
+          'value' => $data->nid,
+          'operator' => '!=',
+        );
+      }
+      $query->where[1]['conditions'][] = $not_in_array_condition;
+    }
 
+    // handle case if fearute is marked in.
+    $feature_value = get_feature_nid_in_sosorry();
+    if (!empty($feature_value)) {
+      $not_in_array_condition = array(
+        'field' => 'node.nid',
+        'value' => $feature_value,
+        'operator' => '!=',
+      );
+      $query->where[1]['conditions'][] = $not_in_array_condition;
+    }
+  }
 
   if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
     if (!empty($_GET['nid']) && empty($_GET['title'])) {
@@ -2497,5 +2544,18 @@ function check_nid_in_sosorry($nid) {
       ->condition('iwo.nid', $nid)
       ->condition('iwo.widget', 'so_sorry_widget')
       ->countQuery();
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Gives count of nid if it is present in sosorry widget.
+ * @param int $nid
+ * @return int
+ */
+function get_feature_nid_in_sosorry() {
+  $query = db_select('itg_widget_order', 'iwo')
+      ->fields('iwo', array('nid'))
+      ->condition('iwo.extra', 'feature')
+      ->condition('iwo.widget', 'so_sorry_widget');
   return $query->execute()->fetchField();
 }
