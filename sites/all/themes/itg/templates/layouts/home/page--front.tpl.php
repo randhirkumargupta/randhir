@@ -881,6 +881,6 @@ window.addEventListener("message", function(ev) {
 <div class="activate-message">
   <div class="message-body">
     <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
-    <p>Your Account Activated Sucessfully!</p>
+    <p>Your Account Activated Successfully!</p>
   </div>
 </div>
