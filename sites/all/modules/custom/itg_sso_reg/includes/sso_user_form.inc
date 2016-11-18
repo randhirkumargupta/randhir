@@ -461,8 +461,44 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
         $mail = $form_state['values']['mail'];
       }
 
-
+      if(is_numeric($mobile)) {
       $edit = array(
+        'name' => $mobile,
+        'pass' => $form_state['values']['password'],
+        'mail' => $mail,
+        'init' => $mail,
+        'status' => 1,
+        'access' => REQUEST_TIME,
+        'field_first_name' => array(
+          LANGUAGE_NONE => array(
+            0 => array(
+              'value' => $form_state['values']['fname']
+            )
+          )
+        ),
+        'field_last_name' => array(
+          LANGUAGE_NONE => array(
+            0 => array(
+              'value' => $form_state['values']['lname']
+            )
+          )
+        ),
+        'field_mobile_number' => array(
+          LANGUAGE_NONE => array(
+            0 => array(
+              'value' => $mobile
+            )
+          )
+        ),
+        'roles' => array(
+          2 => 'authenticated',
+          FRONT_USER => 'Front User',
+        ),
+      );
+      }
+      else
+      {
+        $edit = array(
         'name' => $mobile,
         'pass' => $form_state['values']['password'],
         'mail' => $mail,
@@ -488,6 +524,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
           FRONT_USER => 'Front User',
         ),
       );
+      }
 
       try {
 
