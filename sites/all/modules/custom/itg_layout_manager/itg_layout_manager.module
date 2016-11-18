@@ -200,6 +200,9 @@ function itg_layout_manager_block_view($delta = '') {
             if(!empty($_GET['pass']) && ($_GET['pass'] == 'success')) {
               $change_pass_msg = 'Your password has been changed successfully!';
             }
+            if(!empty($_GET['email']) && ($_GET['email'] == 'success')) {
+              $change_pass_msg = 'Your profile has been updated successfully!';
+            }
             $pop_output = '<div class = "activate-message">';
             $pop_output.= '<div class = "message-body">';
             $pop_output.= '<p>'.$change_pass_msg.'</p>';
@@ -227,7 +230,7 @@ function itg_layout_manager_block_view($delta = '') {
                 
                 // condition for change password
                 
-                if(arg(0) == 'password-success') {
+                if(arg(0) == 'password-success' || arg(0) == 'complete-page') {
                   $change_arg = arg(1);
                   
                 }
