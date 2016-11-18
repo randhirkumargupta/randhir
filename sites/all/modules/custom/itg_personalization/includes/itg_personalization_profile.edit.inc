@@ -18,7 +18,14 @@ function itg_personalization_edit_profile_form() {
   $edit_mobile_url = 'http://'.PARENT_SSO.'/sso-user/mobile/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
   }
   
-  $user_detail = user_load($user->uid);      
+  $user_detail = user_load($user->uid);
+  if(is_numeric($user_detail->name)) {
+    $mobile = $user_detail->name;
+  }
+  else
+  {
+    $mobile = $user_detail->field_mobile_number['und'][0]['value'];
+  }
   $form['fname'] = array(
     '#title' => t('First Name'),
     '#type' => 'textfield',
@@ -56,7 +63,7 @@ function itg_personalization_edit_profile_form() {
       'readonly' => TRUE,
     ),
     '#suffix' => '<div class="change-email"><a href="javascript:void(0)"  onclick="CenterWindow(550, 400, 50, '."'".$edit_mobile_url."'".');">Change Mobile</a></div>',
-    '#default_value' => $user_detail->field_mobile_number['und'][0]['value'],
+    '#default_value' => $mobile,
   );
   $form['dob'] = array(
     '#type' => 'date_popup',
