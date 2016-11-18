@@ -19,4 +19,4 @@
     </div>
 </div>
 <?php $current_time_program_tid = itg_live_tv_page_video_category();  ?>
-<div class="latest-livetv-video"><h4>Latest Video</h4><?php print views_embed_view('programme_content_live_tv', 'block_1', $current_time_program_tid); ?></div>
+<div class="latest-livetv-video"><h4><?php print t('Latest Video'); ?></h4><?php print views_embed_view('programme_content_live_tv', 'block_1', $current_time_program_tid); ?></div>
