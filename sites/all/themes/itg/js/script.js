@@ -381,9 +381,15 @@ jQuery(document).ready(function () {
                 jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
             });
          }
-    };
-   
+    };   
     eventMenu();    
+      
+   //social share animation effects   
+   jQuery('.social-share ul').children().not(":first").hide();
+   jQuery('.social-share li').click(function(){   
+       jQuery('.social-share li').show();        
+   });
+      
       
 });
 
