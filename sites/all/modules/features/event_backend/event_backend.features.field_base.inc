@@ -415,17 +415,22 @@ function event_backend_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'rgb' => array(
+        0 => 'rgb',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'color_field',
     'settings' => array(
-      'max_length' => 255,
+      'allow_empty' => 0,
+      'palette' => '#000000',
+      'show_buttons' => 0,
+      'show_input' => 1,
+      'show_palette' => 1,
+      'show_palette_only' => 0,
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'color_field_rgb',
   );
 
   // Exported field_base: 'field_e_event_banner'.
@@ -461,17 +466,22 @@ function event_backend_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'rgb' => array(
+        0 => 'rgb',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'color_field',
     'settings' => array(
-      'max_length' => 255,
+      'allow_empty' => 0,
+      'palette' => '#eee',
+      'show_buttons' => 0,
+      'show_input' => 1,
+      'show_palette' => 1,
+      'show_palette_only' => 0,
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'color_field_rgb',
   );
 
   // Exported field_base: 'field_e_highlighted_font_color'.
@@ -485,17 +495,22 @@ function event_backend_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'rgb' => array(
+        0 => 'rgb',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'color_field',
     'settings' => array(
-      'max_length' => 255,
+      'allow_empty' => 0,
+      'palette' => '#ef2a24',
+      'show_buttons' => 0,
+      'show_input' => 1,
+      'show_palette' => 1,
+      'show_palette_only' => 0,
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'color_field_rgb',
   );
 
   // Exported field_base: 'field_e_menu_bck_color'.
@@ -509,17 +524,22 @@ function event_backend_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'rgb' => array(
+        0 => 'rgb',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'color_field',
     'settings' => array(
-      'max_length' => 255,
+      'allow_empty' => 0,
+      'palette' => '#000',
+      'show_buttons' => 0,
+      'show_input' => 1,
+      'show_palette' => 1,
+      'show_palette_only' => 0,
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'color_field_rgb',
   );
 
   // Exported field_base: 'field_e_menu_font_color'.
@@ -533,17 +553,22 @@ function event_backend_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'rgb' => array(
+        0 => 'rgb',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'color_field',
     'settings' => array(
-      'max_length' => 255,
+      'allow_empty' => 0,
+      'palette' => '#f7ee23',
+      'show_buttons' => 0,
+      'show_input' => 1,
+      'show_palette' => 1,
+      'show_palette_only' => 0,
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'color_field_rgb',
   );
 
   // Exported field_base: 'field_e_program_title_color'.
@@ -557,17 +582,22 @@ function event_backend_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'rgb' => array(
+        0 => 'rgb',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'color_field',
     'settings' => array(
-      'max_length' => 255,
+      'allow_empty' => 0,
+      'palette' => '#000',
+      'show_buttons' => 0,
+      'show_input' => 1,
+      'show_palette' => 1,
+      'show_palette_only' => 0,
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'color_field_rgb',
   );
 
   // Exported field_base: 'field_e_tab_color'.
@@ -581,17 +611,22 @@ function event_backend_field_default_field_bases() {
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'rgb' => array(
+        0 => 'rgb',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'color_field',
     'settings' => array(
-      'max_length' => 255,
+      'allow_empty' => 0,
+      'palette' => '#eee',
+      'show_buttons' => 0,
+      'show_input' => 1,
+      'show_palette' => 1,
+      'show_palette_only' => 0,
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'color_field_rgb',
   );
 
   // Exported field_base: 'field_event_audio'.

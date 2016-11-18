@@ -4089,6 +4089,47 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
   overflow-x: auto;
 }
 
+.page-sso-user #sso_password_form .pg-title {
+  padding: 15px;
+  font-size: 22px;
+  border-bottom: 1px solid #d9d9d9;
+  margin-bottom: 15px;
+}
+.page-sso-user #sso_password_form span.error {
+  display: block !important;
+}
+.page-sso-user #sso_password_form .form-item {
+  margin: 20px 0;
+}
+.page-sso-user #sso_password_form .form-item label {
+  display: block;
+  padding-bottom: 5px;
+}
+.page-sso-user #sso_password_form .form-item label[for="edit-pass"] {
+  display: none;
+}
+.page-sso-user #sso_password_form div.password-suggestions {
+  width: 100%;
+}
+.page-sso-user #sso_password_form div.password-suggestions ul {
+  padding: 10px 20px;
+}
+.page-sso-user #sso_password_form .form-submit {
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+  height: 50px;
+  width: 33%;
+  margin-bottom: 20px;
+}
+
 /* Responsive CSS Personalization pages */
 @media all and (max-width: 767px) {
   .page-personalization .personalized-wrapper .personalized-user-area, .page-personalization .personalized-wrapper .personalized-user, .page-personalization .personalized-wrapper .personalized-user-info {
@@ -4111,6 +4152,22 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
     float: none;
     border: none;
     border-top: 1px solid #c6c6c6;
+  }
+  .block-itg-personalization .profile-edit-tab {
+    list-style: none;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .block-itg-personalization .profile-edit-tab li {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2px;
+  }
+  .block-itg-personalization .profile-edit-tab li a {
+    padding: 10px 20px;
+    display: block;
+    background: #f8f8f8;
+    border-radius: 10px 10px 0 0;
   }
 
   #block-itg-personalization-personalized-saved-content {

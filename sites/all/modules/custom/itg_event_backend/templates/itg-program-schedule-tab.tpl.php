@@ -12,6 +12,8 @@ $host_node = node_load($host_node_arr[1]);
 $heading_background_color = $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
 $font_color = $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';
 $content_font_color = $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+$program_title_font_color = $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+$tab_highlighted_color = $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
 
 $actual_host_name = itg_event_get_host_name();
 if($actual_host_name) {
@@ -23,14 +25,14 @@ else {
 
 ksort($data);
 foreach ($data as $key => $value) {
-  $tabs .= '<li style="background: '.$heading_background_color.'" data-tag="Day-' . $key . '" class="Day-' . $key . '">Day ' . $key . '</li>';
+  $tabs .= '<li style="background: '.$tab_highlighted_color.'" data-tag="Day-' . $key . '" class="event-program-tabs Day-' . $key . '">Day ' . $key . '</li>';
 }
 
 $banner_img = drupal_get_path('module', 'itg_event_backend').'/event_home_banner.jpeg';
 ?>
 <div style="margin-bottom: 20px;"><img src="<?php echo $base_url.'/'.$banner_img; ?>" width="100%"/></div>
 <h2 class="block-title">Session wise coverage</h2>
-<div class="program-sub-title" style="background: <?php print $heading_background_color; ?>">Program Schedule</div>
+<div class="program-sub-title" style="color: <?php echo $program_title_font_color; ?>; background: <?php print $heading_background_color;?>">Program Schedule</div>
 <?php
 print '<div class="top-tab"><ul>' . $tabs . '</ul></div>';
 foreach ($data as $key => $value) {
@@ -90,4 +92,5 @@ foreach ($data as $key => $value) {
     }
     print '</div>';
   }
-  ?>
+  
+?>

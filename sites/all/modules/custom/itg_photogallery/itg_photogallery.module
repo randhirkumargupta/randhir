@@ -14,7 +14,7 @@
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'photogallery_node_form') {
-    $form['field_story_category'][LANGUAGE_NONE]['#title'] = '<label for="edit-title">'.$form['field_story_category'][LANGUAGE_NONE]['#title'].' <span title="This field is required." class="form-required">*</span></label>';
+    $form['field_story_category'][LANGUAGE_NONE]['#title'] = '<label for="edit-title">' . $form['field_story_category'][LANGUAGE_NONE]['#title'] . ' <span title="This field is required." class="form-required">*</span></label>';
     //code for common syndication field hide
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-syndication").hide();              
@@ -122,7 +122,7 @@ function itg_photogallery_after_build($form, &$form_state) {
     '#weight' => 20,
   );
   global $user, $base_url;
-  
+
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -132,7 +132,7 @@ function itg_photogallery_after_build($form, &$form_state) {
     drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/upload.js', array('weight' => 2));
   }
   drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery.js', array('weight' => 3));
-  
+
   return $form;
 }
 
@@ -306,6 +306,9 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
       // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_gallery_small_image['und'][0]['fid'] = $file_ids[$i]['fid'];   
       if ($file_ids[$i]['filename'] != "") {
         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_credit['und'][0]['value'] = $_POST['field_credit_name']['und'][0]['value'];
+        $photo_by = explode(') (', $_POST['field_photo_by'][LANGUAGE_NONE]);
+        $photo_byline = explode(')', $photo_by[1]);
+        $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_photo_byline['und'][0]['target_id'] = $photo_byline[0];
       }
       $i++;
     }
@@ -474,11 +477,41 @@ function itg_photogallery_node_view($node, $view_mode, $langcode) {
     }
     else {
       foreach ($node->field_story_category[LANGUAGE_NONE] as $sections) {
-      $section .= $sections['tid'] . '+';
-    }
-    $sec = rtrim($section, '+');
+        $section .= $sections['tid'] . '+';
+      }
+      $sec = rtrim($section, '+');
       $view_output = views_embed_view('photo_list_of_category', 'block_3', $sec);
     }
     $node->view_output = $view_output;
   }
+}
+
+/**
+ * Implement widget alter()
+ * {@inheritdoc} 
+ */
+function itg_photogallery_field_widget_form_alter(&$element, &$form_state, $context) {
+if ($form_state['build_info']['form_id'] == ('photogallery_node_form' || 'videogallery_node_form')) {
+    // If this is an image field type of instance 'field_image_top'
+    if ($context['field']['field_name'] == ('field_story_extra_large_image' || 'field_story_large_image' || 'field_story_medium_image' || 'field_story_small_image' || 'field_story_extra_small_image')) {
+      // Loop through the element children (there will always be at least one).
+      foreach (element_children($element) as $key => $child) {
+        $element[$key]['#process'][] = 'itg_photogallery_image_field_widget_process';
+      }
+    }
+  }
+}
+
+/**
+ * Implement function widget process
+ * @param array $element
+ * @param array $form_state
+ * @param array $form
+ * @return string
+ */
+function itg_photogallery_image_field_widget_process($element, &$form_state, $form) {
+  // p($element);
+  $element['alt']['#attributes']['title'] = 'Alternate text';
+  $element['title']['#attributes']['title'] = 'Title';
+  return $element;
 }

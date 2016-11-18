@@ -18,7 +18,7 @@
                         ?>
                         <div class="dm-pic">
                             <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $node_data['node_load_data']->nid); ?>">
-                                <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                                <img width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_video.jpg' />
                             </a>                            
                         </div>
                         <?php } ?>

@@ -12,6 +12,10 @@
  */
 function itg_personalization_edit_profile_form() {
   global $user;
+  //prepare url for change mobile and email
+  $edit_email_url = 'http://'.PARENT_SSO.'/sso-user/email/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
+  $edit_mobile_url = 'http://'.PARENT_SSO.'/sso-user/mobile/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
+  
   $user_detail = user_load($user->uid);      
   $form['fname'] = array(
     '#title' => t('First Name'),
@@ -39,6 +43,7 @@ function itg_personalization_edit_profile_form() {
       'readonly' => TRUE
     ),
     '#default_value' => $user_detail->mail,
+    '#suffix' => '<div class="change-email"><a href="javascript:void(0)"  onclick="CenterWindow(550, 500, 50, '."'".$edit_email_url."'".');">Change Email</a></div>',
   );
   $form['mobile'] = array(
     '#title' => t('Mobile'),
@@ -48,6 +53,7 @@ function itg_personalization_edit_profile_form() {
       'placeholder' => 'E.g., +91 9999999999',
       'readonly' => TRUE,
     ),
+    '#suffix' => '<div class="change-email"><a href="javascript:void(0)"  onclick="CenterWindow(550, 500, 50, '."'".$edit_mobile_url."'".');">Change Mobile</a></div>',
     '#default_value' => $user_detail->field_mobile_number['und'][0]['value'],
   );
   $form['dob'] = array(
@@ -220,3 +226,4 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   // Save user object.
   user_save($user_detail);
 }
+?>

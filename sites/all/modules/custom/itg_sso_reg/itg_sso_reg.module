@@ -4,7 +4,9 @@ module_load_include('inc', 'itg_sso_reg', 'includes/itg_sso_mail');
 module_load_include('inc', 'itg_sso_reg', 'includes/common_fn');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_form');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_change_password');
+module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_email_mobile_change_form');
 module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
+
 
 /*
  * Implement hook_init
@@ -58,6 +60,28 @@ function itg_sso_reg_menu() {
     'title' => 'Change Password',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sso_reg_password_form'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['sso-user/%/%'] = array(
+    'title' => 'Change Email/Mobile',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_sso_user_email_form'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['complete-page'] = array(
+    'title' => 'sso',
+    'page callback' => 'itg_sso_user_email_complete',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['password-success'] = array(
+    'title' => '',
+    'page callback' => 'itg_sso_reg_password_success',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
@@ -200,7 +224,7 @@ function itg_sso_logout_form($form, &$form_state) {
   );
   
   return $form;
-//   return system_settings_form($form);
+
 }
 
 /**
@@ -231,5 +255,22 @@ function itguser_logout() {
   }
   else {
     drupal_access_denied();
+  }
+}
+
+/**
+ * Implements itg_sso_reg_password_success().
+ */
+function itg_sso_reg_password_success() {
+  if (user_is_anonymous()) {
+    return drupal_access_denied();
+  }
+  else {
+    $form['password_success'] = array(
+      '#prefix' => '<div class="password-success">',
+      '#markup' => 'Your passsword has been changed successfully</div>',
+    );
+
+    return $form;
   }
 }

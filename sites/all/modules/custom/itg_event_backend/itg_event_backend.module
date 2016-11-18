@@ -505,6 +505,10 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
             'template' => 'event-header-menu',
             'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
         ),
+        'event_header_adds' => array(
+            'template' => 'event-header-adds',
+            'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+        ),
         'sponsor_node_form' => array(
             'arguments' => array('form' => NULL),
             'template' => 'sponsor-node-form',
@@ -554,6 +558,10 @@ function itg_event_backend_block_info() {
         'info' => t('Event Header Menu'),
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
+    $blocks['event_header_adds'] = array(
+        'info' => t('Event Header Add'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
     $blocks['sponsor_tab_form_block'] = array(
         'info' => t('sponsor Form Tab Block'),
         'cache' => DRUPAL_CACHE_GLOBAL,
@@ -599,6 +607,9 @@ function itg_event_backend_block_view($delta = '') {
         case 'event_header_menu':
             $block['content'] = theme('event_header_menu', array('data' => ''));
             break;
+        case 'event_header_adds':
+            $block['content'] = theme('event_header_adds', array('data' => ''));
+            break;          
         case 'sponsor_tab_form_block':
             $block['content'] = theme('itg_event_sponsor_tab_form_display_block', array('data' => ''));
             break;
@@ -1142,4 +1153,13 @@ function itg_event_backend_insert_into_redirect($node) {
             drupal_write_record('domain_source', $domain_source);
         }
     }
+}
+
+/**
+ * Render Event header adds block
+ * @return array
+ */
+function itg_event_backend_header_add_block() {
+  $block = module_invoke('itg_event_backend', 'block_view', 'event_header_adds');
+  return render($block['content']);
 }

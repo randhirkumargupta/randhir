@@ -158,6 +158,18 @@ Drupal.behaviors.my_custom_behavior = {
       if(activate_account){
         $('.activate-message').show();
       }
+      
+      /* code to show change password popup */
+      var change_password = getUrlParameter('pass');
+      if(change_password){
+        $('.activate-message').show();
+      }
+      
+      /* code to show change email mobile popup */
+      var change_email_mobile = getUrlParameter('email');
+      if(change_email_mobile){
+        $('.activate-message').show();
+      }
   }
 };
 
@@ -272,7 +284,7 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).ready(function () {  
- jQuery('.add-more-block-fornt').live('click', function() {
+ jQuery('.add-more-block-front').live('click', function() {
  	var section_ids="";
         var elementobj=jQuery(this);
         jQuery(this).html('<img src="./sites/all/themes/itg/images/tab-loading.gif"/>')
@@ -369,9 +381,15 @@ jQuery(document).ready(function () {
                 jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
             });
          }
-    };
-   
+    };   
     eventMenu();    
+      
+   //social share animation effects   
+   jQuery('.social-share ul').children().not(":first").hide();
+   jQuery('.social-share li').click(function(){   
+       jQuery('.social-share li').show();        
+   });
+      
       
 });
 

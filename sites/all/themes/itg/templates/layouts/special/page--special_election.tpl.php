@@ -1,3 +1,4 @@
+<script src="http://localhost/itgcms/sites/all/themes/itg/js/election_map.js"></script>
 <?php
 /**
  * @file
@@ -126,56 +127,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         <div class="row">
           <div class="col-md-8 col-sm-8 col-sx-12 left-side">
             <div class="row itg-415-layout">
-              <div class="col-md-6 mt-50">
-                <div class="itg-widget">
-                  <div class="droppable <?php print $gray_bg_layout; ?>">
-                    <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-1']['block_title'])) { ?>
-                        <h4 class="heading"><?php print $widget_data['itg-block-1']['block_title']; ?></h4>
-                      <?php } ?>
-                      <!-- for admin  -->
-                      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                        <div class="widget-settings">
-                          <div class="widget-title-wrapper">
-  <?php if (isset($widget_data['itg-block-1']['block_title'])) { ?>
-                              <span class="widget-title" data-id="itg-block-1"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
-                            <?php } ?>
-                            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id" placeholder="Enter Title" />
-                          </div>
-                          <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                        </div>
-<?php } ?>  
+              
+                <?php print views_embed_view('most_popular','election_graph');?>
 
-                      <div class="data-holder" id="itg-block-1"><img src="./sites/all/themes/itg/images/utarpardesh.jpg"/><?php print $widget_data['itg-block-1']['widget']; ?></div>
-                    </div>             
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 mt-50">
-                <div class="itg-widget">
-                  <div class="droppable <?php print $gray_bg_layout; ?>">
-                    <div class="widget-wrapper <?php print $widget_data['itg-block-2']['widget_name']; ?>">
-<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-2']['block_title'])) { ?>
-                        <h4 class="heading"><?php print $widget_data['itg-block-2']['block_title']; ?></h4>
-                      <?php } ?>
-                      <!-- for admin  -->
-                      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                        <div class="widget-settings">
-                          <div class="widget-title-wrapper">
-  <?php if (isset($widget_data['itg-block-2']['block_title'])) { ?>
-                              <span class="widget-title" data-id="itg-block-2"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
-                            <?php } ?>
-                            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
-                          </div>
-                          <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                        </div>
-<?php } ?>  
-
-                      <div class="data-holder" id="itg-block-2"><img src="./sites/all/themes/itg/images/punjab.jpg"/><?php print $widget_data['itg-block-2']['widget']; ?></div>
-                    </div>             
-                  </div>
-                </div>
-              </div>
+             
             </div>
               <?php if ($theme == 'itgadmin' || (!empty($live_url) || $highlights['node_data']->field_story_highlights['und'][0]['value'] !="" )) { ?>
             <div class="row itg-325-layout">
@@ -269,7 +224,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         </div>
 <?php } ?>  
 
-                      <div class="data-holder" id="itg-block-5"><img src="./sites/all/themes/itg/images/map.jpg"/><?php print $widget_data['itg-block-5']['widget']; ?></div>
+                      <div class="data-holder" id="itg-block-5"><div style="position:relative;">
+<div id="main_container" style="position:relative; ">
+        <div id= "consTable"></div></div>
+<div id = "conssvg"></div>
+<script>getconssvg('delhi',"0");</script></div>
+
+                      
+                      
+                      
+                      
+                      </div>
                     </div>             
                   </div>
                 </div>

@@ -299,6 +299,48 @@ function feature_for_video_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-videogallery-field_primary_category_html_text'.
+  $field_instances['node-videogallery-field_primary_category_html_text'] = array(
+    'bundle' => 'videogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 41,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_primary_category_html_text',
+    'label' => 'Primary category textarea',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 50,
+    ),
+  );
+
   // Exported field_instance: 'node-videogallery-field_story_archive'.
   $field_instances['node-videogallery-field_story_archive'] = array(
     'bundle' => 'videogallery',
@@ -1973,6 +2015,7 @@ function feature_for_video_field_default_field_instances() {
   t('Medium image');
   t('Node Identity');
   t('Primary category html');
+  t('Primary category textarea');
   t('Related Content');
   t('Schedule date & time');
   t('Section');

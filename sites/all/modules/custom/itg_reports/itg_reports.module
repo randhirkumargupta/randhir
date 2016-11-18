@@ -1,6 +1,6 @@
 <?php
 
-/** 
+/**
  * @file
  *   Display front user reports to administrator user.
  */
@@ -41,7 +41,7 @@ function itg_reports_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_reports.helper.inc',
   );
-  
+
   return $items;
 }
 
@@ -54,9 +54,45 @@ function itg_reports_theme($existing, $type, $theme, $path) {
     'itg_reports_dashboard' => array(
       'variables' => array('data' => NULL),
       'template' => 'templates/itg-reports-dashboard',
-    ),    
+    ),
   );
 
   return $themes;
 }
 
+/**
+ * Implements  hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form['#id']) {
+    case 'views-exposed-form-report-filed-content-page':
+      $form['node_status']['#options'][1] = t('Published');
+      $form['node_status']['#options'][0] = t('Not published');
+      $form['moderation'] = array(        
+        '#type' => 'select',
+        '#options' => array('all' => 'Any', 'yes' => 'Yes', 'no' => 'No'),
+        '#default_value' => 'all',
+      );      
+      $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
+      $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
+      $form['from_state']['#prefix'] = '<div style="display: none;">';
+      $form['from_state']['#suffix'] = '</div>';      
+      $form['#after_build'][] = 'itg_reports_view_after_build';
+      
+      break;
+  }
+}
+
+/**
+ * Implements after build function for views exposed form.
+ * {@inheritdoc}.
+ */
+function itg_reports_view_after_build($form, &$form_state) {
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_reports') . '/js/itg_reports.js',
+  );
+  
+  return $form;
+}

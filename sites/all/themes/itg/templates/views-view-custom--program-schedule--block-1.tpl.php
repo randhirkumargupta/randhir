@@ -10,11 +10,13 @@ $host_node = node_load($host_node_arr[1]);
 $heading_background_color = $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
 $font_color = $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';
 $content_font_color = $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+$program_title_font_color = $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+
 drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-content a').css('color', '".$content_font_color."'); });",'inline');
 ?>
 
 
-<div class="program-sub-title" style="background: <?php print $heading_background_color; ?>">Program Schedule</div>
+<div class="program-sub-title" style="color: <?php print $program_title_font_color;?>; background: <?php print $heading_background_color; ?>">Program Schedule</div>
 <div class="row">
 <?php foreach ($rows as $index => $row): ?>
 <div class="col-md-6">
