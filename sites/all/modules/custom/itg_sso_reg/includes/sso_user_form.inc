@@ -460,8 +460,8 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
       else {
         $mail = $form_state['values']['mail'];
       }
-
-
+      
+      // prepare array for user
       $edit = array(
         'name' => $mobile,
         'pass' => $form_state['values']['password'],
@@ -488,6 +488,16 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
           FRONT_USER => 'Front User',
         ),
       );
+      
+      if (is_numeric($mobile)) {
+        $edit['field_mobile_number'] = array(LANGUAGE_NONE => array(
+            0 => array(
+              'value' => $mobile
+            )
+          )
+        );
+      }
+
 
       try {
 
