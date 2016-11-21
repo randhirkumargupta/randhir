@@ -8702,3 +8702,28 @@ div.node{
   padding-bottom: 30px;
 }
 .itg-form-main .itg-form-action{display: inline-block; vertical-align: top; width: 100%;}
+#itg-sso-user-email-form{
+     margin-bottom: 10px;
+    display: inline-block;
+    input[type="text"]{
+        width: 50%;
+    }
+    h3{
+        margin:20px 0;
+        text-transform: uppercase;
+    }
+    .form-submit{
+        background: #000;
+        border: none;
+        color: #fff;
+        padding: 8px 20px;
+        margin-top: 15px;
+    }
+    #fotp .form-item-fotp{
+        max-width: 100%;
+        margin-bottom: 20px;        
+    }
+    #fotp #forgototpclickme{
+        margin: 10px 20px 10px 0px;
+    }
+}

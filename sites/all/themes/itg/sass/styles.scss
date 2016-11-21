@@ -6724,7 +6724,21 @@ input[type="radio"]:checked + label:after{
               }              
             }
         }
-    }    
+    }
+    .graph-design{
+        @include pos(relative);
+        .divider{
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        height: 120px;
+        width: 1px;
+        border-left: 1px dashed #7b7b7b;
+        }
+        .highcharts-container{
+            height: 260px !important;
+        }   
+    }     
 }
 /* CSS For Election Page End */
 

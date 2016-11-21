@@ -9,7 +9,12 @@ if (!empty($data)) : global $base_url; ?>
                 <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
 
 
-                    <div class="data-holder" id="itg-block-1"> <div id="container_<?php echo $index;?>" style="min-width: 310px; height: 260px; max-width: 600px; margin: 0 auto"></div>
+                    <div class="data-holder"> 
+                        <div class="graph-design">
+                            <div id="container_<?php echo $index;?>"></div>
+                            <div class="divider"></div>                                
+                        </div>
+                        
                         <?php
                     
                         $jsondata = file_get_contents($row->field_election_constituency_tall);
