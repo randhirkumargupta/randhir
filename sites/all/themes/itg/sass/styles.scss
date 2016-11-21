@@ -2611,6 +2611,7 @@ footer{
                         @include font(13px,18px,$itg-font-medium);    
                         width: auto; 
                         max-height: 45px;
+                        min-height: 45px;
                         overflow: hidden;
                         a{
                             color: #fff;
@@ -3840,11 +3841,17 @@ footer{
 }
 /*CSS end Latest issue magazins*/
 /*CSS start magazins*/
+.magazin-mob{
+    display: none;
+}
+.magazin-desktop{
+    display: block;
+}
 .magazin-lhs-top{
     background: #f6f5f5;
     border: 1px solid $border-color;
     padding-bottom: 10px;
-    a:hover{
+    &a:hover{
         color:#193984;
     }
     .magazin-top{
@@ -3952,6 +3959,12 @@ footer{
     }
     span.widget-title{
         @include pos(absolute);            
+    }
+    > div > div{
+        margin-bottom: 35px;
+        &:last-child{
+            margin-bottom: 0px;
+        }
     }
 }
 /*End start magazins*/

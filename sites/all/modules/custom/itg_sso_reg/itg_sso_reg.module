@@ -56,7 +56,7 @@ function itg_sso_reg_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['sso-user/change-password'] = array(
+  $items['sso/change-password'] = array(
     'title' => 'Change Password',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_sso_reg_password_form'),

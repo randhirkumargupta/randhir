@@ -79,13 +79,13 @@ function itg_sso_user_email_step_1_form($form, &$form_state, $unique_id) {
   $form['unique_id'] = array(
     '#title' => '',
     '#description' => '',
-    '#type' => 'textfield',
+    '#type' => 'hidden',
     '#value' => $unique_id,
   );
 
 
   $form['domain_info_url'] = array(
-    '#type' => 'textfield',
+    '#type' => 'hidden',
     '#title' => t(''),
     '#value' => base64_decode(arg(3)),
   );
@@ -114,19 +114,19 @@ function itg_sso_user_email_step_2_form($form, &$form_state) {
   $form['emobile'] = array(
     '#title' => '',
     '#description' => '',
-    '#type' => 'textfield',
+    '#type' => 'hidden',
     '#value' => $form_state['values']['emobile'],
   );
 
   $form['unique_id'] = array(
     '#title' => '',
     '#description' => '',
-    '#type' => 'textfield',
+    '#type' => 'hidden',
     '#value' => $form_state['values']['unique_id'],
   );
 
   $form['domain_info_url'] = array(
-    '#type' => 'textfield',
+    '#type' => 'hidden',
     '#title' => t(''),
     '#value' => $form_state['values']['domain_info_url'],
   );
