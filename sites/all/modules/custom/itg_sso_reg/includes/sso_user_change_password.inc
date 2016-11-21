@@ -10,7 +10,10 @@ function itg_sso_reg_password_form($form, &$form_state) {
   if (user_is_anonymous()) {
     return drupal_access_denied();
   }
-  print '<div class="pg-title">'.drupal_set_title('Change Password').'</div>';
+  
+  $form['heading'] = array(
+    '#markup' => '<div class="pg-title">'.drupal_set_title('Change Password').'</div>',
+  );
   
   $form['#account'] = $GLOBALS['user'];
   $form['#prefix'] = '<div id="sso_password_form">';

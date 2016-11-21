@@ -65,7 +65,11 @@ function itg_sso_user_email_form($form, &$form_state) {
 function itg_sso_user_email_step_1_form($form, &$form_state, $unique_id) {
 
   $values = isset($form_state['multistep_values']['step_1']) ? $form_state['multistep_values']['step_1'] : array();
-  print '<div class="me-title">' . drupal_set_title('Change ' . ucfirst(arg(1))) . '</div>';
+  
+  $form['heading'] = array(
+    '#markup' => '<div class="me-title">' . drupal_set_title('Change ' . ucfirst(arg(1))) . '</div>',
+  );
+  
   $form['emobile'] = array(
     '#title' => ucfirst(arg(1)),
     '#description' => '',
