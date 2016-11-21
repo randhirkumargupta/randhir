@@ -799,7 +799,10 @@ function itg_widget_theme() {
     'auto_reviews' => array(
       'template' => 'templates/auto-reviews',
     ),
-    'itg_widget_politoons' => array(
+    'graph_election' => array(
+      'template' => 'templates/itg-widget-graph-election',
+    ),
+      'itg_widget_politoons' => array(
       'template' => 'templates/itg-widget-politoons',
     ),
     'tech_reviews' => array(
@@ -1270,7 +1273,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
         $section = $_GET['section_name'];
       }
 
-      $query->where[1]['conditions'][1]['value'] = $section;
+      $query->where[1]['conditions'][2]['value'] = $section;
     }
   }
 

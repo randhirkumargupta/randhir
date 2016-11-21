@@ -446,11 +446,10 @@ function feature_for_highlights_widget_views_default_views() {
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = 'Content ID';
-  /* Field: Content: Category */
+  /* Field: Content: Section */
   $handler->display->display_options['fields']['field_section']['id'] = 'field_section';
   $handler->display->display_options['fields']['field_section']['table'] = 'field_data_field_section';
   $handler->display->display_options['fields']['field_section']['field'] = 'field_section';
-  $handler->display->display_options['fields']['field_section']['label'] = 'Section';
   /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
