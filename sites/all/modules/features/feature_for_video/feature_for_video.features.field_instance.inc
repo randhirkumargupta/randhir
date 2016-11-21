@@ -570,7 +570,7 @@ function feature_for_video_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_story_expert_name',
-    'label' => 'Short Description',
+    'label' => 'Kicker',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -2010,6 +2010,7 @@ function feature_for_video_field_default_field_instances() {
   t('Image Size (300x350)');
   t('Image Size (650 x 445)');
   t('Image Size (88 x 66)');
+  t('Kicker');
   t('Large image');
   t('Long Description');
   t('Medium image');
@@ -2019,7 +2020,6 @@ function feature_for_video_field_default_field_instances() {
   t('Related Content');
   t('Schedule date & time');
   t('Section');
-  t('Short Description');
   t('Short headline');
   t('Small image');
   t('Social media integration');
