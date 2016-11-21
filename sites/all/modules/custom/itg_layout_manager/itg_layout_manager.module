@@ -90,6 +90,11 @@ function itg_layout_manager_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
+    $items['get_map_data'] = array(
+        'page callback' => 'itg_layout_getterm_detials', // se for get the tags by tagid on image.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
     return $items;
 }
@@ -284,7 +289,7 @@ function itg_layout_manager_block_view($delta = '') {
             else {
                 $widgets_type = 'section_wise_order';
             }
-
+        
             $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
 
             $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
@@ -497,6 +502,37 @@ function itg_layout_gethomecarddata() {
     }
 
     exit();
+}
+
+/**
+ * 
+ * This function use for url cleaning 
+ * $string string
+ * 
+ */
+function itg_layout_clean_url($string) {
+    $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+
+    return strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', $string)); // Removes special chars.
+}
+
+/**
+ * 
+ * This function use for term details
+ * 
+ * 
+ */
+function itg_layout_getterm_detials() {
+    $tid = $_POST['state_id'];
+    $dataterm = taxonomy_term_load($tid);
+   
+    $svgurl = $dataterm->field_state_svg_json['und'][0]['value'];
+    $mapgurl = $dataterm->field_state_map_json['und'][0]['value'];
+    $colorurl=$dataterm->field_state_map_color_json['und'][0]['value'];
+
+    $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl,'color_url'=>$colorurl);
+    print json_encode($urlarray);
+    die;
 }
 
 /**
