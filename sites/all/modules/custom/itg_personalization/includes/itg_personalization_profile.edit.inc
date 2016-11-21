@@ -15,8 +15,9 @@ function itg_personalization_edit_profile_form() {
   //prepare url for change mobile and email
   if (strpos($user->mail, 'twitter') != true) {
   $edit_email_url = 'http://'.PARENT_SSO.'/sso-user/email/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
-  $edit_mobile_url = 'http://'.PARENT_SSO.'/sso-user/mobile/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
   }
+  
+  $edit_mobile_url = 'http://'.PARENT_SSO.'/sso-user/mobile/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
   
   $user_detail = user_load($user->uid);
   if(is_numeric($user_detail->name)) {
