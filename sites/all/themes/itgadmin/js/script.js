@@ -816,3 +816,38 @@ jQuery(document).ready(function() {
     jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
 
 });
+jQuery(document).ready(function () {  
+
+     jQuery('#map-state').change(function() {
+          jQuery('#consTable').hide();
+         var getstate_id=jQuery(this).val();
+        
+          jQuery.ajax({
+            url: Drupal.settings.basePath + 'get_map_data',
+            type: 'post',
+            beforeSend: function() {
+               jQuery('#widget-ajex-loader').show();
+            },
+            data: {'state_id': getstate_id,},
+            success: function(data) {
+            var obj = jQuery.parseJSON(data);
+           jQuery('#widget-ajex-loader').hide();
+           if(obj.mapjson=='')
+           {
+               jQuery("#conssvg").html('Content Not Found');
+               
+           }else{
+            getconssvg(obj,'0');
+         }
+
+            },
+            complete: function() {
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+     });
+});
+

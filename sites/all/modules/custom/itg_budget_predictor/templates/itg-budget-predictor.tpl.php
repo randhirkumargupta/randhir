@@ -10,6 +10,7 @@ $actual_link = $data['actual_link'];
 $budget_title = $data['budget_title'];
 $budget_description = $data['budget_description'];
 $budget_message = $data['budget_message'];
+$budget_social_message = $data['budget_social_message'];
 $budget_message_flag = $data['budget_message_flag'];
 ?>
 <style type="text/css">
@@ -60,7 +61,7 @@ $budget_message_flag = $data['budget_message_flag'];
   <div class="social-list">
       <ul>
           <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>SHARE</span></li>
-          <li class="mhide"><div id="fb-root"></div><a onclick="badget_fb_share('<?php print $actual_link; ?>', '<?php print $budget_title; ?>', '<?php print $budget_description; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+          <li class="mhide"><div id="fb-root"></div><a onclick="badget_fb_share('<?php print $actual_link; ?>', '<?php print $budget_title; ?>', '<?php print $budget_social_message; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
           <li class="mhide"><a href="javascript:" onclick="badget_twitter_share('<?php print urlencode($budget_title); ?>', '<?php print urlencode($actual_link); ?>')"><i class="fa fa-twitter"></i></a></li>
           <li class="mhide"><a title="share on google+" href="#" onclick="return badget_google_plus_share('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
           <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
