@@ -9,7 +9,7 @@ if (!empty($data)) : global $base_url; ?>
                 <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
 
 
-                    <div class="data-holder" id="itg-block-1"> <div id="container_<?php echo $index;?>" style="min-width: 310px; height: 238px; max-width: 600px; margin: 0 auto"></div>
+                    <div class="data-holder" id="itg-block-1"> <div id="container_<?php echo $index;?>" style="min-width: 310px; height: 260px; max-width: 600px; margin: 0 auto"></div>
                         <?php
                     
                         $jsondata = file_get_contents($row->field_election_constituency_tall);
@@ -17,13 +17,13 @@ if (!empty($data)) : global $base_url; ?>
                         
                         $jsondata = json_decode($jsondata_orig);
                         print '<table cellspacing="0" cellpadding="8" border="0" width="100%" id="allianceTable_delhi" class="schedule2"><tbody>
-<tr style="height:40px;"><th>PARTIES</th><th>LEADS</th><th>WON</th><th>TOTAL</th></tr>
+<tr><th></th><th>PARTIES</th><th>LEADS</th><th>WON</th><th>TOTAL</th></tr>
 ';
 
 
                         foreach ($jsondata->election->items as $elction_telly_data) {
                           
-                            print '<tr style="background-color:#ffffff;"><td class="padtext"><span style="background:'.$elction_telly_data->pColor.'; width:5px; height:20px; display:inline-block; margin:0 10px -5px -14px"></span>'.ucfirst($elction_telly_data->pName).'</td>
+                            print '<tr><td class="party-color" style="background:'.$elction_telly_data->pColor.'"></td><td class="padtext">'.ucfirst($elction_telly_data->pName).'</td>
 <td>'.$elction_telly_data->pLead.'</td>
 <td>'.$elction_telly_data->pWon.'</td>
 <td>'.$elction_telly_data->pWon.'</td></tr>';
