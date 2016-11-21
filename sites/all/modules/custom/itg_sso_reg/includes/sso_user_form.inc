@@ -460,8 +460,8 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
       else {
         $mail = $form_state['values']['mail'];
       }
-
-      if(is_numeric($mobile)) {
+      
+      // prepare array for user
       $edit = array(
         'name' => $mobile,
         'pass' => $form_state['values']['password'],
@@ -483,48 +483,21 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
             )
           )
         ),
-        'field_mobile_number' => array(
-          LANGUAGE_NONE => array(
+        'roles' => array(
+          2 => 'authenticated',
+          FRONT_USER => 'Front User',
+        ),
+      );
+      
+      if (is_numeric($mobile)) {
+        $edit['field_mobile_number'] = array(LANGUAGE_NONE => array(
             0 => array(
               'value' => $mobile
             )
           )
-        ),
-        'roles' => array(
-          2 => 'authenticated',
-          FRONT_USER => 'Front User',
-        ),
-      );
+        );
       }
-      else
-      {
-        $edit = array(
-        'name' => $mobile,
-        'pass' => $form_state['values']['password'],
-        'mail' => $mail,
-        'init' => $mail,
-        'status' => 1,
-        'access' => REQUEST_TIME,
-        'field_first_name' => array(
-          LANGUAGE_NONE => array(
-            0 => array(
-              'value' => $form_state['values']['fname']
-            )
-          )
-        ),
-        'field_last_name' => array(
-          LANGUAGE_NONE => array(
-            0 => array(
-              'value' => $form_state['values']['lname']
-            )
-          )
-        ),
-        'roles' => array(
-          2 => 'authenticated',
-          FRONT_USER => 'Front User',
-        ),
-      );
-      }
+
 
       try {
 
