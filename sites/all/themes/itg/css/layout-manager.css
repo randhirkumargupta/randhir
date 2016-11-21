@@ -2374,7 +2374,7 @@ img {
   color: #b6b6b6;
 }
 .election-page .left-side .itg-415-layout .droppable {
-  height: 415px;
+  min-height: 415px;
 }
 .election-page .left-side .itg-325-layout .droppable, .election-page .left-side .itg-325-layout iframe {
   height: 325px;
@@ -2553,6 +2553,66 @@ img {
 }
 .election-page .key-candidate .key-candidate-detail.key-candidate-detail-first {
   display: block;
+}
+.election-page .itg-map svg {
+  max-width: 100%;
+  max-height: 332px;
+}
+.election-page .itg-map #map-state {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 20px;
+  line-height: 20px;
+  padding: 0;
+  width: 145px;
+}
+.election-page .election-graph .highcharts-credits {
+  display: none;
+}
+.election-page .election-graph table {
+  font-size: 13px;
+  font-family: roboto;
+}
+.election-page .election-graph table th {
+  text-align: center;
+  border-bottom: 10px solid #FFF;
+}
+.election-page .election-graph table th:nth-child(2) {
+  text-align: left;
+  padding-left: 10px;
+}
+.election-page .election-graph table td {
+  background: #f5f5f5;
+  border-bottom: 10px solid #FFF;
+  text-align: center;
+  color: #5e5e5e;
+}
+.election-page .election-graph table td:first-child {
+  padding-right: 5px;
+}
+.election-page .election-graph table td:nth-child(2) {
+  text-align: left;
+  padding-left: 10px;
+}
+.election-page .election-graph table td.party-color {
+  width: 13px;
+  height: 19px;
+  margin-bottom: 10px;
+}
+.election-page .graph-design {
+  position: relative;
+}
+.election-page .graph-design .divider {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  height: 120px;
+  width: 1px;
+  border-left: 1px dashed #7b7b7b;
+}
+.election-page .graph-design .highcharts-container {
+  height: 260px !important;
 }
 
 /* CSS For Election Page End */
