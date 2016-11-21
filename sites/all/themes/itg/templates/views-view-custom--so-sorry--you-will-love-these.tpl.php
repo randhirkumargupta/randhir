@@ -1,9 +1,16 @@
 <?php
 global $base_url;
+$skip_nid = FALSE;
+$count_feature = count_sosorry_feature();
+$nid = get_recent_created_node_for_sosorry();
+$arg = arg();
 ?>
-
 <ul class="photo-list">
     <?php foreach ($rows as $key => $value) : ?>
+      <?php if($value['nid'] == $nid && $count_feature == 0 && empty($arg[1])) {
+          // Do not print this node because we dont want to display dublicate videos on page.
+          continue;
+      } ?>
         <li class="col-md-3">
             <div class="tile">
                 <figure>
