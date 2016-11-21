@@ -3483,6 +3483,7 @@ footer .footer-copyright {
   line-height: 18px;
   width: auto;
   max-height: 45px;
+  min-height: 45px;
   overflow: hidden;
 }
 .featured_photo_carousel .flexslider .slides li .detail .flex-caption a, .tech-block_5 .flexslider .slides li .detail .flex-caption a, .auto-block_5 .flexslider .slides li .detail .flex-caption a {
@@ -5165,12 +5166,20 @@ footer .footer-copyright {
 
 /*CSS end Latest issue magazins*/
 /*CSS start magazins*/
+.magazin-mob {
+  display: none;
+}
+
+.magazin-desktop {
+  display: block;
+}
+
 .magazin-lhs-top {
   background: #f6f5f5;
   border: 1px solid #dddddd;
   padding-bottom: 10px;
 }
-.magazin-lhs-top a:hover {
+.magazin-lhs-topa:hover {
   color: #193984;
 }
 .magazin-lhs-top .magazin-top {
@@ -5327,6 +5336,12 @@ footer .footer-copyright {
 }
 .magazin-section span.widget-title {
   position: absolute;
+}
+.magazin-section > div > div {
+  margin-bottom: 35px;
+}
+.magazin-section > div > div:last-child {
+  margin-bottom: 0px;
 }
 
 /*End start magazins*/
