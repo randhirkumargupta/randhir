@@ -8727,3 +8727,15 @@ div.node{
         margin: 10px 20px 10px 0px;
     }
 }
+#views-exposed-form-report-filed-content-page{
+    #edit-date-filter-wrapper{
+        width:auto;
+        #edit-date-filter-min-wrapper, #edit-date-filter-max-wrapper{
+            display: inline-block;
+            vertical-align: top;
+        }
+        #edit-date-filter-min-wrapper{
+         margin-right: 15px;   
+        }
+    }
+}
