@@ -44,6 +44,12 @@ function itg_story_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
+  $items['create-poll-table'] = array(
+    'page callback' => 'create_poll_table',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
 
   return $items;
 }
