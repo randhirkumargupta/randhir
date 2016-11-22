@@ -424,8 +424,30 @@ jQuery(document).ready(function () {
    jQuery('.social-share li').click(function(){   
        jQuery(this).nextAll('li').show();
    });
-      
-      
+  
+     //vertical menu position 
+     var menuLength  = jQuery('.vertical-menu li').length;
+     if(menuLength > 6){         
+         jQuery('.vertical-more').show();
+     }
+    var TotalHeight = 0;
+    jQuery('.vertical-menu li').each(function () {
+        var liLength = jQuery(this).height();
+        TotalHeight = TotalHeight + liLength;        
+        console.log(TotalHeight);                
+    });
+     
+     var clicked = true;
+     jQuery('.vertical-more a').click(function(){          
+         if(clicked){
+             console.log(clicked);
+            clicked=false;
+            jQuery('.vertical-menu').css('margin-top',-(menuLength-6)*92+'px');
+         }else{
+             clicked=true;
+             jQuery('.vertical-menu').css('margin-top','0px');
+         }                  
+     });               
 });
 
 

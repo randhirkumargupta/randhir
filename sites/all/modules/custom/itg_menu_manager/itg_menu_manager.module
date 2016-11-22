@@ -662,7 +662,7 @@ function itg_menu_manager_theme() {
 function get_second_level_menu($level = 'second') {
   $query = db_select('itg_menu_manager', 'imm')
       ->fields('imm')
-      ->condition('imm.menu_level', 'second')
+      ->condition('imm.menu_level', $level)
       ->orderBy('imm.weight', 'ASC');
   return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
