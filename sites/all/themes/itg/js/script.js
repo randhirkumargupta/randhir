@@ -439,13 +439,16 @@ jQuery(document).ready(function () {
      
      var clicked = true;
      jQuery('.vertical-more a').click(function(){          
-         if(clicked){
-             console.log(clicked);
+         if(clicked){             
             clicked=false;
             jQuery('.vertical-menu').css('margin-top',-(menuLength-6)*92+'px');
+            jQuery(this).find('.more').hide();
+            jQuery(this).find('.less').show();
          }else{
              clicked=true;
              jQuery('.vertical-menu').css('margin-top','0px');
+             jQuery(this).find('.less').hide();
+            jQuery(this).find('.more').show();
          }                  
      });               
 });
