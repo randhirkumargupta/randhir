@@ -59,6 +59,7 @@ window.addEventListener("message", function(ev) {
     endif; ?>
   <?php print render($page['top']); ?>
   <?php print render($page['my_cart']); ?>
+  <?php print render($page['vertical_menu']); ?>
   <main id="main" class="container">
     <div class="row">
     <section id="content" class="<?php echo $cls;?>" role="main">

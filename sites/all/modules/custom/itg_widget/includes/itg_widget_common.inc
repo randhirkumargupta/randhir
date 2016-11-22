@@ -372,7 +372,6 @@ function draggable_view_node_delete($view_name, $page_name, $nid) {
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
-
   if ($form_id == 'views_form_key_candidate_special_key_candidate_widget_contents') {
     $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
     $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
@@ -614,7 +613,9 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $form['category_tid']['#options'] = $op;
   }
 
-
+  if($form_state['build_info']['args'][0]->type == 'page' && $form_id == 'page_node_form' && arg(2) == 'edit') {
+    drupal_add_css("div.vertical-tabs {display:none}" ,'inline');
+  }
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
@@ -2275,7 +2276,7 @@ function get_rhs_block_display_condtion($delta = '') {
         }
         break;
       case 'we_may_suggest':
-        if ($arg[0] == 'itg-quiz' || $arg[0] == 'online-archive-story' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+        if ($arg[0] == 'itg-quiz' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
           return TRUE;
         }
         break;

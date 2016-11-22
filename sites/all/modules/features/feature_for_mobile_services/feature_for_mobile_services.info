@@ -190,4 +190,3 @@ features[variable][] = node_submitted_clients_creation
 features[variable][] = node_submitted_service_creation
 features[variable][] = node_submitted_vas_service_content
 features[views_view][] = clients_details
-project path = /home/user/Downloads/arun/test/
