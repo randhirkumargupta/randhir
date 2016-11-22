@@ -55,8 +55,9 @@ function itg_personalization_edit_profile_form() {
       'placeholder' => 'E.g., abc@example.com',
       'readonly' => TRUE
     ),
+    '#prefix' => '<div class="change-email">',
     '#default_value' => $user_detail->mail,
-    '#suffix' => '<div class="change-email">'.$edit_email_link.'</div>',
+    '#suffix' => $edit_email_link.'</div>',
   );
   $form['mobile'] = array(
     '#title' => t('Mobile'),
@@ -66,7 +67,8 @@ function itg_personalization_edit_profile_form() {
       'placeholder' => 'E.g., +91 9999999999',
       'readonly' => TRUE,
     ),
-    '#suffix' => '<div class="change-mobile">'.$edit_mobile_link.'</div>',
+    '#prefix' => '<div class="change-mobile">',
+    '#suffix' => $edit_mobile_link.'</div>',
     '#default_value' => $mobile,
   );
   $form['dob'] = array(
