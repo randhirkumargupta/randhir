@@ -818,6 +818,8 @@ function itg_widget_get_graph_data() {
     return $itg_result;
 }
 
+
+
 /**
  * File provide get highlights widget data.
  *
