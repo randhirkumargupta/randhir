@@ -27,372 +27,375 @@ module_load_include('inc', 'itg_widget', 'includes/itg_widget_common');
 function itg_widget_init() {
 // Js for move funtionality.
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
-  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
+    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', 'file');
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_menu() {
-  $items = array();
-  $items['remove_from_widgets/%/%/%/%'] = array(
-      'page callback' => 'remove_from_widgets',
-      'page arguments' => array(1, 2, 3, 4),
-      'access arguments' => array('administer nodequeue'),
-  );
-  $items['remove_from_widgets_section/%/%/%/%/%/%'] = array(
-      'page callback' => 'remove_from_widgets_with_section',
-      'page arguments' => array(1, 2, 3, 4, 5, 6),
-      'access arguments' => array('administer nodequeue'),
-  );
-  $items['move-widget-node/%/%/%/%'] = array(
-      'page callback' => 'move_node_from_widget',
-      'page arguments' => array(1, 2, 3, 4),
-      'access arguments' => array('administer nodequeue'),
-  );
+    $items = array();
+    $items['remove_from_widgets/%/%/%/%'] = array(
+        'page callback' => 'remove_from_widgets',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
+    $items['remove_from_widgets_section/%/%/%/%/%/%'] = array(
+        'page callback' => 'remove_from_widgets_with_section',
+        'page arguments' => array(1, 2, 3, 4, 5, 6),
+        'access arguments' => array('administer nodequeue'),
+    );
+    $items['move-widget-node/%/%/%/%'] = array(
+        'page callback' => 'move_node_from_widget',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
 
-  $items['remove-so-sorry-extra-data/%'] = array(
-      'page callback' => 'remove_extra_field_value_for_so_sorry',
-      'page arguments' => array(1),
-      'access arguments' => array('administer nodequeue'),
-  );
+    $items['remove-so-sorry-extra-data/%'] = array(
+        'page callback' => 'remove_extra_field_value_for_so_sorry',
+        'page arguments' => array(1),
+        'access arguments' => array('administer nodequeue'),
+    );
 
-  $items['add-so-sorry-extra-data/%/%'] = array(
-      'page callback' => 'add_extra_field_value_for_so_sorry',
-      'page arguments' => array(1, 2),
-      'access arguments' => array('administer nodequeue'),
-  );
+    $items['add-so-sorry-extra-data/%/%'] = array(
+        'page callback' => 'add_extra_field_value_for_so_sorry',
+        'page arguments' => array(1, 2),
+        'access arguments' => array('administer nodequeue'),
+    );
 
-  $items['move-dont-miss-widget-node/%/%/%/%'] = array(
-      'page callback' => 'move_node_from_dont_miss_widget',
-      'page arguments' => array(1, 2, 3, 4),
-      'access arguments' => array('administer nodequeue'),
-  );
-  $items['anchor-list/autocomplete'] = array(
-      'page callback' => 'itg_widget_anchor_autocomplete_name',
-      'access arguments' => array('access content'),
-  );
-  $items['anchor-list-nid/autocomplete'] = array(
-      'page callback' => 'itg_widget_anchor_autocomplete_id',
-      'access arguments' => array('access content'),
-  );
-  $items['node-list-title/autocomplete'] = array(
-      'page callback' => 'itg_widget_all_content_title',
-      'access arguments' => array('access content'),
-  );
-  $items['node-list-nid/autocomplete'] = array(
-      'page callback' => 'itg_widget_all_content_nid',
-      'access arguments' => array('access content'),
-  );
-  $items['so-sorry-content-title/autocomplete'] = array(
-      'page callback' => 'itg_widget_so_sorry_content_title',
-      'access arguments' => array('access content'),
-  );
-  $items['so-sorry-content-nid/autocomplete'] = array(
-      'page callback' => 'itg_widget_so_sorry_content_nid',
-      'access arguments' => array('access content'),
-  );
-  $items['remove-extra-data'] = array(
-      'page callback' => 'remove_extra_data',
-      'access arguments' => array('access administrator'),
-  );
-  $items['setids'] = array(
-      'page callback' => 'itg_widget_setids', // load the croper according to size!.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
-  );
+    $items['move-dont-miss-widget-node/%/%/%/%'] = array(
+        'page callback' => 'move_node_from_dont_miss_widget',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
+    $items['anchor-list/autocomplete'] = array(
+        'page callback' => 'itg_widget_anchor_autocomplete_name',
+        'access arguments' => array('access content'),
+    );
+    $items['anchor-list-nid/autocomplete'] = array(
+        'page callback' => 'itg_widget_anchor_autocomplete_id',
+        'access arguments' => array('access content'),
+    );
+    $items['node-list-title/autocomplete'] = array(
+        'page callback' => 'itg_widget_all_content_title',
+        'access arguments' => array('access content'),
+    );
+    $items['node-list-nid/autocomplete'] = array(
+        'page callback' => 'itg_widget_all_content_nid',
+        'access arguments' => array('access content'),
+    );
+    $items['so-sorry-content-title/autocomplete'] = array(
+        'page callback' => 'itg_widget_so_sorry_content_title',
+        'access arguments' => array('access content'),
+    );
+    $items['so-sorry-content-nid/autocomplete'] = array(
+        'page callback' => 'itg_widget_so_sorry_content_nid',
+        'access arguments' => array('access content'),
+    );
+    $items['remove-extra-data'] = array(
+        'page callback' => 'remove_extra_data',
+        'access arguments' => array('access administrator'),
+    );
+    $items['setids'] = array(
+        'page callback' => 'itg_widget_setids', // load the croper according to size!.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
-  $items['test_function_callback'] = array(
-      'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
-  );
+    $items['test_function_callback'] = array(
+        'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
-  $items['issue_filter_widget'] = array(
-      'page callback' => 'itg_widget_issuewidget_filter_form', // load the croper according to size!.
-      'type' => MENU_CALLBACK,
-      'access arguments' => array('access content'),
-  );
+    $items['issue_filter_widget'] = array(
+        'page callback' => 'itg_widget_issuewidget_filter_form', // load the croper according to size!.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
-  $items['admin/settings/custom-variables'] = array(
-      'title' => 'Custom variables',
-      'description' => 'Custom variables settings page',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('itg_widgets_custom_variables'),
-      'access arguments' => array('access administrator'),
-      'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/settings/custom-variables'] = array(
+        'title' => 'Custom variables',
+        'description' => 'Custom variables settings page',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_widgets_custom_variables'),
+        'access arguments' => array('access administrator'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  return $items;
+    return $items;
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_block_info() {
-  $blocks['top_stories_ordering'] = array(
-      'info' => t('Widget: Top Stories Ordering'),
-  );
-  $blocks['trending_videos_widget'] = array(
-      'info' => t('Widget: Trending videos widgets'),
-  );
-  $blocks['top_takes_videos_widget'] = array(
-      'info' => t('Widget: Top Takes videos widgets'),
-  );
-  $blocks['home_page_feature'] = array(
-      'info' => t('Widget: Home Page Feature'),
-  );
-  $blocks['we_may_suggest'] = array(
-      'info' => t('Widget: We May Suggest'),
-  );
-  $blocks['section_wise_order'] = array(
-      'info' => t('Widget: Section wise ordering form custom table'),
-  );
-  $blocks['rhs_section_wise_order'] = array(
-      'info' => t('Widget: RHS Section wise content ordering from custom table'),
-  );
-  $blocks['big_story_format'] = array(
-      'info' => t('Widget: Big story form custom table'),
-  );
-  $blocks['most_popular'] = array(
-      'info' => t('Widget: Most popular form custom table'),
-  );
+    $blocks['top_stories_ordering'] = array(
+        'info' => t('Widget: Top Stories Ordering'),
+    );
+    $blocks['trending_videos_widget'] = array(
+        'info' => t('Widget: Trending videos widgets'),
+    );
+    $blocks['top_takes_videos_widget'] = array(
+        'info' => t('Widget: Top Takes videos widgets'),
+    );
+    $blocks['home_page_feature'] = array(
+        'info' => t('Widget: Home Page Feature'),
+    );
+    $blocks['we_may_suggest'] = array(
+        'info' => t('Widget: We May Suggest'),
+    );
+    $blocks['section_wise_order'] = array(
+        'info' => t('Widget: Section wise ordering form custom table'),
+    );
+    $blocks['rhs_section_wise_order'] = array(
+        'info' => t('Widget: RHS Section wise content ordering from custom table'),
+    );
+    $blocks['big_story_format'] = array(
+        'info' => t('Widget: Big story form custom table'),
+    );
+    $blocks['most_popular'] = array(
+        'info' => t('Widget: Most popular form custom table'),
+    );
 
-  $blocks['featured_photo_carousel'] = array(
-      'info' => t('Widget: Featured Photo Carousel - Flexslider'),
-  );
+    $blocks['featured_photo_carousel'] = array(
+        'info' => t('Widget: Featured Photo Carousel - Flexslider'),
+    );
 
-  $blocks['featured_photo_carousel_r'] = array(
-      'info' => t('Widget: Featured Photo Carousel - Rolling Slider'),
-  );
+    $blocks['featured_photo_carousel_r'] = array(
+        'info' => t('Widget: Featured Photo Carousel - Rolling Slider'),
+    );
 
-  $blocks['featured_video_carousel'] = array(
-      'info' => t('Widget: Featured Video Carousel - Flexslider'),
-  );
+    $blocks['featured_video_carousel'] = array(
+        'info' => t('Widget: Featured Video Carousel - Flexslider'),
+    );
 
-  $blocks['featured_video_carousel_r'] = array(
-      'info' => t('Widget: Featured Video Carousel - Rolling Slider'),
-  );
+    $blocks['featured_video_carousel_r'] = array(
+        'info' => t('Widget: Featured Video Carousel - Rolling Slider'),
+    );
 
-  $blocks['dont_miss'] = array(
-      'info' => t('Widget: Dont Miss form custom table'),
-  );
-  $blocks['yearende_left_top_news'] = array(
-      'info' => t('Widget: Year end left top news form custom table'),
-  );
-  $blocks['education_how_made_id'] = array(
-      'info' => t('Widget: How I Made it form custom table'),
-  );
-  $blocks['yearende_left_top_videos'] = array(
-      'info' => t('Widget: Year end left top Videos form custom table'),
-  );
-  $blocks['watch_right_now_videos_widget'] = array(
-      'info' => t('Widget: Watch right now videos'),
-  );
-  $blocks['anchor_langing_page_menu'] = array(
-      'info' => t('Anchor landing page menu'),
-  );
-  $blocks['personlization'] = array(
-      'info' => t('Persionlization front end'),
-  );
-  $blocks['home_page_poll_widget_block'] = array(
-      'info' => t('Home Page Poll Widget'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  $blocks['sport_poll_widget_block'] = array(
-      'info' => t('Sport Page Poll Widget'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  $blocks['sosorry_social_icons_block'] = array(
-      'info' => t('So Sorry Social Icons Custom Block'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  $blocks['auto_reviews'] = array(
-      'info' => t('Widget: Auto Reviews from custom table'),
-  );
+    $blocks['dont_miss'] = array(
+        'info' => t('Widget: Dont Miss form custom table'),
+    );
+    $blocks['yearende_left_top_news'] = array(
+        'info' => t('Widget: Year end left top news form custom table'),
+    );
+    $blocks['education_how_made_id'] = array(
+        'info' => t('Widget: How I Made it form custom table'),
+    );
+    $blocks['yearende_left_top_videos'] = array(
+        'info' => t('Widget: Year end left top Videos form custom table'),
+    );
+    $blocks['watch_right_now_videos_widget'] = array(
+        'info' => t('Widget: Watch right now videos'),
+    );
+    $blocks['anchor_langing_page_menu'] = array(
+        'info' => t('Anchor landing page menu'),
+    );
+    $blocks['personlization'] = array(
+        'info' => t('Persionlization front end'),
+    );
+    $blocks['home_page_poll_widget_block'] = array(
+        'info' => t('Home Page Poll Widget'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+    $blocks['sport_poll_widget_block'] = array(
+        'info' => t('Sport Page Poll Widget'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+    $blocks['sosorry_social_icons_block'] = array(
+        'info' => t('So Sorry Social Icons Custom Block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+    $blocks['auto_reviews'] = array(
+        'info' => t('Widget: Auto Reviews from custom table'),
+    );
 
-  $blocks['so_sorry_front_politoons'] = array(
-      'info' => t('So Sorry Politoons'),
-  );
-   $blocks['tech_reviews'] = array(
-      'info' => t('Widget: Tech Reviews from custom table'),
-  );
-   $blocks['tech_most_read'] = array(
-      'info' => t('Widget: Tech most read from custom table'),
-  );
-  $blocks['movies_reviews'] = array(
-      'info' => t('Widget:  Movies Reviews from custom table'),
-  );
-  $blocks['ipl_tweets'] = array(
-    'info' => t('IPL Tweets')
-  );
-  $blocks['budget_tweets'] = array(
-    'info' => t('Budget Tweets')
-  );
-   $blocks['live_score'] = array(
-    'info' => t('Live Score')
-  ); 
+    $blocks['so_sorry_front_politoons'] = array(
+        'info' => t('So Sorry Politoons'),
+    );
+    $blocks['tech_reviews'] = array(
+        'info' => t('Widget: Tech Reviews from custom table'),
+    );
+    $blocks['tech_most_read'] = array(
+        'info' => t('Widget: Tech most read from custom table'),
+    );
+    $blocks['movies_reviews'] = array(
+        'info' => t('Widget:  Movies Reviews from custom table'),
+    );
+    $blocks['ipl_tweets'] = array(
+        'info' => t('IPL Tweets')
+    );
+    $blocks['budget_tweets'] = array(
+        'info' => t('Budget Tweets')
+    );
+    $blocks['graph_election'] = array(
+        'info' => t('Graph Election')
+    );
+    $blocks['live_score'] = array(
+        'info' => t('Live Score')
+    );
 
-  return $blocks;
+    return $blocks;
 }
 
 /**
  * {@inheritdoc}
  */
 function itg_widget_block_view($delta = '') {
-  $block = array();
-  switch ($delta) {
-    // Big Story Content.
-    case 'big_story_format':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
-      //$block['subject'] = t('');
-      $info['widget'] = 'big_story_format_widget';
-      $data = itg_widget_big_story_block_data($info);
-      $block['content'] = theme("widget_big_story_format", array("data" => $data));
-      break;
-    // section ordering reordering widget case
-    case 'section_wise_order':
-      module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
-      // value is hardcoded need to be change for dyanamic functionality
-      $info['section'] = '240'; // tid of section
-      $info['content_type'] = ''; // content type machine name
-      // view name which is stored in draggableviews_structure table
-      $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-      //$block['subject'] = t('Section wise ordering from custom table');
-      $data = itg_widget_section_wise_ordering_from_custom_table($info);
-      $block['content'] = theme("section_wise_ordering", array("data" => $data));
-      break;
-    case 'rhs_section_wise_order':
-      module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
-      // value is hardcoded need to be change for dyanamic functionality
-      $info['section'] = '437'; // tid of section
-      $info['content_type'] = ''; // content type machine name
-      // view name which is stored in draggableviews_structure table
-      $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-      //$block['subject'] = t('Section wise ordering from custom table');
-      $data = itg_widget_section_wise_ordering_for_rhs_from_custom_table($info);
-      $block['content'] = theme("rhs_section_wise_ordering", array("data" => $data));
-      break;
-    case 'we_may_suggest':
-      $display = get_rhs_block_display_condtion($delta);
-      if (empty($display)) {
-        return;
-      }
-      module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
-      $info['section'] = '301'; // tid of section
-      $info['content_type'] = 'story'; // content type machine name
-      $info['view_name'] = 'we_may_suggest_widget';
-      $data = itg_widget_we_may_suggest_ordering_from_custom_table($info);
-      $block['content'] = theme("we_may_suggest", array("data" => $data));
-      break;
-    // Top story ordering reordering widget case
-    case 'top_stories_ordering':
-      module_load_include('inc', 'itg_widget', 'includes/section-odering');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'page_2'; // page name
-      $info['nodequeue'] = 'top_stories';
-      $data = itg_widget_top_stories_ordering_data($info);
-      $block['content'] = theme("top_stories_ordering", array("data" => $data));
-      break;
-    // Top story ordering reordering widget case
-    case 'most_popular':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'most_popular_widget'; // page name
-      $info['nodequeue'] = 'most_popular';
-      $data = itg_widget_most_popular_ordering_data($info);
-      $block['content'] = theme("most_popular_widget", array("data" => $data));
-      break;
-    // Top story ordering reordering widget case
-    case 'dont_miss':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
-      $info['widget_name'] = 'dont_miss_content_widget';
-      $data = itg_widget_dont_miss_ordering_data($info);
-      $block['content'] = theme("dont_miss_widget", array("data" => $data));
-      drupal_add_css("");
-      break;
-    case 'yearende_left_top_news':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
-      $info['widget_name'] = 'yearender_left_news_video';
-      $data = itg_widget_yearend_top_news_ordering_data($info);
+    $block = array();
+    switch ($delta) {
+        // Big Story Content.
+        case 'big_story_format':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
+            //$block['subject'] = t('');
+            $info['widget'] = 'big_story_format_widget';
+            $data = itg_widget_big_story_block_data($info);
+            $block['content'] = theme("widget_big_story_format", array("data" => $data));
+            break;
+        // section ordering reordering widget case
+        case 'section_wise_order':
+            module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
+            // value is hardcoded need to be change for dyanamic functionality
+            $info['section'] = '240'; // tid of section
+            $info['content_type'] = ''; // content type machine name
+            // view name which is stored in draggableviews_structure table
+            $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
+            //$block['subject'] = t('Section wise ordering from custom table');
+            $data = itg_widget_section_wise_ordering_from_custom_table($info);
+            $block['content'] = theme("section_wise_ordering", array("data" => $data));
+            break;
+        case 'rhs_section_wise_order':
+            module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
+            // value is hardcoded need to be change for dyanamic functionality
+            $info['section'] = '437'; // tid of section
+            $info['content_type'] = ''; // content type machine name
+            // view name which is stored in draggableviews_structure table
+            $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
+            //$block['subject'] = t('Section wise ordering from custom table');
+            $data = itg_widget_section_wise_ordering_for_rhs_from_custom_table($info);
+            $block['content'] = theme("rhs_section_wise_ordering", array("data" => $data));
+            break;
+        case 'we_may_suggest':
+            $display = get_rhs_block_display_condtion($delta);
+            if (empty($display)) {
+                return;
+            }
+            module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
+            $info['section'] = '301'; // tid of section
+            $info['content_type'] = 'story'; // content type machine name
+            $info['view_name'] = 'we_may_suggest_widget';
+            $data = itg_widget_we_may_suggest_ordering_from_custom_table($info);
+            $block['content'] = theme("we_may_suggest", array("data" => $data));
+            break;
+        // Top story ordering reordering widget case
+        case 'top_stories_ordering':
+            module_load_include('inc', 'itg_widget', 'includes/section-odering');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'page_2'; // page name
+            $info['nodequeue'] = 'top_stories';
+            $data = itg_widget_top_stories_ordering_data($info);
+            $block['content'] = theme("top_stories_ordering", array("data" => $data));
+            break;
+        // Top story ordering reordering widget case
+        case 'most_popular':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'most_popular_widget'; // page name
+            $info['nodequeue'] = 'most_popular';
+            $data = itg_widget_most_popular_ordering_data($info);
+            $block['content'] = theme("most_popular_widget", array("data" => $data));
+            break;
+        // Top story ordering reordering widget case
+        case 'dont_miss':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
+            $info['widget_name'] = 'dont_miss_content_widget';
+            $data = itg_widget_dont_miss_ordering_data($info);
+            $block['content'] = theme("dont_miss_widget", array("data" => $data));
+            drupal_add_css("");
+            break;
+        case 'yearende_left_top_news':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+            $info['widget_name'] = 'yearender_left_news_video';
+            $data = itg_widget_yearend_top_news_ordering_data($info);
 
-      $block['content'] = theme("year_end_top_news", array("data" => $data));
-      break;
-   case 'education_how_made_id':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_how_i_made_it');
-      $info['widget_name'] = 'special_how_made_it_content';
-      $data = itg_widget_how_made_it_ordering_data($info);
-      
-      $block['content'] = theme("how_made_it", array("data" => $data));
-      break;
-    case 'yearende_left_top_videos':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
-      $info['widget_name'] = 'yearender_left_news_video';
-      $data = itg_widget_yearend_top_videos_ordering_data($info);
+            $block['content'] = theme("year_end_top_news", array("data" => $data));
+            break;
+        case 'education_how_made_id':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_how_i_made_it');
+            $info['widget_name'] = 'special_how_made_it_content';
+            $data = itg_widget_how_made_it_ordering_data($info);
 
-      $block['content'] = theme("year_end_top_videos", array("data" => $data));
-      break;
-    // Trending videos ordering reordering widget case
-    case 'trending_videos_widget':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'trending_videos_widget'; // page name
-      $info['nodequeue'] = 'trending_videos';
-      $data = itg_widget_trending_videos_widget_ordering_data($info);
-      $block['content'] = theme("trending_videos_widget", array("data" => $data));
-      break;
-    // Watch Right Now ordering reordering widget case
-    case 'watch_right_now_videos_widget':
-      $display = get_rhs_block_display_condtion($delta);
-      if (empty($display)) {
-        return;
-      }
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'watch_right_now_widget'; // page name
-      $info['nodequeue'] = 'watch_right_now';
-      $data = itg_widget_watch_right_now_videos_widget_ordering_data($info);
-      $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
-      break;
-    // Top takes videos ordering reordering widget case
-    case 'top_takes_videos_widget':
-      $display = get_rhs_block_display_condtion($delta);
-      if (empty($display)) {
-        return;
-      }
+            $block['content'] = theme("how_made_it", array("data" => $data));
+            break;
+        case 'yearende_left_top_videos':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
+            $info['widget_name'] = 'yearender_left_news_video';
+            $data = itg_widget_yearend_top_videos_ordering_data($info);
 
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'top_takes_video_widget'; // page name
-      $info['nodequeue'] = 'top_takes_videos';
-      $data = itg_widget_top_takes_videos_widget_ordering_data($info);
-      $block['content'] = theme("top_takes_videos_widget", array("data" => $data));
-      break;
-    // home page feature ordering reordering widget case
-    case 'home_page_feature':
-      module_load_include('inc', 'itg_widget', 'includes/home-page-feature');
-      $info['view_name'] = 'home_page_feature_widget'; // view name
-      $info['page'] = 'page_2'; // page name
-      $info['nodequeue'] = 'home_page_feature';
-      $data = itg_widget_home_page_feature_data($info);
-      $block['content'] = theme("home_page_feature", array("data" => $data));
-      break;
-    // featured photo carousel reordering widget case
-    case 'featured_photo_carousel':
-      drupal_add_library('flexslider', 'flexslider');
-      libraries_load('flexslider');
-      module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
+            $block['content'] = theme("year_end_top_videos", array("data" => $data));
+            break;
+        // Trending videos ordering reordering widget case
+        case 'trending_videos_widget':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'trending_videos_widget'; // page name
+            $info['nodequeue'] = 'trending_videos';
+            $data = itg_widget_trending_videos_widget_ordering_data($info);
+            $block['content'] = theme("trending_videos_widget", array("data" => $data));
+            break;
+        // Watch Right Now ordering reordering widget case
+        case 'watch_right_now_videos_widget':
+            $display = get_rhs_block_display_condtion($delta);
+            if (empty($display)) {
+                return;
+            }
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'watch_right_now_widget'; // page name
+            $info['nodequeue'] = 'watch_right_now';
+            $data = itg_widget_watch_right_now_videos_widget_ordering_data($info);
+            $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
+            break;
+        // Top takes videos ordering reordering widget case
+        case 'top_takes_videos_widget':
+            $display = get_rhs_block_display_condtion($delta);
+            if (empty($display)) {
+                return;
+            }
 
-      drupal_add_js('jQuery(window).load(function() {
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
+            $info['view_name'] = 'story_widget'; // view name
+            $info['page'] = 'top_takes_video_widget'; // page name
+            $info['nodequeue'] = 'top_takes_videos';
+            $data = itg_widget_top_takes_videos_widget_ordering_data($info);
+            $block['content'] = theme("top_takes_videos_widget", array("data" => $data));
+            break;
+        // home page feature ordering reordering widget case
+        case 'home_page_feature':
+            module_load_include('inc', 'itg_widget', 'includes/home-page-feature');
+            $info['view_name'] = 'home_page_feature_widget'; // view name
+            $info['page'] = 'page_2'; // page name
+            $info['nodequeue'] = 'home_page_feature';
+            $data = itg_widget_home_page_feature_data($info);
+            $block['content'] = theme("home_page_feature", array("data" => $data));
+            break;
+        // featured photo carousel reordering widget case
+        case 'featured_photo_carousel':
+            drupal_add_library('flexslider', 'flexslider');
+            libraries_load('flexslider');
+            module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
+
+            drupal_add_js('jQuery(window).load(function() {
             jQuery(".flexslider").flexslider({
             animation: "slide",
             prevText: "",
             nextText: "",
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
+            );
 
-      drupal_add_css('.flex-caption {
+            drupal_add_css('.flex-caption {
               width: 96%;
               padding: 2%;
               left: 0;
@@ -405,20 +408,20 @@ function itg_widget_block_view($delta = '') {
             }', 'inline');
 
 
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'photo_carousel'; // page name
-      $info['nodequeue'] = 'photo_carousel';
-      $data = itg_widget_featured_photo_carousel_data($info, 'flexslider');
-      $block['content'] = theme("featured_photo_carousel", array("data" => $data));
-      break;
+            $info['view_name'] = 'photo_carousel_widget'; // view name
+            $info['page'] = 'photo_carousel'; // page name
+            $info['nodequeue'] = 'photo_carousel';
+            $data = itg_widget_featured_photo_carousel_data($info, 'flexslider');
+            $block['content'] = theme("featured_photo_carousel", array("data" => $data));
+            break;
 
-    case 'featured_photo_carousel_r':
-      global $base_url;
+        case 'featured_photo_carousel_r':
+            global $base_url;
 
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
+            drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
+            drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
 
-      drupal_add_js("jQuery(document).ready(function () {
+            drupal_add_js("jQuery(document).ready(function () {
             var winWidth = jQuery(window).width();            
             console.log(winWidth);
             if(winWidth > 1024){
@@ -439,41 +442,41 @@ function itg_widget_block_view($delta = '') {
                 });
             }
           });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
+            );
 
-      /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_js("jQuery('#featuredphoto').RollingSlider({
-        showArea:'#example',
-        prev:'#jprev',
-        next:'#jnext',
-        moveSpeed:300,
-        autoPlay:false
-        });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_js('misc/jquery.js'); */
-      module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'photo_carousel'; // page name
-      $data = itg_widget_featured_photo_carousel_data($info, 'rolling');
-      $block['content'] = theme("featured_photo_carousel_rollingslider", array("data" => $data));
-      break;
+            /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_js("jQuery('#featuredphoto').RollingSlider({
+              showArea:'#example',
+              prev:'#jprev',
+              next:'#jnext',
+              moveSpeed:300,
+              autoPlay:false
+              });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_js('misc/jquery.js'); */
+            module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
+            $info['view_name'] = 'photo_carousel_widget'; // view name
+            $info['page'] = 'photo_carousel'; // page name
+            $data = itg_widget_featured_photo_carousel_data($info, 'rolling');
+            $block['content'] = theme("featured_photo_carousel_rollingslider", array("data" => $data));
+            break;
 
-    case 'featured_video_carousel':
-      drupal_add_library('flexslider', 'flexslider');
-      libraries_load('flexslider');
-      module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
+        case 'featured_video_carousel':
+            drupal_add_library('flexslider', 'flexslider');
+            libraries_load('flexslider');
+            module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
 
-      drupal_add_js('jQuery(window).load(function() {
+            drupal_add_js('jQuery(window).load(function() {
             jQuery(".flexslider-video").flexslider({
             animation: "slide"
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
+            );
 
-      drupal_add_css('.flex-caption {
+            drupal_add_css('.flex-caption {
               width: 96%;
               padding: 2%;
               left: 0;
@@ -486,19 +489,19 @@ function itg_widget_block_view($delta = '') {
             }', 'inline');
 
 
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'video_carousel'; // page name
-      $info['nodequeue'] = 'video_carousel';
-      $data = itg_widget_featured_video_carousel_data($info, 'flexslider');
-      $block['content'] = theme("featured_video_carousel", array("data" => $data));
-      break;
+            $info['view_name'] = 'photo_carousel_widget'; // view name
+            $info['page'] = 'video_carousel'; // page name
+            $info['nodequeue'] = 'video_carousel';
+            $data = itg_widget_featured_video_carousel_data($info, 'flexslider');
+            $block['content'] = theme("featured_video_carousel", array("data" => $data));
+            break;
 
-    case 'featured_video_carousel_r':
-      global $base_url;
+        case 'featured_video_carousel_r':
+            global $base_url;
 
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
-      drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
-      drupal_add_js("jQuery(document).ready(function () {
+            drupal_add_js($base_url . '/sites/all/themes/itg/js/itg-photo-slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
+            drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
+            drupal_add_js("jQuery(document).ready(function () {
             var winWidth = jQuery(window).width();            
             console.log(winWidth);
             if(winWidth > 1024){
@@ -519,36 +522,36 @@ function itg_widget_block_view($delta = '') {
                 });
             }
           });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-      );
-      /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-        );
+            );
+            /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
+              );
 
-        drupal_add_js("jQuery('#featuredvideo').RollingSlider({
-        showArea:'#example',
-        prev:'#jprev',
-        next:'#jnext',
-        moveSpeed:500,
-        autoPlay:false
-        });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_js('misc/jquery.js'); */
-      module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'video_carousel'; // page name
-      $data = itg_widget_featured_video_carousel_data($info, 'rolling');
-      $block['content'] = theme("featured_video_carousel_rollingslider", array("data" => $data));
-      break;
-    // Top takes videos ordering reordering widget case
-    case 'anchor_langing_page_menu':
-      $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
-      break;
-    case 'personlization':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
-      $data = get_personlization_front_block_data();
-      $block['content'] = theme("personlization_front_end", array("data" => $data));
-      drupal_add_js('jQuery(document).ready(function() {
+              drupal_add_js("jQuery('#featuredvideo').RollingSlider({
+              showArea:'#example',
+              prev:'#jprev',
+              next:'#jnext',
+              moveSpeed:500,
+              autoPlay:false
+              });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+              );
+              drupal_add_js('misc/jquery.js'); */
+            module_load_include('inc', 'itg_widget', 'includes/featured_video_carousel');
+            $info['view_name'] = 'photo_carousel_widget'; // view name
+            $info['page'] = 'video_carousel'; // page name
+            $data = itg_widget_featured_video_carousel_data($info, 'rolling');
+            $block['content'] = theme("featured_video_carousel_rollingslider", array("data" => $data));
+            break;
+        // Top takes videos ordering reordering widget case
+        case 'anchor_langing_page_menu':
+            $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
+            break;
+        case 'personlization':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
+            $data = get_personlization_front_block_data();
+            $block['content'] = theme("personlization_front_end", array("data" => $data));
+            drupal_add_js('jQuery(document).ready(function() {
     jQuery(".recommended-slider").slick({
       slidesToShow: 3,
       slidesToScroll: 1,
@@ -573,17 +576,17 @@ function itg_widget_block_view($delta = '') {
       ]
     });
   });', array("type" => "inline"));
-      break;
-    case 'home_page_poll_widget_block':
-      $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
-      $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
-      break;
-   case 'sport_poll_widget_block':
-      $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
-      $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
-      break;
-    case 'sosorry_social_icons_block':
-      $block['content'] = '<div class="sosorry-social">
+            break;
+        case 'home_page_poll_widget_block':
+            $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
+            $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
+            break;
+        case 'sport_poll_widget_block':
+            $selected_poll_widget = get_homepage_current_poll_widget('poll', 'poll_widget');
+            $block['content'] = itg_poll_home_page_polls_select($selected_poll_widget);
+            break;
+        case 'sosorry_social_icons_block':
+            $block['content'] = '<div class="sosorry-social">
     <ul>
         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -591,95 +594,257 @@ function itg_widget_block_view($delta = '') {
         <li><a href="#"><i class="fa fa-rss"></i></a></li>        
     </ul>
 </div>';
-      break;
-    case 'auto_reviews':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
-      $info['widget_name'] = 'special_auto_review_content';
-      $data = itg_widget_auto_reviews_ordering_data($info);
+            break;
+        case 'auto_reviews':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
+            $info['widget_name'] = 'special_auto_review_content';
+            $data = itg_widget_auto_reviews_ordering_data($info);
 
-      $block['content'] = theme("auto_reviews", array("data" => $data));
-      break;
-    case 'so_sorry_front_politoons':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_so_sorry');
-      $data = itg_widget_so_sorry_politoons_ordering_data();
-      $block['content'] = theme('itg_widget_politoons', array('data' => $data));
-      break;
-   case 'tech_reviews':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
-      $info['widget_name'] = 'special_auto_review_content';
-      $info['var_name']='tech_for_widget';
-      $data = itg_widget_tech_reviews_ordering_data($info);
+            $block['content'] = theme("auto_reviews", array("data" => $data));
+            break;
+        case 'so_sorry_front_politoons':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_so_sorry');
+            $data = itg_widget_so_sorry_politoons_ordering_data();
+            $block['content'] = theme('itg_widget_politoons', array('data' => $data));
+            break;
+        case 'tech_reviews':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
+            $info['widget_name'] = 'special_auto_review_content';
+            $info['var_name'] = 'tech_for_widget';
+            $data = itg_widget_tech_reviews_ordering_data($info);
 
-      $block['content'] = theme("tech_reviews", array("data" => $data));
-      break;
-   case 'tech_most_read':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_read');
-      $info['widget_name'] = 'most_read_content';
-        $info['query_var_name'] = 'tech_for_widget';
-      $data = itg_widget_tech_most_read_ordering_data($info);
-     
-      $block['content'] = theme("tech_most_read", array("data" => $data));
-      break;
-  case 'movies_reviews':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
-      $info['widget_name'] = 'special_auto_review_content';
-      $info['var_name']='movie_for_widget';
-      $data = itg_widget_movies_reviews_ordering_data($info);
+            $block['content'] = theme("tech_reviews", array("data" => $data));
+            break;
+        case 'tech_most_read':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_read');
+            $info['widget_name'] = 'most_read_content';
+            $info['query_var_name'] = 'tech_for_widget';
+            $data = itg_widget_tech_most_read_ordering_data($info);
 
-      $block['content'] = theme("auto_reviews", array("data" => $data));
-      break;
-  case 'ipl_tweets':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');  
-      //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
-        $block['subject'] = '';
-      $block['content'] = ipl_tweets();
-      break;
-  case 'budget_tweets':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');  
-      //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
-        $block['subject'] = '';
-      $block['content'] = budget_tweets();
-      break;
-  case 'live_score':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_live_score');  
-     
-        $block['subject'] = '';
-      $data = live_score();
+            $block['content'] = theme("tech_most_read", array("data" => $data));
+            break;
+        case 'graph_election':
+ drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
+            $data = itg_widget_get_graph_data($info);
+            foreach ($data as $index => $row)
+            {
+              $jsondata = file_get_contents($row->field_election_constituency_tall);
 
-       $block['content'] = theme("live_score_data", array("data" => $data));
-      break;
-  }
-  
- 
-  return $block;
+             $jsondata_orig = '{"election": {"aName": "DELHI", "aFullName": "DELHI", "aFullNameHindi": "DELHI", "aSeats": "70", "aSeatOthers": "70", "aColor": "", "aColorOthers": "", "items": [{"pName": "AAP", "pColor": "#DDBC0F", "pfullName": "AAP", "pLead": "0", "pWon": "67"}, {"pName": "BJP+", "pColor": "#F57B19", "pfullName": "BJP+", "pLead": "0", "pWon": "3"}, {"pName": "CONG", "pColor": "#018fff", "pfullName": "CONG", "pLead": "0", "pWon": "0"}, {"pName": "OTH", "pColor": "#9933ff", "pfullName": "OTH", "pLead": "0", "pWon": "0"}]}}';
+
+               drupal_add_js(' jQuery(function() {
+                   
+            var ids = "container_'.$index.'";
+            var data ='.$jsondata_orig.';
+            var combined = [];
+            var colorArray = [];
+            var aName = data.election.aName;
+            var aSeats = data.election.aSeats;
+            var aSeatOthers = data.election.aSeatOthers;
+            var aappos = 0;
+            var aapcolor = "";
+            var aapname = "";
+            var aapseats = "";
+            var ty = 0;
+            for (var x = 0; x < data.election.items.length; x++)
+            {
+                if (data.election.items[x].pName.toLowerCase() != "bjp+") {
+                    colorArray[ty] = data.election.items[x].pColor;
+                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
+                    ty++;
+                } else {
+                    aapcolor = data.election.items[x].pColor;
+                    aappos = data.election.items[x].pColor;
+                    aapname = data.election.items[x].pName;
+                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
+                }
+            }
+            var showtooltip = true;
+            if (aSeatOthers == 0) {
+                jQuery("#resultawaited").show();
+                colorArray[ty] = "#A2A9AD";
+                combined.push(["Result Awaited", "1"]);
+                showtooltip = false;
+            } else {
+
+                colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
+                combined.push([aapname, aapseats]);
+            }
+
+
+            var combined = [];
+            var colorArray = [];
+            var aName = data.election.aName;
+            var aSeats = data.election.aSeats;
+            var aSeatOthers = data.election.aSeatOthers;
+            var aappos = 0;
+            var aapcolor = "";
+            var aapname = "";
+            var aapseats = "";
+            var colindex = 0;
+            for (var x = 0; x < data.election.items.length; x++)
+            {
+                if (data.election.items[x].pName.toLowerCase() != "bjp+") {
+                    colorArray[colindex] = data.election.items[x].pColor;
+                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
+                    colindex++;
+                } else {
+                    aapcolor = data.election.items[x].pColor;
+                    aappos = data.election.items[x].pColor;
+                    aapname = data.election.items[x].pName;
+                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
+                }
+            }
+            var showtooltip = true;
+            if (aSeatOthers == 0) {
+                jQuery("#resultawaited").show();
+                colorArray[colindex] = "#A2A9AD";
+                combined.push(["Result Awaited", "1"]);
+                showtooltip = false;
+            } else {
+
+                colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
+                combined.push([aapname, aapseats]);
+            }
+
+           jQuery("#" + ids).highcharts({
+                colors: colorArray,
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false
+                },
+                title: {
+                    text: aName + " (" + aSeatOthers + "/" + aSeats + ")",
+                    align: "center",
+                    verticalAlign: "middle",
+                    y: 37
+                },
+                tooltip: {
+                    enabled: showtooltip,
+                    pointFormat: "<b>{point.y}</b>"
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: false,
+                            distance: -50,
+                            style: {
+                                fontWeight: "bold",
+                                color: "white",
+                                textShadow: "0px 1px 2px black"
+                            }
+                        },
+                        startAngle: -90,
+                        endAngle: 90,
+                        center: ["50%", "55%"]
+                    }
+                },
+                series: [{
+                        type: "pie",
+                        name: "",
+                        innerSize: "60%",
+                        data: combined
+                    }]
+            });
+        });', array('type' => 'inline', 'scope' => 'footer')); 
+            }
+          
+            $block['content'] = theme("graph_election", array("data" => $data));
+            break;
+        case 'movies_reviews':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
+            $info['widget_name'] = 'special_auto_review_content';
+            $info['var_name'] = 'movie_for_widget';
+            $data = itg_widget_movies_reviews_ordering_data($info);
+
+            $block['content'] = theme("auto_reviews", array("data" => $data));
+            break;
+        case 'ipl_tweets':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');
+            //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
+            $block['subject'] = '';
+            $block['content'] = ipl_tweets();
+            break;
+        case 'budget_tweets':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_twitter');
+            //$block['subject'] = '<div class="ipl_tweets">IPL TWEETS</div>';
+            $block['subject'] = '';
+            $block['content'] = budget_tweets();
+            break;
+        case 'live_score':
+            module_load_include('inc', 'itg_widget', 'includes/itg_widget_live_score');
+
+            $block['subject'] = '';
+            $data = live_score();
+
+            $block['content'] = theme("live_score_data", array("data" => $data));
+            break;
+    }
+
+
+    return $block;
 }
+
+/**
+ * Function returns data for cutom tables widgets.
+ * 
+ * @param string $widget_name
+ * @param int $range_max
+ * @param int $range_min
+ * @return array
+ */
+function itg_widget_get_graph_data() {
+    //p($cat_id);
+    // Fetch fdata from db.
+    global $theme;
+     $cat_id = $_GET['section'];
+        if ($theme == FRONT_THEME_NAME) {
+          $cat_id = arg(2);
+         }
+    $itg_query = db_select('node', 'n');
+    $itg_query->join('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
+
+    $itg_query->join('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
+    $itg_query->fields('n', array('nid'));
+    $itg_query->fields('frq', array('field_election_constituency_tall_value'))
+            ->condition('type', 'election_graph_xml')
+             ->condition('ast.field_section_tid', $cat_id,'=')
+            ->condition('status', 1);
+
+    //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
+    $itg_result = $itg_query->execute()->fetchAll();
+
+    return $itg_result;
+}
+
 /**
  * File provide get highlights widget data.
  *
  * @param array $info
  */
 function itg_widget_highlights_block_data($info) {
-  $widget_name ='highlights_widget';
-  global $theme;
-     
-        if(isset($_GET['section']) && !empty($_GET['section']))
-        {
-            $selction_name='section';
-        }else{
-            $selction_name='section_name';
-        }
-         $cat_id = $_GET[$selction_name];
-          if ($theme == FRONT_THEME_NAME) {
-          $cat_id = arg(2);
-         }
-        
-  $data = array();
-  
-  if (!empty($widget_name)) {
-    $result = get_view_nodes_form_custom_table_for_widgets_by_category($widget_name,$cat_id, 1, 0);
-    foreach ($result as $entity_data_node) {
-      $entity_data = array("node_data" => node_load($entity_data_node['nid']), "related" => $entity_data_node['extra']);
+    $widget_name = 'highlights_widget';
+    global $theme;
+
+    if (isset($_GET['section']) && !empty($_GET['section'])) {
+        $selction_name = 'section';
     }
-    return $entity_data;
-  }
+    else {
+        $selction_name = 'section_name';
+    }
+    $cat_id = $_GET[$selction_name];
+    if ($theme == FRONT_THEME_NAME) {
+        $cat_id = arg(2);
+    }
+
+    $data = array();
+
+    if (!empty($widget_name)) {
+        $result = get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, $cat_id, 1, 0);
+        foreach ($result as $entity_data_node) {
+            $entity_data = array("node_data" => node_load($entity_data_node['nid']), "related" => $entity_data_node['extra']);
+        }
+        return $entity_data;
+    }
 }

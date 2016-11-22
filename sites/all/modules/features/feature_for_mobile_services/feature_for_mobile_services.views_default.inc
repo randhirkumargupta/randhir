@@ -188,6 +188,11 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['field_client_selection']['id'] = 'field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['table'] = 'field_data_field_client_selection';
   $handler->display->display_options['fields']['field_client_selection']['field'] = 'field_client_selection';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -385,6 +390,17 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -526,6 +542,17 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -678,6 +705,17 @@ function feature_for_mobile_services_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -694,17 +732,18 @@ function feature_for_mobile_services_views_default_views() {
     'client_service_association' => 'client_service_association',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Service Title (field_service_association_title) */
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['id'] = 'field_service_association_title_target_id';
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['table'] = 'field_data_field_service_association_title';
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['field'] = 'field_service_association_title_target_id';
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['group'] = 1;
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['operator_id'] = 'field_service_association_title_target_id_op';
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['label'] = 'Service Title';
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['operator'] = 'field_service_association_title_target_id_op';
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['identifier'] = 'field_service_association_title_target_id';
-  $handler->display->display_options['filters']['field_service_association_title_target_id']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Field Title (field_service_title) */
+  $handler->display->display_options['filters']['field_service_title_value']['id'] = 'field_service_title_value';
+  $handler->display->display_options['filters']['field_service_title_value']['table'] = 'field_data_field_service_title';
+  $handler->display->display_options['filters']['field_service_title_value']['field'] = 'field_service_title_value';
+  $handler->display->display_options['filters']['field_service_title_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_service_title_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_service_title_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator_id'] = 'field_service_title_value_op';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['label'] = 'Service Title';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator'] = 'field_service_title_value_op';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['identifier'] = 'field_service_title_value';
+  $handler->display->display_options['filters']['field_service_title_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -725,6 +764,11 @@ function feature_for_mobile_services_views_default_views() {
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
   );
   $handler->display->display_options['path'] = 'service-association-listing';
 
