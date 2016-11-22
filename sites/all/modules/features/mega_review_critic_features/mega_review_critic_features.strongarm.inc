@@ -220,6 +220,12 @@ function mega_review_critic_features_strongarm() {
         'path' => array(
           'weight' => '4',
         ),
+        'domain' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),

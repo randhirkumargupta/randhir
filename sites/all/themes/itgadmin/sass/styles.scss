@@ -8739,3 +8739,23 @@ div.node{
         }
     }
 }
+#itg-sso-reg-password-form{
+    label{
+        display: block;
+        margin-bottom: 8px;
+    }
+    span.error{
+        display: block;
+        margin-top: 8px;
+    }
+    span.form-required{
+        display: none;
+    }
+    .form-submit{
+        background: #000;
+        border: none;
+        color: #fff;
+        padding: 8px 20px;
+        margin-top: 15px;
+    }
+}
