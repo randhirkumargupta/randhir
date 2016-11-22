@@ -243,7 +243,9 @@ Version   :  1.0
         line-height: 22px;
     }
     .carousel .slides .slideItem span.flex-count{
-        display: none;
+        bottom: 10%;
+    right: 10px;
+    font-size: 20px;
     }
     .carousel .slick-dots{
         padding:20px 10px 10px;

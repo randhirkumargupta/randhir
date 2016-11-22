@@ -131,6 +131,7 @@ function itg_menu_manager_form($form, &$form_state) {
     '#options' => array(
       'second' => 'Second',
       'third' => 'Third',
+      'vertical' => 'Vertical menu',
     ),
     '#default_value' => ($default_values['menu_level']) ? $default_values['menu_level'] : "",
     '#required' => TRUE,
@@ -552,6 +553,9 @@ function itg_menu_manager_form_submit($form, &$form_state) {
       if ($menu_level == 'second') {
         drupal_goto('menu-manager/second');
       }
+      else if ($menu_level == 'vertical') {
+        drupal_goto('menu-manager/vertical');
+      }
       else {
         $query = array("section_id" => $sections, "section_child" => $sections);
         drupal_goto('menu-manager/third', array("query" => $query));
@@ -576,6 +580,11 @@ function itg_menu_manager_block_info() {
     'info' => t('Third Level Menu'),
     'cache' => DRUPAL_NO_CACHE
   );
+  
+  $blocks['vertical_menu'] = array(
+    'info' => t('Vertical Menu'),
+    'cache' => DRUPAL_NO_CACHE
+  );
   return $blocks;
 }
 
@@ -594,6 +603,16 @@ function itg_menu_manager_block_view($delta = '') {
         $data[] = $temp_data;
       }
       $block['content'] = theme('second_level_menu', array("data" => $data));
+      break;
+    case 'vertical_menu':
+      $vertical_menu = get_second_level_menu('vertical');
+      foreach ($vertical_menu as $db_data) {
+        $temp_data = array();
+        $temp_data['db_data'] = $db_data;
+        $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+        $data[] = $temp_data;
+      }
+      $block['content'] = theme('vertical_level_menu', array("data" => $data));
       break;
     case 'third_level_menu':
       $data = array();
@@ -630,6 +649,9 @@ function itg_menu_manager_theme() {
     'third_level_menu' => array(
       'template' => 'templates/third-level-menu',
     ),
+    'vertical_level_menu' => array(
+      'template' => 'templates/vertical-level-menu',
+    ),
   );
 }
 
@@ -637,7 +659,7 @@ function itg_menu_manager_theme() {
  * function returns array of second level menu
  * @return type
  */
-function get_second_level_menu() {
+function get_second_level_menu($level = 'second') {
   $query = db_select('itg_menu_manager', 'imm')
       ->fields('imm')
       ->condition('imm.menu_level', 'second')

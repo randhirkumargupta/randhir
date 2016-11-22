@@ -514,9 +514,9 @@ function itg_photogallery_field_widget_form_alter(&$element, &$form_state, $cont
  * @param array $form
  * @return string
  */
-function itg_photogallery_image_field_widget_process($element, &$form_state, $form) {
-    // p($element);
-    $element['alt']['#attributes']['title'] = 'Alternate text';
-    $element['title']['#attributes']['title'] = 'Title';
-    return $element;
+
+function itg_photogallery_image_field_widget_process($element, &$form_state, $form) {  
+  $element['alt']['#attributes']['title'] = 'Alternate text';
+  $element['title']['#attributes']['title'] = 'Title';
+  return $element;
 }

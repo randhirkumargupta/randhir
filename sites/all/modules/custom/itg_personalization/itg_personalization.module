@@ -172,8 +172,8 @@ function itg_personalization_block_view($delta = '') {
   $output .= '<li>' . l(t('General Settings'), 'personalization/edit-profile/general-settings') . '</li>';
   //$output .= '<li>' . l(t('Change Password'), 'personalization/edit-profile/change-password') . '</li>';
   // check for twitter condition
-  if (strpos($user->mail, 'twitter') != true) {
-   $output .= '<li><a href="javascript:void(0)"  onclick="CenterWindow(550, 500, 50, ' . "'" . $change_pass_url . "'" . ');">Change Password</a></li>';
+  if (strpos($user->name, '@') != false || is_numeric($user->name)) {
+    $output .= '<li><a href="javascript:void(0)"  onclick="CenterWindow(550, 500, 50, ' . "'" . $change_pass_url . "'" . ');">Change Password</a></li>';
   }
   $output .= '<li>' . l(t('Refer a Friend'), 'personalization/edit-profile/refer-a-friend') . '</li>';
   $output .= '</ul>';

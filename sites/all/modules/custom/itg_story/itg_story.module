@@ -311,7 +311,7 @@ function itg_story_node_insert($node) {
         itg_story_create_breaking_news($node);
       }
     }
-  }
+  }  
 }
 
 /**
@@ -509,3 +509,6 @@ function itg_story_library_alter(&$libraries, $module) {
     $libraries['drupal.autocomplete']['js'][$library] = array('group' => JS_DEFAULT);
   }
 }
+
+
+

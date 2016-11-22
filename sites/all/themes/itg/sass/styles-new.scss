@@ -1625,6 +1625,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     max-width: 1170px;
     margin: 0 auto;
   }
+  #block-block-2 > p{
+      margin-top: 30px;
+      font-family: roboto;
+  }
 } 
 
 /* CSS for redeem points */
