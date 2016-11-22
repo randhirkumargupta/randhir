@@ -210,7 +210,7 @@ function itg_sso_user_email_form_submit($form, &$form_state) {
       if ($form_state['triggering_element']['#value'] != 'Back') {
 
         if (is_numeric($emobile)) {
-          if (is_numeric($unique_id)) {
+          //if (is_numeric($unique_id)) {
             $edit = array(
               'name' => $emobile,
               'field_mobile_number' => array(
@@ -221,9 +221,10 @@ function itg_sso_user_email_form_submit($form, &$form_state) {
                 )
               )
             );
-          }
-          else {
+         // }
+          /*else {
             $edit = array(
+              'name' => $emobile,
               'field_mobile_number' => array(
                 LANGUAGE_NONE => array(
                   0 => array(
@@ -232,7 +233,7 @@ function itg_sso_user_email_form_submit($form, &$form_state) {
                 )
               )
             );
-          }
+          }*/
         }
         else {
 
