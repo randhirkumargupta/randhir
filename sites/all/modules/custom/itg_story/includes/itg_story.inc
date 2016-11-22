@@ -96,7 +96,7 @@ function itg_story_get_content_nid($nid) {
  */
 
 function create_poll_table() {
-  $query = 'CREATE TABLE IF NOT EXISTS `itg_poll_count_content1` (
+  $query = 'CREATE TABLE IF NOT EXISTS `itg_poll_count_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content_id` int(11) NOT NULL,
   `poll_id` int(11) NOT NULL,
