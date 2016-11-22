@@ -49,7 +49,7 @@ function mega_review_critic_features_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_review_basic_settings|node|mega_review_critic|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -86,7 +86,7 @@ function mega_review_critic_features_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_review_browse_media|node|mega_review_critic|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -119,7 +119,7 @@ function mega_review_critic_features_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_review_movie_review|node|mega_review_critic|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   // Translatables
   // Included for use with string extractors like potx.

@@ -81,6 +81,7 @@ function mega_review_critic_features_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
+      'behaviors' => array(),
       'handler' => 'base',
       'handler_settings' => array(
         'behaviors' => array(
@@ -92,7 +93,7 @@ function mega_review_critic_features_field_default_field_bases() {
           'type' => 'none',
         ),
         'target_bundles' => array(
-          'itg_celebrity_profile' => 'itg_celebrity_profile',
+          'reporter' => 'reporter',
         ),
       ),
       'target_type' => 'node',
