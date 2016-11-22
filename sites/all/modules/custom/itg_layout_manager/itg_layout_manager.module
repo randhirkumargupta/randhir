@@ -443,7 +443,8 @@ function itg_layout_gethomecarddata() {
     $section = 'home_page';
     $template_name = 'page--front';
     $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
-
+        $nextdata=itg_layout_gethomecarddata_new_pre($sectinno + 4);
+        
     $widget_data = $data;
 
     if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
@@ -492,10 +493,12 @@ function itg_layout_gethomecarddata() {
                   </div>             
                 </div>               
             </div>
-        </div>
-         <div class="load-more-wrapper-front">
+        </div>';
+        if($nextdata!=0)
+        {
+         print '<div class="load-more-wrapper-front">
         <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
-      </div></div>';
+        </div>';}print '</div>';
     }
     else {
         itg_layout_gethomecarddata_new($sectinno + 3);
@@ -550,7 +553,7 @@ function itg_layout_gethomecarddata_new($sectinno) {
     $section = 'home_page';
     $template_name = 'page--front';
     $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
-
+    $nextdata=itg_layout_gethomecarddata_new_pre($sectinno + 4);
     $widget_data = $data;
 
     if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
@@ -599,10 +602,12 @@ function itg_layout_gethomecarddata_new($sectinno) {
                   </div>             
                 </div>               
             </div>
-        </div>
-         <div class="load-more-wrapper-front">
+        </div>';
+         if($nextdata!=0)
+        {
+         print '<div class="load-more-wrapper-front">
         <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
-      </div></div>';
+        </div>';}print '</div>';
     }
     else {
         
@@ -611,6 +616,36 @@ function itg_layout_gethomecarddata_new($sectinno) {
     exit();
 }
 
+
+
+/**
+ * Implements hook_manager_preprocess_page().
+ * {@inheritdoc}
+ */
+function itg_layout_gethomecarddata_new_pre($sectinno) {
+    
+    global $theme;
+    $arg = arg();
+
+print $widget_data[$widget_name1]['widget_name'];
+    $widget_name1 = 'itg-block-' . ($sectinno);
+    $widget_name2 = 'itg-block-' . ($sectinno + 1);
+    $widget_name3 = 'itg-block-' . ($sectinno + 2);
+    $block_name = array($widget_name1, $widget_name2, $widget_name3);
+    $section = 'home_page';
+    $template_name = 'page--front';
+    $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
+
+    $widget_data = $data;
+
+    if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
+        return 1;
+    }else{
+      return 0;  
+    }
+    
+  
+}
 /**
  * Implements hook_manager_preprocess_page().
  * {@inheritdoc}
