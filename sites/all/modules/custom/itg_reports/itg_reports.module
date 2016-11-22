@@ -6,15 +6,6 @@
  */
 
 /**
- * Implements hook_init().
- *
- * {@inheritdoc}.
- */
-function itg_reports_init() {
-  
-}
-
-/**
  * Implements hook_permission().
  *
  * {@inheritdoc}.
@@ -55,6 +46,10 @@ function itg_reports_theme($existing, $type, $theme, $path) {
       'variables' => array('data' => NULL),
       'template' => 'templates/itg-reports-dashboard',
     ),
+    'itg_reports_career_graph' => array(
+      'variables' => array('output' => NULL, 'actor' => NULL),
+      'template' => 'templates/itg-reports-career-graph',
+    ),
   );
 
   return $themes;
@@ -70,17 +65,17 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
     case 'views-exposed-form-report-filed-content-page':
       $form['node_status']['#options'][1] = t('Published');
       $form['node_status']['#options'][0] = t('Not published');
-      $form['moderation'] = array(        
+      $form['moderation'] = array(
         '#type' => 'select',
         '#options' => array('all' => 'Any', 'yes' => 'Yes', 'no' => 'No'),
         '#default_value' => 'all',
-      );      
+      );
       $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
       $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
       $form['from_state']['#prefix'] = '<div style="display: none;">';
-      $form['from_state']['#suffix'] = '</div>';      
+      $form['from_state']['#suffix'] = '</div>';
       $form['#after_build'][] = 'itg_reports_view_after_build';
-      
+
       break;
   }
 }
@@ -93,6 +88,155 @@ function itg_reports_view_after_build($form, &$form_state) {
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_reports') . '/js/itg_reports.js',
   );
-  
+
   return $form;
+}
+
+/**
+ * Implements hook_block_info().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_block_info() {
+  // Career graph.
+  $blocks['itg_report_career_graph'] = array(
+    'info' => t('Career Graph'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_block_view($delta = '') {
+  switch ($delta) {
+    case 'itg_report_career_graph':
+      $output = array();
+      $data = itg_report_get_graph_data();
+
+      $errors = array_filter($data);
+      if (!empty($errors)) {
+        foreach ($data as $key => $chart_data) {
+          $errors = array_filter($chart_data['graph']);
+          if (empty($errors)) {
+            continue;
+          }
+          $chart = array(
+            '#type' => 'chart',
+            '#chart_type' => 'line',
+            '#chart_library' => 'highcharts',
+          );
+          
+          // Add missing year.
+          itg_reports_mission_year($chart_data['graph']);
+
+          $chart['career'] = array(
+            '#type' => 'chart_data',
+            '#data' => $chart_data['graph'],            
+            '#title' => $chart_data['actor'][$key]['actor_name'],
+          );
+          $chart['xaxis'] = array(
+            '#type' => 'chart_xaxis',
+            '#title' => t('Year'),
+          );
+
+
+          $chart['yaxis'] = array(
+            '#type' => 'chart_yaxis',
+            '#title' => t('Earning'),
+          );
+          $career_graph['chart'] = $chart;
+          $output[] = $career_graph;
+          $actor_info[] = array(
+            'name' => $chart_data['actor'][$key]['actor_name'],
+            'pic_uri' => $chart_data['actor'][$key]['actor_pic'],
+          );
+        }
+      }      
+      $block['content'] = theme('itg_reports_career_graph', array('output' => $output, 'actor' => $actor_info));
+
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Get graph data from database.
+ * 
+ * @return array
+ *   Array of chart data.
+ */
+function itg_report_get_graph_data() {
+  $arg = arg();
+  $chart_data = array();
+  $node = node_load($arg[1]);
+  foreach ($node->field_mega_review_cast['und'] as $field_collection) {
+    $data = array();
+    $actor_data = array();
+    foreach ($field_collection['entity']->field_reporter_career_graph['und'] as $key => $fids) {
+      $celebrity = entity_load('field_collection_item', array($fids['value']));
+      $movie_tid = $celebrity[$fids['value']]->field_reporter_movie_name['und'][0]['tid'];
+      $term = taxonomy_term_load($movie_tid);
+      $movie_name = $term->name;
+
+      $timestamp = $celebrity[$fids['value']]->field_reporter_movie_year['und'][0]['value'];
+      $movie_year = format_date($timestamp, 'custom', 'Y');
+      $actor_data[] = array(
+        'actor_name' => $field_collection['entity']->title,
+        'movie_name' => $movie_name,
+        'actor_pic' => $field_collection['entity']->field_story_extra_large_image['und'][0]['uri'],
+      );
+      $data[] = array(
+        (int) $movie_year,
+        (int) $celebrity[$fids['value']]->field_reporter_earning['und'][0]['value'],
+      );
+    }
+    $chart_data[] = array(
+      'actor' => $actor_data,
+      'graph' => $data,
+    );
+  }
+
+  return $chart_data;
+}
+
+/**
+ * Ad missing year to the chart data.
+ */
+function itg_reports_mission_year(&$chart_data) {
+  $data = array();
+  array_multisort($chart_data);
+  $temp = NULL;
+  foreach ($chart_data as $value) {
+    if (!empty($temp) && ($temp + 1) != $value[0]) {
+      ++$temp;
+      while ($temp < $value[0]) {
+        $data[] = array(
+          $temp++,
+          NULL
+        );
+      }
+    }
+    $temp = $value[0];
+  }
+  $chart_data = array_merge($chart_data, $data);
+  array_multisort($chart_data);
+  $min_step = count($chart_data);
+  $data = array();
+  if ($min_step < 6) {
+    while ($min_step <= 6) {
+      $data[] = array(
+        $temp++,        
+        NULL
+      );
+      ++$min_step;
+    }
+    $chart_data = array_merge($chart_data, $data);
+    array_multisort($chart_data);
+  }
 }

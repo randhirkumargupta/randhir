@@ -95,7 +95,11 @@
       <?php print $submitted; ?>
     </div>
   <?php endif; ?>
-
+  <?php if (!empty($static_page_menu)) : ?>
+    <div class="static_page_menu">
+      <?php print $static_page_menu; ?>
+    </div>
+  <?php endif; ?>
   <div class="content"<?php print $content_attributes; ?>>
     <?php
       // We hide the comments and links now so that we can render them later.

@@ -48,7 +48,7 @@
                 <div class="content-details">
                   <div class="field">
                     <div class="field-label"><?php echo t('Poll Question'); ?>:</div>
-                    <div class="field-items"><?php print $title; ?></div>
+                    <div class="field-items"><?php print $title; ?></div>                    
                   </div>
                   <?php
                   $poll_question_text = render($content['field_poll_question_text']);
@@ -156,6 +156,7 @@
 
           <div class="content-node-view">
             <div class="poll-details">
+              <?php print render($content['poll_count']); ?>
               <h2><?php echo t('Configuration'); ?></h2>
               <div class="content-details">               
                 <?php
