@@ -1,4 +1,4 @@
-<ul class="vertical-menu">
+<div class="vertical-menu-parent"><ul class="vertical-menu">
   <?php
   global $base_url;
   $load_parent = taxonomy_get_parents(arg(2));
@@ -47,3 +47,11 @@
   endforeach;
   ?>
 </ul>
+    </div>
+<div class="vertical-more">    
+    <a href="javascript:void(0)">
+        <span class="more"><i class="fa fa-chevron-down" aria-hidden="true"></i> More</span>
+        <span class="less"><i class="fa fa-chevron-up" aria-hidden="true"></i> Less</span>
+    </a>    
+</div>
+

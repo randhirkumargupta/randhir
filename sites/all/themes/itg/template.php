@@ -45,7 +45,22 @@ function itg_preprocess_node(&$variables) {
     $title = str_replace('-', '_', $title);
     // Add new template variation.
     $variables['theme_hook_suggestions'][] = 'node__' . $title;
+    $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
   }
+}
+
+/**
+ * Returns blocks.
+ * @param string $module
+ * @param string $block_id
+ * @return array
+ */
+function itg_block_render($module, $block_id) {
+  $block = block_load($module, $block_id);  
+  $block_content = _block_render_blocks(array($block));
+  $build = _block_get_renderable_array($block_content);
+  $block_rendered = drupal_render($build);
+  return $block_rendered;
 }
 
 /**
