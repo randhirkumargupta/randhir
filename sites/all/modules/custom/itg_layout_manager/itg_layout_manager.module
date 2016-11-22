@@ -90,6 +90,11 @@ function itg_layout_manager_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
+    $items['get_map_data'] = array(
+        'page callback' => 'itg_layout_getterm_detials', // se for get the tags by tagid on image.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
     return $items;
 }
@@ -200,6 +205,9 @@ function itg_layout_manager_block_view($delta = '') {
             if(!empty($_GET['pass']) && ($_GET['pass'] == 'success')) {
               $change_pass_msg = 'Your password has been changed successfully!';
             }
+            if(!empty($_GET['email']) && ($_GET['email'] == 'success')) {
+              $change_pass_msg = 'Your profile has been updated successfully!';
+            }
             $pop_output = '<div class = "activate-message">';
             $pop_output.= '<div class = "message-body">';
             $pop_output.= '<p>'.$change_pass_msg.'</p>';
@@ -227,7 +235,7 @@ function itg_layout_manager_block_view($delta = '') {
                 
                 // condition for change password
                 
-                if(arg(0) == 'password-success') {
+                if(arg(0) == 'password-success' || arg(0) == 'complete-page') {
                   $change_arg = arg(1);
                   
                 }
@@ -281,7 +289,7 @@ function itg_layout_manager_block_view($delta = '') {
             else {
                 $widgets_type = 'section_wise_order';
             }
-
+        
             $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
 
             $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
@@ -435,7 +443,8 @@ function itg_layout_gethomecarddata() {
     $section = 'home_page';
     $template_name = 'page--front';
     $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
-
+        $nextdata=itg_layout_gethomecarddata_new_pre($sectinno + 4);
+        
     $widget_data = $data;
 
     if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
@@ -484,16 +493,49 @@ function itg_layout_gethomecarddata() {
                   </div>             
                 </div>               
             </div>
-        </div>
-         <div class="load-more-wrapper-front">
+        </div>';
+        if($nextdata!=0)
+        {
+         print '<div class="load-more-wrapper-front">
         <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
-      </div></div>';
+        </div>';}print '</div>';
     }
     else {
         itg_layout_gethomecarddata_new($sectinno + 3);
     }
 
     exit();
+}
+
+/**
+ * 
+ * This function use for url cleaning 
+ * $string string
+ * 
+ */
+function itg_layout_clean_url($string) {
+    $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+
+    return strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', $string)); // Removes special chars.
+}
+
+/**
+ * 
+ * This function use for term details
+ * 
+ * 
+ */
+function itg_layout_getterm_detials() {
+    $tid = $_POST['state_id'];
+    $dataterm = taxonomy_term_load($tid);
+   
+    $svgurl = $dataterm->field_state_svg_json['und'][0]['value'];
+    $mapgurl = $dataterm->field_state_map_json['und'][0]['value'];
+    $colorurl=$dataterm->field_state_map_color_json['und'][0]['value'];
+
+    $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl,'color_url'=>$colorurl);
+    print json_encode($urlarray);
+    die;
 }
 
 /**
@@ -511,7 +553,7 @@ function itg_layout_gethomecarddata_new($sectinno) {
     $section = 'home_page';
     $template_name = 'page--front';
     $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
-
+    $nextdata=itg_layout_gethomecarddata_new_pre($sectinno + 4);
     $widget_data = $data;
 
     if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
@@ -560,10 +602,12 @@ function itg_layout_gethomecarddata_new($sectinno) {
                   </div>             
                 </div>               
             </div>
-        </div>
-         <div class="load-more-wrapper-front">
+        </div>';
+         if($nextdata!=0)
+        {
+         print '<div class="load-more-wrapper-front">
         <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
-      </div></div>';
+        </div>';}print '</div>';
     }
     else {
         
@@ -572,6 +616,36 @@ function itg_layout_gethomecarddata_new($sectinno) {
     exit();
 }
 
+
+
+/**
+ * Implements hook_manager_preprocess_page().
+ * {@inheritdoc}
+ */
+function itg_layout_gethomecarddata_new_pre($sectinno) {
+    
+    global $theme;
+    $arg = arg();
+
+print $widget_data[$widget_name1]['widget_name'];
+    $widget_name1 = 'itg-block-' . ($sectinno);
+    $widget_name2 = 'itg-block-' . ($sectinno + 1);
+    $widget_name3 = 'itg-block-' . ($sectinno + 2);
+    $block_name = array($widget_name1, $widget_name2, $widget_name3);
+    $section = 'home_page';
+    $template_name = 'page--front';
+    $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
+
+    $widget_data = $data;
+
+    if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
+        return 1;
+    }else{
+      return 0;  
+    }
+    
+  
+}
 /**
  * Implements hook_manager_preprocess_page().
  * {@inheritdoc}

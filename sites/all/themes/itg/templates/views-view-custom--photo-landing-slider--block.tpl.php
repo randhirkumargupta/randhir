@@ -32,9 +32,11 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
     
     <div class="col-md-8">
         <ul class="slickslide">
-            <?php foreach ($rows as $index => $row): ?>
-                <li>
-                    <figure>
+            <?php foreach ($rows as $index => $row): 
+                
+                ?>
+                <li >
+                    <figure class="imgtags" img-fid=" <?php print $row['fid'];?>">
                         <?php print $row['field_images']; ?>                    
                     </figure>
                 </li>
@@ -43,7 +45,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         <div class="slick-thumbs">
             <ul class="slick-thumbs-slider">
                 <?php foreach ($rows as $index => $row): ?>
-                    <li>
+                    <li >
                         <?php print $row['field_images_1']; ?>
                     </li>
                 <?php endforeach; ?>

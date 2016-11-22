@@ -185,6 +185,46 @@ img{
     }
 }
 /*End Dont miss Home page css*/
+/*css start watch now home page */
+.watch-video-home{
+    .widget-settings{
+        position: relative !important;
+        margin-bottom: 5px;
+    }
+    .osscar-video{
+        background: transparent;
+        .home-watch-new{
+            ul{
+                .dont-miss-listing {
+                    @include pos(relative);
+                    padding-bottom:0;
+                    + .dont-miss-listing{                    
+                        padding: 10px 0 0 0;                       
+                    } 
+                    @include video-left-border-bottom;
+                }
+            } 
+        }
+    }    
+}
+
+/*css end watch now home page */
+
+/*css start homepage show*/
+.home-shows{
+    .trending-videos {
+        border: none;
+        padding-top: 25px;
+        .trending-videos-list {
+            overflow: hidden;
+            padding: 10px 0;
+        }
+    }
+}
+/*css end homepage show*/
+
+
+
 /*Start May we suggest css*/
 .we_may_suggest{
     span.widget-title{
@@ -387,6 +427,12 @@ img{
             .droppable{
                 height: 382px;
                 overflow: hidden;
+            }
+            .home-page-poll-block-wrap{
+                .droppable{
+                    min-height: 382px;
+                    height: inherit;
+                }   
             }
             &.row-3{
                 .droppable{
@@ -2039,7 +2085,7 @@ img{
     .left-side{
         .itg-415-layout{
             .droppable{
-                height: 415px;
+                min-height: 415px;
             }
         }
         .itg-325-layout{
@@ -2235,6 +2281,70 @@ img{
                 display: block;
             }
         }
+    }
+      .itg-map{
+        svg{
+            max-width: 100%;
+            max-height: 332px;
+        }
+        #map-state{
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 20px;
+            line-height: 20px;
+            padding: 0;
+            width: 145px;
+        }        
+    }
+    .election-graph{
+        .highcharts-credits{
+            display: none;
+        }
+        table{
+            font-size: 13px;            
+            font-family: roboto;            
+            th{
+                text-align: center;
+                border-bottom: 10px solid #FFF;
+                &:nth-child(2){
+                  text-align: left; 
+                  padding-left: 10px;
+              }
+            }
+            td{
+              background: #f5f5f5;
+              border-bottom: 10px solid #FFF;
+              text-align: center;
+              color:#5e5e5e;
+              &:first-child{
+                padding-right: 5px;
+              }
+              &:nth-child(2){
+                text-align: left; 
+                padding-left: 10px;
+              }
+              &.party-color{
+                width: 13px;
+                height: 19px;
+                margin-bottom: 10px;
+              }              
+            }
+        }
+    }
+    .graph-design{
+        @include pos(relative);
+        .divider{
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        height: 120px;
+        width: 1px;
+        border-left: 1px dashed #7b7b7b;
+        }
+        .highcharts-container{
+            height: 260px !important;
+        }   
     }
 }
 /* CSS For Election Page End */

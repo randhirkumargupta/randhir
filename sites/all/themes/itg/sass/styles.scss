@@ -1204,7 +1204,12 @@ footer{
     }
     .itg-common-section{
         .droppable{
-            min-height: 408px;
+            height: 408px;
+        }
+        .home-page-poll-block-wrap{
+         .droppable{
+                min-height: 408px;
+            }   
         }
     }
     .itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
@@ -1634,8 +1639,21 @@ footer{
     }    
 }
 
-
 /*css end watch now home page */
+
+/*css start homepage show*/
+.home-shows{
+    .trending-videos {
+        border: none;
+        padding-top: 25px;
+        .trending-videos-list {
+            overflow: hidden;
+            padding: 10px 0;
+        }
+    }
+}
+/*css end homepage show*/
+
 
 /*Start Story page css*/
 @mixin story-profile-pic{
@@ -1645,6 +1663,10 @@ footer{
     border: 2px solid #e4e4e4;
 }
 .story-section{
+    iframe{
+        width: 100%;
+        height: 50vh;
+    }
     ul{
         @extend .list-none;
     }
@@ -2421,6 +2443,11 @@ footer{
         margin-bottom: 10px;
         line-height: 22px;
     }
+    > .social-share{
+        margin-bottom: 10px;
+        @include font(18px);
+        @include social-share;
+    }
     .disc-share{
         a{
             font-size: 20px;
@@ -2440,6 +2467,12 @@ footer{
             color: #9f9f9f;
             @include font(12px);
             margin-bottom: 5px;
+        }
+        .breaking-discription{
+            iframe{
+                width: 100%;
+                height: 55vh;
+            }
         }
         .social-share{
             margin-top:10px;
@@ -2582,6 +2615,7 @@ footer{
                         @include font(13px,18px,$itg-font-medium);    
                         width: auto; 
                         max-height: 45px;
+                        min-height: 45px;
                         overflow: hidden;
                         a{
                             color: #fff;
@@ -3811,11 +3845,17 @@ footer{
 }
 /*CSS end Latest issue magazins*/
 /*CSS start magazins*/
+.magazin-mob{
+    display: none;
+}
+.magazin-desktop{
+    display: block;
+}
 .magazin-lhs-top{
     background: #f6f5f5;
     border: 1px solid $border-color;
     padding-bottom: 10px;
-    a:hover{
+    &a:hover{
         color:#193984;
     }
     .magazin-top{
@@ -3923,6 +3963,12 @@ footer{
     }
     span.widget-title{
         @include pos(absolute);            
+    }
+    > div > div{
+        margin-bottom: 35px;
+        &:last-child{
+            margin-bottom: 0px;
+        }
     }
 }
 /*End start magazins*/
@@ -6419,7 +6465,7 @@ input[type="radio"]:checked + label:after{
     .left-side{
         .itg-415-layout{
             .droppable{
-                height: 415px;
+               min-height: 415px;
             }
         }
         .itg-325-layout{
@@ -6629,6 +6675,70 @@ input[type="radio"]:checked + label:after{
             }
         }
     }
+    .itg-map{
+        svg{
+            max-width: 100%;
+            max-height: 332px;
+        }
+        #map-state{
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 20px;
+            line-height: 20px;
+            padding: 0;
+            width: 145px;
+        }        
+    }
+    .election-graph{
+        .highcharts-credits{
+            display: none;
+        }
+        table{
+            font-size: 13px;            
+            font-family: roboto;            
+            th{
+                text-align: center;
+                border-bottom: 10px solid #FFF;
+                &:nth-child(2){
+                  text-align: left; 
+                  padding-left: 10px;
+              }
+            }
+            td{
+              background: #f5f5f5;
+              border-bottom: 10px solid #FFF;
+              text-align: center;
+              color:#5e5e5e;
+              &:first-child{
+                padding-right: 5px;
+              }
+              &:nth-child(2){
+                text-align: left; 
+                padding-left: 10px;
+              }
+              &.party-color{
+                width: 13px;
+                height: 19px;
+                margin-bottom: 10px;
+              }              
+            }
+        }
+    }
+    .graph-design{
+        @include pos(relative);
+        .divider{
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        height: 120px;
+        width: 1px;
+        border-left: 1px dashed #7b7b7b;
+        }
+        .highcharts-container{
+            height: 260px !important;
+        }   
+    }     
 }
 /* CSS For Election Page End */
 

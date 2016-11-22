@@ -44,6 +44,11 @@ function itg_image_croping_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
+     $items['front_imagetag'] = array(
+        'page callback' => 'itg_image_croping_front_imagetag', // make image tags edit
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
 
     $items['savetags'] = array(
@@ -59,6 +64,11 @@ function itg_image_croping_menu() {
     );
     $items['gettaglist'] = array(
         'page callback' => 'itg_image_croping_get_image_tags', // use for get the all tags on image.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
+     $items['gettaglist_front'] = array(
+        'page callback' => 'itg_image_croping_get_image_tags_front', // use for get the all tags on image.
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
@@ -178,6 +188,18 @@ function itg_image_croping_imagetagedit() {
 }
 
 /**
+ * This function use for show image tag in fornt
+ * 
+ */
+function itg_image_croping_front_imagetag() {
+    $image_id = $_POST['fid'];
+    $file = file_load($image_id);
+    print theme('image_tagging_front', array('data' => $file,
+        'field_name' => $_POST['field_name']
+    ));
+}
+
+/**
  * This function use for remove the tags on image
  * used in ajax request and print use for return responce to ajax request
  */
@@ -226,6 +248,28 @@ function itg_image_croping_get_image_tags() {
     echo json_encode($data);
     exit();
 }
+
+/**
+ * This function use for get the all tags on image
+ */
+function itg_image_croping_get_image_tags_front() {
+
+    $image_id = $_POST['fid'];
+    $data['boxes'] = '';
+    $data['lists'] = '';
+    $query = db_select('image_tags', 'tags')
+            ->fields('tags')
+            ->condition('image_id', $image_id, '=');
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+        $data['boxes'] .= '<div class="square-tag" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><i class="fa fa-tag"></i></div><div class="tagview" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;" id="view_' . $record['id'] . '"><div class="square"></div><div id="tag_' . $record['id'] . '" class="person" style="left:' . $record['x_coordinate'] . 'px;top:' . $record['y_coordinate'] . 'px;"><a target="_blank" href="'.$record['tag_url'].'" >'. $record['tag_title'] . '</a></div></div>';
+        $data['lists'] .= ' ';
+    }
+    echo json_encode($data);
+    exit();
+}
+
 
 /**
  * This function use for save the tags on images
@@ -313,6 +357,9 @@ function itg_image_croping_theme($existing, $type, $theme, $path) {
         ),
         'image_taggingedit' => array(
             'template' => 'templates/image_taggeredit',
+        ),
+        'image_tagging_front' => array(
+            'template' => 'templates/image_tagger_front',
         ),
     );
 }

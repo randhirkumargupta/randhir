@@ -70,6 +70,7 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
+    <?php print render($page['vertical_menu']); ?>
     <main id="main" class="container">
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
@@ -881,6 +882,6 @@ window.addEventListener("message", function(ev) {
 <div class="activate-message">
   <div class="message-body">
     <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
-    <p>Your Account Activated Sucessfully!</p>
+    <p>Your Account Activated Successfully!</p>
   </div>
 </div>

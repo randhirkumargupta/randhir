@@ -109,20 +109,21 @@
                                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
                                 $('.tab-buttons span[data-class="' + block_name + '"]').html(category_name_tab);
                                 if(wid_name=='sport_poll_widget_block'){
-                                $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
-                            }
+                                    $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
+                                }
+                                if(wid_name=='home_page_poll_widget_block'){
+                                    $('#section-cart-' + block_name).addClass('home-page-poll-block-wrap');                                    
+                                }
                         
                                 //$('#block_name').html(category_name_tab);
                                 if (display_area) {
                                     $('#' + block_name).html(category_name_tab);
                                 }
-
+                                console.log("blockname"+ block_name);
                                 $('#' + content_place).html(data);
-                                //code by sunil
-                                //console.log("here i am");
+                                //code by sunil                                
                                 jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
-                                //code by avanish
-                              
+                                //code by avanish                              
                                 if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1]== 'block_5') {
                                     jQuery(".flexslider").flexslider({
                                         animation: "slide",

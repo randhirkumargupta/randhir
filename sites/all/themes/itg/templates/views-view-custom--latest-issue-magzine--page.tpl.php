@@ -10,7 +10,7 @@
       </div>
 
 
-      <div class="magazin-subscribe">
+      <div class="magazin-subscribe magazin-desktop">
         <span class="latest-issue">latest issue</span>
         <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
         <div class="issue-title"><?php print $row['field_issue_title']; ?></div>
@@ -33,6 +33,26 @@
     </div>
   <?php endforeach; ?>
 </div>
+<div class="magazin-lhs-top magazin-mob">
+<div class="magazin-top">
+    <div class="magazin-subscribe">
+        <span class="latest-issue">latest issue</span>
+        <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
+        <div class="issue-title"><?php print $row['field_issue_title']; ?></div>
+        <?php
+        $current_issues = itg_msi_get_current_issue();
+        $current_issue = explode(' 00:', $current_issues);
+        ?>
+        <?php if ($current_issue[0] == $issue_attribute_date): ?>
+            <div class="issue-subscribe-link"><?php print $row['nothing']; ?></div>
+        <?php endif; ?>
+        <?php $future_isue = itg_msi_next_week_issue(); ?>
+        <?php if ($future_isue): ?>
+            <div class="next-issue-out"><span class="text">Next issue out on </span><span class="issue-next-date"><?php print $future_isue; ?></span></div>
+        <?php endif; ?>
+    </div>
+</div>
+    </div>
 <div class="row magazin-section">
   <?php
 // category based story according issue date
@@ -40,11 +60,11 @@
   $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date);
   if (isset($supplement_value)) {
     $class = '';
-    print '<div class="col-md-6 col-sm-12 col-xs-12 mt-50">';
+    print '<div class="col-md-6 col-sm-6 col-xs-12 mt-50">';
   }
   else {
 
-    $class = ' class="col-md-6 col-sm-12 col-xs-12 mt-50"';
+    $class = ' class="col-md-6 col-sm-6 col-xs-12 mt-50"';
   }
 //pr($data);
   $style_name = 'section_ordering_widget';
@@ -96,7 +116,7 @@
       if (!empty($sup_sub_title)) {
         $supp_output .= $sup_sub_title;
       }
-      print '<div class="col-md-6 col-sm-12 col-xs-12 mt-50"><div class="section-ordering">' . $supp_output . '</div></div>';
+      print '<div class="col-md-6 col-sm-6 col-xs-12 mt-50"><div class="section-ordering">' . $supp_output . '</div></div>';
     }
   }
   ?>

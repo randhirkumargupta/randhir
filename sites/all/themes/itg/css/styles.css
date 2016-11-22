@@ -1360,6 +1360,9 @@ footer .footer-copyright {
 }
 
 .itg-common-section .droppable {
+  height: 408px;
+}
+.itg-common-section .home-page-poll-block-wrap .droppable {
   min-height: 408px;
 }
 
@@ -2049,7 +2052,22 @@ footer .footer-copyright {
 }
 
 /*css end watch now home page */
+/*css start homepage show*/
+.home-shows .trending-videos {
+  border: none;
+  padding-top: 25px;
+}
+.home-shows .trending-videos .trending-videos-list {
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+/*css end homepage show*/
 /*Start Story page css*/
+.story-section iframe {
+  width: 100%;
+  height: 50vh;
+}
 .story-section h1 {
   font-size: 24px;
   font-size: 1.5rem;
@@ -3212,6 +3230,51 @@ footer .footer-copyright {
   margin-bottom: 10px;
   line-height: 22px;
 }
+.live-block > .social-share {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-size: 1.125rem;
+}
+.live-block > .social-share ul {
+  list-style-type: none;
+}
+.live-block > .social-share ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.live-block > .social-share ul li a {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+}
+@media screen and (min-width: 768px) {
+  .live-block > .social-share ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.live-block > .social-share ul li a.share {
+  color: #d0d0d0;
+}
+.live-block > .social-share ul li a.share, .live-block > .social-share ul li a.google {
+  background: transparent;
+}
+.live-block > .social-share ul li a.facebook {
+  background: #0b4887;
+}
+.live-block > .social-share ul li a.twitter {
+  background: #05a3d2;
+}
+.live-block > .social-share ul li a.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
 .live-block .disc-share a {
   font-size: 20px;
   color: #c4c4c4;
@@ -3231,6 +3294,10 @@ footer .footer-copyright {
   font-size: 12px;
   font-size: 0.75rem;
   margin-bottom: 5px;
+}
+.live-block .breaking-section .breaking-discription iframe {
+  width: 100%;
+  height: 55vh;
 }
 .live-block .breaking-section .social-share {
   margin-top: 10px;
@@ -3420,6 +3487,7 @@ footer .footer-copyright {
   line-height: 18px;
   width: auto;
   max-height: 45px;
+  min-height: 45px;
   overflow: hidden;
 }
 .featured_photo_carousel .flexslider .slides li .detail .flex-caption a, .tech-block_5 .flexslider .slides li .detail .flex-caption a, .auto-block_5 .flexslider .slides li .detail .flex-caption a {
@@ -5102,12 +5170,20 @@ footer .footer-copyright {
 
 /*CSS end Latest issue magazins*/
 /*CSS start magazins*/
+.magazin-mob {
+  display: none;
+}
+
+.magazin-desktop {
+  display: block;
+}
+
 .magazin-lhs-top {
   background: #f6f5f5;
   border: 1px solid #dddddd;
   padding-bottom: 10px;
 }
-.magazin-lhs-top a:hover {
+.magazin-lhs-topa:hover {
   color: #193984;
 }
 .magazin-lhs-top .magazin-top {
@@ -5264,6 +5340,12 @@ footer .footer-copyright {
 }
 .magazin-section span.widget-title {
   position: absolute;
+}
+.magazin-section > div > div {
+  margin-bottom: 35px;
+}
+.magazin-section > div > div:last-child {
+  margin-bottom: 0px;
 }
 
 /*End start magazins*/
@@ -7838,7 +7920,7 @@ footer .footer-copyright {
   color: #b6b6b6;
 }
 .election-page .left-side .itg-415-layout .droppable {
-  height: 415px;
+  min-height: 415px;
 }
 .election-page .left-side .itg-325-layout .droppable, .election-page .left-side .itg-325-layout iframe {
   height: 325px;
@@ -8034,6 +8116,66 @@ footer .footer-copyright {
 }
 .election-page .key-candidate .key-candidate-detail.key-candidate-detail-first {
   display: block;
+}
+.election-page .itg-map svg {
+  max-width: 100%;
+  max-height: 332px;
+}
+.election-page .itg-map #map-state {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 20px;
+  line-height: 20px;
+  padding: 0;
+  width: 145px;
+}
+.election-page .election-graph .highcharts-credits {
+  display: none;
+}
+.election-page .election-graph table {
+  font-size: 13px;
+  font-family: roboto;
+}
+.election-page .election-graph table th {
+  text-align: center;
+  border-bottom: 10px solid #FFF;
+}
+.election-page .election-graph table th:nth-child(2) {
+  text-align: left;
+  padding-left: 10px;
+}
+.election-page .election-graph table td {
+  background: #f5f5f5;
+  border-bottom: 10px solid #FFF;
+  text-align: center;
+  color: #5e5e5e;
+}
+.election-page .election-graph table td:first-child {
+  padding-right: 5px;
+}
+.election-page .election-graph table td:nth-child(2) {
+  text-align: left;
+  padding-left: 10px;
+}
+.election-page .election-graph table td.party-color {
+  width: 13px;
+  height: 19px;
+  margin-bottom: 10px;
+}
+.election-page .graph-design {
+  position: relative;
+}
+.election-page .graph-design .divider {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  height: 120px;
+  width: 1px;
+  border-left: 1px dashed #7b7b7b;
+}
+.election-page .graph-design .highcharts-container {
+  height: 260px !important;
 }
 
 /* CSS For Election Page End */

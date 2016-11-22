@@ -70,6 +70,7 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
+    <?php print render($page['vertical_menu']); ?>
     <main id="main" class="container">
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>

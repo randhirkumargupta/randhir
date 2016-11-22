@@ -24,7 +24,12 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
   <div class="login-wrapper">
     <?php print drupal_render($form['name']); 
           print drupal_render($form['pass']);
-          print drupal_render($form['remember_me']); ?>
+          if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
+          if (strpos($_GET['ReturnTo'], 'domain_info') !== false) {
+                  print drupal_render($form['remember_me']);
+          }
+          }
+?>
     <div class="form-actions">
       <?php print drupal_render($form['actions']['submit']);
         
