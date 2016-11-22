@@ -8404,6 +8404,10 @@ footer .footer-copyright {
   margin-right: 15px;
 }
 
+#itg-sso-reg-password-form h3 {
+  margin: 20px 0;
+  text-transform: uppercase;
+}
 #itg-sso-reg-password-form ul {
   list-style-type: none;
 }

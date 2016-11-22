@@ -6918,8 +6918,8 @@ input[type="radio"]:checked + label:after{
         overflow: hidden;
         padding:0;
         .form-item-fotp{        
-        margin-bottom: 20px;        
-    }
+            margin-bottom: 20px;        
+        }
     } 
     #fotp #forgototpclickme{
         margin: 10px 20px 10px 20px;
@@ -6938,6 +6938,10 @@ input[type="radio"]:checked + label:after{
     }
 }
 #itg-sso-reg-password-form{
+    h3{
+        margin:20px 0;
+        text-transform: uppercase;
+    }
     ul{
       list-style-type: none;  
     }
