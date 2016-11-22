@@ -14,11 +14,11 @@
     )
   );
 ?>
-  <ul type="square">
-      <li><?php print t('Career Graph'); ?></li>
-      <li><?php print $actor[$key]['name']; ?></li>      
-      <li><?php print $actor_pic; ?></li>
-  </ul>
+<div class="career-graph-data">
+    <div class="gray-bg"><?php print t('Career Graph'); ?></div>
+    <div class="black-bg"><?php print $actor[$key]['name']; ?></div>
+    <?php print $actor_pic; ?>
+</div>  
   <?php print drupal_render($value); ?>
 <?php endforeach; ?>
 

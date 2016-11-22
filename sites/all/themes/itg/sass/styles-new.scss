@@ -3832,6 +3832,10 @@ article.node-mega-review-critic{
       background-color: #ddd;
       float: left;
       width: 63%;
+      iframe{
+        height: 271px;
+        width: 100%;
+      }
     }
     .movie-review-text{
       background-color: #000;
@@ -3944,6 +3948,37 @@ article.node-mega-review-critic{
   .movie-photos{
     padding-left: 15px;
   }
+}
+.career-graph{
+    .career-graph-data{
+        margin-top: 150px;
+        position: relative;
+        .gray-bg, .black-bg{
+            background: #dedede;            
+            color: #000;
+            font-family: roboto;
+            font-size: 17px;
+            font-weight: 500;
+            padding: 20px;
+            text-align: right;
+            text-transform: uppercase;
+        }
+        .black-bg{
+            background: #000 none repeat scroll 0 0;
+            color: #fff;
+            font-size: 24px;
+            padding: 28px 0 28px 190px;
+            text-align: left;
+        }
+        img{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }        
+    }
+    .highcharts-container {
+            background: #f7f7f7;
+        }
 }
 .overflow-x-auto{
   overflow-x: auto;
