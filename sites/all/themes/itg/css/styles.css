@@ -8382,12 +8382,15 @@ footer .footer-copyright {
   padding: 8px 20px;
   margin-top: 15px;
 }
+#itg-sso-user-email-form #fotp {
+  overflow: hidden;
+  padding: 0;
+}
 #itg-sso-user-email-form #fotp .form-item-fotp {
-  max-width: 100%;
   margin-bottom: 20px;
 }
 #itg-sso-user-email-form #fotp #forgototpclickme {
-  margin: 10px 20px 10px 0px;
+  margin: 10px 20px 10px 20px;
 }
 
 #views-exposed-form-report-filed-content-page #edit-date-filter-wrapper {
