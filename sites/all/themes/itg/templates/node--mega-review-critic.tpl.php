@@ -61,18 +61,8 @@
   </div>
   <div class="movie-review-wrapper">
     <!--<div class="col-md-7">-->
-      <div class="movie-trailer">
-        <!-- Large Image -->
-        <?php
-        $large_image = theme(
-          'image_style', 
-          array(
-            'style_name' => 'cart_172x240',
-            'path' => $node->field_story_extra_large_image['und'][0]['uri'],
-          )
-        );
-        print $large_image;
-        ?>
+      <div class="movie-trailer">        
+        <?php print render($content['field_mega_review_youtube_url']); ?>
       </div>
     <!--</div>-->
     <!--<div class="col-md-5">-->
@@ -108,15 +98,15 @@
   </div>
   <div class="other-reviews">
   <!-- Print reviews -->
-  <?php foreach ($node->field_mega_review_review['und'] as $field_collection): ?> 
+  <?php foreach ($node->field_mega_review_review['und'] as $field_collection): ?>   
   <div class="other-reviews-row">
-    <?php $reviews = entity_load('field_collection_item', array($field_collection['value'])) ?> 
-    
+    <?php $reviews = entity_load('field_collection_item', array($field_collection['value'])) ?>     
     <!-- Review Headline -->
     <h2><?php print $reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value']; ?></h2>
     <div class="other-reviews-posted-on">
     <!-- Byline reporter -->
-    <span class="other-reviews-by"><?php print t('By') . $reviews[$field_collection['value']]->field_story_reporter['und'][0]['value']; ?></span>
+    
+    <span class="other-reviews-by"><?php print t('By') . ' ' . $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></span>
     <!-- Created date -->
     <span class="other-reviews-date"><?php print format_date($node->created, 'custom', 'F d, Y'); ?></span>
     <!-- Ratings -->
@@ -131,23 +121,45 @@
     <!-- Print video -->
     <div class="movie-videos">
       <h3><span>MOVIE VIDEOS</span></h3>
-      <?php print render($content['field_mega_review_youtube_url']); ?>
+      <?php      
+      $asso_vid_id = $node->field_associate_event_video['und'][0]['target_id'];
+      $video_node = node_load($asso_vid_id);      
+      $large_image = theme(
+          'image_style', 
+          array(
+            'style_name' => 'cart_172x240',
+            'path' => $video_node->field_story_extra_large_image['und'][0]['uri'],
+          )
+        );
+      print $large_image;
+      ?>
     </div>
 
     <!-- Photos -->
     <div class="movie-photos">
       <h3><span>MOVIE PHOTOS</span></h3>
       <?php
+      $asso_photo_gallery = $node->field_associate_event_photo['und'][0]['target_id'];
+      $photo_node = node_load($asso_photo_gallery);      
       $small_image = theme(
         'image_style', array(
         'style_name' => 'cart_172x240',
-        'path' => $node->field_story_small_image['und'][0]['uri'],
+        'path' => $photo_node->field_story_extra_large_image['und'][0]['uri'],
         )
       );
-
-      print $small_image;
+      $image_count = count($photo_node->field_gallery_image['und']);
+      print $small_image;      
       ?>
+      <div class="img-count">
+        <?php print $image_count; ?>
+      </div>
     </div>
+  </div>
+  <div class="career-graph">
+    <?php
+    $block = module_invoke('itg_reports', 'block_view', 'itg_report_career_graph');
+    print render($block['content']);
+    ?>
   </div>
   <?php print render($content['links']); ?>    
   <?php print render($content['comments']); ?>  

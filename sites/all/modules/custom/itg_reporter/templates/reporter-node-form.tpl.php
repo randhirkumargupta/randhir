@@ -6,6 +6,7 @@
     <?php print drupal_render($form['field_story_expert_name']); ?>
     <?php print drupal_render($form['field_story_new_title']); ?>
     <?php print drupal_render($form['field_celebrity_pro_occupation']); ?>
+    <?php print drupal_render($form['field_reporter_career_graph']); ?>
     <?php print drupal_render($form['field_story_category']); ?>
     <?php print drupal_render($form['field_story_extra_large_image']); ?>
     <?php print drupal_render($form['body']); ?>

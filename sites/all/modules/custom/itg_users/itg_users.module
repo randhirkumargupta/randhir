@@ -34,13 +34,13 @@ function itg_users_menu() {
     'file' => 'includes/itg_users.inc',
   );
 
-  $items['user-block'] = array(
-    'title' => 'User Block',
-    'page callback' => 'itg_users_block_user',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_users.inc',
-  );
+//  $items['user-block'] = array(
+//    'title' => 'User Block',
+//    'page callback' => 'itg_users_block_user',
+//    'access callback' => TRUE,
+//    'type' => MENU_CALLBACK,
+//    'file' => 'includes/itg_users.inc',
+//  );
 
   $items['access-denied'] = array(
     'page callback' => 'itg_users_access_denied',
@@ -762,4 +762,18 @@ function itg_users_access_denied() {
  */
 function itg_users_js_alter(&$javascript) {
   $javascript['modules/user/user.js']['data'] = drupal_get_path('module', 'itg_users') . '/js/custom_user.js';
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_users_cronapi($op, $job = NULL) {
+  $items['itg-user-block'] = array(
+    'description' => 'user expired by cron.',
+    'callback' => 'itg_users_block_user',
+    'file' => 'includes/itg_users.inc',
+  );
+  
+  return $items;
 }
