@@ -6914,12 +6914,15 @@ input[type="radio"]:checked + label:after{
         padding: 8px 20px;
         margin-top: 15px;
     }
-    #fotp .form-item-fotp{
-        max-width: 100%;
-        margin-bottom: 20px;        
-    }
+    #fotp{
+        overflow: hidden;
+        padding:0;
+        .form-item-fotp{        
+            margin-bottom: 20px;        
+        }
+    } 
     #fotp #forgototpclickme{
-        margin: 10px 20px 10px 0px;
+        margin: 10px 20px 10px 20px;
     }
 }
 #views-exposed-form-report-filed-content-page{
@@ -6935,6 +6938,10 @@ input[type="radio"]:checked + label:after{
     }
 }
 #itg-sso-reg-password-form{
+    h3{
+        margin:20px 0;
+        text-transform: uppercase;
+    }
     ul{
       list-style-type: none;  
     }

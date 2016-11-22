@@ -428,6 +428,7 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
         $form['title']['#attributes'] = array('placeholder' => t('Title'));
         $form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
         $form['nid']['#attributes'] = array('placeholder' => t('Gallery ID'));
+        
     }
 }
 

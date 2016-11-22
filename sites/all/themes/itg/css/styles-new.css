@@ -3543,6 +3543,18 @@ body.has-cart-popup {
   height: 41px;
   width: 170px;
 }
+[id*="itg-personalization-edit-profile-form"] .change-mobile, [id*="itg-personalization-edit-profile-form"] .change-email {
+  position: relative;
+}
+[id*="itg-personalization-edit-profile-form"] .change-mobile a, [id*="itg-personalization-edit-profile-form"] .change-email a {
+  position: absolute;
+  top: 20px;
+  display: inline-block;
+  right: 8px;
+  z-index: 9;
+  font-size: 13px;
+  color: #0db533;
+}
 
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox {
   padding: 0;

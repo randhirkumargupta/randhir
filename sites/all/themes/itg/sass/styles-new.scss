@@ -3524,6 +3524,18 @@ body.has-cart-popup{
         width: 170px;
       }
     }
+    .change-mobile, .change-email{
+        position: relative;    
+        a{
+            position: absolute;
+            top: 20px;
+            display: inline-block;
+            right: 8px;
+            z-index: 9;
+            font-size: 13px;
+            color: #0db533;    
+        }
+    }
 }
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox{
   padding: 0;
