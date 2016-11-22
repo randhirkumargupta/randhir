@@ -136,8 +136,7 @@ function itg_reports_block_view($delta = '') {
 
           $chart['career'] = array(
             '#type' => 'chart_data',
-            //'#data' => $chart_data['graph'],
-            '#data' => $test_data,
+            '#data' => $chart_data['graph'],            
             '#title' => $chart_data['actor'][$key]['actor_name'],
           );
           $chart['xaxis'] = array(
@@ -157,7 +156,7 @@ function itg_reports_block_view($delta = '') {
             'pic_uri' => $chart_data['actor'][$key]['actor_pic'],
           );
         }
-      }
+      }      
       $block['content'] = theme('itg_reports_career_graph', array('output' => $output, 'actor' => $actor_info));
 
       break;
