@@ -13,11 +13,14 @@
 function itg_personalization_edit_profile_form() {
   global $user;
   //prepare url for change mobile and email
-  if (strpos($user->mail, 'twitter') != true) {
+  if (strpos($user->name, '@') != false || is_numeric($user->name)) {
   $edit_email_url = 'http://'.PARENT_SSO.'/sso-user/email/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
+  $edit_email_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, '."'".$edit_email_url."'".');">Change Email</a>';
+  $edit_mobile_url = 'http://'.PARENT_SSO.'/sso-user/mobile/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
+  $edit_mobile_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, '."'".$edit_mobile_url."'".');">Change Mobile</a>';
   }
   
-  $edit_mobile_url = 'http://'.PARENT_SSO.'/sso-user/mobile/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
+  
   
   $user_detail = user_load($user->uid);
   if(is_numeric($user_detail->name)) {
@@ -53,7 +56,7 @@ function itg_personalization_edit_profile_form() {
       'readonly' => TRUE
     ),
     '#default_value' => $user_detail->mail,
-    '#suffix' => '<div class="change-email"><a href="javascript:void(0)"  onclick="CenterWindow(550, 400, 50, '."'".$edit_email_url."'".');">Change Email</a></div>',
+    '#suffix' => '<div class="change-email">'.$edit_email_link.'</div>',
   );
   $form['mobile'] = array(
     '#title' => t('Mobile'),
@@ -63,7 +66,7 @@ function itg_personalization_edit_profile_form() {
       'placeholder' => 'E.g., +91 9999999999',
       'readonly' => TRUE,
     ),
-    '#suffix' => '<div class="change-email"><a href="javascript:void(0)"  onclick="CenterWindow(550, 400, 50, '."'".$edit_mobile_url."'".');">Change Mobile</a></div>',
+    '#suffix' => '<div class="change-mobile">'.$edit_mobile_link.'</div>',
     '#default_value' => $mobile,
   );
   $form['dob'] = array(
