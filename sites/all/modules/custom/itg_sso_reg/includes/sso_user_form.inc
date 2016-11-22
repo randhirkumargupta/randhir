@@ -143,7 +143,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         $mail = $form_state['values']['mail'];
       }
       else {
-        $mail = $form_state['values']['fname'] . '@' . 'indiatoday.com';
+        $mail = $form_state['values']['fname'] . '@' . 'nowhere.com';
       }
 
       $form['domain_info'] = array(
@@ -453,9 +453,9 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
         $mobile = $form_state['values']['mobile'];
       }
 
-      // if email field empty fill firstname@indiatoday.com as dummy name
+      // if email field empty fill firstname@nowhere.com as dummy name
       if (empty($form_state['values']['mail'])) {
-        $mail = $form_state['values']['fname'] . '@' . 'indiatoday.com';
+        $mail = $form_state['values']['fname'] . '@' . 'nowhere.com';
       }
       else {
         $mail = $form_state['values']['mail'];

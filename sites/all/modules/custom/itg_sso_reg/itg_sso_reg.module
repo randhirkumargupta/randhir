@@ -179,6 +179,13 @@ function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login' && !empty($_GET['ReturnTo'])) {
     array_unshift($form['#validate'], 'itg_sso_user_login_form_validate');
   }
+  if ($form_id == 'user_login' && empty($_GET['ReturnTo'])) {
+    drupal_add_js('jQuery(document).ready(function() {                  
+                          jQuery("#user-login .form-item-remember-me").hide();
+                          jQuery("#user-login #edit-remember-me").prop("checked", false);
+                          
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
 }
 
 /**
