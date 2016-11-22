@@ -16,14 +16,14 @@
 function itg_theme() {
   $items = array();
   $items['user_login'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-login',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-login',
   );
   $items['user_pass'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-pass',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-pass',
   );
   return $items;
 }
@@ -34,6 +34,18 @@ function itg_theme() {
  */
 function itg_preprocess_node(&$variables) {
   unset($variables['content']['links']['node']['#links']['node-readmore']);
+  // Inclue pathauto module
+  module_load_all_includes('inc', 'pathauto', 'pathauto');
+  if (function_exists('pathauto_cleanstring')) {
+    // This assumes that you are using Pathauto for generating clean URLs.
+    // Get the "clean" title.
+    $title = pathauto_cleanstring($variables['node']->title);
+    // Replace all dashes with underscores. This is necessary for recognizing the
+    // template filenames.
+    $title = str_replace('-', '_', $title);
+    // Add new template variation.
+    $variables['theme_hook_suggestions'][] = 'node__' . $title;
+  }
 }
 
 /**
@@ -80,7 +92,8 @@ function itg_preprocess_field(&$vars) {
  * {@inheritdoc}
  */
 function itg_preprocess_page(&$variables) {
-  global $base_url; $base_root;
+  global $base_url;
+  $base_root;
   $arg = arg();
   if ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
     $term = taxonomy_term_load($arg[2]);
@@ -89,16 +102,16 @@ function itg_preprocess_page(&$variables) {
       unset($variables['page']['content']['system_main']);
     }
   }
-  
+
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
-  
+
   if ($arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'password-success' || $arg[0] == 'complete-page') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
-  
+
   // Access domain
   if (function_exists('domain_select_format')) {
     $format = domain_select_format();
@@ -116,7 +129,6 @@ function itg_preprocess_page(&$variables) {
     }
   }
 }
-
 
 /**
  * {@inheritdoc}
