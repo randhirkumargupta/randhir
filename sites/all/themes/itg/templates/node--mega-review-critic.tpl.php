@@ -108,15 +108,15 @@
   </div>
   <div class="other-reviews">
   <!-- Print reviews -->
-  <?php foreach ($node->field_mega_review_review['und'] as $field_collection): ?> 
+  <?php foreach ($node->field_mega_review_review['und'] as $field_collection): ?>   
   <div class="other-reviews-row">
-    <?php $reviews = entity_load('field_collection_item', array($field_collection['value'])) ?> 
-    
+    <?php $reviews = entity_load('field_collection_item', array($field_collection['value'])) ?>     
     <!-- Review Headline -->
     <h2><?php print $reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value']; ?></h2>
     <div class="other-reviews-posted-on">
     <!-- Byline reporter -->
-    <span class="other-reviews-by"><?php print t('By') . $reviews[$field_collection['value']]->field_story_reporter['und'][0]['value']; ?></span>
+    
+    <span class="other-reviews-by"><?php print t('By') . ' ' . $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></span>
     <!-- Created date -->
     <span class="other-reviews-date"><?php print format_date($node->created, 'custom', 'F d, Y'); ?></span>
     <!-- Ratings -->
@@ -148,6 +148,12 @@
       print $small_image;
       ?>
     </div>
+  </div>
+  <div class="career-graph">
+    <?php
+    $block = module_invoke('itg_reports', 'block_view', 'itg_report_career_graph');
+    print render($block['content']);
+    ?>
   </div>
   <?php print render($content['links']); ?>    
   <?php print render($content['comments']); ?>  
