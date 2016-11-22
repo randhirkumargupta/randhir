@@ -61,18 +61,8 @@
   </div>
   <div class="movie-review-wrapper">
     <!--<div class="col-md-7">-->
-      <div class="movie-trailer">
-        <!-- Large Image -->
-        <?php
-        $large_image = theme(
-          'image_style', 
-          array(
-            'style_name' => 'cart_172x240',
-            'path' => $node->field_story_extra_large_image['und'][0]['uri'],
-          )
-        );
-        print $large_image;
-        ?>
+      <div class="movie-trailer">        
+        <?php print render($content['field_mega_review_youtube_url']); ?>
       </div>
     <!--</div>-->
     <!--<div class="col-md-5">-->
@@ -131,22 +121,38 @@
     <!-- Print video -->
     <div class="movie-videos">
       <h3><span>MOVIE VIDEOS</span></h3>
-      <?php print render($content['field_mega_review_youtube_url']); ?>
+      <?php      
+      $asso_vid_id = $node->field_associate_event_video['und'][0]['target_id'];
+      $video_node = node_load($asso_vid_id);      
+      $large_image = theme(
+          'image_style', 
+          array(
+            'style_name' => 'cart_172x240',
+            'path' => $video_node->field_story_extra_large_image['und'][0]['uri'],
+          )
+        );
+      print $large_image;
+      ?>
     </div>
 
     <!-- Photos -->
     <div class="movie-photos">
       <h3><span>MOVIE PHOTOS</span></h3>
       <?php
+      $asso_photo_gallery = $node->field_associate_event_photo['und'][0]['target_id'];
+      $photo_node = node_load($asso_photo_gallery);      
       $small_image = theme(
         'image_style', array(
         'style_name' => 'cart_172x240',
-        'path' => $node->field_story_small_image['und'][0]['uri'],
+        'path' => $photo_node->field_story_extra_large_image['und'][0]['uri'],
         )
       );
-
-      print $small_image;
+      $image_count = count($photo_node->field_gallery_image['und']);
+      print $small_image;      
       ?>
+      <div class="img-count">
+        <?php print $image_count; ?>
+      </div>
     </div>
   </div>
   <div class="career-graph">
