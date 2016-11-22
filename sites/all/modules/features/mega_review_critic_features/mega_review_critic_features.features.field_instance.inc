@@ -494,6 +494,98 @@ function mega_review_critic_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-mega_review_critic-field_associate_event_photo'.
+  $field_instances['node-mega_review_critic-field_associate_event_photo'] = array(
+    'bundle' => 'mega_review_critic',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 21,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_associate_event_photo',
+    'label' => 'Associate Photo Gallery',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-mega_review_critic-field_associate_event_video'.
+  $field_instances['node-mega_review_critic-field_associate_event_video'] = array(
+    'bundle' => 'mega_review_critic',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_associate_event_video',
+    'label' => 'Associate Video',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-mega_review_critic-field_mega_review_cast'.
   $field_instances['node-mega_review_critic-field_mega_review_cast'] = array(
     'bundle' => 'mega_review_critic',
@@ -626,49 +718,6 @@ function mega_review_critic_features_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'node-mega_review_critic-field_mega_review_photo_gallery'.
-  $field_instances['node-mega_review_critic-field_mega_review_photo_gallery'] = array(
-    'bundle' => 'mega_review_critic',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Associate Photo Gallery',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_mega_review_photo_gallery',
-    'label' => 'Associate Photo Gallery',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance:
   // 'node-mega_review_critic-field_mega_review_review'.
   $field_instances['node-mega_review_critic-field_mega_review_review'] = array(
     'bundle' => 'mega_review_critic',
@@ -759,7 +808,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -799,74 +848,6 @@ function mega_review_critic_features_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-mega_review_critic-field_mega_review_video'.
-  $field_instances['node-mega_review_critic-field_mega_review_video'] = array(
-    'bundle' => 'mega_review_critic',
-    'deleted' => 0,
-    'description' => 'Associate Video',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 13,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_mega_review_video',
-    'label' => 'Associate Video',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'exclude_cv' => FALSE,
-      'file_directory' => '',
-      'file_extensions' => 'mp4',
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 'imce',
-            'plupload' => 0,
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 0,
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 1,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-            'search_all_fields' => 0,
-          ),
-        ),
-        'imce_filefield_on' => 0,
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'file_generic',
-      'weight' => 7,
     ),
   );
 
