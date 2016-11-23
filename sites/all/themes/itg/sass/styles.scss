@@ -6965,3 +6965,33 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*email and change password end*/
+/*css start static pages menu*/
+#block-menu-menu-about-us-page-menu{
+    ul{
+        @extend .list-none;      
+        border:1px solid $border-color;
+        li{
+            a{
+                padding: 20px;
+                display: block;
+                @include font(14px);    
+                text-transform: capitalize;
+                &:hover, &.active{
+                    background: #f8f8f8;
+                }
+            }
+            + li{
+              border-top:1px solid $border-color;  
+            }
+            ul{
+                border:none;
+                li{
+                    a{
+                        padding: 10px 0 10px 35px;
+                    }
+                }
+            }
+        }
+    }    
+}
+/*css end static pages menu*/
