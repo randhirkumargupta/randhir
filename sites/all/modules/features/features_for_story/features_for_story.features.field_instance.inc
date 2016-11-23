@@ -1049,7 +1049,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_extra_large_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (650 x 445)',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1661,7 +1661,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_large_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (300x350)',
+    'description' => 'Image Size (483x271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1903,7 +1903,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_medium_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 225)',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2372,7 +2372,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_small_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (210 x 145)',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3254,10 +3254,10 @@ function features_for_story_field_default_field_instances() {
   t('Featured Name');
   t('HeadLine');
   t('Image');
-  t('Image Size (210 x 145)');
-  t('Image Size (300 x 225)');
-  t('Image Size (300x350)');
-  t('Image Size (650 x 445)');
+  t('Image Size (170 x 127)');
+  t('Image Size (370 x 208)');
+  t('Image Size (483x271)');
+  t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
   t('Issue based story');
   t('Issue date');

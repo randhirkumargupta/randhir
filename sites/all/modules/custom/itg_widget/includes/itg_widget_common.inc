@@ -372,7 +372,6 @@ function draggable_view_node_delete($view_name, $page_name, $nid) {
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
-
   if ($form_id == 'views_form_key_candidate_special_key_candidate_widget_contents') {
     $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
     $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
@@ -614,7 +613,9 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $form['category_tid']['#options'] = $op;
   }
 
-
+  if($form_state['build_info']['args'][0]->type == 'page' && $form_id == 'page_node_form' && arg(2) == 'edit') {
+    drupal_add_css("div.vertical-tabs {display:none}" ,'inline');
+  }
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }

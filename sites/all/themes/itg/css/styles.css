@@ -1478,6 +1478,10 @@ footer .footer-copyright {
 }
 
 /*End CSS Big New Home page*/
+.itg-top-section {
+  position: relative;
+}
+
 /*Start CSS Top Story Home Page*/
 .tab-buttons {
   zoom: 1;
@@ -2064,6 +2068,10 @@ footer .footer-copyright {
 
 /*css end homepage show*/
 /*Start Story page css*/
+.story-section iframe {
+  width: 100%;
+  height: 50vh;
+}
 .story-section h1 {
   font-size: 24px;
   font-size: 1.5rem;
@@ -7916,7 +7924,7 @@ footer .footer-copyright {
   color: #b6b6b6;
 }
 .election-page .left-side .itg-415-layout .droppable {
-  height: 415px;
+  min-height: 415px;
 }
 .election-page .left-side .itg-325-layout .droppable, .election-page .left-side .itg-325-layout iframe {
   height: 325px;
@@ -8113,6 +8121,66 @@ footer .footer-copyright {
 .election-page .key-candidate .key-candidate-detail.key-candidate-detail-first {
   display: block;
 }
+.election-page .itg-map svg {
+  max-width: 100%;
+  max-height: 332px;
+}
+.election-page .itg-map #map-state {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 20px;
+  line-height: 20px;
+  padding: 0;
+  width: 145px;
+}
+.election-page .election-graph .highcharts-credits {
+  display: none;
+}
+.election-page .election-graph table {
+  font-size: 13px;
+  font-family: roboto;
+}
+.election-page .election-graph table th {
+  text-align: center;
+  border-bottom: 10px solid #FFF;
+}
+.election-page .election-graph table th:nth-child(2) {
+  text-align: left;
+  padding-left: 10px;
+}
+.election-page .election-graph table td {
+  background: #f5f5f5;
+  border-bottom: 10px solid #FFF;
+  text-align: center;
+  color: #5e5e5e;
+}
+.election-page .election-graph table td:first-child {
+  padding-right: 5px;
+}
+.election-page .election-graph table td:nth-child(2) {
+  text-align: left;
+  padding-left: 10px;
+}
+.election-page .election-graph table td.party-color {
+  width: 13px;
+  height: 19px;
+  margin-bottom: 10px;
+}
+.election-page .graph-design {
+  position: relative;
+}
+.election-page .graph-design .divider {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  height: 120px;
+  width: 1px;
+  border-left: 1px dashed #7b7b7b;
+}
+.election-page .graph-design .highcharts-container {
+  height: 260px !important;
+}
 
 /* CSS For Election Page End */
 /*Start CSS LIVE tv */
@@ -8238,3 +8306,128 @@ footer .footer-copyright {
 }
 
 /*eND CSS LIVE tv */
+/*vertical menu fixed position*/
+#block-itg-menu-manager-vertical-menu {
+  position: absolute;
+  top: 50px;
+  left: -85px;
+  background: #f2f2f2;
+  border-radius: 3px;
+  box-shadow: 2px 2px 3px #ccc;
+  text-align: center;
+  border-right: 1px solid #b3b3b3;
+}
+#block-itg-menu-manager-vertical-menu ul {
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  position: relative;
+}
+#block-itg-menu-manager-vertical-menu li {
+  border-bottom: 1px solid #c4c4c4;
+  padding: 15px 10px;
+  display: block;
+  height: 92px;
+}
+#block-itg-menu-manager-vertical-menu img {
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 8px;
+}
+#block-itg-menu-manager-vertical-menu a {
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+}
+#block-itg-menu-manager-vertical-menu .vertical-menu-parent {
+  max-height: 552px;
+  overflow: hidden;
+  max-width: 80px;
+}
+#block-itg-menu-manager-vertical-menu .vertical-more {
+  padding: 15px 10px;
+  display: none;
+}
+#block-itg-menu-manager-vertical-menu .vertical-more a {
+  display: block;
+}
+#block-itg-menu-manager-vertical-menu .vertical-more a i {
+  display: block;
+  color: #959595;
+  font-size: 26px;
+}
+#block-itg-menu-manager-vertical-menu .vertical-more a span.less {
+  display: none;
+}
+
+/*email and change password start*/
+#itg-sso-user-email-form {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+#itg-sso-user-email-form input[type="text"] {
+  width: 50%;
+}
+#itg-sso-user-email-form h3 {
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+#itg-sso-user-email-form .form-submit {
+  background: #000;
+  border: none;
+  color: #fff;
+  padding: 8px 20px;
+  margin-top: 15px;
+}
+#itg-sso-user-email-form #fotp {
+  overflow: hidden;
+  padding: 0;
+}
+#itg-sso-user-email-form #fotp .form-item-fotp {
+  margin-bottom: 20px;
+}
+#itg-sso-user-email-form #fotp #forgototpclickme {
+  margin: 10px 20px 10px 20px;
+}
+
+#views-exposed-form-report-filed-content-page #edit-date-filter-wrapper {
+  width: auto;
+}
+#views-exposed-form-report-filed-content-page #edit-date-filter-wrapper #edit-date-filter-min-wrapper, #views-exposed-form-report-filed-content-page #edit-date-filter-wrapper #edit-date-filter-max-wrapper {
+  display: inline-block;
+  vertical-align: top;
+}
+#views-exposed-form-report-filed-content-page #edit-date-filter-wrapper #edit-date-filter-min-wrapper {
+  margin-right: 15px;
+}
+
+#itg-sso-reg-password-form h3 {
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+#itg-sso-reg-password-form ul {
+  list-style-type: none;
+}
+#itg-sso-reg-password-form label {
+  display: block;
+  margin-bottom: 8px;
+}
+#itg-sso-reg-password-form span.error {
+  display: block;
+  margin-top: 8px;
+}
+#itg-sso-reg-password-form span.form-required {
+  display: none;
+}
+#itg-sso-reg-password-form .form-submit {
+  background: #000;
+  border: none;
+  color: #fff;
+  padding: 8px 20px;
+  margin-top: 15px;
+}
+
+/*email and change password end*/

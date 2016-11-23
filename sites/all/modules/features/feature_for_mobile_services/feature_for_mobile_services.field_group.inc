@@ -107,7 +107,7 @@ function feature_for_mobile_services_field_group_info() {
   $field_groups['group_service_ftp|node|clients_creation|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_service_ftp|node|service_creation|form';
   $field_group->group_name = 'group_service_ftp';

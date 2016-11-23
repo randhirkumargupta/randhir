@@ -92,6 +92,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             $cls = 'col-md-9';
         endif;
         ?>
+      <?php print render($page['vertical_menu']); ?>
         <main id="main" class="container">
             <section id="content" role="main">
                 <?php print render($page['highlighted']); ?>
@@ -125,7 +126,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 }
                 ?>
                 <div class="row">
-                    <div class="col-md-8 col-sm-8 col-sx-12 left-side">
+                    <div class="col-md-8 col-sm-8 col-sx-12 election-graph left-side">
                         <div class="row itg-415-layout">
 <?php $block = module_invoke('itg_widget', 'block_view', 'graph_election');
                                         print render($block['content']); ?>

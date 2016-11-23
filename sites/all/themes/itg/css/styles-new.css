@@ -1717,6 +1717,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   max-width: 1170px;
   margin: 0 auto;
 }
+.page-personalization #block-block-2 > p {
+  margin-top: 30px;
+  font-family: roboto;
+}
 
 /* CSS for redeem points */
 [id*="block-views-redeem-points-block"] {
@@ -3539,6 +3543,18 @@ body.has-cart-popup {
   height: 41px;
   width: 170px;
 }
+[id*="itg-personalization-edit-profile-form"] .change-mobile, [id*="itg-personalization-edit-profile-form"] .change-email {
+  position: relative;
+}
+[id*="itg-personalization-edit-profile-form"] .change-mobile a, [id*="itg-personalization-edit-profile-form"] .change-email a {
+  position: absolute;
+  top: 20px;
+  display: inline-block;
+  right: 8px;
+  z-index: 9;
+  font-size: 13px;
+  color: #0db533;
+}
 
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox {
   padding: 0;
@@ -3924,6 +3940,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-trailer {
   float: left;
   width: 63%;
 }
+article.node-mega-review-critic .movie-review-wrapper .movie-trailer iframe {
+  height: 271px;
+  width: 100%;
+}
 article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
   background-color: #000;
   float: left;
@@ -4083,6 +4103,36 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
 }
 .photos-videos-wrapper .movie-photos {
   padding-left: 15px;
+}
+
+.career-graph .career-graph-data {
+  margin-top: 150px;
+  position: relative;
+}
+.career-graph .career-graph-data .gray-bg, .career-graph .career-graph-data .black-bg {
+  background: #dedede;
+  color: #000;
+  font-family: roboto;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 20px;
+  text-align: right;
+  text-transform: uppercase;
+}
+.career-graph .career-graph-data .black-bg {
+  background: #000 none repeat scroll 0 0;
+  color: #fff;
+  font-size: 24px;
+  padding: 28px 0 28px 190px;
+  text-align: left;
+}
+.career-graph .career-graph-data img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.career-graph .highcharts-container {
+  background: #f7f7f7;
 }
 
 .overflow-x-auto {

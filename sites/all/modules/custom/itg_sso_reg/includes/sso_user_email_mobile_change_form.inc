@@ -65,13 +65,17 @@ function itg_sso_user_email_form($form, &$form_state) {
 function itg_sso_user_email_step_1_form($form, &$form_state, $unique_id) {
 
   $values = isset($form_state['multistep_values']['step_1']) ? $form_state['multistep_values']['step_1'] : array();
-  print '<div class="me-title">' . drupal_set_title('Change ' . ucfirst(arg(1))) . '</div>';
+  
+  $form['heading'] = array(
+    '#markup' => '<h3>' . drupal_set_title('Change Email/Mobile') . '</h3>',
+  );
+  
   $form['emobile'] = array(
     '#title' => ucfirst(arg(1)),
     '#description' => '',
     '#type' => 'textfield',
     '#required' => TRUE,
-    '#attributes' => array('placeholder' => t(ucfirst(arg(1))), 'autocomplete' => 'off'),
+    '#attributes' => array('placeholder' => t('Email/Mobile'), 'autocomplete' => 'off'),
     '#prefix' => '<div id="ufname">',
     '#suffix' => '</div>',
   );
@@ -206,7 +210,7 @@ function itg_sso_user_email_form_submit($form, &$form_state) {
       if ($form_state['triggering_element']['#value'] != 'Back') {
 
         if (is_numeric($emobile)) {
-          if (is_numeric($unique_id)) {
+          //if (is_numeric($unique_id)) {
             $edit = array(
               'name' => $emobile,
               'field_mobile_number' => array(
@@ -217,9 +221,10 @@ function itg_sso_user_email_form_submit($form, &$form_state) {
                 )
               )
             );
-          }
-          else {
+         // }
+          /*else {
             $edit = array(
+              'name' => $emobile,
               'field_mobile_number' => array(
                 LANGUAGE_NONE => array(
                   0 => array(
@@ -228,7 +233,7 @@ function itg_sso_user_email_form_submit($form, &$form_state) {
                 )
               )
             );
-          }
+          }*/
         }
         else {
 

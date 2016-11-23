@@ -85,6 +85,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
       $cls = 'col-md-9';
     endif;
     ?>
+    <?php print render($page['vertical_menu']); ?>
           <div class="itg-region">
             <div class="container pos-rel">
             <div class="slide-icon scroll-arrow-right"><i class="fa fa-angle-left ll"></i></div>
