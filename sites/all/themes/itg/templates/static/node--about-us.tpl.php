@@ -80,6 +80,7 @@
  * @ingroup themeable
  */
 ?>
+<h1 class="about-us-heading"><?php print t($title); ?></h1>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php print $user_picture; ?>

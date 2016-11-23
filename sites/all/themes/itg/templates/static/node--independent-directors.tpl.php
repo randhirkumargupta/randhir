@@ -100,7 +100,8 @@
       <?php print $static_page_menu; ?>
     </div>
   <?php endif; ?>
-  <div class="content col-md-8 col-xs-12"<?php print $content_attributes; ?>>
+  <div class="content col-md-8 col-xs-12"<?php print $content_attributes; ?>>.
+    <h1 class="about-us-heading"><?php print t($title); ?></h1>
     <?php
       // We hide the comments and links now so that we can render them later.
       hide($content['comments']);
