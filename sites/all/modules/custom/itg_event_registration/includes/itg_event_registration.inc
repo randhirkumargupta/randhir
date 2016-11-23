@@ -22,7 +22,8 @@ function itg_event_registration_form($form, &$form_state) {
     }
     else {
       // TODO: Fix date format
-      $current_date = strtotime(date('Y-m-d') . ' 00:00:00');
+     // $current_date = strtotime(date('Y-m-d') . ' 00:00:00');
+      $current_date = strtotime(date('Y-m-d  H:i:s'));
       $event_reg_start_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       $event_reg_close_date = strtotime($node->field_registration_close_date[LANGUAGE_NONE][0]['value']);
 
@@ -39,7 +40,7 @@ function itg_event_registration_form($form, &$form_state) {
       } 
       else {
         $total_registration_users = itg_event_registration_get_total_registration($event_id);
-        if ($total_registration_users >= $no_of_tickets) {
+        if (1 >= $no_of_tickets) {
           return itg_event_registration_get_status_message($node, 'tickets_not_available');
           return '';
         }
