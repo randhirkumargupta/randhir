@@ -47,6 +47,12 @@ function itg_preprocess_node(&$variables) {
     $variables['theme_hook_suggestions'][] = 'node__' . $title;
     $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
   }
+
+  if ($variables['type'] == 'webform') {
+    unset($variables['submitted']);
+    //$variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
+  }
+  
 }
 
 /**
