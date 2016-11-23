@@ -299,11 +299,14 @@
                       <li><i class="fa fa-tags"></i> Tags :</li>        
                       <?php
                       foreach ($node->field_story_itg_tags['und'] as $tags) {
-                          $term = taxonomy_term_load($tags['tid']);
-                          $t_name = $term->name;
-                          $comma_sep_tag[] = $t_name;
-                          print '<li>#' . $t_name . '</li>';
-                      }
+                          $published_tag = $tags['taxonomy_term']->field_tags_status[LANGUAGE_NONE][0]['value'];
+                          if ($published_tag == 'Published') {
+                            $term = taxonomy_term_load($tags['tid']);
+                            $t_name = $term->name;
+                            $comma_sep_tag[] = $t_name;
+                            print '<li>#' . $t_name . '</li>';
+                          }
+                        }
                       ?>
                   </ul>
               </div>

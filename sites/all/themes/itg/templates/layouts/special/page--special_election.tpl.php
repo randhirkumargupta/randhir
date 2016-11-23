@@ -1,4 +1,3 @@
-<script src="http://localhost/itgcms/sites/all/themes/itg/js/election_map.js"></script>
 <?php
 /**
  * @file
@@ -13,6 +12,7 @@
 
 <?php
 global $theme;
+global $base_url;
 $live_url = "";
 $preview = NULL;
 if (arg(2) == 'preview') {
@@ -31,6 +31,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     $gray_bg_layout = 'gray-bg-layout';
 }
 ?>
+<script src="<?php echo $base_url;?>/sites/all/themes/itg/js/election_map.js"></script>
 
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>
