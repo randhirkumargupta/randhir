@@ -378,7 +378,7 @@ function get_section_update($form, &$form_state) {
   global $messages;
   unset($messages);
   unset($form_state['input']['title'], $form_state['values']['title']);
-  $section = $form_state['values']['sections'];  
+  $section = $form_state['values']['sections'];
   // In case of internal category pool search is reaquired but not in external case.
   if ($form_state['values']['url_type'] == 'internal') {
     //p($form_state['values']['url_type']);
@@ -580,7 +580,7 @@ function itg_menu_manager_block_info() {
     'info' => t('Third Level Menu'),
     'cache' => DRUPAL_NO_CACHE
   );
-  
+
   $blocks['vertical_menu'] = array(
     'info' => t('Vertical Menu'),
     'cache' => DRUPAL_NO_CACHE
@@ -916,6 +916,41 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
         );
       }
     }
+  }
+
+  // see if webform_client_form_ is in the form_id
+  if (strstr($form_id, 'webform_client_form_')) {
+    // get the nid so we can use it in the wrapper value
+    $nid = $form['#node']->nid;
+    // add the ajax properties to the submit button
+    $form['actions']['submit']['#attributes'] = array("class" => array("btn"));
+    $form['actions']['submit']['#ajax'] = array(
+      'callback' => 'itg_menu_manager_webform_js_submit',
+      'wrapper' => 'webform-client-form-' . $nid,
+      'method' => 'replace',
+      'effect' => 'fade',
+    );
+  }
+}
+
+function itg_menu_manager_webform_js_submit(&$form, $form_state) {
+  // define the $sid variable (submission id from webform)
+  $sid = $form_state['values']['details']['sid'];
+  // if we have a sid then we know the form was properly submitted, otherwise, we'll just return the existing $form array
+  if ($sid) {
+    // create an array up with the confirmation message, retreived from the webform node
+    $confirmation = t("You feedback has been recived. Thank you!");
+    drupal_set_message($confirmation);
+//    foreach ($form['#node']->webform['components'] as $key => $field_name) {
+//      $form['#node']->webform['components'][$key]['value'] = "test";
+//      //p($form['#node']->webform['components'][$key]);
+//    }
+    // return the confirmation message
+    return $form;
+  }
+  else {
+    // return the form
+    return $form;
   }
 }
 
