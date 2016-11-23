@@ -3858,7 +3858,7 @@ footer{
     background: #f6f5f5;
     border: 1px solid $border-color;
     padding-bottom: 10px;
-    &a:hover{
+    a:hover{
         color:#193984;
     }
     .magazin-top{
@@ -7034,6 +7034,7 @@ input[type="radio"]:checked + label:after{
                 width: 90px;
                 display: inline-block;
                 text-align: right;
+                margin-right: 0;
             }
         }
         > div.user-email{
@@ -7045,7 +7046,7 @@ input[type="radio"]:checked + label:after{
             font-weight: 500; 
             }
         input[type="text"]{
-            width: 285px;
+            width: 275px;
             height: 40px;
         }
     }
@@ -7089,9 +7090,13 @@ input[type="radio"]:checked + label:after{
                 vertical-align: top;
                 float: left;
             }
+            .form-textarea-wrapper{
+                width: 86%;
             .form-textarea{
-                width: 88%;
+                width: 100%;
+            }    
             }
+            
         }
         .webform-submit-social{
             text-align: center;
