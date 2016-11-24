@@ -155,8 +155,7 @@
 
 
           <div class="content-node-view">
-            <div class="poll-details">
-              <?php print render($content['poll_count']); ?>
+            <div class="poll-details">                            
               <h2><?php echo t('Configuration'); ?></h2>
               <div class="content-details">               
                 <?php
@@ -184,6 +183,7 @@
                 if (!empty($field_associate_poll)): print render($content['field_associate_poll']);
                 endif;
                 ?>
+                <?php print render($content['poll_count']); ?>
               </div>
             </div>
           </div>
