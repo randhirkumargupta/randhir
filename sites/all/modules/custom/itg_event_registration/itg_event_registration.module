@@ -457,7 +457,8 @@ function itg_event_registration_registered_user_detail($nid) {
     return 0;
   }
   else {
-    return l($text, $path, array('attributes' => array('target' => '_blank')));
+    //return l($text, $path, array('attributes' => array('target' => '_blank')));
+    return $text;
   }
 }
 
