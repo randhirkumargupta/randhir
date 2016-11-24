@@ -8414,8 +8414,7 @@ div.node{
         border: 1px solid #d9d9d9;
         &.has-image-parent{
           height: 132px;
-          overflow: hidden;
-          z-index: 9999;
+          overflow: hidden;          
           background-color: #fff;
           transition: all .3s;
           &:hover {

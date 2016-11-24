@@ -477,6 +477,10 @@ header {
   font-size: 0.875rem;
   line-height: 37px;
 }
+#block-itg-layout-manager-header-block .navigation .menu li a.sponsored-active {
+  background: #ffc106;
+  color: #000;
+}
 #block-itg-layout-manager-header-block .navigation .menu li a.active, #block-itg-layout-manager-header-block .navigation .menu li a:hover {
   color: #ffc106;
 }

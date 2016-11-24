@@ -227,7 +227,7 @@ header{
     }
     a{
         color: $white-color; 
-        font-family: $itg-roboto;
+        font-family: $itg-roboto;        
     }
     .header-logo{
         @include pos(relative);        
@@ -355,6 +355,10 @@ header{
                         @include pos(relative);
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
+                        &.sponsored-active{
+                            background: #ffc106;
+                            color: #000;
+                        }
                         &.active, &:hover{
                                 color: #ffc106;
                         }

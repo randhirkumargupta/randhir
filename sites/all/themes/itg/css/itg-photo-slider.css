@@ -82,7 +82,7 @@ Version   :  1.0
     height: 100%;
     display: block;
     z-index: 99;
-    opacity: .5;
+    opacity: .2;
 }
 .carousel .slides .slideItem[style*="width: 645px"] span{
     opacity: 1;
