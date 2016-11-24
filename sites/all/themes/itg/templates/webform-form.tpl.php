@@ -15,52 +15,54 @@
  * - $form['submitted']: The main content of the user-created form.
  * - $form['details']: Internal information stored by Webform.
  */
+global $base_url;
 ?>
-<?php print t("<h1>Send us feedback</h1>"); ?>
-<?php print t("Fiedls marked with * are manadatory."); ?>
-<div class="webform-conatiner">
-  <div class="feeback-container">
-    <div class="webform-name-field feedback">
-      <?php print drupal_render($form['submitted']['feedback']); ?>
+<div class="static-feedback-from">
+  <?php print t("<h1>Send us feedback <span>Field marked with <i>*</i> are manadatory.</span></h1>"); ?>
+  <div class="webform-conatiner">
+    <div class="feeback-container">
+      <div class="webform-name-field feedback">
+        <?php print drupal_render($form['submitted']['feedback']); ?>
+      </div>
     </div>
-  </div>
-  <div class="webform-submit-social">
-    <?php print t("Submit feedback via"); ?>
-    <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
-      <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
-      <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
+    <div class="webform-submit-social">
+      <?php print t("<div class=\"submit-feedback\"><span>Submit feedback via</span></div>"); ?>
+      <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
+        <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+        <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
-      <?php
-    }
-    else {
+        <?php
+      }
+      else {
+        ?>
+        <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon">
+          <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/twitter.png' />
+          <img  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/facebook.png' />
+          <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/google-plus.png' />
+          <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/linked.png' />
+        </a>
+
+        <?php
+      }
       ?>
-      <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon">
-        <input type="button" class="btn" value="Twitter">
-        <input type="button" class="btn" value="Facebook">
-        <input type="button" class="btn" value="Google+">
-        <input type="button" class="btn" value="Linkedin">
-      </a>
-
-      <?php
-    }
-    ?>
-  </div>
-    <?php print t("Or share following details."); ?>
-  <div class="name-email-continer">
-    <div class="webform-name-field user-name">
-      <?php print drupal_render($form['submitted']['name']); ?>
     </div>
-    <div class="webform-name-field user-email">
-      <?php print drupal_render($form['submitted']['email']); ?>
+    <?php print t("<div class=\"or-share-detail\">OR share following details.</div>"); ?>
+    <div class="name-email-continer">
+      <div class="webform-name-field user-name">
+        <?php print drupal_render($form['submitted']['name']); ?>
+      </div>
+      <div class="webform-name-field user-email">
+        <?php print drupal_render($form['submitted']['email']); ?>
+      </div>
     </div>
-  </div>
-  <?php
+    <?php
 // Print out the main part of the form.
 // Feel free to break this up and move the pieces within the array.
-  print drupal_render($form['submitted']);
+    print drupal_render($form['submitted']);
 
 // Always print out the entire $form. This renders the remaining pieces of the
 // form that haven't yet been rendered above.
-  print drupal_render_children($form);
-  ?>
+    print drupal_render_children($form);
+    ?>
+  </div>
 </div>

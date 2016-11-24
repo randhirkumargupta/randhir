@@ -5187,7 +5187,7 @@ footer .footer-copyright {
   border: 1px solid #dddddd;
   padding-bottom: 10px;
 }
-.magazin-lhs-topa:hover {
+.magazin-lhs-top a:hover {
   color: #193984;
 }
 .magazin-lhs-top .magazin-top {
@@ -8499,6 +8499,7 @@ footer .footer-copyright {
   width: 90px;
   display: inline-block;
   text-align: right;
+  margin-right: 0;
 }
 .static-feedback-from .name-email-continer > div.user-email {
   float: right;
@@ -8509,7 +8510,7 @@ footer .footer-copyright {
   font-weight: 500;
 }
 .static-feedback-from .name-email-continer input[type="text"] {
-  width: 285px;
+  width: 275px;
   height: 40px;
 }
 .static-feedback-from .form-submit {
@@ -8553,8 +8554,11 @@ footer .footer-copyright {
   vertical-align: top;
   float: left;
 }
-.static-feedback-from .webform-name-field.feedback .form-textarea {
-  width: 88%;
+.static-feedback-from .webform-name-field.feedback .form-textarea-wrapper {
+  width: 86%;
+}
+.static-feedback-from .webform-name-field.feedback .form-textarea-wrapper .form-textarea {
+  width: 100%;
 }
 .static-feedback-from .webform-submit-social {
   text-align: center;
