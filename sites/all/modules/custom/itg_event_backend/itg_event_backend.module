@@ -868,6 +868,16 @@ function itg_event_backend_menu() {
         'page callback' => 'itg_event_backend_page',
         'access callback' => TRUE,
     );
+    $items['speaker-details'] = array(
+        'page callback' => 'itg_event_backend_page',
+        'title' => 'Speaker Details',
+        'access callback' => TRUE,
+    );
+    $items['sponsor-details'] = array(
+        'page callback' => 'itg_event_backend_page',
+        'title' => 'Sponsor Details',
+        'access callback' => TRUE,
+    );
     return $items;
 }
 
