@@ -13,13 +13,13 @@
  */
 function itg_widget_action_info() {
   return array(
-      'itg_widget_categories_wise_node_group' => array(
-          'type' => 'entity',
-          'label' => t('Add nodes by category wise'),
-          'configurable' => TRUE,
-          'vbo_configurable' => FALSE,
-          'triggers' => array('any'),
-      ),
+    'itg_widget_categories_wise_node_group' => array(
+      'type' => 'entity',
+      'label' => t('Add nodes by category wise'),
+      'configurable' => TRUE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+    ),
   );
 }
 
@@ -36,23 +36,23 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
   // Confirm message is added for altered form.
   // For nodequeue bulk operation message is added from itg_widget.main.js.
   $form['confirm_message'] = array(
-      '#markup' => t("<p class='widget-confirm-message'>Are you sure you want add this content ?</p>"),
+    '#markup' => t("<p class='widget-confirm-message'>Are you sure you want add this content ?</p>"),
   );
   $form['widget_name'] = array(
-      '#type' => 'select',
-      '#options' => array("$widget" => "widget"),
-      '#weight' => -1,
-      '#attributes' => array("style" => array("display:none")),
+    '#type' => 'select',
+    '#options' => array("$widget" => "widget"),
+    '#weight' => -1,
+    '#attributes' => array("style" => array("display:none")),
   );
 
 
   // Adding extra field for related content.
   if ($current_display == 'big_story_format' && ($_GET['type'] != 'story' || !isset($_GET['type']))) {
     $form['related_content'] = array(
-        '#type' => 'textfield',
-        '#title' => t("Related content."),
-        '#attributes' => array("placeholder" => t("Enter node id by server prefix")),
-        '#description' => t("Node ids must be comma seperated values ex server1_123,server2_1024, server3_777."),
+      '#type' => 'textfield',
+      '#title' => t("Related content."),
+      '#attributes' => array("placeholder" => t("Enter node id by server prefix")),
+      '#description' => t("Node ids must be comma seperated values ex server1_123,server2_1024, server3_777."),
     );
   }
   return $form;
@@ -128,7 +128,7 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     module_load_include('inc', 'itg_widget', 'includes/itg_issue_base_magazin_widget');
     save_issue_magazin_widget_data($form_state);
   }
-   elseif ($current_display == 'most_read_widget_contents') {
+  elseif ($current_display == 'most_read_widget_contents') {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_read');
     save_most_read_widget_data($form_state);
   }
@@ -140,14 +140,18 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_feature_content_section');
     save_feature_content_section_widget_data($form_state);
   }
+  elseif ($current_display == 'user_selection_for_section') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_user');
+    save_default_user_for_every_section($form_state);
+  }
   else {
     // Logic to skip nodes which are already in itg_widget_order table
     $nodes_already = db_select('itg_widget_order', 'iwo')
-                    ->condition('iwo.content_type', $content_type)
-                    ->condition('iwo.widget', $widget_name)
-                    ->condition('iwo.cat_id', $cat_id)
-                    ->fields('iwo', array('nid'))
-                    ->execute()->fetchAll();
+            ->condition('iwo.content_type', $content_type)
+            ->condition('iwo.widget', $widget_name)
+            ->condition('iwo.cat_id', $cat_id)
+            ->fields('iwo', array('nid'))
+            ->execute()->fetchAll();
     foreach ($nodes_already as $val) {
       $vals[] = $val->nid;
     }
@@ -161,14 +165,14 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     if (count($selected_node_data)) {
       foreach ($selected_node_data as $node) {
         db_insert('itg_widget_order')
-                ->fields(array(
-                    'nid' => $node,
-                    'widget' => $widget_name,
-                    'content_type' => ($content_type) ? $content_type : " ",
-                    'cat_id' => ($cat_id) ? $cat_id : 0,
-                    'weight' => 0,
-                ))
-                ->execute();
+            ->fields(array(
+              'nid' => $node,
+              'widget' => $widget_name,
+              'content_type' => ($content_type) ? $content_type : " ",
+              'cat_id' => ($cat_id) ? $cat_id : 0,
+              'weight' => 0,
+            ))
+            ->execute();
       }
       drupal_set_message(t("Nodes has been saved"));
     }
@@ -177,6 +181,6 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     }
   }
   return array(
-      'form_values' => $form_state['values'],
+    'form_values' => $form_state['values'],
   );
 }
