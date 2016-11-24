@@ -136,7 +136,6 @@ function itg_ask_expert_form_custom_callback($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_ask_expert_views_pre_render(&$view) {
-
   // add link for in queue and history
   if ($view->name == "ask_an_expert" && ($view->current_display == 'page' || $view->current_display == 'page_2')) {
     $header_content_ask_an_expert = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -305,13 +304,15 @@ function itg_ask_expert_block_view($delta = '') {
   switch ($delta) {
     case 'custom_ask_expert_form_block':
       $arg = arg();
-      
+
       if ($arg[0] == 'node' && is_numeric($arg[1])) {
         $node = node_load($arg[1]);
         if ($node->type == 'story') {
           $tid = $node->field_primary_category['und'][0]['value'];
-          $block['content'] .= drupal_render(user_details_for_section($arg, $tid));
-          $block['content'] = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
+          if (isset($tid) && !empty($tid)) {
+            $block['content'] .= drupal_render(user_details_for_section($arg, $tid));
+            $block['content'] = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
+          }
         }
       }
       elseif ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) {
@@ -326,8 +327,16 @@ function itg_ask_expert_block_view($delta = '') {
       break;
     case 'ask_an_expert_details_page_block':
       $arg = arg();
-      $block['content'] = drupal_render(user_details_for_section($arg, $arg[2]));
-      $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $arg[2]));
+      if ($arg[0] == 'ask-an-expert-question-answer-details' && is_numeric($arg[2])) {
+        $term = taxonomy_term_load($arg[2]);
+        $vid = $term->vid;
+        if ($vid == CATEGORY_MANAGMENT) {
+          $block['content'] = drupal_render(user_details_for_section($arg, $arg[2]));
+          $block['content'] .= '<div class="question-form-title"><h3>Ask a question</h3></div>';
+          $block['content'] .= drupal_render(drupal_get_form('itg_custom_ask_an_expert_form', $arg[2]));
+        }
+      }
+
       break;
   }
 
@@ -346,7 +355,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
   if (isset($_GET['section']) && !empty($_GET['section'])) {
     $cat_id = $_GET['section'];
   }
-  $askquestion = itg_custom_get_ask_quation_data($cat_id);
+  //$askquestion = itg_custom_get_ask_quation_data($cat_id);
 
   $form['#prefix'] = '<div id="expert_global_config">';
   $form['#suffix'] = '</div>';
@@ -391,13 +400,13 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
       'callback' => 'expert_form_ajax_handler',
     ),
   );
-  if ($askquestion->title != "") {
-    $form['html'] = array(
-      '#type' => 'markup',
-      '#markup' => '<div class="expert-question">' . ucfirst($askquestion->title) . '</div><div class="question-link">' . l('Click here to know the answer', $base_url . '/' . drupal_get_path_alias("ask-an-expert-question-answer/{$askquestion->field_user_source_term_id_value}")) . '</div>',
-      '#tree' => true,
-    );
-  }
+//  if ($askquestion->title != "") {
+//    $form['html'] = array(
+//      '#type' => 'markup',
+//      '#markup' => '<div class="expert-question">' . ucfirst($askquestion->title) . '</div><div class="question-link">' . l('Click here to know the answer', $base_url . '/' . drupal_get_path_alias("ask-an-expert-question-answer/{$askquestion->field_user_source_term_id_value}")) . '</div>',
+//      '#tree' => true,
+//    );
+//  }
 
   return $form;
 }
@@ -514,8 +523,16 @@ function user_details_for_section($url, $tid) {
         $imageUrl = image_style_url('user_picture', $file);
       }
       else {
-        $imageUrl = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/deafult-user.png';
+        $imageUrl = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default-user.png';
       }
+
+      $block[] = array(
+        'details' => array(
+          '#prefix' => '',
+          '#type' => 'markup',
+          '#markup' => '<div class="section-user-details"><span class="our-expert">Our Expert</span><img class="section-user-image" src="' . $imageUrl . '"/><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . '</div></div>',
+        ),
+      );
       if ($url[0] == 'ask-an-expert-question-answer-details') {
         $like = itg_flag_get_count($url[1], 'like_count');
         $dislike = itg_flag_get_count($url[1], 'dislike_count');
@@ -529,21 +546,15 @@ function user_details_for_section($url, $tid) {
         $like = "no-of-likes_" . $url[1];
         $dislike = "no-of-dislikes_" . $url[1];
 
-        $block = array(
+        $block[] = array(
           'message' => array(
             '#type' => 'markup',
-            '#markup' => '<div class="ask-an-expert-like-dislike"><button id="like_count" rel="' . $url[1] . '">Like <span id=' . $like . '>' . $like_count . '</span> </button> <button id="dislike_count" rel="' . $url[1] . '">Dislike <span id="' . $dislike . '">' . $dislike_count . '</span></button><p class="error-msg" id="' . $pid . '"></p></div>',
+            '#markup' => '<div class="ask-an-expert-like-dislike"><button id="like_count" rel="' . $url[1] . '"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+             <span id=' . $like . '>' . $like_count . '</span> </button> <button id="dislike_count" rel="' . $url[1] . '"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> <span id="' . $dislike . '">' . $dislike_count . '</span></button><p>DO YOU LIKE THIS ANSWER?</p><p class="error-msg" id="' . $pid . '"></p></div>',
             '#suffix' => '',
           ),
         );
       }
-      $block = array(
-        'details' => array(
-          '#prefix' => '',
-          '#type' => 'markup',
-          '#markup' => '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '"/><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . '</div></div>',
-        ),
-      );
     }
   }
 
