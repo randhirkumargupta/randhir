@@ -16,6 +16,7 @@
  * - $form['details']: Internal information stored by Webform.
  */
 global $base_url;
+global $user;
 ?>
 <div class="static-feedback-from">
   <?php print t("<h1>Send us feedback <span>Field marked with <i>*</i> are manadatory.</span></h1>"); ?>
@@ -25,28 +26,31 @@ global $base_url;
         <?php print drupal_render($form['submitted']['feedback']); ?>
       </div>
     </div>
-    <div class="webform-submit-social">
-      <?php print t("<div class=\"submit-feedback\"><span>Submit feedback via</span></div>"); ?>
-      <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
-        <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
-        <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
+    <!-- Check for user logged in or not -->
+    <?php if (!$user->uid) : ?>
+      <div class="webform-submit-social">
+        <?php print t("<div class=\"submit-feedback\"><span>Submit feedback via</span></div>"); ?>
+        <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
+          <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+          <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
-        <?php
-      }
-      else {
+          <?php
+        }
+        else {
+          ?>
+          <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon">
+            <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/twitter.png' />
+            <img  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/facebook.png' />
+            <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/google-plus.png' />
+            <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/linked.png' />
+          </a>
+
+          <?php
+        }
         ?>
-        <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon">
-          <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/twitter.png' />
-          <img  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/facebook.png' />
-          <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/google-plus.png' />
-          <img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/linked.png' />
-        </a>
-
-        <?php
-      }
-      ?>
-    </div>
-    <?php print t("<div class=\"or-share-detail\">OR share following details.</div>"); ?>
+      </div>
+      <?php print t("<div class=\"or-share-detail\">OR share following details.</div>"); ?>
+    <?php endif; ?>
     <div class="name-email-continer">
       <div class="webform-name-field user-name">
         <?php print drupal_render($form['submitted']['name']); ?>
