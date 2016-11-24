@@ -11,7 +11,7 @@
  */
 function itg_common_tv_time($id = '') {
 
-  $final_id = date('Y/m/d', strtotime($id));
+ $final_id = date('Y/m/d', strtotime($id));
   if (function_exists('mongodb')) {
     $db = mongodb();
     $people = $db->tv_schedule;
@@ -25,7 +25,7 @@ function itg_common_tv_time($id = '') {
       $data[$document['time']] = $document['time'];
     }
     return $data;
-  }
+  } 
 }
 
 /**

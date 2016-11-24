@@ -9173,7 +9173,6 @@ div.node #comments h2 {
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent {
   height: 132px;
   overflow: hidden;
-  z-index: 9999;
   background-color: #fff;
   transition: all .3s;
 }
@@ -9427,41 +9426,4 @@ div.node #comments h2 {
   display: inline-block;
   vertical-align: top;
   width: 100%;
-}
-
-#itg-sso-user-email-form {
-  margin-bottom: 10px;
-  display: inline-block;
-}
-#itg-sso-user-email-form input[type="text"] {
-  width: 50%;
-}
-#itg-sso-user-email-form h3 {
-  margin: 20px 0;
-  text-transform: uppercase;
-}
-#itg-sso-user-email-form .form-submit {
-  background: #000;
-  border: none;
-  color: #fff;
-  padding: 8px 20px;
-  margin-top: 15px;
-}
-#itg-sso-user-email-form #fotp .form-item-fotp {
-  max-width: 100%;
-  margin-bottom: 20px;
-}
-#itg-sso-user-email-form #fotp #forgototpclickme {
-  margin: 10px 20px 10px 0px;
-}
-
-#views-exposed-form-report-filed-content-page #edit-date-filter-wrapper {
-  width: auto;
-}
-#views-exposed-form-report-filed-content-page #edit-date-filter-wrapper #edit-date-filter-min-wrapper, #views-exposed-form-report-filed-content-page #edit-date-filter-wrapper #edit-date-filter-max-wrapper {
-  display: inline-block;
-  vertical-align: top;
-}
-#views-exposed-form-report-filed-content-page #edit-date-filter-wrapper #edit-date-filter-min-wrapper {
-  margin-right: 15px;
 }
