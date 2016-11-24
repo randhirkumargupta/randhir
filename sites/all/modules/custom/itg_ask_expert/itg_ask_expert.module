@@ -528,9 +528,9 @@ function user_details_for_section($url, $tid) {
 
       $block[] = array(
         'details' => array(
-          '#prefix' => '',
+          '#prefix' => '<div class="ask-user-detail">',
           '#type' => 'markup',
-          '#markup' => '<div class="section-user-details"><span class="our-expert">Our Expert</span><img class="section-user-image" src="' . $imageUrl . '"/><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . '</div></div>',
+          '#markup' => '<h4>Our Expert</h4><div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '"/><div class="section-user-name">' . $userDetails->field_first_name['und'][0]['value'] . '</div></div>',
         ),
       );
       if ($url[0] == 'ask-an-expert-question-answer-details') {
@@ -551,7 +551,7 @@ function user_details_for_section($url, $tid) {
             '#type' => 'markup',
             '#markup' => '<div class="ask-an-expert-like-dislike"><button id="like_count" rel="' . $url[1] . '"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
              <span id=' . $like . '>' . $like_count . '</span> </button> <button id="dislike_count" rel="' . $url[1] . '"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> <span id="' . $dislike . '">' . $dislike_count . '</span></button><p>DO YOU LIKE THIS ANSWER?</p><p class="error-msg" id="' . $pid . '"></p></div>',
-            '#suffix' => '',
+            '#suffix' => '</div>',
           ),
         );
       }
