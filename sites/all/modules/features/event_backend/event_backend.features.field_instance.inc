@@ -605,7 +605,7 @@ function event_backend_field_default_field_instances() {
     'bundle' => 'event_backend',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add event photos.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -650,7 +650,7 @@ function event_backend_field_default_field_instances() {
     'bundle' => 'event_backend',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add multiple short & crisp videos.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2386,6 +2386,8 @@ function event_backend_field_default_field_instances() {
   t('Menu Font Color');
   t('No. of Tickets');
   t('Photo');
+  t('Please add event photos.');
+  t('Please add multiple short & crisp videos.');
   t('Program Schedule');
   t('Program Title color');
   t('Programme');

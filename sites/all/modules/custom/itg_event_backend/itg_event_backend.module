@@ -16,6 +16,8 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
 
     // Form alter for event backend node
     if ($form_id == "event_backend_node_form") {
+      $form['field_associate_event_photo']['#suffix'] = '<div class="event-photo-des description">'.$form['field_associate_event_photo'][LANGUAGE_NONE]['#description'].'</div>';
+      $form['field_associate_event_video']['#suffix'] = '<div class="event-video-des description">'.$form['field_associate_event_video'][LANGUAGE_NONE]['#description'].'</div>';
         $form['#after_build'][] = 'itg_event_backend_after_build';
         array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
         $form['actions']['cancel'] = array(
