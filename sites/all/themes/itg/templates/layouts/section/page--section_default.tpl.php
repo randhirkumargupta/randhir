@@ -119,7 +119,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     </div>
     <?php endif; ?>
 
-    <div class="row itg-top-section">
+    <div class="row itg-top-section pos-rel">
+        <?php print render($page['vertical_menu']); ?>
         <div class="top-block">
 
             <div class="top-colum-2">
