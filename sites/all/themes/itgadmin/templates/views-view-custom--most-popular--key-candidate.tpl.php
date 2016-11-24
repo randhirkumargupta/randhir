@@ -1,15 +1,18 @@
 
 <?php
 foreach ($rows as $index => $row) {
+ 
 
     $consti[] = $row['cat_id'];
 }
 
 $resultdata = array_unique($consti);
+
 ?>
 <div class="key-candidate">
 
     <div class="list-state">   <?php
+    
         foreach ($resultdata as $key => $mainids) {
             $firstactive = "";
             if ($key == 0) {
@@ -21,15 +24,22 @@ $resultdata = array_unique($consti);
         ?>
     </div> 
     <?php
-    foreach ($rows as $index => $row) {
-        $term_data = taxonomy_term_load($row['cat_id']);
+   // p($rows);
+    foreach ($resultdata as $key => $mainids) {
         $first_show = "";
-            if ($index == 0) {
+            if ($key == 0) {
                 $first_show = "key-candidate-detail-first";
-            }
+            }?>
+         <div class="key-candidate-detail <?php echo $first_show;?> kc-<?php echo $mainids; ?>" id="">
+   
+    <?php foreach ($rows as $index => $row) {
+        if($row['cat_id']==$mainids)
+        {
+        $term_data = taxonomy_term_load($row['cat_id']);
+        
         ?> 
 
-        <div class="key-candidate-detail <?php echo $first_show;?>" id="kc-<?php echo $term_data->tid; ?>">
+       
             <ul>
                 <li><?php print $row['field_story_extra_large_image']; ?></li>
                 <li>
@@ -53,8 +63,7 @@ $resultdata = array_unique($consti);
                 </li>         
             </ul>
 
-        </div>
-<?php }; ?>
+        <?php }}  print '</div>';}; ?>
 
 
 </div>
@@ -66,7 +75,7 @@ $resultdata = array_unique($consti);
             jQuery(this).addClass('active');
             jQuery('.key-candidate-detail').hide();
             var getval = jQuery(this).attr('data-tag');
-            jQuery('#' + getval).show();
+            jQuery('.' + getval).show();
         });
     });
 </script>
