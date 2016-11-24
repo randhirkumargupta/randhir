@@ -310,8 +310,8 @@ function itg_ask_expert_block_view($delta = '') {
         if ($node->type == 'story') {
           $tid = $node->field_primary_category['und'][0]['value'];
           if (isset($tid) && !empty($tid)) {
-            $block['content'] .= drupal_render(user_details_for_section($arg, $tid));
-            $block['content'] = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
+            $block['content'] = drupal_render(user_details_for_section($arg, $tid));
+            $block['content'] .= drupal_get_form('itg_custom_ask_an_expert_form', $tid);
           }
         }
       }
@@ -320,8 +320,8 @@ function itg_ask_expert_block_view($delta = '') {
         $vid = $term->vid;
         if ($vid == CATEGORY_MANAGMENT) {
           $tid = $arg[2];
-          $block['content'] .= drupal_render(user_details_for_section($arg, $tid));
-          $block['content'] = drupal_get_form('itg_custom_ask_an_expert_form', $tid);
+          $block['content'] = drupal_render(user_details_for_section($arg, $tid));
+          $block['content'] .= drupal_get_form('itg_custom_ask_an_expert_form', $tid);
         }
       }
       break;
