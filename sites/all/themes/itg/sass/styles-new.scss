@@ -3158,7 +3158,7 @@ body.has-cart-popup{
     width: 20px;
   }
 }
-[id*="itg-personalization-edit-profile-form"]{
+[id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"]{
   max-width: 780px;
   margin: 0 auto;
   background-color: #f8f8f8;
@@ -3412,8 +3412,8 @@ body.has-cart-popup{
           div.description{
             color: #5f5f5f;
             font: 400 12px/16px Roboto;
-            margin-top: 35px;
-            padding-left: 160px;
+            margin-top: 8px;
+            padding-left: 270px;
           }
           span.file{
             display: inline-block;
@@ -3522,6 +3522,8 @@ body.has-cart-popup{
         font: 300 20px/28px Roboto;
         height: 41px;
         width: 170px;
+        margin: 30px auto 0;
+        display: block;
       }
     }
     .change-mobile, .change-email{
@@ -3537,6 +3539,72 @@ body.has-cart-popup{
         }
     }
 }
+[id*="itg-personalization-refer-a-friend-form"]{
+    fieldset{
+        border: none;
+        legend{
+            display: none;
+        }
+    }
+    [id*="edit-friend-fieldset-add-friend"]{
+        background: transparent;
+        border: none;
+        color: #075bbb;
+        font-size: 14px;
+        margin-top: 0;
+    }    
+    > div [id*="edit-submit"]{            
+            margin: 60px auto 0;
+            display: block;
+    }    
+}
+#block-itg-personalization-personalization-edit-profile, #block-itg-personalization-personalization-refer-friend{    
+    max-width: 780px;
+    margin: 40px auto 0;
+    ul{
+        list-style: none;
+        text-align: left;
+    }
+    li{
+        @include display-inline;        
+        a{
+            text-align: center;
+            padding: 10px;    
+            font-family: $itg-roboto;
+            font-size: 14px;
+            color: #1a3c8d;
+            padding: 15px 20px;
+            text-transform: uppercase;
+            display: block;
+            &.active{
+                background: #f8f8f8;;
+            }
+        }
+    }    
+}
+#block-itg-personalization-personalization-refer-friend{
+    .social-edit{
+        background: #f8f8f8;
+        text-align: center;
+        font-family: $itg-roboto;
+        padding-top:60px;
+        color:#757575;
+        ul{
+            display: inline-block;
+            li{
+                padding: 0 10px;               
+                &:first-child{
+                    margin-top: 15px;
+                }
+            }
+        }
+        .more-option{
+            margin-top: 40px;
+        }
+    }
+}
+
+
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox{
   padding: 0;
 }
