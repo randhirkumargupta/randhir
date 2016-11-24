@@ -292,7 +292,9 @@ function itg_story_after_build($form, &$form_state) {
               jQuery("#edit-path-pathauto").attr("checked", true);            
             });', array('type' => 'inline', 'scope' => 'footer'));
   }
-
+  
+  unset($form['field_story_associate_lead'][LANGUAGE_NONE]['_none']);
+  
   $form['field_story_select_magazine']['und']['#title'] = t('Select magazine') . '<span class="form-required" title="This field is required."> *</span>';
   $form['field_story_magazine_kicker_text']['und']['#title'] = t('Magazine kicker') . '<span class="form-required" title="This field is required."> *</span>';
 
