@@ -444,6 +444,8 @@ else
   $handler = $view->new_display('page', 'Ask an expert question answer', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Ask an expert question answer';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'ask-an-expert-question-answer';
   $handler->display->display_options['display_description'] = 'Ask an expert question answer';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
@@ -502,8 +504,7 @@ else
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['label'] = '';
-  $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '20';
-  $handler->display->display_options['fields']['field_user_message']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '200';
   $handler->display->display_options['fields']['field_user_message']['alter']['more_link'] = TRUE;
   $handler->display->display_options['fields']['field_user_message']['alter']['more_link_text'] = 'More[+]';
   $handler->display->display_options['fields']['field_user_message']['alter']['more_link_path'] = 'ask-an-expert-question-answer-details/[nid]/[field_user_source_term_id]';
@@ -737,6 +738,8 @@ else
   $handler = $view->new_display('page', 'Ask an expert question answer details', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Ask an expert question answer details';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'ask-an-expert-question-answer ask-an-expert-detailspage';
   $handler->display->display_options['display_description'] = 'Ask an expert question answer details';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
@@ -835,6 +838,8 @@ else
   $handler = $view->new_display('page', 'Ask an expert question answer', 'page_4');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Ask an expert question answer';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'ask-an-expert-question-answer';
   $handler->display->display_options['display_description'] = 'Ask an expert question answer';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
@@ -869,6 +874,13 @@ else
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Source term id */
+  $handler->display->display_options['fields']['field_user_source_term_id']['id'] = 'field_user_source_term_id';
+  $handler->display->display_options['fields']['field_user_source_term_id']['table'] = 'field_data_field_user_source_term_id';
+  $handler->display->display_options['fields']['field_user_source_term_id']['field'] = 'field_user_source_term_id';
+  $handler->display->display_options['fields']['field_user_source_term_id']['label'] = '';
+  $handler->display->display_options['fields']['field_user_source_term_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_user_source_term_id']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -887,11 +899,11 @@ else
   $handler->display->display_options['fields']['field_user_message']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['fields']['field_user_message']['field'] = 'field_user_message';
   $handler->display->display_options['fields']['field_user_message']['label'] = '';
-  $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '20';
+  $handler->display->display_options['fields']['field_user_message']['alter']['max_length'] = '200';
   $handler->display->display_options['fields']['field_user_message']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['field_user_message']['alter']['more_link'] = TRUE;
   $handler->display->display_options['fields']['field_user_message']['alter']['more_link_text'] = 'More[+]';
-  $handler->display->display_options['fields']['field_user_message']['alter']['more_link_path'] = 'ask-an-expert-question-answer-details/[nid]';
+  $handler->display->display_options['fields']['field_user_message']['alter']['more_link_path'] = 'ask-an-expert-question-answer-details/[nid]/[field_user_source_term_id]';
   $handler->display->display_options['fields']['field_user_message']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_user_message']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_user_message']['element_wrapper_type'] = 'div';
