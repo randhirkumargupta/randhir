@@ -5400,7 +5400,34 @@ footer{
     }   
 }
 #block-views-event-subsite-speaker-block{
-    
+    .views-row{
+        @include calculate-width(3);
+        @include float(left);
+        .view-content{            
+            @include clearfix;
+            .views-row{                
+                @include calculate-width(1);
+                @include float(none);
+                @include text-align(center);
+                img{
+                    border-radius: 100%;
+                    border: 1px solid #ddd;
+                }
+                .views-field-title, .views-field-field-story-new-title{
+                    font-size: 11px;
+                    font-weight: 700;
+                    font-family: roboto;
+                    color: #000;
+                    margin-top: 10px;
+                    text-transform: uppercase;
+                }
+                .views-field-field-story-new-title{
+                    color: #ef2a24;  
+                    margin-top:0; 
+                }
+            }
+        }
+    }
 }
 /*CSS end for event page index*/
 
@@ -7321,3 +7348,23 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*CSS End ask an expert detail*/
+
+/*css start related content*/
+#block-itg-front-end-common-related-photo-block{
+    @include sidebar-heading;
+    h3{
+        display: block;
+        padding-left: 0;
+        margin-bottom: 20px;
+    }
+    ul{
+        @extend .list-none;
+    }
+    .views-field-ds-changed{
+        display: block;
+        font-size: 12px;
+        color: #b1b1b1;
+        padding: 8px 0 5px;
+    }
+}
+/*css end related content*/
