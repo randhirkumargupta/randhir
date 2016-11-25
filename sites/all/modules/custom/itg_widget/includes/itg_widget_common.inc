@@ -97,6 +97,24 @@ function itg_widgets_custom_variables() {
     '#size' => 20,
     '#maxlength' => 20,
   );
+
+  $form['we_may_suggest_block_condition'] = array(
+    '#type' => 'textarea',
+    '#title' => t('We may suggest block condition for arg(1)'),
+    '#default_value' => variable_get('we_may_suggest_block_condition'),
+  );
+
+  $form['watch_right_now_block_condition'] = array(
+    '#type' => 'textarea',
+    '#title' => t('watch right now block condition for arg(1)'),
+    '#default_value' => variable_get('watch_right_now_block_condition'),
+  );
+
+  $form['top_takes_block_condition'] = array(
+    '#type' => 'textarea',
+    '#title' => t('top takes block condition for arg(1)'),
+    '#default_value' => variable_get('top_takes_block_condition'),
+  );
   return system_settings_form($form);
 }
 
@@ -223,11 +241,39 @@ function move_node_from_widget($widget_name, $content_type, $cat_tid, $nid) {
  * @param int $nid
  */
 function remove_extra_field_value_for_so_sorry($nid) {
-  $num_updated = db_update('itg_widget_order')
+  $extra_field_value = get_so_sorry_extra_for_nid($nid);
+  db_update('itg_widget_order')
       ->fields(array('extra' => " "))
       ->condition('nid', $nid)
       ->condition('widget', 'so_sorry_widget')
       ->execute();
+//  if ($extra_field_value == 'feature' && !isset($_GET['action'])) {
+//    // Insert recent created node.
+//    $recent_created_node = get_recent_created_node_for_sosorry();
+//    if ($recent_created_node) {
+//      // If node found in sosorry widget then need to update extra colom.
+//      if (check_nid_in_sosorry($recent_created_node)) {
+//        db_update('itg_widget_order')
+//            ->fields(array('extra' => "feature"))
+//            ->condition('nid', $recent_created_node)
+//            ->condition('widget', 'so_sorry_widget')
+//            ->execute();
+//      }
+//      // If node is not in sosorry widget then need to insert new entry.
+//      else {
+//        db_insert('itg_widget_order')
+//            ->fields(array(
+//              'nid' => $recent_created_node,
+//              'widget' => 'so_sorry_widget',
+//              'content_type' => "",
+//              'cat_id' => 0,
+//              'weight' => $recent_created_node,
+//              'extra' => "feature",
+//            ))
+//            ->execute();
+//      }
+//    }
+//  }
 //drupal_set_message(t("Node has been moved"));
   drupal_goto($_SERVER['HTTP_REFERER']);
 }
@@ -346,17 +392,26 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
 
   if ($form_id == 'views_form_key_candidate_special_key_candidate_widget_contents') {
+    $pre_fix = "";
+    $suf_fix = "";
+    $state_class = "visible";
     $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
     $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
     $states_neame[] = 'Select';
     foreach ($terms as $values) {
       $states_neame[$values->tid] = $values->name;
     }
+    if (isset($_POST['state_value'])) {
+      $pre_fix = "<div style='display:none'>";
+      $suf_fix = "</div>";
+    }
+
     $form['state_value'] = array(
       '#type' => 'select',
       '#title' => 'State',
       '#options' => $states_neame,
-        //'#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+      '#prefix' => $pre_fix,
+      '#suffix' => $suf_fix,
     );
   }
   $setting = array();
@@ -453,11 +508,11 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-1' || $form['#id'] == 'views-exposed-form-recipe-management-page-2') {
       $sydication_field_name = 'field_story_syndication_value_op';
       $query_url = array("title" => "", "field_recipe_content_type_value" => "All", "field_story_syndication_value_op" => "all", "field_story_syndication_value" => "Yes");
-      drupal_add_css(".form-item-field-story-syndication-value {display:none !important}" ,"inline");
+      drupal_add_css(".form-item-field-story-syndication-value {display:none !important}", "inline");
     }
     if ($form['#id'] == 'views-exposed-form-recipe-management-page') {
       $query_url = array("field_story_syndication_value_1_op" => "all");
-      drupal_add_css(".form-item-field-story-syndication-value-1 {display:none !important}" ,"inline");
+      drupal_add_css(".form-item-field-story-syndication-value-1 {display:none !important}", "inline");
     }
 
     unset($form[$sydication_field_name]['#options']);
@@ -586,7 +641,9 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $form['category_tid']['#options'] = $op;
   }
 
-
+  if ($form_state['build_info']['args'][0]->type == 'page' && $form_id == 'page_node_form' && arg(2) == 'edit') {
+    drupal_add_css("div.vertical-tabs {display:none}", 'inline');
+  }
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
@@ -721,8 +778,8 @@ function get_sessions_of_ticked_nodes(&$form) {
                 sessionids=sessionids.split(",");
                 }
                 jQuery.each(sessionids, function( index, value ) {
-                 jQuery(".fieldset-wrapper").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
-
+                jQuery(".nodes_id_container").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
+                
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
     );
   }
@@ -798,6 +855,9 @@ function itg_widget_theme() {
     ),
     'auto_reviews' => array(
       'template' => 'templates/auto-reviews',
+    ),
+    'graph_election' => array(
+      'template' => 'templates/itg-widget-graph-election',
     ),
     'itg_widget_politoons' => array(
       'template' => 'templates/itg-widget-politoons',
@@ -1102,15 +1162,6 @@ function itg_widget_views_query_alter(&$view, &$query) {
     array_push($query->where[1]['conditions'], $program_where_condition);
   }
 
-  if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_page') {
-// Handling the query if other videos are clicked but those are not feature.
-// But they are in itg_widget_order table as well as widget value is equal to so_sorry_widget
-    $arg = arg();
-    if (isset($arg[1])) {
-      unset($query->where[1]['conditions'][1]);
-    }
-  }
-
   if ($view->name == 'anchor_option_view') {
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
   }
@@ -1152,11 +1203,25 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_feature') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('so_sorry_category_id_for_widget');
+    foreach ($query->where[1]['conditions'] as $keys => $condtions) {
+      if ($condtions['field'] == 'taxonomy_index.tid') {
+        $query->where[1]['conditions'][$keys]['value'] = variable_get('so_sorry_category_id_for_widget');
+      }
+    }
   }
 
   if ($view->name == 'so_sorry' && $view->current_display == 'so_sorry_page') {
-    $query->where[1]['conditions'][2]['value'] = variable_get('so_sorry_category_id_for_widget');
+    // Handling the query if other videos are clicked but those are not feature.
+    // But they are in itg_widget_order table as well as widget value is equal to so_sorry_widget
+    $arg = arg();
+    if (isset($arg[1])) {
+      unset($query->where[1]['conditions'][1]);
+    }
+    foreach ($query->where[1]['conditions'] as $keys => $condtions) {
+      if ($condtions['field'] == 'taxonomy_index.tid') {
+        $query->where[1]['conditions'][$keys]['value'] = variable_get('so_sorry_category_id_for_widget');
+      }
+    }
   }
 
   if ($view->name == 'so_sorry' && $view->current_display == 'the_remix') {
@@ -1164,12 +1229,62 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'so_sorry' && $view->current_display == 'most_watched') {
+    $arg = arg();
     $query->where[1]['conditions'][3]['value'] = variable_get('so_sorry_category_id_for_widget');
+
+    if (empty($arg[1])) {
+      // Logic to skip or add feature video in most viewed list.
+      $count_feature = count_sosorry_feature();
+      if ($count_feature == 0) {
+        $recent_created_nid_for_sorry = get_recent_created_node_for_sosorry();
+        $not_in_array_condition = array(
+          'field' => 'node.nid',
+          'value' => $recent_created_nid_for_sorry,
+          'operator' => '!=',
+        );
+        $query->where[1]['conditions'][] = $not_in_array_condition;
+      }
+      else {
+        $feature_value = get_feature_nid_in_sosorry();
+        $not_in_array_condition = array(
+          'field' => 'node.nid',
+          'value' => $feature_value,
+          'operator' => '!=',
+        );
+        $query->where[1]['conditions'][] = $not_in_array_condition;
+      }
+    }
   }
   if ($view->name == 'so_sorry' && $view->current_display == 'you_will_love_these') {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
-  }
+    // Skip all nodes which are in most viewed.
+    // Not need to handle feature video because its has been already altered.
+    // This code must be below the most viewed query alter.
+    // Result of most viewed page allways needs to skiped.
+    $result = views_get_view_result('so_sorry', 'most_watched');
+    //array_push($result, $std_obj);
+    foreach ($result as $data) {
+      if (isset($data->nid)) {
+        $not_in_array_condition = array(
+          'field' => 'node.nid',
+          'value' => $data->nid,
+          'operator' => '!=',
+        );
+      }
+      $query->where[1]['conditions'][] = $not_in_array_condition;
+    }
 
+    // handle case if fearute is marked in.
+    $feature_value = get_feature_nid_in_sosorry();
+    if (!empty($feature_value)) {
+      $not_in_array_condition = array(
+        'field' => 'node.nid',
+        'value' => $feature_value,
+        'operator' => '!=',
+      );
+      $query->where[1]['conditions'][] = $not_in_array_condition;
+    }
+  }
 
   if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
     if (!empty($_GET['nid']) && empty($_GET['title'])) {
@@ -1256,7 +1371,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
       $query->where[1]['conditions'][3]['value'] = $section;
     }
   }
-   if ($view->name == 'most_popular' && ($view->current_display == 'election_graph' )) {
+  if ($view->name == 'most_popular' && ($view->current_display == 'election_graph' )) {
     global $theme;
 
     if ($theme != 'seven') {
@@ -1270,7 +1385,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
         $section = $_GET['section_name'];
       }
 
-      $query->where[1]['conditions'][1]['value'] = $section;
+      $query->where[1]['conditions'][2]['value'] = $section;
     }
   }
 
@@ -2166,6 +2281,12 @@ function get_rhs_block_display_condtion($delta = '') {
   $item = menu_get_item();
   $page_argument = $item['page_arguments'];
   $ipl_category = array();
+  $we_may_suggest_display_nodes = variable_get('we_may_suggest_block_condition');
+  $we_may_suggest_node_array = explode(",", $we_may_suggest_display_nodes);
+  $watch_right_now_display_nodes = variable_get('watch_right_now_block_condition');
+  $watch_right_now_node_array = explode(",", $watch_right_now_display_nodes);
+  $top_takes_display_nodes = variable_get('top_takes_block_condition');
+  $top_takes_node_array = explode(",", $top_takes_display_nodes);
   $story_category = $page_argument[0]->field_story_category['und'];
   foreach ($story_category as $category) {
     $ipl_category[] = $category['tid'];
@@ -2179,17 +2300,17 @@ function get_rhs_block_display_condtion($delta = '') {
 
     switch ($delta) {
       case 'watch_right_now_videos_widget':
-        if ($arg[0] == 'programmes' || $arg[0] == 'online-archive-story' || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+        if (in_array($arg[1], $watch_right_now_node_array) || $arg[0] == 'programmes' || $arg[0] == 'online-archive-story' || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
           return TRUE;
         }
         break;
       case 'top_takes_videos_widget':
-        if ($arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+        if (in_array($arg[1], $top_takes_node_array) || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
           return TRUE;
         }
         break;
       case 'we_may_suggest':
-        if ($arg[0] == 'itg-quiz' || $arg[0] == 'online-archive-story' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+        if (in_array($arg[1], $we_may_suggest_node_array) || $arg[0] == 'itg-quiz' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
           return TRUE;
         }
         break;
@@ -2246,6 +2367,24 @@ function itg_widget_node_insert($node) {
             ->execute();
       }
     }
+//
+//    // If there is not any feature in sosorry widget then insert during node insert.
+//    if ($node->type == 'videogallery') {
+//      // Handle sosorry widget ITG-2043
+//      $number_of_feature = count_sosorry_feature();
+//      if (!$number_of_feature) {
+//        db_insert('itg_widget_order')
+//            ->fields(array(
+//              'nid' => $nid,
+//              'widget' => 'so_sorry_widget',
+//              'content_type' => "",
+//              'cat_id' => 0,
+//              'weight' => $nid,
+//              'extra' => "feature",
+//            ))
+//            ->execute();
+//      }
+//    }
   }
 }
 
@@ -2391,4 +2530,70 @@ function get_max_weight_of_politoons() {
   $max_query->condition('view_display', 'so_sorry_politoons');
   $max_result = $max_query->execute()->fetchField();
   return $max_result;
+}
+
+/**
+ * Gives extra coloum value so sorry widget.
+ * @param int $nid
+ * @return string
+ */
+function get_so_sorry_extra_for_nid($nid) {
+  $query = db_select('itg_widget_order', 'iwo')
+      ->fields('iwo', array('extra'))
+      ->condition('iwo.nid', $nid)
+      ->condition('iwo.widget', 'so_sorry_widget');
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Function returns number of feature in so sorry widget.
+ * @return int
+ */
+function count_sosorry_feature() {
+  $query = db_select('itg_widget_order', 'iwo')
+      ->fields('iwo', array('extra'))
+      ->condition('iwo.extra', 'feature')
+      ->condition('iwo.widget', 'so_sorry_widget')
+      ->countQuery();
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Gives recent upblised video which are in sosorry category.
+ * @return int
+ */
+function get_recent_created_node_for_sosorry() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array("nid"));
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->condition('n.type', 'videogallery')->condition('ti.tid', variable_get('so_sorry_category_id_for_widget'));
+  $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Gives count of nid if it is present in sosorry widget.
+ * @param int $nid
+ * @return int
+ */
+function check_nid_in_sosorry($nid) {
+  $query = db_select('itg_widget_order', 'iwo')
+      ->fields('iwo', array('nid'))
+      ->condition('iwo.nid', $nid)
+      ->condition('iwo.widget', 'so_sorry_widget')
+      ->countQuery();
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Gives count of nid if it is present in sosorry widget.
+ * @param int $nid
+ * @return int
+ */
+function get_feature_nid_in_sosorry() {
+  $query = db_select('itg_widget_order', 'iwo')
+      ->fields('iwo', array('nid'))
+      ->condition('iwo.extra', 'feature')
+      ->condition('iwo.widget', 'so_sorry_widget');
+  return $query->execute()->fetchField();
 }

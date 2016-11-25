@@ -254,15 +254,18 @@
 
                     var image_alttext = jQuery('#img_alttext').val();
                     var image_title = jQuery('#img_title').val();
+
                     if (image_alttext == "")
                     {
                         var imagealt = jQuery('#imgtag img').attr('src');
                         var image_alttext = imagealt.substring(imagealt.lastIndexOf("/") + 1, imagealt.length);
+                        image_alttext = image_alttext.substr(0, image_alttext.lastIndexOf('.'));
                     }
                     if (image_title == "")
                     {
                         var imagetitle = jQuery('#imgtag img').attr('src');
                         var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
+                        image_title = image_title.substr(0, image_title.lastIndexOf('.'));
                     }
 
                     image_title = image_title.replace(/%20/g, " ");

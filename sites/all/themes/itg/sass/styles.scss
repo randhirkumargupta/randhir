@@ -227,7 +227,7 @@ header{
     }
     a{
         color: $white-color; 
-        font-family: $itg-roboto;
+        font-family: $itg-roboto;        
     }
     .header-logo{
         @include pos(relative);        
@@ -355,6 +355,13 @@ header{
                         @include pos(relative);
                         @include font($itg-nav-fontsize,37px,null);    
                         @extend .dib;
+                        &.sponsored-active{
+                            background: #ffc106;
+                            color: #000;
+                            &:hover{
+                                color: #000;
+                            }
+                        }
                         &.active, &:hover{
                                 color: #ffc106;
                         }
@@ -1204,7 +1211,12 @@ footer{
     }
     .itg-common-section{
         .droppable{
-            min-height: 408px;
+            height: 408px;
+        }
+        .home-page-poll-block-wrap{
+         .droppable{
+                min-height: 408px;
+            }   
         }
     }
     .itg-layout-container .top-colum-3 .itg-widget-parent .droppable, .itg-layout-container .itg-top-section .top-colum-2 .droppable, .itg-layout-container .itg-top-section .top-colum-1 .droppable{
@@ -1295,6 +1307,9 @@ footer{
     }
 }
 /*End CSS Big New Home page*/
+.itg-top-section{
+    @include pos(relative);
+}
 /*Start CSS Top Story Home Page*/
 .tab-buttons {
     @include clearfix;
@@ -1634,8 +1649,21 @@ footer{
     }    
 }
 
-
 /*css end watch now home page */
+
+/*css start homepage show*/
+.home-shows{
+    .trending-videos {
+        border: none;
+        padding-top: 25px;
+        .trending-videos-list {
+            overflow: hidden;
+            padding: 10px 0;
+        }
+    }
+}
+/*css end homepage show*/
+
 
 /*Start Story page css*/
 @mixin story-profile-pic{
@@ -1645,6 +1673,10 @@ footer{
     border: 2px solid #e4e4e4;
 }
 .story-section{
+    iframe{
+        width: 100%;
+        height: 50vh;
+    }
     ul{
         @extend .list-none;
     }
@@ -2421,6 +2453,11 @@ footer{
         margin-bottom: 10px;
         line-height: 22px;
     }
+    > .social-share{
+        margin-bottom: 10px;
+        @include font(18px);
+        @include social-share;
+    }
     .disc-share{
         a{
             font-size: 20px;
@@ -2440,6 +2477,12 @@ footer{
             color: #9f9f9f;
             @include font(12px);
             margin-bottom: 5px;
+        }
+        .breaking-discription{
+            iframe{
+                width: 100%;
+                height: 55vh;
+            }
         }
         .social-share{
             margin-top:10px;
@@ -2582,6 +2625,7 @@ footer{
                         @include font(13px,18px,$itg-font-medium);    
                         width: auto; 
                         max-height: 45px;
+                        min-height: 45px;
                         overflow: hidden;
                         a{
                             color: #fff;
@@ -3811,6 +3855,12 @@ footer{
 }
 /*CSS end Latest issue magazins*/
 /*CSS start magazins*/
+.magazin-mob{
+    display: none;
+}
+.magazin-desktop{
+    display: block;
+}
 .magazin-lhs-top{
     background: #f6f5f5;
     border: 1px solid $border-color;
@@ -3923,6 +3973,12 @@ footer{
     }
     span.widget-title{
         @include pos(absolute);            
+    }
+    > div > div{
+        margin-bottom: 35px;
+        &:last-child{
+            margin-bottom: 0px;
+        }
     }
 }
 /*End start magazins*/
@@ -5056,7 +5112,7 @@ footer{
         }
     }
 }
-#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container{
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container, #block-views-event-subsite-speaker-block-2{
     h2{
         font-size: 20px;
         border-bottom: 1px solid $border-color;
@@ -5092,7 +5148,7 @@ footer{
         }
     }        
 }
-#block-views-event-photo-slider-block, #block-views-event-associate-video-block{
+#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block{
     margin-top: 20px;
     ul{
         @extend .list-none;
@@ -5329,16 +5385,150 @@ footer{
     margin-bottom: 30px;
 }
 .sponsor-detail-container{
-    @include listing-with-image(sponsor-detail,left,10px,pic,detail);
+    @include listing-with-image(sponsor-detail,left,0px,pic,detail);
     .pic{
         border: 1px solid #ddd;
         padding: 5px;
     }
-    .title{
-        @include font(20px,26px,700);
+    .detail{
+       padding-left: 10px;
+        .title{
+            @include font(20px,26px,700);
+            margin-bottom: 5px;
+            margin-top: -5px;
+        }
+    }   
+}
+#block-views-event-subsite-speaker-block{
+    .views-row{
+        @include calculate-width(3);
+        @include float(left);
+        .view-content{            
+            @include clearfix;
+            .views-row{                
+                @include calculate-width(1);
+                @include float(none);
+                @include text-align(center);
+                margin-bottom:30px;
+                img{
+                    border-radius: 100%;
+                    border: 1px solid #ddd;
+                }
+                .views-field-title, .views-field-field-story-new-title{
+                    font-size: 11px;
+                    font-weight: 700;
+                    font-family: roboto;
+                    color: #000;
+                    margin-top: 10px;
+                    text-transform: uppercase;
+                }
+                .views-field-field-story-new-title{
+                    color: #ef2a24;  
+                    margin-top:0; 
+                }
+            }
+        }
     }
 }
 
+#block-itg-event-backend-post-event-block{
+    .top-tab{
+        background-color: #f1f1f1;
+        padding: 10px;
+        padding-bottom: 0;
+        border:none;
+        ul{
+            li{                         
+                border-radius: 0;
+                color: #000;
+                font-family: roboto;
+                font-weight: normal;
+                 padding: 15px 10px;
+                span{
+                    background-color: #ddd;
+                    padding: 5px 10px;
+                    color: #fff;
+                    font-weight: 900;
+                    font-size: 16px;
+                    border-radius: 3px;
+                   
+                }
+                &.active{
+                    background: #fff !important;   
+                    color:#000;
+                    box-shadow: 1px -1px 1px #ccc;
+                    span{
+                        background-color: red !important;
+                    }
+                }
+            }
+        }
+    }    
+    .event-listing{
+        .content-detail{
+            @include clearfix;
+            padding: 8px;
+            box-shadow: 0px 0px 5px #ccc;
+            margin-bottom: 50px;
+            .side-left, .side-right{
+                @include calculate-width(2);
+            }
+            .side-left{
+                padding-top: 0;
+            }
+            .side-right{
+                .section-part{
+                    @include calculate-width(1);
+                    @include float(none);
+                    padding-right: 0;
+
+                    font-family: $itg-robotoslab;
+                    .bottom-links{
+                        margin-top: 10px;
+                        a{
+                            width: auto;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+                .title{
+                    font-size: 20px;
+                    line-height: 28px;
+                    font-weight: 700;
+                    padding: 0;
+                    background-color: transparent;
+                }
+                .small-title{
+                    color: red;
+                    font-family: $itg-roboto;
+                    @include font(13px);
+                    margin-bottom: 5px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+.speaker-detail-page{
+    .col-md-3{
+        text-align: center;
+        h4{
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        p{
+            text-transform: uppercase;
+            color: red;
+        }
+        img{
+            border-radius: 100%;
+        }
+    }
+    h3{
+        font-family: roboto-slab;
+        margin-bottom: 10px;
+    }
+}
 /*CSS end for event page index*/
 
 
@@ -6419,7 +6609,7 @@ input[type="radio"]:checked + label:after{
     .left-side{
         .itg-415-layout{
             .droppable{
-                height: 415px;
+               min-height: 415px;
             }
         }
         .itg-325-layout{
@@ -6629,6 +6819,70 @@ input[type="radio"]:checked + label:after{
             }
         }
     }
+    .itg-map{
+        svg{
+            max-width: 100%;
+            max-height: 332px;
+        }
+        #map-state{
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 20px;
+            line-height: 20px;
+            padding: 0;
+            width: 145px;
+        }        
+    }
+    .election-graph{
+        .highcharts-credits{
+            display: none;
+        }
+        table{
+            font-size: 13px;            
+            font-family: roboto;            
+            th{
+                text-align: center;
+                border-bottom: 10px solid #FFF;
+                &:nth-child(2){
+                  text-align: left; 
+                  padding-left: 10px;
+              }
+            }
+            td{
+              background: #f5f5f5;
+              border-bottom: 10px solid #FFF;
+              text-align: center;
+              color:#5e5e5e;
+              &:first-child{
+                padding-right: 5px;
+              }
+              &:nth-child(2){
+                text-align: left; 
+                padding-left: 10px;
+              }
+              &.party-color{
+                width: 13px;
+                height: 19px;
+                margin-bottom: 10px;
+              }              
+            }
+        }
+    }
+    .graph-design{
+        @include pos(relative);
+        .divider{
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        height: 120px;
+        width: 1px;
+        border-left: 1px dashed #7b7b7b;
+        }
+        .highcharts-container{
+            height: 260px !important;
+        }   
+    }     
 }
 /* CSS For Election Page End */
 
@@ -6727,3 +6981,490 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*eND CSS LIVE tv */
+
+/*vertical menu fixed position*/
+#block-itg-menu-manager-vertical-menu{
+    position: absolute;
+    top: 50px;
+    left:-85px;
+    background: #f2f2f2;    
+    border-radius: 3px;
+    box-shadow: 2px 2px 3px #ccc;
+    text-align: center;
+    border-right: 1px solid #b3b3b3;   
+    ul{       
+        -webkit-transition: all 1s ease-in-out;
+        -moz-transition: all 1s ease-in-out;
+        -o-transition: all 1s ease-in-out;
+        transition: all 1s ease-in-out;
+        @include pos(relative);
+    }
+    li{        
+        border-bottom: 1px solid #c4c4c4;
+        padding: 15px 10px;
+        display: block;  
+        height: 92px;
+    }
+    img{
+        margin: 0 auto;
+        display: block;
+        margin-bottom: 8px;
+    }
+    a{
+        @include font(12px,null,600);
+        font-family: $itg-roboto;
+        text-transform: uppercase;        
+    }
+    .vertical-menu-parent{
+         max-height : 552px;
+        overflow : hidden; 
+            max-width: 80px;
+    }
+    .vertical-more{
+        padding: 15px 10px;
+        display:none;
+        a{
+            display: block;
+            i{
+                display: block;
+                color: #959595;
+                font-size: 26px;
+            }
+            span.less{
+                display: none;
+            }
+        }
+    }
+}
+
+/*email and change password start*/
+#itg-sso-user-email-form{
+     margin-bottom: 10px;
+    display: inline-block;
+    input[type="text"]{
+        width: 50%;
+    }
+    h3{
+        margin:20px 0;
+        text-transform: uppercase;
+    }
+    .form-submit{
+        background: #000;
+        border: none;
+        color: #fff;
+        padding: 8px 20px;
+        margin-top: 15px;
+    }
+    #fotp{
+        overflow: hidden;
+        padding:0;
+        .form-item-fotp{        
+            margin-bottom: 20px;        
+        }
+    } 
+    #fotp #forgototpclickme{
+        margin: 10px 20px 10px 20px;
+    }
+}
+#views-exposed-form-report-filed-content-page{
+    #edit-date-filter-wrapper{
+        width:auto;
+        #edit-date-filter-min-wrapper, #edit-date-filter-max-wrapper{
+            display: inline-block;
+            vertical-align: top;
+        }
+        #edit-date-filter-min-wrapper{
+         margin-right: 15px;   
+        }
+    }
+}
+#itg-sso-reg-password-form{
+    h3{
+        margin:20px 0;
+        text-transform: uppercase;
+    }
+    ul{
+      list-style-type: none;  
+    }
+    label{
+        display: block;
+        margin-bottom: 8px;
+    }
+    span.error{
+        display: block;
+        margin-top: 8px;
+    }
+    span.form-required{
+        display: none;
+    }
+    .form-submit{
+        background: #000;
+        border: none;
+        color: #fff;
+        padding: 8px 20px;
+        margin-top: 15px;
+    }
+}
+/*email and change password end*/
+/*css start static pages menu*/
+#block-menu-menu-about-us-page-menu{
+    ul{
+        @extend .list-none;      
+        border:1px solid $border-color;
+        li{
+            a{
+                padding: 20px;
+                display: block;
+                @include font(14px);    
+                text-transform: capitalize;
+                &:hover, &.active{
+                    background: #f8f8f8;
+                }
+            }
+            + li{
+              border-top:1px solid $border-color;  
+            }
+            ul{
+                border:none;
+                li{
+                    a{
+                        padding: 10px 0 10px 35px;
+                    }
+                }
+            }
+        }
+    }    
+}
+/*css end static pages menu*/
+
+/*css start static feedback form*/
+.static-feedback-from{
+    font-family:$itg-roboto;
+    h1{
+        @include font(34px);
+        text-transform: capitalize;
+        span{
+            font-size: 14px;
+            color: #7e7e7e;
+            float: right;
+            font-weight: 500;
+            font-family: $itg-robotoslab;
+            i{
+                color: #e61e1e;
+                font-style: normal;
+            }
+        }
+    }
+    .or-share-detail{
+        text-align: center;
+        font-size: 16px;
+        font-family: roboto;
+        color:#777777;
+        margin: 25px 0;
+    }
+    .name-email-continer{
+        overflow: HIDDEN;
+        > div.user-name{
+            float: left;
+            @include calculate-width(2);     
+            label{
+                width: 90px;
+                display: inline-block;
+                text-align: right;
+                margin-right: 0;
+            }
+        }
+        > div.user-email{
+            float: right;
+            width: 45%;
+        }
+        label{
+            padding-right: 10px;
+            font-weight: 500; 
+            }
+        input[type="text"]{
+            width: 275px;
+            height: 40px;
+        }
+    }
+    .form-submit{
+        background: #000;
+        color: #fff;
+        height: 50px;
+        width: 240px;
+        margin-top: 20px;
+        font-size: 24px;
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+    .submit-feedback{
+        color: #777777;
+        font-size: 16px;
+        text-align: center;
+        width: 85%;
+        margin: 30px auto 20px;
+        @include pos(relative);
+        &:before{
+            content: '';
+            width: 100%;
+            height: 1px;
+            background: #e9e9e9;
+            position: absolute;
+            top: 50%;
+            left: 0;
+        }
+        span{
+            background: #fff;
+            position: relative;
+            padding: 0 15px;
+        }       
+    }
+     .webform-name-field.feedback{
+            margin-top: 25px;
+            label{
+                width: 12%;
+                display: inline-block;
+                vertical-align: top;
+                float: left;
+            }
+            .form-textarea-wrapper{
+                width: 86%;
+            .form-textarea{
+                width: 100%;
+            }    
+            }
+            
+        }
+        .webform-submit-social{
+            text-align: center;
+        }
+        .webform-submit-social, .form-actions, .or-share-detail{
+            padding-left: 90px;
+        }
+}
+/*css end static feedback form*/
+/*css start ask an expert*/
+.ask-an-expert-question-answer{
+    .views-row{
+        padding: 25px 5px;
+        &:hover{
+            background: #f7f7f7;
+        }        
+        &:last-child{
+            border-bottom: 1px solid #ddd;
+        }
+    }
+    .view-content{
+        margin: 40px 0;
+    }
+    .view-header{
+        font-size: 30px;
+        color: #fff;
+        font-family: roboto;
+        background: #353535;
+        font-weight: 700;
+        height: 50px;
+        line-height: 50px;
+        padding-left: 15px;
+    }
+    .expert-question{
+        font-size: 21px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 45px;
+        padding-top: 3px;
+        color:#474747;
+        &:before{
+            content: '?';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #474747;
+            width: 26px;
+            height: 26px;
+            border-radius: 50% 50%;
+            color: #fff;
+            text-align: center;
+            line-height: 26px;
+        }
+    }
+    .expert-answer{
+        position: relative;
+        padding-left: 45px;
+        padding-top: 3px;
+        p{
+            line-height: 24px;
+            a{
+                color:#a00606;
+            }
+        }        
+        &:before{
+            content: 'Ans';
+            position: absolute;
+            top: 3px;
+            left: 0;
+            background: #888888;
+            width: 33px;
+            height: 20px;            
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+        }
+    }
+    @include pager;    
+}
+/*css end ask an expert*/
+
+/*CSS start ask an expert detail*/
+#block-views-ask-an-expert-block-1{
+    h2{
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    .views-row{
+            font-size: 21px;
+            font-weight: 500;            
+            position: relative;                        
+            color: #474747;
+            padding: 15px 5px 15px 45px;
+        &:before{
+            content: '?';
+            position: absolute;
+            top: 12px;
+            left: 0;
+            background: #474747;
+            width: 26px;
+            height: 26px;
+            border-radius: 50% 50%;
+            color: #fff;
+            text-align: center;
+            line-height: 26px;
+        }
+    }
+    @include pager;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block{    
+    #expert_global_config{
+        padding: 15px 10px;
+        background: #f7f7f7; 
+        margin-bottom:50px;
+        #itg-custom-ask-an-expert-form{   
+            overflow: hidden;
+            #question{
+                p{
+                    display: none;
+                }
+            }
+            #askname, #askemail{
+                @include float(left);
+                width: 40%;
+                margin-top:15px;
+                input[type="text"]{
+                    width: 90%;
+                }
+            }
+            .form-submit{
+                @include float(left);
+                width: 20%;
+                margin-top:15px;
+                background: #434343;
+                border: none;
+                height: 32px;
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+            }
+        }        
+    }
+    .question-form-title{
+        h3{
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+    }
+    .ask-user-detail{
+        @include clearfix;
+        border-top:1px solid #ddd;
+        border-bottom:1px solid #ddd;
+        padding:20px 0;
+        margin-bottom:50px;
+        h4{
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .section-user-details{
+            @include float(left);
+            width: 60%;
+            img{
+                border-radius: 50% 50%;
+                width: 60px;
+                height: 60px;
+                border: 2px solid #ddd;
+                float: left;
+            }
+            .section-user-name{
+                float: left;
+                padding-left: 10px;
+                padding-top: 5px;
+                font-size: 12px;
+                color: #6b6b6b;
+                text-transform: uppercase;
+                font-family: roboto;
+                font-weight: 600;
+            }
+        }
+        .ask-an-expert-like-dislike{
+            @include float(left);
+            width: 40%;
+            text-align: center;
+            button{
+                background: transparent;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                padding: 0 10px;
+                span{
+                    color: #208302;
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+                &#dislike_count{
+                    span{
+                    color: #ef0302;    
+                    }
+                }
+            }
+            p{
+                font-size: 12px;
+                font-family: $itg-roboto;
+                color: #000;
+                font-weight: 500;
+            }
+        }
+    }
+}
+/*CSS End ask an expert detail*/
+
+/*css start related content*/
+#block-itg-front-end-common-related-photo-block, #block-itg-front-end-common-related-video-block{
+    @include sidebar-heading;
+    h3{
+        display: block;
+        padding-left: 0;
+        margin-bottom: 20px;
+    }
+    ul{
+        @extend .list-none;
+    }
+    .views-field-ds-changed{
+        display: block;
+        font-size: 12px;
+        color: #b1b1b1;
+        padding: 8px 0 5px;
+    }
+}
+/*css end related content*/

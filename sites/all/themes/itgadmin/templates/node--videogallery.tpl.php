@@ -3,17 +3,23 @@
       <?php if ($view_mode == 'full'): ?>
         <a href="javascript:;" class="close-preview">&nbsp;</a>
         <?php
-        // Load custom block for social media integration              
-        if (!isset($node->op)):
+        // Load custom block for social media integration 
+        global $user;        
+        if (!isset($node->op) && in_array('Social Media', $user->roles)):
           $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
           ?>
-<!--          <div class="itg-smi">
-              <button data-id="smi-popup" class="btn data-popup-link">Create Social media</button>
-          </div>-->
+          <div class="itg-smi">
+              <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
+          </div>
           <div id="smi-popup" class="itg-popup">
-              <div class="popup-body">
-                  <a class="itg-close-popup" href="javascript:;"> Close </a>
-                  <?php print render($block['content']); ?>
+              <div class="popup-content">
+                <div class="popup-head">
+                    <div class="popup-title">&nbsp;</div>
+                    <a class="itg-close-popup" href="javascript:;"> Close </a>
+                </div>
+                <div class="popup-body">
+                    <?php print render($block['content']); ?>
+                </div>
               </div>
           </div>
         <?php endif; ?>

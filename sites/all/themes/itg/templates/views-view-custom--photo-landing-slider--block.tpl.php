@@ -13,7 +13,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         <h2><?php print $rows[0]['title']; ?></h2>    
         <div class="social-icon desktop-hide">
             <ul>
-                <li><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li><a onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
                 <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-comment"></i></a></li>
@@ -32,9 +32,11 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
     
     <div class="col-md-8">
         <ul class="slickslide">
-            <?php foreach ($rows as $index => $row): ?>
-                <li>
-                    <figure>
+            <?php foreach ($rows as $index => $row): 
+                
+                ?>
+                <li >
+                    <figure class="imgtags" img-fid=" <?php print $row['fid'];?>">
                         <?php print $row['field_images']; ?>                    
                     </figure>
                 </li>
@@ -43,7 +45,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         <div class="slick-thumbs">
             <ul class="slick-thumbs-slider">
                 <?php foreach ($rows as $index => $row): ?>
-                    <li>
+                    <li >
                         <?php print $row['field_images_1']; ?>
                     </li>
                 <?php endforeach; ?>
@@ -77,7 +79,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         
         <div class="social-icon mhide">
             <ul>
-                <li><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li><a onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
                 <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-comment"></i></a></li>

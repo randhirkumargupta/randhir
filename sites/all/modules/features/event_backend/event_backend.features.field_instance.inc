@@ -605,7 +605,7 @@ function event_backend_field_default_field_instances() {
     'bundle' => 'event_backend',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add event photos.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -650,7 +650,7 @@ function event_backend_field_default_field_instances() {
     'bundle' => 'event_backend',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add multiple short & crisp videos.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1095,9 +1095,10 @@ function event_backend_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'exclude_cv' => 0,
     'field_name' => 'field_e_event_banner',
     'label' => 'Event Banner',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -1111,10 +1112,19 @@ function event_backend_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'image',
       'settings' => array(
         'filefield_sources' => array(
-          'filefield_sources' => array(),
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
           'source_attach' => array(
             'absolute' => 0,
             'attach_mode' => 'move',
@@ -1125,6 +1135,7 @@ function event_backend_field_default_field_instances() {
           ),
           'source_reference' => array(
             'autocomplete' => 0,
+            'search_all_fields' => 0,
           ),
         ),
         'imce_filefield_on' => 0,
@@ -2032,6 +2043,49 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-event_backend-field_story_expert_description'.
+  $field_instances['node-event_backend-field_story_expert_description'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 45,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_expert_description',
+    'label' => 'Terms & Conditions',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 4,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 26,
+    ),
+  );
+
   // Exported field_instance: 'node-event_backend-field_story_expiry_date'.
   $field_instances['node-event_backend-field_story_expiry_date'] = array(
     'bundle' => 'event_backend',
@@ -2332,6 +2386,8 @@ function event_backend_field_default_field_instances() {
   t('Menu Font Color');
   t('No. of Tickets');
   t('Photo');
+  t('Please add event photos.');
+  t('Please add multiple short & crisp videos.');
   t('Program Schedule');
   t('Program Title color');
   t('Programme');
@@ -2347,6 +2403,7 @@ function event_backend_field_default_field_instances() {
   t('Sponsors');
   t('Start Time');
   t('Tab Highlighted Color');
+  t('Terms & Conditions');
   t('The complete description of the event.');
   t('This displays information about the event.');
   t('Values – Paid, Free and Invite');

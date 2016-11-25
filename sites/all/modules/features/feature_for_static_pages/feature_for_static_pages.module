@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for static pages feature.
+ */
+
+include_once 'feature_for_static_pages.features.inc';

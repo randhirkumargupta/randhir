@@ -89,7 +89,7 @@
 
   /*special event page css start here*/
   /*css start snappost page*/
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button button {
     width: 160px;
   }
 
@@ -205,9 +205,6 @@
   .itg-layout-container .itg-top-section .top-colum-2 .droppable {
     height: auto;
   }
-  .itg-layout-container .itg-h450-section .droppable {
-    height: 350px;
-  }
 
   /* End css home page*/
   /*sider bar css start*/
@@ -241,6 +238,12 @@
   }
 
   /*css end poll page*/
+  /*css start osscar page */
+  .oscar-layout-page .osscar-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+
+  /*css start osscar page */
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -482,6 +485,10 @@
     height: auto;
   }
 
+  .itg-layout-container .itg-common-section .home-page-poll-block-wrap .droppable {
+    min-height: inherit;
+  }
+
   /*End CSS Top Block Grid Home Page*/
   /*css start special event page for osscar*/
   .oscar-layout-page .left-side {
@@ -573,23 +580,20 @@
   .page-snappost .view-content .views-row .snap-post-btm .snap-button {
     margin-top: 30px;
   }
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button button {
     width: 120px;
     height: 40px;
     font-size: 16px;
     font-size: 1rem;
     line-height: 40px;
   }
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a.disagree {
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button button.disagree {
     margin-left: 20px;
   }
 
   .page-snappost .view-content .views-row .snap-post-btm .snap-button {
     float: none;
     width: 100%;
-  }
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
-    width: 130px;
   }
   .page-snappost .view-content .views-row .snap-post-btm .snap-social {
     width: 100%;
@@ -962,10 +966,87 @@
   }
 
   /*css end live tv page*/
+  /*Css start home page photo crousal*/
+  .itg-h450-section .col-md-8 .widget-wrapper {
+    height: 100%;
+    padding: 0px;
+    background-color: #f3f3f3;
+  }
+
+  .featured_photo_carousel .widget-title, .tech-block_5 .widget-title, .auto-block_5 .widget-title {
+    top: 0;
+    left: 0;
+  }
+
+  .itg-h321-section .tech_reviews, .itg-h321-section .auto_reviews, .itg-h321-section .dont_miss {
+    padding: 5px 10px 5px;
+  }
+
+  /*Css ens home page photo crousal*/
+  /*css start megzin page*/
+  .magazin-mob {
+    display: block;
+  }
+
+  .magazin-desktop {
+    display: none;
+  }
+
+  .magazin-lhs-top .magazin-top {
+    margin-bottom: 0;
+  }
+  .magazin-lhs-top .magazin-top .magazin-subscribe, .magazin-lhs-top .magazin-top .magazin-top-left {
+    width: 100%;
+    float: none;
+  }
+  .magazin-lhs-top .magazin-top .magazin-top-left {
+    padding: 5px;
+    padding-top: 5px;
+  }
+  .magazin-lhs-top .magazin-top .magazin-top-left .web-excl {
+    top: 5px;
+    left: 5px;
+  }
+  .magazin-lhs-top .magazin-bottom ul {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  .magazin-lhs-top .magazin-bottom ul li {
+    width: 145px;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 5px;
+    margin-top: 20px;
+  }
+  .magazin-lhs-top .magazin-bottom ul li h3 {
+    margin-top: 10px;
+    white-space: pre-wrap;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .magazin-lhs-top.magazin-mob {
+    background: transparent;
+    border: none;
+    margin-top: 50px;
+    padding-bottom: 0;
+  }
+
+  /*css start megzin page*/
 }
 @media only screen and (max-width: 640px) {
   #block-views-anchor-landing-page-block .anchor-left {
     width: 50%;
+  }
+
+  .itg-layout-container .ad-widget {
+    border: none;
+    height: auto;
+    padding: 0;
+  }
+  .itg-layout-container .ad-widget .sidebar-ad {
+    background: transparent;
+    height: 100%;
   }
 }
 @media only screen and (max-width: 560px) {

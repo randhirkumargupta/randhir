@@ -70,6 +70,7 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
+    
     <main id="main" class="container">
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
@@ -91,7 +92,8 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?> tech-layout-page">
+<div class="itg-layout-container <?php echo $itg_class; ?> tech-layout-page pos-rel">
+  <?php print render($page['vertical_menu']); ?>
     <?php // $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
  // print render($block['content']); ?>
     <?php if(isset($widget_data['big_story'])) : ?>

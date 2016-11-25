@@ -69,7 +69,7 @@ if ($theme != 'itgadmin') {
         if ($sidebar_first || $sidebar_second):
           $cls = 'col-md-9';
         endif;
-    ?>
+    ?>    
     <main id="main" class="container">
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
@@ -100,7 +100,8 @@ if ($theme != 'itgadmin') {
     </div>
     <?php endif; ?>
 
-    <div class="row itg-top-section">
+    <div class="row itg-top-section pos-rel">
+        <?php print render($page['vertical_menu']); ?>
         <div class="top-block">
 
             <div class="top-colum-2">
@@ -881,6 +882,6 @@ window.addEventListener("message", function(ev) {
 <div class="activate-message">
   <div class="message-body">
     <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
-    <p>Your Account Activated Sucessfully!</p>
+    <p>Your Account Activated Successfully!</p>
   </div>
 </div>

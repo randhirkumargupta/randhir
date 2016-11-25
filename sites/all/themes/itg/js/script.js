@@ -16,7 +16,46 @@
 // To understand behaviors, see https://drupal.org/node/756722#behaviors
 Drupal.behaviors.my_custom_behavior = {
   attach: function(context, settings) {
+jQuery('.add-more-block-front').live('click', function() {
+ 	var section_ids="";
+        var elementobj=jQuery(this);
+        jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif"/>')
+ 	//jQuery(this).remove();
+ 	jQuery('.sectioncart').each(function(){
+ 		 section_ids=jQuery(this).attr('id');
+ 	});
+ 	
+        jQuery.ajax({
+            url: Drupal.settings.basePath + 'gethomecarddata',
+            type: 'post',
+            beforeSend: function() {
+              // jQuery('#widget-ajex-loader').show();
+            },
+            data: {'section_ids': section_ids,},
+            success: function(data) {
+             if(data=="")
+             {
+              jQuery('.no-more-card').show();
+              jQuery('.new-load').hide();
+             } else {
+                jQuery('.new-load').hide();
 
+              jQuery('#second-section-card').append(data); 
+
+          }
+           elementobj.remove();
+           //  alert(data);  
+
+            },
+            complete: function() {
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+
+    });
     // Place your code here.
     // Make unflag link unclickable
     if ($('a').hasClass('unflag-action')) {
@@ -164,6 +203,12 @@ Drupal.behaviors.my_custom_behavior = {
       if(change_password){
         $('.activate-message').show();
       }
+      
+      /* code to show change email mobile popup */
+      var change_email_mobile = getUrlParameter('email');
+      if(change_email_mobile){
+        $('.activate-message').show();
+      }
   }
 };
 
@@ -278,33 +323,28 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).ready(function () {  
- jQuery('.add-more-block-front').live('click', function() {
- 	var section_ids="";
-        var elementobj=jQuery(this);
-        jQuery(this).html('<img src="./sites/all/themes/itg/images/tab-loading.gif"/>')
- 	//jQuery(this).remove();
- 	jQuery('.sectioncart').each(function(){
- 		 section_ids=jQuery(this).attr('id');
- 	});
- 	
-        jQuery.ajax({
-            url: Drupal.settings.basePath + 'gethomecarddata',
+ 
+       jQuery('#map-state').change(function() {
+          jQuery('#consTable').hide();
+         var getstate_id=jQuery(this).val();
+        
+          jQuery.ajax({
+            url: Drupal.settings.basePath + 'get_map_data',
             type: 'post',
             beforeSend: function() {
-              // jQuery('#widget-ajex-loader').show();
+               jQuery('#widget-ajex-loader').show();
             },
-            data: {'section_ids': section_ids,},
+            data: {'state_id': getstate_id,},
             success: function(data) {
-
-             if(data=="")
-             {
-              jQuery('.no-more-card').show();
-             } else {
-              jQuery('#second-section-card').append(data); 
-
-          }
-           elementobj.remove();
-           //  alert(data);  
+            var obj = jQuery.parseJSON(data);
+           jQuery('#widget-ajex-loader').hide();
+           if(obj.mapjson=='')
+           {
+               jQuery("#conssvg").html('Content Not Found');
+               
+           }else{
+            getconssvg(obj,'0');
+         }
 
             },
             complete: function() {
@@ -314,8 +354,7 @@ jQuery(document).ready(function () {
                 console.log("Details: " + desc + "\nError:" + err);
             }
         });
-
-    });
+     });
 });
 
 
@@ -330,7 +369,7 @@ jQuery(document).ready(function () {
     });   
     var menuBuilder = function(){        
         var menuWidth, Totalwidth, liLength, clickHere;
-	menuWidth = jQuery('.second-level-menu.menu').width();	        
+	menuWidth = jQuery('.second-level-menu.menu').width()-10;        
 	Totalwidth = jQuery('.all-menu').outerWidth();
 	clickHere = 0;
 	if(jQuery('#newlist').length > 0){
@@ -375,10 +414,43 @@ jQuery(document).ready(function () {
                 jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
             });
          }
-    };
-   
+    };   
     eventMenu();    
       
+   //social share animation effects   
+   jQuery('.social-share ul').each(function(){
+       jQuery(this).children().not(":first").hide();       
+   })
+   jQuery('.social-share li').click(function(){   
+       jQuery(this).nextAll('li').show();
+   });
+  
+     //vertical menu position 
+     var menuLength  = jQuery('.vertical-menu li').length;
+     if(menuLength > 6){         
+         jQuery('.vertical-more').show();
+     }
+    var TotalHeight = 0;
+    jQuery('.vertical-menu li').each(function () {
+        var liLength = jQuery(this).height();
+        TotalHeight = TotalHeight + liLength;        
+        console.log(TotalHeight);                
+    });
+     
+     var clicked = true;
+     jQuery('.vertical-more a').click(function(){          
+         if(clicked){             
+            clicked=false;
+            jQuery('.vertical-menu').css('margin-top',-(menuLength-6)*92+'px');
+            jQuery(this).find('.more').hide();
+            jQuery(this).find('.less').show();
+         }else{
+             clicked=true;
+             jQuery('.vertical-menu').css('margin-top','0px');
+             jQuery(this).find('.less').hide();
+            jQuery(this).find('.more').show();
+         }                  
+     });               
 });
 
 

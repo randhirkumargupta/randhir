@@ -175,7 +175,9 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
         $itg_class = 'itg-front';
       }
       ?>
-      <div class="itg-layout-container <?php echo $itg_class; ?> default-video">
+      <div class="itg-layout-container <?php echo $itg_class; ?> default-video pos-rel">
+            <?php print render($page['vertical_menu']); ?>
+
         <?php if ($theme == 'itgadmin') { ?>
         <div class="row">
           <div class="col-md-12">

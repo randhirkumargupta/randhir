@@ -238,6 +238,51 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_associate_photo_gallery'.
+  $field_instances['node-story-field_associate_photo_gallery'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 80,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_associate_photo_gallery',
+    'label' => 'Associate Photo Gallery',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 75,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_common_by_line_reporter_id'.
   $field_instances['node-story-field_common_by_line_reporter_id'] = array(
     'bundle' => 'story',
@@ -622,6 +667,90 @@ function features_for_story_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 47,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_story_associate_lead'.
+  $field_instances['node-story-field_story_associate_lead'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 82,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_associate_lead',
+    'label' => 'Associate lead gallery/video',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 77,
+    ),
+  );
+
+  // Exported field_instance: 'node-story-field_story_associate_video'.
+  $field_instances['node-story-field_story_associate_video'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 81,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_associate_video',
+    'label' => 'Associate Video',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 76,
     ),
   );
 
@@ -1049,7 +1178,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_extra_large_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (650 x 445)',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1661,7 +1790,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_large_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (300x350)',
+    'description' => 'Image Size (483x271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1903,7 +2032,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_medium_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 225)',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2372,7 +2501,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_small_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (210 x 145)',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3227,6 +3356,9 @@ function features_for_story_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Are you sure you want to Archive?');
+  t('Associate Photo Gallery');
+  t('Associate Video');
+  t('Associate lead gallery/video');
   t('Brief case');
   t('Buzz');
   t('Buzz Description');
@@ -3254,10 +3386,10 @@ function features_for_story_field_default_field_instances() {
   t('Featured Name');
   t('HeadLine');
   t('Image');
-  t('Image Size (210 x 145)');
-  t('Image Size (300 x 225)');
-  t('Image Size (300x350)');
-  t('Image Size (650 x 445)');
+  t('Image Size (170 x 127)');
+  t('Image Size (370 x 208)');
+  t('Image Size (483x271)');
+  t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
   t('Issue based story');
   t('Issue date');

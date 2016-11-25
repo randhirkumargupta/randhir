@@ -9173,7 +9173,6 @@ div.node #comments h2 {
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent {
   height: 132px;
   overflow: hidden;
-  z-index: 9999;
   background-color: #fff;
   transition: all .3s;
 }
