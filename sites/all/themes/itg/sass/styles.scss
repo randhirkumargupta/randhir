@@ -5433,7 +5433,7 @@ footer{
 
 #block-itg-event-backend-post-event-block{
     .top-tab{
-        background-color: #f1f1f1;
+        background-color: #f4f4f4;
         padding: 10px;
         padding-bottom: 0;
         border:none;
@@ -5445,20 +5445,19 @@ footer{
                 font-weight: normal;
                  padding: 15px 10px;
                 span{
-                    background-color: #ddd;
+                    background-color: #8d8d8d;
                     padding: 5px 10px;
                     color: #fff;
                     font-weight: 900;
                     font-size: 16px;
-                    border-radius: 3px;
-                   
+                    border-radius: 3px;                   
                 }
                 &.active{
                     background: #fff !important;   
                     color:#000;
                     box-shadow: 1px -1px 1px #ccc;
                     span{
-                        background-color: red !important;
+                        background-color: #ef3c24 !important;
                     }
                 }
             }
@@ -5499,7 +5498,7 @@ footer{
                     background-color: transparent;
                 }
                 .small-title{
-                    color: red;
+                    color: #ef3c24;
                     font-family: $itg-roboto;
                     @include font(13px);
                     margin-bottom: 5px;
@@ -5513,20 +5512,28 @@ footer{
     .col-md-3{
         text-align: center;
         h4{
-            font-size: 14px;
-            margin: 10px 0;
+            font-size: 15px;
+            margin: 10px 0 0 0;
+            color:#000000;
+            text-transform: uppercase;
         }
         p{
             text-transform: uppercase;
-            color: red;
+            color: #ef2a24;
+            font-size: 12px;
         }
         img{
             border-radius: 100%;
+            border: 1px solid #ddd;
         }
     }
     h3{
         font-family: roboto-slab;
         margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+    .body-content{
+        color:#888888;
     }
 }
 /*CSS end for event page index*/
