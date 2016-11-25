@@ -92,7 +92,7 @@ foreach ($data as $key => $value) {
       ?>
     <div class="content-detail">
       <div class="side-right"><p class="small-title"><?php print $program["session_title"]; ?></p><div class="title"><?php print $output_story_title; ?></div> 
-        <div class="listing-detail"><div class="section-part"><?php print $output_story_title .  $output_story_kicker .' <div class="bottom-links">' . $output_photo . ' ' . $output_video . ' ' . $output_audio.'</div>'; ?></div>
+        <div class="listing-detail"><div class="section-part"><?php print $output_story_kicker .' <div class="bottom-links">' . $output_photo . ' ' . $output_video . ' ' . $output_audio.'</div>'; ?></div>
 
         </div>
       </div> 
