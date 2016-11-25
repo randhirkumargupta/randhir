@@ -945,7 +945,8 @@ function _simplesamlphp_auth_get_mobile() {
       $mobile = $seg[0];
     }
     else {
-      throw new Exception(t('Error in simplesamlphp_auth.module: No valid mobile attribute set.'));
+      //throw new Exception(t('Error in simplesamlphp_auth.module: No valid mobile attribute set.'));
+      $mobile = '';
     }
   }
 
@@ -974,7 +975,8 @@ function _simplesamlphp_auth_get_fname() {
       $fname = $seg[0];
     }
     else {
-      throw new Exception(t('Error in simplesamlphp_auth.module: No valid First Name attribute set.'));
+     // throw new Exception(t('Error in simplesamlphp_auth.module: No valid First Name attribute set.'));
+      $fname = '';
     }
   }
 
@@ -1004,7 +1006,8 @@ function _simplesamlphp_auth_get_lname() {
       $lname = $seg[0];
     }
     else {
-      throw new Exception(t('Error in simplesamlphp_auth.module: No valid Last name attribute set.'));
+      //throw new Exception(t('Error in simplesamlphp_auth.module: No valid Last name attribute set.'));
+      $lname = '';
     }
   }
 
