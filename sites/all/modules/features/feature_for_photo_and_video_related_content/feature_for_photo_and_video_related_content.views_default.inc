@@ -77,7 +77,8 @@ function feature_for_photo_and_video_related_content_views_default_views() {
   $handler->display->display_options['fields']['ds_changed']['field'] = 'ds_changed';
   $handler->display->display_options['fields']['ds_changed']['label'] = '';
   $handler->display->display_options['fields']['ds_changed']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['ds_changed']['date_format'] = 'long';
+  $handler->display->display_options['fields']['ds_changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['ds_changed']['custom_date_format'] = 'D, j M, Y';
   $handler->display->display_options['fields']['ds_changed']['second_date_format'] = 'long';
   /* Field: Apache Solr: label */
   $handler->display->display_options['fields']['label']['id'] = 'label';
@@ -154,7 +155,8 @@ function feature_for_photo_and_video_related_content_views_default_views() {
   $handler->display->display_options['fields']['ds_changed']['field'] = 'ds_changed';
   $handler->display->display_options['fields']['ds_changed']['label'] = '';
   $handler->display->display_options['fields']['ds_changed']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['ds_changed']['date_format'] = 'long';
+  $handler->display->display_options['fields']['ds_changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['ds_changed']['custom_date_format'] = 'D, j M, Y';
   $handler->display->display_options['fields']['ds_changed']['second_date_format'] = 'long';
   /* Field: Apache Solr: label */
   $handler->display->display_options['fields']['label']['id'] = 'label';
