@@ -1332,3 +1332,64 @@ function itg_event_backend_convert_number_to_words($number) {
 
     return $string;
 }
+
+/**
+ * Implement function for get old event flasback
+ */
+function itg_event_backend_flashback($curr_event_id){
+  $current_date_time = date('Y-m-d H:i:s');
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));
+  $query->join('field_data_field_event_close_date', 'event_close_date', 'event_close_date.entity_id = n.nid');
+  $query->fields('event_close_date', array('field_event_close_date_value'));
+  $query->condition('n.type', 'event_backend', '=');
+  $query->condition('n.nid', $curr_event_id, '!=');
+  $query->condition('event_close_date.field_event_close_date_value', $current_date_time, '<');
+  $result = $query->execute();
+  foreach($result as $value){
+    $val[] = 'node/'.$value->nid;
+    $detail['node/'.$value->nid] = array(
+      'key'=>'node/'.$value->nid,
+      'title'=>$value->title
+        );
+  }
+  $redirect_event = itg_event_backend_redirect_flashback($val, $detail);
+  foreach($redirect_event as $final_event){
+    $flash_back_link .= '<li>'.l(t($final_event['title']), $final_event['redirect'], array('attributes' => array("style" => "color:$menu_font_color", 'target'=>'_blank'))).'</li>';
+  }
+  $output = '';
+  if(!empty($flash_back_link)){
+  $output = '<ul>'.$flash_back_link.'</ul>';
+  }
+  return $output;
+}
+
+/**
+ * Implement function for get redirect node in flashback
+ * @param type array
+ * @param type array
+ * @return array
+ */
+function itg_event_backend_redirect_flashback($val, $detail){
+  $query = db_select('redirect', 'r');
+  $query->fields('r');
+  $query->condition('r.source', $val, 'IN');
+  $result = $query->execute();
+  foreach($result as $rel){
+    $past_event[] = $detail[$rel->source];
+  }
+  return $past_event;
+}
+
+/**
+ * Implement function to get current event domain
+ * @param type int
+ * @return string
+ */
+function itg_event_backend_current_event_domain($nid){
+  $query = db_select('redirect', 'r');
+  $query->fields('r', array('redirect'));
+  $query->condition('r.source', 'node/'.$nid, '=');
+  $result = $query->execute()->fetchCol();
+  return $result;
+}

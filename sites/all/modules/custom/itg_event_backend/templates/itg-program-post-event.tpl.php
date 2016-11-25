@@ -62,7 +62,7 @@ foreach ($data as $key => $value) {
               )
           );
         }else{
-          $story_img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_video.jpg' />";
+          $story_img = "<img width='364' height='205'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/event_post_default.jpg' />";
         }
         $output_story_img = l($story_img, 'node/'.$detail['nid'], array('html' => TRUE));
         $output_story_kicker = '';
@@ -88,16 +88,18 @@ foreach ($data as $key => $value) {
           $output_audio = l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), 'node/' . $session, array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
       }
+      if(!empty($output_story_title)){
       ?>
     <div class="content-detail">
       <div class="side-right"><p class="small-title"><?php print $program["session_title"]; ?></p><div class="title"><?php print $output_story_title; ?></div> 
-        <div class="listing-detail"><div class="section-part"><?php print $output_story_title .  $output_story_kicker .' <div class="bottom-links">' . $output_photo . ' ' . $output_video . ' ' . $output_audio.'</div>'; ?></div>
+        <div class="listing-detail"><div class="section-part"><?php print $output_story_kicker .' <div class="bottom-links">' . $output_photo . ' ' . $output_video . ' ' . $output_audio.'</div>'; ?></div>
 
         </div>
       </div> 
       <div class="side-left"><?php print $output_story_img; ?></div>
       </div>
       <?php
+      }
     }
     print '</div>';
   }

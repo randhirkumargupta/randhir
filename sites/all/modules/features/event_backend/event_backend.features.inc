@@ -59,6 +59,21 @@ function event_backend_image_default_styles() {
     ),
   );
 
+  // Exported image style: event_post_364x205.
+  $styles['event_post_364x205'] = array(
+    'label' => 'event_post_364x205',
+    'effects' => array(
+      13 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 364,
+          'height' => 205,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: event_speaker_168x168.
   $styles['event_speaker_168x168'] = array(
     'label' => 'event_speaker_168x168',
