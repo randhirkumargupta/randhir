@@ -62,7 +62,7 @@ foreach ($data as $key => $value) {
               )
           );
         }else{
-          $story_img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_video.jpg' />";
+          $story_img = "<img width='364' height='205'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/event_post_default.jpg' />";
         }
         $output_story_img = l($story_img, 'node/'.$detail['nid'], array('html' => TRUE));
         $output_story_kicker = '';
