@@ -244,10 +244,97 @@ function simplesamlphp_auth_init() {
   else if($facebook->isAuthenticated()) {
     $myval = 'facebook';
   }
-  else if($drup->isAuthenticated()) {
+  else if ($drup->isAuthenticated()) {
     $myval = 'drupal-userpass';
+
+    /**
+     * custom function to Get the mobile attribute.
+     * @return
+     *   The mobile attribute.
+     */
+    function _simplesamlphp_auth_get_mobile() {
+      global $_simplesamlphp_auth_as;
+      global $_simplesamlphp_auth_saml_attributes;
+      $mobile = '';
+      global $seg;
+
+      $seg = $_simplesamlphp_auth_saml_attributes['mn'];
+
+
+
+      // Check if valid local session exists..
+      if ($_simplesamlphp_auth_as->isAuthenticated()) {
+        if (isset($seg)) {
+          $mobile = $seg[0];
+        }
+        else {
+          throw new Exception(t('Error in simplesamlphp_auth.module: No valid mobile attribute set.'));
+        }
+      }
+
+      return $mobile;
+    }
+
+    /**
+     * Gets the first name attribute.
+     *
+     * @return
+     *   The first name attribute.
+     */
+    function _simplesamlphp_auth_get_fname() {
+      global $_simplesamlphp_auth_as;
+      global $_simplesamlphp_auth_saml_attributes;
+      $fname = '';
+      global $seg;
+
+      $seg = $_simplesamlphp_auth_saml_attributes['givenName'];
+
+
+
+      // Check if valid local session exists..
+      if ($_simplesamlphp_auth_as->isAuthenticated()) {
+        if (isset($seg)) {
+          $fname = $seg[0];
+        }
+        else {
+          throw new Exception(t('Error in simplesamlphp_auth.module: No valid First Name attribute set.'));
+        }
+      }
+
+      return $fname;
+    }
+
+    /**
+     * Gets the last name attribute.
+     *
+     * @return
+     *   The last name attribute.
+     */
+    function _simplesamlphp_auth_get_lname() {
+      global $_simplesamlphp_auth_as;
+      global $_simplesamlphp_auth_saml_attributes;
+      $lname = '';
+      global $seg;
+
+      $seg = $_simplesamlphp_auth_saml_attributes['sn'];
+
+
+
+      // Check if valid local session exists..
+      if ($_simplesamlphp_auth_as->isAuthenticated()) {
+        if (isset($seg)) {
+          $lname = $seg[0];
+        }
+        else {
+          throw new Exception(t('Error in simplesamlphp_auth.module: No valid Last name attribute set.'));
+        }
+      }
+
+      return $lname;
+    }
+
   }
-  
+
 
   // Load simpleSAMLphp, configuration and metadata.
   $_simplesamlphp_auth_as = new SimpleSAML_Auth_Simple($myval);
@@ -924,95 +1011,6 @@ function _simplesamlphp_auth_get_mail() {
   return $mail_address;
 }
 
-/**
- * custom function to Get the mobile attribute.
- * @return
- *   The mobile attribute.
- */
-function _simplesamlphp_auth_get_mobile() {
-  global $_simplesamlphp_auth_as;
-  global $_simplesamlphp_auth_saml_attributes;
-  $mobile = '';
-  global $seg;
-  
-   $seg = $_simplesamlphp_auth_saml_attributes['mn'];
-  
-
-  
-  // Check if valid local session exists..
-  if ($_simplesamlphp_auth_as->isAuthenticated()) {
-    if (isset($seg)) {
-      $mobile = $seg[0];
-    }
-    else {
-      //throw new Exception(t('Error in simplesamlphp_auth.module: No valid mobile attribute set.'));
-      $mobile = '';
-    }
-  }
-
-  return $mobile;
-}
-
-/**
- * Gets the first name attribute.
- *
- * @return
- *   The first name attribute.
- */
-function _simplesamlphp_auth_get_fname() {
-  global $_simplesamlphp_auth_as;
-  global $_simplesamlphp_auth_saml_attributes;
-  $fname = '';
-  global $seg;
-  
-   $seg = $_simplesamlphp_auth_saml_attributes['givenName'];
-  
-
-  
-  // Check if valid local session exists..
-  if ($_simplesamlphp_auth_as->isAuthenticated()) {
-    if (isset($seg)) {
-      $fname = $seg[0];
-    }
-    else {
-     // throw new Exception(t('Error in simplesamlphp_auth.module: No valid First Name attribute set.'));
-      $fname = '';
-    }
-  }
-
-  return $fname;
-}
-
-
-/**
- * Gets the last name attribute.
- *
- * @return
- *   The last name attribute.
- */
-function _simplesamlphp_auth_get_lname() {
-  global $_simplesamlphp_auth_as;
-  global $_simplesamlphp_auth_saml_attributes;
-  $lname = '';
-  global $seg;
-  
-   $seg = $_simplesamlphp_auth_saml_attributes['sn'];
-  
-
-  
-  // Check if valid local session exists..
-  if ($_simplesamlphp_auth_as->isAuthenticated()) {
-    if (isset($seg)) {
-      $lname = $seg[0];
-    }
-    else {
-      //throw new Exception(t('Error in simplesamlphp_auth.module: No valid Last name attribute set.'));
-      $lname = '';
-    }
-  }
-
-  return $lname;
-}
 
 /**
  * Forces HTTPS connections.
