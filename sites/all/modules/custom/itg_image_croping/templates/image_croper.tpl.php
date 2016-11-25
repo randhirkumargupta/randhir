@@ -17,15 +17,7 @@
         max-width:none;
     }
 
-    .cropit-preview2 {
-        background-color: #f8f8f8;
-        background-size: cover;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        margin-top: 7px;
-        width: 450px;
-        height: 250px;
-    }
+
     .cropit-preview-image-container {
         cursor: move;
         position: absolute;
@@ -106,14 +98,13 @@
 </style>
 
 <?php
-
 drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
   type' => 'file', 'scope' => 'content'));
 $imagedata = base64_encode(file_get_contents($data->uri));
 $url = file_create_url($data->uri);
 ?>
-<input type="hidden" id="crop_image_url" value="<?php echo $url;?>">
-<input type="hidden" id="image_fiedlid" value="<?php echo $data->fid;?>">
+<input type="hidden" id="crop_image_url" value="<?php echo $url; ?>">
+<input type="hidden" id="image_fiedlid" value="<?php echo $data->fid; ?>">
 
 <div class="croper">
     <div class="first-resize">
@@ -121,9 +112,14 @@ $url = file_create_url($data->uri);
     </div>
 </div>
 <div class="croper-action">
-    <button class="crop-image add-more">Crop</button>
+    <button class=" add-more <?php echo ($extra_crop == 1) ? 'crop-all' : 'crop-image'; ?>">Crop</button>
     <button class="original-image add-more">Use Original</button>
     <button class="cancel-image add-more">Cancel</button>
+    <?php
+    if ($genrate == 1) {
+        print' <button class="generate-Image add-more">Generate Image</button>';
+    }
+    ?>
 </div>
 
 <!--   -->

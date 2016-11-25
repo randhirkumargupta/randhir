@@ -19,7 +19,7 @@
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'getimagetocroper',
                 type: 'post',
-                data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width},
+                data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width, 'content_type':content_type},
                 success: function(data) {
                     //  itg_image_repository.processResponse
                     hideloader();
@@ -50,7 +50,7 @@
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'getimagetocroper',
                 type: 'post',
-                data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width},
+                data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width, 'content_type':content_type},
                 success: function(data) {
                     //  itg_image_repository.processResponse
                     hideloader();
@@ -96,7 +96,7 @@
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'getimagetocroper',
                         type: 'post',
-                        data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width},
+                        data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width, 'content_type':content_type},
                         success: function(data) {
                             //  itg_image_repository.processResponse
                             hideloader();
