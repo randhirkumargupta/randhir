@@ -54,7 +54,7 @@
         </p>
         <div class="share-new">
           <ul>
-            <li><a onclick="gogogo('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+            <li><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
             <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
             <li><a href="#" title=""><?php echo t('Follow the Story'); ?></a></li>
           </ul>
