@@ -88,6 +88,7 @@ foreach ($data as $key => $value) {
           $output_audio = l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), 'node/' . $session, array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
       }
+      if(!empty($output_story_title)){
       ?>
     <div class="content-detail">
       <div class="side-right"><p class="small-title"><?php print $program["session_title"]; ?></p><div class="title"><?php print $output_story_title; ?></div> 
@@ -98,6 +99,7 @@ foreach ($data as $key => $value) {
       <div class="side-left"><?php print $output_story_img; ?></div>
       </div>
       <?php
+      }
     }
     print '</div>';
   }
