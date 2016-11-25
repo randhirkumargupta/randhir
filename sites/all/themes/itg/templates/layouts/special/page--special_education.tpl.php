@@ -94,8 +94,9 @@ if ($theme != 'itgadmin') {
 
 <div class="itg-layout-container <?php echo $itg_class; ?> education-layout-page">
 
-    <div class="row itg-top-section itg-layout-672">
-        
+    <div class="row itg-top-section itg-layout-672 pos-rel">
+         
+        <?php print render($page['vertical_menu']); ?>
         <div class="top-block">
         <div class="col-md-8">
             <div class="">

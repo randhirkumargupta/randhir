@@ -76,7 +76,7 @@ h4.heading a {
   color: #09619f;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block ul {
   list-style-type: none;
 }
 
@@ -479,6 +479,9 @@ header {
 }
 #block-itg-layout-manager-header-block .navigation .menu li a.sponsored-active {
   background: #ffc106;
+  color: #000;
+}
+#block-itg-layout-manager-header-block .navigation .menu li a.sponsored-active:hover {
   color: #000;
 }
 #block-itg-layout-manager-header-block .navigation .menu li a.active, #block-itg-layout-manager-header-block .navigation .menu li a:hover {
@@ -6583,7 +6586,7 @@ footer .footer-copyright {
   color: #fff;
 }
 
-#block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2, .sponsor-detail-container h2 {
+#block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2, .sponsor-detail-container h2, #block-views-event-subsite-speaker-block-2 h2 {
   font-size: 20px;
   border-bottom: 1px solid #dddddd;
   text-transform: uppercase;
@@ -6617,10 +6620,10 @@ footer .footer-copyright {
   margin-bottom: 30px;
 }
 
-#block-views-event-photo-slider-block, #block-views-event-associate-video-block {
+#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block {
   margin-top: 20px;
 }
-#block-views-event-photo-slider-block h2, #block-views-event-associate-video-block h2 {
+#block-views-event-photo-slider-block h2, #block-views-event-associate-video-block h2, #block-views-event-subsite-speaker-block h2 {
   font-size: 24px;
   color: #ef3c24;
   font-family: "Roboto Slab", sans-serif;
@@ -6893,6 +6896,44 @@ footer .footer-copyright {
   line-height: 26px;
   margin-bottom: 5px;
   margin-top: -5px;
+}
+
+#block-views-event-subsite-speaker-block .views-row {
+  width: 33.33333%;
+  float: left;
+}
+#block-views-event-subsite-speaker-block .views-row .view-content {
+  zoom: 1;
+}
+#block-views-event-subsite-speaker-block .views-row .view-content:before, #block-views-event-subsite-speaker-block .views-row .view-content:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-views-event-subsite-speaker-block .views-row .view-content:after {
+  clear: both;
+}
+#block-views-event-subsite-speaker-block .views-row .view-content .views-row {
+  width: 100%;
+  float: none;
+  text-align: center;
+}
+#block-views-event-subsite-speaker-block .views-row .view-content .views-row img {
+  border-radius: 100%;
+  border: 1px solid #ddd;
+}
+#block-views-event-subsite-speaker-block .views-row .view-content .views-row .views-field-title, #block-views-event-subsite-speaker-block .views-row .view-content .views-row .views-field-field-story-new-title {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: roboto;
+  color: #000;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+#block-views-event-subsite-speaker-block .views-row .view-content .views-row .views-field-field-story-new-title {
+  color: #ef2a24;
+  margin-top: 0;
 }
 
 /*CSS end for event page index*/
@@ -8572,3 +8613,324 @@ footer .footer-copyright {
 }
 
 /*css end static feedback form*/
+/*css start ask an expert*/
+.ask-an-expert-question-answer .views-row {
+  padding: 25px 5px;
+}
+.ask-an-expert-question-answer .views-row:hover {
+  background: #f7f7f7;
+}
+.ask-an-expert-question-answer .views-row:last-child {
+  border-bottom: 1px solid #ddd;
+}
+.ask-an-expert-question-answer .view-content {
+  margin: 40px 0;
+}
+.ask-an-expert-question-answer .view-header {
+  font-size: 30px;
+  color: #fff;
+  font-family: roboto;
+  background: #353535;
+  font-weight: 700;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 15px;
+}
+.ask-an-expert-question-answer .expert-question {
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-left: 45px;
+  padding-top: 3px;
+  color: #474747;
+}
+.ask-an-expert-question-answer .expert-question:before {
+  content: '?';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #474747;
+  width: 26px;
+  height: 26px;
+  border-radius: 50% 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 26px;
+}
+.ask-an-expert-question-answer .expert-answer {
+  position: relative;
+  padding-left: 45px;
+  padding-top: 3px;
+}
+.ask-an-expert-question-answer .expert-answer p {
+  line-height: 24px;
+}
+.ask-an-expert-question-answer .expert-answer p a {
+  color: #a00606;
+}
+.ask-an-expert-question-answer .expert-answer:before {
+  content: 'Ans';
+  position: absolute;
+  top: 3px;
+  left: 0;
+  background: #888888;
+  width: 33px;
+  height: 20px;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+}
+.ask-an-expert-question-answer ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+.ask-an-expert-question-answer ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+.ask-an-expert-question-answer ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+.ask-an-expert-question-answer ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+.ask-an-expert-question-answer ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+.ask-an-expert-question-answer ul.pager li.pager-next a, .ask-an-expert-question-answer ul.pager li.pager-last a, .ask-an-expert-question-answer ul.pager li.pager-first a, .ask-an-expert-question-answer ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+.ask-an-expert-question-answer ul.pager li.pager-next.pager-first.first, .ask-an-expert-question-answer ul.pager li.pager-next.pager-last.last, .ask-an-expert-question-answer ul.pager li.pager-last.pager-first.first, .ask-an-expert-question-answer ul.pager li.pager-last.pager-last.last, .ask-an-expert-question-answer ul.pager li.pager-first.pager-first.first, .ask-an-expert-question-answer ul.pager li.pager-first.pager-last.last, .ask-an-expert-question-answer ul.pager li.pager-previous.pager-first.first, .ask-an-expert-question-answer ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
+
+/*css end ask an expert*/
+/*CSS start ask an expert detail*/
+#block-views-ask-an-expert-block-1 h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+#block-views-ask-an-expert-block-1 .views-row {
+  font-size: 21px;
+  font-weight: 500;
+  position: relative;
+  color: #474747;
+  padding: 15px 5px 15px 45px;
+}
+#block-views-ask-an-expert-block-1 .views-row:before {
+  content: '?';
+  position: absolute;
+  top: 12px;
+  left: 0;
+  background: #474747;
+  width: 26px;
+  height: 26px;
+  border-radius: 50% 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 26px;
+}
+#block-views-ask-an-expert-block-1 ul.pager {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: center;
+}
+#block-views-ask-an-expert-block-1 ul.pager li {
+  display: inline-block;
+  vertical-align: top;
+}
+#block-views-ask-an-expert-block-1 ul.pager li.pager-current {
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+  font-family: "Roboto", sans-serif;
+}
+#block-views-ask-an-expert-block-1 ul.pager li.pager-item a {
+  display: block;
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 25px;
+  color: #323232;
+  font-family: "Roboto", sans-serif;
+}
+#block-views-ask-an-expert-block-1 ul.pager li.pager-item a:hover {
+  background-color: #337ab7;
+  color: #fff;
+  border-radius: 50%;
+}
+#block-views-ask-an-expert-block-1 ul.pager li.pager-next a, #block-views-ask-an-expert-block-1 ul.pager li.pager-last a, #block-views-ask-an-expert-block-1 ul.pager li.pager-first a, #block-views-ask-an-expert-block-1 ul.pager li.pager-previous a {
+  color: #323232;
+  line-height: 25px;
+}
+#block-views-ask-an-expert-block-1 ul.pager li.pager-next.pager-first.first, #block-views-ask-an-expert-block-1 ul.pager li.pager-next.pager-last.last, #block-views-ask-an-expert-block-1 ul.pager li.pager-last.pager-first.first, #block-views-ask-an-expert-block-1 ul.pager li.pager-last.pager-last.last, #block-views-ask-an-expert-block-1 ul.pager li.pager-first.pager-first.first, #block-views-ask-an-expert-block-1 ul.pager li.pager-first.pager-last.last, #block-views-ask-an-expert-block-1 ul.pager li.pager-previous.pager-first.first, #block-views-ask-an-expert-block-1 ul.pager li.pager-previous.pager-last.last {
+  display: none;
+}
+
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config {
+  padding: 15px 10px;
+  background: #f7f7f7;
+  margin-bottom: 50px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form {
+  overflow: hidden;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form #question p {
+  display: none;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form #askname, #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form #askemail {
+  float: left;
+  width: 40%;
+  margin-top: 15px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form #askname input[type="text"], #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form #askemail input[type="text"] {
+  width: 90%;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .form-submit {
+  float: left;
+  width: 20%;
+  margin-top: 15px;
+  background: #434343;
+  border: none;
+  height: 32px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .question-form-title h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail {
+  zoom: 1;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+  margin-bottom: 50px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail:before, #block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail:after {
+  clear: both;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .section-user-details {
+  float: left;
+  width: 60%;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .section-user-details img {
+  border-radius: 50% 50%;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #ddd;
+  float: left;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .section-user-details .section-user-name {
+  float: left;
+  padding-left: 10px;
+  padding-top: 5px;
+  font-size: 12px;
+  color: #6b6b6b;
+  text-transform: uppercase;
+  font-family: roboto;
+  font-weight: 600;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .ask-an-expert-like-dislike {
+  float: left;
+  width: 40%;
+  text-align: center;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .ask-an-expert-like-dislike button {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .ask-an-expert-like-dislike button span {
+  color: #208302;
+  font-size: 16px;
+  font-weight: 700;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .ask-an-expert-like-dislike button#dislike_count span {
+  color: #ef0302;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block .ask-user-detail .ask-an-expert-like-dislike p {
+  font-size: 12px;
+  font-family: "Roboto", sans-serif;
+  color: #000;
+  font-weight: 500;
+}
+
+/*CSS End ask an expert detail*/
+/*css start related content*/
+#block-itg-front-end-common-related-photo-block h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #bb0a0a;
+  display: none;
+  position: relative;
+}
+#block-itg-front-end-common-related-photo-block h3 span {
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  /* padding-left: 10px; */
+  padding: 45px 20px 10px 10px;
+  display: inline-block;
+}
+#block-itg-front-end-common-related-photo-block h3:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 20px;
+  height: 5px;
+  margin-top: -2px;
+  background: #ddd;
+}
+#block-itg-front-end-common-related-photo-block h3 {
+  display: block;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+#block-itg-front-end-common-related-photo-block .views-field-ds-changed {
+  display: block;
+  font-size: 12px;
+  color: #b1b1b1;
+  padding: 8px 0 5px;
+}
+
+/*css end related content*/

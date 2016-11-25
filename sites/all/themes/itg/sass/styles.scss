@@ -358,6 +358,9 @@ header{
                         &.sponsored-active{
                             background: #ffc106;
                             color: #000;
+                            &:hover{
+                                color: #000;
+                            }
                         }
                         &.active, &:hover{
                                 color: #ffc106;
@@ -5109,7 +5112,7 @@ footer{
         }
     }
 }
-#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container{
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container, #block-views-event-subsite-speaker-block-2{
     h2{
         font-size: 20px;
         border-bottom: 1px solid $border-color;
@@ -5145,7 +5148,7 @@ footer{
         }
     }        
 }
-#block-views-event-photo-slider-block, #block-views-event-associate-video-block{
+#block-views-event-photo-slider-block, #block-views-event-associate-video-block, #block-views-event-subsite-speaker-block{
     margin-top: 20px;
     ul{
         @extend .list-none;
@@ -5395,6 +5398,36 @@ footer{
             margin-top: -5px;
         }
     }   
+}
+#block-views-event-subsite-speaker-block{
+    .views-row{
+        @include calculate-width(3);
+        @include float(left);
+        .view-content{            
+            @include clearfix;
+            .views-row{                
+                @include calculate-width(1);
+                @include float(none);
+                @include text-align(center);
+                img{
+                    border-radius: 100%;
+                    border: 1px solid #ddd;
+                }
+                .views-field-title, .views-field-field-story-new-title{
+                    font-size: 11px;
+                    font-weight: 700;
+                    font-family: roboto;
+                    color: #000;
+                    margin-top: 10px;
+                    text-transform: uppercase;
+                }
+                .views-field-field-story-new-title{
+                    color: #ef2a24;  
+                    margin-top:0; 
+                }
+            }
+        }
+    }
 }
 /*CSS end for event page index*/
 
@@ -7110,3 +7143,228 @@ input[type="radio"]:checked + label:after{
         }
 }
 /*css end static feedback form*/
+/*css start ask an expert*/
+.ask-an-expert-question-answer{
+    .views-row{
+        padding: 25px 5px;
+        &:hover{
+            background: #f7f7f7;
+        }        
+        &:last-child{
+            border-bottom: 1px solid #ddd;
+        }
+    }
+    .view-content{
+        margin: 40px 0;
+    }
+    .view-header{
+        font-size: 30px;
+        color: #fff;
+        font-family: roboto;
+        background: #353535;
+        font-weight: 700;
+        height: 50px;
+        line-height: 50px;
+        padding-left: 15px;
+    }
+    .expert-question{
+        font-size: 21px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 45px;
+        padding-top: 3px;
+        color:#474747;
+        &:before{
+            content: '?';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #474747;
+            width: 26px;
+            height: 26px;
+            border-radius: 50% 50%;
+            color: #fff;
+            text-align: center;
+            line-height: 26px;
+        }
+    }
+    .expert-answer{
+        position: relative;
+        padding-left: 45px;
+        padding-top: 3px;
+        p{
+            line-height: 24px;
+            a{
+                color:#a00606;
+            }
+        }        
+        &:before{
+            content: 'Ans';
+            position: absolute;
+            top: 3px;
+            left: 0;
+            background: #888888;
+            width: 33px;
+            height: 20px;            
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+        }
+    }
+    @include pager;    
+}
+/*css end ask an expert*/
+
+/*CSS start ask an expert detail*/
+#block-views-ask-an-expert-block-1{
+    h2{
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    .views-row{
+            font-size: 21px;
+            font-weight: 500;            
+            position: relative;                        
+            color: #474747;
+            padding: 15px 5px 15px 45px;
+        &:before{
+            content: '?';
+            position: absolute;
+            top: 12px;
+            left: 0;
+            background: #474747;
+            width: 26px;
+            height: 26px;
+            border-radius: 50% 50%;
+            color: #fff;
+            text-align: center;
+            line-height: 26px;
+        }
+    }
+    @include pager;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block{    
+    #expert_global_config{
+        padding: 15px 10px;
+        background: #f7f7f7; 
+        margin-bottom:50px;
+        #itg-custom-ask-an-expert-form{   
+            overflow: hidden;
+            #question{
+                p{
+                    display: none;
+                }
+            }
+            #askname, #askemail{
+                @include float(left);
+                width: 40%;
+                margin-top:15px;
+                input[type="text"]{
+                    width: 90%;
+                }
+            }
+            .form-submit{
+                @include float(left);
+                width: 20%;
+                margin-top:15px;
+                background: #434343;
+                border: none;
+                height: 32px;
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+            }
+        }        
+    }
+    .question-form-title{
+        h3{
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+    }
+    .ask-user-detail{
+        @include clearfix;
+        border-top:1px solid #ddd;
+        border-bottom:1px solid #ddd;
+        padding:20px 0;
+        margin-bottom:50px;
+        h4{
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .section-user-details{
+            @include float(left);
+            width: 60%;
+            img{
+                border-radius: 50% 50%;
+                width: 60px;
+                height: 60px;
+                border: 2px solid #ddd;
+                float: left;
+            }
+            .section-user-name{
+                float: left;
+                padding-left: 10px;
+                padding-top: 5px;
+                font-size: 12px;
+                color: #6b6b6b;
+                text-transform: uppercase;
+                font-family: roboto;
+                font-weight: 600;
+            }
+        }
+        .ask-an-expert-like-dislike{
+            @include float(left);
+            width: 40%;
+            text-align: center;
+            button{
+                background: transparent;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                padding: 0 10px;
+                span{
+                    color: #208302;
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+                &#dislike_count{
+                    span{
+                    color: #ef0302;    
+                    }
+                }
+            }
+            p{
+                font-size: 12px;
+                font-family: $itg-roboto;
+                color: #000;
+                font-weight: 500;
+            }
+        }
+    }
+}
+/*CSS End ask an expert detail*/
+
+/*css start related content*/
+#block-itg-front-end-common-related-photo-block{
+    @include sidebar-heading;
+    h3{
+        display: block;
+        padding-left: 0;
+        margin-bottom: 20px;
+    }
+    ul{
+        @extend .list-none;
+    }
+    .views-field-ds-changed{
+        display: block;
+        font-size: 12px;
+        color: #b1b1b1;
+        padding: 8px 0 5px;
+    }
+}
+/*css end related content*/
