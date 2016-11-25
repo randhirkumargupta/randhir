@@ -18,17 +18,33 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
 
 <div class="program-sub-title" style="color: <?php print $program_title_font_color;?>; background: <?php print $heading_background_color; ?>">Program Schedule</div>
 <div class="row">
+  <?php $output_left = '';
+  $output_right = '';
+  ?>
 <?php foreach ($rows as $index => $row): ?>
-<div class="col-md-6">
-    <div class="content-list" style="background: <?php print $heading_background_color; ?>">
-    <div style="color:<?php print $content_font_color; ?>"><?php print $row['field_start_time']; ?></div>
-        <div class="story-expert-name" style="color: <?php print $font_color; ?>"> <?php print $row['field_story_expert_name']; ?></div>
-    <?php //print $row['field_daywise_event']; ?>
-              
-     <?php //print $row['title']; ?>
-   <div class="program-schedule-content" style="color:<?php print $content_font_color; ?>"><?php print $row['view']; ?></div>
-   
-  </div>
-</div>    
+<!--<div class="col-md-6">-->
+  <?php
+  $row_count = count($rows);
+    if ($index <= ((round($row_count / 2)) - 1)) {
+    $output_left .= '<div class="content-list" style="background:'.$heading_background_color.'">';
+    $output_left .= '<div style="color:'.$content_font_color .'">'.$row['field_start_time'].'</div>';
+    $output_left .= '<div class="story-expert-name" style="color:'.$font_color.'">'.$row['field_story_expert_name'].'</div>';
+    $output_left .= '<div class="program-schedule-content" style="color:'.$content_font_color.'">'.$row['view'].'</div></div>';
+    }else{
+    $output_right .= '<div class="content-list" style="background:'.$heading_background_color.'">';
+    $output_right .= '<div style="color:'.$content_font_color .'">'.$row['field_start_time'].'</div>';
+    $output_right .= '<div class="story-expert-name" style="color:'.$font_color.'">'.$row['field_story_expert_name'].'</div>';
+    $output_right .= '<div class="program-schedule-content" style="color:'.$content_font_color.'">'.$row['view'].'</div></div>';
+    }
+    ?>
+<!--  </div>  -->
 <?php endforeach; ?>
+<?php
+if(!empty($output_left)){
+  print '<div class ="left-side-event-content col-md-6">'.$output_left.'</div>';
+}
+if(!empty($output_right)){
+  print '<div class ="right-side-event-content col-md-6">'.$output_right.'</div>';
+}
+?>
 </div>

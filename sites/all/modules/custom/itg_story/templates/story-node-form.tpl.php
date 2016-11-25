@@ -52,6 +52,10 @@
         <?php print drupal_render($form['field_story_redirection_url_titl']); ?>
         <?php print drupal_render($form['field_story_courtesy']); ?>
         <?php print drupal_render($form['field_story_snap_post']); ?>
+        
+        <?php print drupal_render($form['field_story_associate_lead']); ?>
+        <?php print drupal_render($form['field_associate_photo_gallery']); ?>
+        <?php print drupal_render($form['field_story_associate_video']); ?>
       </div>
     </div>
     <div id="ExpertChunk" class="itg-form-section-wrapper">

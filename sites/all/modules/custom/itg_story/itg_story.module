@@ -43,13 +43,7 @@ function itg_story_menu() {
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
-  );
-  $items['create-poll-table'] = array(
-    'page callback' => 'create_poll_table',
-    'access arguments' => array('access itg story'),
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_story.inc',
-  );
+  );  
 
   return $items;
 }
@@ -292,7 +286,9 @@ function itg_story_after_build($form, &$form_state) {
               jQuery("#edit-path-pathauto").attr("checked", true);            
             });', array('type' => 'inline', 'scope' => 'footer'));
   }
-
+  
+  unset($form['field_story_associate_lead'][LANGUAGE_NONE]['_none']);
+  
   $form['field_story_select_magazine']['und']['#title'] = t('Select magazine') . '<span class="form-required" title="This field is required."> *</span>';
   $form['field_story_magazine_kicker_text']['und']['#title'] = t('Magazine kicker') . '<span class="form-required" title="This field is required."> *</span>';
 
@@ -515,6 +511,23 @@ function itg_story_library_alter(&$libraries, $module) {
     $libraries['drupal.autocomplete']['js'][$library] = array('group' => JS_DEFAULT);
   }
 }
+
+/**
+ * Get video with player
+ * @param int $nid
+ * @return string $content
+ */
+function itg_get_video_display($nid) {
+  $node = node_load($nid);
+  if (module_exists('itg_videogallery')) {
+    $vid = itg_videogallery_get_videoid($row['fid']);
+  }
+  $content = '<iframe frameborder="0"
+            src="https://www.dailymotion.com/embed/video/'.$vid.'?autoplay=0&mute=1&ui-start-screen-info"
+            allowfullscreen></iframe>';
+  return $content;
+}
+ 
 
 
 

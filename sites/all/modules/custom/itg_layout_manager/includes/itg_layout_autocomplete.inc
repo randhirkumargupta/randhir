@@ -26,7 +26,8 @@ function itg_category_autocomplete_list($string) {
   $itg_query = db_select('taxonomy_term_data', 'itg');
   $itg_query->condition('vid', CATEGORY_MANAGMENT, '=');
   $itg_query->condition('name', '%' . $string . '%', 'LIKE')
-          ->fields('itg', array('tid', 'name'));
+            ->fields('itg', array('tid', 'name'));
+  
   $result = $itg_query->execute()->fetchAll();
     
  if (isset($result)) { 
@@ -49,7 +50,9 @@ function section_widgets_ajax() {
   
   if($arg[1] == 'insert') {
     // insert query
-    if ((isset($_GET['section_name']) && ($_GET['section_name'] != '_none')) && (isset($_GET['template_name']) && ($_GET['template_name'] != '_none'))) {
+    if ((isset($_GET['section_name']) && ($_GET['section_name'] != '_none')) 
+            && (isset($_GET['template_name']) 
+            && ($_GET['template_name'] != '_none'))) {
       //widgets_type
       $category_array = explode('(', $_GET['category_name']);
       $cid = substr($category_array[1], 0,-1);
@@ -67,20 +70,21 @@ function section_widgets_ajax() {
               'created_date' => time()        
             ));
 
-            $unpublish_tpl_id = $query_layout_tpl->execute();
+        $unpublish_tpl_id = $query_layout_tpl->execute();
       }
     }
   }
   elseif ($arg[1] == 'delete') {
-      $query = db_select('itg_section_widgets_list', 'section');
-      $query->fields('section', array('widget_type'));
-      $query->condition('id', $_GET['id']);
-      $_GET['widgets_type'] = $query->execute()->fetchField();
+    $query = db_select('itg_section_widgets_list', 'section');
+    $query->fields('section', array('widget_type'));
+    $query->condition('id', $_GET['id']);
+    $_GET['widgets_type'] = $query->execute()->fetchField();
       
     db_delete('itg_section_widgets_list')->condition('id', $_GET['id'])->execute();
   }
   
   $content = display_section_widgets_list($_GET['section_name'], $_GET['template_name'], $_GET['widgets_type']); 
+  
   echo $content;
   exit;
   

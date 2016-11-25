@@ -10,7 +10,7 @@
 $node_data = array();
 $nid = get_recent_created_node_for_sosorry();
 $node_data = node_load($nid);
-$video_fid = $node_data->field_upload_video['und'][0]['fid'];
+$video_fid = itg_videogallery_get_videoid($node_data->field_upload_video['und'][0]['fid']);
 ?>
 <?php foreach ($rows as $id => $row): ?>
   <?php

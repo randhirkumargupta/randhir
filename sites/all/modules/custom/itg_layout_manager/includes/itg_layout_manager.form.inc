@@ -35,19 +35,19 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   $template = get_template_name($arg1);
     
   $form['section'] = array(
-       '#type' => 'select',
-       '#title' => t('Select Section'),
-       '#options' => $op,
-       '#required' => TRUE,
-       '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
+    '#type' => 'select',
+    '#title' => t('Select Section'),
+    '#options' => $op,
+    '#required' => TRUE,
+    '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
    );
   
   $form['template_name'] = array(
-       '#type' => 'select',
-       '#title' => t('Select template'),
-       '#options' => $template,
-       '#required' => TRUE,
-       '#default_value' => isset($_GET['template_name']) ? $_GET['template_name'] : "",       
+    '#type' => 'select',
+    '#title' => t('Select template'),
+    '#options' => $template,
+    '#required' => TRUE,
+    '#default_value' => isset($_GET['template_name']) ? $_GET['template_name'] : "",       
    );
    
   $form['submit'] = array(
@@ -95,11 +95,11 @@ function itg_layout_manager_filter_form($form, &$form_state) {
   }  
   
   $form['section'] = array(
-       '#type' => 'select',
-       '#title' => t('Select Section'),
-       '#options' => $op,
-       '#required' => TRUE,
-       '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
+    '#type' => 'select',
+    '#title' => t('Select Section'),
+    '#options' => $op,
+    '#required' => TRUE,
+    '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
   );
   
   $form['items_per_page'] = array(
@@ -181,8 +181,7 @@ function layout_section_widget2_search_form($form, &$form_state) {
   
   if ($_GET['template_name'] != 'page--front' ) {
     $arg = $_GET['section'];
-  }
-  
+  }  
   
   $widgets_type = 'section_widget2_wise_order';
   

@@ -18,6 +18,22 @@ function itg_personalization_refer_a_friend_form($form, &$form_state) {
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
   );
   drupal_add_js(array('itg_personalization' => array('base_url' => $base_url)), array('type' => 'setting'));
+  
+  $output = '<div class="social-edit">';
+  $output .= '<ul>';
+  $output .= '<li>Via Social</li>';
+  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/facebook-edit.png"></li>';
+  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/edit-twitter.png"></li>';
+  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/google-plus-edit.png"></li>';       
+  $output .= '<li><img alt="" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/linkedin-edit.png"></li>';
+  $output .= '</ul>';
+  $output .= '<div class="more-option"> OR </div>';
+  $output .= '<div>';
+  
+  $form['social_icons'] = array(
+    '#type' => 'markup',
+    '#markup' => $output,
+  );
   $form['friend_fieldset'] = array(
     '#type' => 'fieldset',
     '#title' => t('Friend List'),
