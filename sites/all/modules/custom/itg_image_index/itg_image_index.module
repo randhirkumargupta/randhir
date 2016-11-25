@@ -19,12 +19,12 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
     $document->addField('sm_image_title', $node->field_story_extra_large_image['und']['0']['title']);
   }
 
-  if (isset($node->field_story_expert_description['und']['0']['value'])) {
-    $document->addField('sm_field_story_expert_description', $node->field_story_expert_description['und']['0']['value']);
+  if (isset($node->field_story_expert_description['und']['0']['value']) && $node->type == 'story') {
+    $document->addField('sm_field_custom_expert_description', $node->field_story_expert_description['und']['0']['value']);
   }
 
   if (isset($node->type) && $node->type == 'story') {
-    $document->addField('sm_field_custom_story_description', $node->body[$node->language][0]['value']);
+    $document->addField('sm_field_custom_story_description_text', $node->body[$node->language][0]['value']);
   }
 
   if (isset($node->field_story_extra_small_image['und']['0']['alt'])) {
