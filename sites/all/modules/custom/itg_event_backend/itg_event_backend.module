@@ -527,6 +527,11 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
             'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
             'variables' => array('data' => NULL),
         ),
+        'itg_program_post_event' => array(
+            'template' => 'itg-program-post-event',
+            'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+            'variables' => array('data' => NULL),
+        ),
         'tweet_right_sidebar_event' => array(
             'template' => 'tweet-right-sidebar-event',
             'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
@@ -570,6 +575,10 @@ function itg_event_backend_block_info() {
     );
     $blocks['program_tab_block'] = array(
         'info' => t('Program Schedule Tab Block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+    $blocks['post_event_block'] = array(
+        'info' => t('Post Event block'),
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
     $blocks['ad_right_sidebar_event'] = array(
@@ -617,6 +626,9 @@ function itg_event_backend_block_view($delta = '') {
             break;
         case 'program_tab_block':
             $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab()));
+            break;
+        case 'post_event_block':
+            $block['content'] = theme('itg_program_post_event', array('data' => itg_event_backend_program_schedule_tab()));
             break;
         case 'ad_right_sidebar_event':
             $page_name = 'Rest';
@@ -839,12 +851,40 @@ function itg_event_backend_get_session_story_title($daywise, $font_color) {
         $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
         $story_nid = $daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id'];
         $story_title = itg_common_get_node_title($story_nid);
+        $story_detail = itg_event_get_story_details($story_nid);
         $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
-       
+        $session['story_details'][] = $story_detail;
     }
     return $session;
 }
 
+/**
+ * Implement function for story node details.
+ * @param type int
+ * @return array
+ */
+function itg_event_get_story_details($nid){
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_story_extra_large_image', 'extra_large_img', 'extra_large_img.entity_id = n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'story_kicker', 'story_kicker.entity_id = n.nid');
+  $query->leftJoin('file_managed', 'fm', 'fm.fid = extra_large_img.field_story_extra_large_image_fid');
+  $query->fields('extra_large_img', array('field_story_extra_large_image_fid'));
+  $query->fields('n', array('title', 'nid'));
+  $query->fields('story_kicker',array('field_story_kicker_text_value'));
+  $query->fields('fm',array('uri'));
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute();
+  foreach($result as $rel){
+    $resu['uri'] = $rel->uri;
+    $resu['kicker'] = $rel->field_story_kicker_text_value;
+    $resu['nid'] = $rel->nid;
+  }
+  return $resu;
+}
+
+/**
+ * {@inheritdoc}
+ */
 function itg_event_backend_menu() {
     $items['itg-event-test'] = array(
         'page callback' => 'itg_event_backend_page',
@@ -1174,4 +1214,121 @@ function itg_event_backend_insert_into_redirect($node) {
 function itg_event_backend_header_add_block() {
   $block = module_invoke('itg_event_backend', 'block_view', 'event_header_adds');
   return render($block['content']);
+}
+
+/**
+ * Impement function for conver number to words
+ * @param type int
+ * @return str
+ */
+function itg_event_backend_convert_number_to_words($number) {
+
+    $hyphen      = '-';
+    $conjunction = ' and ';
+    $separator   = ', ';
+    $negative    = 'negative ';
+    $decimal     = ' point ';
+    $dictionary  = array(
+        0                   => 'zero',
+        1                   => 'one',
+        2                   => 'two',
+        3                   => 'three',
+        4                   => 'four',
+        5                   => 'five',
+        6                   => 'six',
+        7                   => 'seven',
+        8                   => 'eight',
+        9                   => 'nine',
+        10                  => 'ten',
+        11                  => 'eleven',
+        12                  => 'twelve',
+        13                  => 'thirteen',
+        14                  => 'fourteen',
+        15                  => 'fifteen',
+        16                  => 'sixteen',
+        17                  => 'seventeen',
+        18                  => 'eighteen',
+        19                  => 'nineteen',
+        20                  => 'twenty',
+        30                  => 'thirty',
+        40                  => 'fourty',
+        50                  => 'fifty',
+        60                  => 'sixty',
+        70                  => 'seventy',
+        80                  => 'eighty',
+        90                  => 'ninety',
+        100                 => 'hundred',
+        1000                => 'thousand',
+        1000000             => 'million',
+        1000000000          => 'billion',
+        1000000000000       => 'trillion',
+        1000000000000000    => 'quadrillion',
+        1000000000000000000 => 'quintillion'
+    );
+
+    if (!is_numeric($number)) {
+        return false;
+    }
+
+    if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
+        // overflow
+        trigger_error(
+            'convert_number_to_words only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
+            E_USER_WARNING
+        );
+        return false;
+    }
+
+    if ($number < 0) {
+        return $negative . convert_number_to_words(abs($number));
+    }
+
+    $string = $fraction = null;
+
+    if (strpos($number, '.') !== false) {
+        list($number, $fraction) = explode('.', $number);
+    }
+
+    switch (true) {
+        case $number < 21:
+            $string = $dictionary[$number];
+            break;
+        case $number < 100:
+            $tens   = ((int) ($number / 10)) * 10;
+            $units  = $number % 10;
+            $string = $dictionary[$tens];
+            if ($units) {
+                $string .= $hyphen . $dictionary[$units];
+            }
+            break;
+        case $number < 1000:
+            $hundreds  = $number / 100;
+            $remainder = $number % 100;
+            $string = $dictionary[$hundreds] . ' ' . $dictionary[100];
+            if ($remainder) {
+                $string .= $conjunction . convert_number_to_words($remainder);
+            }
+            break;
+        default:
+            $baseUnit = pow(1000, floor(log($number, 1000)));
+            $numBaseUnits = (int) ($number / $baseUnit);
+            $remainder = $number % $baseUnit;
+            $string = convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
+            if ($remainder) {
+                $string .= $remainder < 100 ? $conjunction : $separator;
+                $string .= convert_number_to_words($remainder);
+            }
+            break;
+    }
+
+    if (null !== $fraction && is_numeric($fraction)) {
+        $string .= $decimal;
+        $words = array();
+        foreach (str_split((string) $fraction) as $number) {
+            $words[] = $dictionary[$number];
+        }
+        $string .= implode(' ', $words);
+    }
+
+    return $string;
 }

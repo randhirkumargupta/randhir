@@ -46,6 +46,9 @@ function itg_preprocess_node(&$variables) {
     // Add new template variation.
     $variables['theme_hook_suggestions'][] = 'node__' . $title;
     $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
+    if (function_exists(global_comment_last_record)) {
+      $variables['global_comment_last_record'] = global_comment_last_record();
+    }
   }
 
   if ($variables['type'] == 'webform') {
