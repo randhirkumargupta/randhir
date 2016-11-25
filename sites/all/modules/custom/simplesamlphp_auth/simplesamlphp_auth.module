@@ -305,7 +305,7 @@ function simplesamlphp_auth_init() {
                   )
                 )
               ));
-              $userinfo = array('roles' => $roles);
+              //$userinfo = array('roles' => $roles);
               $user = user_save($user, $userinfo); // @todo - Fjernet rolle-delen her da den gav en bra feilmelding når roller ikke finnes ;)
             }
 
