@@ -92,6 +92,7 @@ foreach ($data as $key => $value) {
             <?php
             foreach ($program['speaker'] as $speaker) {
               $spk_detail = itg_event_backend_get_speaker_details($speaker['target_id']);
+              if(!empty($spk_detail)){
               print '<div class="profile-loop"><label style="color:'.$font_color.'">Speaker:</label>';
               //$spk_title = '<div class="speaker-title"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank" style="color:'.$content_font_color.'">'.$spk_detail[0]->title.'</a></div>';
               $spk_title = '<div class="speaker-title">'.l(t($spk_detail[0]->title), 'speaker-details', array('attributes' => array('style' => 'color:'.$content_font_color),'query' => array('speaker' => $spk_detail[0]->nid))).'</div>';
@@ -99,6 +100,7 @@ foreach ($data as $key => $value) {
               //print '<div class="speaker-image"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank">'.$img.'</a></div>';
               print '<div class="speaker-image">'. l($img, 'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)).'</div>';
               print '<div class="speaker-designation" style="color:'.$content_font_color.'">' . t($spk_title . $spk_detail[0]->field_story_new_title_value) . '</div></div>';
+              }
             }
             ?>
           </div>

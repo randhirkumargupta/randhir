@@ -1375,8 +1375,11 @@ function itg_event_backend_redirect_flashback($val, $detail){
   $query->fields('r');
   $query->condition('r.source', $val, 'IN');
   $result = $query->execute();
+  $count = 0;
   foreach($result as $rel){
-    $past_event[] = $detail[$rel->source];
+    $past_event[$count] = $detail[$rel->source];
+    $past_event[$count]['redirect'] = $rel->redirect;
+    $count++;
   }
   return $past_event;
 }
@@ -1389,7 +1392,7 @@ function itg_event_backend_redirect_flashback($val, $detail){
 function itg_event_backend_current_event_domain($nid){
   $query = db_select('redirect', 'r');
   $query->fields('r', array('redirect'));
-  $query->condition('r.source', 'node/'.$nid, '=');
+  $query->condition('r.source', $nid, '=');
   $result = $query->execute()->fetchCol();
   return $result;
 }
