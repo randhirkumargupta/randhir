@@ -483,10 +483,17 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
               if ($field_collection_item[$value]->field_image_syndication['und'][0]['value'] == 'yes') {
                 $field_collection_item_uri = $field_collection_item[$value]->field_images[LANGUAGE_NONE][0]['uri'];
                 $temp_requred_value[] = file_create_url($field_collection_item_uri);
-                $_SESSION['field_gallery_image'] = file_create_url($field_collection_item_uri);
               }
             }
             $required_value['field_gallery_image'] = $temp_requred_value;
+          }
+          elseif ($field_name == 'body') {
+            if (function_exists('remove_extra_tag_in_body')) {
+              $required_value[] = "<![CDATA[" . remove_extra_tag_in_body($field_item[0]['value'], ENT_XML1, 'UTF-8') . "]]>";
+            }
+            else {
+              $required_value[] = "<![CDATA[" . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . "]]>";
+            }
           }
           else {
             $required_value[] = "<![CDATA[" . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . "]]>";
