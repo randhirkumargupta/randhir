@@ -28,7 +28,7 @@
             <ul>
               <li><a href="#"><i class="fa fa-heart"></i> <span>585</span></a></li>
               <li><?php print $row['ops']; ?></li>
-              <li><a onclick="gogogo('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
+              <li><a onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
               <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
               <li><a href="#"><i class="fa fa-envelope"></i> <span>Email</span></a></li>
               <li class="mhide"><a href="#"><i class="fa fa-link"></i> <span>Embed</span></a></li>
