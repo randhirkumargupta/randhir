@@ -275,7 +275,34 @@ function get_generated_feed($message, $var_array, $node, $data_array, $text) {
       //Fix for sydication images repeated value.
       if ($var_array[1][$i] == 'field_gallery_image') {
         $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-        $return_value_for_sydiation[0] = $field_gallery_image['field_gallery_image'][0];
+        //<media:thumbnail url="image url"/>
+        //$return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_gallery_image']);
+        // handle case for creting multiple media tag. if there is multiple images
+        $tags_start = "";
+        $count_synd = count($field_gallery_image['field_gallery_image']) - 1;
+        // Create multiple media tag if images count are more then 1
+        // In case of only 1 , its working fine.
+        // condition for counting images in file_gallery_image
+        if (count($field_gallery_image['field_gallery_image']) > 1) {
+          foreach ($field_gallery_image['field_gallery_image'] as $tag_key => $synd_images) {
+            if ($tag_key == 0) {
+              $tags_start .= $synd_images . '"/>';
+            }
+            elseif ($tag_key < $count_synd) {
+              $tags_start .= '<media:thumbnail url="' . $synd_images . '"/>';
+            }
+            elseif ($tag_key == $count_synd) {
+              $tags_start .= '<media:thumbnail url="' . $synd_images;
+            }
+          }
+          $return_value_for_sydiation[0] = $tags_start;
+        }
+        // If count id equal to 1 execute this code.
+        else {
+          // variable $field_gallery_image['field_gallery_image'] give array of syndication image
+          // so only zero index value will be pick.
+          $return_value_for_sydiation[0] = $field_gallery_image['field_gallery_image'][0];
+        }
       }
       else {
         $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
@@ -456,6 +483,7 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
               if ($field_collection_item[$value]->field_image_syndication['und'][0]['value'] == 'yes') {
                 $field_collection_item_uri = $field_collection_item[$value]->field_images[LANGUAGE_NONE][0]['uri'];
                 $temp_requred_value[] = file_create_url($field_collection_item_uri);
+                $_SESSION['field_gallery_image'] = file_create_url($field_collection_item_uri);
               }
             }
             $required_value['field_gallery_image'] = $temp_requred_value;
