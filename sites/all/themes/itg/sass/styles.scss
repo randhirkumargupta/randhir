@@ -3227,6 +3227,7 @@ footer{
         width: 100%;
         position: relative;
         border-bottom: 1px solid #d9d9d9;
+        overflow: auto;
         li{
             @include display-inline;
             border-right: 0;
@@ -5112,7 +5113,7 @@ footer{
         }
     }
 }
-#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container, #block-views-event-subsite-speaker-block-2{
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container, #block-views-event-subsite-speaker-block-2, #block-views-event-subsite-speaker-block-3{
     h2{
         font-size: 20px;
         border-bottom: 1px solid $border-color;
@@ -7463,6 +7464,9 @@ input[type="radio"]:checked + label:after{
         display: block;
         padding-left: 0;
         margin-bottom: 20px;
+        span{
+            padding-left: 0;
+        }
     }
     ul{
         @extend .list-none;

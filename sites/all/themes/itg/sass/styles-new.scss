@@ -3542,6 +3542,7 @@ body.has-cart-popup{
 [id*="itg-personalization-refer-a-friend-form"]{
     fieldset{
         border: none;
+        text-align: left;
         legend{
             display: none;
         }
@@ -3552,11 +3553,25 @@ body.has-cart-popup{
         color: #075bbb;
         font-size: 14px;
         margin-top: 0;
+        cursor: pointer;
     }    
     > div [id*="edit-submit"]{            
             margin: 60px auto 0;
             display: block;
     }    
+}
+[id*="itg-personalization-edit-profile-form"]{
+    > div .form-type-managed-file .form-managed-file{
+        img{
+            max-height: 80px;            
+            margin-bottom: 10px;
+        }
+        input[type="file"]{
+            + .discription{
+                
+            }
+        }
+    }
 }
 #block-itg-personalization-personalization-edit-profile, #block-itg-personalization-personalization-refer-friend{    
     max-width: 780px;
@@ -3587,11 +3602,11 @@ body.has-cart-popup{
         background: #f8f8f8;
         text-align: center;
         font-family: $itg-roboto;
-        padding-top:60px;
+        padding-top:20px;
         color:#757575;
-        ul{
+        > ul{
             display: inline-block;
-            li{
+            > li{
                 padding: 0 10px;               
                 &:first-child{
                     margin-top: 15px;
@@ -3599,7 +3614,8 @@ body.has-cart-popup{
             }
         }
         .more-option{
-            margin-top: 40px;
+            margin-top: 35px;
+            margin-bottom: 10px;
         }
     }
 }

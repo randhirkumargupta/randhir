@@ -3560,6 +3560,7 @@ body.has-cart-popup {
 
 [id*="itg-personalization-refer-a-friend-form"] fieldset {
   border: none;
+  text-align: left;
 }
 [id*="itg-personalization-refer-a-friend-form"] fieldset legend {
   display: none;
@@ -3570,10 +3571,16 @@ body.has-cart-popup {
   color: #075bbb;
   font-size: 14px;
   margin-top: 0;
+  cursor: pointer;
 }
 [id*="itg-personalization-refer-a-friend-form"] > div [id*="edit-submit"] {
   margin: 60px auto 0;
   display: block;
+}
+
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file img {
+  max-height: 80px;
+  margin-bottom: 10px;
 }
 
 #block-itg-personalization-personalization-edit-profile, #block-itg-personalization-personalization-refer-friend {
@@ -3606,20 +3613,21 @@ body.has-cart-popup {
   background: #f8f8f8;
   text-align: center;
   font-family: "Roboto", sans-serif;
-  padding-top: 60px;
+  padding-top: 20px;
   color: #757575;
 }
-#block-itg-personalization-personalization-refer-friend .social-edit ul {
+#block-itg-personalization-personalization-refer-friend .social-edit > ul {
   display: inline-block;
 }
-#block-itg-personalization-personalization-refer-friend .social-edit ul li {
+#block-itg-personalization-personalization-refer-friend .social-edit > ul > li {
   padding: 0 10px;
 }
-#block-itg-personalization-personalization-refer-friend .social-edit ul li:first-child {
+#block-itg-personalization-personalization-refer-friend .social-edit > ul > li:first-child {
   margin-top: 15px;
 }
 #block-itg-personalization-personalization-refer-friend .social-edit .more-option {
-  margin-top: 40px;
+  margin-top: 35px;
+  margin-bottom: 10px;
 }
 
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox {
