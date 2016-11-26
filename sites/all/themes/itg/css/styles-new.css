@@ -3369,8 +3369,10 @@ body.has-cart-popup {
   border: none;
   width: 100%;
   height: 100%;
-  padding-left: 150px;
   z-index: 9;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"], [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"] {
+  background: #fff url(../images/calender-icon.png) no-repeat right center;
 }
 [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding label, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding label {
   display: none;

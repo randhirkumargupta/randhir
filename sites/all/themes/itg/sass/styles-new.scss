@@ -3341,9 +3341,11 @@ body.has-cart-popup{
             top: 0;
             border: none;
             width: 100%;
-            height: 100%;
-            padding-left: 150px;
+            height: 100%;            
             z-index: 9;
+            input[type="text"]{
+                background: #fff url(../images/calender-icon.png) no-repeat right center;
+            }
             label{
               display: none;
             }
@@ -3368,8 +3370,7 @@ body.has-cart-popup{
             float: left;
           }
         }
-      }
-      
+      }      
         .form-type-managed-file{
           display: inline-block;
           vertical-align: top;
@@ -3565,12 +3566,7 @@ body.has-cart-popup{
         img{
             max-height: 80px;            
             margin-bottom: 10px;
-        }
-        input[type="file"]{
-            + .discription{
-                
-            }
-        }
+        }       
     }
 }
 #block-itg-personalization-personalization-edit-profile, #block-itg-personalization-personalization-refer-friend{    
