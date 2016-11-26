@@ -2368,7 +2368,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Designation */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -2426,7 +2426,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Designation */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -2479,7 +2479,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field: Sponser Logo */
+  /* Field: Field: Category Icon */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
@@ -2695,7 +2695,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Designation */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -2772,7 +2772,7 @@ return itg_event_backend_get_event_node();
     'image_style' => 'event_speaker_program_72x72',
     'image_link' => '',
   );
-  /* Field: Content: New title */
+  /* Field: Content: Designation */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -2816,11 +2816,10 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['style_options']['row_class'] = 'col-md-3 col-sm-4 col-xs-6';
+  $handler->display->display_options['style_plugin'] = 'customstyle';
+  $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Program Schedule (field_program_schedule) */
@@ -2982,7 +2981,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: Field: Sponser Logo */
+  /* Field: Field: Category Icon */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
@@ -3068,7 +3067,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['alter']['path'] = 'speaker-details?speaker=[nid]';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: New title */
+  /* Field: Content: Designation */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
