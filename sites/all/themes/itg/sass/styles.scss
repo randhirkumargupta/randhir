@@ -5113,7 +5113,7 @@ footer{
         }
     }
 }
-#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container, #block-views-event-subsite-speaker-block-2, #block-views-event-subsite-speaker-block-3{
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container, #block-views-event-subsite-speaker-block-2, #block-views-event-subsite-speaker-block-3, #block-views-event-subsite-speaker-block-3{
     h2{
         font-size: 20px;
         border-bottom: 1px solid $border-color;
@@ -5271,15 +5271,39 @@ footer{
       max-width: 1200px;
       li{
           @include float(left);
+          position:relative;
           a{
               color:#f7ee23;
               font-size: 15px;
               padding: 0 10px;
               text-transform: uppercase;
-                height: 50px;
-                line-height: 50px;
+              height: 50px;
+              line-height: 50px;              
               &:hover, &.active{
                   color:#fff;
+              }
+          }
+          ul{
+              position: absolute;
+              background-color: #000;
+              z-index: 1;
+              left: 0;
+              top: 50px;
+              width: 150px;
+              display:none;
+              li{
+                  float: none;
+                  a{
+                      line-height: 22px;
+                      display: block;
+                      height: auto;
+                      padding: 5px 10px;
+                  }
+              }
+          }
+          &:hover{
+              ul{
+                  display: block;
               }
           }
       }
@@ -5509,7 +5533,7 @@ footer{
         }
     }
 }
-.speaker-detail-page{
+.speaker-detail-page, #block-views-event-subsite-speaker-block-3{
     .col-md-3{
         text-align: center;
         h4{
@@ -5536,6 +5560,36 @@ footer{
     .body-content{
         color:#888888;
     }
+}
+#block-views-event-subsite-speaker-block-3{
+   
+        .image-wrap{
+            border: 1px solid $border-color;             
+            height: 100px;
+            float: left;
+            width: 25%;
+            margin-right: 20px;
+            margin-bottom:20px;
+            position:relative;
+            img{
+                border:none;
+                border-radius: inherit;
+                max-height: 100%;
+                max-width: 100%;
+                width: auto;
+                height: auto;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+        }
+        h3{
+            font-weight: 700;
+        }
+ 
 }
 /*CSS end for event page index*/
 
