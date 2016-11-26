@@ -5400,7 +5400,134 @@ footer{
     }   
 }
 #block-views-event-subsite-speaker-block{
-    
+    .views-row{
+        @include calculate-width(3);
+        @include float(left);
+        .view-content{            
+            @include clearfix;
+            .views-row{                
+                @include calculate-width(1);
+                @include float(none);
+                @include text-align(center);
+                margin-bottom:30px;
+                img{
+                    border-radius: 100%;
+                    border: 1px solid #ddd;
+                }
+                .views-field-title, .views-field-field-story-new-title{
+                    font-size: 11px;
+                    font-weight: 700;
+                    font-family: roboto;
+                    color: #000;
+                    margin-top: 10px;
+                    text-transform: uppercase;
+                }
+                .views-field-field-story-new-title{
+                    color: #ef2a24;  
+                    margin-top:0; 
+                }
+            }
+        }
+    }
+}
+
+#block-itg-event-backend-post-event-block{
+    .top-tab{
+        background-color: #f1f1f1;
+        padding: 10px;
+        padding-bottom: 0;
+        border:none;
+        ul{
+            li{                         
+                border-radius: 0;
+                color: #000;
+                font-family: roboto;
+                font-weight: normal;
+                 padding: 15px 10px;
+                span{
+                    background-color: #ddd;
+                    padding: 5px 10px;
+                    color: #fff;
+                    font-weight: 900;
+                    font-size: 16px;
+                    border-radius: 3px;
+                   
+                }
+                &.active{
+                    background: #fff !important;   
+                    color:#000;
+                    box-shadow: 1px -1px 1px #ccc;
+                    span{
+                        background-color: red !important;
+                    }
+                }
+            }
+        }
+    }    
+    .event-listing{
+        .content-detail{
+            @include clearfix;
+            padding: 8px;
+            box-shadow: 0px 0px 5px #ccc;
+            margin-bottom: 50px;
+            .side-left, .side-right{
+                @include calculate-width(2);
+            }
+            .side-left{
+                padding-top: 0;
+            }
+            .side-right{
+                .section-part{
+                    @include calculate-width(1);
+                    @include float(none);
+                    padding-right: 0;
+
+                    font-family: $itg-robotoslab;
+                    .bottom-links{
+                        margin-top: 10px;
+                        a{
+                            width: auto;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+                .title{
+                    font-size: 20px;
+                    line-height: 28px;
+                    font-weight: 700;
+                    padding: 0;
+                    background-color: transparent;
+                }
+                .small-title{
+                    color: red;
+                    font-family: $itg-roboto;
+                    @include font(13px);
+                    margin-bottom: 5px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+.speaker-detail-page{
+    .col-md-3{
+        text-align: center;
+        h4{
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        p{
+            text-transform: uppercase;
+            color: red;
+        }
+        img{
+            border-radius: 100%;
+        }
+    }
+    h3{
+        font-family: roboto-slab;
+        margin-bottom: 10px;
+    }
 }
 /*CSS end for event page index*/
 
@@ -7321,3 +7448,23 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*CSS End ask an expert detail*/
+
+/*css start related content*/
+#block-itg-front-end-common-related-photo-block, #block-itg-front-end-common-related-video-block{
+    @include sidebar-heading;
+    h3{
+        display: block;
+        padding-left: 0;
+        margin-bottom: 20px;
+    }
+    ul{
+        @extend .list-none;
+    }
+    .views-field-ds-changed{
+        display: block;
+        font-size: 12px;
+        color: #b1b1b1;
+        padding: 8px 0 5px;
+    }
+}
+/*css end related content*/

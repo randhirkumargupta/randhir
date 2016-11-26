@@ -44,9 +44,9 @@ function itg_story_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
-  $items['create-poll-table'] = array(
-    'page callback' => 'create_poll_table',
-    'access arguments' => array('access itg story'),
+  $items['associate-photo-video-content/%'] = array(
+    'page callback' => 'associate_photo_video_content',
+    'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
@@ -517,6 +517,23 @@ function itg_story_library_alter(&$libraries, $module) {
     $libraries['drupal.autocomplete']['js'][$library] = array('group' => JS_DEFAULT);
   }
 }
+
+/**
+ * Get video with player
+ * @param int $nid
+ * @return string $content
+ */
+function itg_get_video_display($nid) {
+  $node = node_load($nid);
+  if (module_exists('itg_videogallery')) {
+    $vid = itg_videogallery_get_videoid($row['fid']);
+  }
+  $content = '<iframe frameborder="0"
+            src="https://www.dailymotion.com/embed/video/'.$vid.'?autoplay=0&mute=1&ui-start-screen-info"
+            allowfullscreen></iframe>';
+  return $content;
+}
+ 
 
 
 

@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * The ITG miscellaneousn module.
+ *
+ * Provides common functionality and customizations.
+ *
+ */
+
+/**
+ * Implements hook_init.
+ * {@inheritdoc}
+ */
+function itg_miscellaneous_init() {
+  global $user;
+}
+
+/**
+ * Implements hook_menu().
+ * @return array $items
+ */
+function itg_miscellaneous_menu() {
+   
+      
+    $items['itg-admin-layout-list'] = array(
+        'page callback' => 'itg_layout_list_delete',
+        'access arguments' => array('access administrator'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_miscellaneous.inc',
+    );
+    
+    $items['itg-delete-layout/%'] = array(
+        'page callback' => 'itg_layout_delete',
+        'access arguments' => array('access administrator'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_miscellaneous.inc',
+    );
+      
+    $items['section-widgets-list-delete'] = array(
+        'page callback' => 'itg_section_widgets_list_delete',
+        'access arguments' => array('access administrator'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_miscellaneous.inc',
+    );
+    
+    $items['create-poll-table'] = array(
+      'page callback' => 'create_poll_table',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+    );
+    
+    return $items;
+}

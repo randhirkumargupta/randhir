@@ -90,18 +90,7 @@ function itg_story_get_content_nid($nid) {
   }
 }
 
-/**
- * Callback for create-poll-table
- * @param 
- */
-
-function create_poll_table() {
-  /*$query = 'CREATE TABLE IF NOT EXISTS `itg_poll_count_content` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content_id` int(11) NOT NULL,
-  `poll_id` int(11) NOT NULL,
-  `content_type` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;';
-  db_query($query);*/
+function associate_photo_video_content() {
+   $nid = arg(1);
+   return views_embed_view('photo_landing_slider','block_1', $nid);   
 }
