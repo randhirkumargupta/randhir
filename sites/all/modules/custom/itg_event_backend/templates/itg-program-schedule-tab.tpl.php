@@ -47,7 +47,7 @@ elseif ($current_date < $event_start_date && $current_date < $event_close_date) 
 //$banner_img = drupal_get_path('module', 'itg_event_backend').'/event_home_banner.jpeg';
 print $output;
 ?>
-<h2 class="block-title">Session wise coverage</h2>
+<h2 class="block-title"><?php print t('Session wise coverage'); ?></h2>
 <div class="program-sub-title" style="color: <?php echo $program_title_font_color; ?>; background: <?php print $heading_background_color;?>">Program Schedule</div>
 <?php
 print '<div class="top-tab"><ul>' . $tabs . '</ul></div>';
