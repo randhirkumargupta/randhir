@@ -342,10 +342,10 @@ function get_predefine_variables_value($node, $variable) {
 // Some predefine varliabes
 function pre_define_variables() {
   return array(
-      'node_published_date',
-      'node_author',
-      'node_permalink',
-      'node_title'
+    'node_published_date',
+    'node_author',
+    'node_permalink',
+    'node_title'
   );
 }
 
@@ -476,13 +476,13 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
  */
 function itg_syndication_theme() {
   return array(
-      'syndication_feed_variables' => array(
-          'template' => '/templates/sydication_feed_variables',
-      ),
-      'syndication_feed_from_pattern_node_form' => array(
-          'render element' => 'form',
-          'template' => 'templates/syndication_feed_from_pattern_node_form',
-      ),
+    'syndication_feed_variables' => array(
+      'template' => '/templates/sydication_feed_variables',
+    ),
+    'syndication_feed_from_pattern_node_form' => array(
+      'render element' => 'form',
+      'template' => 'templates/syndication_feed_from_pattern_node_form',
+    ),
   );
 }
 
@@ -610,37 +610,38 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
     $predefine_variables_markup = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
   }
   $form['pre_define_vars'] = array(
-      '#type' => 'markup',
-      '#prefix' => '<div id="pre_define_vars_replace_wrapper">',
-      '#suffix' => '</div>',
-      '#markup' => $predefine_variables_markup,
+    '#type' => 'markup',
+    '#prefix' => '<div id="pre_define_vars_replace_wrapper">',
+    '#suffix' => '</div>',
+    '#markup' => $predefine_variables_markup,
   );
-
   $form['actions']['cancle'] = array(
-      '#markup' => l(t('Cancel'), 'syndication-feed-pattern-listing', array(
-          'attributes' => array(
-              'class' => 'button'
-          )
-      )),
-      '#weight' => 21,
-      '#value' => t('Cancel')
+    '#markup' => l(t('Cancel'), 'syndication-feed-pattern-listing', array(
+      'attributes' => array(
+        'class' => 'button'
+      )
+    )),
+    '#weight' => 21,
+    '#value' => t('Cancel')
   );
 
   $form['field_syndication_feed_type'][LANGUAGE_NONE]['#ajax'] = array(
-      'callback' => 'get_default_feed_pattern_callback',
-      'wrapper' => 'body-wrapper',
+    'callback' => 'get_default_feed_pattern_callback',
+    'wrapper' => 'syndication_form', //body-wrapper',
   );
 
   $form['field_syndication_feed_content'][LANGUAGE_NONE]['#ajax'] = array(
-      'callback' => '_pre_define_vars_callback',
-      'method' => 'replace', // the data would replace the field
-      'effect' => 'fade',
-      'event' => 'change', // On change of the selection this action would take place
+    'callback' => '_pre_define_vars_callback',
+    'method' => 'replace', // the data would replace the field
+    'effect' => 'fade',
+    'event' => 'change', // On change of the selection this action would take place
   );
   // Add a new submit function for redirecting after submit
   $form['actions']['submit']['#submit'][] = 'node_save_redirect_submit';
   // Add extra validation
   $form['#validate'][] = 'itg_syndication_form_syndication_feed_from_pattern_node_form_validate';
+  $form['#prefix'] = "<div id='syndication_form'>";
+  $form['#suffix'] = "</div>";
   unset($form['actions']['preview']);
 }
 
@@ -721,15 +722,30 @@ function node_save_redirect_submit($form, &$form_state) {
  * @param array $form
  * @param array $form_state
  */
-function _pre_define_vars_callback($form, &$form_state) {
+function _pre_define_vars_callback(&$form, &$form_state) {
+  // current selected content type.
   $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
+  // current feed type/
+  $feed_type = $form_state['values']['field_syndication_feed_type']['und'][0]['value'];
+  // change markup of variables as per content type foield is selected
   $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
+  // Get feeds pattern as per feed type and content type.  
+  $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
+  $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
+  // Commands to replace both variables and value of pattern in field.
+  $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
+  $commands[] = ajax_command_replace("#pre_define_vars_replace_wrapper", render($form['pre_define_vars']));
   return array(
-      '#type' => 'ajax',
-      '#commands' => array(
-          ajax_command_replace("#pre_define_vars_replace_wrapper", render($form['pre_define_vars'])),
-      )
+    '#type' => 'ajax',
+    '#commands' => $commands,
   );
+////  return $form;
+//  return array(
+//    '#type' => 'ajax',
+//    '#commands' => array(
+//      ajax_command_replace("#pre_define_vars_replace_wrapper", render($form['pre_define_vars'])),
+//    )
+//  );
 }
 
 /**
@@ -748,10 +764,12 @@ function get_default_feed_pattern_callback($form, &$form_state) {
   }
   else {
     $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
+    $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
+    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
     $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
     return array(
-        '#type' => 'ajax',
-        '#commands' => $commands,
+      '#type' => 'ajax',
+      '#commands' => $commands,
     );
   }
 }
