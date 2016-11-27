@@ -15,7 +15,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['field_collection_item-field_podcast_audio_upload-field_podcast_audio_image_upload'] = array(
     'bundle' => 'field_podcast_audio_upload',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Audio Image Upload',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -87,7 +87,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'field_podcast_audio_upload',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Description',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -123,7 +123,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['field_collection_item-field_podcast_audio_upload-field_podcast_upload_audio_file'] = array(
     'bundle' => 'field_podcast_audio_upload',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Upload Audio',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -155,7 +155,7 @@ function feature_for_podcast_field_default_field_instances() {
             'attach' => 0,
             'clipboard' => 0,
             'imce' => 0,
-            'plupload' => 0,
+            'itg_image_repository' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 'upload',
@@ -186,7 +186,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Related Content',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -228,7 +228,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Playlist',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -315,7 +315,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Kicker Message',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -357,7 +357,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'primary category',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -399,7 +399,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Primary category html',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -441,7 +441,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Primary category textarea',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -483,7 +483,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Are you sure you want to Archive?',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -522,7 +522,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Category',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -560,7 +560,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['node-podcast-field_story_extra_large_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Extra large image',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -636,7 +636,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['node-podcast-field_story_extra_small_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Extra small image',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -713,7 +713,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Tags',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -754,11 +754,53 @@ function feature_for_podcast_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-podcast-field_story_kicker_text'.
+  $field_instances['node-podcast-field_story_kicker_text'] = array(
+    'bundle' => 'podcast',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Kicker Message',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_kicker_text',
+    'label' => 'Kicker Message',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-podcast-field_story_large_image'.
   $field_instances['node-podcast-field_story_large_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Large image',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -834,7 +876,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['node-podcast-field_story_medium_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Medium image',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -911,7 +953,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Node Identity',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -953,7 +995,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Short headline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -994,7 +1036,7 @@ function feature_for_podcast_field_default_field_instances() {
   $field_instances['node-podcast-field_story_small_image'] = array(
     'bundle' => 'podcast',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Small image',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1071,7 +1113,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Source id',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1119,7 +1161,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'podcast',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Source type',
     'display' => array(
       'default' => array(
         'label' => 'above',
