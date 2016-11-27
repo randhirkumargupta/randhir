@@ -220,10 +220,28 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
     // Call function after form build
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
-
+    $form['#validate'][] = 'itg_event_registration_form_validate';
     // Call custom summit callback
     $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
   }
+}
+
+function itg_event_registration_form_validate($form, &$form_state){
+  foreach($form_state['values']['field_email_address'][LANGUAGE_NONE] as $key => $email){
+    if (is_numeric($key)) {
+      if (!valid_email_address($email['value'])) {
+        form_set_error('field_email_address][' . LANGUAGE_NONE . '][' . $key ,  t('Please enter a valid email id.'));
+      }
+    }
+  }
+  
+//  foreach($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE] as $key => $email){
+//    if (is_numeric($key) && !empty($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_email_address'][LANGUAGE_NONE][0]['value'])) {
+//      if (!valid_email_address($form_state['values']['field_erf_registration_fee'][LANGUAGE_NONE][$key]['field_email_address'][LANGUAGE_NONE][0]['value'])) {
+//        form_set_error('field_erf_registration_fee][' . LANGUAGE_NONE . '][' . $key .'][field_email_address',  t('Please enter a valid email id.'));
+//      }
+//    }
+//  }
 }
 
 /**
@@ -379,11 +397,17 @@ function itg_event_registration_node_validate($node) {
 
     if (!preg_match("/^[0-9]{10}$/", $node->field_erf_mobile[LANGUAGE_NONE][0]['value'])) {
       form_set_error('field_erf_mobile', t('Mobile number must be 10 digit numeric value.'));
+    }elseif(substr($node->field_erf_mobile[LANGUAGE_NONE][0]['value'], 0, -8) == '000'){
+      form_set_error('field_erf_mobile', t('Please enter valid mobile number.'));
     }
-
-    if (!valid_email_address($node->field_email_address[LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_email_address', t('Please enter a valid email id.'));
+    
+     if ($node->field_erf_postal_code[LANGUAGE_NONE][0]['value'] == '000000') {
+      form_set_error('field_erf_postal_code', t('Please enter valide postal code.'));
     }
+    
+//    if (!valid_email_address($node->field_email_address[LANGUAGE_NONE][0]['value'])) {
+//      form_set_error('field_email_address', t('Please enter a valid email id.'));
+//    }
 
     // Validate Email for group users
     foreach ($node->field_erf_registration_fee[LANGUAGE_NONE] as $emails) {
@@ -478,7 +502,6 @@ function itg_event_registration_get_total_registration($nid) {
   foreach ($main_user_nid_arr as $main_user_nid) {
     $registration_group_users = $registration_group_users + itg_common_check_record_existance($main_user_nid, 'field_data_field_erf_registration_fee', 'entity_id');
   }
-
   // Total count for an event
   $total_registration_users = $registration_main_users + $registration_group_users;
   return (int)$total_registration_users;
