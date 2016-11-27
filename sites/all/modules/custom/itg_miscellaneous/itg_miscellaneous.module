@@ -14,42 +14,75 @@
  */
 function itg_miscellaneous_init() {
   global $user;
+    $string = '<p>dshdsdhsddas</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+	<tbody>
+		<tr>
+			<td>asasas</td>
+			<td>xzzx</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>zxzx</td>
+			<td>xcfg</td>
+		</tr>
+	</tbody>
+</table>shravan<div class="blurb">Hello</div>
+
+<p> </p>kumar
+';
+    $tags = array("table", "div");
+
+    echo preg_replace('#<(' . implode( '|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $string);
+   /*$string = "<p>Awesome</p><b> Website</b><i> by Narayan</i>. Thanks for visiting";
+    $tags = array("p", "i");
+
+    foreach($tags as $tag) {
+        $string = preg_replace("/<\\/?" . $tag . "(.|\\s)*?>/", $replace_with, $string);
+    }
+
+    echo $string;*/
+    exit;
+  
 }
 
 /**
  * Implements hook_menu().
  * @return array $items
  */
-function itg_miscellaneous_menu() {
-   
+function itg_miscellaneous_menu() {   
       
-    $items['itg-admin-layout-list'] = array(
-        'page callback' => 'itg_layout_list_delete',
-        'access arguments' => array('access administrator'),
-        'type' => MENU_CALLBACK,
-        'file' => 'includes/itg_miscellaneous.inc',
-    );
-    
-    $items['itg-delete-layout/%'] = array(
-        'page callback' => 'itg_layout_delete',
-        'access arguments' => array('access administrator'),
-        'type' => MENU_CALLBACK,
-        'file' => 'includes/itg_miscellaneous.inc',
-    );
-      
-    $items['section-widgets-list-delete'] = array(
-        'page callback' => 'itg_section_widgets_list_delete',
-        'access arguments' => array('access administrator'),
-        'type' => MENU_CALLBACK,
-        'file' => 'includes/itg_miscellaneous.inc',
-    );
-    
-    $items['create-poll-table'] = array(
-      'page callback' => 'create_poll_table',
+  $items['itg-admin-layout-list'] = array(
+      'page callback' => 'itg_layout_list_delete',
       'access arguments' => array('access administrator'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_miscellaneous.inc',
-    );
-    
-    return $items;
+  );
+
+  $items['itg-delete-layout/%'] = array(
+      'page callback' => 'itg_layout_delete',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+
+  $items['section-widgets-list-delete'] = array(
+      'page callback' => 'itg_section_widgets_list_delete',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_miscellaneous.inc',
+  );
+
+  $items['create-poll-table'] = array(
+    'page callback' => 'create_poll_table',
+    'access arguments' => array('access administrator'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_miscellaneous.inc',
+  );
+
+  return $items;
 }
