@@ -7049,7 +7049,7 @@ input[type="radio"]:checked + label:after{
 #block-itg-menu-manager-vertical-menu{
     position: absolute;
     top: 50px;
-    left:-85px;
+    left:-54px;
     background: #f2f2f2;    
     border-radius: 3px;
     box-shadow: 2px 2px 3px #ccc;
@@ -7064,7 +7064,8 @@ input[type="radio"]:checked + label:after{
     }
     li{        
         border-bottom: 1px solid #c4c4c4;       
-        display: block;          
+        display: block;      
+        min-width: 100%;
     }
     img{
         margin: 0 auto;
@@ -7083,21 +7084,22 @@ input[type="radio"]:checked + label:after{
              color: #b00202;
          }
     }
-    .vertical-menu-parent{
-            max-width: 56px;
+    .vertical-menu-parent{            
             .vertical-menu{
+                max-width: 58px;
                 span{
                     font-family: roboto;
                     font-weight: 600;
                     text-transform: uppercase;
                     padding: 5px 5px;
-                    display: block !important;
+                    display: block;
                     cursor: pointer;
+                    font-size:12px;
                     i{
                         display: block;
                         font-size: 20px;
                         color: #959595;
-                    }
+                    }                    
                 }
             }
     }

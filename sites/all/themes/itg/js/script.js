@@ -435,13 +435,23 @@ jQuery(document).ready(function () {
    });
   
      //vertical menu position      
-    jQuery('.vertical-menu').slick({
-      slidesToShow: 6,
-      slidesToScroll: 1,           
-      vertical: true,
-      nextArrow: '<span class="more"><i class="fa fa-chevron-down"></i> More</span>',
-      prevArrow: '<span class="less"><i class="fa fa-chevron-up"></i> Less</span>',
-    });
+    var getNumberMenu = jQuery('.vertical-menu li').length;    
+    if(getNumberMenu > 6){        
+        jQuery('.vertical-menu').slick({
+          vertical: true,
+          slidesToShow: 6,
+          slidesToScroll: 2,
+          infinite: false,
+          nextArrow: '<span class="more"><i class="fa fa-chevron-down"></i> More</span>',
+          prevArrow: '<span class="less"><i class="fa fa-chevron-up"></i> Less</span>',
+        });
+        jQuery(document).find('.vertical-menu span.less').hide();
+        jQuery('.vertical-menu span.more').click(function(){        
+            jQuery('.vertical-menu span.less').show();
+        });
+    }else{
+        return false;
+    }
     /* var menuLength  = jQuery('.vertical-menu li').length;
      if(menuLength > 6){         
          jQuery('.vertical-more').show();
