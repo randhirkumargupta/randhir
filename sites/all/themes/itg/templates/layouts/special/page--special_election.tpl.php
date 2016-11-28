@@ -126,16 +126,30 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 if (!empty($highlights['node_data']->title)) {
                     echo '<h1>' . mb_strimwidth($highlights['node_data']->title, 0, 90, "..") . ' <span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></h1>';
                 }
-                ?>
+                $graphdata=itg_widget_get_graph_data();
+                
+                if(count($graphdata)>2){
+                            ?>
+                        <div class="row election-graph">
+<?php $block = module_invoke('itg_widget', 'block_view', 'graph_election');
+                                        print render($block['content']); ?>
+                   
+
+                        </div>
+                            
+                       <?php  } ?>
                 <div class="row">
                     <div class="col-md-8 col-sm-8 col-sx-12 election-graph left-side">
+                        
+                        <?php if(count($graphdata)<=2)
+                        {?>
                         <div class="row itg-415-layout">
 <?php $block = module_invoke('itg_widget', 'block_view', 'graph_election');
                                         print render($block['content']); ?>
-                            <?php //print views_embed_view('most_popular', 'election_graph'); ?>
-
+                   
 
                         </div>
+                        <?php }  ?>
                         <?php if ($theme == 'itgadmin' || (!empty($live_url) || $highlights['node_data']->field_story_highlights['und'][0]['value'] != "" )) { ?>
                             <div class="row itg-325-layout">
                                 <div class="col-md-6 mt-50">
@@ -354,6 +368,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                     </div>    
                     <div class="col-md-4 col-sm-4 col-sx-12 right-side">        
+                       <?php  if(count($graphdata)<=2){?>
                         <div class="">
                             <div class="itg-widget election-topadd">
                                 <div class="ad-widget droppable">
@@ -361,6 +376,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>
                             </div>
                         </div> 
+                       <?php  } ?>
                         <div class="itg-325 mt-50">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
