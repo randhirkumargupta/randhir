@@ -2452,6 +2452,34 @@ function itg_widget_node_update($node) {
       manage_widget_order_during_node_update($nid, $cat_id, "All");
     }
   }
+
+  if ($node->status == 0) {
+    // Delete from custom table.  
+    $order_re_order_widgtes = array(
+      '\'personalization_widget\'',
+      '\'issue_magazin_widget\'',
+      '\'yearender_left_news_video\'',
+      '\'special_auto_review_content\'',
+      '\'most_read_content\'',
+      '\'feature_content_by_section\'',
+      '\'special_how_made_it_content\'',
+      '\'poll_widget\'',
+      '\'section_wise_widget\'',
+      '\'dont_miss_content_widget\'',
+      '\'we_may_suggest_widget\'',
+      '\'big_story_format_widget\'',
+      '\'so_sorry_widget\'',
+    );
+    $strg = implode(',', $order_re_order_widgtes);
+    // Delete query for itg_widget_query.
+    // Widgets are define above from which node is to be delete.
+    $delete_query = "DELETE from {itg_widget_order} where nid = '" . $node->nid . "' and widget in ($strg)";
+    db_query($delete_query);
+    // Delete from nodequeue. As we have used nodequeue only for widgets. So we can remove from nodeid.
+    // No need to define qid.
+    $nodequeue_query = "DELETE from {nodequeue_nodes} where nid = '" . $node->nid . "'";
+    db_query($nodequeue_query);
+  }
 }
 
 function manage_widget_order_during_node_update($nid, $category_tid, $node_type) {
