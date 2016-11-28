@@ -2300,17 +2300,17 @@ function get_rhs_block_display_condtion($delta = '') {
 
     switch ($delta) {
       case 'watch_right_now_videos_widget':
-        if (in_array($arg[1], $watch_right_now_node_array) || $arg[0] == 'programmes' || $arg[0] == 'online-archive-story' || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+        if ((in_array($arg[1], $watch_right_now_node_array && isset($arg[1]))) || $arg[0] == 'programmes' || $arg[0] == 'online-archive-story' || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
           return TRUE;
         }
         break;
       case 'top_takes_videos_widget':
-        if (in_array($arg[1], $top_takes_node_array) || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+        if ((in_array($arg[1], $top_takes_node_array) && isset($arg[1])) || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
           return TRUE;
         }
         break;
       case 'we_may_suggest':
-        if (in_array($arg[1], $we_may_suggest_node_array) || $arg[0] == 'itg-quiz' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+        if ((in_array($arg[1], $we_may_suggest_node_array) && isset($arg[1])) || $arg[0] == 'itg-quiz' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
           return TRUE;
         }
         break;
