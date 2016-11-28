@@ -3341,9 +3341,11 @@ body.has-cart-popup{
             top: 0;
             border: none;
             width: 100%;
-            height: 100%;
-            padding-left: 150px;
+            height: 100%;            
             z-index: 9;
+            input[type="text"]{
+                background: #fff url(../images/calender-icon.png) no-repeat right center;
+            }
             label{
               display: none;
             }
@@ -3368,8 +3370,7 @@ body.has-cart-popup{
             float: left;
           }
         }
-      }
-      
+      }      
         .form-type-managed-file{
           display: inline-block;
           vertical-align: top;
@@ -3542,6 +3543,7 @@ body.has-cart-popup{
 [id*="itg-personalization-refer-a-friend-form"]{
     fieldset{
         border: none;
+        text-align: left;
         legend{
             display: none;
         }
@@ -3552,11 +3554,20 @@ body.has-cart-popup{
         color: #075bbb;
         font-size: 14px;
         margin-top: 0;
+        cursor: pointer;
     }    
     > div [id*="edit-submit"]{            
             margin: 60px auto 0;
             display: block;
     }    
+}
+[id*="itg-personalization-edit-profile-form"]{
+    > div .form-type-managed-file .form-managed-file{
+        img{
+            max-height: 80px;            
+            margin-bottom: 10px;
+        }       
+    }
 }
 #block-itg-personalization-personalization-edit-profile, #block-itg-personalization-personalization-refer-friend{    
     max-width: 780px;
@@ -3587,11 +3598,11 @@ body.has-cart-popup{
         background: #f8f8f8;
         text-align: center;
         font-family: $itg-roboto;
-        padding-top:60px;
+        padding-top:20px;
         color:#757575;
-        ul{
+        > ul{
             display: inline-block;
-            li{
+            > li{
                 padding: 0 10px;               
                 &:first-child{
                     margin-top: 15px;
@@ -3599,7 +3610,8 @@ body.has-cart-popup{
             }
         }
         .more-option{
-            margin-top: 40px;
+            margin-top: 35px;
+            margin-bottom: 10px;
         }
     }
 }
@@ -3952,6 +3964,26 @@ article.node-mega-review-critic{
         &.movie-reviewer-other{
           margin-top: 0;
         }
+        .other-reviews-rating{
+          float: none;
+    width: 111px;
+    height: 18px;
+    padding: 0px 0;
+    position: relative;
+    background: url(../images/rating-grey.png) 0 0px/80px no-repeat;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+      &:after{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url(../images/rating-red.png) 0 0px/80px no-repeat;
+        height: 18px;
+        width: 0;
+      }
+    }
       }
     }
   }
