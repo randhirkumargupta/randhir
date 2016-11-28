@@ -268,7 +268,7 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['arguments']['field_story_source_type_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_story_source_type_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_story_source_type_value']['limit'] = '0';
-  /* Contextual filter: Content: Source id (field_story_source_id) */
+  /* Contextual filter: Field: Source id (field_story_source_id) */
   $handler->display->display_options['arguments']['field_story_source_id_value']['id'] = 'field_story_source_id_value';
   $handler->display->display_options['arguments']['field_story_source_id_value']['table'] = 'field_data_field_story_source_id';
   $handler->display->display_options['arguments']['field_story_source_id_value']['field'] = 'field_story_source_id_value';
@@ -494,12 +494,12 @@ function features_supplement_magazine_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = 'Posted By';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'Posted by';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';

@@ -9,7 +9,7 @@
 <?php
   $actor_pic = theme(
     'image_style', array(
-      'style_name' => 'cart_172x240',
+      'style_name' => 'mr_graph_pic',
       'path' => $actor[$key]['pic_uri'],
     )
   );

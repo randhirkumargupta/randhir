@@ -61,8 +61,17 @@ jQuery('.add-more-block-front').live('click', function() {
     if ($('a').hasClass('unflag-action')) {
         $('.page-node .unflag-action').attr('title', '');
         $('.page-node .unflag-action').css('pointer-events', 'none');
+    }
+    // Place average ratings to top of the page.
+    if ($('body').hasClass('node-type-mega-review-critic')) {
+        var average_ratings = $('#average-ratings').text();
+        $('.movie-rating').attr('data-star-value', average_ratings);
+        // Place internal and external review on black area.
+        var internal_review = $('#internal-review').html();
+        var external_review = $('#external-review').html();
+        $('.movie-reviewer-other').html('<h3>OTHER REVIEWERS</h3>' + external_review);
+        $('.our-review').html('<h3>OUR REVIEWERS</h3>' + internal_review);
     }    
-    
     $('input.rating').hover(function(){
     $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
     $(this).parent().nextAll().removeClass('rating-hover');
@@ -425,19 +434,23 @@ jQuery(document).ready(function () {
        jQuery(this).nextAll('li').show();
    });
   
-     //vertical menu position 
-     var menuLength  = jQuery('.vertical-menu li').length;
+     //vertical menu position      
+    jQuery('.vertical-menu').slick({
+      slidesToShow: 6,
+      slidesToScroll: 1,           
+      vertical: true,
+      nextArrow: '<span class="more"><i class="fa fa-chevron-down"></i> More</span>',
+      prevArrow: '<span class="less"><i class="fa fa-chevron-up"></i> Less</span>',
+    });
+    /* var menuLength  = jQuery('.vertical-menu li').length;
      if(menuLength > 6){         
          jQuery('.vertical-more').show();
      }
-    var TotalHeight = 0;
+    var TotalHeight = 0, clicked = true;
     jQuery('.vertical-menu li').each(function () {
         var liLength = jQuery(this).height();
-        TotalHeight = TotalHeight + liLength;        
-        console.log(TotalHeight);                
-    });
-     
-     var clicked = true;
+        TotalHeight = TotalHeight + liLength;                             
+    });          
      jQuery('.vertical-more a').click(function(){          
          if(clicked){             
             clicked=false;
@@ -450,7 +463,7 @@ jQuery(document).ready(function () {
              jQuery(this).find('.less').hide();
             jQuery(this).find('.more').show();
          }                  
-     });               
+     });  */             
 });
 
 

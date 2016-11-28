@@ -43,7 +43,13 @@ function itg_story_menu() {
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
-  );  
+  );
+  $items['associate-photo-video-content/%'] = array(
+    'page callback' => 'associate_photo_video_content',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
 
   return $items;
 }

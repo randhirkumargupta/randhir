@@ -3227,6 +3227,7 @@ footer{
         width: 100%;
         position: relative;
         border-bottom: 1px solid #d9d9d9;
+        overflow: auto;
         li{
             @include display-inline;
             border-right: 0;
@@ -4967,6 +4968,7 @@ footer{
     }
 }
 .view-event-photo-slider{
+    max-width: 320px;
     .slick-slider {
         .slick-prev, .slick-next{
             background: #000 none repeat scroll 0 0;
@@ -5112,7 +5114,7 @@ footer{
         }
     }
 }
-#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container, #block-views-event-subsite-speaker-block-2{
+#block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container, #block-views-event-subsite-speaker-block-2, #block-views-event-subsite-speaker-block-3, #block-views-event-subsite-speaker-block-3{
     h2{
         font-size: 20px;
         border-bottom: 1px solid $border-color;
@@ -5270,15 +5272,39 @@ footer{
       max-width: 1200px;
       li{
           @include float(left);
+          position:relative;
           a{
               color:#f7ee23;
               font-size: 15px;
               padding: 0 10px;
               text-transform: uppercase;
-                height: 50px;
-                line-height: 50px;
+              height: 50px;
+              line-height: 50px;              
               &:hover, &.active{
                   color:#fff;
+              }
+          }
+          ul{
+              position: absolute;
+              background-color: #000;
+              z-index: 1;
+              left: 0;
+              top: 50px;
+              width: 150px;
+              display:none;
+              li{
+                  float: none;
+                  a{
+                      line-height: 22px;
+                      display: block;
+                      height: auto;
+                      padding: 5px 10px;
+                  }
+              }
+          }
+          &:hover{
+              ul{
+                  display: block;
               }
           }
       }
@@ -5433,7 +5459,7 @@ footer{
 
 #block-itg-event-backend-post-event-block{
     .top-tab{
-        background-color: #f1f1f1;
+        background-color: #f4f4f4;
         padding: 10px;
         padding-bottom: 0;
         border:none;
@@ -5445,20 +5471,19 @@ footer{
                 font-weight: normal;
                  padding: 15px 10px;
                 span{
-                    background-color: #ddd;
+                    background-color: #8d8d8d;
                     padding: 5px 10px;
                     color: #fff;
                     font-weight: 900;
                     font-size: 16px;
-                    border-radius: 3px;
-                   
+                    border-radius: 3px;                   
                 }
                 &.active{
                     background: #fff !important;   
                     color:#000;
                     box-shadow: 1px -1px 1px #ccc;
                     span{
-                        background-color: red !important;
+                        background-color: #ef3c24 !important;
                     }
                 }
             }
@@ -5499,7 +5524,7 @@ footer{
                     background-color: transparent;
                 }
                 .small-title{
-                    color: red;
+                    color: #ef3c24;
                     font-family: $itg-roboto;
                     @include font(13px);
                     margin-bottom: 5px;
@@ -5509,25 +5534,63 @@ footer{
         }
     }
 }
-.speaker-detail-page{
+.speaker-detail-page, #block-views-event-subsite-speaker-block-3{
     .col-md-3{
         text-align: center;
         h4{
-            font-size: 14px;
-            margin: 10px 0;
+            font-size: 15px;
+            margin: 10px 0 0 0;
+            color:#000000;
+            text-transform: uppercase;
         }
         p{
             text-transform: uppercase;
-            color: red;
+            color: #ef2a24;
+            font-size: 12px;
         }
         img{
             border-radius: 100%;
+            border: 1px solid #ddd;
         }
     }
     h3{
         font-family: roboto-slab;
         margin-bottom: 10px;
+        text-transform: uppercase;
     }
+    .body-content{
+        color:#888888;
+    }
+}
+#block-views-event-subsite-speaker-block-3{
+   
+        .image-wrap{
+            border: 1px solid $border-color;             
+            height: 100px;
+            float: left;
+            width: 25%;
+            margin-right: 20px;
+            margin-bottom:20px;
+            position:relative;
+            img{
+                border:none;
+                border-radius: inherit;
+                max-height: 100%;
+                max-width: 100%;
+                width: auto;
+                height: auto;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+        }
+        h3{
+            font-weight: 700;
+        }
+ 
 }
 /*CSS end for event page index*/
 
@@ -7000,10 +7063,8 @@ input[type="radio"]:checked + label:after{
         @include pos(relative);
     }
     li{        
-        border-bottom: 1px solid #c4c4c4;
-        padding: 15px 10px;
-        display: block;  
-        height: 92px;
+        border-bottom: 1px solid #c4c4c4;       
+        display: block;          
     }
     img{
         margin: 0 auto;
@@ -7013,15 +7074,35 @@ input[type="radio"]:checked + label:after{
     a{
         @include font(12px,null,600);
         font-family: $itg-roboto;
-        text-transform: uppercase;        
+        text-transform: uppercase;
+        line-height: 15px;
+        display: block;
+         padding: 10px 5px;
+         &:hover{
+             background: #fff;
+             color: #b00202;
+         }
     }
     .vertical-menu-parent{
-         max-height : 552px;
-        overflow : hidden; 
-            max-width: 80px;
+            max-width: 56px;
+            .vertical-menu{
+                span{
+                    font-family: roboto;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    padding: 5px 5px;
+                    display: block !important;
+                    cursor: pointer;
+                    i{
+                        display: block;
+                        font-size: 20px;
+                        color: #959595;
+                    }
+                }
+            }
     }
     .vertical-more{
-        padding: 15px 10px;
+        padding: 10px 5px;
         display:none;
         a{
             display: block;
@@ -7456,6 +7537,9 @@ input[type="radio"]:checked + label:after{
         display: block;
         padding-left: 0;
         margin-bottom: 20px;
+        span{
+            padding-left: 0;
+        }
     }
     ul{
         @extend .list-none;

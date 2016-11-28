@@ -120,7 +120,33 @@ jQuery(document).ready(function (e) {
         centerMode: false,
         arrows: true,
         variableWidth: true,
-        focusOnSelect: true
+        focusOnSelect: true,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 7,                  
+                slidesToScroll: 1,
+                arrows: false
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 4,
+                 arrows: false,
+                slidesToScroll: 1
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 3,
+                 arrows: false,
+                slidesToScroll: 1
+              }
+            }
+        ]
     });
         
     jQuery('.counterslide').slick({

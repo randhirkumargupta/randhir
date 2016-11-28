@@ -250,6 +250,11 @@
         }    
     }
  /*css start osscar page */
+/* css start vertical bar */
+#block-itg-menu-manager-vertical-menu{
+    display: none;
+}
+/*end css vertical bar */
 
 }   
 @media only screen and (max-width:991px){
@@ -811,7 +816,16 @@
     
     /*css end poll page*/  
 
-
+    #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider{
+        padding: 0 5px;
+/*        .slick-prev, .slick-next{
+            background: transparent;
+            top: 50%;
+            color: #fff;
+            margin-top: -28px;
+        }*/
+    }
+    
 
 
 }
