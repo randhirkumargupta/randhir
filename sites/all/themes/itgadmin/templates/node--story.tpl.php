@@ -25,7 +25,12 @@
           </div>
         <?php endif; ?>        
         <div class="basic-details content-box">
-            <h2><?php print t('Quick File'); ?></h2>
+            <h2><?php  $termdata="";
+            if($content['body']['#object']->field_primary_category['und'][0]['value']!="") {
+                $termdata=itg_videogallery_get_term_name($content['body']['#object']->field_primary_category['und'][0]['value']);
+           
+            }
+            print t('Quick File'); ?></h2>
             <div class="content-details">
                 <?php print render($content['field_story_magazine_story_issue']); ?>
                 <?php print render($content['field_story_select_magazine']); ?>
@@ -49,6 +54,7 @@
                 ?>
                 <?php print render($content['field_stroy_city']); ?>
                 <?php print render($content['field_story_category']); ?>
+                <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata;?></div></div></div>
                 <?php
                 $extra_large = $content['field_story_extra_large_image'];
                 if (!empty($extra_large)):
