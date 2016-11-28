@@ -986,8 +986,14 @@ allowfullscreen></iframe>';
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<?php $t_name = itg_videogallery_get_term_name($_GET[\'category\']);
-print \'<h3>LATEST FROM \'. $t_name .\'</h3>\';
+  $handler->display->display_options['header']['area']['content'] = '<?php
+if(isset($_GET[\'category\']) && isset($_GET[\'sid\']) && !isset($_GET[\'pcat\'])){
+	$t_name = itg_videogallery_get_term_name($_GET[\'category\']);
+	print \'<h3>LATEST FROM \'. $t_name .\'</h3>\';
+}if(isset($_GET[\'category\']) && isset($_GET[\'sid\']) && isset($_GET[\'pcat\']) && $_GET[\'pcat\'] != 0){
+	$t_name = itg_videogallery_get_term_name($_GET[\'pcat\']);
+	print \'<h3>LATEST FROM \'. $t_name .\'</h3>\';
+}
 ?>';
   $handler->display->display_options['header']['area']['format'] = 'php_code';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
