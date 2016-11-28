@@ -13,17 +13,17 @@ function itg_common_tv_time($id = '') {
 
  $final_id = date('Y/m/d', strtotime($id));
   if (function_exists('mongodb')) {
-//    $db = mongodb();
-//    $people = $db->tv_schedule;
-//    $date = $final_id;
-//    $cond = array('program date' => $date);
-//    $cursor = $people->find($cond);
-//    // Fetch query for supplements
-//    $select = t('- None -');
-//    $data = array('_none' => $select);
-//    foreach ($cursor as $document) {
-//      $data[$document['time']] = $document['time'];
-//    }
+    $db = mongodb();
+    $people = $db->tv_schedule;
+    $date = $final_id;
+    $cond = array('program date' => $date);
+    $cursor = $people->find($cond);
+    // Fetch query for supplements
+    $select = t('- None -');
+    $data = array('_none' => $select);
+    foreach ($cursor as $document) {
+      $data[$document['time']] = $document['time'];
+    }
     return $data;
   } 
 }
