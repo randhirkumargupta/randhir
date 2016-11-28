@@ -152,18 +152,18 @@
             });
             
              // Code issue date exit or not.
-            $('#associate').onclick(function() {
-                var associate_id = $(this).attr('data-associate');
-                var base_url = settings.itg_story.settings.base_url;
-                $.ajax({
-                    url: base_url + "/associate-photo-video-content/"+associate_id,
-                    method: 'post',
-                    data: {},
-                    success: function(data) {
-                        
-                    }
-                });
-            });
+//            $('#associate').onclick(function() {
+//                var associate_id = $(this).attr('data-associate');
+//                var base_url = settings.itg_story.settings.base_url;
+//                $.ajax({
+//                    url: base_url + "/associate-photo-video-content/"+associate_id,
+//                    method: 'post',
+//                    data: {},
+//                    success: function(data) {
+//                        
+//                    }
+//                });
+//            });
 
 
         }

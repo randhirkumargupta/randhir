@@ -180,7 +180,7 @@ function get_personlization_front_block_data() {
       $tid = $persionalization_data;
       $temp_node_data = get_personlization_node_data_for_front($nid);
       $texonomy_data = taxonomy_term_load($tid);
-      $front_end_data[] = array("node_data" => $temp_node_data[0], "taxonomy_name" => $texonomy_data->name);
+      $front_end_data[] = array("node_data" => $temp_node_data[0], "taxonomy_name" => $texonomy_data);
     }
   }
   return $front_end_data;

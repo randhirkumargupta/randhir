@@ -9,7 +9,6 @@
             // Set moderation filter option based on yes or no.
             $('#edit-moderation').on('change', function () {
                 var moderation = $('#edit-moderation').find(":selected").text();
-
                 if (moderation === 'No') {
                     $('select[name="from_state"]').find('option[value="draft"]').attr("selected", true);
                     $("#edit-state option:selected").removeAttr("selected");
@@ -31,8 +30,9 @@
             // Copy Moderation dropdown under actual moderation field.
             if ($('body').hasClass('page-report-filed-content')) {
                 $("#edit-moderation").appendTo("#edit-state-wrapper .views-widget");
-                $('#edit-state').css('display', 'none');
+                //$('#edit-state').css('display', 'none');
                 $('#edit-from-state-wrapper').css('display', 'none');
+                $("#edit-state option[value='draft']").remove();
             }
             // Module code ends here.
         }
