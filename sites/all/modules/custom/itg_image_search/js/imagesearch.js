@@ -1,4 +1,5 @@
 (function($) {
+    
     var timer;
     jQuery('#edit-terms').live('keyup', function() {
         window.clearTimeout(timer);
@@ -47,6 +48,7 @@
                 var imageId = objdata.fid;
                 var height = parent.jQuery('#image_height').val();
                 var width = parent.jQuery('#image_width').val();
+                var ctype=parent.jQuery('#content_type').val();
 
                 if (imageId != "")
                 {
@@ -55,7 +57,7 @@
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'getimagetocroper',
                         type: 'post',
-                        data: {'imageId': imageId, 'field_id': fieldname, 'img_height': height, 'img_width': width},
+                        data: {'imageId': imageId, 'field_id': fieldname,'content_type':ctype, 'img_height': height, 'img_width': width},
                         success: function(data) {
                             //  itg_image_repository.processResponse
                             parent.jQuery('#search-preview').hide();
