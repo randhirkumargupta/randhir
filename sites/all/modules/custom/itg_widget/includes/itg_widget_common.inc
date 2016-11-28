@@ -2130,22 +2130,43 @@ function itg_poll_home_page_polls_select($nid) {
  * @param array $form_state
  */
 function itg_widget_issuewidget_filter_form($form, $form_state) {
-  $options = array();
-  $options[''] = 'Select';
-  $query = db_select('node', 'n');
-  $query->fields('n', array('title'));
-  $query->condition('n.type', array('issue'), '=');
-  $query->condition('n.status', 1);
-  $result = $query->execute();
+  $options_issue = array();
+  $options_issue[''] = 'Select';
+  $magazine_id = ($form_state['input']['magazine_title'] != "") ? $form_state['input']['magazine_title'] : $_GET['magazine_id'];
+  $result = itg_widget_get_issue_data($magazine_id);
+
+
   while ($record = $result->fetchAssoc()) {
-    $options[date('Y-m-d', strtotime($record['title']))] = date('d/m/Y', strtotime($record['title']));
+    $options_issue[date('Y-m-d', strtotime($record['title']))] = date('d/m/Y', strtotime($record['title']));
   }
 
-  $form['content_title'] = array(
-    '#title' => t('Content Title'),
+  $data_magazine = itg_widget_get_magazine_data();
+
+  $options_magazine = array();
+  $options_magazine[''] = 'Select';
+
+  while ($record_magazine = $data_magazine->fetchAssoc()) {
+
+    $options_magazine[$record_magazine['nid']] = t($record_magazine['title']);
+  }
+
+  $form['magazine_title'] = array(
+    '#title' => t('Magazine'),
     '#type' => 'select',
+    '#default_value' => $_GET['magazine_id'],
+    '#options' => $options_magazine,
+    '#ajax' => array(
+      'callback' => 'ajax_dependent_dropdown_issue',
+    //'wrapper' => 'view-display-isesue',
+    ),
+  );
+  $form['content_title'] = array(
+    '#title' => t('Issue Date'),
+    '#type' => 'select',
+    '#prefix' => '<div id="view-display-isesue">',
+    '#suffix' => '</div>',
     '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
-    '#options' => $options,
+    '#options' => $options_issue,
   );
   $form['items_per_page'] = array(
     '#title' => t('Items per page '),
@@ -2158,11 +2179,51 @@ function itg_widget_issuewidget_filter_form($form, $form_state) {
     '#value' => t('Apply'),
   );
   $form['filters']['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset'), '#submit' => array('itg_widget_issuewidget_filter_reset'),);
-
-
-
-
   return $form;
+}
+
+/**
+ * This function use for get issue data
+ * @return array $result
+ */
+function ajax_dependent_dropdown_issue(&$form, $form_state) {
+  return array(
+    '#type' => 'ajax',
+    '#commands' => array(
+      ajax_command_replace("#view-display-isesue", render($form['content_title'])),
+    )
+  );
+}
+
+/**
+ * This function use for get issue data
+ * @return array $result
+ */
+function itg_widget_get_issue_data($magazine_id = null) {
+
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->condition('n.type', array('issue'), '=');
+  $query->Join('field_data_field_issue_magazine', 'mag', 'mag.entity_id=n.nid');
+  $query->condition('mag.field_issue_magazine_target_id', $magazine_id, '=');
+  $query->condition('n.status', 1);
+  $result = $query->execute();
+  return $result;
+}
+
+/**
+ * This function use for get issue data
+ * @return array $result
+ */
+function itg_widget_get_magazine_data() {
+
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title', 'nid'));
+  $query->condition('n.type', array('magazine'), '=');
+
+  $query->condition('n.status', 1);
+  $result = $query->execute();
+  return $result;
 }
 
 /**
@@ -2173,7 +2234,7 @@ function itg_widget_issuewidget_filter_form($form, $form_state) {
  */
 function itg_widget_issuewidget_filter_form_submit($form, $form_state) {
 
-  $query = array('field_story_issue_date_value[value][date]' => $form_state['values']['content_title'], 'items_per_page' => $form_state['values']['items_per_page']);
+  $query = array('field_story_issue_date_value[value][date]' => $form_state['values']['content_title'], 'items_per_page' => $form_state['values']['items_per_page'], 'magazine_id' => $form_state['values']['magazine_title']);
   drupal_goto('issue-base-magazin-widget', array('query' => $query));
 }
 
@@ -2195,22 +2256,43 @@ function itg_widget_issuewidget_filter_reset($form, $form_state) {
  * @param array $form_state
  */
 function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
-  $options = array();
-  $options[''] = 'Select';
-  $query = db_select('node', 'n');
-  $query->fields('n', array('title'));
-  $query->condition('n.type', array('issue'), '=');
-  $query->condition('n.status', 1);
-  $result = $query->execute();
+  $options_issue = array();
+  $options_issue[''] = 'Select';
+  $magazine_id = ($form_state['input']['magazine_title'] != "") ? $form_state['input']['magazine_title'] : $_GET['magazine_id'];
+  $result = itg_widget_get_issue_data($magazine_id);
+
+
   while ($record = $result->fetchAssoc()) {
-    $options[date('Y-m-d', strtotime($record['title']))] = date('d/m/Y', strtotime($record['title']));
+    $options_issue[date('Y-m-d', strtotime($record['title']))] = date('d/m/Y', strtotime($record['title']));
   }
 
-  $form['content_title'] = array(
-    '#title' => t('Content Title'),
+  $data_magazine = itg_widget_get_magazine_data();
+
+  $options_magazine = array();
+  $options_magazine[''] = 'Select';
+
+  while ($record_magazine = $data_magazine->fetchAssoc()) {
+
+    $options_magazine[$record_magazine['nid']] = t($record_magazine['title']);
+  }
+
+  $form['magazine_title'] = array(
+    '#title' => t('Magazine'),
     '#type' => 'select',
+    '#default_value' => $_GET['magazine_id'],
+    '#options' => $options_magazine,
+    '#ajax' => array(
+      'callback' => 'ajax_dependent_dropdown_issue',
+    //'wrapper' => 'view-display-isesue',
+    ),
+  );
+  $form['content_title'] = array(
+    '#title' => t('Issue Date'),
+    '#type' => 'select',
+    '#prefix' => '<div id="view-display-isesue">',
+    '#suffix' => '</div>',
     '#default_value' => $_GET['field_story_issue_date_value']['value']['date'],
-    '#options' => $options,
+    '#options' => $options_issue,
   );
   $form['items_per_page'] = array(
     '#title' => t('Items per page '),
@@ -2238,7 +2320,7 @@ function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
  */
 function itg_widget_issuewidgetlist_filter_form_submit($form, $form_state) {
 
-  $query = array('field_story_issue_date_value[value][date]' => $form_state['values']['content_title'], 'items_per_page' => $form_state['values']['items_per_page']);
+  $query = array('field_story_issue_date_value[value][date]' => $form_state['values']['content_title'], 'items_per_page' => $form_state['values']['items_per_page'], 'magazine_id' => $form_state['values']['magazine_title']);
   drupal_goto('issue-magazin-widget-list', array('query' => $query));
 }
 
@@ -2318,6 +2400,10 @@ function get_rhs_block_display_condtion($delta = '') {
   }
 }
 
+/**
+ * This function use for insert all node in widget table
+ *
+ */
 function insert_all_node_in_widegt_table() {
 
   $nodes = db_select('node', 'n')

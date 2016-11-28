@@ -136,33 +136,55 @@ class ItgStoryMigration extends XMLMigration {
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
     $this->addFieldMapping('field_story_long_head_line', 'storytitle')->xpath('storytitle');
+    $this->addFieldMapping('status', 'state')->xpath('state');
+    
+    //code for date
+    $this->addFieldMapping('created', 'createddate')->xpath('createddate');    
+    $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
+    $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate');
+    $this->addFieldMapping('field_story_expires', 'storyexpires')->xpath('storyexpires');
+    $this->addFieldMapping('field_story_expiry_date', 'storyexpirydate')->xpath('storyexpirydate');
+
+    //code for user
+    //<createdby>2345</createdby><modifiedby>2345</modifiedby>//pending
+    
+    //code for issue
     $this->addFieldMapping('field_story_magazine_story_issue', 'story_issue')->xpath('story_issue');
     $this->addFieldMapping('field_story_select_magazine', 'select_magazine')->xpath('select_magazine');
     $this->addFieldMapping('field_story_select_supplement', 'select_supplement')->xpath('select_supplement');
     $this->addFieldMapping('field_story_issue_date', 'issue_date')->xpath('issue_date');
+    $this->addFieldMapping('field_poll_start_date', 'associatetvdate')->xpath('associatetvdate');
+    
     $this->addFieldMapping('title', 'longheadline')->xpath('longheadline');
     $this->addFieldMapping('field_story_short_headline', 'shortheadline')->xpath('shortheadline');
-
-    $this->addFieldMapping('field_stroy_city', 'city')->xpath('city'); //id
+    
     $this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
+    
+    //code for body
+    $this->addFieldMapping('body', 'storybody')->xpath('storybody');
+    
+    //code for image
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
-     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
+    $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
     $this->addFieldMapping('field_story_extra_large_image:title', 'extra_large_title')->xpath('extra_large_title');
+    
     $this->addFieldMapping('field_story_large_image', 'largeimage')->xpath('largeimage');
     $this->addFieldMapping('field_story_large_image:alt', 'large_alt')->xpath('large_alt');
     $this->addFieldMapping('field_story_large_image:title', 'large_title')->xpath('large_title');
+    
     $this->addFieldMapping('field_story_medium_image', 'mediumimage')->xpath('mediumimage');
     $this->addFieldMapping('field_story_medium_image:alt', 'mediumimage_alt')->xpath('mediumimage_alt');
     $this->addFieldMapping('field_story_medium_image:title', 'mediumimage_title')->xpath('mediumimage_title');
+    
     $this->addFieldMapping('field_story_small_image', 'smallimage')->xpath('smallimage');
     $this->addFieldMapping('field_story_small_image:alt', 'smallimage_alt')->xpath('smallimage_alt');
     $this->addFieldMapping('field_story_small_image:title', 'smallimage_title')->xpath('smallimage_title');
+    
     $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
     $this->addFieldMapping('field_story_extra_small_image:alt', 'extra_small_alt')->xpath('extra_small_alt');
     $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');
+    
     $this->addFieldMapping('field_story_kicker_text', 'storykicker')->xpath('storykicker');
-    $this->addFieldMapping('body', 'storybody')->xpath('storybody');
-//
     $this->addFieldMapping('field_story_magazine_kicker_text', 'magazinekicker')->xpath('magazinekicker');
     $this->addFieldMapping('field_story_magazine_headline', 'magazineheadline')->xpath('magazineheadline');
     $this->addFieldMapping('field_story_rating', 'storyrating')->xpath('storyrating');
@@ -170,6 +192,8 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_redirection_url_titl', 'redirectionurl')->xpath('redirectionurl');
     $this->addFieldMapping('field_story_courtesy', 'courtesy')->xpath('courtesy');
     $this->addFieldMapping('field_story_snap_post', 'snappost')->xpath('snappost');
+    
+    //code for social media
     $this->addFieldMapping('field_story_facebook_narrative', 'facebooknarrative')->xpath('facebooknarrative');
     $this->addFieldMapping('field_story_facebook_image', 'facebookimage')->xpath('facebookimage');
     $this->addFieldMapping('field_story_facebook_image:alt', 'facebookimage_alt')->xpath('facebookimage_alt');
@@ -181,25 +205,26 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_tweet_image:alt', 'twitterimage_alt')->xpath('twitterimage_alt');
     $this->addFieldMapping('field_story_tweet_image:title', 'twitterimage_title')->xpath('twitterimage_title');
     $this->addFieldMapping('field_story_twitter_video_desc', 'twittervideodescription')->xpath('twittervideodescription');
-    $this->addFieldMapping('field_story_twitter_video', 'twittervideo')->xpath('twittervideo');
-    $this->addFieldMapping('field_story_syndication', 'syndication')->xpath('syndication');
+    $this->addFieldMapping('field_story_twitter_video', 'twittervideo')->xpath('twittervideo');    
     $this->addFieldMapping('field_story_media_files_syndicat', 'mediafiles')->xpath('mediafiles');
     $this->addFieldMapping('field_story_client_title', 'client_title')->xpath('client_title');
+    
+    $this->addFieldMapping('field_story_syndication', 'syndication')->xpath('syndication');
+    
+    $this->addFieldMapping('field_story_archive', 'archive')->xpath('archive');
 
     $this->addFieldMapping('field_story_comment_question', 'commentquestion')->xpath('commentquestion');
     $this->addFieldMapping('field_story_featured_name', 'featuredname')->xpath('featuredname'); //id
     $this->addFieldMapping('field_common_related_content', 'relatedcontents')->xpath('relatedcontents');
-    $this->addFieldMapping('field_story_schedule_date_time', 'scheduledatetime')->xpath('scheduledatetime');
-    $this->addFieldMapping('field_story_expires', 'storyexpires')->xpath('storyexpires');
-    $this->addFieldMapping('field_story_expiry_date', 'storyexpirydate')->xpath('storyexpirydate');
+    
     $this->addFieldMapping('field_story_templates', 'selectlisticletemplates')->xpath('selectlisticletemplates');
     $this->addFieldMapping('field_story_expert_name', 'expertname')->xpath('expertname');
     $this->addFieldMapping('field_story_expert_image', 'expertimage')->xpath('expertimage');
     $this->addFieldMapping('field_story_expert_image:alt', 'expert_alt')->xpath('expert_alt');
     $this->addFieldMapping('field_story_expert_image:title', 'expert_title')->xpath('expert_title');
     $this->addFieldMapping('field_story_expert_description', 'expertdescription')->xpath('expertdescription');
-    $this->addFieldMapping('field_story_archive', 'archive')->xpath('archive');
-    $this->addFieldMapping('field_poll_start_date', 'associatetvdate')->xpath('associatetvdate');
+    
+    
     //$this->addFieldMapping('field_story_tv_time', 'associatetime')->xpath('associatetime');
 
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
@@ -241,7 +266,9 @@ class ItgStoryMigration extends XMLMigration {
 
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
-        $source_cid = (string) $final_category;
+        $category_array = explode('#', $final_category);
+        $last_value = end($category_array);
+        $source_cid = (string) $last_value;
         $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
         $data_category[]['tid'] = $orignal_category;
       }
@@ -260,6 +287,20 @@ class ItgStoryMigration extends XMLMigration {
     }
     $row->tag_new = $data_tags;
     // End story tags migration
+    
+    // Story city migration
+    $data_city = '';
+
+    if (isset($row->xml->cities->city) && !empty($row->xml->cities->city)) {
+      foreach ($row->xml->cities->city as $data_city) {
+        $source_city = (string) $final_city;
+        $orignal_city = get_itg_destination_id('migrate_map_itgcity', $source_city);
+        $data_city[]['tid'] = $orignal_city;
+      }
+    }
+    $row->city_new = $data_city;
+    // End story city migration
+    
     // Brifcase migration
     $data_brifcase = '';
 
@@ -371,6 +412,7 @@ class ItgStoryMigration extends XMLMigration {
       }
     }
     $row->byline_new = $data_byline;
+    
       // Related content
     if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
       foreach($row->xml->relatedcontents->relatedcontent as $related){
@@ -402,6 +444,9 @@ class ItgStoryMigration extends XMLMigration {
     }
     if (!empty($row->tag_new)) {
       $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
+    }
+    if (!empty($row->city_new)) {
+      $node->field_stroy_city[LANGUAGE_NONE] = $row->city_new;
     }
     if (!empty($row->final_config_option)) {
       $node->field_story_configurations[LANGUAGE_NONE] = $row->final_config_option;

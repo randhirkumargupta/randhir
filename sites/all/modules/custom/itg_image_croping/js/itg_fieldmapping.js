@@ -237,7 +237,7 @@
     jQuery('.maptofield').click(function() {
         showloader();
         var getbame = jQuery('#btn_name').val();
-        parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
+       
 
 
         if (jQuery('#ckeditor_yes').val() == 1)
@@ -247,7 +247,19 @@
             parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(3)').val(jQuery('#imcheigth').val());
             parent.jQuery.colorbox.close();
         } else {
+           jQuery('.imagefid').each(function(){
+           var getvalue=jQuery(this).val();  
+           getvalue=getvalue.split('#');
+           var newbname=getbame;
+                   var replaced = newbname.substring(newbname.indexOf("[") + 1);
+     replaced = getvalue[1]+'['+replaced;
+  
+    
+        parent.jQuery('[name="' + replaced + '[fid]"]').val(getvalue[0]);
+            parent.jQuery("body").find("input[name='" + replaced + "[filefield_itg_image_repository][button]").trigger('mousedown');
+            parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
             parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
+             
             parent.jQuery(document).ajaxComplete(function(event, request, settings) {
 
                 if (settings.url.indexOf(field_name) >= 0) {
@@ -288,6 +300,7 @@
 
 
             });
+            });
         }
 
 
@@ -305,3 +318,4 @@ function hideloader()
 {
     jQuery('#loader-data').hide();
 }
+

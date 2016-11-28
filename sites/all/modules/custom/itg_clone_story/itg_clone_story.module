@@ -76,3 +76,19 @@ function itg_story_clone_data($keyword) {
     return $resp_search;
   }
 }
+
+/**
+ * Implement hook_views_pre_render
+ * @param Array $view
+ */
+function itg_clone_story_views_pre_render(&$view) {
+
+  if ($view->name == "story_clone") {
+
+    foreach ($view->result as $related_result) {
+      $splittedsite = explode("/", $related_result->site);
+      $explode_site = explode(".", $splittedsite[2]);
+      $related_result->site = strtoupper($explode_site[0]);
+    }
+  }
+}

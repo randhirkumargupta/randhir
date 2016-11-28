@@ -70,6 +70,8 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
         '#options' => array('all' => 'Any', 'yes' => 'Yes', 'no' => 'No'),
         '#default_value' => 'all',
       );
+      
+      
       $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
       $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
       $form['from_state']['#prefix'] = '<div style="display: none;">';
@@ -246,4 +248,3 @@ function itg_reports_missing_year(&$chart_data) {
     array_multisort($chart_data);
   }
 }
-
