@@ -244,6 +244,12 @@
   }
 
   /*css start osscar page */
+  /* css start vertical bar */
+  #block-itg-menu-manager-vertical-menu {
+    display: none;
+  }
+
+  /*end css vertical bar */
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -788,13 +794,13 @@
 
   /*css end poll page*/
   #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider {
-    padding: 0 30px 10px;
-  }
-  #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider .slick-prev, #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider .slick-next {
-    background: transparent;
-    top: 50%;
-    color: #fff;
-    margin-top: -28px;
+    padding: 0 5px;
+    /*        .slick-prev, .slick-next{
+                background: transparent;
+                top: 50%;
+                color: #fff;
+                margin-top: -28px;
+            }*/
   }
 }
 @media only screen and (max-width: 680px) {

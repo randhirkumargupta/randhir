@@ -125,16 +125,16 @@ jQuery(document).ready(function (e) {
             {
               breakpoint: 1024,
               settings: {
-                slidesToShow: 7, 
-                 arrows: true,
-                slidesToScroll: 1                
+                slidesToShow: 7,                  
+                slidesToScroll: 1,
+                arrows: false
               }
             },
             {
               breakpoint: 600,
               settings: {
                 slidesToShow: 4,
-                 arrows: true,
+                 arrows: false,
                 slidesToScroll: 1
               }
             },
@@ -142,7 +142,7 @@ jQuery(document).ready(function (e) {
               breakpoint: 480,
               settings: {
                 slidesToShow: 3,
-                 arrows: true,
+                 arrows: false,
                 slidesToScroll: 1
               }
             }

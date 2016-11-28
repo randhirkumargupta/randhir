@@ -8536,9 +8536,7 @@ footer .footer-copyright {
 }
 #block-itg-menu-manager-vertical-menu li {
   border-bottom: 1px solid #c4c4c4;
-  padding: 15px 10px;
   display: block;
-  height: 92px;
 }
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
@@ -8551,14 +8549,32 @@ footer .footer-copyright {
   font-weight: 600;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
+  line-height: 15px;
+  display: block;
+  padding: 10px 5px;
+}
+#block-itg-menu-manager-vertical-menu a:hover {
+  background: #fff;
+  color: #b00202;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent {
-  max-height: 552px;
-  overflow: hidden;
-  max-width: 80px;
+  max-width: 56px;
+}
+#block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu span {
+  font-family: roboto;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 5px 5px;
+  display: block !important;
+  cursor: pointer;
+}
+#block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu span i {
+  display: block;
+  font-size: 20px;
+  color: #959595;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more {
-  padding: 15px 10px;
+  padding: 10px 5px;
   display: none;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a {

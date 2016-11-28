@@ -434,19 +434,23 @@ jQuery(document).ready(function () {
        jQuery(this).nextAll('li').show();
    });
   
-     //vertical menu position 
-     var menuLength  = jQuery('.vertical-menu li').length;
+     //vertical menu position      
+    jQuery('.vertical-menu').slick({
+      slidesToShow: 6,
+      slidesToScroll: 1,           
+      vertical: true,
+      nextArrow: '<span class="more"><i class="fa fa-chevron-down"></i> More</span>',
+      prevArrow: '<span class="less"><i class="fa fa-chevron-up"></i> Less</span>',
+    });
+    /* var menuLength  = jQuery('.vertical-menu li').length;
      if(menuLength > 6){         
          jQuery('.vertical-more').show();
      }
-    var TotalHeight = 0;
+    var TotalHeight = 0, clicked = true;
     jQuery('.vertical-menu li').each(function () {
         var liLength = jQuery(this).height();
-        TotalHeight = TotalHeight + liLength;        
-        console.log(TotalHeight);                
-    });
-     
-     var clicked = true;
+        TotalHeight = TotalHeight + liLength;                             
+    });          
      jQuery('.vertical-more a').click(function(){          
          if(clicked){             
             clicked=false;
@@ -459,7 +463,7 @@ jQuery(document).ready(function () {
              jQuery(this).find('.less').hide();
             jQuery(this).find('.more').show();
          }                  
-     });               
+     });  */             
 });
 
 

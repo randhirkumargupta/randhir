@@ -123,7 +123,6 @@ function my_custom_ajax_callback() {
  */
 function itg_related_views_pre_render(&$view) {
 
-  //Add "Create Breaking news" on listing page of Breaking news
   if ($view->name == "related_content_new") {
     global $user, $base_url;
 
@@ -199,7 +198,7 @@ function update_search_title($title, $combined_data, $uid, $type) {
  */
 function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 
-  $page_condition = array('related-content', 'site-search', 'searchimage', 'online-archive-story');
+  $page_condition = array('related-content', 'site-search', 'searchimage', 'online-archive-story', 'clone-story');
 
   if (in_array(arg(0), $page_condition)) {
     $i = 1;
