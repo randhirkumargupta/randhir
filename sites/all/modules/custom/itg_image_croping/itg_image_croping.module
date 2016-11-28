@@ -518,7 +518,7 @@ function mageimagedimesion() {
     $image_dim['photogallery']['field_story_small_image']['width'] = 170;
     $image_dim['photogallery']['field_story_small_image']['height'] = 127;
 
- // Dimension for story
+    // Dimension for story
     $image_dim['story']['field_story_extra_large_image']['width'] = 674;
     $image_dim['story']['field_story_extra_large_image']['height'] = 363;
     $image_dim['story']['field_story_large_image']['width'] = 483;
@@ -538,8 +538,8 @@ function mageimagedimesion() {
  */
 function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata, $image_height, $image_width, $aspectratio = null, $content_name = null) {
 
-    $orignal_ratio = number_format($image_width / $image_height, 2);
-    $orignal_ratio = $orignal_ratio . ':1';
+    //$orignal_ratio = number_format($image_width / $image_height, 2);
+    // $orignal_ratio = $orignal_ratio . ':1';
 //    $form['aspect ratio'] = array(
 //        '#title' => t('Aspect ratio'),
 //        '#type' => 'select',
@@ -549,7 +549,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
 //        '#attributes' => array('id' => 'select-aspect-ratio'),
 //    );
 
-
+    $imgdim = mageimagedimesion();
     $form['cropit_image_zoom_input'] = array(
         '#type' => 'markup',
         '#markup' => '<div class="image-editor">
@@ -558,31 +558,40 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         <input type="range" class="cropit-image-zoom-input">
         </div>',
     );
-    if(($content_name=='photogallery' || $content_name=='videogallery' || $content_name=='story') && $field_name=='field_story_extra_large_image') {
-    if ($content_name == 'photogallery') {
-        $checkoption = array(
-            'field_story_large_image' => t('Large Image'),
-            'field_story_small_image' => t('Small Image'));
-    }
-    else {
-        $checkoption = array(
-            'field_story_large_image' => t('Large Image'),
-            'field_story_medium_image' => t('Medium Image'),
-            'field_story_small_image' => t('Small Image'),
-            'field_story_extra_small_image' => t('Extra Small Image'));
-    }
+    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
 
-    $prefix = '<div class="image-fiels-style" >';
-    $suffix = '</div>';
+        if ($content_name == 'photogallery') {
+            $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
+            $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
+
+            $checkoption = array(
+                'field_story_large_image' => t("Large Image  $largsize"),
+                'field_story_small_image' => t("Small Image  $smallsize"));
+        }
+        else {
+            $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
+            $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
+            $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
+            $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
+            $checkoption = array(
+                'field_story_large_image' => t("Large Image  $largsize"),
+                'field_story_medium_image' => t("Medium Image $mediumsize"),
+                'field_story_small_image' => t("Small Image  $smallsize"),
+                'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
+            );
+        }
+
+        $prefix = '<div class="image-fiels-style" >';
+        $suffix = '</div>';
 # the drupal checkboxes form field definition
-    $form['images'] = array(
-        '#title' => t('Select images'),
-        '#type' => 'checkboxes',
-        '#attributes' => array('class' => array('checkbox-image-size')),
-        '#options' => $checkoption,
-        '#prefix' => $prefix,
-        '#suffix' => $suffix,
-    );
+        $form['images'] = array(
+            '#title' => t('Select images'),
+            '#type' => 'checkboxes',
+            '#attributes' => array('class' => array('checkbox-image-size')),
+            '#options' => $checkoption,
+            '#prefix' => $prefix,
+            '#suffix' => $suffix,
+        );
     }
 
     $form['image_data'] = array(
