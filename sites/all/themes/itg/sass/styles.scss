@@ -7063,10 +7063,8 @@ input[type="radio"]:checked + label:after{
         @include pos(relative);
     }
     li{        
-        border-bottom: 1px solid #c4c4c4;
-        padding: 15px 10px;
-        display: block;  
-        height: 92px;
+        border-bottom: 1px solid #c4c4c4;       
+        display: block;          
     }
     img{
         margin: 0 auto;
@@ -7076,15 +7074,35 @@ input[type="radio"]:checked + label:after{
     a{
         @include font(12px,null,600);
         font-family: $itg-roboto;
-        text-transform: uppercase;        
+        text-transform: uppercase;
+        line-height: 15px;
+        display: block;
+         padding: 10px 5px;
+         &:hover{
+             background: #fff;
+             color: #b00202;
+         }
     }
     .vertical-menu-parent{
-         max-height : 552px;
-        overflow : hidden; 
-            max-width: 80px;
+            max-width: 56px;
+            .vertical-menu{
+                span{
+                    font-family: roboto;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    padding: 5px 5px;
+                    display: block !important;
+                    cursor: pointer;
+                    i{
+                        display: block;
+                        font-size: 20px;
+                        color: #959595;
+                    }
+                }
+            }
     }
     .vertical-more{
-        padding: 15px 10px;
+        padding: 10px 5px;
         display:none;
         a{
             display: block;
