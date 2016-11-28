@@ -272,6 +272,7 @@
   padding: 0 12px;
   line-height: 35px;
   display: block;
+  cursor: pointer;
 }
 #block-views-photo-landing-slider-block .social-icon ul li a:hover {
   background: #222222;
