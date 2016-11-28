@@ -3369,8 +3369,10 @@ body.has-cart-popup {
   border: none;
   width: 100%;
   height: 100%;
-  padding-left: 150px;
   z-index: 9;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"], [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"] {
+  background: #fff url(../images/calender-icon.png) no-repeat right center;
 }
 [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding label, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding label {
   display: none;
@@ -3560,6 +3562,7 @@ body.has-cart-popup {
 
 [id*="itg-personalization-refer-a-friend-form"] fieldset {
   border: none;
+  text-align: left;
 }
 [id*="itg-personalization-refer-a-friend-form"] fieldset legend {
   display: none;
@@ -3570,10 +3573,16 @@ body.has-cart-popup {
   color: #075bbb;
   font-size: 14px;
   margin-top: 0;
+  cursor: pointer;
 }
 [id*="itg-personalization-refer-a-friend-form"] > div [id*="edit-submit"] {
   margin: 60px auto 0;
   display: block;
+}
+
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file img {
+  max-height: 80px;
+  margin-bottom: 10px;
 }
 
 #block-itg-personalization-personalization-edit-profile, #block-itg-personalization-personalization-refer-friend {
@@ -3606,20 +3615,21 @@ body.has-cart-popup {
   background: #f8f8f8;
   text-align: center;
   font-family: "Roboto", sans-serif;
-  padding-top: 60px;
+  padding-top: 20px;
   color: #757575;
 }
-#block-itg-personalization-personalization-refer-friend .social-edit ul {
+#block-itg-personalization-personalization-refer-friend .social-edit > ul {
   display: inline-block;
 }
-#block-itg-personalization-personalization-refer-friend .social-edit ul li {
+#block-itg-personalization-personalization-refer-friend .social-edit > ul > li {
   padding: 0 10px;
 }
-#block-itg-personalization-personalization-refer-friend .social-edit ul li:first-child {
+#block-itg-personalization-personalization-refer-friend .social-edit > ul > li:first-child {
   margin-top: 15px;
 }
 #block-itg-personalization-personalization-refer-friend .social-edit .more-option {
-  margin-top: 40px;
+  margin-top: 35px;
+  margin-bottom: 10px;
 }
 
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox {
@@ -4046,6 +4056,26 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 }
 article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer.movie-reviewer-other {
   margin-top: 0;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating {
+  float: none;
+  width: 111px;
+  height: 18px;
+  padding: 0px 0;
+  position: relative;
+  background: url(../images/rating-grey.png) 0 0px/80px no-repeat;
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: url(../images/rating-red.png) 0 0px/80px no-repeat;
+  height: 18px;
+  width: 0;
 }
 article.node-mega-review-critic .other-reviews {
   margin: 10px 0;

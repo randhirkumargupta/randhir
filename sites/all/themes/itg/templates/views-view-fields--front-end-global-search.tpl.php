@@ -40,4 +40,4 @@ $share_desc = '';
   <?php print $field->wrapper_suffix; ?>
 <?php endforeach; ?>
 
-<div class="social-share"><ul><li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>
+<div class="social-share"><ul><li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li><li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li><li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')" class="twitter"><i class="fa fa-twitter"></i></a></li><li><a href="#" class="google"></a></li></ul></div>

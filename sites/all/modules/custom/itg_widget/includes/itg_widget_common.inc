@@ -2354,52 +2354,56 @@ function itg_block_display_condition() {
     return FALSE;
 }
 
-/**
+ /**
  * display block on page
  * @return TRUE or FALSE
  */
 function get_rhs_block_display_condtion($delta = '') {
-    $arg = arg();
-    $item = menu_get_item();
-    $page_argument = $item['page_arguments'];
-    $ipl_category = array();
-    $we_may_suggest_display_nodes = variable_get('we_may_suggest_block_condition');
-    $we_may_suggest_node_array = explode(",", $we_may_suggest_display_nodes);
-    $watch_right_now_display_nodes = variable_get('watch_right_now_block_condition');
-    $watch_right_now_node_array = explode(",", $watch_right_now_display_nodes);
-    $top_takes_display_nodes = variable_get('top_takes_block_condition');
-    $top_takes_node_array = explode(",", $top_takes_display_nodes);
-    $story_category = $page_argument[0]->field_story_category['und'];
-    foreach ($story_category as $category) {
-        $ipl_category[] = $category['tid'];
-    }
-    $display_block = itg_block_display_condition();
-    $user_link = drupal_get_path_alias('node/' . $arg[1]);
-    if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
-        
-    }
-    else {
+  $arg = arg();
+  $item = menu_get_item();
+  $page_argument = $item['page_arguments'];
+  $ipl_category = array();
+  $we_may_suggest_display_nodes = variable_get('we_may_suggest_block_condition');
+  $we_may_suggest_node_array = explode(",", $we_may_suggest_display_nodes);
+  $watch_right_now_display_nodes = variable_get('watch_right_now_block_condition');
+  $watch_right_now_node_array = explode(",", $watch_right_now_display_nodes);
+  $top_takes_display_nodes = variable_get('top_takes_block_condition');
+  $top_takes_node_array = explode(",", $top_takes_display_nodes);
+  $story_category = $page_argument[0]->field_story_category['und'];
+  foreach ($story_category as $category) {
+    $ipl_category[] = $category['tid'];
+  }
+  $display_block = itg_block_display_condition();
+  $user_link = drupal_get_path_alias('node/' . $arg[1]);
+  if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+    
+  }
+  else {
 
-        switch ($delta) {
-            case 'watch_right_now_videos_widget':
-                if (in_array($arg[1], $watch_right_now_node_array) || $arg[0] == 'programmes' || $arg[0] == 'online-archive-story' || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
-                    return TRUE;
-                }
-                break;
-            case 'top_takes_videos_widget':
-                if (in_array($arg[1], $top_takes_node_array) || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
-                    return TRUE;
-                }
-                break;
-            case 'we_may_suggest':
-                if (in_array($arg[1], $we_may_suggest_node_array) || $arg[0] == 'itg-quiz' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
-                    return TRUE;
-                }
-                break;
+    switch ($delta) {
+      case 'watch_right_now_videos_widget':
+        if (in_array($arg[1], $watch_right_now_node_array) || $arg[0] == 'programmes' || $arg[0] == 'online-archive-story' || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE) {
+          return TRUE;
         }
+        break;
+      case 'top_takes_videos_widget':
+        if (in_array($arg[1], $top_takes_node_array) || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+          return TRUE;
+        }
+        break;
+      case 'we_may_suggest':
+        if (in_array($arg[1], $we_may_suggest_node_array) || $arg[0] == 'itg-quiz' || $arg[0] == 'livetv' || $arg[0] == 'online-archive-story' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || $arg[0] == 'anchors-list' || $arg[0] == 'itg-survey' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'survey') || ($page_argument[0]->type == 'breaking_news') || ($page_argument[0]->type == 'photogallery') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || $display_block == TRUE) {
+          return TRUE;
+        }
+        break;
     }
+  }
 }
 
+ /**
+ * This function use for insert all node in widget table
+ *
+ */
 function insert_all_node_in_widegt_table() {
 
     $nodes = db_select('node', 'n')
