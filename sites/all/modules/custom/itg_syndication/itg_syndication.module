@@ -455,6 +455,9 @@ function itg_syndication_node_view($node, $view_mode, $langcode) {
     if (empty($node->field_service_fetch_link[LANGUAGE_NONE][0]['value'])) {
       unset($node->content['field_service_fetch_link']);    
     }
+    
+    $node->content['field_service_fetch_link'][0]['#markup'] = l('http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784', 'http://qa.indiatodayonline.in/syndication/feed/198708796aeeead156a8ecf3785907a577f4f784');
+    //$node->field_service_fetch_link[LANGUAGE_NONE][0]['value'] = ;
   }
 }
 
@@ -511,4 +514,38 @@ function itg_syndication_rule_after_build_validate($form, &$form_state) {
    }        
 
   }
+}
+
+/**
+ * remove some tag from body
+ * @param string $story_body
+ * @return $story_body
+ */
+function remove_extra_tag_in_body($story_body) {
+  // remove survey
+  if (strpos($story_body,'[ITG:SURVEY:')) {
+    if ( preg_match ('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)) {
+          $survey_nid = $matches_survey[1];
+    }
+    $story_body = str_replace('[ITG:SURVEY:'.$survey_nid.']', '', $story_body);
+  }
+  // remove quiz
+  if (strpos($story_body,'[ITG:QUIZ:')) {
+    if ( preg_match ('/ITG:QUIZ:([0-9]+)/', $story_body, $matches_quiz)) {
+      $quiz_nid = $matches_quiz[1];
+    }
+   $story_body = str_replace('[ITG:QUIZ:'.$quiz_nid.']', '', $story_body);
+  }
+  // remove poll
+  if (strpos($story_body,'[ITG:POLL:')) {
+    if ( preg_match ('/ITG:POLL:([0-9]+)/', $story_body, $matches_poll)) {
+      $poll_nid = $matches_poll[1];
+    }
+   $story_body = str_replace('[ITG:POLL:'.$poll_nid.']', '', $story_body);
+  }
+  
+  // some tags remove
+  $tags = array("table", "div");
+  
+  return preg_replace('#<(' . implode( '|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $story_body);
 }

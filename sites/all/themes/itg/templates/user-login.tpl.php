@@ -19,7 +19,7 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
 </div>
 <?php print '<div class="sign-border"><span>Or sign in using your email address</span></div>';
  } else { ?>
-  <h2>Log in</h2>
+  <h2><?php print t('Log in'); ?></h2>
 <?php } ?>
   <div class="login-wrapper">
       

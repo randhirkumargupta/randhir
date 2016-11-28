@@ -78,6 +78,12 @@
 
       <?php
       $photocategory = render($content['field_story_category']);
+      $termdata="";
+     
+            if($content['field_story_extra_large_image']['#object']->field_primary_category['und'][0]['value']!="") {
+                $termdata=itg_videogallery_get_term_name($content['field_story_extra_large_image']['#object']->field_primary_category['und'][0]['value']);
+           
+            }
       if (!empty($photocategory)):
         ?>
         <div class="expert-details content-box">
@@ -86,7 +92,9 @@
             <?php
             if (!empty($photocategory)): print render($content['field_story_category']);
             endif;
+            
             ?>
+                <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata;?></div></div></div>
 
           </div>  
         </div>
