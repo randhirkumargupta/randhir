@@ -307,11 +307,10 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_type']['table'] = 'field_data_field_type';
   $handler->display->display_options['fields']['field_type']['field'] = 'field_type';
   $handler->display->display_options['fields']['field_type']['element_label_colon'] = FALSE;
-  /* Field: Content: Video expires */
+  /* Field: Content: Activate Live TV */
   $handler->display->display_options['fields']['field_story_expires']['id'] = 'field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['table'] = 'field_data_field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['field'] = 'field_story_expires';
-  $handler->display->display_options['fields']['field_story_expires']['label'] = 'Activate Live TV';
   $handler->display->display_options['fields']['field_story_expires']['type'] = 'list_key';
   $handler->display->display_options['fields']['field_story_expires']['delta_offset'] = '0';
   /* Field: Content: Display on */
@@ -344,13 +343,12 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['status']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['status']['type'] = 'published-notpublished';
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = 'Posted by';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
-  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'Posted by';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';

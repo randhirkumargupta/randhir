@@ -7,6 +7,7 @@ dependencies[] = autocomplete_deluxe
 dependencies[] = conditional_fields
 dependencies[] = entity
 dependencies[] = feature_category_management
+dependencies[] = features_for_survey
 dependencies[] = field_collection
 dependencies[] = field_collection_fieldset
 dependencies[] = hs_taxonomy

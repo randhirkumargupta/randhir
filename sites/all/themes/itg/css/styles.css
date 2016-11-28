@@ -8520,7 +8520,7 @@ footer .footer-copyright {
 #block-itg-menu-manager-vertical-menu {
   position: absolute;
   top: 50px;
-  left: -85px;
+  left: -54px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 2px 2px 3px #ccc;
@@ -8537,6 +8537,7 @@ footer .footer-copyright {
 #block-itg-menu-manager-vertical-menu li {
   border-bottom: 1px solid #c4c4c4;
   display: block;
+  min-width: 100%;
 }
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
@@ -8557,16 +8558,17 @@ footer .footer-copyright {
   background: #fff;
   color: #b00202;
 }
-#block-itg-menu-manager-vertical-menu .vertical-menu-parent {
-  max-width: 56px;
+#block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu {
+  max-width: 58px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu span {
   font-family: roboto;
   font-weight: 600;
   text-transform: uppercase;
   padding: 5px 5px;
-  display: block !important;
+  display: block;
   cursor: pointer;
+  font-size: 12px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu span i {
   display: block;
