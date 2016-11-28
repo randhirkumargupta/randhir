@@ -116,9 +116,9 @@ $url = file_create_url($data->uri);
     <button class="original-image add-more">Use Original</button>
     <button class="cancel-image add-more">Cancel</button>
     <?php
-    if ($genrate == 1) {
-        print' <button class="generate-Image add-more">Generate Image</button>';
-    }
+//    if ($genrate == 1) {
+//        print' <button class="generate-Image add-more">Generate Image</button>';
+//    }
     ?>
 </div>
 

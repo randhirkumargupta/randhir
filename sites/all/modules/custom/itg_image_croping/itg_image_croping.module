@@ -166,7 +166,7 @@ function itg_image_croping_ajax_make_ajax() {
         'image_height' => $image_height,
         'image_width' => $image_width,
         'content_type' => $_POST['content_type'],
-        'genrate' => ($field_name == 'field_story_extra_large_image') ? 1 : 0,
+        //'genrate' => ($field_name == 'field_story_extra_large_image') ? 1 : 0,
         'form' => $drupal_form));
 }
 
@@ -540,14 +540,14 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
 
     $orignal_ratio = number_format($image_width / $image_height, 2);
     $orignal_ratio = $orignal_ratio . ':1';
-    $form['aspect ratio'] = array(
-        '#title' => t('Aspect ratio'),
-        '#type' => 'select',
-        '#description' => 'Select aspect ratio.',
-        '#default_value' => $aspectratio,
-        '#options' => array($orignal_ratio => $orignal_ratio, '1:1' => '1:1', '2:1' => '2:1', '4:3' => '4:3', '16:9' => '16:9'),
-        '#attributes' => array('id' => 'select-aspect-ratio'),
-    );
+//    $form['aspect ratio'] = array(
+//        '#title' => t('Aspect ratio'),
+//        '#type' => 'select',
+//        '#description' => 'Select aspect ratio.',
+//        '#default_value' => $aspectratio,
+//        '#options' => array($orignal_ratio => $orignal_ratio, '1:1' => '1:1', '2:1' => '2:1', '4:3' => '4:3', '16:9' => '16:9'),
+//        '#attributes' => array('id' => 'select-aspect-ratio'),
+//    );
 
 
     $form['cropit_image_zoom_input'] = array(
@@ -558,6 +558,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         <input type="range" class="cropit-image-zoom-input">
         </div>',
     );
+    if(($content_name=='photogallery' || $content_name=='videogallery' || $content_name=='story') && $field_name=='field_story_extra_large_image') {
     if ($content_name == 'photogallery') {
         $checkoption = array(
             'field_story_large_image' => t('Large Image'),
@@ -571,7 +572,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
             'field_story_extra_small_image' => t('Extra Small Image'));
     }
 
-    $prefix = '<div class="image-fiels-style" style="display:none">';
+    $prefix = '<div class="image-fiels-style" >';
     $suffix = '</div>';
 # the drupal checkboxes form field definition
     $form['images'] = array(
@@ -582,6 +583,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         '#prefix' => $prefix,
         '#suffix' => $suffix,
     );
+    }
 
     $form['image_data'] = array(
         '#type' => 'hidden',

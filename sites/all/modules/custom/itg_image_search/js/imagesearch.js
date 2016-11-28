@@ -1,4 +1,5 @@
 (function($) {
+    
     var timer;
     jQuery('#edit-terms').live('keyup', function() {
         window.clearTimeout(timer);
