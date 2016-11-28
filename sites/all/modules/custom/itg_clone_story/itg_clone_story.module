@@ -14,14 +14,14 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
         $kicker = html_entity_decode($clone_arr_response->sm_field_story_kicker_text[0], ENT_QUOTES);
         $form['title']['#default_value'] = $label;
-        $form['body'][LANGUAGE_NONE][0]['#default_value'] = $clone_arr_response->content;
+        $form['body'][LANGUAGE_NONE][0]['#default_value'] = $clone_arr_response->sm_field_custom_story_description_text[0];
         $form['field_story_rating'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->fm_field_story_rating[0];
         $form['field_story_kicker_text'][LANGUAGE_NONE][0]['value']['#default_value'] = $kicker;
         $form['field_story_long_head_line'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_long_head_line[0];
         $form['field_story_short_headline'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_short_headline[0];
         $form['field_story_snap_post'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_snap_post[0];
         $form['field_story_expert_name'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_expert_name[0];
-        $form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_expert_description[0];
+        $form['field_story_expert_description'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_custom_expert_description[0];
         $form['field_story_magazine_headline'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_magazine_headline[0];
         $form['field_story_magazine_kicker_text'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_magazine_kicker_t[0];
         $form['field_story_redirection_url_titl'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_redirection_url_t[0];
@@ -39,6 +39,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_social_media_integ'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_social_media_inte;
         $form['field_story_syndication'][LANGUAGE_NONE]['#default_value'] = array($clone_arr_response->sm_field_story_syndication[0]);
         $form['field_story_templates'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_templates[0];
+        $form['field_story_associate_lead'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_associate_lead[0];
         $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#default_value'] = array($clone_arr_response->sm_field_story_magazine_story_is[0]);
       }
   }
