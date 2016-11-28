@@ -185,6 +185,14 @@ function itg_social_media_twitter_login() {
 
 /**
  * Autocomplete callback for social media log node title.
+ *
+ * @param string $field
+ *   Name of the column.
+ * @param string $string
+ *   String for auto complete search.
+ *
+ * @return string
+ *   Suggested string for text field.
  */
 function _smi_title_autocomplete($field, $string) {  
   $itg_query = db_select('itg_social_media_logs', 'itg');

@@ -28,3 +28,23 @@ function itg_report_user_dashboard() {
 
   return theme('itg_reports_dashboard', array('data' => $data));
 }
+
+/**
+ * Implements callback function for email auto complete widget.
+ *
+ * @param string $string'
+ *   String for auto complete search.
+ */
+function itg_reports_email_autocomplete($string) {  
+  $itg_query = db_select('users', 'u')
+    ->fields('u', array('mail'))
+    ->condition('mail', '%' . db_like($string) . '%', 'LIKE');
+  $itg_result = $itg_query->execute();
+
+  $result = array();
+  foreach ($itg_result as $value) {
+    $result[$value->$field] = $value->$field;
+  }
+  
+  return drupal_json_output($result);
+}
