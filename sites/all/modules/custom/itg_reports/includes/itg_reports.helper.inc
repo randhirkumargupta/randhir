@@ -13,7 +13,7 @@
  */
 function itg_report_user_dashboard() {
   $data = array();
-  $user_menu_tree = menu_tree_all_data('menu-itg-reports');  
+  $user_menu_tree = menu_tree_all_data('menu-itg-reports');
   foreach ($user_menu_tree as $key_tree => $val_tree) {
     if (empty($val_tree['below'])) {
       $menu_link[$val_tree['link']['link_path']] = t($val_tree['link']['link_title']);
@@ -35,16 +35,18 @@ function itg_report_user_dashboard() {
  * @param string $string'
  *   String for auto complete search.
  */
-function itg_reports_email_autocomplete($string) {  
+function itg_reports_email_autocomplete($string) {
   $itg_query = db_select('users', 'u')
-    ->fields('u', array('mail'))
-    ->condition('mail', '%' . db_like($string) . '%', 'LIKE');
-  $itg_result = $itg_query->execute();
-
+      ->fields('u', array('mail'))
+      ->condition('mail', '%' . db_like($string) . '%', 'LIKE');
+  $itg_result = $itg_query->execute()->fetchAll();
   $result = array();
-  foreach ($itg_result as $value) {
-    $result[$value->$field] = $value->$field;
+  $errors = array_filter($itg_result);
+  if (!empty($errors)) {
+    foreach ($itg_result as $value) {
+      $result[$value->mail] = $value->mail;
+    }
   }
-  
+
   return drupal_json_output($result);
 }
