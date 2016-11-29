@@ -70,6 +70,11 @@
             }); 
             
             // end here
+            // jQuery code to close popular videos related content
+            $('body').on('click', '.hide-rc', function(){
+              $(this).prev().remove();
+              $(this).remove();
+            });
         }
 
     };

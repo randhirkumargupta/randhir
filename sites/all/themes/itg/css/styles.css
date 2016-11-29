@@ -569,11 +569,17 @@ header .header-right-menu ul li.live-tv a {
 }
 
 @media all and (min-width: 767px) {
-  .node-type-story .header {
-    background-color: #5d26a0;
+  .not-front .header {
+    background: url(../images/header_bg.png) 0 0/100% 100% no-repeat;
   }
-  .node-type-story .header .region-header {
+  .not-front .header .region-header {
     background-color: transparent;
+  }
+  .not-front .header .logo-n-three-bar .three-bar span {
+    background-color: #fff;
+  }
+  .not-front .header .logo-n-three-bar .three-bar span:before, .not-front .header .logo-n-three-bar .three-bar span:after {
+    background-color: #fff;
   }
 
   .story-section h1 {
@@ -791,6 +797,9 @@ header .header-right-menu ul li.live-tv a {
     margin-bottom: 30px;
   }
 }
+.story-photos {
+  margin-bottom: 40px;
+}
 .story-photos .half-grey-bg {
   display: inline-block;
   vertical-align: top;
@@ -801,7 +810,7 @@ header .header-right-menu ul li.live-tv a {
   content: '';
   background-color: #ccc;
   width: 100%;
-  height: 200px;
+  height: 202px;
   position: absolute;
   left: 0;
   top: 0;
@@ -824,7 +833,7 @@ header .header-right-menu ul li.live-tv a {
   position: relative;
   padding-bottom: 10px;
   z-index: 9;
-  margin: 15px;
+  margin: 0 15px;
 }
 .story-photos .view-related-photogallery .view-content ul li .views-field-title {
   padding: 10px;
@@ -856,6 +865,9 @@ header .header-right-menu ul li.live-tv a {
   font-size: 10px;
 }
 
+.popular-videos {
+  margin-bottom: 40px;
+}
 .popular-videos .half-grey-bg {
   display: inline-block;
   vertical-align: top;
@@ -890,17 +902,25 @@ header .header-right-menu ul li.live-tv a {
   position: relative;
   padding-bottom: 10px;
   z-index: 9;
-  margin: 15px;
+  margin: 0 15px;
 }
 .popular-videos .view-related-photogallery .view-content ul li.views-row-odd .views-field-field-primary-category {
   background-color: #dc4750;
   border-radius: 4px 4px 0 0;
   color: #fff;
+  height: 20px;
+}
+.popular-videos .view-related-photogallery .view-content ul li.views-row-odd .hide_sh, .popular-videos .view-related-photogallery .view-content ul li.views-row-odd .hide-rc {
+  background-color: #dc4750;
 }
 .popular-videos .view-related-photogallery .view-content ul li.views-row-even .views-field-field-primary-category {
   background-color: #52bf40;
   border-radius: 4px 4px 0 0;
   color: #fff;
+  height: 20px;
+}
+.popular-videos .view-related-photogallery .view-content ul li.views-row-even .hide_sh, .popular-videos .view-related-photogallery .view-content ul li.views-row-even .hide-rc {
+  background-color: #52bf40;
 }
 .popular-videos .view-related-photogallery .view-content ul li .views-field-title {
   height: 60px;
@@ -933,7 +953,7 @@ header .header-right-menu ul li.live-tv a {
   vertical-align: top;
   font-size: 10px;
 }
-.popular-videos .view-related-photogallery .view-content ul li .hide_sh {
+.popular-videos .view-related-photogallery .view-content ul li .hide_sh, .popular-videos .view-related-photogallery .view-content ul li .hide-rc {
   border: none;
   border-radius: 50%;
   bottom: -18px;
@@ -943,15 +963,58 @@ header .header-right-menu ul li.live-tv a {
   position: absolute;
   right: 0;
   width: 35px;
-  background-color: #dc4750;
+  cursor: pointer;
+  text-indent: -9999px;
+  background-image: url("../images/icon_related_content.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 9;
 }
 .popular-videos .view-related-photogallery .view-content ul li .nxt {
-  display: none;
   left: 0;
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
+}
+.popular-videos .view-related-photogallery .view-content ul li .nxt .view-sambandhit-khabre {
+  background-color: #fff;
+  border-radius: 4px;
+  height: 100%;
+  padding: 0 10px;
+  overflow-y: auto;
+  z-index: 9;
+}
+.popular-videos .view-related-photogallery .view-content ul li .nxt .view-sambandhit-khabre .views-row {
+  border-bottom: 1px solid #9a9a9a;
+  padding: 10px 0;
+  text-align: center;
+}
+.popular-videos .view-related-photogallery .view-content ul li .nxt .view-sambandhit-khabre .views-row .views-field-label {
+  margin-bottom: 10px;
+}
+.popular-videos .view-related-photogallery .view-content ul li .nxt .view-sambandhit-khabre .views-row .views-field-label a {
+  color: #000;
+  display: block;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
+}
+.popular-videos .view-related-photogallery .view-content ul li .nxt .view-sambandhit-khabre .views-row .views-field-hash, .popular-videos .view-related-photogallery .view-content ul li .nxt .view-sambandhit-khabre .views-row .views-field-entity-id {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+}
+.popular-videos .view-related-photogallery .view-content ul li .nxt .view-sambandhit-khabre .views-row .views-field-entity-id:before {
+  content: '|';
+  display: inline-block;
+  vertical-align: top;
+  font-size: 10px;
 }
 
 .Sambandhit-Khabre {
