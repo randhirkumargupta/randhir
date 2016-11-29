@@ -7,12 +7,19 @@ list($width, $height) = getimagesize($url);
 <div id="container">
     <h4 class="tag-image"><i class="fa fa-tags"></i> Tagging</h4>
     <?php
+    $counter=1;
     foreach ($data->fid as $key => $fids) {
+  
         if ($key == 0) {
             $key = "";
         }
+        $image_dim=mageimagedimesion();
+       
         $explodedata = explode('#', $fids);
         $file = file_load($explodedata[0]);
+        $imagename=  str_replace('field_story_','', $explodedata[1]);
+         
+        $imagename=  str_replace('_', ' ', $imagename);
         $url = file_create_url($file->uri);
         print '<div id="imgtag' . $key . '"> 
         <img id="" src="' . $url . '" /> 
@@ -22,8 +29,14 @@ list($width, $height) = getimagesize($url);
         </div> 
         <div id="taglist' . $key . '"> 
         <ol> 
-        </ol> 
-        </div> ';
+        </ol>';
+        if($content_name!="")
+        {
+       print' <div class="image_info">'.$counter.' '. ucwords($imagename).' ('.$image_dim[$content_name][ $explodedata[1]]['width'].'x'.$image_dim[$content_name][ $explodedata[1]]['height'].')</div>';
+        
+        }
+        print'</div>';
+        $counter++;
     }
     ?>
     <button class="add-more maptofield">Upload</button>

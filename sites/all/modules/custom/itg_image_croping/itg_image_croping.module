@@ -176,8 +176,9 @@ function itg_image_croping_ajax_make_ajax() {
  */
 function itg_image_croping_getimagetotag() {
     $image_id = json_decode($_POST['fid']);
+    $content_name=$_POST['content_name'];
 
-    print theme('image_tagging', array('data' => $image_id,
+    print theme('image_tagging', array('data' => $image_id,'content_name'=>$content_name,
         'field_name' => $_POST['field_name']
     ));
 }
@@ -541,6 +542,18 @@ function mageimagedimesion() {
     $image_dim['mega_review_critic']['field_story_small_image']['height'] = 127;
     $image_dim['mega_review_critic']['field_story_extra_small_image']['width'] = 88;
     $image_dim['mega_review_critic']['field_story_extra_small_image']['height'] = 66;
+     // Dimension for recipe
+    $image_dim['recipe']['field_story_extra_large_image']['width'] = 674;
+    $image_dim['recipe']['field_story_extra_large_image']['height'] = 363;
+    $image_dim['recipe']['field_story_large_image']['width'] = 483;
+    $image_dim['recipe']['field_story_large_image']['height'] = 271;
+    $image_dim['recipe']['field_story_medium_image']['width'] = 370;
+    $image_dim['recipe']['field_story_medium_image']['height'] = 208;
+    $image_dim['recipe']['field_story_small_image']['width'] = 170;
+    $image_dim['recipe']['field_story_small_image']['height'] = 127;
+    $image_dim['recipe']['field_story_extra_small_image']['width'] = 88;
+    $image_dim['recipe']['field_story_extra_small_image']['height'] = 66;
+    
     return $image_dim;
 }
 
@@ -570,7 +583,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         <input type="range" class="cropit-image-zoom-input">
         </div>',
     );
-    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name=='mega_review_critic'|| $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
+    if (($content_name == 'photogallery' || $content_name == 'videogallery'|| $content_name == 'recipe' || $content_name=='mega_review_critic'|| $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
 
         if ($content_name == 'photogallery') {
             $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
