@@ -520,7 +520,7 @@ function mageimagedimesion() {
     $image_dim['photogallery']['field_story_small_image']['height'] = 127;
 
     // Dimension for story
-    $image_dim['story']['field_story_extra_large_image']['width'] = 674;
+    $image_dim['story']['field_story_extra_large_image']['width'] = 647;
     $image_dim['story']['field_story_extra_large_image']['height'] = 363;
     $image_dim['story']['field_story_large_image']['width'] = 483;
     $image_dim['story']['field_story_large_image']['height'] = 271;
@@ -532,7 +532,7 @@ function mageimagedimesion() {
     $image_dim['story']['field_story_extra_small_image']['height'] = 66;
     
      // Dimension for story
-    $image_dim['mega_review_critic']['field_story_extra_large_image']['width'] = 674;
+    $image_dim['mega_review_critic']['field_story_extra_large_image']['width'] = 647;
     $image_dim['mega_review_critic']['field_story_extra_large_image']['height'] = 363;
     $image_dim['mega_review_critic']['field_story_large_image']['width'] = 483;
     $image_dim['mega_review_critic']['field_story_large_image']['height'] = 271;
