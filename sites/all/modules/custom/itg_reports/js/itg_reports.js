@@ -42,6 +42,7 @@
                     $('select[name="from_state"]').find('option[value="draft"]').attr("selected", true);
                     $("#edit-state option:selected").removeAttr("selected");
                     $("#edit-state option[value='published']").prop("selected", true);
+                    $('#edit-state').css('pointer-events', 'auto');
                 } else if (moderation === 'Yes') {
                     $('select[name="from_state"]').find('option[value="All"]').attr("selected", true);
                     $("#edit-state option:selected").removeAttr("selected");
@@ -49,10 +50,11 @@
                     $.each(values.split(","), function (i, e) {
                         $("#edit-state option[value='" + e + "']").prop("selected", true);
                     });                   
-                    $('#edit-state-wrapper').hide();
+                    $('#edit-state').css('pointer-events', 'none');
                 } else {
                     $('select[name="from_state"]').find('option[value="All"]').attr("selected", true);
                     $("#edit-state option:selected").removeAttr("selected");
+                    $('#edit-state').css('pointer-events', 'auto');
                 }
 
             });

@@ -23,4 +23,4 @@
  */
 ?>
 
-<?php print itg_report_node_edit_count($output); ?>
+<?php print $output; ?>

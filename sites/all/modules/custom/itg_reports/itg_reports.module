@@ -284,3 +284,16 @@ function itg_report_node_edit_count($output) {
   
   return $result;
 }
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_views_pre_render(&$view) {  
+  if ($view->name == 'report_filed_content') {
+    foreach ($view->result as $rows) {
+      $rows->nid = itg_report_node_edit_count($rows->nid);
+    }
+  }
+}
