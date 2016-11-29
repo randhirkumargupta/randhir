@@ -13,12 +13,12 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         <h2><?php print $rows[0]['title']; ?></h2>    
         <div class="social-icon desktop-hide">
             <ul>
-                <li><a onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li><a title="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
                 <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-comment"></i></a></li>
-                <li><a href="#"><i class="fa fa-link"></i></a></li>
-                <li class="mhide"><a href="#"><i class="fa fa-share"></i></a></li>
+                <li><a title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="javacript:void();" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
+                <li class="mhide"><a href="#" title="post video"><i class="fa fa-share"></i></a></li>
                 <?php global $user; ?>
                   <?php if ($user->uid > 0): ?>
                      <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>                      
@@ -79,12 +79,12 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         
         <div class="social-icon mhide">
             <ul>
-                <li><a onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li><a title="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
                 <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-comment"></i></a></li>
-                <li><a href="#"><i class="fa fa-link"></i></a></li>
-                <li><a href="#"><i class="fa fa-share"></i></a></li>
+                <li><a title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="javacript:void();" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
+                <li><a href="#" title="post video"><i class="fa fa-share"></i></a></li>
                 <?php global $user; ?>
                   <?php if ($user->uid > 0): ?>                     
                      <li><?php print $read_later; ?></li>
@@ -120,7 +120,33 @@ jQuery(document).ready(function (e) {
         centerMode: false,
         arrows: true,
         variableWidth: true,
-        focusOnSelect: true
+        focusOnSelect: true,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 7,                  
+                slidesToScroll: 1,
+                arrows: false
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 4,
+                 arrows: false,
+                slidesToScroll: 1
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 3,
+                 arrows: false,
+                slidesToScroll: 1
+              }
+            }
+        ]
     });
         
     jQuery('.counterslide').slick({

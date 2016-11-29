@@ -7,7 +7,7 @@
   </div>
   <div class="col-md-9">
     <h3><?php print $row['title']; ?></h3>
-    <?php print $row['body']; ?>
+    <div class="body-content"><?php print $row['body']; ?></div>
   </div>
 </div>
   

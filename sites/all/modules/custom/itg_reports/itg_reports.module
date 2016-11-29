@@ -32,6 +32,13 @@ function itg_reports_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_reports.helper.inc',
   );
+  // Menu form email autocomplete.
+  $items['itg-reports-mail/autocomplete'] = array(    
+    'page callback' => 'itg_reports_email_autocomplete',
+    'access arguments' => array('view report dashboard'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_reports.helper.inc',    
+  );
 
   return $items;
 }
@@ -61,15 +68,18 @@ function itg_reports_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}.
  */
 function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
   switch ($form['#id']) {
     case 'views-exposed-form-report-filed-content-page':
       $form['node_status']['#options'][1] = t('Published');
       $form['node_status']['#options'][0] = t('Not published');
       $form['moderation'] = array(
+        '#title' => t('Moderation'),
         '#type' => 'select',
         '#options' => array('all' => 'Any', 'yes' => 'Yes', 'no' => 'No'),
         '#default_value' => 'all',
-      );
+      );      
+      $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
       $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
       $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
       $form['from_state']['#prefix'] = '<div style="display: none;">';
@@ -77,6 +87,10 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
       $form['#after_build'][] = 'itg_reports_view_after_build';
 
       break;
+    case 'views-exposed-form-comparative-reports-page':
+      $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
+      $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
+      $form['#after_build'][] = 'itg_reports_view_after_build';
   }
 }
 
@@ -130,13 +144,13 @@ function itg_reports_block_view($delta = '') {
             '#chart_type' => 'line',
             '#chart_library' => 'highcharts',
           );
-          
+
           // Add missing year.
-          itg_reports_mission_year($chart_data['graph']);
+          itg_reports_missing_year($chart_data['graph']);
 
           $chart['career'] = array(
             '#type' => 'chart_data',
-            '#data' => $chart_data['graph'],            
+            '#data' => $chart_data['graph'],
             '#title' => $chart_data['actor'][$key]['actor_name'],
           );
           $chart['xaxis'] = array(
@@ -156,7 +170,7 @@ function itg_reports_block_view($delta = '') {
             'pic_uri' => $chart_data['actor'][$key]['actor_pic'],
           );
         }
-      }      
+      }
       $block['content'] = theme('itg_reports_career_graph', array('output' => $output, 'actor' => $actor_info));
 
       break;
@@ -207,8 +221,14 @@ function itg_report_get_graph_data() {
 
 /**
  * Ad missing year to the chart data.
+ *
+ * @param array $chart_data
+ *   Array containing year wise data of celebrity career graph.
+ *
+ * @return array
+ *   Sorted array with missing intervals.
  */
-function itg_reports_mission_year(&$chart_data) {
+function itg_reports_missing_year(&$chart_data) {
   $data = array();
   array_multisort($chart_data);
   $temp = NULL;
@@ -231,12 +251,49 @@ function itg_reports_mission_year(&$chart_data) {
   if ($min_step < 6) {
     while ($min_step <= 6) {
       $data[] = array(
-        $temp++,        
+        $temp++,
         NULL
       );
       ++$min_step;
     }
     $chart_data = array_merge($chart_data, $data);
     array_multisort($chart_data);
+  }
+}
+
+/**
+ * Get node edit count from revision table.
+ *
+ * @param int $output
+ *   Unique node id of the node.
+ * 
+ * @return int
+ *   Total count of the node edit.
+ */
+function itg_report_node_edit_count($output) {
+  $result = 0;
+  try {
+    $itg_query = db_select('node_revision', 'n');
+    $itg_query->fields('n', array('nid'))
+        ->condition('nid', $output);        
+    $result = $itg_query->execute()->rowCount();
+  }
+  catch (Exception $ex) {
+    drupal_set_message($ex->getMessage(), 'error');
+  }
+  
+  return $result;
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_views_pre_render(&$view) {  
+  if ($view->name == 'report_filed_content') {
+    foreach ($view->result as $rows) {
+      $rows->nid = itg_report_node_edit_count($rows->nid);
+    }
   }
 }

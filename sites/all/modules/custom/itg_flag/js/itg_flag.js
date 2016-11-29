@@ -92,3 +92,10 @@ function googleplusbtn(url, title, img) {
 }   
 
 // google sharing end here
+
+
+// function for scrolling
+function scrollToAnchor(aid){
+    var aTag = jQuery("div[id='"+ aid +"']");
+    jQuery('html,body').animate({scrollTop: aTag.offset().top},'slow');
+}

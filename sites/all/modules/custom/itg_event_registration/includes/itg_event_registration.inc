@@ -110,6 +110,7 @@ function itg_event_registration_users_list() {
         <th>Company</th>
         <th>Designation</th>
         <th>City</th>
+        <th>Registration Date</th>
       </tr></thead><tbody>';
       
       $output_data = '';
@@ -121,6 +122,7 @@ function itg_event_registration_users_list() {
             <td>' . $data[$user_list]['company'] . '</td>
             <td>' . $data[$user_list]['designation'] . '</td>
             <td>' . $data[$user_list]['city'] . '</td>
+            <td>' . format_date($node->created, $type = 'custom_date_d_m_y_', $format = '', $timezone = NULL, $langcode = NULL) . '</td>
           </tr>';
       }
       $output_data .= '</tbody></table>';
