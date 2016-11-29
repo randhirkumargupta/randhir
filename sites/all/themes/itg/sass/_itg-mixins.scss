@@ -492,3 +492,19 @@ $root-font-size: 16px;
         }
     }
 }
+@mixin half-grey-bg($height){
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 0;
+    position: relative;
+    &:before{
+      content: '';
+      background-color: #ccc;
+      width: 100%;
+      height: $height;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+    }
+  }

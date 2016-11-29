@@ -5,7 +5,7 @@
 
 body{
   font: 14px/18px 'Noto Sans';
-  color: #333;
+  color: #000;
 }
 h1, h2, h3, h4{font-family: 'Noto Sans';}
 h1{    
@@ -492,6 +492,9 @@ header{
 }
 @media all and (min-width: 767px){
   .story-section{
+    h1{
+      margin-bottom: 30px;
+    }
     .stryimg{
       height: 420px;
       border: 1px solid #ddd;
@@ -536,8 +539,8 @@ header{
                         margin-top: 0px;
                     }
                     &.title{
-                        color: #6b6b6b;
-                        /*@include font(12px,20px,$itg-font-bold);*/
+                        color: #000;
+                        @include font(16px,20px,$itg-font-regular);
                     }
                     &.mailto{
                         text-transform: uppercase;
@@ -545,6 +548,9 @@ header{
                 }
             }
             ul.date-update{ 
+              font-size: 14px;
+              line-height: 15px;
+              color: #aba8a8;
               list-style: none;
                 li{
                     margin-bottom: 7px;
@@ -579,14 +585,30 @@ header{
                 }
             }
         }
+        & + .description{
+          @include font(16px,24px,$itg-font-regular);
+          color: #000;
+          p{
+            margin-bottom: 20px;
+          }
+        }
     }
     .previous-next{
       @include clearfix;
       margin: 30px 0 20px;
       #previous{float: left;}
-      #next{float: right;}
+      #next{
+        float: right;
+        > a{
+          float: right;
+        }
+      }
       #previous, #next{
         width: 260px;
+        > a{
+          @include font(18px,44px,$itg-font-regular);
+          color: rgba(0,0,0,.5);
+        }
         h4{
           float: left;
           width: 150px;
@@ -608,15 +630,17 @@ header{
       }
     }
     .tags{
+      margin-bottom: 30px;
       h3{
         
       }
       ul{
         list-style: none;
         li{
-          padding: 5px;
-          background-color: #ccc;
-          border-radius: 10px;
+          @include font(16px,23px,$itg-font-regular);
+          padding: 5px 15px;
+          background-color: #8d8f91;
+          border-radius: 20px;
           display: inline-block;
           vertical-align: top;
           color: #fff;
@@ -625,25 +649,12 @@ header{
         }
       }
     }
+    #ads-place, #api-place{margin-bottom: 30px;}
   }
 }
+
 .story-photos{
-  .story-photos-inner{
-    display: inline-block;
-    vertical-align: top;
-    padding: 10px 0;
-    position: relative;
-    &:before{
-      content: '';
-      background-color: #ccc;
-      display: block;
-      height: 200px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: -1;
-    }
-  }
+  @include half-grey-bg(200px);
   h3{
     padding: 0 15px;
   }
@@ -653,21 +664,122 @@ header{
         list-style: none;
         li{
           background-color: #fff;
+          border-radius: 5px;
           box-shadow: 0 0 15px 0 #aaa;
           float: left;
           width: 260px;
           text-align: center;
           position: relative;
+          padding-bottom: 10px;
           z-index: 9;
           margin: 15px;
           .views-field-title{
             padding: 10px;
+            a{
+              color: #000;
+              display: block;
+              @include font(16px,20px,$itg-font-bold);
+            }
           }
           .views-field-field-story-extra-large-image{
-            height: 160px;
+            height: 148px;
+          }
+          .views-field-field-photo-by, .views-field-changed{
+            display: inline-block;
+            vertical-align: top;
+            @include font(12px,16px,$itg-font-regular);
+            color: #9a9a9a;
+          }
+          .views-field-changed:before{
+            content: '|';
+            display: inline-block;
+            vertical-align: top;
+            font-size: 10px;
           }
         }
       }
+    }
+  }
+}
+.popular-videos{
+  @include half-grey-bg(200px);
+  h3{
+    padding: 0 15px;
+  }
+  .view-related-photogallery{
+    .view-content{
+      ul{
+        list-style: none;
+        li{
+          background-color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 0 15px 0 #aaa;
+          float: left;
+          width: 260px;
+          text-align: center;
+          position: relative;
+          padding-bottom: 10px;
+          z-index: 9;
+          margin: 15px;
+          .views-field-title{
+            padding: 10px;
+            a{
+              color: #000;
+              display: block;
+              @include font(16px,20px,$itg-font-bold);
+            }
+          }
+          .views-field-field-story-extra-large-image{
+            height: 148px;
+          }
+          .views-field-field-photo-by, .views-field-changed{
+            display: inline-block;
+            vertical-align: top;
+            @include font(12px,16px,$itg-font-regular);
+            color: #9a9a9a;
+          }
+          .views-field-changed:before{
+            content: '|';
+            display: inline-block;
+            vertical-align: top;
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+.Sambandhit-Khabre{
+  padding: 20px 45px;
+  background-color: #f2f2f2;
+  .view-sambandhit-khabre{
+    .views-row{
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 0 10px 0 #c2c2c2;
+      margin: 20px 0;
+      padding-bottom: 10px;
+      text-align: center;
+      .views-field-label{
+        padding: 10px;
+        a{
+          color: #000;
+          display: block;
+          @include font(16px,20px,$itg-font-bold);
+        }
+      }
+      .views-field-hash, .views-field-entity-id{
+            display: inline-block;
+            vertical-align: top;
+            @include font(12px,16px,$itg-font-regular);
+            color: #9a9a9a;
+          }
+          .views-field-entity-id:before{
+            content: '|';
+            display: inline-block;
+            vertical-align: top;
+            font-size: 10px;
+          }
     }
   }
 }

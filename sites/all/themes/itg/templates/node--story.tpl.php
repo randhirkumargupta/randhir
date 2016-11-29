@@ -96,14 +96,14 @@
           </div>
           </div>
       <div class="tags">
-        <h3>Tags</h3> 
+        <h3>टैग्स</h3> 
         <ul>      
           <?php
           foreach ($node->field_story_itg_tags['und'] as $tags) {
             $term = taxonomy_term_load($tags['tid']);
             $t_name = $term->name;
             $comma_sep_tag[] = $t_name;
-            print '<li>#' . $t_name . '</li>';
+            print '<li># ' . $t_name . '</li>';
           }
           ?>
         </ul>
@@ -138,25 +138,30 @@
         </div>
                <?php } ?>
       <div class="story-photos">
-        <div class="story-photos-inner">
-        <h3>photos</h3>
+        <div class="half-grey-bg">
+        <h3>फोटोज</h3>
         <?php print views_embed_view('related_photogallery','page', $node->field_primary_category[LANGUAGE_NONE][0]['value']); ?>
         </div>
       </div>
-        <h2>popular videos</h2>
-      <div id="video-place"><?php print views_embed_view('related_photogallery','page_1', $node->field_primary_category[LANGUAGE_NONE][0]['value']); ?></div>
-            <h2>Sambandhit Khabre</h2>
-            <div id="ads-place"><?php
-                  $related_content = itg_get_related_content(arg(1));
-                  $related_content = explode(',', $related_content);
-                  foreach ($related_content as $fn_result) {
-                    $related_content = explode('_', $fn_result);
-                    $final_related [] = $related_content[1];
-                  }
-                  $final_related = implode(' OR ', $final_related);
-                  echo views_embed_view('sambandhit_khabre', 'page', $final_related);
-                  ?></div>
-
+      <div class="popular-videos">
+        <div class="half-grey-bg">
+          <h3>पॉपुलर वीडियोज़</h3>
+          <div id="video-place"><?php print views_embed_view('related_photogallery','page_1', $node->field_primary_category[LANGUAGE_NONE][0]['value']); ?></div>
+        </div>
+      </div>
+      <div class="Sambandhit-Khabre">      
+        <h2>संबंधित खबरें</h2>
+        <?php
+          $related_content = itg_get_related_content(arg(1));
+          $related_content = explode(',', $related_content);
+          foreach ($related_content as $fn_result) {
+            $related_content = explode('_', $fn_result);
+            $final_related [] = $related_content[1];
+          }
+          $final_related = implode(' OR ', $final_related);
+          echo views_embed_view('sambandhit_khabre', 'page', $final_related);
+          ?>
+      </div>
     </div>
 </div>
 <?php endif; ?>
