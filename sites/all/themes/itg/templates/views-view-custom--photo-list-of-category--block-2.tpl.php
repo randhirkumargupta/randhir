@@ -2,9 +2,8 @@
  if (isset($_GET['category'])) {
    $section_cat_id = $_GET['category'];
  }
- 
 ?>
-<h3><span>Other Gallery</span></h3>
+<h3><span><?php print t('Other Galleries'); ?></span></h3>
 <ul class="photo-list">
 <?php foreach($rows as $index => $row): ?>
     <li class="col-md-3">
