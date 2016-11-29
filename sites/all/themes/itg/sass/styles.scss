@@ -3371,6 +3371,7 @@ footer{
     }
 }
 .view-photo-list-of-category, .view-video-list-of-category{
+    @include pos(relative);
     .view-filters{
         .views-exposed-form{
             display: block;
