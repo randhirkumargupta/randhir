@@ -216,7 +216,7 @@ function itg_menu_manager_form($form, &$form_state) {
     ),
     '#default_value' => (is_integer($default_values['menu_name'])) ? $default_values['menu_name'] : NULL,
     '#upload_location' => 'public://category_icon/',
-  );  
+  );
   // Submit Button
   $form['submit'] = array(
     '#type' => 'submit',
@@ -261,10 +261,21 @@ function itg_menu_manager_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_menu_manager_form_validate($form, &$form_state) {
+  $errors = array();
   $values = $form_state['values'];
   $url_type = $values['url_type'];
+  $fid = $values['category_icon'];
   $url = $values['url'];
-  $errors = array();
+  
+  if ($fid) {
+    $file = file_load($fid);
+    $image_size = getimagesize(file_create_url($file->uri));
+    $image_width = $image_size[0];
+    $image_height = $image_size[1];
+    if($image_width > 200 || $image_height > 100) {
+      $errors[] = t("Max allowed image width*height is 200*100 in pixel.");
+    }
+  }
 
   if ($url_type == 'external' && !empty($url)) {
     if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
@@ -863,7 +874,7 @@ function itg_menu_manager_views_data() {
       'handler' => 'views_handler_argument_string',
     ),
   );
-  
+
   $data['itg_menu_manager']['menu_name'] = array(
     'title' => t('Menu name'),
     'help' => t('Here we are storing icon of menu manager'),
