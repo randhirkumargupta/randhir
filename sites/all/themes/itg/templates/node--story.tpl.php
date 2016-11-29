@@ -138,8 +138,10 @@ if (!empty($content)):
                     </div>
                     <!-- For buzzfeed section end -->
                       <?php } ?>
-                      <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
-                    <div class="stryimg imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']; ?>"><?php $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                      <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
+                          // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
+                          ?>
+                    <div class="stryimg ><?php $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     print theme('image_style', array('style_name' => 'story_image', 'path' => $story_image));
                         ?>
 
