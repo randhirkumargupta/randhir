@@ -4,7 +4,7 @@
         <ul class="slickslide">
             <?php foreach ($rows as $index => $row): ?>
                 <li >
-                    <figure class="imgtags" img-fid=" <?php print $row['fid'];?>">
+                    <figure class="" img-fid=" <?php print $row['fid'];?>">
                         <?php print $row['field_images']; ?>                    
                     </figure>
                 </li>
