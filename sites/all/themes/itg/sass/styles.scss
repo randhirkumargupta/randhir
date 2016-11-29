@@ -3206,7 +3206,8 @@ footer{
         background: -ms-linear-gradient(top, #1b1b1b, #525252);        
         background: -o-linear-gradient(top, #1b1b1b, #525252);
         border-radius: 10px 10px 16px 16px;   
-        margin: 0
+        margin: 0;
+        width: 100%;
     }
     .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
         height: 12px;
@@ -3332,8 +3333,10 @@ footer{
     }
 }
 .view-video-landing-header {
-    .view-content .photo-list li .tile a{
-        color:#b4b4b4
+    .view-content .photo-list li .tile > a{
+        color:#b4b4b4;
+        margin-top: 10px;
+        display: block;
     }
     .defalt-bar{        
         max-width: 100%;
@@ -3344,8 +3347,7 @@ footer{
         max-height: 210px;
         overflow-y: hidden;        
     }
-    .view-content .photo-list li{
-        height: 210px;
+    .view-content .photo-list li{        
         overflow: hidden;
         &:nth-child(2n+1){
                     clear: none;
@@ -3369,6 +3371,7 @@ footer{
     }
 }
 .view-photo-list-of-category, .view-video-list-of-category{
+    @include pos(relative);
     .view-filters{
         .views-exposed-form{
             display: block;
@@ -6820,7 +6823,7 @@ input[type="radio"]:checked + label:after{
                     }
                     &:nth-child(2){
                         width: 60%;
-                        padding-top: 12px;
+                        padding-top: 5px;
                     }
                     &:nth-child(3){
                         width: 15%;
@@ -6897,7 +6900,26 @@ input[type="radio"]:checked + label:after{
             width: 145px;
         }        
     }
-    .election-graph{
+    .election-graph{        
+        .col-el-1, .col-el-2, .col-el-3, .col-el-4, .col-el-5{
+            padding: 0 15px;
+            float:left;
+        }
+        .col-el-1{
+            @include calculate-width(1);
+        }
+        .col-el-2{
+            @include calculate-width(2);
+        }
+        .col-el-3{
+            @include calculate-width(3);
+        }
+        .col-el-4{
+            @include calculate-width(4);
+        }
+        .col-el-5{
+            @include calculate-width(5);
+        }
         .highcharts-credits{
             display: none;
         }
@@ -6932,20 +6954,58 @@ input[type="radio"]:checked + label:after{
             }
         }
     }
-    .graph-design{
-        @include pos(relative);
-        .divider{
-        position: absolute;
-        top: 50px;
-        left: 50%;
-        height: 120px;
-        width: 1px;
-        border-left: 1px dashed #7b7b7b;
-        }
+    .graph-design{                
         .highcharts-container{
             height: 260px !important;
         }   
-    }     
+        .highcharts-series-group{            
+            @include pos(relative);
+            &:before{
+                content: '';
+                position: absolute;
+                top: 50px;
+                left: 50%;
+                height: 50%;
+                width: 1px;
+                border-left: 1px dashed #7b7b7b;                
+            }
+        }
+        .highcharts-title{
+            color: #515151 !important;;
+            font-size: 18px;
+            fill: #515151 !important;
+            tspan{
+                &:nth-child(1){
+                    font-weight: 900;
+                   font-family: roboto;
+                   font-size: 42px;
+                   color: #515151;   
+                }                
+            }
+        }
+    }
+    .col-el-4{
+        .graph-design{
+            .highcharts-title{
+                tspan{
+                    &:nth-child(1){                   
+                        font-size: 32px;                   
+                    }                
+                }
+            }
+        }
+    }
+    .col-el-5{
+        .graph-design{
+            .highcharts-title{
+                tspan{
+                    &:nth-child(1){                   
+                        font-size: 22px;                   
+                    }                
+                }
+            }
+        }
+    }
 }
 /* CSS For Election Page End */
 

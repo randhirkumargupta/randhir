@@ -5920,6 +5920,16 @@ div.node #comments h2 {
 .itg_image_repository #preview-wrapper #file-preview {
   text-align: center;
 }
+.itg_image_repository #preview-wrapper #imgtag {
+  float: left;
+}
+.itg_image_repository #preview-wrapper #imgtag, .itg_image_repository #preview-wrapper #imgtag1 {
+  border-bottom: 2px solid #ddd;
+  padding: 10px 0;
+}
+.itg_image_repository #preview-wrapper #imgtag2 {
+  padding: 10px 0;
+}
 
 /*itg_image_repository end*/
 [id*="field-pti-print-media-values"] tbody {

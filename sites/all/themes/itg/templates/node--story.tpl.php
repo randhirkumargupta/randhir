@@ -77,7 +77,7 @@ if (!empty($content)):
                                   <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
                                   <li><?php print $read_later; ?></li>
     <?php else: ?>
-      <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE)) . '</li>'; ?>
+      <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'READ LATER'))) . '</li>'; ?>
                     <?php endif; ?>                      
                             </ul>
                         </div>
@@ -139,7 +139,7 @@ if (!empty($content)):
                     <!-- For buzzfeed section end -->
                       <?php } ?>
                       <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
-                    <div class="stryimg imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']; ?>"><?php $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                    <div class="stryimg"><?php $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     print theme('image_style', array('style_name' => 'story_image', 'path' => $story_image));
                         ?>
 

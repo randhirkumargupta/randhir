@@ -255,7 +255,18 @@
     display: none;
 }
 /*end css vertical bar */
-
+/*css start photo landing*/
+#block-views-photo-landing-slider-block .other-details-main{
+    padding-bottom: 30px;
+    height:auto !important;
+    .photo-ad{
+        margin: 30px auto 0px auto;
+    }
+}
+#block-views-photo-landing-slider-block .other-details-main .caption{
+    min-height: auto;
+}
+/*css start photo landing*/
 }   
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
@@ -294,7 +305,6 @@
     }
 }
 /* end Event page mobile nav*/
-    
 }
 
 @media only screen and (max-width:768px){
