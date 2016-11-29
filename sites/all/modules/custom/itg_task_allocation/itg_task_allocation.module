@@ -6,6 +6,29 @@
  * Provides Task Allocation functionality and customizations.
  */
 
+/**
+ * Implements hook_init().
+ */
+function itg_task_allocation_init() 
+{
+global $theme;
+if($theme == 'itgadmin')
+{
+drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js');
+}
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function itg_task_allocation_form_alter(&$form, &$form_state, $form_id){
+if($form_id == 'task_idea_allocation_tracking_node_form')
+{ 
+  drupal_add_js('jQuery(document).ready(function() {
+              jQuery(".vertical-tabs-list").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
+}
+}
 
 /**
  * Implements hook_menu().
@@ -18,9 +41,38 @@ function itg_task_allocation_menu() {
     'access callback' => TRUE,
     'file' => 'includes/itg_task_allocation.inc',
   );
- 
+ $items['notify-detail'] = array(
+    'page callback' => 'get_task_notification_of_user',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
   return $items;
 }
+/**
+ * Expire task acc to date and send mail to the author of node.   
+ */
+function itg_task_allocation_expirestatus_enddatemail() {
+  $current_time = date('Y-m-d H:i');
+  $query = db_select('node', 'n');
+  $query->leftjoin('field_data_field_task_finish_date_and_time', 'f', 'n.nid = f.entity_id');
+  $query->leftjoin('field_data_field_task_comment_change_status', 's', 'n.nid = s.entity_id');
+  $query->fields('n',array('nid'));
+  $query->condition('n.status', 1);  
+  $query->fields('f', array('field_task_finish_date_and_time_value'));
+  $query->fields('s', array('field_task_comment_change_status_value'));
+  $query->join('users', 'u', 'u.uid = n.uid');
+  $query->fields('u', array('mail'));
+  $query->condition('s.field_task_comment_change_status_value','open', '=');
+  $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
+  $result = $query->execute();
+  foreach ($result as $value) {
+  $node=node_load($value->nid);
+  $node->field_task_comment_change_status['und'][0]['value']='expired';
+  field_attach_update('node', $node);
+  expiredtask_authormail_content($value);
+    }
+}
+
 
 /**
  * Implements views header link 
@@ -73,6 +125,7 @@ function itg_task_allocation_form_comment_node_task_idea_allocation_tracking_for
   $form['#after_build'][] = 'itg_task_allocation_form_after_build';
    // Add cancel button to create/edit astro page
   $form['actions']['cancel'] = array(
+     
     '#markup' => l(t('Cancel'), 'assigned-task-list', array('attributes' => array('class' => 'button'))),
     '#weight' => 20,
   );
@@ -353,6 +406,17 @@ function itg_task_allocation_mail($key, &$message, $params) {
         $message['headers'][$key] = $value;
       }
       break;
+    case 'exp_task_rem':
+         $headers = array(
+              'MIME-Version' => '1.0',
+              'Content-Type' => 'text/html; charset=iso-8859-1;',
+              'Content-Transfer-Encoding' => '8Bit',
+              'X-Mailer' => 'Drupal'
+            );
+      
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      break;
   }
 }
 
@@ -397,7 +461,38 @@ function get_task_count_of_user() {
   
   return $result->rowCount();  
 }
+/**
+ * Get task count of user.
+ * @return task count    
+ */
 
+function get_task_notification_of_user() {
+  global $user;
+  print "<ul>";
+  $start = date('Y-m-d H:i');
+  $end = date('Y-m-d H:i', strtotime('+1 day'));
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->fields('n', array('nid'));
+  $query->join('field_data_field_task_comment_change_status', 's', 'n.nid = s.entity_id');
+  $query->join('field_data_field_task_finish_date_and_time', 'f', 'n.nid = f.entity_id');  
+  $query->join('field_data_field_task_team_member', 'tm', 'n.nid = tm.entity_id');
+  $query->fields('s', array('field_task_comment_change_status_value'));
+  $query->condition('f.field_task_finish_date_and_time_value', $start, '>');
+  $query->condition('f.field_task_finish_date_and_time_value', $end, '<=');
+  $query->condition('s.field_task_comment_change_status_value','open', '=');
+  $query->condition('tm.field_task_team_member_target_id', $user->uid, '=');
+  $query->condition('n.type', 'task_idea_allocation_tracking', '=');
+  $result = $query->execute();
+  foreach($result as $value)
+  {
+    ?>
+<li> <?php echo l("your task ".$value->title." will expire tomorrow",'node/'.$value->nid);?></li>
+ <?php
+  }
+    print "</ul>";
+ 
+}
 /**
  * Custom method for expired task.
  */
@@ -466,6 +561,41 @@ function expiredmail_mail_content($to) {
 }
 
 /**
+ * Get Mail content
+ * @param type $to
+ * @return 
+ */
+function expiredtask_authormail_content($var) {
+
+    $task_subject = 'A task has been expired that was created by you';
+    $subject = 'Task Expired';
+    $node_url = $base_url . '/node/' . $var->nid;
+    $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+              <html xmlns:v="urn:schemas-microsoft-com:vml">
+                <head><title></title></head>
+                <body style="margin:0; padding:0;">';
+    $content .= 'Dear Team,';
+    $content .= '<br /><br />' . $task_subject;
+    $content .= '<br />URL: ' . $node_url;
+    $content .= '</body>';
+    $content .= '</html>';
+    $params = array(
+      'body' => $content,
+      'subject' => $subject,
+    );
+
+    $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $var->mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    if ($mail['result']) {
+        return TRUE;
+    }
+    else {
+        $error_msg = 'Failed to send the email!';
+        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+        return FALSE;
+    }
+}
+
+/**
  * Implements hook__cronapi().
  * {@inheritdoc}
  */
@@ -474,6 +604,11 @@ function itg_task_allocation_cronapi($op, $job = NULL) {
     'description' => 'Mail shoot after task completion date.',
     'weight' => 5,
     'callback' => 'itg_task_allocation_expiredmail',
+  );
+  $items['task_ending_mail'] = array(
+    'description' => 'Mail shoot after task ending date.',
+    'weight' => 5,
+    'callback' => 'itg_task_allocation_expiredmail_enddate',
   );
   return $items;
 }
