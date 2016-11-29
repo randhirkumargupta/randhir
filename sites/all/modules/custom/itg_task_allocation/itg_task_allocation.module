@@ -9,32 +9,28 @@
 /**
  * Implements hook_init().
  */
-function itg_task_allocation_init() 
-{
-global $theme;
-if($theme == 'itgadmin')
-{
-drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js');
-}
+function itg_task_allocation_init() {
+  global $theme;
+  if ($theme == 'itgadmin') {
+    drupal_add_js(drupal_get_path('module', 'itg_task_allocation') . '/js/itg_task_allocation.js');
+  }
 }
 
 /**
  * Implements hook_form_alter().
  */
-function itg_task_allocation_form_alter(&$form, &$form_state, $form_id){
-if($form_id == 'task_idea_allocation_tracking_node_form')
-{ 
-  drupal_add_js('jQuery(document).ready(function() {
+function itg_task_allocation_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'task_idea_allocation_tracking_node_form') {
+    drupal_add_js('jQuery(document).ready(function() {
               jQuery(".vertical-tabs-list").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-}
+  }
 }
 
 /**
  * Implements hook_menu().
  */
 function itg_task_allocation_menu() {
-  
   $items['content-task-list/%/autocomplete'] = array(
     'page callback' => 'itg_task_allocation_autocomplete',
     'type' => MENU_CALLBACK,
@@ -462,8 +458,7 @@ function get_task_count_of_user() {
   return $result->rowCount();  
 }
 /**
- * Get task count of user.
- * @return task count    
+ * Display task notification of user.    
  */
 
 function get_task_notification_of_user() {
