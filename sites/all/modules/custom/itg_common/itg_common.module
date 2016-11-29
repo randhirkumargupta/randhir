@@ -24,23 +24,20 @@ function itg_common_init() {
  * @return array $data
  */
 function itg_common_dropdown_supplement($id = '') {
-
-    // Fetch query for supplements
+    // Fetch supplements for selected magazine
     $select = t('- None -');
     $data = array('_none' => $select);
-
     $query = db_select('field_data_field_supp_select_magazine', 'm');
     $query->join('node', 'n', 'm.entity_id = n.nid');
     $query->fields('m', array('entity_id'));
     $query->fields('n', array('title'));
-    $query->condition('field_supp_select_magazine_target_id', $id, '=');
-
+    $query->condition('n.status', 1, '=');
+    $query->condition('m.field_supp_select_magazine_target_id', $id, '=');
     $result = $query->execute();
 
     while ($record = $result->fetchAssoc()) {
         $data[$record['entity_id']] = $record['title'];
     }
-
     return $data;
 }
 
