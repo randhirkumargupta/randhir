@@ -6,6 +6,35 @@
     Drupal.behaviors.my_custom_behavior = {
         attach: function (context, settings) {
             // Module code start here.
+            
+            // Disable future date from date popup.
+            function itg_report_disable_future_date() {
+                $("#edit-date-filter-min-datepicker-popup-0").datepicker({
+                    maxDate: new Date(),
+                    minDate: new Date(1970, 01, 01),
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'yy-mm-dd',
+                    onSelect: function (selected) {
+                        var dt = new Date(selected);
+                        dt.setDate(dt.getDate() + 1);
+                        $("#edit-date-filter-max-datepicker-popup-0").datepicker("option", "minDate", dt);
+                    }
+                });
+                $("#edit-date-filter-max-datepicker-popup-0").datepicker({
+                    maxDate: new Date(),
+                    minDate: new Date(1970, 01, 01),
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'yy-mm-dd',
+                    onSelect: function (selected) {
+                        var dt = new Date(selected);
+                        dt.setDate(dt.getDate() - 1);
+                        $("#edit-date-filter-min-datepicker-popup-0").datepicker("option", "maxDate", dt);
+                    }
+                });
+            }
+            
             // Set moderation filter option based on yes or no.
             $('#edit-moderation').on('change', function () {
                 var moderation = $('#edit-moderation').find(":selected").text();
@@ -33,30 +62,12 @@
                 //$('#edit-state').css('display', 'none');
                 $('#edit-from-state-wrapper').css('display', 'none');
                 $("#edit-state option[value='draft']").remove();
-                $("#edit-date-filter-min-datepicker-popup-0").datepicker({
-                    maxDate: new Date(),
-                    minDate: new Date(1970, 01, 01),
-                    changeMonth: true,
-                    changeYear: true,
-                    dateFormat: 'yy-mm-dd',
-                    onSelect: function (selected) {
-                        var dt = new Date(selected);
-                        dt.setDate(dt.getDate() + 1);
-                        $("#edit-date-filter-max-datepicker-popup-0").datepicker("option", "minDate", dt);
-                    }
-                });
-                $("#edit-date-filter-max-datepicker-popup-0").datepicker({
-                    maxDate: new Date(),
-                    minDate: new Date(1970, 01, 01),
-                    changeMonth: true,
-                    changeYear: true,
-                    dateFormat: 'yy-mm-dd',
-                    onSelect: function (selected) {
-                        var dt = new Date(selected);
-                        dt.setDate(dt.getDate() - 1);
-                        $("#edit-date-filter-min-datepicker-popup-0").datepicker("option", "maxDate", dt);
-                    }
-                });
+                // Disbale future date.
+                itg_report_disable_future_date();
+            }            
+            
+            if ($('body').hasClass('page-comparative-reports')) {
+                itg_report_disable_future_date();
             }
             // Module code ends here.
         }
