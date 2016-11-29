@@ -5436,6 +5436,16 @@ div.node{
     #file-preview {
       text-align: center;
     }
+    #imgtag{
+        float: left;
+    }
+    #imgtag, #imgtag1{
+        border-bottom: 2px solid #ddd;
+        padding: 10px 0;         
+    }
+    #imgtag2{
+        padding: 10px 0;         
+    }
   }
 }
 

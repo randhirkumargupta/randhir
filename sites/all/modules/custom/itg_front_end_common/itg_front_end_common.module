@@ -194,39 +194,40 @@ function itg_get_related_content($nid) {
  * Implements Related video block content
  */
 function _related_video_block_content() {
-
-  $video_output ='<h3><span>Related content</span></h3>
+  $related_content = itg_get_related_content(arg(1));
+  if (!empty($related_content)) {
+    $video_output = '<h3><span>Related content</span></h3>
             <div id="related-video">';
-                  $related_content = itg_get_related_content(arg(1));
-                  $related_content = explode(',', $related_content);
-                  foreach ($related_content as $fn_result) {
-                    $related_content = explode('_', $fn_result);
-                    $final_related [] = $related_content[1];
-                  }
-                  $final_related = implode(' OR ', $final_related);
-                  $video_output.= views_embed_view('related_photo_video_content', 'page', $final_related);
-                  '</div>';
-                  
-   return $video_output;               
-}
+    $related_content = explode(',', $related_content);
+    foreach ($related_content as $fn_result) {
+      $related_content = explode('_', $fn_result);
+      $final_related [] = $related_content[1];
+    }
+    $final_related = implode(' OR ', $final_related);
+    $video_output.= views_embed_view('related_photo_video_content', 'page', $final_related);
+    '</div>';
 
+    return $video_output;
+  }
+}
 
 /**
  * Implements Related photo block content
  */
 function _related_photo_block_content() {
-
-  $photo_output ='<h3><span>Related content</span></h3>
+  $related_content = itg_get_related_content(arg(1));
+  if (!empty($related_content)) {
+    $photo_output = '<h3><span>Related content</span></h3>
             <div id="related-photo">';
-                  $related_content = itg_get_related_content(arg(1));
-                  $related_content = explode(',', $related_content);
-                  foreach ($related_content as $fn_result) {
-                    $related_content = explode('_', $fn_result);
-                    $final_related [] = $related_content[1];
-                  }
-                  $final_related = implode(' OR ', $final_related);
-                  $photo_output.= views_embed_view('related_photo_video_content', 'page_1', $final_related);
-                  '</div>';
-                  
-   return $photo_output;               
+    $related_content = explode(',', $related_content);
+    foreach ($related_content as $fn_result) {
+      $related_content = explode('_', $fn_result);
+      $final_related [] = $related_content[1];
+    }
+    $final_related = implode(' OR ', $final_related);
+    $photo_output.= views_embed_view('related_photo_video_content', 'page_1', $final_related);
+    '</div>';
+
+    return $photo_output;
+  }
 }

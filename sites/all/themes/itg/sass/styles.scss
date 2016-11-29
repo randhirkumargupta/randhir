@@ -3206,7 +3206,8 @@ footer{
         background: -ms-linear-gradient(top, #1b1b1b, #525252);        
         background: -o-linear-gradient(top, #1b1b1b, #525252);
         border-radius: 10px 10px 16px 16px;   
-        margin: 0
+        margin: 0;
+        width: 100%;
     }
     .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
         height: 12px;
@@ -3332,8 +3333,10 @@ footer{
     }
 }
 .view-video-landing-header {
-    .view-content .photo-list li .tile a{
-        color:#b4b4b4
+    .view-content .photo-list li .tile > a{
+        color:#b4b4b4;
+        margin-top: 10px;
+        display: block;
     }
     .defalt-bar{        
         max-width: 100%;
@@ -3344,8 +3347,7 @@ footer{
         max-height: 210px;
         overflow-y: hidden;        
     }
-    .view-content .photo-list li{
-        height: 210px;
+    .view-content .photo-list li{        
         overflow: hidden;
         &:nth-child(2n+1){
                     clear: none;
@@ -4968,6 +4970,7 @@ footer{
     }
 }
 .view-event-photo-slider{
+    max-width: 320px;
     .slick-slider {
         .slick-prev, .slick-next{
             background: #000 none repeat scroll 0 0;
@@ -6896,7 +6899,25 @@ input[type="radio"]:checked + label:after{
             width: 145px;
         }        
     }
-    .election-graph{
+    .election-graph{        
+        .col-el-1, .col-el-2, .col-el-3, .col-el-4, .col-el-5{
+            padding: 0 15px;
+        }
+        .col-el-1{
+            @include calculate-width(1);
+        }
+        .col-el-2{
+            @include calculate-width(2);
+        }
+        .col-el-3{
+            @include calculate-width(3);
+        }
+        .col-el-4{
+            @include calculate-width(4);
+        }
+        .col-el-5{
+            @include calculate-width(5);
+        }
         .highcharts-credits{
             display: none;
         }
@@ -7048,7 +7069,7 @@ input[type="radio"]:checked + label:after{
 #block-itg-menu-manager-vertical-menu{
     position: absolute;
     top: 50px;
-    left:-85px;
+    left:-54px;
     background: #f2f2f2;    
     border-radius: 3px;
     box-shadow: 2px 2px 3px #ccc;
@@ -7062,10 +7083,9 @@ input[type="radio"]:checked + label:after{
         @include pos(relative);
     }
     li{        
-        border-bottom: 1px solid #c4c4c4;
-        padding: 15px 10px;
-        display: block;  
-        height: 92px;
+        border-bottom: 1px solid #c4c4c4;       
+        display: block;      
+        min-width: 100%;
     }
     img{
         margin: 0 auto;
@@ -7075,15 +7095,36 @@ input[type="radio"]:checked + label:after{
     a{
         @include font(12px,null,600);
         font-family: $itg-roboto;
-        text-transform: uppercase;        
+        text-transform: uppercase;
+        line-height: 15px;
+        display: block;
+         padding: 10px 5px;
+         &:hover{
+             background: #fff;
+             color: #b00202;
+         }
     }
-    .vertical-menu-parent{
-         max-height : 552px;
-        overflow : hidden; 
-            max-width: 80px;
+    .vertical-menu-parent{            
+            .vertical-menu{
+                max-width: 58px;
+                span{
+                    font-family: roboto;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    padding: 5px 5px;
+                    display: block;
+                    cursor: pointer;
+                    font-size:12px;
+                    i{
+                        display: block;
+                        font-size: 20px;
+                        color: #959595;
+                    }                    
+                }
+            }
     }
     .vertical-more{
-        padding: 15px 10px;
+        padding: 10px 5px;
         display:none;
         a{
             display: block;

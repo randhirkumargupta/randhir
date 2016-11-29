@@ -9,7 +9,6 @@
             // Set moderation filter option based on yes or no.
             $('#edit-moderation').on('change', function () {
                 var moderation = $('#edit-moderation').find(":selected").text();
-
                 if (moderation === 'No') {
                     $('select[name="from_state"]').find('option[value="draft"]').attr("selected", true);
                     $("#edit-state option:selected").removeAttr("selected");
@@ -27,12 +26,37 @@
                 }
 
             });
-            
+
             // Copy Moderation dropdown under actual moderation field.
             if ($('body').hasClass('page-report-filed-content')) {
                 $("#edit-moderation").appendTo("#edit-state-wrapper .views-widget");
-                $('#edit-state').css('display', 'none');
+                //$('#edit-state').css('display', 'none');
                 $('#edit-from-state-wrapper').css('display', 'none');
+                $("#edit-state option[value='draft']").remove();
+                $("#edit-date-filter-min-datepicker-popup-0").datepicker({
+                    maxDate: new Date(),
+                    minDate: new Date(1970, 01, 01),
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'yy-mm-dd',
+                    onSelect: function (selected) {
+                        var dt = new Date(selected);
+                        dt.setDate(dt.getDate() + 1);
+                        $("#edit-date-filter-max-datepicker-popup-0").datepicker("option", "minDate", dt);
+                    }
+                });
+                $("#edit-date-filter-max-datepicker-popup-0").datepicker({
+                    maxDate: new Date(),
+                    minDate: new Date(1970, 01, 01),
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'yy-mm-dd',
+                    onSelect: function (selected) {
+                        var dt = new Date(selected);
+                        dt.setDate(dt.getDate() - 1);
+                        $("#edit-date-filter-min-datepicker-popup-0").datepicker("option", "maxDate", dt);
+                    }
+                });
             }
             // Module code ends here.
         }

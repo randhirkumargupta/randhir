@@ -246,6 +246,7 @@
                         padding: 0 12px;
                         line-height: 35px;
                         display: block;
+                        cursor: pointer;
                         &:hover{
                             background: #222222;
                         }
@@ -3964,6 +3965,26 @@ article.node-mega-review-critic{
         &.movie-reviewer-other{
           margin-top: 0;
         }
+        .other-reviews-rating{
+          float: none;
+    width: 111px;
+    height: 18px;
+    padding: 0px 0;
+    position: relative;
+    background: url(../images/rating-grey.png) 0 0px/80px no-repeat;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+      &:after{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url(../images/rating-red.png) 0 0px/80px no-repeat;
+        height: 18px;
+        width: 0;
+      }
+    }
       }
     }
   }

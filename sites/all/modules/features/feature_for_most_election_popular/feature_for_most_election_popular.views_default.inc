@@ -209,6 +209,12 @@ function feature_for_most_election_popular_views_default_views() {
   $handler->display->display_options['fields']['extra']['field'] = 'extra';
   $handler->display->display_options['fields']['extra']['label'] = '';
   $handler->display->display_options['fields']['extra']['element_label_colon'] = FALSE;
+  /* Field: Content: Party Name */
+  $handler->display->display_options['fields']['field_party_name']['id'] = 'field_party_name';
+  $handler->display->display_options['fields']['field_party_name']['table'] = 'field_data_field_party_name';
+  $handler->display->display_options['fields']['field_party_name']['field'] = 'field_party_name';
+  $handler->display->display_options['fields']['field_party_name']['label'] = '';
+  $handler->display->display_options['fields']['field_party_name']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
