@@ -569,6 +569,13 @@ header .header-right-menu ul li.live-tv a {
 }
 
 @media all and (min-width: 767px) {
+  .node-type-story .header {
+    background-color: #5d26a0;
+  }
+  .node-type-story .header .region-header {
+    background-color: transparent;
+  }
+
   .story-section h1 {
     margin-bottom: 30px;
   }
@@ -784,13 +791,13 @@ header .header-right-menu ul li.live-tv a {
     margin-bottom: 30px;
   }
 }
-.story-photos {
+.story-photos .half-grey-bg {
   display: inline-block;
   vertical-align: top;
   padding: 10px 0;
   position: relative;
 }
-.story-photos:before {
+.story-photos .half-grey-bg:before {
   content: '';
   background-color: #ccc;
   width: 100%;
@@ -802,6 +809,7 @@ header .header-right-menu ul li.live-tv a {
 }
 .story-photos h3 {
   padding: 0 15px;
+  margin-bottom: 20px;
 }
 .story-photos .view-related-photogallery .view-content ul {
   list-style: none;
@@ -848,17 +856,17 @@ header .header-right-menu ul li.live-tv a {
   font-size: 10px;
 }
 
-.popular-videos {
+.popular-videos .half-grey-bg {
   display: inline-block;
   vertical-align: top;
   padding: 10px 0;
   position: relative;
 }
-.popular-videos:before {
+.popular-videos .half-grey-bg:before {
   content: '';
   background-color: #ccc;
   width: 100%;
-  height: 200px;
+  height: 285px;
   position: absolute;
   left: 0;
   top: 0;
@@ -866,6 +874,7 @@ header .header-right-menu ul li.live-tv a {
 }
 .popular-videos h3 {
   padding: 0 15px;
+  margin-bottom: 20px;
 }
 .popular-videos .view-related-photogallery .view-content ul {
   list-style: none;
@@ -876,13 +885,26 @@ header .header-right-menu ul li.live-tv a {
   box-shadow: 0 0 15px 0 #aaa;
   float: left;
   width: 260px;
+  height: 310px;
   text-align: center;
   position: relative;
   padding-bottom: 10px;
   z-index: 9;
   margin: 15px;
 }
+.popular-videos .view-related-photogallery .view-content ul li.views-row-odd .views-field-field-primary-category {
+  background-color: #dc4750;
+  border-radius: 4px 4px 0 0;
+  color: #fff;
+}
+.popular-videos .view-related-photogallery .view-content ul li.views-row-even .views-field-field-primary-category {
+  background-color: #52bf40;
+  border-radius: 4px 4px 0 0;
+  color: #fff;
+}
 .popular-videos .view-related-photogallery .view-content ul li .views-field-title {
+  height: 60px;
+  overflow: hidden;
   padding: 10px;
 }
 .popular-videos .view-related-photogallery .view-content ul li .views-field-title a {
@@ -894,7 +916,7 @@ header .header-right-menu ul li.live-tv a {
   line-height: 20px;
 }
 .popular-videos .view-related-photogallery .view-content ul li .views-field-field-story-extra-large-image {
-  height: 148px;
+  height: 196px;
 }
 .popular-videos .view-related-photogallery .view-content ul li .views-field-field-photo-by, .popular-videos .view-related-photogallery .view-content ul li .views-field-changed {
   display: inline-block;
@@ -910,6 +932,26 @@ header .header-right-menu ul li.live-tv a {
   display: inline-block;
   vertical-align: top;
   font-size: 10px;
+}
+.popular-videos .view-related-photogallery .view-content ul li .hide_sh {
+  border: none;
+  border-radius: 50%;
+  bottom: -18px;
+  height: 35px;
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  width: 35px;
+  background-color: #dc4750;
+}
+.popular-videos .view-related-photogallery .view-content ul li .nxt {
+  display: none;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .Sambandhit-Khabre {
