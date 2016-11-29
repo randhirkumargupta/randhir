@@ -130,6 +130,7 @@
           </div>
         <?php endforeach; ?>  
         <?php $average_rating = (float) $average_ratings / $num_of_ratings ?>  
+        <?php $average_rating = round($average_rating, 0, PHP_ROUND_HALF_UP); ?>
         <div id="average-ratings" style="display:none;"><?php print $average_rating * 20; ?>%</div> 
     </div>
     <div class="photos-videos-wrapper">

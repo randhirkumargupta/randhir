@@ -29,8 +29,8 @@ function mega_review_critic_features_field_group_info() {
       3 => 'field_mega_review_youtube_url',
       4 => 'field_mega_review_type',
       5 => 'field_mega_review_cast',
-      6 => 'field_story_associate_video',
-      7 => 'field_associate_photo_gallery',
+      6 => 'field_associate_photo_gallery',
+      7 => 'field_story_associate_video',
       8 => 'field_story_movie_description',
       9 => 'title',
     ),
@@ -50,7 +50,7 @@ function mega_review_critic_features_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_review_basic_settings|node|mega_review_critic|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -87,7 +87,7 @@ function mega_review_critic_features_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_review_browse_media|node|mega_review_critic|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -120,7 +120,7 @@ function mega_review_critic_features_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $field_groups['group_review_movie_review|node|mega_review_critic|form'] = $field_group;
+  $field_groups[''] = $field_group;
 
   // Translatables
   // Included for use with string extractors like potx.
