@@ -74,6 +74,7 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
       $form['node_status']['#options'][1] = t('Published');
       $form['node_status']['#options'][0] = t('Not published');
       $form['moderation'] = array(
+        '#title' => t('Moderation'),
         '#type' => 'select',
         '#options' => array('all' => 'Any', 'yes' => 'Yes', 'no' => 'No'),
         '#default_value' => 'all',

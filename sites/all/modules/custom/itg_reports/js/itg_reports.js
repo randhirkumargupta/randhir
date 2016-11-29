@@ -48,7 +48,8 @@
                     var values = "needs_review,rejected";
                     $.each(values.split(","), function (i, e) {
                         $("#edit-state option[value='" + e + "']").prop("selected", true);
-                    });
+                    });                   
+                    $('#edit-state-wrapper').hide();
                 } else {
                     $('select[name="from_state"]').find('option[value="All"]').attr("selected", true);
                     $("#edit-state option:selected").removeAttr("selected");
@@ -58,7 +59,7 @@
 
             // Copy Moderation dropdown under actual moderation field.
             if ($('body').hasClass('page-report-filed-content')) {
-                $("#edit-moderation").appendTo("#edit-state-wrapper .views-widget");
+                $(".form-item-moderation").appendTo("#edit-state-wrapper .views-widget");
                 //$('#edit-state').css('display', 'none');
                 $('#edit-from-state-wrapper').css('display', 'none');
                 $("#edit-state option[value='draft']").remove();
