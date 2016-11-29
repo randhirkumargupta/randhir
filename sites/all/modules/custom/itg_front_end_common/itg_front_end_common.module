@@ -287,5 +287,6 @@ function itg_related_hide_show_details() {
                   }
                   $final_related = implode(' OR ', $final_related);
   echo views_embed_view('sambandhit_khabre', 'page', $final_related);
+  echo '<span class="hide-rc"></span>';
   exit;
 }
