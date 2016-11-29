@@ -17500,7 +17500,9 @@ movie
 redeem-points
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17528,7 +17530,9 @@ redeem-points
 cart
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17553,7 +17557,9 @@ movie
 redeem-points
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17581,7 +17587,9 @@ redeem-points
 cart
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17606,7 +17614,9 @@ movie
 redeem-points
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17634,7 +17644,9 @@ redeem-points
 cart
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17659,7 +17671,9 @@ movie
 redeem-points
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17687,7 +17701,9 @@ redeem-points
 cart
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17712,7 +17728,9 @@ movie
 redeem-points
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17740,7 +17758,9 @@ redeem-points
 cart
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17765,7 +17785,9 @@ movie
 redeem-points
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17793,7 +17815,9 @@ redeem-points
 cart
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17818,7 +17842,9 @@ movie
 redeem-points
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -17846,7 +17872,9 @@ redeem-points
 cart
 product
 product/*
-order-summary',
+order-summary
+snappost
+snappost/*',
   'title' => '',
   'cache' => 8,
 );
@@ -30415,7 +30443,7 @@ draft-recipe-management',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30429,7 +30457,7 @@ draft-recipe-management',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30513,7 +30541,7 @@ draft-recipe-management',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30527,7 +30555,7 @@ draft-recipe-management',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30611,7 +30639,7 @@ draft-recipe-management',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30625,7 +30653,7 @@ draft-recipe-management',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30709,7 +30737,7 @@ draft-recipe-management',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30723,7 +30751,7 @@ draft-recipe-management',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30807,7 +30835,7 @@ draft-recipe-management',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30821,7 +30849,7 @@ draft-recipe-management',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30905,7 +30933,7 @@ draft-recipe-management',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30919,7 +30947,7 @@ draft-recipe-management',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => '',
@@ -30972,6 +31000,104 @@ draft-recipe-management',
   'bid' => 2164,
   'module' => 'views',
   'delta' => 'event_subsite_speaker-block_1',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2165,
+  'module' => 'views',
+  'delta' => 'story_factoids-block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2166,
+  'module' => 'views',
+  'delta' => 'story_factoids-block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2167,
+  'module' => 'views',
+  'delta' => 'story_factoids-block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2168,
+  'module' => 'views',
+  'delta' => 'story_factoids-block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2169,
+  'module' => 'views',
+  'delta' => 'story_factoids-block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2170,
+  'module' => 'views',
+  'delta' => 'story_factoids-block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2171,
+  'module' => 'views',
+  'delta' => 'story_factoids-block',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,

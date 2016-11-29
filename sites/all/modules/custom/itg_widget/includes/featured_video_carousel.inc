@@ -48,6 +48,7 @@ function itg_widget_featured_video_carousel_data_fetch($result, $slider_type) {
   $sid = '';
   if(arg(0) == 'taxonomy' && arg(1) == 'term' && is_numeric(arg(2))){
     $sid = arg(2);
+    $section_cat_id = get_first_category_of_media_widget(arg(2), 'page--section_video', 'video_list_of_category');
   }
   foreach ($result as $key => $data) {
     $node = node_load($data['entity_id']);
@@ -59,6 +60,7 @@ function itg_widget_featured_video_carousel_data_fetch($result, $slider_type) {
     $data_render[$data['entity_id']]['nid'] = $node->nid;
     $data_render[$data['entity_id']]['primary_category'] = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
     $data_render[$data['entity_id']]['sid'] = $sid;
+    $data_render[$data['entity_id']]['cat'] = $section_cat_id;
   }
   return $data_render;
 }

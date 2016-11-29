@@ -726,10 +726,10 @@ function itg_widget_block_view($delta = '') {
                     plotShadow: false
                 },
                 title: {
-                    text: aName + " (" + aSeatOthers + "/" + aSeats + ")",
+                    text: aSeatOthers +"/"+ aSeats + "<br>" + aName,
                     align: "center",
                     verticalAlign: "middle",
-                    y: 37
+                    y: 12
                 },
                 tooltip: {
                     enabled: showtooltip,

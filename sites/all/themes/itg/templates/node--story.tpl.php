@@ -77,7 +77,7 @@ if (!empty($content)):
                                   <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
                                   <li><?php print $read_later; ?></li>
     <?php else: ?>
-      <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE)) . '</li>'; ?>
+      <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'READ LATER'))) . '</li>'; ?>
                     <?php endif; ?>                      
                             </ul>
                         </div>
