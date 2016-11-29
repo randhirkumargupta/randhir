@@ -76,7 +76,7 @@ h4.heading a {
   color: #09619f;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block ul, #block-itg-front-end-common-related-video-block ul {
   list-style-type: none;
 }
 
@@ -4252,6 +4252,7 @@ footer .footer-copyright {
   width: 100%;
   position: relative;
   border-bottom: 1px solid #d9d9d9;
+  overflow: auto;
 }
 #block-itg-videogallery-videogallery-menu-video-block ul li, #block-itg-photogallery-photo-menu-landing-block ul li {
   display: inline-block;
@@ -6416,6 +6417,9 @@ footer .footer-copyright {
   width: 100%;
 }
 
+.view-event-photo-slider {
+  max-width: 320px;
+}
 .view-event-photo-slider .slick-slider .slick-prev, .view-event-photo-slider .slick-slider .slick-next {
   background: #000 none repeat scroll 0 0;
   color: #fff;
@@ -6586,7 +6590,7 @@ footer .footer-copyright {
   color: #fff;
 }
 
-#block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2, .sponsor-detail-container h2, #block-views-event-subsite-speaker-block-2 h2 {
+#block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2, .sponsor-detail-container h2, #block-views-event-subsite-speaker-block-2 h2, #block-views-event-subsite-speaker-block-3 h2, #block-views-event-subsite-speaker-block-3 h2 {
   font-size: 20px;
   border-bottom: 1px solid #dddddd;
   text-transform: uppercase;
@@ -6751,6 +6755,7 @@ footer .footer-copyright {
 }
 #block-menu-menu-event-menu ul li {
   float: left;
+  position: relative;
 }
 #block-menu-menu-event-menu ul li a {
   color: #f7ee23;
@@ -6762,6 +6767,27 @@ footer .footer-copyright {
 }
 #block-menu-menu-event-menu ul li a:hover, #block-menu-menu-event-menu ul li a.active {
   color: #fff;
+}
+#block-menu-menu-event-menu ul li ul {
+  position: absolute;
+  background-color: #000;
+  z-index: 1;
+  left: 0;
+  top: 50px;
+  width: 150px;
+  display: none;
+}
+#block-menu-menu-event-menu ul li ul li {
+  float: none;
+}
+#block-menu-menu-event-menu ul li ul li a {
+  line-height: 22px;
+  display: block;
+  height: auto;
+  padding: 5px 10px;
+}
+#block-menu-menu-event-menu ul li:hover ul {
+  display: block;
 }
 #block-menu-menu-event-menu .event-detail {
   background: #ef3c24;
@@ -6918,6 +6944,7 @@ footer .footer-copyright {
   width: 100%;
   float: none;
   text-align: center;
+  margin-bottom: 30px;
 }
 #block-views-event-subsite-speaker-block .views-row .view-content .views-row img {
   border-radius: 100%;
@@ -6934,6 +6961,139 @@ footer .footer-copyright {
 #block-views-event-subsite-speaker-block .views-row .view-content .views-row .views-field-field-story-new-title {
   color: #ef2a24;
   margin-top: 0;
+}
+
+#block-itg-event-backend-post-event-block .top-tab {
+  background-color: #f4f4f4;
+  padding: 10px;
+  padding-bottom: 0;
+  border: none;
+}
+#block-itg-event-backend-post-event-block .top-tab ul li {
+  border-radius: 0;
+  color: #000;
+  font-family: roboto;
+  font-weight: normal;
+  padding: 15px 10px;
+}
+#block-itg-event-backend-post-event-block .top-tab ul li span {
+  background-color: #8d8d8d;
+  padding: 5px 10px;
+  color: #fff;
+  font-weight: 900;
+  font-size: 16px;
+  border-radius: 3px;
+}
+#block-itg-event-backend-post-event-block .top-tab ul li.active {
+  background: #fff !important;
+  color: #000;
+  box-shadow: 1px -1px 1px #ccc;
+}
+#block-itg-event-backend-post-event-block .top-tab ul li.active span {
+  background-color: #ef3c24 !important;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail {
+  zoom: 1;
+  padding: 8px;
+  box-shadow: 0px 0px 5px #ccc;
+  margin-bottom: 50px;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail:before, #block-itg-event-backend-post-event-block .event-listing .content-detail:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail:after {
+  clear: both;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail .side-left, #block-itg-event-backend-post-event-block .event-listing .content-detail .side-right {
+  width: 50%;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail .side-left {
+  padding-top: 0;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail .side-right .section-part {
+  width: 100%;
+  float: none;
+  padding-right: 0;
+  font-family: "Roboto Slab", sans-serif;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail .side-right .section-part .bottom-links {
+  margin-top: 10px;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail .side-right .section-part .bottom-links a {
+  width: auto;
+  margin-right: 10px;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail .side-right .title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  padding: 0;
+  background-color: transparent;
+}
+#block-itg-event-backend-post-event-block .event-listing .content-detail .side-right .small-title {
+  color: #ef3c24;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-size: 0.8125rem;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.speaker-detail-page .col-md-3, #block-views-event-subsite-speaker-block-3 .col-md-3 {
+  text-align: center;
+}
+.speaker-detail-page .col-md-3 h4, #block-views-event-subsite-speaker-block-3 .col-md-3 h4 {
+  font-size: 15px;
+  margin: 10px 0 0 0;
+  color: #000000;
+  text-transform: uppercase;
+}
+.speaker-detail-page .col-md-3 p, #block-views-event-subsite-speaker-block-3 .col-md-3 p {
+  text-transform: uppercase;
+  color: #ef2a24;
+  font-size: 12px;
+}
+.speaker-detail-page .col-md-3 img, #block-views-event-subsite-speaker-block-3 .col-md-3 img {
+  border-radius: 100%;
+  border: 1px solid #ddd;
+}
+.speaker-detail-page h3, #block-views-event-subsite-speaker-block-3 h3 {
+  font-family: roboto-slab;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.speaker-detail-page .body-content, #block-views-event-subsite-speaker-block-3 .body-content {
+  color: #888888;
+}
+
+#block-views-event-subsite-speaker-block-3 .image-wrap {
+  border: 1px solid #dddddd;
+  height: 100px;
+  float: left;
+  width: 25%;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+#block-views-event-subsite-speaker-block-3 .image-wrap img {
+  border: none;
+  border-radius: inherit;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+#block-views-event-subsite-speaker-block-3 h3 {
+  font-weight: 700;
 }
 
 /*CSS end for event page index*/
@@ -8360,7 +8520,7 @@ footer .footer-copyright {
 #block-itg-menu-manager-vertical-menu {
   position: absolute;
   top: 50px;
-  left: -85px;
+  left: -54px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 2px 2px 3px #ccc;
@@ -8376,9 +8536,8 @@ footer .footer-copyright {
 }
 #block-itg-menu-manager-vertical-menu li {
   border-bottom: 1px solid #c4c4c4;
-  padding: 15px 10px;
   display: block;
-  height: 92px;
+  min-width: 100%;
 }
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
@@ -8391,14 +8550,33 @@ footer .footer-copyright {
   font-weight: 600;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
+  line-height: 15px;
+  display: block;
+  padding: 10px 5px;
 }
-#block-itg-menu-manager-vertical-menu .vertical-menu-parent {
-  max-height: 552px;
-  overflow: hidden;
-  max-width: 80px;
+#block-itg-menu-manager-vertical-menu a:hover {
+  background: #fff;
+  color: #b00202;
+}
+#block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu {
+  max-width: 58px;
+}
+#block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu span {
+  font-family: roboto;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 5px 5px;
+  display: block;
+  cursor: pointer;
+  font-size: 12px;
+}
+#block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu span i {
+  display: block;
+  font-size: 20px;
+  color: #959595;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more {
-  padding: 15px 10px;
+  padding: 10px 5px;
   display: none;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a {
@@ -8896,14 +9074,14 @@ footer .footer-copyright {
 
 /*CSS End ask an expert detail*/
 /*css start related content*/
-#block-itg-front-end-common-related-photo-block h3 {
+#block-itg-front-end-common-related-photo-block h3, #block-itg-front-end-common-related-video-block h3 {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
   display: none;
   position: relative;
 }
-#block-itg-front-end-common-related-photo-block h3 span {
+#block-itg-front-end-common-related-photo-block h3 span, #block-itg-front-end-common-related-video-block h3 span {
   background: #fff;
   z-index: 1;
   position: relative;
@@ -8911,7 +9089,7 @@ footer .footer-copyright {
   padding: 45px 20px 10px 10px;
   display: inline-block;
 }
-#block-itg-front-end-common-related-photo-block h3:before {
+#block-itg-front-end-common-related-photo-block h3:before, #block-itg-front-end-common-related-video-block h3:before {
   content: '';
   position: absolute;
   left: 0;
@@ -8921,12 +9099,15 @@ footer .footer-copyright {
   margin-top: -2px;
   background: #ddd;
 }
-#block-itg-front-end-common-related-photo-block h3 {
+#block-itg-front-end-common-related-photo-block h3, #block-itg-front-end-common-related-video-block h3 {
   display: block;
   padding-left: 0;
   margin-bottom: 20px;
 }
-#block-itg-front-end-common-related-photo-block .views-field-ds-changed {
+#block-itg-front-end-common-related-photo-block h3 span, #block-itg-front-end-common-related-video-block h3 span {
+  padding-left: 0;
+}
+#block-itg-front-end-common-related-photo-block .views-field-ds-changed, #block-itg-front-end-common-related-video-block .views-field-ds-changed {
   display: block;
   font-size: 12px;
   color: #b1b1b1;

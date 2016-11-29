@@ -57,7 +57,7 @@
                         fjs.parentNode.insertBefore(js, fjs);
                       }(document, 'script', 'facebook-jssdk'));
 
-function gogogo(linkurl, title, desc, image) {
+function fbpop(linkurl, title, desc, image) {
   FB.ui({
     method: 'feed',
     link: linkurl,

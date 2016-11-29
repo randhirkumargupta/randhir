@@ -21,7 +21,7 @@ function feature_category_management_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Basic Detail',
-    'weight' => '-1',
+    'weight' => '0',
     'children' => array(
       0 => 'field_cm_display_title',
       1 => 'field_cm_redirection_url',
@@ -59,14 +59,12 @@ function feature_category_management_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Selection Details',
-    'weight' => '23',
+    'weight' => '7',
     'children' => array(
       0 => 'field_cm_select_type',
       1 => 'field_cm_select_template',
       2 => 'field_cm_select_template_type',
       3 => 'field_set_as_featured_cate',
-      4 => 'field_cm_category_color',
-      5 => 'field_cm_category_banner',
     ),
     'format_type' => 'div',
     'format_settings' => array(

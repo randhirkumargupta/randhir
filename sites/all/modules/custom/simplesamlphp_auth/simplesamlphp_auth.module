@@ -305,7 +305,7 @@ function simplesamlphp_auth_init() {
                   )
                 )
               ));
-              $userinfo = array('roles' => $roles);
+              //$userinfo = array('roles' => $roles);
               $user = user_save($user, $userinfo); // @todo - Fjernet rolle-delen her da den gav en bra feilmelding når roller ikke finnes ;)
             }
 
@@ -937,15 +937,14 @@ function _simplesamlphp_auth_get_mobile() {
   
    $seg = $_simplesamlphp_auth_saml_attributes['mn'];
   
-
-  
   // Check if valid local session exists..
   if ($_simplesamlphp_auth_as->isAuthenticated()) {
     if (isset($seg)) {
       $mobile = $seg[0];
     }
     else {
-      throw new Exception(t('Error in simplesamlphp_auth.module: No valid mobile attribute set.'));
+      //throw new Exception(t('Error in simplesamlphp_auth.module: No valid mobile attribute set.'));
+      $mobile = '';
     }
   }
 
@@ -966,15 +965,14 @@ function _simplesamlphp_auth_get_fname() {
   
    $seg = $_simplesamlphp_auth_saml_attributes['givenName'];
   
-
-  
   // Check if valid local session exists..
   if ($_simplesamlphp_auth_as->isAuthenticated()) {
     if (isset($seg)) {
       $fname = $seg[0];
     }
     else {
-      throw new Exception(t('Error in simplesamlphp_auth.module: No valid First Name attribute set.'));
+     // throw new Exception(t('Error in simplesamlphp_auth.module: No valid First Name attribute set.'));
+      $fname = '';
     }
   }
 
@@ -996,21 +994,19 @@ function _simplesamlphp_auth_get_lname() {
   
    $seg = $_simplesamlphp_auth_saml_attributes['sn'];
   
-
-  
   // Check if valid local session exists..
   if ($_simplesamlphp_auth_as->isAuthenticated()) {
     if (isset($seg)) {
       $lname = $seg[0];
     }
     else {
-      throw new Exception(t('Error in simplesamlphp_auth.module: No valid Last name attribute set.'));
+      //throw new Exception(t('Error in simplesamlphp_auth.module: No valid Last name attribute set.'));
+      $lname = '';
     }
   }
 
   return $lname;
 }
-
 /**
  * Forces HTTPS connections.
  */

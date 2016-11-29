@@ -89,3 +89,8 @@ function itg_story_get_content_nid($nid) {
     drupal_json_output($options);
   }
 }
+
+function associate_photo_video_content() {
+   $nid = arg(1);
+   return views_embed_view('photo_landing_slider','block_1', $nid);   
+}

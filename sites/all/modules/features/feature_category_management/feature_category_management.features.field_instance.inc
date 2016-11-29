@@ -77,7 +77,7 @@ function feature_category_management_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 23,
+      'weight' => 6,
     ),
   );
 
@@ -110,8 +110,8 @@ function feature_category_management_field_default_field_instances() {
       'active' => 0,
       'module' => 'color_field',
       'settings' => array(),
-      'type' => 'color_field_plain_text',
-      'weight' => 22,
+      'type' => 'color_field_spectrum_widget',
+      'weight' => 5,
     ),
   );
 
@@ -182,7 +182,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -216,7 +216,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -250,7 +250,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -424,7 +424,7 @@ function feature_category_management_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 

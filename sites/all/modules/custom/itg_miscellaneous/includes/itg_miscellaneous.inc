@@ -84,8 +84,8 @@ function itg_layout_list_delete() {
  */
 function itg_layout_delete() {
   //SELECT * FROM `itg_layout_manager` WHERE widget_name = '';
-  db_delete('itg_layout_manager')->condition('widget_name', '')->execute();
-  exit;
+  //db_delete('itg_layout_manager')->condition('widget_name', '')->execute();
+  //exit;
   /*db_delete('itg_layout_manager')->condition('layout_id', arg(1))->execute();
   db_delete('itg_layout_tpl')->condition('id', arg(1))->execute();
   drupal_goto('itg-admin-layout-list');*/
