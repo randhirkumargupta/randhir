@@ -87,6 +87,7 @@ function itg_menu_manager_form($form, &$form_state) {
   $default_values = array();
   $edit_id = isset($_GET['edit_id']) ? intval(trim($_GET['edit_id'])) : FALSE;
   $term_id = isset($_GET['term_id']) ? intval(trim($_GET['term_id'])) : FALSE;
+  $doc_id = variable_get('document_variable_name');
   // condition to check operation
   if ($edit_id && $term_id) {
     $query = db_select('itg_menu_manager', 'imm')
@@ -205,6 +206,17 @@ function itg_menu_manager_form($form, &$form_state) {
     '#options' => array('Yes' => t('Yes')),
   );
 
+  $form['category_icon'] = array(
+    '#title' => t('Upload the icon'),
+    '#type' => 'managed_file',
+    '#name' => 'category_icon',
+    '#title' => t('Upload category icon'),
+    '#file_validate_extensions' => array(
+      'png gif jpg jpeg'
+    ),
+    '#default_value' => (is_integer($default_values['menu_name'])) ? $default_values['menu_name'] : NULL,
+    '#upload_location' => 'public://category_icon/',
+  );  
   // Submit Button
   $form['submit'] = array(
     '#type' => 'submit',
@@ -241,6 +253,7 @@ function itg_menu_manager_form($form, &$form_state) {
   if ($default_values['menu_level'] == 'second') {
     unset($form['title']['#autocomplete_path']);
   }
+
   return $form;
 }
 
@@ -466,6 +479,7 @@ function add_or_remove_autocomplete($form, $form_state) {
  * {@inheritdoc}
  */
 function itg_menu_manager_form_submit($form, &$form_state) {
+  $edit_id = (null !== filter_input(INPUT_GET, 'edit_id')) ? filter_input(INPUT_GET, 'edit_id') : 0;
   $values = $form_state['values'];
   $url_type = filter_xss($values['url_type']);
   $menu_level = filter_xss($values['menu_level']);
@@ -473,10 +487,21 @@ function itg_menu_manager_form_submit($form, &$form_state) {
   $title = filter_xss($values['title']);
   $url = filter_xss($values['url']);
   $target = filter_xss($values['url_window']);
+  $category_icon = $values['category_icon'];
   $sponsored_category = $values['sponsored_category']['Yes'];
   $is_sponsored = ($sponsored_category) ? $sponsored_category : "No";
-  $edit_id = isset($_GET['edit_id']) ? intval(trim($_GET['edit_id'])) : FALSE;
+  $file_id = 'notFound';
+  if ($category_icon != 0) {
+    // Upload and save file.
+    $file = file_load($category_icon);
 
+    $file->status = FILE_STATUS_PERMANENT;
+    $file_saved = file_save($file);
+    // Record that the module is using the file. 
+    // If we dont do , then file will remove if a cron run.
+    file_usage_add($file_saved, 'itg_menu_manager', 'category_icon_image', $file_saved->fid);
+    $file_id = $file_saved->fid;
+  }
   if ($edit_id) {
     // Handle update
     try {
@@ -493,11 +518,11 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'target' => $target,
             'menu_level' => $menu_level,
             'url_type' => $url_type,
-            'menu_name' => "blank",
             'section_id' => $sections,
             'tid' => $term_id,
             'created' => time(),
             'extra' => $is_sponsored,
+            'menu_name' => $file_id,
               )
           )->condition('id', $edit_id, "=")->execute();
 
@@ -543,11 +568,11 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'menu_level' => $menu_level,
             'weight' => $order,
             'url_type' => $url_type,
-            'menu_name' => "blank",
             'section_id' => $sections,
             'tid' => trim($term_id),
             'created' => time(),
             'extra' => $is_sponsored,
+            'menu_name' => $file_id,
           ))
           ->execute();
       if ($menu_level == 'second') {
@@ -824,6 +849,24 @@ function itg_menu_manager_views_data() {
   $data['itg_menu_manager']['url_type'] = array(
     'title' => t('Url Type'),
     'help' => t('Its stores url type value internal or external'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
+  );
+  
+  $data['itg_menu_manager']['menu_name'] = array(
+    'title' => t('Menu name'),
+    'help' => t('Here we are storing icon of menu manager'),
     'field' => array(
       'handler' => 'views_handler_field',
       'click sortable' => TRUE,
