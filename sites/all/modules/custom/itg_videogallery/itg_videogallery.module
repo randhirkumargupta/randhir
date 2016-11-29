@@ -1098,6 +1098,7 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
     if(numLatestVideo > 4){    
         jQuery("#block-views-video-landing-header-block-1 ul.photo-list").slick({
                         vertical: true,
+                        infinite:false,
                         slidesToShow: 4,
                         dots: false,
                         nextArrow:"' . $classnext . '",

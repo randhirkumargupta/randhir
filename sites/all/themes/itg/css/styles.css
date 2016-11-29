@@ -4385,8 +4385,10 @@ footer .footer-copyright {
   clear: left;
 }
 
-.view-video-landing-header .view-content .photo-list li .tile a {
+.view-video-landing-header .view-content .photo-list li .tile > a {
   color: #b4b4b4;
+  margin-top: 10px;
+  display: block;
 }
 .view-video-landing-header .defalt-bar {
   max-width: 100%;
@@ -4398,7 +4400,6 @@ footer .footer-copyright {
   overflow-y: hidden;
 }
 .view-video-landing-header .view-content .photo-list li {
-  height: 210px;
   overflow: hidden;
 }
 .view-video-landing-header .view-content .photo-list li:nth-child(2n+1) {
@@ -8343,6 +8344,24 @@ footer .footer-copyright {
   line-height: 20px;
   padding: 0;
   width: 145px;
+}
+.election-page .election-graph .col-el-1, .election-page .election-graph .col-el-2, .election-page .election-graph .col-el-3, .election-page .election-graph .col-el-4, .election-page .election-graph .col-el-5 {
+  padding: 0 15px;
+}
+.election-page .election-graph .col-el-1 {
+  width: 100%;
+}
+.election-page .election-graph .col-el-2 {
+  width: 50%;
+}
+.election-page .election-graph .col-el-3 {
+  width: 33.33333%;
+}
+.election-page .election-graph .col-el-4 {
+  width: 25%;
+}
+.election-page .election-graph .col-el-5 {
+  width: 20%;
 }
 .election-page .election-graph .highcharts-credits {
   display: none;
