@@ -197,6 +197,16 @@
   padding: 0 5px;
   cursor: pointer;
 }
+#block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li:focus {
+  outline: none;
+  border: none;
+}
+#block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li img {
+  border: 1px solid transparent;
+}
+#block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li.slick-current img {
+  border: 1px solid #fff;
+}
 #block-views-photo-landing-slider-block .other-details-main {
   height: auto;
   background: transparent;
