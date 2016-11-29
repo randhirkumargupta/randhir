@@ -16,14 +16,20 @@
       </div>
       
       <!--<div class="image-alt"><?php //if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; } ?></div>-->
-  
+      <?php
+      // get byline detail
+        $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+        $reporter_node = node_load($byline_id);
+      
+      ?>
       <div class="byline">
-        <div class="byline-pic"></div>
+          <?php if (!empty($reporter_node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
+        <div class="byline-pic"><?php $byline_image = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                      print theme('image_style', array('style_name' => '50x50', 'path' => $byline_image)); ?></div>
+          <?php } ?>
         <div class="byline-detail">
             <ul>
               <li class="title"><?php
-                $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-                $reporter_node = node_load($byline_id);
                 print $reporter_node->title;
                 ?></li>
               <?php
@@ -69,7 +75,7 @@
               $pre_image = $previous->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
 
               if (!empty($pre_image)) {
-                print theme('image_style', array('style_name' => 'magazine_rhs_100x140', 'path' => $pre_image));
+                print theme('image_style', array('style_name' => '98x55', 'path' => $pre_image));
               }
               ?>
             </div>
@@ -89,7 +95,7 @@
               <?php
               $nxt_image = $next->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
               if (!empty($nxt_image)) {
-                print theme('image_style', array('style_name' => 'magazine_rhs_100x140', 'path' => $nxt_image));
+                print theme('image_style', array('style_name' => '98x55', 'path' => $nxt_image));
               }
               ?>
             </div>
@@ -149,19 +155,6 @@
           <div id="video-place"><?php print views_embed_view('related_photogallery','page_1', $node->field_primary_category[LANGUAGE_NONE][0]['value']); ?></div>
         </div>
       </div>
-      <div class="Sambandhit-Khabre">      
-        <h2>संबंधित खबरें</h2>
-        <?php
-          $related_content = itg_get_related_content(arg(1));
-          $related_content = explode(',', $related_content);
-          foreach ($related_content as $fn_result) {
-            $related_content = explode('_', $fn_result);
-            $final_related [] = $related_content[1];
-          }
-          $final_related = implode(' OR ', $final_related);
-          echo views_embed_view('sambandhit_khabre', 'page', $final_related);
-          ?>
-      </div>
-    </div>
+     </div>
 </div>
 <?php endif; ?>
