@@ -32,6 +32,11 @@ function itg_image_croping_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
+    $items['saveimageinfo'] = array(
+        'page callback' => 'itg_image_saveimage_info', // save croped image by form the image dataurl (base64).
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
     $items['savecropedimage_orignal'] = array(
         'page callback' => 'itg_image_croping_crop_image_orignal', // save croped image by form the image dataurl (base64).
         'type' => MENU_CALLBACK,
@@ -176,9 +181,9 @@ function itg_image_croping_ajax_make_ajax() {
  */
 function itg_image_croping_getimagetotag() {
     $image_id = json_decode($_POST['fid']);
-    $content_name=$_POST['content_name'];
+    $content_name = $_POST['content_name'];
 
-    print theme('image_tagging', array('data' => $image_id,'content_name'=>$content_name,
+    print theme('image_tagging', array('data' => $image_id, 'content_name' => $content_name,
         'field_name' => $_POST['field_name']
     ));
 }
@@ -428,6 +433,34 @@ function itg_image_croping_crop_image() {
 }
 
 /**
+ * This function use for save  image info extra fields !
+ */
+function itg_image_saveimage_info() {
+
+    $imageino = $_POST['form_value'];
+    parse_str($imageino, $output_info);
+
+    if (!empty($output_info['fids'])) {
+        for ($i = 0; $i < count($output_info['fids']); $i++) {
+            $fid=  explode('#', $output_info['fids'][$i]);
+            if ($output_info['courtesy'][$i] != "" || $output_info['syndicate'][$i] != "")
+                $inserted_data = db_insert('image_info')->fields(array(
+                            'fid' =>$fid[0] ,
+                            'image_courtesy' => $output_info['courtesy'][$i],
+                            'image_syndicate' => $output_info['syndicate'][$i],
+                        ))->execute();
+        }
+    }
+    if ($inserted_data) {
+        print 1;
+    }
+    else {
+        print 0;
+    }
+    exit();
+}
+
+/**
  * This function use for resize orignal image
  */
 function itg_image_croping_crop_image_orignal() {
@@ -530,8 +563,8 @@ function mageimagedimesion() {
     $image_dim['story']['field_story_small_image']['height'] = 127;
     $image_dim['story']['field_story_extra_small_image']['width'] = 88;
     $image_dim['story']['field_story_extra_small_image']['height'] = 66;
-    
-     // Dimension for story
+
+    // Dimension for story
     $image_dim['mega_review_critic']['field_story_extra_large_image']['width'] = 647;
     $image_dim['mega_review_critic']['field_story_extra_large_image']['height'] = 363;
     $image_dim['mega_review_critic']['field_story_large_image']['width'] = 483;
@@ -542,7 +575,7 @@ function mageimagedimesion() {
     $image_dim['mega_review_critic']['field_story_small_image']['height'] = 127;
     $image_dim['mega_review_critic']['field_story_extra_small_image']['width'] = 88;
     $image_dim['mega_review_critic']['field_story_extra_small_image']['height'] = 66;
-     // Dimension for recipe
+    // Dimension for recipe
     $image_dim['recipe']['field_story_extra_large_image']['width'] = 674;
     $image_dim['recipe']['field_story_extra_large_image']['height'] = 363;
     $image_dim['recipe']['field_story_large_image']['width'] = 483;
@@ -553,7 +586,7 @@ function mageimagedimesion() {
     $image_dim['recipe']['field_story_small_image']['height'] = 127;
     $image_dim['recipe']['field_story_extra_small_image']['width'] = 88;
     $image_dim['recipe']['field_story_extra_small_image']['height'] = 66;
-    
+
     return $image_dim;
 }
 
@@ -583,7 +616,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         <input type="range" class="cropit-image-zoom-input">
         </div>',
     );
-    if (($content_name == 'photogallery' || $content_name == 'videogallery'|| $content_name == 'recipe' || $content_name=='mega_review_critic'|| $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
+    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'recipe' || $content_name == 'mega_review_critic' || $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
 
         if ($content_name == 'photogallery') {
             $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';

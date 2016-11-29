@@ -6,6 +6,7 @@ list($width, $height) = getimagesize($url);
 <link rel="stylesheet" type="text/css" href="<?php echo $base_url . '/' . drupal_get_path('module', 'itg_image_croping') . '/css/itg_tagging.css'; ?>">
 <div id="container">
     <h4 class="tag-image"><i class="fa fa-tags"></i> Tagging</h4>
+    <form name="image_teg_form" id="image_teg_form" methode="post">
     <?php
     $counter=1;
     foreach ($data->fid as $key => $fids) {
@@ -25,7 +26,7 @@ list($width, $height) = getimagesize($url);
         <img id="" src="' . $url . '" /> 
         <div id="tagbox' . $key . '">
         </div>
-        <input type="hidden" class="imagefid" value="' . $fids . '">
+        <input type="hidden" name="fids[]" class="imagefid" value="' . $fids . '">
         </div> 
         <div id="taglist' . $key . '"> 
         <ol> 
@@ -35,10 +36,13 @@ list($width, $height) = getimagesize($url);
        print' <div class="image_info">'.$counter.' '. ucwords($imagename).' ('.$image_dim[$content_name][ $explodedata[1]]['width'].'x'.$image_dim[$content_name][ $explodedata[1]]['height'].')</div>';
         
         }
-        print'</div>';
+       
+        print' <input type="text" name="courtesy[]" placeholder="Courtesy"  value="">
+                <input type="text" name="syndicate[]" placeholder="Syndicate" value=""></div>';
         $counter++;
     }
     ?>
+    </form>
     <button class="add-more maptofield">Upload</button>
     <button class="cancel-image add-more">Cancel</button>
     <input type="hidden" value="<?php echo $field_name; ?>" id="field_name">
