@@ -8272,7 +8272,7 @@ footer .footer-copyright {
 }
 .election-page .key-candidate .key-candidate-detail ul li:nth-child(2) {
   width: 60%;
-  padding-top: 12px;
+  padding-top: 5px;
 }
 .election-page .key-candidate .key-candidate-detail ul li:nth-child(3) {
   width: 15%;
@@ -8348,6 +8348,7 @@ footer .footer-copyright {
 }
 .election-page .election-graph .col-el-1, .election-page .election-graph .col-el-2, .election-page .election-graph .col-el-3, .election-page .election-graph .col-el-4, .election-page .election-graph .col-el-5 {
   padding: 0 15px;
+  float: left;
 }
 .election-page .election-graph .col-el-1 {
   width: 100%;
@@ -8397,19 +8398,37 @@ footer .footer-copyright {
   height: 19px;
   margin-bottom: 10px;
 }
-.election-page .graph-design {
+.election-page .graph-design .highcharts-container {
+  height: 260px !important;
+}
+.election-page .graph-design .highcharts-series-group {
   position: relative;
 }
-.election-page .graph-design .divider {
+.election-page .graph-design .highcharts-series-group:before {
+  content: '';
   position: absolute;
   top: 50px;
   left: 50%;
-  height: 120px;
+  height: 50%;
   width: 1px;
   border-left: 1px dashed #7b7b7b;
 }
-.election-page .graph-design .highcharts-container {
-  height: 260px !important;
+.election-page .graph-design .highcharts-title {
+  color: #515151 !important;
+  font-size: 18px;
+  fill: #515151 !important;
+}
+.election-page .graph-design .highcharts-title tspan:nth-child(1) {
+  font-weight: 900;
+  font-family: roboto;
+  font-size: 42px;
+  color: #515151;
+}
+.election-page .col-el-4 .graph-design .highcharts-title tspan:nth-child(1) {
+  font-size: 32px;
+}
+.election-page .col-el-5 .graph-design .highcharts-title tspan:nth-child(1) {
+  font-size: 22px;
 }
 
 /* CSS For Election Page End */
