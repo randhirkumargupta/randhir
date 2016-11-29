@@ -88,7 +88,13 @@ class ItgStoryMigration extends XMLMigration {
       'common_by_line_name' => t('common_by_line_name'),
       'common_by_line_twitter' => t('common_by_line_twitter'),
       'associatetvdate' => t('associatetvdate'),
-      'associatetime' => t('associatetime'),
+      'field_story_syndications_photo' => t('field_story_syndications_photo'),
+      'kicker_image_caption' => t('kicker_image_caption'),
+      'short_introtext' => t('short_introtext'),
+      'listicle_title' => t('listicle_title'),
+      'quote_title' => t('quote_title'),
+      'quote_image' => t('quote_image'),
+      'factoids_title' => t('factoids_title'),
       'sefurl' => t('Sefurl'),
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
@@ -224,8 +230,16 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_expert_image:title', 'expert_title')->xpath('expert_title');
     $this->addFieldMapping('field_story_expert_description', 'expertdescription')->xpath('expertdescription');
     
+    //New field
+    $this->addFieldMapping('field_story_syndications_photo', 'syndications_photo')->xpath('syndications_photo');
+    $this->addFieldMapping('field_story_kicker_image_caption', 'kicker_image_caption')->xpath('kicker_image_caption');
+    $this->addFieldMapping('field_story_short_introtext', 'short_introtext')->xpath('short_introtext');
+    $this->addFieldMapping('field_story_strap_headline', 'strapheadline')->xpath('strapheadline');
+    $this->addFieldMapping('field_story_template_guru', 'listicle_title')->xpath('fulltext_conclaveformat/listicle_title');
+    $this->addFieldMapping('field_story_quote_title', 'quote_title')->xpath('fulltext_conclaveformat/quote_title');
+    $this->addFieldMapping('field_story_factoids_title', 'factoids_title')->xpath('fulltext_conclaveformat/factoids_title');
+    $this->addFieldMapping('field_story_quote_image', 'quote_image')->xpath('fulltext_conclaveformat/quote_image');
     
-    //$this->addFieldMapping('field_story_tv_time', 'associatetime')->xpath('associatetime');
 
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
@@ -235,17 +249,17 @@ class ItgStoryMigration extends XMLMigration {
 
   public function prepareRow($row) {
     // prepare row for listicle
-    $data_listicle = '';
-    if (isset($row->xml->listicle_content->listicle) && !empty($row->xml->listicle_content->listicle)) {
-      foreach ($row->xml->listicle_content->listicle as $final_listicle) {
+   /* $data_listicle = '';
+    if (isset($row->xml->fulltext_conclaveformat->listicle_content->listicle) && !empty($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
+      foreach ($row->xml->fulltext_conclaveformat->listicle_content->listicle as $final_listicle) {
         $data_listicle[]['value'] = (string) $final_listicle;
       }
     }
-    $row->listicle_new = $data_listicle;
+    $row->listicle_new = $data_listicle;*/
     // end prepare row for listicle
     // prepare row for quote
     $data_quotes = '';
-    if (isset($row->xml->quotes->quote) && !empty($row->xml->quotes->quote)) {
+    if (isset($row->xml->fulltext_conclaveformat->quotes->quote) && !empty($row->xml->fulltext_conclaveformat->quotes->quote)) {
       foreach ($row->xml->quotes->quote as $final_quote) {
         $data_quotes[]['value'] = (string) $final_quote;
       }
@@ -254,7 +268,7 @@ class ItgStoryMigration extends XMLMigration {
     // end prepare row for quote
     // prepare row for factoids
     $data_factoids = '';
-    if (isset($row->xml->factoids_content->factoids) && !empty($row->xml->factoids_content->factoids)) {
+    if (isset($row->xml->fulltext_conclaveformat->factoids_content->factoids) && !empty($row->xml->fulltext_conclaveformat->factoids_content->factoids)) {
       foreach ($row->xml->factoids_content->factoids as $final_factoids) {
         $data_factoids[]['value'] = (string) $final_factoids;
       }
@@ -366,8 +380,14 @@ class ItgStoryMigration extends XMLMigration {
         if ((string) $option->associatetv == true) {
           $final_option[]['value'] = 'tv';
         }
+        
       }
     }
+    
+    if ((string) $row->xml->noindex_nofollow == true) {
+      $final_option[]['value'] = 'noindex_nofollow';
+    }
+    
     $row->final_config_option = $final_option;
     // end checkboxes values
     // End Brifcase migration
@@ -427,9 +447,9 @@ class ItgStoryMigration extends XMLMigration {
 
   public function prepare($node, stdClass $row) {
     $node->teaser = (string) $row->xml->description;
-    if (!empty($row->listicle_new)) {
-      $node->field_story_template_guru[LANGUAGE_NONE] = $row->listicle_new;
-    }
+//    if (!empty($row->listicle_new)) {
+//      $node->field_story_template_guru[LANGUAGE_NONE] = $row->listicle_new;
+//    }
     if (!empty($row->quotes_new)) {
       $node->field_story_template_quotes[LANGUAGE_NONE] = $row->quotes_new;
     }
@@ -470,7 +490,7 @@ class ItgStoryMigration extends XMLMigration {
   public function complete($entity, $row) {
     $node = node_load($entity->nid);
     $key = 0;
-    if (isset($row->xml->buzz_content->buzz)) {
+    //if (isset($row->xml->buzz_content->buzz)) {
       foreach ($row->xml->buzz_content->buzz as $value) {
         $headline = (string) $value->headline;
         $image_url = (string) $value->image;
@@ -492,8 +512,24 @@ class ItgStoryMigration extends XMLMigration {
         $node->field_story_template_buzz[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
         $key++;
       }
+      $count++;
+      foreach ($row->xml->fulltext_conclaveformat->listicle_content as $value) {
+        $listicle = (string) $value->listicle;
+       
+        $values = array(
+          'field_name' => 'field_story_listicle',
+          'field_story_listicle_description' => array(LANGUAGE_NONE => array(array('value' => $headline))),          
+        );
+        
+        $field_collection_item = entity_create('field_collection_item', $values);
+        $field_collection_item->setHostEntity('node', $node);
+        $field_collection_item->save(TRUE);
+        $node->field_story_listicle[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
+        $count++;
+      }
+      
       field_attach_update('node', $node);
-    }
+    //}
   }
 
 }

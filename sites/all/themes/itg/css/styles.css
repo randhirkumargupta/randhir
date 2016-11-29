@@ -4385,8 +4385,10 @@ footer .footer-copyright {
   clear: left;
 }
 
-.view-video-landing-header .view-content .photo-list li .tile a {
+.view-video-landing-header .view-content .photo-list li .tile > a {
   color: #b4b4b4;
+  margin-top: 10px;
+  display: block;
 }
 .view-video-landing-header .defalt-bar {
   max-width: 100%;
@@ -4398,7 +4400,6 @@ footer .footer-copyright {
   overflow-y: hidden;
 }
 .view-video-landing-header .view-content .photo-list li {
-  height: 210px;
   overflow: hidden;
 }
 .view-video-landing-header .view-content .photo-list li:nth-child(2n+1) {
@@ -8344,6 +8345,24 @@ footer .footer-copyright {
   padding: 0;
   width: 145px;
 }
+.election-page .election-graph .col-el-1, .election-page .election-graph .col-el-2, .election-page .election-graph .col-el-3, .election-page .election-graph .col-el-4, .election-page .election-graph .col-el-5 {
+  padding: 0 15px;
+}
+.election-page .election-graph .col-el-1 {
+  width: 100%;
+}
+.election-page .election-graph .col-el-2 {
+  width: 50%;
+}
+.election-page .election-graph .col-el-3 {
+  width: 33.33333%;
+}
+.election-page .election-graph .col-el-4 {
+  width: 25%;
+}
+.election-page .election-graph .col-el-5 {
+  width: 20%;
+}
 .election-page .election-graph .highcharts-credits {
   display: none;
 }
@@ -8520,7 +8539,7 @@ footer .footer-copyright {
 #block-itg-menu-manager-vertical-menu {
   position: absolute;
   top: 50px;
-  left: -85px;
+  left: -54px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 2px 2px 3px #ccc;
@@ -8537,6 +8556,7 @@ footer .footer-copyright {
 #block-itg-menu-manager-vertical-menu li {
   border-bottom: 1px solid #c4c4c4;
   display: block;
+  min-width: 100%;
 }
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
@@ -8557,16 +8577,17 @@ footer .footer-copyright {
   background: #fff;
   color: #b00202;
 }
-#block-itg-menu-manager-vertical-menu .vertical-menu-parent {
-  max-width: 56px;
+#block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu {
+  max-width: 58px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu span {
   font-family: roboto;
   font-weight: 600;
   text-transform: uppercase;
   padding: 5px 5px;
-  display: block !important;
+  display: block;
   cursor: pointer;
+  font-size: 12px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu span i {
   display: block;

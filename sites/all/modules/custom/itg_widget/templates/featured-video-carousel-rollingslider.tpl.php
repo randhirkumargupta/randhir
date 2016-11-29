@@ -13,7 +13,7 @@ if (!empty($data)) {
           ?>
 
           <div class="slideItem"> 
-            <a href="<?php echo $base_url ?>/node/<?php print $entity_data_node['nid']; ?>">
+            <a href="<?php print $entity_data_node['node_url']; ?>?category=<?php print $entity_data_node['sid']; ?>&sid=<?php print $entity_data_node['sid']; ?>&pcat=<?php print $entity_data_node['primary_category']; ?>">
               <?php print $entity_data_node['file_url']; ?>
             <!--<img src="/itgcms/sites/all/themes/itg/images/demo-photo.jpg">-->
               <span class="flex-count" style="text-align: right"><i class="fa fa-play-circle"></i></span>

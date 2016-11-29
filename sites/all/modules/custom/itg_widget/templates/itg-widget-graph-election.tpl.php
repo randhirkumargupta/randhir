@@ -2,8 +2,18 @@
 if (!empty($data)) : global $base_url; ?>
 
 
-<?php foreach ($data as $index => $row):  ?>
-    <div class="col-md-6 mt-50">
+<?php 
+ $classrow=6;
+ $rowcounter=ceil(12/count($data));
+ if(count($data)<=2)
+ {
+     $classrow="col-md-$rowcounter";
+ } else if(count($data)>2)
+ {
+     $classrow="col-el-".count($data);
+ }
+foreach ($data as $index => $row):  ?>
+    <div class="<?php echo $classrow;?> mt-50">
         <div class="itg-widget">
             <div class="droppable <?php print $gray_bg_layout; ?>">
                 <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
