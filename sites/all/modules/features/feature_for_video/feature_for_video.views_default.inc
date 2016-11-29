@@ -844,7 +844,7 @@ src="https://www.dailymotion.com/embed/video/<?php print $vid; ?>?autoplay=0&mut
 allowfullscreen></iframe>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Field: Expert description */
+  /* Field: Field: Content */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -922,7 +922,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['fid']['label'] = '';
   $handler->display->display_options['fields']['fid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['fid']['element_label_colon'] = FALSE;
-  /* Field: Field: Expert description */
+  /* Field: Field: Content */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -951,7 +951,6 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<i class="fa fa-clock-o"></i> <span>Watch Later</span>';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'user/login';
-  $handler->display->display_options['fields']['nothing']['alter']['alt'] = 'Watch Later';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Field: Flags: Flag link */
   $handler->display->display_options['fields']['ops']['id'] = 'ops';
@@ -983,20 +982,19 @@ allowfullscreen></iframe>';
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<?php
+  /* Header: Global: PHP */
+  $handler->display->display_options['header']['php']['id'] = 'php';
+  $handler->display->display_options['header']['php']['table'] = 'views';
+  $handler->display->display_options['header']['php']['field'] = 'php';
+  $handler->display->display_options['header']['php']['php_output'] = '<?php
 if(isset($_GET[\'category\']) && isset($_GET[\'sid\']) && !isset($_GET[\'pcat\'])){
 	$t_name = itg_videogallery_get_term_name($_GET[\'category\']);
-	print \'<h3>LATEST FROM \'. $t_name .\'</h3>\';
-}if(isset($_GET[\'category\']) && isset($_GET[\'sid\']) && isset($_GET[\'pcat\']) && $_GET[\'pcat\'] != 0){
+	print "<h3>". t("LATEST FROM $t_name") ."</h3>";
+}elseif(isset($_GET[\'category\']) && isset($_GET[\'sid\']) && isset($_GET[\'pcat\']) && $_GET[\'pcat\'] != 0){
 	$t_name = itg_videogallery_get_term_name($_GET[\'pcat\']);
-	print \'<h3>LATEST FROM \'. $t_name .\'</h3>\';
+	print "<h3>". t("LATEST FROM $t_name") ."</h3>";
 }
 ?>';
-  $handler->display->display_options['header']['area']['format'] = 'php_code';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */

@@ -36,7 +36,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 
                 ?>
                 <li >
-                    <figure class="imgtags" img-fid=" <?php print $row['fid'];?>">
+                    <figure class="" img-fid=" <?php print $row['fid'];?>">
                         <?php print $row['field_images']; ?>                    
                     </figure>
                 </li>
