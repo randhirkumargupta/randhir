@@ -24,6 +24,7 @@
  * @ingroup views_templates
  */
 ?>
+<div class="tile">
 <?php foreach ($fields as $id => $field): ?>
   <?php if (!empty($field->separator)): ?>
     <?php print $field->separator; ?>
@@ -34,4 +35,9 @@
     <?php print $field->content; ?>
   <?php print $field->wrapper_suffix; ?>
 <?php endforeach; ?>
-<button class="hide_sh icon-related-content" rel="<?php print $row->nid; ?>">click</button>
+<button class="hide_sh icon-list" rel="<?php print $row->nid; ?>">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+</div>

@@ -748,8 +748,7 @@ header{
     @include half-grey-bg(285px);
   }
   h3{
-    padding: 0 15px;
-    margin-bottom: 20px;
+    padding: 9px 15px 25px;
   }
   .view-related-photogallery{
     .view-content{
@@ -767,9 +766,7 @@ header{
     float: left;
     width: 260px;
     height: 310px;
-    text-align: center;
     position: relative;
-    padding-bottom: 10px;
     z-index: 9;
     list-style-type: none;
     margin: 0 15px;
@@ -778,106 +775,90 @@ header{
           transform: translate(0,-4px);  
       }
     &.views-row-odd{
-      .views-field-field-primary-category{
+      .category-name{
         background-color: #dc4750;
-        border-radius: 4px 4px 0 0;
-        color: #fff;
-        height: 20px;
       }
-      .hide_sh, .hide-rc{
+      .icon-list{
         background-color: #dc4750;
       }
     }
     &.views-row-even{
-      .views-field-field-primary-category{
+      .category-name{
         background-color: #52bf40;
+      }
+      .icon-list{
+        background-color: #52bf40;
+      }
+    }
+    }
+.tile{ 
+    text-align: center;
+    .category-name{
+        background-color: #dc4750;
         border-radius: 4px 4px 0 0;
         color: #fff;
         height: 20px;
       }
-      .hide_sh, .hide-rc{
-        background-color: #52bf40;
-      }
-    }
-    .views-field-title{
-      height: 60px;
+    .title{
+      height: 40px;
       overflow: hidden;
-      padding: 10px;
+      margin: 10px 10px 8px;
       a{
         color: #000;
         display: block;
         @include font(16px,20px,$itg-font-bold);
       }
     }
-    .views-field-field-story-extra-large-image{
+    .pic{
       height: 196px;
     }
-    .views-field-field-story-reporter, .views-field-changed{
+    .name, .date{
       display: inline-block;
       vertical-align: top;
       @include font(12px,16px,$itg-font-regular);
       color: #9a9a9a;
+      padding: 0 5px;
     }
-    .views-field-changed:before{
-      content: '|';
-      display: inline-block;
-      vertical-align: top;
-      font-size: 10px;
+    .date:before{
+        content: '|';
+        position: absolute;
+        font-size: 9px;
+        left: -4px;
+        top: 0;
     }
-    .hide_sh, .hide-rc{
+    .icon-list{
       border: none;
       border-radius: 50%;
       bottom: -18px;
-      height: 35px;
+      height: 36px;
       left: 0;
       margin: 0 auto;
       position: absolute;
+      padding: 11px 12px;
+      transition: .25s ease-in-out;
+      transform: rotate(0);
       right: 0;
-      width: 35px;
+      width: 36px;
       cursor: pointer;
-      text-indent: -9999px;
-      background-image: url('../images/icon_related_content.png');
-      background-position: center center;
-      background-repeat: no-repeat;
       z-index: 9;
-    }
-    .nxt{
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      .view-sambandhit-khabre{
-        background-color: #fff;
-        border-radius: 4px;
-        height: 100%;
-        padding: 0 10px;
-        overflow-y: auto;
-        z-index: 9;
-        .views-row{
-          border-bottom: 1px solid #9a9a9a;
-          padding: 10px 0;
-          text-align: center;
-          .views-field-label{
-            margin-bottom: 10px;
-            a{
-              color: #000;
-              display: block;
-              @include font(16px,20px,$itg-font-bold);
-            }
-          }
-          .views-field-hash, .views-field-entity-id{
-            display: inline-block;
-            vertical-align: top;
-            @include font(12px,16px,$itg-font-regular);
-            color: #9a9a9a;
-          }
-          .views-field-entity-id:before{
-            content: '|';
-            display: inline-block;
-            vertical-align: top;
-            font-size: 10px;
-          }
+      span {
+        background: #fff;
+        display: block;
+        height: 1px;
+        margin-bottom: 5px;
+        width: 15px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0);
+        transition: .25s ease-in-out;
+        &:before {
+            content: "";
+            box-shadow: 2px 1px 0 1px #fff;
+            display: block;
+            height: 0;
+            left: -6px;
+            position: relative;
+            width: 0;
         }
       }
     }
@@ -921,7 +902,6 @@ header{
     opacity: 0;
     width: 260px;
     z-index: 9999999999;
-    /*transition: all 1s;*/
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 14px 28px rgba(0,0,0,.7),0 10px 10px rgba(0,0,0,.7);
