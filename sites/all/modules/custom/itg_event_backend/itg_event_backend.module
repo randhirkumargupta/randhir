@@ -632,7 +632,7 @@ function itg_event_backend_block_view($delta = '') {
             $block['content'] = theme('event_flashback');
             break;
         case 'highlights_block':
-            $block['content'] = itg_event_backend_highlights_block_content();
+            $block['content'] = itg_event_backend_live_content();
             break;  
     }
 
@@ -1420,20 +1420,24 @@ function itg_event_backend_get_highlights_block() {
  */
 function itg_event_backend_highlights_block_content() {
   $nid = itg_event_backend_get_event_node();
-  $query = db_select('field_data_field_e_associate_highlights', 'fh');
-  $query->fields('fh', array('field_e_associate_highlights_target_id'));
-  $query->condition('fh.entity_id', $nid, '=');
-  $highlights_nid = $query->execute()->fetchField();
-  $highlights_node = node_load($highlights_nid);
-  
-  $output = '';
-  $output .= '<div class = "highlights-heading">Highlights</div>';
-  foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
-          $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
-          $text .= '<div>'.$highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'].itg_event_backend_highlights_like_dislike($highlights_arr['value']).'</div>';
+  if (db_table_exists('field_data_field_e_associate_highlights')) {
+    $query = db_select('field_data_field_e_associate_highlights', 'fh');
+    $query->fields('fh', array('field_e_associate_highlights_target_id'));
+    $query->condition('fh.entity_id', $nid, '=');
+    $highlights_nid = $query->execute()->fetchField();
+    $highlights_node = node_load($highlights_nid);
+
+    $output = '';
+    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">Highlights</h2>';
+    foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
+      $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
+      $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
+    }
+
+    $output .= '</div>';
+    $final_output = $output . $text;
+    return $final_output;
   }
-  $final_output = $output.$text;
-  return $final_output;
 }
 
 /**
@@ -1454,8 +1458,23 @@ function itg_event_backend_highlights_like_dislike($unique_id) {
   $like = "no-of-likes_" . $unique_id;
   $dislike = "no-of-dislikes_" . $unique_id;
   
-  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="'.$unique_id.'">Like<span id="'.$like.'">'.$like_count.'</span></button>';    
-  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="'.$unique_id.'">Dislike<span id="'.$dislike.'">'.$dislike_count.'</span></button>';
+  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="'.$unique_id.'"><i class="fa fa-thumbs-o-up"></i> <span id="'.$like.'">'.$like_count.'</span></button>';    
+  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="'.$unique_id.'"><i class="fa fa-thumbs-o-down"></i> <span id="'.$dislike.'">'.$dislike_count.'</span></button>';
   $error_msg = '<p class="error-msg" id="'.$pid.'"></p></div><p>&nbsp;<p>';
   return $like_btn.$dislike_btn.$error_msg;
+}
+
+/**
+ * Get event live whole content
+ * @return string
+ */
+function itg_event_backend_live_content() {
+  $nid = itg_event_backend_get_event_node();
+  $title = itg_common_get_node_title($nid);
+  if (module_exists('itg_live_tv')) {
+    $banner_video = itg_live_tv_page_video();
+  }
+  $video = '<div class="highlights-video col-md-7"><h2 style="live-event-title">'.$title.'</h2><div class="live-event-video">' . $banner_video . '</div></div>';
+  $highlights_content = '<div class="highlights-container col-md-5">'. itg_event_backend_highlights_block_content().'</div>';
+  return $video.$highlights_content;
 }
