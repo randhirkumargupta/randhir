@@ -118,6 +118,7 @@ features[variable][] = save_continue_mega_review_critic
 features[variable][] = workbench_moderation_default_state_mega_review_critic
 features[views_view][] = celebrity_profile_list
 features[views_view][] = movie_review_list
+features[views_view][] = movies_master
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][entityreference] = entityreference
 features_exclude[dependencies][features] = features
