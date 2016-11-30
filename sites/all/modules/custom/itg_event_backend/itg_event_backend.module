@@ -18,6 +18,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == "event_backend_node_form") {
       $form['field_associate_event_photo']['#suffix'] = '<div class="event-photo-des description">'.$form['field_associate_event_photo'][LANGUAGE_NONE]['#description'].'</div>';
       $form['field_associate_event_video']['#suffix'] = '<div class="event-video-des description">'.$form['field_associate_event_video'][LANGUAGE_NONE]['#description'].'</div>';
+      $form['field_e_associate_highlights']['#suffix'] = '<div class="event-video-des description">'.$form['field_e_associate_highlights'][LANGUAGE_NONE]['#description'].'</div>';
         $form['#after_build'][] = 'itg_event_backend_after_build';
         array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
         $form['actions']['cancel'] = array(
@@ -601,7 +602,10 @@ function itg_event_backend_block_info() {
         'info' => t('Event Flashback'),
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
-
+    $blocks['highlights_block'] = array(
+      'info' => t('Highlights Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+    );
     return $blocks;
 }
 
@@ -648,6 +652,9 @@ function itg_event_backend_block_view($delta = '') {
         case 'event_flashback':
             $block['content'] = theme('event_flashback');
             break;
+        case 'highlights_block':
+            $block['content'] = itg_event_backend_highlights_block_content();
+            break;  
     }
 
     return $block;
@@ -1199,12 +1206,29 @@ function itg_event_backend_insert_into_redirect($node) {
         $domain_source->nid = $node->nid;
         $domain_source->domain_id = '-' . $node->domains;
 
-        $existing = redirect_load_by_hash($hash);
+        $existing = itg_event_backend_check_old_rec($node->nid);
         if (!$existing) {
             drupal_write_record('redirect', $redirect);
             drupal_write_record('domain_source', $domain_source);
         }
     }
+}
+
+/**
+ * Check existing record in domain source
+ * @param int $nid
+ * @return boolean
+ */
+function itg_event_backend_check_old_rec($nid) {
+  $query = db_select('domain_source', 'd');
+  $query->fields('d', array('nid'));
+  $query->condition('d.nid', $nid, '=');
+  $nid = $query->execute()->fetchField();
+  if($nid) {
+    return TRUE;
+  } else {
+    return FALSE;
+  }
 }
 
 /**
@@ -1395,4 +1419,58 @@ function itg_event_backend_current_event_domain($nid){
   $query->condition('r.source', $nid, '=');
   $result = $query->execute()->fetchCol();
   return $result;
+}
+
+/**
+ * Highlights block for event
+ */
+function itg_event_backend_get_highlights_block() {
+  $block = module_invoke('itg_event_backend', 'block_view', 'highlights_block');
+  print render($block['content']);
+}
+
+/**
+ * Get highlights block content for live event
+ * @return string
+ */
+function itg_event_backend_highlights_block_content() {
+  $nid = itg_event_backend_get_event_node();
+  $query = db_select('field_data_field_e_associate_highlights', 'fh');
+  $query->fields('fh', array('field_e_associate_highlights_target_id'));
+  $query->condition('fh.entity_id', $nid, '=');
+  $highlights_nid = $query->execute()->fetchField();
+  $highlights_node = node_load($highlights_nid);
+  
+  $output = '';
+  $output .= '<div class = "highlights-heading">Highlights</div>';
+  foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
+          $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
+          $text .= '<div>'.$highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'].itg_event_backend_highlights_like_dislike($highlights_arr['value']).'</div>';
+  }
+  $final_output = $output.$text;
+  return $final_output;
+}
+
+/**
+ * Like and dislike button for highlights on event page
+ * @param int $unique_id
+ * @return string
+ */
+function itg_event_backend_highlights_like_dislike($unique_id) {
+  $like = itg_flag_get_count($unique_id, 'like_count');
+  $dislike = itg_flag_get_count($unique_id, 'dislike_count');
+  if (!empty($like)) {
+    $like_count = '(' . $like . ')';
+  }
+  if (!empty($dislike)) {
+    $dislike_count = '(' . $dislike . ')';
+  }
+  $pid = "voted_" . $unique_id;
+  $like = "no-of-likes_" . $unique_id;
+  $dislike = "no-of-dislikes_" . $unique_id;
+  
+  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="'.$unique_id.'">Like<span id="'.$like.'">'.$like_count.'</span></button>';    
+  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="'.$unique_id.'">Dislike<span id="'.$dislike.'">'.$dislike_count.'</span></button>';
+  $error_msg = '<p class="error-msg" id="'.$pid.'"></p></div><p>&nbsp;<p>';
+  return $like_btn.$dislike_btn.$error_msg;
 }
