@@ -10,53 +10,30 @@
 function feature_for_reporter_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_reporter_career_graph'.
-  $field_bases['field_reporter_career_graph'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_reporter_career_graph',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'revision_id' => array(
-        0 => 'revision_id',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'field_collection',
-    'settings' => array(
-      'hide_blank_items' => 1,
-      'path' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'field_collection',
-  );
-
-  // Exported field_base: 'field_reporter_earning'.
-  $field_bases['field_reporter_earning'] = array(
+  // Exported field_base: 'field_movie_earning'.
+  $field_bases['field_movie_earning'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_reporter_earning',
+    'field_name' => 'field_movie_earning',
     'field_permissions' => array(
       'type' => 0,
     ),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
-    'settings' => array(),
+    'settings' => array(
+      'decimal_separator' => '.',
+    ),
     'translatable' => 0,
-    'type' => 'number_integer',
+    'type' => 'number_float',
   );
 
   // Exported field_base: 'field_reporter_movie_name'.
   $field_bases['field_reporter_movie_name'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_reporter_movie_name',

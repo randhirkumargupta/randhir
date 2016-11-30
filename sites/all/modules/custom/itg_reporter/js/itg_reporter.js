@@ -36,9 +36,9 @@
                 $('#edit-field-story-category').hide();
             }
             // Hide by default career graph field collection.
-            $('#edit-field-reporter-career-graph').hide();
+            $('#edit-field-reporter-movie-name').hide();
             if ($('select[name="field_celebrity_pro_occupation[und][]"').find('option:selected').text() == 'Celebrity') {
-                $('#edit-field-reporter-career-graph').show();
+                $('#edit-field-reporter-movie-name').show();
             }
 
             $('#edit-field-celebrity-pro-occupation-und').change(function () {
@@ -71,10 +71,10 @@
 
                 // Show hide logic for career graph field.
                 if (celebrity == 'Celebrity') {
-                    $('#edit-field-reporter-career-graph').show();
+                    $('#edit-field-reporter-movie-name').show();
                 } else {
-                    clear_form_elements('form-field-name-field-reporter-career-graph')
-                    $('#edit-field-reporter-career-graph').hide();
+                    clear_form_elements('form-field-name-field-reporter-movie-name')
+                    $('#edit-field-reporter-movie-name').hide();
                 }
 
             });

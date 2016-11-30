@@ -51,6 +51,36 @@ function itg_image_croping_schema() {
   ),
   'primary key' => array('id'),
 );
+ 
+ $schema['image_info'] = array(
+  'description' => t('Table for image_info .'),
+  'fields' => array(
+    'id' => array(
+      'description' => t('id'),
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'fid' => array(
+      'description' => t('fid of image'),
+      'type' => 'int',
+      'not null' => TRUE,
+    ),
+    'image_courtesy' => array(
+      'description' => t('Image courtesy'),
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => FALSE,
+    ),
+    'image_syndicate' => array(
+      'description' => t('Image courtesy'),
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => FALSE,
+    ),
+   
+  ),
+  'primary key' => array('id'),
+);
 
   return $schema;
 }
@@ -60,6 +90,7 @@ function itg_image_croping_schema() {
  */
 function itg_image_croping_uninstall() {
   drupal_uninstall_schema('image_tags');
+   drupal_uninstall_schema('image_info');
 }
 
 /**
