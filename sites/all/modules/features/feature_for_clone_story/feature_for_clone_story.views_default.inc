@@ -36,10 +36,10 @@ function feature_for_clone_story_views_default_views() {
   $handler->display->display_options['fields']['_version_']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['_version_']['field'] = '_version_';
 
-  /* Display: clone story */
-  $handler = $view->new_display('page', 'clone story', 'page');
+  /* Display: Clone story */
+  $handler = $view->new_display('page', 'Clone story', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'clone story';
+  $handler->display->display_options['title'] = 'Clone story';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
