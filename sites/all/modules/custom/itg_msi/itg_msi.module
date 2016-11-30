@@ -101,14 +101,6 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
     //Call function after build
     $form['#after_build'][] = 'itg_msi_form_after_build';
   }
-
-  //Hide source type and source id from story add and edit form.
-//  if ($form_id == 'story_node_form') {
-//    if(!in_array('administrator', $user->roles)){ 
-//      unset($form['field_story_source_type']);
-//      unset($form['field_story_source_id']);
-//    }
-//  }
 }
 
 /**

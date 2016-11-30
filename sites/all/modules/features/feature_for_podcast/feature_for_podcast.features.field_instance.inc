@@ -87,7 +87,7 @@ function feature_for_podcast_field_default_field_instances() {
     'bundle' => 'field_podcast_audio_upload',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Description',
+    'description' => 'Audio Description',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -128,7 +128,17 @@ function feature_for_podcast_field_default_field_instances() {
       'default' => array(
         'label' => 'above',
         'module' => 'file',
-        'settings' => array(),
+        'settings' => array(
+          'autoplay' => 0,
+          'backgroundColor' => '000000',
+          'continuous' => 0,
+          'mode' => 'single',
+          'muted' => 0,
+          'preload' => 'metadata',
+          'repeat' => 'none',
+          'solution' => 'html, flash',
+          'volume' => 80,
+        ),
         'type' => 'file_default',
         'weight' => 0,
       ),
@@ -141,7 +151,7 @@ function feature_for_podcast_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'exclude_cv' => FALSE,
-      'file_directory' => 'dailymotion_audio_dir',
+      'file_directory' => 'podcast_audio_dir',
       'file_extensions' => 'mp3',
       'max_filesize' => '',
       'user_register_form' => FALSE,
@@ -223,48 +233,6 @@ function feature_for_podcast_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-podcast-field_dailymotion_playlist'.
-  $field_instances['node-podcast-field_dailymotion_playlist'] = array(
-    'bundle' => 'podcast',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Playlist',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 16,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_dailymotion_playlist',
-    'label' => 'Playlist',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 16,
-    ),
-  );
-
   // Exported field_instance: 'node-podcast-field_podcast_audio_upload'.
   $field_instances['node-podcast-field_podcast_audio_upload'] = array(
     'bundle' => 'podcast',
@@ -334,7 +302,7 @@ function feature_for_podcast_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 1,
     'field_name' => 'field_podcast_kicker_message',
-    'label' => 'Kicker Message',
+    'label' => 'Kicker',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -754,48 +722,6 @@ function feature_for_podcast_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-podcast-field_story_kicker_text'.
-  $field_instances['node-podcast-field_story_kicker_text'] = array(
-    'bundle' => 'podcast',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Kicker Message',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 14,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_kicker_text',
-    'label' => 'Kicker Message',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
-    ),
-  );
-
   // Exported field_instance: 'node-podcast-field_story_large_image'.
   $field_instances['node-podcast-field_story_large_image'] = array(
     'bundle' => 'podcast',
@@ -1201,17 +1127,18 @@ function feature_for_podcast_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Are you sure you want to Archive?');
+  t('Audio Description');
   t('Audio Image Upload');
   t('Audio Upload');
   t('Category');
   t('Description');
   t('Extra large image');
   t('Extra small image');
+  t('Kicker');
   t('Kicker Message');
   t('Large image');
   t('Medium image');
   t('Node Identity');
-  t('Playlist');
   t('Primary category html');
   t('Primary category textarea');
   t('Related Content');

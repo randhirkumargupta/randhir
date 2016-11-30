@@ -2233,7 +2233,7 @@ img{
                     }
                     &:nth-child(2){
                         width: 60%;
-                        padding-top: 12px;
+                        padding-top: 5px;
                     }
                     &:nth-child(3){
                         width: 15%;
@@ -2256,23 +2256,36 @@ img{
                         width: 63px;
                     }
                     .status{
-                        width: 35px;
-                        height: 35px;                        
-                        border-radius: 3px;
-                        text-align: center;
-                        line-height: 35px;
-                        color: #fff;
-                        font-size: 28px;
-                        background: #ccc;
-                        margin-top: 12px;
+                        font-size: 15px;
+                        font-weight: 700;
+                        i{                        
+                            width: 35px;
+                            height: 35px;                        
+                            border-radius: 3px;
+                            text-align: center;
+                            line-height: 35px;
+                            color: #fff;
+                            font-size: 28px;
+                            background: #ccc;
+                            margin-top: 12px;
+                        }
                         &.green{
-                            background: #418b32;
+                            i{
+                                background: #418b32;
+                            }
+                            color:#418b32;
                         }
                         &.red{
-                            background: #d80a02;
+                            i{
+                                background: #d80a02;
+                            }
+                            color:#418b32;
                         }
                         &.yellow{
-                            background: #efc107;
+                            i{
+                                background: #efc107;
+                            }
+                            color:#418b32;
                         }
                     }
                 }
@@ -2297,7 +2310,26 @@ img{
             width: 145px;
         }        
     }
-    .election-graph{
+    .election-graph{        
+        .col-el-1, .col-el-2, .col-el-3, .col-el-4, .col-el-5{
+            padding: 0 15px;
+            float:left;
+        }
+        .col-el-1{
+            @include calculate-width(1);
+        }
+        .col-el-2{
+            @include calculate-width(2);
+        }
+        .col-el-3{
+            @include calculate-width(3);
+        }
+        .col-el-4{
+            @include calculate-width(4);
+        }
+        .col-el-5{
+            @include calculate-width(5);
+        }
         .highcharts-credits{
             display: none;
         }
@@ -2332,19 +2364,57 @@ img{
             }
         }
     }
-    .graph-design{
-        @include pos(relative);
-        .divider{
-        position: absolute;
-        top: 50px;
-        left: 50%;
-        height: 120px;
-        width: 1px;
-        border-left: 1px dashed #7b7b7b;
-        }
+    .graph-design{                
         .highcharts-container{
             height: 260px !important;
         }   
+        .highcharts-series-group{            
+            @include pos(relative);
+            &:before{
+                content: '';
+                position: absolute;
+                top: 50px;
+                left: 50%;
+                height: 50%;
+                width: 1px;
+                border-left: 1px dashed #7b7b7b;                
+            }
+        }
+        .highcharts-title{
+            color: #515151 !important;;
+            font-size: 18px;
+            fill: #515151 !important;
+            tspan{
+                &:nth-child(1){
+                    font-weight: 900;
+                   font-family: roboto;
+                   font-size: 42px;
+                   color: #515151;   
+                }                
+            }
+        }
+    }
+    .col-el-4{
+        .graph-design{
+            .highcharts-title{
+                tspan{
+                    &:nth-child(1){                   
+                        font-size: 32px;                   
+                    }                
+                }
+            }
+        }
+    }
+    .col-el-5{
+        .graph-design{
+            .highcharts-title{
+                tspan{
+                    &:nth-child(1){                   
+                        font-size: 22px;                   
+                    }                
+                }
+            }
+        }
     }
 }
 /* CSS For Election Page End */
