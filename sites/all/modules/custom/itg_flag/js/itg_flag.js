@@ -46,11 +46,27 @@
             
             // code for related content hide show
             
-           $('.hide_sh').click(function (event) {
+           
+               $("body").on("click", ".hide_sh", function(e) {
+                   console.log('hi');
                var obj = jQuery(this);
                 var nd_id = jQuery(this).attr('rel');
                 var post_data = "&nd_id="+ nd_id;
-
+                var obj_parent = obj.parent();
+                pos_left = obj_parent.offset().left, pos_top = obj_parent.offset().top - $(window).scrollTop(), parent_height = obj_parent.height();
+                var parent_clone = obj_parent.clone();
+                $("body").addClass("overlay");
+                var rc_popup = $(".related-content-popup");
+                rc_popup.addClass("popup-open"), 
+                rc_popup.html(parent_clone), 
+                rc_popup.css({left: pos_left, top: pos_top}),
+                $("body").css("overflow", "hidden"), rc_popup.velocity({
+                    duration: 300,
+                    stagger: 80,
+                    left: "500px",
+                    top: "20px"
+                }),
+                
                     $.ajax({
                         'url': base_url + '/related-details-ajax',
                         'data': post_data,
@@ -62,8 +78,9 @@
                         },
                         'success': function (result)
                         {
-                            obj.next('.nxt').html(result);
+//                            obj.next('.nxt').html(result);
                          ///obj.html(result);
+                         $('body').find('.related-content-popup').append(result);
                         }
                     });
                
@@ -75,6 +92,7 @@
               $(this).prev().remove();
               $(this).remove();
             });
+            
         }
 
     };

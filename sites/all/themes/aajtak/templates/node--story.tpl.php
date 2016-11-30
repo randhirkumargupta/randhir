@@ -43,7 +43,7 @@
             <ul class="date-update">
               <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
               <li><?php print make_hin_str(date('j F, Y', $node->created)); ?>   </li>
-              <li>अपडेटेड <?php print make_hin_str(date('H:i', $node->changed)); ?> IST</li>
+              <li><?php print t('अपडेटेड'); ?> <?php print make_hin_str(date('H:i', $node->changed)); ?> IST</li>
             </ul>
           </div>
           
@@ -58,18 +58,16 @@
         $view_name = 'photo_gallery_management';
         $view_display = 'page_1';
         $vvid = itg_front_end_node_weight(1683, $view_name, $view_display);
+        $previous = node_load(itg_get_previousnext_weight($vvid - 1, $view_name, $view_display));
+        $pre_url = url('node/' . $previous->nid, array('absolute' => TRUE));
+        $next = node_load(itg_get_previousnext_weight($vvid + 1, $view_name, $view_display));
+        $next_url = url('node/' . $next->nid, array('absolute' => TRUE));
         ?>
         <div id="previous">
-            <a href="#">Previous</a>
+            <?php print  l('Previous', $pre_url); ?>
             <div class="prev-details">
-              <?php
-              $previous = node_load(itg_get_previousnext_weight($vvid - 1, $view_name, $view_display));
-              ?>
               <h4>
-                <?php
-                $pre_url = url('node/' . $previous->nid, array('absolute' => TRUE));
-                print l($previous->title, $pre_url);
-                ?>
+              <?php print l($previous->title, $pre_url); ?>
               </h4>
               <?php
               $pre_image = $previous->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
@@ -81,14 +79,10 @@
             </div>
           </div>
         <div id="next">
-            <a href="#">Next</a>
+           <?php print  l('Next', $next_url); ?>
             <div class="prev-details">
-              <?php
-              $next = node_load(itg_get_previousnext_weight($vvid + 1, $view_name, $view_display));
-              ?>
               <h4>
               <?php
-              $next_url = url('node/' . $next->nid, array('absolute' => TRUE));
               print l($next->title, $next_url);
               ?>
               </h4>
@@ -102,7 +96,7 @@
           </div>
           </div>
       <div class="tags">
-        <h3>टैग्स</h3> 
+        <h3><?php print t('टैग्स'); ?></h3> 
         <ul>      
           <?php
           foreach ($node->field_story_itg_tags['und'] as $tags) {
@@ -116,7 +110,7 @@
       </div>
       
       <div id="ads-place">Ads goes here</div>
-      <div id="api-place">Third party api goes here</div>
+     
       <?php 
            if (function_exists(global_comment_last_record)) {
                  $last_record = global_comment_last_record();
@@ -145,13 +139,13 @@
                <?php } ?>
       <div class="story-photos">
         <div class="half-grey-bg">
-        <h3>फोटोज</h3>
+        <h3><?php print t('फोटोज'); ?></h3>
         <?php print views_embed_view('related_photogallery','page', $node->field_primary_category[LANGUAGE_NONE][0]['value']); ?>
         </div>
       </div>
       <div class="popular-videos">
         <div class="half-grey-bg">
-          <h3>पॉपुलर वीडियोज़</h3>
+          <h3><?php print t('पॉपुलर वीडियोज़'); ?></h3>
           <div id="video-place"><?php print views_embed_view('related_photogallery','page_1', $node->field_primary_category[LANGUAGE_NONE][0]['value']); ?></div>
         </div>
       </div>

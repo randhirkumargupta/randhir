@@ -34,5 +34,4 @@
     <?php print $field->content; ?>
   <?php print $field->wrapper_suffix; ?>
 <?php endforeach; ?>
-<button class="hide_sh" rel="<?php print $row->nid; ?>">click</button>
-<div class="nxt"></div>
+<button class="hide_sh icon-related-content" rel="<?php print $row->nid; ?>">click</button>

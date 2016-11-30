@@ -286,7 +286,6 @@ function itg_related_hide_show_details() {
                     $final_related [] = $related_content[1];
                   }
                   $final_related = implode(' OR ', $final_related);
-  echo views_embed_view('sambandhit_khabre', 'page', $final_related);
-  echo '<span class="hide-rc"></span>';
+  echo '<div class="related-content-wrapper">' . views_embed_view('sambandhit_khabre', 'page', $final_related) . '<span class="hide-rc"></span></div>';
   exit;
 }
