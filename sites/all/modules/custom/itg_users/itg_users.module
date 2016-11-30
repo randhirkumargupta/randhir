@@ -60,11 +60,10 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
               jQuery(".confirm-user").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
   }
-if($form_id == 'user_register_form')
- //Sort roles in alphabetical order. 
-{
-      asort($form['account']['roles']['#options']);
-}
+    //Sort roles in alphabetical order.
+  if ($form_id == 'user_register_form') {
+    asort($form['account']['roles']['#options']);
+  }
 
   if ($form_id == "user_pass") {
     drupal_add_js("jQuery('#edit-name').blur(function(){
