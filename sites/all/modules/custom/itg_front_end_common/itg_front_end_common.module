@@ -212,6 +212,7 @@ function itg_front_end_common_views_pre_render(&$view) {
     foreach ($view->result as $related_video_result) {
       $cat_id = taxonomy_term_load($related_video_result->field_field_primary_category[0]['raw']['value']);
       $related_video_result->field_field_primary_category[0]['rendered']['#markup'] = $cat_id->name;
+      $related_video_result->node_title = mb_strimwidth($related_video_result->node_title, 0, 30, "..");
     }
   }
 }
