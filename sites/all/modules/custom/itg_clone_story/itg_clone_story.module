@@ -32,9 +32,9 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_new_title'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_new_title[0];
         $form['field_story_courtesy'][LANGUAGE_NONE][0]['value']['#value'] = $clone_arr_response->sm_field_story_courtesy[0];
         //$form['field_story_template_guru'][LANGUAGE_NONE][0]['value']['#default_value'] = $clone_arr_response->sm_field_story_template_guru[0];
-        $form['field_story_template_quotes'][LANGUAGE_NONE][0]['value']['#default_value'] = $clone_arr_response->sm_field_story_template_quotes[0];
-        $form['field_story_template_factoids'][LANGUAGE_NONE][0]['value']['#default_value'] = $clone_arr_response->sm_field_story_template_factoids[0];
-        $form['field_story_highlights'][LANGUAGE_NONE][0]['value']['#default_value'] = $clone_arr_response->sm_field_story_highlights[0];
+        //$form['field_story_template_quotes'][LANGUAGE_NONE][0]['value']['#default_value'] = $clone_arr_response->sm_field_story_template_quotes[0];
+        //$form['field_story_template_factoids'][LANGUAGE_NONE][0]['value']['#default_value'] = $clone_arr_response->sm_field_story_template_factoids[0];
+        //$form['field_story_highlights'][LANGUAGE_NONE][0]['value']['#default_value'] = $clone_arr_response->sm_field_story_highlights[0];
         $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_configurations;
         $form['field_story_social_media_integ'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_social_media_inte;
         $form['field_story_syndication'][LANGUAGE_NONE]['#default_value'] = array($clone_arr_response->sm_field_story_syndication[0]);
