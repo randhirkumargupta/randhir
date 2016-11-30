@@ -307,13 +307,7 @@ function itg_reporter_node_presave($node) {
         $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_twitter;
         field_attach_update('node', $story_node);
       }
-    }
-    // Unset empty career graph value.
-    foreach ($node->field_reporter_career_graph['und'] as $key => $graph_value) {
-      if ($graph_value['field_reporter_movie_name']['und'][0]['tid'] < 1) {
-        unset($node->field_reporter_career_graph['und'][$key]);
-      }
-    }
+    }    
   }
 }
 
