@@ -2477,6 +2477,9 @@ footer .footer-copyright {
   border-radius: 100%;
   border: 1px solid #ddd;
 }
+.story-section .story-expert-opinion .expert-detail {
+  margin-top: 15px;
+}
 .story-section .story-expert-opinion .left-side p.name {
   font-size: 14px;
   line-height: 18px;
