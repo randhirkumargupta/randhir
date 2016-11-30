@@ -1032,6 +1032,51 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event_backend-field_e_associate_highlights'.
+  $field_instances['node-event_backend-field_e_associate_highlights'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please add event highlights.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 46,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_e_associate_highlights',
+    'label' => 'Associate Event Highlights',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 14,
+    ),
+  );
+
   // Exported field_instance: 'node-event_backend-field_e_content_font_color'.
   $field_instances['node-event_backend-field_e_content_font_color'] = array(
     'bundle' => 'event_backend',
@@ -1067,7 +1112,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -1143,7 +1188,7 @@ function event_backend_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -1186,7 +1231,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -1230,7 +1275,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -1269,7 +1314,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -1312,7 +1357,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -1355,7 +1400,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 25,
+      'weight' => 26,
     ),
   );
 
@@ -1398,7 +1443,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -2082,7 +2127,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 4,
       ),
       'type' => 'text_textarea',
-      'weight' => 26,
+      'weight' => 27,
     ),
   );
 
@@ -2354,6 +2399,7 @@ function event_backend_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Associate Event Highlights');
   t('Associate Event Photo');
   t('Associate Event Video');
   t('Associate Sponsors');
@@ -2386,6 +2432,7 @@ function event_backend_field_default_field_instances() {
   t('Menu Font Color');
   t('No. of Tickets');
   t('Photo');
+  t('Please add event highlights.');
   t('Please add event photos.');
   t('Please add multiple short & crisp videos.');
   t('Program Schedule');

@@ -27,18 +27,14 @@ else {
 }
 
 ksort($data);
-if($current_date < $event_close_date){
+if($current_date < $event_close_date) {
 foreach ($data as $key => $value) {
   $tabs .= '<li style="background: '.$tab_highlighted_color.'" data-tag="Day-' . $key . '" class="event-program-tabs Day-' . $key . '">Day ' . $key . '</li>';
 }
 // if for live event
 $output = '';
 if ($current_date > $event_start_date && $current_date < $event_close_date) {
-  if (module_exists('itg_live_tv')) {
-    $banner_video = itg_live_tv_page_video();
-  }
-  $output = '<div style="live-event-title">' . $host_node->title . '</div>';
-  $output .= '<div style="margin-bottom: 20px;">' . $banner_video . '</div>';
+  $output .= itg_event_backend_get_highlights_block();
 }
 elseif ($current_date < $event_start_date && $current_date < $event_close_date) {
   $output = '<h2 class="block-title">'.$host_node->title.'</h2>';
@@ -111,7 +107,7 @@ foreach ($data as $key => $value) {
     }
     print '</div>';
   }
-}else{
+} else {
   $block = block_load('itg_event_backend', 'post_event_block');
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
   $output = render($render_array);

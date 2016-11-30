@@ -73,14 +73,26 @@ if (!in_array('administrator', $user->roles)) {
                     ?>
                 </nav>
 <?php endif; ?>
-            <div class="user-role">
-                <a href="<?php print $base_url . '/assigned-task-list'; ?>">
+<!--            <div class="user-role">
+              <a id="belly" href="javascript:void(0);" class="notifi">bell</a>          
+                    <i class="fa fa-bell-o"></i>
+                    <dfn><?php //if (function_exists('get_task_count_of_user')) {
+   // print get_task_count_of_user();
+//} ?></dfn>
+                     <div class="bell-notice"></div>
+                </div> -->
+                <span>
+                     <div class="user-role">
+                        <a id="belly" href="javascript:void(0);" class="notifi">  
+<!--                <a href="<?//php print $base_url . '/assigned-task-list'; ?>">-->
                     <i class="fa fa-bell-o"></i>
                     <dfn><?php if (function_exists('get_task_count_of_user')) {
     print get_task_count_of_user();
 } ?></dfn>
+                    <div class="bell-notice"></div>
                 </a> 
                 <span>
+
                     User role - 
                     <?php
                     // get role array
