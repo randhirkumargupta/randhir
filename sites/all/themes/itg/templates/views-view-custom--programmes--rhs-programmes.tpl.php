@@ -3,7 +3,7 @@
   <ul>
     <?php
     global $base_url;
-    foreach ($rows as $row) :
+    foreach ($rows as $row)  :
       $status = itg_category_manager_term_state($row['tid']);
       if ($status) {
         $view = views_get_view('programme_content');
@@ -18,10 +18,23 @@
               <?php print l($row['field_cm_display_title'], 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
             <?php endif; ?>
           </h4>
-
-          <span class="time"> <?php if (!empty($row['field_user_city'])) : ?>
+          <span class="time">
+            <?php if (!empty($row['field_program_timing_in_days'])) : ?>
+              <?php print $row['field_program_timing_in_days']; ?>
+            <?php endif; ?>
+            
+            <?php print t(" at ") ?>
+            
+            <?php if (!empty($row['field_user_city'])) : ?>
               <?php print $row['field_user_city']; ?>
-            <?php endif; ?></span>
+            <?php endif; ?>
+            
+            <?php if (!empty($row['field_time_period'])) : ?>
+              <?php print $row['field_time_period']; ?>
+            <?php endif; ?>
+          </span>
+
+          
           <div class="detail">
             <div class="pic">
               <?php if (isset($row['field_sponser_logo'])) : ?>

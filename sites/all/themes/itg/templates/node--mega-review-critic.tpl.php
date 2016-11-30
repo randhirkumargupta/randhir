@@ -166,6 +166,9 @@
             print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
             ?>
         </div>
+        <?php $video_date = format_date($video_node->created, 'custom', 'D, d, M, Y'); ?>
+        <div class="photo-date"><?php print $video_date ?></div>
+        <div class="photo-title"><?php print $video_node->title; ?></div>
         <?php endif; ?>
         <!-- Photos -->
         <?php $asso_photo_gallery = $node->field_associate_photo_gallery['und'][0]['target_id'];; ?>
@@ -187,6 +190,9 @@
                 <?php print $image_count; ?>
             </div>
         </div>
+        <?php $photo_date = format_date($photo_node->created, 'custom', 'D, d, M, Y'); ?>
+        <div class="photo-date"><?php print $photo_date ?></div>
+        <div class="photo-title"><?php print $photo_node->title; ?></div>
         <?php endif; ?>
     </div>
     <div class="career-graph">
