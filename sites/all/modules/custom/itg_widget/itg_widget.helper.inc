@@ -15,7 +15,7 @@ define('DONT_MISS_MIN_RANGE', 0);
 define('MOST_POPULAR_MAX_RANGE', 15);
 define('MOST_POPULAR_MIN_RANGE', 0);
 
-define('TOP_TAKES_MAX_RANGE', 4);
+define('TOP_TAKES_MAX_RANGE', 3);
 define('TOP_TAKES_MIN_RANGE', 0);
 
 define('WATCH_RIGHT_NOW_MAX_RANGE', 4);
