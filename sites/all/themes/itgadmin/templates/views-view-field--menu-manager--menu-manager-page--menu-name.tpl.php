@@ -22,5 +22,15 @@
  * the view is modified.
  */
 ?>
+<?php
 
-<?php print itg_report_node_edit_count($output); ?>
+$fid = (int) $row->itg_menu_manager_menu_name;
+if ($fid) {
+  $file_obj = file_load($row->itg_menu_manager_menu_name);
+  $icon_url = file_create_url($file_obj->uri);
+  echo '<img  src="' . $icon_url . '" height = "27px" width = "120px">';
+}
+else {
+  echo t("N/A");
+}
+?>

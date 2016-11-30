@@ -5436,6 +5436,16 @@ div.node{
     #file-preview {
       text-align: center;
     }
+    #imgtag{
+        float: left;
+    }
+    #imgtag, #imgtag1{
+        border-bottom: 2px solid #ddd;
+        padding: 10px 0;         
+    }
+    #imgtag2{
+        padding: 10px 0;         
+    }
   }
 }
 
@@ -5963,6 +5973,16 @@ div.node{
     .view-content{
       margin: 0 -15px;
       .photo-list{
+          zoom:1;
+    &:before, &:after {
+        content: "";
+        display: block;       
+        height: 0; 
+        overflow: hidden; 
+    }
+    &:after {
+        clear: both;
+    }
         li{
           padding: 15px;
           @extend .fleft;
@@ -5996,6 +6016,9 @@ div.node{
               color: #494949;
               font-size: 14px;
             }
+          }
+          &:nth-child(4n+1){
+              clear:left;
           }
         }
       }

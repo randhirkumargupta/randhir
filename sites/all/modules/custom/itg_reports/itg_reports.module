@@ -68,11 +68,13 @@ function itg_reports_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}.
  */
 function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
   switch ($form['#id']) {
     case 'views-exposed-form-report-filed-content-page':
       $form['node_status']['#options'][1] = t('Published');
       $form['node_status']['#options'][0] = t('Not published');
       $form['moderation'] = array(
+        '#title' => t('Moderation'),
         '#type' => 'select',
         '#options' => array('all' => 'Any', 'yes' => 'Yes', 'no' => 'No'),
         '#default_value' => 'all',
@@ -85,6 +87,10 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
       $form['#after_build'][] = 'itg_reports_view_after_build';
 
       break;
+    case 'views-exposed-form-comparative-reports-page':
+      $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
+      $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
+      $form['#after_build'][] = 'itg_reports_view_after_build';
   }
 }
 
@@ -140,7 +146,7 @@ function itg_reports_block_view($delta = '') {
           );
 
           // Add missing year.
-          itg_reports_missing_year($chart_data['graph']);
+          itg_reports_missing_year($chart_data['graph']);          
 
           $chart['career'] = array(
             '#type' => 'chart_data',
@@ -182,34 +188,31 @@ function itg_reports_block_view($delta = '') {
 function itg_report_get_graph_data() {
   $arg = arg();
   $chart_data = array();
-  $node = node_load($arg[1]);
-  foreach ($node->field_mega_review_cast['und'] as $field_collection) {
+  $node = node_load($arg[1]);  
+  foreach ($node->field_mega_review_career_graph['und'] as $field_collection) {    
     $data = array();
     $actor_data = array();
-    foreach ($field_collection['entity']->field_reporter_career_graph['und'] as $key => $fids) {
-      $celebrity = entity_load('field_collection_item', array($fids['value']));
-      $movie_tid = $celebrity[$fids['value']]->field_reporter_movie_name['und'][0]['tid'];
-      $term = taxonomy_term_load($movie_tid);
-      $movie_name = $term->name;
-
-      $timestamp = $celebrity[$fids['value']]->field_reporter_movie_year['und'][0]['value'];
-      $movie_year = format_date($timestamp, 'custom', 'Y');
+    foreach ($field_collection['entity']->field_reporter_movie_name['und'] as $key => $tids) {      
+      $movie_details = taxonomy_term_load($tids['tid']);      
+      $movie_name = $movie_details->name;
+      $timestamp = $movie_details->field_reporter_movie_year['und'][0]['value'];
+      $movie_year = format_date($timestamp, 'custom', 'Y');            
       $actor_data[] = array(
         'actor_name' => $field_collection['entity']->title,
         'movie_name' => $movie_name,
         'actor_pic' => $field_collection['entity']->field_story_extra_large_image['und'][0]['uri'],
-      );
+      );      
       $data[] = array(
         (int) $movie_year,
-        (int) $celebrity[$fids['value']]->field_reporter_earning['und'][0]['value'],
+        (int) $movie_details->field_movie_earning['und'][0]['value'],
       );
-    }
+    }    
     $chart_data[] = array(
       'actor' => $actor_data,
       'graph' => $data,
     );
   }
-
+  
   return $chart_data;
 }
 
@@ -277,4 +280,17 @@ function itg_report_node_edit_count($output) {
   }
   
   return $result;
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_views_pre_render(&$view) {  
+  if ($view->name == 'report_filed_content') {
+    foreach ($view->result as $rows) {
+      $rows->nid = itg_report_node_edit_count($rows->nid);
+    }
+  }
 }

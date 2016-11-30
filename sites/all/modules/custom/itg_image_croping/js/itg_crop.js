@@ -78,7 +78,7 @@
                     jQuery.ajax({
                         url: Drupal.settings.basePath + 'imagetotag',
                         type: 'post',
-                        data: {'fid': image_fiedlid, 'field_name': field_name,'image_fields': imagefield },
+                        data: {'fid': image_fiedlid, 'field_name': field_name,'image_fields': imagefield,'content_name': content_type },
                         success: function(data) {
                             
                             jQuery('#file-preview').html(data);

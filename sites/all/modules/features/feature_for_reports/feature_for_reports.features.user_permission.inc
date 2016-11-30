@@ -14,6 +14,7 @@ function feature_for_reports_user_default_permissions() {
   $permissions['view report dashboard'] = array(
     'name' => 'view report dashboard',
     'roles' => array(
+      'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),

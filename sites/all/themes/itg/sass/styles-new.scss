@@ -169,6 +169,18 @@
             li{
                 padding: 0 5px;
                 cursor: pointer;
+                &:focus{
+                 outline: none;
+                  border: none;  
+                }
+                img{
+                    border: 1px solid transparent;
+                }
+                &.slick-current{
+                    img{
+                        border: 1px solid #fff;
+                    }
+                }
             }
         }
     }
