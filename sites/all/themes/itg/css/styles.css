@@ -9241,4 +9241,40 @@ footer .footer-copyright {
   right: 0;
 }
 
+.listicle-page {
+  width: 100%;
+}
+.listicle-page .listicle-detail {
+  border-top: 1px solid #ccc;
+}
+.listicle-page .listicle-detail > span {
+  width: 34px;
+  height: 34px;
+  background: #a00606;
+  border-radius: 100%;
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  line-height: 34px;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 5px;
+}
+.listicle-page .listicle-detail .listicle-description {
+  font-size: 16px;
+  color: #282828;
+  display: inline-block;
+  vertical-align: top;
+  width: 90%;
+  padding-left: 15px;
+}
+.listicle-page .listicle-detail .listicle-description span {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.listicle-page .listicle-detail + .listicle-detail {
+  border-top: 1px solid #ccc;
+}
+
 /*css end factoids-slider*/

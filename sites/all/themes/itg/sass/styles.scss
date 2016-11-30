@@ -7662,4 +7662,37 @@ input[type="radio"]:checked + label:after{
         right: 0;
     }
 }
+.listicle-page{
+    @include calculate-width(1);
+    .listicle-detail{
+        border-top: 1px solid #ccc;   
+        > span{
+            width: 34px;
+            height: 34px;
+            background: #a00606;
+            border-radius: 100%;
+            font-size: 24px;
+            @include display-inline;
+            text-align: center;
+            line-height: 34px;
+            color: #fff;
+            font-weight: 700;        
+            margin-top: 5px;
+        }
+        .listicle-description{
+            font-size: 16px;
+            color: #282828;    
+            @include display-inline;
+            width: 90%;
+            padding-left: 15px;
+            span{
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+        }
+        + .listicle-detail{
+            border-top: 1px solid #ccc;    
+        }
+    }
+}
 /*css end factoids-slider*/
