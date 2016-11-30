@@ -1964,6 +1964,41 @@ footer{
             }
         }
     }
+    .story-expert-opinion{
+        background: #f5f5f5;
+        width: 320px;
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        padding: 10px;
+        font-family: $itg-robotoslab;
+        h4{
+            font-family: $itg-robotoslab;
+            font-family: 20px;
+        }
+        img{
+            width: 70px;
+            height: 70px;
+            border-radius: 100%; 
+            border:1px solid #ddd; 
+        }
+        .left-side{
+            p.name{
+                font-size: 14px;
+                line-height: 18px;
+                margin-bottom: 5px;
+                color: #000;
+            }
+            p{
+                color: #747474;
+                line-height: 18px;
+                font-size: 12px;
+            }
+        }
+        h2{
+            font-family: $itg-robotoslab;
+        }
+    }
 }
 .buzz-feedback{    
     @include calculate-width(1);
@@ -5145,6 +5180,7 @@ footer{
                 border: none;
                 margin: 10px 0 5px 0;
                 margin-right: 20px;
+                cursor: pointer;
                 i{
                     font-size: 28px;
                     font-weight: normal;

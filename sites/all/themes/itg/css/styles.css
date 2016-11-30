@@ -2458,6 +2458,39 @@ footer .footer-copyright {
   font-weight: 700;
   line-height: 35px;
 }
+.story-section .story-expert-opinion {
+  background: #f5f5f5;
+  width: 320px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-family: "Roboto Slab", sans-serif;
+}
+.story-section .story-expert-opinion h4 {
+  font-family: "Roboto Slab", sans-serif;
+  font-family: 20px;
+}
+.story-section .story-expert-opinion img {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  border: 1px solid #ddd;
+}
+.story-section .story-expert-opinion .left-side p.name {
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 5px;
+  color: #000;
+}
+.story-section .story-expert-opinion .left-side p {
+  color: #747474;
+  line-height: 18px;
+  font-size: 12px;
+}
+.story-section .story-expert-opinion h2 {
+  font-family: "Roboto Slab", sans-serif;
+}
 
 .buzz-feedback {
   width: 100%;
@@ -6621,6 +6654,7 @@ footer .footer-copyright {
   border: none;
   margin: 10px 0 5px 0;
   margin-right: 20px;
+  cursor: pointer;
 }
 #block-itg-event-backend-program-tab-block .top-block-highlight .highlights-container button i {
   font-size: 28px;
