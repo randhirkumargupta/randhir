@@ -117,19 +117,31 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_gallery_kicer', 'galleryslug')->xpath('galleryslug');
     $this->addFieldMapping('field_featured', 'featured')->xpath('featured');
     $this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
+    
+    //code for date
+    $this->addFieldMapping('created', 'createddate')->xpath('createddate');    
+    $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
+    $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate');
+    $this->addFieldMapping('field_story_expires', 'storyexpires')->xpath('storyexpires');
+    $this->addFieldMapping('field_story_expiry_date', 'storyexpirydate')->xpath('storyexpirydate');
+    
     // for image
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
     $this->addFieldMapping('field_story_extra_large_image:title', 'extra_large_title')->xpath('extra_large_title');
+    
     $this->addFieldMapping('field_story_large_image', 'largeimage')->xpath('largeimage');
     $this->addFieldMapping('field_story_large_image:alt', 'large_alt')->xpath('large_alt');
     $this->addFieldMapping('field_story_large_image:title', 'large_title')->xpath('large_title');
+    
     $this->addFieldMapping('field_story_medium_image', 'mediumimage')->xpath('mediumimage');
     $this->addFieldMapping('field_story_medium_image:alt', 'mediumimage_alt')->xpath('mediumimage_alt');
     $this->addFieldMapping('field_story_medium_image:title', 'mediumimage_title')->xpath('mediumimage_title');
+    
     $this->addFieldMapping('field_story_small_image', 'smallimage')->xpath('smallimage');
     $this->addFieldMapping('field_story_small_image:alt', 'smallimage_alt')->xpath('smallimage_alt');
     $this->addFieldMapping('field_story_small_image:title', 'smallimage_title')->xpath('smallimage_title');
+    
     $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
     $this->addFieldMapping('field_story_extra_small_image:alt', 'extra_small_alt')->xpath('extra_small_alt');
     $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');
@@ -182,13 +194,15 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
+        $category_array = explode('#', $final_category);
+        $last_value = end($category_array);
         $source_cid = (string) $final_category;
         $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
         $data_category[]['tid'] = $orignal_category;
       }
     }
     $row->category_new = $data_category;
-    // End category migrate
+    
     // Story tags migration
     $data_tags = '';
 
@@ -200,7 +214,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
       }
     }
     $row->tag_new = $data_tags;
-    // End story tags migration
+    
     // Syndication checkbox
     if ((string) $row->xml->syndication == 'yes') {
       $row->xml->syndication = 'Yes';
@@ -223,10 +237,12 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $row->final_social_checkbox = $final_social;
 
     // Primary category
-    if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
-      $source_cid = (string) $row->xml->primarycategory;
+    if (isset($row->xml->primary_category) && !empty($row->xml->primary_category)) {
+      $category_primary_array = explode('#', $row->xml->primary_category);
+      $last_primary_value = end($category_primary_array);
+      $source_cid = (string) $last_primary_value;      
       $orignal_pcategory = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
-      $row->xml->primarycategory = $orignal_pcategory;
+      $row->xml->primary_category = $orignal_pcategory;
     }
     //social media integration checkboxes
     if (isset($row->xml->socialmediaintegration) && !empty($row->xml->socialmediaintegration)) {
@@ -286,9 +302,9 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
   public function complete($entity, $row) {
     $node = node_load($entity->nid);
-    if (isset($row->xml->gallery->image_details) && !empty($row->xml->gallery->image_details)) {
+    if (isset($row->xml->gallery->gallery) && !empty($row->xml->gallery->gallery)) {
       $key = 0;
-      foreach ($row->xml->gallery->image_details as $value) {
+      foreach ($row->xml->gallery->gallery as $value) {
         $image_url = (string) $value->image_url;
         $caption = (string) $value->caption;
         $credit = (string) $value->credit;

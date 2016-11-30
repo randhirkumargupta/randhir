@@ -2,7 +2,7 @@
 <?php
 $category = itg_videogallery_get_term(arg(1));
 if (!in_array(variable_get('ipl_for_widget'), $category)) {
-  print '<h3><span>Other Galleries</span></h3>';
+  print '<h3><span>'.t('Other Galleries').'</span></h3>';
 }
 ?>
 <ul class="photo-list">

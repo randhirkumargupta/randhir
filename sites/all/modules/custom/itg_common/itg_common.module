@@ -24,23 +24,20 @@ function itg_common_init() {
  * @return array $data
  */
 function itg_common_dropdown_supplement($id = '') {
-
-    // Fetch query for supplements
+    // Fetch supplements for selected magazine
     $select = t('- None -');
     $data = array('_none' => $select);
-
     $query = db_select('field_data_field_supp_select_magazine', 'm');
     $query->join('node', 'n', 'm.entity_id = n.nid');
     $query->fields('m', array('entity_id'));
     $query->fields('n', array('title'));
-    $query->condition('field_supp_select_magazine_target_id', $id, '=');
-
+    $query->condition('n.status', 1, '=');
+    $query->condition('m.field_supp_select_magazine_target_id', $id, '=');
     $result = $query->execute();
 
     while ($record = $result->fetchAssoc()) {
         $data[$record['entity_id']] = $record['title'];
     }
-
     return $data;
 }
 
@@ -135,7 +132,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'mega_review_critic_node_form' || $form_id=='custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form') {      
       $form['#after_build'][] = 'itg_common_cancel_button';
     }
-
+    if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {
+      $form['#after_build'][] = 'itg_common_cancel_button';
+    }
     // Auto Generate image according photo gallery
     if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'podcast_node_form') {
         $form['field_story_extra_large_image']['#suffix'] = '<a class="img-crt button" href="javascript:;">Generate Image</a><span class="generate-image-error error"></span>';
