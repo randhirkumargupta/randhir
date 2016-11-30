@@ -9278,3 +9278,64 @@ footer .footer-copyright {
 }
 
 /*css end factoids-slider*/
+/*css start Ask an expret for all page*/
+#block-itg-ask-expert-custom-ask-expert-form-block, .ask-question-sidebar {
+  padding: 15px;
+  font-family: roboto;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 50px;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block .form-type-textarea, #block-itg-ask-expert-custom-ask-expert-form-block .form-type-textfield, .ask-question-sidebar .form-type-textarea, .ask-question-sidebar .form-type-textfield {
+  margin: 0;
+  padding: 0;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form, .ask-question-sidebar #itg-custom-ask-an-expert-form {
+  zoom: 1;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:before, #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:after, .ask-question-sidebar #itg-custom-ask-an-expert-form:before, .ask-question-sidebar #itg-custom-ask-an-expert-form:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:after, .ask-question-sidebar #itg-custom-ask-an-expert-form:after {
+  clear: both;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form input[type="text"], .ask-question-sidebar #itg-custom-ask-an-expert-form input[type="text"] {
+  position: static;
+  left: auto;
+  top: auto;
+  width: 110px;
+  font-family: roboto;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form textarea, .ask-question-sidebar #itg-custom-ask-an-expert-form textarea {
+  font-family: roboto;
+  height: 65px;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #question p, .ask-question-sidebar #itg-custom-ask-an-expert-form #question p {
+  color: #000;
+  font-size: 12px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname, #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askemail, #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form input[type="submit"], .ask-question-sidebar #itg-custom-ask-an-expert-form #askname, .ask-question-sidebar #itg-custom-ask-an-expert-form #askemail, .ask-question-sidebar #itg-custom-ask-an-expert-form input[type="submit"] {
+  float: left;
+  width: 33%;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askemail, .ask-question-sidebar #itg-custom-ask-an-expert-form #askemail {
+  margin: 0 12px;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form input[type="submit"], .ask-question-sidebar #itg-custom-ask-an-expert-form input[type="submit"] {
+  background: #000 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  height: 32px;
+  text-transform: uppercase;
+  width: 90px;
+  cursor: pointer;
+  font-family: roboto;
+}
+
+/*css End Ask an expret for all page*/

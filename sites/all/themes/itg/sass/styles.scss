@@ -7696,3 +7696,58 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*css end factoids-slider*/
+
+
+/*css start Ask an expret for all page*/
+#block-itg-ask-expert-custom-ask-expert-form-block, .ask-question-sidebar{    
+        padding:15px;
+        font-family: roboto;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 50px;
+        .form-type-textarea, .form-type-textfield{
+            margin: 0;
+            padding: 0;            
+        }
+        #itg-custom-ask-an-expert-form{
+            @include clearfix;
+            input[type="text"]{
+                position: static;
+                left: auto;
+                top:auto;
+                width: 110px;
+                font-family: roboto;
+            }
+            textarea{
+                font-family: roboto;
+                height: 65px;
+            }
+            #question{
+                p{
+                    color: #000;
+                    font-size: 12px;
+                    margin-bottom: 20px;
+                    margin-top: 10px;
+                }
+            }
+            #askname, #askemail, input[type="submit"]{
+                float: left;
+                width: 33%;
+            }
+            #askemail{
+                margin: 0 12px;
+            }
+            input[type="submit"]{
+                background: #000 none repeat scroll 0 0;
+                border: medium none;
+                border-radius: 5px;
+                color: #fff;                
+                font-size: 16px;
+                height: 32px;                
+                text-transform: uppercase;
+                width: 90px;
+                cursor: pointer;
+                font-family: roboto;
+            }
+        }        
+    }
+    /*css End Ask an expret for all page*/
