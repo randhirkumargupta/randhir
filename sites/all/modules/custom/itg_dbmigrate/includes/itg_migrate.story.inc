@@ -95,6 +95,11 @@ class ItgStoryMigration extends XMLMigration {
       'quote_title' => t('quote_title'),
       'quote_image' => t('quote_image'),
       'factoids_title' => t('factoids_title'),
+      'title' => t('title'),
+      'rating' => t('rating'),
+      'pron-cons-img' => t('pron-cons-img'),
+      'item' => t('item'),
+      'factoids_title' => t('factoids_title'),
       'sefurl' => t('Sefurl'),
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
@@ -240,6 +245,12 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_factoids_title', 'factoids_title')->xpath('fulltext_conclaveformat/factoids_title');
     $this->addFieldMapping('field_story_quote_image', 'quote_image')->xpath('fulltext_conclaveformat/quote_image');
     
+    $this->addFieldMapping('field_story_tech_pros_cons_title', 'title')->xpath('pros-cons/tech-pros-cons-main/title');
+    $this->addFieldMapping('field_story_tech_pros_cons_ratin', 'rating')->xpath('pros-cons/tech-pros-cons-main/rating');
+    $this->addFieldMapping('field_story_tech_pros_cons_image', 'pron-cons-img')->xpath('pros-cons/tech-pros-cons-main/pron-cons-img');
+    $this->addFieldMapping('field_story_technology_pros', 'item')->xpath('tech-pros/item');
+    $this->addFieldMapping('field_story_technology_cons', 'item')->xpath('tech-cons/item');
+    $this->addFieldMapping('field_story_tech_image_gallery', 'image')->xpath('tech-image-gallery/image');
 
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
@@ -489,8 +500,9 @@ class ItgStoryMigration extends XMLMigration {
 
   public function complete($entity, $row) {
     $node = node_load($entity->nid);
-    $key = 0;
-    //if (isset($row->xml->buzz_content->buzz)) {
+    
+    if (isset($row->xml->buzz_content->buzz)) {
+      $key = 0;
       foreach ($row->xml->buzz_content->buzz as $value) {
         $headline = (string) $value->headline;
         $image_url = (string) $value->image;
@@ -512,6 +524,10 @@ class ItgStoryMigration extends XMLMigration {
         $node->field_story_template_buzz[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
         $key++;
       }
+    }
+      
+     
+    if (isset($row->xml->fulltext_conclaveformat->listicle_content)) {
       $count++;
       foreach ($row->xml->fulltext_conclaveformat->listicle_content as $value) {
         $listicle = (string) $value->listicle;
@@ -527,9 +543,14 @@ class ItgStoryMigration extends XMLMigration {
         $node->field_story_listicle[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
         $count++;
       }
-      
-      field_attach_update('node', $node);
-    //}
+    }
+    
+   if (isset($row->xml->buzz_content->buzz) || isset($row->xml->fulltext_conclaveformat->listicle_content)) {
+    field_attach_update('node', $node);
+   }
+   
+   //code for like and dislike
+  
   }
 
 }
