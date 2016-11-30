@@ -6594,6 +6594,39 @@ footer .footer-copyright {
   background: #a00606 !important;
   color: #fff;
 }
+#block-itg-event-backend-program-tab-block .top-block-highlight {
+  margin-bottom: 50px;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight h2 {
+  margin-bottom: 0;
+  color: #ef3c24;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video h2 {
+  border-bottom: snow;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video iframe {
+  width: 100%;
+  height: 50vh;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight .highlights-container .wrap-listing {
+  height: 345px;
+  overflow: auto;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight .highlights-container .h-list {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight .highlights-container button {
+  background: transparent;
+  border: none;
+  margin: 10px 0 5px 0;
+  margin-right: 20px;
+}
+#block-itg-event-backend-program-tab-block .top-block-highlight .highlights-container button i {
+  font-size: 28px;
+  font-weight: normal;
+  color: #464646;
+}
 
 #block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2, .sponsor-detail-container h2, #block-views-event-subsite-speaker-block-2 h2, #block-views-event-subsite-speaker-block-3 h2, #block-views-event-subsite-speaker-block-3 h2 {
   font-size: 20px;
