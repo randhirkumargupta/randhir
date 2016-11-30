@@ -205,6 +205,8 @@ function features_for_story_user_default_permissions() {
   $permissions['view moderation history'] = array(
     'name' => 'view moderation history',
     'roles' => array(
+      'Editor' => 'Editor',
+      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',

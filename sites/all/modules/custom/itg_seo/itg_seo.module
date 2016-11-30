@@ -87,6 +87,7 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
             || $form_id == 'ask_an_expert_node_form'
             || $form_id == 'event_configurations_node_form'
             || $form_id == 'event_backend_node_form'
+            || $form_id == 'heighlights_node_form'
             || $form['#vocabulary']->machine_name == 'category_management'
             ) {
       if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
