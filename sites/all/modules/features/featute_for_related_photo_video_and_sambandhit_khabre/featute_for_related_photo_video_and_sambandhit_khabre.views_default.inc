@@ -160,13 +160,20 @@ function featute_for_related_photo_video_and_sambandhit_khabre_views_default_vie
     'image_style' => 'medium',
     'image_link' => '',
   );
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Field: Field: Byline */
   $handler->display->display_options['fields']['field_story_reporter']['id'] = 'field_story_reporter';
   $handler->display->display_options['fields']['field_story_reporter']['table'] = 'field_data_field_story_reporter';
@@ -176,6 +183,7 @@ function featute_for_related_photo_video_and_sambandhit_khabre_views_default_vie
   $handler->display->display_options['fields']['field_story_reporter']['settings'] = array(
     'link' => 0,
   );
+  $handler->display->display_options['fields']['field_story_reporter']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_story_reporter']['delta_offset'] = '0';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
