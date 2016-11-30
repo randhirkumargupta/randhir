@@ -34,14 +34,7 @@ foreach ($data as $key => $value) {
 // if for live event
 $output = '';
 if ($current_date > $event_start_date && $current_date < $event_close_date) {
-  if (module_exists('itg_live_tv')) {
-    $banner_video = itg_live_tv_page_video();
-  }
-
-  $associated_highlights = itg_event_backend_get_highlights_block();
-  $output = '<div style="live-event-title">' . $host_node->title . '</div>';
-  $output .= '<div style="margin-bottom: 20px;">' . $banner_video . '</div>';
-  $output .= '<div class="event-highlights">'.$associated_highlights.'</div>';
+  $output .= itg_event_backend_get_highlights_block();
 }
 elseif ($current_date < $event_start_date && $current_date < $event_close_date) {
   $output = '<h2 class="block-title">'.$host_node->title.'</h2>';
