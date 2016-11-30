@@ -4,9 +4,11 @@
         <ul class="slickslide">
             <?php foreach ($rows as $index => $row): ?>
                 <li >
-                    <?php // class="imgtags" img-fid=" <?php print $row['fid'];" use for image taggin in figure tag
+                    <?php // class="imgtags"  use for image taggin in figure tag
                     ?>
-                    <figure >
+                   
+                    <figure class="" img-fid=" <?php print $row['fid'];?>">
+
                         <?php print $row['field_images']; ?>                    
                     </figure>
                 </li>
