@@ -505,7 +505,7 @@ function feature_for_so_sorry_views_default_views() {
       'postpone_processing' => 0,
       'skip_confirmation' => 1,
       'override_label' => 1,
-      'label' => 'Add To So Sorry Most Pupular',
+      'label' => 'Add To So Sorry Most Popular',
     ),
   );
   /* Field: Content: Title */

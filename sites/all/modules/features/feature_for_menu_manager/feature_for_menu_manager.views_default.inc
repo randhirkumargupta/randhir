@@ -245,6 +245,11 @@ function feature_for_menu_manager_views_default_views() {
   $handler->display->display_options['fields']['url']['table'] = 'itg_menu_manager';
   $handler->display->display_options['fields']['url']['field'] = 'url';
   $handler->display->display_options['fields']['url']['label'] = 'Link';
+  /* Field: Menu Manager: Menu name */
+  $handler->display->display_options['fields']['menu_name']['id'] = 'menu_name';
+  $handler->display->display_options['fields']['menu_name']['table'] = 'itg_menu_manager';
+  $handler->display->display_options['fields']['menu_name']['field'] = 'menu_name';
+  $handler->display->display_options['fields']['menu_name']['label'] = 'Icon';
   /* Field: Menu Manager: Url Type */
   $handler->display->display_options['fields']['url_type']['id'] = 'url_type';
   $handler->display->display_options['fields']['url_type']['table'] = 'itg_menu_manager';

@@ -4445,6 +4445,9 @@ footer .footer-copyright {
   display: block;
 }
 
+.view-photo-list-of-category, .view-video-list-of-category {
+  position: relative;
+}
 .view-photo-list-of-category .view-filters .views-exposed-form, .view-video-list-of-category .view-filters .views-exposed-form {
   display: block;
 }

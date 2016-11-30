@@ -574,6 +574,52 @@ function mega_review_critic_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-mega_review_critic-field_mega_review_career_graph'.
+  $field_instances['node-mega_review_critic-field_mega_review_career_graph'] = array(
+    'bundle' => 'mega_review_critic',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 25,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_mega_review_career_graph',
+    'label' => 'Career Graph',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 31,
+    ),
+  );
+
   // Exported field_instance: 'node-mega_review_critic-field_mega_review_cast'.
   $field_instances['node-mega_review_critic-field_mega_review_cast'] = array(
     'bundle' => 'mega_review_critic',
@@ -582,7 +628,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => ' Please select cast name',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
           'link' => FALSE,
@@ -628,7 +674,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Director',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -671,7 +717,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Movie Plot',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -848,7 +894,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => 'Youtube url',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'youtube',
         'settings' => array(
           'youtube_autohide' => FALSE,
@@ -1251,7 +1297,7 @@ function mega_review_critic_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -1410,6 +1456,7 @@ function mega_review_critic_features_field_default_field_instances() {
   t('About');
   t('Associate Photo Gallery');
   t('Associate Video');
+  t('Career Graph');
   t('Cast');
   t('Description');
   t('Director');
