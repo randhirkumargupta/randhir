@@ -1970,20 +1970,22 @@ footer{
         float: left;
         margin-right: 20px;
         margin-bottom: 20px;
-        padding: 10px;
+        padding: 10px 15px;
         font-family: $itg-robotoslab;
         h4{
-            font-family: $itg-robotoslab;
-            font-family: 20px;
+            font-family: "Roboto Slab",sans-serif;
+            font-size: 22px;
+            font-weight: 700;
         }
         img{
             width: 70px;
             height: 70px;
             border-radius: 100%; 
-            border:1px solid #ddd; 
+            border: 2px solid #ddd; 
         }
         .expert-detail{
-                margin-top: 15px;
+                margin-top: 25px;
+                margin-bottom: 25px;
         }
         .left-side{
             p.name{
@@ -7755,7 +7757,9 @@ input[type="radio"]:checked + label:after{
     }
 }
 .listicle-page{
-    @include calculate-width(1);
+    &.story-right{
+        @include calculate-width(1);   
+    }    
     .listicle-detail{
         border-top: 1px solid #ccc;   
         > span{
@@ -7769,14 +7773,14 @@ input[type="radio"]:checked + label:after{
             line-height: 34px;
             color: #fff;
             font-weight: 700;        
-            margin-top: 5px;
+            margin-top: 15px;
         }
         .listicle-description{
             font-size: 16px;
             color: #282828;    
             @include display-inline;
             width: 90%;
-            padding-left: 15px;
+            padding: 15px;
             span{
                 font-weight: 600;
                 text-transform: capitalize;
@@ -7851,3 +7855,33 @@ input[type="radio"]:checked + label:after{
         }        
     }
     /*css End Ask an expret for all page*/
+    
+/* new changes defalt section page*/
+.itg-layout-container.default-section{
+    .auto-block-1, .auto-block-2{
+        height: 673px;
+    }
+    .auto-block-1, .auto-block-2{
+        border: 1px solid $border-color;
+    }
+    .auto-block-2{
+        position: relative;
+        .special-top-news {
+            overflow: hidden;            
+            height: 100%;
+            .widget-title{
+                position: absolute;
+            }
+            ul{
+                padding-top: 20px !important;
+            }
+        }
+    }
+    .itg-listing, .featured-news{
+        border: none;
+    }    
+    .itg-top-section .top-colum-2 .droppable{
+        margin-bottom: 0;
+    }
+}
+/* new changes defalt section page end*/
