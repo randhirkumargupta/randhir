@@ -11,7 +11,7 @@ class ItgCityMigration extends XMLMigration {
 
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'name' => t('city name'),
+      'city' => t('city name'),
       'metatitle' => t('metatitle'),
       'metadesc' => t('metadesc'),
       'metakey' => t('metakey'),      
@@ -28,7 +28,7 @@ class ItgCityMigration extends XMLMigration {
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/item/city';
+    $item_xpath = '/data/row';
     
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /categories/category/id.
@@ -64,7 +64,7 @@ class ItgCityMigration extends XMLMigration {
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
     
-    $this->addFieldMapping('name', 'name')->xpath('name');    
+    $this->addFieldMapping('name', 'name')->xpath('city');    
     $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
     $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
