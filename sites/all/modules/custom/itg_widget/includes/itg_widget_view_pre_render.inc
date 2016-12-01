@@ -252,6 +252,13 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+   elseif ($view->name == "at_most_popular_widget" && $view->current_display == 'at_most_popular') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Most Popular Widget'), 'at-most-popular-widget-order-reorder', array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $view->attachment_before = $header_content;
+    }
+  }
   // Aaj tak work end.
    elseif ($view->name == "key_candidate" && $view->current_display == 'special_key_candidate_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
@@ -260,4 +267,5 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  
 }

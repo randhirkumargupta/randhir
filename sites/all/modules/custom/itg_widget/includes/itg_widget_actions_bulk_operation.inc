@@ -164,6 +164,12 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     $big_story_data = $form_state;
     save_at_big_story_widget_data($big_story_data);
   }
+  if ($current_display == 'at_most_popular') {
+    // All Code for big sotry.
+    module_load_include('inc', 'itg_widget', 'includes/at_widget_most_popular');
+    $widget_most_popular = $form_state;
+    save_at_widget_most_popular_widget_data($widget_most_popular);
+  }
   // Work done for aaj tak end here
   else {
     // Logic to skip nodes which are already in itg_widget_order table

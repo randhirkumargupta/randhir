@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for most popular widget feature.
+ */
+
+include_once 'feature_for_most_popular_widget.features.inc';
