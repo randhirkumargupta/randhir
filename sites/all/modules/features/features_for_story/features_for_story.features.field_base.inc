@@ -494,7 +494,7 @@ function features_for_story_field_default_field_bases() {
         'display_lock' => 'Display Lock',
         'set_as_featured' => 'Set As Featured',
         'tv' => 'Associate Tv',
-        'noindex_nofollow' => 'Noindex&No follow',
+        'noindex_nofollow' => 'Noindex & No follow',
       ),
       'allowed_values_function' => '',
     ),
@@ -594,6 +594,30 @@ function features_for_story_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_story_expertise'.
+  $field_bases['field_story_expertise'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_expertise',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_story_expires'.
   $field_bases['field_story_expires'] = array(
     'active' => 1,
@@ -645,6 +669,7 @@ function features_for_story_field_default_field_bases() {
         'second' => 0,
         'year' => 'year',
       ),
+      'repeat' => 0,
       'timezone_db' => '',
       'todate' => '',
       'tz_handling' => 'none',
@@ -903,6 +928,7 @@ function features_for_story_field_default_field_bases() {
         'second' => 0,
         'year' => 'year',
       ),
+      'repeat' => 0,
       'timezone_db' => '',
       'todate' => '',
       'tz_handling' => 'none',
@@ -1240,6 +1266,30 @@ function features_for_story_field_default_field_bases() {
     'type' => 'image',
   );
 
+  // Exported field_base: 'field_story_mosimage'.
+  $field_bases['field_story_mosimage'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_mosimage',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_story_new_title'.
   $field_bases['field_story_new_title'] = array(
     'active' => 1,
@@ -1431,6 +1481,7 @@ function features_for_story_field_default_field_bases() {
         'second' => 0,
         'year' => 'year',
       ),
+      'repeat' => 0,
       'timezone_db' => 'UTC',
       'todate' => '',
       'tz_handling' => 'site',
