@@ -2012,6 +2012,10 @@ div.vertical-tabs .form-textarea-wrapper {
   cursor: pointer;
 }
 
+.generate-image {
+  display: none;
+}
+
 .img-crt {
   margin-left: 250px;
 }
@@ -5921,15 +5925,20 @@ div.node #comments h2 {
 .itg_image_repository #preview-wrapper #file-preview {
   text-align: center;
 }
-.itg_image_repository #preview-wrapper #imgtag {
-  float: left;
+.itg_image_repository #preview-wrapper .multipal-crop-images {
+  box-shadow: 0 0 5px #ccc;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
+  min-height: inherit;
+  border: 3px solid #fff;
+  margin-bottom: 30px;
 }
-.itg_image_repository #preview-wrapper #imgtag, .itg_image_repository #preview-wrapper #imgtag1 {
-  border-bottom: 2px solid #ddd;
-  padding: 10px 0;
+.itg_image_repository #preview-wrapper .tag-box-input {
+  margin: 15px 0;
 }
-.itg_image_repository #preview-wrapper #imgtag2 {
-  padding: 10px 0;
+.itg_image_repository #preview-wrapper .tag-box-input .image_info {
+  padding-bottom: 10px;
 }
 
 /*itg_image_repository end*/
@@ -6036,6 +6045,14 @@ div.node #comments h2 {
   margin: 0;
   padding: 20px 0;
   text-align: center;
+}
+.croper .image-editor .form-type-checkbox input {
+  display: inline-block;
+}
+.croper .image-editor .image-fiels-style .form-item.form-type-checkboxes.form-item-images {
+  background: #fff;
+  margin: 0;
+  padding: 30px 0;
 }
 .croper .first-resize, .croper .second-resize {
   display: inline-block;
