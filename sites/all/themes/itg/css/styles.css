@@ -2464,21 +2464,23 @@ footer .footer-copyright {
   float: left;
   margin-right: 20px;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 10px 15px;
   font-family: "Roboto Slab", sans-serif;
 }
 .story-section .story-expert-opinion h4 {
-  font-family: "Roboto Slab", sans-serif;
-  font-family: 20px;
+  font-family: "Roboto Slab",sans-serif;
+  font-size: 22px;
+  font-weight: 700;
 }
 .story-section .story-expert-opinion img {
   width: 70px;
   height: 70px;
   border-radius: 100%;
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
 }
 .story-section .story-expert-opinion .expert-detail {
-  margin-top: 15px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 .story-section .story-expert-opinion .left-side p.name {
   font-size: 14px;

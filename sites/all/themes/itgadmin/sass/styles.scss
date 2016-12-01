@@ -1387,8 +1387,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 }
 #block-menu-menu-admin-left-menu{
   margin: 10px 0 20px;
-  @extend .pos-rel;
-  z-index: 999;
+  @extend .pos-rel;  
   h2{
     display: none;
   }
@@ -1627,6 +1626,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   }
 }
 .user-role{
+  @extend .pos-rel;
   @extend .fright;
   line-height: 50px;
   font-weight: 300;
@@ -1655,6 +1655,42 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
       width: 18px;
       font-style: normal;
     }
+  }
+  .bell-notice{      
+    position: absolute;
+    top: 50px;
+    left: -100px;
+    background: #fff;
+    box-shadow: 0 0 5px #ccc;    
+      ul{
+          list-style-type: none;
+          li{
+              a{
+                display: block;
+                padding: 10px 10px;
+                margin: 0;
+                line-height: 18px;
+                color: #000;
+                border-bottom: 1px solid #ddd;
+                font-weight: 500;
+                  &:hover{
+                      background: #f1f1f1;
+                  }
+              }
+          }
+      }
+      &:before{
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        content: '';
+        width: 0; 
+        height: 0; 
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;  
+        border-bottom: 10px solid #ec0727;
+        margin-left: -24px;
+      }
   }
 }
 .views-table{
