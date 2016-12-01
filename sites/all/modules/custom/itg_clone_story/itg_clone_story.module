@@ -41,6 +41,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_templates'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_templates[0];
         $form['field_story_associate_lead'][LANGUAGE_NONE]['#default_value'] = $clone_arr_response->sm_field_story_associate_lead[0];
         $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#default_value'] = array($clone_arr_response->sm_field_story_magazine_story_is[0]);
+        $form['field_story_source_type'][LANGUAGE_NONE][0]['value']['#value'] = 'Clone Story';
       }
   }
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'story_clone') {
@@ -86,9 +87,18 @@ function itg_clone_story_views_pre_render(&$view) {
   if ($view->name == "story_clone") {
 
     foreach ($view->result as $related_result) {
-      $splittedsite = explode("/", $related_result->site);
-      $explode_site = explode(".", $splittedsite[2]);
-      $related_result->site = strtoupper($explode_site[0]);
+//      $splittedsite = explode("/", $related_result->site);
+//      $explode_site = explode(".", $splittedsite[2]);
+//      $related_result->site = strtoupper($explode_site[0]);
+      if ($related_result->hash == '5fyeg7') {
+        $related_result->site = 'DEV';
+      }
+      elseif ($related_result->hash == '2e1u4m') {
+        $related_result->site = 'QA';
+      }
+      elseif ($related_result->hash == 'e49it8') {
+        $related_result->site = 'STAGE';
+      }
     }
   }
 }

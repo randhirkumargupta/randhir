@@ -54,15 +54,18 @@ function itg_users_menu() {
  * Implements hook_form_alter().
  */
 function itg_users_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if ($form_id == 'user_register_form') {
+    // Sort roles in alphabetical order.
+    $edrole = $form['account']['roles']['#options'];
+    asort($edrole);
+    $form['account']['roles']['#options'] = $edrole;
+  }
   if (isset($form['confirm']['#value'])) {
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
               jQuery(".confirm-user").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-    //Sort roles in alphabetical order.
-  if ($form_id == 'user_register_form') {
-    asort($form['account']['roles']['#options']);
   }
 
   if ($form_id == "user_pass") {
@@ -80,10 +83,8 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   }
   if ($form_id == 'user_profile_form') {
     // access denied code for direct hit 
-    //p($form_state);
-    //print #user->account;
     if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit' && arg(1) != $user->uid) {
-      $arg = arg(1);            
+      $arg = arg(1);
       $user_child_roles = itg_users_role_delegation($user->roles);
       $user_role = user_load($arg);
       $user_intersec = array_intersect($user_role->roles, $user_child_roles);
@@ -463,7 +464,7 @@ function itg_users_theme($existing, $type, $theme, $path) {
  */
 function itg_users_user_login(&$edit, $account) {
   $role_count = count($account->roles);
-  
+
   //p($account->roles);
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
@@ -778,6 +779,6 @@ function itg_users_cronapi($op, $job = NULL) {
     'callback' => 'itg_users_block_user',
     'file' => 'includes/itg_users.inc',
   );
-  
+
   return $items;
 }
