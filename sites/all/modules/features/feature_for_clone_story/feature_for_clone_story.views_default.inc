@@ -36,41 +36,48 @@ function feature_for_clone_story_views_default_views() {
   $handler->display->display_options['fields']['_version_']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['_version_']['field'] = '_version_';
 
-  /* Display: Clone story */
-  $handler = $view->new_display('page', 'Clone story', 'page');
+  /* Display: Clone Story */
+  $handler = $view->new_display('page', 'Clone Story', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Clone story';
+  $handler->display->display_options['title'] = 'Clone Story';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    6 => '6',
+    10 => '10',
+  );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'itg_row_selector' => 'itg_row_selector',
     'counter' => 'counter',
+    'entity_id' => 'entity_id',
     'label' => 'label',
     'bundle_name' => 'bundle_name',
-    'entity_id' => 'entity_id',
-    'url' => 'url',
     'site' => 'site',
-    'hash' => 'hash',
-    'tm_vid_4_names' => 'tm_vid_4_names',
-    'im_vid_4' => 'im_vid_4',
+    'ds_created' => 'ds_created',
+    'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
-    'itg_row_selector' => array(
+    'counter' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'counter' => array(
+    'entity_id' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -89,20 +96,6 @@ function feature_for_clone_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'entity_id' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'url' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'site' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
@@ -110,23 +103,14 @@ function feature_for_clone_story_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'hash' => array(
+    'ds_created' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'tm_vid_4_names' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'im_vid_4' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
+    'nothing' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -181,6 +165,21 @@ function feature_for_clone_story_views_default_views() {
   $handler->display->display_options['fields']['site']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['site']['field'] = 'site';
   $handler->display->display_options['fields']['site']['label'] = 'Property';
+  /* Field: Apache Solr: ds_created */
+  $handler->display->display_options['fields']['ds_created']['id'] = 'ds_created';
+  $handler->display->display_options['fields']['ds_created']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['ds_created']['field'] = 'ds_created';
+  $handler->display->display_options['fields']['ds_created']['label'] = 'Created date';
+  $handler->display->display_options['fields']['ds_created']['date_format'] = 'medium';
+  $handler->display->display_options['fields']['ds_created']['second_date_format'] = 'long';
+  /* Field: Apache Solr: ds_changed */
+  $handler->display->display_options['fields']['ds_changed']['id'] = 'ds_changed';
+  $handler->display->display_options['fields']['ds_changed']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['ds_changed']['field'] = 'ds_changed';
+  $handler->display->display_options['fields']['ds_changed']['label'] = 'Updated date';
+  $handler->display->display_options['fields']['ds_changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['ds_changed']['date_format'] = 'medium';
+  $handler->display->display_options['fields']['ds_changed']['second_date_format'] = 'long';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -199,6 +198,43 @@ function feature_for_clone_story_views_default_views() {
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Apache Solr: entity_id */
+  $handler->display->display_options['filters']['entity_id']['id'] = 'entity_id';
+  $handler->display->display_options['filters']['entity_id']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['entity_id']['field'] = 'entity_id';
+  $handler->display->display_options['filters']['entity_id']['group'] = 1;
+  $handler->display->display_options['filters']['entity_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['entity_id']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['entity_id']['expose']['label'] = 'Nid';
+  $handler->display->display_options['filters']['entity_id']['expose']['operator'] = 'entity_id_op';
+  $handler->display->display_options['filters']['entity_id']['expose']['identifier'] = 'entity_id';
+  $handler->display->display_options['filters']['entity_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   /* Filter criterion: Apache Solr: Search */
   $handler->display->display_options['filters']['keyword']['id'] = 'keyword';
   $handler->display->display_options['filters']['keyword']['table'] = 'apachesolr__solr';

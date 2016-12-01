@@ -88,6 +88,9 @@ function itg_dbmigrate_migrate_api() {
       'itg_megareview' => array(
         'title' => t('Itg Megareview Imports'),
       ),
+      'itg_user' => array(
+        'title' => t('Itg User Migration'),
+      ),
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -162,6 +165,10 @@ function itg_dbmigrate_migrate_api() {
       'ItgMegareview' => array(
         'class_name' => 'ItgMegareviewMigration',
         'group_name' => 'itg_megareview',
+      ),
+      'ItgUser' => array(
+        'class_name' => 'ItgUserMigration',
+        'group_name' => 'itg_user',
       ),
     ),
     
