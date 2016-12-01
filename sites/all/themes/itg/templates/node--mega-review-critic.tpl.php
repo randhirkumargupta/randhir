@@ -200,7 +200,7 @@
             print l($small_image, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
             ?>
             <div class="img-count">
-                <i class="fa fa-camera"></i> <?php print $image_count; ?>
+                <i class="fa fa-camera"></i> <?php print $image_count . t(' Images'); ?>
             </div>
             </div>
              <?php $photo_date = format_date($photo_node->created, 'custom', 'D, d, M, Y'); ?>
