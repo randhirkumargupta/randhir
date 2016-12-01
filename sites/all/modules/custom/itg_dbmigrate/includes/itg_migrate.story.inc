@@ -552,7 +552,19 @@ class ItgStoryMigration extends XMLMigration {
    }
    
    //code for like and dislike
-  
+   if (isset($row->xml->like_dislike->like)) {
+     itg_flag_insert_like_dislike($node->nid, 'story', $row->xml->like_dislike->like);
+   }
+   
+   if (isset($row->xml->like_dislike->dislike)) {
+     itg_flag_insert_like_dislike($node->nid, 'story', $row->xml->like_dislike->dislike);
+   }
+   
+   //code for order set
+   if (isset($row->xml->ordering)) {
+     ordering_set_of_content($node, $row->xml->ordering);
+   }
+   
   }
 
 }
