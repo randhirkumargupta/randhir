@@ -268,16 +268,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 ?>
                                             </select>
 
-                                            <div class="data-holder" id="itg-block-5"><div style="position:relative;">
-                                                    <div id="main_container" style="position:relative; ">
+                                            <div class="data-holder pos-rel" id="itg-block-5">
+                                                <div id="main_container" class="map-result-detail">
                                                         <div id= "consTable"></div></div>
                                                     <div id = "conssvg"></div>
-                                                    <script>getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script></div>
-
-
-
-
-
+                                                    <script>getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
                                             </div>
                                         </div>             
                                     </div>
