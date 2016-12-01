@@ -4,6 +4,7 @@
  *   Order confirmation template file. 
  */
 ?>
+
 <div class="order-confirmation">
     <div class="thankyou-block">
         <h2>Thank you for your order</h2>

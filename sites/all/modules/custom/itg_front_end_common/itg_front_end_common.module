@@ -29,7 +29,6 @@ function itg_front_end_common_block_info() {
     'info' => t('Related photo Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-
   return $blocks;
 }
 
@@ -55,7 +54,7 @@ function itg_front_end_common_block_view($delta = '') {
     
     case 'related_photo_block':
       $block['content'] = _related_photo_block_content();
-      break;
+      break;  
   }
 
   return $block;

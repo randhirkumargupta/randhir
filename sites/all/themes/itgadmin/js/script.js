@@ -819,7 +819,7 @@ jQuery(document).ready(function() {
 jQuery(document).ready(function () {  
 
      jQuery('#map-state').change(function() {
-          jQuery('#consTable').hide();
+          jQuery('.map-result-detail').hide();
          var getstate_id=jQuery(this).val();
         
           jQuery.ajax({
