@@ -99,11 +99,17 @@
               <!-- Review Headline -->
               <h2><?php print $reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value']; ?></h2>
               <div class="other-reviews-posted-on">
-                  <!-- Byline reporter -->                  
+                  <!-- Byline reporter -->
+                  <!-- Get Multiple reviewers name -->
+                  <?php $reviewers = array(); ?>
+                  <?php foreach($reviews[$field_collection['value']]->field_story_reporter['und'] as $reviewer_name): ?>                  
+                    <?php $reviewers[] = $reviewer_name['entity']->title ?>
+                  <?php endforeach; ?>
                   <!-- Print External review. -->
                   <?php if ($reviews[$field_collection['value']]->field_story_review_type['und'][0]['value'] == 'external' && !$external_review): ?>
                   <div id="external-review" style="display:none;">
                       <p><?php print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>
+                      
                       <span class="other-reviews-rating" data-star-value="<?php print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>
                     </div>                  
                     <?php $external_review == TRUE; ?>
@@ -112,12 +118,13 @@
                   <!-- Print internal review. -->
                   <?php if ($reviews[$field_collection['value']]->field_story_review_type['und'][0]['value'] == 'internal' && !$internal_review): ?>
                   <div id="internal-review" style="display:none;">
-                      <p><?php print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>
+                      <p><?php print implode(', ', $reviewers); ?></p>
                       <span class="other-reviews-rating" data-star-value="<?php print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>
                     </div>                  
                     <?php $internal_review == TRUE; ?>
                   <?php endif; ?>
-                  <span class="other-reviews-by"><?php print t('By') . ' ' . $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></span>
+                  
+                  <span class="other-reviews-by"><?php print t('By') . ' ' . implode(', ', $reviewers); ?></span>
                   <!-- Created date -->
                   <span class="other-reviews-date"><?php print format_date($node->created, 'custom', 'F d, Y'); ?></span>
                   <!-- Ratings -->    
