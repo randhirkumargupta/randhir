@@ -314,7 +314,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                 <?php if ($theme == 'itg') { ?>
                   <div class="">
                     <div class="ask-question-sidebar ask-question">
-                      <span class="widget-title">Ask a Question</span>
+                        <h3><span>Ask a Question</span></h3>
                       <div class="data-holder ask-question" id="itg-block-19">
                         <?php $block = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');
                               print render($block['content']); ?>

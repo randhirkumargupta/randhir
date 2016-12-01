@@ -19,19 +19,19 @@ function feature_category_management_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '25',
+          'weight' => '18',
         ),
         'path' => array(
-          'weight' => '24',
-        ),
-        'name' => array(
-          'weight' => '11',
-        ),
-        'description' => array(
           'weight' => '17',
         ),
+        'name' => array(
+          'weight' => '9',
+        ),
+        'description' => array(
+          'weight' => '16',
+        ),
         'redirect' => array(
-          'weight' => '10',
+          'weight' => '8',
         ),
       ),
       'display' => array(),
