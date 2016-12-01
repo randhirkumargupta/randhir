@@ -334,6 +334,9 @@ function itg_loyalty_reward_order_summary() {
  * @return array
  */
 function itg_loyalty_reward_order_confirmation() {
+  if (!isset($_SESSION['placed-item'])) {
+    drupal_goto('redeem-points');
+  } 
   
   return theme('cart_order_confirmation', array('data' => $data));
 }

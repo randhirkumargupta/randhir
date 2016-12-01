@@ -93,6 +93,7 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
     // code to hide source field
     if ($user->uid != '1') {
       $form['field_source']['#access'] = FALSE;
+      $form['field_common_related_content']['#attributes']['class'][] = 'element-hidden';
     }
 
     if (isset($form['#node']->nid)) {

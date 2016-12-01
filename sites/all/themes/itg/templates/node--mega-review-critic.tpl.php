@@ -151,8 +151,12 @@
             $asso_vid_class = 'full-width';
           }       
         ?>
+        
+        <div class="row">
+        
         <?php if ($asso_vid_id): ?>
         <div class="movie-videos <?php print $asso_vid_class; ?>">
+            <div class="movie-data">
             <h3><span>MOVIE VIDEOS</span></h3>
             <?php
             
@@ -165,12 +169,24 @@
             );
             print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
             ?>
+             <?php $video_date = format_date($video_node->created, 'custom', 'D, d, M, Y'); ?>
+            
+             <div class="img-count">
+                 <i class="fa fa-play-circle"></i>
+            </div>
+            </div>
+            
+        <div class="photo-date"><?php print $video_date ?></div>
+        <div class="photo-title"><?php print $video_node->title; ?></div>
+        
         </div>
+       
         <?php endif; ?>
         <!-- Photos -->
         <?php $asso_photo_gallery = $node->field_associate_photo_gallery['und'][0]['target_id'];; ?>
         <?php if ($asso_photo_gallery): ?>
         <div class="movie-photos <?php print $ass_photo_class; ?>">
+            <div class="movie-data">
             <h3><span>MOVIE PHOTOS</span></h3>
             <?php            
             $photo_node = node_load($asso_photo_gallery);
@@ -184,10 +200,16 @@
             print l($small_image, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
             ?>
             <div class="img-count">
-                <?php print $image_count; ?>
+                <i class="fa fa-camera"></i> <?php print $image_count . t(' Images'); ?>
             </div>
+            </div>
+             <?php $photo_date = format_date($photo_node->created, 'custom', 'D, d, M, Y'); ?>
+        <div class="photo-date"><?php print $photo_date ?></div>
+        <div class="photo-title"><?php print $photo_node->title; ?></div>
         </div>
+       
         <?php endif; ?>
+        </div>
     </div>
     <div class="career-graph">
         <?php
