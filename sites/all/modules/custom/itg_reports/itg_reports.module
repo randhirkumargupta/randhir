@@ -67,10 +67,12 @@ function itg_reports_theme($existing, $type, $theme, $path) {
  *
  * {@inheritdoc}.
  */
-function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  
-  switch ($form['#id']) {
+function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {  
+  switch ($form['#id']) {    
     case 'views-exposed-form-report-filed-content-page':
+      $form['field_story_category_tid']['#attributes'] = array('placeholder' => 'Search by section name');
+      $form['uid']['#attributes'] = array('placeholder' => 'Search by user name');
+      $form['mail']['#attributes'] = array('placeholder' => 'Search by user email');      
       $form['node_status']['#options'][1] = t('Published');
       $form['node_status']['#options'][0] = t('Not published');
       $form['moderation'] = array(
@@ -88,6 +90,7 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
 
       break;
     case 'views-exposed-form-comparative-reports-page':
+      $form['tid']['#attributes'] = array('placeholder' => 'Search by section name');
       $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
       $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
       $form['#after_build'][] = 'itg_reports_view_after_build';

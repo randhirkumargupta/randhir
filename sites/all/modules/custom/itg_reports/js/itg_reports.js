@@ -42,7 +42,7 @@
                     $('select[name="from_state"]').find('option[value="draft"]').attr("selected", true);
                     $("#edit-state option:selected").removeAttr("selected");
                     $("#edit-state option[value='published']").prop("selected", true);
-                    $('#edit-state').css('pointer-events', 'auto');
+                    $('#edit-state').css('pointer-events', 'none');
                 } else if (moderation === 'Yes') {
                     $('select[name="from_state"]').find('option[value="All"]').attr("selected", true);
                     $("#edit-state option:selected").removeAttr("selected");
@@ -67,10 +67,13 @@
                 $("#edit-state option[value='draft']").remove();
                 // Disbale future date.
                 itg_report_disable_future_date();
+                $('.views-field-workbench-moderation-history-link').find('a').attr('target', '_blank');
+                $('.view-empty').parent().find('.feed-icon').hide();
             }            
             
             if ($('body').hasClass('page-comparative-reports')) {
                 itg_report_disable_future_date();
+                $('.view-empty').parent().find('.feed-icon').hide();
             }
             // Module code ends here.
         }
