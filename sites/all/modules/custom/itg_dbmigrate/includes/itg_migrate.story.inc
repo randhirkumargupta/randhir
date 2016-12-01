@@ -260,18 +260,18 @@ class ItgStoryMigration extends XMLMigration {
 
   public function prepareRow($row) {
     // prepare row for listicle
-   /* $data_listicle = '';
-    if (isset($row->xml->fulltext_conclaveformat->listicle_content->listicle) && !empty($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
-      foreach ($row->xml->fulltext_conclaveformat->listicle_content->listicle as $final_listicle) {
-        $data_listicle[]['value'] = (string) $final_listicle;
-      }
-    }
-    $row->listicle_new = $data_listicle;*/
+//   $data_listicle = '';
+//    if (isset($row->xml->fulltext_conclaveformat->listicle_content->listicle) && !empty($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
+//      foreach ($row->xml->fulltext_conclaveformat->listicle_content->listicle as $final_listicle) {
+//        $data_listicle[]['value'] = (string) $final_listicle;
+//      }
+//    }
+//    $row->listicle_new = $data_listicle;
     // end prepare row for listicle
     // prepare row for quote
     $data_quotes = '';
     if (isset($row->xml->fulltext_conclaveformat->quotes->quote) && !empty($row->xml->fulltext_conclaveformat->quotes->quote)) {
-      foreach ($row->xml->quotes->quote as $final_quote) {
+      foreach ($row->xml->fulltext_conclaveformat->quotes->quote as $final_quote) {
         $data_quotes[]['value'] = (string) $final_quote;
       }
     }
@@ -280,7 +280,7 @@ class ItgStoryMigration extends XMLMigration {
     // prepare row for factoids
     $data_factoids = '';
     if (isset($row->xml->fulltext_conclaveformat->factoids_content->factoids) && !empty($row->xml->fulltext_conclaveformat->factoids_content->factoids)) {
-      foreach ($row->xml->factoids_content->factoids as $final_factoids) {
+      foreach ($row->xml->fulltext_conclaveformat->factoids_content->factoids as $final_factoids) {
         $data_factoids[]['value'] = (string) $final_factoids;
       }
     }
@@ -317,7 +317,7 @@ class ItgStoryMigration extends XMLMigration {
     $data_city = '';
 
     if (isset($row->xml->cities->city) && !empty($row->xml->cities->city)) {
-      foreach ($row->xml->cities->city as $data_city) {
+      foreach ($row->xml->cities->city as $final_city) {
         $source_city = (string) $final_city;
         $orignal_city = get_itg_destination_id('migrate_map_itgcity', $source_city);
         $data_city[]['tid'] = $orignal_city;
@@ -476,6 +476,7 @@ class ItgStoryMigration extends XMLMigration {
     if (!empty($row->tag_new)) {
       $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
     }
+    
     if (!empty($row->city_new)) {
       $node->field_stroy_city[LANGUAGE_NONE] = $row->city_new;
     }
@@ -490,62 +491,63 @@ class ItgStoryMigration extends XMLMigration {
     }
     if(!empty($row->featuredname)){
       $node->field_story_featured_name[LANGUAGE_NONE][0]['tid'] = (string) $row->featuredname;
-    }
-    if(!empty($row->city)){
-      $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = (string) $row->city;
-    }
-  
-    $node->uid = 291;
+    }  
+    $node->uid = 415;
   }
 
   public function complete($entity, $row) {
     $node = node_load($entity->nid);
     
-    if (isset($row->xml->buzz_content->buzz)) {
+    if (isset($row->xml->buzz_content->buzz) && (!empty($row->xml->buzz_content->buzz->headline) || !empty($row->xml->buzz_content->buzz->image) || !empty($row->xml->buzz_content->buzz->description))) {
+      
       $key = 0;
-      foreach ($row->xml->buzz_content->buzz as $value) {
-        $headline = (string) $value->headline;
-        $image_url = (string) $value->image;
+      foreach ($row->xml->buzz_content->buzz as $buzz_value) {
+        if(!empty($buzz_value->headline) || !empty($buzz_value->image) || !empty($buzz_value->description)){
+        drupal_set_message('<pre>'.print_r('Buzz content', 1).'<pre>');
+        $headline = (string) $buzz_value->headline;
+        $image_url = (string) $buzz_value->image;
         $file = file_save_data(file_get_contents($image_url), file_default_scheme() . '://' . basename($image_url), FILE_EXISTS_RENAME);
         $file->status = 1;
-        $file->alt = (string) $value->buzz_alt;
-        $file->title = (string) $value->buzz_title;
+        $file->alt = (string) $buzz_value->buzz_alt;
+        $file->title = (string) $buzz_value->buzz_title;
         $image = (array) $file;
-        $description = (string) $value->description;
-        $values = array(
+        $description = (string) $buzz_value->description;
+        $buzz_values = array(
           'field_name' => 'field_story_template_buzz',
           'field_buzz_headline' => array(LANGUAGE_NONE => array(array('value' => $headline))),
           'field_buzz_image' => array(LANGUAGE_NONE => array($image)),
           'field_buzz_description' => array(LANGUAGE_NONE => array(array('value' => $description))),
         );
-        $field_collection_item = entity_create('field_collection_item', $values);
+        $field_collection_item = entity_create('field_collection_item', $buzz_values);
         $field_collection_item->setHostEntity('node', $node);
         $field_collection_item->save(TRUE);
         $node->field_story_template_buzz[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
         $key++;
+        }
       }
     }
       
+      
+    if (isset($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
+      $count=0;
      
-    if (isset($row->xml->fulltext_conclaveformat->listicle_content)) {
-      $count++;
-      foreach ($row->xml->fulltext_conclaveformat->listicle_content as $value) {
-        $listicle = (string) $value->listicle;
-       
+      foreach ($row->xml->fulltext_conclaveformat->listicle_content->listicle as $value) {
+        drupal_set_message('<pre>'.print_r('Listcle content', 1).'<pre>');
+        $listicle = (string) $value;
         $values = array(
           'field_name' => 'field_story_listicle',
-          'field_story_listicle_description' => array(LANGUAGE_NONE => array(array('value' => $headline))),          
+          'field_story_listicle_description' => array(LANGUAGE_NONE => array(array('value' => $listicle))),          
         );
-        
-        $field_collection_item = entity_create('field_collection_item', $values);
-        $field_collection_item->setHostEntity('node', $node);
-        $field_collection_item->save(TRUE);
-        $node->field_story_listicle[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
+        $field_collection_item_listicle = entity_create('field_collection_item', $values);
+        $field_collection_item_listicle->setHostEntity('node', $node);
+        $field_collection_item_listicle->save(TRUE);
+        $node->field_story_listicle[LANGUAGE_NONE][$count]['value'] = $field_collection_item_listicle->item_id;
         $count++;
       }
     }
-    
-   if (isset($row->xml->buzz_content->buzz) || isset($row->xml->fulltext_conclaveformat->listicle_content)) {
+
+   if (isset($row->xml->buzz_content->buzz) || isset($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
+     
     field_attach_update('node', $node);
    }
    

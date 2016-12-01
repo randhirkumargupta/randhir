@@ -8724,3 +8724,44 @@ div.node{
   padding-bottom: 30px;
 }
 .itg-form-main .itg-form-action{display: inline-block; vertical-align: top; width: 100%;}
+
+#views-exposed-form-comparative-reports-page, #views-exposed-form-report-filed-content-page{
+    #edit-date-filter-wrapper, #edit-state-wrapper{
+        width: 300px;
+        #edit-date-filter-min-wrapper, #edit-date-filter-max-wrapper, .form-item-state, .form-item-moderation{
+            display: inline-block;
+            margin-right: 10px;
+            width: 140px;
+           vertical-align: bottom;
+        }
+        #edit-date-filter-max-wrapper, .form-item-moderation{
+            margin-right: 0px;    
+        }        
+    }
+
+}
+.page-node-moderation{
+    @extend .views-table;
+    td{
+        background: transparent;
+    }
+}
+#views-exposed-form-movies-master-page{
+    #edit-field-movie-earning-value-wrapper{
+        width: 300px;
+        .form-item-field-movie-earning-value-min, .form-item-field-movie-earning-value-max{
+            display: inline-block;
+            margin-right: 10px;
+            width: 140px;
+            vertical-align: bottom;
+        }
+        .form-item-field-movie-earning-value-max{
+            margin-right: 0px; 
+        }
+    }
+    #edit-date-filter-value-inside-wrapper{
+        .date-year{
+           padding-left: 0;    
+    }
+    }    
+} 
