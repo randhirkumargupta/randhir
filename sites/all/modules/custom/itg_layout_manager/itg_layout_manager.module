@@ -422,7 +422,7 @@ function itg_layout_gethomecarddata_new_pre($sectinno) {
   
   $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
 
-  if($data=="")
+  if($data=="" && $sectinno<80)
   {
   return itg_layout_gethomecarddata_new_pre($sectinno + 3); 
   }

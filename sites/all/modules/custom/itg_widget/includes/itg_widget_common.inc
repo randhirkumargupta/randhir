@@ -115,6 +115,11 @@ function itg_widgets_custom_variables() {
     '#title' => t('top takes block condition for arg(1)'),
     '#default_value' => variable_get('top_takes_block_condition'),
   );
+   $form['tid_politician'] = array(
+    '#type' => 'textarea',
+    '#title' => t('tid of politician'),
+    '#default_value' => variable_get('tid_politician'),
+  );
   return system_settings_form($form);
 }
 
@@ -1305,6 +1310,21 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
     else if (empty($_GET['nid']) && empty($_GET['title'])) {
       $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    }
+  }
+   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
+    if (!empty($_GET['nid']) && empty($_GET['title'])) {
+       
+      $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
+    } if (empty($_GET['nid']) && !empty($_GET['title'])) {
+       
+      $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
+    }
+    else if (!empty($_GET['nid']) && !empty($_GET['title'])) {
+      $query->where[1]['conditions'][3]['value'] = variable_get('tid_politician');
+    }
+    else if (empty($_GET['nid']) && empty($_GET['title'])) {
+      $query->where[1]['conditions'][1]['value'] = variable_get('tid_politician');
     }
   }
 
