@@ -18,7 +18,12 @@ Drupal.behaviors.my_custom_behavior = {
   attach: function(context, settings) {
 
     // Place your code here.
-
+    $('.slider-container').slick({
+        infinite: true,
+        slidesToShow: 3,
+        variableWidth: true,
+        slidesToScroll: 1
+      });
   }
 };
 
