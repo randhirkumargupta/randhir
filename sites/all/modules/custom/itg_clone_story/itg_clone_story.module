@@ -88,12 +88,7 @@ function itg_clone_story_views_pre_render(&$view) {
     foreach ($view->result as $related_result) {
       $splittedsite = explode("/", $related_result->site);
       $explode_site = explode(".", $splittedsite[2]);
-      if (strpos($related_result->site, 'staging') !== false) {
-        $related_result->site = strtoupper($explode_site[1]);
-      }
-      else {
-        $related_result->site = strtoupper($explode_site[0]);
-      }
+      $related_result->site = strtoupper($explode_site[0]);
     }
   }
 }
