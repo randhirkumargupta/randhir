@@ -33,11 +33,24 @@ global $base_url;
             </div>
           <?php endif; ?>
 
-          <?php if (isset($row['field_user_city'])) : ?>
+          <?php if (isset($row['field_program_timing_in_days'])) : ?>
             <div class="programe-timing">
-              <?php print $row['field_user_city']; ?>
+              <?php print $row['field_program_timing_in_days']; ?>
+              
+                <?php print t(" at ") ?>
+
+              <span class="time">
+                <?php if (!empty($row['field_user_city'])) : ?>
+                  <?php print $row['field_user_city']; ?>
+                <?php endif; ?>
+
+                <?php if (!empty($row['field_time_period'])) : ?>
+                  <?php print $row['field_time_period']; ?>
+                <?php endif; ?>
+              </span>
             </div>
           <?php endif; ?>
+
 
           <?php if (isset($row['description'])) : ?>
             <div class="description-timing">
