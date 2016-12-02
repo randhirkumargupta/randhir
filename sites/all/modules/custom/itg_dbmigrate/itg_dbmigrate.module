@@ -77,3 +77,19 @@ function itg_dbmigrate_mosimage_replace($body_string, $mosimage_array, $token){
   $newstr = vsprintf($str, $mosimage_array);
   return $newstr;
 }
+
+/**
+ * Order set for byline
+ * @param array $node
+ * @return
+ */
+function ordering_set_for_byline($nid, $weight) {
+    db_insert('draggableviews_structure')->fields(array(
+    'view_name' => 'widget_anchors_listing',
+    'view_display' => 'anchors_listing_widget',
+    'args' => '[]',
+    'entity_id' => $nid,
+    'weight' => $weight,
+    'parent' => 0,
+    ))->execute();
+  }
