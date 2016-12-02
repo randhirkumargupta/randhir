@@ -5945,18 +5945,16 @@ footer{
             margin: 0;
             padding: 0;            
         }
-        #itg-custom-ask-an-expert-form{
+        [id*="itg-custom-ask-an-expert-form"]{
             @include clearfix;
-            input[type="text"]{
-                position: static;
-                left: auto;
-                top:auto;
-                width: 110px;
-                font-family: roboto-slab;
+            input[type="text"]{                
+                width: 100%;
+                font-family: roboto-slab;                
             }
             textarea{
                 font-family: roboto-slab;
                 height: 65px;
+                margin-bottom: 10px;
             }
             #question{
                 p{
@@ -5966,12 +5964,15 @@ footer{
                     margin-top: 10px;
                 }
             }
-            #askname, #askemail, input[type="submit"]{
+            #askname, #askemail{
                 float: left;
-                width: 33%;
+                width: 47%;
+            }
+            #askname{
+                margin-right: 10px;
             }
             #askemail{
-                margin: 0 12px;
+                margin-left: 10px;
             }
             input[type="submit"]{
                 background: #000 none repeat scroll 0 0;
@@ -5979,12 +5980,17 @@ footer{
                 border-radius: 5px;
                 color: #fff;                
                 font-size: 16px;
-                height: 32px;
-                line-height: 29px;
+                height: 32px;                
                 text-transform: uppercase;
                 width: 90px;
                 cursor: pointer;
                 font-family: roboto-slab;
+            }
+            .form-item-captcha-response{
+                input[type="text"]{                
+                    width: 40%;
+                    font-family: roboto-slab;                
+                }
             }
         }        
     }
