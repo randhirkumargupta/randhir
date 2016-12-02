@@ -81,18 +81,17 @@ if (!in_array('administrator', $user->roles)) {
 //} ?></dfn>
                      <div class="bell-notice"></div>
                 </div> -->
-                <span>
+                
                      <div class="user-role">
-                        <a id="belly" href="javascript:void(0);" class="notifi">  
-<!--                <a href="<?//php print $base_url . '/assigned-task-list'; ?>">-->
-                    <i class="fa fa-bell-o"></i>
-                    <dfn><?php if (function_exists('get_task_count_of_user')) {
-    print get_task_count_of_user();
-} ?></dfn>
-                    <div class="bell-notice"></div>
-                </a> 
+                    <a id="belly" href="javascript:void(0);" class="notifi">
+                        <i class="fa fa-bell-o"></i>
+                        <dfn><?php if (function_exists('get_task_count_of_user')) {
+                    print get_task_count_of_user();
+                    } ?></dfn>
+                    </a> 
+                         
+                         
                 <span>
-
                     User role - 
                     <?php
                     // get role array
@@ -104,7 +103,9 @@ if (!in_array('administrator', $user->roles)) {
                     $role_display = implode(',', $role_display);
                     print $role_display;
                     ?>
-                </span>
+                </span>                                                  
+                <div class="bell-notice">                        
+                </div>
             </div>
 <?php print render($page['header']); ?>
         </section>

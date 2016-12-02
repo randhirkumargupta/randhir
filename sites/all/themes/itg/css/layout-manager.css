@@ -2810,3 +2810,12 @@ img {
 }
 
 /*Budget page css end*/
+/* new changes defalt section page*/
+.itg-layout-container.default-section .auto-block-1, .itg-layout-container.default-section .auto-block-2 {
+  height: 673px;
+}
+.itg-layout-container.default-section .auto-block-2 {
+  border: 1px solid #dddddd;
+}
+
+/* new changes defalt section page end*/
