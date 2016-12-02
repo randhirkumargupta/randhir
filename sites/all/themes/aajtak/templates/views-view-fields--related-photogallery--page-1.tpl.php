@@ -24,7 +24,7 @@
  * @ingroup views_templates
  */
 ?>
-<div class="tile">
+<div class="popular-videos-tile">
 <?php foreach ($fields as $id => $field): ?>
   <?php if (!empty($field->separator)): ?>
     <?php print $field->separator; ?>

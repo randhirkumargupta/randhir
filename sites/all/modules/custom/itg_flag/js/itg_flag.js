@@ -48,6 +48,7 @@
 
 
             $("body").on("click", ".hide_sh", function(e) {
+                e.stopPropagation();
                 var screen_width = $('body').width();
                 var h_center = screen_width/2 - 130;
                 var obj = jQuery(this);
@@ -76,21 +77,26 @@
                             'type': 'POST',
                             // dataType: 'json',
                             beforeSend: function() {
-
+                                var imageURL = base_url + '/sites/all/themes/aajtak/images/bars.svg';
+                                var image = "<div class='loader-svg'><img src=" + imageURL + " alt='loadding...'></div>";
+                                $('body').find(rc_popup).append(image);
                             },
                             'success': function(result)
                             {
 //                              obj.next('.nxt').html(result);
                                 ///obj.html(result);
-                                $('body').find(rc_popup).append(result);
+                                $('body').find(rc_popup).find('.loader-svg').remove(),
+                                $('body').find(rc_popup).append(result),
                                 rc_popup.find(".icon-list").addClass("open"),
                                 rc_popup.find(".related-content-wrapper").slideToggle().toggleClass("open-data");
                             }
                         });
+                        
 
             }), $(document).on('click', '.icon-list.open', function(){
                     if ($("body").hasClass("overlay")){
                         var rc_popup = $(".related-content-popup");
+                        rc_popup.find('.view-sambandhit-khabre').slideUp('fast'),
                         $("body").removeClass("overlay"), 
                         rc_popup.velocity({
                             duration: 1200,
@@ -104,6 +110,24 @@
                             }
                         });
                     }               
+                }), $(document).on('click', function(e){
+                    e.stopPropagation();
+                    if ($("body").hasClass("overlay")){
+                        var rc_popup = $(".related-content-popup");
+                        rc_popup.find('.view-sambandhit-khabre').slideUp('fast'),
+                        $("body").removeClass("overlay"), 
+                        rc_popup.velocity({
+                            duration: 1200,
+                            left: pos_left, 
+                            top: pos_top
+                        }, {
+                            complete: function() {
+                                rc_popup.removeClass("popup-open").removeAttr("style"), 
+                                $("body").css("overflow", "auto"), 
+                                rc_popup.empty();
+                            }
+                        });
+                    }
                 });
 
             // end here

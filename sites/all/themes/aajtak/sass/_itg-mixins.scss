@@ -508,3 +508,102 @@ $root-font-size: 16px;
       z-index: -1;
     }
   }
+
+@mixin aajtak-tile($tile-height: null, $category-name: null, $title: null, $pic: null, $posted-by: null, $posted-date: null, $icon-list: null, $pic-height: null){ 
+    text-align: center;
+    position: relative;
+    height: $tile-height;
+    @if($category-name){
+        .#{$category-name} {
+            background-color: #dc4750;
+            border-radius: 4px 4px 0 0;
+            color: #fff;
+            height: 20px;
+        }
+    }
+    @if($title !=null){
+        .#{$title} {
+            height: 40px;
+            overflow: hidden;
+            margin: 10px 10px 8px;
+            a{
+                color: #000;
+                display: block;
+                @include font(16px,20px,$itg-font-bold);
+            }
+        }
+    }
+    @if($pic != null){
+        .#{$pic} {
+            height: $pic-height;
+        }
+    }
+    @if($posted-by != null){
+        .#{$posted-by} {
+            display: inline-block;
+            vertical-align: top;
+            @include font(12px,16px,$itg-font-regular);
+            color: #9a9a9a;
+            padding: 0 5px;
+            position: relative;
+        }
+    }
+    @if($posted-date != null){
+        .#{$posted-date} {
+            display: inline-block;
+            vertical-align: top;
+            @include font(12px,16px,$itg-font-regular);
+            color: #9a9a9a;
+            padding: 0 5px;
+            position: relative;
+        }
+    }
+    @if($posted-date != null && $posted-by != null){
+        .#{$posted-date}:before{
+            content: '|';
+            position: absolute;
+            font-size: 9px;
+            left: -4px;
+            top: 0;
+        }
+    }
+    @if($icon-list){ 
+        .#{$icon-list}{
+            border: none;
+            border-radius: 50%;
+            bottom: -18px;
+            height: 36px;
+            left: 0;
+            margin: 0 auto;
+            position: absolute;
+            padding: 11px 12px;
+            transition: .25s ease-in-out;
+            transform: rotate(0);
+            right: 0;
+            width: 36px;
+            cursor: pointer;
+            z-index: 9;
+            span {
+                background: #fff;
+                display: block;
+                height: 1px;
+                margin-bottom: 5px;
+                position: relative;
+                width: 15px;
+                opacity: 1;
+                left: 0;
+                transform: rotate(0);
+                transition: .25s ease-in-out;
+                &:before {
+                    content: "";
+                    box-shadow: 2px 1px 0 1px #fff;
+                    display: block;
+                    height: 0;
+                    left: -6px;
+                    position: relative;
+                    width: 0;
+                }
+            }
+        }
+    }
+}  
