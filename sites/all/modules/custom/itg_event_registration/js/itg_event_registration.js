@@ -42,7 +42,8 @@
           $('#edit-field-erf-registration-fee').hide();
         }
       });
-
+      //
+      $("#edit-field-erf-registration-fee-und-0-remove-button").hide();
       //Validation of event registration fields
       $('#edit-field-last-name-und-0-value, #edit-title').keyup(function() {
         this.value = this.value.replace(/[^a-zA-Z\s.]/g, '');

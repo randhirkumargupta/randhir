@@ -15,11 +15,12 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 
     if ($form_id == 'photogallery_node_form') {
         unset($form['field_story_medium_image']);
-         unset($form['field_story_extra_small_image']);
+        unset($form['field_story_extra_small_image']);
         $form['field_story_category'][LANGUAGE_NONE]['#title'] = '<label for="edit-title">' . $form['field_story_category'][LANGUAGE_NONE]['#title'] . ' <span title="This field is required." class="form-required">*</span></label>';
         //code for common syndication field hide
         drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-field-story-syndication").hide();              
+              jQuery("#edit-field-story-syndication").hide();
+              jQuery("#edit-field-story-expert-description").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
 
         $form['upload'] = array(

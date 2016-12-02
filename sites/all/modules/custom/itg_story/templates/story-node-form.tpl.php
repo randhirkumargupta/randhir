@@ -25,7 +25,11 @@
       <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_templates']); ?>
         <?php print drupal_render($form['field_story_template_guru']); ?>
+        <?php print drupal_render($form['field_story_listicle']); ?>                
+        <?php print drupal_render($form['field_story_quote_title']); ?>
+        <?php print drupal_render($form['field_story_quote_image']); ?>
         <?php print drupal_render($form['field_story_template_quotes']); ?>
+        <?php print drupal_render($form['field_story_factoids_title']); ?>
         <?php print drupal_render($form['field_story_template_factoids']); ?>
         <?php print drupal_render($form['field_story_template_buzz']); ?>
       </div>
@@ -52,6 +56,10 @@
         <?php print drupal_render($form['field_story_redirection_url_titl']); ?>
         <?php print drupal_render($form['field_story_courtesy']); ?>
         <?php print drupal_render($form['field_story_snap_post']); ?>
+        
+        <?php print drupal_render($form['field_story_associate_lead']); ?>
+        <?php print drupal_render($form['field_associate_photo_gallery']); ?>
+        <?php print drupal_render($form['field_story_associate_video']); ?>
       </div>
     </div>
     <div id="ExpertChunk" class="itg-form-section-wrapper">
@@ -59,6 +67,7 @@
       <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_expert_name']); ?>
         <?php print drupal_render($form['field_story_expert_image']); ?>
+        <?php print drupal_render($form['field_story_expertise']); ?>
         <?php print drupal_render($form['field_story_expert_description']); ?>
         <?php // print drupal_render($form['revision_information']['workbench_moderation_state_new']); ?>
         <?php // print drupal_render($form['revision_information']['log']); ?>
@@ -82,6 +91,7 @@
         <?php print drupal_render($form['field_story_tv_time']); ?>
         <?php print drupal_render($form['field_story_featured_name']); ?>
         <?php print drupal_render($form['field_story_syndication']); ?>
+        <?php print drupal_render($form['field_story_syndications_photo']); ?>
         <?php print drupal_render($form['field_story_comment_question']); ?>
         <?php print drupal_render($form['field_story_client_title']); ?>
         <?php print drupal_render($form['field_story_media_files_syndicat']); ?>

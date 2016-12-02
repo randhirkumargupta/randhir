@@ -1,5 +1,5 @@
 /*
- * @file itg_user_forgot_password.js
+ * @file itg_sso_change_email.js
  * Contains all functionality related to SSO
  */
 

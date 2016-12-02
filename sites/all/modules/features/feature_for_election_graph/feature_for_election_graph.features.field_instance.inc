@@ -36,7 +36,7 @@ function feature_for_election_graph_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_election_constituency_tall',
     'label' => 'Election Graph JSON URL',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -50,49 +50,6 @@ function feature_for_election_graph_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-election_graph_xml-field_election_party_tally'.
-  $field_instances['node-election_graph_xml-field_election_party_tally'] = array(
-    'bundle' => 'election_graph_xml',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_election_party_tally',
-    'label' => 'Election Party Tally JSON URL',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 3,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 5,
     ),
   );
 
@@ -121,7 +78,7 @@ function feature_for_election_graph_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_section',
     'label' => 'Section',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -138,7 +95,6 @@ function feature_for_election_graph_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Election Graph JSON URL');
-  t('Election Party Tally JSON URL');
   t('Section');
 
   return $field_instances;

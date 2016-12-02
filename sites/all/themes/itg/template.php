@@ -46,6 +46,9 @@ function itg_preprocess_node(&$variables) {
     // Add new template variation.
     $variables['theme_hook_suggestions'][] = 'node__' . $title;
     $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
+    if (function_exists(global_comment_last_record)) {
+      $variables['global_comment_last_record'] = global_comment_last_record();
+    }
   }
 
   if ($variables['type'] == 'webform') {
@@ -62,8 +65,9 @@ function itg_preprocess_node(&$variables) {
  * @return array
  */
 function itg_block_render($module, $block_id) {
-  $block = block_load($module, $block_id);  
+  $block = block_load($module, $block_id); 
   $block_content = _block_render_blocks(array($block));
+  unset($block_content['menu_menu-about-us-page-menu']->subject);
   $build = _block_get_renderable_array($block_content);
   $block_rendered = drupal_render($build);
   return $block_rendered;
@@ -129,7 +133,13 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
   
-  if ($arg[0] == 'signup' || $arg[0] == 'forgot-password' || $arg[0] == 'sso-user' || $arg[0] == 'sso'|| $arg[0] == 'password-success' || $arg[0] == 'complete-page') {
+  if ($arg[0] == 'signup' 
+          || $arg[0] == 'forgot-password' 
+          || $arg[0] == 'sso-user' 
+          || $arg[0] == 'sso'
+          || $arg[0] == 'password-success' 
+          || $arg[0] == 'complete-page' 
+          || $arg[0] == 'associate-photo-video-content') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
 

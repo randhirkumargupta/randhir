@@ -87,6 +87,8 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
             || $form_id == 'ask_an_expert_node_form'
             || $form_id == 'event_configurations_node_form'
             || $form_id == 'event_backend_node_form'
+            || $form_id == 'heighlights_node_form'
+            || $form['#vocabulary']->machine_name == 'category_management'
             ) {
       if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
         $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
@@ -100,7 +102,8 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
             || $form_id == 'task_idea_allocation_tracking_node_form'
             || $form_id == 'ugc_node_form'
             || $form_id == 'notification_node_form') {
-      $form['additional_settings']['#access'] = FALSE;
+      //$form['additional_settings']['#access'] = FALSE;
+     
     }
 }
 

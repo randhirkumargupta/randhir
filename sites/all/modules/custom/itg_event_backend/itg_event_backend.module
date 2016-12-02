@@ -16,6 +16,9 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
 
     // Form alter for event backend node
     if ($form_id == "event_backend_node_form") {
+      $form['field_associate_event_photo']['#suffix'] = '<div class="event-photo-des description">'.$form['field_associate_event_photo'][LANGUAGE_NONE]['#description'].'</div>';
+      $form['field_associate_event_video']['#suffix'] = '<div class="event-video-des description">'.$form['field_associate_event_video'][LANGUAGE_NONE]['#description'].'</div>';
+      $form['field_e_associate_highlights']['#suffix'] = '<div class="event-video-des description">'.$form['field_e_associate_highlights'][LANGUAGE_NONE]['#description'].'</div>';
         $form['#after_build'][] = 'itg_event_backend_after_build';
         array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
         $form['actions']['cancel'] = array(
@@ -83,30 +86,12 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // Form alter for event configurations node
-    if ($form_id == 'event_configurations_node_form') {
-        if (module_exists('domain')) {
-            $format = domain_select_format();
-            foreach (domain_domains() as $data) {
-                if ($data['valid'] || user_access('access inactive domains')) {
-                    $options[$data['sitename']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
-                }
-            }
-        }
-
-        unset($form['title']);
+    if ($form_id == 'heighlights_node_form') {
         unset($form['#metatags']);
         unset($form['actions']['preview']);
-
-        // Prepare domain drop-down
-        $domain_selected_value = $form['field_ec_select_domain'][LANGUAGE_NONE]['#entity']->field_ec_select_domain[LANGUAGE_NONE][0]['value'];
-        if ($domain_selected_value) {
-            $form['field_ec_select_domain'][LANGUAGE_NONE]['#default_value'] = $domain_selected_value;
-        }
-        $form['field_ec_select_domain'][LANGUAGE_NONE]['#options'] = $options;
-
-        $form['#after_build'][] = 'itg_event_backend_event_configurations_after_build';
+        $form['#after_build'][] = 'itg_event_backend_highlights_after_build';
         $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), 'manage-event-configuration', array('attributes' => array('class' => 'button'))),
+            '#markup' => l(t('Cancel'), 'manage-highlights', array('attributes' => array('class' => 'button'))),
             '#weight' => 20,
         );
     }
@@ -255,10 +240,7 @@ function itg_event_backend_sponsor($form, &$form_state) {
  * @param array $form_state
  * @return boolean
  */
-function itg_event_backend_event_configurations_after_build($form, &$form_state) {
-    if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
-        $form['field_ec_select_domain'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
-    }
+function itg_event_backend_highlights_after_build($form, &$form_state) {
     $form['path']['#access'] = FALSE;
     return $form;
 }
@@ -525,6 +507,11 @@ function itg_event_backend_theme($existing, $type, $theme, $path) {
             'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
             'variables' => array('data' => NULL),
         ),
+        'itg_program_post_event' => array(
+            'template' => 'itg-program-post-event',
+            'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
+            'variables' => array('data' => NULL),
+        ),
         'tweet_right_sidebar_event' => array(
             'template' => 'tweet-right-sidebar-event',
             'path' => drupal_get_path('module', 'itg_event_backend') . '/templates',
@@ -570,6 +557,10 @@ function itg_event_backend_block_info() {
         'info' => t('Program Schedule Tab Block'),
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
+    $blocks['post_event_block'] = array(
+        'info' => t('Post Event block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
     $blocks['ad_right_sidebar_event'] = array(
         'info' => t('Ad right sidebar event'),
         'cache' => DRUPAL_CACHE_GLOBAL,
@@ -590,7 +581,10 @@ function itg_event_backend_block_info() {
         'info' => t('Event Flashback'),
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
-
+    $blocks['highlights_block'] = array(
+      'info' => t('Highlights Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+    );
     return $blocks;
 }
 
@@ -616,6 +610,9 @@ function itg_event_backend_block_view($delta = '') {
         case 'program_tab_block':
             $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab()));
             break;
+        case 'post_event_block':
+            $block['content'] = theme('itg_program_post_event', array('data' => itg_event_backend_program_schedule_tab()));
+            break;
         case 'ad_right_sidebar_event':
             $page_name = 'Rest';
             $data['itg_ad'] = get_ad_script($page_name);
@@ -634,6 +631,9 @@ function itg_event_backend_block_view($delta = '') {
         case 'event_flashback':
             $block['content'] = theme('event_flashback');
             break;
+        case 'highlights_block':
+            $block['content'] = itg_event_backend_live_content();
+            break;  
     }
 
     return $block;
@@ -662,6 +662,12 @@ function itg_event_backend_views_pre_render(&$view) {
         $event_conf .= l(t('Add Event Domain'), 'admin/structure/domain/create', array('query' => array('destination' => 'manage-event-configuration')));
         $event_conf .= l(t('Configure New Event'), 'node/add/event-configurations', array('query' => array('destination' => 'manage-event-configuration')));
         $view->attachment_before = $event_conf;
+    }
+    if ($view->name == "manage_heighlights") {
+        $event_heighlights = '';
+        $event_heighlights .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+        $event_heighlights .= l(t('Add Highlights'), 'node/add/heighlights', array('query' => array('destination' => 'manage-highlights')));
+        $view->attachment_before = $event_heighlights;
     }
 }
 
@@ -837,12 +843,40 @@ function itg_event_backend_get_session_story_title($daywise, $font_color) {
         $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
         $story_nid = $daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id'];
         $story_title = itg_common_get_node_title($story_nid);
+        $story_detail = itg_event_get_story_details($story_nid);
         $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
-       
+        $session['story_details'][] = $story_detail;
     }
     return $session;
 }
 
+/**
+ * Implement function for story node details.
+ * @param type int
+ * @return array
+ */
+function itg_event_get_story_details($nid){
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_story_extra_large_image', 'extra_large_img', 'extra_large_img.entity_id = n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'story_kicker', 'story_kicker.entity_id = n.nid');
+  $query->leftJoin('file_managed', 'fm', 'fm.fid = extra_large_img.field_story_extra_large_image_fid');
+  $query->fields('extra_large_img', array('field_story_extra_large_image_fid'));
+  $query->fields('n', array('title', 'nid'));
+  $query->fields('story_kicker',array('field_story_kicker_text_value'));
+  $query->fields('fm',array('uri'));
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute();
+  foreach($result as $rel){
+    $resu['uri'] = $rel->uri;
+    $resu['kicker'] = $rel->field_story_kicker_text_value;
+    $resu['nid'] = $rel->nid;
+  }
+  return $resu;
+}
+
+/**
+ * {@inheritdoc}
+ */
 function itg_event_backend_menu() {
     $items['itg-event-test'] = array(
         'page callback' => 'itg_event_backend_page',
@@ -866,6 +900,16 @@ function itg_event_backend_menu() {
     );
     $items['flashback'] = array(
         'page callback' => 'itg_event_backend_page',
+        'access callback' => TRUE,
+    );
+    $items['speaker-details'] = array(
+        'page callback' => 'itg_event_backend_page',
+        'title' => 'Speaker Details',
+        'access callback' => TRUE,
+    );
+    $items['sponsor-details'] = array(
+        'page callback' => 'itg_event_backend_page',
+        'title' => 'Sponsor Details',
         'access callback' => TRUE,
     );
     return $items;
@@ -1147,12 +1191,29 @@ function itg_event_backend_insert_into_redirect($node) {
         $domain_source->nid = $node->nid;
         $domain_source->domain_id = '-' . $node->domains;
 
-        $existing = redirect_load_by_hash($hash);
+        $existing = itg_event_backend_check_old_rec($node->nid);
         if (!$existing) {
             drupal_write_record('redirect', $redirect);
             drupal_write_record('domain_source', $domain_source);
         }
     }
+}
+
+/**
+ * Check existing record in domain source
+ * @param int $nid
+ * @return boolean
+ */
+function itg_event_backend_check_old_rec($nid) {
+  $query = db_select('domain_source', 'd');
+  $query->fields('d', array('nid'));
+  $query->condition('d.nid', $nid, '=');
+  $nid = $query->execute()->fetchField();
+  if($nid) {
+    return TRUE;
+  } else {
+    return FALSE;
+  }
 }
 
 /**
@@ -1162,4 +1223,257 @@ function itg_event_backend_insert_into_redirect($node) {
 function itg_event_backend_header_add_block() {
   $block = module_invoke('itg_event_backend', 'block_view', 'event_header_adds');
   return render($block['content']);
+}
+
+/**
+ * Impement function for conver number to words
+ * @param type int
+ * @return str
+ */
+function itg_event_backend_convert_number_to_words($number) {
+
+    $hyphen      = '-';
+    $conjunction = ' and ';
+    $separator   = ', ';
+    $negative    = 'negative ';
+    $decimal     = ' point ';
+    $dictionary  = array(
+        0                   => 'zero',
+        1                   => 'one',
+        2                   => 'two',
+        3                   => 'three',
+        4                   => 'four',
+        5                   => 'five',
+        6                   => 'six',
+        7                   => 'seven',
+        8                   => 'eight',
+        9                   => 'nine',
+        10                  => 'ten',
+        11                  => 'eleven',
+        12                  => 'twelve',
+        13                  => 'thirteen',
+        14                  => 'fourteen',
+        15                  => 'fifteen',
+        16                  => 'sixteen',
+        17                  => 'seventeen',
+        18                  => 'eighteen',
+        19                  => 'nineteen',
+        20                  => 'twenty',
+        30                  => 'thirty',
+        40                  => 'fourty',
+        50                  => 'fifty',
+        60                  => 'sixty',
+        70                  => 'seventy',
+        80                  => 'eighty',
+        90                  => 'ninety',
+        100                 => 'hundred',
+        1000                => 'thousand',
+        1000000             => 'million',
+        1000000000          => 'billion',
+        1000000000000       => 'trillion',
+        1000000000000000    => 'quadrillion',
+        1000000000000000000 => 'quintillion'
+    );
+
+    if (!is_numeric($number)) {
+        return false;
+    }
+
+    if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
+        // overflow
+        trigger_error(
+            'convert_number_to_words only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
+            E_USER_WARNING
+        );
+        return false;
+    }
+
+    if ($number < 0) {
+        return $negative . convert_number_to_words(abs($number));
+    }
+
+    $string = $fraction = null;
+
+    if (strpos($number, '.') !== false) {
+        list($number, $fraction) = explode('.', $number);
+    }
+
+    switch (true) {
+        case $number < 21:
+            $string = $dictionary[$number];
+            break;
+        case $number < 100:
+            $tens   = ((int) ($number / 10)) * 10;
+            $units  = $number % 10;
+            $string = $dictionary[$tens];
+            if ($units) {
+                $string .= $hyphen . $dictionary[$units];
+            }
+            break;
+        case $number < 1000:
+            $hundreds  = $number / 100;
+            $remainder = $number % 100;
+            $string = $dictionary[$hundreds] . ' ' . $dictionary[100];
+            if ($remainder) {
+                $string .= $conjunction . convert_number_to_words($remainder);
+            }
+            break;
+        default:
+            $baseUnit = pow(1000, floor(log($number, 1000)));
+            $numBaseUnits = (int) ($number / $baseUnit);
+            $remainder = $number % $baseUnit;
+            $string = convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
+            if ($remainder) {
+                $string .= $remainder < 100 ? $conjunction : $separator;
+                $string .= convert_number_to_words($remainder);
+            }
+            break;
+    }
+
+    if (null !== $fraction && is_numeric($fraction)) {
+        $string .= $decimal;
+        $words = array();
+        foreach (str_split((string) $fraction) as $number) {
+            $words[] = $dictionary[$number];
+        }
+        $string .= implode(' ', $words);
+    }
+
+    return $string;
+}
+
+/**
+ * Implement function for get old event flasback
+ */
+function itg_event_backend_flashback($curr_event_id){
+  $current_date_time = date('Y-m-d H:i:s');
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));
+  $query->join('field_data_field_event_close_date', 'event_close_date', 'event_close_date.entity_id = n.nid');
+  $query->fields('event_close_date', array('field_event_close_date_value'));
+  $query->condition('n.type', 'event_backend', '=');
+  $query->condition('n.nid', $curr_event_id, '!=');
+  $query->condition('event_close_date.field_event_close_date_value', $current_date_time, '<');
+  $result = $query->execute();
+  foreach($result as $value){
+    $val[] = 'node/'.$value->nid;
+    $detail['node/'.$value->nid] = array(
+      'key'=>'node/'.$value->nid,
+      'title'=>$value->title
+        );
+  }
+  $redirect_event = itg_event_backend_redirect_flashback($val, $detail);
+  foreach($redirect_event as $final_event){
+    $flash_back_link .= '<li>'.l(t($final_event['title']), $final_event['redirect'], array('attributes' => array("style" => "color:$menu_font_color", 'target'=>'_blank'))).'</li>';
+  }
+  $output = '';
+  if(!empty($flash_back_link)){
+  $output = '<ul>'.$flash_back_link.'</ul>';
+  }
+  return $output;
+}
+
+/**
+ * Implement function for get redirect node in flashback
+ * @param type array
+ * @param type array
+ * @return array
+ */
+function itg_event_backend_redirect_flashback($val, $detail){
+  $query = db_select('redirect', 'r');
+  $query->fields('r');
+  $query->condition('r.source', $val, 'IN');
+  $result = $query->execute();
+  $count = 0;
+  foreach($result as $rel){
+    $past_event[$count] = $detail[$rel->source];
+    $past_event[$count]['redirect'] = $rel->redirect;
+    $count++;
+  }
+  return $past_event;
+}
+
+/**
+ * Implement function to get current event domain
+ * @param type int
+ * @return string
+ */
+function itg_event_backend_current_event_domain($nid){
+  $query = db_select('redirect', 'r');
+  $query->fields('r', array('redirect'));
+  $query->condition('r.source', $nid, '=');
+  $result = $query->execute()->fetchCol();
+  return $result;
+}
+
+/**
+ * Highlights block for event
+ */
+function itg_event_backend_get_highlights_block() {
+  $block = module_invoke('itg_event_backend', 'block_view', 'highlights_block');
+  print render($block['content']);
+}
+
+/**
+ * Get highlights block content for live event
+ * @return string
+ */
+function itg_event_backend_highlights_block_content() {
+  $nid = itg_event_backend_get_event_node();
+  if (db_table_exists('field_data_field_e_associate_highlights')) {
+    $query = db_select('field_data_field_e_associate_highlights', 'fh');
+    $query->fields('fh', array('field_e_associate_highlights_target_id'));
+    $query->condition('fh.entity_id', $nid, '=');
+    $highlights_nid = $query->execute()->fetchField();
+    $highlights_node = node_load($highlights_nid);
+
+    $output = '';
+    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">Highlights</h2><div class="wrap-listing">';
+    foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
+      $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
+      $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
+    }
+
+    $output .= $text. '</div></div>';
+    return $output;
+  }
+}
+
+/**
+ * Like and dislike button for highlights on event page
+ * @param int $unique_id
+ * @return string
+ */
+function itg_event_backend_highlights_like_dislike($unique_id) {
+  $like = itg_flag_get_count($unique_id, 'like_count');
+  $dislike = itg_flag_get_count($unique_id, 'dislike_count');
+  if (!empty($like)) {
+    $like_count = '(' . $like . ')';
+  }
+  if (!empty($dislike)) {
+    $dislike_count = '(' . $dislike . ')';
+  }
+  $pid = "voted_" . $unique_id;
+  $like = "no-of-likes_" . $unique_id;
+  $dislike = "no-of-dislikes_" . $unique_id;
+  
+  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="'.$unique_id.'"><i class="fa fa-thumbs-o-up"></i> <span id="'.$like.'">'.$like_count.'</span></button>';    
+  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="'.$unique_id.'"><i class="fa fa-thumbs-o-down"></i> <span id="'.$dislike.'">'.$dislike_count.'</span></button>';
+  $error_msg = '<p class="error-msg" id="'.$pid.'"></p></div>';
+  return $like_btn.$dislike_btn.$error_msg;
+}
+
+/**
+ * Get event live whole content
+ * @return string
+ */
+function itg_event_backend_live_content() {
+  $nid = itg_event_backend_get_event_node();
+  $title = itg_common_get_node_title($nid);
+  if (module_exists('itg_live_tv')) {
+    $banner_video = itg_live_tv_page_video();
+  }
+  $video = '<div class="row top-block-highlight"><div class="highlights-video col-md-7"><h2 style="live-event-title">'.$title.'</h2><div class="live-event-video">' . $banner_video . '</div></div>';
+  $highlights_content = '<div class="highlights-container col-md-5">'. itg_event_backend_highlights_block_content().'</div></div>';
+  return $video.$highlights_content;
 }

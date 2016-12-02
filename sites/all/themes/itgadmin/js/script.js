@@ -813,13 +813,13 @@ jQuery(document).ready(function() {
     });
 
     //tech and auto new block title tig admin
-    jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
+    jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings, #defalt-section-top-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
 
 });
 jQuery(document).ready(function () {  
 
      jQuery('#map-state').change(function() {
-          jQuery('#consTable').hide();
+          jQuery('.map-result-detail').hide();
          var getstate_id=jQuery(this).val();
         
           jQuery.ajax({

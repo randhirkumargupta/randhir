@@ -54,8 +54,8 @@
         </p>
         <div class="share-new">
           <ul>
-            <li><a onclick="gogogo('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
+            <li><a onclick="fbpop ('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="javascript:" onclick="twitter_popup ('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
             <li><a href="#" title=""><?php echo t('Follow the Story'); ?></a></li>
           </ul>
         </div>
@@ -65,15 +65,20 @@
             $extra = $data['related'];
             // Its remaining to use solr here to get title form other server.
             $realted_nodes = json_decode($extra);
-            foreach ($realted_nodes as $related_node) {
-              foreach ($related_node as $node_id => $data_id) {
-                $data_data = node_load($data_id);
-                $alise = drupal_get_path_alias("node/$data_id");
-                $url = ($alise) ? $alise : "#";
-                if (!empty($data_data->title)) :
-                  print "<li>" . l(mb_strimwidth($data_data->title, 0, 210, '..'), $url) . "</li>";
-                  $url = "";
-                endif;
+            foreach ($realted_nodes as $key => $related_node) {
+              if ($key <= 1) {
+                foreach ($related_node as $node_id => $data_id) {
+                  $data_data = node_load($data_id);
+                  $alise = drupal_get_path_alias("node/$data_id");
+                  $url = ($alise) ? $alise : "#";
+                  if (!empty($data_data->title)) :
+                    print "<li>" . l(mb_strimwidth($data_data->title, 0, 210, '..'), $url) . "</li>";
+                    $url = "";
+                  endif;
+                }
+              }
+              else {
+                break;
               }
             }
             ?>

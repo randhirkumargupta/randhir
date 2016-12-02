@@ -88,13 +88,6 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
   if ($form_id == 'reporter_node_form') {
-    // Hide show logic for career graph fields.    
-    $form['field_reporter_career_graph']['#states'] = array(
-      'visible' => array(
-        ':input[name="field_celebrity_pro_occupation[und][]"]' => array('value' => '494'),
-      ),
-    );
-    
     $node_type = $form['#node']->type;
     // code to change page title on node edit
     if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
@@ -281,8 +274,9 @@ function itg_reporter_get_twitter_handle($twitter) {
 }
 
 /**
- * Implement hook_node_presave
- * @param Object $node
+ * Implements hook_node_presave().
+ *
+ * {@inheritdoc}.
  */
 function itg_reporter_node_presave($node) {
   if ($node->type == 'reporter') {
@@ -313,7 +307,7 @@ function itg_reporter_node_presave($node) {
         $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_twitter;
         field_attach_update('node', $story_node);
       }
-    }
+    }    
   }
 }
 

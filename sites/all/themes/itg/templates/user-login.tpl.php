@@ -19,16 +19,14 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
 </div>
 <?php print '<div class="sign-border"><span>Or sign in using your email address</span></div>';
  } else { ?>
-  <h2>Log in</h2>
+  <h2><?php print t('Log in'); ?></h2>
 <?php } ?>
   <div class="login-wrapper">
+      
     <?php print drupal_render($form['name']); 
           print drupal_render($form['pass']);
-          if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
-          if (strpos($_GET['ReturnTo'], 'domain_info') !== false) {
-                  print drupal_render($form['remember_me']);
-          }
-          }
+          print drupal_render($form['remember_me']);
+         
 ?>
     <div class="form-actions">
       <?php print drupal_render($form['actions']['submit']);

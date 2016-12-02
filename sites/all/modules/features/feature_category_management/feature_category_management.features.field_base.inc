@@ -53,12 +53,18 @@ function feature_category_management_field_default_field_bases() {
     'locked' => 0,
     'module' => 'color_field',
     'settings' => array(
+      'allow_empty' => 0,
       'default_colors' => '#AC725E,#D06B64,#F83A22,#FA573C,#FF7537,#FFAD46
 #42D692,#16A765,#7BD148,#B3DC6C,#FBE983
 #92E1C0,#9FE1E7,#9FC6E7,#4986E7,#9A9CFF
 #B99AFF,#C2C2C2,#CABDBF,#CCA6AC,#F691B2
 #CD74E6,#A47AE2
         ',
+      'palette' => '',
+      'show_buttons' => 0,
+      'show_input' => 1,
+      'show_palette' => 0,
+      'show_palette_only' => 0,
     ),
     'translatable' => 0,
     'type' => 'color_field_rgb',
@@ -250,6 +256,52 @@ function feature_category_management_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
+  // Exported field_base: 'field_description'.
+  $field_bases['field_description'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_description',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
+  // Exported field_base: 'field_program_timing_in_days'.
+  $field_bases['field_program_timing_in_days'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_program_timing_in_days',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_set_as_featured_cate'.
   $field_bases['field_set_as_featured_cate'] = array(
     'active' => 1,
@@ -270,6 +322,34 @@ function feature_category_management_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'Yes' => '',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_time_period'.
+  $field_bases['field_time_period'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_time_period',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'am' => 'am',
+        'pm' => 'pm',
       ),
       'allowed_values_function' => '',
     ),

@@ -57,7 +57,7 @@
                         fjs.parentNode.insertBefore(js, fjs);
                       }(document, 'script', 'facebook-jssdk'));
 
-function gogogo(linkurl, title, desc, image) {
+function fbpop(linkurl, title, desc, image) {
   FB.ui({
     method: 'feed',
     link: linkurl,
@@ -92,3 +92,10 @@ function googleplusbtn(url, title, img) {
 }   
 
 // google sharing end here
+
+
+// function for scrolling
+function scrollToAnchor(aid){
+    var aTag = jQuery("div[id='"+ aid +"']");
+    jQuery('html,body').animate({scrollTop: aTag.offset().top},'slow');
+}

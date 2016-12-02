@@ -2506,7 +2506,7 @@ img {
 }
 .election-page .key-candidate .key-candidate-detail ul li:nth-child(2) {
   width: 60%;
-  padding-top: 12px;
+  padding-top: 5px;
 }
 .election-page .key-candidate .key-candidate-detail ul li:nth-child(3) {
   width: 15%;
@@ -2532,6 +2532,10 @@ img {
   width: 63px;
 }
 .election-page .key-candidate .key-candidate-detail ul li .status {
+  font-size: 15px;
+  font-weight: 700;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status i {
   width: 35px;
   height: 35px;
   border-radius: 3px;
@@ -2543,12 +2547,21 @@ img {
   margin-top: 12px;
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.green {
+  color: #418b32;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.green i {
   background: #418b32;
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.red {
+  color: #418b32;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.red i {
   background: #d80a02;
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.yellow {
+  color: #418b32;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.yellow i {
   background: #efc107;
 }
 .election-page .key-candidate .key-candidate-detail.key-candidate-detail-first {
@@ -2566,6 +2579,41 @@ img {
   line-height: 20px;
   padding: 0;
   width: 145px;
+}
+.election-page .itg-map .map-result-detail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.48);
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+.election-page .itg-map .map-result-detail #consTable {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -48px;
+  margin-left: -110px;
+}
+.election-page .election-graph .col-el-1, .election-page .election-graph .col-el-2, .election-page .election-graph .col-el-3, .election-page .election-graph .col-el-4, .election-page .election-graph .col-el-5 {
+  padding: 0 15px;
+  float: left;
+}
+.election-page .election-graph .col-el-1 {
+  width: 100%;
+}
+.election-page .election-graph .col-el-2 {
+  width: 50%;
+}
+.election-page .election-graph .col-el-3 {
+  width: 33.33333%;
+}
+.election-page .election-graph .col-el-4 {
+  width: 25%;
+}
+.election-page .election-graph .col-el-5 {
+  width: 20%;
 }
 .election-page .election-graph .highcharts-credits {
   display: none;
@@ -2600,19 +2648,37 @@ img {
   height: 19px;
   margin-bottom: 10px;
 }
-.election-page .graph-design {
+.election-page .graph-design .highcharts-container {
+  height: 260px !important;
+}
+.election-page .graph-design .highcharts-series-group {
   position: relative;
 }
-.election-page .graph-design .divider {
+.election-page .graph-design .highcharts-series-group:before {
+  content: '';
   position: absolute;
   top: 50px;
   left: 50%;
-  height: 120px;
+  height: 50%;
   width: 1px;
   border-left: 1px dashed #7b7b7b;
 }
-.election-page .graph-design .highcharts-container {
-  height: 260px !important;
+.election-page .graph-design .highcharts-title {
+  color: #515151 !important;
+  font-size: 18px;
+  fill: #515151 !important;
+}
+.election-page .graph-design .highcharts-title tspan:nth-child(1) {
+  font-weight: 900;
+  font-family: roboto;
+  font-size: 42px;
+  color: #515151;
+}
+.election-page .col-el-4 .graph-design .highcharts-title tspan:nth-child(1) {
+  font-size: 32px;
+}
+.election-page .col-el-5 .graph-design .highcharts-title tspan:nth-child(1) {
+  font-size: 22px;
 }
 
 /* CSS For Election Page End */
@@ -2744,3 +2810,12 @@ img {
 }
 
 /*Budget page css end*/
+/* new changes defalt section page*/
+.itg-layout-container.default-section .auto-block-1, .itg-layout-container.default-section .auto-block-2 {
+  height: 673px;
+}
+.itg-layout-container.default-section .auto-block-2 {
+  border: 1px solid #dddddd;
+}
+
+/* new changes defalt section page end*/

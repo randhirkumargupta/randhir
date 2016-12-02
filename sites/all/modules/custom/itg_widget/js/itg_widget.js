@@ -146,6 +146,11 @@ Drupal.behaviors.itg_widgets = {
                     'type': type
                 },
                 success: function(data) {
+                  console.log(data.length);
+                  var json_obj = JSON.parse(data);
+                    if(json_obj.length === 0){
+                      jQuery(".handle-unckeck-on-page").attr('checked', false);
+                    }
                     setTimeout(function() {
 
                         jQuery('#widget-ajex-loader').hide();

@@ -6,7 +6,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 }
 ?>
 <div class="header-ads mhide">
- <!--   <img src="<?php //print base_path()         ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
+ <!--   <img src="<?php //print base_path()                ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
   <?php print ($data['itg_top']['200*200_header']); ?>
 </div>                               
 
@@ -67,6 +67,15 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
           $db_target = $menu_data['db_data']['target'];
           $tid = $menu_data['db_data']['tid'];
           $active_cls = $parent_class = "notactive";
+          $icon_fid = $menu_data['db_data']['menu_name'];
+          if ($icon_fid != 'notFound' || $icon_fid != 'blank') {
+            $int_value = (int) $icon_fid;
+            if ($int_value) {
+              $icon_object = file_load((int) $icon_fid);
+              $icon_url = file_create_url($icon_object->uri);
+              $link_text = '<img title="' . $link_text . '" src="' . $icon_url . '" height = "37" width = "120">';
+            }
+          }
           $sponsored_class = ($menu_data['db_data']['extra'] == 'Yes') ? "sponsored-active" : "";
           // if tid is not 0 then its internal url
           if (($tid && $url_type == 'internal')) {
@@ -82,13 +91,13 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
           if (trim($db_target) == 'new_window') {
             $target = "_blank";
           }
-          
-          if($tid == $parent_key_of_third_level) {
+
+          if ($tid == $parent_key_of_third_level) {
             $parent_class = "active";
           }
           ?>
-          <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class , $parent_class)))); ?></li>
-        <?php endforeach;?>
+          <li><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class)))); ?></li>
+        <?php endforeach; ?>
       </ul>
       <?php //print drupal_render($data['itg_main_manu_header']);    ?>            
     </div>         
@@ -104,14 +113,14 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
           ?>
           <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 
-            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
-            <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
             <?php
           }
           else {
             ?>
-            <a onclick="Go(550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>','/saml_login/other')" class="user-icon"><i class="fa fa-user"></i></a>
+            <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon"><i class="fa fa-user"></i></a>
 
             <?php
           }

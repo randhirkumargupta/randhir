@@ -6,6 +6,7 @@ version = 7.x-1.0
 dependencies[] = actions_permissions
 dependencies[] = feature_category_management
 dependencies[] = feature_for_mobile_services
+dependencies[] = features_for_survey
 dependencies[] = field_group
 dependencies[] = node
 dependencies[] = text

@@ -1,0 +1,6 @@
+name = ITG miscellaneous
+description = "for custom script and testing."
+package = "ITG"
+core = 7.x
+
+files[] = itg_miscellaneous.module

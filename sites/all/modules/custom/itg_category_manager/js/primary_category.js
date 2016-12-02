@@ -31,15 +31,18 @@
 
             });
             comptext = comptext.slice(0, -1);
-            jQuery('.select-prim').each(function()
-            {
-                var existvalue = jQuery(this).val();
-                if (selectvalue == existvalue)
-                {
-                    flag = 1;
-                }
-
-            });
+            //jQuery('.select-prim').each(function()
+//            {
+//                var existvalue = jQuery(this).val();
+//                if (selectvalue == existvalue)
+//                {
+//                    jQuery(this).parent('.hiddenradio').remove();
+//                    flag = 1;
+//                }
+//               
+//
+//            });
+//            
  makeradio = '<span class="hiddenradio"><input type="radio" class="select-prim" value="' + selectvalue + '"><span class="primary-text">' + comptext + '</span></span>';
                         datahtml = datahtml.replace(makeradio, "");
                         datahtml = datahtml + makeradio+'</div>';
@@ -61,18 +64,18 @@
 
                             makeradio = '<input class="primary-radio" name="primary_radio" type=radio  value="' + selectvalue + '">';
 
-
+setTimeout(function(){ 
                             jQuery(".dropbox-entry").each(function() {
                                 var gettrtext = jQuery(this).children("td:first").text();
                                 if (gettoptext == gettrtext)
                                 {
-
                                     if (!jQuery(this).children("td:first").find('input').hasClass('primary-radio'))
                                     {
                                         jQuery(this).children("td:first").find(".dropbox-item:first").before(makeradio);
                                     }
                                 }
                             });
+                            }, 500);
 
                         });
                         

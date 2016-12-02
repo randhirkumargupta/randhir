@@ -25,7 +25,7 @@ function itg_common_tv_time($id = '') {
       $data[$document['time']] = $document['time'];
     }
     return $data;
-  }
+  } 
 }
 
 /**

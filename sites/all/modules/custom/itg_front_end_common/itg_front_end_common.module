@@ -19,7 +19,16 @@ function itg_front_end_common_block_info() {
     'info' => t('vukkul Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-
+  
+  $blocks['related_video_block'] = array(
+    'info' => t('Related video Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  $blocks['related_photo_block'] = array(
+    'info' => t('Related photo Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -38,6 +47,14 @@ function itg_front_end_common_block_view($delta = '') {
     case 'vukkul_block':
       $block['content'] = _vukkul_block_content();
       break;
+    
+    case 'related_video_block':
+      $block['content'] = _related_video_block_content();
+      break;
+    
+    case 'related_photo_block':
+      $block['content'] = _related_photo_block_content();
+      break;  
   }
 
   return $block;
@@ -155,5 +172,61 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
     drupal_add_css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/dot-luv/jquery-ui.css', array('type' => 'external'));
     drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
     drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
+  }
+}
+
+
+/**
+ * Custom function to fetch related content.
+ * @param int $nid
+ */
+function itg_get_related_content($nid) {
+
+  $query = db_select('field_data_field_common_related_content', 'tt');
+  $query->fields('tt', array('field_common_related_content_value'));
+  $query->condition('tt.entity_id', $nid, '=');
+  $related_result = $query->execute()->fetchField();
+  return $related_result;
+}
+
+/**
+ * Implements Related video block content
+ */
+function _related_video_block_content() {
+  $related_content = itg_get_related_content(arg(1));
+  if (!empty($related_content)) {
+    $video_output = '<h3><span>Related content</span></h3>
+            <div id="related-video">';
+    $related_content = explode(',', $related_content);
+    foreach ($related_content as $fn_result) {
+      $related_content = explode('_', $fn_result);
+      $final_related [] = $related_content[1];
+    }
+    $final_related = implode(' OR ', $final_related);
+    $video_output.= views_embed_view('related_photo_video_content', 'page', $final_related);
+    '</div>';
+
+    return $video_output;
+  }
+}
+
+/**
+ * Implements Related photo block content
+ */
+function _related_photo_block_content() {
+  $related_content = itg_get_related_content(arg(1));
+  if (!empty($related_content)) {
+    $photo_output = '<h3><span>Related content</span></h3>
+            <div id="related-photo">';
+    $related_content = explode(',', $related_content);
+    foreach ($related_content as $fn_result) {
+      $related_content = explode('_', $fn_result);
+      $final_related [] = $related_content[1];
+    }
+    $final_related = implode(' OR ', $final_related);
+    $photo_output.= views_embed_view('related_photo_video_content', 'page_1', $final_related);
+    '</div>';
+
+    return $photo_output;
   }
 }

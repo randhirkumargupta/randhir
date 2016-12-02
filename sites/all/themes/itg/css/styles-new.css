@@ -197,6 +197,16 @@
   padding: 0 5px;
   cursor: pointer;
 }
+#block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li:focus {
+  outline: none;
+  border: none;
+}
+#block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li img {
+  border: 1px solid transparent;
+}
+#block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider li.slick-current img {
+  border: 1px solid #fff;
+}
 #block-views-photo-landing-slider-block .other-details-main {
   height: auto;
   background: transparent;
@@ -272,6 +282,7 @@
   padding: 0 12px;
   line-height: 35px;
   display: block;
+  cursor: pointer;
 }
 #block-views-photo-landing-slider-block .social-icon ul li a:hover {
   background: #222222;
@@ -3185,12 +3196,12 @@ body.has-cart-popup {
   width: 20px;
 }
 
-[id*="itg-personalization-edit-profile-form"] {
+[id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"] {
   max-width: 780px;
   margin: 0 auto;
   background-color: #f8f8f8;
 }
-[id*="itg-personalization-edit-profile-form"] > div {
+[id*="itg-personalization-edit-profile-form"] > div, [id*="itg-personalization-refer-a-friend-form"] > div {
   text-align: left;
   padding: 40px 0;
   max-width: 480px;
@@ -3198,10 +3209,10 @@ body.has-cart-popup {
   vertical-align: top;
   display: inline-block;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype {
+[id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype, [id*="itg-personalization-refer-a-friend-form"] > div .form-field-name-field-ugc-ctype {
   text-align: center;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype .form-select {
+[id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype .form-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-field-name-field-ugc-ctype .form-select {
   width: 450px;
   height: 44px;
   border-radius: 5px;
@@ -3211,7 +3222,7 @@ body.has-cart-popup {
   font: 300 16px/normal Roboto;
   text-align: center;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -3221,7 +3232,7 @@ body.has-cart-popup {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield label {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield label {
   width: 150px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
@@ -3231,7 +3242,7 @@ body.has-cart-popup {
   position: relative;
   float: left;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield .form-text {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield .form-text, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield .form-text {
   position: absolute;
   left: 0;
   top: 0;
@@ -3241,7 +3252,7 @@ body.has-cart-popup {
   padding-left: 160px;
   z-index: 9;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-select {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -3251,7 +3262,7 @@ body.has-cart-popup {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-select label {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-select label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select label {
   width: 150px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
@@ -3261,7 +3272,7 @@ body.has-cart-popup {
   position: relative;
   float: left;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-select .form-select {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-select .form-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select .form-select {
   position: absolute;
   left: 150px;
   top: 0;
@@ -3270,7 +3281,7 @@ body.has-cart-popup {
   height: 100%;
   z-index: 9;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -3280,7 +3291,7 @@ body.has-cart-popup {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea label {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea label {
   width: 150px;
   height: 128px;
   padding: 0 20px;
@@ -3291,7 +3302,7 @@ body.has-cart-popup {
   position: relative;
   float: left;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea-wrapper {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea-wrapper, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea .form-textarea-wrapper {
   padding-left: 150px;
   position: absolute;
   left: 0;
@@ -3299,31 +3310,31 @@ body.has-cart-popup {
   width: 100%;
   height: 100%;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea .form-textarea {
   border: none;
   width: 100%;
   height: 100%;
   padding: 10px;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes > label {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes > label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes > label {
   font: 300 14px/18px Roboto;
   color: #757575;
   display: block;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes {
   padding: 10px 0;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox {
   display: inline-block;
   margin-right: 30px;
   vertical-align: top;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label {
   font: 400 13px/18px Roboto;
   vertical-align: top;
   color: #757575;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-radios {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -3331,7 +3342,7 @@ body.has-cart-popup {
   width: 100%;
   margin: 10px 0;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-radios > label {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios > label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios > label {
   width: 150px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
@@ -3342,14 +3353,14 @@ body.has-cart-popup {
   position: relative;
   float: left;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios .form-radios .form-type-radio {
   float: left;
   margin: 0 0 0 40px;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio label {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios .form-radios .form-type-radio label {
   font: 300 14px/36px Roboto;
 }
-[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup {
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -3359,32 +3370,34 @@ body.has-cart-popup {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup div.description {
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup div.description, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup div.description {
   display: none;
 }
-[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding {
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding {
   position: absolute;
   left: 0;
   top: 0;
   border: none;
   width: 100%;
   height: 100%;
-  padding-left: 150px;
   z-index: 9;
 }
-[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding label {
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"], [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"] {
+  background: #fff url(../images/calender-icon.png) no-repeat right center;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding label, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding label {
   display: none;
 }
-[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield {
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield {
   margin: 0;
   height: 100%;
   border: none;
 }
-[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield .form-text {
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield .form-text, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield .form-text {
   width: 100%;
   height: 100%;
 }
-[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup > label {
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup > label, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup > label {
   width: 150px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
@@ -3394,7 +3407,7 @@ body.has-cart-popup {
   position: relative;
   float: left;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -3405,7 +3418,7 @@ body.has-cart-popup {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file label {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file label {
   width: 150px;
   height: 125px;
   padding: 0 20px;
@@ -3416,14 +3429,14 @@ body.has-cart-popup {
   float: left;
   position: relative;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file {
   width: 100%;
   padding: 10px 10px 10px 160px;
   position: absolute;
   left: 0;
   top: 0;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .form-submit[value="Upload"], [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
   width: 100px;
   background-color: #ededed;
   border: 1px solid #bababa;
@@ -3431,16 +3444,16 @@ body.has-cart-popup {
   float: right;
   cursor: pointer;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .ajax-progress-throbber {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .ajax-progress-throbber, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file .ajax-progress-throbber {
   display: none;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file div.description {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file div.description, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file div.description {
   color: #5f5f5f;
   font: 400 12px/16px Roboto;
-  margin-top: 35px;
-  padding-left: 160px;
+  margin-top: 8px;
+  padding-left: 270px;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file {
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3448,38 +3461,38 @@ body.has-cart-popup {
   white-space: nowrap;
   width: 240px;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file a {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file a, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file a {
   font: 400 14px/18px Roboto;
   color: #757575;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file + .form-submit {
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file + .form-submit, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file + .form-submit {
   color: #ee4d4d;
   font: 400 13px/18px Roboto;
   border: none;
   background-color: #fff;
   cursor: pointer;
 }
-[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data {
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data {
   float: none;
 }
-[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield {
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data .form-type-textfield {
   max-width: 200px;
   border: none;
   border-radius: 0;
   margin: 0;
   overflow: hidden;
 }
-[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield .form-text {
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield .form-text, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data .form-type-textfield .form-text {
   border: 1px solid #ddd;
   height: 34px;
   padding: 5px;
   position: static;
   width: 100%;
 }
-[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield div.description {
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield div.description, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data .form-type-textfield div.description {
   display: none;
 }
-[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-submit[value="Remove"] {
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-submit[value="Remove"], [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data .form-submit[value="Remove"] {
   color: #ee4d4d;
   font-size: 13px;
   left: 550px;
@@ -3487,11 +3500,11 @@ body.has-cart-popup {
   top: 16px;
   cursor: pointer;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-actions {
+[id*="itg-personalization-edit-profile-form"] > div .form-actions, [id*="itg-personalization-refer-a-friend-form"] > div .form-actions {
   padding: 20px 0;
   text-align: center;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-actions .form-submit {
+[id*="itg-personalization-edit-profile-form"] > div .form-actions .form-submit, [id*="itg-personalization-refer-a-friend-form"] > div .form-actions .form-submit {
   background: url(../images/btn-blue.png) no-repeat;
   height: 41px;
   border: none;
@@ -3500,7 +3513,7 @@ body.has-cart-popup {
   color: #fff;
   cursor: pointer;
 }
-[id*="itg-personalization-edit-profile-form"] > div .form-actions a.button {
+[id*="itg-personalization-edit-profile-form"] > div .form-actions a.button, [id*="itg-personalization-refer-a-friend-form"] > div .form-actions a.button {
   background: url(../images/btn-blue.png) no-repeat;
   height: 41px;
   border: none;
@@ -3510,31 +3523,31 @@ body.has-cart-popup {
   vertical-align: top;
   color: #fff;
 }
-[id*="itg-personalization-edit-profile-form"] > div table td {
+[id*="itg-personalization-edit-profile-form"] > div table td, [id*="itg-personalization-refer-a-friend-form"] > div table td {
   position: relative;
 }
-[id*="itg-personalization-edit-profile-form"] > div table td > .form-submit[value="Remove"], [id*="itg-personalization-edit-profile-form"] > div table td .ajax-new-content > .form-submit[value="Remove"] {
+[id*="itg-personalization-edit-profile-form"] > div table td > .form-submit[value="Remove"], [id*="itg-personalization-edit-profile-form"] > div table td .ajax-new-content > .form-submit[value="Remove"], [id*="itg-personalization-refer-a-friend-form"] > div table td > .form-submit[value="Remove"], [id*="itg-personalization-refer-a-friend-form"] > div table td .ajax-new-content > .form-submit[value="Remove"] {
   position: absolute;
   right: 10px;
   margin: 0;
   bottom: 20px;
 }
-[id*="itg-personalization-edit-profile-form"] > div table td .ajax-progress {
+[id*="itg-personalization-edit-profile-form"] > div table td .ajax-progress, [id*="itg-personalization-refer-a-friend-form"] > div table td .ajax-progress {
   display: none;
 }
-[id*="itg-personalization-edit-profile-form"] > div table + div .field-add-more-submit {
+[id*="itg-personalization-edit-profile-form"] > div table + div .field-add-more-submit, [id*="itg-personalization-refer-a-friend-form"] > div table + div .field-add-more-submit {
   margin-left: 0;
 }
-[id*="itg-personalization-edit-profile-form"] > div .messages.error.file-upload-js-error {
+[id*="itg-personalization-edit-profile-form"] > div .messages.error.file-upload-js-error, [id*="itg-personalization-refer-a-friend-form"] > div .messages.error.file-upload-js-error {
   display: none;
 }
-[id*="itg-personalization-edit-profile-form"] > div input[type="file"] {
+[id*="itg-personalization-edit-profile-form"] > div input[type="file"], [id*="itg-personalization-refer-a-friend-form"] > div input[type="file"] {
   width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-[id*="itg-personalization-edit-profile-form"] > div [id*="edit-submit"] {
+[id*="itg-personalization-edit-profile-form"] > div [id*="edit-submit"], [id*="itg-personalization-refer-a-friend-form"] > div [id*="edit-submit"] {
   background: transparent url("../images/btn-blue.png") no-repeat scroll 0 0;
   border: medium none;
   color: #fff;
@@ -3542,11 +3555,13 @@ body.has-cart-popup {
   font: 300 20px/28px Roboto;
   height: 41px;
   width: 170px;
+  margin: 30px auto 0;
+  display: block;
 }
-[id*="itg-personalization-edit-profile-form"] .change-mobile, [id*="itg-personalization-edit-profile-form"] .change-email {
+[id*="itg-personalization-edit-profile-form"] .change-mobile, [id*="itg-personalization-edit-profile-form"] .change-email, [id*="itg-personalization-refer-a-friend-form"] .change-mobile, [id*="itg-personalization-refer-a-friend-form"] .change-email {
   position: relative;
 }
-[id*="itg-personalization-edit-profile-form"] .change-mobile a, [id*="itg-personalization-edit-profile-form"] .change-email a {
+[id*="itg-personalization-edit-profile-form"] .change-mobile a, [id*="itg-personalization-edit-profile-form"] .change-email a, [id*="itg-personalization-refer-a-friend-form"] .change-mobile a, [id*="itg-personalization-refer-a-friend-form"] .change-email a {
   position: absolute;
   top: 20px;
   display: inline-block;
@@ -3554,6 +3569,78 @@ body.has-cart-popup {
   z-index: 9;
   font-size: 13px;
   color: #0db533;
+}
+
+[id*="itg-personalization-refer-a-friend-form"] fieldset {
+  border: none;
+  text-align: left;
+}
+[id*="itg-personalization-refer-a-friend-form"] fieldset legend {
+  display: none;
+}
+[id*="itg-personalization-refer-a-friend-form"] [id*="edit-friend-fieldset-add-friend"] {
+  background: transparent;
+  border: none;
+  color: #075bbb;
+  font-size: 14px;
+  margin-top: 0;
+  cursor: pointer;
+}
+[id*="itg-personalization-refer-a-friend-form"] > div [id*="edit-submit"] {
+  margin: 60px auto 0;
+  display: block;
+}
+
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file img {
+  max-height: 80px;
+  margin-bottom: 10px;
+}
+
+#block-itg-personalization-personalization-edit-profile, #block-itg-personalization-personalization-refer-friend {
+  max-width: 780px;
+  margin: 40px auto 0;
+}
+#block-itg-personalization-personalization-edit-profile ul, #block-itg-personalization-personalization-refer-friend ul {
+  list-style: none;
+  text-align: left;
+}
+#block-itg-personalization-personalization-edit-profile li, #block-itg-personalization-personalization-refer-friend li {
+  display: inline-block;
+  vertical-align: top;
+}
+#block-itg-personalization-personalization-edit-profile li a, #block-itg-personalization-personalization-refer-friend li a {
+  text-align: center;
+  padding: 10px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #1a3c8d;
+  padding: 15px 20px;
+  text-transform: uppercase;
+  display: block;
+}
+#block-itg-personalization-personalization-edit-profile li a.active, #block-itg-personalization-personalization-refer-friend li a.active {
+  background: #f8f8f8;
+}
+
+#block-itg-personalization-personalization-refer-friend .social-edit {
+  background: #f8f8f8;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  padding-top: 20px;
+  color: #757575;
+}
+#block-itg-personalization-personalization-refer-friend .social-edit > ul {
+  display: inline-block;
+}
+#block-itg-personalization-personalization-refer-friend .social-edit > ul > li {
+  padding: 0 10px;
+}
+#block-itg-personalization-personalization-refer-friend .social-edit > ul > li:first-child {
+  margin-top: 15px;
+}
+#block-itg-personalization-personalization-refer-friend .social-edit .more-option {
+  margin-top: 35px;
+  margin-bottom: 10px;
 }
 
 .question-container .answer-container > .form-item div.rating .form-item.form-type-checkbox {
@@ -3981,6 +4068,26 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer.movie-reviewer-other {
   margin-top: 0;
 }
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating {
+  float: none;
+  width: 111px;
+  height: 18px;
+  padding: 0px 0;
+  position: relative;
+  background: url(../images/rating-grey.png) 0 0px/80px no-repeat;
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: url(../images/rating-red.png) 0 0px/80px no-repeat;
+  height: 18px;
+  width: 0;
+}
 article.node-mega-review-critic .other-reviews {
   margin: 10px 0;
 }
@@ -4098,11 +4205,28 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
   padding-left: 0;
   padding-top: 20px;
 }
-.photos-videos-wrapper .movie-videos {
-  padding-right: 15px;
+.photos-videos-wrapper .movie-videos, .photos-videos-wrapper .movie-photos {
+  padding: 0 15px;
 }
-.photos-videos-wrapper .movie-photos {
-  padding-left: 15px;
+.photos-videos-wrapper .movie-videos .movie-data, .photos-videos-wrapper .movie-photos .movie-data {
+  position: relative;
+}
+.photos-videos-wrapper .movie-videos .movie-data .img-count, .photos-videos-wrapper .movie-photos .movie-data .img-count {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 12px;
+  font-family: Roboto;
+}
+.photos-videos-wrapper .movie-videos .photo-date, .photos-videos-wrapper .movie-photos .photo-date {
+  display: block;
+  font-size: 12px;
+  color: #b1b1b1;
+  padding: 8px 0 5px;
+  font-family: "Roboto Slab";
 }
 
 .career-graph .career-graph-data {
@@ -4137,6 +4261,46 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
 
 .overflow-x-auto {
   overflow-x: auto;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="10%"]:after {
+  width: 7.8px;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="20%"]:after {
+  width: 16px;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="30%"]:after {
+  width: 24px;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="40%"]:after {
+  width: 32px;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="50%"]:after {
+  width: 41px;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="60%"]:after {
+  width: 48px;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="70%"]:after {
+  width: 57px;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="80%"]:after {
+  width: 65px;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="90%"]:after {
+  width: 74px;
+}
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="90%"]:after {
+  width: 80px;
 }
 
 .page-sso-user #sso_password_form .pg-title {

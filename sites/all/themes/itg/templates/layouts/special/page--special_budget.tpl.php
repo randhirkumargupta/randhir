@@ -93,7 +93,6 @@ if (!empty($device[0])) {
             $cls = 'col-md-9';
         endif;
         ?>
-      <?php print render($page['vertical_menu']); ?>
         <main id="main" class="container">
             <section id="content" role="main">
                 <?php print render($page['highlighted']); ?>
@@ -120,8 +119,9 @@ if (!empty($device[0])) {
                 $itg_class = 'itg-front';
             }
             ?>
-            <div class="itg-layout-container <?php echo $itg_class; ?> budget-page-layout">
-               
+            <div class="itg-layout-container <?php echo $itg_class; ?> budget-page-layout pos-rel">
+                     <?php print render($page['vertical_menu']); ?>
+
                 <?php
                 if (!empty($highlights['node_data']->title)) {
                     echo '<h1>' . mb_strimwidth($highlights['node_data']->title, 0, 90, ".."). '<span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span></h1>';
