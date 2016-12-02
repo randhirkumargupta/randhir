@@ -60,9 +60,12 @@ function featute_for_related_photo_video_and_sambandhit_khabre_views_default_vie
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['row_class'] = 'tile-photos';
+  $handler->display->display_options['style_options']['wrapper_class'] = '';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Extra large image */
@@ -70,6 +73,7 @@ function featute_for_related_photo_video_and_sambandhit_khabre_views_default_vie
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
@@ -81,13 +85,16 @@ function featute_for_related_photo_video_and_sambandhit_khabre_views_default_vie
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['label'] = '';
+  $handler->display->display_options['fields']['field_photo_by']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_photo_by']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_photo_by']['settings'] = array(
     'link' => 0,
@@ -97,10 +104,28 @@ function featute_for_related_photo_video_and_sambandhit_khabre_views_default_vie
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['exclude'] = TRUE;
   $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'itg_time';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="tile">
+<div class="pic">[field_story_extra_large_image]</div>
+<div class="title">[title]</div>
+<div class="photo-by">
+<span class="name">[field_photo_by]</span>
+<span class="date">[changed]</span>
+</div>
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: primary category (field_primary_category) */
   $handler->display->display_options['arguments']['field_primary_category_value']['id'] = 'field_primary_category_value';
@@ -138,9 +163,13 @@ function featute_for_related_photo_video_and_sambandhit_khabre_views_default_vie
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['row_class'] = 'tile-popular-videos';
+  $handler->display->display_options['style_options']['class'] = 'slider-container';
+  $handler->display->display_options['style_options']['wrapper_class'] = '';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: primary category */
@@ -148,12 +177,14 @@ function featute_for_related_photo_video_and_sambandhit_khabre_views_default_vie
   $handler->display->display_options['fields']['field_primary_category']['table'] = 'field_data_field_primary_category';
   $handler->display->display_options['fields']['field_primary_category']['field'] = 'field_primary_category';
   $handler->display->display_options['fields']['field_primary_category']['label'] = '';
+  $handler->display->display_options['fields']['field_primary_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_primary_category']['element_label_colon'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
@@ -172,28 +203,49 @@ function featute_for_related_photo_video_and_sambandhit_khabre_views_default_vie
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '<a href="[path] ">[title]</a>';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Field: Field: Byline */
   $handler->display->display_options['fields']['field_story_reporter']['id'] = 'field_story_reporter';
   $handler->display->display_options['fields']['field_story_reporter']['table'] = 'field_data_field_story_reporter';
   $handler->display->display_options['fields']['field_story_reporter']['field'] = 'field_story_reporter';
   $handler->display->display_options['fields']['field_story_reporter']['label'] = '';
+  $handler->display->display_options['fields']['field_story_reporter']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_reporter']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_reporter']['settings'] = array(
     'link' => 0,
   );
-  $handler->display->display_options['fields']['field_story_reporter']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_story_reporter']['delta_offset'] = '0';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['exclude'] = TRUE;
   $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'itg_time';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['changed']['timezone'] = 'Asia/Kolkata';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="category-name">[field_primary_category]</div>
+<div class="pic">[field_story_extra_large_image]</div>
+<div class="title">[title]</div>
+<div class="reported-by">
+<span class="name">[field_story_reporter]</span>
+<span class="date">[changed]</span>
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: primary category (field_primary_category) */
   $handler->display->display_options['arguments']['field_primary_category_value']['id'] = 'field_primary_category_value';

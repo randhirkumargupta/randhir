@@ -1,10 +1,16 @@
+<?php 
+global $base_url;
+?>
+<section class="footer-ads">
+    <img src="<?php print $base_url;?>/sites/all/themes/aajtak/footer-ads.png" alt="Ads goes here..." />
+</section>
 <section class="footer-top">
     <div class="container">
       <div class="row">
         <div class="footer-top-link clearfix">
   
                 <div class="footer-logo">
-                    <a href="#" title="" rel="home" class="header__logo"><img src="http://localhost/aajtak/sites/all/themes/itg/logo.png" alt="" class="header__logo-image" /></a>
+                    <a href="#" title="" rel="home" class="header__logo"><img src="<?php echo $base_url ?>/sites/all/themes/aajtak/logo.png" alt="" class="header__logo-image" /></a>
                 </div>
                  
           <div class="menu-first">
