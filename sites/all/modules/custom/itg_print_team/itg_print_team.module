@@ -301,7 +301,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
 
           $magazine_options = itg_print_team_get_magazine_title();
           $selected = isset($form_state['values']['pti_magazine']) ? $form_state['values']['pti_magazine'] : key($magazine_options);
-
+          
           $form['pti_magazine'] = array(
               '#type' => 'select',
               '#title' => 'Magazine',
@@ -337,15 +337,34 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
               '#weight' => 101,
               '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:30px'),
           );
+          
+          $field_rating_info = field_info_field('field_story_rating');
+          $field_rating_values = $field_rating_info['settings']['allowed_values'];
+          
+          $form['story_rating'] = array(
+              '#type' => 'select',
+              '#title' => t('Rating'),
+              '#options' => $field_rating_values,
+              '#default_value' => isset($form_state['values']['story_rating']) ? $form_state['values']['story_rating'] : '_none',
+              '#attributes' => array('class' => array('associate-pti-magazine')),
+              '#weight' =>  102,
+          );
+          $form['submit_rating'] = array(
+              '#type' => 'submit',
+              '#value' => t('Submit Rating'),
+              '#weight' =>  103,
+              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:30px'),
+          );
           $form['download_csv'] = array(
               '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'button', 'style' => 'margin-top:30px'))),
-              '#weight' => 102,
+              '#weight' => 104,
               '#value' => t('Download CSV'),
           );
 
           $form['#validate'][] = 'itg_print_team_association_custom_validate';
           $form['submit']['#submit'][] = 'itg_print_team_association_custom_submit';
           $form['mark_as_complete']['#submit'][] = 'itg_print_team_markascomplete_custom_submit';
+          $form['submit_rating']['#submit'][] = 'itg_print_team_rating_custom_submit';
         }
     }
   }
@@ -688,7 +707,7 @@ function itg_print_team_association_custom_validate($form, &$form_state) {
   
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     if (!max($views_bulk_operations) > 0) {
-      form_set_error('views_bulk_operations', t('Please select atleast one checkbox to associate with magazine and issue or to mark as complete.'));
+      form_set_error('views_bulk_operations', t('Please select atleast one checkbox to perform operations.'));
     }
   }
   $op_value = $form_state['values']['op'];
@@ -747,6 +766,33 @@ function itg_print_team_markascomplete_custom_submit($form, &$form_state) {
           $node_details->field_pti_mark_as_complete['und'][0]['value'] = 'completed';
           field_attach_presave('node', $node_details);
           field_attach_update('node', $node_details);
+          drupal_set_message(t($node_details->title . ' has been successfully marked as complete.'), 'status');
+        }
+      }
+    }
+  }
+}
+/**
+ * Submit handler for story rating
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_print_team_rating_custom_submit($form, &$form_state) {
+  
+  $rating = $form_state['values']['story_rating'];
+  $views_bulk_operations = $form_state['values']['views_bulk_operations'];
+  if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
+    foreach ($views_bulk_operations as $source_id) {
+      if (!empty($source_id)) {
+        
+        $node_details = node_load($source_id);
+        if (empty($node_details->field_story_rating)) {
+          $node_details->field_story_rating['und'][0]['value'] = $rating;
+          field_attach_update('node', $node_details);
+          drupal_set_message(t($node_details->title . ' has been given ratings successfully.'), 'status');
+        }
+        else {
+          drupal_set_message(t($node_details->title . ' Rating has already been given.'), 'error');
         }
       }
     }

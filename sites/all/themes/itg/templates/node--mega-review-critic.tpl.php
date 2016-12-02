@@ -42,8 +42,13 @@
     <?php print render($content['field_story_movie_description']); ?>  
     </div>
     <div class="rating-and-social-wrapper">
-        <div class="movie-rating"></div>
-        <div class="social-info">
+        <div class="movie-rating">                      
+        </div>
+        <div class="social-info">     
+            <span class="share-count">
+                <i>4.3K</i>
+                SHARES
+            </span> 
             <span>
                 <i class="fa fa-facebook" aria-hidden="true"></i>
                 <dfn>1522</dfn>
@@ -108,8 +113,7 @@
                   <!-- Print External review. -->
                   <?php if ($reviews[$field_collection['value']]->field_story_review_type['und'][0]['value'] == 'external' && !$external_review): ?>
                   <div id="external-review" style="display:none;">
-                      <p><?php print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>
-                      
+                      <p><?php print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>                      
                       <span class="other-reviews-rating" data-star-value="<?php print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>
                     </div>                  
                     <?php $external_review == TRUE; ?>
