@@ -6,7 +6,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 }
 ?>
 <div class="header-ads mhide">
- <!--   <img src="<?php //print base_path()                ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
+ <!--   <img src="<?php //print base_path()                  ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
   <?php print ($data['itg_top']['200*200_header']); ?>
 </div>                               
 
@@ -73,6 +73,9 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
             if ($int_value) {
               $icon_object = file_load((int) $icon_fid);
               $link_text = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+              if (!empty($icon_object->uri)) {
+                $image_class = "image-icon";
+              }
             }
           }
           $sponsored_class = ($menu_data['db_data']['extra'] == 'Yes') ? "sponsored-active" : "";
@@ -95,7 +98,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
             $parent_class = "active";
           }
           ?>
-          <li><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class)))); ?></li>
+          <li><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $image_class)))); ?></li>
         <?php endforeach; ?>
       </ul>
       <?php //print drupal_render($data['itg_main_manu_header']);    ?>            
