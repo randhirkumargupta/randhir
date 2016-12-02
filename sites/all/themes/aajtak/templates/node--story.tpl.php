@@ -1,7 +1,7 @@
 <?php if (!empty($content)):
    global $base_url;
   ?>
-
+<?php //print $base_url;exit(); ?>
 <div class="story-section">
   <div class='<?php print $classes ?>'>
       <h1><?php print $node->title; ?></h1>
@@ -109,7 +109,9 @@
         </ul>
       </div>
       
-      <div id="ads-place">Ads goes here</div>
+      <div class="">
+          <img class="abc" src="../sites/all/themes/aajtak/images/ads.png" alt="Ads goes here..."/>
+      </div>
      
       <?php 
            if (function_exists(global_comment_last_record)) {
