@@ -72,19 +72,20 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
             <?php foreach ($data as $key => $menu_data) : ?>
               <?php
               $link_url = "";
+              $image_class = "";
               $target = "_self";
               $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $menu_data['db_data']['title'];
               $url_type = $menu_data['db_data']['url_type'];
               $db_target = $menu_data['db_data']['target'];
               $tid = $menu_data['db_data']['tid'];
-              $icon_fid = $menu_data['db_data']['menu_name'];
-              if ($icon_fid != 'notFound' || $icon_fid != 'blank') {
+              $icon_fid = (int) $menu_data['db_data']['menu_name'];
+              if ($icon_fid) {
                 $int_value = (int) $icon_fid;
                 if ($int_value) {
                   $icon_object = file_load((int) $icon_fid);
                   $link_text = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
                   if (!empty($icon_object->uri)) {
-                    $image_class = "image-icon";
+                    $image_class = "has-image";
                   }
                 }
               }
@@ -107,7 +108,7 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
                 $active = 'active';
               }
               ?>
-              <li><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class)))); ?></li>
+              <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class)))); ?></li>
             <?php endforeach; ?>
           </ul>
         </div>
