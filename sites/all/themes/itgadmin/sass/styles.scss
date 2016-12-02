@@ -8883,3 +8883,31 @@ div.node{
     }
 }
 /*budget predictor css end*/
+#itg-budget-predictor-search-form{
+    .form-type-select{
+        padding-left: 0;
+    }
+    .form-submit{
+       background-color: #33a26d;
+    border: 1px solid #197e4e;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    height: 32px;
+    margin-right: 5px;
+    padding: 5px 12px 7px;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 300ms;
+    text-decoration: none;
+    }
+}
+#taxonomy-overview-terms{
+    @extend .views-table;
+}
+.cheaper-dearer-btn{
+    list-style-type: none;
+    margin: 20px 0;
+}
