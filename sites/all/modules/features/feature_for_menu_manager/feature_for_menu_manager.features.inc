@@ -25,7 +25,7 @@ function feature_for_menu_manager_image_default_styles() {
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 100,
-          'height' => 32,
+          'height' => 37,
         ),
         'weight' => 1,
       ),
