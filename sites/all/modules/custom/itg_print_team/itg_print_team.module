@@ -792,7 +792,7 @@ function itg_print_team_rating_custom_submit($form, &$form_state) {
           drupal_set_message(t($node_details->title . ' has been given ratings successfully.'), 'status');
         }
         else {
-          drupal_set_message(t('Rating has already been provided.'), 'warning');
+          drupal_set_message(t($node_details->title . ' Rating has already been given.'), 'error');
         }
       }
     }
