@@ -125,7 +125,11 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     $form['field_pti_issue']['#access'] = FALSE;
     $form['field_pti_magazine']['#access'] = FALSE;
     $form['actions']['submit']['#value'] = 'Submit';
-
+    
+    // Hide Rating and Mark as complete fields from node edit page
+    $form['field_pti_mark_as_complete']['#access'] = FALSE;
+    $form['field_story_rating']['#access'] = FALSE;
+    
     // Unset meta tags
     unset($form['#metatags']);
     unset($form['actions']['preview']);
@@ -197,9 +201,9 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       }
   
       // Hide mark as complete field in case of completed only
-      if($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed'){
-         $form['field_pti_mark_as_complete']['#disabled'] = TRUE;
-      }
+//      if($form['#node']->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] == 'completed'){
+//         $form['field_pti_mark_as_complete']['#disabled'] = TRUE;
+//      }
       
       // Not allow to edit rating field for mark type users
       if($mark_task_comp_users_flag) {
@@ -208,11 +212,11 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     
       // Show mark as complete field to allowed users only
       $mark_task_as_complted_users = itg_print_team_check_mark_complete_users();
-      if ($mark_task_as_complted_users && $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
-        $form['field_pti_mark_as_complete']['#access'] = TRUE;
-      } else {
-        $form['field_pti_mark_as_complete']['#access'] = FALSE;
-      }
+//      if ($mark_task_as_complted_users && $form['#node']->field_pti_idea_status[LANGUAGE_NONE][0]['value'] == 'Approved') {
+//        $form['field_pti_mark_as_complete']['#access'] = TRUE;
+//      } else {
+//        $form['field_pti_mark_as_complete']['#access'] = FALSE;
+//      }
       
       // Show comment section in iframe
       $node_view_url = $base_url . '/node/' . $form['#node']->nid;
@@ -288,12 +292,12 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       if (!$mark_task_comp_users_flag) {
         
           // Disable idea's association option for all except "Approved"
-          for ($bulk_op = 0; $bulk_op < $filtered_result; $bulk_op++) {
-            $node_idea = node_load($form['views_bulk_operations'][$bulk_op]['#return_value']);
-            if ($node_idea->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] !== 'completed') {
-              $form['views_bulk_operations'][$bulk_op]['#disabled'] = TRUE;
-            }
-          }
+//          for ($bulk_op = 0; $bulk_op < $filtered_result; $bulk_op++) {
+//            $node_idea = node_load($form['views_bulk_operations'][$bulk_op]['#return_value']);
+//            if ($node_idea->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value'] !== 'completed') {
+//              $form['views_bulk_operations'][$bulk_op]['#disabled'] = TRUE;
+//            }
+//          }
 
           $magazine_options = itg_print_team_get_magazine_title();
           $selected = isset($form_state['values']['pti_magazine']) ? $form_state['values']['pti_magazine'] : key($magazine_options);
@@ -327,14 +331,21 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
               '#weight' => 100,
               '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:30px'),
           );
+          $form['mark_as_complete'] = array(
+              '#type' => 'submit',
+              '#value' => t('Mark as Complete'),
+              '#weight' => 101,
+              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:30px'),
+          );
           $form['download_csv'] = array(
               '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'button', 'style' => 'margin-top:30px'))),
-              '#weight' => 101,
+              '#weight' => 102,
               '#value' => t('Download CSV'),
           );
 
           $form['#validate'][] = 'itg_print_team_association_custom_validate';
           $form['submit']['#submit'][] = 'itg_print_team_association_custom_submit';
+          $form['mark_as_complete']['#submit'][] = 'itg_print_team_markascomplete_custom_submit';
         }
     }
   }
@@ -675,19 +686,20 @@ function itg_print_team_association_custom_validate($form, &$form_state) {
   $issue = $form_state['values']['pti_issue'];
   $magazine = check_plain($form_state['values']['pti_magazine']);
   
-
   if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
     if (!max($views_bulk_operations) > 0) {
-      form_set_error('views_bulk_operations', t('Please select atleast one checkbox to associate with magazine and issue.'));
+      form_set_error('views_bulk_operations', t('Please select atleast one checkbox to associate with magazine and issue or to mark as complete.'));
     }
   }
+  $op_value = $form_state['values']['op'];
+  if ($op_value == 'Associate') {
+    if ($magazine == '_none') {
+      form_set_error('magazine', t('Please select magazine.'));
+    }
 
-  if ($magazine == '_none') {
-    form_set_error('magazine', t('Please select magazine.'));
-  }
-
-  if ($issue == '_none') {
-    form_set_error('issue', t('Please select issue.'));
+    if ($issue == '_none') {
+      form_set_error('issue', t('Please select issue.'));
+    }
   }
 }
 
@@ -697,7 +709,7 @@ function itg_print_team_association_custom_validate($form, &$form_state) {
  * @param array $form_state
  */
 function itg_print_team_association_custom_submit($form, &$form_state) {
-  
+
   $views_bulk_operations = $form_state['values']['views_bulk_operations'];
   $issue = check_plain($form_state['values']['pti_issue']);
   $magazine = check_plain($form_state['values']['pti_magazine']);
@@ -717,7 +729,29 @@ function itg_print_team_association_custom_submit($form, &$form_state) {
     }
   }
 }
-
+/**
+ * Submit handler for mark as complete
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_print_team_markascomplete_custom_submit($form, &$form_state) {
+  
+  $filtered_result = count($form['#substitutions']['#value']);
+  $views_bulk_operations = $form_state['values']['views_bulk_operations'];
+  if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
+    foreach ($views_bulk_operations as $source_id) {
+      if (!empty($source_id)) {
+        
+        $node_details = node_load($source_id);
+        if (empty($node_details->field_pti_mark_as_complete)) {
+          $node_details->field_pti_mark_as_complete['und'][0]['value'] = 'completed';
+          field_attach_presave('node', $node_details);
+          field_attach_update('node', $node_details);
+        }
+      }
+    }
+  }
+}
 /**
  * Save function for association of story with magazine and issue
  * @global array $user

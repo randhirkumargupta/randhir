@@ -115,6 +115,11 @@ function itg_widgets_custom_variables() {
     '#title' => t('top takes block condition for arg(1)'),
     '#default_value' => variable_get('top_takes_block_condition'),
   );
+   $form['tid_politician'] = array(
+    '#type' => 'textarea',
+    '#title' => t('tid of politician'),
+    '#default_value' => variable_get('tid_politician'),
+  );
   return system_settings_form($form);
 }
 
@@ -156,6 +161,7 @@ function itg_widget_setids() {
   }
   $datatoset = array_unique($datatoset);
   $_SESSION[$_POST['formid']] = $datatoset;
+  echo json_encode($_SESSION[$_POST['formid']]);
 }
 
 function remove_extra_data() {
@@ -680,7 +686,6 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
 // Session value is set by ajax.
 // Extra funtionality to display nodeid with cross.
   $form_to_used_session_checked = forms_uses_checked_content_id();
-
   if (in_array($form['#form_id'], $form_to_used_session_checked)) {
 // $form_state['selection'] value is set by bulk operation submit.
 // Only selected nodes are come in $form_state['selection'] array.
@@ -689,6 +694,14 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     $form_state['selection'] = $_SESSION[$form['#form_id']];
     $form_state['values']['views_bulk_operations'] = $form_state['selection'];
     $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
+    $form['views_bulk_operations'][] = array(
+      '#attributes' => array("class" => array('handle-unckeck-on-page')),
+      '#return_value' => end($_SESSION[$form['#form_id']]),
+      '#default_value' => !empty(end($_SESSION[$form['#form_id']])) ? end($_SESSION[$form['#form_id']]) : NULL,
+      '#type' => 'checkbox',
+      '#prefix' => '<div style=\'display:none\'>',
+      '#suffix' => '</div>',
+    );
   }
 
 // Add a node id contianer just below the bulk operation.
@@ -1297,6 +1310,21 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
     else if (empty($_GET['nid']) && empty($_GET['title'])) {
       $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    }
+  }
+   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
+    if (!empty($_GET['nid']) && empty($_GET['title'])) {
+       
+      $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
+    } if (empty($_GET['nid']) && !empty($_GET['title'])) {
+       
+      $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
+    }
+    else if (!empty($_GET['nid']) && !empty($_GET['title'])) {
+      $query->where[1]['conditions'][3]['value'] = variable_get('tid_politician');
+    }
+    else if (empty($_GET['nid']) && empty($_GET['title'])) {
+      $query->where[1]['conditions'][1]['value'] = variable_get('tid_politician');
     }
   }
 

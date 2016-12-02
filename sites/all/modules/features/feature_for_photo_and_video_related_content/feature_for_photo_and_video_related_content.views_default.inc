@@ -113,6 +113,11 @@ function feature_for_photo_and_video_related_content_views_default_views() {
   $handler->display->display_options['arguments']['entity_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Apache Solr: bs_status */
+  $handler->display->display_options['filters']['bs_status']['id'] = 'bs_status';
+  $handler->display->display_options['filters']['bs_status']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['bs_status']['field'] = 'bs_status';
+  $handler->display->display_options['filters']['bs_status']['value'] = 'true';
   $handler->display->display_options['path'] = 'related-video';
 
   /* Display: Related photo */
@@ -191,6 +196,11 @@ function feature_for_photo_and_video_related_content_views_default_views() {
   $handler->display->display_options['arguments']['entity_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Apache Solr: bs_status */
+  $handler->display->display_options['filters']['bs_status']['id'] = 'bs_status';
+  $handler->display->display_options['filters']['bs_status']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['bs_status']['field'] = 'bs_status';
+  $handler->display->display_options['filters']['bs_status']['value'] = 'true';
   $handler->display->display_options['path'] = 'related-photo';
   $export['related_photo_video_content'] = $view;
 

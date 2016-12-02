@@ -114,7 +114,7 @@
                                 console.log("blockname"+ block_name);
                                 $('#' + content_place).html(data);
                                 //code by sunil                                
-                                jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
+                                jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings, #defalt-section-top-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
                                 //code by avanish                              
                                 if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1]== 'block_5') {
                                     jQuery(".flexslider").flexslider({

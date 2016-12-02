@@ -17,6 +17,21 @@ function feature_for_menu_manager_views_api($module = NULL, $api = NULL) {
 function feature_for_menu_manager_image_default_styles() {
   $styles = array();
 
+  // Exported image style: menu_manager_icons.
+  $styles['menu_manager_icons'] = array(
+    'label' => 'menu manager icons',
+    'effects' => array(
+      12 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 100,
+          'height' => 32,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: vertical_menu_icons.
   $styles['vertical_menu_icons'] = array(
     'label' => 'vertical menu icons',
