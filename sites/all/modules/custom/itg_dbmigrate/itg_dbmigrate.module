@@ -20,3 +20,47 @@ function get_itg_destination_id($table_name, $sourceid) {
   
   return $query->execute()->fetchField();
 }
+
+/**
+ * Order set of content
+ * @param array $node
+ * @return
+ */
+function ordering_set_of_content($node, $count) {  
+  
+  $nid = $node->nid;
+  $cat_id = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+  
+  if (!empty($cat_id)) {
+    $query = db_insert('itg_widget_order')
+        ->fields(array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => $node->type,
+          'cat_id' => $cat_id,
+          'weight' => $count,
+          'extra' => "",
+        ))
+        ->execute();        
+  }
+    
+}    
+ 
+
+/**
+ * insert value of flag count in db.
+ * @param int $nid
+ * @param string $type
+ * @param string $val
+ */
+function itg_flag_insert_like_dislike($nid, $type, $val) {
+  
+  $active = db_insert('itg_custom_flag_count')
+      ->fields(array(
+        'nid' => $nid,
+        $type => $val,
+        'created' => date('Y-m-d G:i:s'),
+      ))
+      ->execute();
+  
+}

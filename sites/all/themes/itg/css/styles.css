@@ -2464,21 +2464,23 @@ footer .footer-copyright {
   float: left;
   margin-right: 20px;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 10px 15px;
   font-family: "Roboto Slab", sans-serif;
 }
 .story-section .story-expert-opinion h4 {
-  font-family: "Roboto Slab", sans-serif;
-  font-family: 20px;
+  font-family: "Roboto Slab",sans-serif;
+  font-size: 22px;
+  font-weight: 700;
 }
 .story-section .story-expert-opinion img {
   width: 70px;
   height: 70px;
   border-radius: 100%;
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
 }
 .story-section .story-expert-opinion .expert-detail {
-  margin-top: 15px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 .story-section .story-expert-opinion .left-side p.name {
   font-size: 14px;
@@ -9327,7 +9329,7 @@ footer .footer-copyright {
   right: 0;
 }
 
-.listicle-page {
+.listicle-page.story-right {
   width: 100%;
 }
 .listicle-page .listicle-detail {
@@ -9345,7 +9347,7 @@ footer .footer-copyright {
   line-height: 34px;
   color: #fff;
   font-weight: 700;
-  margin-top: 5px;
+  margin-top: 15px;
 }
 .listicle-page .listicle-detail .listicle-description {
   font-size: 16px;
@@ -9353,7 +9355,7 @@ footer .footer-copyright {
   display: inline-block;
   vertical-align: top;
   width: 90%;
-  padding-left: 15px;
+  padding: 15px;
 }
 .listicle-page .listicle-detail .listicle-description span {
   font-weight: 600;
@@ -9457,3 +9459,31 @@ footer .footer-copyright {
 }
 
 /*css End Ask an expret for all page*/
+/* new changes defalt section page*/
+.itg-layout-container.default-section .auto-block-1, .itg-layout-container.default-section .auto-block-2 {
+  height: 673px;
+}
+.itg-layout-container.default-section .auto-block-1, .itg-layout-container.default-section .auto-block-2 {
+  border: 1px solid #dddddd;
+}
+.itg-layout-container.default-section .auto-block-2 {
+  position: relative;
+}
+.itg-layout-container.default-section .auto-block-2 .special-top-news {
+  overflow: hidden;
+  height: 100%;
+}
+.itg-layout-container.default-section .auto-block-2 .special-top-news .widget-title {
+  position: absolute;
+}
+.itg-layout-container.default-section .auto-block-2 .special-top-news ul {
+  padding-top: 20px !important;
+}
+.itg-layout-container.default-section .itg-listing, .itg-layout-container.default-section .featured-news {
+  border: none;
+}
+.itg-layout-container.default-section .itg-top-section .top-colum-2 .droppable {
+  margin-bottom: 0;
+}
+
+/* new changes defalt section page end*/
