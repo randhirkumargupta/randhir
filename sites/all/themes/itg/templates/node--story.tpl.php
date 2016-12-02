@@ -330,7 +330,17 @@ if (!empty($content)):
           ?>
 
           <!-- condition for buzz end -->      
-
+          
+          <div class="section-like-dislike">
+              <div id="name-dv"><?php print t('Do You Like This Story'); ?></div>
+              <div id="btn-div">
+             <?php if(function_exists(itg_event_backend_highlights_like_dislike)) {
+               print itg_event_backend_highlights_like_dislike(arg(1), 'story');
+             } ?>
+              </div>
+              </div>
+          
+          
           <div class="section-left-bototm">
               <div class="social-list">
                   <ul>
