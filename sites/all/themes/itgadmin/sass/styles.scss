@@ -1659,13 +1659,16 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   .bell-notice{      
     position: absolute;
     top: 50px;
-    left: -100px;
+    left: -135px;
     background: #fff;
-    box-shadow: 0 0 5px #ccc;    
-      ul{
-          list-style-type: none;
-          li{
-              a{
+    box-shadow: 0 0 5px #ccc; 
+    display:none;
+    ul{
+        max-height:285px;
+        overflow:auto;
+        list-style-type: none;
+        li{
+            a{
                 display: block;
                 padding: 10px 10px;
                 margin: 0;
@@ -1673,13 +1676,13 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
                 color: #000;
                 border-bottom: 1px solid #ddd;
                 font-weight: 500;
-                  &:hover{
-                      background: #f1f1f1;
-                  }
-              }
-          }
-      }
-/*      &:before{
+                &:hover{
+                    background: #f1f1f1;
+                }
+            }
+        }        
+    }
+    &:before{
         position: absolute;
         top: -10px;
         left: 50%;
@@ -1688,9 +1691,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
         height: 0; 
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;  
-        border-bottom: 10px solid #ec0727;
-        margin-left: -24px;
-      }*/
+        border-bottom: 10px solid #fff;
+        margin-left: -9px;
+    }
   }
 }
 .views-table{
@@ -8821,3 +8824,62 @@ div.node{
     }
     }    
 } 
+/*budget predictor css start*/
+#main-container-budget{     
+        padding:15px;                        
+    .col-list{        
+        min-height:600px;
+        background:#f3f3f3;
+        span{
+            font-size: 20px;
+            padding: 10px;
+            background: #09619f;
+            display: block;
+            color: #fff;
+            margin: 0 -15px;
+            border-bottom: 5px solid #fff;
+        }
+    }
+    .col-list-1{
+        background: #ffb7bf;        
+    border-right: 5px solid #fff;
+    }
+    .col-list-2{
+        background: #9cd2ed;
+        border-right: 5px solid #fff;
+    }
+    .col-list-3{
+        background: #bae6b5;
+        border-right: 5px solid #fff;
+    }
+    .col-list-4{
+        background: #f0f0f0;
+        p{
+            padding-top: 15px;
+            font-size: 16px;
+            text-align: center;
+            line-height: 22px;           
+        }
+         ul{
+                list-style: none;
+                margin-top: 20px;
+                li{
+                    background: transparent;
+                    border: none;
+                    height: 65px;
+                    width: 65px;
+                    display: inline-block;
+                    vertical-align: top;
+                    margin: 10px;
+                }
+            }
+    }
+    .btn{
+        margin-top: 40px;
+        margin-bottom: 100px;
+    }
+    .bottom-side-block{
+        display: none;
+    }
+}
+/*budget predictor css end*/

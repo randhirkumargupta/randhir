@@ -496,6 +496,9 @@ header {
   right: 0;
   top: 0;
 }
+#block-itg-layout-manager-header-block .navigation .menu li.has-image a {
+  padding: 0;
+}
 #block-itg-layout-manager-header-block .navigation .menu#newlist li a:after {
   display: none;
 }
@@ -9487,3 +9490,58 @@ footer .footer-copyright {
 }
 
 /* new changes defalt section page end*/
+/*budget predictor css start*/
+#main-container-budget .col-list {
+  min-height: 600px;
+  background: #f3f3f3;
+}
+#main-container-budget .col-list span {
+  font-size: 20px;
+  padding: 10px;
+  background: #09619f;
+  display: block;
+  color: #fff;
+  margin: 0 -15px;
+  border-bottom: 5px solid #fff;
+  font-family: roboto;
+}
+#main-container-budget .col-list-1 {
+  background: #ffb7bf;
+  border-right: 5px solid #fff;
+}
+#main-container-budget .col-list-2 {
+  background: #9cd2ed;
+  border-right: 5px solid #fff;
+}
+#main-container-budget .col-list-3 {
+  background: #bae6b5;
+  border-right: 5px solid #fff;
+}
+#main-container-budget .col-list-4 {
+  background: #f0f0f0;
+}
+#main-container-budget .col-list-4 p {
+  padding-top: 15px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 22px;
+}
+#main-container-budget .col-list-4 ul {
+  list-style: none;
+  margin-top: 20px;
+}
+#main-container-budget .col-list-4 ul li {
+  background: transparent;
+  border: none;
+  height: 65px;
+  width: 65px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
+}
+#main-container-budget .btn, #main-container-budget .page-user form .form-submit, .page-user form #main-container-budget .form-submit, #main-container-budget #block-formblock-ask-an-expert .form-submit, #block-formblock-ask-an-expert #main-container-budget .form-submit, #main-container-budget .question-container .form-submit, .question-container #main-container-budget .form-submit, #main-container-budget #content .node-form .form-actions .form-submit, #content .node-form .form-actions #main-container-budget .form-submit, #main-container-budget #content #comments .comment-form .form-actions .form-submit, #content #comments .comment-form .form-actions #main-container-budget .form-submit, #main-container-budget #comments #content .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions #main-container-budget .form-submit, #main-container-budget .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget td > .form-submit, #main-container-budget .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget td > .ajax-new-content > .form-submit {
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+
+/*budget predictor css end*/
