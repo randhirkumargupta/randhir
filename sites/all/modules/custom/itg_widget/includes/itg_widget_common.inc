@@ -694,10 +694,11 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     $form_state['selection'] = $_SESSION[$form['#form_id']];
     $form_state['values']['views_bulk_operations'] = $form_state['selection'];
     $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
+    $end_value = end($_SESSION[$form['#form_id']]);
     $form['views_bulk_operations'][] = array(
       '#attributes' => array("class" => array('handle-unckeck-on-page')),
       '#return_value' => end($_SESSION[$form['#form_id']]),
-      '#default_value' => !empty(end($_SESSION[$form['#form_id']])) ? end($_SESSION[$form['#form_id']]) : NULL,
+      '#default_value' => !empty($end_value) ? $end_value : NULL,
       '#type' => 'checkbox',
       '#prefix' => '<div style=\'display:none\'>',
       '#suffix' => '</div>',
