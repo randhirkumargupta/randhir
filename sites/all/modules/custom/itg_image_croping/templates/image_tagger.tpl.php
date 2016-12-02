@@ -22,13 +22,12 @@ list($width, $height) = getimagesize($url);
          
         $imagename=  str_replace('_', ' ', $imagename);
         $url = file_create_url($file->uri);
-        print '<div id="imgtag' . $key . '"> 
+        print '<div id="imgtag' . $key . '" class="multipal-crop-images"> 
         <img id="" src="' . $url . '" /> 
         <div id="tagbox' . $key . '">
         </div>
         <input type="hidden" name="fids[]" class="imagefid" value="' . $fids . '">
-        </div> 
-        <div id="taglist' . $key . '"> 
+           <div id="taglist' . $key . '" class="tag-box-input"> 
         <ol> 
         </ol>';
         if($content_name!="")
@@ -38,7 +37,9 @@ list($width, $height) = getimagesize($url);
         }
        
         print' <input type="text" name="courtesy[]" placeholder="Courtesy"  value="">
-                <input type="text" name="syndicate[]" placeholder="Syndicate" value=""></div>';
+                <input type="text" name="syndicate[]" placeholder="Syndicate" value=""></div> </div> ';  
+       
+       
         $counter++;
     }
     ?>

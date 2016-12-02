@@ -2580,6 +2580,22 @@ img {
   padding: 0;
   width: 145px;
 }
+.election-page .itg-map .map-result-detail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.48);
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+.election-page .itg-map .map-result-detail #consTable {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -48px;
+  margin-left: -110px;
+}
 .election-page .election-graph .col-el-1, .election-page .election-graph .col-el-2, .election-page .election-graph .col-el-3, .election-page .election-graph .col-el-4, .election-page .election-graph .col-el-5 {
   padding: 0 15px;
   float: left;
@@ -2794,3 +2810,12 @@ img {
 }
 
 /*Budget page css end*/
+/* new changes defalt section page*/
+.itg-layout-container.default-section .auto-block-1, .itg-layout-container.default-section .auto-block-2 {
+  height: 673px;
+}
+.itg-layout-container.default-section .auto-block-2 {
+  border: 1px solid #dddddd;
+}
+
+/* new changes defalt section page end*/

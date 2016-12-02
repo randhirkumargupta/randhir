@@ -139,8 +139,8 @@
                 if ($(this).hasClass('itg-remove-product')) {
                     var r = confirm("Do you really want to delete this product!");
                     if (r == false) {
-                      test_loader_hide();  
-                      event.preventDefault();  
+                        test_loader_hide();
+                        event.preventDefault();
                     }
                 }
             });
@@ -152,6 +152,31 @@
                 $('#widget-ajex-loader').hide();
             }
 
+            // Code for quantit update.
+            jQuery('select[name="quantity"]').on('change', function () {
+                var item_count = jQuery(this).find('option:selected').text();
+                var encoded_id = jQuery(this).find('option:selected').val();
+                $.ajax({
+                    url: Drupal.settings.itg_loyalty_reward.base_url + "/cart/update",
+                    type: 'post',
+                    data: {'item_count': item_count, 'encoded_id' : encoded_id},
+                    dataType: "JSON",
+                    success: function(data) {
+                        console.log(data);
+                        switch (data.code) {
+                            case -2:
+                                alert('Insufficient points to redeem this product.');
+                                break;                                                            
+                        }                        
+                    },
+                    beforeSend: function (xhr) {
+                        test_loader_show();
+                    },
+                    complete: function() {
+                        test_loader_hide();
+                    }
+                });
+            });
 
             // Code end for product page.
 

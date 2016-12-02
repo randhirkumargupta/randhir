@@ -165,6 +165,12 @@ function _cart_total_point($uid, $op = NULL) {
  */
 function itg_loyalty_reward_place_order() {
   global $user;
+  // Get product info.
+  $cart_detail = _get_cart_full_details($user->uid);
+  $errors = array_filter($cart_detail);
+  if (empty($errors)) {
+    drupal_goto('redeem-points');
+  }  
   $user_detail = user_load($user->uid);
   $fname = $user_detail->field_first_name['und'][0]['value'];
   $lname = $user_detail->field_last_name['und'][0]['value'];
@@ -176,8 +182,7 @@ function itg_loyalty_reward_place_order() {
     'city' => $inputs['city'],
     'zip_code' => 462011,
   );
-  // Get product info.
-  $cart_detail = _get_cart_full_details($user->uid);
+  
   $data['cart-items'] = $cart_detail;  
   // Save data into order table.
   $presave = array(

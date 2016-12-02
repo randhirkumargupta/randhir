@@ -95,6 +95,11 @@ class ItgStoryMigration extends XMLMigration {
       'quote_title' => t('quote_title'),
       'quote_image' => t('quote_image'),
       'factoids_title' => t('factoids_title'),
+      'title' => t('title'),
+      'rating' => t('rating'),
+      'pron-cons-img' => t('pron-cons-img'),
+      'item' => t('item'),
+      'factoids_title' => t('factoids_title'),
       'sefurl' => t('Sefurl'),
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
@@ -111,7 +116,7 @@ class ItgStoryMigration extends XMLMigration {
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/story';
+    $item_xpath = '/root/story';
 
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /story/item/id.
@@ -240,6 +245,12 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_factoids_title', 'factoids_title')->xpath('fulltext_conclaveformat/factoids_title');
     $this->addFieldMapping('field_story_quote_image', 'quote_image')->xpath('fulltext_conclaveformat/quote_image');
     
+    $this->addFieldMapping('field_story_tech_pros_cons_title', 'title')->xpath('pros-cons/tech-pros-cons-main/title');
+    $this->addFieldMapping('field_story_tech_pros_cons_ratin', 'rating')->xpath('pros-cons/tech-pros-cons-main/rating');
+    $this->addFieldMapping('field_story_tech_pros_cons_image', 'pron-cons-img')->xpath('pros-cons/tech-pros-cons-main/pron-cons-img');
+    $this->addFieldMapping('field_story_technology_pros', 'item')->xpath('tech-pros/item');
+    $this->addFieldMapping('field_story_technology_cons', 'item')->xpath('tech-cons/item');
+    $this->addFieldMapping('field_story_tech_image_gallery', 'image')->xpath('tech-image-gallery/image');
 
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
@@ -248,19 +259,79 @@ class ItgStoryMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
-    // prepare row for listicle
-   /* $data_listicle = '';
-    if (isset($row->xml->fulltext_conclaveformat->listicle_content->listicle) && !empty($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
-      foreach ($row->xml->fulltext_conclaveformat->listicle_content->listicle as $final_listicle) {
-        $data_listicle[]['value'] = (string) $final_listicle;
+    // Mosimage in body
+    if(!empty($row->xml->mosimage)){
+      $mos_count= array();
+      foreach($row->xml->mosimage->image as $images){
+        $image = (string)$images;
+        if(!empty($image)){
+          $mosimage_array[] = '<img src="'.$image.'">';
+        }
       }
+     $mos_count = count($mosimage_array);
     }
-    $row->listicle_new = $data_listicle;*/
-    // end prepare row for listicle
+
+    if(!empty($row->xml->storybody)){
+      $body_string = (string) $row->xml->storybody;
+      $mos_image_tag = substr_count($body_string, '{mosimage}');
+      if($mos_count >= $mos_image_tag){
+        $string = itg_dbmigrate_mosimage_replace($body_string, $mosimage_array, '{mosimage}');
+      }else{
+        $string = (string)$body_string;
+      }
+      $row->xml->storybody = $string;
+    }
+    
+    // blurb tags
+    if(!empty($row->xml->blurbs)){
+      $blurb_count = array();
+      foreach($row->xml->blurbs->blurb as $blurbs){
+        $blurb = (string)$blurbs;
+        if(!empty($blurb)){
+          $blurb_array[] = $blurb;
+        }
+      }
+      $blurb_count = count($blurb_array);
+    }
+    // Blurb assign to body
+      if(!empty($row->xml->storybody)){
+      $body_string = (string) $row->xml->storybody;
+      $blurb_tag = substr_count($body_string, '{blurb}');
+      if($blurb_count >= $blurb_tag){
+        $string = itg_dbmigrate_mosimage_replace($body_string, $blurb_array, '{blurb}');
+      }else{
+        $string = (string)$body_string;
+      }
+      $row->xml->storybody = $string;
+    }
+    
+    //Tabel tags
+    if(!empty($row->xml->tables)){
+      $table_count = array();
+      foreach($row->xml->tables->table as $tables){
+        $table = (string) $tables;
+        if(!empty($table)){
+          $table_array[] = $table;
+        }
+      }
+      $table_count = count($table_array);
+    }
+    
+    // Table assing to body
+    if(!empty($row->xml->storybody)){
+      $body_string = (string) $row->xml->storybody;
+      $table_tag = substr_count($body_string, '{table}');
+      if($table_count >= $table_tag){
+        $string = itg_dbmigrate_mosimage_replace($body_string, $table_array, '{table}');
+      }else{
+        $string = (string)$body_string;
+      }
+      $row->xml->storybody = $string;
+    }
     // prepare row for quote
     $data_quotes = '';
     if (isset($row->xml->fulltext_conclaveformat->quotes->quote) && !empty($row->xml->fulltext_conclaveformat->quotes->quote)) {
-      foreach ($row->xml->quotes->quote as $final_quote) {
+      foreach ($row->xml->fulltext_conclaveformat->quotes->quote as $final_quote) {
         $data_quotes[]['value'] = (string) $final_quote;
       }
     }
@@ -269,7 +340,7 @@ class ItgStoryMigration extends XMLMigration {
     // prepare row for factoids
     $data_factoids = '';
     if (isset($row->xml->fulltext_conclaveformat->factoids_content->factoids) && !empty($row->xml->fulltext_conclaveformat->factoids_content->factoids)) {
-      foreach ($row->xml->factoids_content->factoids as $final_factoids) {
+      foreach ($row->xml->fulltext_conclaveformat->factoids_content->factoids as $final_factoids) {
         $data_factoids[]['value'] = (string) $final_factoids;
       }
     }
@@ -306,7 +377,7 @@ class ItgStoryMigration extends XMLMigration {
     $data_city = '';
 
     if (isset($row->xml->cities->city) && !empty($row->xml->cities->city)) {
-      foreach ($row->xml->cities->city as $data_city) {
+      foreach ($row->xml->cities->city as $final_city) {
         $source_city = (string) $final_city;
         $orignal_city = get_itg_destination_id('migrate_map_itgcity', $source_city);
         $data_city[]['tid'] = $orignal_city;
@@ -465,6 +536,7 @@ class ItgStoryMigration extends XMLMigration {
     if (!empty($row->tag_new)) {
       $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
     }
+    
     if (!empty($row->city_new)) {
       $node->field_stroy_city[LANGUAGE_NONE] = $row->city_new;
     }
@@ -479,57 +551,74 @@ class ItgStoryMigration extends XMLMigration {
     }
     if(!empty($row->featuredname)){
       $node->field_story_featured_name[LANGUAGE_NONE][0]['tid'] = (string) $row->featuredname;
-    }
-    if(!empty($row->city)){
-      $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = (string) $row->city;
-    }
-  
-    $node->uid = 291;
+    }  
+    $node->uid = 415;
   }
 
   public function complete($entity, $row) {
     $node = node_load($entity->nid);
-    $key = 0;
-    //if (isset($row->xml->buzz_content->buzz)) {
-      foreach ($row->xml->buzz_content->buzz as $value) {
-        $headline = (string) $value->headline;
-        $image_url = (string) $value->image;
+    
+    if (isset($row->xml->buzz_content->buzz) && (!empty($row->xml->buzz_content->buzz->headline) || !empty($row->xml->buzz_content->buzz->image) || !empty($row->xml->buzz_content->buzz->description))) {
+      
+      $key = 0;
+      foreach ($row->xml->buzz_content->buzz as $buzz_value) {
+        if(!empty($buzz_value->headline) || !empty($buzz_value->image) || !empty($buzz_value->description)){
+        $headline = (string) $buzz_value->headline;
+        $image_url = (string) $buzz_value->image;
         $file = file_save_data(file_get_contents($image_url), file_default_scheme() . '://' . basename($image_url), FILE_EXISTS_RENAME);
         $file->status = 1;
-        $file->alt = (string) $value->buzz_alt;
-        $file->title = (string) $value->buzz_title;
+        $file->alt = (string) $buzz_value->buzz_alt;
+        $file->title = (string) $buzz_value->buzz_title;
         $image = (array) $file;
-        $description = (string) $value->description;
-        $values = array(
+        $description = (string) $buzz_value->description;
+        $buzz_values = array(
           'field_name' => 'field_story_template_buzz',
           'field_buzz_headline' => array(LANGUAGE_NONE => array(array('value' => $headline))),
           'field_buzz_image' => array(LANGUAGE_NONE => array($image)),
           'field_buzz_description' => array(LANGUAGE_NONE => array(array('value' => $description))),
         );
-        $field_collection_item = entity_create('field_collection_item', $values);
+        $field_collection_item = entity_create('field_collection_item', $buzz_values);
         $field_collection_item->setHostEntity('node', $node);
         $field_collection_item->save(TRUE);
         $node->field_story_template_buzz[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
         $key++;
+        }
       }
-      $count++;
-      foreach ($row->xml->fulltext_conclaveformat->listicle_content as $value) {
-        $listicle = (string) $value->listicle;
-       
+    }
+      
+      
+    if (isset($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
+      $count=0;
+     
+      foreach ($row->xml->fulltext_conclaveformat->listicle_content->listicle as $value) {
+        $listicle = (string) $value;
         $values = array(
           'field_name' => 'field_story_listicle',
-          'field_story_listicle_description' => array(LANGUAGE_NONE => array(array('value' => $headline))),          
+          'field_story_listicle_description' => array(LANGUAGE_NONE => array(array('value' => $listicle))),          
         );
-        
-        $field_collection_item = entity_create('field_collection_item', $values);
-        $field_collection_item->setHostEntity('node', $node);
-        $field_collection_item->save(TRUE);
-        $node->field_story_listicle[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
+        $field_collection_item_listicle = entity_create('field_collection_item', $values);
+        $field_collection_item_listicle->setHostEntity('node', $node);
+        $field_collection_item_listicle->save(TRUE);
+        $node->field_story_listicle[LANGUAGE_NONE][$count]['value'] = $field_collection_item_listicle->item_id;
         $count++;
       }
-      
-      field_attach_update('node', $node);
-    //}
+    }
+
+   if (isset($row->xml->buzz_content->buzz) || isset($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
+     
+    field_attach_update('node', $node);
+   }
+   //code for like and dislike
+   if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+     itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+   }
+
+   
+   //code for order set
+   if (isset($row->xml->ordering)) {
+     ordering_set_of_content($node, $row->xml->ordering);
+   }
+   
   }
 
 }

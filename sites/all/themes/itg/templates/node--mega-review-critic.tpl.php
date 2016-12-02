@@ -42,8 +42,13 @@
     <?php print render($content['field_story_movie_description']); ?>  
     </div>
     <div class="rating-and-social-wrapper">
-        <div class="movie-rating"></div>
-        <div class="social-info">
+        <div class="movie-rating">                      
+        </div>
+        <div class="social-info">     
+            <span class="share-count">
+                <i>4.3K</i>
+                SHARES
+            </span> 
             <span>
                 <i class="fa fa-facebook" aria-hidden="true"></i>
                 <dfn>1522</dfn>
@@ -99,11 +104,16 @@
               <!-- Review Headline -->
               <h2><?php print $reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value']; ?></h2>
               <div class="other-reviews-posted-on">
-                  <!-- Byline reporter -->                  
+                  <!-- Byline reporter -->
+                  <!-- Get Multiple reviewers name -->
+                  <?php $reviewers = array(); ?>
+                  <?php foreach($reviews[$field_collection['value']]->field_story_reporter['und'] as $reviewer_name): ?>                  
+                    <?php $reviewers[] = $reviewer_name['entity']->title ?>
+                  <?php endforeach; ?>
                   <!-- Print External review. -->
                   <?php if ($reviews[$field_collection['value']]->field_story_review_type['und'][0]['value'] == 'external' && !$external_review): ?>
                   <div id="external-review" style="display:none;">
-                      <p><?php print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>
+                      <p><?php print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>                      
                       <span class="other-reviews-rating" data-star-value="<?php print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>
                     </div>                  
                     <?php $external_review == TRUE; ?>
@@ -112,12 +122,13 @@
                   <!-- Print internal review. -->
                   <?php if ($reviews[$field_collection['value']]->field_story_review_type['und'][0]['value'] == 'internal' && !$internal_review): ?>
                   <div id="internal-review" style="display:none;">
-                      <p><?php print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>
+                      <p><?php print implode(', ', $reviewers); ?></p>
                       <span class="other-reviews-rating" data-star-value="<?php print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>
                     </div>                  
                     <?php $internal_review == TRUE; ?>
                   <?php endif; ?>
-                  <span class="other-reviews-by"><?php print t('By') . ' ' . $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></span>
+                  
+                  <span class="other-reviews-by"><?php print t('By') . ' ' . implode(', ', $reviewers); ?></span>
                   <!-- Created date -->
                   <span class="other-reviews-date"><?php print format_date($node->created, 'custom', 'F d, Y'); ?></span>
                   <!-- Ratings -->    
@@ -151,8 +162,12 @@
             $asso_vid_class = 'full-width';
           }       
         ?>
+        
+        <div class="row">
+        
         <?php if ($asso_vid_id): ?>
         <div class="movie-videos <?php print $asso_vid_class; ?>">
+            <div class="movie-data">
             <h3><span>MOVIE VIDEOS</span></h3>
             <?php
             
@@ -165,12 +180,24 @@
             );
             print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
             ?>
+             <?php $video_date = format_date($video_node->created, 'custom', 'D, d, M, Y'); ?>
+            
+             <div class="img-count">
+                 <i class="fa fa-play-circle"></i>
+            </div>
+            </div>
+            
+        <div class="photo-date"><?php print $video_date ?></div>
+        <div class="photo-title"><?php print $video_node->title; ?></div>
+        
         </div>
+       
         <?php endif; ?>
         <!-- Photos -->
         <?php $asso_photo_gallery = $node->field_associate_photo_gallery['und'][0]['target_id'];; ?>
         <?php if ($asso_photo_gallery): ?>
         <div class="movie-photos <?php print $ass_photo_class; ?>">
+            <div class="movie-data">
             <h3><span>MOVIE PHOTOS</span></h3>
             <?php            
             $photo_node = node_load($asso_photo_gallery);
@@ -184,10 +211,16 @@
             print l($small_image, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
             ?>
             <div class="img-count">
-                <?php print $image_count; ?>
+                <i class="fa fa-camera"></i> <?php print $image_count . t(' Images'); ?>
             </div>
+            </div>
+             <?php $photo_date = format_date($photo_node->created, 'custom', 'D, d, M, Y'); ?>
+        <div class="photo-date"><?php print $photo_date ?></div>
+        <div class="photo-title"><?php print $photo_node->title; ?></div>
         </div>
+       
         <?php endif; ?>
+        </div>
     </div>
     <div class="career-graph">
         <?php

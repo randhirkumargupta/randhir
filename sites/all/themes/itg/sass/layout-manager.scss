@@ -2308,6 +2308,22 @@ img{
             line-height: 20px;
             padding: 0;
             width: 145px;
+        }
+        .map-result-detail{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.48);
+            height: 100%;
+            width: 100%;
+            display:none;
+            #consTable{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -48px;
+                margin-left: -110px;
+            }
         }        
     }
     .election-graph{        
@@ -2577,3 +2593,13 @@ img{
     }
 }
 /*Budget page css end*/
+/* new changes defalt section page*/
+.itg-layout-container.default-section{
+    .auto-block-1, .auto-block-2{
+        height: 673px;
+    }
+    .auto-block-2{
+        border: 1px solid $border-color;
+    }
+}
+/* new changes defalt section page end*/

@@ -13,7 +13,12 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   if (isset($form_state['view']->name) && $form_state['view']->name == 'syndication_rule_listing') {
     $form['field_syndication_rule_title_value']['#options'] = itg_syndication_get_client();
     unset($form['field_syndication_rule_title_value']['#options']['_none']);
+    $options = $form['field_syndication_rule_title_value']['#options'];
+    unset($form['field_syndication_rule_title_value']['#options']);
     $form['field_syndication_rule_title_value']['#options']['All'] = '- Any -';
+    foreach($options as $keys=>$values) {
+      $form['field_syndication_rule_title_value']['#options'][$keys] = $values;
+    }
   }
 
   if ($form_id == 'views_form_syndication_feed_generator_page') {
@@ -175,6 +180,19 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   // View autocomplete title field.
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_client') {
     $form['title']['#autocomplete_path'] = 'content-title-list/syndication_client/autocomplete';
+  }
+  // Code to ristrict future date on client creation.
+  if($form_id == 'views_form_syndication_feed_generator_page') {
+   $form['client_delivery_mode']['#title'] = t("Select delivery end point");
+    drupal_add_js('
+      jQuery(function() {
+        jQuery( "#edit-changed-max-datepicker-popup-0" ).datepicker({  
+          changeMonth:true,
+          changeYear:true,
+          maxDate: new Date() 
+        });
+      });
+    ',"inline");
   }
 }
 

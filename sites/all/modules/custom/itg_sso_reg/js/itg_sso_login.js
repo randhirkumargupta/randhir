@@ -67,6 +67,8 @@
                 });
             });
             
+            // change passsword field name
+            jQuery("#itg-sso-reg-password-form  label[for='edit-pass-pass1']").text("New password");
         }
 
     };
