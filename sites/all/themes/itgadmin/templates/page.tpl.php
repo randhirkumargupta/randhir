@@ -103,11 +103,9 @@ if (!in_array('administrator', $user->roles)) {
                     $role_display = implode(',', $role_display);
                     print $role_display;
                     ?>
-                </span>
-                         
-                         
-                         <div class="bell-notice">                                                       
-                         </div>
+                </span>                                                  
+                <div class="bell-notice">                        
+                </div>
             </div>
 <?php print render($page['header']); ?>
         </section>
