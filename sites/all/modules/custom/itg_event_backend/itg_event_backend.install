@@ -1,0 +1,52 @@
+<?php
+/**
+ * @file: itg_event_backend.install 
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store event node information
+ * @return array
+ */
+function itg_event_backend_schema() {
+  $schema['itg_event_publish_cron'] = array(
+      'description' => 'Table for itg_event_backend module',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The Primary Id',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'nid' => array(
+              'description' => 'Node Id',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'event_start_date' => array(
+              'description' => 'Event start date',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'status' => array(
+              'description' => 'Status',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'created' => array(
+              'type' => 'int',
+              'not null' => TRUE,
+              'default' => 0
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  return $schema;
+}

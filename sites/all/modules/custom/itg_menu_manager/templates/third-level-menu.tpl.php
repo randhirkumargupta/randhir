@@ -54,58 +54,60 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-  <?php
-  if (!empty($src) && isset($uri)) {
-    print "<img src='" . $src . "'>";
-  }
-  ?>
+          <?php
+          if (!empty($src) && isset($uri)) {
+            print "<img src='" . $src . "'>";
+          }
+          ?>
         </div>
 
 
         <div class="col-md-8">
-  <?php
-  if (!empty($ipl_link) && strlen($ipl_link) > 0) {
-    //print $ipl_link;
-  }
-  ?>
+          <?php
+          if (!empty($ipl_link) && strlen($ipl_link) > 0) {
+            //print $ipl_link;
+          }
+          ?>
           <ul class="third-level-menu">
-          <?php foreach ($data as $key => $menu_data) : ?>
-            <?php
-            $link_url = "";
-            $target = "_self";
-            $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $menu_data['db_data']['title'];
-            $url_type = $menu_data['db_data']['url_type'];
-            $db_target = $menu_data['db_data']['target'];
-            $tid = $menu_data['db_data']['tid'];
-            $icon_fid = $menu_data['db_data']['menu_name'];
-            if ($icon_fid != 'notFound' || $icon_fid != 'blank') {
-              $int_value = (int) $icon_fid;
-              if ($int_value) {
-                $icon_object = file_load((int) $icon_fid);
-                $icon_url = file_create_url($icon_object->uri);
-                $link_text = '<img title="' . $link_text . '" src="' . $icon_url . '" height = "37" width = "120">';
+            <?php foreach ($data as $key => $menu_data) : ?>
+              <?php
+              $link_url = "";
+              $target = "_self";
+              $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $menu_data['db_data']['title'];
+              $url_type = $menu_data['db_data']['url_type'];
+              $db_target = $menu_data['db_data']['target'];
+              $tid = $menu_data['db_data']['tid'];
+              $icon_fid = $menu_data['db_data']['menu_name'];
+              if ($icon_fid != 'notFound' || $icon_fid != 'blank') {
+                $int_value = (int) $icon_fid;
+                if ($int_value) {
+                  $icon_object = file_load((int) $icon_fid);
+                  $link_text = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+                  if (!empty($icon_object->uri)) {
+                    $image_class = "image-icon";
+                  }
+                }
               }
-            }
-            // if tid is not 0 then its internal url
-            if ($tid && $url_type == 'internal') {
-              $link_url = "taxonomy/term/$tid";
-            }
-            else {
-              $link_url = $menu_data['db_data']['url'];
-            }
-            // manage target
-            if (trim($db_target) == 'new_window') {
-              $target = "_blank";
-            }
-            $active = '';
-            $arg1 = arg(1);
-            $urlalise = drupal_get_path_alias("node/$arg1");
-            $real_path_alise = ($urlalise) ? $urlalise : "node/$arg1";
-            if (end(explode('/', $link_url)) == $real_path_alise) {
-              $active = 'active';
-            }
-            ?>
-              <li><?php print l($link_text, $link_url, array('html'=>true ,'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active)))); ?></li>
+              // if tid is not 0 then its internal url
+              if ($tid && $url_type == 'internal') {
+                $link_url = "taxonomy/term/$tid";
+              }
+              else {
+                $link_url = $menu_data['db_data']['url'];
+              }
+              // manage target
+              if (trim($db_target) == 'new_window') {
+                $target = "_blank";
+              }
+              $active = '';
+              $arg1 = arg(1);
+              $urlalise = drupal_get_path_alias("node/$arg1");
+              $real_path_alise = ($urlalise) ? $urlalise : "node/$arg1";
+              if (end(explode('/', $link_url)) == $real_path_alise) {
+                $active = 'active';
+              }
+              ?>
+              <li><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class)))); ?></li>
             <?php endforeach; ?>
           </ul>
         </div>

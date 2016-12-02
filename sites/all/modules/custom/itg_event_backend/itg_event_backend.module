@@ -742,14 +742,56 @@ function itg_event_backend_node_access($node, $op, $account) {
     return NODE_ACCESS_IGNORE;
 }
 
+
+/**
+ * Implement hook_node_insert 
+ * {@inheritdoc}
+ */
+function itg_event_backend_node_insert($node) {
+  if ($node->type == 'event_backend') {
+    $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
+    itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'insert');
+  }
+}
+
 /**
  * Implements hook_node_update
- * @param object $node
+ * {@inheritdoc}
  */
 function itg_event_backend_node_update($node) {
     if ($node->type == 'event_backend') {
         itg_event_backend_insert_into_redirect($node);
+        $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
+        itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
     }
+}
+
+/**
+ * Insert and update cron table for event publishing action through cron
+ * @param int $nid
+ * @param int $event_start_date
+ * @param string $op
+ */
+function itg_event_backend_insert_event_publish_details($nid, $event_start_date, $op) {
+  if (db_table_exists('itg_event_publish_cron')) {
+    if ($op == 'insert') {
+      db_insert('itg_event_publish_cron')
+              ->fields(array(
+                  'nid' => $nid,
+                  'event_start_date' => $event_start_date,
+                  'status' => 0,
+                  'created' => time()
+              ))
+              ->execute();
+    } else {
+      db_update('itg_event_publish_cron')
+              ->fields(array(
+                  'event_start_date' => $event_start_date,
+              ))
+              ->condition('nid', $nid, '=')
+              ->execute();
+    }
+  }
 }
 
 /**
@@ -1476,4 +1518,51 @@ function itg_event_backend_live_content() {
   $video = '<div class="row top-block-highlight"><div class="highlights-video col-md-7"><h2 style="live-event-title">'.$title.'</h2><div class="live-event-video">' . $banner_video . '</div></div>';
   $highlights_content = '<div class="highlights-container col-md-5">'. itg_event_backend_highlights_block_content().'</div></div>';
   return $video.$highlights_content;
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_event_backend_cronapi($op, $job = NULL) {
+  $items['itg_event_backend_publish_event'] = array(
+    'description' => 'Publish Event',
+    'callback' => 'itg_event_backend_publish_event_callback', 
+  );
+  return $items;
+}
+
+/**
+ * Publish event automatically through cron
+ */
+function itg_event_backend_publish_event_callback() {
+  $current_time = time();
+  
+  if (db_table_exists('itg_event_publish_cron')) {
+    $query = db_select('itg_event_publish_cron', 'e');
+    $query->fields('e')
+            ->condition('e.status', 0, '=');
+    $result = $query->execute();
+
+    // Fetch node to publish
+    while ($record = $result->fetchAssoc()) {
+      $event_start_date = $record['event_start_date'];
+      if ($current_time >= $event_start_date) {
+        db_update('node')
+                ->fields(array(
+                    'status' => 1,
+                ))
+                ->condition('nid', $record['nid'], '=')
+                ->execute();
+
+        // Update cron table
+        db_update('itg_event_publish_cron')
+                ->fields(array(
+                    'status' => 1,
+                ))
+                ->condition('nid', $record['nid'], '=')
+                ->execute();
+      }
+    }
+  }
 }
