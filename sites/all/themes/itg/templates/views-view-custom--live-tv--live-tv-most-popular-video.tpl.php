@@ -1,6 +1,6 @@
 <?php global $base_url; ?>
 <div class="live-tv-latest-video-container container">
-  <h2><?php print t("Most popular"); ?></h2>
+  <h2><?php print t("अन्य ख़बरे"); ?></h2>
   <?php foreach ($rows as $key => $output) : ?>
     <div class="latest-video-rows latest-video-rows-<?php print $key ?>">
       <div class="cateogry cateogry-<?php print $keys; ?>">
