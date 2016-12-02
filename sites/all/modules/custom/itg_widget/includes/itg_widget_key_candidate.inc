@@ -26,7 +26,7 @@ function save_key_candidate_data($auto_review_content) {
             $num_deleted = db_delete('itg_widget_order')
                     ->condition('widget', $widget_name)
                     ->condition('nid', $node)
-                    ->condition('cat_id',$auto_review_content['values']['state_value'])
+                    //->condition('cat_id',$auto_review_content['values']['state_value'])
                     ->execute();
                         $max_weight=get_max_weight_for_special($widget_name);
 
