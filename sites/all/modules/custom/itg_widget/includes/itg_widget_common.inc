@@ -647,9 +647,9 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     $form['category_tid']['#options'] = $op;
   }
 
-  if ($form_state['build_info']['args'][0]->type == 'page' && $form_id == 'page_node_form' && arg(2) == 'edit') {
-    drupal_add_css("div.vertical-tabs {display:none}", 'inline');
-  }
+//  if ($form_state['build_info']['args'][0]->type == 'page' && $form_id == 'page_node_form' && arg(2) == 'edit') {
+//    //drupal_add_css("div.vertical-tabs {display:none}", 'inline');
+//  }
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
