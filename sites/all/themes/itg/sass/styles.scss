@@ -375,6 +375,11 @@ header{
                             top:0;
                         }
                     }
+                    &.has-image{
+                        a{
+                            padding: 0;   
+                        }                        
+                    }
                 }
                 &#newlist{
                     li{
@@ -7885,3 +7890,60 @@ input[type="radio"]:checked + label:after{
     }
 }
 /* new changes defalt section page end*/
+
+/*budget predictor css start*/
+#main-container-budget{                           
+    .col-list{        
+        min-height:600px;
+        background:#f3f3f3;
+        span{
+            font-size: 20px;
+            padding: 10px;
+            background: #09619f;
+            display: block;
+            color: #fff;
+            margin: 0 -15px;
+            border-bottom: 5px solid #fff;
+            font-family: roboto;
+        }
+    }
+    .col-list-1{
+        background: #ffb7bf;        
+    border-right: 5px solid #fff;
+    }
+    .col-list-2{
+        background: #9cd2ed;
+        border-right: 5px solid #fff;
+    }
+    .col-list-3{
+        background: #bae6b5;
+        border-right: 5px solid #fff;
+    }
+    .col-list-4{
+        background: #f0f0f0;
+        p{
+            padding-top: 15px;
+            font-size: 16px;
+            text-align: center;
+            line-height: 22px;           
+        }
+         ul{
+                list-style: none;
+                margin-top: 20px;
+                li{
+                    background: transparent;
+                    border: none;
+                    height: 65px;
+                    width: 65px;
+                    display: inline-block;
+                    vertical-align: top;
+                    margin: 10px;
+                }
+            }
+    }
+    .btn{
+        margin-top: 40px;
+        margin-bottom: 100px;
+    }
+}
+/*budget predictor css end*/

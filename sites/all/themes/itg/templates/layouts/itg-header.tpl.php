@@ -61,20 +61,21 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
           <?php
           $title_array = explode("[tid", $menu_data['db_data']['title']);
           $link_url = "";
+          $image_class = "";
           $target = "_self";
           $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $title_array[0];
           $url_type = $menu_data['db_data']['url_type'];
           $db_target = $menu_data['db_data']['target'];
           $tid = $menu_data['db_data']['tid'];
           $active_cls = $parent_class = "notactive";
-          $icon_fid = $menu_data['db_data']['menu_name'];
-          if ($icon_fid != 'notFound' || $icon_fid != 'blank') {
+          $icon_fid = (int) $menu_data['db_data']['menu_name'];
+          if ($icon_fid) {
             $int_value = (int) $icon_fid;
             if ($int_value) {
               $icon_object = file_load((int) $icon_fid);
               $link_text = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
               if (!empty($icon_object->uri)) {
-                $image_class = "image-icon";
+                $image_class = "has-image";
               }
             }
           }
@@ -98,8 +99,8 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
             $parent_class = "active";
           }
           ?>
-          <li><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $image_class)))); ?></li>
-        <?php endforeach; ?>
+        <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class)))); ?></li>
+        <?php endforeach;?>
       </ul>
       <?php //print drupal_render($data['itg_main_manu_header']);    ?>            
     </div>         
