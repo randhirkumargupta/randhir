@@ -39,7 +39,7 @@ function itg_loyalty_reward_menu() {
     'file' => 'includes/itg_loyalty_reward_points_form.inc',
   );
   // Redeem points page.
-  $items['redeem-points'] = array(    
+  $items['redeem-points'] = array(
     'page callback' => 'itg_loyalty_reward_redeem_points',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -61,6 +61,17 @@ function itg_loyalty_reward_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward.product.inc',
   );
+  // Add to cart callback
+  $items['cart/update'] = array(
+    'page callback' => 'itg_loyalty_reward_update_item_count',
+    'access arguments' => array('view product page'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_loyalty_reward.product.inc',
+  );
+
+
+
+
   // Cart remove product.
   $items['cart/delete/%'] = array(
     'page callback' => 'itg_loyalty_reward_removecart',
@@ -98,7 +109,7 @@ function itg_loyalty_reward_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_loyalty_reward.product.inc',
   );
-  $items['order-confirmation'] = array(    
+  $items['order-confirmation'] = array(
     'page callback' => 'itg_loyalty_reward_order_confirmation',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -281,7 +292,7 @@ function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, 
     $form['title']['#autocomplete_path'] = 'content-title-list/loyalty_and_rewards/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Product Title'));
   }
-  if ($form['#id'] == 'views-exposed-form-product-page') {    
+  if ($form['#id'] == 'views-exposed-form-product-page') {
     $arg = arg();
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js',
@@ -493,7 +504,7 @@ function itg_loyalty_reward_block_view($delta = '') {
       $l_name = $user_fields->field_last_name['und'][0]['value'];
       $data['full_name'] = $f_name . ' ' . $l_name;
       // user logout link
-      $data['item_after'] = isset($_SESSION['cart_after_popup']) ? is_array($_SESSION['cart_after_popup']) ? $_SESSION['cart_after_popup'] : 0 : 0;      
+      $data['item_after'] = isset($_SESSION['cart_after_popup']) ? is_array($_SESSION['cart_after_popup']) ? $_SESSION['cart_after_popup'] : 0 : 0;
       $data['logout'] = l(t('Logout'), 'user/logout');
       $block['content'] = theme('itg_loyalty_reward_redeem_points', array('data' => $data));
       break;
@@ -516,16 +527,16 @@ function itg_loyalty_reward_block_view($delta = '') {
  * @return int
  *   Remaining loyalty points of ths current logged in user.
  */
-function itg_loyalty_reward_remaining_point($uid) {  
+function itg_loyalty_reward_remaining_point($uid) {
   $itg_result = 0;
   $itg_query = db_select('itg_loyalty_reward_point_history', 'itg');
   $itg_query->join('itg_lrp_pointer_key', 'pk', 'itg.pointer_key=pk.pointer_key');
   $itg_query->fields('itg', array('remaining_point'))
-      ->condition('itg.uid', $uid)      
+      ->condition('itg.uid', $uid)
       ->condition('pk.expiry_date', REQUEST_TIME, '>=')
       ->orderBy('pk.expiry_date', 'desc');
   $itg_result = $itg_query->execute()->fetchField();
-  
+
   return $itg_result;
 }
 
