@@ -2,15 +2,15 @@
 /*=======================================================================*/
 
 /*heading used in Indiatoday site*/
-$mobile-h1-font-size: 26px;
-$mobile-h2-font-size: 22px;
+$mobile-h1-font-size: 18px;
+$mobile-h2-font-size: 16px;
 $mobile-h3-font-size: 16px;
-$mobile-h4-font-size: 12px;
+$mobile-h4-font-size: 14px;
 
-$mobile-h1-line-height: 32px;
-$mobile-h2-line-height: 26px;
-$mobile-h3-line-height: 22px;
-$mobile-h4-line-height: 16px;
+$mobile-h1-line-height: 20px;
+$mobile-h2-line-height: 20px;
+$mobile-h3-line-height: 20px;
+$mobile-h4-line-height: 18px;
 
 /*Heading used in Indiatoday site Mobile version*/
 $h1-font-size: 36px;
@@ -79,3 +79,8 @@ $full-radius:50%;
 /*footer color in Indiatoday site*/
 $footer-text-color: #a6a6a6;
 $footer-border-color: #111111;
+
+/* @media variables */
+$mobile: "(min-width: 320px) and (max-width: 767px)";
+$tablet: "(min-width: 768px) and (max-width: 1024px)";
+$desktop: "(min-width: 1024px)";

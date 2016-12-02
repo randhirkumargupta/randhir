@@ -11,6 +11,7 @@
 /*navigation font in Indiatoday site*/
 /*Full radius in Indiatoday site*/
 /*footer color in Indiatoday site*/
+/* @media variables */
 /*font family an font weight mixins*/
 /*font size an font weight mixins*/
 /*clear fix mixins*/
@@ -36,15 +37,15 @@ h1, h2, h3, h4 {
 
 /* line 4, ../sass/layout-manager.scss */
 h1 {
-  font-size: 26px;
-  line-height: 32px;
+  font-size: 18px;
+  line-height: 20px;
   font-weight: 700;
 }
 
 /* line 9, ../sass/layout-manager.scss */
 h2 {
-  font-size: 22px;
-  line-height: 26px;
+  font-size: 16px;
+  line-height: 20px;
   font-weight: 700;
 }
 
