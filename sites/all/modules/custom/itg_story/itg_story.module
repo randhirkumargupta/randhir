@@ -123,8 +123,9 @@ function itg_story_theme($existing, $type, $theme, $path) {
  */
 function itg_story_ckeditor_plugin_alter(&$plugins) {
   $arg = arg();
-  if ($arg[0] == 'node' && $arg[1] == 'add' && $arg[2] != 'story') {
+  if (($arg[0] == 'node' && $arg[1] == 'add' && $arg[2] != 'story') || ($arg[0] == 'personalization' && $arg[1] == 'my-content')) {
     unset($plugins['factoids']);
+    unset($plugins['expertchunk']);
   }
 }
 
