@@ -72,8 +72,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
             $int_value = (int) $icon_fid;
             if ($int_value) {
               $icon_object = file_load((int) $icon_fid);
-              $icon_url = file_create_url($icon_object->uri);
-              $link_text = '<img title="' . $link_text . '" src="' . $icon_url . '" height = "37" width = "120">';
+              $link_text = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
             }
           }
           $sponsored_class = ($menu_data['db_data']['extra'] == 'Yes') ? "sponsored-active" : "";

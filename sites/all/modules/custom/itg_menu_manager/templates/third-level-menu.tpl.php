@@ -82,8 +82,7 @@ $field_cm_category_color = ($section_banner_data->field_cm_category_color['und']
               $int_value = (int) $icon_fid;
               if ($int_value) {
                 $icon_object = file_load((int) $icon_fid);
-                $icon_url = file_create_url($icon_object->uri);
-                $link_text = '<img title="' . $link_text . '" src="' . $icon_url . '" height = "37" width = "120">';
+                $link_text = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
               }
             }
             // if tid is not 0 then its internal url
