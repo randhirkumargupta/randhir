@@ -115,6 +115,11 @@ function itg_widgets_custom_variables() {
     '#title' => t('top takes block condition for arg(1)'),
     '#default_value' => variable_get('top_takes_block_condition'),
   );
+   $form['tid_politician'] = array(
+    '#type' => 'textarea',
+    '#title' => t('tid of politician'),
+    '#default_value' => variable_get('tid_politician'),
+  );
   return system_settings_form($form);
 }
 
@@ -689,10 +694,11 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     $form_state['selection'] = $_SESSION[$form['#form_id']];
     $form_state['values']['views_bulk_operations'] = $form_state['selection'];
     $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
+    $end_value = end($_SESSION[$form['#form_id']]);
     $form['views_bulk_operations'][] = array(
       '#attributes' => array("class" => array('handle-unckeck-on-page')),
       '#return_value' => end($_SESSION[$form['#form_id']]),
-      '#default_value' => !empty(end($_SESSION[$form['#form_id']])) ? end($_SESSION[$form['#form_id']]) : NULL,
+      '#default_value' => !empty($end_value) ? $end_value : NULL,
       '#type' => 'checkbox',
       '#prefix' => '<div style=\'display:none\'>',
       '#suffix' => '</div>',
@@ -1305,6 +1311,21 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
     else if (empty($_GET['nid']) && empty($_GET['title'])) {
       $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    }
+  }
+   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
+    if (!empty($_GET['nid']) && empty($_GET['title'])) {
+       
+      $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
+    } if (empty($_GET['nid']) && !empty($_GET['title'])) {
+       
+      $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
+    }
+    else if (!empty($_GET['nid']) && !empty($_GET['title'])) {
+      $query->where[1]['conditions'][3]['value'] = variable_get('tid_politician');
+    }
+    else if (empty($_GET['nid']) && empty($_GET['title'])) {
+      $query->where[1]['conditions'][1]['value'] = variable_get('tid_politician');
     }
   }
 

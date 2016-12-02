@@ -20,17 +20,15 @@
                 });
             });
 
-            jQuery("#belly").click(function(event) {
+            jQuery("#belly").click(function(event) {                
                 jQuery.ajax({
                     url: Drupal.settings.basePath + "notify-detail",
-                    type: 'POST',
-                 
-                    success: function(msg) {
-                        
-                        jQuery(".bell-notice").html(msg);
-                      
+                    type: 'POST',                 
+                    success: function(msg) {                        
+                        jQuery(".bell-notice").html(msg); 
+                        jQuery(".bell-notice").show();
                     }
-                });
+                });                 
             });
         }
 
