@@ -294,12 +294,10 @@ function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, 
     $form['title']['#autocomplete_path'] = 'content-title-list/loyalty_and_rewards/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Product Title'));
   }
-  if ($form['#id'] == 'views-exposed-form-product-page') {
-    $arg = arg();
+  if ($form['#id'] == 'views-exposed-form-product-page') {    
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js',
-    );
-    drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url)), array('type' => 'setting'));
+    );    
     $form['field_lrp_category_value']['#options']['All'] = 'Category';
     $form['reset']['#attributes'] = array('id' => array('product-reset'));
     $form['itg-points'] = array(
@@ -309,9 +307,7 @@ function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, 
         '0-500' => '0-500',
         '501-1000' => '501-1000',
         '1001-10000' => '1001-10000'
-      ),
-      '#default_value' => $arg[1],
-      '#required' => TRUE,
+      ),      
     );
     $form['field_lrp_loyalty_points_value']['#prefix'] = '<div style="display:none">';
     $form['field_lrp_loyalty_points_value']['#suffix'] = '</div>';
@@ -596,23 +592,6 @@ function _get_cart_full_details($uid) {
   }
 
   return $data;
-}
-
-/**
- * Implements hook_views_query_alter().
- *
- * {@inheritdoc}.
- */
-function itg_loyalty_reward_views_query_alter(&$view, &$query) {
-  $arg = arg();
-  if ($view->name === 'product' && !isset($_GET['field_lrp_category_value']) && ($arg[1] == '0-500' || $arg[1] == '501-1000' || $arg[1] == '1001-10000')) {
-    $filter_value = explode('-', $arg[1]);
-    $query->where[1]['conditions'][2] = array(
-      'field' => 'field_data_field_lrp_loyalty_points.field_lrp_loyalty_points_value',
-      'value' => $filter_value,
-      'operator' => 'BETWEEN',
-    );
-  }
 }
 
 /**
