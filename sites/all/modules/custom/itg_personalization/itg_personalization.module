@@ -304,7 +304,7 @@ function itg_personalization_views_pre_render(&$view) {
   if ($view->name == 'personalization_my_content') {
     foreach ($view->result as $key => $value) {
       if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {
-        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Pending';
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Under review';
       }
       if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {
         $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Rejected';
