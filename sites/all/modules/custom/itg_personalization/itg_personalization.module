@@ -229,7 +229,7 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
                 $content_type_for_icon.='<li class="perchange per-' . $key . '-icon" id="' . $key . '">' . ucfirst($values) . '</li>';
             }
         }
-        
+
         $content_type_for_icon.='</ul>';
         $form['field_user_name']['#prefix'] = '<div style="display: none;">';
         $form['field_user_name']['#suffix'] = '</div>';
@@ -317,19 +317,19 @@ function itg_personalization_flag_text($nid) {
  * {@inheritdoc}.
  */
 function itg_personalization_views_pre_render(&$view) {
-    if ($view->name == 'personalization_my_content') {
-        foreach ($view->result as $key => $value) {
-            if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {
-                $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Pending';
-            }
-            if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {
-                $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Rejected';
-            }
-            if ($view->result[$key]->node_status == '0' && $view->result[$key]->field_field_story_source_type[0]['raw']['value'] == '1') {
-                $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Approved';
-            }
-        }
+  if ($view->name == 'personalization_my_content') {
+    foreach ($view->result as $key => $value) {
+      if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Under review';
+      }
+      if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Rejected';
+      }
+      if ($view->result[$key]->node_status == '0' && $view->result[$key]->field_field_story_source_type[0]['raw']['value'] == '1') {
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Approved';
+      }
     }
+  }
 }
 
 /**
