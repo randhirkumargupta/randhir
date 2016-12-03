@@ -90,16 +90,16 @@ function feature_for_video_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '23',
+          'weight' => '24',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '22',
+          'weight' => '23',
         ),
         'domain' => array(
-          'weight' => '1',
+          'weight' => '2',
         ),
         'redirect' => array(
           'weight' => '30',
