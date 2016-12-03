@@ -732,18 +732,18 @@ function feature_for_mobile_services_views_default_views() {
     'client_service_association' => 'client_service_association',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Field Title (field_service_title) */
-  $handler->display->display_options['filters']['field_service_title_value']['id'] = 'field_service_title_value';
-  $handler->display->display_options['filters']['field_service_title_value']['table'] = 'field_data_field_service_title';
-  $handler->display->display_options['filters']['field_service_title_value']['field'] = 'field_service_title_value';
-  $handler->display->display_options['filters']['field_service_title_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_service_title_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_service_title_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator_id'] = 'field_service_title_value_op';
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['label'] = 'Service Title';
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['operator'] = 'field_service_title_value_op';
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['identifier'] = 'field_service_title_value';
-  $handler->display->display_options['filters']['field_service_title_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['relationship'] = 'field_service_association_title_target_id';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,

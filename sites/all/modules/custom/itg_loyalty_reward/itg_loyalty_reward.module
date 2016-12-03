@@ -127,6 +127,8 @@ function itg_loyalty_reward_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward.checkout.inc',
   );
+   
+  
 
   return $items;
 }
@@ -327,7 +329,8 @@ function itg_loyalty_reward_node_insert($node) {
       $query->fields(array(
         'nid' => $node->nid,
         'type' => $node->type,
-        'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours'),
+        //'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours'),
+           'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']),
         'status' => 0,
         'created' => time()
       ));
@@ -347,18 +350,18 @@ function itg_loyalty_reward_node_update($node) {
   switch ($node->type) {
     case 'loyalty_and_rewards':
       $curr_time = time();
-      $product_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
-
+    //  $product_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       // If product expiry date is update and set to future
-      if ($product_expiry_date > $curr_time) {
+     // if ($product_expiry_date > $curr_time) { comment if node user update expire date
         db_update('itg_loyalty_reward_cron')
             ->fields(array(
-              'status' => 1,
-              'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours')
+              'status' => 0,
+              //'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours')
+                'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])
             ))
             ->condition('nid', $node->nid, '=')
             ->execute();
-      }
+     // }
       break;
 
     default:
