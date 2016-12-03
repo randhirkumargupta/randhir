@@ -59,15 +59,15 @@
             // FTP browse js
             $('document').ready(function() {
                 var old_vid = $("input[name='field_upload_video[und][0][fid]']").val();
-                if (old_vid == 0) {
-                    $("#edit-field-upload-video-und-0-upload").hide();
-                    $("#edit-field-upload-video-und-0-upload-button").hide();
-                    $('#edit-field-upload-video label').hide();
-                } else {
-                    $(".browse-ftp-click").hide();
-                    $('.browse-video-form label').hide();
-                    $('#edit-field-upload-video label:first').show();
-                }
+//                if (old_vid == 0) {
+//                    $("#edit-field-upload-video-und-0-upload").hide();
+//                    $("#edit-field-upload-video-und-0-upload-button").hide();
+//                    $('#edit-field-upload-video label').hide();
+//                } else {
+//                    $(".browse-ftp-click").hide();
+//                    $('.browse-video-form label').hide();
+//                    $('#edit-field-upload-video label:first').show();
+//                }
             });
 
 
@@ -118,19 +118,19 @@
             $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
                 if (form_build_id = settings.url.match(/file\/ajax\/field_upload_video\d*\/(.*)$/)) {
 
-                    if ($('#videogallery-node-form').find("input[name='field_upload_video_und_0_remove_button']").val() == 'Remove') {
-                        $(".browse-ftp-click").hide();
-                        $('.browse-video-form label').hide();
-                        $('#edit-field-upload-video label:first').show();
-
-                    } else {
-
-                        $(".browse-ftp-click").show();
-                        $("input[name='field_video_duration[und][0][value]']").val('');
-
-                        $('.browse-video-form label').show();
-                        $('#edit-field-upload-video label:first').hide();
-                    }
+//                    if ($('#videogallery-node-form').find("input[name='field_upload_video_und_0_remove_button']").val() == 'Remove') {
+//                        $(".browse-ftp-click").hide();
+//                        $('.browse-video-form label').hide();
+//                        $('#edit-field-upload-video label:first').show();
+//
+//                    } else {
+//
+//                        $(".browse-ftp-click").show();
+//                        $("input[name='field_video_duration[und][0][value]']").val('');
+//
+//                        $('.browse-video-form label').show();
+//                        $('#edit-field-upload-video label:first').hide();
+//                    }
                 }
 
             });
