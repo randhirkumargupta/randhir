@@ -92,7 +92,7 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
             || $form_id == 'magazine_node_form'
             || $form_id == 'heighlights_node_form'
             || $form['#vocabulary']->machine_name == 'category_management'
-            ) {
+        ) {
       if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
         $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
       }      

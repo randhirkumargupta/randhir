@@ -529,7 +529,6 @@ function itg_msi_node_validate($node, $form, &$form_state) {
       }
     }
   }
-  
 }
 
 /* * ************************Common Functionality******************************* */

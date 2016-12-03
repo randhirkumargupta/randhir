@@ -59,10 +59,8 @@ function _create_issue_process($fid, $node_info, $parent_node) {
   $xml_file = file_load($fid);
   $xml_file_path = str_replace('public://', 'sites/default/files/', $xml_file->uri);
   $xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
-  
 
   if (!empty($xml)) {
-
     //Get XML unique UID
     foreach ($xml->attributes() as $key => $value) {
       $xml_uid = $value;
