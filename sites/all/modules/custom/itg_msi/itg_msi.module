@@ -404,7 +404,6 @@ function itg_msi_node_presave($node) {
 function itg_msi_node_validate($node, $form, &$form_state) {
 
   if ($node->type == 'magazine' || $node->type == 'supplement') { // Validate duplicacy on titles for magazine and supplement
-    //if (!isset($node->nid)) {
     $title = $form_state['values']['title'];
     if (isset($node->nid)) {
       $results = db_select('node')->fields('node', array('title'))->condition('title', $title, '=')->condition('type', $node->type)->condition('nid', $node->nid, '!=')->execute();
@@ -429,9 +428,9 @@ function itg_msi_node_validate($node, $form, &$form_state) {
         $_SESSION['messages']['error'] = $message_arr_new;
       }
     }
-
-    //Case: Supplement creation (If issue is already exist, throw an error)
-    if ($node->type == 'supplement') {
+    
+    if($node->type == 'supplement') {
+            //If issue is already exist, throw an error
       $is_issue_exist = itg_msi_check_for_issue_existence($node, 'supplement');
       if (!$is_issue_exist) {
         form_set_error('field_supp_issue', t('This issue doesn\'t exist. Please select another issue to map supplement.'));
@@ -452,6 +451,85 @@ function itg_msi_node_validate($node, $form, &$form_state) {
       form_set_error('field_supp_issue', t('This issue is already exist.'));
     }
   }
+  
+  // Validate XML 
+  if ($node->type == 'issue' || $node->type == 'supplement') {
+    
+    if($node->type == 'supplement') {
+      $file = $node->field_supp_import_xml[LANGUAGE_NONE];
+      $field = 'field_supp_import_xml';
+    }
+    
+    if($node->type == 'issue') {
+      $file = $node->field_field_issue_import_xml[LANGUAGE_NONE];
+      $field = 'field_field_issue_import_xml';
+    }
+    
+    foreach ($file as $result) {
+      $xml_file = file_load($result['fid']);
+      $xml_file_path = str_replace('public://', 'sites/default/files/', $xml_file->uri);
+      $xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
+
+      if (!empty($xml)) {
+        //Get XML unique UID
+        foreach ($xml->attributes() as $key => $value) {
+          $xml_uid = $value;
+        }
+
+        //Get City
+        $city = trim($xml->City);
+        $city_tid = itg_msi_get_term_from_name($city, 'city');
+
+        //Get Parent Category
+        $section = trim($xml->Section);
+        $section_tid = itg_msi_get_term_from_name($section, 'category_management');
+
+
+        //Get kicker, headline, byline and body from this array($xml_other)
+        foreach ($xml as $key => $value) {
+          $xml_other[strtolower($key)] = $value;
+        }
+
+        $byline = trim($xml_other['byline']->p);
+        $byline_id = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');
+
+        $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));
+
+        //Add check for required fields
+        //$existing_xml = itg_msi_get_associated_fid_node($node, $xml_uid);
+
+//        if (count($existing_xml) > 0) {
+//          form_set_error($field . '1' . $result['fid'], t('Sorry! <strong>@xmlfilename</strong> is a duplicate xml file. Please upload another one.', array('@xmlfilename' => $xml_file->filename)));
+//        }
+        if (empty($city)) {
+          form_set_error($field . '2' . $result['fid'], t('No city found in the file <strong>@xmlfilename</strong>. Please upload file with city name and try again.', array('@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($city_tid) && !empty($city)) {
+          form_set_error($field . '3' . $result['fid'], t('City <strong>@cityname</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another city and try again.', array('@cityname' => $city, '@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($section)) {
+          form_set_error($field . '4' . $result['fid'], t('No section found in the file <strong>@xmlfilename</strong>. Please upload file with section and try again.', array('@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($section_tid) && !empty($section)) {
+          form_set_error($field . '5' . $result['fid'], t('Section <strong>@sectionname</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another section and try again.', array('@sectionname' => $section, '@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($byline)) {
+          form_set_error($field . '6' . $result['fid'], t('No Author found in the file <strong>@xmlfilename</strong>. Please upload file with author name and try again.', array('@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($byline_id) && !empty($byline)) {
+          form_set_error($field . '7' . $result['fid'], t('Author <strong>@byline</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another Author and try again.', array('@byline' => $byline, '@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($headline) || $headline == 'NA') {
+          form_set_error($field . '8' . $result['fid'], t('No story headline found in the file <strong>@xmlfilename</strong>. Please upload file with story headline and try again.', array('@xmlfilename' => $xml_file->filename)));
+        }
+      } else {
+        if ($xml_file->uri) {
+          form_set_error($field, t('File <strong>@xmlfilename</strong> is a invalid xml file. Please try with another file.', array('@xmlfilename' => $xml_file->filename)));
+        }
+      }
+    }
+  }
+  
 }
 
 /* * ************************Common Functionality******************************* */
