@@ -1450,13 +1450,13 @@ function itg_videogallery_field_attach_form($entity_type, $entity, &$form, &$for
             '#type' => 'select',
             '#options' => drupal_map_assoc(range(0, 20)),
             '#default_value' => 1,
-           // '#attributes' => array('style' => 'display:none;'),
+            '#attributes' => array('style' => 'display:none;'),
           );
 
           $form[$field['field_name']]['file_entity_holder_nums'] = array(
             '#type' => 'textfield',
             '#default_value' => '',
-           // '#attributes' => array('style' => 'display:none;'),
+            '#attributes' => array('style' => 'display:none;'),
           );
 
 
