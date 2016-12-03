@@ -47,6 +47,14 @@ jQuery(document).ready(function () {
         }
 
     });
+    
+    //Trigger select box by icon
+    jQuery('.perchange').on('click',function(){
+        jQuery('.perchange').removeClass('active');
+         jQuery(this).addClass('active');
+       var getid=jQuery(this).attr('id');
+       jQuery('#edit-field-ugc-ctype-und').val(getid).trigger('change');
+    })
     // Change text of select option.
     jQuery("#edit-field-ugc-ctype-und option[value='photogallery']").text('Photogallery');
     jQuery("#edit-field-ugc-ctype-und option[value='videogallery']").text('Videogallery');

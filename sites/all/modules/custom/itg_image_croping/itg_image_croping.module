@@ -443,11 +443,12 @@ function itg_image_saveimage_info() {
     if (!empty($output_info['fids'])) {
         for ($i = 0; $i < count($output_info['fids']); $i++) {
             $fid=  explode('#', $output_info['fids'][$i]);
-            if ($output_info['courtesy'][$i] != "" || $output_info['syndicate'][$i] != "")
+             $syndicatin_name='syndicate_'.$fid[0];
+            if ($output_info['courtesy'][$i] != "" || $output_info[$syndicatin_name]!= "")
                 $inserted_data = db_insert('image_info')->fields(array(
                             'fid' =>$fid[0] ,
                             'image_courtesy' => $output_info['courtesy'][$i],
-                            'image_syndicate' => $output_info['syndicate'][$i],
+                            'image_syndicate' => $output_info[$syndicatin_name],
                         ))->execute();
         }
     }

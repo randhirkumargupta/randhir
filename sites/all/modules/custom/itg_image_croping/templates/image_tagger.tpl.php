@@ -36,8 +36,8 @@ list($width, $height) = getimagesize($url);
         
         }
        
-        print' <input type="text" name="courtesy[]" placeholder="Courtesy"  value="">
-                <input type="text" name="syndicate[]" placeholder="Syndicate" value=""></div> </div> ';  
+        print' <input type="text" name="courtesy[]" placeholder="Courtesy"  value=""></br>
+                Syndicate  <input type="checkbox" name="syndicate_'.$explodedata[0].'" value="1"></div> </div> ';  
        
        
         $counter++;
