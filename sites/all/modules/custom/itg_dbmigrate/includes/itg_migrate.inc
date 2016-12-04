@@ -37,8 +37,17 @@ function itg_dbmigrate_migrate_api() {
     'api' => 2,
   
     'groups' => array(
+      'itg_section' => array(
+        'title' => t('Itg section Imports'),
+      ),
       'itg_category' => array(
         'title' => t('Itg category Imports'),
+      ),
+      'itg_subcategory' => array(
+        'title' => t('Itg subcategory Imports'),
+      ),
+      'itg_subsubcategory' => array(
+        'title' => t('Itg subsubcategory Imports'),
       ),
       'itg_story' => array(
         'title' => t('Itg story Imports'),
@@ -46,7 +55,22 @@ function itg_dbmigrate_migrate_api() {
        'itg_byline' => array(
         'title' => t('Itg byline Imports'),
       ),
-      'itg_magazine' => array(
+      'itg_city' => array(
+        'title' => t('Itg city Imports'),
+      ),
+      'itg_tags' => array(
+        'title' => t('Itg tags Imports'),
+      ),
+      'itg_photogallery' => array(
+        'title' => t('Itg Photogallery Imports'),
+      ),
+      'itg_videogallery' => array(
+        'title' => t('Itg Videogallery Imports'),
+      ),
+      'itg_user' => array(
+        'title' => t('Itg User Migration'),
+      ),
+      /*'itg_magazine' => array(
         'title' => t('Itg magazine Imports'),
       ),
        'itg_issue' => array(
@@ -57,13 +81,7 @@ function itg_dbmigrate_migrate_api() {
       ),
       'itg_foodnews' => array(
         'title' => t('Itg Food News Imports'),
-      ),
-      'itg_city' => array(
-        'title' => t('Itg city Imports'),
-      ),
-      'itg_tags' => array(
-        'title' => t('Itg tags Imports'),
-      ),
+      ),      
       'itg_sponsor' => array(
         'title' => t('Itg sponsor Imports'),
       ),
@@ -78,19 +96,10 @@ function itg_dbmigrate_migrate_api() {
       ),
       'itg_recipe' => array(
         'title' => t('Itg recipe Imports'),//pending
-      ),
-      'itg_photogallery' => array(
-        'title' => t('Itg Photogallery Imports'),
-      ),
-      'itg_videogallery' => array(
-        'title' => t('Itg Videogallery Imports'),
-      ),
+      ),      
       'itg_megareview' => array(
         'title' => t('Itg Megareview Imports'),
-      ),
-      'itg_user' => array(
-        'title' => t('Itg User Migration'),
-      ),
+      ),*/      
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -98,10 +107,22 @@ function itg_dbmigrate_migrate_api() {
     // argument is required. The group_name is optional (defaulting to 'default')
     // but specifying it is a best practice.
     'migrations' => array(
+      'ItgSection' => array(
+        'class_name' => 'ItgSectionMigration',
+        'group_name' => 'itg_category',
+      ),
       'ItgCategory' => array(
         'class_name' => 'ItgCategoryMigration',
         'group_name' => 'itg_category',
       ),
+      'ItgSubCategory' => array(
+        'class_name' => 'ItgSubCategoryMigration',
+        'group_name' => 'itg_category',
+      ),
+      'ItgSubSubCategory' => array(
+        'class_name' => 'ItgSubSubCategoryMigration',
+        'group_name' => 'itg_category',
+      ),      
       'ItgStory' => array(
         'class_name' => 'ItgStoryMigration',
         'group_name' => 'itg_story',
@@ -110,7 +131,27 @@ function itg_dbmigrate_migrate_api() {
         'class_name' => 'ItgBylineMigration',
         'group_name' => 'itg_byline',
       ),
-      'ItgMagazine' => array(
+      'ItgCity' => array(
+        'class_name' => 'ItgCityMigration',
+        'group_name' => 'itg_city',
+      ),
+      'ItgTags' => array(
+        'class_name' => 'ItgTagsMigration',
+        'group_name' => 'itg_tags',
+      ),
+      'ItgPhotogallery' => array(
+        'class_name' => 'ItgPhotogalleryMigration',
+        'group_name' => 'itg_photogallery',
+      ),
+      'ItgVideogallery' => array(
+        'class_name' => 'ItgVideogalleryMigration',
+        'group_name' => 'itg_videogallery',
+      ),
+      'ItgUser' => array(
+        'class_name' => 'ItgUserMigration',
+        'group_name' => 'itg_user',
+      ),
+      /*'ItgMagazine' => array(
         'class_name' => 'ItgMagazineMigration',
         'group_name' => 'itg_magazine',
       ),
@@ -125,15 +166,7 @@ function itg_dbmigrate_migrate_api() {
       'ItgFoodNews' => array(
         'class_name' => 'ItgFoodNewsMigration',
         'group_name' => 'itg_foodnews',
-      ),
-      'ItgCity' => array(
-        'class_name' => 'ItgCityMigration',
-        'group_name' => 'itg_city',
-      ),
-      'ItgTags' => array(
-        'class_name' => 'ItgTagsMigration',
-        'group_name' => 'itg_tags',
-      ),
+      ),      
       'ItgSponsor' => array(
         'class_name' => 'ItgSponsorMigration',
         'group_name' => 'itg_sponsor',
@@ -153,23 +186,11 @@ function itg_dbmigrate_migrate_api() {
       'ItgRecipe' => array(
         'class_name' => 'ItgRecipeMigration',
         'group_name' => 'itg_recipe',
-      ),
-      'ItgPhotogallery' => array(
-        'class_name' => 'ItgPhotogalleryMigration',
-        'group_name' => 'itg_photogallery',
-      ),
-      'ItgVideogallery' => array(
-        'class_name' => 'ItgVideogalleryMigration',
-        'group_name' => 'itg_videogallery',
-      ),
+      ),      
       'ItgMegareview' => array(
         'class_name' => 'ItgMegareviewMigration',
         'group_name' => 'itg_megareview',
-      ),
-      'ItgUser' => array(
-        'class_name' => 'ItgUserMigration',
-        'group_name' => 'itg_user',
-      ),
+      ),*/      
     ),
     
   );
