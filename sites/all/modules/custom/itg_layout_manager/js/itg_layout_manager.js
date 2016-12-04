@@ -374,6 +374,12 @@
                             jQuery('#' + block_id).html('');
                             jQuery('span[data-id="' + block_id + '"]').html('');
                             jQuery('#' + block_id).removeClass('input-loader');
+//                            $('body').$('.slider-container').slick({
+//                              infinite: true,
+//                              slidesToShow: 3,
+//                              variableWidth: true,
+//                              slidesToScroll: 1
+//                            });
                         }
                     });
                 })
@@ -395,6 +401,13 @@
                 if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').is(":visible")) {
                     jQuery(this).hide();
                 }
+            });
+            
+            $('.slider-container').slick({
+              infinite: true,
+              slidesToShow: 3,
+              variableWidth: true,
+              slidesToScroll: 1
             });
         }
 
