@@ -29,7 +29,7 @@
   <link href="<?php print $base_path; ?>sites/all/themes/itgadmin/css/font-awesome.css" rel="stylesheet" type="text/css"/>
   <?php print $styles; ?>
   <?php print $scripts; ?>
-  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js" type="text/javascript"></script>
+  <script src="http://localhost/itgcms/sites/all/themes/itgadmin/js/jquery-ui.js" type="text/javascript"></script>
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>
     <script src="<?php print $base_path . $path_to_zen; ?>/js/html5.js"></script>
