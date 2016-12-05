@@ -16,7 +16,7 @@
 function itg_loyalty_reward_address_form($form, &$form_state) {
   global $user;
   // validate cart total.
-  $cart_total_valid = _cart_total_point($user->uid, 'compare');
+  $cart_total_valid = _cart_total_point($user->uid, 'compare');  
   if (!$cart_total_valid) {    
     drupal_goto('cart');
   }
@@ -169,7 +169,7 @@ function itg_loyalty_reward_place_order() {
   $cart_detail = _get_cart_full_details($user->uid);
   $errors = array_filter($cart_detail);
   if (empty($errors)) {
-    drupal_goto('redeem-points');
+    drupal_goto('product');
   }  
   $user_detail = user_load($user->uid);
   $fname = $user_detail->field_first_name['und'][0]['value'];
