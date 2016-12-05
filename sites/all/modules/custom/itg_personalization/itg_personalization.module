@@ -220,7 +220,8 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
 
         $content_type_for_icon = '<ul class="saved-item-tab">';
         if (!empty($form['field_ugc_ctype']['und']['#options'])) {
-
+            $icone = "";
+            $i = 0;
             foreach ($form['field_ugc_ctype']['und']['#options'] as $key => $values) {
 
                 if ($key == '_none') {
@@ -229,25 +230,33 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
                 }
                 switch ($key) {
                     case 'story':
-                         $icone = '<i class="fa fa-book" ></i>';
+                        $icone = '<i class="fa fa-book" ></i>';
                         break;
-                     case 'recipe':
-                         $icone = '<i class="fa fa-cutlery" ></i>';
+                    case 'recipe':
+                        $icone = '<i class="fa fa-cutlery" ></i>';
                         break;
-                      case 'photogallery':
-                         $icone = '<i class="fa fa-picture-o" ></i>';
+                    case 'photogallery':
+                        $icone = '<i class="fa fa-picture-o" ></i>';
                         break;
-                      case 'videogallery':
-                         $icone = '<i class="fa fa-video-o" ></i>';
+                    case 'videogallery':
+                        $icone = '<i class="fa fa-video-camera" ></i>';
                         break;
-                     case 'podcast':
-                         $icone = '<i class="fa fa-podcast" ></i>';
+                    case 'podcast':
+                        $icone = '<i class="fa fa-volume-down" ></i>';
                         break;
                     case 'blog':
-                         $icone = '<i class="fa fa-rss" ></i>';
+                        $icone = '<i class="fa fa-rss" ></i>';
                         break;
                 }
-                $content_type_for_icon.='<li class="perchange per-' . $key . '-icon" id="' . $key . '"><a href="javascript:void(0)">' . $icone . '' . ucfirst($values) . '</a></li>';
+                if ($i == 0) {
+                    $content_type_for_icon.='<li ><a href="javascript:void(0)" class="active perchange per-' . $key . '-icon" id="' . $key . '">' . $icone . ' ' . ucfirst($values) . '</a></li>';
+                }
+                else {
+                    $content_type_for_icon.='<li ><a href="javascript:void(0)" class="perchange per-' . $key . '-icon" id="' . $key . '">' . $icone . ' ' . ucfirst($values) . '</a></li>';
+                }
+
+
+                $i++;
             }
         }
 
