@@ -218,15 +218,36 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
         // Hide user name field.
 
-        $content_type_for_icon = '<ul>';
+        $content_type_for_icon = '<ul class="saved-item-tab">';
         if (!empty($form['field_ugc_ctype']['und']['#options'])) {
 
             foreach ($form['field_ugc_ctype']['und']['#options'] as $key => $values) {
 
                 if ($key == '_none') {
                     $values = 'Reset';
+                    $icone = '<i class="fa fa-repeat" ></i>';
                 }
-                $content_type_for_icon.='<li class="perchange per-' . $key . '-icon" id="' . $key . '">' . ucfirst($values) . '</li>';
+                switch ($key) {
+                    case 'story':
+                         $icone = '<i class="fa fa-book" ></i>';
+                        break;
+                     case 'recipe':
+                         $icone = '<i class="fa fa-cutlery" ></i>';
+                        break;
+                      case 'photogallery':
+                         $icone = '<i class="fa fa-picture-o" ></i>';
+                        break;
+                      case 'videogallery':
+                         $icone = '<i class="fa fa-video-o" ></i>';
+                        break;
+                     case 'podcast':
+                         $icone = '<i class="fa fa-podcast" ></i>';
+                        break;
+                    case 'blog':
+                         $icone = '<i class="fa fa-rss" ></i>';
+                        break;
+                }
+                $content_type_for_icon.='<li class="perchange per-' . $key . '-icon" id="' . $key . '"><a href="javascript:void(0)">' . $icone . '' . ucfirst($values) . '</a></li>';
             }
         }
 
@@ -317,19 +338,19 @@ function itg_personalization_flag_text($nid) {
  * {@inheritdoc}.
  */
 function itg_personalization_views_pre_render(&$view) {
-  if ($view->name == 'personalization_my_content') {
-    foreach ($view->result as $key => $value) {
-      if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {
-        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Under review';
-      }
-      if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {
-        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Rejected';
-      }
-      if ($view->result[$key]->node_status == '0' && $view->result[$key]->field_field_story_source_type[0]['raw']['value'] == '1') {
-        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Approved';
-      }
+    if ($view->name == 'personalization_my_content') {
+        foreach ($view->result as $key => $value) {
+            if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {
+                $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Under review';
+            }
+            if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {
+                $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Rejected';
+            }
+            if ($view->result[$key]->node_status == '0' && $view->result[$key]->field_field_story_source_type[0]['raw']['value'] == '1') {
+                $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Approved';
+            }
+        }
     }
-  }
 }
 
 /**
