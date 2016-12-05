@@ -288,14 +288,14 @@
                                 image_alttext = image_alttext.replace(/%20/g, " ");
 
                                 setTimeout(function() {
-                                    parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
-                                    parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+                                  //  parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
+                                   // parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
                                     var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
                                     var captionid = getbame + '[field_image_caption][und][0][value]';
                                     captionid = captionid.replace('[field_images][und][0]', "");
                                     var captionid1 = getbame + '[field_credit][und][0][value]';
                                     captionid1 = captionid1.replace('[field_images][und][0]', "");
-                                    parent.jQuery('[name="' + captionid + '"]').val(image_title);
+                                  //  parent.jQuery('[name="' + captionid + '"]').val(image_title);
                                     parent.jQuery('[name="' + captionid1 + '"]').val(credit);
                                     hideloader();
                                     parent.jQuery.colorbox.close();
