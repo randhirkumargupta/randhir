@@ -5988,8 +5988,11 @@ footer{
             }
             .form-item-captcha-response{
                 input[type="text"]{                
-                    width: 40%;
+                    width: 50%;
                     font-family: roboto-slab;                
+                }
+                .description{
+                    display: none;
                 }
             }
         }        
@@ -7898,11 +7901,14 @@ input[type="radio"]:checked + label:after{
 /* new changes defalt section page end*/
 
 /*budget predictor css start*/
+.budget-predictor-heading{
+    margin-bottom: 10px;
+}
 #main-container-budget{                           
     .col-list{        
         min-height:600px;
         background:#f3f3f3;
-        span{
+        span.title{
             font-size: 20px;
             padding: 10px;
             background: #09619f;
@@ -7927,13 +7933,14 @@ input[type="radio"]:checked + label:after{
     }
     .col-list-4{
         background: #f0f0f0;
+        text-align: center;
         p{
             padding-top: 15px;
             font-size: 16px;
             text-align: center;
             line-height: 22px;           
         }
-         ul{
+         ul.connectedSortable{
                 list-style: none;
                 margin-top: 20px;
                 li{
@@ -7946,10 +7953,21 @@ input[type="radio"]:checked + label:after{
                     margin: 10px;
                 }
             }
+            button.btn{
+            margin-top: 40px;        
+            width: 158px;
+            height: 38px;
+            background: #cd070f;
+            border: none;
+            border-radius: 0;
+            color: #fff;
+            font-size: 28px;
+            text-transform: uppercase;
+            font-weight: 700;
+            line-height: 30px;
+        }    
     }
-    .btn{
-        margin-top: 40px;
-        margin-bottom: 100px;
-    }
+    
+    @include social-share;
 }
 /*budget predictor css end*/
