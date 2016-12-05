@@ -139,7 +139,7 @@ function itg_layout_gethomecarddata() {
   $section = 'home_page';
   $template_name = 'page--front';
   $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
-  $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 4);
+  $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 3);
 
   $widget_data = $data;
   
@@ -189,7 +189,7 @@ function itg_layout_gethomecarddata() {
       print '</div>';
     }
     else {
-        itg_layout_gethomecarddata_new($sectinno + 3);
+        itg_layout_gethomecarddata_new($sectinno + 4);
     }
       
     exit();  
@@ -213,8 +213,12 @@ function itg_layout_gethomecarddata_new($sectinno) {
   $template_name = 'page--front';
   
   $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
+  if($data=="" && $sectinno<80)
+  {
+     itg_layout_gethomecarddata_new($sectinno + 3); 
+  }
   
-  $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 4);
+  $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 3);
   $widget_data = $data;
 
   if (!empty($widget_data[$widget_name1]['widget_name']) 

@@ -3877,6 +3877,7 @@ article.node-mega-review-critic{
     vertical-align: top;
     width: 100%;
     .movie-rating{
+        margin-top: 20px;
       float: left;
       width: 111px;
       height: 60px;
@@ -3904,26 +3905,42 @@ article.node-mega-review-critic{
     div[data-star-value="90%"]:after{width: 102px;}
     div[data-star-value="100%"]:after{width: 111px;}
     .social-info{
-      float: left;
-      width: 200px;
-      padding: 5px 10px;
-      border-left: 1px solid #c0c0c0;
-      margin-left: 20px;
+      float: left;   
+      margin-top:20px;
       span{
-        float: left;
-        width: 25%;
-        padding: 5px;
-        text-align: center;
-        .fa{
-          font-size: 18px;
-          line-height: 22px;
-          color: #c0c0c0;
-        }
-        dfn{
-          font: normal 400 12px/18px Roboto;
-          display: block;
-          color: #989898;
-        }
+          color: #bebebe;
+          float: left;
+          font-family: roboto;
+          font-size: 12px;
+          padding: 5px 15px;
+          text-align: center;
+          .fa{
+              font-size: 18px;
+              line-height: 22px;
+              margin-top: 10px;
+          }
+          dfn{
+              font: normal 400 12px/18px Roboto;
+              display: block;
+          }
+      }
+      span.share-count{
+          color: #bebebe;
+          font-size:12px;
+          border-right: 1px solid #c0c0c0;
+          margin-left: 20px;
+          margin-right: 10px;
+          padding-top:0;
+          padding-bottom:0;
+          i{              
+              color: #bebebe;
+              display: block;
+              font-family: roboto;
+              font-size: 40px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 40px;
+          }
       }
     }
   }
@@ -4067,12 +4084,29 @@ article.node-mega-review-critic{
       span{padding-left: 0; padding-top: 20px;}
     }
   }
-  .movie-videos{
-    padding-right: 15px;
-  }
-  .movie-photos{
-    padding-left: 15px;
-  }
+.movie-videos, .movie-photos {    
+    padding: 0 15px;
+    .movie-data{
+        position: relative; 
+        .img-count{
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            padding: 5px;
+            background-color: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 12px;
+            font-family: Roboto;
+        }
+    } 
+    .photo-date{
+        display: block;
+        font-size: 12px;
+        color: #b1b1b1;
+        padding: 8px 0 5px;
+        font-family: "Roboto Slab";
+    }
+}
 }
 .career-graph{
     .career-graph-data{
@@ -4108,6 +4142,41 @@ article.node-mega-review-critic{
 .overflow-x-auto{
   overflow-x: auto;
 }
+
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="10%"]:after {
+    width: 7.8px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="20%"]:after {
+    width: 16px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="30%"]:after {
+    width: 24px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="40%"]:after {
+    width: 32px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="50%"]:after {
+    width: 41px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="60%"]:after {
+    width: 48px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="70%"]:after {
+    width: 57px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="80%"]:after {
+    width: 65px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="90%"]:after {
+    width: 74px;
+}
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="90%"]:after {
+    width: 80px;
+}
+
+
+
+
 .page-sso-user{
   #sso_password_form{
     .pg-title{

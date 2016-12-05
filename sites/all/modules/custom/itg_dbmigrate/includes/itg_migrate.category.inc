@@ -26,7 +26,7 @@ class ItgCategoryMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'category_new.xml';
+    $items_url = $xml_folder . 'category.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -65,31 +65,40 @@ class ItgCategoryMigration extends XMLMigration {
     // item xpath since each item xml chunk is processed individually.
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
+    
+    $this->addFieldMapping('field_cm_display_title', 'title')->xpath('title');
     $this->addFieldMapping('name', 'name')->xpath('name');
-    //$this->addFieldMapping('parent', 'category_parent')->xpath('category_parent');
-    $this->addFieldMapping('pathauto', 'sef_url')
-             ->xpath(t('sef_url'));
-    
-    $this->addFieldMapping('field_cm_select_template_type', 'template_name')->xpath('template_name');
-    $this->addFieldMapping('field_cm_select_type', 'content_type')->xpath('content_type');
-    // for image
-    $img_path = $file_path . '/' . 'migrate/image/category/';
-    $this->addFieldMapping('field_sponser_logo', 'header_image')
-     ->xpath('header_image');
-    /*
-    $this->addFieldMapping('field_my_image', 'source_filename')
-     ->sourceMigration('Image');
-    $this->addFieldMapping('field_cm_select_type', 'content_type')->xpath('content_type');
-    $this->addFieldMapping('description', 'details');
-    $this->addFieldMapping('weight', 'ordering');
-     */
-    
+    $this->addFieldMapping('field_sponser_logo', 'image')->xpath('image');
+    $this->addFieldMapping('parent', 'section')->xpath('section');
+    $this->addFieldMapping('description', 'description')->xpath('description');
+    $this->addFieldMapping('weight', 'ordering')->xpath('ordering');
     $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
     $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
+    $this->addFieldMapping('field_category_section_flag', 'section_flag')->xpath('section_flag');
+    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+    $this->addFieldMapping('field_user_city', 'programme_schedule')->xpath(t('programme_schedule'));
+    $this->addFieldMapping('field_cm_category_banner', 'header_image')->xpath('header_image');
+    $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
+    $this->addFieldMapping('field_cm_category_color', 'content_display_color')->xpath('content_display_color');
     
-    //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
-    //$this->addFieldMapping('metatag_robots', 'nodeword_robots');
-
+    //<simply_flag>0</simply_flag>(not clear)
+    //<params>(not clear)
+    //<schedule_duration>(not clear)
+    //<telecasting_time>(not clear)
+    //<created>(NULL)</created>(not clear)
+  }
+  
+  public function complete($entity, $row) {
+   if (!empty($row->xml->published)) {    
+    $data = array(
+     'tid' => $term->tid,
+     'uid' => 3,
+     'created' => time(),
+     'changed' => time(),
+     'status' => isset($row->xml->published) ? $row->xml->published : 1,
+    );
+    drupal_write_record('itg_category_manager', $data);
+   }   
   }
 }

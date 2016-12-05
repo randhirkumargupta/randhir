@@ -375,6 +375,11 @@ header{
                             top:0;
                         }
                     }
+                    &.has-image{
+                        a{
+                            padding: 0;   
+                        }                        
+                    }
                 }
                 &#newlist{
                     li{
@@ -1962,6 +1967,46 @@ footer{
                     @include font(14px,35px,$itg-font-bold);                
                 }
             }
+        }
+    }
+    .story-expert-opinion{
+        background: #f5f5f5;
+        width: 320px;
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        font-family: $itg-robotoslab;
+        h4{
+            font-family: "Roboto Slab",sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        img{
+            width: 70px;
+            height: 70px;
+            border-radius: 100%; 
+            border: 2px solid #ddd; 
+        }
+        .expert-detail{
+                margin-top: 25px;
+                margin-bottom: 25px;
+        }
+        .left-side{
+            p.name{
+                font-size: 14px;
+                line-height: 18px;
+                margin-bottom: 5px;
+                color: #000;
+            }
+            p{
+                color: #747474;
+                line-height: 18px;
+                font-size: 12px;
+            }
+        }
+        h2{
+            font-family: $itg-robotoslab;
         }
     }
 }
@@ -5116,6 +5161,44 @@ footer{
             }
         }
     }
+    .top-block-highlight{
+        margin-bottom:50px;
+        h2{
+            margin-bottom: 0;
+            color: #ef3c24;
+        }
+        .highlights-video{
+            h2{                
+                border-bottom: snow;                
+            }
+            iframe{
+                width: 100%;
+                height: 50vh;
+            }
+        }
+        .highlights-container{
+            .wrap-listing{
+                height: 345px;
+                overflow: auto;
+            }
+            .h-list{
+                border-bottom: 1px solid #ccc;
+                padding: 10px 0;
+            }
+            button{
+                background: transparent;
+                border: none;
+                margin: 10px 0 5px 0;
+                margin-right: 20px;
+                cursor: pointer;
+                i{
+                    font-size: 28px;
+                    font-weight: normal;
+                    color: #464646;
+                }
+            }
+        }
+    }    
 }
 #block-views-program-schedule-block-1, #block-views-program-schedule-block-3, #block-views-program-schedule-block-4, #block-itg-event-backend-program-tab-block, #block-itg-event-backend-event-sign-and-win, #block-itg-event-backend-event-registration, .sponsor-detail-container, #block-views-event-subsite-speaker-block-2, #block-views-event-subsite-speaker-block-3, #block-views-event-subsite-speaker-block-3{
     h2{
@@ -5862,18 +5945,16 @@ footer{
             margin: 0;
             padding: 0;            
         }
-        #itg-custom-ask-an-expert-form{
+        [id*="itg-custom-ask-an-expert-form"]{
             @include clearfix;
-            input[type="text"]{
-                position: static;
-                left: auto;
-                top:auto;
-                width: 110px;
-                font-family: roboto-slab;
+            input[type="text"]{                
+                width: 100%;
+                font-family: roboto-slab;                
             }
             textarea{
                 font-family: roboto-slab;
                 height: 65px;
+                margin-bottom: 10px;
             }
             #question{
                 p{
@@ -5883,12 +5964,15 @@ footer{
                     margin-top: 10px;
                 }
             }
-            #askname, #askemail, input[type="submit"]{
+            #askname, #askemail{
                 float: left;
-                width: 33%;
+                width: 47%;
+            }
+            #askname{
+                margin-right: 10px;
             }
             #askemail{
-                margin: 0 12px;
+                margin-left: 10px;
             }
             input[type="submit"]{
                 background: #000 none repeat scroll 0 0;
@@ -5896,12 +5980,20 @@ footer{
                 border-radius: 5px;
                 color: #fff;                
                 font-size: 16px;
-                height: 32px;
-                line-height: 29px;
+                height: 32px;                
                 text-transform: uppercase;
                 width: 90px;
                 cursor: pointer;
                 font-family: roboto-slab;
+            }
+            .form-item-captcha-response{
+                input[type="text"]{                
+                    width: 50%;
+                    font-family: roboto-slab;                
+                }
+                .description{
+                    display: none;
+                }
             }
         }        
     }
@@ -6898,7 +6990,23 @@ input[type="radio"]:checked + label:after{
             line-height: 20px;
             padding: 0;
             width: 145px;
-        }        
+        }     
+        .map-result-detail{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.48);
+            height: 100%;
+            width: 100%;
+            display:none;
+            #consTable{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -48px;
+                margin-left: -110px;
+            }
+        }
     }
     .election-graph{        
         .col-el-1, .col-el-2, .col-el-3, .col-el-4, .col-el-5{
@@ -7614,3 +7722,252 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*css end related content*/
+
+/*css start factoids-slider*/
+.factoids-page{
+    @include social-share;    
+    margin:20px 0 10px 0;
+    .fun-facts, .social-share{
+        display: inline-block;
+    }
+    h3{
+        color:#000;
+    }
+}
+.factoids-slider{
+    ul{        
+        background:#a00606;
+        padding:0px 30px;
+        li{
+            span{
+            padding:25px 10px;
+            font-size: 15px;
+            line-height: 24px;
+            color:#fff;       
+            display:block;
+            &:hover{
+                background: #000;
+            }   
+            }            
+        }
+    }
+    button{
+        background: #000;
+        border: none;
+        width: 20px;
+        height: 30px;
+        color: #fff;
+        font-size: 28px;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        margin-top: -18px;
+        z-index: 2;
+    }
+    button.slick-next{
+        left: auto;
+        right: 0;
+    }
+}
+.listicle-page{
+    &.story-right{
+        @include calculate-width(1);   
+    }    
+    .listicle-detail{
+        border-top: 1px solid #ccc;   
+        > span{
+            width: 34px;
+            height: 34px;
+            background: #a00606;
+            border-radius: 100%;
+            font-size: 24px;
+            @include display-inline;
+            text-align: center;
+            line-height: 34px;
+            color: #fff;
+            font-weight: 700;        
+            margin-top: 15px;
+        }
+        .listicle-description{
+            font-size: 16px;
+            color: #282828;    
+            @include display-inline;
+            width: 90%;
+            padding: 15px;
+            span{
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+        }
+        + .listicle-detail{
+            border-top: 1px solid #ccc;    
+        }
+    }
+}
+/*css end factoids-slider*/
+
+
+/*css start Ask an expret for all page*/
+#block-itg-ask-expert-custom-ask-expert-form-block, .ask-question-sidebar{     
+        padding:15px;
+        font-family: roboto;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 50px;
+        @include sidebar-heading;        
+        h3{
+            margin-bottom: 10px;
+            display: block;
+            span{
+                padding: 0px 20px 10px 0px;
+            }
+        }
+        .form-type-textarea, .form-type-textfield{
+            margin: 0;
+            padding: 0;            
+        }
+        #itg-custom-ask-an-expert-form{
+            @include clearfix;
+            input[type="text"]{
+                position: static;
+                left: auto;
+                top:auto;
+                width: 110px;
+                font-family: roboto;
+            }
+            textarea{
+                font-family: roboto;
+                height: 65px;
+            }
+            #question{
+                p{
+                    color: #000;
+                    font-size: 12px;
+                    margin-bottom: 20px;
+                    margin-top: 10px;
+                }
+            }
+            #askname, #askemail, input[type="submit"]{
+                float: left;
+                width: 33%;
+            }
+            #askemail{
+                margin: 0 12px;
+            }
+            input[type="submit"]{
+                background: #000 none repeat scroll 0 0;
+                border: medium none;
+                border-radius: 5px;
+                color: #fff;                
+                font-size: 16px;
+                height: 32px;                
+                text-transform: uppercase;
+                width: 90px;
+                cursor: pointer;
+                font-family: roboto;
+            }
+        }        
+    }
+    /*css End Ask an expret for all page*/
+    
+/* new changes defalt section page*/
+.itg-layout-container.default-section{
+    .auto-block-1, .auto-block-2{
+        height: 673px;
+    }
+    .auto-block-1, .auto-block-2{
+        border: 1px solid $border-color;
+    }
+    .auto-block-2{
+        position: relative;
+        .special-top-news {
+            overflow: hidden;            
+            height: 100%;
+            .widget-title{
+                position: absolute;
+            }
+            ul{
+                padding-top: 20px !important;
+            }
+        }
+    }
+    .itg-listing, .featured-news{
+        border: none;
+    }    
+    .itg-top-section .top-colum-2 .droppable{
+        margin-bottom: 0;
+    }
+}
+/* new changes defalt section page end*/
+
+/*budget predictor css start*/
+.budget-predictor-heading{
+    margin-bottom: 10px;
+}
+#main-container-budget{                           
+    .col-list{        
+        min-height:600px;
+        background:#f3f3f3;
+        span.title{
+            font-size: 20px;
+            padding: 10px;
+            background: #09619f;
+            display: block;
+            color: #fff;
+            margin: 0 -15px;
+            border-bottom: 5px solid #fff;
+            font-family: roboto;
+        }
+    }
+    .col-list-1{
+        background: #ffb7bf;        
+    border-right: 5px solid #fff;
+    }
+    .col-list-2{
+        background: #9cd2ed;
+        border-right: 5px solid #fff;
+    }
+    .col-list-3{
+        background: #bae6b5;
+        border-right: 5px solid #fff;
+    }
+    .col-list-4{
+        background: #f0f0f0;
+        text-align: center;
+        p{
+            padding-top: 15px;
+            font-size: 16px;
+            text-align: center;
+            line-height: 22px;           
+        }
+         ul.connectedSortable{
+                list-style: none;
+                margin-top: 20px;
+                li{
+                    background: transparent;
+                    border: none;
+                    height: 65px;
+                    width: 65px;
+                    display: inline-block;
+                    vertical-align: top;
+                    margin: 10px;
+                }
+            }
+            button.btn{
+            margin-top: 40px;        
+            width: 158px;
+            height: 38px;
+            background: #cd070f;
+            border: none;
+            border-radius: 0;
+            color: #fff;
+            font-size: 28px;
+            text-transform: uppercase;
+            font-weight: 700;
+            line-height: 30px;
+        }    
+    }
+    
+    @include social-share;
+}
+/*budget predictor css end*/

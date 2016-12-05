@@ -6,7 +6,6 @@ if (!empty($content)):
   if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
     $class_buzz = 'buzz-feedback';
   }
-
   // prepare url for sharing
   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   $short_url = shorten_url($actual_link, 'goo.gl');
@@ -16,7 +15,7 @@ if (!empty($content)):
   ?>
   <div class="story-section <?php print $class_buzz; ?>">
       <div class='<?php print $classes ?>'>
-  <?php //pr($node);  ?> 
+          <?php //pr($node);  ?> 
           <div class="comment-mobile desktop-hide">
               <ul>
                   <li><a href="#"><i class="fa fa-envelope"></i> Mail to author</a></li>
@@ -28,7 +27,7 @@ if (!empty($content)):
           </div>
           <h1><?php print $node->title; ?></h1>
           <div class="story-left-section">
-                      <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
+              <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                 <div class="story-left">
                     <div class="byline"><?php
                         $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
@@ -54,13 +53,13 @@ if (!empty($content)):
                                 $twitter_handle = str_replace('@', '', $twitter_handle);
                                 if (!empty($twitter_handle)) {
                                   ?>
-                                  <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];  ?></li>                
-                                    <?php } ?>
+                                  <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                     ?></li>                
+                                <?php } ?>
                             </ul>
                             <ul class="date-update">
                                 <li class="mailto mhide"><i class="fa fa-envelope-o"></i> &nbsp;<?php
                                     $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
-                                    print "<a href='mailto:$email'>Mail To Author</a>";
+                                    print "<a href='mailto:support@indiatoday.in'>Mail To Author</a>";
                                     ?></li>
                                 <li class="mhide"><span class="share-count">4.5K</span>SHARES</li>
                                 <li><?php print date('F j, Y', $node->created); ?>   </li>
@@ -76,13 +75,13 @@ if (!empty($content)):
                                 <?php if ($user->uid > 0): ?>
                                   <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
                                   <li><?php print $read_later; ?></li>
-    <?php else: ?>
-      <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'READ LATER'))) . '</li>'; ?>
-                    <?php endif; ?>                      
+                                <?php else: ?>
+                                  <?php print '<li>' . l('<i class="fa fa-bookmark"></i> READ LATER', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'READ LATER'))) . '</li>'; ?>
+                                <?php endif; ?>                      
                             </ul>
                         </div>
                     </div>
-                            <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
+                    <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
                       <div class="briefcase mhide">
                           <h4><?php print t('Briefcase'); ?></h4>
                           <ul>
@@ -93,18 +92,19 @@ if (!empty($content)):
                               ?>
                           </ul>
                       </div>
-    <?php } ?>
+                    <?php } ?>
                 </div>  
-  <?php } ?>
-
-
-
-              <div class="story-right">
-                      <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
+              <?php } ?>
+              <div class="story-right <?php
+              if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+                echo 'listicle-page';
+              }
+              ?>">
+                       <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                     <!-- For buzzfeed section start -->
                     <div class="byline"><?php
-                    $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-                    $reporter_node = node_load($byline_id);
+                        $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+                        $reporter_node = node_load($byline_id);
                         ?>
                         <div class="profile-pic">
                             <?php
@@ -126,8 +126,8 @@ if (!empty($content)):
                                 $twitter_handle = str_replace('@', '', $twitter_handle);
                                 if (!empty($twitter_handle)) {
                                   ?>
-                                  <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];  ?></li>                
-    <?php } ?>
+                                  <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                    ?></li>                
+                                <?php } ?>
                             </ul>
                             <ul class="date-update">
                                 <li><?php print date('F j, Y', $node->created); ?>   </li>
@@ -136,45 +136,52 @@ if (!empty($content)):
                             </ul>
                         </div>
                     </div>
+
                     <!-- For buzzfeed section end -->
-                      <?php } ?>
-                      <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
-                    <div class="stryimg"><?php $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    print theme('image_style', array('style_name' => 'story_image', 'path' => $story_image));
+
+                  <?php } ?>
+
+                  <?php
+                  if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
+                    // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
+                    ?>
+                    <div class="stryimg" ><?php
+                        $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+
+                        print theme('image_style', array('style_name' => 'story_image', 'path' => $story_image));
                         ?>
-
-                          <?php }
-                          else { ?>
-                        <div class="stryimg"><?php $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                        print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
+                        <?php
+                      }
+                      else {
+                        ?>
+                        <div class="stryimg"><?php
+                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
                             ?>
-  <?php } ?>
-  <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
+                          <?php } ?>
+                          <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
                             <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
-                      <?php } ?>
+                          <?php } ?>
                       </div>
-
                       <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
-
-                              <?php
-                              if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
-                                if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
-                                  ?>
+                      <?php
+                      if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
+                        if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
+                          ?>
                           <div class="briefcase desktop-hide">
                               <h4><?php print t('Briefcase'); ?></h4>
                               <ul>
-                          <?php
-                          foreach ($node->field_story_highlights['und'] as $high) {
-                            print '<li>' . $high['value'] . '</li>';
-                          }
-                          ?>
+                                  <?php
+                                  foreach ($node->field_story_highlights['und'] as $high) {
+                                    print '<li>' . $high['value'] . '</li>';
+                                  }
+                                  ?>
                               </ul>
                           </div>
-                            <?php }
-                          } ?>
-
-
-
+                          <?php
+                        }
+                      }
+                      ?>
                       <div class="description">
                           <?php
                           $story_body = $node->body['und'][0]['value'];
@@ -199,11 +206,71 @@ if (!empty($content)):
                             $story_body = str_replace('[ITG:POLL:' . $poll_nid . ']', '', $story_body);
                           }
                           if (strpos($story_body, '[ITG:FACTOIDS]')) {
-                            $factoidsBlock = views_embed_view('story_factoids', 'block');
+                            $factoidsBlock = '';
+                            if (isset($node->field_story_template_factoids) && !empty($node->field_story_template_factoids)) {
+                              $factoidsSocialShare['title'] = $node->field_story_factoids_title[LANGUAGE_NONE][0]['value'];
+                              $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
+                              $factoidsSocialShare['icons'] = '<div class="factoids-page">
+                                 <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
+                                 <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . $actual_link . ' ' . $factoidsSocialShare['title'] . ' ' . $factoidsSocialShare['share_desc'] . ')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="twitter" href="javascript:" onclick="twitter_popup(' . urlencode($factoidsSocialShare['title']) . ' ' . urlencode($short_url) . ')"><i class="fa fa-twitter"></i></a></li>
+                                 <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . $actual_link . ')"></a></li>
+                                 </ul></div></div>';
+                              $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
+                              foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
+                                $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
+                              }
+                              $factoidsSocialShare['slider'] .= '</ul></div>';
+                              $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
+                            }
                             $story_body = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $story_body);
                           }
-                          // Print story body
-                          print $story_body;
+                          if (strpos($story_body, '[ITG:EXPERT-CHUNK]')) {
+                            $expertDetails = '';
+                            if (!empty($node->field_story_expert_name)) {
+                              $expertDetails .= '<div class="story-expert-opinion"><h4>' . t('Expert Opinion') . '</h4>';
+                              $expertDetails .= '<div class="expert-detail row"><div class="left-side col-md-8"><p class="name">' . $node->field_story_expert_name['und'][0]['value'] . '</p>';
+                              if (!empty($node->field_story_expertise)) {
+                                $expertDetails .= '<p class="name">' . $node->field_story_expertise[LANGUAGE_NONE][0]['value'] . '</p>';
+                              }
+                              $expertDetails .= '</div>';
+                            }
+                            if (!empty($node->field_story_expert_image)) {
+                              $expertDetailsImage = file_create_url($node->field_story_expert_image[LANGUAGE_NONE][0]['uri']);
+                              $expertDetails .= '<div class="right-side col-md-4"><img src="' . $expertDetailsImage . '"></div></div>';
+                            }
+                            if (!empty($node->field_story_expert_description)) {
+                              $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2></div>';
+                            }
+
+                            $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
+                          }
+
+                          if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+
+                            $wrapper = entity_metadata_wrapper('node', $node);
+                            $num = 1;
+                            foreach ($wrapper->field_story_listicle as $i):
+                              $listicletype = '';
+                              print '<div class="listicle-detail">';
+                              $type = $i->field_story_listicle_type->value();
+                              $description = $i->field_story_listicle_description->value();
+                              $color = $i->field_story_listicle_color->value();
+                              $color = ($color['rgb']) ? $color['rgb'] : '#000000';
+                              print '<span>' . $num . '</span>';
+                              if (isset($type)) {
+                                $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
+                              }
+                              print '<div class="listicle-description">' . $listicletype . $description . '</div>';
+                              print '</div>';
+                              $num++;
+                            endforeach;
+                          }
+                          else {
+                            // Print story body
+                            print $story_body;
+                          }
 
                           // If survey is associated with story, render survey form
                           if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
@@ -222,11 +289,8 @@ if (!empty($content)):
                             print $story_body_poll;
                           }
                           ?>
-
                       </div>
-
                   </div>
-
               </div>
 
               <!-- condition for buzz  -->
@@ -236,9 +300,7 @@ if (!empty($content)):
                 $buzz_output.= '';
                 $buzz = 1;
                 foreach ($node->field_story_template_buzz['und'] as $buzz_item) {
-
                   $buzz_output.= '<div class="buzz-section">';
-
                   $field_collection_id = $buzz_item['value'];
                   $entity = entity_load('field_collection_item', array($field_collection_id));
                   $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
@@ -285,7 +347,7 @@ if (!empty($content)):
                       </ul>
                   </div>
 
-                      <?php if (!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
+                  <?php if (!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
                     <div class="snap-post">
                         <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
                         <?php
@@ -303,7 +365,7 @@ if (!empty($content)):
                         ?>
                         <div class="agbutton"><button id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snappost"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
                     </div>
-                          <?php } ?>
+                  <?php } ?>
                   <div class="tags">
                       <ul>
                           <li><i class="fa fa-tags"></i> Tags :</li>        
@@ -328,33 +390,33 @@ if (!empty($content)):
               }
               ?>
 
-  <?php
-  if (function_exists(global_comment_last_record)) {
-    $last_record = $global_comment_last_record;
-    $config_name = trim($last_record[0]->config_name);
-  }
-  if ($config_name == 'vukkul') {
-    ?>
+              <?php
+              if (function_exists(global_comment_last_record)) {
+                $last_record = $global_comment_last_record;
+                $config_name = trim($last_record[0]->config_name);
+              }
+              if ($config_name == 'vukkul') {
+                ?>
                 <div class="vukkul-comment">
                     <div id="vuukle-emote"></div>
                     <div id="vuukle_div"></div>
 
-                <?php
-                if (function_exists('vukkul_view')) {
-                  vukkul_view();
-                }
-                ?>
+                    <?php
+                    if (function_exists('vukkul_view')) {
+                      vukkul_view();
+                    }
+                    ?>
 
                 </div>
-              <?php
+                <?php
               }
               if ($config_name == 'other') {
                 ?>
                 <div id="other-comment">
-    <?php print render($content['comment_form']); ?>
-    <?php print render($content['comments']); ?>
+                    <?php print render($content['comment_form']); ?>
+                    <?php print render($content['comments']); ?>
                 </div>
-  <?php } ?>
+              <?php } ?>
           </div>
       </div>
-<?php endif; ?>
+    <?php endif; ?>

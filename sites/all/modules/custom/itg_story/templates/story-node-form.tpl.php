@@ -67,6 +67,7 @@
       <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_expert_name']); ?>
         <?php print drupal_render($form['field_story_expert_image']); ?>
+        <?php print drupal_render($form['field_story_expertise']); ?>
         <?php print drupal_render($form['field_story_expert_description']); ?>
         <?php // print drupal_render($form['revision_information']['workbench_moderation_state_new']); ?>
         <?php // print drupal_render($form['revision_information']['log']); ?>

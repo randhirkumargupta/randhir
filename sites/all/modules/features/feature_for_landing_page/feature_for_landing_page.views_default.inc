@@ -98,6 +98,36 @@ function feature_for_landing_page_views_default_views() {
   /* Display: Anchor Landing , Anchor Description Block */
   $handler = $view->new_display('block', 'Anchor Landing , Anchor Description Block', 'block');
   $handler->display->display_options['display_description'] = 'Anchor Landing , Anchor Description Block';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Content: Extra large image */
+  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
+    'image_style' => 'anchors_landing',
+    'image_link' => 'content',
+  );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $export['anchor_landing_page'] = $view;
 
   $view = new view();
@@ -327,6 +357,11 @@ function feature_for_landing_page_views_default_views() {
     'image_style' => 'widget_very_small',
     'image_link' => '',
   );
+  /* Field: Taxonomy term: Program timing in days */
+  $handler->display->display_options['fields']['field_program_timing_in_days']['id'] = 'field_program_timing_in_days';
+  $handler->display->display_options['fields']['field_program_timing_in_days']['table'] = 'field_data_field_program_timing_in_days';
+  $handler->display->display_options['fields']['field_program_timing_in_days']['field'] = 'field_program_timing_in_days';
+  $handler->display->display_options['fields']['field_program_timing_in_days']['label'] = 'Title';
   /* Field: Taxonomy term: Display Title */
   $handler->display->display_options['fields']['field_cm_display_title']['id'] = 'field_cm_display_title';
   $handler->display->display_options['fields']['field_cm_display_title']['table'] = 'field_data_field_cm_display_title';
@@ -357,6 +392,10 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['tid']['label'] = '';
   $handler->display->display_options['fields']['tid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
+  /* Field: Taxonomy term: Time Period */
+  $handler->display->display_options['fields']['field_time_period']['id'] = 'field_time_period';
+  $handler->display->display_options['fields']['field_time_period']['table'] = 'field_data_field_time_period';
+  $handler->display->display_options['fields']['field_time_period']['field'] = 'field_time_period';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -423,6 +462,15 @@ function feature_for_landing_page_views_default_views() {
     'image_style' => 'widget_very_small',
     'image_link' => '',
   );
+  /* Field: Taxonomy term: Program timing in days */
+  $handler->display->display_options['fields']['field_program_timing_in_days']['id'] = 'field_program_timing_in_days';
+  $handler->display->display_options['fields']['field_program_timing_in_days']['table'] = 'field_data_field_program_timing_in_days';
+  $handler->display->display_options['fields']['field_program_timing_in_days']['field'] = 'field_program_timing_in_days';
+  $handler->display->display_options['fields']['field_program_timing_in_days']['label'] = 'Timing';
+  /* Field: Taxonomy term: Time Period */
+  $handler->display->display_options['fields']['field_time_period']['id'] = 'field_time_period';
+  $handler->display->display_options['fields']['field_time_period']['table'] = 'field_data_field_time_period';
+  $handler->display->display_options['fields']['field_time_period']['field'] = 'field_time_period';
   $export['programmes'] = $view;
 
   return $export;

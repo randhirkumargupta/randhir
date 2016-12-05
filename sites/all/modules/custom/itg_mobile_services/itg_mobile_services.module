@@ -1095,11 +1095,12 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
       $form['title']['#autocomplete_path'] = 'content-title-list/vas_service_content/autocomplete';
       break;
     case 'views-exposed-form-clients-details-page-2':
-      $form['field_service_title_value']['#attributes'] = array(
+     // pr($form);
+      $form['title']['#attributes'] = array(
         'placeholder' => t('Title')
       );
 
-      $form['field_service_title_value']['#autocomplete_path'] = 'mobile_services/service_creation/autocomplete';
+      $form['title']['#autocomplete_path'] = 'mobile_services/service_creation/autocomplete';
       break;
   }
 }

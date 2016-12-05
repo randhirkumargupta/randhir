@@ -128,7 +128,7 @@ jQuery.ajax({type: "GET",url: feedURL,dataType: "jsonp", cache: "true",crossDoma
     $("#cons"+consID).attr('onclick',"getJSONFeedDetails('"+conurl+"','"+consID+"')");
 
 	var tr;
-  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:10px;top: 8px;'><img src='http://media2.intoday.in/indiatoday/election2014/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
+  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:0px;top: 0px;'><img src='http://media2.intoday.in/indiatoday/election2014/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
 	var itemsArray = data.loksabha.items; 
 	  for(var i = 0;i<itemsArray.length;i++)
 	  {
@@ -154,7 +154,7 @@ jQuery.ajax({type: "GET",url: feedURL,dataType: "jsonp", cache: "true",crossDoma
 }
 function getJSONFeedDetails(conurl,consID)
 {
-  
+  jQuery('.map-result-detail').show();
 var feedURL = conurl+"/"+consID+".json";
 
 
@@ -162,7 +162,7 @@ jQuery.ajax({type: "GET",url: feedURL,dataType: "jsonp", cache: "true",crossDoma
 	{
 
 	var tr;
-  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:10px;top: 8px;'><img src='http://media2.intoday.in/indiatoday/election_delhi_2015/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
+  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:0px;top: 0px;'><img src='http://media2.intoday.in/indiatoday/election_delhi_2015/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
 	var itemsArray = data.loksabha.items; 
 	  for(var i = 0;i<itemsArray.length;i++)
 	  {
@@ -190,5 +190,6 @@ ga('send', 'event', 'IT-election-delhi-map', 'click',"versedelhiconstuencymap", 
 
 function tabclose()
 {
-    jQuery('#consTable').hide();
+     jQuery('.map-result-detail').hide();
+   
 }

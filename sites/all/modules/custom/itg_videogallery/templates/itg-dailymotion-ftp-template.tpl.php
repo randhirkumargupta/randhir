@@ -43,8 +43,19 @@ global $base_url;
         <a href="javascript:void(0)" class = "button"><?php print t('Associate Video'); ?></a>
       </div>  
       <?php //print drupal_render($form['video_browse_select']); ?>
-      <div class="local_browse" style="display: none">
-        <span class="button browse-local"><?php print t('Browse Video'); ?></span>
+      <div class="local_browse" style="display: none;">
+        
+        <?php    print  drupal_render(drupal_get_form('videogallery_new_fileupload_form')); ?>
+
+        
+       <span class="button browse-local">
+           <?php 
+                   
+          print t('Upload Video');
+                  
+          ?>
+             
+        </span>
       </div>
     </div>
   </div>
@@ -54,6 +65,7 @@ global $base_url;
 </div>
 
 <?php 
+
 $field_id = $_GET['input_filed'];
 $file_field_name = $_GET['file_filed_name'];
  
@@ -62,7 +74,7 @@ $file_field_name = $_GET['file_filed_name'];
   $settings['video_field_id'] = $field_id;
   $settings['video_field_file'] = $file_field_name;
   drupal_add_js(array('itg_dailymotion' => array('settings' => $settings)), array('type' => 'setting'));
- drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_dailymotion.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_dailymotion.js', array('weight' => 1));
  
 ?>
 <script src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/js/jquery.easyPaginate.js"></script>

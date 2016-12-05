@@ -68,7 +68,7 @@ function itg_seo_theme() {
  * {@inheritdoc}
  */
 function itg_seo_form_alter(&$form, &$form_state, $form_id) {
-  
+   
    // Extra meta tags element hide from form
     if ($form_id == 'mega_review_critic_node_form' 
             || $form_id == 'story_node_form' 
@@ -87,11 +87,18 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
             || $form_id == 'ask_an_expert_node_form'
             || $form_id == 'event_configurations_node_form'
             || $form_id == 'event_backend_node_form'
+            || $form_id == 'issue_node_form'
+            || $form_id == 'supplement_node_form'
+            || $form_id == 'magazine_node_form'
+            || $form_id == 'heighlights_node_form'
+            || $form_id == 'page_node_form'
             || $form['#vocabulary']->machine_name == 'category_management'
-            ) {
-      if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
-        $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
-      }      
+
+            ) {      
+                if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+
+                  $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+                }      
     }
     
     if ($form_id == 'syndication_client_node_form' 
@@ -101,7 +108,8 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
             || $form_id == 'task_idea_allocation_tracking_node_form'
             || $form_id == 'ugc_node_form'
             || $form_id == 'notification_node_form') {
-      $form['additional_settings']['#access'] = FALSE;
+      //$form['additional_settings']['#access'] = FALSE;
+     
     }
 }
 
@@ -115,14 +123,15 @@ function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_metatags.js');
     unset($form['additional_settings']['group']['#groups']['additional_settings'][5]['#description']);
     unset($form['metatags']['intro_text']['#markup']);
-    
+     
     // Add code after metatag updation
     unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
     unset($form['metatags'][LANGUAGE_NONE]['basic']['#description']);
   
     $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
     
-    if($form['#form_id'] != 'event_backend_node_form') {
+    $arr_seo_heading_not_req = array('event_backend_node_form', 'issue_node_form', 'supplement_node_form', 'magazine_node_form');
+    if(!in_array($form['#form_id'], $arr_seo_heading_not_req)) {
       $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
     }
 
