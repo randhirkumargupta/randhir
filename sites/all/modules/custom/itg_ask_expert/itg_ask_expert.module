@@ -547,9 +547,10 @@ function user_details_for_section($url, $tid) {
         ->fetchAssoc();
     if (isset($result) && !empty($result)) {
       $userDetails = user_load($result['nid']);
-      $file = $userDetails->picture[0]['uri'];
-      if (!empty($file)) {
-        $imageUrl = image_style_url('user_picture', $file);
+
+      if (isset($userDetails->field_user_picture) && !empty($userDetails->field_user_picture)) {
+        $fileUri = $userDetails->field_user_picture[LANGUAGE_NONE][0]['uri'];
+        $imageUrl = image_style_url('user_picture', $fileUri);
       }
       else {
         $imageUrl = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default-user.png';
