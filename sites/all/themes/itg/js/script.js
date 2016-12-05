@@ -16,6 +16,13 @@
 // To understand behaviors, see https://drupal.org/node/756722#behaviors
     Drupal.behaviors.my_custom_behavior = {
         attach: function (context, settings) {
+            var getmsgsaves=jQuery('.saved-photogallery').text();
+            
+            if(getmsgsaves!="")
+            {
+                jQuery('.saved-photogallery').remove();
+                jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
+            }
             jQuery('.add-more-block-front').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
