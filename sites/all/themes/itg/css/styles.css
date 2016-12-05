@@ -2466,7 +2466,7 @@ footer .footer-copyright {
   width: 320px;
   float: left;
   margin-right: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   padding: 10px 15px;
   font-family: "Roboto Slab", sans-serif;
 }
@@ -7466,8 +7466,11 @@ footer .footer-copyright {
   font-family: roboto-slab;
 }
 .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"] {
-  width: 40%;
+  width: 50%;
   font-family: roboto-slab;
+}
+.education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response .description {
+  display: none;
 }
 
 /*CSS end for education page*/
@@ -9495,11 +9498,15 @@ footer .footer-copyright {
 
 /* new changes defalt section page end*/
 /*budget predictor css start*/
+.budget-predictor-heading {
+  margin-bottom: 10px;
+}
+
 #main-container-budget .col-list {
   min-height: 600px;
   background: #f3f3f3;
 }
-#main-container-budget .col-list span {
+#main-container-budget .col-list span.title {
   font-size: 20px;
   padding: 10px;
   background: #09619f;
@@ -9523,6 +9530,7 @@ footer .footer-copyright {
 }
 #main-container-budget .col-list-4 {
   background: #f0f0f0;
+  text-align: center;
 }
 #main-container-budget .col-list-4 p {
   padding-top: 15px;
@@ -9530,11 +9538,11 @@ footer .footer-copyright {
   text-align: center;
   line-height: 22px;
 }
-#main-container-budget .col-list-4 ul {
+#main-container-budget .col-list-4 ul.connectedSortable {
   list-style: none;
   margin-top: 20px;
 }
-#main-container-budget .col-list-4 ul li {
+#main-container-budget .col-list-4 ul.connectedSortable li {
   background: transparent;
   border: none;
   height: 65px;
@@ -9543,9 +9551,58 @@ footer .footer-copyright {
   vertical-align: top;
   margin: 10px;
 }
-#main-container-budget .btn, #main-container-budget .page-user form .form-submit, .page-user form #main-container-budget .form-submit, #main-container-budget #block-formblock-ask-an-expert .form-submit, #block-formblock-ask-an-expert #main-container-budget .form-submit, #main-container-budget .question-container .form-submit, .question-container #main-container-budget .form-submit, #main-container-budget #content .node-form .form-actions .form-submit, #content .node-form .form-actions #main-container-budget .form-submit, #main-container-budget #content #comments .comment-form .form-actions .form-submit, #content #comments .comment-form .form-actions #main-container-budget .form-submit, #main-container-budget #comments #content .comment-form .form-actions .form-submit, #comments #content .comment-form .form-actions #main-container-budget .form-submit, #main-container-budget .form-field-type-field-collection .field-multiple-table tbody td > .form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget td > .form-submit, #main-container-budget .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > .form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget td > .ajax-new-content > .form-submit {
+#main-container-budget .col-list-4 button.btn, #main-container-budget .col-list-4 .page-user form button.form-submit, .page-user form #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #block-formblock-ask-an-expert button.form-submit, #block-formblock-ask-an-expert #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 .question-container button.form-submit, .question-container #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #content .node-form .form-actions button.form-submit, #content .node-form .form-actions #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #content #comments .comment-form .form-actions button.form-submit, #content #comments .comment-form .form-actions #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 #comments #content .comment-form .form-actions button.form-submit, #comments #content .comment-form .form-actions #main-container-budget .col-list-4 button.form-submit, #main-container-budget .col-list-4 .form-field-type-field-collection .field-multiple-table tbody td > button.form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget .col-list-4 td > button.form-submit, #main-container-budget .col-list-4 .form-field-type-field-collection .field-multiple-table tbody td > .ajax-new-content > button.form-submit, .form-field-type-field-collection .field-multiple-table tbody #main-container-budget .col-list-4 td > .ajax-new-content > button.form-submit {
   margin-top: 40px;
-  margin-bottom: 100px;
+  width: 158px;
+  height: 38px;
+  background: #cd070f;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  font-size: 28px;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 30px;
+}
+#main-container-budget ul {
+  list-style-type: none;
+}
+#main-container-budget ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+#main-container-budget ul li a {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+}
+@media screen and (min-width: 768px) {
+  #main-container-budget ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+#main-container-budget ul li a.share {
+  color: #d0d0d0;
+}
+#main-container-budget ul li a.share, #main-container-budget ul li a.google {
+  background: transparent;
+}
+#main-container-budget ul li a.facebook {
+  background: #0b4887;
+}
+#main-container-budget ul li a.twitter {
+  background: #05a3d2;
+}
+#main-container-budget ul li a.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
 }
 
 /*budget predictor css end*/

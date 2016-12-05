@@ -53,7 +53,7 @@ if (!empty($content)):
                                 $twitter_handle = str_replace('@', '', $twitter_handle);
                                 if (!empty($twitter_handle)) {
                                   ?>
-                                  <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                     ?></li>                
+                                  <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                      ?></li>                
                                 <?php } ?>
                             </ul>
                             <ul class="date-update">
@@ -126,7 +126,7 @@ if (!empty($content)):
                                 $twitter_handle = str_replace('@', '', $twitter_handle);
                                 if (!empty($twitter_handle)) {
                                   ?>
-                                  <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                    ?></li>                
+                                  <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                     ?></li>                
                                 <?php } ?>
                             </ul>
                             <ul class="date-update">
@@ -213,9 +213,9 @@ if (!empty($content)):
                               $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . $actual_link . ' ' . $factoidsSocialShare['title'] . ' ' . $factoidsSocialShare['share_desc'] . ')"><i class="fa fa-facebook"></i></a></li>
-                                 <li><a class="twitter" href="javascript:" onclick="twitter_popup(' . urlencode($factoidsSocialShare['title']) . ' ' . urlencode($short_url) . ')"><i class="fa fa-twitter"></i></a></li>
-                                 <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . $actual_link . ')"></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(\'' . $actual_link . ' ' . $factoidsSocialShare['title'] . ' ' . $factoidsSocialShare['share_desc'] . '\')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['title']) . ' ' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
+                                 <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(\'' . $actual_link . '\')"></a></li>
                                  </ul></div></div>';
                               $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
                               foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {

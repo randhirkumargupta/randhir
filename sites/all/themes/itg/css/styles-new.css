@@ -633,6 +633,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .saved-item-tab {
   margin: 60px 0 30px;
   position: relative;
+  list-style: none;
+  display: inline-block;
+  vertical-align: top;
 }
 .saved-item-tab li {
   float: left;
@@ -1044,6 +1047,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+#content #block-formblock-ugc .node-ugc-form .captcha {
+  max-width: 100%;
+  margin-left: 0;
+  border: 1px solid #e0e0e0;
 }
 #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
   margin-left: 0;
@@ -3096,6 +3104,10 @@ body.has-cart-popup {
 .page-order-summary #main {
   padding: 50px 0;
 }
+.page-order-summary .rhs-address {
+  border: 1px solid #ddd;
+  margin-bottom: 35px;
+}
 .page-order-summary .order-address-wrapper {
   background-color: #ededed;
   display: inline-block;
@@ -3153,6 +3165,14 @@ body.has-cart-popup {
 }
 .page-order-summary .cart-checkout-list .prd-title {
   font: 500 18px/24px Roboto;
+}
+.page-order-summary .lhs-redeem-point .cart-total-inner {
+  max-width: 100%;
+  text-align: left;
+}
+.page-order-summary .lhs-redeem-point .cart-total-inner .checkout {
+  display: inline-block;
+  vertical-align: top;
 }
 
 #change-address-popup {
