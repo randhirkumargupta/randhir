@@ -4,6 +4,9 @@
 /**
  * ItgBylineMigration extends XMLMigration 
  */
+
+//http://feeds.intoday.in/migration/byline-master.xml
+
 class ItgBylineMigration extends XMLMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
@@ -81,14 +84,16 @@ class ItgBylineMigration extends XMLMigration {
     $this->addFieldMapping('body', 'full_description')->xpath('full_description');
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('field_reporter_twitter_handle', 'twitter_id')->xpath('twitter_id');
-    $this->addFieldMapping('field_reporter_facebook_id', 'facebook_id')->xpath('facebook_id');
-    $this->addFieldMapping('field_reporter_profile_type', 'profile_type')->xpath('profile_type');
+    $this->addFieldMapping('field_reporter_facebook_id', 'facebook_id')->xpath('facebook_id');    
     $this->addFieldMapping('created', 'created_datetime')->xpath('created_datetime');    
-    $this->addFieldMapping('changed', 'modified_datetime')->xpath('modified_datetime');
-    //$this->addFieldMapping('uid', 'created_by')->xpath('created_by');
-    $this->addFieldMapping('status', 'published')->xpath('published');    
+    $this->addFieldMapping('changed', 'modified_datetime')->xpath('modified_datetime');    
+    $this->addFieldMapping('status', 'published')->xpath('published');
+    
+    $this->addFieldMapping('field_reporter_profile_type', 'profile_type')->xpath('profile_type');
     $this->addFieldMapping('field_reporter_company', 'company')->xpath('company');
-    $this->addFieldMapping('field_reporter_department', 'department')->xpath('department');    
+    $this->addFieldMapping('field_reporter_department', 'department')->xpath('department'); 
+    
+    //$this->addFieldMapping('uid', 'created_by')->xpath('created_by');
     
     /*$this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');
     $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');
@@ -99,36 +104,21 @@ class ItgBylineMigration extends XMLMigration {
   }
   
   public function prepareRow($row) {
-   // Category migrate
-   /* $data_category = '';
-
-    if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
-      foreach ($row->xml->categories->category as $final_category) {
-        $source_cid = (string) $final_category;
-        $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
-        $data_category[]['tid'] = $orignal_category;
-      }
-    }
-    
-    $row->category_new = $data_category;*/
-    
+    //$department_array = array('Mail Today Editorial' => 'mail_today_editorial');
+  
+    //$department = (string) $row->xml->department;
+    //$row->department_new = $department_array[$department];
   }
   
-  public function prepare($node, stdClass $row) {
-    /*if (!empty($row->category_new)) {
-      $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
-    }*/
-    
-    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][]['tid'] = 403;
-    
+  public function prepare($node, stdClass $row) {       
+    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 403;
     $node->uid = 1;
   }
   
-  public function complete($entity, $row) {
-    
+  public function complete($entity, $row) {    
    //code for order set
    if (!empty($row->xml->ordering)) {    
-     ordering_set_for_byline($node->nid, $row->xml->ordering);
+     ordering_set_for_byline($entity->nid, $row->xml->ordering);
    }
    
   }
