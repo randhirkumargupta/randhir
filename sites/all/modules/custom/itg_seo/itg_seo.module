@@ -68,7 +68,7 @@ function itg_seo_theme() {
  * {@inheritdoc}
  */
 function itg_seo_form_alter(&$form, &$form_state, $form_id) {
-  
+   
    // Extra meta tags element hide from form
     if ($form_id == 'mega_review_critic_node_form' 
             || $form_id == 'story_node_form' 
@@ -91,11 +91,14 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
             || $form_id == 'supplement_node_form'
             || $form_id == 'magazine_node_form'
             || $form_id == 'heighlights_node_form'
+            || $form_id == 'page_node_form'
             || $form['#vocabulary']->machine_name == 'category_management'
-        ) {
-      if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
-        $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
-      }      
+
+            ) {      
+                if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+
+                  $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+                }      
     }
     
     if ($form_id == 'syndication_client_node_form' 
