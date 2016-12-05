@@ -403,7 +403,7 @@
                 }
             });
             
-            $('.slider-container').slick({
+            $('.aajtak-slide .slider-container').slick({
               infinite: true,
               slidesToShow: 3,
               variableWidth: true,
