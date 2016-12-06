@@ -404,6 +404,17 @@ function feature_for_key_candidate_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['label'] = 'Posted By';
+  /* Field: Section wise ordering content: Category */
+  $handler->display->display_options['fields']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['fields']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['fields']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['fields']['cat_id']['label'] = 'Section';
+  $handler->display->display_options['fields']['cat_id']['element_label_colon'] = FALSE;
+  /* Field: Section wise ordering content: state */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'itg_widget_order';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['label'] = 'State';
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
@@ -411,12 +422,6 @@ function feature_for_key_candidate_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom_date_d_m_y_';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Section wise ordering content: Category */
-  $handler->display->display_options['fields']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['fields']['cat_id']['table'] = 'itg_widget_order';
-  $handler->display->display_options['fields']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['fields']['cat_id']['label'] = 'State';
-  $handler->display->display_options['fields']['cat_id']['element_label_colon'] = FALSE;
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
   $handler->display->display_options['fields']['php_1']['table'] = 'views';
@@ -529,6 +534,78 @@ print \'<a href="move-dont-miss-widget-node/key_candidate/0/0/\'.$row->nid.\'"> 
   $handler->display->display_options['filters']['nid']['expose']['operator'] = 'nid_op';
   $handler->display->display_options['filters']['nid']['expose']['identifier'] = 'nid';
   $handler->display->display_options['filters']['nid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  /* Filter criterion: Section wise ordering content: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['cat_id']['expose']['operator_id'] = 'cat_id_op';
+  $handler->display->display_options['filters']['cat_id']['expose']['label'] = 'Category';
+  $handler->display->display_options['filters']['cat_id']['expose']['operator'] = 'cat_id_op';
+  $handler->display->display_options['filters']['cat_id']['expose']['identifier'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  /* Filter criterion: Section wise ordering content: state */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'State';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
