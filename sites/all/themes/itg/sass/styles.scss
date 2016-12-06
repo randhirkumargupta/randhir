@@ -7978,9 +7978,16 @@ input[type="radio"]:checked + label:after{
             text-transform: uppercase;
             font-weight: 700;
             line-height: 30px;
+             margin-bottom: 40px;  
         }    
     }
-    
+    #ranking-content{
+        ul{
+            li{
+                margin-top: 15px;
+            }
+        }
+    }    
     @include social-share;
 }
 /*budget predictor css end*/
