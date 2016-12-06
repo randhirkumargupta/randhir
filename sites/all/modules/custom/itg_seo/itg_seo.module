@@ -109,7 +109,7 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
  * @return array
  */
 function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
-  if ($form['#vocabulary']->machine_name == 'movies') {
+  if (isset($form['#vocabulary']->machine_name) && $form['#vocabulary']->machine_name == 'movies') {
     unset($form['relations']['#title']);
     unset($form['metatags']['#title']);
     unset($form['metatags']['#title']);
