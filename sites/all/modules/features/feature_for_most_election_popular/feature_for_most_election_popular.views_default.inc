@@ -197,12 +197,6 @@ function feature_for_most_election_popular_views_default_views() {
   $handler->display->display_options['fields']['field_constituancy']['field'] = 'field_constituancy';
   $handler->display->display_options['fields']['field_constituancy']['label'] = '';
   $handler->display->display_options['fields']['field_constituancy']['element_label_colon'] = FALSE;
-  /* Field: Section wise ordering content: Category */
-  $handler->display->display_options['fields']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['fields']['cat_id']['table'] = 'itg_widget_order';
-  $handler->display->display_options['fields']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['fields']['cat_id']['label'] = '';
-  $handler->display->display_options['fields']['cat_id']['element_label_colon'] = FALSE;
   /* Field: Section wise ordering content: extra */
   $handler->display->display_options['fields']['extra']['id'] = 'extra';
   $handler->display->display_options['fields']['extra']['table'] = 'itg_widget_order';
@@ -215,6 +209,12 @@ function feature_for_most_election_popular_views_default_views() {
   $handler->display->display_options['fields']['field_party_name']['field'] = 'field_party_name';
   $handler->display->display_options['fields']['field_party_name']['label'] = '';
   $handler->display->display_options['fields']['field_party_name']['element_label_colon'] = FALSE;
+  /* Field: Section wise ordering content: state */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'itg_widget_order';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['label'] = '';
+  $handler->display->display_options['fields']['state']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -230,6 +230,11 @@ function feature_for_most_election_popular_views_default_views() {
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'key_candidate';
   $handler->display->display_options['filters']['widget']['group'] = 1;
+  /* Filter criterion: Section wise ordering content: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['value'] = '624';
   $export['most_popular'] = $view;
 
   return $export;

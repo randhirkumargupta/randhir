@@ -422,18 +422,18 @@ function update_itg_widget_order_table_data_for_key_candidate($form, &$form_stat
     if ($weightcount > 0) {
         $electionstatus='node-'.$value['id'];
       db_update('itg_widget_order')
-              ->fields(array('weight' => $value['weight'], 'extra' => $form_state['input'][$electionstatus],))
+              ->fields(array('weight' => $value['weight'],))
               ->condition('widget', 'key_candidate')
               ->condition('nid', $value['id'])
               ->execute();
     }
-    else {
-      db_update('itg_widget_order')
-              ->fields(array('extra' => $form_state['input'][$electionstatus],))
-              ->condition('widget', 'key_candidate')
-              ->condition('nid', $value['id'])
-              ->execute();
-    }
+//    else {
+//      db_update('itg_widget_order')
+//              ->fields(array('extra' => $form_state['input'][$electionstatus],))
+//              ->condition('widget', 'key_candidate')
+//              ->condition('nid', $value['id'])
+//              ->execute();
+//    }
   }
   
 }
