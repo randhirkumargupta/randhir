@@ -3,7 +3,7 @@
 foreach ($rows as $index => $row) {
  
 
-    $consti[] = $row['cat_id'];
+    $consti[] = $row['state'];
 }
 
 $resultdata = array_unique($consti);
@@ -33,9 +33,9 @@ $resultdata = array_unique($consti);
          <div class="key-candidate-detail <?php echo $first_show;?> kc-<?php echo $mainids; ?>" id="">
    
     <?php foreach ($rows as $index => $row) {
-        if($row['cat_id']==$mainids)
+        if($row['state']==$mainids)
         {
-        $term_data = taxonomy_term_load($row['cat_id']);
+        $term_data = taxonomy_term_load($row['state']);
         
         ?> 
 

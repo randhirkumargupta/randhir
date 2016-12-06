@@ -8878,9 +8878,9 @@ div.node{
                 }
             }
     }
-    .btn{
-        margin-top: 40px;
-        margin-bottom: 100px;
+    .btn{        
+        margin: 0;
+        margin-bottom: 10px;
     }
     .bottom-side-block{
         display: none;
@@ -8899,8 +8899,7 @@ div.node{
     cursor: pointer;
     font-size: 14px;
     font-weight: 400;
-    height: 32px;
-    margin-right: 5px;
+    height: 32px;    
     padding: 5px 12px 7px;
     text-align: center;
     white-space: nowrap;
@@ -8939,4 +8938,20 @@ div.node{
 }
 .form-field-name-field-story-quote-image{
     @extend .Browse-upload;
+}
+[id="taxonomy-form-term"]{
+    .fieldset-wrapper{
+        display: block !important;
+    }
+    fieldset{        
+        border:none;       
+    }
+    .form-type-select > label + div{
+        padding-left: 0;
+    }
+    #field-reporter-movie-year-add-more-wrapper{
+        .fieldset-wrapper{
+            padding-left: 0;
+        }
+    }
 }
