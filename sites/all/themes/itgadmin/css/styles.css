@@ -161,7 +161,7 @@ img {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="domain-form"] .form-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="domain-form"] .form-submit, [id="itg-widget-keycandidate-form"] .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -325,7 +325,7 @@ img {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="domain-form"] .form-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="domain-form"] .form-submit, [id="itg-widget-keycandidate-form"] .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -618,7 +618,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="domain-form"] .form-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="domain-form"] .form-submit, [id="itg-widget-keycandidate-form"] .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -701,7 +701,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit:hover,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit:hover,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit:hover,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, [id*="comment-global-config"] .form-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-submit:hover, [id*="protected-pages-enter-password"] fieldset .form-submit:hover, [id*="domain-form"] .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, [id*="comment-global-config"] .form-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-submit:hover, [id*="protected-pages-enter-password"] fieldset .form-submit:hover, [id*="domain-form"] .form-submit:hover, [id="itg-widget-keycandidate-form"] .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
 .form-submit[value="Save"]:hover,
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
@@ -774,7 +774,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="domain-form"] .form-submit, .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit, .page-submit-idea .top-actions .form-submit, #menu-item-delete-form .form-actions #edit-submit, .itg_menu_manager_form .form-submit, [id*="comment-global-config"] .form-submit, [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="domain-form"] .form-submit, [id="itg-widget-keycandidate-form"] .form-submit, .form-submit[value="Save as Draft"],
 .form-submit[value="Save"],
 .form-submit[value="Create"],
 .form-submit[value="Update"],
@@ -797,7 +797,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions #edit-submit:hover,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions #edit-submit:hover,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit:hover,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, [id*="comment-global-config"] .form-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-submit:hover, [id*="protected-pages-enter-password"] fieldset .form-submit:hover, [id*="domain-form"] .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:hover, .page-submit-idea .top-actions .form-submit:hover, #menu-item-delete-form .form-actions #edit-submit:hover, .itg_menu_manager_form .form-submit:hover, [id*="comment-global-config"] .form-submit:hover, [id*="views-form-photo-gallery-management-page"] .form-submit:hover, [id*="protected-pages-enter-password"] fieldset .form-submit:hover, [id*="domain-form"] .form-submit:hover, [id="itg-widget-keycandidate-form"] .form-submit:hover, .form-submit[value="Save as Draft"]:hover,
 .form-submit[value="Save"]:hover,
 .form-submit[value="Create"]:hover,
 .form-submit[value="Update"]:hover,
@@ -5291,7 +5291,7 @@ div.node #comments h2 {
 .top-actions #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit:last-child,
 #views-form-most-read-widget-most-read-widget-contents .form-actions .top-actions #edit-submit:last-child,
 .top-actions #views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit:last-child,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions .top-actions #edit-submit:last-child, .page-submit-idea .top-actions .form-submit:last-child, .top-actions #menu-item-delete-form .form-actions #edit-submit:last-child, #menu-item-delete-form .form-actions .top-actions #edit-submit:last-child, .top-actions .itg_menu_manager_form .form-submit:last-child, .itg_menu_manager_form .top-actions .form-submit:last-child, .top-actions [id*="comment-global-config"] .form-submit:last-child, [id*="comment-global-config"] .top-actions .form-submit:last-child, .top-actions [id*="views-form-photo-gallery-management-page"] .form-submit:last-child, [id*="views-form-photo-gallery-management-page"] .top-actions .form-submit:last-child, .top-actions [id*="protected-pages-enter-password"] fieldset .form-submit:last-child, [id*="protected-pages-enter-password"] fieldset .top-actions .form-submit:last-child, .top-actions [id*="domain-form"] .form-submit:last-child, [id*="domain-form"] .top-actions .form-submit:last-child, .top-actions .form-submit[value="Save as Draft"]:last-child,
+#views-form-photo-carousel-widget-video-carousel-list .form-actions .top-actions #edit-submit:last-child, .page-submit-idea .top-actions .form-submit:last-child, .top-actions #menu-item-delete-form .form-actions #edit-submit:last-child, #menu-item-delete-form .form-actions .top-actions #edit-submit:last-child, .top-actions .itg_menu_manager_form .form-submit:last-child, .itg_menu_manager_form .top-actions .form-submit:last-child, .top-actions [id*="comment-global-config"] .form-submit:last-child, [id*="comment-global-config"] .top-actions .form-submit:last-child, .top-actions [id*="views-form-photo-gallery-management-page"] .form-submit:last-child, [id*="views-form-photo-gallery-management-page"] .top-actions .form-submit:last-child, .top-actions [id*="protected-pages-enter-password"] fieldset .form-submit:last-child, [id*="protected-pages-enter-password"] fieldset .top-actions .form-submit:last-child, .top-actions [id*="domain-form"] .form-submit:last-child, [id*="domain-form"] .top-actions .form-submit:last-child, .top-actions [id="itg-widget-keycandidate-form"] .form-submit:last-child, [id="itg-widget-keycandidate-form"] .top-actions .form-submit:last-child, .top-actions .form-submit[value="Save as Draft"]:last-child,
 .top-actions .form-submit[value="Save"]:last-child,
 .top-actions .form-submit[value="Create"]:last-child,
 .top-actions .form-submit[value="Update"]:last-child,
@@ -9677,7 +9677,7 @@ div.node #comments h2 {
 #main-container-budget #views-form-most-read-widget-most-read-widget-contents .form-actions #edit-submit,
 #views-form-most-read-widget-most-read-widget-contents .form-actions #main-container-budget #edit-submit,
 #main-container-budget #views-form-photo-carousel-widget-video-carousel-list .form-actions #edit-submit,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions #main-container-budget #edit-submit, #main-container-budget .page-submit-idea .top-actions .form-submit, .page-submit-idea .top-actions #main-container-budget .form-submit, #main-container-budget #menu-item-delete-form .form-actions #edit-submit, #menu-item-delete-form .form-actions #main-container-budget #edit-submit, #main-container-budget .itg_menu_manager_form .form-submit, .itg_menu_manager_form #main-container-budget .form-submit, #main-container-budget [id*="comment-global-config"] .form-submit, [id*="comment-global-config"] #main-container-budget .form-submit, #main-container-budget [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="views-form-photo-gallery-management-page"] #main-container-budget .form-submit, #main-container-budget [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="protected-pages-enter-password"] fieldset #main-container-budget .form-submit, #main-container-budget [id*="domain-form"] .form-submit, [id*="domain-form"] #main-container-budget .form-submit, #main-container-budget .form-submit[value="Save as Draft"],
+#views-form-photo-carousel-widget-video-carousel-list .form-actions #main-container-budget #edit-submit, #main-container-budget .page-submit-idea .top-actions .form-submit, .page-submit-idea .top-actions #main-container-budget .form-submit, #main-container-budget #menu-item-delete-form .form-actions #edit-submit, #menu-item-delete-form .form-actions #main-container-budget #edit-submit, #main-container-budget .itg_menu_manager_form .form-submit, .itg_menu_manager_form #main-container-budget .form-submit, #main-container-budget [id*="comment-global-config"] .form-submit, [id*="comment-global-config"] #main-container-budget .form-submit, #main-container-budget [id*="views-form-photo-gallery-management-page"] .form-submit, [id*="views-form-photo-gallery-management-page"] #main-container-budget .form-submit, #main-container-budget [id*="protected-pages-enter-password"] fieldset .form-submit, [id*="protected-pages-enter-password"] fieldset #main-container-budget .form-submit, #main-container-budget [id*="domain-form"] .form-submit, [id*="domain-form"] #main-container-budget .form-submit, #main-container-budget [id="itg-widget-keycandidate-form"] .form-submit, [id="itg-widget-keycandidate-form"] #main-container-budget .form-submit, #main-container-budget .form-submit[value="Save as Draft"],
 #main-container-budget .form-submit[value="Save"],
 #main-container-budget .form-submit[value="Create"],
 #main-container-budget .form-submit[value="Update"],
@@ -9844,4 +9844,45 @@ div.node #comments h2 {
 }
 [id="taxonomy-form-term"] #field-reporter-movie-year-add-more-wrapper .fieldset-wrapper {
   padding-left: 0;
+}
+
+.view-key-candidate .stepform {
+  margin-top: 40px;
+}
+.view-key-candidate .stepform ul {
+  list-style-type: none;
+}
+.view-key-candidate .stepform ul li {
+  display: inline-block;
+  vertical-align: top;
+}
+.view-key-candidate .stepform ul li a {
+  background: #f1f1f1;
+  padding: 8px 20px;
+  display: inline-block;
+  color: #000;
+}
+.view-key-candidate .stepform ul li a.active {
+  background: #4a4a4a;
+  color: #fff;
+}
+
+[id="itg-widget-keycandidate-form"] .form-item-state-value, [id="itg-widget-keycandidate-form"] .form-item-cat-value {
+  width: 300px;
+  float: left;
+  padding-left: 0;
+}
+[id="itg-widget-keycandidate-form"] .form-item-state-value > label, [id="itg-widget-keycandidate-form"] .form-item-cat-value > label {
+  float: none;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+[id="itg-widget-keycandidate-form"] .form-item-state-value > select, [id="itg-widget-keycandidate-form"] .form-item-cat-value > select {
+  width: 100%;
+}
+[id="itg-widget-keycandidate-form"] .form-submit {
+  margin-top: 70px;
+}
+[id="itg-widget-keycandidate-form"] + .attachment.attachment-before {
+  margin-top: -53px;
 }

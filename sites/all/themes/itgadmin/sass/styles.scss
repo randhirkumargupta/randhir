@@ -8964,3 +8964,50 @@ div.node{
         }
     }
 }
+
+.view-key-candidate{
+    .stepform{
+        margin-top:40px;
+        ul{
+            list-style-type: none;
+            li{
+                display: inline-block;
+                vertical-align: top;
+                a{
+                    background: #f1f1f1;
+                    padding: 8px 20px;
+                    display: inline-block;
+                    color: #000;
+                    &.active{
+                        background: #4a4a4a;
+                        color: #fff;
+                    }
+                }
+
+            }
+        }
+    }
+}
+[id="itg-widget-keycandidate-form"]{
+    .form-item-state-value, .form-item-cat-value{        
+        width: 300px;
+      float: left;
+      padding-left:0;
+      > label{
+        float: none;
+        margin-bottom: 10px;
+        display: inline-block;
+      }
+      > select{
+          width: 100%;
+      }
+    }
+    .form-submit{
+        @extend .btn;
+        @extend .btn-save;
+        margin-top: 70px;
+    }
+    + .attachment.attachment-before{
+        margin-top: -53px;
+    }
+}
