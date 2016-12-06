@@ -15,14 +15,7 @@
 
 // To understand behaviors, see https://drupal.org/node/756722#behaviors
     Drupal.behaviors.my_custom_behavior = {
-        attach: function (context, settings) {
-            var getmsgsaves=jQuery('.saved-photogallery').text();
-            
-            if(getmsgsaves!="")
-            {
-                jQuery('.saved-photogallery').remove();
-                jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
-            }
+        attach: function (context, settings) {           
             jQuery('.add-more-block-front').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
@@ -232,7 +225,7 @@
 })(jQuery, Drupal, this, this.document);
 
 
-jQuery(document).ready(function () {
+jQuery(document).ready(function () {    
     jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
         var h = jQuery(this).height() + 13;
 //        alert(h);
@@ -393,6 +386,16 @@ jQuery(document).ready(function () {
             }
         });
     });
+    
+    //saved message
+     var getmsgsaves=jQuery('.saved-photogallery').text();            
+        if(getmsgsaves!=""){
+            jQuery('.saved-photogallery').remove();            
+            jQuery( ".view-photo-landing-slider .slickslide li" ).append('<div class="saved-photogallery">'+getmsgsaves+'</div>');
+        }
+        setTimeout(function(){
+            jQuery('.saved-photogallery').remove();  
+        },3000);
 });
 
 
