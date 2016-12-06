@@ -10,38 +10,40 @@
 // wrapping it with an "anonymous closure". See:
 // - https://drupal.org/node/1446420
 // - http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
-(function ($, Drupal, window, document, undefined) {
+(function($, Drupal, window, document, undefined) {
 
 
 // To understand behaviors, see https://drupal.org/node/756722#behaviors
     Drupal.behaviors.my_custom_behavior = {
-        attach: function (context, settings) {
-            var getmsgsaves=jQuery('.saved-photogallery').text();
-            
-            if(getmsgsaves!="")
+        attach: function(context, settings) {
+            var getmsgsaves = jQuery('.saved-photogallery').text();
+
+            if (getmsgsaves != "")
             {
                 jQuery('.saved-photogallery').remove();
-               // jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
-                jQuery( ".view-photo-landing-slider .slickslide li" ).append('<div class="saved-photogallery">'+getmsgsaves+'</div>');
-            setTimeout(function(){  jQuery('.saved-photogallery').remove(); }, 3000);
+                // jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
+                jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+                setTimeout(function() {
+                    jQuery('.saved-photogallery').remove();
+                }, 3000);
             }
-            jQuery('.add-more-block-front').live('click', function () {
+            jQuery('.add-more-block-front').live('click', function() {
                 var section_ids = "";
                 var elementobj = jQuery(this);
                 jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif"/>')
                 //jQuery(this).remove();
-                jQuery('.sectioncart').each(function () {
+                jQuery('.sectioncart').each(function() {
                     section_ids = jQuery(this).attr('id');
                 });
 
                 jQuery.ajax({
                     url: Drupal.settings.basePath + 'gethomecarddata',
                     type: 'post',
-                    beforeSend: function () {
+                    beforeSend: function() {
                         // jQuery('#widget-ajex-loader').show();
                     },
                     data: {'section_ids': section_ids, },
-                    success: function (data) {
+                    success: function(data) {
                         if (data == "")
                         {
                             jQuery('.no-more-card').show();
@@ -56,9 +58,9 @@
                         //  alert(data);  
 
                     },
-                    complete: function () {
+                    complete: function() {
                     },
-                    error: function (xhr, desc, err) {
+                    error: function(xhr, desc, err) {
                         console.log(xhr);
                         console.log("Details: " + desc + "\nError:" + err);
                     }
@@ -81,20 +83,20 @@
                 $('.movie-reviewer-other').html('<h3>OTHER REVIEWERS</h3>' + external_review);
                 $('.our-review').html('<h3>OUR REVIEWERS</h3>' + internal_review);
             }
-            $('input.rating').hover(function () {
+            $('input.rating').hover(function() {
                 $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
                 $(this).parent().nextAll().removeClass('rating-hover');
-            }, function () {
+            }, function() {
                 $('.form-checkboxes.rating .form-type-checkbox').removeClass('rating-hover');
             });
 
-            $('input.rating').click(function () {
+            $('input.rating').click(function() {
                 $(this).parent().addClass('rated-div current-rating').prevAll().addClass('rated-div');
                 $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
                 $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
             });
 
-            $('.image-widget').each(function () {
+            $('.image-widget').each(function() {
                 var filename = $(this).find('.file').html();
                 var filesize = $(this).find('.file-size').html();
                 var fullname = filename + filesize;
@@ -103,7 +105,7 @@
                 }
                 $(this).find('.image-widget-data .file, .image-widget-data .file-size').remove();
             });
-            $('.image-widget-data').find('.form-text').each(function () {
+            $('.image-widget-data').find('.form-text').each(function() {
                 var plaholderText = $(this).prev().text();
                 $(this).attr('placeholder', plaholderText);
                 $(this).prev('label').hide();
@@ -114,21 +116,21 @@
 
                 //var logotxt = $('.container.header-logo').html();
                 $('.container.header-logo').prependTo('.itg-logo-container');
-                $('.search-icon').click(function () {
+                $('.search-icon').click(function() {
                     $(this).parents('div').find('.globle-search').css('width', '255px');
                 });
 
 
-                $(document).on('click', function () {
+                $(document).on('click', function() {
                     $('.globle-search').css('width', '0px');
                 });
-                $('.search-icon, .globle-search').click(function (e) {
+                $('.search-icon, .globle-search').click(function(e) {
                     e.stopPropagation();
                 });
             }
 
             // jQuery Code for tabbing
-            $('.tab-buttons').on('click', 'span', function () {
+            $('.tab-buttons').on('click', 'span', function() {
                 var dataID = '.' + $(this).attr('data-id');
                 $(this).addClass('active').siblings().removeClass('active');
                 $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
@@ -141,8 +143,8 @@
             //search page result
             var winWidth;
             $(".view-front-end-global-search").find("#edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper, .views-submit-button, .views-reset-button").wrapAll("<div class='searh-all-filters'></div>");
-            $('.itg-search-list').each(function () {
-                $(this).find('.search-pic').each(function () {
+            $('.itg-search-list').each(function() {
+                $(this).find('.search-pic').each(function() {
                     var current = $(this);
                     if (current.children().length == 0) {
                         $(current).addClass("hide");
@@ -166,7 +168,7 @@
             $('#block-views-video-landing-header-block-1 .item-list ul').css('width', videoNumber * 170 + 'px');
             // Global function to set lable as input placeholder
             function placeHolder(element, parent) {
-                $(element).each(function () {
+                $(element).each(function() {
                     el = $(this);                                                                     //make a variable for this label
                     el_for = el.attr('for');                                                          //get the value of the label attr for
                     label_value = el.text();                                                          //get the value of the label
@@ -179,19 +181,19 @@
 
 
             // Open and Close popup jQuery on Order Summary page
-            $('body').on('click', '#change-address', function () {
+            $('body').on('click', '#change-address', function() {
                 $('body').find('#change-address-popup').show();
             });
-            $('#change-address-popup').on('click', '.close-popup', function () {
+            $('#change-address-popup').on('click', '.close-popup', function() {
                 $(this).closest('#change-address-popup').hide();
             });
 
             // jQuery code to close cart dropdown popup
-            $('body').on('click', '.cart-dropdown-close', function () {
+            $('body').on('click', '.cart-dropdown-close', function() {
                 $(this).parent().hide();
             });
             // jQuery code to close activate message popup
-            $('.activate-message').on('click', '.close-popup', function () {
+            $('.activate-message').on('click', '.close-popup', function() {
                 $(this).parent().parent().hide();
                 window.location = window.location.href.split('?')[0];
             });
@@ -234,8 +236,8 @@
 })(jQuery, Drupal, this, this.document);
 
 
-jQuery(document).ready(function () {
-    jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
+jQuery(document).ready(function() {
+    jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function(e) {
         var h = jQuery(this).height() + 13;
 //        alert(h);
         var offset = jQuery(this).offset();
@@ -269,20 +271,20 @@ jQuery(document).ready(function () {
     footerMain();
     function footerMain() {
         //footer toggal script
-        jQuery('.footer-expand-icon').click(function () {
+        jQuery('.footer-expand-icon').click(function() {
             jQuery('.footer-toggle').slideToggle();
             jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
             jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
         });
         //footer add more link
-        jQuery('.footer-bottom .cell ul').each(function () {
+        jQuery('.footer-bottom .cell ul').each(function() {
             var countList = jQuery(this).children('li').length;
             if (countList > 8) {
                 jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
                 jQuery(this).append("<li><span class='more-link'>More</span></li>");
             }
         });
-        jQuery('.footer-bottom .more-link').click(function () {
+        jQuery('.footer-bottom .more-link').click(function() {
             jQuery(this).parents('ul').find('li.hidelist').slideToggle();
             jQuery(this).toggleClass('active');
             jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
@@ -297,9 +299,9 @@ jQuery(document).ready(function () {
 
 
 // code to copy serach text into search page
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
 
-    jQuery('.search-text').keyup(function (e) {
+    jQuery('.search-text').keyup(function(e) {
 
         var code = e.keyCode || e.which;
 
@@ -354,7 +356,7 @@ jQuery(document).ready(function () {
 
 });
 
-jQuery(window).load(function () {
+jQuery(window).load(function() {
     // jQuery code to set offset of photo section page
     var menuOffset = jQuery('.itg-region').offset();
     if (jQuery('.video_landing_menu li').children().hasClass('set-offset')) {
@@ -362,20 +364,20 @@ jQuery(window).load(function () {
     }
 });
 
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
 
-    jQuery('#map-state').change(function () {
+    jQuery('#map-state').change(function() {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
 
         jQuery.ajax({
             url: Drupal.settings.basePath + 'get_map_data',
             type: 'post',
-            beforeSend: function () {
+            beforeSend: function() {
                 jQuery('#widget-ajex-loader').show();
             },
             data: {'state_id': getstate_id, },
-            success: function (data) {
+            success: function(data) {
                 var obj = jQuery.parseJSON(data);
                 jQuery('#widget-ajex-loader').hide();
                 if (obj.mapjson == '')
@@ -387,27 +389,37 @@ jQuery(document).ready(function () {
                 }
 
             },
-            complete: function () {
+            complete: function() {
             },
-            error: function (xhr, desc, err) {
+            error: function(xhr, desc, err) {
                 console.log(xhr);
                 console.log("Details: " + desc + "\nError:" + err);
             }
         });
     });
+
+    //saved message
+    var getmsgsaves = jQuery('.saved-photogallery').text();
+    if (getmsgsaves != "") {
+        jQuery('.saved-photogallery').remove();
+        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+    }
+    setTimeout(function() {
+        jQuery('.saved-photogallery').remove();
+    }, 3000);
 });
 
 
 
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
     var winWidth;
-    jQuery('.mobile-nav').click(function () {
+    jQuery('.mobile-nav').click(function() {
         jQuery('.navigation').slideToggle();
     });
-    jQuery(document).on('click', '.all-menu', function () {
+    jQuery(document).on('click', '.all-menu', function() {
         jQuery('#newlist').slideToggle();
     });
-    var menuBuilder = function () {
+    var menuBuilder = function() {
         var menuWidth, Totalwidth, liLength, clickHere;
         menuWidth = jQuery('.second-level-menu.menu').width() - 10;
         Totalwidth = jQuery('.all-menu').outerWidth();
@@ -416,7 +428,7 @@ jQuery(document).ready(function () {
             jQuery('#newlist').html('');
         }
         jQuery('.all-menu').remove();
-        jQuery('.second-level-menu.menu li').each(function () {
+        jQuery('.second-level-menu.menu li').each(function() {
             liLength = jQuery(this).outerWidth(true);
             Totalwidth = Totalwidth + liLength;
             if (Totalwidth <= menuWidth) {
@@ -446,11 +458,11 @@ jQuery(document).ready(function () {
     }
 
 
-    var eventMenu = function () {
+    var eventMenu = function() {
         winWidth = jQuery(window).width();
         if (winWidth < 1024) {
             jQuery('#block-menu-menu-event-menu').prepend('<div><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
-            jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
+            jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function() {
                 jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
             });
         }
@@ -458,10 +470,10 @@ jQuery(document).ready(function () {
     eventMenu();
 
     //social share animation effects   
-    jQuery('.social-share ul').each(function () {
+    jQuery('.social-share ul').each(function() {
         jQuery(this).children().not(":first").hide();
     })
-    jQuery('.social-share li').click(function () {
+    jQuery('.social-share li').click(function() {
         jQuery(this).nextAll('li').show();
     });
 
@@ -477,7 +489,7 @@ jQuery(document).ready(function () {
             prevArrow: '<span class="less"><i class="fa fa-chevron-up"></i> Less</span>',
         });
         jQuery(document).find('.vertical-menu span.less').hide();
-        jQuery('.vertical-menu span.more').click(function () {
+        jQuery('.vertical-menu span.more').click(function() {
             jQuery('.vertical-menu span.less').show();
         });
     } else {

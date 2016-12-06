@@ -18,6 +18,7 @@ function itg_budget_predictor_get_taxonomy() {
   $user_id = $user->uid;
   $timestamp = arg(1);
   $check_budget_status = check_budget_status($timestamp);
+  $check_budget_status_front_user = check_budget_status_front_user($timestamp);
   $check_budget = check_budget($timestamp);
 
   if (!empty($check_budget['status'])) {
@@ -28,7 +29,7 @@ function itg_budget_predictor_get_taxonomy() {
     $querys->where('YEAR(FROM_UNIXTIME(r.timestamp)) = :timestamp', array(':timestamp' => $timestamp));
     if (empty($check_budget_status)) {
       $querys->condition('r.user_id', $user_id);
-    } 
+    }
     else {
       $querys->condition('r.status', 2);
     }
@@ -112,7 +113,8 @@ function itg_budget_predictor_get_taxonomy() {
     $budget_data['budget_message'] = $check_budget['budget_message'];
     $budget_data['budget_social_message'] = $check_budget['budget_social_message'];
     $budget_data['budget_message_flag'] = ($check_budget_status) ? 1 : '';
-  } 
+    $budget_data['budget_message_front_flag'] = ($check_budget_status_front_user) ? 1 : '';
+  }
   else {
     $budget_data['exist'] = '';
   }
@@ -131,7 +133,7 @@ function itg_budget_predictor_update_budget() {
   $allowed_roles = array('Editor', 'Site Admin', 'administrator');
   if (count(array_intersect($user->roles, $allowed_roles)) > 0) {
     $budget_status = 2;
-  } 
+  }
   else {
     $budget_status = 1;
   }
@@ -163,7 +165,7 @@ function itg_budget_predictor_update_budget() {
             'ip_address' => $ip_address,
           ))
           ->execute();
-    } 
+    }
     else {
       db_update('itg_budget_predictor')
           ->fields(array(
@@ -196,7 +198,7 @@ function itg_budget_predictor_update_budget() {
             'ip_address' => $ip_address,
           ))
           ->execute();
-    } 
+    }
     else {
       db_update('itg_budget_predictor')
           ->fields(array(
@@ -226,7 +228,7 @@ function itg_budget_predictor_update_budget() {
             'ip_address' => $ip_address,
           ))
           ->execute();
-    } 
+    }
     else {
       db_update('itg_budget_predictor')
           ->fields(array(
@@ -306,7 +308,7 @@ function itg_budget_predictor_list() {
   if (isset($_GET['budget_year'])) {
     $timestamp = $_GET['budget_year'];
     $query->where('YEAR(FROM_UNIXTIME(p.timestamp)) = :timestamp', array(':timestamp' => $timestamp));
-  } 
+  }
   $query->condition('p.status', 1, '=')
       ->condition('p.budget_type', 1, '=')
       ->groupBy('p.user_id');
@@ -365,7 +367,7 @@ function itg_budget_predictor_list() {
  */
 function itg_budget_predictor_search_form($form, &$form_state) {
   global $base_url;
-  for($i=date('Y'); $i >=2015; $i--) {
+  for ($i = date('Y'); $i >= 2015; $i--) {
     $year[$i] = $i;
   }
   $form['#method'] = 'get';
@@ -380,7 +382,7 @@ function itg_budget_predictor_search_form($form, &$form_state) {
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
-  
+
   $url = $base_url . '/budget-predictor-list';
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Reset'), $url, array(
@@ -483,10 +485,10 @@ function itg_manage_budget() {
     $query = db_select('itg_manage_budget', 'm');
     $query->condition('m.id', $action, '=');
     # get the desired fields from the database
-    $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_message', 'budget_social_message','budget_year', 'status'));
+    $query->fields('m', array('id', 'budget_title', 'budget_description', 'budget_message', 'budget_social_message', 'budget_year', 'status'));
     # execute the query
     $results = $query->execute()->fetchObject();
-  } 
+  }
   else {
     $action = '';
   }
@@ -517,7 +519,7 @@ function itg_manage_budget() {
     '#default_value' => ($results->budget_social_message) ? $results->budget_social_message : '',
     '#required' => TRUE
   );
-  
+
   $form['budget_year'] = array(
     '#type' => 'select',
     '#title' => t('Select Budget Year'),
@@ -578,7 +580,7 @@ function itg_manage_budget_submit($form, &$form_state) {
         ->condition('id', $budget_action, '=')
         ->execute();
     drupal_set_message(t('The form has been updated'));
-  } 
+  }
   else {
     db_insert('itg_manage_budget')
         ->fields(array(
@@ -600,6 +602,7 @@ function itg_manage_budget_submit($form, &$form_state) {
  * update image at the budget predictor table
  */
 function itg_budget_crop_image() {
+  global $user;
   $timestamp = date('Y');
   $data = $_POST['data'];
   $uniqid = uniqid();
@@ -617,8 +620,10 @@ function itg_budget_crop_image() {
   $query = db_update('itg_budget_predictor');
   $query->fields(array('file_name' => $file_name));
   $query->where('YEAR(FROM_UNIXTIME(timestamp)) = :timestamp', array(':timestamp' => $timestamp));
+  $query->condition('user_id', $user->uid, '=');
   # execute the query
   $query->execute();
+  dpq($query);
 }
 
 /**
@@ -671,12 +676,30 @@ function check_budget_status($timestamp) {
 }
 
 /**
+ * get budget id
+ * @param string $timestamp
+ * @return int
+ */
+function check_budget_status_front_user($timestamp) {
+  global $user;
+  $query = db_select('itg_budget_predictor', 'p');
+  $query->where('YEAR(FROM_UNIXTIME(p.timestamp)) = :timestamp', array(':timestamp' => $timestamp))
+      ->condition('p.status', 1, '=')
+      ->condition('p.user_id', $user->uid)
+      ->condition('p.file_name', '', '!=');
+  $query->fields('p', array('budget_id'));
+  # execute the query
+  $results = $query->execute()->fetchObject();
+  return $results->budget_id;
+}
+
+/**
  * Download Excel
  */
 function itg_budget_download_excel() {
   $timestamp = $_GET['budget_year'];
   $query = db_select('itg_budget_predictor', 'p');
-  if($timestamp) {
+  if ($timestamp) {
     $query->where('YEAR(FROM_UNIXTIME(p.timestamp)) = :timestamp', array(':timestamp' => $timestamp));
   }
   $query->fields('p', array('user_id'))->groupBy('p.user_id');

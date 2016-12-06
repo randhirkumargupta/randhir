@@ -2466,7 +2466,7 @@ footer .footer-copyright {
   width: 320px;
   float: left;
   margin-right: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   padding: 10px 15px;
   font-family: "Roboto Slab", sans-serif;
 }
@@ -2498,6 +2498,17 @@ footer .footer-copyright {
 }
 .story-section .story-expert-opinion h2 {
   font-family: "Roboto Slab", sans-serif;
+}
+.story-section .story-expert-opinion h2:before, .story-section .story-expert-opinion h2:after {
+  width: 20px;
+  height: 16px;
+  content: '';
+  background: url(../images/up-quotes.jpg) no-repeat center center;
+  display: inline-block;
+  vertical-align: top;
+}
+.story-section .story-expert-opinion h2:after {
+  background: url(../images/down-quote.jpg) no-repeat center center;
 }
 
 .buzz-feedback {
@@ -9339,13 +9350,13 @@ footer .footer-copyright {
   right: 0;
 }
 
-.listicle-page.story-right {
+.story-section .listicle-page.story-right {
   width: 100%;
 }
-.listicle-page .listicle-detail {
+.story-section .listicle-page .listicle-detail {
   border-top: 1px solid #ccc;
 }
-.listicle-page .listicle-detail > span {
+.story-section .listicle-page .listicle-detail > span {
   width: 34px;
   height: 34px;
   background: #a00606;
@@ -9359,7 +9370,7 @@ footer .footer-copyright {
   font-weight: 700;
   margin-top: 15px;
 }
-.listicle-page .listicle-detail .listicle-description {
+.story-section .listicle-page .listicle-detail .listicle-description {
   font-size: 16px;
   color: #282828;
   display: inline-block;
@@ -9367,11 +9378,11 @@ footer .footer-copyright {
   width: 90%;
   padding: 15px;
 }
-.listicle-page .listicle-detail .listicle-description span {
+.story-section .listicle-page .listicle-detail .listicle-description span {
   font-weight: 600;
   text-transform: capitalize;
 }
-.listicle-page .listicle-detail + .listicle-detail {
+.story-section .listicle-page .listicle-detail + .listicle-detail {
   border-top: 1px solid #ccc;
 }
 

@@ -828,7 +828,7 @@ function feature_for_reporter_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 43,
+      'weight' => 3,
     ),
   );
 
@@ -882,7 +882,7 @@ function feature_for_reporter_field_default_field_instances() {
         'year_range' => '1970:+0',
       ),
       'type' => 'date_select',
-      'weight' => 42,
+      'weight' => 2,
     ),
   );
 
