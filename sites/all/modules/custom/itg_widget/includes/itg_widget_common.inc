@@ -403,14 +403,14 @@ function itg_widget_keycandidate_form($form, $form_state) {
 
     $state_class = "visible";
     $states_neame = get_all_state();
-    if (isset($_POST['state_value'])) {
-        $pre_fix = "<div style='display:none'>";
-        $suf_fix = "</div>";
-    }
+//    if (isset($_POST['state_value'])) {
+//        $pre_fix = "<div style='display:none'>";
+//        $suf_fix = "</div>";
+//    }
 
     $form['state_value'] = array(
         '#type' => 'select',
-        '#title' => 'State',
+        '#title' => 'State <span class="form-required" title="This field is required.">*</span>',
         '#multiple' => TRUE,
         '#options' => $states_neame,
         '#prefix' => $pre_fix,
@@ -421,7 +421,7 @@ function itg_widget_keycandidate_form($form, $form_state) {
 
     $form['cat_value'] = array(
         '#type' => 'select',
-        '#title' => 'Section',
+        '#title' => 'Section <span class="form-required" title="This field is required.">*</span>',
         '#options' => $op,
         '#prefix' => $pre_fix,
         '#suffix' => $suf_fix,
@@ -1119,10 +1119,10 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
             $form['#validate'][] = 'custom_section_wise_validate';
             $form['cat_id']['#prefix'] = '<div class="cat-wraper"style="">';
-            $form['cat_id']['#suffix'] ='</div>';
-            $form['cat_id']['#title'] ='';
-             $form['state']['#prefix'] = '<div class="state-wraper"style="">';
-            $form['state']['#suffix'] ='</div>';
+            $form['cat_id']['#suffix'] = '</div>';
+            $form['cat_id']['#title'] = '';
+            $form['state']['#prefix'] = '<div class="state-wraper"style="">';
+            $form['state']['#suffix'] = '</div>';
             $op = getsaction_list();
             $form['cat1_id']['#type'] = 'select';
             $form['cat1_id']['#options'] = $op;
@@ -1159,16 +1159,19 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 /**
  * {@inheritdoc}
  */
-function itg_widget_keycandidate_validate($form, &$form_state)
-{
+function itg_widget_keycandidate_validate($form, &$form_state) {
 
-     if ($form_state['values']['state_value'][0] == '0') {
+    if ($form_state['values']['state_value'][0] == '0') {
         form_set_error('state_value', 'State is required');
     }
-     if ($form_state['values']['cat_value'] == 'All') {
-        form_set_error('state_value', 'section is required');
+    if (empty($form_state['values']['state_value'])) {
+        form_set_error('state_value', 'State is required');
+    }
+    if ($form_state['values']['cat_value'] == 'All') {
+        form_set_error('cat_value', 'section is required');
     }
 }
+
 /**
  * {@inheritdoc}
  */
