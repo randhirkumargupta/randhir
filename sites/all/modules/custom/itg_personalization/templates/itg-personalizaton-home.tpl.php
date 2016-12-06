@@ -41,8 +41,7 @@
       </span>
     </div>
       <div>
-        <!-- Total Points -->
-        <?php dpm($data); ?>
+        <!-- Total Points -->        
         <div class="total-points">
           TOTAL POINTS
           <span><?php print $data['badge_detail']['total']; ?></span>
