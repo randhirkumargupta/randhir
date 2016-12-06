@@ -1,5 +1,8 @@
 @import "itg-variables";
 @import "itg-mixins";
+.grey-bg{
+  background-color: #eeeded;
+}
 @mixin half-grey-bg($height){
   display: inline-block;
   vertical-align: top;
@@ -200,13 +203,9 @@
 
 
 .widget-container{
-  margin-bottom: 40px;
   .half-grey-bg{
     @include half-grey-bg(202px);
     width: 100%;
-  }
-  h2{
-    padding: 9px 15px 5px;
   }
   .widget-list-row{
     background-color: #fff;
@@ -232,8 +231,132 @@
     }
   }
 }
-.sirf-web-par{
+.aajtak-slide{
   .tile{
-    @include aajtak-tile($tile-height:240px, $category-name: 'category-name', $pic:'pic', $title:'title', $posted-by:'name', $posted-date:'date', $icon-list: null, $pic-height:148px);
+    @include aajtak-tile($tile-height:260px, $category-name: 'category-name', $pic:'pic', $title:'title', $posted-by:'name', $posted-date:'date', $icon-list: null, $pic-height:148px);
+  }
+}
+
+
+.aajtak-row{
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin: 20px 0;
+  }
+.aajtak-widget{
+  min-height: 380px;
+  height: 380px;
+  .droppable{
+    height: 100%;
+  }
+}
+.aajtak-slide{
+  .data-holder{
+    padding-top: 20px;
+  }
+}
+.aajtak-stack{
+  .tile{
+    @include aajtak-tile($tile-height:260px, $category-name: 'category-name', $pic:'pic', $title:'title', $posted-by:'name', $posted-date:'date', $icon-list: null, $pic-height:148px);
+  }
+  .data-holder, .widget-container{
+    height: 100%;
+  }
+  .widget-title{
+    @include font(28px,28px,700);
+    color: #000;
+    padding: 20px 45px 25px;
+  }
+  .stack{
+    width: 262px;
+    height: 268px;
+  }
+  .data-holder{
+    position: relative;
+      .controls{
+        position: absolute;
+        right: 10px;
+        top: 15px;
+        width: 100px;
+        margin: 0;
+          .button{
+            background-color: transparent;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #000;
+            border-radius: 50%;
+            text-indent: -9999px;
+            padding: 0;
+            margin: 0;
+            &.button--reject{
+              margin-right: 10px;
+            }
+            &.button--reject::before {
+              border-color: transparent #eeeded transparent transparent;
+              border-image: none;
+              border-style: solid;
+              border-width: 6px;
+              content: "";
+              height: 0;
+              left: 5px;
+              position: absolute;
+              top: 8px;
+              width: 0;
+              z-index: 9;
+              opacity: 1;
+              pointer-events: auto;
+              margin: 0;
+            }
+          &.button--reject::after {
+              border-color: transparent #000 transparent transparent;
+              border-image: none;
+              border-style: solid;
+              border-width: 6px;
+              content: "";
+              height: 0;
+              left: 4px;
+              position: absolute;
+              right: 0;
+              top: 8px;
+              width: 0;
+              opacity: 1;
+              pointer-events: auto;
+              margin: 0;
+            }
+            &.button--accept::before {
+              border-color: transparent transparent transparent #eeeded;
+              border-image: none;
+              border-style: solid;
+              border-width: 6px;
+              content: "";
+              height: 0;
+              left: 12px;
+              position: absolute;
+              top: 8px;
+              width: 0;
+              z-index: 9;
+              opacity: 1;
+              pointer-events: auto;
+              margin: 0;
+            }
+            &.button--accept::after {
+              border-color: transparent transparent transparent #000;
+              border-image: none;
+              border-style: solid;
+              border-width: 6px;
+              content: "";
+              height: 0;
+              left:13px;
+              position: absolute;
+              right: 0;
+              top: 8px;
+              width: 0;
+              opacity: 1;
+              pointer-events: auto;
+              margin: 0;
+            }
+          }
+      }
   }
 }

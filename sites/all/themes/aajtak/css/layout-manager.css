@@ -24,22 +24,26 @@
 /* Calculate-width function */
 /* Tab Button mixins */
 /* Tab Listing mixins */
-/* Story Tag mixins */
 /* List before icon */
 /*mixin for transition animation*/
 /*mixin for listing with image*/
 /*mixin for pager*/
-/* line 120, ../sass/layout-manager.scss */
+/* line 3, ../sass/layout-manager.scss */
+.grey-bg {
+  background-color: #eeeded;
+}
+
+/* line 123, ../sass/layout-manager.scss */
 .aajtak-layout-container {
   max-width: 1170px;
   margin: 0 auto;
 }
 
-/* line 128, ../sass/layout-manager.scss */
+/* line 131, ../sass/layout-manager.scss */
 .slider-container .slick-list {
   padding: 20px 0 30px 15px;
 }
-/* line 131, ../sass/layout-manager.scss */
+/* line 134, ../sass/layout-manager.scss */
 .slider-container .slick-arrow {
   position: absolute;
   top: -35px;
@@ -49,15 +53,15 @@
   border-radius: 50%;
   text-indent: -9999px;
 }
-/* line 140, ../sass/layout-manager.scss */
+/* line 143, ../sass/layout-manager.scss */
 .slider-container .slick-next {
   right: 10px;
 }
-/* line 141, ../sass/layout-manager.scss */
+/* line 144, ../sass/layout-manager.scss */
 .slider-container .slick-prev {
   right: 56px;
 }
-/* line 142, ../sass/layout-manager.scss */
+/* line 145, ../sass/layout-manager.scss */
 .slider-container .slick-next::before {
   border-color: transparent transparent transparent #eeeded;
   border-image: none;
@@ -71,7 +75,7 @@
   width: 0;
   z-index: 9;
 }
-/* line 155, ../sass/layout-manager.scss */
+/* line 158, ../sass/layout-manager.scss */
 .slider-container .slick-next::after {
   border-color: transparent transparent transparent #000;
   border-image: none;
@@ -85,7 +89,7 @@
   top: 8px;
   width: 0;
 }
-/* line 168, ../sass/layout-manager.scss */
+/* line 171, ../sass/layout-manager.scss */
 .slider-container .slick-prev::before {
   border-color: transparent #eeeded transparent transparent;
   border-image: none;
@@ -99,7 +103,7 @@
   width: 0;
   z-index: 9;
 }
-/* line 181, ../sass/layout-manager.scss */
+/* line 184, ../sass/layout-manager.scss */
 .slider-container .slick-prev::after {
   border-color: transparent #000 transparent transparent;
   border-image: none;
@@ -114,11 +118,7 @@
   width: 0;
 }
 
-/* line 202, ../sass/layout-manager.scss */
-.widget-container {
-  margin-bottom: 40px;
-}
-/* line 204, ../sass/layout-manager.scss */
+/* line 206, ../sass/layout-manager.scss */
 .widget-container .half-grey-bg {
   display: inline-block;
   vertical-align: top;
@@ -127,7 +127,7 @@
   max-width: 100%;
   width: 100%;
 }
-/* line 9, ../sass/layout-manager.scss */
+/* line 12, ../sass/layout-manager.scss */
 .widget-container .half-grey-bg:before {
   content: '';
   background-color: #eeeded;
@@ -138,11 +138,7 @@
   top: 0;
   z-index: -1;
 }
-/* line 208, ../sass/layout-manager.scss */
-.widget-container h2 {
-  padding: 9px 15px 5px;
-}
-/* line 211, ../sass/layout-manager.scss */
+/* line 210, ../sass/layout-manager.scss */
 .widget-container .widget-list-row {
   background-color: #fff;
   border-radius: 5px;
@@ -156,41 +152,41 @@
   list-style-type: none;
   margin: 0 15px;
 }
-/* line 223, ../sass/layout-manager.scss */
+/* line 222, ../sass/layout-manager.scss */
 .widget-container .widget-list-row:hover {
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
   transform: translate(0, -4px);
 }
-/* line 227, ../sass/layout-manager.scss */
+/* line 226, ../sass/layout-manager.scss */
 .widget-container .widget-list-row .category-name {
   background-color: #dc4750;
 }
-/* line 230, ../sass/layout-manager.scss */
+/* line 229, ../sass/layout-manager.scss */
 .widget-container .widget-list-row .icon-list {
   background-color: #dc4750;
 }
 
-/* line 236, ../sass/layout-manager.scss */
-.sirf-web-par .tile {
+/* line 235, ../sass/layout-manager.scss */
+.aajtak-slide .tile {
   text-align: center;
   position: relative;
-  height: 240px;
+  height: 260px;
 }
-/* line 26, ../sass/layout-manager.scss */
-.sirf-web-par .tile .category-name {
+/* line 29, ../sass/layout-manager.scss */
+.aajtak-slide .tile .category-name {
   background-color: #dc4750;
   border-radius: 4px 4px 0 0;
   color: #fff;
   height: 20px;
 }
-/* line 34, ../sass/layout-manager.scss */
-.sirf-web-par .tile .title {
+/* line 37, ../sass/layout-manager.scss */
+.aajtak-slide .tile .title {
   height: 40px;
   overflow: hidden;
   margin: 10px 10px 8px;
 }
-/* line 38, ../sass/layout-manager.scss */
-.sirf-web-par .tile .title a {
+/* line 41, ../sass/layout-manager.scss */
+.aajtak-slide .tile .title a {
   color: #000;
   display: block;
   font-size: 16px;
@@ -198,13 +194,13 @@
   font-weight: 700;
   line-height: 20px;
 }
-/* line 46, ../sass/layout-manager.scss */
-.sirf-web-par .tile .pic {
+/* line 49, ../sass/layout-manager.scss */
+.aajtak-slide .tile .pic {
   height: 148px;
   overflow: hidden;
 }
-/* line 52, ../sass/layout-manager.scss */
-.sirf-web-par .tile .name {
+/* line 55, ../sass/layout-manager.scss */
+.aajtak-slide .tile .name {
   display: inline-block;
   vertical-align: top;
   font-size: 12px;
@@ -215,8 +211,8 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 62, ../sass/layout-manager.scss */
-.sirf-web-par .tile .date {
+/* line 65, ../sass/layout-manager.scss */
+.aajtak-slide .tile .date {
   display: inline-block;
   vertical-align: top;
   font-size: 12px;
@@ -227,11 +223,213 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 72, ../sass/layout-manager.scss */
-.sirf-web-par .tile .date:before {
+/* line 75, ../sass/layout-manager.scss */
+.aajtak-slide .tile .date:before {
   content: '|';
   position: absolute;
   font-size: 9px;
   left: -4px;
   top: 0;
+}
+
+/* line 241, ../sass/layout-manager.scss */
+.aajtak-row {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin: 20px 0;
+}
+
+/* line 247, ../sass/layout-manager.scss */
+.aajtak-widget {
+  min-height: 380px;
+  height: 380px;
+}
+/* line 250, ../sass/layout-manager.scss */
+.aajtak-widget .droppable {
+  height: 100%;
+}
+
+/* line 255, ../sass/layout-manager.scss */
+.aajtak-slide .data-holder {
+  padding-top: 20px;
+}
+
+/* line 260, ../sass/layout-manager.scss */
+.aajtak-stack .tile {
+  text-align: center;
+  position: relative;
+  height: 260px;
+}
+/* line 29, ../sass/layout-manager.scss */
+.aajtak-stack .tile .category-name {
+  background-color: #dc4750;
+  border-radius: 4px 4px 0 0;
+  color: #fff;
+  height: 20px;
+}
+/* line 37, ../sass/layout-manager.scss */
+.aajtak-stack .tile .title {
+  height: 40px;
+  overflow: hidden;
+  margin: 10px 10px 8px;
+}
+/* line 41, ../sass/layout-manager.scss */
+.aajtak-stack .tile .title a {
+  color: #000;
+  display: block;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
+}
+/* line 49, ../sass/layout-manager.scss */
+.aajtak-stack .tile .pic {
+  height: 148px;
+  overflow: hidden;
+}
+/* line 55, ../sass/layout-manager.scss */
+.aajtak-stack .tile .name {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+  padding: 0 5px;
+  position: relative;
+}
+/* line 65, ../sass/layout-manager.scss */
+.aajtak-stack .tile .date {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+  padding: 0 5px;
+  position: relative;
+}
+/* line 75, ../sass/layout-manager.scss */
+.aajtak-stack .tile .date:before {
+  content: '|';
+  position: absolute;
+  font-size: 9px;
+  left: -4px;
+  top: 0;
+}
+/* line 263, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder, .aajtak-stack .widget-container {
+  height: 100%;
+}
+/* line 266, ../sass/layout-manager.scss */
+.aajtak-stack .widget-title {
+  font-size: 28px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 28px;
+  color: #000;
+  padding: 20px 45px 25px;
+}
+/* line 271, ../sass/layout-manager.scss */
+.aajtak-stack .stack {
+  width: 262px;
+  height: 268px;
+}
+/* line 275, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder {
+  position: relative;
+}
+/* line 277, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  width: 100px;
+  margin: 0;
+}
+/* line 283, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button {
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  text-indent: -9999px;
+  padding: 0;
+  margin: 0;
+}
+/* line 292, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--reject {
+  margin-right: 10px;
+}
+/* line 295, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--reject::before {
+  border-color: transparent #eeeded transparent transparent;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 5px;
+  position: absolute;
+  top: 8px;
+  width: 0;
+  z-index: 9;
+  opacity: 1;
+  pointer-events: auto;
+  margin: 0;
+}
+/* line 311, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--reject::after {
+  border-color: transparent #000 transparent transparent;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 4px;
+  position: absolute;
+  right: 0;
+  top: 8px;
+  width: 0;
+  opacity: 1;
+  pointer-events: auto;
+  margin: 0;
+}
+/* line 327, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--accept::before {
+  border-color: transparent transparent transparent #eeeded;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 12px;
+  position: absolute;
+  top: 8px;
+  width: 0;
+  z-index: 9;
+  opacity: 1;
+  pointer-events: auto;
+  margin: 0;
+}
+/* line 343, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--accept::after {
+  border-color: transparent transparent transparent #000;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 13px;
+  position: absolute;
+  right: 0;
+  top: 8px;
+  width: 0;
+  opacity: 1;
+  pointer-events: auto;
+  margin: 0;
 }

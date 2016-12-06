@@ -2,11 +2,9 @@
 <div class="widget-container sirf-web-par">
   <div class="half-grey-bg">
     <h2><?php print t("Sirf web per"); ?></h2>
-    <ul class="widget-list-wrapper slider-container">
-    <!--<ul id="stack-card" class="stack stack--krisna">-->
+    <ul id="stack-card" class="stack stack--krisna">
       <?php foreach ($data as $key => $output) : ?>
-        <!--<li class="stack__item">-->
-        <li class="widget-list-row latest-video-rows-<?php print $key ?>">
+        <li class="stack__item">
           <div class="tile">
             <div class="cateogry-name cateogry-<?php print $keys; ?>">
               <?php
