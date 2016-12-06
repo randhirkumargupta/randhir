@@ -5530,13 +5530,7 @@ div.node{
   }
 }
 [id*="views-form-manage-print-team-page"]{
-  .form-item-pti-issue{
-    @extend .fleft;
-    padding: 0 30px 0 0;
-    > label{
-      @extend .fleft;
-      width: auto;
-    }
+  .form-item-pti-issue{            
     div.description{
       left: 165px;
     }
@@ -5545,11 +5539,26 @@ div.node{
       @extend .add-more;
     }
   }
-  .form-item-pti-magazine{
-    @extend .fleft;
-    > label{
-      width: auto;
-    }
+  #pti-container-data{
+      display: inline-block;
+      width: inherit;      
+  }
+  .form-item-pti-magazine, .form-item-pti-issue, .form-item-pti-supplement, .form-item-story-rating{     
+      width: 300px;
+      float: left;
+      padding-left:0;
+      > label{
+        float: none;
+        margin-bottom: 10px;
+        display: inline-block;
+      }
+      > select{
+          width: 100%;
+      }
+  }
+  .form-item-story-rating{      
+      width: 300px;
+      margin-top: 0;
   }
 }
 
@@ -8951,7 +8960,7 @@ div.node{
     }
     #field-reporter-movie-year-add-more-wrapper{
         .fieldset-wrapper{
-            padding-left: 0;
+            padding-left: 0;    
         }
     }
 }
