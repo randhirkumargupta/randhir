@@ -43,7 +43,7 @@
       <div>
         <!-- Total Points -->        
         <div class="total-points">
-          TOTAL POINTS
+          <?php print t('TOTAL POINTS'); ?>
           <span><?php print $data['badge_detail']['total']; ?></span>
         </div>
         <div class="pregress-bar">
@@ -51,7 +51,7 @@
             <div class="next-badge"><?php print $data['badge_detail']['next']; ?></div>
         </div>
         <div class="points-to-go">
-          <?php print $data['badge_detail']['points_to_go']; ?>
+          <?php print $data['badge_detail']['points_to_go'] . ' ' . t('Points to go'); ?>
         </div>
       </div>  
   </div>
