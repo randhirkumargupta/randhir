@@ -37,10 +37,10 @@
                                 for ($i = 1; $i <= 10; ++$i) {
                                   // Encode original node id.                                  
                                   if ($cart_detail['quantity'] == $i) {
-                                    echo '<option value="' . $node_id . '" selected="selected">' . $i . '</option>';
+                                    echo '<option value="' . $node_id . '-'. $i . '" selected="selected">' . $i . '</option>';
                                   }
                                   else {
-                                    echo '<option value="' . $node_id . '">' . $i . '</option>';
+                                    echo '<option value="' . $node_id . '-'. $i . '">' . $i . '</option>';
                                   }
                                 }
                                 ?>
@@ -65,11 +65,11 @@
               <div class="grand-total"><strong>GRAND TOTAL</strong><strong><?php print $cart_total; ?> Points</strong></div>
               <div class="checkout"><?php print l(t('REDEEM POINTS'), 'order-summary'); ?></div>
               <div class="points-balance"><span>Balance after redemption</span><span><?php print number_format($remain_point); ?> Points</span></div>
-              <div class="continue-shopping"><?php print l('Continue Shopping', 'redeem-points'); ?></div>
+              <div class="continue-shopping"><?php print l('Continue Shopping', 'product'); ?></div>
           </div>
       </div>
     <?php else: ?>
       <?php print t('There are no items in this cart.') ?>
-  <?php print l('Continue Shopping', 'redeem-points', array('attributes' => array('class' => array('button')))); ?>
+  <?php print l('Continue Shopping', 'product', array('attributes' => array('class' => array('button')))); ?>
 <?php endif; ?>
 </div>

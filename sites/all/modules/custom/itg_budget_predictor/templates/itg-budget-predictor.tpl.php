@@ -18,13 +18,16 @@ $admin_user = $data['admin_user'];
 ?>
 
 <style>
-    #sortable1, #sortable2, #sortable3, #sortable4 { width:100%; min-height:400px;}
-    #sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li { display:block;cursor:move;margin: 0 5px 5px 5px;}
+    #sortable1, #sortable2, #sortable3, #sortable4 { width:100%; min-height:450px; cursor: move;}
+    #sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li { display:block;cursor:move; margin: 10px 0px;
+    background: transparent;
+    border: none;
+    text-align: center;}
     <?php if ($admin_user) { ?>
-      #main-container-budget{width:100%;height:100%;}
+      #main-container-budget{width:100%;height:100%;display: inline-block;width: 100%;}
     <?php }
     else { ?>
-      #main-container-budget{width:800px;height:600px;}
+      #main-container-budget{width:100%;height:600px;}
     <?php } ?>
 
 </style>

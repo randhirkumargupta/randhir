@@ -1974,13 +1974,13 @@ footer{
         width: 320px;
         float: left;
         margin-right: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 5px;
         padding: 10px 15px;
         font-family: $itg-robotoslab;
         h4{
             font-family: "Roboto Slab",sans-serif;
             font-size: 22px;
-            font-weight: 700;
+            font-weight: 700;            
         }
         img{
             width: 70px;
@@ -2007,6 +2007,17 @@ footer{
         }
         h2{
             font-family: $itg-robotoslab;
+            &:before, &:after{
+                width: 20px;
+                height: 16px;
+                content: '';
+                background: url(../images/up-quotes.jpg) no-repeat center center;
+                display: inline-block;
+                vertical-align: top;
+            }
+            &:after{
+                background: url(../images/down-quote.jpg) no-repeat center center;
+            }
         }
     }
 }
@@ -7770,6 +7781,7 @@ input[type="radio"]:checked + label:after{
         right: 0;
     }
 }
+.story-section {
 .listicle-page{
     &.story-right{
         @include calculate-width(1);   
@@ -7804,6 +7816,7 @@ input[type="radio"]:checked + label:after{
             border-top: 1px solid #ccc;    
         }
     }
+}
 }
 /*css end factoids-slider*/
 
@@ -7965,9 +7978,16 @@ input[type="radio"]:checked + label:after{
             text-transform: uppercase;
             font-weight: 700;
             line-height: 30px;
+             margin-bottom: 40px;  
         }    
     }
-    
+    #ranking-content{
+        ul{
+            li{
+                margin-top: 15px;
+            }
+        }
+    }    
     @include social-share;
 }
 /*budget predictor css end*/

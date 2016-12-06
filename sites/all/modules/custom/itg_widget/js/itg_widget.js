@@ -23,8 +23,47 @@ Drupal.behaviors.itg_widgets = {
         //            // Prevent default action.
         //            return false;
         //        });
+        jQuery('#edit-state1').change(function() {
+            var getval = jQuery(this).val();
+            if (getval == 0)
+            {
+                getval = "";
+            }
+            jQuery('#edit-state').val(getval);
+        })
+        jQuery('#edit-cat1_id').change(function() {
+            var getval = jQuery(this).val();
+            if (getval == 0)
+            {
+                getval = "";
+            }
+            jQuery('#edit-cat_id').val(getval);
+        })
+// This code use for mark candidate status
+        jQuery('.key-radio').live('click', function() {
+            var getname = jQuery(this).attr('name');
+            var getstatus = jQuery(this).val();
+            jQuery.ajax({
+                url: Drupal.settings.basePath + 'update-keycandidate-status',
+                type: 'post',
+                beforeSend: function() {
+                    jQuery('#widget-ajex-loader').show();
+
+                },
+                data: {
+                    'fname': getname,
+                    'status': getstatus,
+                },
+                success: function(data) {
 
 
+                },
+                error: function(xhr, desc, err) {
+                    console.log(xhr);
+                    console.log("Details: " + desc + "\nError:" + err);
+                }
+            });
+        })
         jQuery(".remove_from_nodequeue_draggable_view").click(function() {
             var nid = jQuery(this).attr("data-nid");
             var qid = jQuery(this).attr("data-queueid");
@@ -33,7 +72,7 @@ Drupal.behaviors.itg_widgets = {
             // get query parameter
             var c_tid = get_url_parameter('field_story_category_tid');
             var type = get_url_parameter('type');
-            if (typeof(c_tid) != "undefined" && c_tid !== null && typeof(type) != "undefined" && type !== null) {
+            if (typeof (c_tid) != "undefined" && c_tid !== null && typeof (type) != "undefined" && type !== null) {
                 if (confirm('Are you sure you want to move this content ?')) {
                     jQuery("#widget-ajex-loader").css("display", "block");
                     jQuery.get("remove_from_widgets_section/" + nid + "/" + qid + "/" + view_name + "/" + view_page + "/" + c_tid + "/" + type, function(data, status) {
@@ -146,10 +185,10 @@ Drupal.behaviors.itg_widgets = {
                     'type': type
                 },
                 success: function(data) {
-                  console.log(data.length);
-                  var json_obj = JSON.parse(data);
-                    if(json_obj.length === 0){
-                      jQuery(".handle-unckeck-on-page").attr('checked', false);
+                    console.log(data.length);
+                    var json_obj = JSON.parse(data);
+                    if (json_obj.length === 0) {
+                        jQuery(".handle-unckeck-on-page").attr('checked', false);
                     }
                     setTimeout(function() {
 
@@ -233,9 +272,9 @@ Drupal.behaviors.itg_widgets = {
 
 var get_url_parameter = function get_url_parameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
     for (i = 0; i < sURLVariables.length; i++) {
         sParameterName = sURLVariables[i].split('=');
 
@@ -247,6 +286,12 @@ var get_url_parameter = function get_url_parameter(sParam) {
 
 
 jQuery(document).ready(function() {
+    jQuery('.cat-wraper').html(jQuery('.form-item-cat1-id').html());
+    jQuery('.state-wraper').html(jQuery('.form-item-state1').html());
+    jQuery('.form-item-cat1-id').remove();
+    jQuery('.form-item-state1').remove();
+    jQuery('#edit-cat1-id').attr('name', 'cat_id');
+    jQuery('#edit-state1').attr('name', 'state');
     jQuery(".custom-weight-draggable input[type=number]").change(function() {
         jQuery(this).next().children().find('option').remove().end().append('<option value="' + jQuery(this).val() + '">' + jQuery(this).val() + '</option>').val(jQuery(this).val());
     });
