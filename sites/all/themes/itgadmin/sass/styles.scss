@@ -2027,7 +2027,8 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-template-quotes-values"], 
 [id*="field-story-template-factoids-values"],
 [id*="field-story-reporter-values"],
-[id*="field-story-template-guru-values"]{
+[id*="field-story-template-guru-values"],
+[id*="field-story-listicle-values"]{
   @extend .itg-add-another-item;
 }
 [id*="field-erf-registration-fee-values"],
@@ -5490,6 +5491,9 @@ div.node{
         .image_info{
             padding-bottom: 10px;   
         }
+        .syndicate-lable{
+            margin-top: 10px;
+        }
     }
   }
 }
@@ -7535,7 +7539,7 @@ div.node{
   [id*="field-story-template-quotes-values"], 
   [id*="field-story-template-factoids-values"], 
   [id*="field-story-template-buzz-values"], 
-  [id*="field-story-template-guru-values"]{
+  [id*="field-story-template-guru-values"],[id*="field-story-listicle-values"]{
     thead{
       padding-left: 20px;
       padding-right: 10px;
@@ -8910,4 +8914,29 @@ div.node{
 .cheaper-dearer-btn{
     list-style-type: none;
     margin: 20px 0;
+}
+.node-story-form [id*="field-story-listicle-values"]{
+    thead{
+     display: none;        
+    }
+    + div.clearfix{
+        bottom: 84px;        
+    }
+    tbody tr td{
+      border:none;
+      padding-bottom: 0;
+        .form-submit[value="Remove"]{
+        position: absolute;
+        top: 10px;
+        right: -8px;
+        }
+    } 
+} 
+#field-story-reporter-values{
+    label + .form-text + span.error{
+        padding-left: 0;
+    }
+}
+.form-field-name-field-story-quote-image{
+    @extend .Browse-upload;
 }

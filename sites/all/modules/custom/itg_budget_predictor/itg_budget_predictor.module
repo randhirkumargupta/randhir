@@ -30,13 +30,13 @@ function itg_budget_predictor_menu() {
   );
   $items['budget-predictor-list'] = array(
     'page callback' => 'itg_budget_predictor_list',
-    'access callback' => 'user_is_logged_in',
+    'access arguments' => array('administer itg_term settings'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_budget_predictor.inc',
   );
   $items['manage-budget-list'] = array(
     'page callback' => 'itg_budget_manage_list',
-    'access callback' => 'user_is_logged_in',
+    'access arguments' => array('administer itg_term settings'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_budget_predictor.inc',
   );
@@ -50,7 +50,7 @@ function itg_budget_predictor_menu() {
     'title' => 'Manage Budget Predictor',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_manage_budget'),
-    'access callback' => 'user_is_logged_in',
+    'access arguments' => array('administer itg_term settings'),
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_budget_predictor.inc',
   );
