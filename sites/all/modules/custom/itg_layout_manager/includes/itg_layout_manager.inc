@@ -18,7 +18,16 @@ function itg_layout_admin() {
     $data['preview'] = 'yes';
   }
   drupal_add_js('jQuery(document).ready(function(){ jQuery("#views-exposed-form-video-list-of-category-block-1 , #views-exposed-form-photo-list-of-category-block").hide(); });', array('scope' => 'footer', 'type' => 'inline'));
-  drupal_add_css(drupal_get_path('theme', FRONT_THEME_NAME) . '/css/layout-manager.css');
+//  drupal_add_css(drupal_get_path('theme', FRONT_THEME_NAME) . '/css/layout-manager.css');
+  drupal_add_css(drupal_get_path('theme', FRONT_THEME_NAME) . '/css/component.css', array('scope' => 'footer'));
+  drupal_add_css(drupal_get_path('theme', FRONT_THEME_NAME) . '/css/layout-manager.css', array('scope' => 'footer'));
+  drupal_add_css(drupal_get_path('theme', FRONT_THEME_NAME) . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', FRONT_THEME_NAME) . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', FRONT_THEME_NAME) . '/js/modernizr-custom.js', array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', FRONT_THEME_NAME) . '/js/classie.js', array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', FRONT_THEME_NAME) . '/js/dynamics.min.js', array('scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', FRONT_THEME_NAME) . '/js/main.js', array('scope' => 'footer'));
+  drupal_add_js('', array('type' => 'inline', 'scope' => 'footer'));
   
   return theme('itg_layout_admin_page', array('widget_data' => $data));  
 }

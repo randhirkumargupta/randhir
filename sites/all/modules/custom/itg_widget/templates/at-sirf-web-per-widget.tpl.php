@@ -3,7 +3,9 @@
   <div class="half-grey-bg">
     <h2><?php print t("Sirf web per"); ?></h2>
     <ul class="widget-list-wrapper slider-container">
+    <!--<ul id="stack-card" class="stack stack--krisna">-->
       <?php foreach ($data as $key => $output) : ?>
+        <!--<li class="stack__item">-->
         <li class="widget-list-row latest-video-rows-<?php print $key ?>">
           <div class="tile">
             <div class="cateogry-name cateogry-<?php print $keys; ?>">
@@ -46,5 +48,9 @@
         </li>
       <?php endforeach; ?>
     </ul>
+    <div class="controls">
+      <button class="button button--sonar button--reject" data-stack="stack-card">Reject</button>
+      <button class="button button--sonar button--accept" data-stack="stack-card">Accept</button>
+    </div>
   </div>
 </div>

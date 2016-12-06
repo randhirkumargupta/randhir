@@ -567,6 +567,16 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $is_fron_page = drupal_is_front_page();
 
     if (!empty($is_fron_page) && $theme == FRONT_THEME_NAME) {
+        drupal_add_css(drupal_get_path('theme', 'aajtak') . '/css/component.css', array('scope' => 'footer'));
+        drupal_add_css(drupal_get_path('theme', 'aajtak') . '/css/layout-manager.css', array('scope' => 'footer'));
+        drupal_add_css(drupal_get_path('theme', 'aajtak') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/modernizr-custom.js', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/classie.js', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/dynamics.min.js', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/main.js', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/script.js', array('scope' => 'footer'));
+        drupal_add_js('', array('type' => 'inline', 'scope' => 'footer'));
         $section = 'home_page';
         $template_name = 'page--front';
         $data = get_layout_details($section, $template_name, 'front');
@@ -578,8 +588,14 @@ function itg_layout_manager_preprocess_page(&$vars) {
 
     //section template display on front
     if (($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) && $theme == FRONT_THEME_NAME) {
-        drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
-        drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+        drupal_add_css(drupal_get_path('theme', 'aajtak') . '/css/component.css', array('scope' => 'footer'));
+        drupal_add_css(drupal_get_path('theme', 'aajtak') . '/css/layout-manager.css', array('scope' => 'footer'));
+        drupal_add_css(drupal_get_path('theme', 'aajtak') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/modernizr-custom.js', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/classie.js', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/dynamics.min.js', array('scope' => 'footer'));
+        drupal_add_js(drupal_get_path('theme', 'aajtak') . '/js/main.js', array('scope' => 'footer'));
         drupal_add_js('', array('type' => 'inline', 'scope' => 'footer'));
         $query = db_select('taxonomy_term_hierarchy', 'tth');
         $query->fields('tth', array('parent'));
