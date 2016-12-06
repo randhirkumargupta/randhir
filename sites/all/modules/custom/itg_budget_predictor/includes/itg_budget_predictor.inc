@@ -34,7 +34,6 @@ function itg_budget_predictor_get_taxonomy() {
       $querys->condition('r.status', 2);
     }
 
-
     $results = $querys->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($results as $k => $row) {
       $ranking_array[$k]['ranking_column'] = $row['ranking_column'];
@@ -42,7 +41,7 @@ function itg_budget_predictor_get_taxonomy() {
       $file_name = $row['file_name'];
       $entity_array[] = $row['entity_id'];
     }
-    $query = db_select('taxonomy_term_data', 'td');
+    $query = db_select('taxonomy_term_data', 'td')->distinct();
     $query->leftJoin('taxonomy_vocabulary', 'v', 'td.vid=v.vid');
     $query->leftJoin('field_data_field_story_small_image', 'img', 'td.tid=img.entity_id');
     $query->leftJoin('itg_budget_predictor', 'r', 'td.tid=r.entity_id');
@@ -56,6 +55,7 @@ function itg_budget_predictor_get_taxonomy() {
     }
 
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
     $entity_data = array();
     foreach ($result as $key => $entity_data_node) {
       $entity_data[$key]['tid'] = $entity_data_node['tid'];
@@ -98,7 +98,7 @@ function itg_budget_predictor_get_taxonomy() {
         $column3 .= '<li id="entry_' . $entity_id . '" class="ui-state-default"><img src="' . image_style_url("thumbnail", $uri) . '"></li>';
       }
     }
-
+    
 
     $budget_data['column1'] = $column1;
     $budget_data['column2'] = $column2;
@@ -129,6 +129,7 @@ function itg_budget_predictor_get_taxonomy() {
 function itg_budget_predictor_update_budget() {
   global $user;
   $timestamp = arg(2);
+  $budget_year = strtotime(date('d-m-'.$timestamp));
   $user_id = $user->uid;
   $allowed_roles = array('Editor', 'Site Admin', 'administrator');
   if (count(array_intersect($user->roles, $allowed_roles)) > 0) {
@@ -161,7 +162,7 @@ function itg_budget_predictor_update_budget() {
             'user_id' => $user_id,
             'file_name' => '',
             'status' => $budget_status,
-            'timestamp' => REQUEST_TIME,
+            'timestamp' => $budget_year,
             'ip_address' => $ip_address,
           ))
           ->execute();
@@ -171,7 +172,6 @@ function itg_budget_predictor_update_budget() {
           ->fields(array(
             'ranking_value' => $key,
             'ranking_column' => 1,
-            'timestamp' => REQUEST_TIME,
             'ip_address' => $ip_address,
           ))
           ->condition('entity_id', $value, '=')
@@ -194,7 +194,7 @@ function itg_budget_predictor_update_budget() {
             'user_id' => $user_id,
             'file_name' => '',
             'status' => $budget_status,
-            'timestamp' => REQUEST_TIME,
+            'timestamp' => $budget_year,
             'ip_address' => $ip_address,
           ))
           ->execute();
@@ -204,7 +204,6 @@ function itg_budget_predictor_update_budget() {
           ->fields(array(
             'ranking_value' => $key,
             'ranking_column' => 2,
-            'timestamp' => REQUEST_TIME,
             'ip_address' => $ip_address,
           ))
           ->condition('entity_id', $value, '=')
@@ -224,7 +223,7 @@ function itg_budget_predictor_update_budget() {
             'user_id' => $user_id,
             'file_name' => '',
             'status' => $budget_status,
-            'timestamp' => REQUEST_TIME,
+            'timestamp' => $budget_year,
             'ip_address' => $ip_address,
           ))
           ->execute();
@@ -234,7 +233,6 @@ function itg_budget_predictor_update_budget() {
           ->fields(array(
             'ranking_value' => $key,
             'ranking_column' => 3,
-            'timestamp' => REQUEST_TIME,
             'ip_address' => $ip_address,
           ))
           ->condition('entity_id', $value, '=')
