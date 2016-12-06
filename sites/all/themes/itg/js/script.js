@@ -21,7 +21,9 @@
             if(getmsgsaves!="")
             {
                 jQuery('.saved-photogallery').remove();
-                jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
+               // jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
+                jQuery( ".view-photo-landing-slider .slickslide li" ).append('<div class="saved-photogallery">'+getmsgsaves+'</div>');
+            setTimeout(function(){  jQuery('.saved-photogallery').remove(); }, 3000);
             }
             jQuery('.add-more-block-front').live('click', function () {
                 var section_ids = "";
