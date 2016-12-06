@@ -445,8 +445,9 @@ function feature_for_key_candidate_views_default_views() {
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_value'] = '$row->cat_id';
   $handler->display->display_options['fields']['php']['php_output'] = '| <?php
-print \'<a href="move-dont-miss-widget-node/key_candidate/0/0/\'.$row->nid.\'"> <span class="move-link">Remove</spa></a>\';
+print \'<a href="key-candidate-widget-node/key_candidate/\'.$row->cat_id.\'/\'.$row->state.\'/\'.$row->nid.\'"> <span class="move-link">Remove</spa></a>\';
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';

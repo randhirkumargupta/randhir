@@ -68,6 +68,11 @@ function itg_widget_menu() {
         'page arguments' => array(1, 2, 3, 4),
         'access arguments' => array('administer nodequeue'),
     );
+     $items['key-candidate-widget-node/%/%/%/%'] = array(
+        'page callback' => 'move_node_from_key_candidate_widget',
+        'page arguments' => array(1, 2, 3, 4),
+        'access arguments' => array('administer nodequeue'),
+    );
     $items['anchor-list/autocomplete'] = array(
         'page callback' => 'itg_widget_anchor_autocomplete_name',
         'access arguments' => array('access content'),

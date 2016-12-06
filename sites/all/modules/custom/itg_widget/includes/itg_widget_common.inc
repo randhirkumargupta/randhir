@@ -217,6 +217,32 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
         }
     }
 }
+/**
+ * Funtion used to delete node combination form itg_widget_order table.
+ * 
+ * @param string $widget_name
+ * @param string $content_type
+ * @param int $cat_tid
+ * @param int $nid
+ */
+function move_node_from_key_candidate_widget($widget_name, $cat_tid,$state, $nid) {
+    if (!empty($widget_name) && !empty($nid)) {
+        $num = db_delete('itg_widget_order')
+                ->condition('nid', $nid)
+                ->condition('cat_id', $cat_tid)
+                ->condition('state', $state)
+                ->condition('widget', $widget_name)
+                ->execute();
+        if ($num) {
+            drupal_set_message(t("Node has been moved"));
+            drupal_goto($_SERVER['HTTP_REFERER']);
+        }
+        else {
+            drupal_set_message(t("Node id or widget name not found"));
+            drupal_goto($_SERVER['HTTP_REFERER']);
+        }
+    }
+}
 
 /**
  * Function used to delete node combination form itg_widget_order table.
@@ -2546,15 +2572,22 @@ function get_rhs_block_display_condtion($delta = '') {
  *
  */
 function insert_all_node_in_widegt_table() {
+    try {
+    db_query('alter table itg_widget_order add column state INT NULL after extra')->execute();
+    db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
 
-    $nodes = db_select('node', 'n')
-                    ->fields('n', array('nid'))
-                    ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
-                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($nodes as $data) {
-        $node = node_load($data['nid']);
-        itg_widget_node_insert($node);
-    }
+
+//    $nodes = db_select('node', 'n')
+//                    ->fields('n', array('nid'))
+//                    ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
+//                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
+//    foreach ($nodes as $data) {
+//        $node = node_load($data['nid']);
+//        itg_widget_node_insert($node);
+//    }
 }
 
 /**
