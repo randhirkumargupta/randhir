@@ -9574,6 +9574,10 @@ footer .footer-copyright {
   text-transform: uppercase;
   font-weight: 700;
   line-height: 30px;
+  margin-bottom: 40px;
+}
+#main-container-budget #ranking-content ul li {
+  margin-top: 15px;
 }
 #main-container-budget ul {
   list-style-type: none;

@@ -9769,8 +9769,8 @@ div.node #comments h2 {
 #views-form-strory-menegment-page .form-actions #main-container-budget .form-submit + a, #main-container-budget #views-form-podcast-management-page .form-actions .form-submit + a, #views-form-podcast-management-page .form-actions #main-container-budget .form-submit + a,
 #main-container-budget #views-form-videogallery-management-page .form-actions .form-submit + a,
 #views-form-videogallery-management-page .form-actions #main-container-budget .form-submit + a, #main-container-budget #edit-preview-changes, #main-container-budget [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions #main-container-budget a, #main-container-budget .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li #main-container-budget a, #main-container-budget .page-manage-budget-list table caption a, .page-manage-budget-list table caption #main-container-budget a, #main-container-budget .page-budget-predictor-list table caption a, .page-budget-predictor-list table caption #main-container-budget a, #main-container-budget [id*="itg-manage-budget"] .form-submit, [id*="itg-manage-budget"] #main-container-budget .form-submit {
-  margin-top: 40px;
-  margin-bottom: 100px;
+  margin: 0;
+  margin-bottom: 10px;
 }
 #main-container-budget .bottom-side-block {
   display: none;
@@ -9789,7 +9789,6 @@ div.node #comments h2 {
   font-size: 14px;
   font-weight: 400;
   height: 32px;
-  margin-right: 5px;
   padding: 5px 12px 7px;
   text-align: center;
   white-space: nowrap;
@@ -9819,5 +9818,18 @@ div.node #comments h2 {
 }
 
 #field-story-reporter-values label + .form-text + span.error {
+  padding-left: 0;
+}
+
+[id="taxonomy-form-term"] .fieldset-wrapper {
+  display: block !important;
+}
+[id="taxonomy-form-term"] fieldset {
+  border: none;
+}
+[id="taxonomy-form-term"] .form-type-select > label + div {
+  padding-left: 0;
+}
+[id="taxonomy-form-term"] #field-reporter-movie-year-add-more-wrapper .fieldset-wrapper {
   padding-left: 0;
 }
