@@ -327,8 +327,8 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $form['pti_container']['pti_issue'] = array(
               '#type' => 'select',
               '#title' => t('Issue'),
-              '#prefix' => '<div id="pti-issue-replace">',
-              '#suffix' => '</div>',
+//              '#prefix' => '<div id="pti-issue-replace">',
+//              '#suffix' => '</div>',
               '#options' => itg_print_team_magazine_issue($selected),
               '#default_value' => isset($form_state['values']['pti_issue']) ? $form_state['values']['pti_issue'] : '_none',
               '#weight' => 100,
@@ -337,8 +337,8 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           $form['pti_container']['pti_supplement'] = array(
               '#type' => 'select',
               '#title' => t('Supplement'),
-              '#prefix' => '<div id="pti-supplement-replace">',
-              '#suffix' => '</div>',
+//              '#prefix' => '<div id="pti-supplement-replace">',
+//              '#suffix' => '</div>',
               '#options' => itg_print_team_magazine_supplement($selected),
               '#default_value' => isset($form_state['values']['pti_supplement']) ? $form_state['values']['pti_supplement'] : '_none',
               '#weight' => 101,
@@ -348,13 +348,13 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'submit',
               '#value' => t('Associate'),
               '#weight' => 102,
-              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:30px'),
+              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:70px'),
           );
           $form['mark_as_complete'] = array(
               '#type' => 'submit',
               '#value' => t('Mark as Complete'),
               '#weight' => 103,
-              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:30px'),
+              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:70px'),
           );
           
           $field_rating_info = field_info_field('field_story_rating');
@@ -372,10 +372,10 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'submit',
               '#value' => t('Submit Rating'),
               '#weight' =>  105,
-              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:30px'),
+              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:40px'),
           );
           $form['download_csv'] = array(
-              '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'button', 'style' => 'margin-top:30px'))),
+              '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'button', 'style' => 'margin-top:40px'))),
               '#weight' => 106,
               '#value' => t('Download CSV'),
           );
