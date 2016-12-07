@@ -6031,7 +6031,7 @@ div.node #comments h2 {
 }
 [id*="views-form-manage-print-team-page"] #pti-container-data {
   display: inline-block;
-  width: inherit;
+  width: 82%;
 }
 [id*="views-form-manage-print-team-page"] .form-item-pti-magazine, [id*="views-form-manage-print-team-page"] .form-item-pti-issue, [id*="views-form-manage-print-team-page"] .form-item-pti-supplement, [id*="views-form-manage-print-team-page"] .form-item-story-rating {
   width: 300px;

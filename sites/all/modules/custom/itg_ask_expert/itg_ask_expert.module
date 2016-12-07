@@ -396,8 +396,8 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
   $form['askname'] = array(
     '#type' => 'textfield', //you can find a list of available types in the form api
     '#title' => t(''),
-    '#prefix' => '<div id="askname">',
-    '#suffix' => '</div>',
+    '#prefix' => '<div id="askname" class="askname">',
+    //'#suffix' => '</div>',
     '#attributes' => array(
       'placeholder' => 'Name',
     ),
@@ -405,7 +405,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
   $form['askemail'] = array(
     '#type' => 'textfield', //you can find a list of available types in the form api
     '#title' => t(''),
-    '#prefix' => '<div id="askemail">',
+    //'#prefix' => '<div id="askemail">',
     '#suffix' => '</div>',
     '#attributes' => array(
       'placeholder' => 'Email',
