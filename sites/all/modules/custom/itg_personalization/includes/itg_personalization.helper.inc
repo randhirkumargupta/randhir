@@ -44,3 +44,41 @@ function _personalized_saved_content($view_name, $type = 'ajax') {
     ajax_deliver(array('#type' => 'ajax', '#commands' => $commands));
   }
 }
+
+/**
+ * Get badge detail for current user.
+ *
+ * @param int $uid
+ *  User unique id.
+ *
+ * @return array
+ *   Earned and next badge information.
+ */
+function itg_personalization_badge($uid) {
+  $data = itg_loyalty_reward_user_details($uid);
+  // Prepare array of all badge steps.
+  $badge = array(
+    variable_get('lrp_gold_star_one'),
+    variable_get('lrp_gold_star_two'),
+    variable_get('lrp_gold_star_three'),
+    variable_get('lrp_gold_star_four'),
+    variable_get('lrp_gold_star_five'),
+  );
+  // Compare earned points with badge points.
+  $earned_badge = $points_to_go = 0;
+  foreach ($badge as $key => $point) {    
+    if ($point >= $data['total_earned_so_far']) {      
+      $earned_badge = $key + 1;
+      $points_to_go = $point - $data['total_earned_so_far'];
+      break;
+    }    
+  }
+  $data = array(
+    'total' => $data['total_earned_so_far'],
+    'earn' => $earned_badge,
+    'next' => $earned_badge + 1,
+    'points_to_go' => $points_to_go,
+  );  
+  
+  return $data;
+}

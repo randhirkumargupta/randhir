@@ -150,26 +150,34 @@
 
             // Code for quantit update.
             jQuery('select[name="quantity"]').on('change', function () {
-                var item_count = jQuery(this).find('option:selected').text();
-                var encoded_id = jQuery(this).find('option:selected').val();
+                var item_count = $(this).find('option:selected').text();
+                var encoded_id = $(this).find('option:selected').val();
+                var spliteed_id = encoded_id.split("-");
                 $.ajax({
                     url: Drupal.settings.itg_loyalty_reward.base_url + "/cart/update",
                     type: 'post',
-                    data: {'item_count': item_count, 'encoded_id': encoded_id},
+                    data: {'item_count': item_count, 'encoded_id': spliteed_id[0]},
                     dataType: "JSON",
-                    success: function (data) {
-                        console.log(data);
+                    success: function (data) {                        
                         switch (data.code) {
-                            case - 2:
+                            case -2:
                                 alert('Insufficient points to redeem this product.');
+                                location.reload();
                                 break;
+                                
+                            case -1:
+                                alert('Something went wrong please try after some time.');
+                                break;
+                                
+                            case 1:
+                                location.reload();
                         }
                     },
                     beforeSend: function (xhr) {
                         test_loader_show();
                     },
                     complete: function () {
-                        test_loader_hide();
+                        //test_loader_hide();
                     }
                 });
             });

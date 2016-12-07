@@ -363,7 +363,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                     </div>    
                     <div class="col-md-4 col-sm-4 col-sx-12 right-side">        
-                       <?php  if(count($graphdata)<=2){?>
+                      
                         <div class="">
                             <div class="itg-widget election-topadd">
                                 <div class="ad-widget droppable">
@@ -371,7 +371,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>
                             </div>
                         </div> 
-                       <?php  } ?>
+               
                         <div class="itg-325 mt-50">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
