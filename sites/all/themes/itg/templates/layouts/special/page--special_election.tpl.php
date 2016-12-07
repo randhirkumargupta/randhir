@@ -385,7 +385,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <div class="itg-325 mt-50 <?php echo $key_candidate_extra_block; ?>">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
-                                    <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name']; ?>">
+                                    <div class="widget-wrapper <?php //print $widget_data['itg-block-9']['widget_name']; ?>">
                                         <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-9']['block_title'])) { ?>
                                             <h4 class="heading"><?php print $widget_data['itg-block-9']['block_title']; ?></h4>
 <?php } ?>
