@@ -187,11 +187,7 @@ img{
   background:#f3f3f3;
   padding:10px;
 }
-.widget-title{
-  @include font(28px,28px,700);
-  color: #000;
-  padding: 0 15px;
-}
+
 .success-message, .messages--status{
   color:#009c00;
   font-size: 13px;
