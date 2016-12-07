@@ -83,16 +83,20 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
       );      
       $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
       $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
+      unset($form['date_filter']['min']['#title']);
       $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
+      unset($form['date_filter']['max']['#title']);
       $form['from_state']['#prefix'] = '<div style="display: none;">';
       $form['from_state']['#suffix'] = '</div>';
       $form['#after_build'][] = 'itg_reports_view_after_build';
 
       break;
-    case 'views-exposed-form-comparative-reports-page':
+    case 'views-exposed-form-comparative-report-cm-page':      
       $form['tid']['#attributes'] = array('placeholder' => 'Search by section name');
       $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
+      unset($form['date_filter']['min']['#title']);
       $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
+      unset($form['date_filter']['max']['#title']);
       $form['#after_build'][] = 'itg_reports_view_after_build';
   }
 }

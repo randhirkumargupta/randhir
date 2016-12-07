@@ -866,7 +866,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 
 #content #block-formblock-ugc {
   margin: 0 auto;
-  max-width: 720px;
+  max-width: 750px;
   text-align: left;
 }
 #content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype {
