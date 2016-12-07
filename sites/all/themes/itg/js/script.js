@@ -416,6 +416,18 @@ jQuery(document).ready(function () {
     setTimeout(function () {
         jQuery('.saved-photogallery').remove();
     }, 3000);
+    
+    //movie review more less
+    jQuery('.other-reviews-desc .read-more').click(function(){        
+       jQuery(this).parents('.other-reviews-desc').find('.less-content').hide();
+       jQuery(this).parents('.other-reviews-desc').find('.full-content').show();        
+    });
+    
+    jQuery('.other-reviews-desc .read-less').click(function(){        
+        jQuery(this).parents('.other-reviews-desc').find('.full-content').hide();
+        jQuery(this).parents('.other-reviews-desc').find('.less-content').show();        
+    });
+    
 });
 
 

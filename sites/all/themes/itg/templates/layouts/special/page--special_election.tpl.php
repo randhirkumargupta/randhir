@@ -19,6 +19,7 @@ if (arg(2) == 'preview') {
     $preview = 'preview';
 }
 $highlights = itg_widget_highlights_block_data();
+
 $device = itg_live_tv_company('web');
 if (!empty($device[0])) {
     $live_tv_get_details = node_load($device[0]);
@@ -26,6 +27,11 @@ if (!empty($device[0])) {
     if (filter_var($live_url, FILTER_VALIDATE_URL)) {
         $live_url = '<iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>';
     }
+}
+
+if($highlights['node_data']->field_story_expires[LANGUAGE_NONE][0]['value']!='Yes')
+{
+ $live_url='';   
 }
 if ($theme == 'itgadmin' && !isset($preview)) {
     $gray_bg_layout = 'gray-bg-layout';
@@ -130,7 +136,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 
                 if(count($graphdata)>2){
                             ?>
-                        <div class="row election-graph">
+                        <div class="row election-graph election-graph-<?php echo count($graphdata);?>">
 <?php $block = module_invoke('itg_widget', 'block_view', 'graph_election');
                                         print render($block['content']); ?>
                    

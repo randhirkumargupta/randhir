@@ -4013,7 +4013,7 @@ article.node-mega-review-critic{
       float: left;
       height: 271px;
       overflow-y: auto;
-      width: 37%;
+      width: 37%;      
       .review-row{
         padding: 10px 8px 0;
         color: #a0a0a0;
@@ -4026,6 +4026,13 @@ article.node-mega-review-critic{
           display: block;
           font: 400 14px/16px Roboto;
           overflow: hidden;
+          .field-name-field-mega-review-cast{
+              .field-item{
+                  display:inline-block;
+                  vertical-aling:top;
+                  margin-right:5px;
+              }
+          }
         }
       }
       .movie-reviewer{
@@ -4065,6 +4072,10 @@ article.node-mega-review-critic{
     }
       }
     }
+  }
+  .bottom-movie-desc{
+      color:#b7b7b7;
+      padding-top:10px;
   }
   .other-reviews{
     margin: 10px 0;
@@ -4117,6 +4128,9 @@ article.node-mega-review-critic{
       font: 400 15px/27px 'Roboto Slab';
       color: #212121;
       margin-top: 10px;
+      a{
+          color:#a00606;
+      }
     }
   }
 }
@@ -4131,6 +4145,12 @@ article.node-mega-review-critic{
     h3{
       display: block;
       span{padding-left: 0; padding-top: 20px;}
+    }
+    &.full-width{
+       width: 100%;
+       img{
+           width: 100%;
+       }
     }
   }
 .movie-videos, .movie-photos {    
@@ -4159,7 +4179,7 @@ article.node-mega-review-critic{
 }
 .career-graph{
     .career-graph-data{
-        margin-top: 150px;
+        margin-top: 80px;
         position: relative;
         .gray-bg, .black-bg{
             background: #dedede;            
@@ -4186,6 +4206,9 @@ article.node-mega-review-critic{
     }
     .highcharts-container {
             background: #f7f7f7;
+        }
+        + vukkul-comment{
+            margin-top:50px;
         }
 }
 .overflow-x-auto{
