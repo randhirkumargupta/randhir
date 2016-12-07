@@ -7550,6 +7550,26 @@ footer .footer-copyright {
   margin-bottom: 20px;
   display: block;
 }
+.education-layout-page .ask-question .ask-user-detail h4 {
+  display: block;
+  margin-bottom: 10px;
+}
+.education-layout-page .ask-question .section-user-details {
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.education-layout-page .ask-question .section-user-details img {
+  float: right;
+  border: 2px solid #ddd;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+}
+.education-layout-page .ask-question .section-user-details .section-user-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #585858;
+}
 
 /*CSS end for education page*/
 /*CSS start sport home page*/
@@ -8332,6 +8352,9 @@ footer .footer-copyright {
 .election-page .right-side .itg-460 .droppable {
   height: 460px;
 }
+.election-page .right-side .key_candidate_extra_block .droppable {
+  height: 375px;
+}
 .election-page .right-side .ad-widget {
   border: none;
 }
@@ -8339,6 +8362,9 @@ footer .footer-copyright {
   margin-top: 103px;
   padding-bottom: 0;
   margin-bottom: 90px;
+}
+.election-page .right-side .ads-after-two .election-topadd .ad-widget {
+  margin-top: 15px;
 }
 .election-page .itg-listing {
   border: none;
@@ -9241,6 +9267,7 @@ footer .footer-copyright {
   display: inline-block;
   vertical-align: bottom;
   width: 50%;
+  margin-top: 10px;
 }
 #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config .expert-question {
   position: relative;
@@ -9558,6 +9585,8 @@ footer .footer-copyright {
   padding: 0;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form, .ask-question-sidebar #itg-custom-ask-an-expert-form {
+  background: #f5f5f5;
+  padding: 15px 15px 15px 30px;
   zoom: 1;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:before, #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:after, .ask-question-sidebar #itg-custom-ask-an-expert-form:before, .ask-question-sidebar #itg-custom-ask-an-expert-form:after {

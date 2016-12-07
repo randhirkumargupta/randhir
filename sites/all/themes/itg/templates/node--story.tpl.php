@@ -213,8 +213,8 @@ if (!empty($content)):
                               $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(\'' . $actual_link . ' ' . $factoidsSocialShare['title'] . ' ' . $factoidsSocialShare['share_desc'] . '\')"><i class="fa fa-facebook"></i></a></li>
-                                 <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['title']) . ' ' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(\'' . $actual_link . ',' . $factoidsSocialShare['title'] . ',' . $factoidsSocialShare['share_desc'] . '\')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['title']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
                                  <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(\'' . $actual_link . '\')"></a></li>
                                  </ul></div></div>';
                               $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
@@ -232,7 +232,7 @@ if (!empty($content)):
                               $expertDetails .= '<div class="story-expert-opinion"><h4>' . t('Expert Opinion') . '</h4>';
                               $expertDetails .= '<div class="expert-detail row"><div class="left-side col-md-8"><p class="name">' . $node->field_story_expert_name['und'][0]['value'] . '</p>';
                               if (!empty($node->field_story_expertise)) {
-                                $expertDetails .= '<p class="name">' . $node->field_story_expertise[LANGUAGE_NONE][0]['value'] . '</p>';
+                                $expertDetails .= '<p>' . $node->field_story_expertise[LANGUAGE_NONE][0]['value'] . '</p>';
                               }
                               $expertDetails .= '</div>';
                             }
