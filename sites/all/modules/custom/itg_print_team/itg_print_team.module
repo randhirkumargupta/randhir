@@ -350,12 +350,6 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
               '#weight' => 102,
               '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:70px'),
           );
-          $form['mark_as_complete'] = array(
-              '#type' => 'submit',
-              '#value' => t('Mark as Complete'),
-              '#weight' => 103,
-              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:70px'),
-          );
           
           $field_rating_info = field_info_field('field_story_rating');
           $field_rating_values = $field_rating_info['settings']['allowed_values'];
@@ -366,16 +360,23 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
               '#options' => $field_rating_values,
               '#default_value' => isset($form_state['values']['story_rating']) ? $form_state['values']['story_rating'] : '_none',
               '#attributes' => array('class' => array('associate-pti-magazine')),
-              '#weight' =>  104,
+              '#weight' =>  103,
           );
           $form['submit_rating'] = array(
               '#type' => 'submit',
               '#value' => t('Submit Rating'),
-              '#weight' =>  105,
+              '#weight' =>  104,
               '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:40px'),
           );
+          $form['mark_as_complete'] = array(
+              '#type' => 'submit',
+              '#value' => t('Mark as Complete'),
+              '#weight' => 105,
+              '#attributes' => array('class' => array('btn-save'), 'style' => 'margin-top:40px'),
+          );
+          
           $form['download_csv'] = array(
-              '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'button', 'style' => 'margin-top:40px'))),
+              '#markup' => l(t('Download CSV'), 'print-team-ideas/csv', array('attributes' => array('class' => 'btn-save', 'style' => 'margin-top:40px'))),
               '#weight' => 106,
               '#value' => t('Download CSV'),
           );
@@ -812,6 +813,9 @@ function itg_print_team_markascomplete_custom_submit($form, &$form_state) {
           field_attach_presave('node', $node_details);
           field_attach_update('node', $node_details);
           drupal_set_message(t($node_details->title . ' has been successfully marked as complete.'), 'status');
+        }
+        else {
+          drupal_set_message(t($node_details->title . ' has been already marked as complete.'), 'error');
         }
       }
     }
