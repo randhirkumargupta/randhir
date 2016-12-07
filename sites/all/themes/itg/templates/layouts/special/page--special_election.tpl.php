@@ -363,8 +363,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                     </div>    
                     <div class="col-md-4 col-sm-4 col-sx-12 right-side">        
-                      
-                        <div class="">
+                      <?php $adsclass="";if(count($graphdata)>2){
+                          $adsclass='ads-after-two';
+                      }?>
+                        <div class="<?php echo $adsclass;?>">
                             <div class="itg-widget election-topadd">
                                 <div class="ad-widget droppable">
                                     <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']); ?></div>
