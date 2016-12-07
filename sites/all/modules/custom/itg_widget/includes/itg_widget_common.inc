@@ -860,7 +860,6 @@ function forms_uses_checked_content_id() {
         'views_form_special_how_i_made_it_special_how_made_it_widget_contents',
         'views_form_yearender_top_news_and_top_videos_yearend_left_widget_contents',
         'views_form_most_read_widget_most_read_widget_contents',
-        'views_form_issue_base_magazin_widget_issue_base_magazin_widget',
     );
 }
 
