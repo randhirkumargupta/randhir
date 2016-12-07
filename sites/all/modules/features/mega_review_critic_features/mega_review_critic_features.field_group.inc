@@ -32,7 +32,8 @@ function mega_review_critic_features_field_group_info() {
       6 => 'field_associate_photo_gallery',
       7 => 'field_story_associate_video',
       8 => 'field_story_movie_description',
-      9 => 'title',
+      9 => 'field_mega_review_career_graph',
+      10 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
