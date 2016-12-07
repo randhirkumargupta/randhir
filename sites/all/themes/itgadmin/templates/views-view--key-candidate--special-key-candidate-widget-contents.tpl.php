@@ -57,7 +57,7 @@
       <?php print $exposed; ?>
     </div>
 <?php endif;  }?>
-    <?php if(empty($_GET['state_val']) && empty($_GET['cat_id']))
+    <?php if(empty($_GET['state_val']) ||  empty($_GET['cat_id']))
 {
  print render(drupal_get_form('itg_widget_keycandidate_form')); }?>
   <?php if ($attachment_before): ?>

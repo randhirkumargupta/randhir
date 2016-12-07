@@ -15,6 +15,7 @@ $budget_message_flag = $data['budget_message_flag'];
 $budget_message_front_flag = $data['budget_message_front_flag'];
 $budget_social_message_flag = $data['budget_social_message_flag'];
 $admin_user = $data['admin_user'];
+$budget_year = $data['budget_year'];
 ?>
 
 <style>
@@ -67,6 +68,7 @@ $admin_user = $data['admin_user'];
                     ?>      
                     <div class="budget-predictor-block">
                         <div class="budget-predictor-social-share">
+                            <div><?php print 'SHARE YOUR PREDICTION'; ?></div>
                             <ul>
                                 <li><a href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
                                 <li><div id="fb-root"></div><a class="facebook" href="javascript:void(0)" onclick="badget_fb_share('<?php print $actual_link; ?>', '<?php print $budget_title; ?>', '<?php print $budget_social_message; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
@@ -78,8 +80,8 @@ $admin_user = $data['admin_user'];
   <?php } ?>
               </ul>
 
-              <?php if (empty($file_name)) { ?>
-                <button class="btn btn-save" type="button" onclick="captureCurrentDiv()">Submit</button>
+              <?php if (empty($file_name) && empty($budget_message_flag)) { ?>
+                <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $budget_year; ?>)"><?php print t('Submit'); ?></button>
                 <?php
               }
             }
