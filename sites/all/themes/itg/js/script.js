@@ -16,17 +16,7 @@
 // To understand behaviors, see https://drupal.org/node/756722#behaviors
     Drupal.behaviors.my_custom_behavior = {
         attach: function(context, settings) {
-            var getmsgsaves = jQuery('.saved-photogallery').text();
-
-            if (getmsgsaves != "")
-            {
-                jQuery('.saved-photogallery').remove();
-                // jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
-                jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
-                setTimeout(function() {
-                    jQuery('.saved-photogallery').remove();
-                }, 3000);
-            }
+            
             jQuery('.add-more-block-front').live('click', function() {
                 var section_ids = "";
                 var elementobj = jQuery(this);
@@ -365,7 +355,17 @@ jQuery(window).load(function() {
 });
 
 jQuery(document).ready(function() {
+var getmsgsaves = jQuery('.saved-photogallery').text();
 
+            if (getmsgsaves != "")
+            {
+                jQuery('.saved-photogallery').remove();
+                // jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
+                jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+                setTimeout(function() {
+                    jQuery('.saved-photogallery').remove();
+                }, 3000);
+            }
     jQuery('#map-state').change(function() {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
