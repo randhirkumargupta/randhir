@@ -2123,7 +2123,7 @@ img{
             }
         }           
     }
-  .right-side{
+  .right-side{      
     .itg-325{
       .droppable{
         height: 325px;
@@ -2139,6 +2139,11 @@ img{
         height: 460px;
       }
     }
+    .key_candidate_extra_block{
+       .droppable{
+        height: 375px;
+      }   
+      }
     .ad-widget{
         border: none;
     }
@@ -2146,6 +2151,13 @@ img{
         margin-top: 103px;
         padding-bottom: 0;
         margin-bottom: 90px;
+    }
+    .ads-after-two{
+        .election-topadd{
+            .ad-widget{
+                margin-top: 15px;
+            }
+        }
     }
   }
   .itg-listing {
