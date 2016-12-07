@@ -68,6 +68,7 @@ $budget_year = $data['budget_year'];
                     ?>      
                     <div class="budget-predictor-block">
                         <div class="budget-predictor-social-share">
+                            <div><?php print 'SHARE YOUR PREDICTION'; ?></div>
                             <ul>
                                 <li><a href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
                                 <li><div id="fb-root"></div><a class="facebook" href="javascript:void(0)" onclick="badget_fb_share('<?php print $actual_link; ?>', '<?php print $budget_title; ?>', '<?php print $budget_social_message; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
@@ -79,7 +80,7 @@ $budget_year = $data['budget_year'];
   <?php } ?>
               </ul>
 
-              <?php if (empty($file_name)) { ?>
+              <?php if (empty($file_name) && empty($budget_message_flag)) { ?>
                 <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $budget_year; ?>)"><?php print t('Submit'); ?></button>
                 <?php
               }
