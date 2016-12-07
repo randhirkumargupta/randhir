@@ -217,6 +217,7 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
         }
     }
 }
+
 /**
  * Funtion used to delete node combination form itg_widget_order table.
  * 
@@ -225,7 +226,7 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
  * @param int $cat_tid
  * @param int $nid
  */
-function move_node_from_key_candidate_widget($widget_name, $cat_tid,$state, $nid) {
+function move_node_from_key_candidate_widget($widget_name, $cat_tid, $state, $nid) {
     if (!empty($widget_name) && !empty($nid)) {
         $num = db_delete('itg_widget_order')
                 ->condition('nid', $nid)
@@ -1132,6 +1133,23 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
             $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
             $form['#validate'][] = 'custom_section_wise_validate';
+            $states_neame = get_all_state();
+            $form['state_val'] = array(
+                '#type' => 'select',
+                '#multiple' => TRUE,
+                '#options' => $states_neame,
+            );
+            $form['state_val']['#prefix'] = '<div class=""style="display:none">';
+            $form['state_val']['#suffix'] = '</div>';
+
+            $op = getsaction_list();
+
+            $form['cat_id'] = array(
+                '#type' => 'select',
+                '#options' => $op,
+            );
+            $form['cat_id']['#prefix'] = '<div class=""style="display:none">';
+            $form['cat_id']['#suffix'] = '</div>';
             break;
         case 'views-exposed-form-key-candidate-special-key-candidate-widget-list':
             $form['title']['#attributes']['placeholder'] = t('Content Title');
@@ -2573,11 +2591,11 @@ function get_rhs_block_display_condtion($delta = '') {
  */
 function insert_all_node_in_widegt_table() {
     try {
-    db_query('alter table itg_widget_order add column state INT NULL after extra')->execute();
-    db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
-  } catch (Exception $ex) {
-    drupal_set_message($ex->getMessage());
-  }
+        db_query('alter table itg_widget_order add column state INT NULL after extra')->execute();
+        db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
+    } catch (Exception $ex) {
+        drupal_set_message($ex->getMessage());
+    }
 
 
 //    $nodes = db_select('node', 'n')

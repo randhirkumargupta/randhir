@@ -30,7 +30,7 @@ function save_key_candidate_data($auto_review_content) {
                     ->condition('widget', $widget_name)
                     ->condition('nid', $node)
                     ->condition('cat_id',$cat_id)
-                    ->condition('state',$key)
+                    ->condition('state',$val)
                     ->execute();
                         $max_weight=get_max_weight_for_special($widget_name);
 
@@ -40,7 +40,7 @@ function save_key_candidate_data($auto_review_content) {
                         'widget' => $widget_name,
                         'cat_id' => $cat_id,
                         'content_type' => $node_load_data->type,
-                        'state' => $key,
+                        'state' => $val,
                         'weight' => ++$max_weight,
                     ))
                     ->execute();
