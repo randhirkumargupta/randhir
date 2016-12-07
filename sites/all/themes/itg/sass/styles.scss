@@ -6065,6 +6065,28 @@ footer{
                 display: block;
             }
         }
+        .ask-user-detail{
+            h4{
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+        .section-user-details{
+            overflow: hidden;
+            margin-bottom: 20px;
+            img{
+                float: right;
+                border: 2px solid #ddd;
+                border-radius: 100%;
+                width: 60px;
+                height: 60px;
+            }
+            .section-user-name{
+                font-size: 14px;
+                font-weight: 700;
+                color: #585858;
+            }
+        }
     }
 }
 /*CSS end for education page*/
@@ -6863,7 +6885,7 @@ input[type="radio"]:checked + label:after{
             }
         }           
     }
-  .right-side{
+  .right-side{      
     .itg-325{
       .droppable{
         height: 325px;
@@ -6886,6 +6908,11 @@ input[type="radio"]:checked + label:after{
         height: 460px;
       }
     }
+    .key_candidate_extra_block{
+       .droppable{
+        height: 375px;
+      }   
+      }
     .ad-widget{
         border: none;
     }
@@ -6893,6 +6920,13 @@ input[type="radio"]:checked + label:after{
         margin-top: 103px;
         padding-bottom: 0;
         margin-bottom: 90px;
+    }
+    .ads-after-two{
+        .election-topadd{
+            .ad-widget{
+                margin-top: 15px;
+            }
+        }
     }
   }
   .itg-listing {
@@ -7695,23 +7729,24 @@ input[type="radio"]:checked + label:after{
                 }
             }            
             .form-submit{                
-                    width: 20%;
-    margin-top: 15px;
-    background: #434343;
-    border: none;
-    height: 32px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 18px;
-    margin-left: 15px;
-        display: inline-block;
-    vertical-align: bottom;
+                width: 20%;
+                margin-top: 15px;
+                background: #434343;
+                border: none;
+                height: 32px;
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+                margin-bottom: 18px;
+                margin-left: 15px;
+                display: inline-block;
+                vertical-align: bottom;
             }
             .captcha{
                 display: inline-block;
                 vertical-align: bottom;
                 width: 50%;
+                margin-top: 10px;
             }
         } 
         .expert-question{
@@ -7948,7 +7983,9 @@ input[type="radio"]:checked + label:after{
             margin: 0;
             padding: 0;            
         }
-        #itg-custom-ask-an-expert-form{                   
+        #itg-custom-ask-an-expert-form{     
+            background: #f5f5f5;
+            padding: 15px 15px 15px 30px;            
             @include clearfix;
             input[type="text"]{                
                 width: 100%;

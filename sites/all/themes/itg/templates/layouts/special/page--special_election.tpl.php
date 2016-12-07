@@ -363,8 +363,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                     </div>    
                     <div class="col-md-4 col-sm-4 col-sx-12 right-side">        
-                      <?php $adsclass="";if(count($graphdata)>2){
+                      <?php $adsclass="";$key_candidate_extra_block ="";
+                      if(count($graphdata)>2){
                           $adsclass='ads-after-two';
+                          $key_candidate_extra_block='key_candidate_extra_block';
                       }?>
                         <div class="<?php echo $adsclass;?>">
                             <div class="itg-widget election-topadd">
@@ -374,7 +376,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                             </div>
                         </div> 
                
-                        <div class="itg-325 mt-50">
+                        <div class="itg-325 mt-50 <?php echo $key_candidate_extra_block; ?>">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
                                     <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name']; ?>">
