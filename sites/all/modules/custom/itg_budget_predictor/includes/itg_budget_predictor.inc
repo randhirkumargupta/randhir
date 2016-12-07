@@ -702,7 +702,8 @@ function itg_budget_download_excel() {
   if ($timestamp) {
     $query->where('YEAR(FROM_UNIXTIME(p.timestamp)) = :timestamp', array(':timestamp' => $timestamp));
   }
-  $query->fields('p', array('user_id'))->groupBy('p.user_id');
+  $query->fields('p', array('user_id'));
+  $query->condition('p.status', 1, '=')->groupBy('p.user_id');
   # execute the query
   $result = $query->execute()->fetchAll();
   $name = date('d-m-y') . '-budget-usermail-list.xls';
