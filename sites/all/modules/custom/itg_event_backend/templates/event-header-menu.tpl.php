@@ -13,8 +13,8 @@ $event_config_programme = $node->field_config_programme[LANGUAGE_NONE][0]['value
 $event_config_speakers = $node->field_config_speakers[LANGUAGE_NONE][0]['value'];
 $event_config_sponsors = $node->field_config_sponsors[LANGUAGE_NONE][0]['value'];
 $event_config_flashback = $node->field_config_flashback[LANGUAGE_NONE][0]['value'];
-$event_config_photo = $node->field_config_photo[LANGUAGE_NONE][0]['value'];
-$event_config_video = $node->field_config_video[LANGUAGE_NONE][0]['value'];
+//$event_config_photo = $node->field_config_photo[LANGUAGE_NONE][0]['value'];
+//$event_config_video = $node->field_config_video[LANGUAGE_NONE][0]['value'];
 $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] : '#f7ee23';
 ?>
 <div id="block-menu-menu-event-menu" class="container event-header-menu-container">
@@ -40,18 +40,18 @@ $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $no
               print '<li>'.l('Sponsors', 'sponsors', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
 
-            if ($event_config_photo) {
-              print '<li>'.l('Photo', '#', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
-            }
-
-            if ($event_config_video) {
-              print '<li>'.l('Video', '#', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
-            }
+//            if ($event_config_photo) {
+//              print '<li>'.l('Photo', '#', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+//            }
+//
+//            if ($event_config_video) {
+//              print '<li>'.l('Video', '#', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+//            }
 
             if ($event_config_flashback) {
               $flash_old_event = itg_event_backend_flashback($node->nid);
               $current_event_path = itg_event_backend_current_event_domain($node->nid);
-              print '<li>'.l('Fashback', $current_event_path, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
+              print '<li>'.l('Flashback', '#', array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
             }
 
           ?>

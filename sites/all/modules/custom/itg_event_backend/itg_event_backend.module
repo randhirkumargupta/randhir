@@ -95,6 +95,8 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
             '#weight' => 20,
         );
     }
+    $form['field_config_photo']['#access'] = FALSE;
+    $form['field_config_video']['#access'] = FALSE;
 }
 
 /**
