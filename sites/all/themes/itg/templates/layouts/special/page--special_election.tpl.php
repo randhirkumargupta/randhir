@@ -29,7 +29,7 @@ if (!empty($device[0])) {
     }
 }
 
-if($highlights['node_data']->field_story_expires[LANGUAGE_NONE][0]['value']!='yes')
+if($highlights['node_data']->field_story_expires[LANGUAGE_NONE][0]['value']!='Yes')
 {
  $live_url='';   
 }
