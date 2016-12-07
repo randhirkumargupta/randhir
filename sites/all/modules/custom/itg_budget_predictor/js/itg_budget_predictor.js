@@ -89,13 +89,13 @@ function badget_google_plus_share(url, title, img) {
     return false;
 }
 
-function captureCurrentDiv()
+function captureCurrentDiv(year)
 {
     html2canvas([document.getElementById('main-container-budget')], {
         onrendered: function (canvas)
         {
             var img = canvas.toDataURL()
-            jQuery.post("/budget-save", {data: img}, function (file) {
+            jQuery.post("/budget-save/"+year, {data: img}, function (file) {
                 window.location.reload();
             });
         }
