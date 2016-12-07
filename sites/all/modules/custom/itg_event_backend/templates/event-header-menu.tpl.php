@@ -50,8 +50,9 @@ $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $no
 
             if ($event_config_flashback) {
               $flash_old_event = itg_event_backend_flashback($node->nid);
-              $current_event_path = itg_event_backend_current_event_domain($node->nid);
-              print '<li>'.l('Flashback', '#', array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
+              //$current_event_path = itg_event_backend_current_event_domain($node->nid);
+              //print '<li>'.l('Flashback', $current_event_path, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
+              print '<li><a href="#" style="color:'.$menu_font_color.'">Flashback</a>'.$flash_old_event.'</li>';
             }
 
           ?>
