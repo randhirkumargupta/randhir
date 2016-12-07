@@ -95,8 +95,9 @@
             <div class="movie-reviewer movie-reviewer-other"></div>
         </div>
         <!--</div>-->
-        <div class="bottom-movie-desc"><?php print $bottom_desc; ?></div>
+       
     </div>
+     <div class="bottom-movie-desc"><?php print $bottom_desc; ?></div>
     <div class="other-reviews">
         <!-- Print reviews -->
         <?php $average_ratings = 0; ?>
