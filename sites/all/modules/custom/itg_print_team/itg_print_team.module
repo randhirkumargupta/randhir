@@ -814,6 +814,9 @@ function itg_print_team_markascomplete_custom_submit($form, &$form_state) {
           field_attach_update('node', $node_details);
           drupal_set_message(t($node_details->title . ' has been successfully marked as complete.'), 'status');
         }
+        else {
+          drupal_set_message(t($node_details->title . ' has been already marked as complete.'), 'error');
+        }
       }
     }
   }
