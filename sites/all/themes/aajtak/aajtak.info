@@ -75,7 +75,7 @@ stylesheets[all][] = css/media.css
 
 scripts[] = js/velocity.min.js
 scripts[] = js/slick.js
-;scripts[] = js/script.js
+scripts[] = js/script.js
 
 
 

@@ -154,25 +154,7 @@ $root-font-size: 16px;
         }
 }
 
-/* Story Tag mixins */
-@mixin story-tag($height, $line-height){
-    @include pos(relative,0px,null,null,0px);
-    background: $red-bg;
-    height: $height;
-    line-height: $line-height;
-    padding: 0 7px;
-    text-transform: uppercase;
-    color:$white-color;
-    @include itg-font($itg-roboto);
-    z-index: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-    a{
-        color:#fff;
-    }
-}
+
 
 /* List before icon */
 @mixin before-icon-list($width, $height, $top, $left, $background-color, $border-radius) {
