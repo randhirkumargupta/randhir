@@ -254,8 +254,17 @@
 .aajtak-slide .data-holder {
   padding-top: 20px;
 }
+/* line 258, ../sass/layout-manager.scss */
+.aajtak-slide .widget-title {
+  font-size: 28px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 28px;
+  color: #000;
+  padding: 0 15px;
+}
 
-/* line 260, ../sass/layout-manager.scss */
+/* line 265, ../sass/layout-manager.scss */
 .aajtak-stack .tile {
   text-align: center;
   position: relative;
@@ -320,11 +329,11 @@
   left: -4px;
   top: 0;
 }
-/* line 263, ../sass/layout-manager.scss */
+/* line 268, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder, .aajtak-stack .widget-container {
   height: 100%;
 }
-/* line 266, ../sass/layout-manager.scss */
+/* line 271, ../sass/layout-manager.scss */
 .aajtak-stack .widget-title {
   font-size: 28px;
   font-size: 1.75rem;
@@ -333,16 +342,16 @@
   color: #000;
   padding: 20px 45px 25px;
 }
-/* line 271, ../sass/layout-manager.scss */
+/* line 276, ../sass/layout-manager.scss */
 .aajtak-stack .stack {
   width: 262px;
   height: 268px;
 }
-/* line 275, ../sass/layout-manager.scss */
+/* line 280, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder {
   position: relative;
 }
-/* line 277, ../sass/layout-manager.scss */
+/* line 282, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls {
   position: absolute;
   right: 10px;
@@ -350,7 +359,7 @@
   width: 100px;
   margin: 0;
 }
-/* line 283, ../sass/layout-manager.scss */
+/* line 288, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button {
   background-color: transparent;
   width: 30px;
@@ -361,11 +370,11 @@
   padding: 0;
   margin: 0;
 }
-/* line 292, ../sass/layout-manager.scss */
+/* line 297, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--reject {
   margin-right: 10px;
 }
-/* line 295, ../sass/layout-manager.scss */
+/* line 300, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--reject::before {
   border-color: transparent #eeeded transparent transparent;
   border-image: none;
@@ -382,7 +391,7 @@
   pointer-events: auto;
   margin: 0;
 }
-/* line 311, ../sass/layout-manager.scss */
+/* line 316, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--reject::after {
   border-color: transparent #000 transparent transparent;
   border-image: none;
@@ -399,7 +408,7 @@
   pointer-events: auto;
   margin: 0;
 }
-/* line 327, ../sass/layout-manager.scss */
+/* line 332, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--accept::before {
   border-color: transparent transparent transparent #eeeded;
   border-image: none;
@@ -416,7 +425,7 @@
   pointer-events: auto;
   margin: 0;
 }
-/* line 343, ../sass/layout-manager.scss */
+/* line 348, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--accept::after {
   border-color: transparent transparent transparent #000;
   border-image: none;
