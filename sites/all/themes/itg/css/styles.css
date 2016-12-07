@@ -7550,6 +7550,26 @@ footer .footer-copyright {
   margin-bottom: 20px;
   display: block;
 }
+.education-layout-page .ask-question .ask-user-detail h4 {
+  display: block;
+  margin-bottom: 10px;
+}
+.education-layout-page .ask-question .section-user-details {
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.education-layout-page .ask-question .section-user-details img {
+  float: right;
+  border: 2px solid #ddd;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+}
+.education-layout-page .ask-question .section-user-details .section-user-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #585858;
+}
 
 /*CSS end for education page*/
 /*CSS start sport home page*/
@@ -9241,6 +9261,7 @@ footer .footer-copyright {
   display: inline-block;
   vertical-align: bottom;
   width: 50%;
+  margin-top: 10px;
 }
 #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config .expert-question {
   position: relative;
