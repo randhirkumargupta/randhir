@@ -232,7 +232,7 @@ if (!empty($content)):
                               $expertDetails .= '<div class="story-expert-opinion"><h4>' . t('Expert Opinion') . '</h4>';
                               $expertDetails .= '<div class="expert-detail row"><div class="left-side col-md-8"><p class="name">' . $node->field_story_expert_name['und'][0]['value'] . '</p>';
                               if (!empty($node->field_story_expertise)) {
-                                $expertDetails .= '<p class="name">' . $node->field_story_expertise[LANGUAGE_NONE][0]['value'] . '</p>';
+                                $expertDetails .= '<p>' . $node->field_story_expertise[LANGUAGE_NONE][0]['value'] . '</p>';
                               }
                               $expertDetails .= '</div>';
                             }
