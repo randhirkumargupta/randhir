@@ -214,6 +214,8 @@ input[type="text"], select, input[type="password"]{
 /*start header css*/
 header{
     margin-bottom: 30px;
+    position: relative;
+    z-index: 10;
 }
 #block-itg-layout-manager-header-block{    
     padding-top: 20px;
@@ -6852,12 +6854,23 @@ input[type="radio"]:checked + label:after{
 .election-page{  
     h1{
         margin-top:60px;
+        position: relative;
+        z-index: 10;
         .disc-share{
             a{
                 font-size: 20px;
                 color: #b6b6b6;
             }
         }
+    }
+    .election-graph-3{
+        margin-top: -50px;
+    }
+    .election-graph-4{
+        margin-top: -50px;
+    }
+    .election-graph-5{
+        margin-top: -150px;
     }
     .left-side{
         .itg-415-layout{
