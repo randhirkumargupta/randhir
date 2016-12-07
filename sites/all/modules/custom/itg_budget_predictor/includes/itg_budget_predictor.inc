@@ -114,6 +114,7 @@ function itg_budget_predictor_get_taxonomy() {
     $budget_data['budget_social_message'] = $check_budget['budget_social_message'];
     $budget_data['budget_message_flag'] = ($check_budget_status) ? 1 : '';
     $budget_data['budget_message_front_flag'] = ($check_budget_status_front_user) ? 1 : '';
+    $budget_data['budget_year'] = $timestamp;
   }
   else {
     $budget_data['exist'] = '';
@@ -601,27 +602,28 @@ function itg_manage_budget_submit($form, &$form_state) {
  */
 function itg_budget_crop_image() {
   global $user;
-  $timestamp = date('Y');
-  $data = $_POST['data'];
-  $uniqid = uniqid();
-  $file = $uniqid . '.png';
-  $budget_dir = "public://budget/";
+  $timestamp = arg(1);
+  if (isset($_POST['data'])) {
+    $data = $_POST['data'];
+    $uniqid = uniqid();
+    $file = $uniqid . '.png';
+    $budget_dir = "public://budget/";
 
-  if (!file_exists($budget_dir)) {
-    mkdir($budget_dir, 0777, TRUE);
+    if (!file_exists($budget_dir)) {
+      mkdir($budget_dir, 0777, TRUE);
+    }
+
+    $file_name = 'budget/' . $file;
+    $uri = substr($data, strpos($data, ",") + 1);
+    // save to file
+    file_put_contents('public://budget/' . $file, base64_decode($uri));
+    $query = db_update('itg_budget_predictor');
+    $query->fields(array('file_name' => $file_name));
+    $query->where('YEAR(FROM_UNIXTIME(timestamp)) = :timestamp', array(':timestamp' => $timestamp));
+    $query->condition('user_id', $user->uid, '=');
+    # execute the query
+    $query->execute();
   }
-
-  $file_name = 'budget/' . $file;
-  $uri = substr($data, strpos($data, ",") + 1);
-  // save to file
-  file_put_contents('public://budget/' . $file, base64_decode($uri));
-  $query = db_update('itg_budget_predictor');
-  $query->fields(array('file_name' => $file_name));
-  $query->where('YEAR(FROM_UNIXTIME(timestamp)) = :timestamp', array(':timestamp' => $timestamp));
-  $query->condition('user_id', $user->uid, '=');
-  # execute the query
-  $query->execute();
-  dpq($query);
 }
 
 /**

@@ -15,6 +15,7 @@ $budget_message_flag = $data['budget_message_flag'];
 $budget_message_front_flag = $data['budget_message_front_flag'];
 $budget_social_message_flag = $data['budget_social_message_flag'];
 $admin_user = $data['admin_user'];
+$budget_year = $data['budget_year'];
 ?>
 
 <style>
@@ -79,7 +80,7 @@ $admin_user = $data['admin_user'];
               </ul>
 
               <?php if (empty($file_name)) { ?>
-                <button class="btn btn-save" type="button" onclick="captureCurrentDiv()">Submit</button>
+                <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $budget_year; ?>)"><?php print t('Submit'); ?></button>
                 <?php
               }
             }
