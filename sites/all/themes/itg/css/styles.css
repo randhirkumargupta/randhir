@@ -9579,6 +9579,8 @@ footer .footer-copyright {
   padding: 0;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form, .ask-question-sidebar #itg-custom-ask-an-expert-form {
+  background: #f5f5f5;
+  padding: 15px 15px 15px 30px;
   zoom: 1;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:before, #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:after, .ask-question-sidebar #itg-custom-ask-an-expert-form:before, .ask-question-sidebar #itg-custom-ask-an-expert-form:after {
