@@ -110,12 +110,19 @@ function itg_widgets_custom_variables() {
     '#default_value' => variable_get('watch_right_now_block_condition'),
   );
 
+  $form['apache_solr_sites_prefix_values'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Apache solr sites prefix and has values'),
+    '#description' => t("Ex: dev|eoshds,stage|asdasd"),
+    '#default_value' => variable_get('apache_solr_sites_prefix_values'),
+  );
+
   $form['top_takes_block_condition'] = array(
     '#type' => 'textarea',
     '#title' => t('top takes block condition for arg(1)'),
     '#default_value' => variable_get('top_takes_block_condition'),
   );
-   $form['tid_politician'] = array(
+  $form['tid_politician'] = array(
     '#type' => 'textarea',
     '#title' => t('tid of politician'),
     '#default_value' => variable_get('tid_politician'),
@@ -960,6 +967,17 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
+      // Activate live tv button
+      $form['#prefix'] = '
+          <div class="switch-field">
+           <div class="switch-title">Big Story As Live Tv?</div>
+           <input type="radio" id="switch_left" name="live_tv_switch_2" value="yes" checked/>
+           <label for="switch_left">Activated</label>
+           <input type="radio" id="switch_right" name="live_tv_switch_2" value="no" />
+           <label for="switch_right">Not Activated</label>
+         </div>';
+      //drupal_add_css('.switch-title{margin-bottom:6px}.switch-field input{display:none}.switch-field label{float:left;display:inline-block;width:60px;background-color:#33a26d;color:#FFFFFF;font-size:14px;font-weight:400;text-align:center;text-shadow:none;padding:6px 14px;border:1px solid rgba(0,0,0,0.2);-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.3),0 1px rgba(255,255,255,0.1);box-shadow:inset 0 1px 3px rgba(0,0,0,0.3),0 1px rgba(255,255,255,0.1);-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;transition:all .1s ease-in-out}.switch-field label:hover{cursor:pointer}.switch-field input:checked + label{background-color:#1fb5ad;-webkit-box-shadow:none;box-shadow:none}.switch-field label:first-of-type{border-radius:4px 0 0 4px}.switch-field label:last-of-type{border-radius:0 4px 4px 0}', 'inline');
       break;
     case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
@@ -1154,10 +1172,25 @@ function itg_widget_views_api() {
  */
 function itg_widget_views_query_alter(&$view, &$query) {
   global $user;
-  if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
-    unset($query->table_queue['field_data_field_type']);
-    unset($query->tables['node']['field_data_field_type']);
-    unset($query->where[1]['conditions'][2]);
+  if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
+
+    foreach ($query->table_queue as $queue => $queue_value) {
+      if ($queue == 'field_data_field_type') {
+        unset($query->table_queue['field_data_field_type']);
+      }
+    }
+
+    foreach ($query->tables['node'] as $queue2 => $queue_value2) {
+      if ($queue2 == 'field_data_field_type') {
+        unset($query->tables['node']['field_data_field_type']);
+      }
+    }
+
+    foreach ($query->where[1]['conditions'] as $conditions_key => $conditions) {
+      if ($conditions['field'] == 'field_data_field_type.field_type_value') {
+        unset($query->where[1]['conditions'][$conditions_key]);
+      }
+    }
   }
   if (($view->name == 'programmes' || $view->name == 'live_tv_programs') && ($view->current_display == 'page' || $view->current_display == 'rhs_programmes')) {
     $program_cat_value = variable_get('program_category_id_for_programmes');
@@ -1313,12 +1346,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
       $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
     }
   }
-   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
+  if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
     if (!empty($_GET['nid']) && empty($_GET['title'])) {
-       
+
       $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
     } if (empty($_GET['nid']) && !empty($_GET['title'])) {
-       
+
       $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
     }
     else if (!empty($_GET['nid']) && !empty($_GET['title'])) {
@@ -2434,15 +2467,21 @@ function get_rhs_block_display_condtion($delta = '') {
  *
  */
 function insert_all_node_in_widegt_table() {
-
-  $nodes = db_select('node', 'n')
-          ->fields('n', array('nid'))
-          ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
-          ->execute()->fetchAll(PDO::FETCH_ASSOC);
-  foreach ($nodes as $data) {
-    $node = node_load($data['nid']);
-    itg_widget_node_insert($node);
+  try {
+    db_query('alter table itg_widget_order add column state INT NULL after extra')->execute();
+    db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
   }
+//
+//  $nodes = db_select('node', 'n')
+//          ->fields('n', array('nid'))
+//          ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
+//          ->execute()->fetchAll(PDO::FETCH_ASSOC);
+//  foreach ($nodes as $data) {
+//    $node = node_load($data['nid']);
+//    itg_widget_node_insert($node);
+//  }
 }
 
 /**
@@ -2739,4 +2778,34 @@ function get_feature_nid_in_sosorry() {
       ->condition('iwo.extra', 'feature')
       ->condition('iwo.widget', 'so_sorry_widget');
   return $query->execute()->fetchField();
+}
+
+/**
+ * Returns hash value crossponding to sites. Which is managing from custom varibales.
+ * 
+ * @param string $site_prefix
+ *  site_prefix is like "qa" form qa_1234
+ * 
+ * @return string
+ */
+function itg_widget_get_site_hash_from_solr($site_prefix) {
+  $solr_variable = variable_get('apache_solr_sites_prefix_values');
+  $site_hash = array();
+  if (!empty($solr_variable)) {
+    $hash_site_string_array = explode(",", $solr_variable);
+    foreach ($hash_site_string_array as $value) {
+      $prefix_with_values = explode("|", $value);
+      $site_hash[strtolower(trim($prefix_with_values[0]))] = trim($prefix_with_values[1]);
+    }
+    return isset($site_hash[$site_prefix]) ? $site_hash[strtolower($site_prefix)] : $site_hash['dev'];
+  }
+}
+
+function itg_get_link_from_hash_and_entity_solr_search($entity_id, $hash) {
+  $solr = apachesolr_get_solr();
+  $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id and hash: $hash"));
+  $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+  $query->addParam('qf', 'entity_id'); // Only search in title
+  $resp_search = $query->search();
+  return $resp_search->response->docs[0];
 }

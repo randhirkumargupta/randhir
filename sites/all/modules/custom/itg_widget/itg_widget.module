@@ -102,6 +102,20 @@ function itg_widget_menu() {
     'access arguments' => array('access content'),
   );
 
+  $items['big-story-video-gallery/%'] = array(
+    'page callback' => 'itg_get_video_display_for_big_story',
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+
+  $items['big-story-live-tv-flag/%'] = array(
+    'page callback' => 'itg_widget_big_story_live_tv_flag',
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+
   $items['test_function_callback'] = array(
     'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
     'type' => MENU_CALLBACK,
@@ -263,7 +277,13 @@ function itg_widget_block_view($delta = '') {
       //$block['subject'] = t('');
       $info['widget'] = 'big_story_format_widget';
       $data = itg_widget_big_story_block_data($info);
-      $block['content'] = theme("widget_big_story_format", array("data" => $data));
+      if (isset($data['node_data']->is_live_tv_activeted) && $data['node_data']->is_live_tv_activeted == 1) {
+        $block['content'] = itg_live_tv_page_video();
+      }
+      else {
+        $block['content'] = theme("widget_big_story_format", array("data" => $data));
+      }
+
       break;
     // section ordering reordering widget case
     case 'section_wise_order':
@@ -889,4 +909,91 @@ function itg_widget_remove_unpublised_node() {
     $delete_query = "DELETE from {itg_widget_order} where nid = '" . $nid . "' and widget in ($strg)";
     db_query($delete_query);
   }
+}
+
+/**
+ * Get video with player
+ * @param int $nid
+ * @return string $content
+ */
+function itg_get_video_display_for_big_story($nid) {
+  $node = node_load($nid);
+  if (module_exists('itg_videogallery')) {
+    $fid = $node->field_upload_video['und'][0]['fid'];
+    $vid = itg_videogallery_get_videoid($fid);
+  }
+  $content = '<span id="close-big-story"><a href="#">X</a></span><iframe frameborder="0"
+            src="https://www.dailymotion.com/embed/video/' . $vid . '?autoplay=0&mute=1&ui-start-screen-info"
+            allowfullscreen></iframe>';
+  print $content;
+}
+
+/**
+ * Function responsible for big story live tv activation or deactivation
+ * 
+ * @param type $flag
+ * 
+ */
+function itg_widget_big_story_live_tv_flag($flag) {
+  $action = FALSE;
+  if ($flag == 'yes' || $flag == 'no') {
+    $action = TRUE;
+    if ($action) {
+      $extra_field_value = itg_big_story_get_extra_value();
+      // Run db query if live tv is not as big story
+      if ($flag == 'yes' && $extra_field_value != "big_story_live_tv_active") {
+        itg_widget_delete_big_story_live_tv();
+        try {
+          db_insert('itg_widget_order')
+              ->fields(array(
+                'widget' => 'big_story_format_widget',
+                'extra' => 'big_story_live_tv_active',
+                'nid' => 0,
+              ))->execute();
+          print "success";
+        } catch (Exception $ex) {
+          print "error";
+        }
+      }
+      elseif ($flag == 'yes' && $extra_field_value == "big_story_live_tv_active") {
+        print "already_live_tv";
+      }
+      elseif ($flag == 'no' && $extra_field_value == 'big_story_live_tv_active') {
+        $is_deleted_liv_tv = itg_widget_delete_big_story_live_tv();
+        if ($is_deleted_liv_tv) {
+          print "deleted";
+        }
+        else {
+          print "notfound";
+        }
+      }
+    }
+  }
+  else {
+    return drupal_access_denied();
+  }
+}
+
+function itg_widget_delete_big_story_live_tv() {
+  try {
+    $number_deleted = db_delete('itg_widget_order')
+        ->condition('widget', 'big_story_format_widget')
+        ->execute();
+    if ($number_deleted) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  } catch (Exception $ex) {
+    return $ex->getMessage();
+  }
+}
+
+function itg_big_story_get_extra_value() {
+  $select_query = db_select('itg_widget_order', 'iwo')
+          ->fields('iwo', array('extra'))
+          ->condition('widget', 'big_story_format_widget')
+          ->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $select_query[0]['extra'];
 }
