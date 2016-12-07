@@ -8352,6 +8352,9 @@ footer .footer-copyright {
 .election-page .right-side .itg-460 .droppable {
   height: 460px;
 }
+.election-page .right-side .key_candidate_extra_block .droppable {
+  height: 375px;
+}
 .election-page .right-side .ad-widget {
   border: none;
 }
@@ -8359,6 +8362,9 @@ footer .footer-copyright {
   margin-top: 103px;
   padding-bottom: 0;
   margin-bottom: 90px;
+}
+.election-page .right-side .ads-after-two .election-topadd .ad-widget {
+  margin-top: 15px;
 }
 .election-page .itg-listing {
   border: none;
