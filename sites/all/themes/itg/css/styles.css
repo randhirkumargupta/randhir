@@ -315,6 +315,8 @@ input[type="text"], select, input[type="password"] {
 /*start header css*/
 header {
   margin-bottom: 30px;
+  position: relative;
+  z-index: 10;
 }
 
 #block-itg-layout-manager-header-block {
@@ -2559,6 +2561,7 @@ footer .footer-copyright {
   font-size: 1rem;
   line-height: 22px;
   font-family: "Roboto", sans-serif;
+  word-wrap: break-word;
 }
 .buzz-feedback .buzz-section .buzz-img {
   position: relative;
@@ -7456,6 +7459,9 @@ footer .footer-copyright {
   margin-bottom: 20px;
   margin-top: 10px;
 }
+.education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] #question p.chtr-limit {
+  margin-bottom: 10px;
+}
 .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] #askname {
   zoom: 1;
 }
@@ -7503,13 +7509,13 @@ footer .footer-copyright {
   margin-bottom: 10px;
 }
 .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response label {
-  width: 40%;
+  width: 47%;
   float: left;
 }
 .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"] {
-  width: 60%;
+  width: 47%;
   font-family: roboto-slab;
-  float: left;
+  float: right;
 }
 .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response .description {
   display: none;
@@ -8313,10 +8319,21 @@ footer .footer-copyright {
 /* CSS For Election Page */
 .election-page h1 {
   margin-top: 60px;
+  position: relative;
+  z-index: 10;
 }
 .election-page h1 .disc-share a {
   font-size: 20px;
   color: #b6b6b6;
+}
+.election-page .election-graph-3 {
+  margin-top: -50px;
+}
+.election-page .election-graph-4 {
+  margin-top: -50px;
+}
+.election-page .election-graph-5 {
+  margin-top: -150px;
 }
 .election-page .left-side .itg-415-layout .droppable {
   min-height: 415px;
@@ -9578,7 +9595,7 @@ footer .footer-copyright {
   display: block;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block h3 span, .ask-question-sidebar h3 span {
-  padding: 0px 20px 10px 30px;
+  padding: 45px 20px 10px 30px;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block .form-type-textarea, #block-itg-ask-expert-custom-ask-expert-form-block .form-type-textfield, .ask-question-sidebar .form-type-textarea, .ask-question-sidebar .form-type-textfield {
   margin: 0;
@@ -9612,6 +9629,9 @@ footer .footer-copyright {
   font-size: 12px;
   margin-bottom: 20px;
   margin-top: 10px;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #question p.chtr-limit, .ask-question-sidebar #itg-custom-ask-an-expert-form #question p.chtr-limit {
+  margin-bottom: 10px;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname, .ask-question-sidebar #itg-custom-ask-an-expert-form #askname {
   zoom: 1;
@@ -9660,13 +9680,13 @@ footer .footer-copyright {
   margin-bottom: 10px;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form .form-item-captcha-response label, .ask-question-sidebar #itg-custom-ask-an-expert-form .form-item-captcha-response label {
-  width: 40%;
+  width: 52%;
   float: left;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form .form-item-captcha-response input[type="text"], .ask-question-sidebar #itg-custom-ask-an-expert-form .form-item-captcha-response input[type="text"] {
-  width: 60%;
+  width: 47%;
   font-family: roboto-slab;
-  float: left;
+  float: right;
 }
 #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form .form-item-captcha-response .description, .ask-question-sidebar #itg-custom-ask-an-expert-form .form-item-captcha-response .description {
   display: none;
@@ -9706,6 +9726,27 @@ footer .footer-copyright {
   letter-spacing: 0;
   margin-bottom: 20px;
   display: block;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block .section-user-details, .ask-question-sidebar .section-user-details {
+  overflow: hidden;
+  background: #f5f5f5;
+  padding: 15px 15px 0px 30px;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block .section-user-details img, .ask-question-sidebar .section-user-details img {
+  float: right;
+  border: 2px solid #ddd;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block .section-user-details .section-user-name, .ask-question-sidebar .section-user-details .section-user-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #585858;
+}
+#block-itg-ask-expert-custom-ask-expert-form-block .ask-user-detail h4, .ask-question-sidebar .ask-user-detail h4 {
+  background: #f5f5f5;
+  padding: 15px 15px 0px 30px;
 }
 
 /*css End Ask an expret for all page*/

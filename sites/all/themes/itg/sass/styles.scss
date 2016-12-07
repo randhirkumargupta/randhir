@@ -214,6 +214,8 @@ input[type="text"], select, input[type="password"]{
 /*start header css*/
 header{
     margin-bottom: 30px;
+    position: relative;
+    z-index: 10;
 }
 #block-itg-layout-manager-header-block{    
     padding-top: 20px;
@@ -2060,6 +2062,7 @@ footer{
         .buzz-discription{
             @include font(16px,22px); 
             @include itg-font($itg-roboto);
+            word-wrap: break-word;
         }
         .buzz-img{
             @include pos(relative);
@@ -5975,6 +5978,9 @@ footer{
                     font-size: 12px;
                     margin-bottom: 20px;
                     margin-top: 10px;
+                    &.chtr-limit{
+                    margin-bottom: 10px;    
+                    }
                 }
             }
            #askname{
@@ -6016,13 +6022,13 @@ footer{
                 width: 100%;
                 margin-bottom: 10px;
                 label{
-                    width: 40%;
+                    width: 47%;
                     float: left;
                 }
                 input[type="text"]{                
-                    width: 60%;
+                    width: 47%;
                     font-family: roboto-slab;    
-                    float: left;
+                    float: right;
                 }
                 .description{
                     display: none;
@@ -6848,12 +6854,23 @@ input[type="radio"]:checked + label:after{
 .election-page{  
     h1{
         margin-top:60px;
+        position: relative;
+        z-index: 10;
         .disc-share{
             a{
                 font-size: 20px;
                 color: #b6b6b6;
             }
         }
+    }
+    .election-graph-3{
+        margin-top: -50px;
+    }
+    .election-graph-4{
+        margin-top: -50px;
+    }
+    .election-graph-5{
+        margin-top: -150px;
     }
     .left-side{
         .itg-415-layout{
@@ -7976,7 +7993,7 @@ input[type="radio"]:checked + label:after{
             margin-bottom: 10px;
             display: block;
             span{
-                padding: 0px 20px 10px 30px;
+                padding: 45px 20px 10px 30px;
             }
         }
         .form-type-textarea, .form-type-textfield{
@@ -8002,6 +8019,9 @@ input[type="radio"]:checked + label:after{
                     font-size: 12px;
                     margin-bottom: 20px;
                     margin-top: 10px;
+                    &.chtr-limit{
+                        margin-bottom: 10px;
+                    }
                 }
             }
            #askname{
@@ -8043,13 +8063,13 @@ input[type="radio"]:checked + label:after{
                 width: 100%;
                 margin-bottom: 10px;
                 label{
-                    width: 40%;
+                    width: 52%;
                     float: left;
                 }
                 input[type="text"]{                
-                    width: 60%;
+                    width: 47%;
                     font-family: roboto-slab;    
-                    float: left;
+                    float: right;
                 }
                 .description{
                     display: none;
@@ -8091,7 +8111,30 @@ input[type="radio"]:checked + label:after{
                 margin-bottom: 20px;
                 display: block;
             }
-        }        
+        } 
+        .section-user-details{
+            overflow: hidden;            
+            background: #f5f5f5;
+            padding: 15px 15px 0px 30px;            
+            img{
+                float: right;
+                border: 2px solid #ddd;
+                border-radius: 100%;
+                width: 60px;
+                height: 60px;
+            }
+            .section-user-name{
+                font-size: 14px;
+                font-weight: 700;
+                color: #585858;
+            }
+        }
+        .ask-user-detail{
+            h4{
+                background: #f5f5f5;
+                padding: 15px 15px 0px 30px;
+            }
+        }
     }
     /*css End Ask an expret for all page*/
     
