@@ -73,9 +73,15 @@
                 if (external_review != null) {
                     $('.movie-reviewer-other').html('<h3>OTHER REVIEWERS</h3>' + external_review);
                 }
+                else {
+                    $('.movie-reviewer-other').remove();
+                }
                 if (internal_review != null) {
                     $('.our-review').html('<h3>OUR REVIEWERS</h3>' + internal_review);
-                }                
+                }
+                else {
+                    $('.our-review').remove();
+                }
             }
             $('input.rating').hover(function () {
                 $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
