@@ -391,6 +391,8 @@ $form['#validate'][] = 'itg_category_manager_term_validate';
 $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
 }
 }
+if(is_array($form['#term']))
+{
 if ($form['#term']['vocabulary_machine_name'] == 'state_managment') {
 
 unset($form['relations']);
@@ -406,6 +408,7 @@ drupal_add_css(
  )
 );
 //  vertical-tabs-list
+}
 }
 }
 
