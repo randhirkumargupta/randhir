@@ -9563,10 +9563,14 @@ footer .footer-copyright {
   padding: 0px;
 }
 .factoids-slider ul li {
-  padding: 25px;
+  padding: 25px 0;
   font-size: 15px;
   line-height: 24px;
   color: #fff;
+}
+.factoids-slider ul li span {
+  margin: 0 25px;
+  display: block;
 }
 .factoids-slider ul li:nth-child(odd) {
   background: #a00606;

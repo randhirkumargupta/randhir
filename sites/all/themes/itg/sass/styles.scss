@@ -7938,10 +7938,14 @@ input[type="radio"]:checked + label:after{
         background:#a00606;
         padding:0px;
         li{
-            padding:25px;
+            padding:25px 0;
             font-size: 15px;
             line-height: 24px;
-            color:#fff;                   
+            color:#fff;  
+            span{
+                margin: 0 25px;
+                display: block;
+            }
             &:nth-child(odd){
                 background:#a00606;
             }
