@@ -303,10 +303,10 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
             $filename = $file_ids[$i]['filename'];
             $newFileName = substr($filename, 0, (strrpos($filename, ".")));
             //$filed_collection->field_images['und'][0]['fid'] = $file_ids[$i];
-            $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_caption['und'][0]['value'] = $newFileName;
+            //$form_state['field']['field_gallery_image']['und']['entity'][$key]->field_image_caption['und'][0]['value'] = $newFileName;
             $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['fid'] = $file_ids[$i]['fid'];
-            $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['alt'] = $newFileName;
-            $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['title'] = $newFileName;
+            // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['alt'] = $newFileName;
+            // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_images['und'][0]['title'] = $newFileName;
             // $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_gallery_small_image['und'][0]['fid'] = $file_ids[$i]['fid'];   
             if ($file_ids[$i]['filename'] != "") {
                 $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_credit['und'][0]['value'] = $_POST['field_credit_name']['und'][0]['value'];
@@ -421,7 +421,7 @@ function itg_photogallery_byline_photoby($type, $id) {
  * @param Array $form_state
  */
 function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
- 
+
     //Get the Form Id
     if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-3' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-8' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-9' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-7' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-4') {
         //$form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
@@ -429,7 +429,6 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
         $form['title']['#attributes'] = array('placeholder' => t('Title'));
         $form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
         $form['nid']['#attributes'] = array('placeholder' => t('Gallery ID'));
-        
     }
 }
 
@@ -514,9 +513,8 @@ function itg_photogallery_field_widget_form_alter(&$element, &$form_state, $cont
  * @param array $form
  * @return string
  */
-
-function itg_photogallery_image_field_widget_process($element, &$form_state, $form) {  
-  $element['alt']['#attributes']['title'] = 'Alternate text';
-  $element['title']['#attributes']['title'] = 'Title';
-  return $element;
+function itg_photogallery_image_field_widget_process($element, &$form_state, $form) {
+    $element['alt']['#attributes']['title'] = 'Alternate text';
+    $element['title']['#attributes']['title'] = 'Title';
+    return $element;
 }

@@ -11,6 +11,118 @@ function feature_for_reporter_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_reporter_career_graph-field_reporter_earning'.
+  $field_instances['field_collection_item-field_reporter_career_graph-field_reporter_earning'] = array(
+    'bundle' => 'field_reporter_career_graph',
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+        'container' => array(
+          'max_value' => 1000000,
+          'min_value' => 0,
+        ),
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_earning',
+    'label' => 'Earning',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => 1000,
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => 'crore',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'sliderfield',
+      'settings' => array(
+        'sliderfield_settings' => array(
+          'adjust_field_max' => '',
+          'adjust_field_min' => '',
+          'animate' => 1,
+          'display_bubble' => 1,
+          'display_bubble_format' => '%{value}%',
+          'display_ignore_button' => 0,
+          'display_values' => 1,
+          'display_values_format' => '%{value}%',
+          'hide_inputs' => 1,
+          'hide_slider_handle_when_no_value' => 0,
+          'multi_value' => 0,
+          'orientation' => 'horizontal',
+          'range' => 0,
+          'slider_length' => '',
+          'slider_style' => 'blue',
+          'step' => 10,
+        ),
+      ),
+      'type' => 'sliderfield',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_reporter_career_graph-field_reporter_movie_name'.
+  $field_instances['field_collection_item-field_reporter_career_graph-field_reporter_movie_name'] = array(
+    'bundle' => 'field_reporter_career_graph',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_movie_name',
+    'label' => 'Movie name',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_deluxe_path' => 'autocomplete_deluxe/taxonomy',
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'delimiter' => '',
+        'limit' => 10,
+        'min_length' => 0,
+        'not_found_message' => 'The term \'@term\' will be added.',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_reporter_career_graph-field_reporter_movie_year'.
   $field_instances['field_collection_item-field_reporter_career_graph-field_reporter_movie_year'] = array(
     'bundle' => 'field_reporter_career_graph',
@@ -27,6 +139,7 @@ function feature_for_reporter_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 1,
@@ -55,6 +168,7 @@ function feature_for_reporter_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
+        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '1970:+0',
       ),
@@ -149,6 +263,129 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-reporter-field_reporter_career_graph'.
+  $field_instances['node-reporter-field_reporter_career_graph'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_career_graph',
+    'label' => 'Career Graph',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance: 'node-reporter-field_reporter_company'.
+  $field_instances['node-reporter-field_reporter_company'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_company',
+    'label' => 'company',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 34,
+    ),
+  );
+
+  // Exported field_instance: 'node-reporter-field_reporter_department'.
+  $field_instances['node-reporter-field_reporter_department'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_department',
+    'label' => 'Department',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 35,
+    ),
+  );
+
   // Exported field_instance: 'node-reporter-field_reporter_email_id'.
   $field_instances['node-reporter-field_reporter_email_id'] = array(
     'bundle' => 'reporter',
@@ -191,6 +428,48 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-reporter-field_reporter_facebook_id'.
+  $field_instances['node-reporter-field_reporter_facebook_id'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_facebook_id',
+    'label' => 'Facebook id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-reporter-field_reporter_movie_name'.
   $field_instances['node-reporter-field_reporter_movie_name'] = array(
     'bundle' => 'reporter',
@@ -230,6 +509,45 @@ function feature_for_reporter_field_default_field_instances() {
       ),
       'type' => 'taxonomy_autocomplete',
       'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-reporter-field_reporter_profile_type'.
+  $field_instances['node-reporter-field_reporter_profile_type'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_reporter_profile_type',
+    'label' => 'Profile type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 33,
     ),
   );
 
@@ -510,7 +828,7 @@ function feature_for_reporter_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 43,
+      'weight' => 3,
     ),
   );
 
@@ -530,6 +848,7 @@ function feature_for_reporter_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -558,27 +877,33 @@ function feature_for_reporter_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
+        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '1970:+0',
       ),
       'type' => 'date_select',
-      'weight' => 42,
+      'weight' => 2,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('About');
+  t('Career Graph');
+  t('Department');
   t('Designation');
   t('Earning');
   t('Email id');
+  t('Facebook id');
   t('Facebook page');
   t('Movie name');
   t('Movie year');
   t('Occupation');
   t('Picture');
+  t('Profile type');
   t('Section');
   t('Twitter Handle');
+  t('company');
 
   return $field_instances;
 }

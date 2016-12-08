@@ -110,13 +110,6 @@ function itg_widgets_custom_variables() {
     '#default_value' => variable_get('watch_right_now_block_condition'),
   );
 
-  $form['apache_solr_sites_prefix_values'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Apache solr sites prefix and has values'),
-    '#description' => t("Ex: dev|eoshds,stage|asdasd"),
-    '#default_value' => variable_get('apache_solr_sites_prefix_values'),
-  );
-
   $form['top_takes_block_condition'] = array(
     '#type' => 'textarea',
     '#title' => t('top takes block condition for arg(1)'),
@@ -126,6 +119,13 @@ function itg_widgets_custom_variables() {
     '#type' => 'textarea',
     '#title' => t('tid of politician'),
     '#default_value' => variable_get('tid_politician'),
+  );
+
+  $form['apache_solr_sites_prefix_values'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Apache solr sites prefix and has values'),
+    '#description' => t("Ex: dev|eoshds,stage|asdasd"),
+    '#default_value' => variable_get('apache_solr_sites_prefix_values'),
   );
   return system_settings_form($form);
 }
@@ -212,6 +212,33 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
   if (!empty($widget_name) && !empty($nid)) {
     $num = db_delete('itg_widget_order')
         ->condition('nid', $nid)
+        ->condition('widget', $widget_name)
+        ->execute();
+    if ($num) {
+      drupal_set_message(t("Node has been moved"));
+      drupal_goto($_SERVER['HTTP_REFERER']);
+    }
+    else {
+      drupal_set_message(t("Node id or widget name not found"));
+      drupal_goto($_SERVER['HTTP_REFERER']);
+    }
+  }
+}
+
+/**
+ * Funtion used to delete node combination form itg_widget_order table.
+ * 
+ * @param string $widget_name
+ * @param string $content_type
+ * @param int $cat_tid
+ * @param int $nid
+ */
+function move_node_from_key_candidate_widget($widget_name, $cat_tid, $state, $nid) {
+  if (!empty($widget_name) && !empty($nid)) {
+    $num = db_delete('itg_widget_order')
+        ->condition('nid', $nid)
+        ->condition('cat_id', $cat_tid)
+        ->condition('state', $state)
         ->condition('widget', $widget_name)
         ->execute();
     if ($num) {
@@ -399,34 +426,101 @@ function draggable_view_node_delete($view_name, $page_name, $nid) {
 }
 
 /**
+ * Implements hook_form().
+ * {@inheritdoc}
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_keycandidate_form($form, $form_state) {
+  $pre_fix = "";
+  $suf_fix = "";
+
+  $state_class = "visible";
+  $states_neame = get_all_state();
+//    if (isset($_POST['state_value'])) {
+//        $pre_fix = "<div style='display:none'>";
+//        $suf_fix = "</div>";
+//    }
+
+  $form['state_value'] = array(
+    '#type' => 'select',
+    '#title' => 'State <span class="form-required" title="This field is required.">*</span>',
+    '#multiple' => TRUE,
+    '#options' => $states_neame,
+    '#prefix' => $pre_fix,
+    '#suffix' => $suf_fix,
+  );
+
+  $op = getsaction_list();
+
+  $form['cat_value'] = array(
+    '#type' => 'select',
+    '#title' => 'Section <span class="form-required" title="This field is required.">*</span>',
+    '#options' => $op,
+    '#prefix' => $pre_fix,
+    '#suffix' => $suf_fix,
+  );
+
+
+  $form['alt_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Apply'),
+  );
+  $form['#validate'][] = 'itg_widget_keycandidate_validate';
+  return $form;
+}
+
+/**
+ * this function use for get section list
+ */
+function getsaction_list() {
+  $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+  foreach ($tax as $key => $term) {
+
+    if (!itg_category_manager_term_state($term->tid)) {
+      unset($tax[$key]);
+    }
+  }
+  $op = array("All" => " - None -");
+  foreach ($tax as $key => $val) {
+    $op[$val->tid] = $val->name;
+  }
+  return $op;
+}
+
+/**
+ * This function use for get state
+ */
+function get_all_state() {
+  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+  $states_neame[] = 'Select';
+  foreach ($terms as $values) {
+    $states_neame[$values->tid] = $values->name;
+  }
+  return $states_neame;
+}
+
+/**
+ * This mentod will go to keycandidate widget filter url
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_keycandidate_form_submit($form, $form_state) {
+
+  $query = array('state_val' => $form_state['values']['state_value'], 'cat_id' => $form_state['values']['cat_value']);
+  drupal_goto('special-key-candidate-widget-contents', array('query' => $query));
+}
+
+/**
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
 
-  if ($form_id == 'views_form_key_candidate_special_key_candidate_widget_contents') {
-    $pre_fix = "";
-    $suf_fix = "";
-    $state_class = "visible";
-    $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
-    $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-    $states_neame[] = 'Select';
-    foreach ($terms as $values) {
-      $states_neame[$values->tid] = $values->name;
-    }
-    if (isset($_POST['state_value'])) {
-      $pre_fix = "<div style='display:none'>";
-      $suf_fix = "</div>";
-    }
 
-    $form['state_value'] = array(
-      '#type' => 'select',
-      '#title' => 'State',
-      '#options' => $states_neame,
-      '#prefix' => $pre_fix,
-      '#suffix' => $suf_fix,
-    );
-  }
   $setting = array();
   $queue_flag = "";
   $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
@@ -773,7 +867,6 @@ function forms_uses_checked_content_id() {
     'views_form_special_how_i_made_it_special_how_made_it_widget_contents',
     'views_form_yearender_top_news_and_top_videos_yearend_left_widget_contents',
     'views_form_most_read_widget_most_read_widget_contents',
-    'views_form_issue_base_magazin_widget_issue_base_magazin_widget',
   );
 }
 
@@ -967,17 +1060,6 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
-      // Activate live tv button
-      $form['#prefix'] = '
-          <div class="switch-field">
-           <div class="switch-title">Big Story As Live Tv?</div>
-           <input type="radio" id="switch_left" name="live_tv_switch_2" value="yes" checked/>
-           <label for="switch_left">Activated</label>
-           <input type="radio" id="switch_right" name="live_tv_switch_2" value="no" />
-           <label for="switch_right">Not Activated</label>
-         </div>';
-      //drupal_add_css('.switch-title{margin-bottom:6px}.switch-field input{display:none}.switch-field label{float:left;display:inline-block;width:60px;background-color:#33a26d;color:#FFFFFF;font-size:14px;font-weight:400;text-align:center;text-shadow:none;padding:6px 14px;border:1px solid rgba(0,0,0,0.2);-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.3),0 1px rgba(255,255,255,0.1);box-shadow:inset 0 1px 3px rgba(0,0,0,0.3),0 1px rgba(255,255,255,0.1);-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;transition:all .1s ease-in-out}.switch-field label:hover{cursor:pointer}.switch-field input:checked + label{background-color:#1fb5ad;-webkit-box-shadow:none;box-shadow:none}.switch-field label:first-of-type{border-radius:4px 0 0 4px}.switch-field label:last-of-type{border-radius:0 4px 4px 0}', 'inline');
       break;
     case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
@@ -1051,13 +1133,56 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
     case 'views-exposed-form-key-candidate-special-key-candidate-widget-contents':
-    case 'views-exposed-form-key-candidate-special-key-candidate-widget-list':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
       $autocomplete_path = autocomplete_for_widgets('reporter');
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       $form['#validate'][] = 'custom_section_wise_validate';
+      $states_neame = get_all_state();
+      $form['state_val'] = array(
+        '#type' => 'select',
+        '#multiple' => TRUE,
+        '#options' => $states_neame,
+      );
+      $form['state_val']['#prefix'] = '<div class=""style="display:none">';
+      $form['state_val']['#suffix'] = '</div>';
+
+      $op = getsaction_list();
+
+      $form['cat_id'] = array(
+        '#type' => 'select',
+        '#options' => $op,
+      );
+      $form['cat_id']['#prefix'] = '<div class=""style="display:none">';
+      $form['cat_id']['#suffix'] = '</div>';
+      break;
+    case 'views-exposed-form-key-candidate-special-key-candidate-widget-list':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['title']['#weight'] = 1;
+      $form['nid']['#weight'] = 2;
+      $form['title']['#weight'] = 1;
+      $form['items_per_page']['#weight'] = 5;
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets('reporter');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      $form['#validate'][] = 'custom_section_wise_validate';
+      $form['cat_id']['#prefix'] = '<div class="cat-wraper"style="">';
+      $form['cat_id']['#suffix'] = '</div>';
+      $form['cat_id']['#title'] = '';
+      $form['state']['#prefix'] = '<div class="state-wraper"style="">';
+      $form['state']['#suffix'] = '</div>';
+      $op = getsaction_list();
+      $form['cat1_id']['#type'] = 'select';
+      $form['cat1_id']['#options'] = $op;
+      $form['cat1_id']['#weight'] = -9999;
+      $form['cat1_id']['#default_value'] = $_GET['cat_id'];
+      $allstate = get_all_state();
+      $form['state1']['#type'] = 'select';
+      $form['state1']['#options'] = $allstate;
+      $form['state1']['#weight'] = -99994;
+      $form['state1']['#default_value'] = $_GET['state'];
       break;
     case 'views-exposed-form-section-wise-content-ordering-list-page':
       global $messages;
@@ -1078,6 +1203,22 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 
   if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
     $form['#info']['filter-shs_term_node_tid_depth']['label'] = 'Section';
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_widget_keycandidate_validate($form, &$form_state) {
+
+  if ($form_state['values']['state_value'][0] == '0') {
+    form_set_error('state_value', 'State is required');
+  }
+  if (empty($form_state['values']['state_value'])) {
+    form_set_error('state_value', 'State is required');
+  }
+  if ($form_state['values']['cat_value'] == 'All') {
+    form_set_error('cat_value', 'section is required');
   }
 }
 
@@ -1171,6 +1312,7 @@ function itg_widget_views_api() {
  * {@inheritdoc}
  */
 function itg_widget_views_query_alter(&$view, &$query) {
+
   global $user;
   if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
 
@@ -1361,6 +1503,9 @@ function itg_widget_views_query_alter(&$view, &$query) {
       $query->where[1]['conditions'][1]['value'] = variable_get('tid_politician');
     }
   }
+  if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_list') {
+    
+  }
 
   if ($view->name == 'yearender' && $view->current_display == 'block_2') {
     $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
@@ -1433,7 +1578,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
       $query->where[1]['conditions'][3]['value'] = $section;
     }
   }
-  if ($view->name == 'most_popular' && ($view->current_display == 'election_graph' )) {
+  if ($view->name == 'most_popular' && ($view->current_display == 'key_candidate' )) {
     global $theme;
 
     if ($theme != 'seven') {
@@ -2467,21 +2612,23 @@ function get_rhs_block_display_condtion($delta = '') {
  *
  */
 function insert_all_node_in_widegt_table() {
+
   try {
     db_query('alter table itg_widget_order add column state INT NULL after extra')->execute();
     db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
   } catch (Exception $ex) {
     drupal_set_message($ex->getMessage());
   }
-//
-//  $nodes = db_select('node', 'n')
-//          ->fields('n', array('nid'))
-//          ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
-//          ->execute()->fetchAll(PDO::FETCH_ASSOC);
-//  foreach ($nodes as $data) {
-//    $node = node_load($data['nid']);
-//    itg_widget_node_insert($node);
-//  }
+
+
+//    $nodes = db_select('node', 'n')
+//                    ->fields('n', array('nid'))
+//                    ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
+//                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
+//    foreach ($nodes as $data) {
+//        $node = node_load($data['nid']);
+//        itg_widget_node_insert($node);
+//    }
 }
 
 /**

@@ -23,8 +23,47 @@ Drupal.behaviors.itg_widgets = {
     //            // Prevent default action.
     //            return false;
     //        });
+    jQuery ('#edit-state1').change (function () {
+      var getval = jQuery (this).val ();
+      if (getval == 0)
+      {
+        getval = "";
+      }
+      jQuery ('#edit-state').val (getval);
+    })
+    jQuery ('#edit-cat1_id').change (function () {
+      var getval = jQuery (this).val ();
+      if (getval == 0)
+      {
+        getval = "";
+      }
+      jQuery ('#edit-cat_id').val (getval);
+    })
+// This code use for mark candidate status
+    jQuery ('.key-radio').live ('click', function () {
+      var getname = jQuery (this).attr ('name');
+      var getstatus = jQuery (this).val ();
+      jQuery.ajax ({
+        url: Drupal.settings.basePath + 'update-keycandidate-status',
+        type: 'post',
+        beforeSend: function () {
+          jQuery ('#widget-ajex-loader').show ();
+
+        },
+        data: {
+          'fname': getname,
+          'status': getstatus,
+        },
+        success: function (data) {
 
 
+        },
+        error: function (xhr, desc, err) {
+          console.log (xhr);
+          console.log ("Details: " + desc + "\nError:" + err);
+        }
+      });
+    })
     jQuery (".remove_from_nodequeue_draggable_view").click (function () {
       var nid = jQuery (this).attr ("data-nid");
       var qid = jQuery (this).attr ("data-queueid");
@@ -247,26 +286,39 @@ var get_url_parameter = function get_url_parameter (sParam) {
 
 
 jQuery (document).ready (function () {
+  jQuery ('.cat-wraper').html (jQuery ('.form-item-cat1-id').html ());
+  jQuery ('.state-wraper').html (jQuery ('.form-item-state1').html ());
+  jQuery ('.form-item-cat1-id').remove ();
+  jQuery ('.form-item-state1').remove ();
+  jQuery ('#edit-cat1-id').attr ('name', 'cat_id');
+  jQuery ('#edit-state1').attr ('name', 'state');
   jQuery (".custom-weight-draggable input[type=number]").change (function () {
     jQuery (this).next ().children ().find ('option').remove ().end ().append ('<option value="' + jQuery (this).val () + '">' + jQuery (this).val () + '</option>').val (jQuery (this).val ());
   });
-
+  //    jQuery("#edit-actionitg-widget-categories-wise-node-group").click(function(e){
+  //        e.preventDefault();
+  //        if(confirm("Are you sure want to perform action.")) {
+  //            return ture;
+  //        } else {
+  //            return false;
+  //        }
+  //    });
   jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
     var nid = jQuery (this).attr ("data-nid");
     jQuery.get ("big-story-video-gallery/" + nid, function (data) {
       // remove previous data.
-      jQuery ("#videogallery-iframe").html ("",function(){
-        jQuery ("#videogallery-iframe").show();
+      jQuery ("#videogallery-iframe").html ("", function () {
+        jQuery ("#videogallery-iframe").show ();
       });
       // add new data data.
       jQuery ("#videogallery-iframe").html (data);
+
+      jQuery ("span#close-big-story a").on ('click', function () {
+        console.log ("closed click");
+        jQuery ("#videogallery-iframe").html ("");
+        jQuery ("#videogallery-iframe").hide ();
+      });
     });
-  });
-
-  jQuery ("span#close-big-story a").on ('click', function () {
-    console.log("closed click");
-    jQuery ("#videogallery-iframe").html ("");
-    jQuery ("#videogallery-iframe").hide ();
-  });
-
+  })
 });
+  

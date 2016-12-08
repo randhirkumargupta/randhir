@@ -482,8 +482,7 @@ function get_task_notification_of_user() {
   $query->condition('n.type', 'task_idea_allocation_tracking', '=');
   $result = $query->execute();
   foreach ($result as $value) {
-
-    $string .= '<li>' . l("your task " . $value->title . " will expire tomorrow", 'node/' . $value->nid) . '</li>';
+    $string .= '<li>' . l("your task " . $value->title . " is going to expire", 'node/' . $value->nid) . '</li>';
   }
   $string .= "</ul>";
   print $string;

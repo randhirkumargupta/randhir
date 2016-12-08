@@ -100,6 +100,9 @@
         padding: 10px;
         background: #000;
         border: none;   
+        .slick-slide{
+            position: relative;
+        }
         .slick-prev{
             font: normal normal normal 14px/1 FontAwesome;
             cursor: pointer;
@@ -273,7 +276,23 @@
             font-size: 14px;
             color: #626262;
         }
-
+        
+        .saved-photogallery{
+            position: absolute;
+            background: #fff;
+            width: 315px;
+            height: 150px;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -75px;
+            font-weight: 700;
+            text-transform: capitalize;
+            font-size: 26px;
+            font-family: roboto;
+            text-align: center;
+            line-height: 150px;
+        }
 }
 
 
@@ -628,6 +647,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .saved-item-tab{
   margin: 60px 0 30px;
   position: relative;
+  list-style: none;
+    display: inline-block;
+    vertical-align: top;
   li{
     float: left;
     a{
@@ -664,6 +686,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       top: 100px;
     }
   }
+}
+.per-icon{.saved-item-tab{
+    li{
+        a{
+            padding: 10px 18px;            
+        }
+    }   
+}
 }
 .personal-list{
   list-style: none;
@@ -803,7 +833,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 #content{ 
   #block-formblock-ugc{
     margin: 0 auto;
-    max-width: 720px;
+    max-width: 750px;
     text-align: left;
     .node-ugc-form{
       .form-field-name-field-ugc-ctype{
@@ -1013,6 +1043,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+      }
+      .captcha{
+        max-width: 100%;
+        margin-left: 0;
+        border: 1px solid #e0e0e0;
       }
     }
     [id*="field-ugc-personalization-photo-add-more-wrapper"]{
@@ -3070,6 +3105,10 @@ body.has-cart-popup{
   #main{
     padding: 50px 0;
   }
+  .rhs-address{
+    border: 1px solid #ddd;
+    margin-bottom: 35px;
+  }
   .order-address-wrapper{
     background-color: #ededed;
     display: inline-block;
@@ -3118,7 +3157,7 @@ body.has-cart-popup{
   .cart-total-block{
     background-color: #fff;
     border: 1px solid #dedede;
-    margin-bottom: 30px;
+    margin-bottom: 30px;    
   }
   .cart-checkout-list{
     .cart-image {
@@ -3129,6 +3168,16 @@ body.has-cart-popup{
     .prd-title {
       font: 500 18px/24px Roboto;
     }
+  }
+  .lhs-redeem-point{
+      .cart-total-inner{
+          max-width: 100%;
+          text-align: left;
+          .checkout{
+            display: inline-block;
+            vertical-align: top;
+          }
+      }
   }
 }
 #change-address-popup{
@@ -3964,7 +4013,7 @@ article.node-mega-review-critic{
       float: left;
       height: 271px;
       overflow-y: auto;
-      width: 37%;
+      width: 37%;      
       .review-row{
         padding: 10px 8px 0;
         color: #a0a0a0;
@@ -3977,6 +4026,13 @@ article.node-mega-review-critic{
           display: block;
           font: 400 14px/16px Roboto;
           overflow: hidden;
+          .field-name-field-mega-review-cast{
+              .field-item{
+                  display:inline-block;
+                  vertical-aling:top;
+                  margin-right:5px;
+              }
+          }
         }
       }
       .movie-reviewer{
@@ -4016,6 +4072,10 @@ article.node-mega-review-critic{
     }
       }
     }
+  }
+  .bottom-movie-desc{
+      color:#b7b7b7;
+      padding-top:10px;
   }
   .other-reviews{
     margin: 10px 0;
@@ -4068,6 +4128,9 @@ article.node-mega-review-critic{
       font: 400 15px/27px 'Roboto Slab';
       color: #212121;
       margin-top: 10px;
+      a{
+          color:#a00606;
+      }
     }
   }
 }
@@ -4082,6 +4145,12 @@ article.node-mega-review-critic{
     h3{
       display: block;
       span{padding-left: 0; padding-top: 20px;}
+    }
+    &.full-width{
+       width: 100%;
+       img{
+           width: 100%;
+       }
     }
   }
 .movie-videos, .movie-photos {    
@@ -4110,7 +4179,7 @@ article.node-mega-review-critic{
 }
 .career-graph{
     .career-graph-data{
-        margin-top: 150px;
+        margin-top: 80px;
         position: relative;
         .gray-bg, .black-bg{
             background: #dedede;            
@@ -4137,6 +4206,9 @@ article.node-mega-review-critic{
     }
     .highcharts-container {
             background: #f7f7f7;
+        }
+        + vukkul-comment{
+            margin-top:50px;
         }
 }
 .overflow-x-auto{
