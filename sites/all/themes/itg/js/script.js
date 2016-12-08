@@ -329,7 +329,7 @@ jQuery(document).ready(function () {
     
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function(){
-        var getHEight = jQuery(this).height();
+        var getHEight = jQuery(this).outerHeight(true);
         arrayOne.push(getHEight);    
     });
     var largest = Math.max.apply(Math, arrayOne);
