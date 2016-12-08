@@ -4,6 +4,7 @@
  *   Cart order summary page template file. 
  */
 ?>
+
 <div class="row">
   <div class="col-md-8">
     
@@ -50,7 +51,7 @@
     
     <?php else: ?>
       <?php print t('There are no items in this cart.') ?>
-      <?php print l('Continue Shopping', 'redeem-points', array('attributes' => array('class' => array('button')))); ?>
+      <?php print l('Continue Shopping', 'product', array('attributes' => array('class' => array('button')))); ?>
     <?php endif; ?>
   
    <?php if (count($data['product_detail']) > 0): ?>

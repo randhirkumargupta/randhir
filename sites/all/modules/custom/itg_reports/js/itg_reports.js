@@ -71,7 +71,7 @@
                 $('.view-empty').parent().find('.feed-icon').hide();
             }            
             
-            if ($('body').hasClass('page-comparative-reports')) {
+            if ($('body').hasClass('page-comparative-report-list')) {
                 itg_report_disable_future_date();
                 $('.view-empty').parent().find('.feed-icon').hide();
             }

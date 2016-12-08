@@ -190,7 +190,7 @@ function features_for_print_team_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_primary_category',
     'label' => 'primary category',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -203,7 +203,7 @@ function features_for_print_team_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 21,
+      'weight' => 11,
     ),
   );
 
@@ -245,7 +245,7 @@ function features_for_print_team_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 23,
+      'weight' => 12,
     ),
   );
 
@@ -333,7 +333,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -374,7 +374,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -415,7 +415,7 @@ function features_for_print_team_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -545,6 +545,48 @@ function features_for_print_team_field_default_field_instances() {
       'settings' => array(),
       'type' => 'field_collection_embed',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-print_team_integration-field_pti_supplement'.
+  $field_instances['node-print_team_integration-field_pti_supplement'] = array(
+    'bundle' => 'print_team_integration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_pti_supplement',
+    'label' => 'Supplement',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 7,
     ),
   );
 
@@ -742,6 +784,7 @@ function features_for_print_team_field_default_field_instances() {
   t('Primary category textarea');
   t('Rating');
   t('Select Section');
+  t('Supplement');
   t('Timeline');
   t('Timeline to submit the final story.');
   t('Upload Images');
