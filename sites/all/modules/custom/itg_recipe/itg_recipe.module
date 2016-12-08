@@ -42,6 +42,7 @@ function itg_recipe_node_presave($node) {
 function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'recipe_node_form':
+    case 'page_node_form':
       // Social Media Integration field show hide
       itg_recipe_smi_hideshow($form);
       // Save as draft button
