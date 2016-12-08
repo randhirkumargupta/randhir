@@ -7929,10 +7929,10 @@ input[type="radio"]:checked + label:after{
             display:block;               
             } 
             &:nth-child(odd){
-                background:#000;
+                background:#a00606;
             }
             &:nth-child(even){
-                background:#a00606;
+                background:#000;                
             }
         }
     }
@@ -8076,6 +8076,7 @@ input[type="radio"]:checked + label:after{
                 label{
                     width: 52%;
                     float: left;
+                    font-size: 13px;
                 }
                 input[type="text"]{                
                     width: 47%;

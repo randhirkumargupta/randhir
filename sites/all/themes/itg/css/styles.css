@@ -9553,10 +9553,10 @@ footer .footer-copyright {
   display: block;
 }
 .factoids-slider ul li:nth-child(odd) {
-  background: #000;
+  background: #a00606;
 }
 .factoids-slider ul li:nth-child(even) {
-  background: #a00606;
+  background: #000;
 }
 .factoids-slider button {
   background: #000;
@@ -9736,6 +9736,7 @@ footer .footer-copyright {
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response label, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response label {
   width: 52%;
   float: left;
+  font-size: 13px;
 }
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"], .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"] {
   width: 47%;
