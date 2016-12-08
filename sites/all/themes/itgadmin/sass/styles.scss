@@ -9021,3 +9021,10 @@ div.node{
         margin-right: 10px;
     }
 }
+[id*="mega-review-critic-node-form"]{
+    [id*="edit-field-mega-review-youtube-url"]{
+        .youtube-video-id{
+            display:none;
+        }   
+    }
+}
