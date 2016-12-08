@@ -7941,8 +7941,7 @@ input[type="radio"]:checked + label:after{
             padding:25px;
             font-size: 15px;
             line-height: 24px;
-            color:#fff;       
-            display:block;  
+            color:#fff;                   
             &:nth-child(odd){
                 background:#a00606;
             }
