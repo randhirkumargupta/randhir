@@ -9892,3 +9892,7 @@ div.node #comments h2 {
   vertical-align: top;
   margin-right: 10px;
 }
+
+[id*="mega-review-critic-node-form"] [id*="edit-field-mega-review-youtube-url"] .youtube-video-id {
+  display: none;
+}
