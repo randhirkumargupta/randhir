@@ -10,9 +10,9 @@
 function itg_widget_views_pre_render(&$view) {
   $color_box_query = array("width" => "900", "height" => "600", "iframe" => "true");
   $color_box_class = array("class" => array("colorbox-load"));
-  if ($view->name == "so_sorry" && $view->current_display == 'so_sorry_videos_widget') {
-    //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    //$view->attachment_before = $header_content;
+  if ($view->name == "static_pages" && $view->current_display == 'page') {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $view->attachment_before = $header_content;
   }
   elseif ($view->name == "so_sorry" && $view->current_display == 'so_sorry_videos') {
     if (!isset($_POST['views_bulk_operations'])) {

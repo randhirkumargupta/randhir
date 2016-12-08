@@ -263,6 +263,19 @@ function itg_image_croping_get_image_tags() {
 }
 
 /**
+ * This function use for get image tag by fid
+ * $resuly array
+ */
+ function itg_image_croping_get_image_tags_by_fid($fid) {
+     $query = db_select('image_tags', 'tags')
+            ->fields('tags')
+            ->condition('image_id', $fid, '=');
+    $result = $query->execute()->fetchAll();
+    return $result;
+ }
+
+
+/**
  * This function use for get the all tags on image
  */
 function itg_image_croping_get_image_tags_front() {

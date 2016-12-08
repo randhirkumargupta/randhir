@@ -258,11 +258,10 @@
                         var replaced = newbname.substring(newbname.indexOf("[") + 1);
                         replaced = getvalue[1] + '[' + replaced;
 
-
                         parent.jQuery('[name="' + replaced + '[fid]"]').val(getvalue[0]);
                         parent.jQuery("body").find("input[name='" + replaced + "[filefield_itg_image_repository][button]").trigger('mousedown');
-                        parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
-                        parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
+//                        parent.jQuery('[name="' + getbame + '[fid]"]').val(getvalue[0]);
+//                        parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
 
                         parent.jQuery(document).ajaxComplete(function(event, request, settings) {
 
