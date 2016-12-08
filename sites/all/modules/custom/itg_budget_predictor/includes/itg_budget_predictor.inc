@@ -474,7 +474,7 @@ function itg_budget_manage_list() {
 }
 
 /**
- * This function is used to manage budget
+ * This function is used to manage budget form
  * @return string
  */
 function itg_manage_budget() {
@@ -556,6 +556,22 @@ function itg_manage_budget() {
 }
 
 /**
+ * This function is used to budget form validation
+ * {@inheritdoc}
+ */
+function itg_manage_budget_validate($form, &$form_state) {
+  $budget_year = $form_state['values']['budget_year'];
+  $query = db_select('itg_manage_budget', 'm');
+  $query->condition('m.budget_year', $budget_year, '=');
+  $query->fields('m', array('id'));
+  # execute the query
+  $results = $query->execute()->fetchObject();
+  if($results->id) {
+    form_set_error('field', t('Budget Predictor already exist in our system for '.$budget_year));
+  }
+}
+/**
+ * This function is used to budget form submit.
  * {@inheritdoc}
  */
 function itg_manage_budget_submit($form, &$form_state) {
