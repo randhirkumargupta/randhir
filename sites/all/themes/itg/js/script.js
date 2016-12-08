@@ -326,7 +326,15 @@ jQuery(document).ready(function () {
     //Add header for so-sorry page
     jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
     jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title, #defalt-section-top-block .widget-title').prependTo('.auto-block-2 .special-top-news');
-
+    
+    var arrayOne = [];
+    jQuery('.factoids-slider li').each(function(){
+        var getHEight = jQuery(this).height();
+        arrayOne.push(getHEight);    
+    });
+    var largest = Math.max.apply(Math, arrayOne);
+    jQuery(".factoids-slider li").css('height', largest + "px");
+    
     jQuery('.factoids-slider ul').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -350,7 +358,7 @@ jQuery(document).ready(function () {
                 }
             }
         ]
-    });
+    });        
 
 
 });
