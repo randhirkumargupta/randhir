@@ -1,44 +1,52 @@
 <?php
 
-
 /**
  * ItgSubCategoryMigration extends XMLMigration 
  */
 class ItgSubCategoryMigration extends XMLMigration {
+
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of terms (category)');
 
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
+      'title' => t('title'),
       'name' => t('Category name'),
+      'image' => t('image'),
+      'section' => t('Super_Parent_id'),
+      'description' => t('description'),
+      'published' => t('published'),
+      'ordering' => t('ordering'),
       'metatitle' => t('metatitle'),
       'metadesc' => t('metadesc'),
       'metakey' => t('metakey'),
+      'category' => t('Parent_id'),
       'template_name' => t('template_name'),
       'sef_url' => t('sef_url'),
-      'content_type' => t('content_type'),      
+      'created' => t('created'),
+      'content_url' => t('content_url'),
     );
 
-    
+
     // This can also be an URL instead of a local file path.
     $file_path = drupal_realpath('public://');
-    
+
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
-    
+
     $items_url = $xml_folder . 'subcategory.xml';
-    
+
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
     $item_xpath = '/data/row';
-    
+
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /categories/category/id.
     $item_ID_xpath = 'id';
 
     $items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
     $this->source = new MigrateSourceMultiItems($items_class, $fields);
-    
+
     $destination_options = array(
       'allow_duplicate_terms' => TRUE,
     );
@@ -46,17 +54,15 @@ class ItgSubCategoryMigration extends XMLMigration {
 
     // The source ID here is the one retrieved from each data item in the XML
     // file, and used to identify specific items
-    $this->map = new MigrateSQLMap($this->machineName,
-      array(
-        'id' => array(
-          'type' => 'int',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
-        )
-      ),
-      MigrateDestinationTerm::getKeySchema()
+    $this->map = new MigrateSQLMap($this->machineName, array(
+      'id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      )
+        ), MigrateDestinationTerm::getKeySchema()
     );
-    
+
     // TIP: Note that for XML sources, in addition to the source field passed to
     // addFieldMapping (the name under which it will be saved in the data row
     // passed through the migration process) we specify the Xpath used to
@@ -65,7 +71,7 @@ class ItgSubCategoryMigration extends XMLMigration {
     // item xpath since each item xml chunk is processed individually.
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
-    
+
     $this->addFieldMapping('field_cm_display_title', 'title')->xpath('title');
     $this->addFieldMapping('name', 'name')->xpath('name');
     $this->addFieldMapping('field_sponser_logo', 'image')->xpath('image');
@@ -77,19 +83,30 @@ class ItgSubCategoryMigration extends XMLMigration {
     $this->addFieldMapping('parent', 'category')->xpath('category');
     $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
-    //<created>(NULL)</created>(not clear)
   }
   
-  public function complete($entity, $row) {
-    if (!empty($row->xml->published)) {    
-      $data = array(
-       'tid' => $term->tid,
-       'uid' => 3,
-       'created' => time(),
-       'changed' => time(),
-       'status' => isset($row->xml->published) ? $row->xml->published : 1,
-     );
-     drupal_write_record('itg_category_manager', $data);
-    }   
+  
+  public function prepareRow($row) {
+    // manage parent id
+    if (isset($row->xml->category) && !empty($row->xml->category)) {
+      $source_cid = (string) $row->xml->category;
+      $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
+      $row->xml->category = $orignal_category;
+    }
+    else {
+      $row->xml->category = '';
+    }
   }
+
+  public function complete($entity, $row) {
+    $created = !empty($row->xml->created) ? (string) $row->xml->created : time();
+    $status = isset($row->xml->published) ? (string) $row->xml->published : 1;
+    db_update('itg_category_manager')
+        ->fields(array('created' => $created, 'uid' => 3, 'status' => $status))
+        ->condition('tid', $entity->tid, '=')
+        ->execute();
+  }
+  
+  
+
 }

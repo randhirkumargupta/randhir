@@ -109,7 +109,7 @@ function itg_dbmigrate_migrate_api() {
     'migrations' => array(
       'ItgSection' => array(
         'class_name' => 'ItgSectionMigration',
-        'group_name' => 'itg_category',
+        'group_name' => 'itg_section',
       ),
       'ItgCategory' => array(
         'class_name' => 'ItgCategoryMigration',
@@ -117,11 +117,11 @@ function itg_dbmigrate_migrate_api() {
       ),
       'ItgSubCategory' => array(
         'class_name' => 'ItgSubCategoryMigration',
-        'group_name' => 'itg_category',
+        'group_name' => 'itg_subcategory',
       ),
       'ItgSubSubCategory' => array(
         'class_name' => 'ItgSubSubCategoryMigration',
-        'group_name' => 'itg_category',
+        'group_name' => 'itg_subsubcategory',
       ),      
       'ItgStory' => array(
         'class_name' => 'ItgStoryMigration',

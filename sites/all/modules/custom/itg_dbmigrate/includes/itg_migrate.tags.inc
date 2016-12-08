@@ -11,7 +11,7 @@ class ItgTagsMigration extends XMLMigration {
 
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'keyword' => t('tag name'),
+      'metatag' => t('tag name'),
       'metatitle' => t('metatitle'),
       'metadesc' => t('metadesc'),
       'metakey' => t('metakey'),      
@@ -64,7 +64,7 @@ class ItgTagsMigration extends XMLMigration {
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
     
-    $this->addFieldMapping('name', 'name')->xpath('keyword'); 
+    $this->addFieldMapping('name', 'metatag')->xpath('metatag'); 
     /*$this->addFieldMapping('field_tags_display', 'tags_display')->xpath('tags_display');
     $this->addFieldMapping('field_tags_status', 'tags_status')->xpath('tags_status');
     $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
