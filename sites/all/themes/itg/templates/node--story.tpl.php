@@ -219,7 +219,7 @@ if (!empty($content)):
                                  </ul></div></div>';
                               $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
                               foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
-                                $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
+                                $factoidsSocialShare['slider'] .='<li>' . $value['value'] . '</li>';
                               }
                               $factoidsSocialShare['slider'] .= '</ul></div>';
                               $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
