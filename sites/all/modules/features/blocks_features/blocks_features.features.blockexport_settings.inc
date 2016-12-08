@@ -21987,7 +21987,7 @@ checkout',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'sponsors
@@ -22022,7 +22022,7 @@ sponsor-details',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'sponsors
@@ -22057,7 +22057,7 @@ sponsor-details',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'sponsors
@@ -22092,7 +22092,7 @@ sponsor-details',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'sponsors
@@ -22127,7 +22127,7 @@ sponsor-details',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'sponsors
@@ -22162,7 +22162,7 @@ sponsor-details',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'sponsors
@@ -29816,7 +29816,8 @@ draft-recipe-management',
   'region' => 'vertical_menu',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user/login
+  'pages' => 'user
+user/login
 user/password
 itg-access-denied
 itg-not-found',
@@ -30474,10 +30475,11 @@ itg-not-found',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user/login
+  'pages' => 'user
+user/login
 user/password
 itg-access-denied
 itg-not-found',
@@ -30575,10 +30577,11 @@ itg-not-found',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user/login
+  'pages' => 'user
+user/login
 user/password
 itg-access-denied
 itg-not-found',
@@ -30676,10 +30679,11 @@ itg-not-found',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user/login
+  'pages' => 'user
+user/login
 user/password
 itg-access-denied
 itg-not-found',
@@ -30777,10 +30781,11 @@ itg-not-found',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user/login
+  'pages' => 'user
+user/login
 user/password
 itg-access-denied
 itg-not-found',
@@ -30878,10 +30883,11 @@ itg-not-found',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user/login
+  'pages' => 'user
+user/login
 user/password
 itg-access-denied
 itg-not-found',
@@ -30979,10 +30985,11 @@ itg-not-found',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => '',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user/login
+  'pages' => 'user
+user/login
 user/password
 itg-access-denied
 itg-not-found',
