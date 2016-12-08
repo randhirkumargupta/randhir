@@ -9169,7 +9169,7 @@ footer .footer-copyright {
 .ask-an-expert-question-answer .expert-answer p {
   line-height: 24px;
 }
-.ask-an-expert-question-answer .expert-answer p a {
+.ask-an-expert-question-answer .expert-answer p a.views-more-link {
   color: #a00606;
 }
 .ask-an-expert-question-answer .expert-answer:before {
