@@ -312,6 +312,10 @@ input[type="text"], select, input[type="password"] {
   clear: both;
 }
 
+p {
+  word-wrap: break-word;
+}
+
 /*start header css*/
 header {
   margin-bottom: 30px;
@@ -8326,11 +8330,55 @@ footer .footer-copyright {
   font-size: 20px;
   color: #b6b6b6;
 }
+.election-page h1 div {
+  display: inline-block;
+  vertical-align: bottom;
+}
+.election-page h1 ul {
+  list-style-type: none;
+}
+.election-page h1 ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.election-page h1 ul li a {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+}
+@media screen and (min-width: 768px) {
+  .election-page h1 ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.election-page h1 ul li a.share {
+  color: #d0d0d0;
+}
+.election-page h1 ul li a.share, .election-page h1 ul li a.google {
+  background: transparent;
+}
+.election-page h1 ul li a.facebook {
+  background: #0b4887;
+}
+.election-page h1 ul li a.twitter {
+  background: #05a3d2;
+}
+.election-page h1 ul li a.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
 .election-page .election-graph-3 {
   margin-top: -50px;
 }
 .election-page .election-graph-4 {
-  margin-top: -50px;
+  margin-top: -100px;
 }
 .election-page .election-graph-5 {
   margin-top: -150px;
@@ -8781,7 +8829,7 @@ footer .footer-copyright {
 #block-itg-menu-manager-vertical-menu {
   position: absolute;
   top: 50px;
-  left: -54px;
+  left: -75px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 2px 2px 3px #ccc;
@@ -8814,6 +8862,7 @@ footer .footer-copyright {
   line-height: 15px;
   display: block;
   padding: 10px 5px;
+  word-wrap: break-word;
 }
 #block-itg-menu-manager-vertical-menu a:hover {
   background: #fff;
@@ -9492,17 +9541,20 @@ footer .footer-copyright {
 
 .factoids-slider ul {
   background: #a00606;
-  padding: 0px 30px;
+  padding: 0px;
 }
 .factoids-slider ul li span {
-  padding: 25px 10px;
+  padding: 25px;
   font-size: 15px;
   line-height: 24px;
   color: #fff;
   display: block;
 }
-.factoids-slider ul li span:hover {
+.factoids-slider ul li:nth-child(odd) {
   background: #000;
+}
+.factoids-slider ul li:nth-child(even) {
+  background: #a00606;
 }
 .factoids-slider button {
   background: #000;
