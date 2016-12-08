@@ -9011,3 +9011,6 @@ div.node{
         margin-top: -53px;
     }
 }
+.action-with-title [data-id="edit-submit"]{    
+    @extend .btn-save;
+}

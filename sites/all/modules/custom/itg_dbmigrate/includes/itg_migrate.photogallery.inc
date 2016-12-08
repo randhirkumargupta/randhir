@@ -187,7 +187,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_expert_description', 'short_description')->xpath('short_description');
     $this->addFieldMapping('field_story_strap_headline', 'strap_headline')->xpath('strap_headline');
     $this->addFieldMapping('field_story_short_introtext', 'content_url')->xpath('content_url');
-    $this->addFieldMapping('field_story_expert_description', 'short_description')->xpath('short_description');
+    //$this->addFieldMapping('field_story_expert_description', 'short_description')->xpath('short_description');
     
     //$this->addFieldMapping('field_story_courtesy', 'commonbyline')->xpath('commonbyline');
     //$this->addFieldMapping('field_story_courtesy', 'commonbylinetwitter')->xpath('commonbylinetwitter');
