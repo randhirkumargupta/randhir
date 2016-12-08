@@ -227,3 +227,10 @@ function itg_loyalty_reward_dedicated_point($type) {
 
   return $data[$type];
 }
+
+/**
+ * Implements callback function for point notification.
+ */
+function itg_loyalty_reward_points_expire_notification_callback() {
+  
+}
