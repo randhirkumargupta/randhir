@@ -6014,6 +6014,10 @@ footer{
                 font-family: roboto-slab;
             }
             .captcha{
+                border: none;
+                legend, .fieldset-description{
+                    display: none;
+                }
                 img{
                     width: 120px;
                     margin-top: 15px;
@@ -7088,13 +7092,19 @@ input[type="radio"]:checked + label:after{
                             i{
                                 background: #d80a02;
                             }
-                            color:#418b32;
+                            color:#d80a02;
                         }
                         &.yellow{
                             i{
                                 background: #efc107;
                             }
                             color:#418b32;
+                        }
+                        &.orange{
+                            i{
+                                background: #ff8300;
+                            }
+                            color:#ff8300;
                         }
                     }
                 }
@@ -7768,10 +7778,14 @@ input[type="radio"]:checked + label:after{
                 vertical-align: bottom;
             }
             .captcha{
+                border:none;
                 display: inline-block;
                 vertical-align: bottom;
                 width: 50%;
                 margin-top: 10px;
+                legend, .fieldset-description{
+                   display: none; 
+                }
             }
         } 
         .expert-question{
@@ -7961,7 +7975,7 @@ input[type="radio"]:checked + label:after{
         @include calculate-width(1);   
     }    
     .listicle-detail{
-        border-top: 1px solid #ccc;   
+/*        border-top: 1px solid #ccc;   */
         > span{
             width: 34px;
             height: 34px;
@@ -7980,7 +7994,7 @@ input[type="radio"]:checked + label:after{
             color: #282828;    
             @include display-inline;
             width: 90%;
-            padding: 15px;
+            padding: 20px;
             span{
                 font-weight: 600;
                 text-transform: capitalize;
@@ -8064,9 +8078,13 @@ input[type="radio"]:checked + label:after{
                 font-family: roboto-slab;
             }
             .captcha{
+                border:none;
                 img{
                     width: 120px;
                     margin-top: 15px;
+                }
+                legend, .fieldset-description{
+                   display: none; 
                 }
             }
             .form-item-captcha-response{

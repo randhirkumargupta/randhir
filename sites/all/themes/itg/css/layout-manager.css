@@ -2946,9 +2946,15 @@ img {
   cursor: pointer;
   font-family: roboto-slab;
 }
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha {
+  border: none;
+}
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha img, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha img {
   width: 120px;
   margin-top: 15px;
+}
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha legend, [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha .fieldset-description, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha legend, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha .fieldset-description {
+  display: none;
 }
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response {
   display: inline-block;
