@@ -747,10 +747,10 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     unset($form['category_tid']['#options']);
     $form['category_tid']['#options'] = $op;
   }
-
-//  if ($form_state['build_info']['args'][0]->type == 'page' && $form_id == 'page_node_form' && arg(2) == 'edit') {
-//    //drupal_add_css("div.vertical-tabs {display:none}", 'inline');
-//  }
+// Hiding section filed from basic page (Static page node form)
+  if ($form_id == 'page_node_form') {
+    drupal_add_css("div.form-item-field-page-section-und {display:none}", 'inline');
+  }
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
 }
@@ -1198,6 +1198,12 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       );
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
+      break;
+    case 'views-exposed-form-static-pages-page':
+      $form['title']['#attributes']['placeholder'] = t('Page Title');
+      $form['title']['#autocomplete_path'] = 'content-title-list/page/autocomplete';
+      $form['nid']['#attributes']['placeholder'] = t('Page ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/page/autocomplete';
       break;
   }
 
