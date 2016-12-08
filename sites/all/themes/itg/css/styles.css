@@ -312,6 +312,10 @@ input[type="text"], select, input[type="password"] {
   clear: both;
 }
 
+p {
+  word-wrap: break-word;
+}
+
 /*start header css*/
 header {
   margin-bottom: 30px;
@@ -7499,6 +7503,12 @@ footer .footer-copyright {
   cursor: pointer;
   font-family: roboto-slab;
 }
+.education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha {
+  border: none;
+}
+.education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha legend, .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha .fieldset-description {
+  display: none;
+}
 .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha img {
   width: 120px;
   margin-top: 15px;
@@ -8326,11 +8336,55 @@ footer .footer-copyright {
   font-size: 20px;
   color: #b6b6b6;
 }
+.election-page h1 div {
+  display: inline-block;
+  vertical-align: bottom;
+}
+.election-page h1 ul {
+  list-style-type: none;
+}
+.election-page h1 ul li {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 8px;
+}
+.election-page h1 ul li a {
+  background: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: block;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+}
+@media screen and (min-width: 768px) {
+  .election-page h1 ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+.election-page h1 ul li a.share {
+  color: #d0d0d0;
+}
+.election-page h1 ul li a.share, .election-page h1 ul li a.google {
+  background: transparent;
+}
+.election-page h1 ul li a.facebook {
+  background: #0b4887;
+}
+.election-page h1 ul li a.twitter {
+  background: #05a3d2;
+}
+.election-page h1 ul li a.google {
+  background: url(../images/google-icon.jpg) no-repeat center center;
+}
 .election-page .election-graph-3 {
   margin-top: -50px;
 }
 .election-page .election-graph-4 {
-  margin-top: -50px;
+  margin-top: -100px;
 }
 .election-page .election-graph-5 {
   margin-top: -150px;
@@ -8525,7 +8579,7 @@ footer .footer-copyright {
   background: #418b32;
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.red {
-  color: #418b32;
+  color: #d80a02;
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.red i {
   background: #d80a02;
@@ -8535,6 +8589,12 @@ footer .footer-copyright {
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.yellow i {
   background: #efc107;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.orange {
+  color: #ff8300;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.orange i {
+  background: #ff8300;
 }
 .election-page .key-candidate .key-candidate-detail.key-candidate-detail-first {
   display: block;
@@ -8781,7 +8841,7 @@ footer .footer-copyright {
 #block-itg-menu-manager-vertical-menu {
   position: absolute;
   top: 50px;
-  left: -54px;
+  left: -75px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 2px 2px 3px #ccc;
@@ -8814,6 +8874,7 @@ footer .footer-copyright {
   line-height: 15px;
   display: block;
   padding: 10px 5px;
+  word-wrap: break-word;
 }
 #block-itg-menu-manager-vertical-menu a:hover {
   background: #fff;
@@ -9281,10 +9342,14 @@ footer .footer-copyright {
   vertical-align: bottom;
 }
 #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .captcha {
+  border: none;
   display: inline-block;
   vertical-align: bottom;
   width: 50%;
   margin-top: 10px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .captcha legend, #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .captcha .fieldset-description {
+  display: none;
 }
 #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config .expert-question {
   position: relative;
@@ -9492,16 +9557,21 @@ footer .footer-copyright {
 
 .factoids-slider ul {
   background: #a00606;
-  padding: 0px 30px;
+  padding: 0px;
+}
+.factoids-slider ul li {
+  padding: 25px;
 }
 .factoids-slider ul li span {
-  padding: 25px 10px;
   font-size: 15px;
   line-height: 24px;
   color: #fff;
   display: block;
 }
-.factoids-slider ul li span:hover {
+.factoids-slider ul li:nth-child(odd) {
+  background: #a00606;
+}
+.factoids-slider ul li:nth-child(even) {
   background: #000;
 }
 .factoids-slider button {
@@ -9527,7 +9597,7 @@ footer .footer-copyright {
   width: 100%;
 }
 .story-section .listicle-page .listicle-detail {
-  border-top: 1px solid #ccc;
+  /*        border-top: 1px solid #ccc;   */
 }
 .story-section .listicle-page .listicle-detail > span {
   width: 34px;
@@ -9549,7 +9619,7 @@ footer .footer-copyright {
   display: inline-block;
   vertical-align: top;
   width: 90%;
-  padding: 15px;
+  padding: 20px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description span {
   font-weight: 600;
@@ -9561,18 +9631,18 @@ footer .footer-copyright {
 
 /*css end factoids-slider*/
 /*css start Ask an expret for all page*/
-#block-itg-ask-expert-custom-ask-expert-form-block, .ask-question-sidebar {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"], .ask-question-sidebar {
   font-family: roboto;
   border-bottom: 1px solid #ddd;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block h3, .ask-question-sidebar h3 {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3, .ask-question-sidebar h3 {
   text-transform: uppercase;
   font-weight: 700;
   color: #bb0a0a;
   display: none;
   position: relative;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block h3 span, .ask-question-sidebar h3 span {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3 span, .ask-question-sidebar h3 span {
   background: #fff;
   z-index: 1;
   position: relative;
@@ -9580,7 +9650,7 @@ footer .footer-copyright {
   padding: 45px 20px 10px 10px;
   display: inline-block;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block h3:before, .ask-question-sidebar h3:before {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3:before, .ask-question-sidebar h3:before {
   content: '';
   position: absolute;
   left: 0;
@@ -9590,75 +9660,75 @@ footer .footer-copyright {
   margin-top: -2px;
   background: #ddd;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block h3, .ask-question-sidebar h3 {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3, .ask-question-sidebar h3 {
   margin-bottom: 10px;
   display: block;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block h3 span, .ask-question-sidebar h3 span {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3 span, .ask-question-sidebar h3 span {
   padding: 45px 20px 10px 30px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block .form-type-textarea, #block-itg-ask-expert-custom-ask-expert-form-block .form-type-textfield, .ask-question-sidebar .form-type-textarea, .ask-question-sidebar .form-type-textfield {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] .form-type-textarea, [id*="block-itg-ask-expert-custom-ask-expert-form-block"] .form-type-textfield, .ask-question-sidebar .form-type-textarea, .ask-question-sidebar .form-type-textfield {
   margin: 0;
   padding: 0;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form, .ask-question-sidebar #itg-custom-ask-an-expert-form {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"], .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] {
   background: #f5f5f5;
   padding: 15px 15px 15px 30px;
   zoom: 1;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:before, #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:after, .ask-question-sidebar #itg-custom-ask-an-expert-form:before, .ask-question-sidebar #itg-custom-ask-an-expert-form:after {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"]:before, [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"]:after, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"]:before, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"]:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form:after, .ask-question-sidebar #itg-custom-ask-an-expert-form:after {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"]:after, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"]:after {
   clear: both;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form input[type="text"], .ask-question-sidebar #itg-custom-ask-an-expert-form input[type="text"] {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] input[type="text"], .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] input[type="text"] {
   width: 100%;
   font-family: roboto-slab;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form textarea, .ask-question-sidebar #itg-custom-ask-an-expert-form textarea {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] textarea, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] textarea {
   font-family: roboto-slab;
   height: 65px;
   margin-bottom: 10px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #question p, .ask-question-sidebar #itg-custom-ask-an-expert-form #question p {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #question p, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #question p {
   color: #000;
   font-size: 12px;
   margin-bottom: 20px;
   margin-top: 10px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #question p.chtr-limit, .ask-question-sidebar #itg-custom-ask-an-expert-form #question p.chtr-limit {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #question p.chtr-limit, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #question p.chtr-limit {
   margin-bottom: 10px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname, .ask-question-sidebar #itg-custom-ask-an-expert-form #askname {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname {
   zoom: 1;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname:before, #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname:after, .ask-question-sidebar #itg-custom-ask-an-expert-form #askname:before, .ask-question-sidebar #itg-custom-ask-an-expert-form #askname:after {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname:before, [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname:after, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname:before, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname:after {
   content: "";
   display: block;
   height: 0;
   overflow: hidden;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname:after, .ask-question-sidebar #itg-custom-ask-an-expert-form #askname:after {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname:after, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname:after {
   clear: both;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname .form-item-askname, #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname .form-item-askemail, .ask-question-sidebar #itg-custom-ask-an-expert-form #askname .form-item-askname, .ask-question-sidebar #itg-custom-ask-an-expert-form #askname .form-item-askemail {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askname, [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askemail, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askname, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askemail {
   float: left;
   width: 50%;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname .form-item-askname input[type="text"], #block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname .form-item-askemail input[type="text"], .ask-question-sidebar #itg-custom-ask-an-expert-form #askname .form-item-askname input[type="text"], .ask-question-sidebar #itg-custom-ask-an-expert-form #askname .form-item-askemail input[type="text"] {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askname input[type="text"], [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askemail input[type="text"], .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askname input[type="text"], .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askemail input[type="text"] {
   width: 100%;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname .form-item-askname, .ask-question-sidebar #itg-custom-ask-an-expert-form #askname .form-item-askname {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askname, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askname {
   padding-right: 10px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form #askname .form-item-askemail, .ask-question-sidebar #itg-custom-ask-an-expert-form #askname .form-item-askemail {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askemail, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] #askname .form-item-askemail {
   padding-left: 10px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form input[type="submit"], .ask-question-sidebar #itg-custom-ask-an-expert-form input[type="submit"] {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] input[type="submit"], .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] input[type="submit"] {
   background: #000 none repeat scroll 0 0;
   border: medium none;
   border-radius: 5px;
@@ -9670,28 +9740,35 @@ footer .footer-copyright {
   cursor: pointer;
   font-family: roboto-slab;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form .captcha img, .ask-question-sidebar #itg-custom-ask-an-expert-form .captcha img {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha {
+  border: none;
+}
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha img, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha img {
   width: 120px;
   margin-top: 15px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form .form-item-captcha-response, .ask-question-sidebar #itg-custom-ask-an-expert-form .form-item-captcha-response {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha legend, [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha .fieldset-description, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha legend, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha .fieldset-description {
+  display: none;
+}
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response {
   display: inline-block;
   width: 100%;
   margin-bottom: 10px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form .form-item-captcha-response label, .ask-question-sidebar #itg-custom-ask-an-expert-form .form-item-captcha-response label {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response label, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response label {
   width: 52%;
   float: left;
+  font-size: 13px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form .form-item-captcha-response input[type="text"], .ask-question-sidebar #itg-custom-ask-an-expert-form .form-item-captcha-response input[type="text"] {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"], .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"] {
   width: 47%;
   font-family: roboto-slab;
   float: right;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block #itg-custom-ask-an-expert-form .form-item-captcha-response .description, .ask-question-sidebar #itg-custom-ask-an-expert-form .form-item-captcha-response .description {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response .description, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response .description {
   display: none;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block .expert-question, .ask-question-sidebar .expert-question {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] .expert-question, .ask-question-sidebar .expert-question {
   position: relative;
   font-size: 14px;
   color: #323232;
@@ -9700,7 +9777,7 @@ footer .footer-copyright {
   padding-top: 20px;
   padding-left: 30px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block .expert-question:before, .ask-question-sidebar .expert-question:before {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] .expert-question:before, .ask-question-sidebar .expert-question:before {
   content: 'Q';
   width: 20px;
   height: 20px;
@@ -9714,10 +9791,10 @@ footer .footer-copyright {
   top: 20px;
   left: 0;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block .question-link, .ask-question-sidebar .question-link {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] .question-link, .ask-question-sidebar .question-link {
   text-align: center;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block .question-link a, .ask-question-sidebar .question-link a {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] .question-link a, .ask-question-sidebar .question-link a {
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 900;
@@ -9727,26 +9804,33 @@ footer .footer-copyright {
   margin-bottom: 20px;
   display: block;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block .section-user-details, .ask-question-sidebar .section-user-details {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] .section-user-details, .ask-question-sidebar .section-user-details {
   overflow: hidden;
   background: #f5f5f5;
   padding: 15px 15px 0px 30px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block .section-user-details img, .ask-question-sidebar .section-user-details img {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] .section-user-details img, .ask-question-sidebar .section-user-details img {
   float: right;
   border: 2px solid #ddd;
   border-radius: 100%;
   width: 60px;
   height: 60px;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block .section-user-details .section-user-name, .ask-question-sidebar .section-user-details .section-user-name {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] .section-user-details .section-user-name, .ask-question-sidebar .section-user-details .section-user-name {
   font-size: 14px;
   font-weight: 700;
   color: #585858;
 }
-#block-itg-ask-expert-custom-ask-expert-form-block .ask-user-detail h4, .ask-question-sidebar .ask-user-detail h4 {
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] .ask-user-detail h4, .ask-question-sidebar .ask-user-detail h4 {
   background: #f5f5f5;
   padding: 15px 15px 0px 30px;
+}
+
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] {
+  border-bottom: none;
+}
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] {
+  padding: 15px;
 }
 
 /*css End Ask an expret for all page*/

@@ -139,7 +139,6 @@ function feature_for_reporter_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 1,
@@ -168,7 +167,6 @@ function feature_for_reporter_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
-        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '1970:+0',
       ),
@@ -220,7 +218,7 @@ function feature_for_reporter_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 11,
+      'weight' => 13,
     ),
   );
 
@@ -260,6 +258,90 @@ function feature_for_reporter_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-reporter-field_constituancy'.
+  $field_instances['node-reporter-field_constituancy'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_constituancy',
+    'label' => 'Constituancy',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-reporter-field_party_name'.
+  $field_instances['node-reporter-field_party_name'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_party_name',
+    'label' => 'Party Name',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
     ),
   );
 
@@ -304,7 +386,7 @@ function feature_for_reporter_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 31,
+      'weight' => 15,
     ),
   );
 
@@ -343,7 +425,7 @@ function feature_for_reporter_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 34,
+      'weight' => 18,
     ),
   );
 
@@ -382,7 +464,7 @@ function feature_for_reporter_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 35,
+      'weight' => 19,
     ),
   );
 
@@ -424,7 +506,7 @@ function feature_for_reporter_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -466,7 +548,7 @@ function feature_for_reporter_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 32,
+      'weight' => 16,
     ),
   );
 
@@ -508,7 +590,7 @@ function feature_for_reporter_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 7,
+      'weight' => 10,
     ),
   );
 
@@ -547,7 +629,7 @@ function feature_for_reporter_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 33,
+      'weight' => 17,
     ),
   );
 
@@ -626,7 +708,7 @@ function feature_for_reporter_field_default_field_instances() {
       'module' => 'hs_taxonomy',
       'settings' => array(),
       'type' => 'taxonomy_hs',
-      'weight' => 8,
+      'weight' => 11,
     ),
   );
 
@@ -744,7 +826,7 @@ function feature_for_reporter_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 9,
+      'weight' => 12,
     ),
   );
 
@@ -890,6 +972,7 @@ function feature_for_reporter_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('About');
   t('Career Graph');
+  t('Constituancy');
   t('Department');
   t('Designation');
   t('Earning');
@@ -899,6 +982,7 @@ function feature_for_reporter_field_default_field_instances() {
   t('Movie name');
   t('Movie year');
   t('Occupation');
+  t('Party Name');
   t('Picture');
   t('Profile type');
   t('Section');

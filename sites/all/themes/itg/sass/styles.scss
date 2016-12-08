@@ -210,7 +210,9 @@ input[type="text"], select, input[type="password"]{
     @include clearfix;
 }
 #page{@extend .vtop; @extend .full; @extend .dib;}
-
+p{
+    word-wrap: break-word;
+}
 /*start header css*/
 header{
     margin-bottom: 30px;
@@ -6012,6 +6014,10 @@ footer{
                 font-family: roboto-slab;
             }
             .captcha{
+                border: none;
+                legend, .fieldset-description{
+                    display: none;
+                }
                 img{
                     width: 120px;
                     margin-top: 15px;
@@ -6862,12 +6868,17 @@ input[type="radio"]:checked + label:after{
                 color: #b6b6b6;
             }
         }
+        div{
+            display: inline-block;
+            vertical-align: bottom;
+        }
+        @include social-share;
     }
     .election-graph-3{
         margin-top: -50px;
     }
     .election-graph-4{
-        margin-top: -50px;
+        margin-top: -100px;
     }
     .election-graph-5{
         margin-top: -150px;
@@ -7081,13 +7092,19 @@ input[type="radio"]:checked + label:after{
                             i{
                                 background: #d80a02;
                             }
-                            color:#418b32;
+                            color:#d80a02;
                         }
                         &.yellow{
                             i{
                                 background: #efc107;
                             }
                             color:#418b32;
+                        }
+                        &.orange{
+                            i{
+                                background: #ff8300;
+                            }
+                            color:#ff8300;
                         }
                     }
                 }
@@ -7337,7 +7354,7 @@ input[type="radio"]:checked + label:after{
 #block-itg-menu-manager-vertical-menu{
     position: absolute;
     top: 50px;
-    left:-54px;
+    left:-75px;
     background: #f2f2f2;    
     border-radius: 3px;
     box-shadow: 2px 2px 3px #ccc;
@@ -7366,7 +7383,8 @@ input[type="radio"]:checked + label:after{
         text-transform: uppercase;
         line-height: 15px;
         display: block;
-         padding: 10px 5px;
+        padding: 10px 5px;
+        word-wrap: break-word;
          &:hover{
              background: #fff;
              color: #b00202;
@@ -7760,10 +7778,14 @@ input[type="radio"]:checked + label:after{
                 vertical-align: bottom;
             }
             .captcha{
+                border:none;
                 display: inline-block;
                 vertical-align: bottom;
                 width: 50%;
                 margin-top: 10px;
+                legend, .fieldset-description{
+                   display: none; 
+                }
             }
         } 
         .expert-question{
@@ -7911,18 +7933,21 @@ input[type="radio"]:checked + label:after{
 .factoids-slider{
     ul{        
         background:#a00606;
-        padding:0px 30px;
+        padding:0px;
         li{
-            span{
-            padding:25px 10px;
+            padding:25px;
+            span{          
             font-size: 15px;
             line-height: 24px;
             color:#fff;       
-            display:block;
-            &:hover{
-                background: #000;
-            }   
-            }            
+            display:block;               
+            } 
+            &:nth-child(odd){
+                background:#a00606;
+            }
+            &:nth-child(even){
+                background:#000;                
+            }
         }
     }
     button{
@@ -7950,7 +7975,7 @@ input[type="radio"]:checked + label:after{
         @include calculate-width(1);   
     }    
     .listicle-detail{
-        border-top: 1px solid #ccc;   
+/*        border-top: 1px solid #ccc;   */
         > span{
             width: 34px;
             height: 34px;
@@ -7969,7 +7994,7 @@ input[type="radio"]:checked + label:after{
             color: #282828;    
             @include display-inline;
             width: 90%;
-            padding: 15px;
+            padding: 20px;
             span{
                 font-weight: 600;
                 text-transform: capitalize;
@@ -7985,7 +8010,7 @@ input[type="radio"]:checked + label:after{
 
 
 /*css start Ask an expret for all page*/
-#block-itg-ask-expert-custom-ask-expert-form-block, .ask-question-sidebar{             
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"], .ask-question-sidebar{             
         font-family: roboto;
         border-bottom: 1px solid #ddd;        
         @include sidebar-heading;        
@@ -8000,7 +8025,7 @@ input[type="radio"]:checked + label:after{
             margin: 0;
             padding: 0;            
         }
-        #itg-custom-ask-an-expert-form{     
+        [id*="itg-custom-ask-an-expert-form"]{     
             background: #f5f5f5;
             padding: 15px 15px 15px 30px;            
             @include clearfix;
@@ -8053,9 +8078,13 @@ input[type="radio"]:checked + label:after{
                 font-family: roboto-slab;
             }
             .captcha{
+                border:none;
                 img{
                     width: 120px;
                     margin-top: 15px;
+                }
+                legend, .fieldset-description{
+                   display: none; 
                 }
             }
             .form-item-captcha-response{
@@ -8065,6 +8094,7 @@ input[type="radio"]:checked + label:after{
                 label{
                     width: 52%;
                     float: left;
+                    font-size: 13px;
                 }
                 input[type="text"]{                
                     width: 47%;
@@ -8134,6 +8164,12 @@ input[type="radio"]:checked + label:after{
                 background: #f5f5f5;
                 padding: 15px 15px 0px 30px;
             }
+        }
+    }
+    [id*="block-itg-ask-expert-custom-ask-expert-form-block"]{
+        border-bottom:none;
+        [id*="itg-custom-ask-an-expert-form"]{
+            padding: 15px;
         }
     }
     /*css End Ask an expret for all page*/
