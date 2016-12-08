@@ -9011,3 +9011,13 @@ div.node{
         margin-top: -53px;
     }
 }
+.action-with-title [data-id="edit-submit"]{    
+    @extend .btn-save;
+}
+[id*="itg-widget-issuewidget-filter-form"]{
+    .form-item-magazine-title, #view-display-isesue, .form-item-content-title{
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 10px;
+    }
+}
