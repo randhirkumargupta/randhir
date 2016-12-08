@@ -11,13 +11,19 @@ class ItgSubSubCategoryMigration extends XMLMigration {
 
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
+      'title' => t('title'),
       'name' => t('Category name'),
+      'image' => t('image'),
+      'description' => t('description'),      
+      'published' => t('published'),
+      'ordering' => t('ordering'),
       'metatitle' => t('metatitle'),
       'metadesc' => t('metadesc'),
       'metakey' => t('metakey'),
-      'template_name' => t('template_name'),
+      'sub_category' => t('parent_id'),
       'sef_url' => t('sef_url'),
-      'content_type' => t('content_type'),      
+      'created' => t('created'),
+      'content_url' => t('content_url'),
     );
 
     
@@ -77,19 +83,26 @@ class ItgSubSubCategoryMigration extends XMLMigration {
     $this->addFieldMapping('parent', 'sub_category')->xpath('sub_category');
     $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
-    //<created>(NULL)</created>(not clear)
+  }
+  
+  public function prepareRow($row) {
+    // manage parent id
+    if (isset($row->xml->sub_category) && !empty($row->xml->sub_category)) {
+      $source_cid = (string) $row->xml->category;
+      $orignal_category = get_itg_destination_id('migrate_map_itgsubcategory', $source_cid);
+      $row->xml->sub_category = $orignal_category;
+    }
+    else {
+      $row->xml->sub_category = '';
+    }
   }
   
   public function complete($entity, $row) {
-    if (!empty($row->xml->published)) {    
-      $data = array(
-       'tid' => $term->tid,
-       'uid' => 3,
-       'created' => time(),
-       'changed' => time(),
-       'status' => isset($row->xml->published) ? $row->xml->published : 1,
-     );
-     drupal_write_record('itg_category_manager', $data);
-    }   
+    $created = !empty($row->xml->created) ? (string) $row->xml->created : time();
+    $status = isset($row->xml->published) ? (string) $row->xml->published : 1;
+    db_update('itg_category_manager')
+        ->fields(array('created' => $created, 'uid' => 3, 'status' => $status))
+        ->condition('tid', $entity->tid, '=')
+        ->execute();
   }
 }

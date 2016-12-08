@@ -822,6 +822,43 @@ function feature_category_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_user_name'.
+  $field_instances['taxonomy_term-category_management-field_user_name'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'schedule duration',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 21,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_user_name',
+    'label' => 'Schedule duration',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 26,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t(' Program Timing');
@@ -846,6 +883,7 @@ function feature_category_management_field_default_field_instances() {
   t('Program timing in days');
   t('Redirection URL');
   t('Result format');
+  t('Schedule duration');
   t('Section flag');
   t('Section type');
   t('Select template');
@@ -853,6 +891,7 @@ function feature_category_management_field_default_field_instances() {
   t('Set As Featured');
   t('Sponsored Category');
   t('Time Period');
+  t('schedule duration');
 
   return $field_instances;
 }
