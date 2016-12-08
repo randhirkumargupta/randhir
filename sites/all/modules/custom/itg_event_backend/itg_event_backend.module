@@ -1423,18 +1423,20 @@ function itg_event_backend_flashback($curr_event_id){
  * @param type array
  * @return array
  */
-function itg_event_backend_redirect_flashback($val, $detail){
-  $query = db_select('redirect', 'r');
-  $query->fields('r');
-  $query->condition('r.source', $val, 'IN');
-  $result = $query->execute();
-  $count = 0;
-  foreach($result as $rel){
-    $past_event[$count] = $detail[$rel->source];
-    $past_event[$count]['redirect'] = $rel->redirect;
-    $count++;
+function itg_event_backend_redirect_flashback($val, $detail) {
+  if(count($val) > 0) {
+    $query = db_select('redirect', 'r');
+    $query->fields('r');
+    $query->condition('r.source', $val, 'IN');
+    $result = $query->execute();
+    $count = 0;
+    foreach($result as $rel){
+      $past_event[$count] = $detail[$rel->source];
+      $past_event[$count]['redirect'] = $rel->redirect;
+      $count++;
+    }
+    return $past_event;
   }
-  return $past_event;
 }
 
 /**
