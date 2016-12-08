@@ -7503,6 +7503,12 @@ footer .footer-copyright {
   cursor: pointer;
   font-family: roboto-slab;
 }
+.education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha {
+  border: none;
+}
+.education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha legend, .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha .fieldset-description {
+  display: none;
+}
 .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha img {
   width: 120px;
   margin-top: 15px;
@@ -8573,7 +8579,7 @@ footer .footer-copyright {
   background: #418b32;
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.red {
-  color: #418b32;
+  color: #d80a02;
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.red i {
   background: #d80a02;
@@ -8583,6 +8589,12 @@ footer .footer-copyright {
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.yellow i {
   background: #efc107;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.orange {
+  color: #ff8300;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status.orange i {
+  background: #ff8300;
 }
 .election-page .key-candidate .key-candidate-detail.key-candidate-detail-first {
   display: block;
@@ -9330,10 +9342,14 @@ footer .footer-copyright {
   vertical-align: bottom;
 }
 #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .captcha {
+  border: none;
   display: inline-block;
   vertical-align: bottom;
   width: 50%;
   margin-top: 10px;
+}
+#block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .captcha legend, #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config #itg-custom-ask-an-expert-form .captcha .fieldset-description {
+  display: none;
 }
 #block-itg-ask-expert-ask-an-expert-details-page-block #expert_global_config .expert-question {
   position: relative;
@@ -9553,10 +9569,10 @@ footer .footer-copyright {
   display: block;
 }
 .factoids-slider ul li:nth-child(odd) {
-  background: #000;
+  background: #a00606;
 }
 .factoids-slider ul li:nth-child(even) {
-  background: #a00606;
+  background: #000;
 }
 .factoids-slider button {
   background: #000;
@@ -9581,7 +9597,7 @@ footer .footer-copyright {
   width: 100%;
 }
 .story-section .listicle-page .listicle-detail {
-  border-top: 1px solid #ccc;
+  /*        border-top: 1px solid #ccc;   */
 }
 .story-section .listicle-page .listicle-detail > span {
   width: 34px;
@@ -9603,7 +9619,7 @@ footer .footer-copyright {
   display: inline-block;
   vertical-align: top;
   width: 90%;
-  padding: 15px;
+  padding: 20px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description span {
   font-weight: 600;
@@ -9724,9 +9740,15 @@ footer .footer-copyright {
   cursor: pointer;
   font-family: roboto-slab;
 }
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha {
+  border: none;
+}
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha img, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha img {
   width: 120px;
   margin-top: 15px;
+}
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha legend, [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha .fieldset-description, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha legend, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha .fieldset-description {
+  display: none;
 }
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response {
   display: inline-block;
@@ -9736,6 +9758,7 @@ footer .footer-copyright {
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response label, .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response label {
   width: 52%;
   float: left;
+  font-size: 13px;
 }
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"], .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"] {
   width: 47%;
