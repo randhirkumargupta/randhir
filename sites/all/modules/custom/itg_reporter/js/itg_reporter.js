@@ -3,9 +3,9 @@
  * Contains all functionality related to Reporter
  */
 
-(function ($) {
+(function($) {
     Drupal.behaviors.itg_reporter = {
-        attach: function (context, settings) {
+        attach: function(context, settings) {
             var uid = settings.itg_reporter.settings.uid;
             var ntype = settings.itg_reporter.settings.ntype;
             var anchor = settings.itg_reporter.settings.anchor;
@@ -22,11 +22,17 @@
             {
                 $('#edit-field-constituancy-und-0-value').show();
                 $('#edit-field-party-name-und-0-value').show();
+                $('.form-item-field-constituancy-und-0-value').show();
+                $('#edit-field-party-name').show();
+
 
 
             } else {
                 $('#edit-field-constituancy-und-0-value').hide();
+
                 $('#edit-field-party-name-und-0-value').hide();
+                $('.form-item-field-constituancy-und-0-value').hide();
+                $('#edit-field-party-name').hide();
 
 
             }
@@ -41,7 +47,7 @@
                 $('#edit-field-reporter-movie-name').show();
             }
 
-            $('#edit-field-celebrity-pro-occupation-und').change(function () {
+            $('#edit-field-celebrity-pro-occupation-und').change(function() {
                 var celebrityvalue = $('#edit-field-celebrity-pro-occupation-und').val();
                 // alert(celebrityvalue);
                 var hasexist = celebrityvalue.indexOf(anchor) != -1;
@@ -60,11 +66,15 @@
                 {
                     $('#edit-field-constituancy-und-0-value').show();
                     $('#edit-field-party-name-und-0-value').show();
+                    $('.form-item-field-constituancy-und-0-value').show();
+                    $('#edit-field-party-name').show();
 
 
                 } else {
                     $('#edit-field-constituancy-und-0-value').hide();
                     $('#edit-field-party-name-und-0-value').hide();
+                    $('.form-item-field-constituancy-und-0-value').hide();
+                    $('#edit-field-party-name').hide();
 
 
                 }
@@ -81,7 +91,7 @@
 
             // Common function to reset all values.
             function clear_form_elements(class_name) {
-                jQuery("." + class_name).find(':input').each(function () {
+                jQuery("." + class_name).find(':input').each(function() {
                     switch (this.type) {
                         case 'text':
                         case 'textarea':
@@ -97,7 +107,7 @@
 
             // restrict mouse down on datefield.
             // date-clear form-text hasDatepicker date-popup-init valid
-            $('input .hasDatepicker').keypress(function (e) {
+            $('input .hasDatepicker').keypress(function(e) {
                 return false
             });
 
