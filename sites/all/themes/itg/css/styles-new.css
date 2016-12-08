@@ -866,7 +866,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 
 #content #block-formblock-ugc {
   margin: 0 auto;
-  max-width: 720px;
+  max-width: 750px;
   text-align: left;
 }
 #content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype {
@@ -4112,6 +4112,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .review
   font: 400 14px/16px Roboto;
   overflow: hidden;
 }
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .review-row .review-txt .field-name-field-mega-review-cast .field-item {
+  display: inline-block;
+  vertical-aling: top;
+  margin-right: 5px;
+}
 article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer {
   margin: 10px 20px 0;
   padding-top: 4px;
@@ -4147,6 +4152,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   background: url(../images/rating-red.png) 0 0px/80px no-repeat;
   height: 18px;
   width: 0;
+}
+article.node-mega-review-critic .bottom-movie-desc {
+  color: #b7b7b7;
+  padding-top: 10px;
 }
 article.node-mega-review-critic .other-reviews {
   margin: 10px 0;
@@ -4223,6 +4232,9 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
   color: #212121;
   margin-top: 10px;
 }
+article.node-mega-review-critic .other-reviews .other-reviews-desc a {
+  color: #a00606;
+}
 
 .photos-videos-wrapper {
   display: inline-block;
@@ -4265,6 +4277,12 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
   padding-left: 0;
   padding-top: 20px;
 }
+.photos-videos-wrapper .movie-videos.full-width, .photos-videos-wrapper .movie-photos.full-width {
+  width: 100%;
+}
+.photos-videos-wrapper .movie-videos.full-width img, .photos-videos-wrapper .movie-photos.full-width img {
+  width: 100%;
+}
 .photos-videos-wrapper .movie-videos, .photos-videos-wrapper .movie-photos {
   padding: 0 15px;
 }
@@ -4290,7 +4308,7 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
 }
 
 .career-graph .career-graph-data {
-  margin-top: 150px;
+  margin-top: 80px;
   position: relative;
 }
 .career-graph .career-graph-data .gray-bg, .career-graph .career-graph-data .black-bg {
@@ -4317,6 +4335,9 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
 }
 .career-graph .highcharts-container {
   background: #f7f7f7;
+}
+.career-graph + vukkul-comment {
+  margin-top: 50px;
 }
 
 .overflow-x-auto {

@@ -326,7 +326,15 @@ jQuery(document).ready(function () {
     //Add header for so-sorry page
     jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
     jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title, #defalt-section-top-block .widget-title').prependTo('.auto-block-2 .special-top-news');
-
+    
+    var arrayOne = [];
+    jQuery('.factoids-slider li').each(function(){
+        var getHEight = jQuery(this).outerHeight(true);
+        arrayOne.push(getHEight);    
+    });
+    var largest = Math.max.apply(Math, arrayOne);
+    jQuery(".factoids-slider li").css('height', largest + "px");
+    
     jQuery('.factoids-slider ul').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -350,7 +358,7 @@ jQuery(document).ready(function () {
                 }
             }
         ]
-    });
+    });        
 
 
 });
@@ -416,6 +424,18 @@ jQuery(document).ready(function () {
     setTimeout(function () {
         jQuery('.saved-photogallery').remove();
     }, 3000);
+    
+    //movie review more less
+    jQuery('.other-reviews-desc .read-more').click(function(){        
+       jQuery(this).parents('.other-reviews-desc').find('.less-content').hide();
+       jQuery(this).parents('.other-reviews-desc').find('.full-content').show();        
+    });
+    
+    jQuery('.other-reviews-desc .read-less').click(function(){        
+        jQuery(this).parents('.other-reviews-desc').find('.full-content').hide();
+        jQuery(this).parents('.other-reviews-desc').find('.less-content').show();        
+    });
+    
 });
 
 

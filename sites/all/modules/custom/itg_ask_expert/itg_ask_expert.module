@@ -396,7 +396,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     '#type' => 'textarea', //you can find a list of available types in the form api
     '#title' => t(''),
     '#prefix' => '<div id="question">',
-    '#suffix' => '<span id="rest-char">160</span> out of 160 characters</div>',
+    '#suffix' => '<p class="chtr-limit"><span id="rest-char">160</span> out of 160 characters</p></div>',
     '#maxlength' => 160,
     '#attributes' => array(
       'placeholder' => 'Ask your question here',
