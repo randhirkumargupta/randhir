@@ -5955,6 +5955,9 @@ footer{
             cursor: pointer;
         }
     }
+    .widget-wrapper.custom_ask_expert_form_block{
+        overflow-y: auto;
+    }
     .ask-question{
         padding:15px;
         font-family: roboto-slab;
@@ -7684,8 +7687,8 @@ input[type="radio"]:checked + label:after{
         padding-top: 3px;
         p{
             line-height: 24px;
-            a{
-                color:#a00606;
+            a.views-more-link{                
+                color:#a00606;                                   
             }
         }        
         &:before{
@@ -7936,12 +7939,9 @@ input[type="radio"]:checked + label:after{
         padding:0px;
         li{
             padding:25px;
-            span{          
             font-size: 15px;
             line-height: 24px;
-            color:#fff;       
-            display:block;               
-            } 
+            color:#fff;                   
             &:nth-child(odd){
                 background:#a00606;
             }
@@ -8010,6 +8010,9 @@ input[type="radio"]:checked + label:after{
 
 
 /*css start Ask an expret for all page*/
+    .widget-wrapper.custom_ask_expert_form_block{
+        overflow-y: auto;
+    }
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"], .ask-question-sidebar{             
         font-family: roboto;
         border-bottom: 1px solid #ddd;        

@@ -58,7 +58,7 @@ $resultdata = array_unique($consti);
                     }
                     else if ($row['extra'] == "Lead")
                     {
-                        print ' <p class="status green"><i class="fa fa-thumbs-o-yellow"></i><span>LEAD</span></p>';
+                        print ' <p class="status green"> <i class="fa fa-hand-o-up" aria-hidden="true"></i></i><span>LEAD</span></p>';
                     }
                     ?>
                 </li>         

@@ -79,8 +79,18 @@
                 // Place internal and external review on black area.
                 var internal_review = $('#internal-review').html();
                 var external_review = $('#external-review').html();
-                $('.movie-reviewer-other').html('<h3>OTHER REVIEWERS</h3>' + external_review);
-                $('.our-review').html('<h3>OUR REVIEWERS</h3>' + internal_review);
+                if (external_review != null) {
+                    $('.movie-reviewer-other').html('<h3>OTHER REVIEWERS</h3>' + external_review);
+                }
+                else {
+                    $('.movie-reviewer-other').remove();
+                }
+                if (internal_review != null) {
+                    $('.our-review').html('<h3>OUR REVIEWERS</h3>' + internal_review);
+                }
+                else {
+                    $('.our-review').remove();
+                }
             }
             $('input.rating').hover(function () {
                 $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
@@ -327,19 +337,11 @@ jQuery(document).ready(function () {
     jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
     jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title, #defalt-section-top-block .widget-title').prependTo('.auto-block-2 .special-top-news');
 
-    var arrayOne = [];
-    jQuery('.factoids-slider li').each(function () {
-        var getHEight = jQuery(this).outerHeight(true);
-        arrayOne.push(getHEight);
-    });
-    var largest = Math.max.apply(Math, arrayOne);
-    jQuery(".factoids-slider li").css('height', largest + "px");
 
     jQuery('.factoids-slider ul').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
-        infinite: false,
-        centerPadding: '20px',
+        infinite: false,        
         prevArrow: "<button class = 'slick-prev'><i class = 'fa fa-angle-left'></i></button>",
         nextArrow: "<button class = 'slick-next'><i class = 'fa fa-angle-right'></i></button>",
         responsive: [
@@ -360,6 +362,13 @@ jQuery(document).ready(function () {
         ]
     });
 
+    var arrayOne = [];
+    jQuery('.factoids-slider li').each(function () {
+        var getHEight = jQuery(this).outerHeight(true);
+        arrayOne.push(getHEight);
+    });
+    var largest = Math.max.apply(Math, arrayOne);
+    jQuery(".factoids-slider li").css('height', largest + "px");
 
 });
 

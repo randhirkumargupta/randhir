@@ -124,6 +124,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
     // Hide issue and magazine form edit page
     $form['field_pti_issue']['#access'] = FALSE;
     $form['field_pti_magazine']['#access'] = FALSE;
+    $form['field_pti_supplement']['#access'] = FALSE;
     $form['actions']['submit']['#value'] = 'Submit';
     
     // Hide Rating and Mark as complete fields from node edit page
@@ -147,6 +148,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
           unset($form['field_pti_print_media']);
           $form['field_pti_issue']['#access'] = FALSE;
           $form['field_pti_magazine']['#access'] = FALSE;
+          $form['field_pti_supplement']['#access'] = FALSE;
           $form['field_story_rating']['#access'] = FALSE;
           $form['field_pti_magazine_kicker']['#access'] = FALSE;
         }
@@ -164,6 +166,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
         $form['field_survey_end_date']['#access'] = FALSE;
         $form['field_pti_issue']['#access'] = FALSE;
         $form['field_pti_magazine']['#access'] = FALSE;
+        $form['field_pti_supplement']['#access'] = FALSE;
         $form['field_story_rating']['#access'] = FALSE;
       }
       
@@ -234,6 +237,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
       $form['field_pti_idea_status']['#access'] = FALSE;
       $form['field_pti_issue']['#access'] = FALSE;
       $form['field_pti_magazine']['#access'] = FALSE;
+      $form['field_pti_supplement']['#access'] = FALSE;
       $form['field_story_rating']['#access'] = FALSE;
       $form['field_pti_mark_as_complete']['#access'] = FALSE;
       $form['field_pti_magazine_kicker']['#access'] = FALSE;

@@ -33,11 +33,11 @@ function itg_reports_menu() {
     'file' => 'includes/itg_reports.helper.inc',
   );
   // Menu form email autocomplete.
-  $items['itg-reports-mail/autocomplete'] = array(    
+  $items['itg-reports-mail/autocomplete'] = array(
     'page callback' => 'itg_reports_email_autocomplete',
     'access arguments' => array('view report dashboard'),
     'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_reports.helper.inc',    
+    'file' => 'includes/itg_reports.helper.inc',
   );
 
   return $items;
@@ -67,12 +67,12 @@ function itg_reports_theme($existing, $type, $theme, $path) {
  *
  * {@inheritdoc}.
  */
-function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {  
-  switch ($form['#id']) {    
+function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form['#id']) {
     case 'views-exposed-form-report-filed-content-page':
       $form['field_story_category_tid']['#attributes'] = array('placeholder' => 'Search by section name');
       $form['uid']['#attributes'] = array('placeholder' => 'Search by user name');
-      $form['mail']['#attributes'] = array('placeholder' => 'Search by user email');      
+      $form['mail']['#attributes'] = array('placeholder' => 'Search by user email');
       $form['node_status']['#options'][1] = t('Published');
       $form['node_status']['#options'][0] = t('Not published');
       $form['moderation'] = array(
@@ -80,7 +80,7 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
         '#type' => 'select',
         '#options' => array('all' => 'Any', 'yes' => 'Yes', 'no' => 'No'),
         '#default_value' => 'all',
-      );      
+      );
       $form['mail']['#autocomplete_path'] = 'itg-reports-mail/autocomplete';
       $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
       unset($form['date_filter']['min']['#title']);
@@ -91,13 +91,20 @@ function itg_reports_form_views_exposed_form_alter(&$form, &$form_state, $form_i
       $form['#after_build'][] = 'itg_reports_view_after_build';
 
       break;
-    case 'views-exposed-form-comparative-report-cm-page':      
+    case 'views-exposed-form-comparative-report-cm-page':
       $form['tid']['#attributes'] = array('placeholder' => 'Search by section name');
       $form['date_filter']['min']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('Start Date'));
       unset($form['date_filter']['min']['#title']);
       $form['date_filter']['max']['#attributes'] = array('autocomplete' => 'off', 'readonly' => 'readonly', 'placeholder' => t('End Date'));
       unset($form['date_filter']['max']['#title']);
       $form['#after_build'][] = 'itg_reports_view_after_build';
+
+      break;
+    case 'views-exposed-form-movies-master-page':
+      $form['tid']['#attributes'] = array('placeholder' => t('Search by movie name'));
+      $form['field_movie_earning_value']['min']['#attributes'] = array('placeholder' => t('Start range'));
+      $form['field_movie_earning_value']['max']['#attributes'] = array('placeholder' => t('End range'));
+      unset($form['field_movie_earning_value']['max']['#title']);
   }
 }
 
@@ -150,16 +157,16 @@ function itg_reports_block_view($delta = '') {
             '#type' => 'chart',
             '#chart_type' => 'line',
             '#chart_library' => 'highcharts',
-            '#legend' => FALSE,            
+            '#legend' => FALSE,
           );
 
           // Add missing year.
-          itg_reports_missing_year($chart_data['graph']);          
+          itg_reports_missing_year($chart_data['graph']);
 
           $chart['career'] = array(
             '#type' => 'chart_data',
             '#data' => $chart_data['graph'],
-            '#title' => t($chart_data['actor'][$key]['actor_name']),            
+            '#title' => t($chart_data['actor'][$key]['actor_name']),
           );
           $chart['xaxis'] = array(
             '#type' => 'chart_xaxis',
@@ -196,31 +203,31 @@ function itg_reports_block_view($delta = '') {
 function itg_report_get_graph_data() {
   $arg = arg();
   $chart_data = array();
-  $node = node_load($arg[1]);  
-  foreach ($node->field_mega_review_career_graph['und'] as $field_collection) {    
+  $node = node_load($arg[1]);
+  foreach ($node->field_mega_review_career_graph['und'] as $field_collection) {
     $data = array();
     $actor_data = array();
-    foreach ($field_collection['entity']->field_reporter_movie_name['und'] as $key => $tids) {      
-      $movie_details = taxonomy_term_load($tids['tid']);      
+    foreach ($field_collection['entity']->field_reporter_movie_name['und'] as $key => $tids) {
+      $movie_details = taxonomy_term_load($tids['tid']);
       $movie_name = $movie_details->name;
       $timestamp = $movie_details->field_reporter_movie_year['und'][0]['value'];
-      $movie_year = format_date($timestamp, 'custom', 'Y');            
+      $movie_year = format_date($timestamp, 'custom', 'Y');
       $actor_data[] = array(
         'actor_name' => $field_collection['entity']->title,
         'movie_name' => $movie_name,
         'actor_pic' => $field_collection['entity']->field_story_extra_large_image['und'][0]['uri'],
-      );      
+      );
       $data[] = array(
         (int) $movie_year,
         (int) $movie_details->field_movie_earning['und'][0]['value'],
       );
-    }    
+    }
     $chart_data[] = array(
       'actor' => $actor_data,
       'graph' => $data,
     );
   }
-  
+
   return $chart_data;
 }
 
@@ -280,13 +287,13 @@ function itg_report_node_edit_count($output) {
   try {
     $itg_query = db_select('node_revision', 'n');
     $itg_query->fields('n', array('nid'))
-        ->condition('nid', $output);        
+        ->condition('nid', $output);
     $result = $itg_query->execute()->rowCount();
   }
   catch (Exception $ex) {
     drupal_set_message($ex->getMessage(), 'error');
   }
-  
+
   return $result;
 }
 
@@ -295,10 +302,27 @@ function itg_report_node_edit_count($output) {
  *
  * {@inheritdoc}.
  */
-function itg_reports_views_pre_render(&$view) {  
-  if ($view->name == 'report_filed_content') {
-    foreach ($view->result as $rows) {
-      $rows->nid = itg_report_node_edit_count($rows->nid);
-    }
+function itg_reports_views_pre_render(&$view) {
+  switch ($view->name) {
+    case 'report_filed_content':      
+      foreach ($view->result as $rows) {
+        $rows->nid = itg_report_node_edit_count($rows->nid);
+      }
+      $header_content = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+      $view->attachment_before = $header_content;
+
+      break;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_form_alter(&$form, &$form_state, $form_id) {  
+  if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {    
+    $form['relations']['#prefix'] = '<div style="display:none;">';
+    $form['relations']['#suffix'] = '</div>';
   }
 }

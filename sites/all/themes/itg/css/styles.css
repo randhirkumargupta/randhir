@@ -7427,6 +7427,9 @@ footer .footer-copyright {
   border-radius: 5px;
   cursor: pointer;
 }
+.education-layout-page .widget-wrapper.custom_ask_expert_form_block {
+  overflow-y: auto;
+}
 .education-layout-page .ask-question {
   padding: 15px;
   font-family: roboto-slab;
@@ -9166,7 +9169,7 @@ footer .footer-copyright {
 .ask-an-expert-question-answer .expert-answer p {
   line-height: 24px;
 }
-.ask-an-expert-question-answer .expert-answer p a {
+.ask-an-expert-question-answer .expert-answer p a.views-more-link {
   color: #a00606;
 }
 .ask-an-expert-question-answer .expert-answer:before {
@@ -9561,12 +9564,9 @@ footer .footer-copyright {
 }
 .factoids-slider ul li {
   padding: 25px;
-}
-.factoids-slider ul li span {
   font-size: 15px;
   line-height: 24px;
   color: #fff;
-  display: block;
 }
 .factoids-slider ul li:nth-child(odd) {
   background: #a00606;
@@ -9631,6 +9631,10 @@ footer .footer-copyright {
 
 /*css end factoids-slider*/
 /*css start Ask an expret for all page*/
+.widget-wrapper.custom_ask_expert_form_block {
+  overflow-y: auto;
+}
+
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"], .ask-question-sidebar {
   font-family: roboto;
   border-bottom: 1px solid #ddd;
