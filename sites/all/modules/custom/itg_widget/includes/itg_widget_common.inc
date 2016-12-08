@@ -115,10 +115,17 @@ function itg_widgets_custom_variables() {
     '#title' => t('top takes block condition for arg(1)'),
     '#default_value' => variable_get('top_takes_block_condition'),
   );
-   $form['tid_politician'] = array(
+  $form['tid_politician'] = array(
     '#type' => 'textarea',
     '#title' => t('tid of politician'),
     '#default_value' => variable_get('tid_politician'),
+  );
+
+  $form['apache_solr_sites_prefix_values'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Apache solr sites prefix and has values'),
+    '#description' => t("Ex: dev|eoshds,stage|asdasd"),
+    '#default_value' => variable_get('apache_solr_sites_prefix_values'),
   );
   return system_settings_form($form);
 }
@@ -205,6 +212,33 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
   if (!empty($widget_name) && !empty($nid)) {
     $num = db_delete('itg_widget_order')
         ->condition('nid', $nid)
+        ->condition('widget', $widget_name)
+        ->execute();
+    if ($num) {
+      drupal_set_message(t("Node has been moved"));
+      drupal_goto($_SERVER['HTTP_REFERER']);
+    }
+    else {
+      drupal_set_message(t("Node id or widget name not found"));
+      drupal_goto($_SERVER['HTTP_REFERER']);
+    }
+  }
+}
+
+/**
+ * Funtion used to delete node combination form itg_widget_order table.
+ * 
+ * @param string $widget_name
+ * @param string $content_type
+ * @param int $cat_tid
+ * @param int $nid
+ */
+function move_node_from_key_candidate_widget($widget_name, $cat_tid, $state, $nid) {
+  if (!empty($widget_name) && !empty($nid)) {
+    $num = db_delete('itg_widget_order')
+        ->condition('nid', $nid)
+        ->condition('cat_id', $cat_tid)
+        ->condition('state', $state)
         ->condition('widget', $widget_name)
         ->execute();
     if ($num) {
@@ -392,34 +426,101 @@ function draggable_view_node_delete($view_name, $page_name, $nid) {
 }
 
 /**
+ * Implements hook_form().
+ * {@inheritdoc}
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_keycandidate_form($form, $form_state) {
+  $pre_fix = "";
+  $suf_fix = "";
+
+  $state_class = "visible";
+  $states_neame = get_all_state();
+//    if (isset($_POST['state_value'])) {
+//        $pre_fix = "<div style='display:none'>";
+//        $suf_fix = "</div>";
+//    }
+
+  $form['state_value'] = array(
+    '#type' => 'select',
+    '#title' => 'State <span class="form-required" title="This field is required.">*</span>',
+    '#multiple' => TRUE,
+    '#options' => $states_neame,
+    '#prefix' => $pre_fix,
+    '#suffix' => $suf_fix,
+  );
+
+  $op = getsaction_list();
+
+  $form['cat_value'] = array(
+    '#type' => 'select',
+    '#title' => 'Section <span class="form-required" title="This field is required.">*</span>',
+    '#options' => $op,
+    '#prefix' => $pre_fix,
+    '#suffix' => $suf_fix,
+  );
+
+
+  $form['alt_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Apply'),
+  );
+  $form['#validate'][] = 'itg_widget_keycandidate_validate';
+  return $form;
+}
+
+/**
+ * this function use for get section list
+ */
+function getsaction_list() {
+  $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
+
+  foreach ($tax as $key => $term) {
+
+    if (!itg_category_manager_term_state($term->tid)) {
+      unset($tax[$key]);
+    }
+  }
+  $op = array("All" => " - None -");
+  foreach ($tax as $key => $val) {
+    $op[$val->tid] = $val->name;
+  }
+  return $op;
+}
+
+/**
+ * This function use for get state
+ */
+function get_all_state() {
+  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+  $states_neame[] = 'Select';
+  foreach ($terms as $values) {
+    $states_neame[$values->tid] = $values->name;
+  }
+  return $states_neame;
+}
+
+/**
+ * This mentod will go to keycandidate widget filter url
+ * 
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_keycandidate_form_submit($form, $form_state) {
+
+  $query = array('state_val' => $form_state['values']['state_value'], 'cat_id' => $form_state['values']['cat_value']);
+  drupal_goto('special-key-candidate-widget-contents', array('query' => $query));
+}
+
+/**
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
 
-  if ($form_id == 'views_form_key_candidate_special_key_candidate_widget_contents') {
-    $pre_fix = "";
-    $suf_fix = "";
-    $state_class = "visible";
-    $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
-    $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-    $states_neame[] = 'Select';
-    foreach ($terms as $values) {
-      $states_neame[$values->tid] = $values->name;
-    }
-    if (isset($_POST['state_value'])) {
-      $pre_fix = "<div style='display:none'>";
-      $suf_fix = "</div>";
-    }
 
-    $form['state_value'] = array(
-      '#type' => 'select',
-      '#title' => 'State',
-      '#options' => $states_neame,
-      '#prefix' => $pre_fix,
-      '#suffix' => $suf_fix,
-    );
-  }
   $setting = array();
   $queue_flag = "";
   $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
@@ -766,7 +867,6 @@ function forms_uses_checked_content_id() {
     'views_form_special_how_i_made_it_special_how_made_it_widget_contents',
     'views_form_yearender_top_news_and_top_videos_yearend_left_widget_contents',
     'views_form_most_read_widget_most_read_widget_contents',
-    'views_form_issue_base_magazin_widget_issue_base_magazin_widget',
   );
 }
 
@@ -1033,13 +1133,56 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
     case 'views-exposed-form-key-candidate-special-key-candidate-widget-contents':
-    case 'views-exposed-form-key-candidate-special-key-candidate-widget-list':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
       $form['nid']['#attributes']['placeholder'] = t('Content ID');
       $autocomplete_path = autocomplete_for_widgets('reporter');
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
       $form['#validate'][] = 'custom_section_wise_validate';
+      $states_neame = get_all_state();
+      $form['state_val'] = array(
+        '#type' => 'select',
+        '#multiple' => TRUE,
+        '#options' => $states_neame,
+      );
+      $form['state_val']['#prefix'] = '<div class=""style="display:none">';
+      $form['state_val']['#suffix'] = '</div>';
+
+      $op = getsaction_list();
+
+      $form['cat_id'] = array(
+        '#type' => 'select',
+        '#options' => $op,
+      );
+      $form['cat_id']['#prefix'] = '<div class=""style="display:none">';
+      $form['cat_id']['#suffix'] = '</div>';
+      break;
+    case 'views-exposed-form-key-candidate-special-key-candidate-widget-list':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['title']['#weight'] = 1;
+      $form['nid']['#weight'] = 2;
+      $form['title']['#weight'] = 1;
+      $form['items_per_page']['#weight'] = 5;
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets('reporter');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      $form['#validate'][] = 'custom_section_wise_validate';
+      $form['cat_id']['#prefix'] = '<div class="cat-wraper"style="">';
+      $form['cat_id']['#suffix'] = '</div>';
+      $form['cat_id']['#title'] = '';
+      $form['state']['#prefix'] = '<div class="state-wraper"style="">';
+      $form['state']['#suffix'] = '</div>';
+      $op = getsaction_list();
+      $form['cat1_id']['#type'] = 'select';
+      $form['cat1_id']['#options'] = $op;
+      $form['cat1_id']['#weight'] = -9999;
+      $form['cat1_id']['#default_value'] = $_GET['cat_id'];
+      $allstate = get_all_state();
+      $form['state1']['#type'] = 'select';
+      $form['state1']['#options'] = $allstate;
+      $form['state1']['#weight'] = -99994;
+      $form['state1']['#default_value'] = $_GET['state'];
       break;
     case 'views-exposed-form-section-wise-content-ordering-list-page':
       global $messages;
@@ -1060,6 +1203,22 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
 
   if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
     $form['#info']['filter-shs_term_node_tid_depth']['label'] = 'Section';
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_widget_keycandidate_validate($form, &$form_state) {
+
+  if ($form_state['values']['state_value'][0] == '0') {
+    form_set_error('state_value', 'State is required');
+  }
+  if (empty($form_state['values']['state_value'])) {
+    form_set_error('state_value', 'State is required');
+  }
+  if ($form_state['values']['cat_value'] == 'All') {
+    form_set_error('cat_value', 'section is required');
   }
 }
 
@@ -1153,11 +1312,27 @@ function itg_widget_views_api() {
  * {@inheritdoc}
  */
 function itg_widget_views_query_alter(&$view, &$query) {
+
   global $user;
-  if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && $_GET['type'] == 'story') {
-    unset($query->table_queue['field_data_field_type']);
-    unset($query->tables['node']['field_data_field_type']);
-    unset($query->where[1]['conditions'][2]);
+  if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
+
+    foreach ($query->table_queue as $queue => $queue_value) {
+      if ($queue == 'field_data_field_type') {
+        unset($query->table_queue['field_data_field_type']);
+      }
+    }
+
+    foreach ($query->tables['node'] as $queue2 => $queue_value2) {
+      if ($queue2 == 'field_data_field_type') {
+        unset($query->tables['node']['field_data_field_type']);
+      }
+    }
+
+    foreach ($query->where[1]['conditions'] as $conditions_key => $conditions) {
+      if ($conditions['field'] == 'field_data_field_type.field_type_value') {
+        unset($query->where[1]['conditions'][$conditions_key]);
+      }
+    }
   }
   if (($view->name == 'programmes' || $view->name == 'live_tv_programs') && ($view->current_display == 'page' || $view->current_display == 'rhs_programmes')) {
     $program_cat_value = variable_get('program_category_id_for_programmes');
@@ -1313,12 +1488,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
       $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
     }
   }
-   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
+  if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
     if (!empty($_GET['nid']) && empty($_GET['title'])) {
-       
+
       $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
     } if (empty($_GET['nid']) && !empty($_GET['title'])) {
-       
+
       $query->where[1]['conditions'][2]['value'] = variable_get('tid_politician');
     }
     else if (!empty($_GET['nid']) && !empty($_GET['title'])) {
@@ -1327,6 +1502,9 @@ function itg_widget_views_query_alter(&$view, &$query) {
     else if (empty($_GET['nid']) && empty($_GET['title'])) {
       $query->where[1]['conditions'][1]['value'] = variable_get('tid_politician');
     }
+  }
+  if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_list') {
+    
   }
 
   if ($view->name == 'yearender' && $view->current_display == 'block_2') {
@@ -1400,7 +1578,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
       $query->where[1]['conditions'][3]['value'] = $section;
     }
   }
-  if ($view->name == 'most_popular' && ($view->current_display == 'election_graph' )) {
+  if ($view->name == 'most_popular' && ($view->current_display == 'key_candidate' )) {
     global $theme;
 
     if ($theme != 'seven') {
@@ -2435,14 +2613,22 @@ function get_rhs_block_display_condtion($delta = '') {
  */
 function insert_all_node_in_widegt_table() {
 
-  $nodes = db_select('node', 'n')
-          ->fields('n', array('nid'))
-          ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
-          ->execute()->fetchAll(PDO::FETCH_ASSOC);
-  foreach ($nodes as $data) {
-    $node = node_load($data['nid']);
-    itg_widget_node_insert($node);
+  try {
+    db_query('alter table itg_widget_order add column state INT NULL after extra')->execute();
+    db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
   }
+
+
+//    $nodes = db_select('node', 'n')
+//                    ->fields('n', array('nid'))
+//                    ->condition('n.type', array('story', 'photogallery', 'videogallery'), "IN")
+//                    ->execute()->fetchAll(PDO::FETCH_ASSOC);
+//    foreach ($nodes as $data) {
+//        $node = node_load($data['nid']);
+//        itg_widget_node_insert($node);
+//    }
 }
 
 /**
@@ -2739,4 +2925,34 @@ function get_feature_nid_in_sosorry() {
       ->condition('iwo.extra', 'feature')
       ->condition('iwo.widget', 'so_sorry_widget');
   return $query->execute()->fetchField();
+}
+
+/**
+ * Returns hash value crossponding to sites. Which is managing from custom varibales.
+ * 
+ * @param string $site_prefix
+ *  site_prefix is like "qa" form qa_1234
+ * 
+ * @return string
+ */
+function itg_widget_get_site_hash_from_solr($site_prefix) {
+  $solr_variable = variable_get('apache_solr_sites_prefix_values');
+  $site_hash = array();
+  if (!empty($solr_variable)) {
+    $hash_site_string_array = explode(",", $solr_variable);
+    foreach ($hash_site_string_array as $value) {
+      $prefix_with_values = explode("|", $value);
+      $site_hash[strtolower(trim($prefix_with_values[0]))] = trim($prefix_with_values[1]);
+    }
+    return isset($site_hash[$site_prefix]) ? $site_hash[strtolower($site_prefix)] : $site_hash['dev'];
+  }
+}
+
+function itg_get_link_from_hash_and_entity_solr_search($entity_id, $hash) {
+  $solr = apachesolr_get_solr();
+  $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id and hash: $hash"));
+  $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+  $query->addParam('qf', 'entity_id'); // Only search in title
+  $resp_search = $query->search();
+  return $resp_search->response->docs[0];
 }

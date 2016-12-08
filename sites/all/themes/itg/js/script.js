@@ -16,6 +16,7 @@
 // To understand behaviors, see https://drupal.org/node/756722#behaviors
     Drupal.behaviors.my_custom_behavior = {
         attach: function (context, settings) {
+
             jQuery('.add-more-block-front').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
@@ -55,6 +56,15 @@
                     }
                 });
 
+            });
+            jQuery('#question textarea.charcount').keyup(function () {
+                if (jQuery(this).val().length > 160) {
+                    jQuery(this).val(jQuery(this).val().substring(0, 160));
+                    return false;
+                } else {
+                    var value = 160 - jQuery(this).val().length;
+                    jQuery('#rest-char').html(value);
+                }
             });
             // Place your code here.
             // Make unflag link unclickable
@@ -317,6 +327,14 @@ jQuery(document).ready(function () {
     jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
     jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title, #defalt-section-top-block .widget-title').prependTo('.auto-block-2 .special-top-news');
 
+    var arrayOne = [];
+    jQuery('.factoids-slider li').each(function () {
+        var getHEight = jQuery(this).outerHeight(true);
+        arrayOne.push(getHEight);
+    });
+    var largest = Math.max.apply(Math, arrayOne);
+    jQuery(".factoids-slider li").css('height', largest + "px");
+
     jQuery('.factoids-slider ul').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -354,7 +372,17 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).ready(function () {
+    var getmsgsaves = jQuery('.saved-photogallery').text();
 
+    if (getmsgsaves != "")
+    {
+        jQuery('.saved-photogallery').remove();
+        // jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
+        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+        setTimeout(function () {
+            jQuery('.saved-photogallery').remove();
+        }, 3000);
+    }
     jQuery('#map-state').change(function () {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
@@ -386,6 +414,28 @@ jQuery(document).ready(function () {
             }
         });
     });
+
+    //saved message
+    var getmsgsaves = jQuery('.saved-photogallery').text();
+    if (getmsgsaves != "") {
+        jQuery('.saved-photogallery').remove();
+        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+    }
+    setTimeout(function () {
+        jQuery('.saved-photogallery').remove();
+    }, 3000);
+
+    //movie review more less
+    jQuery('.other-reviews-desc .read-more').click(function () {
+        jQuery(this).parents('.other-reviews-desc').find('.less-content').hide();
+        jQuery(this).parents('.other-reviews-desc').find('.full-content').show();
+    });
+
+    jQuery('.other-reviews-desc .read-less').click(function () {
+        jQuery(this).parents('.other-reviews-desc').find('.full-content').hide();
+        jQuery(this).parents('.other-reviews-desc').find('.less-content').show();
+    });
+
 });
 
 

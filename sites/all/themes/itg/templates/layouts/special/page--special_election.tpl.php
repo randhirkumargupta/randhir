@@ -19,6 +19,7 @@ if (arg(2) == 'preview') {
     $preview = 'preview';
 }
 $highlights = itg_widget_highlights_block_data();
+
 $device = itg_live_tv_company('web');
 if (!empty($device[0])) {
     $live_tv_get_details = node_load($device[0]);
@@ -26,6 +27,11 @@ if (!empty($device[0])) {
     if (filter_var($live_url, FILTER_VALIDATE_URL)) {
         $live_url = '<iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>';
     }
+}
+
+if($highlights['node_data']->field_story_expires[LANGUAGE_NONE][0]['value']!='Yes')
+{
+ $live_url='';   
 }
 if ($theme == 'itgadmin' && !isset($preview)) {
     $gray_bg_layout = 'gray-bg-layout';
@@ -130,7 +136,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 
                 if(count($graphdata)>2){
                             ?>
-                        <div class="row election-graph">
+                        <div class="row election-graph election-graph-<?php echo count($graphdata);?>">
 <?php $block = module_invoke('itg_widget', 'block_view', 'graph_election');
                                         print render($block['content']); ?>
                    
@@ -363,19 +369,23 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                     </div>    
                     <div class="col-md-4 col-sm-4 col-sx-12 right-side">        
-                       <?php  if(count($graphdata)<=2){?>
-                        <div class="">
+                      <?php $adsclass="";$key_candidate_extra_block ="";
+                      if(count($graphdata)>2){
+                          $adsclass='ads-after-two';
+                          $key_candidate_extra_block='key_candidate_extra_block';
+                      }?>
+                        <div class="<?php echo $adsclass;?>">
                             <div class="itg-widget election-topadd">
                                 <div class="ad-widget droppable">
                                     <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']); ?></div>
                                 </div>
                             </div>
                         </div> 
-                       <?php  } ?>
-                        <div class="itg-325 mt-50">
+               
+                        <div class="itg-325 mt-50 <?php echo $key_candidate_extra_block; ?>">
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
-                                    <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name']; ?>">
+                                    <div class="widget-wrapper <?php //print $widget_data['itg-block-9']['widget_name']; ?>">
                                         <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-9']['block_title'])) { ?>
                                             <h4 class="heading"><?php print $widget_data['itg-block-9']['block_title']; ?></h4>
 <?php } ?>

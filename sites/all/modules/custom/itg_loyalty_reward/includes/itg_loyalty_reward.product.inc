@@ -25,7 +25,9 @@ function itg_loyalty_reward_redeem_points() {
  */
 function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = NULL) {
   global $user;
-  $redirect = check_plain($_GET['destination']);
+  if ($new_quantity == NULL) {
+    $redirect = check_plain($_GET['destination']);
+  }
   // Check if node is set.
   if ($node_id > 0) {
     // Check if product is already in cart.
@@ -42,30 +44,39 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = 
     );
     // Check if user has valid points to redeem product.
     $remaining_point = itg_loyalty_reward_remaining_point($user->uid);
-    if ($remaining_point < $node_info_array['points'] && $action = 'buy-now') {
+    if ($remaining_point < $node_info_array['points'] && $action == 'buy-now') {
       drupal_set_message(t('Insufficient points to redeem this product.'), 'error');
-      if ($new_quantity == NULL) {
-        drupal_goto('redeem-points');
-      }
-      else {
-        echo drupal_json_encode(array('code' => -2));
-        exit();
-      }      
+      drupal_goto('product');
     }
-    elseif ($remaining_point < $node_info_array['points']) {
+    elseif ($remaining_point < $node_info_array['points'] && $new_quantity > 0) {
+      return drupal_json_encode(array('code' => -2));
+    }
+    elseif ($remaining_point < $node_info_array['points'] && $new_quantity == NULL && $action == NULL) {
       drupal_set_message(t('Insufficient points to redeem this product.'), 'error');
       drupal_goto($redirect);
     }
 
-    if ($node_id == $itg_result->nid && $action == NULL) {
-      if ($new_quantity != NULL) {
-        $quantity = $new_quantity;
-      }
-      else {
-        $quantity = $itg_result->quintity + 1;
-      }      
+    // Upfate cart quantity.
+    if ($node_id == $itg_result->nid && $action == NULL && $new_quantity == NULL) {
+      $quantity = $itg_result->quintity + 1;
       // Update item on cart page.
       _update_cart_item($node->nid, $user->uid, $quantity, $node_info_array, $redirect);
+    }
+    elseif ($node_id == $itg_result->nid && $new_quantity > 0) {
+      // Set operation increase otr decrease points.
+      $op = $itg_result->quintity > $new_quantity ? 'dec' : 'inc';
+      if ($op == 'dec') {
+        $quantity = $itg_result->quintity - $new_quantity;
+      }
+      elseif ($op == 'inc') {
+        $quantity = $new_quantity - $itg_result->quintity;
+      }
+      else {
+        $quantity = 0;
+      }      
+      _update_cart_item($node->nid, $user->uid, $quantity, $node_info_array, 'quantity', $op, $itg_result->quintity);
+
+      return drupal_json_encode(array('code' => 1));
     }
     else {
       $node_info_array['quantity'] = 1;
@@ -93,7 +104,7 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = 
       drupal_set_message(t('Something went wrong please try after some time.')
           , 'error');
       // Redirect to cart page.
-      drupal_goto('redeem-points');
+      drupal_goto('product');
     }
     // Redirect to cart page.
     drupal_goto('cart');
@@ -119,16 +130,30 @@ function _check_product_into_cart($uid, $nid) {
  * @param int $uid
  *   User id of the user.
  */
-function _update_cart_item($nid, $uid, $quantity, $node_info_array, $redirect) {
-  $itg_query = db_update('itg_loyalty_reward_cart')
-      ->fields(array('quintity' => $quantity))
-      ->condition('nid', $nid)
+function _update_cart_item($nid, $uid, $quantity, $node_info_array, $redirect, $op = NULL, $old_qua = NULL) {
+  $itg_query = db_update('itg_loyalty_reward_cart');
+  if ($op == 'inc') {
+    $itg_query->fields(array('quintity' => $quantity + $old_qua));
+  }
+  elseif ($op == 'dec') {
+    $itg_query->fields(array('quintity' => $old_qua - $quantity));
+  }
+  else {
+    $itg_query->fields(array('quintity' => $quantity));
+  }
+  $itg_query->condition('nid', $nid)
       ->condition('uid', $uid)
       ->execute();
   // Update points
-  itg_loyalty_reward_update_point($uid, $node_info_array['points']);
-  $_SESSION['cart_after_popup'] = $node_info_array;
-  drupal_goto($redirect);
+
+  if ($redirect != 'quantity' && $op == NULL) {
+    itg_loyalty_reward_update_point($uid, $node_info_array['points']);
+    $_SESSION['cart_after_popup'] = $node_info_array;
+    drupal_goto($redirect);
+  }
+  elseif ($redirect == 'quantity' && $op != NULL) {
+    itg_loyalty_reward_update_point($uid, ($node_info_array['points'] * $quantity), $op);
+  }
 }
 
 /**
@@ -139,14 +164,20 @@ function _update_cart_item($nid, $uid, $quantity, $node_info_array, $redirect) {
  * @param int $points
  *   Points assigned to particular product.
  */
-function itg_loyalty_reward_update_point($uid, $points) {
+function itg_loyalty_reward_update_point($uid, $points, $op = NULL) {  
   $unique_exp_key = itg_loyalty_reward_unique_expiration($uid);
   $itg_query = db_update('itg_loyalty_reward_point_history')
       ->fields(array('cart_point' => $points, 'remaining_point' => $points))
-      ->condition('pointer_key', $unique_exp_key)
-      ->expression('cart_point', 'cart_point + :point', array(':point' => $points))
-      ->expression('remaining_point', 'remaining_point - :point', array(':point' => $points))
-      ->execute();
+      ->condition('pointer_key', $unique_exp_key);
+  if ($op == NULL || $op == 'inc') {    
+    $itg_query->expression('cart_point', 'cart_point + :point', array(':point' => $points))
+        ->expression('remaining_point', 'remaining_point - :point', array(':point' => $points));   
+  }
+  elseif ($op == 'dec') {
+    $itg_query->expression('cart_point', 'cart_point - :point', array(':point' => $points))
+        ->expression('remaining_point', 'remaining_point + :point', array(':point' => $points));  
+  }  
+  $itg_query->execute();  
 }
 
 /**
@@ -225,12 +256,7 @@ function itg_loyalty_reward_update_item_count() {
   // check if valid node id and quantity available.
   if ($node_id > 0 && $quantity > 0) {
     $code = itg_loyalty_reward_addtocart($node_id, NULL, $quantity);
-    if ($code == 1) {
-      echo drupal_json_encode(array('code' => $code));
-    }
-    else {
-      echo drupal_json_encode(array('code' => $code));
-    }
+    echo $code;
   }
   else {
     echo drupal_json_encode(array('code' => -1));
@@ -351,6 +377,7 @@ function _get_order_item() {
  * @return array
  */
 function itg_loyalty_reward_order_summary() {
+  
   global $user;
   // Add js file.
   drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
@@ -363,7 +390,7 @@ function itg_loyalty_reward_order_summary() {
   $data['user_detail']['address'] = $user_detail->field_short_description['und'][0]['value'];
   $data['user_detail']['pincode'] = $user_detail->field_user_pincode['und'][0]['value'];
   $remain_point = itg_loyalty_reward_remaining_point($user->uid);
-
+  
   return theme('cart_order_summary', array('data' => $data, 'remain_point' => $remain_point));
 }
 
@@ -374,7 +401,7 @@ function itg_loyalty_reward_order_summary() {
  */
 function itg_loyalty_reward_order_confirmation() {
   if (!isset($_SESSION['placed-item'])) {
-    drupal_goto('redeem-points');
+    drupal_goto('product');
   }
 
   return theme('cart_order_confirmation', array('data' => $data));

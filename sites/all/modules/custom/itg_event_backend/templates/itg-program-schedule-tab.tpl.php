@@ -56,7 +56,7 @@ foreach ($data as $key => $value) {
       $media = $program["daywise"] . '--' . $program["session_title"] . '--' . $program["start_time"] . '--' . $program["end_time"];
       $session_result = itg_event_backend_get_session_photo_video($media);
       $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
-        $output_story_title = '';
+      $output_story_title = '';
       foreach ($story_title['story_title'] as $title) {
         if (!empty($title)) {
           $output_story_title = '<p><i class="fa fa-story-title"></i>'.$title.'</p>';
@@ -66,19 +66,19 @@ foreach ($data as $key => $value) {
       $output_photo = '';
       foreach ($session_result['photo'] as $session) {
         if (!empty($session)) {
-          $output_photo = l('<i class="fa fa-camera"></i> ' . t('Session Photo'), 'node/' . $session, array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+          $output_photo = l('<i class="fa fa-camera"></i> ' . t('Session Photo'), $baseurl.drupal_get_path_alias('node/'.$session), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
       }
       $output_video = '';
       foreach ($session_result['video'] as $session) {
         if (!empty($session)) {
-          $output_video = l('<i class="fa fa-video-camera"></i> ' . t('Session Video'), 'node/' . $session, array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+          $output_video = l('<i class="fa fa-video-camera"></i> ' . t('Session Video'), $baseurl.drupal_get_path_alias('node/'.$session), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
       }
       $output_audio = '';
       foreach ($session_result['audio'] as $session) {
         if (!empty($session)) {
-          $output_audio = l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), 'node/' . $session, array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+          $output_audio = l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), $baseurl.drupal_get_path_alias('node/'.$session), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
       }
       ?>
