@@ -341,7 +341,8 @@ jQuery(document).ready(function () {
     jQuery('.factoids-slider ul').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
-        infinite: false,        
+        infinite: false,   
+        centerPadding: '25px',
         prevArrow: "<button class = 'slick-prev'><i class = 'fa fa-angle-left'></i></button>",
         nextArrow: "<button class = 'slick-next'><i class = 'fa fa-angle-right'></i></button>",
         responsive: [

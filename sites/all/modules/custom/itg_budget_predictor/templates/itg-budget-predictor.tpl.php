@@ -19,7 +19,7 @@ $budget_year = $data['budget_year'];
 ?>
 
 <style>
-    #sortable1, #sortable2, #sortable3, #sortable4 { width:100%; min-height:450px; cursor: move;}
+    #sortable1, #sortable2, #sortable3, #sortable4 { width:100%; min-height:400px; cursor: move;}
     #sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li { display:block;cursor:move; margin: 10px 0px;
     background: transparent;
     border: none;
