@@ -29816,7 +29816,10 @@ draft-recipe-management',
   'region' => 'vertical_menu',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user/login
+user/password
+itg-access-denied
+itg-not-found',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30471,10 +30474,13 @@ draft-recipe-management',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user/login
+user/password
+itg-access-denied
+itg-not-found',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30569,10 +30575,13 @@ draft-recipe-management',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user/login
+user/password
+itg-access-denied
+itg-not-found',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30667,10 +30676,13 @@ draft-recipe-management',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user/login
+user/password
+itg-access-denied
+itg-not-found',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30765,10 +30777,13 @@ draft-recipe-management',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user/login
+user/password
+itg-access-denied
+itg-not-found',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30863,10 +30878,13 @@ draft-recipe-management',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user/login
+user/password
+itg-access-denied
+itg-not-found',
   'title' => '<none>',
   'cache' => -1,
 );
@@ -30961,10 +30979,13 @@ draft-recipe-management',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
+  'pages' => 'user/login
+user/password
+itg-access-denied
+itg-not-found',
   'title' => '<none>',
   'cache' => -1,
 );

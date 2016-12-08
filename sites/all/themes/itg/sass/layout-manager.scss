@@ -2697,9 +2697,13 @@ img{
                 font-family: roboto-slab;
             }
             .captcha{
+                border:none;
                 img{
                     width: 120px;
                     margin-top: 15px;
+                }
+                legend, .fieldset-description{
+                   display: none; 
                 }
             }
             .form-item-captcha-response{
