@@ -11,6 +11,7 @@ class ItgSectionMigration extends XMLMigration {
 
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
+      'title' => t('title'),
       'name' => t('Category name'),
       'metatitle' => t('metatitle'),
       'metadesc' => t('metadesc'),
@@ -18,9 +19,16 @@ class ItgSectionMigration extends XMLMigration {
       'template_name' => t('template_name'),
       'sef_url' => t('sef_url'),
       'content_type' => t('content_type'),      
+      'image' => t('image'),      
+      'description' => t('description'),      
+      'published' => t('published'),      
+      'ordering' => t('ordering'),      
+      'section_flag' => t('section_flag'),      
+      'section_type' => t('section_type'),    
+      'content_url' => t('content_url'),      
+      'content_display_color' => t('content_display_color'), 
     );
 
-    
     // This can also be an URL instead of a local file path.
     $file_path = drupal_realpath('public://');
     
@@ -77,31 +85,26 @@ class ItgSectionMigration extends XMLMigration {
     $this->addFieldMapping('field_cm_select_template_type', 'template_name')->xpath('template_name');
     $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
     $this->addFieldMapping('field_cm_select_type', 'content_type')->xpath('content_type');
-    $img_path = $file_path . '/' . 'migrate/image/category/';
     $this->addFieldMapping('field_cm_category_banner', 'header_image')->xpath('header_image');
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
     $this->addFieldMapping('field_cm_category_color', 'content_display_color')->xpath('header_image');
     $this->addFieldMapping('weight', 'ordering')->xpath('ordering');
-    $this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type');    
+    $this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type');       
     //<issue_free>0</issue_free> (not clear)
     //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
     //$this->addFieldMapping('metatag_robots', 'nodeword_robots');
 
   }
   
-  public function complete($entity, $row) {    
-   
-   if (!empty($row->xml->published)) {    
-     $data = array(
-      'tid' => $term->tid,
-      'uid' => 3,
-      'created' => time(),
-      'changed' => time(),
-      'status' => isset($row->xml->published) ? $row->xml->published : 1,
-    );
-    drupal_write_record('itg_category_manager', $data);
-   }
-   
+  public function complete($entity, $row) {  
+    $created = !empty($row->xml->created) ? (string) $row->xml->created : time();
+    $status = isset($row->xml->published) ? (string) $row->xml->published : 1;
+    db_update('itg_category_manager')
+        ->fields(array('created' => $created, 'uid' => 3, 'status' => $status))
+        ->condition('tid', $entity->tid, '=')
+        ->execute();
+    
+    
   }
 }
 
