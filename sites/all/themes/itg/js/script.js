@@ -70,8 +70,12 @@
                 // Place internal and external review on black area.
                 var internal_review = $('#internal-review').html();
                 var external_review = $('#external-review').html();
-                $('.movie-reviewer-other').html('<h3>OTHER REVIEWERS</h3>' + external_review);
-                $('.our-review').html('<h3>OUR REVIEWERS</h3>' + internal_review);
+                if (external_review != null) {
+                    $('.movie-reviewer-other').html('<h3>OTHER REVIEWERS</h3>' + external_review);
+                }
+                if (internal_review != null) {
+                    $('.our-review').html('<h3>OUR REVIEWERS</h3>' + internal_review);
+                }                
             }
             $('input.rating').hover(function () {
                 $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
