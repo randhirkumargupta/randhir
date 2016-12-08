@@ -210,7 +210,9 @@ input[type="text"], select, input[type="password"]{
     @include clearfix;
 }
 #page{@extend .vtop; @extend .full; @extend .dib;}
-
+p{
+    word-wrap: break-word;
+}
 /*start header css*/
 header{
     margin-bottom: 30px;
@@ -6862,12 +6864,17 @@ input[type="radio"]:checked + label:after{
                 color: #b6b6b6;
             }
         }
+        div{
+            display: inline-block;
+            vertical-align: bottom;
+        }
+        @include social-share;
     }
     .election-graph-3{
         margin-top: -50px;
     }
     .election-graph-4{
-        margin-top: -50px;
+        margin-top: -100px;
     }
     .election-graph-5{
         margin-top: -150px;
@@ -7337,7 +7344,7 @@ input[type="radio"]:checked + label:after{
 #block-itg-menu-manager-vertical-menu{
     position: absolute;
     top: 50px;
-    left:-54px;
+    left:-75px;
     background: #f2f2f2;    
     border-radius: 3px;
     box-shadow: 2px 2px 3px #ccc;
@@ -7366,7 +7373,8 @@ input[type="radio"]:checked + label:after{
         text-transform: uppercase;
         line-height: 15px;
         display: block;
-         padding: 10px 5px;
+        padding: 10px 5px;
+        word-wrap: break-word;
          &:hover{
              background: #fff;
              color: #b00202;
@@ -7911,18 +7919,21 @@ input[type="radio"]:checked + label:after{
 .factoids-slider{
     ul{        
         background:#a00606;
-        padding:0px 30px;
+        padding:0px;
         li{
-            span{
-            padding:25px 10px;
+            padding:25px;
+            span{          
             font-size: 15px;
             line-height: 24px;
             color:#fff;       
-            display:block;
-            &:hover{
-                background: #000;
-            }   
-            }            
+            display:block;               
+            } 
+            &:nth-child(odd){
+                background:#000;
+            }
+            &:nth-child(even){
+                background:#a00606;
+            }
         }
     }
     button{
@@ -7985,7 +7996,7 @@ input[type="radio"]:checked + label:after{
 
 
 /*css start Ask an expret for all page*/
-#block-itg-ask-expert-custom-ask-expert-form-block, .ask-question-sidebar{             
+[id*="block-itg-ask-expert-custom-ask-expert-form-block"], .ask-question-sidebar{             
         font-family: roboto;
         border-bottom: 1px solid #ddd;        
         @include sidebar-heading;        
@@ -8000,7 +8011,7 @@ input[type="radio"]:checked + label:after{
             margin: 0;
             padding: 0;            
         }
-        #itg-custom-ask-an-expert-form{     
+        [id*="itg-custom-ask-an-expert-form"]{     
             background: #f5f5f5;
             padding: 15px 15px 15px 30px;            
             @include clearfix;
@@ -8134,6 +8145,12 @@ input[type="radio"]:checked + label:after{
                 background: #f5f5f5;
                 padding: 15px 15px 0px 30px;
             }
+        }
+    }
+    [id*="block-itg-ask-expert-custom-ask-expert-form-block"]{
+        border-bottom:none;
+        [id*="itg-custom-ask-an-expert-form"]{
+            padding: 15px;
         }
     }
     /*css End Ask an expret for all page*/
