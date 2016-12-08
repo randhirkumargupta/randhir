@@ -314,3 +314,15 @@ function itg_reports_views_pre_render(&$view) {
       break;
   }
 }
+
+/**
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reports_form_alter(&$form, &$form_state, $form_id) {  
+  if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {    
+    $form['relations']['#prefix'] = '<div style="display:none;">';
+    $form['relations']['#suffix'] = '</div>';
+  }
+}
