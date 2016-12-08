@@ -16,22 +16,25 @@ class ItgBylineMigration extends XMLMigration {
     
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'title' => t('title'),
-      'reporter_email_id' => t('reporter_email_id'),
-      'reporter_twitter_handle' => t('reporter_twitter_handle'),
-      'facebook_page' => t('facebook_page'),
-      'occupation' => t('occupation'),
-      'categories' => t('categories'),
-      'picture' => t('picture'),
+      'author_name' => t('title'),
+      'author_email' => t('author_email'),
+      'profile_image' => t('profile_image'),
       'designation' => t('designation'),
-      'about' => t('about'),
-      'field_reporter_facebook_id' => t('Facebook id'),
-      'field_reporter_profile_type' => t('Profile type'),
-      'field_reporter_company' => t('company'),
-      'field_reporter_department' => t('Department'),
+      'full_description' => t('full_description'),
       'sefurl' => t('Sefurl'),
+      'twitter_id' => t('twitter_id'),
+      'facebook_id' => t('Facebook id'),
+      'profile_type' => t('profile_type'),
+      'created_datetime' => t('created_datetime'),
+      'modified_datetime' => t('modified_datetime'),
+      'created_by' => t('created_by'),
+      'modified_by' => t('modified_by'),
+      'published' => t('published'),
+      'ordering' => t('ordering'),
+      'company' => t('company'),
+      'department' => t('department'),
+      'occupation' => t('occupation'),
       'pagetitle' => t('Page title'),
-      'description' => t('Description'),
       'keywords' => t('Keywords'),
     );
     
@@ -104,15 +107,24 @@ class ItgBylineMigration extends XMLMigration {
   }
   
   public function prepareRow($row) {
-    //$department_array = array('Mail Today Editorial' => 'mail_today_editorial');
-  
-    //$department = (string) $row->xml->department;
-    //$row->department_new = $department_array[$department];
+      // manage created user
+    if (isset($row->xml->created_by) && !empty($row->xml->created_by)) {
+      $created_uid = (string) $row->xml->created_by;
+      $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
+      $row->xml->created_by = $orignal_crated_uid;
+    }
+    // Manage department in byline
+    if (isset($row->xml->department) && !empty($row->xml->department)) {
+      $department_value = (string) $row->xml->department;
+      $department_option_value = itg_migrate_byline_department($department_value);
+      $row->xml->department = $department_option_value;
+    }
+    
   }
   
   public function prepare($node, stdClass $row) {       
-    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 403;
-    $node->uid = 1;
+    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 403; // fix for reporter
+    $node->uid = $row->xml->created_by;
   }
   
   public function complete($entity, $row) {    
@@ -124,4 +136,38 @@ class ItgBylineMigration extends XMLMigration {
   }
 }
 
- 
+ function itg_migrate_byline_department($key){
+   $department = array(
+     'Mail Today Editorial' => 'mail_today_editorial',
+     'Auto Shows - Magazine' => 'auto_shows_magazine',
+     'Business Today Editorial' => 'business_today_editorial',
+     'Consumer and Personal Finance' => 'consumer_and_personal_finance',
+     'Corporate' => 'Corporate',
+     'Cosmopolitan' => 'Cosmopolitan',
+     'Editorial AT' => 'Editorial_AT',
+     'Editorial DAT' => 'Editorial_DAT',
+     'Editorial HLT' => 'Editorial_HLT',
+     'Editorial India Today TV' => 'editorial_india_today_TV',
+     'Editorial TVTN' => 'Editorial_TVTN',
+     'Good Housekeeping' => 'good_housekeeping',
+     "Harper's Bazaar" => 'harper_s_bazaar',
+     "Harper's Bazaar Bride" => 'harper_s_bazaar_bride',
+     'Impact' => 'Impact',
+     'INDIA TODAY - SUPPLEMENTS' => 'INDIA_TODAY_SUPPLEMENTS',
+     'ITE Editorial' => 'ITE_editorial',
+     'ITGD - Editorial' => 'ITGD_editorial',
+     'ITH Editorial' => 'ITH_editorial',
+     'Mail Today S&D' => 'mail_today_S&D',
+     "Reader's Digest Editorial" => 'reader_s_digest_editorial',
+     'Robb Report Editorial' => 'robb_report_editorial',
+     'simply' => 'simply',
+     'Social Media & Content Services' => 'social_media_content_services',
+     'spice' => 'spice',
+     'Technology-Development' => 'technology_development',
+     'Woman' => 'Woman',
+     "Men's Health" => 'men_s_health',
+     
+     
+   );
+   return $department[$key];
+ }
