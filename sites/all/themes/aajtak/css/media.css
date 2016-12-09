@@ -1,0 +1,207 @@
+/*Start CSS Desktop version*/
+/*====================== IndiaToday Variables =========================*/
+/*=======================================================================*/
+/*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
+/*Fonts used in Indiatoday site*/
+/*Colors used in Indiatoday site*/
+/*Background Colors used in Indiatoday site*/
+/*Border Colors used in Indiatoday site*/
+/*Text color in Indiatoday site*/
+/*Background color in Indiatoday site*/
+/*navigation font in Indiatoday site*/
+/*Full radius in Indiatoday site*/
+/*footer color in Indiatoday site*/
+/* @media variables */
+/*font family an font weight mixins*/
+/*font size an font weight mixins*/
+/*clear fix mixins*/
+/*Box sizeing mixins*/
+/*Center Block mixins*/
+/*Float mixins*/
+/*Display inline block mixins*/
+/*Text align block mixins*/
+/* Positional mixins */
+/* Calculate-width function */
+/* Tab Button mixins */
+/* Tab Listing mixins */
+/* List before icon */
+/*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
+@media all and (min-width: 767px) {
+  /* line 8, ../sass/media.scss */
+  h1 {
+    font-size: 36px;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 40px;
+  }
+
+  /* HEADER CSS */
+  /* line 12, ../sass/media.scss */
+  header {
+    margin-bottom: 30px;
+    position: relative;
+    min-height: 92px;
+  }
+  /* line 16, ../sass/media.scss */
+  header .logo-n-three-bar {
+    left: 0;
+    padding-left: 72px;
+    position: absolute;
+    z-index: 99999;
+    bottom: -19px;
+  }
+  /* line 22, ../sass/media.scss */
+  header .logo-n-three-bar .three-bar {
+    position: absolute;
+    left: 30px;
+    top: 44px;
+    height: 15px;
+    width: 21px;
+    cursor: pointer;
+  }
+  /* line 29, ../sass/media.scss */
+  header .logo-n-three-bar .three-bar span {
+    background-color: #000;
+    display: inline-block;
+    vertical-align: top;
+    width: 21px;
+    height: 3px;
+    margin-top: 6px;
+    position: relative;
+  }
+  /* line 37, ../sass/media.scss */
+  header .logo-n-three-bar .three-bar span:before, header .logo-n-three-bar .three-bar span:after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    background-color: #000;
+  }
+  /* line 43, ../sass/media.scss */
+  header .logo-n-three-bar .three-bar span:before {
+    width: 50%;
+    bottom: 6px;
+  }
+  /* line 47, ../sass/media.scss */
+  header .logo-n-three-bar .three-bar span:after {
+    width: 100%;
+    top: 6px;
+  }
+  /* line 54, ../sass/media.scss */
+  header .logo-n-three-bar .header__logo img {
+    max-width: 100%;
+  }
+  /* line 59, ../sass/media.scss */
+  header .region-header {
+    background-color: #f6f6f6;
+    height: 60px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    z-index: 9999;
+  }
+  /* line 66, ../sass/media.scss */
+  header .region-header .main-menu {
+    float: left;
+    margin-top: 10px;
+  }
+  /* line 69, ../sass/media.scss */
+  header .region-header .main-menu ul {
+    list-style: none;
+  }
+  /* line 71, ../sass/media.scss */
+  header .region-header .main-menu ul li {
+    float: left;
+  }
+  /* line 73, ../sass/media.scss */
+  header .region-header .main-menu ul li a {
+    color: #c0c0c0;
+    outline: none;
+    padding: 10px 20px;
+    display: block;
+    font-family: 'Noto Sans';
+    font-weight: 700;
+  }
+  /* line 81, ../sass/media.scss */
+  header .region-header .main-menu ul li a.active, header .region-header .main-menu ul li a:hover {
+    color: #000;
+  }
+  /* line 90, ../sass/media.scss */
+  header .header-right-menu {
+    float: right;
+  }
+  /* line 92, ../sass/media.scss */
+  header .header-right-menu ul {
+    list-style: none;
+  }
+  /* line 94, ../sass/media.scss */
+  header .header-right-menu ul li {
+    float: left;
+    width: 60px;
+    height: 60px;
+  }
+  /* line 98, ../sass/media.scss */
+  header .header-right-menu ul li a {
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    height: 60px;
+  }
+  /* line 104, ../sass/media.scss */
+  header .header-right-menu ul li.icon-search a {
+    background-color: #ddd;
+    background-image: url(../images/icon_search.png);
+  }
+  /* line 108, ../sass/media.scss */
+  header .header-right-menu ul li.icon-notification a {
+    background-color: #e6e6e6;
+    background-image: url(../images/icon_notification.png);
+  }
+  /* line 112, ../sass/media.scss */
+  header .header-right-menu ul li.icon-user a {
+    background-color: #f6f6f6;
+    background-image: url(../images/icon_user.png);
+  }
+  /* line 116, ../sass/media.scss */
+  header .header-right-menu ul li.city-temp {
+    min-width: 133px;
+    display: block;
+  }
+  /* line 119, ../sass/media.scss */
+  header .header-right-menu ul li.city-temp a {
+    padding: 8px 20px;
+    background-color: #0c1559;
+    color: #fff;
+  }
+  /* line 123, ../sass/media.scss */
+  header .header-right-menu ul li.city-temp a .city-name {
+    font-size: 12px;
+    display: block;
+  }
+  /* line 126, ../sass/media.scss */
+  header .header-right-menu ul li.city-temp a .city-name .fa {
+    font-size: 26px;
+    margin-right: 10px;
+  }
+  /* line 131, ../sass/media.scss */
+  header .header-right-menu ul li.city-temp a .temp {
+    font-size: 24px;
+    font-family: 'Noto Serif';
+  }
+  /* line 137, ../sass/media.scss */
+  header .header-right-menu ul li.live-tv {
+    width: 156px;
+  }
+  /* line 139, ../sass/media.scss */
+  header .header-right-menu ul li.live-tv a {
+    background: url(../images/icon_live_tv.png) 25px 12px no-repeat #d9000c;
+    color: #fff;
+    padding: 18px 20px 18px 60px;
+    font-size: 18px;
+    height: 60px;
+  }
+
+  /* END OF HEADER CSS */
+}

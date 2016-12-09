@@ -14,32 +14,14 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
   if (is_array($info)) {
       $range = 3; 
     // set range of data here
-      $rangearray=array('auto-road-trip'=>2 ,
-          'auto-tips-and-tricks'=>3 ,
-          'edu-exam'=>4 ,
-          'budget-reactions'=>4,
-          'home-shows'=>4,
-          'election-other-story'=>4 ,
-          'home-watch'=>3,
-          'india-inc-on-budget'=>4,
-          'budget-decoded'=>3,
-          'edu-featurefilia'=>4 ,
-          'edu-jobs-and-career'=>4 ,
-          'election-so-sorry'=>1 ,
-          'edu-tips-and-trick'=>10 ,
-          'edu-sample-paper'=>5 ,
-          'edu-from-the-magazine'=>4 ,
-          'edu-gov-jobs'=>4 ,
-          'buying-guid'=>6 ,
-          'edu-notification'=>4 ,
-          'tech-tips'=>4 ,
-          'sport-column'=>3 ,
-          'in-depth'=>6 ,
-          'talking-point'=>4 ,
-          'movies-lifestyle'=>7 ,
-          'movies-celebrities'=>7 ,
-          'oscar-news'=>5 , 
-          'oscar-features'=>6);
+      $rangearray=array(
+          'aajtak-slider'=>10,
+          'stack-card-0'=>10,
+          'stack-card-1'=>10,
+          'stack-card-2'=>10,
+          'stack-card-3'=>10,
+          'stack-card-4'=>10,
+          );
     
        if(array_key_exists($widget_style, $rangearray))
        {
@@ -49,6 +31,10 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
       {
           return itg_widget_section_wise_ordering_from_custom_table_by_content($info, 'story',$widget_style);
       }
+//      if($widget_style=='aajtak-slider')
+//      {
+//          return itg_widget_section_wise_ordering_from_custom_table_by_content($info, 'photogallery',$widget_style);
+//      }
       if($widget_style=='home-watch' || $widget_style=='election-so-sorry')
       {
           return itg_widget_section_wise_ordering_from_custom_table_by_content($info, 'videogallery',$widget_style);

@@ -3,73 +3,140 @@
  * Contains all functionality related to Flag Management
  */
 
-(function ($) {
+(function($) {
     Drupal.behaviors.itg_flag = {
-        attach: function (context, settings) {
+        attach: function(context, settings) {
             var uid = settings.itg_flag.settings.uid;
             var base_url = settings.itg_flag.settings.base_url;
-            
-            $('#like_count,#dislike_count').click(function (event) {
-                
+
+            $('#like_count,#dislike_count').click(function(event) {
+
                 var nd_id = jQuery(this).attr('rel');
                 var typ = jQuery(this).attr('id');
-                var post_data = "&nd_id="+ nd_id + "&typ=" + typ;
+                var post_data = "&nd_id=" + nd_id + "&typ=" + typ;
 
-                    $.ajax({
-                        'url': base_url + '/flag-details-ajax',
-                        'data': post_data,
-                        'cache': false,
-                        'type': 'POST',
-                        // dataType: 'json',
-                        beforeSend: function () {
-                           
-                        },
-                        'success': function (result)
-                        {
-                            var obj = jQuery.parseJSON(result);
-                             
-                            $('#widget-ajex-loader').hide();
-                            if (obj.type == 'like_count') {
-                            $("#no-of-likes_"+obj.nd_id).html("(" + obj.count + ")");
+                $.ajax({
+                    'url': base_url + '/flag-details-ajax',
+                    'data': post_data,
+                    'cache': false,
+                    'type': 'POST',
+                    // dataType: 'json',
+                    beforeSend: function() {
+
+                    },
+                    'success': function(result)
+                    {
+                        var obj = jQuery.parseJSON(result);
+
+                        $('#widget-ajex-loader').hide();
+                        if (obj.type == 'like_count') {
+                            $("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
                         }
                         if (obj.type == 'dislike_count') {
-                            $("#no-of-dislikes_"+obj.nd_id).html("(" + obj.count + ")");
+                            $("#no-of-dislikes_" + obj.nd_id).html("(" + obj.count + ")");
                         }
                         if (obj.error == 'error') {
-                           
-                            $("#voted_"+obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
-                        }
-                        }
-                    });
-               
-            });
-            
-            // code for related content hide show
-            
-           $('.hide_sh').click(function (event) {
-               var obj = jQuery(this);
-                var nd_id = jQuery(this).attr('rel');
-                var post_data = "&nd_id="+ nd_id;
 
-                    $.ajax({
-                        'url': base_url + '/related-details-ajax',
-                        'data': post_data,
-                        'cache': false,
-                        'type': 'POST',
-                        // dataType: 'json',
-                        beforeSend: function () {
-                           
-                        },
-                        'success': function (result)
-                        {
-                            obj.next('.nxt').html(result);
-                         ///obj.html(result);
+                            $("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
                         }
-                    });
-               
-            }); 
-            
+                    }
+                });
+
+            });
+
+            // code for related content hide show
+
+
+            $("body").on("click", ".hide_sh", function(e) {
+                e.stopPropagation();
+                var screen_width = $('body').width();
+                var h_center = screen_width/2 - 130;
+                var obj = jQuery(this);
+                var nd_id = jQuery(this).attr('rel');
+                var post_data = "&nd_id=" + nd_id;
+                var obj_parent = obj.parent();
+                pos_left = obj_parent.offset().left, pos_top = obj_parent.offset().top - $(window).scrollTop(), parent_height = obj_parent.height();
+                var parent_clone = obj_parent.clone();
+                $("body").addClass("overlay");
+                var rc_popup = $(".related-content-popup");
+                rc_popup.addClass("popup-open"),
+                        rc_popup.html(parent_clone),
+                        rc_popup.find('.icon-list').removeClass('hide_sh'),
+                        rc_popup.css({left: pos_left, top: pos_top}),
+                        $("body").css("overflow", "hidden"), 
+                        rc_popup.velocity({
+                            duration: 300,
+                            stagger: 80,
+                            left: h_center,
+                            top: "20px"
+                        }),
+                        $.ajax({
+                            'url': base_url + '/related-details-ajax',
+                            'data': post_data,
+                            'cache': false,
+                            'type': 'POST',
+                            // dataType: 'json',
+                            beforeSend: function() {
+                                var imageURL = base_url + '/sites/all/themes/aajtak/images/bars.svg';
+                                var image = "<div class='loader-svg'><img src=" + imageURL + " alt='loadding...'></div>";
+                                $('body').find(rc_popup).append(image);
+                            },
+                            'success': function(result)
+                            {
+//                              obj.next('.nxt').html(result);
+                                ///obj.html(result);
+                                $('body').find(rc_popup).find('.loader-svg').remove(),
+                                $('body').find(rc_popup).append(result),
+                                rc_popup.find(".icon-list").addClass("open"),
+                                rc_popup.find(".related-content-wrapper").slideToggle().toggleClass("open-data");
+                            }
+                        });
+                        
+
+            }), $(document).on('click', '.icon-list.open', function(){
+                    if ($("body").hasClass("overlay")){
+                        var rc_popup = $(".related-content-popup");
+                        rc_popup.find('.view-sambandhit-khabre').slideUp('fast'),
+                        $("body").removeClass("overlay"), 
+                        rc_popup.velocity({
+                            duration: 1200,
+                            left: pos_left, 
+                            top: pos_top
+                        }, {
+                            complete: function() {
+                                rc_popup.removeClass("popup-open").removeAttr("style"), 
+                                $("body").css("overflow", "auto"), 
+                                rc_popup.empty();
+                            }
+                        });
+                    }               
+                }), $(document).on('click', function(e){
+                    e.stopPropagation();
+                    if ($("body").hasClass("overlay")){
+                        var rc_popup = $(".related-content-popup");
+                        rc_popup.find('.view-sambandhit-khabre').slideUp('fast'),
+                        $("body").removeClass("overlay"), 
+                        rc_popup.velocity({
+                            duration: 1200,
+                            left: pos_left, 
+                            top: pos_top
+                        }, {
+                            complete: function() {
+                                rc_popup.removeClass("popup-open").removeAttr("style"), 
+                                $("body").css("overflow", "auto"), 
+                                rc_popup.empty();
+                            }
+                        });
+                    }
+                });
+
             // end here
+            // jQuery code to close popular videos related content
+            $('body').on('click', '.hide-rc', function() {
+                $(this).prev().remove();
+                $(this).remove();
+            });
+
         }
 
     };
@@ -77,45 +144,51 @@
 
 // script for facebook sharing
 (function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                        js = d.createElement(s); js.id = id;
-                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
-                        fjs.parentNode.insertBefore(js, fjs);
-                      }(document, 'script', 'facebook-jssdk'));
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id))
+        return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 
 function gogogo(linkurl, title, desc, image) {
-  FB.ui({
-    method: 'feed',
-    link: linkurl,
-    picture: image,
-    name: title,
-    //caption: desc,
-    description: desc
-  });
+    FB.ui({
+        method: 'feed',
+        link: linkurl,
+        picture: image,
+        name: title,
+        //caption: desc,
+        description: desc
+    });
 }
-  
+
 
 //facebook sharing end here
 
 // script for twitter sharing
 
-  function twitter_popup(title, url) {
-    tweetlink = "http://twitter.com/share?text="+title+"&url="+url+"&via=indiatoday";
-    newwindow=window.open(tweetlink,'indiatoday','height=500,width=550,left=440,top=250');
-    if (window.focus) {newwindow.focus()}
+function twitter_popup(title, url) {
+    tweetlink = "http://twitter.com/share?text=" + title + "&url=" + url + "&via=indiatoday";
+    newwindow = window.open(tweetlink, 'indiatoday', 'height=500,width=550,left=440,top=250');
+    if (window.focus) {
+        newwindow.focus()
+    }
     return false;
-  }
+}
 
 // twitter sharing end here
 
 // script for google sharing
 
 function googleplusbtn(url, title, img) {
-  sharelink = "https://plus.google.com/share?url="+url;
-  newwindow=window.open(sharelink,'indiatoday','height=400,width=600,left=440,top=250');
-  if (window.focus) {newwindow.focus()}                                                                                                                                
-  return false;
-}   
+    sharelink = "https://plus.google.com/share?url=" + url;
+    newwindow = window.open(sharelink, 'indiatoday', 'height=400,width=600,left=440,top=250');
+    if (window.focus) {
+        newwindow.focus()
+    }
+    return false;
+}
 
 // google sharing end here

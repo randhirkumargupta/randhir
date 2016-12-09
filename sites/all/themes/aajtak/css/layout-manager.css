@@ -1,0 +1,532 @@
+/*====================== IndiaToday Variables =========================*/
+/*=======================================================================*/
+/*heading used in Indiatoday site*/
+/*Heading used in Indiatoday site Mobile version*/
+/*Fonts used in Indiatoday site*/
+/*Colors used in Indiatoday site*/
+/*Background Colors used in Indiatoday site*/
+/*Border Colors used in Indiatoday site*/
+/*Text color in Indiatoday site*/
+/*Background color in Indiatoday site*/
+/*navigation font in Indiatoday site*/
+/*Full radius in Indiatoday site*/
+/*footer color in Indiatoday site*/
+/* @media variables */
+/*font family an font weight mixins*/
+/*font size an font weight mixins*/
+/*clear fix mixins*/
+/*Box sizeing mixins*/
+/*Center Block mixins*/
+/*Float mixins*/
+/*Display inline block mixins*/
+/*Text align block mixins*/
+/* Positional mixins */
+/* Calculate-width function */
+/* Tab Button mixins */
+/* Tab Listing mixins */
+/* List before icon */
+/*mixin for transition animation*/
+/*mixin for listing with image*/
+/*mixin for pager*/
+/* line 3, ../sass/layout-manager.scss */
+.grey-bg {
+  background-color: #eeeded;
+}
+
+/* line 123, ../sass/layout-manager.scss */
+.aajtak-layout-container {
+  margin: 0 auto;
+  max-width: 1170px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* line 128, ../sass/layout-manager.scss */
+.aajtak-layout-container .row {
+  margin-top: 38px;
+  margin-bottom: 38px;
+  zoom: 1;
+}
+/* line 19, ../sass/_itg-mixins.scss */
+.aajtak-layout-container .row:before, .aajtak-layout-container .row:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+/* line 25, ../sass/_itg-mixins.scss */
+.aajtak-layout-container .row:after {
+  clear: both;
+}
+
+/* line 138, ../sass/layout-manager.scss */
+.slider-container .slick-list {
+  padding: 20px 0 30px 15px;
+}
+/* line 141, ../sass/layout-manager.scss */
+.slider-container .slick-arrow {
+  position: absolute;
+  top: -35px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  text-indent: -9999px;
+}
+/* line 150, ../sass/layout-manager.scss */
+.slider-container .slick-next {
+  right: 10px;
+}
+/* line 151, ../sass/layout-manager.scss */
+.slider-container .slick-prev {
+  right: 56px;
+}
+/* line 152, ../sass/layout-manager.scss */
+.slider-container .slick-next::before {
+  border-color: transparent transparent transparent #eeeded;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 12px;
+  position: absolute;
+  top: 8px;
+  width: 0;
+  z-index: 9;
+}
+/* line 165, ../sass/layout-manager.scss */
+.slider-container .slick-next::after {
+  border-color: transparent transparent transparent #000;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 13px;
+  position: absolute;
+  right: 0;
+  top: 8px;
+  width: 0;
+}
+/* line 178, ../sass/layout-manager.scss */
+.slider-container .slick-prev::before {
+  border-color: transparent #eeeded transparent transparent;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 5px;
+  position: absolute;
+  top: 8px;
+  width: 0;
+  z-index: 9;
+}
+/* line 191, ../sass/layout-manager.scss */
+.slider-container .slick-prev::after {
+  border-color: transparent #000 transparent transparent;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 4px;
+  position: absolute;
+  right: 0;
+  top: 8px;
+  width: 0;
+}
+
+/* line 213, ../sass/layout-manager.scss */
+.widget-container .half-grey-bg {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 0;
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+}
+/* line 12, ../sass/layout-manager.scss */
+.widget-container .half-grey-bg:before {
+  content: '';
+  background-color: #eeeded;
+  width: 100%;
+  height: 202px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+/* line 217, ../sass/layout-manager.scss */
+.widget-container .widget-list-row {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: box-shadow .2s,transform .2s,opacity .2s;
+  float: left;
+  width: 260px;
+  height: 240px;
+  position: relative;
+  z-index: 9;
+  list-style-type: none;
+  margin: 0 15px;
+}
+/* line 229, ../sass/layout-manager.scss */
+.widget-container .widget-list-row:hover {
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+  transform: translate(0, -4px);
+}
+/* line 233, ../sass/layout-manager.scss */
+.widget-container .widget-list-row .category-name {
+  background-color: #dc4750;
+}
+/* line 236, ../sass/layout-manager.scss */
+.widget-container .widget-list-row .icon-list {
+  background-color: #dc4750;
+}
+
+/* line 242, ../sass/layout-manager.scss */
+.aajtak-slide .tile {
+  text-align: center;
+  position: relative;
+  height: 260px;
+}
+/* line 29, ../sass/layout-manager.scss */
+.aajtak-slide .tile .category-name {
+  background-color: #dc4750;
+  border-radius: 4px 4px 0 0;
+  color: #fff;
+  height: 20px;
+}
+/* line 37, ../sass/layout-manager.scss */
+.aajtak-slide .tile .title {
+  height: 40px;
+  overflow: hidden;
+  margin: 10px 10px 8px;
+}
+/* line 41, ../sass/layout-manager.scss */
+.aajtak-slide .tile .title a {
+  color: #000;
+  display: block;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
+}
+/* line 49, ../sass/layout-manager.scss */
+.aajtak-slide .tile .pic {
+  height: 148px;
+  overflow: hidden;
+}
+/* line 55, ../sass/layout-manager.scss */
+.aajtak-slide .tile .name {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+  padding: 0 5px;
+  position: relative;
+}
+/* line 65, ../sass/layout-manager.scss */
+.aajtak-slide .tile .date {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+  padding: 0 5px;
+  position: relative;
+}
+/* line 75, ../sass/layout-manager.scss */
+.aajtak-slide .tile .date:before {
+  content: '|';
+  position: absolute;
+  font-size: 9px;
+  left: -4px;
+  top: 0;
+}
+
+/* line 249, ../sass/layout-manager.scss */
+.aajtak-widget {
+  min-height: 380px;
+  height: 380px;
+  overflow: hidden;
+}
+/* line 253, ../sass/layout-manager.scss */
+.aajtak-widget .droppable {
+  height: 100%;
+}
+
+/* line 258, ../sass/layout-manager.scss */
+.aajtak-slide .data-holder {
+  padding-top: 20px;
+}
+/* line 261, ../sass/layout-manager.scss */
+.aajtak-slide .widget-title {
+  font-size: 28px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 38px;
+  color: #000;
+  padding: 0 15px;
+}
+
+/* line 268, ../sass/layout-manager.scss */
+.aajtak-stack .tile {
+  text-align: center;
+  position: relative;
+  height: 260px;
+}
+/* line 29, ../sass/layout-manager.scss */
+.aajtak-stack .tile .category-name {
+  background-color: #dc4750;
+  border-radius: 4px 4px 0 0;
+  color: #fff;
+  height: 20px;
+}
+/* line 37, ../sass/layout-manager.scss */
+.aajtak-stack .tile .title {
+  height: 40px;
+  overflow: hidden;
+  margin: 10px 10px 8px;
+}
+/* line 41, ../sass/layout-manager.scss */
+.aajtak-stack .tile .title a {
+  color: #000;
+  display: block;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
+}
+/* line 49, ../sass/layout-manager.scss */
+.aajtak-stack .tile .pic {
+  height: 148px;
+  overflow: hidden;
+}
+/* line 55, ../sass/layout-manager.scss */
+.aajtak-stack .tile .name {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+  padding: 0 5px;
+  position: relative;
+}
+/* line 65, ../sass/layout-manager.scss */
+.aajtak-stack .tile .date {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+  padding: 0 5px;
+  position: relative;
+}
+/* line 75, ../sass/layout-manager.scss */
+.aajtak-stack .tile .date:before {
+  content: '|';
+  position: absolute;
+  font-size: 9px;
+  left: -4px;
+  top: 0;
+}
+/* line 271, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder, .aajtak-stack .widget-container {
+  height: 100%;
+}
+/* line 274, ../sass/layout-manager.scss */
+.aajtak-stack .widget-title {
+  font-size: 28px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 28px;
+  color: #000;
+  padding: 20px 45px 25px;
+}
+/* line 279, ../sass/layout-manager.scss */
+.aajtak-stack .stack {
+  width: 262px;
+  height: 268px;
+}
+/* line 283, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder {
+  position: relative;
+}
+/* line 285, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  width: 100px;
+  margin: 0;
+}
+/* line 291, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button {
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  text-indent: -9999px;
+  padding: 0;
+  margin: 0;
+}
+/* line 300, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--reject {
+  margin-right: 10px;
+}
+/* line 303, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--reject::before {
+  border-color: transparent #eeeded transparent transparent;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 5px;
+  position: absolute;
+  top: 8px;
+  width: 0;
+  z-index: 9;
+  opacity: 1;
+  pointer-events: auto;
+  margin: 0;
+}
+/* line 319, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--reject::after {
+  border-color: transparent #000 transparent transparent;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 4px;
+  position: absolute;
+  right: 0;
+  top: 8px;
+  width: 0;
+  opacity: 1;
+  pointer-events: auto;
+  margin: 0;
+}
+/* line 335, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--accept::before {
+  border-color: transparent transparent transparent #eeeded;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 12px;
+  position: absolute;
+  top: 8px;
+  width: 0;
+  z-index: 9;
+  opacity: 1;
+  pointer-events: auto;
+  margin: 0;
+}
+/* line 351, ../sass/layout-manager.scss */
+.aajtak-stack .data-holder .controls .button.button--accept::after {
+  border-color: transparent transparent transparent #000;
+  border-image: none;
+  border-style: solid;
+  border-width: 6px;
+  content: "";
+  height: 0;
+  left: 13px;
+  position: absolute;
+  right: 0;
+  top: 8px;
+  width: 0;
+  opacity: 1;
+  pointer-events: auto;
+  margin: 0;
+}
+
+/* line 372, ../sass/layout-manager.scss */
+.layout-heading-wrapper {
+  padding: 20px 15px;
+  position: relative;
+}
+/* line 375, ../sass/layout-manager.scss */
+.layout-heading-wrapper .layout-heading {
+  display: inline-block;
+  height: 38px;
+  max-width: 250px;
+  position: relative;
+  vertical-align: middle;
+  width: auto;
+  transition: all 500ms;
+}
+/* line 383, ../sass/layout-manager.scss */
+.layout-heading-wrapper .layout-heading input[type="text"] {
+  height: 38px !important;
+  left: 0;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+  opacity: 0;
+}
+/* line 393, ../sass/layout-manager.scss */
+.layout-heading-wrapper .layout-heading h2 {
+  padding: 0 !important;
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  transition: all 500ms;
+}
+/* line 400, ../sass/layout-manager.scss */
+.layout-heading-wrapper .layout-heading.edit {
+  width: 100%;
+}
+/* line 402, ../sass/layout-manager.scss */
+.layout-heading-wrapper .layout-heading.edit h2 {
+  z-index: 0;
+  opacity: 0;
+}
+/* line 406, ../sass/layout-manager.scss */
+.layout-heading-wrapper .layout-heading.edit input[type="text"] {
+  z-index: 1;
+  opacity: 1;
+}
+/* line 412, ../sass/layout-manager.scss */
+.layout-heading-wrapper .edit-trigger {
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px;
+  vertical-align: middle;
+}
+
+/* line 420, ../sass/layout-manager.scss */
+.itg-admin .data-holder {
+  padding: 0;
+  overflow: hidden;
+}
+/* line 425, ../sass/layout-manager.scss */
+.itg-admin .aajtak-slide .widget-list-wrapper {
+  margin-top: -20px;
+}
+
+/* line 431, ../sass/layout-manager.scss */
+.aajtak-stack .aapka_vote_widget h2 {
+  font-size: 28px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 28px;
+  color: #000;
+  padding: 20px 45px 25px;
+}

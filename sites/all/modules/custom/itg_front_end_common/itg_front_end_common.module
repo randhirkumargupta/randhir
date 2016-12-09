@@ -34,6 +34,10 @@ function itg_front_end_common_block_info() {
     'info' => t('vukkul Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['sambandhit_khabre_block'] = array(
+    'info' => t('sambandhit khabre Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -52,6 +56,10 @@ function itg_front_end_common_block_view($delta = '') {
 
     case 'vukkul_block':
       $block['content'] = _vukkul_block_content();
+      break;
+    
+    case 'sambandhit_khabre_block':
+      $block['content'] = _sambandhit_khabre_block_content();
       break;
   }
 
@@ -140,6 +148,26 @@ function _vukkul_block_content() {
 }
 
 /**
+ * Implements sambandhit khabre block content
+ */
+function _sambandhit_khabre_block_content() {
+  $related_content = itg_get_related_content(arg(1));
+  if (!empty($related_content)) {
+    $sambandhit_output = '<div class="Sambandhit-Khabre"><h3>संबंधित खबरें</h3>';
+    $related_content = explode(',', $related_content);
+    foreach ($related_content as $fn_result) {
+      $related_content = explode('_', $fn_result);
+      $final_related [] = $related_content[1];
+    }
+    $final_related = implode(' OR ', $final_related);
+    $sambandhit_output.= views_embed_view('sambandhit_khabre', 'page', $final_related);
+    '</div>';
+
+    return $sambandhit_output;
+  }
+}
+
+/**
  * Implements taboola view
  */
 function taboola_view() {
@@ -184,29 +212,10 @@ function itg_front_end_common_views_pre_render(&$view) {
     foreach ($view->result as $related_video_result) {
       $cat_id = taxonomy_term_load($related_video_result->field_field_primary_category[0]['raw']['value']);
       $related_video_result->field_field_primary_category[0]['rendered']['#markup'] = $cat_id->name;
+      $related_video_result->node_title = mb_strimwidth($related_video_result->node_title, 0, 30, "..");
     }
   }
 }
-
-
-/**
- * Implement hook_form_alter
- * {@inheritdoc}
- */
-//function itg_front_end_common_form_alter(&$form, &$form_state, $form_id) {
-//   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'sambandhit_khabre' && $form_state['view']->current_display == 'page') {
-//    //$form['entity_id']['#access'] = false;
-//    $arg = arg();
-//    $related_content = itg_get_related_content($arg[1]);
-//    $related_content = explode(',', $related_content);
-//    foreach($related_content as $fn_result) {
-//      $related_content = explode('_', $fn_result);
-//      $final_related [] = $related_content[1];
-//    }
-//    $final_related = implode(' OR ', $final_related);
-//    $form['entity_id']['#value'] = $final_related;
-//  }
-//}
 
 /**
  * Custom function to fetch related content.

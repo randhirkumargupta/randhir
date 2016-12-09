@@ -1,5 +1,5 @@
 <div class="live-tv-latest-video-container container">
-  <h2><?php print t("Latest program"); ?></h2>
+  <h2><?php print t("आपके लीये"); ?></h2>
   <?php foreach ($rows as $key => $output) : ?>
     <div class="latest-video-rows latest-video-rows-<?php print $key ?>">
       <div class="cateogry cateogry-<?php print $keys; ?>">

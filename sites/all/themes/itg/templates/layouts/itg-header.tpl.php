@@ -6,9 +6,21 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 }
 ?>
 <div class="header-ads mhide">
- <!--   <img src="<?php //print base_path()         ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
+ <!--   <img src="<?php //print base_path()          ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
   <?php print ($data['itg_top']['200*200_header']); ?>
-</div>                               
+</div>    
+ <div class="container"> 
+<nav class="main-menu">
+  <ul class="clearfix">
+    <li><a href="#"> Home </a></li>
+    <li><a href="#"> News </a></li>
+    <li><a href="#"> State </a></li>
+    <li><a href="#"> Vyakaran </a></li>
+    <li><a href="#"> Photos </a></li>
+    <li><a href="#"> Videos </a></li>
+  </ul>
+</nav>
+ </div>
 
 <div class="header-right-menu">
   <ul>
@@ -24,9 +36,9 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
     </li>
     <li class="live-tv"><a href="javascript:void(0)" title="">LIVE TV</a></li> 
   </ul>
-<!--  <div class="globle-search">
-    <input class="search-text" placeholder="Type here" type="text" value="">
-  </div>-->
+  <!--  <div class="globle-search">
+      <input class="search-text" placeholder="Type here" type="text" value="">
+    </div>-->
 </div>
 <!--<div class="itg-logo-container">
   <div class="container top-nav">                  
@@ -44,7 +56,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
         <input class="search-text" placeholder="Type here" type="text" value=""></div>
     </div>
     <div class="main-nav">
-      <?php //print drupal_render($data['itg_top_manu_header']); ?>
+<?php //print drupal_render($data['itg_top_manu_header']); ?>
     </div>
   </div>-->
 <!--  <nav class="navigation">
@@ -55,7 +67,8 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 //        $load_parent = taxonomy_get_parents(arg(2));
 //        $parent_key_of_third_level = isset(array_keys($load_parent)[0]) ? array_keys($load_parent)[0] : 0;
 //        foreach ($menu_manager as $key => $menu_data) :
-//          ?>
+//          
+?>
           //<?php
 //          $title_array = explode("[tid", $menu_data['db_data']['title']);
 //          $link_url = "";
@@ -84,14 +97,15 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 //          if($tid == $parent_key_of_third_level) {
 //            $parent_class = "active";
 //          }
-//          ?>
-          <li>//<?php //print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class , $parent_class)))); ?></li>
-        <?php //endforeach;?>
+//          
+?>
+          <li>//<?php //print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class , $parent_class))));  ?></li>
+<?php //endforeach; ?>
       </ul>
-      //<?php //print drupal_render($data['itg_main_manu_header']);    ?>            
+      //<?php //print drupal_render($data['itg_main_manu_header']);     ?>            
     </div>         
   </nav>-->
-<?php if(false) { ?>
+<?php if (false) { ?>
   <div class="menu-login mhide">
     <div class="container ">   
       <div class="user-menu">
@@ -100,16 +114,15 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 
         if ($user->uid == 0 || $_GET['q'] != 'user') {
           ?>
-          <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
+    <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 
             <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
             <a href="javascript:void(0)" onclick="CenterWindow(550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
             <?php
-          }
-          else {
+          } else {
             ?>
-            <a onclick="Go(550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>','/saml_login/other')" class="user-icon"><i class="fa fa-user"></i></a>
+            <a onclick="Go(550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon"><i class="fa fa-user"></i></a>
 
             <?php
           }
