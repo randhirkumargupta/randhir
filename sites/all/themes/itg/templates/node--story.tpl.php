@@ -230,7 +230,7 @@ if (!empty($content)):
                             $expertDetails = '';
                             if (!empty($node->field_story_expert_name)) {
                               $expertDetails .= '<div class="story-expert-opinion"><h4>' . t('Expert Opinion') . '</h4>';
-                              $expertDetails .= '<div class="expert-detail row"><div class="left-side col-md-8"><p class="name">' . $node->field_story_expert_name['und'][0]['value'] . '</p>';
+                              $expertDetails .= '<div class="expert-detail row"><div class="left-side col-md-8 col-sm-8 col-xs-8"><p class="name">' . $node->field_story_expert_name['und'][0]['value'] . '</p>';
                               if (!empty($node->field_story_expertise)) {
                                 $expertDetails .= '<p>' . $node->field_story_expertise[LANGUAGE_NONE][0]['value'] . '</p>';
                               }
@@ -238,7 +238,7 @@ if (!empty($content)):
                             }
                             if (!empty($node->field_story_expert_image)) {
                               $expertDetailsImage = file_create_url($node->field_story_expert_image[LANGUAGE_NONE][0]['uri']);
-                              $expertDetails .= '<div class="right-side col-md-4"><img src="' . $expertDetailsImage . '"></div></div>';
+                              $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '"></div></div>';
                             }
                             if (!empty($node->field_story_expert_description)) {
                               $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2></div>';
