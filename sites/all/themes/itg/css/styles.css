@@ -9911,6 +9911,13 @@ footer .footer-copyright {
   text-align: center;
   line-height: 22px;
 }
+#main-container-budget .col-list-4 p.success {
+  font-size: 14px;
+  color: green;
+  border-bottom: 1px solid #d2d2d2;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
 #main-container-budget .col-list-4 ul.connectedSortable {
   list-style: none;
   margin-top: 20px;
@@ -9948,6 +9955,10 @@ footer .footer-copyright {
   width: 65px;
   height: 65px;
   padding-right: 0;
+}
+#main-container-budget .budget-predictor-social-share .share-msg {
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 #main-container-budget ul {
   list-style-type: none;

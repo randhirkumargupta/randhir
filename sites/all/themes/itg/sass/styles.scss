@@ -8249,7 +8249,14 @@ input[type="radio"]:checked + label:after{
             padding-top: 15px;
             font-size: 16px;
             text-align: center;
-            line-height: 22px;           
+            line-height: 22px;
+            &.success{
+                font-size: 14px;
+                color: green;
+                border-bottom: 1px solid #d2d2d2;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+            }
         }
          ul.connectedSortable{
                 list-style: none;
@@ -8292,6 +8299,12 @@ input[type="radio"]:checked + label:after{
             width: 65px;
             height: 65px;
             padding-right: 0;
+        }
+    }
+    .budget-predictor-social-share{
+        .share-msg{
+            font-weight: 700;
+            margin-bottom: 10px;
         }
     }
     @include social-share;
