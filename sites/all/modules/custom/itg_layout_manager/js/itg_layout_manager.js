@@ -95,7 +95,7 @@
               data: {block_name: block_name, widget_name: widget_name, section_name: section_name, template_name: template_name, layout_type: layout_type, block_title: category_name_tab, widget_info: widget_info},
               beforeSend: function() {
 
-                $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
+                $('#' + content_place).html('<div class="widget-loader-wrapper dasda"><img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
               },
               success: function(data) {
                 var splitewigitinfo = widget_info.split('|');
@@ -107,34 +107,26 @@
                 $('input[name = ' + block_name + ']').val(category_name_tab);
                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
                 $('.tab-buttons span[data-class="' + block_name + '"]').html(category_name_tab);
-                if (wid_name == 'sport_poll_widget_block') {
-                  $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
-                }
+                
 
                 //$('#block_name').html(category_name_tab);
                 if (display_area) {
                   $('#' + block_name).html(category_name_tab);
                 }
-
-                $('#' + content_place).html(data);
-                //code by sunil
-                //console.log("here i am");
-                jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
-                //code by avanish
-
-                if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1] == 'block_5') {
-                  jQuery(".flexslider").flexslider({
-                    animation: "slide",
-                    prevText: "",
-                    nextText: "",
-                  });
-                }
-                jQuery('.year-slider').slick({
-                  slidesToShow: 1,
-                  slidesToScroll: 1,
-                  arrows: true,
-                  fade: false
+                $('#' + content_place).html(data); 
+                $('#' + content_place).find('.slider-container').slick({infinite: true, slidesToShow: 3, variableWidth: true, slidesToScroll: 1});
+                
+                var stackId = $('#' + content_place).find('ul').attr('id');
+                  console.log(stackId);
+                var clickeventtype = mobilecheck() ? 'touchstart' : 'click';  
+                var stack = new Stack(document.getElementById(stackId));
+                document.querySelector('.button--accept[data-stack =' + stackId + ']').addEventListener(clickeventtype, function() {
+                  stack.accept(buttonClickCallback.bind(this));
                 });
+                document.querySelector('.button--reject[data-stack =' + stackId + ']').addEventListener(clickeventtype, function() {
+                  stack.reject(buttonClickCallback.bind(this));
+                });
+                  
               }
             });
           }
@@ -373,12 +365,6 @@
               jQuery('#' + block_id).html('');
               jQuery('span[data-id="' + block_id + '"]').html('');
               jQuery('#' + block_id).removeClass('input-loader');
-//                            $('body').$('.slider-container').slick({
-//                              infinite: true,
-//                              slidesToShow: 3,
-//                              variableWidth: true,
-//                              slidesToScroll: 1
-//                            });
             }
           });
         })
@@ -401,6 +387,28 @@
           jQuery(this).hide();
         }
       });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    /*==========================================================================*/
+    /*=================== Jquery code for aajtak sliders =======================*/
+    /*==========================================================================*/
+    
       // jquery code to add aajtak sliding slider
       $('.slider-container').slick({
         infinite: true,
@@ -465,6 +473,11 @@
         }
         
       });
+        
+        
+        $('.itg-admin').on('click', '.edit-trigger', function(){
+            $(this).prev().stop().toggleClass('edit');                            
+        });
 
     }
 

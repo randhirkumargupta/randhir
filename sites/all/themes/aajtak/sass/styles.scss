@@ -21,6 +21,17 @@ body::before {
     transition: opacity .3s;
     pointer-events: none;
 }
+@font-face {
+    font-family: "aajtak";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/aajtak.eot?#iefix") format("embedded-opentype"), 
+        url("../fonts/aajtak.woff") format("woff"), url("../fonts/aajtak.ttf") format("truetype"), 
+        url("../fonts/aajtak.svg#aajtak") format("svg");
+}
+[data-icon]::before {
+    content: attr(data-icon);
+}
 .overlay::before {
     opacity: 1;
     pointer-events: auto;

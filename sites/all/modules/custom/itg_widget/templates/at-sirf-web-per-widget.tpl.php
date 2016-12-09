@@ -1,6 +1,5 @@
 <?php global $base_url; ?>
-<div class="widget-container sirf-web-par">
-  <div class="half-grey-bg">
+<div class="sirf-web-par">
     <h2><?php print t("Sirf web per"); ?></h2>
     <ul id="stack-card" class="stack stack--krisna">
       <?php foreach ($data as $key => $output) : ?>
@@ -50,5 +49,4 @@
       <button class="button button--sonar button--reject" data-stack="stack-card">Reject</button>
       <button class="button button--sonar button--accept" data-stack="stack-card">Accept</button>
     </div>
-  </div>
 </div>
