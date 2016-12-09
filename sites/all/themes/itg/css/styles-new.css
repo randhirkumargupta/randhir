@@ -4336,7 +4336,7 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc a {
 .career-graph .highcharts-container {
   background: #f7f7f7;
 }
-.career-graph + vukkul-comment {
+.career-graph + .vukkul-comment {
   margin-top: 50px;
 }
 
