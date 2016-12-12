@@ -11,6 +11,10 @@
  *   Personalized mail content.
  * @param string $to
  *   To email address.
+ * @param string $key
+ *   Mail specific key.
+ * @param string $subject
+ *   Mail subject text.
  *
  * @return string
  *   Modified mail content.
@@ -36,8 +40,14 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
 
 /**
  * Implement mail template for specific mail.
- * @param array $node
- * @return array
+ *
+ * @param array $data
+ *   Mixed array containing mail template data.
+ * @param string $key
+ *   Specific key for specific mail.
+ *
+ * @return
+ *   Themed mail template data.
  */
 function itg_common_notification_mail_content($data , $key) {  
   switch ($key) {
