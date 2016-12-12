@@ -795,6 +795,11 @@ function itg_common_theme() {
       'path' => drupal_get_path('module', 'itg_common') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    'itg_loyalty_point_notification' => array(
+      'template' => 'itg-loyalty-point-notification-mail',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
 
   return $themes;
