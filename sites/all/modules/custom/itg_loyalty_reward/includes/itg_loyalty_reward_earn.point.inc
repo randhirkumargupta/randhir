@@ -239,7 +239,7 @@ function itg_loyalty_reward_points_expire_notification_callback() {
   } catch (Exception $ex) {
     watchdog('Point Expiry Notification', $ex->getMessage());
   }
-  // Send mail if got some user on result.
+  // Send mail if got some user on result.  
   $erros = array_filter($itg_result);
   if (!empty($itg_result)) {
     foreach ($itg_result as $value) {

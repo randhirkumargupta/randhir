@@ -39,13 +39,13 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
  * @param array $node
  * @return array
  */
-function itg_common_notification_mail_content($data , $key) {
+function itg_common_notification_mail_content($data , $key) {  
   switch ($key) {
     case 'refer_friend':
       return theme('itg_personalization_refer_friend_mail', array('data' => $data));
       break;
-    case 'lrp_point':
-      return theme('itg_personalization_refer_friend_mail', array('data' => $data));    
+    case 'lrp_point':      
+      return theme('itg_loyalty_point_notification', array('data' => $data));    
       break;
   }
   
