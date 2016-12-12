@@ -1047,11 +1047,10 @@ header .header-right-menu ul li.live-tv a {
 .story-photos .half-grey-bg {
   display: inline-block;
   vertical-align: top;
-  padding: 10px 0;
   position: relative;
   max-width: 100%;
 }
-/* line 496, ../sass/_itg-mixins.scss */
+/* line 495, ../sass/_itg-mixins.scss */
 .story-photos .half-grey-bg:before {
   content: '';
   background-color: #eeeded;
@@ -1381,12 +1380,11 @@ header .header-right-menu ul li.live-tv a {
 .popular-videos .half-grey-bg {
   display: inline-block;
   vertical-align: top;
-  padding: 10px 0;
   position: relative;
   max-width: 100%;
   width: 100%;
 }
-/* line 496, ../sass/_itg-mixins.scss */
+/* line 495, ../sass/_itg-mixins.scss */
 .popular-videos .half-grey-bg:before {
   content: '';
   background-color: #eeeded;
@@ -1408,7 +1406,7 @@ header .header-right-menu ul li.live-tv a {
 
 /* line 961, ../sass/styles.scss */
 .slider-container .slick-list {
-  padding: 25px 0 30px 15px;
+  padding: 20px 0 30px 15px;
 }
 /* line 964, ../sass/styles.scss */
 .slider-container .slick-arrow {
