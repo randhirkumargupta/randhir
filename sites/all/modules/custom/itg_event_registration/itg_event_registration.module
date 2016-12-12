@@ -98,7 +98,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         '#title' => 'No. Of Memebers',
         '#type' => 'item',
         '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
-        '</suffix>'=> '</div>'
+        '#suffix'=> '</div>'
     );
     
     $current_event_nid = itg_event_registration_get_event_nid();
@@ -135,12 +135,13 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
     
     // Hide metatags and priview button
+    unset($form['title']);
     unset($form['#metatags']);
     unset($form['actions']['preview']);
     
     // Rename submit button from "Save" to "Submit"
     $form['actions']['submit']['#value'] = 'Submit';
-
+/*
     if (isset($current_event_nid)) {
       $event_node = node_load($current_event_nid);
       $registration_type = $event_node->field_event_type[LANGUAGE_NONE][0]['value'];
@@ -150,7 +151,6 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         unset($form['field_erf_total_fee']);
         $form['field_erf_payment_gateway']['#access'] = FALSE;
       } else {
-        
         $count_people = 0;
         foreach ($form['#node']->field_erf_registration_fee[LANGUAGE_NONE] as $registered_people) {
           if (!empty($registered_people['field_first_name'])) {
@@ -159,7 +159,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       $total_fee = ceil($total_fee);
-    }
+    } */
 
     $total_fee = $total_fee ? $total_fee : '0.00';
     $form['field_erf_total_fee'][LANGUAGE_NONE][0]['value']['#value'] = $total_fee;
@@ -212,11 +212,19 @@ function itg_event_registration_form_after_build($form, &$form_state) {
   // Add JS for Event Registration
   drupal_add_js(drupal_get_path('module', 'itg_event_registration') . '/js/itg_event_registration.js', array('weight' => 1));
 
-   $form['event_registration_title'] = array(
-        '#type' => 'item',
-        '#markup' => '<div class="event-registration-title"><h2>REGISTRATION</h2></div>',
-        '#weight' => -100,
-      );
+  $form['event_registration_title'] = array(
+       '#type' => 'item',
+       '#markup' => '<div class="event-registration-title"><h2>REGISTRATION</h2></div>',
+       '#weight' => -100,
+     );
+
+   // Dynamic title of each form
+   $form['field_erf_registration_fee'][LANGUAGE_NONE]['#title'] = '';
+   for ($ereg = 0; $ereg <= $form['field_erf_registration_fee']['und']['#max_delta']; $ereg++) {
+     $count = $ereg + 1;
+     $form['field_erf_registration_fee']['und'][$ereg]['#title'] = t('Member ') . $count;
+     //$form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['und'][$ereg]['#title'] = 'Date of Birth';
+   }
    
   // If limited tickets are available
   $event_node = node_load($current_event_nid);
@@ -282,6 +290,15 @@ function itg_event_registration_form_views_exposed_form_alter(&$form, &$form_sta
   }
 }
 
+/**
+ * Implementation of hook_node_presave
+ * {@inheritdoc}
+ */
+function itg_event_registration_node_presave($node) {
+  if ($node->type == 'event_registration') {
+    $node->title = itg_common_get_node_title(itg_event_registration_get_event_nid());
+  }
+}
 /**
  * Implementation of hook_node_validate
  * {@inheritdoc}
