@@ -237,22 +237,20 @@ input[type="text"], select, input[type="password"]{
 
 /* HEADER CSS */
 header{
-  margin-bottom: 20px;
+  display: inline-block;
   position: relative;
-  height: 52px;
+  vertical-align: top;
+  width: 100%;
   .logo-n-three-bar{
-    left: 0;
-    padding-left: 50px;
+    bottom: -6px;
     position: absolute;
     z-index: 99999;
-    bottom: -8px;
     .three-bar{
-      position: absolute;
-      left: 15px;
-      top: 18px;
-      height: 15px;
-      width: 21px;
       cursor: pointer;
+      float: left;
+      height: 45px;
+      padding: 20px 12px 0 15px;
+      width: 48px;
       span{
         background-color: #000;
         display: inline-block;
@@ -285,11 +283,7 @@ header{
   }
   .region-header{
     background-color: #f6f6f6;
-    height: 40px;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    z-index: 9999;
+    margin-top: 10px;
     .main-menu {
       float: left;
       margin-top:10px;

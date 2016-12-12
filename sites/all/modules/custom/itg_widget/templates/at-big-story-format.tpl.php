@@ -21,19 +21,24 @@ if (!empty($data)) : global $base_url;
     }
     ?>
   </div>
-  <div class="big-story-title">
-    <?php print l($db_node->title, "node/$db_node->nid"); ?>
-  </div>
-  <div class="userdetails">
-    <?php
-    $user_data = user_load($db_node->uid);
-    print l($user_data->name, "user/$user_data->uid");
-    unset($user_data);
-    ?>
-  </div>
-  <div class="big-story-updated">
-    <?php
-    print date("h:s", $db_node->changed). " " .t("IST");
-    ?>
+  <div class="big-story-text">
+    <div class="big-story-title">
+      <a href="#">खुद कार ड्राइव कर PM मोदी को रेस्टोरेंट ले गए मैक्सिको के राष्ट्रपति</a>
+      <?php //print l($db_node->title, "node/$db_node->nid"); ?>
+    </div>
+    <div class="reported-by">
+      <span class="name">
+        <?php
+        $user_data = user_load($db_node->uid);
+        print l($user_data->name, "user/$user_data->uid");
+        unset($user_data);
+        ?>
+      </span>
+      <span class="date">
+        <?php
+        print date("h:s", $db_node->changed). " " .t("IST");
+        ?>
+      </span>
+    </div>
   </div>
 <?php endif; ?>

@@ -27,6 +27,7 @@ if ($theme != 'itgadmin') {
 <?php if ($theme != 'itgadmin') { ?>
   <div id="page">
     <header class="header" id="header" role="banner">
+      <div class="header-bar">
       <div class="logo-n-three-bar">
         <div class="three-bar"><span></span></div>
   <?php if ($logo): ?>
@@ -34,6 +35,7 @@ if ($theme != 'itgadmin') {
         <?php endif; ?>
       </div>
         <?php print render($page['header']); ?>
+      </div>
     </header>
       <?php
       // Render the sidebars to see if there's anything in them.
@@ -45,7 +47,10 @@ if ($theme != 'itgadmin') {
         $cls = 'col-md-9';
       endif;
       ?>
-    <main id="main" class="container">
+    <?php if (isset($widget_data['big_story'])) : ?>
+      <?php print $widget_data['big_story']; ?>
+    <?php endif; ?>
+    <main id="main">
       <section id="content" role="main">
     <?php print render($page['highlighted']); ?>
   <?php print $breadcrumb; ?>
@@ -65,13 +70,6 @@ if ($theme != 'itgadmin') {
       <?php } ?>
       <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
       <div class="aajtak-layout-container <?php echo $itg_class; ?>">
-      <?php if (isset($widget_data['big_story'])) : ?>
-          <div class="row">
-            <div class="col-md-12">
-          <?php print $widget_data['big_story']; ?>
-            </div>    
-          </div>
-            <?php endif; ?>
         <!--1-- Aajtak row starts here--> 
         <?php if (isset($widget_data['itg-block-1']['widget_name']) || $theme == 'itgadmin') { ?>
         <div class="row">
