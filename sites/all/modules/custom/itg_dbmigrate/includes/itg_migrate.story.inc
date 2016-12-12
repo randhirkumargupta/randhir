@@ -352,9 +352,11 @@ class ItgStoryMigration extends XMLMigration {
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
         $category_array = explode('#', $final_category);
+        $array_count = count($category_array);
+        $table_name = itg_migrate_category_table($array_count);
         $last_value = end($category_array);
         $source_cid = (string) $last_value;
-        $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
+        $orignal_category = get_itg_destination_id($table_name, $source_cid);
         $data_category[]['tid'] = $orignal_category;
       }
     }
@@ -465,7 +467,12 @@ class ItgStoryMigration extends XMLMigration {
     // Primary category
     if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
       $source_cid = (string) $row->xml->primarycategory;
-      $orignal_pcategory = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
+      $pcategory_array = explode('#', $source_cid);
+      $parray_count = count($pcategory_array);
+      $table_name = itg_migrate_category_table($parray_count);
+      $last_value = end($pcategory_array);
+      $source_cid = (string) $last_value;
+      $orignal_pcategory = get_itg_destination_id($table_name, $source_cid);
       $row->xml->primarycategory = $orignal_pcategory;
     }
     //End primary category
@@ -621,4 +628,18 @@ class ItgStoryMigration extends XMLMigration {
    
   }
 
+}
+
+/**
+ * implement function to get category table
+ */
+function itg_migrate_category_table($level){
+  $table = array(
+    '1' => 'migrate_map_itgsection',
+    '2' => 'migrate_map_itgcategory',
+    '3' => 'migrate_map_itgsubcategory',
+    '4' => 'migrate_map_itgsubsubcategory',
+  );
+  
+  return $table[$level];
 }

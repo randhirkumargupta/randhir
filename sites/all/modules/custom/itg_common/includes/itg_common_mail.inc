@@ -15,13 +15,15 @@
  * @return string
  *   Modified mail content.
  */
-function itg_common_get_mail_content($data, $to) {
-  $mail_content = itg_common_notification_mail_content($data);
+function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
+  $mail_content = itg_common_notification_mail_content($data, $key);
   $params = array(
     'body' => $mail_content,
-    'subject' => 'India Today | Refer a friend',
+    //'subject' => 'India Today | Refer a friend',
+    'subject' => $subject,
   );
-  $mail = drupal_mail('itg_common', 'refer_a_friend', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  //$mail = drupal_mail('itg_common', 'refer_a_friend', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
   }
@@ -33,10 +35,18 @@ function itg_common_get_mail_content($data, $to) {
 }
 
 /**
- * Get approval mail content.
+ * Implement mail template for specific mail.
  * @param array $node
  * @return array
  */
-function itg_common_notification_mail_content($data) {
-  return theme('itg_personalization_refer_friend_mail', array('data' => $data));
+function itg_common_notification_mail_content($data , $key) {
+  switch ($key) {
+    case 'refer_friend':
+      return theme('itg_personalization_refer_friend_mail', array('data' => $data));
+      break;
+    case 'lrp_point':
+      return theme('itg_personalization_refer_friend_mail', array('data' => $data));    
+      break;
+  }
+  
 }

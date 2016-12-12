@@ -505,20 +505,21 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 /* CSS FOR FRONT USER PERSONALIZATION */
 .personalized-wrapper{
   background-color: #eaebed;
+      padding-top: 30px;
+    padding-bottom: 30px;
 }
 .personalized-user-area{
   display: table;
   max-width: 100%;
-  height: 240px;
   margin: 0 auto;
-  width: 800px;
+  width: 1170px;
 }
 .personalized-user{
   display: table-cell;
-  padding: 20px;
   text-align: center;
   vertical-align: middle;
   width: 260px;
+  border-right: 1px solid #ddd;
   .user-pic{
     display: inline-block;
     vertical-align: top;
@@ -540,16 +541,18 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   }
 }
 .personalized-user-info{
-  display: table-cell;
-  padding: 20px 0;
-  text-align: center;
-  vertical-align: middle;
+    display: table-cell; 
+    text-align: center;
+    vertical-align: middle;
+    width: 35%;
+    border-right: 1px solid #ddd;
+    padding: 0 20px;
   span{
     padding: 0 20px;
     display: inline-block;
     vertical-align: top;
     .fa{
-      font-size: 35px;
+      font-size: 20px;
       color: #8d8d8d;
     }
     dfn{
@@ -560,6 +563,88 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       margin-top: 10px;
     }
   }
+}
+.total-point-wrapper{
+    display: table-cell;
+        padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-family: roboto;
+    .total-point-value{
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 15px;      
+        color: #8d8d8d;
+        font-size: 12px;
+        span{
+        display: block;
+        font-size: 40px;
+        color: #9f0505;
+        font-weight: 700;
+        margin-top: 5px;
+        line-height: 30px;    
+        }       
+    }
+     img{
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        }
+        .pregress-bar{
+            position: relative;
+            height: 40px;
+            margin-top: 20px;            
+            .pregress-bar-active{
+                width: 320px;
+                background: #cdcdcd;
+                display: inline-block;
+                vertical-align: middle;
+                height: 6px;
+                border-radius: 10px;
+                position: relative;
+                &:before{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: '';
+                    height: 6px;
+                    background: #a00606;
+                    width: 10%;
+                    border-radius: 10px;
+                }
+            }
+            span.current-badge, span.next-badge{
+                display: inline-block;
+                /* vertical-align: middle; */
+                position: absolute;
+                left: 40px;
+                top: -9px;
+                font-size: 12px;
+                color: #8c8c8e;
+                font-weight: 500;
+                small{
+                display: block;
+                font-size: 24px;
+                color: #000;
+                margin-bottom: 5px;
+                }
+            }
+            span.next-badge{
+                right: 48px;
+                left: auto;
+            }
+        }
+        .points-to-go{
+            text-align: right;
+            padding-right: 48px;
+            color: #8c8c8e;
+            span{
+                font-weight: 700;
+                color: #1a3c8d;
+            }
+        }
 }
 .block-itg-personalization{
   text-align: center;
@@ -4207,7 +4292,7 @@ article.node-mega-review-critic{
     .highcharts-container {
             background: #f7f7f7;
         }
-        + vukkul-comment{
+        + .vukkul-comment{
             margin-top:50px;
         }
 }
