@@ -4000,7 +4000,7 @@ body.has-cart-popup {
   margin: 20px 0;
 }
 #content .node-event_registration-form .form-type-textfield > label, #content .node-event_registration-form .form-type-textarea > label, #content .node-event_registration-form .form-type-select > label {
-  width: 180px;
+  width: 130px;
   padding-right: 10px;
   font-size: 15px;
   color: #000;
@@ -4016,8 +4016,8 @@ body.has-cart-popup {
   text-align: left;
   padding: 5px;
 }
-#content .node-event_registration-form div.description, #content .node-event_registration-form .form-type-textarea > label + div, #content .node-event_registration-form span.error {
-  padding-left: 180px;
+#content .node-event_registration-form div.description, #content .node-event_registration-form span.error {
+  padding-left: 130px;
 }
 #content .node-event_registration-form .form-type-radios > label + div .form-item {
   display: inline-block;
@@ -4030,7 +4030,7 @@ body.has-cart-popup {
   width: auto;
 }
 #content .node-event_registration-form .form-actions {
-  padding-left: 180px;
+  padding-left: 130px;
 }
 #content .node-event_registration-form .form-actions .form-submit {
   background-color: #ef3c24;
