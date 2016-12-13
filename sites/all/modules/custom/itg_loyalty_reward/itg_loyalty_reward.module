@@ -320,8 +320,7 @@ function itg_loyalty_reward_node_insert($node) {
       $query = db_insert('itg_loyalty_reward_cron');
       $query->fields(array(
         'nid' => $node->nid,
-        'type' => $node->type,
-        //'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours'),
+        'type' => $node->type,        
         'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']),
         'status' => 0,
         'created' => time()

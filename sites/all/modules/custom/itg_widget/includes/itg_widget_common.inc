@@ -1001,216 +1001,234 @@ function get_required_data_from_entity_id($entity_id) {
  * {@inheritdoc}
  */
 function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-    switch ($form['#id']) {
-        case 'views-exposed-form-home-page-feature-widget-page-1':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
+switch ($form['#id']) {
+    case 'views-exposed-form-home-page-feature-widget-page-1':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
 
-        case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE, 'story');
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-story-widget-most-popular':
-        case 'views-exposed-form-story-widget-page-1':
-            $form['title']['#attributes']['placeholder'] = t('Story Title');
-            $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
-            $form['nid']['#attributes']['placeholder'] = t('Story ID');
-            $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
-            break;
-        case 'views-exposed-form-photo-carousel-widget-photo-carousel-list':
-            $form['title']['#attributes']['placeholder'] = t('Photo Gallery Title');
-            $form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
-            $form['nid']['#attributes']['placeholder'] = t('Photo Gallery ID');
-            $form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
-            break;
-        case 'views-exposed-form-photo-carousel-widget-video-carousel-list':
-            $form['title']['#attributes']['placeholder'] = t('Video Gallery Title');
-            $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
-            $form['nid']['#attributes']['placeholder'] = t('Video Gallery ID');
-            $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
-            break;
-        case 'views-exposed-form-story-widget-trending-videos':
-        case 'views-exposed-form-story-widget-top-takes-video':
-        case 'views-exposed-form-story-widget-watch-right-now':
-            $form['title']['#attributes']['placeholder'] = t('Video Title');
-            $form['nid']['#attributes']['placeholder'] = t('Video ID');
-            $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
-            $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
-            break;
-        case 'views-exposed-form-so-sorry-so-sorry-videos':
-            $cat_setting = trim(variable_get('so_sorry_category_id_for_widget'));
-            if (strlen($cat_setting) <= 0) {
-                $setting_link = l("Click Here", "admin/settings/custom-variables");
-                drupal_set_message("Setting not found for autocomplete. Please $setting_link", "error");
-            }
-            $form['title']['#attributes']['placeholder'] = t('Video Title');
-            $form['nid']['#attributes']['placeholder'] = t('Video ID');
-            $form['title']['#autocomplete_path'] = 'so-sorry-content-title/autocomplete';
-            $form['nid']['#autocomplete_path'] = 'so-sorry-content-nid/autocomplete';
-            break;
-        case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-special-auto-review-widget-special-auto-review-widget-contents':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-most-read-widget-most-read-widget-contents':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
+    case 'views-exposed-form-section-wise-draggable-content-order-we-may-suggest-widget':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE, 'story');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-story-widget-most-popular':
+    case 'views-exposed-form-story-widget-page-1':
+      $form['title']['#attributes']['placeholder'] = t('Story Title');
+      $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
+      $form['nid']['#attributes']['placeholder'] = t('Story ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
+      break;
+    case 'views-exposed-form-photo-carousel-widget-photo-carousel-list':
+      $form['title']['#attributes']['placeholder'] = t('Photo Gallery Title');
+      $form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
+      $form['nid']['#attributes']['placeholder'] = t('Photo Gallery ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
+      break;
+    case 'views-exposed-form-photo-carousel-widget-video-carousel-list':
+      $form['title']['#attributes']['placeholder'] = t('Video Gallery Title');
+      $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
+      $form['nid']['#attributes']['placeholder'] = t('Video Gallery ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
+      break;
+    case 'views-exposed-form-story-widget-trending-videos':
+    case 'views-exposed-form-story-widget-top-takes-video':
+    case 'views-exposed-form-story-widget-watch-right-now':
+      $form['title']['#attributes']['placeholder'] = t('Video Title');
+      $form['nid']['#attributes']['placeholder'] = t('Video ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/videogallery/autocomplete';
+      $form['title']['#autocomplete_path'] = 'content-title-list/videogallery/autocomplete';
+      break;
+    case 'views-exposed-form-so-sorry-so-sorry-videos':
+      $cat_setting = trim(variable_get('so_sorry_category_id_for_widget'));
+      if (strlen($cat_setting) <= 0) {
+        $setting_link = l("Click Here", "admin/settings/custom-variables");
+        drupal_set_message("Setting not found for autocomplete. Please $setting_link", "error");
+      }
+      $form['title']['#attributes']['placeholder'] = t('Video Title');
+      $form['nid']['#attributes']['placeholder'] = t('Video ID');
+      $form['title']['#autocomplete_path'] = 'so-sorry-content-title/autocomplete';
+      $form['nid']['#autocomplete_path'] = 'so-sorry-content-nid/autocomplete';
+      break;
+    case 'views-exposed-form-section-wise-draggable-content-order-big-story-format':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
+      $big_story_value =  itg_big_story_get_extra_value();
+      if($big_story_value == 'big_story_live_tv_active') {
+        $yes_live = "checked";
+        $no_live = "";
+      }
+      else {
+        $yes_live = "";
+        $no_live = "checked";
+      }
+      // Activate live tv button
+      $form['#prefix'] = '
+          <div class="switch-field">
+           <div class="switch-title">Big Story As Live Tv?</div>
+           <input type="radio" id="switch_left" name="live_tv_switch_2" value="yes" '.$yes_live.'/>
+           <label for="switch_left">Activated</label>
+           <input type="radio" id="switch_right" name="live_tv_switch_2" value="no" '.$no_live.' />
+           <label for="switch_right">Not Activated</label>
+         </div>';
+      break;
+    case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-special-auto-review-widget-special-auto-review-widget-contents':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-most-read-widget-most-read-widget-contents':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
 
-        case 'views-exposed-form-special-how-i-made-it-special-how-made-it-widget-contents':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-feature-content-by-section-widget-feature-content-section-widget-contents':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-poll-widget-poll-widget-format':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets('poll');
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-highlights-widget-highlights-widget-conent':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets('breaking_news');
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-yearender-top-news-and-top-videos-yearend-left-widget-contents':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            break;
-        case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
-            $form['title']['#attributes']['placeholder'] = t('Anchor name');
-            $form['title']['#autocomplete_path'] = 'anchor-list/autocomplete';
-            $form['nid']['#attributes']['placeholder'] = t('Anchor ID');
-            $form['nid']['#autocomplete_path'] = 'anchor-list-nid/autocomplete';
-            break;
-        case 'views-exposed-form-section-wise-draggable-content-order-page':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets($_GET['type']);
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            $form['#validate'][] = 'custom_section_wise_validate';
-            break;
-        case 'views-exposed-form-key-candidate-special-key-candidate-widget-contents':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets('reporter');
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            $form['#validate'][] = 'custom_section_wise_validate';
-            $states_neame = get_all_state();
-            $form['state_val'] = array(
-                '#type' => 'select',
-                '#multiple' => TRUE,
-                '#options' => $states_neame,
-            );
-            $form['state_val']['#prefix'] = '<div class=""style="display:none">';
-            $form['state_val']['#suffix'] = '</div>';
+    case 'views-exposed-form-special-how-i-made-it-special-how-made-it-widget-contents':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-feature-content-by-section-widget-feature-content-section-widget-contents':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-poll-widget-poll-widget-format':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets('poll');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-highlights-widget-highlights-widget-conent':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets('breaking_news');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-yearender-top-news-and-top-videos-yearend-left-widget-contents':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      break;
+    case 'views-exposed-form-widget-anchors-listing-anchors-listing-page':
+      $form['title']['#attributes']['placeholder'] = t('Anchor name');
+      $form['title']['#autocomplete_path'] = 'anchor-list/autocomplete';
+      $form['nid']['#attributes']['placeholder'] = t('Anchor ID');
+      $form['nid']['#autocomplete_path'] = 'anchor-list-nid/autocomplete';
+      break;
+    case 'views-exposed-form-section-wise-draggable-content-order-page':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets($_GET['type']);
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      $form['#validate'][] = 'custom_section_wise_validate';
+      break;
+    case 'views-exposed-form-key-candidate-special-key-candidate-widget-contents':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets('reporter');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      $form['#validate'][] = 'custom_section_wise_validate';
+      $states_neame = get_all_state();
+      $form['state_val'] = array(
+        '#type' => 'select',
+        '#multiple' => TRUE,
+        '#options' => $states_neame,
+      );
+      $form['state_val']['#prefix'] = '<div class=""style="display:none">';
+      $form['state_val']['#suffix'] = '</div>';
 
-            $op = getsaction_list();
+      $op = getsaction_list();
 
-            $form['cat_id'] = array(
-                '#type' => 'select',
-                '#options' => $op,
-            );
-            $form['cat_id']['#prefix'] = '<div class=""style="display:none">';
-            $form['cat_id']['#suffix'] = '</div>';
-            break;
-        case 'views-exposed-form-key-candidate-special-key-candidate-widget-list':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['title']['#weight'] = 1;
-            $form['nid']['#weight'] = 2;
-            $form['title']['#weight'] = 1;
-            $form['items_per_page']['#weight'] = 5;
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets('reporter');
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            $form['#validate'][] = 'custom_section_wise_validate';
-            $form['cat_id']['#prefix'] = '<div class="cat-wraper"style="">';
-            $form['cat_id']['#suffix'] = '</div>';
-            $form['cat_id']['#title'] = '';
-            $form['state']['#prefix'] = '<div class="state-wraper"style="">';
-            $form['state']['#suffix'] = '</div>';
-            $op = getsaction_list();
-            $form['cat1_id']['#type'] = 'select';
-            $form['cat1_id']['#options'] = $op;
-            $form['cat1_id']['#weight'] = -9999;
-            $form['cat1_id']['#default_value'] = $_GET['cat_id'];
-            $allstate = get_all_state();
-            $form['state1']['#type'] = 'select';
-            $form['state1']['#options'] = $allstate;
-            $form['state1']['#weight'] = -99994;
-            $form['state1']['#default_value'] = $_GET['state'];
-            break;
-        case 'views-exposed-form-section-wise-content-ordering-list-page':
-            global $messages;
-            if ($_GET['category_tid'] == 0) {
-                drupal_add_css(".messages--error {display:none}", "inline");
-            }
-            // handle expose content type of itg_widget_order table.
-            $form['content_type']['#default_value'] = 'all';
-            $form['content_type']['#value'] = 'all';
-            $form['Canlce'] = array(
-                '#type' => 'markup',
-                '#markup' => l('Reset', 'section-wise-content-ordering-list', array("attributes" => array("class" => array("button")), "query" => array("category_tid" => 0))),
-            );
-            drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
-            $form['#validate'][] = 'custom_section_wise_validate';
-            break;
-        case 'views-exposed-form-static-pages-page':
-            $form['title']['#attributes']['placeholder'] = t('Page Title');
-            $form['title']['#autocomplete_path'] = 'content-title-list/page/autocomplete';
-            $form['nid']['#attributes']['placeholder'] = t('Page ID');
-            $form['nid']['#autocomplete_path'] = 'content-nid-list/page/autocomplete';
-            break;
-    }
-
-    if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
-        $form['#info']['filter-shs_term_node_tid_depth']['label'] = 'Section';
-    }
+      $form['cat_id'] = array(
+        '#type' => 'select',
+        '#options' => $op,
+      );
+      $form['cat_id']['#prefix'] = '<div class=""style="display:none">';
+      $form['cat_id']['#suffix'] = '</div>';
+      break;
+    case 'views-exposed-form-key-candidate-special-key-candidate-widget-list':
+      $form['title']['#attributes']['placeholder'] = t('Content Title');
+      $form['title']['#weight'] = 1;
+      $form['nid']['#weight'] = 2;
+      $form['title']['#weight'] = 1;
+      $form['items_per_page']['#weight'] = 5;
+      $form['nid']['#attributes']['placeholder'] = t('Content ID');
+      $autocomplete_path = autocomplete_for_widgets('reporter');
+      $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+      $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      $form['#validate'][] = 'custom_section_wise_validate';
+      $form['cat_id']['#prefix'] = '<div class="cat-wraper"style="">';
+      $form['cat_id']['#suffix'] = '</div>';
+      $form['cat_id']['#title'] = '';
+      $form['state']['#prefix'] = '<div class="state-wraper"style="">';
+      $form['state']['#suffix'] = '</div>';
+      $op = getsaction_list();
+      $form['cat1_id']['#type'] = 'select';
+      $form['cat1_id']['#options'] = $op;
+      $form['cat1_id']['#weight'] = -9999;
+      $form['cat1_id']['#default_value'] = $_GET['cat_id'];
+      $allstate = get_all_state();
+      $form['state1']['#type'] = 'select';
+      $form['state1']['#options'] = $allstate;
+      $form['state1']['#weight'] = -99994;
+      $form['state1']['#default_value'] = $_GET['state'];
+      break;
+    case 'views-exposed-form-section-wise-content-ordering-list-page':
+      global $messages;
+      if ($_GET['category_tid'] == 0) {
+        drupal_add_css(".messages--error {display:none}", "inline");
+      }
+      // handle expose content type of itg_widget_order table.
+      $form['content_type']['#default_value'] = 'all';
+      $form['content_type']['#value'] = 'all';
+      $form['Canlce'] = array(
+        '#type' => 'markup',
+        '#markup' => l('Reset', 'section-wise-content-ordering-list', array("attributes" => array("class" => array("button")), "query" => array("category_tid" => 0))),
+      );
+      drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
+      $form['#validate'][] = 'custom_section_wise_validate';
+      break;
+    case 'views-exposed-form-static-pages-page':
+      $form['title']['#attributes']['placeholder'] = t('Page Title');
+      $form['title']['#autocomplete_path'] = 'content-title-list/page/autocomplete';
+      $form['nid']['#attributes']['placeholder'] = t('Page ID');
+      $form['nid']['#autocomplete_path'] = 'content-nid-list/page/autocomplete';
+      break;
+  }
+  if (isset($form['#info']['filter-shs_term_node_tid_depth']) && !empty($form['#info']['filter-shs_term_node_tid_depth'])) {
+    $form['#info']['filter-shs_term_node_tid_depth']['label'] = 'Section';
+  }
 }
 
 /**

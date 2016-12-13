@@ -57,6 +57,9 @@ function itg_common_notification_mail_content($data , $key) {
     case 'lrp_point':      
       return theme('itg_loyalty_point_notification', array('data' => $data));    
       break;
+    case 'personalization_mail':
+      return theme('itg_personalization_personalization_mail', array('data' => $data));
+      break;
   }
   
 }
