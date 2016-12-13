@@ -431,10 +431,13 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
         '#title' => t(''),
         '#value' => $cat_id,
     );
-//  $form['captcha'] = array(
-//    '#type' => 'captcha',
-//    '#captcha_type' => 'image_captcha/Image',
-//  );
+    global $theme;
+    if ($theme == 'itgadmin ') {
+        $form['captcha'] = array(
+            '#type' => 'captcha',
+            '#captcha_type' => 'image_captcha/Image',
+        );
+    }
     $form['submit_button'] = array(
         '#type' => 'submit',
         '#value' => t('Submit'),
