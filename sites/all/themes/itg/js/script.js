@@ -517,7 +517,7 @@ jQuery(document).ready(function () {
     });
 
     //vertical menu position      
-    var getNumberMenu = jQuery('.vertical-menu li').length;
+    /*var getNumberMenu = jQuery('.vertical-menu li').length;
     if (getNumberMenu > 6) {
         jQuery('.vertical-menu').slick({
             vertical: true,
@@ -533,29 +533,37 @@ jQuery(document).ready(function () {
         });
     } else {
         return false;
+    }*/
+    var menuLength  = jQuery('.vertical-menu li').length;
+    if (menuLength > 5) {
+        jQuery('.vertical-more').show();
     }
-    /* var menuLength  = jQuery('.vertical-menu li').length;
-     if(menuLength > 6){         
-     jQuery('.vertical-more').show();
-     }
-     var TotalHeight = 0, clicked = true;
-     jQuery('.vertical-menu li').each(function () {
-     var liLength = jQuery(this).height();
-     TotalHeight = TotalHeight + liLength;                             
-     });          
-     jQuery('.vertical-more a').click(function(){          
-     if(clicked){             
-     clicked=false;
-     jQuery('.vertical-menu').css('margin-top',-(menuLength-6)*92+'px');
-     jQuery(this).find('.more').hide();
-     jQuery(this).find('.less').show();
-     }else{
-     clicked=true;
-     jQuery('.vertical-menu').css('margin-top','0px');
-     jQuery(this).find('.less').hide();
-     jQuery(this).find('.more').show();
-     }                  
-     });  */
+   // var clicked = true;
+    var calcNum = menuLength % 5;
+    var divNum = parseInt(menuLength/5);
+    console.log(calcNum);
+    console.log(divNum);
+    var count = 0;
+    jQuery('.vertical-more a.more').click(function () {
+        count ++;        
+        if(count < divNum && calcNum !=0) {
+            jQuery('.vertical-menu').css('margin-top', - 375 * count + 'px');
+        }else if(calcNum > 0 && count == divNum){
+            jQuery('.vertical-menu').css('margin-top', - (375 * (count-1) + calcNum * 75) + 'px');
+            jQuery('.vertical-more a.less').show();
+            jQuery(this).hide(); 
+        }else if(count < divNum && calcNum == 0){
+            jQuery('.vertical-menu').css('margin-top', - 375 * count + 'px');
+            jQuery('.vertical-more a.less').show();
+            jQuery(this).hide(); 
+        }     
+    });  
+    jQuery('.vertical-more a.less').click(function () {
+        count = 0;
+        jQuery('.vertical-menu').css('margin-top', '0px');
+        jQuery('.vertical-more a.more').show();
+        jQuery(this).hide();   
+    });  
 });
 
 
