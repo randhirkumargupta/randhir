@@ -11,7 +11,7 @@
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   $magazine_id = $form_state['input']['magazine-name'];
   if (isset($form_state['view']->name) && $form_state['view']->name == 'syndication_rule_listing') {
-    $form['field_syndication_rule_title_value']['#options'] = itg_syndication_get_client();
+    $form['field_syndication_rule_title_value']['#options'] = itg_syndication_get_client("yes");
     unset($form['field_syndication_rule_title_value']['#options']['_none']);
     $options = $form['field_syndication_rule_title_value']['#options'];
     unset($form['field_syndication_rule_title_value']['#options']);
@@ -171,7 +171,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
   elseif ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_pattern_listing') {
     $form['field_syndication_feed_clients_value'] = array(
       '#type' => 'select',
-      '#options' => itg_syndication_get_client(),
+      '#options' => itg_syndication_get_client("yes"),
       '#default_value' => '_none',
       '#validated' => true,
       '#weight' => 1,
@@ -186,7 +186,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
    $form['client_delivery_mode']['#title'] = t("Select delivery end point");
     drupal_add_js('
       jQuery(function() {
-        jQuery( "#edit-changed-max-datepicker-popup-0" ).datepicker({  
+        jQuery( "#edit-changed-max-datepicker-popup-0 , #edit-changed-min-datepicker-popup-0" ).datepicker({  
           changeMonth:true,
           changeYear:true,
           maxDate: new Date() 

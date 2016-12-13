@@ -1060,6 +1060,25 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
+      $big_story_value =  itg_big_story_get_extra_value();
+      if($big_story_value == 'big_story_live_tv_active') {
+        $yes_live = "checked";
+        $no_live = "";
+      }
+      else {
+        $yes_live = "";
+        $no_live = "checked";
+      }
+      // Activate live tv button
+      $form['#prefix'] = '
+          <div class="switch-field">
+           <div class="switch-title">Big Story As Live Tv?</div>
+           <input type="radio" id="switch_left" name="live_tv_switch_2" value="yes" '.$yes_live.'/>
+           <label for="switch_left">Activated</label>
+           <input type="radio" id="switch_right" name="live_tv_switch_2" value="no" '.$no_live.' />
+           <label for="switch_right">Not Activated</label>
+         </div>';
       break;
     case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
