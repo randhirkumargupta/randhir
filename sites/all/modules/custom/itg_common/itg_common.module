@@ -767,6 +767,7 @@ function itg_common_views_pre_render(&$view) {
  */
 function itg_common_mail($key, &$message, $params) {  
   switch ($key) {
+    case 'personalisation_mail':
     case 'lrp_point':
     case 'refer_a_friend':
       $headers = array(
@@ -793,6 +794,11 @@ function itg_common_theme() {
   $themes = array(    
     'itg_personalization_refer_friend_mail' => array(
       'template' => 'itg-refer-friend-mail',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_personalization_personalization_mail' => array(
+      'template' => 'itg-personalization-mail',
       'path' => drupal_get_path('module', 'itg_common') . '/templates',
       'variables' => array('data' => NULL),
     ),

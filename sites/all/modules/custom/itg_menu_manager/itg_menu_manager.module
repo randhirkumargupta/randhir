@@ -985,6 +985,10 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
       'effect' => 'fade',
     );
   }
+  if($form_id == 'menu_edit_item' && arg(4) == 'menu-about-us-page-menu') {
+    $form['actions']['submit']['#suffix'] = l("Cancel","admin/structure/menu/manage/menu-about-us-page-menu",array("attributes"=>array("class"=>array("button"))));
+    drupal_add_css(".form-item-expanded {display:block !important}","inline");
+  }
 }
 
 function itg_menu_manager_webform_js_submit(&$form, $form_state) {
