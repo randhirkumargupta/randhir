@@ -97,7 +97,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         '#prefix' => '<div class= "event-member-container">',
         '#title' => 'No. Of Memebers',
         '#type' => 'item',
-        '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
+        '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input value="1" type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
         '#suffix'=> '</div>'
     );
     
@@ -220,6 +220,8 @@ function itg_event_registration_form_after_build($form, &$form_state) {
 
    // Dynamic title of each form
    $form['field_erf_registration_fee'][LANGUAGE_NONE]['#title'] = '';
+   $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
+   $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#suffix'] = '</div>';
    for ($ereg = 0; $ereg <= $form['field_erf_registration_fee']['und']['#max_delta']; $ereg++) {
      $count = $ereg + 1;
      $form['field_erf_registration_fee']['und'][$ereg]['#title'] = t('Member ') . $count;

@@ -3936,7 +3936,7 @@ body.has-cart-popup{
     margin: 20px 0;
   }
   .form-type-textfield > label, .form-type-textarea > label, .form-type-select > label{
-    width: 180px;
+    width: 130px;
     padding-right: 10px;
     font-size: 15px;
     color: #000;
@@ -3952,8 +3952,8 @@ body.has-cart-popup{
       }
     }
   }
-  div.description, .form-type-textarea > label + div, span.error{
-    padding-left: 180px;
+  div.description, span.error{
+    padding-left: 130px;
   }
   .form-type-radios > label + div{
     .form-item{
@@ -3968,7 +3968,7 @@ body.has-cart-popup{
     }
   }
   .form-actions{
-    padding-left: 180px;
+    padding-left: 130px;
     .form-submit{
       background-color: #ef3c24;
       width: auto;

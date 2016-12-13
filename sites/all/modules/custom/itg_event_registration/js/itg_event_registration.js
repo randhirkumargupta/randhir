@@ -42,3 +42,9 @@
     }
   };
 })(jQuery, Drupal, this, this.document);
+
+jQuery(document).ready(function(){
+    jQuery("span.event-form-add").click(function() {        
+        jQuery("#edit-field-erf-registration-fee-und-add-more").trigger("click");
+    });    
+});
