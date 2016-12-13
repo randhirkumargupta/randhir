@@ -79,6 +79,17 @@ function itg_personalization_home_page() {
   $l_name = $user_fields->field_last_name['und'][0]['value'];
   $data['full_name'] = $f_name . ' ' . $l_name;
   $data['badge_detail'] = itg_personalization_badge($user->uid);
+  // Load badge icon.
+  if (isset($data['badge_detail']['earn']) && $data['badge_detail']['earn'] > 0) {
+    $file = file_load(variable_get('badge_' . $data['badge_detail']['earn'], ''));
+    // Render badge icone.
+    $data['badge_detail']['badge_icon'] = theme(
+        'image_style', array(
+      'style_name' => 'medium',
+      'path' => $file->uri,
+        )
+    );
+  }
 
   return theme('personalization_userpage', array('data' => $data));
 }

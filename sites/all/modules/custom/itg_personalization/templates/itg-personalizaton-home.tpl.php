@@ -40,6 +40,7 @@
         <dfn>26</dfn>
       </span>
     </div>
+      <?php if (isset($data['badge_detail']['earn']) && $data['badge_detail']['earn'] > 1): ?>
       <div class="total-point-wrapper">
         <!-- Total Points -->        
         <div class="total-points">
@@ -47,7 +48,7 @@
                 <?php print t('TOTAL POINTS'); ?>
                 <span><?php print $data['badge_detail']['total']; ?></span>
             </span>
-          <img typeof="foaf:Image" src="http://localhost/itgcms/sites/default/files/styles/user_picture/public/Tramonto_a_Scalea_by_Renatvs88.jpg?itok=FM8fq8qe" width="200" height="200" alt="">
+          <?php print render($data['badge_detail']['badge_icon']); ?>
         </div>
         <div class="pregress-bar">            
             <span class="current-badge"><small><?php print $data['badge_detail']['earn']; ?></small>Current Level</span>
@@ -57,7 +58,8 @@
         <div class="points-to-go">
           <?php print '<span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to go'); ?>
         </div>
-      </div>  
+      </div>
+      <?php endif; ?>
   </div>
  </div> 
 
