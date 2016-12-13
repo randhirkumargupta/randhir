@@ -27,6 +27,7 @@ if ($theme != 'itgadmin') {
 <?php if ($theme != 'itgadmin') { ?>
   <div id="page">
     <header class="header" id="header" role="banner">
+      <div class="header-bar">
       <div class="logo-n-three-bar">
         <div class="three-bar"><span></span></div>
   <?php if ($logo): ?>
@@ -34,6 +35,7 @@ if ($theme != 'itgadmin') {
         <?php endif; ?>
       </div>
         <?php print render($page['header']); ?>
+      </div>
     </header>
       <?php
       // Render the sidebars to see if there's anything in them.
@@ -45,7 +47,10 @@ if ($theme != 'itgadmin') {
         $cls = 'col-md-9';
       endif;
       ?>
-    <main id="main" class="container">
+    <?php if (isset($widget_data['big_story'])) : ?>
+      <?php print $widget_data['big_story']; ?>
+    <?php endif; ?>
+    <main id="main">
       <section id="content" role="main">
     <?php print render($page['highlighted']); ?>
   <?php print $breadcrumb; ?>
@@ -65,13 +70,6 @@ if ($theme != 'itgadmin') {
       <?php } ?>
       <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
       <div class="aajtak-layout-container <?php echo $itg_class; ?>">
-      <?php if (isset($widget_data['big_story'])) : ?>
-          <div class="row">
-            <div class="col-md-12">
-          <?php print $widget_data['big_story']; ?>
-            </div>    
-          </div>
-            <?php endif; ?>
         <!--1-- Aajtak row starts here--> 
         <?php if (isset($widget_data['itg-block-1']['widget_name']) || $theme == 'itgadmin') { ?>
         <div class="row">
@@ -79,7 +77,7 @@ if ($theme != 'itgadmin') {
             <div class="aajtak-widget aajtak-slide">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-container <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-                 <div class="data-holder half-grey-bg" widget-style="aajtak-slider" id="itg-block-1" >
+                 <div class="data-holder" widget-style="aajtak-slider" id="itg-block-1" >
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-1']['block_title'])) { ?>
                      <h2 class="widget-title"><?php print $widget_data['itg-block-1']['block_title']; ?></h2>
                   <?php } ?>
@@ -112,7 +110,7 @@ if ($theme != 'itgadmin') {
             <div class="aajtak-widget aajtak-slide">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-container <?php print $widget_data['itg-block-2']['widget_name']; ?>">
-                 <div class="data-holder half-grey-bg" widget-style="aajtak-slider" id="itg-block-2" >
+                 <div class="data-holder" widget-style="aajtak-slider" id="itg-block-2" >
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-2']['block_title'])) { ?>
                      <h2 class="widget-title"><?php print $widget_data['itg-block-2']['block_title']; ?></h2>
                   <?php } ?>
@@ -170,9 +168,9 @@ if ($theme != 'itgadmin') {
             <div class="aajtak-widget aajtak-slide">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-container <?php print $widget_data['itg-block-4']['widget_name']; ?>">
-                 <div class="data-holder half-grey-bg" widget-style="aajtak-slider" id="itg-block-4" >
+                 <div class="data-holder" widget-style="aajtak-slider" id="itg-block-4" >
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-4']['block_title'])) { ?>
-                     <span class="widget-title"><?php print $widget_data['itg-block-4']['block_title']; ?></span>
+                     <h2 class="widget-title"><?php print $widget_data['itg-block-4']['block_title']; ?></h2>
                   <?php } ?>
                      <!-- for admin  -->
                      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
@@ -203,7 +201,7 @@ if ($theme != 'itgadmin') {
             <div class="aajtak-widget aajtak-slide">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-container <?php print $widget_data['itg-block-5']['widget_name']; ?>">
-                 <div class="data-holder half-grey-bg" widget-style="aajtak-slider" id="itg-block-5" >
+                 <div class="data-holder" widget-style="aajtak-slider" id="itg-block-5" >
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
                      <h2 class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></h2>
                   <?php } ?>
@@ -227,7 +225,7 @@ if ($theme != 'itgadmin') {
           <div class="col-md-4">
             <div class="aajtak-widget aajtak-stack">
               <div class="droppable <?php print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name']; ?>">
+               <div class="widget-container <?php print $widget_data['itg-block-6']['widget_name']; ?>">
                  <div class="data-holder grey-bg" widget-style="stack-card-1" id="itg-block-6" >
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-6']['block_title'])) { ?>
                      <h2 class="widget-title"><?php print $widget_data['itg-block-6']['block_title']; ?></h2>

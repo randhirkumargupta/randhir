@@ -15,16 +15,16 @@ $root-font-size: 16px;
 }
 /*clear fix mixins*/
 @mixin clearfix {
-    zoom:1;
-    &:before, &:after {
-        content: "";
-        display: block;       
-        height: 0; 
-        overflow: hidden; 
-    }
-    &:after {
-        clear: both;
-    }
+  zoom:1;
+  &:before, &:after {
+    content: "";
+    display: block;       
+    height: 0; 
+    overflow: hidden; 
+  }
+  &:after {
+    clear: both;
+  }
 }
 /*Box sizeing mixins*/
 @mixin box-sizing($border-box) {
@@ -41,47 +41,47 @@ $root-font-size: 16px;
 /*Float mixins*/
 @mixin float($pos) {  
   @if ($pos == left) {
-   float:left;
+    float:left;
   }
   @else if ($pos == right) {
-   float:right;
+    float:right;
   }
   @else if ($pos == none) {
-   float: none;
+    float: none;
   }
 }
 
 /*Display inline block mixins*/
 @mixin display-inline{
-    display: inline-block;
-    vertical-align: top;
+  display: inline-block;
+  vertical-align: top;
 }
 /*Text align block mixins*/
 @mixin text-align($align) {  
   @if ($align == center) {
-   text-align:center;
+    text-align:center;
   }
   @else if ($align == left) {
-   text-align: left;
+    text-align: left;
   }
   @else if ($align == right) {
-   text-align: right;
+    text-align: right;
   }
 }
 
 /* Positional mixins */
 @mixin pos($pos:static,$top:null,$right:null,$bottom:null,$left:null,$z-index:null) {  
   @if (($pos == relative) or ($pos == re)) {
-   position: relative;
+    position: relative;
   }
   @else if (($pos == absolute) or ($pos == ab)) {
-   position: absolute;
+    position: absolute;
   }
   @else if (($pos == fixed) or ($pos == fi)) {
-   position: fixed;
+    position: fixed;
   }
   @else if ($pos == static) {
-   position:static;
+    position:static;
   }   
   top:$top;
   right:$right;
@@ -91,74 +91,74 @@ $root-font-size: 16px;
 }
 /* Calculate-width function */
 @mixin calculate-width ($col-span) {
-    width: 100% / $col-span;
+  width: 100% / $col-span;
 }
 
 /* Tab Button mixins */
 @mixin tab-buttons {
+  background: $tab-primary-bg;
+  border-radius: 10px 10px 0 0;
+  span{
+    @include itg-font($itg-roboto, $itg-font-medium);
     background: $tab-primary-bg;
+    text-transform: uppercase;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
     border-radius: 10px 10px 0 0;
-     span{
-        @include itg-font($itg-roboto, $itg-font-medium);
-        background: $tab-primary-bg;
-        text-transform: uppercase;
-        height: 36px;
-        line-height: 36px;
-        text-align: center;
-        border-radius: 10px 10px 0 0;
-        border-top: 3px solid transparent;
-        color: $tab-primary-color;
-        @include calculate-width(2);
-        display: block;
-        @include float(left);
-        cursor: pointer;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding: 0 5px;
-        &.active{
-            background: $white-color;
-            color: $red-color;
-            border-left: 1px solid $tab-primary-border-color;
-            border-right: 1px solid $tab-primary-border-color;
-            border-top: 3px solid $red-color;
-        }
+    border-top: 3px solid transparent;
+    color: $tab-primary-color;
+    @include calculate-width(2);
+    display: block;
+    @include float(left);
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 5px;
+    &.active{
+      background: $white-color;
+      color: $red-color;
+      border-left: 1px solid $tab-primary-border-color;
+      border-right: 1px solid $tab-primary-border-color;
+      border-top: 3px solid $red-color;
     }
+  }
 }
 /* Tab Listing mixins */
 @mixin tab-listing {
-    @include pos(relative);
-        a{
-            color: $tab-list-color;
-            padding: 15px 15px 15px 20px;
-            display: block;
-            border-bottom: 1px solid $tab-primary-border-color;
-            line-height: 19px;
-            &:hover{
-                background: $off-white-bg;
-            }
-            &:first-letter{
-                text-transform: capitalize;
-            }
-        }
-        &:last-child a{
-            border-bottom: none;
-        }
-        &:before{
-           @include pos(absolute,22px,null,null,9px);
-           content: '';
-           border-radius: $full-radius;
-           background: $tab-icon-bg;
-           height: 5px;
-           width: 5px;
-        }
+  @include pos(relative);
+  a{
+    color: $tab-list-color;
+    padding: 15px 15px 15px 20px;
+    display: block;
+    border-bottom: 1px solid $tab-primary-border-color;
+    line-height: 19px;
+    &:hover{
+      background: $off-white-bg;
+    }
+    &:first-letter{
+      text-transform: capitalize;
+    }
+  }
+  &:last-child a{
+    border-bottom: none;
+  }
+  &:before{
+    @include pos(absolute,22px,null,null,9px);
+    content: '';
+    border-radius: $full-radius;
+    background: $tab-icon-bg;
+    height: 5px;
+    width: 5px;
+  }
 }
 
 
 
 /* List before icon */
 @mixin before-icon-list($width, $height, $top, $left, $background-color, $border-radius) {
-    @include pos(relative);
+  @include pos(relative);
 
   &:before {
     @include pos(absolute);
@@ -182,35 +182,35 @@ $root-font-size: 16px;
 }
 /*mixin for listing with image*/
 @mixin listing-with-image($perent-class,$img-position,$image-space,$class-image,$class-title){   
-    .#{$perent-class}{ 
-        overflow: hidden;
-        padding: 10px;        
-        .#{$class-image} {
-            @include float($img-position);
-            @if (($img-position == left)) {
-                margin-right:$image-space;
-            }
-            @else{
-                margin-left:$image-space;
-            }
-        }
-        .#{$class-title}{
-            display: block;     
-            overflow: hidden;
-            @include font(14px,19px);
-            color: $black-color;            
-        }    
+  .#{$perent-class}{ 
+    overflow: hidden;
+    padding: 10px;        
+    .#{$class-image} {
+      @include float($img-position);
+      @if (($img-position == left)) {
+        margin-right:$image-space;
+      }
+      @else{
+        margin-left:$image-space;
+      }
     }
+    .#{$class-title}{
+      display: block;     
+      overflow: hidden;
+      @include font(14px,19px);
+      color: $black-color;            
+    }    
+  }
 }
 /*mixin for pager*/
 @mixin pager {
-    ul.pager{
+  ul.pager{
     margin:10px 0;
     list-style-type: none;
     @include text-align(center);
-  li{
-    @include display-inline;
-    &.pager-current{
+    li{
+      @include display-inline;
+      &.pager-current{
         height: 25px;
         width: 25px;
         line-height: 25px;      
@@ -218,269 +218,269 @@ $root-font-size: 16px;
         color: $white-color;
         border-radius: 50%;
         @include itg-font($itg-roboto);
-    }
-    &.pager-item{
-      a{       
-        display: block;
-        height: 25px;
-        width: 25px;
-        @include font(16px,25px);        
-        color: $black-color;
-        @include itg-font($itg-roboto);
-        &:hover{
-          background-color: #337ab7;
-          color: $white-color;
-          border-radius: 50%;
+      }
+      &.pager-item{
+        a{       
+          display: block;
+          height: 25px;
+          width: 25px;
+          @include font(16px,25px);        
+          color: $black-color;
+          @include itg-font($itg-roboto);
+          &:hover{
+            background-color: #337ab7;
+            color: $white-color;
+            border-radius: 50%;
+          }
         }
       }
-    }
-    &.pager-next, &.pager-last, &.pager-first, &.pager-previous{
-      a{
-        color: $black-color;
-        line-height: 25px;
-      }
-      &.pager-first.first, &.pager-last.last{
+      &.pager-next, &.pager-last, &.pager-first, &.pager-previous{
+        a{
+          color: $black-color;
+          line-height: 25px;
+        }
+        &.pager-first.first, &.pager-last.last{
           display: none;
+        }
       }
     }
   }
 }
-}
 @mixin sidebar-heading{
-    h3{
-        text-transform: uppercase;
-        font-weight: 700;
-        color: #bb0a0a;
-        display: none;
-       @include pos(relative);
-        span{
-            background: #fff;
-            z-index: 1;
-            @include pos(relative);
-            /* padding-left: 10px; */
-            padding: 45px 20px 10px 10px;
-            display: inline-block;
-        }
-        &:before{
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 100%;
-            bottom: 20px;
-            height: 5px;
-            margin-top: -2px;
-            background: #ddd;
-        }
-    }    
+  h3{
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #bb0a0a;
+    display: none;
+    @include pos(relative);
+    span{
+      background: #fff;
+      z-index: 1;
+      @include pos(relative);
+      /* padding-left: 10px; */
+      padding: 45px 20px 10px 10px;
+      display: inline-block;
+    }
+    &:before{
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      bottom: 20px;
+      height: 5px;
+      margin-top: -2px;
+      background: #ddd;
+    }
+  }    
 }
 @mixin background-snappost{
-    $class-title:'views-row';
-    $colors: #96704c, #c94d2b, #bf273c, #29337b, #058392;
-    $bg-colors: #e3bc95, #ff7755, #ff5a72, #727ec8, #1fd0e2;
+  $class-title:'views-row';
+  $colors: #96704c, #c94d2b, #bf273c, #29337b, #058392;
+  $bg-colors: #e3bc95, #ff7755, #ff5a72, #727ec8, #1fd0e2;
 
-@for $i from 1 through length($colors) {
+  @for $i from 1 through length($colors) {
     .#{$class-title}:nth-child(#{length($colors)}n+#{$i}) {
-        background: nth($bg-colors, $i);
-        .snap-date{
+      background: nth($bg-colors, $i);
+      .snap-date{
+        color:nth($colors, $i);
+      }
+      .snap-title{
+        h1{
+          color:#000;
+          span a{
             color:nth($colors, $i);
+          }
+        }            
+      }
+      .snap-button i, .snap-social i, .snap-social span{
+        color:nth($colors, $i);
+      }
+      .snap-social{
+        ul{
+          border-color:($colors, $i);
         }
-        .snap-title{
-            h1{
-                color:#000;
-                span a{
-                    color:nth($colors, $i);
-                }
-            }            
-        }
-        .snap-button i, .snap-social i, .snap-social span{
-            color:nth($colors, $i);
-        }
-        .snap-social{
-            ul{
-                border-color:($colors, $i);
-            }
-        }
+      }
     }
-}    
+  }    
 }
 
 @mixin social-share{
-    $break-mobile :768px;
-    ul{
-        list-style-type: none;
-        li{
-            @include display-inline;
-            padding-right: 8px;
-            a{
-                background: #000;
-                width: 20px;
-                height: 20px;                       
-                border-radius: 100%;
-                display: block;
-                color: #fff;
-                text-align: center;
-                line-height: 23px;                
-                @media screen and (min-width: $break-mobile) {
-                    width: 23px;
-                    height: 23px; 
-                    line-height: 25px;
-                }
-                &.share{
-                    color:#d0d0d0;
-                }
-                &.share, &.google{
-                    background: transparent;
-                }
-                &.facebook{
-                    background: #0b4887;
-                }
-                &.twitter{
-                    background: #05a3d2;
-                }
-                &.google{
-                    background: url(../images/google-icon.jpg) no-repeat center center;
-                }
-            }
+  $break-mobile :768px;
+  ul{
+    list-style-type: none;
+    li{
+      @include display-inline;
+      padding-right: 8px;
+      a{
+        background: #000;
+        width: 20px;
+        height: 20px;                       
+        border-radius: 100%;
+        display: block;
+        color: #fff;
+        text-align: center;
+        line-height: 23px;                
+        @media screen and (min-width: $break-mobile) {
+          width: 23px;
+          height: 23px; 
+          line-height: 25px;
         }
+        &.share{
+          color:#d0d0d0;
+        }
+        &.share, &.google{
+          background: transparent;
+        }
+        &.facebook{
+          background: #0b4887;
+        }
+        &.twitter{
+          background: #05a3d2;
+        }
+        &.google{
+          background: url(../images/google-icon.jpg) no-repeat center center;
+        }
+      }
     }
+  }
 }
 @mixin photo-scroll{
-     @media screen and (max-width: 768px) {
-        .photo-list{
-            white-space: nowrap;
-            overflow-x: scroll;
-            li{               
-                @include display-inline;
-                float: none;
-                width: inherit;
-                a{
-                    white-space: initial;
-                }
-            }
+  @media screen and (max-width: 768px) {
+    .photo-list{
+      white-space: nowrap;
+      overflow-x: scroll;
+      li{               
+        @include display-inline;
+        float: none;
+        width: inherit;
+        a{
+          white-space: initial;
         }
-     }
+      }
+    }
+  }
 }
 @mixin slider-icon-width-background{
-    .slick-slider{
-        padding: 10px;
-        background: #000;
+  .slick-slider{
+    padding: 10px;
+    background: #000;
+    border: none;   
+    .slick-prev{
+      font: normal normal normal 14px/1 FontAwesome;
+      cursor: pointer;
+      width: 24px;
+      height: 48px;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 0 90px 90px 0;
+      left: 10px;
+      font-size: 0;
+      position: absolute;
+      top: 50%;
+      z-index: 9;
+      border: none;
+      margin-top:-12px;
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.6);
+      }
+      &:before{
+        content: '\f053';
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 20px;
+        padding-left: 0;
+        left: 0;
+        position: absolute;
+        top: 16px;
+      }
+    }
+    .slick-next{
+      font: normal normal normal 14px/1 FontAwesome;
+      cursor: pointer;
+      width: 24px;
+      height: 48px;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 90px 0px 0px 90px;
+      right: 10px;
+      font-size: 0;
+      position: absolute;
+      top: 50%;
+      z-index: 9;
+      border: none;
+      margin-top:-12px;
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.6);
+      }
+      &:before{            
+        content: '\f054';
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 20px;
+        padding-left: 0;
+        right: 0;
+        position: absolute;
+        top: 16px;
+      }
+    }
+    ul.slick-dots li {
+      @include display-inline;
+      padding: 10px 6px;
+      button{
         border: none;   
-        .slick-prev{
-            font: normal normal normal 14px/1 FontAwesome;
-            cursor: pointer;
-            width: 24px;
-            height: 48px;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 0 90px 90px 0;
-            left: 10px;
-            font-size: 0;
-            position: absolute;
-            top: 50%;
-            z-index: 9;
-            border: none;
-            margin-top:-12px;
-            &:hover{
-                background-color: rgba(255, 255, 255, 0.6);
-            }
-            &:before{
-                content: '\f053';
-                font: normal normal normal 14px/1 FontAwesome;
-                font-size: 20px;
-                padding-left: 0;
-                left: 0;
-                position: absolute;
-                top: 16px;
-            }
-        }
-        .slick-next{
-            font: normal normal normal 14px/1 FontAwesome;
-            cursor: pointer;
-            width: 24px;
-            height: 48px;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 90px 0px 0px 90px;
-            right: 10px;
-            font-size: 0;
-            position: absolute;
-            top: 50%;
-            z-index: 9;
-            border: none;
-            margin-top:-12px;
-            &:hover{
-                background-color: rgba(255, 255, 255, 0.6);
-            }
-            &:before{            
-                content: '\f054';
-                font: normal normal normal 14px/1 FontAwesome;
-                font-size: 20px;
-                padding-left: 0;
-                right: 0;
-                position: absolute;
-                top: 16px;
-            }
-        }
-        ul.slick-dots li {
-            @include display-inline;
-            padding: 10px 6px;
-            button{
-                border: none;   
-                cursor: pointer;
-            }    
-        }
+        cursor: pointer;
+      }    
     }
-    @media screen and (min-width: 769px) {
+  }
+  @media screen and (min-width: 769px) {
     .slick-slider .slick-next, .slick-slider .slick-prev{
-           width: 50px;
-           height: 100px;
-           margin-top: -50px;
-           &:before{
-                top: 38px;
-                font-size: 30px;
-           }
-       } 
-    }
+      width: 50px;
+      height: 100px;
+      margin-top: -50px;
+      &:before{
+        top: 38px;
+        font-size: 30px;
+      }
+    } 
+  }
 }
 @mixin clear-floating-block($float-class){
-    .#{$float-class}{
-        &:nth-child(2n+1){
-            clear: left;
-        }
-    }    
+  .#{$float-class}{
+    &:nth-child(2n+1){
+      clear: left;
+    }
+  }    
 }
 
 @mixin blue-title{
-        display: block;
-        font-weight: 500;
-        background: #5585f6;
-        font-size: 16px;
-        padding: 0 10px;
-        @include calculate-width(1);
+  display: block;
+  font-weight: 500;
+  background: #5585f6;
+  font-size: 16px;
+  padding: 0 10px;
+  @include calculate-width(1);
 }
 @mixin video-left-border-bottom{
-    @include pos(relative);
+  @include pos(relative);
+  &:after{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 1PX;
+    background:  #DDD;
+    left: 0;
+    bottom: 0px;
+    z-index: 1;
+  }
+  &:last-child{
     &:after{
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 1PX;
-        background:  #DDD;
-        left: 0;
-        bottom: 0px;
-        z-index: 1;
+      display: none;
     }
-    &:last-child{
-        &:after{
-            display: none;
-        }
-    }
+  }
 }
 
 
 @mixin story-profile-pic{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid #e4e4e4;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #e4e4e4;
 }
 
 @mixin mobile-hide{
@@ -488,119 +488,119 @@ $root-font-size: 16px;
 }
 
 @mixin half-grey-bg($height){
-    display: inline-block;
-    vertical-align: top;
-    padding: 10px 0;
-    position: relative;
-    max-width: 100%;
-    &:before{
-      content: '';
-      background-color: #eeeded;
-      width: 100%;
-      height: $height;
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: -1;
-    }
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  max-width: 100%;
+  &:before{
+    content: '';
+    background-color: #eeeded;
+    width: 100%;
+    height: $height;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
   }
+}
 
 @mixin aajtak-tile($tile-height: null, $category-name: null, $title: null, $pic: null, $posted-by: null, $posted-date: null, $icon-list: null, $pic-height: null){ 
-    text-align: center;
-    position: relative;
-    height: $tile-height;
-    @if($category-name){
-        .#{$category-name} {
-            background-color: #dc4750;
-            border-radius: 4px 4px 0 0;
-            color: #fff;
-            height: 20px;
-        }
+  text-align: center;
+  position: relative;
+  height: $tile-height;
+
+  @if($category-name != null){
+    .#{$category-name} {
+      background-color: #dc4750;
+      border-radius: 4px 4px 0 0;
+      color: #fff;
+      height: 20px;
     }
-    @if($title !=null){
-        .#{$title} {
-            height: 40px;
-            overflow: hidden;
-            margin: 10px 10px 8px;
-            a{
-                color: #000;
-                display: block;
-                @include font(16px,20px,$itg-font-bold);
-            }
-        }
+  }
+  @if($title !=null){
+    .#{$title} {
+      height: 40px;
+      overflow: hidden;
+      margin: 10px 10px 8px;
+      a{
+        color: #000;
+        display: block;
+        @include font(16px,20px,$itg-font-bold);
+      }
     }
-    @if($pic != null){
-        .#{$pic} {
-            height: $pic-height;
-            overflow: hidden;
-        }
+  }
+  @if($pic != null){
+    .#{$pic} {
+      height: $pic-height;
+      overflow: hidden;
     }
-    @if($posted-by != null){
-        .#{$posted-by} {
-            display: inline-block;
-            vertical-align: top;
-            @include font(12px,16px,$itg-font-regular);
-            color: #9a9a9a;
-            padding: 0 5px;
-            position: relative;
-        }
+  }
+  @if($posted-by != null){
+    .#{$posted-by} {
+      display: inline-block;
+      vertical-align: top;
+      @include font(12px,16px,$itg-font-regular);
+      color: #9a9a9a;
+      padding: 0 5px;
+      position: relative;
     }
-    @if($posted-date != null){
-        .#{$posted-date} {
-            display: inline-block;
-            vertical-align: top;
-            @include font(12px,16px,$itg-font-regular);
-            color: #9a9a9a;
-            padding: 0 5px;
-            position: relative;
-        }
+  }
+  @if($posted-date != null){
+    .#{$posted-date} {
+      display: inline-block;
+      vertical-align: top;
+      @include font(12px,16px,$itg-font-regular);
+      color: #9a9a9a;
+      padding: 0 5px;
+      position: relative;
     }
-    @if($posted-date != null && $posted-by != null){
-        .#{$posted-date}:before{
-            content: '|';
-            position: absolute;
-            font-size: 9px;
-            left: -4px;
-            top: 0;
-        }
+  }
+  @if($posted-date != null && $posted-by != null){
+    .#{$posted-date}:before{
+      content: '|';
+      position: absolute;
+      font-size: 9px;
+      left: -4px;
+      top: 0;
     }
-    @if($icon-list){ 
-        .#{$icon-list}{
-            border: none;
-            border-radius: 50%;
-            bottom: -18px;
-            height: 36px;
-            left: 0;
-            margin: 0 auto;
-            position: absolute;
-            padding: 11px 12px;
-            transition: .25s ease-in-out;
-            transform: rotate(0);
-            right: 0;
-            width: 36px;
-            cursor: pointer;
-            z-index: 9;
-            span {
-                background: #fff;
-                display: block;
-                height: 1px;
-                margin-bottom: 5px;
-                position: relative;
-                width: 15px;
-                opacity: 1;
-                left: 0;
-                transform: rotate(0);
-                transition: .25s ease-in-out;
-                &:before {
-                    content: "";
-                    box-shadow: 2px 1px 0 1px #fff;
-                    display: block;
-                    height: 0;
-                    left: -6px;
-                    position: relative;
-                    width: 0;
-                }
-            }
+  }
+  @if($icon-list){ 
+    .#{$icon-list}{
+      border: none;
+      border-radius: 50%;
+      bottom: -18px;
+      height: 36px;
+      left: 0;
+      margin: 0 auto;
+      position: absolute;
+      padding: 11px 12px;
+      transition: .25s ease-in-out;
+      transform: rotate(0);
+      right: 0;
+      width: 36px;
+      cursor: pointer;
+      z-index: 9;
+      span {
+        background: #fff;
+        display: block;
+        height: 1px;
+        margin-bottom: 5px;
+        position: relative;
+        width: 15px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0);
+        transition: .25s ease-in-out;
+        &:before {
+          content: "";
+          box-shadow: 2px 1px 0 1px #fff;
+          display: block;
+          height: 0;
+          left: -6px;
+          position: relative;
+          width: 0;
         }
+      }
     }
+  }
 }  
