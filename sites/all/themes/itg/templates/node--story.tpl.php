@@ -195,116 +195,117 @@ if (!empty($content)):
                             }
                         }
                         ?>
-                        <div class="description">
-                            <?php
-                            $story_body = $node->body['und'][0]['value'];
+                        
+                       <div class="description">
+                          <?php
+                          $story_body = $node->body['und'][0]['value'];
 
-                            if (strpos($story_body, '[ITG:SURVEY:')) {
-                                if (preg_match('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)) {
-                                    $survey_nid = $matches_survey[1];
-                                }
-                                $story_body = str_replace('[ITG:SURVEY:' . $survey_nid . ']', '', $story_body);
+                          if (strpos($story_body, '[ITG:SURVEY:')) {
+                            if (preg_match('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)) {
+                              $survey_nid = $matches_survey[1];
                             }
+                            $story_body = str_replace('[ITG:SURVEY:' . $survey_nid . ']', '', $story_body);
+                          }
 
-                            if (strpos($story_body, '[ITG:QUIZ:')) {
-                                if (preg_match('/ITG:QUIZ:([0-9]+)/', $story_body, $matches_quiz)) {
-                                    $quiz_nid = $matches_quiz[1];
-                                }
-                                $story_body = str_replace('[ITG:QUIZ:' . $quiz_nid . ']', '', $story_body);
+                          if (strpos($story_body, '[ITG:QUIZ:')) {
+                            if (preg_match('/ITG:QUIZ:([0-9]+)/', $story_body, $matches_quiz)) {
+                              $quiz_nid = $matches_quiz[1];
                             }
-                            if (strpos($story_body, '[ITG:POLL:')) {
-                                if (preg_match('/ITG:POLL:([0-9]+)/', $story_body, $matches_poll)) {
-                                    $poll_nid = $matches_poll[1];
-                                }
-                                $story_body = str_replace('[ITG:POLL:' . $poll_nid . ']', '', $story_body);
+                            $story_body = str_replace('[ITG:QUIZ:' . $quiz_nid . ']', '', $story_body);
+                          }
+                          if (strpos($story_body, '[ITG:POLL:')) {
+                            if (preg_match('/ITG:POLL:([0-9]+)/', $story_body, $matches_poll)) {
+                              $poll_nid = $matches_poll[1];
                             }
-                            if (strpos($story_body, '[ITG:FACTOIDS]')) {
-                                $factoidsBlock = '';
-                                if (isset($node->field_story_template_factoids) && !empty($node->field_story_template_factoids)) {
-                                    $factoidsSocialShare['title'] = $node->field_story_factoids_title[LANGUAGE_NONE][0]['value'];
-                                    $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
-                                    $factoidsSocialShare['icons'] = '<div class="factoids-page">
+                            $story_body = str_replace('[ITG:POLL:' . $poll_nid . ']', '', $story_body);
+                          }
+                          if (strpos($story_body, '[ITG:FACTOIDS]')) {
+                            $factoidsBlock = '';
+                            if (isset($node->field_story_template_factoids) && !empty($node->field_story_template_factoids)) {
+                              $factoidsSocialShare['title'] = $node->field_story_factoids_title[LANGUAGE_NONE][0]['value'];
+                              $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
+                              $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
                                  <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(\'' . $actual_link . ',' . $factoidsSocialShare['title'] . ',' . $factoidsSocialShare['share_desc'] . '\')"><i class="fa fa-facebook"></i></a></li>
                                  <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['title']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
                                  <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(\'' . $actual_link . '\')"></a></li>
                                  </ul></div></div>';
-                                    $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
-                                    foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
-                                        $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
-                                    }
-                                    $factoidsSocialShare['slider'] .= '</ul></div>';
-                                    $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
-                                }
-                                $story_body = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $story_body);
+                              $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
+                              foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
+                                $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
+                              }
+                              $factoidsSocialShare['slider'] .= '</ul></div>';
+                              $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
                             }
-                            if (strpos($story_body, '[ITG:EXPERT-CHUNK]')) {
-                                $expertDetails = '';
-                                if (!empty($node->field_story_expert_name)) {
-                                    $expertDetails .= '<div class="story-expert-opinion"><h4>' . t('Expert Opinion') . '</h4>';
-                                    $expertDetails .= '<div class="expert-detail row"><div class="left-side col-md-8"><p class="name">' . $node->field_story_expert_name['und'][0]['value'] . '</p>';
-                                    if (!empty($node->field_story_expertise)) {
-                                        $expertDetails .= '<p>' . $node->field_story_expertise[LANGUAGE_NONE][0]['value'] . '</p>';
-                                    }
-                                    $expertDetails .= '</div>';
-                                }
-                                if (!empty($node->field_story_expert_image)) {
-                                    $expertDetailsImage = file_create_url($node->field_story_expert_image[LANGUAGE_NONE][0]['uri']);
-                                    $expertDetails .= '<div class="right-side col-md-4"><img src="' . $expertDetailsImage . '"></div></div>';
-                                }
-                                if (!empty($node->field_story_expert_description)) {
-                                    $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2></div>';
-                                }
-
-                                $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
+                            $story_body = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $story_body);
+                          }
+                          if (strpos($story_body, '[ITG:EXPERT-CHUNK]')) {
+                            $expertDetails = '';
+                            if (!empty($node->field_story_expert_name)) {
+                              $expertDetails .= '<div class="story-expert-opinion"><h4>' . t('Expert Opinion') . '</h4>';
+                              $expertDetails .= '<div class="expert-detail row"><div class="left-side col-md-8 col-sm-8 col-xs-8"><p class="name">' . $node->field_story_expert_name['und'][0]['value'] . '</p>';
+                              if (!empty($node->field_story_expertise)) {
+                                $expertDetails .= '<p>' . $node->field_story_expertise[LANGUAGE_NONE][0]['value'] . '</p>';
+                              }
+                              $expertDetails .= '</div>';
+                            }
+                            if (!empty($node->field_story_expert_image)) {
+                              $expertDetailsImage = file_create_url($node->field_story_expert_image[LANGUAGE_NONE][0]['uri']);
+                              $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '"></div></div>';
+                            }
+                            if (!empty($node->field_story_expert_description)) {
+                              $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2></div>';
                             }
 
-                            if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+                            $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
+                          }
 
-                                $wrapper = entity_metadata_wrapper('node', $node);
-                                $num = 1;
-                                foreach ($wrapper->field_story_listicle as $i):
-                                    $listicletype = '';
-                                    print '<div class="listicle-detail">';
-                                    $type = $i->field_story_listicle_type->value();
-                                    $description = $i->field_story_listicle_description->value();
-                                    $color = $i->field_story_listicle_color->value();
-                                    $color = ($color['rgb']) ? $color['rgb'] : '#000000';
-                                    print '<span>' . $num . '</span>';
-                                    if (isset($type)) {
-                                        $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
-                                    }
-                                    print '<div class="listicle-description">' . $listicletype . $description . '</div>';
-                                    print '</div>';
-                                    $num++;
-                                endforeach;
-                            }
-                            else {
-                                // Print story body
-                                print $story_body;
-                            }
+                          if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
 
-                            // If survey is associated with story, render survey form
-                            if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
-                                $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:' . $survey_nid . ']'), $story_body);
-                                print $story_body_survey;
-                            }
+                            $wrapper = entity_metadata_wrapper('node', $node);
+                            $num = 1;
+                            foreach ($wrapper->field_story_listicle as $i):
+                              $listicletype = '';
+                              print '<div class="listicle-detail">';
+                              $type = $i->field_story_listicle_type->value();
+                              $description = $i->field_story_listicle_description->value();
+                              $color = $i->field_story_listicle_color->value();
+                              $color = ($color['rgb']) ? $color['rgb'] : '#000000';
+                              print '<span>' . $num . '</span>';
+                              if (isset($type)) {
+                                $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
+                              }
+                              print '<div class="listicle-description">' . $listicletype . $description . '</div>';
+                              print '</div>';
+                              $num++;
+                            endforeach;
+                          }
+                          else {
+                            // Print story body
+                            print $story_body;
+                          }
 
-                            // If quiz is associated with story, render quiz form
-                            if (strpos($node->body['und'][0]['value'], '[ITG:QUIZ:')) {
-                                $story_body_quiz = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:QUIZ:' . $quiz_nid . ']'), $story_body);
-                                print $story_body_quiz;
-                            }
-                            // If Poll Associated with story node.
-                            if (strpos($node->body['und'][0]['value'], '[ITG:POLL:')) {
-                                $story_body_poll = str_replace($story_body, itg_survey_pqs_associate_poll_with_story($poll_nid), $story_body);
-                                print $story_body_poll;
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
+                          // If survey is associated with story, render survey form
+                          if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
+                            $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:' . $survey_nid . ']'), $story_body);
+                            print $story_body_survey;
+                          }
+
+                          // If quiz is associated with story, render quiz form
+                          if (strpos($node->body['und'][0]['value'], '[ITG:QUIZ:')) {
+                            $story_body_quiz = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:QUIZ:' . $quiz_nid . ']'), $story_body);
+                            print $story_body_quiz;
+                          }
+                          // If Poll Associated with story node.
+                          if (strpos($node->body['und'][0]['value'], '[ITG:POLL:')) {
+                            $story_body_poll = str_replace($story_body, itg_survey_pqs_associate_poll_with_story($poll_nid), $story_body);
+                            print $story_body_poll;
+                          }
+                          ?>
+                      </div>
+                  </div>
+              </div>
 
                 <!-- condition for buzz  -->
 

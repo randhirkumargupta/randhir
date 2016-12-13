@@ -1298,6 +1298,8 @@ footer{
         }
     }
     .big-story-detail{
+        max-height: 160px;
+        overflow: auto;
         li{
             @include before-icon-list(6px, 6px, 5px, 0, #ffffff, 50%);
             padding-left: 15px;
@@ -5695,6 +5697,179 @@ footer{
         }
  
 }
+#content{
+    [id*='event-registration-node-form']{
+        #edit-field-no-of-members{
+            label{
+                margin-right: 20px;
+            }
+            label, .event-no-of-memeber{
+                display: inline-block;
+                vertical-align: middle;
+                span{
+                    background: #e6e6e6;
+                    width: 30px;
+                    height: 33px;
+                    display: inline-block;
+                    vertical-align: top;
+                    border: 1px solid #cdcdcd;
+                    border-right: snow;
+                    line-height: 23px;
+                    text-align: center;
+                    font-size: 45px;
+                    cursor: pointer;
+                    &.event-form-add{
+                        font-size: 28px;
+                        line-height: 29px;
+                        border-left: 0;
+                        border-right: 1px solid #cdcdcd;
+                    }
+                }
+                .event-form-number{
+                    height: 33px;
+                    border: 1px solid #cdcdcd;
+                    border-left: 0;
+                    width: 40px;
+                    font-size: 16px;
+                    font-weight: 700;
+                    border-right: 0;
+                    text-align: center;
+                }
+            }
+        }
+        [id*='field-erf-registration-fee-values']{            
+            max-width: 620px;                        
+            fieldset.collapsible.form-wrapper{
+                border: none;
+                margin-bottom: 20px;
+                legend{
+                    background: #e6e6e6;
+                    width: 100%;
+                    padding: 10px;
+                    font-size: 16px;
+                    border: 1px solid #dadada;
+                    border-bottom: none;
+                    font-weight: 700;
+                    cursor: pointer;
+                    position: relative;
+                    &:before{
+                        position: absolute;
+                        right: 10px;
+                        content: '+';
+                        font-size: 26px;
+                        top: 10px;
+                        color: #000;
+                    }
+                }
+                > .fieldset-wrapper{
+                    background: #f1f1f1;
+                    padding: 10px 30px 50px 15px;
+                    border: 1px solid #dadada;
+                    border-top: none; 
+                }                
+            }
+            div.form-type-radios, div.form-type-select{
+                label{
+                    width: 130px;
+                    font-size: 15px;
+                    color: #000;
+                    + div{
+                         padding-left: 0;
+                      > div{
+                        width: 16.6%;
+                        label{
+                           display: inherit;
+                           vertical-align: middle;   
+                           b{
+                              display: block;
+                           }
+                        }
+                      }
+                      .form-item .form-radio{
+                          float: none;
+                      }
+                    }
+                }
+            }
+            .date-box-wrapper{
+                display: inline-block;
+                width:100%;
+                label{
+                    width: 130px;
+                    padding-right: 10px;
+                    font-size: 15px;
+                    color: #000;
+                    display: block;
+                    float: left;                    
+                }
+                .field-type-datetime{                
+                    width: 75%;
+                    float: left;
+                    .date-no-float{
+                        width: 100%;
+                    }
+                    .form-type-date-select{
+                            width: 100%;
+                        margin: 0;
+                        padding-left: 40px;
+                        .form-type-select{
+                            label{
+                                width: auto;    
+                            }
+                            width: 33.33%;
+                            display: inline-block;
+                            vertical-align: top;    
+                            padding-right: 10px;
+                            &:last-child{
+                                padding-right: 0px;
+                            }
+                        }                    
+                        .date-padding{
+                            padding: 0;
+                            float:none;
+                        }
+                        select{
+                            width:100%;
+                        }
+                    }
+                    fieldset.date-combo.form-wrapper{
+                        border: none;
+                        legend{
+                            display: none;                        
+                        }                    
+                    }
+                }
+            }
+        }
+        fieldset.captcha{
+            max-width: 630px;
+            margin: 0;
+            border: 1px solid #dadada;
+        }
+        .form-text, .form-textarea{
+           width: 75%;
+        }
+        .form-type-textarea > label + div{
+            padding-left: 0 !important;
+        }
+    }    
+}
+#block-itg-event-backend-event-registration{
+    b{
+        font-size: 14px;
+        color: #000;
+        font-weight: 700;
+    }
+    .tc-txt {    
+        padding: 0;
+        background: transparent;
+        border: none;
+        font-family: roboto;
+        font-size: 12px;
+        color: #707070;
+        padding-top: 30px;    
+    }
+}
 /*CSS end for event page index*/
 
 
@@ -8249,7 +8424,14 @@ input[type="radio"]:checked + label:after{
             padding-top: 15px;
             font-size: 16px;
             text-align: center;
-            line-height: 22px;           
+            line-height: 22px;
+            &.success{
+                font-size: 14px;
+                color: green;
+                border-bottom: 1px solid #d2d2d2;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+            }
         }
          ul.connectedSortable{
                 list-style: none;
@@ -8292,6 +8474,12 @@ input[type="radio"]:checked + label:after{
             width: 65px;
             height: 65px;
             padding-right: 0;
+        }
+    }
+    .budget-predictor-social-share{
+        .share-msg{
+            font-weight: 700;
+            margin-bottom: 10px;
         }
     }
     @include social-share;

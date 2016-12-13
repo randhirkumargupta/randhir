@@ -20,7 +20,7 @@ function itg_loyalty_reward_testpoints() {
   drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url),
       ), array('type' => 'setting'));
 
-  $output = '<div>';  
+  $output = '<div>';
   $output .= '<div class="share" style="cursor:pointer">Content Share <span></span></div>';
   $output .= '<div class="like" style="cursor:pointer">Content Like<span></span></div>';
   $output .= '<div class="visit" style="cursor:pointer">Content Visit<span></span></div>';
@@ -29,7 +29,7 @@ function itg_loyalty_reward_testpoints() {
   $output .= '<div class="ugc" style="cursor:pointer">UGC Contribution<span></span></div>';
   $output .= '<div class="ol-register" style="cursor:pointer">Online Registration for Any Events<span></span></div>';
   $output .= '<div class="participate" style="cursor:pointer">Participation in Poll/Campaign/Survey<span></span></div>';
-  $output .= '<div class="raf" style="cursor:pointer">Refer a Friend<span></span></div>';  
+  $output .= '<div class="raf" style="cursor:pointer">Refer a Friend<span></span></div>';
   $output .= '</div>';
 
   return $output;
@@ -43,19 +43,19 @@ function itg_loyalty_reward_testpoints() {
  * @param string $news_letter
  * @return boolean
  */
-function itg_loyalty_reward_newsletter_point($user, $type, $news_letter) {  
+function itg_loyalty_reward_newsletter_point($user, $type, $news_letter) {
   $itg_result = '';
   $dedicated_point = itg_loyalty_reward_dedicated_point($type);
   $itg_query = db_select('itg_lrp_loyalty_points', 'p')
-      ->fields('p', array('newsletter'))      
+      ->fields('p', array('newsletter'))
       ->condition('uid', $user)
       ->condition('loyalty_type', $dedicated_point['label']);
   $itg_result = $itg_query->execute()->fetchAll();
   // If newsletter subscription is first time then earn point else not.
   foreach ($itg_result as $value) {
-    if ($value->newsletter == $news_letter) {     
+    if ($value->newsletter == $news_letter) {
       return TRUE;
-    }    
+    }
   }
 }
 
@@ -81,19 +81,17 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL, $n
           return;
         }
     }
-  }
-  else {
+  } else {
     $user_id = $user->uid;
   }
   // Check user unique expiration key.
   $unique_exp_key = itg_loyalty_reward_unique_expiration($user_id);
   $time_span = variable_get('lrp_loyality_points_expiry');
   if (isset($_POST['type'])) {
-    $inputs = $_POST;    
+    $inputs = $_POST;
+  } else {
+    $inputs['type'] = $type;
   }
-  else {
-    $inputs['type'] = $type;    
-  }  
   $dedicated_point = itg_loyalty_reward_dedicated_point(check_plain($inputs['type']));
   $point_presave = array(
     'uid' => $user_id,
@@ -104,7 +102,7 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL, $n
     'created' => REQUEST_TIME,
   );
   if ($news_l != NULL) {
-    $point_presave['newsletter'] = $news_l;        
+    $point_presave['newsletter'] = $news_l;
   }
   $flag = '';
   // Check if expiry key is availbal and not expired.
@@ -112,8 +110,7 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL, $n
     // Add point into user point table.    
     itg_loyalty_reward_add_point($point_presave, 'update');
     $flag = 'old_key';
-  }
-  else {
+  } else {
     $presave = array(
       'uid' => $user_id,
       'pointer_key' => uniqid('itg'),
@@ -130,13 +127,11 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL, $n
   }
   // Set ajax response code.
   if ($flag == 'new_key') {
-    watchdog('Loyalty Points', drupal_json_encode(array('code' => 1)));    
-  }
-  elseif ($flag == 'old_key') {
-    watchdog('Loyalty Points', drupal_json_encode(array('code' => 2)));    
-  }
-  else {
-    watchdog('Loyalty Points', drupal_json_encode(array('code' => 0)));    
+    watchdog('Loyalty Points', drupal_json_encode(array('code' => 1)));
+  } elseif ($flag == 'old_key') {
+    watchdog('Loyalty Points', drupal_json_encode(array('code' => 2)));
+  } else {
+    watchdog('Loyalty Points', drupal_json_encode(array('code' => 0)));
   }
 }
 
@@ -148,7 +143,7 @@ function itg_loyalty_reward_earnpoint($nid = NULL, $type = NULL, $uid = NULL, $n
  * @param string $op
  *   Type of operation. 'new' and 'update'.
  */
-function itg_loyalty_reward_add_point($presave, $op) {  
+function itg_loyalty_reward_add_point($presave, $op) {
   $itg_query = db_insert('itg_lrp_loyalty_points')
       ->fields($presave)
       ->execute();
@@ -164,8 +159,7 @@ function itg_loyalty_reward_add_point($presave, $op) {
     $itg_query = db_insert('itg_loyalty_reward_point_history')
         ->fields($point_presave)
         ->execute();
-  }
-  elseif ($itg_query >= 1 && $op == 'update') {
+  } elseif ($itg_query >= 1 && $op == 'update') {
     // Update new points on table.
     $itg_query = db_update('itg_loyalty_reward_point_history')
         ->fields(array('total_point' => $presave['loyalty_points']))
@@ -185,7 +179,7 @@ function itg_loyalty_reward_add_point($presave, $op) {
  * @return int
  *   Return points specified for given trigger.
  */
-function itg_loyalty_reward_dedicated_point($type) {  
+function itg_loyalty_reward_dedicated_point($type) {
   $data = array(
     'share' => array(
       'label' => 'Content Share',
@@ -214,7 +208,7 @@ function itg_loyalty_reward_dedicated_point($type) {
     'ol-register' => array(
       'label' => 'Online Registration for Any Events',
       'point' => variable_get('lrp_online_registration_for_any_events'),
-    ),    
+    ),
     'participate' => array(
       'label' => 'Participation in Poll/Campaign/Survey',
       'point' => variable_get('lrp_participation_in_poll_campaign_survey'),
@@ -232,5 +226,25 @@ function itg_loyalty_reward_dedicated_point($type) {
  * Implements callback function for point notification.
  */
 function itg_loyalty_reward_points_expire_notification_callback() {
-  
+  $itg_result = array();
+  try {
+    $itg_query = db_select('itg_lrp_pointer_key', 'pk');
+    $itg_query->join('users', 'u', 'pk.uid=u.uid');    
+    $itg_query->join('itg_loyalty_reward_point_history', 'ph', 'pk.pointer_key=ph.pointer_key');
+    $itg_query->fields('u', array('mail'));
+    $itg_query->fields('ph', array('remaining_point'));
+    $itg_query->addExpression('DATEDIFF(from_unixtime(pk.expiry_date), CURDATE())', 'date_diff_real');
+    $itg_query->havingCondition('date_diff_real', 1);
+    $itg_result = $itg_query->execute()->fetchAll();
+  } catch (Exception $ex) {
+    watchdog('Point Expiry Notification', $ex->getMessage());
+  }
+  // Send mail if got some user on result.  
+  $erros = array_filter($itg_result);
+  if (!empty($itg_result)) {
+    foreach ($itg_result as $value) {
+      $data['remaining_point'] = $value->remaining_point;
+      itg_common_get_mail_content($data, $value->mail, 'lrp_point', 'India Today | Loyalty Points Notification');
+    }
+  }
 }

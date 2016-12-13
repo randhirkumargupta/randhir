@@ -766,7 +766,8 @@ function itg_common_views_pre_render(&$view) {
  * {@inheritdoc}. 
  */
 function itg_common_mail($key, &$message, $params) {  
-  switch ($key) {    
+  switch ($key) {
+    case 'lrp_point':
     case 'refer_a_friend':
       $headers = array(
         'MIME-Version' => '1.0',
@@ -792,6 +793,11 @@ function itg_common_theme() {
   $themes = array(    
     'itg_personalization_refer_friend_mail' => array(
       'template' => 'itg-refer-friend-mail',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_loyalty_point_notification' => array(
+      'template' => 'itg-loyalty-point-notification-mail',
       'path' => drupal_get_path('module', 'itg_common') . '/templates',
       'variables' => array('data' => NULL),
     ),
