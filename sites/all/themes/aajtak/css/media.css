@@ -12,6 +12,7 @@
 /*navigation font in Indiatoday site*/
 /*Full radius in Indiatoday site*/
 /*footer color in Indiatoday site*/
+/*============================= AAJTAK CSS =================================*/
 /* @media variables */
 /*font family an font weight mixins*/
 /*font size an font weight mixins*/
@@ -218,37 +219,54 @@
   /* START OF BIG STORY FORMAT CSS */
   /* line 166, ../sass/media.scss */
   #block-itg-widget-aaj-tak-big-story {
+    border-bottom: 1px solid #ccc;
+    margin: 0 auto 50px;
     max-width: 1360px;
-    position: relative;
-    margin: 0 auto;
+    zoom: 1;
   }
-  /* line 171, ../sass/media.scss */
-  #block-itg-widget-aaj-tak-big-story .extra-large-image img {
+  /* line 19, ../sass/_itg-mixins.scss */
+  #block-itg-widget-aaj-tak-big-story:before, #block-itg-widget-aaj-tak-big-story:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  /* line 25, ../sass/_itg-mixins.scss */
+  #block-itg-widget-aaj-tak-big-story:after {
+    clear: both;
+  }
+
+  /* line 172, ../sass/media.scss */
+  .big-story-wrapper {
+    position: relative;
+  }
+  /* line 175, ../sass/media.scss */
+  .big-story-wrapper .extra-large-image img {
     width: 100%;
     max-height: 430px;
   }
-  /* line 176, ../sass/media.scss */
-  #block-itg-widget-aaj-tak-big-story .big-story-text {
+  /* line 180, ../sass/media.scss */
+  .big-story-wrapper .big-story-text {
     position: absolute;
     left: 0;
     bottom: 30px;
     background-color: rgba(0, 0, 0, 0.8);
     padding: 28px;
   }
-  /* line 183, ../sass/media.scss */
-  #block-itg-widget-aaj-tak-big-story .big-story-text .big-story-title a {
+  /* line 187, ../sass/media.scss */
+  .big-story-wrapper .big-story-text .big-story-title a {
     color: #fff;
     font-size: 28px;
     font-size: 1.75rem;
     font-weight: 700;
     line-height: 30px;
   }
-  /* line 188, ../sass/media.scss */
-  #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by {
+  /* line 192, ../sass/media.scss */
+  .big-story-wrapper .big-story-text .reported-by {
     padding-top: 13px;
   }
-  /* line 190, ../sass/media.scss */
-  #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by .name, #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by .date {
+  /* line 194, ../sass/media.scss */
+  .big-story-wrapper .big-story-text .reported-by .name, .big-story-wrapper .big-story-text .reported-by .date {
     display: inline-block;
     vertical-align: top;
     font-size: 18px;
@@ -259,12 +277,188 @@
     padding: 0 5px;
     position: relative;
   }
-  /* line 198, ../sass/media.scss */
-  #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by .name a {
+  /* line 202, ../sass/media.scss */
+  .big-story-wrapper .big-story-text .reported-by .name a {
     color: #9a9a9a;
   }
-  /* line 201, ../sass/media.scss */
-  #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by .date:before {
+  /* line 205, ../sass/media.scss */
+  .big-story-wrapper .big-story-text .reported-by .date:before {
+    content: '|';
+    position: absolute;
+    font-size: 12px;
+    left: -4px;
+    top: 0;
+  }
+
+  /* line 215, ../sass/media.scss */
+  .big-story-related-content {
+    position: relative;
+    padding: 0 24px;
+  }
+  /* line 218, ../sass/media.scss */
+  .big-story-related-content:after {
+    background-color: #ccc;
+    content: "";
+    height: 100%;
+    left: 24px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+  /* line 227, ../sass/media.scss */
+  .big-story-related-content .slick-arrow {
+    background-color: #000;
+    border: 1px solid #000;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 15px;
+    text-indent: -9999px;
+    z-index: 99;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  /* line 239, ../sass/media.scss */
+  .big-story-related-content .slick-prev {
+    top: 40px;
+  }
+  /* line 241, ../sass/media.scss */
+  .big-story-related-content .slick-prev:before {
+    border-color: transparent #000 transparent transparent;
+    border-image: none;
+    border-style: solid;
+    border-width: 6px;
+    content: "";
+    height: 0;
+    left: 1px;
+    position: absolute;
+    top: 3px;
+    width: 0;
+    z-index: 9;
+  }
+  /* line 254, ../sass/media.scss */
+  .big-story-related-content .slick-prev:after {
+    border-color: transparent #fff transparent transparent;
+    border-image: none;
+    border-style: solid;
+    border-width: 6px;
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 3px;
+    width: 0;
+  }
+  /* line 268, ../sass/media.scss */
+  .big-story-related-content .slick-next {
+    bottom: 40px;
+  }
+  /* line 270, ../sass/media.scss */
+  .big-story-related-content .slick-next:before {
+    border-color: transparent transparent transparent #000;
+    border-image: none;
+    border-style: solid;
+    border-width: 6px;
+    content: "";
+    height: 0;
+    left: 6px;
+    position: absolute;
+    top: 3px;
+    width: 0;
+    z-index: 9;
+  }
+  /* line 283, ../sass/media.scss */
+  .big-story-related-content .slick-next:after {
+    border-color: transparent transparent transparent #fff;
+    border-image: none;
+    border-style: solid;
+    border-width: 6px;
+    content: "";
+    height: 0;
+    left: 7px;
+    position: absolute;
+    right: 0;
+    top: 3px;
+    width: 0;
+  }
+
+  /* line 298, ../sass/media.scss */
+  .big-story-related-content-list {
+    border-left: 1px solid #ccc;
+    float: left;
+    padding: 26px;
+    width: 327px;
+  }
+  /* line 306, ../sass/media.scss */
+  .big-story-related-content-list:nth-child(6n+1) .tile .category-name {
+    color: #542399;
+  }
+  /* line 306, ../sass/media.scss */
+  .big-story-related-content-list:nth-child(6n+2) .tile .category-name {
+    color: #b81b24;
+  }
+  /* line 306, ../sass/media.scss */
+  .big-story-related-content-list:nth-child(6n+3) .tile .category-name {
+    color: #3b5a86;
+  }
+  /* line 306, ../sass/media.scss */
+  .big-story-related-content-list:nth-child(6n+4) .tile .category-name {
+    color: #d5713f;
+  }
+  /* line 306, ../sass/media.scss */
+  .big-story-related-content-list:nth-child(6n+5) .tile .category-name {
+    color: #d85452;
+  }
+  /* line 306, ../sass/media.scss */
+  .big-story-related-content-list:nth-child(6n+6) .tile .category-name {
+    color: #e0439c;
+  }
+  /* line 313, ../sass/media.scss */
+  .big-story-related-content-list .tile .pic {
+    float: left;
+    max-height: 67px;
+    max-width: 118px;
+    margin-right: 10px;
+    overflow: hidden;
+  }
+  /* line 320, ../sass/media.scss */
+  .big-story-related-content-list .tile .details {
+    overflow: hidden;
+  }
+  /* line 323, ../sass/media.scss */
+  .big-story-related-content-list .tile .category-name {
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 14px;
+  }
+  /* line 326, ../sass/media.scss */
+  .big-story-related-content-list .tile .title {
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 14px;
+    padding: 5px 0;
+  }
+  /* line 331, ../sass/media.scss */
+  .big-story-related-content-list .tile .reported-by .name, .big-story-related-content-list .tile .reported-by .date {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 14px;
+    color: #9a9a9a;
+    padding: 0 5px;
+    position: relative;
+  }
+  /* line 339, ../sass/media.scss */
+  .big-story-related-content-list .tile .reported-by .name a {
+    color: #9a9a9a;
+  }
+  /* line 342, ../sass/media.scss */
+  .big-story-related-content-list .tile .reported-by .date:before {
     content: '|';
     position: absolute;
     font-size: 12px;

@@ -9,38 +9,57 @@
 .aajtak-layout-container{
   margin: 0 auto;
   max-width: 1170px;
+  &.itg-front{
+    padding: 0 15px;
+  }
   .row{
     margin-top: 38px;
     margin-bottom: 38px;
     @include clearfix;
-    &:nth-child(1){
-      .data-holder[widget-style="aajtak-slider"]:before{
-        background-color: #542399;
-      }
-    }
-    &:nth-child(2){
-      .data-holder[widget-style="aajtak-slider"]:before{
-        background-color: #b81b24;
-      }
-    }
-    &:nth-child(3){
-      .data-holder[widget-style="aajtak-slider"]:before{
-        background-color: #3b5a86;
-      }
-    }
-    &:nth-child(4){
-      .data-holder[widget-style="aajtak-slider"]:before{
-        background-color: #d5713f;
-      }
-    }
-    &:nth-child(5){
-      .data-holder[widget-style="aajtak-slider"]:before{
-        background-color: #d85452;
-      }
-    }
-    &:nth-child(6){
-      .data-holder[widget-style="aajtak-slider"]:before{
-        background-color: #e0439c;
+    @for $i from 1 through length($colors) {
+      &:nth-child(#{length($colors)}n+#{$i}) {
+        .data-holder[widget-style="aajtak-slider"]{
+          > .widget-title{
+            a{
+              color: #fff;
+            }
+          }
+          &:before{
+            background-color: nth($colors, $i);
+          }
+          .slider-container{
+            .slick-prev::before{
+              border-color: transparent nth($colors, $i) transparent transparent;
+            }
+            .slick-prev::after {
+              border-color: transparent #fff transparent transparent;
+            }
+            .slick-next::before{
+              border-color: transparent transparent transparent nth($colors, $i);
+            }
+            .slick-next::after {
+              border-color: transparent transparent transparent #fff;
+            }
+            .slick-arrow{
+              border-color: #fff;
+              &:hover{
+                background-color: #fff;
+                &.slick-prev::before{
+                  border-color: transparent #fff transparent transparent;
+                }
+                &.slick-prev::after {
+                  border-color: transparent nth($colors, $i) transparent transparent;
+                }
+                &.slick-next::before{
+                  border-color: transparent transparent transparent #fff;
+                }
+                &.slick-next::after {
+                  border-color: transparent transparent transparent nth($colors, $i);
+                }
+              }
+            }
+          }
+        }
       }
     }
     &:nth-child(7){
@@ -60,13 +79,15 @@
     padding: 20px 0 30px 15px;
   }
   .slick-arrow{
+    background-color: transparent;
+    border: 1px solid #000;
+    border-radius: 50%;
     position: absolute;
     top: -35px;
     width: 30px;
     height: 30px;
-    border: 1px solid #000;
-    border-radius: 50%;
     text-indent: -9999px;
+    cursor: pointer;
   }
   .slick-next{right: 10px;}
   .slick-prev{right: 56px;}
