@@ -44,7 +44,7 @@ $resultdata = array_unique($consti);
                 <li><?php print $row['field_story_extra_large_image']; ?></li>
                 <li>
                     <p class="candidate-name"><?php print ucfirst($row['title']); ?></p>
-                    <p class="constituancy"><?php print ucfirst($row['field_constituancy']); ?></p>
+                    <p class="constituancy"><?php print ucfirst($row['constituency']); ?></p>
                     <p class="party"><?php print ucfirst($row['field_party_name']); ?></p>
                 </li>
                 <li>

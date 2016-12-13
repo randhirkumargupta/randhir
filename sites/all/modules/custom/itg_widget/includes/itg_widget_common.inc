@@ -2620,8 +2620,8 @@ function get_rhs_block_display_condtion($delta = '') {
 function insert_all_node_in_widegt_table() {
 
   try {
-    db_query('alter table itg_widget_order add column state INT NULL after extra')->execute();
-    db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
+    db_query('alter table itg_widget_order add column constituency varchar(200) NULL after extra')->execute();
+   // db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
   } catch (Exception $ex) {
     drupal_set_message($ex->getMessage());
   }

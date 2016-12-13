@@ -226,6 +226,12 @@ function feature_for_most_election_popular_views_default_views() {
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['label'] = '';
   $handler->display->display_options['fields']['state']['element_label_colon'] = FALSE;
+  /* Field: Section wise ordering content: constituency */
+  $handler->display->display_options['fields']['constituency']['id'] = 'constituency';
+  $handler->display->display_options['fields']['constituency']['table'] = 'itg_widget_order';
+  $handler->display->display_options['fields']['constituency']['field'] = 'constituency';
+  $handler->display->display_options['fields']['constituency']['label'] = '';
+  $handler->display->display_options['fields']['constituency']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
