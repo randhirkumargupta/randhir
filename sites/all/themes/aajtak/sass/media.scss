@@ -10,19 +10,17 @@
   }
   /* HEADER CSS */
   header{
-    margin-bottom: 30px;
     position: relative;
-    min-height: 92px;
+    .header-bar {
+      margin: 0 auto;
+      max-width: 1360px;
+      position: relative;
+    }
     .logo-n-three-bar{
-      left: 0;
-      padding-left: 72px;
-      position: absolute;
-      z-index: 99999;
-      bottom: -19px;
+      bottom: -20px;
       .three-bar{
-        position: absolute;
-        left: 30px;
-        top: 44px;
+        margin: 44px 18px 0 28px;
+        padding: 0;
         height: 15px;
         width: 21px;
         cursor: pointer;
@@ -57,12 +55,12 @@
       }
     }
     .region-header{
-      background-color: #f6f6f6;
-      height: 60px;
-      position: absolute;
+      margin-top: 30px;
+      display: inline-block;
+      position: relative;
+      vertical-align: top;
       width: 100%;
-      bottom: 0;
-      z-index: 9999;
+      z-index: 9998;
       .main-menu {
         float: left;
         margin-top:10px;
@@ -148,5 +146,68 @@
       }
     }
   }
+  .front{
+    header{
+      &::after {
+        background-color: #f6f6f6;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 60px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+      }
+    }
+  }
   /* END OF HEADER CSS */
+  
+  /* START OF BIG STORY FORMAT CSS */
+  #block-itg-widget-aaj-tak-big-story{
+    max-width: 1360px;
+    position: relative;
+    margin: 0 auto;
+    .extra-large-image{
+      img{
+        width: 100%;
+        max-height: 430px;
+      }
+    }
+    .big-story-text{
+      position: absolute;
+      left: 0;
+      bottom: 30px;
+      background-color: rgba(0,0,0,.8);
+      padding: 28px;
+      .big-story-title{
+        a{
+          color: #fff;
+          @include font(28px, 30px, $itg-font-bold);
+        }
+      }
+      .reported-by{
+        padding-top: 13px;
+        .name, .date{
+          display: inline-block;
+          vertical-align: top;
+          @include font(18px,20px,$itg-font-regular);
+          color: #9a9a9a;
+          padding: 0 5px;
+          position: relative;
+        }
+        .name a{
+          color: #9a9a9a;
+        }
+        .date:before{
+          content: '|';
+          position: absolute;
+          font-size: 12px;
+          left: -4px;
+          top: 0;
+        }
+      }
+    }
+  }
+  /* END OF BIG STORY FORMAT CSS */
 }
+

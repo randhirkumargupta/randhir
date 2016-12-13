@@ -41,28 +41,27 @@
   /* HEADER CSS */
   /* line 12, ../sass/media.scss */
   header {
-    margin-bottom: 30px;
     position: relative;
-    min-height: 92px;
   }
-  /* line 16, ../sass/media.scss */
+  /* line 14, ../sass/media.scss */
+  header .header-bar {
+    margin: 0 auto;
+    max-width: 1360px;
+    position: relative;
+  }
+  /* line 19, ../sass/media.scss */
   header .logo-n-three-bar {
-    left: 0;
-    padding-left: 72px;
-    position: absolute;
-    z-index: 99999;
-    bottom: -19px;
+    bottom: -20px;
   }
-  /* line 22, ../sass/media.scss */
+  /* line 21, ../sass/media.scss */
   header .logo-n-three-bar .three-bar {
-    position: absolute;
-    left: 30px;
-    top: 44px;
+    margin: 44px 18px 0 28px;
+    padding: 0;
     height: 15px;
     width: 21px;
     cursor: pointer;
   }
-  /* line 29, ../sass/media.scss */
+  /* line 27, ../sass/media.scss */
   header .logo-n-three-bar .three-bar span {
     background-color: #000;
     display: inline-block;
@@ -72,50 +71,50 @@
     margin-top: 6px;
     position: relative;
   }
-  /* line 37, ../sass/media.scss */
+  /* line 35, ../sass/media.scss */
   header .logo-n-three-bar .three-bar span:before, header .logo-n-three-bar .three-bar span:after {
     content: '';
     position: absolute;
     height: 3px;
     background-color: #000;
   }
-  /* line 43, ../sass/media.scss */
+  /* line 41, ../sass/media.scss */
   header .logo-n-three-bar .three-bar span:before {
     width: 50%;
     bottom: 6px;
   }
-  /* line 47, ../sass/media.scss */
+  /* line 45, ../sass/media.scss */
   header .logo-n-three-bar .three-bar span:after {
     width: 100%;
     top: 6px;
   }
-  /* line 54, ../sass/media.scss */
+  /* line 52, ../sass/media.scss */
   header .logo-n-three-bar .header__logo img {
     max-width: 100%;
   }
-  /* line 59, ../sass/media.scss */
+  /* line 57, ../sass/media.scss */
   header .region-header {
-    background-color: #f6f6f6;
-    height: 60px;
-    position: absolute;
+    margin-top: 30px;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
     width: 100%;
-    bottom: 0;
-    z-index: 9999;
+    z-index: 9998;
   }
-  /* line 66, ../sass/media.scss */
+  /* line 64, ../sass/media.scss */
   header .region-header .main-menu {
     float: left;
     margin-top: 10px;
   }
-  /* line 69, ../sass/media.scss */
+  /* line 67, ../sass/media.scss */
   header .region-header .main-menu ul {
     list-style: none;
   }
-  /* line 71, ../sass/media.scss */
+  /* line 69, ../sass/media.scss */
   header .region-header .main-menu ul li {
     float: left;
   }
-  /* line 73, ../sass/media.scss */
+  /* line 71, ../sass/media.scss */
   header .region-header .main-menu ul li a {
     color: #c0c0c0;
     outline: none;
@@ -124,77 +123,77 @@
     font-family: 'Noto Sans';
     font-weight: 700;
   }
-  /* line 81, ../sass/media.scss */
+  /* line 79, ../sass/media.scss */
   header .region-header .main-menu ul li a.active, header .region-header .main-menu ul li a:hover {
     color: #000;
   }
-  /* line 90, ../sass/media.scss */
+  /* line 88, ../sass/media.scss */
   header .header-right-menu {
     float: right;
   }
-  /* line 92, ../sass/media.scss */
+  /* line 90, ../sass/media.scss */
   header .header-right-menu ul {
     list-style: none;
   }
-  /* line 94, ../sass/media.scss */
+  /* line 92, ../sass/media.scss */
   header .header-right-menu ul li {
     float: left;
     width: 60px;
     height: 60px;
   }
-  /* line 98, ../sass/media.scss */
+  /* line 96, ../sass/media.scss */
   header .header-right-menu ul li a {
     background-position: center center;
     background-repeat: no-repeat;
     display: block;
     height: 60px;
   }
-  /* line 104, ../sass/media.scss */
+  /* line 102, ../sass/media.scss */
   header .header-right-menu ul li.icon-search a {
     background-color: #ddd;
     background-image: url(../images/icon_search.png);
   }
-  /* line 108, ../sass/media.scss */
+  /* line 106, ../sass/media.scss */
   header .header-right-menu ul li.icon-notification a {
     background-color: #e6e6e6;
     background-image: url(../images/icon_notification.png);
   }
-  /* line 112, ../sass/media.scss */
+  /* line 110, ../sass/media.scss */
   header .header-right-menu ul li.icon-user a {
     background-color: #f6f6f6;
     background-image: url(../images/icon_user.png);
   }
-  /* line 116, ../sass/media.scss */
+  /* line 114, ../sass/media.scss */
   header .header-right-menu ul li.city-temp {
     min-width: 133px;
     display: block;
   }
-  /* line 119, ../sass/media.scss */
+  /* line 117, ../sass/media.scss */
   header .header-right-menu ul li.city-temp a {
     padding: 8px 20px;
     background-color: #0c1559;
     color: #fff;
   }
-  /* line 123, ../sass/media.scss */
+  /* line 121, ../sass/media.scss */
   header .header-right-menu ul li.city-temp a .city-name {
     font-size: 12px;
     display: block;
   }
-  /* line 126, ../sass/media.scss */
+  /* line 124, ../sass/media.scss */
   header .header-right-menu ul li.city-temp a .city-name .fa {
     font-size: 26px;
     margin-right: 10px;
   }
-  /* line 131, ../sass/media.scss */
+  /* line 129, ../sass/media.scss */
   header .header-right-menu ul li.city-temp a .temp {
     font-size: 24px;
     font-family: 'Noto Serif';
   }
-  /* line 137, ../sass/media.scss */
+  /* line 135, ../sass/media.scss */
   header .header-right-menu ul li.live-tv {
     width: 156px;
   }
-  /* line 139, ../sass/media.scss */
+  /* line 137, ../sass/media.scss */
   header .header-right-menu ul li.live-tv a {
     background: url(../images/icon_live_tv.png) 25px 12px no-repeat #d9000c;
     color: #fff;
@@ -203,5 +202,75 @@
     height: 60px;
   }
 
+  /* line 151, ../sass/media.scss */
+  .front header::after {
+    background-color: #f6f6f6;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 60px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+
   /* END OF HEADER CSS */
+  /* START OF BIG STORY FORMAT CSS */
+  /* line 166, ../sass/media.scss */
+  #block-itg-widget-aaj-tak-big-story {
+    max-width: 1360px;
+    position: relative;
+    margin: 0 auto;
+  }
+  /* line 171, ../sass/media.scss */
+  #block-itg-widget-aaj-tak-big-story .extra-large-image img {
+    width: 100%;
+    max-height: 430px;
+  }
+  /* line 176, ../sass/media.scss */
+  #block-itg-widget-aaj-tak-big-story .big-story-text {
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 28px;
+  }
+  /* line 183, ../sass/media.scss */
+  #block-itg-widget-aaj-tak-big-story .big-story-text .big-story-title a {
+    color: #fff;
+    font-size: 28px;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 30px;
+  }
+  /* line 188, ../sass/media.scss */
+  #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by {
+    padding-top: 13px;
+  }
+  /* line 190, ../sass/media.scss */
+  #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by .name, #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by .date {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 18px;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 20px;
+    color: #9a9a9a;
+    padding: 0 5px;
+    position: relative;
+  }
+  /* line 198, ../sass/media.scss */
+  #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by .name a {
+    color: #9a9a9a;
+  }
+  /* line 201, ../sass/media.scss */
+  #block-itg-widget-aaj-tak-big-story .big-story-text .reported-by .date:before {
+    content: '|';
+    position: absolute;
+    font-size: 12px;
+    left: -4px;
+    top: 0;
+  }
+
+  /* END OF BIG STORY FORMAT CSS */
 }
