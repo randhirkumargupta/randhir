@@ -263,6 +263,16 @@ function itg_image_croping_get_image_tags() {
 }
 
 /**
+ * This function use for add http in url
+ */
+
+function addhttp($url) {
+    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+        $url = "http://" . $url;
+    }
+    return $url;
+}
+/**
  * This function use for get image tag by fid
  * $resuly array
  */
