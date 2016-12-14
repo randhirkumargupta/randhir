@@ -43,8 +43,6 @@ else if ($widget_style == 'auto-tips-and-tricks' || $widget_style == 'edu-tips-a
                 if (strtolower($entity->type) == 'videogallery') {
                     $video_class = 'video-icon';
                 }
-
-
                 if (!empty($entity->field_story_kicker_text)) {
                     $desc = $entity->field_story_kicker_text['und'][0]['value'];
                 }
@@ -316,8 +314,6 @@ else if ($widget_style == 'movies-celebrities') {
         }
         else if ($count == 1 || $count == 2) {
             ?>
-
-
 
                     <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?></p>
 

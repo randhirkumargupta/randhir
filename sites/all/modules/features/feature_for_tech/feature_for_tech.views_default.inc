@@ -143,7 +143,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['field'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['label'] = '';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image_1']['empty'] = '<img src="http://qa.indiatodayonline.in/sites/all/themes/itg/images/default_for_all.png" class=\'no-result-image\'>';
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['empty'] = '<img src="../sites/all/themes/itg/images/default_for_all_top.png" width="237" height="133" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['settings'] = array(
     'image_style' => 'magazine_top_three_story_237x133',
