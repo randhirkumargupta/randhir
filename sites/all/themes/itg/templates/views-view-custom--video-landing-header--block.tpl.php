@@ -39,6 +39,17 @@
         </div>
         <div class="col-md-4 video-header-right"><p><?php print $row['field_story_expert_description']; ?></p>
           <p class="upload-date"><?php print $row['timestamp']; ?></p>
+           <div class="section-like-dislike">
+                                  <div id="btn-div">
+                                      <?php
+                                      if (function_exists(itg_event_backend_highlights_like_dislike)) {
+                                         $val = arg(1);
+                                        print itg_event_backend_highlights_like_dislike($val);
+                                      }
+                                      ?>
+                                  </div>
+                        
+                        </div>
           <div class="ads mhide"></div>
         </div>
       </div>

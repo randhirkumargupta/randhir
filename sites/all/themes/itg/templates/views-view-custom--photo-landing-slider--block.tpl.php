@@ -72,7 +72,19 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                             <i class="fa fa-camera" aria-hidden="true"></i>
                             <?php print $row['counter']; ?>
                         </div>
-                        <div class="caption"><?php print $row['field_image_caption']; ?></div>
+                        <div class="caption"><?php print $row['field_image_caption']; ?>
+                        
+                            <div class="section-like-dislike">
+                                  <div id="btn-div">
+                                      <?php
+                                      if (function_exists(itg_event_backend_highlights_like_dislike)) {
+                                        $val = $row['item_id'];
+                                        print itg_event_backend_highlights_like_dislike($val);
+                                      }
+                                      ?>
+                                  </div>
+                        
+                        </div>
                     </div>
                 </li>
             <?php endforeach; ?>
