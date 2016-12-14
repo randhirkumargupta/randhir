@@ -233,7 +233,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-21']['widget_name']; ?>">
-                     <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-21']['block_title'])) { ?>
+                     <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-21']['block_title'])) { ?>
                         <span class="widget-title"><?php print $widget_data['itg-block-21']['block_title']; ?></span>
                       <?php } ?>
                       <!-- for admin  -->
@@ -254,7 +254,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-22']['widget_name']; ?>">
-                      <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-22']['block_title'])) { ?>
+                      <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-22']['block_title'])) { ?>
                         <span class="widget-title"><?php print $widget_data['itg-block-22']['block_title']; ?></span>
                       <?php } ?>
                       <!-- for admin  -->
@@ -315,15 +315,15 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
                   </div>               
                 </div>-->
                 <?php if ($theme == 'itg') { ?>
-                  <div class="">
+<!--                  <div class="">
                     <div class="ask-question-sidebar ask-question">
                       <span class="widget-title">Ask a Question</span>
                       <div class="data-holder ask-question" id="itg-block-19">
                         <?php $block = module_invoke('itg_ask_expert', 'block_view', 'custom_ask_expert_form_block');
-                              print render($block['content']); ?>
+                             // print render($block['content']); ?>
                       </div>
                     </div>              
-                  </div>
+                  </div>-->
                 <?php } ?>
                 <div class="itg-widget">
                     <div class="ad-widget">

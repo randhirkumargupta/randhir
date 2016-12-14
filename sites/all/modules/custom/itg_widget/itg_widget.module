@@ -56,6 +56,11 @@ function itg_widget_menu() {
     'page arguments' => array(1),
     'access arguments' => array('administer nodequeue'),
   );
+  $items['update-keycandidate-status'] = array(
+        'page callback' => 'update_keycandidate_status', // load the croper according to size!.
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
   $items['add-so-sorry-extra-data/%/%'] = array(
     'page callback' => 'add_extra_field_value_for_so_sorry',

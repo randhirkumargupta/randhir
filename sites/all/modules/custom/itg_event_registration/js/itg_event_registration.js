@@ -38,13 +38,34 @@
       
       $('#edit-field-erf-mobile-und-0-value, #edit-field-erf-postal-code-und-0-value').keyup(function() {
         this.value = this.value.replace(/[^0-9]/g, '');
+      }); 
+      
+      $('.form-field-name-field-erf-registration-fee').on('click', 'legend', function(){            
+        $(this).next('.fieldset-wrapper').stop().slideToggle();            
       });
+      
     }
   };
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function(){
-    jQuery("span.event-form-add").click(function() {        
-        jQuery("#edit-field-erf-registration-fee-und-add-more").trigger("click");
-    });    
+    
+          //event regestration
+        jQuery('.event-form-add').click(function() {
+            var $eventNum = jQuery(".event-form-number");
+            var a = $eventNum.val();
+            a++;        
+            $eventNum.val(a);
+            jQuery(".field-add-more-submit").trigger("mousedown");
+        });        
+
+        jQuery('.event-form-remove').click(function() {
+            var $eventNum = jQuery(".event-form-number");
+            var b = $eventNum.val();
+            if (b >= 1) {
+              b--;
+              $eventNum.val(b);
+            }
+            jQuery("table.field-multiple-table tr td:last").prev().find(".cancel.form-submit").trigger("mousedown");
+        });                              
 });

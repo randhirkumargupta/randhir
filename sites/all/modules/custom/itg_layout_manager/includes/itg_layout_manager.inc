@@ -180,7 +180,8 @@ function itg_layout_gethomecarddata() {
 
       print '<div class="data-holder" id="' . $widget_name3 . '">' . $widget_data[$widget_name3]['widget'] . '</div></div></div></div></div>';
       
-      if ($nextdata != 0) {
+       if ($nextdata != 0 && $sectinno+3 < 40) {
+          
          print '<div class="load-more-wrapper-front">
         <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
         </div>';
@@ -218,7 +219,7 @@ function itg_layout_gethomecarddata_new($sectinno) {
      itg_layout_gethomecarddata_new($sectinno + 3); 
   }
   
-  $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 3);
+   $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 3);
   $widget_data = $data;
 
   if (!empty($widget_data[$widget_name1]['widget_name']) 
@@ -257,7 +258,8 @@ function itg_layout_gethomecarddata_new($sectinno) {
     }
 
     print '<div class="data-holder" id="' . $widget_name3 . '">' . $widget_data[$widget_name3]['widget'] . '</div></div></div></div></div>';
-    if ($nextdata != 0) {
+     if ($nextdata != 0 && $sectinno+3 < 40) {
+         
        print '<div class="load-more-wrapper-front">
               <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
               </div>';       
