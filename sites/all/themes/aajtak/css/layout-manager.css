@@ -11,6 +11,7 @@
 /*navigation font in Indiatoday site*/
 /*Full radius in Indiatoday site*/
 /*footer color in Indiatoday site*/
+/*============================= AAJTAK CSS =================================*/
 /* @media variables */
 /*font family an font weight mixins*/
 /*font size an font weight mixins*/
@@ -39,6 +40,10 @@
   max-width: 1170px;
 }
 /* line 12, ../sass/layout-manager.scss */
+.aajtak-layout-container.itg-front {
+  padding: 0 15px;
+}
+/* line 15, ../sass/layout-manager.scss */
 .aajtak-layout-container .row {
   margin-top: 38px;
   margin-bottom: 38px;
@@ -55,62 +60,328 @@
 .aajtak-layout-container .row:after {
   clear: both;
 }
-/* line 17, ../sass/layout-manager.scss */
-.aajtak-layout-container .row:nth-child(1) .data-holder[widget-style="aajtak-slider"]:before {
-  background-color: #542399;
-}
-/* line 22, ../sass/layout-manager.scss */
-.aajtak-layout-container .row:nth-child(2) .data-holder[widget-style="aajtak-slider"]:before {
-  background-color: #b81b24;
+/* line 23, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] > .widget-title a {
+  color: #fff;
 }
 /* line 27, ../sass/layout-manager.scss */
-.aajtak-layout-container .row:nth-child(3) .data-holder[widget-style="aajtak-slider"]:before {
-  background-color: #3b5a86;
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"]:before {
+  background-color: #542399;
 }
-/* line 32, ../sass/layout-manager.scss */
-.aajtak-layout-container .row:nth-child(4) .data-holder[widget-style="aajtak-slider"]:before {
-  background-color: #d5713f;
+/* line 31, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::before {
+  border-color: transparent #542399 transparent transparent;
+}
+/* line 34, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::after {
+  border-color: transparent #fff transparent transparent;
 }
 /* line 37, ../sass/layout-manager.scss */
-.aajtak-layout-container .row:nth-child(5) .data-holder[widget-style="aajtak-slider"]:before {
-  background-color: #d85452;
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::before {
+  border-color: transparent transparent transparent #542399;
 }
-/* line 42, ../sass/layout-manager.scss */
-.aajtak-layout-container .row:nth-child(6) .data-holder[widget-style="aajtak-slider"]:before {
-  background-color: #e0439c;
+/* line 40, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::after {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 43, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow {
+  border-color: #fff;
+}
+/* line 45, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover {
+  background-color: #fff;
 }
 /* line 47, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::before {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 50, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::after {
+  border-color: transparent #542399 transparent transparent;
+}
+/* line 53, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::before {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 56, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+1) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::after {
+  border-color: transparent transparent transparent #542399;
+}
+/* line 23, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] > .widget-title a {
+  color: #fff;
+}
+/* line 27, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"]:before {
+  background-color: #b81b24;
+}
+/* line 31, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::before {
+  border-color: transparent #b81b24 transparent transparent;
+}
+/* line 34, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::after {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 37, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::before {
+  border-color: transparent transparent transparent #b81b24;
+}
+/* line 40, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::after {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 43, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow {
+  border-color: #fff;
+}
+/* line 45, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover {
+  background-color: #fff;
+}
+/* line 47, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::before {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 50, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::after {
+  border-color: transparent #b81b24 transparent transparent;
+}
+/* line 53, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::before {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 56, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+2) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::after {
+  border-color: transparent transparent transparent #b81b24;
+}
+/* line 23, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] > .widget-title a {
+  color: #fff;
+}
+/* line 27, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"]:before {
+  background-color: #3b5a86;
+}
+/* line 31, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::before {
+  border-color: transparent #3b5a86 transparent transparent;
+}
+/* line 34, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::after {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 37, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::before {
+  border-color: transparent transparent transparent #3b5a86;
+}
+/* line 40, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::after {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 43, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow {
+  border-color: #fff;
+}
+/* line 45, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover {
+  background-color: #fff;
+}
+/* line 47, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::before {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 50, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::after {
+  border-color: transparent #3b5a86 transparent transparent;
+}
+/* line 53, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::before {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 56, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+3) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::after {
+  border-color: transparent transparent transparent #3b5a86;
+}
+/* line 23, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] > .widget-title a {
+  color: #fff;
+}
+/* line 27, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"]:before {
+  background-color: #d5713f;
+}
+/* line 31, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::before {
+  border-color: transparent #d5713f transparent transparent;
+}
+/* line 34, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::after {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 37, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::before {
+  border-color: transparent transparent transparent #d5713f;
+}
+/* line 40, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::after {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 43, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow {
+  border-color: #fff;
+}
+/* line 45, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover {
+  background-color: #fff;
+}
+/* line 47, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::before {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 50, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::after {
+  border-color: transparent #d5713f transparent transparent;
+}
+/* line 53, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::before {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 56, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+4) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::after {
+  border-color: transparent transparent transparent #d5713f;
+}
+/* line 23, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] > .widget-title a {
+  color: #fff;
+}
+/* line 27, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"]:before {
+  background-color: #d85452;
+}
+/* line 31, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::before {
+  border-color: transparent #d85452 transparent transparent;
+}
+/* line 34, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::after {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 37, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::before {
+  border-color: transparent transparent transparent #d85452;
+}
+/* line 40, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::after {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 43, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow {
+  border-color: #fff;
+}
+/* line 45, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover {
+  background-color: #fff;
+}
+/* line 47, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::before {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 50, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::after {
+  border-color: transparent #d85452 transparent transparent;
+}
+/* line 53, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::before {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 56, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+5) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::after {
+  border-color: transparent transparent transparent #d85452;
+}
+/* line 23, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] > .widget-title a {
+  color: #fff;
+}
+/* line 27, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"]:before {
+  background-color: #e0439c;
+}
+/* line 31, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::before {
+  border-color: transparent #e0439c transparent transparent;
+}
+/* line 34, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-prev::after {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 37, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::before {
+  border-color: transparent transparent transparent #e0439c;
+}
+/* line 40, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-next::after {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 43, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow {
+  border-color: #fff;
+}
+/* line 45, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover {
+  background-color: #fff;
+}
+/* line 47, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::before {
+  border-color: transparent #fff transparent transparent;
+}
+/* line 50, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-prev::after {
+  border-color: transparent #e0439c transparent transparent;
+}
+/* line 53, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::before {
+  border-color: transparent transparent transparent #fff;
+}
+/* line 56, ../sass/layout-manager.scss */
+.aajtak-layout-container .row:nth-child(6n+6) .data-holder[widget-style="aajtak-slider"] .slider-container .slick-arrow:hover.slick-next::after {
+  border-color: transparent transparent transparent #e0439c;
+}
+/* line 66, ../sass/layout-manager.scss */
 .aajtak-layout-container .row:nth-child(7) .data-holder[widget-style="aajtak-slider"]:before {
   background-color: #eeeced;
 }
-/* line 52, ../sass/layout-manager.scss */
+/* line 71, ../sass/layout-manager.scss */
 .aajtak-layout-container .row:nth-child(8) .data-holder[widget-style="aajtak-slider"]:before {
   background-color: #fff;
 }
 
-/* line 59, ../sass/layout-manager.scss */
+/* line 78, ../sass/layout-manager.scss */
 .slider-container .slick-list {
   padding: 20px 0 30px 15px;
 }
-/* line 62, ../sass/layout-manager.scss */
+/* line 81, ../sass/layout-manager.scss */
 .slider-container .slick-arrow {
+  background-color: transparent;
+  border: 1px solid #000;
+  border-radius: 50%;
   position: absolute;
   top: -35px;
   width: 30px;
   height: 30px;
-  border: 1px solid #000;
-  border-radius: 50%;
   text-indent: -9999px;
+  cursor: pointer;
 }
-/* line 71, ../sass/layout-manager.scss */
+/* line 92, ../sass/layout-manager.scss */
 .slider-container .slick-next {
   right: 10px;
 }
-/* line 72, ../sass/layout-manager.scss */
+/* line 93, ../sass/layout-manager.scss */
 .slider-container .slick-prev {
   right: 56px;
 }
-/* line 73, ../sass/layout-manager.scss */
+/* line 94, ../sass/layout-manager.scss */
 .slider-container .slick-next::before {
   border-color: transparent transparent transparent #eeeded;
   border-image: none;
@@ -124,7 +395,7 @@
   width: 0;
   z-index: 9;
 }
-/* line 86, ../sass/layout-manager.scss */
+/* line 107, ../sass/layout-manager.scss */
 .slider-container .slick-next::after {
   border-color: transparent transparent transparent #000;
   border-image: none;
@@ -138,7 +409,7 @@
   top: 8px;
   width: 0;
 }
-/* line 99, ../sass/layout-manager.scss */
+/* line 120, ../sass/layout-manager.scss */
 .slider-container .slick-prev::before {
   border-color: transparent #eeeded transparent transparent;
   border-image: none;
@@ -152,7 +423,7 @@
   width: 0;
   z-index: 9;
 }
-/* line 112, ../sass/layout-manager.scss */
+/* line 133, ../sass/layout-manager.scss */
 .slider-container .slick-prev::after {
   border-color: transparent #000 transparent transparent;
   border-image: none;
@@ -167,7 +438,7 @@
   width: 0;
 }
 
-/* line 128, ../sass/layout-manager.scss */
+/* line 149, ../sass/layout-manager.scss */
 .widget-list-row {
   background-color: #fff;
   border-radius: 5px;
@@ -181,12 +452,12 @@
   list-style-type: none;
   margin: 0 15px;
 }
-/* line 140, ../sass/layout-manager.scss */
+/* line 161, ../sass/layout-manager.scss */
 .widget-list-row:hover {
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
   transform: translate(0, -4px);
 }
-/* line 144, ../sass/layout-manager.scss */
+/* line 165, ../sass/layout-manager.scss */
 .widget-list-row .tile {
   text-align: center;
   position: relative;
@@ -251,16 +522,16 @@
   left: -4px;
   top: 0;
 }
-/* line 147, ../sass/layout-manager.scss */
+/* line 168, ../sass/layout-manager.scss */
 .widget-list-row .category-name {
   background-color: #dc4750;
 }
-/* line 150, ../sass/layout-manager.scss */
+/* line 171, ../sass/layout-manager.scss */
 .widget-list-row .icon-list {
   background-color: #dc4750;
 }
 
-/* line 154, ../sass/layout-manager.scss */
+/* line 175, ../sass/layout-manager.scss */
 .data-holder[widget-style="aajtak-slider"] {
   display: inline-block;
   vertical-align: top;
@@ -278,7 +549,7 @@
   top: 0;
   z-index: -1;
 }
-/* line 156, ../sass/layout-manager.scss */
+/* line 177, ../sass/layout-manager.scss */
 .data-holder[widget-style="aajtak-slider"] > .widget-title {
   font-size: 28px;
   font-size: 1.75rem;
@@ -287,23 +558,23 @@
   color: #000;
   padding: 20px 15px;
 }
-/* line 161, ../sass/layout-manager.scss */
+/* line 182, ../sass/layout-manager.scss */
 .data-holder[widget-style="aajtak-slider"] .widget-list-wrapper {
   margin-top: -20px;
 }
 
-/* line 168, ../sass/layout-manager.scss */
+/* line 189, ../sass/layout-manager.scss */
 .aajtak-widget {
   min-height: 380px;
   height: 380px;
   overflow: hidden;
 }
-/* line 172, ../sass/layout-manager.scss */
+/* line 193, ../sass/layout-manager.scss */
 .aajtak-widget .droppable {
   height: 100%;
 }
 
-/* line 178, ../sass/layout-manager.scss */
+/* line 199, ../sass/layout-manager.scss */
 .aajtak-stack .tile {
   text-align: center;
   position: relative;
@@ -368,11 +639,11 @@
   left: -4px;
   top: 0;
 }
-/* line 181, ../sass/layout-manager.scss */
+/* line 202, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder, .aajtak-stack .widget-container {
   height: 100%;
 }
-/* line 184, ../sass/layout-manager.scss */
+/* line 205, ../sass/layout-manager.scss */
 .aajtak-stack .widget-title {
   font-size: 28px;
   font-size: 1.75rem;
@@ -381,16 +652,16 @@
   color: #000;
   padding: 20px 45px 25px;
 }
-/* line 189, ../sass/layout-manager.scss */
+/* line 210, ../sass/layout-manager.scss */
 .aajtak-stack .stack {
   width: 262px;
   height: 268px;
 }
-/* line 193, ../sass/layout-manager.scss */
+/* line 214, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder {
   position: relative;
 }
-/* line 195, ../sass/layout-manager.scss */
+/* line 216, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls {
   position: absolute;
   right: 10px;
@@ -398,7 +669,7 @@
   width: 100px;
   margin: 0;
 }
-/* line 201, ../sass/layout-manager.scss */
+/* line 222, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button {
   background-color: transparent;
   width: 30px;
@@ -409,11 +680,11 @@
   padding: 0;
   margin: 0;
 }
-/* line 210, ../sass/layout-manager.scss */
+/* line 231, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--reject {
   margin-right: 10px;
 }
-/* line 213, ../sass/layout-manager.scss */
+/* line 234, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--reject::before {
   border-color: transparent #eeeded transparent transparent;
   border-image: none;
@@ -430,7 +701,7 @@
   pointer-events: auto;
   margin: 0;
 }
-/* line 229, ../sass/layout-manager.scss */
+/* line 250, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--reject::after {
   border-color: transparent #000 transparent transparent;
   border-image: none;
@@ -447,7 +718,7 @@
   pointer-events: auto;
   margin: 0;
 }
-/* line 245, ../sass/layout-manager.scss */
+/* line 266, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--accept::before {
   border-color: transparent transparent transparent #eeeded;
   border-image: none;
@@ -464,7 +735,7 @@
   pointer-events: auto;
   margin: 0;
 }
-/* line 261, ../sass/layout-manager.scss */
+/* line 282, ../sass/layout-manager.scss */
 .aajtak-stack .data-holder .controls .button.button--accept::after {
   border-color: transparent transparent transparent #000;
   border-image: none;
@@ -482,12 +753,12 @@
   margin: 0;
 }
 
-/* line 282, ../sass/layout-manager.scss */
+/* line 303, ../sass/layout-manager.scss */
 .layout-heading-wrapper {
   padding: 20px 15px;
   position: relative;
 }
-/* line 285, ../sass/layout-manager.scss */
+/* line 306, ../sass/layout-manager.scss */
 .layout-heading-wrapper .layout-heading {
   display: inline-block;
   height: 38px;
@@ -497,7 +768,7 @@
   width: auto;
   transition: all 500ms;
 }
-/* line 293, ../sass/layout-manager.scss */
+/* line 314, ../sass/layout-manager.scss */
 .layout-heading-wrapper .layout-heading input[type="text"] {
   height: 38px !important;
   left: 0;
@@ -508,7 +779,7 @@
   z-index: 0;
   opacity: 0;
 }
-/* line 303, ../sass/layout-manager.scss */
+/* line 324, ../sass/layout-manager.scss */
 .layout-heading-wrapper .layout-heading h2 {
   padding: 0 !important;
   position: relative;
@@ -516,21 +787,21 @@
   opacity: 1;
   transition: all 500ms;
 }
-/* line 310, ../sass/layout-manager.scss */
+/* line 331, ../sass/layout-manager.scss */
 .layout-heading-wrapper .layout-heading.edit {
   width: 100%;
 }
-/* line 312, ../sass/layout-manager.scss */
+/* line 333, ../sass/layout-manager.scss */
 .layout-heading-wrapper .layout-heading.edit h2 {
   z-index: 0;
   opacity: 0;
 }
-/* line 316, ../sass/layout-manager.scss */
+/* line 337, ../sass/layout-manager.scss */
 .layout-heading-wrapper .layout-heading.edit input[type="text"] {
   z-index: 1;
   opacity: 1;
 }
-/* line 322, ../sass/layout-manager.scss */
+/* line 343, ../sass/layout-manager.scss */
 .layout-heading-wrapper .edit-trigger {
   cursor: pointer;
   display: inline-block;
@@ -538,21 +809,21 @@
   vertical-align: middle;
 }
 
-/* line 330, ../sass/layout-manager.scss */
+/* line 351, ../sass/layout-manager.scss */
 .itg-admin .data-holder {
   padding: 0;
   overflow: hidden;
 }
 
-/* line 335, ../sass/layout-manager.scss */
+/* line 356, ../sass/layout-manager.scss */
 .aapka_vote_widget {
   text-align: center;
 }
-/* line 337, ../sass/layout-manager.scss */
+/* line 358, ../sass/layout-manager.scss */
 .aapka_vote_widget .widget-title {
   display: none;
 }
-/* line 340, ../sass/layout-manager.scss */
+/* line 361, ../sass/layout-manager.scss */
 .aapka_vote_widget .block-itg-widget {
   border-radius: 5px;
   display: inline-block;
@@ -564,16 +835,16 @@
   text-align: left;
   vertical-align: top;
 }
-/* line 351, ../sass/layout-manager.scss */
+/* line 372, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-data {
   height: 100%;
 }
-/* line 354, ../sass/layout-manager.scss */
+/* line 375, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-banner-image {
   height: 108px;
   overflow: hidden;
 }
-/* line 358, ../sass/layout-manager.scss */
+/* line 379, ../sass/layout-manager.scss */
 .aapka_vote_widget h3 {
   font-size: 20px;
   font-size: 1.25rem;
@@ -581,13 +852,13 @@
   line-height: 28px;
   color: #000;
 }
-/* line 362, ../sass/layout-manager.scss */
+/* line 383, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-text {
   background-color: #fff;
   height: calc(100% - 108px);
   padding: 10px 15px;
 }
-/* line 367, ../sass/layout-manager.scss */
+/* line 388, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-text .active-poll-title h4 {
   font-size: 16px;
   font-size: 1rem;
@@ -596,17 +867,17 @@
   color: rgba(0, 0, 0, 0.9);
   padding: 3px 0;
 }
-/* line 372, ../sass/layout-manager.scss */
+/* line 393, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-text .active-poll-title .updated-msg {
   display: none;
 }
-/* line 377, ../sass/layout-manager.scss */
+/* line 398, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-text .form-radios .form-type-radio {
   position: relative;
   height: 35px;
   z-index: 1;
 }
-/* line 381, ../sass/layout-manager.scss */
+/* line 402, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-text .form-radios .form-type-radio label {
   background-color: #f3f3f3;
   border: 1px solid #e7e7e7;
@@ -624,7 +895,7 @@
   padding: 0 13px;
   transition: all 300ms;
 }
-/* line 395, ../sass/layout-manager.scss */
+/* line 416, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-text .form-radios .form-type-radio input[type="radio"] {
   position: absolute;
   left: 0;
@@ -634,18 +905,18 @@
   opacity: 0;
   z-index: 9;
 }
-/* line 403, ../sass/layout-manager.scss */
+/* line 424, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-text .form-radios .form-type-radio input[type="radio"]:hover + label, .aapka_vote_widget .poll-text .form-radios .form-type-radio input[type="radio"]:checked + label {
   background-color: #888;
   border-color: #888;
   box-shadow: 0 0 5px 0 #888;
   color: #fff;
 }
-/* line 410, ../sass/layout-manager.scss */
+/* line 431, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-text .form-radios .form-type-radio:hover {
   z-index: 9;
 }
-/* line 415, ../sass/layout-manager.scss */
+/* line 436, ../sass/layout-manager.scss */
 .aapka_vote_widget .poll-text .form-submit {
   margin-top: 10px;
 }

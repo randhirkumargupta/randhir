@@ -21,6 +21,14 @@
     /*=================== Jquery code for aajtak sliders =======================*/
     /*==========================================================================*/
     
+      // jquery code to add aajtak Big story format related content slider
+      $('.big-story-related-content').slick({
+        infinite: true,
+        slidesToShow: 3,
+        variableWidth: true,
+        slidesToScroll: 1
+      });
+      
       // jquery code to add aajtak sliding slider
       $('.slider-container').slick({
         infinite: true,

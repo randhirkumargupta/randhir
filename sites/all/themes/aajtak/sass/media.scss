@@ -164,9 +164,13 @@
   
   /* START OF BIG STORY FORMAT CSS */
   #block-itg-widget-aaj-tak-big-story{
+    border-bottom: 1px solid #ccc;
+    margin: 0 auto 50px;
     max-width: 1360px;
+    @include clearfix;
+  }
+  .big-story-wrapper{
     position: relative;
-    margin: 0 auto;
     .extra-large-image{
       img{
         width: 100%;
@@ -191,6 +195,143 @@
           display: inline-block;
           vertical-align: top;
           @include font(18px,20px,$itg-font-regular);
+          color: #9a9a9a;
+          padding: 0 5px;
+          position: relative;
+        }
+        .name a{
+          color: #9a9a9a;
+        }
+        .date:before{
+          content: '|';
+          position: absolute;
+          font-size: 12px;
+          left: -4px;
+          top: 0;
+        }
+      }
+    }
+  }
+  .big-story-related-content{
+    position: relative;
+    padding: 0 24px;
+    &:after {
+      background-color: #ccc;
+      content: "";
+      height: 100%;
+      left: 24px;
+      position: absolute;
+      top: 0;
+      width: 1px;
+    }
+    .slick-arrow {
+      background-color: #000;
+      border: 1px solid #000;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 15px;
+      text-indent: -9999px;
+      z-index: 99;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .slick-prev{
+      top: 40px;
+      &:before {
+        border-color: transparent #000 transparent transparent;
+        border-image: none;
+        border-style: solid;
+        border-width: 6px;
+        content: "";
+        height: 0;
+        left: 1px;
+        position: absolute;
+        top: 3px;
+        width: 0;
+        z-index: 9;
+      }
+      &:after {
+        border-color: transparent #fff transparent transparent;
+        border-image: none;
+        border-style: solid;
+        border-width: 6px;
+        content: "";
+        height: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 3px;
+        width: 0;
+      }
+    }
+    .slick-next{
+      bottom: 40px;
+      &:before {
+        border-color: transparent transparent transparent #000;
+        border-image: none;
+        border-style: solid;
+        border-width: 6px;
+        content: "";
+        height: 0;
+        left: 6px;
+        position: absolute;
+        top: 3px;
+        width: 0;
+        z-index: 9;
+      }
+      &:after {
+        border-color: transparent transparent transparent #fff;
+        border-image: none;
+        border-style: solid;
+        border-width: 6px;
+        content: "";
+        height: 0;
+        left:7px;
+        position: absolute;
+        right: 0;
+        top: 3px;
+        width: 0;
+      }
+    }
+  }
+  .big-story-related-content-list{
+    border-left: 1px solid #ccc;
+    float: left;
+    padding: 26px;
+    width: 327px;
+    @for $i from 1 through length($colors) {
+      &:nth-child(#{length($colors)}n+#{$i}) {
+        .tile{
+          .category-name{
+            color: nth($colors, $i);
+          }
+        }
+      }
+    }
+    .tile{
+      .pic {
+        float: left;
+        max-height: 67px;
+        max-width: 118px;
+        margin-right: 10px;
+        overflow: hidden;
+      }
+      .details{
+        overflow: hidden;
+      }
+      .category-name{
+        @include font(14px,14px,$itg-font-regular);
+      }
+      .title{
+        @include font(14px,14px,$itg-font-bold);
+        padding: 5px 0;
+      }
+      .reported-by{
+        .name, .date{
+          display: inline-block;
+          vertical-align: top;
+          @include font(12px,14px,$itg-font-regular);
           color: #9a9a9a;
           padding: 0 5px;
           position: relative;
