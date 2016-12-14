@@ -55,11 +55,11 @@
         return;
     js = d.createElement(s);
     js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";    
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function fbpop(linkurl, title, desc, image) {
+function fbpop(linkurl, title, desc, image, base_url, node_id) {
     FB.ui({
         method: 'feed',
         link: linkurl,
@@ -67,8 +67,14 @@ function fbpop(linkurl, title, desc, image) {
         name: title,
         //caption: desc,
         description: desc
-    },function(response){
-        console.log(response);
+    }, function (response) {
+        if (response.post_id != 'undefined' && response.post_id != '') {
+            jQuery.ajax({
+                url: base_url + '/earn-loyalty-point/' + node_id + '/share',
+                type: 'POST',
+                dataType: 'JSON',                
+            });
+        }
     });
 }
 

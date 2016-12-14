@@ -75,6 +75,13 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['filters']['field_tags_display_value']['value'] = array(
     'Yes' => 'Yes',
   );
+  /* Filter criterion: Taxonomy term: Tag Status (field_tags_status) */
+  $handler->display->display_options['filters']['field_tags_status_value']['id'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['table'] = 'field_data_field_tags_status';
+  $handler->display->display_options['filters']['field_tags_status_value']['field'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['value'] = array(
+    'Published' => 'Published',
+  );
 
   /* Display: Follow View */
   $handler = $view->new_display('block', 'Follow View', 'block');
@@ -110,6 +117,13 @@ function feature_tag_management_views_default_views() {
   $handler->display->display_options['filters']['flagged']['field'] = 'flagged';
   $handler->display->display_options['filters']['flagged']['relationship'] = 'flag_content_rel';
   $handler->display->display_options['filters']['flagged']['value'] = '0';
+  /* Filter criterion: Taxonomy term: Tag Status (field_tags_status) */
+  $handler->display->display_options['filters']['field_tags_status_value']['id'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['table'] = 'field_data_field_tags_status';
+  $handler->display->display_options['filters']['field_tags_status_value']['field'] = 'field_tags_status_value';
+  $handler->display->display_options['filters']['field_tags_status_value']['value'] = array(
+    'Published' => 'Published',
+  );
 
   /* Display: Following */
   $handler = $view->new_display('block', 'Following', 'block_1');
@@ -476,6 +490,7 @@ function feature_tag_management_views_default_views() {
   $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'ITG_download_taxonomy';
+  $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
   $handler->display->display_options['style_options']['attach_text'] = 'Exports CSV';
   $handler->display->display_options['style_options']['provide_file'] = 1;

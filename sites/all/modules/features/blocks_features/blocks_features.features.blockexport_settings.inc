@@ -17486,7 +17486,7 @@ personalization/saved-items',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17502,7 +17502,8 @@ product
 product/*
 order-summary
 snappost
-snappost/*',
+snappost/*
+site-search',
   'title' => '',
   'cache' => 8,
 );
@@ -17559,7 +17560,8 @@ product
 product/*
 order-summary
 snappost
-snappost/*',
+snappost/*
+site-search',
   'title' => '',
   'cache' => 8,
 );
@@ -17600,7 +17602,7 @@ snappost/*',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17616,7 +17618,8 @@ product
 product/*
 order-summary
 snappost
-snappost/*',
+snappost/*
+site-search',
   'title' => '',
   'cache' => 8,
 );
@@ -17657,7 +17660,7 @@ snappost/*',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17673,7 +17676,8 @@ product
 product/*
 order-summary
 snappost
-snappost/*',
+snappost/*
+site-search',
   'title' => '',
   'cache' => 8,
 );
@@ -17714,7 +17718,7 @@ snappost/*',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17730,7 +17734,8 @@ product
 product/*
 order-summary
 snappost
-snappost/*',
+snappost/*
+site-search',
   'title' => '',
   'cache' => 8,
 );
@@ -17771,7 +17776,7 @@ snappost/*',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17787,7 +17792,8 @@ product
 product/*
 order-summary
 snappost
-snappost/*',
+snappost/*
+site-search',
   'title' => '',
   'cache' => 8,
 );
@@ -17828,7 +17834,7 @@ snappost/*',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'personalization
@@ -17844,7 +17850,8 @@ product
 product/*
 order-summary
 snappost
-snappost/*',
+snappost/*
+site-search',
   'title' => '',
   'cache' => 8,
 );
@@ -29816,10 +29823,12 @@ draft-recipe-management',
   'region' => 'vertical_menu',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
+  'pages' => 'exceptions
+user
 user/login
 user/password
 itg-access-denied
+itg-not-found
 itg-not-found',
   'title' => '<none>',
   'cache' => -1,
@@ -30475,13 +30484,15 @@ itg-not-found',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
+  'pages' => 'exceptions
+user
 user/login
 user/password
 itg-access-denied
+itg-not-found
 itg-not-found',
   'title' => '<none>',
   'cache' => -1,
@@ -30577,13 +30588,15 @@ itg-not-found',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
+  'pages' => 'exceptions
+user
 user/login
 user/password
 itg-access-denied
+itg-not-found
 itg-not-found',
   'title' => '<none>',
   'cache' => -1,
@@ -30679,13 +30692,15 @@ itg-not-found',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
+  'pages' => 'exceptions
+user
 user/login
 user/password
 itg-access-denied
+itg-not-found
 itg-not-found',
   'title' => '<none>',
   'cache' => -1,
@@ -30781,13 +30796,15 @@ itg-not-found',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
+  'pages' => 'exceptions
+user
 user/login
 user/password
 itg-access-denied
+itg-not-found
 itg-not-found',
   'title' => '<none>',
   'cache' => -1,
@@ -30883,13 +30900,15 @@ itg-not-found',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
+  'pages' => 'exceptions
+user
 user/login
 user/password
 itg-access-denied
+itg-not-found
 itg-not-found',
   'title' => '<none>',
   'cache' => -1,
@@ -30985,13 +31004,15 @@ itg-not-found',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => 'user
+  'pages' => 'exceptions
+user
 user/login
 user/password
 itg-access-denied
+itg-not-found
 itg-not-found',
   'title' => '<none>',
   'cache' => -1,
@@ -31233,6 +31254,62 @@ itg-not-found',
   'pages' => '',
   'title' => '',
   'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2179,
+  'module' => 'follow',
+  'delta' => 'site',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 1,
+);
+  $export['block'][] = array(
+  'bid' => 2180,
+  'module' => 'follow',
+  'delta' => 'user',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 2,
+);
+  $export['block'][] = array(
+  'bid' => 2181,
+  'module' => 'views',
+  'delta' => 'a9bbdce6d3c77a4b8ff24dfabdffc7bf',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2182,
+  'module' => 'views',
+  'delta' => '9cb9dd6ba8800923da6d395352554c9f',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
 );
   $export['block_custom'][] = array(
   'bid' => 1,
