@@ -58,27 +58,26 @@ $budget_year = $data['budget_year'];
           <div id="ranking-content-main" class="col-md-6 col-list col-list-4">
               <span id="ranking-label" class="title"><?php print t('Items'); ?></span>    
               <ul id="sortable4" class="connectedSortable">
-                  <?php echo $column4; ?>
-                  <?php
+                  <?php echo $column4; ?>                  
+              </ul>
+              <?php
                   if ($budget_message_flag) {
-                    print $budget_social_message;
+                    print '<p class="success">'.$budget_social_message.'</p>';
                   }
                   elseif ($budget_message_front_flag) {
-                    print $budget_message;
+                    print '<p class="success">'.$budget_message.'</p>';
                     ?>      
                     <div class="budget-predictor-block">
                         <div class="budget-predictor-social-share">
-                            <div><?php print 'SHARE YOUR PREDICTION'; ?></div>
-                            <ul>
-                                <li><a href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
+                            <div class="share-msg"><?php print 'SHARE YOUR PREDICTION'; ?></div>
+                            <ul>                                
                                 <li><div id="fb-root"></div><a class="facebook" href="javascript:void(0)" onclick="badget_fb_share('<?php print $actual_link; ?>', '<?php print $budget_title; ?>', '<?php print $budget_social_message; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="javascript:void(0)" class="twitter" onclick="badget_twitter_share('<?php print urlencode($budget_title); ?>', '<?php print urlencode($actual_link); ?>')"><i class="fa fa-twitter"></i></a></li>
-                                <li><a title="share on google+" class="google" href="javascript:void(0)" onclick="return badget_google_plus_share('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>                                           
+                                <li><a title="share on google+" class="google" href="javascript:void(0)" onclick="return badget_google_plus_share('<?php print $actual_link; ?>')"></a></li>                                           
                             </ul>
                         </div>
                     </div>
   <?php } ?>
-              </ul>
 
               <?php if (empty($file_name) && empty($budget_message_flag)) { ?>
                 <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $budget_year; ?>)"><?php print t('Submit'); ?></button>

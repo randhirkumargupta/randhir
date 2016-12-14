@@ -319,6 +319,11 @@ jQuery (document).ready (function () {
         jQuery ("#videogallery-iframe").hide ();
       });
     });
-  })
+  });
+  
+  jQuery("select#fake-soruce-type").on("change",function(){
+    var soruce_type = jQuery(this).val();
+    jQuery("#edit-field-story-source-type-value").val(soruce_type);
+  });
 });
   

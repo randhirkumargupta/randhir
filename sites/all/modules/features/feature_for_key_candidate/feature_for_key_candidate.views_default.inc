@@ -224,7 +224,7 @@ function feature_for_key_candidate_views_default_views() {
       'postpone_processing' => 0,
       'skip_confirmation' => 1,
       'override_label' => 1,
-      'label' => 'Add to Special  Candiddate Key Widget',
+      'label' => 'Add to Special Candidate Key Widget',
     ),
   );
   /* Field: Content: Title */
@@ -458,6 +458,13 @@ print \'<a href="key-candidate-widget-node/key_candidate/\'.$row->cat_id.\'/\'.$
   $handler->display->display_options['fields']['extra']['label'] = '';
   $handler->display->display_options['fields']['extra']['exclude'] = TRUE;
   $handler->display->display_options['fields']['extra']['element_label_colon'] = FALSE;
+  /* Field: Section wise ordering content: id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['label'] = '';
+  $handler->display->display_options['fields']['id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';

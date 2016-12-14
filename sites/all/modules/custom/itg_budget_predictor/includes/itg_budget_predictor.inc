@@ -560,14 +560,17 @@ function itg_manage_budget() {
  * {@inheritdoc}
  */
 function itg_manage_budget_validate($form, &$form_state) {
-  $budget_year = $form_state['values']['budget_year'];
-  $query = db_select('itg_manage_budget', 'm');
-  $query->condition('m.budget_year', $budget_year, '=');
-  $query->fields('m', array('id'));
-  # execute the query
-  $results = $query->execute()->fetchObject();
-  if($results->id) {
-    form_set_error('field', t('Budget Predictor already exist in our system for '.$budget_year));
+  $budget_action = $form_state['values']['budget_action'];
+  if (empty($budget_action)) {
+    $budget_year = $form_state['values']['budget_year'];
+    $query = db_select('itg_manage_budget', 'm');
+    $query->condition('m.budget_year', $budget_year, '=');
+    $query->fields('m', array('id'));
+    # execute the query
+    $results = $query->execute()->fetchObject();
+    if($results->id) {
+      form_set_error('field', t('Budget Predictor already exist in our system for '.$budget_year));
+    }
   }
 }
 /**
