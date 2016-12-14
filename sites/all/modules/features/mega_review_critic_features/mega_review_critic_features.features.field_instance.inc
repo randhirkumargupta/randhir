@@ -570,7 +570,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 9,
+      'weight' => 11,
     ),
   );
 
@@ -616,7 +616,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 31,
+      'weight' => 6,
     ),
   );
 
@@ -661,7 +661,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -704,7 +704,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 7,
     ),
   );
 
@@ -747,7 +747,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 8,
     ),
   );
 
@@ -799,7 +799,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'replace_label' => 0,
       ),
       'type' => 'field_collection_embed',
-      'weight' => 3,
+      'weight' => 16,
     ),
   );
 
@@ -842,7 +842,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 12,
     ),
   );
 
@@ -881,7 +881,7 @@ function mega_review_critic_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -931,7 +931,7 @@ function mega_review_critic_features_field_default_field_instances() {
       'module' => 'youtube',
       'settings' => array(),
       'type' => 'youtube',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 
@@ -977,7 +977,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -1054,7 +1054,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 2,
+      'weight' => 17,
     ),
   );
 
@@ -1131,7 +1131,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 6,
+      'weight' => 21,
     ),
   );
 
@@ -1207,7 +1207,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 18,
     ),
   );
 
@@ -1284,7 +1284,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
+      'weight' => 19,
     ),
   );
 
@@ -1327,7 +1327,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -1370,7 +1370,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 5,
     ),
   );
 
@@ -1446,7 +1446,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 20,
     ),
   );
 

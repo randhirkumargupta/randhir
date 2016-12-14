@@ -11,12 +11,14 @@ list($width, $height) = getimagesize($url);
     $counter=1;
     foreach ($data->fid as $key => $fids) {
   
-        if ($key == 0) {
-            $key = "";
-        }
+      
         $image_dim=mageimagedimesion();
        
         $explodedata = explode('#', $fids);
+          if ($key == 0) {
+            $key = "";
+            $fidsformain=$explodedata[0];
+        }
         $file = file_load($explodedata[0]);
         $imagename=  str_replace('field_story_','', $explodedata[1]);
          
@@ -36,8 +38,8 @@ list($width, $height) = getimagesize($url);
         
         }
        
-        print' <input type="text" name="courtesy[]" placeholder="Courtesy"  value="">
-                <input type="text" name="syndicate[]" placeholder="Syndicate" value=""></div> </div> ';  
+        print' <input type="text" name="courtesy[]" placeholder="Courtesy"  value=""></br>
+                <div class="syndicate-lable"><input type="checkbox" name="syndicate_'.$explodedata[0].'" value="1"> Syndicate</div></div> </div> ';  
        
        
         $counter++;
@@ -47,7 +49,7 @@ list($width, $height) = getimagesize($url);
     <button class="add-more maptofield">Upload</button>
     <button class="cancel-image add-more">Cancel</button>
     <input type="hidden" value="<?php echo $field_name; ?>" id="field_name">
-    <input type="hidden" value="<?php echo $file->fid; ?>" id="image_fiedlid">
+    <input type="hidden" value="<?php echo $fidsformain; ?>" id="image_fiedlid">
     <input type="hidden" value="<?php echo $url; ?>" id="imcurl">
     <input type="hidden" value="<?php echo $height; ?>" id="imcheigth">
     <input type="hidden" value="<?php echo $width; ?>" id="imcwidth">

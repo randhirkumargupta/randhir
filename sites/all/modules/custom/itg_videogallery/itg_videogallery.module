@@ -102,16 +102,15 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 20,
       );
       $form['field_video_duration']['#attributes'] = array('style' => 'display:none;');
-      $form['field_upload_video'][LANGUAGE_NONE][0]['#upload_validators']['itg_custom_field_validate'] = array(1, 2);
-      $form['field_upload_video']['#suffix'] = '<div class="ftp_browse_field"><label for="edit-field-upload-video-und-0-upload">Video <span title="This field is required." class="form-required">*</span></label><span class="browse-ftp-click">'.l(t('Browse Video'), 'dailymotion-ftp-template', array('query' => array('width' => '80%', 'height' => '80%', 'iframe' => true, 'input_filed' => 'edit-field-upload-video-und-0-upload', 'file_filed_name' => 'field_upload_video[und][0][fid]'), 'attributes' => array('class' => array('colorbox-load', 'browse-ftp-click')))).'</span><div class="description">Allowed file extension MP4.</div></div>';
+      $form['field_video_upload'][LANGUAGE_NONE][0]['#upload_validators']['itg_custom_field_validate'] = array(1, 2);
+      $form['field_video_upload']['#prefix'] = '<div class="ftp_browse_field"><label for="edit-field-upload-video-und-0-upload">Video <span title="This field is required." class="form-required">*</span></label><span class="browse-ftp-click">' . l(t('Browse Video'), 'dailymotion-ftp-template', array('query' => array('width' => '80%', 'height' => '80%', 'iframe' => true, 'input_filed' => 'edit-field-upload-video-und-0-upload', 'file_filed_name' => 'field_upload_video[und][0][fid]'), 'attributes' => array('class' => array('colorbox-load', 'browse-ftp-click')))) . '</span><div class="description">Allowed file extension MP4.</div></div>';
       $form['actions']['submit']['#submit'][] = 'itg_videogallery_submit_status_message';
       $form['actions']['submit']['#submit'][] = 'itg_videogallery_custom_submit';
       // Add accept file
-      $form['field_upload_video'][LANGUAGE_NONE][0]['#process'][] = 'itg_videogallery_managed_file_process_accept_attribute'; 
+      $form['field_video_upload'][LANGUAGE_NONE][0]['#process'][] = 'itg_videogallery_managed_file_process_accept_attribute';
       break;
   }
 }
-
 
 /**
  * Processes a filed_video upload element to add the accept attribute.
@@ -119,7 +118,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
  * Add the allowed extensions as an 'accept' attribute to the file_managed element.
  */
 function itg_videogallery_managed_file_process_accept_attribute($element, &$form_state, $form) {
-  
+
   if ($form['#form_id'] == 'videogallery_node_form') {
     if (!empty($element['#upload_validators']['file_validate_extensions']) && !isset($element['upload']['#attributes']['accept'])) {
       $extensions = explode(' ', $element['#upload_validators']['file_validate_extensions'][0]);
@@ -675,17 +674,18 @@ function itg_videogallery_get_video($fid) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_access($node, $op, $account) {
-    if ($account->uid == 0) {
-        $current_time = time();
-        $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
-        $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
-        if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
-            return NODE_ACCESS_ALLOW;
-        } elseif (($current_time > $video_expire_date) && ($node->type == 'videogallery') && ($op == 'view')) {
-            return NODE_ACCESS_DENY;
-        }
+  if ($account->uid == 0) {
+    $current_time = time();
+    $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+    $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+    if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
+      return NODE_ACCESS_ALLOW;
     }
-    return NODE_ACCESS_IGNORE;
+    elseif (($current_time > $video_expire_date) && ($node->type == 'videogallery') && ($op == 'view')) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
 }
 
 /**
@@ -1157,13 +1157,13 @@ function itg_videogallery_ajax_ftp_video() {
     //$used_video = itg_videogallery_ftp_used_video();
     $used_video = itg_videogallery_ftp_used_video();
     foreach ($used_video as $key => $u_video) {
-      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' .'<img src="'.$u_video['thumb_url'].'">'. $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
+      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . '<img src="' . $u_video['thumb_url'] . '">' . $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
     }
   }
   elseif ($case == 'unused') {
     $unused_video = itg_videogallery_ftp_unused_video();
     foreach ($unused_video as $key => $un_video) {
-      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' .  $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
+      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
     }
   }
   if (empty($val)) {
@@ -1175,7 +1175,6 @@ function itg_videogallery_ajax_ftp_video() {
 		elementsPerPage: 21,
 		effect: "climb"
 	});</script>';
-
 }
 
 /**
@@ -1196,7 +1195,7 @@ function itg_videogallery_ajax_time_filter_video() {
     }
     $used_video = itg_videogallery_ftp_used_video($before_time, $searh_key);
     foreach ($used_video as $key => $u_video) {
-      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' .'<img src="'.$u_video['thumb_url'].'">'. $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
+      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . '<img src="' . $u_video['thumb_url'] . '">' . $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
     }
   }
   if (empty($val)) {
@@ -1208,8 +1207,8 @@ function itg_videogallery_ajax_time_filter_video() {
 		elementsPerPage: 21,
 		effect: "climb"
 	});</script>';
-
 }
+
 /**
  * Implements function for video search filter ajax
  */
@@ -1217,37 +1216,37 @@ function itg_videogallery_ajax_time_search_video() {
   $ajax_data = $_POST['back_time'];
   $filters = explode('@', $ajax_data);
   $search_key = $filters[1];
-  if($filters[0] == 'used'){
+  if ($filters[0] == 'used') {
     $back_time = $filters[2];
-     $val = '';
-  if ($back_time) {
-    if (is_numeric($back_time)) {
-      $before_time = time() - (60 * 60 * $back_time);
-    }
-    elseif ($back_time == '-all-') {
-      $before_time = '-all-';
-    }
-    $used_video = itg_videogallery_ftp_used_video($before_time, $search_key);
-    foreach ($used_video as $key => $u_video) {
-      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' .'<img src="'.$u_video['thumb_url'].'">'. $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
+    $val = '';
+    if ($back_time) {
+      if (is_numeric($back_time)) {
+        $before_time = time() - (60 * 60 * $back_time);
+      }
+      elseif ($back_time == '-all-') {
+        $before_time = '-all-';
+      }
+      $used_video = itg_videogallery_ftp_used_video($before_time, $search_key);
+      foreach ($used_video as $key => $u_video) {
+        $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . '<img src="' . $u_video['thumb_url'] . '">' . $u_video['filename'] . '<span class="file_size">' . $u_video['filesize'] . ' MB</span></label></span>';
+      }
     }
   }
-  }elseif($filters[0] == 'unused'){
+  elseif ($filters[0] == 'unused') {
     $unused_video = itg_videogallery_ftp_unused_video($search_key);
     foreach ($unused_video as $key => $un_video) {
-      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' .  $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
+      $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
     }
   }
   if (empty($val)) {
     $val = "Result not found.";
   }
- 
+
   echo '<div id="edit-video-browse-select">' . $val . '</div><script>jQuery("#edit-video-browse-select").easyPaginate({
 		paginateElement: ".ftp_video_radio",
 		elementsPerPage: 21,
 		effect: "climb"
 	});</script>';
-
 }
 
 /**
@@ -1270,7 +1269,7 @@ function itg_videogallery_ftp_used_video($before_time = NULL, $searh_key = NULL)
   if (!empty($before_time) && is_numeric($before_time)) {
     $query->condition('drd.upload_time', $before_time, '>');
   }
-  if(!empty($searh_key)){
+  if (!empty($searh_key)) {
     $query->condition('fm.filename', '%' . db_like($searh_key) . '%', LIKE);
   }
   $results = $query->execute();
@@ -1296,7 +1295,7 @@ function itg_videogallery_ftp_unused_video($search_key = NULL) {
     $path_info = pathinfo($file_array[1]);
     $extension = $path_info['extension'];
     if (isset($extension) && $extension == 'mp4') {
-      $new_file[] = 'public://dailymotion_video_dir/'.$file_array[1];
+      $new_file[] = 'public://dailymotion_video_dir/' . $file_array[1];
     }
   }
   $ftp_current_videos = itg_videogallery_ftp_unused_file($new_file, $search_key);
@@ -1308,8 +1307,6 @@ function itg_videogallery_ftp_unused_video($search_key = NULL) {
   }
   return $options;
 }
-
-
 
 /**
  * Implements function for get unused files.
@@ -1337,14 +1334,12 @@ function itg_videogallery_ftp_unused_file($filename, $search_key = NULL) {
   $query->condition('fu.type', 'file', '=');
   $query->condition('fm.fid', $used_fid, 'NOT IN');
   $query->condition('fm.uri', $filename, 'IN');
-  if(!empty($search_key)){
-     $query->condition('fm.filename', '%'. db_like($search_key) . '%', LIKE);
-  }  
+  if (!empty($search_key)) {
+    $query->condition('fm.filename', '%' . db_like($search_key) . '%', LIKE);
+  }
   $result_unused = $query->execute()->fetchAll();
   return $result_unused;
 }
-
-
 
 /**
  * Implements hook_views_query_alter()
@@ -1415,10 +1410,158 @@ function itg_videogallery_get_tid_nid($nid) {
  * Implement function for get term name
  * @param int $tid
  */
-function itg_videogallery_get_term_name($tid){
+function itg_videogallery_get_term_name($tid) {
   $query = db_select('taxonomy_term_data', 'ttd');
   $query->fields('ttd', array('name'));
   $query->condition('ttd.tid', $tid, '=');
   $result = $query->execute()->fetchField();
   return strtoupper($result);
+}
+
+/**
+ * Implements hook_field_attach_form().
+ * {@inheritdoc}
+ */
+function itg_videogallery_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
+  $options = array('language' => field_valid_language($langcode));
+  // Merge default options.
+  $default_options = array(
+    'default' => FALSE,
+    'deleted' => FALSE,
+    'language' => NULL,
+  );
+  $options += $default_options;
+  list($a, $b, $bundle) = entity_extract_ids($entity_type, $entity);
+
+  $instances = _field_invoke_get_instances($entity_type, $bundle, $options);
+  // Iterate through the instances.
+  $return = array();
+  foreach ($instances as $instance) {
+    $field = field_info_field_by_id($instance['field_id']);
+    $field_name = $field['field_name'];
+    //If we are looking at our field type and specific widget type, and we are multiple entries
+    if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
+      if ($field['bundles']['node'][0] == "videogallery") {
+        //  drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/upload.js', array('weight' => 2));
+        // Check just in case the button is here, and add another #submit function
+        if (isset($form[$field['field_name']]['und']['add_more'])) {
+          // add a simple select list, this defaults to numb 3
+          $form[$field['field_name']]['add_more_number'] = array(
+            '#type' => 'select',
+            '#options' => drupal_map_assoc(range(0, 20)),
+            '#default_value' => 1,
+            '#attributes' => array('style' => 'display:none;'),
+          );
+
+          $form[$field['field_name']]['file_entity_holder_nums'] = array(
+            '#type' => 'textfield',
+            '#default_value' => '',
+            '#attributes' => array('style' => 'display:none;'),
+          );
+
+
+          $form[$field['field_name']]['und']['add_more']['#submit'][] = 'itg_videogallery_field_add_more_submit';
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_submit().
+ * @global object $user
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_videogallery_field_add_more_submit($form, &$form_state) {
+  global $user;
+  $button = $form_state['triggering_element'];
+  // Go one level up in the form, to the widgets container.
+  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
+  $field_name = $element['#field_name'];
+  $langcode = $element['#language'];
+  $parents = $element['#field_parents'];
+
+  // Alter the number of widgets to show. items_count = 0 means 1.
+  $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
+  //get the number from the select
+  $numbtoadd = $form[$field_name]['add_more_number']['#value'];
+  $file_entity_holder_nums = $form[$field_name]['file_entity_holder_nums']['#value'];
+
+  if ($numbtoadd) {
+    $field_state['items_count'] += $numbtoadd - 1;
+    field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
+    $form_state['rebuild'] = TRUE;
+  }
+  $node = drupal_rebuild_form('videogallery_node_form', $form_state, $old_form = NULL);
+  $fids = array();
+  $mydir = 'public://dailymotion_video_dir';
+  file_prepare_directory($mydir, FILE_CREATE_DIRECTORY);
+  foreach ($node['upload']['#value'] as $audio) {
+    $scheme = variable_get('file_default_scheme', 'public') . '://dailymotion_video_dir/';
+    $source = $audio['tmppath'];
+    $uri = itg_audio_check_exist_file($audio['name']);
+    $newuri = explode('//dailymotion_video_dir/', $uri);
+    $directory = '';
+    $destination = file_stream_wrapper_uri_normalize($scheme . $directory . $newuri[1]);
+    $destination = file_unmanaged_move($source, $destination);
+    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+    $file = new StdClass;
+    $file->uid = $user->uid;
+    $file->filename = $audio['name'];
+    $file->uri = $uri;
+    $file->filemime = file_get_mimetype($uri);
+    $file->filesize = @filesize($uri);
+    $file->timestamp = REQUEST_TIME;
+    $file->is_new = TRUE;
+    $file->status = 0;
+    $fids[] = file_save($file);
+  }
+  $key_val = 0;
+  foreach ($fids as $file_id) {
+    $file_ids[$key_val]['fid'] = $file_id->fid;
+    $file_ids[$key_val]['filename'] = $file_id->filename;
+    $key_val++;
+  }
+
+  $i = 0;
+
+
+  $videogallery_popup_data_fids_array = array();
+  if (isset($file_entity_holder_nums) && !empty($file_entity_holder_nums)) {
+    $videogallery_popup_data_fids_array = explode(',', $file_entity_holder_nums);
+  }
+
+  if (isset($videogallery_popup_data_fids_array) && count($videogallery_popup_data_fids_array) > 0) {
+
+    foreach ($form_state['field']['field_video_upload']['und']['entity'] as $key => $filed_collection) {
+      if (!isset($filed_collection->field_videogallery_video_upload['und'])) {
+        $form_state['field']['field_video_upload']['und']['entity'][$key]->field_videogallery_video_upload['und'][0]['fid'] = $videogallery_popup_data_fids_array[$i];
+        $i++;
+      }
+    }
+  }
+}
+
+/**
+ * Creating a form for uploading single video using FTP popup.
+ * @param array $form
+ * @param array $form_state
+ */
+
+function videogallery_new_fileupload_form($form, &$form_state) {
+
+  $form['videogallery_new_file'] = array(
+    '#type' => 'managed_file',
+    '#title' => 'Browse file',
+    '#description' => t('Allowed extensions: MP4'),
+    '#upload_location' => 'public://dailymotion_video_dir/',
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('mp4'),
+      'file_validate_size' => array(MAX_FILE_SIZE * 1024 * 1024),
+    ),
+  );
+
+
+  return $form;
 }

@@ -21848,7 +21848,7 @@ programme
 speakers
 event-registration
 flashback
-sign-and-win
+sing-and-win
 speaker-details
 sponsor-details',
   'title' => '',
@@ -21995,7 +21995,7 @@ programme
 speakers
 event-registration
 flashback
-sign-and-win
+sing-and-win
 speaker-details
 sponsor-details',
   'title' => '',
@@ -22030,7 +22030,7 @@ programme
 speakers
 event-registration
 flashback
-sign-and-win
+sing-and-win
 speaker-details
 sponsor-details',
   'title' => '',
@@ -22065,7 +22065,7 @@ programme
 speakers
 event-registration
 flashback
-sign-and-win
+sing-and-win
 speaker-details
 sponsor-details',
   'title' => '',
@@ -22100,7 +22100,7 @@ programme
 speakers
 event-registration
 flashback
-sign-and-win
+sing-and-win
 speaker-details
 sponsor-details',
   'title' => '',
@@ -22135,7 +22135,7 @@ programme
 speakers
 event-registration
 flashback
-sign-and-win
+sing-and-win
 speaker-details
 sponsor-details',
   'title' => '',
@@ -22170,7 +22170,7 @@ programme
 speakers
 event-registration
 flashback
-sign-and-win
+sing-and-win
 speaker-details
 sponsor-details',
   'title' => '',
@@ -29811,13 +29811,17 @@ draft-recipe-management',
   'module' => 'itg_menu_manager',
   'delta' => 'vertical_menu',
   'theme' => 'itg',
-  'status' => 0,
+  'status' => 1,
   'weight' => 0,
-  'region' => -1,
+  'region' => 'vertical_menu',
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'pages' => 'user
+user/login
+user/password
+itg-access-denied
+itg-not-found',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -30474,8 +30478,12 @@ draft-recipe-management',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'pages' => 'user
+user/login
+user/password
+itg-access-denied
+itg-not-found',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -30572,8 +30580,12 @@ draft-recipe-management',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'pages' => 'user
+user/login
+user/password
+itg-access-denied
+itg-not-found',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -30670,8 +30682,12 @@ draft-recipe-management',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'pages' => 'user
+user/login
+user/password
+itg-access-denied
+itg-not-found',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -30768,8 +30784,12 @@ draft-recipe-management',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'pages' => 'user
+user/login
+user/password
+itg-access-denied
+itg-not-found',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -30866,8 +30886,12 @@ draft-recipe-management',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'pages' => 'user
+user/login
+user/password
+itg-access-denied
+itg-not-found',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -30964,8 +30988,12 @@ draft-recipe-management',
   'region' => -1,
   'custom' => 0,
   'visibility' => 0,
-  'pages' => '',
-  'title' => '',
+  'pages' => 'user
+user/login
+user/password
+itg-access-denied
+itg-not-found',
+  'title' => '<none>',
   'cache' => -1,
 );
   $export['block'][] = array(
@@ -31107,6 +31135,104 @@ draft-recipe-management',
   'pages' => '',
   'title' => '',
   'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2172,
+  'module' => 'itg_event_backend',
+  'delta' => 'highlights_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2173,
+  'module' => 'itg_event_backend',
+  'delta' => 'highlights_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2174,
+  'module' => 'itg_event_backend',
+  'delta' => 'highlights_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2175,
+  'module' => 'itg_event_backend',
+  'delta' => 'highlights_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2176,
+  'module' => 'itg_event_backend',
+  'delta' => 'highlights_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2177,
+  'module' => 'itg_event_backend',
+  'delta' => 'highlights_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2178,
+  'module' => 'itg_event_backend',
+  'delta' => 'highlights_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
 );
   $export['block_custom'][] = array(
   'bid' => 1,

@@ -14,13 +14,11 @@ function itg_loyalty_reward_send_mail_product_expiration($nid) {
   $mail_content = itg_loyalty_reward_product_expiration_mail_content($node);
   $user_emails = itg_loyalty_reward_product_expiration_user_emails('association');
   $user_email_ids = implode(",", $user_emails);
-
   // Array of email subject and body 
   $params = array(
     'body' => $mail_content,
     'subject' => 'India Today | Product Expiration Status!',
   );
-
   // Send product expiration notification mail
   $mail = drupal_mail('itg_loyalty_reward_product_expiration', 'itg_loyalty_reward', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
 

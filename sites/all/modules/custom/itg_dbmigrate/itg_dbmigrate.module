@@ -53,14 +53,43 @@ function ordering_set_of_content($node, $count) {
  * @param string $type
  * @param string $val
  */
-function itg_flag_insert_like_dislike($nid, $type, $val) {
+function itg_flag_insert_like_dislike($nid, $like, $dis_like) {
   
   $active = db_insert('itg_custom_flag_count')
       ->fields(array(
         'nid' => $nid,
-        $type => $val,
+        'like_count' => $like,
+        'dislike_count' => $dis_like,
         'created' => date('Y-m-d G:i:s'),
       ))
       ->execute();
   
 }
+
+/**
+ * Implements function for mosimage replace
+ * @param string $body_string
+ * @param array $mosimage_array
+ * @return string
+ */
+function itg_dbmigrate_mosimage_replace($body_string, $mosimage_array, $token){
+  $str = str_replace(array('%', $token), array('%%', '%s'), $body_string);
+  $newstr = vsprintf($str, $mosimage_array);
+  return $newstr;
+}
+
+/**
+ * Order set for byline
+ * @param array $node
+ * @return
+ */
+function ordering_set_for_byline($nid, $weight) {
+    db_insert('draggableviews_structure')->fields(array(
+    'view_name' => 'widget_anchors_listing',
+    'view_display' => 'anchors_listing_widget',
+    'args' => '[]',
+    'entity_id' => $nid,
+    'weight' => $weight,
+    'parent' => 0,
+    ))->execute();
+  }

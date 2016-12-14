@@ -11,6 +11,111 @@ function feature_category_management_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_category_app_description'.
+  $field_instances['taxonomy_term-category_management-field_category_app_description'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 20,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_category_app_description',
+    'label' => 'App description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_category_section_flag'.
+  $field_instances['taxonomy_term-category_management-field_category_section_flag'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 18,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_category_section_flag',
+    'label' => 'Section flag',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 22,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_category_section_type'.
+  $field_instances['taxonomy_term-category_management-field_category_section_type'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 19,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_category_section_type',
+    'label' => 'Section type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 23,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_cm_category_banner'.
   $field_instances['taxonomy_term-category_management-field_cm_category_banner'] = array(
     'bundle' => 'category_management',
@@ -717,9 +822,47 @@ function feature_category_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_user_name'.
+  $field_instances['taxonomy_term-category_management-field_user_name'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'schedule duration',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 21,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_user_name',
+    'label' => 'Schedule duration',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 26,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t(' Program Timing');
+  t('App description');
   t('Category Banner');
   t('Category Color');
   t('Category Icon');
@@ -740,11 +883,15 @@ function feature_category_management_field_default_field_instances() {
   t('Program timing in days');
   t('Redirection URL');
   t('Result format');
+  t('Schedule duration');
+  t('Section flag');
+  t('Section type');
   t('Select template');
   t('Select template type');
   t('Set As Featured');
   t('Sponsored Category');
   t('Time Period');
+  t('schedule duration');
 
   return $field_instances;
 }

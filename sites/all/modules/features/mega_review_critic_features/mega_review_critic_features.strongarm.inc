@@ -212,19 +212,19 @@ function mega_review_critic_features_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '5',
+          'weight' => '4',
         ),
         'title' => array(
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '4',
+          'weight' => '3',
         ),
         'domain' => array(
-          'weight' => '1',
+          'weight' => '2',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '6',
         ),
       ),
       'display' => array(

@@ -11,18 +11,18 @@ function feature_for_reports_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'comparative_reports';
-  $view->description = 'Section wise comparative report using pie chart.';
+  $view->name = 'comparative_report_cm';
+  $view->description = 'report';
   $view->tag = 'default';
-  $view->base_table = 'taxonomy_term_data';
-  $view->human_name = 'Comparative reports';
+  $view->base_table = 'itg_category_manager';
+  $view->human_name = 'Comparative Report';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Comparative reports';
+  $handler->display->display_options['title'] = 'Comparative Report';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -33,9 +33,6 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '5';
   $handler->display->display_options['style_plugin'] = 'chart';
   $handler->display->display_options['style_options']['library'] = 'highcharts';
   $handler->display->display_options['style_options']['label_field'] = 'name';
@@ -51,63 +48,62 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['style_options']['height'] = '';
   $handler->display->display_options['style_options']['xaxis_labels_rotation'] = '0';
   $handler->display->display_options['style_options']['yaxis_labels_rotation'] = '0';
-  /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'No result Found!';
-  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Relationship: Category Manager: ITG */
+  $handler->display->display_options['relationships']['tid']['id'] = 'tid';
+  $handler->display->display_options['relationships']['tid']['table'] = 'itg_category_manager';
+  $handler->display->display_options['relationships']['tid']['field'] = 'tid';
+  $handler->display->display_options['relationships']['tid']['required'] = TRUE;
   /* Relationship: Taxonomy term: Content using Section */
   $handler->display->display_options['relationships']['reverse_field_story_category_node']['id'] = 'reverse_field_story_category_node';
   $handler->display->display_options['relationships']['reverse_field_story_category_node']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['relationships']['reverse_field_story_category_node']['field'] = 'reverse_field_story_category_node';
+  $handler->display->display_options['relationships']['reverse_field_story_category_node']['relationship'] = 'tid';
   $handler->display->display_options['relationships']['reverse_field_story_category_node']['required'] = TRUE;
-  /* Relationship: Taxonomy term: Parent term */
-  $handler->display->display_options['relationships']['parent']['id'] = 'parent';
-  $handler->display->display_options['relationships']['parent']['table'] = 'taxonomy_term_hierarchy';
-  $handler->display->display_options['relationships']['parent']['field'] = 'parent';
   /* Field: Taxonomy term: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = 'Section';
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['relationship'] = 'tid';
   /* Field: COUNT(Content: Title) */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'reverse_field_story_category_node';
   $handler->display->display_options['fields']['title']['group_type'] = 'count';
-  $handler->display->display_options['fields']['title']['label'] = 'Node Count';
-  /* Filter criterion: Taxonomy vocabulary: Machine name */
-  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
-  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
-  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
-  $handler->display->display_options['filters']['machine_name']['value'] = array(
-    'category_management' => 'category_management',
-  );
-  $handler->display->display_options['filters']['machine_name']['group'] = 1;
   /* Filter criterion: Taxonomy term: Parent term */
   $handler->display->display_options['filters']['parent']['id'] = 'parent';
   $handler->display->display_options['filters']['parent']['table'] = 'taxonomy_term_hierarchy';
   $handler->display->display_options['filters']['parent']['field'] = 'parent';
-  $handler->display->display_options['filters']['parent']['relationship'] = 'parent';
+  $handler->display->display_options['filters']['parent']['relationship'] = 'tid';
   $handler->display->display_options['filters']['parent']['value']['value'] = '0';
   $handler->display->display_options['filters']['parent']['group'] = 1;
+  /* Filter criterion: Taxonomy vocabulary: Machine name */
+  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['relationship'] = 'tid';
+  $handler->display->display_options['filters']['machine_name']['value'] = array(
+    'category_management' => 'category_management',
+  );
+  $handler->display->display_options['filters']['machine_name']['group'] = 1;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['relationship'] = 'reverse_field_story_category_node';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'blog' => 'blog',
+    'podcast' => 'podcast',
+    'story' => 'story',
+    'videogallery' => 'videogallery',
+    'photogallery' => 'photogallery',
+  );
   $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Content Type';
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
-  $handler->display->display_options['filters']['type']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -135,18 +131,18 @@ function feature_for_reports_views_default_views() {
     25 => 0,
     26 => 0,
   );
+  $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Taxonomy term: Term */
   $handler->display->display_options['filters']['tid']['id'] = 'tid';
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['value'] = '';
+  $handler->display->display_options['filters']['tid']['relationship'] = 'tid';
   $handler->display->display_options['filters']['tid']['group'] = 1;
   $handler->display->display_options['filters']['tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['tid']['expose']['operator_id'] = 'tid_op';
   $handler->display->display_options['filters']['tid']['expose']['label'] = 'Section';
   $handler->display->display_options['filters']['tid']['expose']['operator'] = 'tid_op';
   $handler->display->display_options['filters']['tid']['expose']['identifier'] = 'tid';
-  $handler->display->display_options['filters']['tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -181,6 +177,7 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
   $handler->display->display_options['filters']['date_filter']['relationship'] = 'reverse_field_story_category_node';
   $handler->display->display_options['filters']['date_filter']['operator'] = 'between';
+  $handler->display->display_options['filters']['date_filter']['group'] = 1;
   $handler->display->display_options['filters']['date_filter']['exposed'] = TRUE;
   $handler->display->display_options['filters']['date_filter']['expose']['operator_id'] = 'date_filter_op';
   $handler->display->display_options['filters']['date_filter']['expose']['label'] = 'Date Range';
@@ -220,20 +217,40 @@ function feature_for_reports_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'comparative-reports';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No Result Found!';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['path'] = 'comparative-report-list';
 
   /* Display: Data export */
   $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
-  $handler->display->display_options['defaults']['header'] = FALSE;
-  $handler->display->display_options['path'] = 'comparative-reports/csv-download';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'tid';
+  /* Field: COUNT(Content: Title) */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'reverse_field_story_category_node';
+  $handler->display->display_options['fields']['title']['group_type'] = 'count';
+  $handler->display->display_options['fields']['title']['label'] = 'Node Count';
+  $handler->display->display_options['path'] = 'comparative-report-list/download';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
   );
-  $export['comparative_reports'] = $view;
+  $export['comparative_report_cm'] = $view;
 
   $view = new view();
   $view->name = 'report_filed_content';
@@ -258,11 +275,6 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Header: Global: Result summary */
-  $handler->display->display_options['header']['result']['id'] = 'result';
-  $handler->display->display_options['header']['result']['table'] = 'views';
-  $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = 'Count(@total)';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';

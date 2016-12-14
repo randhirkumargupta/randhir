@@ -9,6 +9,7 @@ dependencies[] = itg_menu_manager
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
+features[image][] = menu_manager_icons
 features[image][] = vertical_menu_icons
 features[user_permission][] = administer itg menu manager
 features[views_view][] = menu_manager

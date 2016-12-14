@@ -10,34 +10,55 @@
             var video_field_id = settings.itg_dailymotion.settings.video_field_id;
             var video_field_file = settings.itg_dailymotion.settings.video_field_file;
             // FTP browse
+
+
             setTimeout(function() {
                 jQuery(".video-ftp").trigger("click");
             }, 1000);
-            $(".ftp-server a").click(function() {
-                var vid = $("#edit-video-browse-select .form-radio:checked").val();
-                if (vid !== "" && !$.isNumeric(vid)) {
+            $(".ftp-server a").click(function(e) {
+               
+                // Getting selected videos from checkboxes        
+
+                var selected_check_boxes_values = new Array();
+                var selected_check_boxes_index = 0;
+                $("input:checkbox[class=form-radio]:checked").each(function() {
+                    selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
+                });
+
+
+                parent.jQuery('#edit-field-video-upload-add-more-number').val(selected_check_boxes_values.length);
+                parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(selected_check_boxes_values.join());
+
+
+
+                //var vid = $("#edit-video-browse-select .form-radio:checked").val();
+
+                if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
 
-                    parent.jQuery("input[name='" + video_field_file + "'").val(vid);
+                    //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
+                    parent.jQuery("[name='field_video_upload_add_more']").mousedown();
 
-                    parent.jQuery("#" + video_field_id + "-button").mousedown();
+                    //parent.jQuery("#" + video_field_id + "-button").mousedown();
                     setTimeout(function() {
                         parent.jQuery.colorbox.close();
-                        $("#edit-video-browse-select .form-radio").prop("checked", false);
+                        //$("#edit-video-browse-select .form-radio").prop("checked", false);
                     }, 2000);
                 }
             });
+
+
             // Browse Local
-            $(".browse-local").click(function() {
-                parent.jQuery("#" + video_field_id + "").trigger('click');
-                parent.jQuery("#" + video_field_id + "").change(function() {
-                    parent.jQuery("#" + video_field_id + "").show();
-                    parent.jQuery("#" + video_field_id + "-button").show();
-                    parent.jQuery("#" + video_field_id + "-button").mousedown();
-                    parent.jQuery.colorbox.close();
-                });
-            });
+//            $(".browse-local").click(function() {
+//                parent.jQuery("#" + video_field_id + "").trigger('click');
+//                parent.jQuery("#" + video_field_id + "").change(function() {
+//                    parent.jQuery("#" + video_field_id + "").show();
+//                    parent.jQuery("#" + video_field_id + "-button").show();
+//                    parent.jQuery("#" + video_field_id + "-button").mousedown();
+//                    parent.jQuery.colorbox.close();
+//                });
+//            });
 
 
             // popup show hide
@@ -88,7 +109,7 @@
                     $(".video-ftp").trigger('click');
                     $('#video_text_search').val('');
                 }
-                else if(unused_value == 'used'){
+                else if (unused_value == 'used') {
                     $('#video_text_search').val('');
                     $('.used-unused-select').val('used');
                     $(".used-unused-select").trigger('change');
@@ -154,6 +175,22 @@ jQuery('document').ready(function() {
         });
 
     });
+
+
+    jQuery(".browse-local").click(function(e) {
+        var videogallery_new_file_hold = parseInt(jQuery('input[name="videogallery_new_file[fid]"]').val());
+        if (parseInt(jQuery('input[name="videogallery_new_file[fid]"]').val()) != 0) {
+            parent.jQuery('#edit-field-video-upload-add-more-number').val(1);
+            parent.jQuery("[name='field_video_upload[file_entity_holder_nums]']").val(videogallery_new_file_hold);
+            parent.jQuery("[name='field_video_upload_add_more']").mousedown();
+            setTimeout(function() {
+                parent.jQuery.colorbox.close();
+            }, 2000);
+        } else {
+            alert("Select video file and upload");
+        }
+    });
+
 });
 
 // Implement function for video search by title

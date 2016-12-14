@@ -116,7 +116,7 @@ class ItgStoryMigration extends XMLMigration {
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/story';
+    $item_xpath = '/root/story';
 
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /story/item/id.
@@ -259,15 +259,75 @@ class ItgStoryMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
-    // prepare row for listicle
-//   $data_listicle = '';
-//    if (isset($row->xml->fulltext_conclaveformat->listicle_content->listicle) && !empty($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
-//      foreach ($row->xml->fulltext_conclaveformat->listicle_content->listicle as $final_listicle) {
-//        $data_listicle[]['value'] = (string) $final_listicle;
-//      }
-//    }
-//    $row->listicle_new = $data_listicle;
-    // end prepare row for listicle
+    // Mosimage in body
+    if(!empty($row->xml->mosimage)){
+      $mos_count= array();
+      foreach($row->xml->mosimage->image as $images){
+        $image = (string)$images;
+        if(!empty($image)){
+          $mosimage_array[] = '<img src="'.$image.'">';
+        }
+      }
+     $mos_count = count($mosimage_array);
+    }
+
+    if(!empty($row->xml->storybody)){
+      $body_string = (string) $row->xml->storybody;
+      $mos_image_tag = substr_count($body_string, '{mosimage}');
+      if($mos_count >= $mos_image_tag){
+        $string = itg_dbmigrate_mosimage_replace($body_string, $mosimage_array, '{mosimage}');
+      }else{
+        $string = (string)$body_string;
+      }
+      $row->xml->storybody = $string;
+    }
+    
+    // blurb tags
+    if(!empty($row->xml->blurbs)){
+      $blurb_count = array();
+      foreach($row->xml->blurbs->blurb as $blurbs){
+        $blurb = (string)$blurbs;
+        if(!empty($blurb)){
+          $blurb_array[] = $blurb;
+        }
+      }
+      $blurb_count = count($blurb_array);
+    }
+    // Blurb assign to body
+      if(!empty($row->xml->storybody)){
+      $body_string = (string) $row->xml->storybody;
+      $blurb_tag = substr_count($body_string, '{blurb}');
+      if($blurb_count >= $blurb_tag){
+        $string = itg_dbmigrate_mosimage_replace($body_string, $blurb_array, '{blurb}');
+      }else{
+        $string = (string)$body_string;
+      }
+      $row->xml->storybody = $string;
+    }
+    
+    //Tabel tags
+    if(!empty($row->xml->tables)){
+      $table_count = array();
+      foreach($row->xml->tables->table as $tables){
+        $table = (string) $tables;
+        if(!empty($table)){
+          $table_array[] = $table;
+        }
+      }
+      $table_count = count($table_array);
+    }
+    
+    // Table assing to body
+    if(!empty($row->xml->storybody)){
+      $body_string = (string) $row->xml->storybody;
+      $table_tag = substr_count($body_string, '{table}');
+      if($table_count >= $table_tag){
+        $string = itg_dbmigrate_mosimage_replace($body_string, $table_array, '{table}');
+      }else{
+        $string = (string)$body_string;
+      }
+      $row->xml->storybody = $string;
+    }
     // prepare row for quote
     $data_quotes = '';
     if (isset($row->xml->fulltext_conclaveformat->quotes->quote) && !empty($row->xml->fulltext_conclaveformat->quotes->quote)) {
@@ -292,9 +352,11 @@ class ItgStoryMigration extends XMLMigration {
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
       foreach ($row->xml->categories->category as $final_category) {
         $category_array = explode('#', $final_category);
+        $array_count = count($category_array);
+        $table_name = itg_migrate_category_table($array_count);
         $last_value = end($category_array);
         $source_cid = (string) $last_value;
-        $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
+        $orignal_category = get_itg_destination_id($table_name, $source_cid);
         $data_category[]['tid'] = $orignal_category;
       }
     }
@@ -405,7 +467,12 @@ class ItgStoryMigration extends XMLMigration {
     // Primary category
     if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
       $source_cid = (string) $row->xml->primarycategory;
-      $orignal_pcategory = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
+      $pcategory_array = explode('#', $source_cid);
+      $parray_count = count($pcategory_array);
+      $table_name = itg_migrate_category_table($parray_count);
+      $last_value = end($pcategory_array);
+      $source_cid = (string) $last_value;
+      $orignal_pcategory = get_itg_destination_id($table_name, $source_cid);
       $row->xml->primarycategory = $orignal_pcategory;
     }
     //End primary category
@@ -503,7 +570,6 @@ class ItgStoryMigration extends XMLMigration {
       $key = 0;
       foreach ($row->xml->buzz_content->buzz as $buzz_value) {
         if(!empty($buzz_value->headline) || !empty($buzz_value->image) || !empty($buzz_value->description)){
-        drupal_set_message('<pre>'.print_r('Buzz content', 1).'<pre>');
         $headline = (string) $buzz_value->headline;
         $image_url = (string) $buzz_value->image;
         $file = file_save_data(file_get_contents($image_url), file_default_scheme() . '://' . basename($image_url), FILE_EXISTS_RENAME);
@@ -532,7 +598,6 @@ class ItgStoryMigration extends XMLMigration {
       $count=0;
      
       foreach ($row->xml->fulltext_conclaveformat->listicle_content->listicle as $value) {
-        drupal_set_message('<pre>'.print_r('Listcle content', 1).'<pre>');
         $listicle = (string) $value;
         $values = array(
           'field_name' => 'field_story_listicle',
@@ -550,15 +615,11 @@ class ItgStoryMigration extends XMLMigration {
      
     field_attach_update('node', $node);
    }
-   
    //code for like and dislike
-   if (isset($row->xml->like_dislike->like)) {
-     itg_flag_insert_like_dislike($node->nid, 'story', $row->xml->like_dislike->like);
+   if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+     itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
    }
-   
-   if (isset($row->xml->like_dislike->dislike)) {
-     itg_flag_insert_like_dislike($node->nid, 'story', $row->xml->like_dislike->dislike);
-   }
+
    
    //code for order set
    if (isset($row->xml->ordering)) {
@@ -567,4 +628,18 @@ class ItgStoryMigration extends XMLMigration {
    
   }
 
+}
+
+/**
+ * implement function to get category table
+ */
+function itg_migrate_category_table($level){
+  $table = array(
+    '1' => 'migrate_map_itgsection',
+    '2' => 'migrate_map_itgcategory',
+    '3' => 'migrate_map_itgsubcategory',
+    '4' => 'migrate_map_itgsubsubcategory',
+  );
+  
+  return $table[$level];
 }

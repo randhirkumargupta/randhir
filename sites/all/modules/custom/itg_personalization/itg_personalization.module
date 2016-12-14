@@ -78,10 +78,19 @@ function itg_personalization_home_page() {
   $f_name = $user_fields->field_first_name['und'][0]['value'];
   $l_name = $user_fields->field_last_name['und'][0]['value'];
   $data['full_name'] = $f_name . ' ' . $l_name;
+  $data['badge_detail'] = itg_personalization_badge($user->uid);
+  // Load badge icon.
+  if (isset($data['badge_detail']['earn']) && $data['badge_detail']['earn'] > 0) {
+    $file = file_load(variable_get('badge_' . $data['badge_detail']['earn'], ''));
+    // Render badge icone.
+    $data['badge_detail']['badge_icon'] = theme(
+        'image_style', array(
+      'style_name' => 'medium',
+      'path' => $file->uri,
+        )
+    );
+  }
 
-  // user logout link
-  //$data['logout'] = '<a href="javascript:void(0)" id="myhref">Logout</a>';
-  //$data['logout'] = l('Log out', 'user/logout');
   return theme('personalization_userpage', array('data' => $data));
 }
 
@@ -164,8 +173,8 @@ function itg_personalization_block_info() {
 function itg_personalization_block_view($delta = '') {
   global $user;
   // create url for edit profile
-  if($delta == 'personalization_edit_profile') {
-   $change_pass_url = 'http://'.PARENT_SSO.'/sso/change-password/'.base64_encode($_SERVER['HTTP_HOST']);
+  if ($delta == 'personalization_edit_profile') {
+    $change_pass_url = 'http://' . PARENT_SSO . '/sso/change-password/' . base64_encode($_SERVER['HTTP_HOST']);
   }
   $block = array();
   $output = '<ul class="profile-edit-tab">';
@@ -217,6 +226,50 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
   $arg = arg();
   if ($form_id == 'ugc_node_form' && $arg[0] == 'personalization') {
     // Hide user name field.
+
+    $content_type_for_icon = '<ul class="saved-item-tab">';
+    if (!empty($form['field_ugc_ctype']['und']['#options'])) {
+      $icone = "";
+      $i = 0;
+      foreach ($form['field_ugc_ctype']['und']['#options'] as $key => $values) {
+
+        if ($key == '_none') {
+          $values = 'Reset';
+          $icone = '<i class="fa fa-repeat" ></i>';
+        }
+        switch ($key) {
+          case 'story':
+            $icone = '<i class="fa fa-book" ></i>';
+            break;
+          case 'recipe':
+            $icone = '<i class="fa fa-cutlery" ></i>';
+            break;
+          case 'photogallery':
+            $icone = '<i class="fa fa-picture-o" ></i>';
+            break;
+          case 'videogallery':
+            $icone = '<i class="fa fa-video-camera" ></i>';
+            break;
+          case 'podcast':
+            $icone = '<i class="fa fa-volume-down" ></i>';
+            break;
+          case 'blog':
+            $icone = '<i class="fa fa-rss" ></i>';
+            break;
+        }
+        if ($i == 0) {
+          $content_type_for_icon .= '<li ><a href="javascript:void(0)" class="active perchange per-' . $key . '-icon" id="' . $key . '">' . $icone . ' ' . ucfirst($values) . '</a></li>';
+        }
+        else {
+          $content_type_for_icon .= '<li ><a href="javascript:void(0)" class="perchange per-' . $key . '-icon" id="' . $key . '">' . $icone . ' ' . ucfirst($values) . '</a></li>';
+        }
+
+
+        $i++;
+      }
+    }
+
+    $content_type_for_icon .= '</ul>';
     $form['field_user_name']['#prefix'] = '<div style="display: none;">';
     $form['field_user_name']['#suffix'] = '</div>';
     // Hide user email field.
@@ -228,6 +281,8 @@ function itg_personalization_form_alter(&$form, &$form_state, $form_id) {
     // Hide section field.    
     $form['field_section']['#prefix'] = '<div style="display: none;">';
     $form['field_section']['#suffix'] = '</div>';
+    $form['field_ugc_ctype']['#prefix'] = '<div class="per-icon">' . $content_type_for_icon . '</div><div style="display: none;">';
+    $form['field_ugc_ctype']['#suffix'] = '</div>';
     // Set field visibility for category field.
     $form['field_section']['#states'] = array(
       'visible' => array(
@@ -304,7 +359,7 @@ function itg_personalization_views_pre_render(&$view) {
   if ($view->name == 'personalization_my_content') {
     foreach ($view->result as $key => $value) {
       if ($view->result[$key]->node_status == '1' && empty($view->result[$key]->field_field_story_source_type)) {
-        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Pending';
+        $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Under review';
       }
       if ($view->result[$key]->node_status == '0' && empty($view->result[$key]->field_field_story_source_type)) {
         $view->result[$key]->field_field_story_source_type[0]['rendered']['#markup'] = 'Rejected';
@@ -382,7 +437,7 @@ function itg_personalization_reddem_referfriend($key) {
         ->fields(array('status' => 1))
         ->condition('referral_key', $key)
         ->condition('status', 0);
-    $itg_result = $itg_query->execute();    
+    $itg_result = $itg_query->execute();
   }
   catch (Exception $ex) {
     drupal_set_message($ex->getMessage(), 'error');
@@ -390,10 +445,10 @@ function itg_personalization_reddem_referfriend($key) {
   if ($itg_result) {
     try {
       $itg_query = db_select('itg_lrp_refer_friend', 'u');
-    $itg_query->fields('u', array('uid'))
-        ->condition('referral_key', $key)
-        ->condition('status', 1);
-    $itg_result = $itg_query->execute()->fetchField();
+      $itg_query->fields('u', array('uid'))
+          ->condition('referral_key', $key)
+          ->condition('status', 1);
+      $itg_result = $itg_query->execute()->fetchField();
     }
     catch (Exception $ex) {
       drupal_set_message($ex->getMessage(), 'error');
@@ -401,5 +456,5 @@ function itg_personalization_reddem_referfriend($key) {
     if ($itg_result) {
       itg_loyalty_reward_earnpoint(0, 'raf', $itg_result);
     }
-  } 
+  }
 }

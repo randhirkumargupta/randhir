@@ -132,8 +132,17 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'mega_review_critic_node_form' || $form_id=='custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form') {      
       $form['#after_build'][] = 'itg_common_cancel_button';
     }
+    if(is_array($form['#term']))
+    {
     if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {
       $form['#after_build'][] = 'itg_common_cancel_button';
+    }
+    }
+    if(is_object($form['#term']))
+    {
+     if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'movies') {
+      $form['#after_build'][] = 'itg_common_cancel_button';
+    }   
     }
     // Auto Generate image according photo gallery
     if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'podcast_node_form') {
@@ -757,7 +766,9 @@ function itg_common_views_pre_render(&$view) {
  * {@inheritdoc}. 
  */
 function itg_common_mail($key, &$message, $params) {  
-  switch ($key) {    
+  switch ($key) {
+    case 'personalisation_mail':
+    case 'lrp_point':
     case 'refer_a_friend':
       $headers = array(
         'MIME-Version' => '1.0',
@@ -783,6 +794,16 @@ function itg_common_theme() {
   $themes = array(    
     'itg_personalization_refer_friend_mail' => array(
       'template' => 'itg-refer-friend-mail',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_personalization_personalization_mail' => array(
+      'template' => 'itg-personalization-mail',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_loyalty_point_notification' => array(
+      'template' => 'itg-loyalty-point-notification-mail',
       'path' => drupal_get_path('module', 'itg_common') . '/templates',
       'variables' => array('data' => NULL),
     ),

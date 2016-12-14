@@ -81,16 +81,6 @@
                 }, "Address must contain only letters, numbers, or dashes.");
             }
 
-            // Redirect user to redeem points page after clicking on reset button.
-            if ($('body').hasClass('page-product')) {
-                var base_url = Drupal.settings.itg_loyalty_reward.base_url;
-                $('#product-reset').on('click', function (event) {
-                    event.preventDefault();
-                    test_loader_show();
-                    window.location.href = base_url + '/redeem-points';
-                });
-            }
-
             // Code for points earning callbacks.
             $('.share, .like, .visit, .follow, .ns, .ugc, .ol-register, .participate, .raf').on('click', function () {
                 //console.log(Drupal.settings.itg_loyalty_reward);
@@ -120,12 +110,18 @@
                     $('#edit-field-lrp-loyalty-points-value-min').val(spliteed_points[0]);
                     $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
                 });
+                $('#product-reset').on('click', function () {
+                    $('#edit-itg-points').find('option[value=""]').attr("selected", true);
+                });
             }
             $('#views-exposed-form-product-page').on('submit', function (event) {
                 var points = $('#edit-itg-points').find('option:selected').val();
-                var spliteed_points = points.split("-");
-                $('#edit-field-lrp-loyalty-points-value-min').val(spliteed_points[0]);
-                $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
+                if (points == '') {
+                    var spliteed_points = points.split("-");
+                    $('#edit-field-lrp-loyalty-points-value-min').val(spliteed_points[0]);
+                    $('#edit-field-lrp-loyalty-points-value-max').val(spliteed_points[1]);
+                }
+
 
             });
             // Display loader onclick of add to cart link.
@@ -139,8 +135,8 @@
                 if ($(this).hasClass('itg-remove-product')) {
                     var r = confirm("Do you really want to delete this product!");
                     if (r == false) {
-                      test_loader_hide();  
-                      event.preventDefault();  
+                        test_loader_hide();
+                        event.preventDefault();
                     }
                 }
             });
@@ -152,6 +148,39 @@
                 $('#widget-ajex-loader').hide();
             }
 
+            // Code for quantit update.
+            jQuery('select[name="quantity"]').on('change', function () {
+                var item_count = $(this).find('option:selected').text();
+                var encoded_id = $(this).find('option:selected').val();
+                var spliteed_id = encoded_id.split("-");
+                $.ajax({
+                    url: Drupal.settings.itg_loyalty_reward.base_url + "/cart/update",
+                    type: 'post',
+                    data: {'item_count': item_count, 'encoded_id': spliteed_id[0]},
+                    dataType: "JSON",
+                    success: function (data) {                        
+                        switch (data.code) {
+                            case -2:
+                                alert('Insufficient points to redeem this product.');
+                                location.reload();
+                                break;
+                                
+                            case -1:
+                                alert('Something went wrong please try after some time.');
+                                break;
+                                
+                            case 1:
+                                location.reload();
+                        }
+                    },
+                    beforeSend: function (xhr) {
+                        test_loader_show();
+                    },
+                    complete: function () {
+                        //test_loader_hide();
+                    }
+                });
+            });
 
             // Code end for product page.
 

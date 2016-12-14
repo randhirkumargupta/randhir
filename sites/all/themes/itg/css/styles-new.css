@@ -128,6 +128,9 @@
   background: #000;
   border: none;
 }
+#block-views-photo-landing-slider-block .slick-slider .slick-slide {
+  position: relative;
+}
 #block-views-photo-landing-slider-block .slick-slider .slick-prev {
   font: normal normal normal 14px/1 FontAwesome;
   cursor: pointer;
@@ -293,6 +296,22 @@
 #block-views-photo-landing-slider-block .photo-by {
   font-size: 14px;
   color: #626262;
+}
+#block-views-photo-landing-slider-block .saved-photogallery {
+  position: absolute;
+  background: #fff;
+  width: 315px;
+  height: 150px;
+  left: 50%;
+  top: 50%;
+  margin-left: -150px;
+  margin-top: -75px;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 26px;
+  font-family: roboto;
+  text-align: center;
+  line-height: 150px;
 }
 
 .itg-h450-section .widget-wrapper {
@@ -499,22 +518,23 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 /* CSS FOR FRONT USER PERSONALIZATION */
 .personalized-wrapper {
   background-color: #eaebed;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .personalized-user-area {
   display: table;
   max-width: 100%;
-  height: 240px;
   margin: 0 auto;
-  width: 800px;
+  width: 1170px;
 }
 
 .personalized-user {
   display: table-cell;
-  padding: 20px;
   text-align: center;
   vertical-align: middle;
   width: 260px;
+  border-right: 1px solid #ddd;
 }
 .personalized-user .user-pic {
   display: inline-block;
@@ -538,9 +558,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 
 .personalized-user-info {
   display: table-cell;
-  padding: 20px 0;
   text-align: center;
   vertical-align: middle;
+  width: 35%;
+  border-right: 1px solid #ddd;
+  padding: 0 20px;
 }
 .personalized-user-info span {
   padding: 0 20px;
@@ -548,7 +570,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   vertical-align: top;
 }
 .personalized-user-info span .fa {
-  font-size: 35px;
+  font-size: 20px;
   color: #8d8d8d;
 }
 .personalized-user-info span dfn {
@@ -557,6 +579,89 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-size: 16px;
   color: #323232;
   margin-top: 10px;
+}
+
+.total-point-wrapper {
+  display: table-cell;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  font-family: roboto;
+}
+.total-point-wrapper .total-point-value {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15px;
+  color: #8d8d8d;
+  font-size: 12px;
+}
+.total-point-wrapper .total-point-value span {
+  display: block;
+  font-size: 40px;
+  color: #9f0505;
+  font-weight: 700;
+  margin-top: 5px;
+  line-height: 30px;
+}
+.total-point-wrapper img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.total-point-wrapper .pregress-bar {
+  position: relative;
+  height: 40px;
+  margin-top: 20px;
+}
+.total-point-wrapper .pregress-bar .pregress-bar-active {
+  width: 320px;
+  background: #cdcdcd;
+  display: inline-block;
+  vertical-align: middle;
+  height: 6px;
+  border-radius: 10px;
+  position: relative;
+}
+.total-point-wrapper .pregress-bar .pregress-bar-active:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  height: 6px;
+  background: #a00606;
+  width: 10%;
+  border-radius: 10px;
+}
+.total-point-wrapper .pregress-bar span.current-badge, .total-point-wrapper .pregress-bar span.next-badge {
+  display: inline-block;
+  /* vertical-align: middle; */
+  position: absolute;
+  left: 40px;
+  top: -9px;
+  font-size: 12px;
+  color: #8c8c8e;
+  font-weight: 500;
+}
+.total-point-wrapper .pregress-bar span.current-badge small, .total-point-wrapper .pregress-bar span.next-badge small {
+  display: block;
+  font-size: 24px;
+  color: #000;
+  margin-bottom: 5px;
+}
+.total-point-wrapper .pregress-bar span.next-badge {
+  right: 48px;
+  left: auto;
+}
+.total-point-wrapper .points-to-go {
+  text-align: right;
+  padding-right: 48px;
+  color: #8c8c8e;
+}
+.total-point-wrapper .points-to-go span {
+  font-weight: 700;
+  color: #1a3c8d;
 }
 
 .block-itg-personalization {
@@ -633,6 +738,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .saved-item-tab {
   margin: 60px 0 30px;
   position: relative;
+  list-style: none;
+  display: inline-block;
+  vertical-align: top;
 }
 .saved-item-tab li {
   float: left;
@@ -665,6 +773,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   right: 0;
   margin: 0 auto;
   top: 100px;
+}
+
+.per-icon .saved-item-tab li a {
+  padding: 10px 18px;
 }
 
 .personal-list {
@@ -840,7 +952,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 
 #content #block-formblock-ugc {
   margin: 0 auto;
-  max-width: 720px;
+  max-width: 750px;
   text-align: left;
 }
 #content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype {
@@ -1044,6 +1156,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+#content #block-formblock-ugc .node-ugc-form .captcha {
+  max-width: 100%;
+  margin-left: 0;
+  border: 1px solid #e0e0e0;
 }
 #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
   margin-left: 0;
@@ -3096,6 +3213,10 @@ body.has-cart-popup {
 .page-order-summary #main {
   padding: 50px 0;
 }
+.page-order-summary .rhs-address {
+  border: 1px solid #ddd;
+  margin-bottom: 35px;
+}
 .page-order-summary .order-address-wrapper {
   background-color: #ededed;
   display: inline-block;
@@ -3153,6 +3274,14 @@ body.has-cart-popup {
 }
 .page-order-summary .cart-checkout-list .prd-title {
   font: 500 18px/24px Roboto;
+}
+.page-order-summary .lhs-redeem-point .cart-total-inner {
+  max-width: 100%;
+  text-align: left;
+}
+.page-order-summary .lhs-redeem-point .cart-total-inner .checkout {
+  display: inline-block;
+  vertical-align: top;
 }
 
 #change-address-popup {
@@ -3871,7 +4000,7 @@ body.has-cart-popup {
   margin: 20px 0;
 }
 #content .node-event_registration-form .form-type-textfield > label, #content .node-event_registration-form .form-type-textarea > label, #content .node-event_registration-form .form-type-select > label {
-  width: 180px;
+  width: 130px;
   padding-right: 10px;
   font-size: 15px;
   color: #000;
@@ -3887,8 +4016,8 @@ body.has-cart-popup {
   text-align: left;
   padding: 5px;
 }
-#content .node-event_registration-form div.description, #content .node-event_registration-form .form-type-textarea > label + div, #content .node-event_registration-form span.error {
-  padding-left: 180px;
+#content .node-event_registration-form div.description, #content .node-event_registration-form span.error {
+  padding-left: 130px;
 }
 #content .node-event_registration-form .form-type-radios > label + div .form-item {
   display: inline-block;
@@ -3901,7 +4030,7 @@ body.has-cart-popup {
   width: auto;
 }
 #content .node-event_registration-form .form-actions {
-  padding-left: 180px;
+  padding-left: 130px;
 }
 #content .node-event_registration-form .form-actions .form-submit {
   background-color: #ef3c24;
@@ -3946,6 +4075,7 @@ article.node-mega-review-critic .rating-and-social-wrapper {
   width: 100%;
 }
 article.node-mega-review-critic .rating-and-social-wrapper .movie-rating {
+  margin-top: 20px;
   float: left;
   width: 111px;
   height: 60px;
@@ -3994,26 +4124,42 @@ article.node-mega-review-critic .rating-and-social-wrapper div[data-star-value="
 }
 article.node-mega-review-critic .rating-and-social-wrapper .social-info {
   float: left;
-  width: 200px;
-  padding: 5px 10px;
-  border-left: 1px solid #c0c0c0;
-  margin-left: 20px;
+  margin-top: 20px;
 }
 article.node-mega-review-critic .rating-and-social-wrapper .social-info span {
+  color: #bebebe;
   float: left;
-  width: 25%;
-  padding: 5px;
+  font-family: roboto;
+  font-size: 12px;
+  padding: 5px 15px;
   text-align: center;
 }
 article.node-mega-review-critic .rating-and-social-wrapper .social-info span .fa {
   font-size: 18px;
   line-height: 22px;
-  color: #c0c0c0;
+  margin-top: 10px;
 }
 article.node-mega-review-critic .rating-and-social-wrapper .social-info span dfn {
   font: normal 400 12px/18px Roboto;
   display: block;
-  color: #989898;
+}
+article.node-mega-review-critic .rating-and-social-wrapper .social-info span.share-count {
+  color: #bebebe;
+  font-size: 12px;
+  border-right: 1px solid #c0c0c0;
+  margin-left: 20px;
+  margin-right: 10px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+article.node-mega-review-critic .rating-and-social-wrapper .social-info span.share-count i {
+  color: #bebebe;
+  display: block;
+  font-family: roboto;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
 }
 article.node-mega-review-critic .movie-review-wrapper {
   display: inline-block;
@@ -4052,6 +4198,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .review
   font: 400 14px/16px Roboto;
   overflow: hidden;
 }
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .review-row .review-txt .field-name-field-mega-review-cast .field-item {
+  display: inline-block;
+  vertical-aling: top;
+  margin-right: 5px;
+}
 article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer {
   margin: 10px 20px 0;
   padding-top: 4px;
@@ -4087,6 +4238,10 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   background: url(../images/rating-red.png) 0 0px/80px no-repeat;
   height: 18px;
   width: 0;
+}
+article.node-mega-review-critic .bottom-movie-desc {
+  color: #b7b7b7;
+  padding-top: 10px;
 }
 article.node-mega-review-critic .other-reviews {
   margin: 10px 0;
@@ -4163,6 +4318,9 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
   color: #212121;
   margin-top: 10px;
 }
+article.node-mega-review-critic .other-reviews .other-reviews-desc a {
+  color: #a00606;
+}
 
 .photos-videos-wrapper {
   display: inline-block;
@@ -4205,6 +4363,12 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
   padding-left: 0;
   padding-top: 20px;
 }
+.photos-videos-wrapper .movie-videos.full-width, .photos-videos-wrapper .movie-photos.full-width {
+  width: 100%;
+}
+.photos-videos-wrapper .movie-videos.full-width img, .photos-videos-wrapper .movie-photos.full-width img {
+  width: 100%;
+}
 .photos-videos-wrapper .movie-videos, .photos-videos-wrapper .movie-photos {
   padding: 0 15px;
 }
@@ -4230,7 +4394,7 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
 }
 
 .career-graph .career-graph-data {
-  margin-top: 150px;
+  margin-top: 80px;
   position: relative;
 }
 .career-graph .career-graph-data .gray-bg, .career-graph .career-graph-data .black-bg {
@@ -4257,6 +4421,9 @@ article.node-mega-review-critic .other-reviews .other-reviews-desc {
 }
 .career-graph .highcharts-container {
   background: #f7f7f7;
+}
+.career-graph + .vukkul-comment {
+  margin-top: 50px;
 }
 
 .overflow-x-auto {
@@ -4299,7 +4466,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   width: 74px;
 }
 
-article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="90%"]:after {
+article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer .other-reviews-rating[data-star-value="100%"]:after {
   width: 80px;
 }
 

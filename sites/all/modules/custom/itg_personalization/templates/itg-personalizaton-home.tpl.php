@@ -40,6 +40,26 @@
         <dfn>26</dfn>
       </span>
     </div>
+      <?php if (isset($data['badge_detail']['earn']) && $data['badge_detail']['earn'] > 1): ?>
+      <div class="total-point-wrapper">
+        <!-- Total Points -->        
+        <div class="total-points">
+            <span class="total-point-value">
+                <?php print t('TOTAL POINTS'); ?>
+                <span><?php print $data['badge_detail']['total']; ?></span>
+            </span>
+          <?php print render($data['badge_detail']['badge_icon']); ?>
+        </div>
+        <div class="pregress-bar">            
+            <span class="current-badge"><small><?php print $data['badge_detail']['earn']; ?></small>Current Level</span>
+            <span class="pregress-bar-active"></span>
+            <span class="next-badge"><small><?php print $data['badge_detail']['next']; ?></small>Next Level</span>
+        </div>
+        <div class="points-to-go">
+          <?php print '<span>'.$data['badge_detail']['points_to_go'] . '</span> ' . t('Points to go'); ?>
+        </div>
+      </div>
+      <?php endif; ?>
   </div>
  </div> 
 

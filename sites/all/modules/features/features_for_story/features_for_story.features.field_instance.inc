@@ -76,7 +76,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -113,7 +113,7 @@ function features_for_story_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -130,7 +130,7 @@ function features_for_story_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 1,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -147,7 +147,7 @@ function features_for_story_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -638,7 +638,7 @@ function features_for_story_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_primary_category',
     'label' => 'primary category',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,

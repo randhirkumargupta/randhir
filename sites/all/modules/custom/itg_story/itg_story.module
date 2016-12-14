@@ -123,8 +123,9 @@ function itg_story_theme($existing, $type, $theme, $path) {
  */
 function itg_story_ckeditor_plugin_alter(&$plugins) {
   $arg = arg();
-  if ($arg[0] == 'node' && $arg[1] == 'add' && $arg[2] != 'story') {
+  if (($arg[0] == 'node' && $arg[1] == 'add' && $arg[2] != 'story') || ($arg[0] == 'personalization' && $arg[1] == 'my-content')) {
     unset($plugins['factoids']);
+    unset($plugins['expertchunk']);
   }
 }
 
@@ -178,7 +179,15 @@ function itg_story_form_custom_callback($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
+  //pr($form['#id']);
+  $soruce_type_filter_display_views = array(
+    'views-exposed-form-strory-menegment-page',
+    'views-exposed-form-strory-menegment-page-1',
+    'views-exposed-form-strory-menegment-page-2',
+    'views-exposed-form-strory-menegment-page-7',
+    'views-exposed-form-strory-menegment-page-4',
+    ''
+  );
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-3' || $form['#id'] == 'views-exposed-form-strory-menegment-page-8' || $form['#id'] == 'views-exposed-form-strory-menegment-page-6' || $form['#id'] == 'views-exposed-form-strory-menegment-page-5' || $form['#id'] == 'views-exposed-form-strory-menegment-page-2' || $form['#id'] == 'views-exposed-form-strory-menegment-page-9' || $form['#id'] == 'views-exposed-form-strory-menegment-page-7' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12' || $form['#id'] == 'views-exposed-form-strory-menegment-page-1'
   ) {
     $form['title']['#autocomplete_path'] = 'content-title-list/story/autocomplete';
@@ -186,9 +195,34 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
     $form['nid']['#autocomplete_path'] = 'content-nid-list/story/autocomplete';
     $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
   }
-
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
     $form['field_story_configurations_value']['#options'] = array('All' => '- All -', 'display_lock' => 'Locked Story');
+  }
+
+  if (in_array($form['#id'], $soruce_type_filter_display_views)) {
+    $option = array("" => '-Any-' , "story" => "Story");
+    $query = db_select('field_data_field_story_source_type', 'st');
+    $query->leftJoin('node', 'n', 'n.nid=st.entity_id');
+    $query->condition('n.type', 'story')->distinct()
+        ->fields('st', array('field_story_source_type_value'));
+    $result = $query->execute()->fetchAll();
+    foreach ($result as $option_values) {
+      $option[$option_values->field_story_source_type_value] = $option_values->field_story_source_type_value;
+    }
+
+    $source_type = "<select class='form-item form-type-select' id='fake-soruce-type'>";
+    foreach ($option as $option_value => $option_element) {
+      if ($_GET['field_story_source_type_value'] == $option_value) {
+        $select = "selected";
+      }
+      else {
+        $select = "";
+      }
+      $source_type .= "<option value=\"$option_value\" $select>$option_element</option>";
+    }
+    $source_type .= "</select>";
+    $form['field_story_source_type_value']['#suffix'] = $source_type;
+    drupal_add_css("input#edit-field-story-source-type-value {display:none}", "inline");
   }
 }
 
@@ -525,4 +559,20 @@ function itg_get_video_display($nid) {
             src="https://www.dailymotion.com/embed/video/' . $vid . '?autoplay=0&mute=1&ui-start-screen-info"
             allowfullscreen></iframe>';
   return $content;
+}
+
+/**
+ * {@inheritdoc}
+ */
+function itg_story_views_query_alter(&$view, &$query) {
+  if ($view->name == 'strory_menegment') {
+    if ($_GET['field_story_source_type_value'] == "story") {
+      foreach ($query->where[1]['conditions'] as $keys => $field) {
+        if ($field['field'] == 'field_data_field_story_source_type.field_story_source_type_value') {
+          $query->where[1]['conditions'][$keys]['value'] = "";
+          $query->where[1]['conditions'][$keys]['operator'] = "IS NULL";
+        }
+      }
+    }
+  }
 }
