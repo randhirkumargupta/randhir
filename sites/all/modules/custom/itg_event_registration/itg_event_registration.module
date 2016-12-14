@@ -128,42 +128,57 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     if (isset($max_delta) && $max_delta >= $_SESSION['total_ava_ticket']) {
       unset($form['field_erf_registration_fee']['und']['add_more']);
     }
- 
-   unset($form['field_erf_registration_fee']['und'][0]['field_erf_ticket_type']['und']['#options']['_none']);
-//    $ticket_type_options = array(1=>'Student', 2=>'Young Professional', 3=>'Senior Citizen',4=>'Business Professional');
-//    $form['field_erf_registration_fee']['und'][0]['field_erf_ticket_type']['und']['#options'] = $ticket_type_options;
-
     
+    // Hide none option from ticket type
+    for($member = 0; $member < $max_delta; $member++) {
+      unset($form['field_erf_registration_fee']['und'][$member]['field_erf_ticket_type']['und']['#options']['_none']);
+    }
+  
     // Hide metatags and priview button
     unset($form['title']);
     unset($form['#metatags']);
     unset($form['actions']['preview']);
+    $form['field_erf_total_fee']['#access'] = FALSE;
     
     // Rename submit button from "Save" to "Submit"
     $form['actions']['submit']['#value'] = 'Submit';
-/*
+
     if (isset($current_event_nid)) {
       $event_node = node_load($current_event_nid);
       $registration_type = $event_node->field_event_type[LANGUAGE_NONE][0]['value'];
-
+ /*     
       if ($registration_type == 'free') {
-        // Hide fee field & payment drop-down field and display a message, if registration is free.
         unset($form['field_erf_total_fee']);
         $form['field_erf_payment_gateway']['#access'] = FALSE;
       } else {
-        $count_people = 0;
-        foreach ($form['#node']->field_erf_registration_fee[LANGUAGE_NONE] as $registered_people) {
-          if (!empty($registered_people['field_first_name'])) {
-            $count_people = $count_people + 1;
-          }
-        }
+        $form['total_fees_container'] = array(
+            '#prefix' => '<div class= "event-total-fees-container">',
+            '#title' => 'Total Fees',
+            '#type' => 'item',
+            '#markup' => '<span class="event-total-fees-text">Rs <span class"event-fees-amount">00</span> for <span class="event-number-of-members">1</span> Members',
+            '#suffix' => '</div>',
+            '#weight' => 10
+        );
       }
-      $total_fee = ceil($total_fee);
-    } */
-
-    $total_fee = $total_fee ? $total_fee : '0.00';
-    $form['field_erf_total_fee'][LANGUAGE_NONE][0]['value']['#value'] = $total_fee;
-    $form['field_erf_total_fee']['#disabled'] = TRUE;
+  * */
+    } 
+ 
+     $form['total_fees_container'] = array(
+        '#prefix' => '<div class= "event-total-fees-container">',
+        '#title' => 'Total Fees',
+        '#type' => 'item',
+        '#markup' => '<span class="event-total-fees-text">Rs <span class"event-fees-amount">00</span> for <span class="event-number-of-members">1</span> Members',
+        '#suffix' => '</div>',
+        '#weight' => 10
+    );
+     
+    $form['have_a_coupon_code'] = array(
+        '#prefix' => '<div class= "have-a-coupon-code">',
+        '#type' => 'item',
+        '#markup' => '<span class="event-number-of-members">Have a Coupon Code?</span> <a class="have-a-coupon-code-link" href="#">Apply</a>',
+        '#suffix' => '</div>',
+        '#weight' => 11
+    );
 
     // Assign event id into source id field
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $current_event_nid;
@@ -171,7 +186,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
     // After build and validate function 
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
-    $form['#validate'][] = 'itg_event_registration_form_validate';
+    //$form['#validate'][] = 'itg_event_registration_form_validate';
 
     // Call custom summit callback
     $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
@@ -220,13 +235,12 @@ function itg_event_registration_form_after_build($form, &$form_state) {
 
    // Dynamic title of each form
    $form['field_erf_registration_fee'][LANGUAGE_NONE]['#title'] = '';
-   //$form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
-   //$form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#suffix'] = '</div>';
    for ($ereg = 0; $ereg <= $form['field_erf_registration_fee']['und']['#max_delta']; $ereg++) {
      $count = $ereg + 1;
-     $form['field_erf_registration_fee']['und'][$ereg]['#title'] = t('Member ') . $count;
-     $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['und'][$ereg]['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
-     $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['und'][$ereg]['#suffix'] = '</div>';
+     $form['field_erf_registration_fee']['und'][$ereg]['#prefix'] = '<div class="event-registration-form-header" id="event-registration-memeber-'.$count.'">Member '.$count;
+     $form['field_erf_registration_fee']['und'][$ereg]['#suffix'] = '</div>';
+     $form['field_erf_registration_fee']['und'][$ereg]['field_erf_date_of_birth']['und'][0]['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
+     $form['field_erf_registration_fee']['und'][$ereg]['field_erf_date_of_birth']['und'][0]['#suffix'] = '</div>';
    }
    
   // If limited tickets are available
@@ -460,3 +474,5 @@ function itg_event_registration_get_form() {
   }
   return $form;
 }
+
+
