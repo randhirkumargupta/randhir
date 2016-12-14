@@ -48,10 +48,12 @@
   ?>
 </ul>
     </div>
-<!--<div class="vertical-more">    
-    <a href="javascript:void(0)">
-        <span class="more"><i class="fa fa-chevron-down" aria-hidden="true"></i> More</span>
-        <span class="less"><i class="fa fa-chevron-up" aria-hidden="true"></i> Less</span>
+<div class="vertical-more">    
+    <a class="more" href="javascript:void(0)">
+        <span><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
     </a>    
-</div>-->
+    <a class="less" href="javascript:void(0)" style="display: none">
+        <span><i class="fa fa-chevron-up" aria-hidden="true"></i></span>
+    </a>    
+</div>
 

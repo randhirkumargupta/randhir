@@ -220,12 +220,13 @@ function itg_event_registration_form_after_build($form, &$form_state) {
 
    // Dynamic title of each form
    $form['field_erf_registration_fee'][LANGUAGE_NONE]['#title'] = '';
-   $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
-   $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#suffix'] = '</div>';
+   //$form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
+   //$form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#suffix'] = '</div>';
    for ($ereg = 0; $ereg <= $form['field_erf_registration_fee']['und']['#max_delta']; $ereg++) {
      $count = $ereg + 1;
      $form['field_erf_registration_fee']['und'][$ereg]['#title'] = t('Member ') . $count;
-     //$form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['und'][$ereg]['#title'] = 'Date of Birth';
+     $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['und'][$ereg]['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
+     $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['und'][$ereg]['#suffix'] = '</div>';
    }
    
   // If limited tickets are available
