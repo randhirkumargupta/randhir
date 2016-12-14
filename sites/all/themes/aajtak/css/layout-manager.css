@@ -463,20 +463,20 @@
   position: relative;
   height: 260px;
 }
-/* line 513, ../sass/_itg-mixins.scss */
+/* line 558, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .category-name {
   background-color: #dc4750;
   border-radius: 4px 4px 0 0;
   color: #fff;
   height: 20px;
 }
-/* line 521, ../sass/_itg-mixins.scss */
+/* line 566, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .title {
   height: 40px;
   overflow: hidden;
   margin: 10px 10px 8px;
 }
-/* line 525, ../sass/_itg-mixins.scss */
+/* line 570, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .title a {
   color: #000;
   display: block;
@@ -485,12 +485,12 @@
   font-weight: 700;
   line-height: 20px;
 }
-/* line 533, ../sass/_itg-mixins.scss */
+/* line 578, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .pic {
   height: 148px;
   overflow: hidden;
 }
-/* line 539, ../sass/_itg-mixins.scss */
+/* line 584, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .name {
   display: inline-block;
   vertical-align: top;
@@ -502,7 +502,7 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 549, ../sass/_itg-mixins.scss */
+/* line 594, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .date {
   display: inline-block;
   vertical-align: top;
@@ -514,7 +514,7 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 559, ../sass/_itg-mixins.scss */
+/* line 604, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .date:before {
   content: '|';
   position: absolute;
@@ -580,20 +580,20 @@
   position: relative;
   height: 260px;
 }
-/* line 513, ../sass/_itg-mixins.scss */
+/* line 558, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .category-name {
   background-color: #dc4750;
   border-radius: 4px 4px 0 0;
   color: #fff;
   height: 20px;
 }
-/* line 521, ../sass/_itg-mixins.scss */
+/* line 566, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .title {
   height: 40px;
   overflow: hidden;
   margin: 10px 10px 8px;
 }
-/* line 525, ../sass/_itg-mixins.scss */
+/* line 570, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .title a {
   color: #000;
   display: block;
@@ -602,12 +602,12 @@
   font-weight: 700;
   line-height: 20px;
 }
-/* line 533, ../sass/_itg-mixins.scss */
+/* line 578, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .pic {
   height: 148px;
   overflow: hidden;
 }
-/* line 539, ../sass/_itg-mixins.scss */
+/* line 584, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .name {
   display: inline-block;
   vertical-align: top;
@@ -619,7 +619,7 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 549, ../sass/_itg-mixins.scss */
+/* line 594, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .date {
   display: inline-block;
   vertical-align: top;
@@ -631,7 +631,7 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 559, ../sass/_itg-mixins.scss */
+/* line 604, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .date:before {
   content: '|';
   position: absolute;

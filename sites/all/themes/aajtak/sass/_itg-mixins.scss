@@ -503,7 +503,52 @@ $root-font-size: 16px;
     z-index: -1;
   }
 }
-
+@mixin icon-list($left: null, $right: null, $top: null, $bottom: null){
+  border: none;
+  border-radius: 50%;
+  height: 36px;
+  margin: 0 auto;
+  position: absolute;
+  @if($left != null){
+    left: $left;
+  }
+  @if($right != null){
+    right: $right;
+  }
+  @if($top != null){
+    top: $top;
+  }
+  @if($bottom != null){
+    bottom: $bottom;
+  }
+  padding: 11px 12px;
+  transition: .25s ease-in-out;
+  transform: rotate(0);
+  width: 36px;
+  cursor: pointer;
+  z-index: 9;
+  span {
+    background: #fff;
+    display: block;
+    height: 1px;
+    margin-bottom: 5px;
+    position: relative;
+    width: 15px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0);
+    transition: .25s ease-in-out;
+    &:before {
+      content: "";
+      box-shadow: 2px 1px 0 1px #fff;
+      display: block;
+      height: 0;
+      left: -6px;
+      position: relative;
+      width: 0;
+    }
+  }
+}
 @mixin aajtak-tile($tile-height: null, $category-name: null, $title: null, $pic: null, $posted-by: null, $posted-date: null, $icon-list: null, $pic-height: null){ 
   text-align: center;
   position: relative;

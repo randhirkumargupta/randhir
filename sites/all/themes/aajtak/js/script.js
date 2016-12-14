@@ -22,6 +22,14 @@
     /*==========================================================================*/
     
       // jquery code to add aajtak Big story format related content slider
+      $('.promoted-to-front').slick({
+        infinite: false,
+        slidesToShow: 1,
+        variableWidth: true,
+        slidesToScroll: 1
+      });
+      
+      // jquery code to add aajtak Big story format related content slider
       $('.big-story-related-content').slick({
         infinite: true,
         slidesToShow: 3,
