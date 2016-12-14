@@ -1894,24 +1894,31 @@ footer{
                     font-weight: normal;
                     padding: 0px 6px;                    
                     white-space: nowrap;
+                    display: none;
                     a{
                         color: #404040;
                         font-size: 11px;
                         font-family: roboto;    
                         position: relative;
                         &:before{
+                            content: '';
                             position: absolute;
                             width: 0; 
                             height: 0; 
-                            border-left: 5px solid transparent;
-                            border-right: 5px solid transparent;
-                            border-top: 5px solid #fff;
+                            border-left: 7px solid transparent;
+                            border-right: 7px solid transparent;  
+                            border-bottom: 7px solid #fff;
                             position: absolute;
-                            top: -5px;
+                            top: -7px;
                             left: 50%;
                             margin-left: -5px;
                         }
                     }
+                }
+                &:hover{
+                    .person{
+                        display: block;   
+                    }                    
                 }
             }
         }

@@ -2370,6 +2370,7 @@ footer .footer-copyright {
   font-weight: normal;
   padding: 0px 6px;
   white-space: nowrap;
+  display: none;
 }
 .story-section .story-right .stryimg .tagview .person a {
   color: #404040;
@@ -2378,16 +2379,20 @@ footer .footer-copyright {
   position: relative;
 }
 .story-section .story-right .stryimg .tagview .person a:before {
+  content: '';
   position: absolute;
   width: 0;
   height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid #fff;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #fff;
   position: absolute;
-  top: -5px;
+  top: -7px;
   left: 50%;
   margin-left: -5px;
+}
+.story-section .story-right .stryimg .tagview:hover .person {
+  display: block;
 }
 .story-section .snap-post {
   padding: 20px 20px 20px 70px;
