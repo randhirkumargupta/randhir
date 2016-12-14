@@ -51,7 +51,10 @@
             .menu {
                 margin-left: 135px;
                 margin-right: 50px;
-                padding-left: 0;                               
+                padding-left: 0; 
+                li a{
+                    padding: 0 8px;
+                }
             }
         }
     } 
@@ -267,6 +270,13 @@
     min-height: auto;
 }
 /*css start photo landing*/
+
+/*story page css start*/
+.story-section .social-list li{
+    padding: 10px 10px 5px;
+}
+/*story page css end*/
+
 }   
 @media only screen and (max-width:991px){
     /*CSS start education page special*/
@@ -305,6 +315,19 @@
     }
 }
 /* end Event page mobile nav*/
+/*story page css*/
+.story-section .byline .profile-detail ul li.title{
+    border-right: 1px solid #ddd;
+}
+.story-section .byline{
+    margin-bottom:15px;
+    .profile-detail ul.date-update li{
+        +li{
+            border-left: 1px solid #ddd;    
+        }
+    } 
+}
+/*story page css add*/
 }
 
 @media only screen and (max-width:768px){
@@ -1182,6 +1205,15 @@
         }
     }
     /*end event page*/
+    /*story page css*/
+    .story-section .story-expert-opinion{    
+        width: 280px;
+        float: none;    
+        padding: 10px 15px;    
+        margin: 0 auto;
+    }
+    /*story page css end*/
+    
 }
 
 /*Start header CSS Desktop version*/

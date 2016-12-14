@@ -32,7 +32,27 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_we_may_su
  * {@inheritdoc}
  */
 function itg_widget_form_views_form_key_candidate_special_key_candidate_widget_list_alter(&$form, &$form_state, $form_id) {
-  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_key_candidate";
+  // Js added for alter colum name.
+    $draggable_form = $form['draggableviews'];
+  foreach ($draggable_form as $form_key => $from_node) {
+    // Escape #tree as draggable view proview 1st option tree
+    if (is_integer($form_key)) {
+      $default_value = isset($form['draggableviews'][$form_key]['id']['#value']) ? $form['draggableviews'][$form_key]['id']['#value'] : "";
+      $form['draggableviews'][$form_key]['custom_text'] = array(
+          "#type" => "textfield",
+          "#size" => '',
+          // get value which is saved into custom_table.
+          '#default_value' => _get_constituency_value_from_nid($default_value, 'key_candidate'),
+          '#attributes' => array("placeholder" => array(t("Please Enter Constituency"))),
+      );
+    }
+  }
+  drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery("#draggableviews-table-key-candidate-special-key-candidate-widget-list").find("th.tabledrag-hide").html("Constituency");
+          });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+
+  drupal_add_css('#draggableviews-table-key-candidate-special-key-candidate-widget-list .tabledrag-hide {display:table-cell !important;} .draggableviews-weight {display:none}', 'inline');
+    $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_key_candidate";
 }
 
 
@@ -416,24 +436,25 @@ function update_itg_widget_order_table_data_for_key_candidate($form, &$form_stat
   foreach ($draggable_view_data as $key => $value) {
     $weightcount = $datacount + $value['weight'];
   }
+
   // Get extra , nid , content type from custom_table because it will further use to insert again.
   foreach ($draggable_view_data as $key => $value) {
       
     if ($weightcount > 0) {
-        $electionstatus='node-'.$value['id'];
+        
       db_update('itg_widget_order')
-              ->fields(array('weight' => $value['weight'],))
+              ->fields(array('weight' => $value['weight'],'constituency' => $value['custom_text']))
               ->condition('widget', 'key_candidate')
-              ->condition('nid', $value['id'])
+              ->condition('id', $value['id'])
               ->execute();
     }
-//    else {
-//      db_update('itg_widget_order')
-//              ->fields(array('extra' => $form_state['input'][$electionstatus],))
-//              ->condition('widget', 'key_candidate')
-//              ->condition('nid', $value['id'])
-//              ->execute();
-//    }
+    else {
+      db_update('itg_widget_order')
+              ->fields(array('constituency' => $value['custom_text'],))
+              ->condition('widget', 'key_candidate')
+              ->condition('id', $value['id'])
+              ->execute();
+    }
   }
   
 }
@@ -658,4 +679,18 @@ function _get_custom_text_value_from_nid($nid, $widget = 'dont_miss_content_widg
                   ->condition('iwo.widget', $widget)
                   ->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['extra'];
+}
+/**
+ * Funtion to get extra value if already saved used for dont miss widget.
+ *
+ * @param int $nid
+ * @return array
+ */
+function _get_constituency_value_from_nid($nid, $widget = 'key_candidate') {
+  $result = db_select('itg_widget_order', 'iwo')
+                  ->fields('iwo', array('constituency'))
+                  ->condition('iwo.id', $nid)
+                  ->condition('iwo.widget', $widget)
+                  ->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result[0]['constituency'];
 }

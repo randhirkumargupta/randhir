@@ -879,7 +879,7 @@ window.addEventListener("message", function(ev) {
 </script>
 <?php } ?>
 
-<div class="activate-message">
+<div class="activate-message" style="display:none">
   <div class="message-body">
     <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
     <p>Your Account Activated Successfully!</p>

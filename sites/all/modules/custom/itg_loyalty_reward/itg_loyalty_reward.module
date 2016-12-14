@@ -68,10 +68,6 @@ function itg_loyalty_reward_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward.product.inc',
   );
-
-
-
-
   // Cart remove product.
   $items['cart/delete/%'] = array(
     'page callback' => 'itg_loyalty_reward_removecart',
@@ -127,8 +123,8 @@ function itg_loyalty_reward_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_loyalty_reward.checkout.inc',
   );
-   
-  
+
+
 
   return $items;
 }
@@ -294,10 +290,10 @@ function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, 
     $form['title']['#autocomplete_path'] = 'content-title-list/loyalty_and_rewards/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Product Title'));
   }
-  if ($form['#id'] == 'views-exposed-form-product-page') {    
+  if ($form['#id'] == 'views-exposed-form-product-page') {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js',
-    );    
+    );
     $form['field_lrp_category_value']['#options']['All'] = 'Category';
     $form['reset']['#attributes'] = array('id' => array('product-reset'));
     $form['itg-points'] = array(
@@ -307,7 +303,7 @@ function itg_loyalty_reward_form_views_exposed_form_alter(&$form, &$form_state, 
         '0-500' => '0-500',
         '501-1000' => '501-1000',
         '1001-10000' => '1001-10000'
-      ),      
+      ),
     );
     $form['field_lrp_loyalty_points_value']['#prefix'] = '<div style="display:none">';
     $form['field_lrp_loyalty_points_value']['#suffix'] = '</div>';
@@ -324,9 +320,8 @@ function itg_loyalty_reward_node_insert($node) {
       $query = db_insert('itg_loyalty_reward_cron');
       $query->fields(array(
         'nid' => $node->nid,
-        'type' => $node->type,
-        //'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours'),
-           'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']),
+        'type' => $node->type,        
+        'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']),
         'status' => 0,
         'created' => time()
       ));
@@ -346,22 +341,13 @@ function itg_loyalty_reward_node_update($node) {
   switch ($node->type) {
     case 'loyalty_and_rewards':
       $curr_time = time();
-    //  $product_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
-      // If product expiry date is update and set to future
-     // if ($product_expiry_date > $curr_time) { comment if node user update expire date
-        db_update('itg_loyalty_reward_cron')
-            ->fields(array(
-              'status' => 0,
-              //'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours')
-                'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])
-            ))
-            ->condition('nid', $node->nid, '=')
-            ->execute();
-     // }
-      break;
-
-    default:
-      break;
+      db_update('itg_loyalty_reward_cron')
+          ->fields(array(
+            'status' => 0,
+            'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])
+          ))
+          ->condition('nid', $node->nid, '=')
+          ->execute();
   }
 }
 
@@ -379,7 +365,7 @@ function itg_loyalty_reward_cronapi($op, $job = NULL) {
     'description' => 'Send mail before 24 hours for point expiration (Loyalty)',
     'callback' => 'itg_loyalty_reward_points_expire_notification_callback',
   );
-  
+
   return $items;
 }
 
@@ -387,12 +373,9 @@ function itg_loyalty_reward_cronapi($op, $job = NULL) {
  * Send mail to siteadmin and editor before 24 hours of product expiration
  */
 function itg_loyalty_reward_product_expiry_notification_callback() {
-
   // Include itg_loyalty_reward mail file to send mail
   module_load_include('inc', 'itg_loyalty_reward', 'includes/itg_loyalty_reward_mail');
-
   $current_time = time();
-
   $query = db_select('itg_loyalty_reward_cron', 'c');
   $query->fields('c')
       ->condition('c.status', 0, '=');
