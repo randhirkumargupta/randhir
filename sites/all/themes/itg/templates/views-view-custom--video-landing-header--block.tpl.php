@@ -1,5 +1,7 @@
 <?php
 // config for sharing
+         global $base_url; 
+         $nid = check_plain(arg(1)); 
          $video_node = node_load(arg(1));
          $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
          $short_url = shorten_url($actual_link, 'goo.gl');
@@ -28,7 +30,7 @@
             <ul>
               <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span>585</span></a></li>
               <li><?php print $row['ops']; ?></li>
-              <li><a href="javacript:void();" title ="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
+              <li><a href="javacript:void();" title ="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
               <li><a href="javacript:void();" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
               <li><a href="mailto:?body=<?php print urlencode($actual_link);?>" title="Email"><i class="fa fa-envelope"></i> <span>Email</span></a></li>
               <li class="mhide"><a href="#" title="Embed"><i class="fa fa-link"></i> <span>Embed</span></a></li>
