@@ -1399,8 +1399,20 @@ footer .footer-copyright {
 .big-news .big-story-col-1, .big-news .big-story-col-2 {
   padding: 0 15px;
 }
+.big-news .big-story-col-1 {
+  position: relative;
+}
 .big-news .big-story-col-1 .story-tag {
   position: absolute;
+  margin: 0px 0 0 15px;
+}
+.big-news .big-story-col-1 .loading-popup {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  margin-left: -15px;
+  margin-top: -15px;
+  display: none;
 }
 .big-news h1 {
   position: relative;
@@ -2339,6 +2351,43 @@ footer .footer-copyright {
   background: #a00606;
   height: 5px;
   width: 5px;
+}
+.story-section .story-right .stryimg .tagview {
+  position: absolute;
+  width: 70px;
+  height: 50px;
+  text-align: center;
+}
+.story-section .story-right .stryimg .tagview .person {
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25), 0 1px 5px 3px rgba(0, 0, 0, 0.05);
+  background-clip: padding-box;
+  border: 1px solid #404040;
+  border-color: rgba(0, 0, 0, 0.25);
+  text-align: center;
+  background: #fff;
+  color: #404040;
+  cursor: default;
+  font-weight: normal;
+  padding: 0px 6px;
+  white-space: nowrap;
+}
+.story-section .story-right .stryimg .tagview .person a {
+  color: #404040;
+  font-size: 11px;
+  font-family: roboto;
+  position: relative;
+}
+.story-section .story-right .stryimg .tagview .person a:before {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #fff;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  margin-left: -5px;
 }
 .story-section .snap-post {
   padding: 20px 20px 20px 70px;
@@ -8605,15 +8654,17 @@ footer .footer-copyright {
 .election-page .left-side .itg-photo .droppable {
   height: 494px;
 }
+.election-page .right-side .itg-325 {
+  /*      .data-holder{
+            overflow: auto;
+        }*/
+}
 .election-page .right-side .itg-325 .droppable {
   height: 325px;
 }
 .election-page .right-side .itg-325 .most_popular {
   border: none;
   overflow: inherit;
-}
-.election-page .right-side .itg-325 .data-holder {
-  overflow: auto;
 }
 .election-page .right-side .itg-484 .droppable {
   height: 484px;
@@ -8640,6 +8691,7 @@ footer .footer-copyright {
 }
 .election-page .highlight {
   overflow: auto;
+  max-height: 282px;
 }
 .election-page .trending-videos {
   padding: 0;
@@ -8683,6 +8735,8 @@ footer .footer-copyright {
 }
 .election-page .key-candidate {
   font-family: "Roboto", sans-serif;
+  max-height: 282px;
+  overflow: auto;
 }
 .election-page .key-candidate .most_popular {
   border: none;
@@ -10207,3 +10261,48 @@ footer .footer-copyright {
 }
 
 /*budget predictor css end*/
+/*css start big story format*/
+#block-itg-widget-big-story-format #videogallery-iframe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.76);
+  display: none;
+}
+#block-itg-widget-big-story-format #videogallery-iframe iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 350px;
+  margin-left: -300px;
+  margin-top: -175px;
+}
+#block-itg-widget-big-story-format #videogallery-iframe #close-big-story {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #000;
+  z-index: 99;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  text-align: center;
+  border-radius: 100%;
+  line-height: 30px;
+  font-weight: 900;
+  cursor: pointer;
+}
+#block-itg-widget-big-story-format #videogallery-iframe #close-big-story a {
+  color: #000;
+  font-family: roboto;
+}
+#block-itg-widget-big-story-format .live-tv-big-story {
+  margin-bottom: 50px;
+}
+
+/*css end big story format*/
