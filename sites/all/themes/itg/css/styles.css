@@ -3288,7 +3288,8 @@ footer .footer-copyright {
   vertical-align: top;
   padding: 10px 10px 0 0;
 }
-#block-views-anchor-landing-page-block .anchor-right .social-icon ul li i {
+#block-views-anchor-landing-page-block .anchor-right .social-icon ul li a i {
+  color: #818181;
   font-size: 20px;
   font-size: 1.25rem;
 }
@@ -9036,9 +9037,8 @@ footer .footer-copyright {
 /*eND CSS LIVE tv */
 /*vertical menu fixed position*/
 #block-itg-menu-manager-vertical-menu {
-  position: absolute;
-  top: 50px;
-  left: -75px;
+  position: fixed;
+  top: 270px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 2px 2px 3px #ccc;
@@ -9101,19 +9101,16 @@ footer .footer-copyright {
   color: #959595;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more {
-  padding: 10px 5px;
   display: none;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a {
   display: block;
+  padding: 5px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a i {
   display: block;
   color: #959595;
-  font-size: 26px;
-}
-#block-itg-menu-manager-vertical-menu .vertical-more a span.less {
-  display: none;
+  font-size: 20px;
 }
 
 /*email and change password start*/

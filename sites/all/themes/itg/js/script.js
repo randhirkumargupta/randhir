@@ -534,15 +534,42 @@ jQuery(document).ready(function () {
     } else {
         return false;
     }*/
+   var el = jQuery('#block-itg-menu-manager-vertical-menu');
+    var totlWidth = jQuery(window).width();
+    var finalWidth = (totlWidth - 1170) / 2 ;
+    el.css('left', finalWidth - 70 + 'px');        
+     if (el.length) { 
+      //var stickyTop = el.offset().top; 
+      var stickyHeight = el.height();
+
+      jQuery(window).scroll(function(){ 
+          var limit = jQuery('footer').offset().top - stickyHeight - 20;
+          var flimit = limit - 375;          
+          var windowTop = jQuery(window).scrollTop();           
+        if(windowTop > flimit){            
+               el.css({
+                   'position': 'absolute',
+                   'left': -55 + 'px',
+                   'top': flimit - 175 + 'px'
+               })   
+        }
+        else{
+            el.css({
+                   'position': 'fixed',
+                   'left': finalWidth - 70 + 'px',
+                   'top': 270 + 'px'
+               })
+        }
+        });
+   }
+    
+    
     var menuLength  = jQuery('.vertical-menu li').length;
     if (menuLength > 5) {
         jQuery('.vertical-more').show();
-    }
-   // var clicked = true;
+    }   
     var calcNum = menuLength % 5;
-    var divNum = parseInt(menuLength/5);
-    console.log(calcNum);
-    console.log(divNum);
+    var divNum = parseInt(menuLength/5);    
     var count = 0;
     jQuery('.vertical-more a.more').click(function () {
         count ++;        
