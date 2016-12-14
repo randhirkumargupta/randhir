@@ -4,14 +4,14 @@
  * @file
  * The ITG Flag module.
  *
- * Contains functionality for Flag. *
+ * Contains functionality for Flag.
  */
 
 /**
  * Tmplements hook_init()
  */
 function itg_flag_init() {
-  global $user, $base_url;
+  global $user, $base_url;  
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   if (isset($_GET['referral_key']) && !empty($_GET['referral_key'])) {
