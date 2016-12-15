@@ -345,20 +345,30 @@ if (!empty($content)):
                 }
                 ?>
 
-
-              <div class="section-left-bototm">
-                  <div class="social-list">
-                      <ul>
-                          <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                          <li class="mhide"><div id="fb-root"></div><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                          <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                          <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                          <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
-                          <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
-                          <li><span>Edited by</span> Arunava Chatterjee</li>
-                          <li><a href="#">follow the Story</a></li>
-                      </ul>
-                  </div>
+                <div class="section-left-bototm">
+                    <div class="social-list">
+                        <ul>
+                            <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
+                            <li class="mhide"><div id="fb-root"></div><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>, '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                            <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                            <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                              <?php
+                              if (function_exists(global_comment_last_record)) {
+                                $last_record = $global_comment_last_record;
+                                $config_name = trim($last_record[0]->config_name);
+                              }
+                              if ($config_name == 'vukkul') {
+                                ?>
+                                <li class="mhide"><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
+                              <?php } if ($config_name == 'other') { ?> 
+                                <li class="mhide"><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
+                              <?php } ?>
+                            <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
+                            <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
+                            <li><span>Edited by</span> Arunava Chatterjee</li>
+                            <li><a href="#">follow the Story</a></li>
+                        </ul>
+                    </div>
 
                     <?php if (!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
                         <div class="snap-post">
