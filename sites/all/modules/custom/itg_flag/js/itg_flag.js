@@ -13,7 +13,8 @@
 
                 var nd_id = jQuery(this).attr('rel');
                 var typ = jQuery(this).attr('id');
-                var post_data = "&nd_id=" + nd_id + "&typ=" + typ;
+                var dtag = jQuery(this).attr('data-tag');
+                var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag;
 
                 $.ajax({
                     'url': base_url + '/flag-details-ajax',
@@ -31,6 +32,12 @@
                         $('#widget-ajex-loader').hide();
                         if (obj.type == 'like_count') {
                             $("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
+                        }
+                        if (obj.chk == 'sty') {
+                            $("#sty-dv").show(0).delay(4000).hide(3000);
+                        }
+                        if (obj.chk == 'dsty') {
+                            $("#dsty-dv").show(0).delay(4000).hide(3000);
                         }
                         if (obj.type == 'dislike_count') {
                             $("#no-of-dislikes_" + obj.nd_id).html("(" + obj.count + ")");

@@ -46,6 +46,7 @@ function itg_flag_details() {
   global $user;
   $nd_id = $_POST['nd_id'];
   $typ = $_POST['typ'];
+  $dtag = $_POST['dtag'];
   if(isset($_COOKIE['likeDislike'."_".$nd_id])) {
     $response = array('error' => 'error', 'nd_id' => $nd_id);
     print json_encode($response);
@@ -72,9 +73,18 @@ function itg_flag_details() {
       itg_loyalty_reward_earnpoint($nd_id, 'like', $user->uid);
     }
   }
-
-  $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id);
-  print json_encode($response);
+  if ($dtag != 'undefined') {
+      if ($dtag == 'sty') {
+        $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id, 'chk' => 'sty');
+      }
+      if ($dtag == 'dsty') {
+        $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id, 'chk' => 'dsty');
+      }
+    }
+    else {
+      $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id);
+    }
+    print json_encode($response);
   }
 }
 

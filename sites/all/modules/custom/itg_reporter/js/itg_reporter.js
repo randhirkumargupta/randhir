@@ -41,12 +41,12 @@
             } else {
                 $('#edit-field-story-category').hide();
             }
-            // Hide by default career graph field collection.
+            // Hide by default movie name field.
             $('#edit-field-reporter-movie-name').hide();
-            if ($('select[name="field_celebrity_pro_occupation[und][]"').find('option:selected').text() == 'Celebrity') {
+            var occupationname = $('select[name="field_celebrity_pro_occupation[und][]"').find('option:selected').text();            
+            if (~occupationname.indexOf('Celebrity')) {
                 $('#edit-field-reporter-movie-name').show();
             }
-
             $('#edit-field-celebrity-pro-occupation-und').change(function () {
                 var celebrityvalue = $('#edit-field-celebrity-pro-occupation-und').val();
                 var hasexist = celebrityvalue.indexOf(anchor) != -1;
