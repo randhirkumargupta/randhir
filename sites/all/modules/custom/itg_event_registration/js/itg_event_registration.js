@@ -49,23 +49,66 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function(){
-    
+        var offset = jQuery('.form-field-name-field-erf-payment-gateway').offset();   
           //event regestration
         jQuery('.event-form-add').click(function() {
+            jQuery('html, body').animate({
+                            scrollTop:offset.top - 200
+                            }, 'slow');
             var $eventNum = jQuery(".event-form-number");
             var a = $eventNum.val();
             a++;        
             $eventNum.val(a);
-            jQuery(".field-add-more-submit").trigger("mousedown");
+            jQuery(".field-add-more-submit").trigger("mousedown");                      
         });        
-
+        
         jQuery('.event-form-remove').click(function() {
             var $eventNum = jQuery(".event-form-number");
             var b = $eventNum.val();
-            if (b >= 1) {
+            console.log(b);
+            if (b > 1) {
+              jQuery("table.field-multiple-table tr td:last").prev().find(".cancel.form-submit").trigger("mousedown");
+              jQuery('html, body').animate({
+               scrollTop:offset.top - 200
+               }, 'slow');   
+               jQuery("table.field-multiple-table tr").eq(b).remove();  
               b--;
-              $eventNum.val(b);
-            }
-            jQuery("table.field-multiple-table tr td:last").prev().find(".cancel.form-submit").trigger("mousedown");
+              $eventNum.val(b);              
+            }                        
+            
         });                              
+                      
+        jQuery(document).on('change', 'input[type="radio"]', function() {  
+            var $eventNum = jQuery(".event-form-number");
+            var totalMember = jQuery('.event-total-fees-text .event-number-of-members');
+            var a = $eventNum.val();                        
+            totalMember.html(a);  
+            var memberPrice = 0;
+            jQuery('.form-radio').each(function(){   
+               if(jQuery(this).is(':checked'))
+               {
+                   memberPrice =  parseInt(memberPrice) +  parseInt(jQuery(this).val());                     
+               }                                        
+            });                 
+            var $total = jQuery('#edit-total-fees-container .event-fees-amount');           
+            $total.html("Rs " + memberPrice);                
+        });
+        
+        
+        jQuery(document).on('click','.event-registration-form-header', function(){        
+            jQuery('.event-registration-form-header').removeClass('.event-registration-header-open');
+            var nextContent = jQuery(this).next('.event-registration-form-content');            
+            if(nextContent.is(":visible")){
+                nextContent.stop().slideUp();
+                jQuery(this).addClass('event-registration-header-close'); 
+                jQuery(this).removeClass('event-registration-header-open');
+            }else{
+                nextContent.stop().slideDown();
+                jQuery(this).addClass('event-registration-header-open');                
+                jQuery(this).removeClass('event-registration-header-close');
+            }
+            
+        });
+        
+        
 });

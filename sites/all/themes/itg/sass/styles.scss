@@ -149,6 +149,15 @@ img{
 .m-bottom40{
     margin-bottom: 40px;
 }
+.zoom-image {
+  overflow: hidden;
+   img {
+    transition: all 500ms ease 0s;
+    &:hover{
+      transform: scale(1.2);
+    }
+  }
+}
 .btn {
     background-color: #337ab7;
     border: 1px solid #2e6da4;
@@ -5758,7 +5767,32 @@ footer{
 }
 #content{
     [id*='event-registration-node-form']{
-        max-width: 620px;
+        .form-field-type-field-collection .form-item .form-item{
+            margin: 15px 0;
+        }
+        .form-item-field-erf-payment-gateway-und{
+            max-width: 620px;   
+        }
+        .event-total-fees-container{
+            label{
+            width: 127px;            
+            font-size: 15px;
+            color: #000;
+            display: inline-block;
+            }                
+            span{
+                &.event-fees-amount{
+                    font-weight: 700;
+                    font-size: 20px;
+                }                
+            }           
+        }
+        .have-a-coupon-code{
+            padding-left: 130px;
+             a.have-a-coupon-code-link{
+                    color:#0098d8;
+                }
+        }
         #edit-field-no-of-members{
             label{
                 margin-right: 20px;
@@ -5798,17 +5832,22 @@ footer{
             }
         }
         [id*='field-erf-registration-fee-values']{            
-            max-width: 620px;                        
-            fieldset.collapsible.form-wrapper{
-                border: none;
-                margin-bottom: 20px;
-                legend{
-                    background: #e6e6e6;
+            max-width: 620px;      
+            tr{
+                &:nth-child(1){
+                    .event-registration-form-header{
+                        &:before{
+                            content: '-';
+                        }
+                    }
+                }
+            }
+            .event-registration-form-header{
+                background: #e6e6e6;
                     width: 100%;
                     padding: 10px;
                     font-size: 16px;
-                    border: 1px solid #dadada;
-                    border-bottom: none;
+                    border: 1px solid #dadada;                    
                     font-weight: 700;
                     cursor: pointer;
                     position: relative;
@@ -5816,18 +5855,29 @@ footer{
                         position: absolute;
                         right: 10px;
                         content: '+';
-                        font-size: 26px;
+                        font-size: 22px;
                         top: 10px;
                         color: #000;
                     }
-                }
-                > .fieldset-wrapper{
-                    background: #f1f1f1;
-                    padding: 10px 10px 50px 15px;
-                    border: 1px solid #dadada;
-                    border-top: none; 
-                }                
+                    &.event-registration-header-open{                        
+                        &:before{
+                            content: '-' !important;
+                            font-size: 26px;
+                        }
+                    }
+                    &.event-registration-header-close{                        
+                        &:before{
+                            content: '+' !important;                            
+                        }
+                    }
             }
+            .event-registration-form-content{
+                background: #f1f1f1;
+                padding: 10px 10px 50px 15px;
+                border: 1px solid #dadada;  
+                border-top: none;                
+                display: none;
+            }            
             div.form-type-radios, div.form-type-select{
                 label{
                     width: 130px;
@@ -5877,8 +5927,8 @@ footer{
                     .form-type-date-select{
                         width: 100%;
                         margin: 0;
-                        padding-left: 40px;
-                        background: url('../images/edit-profile-calander.png') no-repeat top left;
+/*                        padding-left: 40px;
+                        background: url('../images/edit-profile-calander.png') no-repeat top left;*/
                         background-size: 18px;
                         .form-type-select{
                             label{
@@ -5903,6 +5953,23 @@ footer{
                         legend{
                             display: none;                        
                         }                                        
+                }
+            }
+            tr{
+                &:nth-child(1){
+                    .event-registration-form-header{
+                        &:before{
+                            content: '-';
+                        }
+                    }
+                    .event-registration-form-content{
+                        display: block;
+                    } 
+                } 
+                td{
+                    &:nth-child(2){
+                        padding-bottom: 15px;
+                    }
                 }
             }
         }
@@ -5936,11 +6003,19 @@ footer{
             color: #000;
             margin-top: 5px;
         }
+        span.error{
+            padding-left: 0;
+        }
     }
-        
+    .form-submit[value="Add another item"], .form-submit[value="Remove"]{
+            display: none;
+        } 
     }        
 }
 #block-itg-event-backend-event-registration{
+    .event-registration-main-container{
+        margin-top: 40px;
+    }
     b{
         font-size: 14px;
         color: #000;
@@ -5953,7 +6028,12 @@ footer{
         font-family: roboto;
         font-size: 12px;
         color: #707070;
-        padding-top: 30px;    
+        padding-top: 25px;    
+        ul{
+            li{
+                margin-bottom: 10px;
+            }
+        }
     }
 }
 /*CSS end for event page index*/
