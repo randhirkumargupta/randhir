@@ -10,21 +10,28 @@ global $base_url;
   <div class="row">
     <div class="col-md-6">
       <div class="page-error-pic">
-        <img src="<?php echo $base_url . '/sites/all/themes/itg/images/error_403.png';?>" alt=""/>
+          <a href="<?php print url(''); ?>"><img src="<?php echo $base_url . '/sites/all/themes/itg/images/error_403.png';?>" alt=""/></a>
         <p>You are not authorized to access this page.</p>
       </div>
     </div>
     <div class="col-md-6">
       <p class="go-back">
-        I want to go <a href="#">BACK</a> from where I came </br> Open the <a href="#">India Today</a> homepage for me
+          I want to go <a href="#">BACK</a> from where I came </br> Open the <a href="<?php print url(''); ?>">India Today</a> homepage for me
       </p>
       <span class="error-or">OR</span>
       <h3>Check out Latest Headlines</h3>
       <ul class="latest-headlines-list">
-        <li><span class="red">See pics:</span> Jennifer, Ragini, Mouni step out in their sexiest best</li>
-        <li>Priyanka Chopra reveals her favourite Quantico episode in a Twitter chat</li>
-        <li>TV newbie Tridha Choudhury happy to be compared to Alia Bhatt</li>
-        <li>7 lesser-known facts about Bigg Boss hottie Kishwer Merchant</li>
+          <?php 
+          $query = db_select('node', 'n')
+                  ->fields('n', array('title', 'nid'))
+                  ->condition('n.status', 'published')
+                  ->range(0,4)
+                  ->orderBy('n.created', 'DESC');
+          $result = $query->execute()->fetchAll();
+          foreach ($result as $key => $val) {
+          ?>
+          <a href="<?php print url('node/'. $val->nid); ?>" target="_blank"><li><?php print_r($val->title); ?></li></a>
+          <?php } ?>
       </ul>
     </div>
   </div>
