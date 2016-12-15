@@ -271,14 +271,7 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
   }
 
   $current_event_nid = itg_event_registration_get_event_nid();
-
-  // Set Redirection after completion of event registration form
-  if (!empty($current_event_nid)) {
-    $form_state['redirect'] = array('event-registration', array('query' => array('event_id' => $current_event_nid)));
-  }
-  else {
-    $form_state['redirect'] = 'event-registration';
-  }
+  $form_state['redirect'] = 'event-registration';
   $event_name = itg_common_get_node_title($current_event_nid);
   drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
 }
@@ -324,22 +317,44 @@ function itg_event_registration_node_validate($node) {
 
   if ($node->type == 'event_registration') {
 
+    $member = 1;
     foreach ($node->field_erf_registration_fee[LANGUAGE_NONE] as $regdata) {
-      if (!preg_match("/^[a-zA-Z ]*$/", $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'])) {
-          form_set_error('field_erf_name', t('Name <strong>@name</strong> must be alphabetic.', array('@name' => $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'])));
+      
+      // Validate Name field
+      if (empty($regdata['field_erf_name'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'] != 'A') {
+        form_set_error('field_erf_name'.$member, t('Name field is required for Member @member', array('@member' => $member)));
+      } else {
+        if (!preg_match("/^[a-zA-Z ]*$/", $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'])) {
+          form_set_error('field_erf_name'.$member, t('Name <strong>@name</strong> must be alphabetic for Member @member', array('@name' => $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
+        }
       }
-      if (!preg_match("/^[0-9]{10}$/", $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
-          form_set_error('field_erf_mobile', t('Mobile number <strong>@mobile</strong> must be 10 digit numeric value.', array('@mobile' => $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'])));
+      
+      // Validate Mobile field
+      if (empty($regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
+        form_set_error('field_erf_mobile' . $member, t('Mobile field is required for Member @member', array('@member' => $member)));
+      } else {
+        if (!preg_match("/^[0-9]{10}$/", $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
+          form_set_error('field_erf_mobile'.$member, t('Mobile number <strong>@mobile</strong> must be 10 digit numeric value for Member @member', array('@mobile' => $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
+        }
+        if (substr($regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'], 0, -8) == '000' && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
+          form_set_error('field_erf_mobile'.$member, t('Mobile number <strong>@mobile</strong> is not a valid mobile number for Member @member', array('@mobile' => $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
+        }
       }
-      if (substr($regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'], 0, -8) == '000' && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
-          form_set_error('field_erf_mobile', t('Mobile number <strong>@mobile</strong> is not a valid mobile number.', array('@mobile' => $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'])));
+      
+      // Validate Email field
+      if (empty($regdata['field_email_address'][LANGUAGE_NONE][0]['value']) && $regdata['field_email_address'][LANGUAGE_NONE][0]['value'] != 'A') {
+        form_set_error('field_email_address'.$member, t('Email field is required for Member @member', array('@member' => $member)));
+      } else {
+        if (!valid_email_address($regdata['field_email_address'][LANGUAGE_NONE][0]['value']) && $regdata['field_email_address'][LANGUAGE_NONE][0]['value'] != 'A') {
+          form_set_error('field_email_address'.$member, t('Email <strong>@email</strong> is not a valid email for Member @member', array('@email' => $regdata['field_email_address'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
+        }
       }
-      if (!empty($regdata['field_email_address'][LANGUAGE_NONE][0]['value']) && !valid_email_address($regdata['field_email_address'][LANGUAGE_NONE][0]['value'])) {
-          form_set_error('field_email_address', t('Email <strong>@email</strong> is not a valid email.', array('@email' => $regdata['field_email_address'][LANGUAGE_NONE][0]['value'])));
+      
+      // Validate Pincode
+      if (!empty($regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'] == '000000' && $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'] != 'A') {
+          form_set_error('field_erf_postal_code'.$member, t('Pincode <strong>@pincode</strong> is not a valid pincode for Member @member', array('@pincode' => $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
       }
-      if (!empty($regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'] == '000000') {
-          form_set_error('field_erf_postal_code', t('Pincode <strong>@pincode</strong> is not a valid pincode.', array('@pincode' => $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'])));
-      }
+      $member++;
     }
   }
 }
