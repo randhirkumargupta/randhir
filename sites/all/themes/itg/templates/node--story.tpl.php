@@ -396,7 +396,7 @@ if (!empty($content)):
                               <?php } ?>
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
                             <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
-                            <li><span>Edited by</span> Arunava Chatterjee</li>
+                            <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
                             <li><a href="#">follow the Story</a></li>
                         </ul>
                     </div>
