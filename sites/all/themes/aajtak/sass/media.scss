@@ -368,7 +368,7 @@
     }
   }
   .promoted-to-front{
-    max-width: 1240px;
+    max-width: 690px;
     margin: 0 auto;
     .slick-list{
       overflow: visible;
@@ -393,7 +393,7 @@
   }
   .promoted-to-front-list{
     float: left;
-    width: 1240px;
+    width: 690px;
     &:after {
       background-color: rgba(0, 0, 0, 0.8);
       content: "";
@@ -532,5 +532,40 @@
     }
   }
   /* END OF PROMOTED TO FRONT TOP SLIDER CSS */
+}
+
+@media all and (min-width: 1024px){
+  .promoted-to-front {
+    max-width: 960px;
+    .slick-arrow{
+      .slick-prev{
+        left: -34px;
+      }
+      .slick-next{
+        right: -34px;
+      }
+    }
+  }
+  .promoted-to-front-list {
+    max-width: 960px;
+    width: 100%;
+  }
+}
+@media all and (min-width: 1280px){
+  .promoted-to-front {
+    max-width: 1240px;
+    .slick-arrow{
+      .slick-prev{
+        left: -50px;
+      }
+      .slick-next{
+        right: -50px;
+      }
+    }
+  }
+  .promoted-to-front-list {
+    max-width: 1240px;
+    width: 100%;
+  }
 }
 
