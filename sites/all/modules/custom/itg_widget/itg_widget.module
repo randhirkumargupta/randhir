@@ -673,7 +673,22 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_at_widget_big_story');
       $info['widget'] = 'at_big_story_format_widget';
       $data = itg_at_widget_big_story_block_data($info);
-      $block['content'] = theme("at_widget_big_story_format", array("data" => $data));
+      if(!empty($data)) {
+        $block['content'] = theme("at_widget_big_story_format", array("data" => $data));
+      }
+      else {
+        $is_mobile = FALSE;
+          if(function_exists('mobile_detect_get_object')) {
+            $detect = mobile_detect_get_object();
+            $is_mobile = $detect->isMobile();
+          }
+          if(!$is_mobile) {
+            $block['content'] = theme("at_widget_promoted_to_front_data", array("data" => $data));
+          }
+          else {
+            $block['content'] = theme("at_widget_promoted_to_front_data_mobile", array("data" => $data));
+          }
+      }
       break;
   }
 
@@ -710,4 +725,24 @@ function itg_widget_highlights_block_data($info) {
     }
     return $entity_data;
   }
+}
+
+/**
+ * Function to return big story promoted to front data.
+ * @return type
+ */
+function itg_widget_at_get_big_story_front_content_data() {
+  $query = db_select('node','n');
+  $query->leftJoin('field_data_field_story_extra_large_image','eli','eli.entity_id=n.nid');
+  $query->leftJoin('file_managed','fm','fm.fid=eli.field_story_extra_large_image_fid');
+  $query->leftJoin('field_data_field_primary_category','pc','pc.entity_id=n.nid');
+  $query->fields('n',array('nid','uid','created','title'));
+  $query->fields('pc',array('field_primary_category_value'));
+  $query->fields('fm',array('uri'))
+  ->condition('n.promote', 0)
+  ->condition('n.status', 1)
+  ->condition('n.type', array('videogallery','story','photogallery'),'IN')
+  ->range(ITG_AT_BIG_STORY_MIN_LIMIT,ITG_AT_BIG_STORY_MAX_LIMIT)
+  ->orderBy('n.nid','DESC');
+  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }

@@ -32,5 +32,20 @@ function feature_for_aajtak_big_story_image_default_styles() {
     ),
   );
 
+  // Exported image style: at_big_story_front_promoted_image.
+  $styles['at_big_story_front_promoted_image'] = array(
+    'label' => 'at_big_story_front_promoted_image',
+    'effects' => array(
+      20 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 118,
+          'height' => 67,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }

@@ -40,3 +40,6 @@ define('HOW_MADE_MIN_RANGE', 0);
 
 define('SIRF_WEB_PER_MAX_RANGE', 12);
 define('SIRF_WEB_PER_MIN_RANGE', 0);
+
+define('ITG_AT_BIG_STORY_MAX_LIMIT', 12);
+define('ITG_AT_BIG_STORY_MIN_LIMIT', 0);
