@@ -8,6 +8,7 @@ dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[image][] = at_big_story
+features[image][] = at_big_story_front_promoted_image
 features[views_view][] = at_big_story
 features[views_view][] = at_big_story_ordering_list
 features_exclude[dependencies][ctools] = ctools

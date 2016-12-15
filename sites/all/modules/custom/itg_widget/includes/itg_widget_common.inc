@@ -820,6 +820,12 @@ function itg_widget_theme() {
         'at_widget_big_story_format' => array(
             'template' => 'templates/at-big-story-format',
         ),
+        'at_widget_promoted_to_front_data' => array(
+            'template' => 'templates/aajtak-content-promoted-to-front',
+        ),
+        'at_widget_promoted_to_front_data_mobile' => array(
+            'template' => 'templates/aajtak-content-promoted-to-front-mobile',
+        ),
     );
     return $themes;
 }
