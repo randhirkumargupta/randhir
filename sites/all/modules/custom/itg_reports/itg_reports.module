@@ -304,7 +304,7 @@ function itg_report_node_edit_count($output) {
  */
 function itg_reports_views_pre_render(&$view) {
   switch ($view->name) {
-    case 'report_filed_content':      
+    case 'report_filed_content':
       foreach ($view->result as $rows) {
         $rows->nid = itg_report_node_edit_count($rows->nid);
       }
@@ -320,9 +320,17 @@ function itg_reports_views_pre_render(&$view) {
  *
  * {@inheritdoc}.
  */
-function itg_reports_form_alter(&$form, &$form_state, $form_id) {  
-  if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {    
-    $form['relations']['#prefix'] = '<div style="display:none;">';
-    $form['relations']['#suffix'] = '</div>';
+function itg_reports_form_alter(&$form, &$form_state, $form_id) {
+  if (is_array($form['#term'])) {
+    if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {
+      $form['relations']['#prefix'] = '<div style="display:none;">';
+      $form['relations']['#suffix'] = '</div>';
+    }
+  }
+  if (is_object($form['#term'])) {
+    if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'movies') {
+      $form['relations']['#prefix'] = '<div style="display:none;">';
+      $form['relations']['#suffix'] = '</div>';
+    }
   }
 }
