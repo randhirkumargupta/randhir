@@ -56,7 +56,7 @@
                                       <?php
                                       if (function_exists(itg_event_backend_highlights_like_dislike)) {
                                          $val = arg(1);
-                                        print itg_event_backend_highlights_like_dislike($val);
+                                       print itg_event_backend_highlights_like_dislike($val);
                                       }
                                       ?>
                                   </div>

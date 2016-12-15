@@ -124,7 +124,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                   <?php if ($user->uid > 0): ?>                     
                      <li><?php print $read_later; ?></li>
                   <?php else: ?>
-                     <?php print '<li>' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'Save'))) . '</li>'; ?>
+                     <?php  print '<li>' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'Save'))) . '</li>'; ?>
                 <?php endif; ?>
             </ul>
         </div>
