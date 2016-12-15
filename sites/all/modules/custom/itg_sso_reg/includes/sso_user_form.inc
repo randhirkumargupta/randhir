@@ -401,7 +401,17 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
 
       $pass = $form_state['values']['password'];
       $cpass = $form_state['values']['password_again'];
-
+      
+      $min_length = 3;
+      $max_length = 10;
+      
+      if (strlen($pass) < $min_length) {
+        form_set_error('pass', t('password is too short, minimum is '. $min_length. ' characters '));
+      }
+      elseif (strlen($pass) > $max_length) {
+        form_set_error('pass', t('password is too long, maximum is '. $max_length. ' characters '));
+      }
+      
       if ($pass != $cpass) {
         form_set_error('pass', t('Password do not match.'));
       }
