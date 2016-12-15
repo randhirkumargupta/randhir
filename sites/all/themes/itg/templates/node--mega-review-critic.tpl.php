@@ -78,19 +78,27 @@
         <!--</div>-->
         <!--<div class="col-md-5">-->
         <div class="movie-review-text">
+            <?php $cast_name = render($content['field_mega_review_cast']); ?>
+            <?php if (!empty($cast_name)): ?>
             <div class="review-row">
                 <dfn class="review-label">Cast :</dfn>
-                <span class="review-txt"><?php print render($content['field_mega_review_cast']); ?></span>
+                <span class="review-txt"><?php print $cast_name; ?></span>
             </div>
+            <?php endif; ?>
+            <?php $director = render($content['field_mega_review_director']); ?>
+            <?php if (!empty($director)): ?>
             <div class="review-row">
                 <dfn class="review-label">Director :</dfn>
-                <span class="review-txt"><?php print render($content['field_mega_review_director']); ?></span>
+                <span class="review-txt"><?php print $director; ?></span>
             </div>
+            <?php endif; ?>
+            <?php $plot = render($content['field_mega_review_movie_plot']); ?>
+            <?php if (!empty($plot)): ?>
             <div class="review-row">
                 <dfn class="review-label">Plot :</dfn>
-                <span class="review-txt"><?php print render($content['field_mega_review_movie_plot']); ?></span>
+                <span class="review-txt"><?php print $plot; ?></span>
             </div>
-            <?php ?>
+            <?php endif; ?>
             <div class="movie-reviewer our-review"></div>
             <div class="movie-reviewer movie-reviewer-other"></div>
         </div>
@@ -165,6 +173,7 @@
         <?php endforeach; ?>  
         <?php $average_rating = (float) $average_ratings / $num_of_ratings ?>  
         <?php $average_rating = round($average_rating, 1); ?>
+        <?php $average_rating = itg_common_round_rating($average_rating); ?>
         <div id="average-ratings" style="display:none;"><?php print $average_rating * 20; ?>%</div> 
     </div>
     <div class="photos-videos-wrapper">
