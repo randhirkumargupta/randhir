@@ -3288,7 +3288,8 @@ footer .footer-copyright {
   vertical-align: top;
   padding: 10px 10px 0 0;
 }
-#block-views-anchor-landing-page-block .anchor-right .social-icon ul li i {
+#block-views-anchor-landing-page-block .anchor-right .social-icon ul li a i {
+  color: #818181;
   font-size: 20px;
   font-size: 1.25rem;
 }
@@ -7199,6 +7200,9 @@ footer .footer-copyright {
   font-weight: 700;
 }
 
+#content [id*='event-registration-node-form'] {
+  max-width: 620px;
+}
 #content [id*='event-registration-node-form'] #edit-field-no-of-members label {
   margin-right: 20px;
 }
@@ -7263,7 +7267,7 @@ footer .footer-copyright {
 }
 #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] fieldset.collapsible.form-wrapper > .fieldset-wrapper {
   background: #f1f1f1;
-  padding: 10px 30px 50px 15px;
+  padding: 10px 10px 50px 15px;
   border: 1px solid #dadada;
   border-top: none;
 }
@@ -7276,14 +7280,19 @@ footer .footer-copyright {
   padding-left: 0;
 }
 #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-radios label + div > div, #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-select label + div > div {
-  width: 16.6%;
+  width: 18.3%;
 }
 #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-radios label + div > div label, #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-select label + div > div label {
-  display: inherit;
+  display: inline-block;
   vertical-align: middle;
+  width: 85%;
 }
 #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-radios label + div > div label b, #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-select label + div > div label b {
   display: block;
+}
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-radios label + div > div input[type="radio"], #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-select label + div > div input[type="radio"] {
+  display: inline-block;
+  width: 12px;
 }
 #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-radios label + div .form-item .form-radio, #content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] div.form-type-select label + div .form-item .form-radio {
   float: none;
@@ -7300,41 +7309,41 @@ footer .footer-copyright {
   display: block;
   float: left;
 }
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime {
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .date-combo.form-wrapper {
   width: 75%;
   float: left;
+  border: none;
 }
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime .date-no-float {
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .date-combo.form-wrapper .date-no-float {
   width: 100%;
 }
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime .form-type-date-select {
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .date-combo.form-wrapper .form-type-date-select {
   width: 100%;
   margin: 0;
   padding-left: 40px;
+  background: url("../images/edit-profile-calander.png") no-repeat top left;
+  background-size: 18px;
 }
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime .form-type-date-select .form-type-select {
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .date-combo.form-wrapper .form-type-date-select .form-type-select {
   width: 33.33%;
   display: inline-block;
   vertical-align: top;
   padding-right: 10px;
 }
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime .form-type-date-select .form-type-select label {
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .date-combo.form-wrapper .form-type-date-select .form-type-select label {
   width: auto;
 }
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime .form-type-date-select .form-type-select:last-child {
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .date-combo.form-wrapper .form-type-date-select .form-type-select:last-child {
   padding-right: 0px;
 }
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime .form-type-date-select .date-padding {
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .date-combo.form-wrapper .form-type-date-select .date-padding {
   padding: 0;
   float: none;
 }
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime .form-type-date-select select {
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .date-combo.form-wrapper .form-type-date-select select {
   width: 100%;
 }
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime fieldset.date-combo.form-wrapper {
-  border: none;
-}
-#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .field-type-datetime fieldset.date-combo.form-wrapper legend {
+#content [id*='event-registration-node-form'] [id*='field-erf-registration-fee-values'] .date-box-wrapper .date-combo.form-wrapper legend {
   display: none;
 }
 #content [id*='event-registration-node-form'] fieldset.captcha {
@@ -7347,6 +7356,23 @@ footer .footer-copyright {
 }
 #content [id*='event-registration-node-form'] .form-type-textarea > label + div {
   padding-left: 0 !important;
+}
+#content [id*='event-registration-node-form'] .form-item-field-erf-payment-gateway-und #edit-field-erf-payment-gateway-und {
+  width: 79%;
+}
+#content [id*='event-registration-node-form'] .captcha {
+  padding-left: 130px;
+}
+#content [id*='event-registration-node-form'] .captcha #edit-captcha-response {
+  width: 220px;
+}
+#content [id*='event-registration-node-form'] .captcha label {
+  display: none;
+}
+#content [id*='event-registration-node-form'] .captcha .description {
+  padding-left: 0;
+  color: #000;
+  margin-top: 5px;
 }
 
 #block-itg-event-backend-event-registration b {
@@ -9011,9 +9037,8 @@ footer .footer-copyright {
 /*eND CSS LIVE tv */
 /*vertical menu fixed position*/
 #block-itg-menu-manager-vertical-menu {
-  position: absolute;
-  top: 50px;
-  left: -75px;
+  position: fixed;
+  top: 270px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 2px 2px 3px #ccc;
@@ -9031,6 +9056,8 @@ footer .footer-copyright {
   border-bottom: 1px solid #c4c4c4;
   display: block;
   min-width: 100%;
+  height: 75px;
+  overflow: hidden;
 }
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
@@ -9052,6 +9079,10 @@ footer .footer-copyright {
   background: #fff;
   color: #b00202;
 }
+#block-itg-menu-manager-vertical-menu .vertical-menu-parent {
+  height: 375px;
+  overflow: hidden;
+}
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent .vertical-menu {
   max-width: 58px;
 }
@@ -9070,19 +9101,16 @@ footer .footer-copyright {
   color: #959595;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more {
-  padding: 10px 5px;
   display: none;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a {
   display: block;
+  padding: 5px;
 }
 #block-itg-menu-manager-vertical-menu .vertical-more a i {
   display: block;
   color: #959595;
-  font-size: 26px;
-}
-#block-itg-menu-manager-vertical-menu .vertical-more a span.less {
-  display: none;
+  font-size: 20px;
 }
 
 /*email and change password start*/
@@ -9193,6 +9221,7 @@ footer .footer-copyright {
   float: right;
   font-weight: 500;
   font-family: "Roboto Slab", sans-serif;
+  text-transform: initial;
 }
 .static-feedback-from h1 span i {
   color: #e61e1e;
@@ -9664,9 +9693,16 @@ footer .footer-copyright {
   display: block;
   padding-left: 0;
   margin-bottom: 20px;
+  padding-top: 0;
 }
 #block-itg-front-end-common-related-photo-block h3 span, #block-itg-front-end-common-related-video-block h3 span {
   padding-left: 0;
+}
+#block-itg-front-end-common-related-photo-block ul li, #block-itg-front-end-common-related-video-block ul li {
+  margin-bottom: 30px;
+}
+#block-itg-front-end-common-related-photo-block ul li:nth-child(4n+1), #block-itg-front-end-common-related-video-block ul li:nth-child(4n+1) {
+  clear: left;
 }
 #block-itg-front-end-common-related-photo-block .views-field-ds-changed, #block-itg-front-end-common-related-video-block .views-field-ds-changed {
   display: block;

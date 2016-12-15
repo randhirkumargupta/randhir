@@ -2492,9 +2492,12 @@ footer{
                 li{
                     @include display-inline;
                     padding: 10px 10px 0 0;
-                    i{
+                    a{                        
+                      i{
+                        color:#818181;
                         @include font(20px);
-                    }
+                      }   
+                    }                   
                 }
             }
         }
@@ -5699,6 +5702,7 @@ footer{
 }
 #content{
     [id*='event-registration-node-form']{
+        max-width: 620px;
         #edit-field-no-of-members{
             label{
                 margin-right: 20px;
@@ -5763,7 +5767,7 @@ footer{
                 }
                 > .fieldset-wrapper{
                     background: #f1f1f1;
-                    padding: 10px 30px 50px 15px;
+                    padding: 10px 10px 50px 15px;
                     border: 1px solid #dadada;
                     border-top: none; 
                 }                
@@ -5776,13 +5780,18 @@ footer{
                     + div{
                          padding-left: 0;
                       > div{
-                        width: 16.6%;
+                        width: 18.3%;
                         label{
-                           display: inherit;
-                           vertical-align: middle;   
+                           display: inline-block;
+                           vertical-align: middle;  
+                           width: 85%;
                            b{
                               display: block;
                            }
+                        }
+                        input[type="radio"]{
+                            display: inline-block;
+                            width: 12px;
                         }
                       }
                       .form-item .form-radio{
@@ -5802,16 +5811,19 @@ footer{
                     display: block;
                     float: left;                    
                 }
-                .field-type-datetime{                
+                .date-combo.form-wrapper{                
                     width: 75%;
                     float: left;
+                    border: none;
                     .date-no-float{
                         width: 100%;
                     }
                     .form-type-date-select{
-                            width: 100%;
+                        width: 100%;
                         margin: 0;
                         padding-left: 40px;
+                        background: url('../images/edit-profile-calander.png') no-repeat top left;
+                        background-size: 18px;
                         .form-type-select{
                             label{
                                 width: auto;    
@@ -5831,13 +5843,10 @@ footer{
                         select{
                             width:100%;
                         }
-                    }
-                    fieldset.date-combo.form-wrapper{
-                        border: none;
+                    }                                            
                         legend{
                             display: none;                        
-                        }                    
-                    }
+                        }                                        
                 }
             }
         }
@@ -5852,7 +5861,28 @@ footer{
         .form-type-textarea > label + div{
             padding-left: 0 !important;
         }
-    }    
+        
+        .form-item-field-erf-payment-gateway-und{
+        #edit-field-erf-payment-gateway-und{
+            width: 79%;
+        }
+    }
+    .captcha{
+        padding-left: 130px;
+        #edit-captcha-response{
+            width: 220px;
+        }
+        label{
+            display: none;
+        }
+        .description{
+            padding-left: 0;
+            color: #000;
+            margin-top: 5px;
+        }
+    }
+        
+    }        
 }
 #block-itg-event-backend-event-registration{
     b{
@@ -7530,14 +7560,13 @@ input[type="radio"]:checked + label:after{
 
 /*vertical menu fixed position*/
 #block-itg-menu-manager-vertical-menu{
-    position: absolute;
-    top: 50px;
-    left:-75px;
+    position: fixed;
+    top: 270px;    
     background: #f2f2f2;    
     border-radius: 3px;
     box-shadow: 2px 2px 3px #ccc;
     text-align: center;
-    border-right: 1px solid #b3b3b3;   
+    border-right: 1px solid #b3b3b3;       
     ul{       
         -webkit-transition: all 1s ease-in-out;
         -moz-transition: all 1s ease-in-out;
@@ -7549,6 +7578,8 @@ input[type="radio"]:checked + label:after{
         border-bottom: 1px solid #c4c4c4;       
         display: block;      
         min-width: 100%;
+        height: 75px;
+        overflow: hidden;
     }
     img{
         margin: 0 auto;
@@ -7568,7 +7599,9 @@ input[type="radio"]:checked + label:after{
              color: #b00202;
          }
     }
-    .vertical-menu-parent{            
+    .vertical-menu-parent{  
+            height: 375px;
+            overflow: hidden;
             .vertical-menu{
                 max-width: 58px;
                 span{
@@ -7587,19 +7620,16 @@ input[type="radio"]:checked + label:after{
                 }
             }
     }
-    .vertical-more{
-        padding: 10px 5px;
+    .vertical-more{        
         display:none;
         a{
             display: block;
+            padding: 5px;
             i{
                 display: block;
                 color: #959595;
-                font-size: 26px;
-            }
-            span.less{
-                display: none;
-            }
+                font-size: 20px;
+            }            
         }
     }
 }
@@ -7716,6 +7746,7 @@ input[type="radio"]:checked + label:after{
             float: right;
             font-weight: 500;
             font-family: $itg-robotoslab;
+            text-transform: initial;
             i{
                 color: #e61e1e;
                 font-style: normal;
@@ -8081,12 +8112,19 @@ input[type="radio"]:checked + label:after{
         display: block;
         padding-left: 0;
         margin-bottom: 20px;
+        padding-top: 0;
         span{
             padding-left: 0;
         }
     }
     ul{
         @extend .list-none;
+        li{
+            margin-bottom: 30px;
+            &:nth-child(4n+1){
+                clear: left;
+            }
+        }
     }
     .views-field-ds-changed{
         display: block;
