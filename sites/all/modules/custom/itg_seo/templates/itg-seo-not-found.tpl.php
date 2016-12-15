@@ -16,7 +16,7 @@ global $base_url;
     </div>
     <div class="col-md-6">
       <p class="go-back">
-          I want to go <a href="#">BACK</a> from where I came </br> Open the <a href="<?php print url(''); ?>">India Today</a> homepage for me
+          I want to go <a href="javascript:history.back()">BACK</a> from where I came </br> Open the <a href="<?php print url(''); ?>">India Today</a> homepage for me
       </p>
       <span class="error-or">OR</span>
       <h3>Check out Latest Headlines</h3>
