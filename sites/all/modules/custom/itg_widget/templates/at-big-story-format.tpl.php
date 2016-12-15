@@ -2,7 +2,14 @@
 if (!empty($data)) :
   global $base_url;
   $db_node = $data['node_data'];
+  $cls = '';
+  if(is_mobile()) {
+    $cls = 'mobile';
+  } else{
+    $cls = 'not-mobile';
+  }
   ?>
+<div class="big-story-format-layout <?php echo $cls ?> ">
   <div class="big-story-wrapper">
     <div class="extra-large-image">
       <?php if (!empty($db_node->field_story_extra_large_image['und'][0]['uri'])) { ?>
@@ -93,4 +100,5 @@ if (!empty($data)) :
       </div>
     <?php endforeach; ?>
   </div>
+</div>
 <?php endif; ?>

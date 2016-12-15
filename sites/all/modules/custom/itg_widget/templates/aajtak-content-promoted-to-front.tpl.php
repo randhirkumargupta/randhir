@@ -3,19 +3,13 @@
   $default_image_src = $base_url . "/" . drupal_get_path('theme', 'aajtak') . "/images/default_for_all.png";
   $default_image_fornt = "<img src='" . $default_image_src . "' alt='Images'>";
   $front_page_promoted_nodes = itg_widget_at_get_big_story_front_content_data();
+
+  // Get initial 5 vlaues of array
+  $frist_slide_array_data = array_slice($front_page_promoted_nodes,0,5);
+  // Remove a portion of the array and replace it with something else
+  $rest_slide_array_data = array_splice($front_page_promoted_nodes,5);
 ?>
-
-<?php if($is_mobile){ ?>
-
-<div>Code for Mobile</div>
-
-<?php } else { ?>
-  <?php
-      // Get initial 5 vlaues of array
-      $frist_slide_array_data = array_slice($front_page_promoted_nodes,0,5);
-      // Remove a portion of the array and replace it with something else
-      $rest_slide_array_data = array_splice($front_page_promoted_nodes,5);
-  ?>
+<div class="promoted-to-front-layout">
 <div class="promoted-to-front">
   <!-- First slide of banner -->
   <?php if(!empty($frist_slide_array_data)) : ?>
@@ -28,7 +22,7 @@
             <span></span>
             <span></span>
           </div>
-          <a href="#" class="tile">
+          <div href="#" class="tile">
             <div class="pic">
               <?php if(!empty($frist_slide_array['uri'])) : ?>
               <?php echo $default_image_fornt; ?>
@@ -74,7 +68,7 @@
                 <?php print date('m:s' , time($frist_slide_array['created']));?>
                 <?php print t("IST"); ?></span>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     <?php endforeach;?>    
@@ -142,5 +136,4 @@
   <?php endforeach; ?>
   <?php endif; ?>
 </div>
-
-<?php } ?>
+</div>

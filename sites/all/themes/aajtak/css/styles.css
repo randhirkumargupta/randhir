@@ -1525,8 +1525,12 @@ header .header-right-menu ul li.live-tv a {
   height: 40px;
   overflow: hidden;
   margin: 10px 10px 8px;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
 }
-/* line 570, ../sass/_itg-mixins.scss */
+/* line 571, ../sass/_itg-mixins.scss */
 .story-photos .tile .title a {
   color: #000;
   display: block;
@@ -1535,12 +1539,12 @@ header .header-right-menu ul li.live-tv a {
   font-weight: 700;
   line-height: 20px;
 }
-/* line 578, ../sass/_itg-mixins.scss */
+/* line 579, ../sass/_itg-mixins.scss */
 .story-photos .tile .pic {
   height: 148px;
   overflow: hidden;
 }
-/* line 584, ../sass/_itg-mixins.scss */
+/* line 585, ../sass/_itg-mixins.scss */
 .story-photos .tile .name {
   display: inline-block;
   vertical-align: top;
@@ -1552,7 +1556,11 @@ header .header-right-menu ul li.live-tv a {
   padding: 0 5px;
   position: relative;
 }
-/* line 594, ../sass/_itg-mixins.scss */
+/* line 592, ../sass/_itg-mixins.scss */
+.story-photos .tile .name a {
+  color: #9a9a9a;
+}
+/* line 598, ../sass/_itg-mixins.scss */
 .story-photos .tile .date {
   display: inline-block;
   vertical-align: top;
@@ -1564,7 +1572,7 @@ header .header-right-menu ul li.live-tv a {
   padding: 0 5px;
   position: relative;
 }
-/* line 604, ../sass/_itg-mixins.scss */
+/* line 608, ../sass/_itg-mixins.scss */
 .story-photos .tile .date:before {
   content: '|';
   position: absolute;
@@ -1591,8 +1599,12 @@ header .header-right-menu ul li.live-tv a {
   height: 40px;
   overflow: hidden;
   margin: 10px 10px 8px;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
 }
-/* line 570, ../sass/_itg-mixins.scss */
+/* line 571, ../sass/_itg-mixins.scss */
 .popular-videos-tile .title a {
   color: #000;
   display: block;
@@ -1601,12 +1613,12 @@ header .header-right-menu ul li.live-tv a {
   font-weight: 700;
   line-height: 20px;
 }
-/* line 578, ../sass/_itg-mixins.scss */
+/* line 579, ../sass/_itg-mixins.scss */
 .popular-videos-tile .pic {
   height: 196px;
   overflow: hidden;
 }
-/* line 584, ../sass/_itg-mixins.scss */
+/* line 585, ../sass/_itg-mixins.scss */
 .popular-videos-tile .name {
   display: inline-block;
   vertical-align: top;
@@ -1618,7 +1630,11 @@ header .header-right-menu ul li.live-tv a {
   padding: 0 5px;
   position: relative;
 }
-/* line 594, ../sass/_itg-mixins.scss */
+/* line 592, ../sass/_itg-mixins.scss */
+.popular-videos-tile .name a {
+  color: #9a9a9a;
+}
+/* line 598, ../sass/_itg-mixins.scss */
 .popular-videos-tile .date {
   display: inline-block;
   vertical-align: top;
@@ -1630,7 +1646,7 @@ header .header-right-menu ul li.live-tv a {
   padding: 0 5px;
   position: relative;
 }
-/* line 604, ../sass/_itg-mixins.scss */
+/* line 608, ../sass/_itg-mixins.scss */
 .popular-videos-tile .date:before {
   content: '|';
   position: absolute;
@@ -1638,7 +1654,7 @@ header .header-right-menu ul li.live-tv a {
   left: -4px;
   top: 0;
 }
-/* line 613, ../sass/_itg-mixins.scss */
+/* line 617, ../sass/_itg-mixins.scss */
 .popular-videos-tile .icon-list {
   border: none;
   border-radius: 50%;
@@ -1655,7 +1671,7 @@ header .header-right-menu ul li.live-tv a {
   cursor: pointer;
   z-index: 9;
 }
-/* line 628, ../sass/_itg-mixins.scss */
+/* line 632, ../sass/_itg-mixins.scss */
 .popular-videos-tile .icon-list span {
   background: #fff;
   display: block;
@@ -1668,7 +1684,7 @@ header .header-right-menu ul li.live-tv a {
   transform: rotate(0);
   transition: .25s ease-in-out;
 }
-/* line 639, ../sass/_itg-mixins.scss */
+/* line 643, ../sass/_itg-mixins.scss */
 .popular-videos-tile .icon-list span:before {
   content: "";
   box-shadow: 2px 1px 0 1px #fff;

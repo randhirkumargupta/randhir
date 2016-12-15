@@ -3,7 +3,7 @@
 @import "itg-mixins";
 
 
-@media all and (min-width: 767px){
+@media all and (min-width: 768px){
 
   h1{    
     @include font($h1-font-size,$h1-line-height,$itg-font-bold);
@@ -163,12 +163,12 @@
   /* END OF HEADER CSS */
 
   /* START OF BIG STORY FORMAT CSS */
-  /*  #block-itg-widget-aaj-tak-big-story{
-      border-bottom: 1px solid #ccc;
-      margin: 0 auto 50px;
-      max-width: 1360px;
-      @include clearfix;
-    }*/
+  .big-story-format-layout{
+    border-bottom: 1px solid #ccc;
+    margin: 0 auto 50px;
+    max-width: 1360px;
+    @include clearfix;
+  }
   .big-story-wrapper{
     position: relative;
     .extra-large-image{
@@ -182,6 +182,7 @@
       left: 0;
       bottom: 30px;
       background-color: rgba(0,0,0,.8);
+      max-width: 75%;
       padding: 28px;
       .big-story-title{
         a{
@@ -351,7 +352,7 @@
   }
   /* END OF BIG STORY FORMAT CSS */
   /* START OF PROMOTED TO FRONT TOP SLIDER CSS FOR HOMEPAGE */
-  #block-itg-widget-aaj-tak-big-story{
+  .promoted-to-front-layout{
     background-color: #000;
     @include display-inline;
     width: 100%;
@@ -534,7 +535,7 @@
   /* END OF PROMOTED TO FRONT TOP SLIDER CSS */
 }
 
-@media all and (min-width: 1024px){
+@media all and (min-width: 1025px){
   .promoted-to-front {
     max-width: 960px;
     .slick-arrow{
@@ -551,7 +552,7 @@
     width: 100%;
   }
 }
-@media all and (min-width: 1280px){
+@media all and (min-width: 1281px){
   .promoted-to-front {
     max-width: 1240px;
     .slick-arrow{
@@ -566,6 +567,11 @@
   .promoted-to-front-list {
     max-width: 1240px;
     width: 100%;
+  }
+  .big-story-wrapper{
+    .big-story-text{
+      max-width: 65%;
+    }
   }
 }
 
