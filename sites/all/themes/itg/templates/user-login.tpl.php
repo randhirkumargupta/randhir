@@ -17,7 +17,7 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
 <a href="saml_login/twitter/<?php echo $shr; ?>" class="sso-twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
 <a href="saml_login/facebook/<?php echo $shr; ?>" class="sso-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
 </div>
-<?php print '<div class="sign-border"><span>Or sign in using your email address</span></div>';
+<?php print '<div class="sign-border"><span>Or sign in using your Email/Mobile</span></div>';
  } else { ?>
   <h2><?php print t('Log in'); ?></h2>
 <?php } ?>
