@@ -786,3 +786,16 @@ function itg_widget_check_node_is_in_widget($nid, $widget) {
     return FALSE;
   }
 }
+
+
+/**
+ * Function returns TRUE or FALSE wrt devices
+ */
+function is_mobile(){
+  $is_mobile = FALSE;
+  if(function_exists('mobile_detect_get_object')) {
+    $detect = mobile_detect_get_object();
+    $is_mobile = $detect->isMobile();
+  }
+  return $is_mobile;
+}
