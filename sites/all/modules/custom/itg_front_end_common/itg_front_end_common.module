@@ -277,3 +277,15 @@ function itg_vukkul_comment_count($nid) {
   $content = file_get_contents($run_url);
   return $content;
 }
+
+/**
+ * Implements itg_facebook_share_count
+ * @param string $url
+ */
+
+function itg_facebook_share_count($url) {
+  $run_url = "http://graph.facebook.com/?id=".$url;
+  $content = file_get_contents($run_url);
+  $share_count = json_decode($content);
+  return $share_count->share->share_count;
+}
