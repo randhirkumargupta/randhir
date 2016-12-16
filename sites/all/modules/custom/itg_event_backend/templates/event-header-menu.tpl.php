@@ -5,6 +5,12 @@
  * 
  */
 global $base_url;
+if(is_numeric(arg(1))) {
+  $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  arg(1));
+} else {
+  $baseurl = $base_url;
+}
+
 $node = itg_event_backend_get_event_node('node');
 $event_start_date = date('F d, Y', strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']));
 $event_location = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
@@ -23,40 +29,30 @@ $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $no
       <ul class="menu">
           <?php 
             if ($event_config_home) {
-              print '<li>'.l('Home', $base_url,  array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+              print '<li>'.l('Home', $baseurl,  array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
 
             if ($event_config_programme) {
-              print '<li>'.l('Programme', 'programme', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+              print '<li>'.l('Programme', $baseurl.'/programme', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
 
             if ($event_config_speakers) {
-              print '<li>'.l('Speakers', 'speakers', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+              print '<li>'.l('Speakers', $baseurl.'/speakers', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
 
-            print '<li>'.l('Registration', 'event-registration', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+            print '<li>'.l('Registration', $baseurl.'/event-registration', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
 
             if ($event_config_sponsors) {
-              print '<li>'.l('Sponsors', 'sponsors', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+              print '<li>'.l('Sponsors', $baseurl.'/sponsors', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
-
-//            if ($event_config_photo) {
-//              print '<li>'.l('Photo', '#', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
-//            }
-//
-//            if ($event_config_video) {
-//              print '<li>'.l('Video', '#', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
-//            }
 
             if ($event_config_flashback) {
               $flash_old_event = itg_event_backend_flashback($node->nid);
-              //$current_event_path = itg_event_backend_current_event_domain($node->nid);
-              //print '<li>'.l('Flashback', $current_event_path, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
               print '<li><a href="#" style="color:'.$menu_font_color.'">Flashback</a>'.$flash_old_event.'</li>';
             }
 
           ?>
-        <li><?php print l('Sing and Win', 'sing-and-win', array('attributes' => array("style" => "color:$menu_font_color"))); ?></li>
+        <li><?php print l('Sing and Win', $baseurl.'/sing-and-win', array('attributes' => array("style" => "color:$menu_font_color"))); ?></li>
       </ul>
     </div>
     <div class="col-md-4">

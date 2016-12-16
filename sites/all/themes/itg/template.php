@@ -155,9 +155,15 @@ function itg_preprocess_page(&$variables) {
     // Add another page.tpl file for existing domains
     $parse = parse_url($base_url);
 
+    // Call Event Parent TPL
     if (in_array($parse['host'], $options)) {
       $variables['theme_hook_suggestions'][] = 'page__event_domain';
     }
+  }
+  
+  // Call Event Parent TPL
+  if ((isset($variables['node']->type) && $variables['node']->type == 'event_backend')) {
+    $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
 }
 

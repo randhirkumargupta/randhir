@@ -5,8 +5,13 @@
  */
 global $base_url;
 $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
-$host_node_arr = explode('/', $host_detail['source']);
-$host_node = node_load($host_node_arr[1]);
+if (empty($host_detail) && is_numeric(arg(1))) {
+  $host_node = node_load(arg(1));
+} else {
+  $host_node_arr = explode('/', $host_detail['source']);
+  $host_node = node_load($host_node_arr[1]);
+}
+
 $current_date = strtotime(date('Y-m-d  H:i:s'));
 $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
 $event_close_date = strtotime($host_node->field_event_close_date[LANGUAGE_NONE][0]['value']);

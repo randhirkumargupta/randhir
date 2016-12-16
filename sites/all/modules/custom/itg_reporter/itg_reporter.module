@@ -307,7 +307,7 @@ function itg_reporter_node_presave($node) {
         $story_node->field_itg_common_by_line_twitter[LANGUAGE_NONE][0]['value'] = $final_twitter;
         field_attach_update('node', $story_node);
       }
-    }    
+    }
   }
 }
 
@@ -369,4 +369,29 @@ function itg_autocomplete_byline($id) {
   }
 
   return $name_format;
+}
+
+/**
+ * Implements hook_node_validate().
+ *
+ * {@inheritdoc}.
+ */
+function itg_reporter_node_validate($node, $form, &$form_state) {
+  if ($node->type == 'reporter') {
+    $occupation = $node->field_celebrity_pro_occupation['und'];
+    $flag = FALSE;
+    if (count($occupation) >= 1) {
+      foreach ($occupation as $term) {
+        $occ_name = taxonomy_term_load($term['tid']);
+        if ($occ_name->name == 'Celebrity') {
+          $flag = TRUE;
+        }
+      }
+    }
+    // make moview field mandotory.
+    $errors = array_filter($node->field_reporter_movie_name['und']);
+    if ($flag && empty($errors)) {
+      form_set_error('field_reporter_movie_name', 'Movie name is required.');
+    }
+  }
 }
