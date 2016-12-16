@@ -825,6 +825,28 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
 //      'onclick' => 'return alert("test")',
 //    );
     }
+    
+    if($form['#form_id'] == 'views_form_section_wise_draggable_content_order_big_story_format') {
+            drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
+            $big_story_value =  itg_big_story_get_extra_value();
+            if(in_array('big_story_live_tv_active', $big_story_value)) {
+              $yes_live = "checked";
+              $no_live = "";
+            }
+            else {
+              $yes_live = "";
+              $no_live = "checked";
+            }
+            // Activate live tv button
+            $form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '
+                <div class="switch-field">
+                 <div class="switch-title">Activate Live TV: </div>
+                 <input type="radio" id="switch_left" name="live_tv_switch_2" value="yes" '.$yes_live.'/>
+                 <label for="switch_left">Yes</label>
+                 <input type="radio" id="switch_right" name="live_tv_switch_2" value="no" '.$no_live.' />
+                 <label for="switch_right">No</label>
+               </div>';
+    }
 }
 
 /**
@@ -1061,25 +1083,6 @@ switch ($form['#id']) {
       $autocomplete_path = autocomplete_for_widgets($_GET['type'], TRUE);
       $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
       $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-      drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
-      $big_story_value =  itg_big_story_get_extra_value();
-      if($big_story_value == 'big_story_live_tv_active') {
-        $yes_live = "checked";
-        $no_live = "";
-      }
-      else {
-        $yes_live = "";
-        $no_live = "checked";
-      }
-      // Activate live tv button
-      $form['#prefix'] = '
-          <div class="switch-field">
-           <div class="switch-title">Big Story As Live Tv?</div>
-           <input type="radio" id="switch_left" name="live_tv_switch_2" value="yes" '.$yes_live.'/>
-           <label for="switch_left">Activated</label>
-           <input type="radio" id="switch_right" name="live_tv_switch_2" value="no" '.$no_live.' />
-           <label for="switch_right">Not Activated</label>
-         </div>';
       break;
     case 'views-exposed-form-section-wise-draggable-content-order-dont-miss-content':
       $form['title']['#attributes']['placeholder'] = t('Content Title');
