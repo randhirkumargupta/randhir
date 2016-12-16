@@ -1614,7 +1614,7 @@ function photogallery_field_default_field_instances() {
   $field_instances['node-photogallery-field_story_medium_image'] = array(
     'bundle' => 'photogallery',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 225)',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2617,7 +2617,7 @@ function photogallery_field_default_field_instances() {
   t('Gallery Slug');
   t('Image');
   t('Image Size (170 x 127)');
-  t('Image Size (300 x 225)');
+  t('Image Size (370 x 208)');
   t('Image Size (483 x 271)');
   t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');

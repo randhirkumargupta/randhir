@@ -144,6 +144,15 @@
 
             }
 
+          try {
+               jQuery("[name='field_video_upload_add_more']").css('visibility', 'hidden');
+            } catch (e) {
+
+            }
+
+
+            
+
         }
 
     };
