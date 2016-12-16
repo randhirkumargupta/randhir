@@ -118,13 +118,13 @@ function itg_widget_menu() {
     'page callback' => 'itg_widget_big_story_live_tv_flag',
     'page arguments' => array(1),
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'access arguments' => array('administer nodequeue'),
   );
 
   $items['test_function_callback'] = array(
     'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'access arguments' => array('administer nodequeue'),
   );
 
   $items['issue_filter_widget'] = array(
@@ -976,7 +976,7 @@ function itg_widget_big_story_live_tv_flag($flag) {
     if ($action) {
       $extra_field_value = itg_big_story_get_extra_value();
       // Run db query if live tv is not as big story
-      if ($flag == 'yes' && $extra_field_value != "big_story_live_tv_active") {
+      if ($flag == 'yes') {
         itg_widget_delete_big_story_live_tv();
         try {
           db_insert('itg_widget_order')
@@ -990,10 +990,7 @@ function itg_widget_big_story_live_tv_flag($flag) {
           print "error";
         }
       }
-      elseif ($flag == 'yes' && $extra_field_value == "big_story_live_tv_active") {
-        print "already_live_tv";
-      }
-      elseif ($flag == 'no' && $extra_field_value == 'big_story_live_tv_active') {
+      elseif ($flag == 'no') {
         $is_deleted_liv_tv = itg_widget_delete_big_story_live_tv();
         if ($is_deleted_liv_tv) {
           print "deleted";
@@ -1035,9 +1032,15 @@ function itg_widget_delete_big_story_live_tv() {
  * @return string
  */
 function itg_big_story_get_extra_value() {
+  $extra_data = array();
   $select_query = db_select('itg_widget_order', 'iwo')
           ->fields('iwo', array('extra'))
           ->condition('widget', 'big_story_format_widget')
           ->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $select_query[0]['extra'];
+  if(!empty($select_query)) {
+    foreach($select_query as $data) {
+      $extra_data[] = $data['extra'];
+    }
+  }
+  return $extra_data;
 }
