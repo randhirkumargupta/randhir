@@ -97,7 +97,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         '#prefix' => '<div class= "event-member-container">',
         '#title' => 'No. Of Memebers',
         '#type' => 'item',
-        '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input value="1" type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
+        '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input readonly value="1" type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
         '#suffix'=> '</div>'
     );
     
@@ -167,7 +167,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
         '#prefix' => '<div class= "event-total-fees-container">',
         '#title' => 'Total Fees',
         '#type' => 'item',
-        '#markup' => '<span class="event-total-fees-text">Rs <span class"event-fees-amount">00</span> for <span class="event-number-of-members">1</span> Members',
+        '#markup' => '<span class="event-total-fees-text"><span class="event-fees-amount">Rs 00</span> for <span class="event-number-of-members">1</span> Members',
         '#suffix' => '</div>',
         '#weight' => 10
     );
@@ -237,7 +237,7 @@ function itg_event_registration_form_after_build($form, &$form_state) {
    $form['field_erf_registration_fee'][LANGUAGE_NONE]['#title'] = '';
    for ($ereg = 0; $ereg <= $form['field_erf_registration_fee']['und']['#max_delta']; $ereg++) {
      $count = $ereg + 1;
-     $form['field_erf_registration_fee']['und'][$ereg]['#prefix'] = '<div class="event-registration-form-header" id="event-registration-memeber-'.$count.'">Member '.$count;
+     $form['field_erf_registration_fee']['und'][$ereg]['#prefix'] = '<div class="event-registration-form-header" id="event-registration-memeber-'.$count.'">Member '.$count.'</div><div class="event-registration-form-content">';
      $form['field_erf_registration_fee']['und'][$ereg]['#suffix'] = '</div>';
      $form['field_erf_registration_fee']['und'][$ereg]['field_erf_date_of_birth']['und'][0]['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
      $form['field_erf_registration_fee']['und'][$ereg]['field_erf_date_of_birth']['und'][0]['#suffix'] = '</div>';
@@ -483,8 +483,8 @@ function itg_event_registration_get_form() {
   if(!empty($host_node->field_story_expert_description[LANGUAGE_NONE])){
   $form['cutomtext'] = array(
       '#type' => 'item',
-      '#markup' => '<div class="event-registration-main-container"><div><b>Terms and Conditions:</b></div><div class="tc-txt"> '.$host_node->field_story_expert_description[LANGUAGE_NONE][0]['value'].'  </span></div></div>',
-      '#weight' => 100,
+      '#markup' => '<div class="event-registration-main-container"><div><b>Terms and Conditions:</b></div><div class="tc-txt"> <ul>'.$host_node->field_story_expert_description[LANGUAGE_NONE][0]['value'].'  </ul></div></div>',
+      '#weight' => 1000,
   );
   }
   return $form;
