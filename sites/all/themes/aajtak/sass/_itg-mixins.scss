@@ -567,6 +567,7 @@ $root-font-size: 16px;
       height: 40px;
       overflow: hidden;
       margin: 10px 10px 8px;
+      @include font(16px,20px,$itg-font-bold);
       a{
         color: #000;
         display: block;
@@ -588,6 +589,9 @@ $root-font-size: 16px;
       color: #9a9a9a;
       padding: 0 5px;
       position: relative;
+      a{
+        color: #9a9a9a;
+      }
     }
   }
   @if($posted-date != null){

@@ -475,8 +475,12 @@
   height: 40px;
   overflow: hidden;
   margin: 10px 10px 8px;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
 }
-/* line 570, ../sass/_itg-mixins.scss */
+/* line 571, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .title a {
   color: #000;
   display: block;
@@ -485,12 +489,12 @@
   font-weight: 700;
   line-height: 20px;
 }
-/* line 578, ../sass/_itg-mixins.scss */
+/* line 579, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .pic {
   height: 148px;
   overflow: hidden;
 }
-/* line 584, ../sass/_itg-mixins.scss */
+/* line 585, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .name {
   display: inline-block;
   vertical-align: top;
@@ -502,7 +506,11 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 594, ../sass/_itg-mixins.scss */
+/* line 592, ../sass/_itg-mixins.scss */
+.widget-list-row .tile .name a {
+  color: #9a9a9a;
+}
+/* line 598, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .date {
   display: inline-block;
   vertical-align: top;
@@ -514,7 +522,7 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 604, ../sass/_itg-mixins.scss */
+/* line 608, ../sass/_itg-mixins.scss */
 .widget-list-row .tile .date:before {
   content: '|';
   position: absolute;
@@ -592,8 +600,12 @@
   height: 40px;
   overflow: hidden;
   margin: 10px 10px 8px;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
 }
-/* line 570, ../sass/_itg-mixins.scss */
+/* line 571, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .title a {
   color: #000;
   display: block;
@@ -602,12 +614,12 @@
   font-weight: 700;
   line-height: 20px;
 }
-/* line 578, ../sass/_itg-mixins.scss */
+/* line 579, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .pic {
   height: 148px;
   overflow: hidden;
 }
-/* line 584, ../sass/_itg-mixins.scss */
+/* line 585, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .name {
   display: inline-block;
   vertical-align: top;
@@ -619,7 +631,11 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 594, ../sass/_itg-mixins.scss */
+/* line 592, ../sass/_itg-mixins.scss */
+.aajtak-stack .tile .name a {
+  color: #9a9a9a;
+}
+/* line 598, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .date {
   display: inline-block;
   vertical-align: top;
@@ -631,7 +647,7 @@
   padding: 0 5px;
   position: relative;
 }
-/* line 604, ../sass/_itg-mixins.scss */
+/* line 608, ../sass/_itg-mixins.scss */
 .aajtak-stack .tile .date:before {
   content: '|';
   position: absolute;
