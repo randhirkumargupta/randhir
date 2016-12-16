@@ -158,6 +158,17 @@ function feature_for_category_wise_content_list_views_default_views() {
 </div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Field: Small image */
+  $handler->display->display_options['fields']['field_story_small_image']['id'] = 'field_story_small_image';
+  $handler->display->display_options['fields']['field_story_small_image']['table'] = 'field_data_field_story_small_image';
+  $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
+  $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
+    'image_style' => '',
+    'image_link' => '',
+  );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Has taxonomy term ID (with depth) */
   $handler->display->display_options['arguments']['term_node_tid_depth']['id'] = 'term_node_tid_depth';
@@ -236,7 +247,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_kicker_text']['label'] = '';
   $handler->display->display_options['fields']['field_story_kicker_text']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -260,6 +271,17 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Field: Small image */
+  $handler->display->display_options['fields']['field_story_small_image']['id'] = 'field_story_small_image';
+  $handler->display->display_options['fields']['field_story_small_image']['table'] = 'field_data_field_story_small_image';
+  $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
+  $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
+  $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
+    'image_style' => '',
+    'image_link' => '',
+  );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

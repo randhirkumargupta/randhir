@@ -1,9 +1,11 @@
 <?php if (!empty($data)) : global $base_url; ?>
   <div class="featured-news">
     <div class="featured-post featured-post-first">
-      <?php if (isset($data[0]->field_story_extra_large_image) && $data[0]->field_story_extra_large_image['und'][0]['uri']) : ?>
+      <?php if (isset($data[0]->field_story_large_image) && $data[0]->field_story_large_image['und'][0]['uri']) : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$data[0]->nid}"); ?>">
-          <img src="<?php print image_style_url("home_page_feature_large", $data[0]->field_story_extra_large_image['und'][0]['uri']); ?>" />
+            <?php             $extra_large_image_url = file_create_url($data[0]->field_story_large_image['und'][0]['uri']);
+?>
+            <img src="<?php print $extra_large_image_url; ?>"  />
         </a>
       <?php else : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$data[0]->nid}"); ?>">

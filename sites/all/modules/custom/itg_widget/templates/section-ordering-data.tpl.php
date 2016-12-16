@@ -858,8 +858,10 @@ else if ($widget_style == 'movies-celebrities') {
             if (strtolower($entity->type) == 'videogallery') {
                 $video_class = 'video-icon';
             }
-            if ($count == 0 && (!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
-                $extra_large_image_url = image_style_url("section_ordering_widget", $entity->field_story_extra_large_image['und'][0]['uri']);
+            if ($count == 0 && (!empty($entity->field_story_medium_image['und'][0]['uri']) && isset($entity->field_story_medium_image['und'][0]['uri']))) {
+                //$extra_large_image_url = image_style_url("section_ordering_widget", $entity->field_story_extra_large_image['und'][0]['uri']);
+            $extra_large_image_url = file_create_url($entity->field_story_medium_image['und'][0]['uri']);
+                
             }
             ?>
                     <?php if ($count == 0) : ?>
