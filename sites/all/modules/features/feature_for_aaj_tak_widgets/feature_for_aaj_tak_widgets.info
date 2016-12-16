@@ -1,0 +1,16 @@
+name = Feature for aaj tak widgets
+description = Feature for aaj tak widgets
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = image
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[image][] = aaj_tak_category_wise_content_banner_big
+features[image][] = aaj_tak_category_wise_content_banner_small
+features[image][] = aaj_tak_category_wise_content_photo_block_big
+features[image][] = aaj_tak_category_wise_content_photo_small
+features[image][] = aaj_tak_category_wise_content_story_block
+features[views_view][] = aaj_tak_widgets
+features_exclude[dependencies][ctools] = ctools

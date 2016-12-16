@@ -826,6 +826,9 @@ function itg_widget_theme() {
         'at_widget_promoted_to_front_data_mobile' => array(
             'template' => 'templates/aajtak-content-promoted-to-front-mobile',
         ),
+        'itg_at_home_page_feature_video' => array(
+            'template' => 'templates/itg-at-home-page-feature-video',
+        ),
     );
     return $themes;
 }
@@ -1078,7 +1081,9 @@ function _get_widget_name($view_name, $page_name) {
     $widget = "";
 // TODO: Use switch-case
 
-    if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
+    if (($view_name == 'views_form_section_wise_draggable_content_order_page' 
+        || $view_name == 'views_form_section_wise_content_ordering_list_page') 
+        && $page_name == 'page') {
         $widget = 'section_wise_widget';
     }
     else if ($page_name == 'we_may_suggest_widget') {

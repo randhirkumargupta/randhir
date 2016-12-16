@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature for aaj tak widgets feature.
+ */
+
+include_once 'feature_for_aaj_tak_widgets.features.inc';
