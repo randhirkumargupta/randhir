@@ -761,11 +761,13 @@ function itg_event_backend_node_insert($node) {
  * {@inheritdoc}
  */
 function itg_event_backend_node_update($node) {
-    if ($node->type == 'event_backend') {
-        itg_event_backend_insert_into_redirect($node);
-        $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
-        itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
+  if ($node->type == 'event_backend') {
+    if ($node->domains != 1) {
+      itg_event_backend_insert_into_redirect($node);
     }
+    $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
+    itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
+  }
 }
 
 /**
@@ -1083,14 +1085,21 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
     $query->condition('redirect', $base_url, '=');
     $result = $query->execute()->fetchField();
     $event_id = explode('node/', $result);
-    
-    if(!empty($whole_node)) {
-      return node_load($event_id[1]); // Returns whole node
+
+    if (!empty($whole_node)) {
+      if (is_numeric(arg(1))) {
+        $nid = arg(1);
+      } else {
+        $nid = $event_id[1];
+      }
+      return node_load($nid); 
+    } else {
+      if (is_numeric(arg(1))) {
+        return arg(1);
+      } else {
+        return $event_id[1];
+      }
     }
-    else {
-      return $event_id[1]; // Event nid
-    }
-    
   }
 }
 
@@ -1099,13 +1108,19 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
  * @return boolean
  */
 function itg_event_get_host_name() {
-    if (module_exists('domain')) {
+  if(!empty(arg(1)) && is_numeric(arg(1))) {
+    global $base_url;
+    $host = $base_url.'/'.drupal_get_path_alias('node/'.  arg(1));
+  } else {
+        if (module_exists('domain')) {
         $query = db_select('domain', 'd');
         $query->fields('d', array('subdomain', 'scheme'));
         $query->condition('domain_id', 1, '=');
         $result = $query->execute()->fetchAssoc();
-        return $result['scheme'] . '://' . $result['subdomain'];
+        $host = $result['scheme'] . '://' . $result['subdomain'];
     }
+  }
+  return $host;
 }
 
 /**

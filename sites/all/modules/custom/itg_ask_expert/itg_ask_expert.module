@@ -390,6 +390,7 @@ function itg_ask_expert_block_view($delta = '') {
 function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
 
     global $user, $base_url, $theme;
+    $user_fields = user_load($user->uid);
     $arg = arg();
     if (isset($_GET['section']) && !empty($_GET['section'])) {
         $cat_id = $_GET['section'];
@@ -411,6 +412,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     $form['askname'] = array(
         '#type' => 'textfield', //you can find a list of available types in the form api
         '#title' => t(''),
+        '#value' => $user_fields->field_first_name['und']['0']['value'],
         '#prefix' => '<div id="askname" class="askname">',
         //'#suffix' => '</div>',
         '#attributes' => array(
@@ -420,6 +422,7 @@ function itg_custom_ask_an_expert_form($form, &$form_state, $cat_id) {
     $form['askemail'] = array(
         '#type' => 'textfield', //you can find a list of available types in the form api
         '#title' => t(''),
+        '#value' => $user_fields->mail,
         //'#prefix' => '<div id="askemail">',
         '#suffix' => '</div>',
         '#attributes' => array(

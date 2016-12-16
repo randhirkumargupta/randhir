@@ -344,21 +344,62 @@ if (!empty($content)):
                     print $buzz_output;
                 }
                 ?>
-
-
-              <div class="section-left-bototm">
-                  <div class="social-list">
-                      <ul>
-                          <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                          <li class="mhide"><div id="fb-root"></div><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                          <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                          <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                          <li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>
-                          <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
-                          <li><span>Edited by</span> Arunava Chatterjee</li>
-                          <li><a href="#">follow the Story</a></li>
-                      </ul>
+                
+                <!-- code for like dislike -->
+                
+                  <?php
+                  $get_val = '0'.arg(1);
+                  $like = itg_flag_get_count($get_val, 'like_count');
+                  $dislike = itg_flag_get_count($get_val, 'dislike_count');
+                  if (!empty($like)) {
+                    $like_count = '(' . $like . ')';
+                  }
+                  if (!empty($dislike)) {
+                    $dislike_count = '(' . $dislike . ')';
+                  }
+                  $pid = "voted_" . $get_val;
+                  $like = "no-of-likes_" . $get_val;
+                  $dislike = "no-of-dislikes_" . $get_val;
+                  ?>
+                  <div class="agbutton">
+                      <div id="name-dv"><?php print t('Do You Like This Story'); ?></div>
+                          <div id="lky"><button id="like_count" rel="<?php print $get_val; ?>" data-tag="sty">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button>
+                          <div id="sty-dv" style="display:none">Awesome! Now share the story <a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
+                          <a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
+                          <a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
+                          <a href="#"><i class="fa fa-comment"></i></a></div></div>
+                  <div id="dlky"> <button id="dislike_count" rel="<?php print $get_val; ?>" data-tag="dsty">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>
+                      <div id="dsty-dv" style="display:none">Too bad. Tell us what you didn't like in the comment section</div></div>
+                  <p class="error-msg" id="<?php print $pid; ?>"></p>
                   </div>
+                
+                <!-- End here -->
+                
+                
+                <div class="section-left-bototm">
+                    <div class="social-list">
+                        <ul>
+                            <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
+                            <li class="mhide"><div id="fb-root"></div><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>, '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                            <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                            <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                              <?php
+                              if (function_exists(global_comment_last_record)) {
+                                $last_record = $global_comment_last_record;
+                                $config_name = trim($last_record[0]->config_name);
+                              }
+                              if ($config_name == 'vukkul') {
+                                ?>
+                                <li class="mhide"><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
+                              <?php } if ($config_name == 'other') { ?> 
+                                <li class="mhide"><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
+                              <?php } ?>
+                            <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
+                            <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
+                            <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
+                            <li><a href="#">follow the Story</a></li>
+                        </ul>
+                    </div>
 
                     <?php if (!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
                         <div class="snap-post">

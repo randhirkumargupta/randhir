@@ -857,3 +857,31 @@ function itg_content_inactive() {
   watchdog("cron content expiry", '<pre>'. print_r($nodeid, TRUE) .'</pre>'); 
   
 }
+
+/**
+ * Round average rating into interval of 0.5.
+ *
+ * @param float $average_rating
+ * @return real
+ */
+function itg_common_round_rating($average_rating) {  
+  $temp = fmod($average_rating, 1);  
+  $temp = (string) $temp;
+  $average_rating -= $temp;  
+  switch ($temp) {
+    case '0.1':
+    case '0.2':
+    case '0.3':
+    case '0.4':
+    case '0.5':      
+      $average_rating += 0.5;
+      break;
+    case '0.6':
+    case '0.7':
+    case '0.8':
+    case '0.9':      
+      ++$average_rating;      
+  }
+  
+  return $average_rating;
+}

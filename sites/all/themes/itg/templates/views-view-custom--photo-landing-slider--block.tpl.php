@@ -16,7 +16,18 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <li><a title="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
                 <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li><a title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="javacript:void();" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                <li><a href="mailto:?body=<?php print urlencode($actual_link);?>" title="Email"><i class="fa fa-envelope"></i></a></li>
+                  <?php
+                if (function_exists(global_comment_last_record)) {
+                  $last_record = $global_comment_last_record;
+                  $config_name = trim($last_record[0]->config_name);
+                }
+                if ($config_name == 'vukkul') {
+                  ?>
+                <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                <?php } if ($config_name == 'other') { ?> 
+                <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                <?php } ?>
                 <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
                 <li class="mhide"><a href="#" title="post video"><i class="fa fa-share"></i></a></li>
                 <?php global $user; ?>
@@ -72,7 +83,19 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                             <i class="fa fa-camera" aria-hidden="true"></i>
                             <?php print $row['counter']; ?>
                         </div>
-                        <div class="caption"><?php print $row['field_image_caption']; ?></div>
+                        <div class="caption"><?php print $row['field_image_caption']; ?>
+                        
+                            <div class="section-like-dislike">
+                                  <div id="btn-div">
+                                      <?php
+                                      if (function_exists(itg_event_backend_highlights_like_dislike)) {
+                                        $val = $row['item_id'];
+                                        print itg_event_backend_highlights_like_dislike($val);
+                                      }
+                                      ?>
+                                  </div>
+                        
+                        </div>
                     </div>
                 </li>
             <?php endforeach; ?>
@@ -83,14 +106,25 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <li><a title="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
                 <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li><a title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="javacript:void();" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                <li><a href="mailto:?body=<?php print urlencode($actual_link);?>" title="Email"><i class="fa fa-envelope"></i></a></li>
+                <?php
+                if (function_exists(global_comment_last_record)) {
+                  $last_record = global_comment_last_record();
+                  $config_name = trim($last_record[0]->config_name);
+                }
+                if ($config_name == 'vukkul') {
+                  ?>
+                <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                <?php } if ($config_name == 'other') { ?> 
+                <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                <?php } ?>
                 <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
                 <li><a href="#" title="post video"><i class="fa fa-share"></i></a></li>
                 <?php global $user; ?>
                   <?php if ($user->uid > 0): ?>                     
                      <li><?php print $read_later; ?></li>
                   <?php else: ?>
-                     <?php print '<li>' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'Save'))) . '</li>'; ?>
+                     <?php  print '<li>' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'Save'))) . '</li>'; ?>
                 <?php endif; ?>
             </ul>
         </div>
