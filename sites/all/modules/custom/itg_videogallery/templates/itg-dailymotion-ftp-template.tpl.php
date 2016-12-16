@@ -22,7 +22,6 @@ global $base_url;
             <label><?php echo t('Filter By') ?>:</label>
             <select class="used-unused-select">
               <option value="unused"><?php print t("Un Published"); ?></option>
-              <option value="used"><?php print t("Published"); ?></option>
             </select>
           </div>
           <div class="time-filter">

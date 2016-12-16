@@ -304,7 +304,7 @@ function itg_widget_block_view($delta = '') {
       $info['widget'] = 'big_story_format_widget';
       $data = itg_widget_big_story_block_data($info);
       if (isset($data['node_data']->is_live_tv_activeted) && $data['node_data']->is_live_tv_activeted == 1) {
-        $block['content'] = itg_live_tv_page_video();
+        $block['content'] = "<div class='live-tv-big-story'>" . itg_live_tv_page_video() . "</div>";
       }
       else {
         $block['content'] = theme("widget_big_story_format", array("data" => $data));
@@ -445,7 +445,7 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
 
       drupal_add_js('jQuery(window).load(function() {
->>>>>>> 11fa7f6f8c80472eb4f583876c6849ab46a1fe27
+
             jQuery(".flexslider").flexslider({
             animation: "slide",
             prevText: "",
