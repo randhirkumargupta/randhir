@@ -136,6 +136,11 @@
                 $('.search-icon, .globle-search').click(function (e) {
                     e.stopPropagation();
                 });
+                
+                $('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
+                    $('#newlist').hide();
+                });
+                
             }
 
             // jQuery Code for tabbing
@@ -383,16 +388,23 @@ jQuery(window).load(function () {
 
 jQuery(document).ready(function () {
     var getmsgsaves = jQuery('.saved-photogallery').text();
-
     if (getmsgsaves != "")
     {
         jQuery('.saved-photogallery').remove();
-        // jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
-        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">Saved</div>');
+         jQuery('.stryimg').prepend('<div class="saved-photogallery">Saved</div>');
         setTimeout(function () {
             jQuery('.saved-photogallery').remove();
         }, 3000);
     }
+   jQuery('.block-itg-ads').each(function(){
+       
+       if(jQuery(this).html().trim().length==0)
+       {
+           jQuery(this).remove();
+       }
+        
+    })
     jQuery('#map-state').change(function () {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
@@ -425,15 +437,15 @@ jQuery(document).ready(function () {
         });
     });
 
-    //saved message
-    var getmsgsaves = jQuery('.saved-photogallery').text();
-    if (getmsgsaves != "") {
-        jQuery('.saved-photogallery').remove();
-        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
-    }
-    setTimeout(function () {
-        jQuery('.saved-photogallery').remove();
-    }, 3000);
+//    //saved message
+//    var getmsgsaves = jQuery('.saved-photogallery').text();
+//    if (getmsgsaves != "") {
+//        jQuery('.saved-photogallery').remove();
+//        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+//    }
+//    setTimeout(function () {
+//        jQuery('.saved-photogallery').remove();
+//    }, 3000);
 
     //movie review more less
     jQuery('.other-reviews-desc .read-more').click(function () {
@@ -494,8 +506,14 @@ jQuery(document).ready(function () {
     if (winWidth > 770) {
         jQuery(window).resize(menuBuilder);
         menuBuilder();
-    }
-
+    }    
+    jQuery(document).on('click', function () {
+        jQuery('#newlist').slideUp();
+    });
+    jQuery(document).on('click', '.all-menu', function (e) {
+         e.stopPropagation();
+    });
+    
 
     var eventMenu = function () {
         winWidth = jQuery(window).width();
