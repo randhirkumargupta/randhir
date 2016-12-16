@@ -611,6 +611,23 @@ function itg_widget_block_view($delta = '') {
       break;
     // Top takes videos ordering reordering widget case
     case 'anchor_langing_page_menu':
+      drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));  
+      drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+        drupal_add_js('             
+        jQuery(document).ready(function(){ 
+            var getLength = 0;
+            var defaultWidth  = jQuery(".anchor-detail-menu").outerWidth(true);
+            jQuery(".anchor-detail-menu .tab-buttons span").each(function(){
+                getLength += jQuery(this).outerWidth(true);                
+            });                
+            if(getLength > defaultWidth){
+                jQuery(".anchor-detail-menu .tab-buttons").css("width", getLength +"px"); 
+                jQuery(".anchor-detail-menu").mCustomScrollbar({
+                    axis:"x",                    
+                });
+            }
+       });', array('type' => 'inline', 'scope' => 'footer'));
+        
       $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
       break;
     case 'personlization':

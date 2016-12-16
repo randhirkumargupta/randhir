@@ -251,6 +251,7 @@
 
 
 jQuery(document).ready(function () {
+    jQuery('#main').find('img').parent().addClass('zoom-image');
     jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
         var h = jQuery(this).height() + 13;
 //        alert(h);
