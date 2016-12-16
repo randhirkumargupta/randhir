@@ -48,6 +48,13 @@ if (!empty($data)) :
           ?>
         </span>
       </div>
+      <?php if(is_mobile()) { ?>
+        <div class="icon-related show-related">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      <?php } ?>
     </div>
   </div>
   <?php
@@ -59,6 +66,16 @@ if (!empty($data)) :
     <?php foreach ($front_page_promoted_nodes as $front_promoted_data):?>
       <div class="big-story-related-content-list">
         <div class="tile">
+          <?php if(is_mobile()) { ?>
+            <div class="category-name">
+              <?php
+              if (!empty($front_promoted_data['field_primary_category_value'])) {
+                $term_data = taxonomy_term_load($front_promoted_data['field_primary_category_value']);
+                print $term_data->field_cm_display_title['und'][0]['value'];
+              }
+              ?>
+            </div>
+          <?php } ?>
           <div class="pic">
             <?php if(!empty($front_promoted_data['uri'])) : ?>
             <?php echo $default_image_fornt; ?>
@@ -69,6 +86,7 @@ if (!empty($data)) :
              print l($image , 'node/'.$front_promoted_data['nid'] , array('html' => TRUE)); ?>
             <?php endif; ?>
           </div>
+          <?php if(!is_mobile()) { ?>
           <div class="details">
             <div class="category-name">
               <?php
@@ -77,7 +95,8 @@ if (!empty($data)) :
                 print $term_data->field_cm_display_title['und'][0]['value'];
               }
               ?>
-            </div>          
+            </div> 
+            <?php } ?>
             <div class="title">
               <?php print l(mb_strimwidth($front_promoted_data['title'], 0, 65, ".."), 'node/' . $front_promoted_data['nid']); ?>
             </div>
@@ -95,10 +114,13 @@ if (!empty($data)) :
               <?php print t("IST"); ?>
               </span>
             </div>
+            <?php if(!is_mobile()) { ?>
           </div>
+            <?php } ?>
         </div>
       </div>
     <?php endforeach; ?>
   </div>
+  <?php if(is_mobile()) { ?> <div class="big-story-related-content-popup"></div> <?php } ?>
 </div>
 <?php endif; ?>

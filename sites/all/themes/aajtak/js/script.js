@@ -30,9 +30,84 @@
         })(navigator.userAgent || navigator.vendor || window.opera);
         return check;
       }
-      var is_mobile = mobilecheck() ? 'true' : 'false';
+      var is_mobile = mobilecheck() ? true : false;
     
-      
+    // jQuery code only for mobile device
+      if(is_mobile){
+        
+        // jQuery code to open popup for big story related content
+        $("body").on("click", ".show-related", function(e) {
+                e.stopPropagation();
+                var screen_width = $('body').width();
+                var h_center = screen_width/2 - 130;
+                var obj = jQuery(this);
+                var obj_parent = obj.parent();
+                var result = $('.big-story-related-content').html();
+                pos_left = obj_parent.offset().left, pos_top = obj_parent.offset().top - $(window).scrollTop(), parent_height = obj_parent.height();
+                var parent_clone = obj_parent.clone();
+                $("body").addClass("big-overlay");
+                var rc_popup = $(".big-story-related-content-popup");
+                rc_popup.addClass("popup-open"),
+                rc_popup.html(parent_clone),
+                rc_popup.find('.icon-related').removeClass('show-related'),
+                rc_popup.css({left: pos_left, top: pos_top}),
+                $("body").css("overflow", "hidden"), 
+                rc_popup.velocity({
+                  duration: 300,
+                  stagger: 80,
+                  left: h_center,
+                  top: "20px"
+                }, {
+                    complete: function() {
+                      $('body').find(rc_popup).append(result),
+                      rc_popup.find(".icon-related").addClass("open");
+//                        rc_popup.removeClass("popup-open").removeAttr("style"), 
+//                        $("body").css("overflow", "auto"), 
+//                        rc_popup.empty();
+                    }
+                });
+//                rc_popup.find(".related-content-wrapper").slideToggle().toggleClass("open-data");
+            }), $(document).on('click', '.icon-related.open', function(){
+              if ($("body").hasClass("big-overlay")){
+                var rc_popup = $(".big-story-related-content-popup");
+                rc_popup.find('.big-story-related-content-list').remove(),
+                $("body").removeClass("big-overlay"), 
+                rc_popup.velocity({
+                    duration: 1200,
+                    left: pos_left, 
+                    top: pos_top
+                }, {
+                    complete: function() {
+                        rc_popup.removeClass("popup-open").removeAttr("style"), 
+                        $("body").css("overflow", "auto"), 
+                        rc_popup.empty();
+                    }
+                });
+              }
+            }), $(document).on('click', function(e){
+                    e.stopPropagation();
+                    if ($("body").hasClass("big-overlay")){
+                        var rc_popup = $(".big-story-related-content-popup");
+                        rc_popup.find('.big-story-related-content-list').remove(),
+                        $("body").removeClass("big-overlay"), 
+                        rc_popup.velocity({
+                            duration: 1200,
+                            left: pos_left, 
+                            top: pos_top
+                        }, {
+                            complete: function() {
+                                rc_popup.removeClass("popup-open").removeAttr("style"), 
+                                $("body").css("overflow", "auto"), 
+                                rc_popup.empty();
+                            }
+                        });
+                    }
+                });
+        
+      }
+    // End of jQuery code  
+    
+    // jQuery code not for mobile device  
       if(!is_mobile){
         
         // jquery code to add aajtak Big story format related content slider
@@ -50,7 +125,10 @@
           variableWidth: true,
           slidesToScroll: 1
         });
+        
       }
+    // End of jQuery code    
+      
       
       // jquery code to add aajtak sliding slider
       $('.slider-container').slick({

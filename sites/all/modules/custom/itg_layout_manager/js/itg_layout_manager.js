@@ -117,7 +117,6 @@
                 $('#' + content_place).find('.slider-container').slick({infinite: true, slidesToShow: 3, variableWidth: true, slidesToScroll: 1});
                 
                 var stackId = $('#' + content_place).find('ul').attr('id');
-                  console.log(stackId);
                 var clickeventtype = mobilecheck() ? 'touchstart' : 'click';  
                 var stack = new Stack(document.getElementById(stackId));
                 document.querySelector('.button--accept[data-stack =' + stackId + ']').addEventListener(clickeventtype, function() {

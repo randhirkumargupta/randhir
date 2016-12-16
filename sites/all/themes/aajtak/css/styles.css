@@ -42,7 +42,7 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999999999;
+  z-index: 9999;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
@@ -65,7 +65,7 @@ body::before {
 }
 
 /* line 35, ../sass/styles.scss */
-.overlay::before {
+.overlay::before, .big-overlay::before {
   opacity: 1;
   pointer-events: auto;
 }
@@ -1715,7 +1715,7 @@ header .header-right-menu ul li.live-tv a {
   position: fixed;
   opacity: 0;
   width: 260px;
-  z-index: 9999999999;
+  z-index: 99999;
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.7), 0 10px 10px rgba(0, 0, 0, 0.7);
@@ -1739,3 +1739,217 @@ header .header-right-menu ul li.live-tv a {
   box-shadow: none;
   transition: none;
 }
+
+/* START OF BIG STORY FORMAT CSS */
+/* line 1106, ../sass/styles.scss */
+.big-story-format-layout.mobile {
+  zoom: 1;
+}
+/* line 19, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile:before, .big-story-format-layout.mobile:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+/* line 25, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile:after {
+  clear: both;
+}
+/* line 1108, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-wrapper {
+  position: relative;
+}
+/* line 1111, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-text {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  margin: 0 auto;
+  max-width: 260px;
+  padding: 20px 15px;
+  position: relative;
+  z-index: 99;
+  text-align: center;
+  top: -30px;
+}
+/* line 1123, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-text .big-story-title a {
+  color: #000;
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 18px;
+}
+/* line 1128, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-text .reported-by {
+  padding-top: 5px;
+}
+/* line 1130, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-text .reported-by .name, .big-story-format-layout.mobile .big-story-text .reported-by .date {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+  padding: 0 5px;
+  position: relative;
+}
+/* line 1138, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-text .reported-by .name a {
+  color: #9a9a9a;
+}
+/* line 1141, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-text .reported-by .date:before {
+  content: '|';
+  position: absolute;
+  font-size: 10px;
+  left: -4px;
+  top: 0;
+}
+/* line 1149, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-text .icon-related {
+  background-color: #179f75;
+  border: none;
+  border-radius: 50%;
+  height: 36px;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 11px 12px;
+  transition: .25s ease-in-out;
+  transform: rotate(0);
+  width: 36px;
+  cursor: pointer;
+  z-index: 9;
+}
+/* line 530, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-text .icon-related span {
+  background: #fff;
+  display: block;
+  height: 1px;
+  margin-bottom: 5px;
+  position: relative;
+  width: 15px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0);
+  transition: .25s ease-in-out;
+}
+/* line 541, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-text .icon-related span:before {
+  content: "";
+  box-shadow: 2px 1px 0 1px #fff;
+  display: block;
+  height: 0;
+  left: -6px;
+  position: relative;
+  width: 0;
+}
+/* line 1154, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-related-content-popup {
+  position: fixed;
+  opacity: 0;
+  width: 260px;
+  z-index: 99999;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.7), 0 10px 10px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.7), 0 10px 10px rgba(0, 0, 0, 0.7);
+  transition: all 500ms;
+  max-height: 80%;
+  visibility: hidden;
+}
+/* line 1166, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-related-content-popup.popup-open {
+  opacity: 1;
+  visibility: visible;
+  overflow-y: auto;
+}
+/* line 1170, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-related-content-popup.popup-open .big-story-text {
+  margin: 0;
+  top: 0;
+}
+/* line 1177, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-related-content {
+  display: none;
+}
+/* line 1181, ../sass/styles.scss */
+.big-story-format-layout.mobile .big-story-related-content-list .tile {
+  text-align: center;
+  position: relative;
+  height: 262px;
+}
+/* line 558, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-related-content-list .tile .category-name {
+  background-color: #dc4750;
+  border-radius: 4px 4px 0 0;
+  color: #fff;
+  height: 20px;
+}
+/* line 566, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-related-content-list .tile .title {
+  height: 40px;
+  overflow: hidden;
+  margin: 10px 10px 8px;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
+}
+/* line 571, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-related-content-list .tile .title a {
+  color: #000;
+  display: block;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
+}
+/* line 579, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-related-content-list .tile .pic {
+  height: 148px;
+  overflow: hidden;
+}
+/* line 585, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-related-content-list .tile .name {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+  padding: 0 5px;
+  position: relative;
+}
+/* line 592, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-related-content-list .tile .name a {
+  color: #9a9a9a;
+}
+/* line 598, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-related-content-list .tile .date {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #9a9a9a;
+  padding: 0 5px;
+  position: relative;
+}
+/* line 608, ../sass/_itg-mixins.scss */
+.big-story-format-layout.mobile .big-story-related-content-list .tile .date:before {
+  content: '|';
+  position: absolute;
+  font-size: 9px;
+  left: -4px;
+  top: 0;
+}
+
+/* END OF BIG STORY FORMAT CSS */
