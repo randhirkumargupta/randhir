@@ -70,7 +70,23 @@ if (!empty($content)):
                                     <li><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> <!--<span>958</span>--></li>
                                     <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a> <!--<span>8523</span>--></li>
                                     <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a> <!--<span>7258</span>--></li>
-                                    <li><a href="#"><i class="fa fa-comment"></i></a> <!--<span>1522</span>--></li>
+                                        <?php
+                                        if (function_exists(global_comment_last_record)) {
+                                          $last_record = $global_comment_last_record;
+                                          $config_name = trim($last_record[0]->config_name);
+                                        }
+                                        if ($config_name == 'vukkul') {
+                                          ?>
+                                          <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
+                                                      $comment_count = json_decode(itg_vukkul_comment_count('story_' . arg(1)));
+                                                      foreach ($comment_count as $cnt) {
+                                                        echo $cnt;
+                                                      }
+                                                      ?></span></a></li>
+                                        <?php } if ($config_name == 'other') { ?> 
+                                          <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
+                                        <?php } ?>
+                              
                                     <?php global $user; ?>
                                     <?php if ($user->uid > 0): ?>
                                         <?php $read_later = flag_create_link('my_saved_content', $node->nid); ?>                      
@@ -176,8 +192,10 @@ if (!empty($content)):
                                 <div class="photoby"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
                             <?php } ?>
                         </div>
+                        <?php if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
                         <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
-                        <?php
+                        <?php } ?>
+                          <?php
                         if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                             if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
                                 ?>
@@ -227,9 +245,9 @@ if (!empty($content)):
                               $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(\'' . $actual_link . ',' . $factoidsSocialShare['title'] . ',' . $factoidsSocialShare['share_desc'] . '\')"><i class="fa fa-facebook"></i></a></li>
-                                 <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['title']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
-                                 <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(\'' . $actual_link . '\')"></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . addslashes(htmlspecialchars($factoidsSocialShare['title'], ENT_QUOTES)) . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $img . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
+                                 <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
                                  </ul></div></div>';
                               $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
                               foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
@@ -251,8 +269,17 @@ if (!empty($content)):
                               $expertDetails .= '</div>';
                             }
                             if (!empty($node->field_story_expert_image)) {
+                              if(!empty($node->field_story_expert_image[LANGUAGE_NONE][0]['uri'])) {
                               $expertDetailsImage = file_create_url($node->field_story_expert_image[LANGUAGE_NONE][0]['uri']);
+                              
+                              }
+                              else
+                              {
+                                $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
+     
+                              }
                               $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '"></div></div>';
+                              
                             }
                             if (!empty($node->field_story_expert_description)) {
                               $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2></div>';
@@ -328,7 +355,7 @@ if (!empty($content)):
                                 $buzz_output.= '<div class="buzz-img"><div class="social-share">
               <ul>
               <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-              <li><a onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . addslashes(htmlspecialchars($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'], ENT_QUOTES)) . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ')" class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a class= "def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . addslashes($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ')" class="facebook"><i class="fa fa-facebook"></i></a></li>
               <li><a href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="twitter"><i class="fa fa-twitter"></i></a></li>
               <li><a title="share on google+" href="#" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
@@ -390,9 +417,13 @@ if (!empty($content)):
                               }
                               if ($config_name == 'vukkul') {
                                 ?>
-                                <li class="mhide"><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
+                            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php  $comment_count = json_decode(itg_vukkul_comment_count('story_'.arg(1))); 
+                            foreach ($comment_count as $cnt) {
+                                echo $cnt;
+                             }
+                            ?></span></a></li>
                               <?php } if ($config_name == 'other') { ?> 
-                                <li class="mhide"><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
+                                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
                               <?php } ?>
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
                             <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>

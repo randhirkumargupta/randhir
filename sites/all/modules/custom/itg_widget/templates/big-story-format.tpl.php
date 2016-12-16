@@ -25,7 +25,8 @@ if (!empty($data)) : global $base_url;
           <a href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
             <img src="<?php print image_style_url("big_story_widget", $data['node_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
           </a>  
-          <div class="story-tag"><?php print t("Big Story") ?></div>
+          <div class="story-tag"><?php print t("Big Story") ?></div>          
+          <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg').'/images/tab-loading.gif' ?>" alt="loading">
           <?php
           // prepare configuration for sharing
           $image = file_create_url($data['node_data']->field_story_extra_large_image['und'][0]['uri']);
@@ -35,7 +36,8 @@ if (!empty($data)) : global $base_url;
           <a href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
             <img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
           </a>  
-          <div class="story-tag"><?php echo t("Big Story") ?></div>
+          <div class="story-tag"><?php echo t("Big Story") ?></div>          
+          <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg').'/images/tab-loading.gif' ?>" alt="loading">          
         <?php } ?>
       </div>
       <div class="big-story-col-2">
