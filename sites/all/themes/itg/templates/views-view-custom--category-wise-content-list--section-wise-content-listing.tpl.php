@@ -1,4 +1,5 @@
 <?php
+global $base_url;
 /**
  * @file
  * Default simple view template to display a list of rows.
@@ -12,8 +13,8 @@
 <?php foreach ($rows as $id => $row) { ?>
   <div class="catagory-listing">
     <div class="pic">
-      <?php if ($row['field_story_extra_large_image'] != 'notFound') { ?>
-        <?php print $row['field_story_extra_large_image']; ?>
+      <?php if ($row['field_story_small_image'] != '') { ?>
+        <?php print $row['field_story_small_image']; ?>
         <?php
       }
       else {
@@ -23,9 +24,10 @@
         else {
           $image_link = "<img width='170' height='127'  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
         }
+         print l($image_link, "node/" . $row['nid'], array("html" => true));
       }
       ?>
-      <?php print l($image_link, "node/" . $row['nid'], array("html" => true)); ?>
+   
     </div>
     <div class="detail"><h3><?php print $row['title']; ?></h3>
         <?php if ($row['type'] == 'story') { ?>

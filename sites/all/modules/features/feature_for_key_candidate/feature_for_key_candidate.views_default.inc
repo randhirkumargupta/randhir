@@ -224,7 +224,7 @@ function feature_for_key_candidate_views_default_views() {
       'postpone_processing' => 0,
       'skip_confirmation' => 1,
       'override_label' => 1,
-      'label' => 'Add to Special Candidate Key Widget',
+      'label' => 'Add To Key Candidate',
     ),
   );
   /* Field: Content: Title */
