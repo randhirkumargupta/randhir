@@ -146,7 +146,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     if (isset($current_event_nid)) {
       $event_node = node_load($current_event_nid);
       $registration_type = $event_node->field_event_type[LANGUAGE_NONE][0]['value'];
- /*     
+     
       if ($registration_type == 'free') {
         unset($form['field_erf_total_fee']);
         $form['field_erf_payment_gateway']['#access'] = FALSE;
@@ -155,31 +155,21 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
             '#prefix' => '<div class= "event-total-fees-container">',
             '#title' => 'Total Fees',
             '#type' => 'item',
-            '#markup' => '<span class="event-total-fees-text">Rs <span class"event-fees-amount">00</span> for <span class="event-number-of-members">1</span> Members',
+            '#markup' => '<span class="event-total-fees-text"><span class="event-fees-amount">Rs 00</span> for <span class="event-number-of-members">1</span> Members',
             '#suffix' => '</div>',
             '#weight' => 10
         );
+        $form['have_a_coupon_code'] = array(
+            '#prefix' => '<div class= "have-a-coupon-code">',
+            '#type' => 'item',
+            '#markup' => '<span class="event-number-of-members">Have a Coupon Code?</span> <a class="have-a-coupon-code-link" href="#">Apply</a>',
+            '#suffix' => '</div>',
+            '#weight' => 11
+        );
       }
-  * */
-    } 
  
-     $form['total_fees_container'] = array(
-        '#prefix' => '<div class= "event-total-fees-container">',
-        '#title' => 'Total Fees',
-        '#type' => 'item',
-        '#markup' => '<span class="event-total-fees-text"><span class="event-fees-amount">Rs 00</span> for <span class="event-number-of-members">1</span> Members',
-        '#suffix' => '</div>',
-        '#weight' => 10
-    );
-     
-    $form['have_a_coupon_code'] = array(
-        '#prefix' => '<div class= "have-a-coupon-code">',
-        '#type' => 'item',
-        '#markup' => '<span class="event-number-of-members">Have a Coupon Code?</span> <a class="have-a-coupon-code-link" href="#">Apply</a>',
-        '#suffix' => '</div>',
-        '#weight' => 11
-    );
-
+    } 
+   
     // Assign event id into source id field
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $current_event_nid;
     $form['field_story_source_id']['#access'] = TRUE;
@@ -244,11 +234,11 @@ function itg_event_registration_form_after_build($form, &$form_state) {
    }
    
   // If limited tickets are available
-  $event_node = node_load($current_event_nid);
-  $no_of_tickets = $event_node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
-
-  $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
-  $tickets_available = $no_of_tickets - $total_registered_users;
+//  $event_node = node_load($current_event_nid);
+//  $no_of_tickets = $event_node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
+//
+//  $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
+//  $tickets_available = $no_of_tickets - $total_registered_users;
 
   return $form;
 }
