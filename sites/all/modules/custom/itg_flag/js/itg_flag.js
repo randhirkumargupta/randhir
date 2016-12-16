@@ -34,10 +34,10 @@
                             $("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
                         }
                         if (obj.chk == 'sty') {
-                            $("#sty-dv").show(0).delay(4000).hide(3000);
+                            $("#sty-dv").show(0);
                         }
                         if (obj.chk == 'dsty') {
-                            $("#dsty-dv").show(0).delay(4000).hide(3000);
+                            $("#dsty-dv").show(0);
                         }
                         if (obj.type == 'dislike_count') {
                             $("#no-of-dislikes_" + obj.nd_id).html("(" + obj.count + ")");

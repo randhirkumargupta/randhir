@@ -11,8 +11,10 @@ function save_big_story_widget_data($big_story_data) {
   $selected_node = $big_story_data['selection'][0];
   $related_nodes_json = '[]';
   // Delete entry first.
+  // Remove except livetv.
   db_delete('itg_widget_order')
       ->condition('widget', $widget)
+      ->condition('extra','[]')
       ->execute();
   // watchdog("widget", "Delete action has been performed");
   // Get related nodes then convert into json.
@@ -61,20 +63,23 @@ function get_related_content_with_server_prefix($related_content_string) {
  * @return array
  */
 function itg_widget_big_story_block_data($info) {
+  $big_story_block_data = array();
   $widget_name = isset($info['widget']) ? $info['widget'] : "";
   if (!empty($widget_name)) {
-    $big_story_live_tv_extra = itg_big_story_get_extra_value();
-    if ($big_story_live_tv_extra == 'big_story_live_tv_active') {
-      $std = new stdClass();
-      $std->is_live_tv_activeted =  TRUE;
-      $entity_data = array("node_data" => $std);
-    }
-    else {
-      $result = get_view_nodes_form_custom_table_for_widgets($widget_name, 1, 0);
-      foreach ($result as $entity_data_node) {
-        $entity_data = array("node_data" => node_load($entity_data_node['nid']));
+    $query = db_select('itg_widget_order','iwo')
+        ->fields('iwo',array('nid','extra'))
+        ->orderBy('iwo.nid','ASC')
+        ->condition('widget',$widget_name);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    
+    foreach($result as $big_story_data) {
+      if($big_story_data['extra'] == 'big_story_live_tv_active' && $big_story_data['nid'] == 0) {
+        $big_story_block_data[] = array("is_live_tv" => TRUE);
+      }
+      else if ($big_story_data['nid']) {
+        $big_story_block_data[] = array("node_load_data" => node_load($big_story_data['nid']));
       }
     }
-    return $entity_data;
+    return $big_story_block_data;
   }
 }
