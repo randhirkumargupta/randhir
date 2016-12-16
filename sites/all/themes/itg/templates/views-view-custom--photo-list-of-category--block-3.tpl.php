@@ -10,7 +10,7 @@ if (!in_array(variable_get('ipl_for_widget'), $category)) {
     <li class="col-md-3">
       <div class="tile">
         <figure>
-  <?php $img = $row['field_story_extra_large_image']; ?>
+  <?php $img = $row['field_story_small_image']; ?>
   <?php print l($img, 'node/' . $row['nid_1'], array('html' => TRUE)); ?>
           <figcaption><i class="fa fa-camera" aria-hidden="true"></i><?php print $row['delta']; ?></figcaption>
         </figure>
