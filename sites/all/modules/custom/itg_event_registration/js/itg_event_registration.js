@@ -74,15 +74,14 @@ jQuery(document).ready(function(){
                jQuery("table.field-multiple-table tr").eq(b).remove();  
               b--;
               $eventNum.val(b);              
-            }                        
-            
-        });                              
-                      
-        jQuery(document).on('change', 'input[type="radio"]', function() {  
-            var $eventNum = jQuery(".event-form-number");
+            }             
+            priceCalc();
             var totalMember = jQuery('.event-total-fees-text .event-number-of-members');
             var a = $eventNum.val();                        
-            totalMember.html(a);  
+            totalMember.html(a);                         
+        });                              
+        
+        var priceCalc = function(){
             var memberPrice = 0;
             jQuery('.form-radio').each(function(){   
                if(jQuery(this).is(':checked'))
@@ -91,7 +90,15 @@ jQuery(document).ready(function(){
                }                                        
             });                 
             var $total = jQuery('#edit-total-fees-container .event-fees-amount');           
-            $total.html("Rs " + memberPrice);                
+            $total.html("Rs " + memberPrice);            
+        }
+        
+        jQuery(document).on('change', 'input[type="radio"]', function() {  
+            var $eventNum = jQuery(".event-form-number");
+            var totalMember = jQuery('.event-total-fees-text .event-number-of-members');
+            var a = $eventNum.val();                        
+            totalMember.html(a); 
+            priceCalc();
         });
         
         
