@@ -149,10 +149,11 @@ drupal_add_js("jQuery(document).ready(function(){
         jQuery('.'+getVal).show();
     });
     
-    jQuery('.view-event-photo-slider ul').slick({
+    jQuery('#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider ul').slick({
         infinite: true,    
         autoplay:true,
         dots: false,
+        variableWidth:true,
         prevArrow: '<i class=\"fa fa-angle-left slick-prev\"></i>',
         nextArrow: '<i class=\"fa fa-angle-right slick-next\"></i>'
     });

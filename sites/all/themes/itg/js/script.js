@@ -136,6 +136,11 @@
                 $('.search-icon, .globle-search').click(function (e) {
                     e.stopPropagation();
                 });
+                
+                $('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
+                    $('#newlist').hide();
+                });
+                
             }
 
             // jQuery Code for tabbing
@@ -494,8 +499,14 @@ jQuery(document).ready(function () {
     if (winWidth > 770) {
         jQuery(window).resize(menuBuilder);
         menuBuilder();
-    }
-
+    }    
+    jQuery(document).on('click', function () {
+        jQuery('#newlist').slideUp();
+    });
+    jQuery(document).on('click', '.all-menu', function (e) {
+         e.stopPropagation();
+    });
+    
 
     var eventMenu = function () {
         winWidth = jQuery(window).width();
