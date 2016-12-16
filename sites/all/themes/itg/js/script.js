@@ -388,16 +388,23 @@ jQuery(window).load(function () {
 
 jQuery(document).ready(function () {
     var getmsgsaves = jQuery('.saved-photogallery').text();
-
     if (getmsgsaves != "")
     {
         jQuery('.saved-photogallery').remove();
-        // jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
-        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">Saved</div>');
+         jQuery('.stryimg').prepend('<div class="saved-photogallery">Saved</div>');
         setTimeout(function () {
             jQuery('.saved-photogallery').remove();
         }, 3000);
     }
+   jQuery('.block-itg-ads').each(function(){
+       
+       if(jQuery(this).html().trim().length==0)
+       {
+           jQuery(this).remove();
+       }
+        
+    })
     jQuery('#map-state').change(function () {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
@@ -430,15 +437,15 @@ jQuery(document).ready(function () {
         });
     });
 
-    //saved message
-    var getmsgsaves = jQuery('.saved-photogallery').text();
-    if (getmsgsaves != "") {
-        jQuery('.saved-photogallery').remove();
-        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
-    }
-    setTimeout(function () {
-        jQuery('.saved-photogallery').remove();
-    }, 3000);
+//    //saved message
+//    var getmsgsaves = jQuery('.saved-photogallery').text();
+//    if (getmsgsaves != "") {
+//        jQuery('.saved-photogallery').remove();
+//        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+//    }
+//    setTimeout(function () {
+//        jQuery('.saved-photogallery').remove();
+//    }, 3000);
 
     //movie review more less
     jQuery('.other-reviews-desc .read-more').click(function () {

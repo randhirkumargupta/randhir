@@ -9,6 +9,6 @@
 $nid = $row->nid.'-'.$row->itg_widget_order_cat_id.'-'.$row->itg_widget_order_state;
 
 ?>
-Lead&nbsp;<input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Lead" <?php echo ($row->itg_widget_order_extra=='Lead')?'checked':'';?>>
-Win&nbsp;<input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Win" <?php echo ($row->itg_widget_order_extra=='Win')?'checked':'';?>>
+Leading&nbsp;<input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Lead" <?php echo ($row->itg_widget_order_extra=='Lead')?'checked':'';?>>
+Won&nbsp;<input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Win" <?php echo ($row->itg_widget_order_extra=='Win')?'checked':'';?>>
 Lost&nbsp;<input type="radio" class="key-radio" name="node-<?php print $nid ?>" value="Lost" <?php echo ($row->itg_widget_order_extra=='Lost')?'checked':'';?>>

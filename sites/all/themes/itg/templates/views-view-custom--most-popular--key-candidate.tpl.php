@@ -51,10 +51,10 @@ $resultdata = array_unique($consti);
 
                    <?php
                     if ($row['extra'] == "Win") {
-                        print ' <p class="status green"><i class="fa fa-thumbs-o-up"></i><span>WIN</span></p>';
+                        print ' <p class="status green"><i class="fa fa-thumbs-o-up"></i><span>WON</span></p>';
                     } else if ($row['extra'] == "Lost")
                     {
-                        print ' <p class="status red"><i class="fa fa-thumbs-o-down"></i><span>LOST</span></p>';
+                        print ' <p class="status red"><i class="fa fa-thumbs-o-down"></i><span>LEADING</span></p>';
                     }
                     else if ($row['extra'] == "Lead")
                     {
