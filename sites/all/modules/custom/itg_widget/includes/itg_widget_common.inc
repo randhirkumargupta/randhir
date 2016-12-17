@@ -226,6 +226,18 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
 }
 
 /**
+ * Function to remove term.
+ * @param int $tid
+ */
+function remove_state_term($tid) {
+    if($tid) {
+        taxonomy_term_delete($tid);
+    }
+    drupal_set_message(t("Term Deleted"));
+    drupal_goto($_SERVER['HTTP_REFERER']);
+}
+
+/**
  * Funtion used to delete node combination form itg_widget_order table.
  * 
  * @param string $widget_name

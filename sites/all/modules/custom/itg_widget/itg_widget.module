@@ -101,6 +101,11 @@ function itg_widget_menu() {
     'page callback' => 'remove_extra_data',
     'access arguments' => array('access administrator'),
   );
+  $items['remove-term-state'] = array(
+    'page callback' => 'remove_state_term',
+    'page arguments' => array(1),
+    'access arguments' => array('administer nodequeue'),
+  );
   $items['setids'] = array(
     'page callback' => 'itg_widget_setids', // load the croper according to size!.
     'type' => MENU_CALLBACK,
