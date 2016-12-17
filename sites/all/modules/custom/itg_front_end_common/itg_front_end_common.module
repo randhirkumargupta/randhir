@@ -273,9 +273,10 @@ function itg_front_end_common_views_pre_render(&$view) {
  */
 
 function itg_vukkul_comment_count($nid) {
-  $run_url = "http://vuukle.com/api.asmx/getCommentCountListJSON?id=dc34b5cc-453d-468a-96ae-075a66cd9eb7&list=".$nid;
+  $run_url = "http://vuukle.com/api.asmx/getCommentCountListJSON?id=dc34b5cc-453d-468a-96ae-075a66cd9eb7&list=" . $nid;
   $content = file_get_contents($run_url);
-  return $content;
+  $vukkul_share = json_decode($content);
+  return $vukkul_share->$nid;
 }
 
 /**

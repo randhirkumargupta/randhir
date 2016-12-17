@@ -67,7 +67,7 @@ if (!empty($content)):
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
                                 </ul>
                                 <ul class="social-links mhide">
-                                    <li><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> <!--<span>958</span>--></li>
+                                    <li><a href="javascript:" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> <!--<span>958</span>--></li>
                                     <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a> <!--<span>8523</span>--></li>
                                     <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a> <!--<span>7258</span>--></li>
                                         <?php
@@ -79,10 +79,7 @@ if (!empty($content)):
                                           ?>
                                           <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
                                                       if(function_exists(itg_vukkul_comment_count)) {
-                                                      $comment_count = json_decode(itg_vukkul_comment_count('story_' . arg(1)));
-                                                      }
-                                                      foreach ($comment_count as $cnt) {
-                                                        echo $cnt;
+                                                      print itg_vukkul_comment_count('story_' . arg(1));
                                                       }
                                                       ?></span></a></li>
                                         <?php } if ($config_name == 'other') { ?> 
@@ -431,11 +428,8 @@ if (!empty($content)):
                                 ?>
                             <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php  
                             if(function_exists(itg_vukkul_comment_count)) {
-                            $comment_count = json_decode(itg_vukkul_comment_count('story_'.arg(1)));
+                              print itg_vukkul_comment_count('story_' . arg(1));
                             }
-                            foreach ($comment_count as $cnt) {
-                                echo $cnt;
-                             }
                             ?></span></a></li>
                               <?php } if ($config_name == 'other') { ?> 
                                 <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
