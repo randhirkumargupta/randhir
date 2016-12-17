@@ -292,7 +292,7 @@ function itg_facebook_share_count($url) {
 
 
 /**
- * Implements itg_twitter_share_count
+ * Implements itg_google_share_count
  * @param string $url
  */
 
