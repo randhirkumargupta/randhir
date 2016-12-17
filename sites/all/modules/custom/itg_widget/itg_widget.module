@@ -118,13 +118,13 @@ function itg_widget_menu() {
     'page callback' => 'itg_widget_big_story_live_tv_flag',
     'page arguments' => array(1),
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'access arguments' => array('administer nodequeue'),
   );
 
   $items['test_function_callback'] = array(
     'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'access arguments' => array('administer nodequeue'),
   );
 
   $items['issue_filter_widget'] = array(
@@ -299,16 +299,24 @@ function itg_widget_block_view($delta = '') {
   switch ($delta) {
     // Big Story Content.
     case 'big_story_format':
+      $live_tv_flag = FALSE;
+      $content_flag = FALSE;
+      $big_story_node_data = array();
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
       //$block['subject'] = t('');
       $info['widget'] = 'big_story_format_widget';
       $data = itg_widget_big_story_block_data($info);
-      if (isset($data['node_data']->is_live_tv_activeted) && $data['node_data']->is_live_tv_activeted == 1) {
-        $block['content'] = "<div class='live-tv-big-story'>" . itg_live_tv_page_video() . "</div>";
+      foreach($data as $big_story_data) {
+        if($big_story_data['is_live_tv']) {
+          $live_tv_flag = TRUE;
+          $big_story_node_data['live_tv'] = itg_live_tv_page_video();
+        }
+        if(!empty($big_story_data['node_load_data']->nid)) {
+          $content_flag = TRUE;
+          $big_story_node_data['node_data'] = $big_story_data['node_load_data'];
+        }
       }
-      else {
-        $block['content'] = theme("widget_big_story_format", array("data" => $data));
-      }
+      $block['content'] = theme("widget_big_story_format", array("data" => $big_story_node_data));
 
       break;
     // section ordering reordering widget case
@@ -445,7 +453,6 @@ function itg_widget_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
 
       drupal_add_js('jQuery(window).load(function() {
-
             jQuery(".flexslider").flexslider({
             animation: "slide",
             prevText: "",
@@ -604,6 +611,23 @@ function itg_widget_block_view($delta = '') {
       break;
     // Top takes videos ordering reordering widget case
     case 'anchor_langing_page_menu':
+      drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));  
+      drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
+        drupal_add_js('             
+        jQuery(document).ready(function(){ 
+            var getLength = 0;
+            var defaultWidth  = jQuery(".anchor-detail-menu").outerWidth(true);
+            jQuery(".anchor-detail-menu .tab-buttons span").each(function(){
+                getLength += jQuery(this).outerWidth(true);                
+            });                
+            if(getLength > defaultWidth){
+                jQuery(".anchor-detail-menu .tab-buttons").css("width", getLength +"px"); 
+                jQuery(".anchor-detail-menu").mCustomScrollbar({
+                    axis:"x",                    
+                });
+            }
+       });', array('type' => 'inline', 'scope' => 'footer'));
+        
       $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
       break;
     case 'personlization':
@@ -969,7 +993,7 @@ function itg_widget_big_story_live_tv_flag($flag) {
     if ($action) {
       $extra_field_value = itg_big_story_get_extra_value();
       // Run db query if live tv is not as big story
-      if ($flag == 'yes' && $extra_field_value != "big_story_live_tv_active") {
+      if ($flag == 'yes') {
         itg_widget_delete_big_story_live_tv();
         try {
           db_insert('itg_widget_order')
@@ -983,10 +1007,7 @@ function itg_widget_big_story_live_tv_flag($flag) {
           print "error";
         }
       }
-      elseif ($flag == 'yes' && $extra_field_value == "big_story_live_tv_active") {
-        print "already_live_tv";
-      }
-      elseif ($flag == 'no' && $extra_field_value == 'big_story_live_tv_active') {
+      elseif ($flag == 'no') {
         $is_deleted_liv_tv = itg_widget_delete_big_story_live_tv();
         if ($is_deleted_liv_tv) {
           print "deleted";
@@ -1010,6 +1031,7 @@ function itg_widget_delete_big_story_live_tv() {
   try {
     $number_deleted = db_delete('itg_widget_order')
         ->condition('widget', 'big_story_format_widget')
+        ->condition('extra','big_story_live_tv_active')
         ->execute();
     if ($number_deleted) {
       return TRUE;
@@ -1027,9 +1049,15 @@ function itg_widget_delete_big_story_live_tv() {
  * @return string
  */
 function itg_big_story_get_extra_value() {
+  $extra_data = array();
   $select_query = db_select('itg_widget_order', 'iwo')
           ->fields('iwo', array('extra'))
           ->condition('widget', 'big_story_format_widget')
           ->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $select_query[0]['extra'];
+  if(!empty($select_query)) {
+    foreach($select_query as $data) {
+      $extra_data[] = $data['extra'];
+    }
+  }
+  return $extra_data;
 }
