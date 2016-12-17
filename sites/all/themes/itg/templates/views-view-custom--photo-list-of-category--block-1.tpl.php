@@ -4,7 +4,7 @@
         <div class="tile">
      <figure>
         <?php
-        $img = $row['field_story_extra_large_image'];
+        $img = $row['field_story_small_image'];
         $section_cat_id = $row['field_story_category'];
         ?>
   <?php print l($img, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>

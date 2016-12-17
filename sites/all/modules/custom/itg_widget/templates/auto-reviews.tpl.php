@@ -8,10 +8,10 @@
         }
         ?>
         <li class="dont-miss-listing" id="dont-miss-<?php print $key ?>">
-          <?php if (!empty($node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
+          <?php if (!empty($node_data['node_load_data']->field_story_small_image['und'][0]['uri'])) { ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">
-                <img src="<?php print image_style_url("widget_small", $node_data['node_load_data']->field_story_extra_large_image['und'][0]['uri']); ?>" />
+                <img src="<?php print image_style_url("widget_small", $node_data['node_load_data']->field_story_small_image['und'][0]['uri']); ?>" />
               </a>
             </div>
             <?php
