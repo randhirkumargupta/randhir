@@ -2314,6 +2314,23 @@ footer .footer-copyright {
 .story-section .story-right .stryimg {
   position: relative;
 }
+.story-section .story-right .stryimg .saved-photogallery {
+  background: #fff none repeat scroll 0 0;
+  box-shadow: 0 0 8px #666;
+  font-family: roboto;
+  font-size: 22px;
+  font-weight: 700;
+  height: 160px;
+  left: 50%;
+  line-height: 160px;
+  margin-left: -157px;
+  margin-top: -80px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 315px;
+  z-index: 1;
+}
 .story-section .story-right .stryimg .field-label {
   display: none;
 }
@@ -9972,6 +9989,11 @@ footer .footer-copyright {
 .story-section .listicle-page.story-right {
   width: 100%;
 }
+.story-section .listicle-page.story-right .byline {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
 .story-section .listicle-page .listicle-detail {
   /*        border-top: 1px solid #ccc;   */
 }
@@ -9987,15 +10009,15 @@ footer .footer-copyright {
   line-height: 34px;
   color: #fff;
   font-weight: 700;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description {
   font-size: 16px;
   color: #282828;
   display: inline-block;
   vertical-align: top;
-  width: 90%;
-  padding: 20px;
+  width: 95%;
+  padding: 18px 20px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description span {
   font-weight: 600;

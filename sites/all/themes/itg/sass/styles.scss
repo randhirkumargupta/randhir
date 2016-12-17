@@ -1851,6 +1851,23 @@ footer{
     .story-right{        
         .stryimg{
             @include pos(relative);
+            .saved-photogallery{
+                background: #fff none repeat scroll 0 0;
+                box-shadow: 0 0 8px #666;
+                font-family: roboto;
+                font-size: 22px;
+                font-weight: 700;
+                height: 160px;
+                left: 50%;
+                line-height: 160px;
+                margin-left: -157px;
+                margin-top: -80px;
+                position: absolute;
+                text-align: center;
+                top: 50%;
+                width: 315px;
+                z-index: 1;
+            }
             .field-label{
                 display: none;
             }
@@ -8379,7 +8396,12 @@ input[type="radio"]:checked + label:after{
 .story-section {
 .listicle-page{
     &.story-right{
-        @include calculate-width(1);   
+        @include calculate-width(1);
+        .byline{
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }   
     }    
     .listicle-detail{
 /*        border-top: 1px solid #ccc;   */
@@ -8394,14 +8416,14 @@ input[type="radio"]:checked + label:after{
             line-height: 34px;
             color: #fff;
             font-weight: 700;        
-            margin-top: 15px;
+            margin-top: 20px;
         }
         .listicle-description{
             font-size: 16px;
             color: #282828;    
             @include display-inline;
-            width: 90%;
-            padding: 20px;
+            width: 95%;
+            padding: 18px 20px;
             span{
                 font-weight: 600;
                 text-transform: capitalize;
