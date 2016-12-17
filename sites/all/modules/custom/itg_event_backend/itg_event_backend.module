@@ -1179,7 +1179,8 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
  * @return boolean
  */
 function itg_event_get_host_name() {
-  if(!empty(arg(1)) && is_numeric(arg(1))) {
+  $arg = arg(1);
+  if(!empty($arg[1]) && is_numeric($arg[1])) {
     global $base_url;
     $host = $base_url.'/'.drupal_get_path_alias('node/'.  arg(1));
   } else {

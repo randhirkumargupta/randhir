@@ -84,11 +84,22 @@ function feature_for_front_search_views_default_views() {
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['field'] = 'sm_thumb_medium_field_story_extra_large_image';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_type'] = '0';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_wrapper_class'] = 'search-pic';
   $handler->display->display_options['fields']['sm_thumb_medium_field_story_extra_large_image']['element_default_classes'] = FALSE;
+  /* Field: Apache Solr: sm_thumb_medium_field_story_small_image */
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_small_image']['id'] = 'sm_thumb_medium_field_story_small_image';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_small_image']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_small_image']['field'] = 'sm_thumb_medium_field_story_small_image';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_small_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_small_image']['element_type'] = '0';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_small_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_small_image']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_small_image']['element_wrapper_class'] = 'search-pic';
+  $handler->display->display_options['fields']['sm_thumb_medium_field_story_small_image']['element_default_classes'] = FALSE;
   /* Field: Apache Solr: sm_thumb_medium_field_magazine_cover_photo */
   $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['id'] = 'sm_thumb_medium_field_magazine_cover_photo';
   $handler->display->display_options['fields']['sm_thumb_medium_field_magazine_cover_photo']['table'] = 'apachesolr__solr';
@@ -347,6 +358,10 @@ function feature_for_front_search_views_default_views() {
       'value' => '',
     ),
   );
+  /* Filter criterion: Apache Solr: label */
+  $handler->display->display_options['filters']['label']['id'] = 'label';
+  $handler->display->display_options['filters']['label']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['filters']['label']['field'] = 'label';
   $handler->display->display_options['path'] = 'site-search';
   $export['front_end_global_search'] = $view;
 

@@ -32,6 +32,12 @@ function itg_videogallery_schema() {
         'length' => '255',
         'not null' => TRUE,
       ),
+        'type' => array(
+        'description' => 'Video type on dailymotion',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
       'fid' => array(
         'description' => 'file id from file manage table',
         'type' => 'int',
