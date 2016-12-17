@@ -289,3 +289,16 @@ function itg_facebook_share_count($url) {
   $share_count = json_decode($content);
   return $share_count->share->share_count;
 }
+
+
+/**
+ * Implements itg_google_share_count
+ * @param string $url
+ */
+
+function itg_google_share_count($url) {
+    $html =  file_get_contents( "https://plusone.google.com/_/+1/fastbutton?url=".urlencode($url));
+    $doc = new DOMDocument();   $doc->loadHTML($html);
+    $counter=$doc->getElementById('aggregateCount');
+    return $counter->nodeValue;
+}
