@@ -78,7 +78,9 @@ if (!empty($content)):
                                         if ($config_name == 'vukkul') {
                                           ?>
                                           <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
+                                                      if(function_exists(itg_vukkul_comment_count)) {
                                                       $comment_count = json_decode(itg_vukkul_comment_count('story_' . arg(1)));
+                                                      }
                                                       foreach ($comment_count as $cnt) {
                                                         echo $cnt;
                                                       }
@@ -418,7 +420,10 @@ if (!empty($content)):
                               }
                               if ($config_name == 'vukkul') {
                                 ?>
-                            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php  $comment_count = json_decode(itg_vukkul_comment_count('story_'.arg(1))); 
+                            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php  
+                            if(function_exists(itg_vukkul_comment_count)) {
+                            $comment_count = json_decode(itg_vukkul_comment_count('story_'.arg(1)));
+                            }
                             foreach ($comment_count as $cnt) {
                                 echo $cnt;
                              }
