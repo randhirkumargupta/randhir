@@ -113,7 +113,19 @@
                         print render($content['field_story_tweet']);
                         print render($content['field_story_tweet_image']);
                         print render($content['field_story_twitter_video_desc']);
-                        print render($content['field_story_twitter_video']);                        
+                        print render($content['field_story_twitter_video']);
+                        break;
+                      
+                      case 'facebook_instant_article':
+                        print render($content['field_facebook_audio_position']);
+                        print render($content['field_facebook_instant_audio_url']);
+                        print render($content['field_animated_image_position']);
+                        print render($content['field_facebook_animated_image']);                        
+                        print render($content['field_facebook_map_position']);                        
+                        print render($content['field_map_embed_code']);                        
+                        //print render($content['field_facebook_gallery_associate']);                        
+                        print render($content['field_social_embed_code_position']);                        
+                        print render($content['field_social_embed_code']);                        
                     }
                     ?>
                   <?php endforeach; ?>

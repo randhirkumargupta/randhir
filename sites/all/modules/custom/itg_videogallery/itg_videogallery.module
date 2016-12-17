@@ -94,10 +94,16 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
  */
 function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
-
   switch ($form_id) {
     case 'videogallery_node_form':
       unset($form['actions']['preview_changes']);
+        if(arg(1)=='add')
+        {
+            drupal_set_title('Upload Video');
+        } else {
+            drupal_set_title('Edit Upload Video');
+        }
+        
       $form['#after_build'][] = 'itg_videogallery_after_build';
       $form['#validate'][] = 'itg_videogallery_custom_validate';
       $form['actions']['cancel'] = array(

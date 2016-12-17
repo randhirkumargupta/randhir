@@ -57,7 +57,7 @@ function itg_widget_menu() {
     'access arguments' => array('administer nodequeue'),
   );
   $items['update-keycandidate-status'] = array(
-        'page callback' => 'update_keycandidate_status', // load the croper according to size!.
+        'page callback' => 'update_keycandidate_status', 
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
@@ -150,7 +150,9 @@ function itg_widget_menu() {
 
   return $items;
 }
-
+/**
+ * This function use for update key candidate election status
+ */
 function update_keycandidate_status() {
   $status = $_POST['status'];
   $fields_name = $_POST['fname'];
