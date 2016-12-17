@@ -16,7 +16,7 @@
                 jQuery(".video-ftp").trigger("click");
             }, 1000);
             $(".ftp-server a").click(function(e) {
-               
+
                 // Getting selected videos from checkboxes        
 
                 var selected_check_boxes_values = new Array();
@@ -44,7 +44,7 @@
                     setTimeout(function() {
                         parent.jQuery.colorbox.close();
                         //$("#edit-video-browse-select .form-radio").prop("checked", false);
-                    }, 2000);
+                    }, 5000);
                 }
             });
 
@@ -71,6 +71,7 @@
             });
             $(".video-ftp").click(function() {
                 $(".local_browse").hide();
+                $('#video_text_search').val('');
                 $(".ftp-server").show();
                 $(".video_filters").show();
                 $(this).addClass('active');
@@ -183,10 +184,11 @@ jQuery('document').ready(function() {
             parent.jQuery('#edit-field-video-upload-add-more-number').val(1);
             parent.jQuery("[name='field_video_upload[file_entity_holder_nums]']").val(videogallery_new_file_hold);
             parent.jQuery("[name='field_video_upload_add_more']").mousedown();
-            setTimeout(function() {
+            $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+
                 parent.jQuery.colorbox.close();
-            }, 2000);
-        } else {
+            });
+        }else {
             alert("Select video file and upload");
         }
     });

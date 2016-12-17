@@ -18,7 +18,7 @@ global $base_url;
           <div class="video-search">
             <label><?php echo t('Search by title'); ?>:</label><input type="text" id="video_text_search" onkeyup="videosearch()"/>
           </div>
-          <div class="video-select">
+            <div class="video-select" style="display:none">
             <label><?php echo t('Filter By') ?>:</label>
             <select class="used-unused-select">
               <option value="unused"><?php print t("Un Published"); ?></option>
@@ -34,7 +34,7 @@ global $base_url;
                 <option value="24"><?php print t("24 Hours"); ?></option>
               </select>
           </div>
-          <div class="reset_video_filter">
+          <div class="reset_video_filter" style="display:none">
             <span class="button reset_video_filters">Reset</span>
           </div>
         </div>

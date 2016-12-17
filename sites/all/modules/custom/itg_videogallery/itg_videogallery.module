@@ -1500,6 +1500,7 @@ function itg_videogallery_ftp_used_video($before_time = NULL, $searh_key = NULL)
     $query->condition('fm.filename', '%' . db_like($searh_key) . '%', LIKE);
   }
   $results = $query->execute();
+  p($results);
   foreach ($results as $result) {
     $used_video[$result->fid]['filename'] = $result->filename;
     $used_video[$result->fid]['filesize'] = number_format($result->filesize / (1024 * 1024), 2);
@@ -1521,7 +1522,10 @@ function itg_videogallery_ftp_unused_video($search_key = NULL) {
   $query->distinct();
   $query->condition('drd.type', 'ftp', '=');
   $query->condition('drd.dailymotion_published', 0, '=');
-
+  if($search_key !="")
+  {
+   $query->condition('drd.name', '%' . db_like($search_key) . '%', LIKE);
+  }
   $results = $query->execute();
   foreach ($results as $result) {
     $unused_video[$result->fid]['filename'] = $result->name;
@@ -1859,9 +1863,10 @@ function itg_videogallery_ftp_file_insert_cron() {
               'name' => $realfilename,
             ))
             ->execute();
+        
       }
       catch (Exception $e) {
-        //die($e->getMessage());
+        die($e->getMessage());
       }
       // Code start for Adding  video in daily motion 
     }
