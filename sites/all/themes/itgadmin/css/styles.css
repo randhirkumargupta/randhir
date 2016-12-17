@@ -9945,3 +9945,9 @@ div.node #comments h2 {
 .view-section-wise-draggable-content-order .switch-field label:last-of-type {
   border-radius: 0 4px 4px 0;
 }
+
+#itg-widget-issuewidgetlist-filter-form .form-item, #itg-widget-issuewidgetlist-filter-form #view-display-isesue {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
