@@ -13,9 +13,26 @@
  * {@inheritdoc}
  */
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
-
     // Form alter for event backend node
     if ($form_id == "event_backend_node_form") {
+      if(isset($_GET['button_action']) || $form_state['clicked_button']['#name'] == 'previous') {
+        //Hijack our errors so they don't display normally.
+        $errors = form_get_errors();
+        //Only rebuild form if there are actually errors that we need to display
+        if( !empty($errors) ) {
+          $form_state['errors'] = $errors;
+          $form_state['rebuild'] = TRUE;    
+        }
+        // Remove all error messages
+        drupal_get_messages('error');
+        // Get the array of errors and reset them
+        $errors = &drupal_static("form_set_error", array());
+        // Make sure that each error should be applied to the field
+        foreach (array_keys($errors) as $field) {
+          unset($errors[$field]);
+        }
+      }
+      
       $form['field_associate_event_photo']['#suffix'] = '<div class="event-photo-des description">'.$form['field_associate_event_photo'][LANGUAGE_NONE]['#description'].'</div>';
       $form['field_associate_event_video']['#suffix'] = '<div class="event-video-des description">'.$form['field_associate_event_video'][LANGUAGE_NONE]['#description'].'</div>';
       $form['field_e_associate_highlights']['#suffix'] = '<div class="event-video-des description">'.$form['field_e_associate_highlights'][LANGUAGE_NONE]['#description'].'</div>';
@@ -39,7 +56,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         else {
             $form['actions']['submit']['#weight'] = 10;
         }
-
+        
 
         //add extra save button
         if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
@@ -73,6 +90,18 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         if (isset($form_state['storage']['step'])) {
             $_SESSION['current_step'] = $form_state['storage']['step'];
         }
+      if(arg(1) == 'add') {
+        $form['actions']['submit2'] = array(
+            '#type' => 'submit',
+            '#name' => 'second_submit',
+            '#value' => t('Next'),
+            '#access' => TRUE,
+            '#submit' => array('node_form_submit', 'itg_event_backend_frist_form_submit'),
+            '#weight' => -9,
+            '#attributes' => array('id' => array('save_btn')),
+        );
+        drupal_add_css("input#edit-submit , input[data-id=edit-submit]{display:none !important}",'inline');
+      }
     }
 
     // Form alter for sponsor node
@@ -145,6 +174,33 @@ function itg_sponsor_alter_submit_status_message(&$form, $form_state) {
  * @param array $form_state
  */
 function itg_event_backend_node_form_validate($form, &$form_state) {
+    // Keep steps in a array
+    $previous_step = "";
+    $steps = array(
+      'step_first',
+      'step_second',
+      'step_program_schedule',
+      'step_sponsor',
+      'step_highlights',
+      'step_media',
+      'step_configuration'
+    );
+    // Check if clicked button is previous
+    if(isset($_GET['step']) || $form_state['clicked_button']['#name'] == 'previous') {
+      $current_step = array_search($_GET['step'], $steps);
+      $previous_step = $steps[$current_step -1];
+      if(isset($_POST['previous'])) {
+        // If user in on frist step (on Step1-Basic Details) and press prev button then redirect user.
+        // to add node form.
+        if(arg(1) == 'add') {
+          drupal_goto('node/add/event-backend');
+        }
+        // Other wise redirect user to edit  node form.
+        else {
+          drupal_goto("node/".arg(1)."/edit" ,array('query' => array('step' => $previous_step , 'button_action' => 'back')));
+        }
+      }
+    }
     foreach ($form_state['values']['field_event_highlights'][LANGUAGE_NONE] as $key => $event_highlights) {
         if (is_numeric($key)) {
             $event_high_value[$key] = $form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'];
@@ -406,7 +462,6 @@ function itg_event_backend_configuration_redirect($form, &$form_state) {
     if (isset($_GET['destination'])) {
         unset($_GET['destination']);
     }
-
     if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
         $form_state['redirect'] = 'manage-event-backend';
     }
@@ -448,6 +503,22 @@ function itg_event_backend_second_submit($form, &$form_state) {
     if (isset($form_state['storage']['step'])) {
         $current_step = $form_state['storage']['step'];
         $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => $current_step)));
+    }
+}
+
+/**
+ * Implements function itg_event_backend_second_submit().
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_event_backend_frist_form_submit($form, &$form_state) {
+    // To hide status messgae.
+    drupal_get_messages('status');
+    if (isset($_GET['destination'])) {
+        unset($_GET['destination']);
+    }
+    if (isset($form_state['storage']['step'])) {
+        $form_state['redirect'] = array('node/' . $form_state['values']['nid'] . '/edit', array('query' => array('step' => 'step_second' ,'from'=> 'frist_step')));
     }
 }
 
