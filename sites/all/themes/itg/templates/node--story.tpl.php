@@ -67,9 +67,17 @@ if (!empty($content)):
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
                                 </ul>
                                 <ul class="social-links mhide">
-                                    <li><a href="javascript:" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> <!--<span>958</span>--></li>
-                                    <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a> <!--<span>8523</span>--></li>
-                                    <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a> <!--<span>7258</span>--></li>
+                                    <li><a href="javascript:" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> <span><?php
+                                    if(function_exists(itg_facebook_share_count)) {
+                                    $fb_count = itg_facebook_share_count($actual_link); 
+                                    }
+                                    if(!empty($fb_count)) { print $fb_count; } else { print '0'; } ?></span></li>
+                                    <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a> <span>0</span></li>
+                                    <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a> <span><?php
+                                    if(function_exists(itg_google_share_count)) {
+                                    $google_count = itg_google_share_count($actual_link);
+                                    if(!empty($google_count)) { print $google_count; } else { print '0'; }
+                                    } ?></span></li>
                                         <?php
                                         if (function_exists(global_comment_last_record)) {
                                           $last_record = $global_comment_last_record;
@@ -412,7 +420,7 @@ if (!empty($content)):
                               $fb_count = itg_facebook_share_count($actual_link); 
                               }
                               if(!empty($fb_count)) { print $fb_count; } else { print '0'; } ?></span></a></li>
-                            <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                            <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i><span>0</span></a></li>
                             <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i><span><?php 
                             if(function_exists(itg_google_share_count)) {
                               $google_count = itg_google_share_count($actual_link);
