@@ -416,7 +416,12 @@ if (!empty($content)):
                               }
                               if(!empty($fb_count)) { print $fb_count; } else { print '0'; } ?></span></a></li>
                             <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                            <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i><span><?php 
+                            if(function_exists(itg_google_share_count)) {
+                              $google_count = itg_google_share_count($actual_link);
+                              if(!empty($google_count)) { print $google_count; } else { print '0'; }
+                            }
+                            ?></span></a></li>
                               <?php
                               if (function_exists(global_comment_last_record)) {
                                 $last_record = $global_comment_last_record;
