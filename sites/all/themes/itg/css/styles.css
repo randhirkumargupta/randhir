@@ -1428,6 +1428,10 @@ footer .footer-copyright {
   margin-top: -15px;
   display: none;
 }
+.big-news .big-story-col-1 iframe {
+  width: 100%;
+  height: 46vh;
+}
 .big-news h1 {
   position: relative;
   margin-bottom: 10px;

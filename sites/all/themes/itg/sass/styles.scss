@@ -1272,6 +1272,10 @@ footer{
             margin-top: -15px;
             display: none;
         }
+        iframe{
+           width: 100%;
+           height: 46vh;
+        }
     }
     h1{
         @include pos(relative);

@@ -5613,10 +5613,14 @@ div.node{
     @extend .fleft;
     margin: 10px 10px 0 0;
     height: 32px;
+    line-height: 16px;
     .form-actions{
       margin-top: 10px;
     }
   }
+  #edit-actions #edit-submit {
+    margin: 10px 10px 0 0;
+  } 
 }
 [id*="views-exposed-form-section-wise-content-ordering-page"]{
   .form-item-field-story-category-tid .form-select + div.description{
@@ -6496,6 +6500,15 @@ div.node{
         @extend .btn-save;
         margin-top: 10px;
       }
+    }
+    th{
+        &:last-child{
+            text-align: center;
+        }
+    }
+    td.menu-operations{
+        text-align: center;
+        width: 70px;
     }
   }
 }
