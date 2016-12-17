@@ -230,3 +230,76 @@ function _related_photo_block_content() {
     return $photo_output;
   }
 }
+
+/**
+ * Implement hook_views_pre_render
+ * @param Array $view
+ */
+function itg_front_end_common_views_pre_render(&$view) {
+  global $base_url;
+
+  if (isset($view->name) && ($view->name == "related_photo_video_content")) {
+
+    global $user, $base_url;
+
+    foreach ($view->result as $related_result) {
+      // image condition when image not image
+      $image = $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0];
+      $pattern = '/src="([^"]*)"/';
+
+      if (preg_match($pattern, $image, $matches)) {
+        $src = $matches[1];
+        if (getimagesize($src) !== false) {
+          $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0];
+        }
+        else {
+          $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+          $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' width='170' height='127' />";
+        }
+      }
+
+      if (empty($image)) {
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+        $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' width='170' height='127' />";
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements itg_vukkul_comment_count
+ * @param string $nid
+ */
+
+function itg_vukkul_comment_count($nid) {
+  $run_url = "http://vuukle.com/api.asmx/getCommentCountListJSON?id=dc34b5cc-453d-468a-96ae-075a66cd9eb7&list=".$nid;
+  $content = file_get_contents($run_url);
+  $vukkul_share = json_decode($content);
+  return $vukkul_share->$nid;
+}
+
+/**
+ * Implements itg_facebook_share_count
+ * @param string $url
+ */
+
+function itg_facebook_share_count($url) {
+  $run_url = "http://graph.facebook.com/?id=".$url;
+  $content = file_get_contents($run_url);
+  $share_count = json_decode($content);
+  return $share_count->share->share_count;
+}
+
+
+/**
+ * Implements itg_google_share_count
+ * @param string $url
+ */
+
+function itg_google_share_count($url) {
+    $html =  file_get_contents( "https://plusone.google.com/_/+1/fastbutton?url=".urlencode($url));
+    $doc = new DOMDocument();   $doc->loadHTML($html);
+    $counter=$doc->getElementById('aggregateCount');
+    return $counter->nodeValue;
+}

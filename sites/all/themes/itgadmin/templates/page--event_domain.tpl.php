@@ -17,6 +17,7 @@ if (empty($host_detail) && is_numeric(arg(1))) {
 $banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
 $banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
 $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+
 ?>
 
 <div id="page">
@@ -149,11 +150,10 @@ drupal_add_js("jQuery(document).ready(function(){
         jQuery('.'+getVal).show();
     });
     
-    jQuery('#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider ul').slick({
+    jQuery('.view-event-photo-slider ul').slick({
         infinite: true,    
         autoplay:true,
         dots: false,
-        variableWidth:true,
         prevArrow: '<i class=\"fa fa-angle-left slick-prev\"></i>',
         nextArrow: '<i class=\"fa fa-angle-right slick-next\"></i>'
     });

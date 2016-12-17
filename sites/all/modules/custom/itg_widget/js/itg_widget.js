@@ -304,22 +304,25 @@ jQuery (document).ready (function () {
   //        }
   //    });
   jQuery ("div.big-news-content-videogallery a.has-ajax-big-story").click (function () {
+      jQuery('.big-story-col-1 .loading-popup').show();
     var nid = jQuery (this).attr ("data-nid");
     jQuery.get ("big-story-video-gallery/" + nid, function (data) {
       // remove previous data.
-      jQuery ("#videogallery-iframe").html ("", function () {
-        jQuery ("#videogallery-iframe").show ();
-      });
+//      jQuery ("#videogallery-iframe").html ("", function () {
+//        jQuery ("#videogallery-iframe").show ();        
+//        
+//      });
       // add new data data.
       jQuery ("#videogallery-iframe").html (data);
+       jQuery ("#videogallery-iframe").show ();
+       jQuery('.big-story-col-1 .loading-popup').hide();
 
-      jQuery ("span#close-big-story a").on ('click', function () {
-        console.log ("closed click");
-        jQuery ("#videogallery-iframe").html ("");
-        jQuery ("#videogallery-iframe").hide ();
-      });
     });
   });
+  jQuery ("#videogallery-iframe").on ('click','#close-big-story', function () {        
+        jQuery ("#videogallery-iframe").html(" ");
+        jQuery ("#videogallery-iframe").hide();
+      });
   
   jQuery("select#fake-soruce-type").on("change",function(){
     var soruce_type = jQuery(this).val();

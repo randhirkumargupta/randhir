@@ -865,7 +865,7 @@ function mega_review_critic_features_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  /* Field: Taxonomy term: Movie year */
+  /* Field: Field: Movie year */
   $handler->display->display_options['fields']['field_reporter_movie_year']['id'] = 'field_reporter_movie_year';
   $handler->display->display_options['fields']['field_reporter_movie_year']['table'] = 'field_data_field_reporter_movie_year';
   $handler->display->display_options['fields']['field_reporter_movie_year']['field'] = 'field_reporter_movie_year';

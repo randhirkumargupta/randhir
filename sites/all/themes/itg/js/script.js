@@ -136,6 +136,11 @@
                 $('.search-icon, .globle-search').click(function (e) {
                     e.stopPropagation();
                 });
+                
+                $('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
+                    $('#newlist').hide();
+                });
+                
             }
 
             // jQuery Code for tabbing
@@ -246,6 +251,7 @@
 
 
 jQuery(document).ready(function () {
+    jQuery('#main').find('img').parent().addClass('zoom-image');
     jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
         var h = jQuery(this).height() + 13;
 //        alert(h);
@@ -383,16 +389,23 @@ jQuery(window).load(function () {
 
 jQuery(document).ready(function () {
     var getmsgsaves = jQuery('.saved-photogallery').text();
-
     if (getmsgsaves != "")
     {
         jQuery('.saved-photogallery').remove();
-        // jQuery('<div class="saved-photogallery">'+getmsgsaves+'</div>').insertAfter(jQuery( ".slickslide" ));
-        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">Saved</div>');
+         jQuery('.stryimg').prepend('<div class="saved-photogallery">Saved</div>');
         setTimeout(function () {
             jQuery('.saved-photogallery').remove();
         }, 3000);
     }
+   jQuery('.block-itg-ads').each(function(){
+       
+       if(jQuery(this).html().trim().length==0)
+       {
+           jQuery(this).remove();
+       }
+        
+    })
     jQuery('#map-state').change(function () {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
@@ -425,15 +438,15 @@ jQuery(document).ready(function () {
         });
     });
 
-    //saved message
-    var getmsgsaves = jQuery('.saved-photogallery').text();
-    if (getmsgsaves != "") {
-        jQuery('.saved-photogallery').remove();
-        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
-    }
-    setTimeout(function () {
-        jQuery('.saved-photogallery').remove();
-    }, 3000);
+//    //saved message
+//    var getmsgsaves = jQuery('.saved-photogallery').text();
+//    if (getmsgsaves != "") {
+//        jQuery('.saved-photogallery').remove();
+//        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
+//    }
+//    setTimeout(function () {
+//        jQuery('.saved-photogallery').remove();
+//    }, 3000);
 
     //movie review more less
     jQuery('.other-reviews-desc .read-more').click(function () {
@@ -494,8 +507,14 @@ jQuery(document).ready(function () {
     if (winWidth > 770) {
         jQuery(window).resize(menuBuilder);
         menuBuilder();
-    }
-
+    }    
+    jQuery(document).on('click', function () {
+        jQuery('#newlist').slideUp();
+    });
+    jQuery(document).on('click', '.all-menu', function (e) {
+         e.stopPropagation();
+    });
+    
 
     var eventMenu = function () {
         winWidth = jQuery(window).width();
@@ -517,7 +536,7 @@ jQuery(document).ready(function () {
     });
 
     //vertical menu position      
-    var getNumberMenu = jQuery('.vertical-menu li').length;
+    /*var getNumberMenu = jQuery('.vertical-menu li').length;
     if (getNumberMenu > 6) {
         jQuery('.vertical-menu').slick({
             vertical: true,
@@ -533,29 +552,64 @@ jQuery(document).ready(function () {
         });
     } else {
         return false;
-    }
-    /* var menuLength  = jQuery('.vertical-menu li').length;
-     if(menuLength > 6){         
-     jQuery('.vertical-more').show();
-     }
-     var TotalHeight = 0, clicked = true;
-     jQuery('.vertical-menu li').each(function () {
-     var liLength = jQuery(this).height();
-     TotalHeight = TotalHeight + liLength;                             
-     });          
-     jQuery('.vertical-more a').click(function(){          
-     if(clicked){             
-     clicked=false;
-     jQuery('.vertical-menu').css('margin-top',-(menuLength-6)*92+'px');
-     jQuery(this).find('.more').hide();
-     jQuery(this).find('.less').show();
-     }else{
-     clicked=true;
-     jQuery('.vertical-menu').css('margin-top','0px');
-     jQuery(this).find('.less').hide();
-     jQuery(this).find('.more').show();
-     }                  
-     });  */
+    }*/
+   var el = jQuery('#block-itg-menu-manager-vertical-menu');
+    var totlWidth = jQuery(window).width();
+    var finalWidth = (totlWidth - 1170) / 2 ;
+    el.css('left', finalWidth - 70 + 'px');        
+     if (el.length) { 
+      //var stickyTop = el.offset().top; 
+      var stickyHeight = el.height();
+
+      jQuery(window).scroll(function(){ 
+          var limit = jQuery('footer').offset().top - stickyHeight - 20;
+          var flimit = limit - 375;          
+          var windowTop = jQuery(window).scrollTop();           
+        if(windowTop > flimit){            
+               el.css({
+                   'position': 'absolute',
+                   'left': -55 + 'px',
+                   'top': flimit - 175 + 'px'
+               })   
+        }
+        else{
+            el.css({
+                   'position': 'fixed',
+                   'left': finalWidth - 70 + 'px',
+                   'top': 270 + 'px'
+               })
+        }
+        });
+   }
+    
+    
+    var menuLength  = jQuery('.vertical-menu li').length;
+    if (menuLength > 5) {
+        jQuery('.vertical-more').show();
+    }   
+    var calcNum = menuLength % 5;
+    var divNum = parseInt(menuLength/5);    
+    var count = 0;
+    jQuery('.vertical-more a.more').click(function () {
+        count ++;        
+        if(count < divNum && calcNum !=0) {
+            jQuery('.vertical-menu').css('margin-top', - 375 * count + 'px');
+        }else if(calcNum > 0 && count == divNum){
+            jQuery('.vertical-menu').css('margin-top', - (375 * (count-1) + calcNum * 75) + 'px');
+            jQuery('.vertical-more a.less').show();
+            jQuery(this).hide(); 
+        }else if(count < divNum && calcNum == 0){
+            jQuery('.vertical-menu').css('margin-top', - 375 * count + 'px');
+            jQuery('.vertical-more a.less').show();
+            jQuery(this).hide(); 
+        }     
+    });  
+    jQuery('.vertical-more a.less').click(function () {
+        count = 0;
+        jQuery('.vertical-menu').css('margin-top', '0px');
+        jQuery('.vertical-more a.more').show();
+        jQuery(this).hide();   
+    });  
 });
 
 

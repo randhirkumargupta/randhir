@@ -4,8 +4,8 @@
       <?php
       foreach ($rows as $index => $row) {
         $desc = $row['title'];
-        if (!empty($row['field_story_extra_large_image'])) {
-          $img = $row['field_story_extra_large_image'];
+        if (!empty($row['field_story_small_image'])) {
+          $img = $row['field_story_small_image'];
         }
         else {
           global $base_url;

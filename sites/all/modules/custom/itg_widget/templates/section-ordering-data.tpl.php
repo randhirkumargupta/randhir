@@ -606,15 +606,19 @@ else if ($widget_style == 'movies-celebrities') {
                     <?php
                     if ((!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
                         $extra_large_image_url = image_style_url("widget_very_small", $entity->field_story_extra_large_image['und'][0]['uri']);
-                    }
+                    } 
                     ?>
 
                 <?php if (!empty($extra_large_image_url)) { ?>
 
                         <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  src="<?php print $extra_large_image_url ?>" /> </a></span>
 
-        <?php }
+        <?php } else { ?>
+     <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">  <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png"  /> </a></span>
+
+       <?php }
         ?>
+                        
 
                     <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></span></a>
                 </li>
@@ -854,8 +858,10 @@ else if ($widget_style == 'movies-celebrities') {
             if (strtolower($entity->type) == 'videogallery') {
                 $video_class = 'video-icon';
             }
-            if ($count == 0 && (!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
-                $extra_large_image_url = image_style_url("section_ordering_widget", $entity->field_story_extra_large_image['und'][0]['uri']);
+            if ($count == 0 && (!empty($entity->field_story_medium_image['und'][0]['uri']) && isset($entity->field_story_medium_image['und'][0]['uri']))) {
+                //$extra_large_image_url = image_style_url("section_ordering_widget", $entity->field_story_extra_large_image['und'][0]['uri']);
+            $extra_large_image_url = file_create_url($entity->field_story_medium_image['und'][0]['uri']);
+                
             }
             ?>
                     <?php if ($count == 0) : ?>

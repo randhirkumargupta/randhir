@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Default theme implementation to display a node.
@@ -33,5 +34,4 @@
  * 
  * @ingroup themeable
  */
-echo 'adasdasdsa';
 ?>

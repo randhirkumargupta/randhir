@@ -32,6 +32,12 @@ function itg_videogallery_schema() {
         'length' => '255',
         'not null' => TRUE,
       ),
+        'type' => array(
+        'description' => 'Video type on dailymotion',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
       'fid' => array(
         'description' => 'file id from file manage table',
         'type' => 'int',
@@ -66,6 +72,7 @@ function itg_videogallery_schema() {
         'length' => '250',
         'not null' => TRUE,
       ),
+        
     ),
     'primary key' => array('eid'),
   );
@@ -145,5 +152,71 @@ function itg_videogallery_update_751(){
     'size' => 'big',
     'description' => 'video thumbnail url from ',
   );
+  
+  
+    $dailymotion_published = array(
+        'description' => 'Dailymotion Published',
+        'type' => 'int',
+        'not null' => TRUE,
+      );
+      
+      $type = array(
+        'description' => 'Type',
+        'type' => 'varchar',
+        'length' => '20',
+        'not null' => TRUE,
+      
+        );
+      
+      $name = array(
+        'description' => 'Name',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      );
+  
+  
   db_add_field('dailymotion_response_details', 'dailymotion_thumb_url', $field);
+  db_add_field('dailymotion_response_details', 'dailymotion_published', $dailymotion_published);
+  db_add_field('dailymotion_response_details', 'type', $type);
+  db_add_field('dailymotion_response_details', 'name', $name);
+  
 }
+
+//
+//function itg_videogallery_update_751(){
+//  $field = array(
+//    'type' => 'text',
+//    'size' => 'big',
+//    'description' => 'video thumbnail url from ',
+//  );
+//  
+//  
+//    $dailymotion_published = array(
+//        'description' => 'Dailymotion Published',
+//        'type' => 'int',
+//        'not null' => TRUE,
+//      );
+//      
+//      $type = array(
+//        'description' => 'Type',
+//        'type' => 'varchar',
+//        'length' => '20',
+//        'not null' => TRUE,
+//      
+//        );
+//      
+//      $name = array(
+//        'description' => 'Name',
+//        'type' => 'varchar',
+//        'length' => '255',
+//        'not null' => TRUE,
+//      );
+//}
+//  
+//  
+//  db_add_field('dailymotion_response_details', 'dailymotion_thumb_url', $field);
+//  db_add_field('dailymotion_response_details', 'dailymotion_published', $dailymotion_published);
+//  db_add_field('dailymotion_response_details', 'type', $type);
+//  db_add_field('dailymotion_response_details', 'name', $name);
+//  

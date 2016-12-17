@@ -137,12 +137,18 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {
       $form['#after_build'][] = 'itg_common_cancel_button';
     }
+     if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'state_managment') {
+      $form['#after_build'][] = 'itg_common_cancel_button';
+    }
     }
     if(is_object($form['#term']))
     {
      if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'movies') {
       $form['#after_build'][] = 'itg_common_cancel_button';
-    }   
+    }  
+     if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'state_managment') {
+      $form['#after_build'][] = 'itg_common_cancel_button';
+    }  
     }
     // Auto Generate image according photo gallery
     if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'podcast_node_form') {
@@ -850,4 +856,32 @@ function itg_content_inactive() {
   
   watchdog("cron content expiry", '<pre>'. print_r($nodeid, TRUE) .'</pre>'); 
   
+}
+
+/**
+ * Round average rating into interval of 0.5.
+ *
+ * @param float $average_rating
+ * @return real
+ */
+function itg_common_round_rating($average_rating) {  
+  $temp = fmod($average_rating, 1);  
+  $temp = (string) $temp;
+  $average_rating -= $temp;  
+  switch ($temp) {
+    case '0.1':
+    case '0.2':
+    case '0.3':
+    case '0.4':
+    case '0.5':      
+      $average_rating += 0.5;
+      break;
+    case '0.6':
+    case '0.7':
+    case '0.8':
+    case '0.9':      
+      ++$average_rating;      
+  }
+  
+  return $average_rating;
 }

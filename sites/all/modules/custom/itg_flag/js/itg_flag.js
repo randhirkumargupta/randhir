@@ -13,7 +13,8 @@
 
                 var nd_id = jQuery(this).attr('rel');
                 var typ = jQuery(this).attr('id');
-                var post_data = "&nd_id=" + nd_id + "&typ=" + typ;
+                var dtag = jQuery(this).attr('data-tag');
+                var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag;
 
                 $.ajax({
                     'url': base_url + '/flag-details-ajax',
@@ -31,6 +32,12 @@
                         $('#widget-ajex-loader').hide();
                         if (obj.type == 'like_count') {
                             $("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
+                        }
+                        if (obj.chk == 'sty') {
+                            $("#sty-dv").show(0);
+                        }
+                        if (obj.chk == 'dsty') {
+                            $("#dsty-dv").show(0);
                         }
                         if (obj.type == 'dislike_count') {
                             $("#no-of-dislikes_" + obj.nd_id).html("(" + obj.count + ")");
@@ -55,11 +62,11 @@
         return;
     js = d.createElement(s);
     js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";    
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function fbpop(linkurl, title, desc, image) {
+function fbpop(linkurl, title, desc, image, base_url, node_id) {
     FB.ui({
         method: 'feed',
         link: linkurl,
@@ -67,8 +74,14 @@ function fbpop(linkurl, title, desc, image) {
         name: title,
         //caption: desc,
         description: desc
-    },function(response){
-        console.log(response);
+    }, function (response) {
+        if (response.post_id != 'undefined' && response.post_id != '') {
+            jQuery.ajax({
+                url: base_url + '/earn-loyalty-point/' + node_id + '/share',
+                type: 'POST',
+                dataType: 'JSON',                
+            });
+        }
     });
 }
 
