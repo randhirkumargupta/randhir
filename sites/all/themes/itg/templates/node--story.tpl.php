@@ -78,7 +78,9 @@ if (!empty($content)):
                                         if ($config_name == 'vukkul') {
                                           ?>
                                           <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
+                                                      if(function_exists(itg_vukkul_comment_count)) {
                                                       $comment_count = json_decode(itg_vukkul_comment_count('story_' . arg(1)));
+                                                      }
                                                       foreach ($comment_count as $cnt) {
                                                         echo $cnt;
                                                       }
@@ -407,7 +409,8 @@ if (!empty($content)):
                     <div class="social-list">
                         <ul>
                             <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                            <li class="mhide"><div id="fb-root"></div><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>, '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                            <li class="mhide"><div id="fb-root"></div><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>, '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i><span>
+                              <?php $fb_count = itg_facebook_share_count($actual_link); if(!empty($fb_count)) { print $fb_count; } else { print '0'; } ?></span></a></li>
                             <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                             <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                               <?php
@@ -417,7 +420,10 @@ if (!empty($content)):
                               }
                               if ($config_name == 'vukkul') {
                                 ?>
-                            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php  $comment_count = json_decode(itg_vukkul_comment_count('story_'.arg(1))); 
+                            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php  
+                            if(function_exists(itg_vukkul_comment_count)) {
+                            $comment_count = json_decode(itg_vukkul_comment_count('story_'.arg(1)));
+                            }
                             foreach ($comment_count as $cnt) {
                                 echo $cnt;
                              }
