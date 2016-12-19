@@ -243,6 +243,7 @@
             if (change_email_mobile) {
                 $('.activate-message').show();
             }
+            jQuery('#main').find('img').parent().addClass('zoom-image');
         }
     };
 
@@ -251,7 +252,7 @@
 
 
 jQuery(document).ready(function () {
-    jQuery('#main').find('img').parent().addClass('zoom-image');
+    
     jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
         var h = jQuery(this).height() + 13;
 //        alert(h);
@@ -609,8 +610,15 @@ jQuery(document).ready(function () {
         jQuery('.vertical-menu').css('margin-top', '0px');
         jQuery('.vertical-more a.more').show();
         jQuery(this).hide();   
-    });  
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.second-level-menu li, .itg-listing li'), function(element){
+  // find all elements and attach effect
+  new RippleEffect(element); // element is instance of javascript element node
 });
+    
+});
+
+
 
 
 

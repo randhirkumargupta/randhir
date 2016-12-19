@@ -27,13 +27,15 @@ foreach ($data as $index => $row):  ?>
                         
                         <?php
                     
-                        $jsondata = file_get_contents($row->field_election_constituency_tall);
-                        $jsondata_orig = '{"election": {"aName": "DELHI", "aFullName": "DELHI", "aFullNameHindi": "DELHI", "aSeats": "70", "aSeatOthers": "70", "aColor": "", "aColorOthers": "", "items": [{"pName": "AAP", "pColor": "#DDBC0F", "pfullName": "AAP", "pLead": "0", "pWon": "67"}, {"pName": "BJP+", "pColor": "#F57B19", "pfullName": "BJP+", "pLead": "0", "pWon": "3"}, {"pName": "CONG", "pColor": "#018fff", "pfullName": "CONG", "pLead": "0", "pWon": "0"}, {"pName": "OTH", "pColor": "#9933ff", "pfullName": "OTH", "pLead": "0", "pWon": "0"}]}}';
-                        
-                        $jsondata = json_decode($jsondata_orig);
+                        $jsondata = file_get_contents($row->field_election_constituency_tall_value);                        
+                        $jsondata = json_decode($jsondata);
+          
+                        if(!empty($jsondata))
+                        {
                         print '<table cellspacing="0" cellpadding="8" border="0" width="100%" id="allianceTable_delhi" class="schedule2"><tbody>
 <tr><th></th><th>PARTIES</th><th>LEADS</th><th>WON</th><th>TOTAL</th></tr>
 ';
+                        }
 
 
                         foreach ($jsondata->election->items as $elction_telly_data) {
