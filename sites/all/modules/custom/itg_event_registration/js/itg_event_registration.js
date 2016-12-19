@@ -31,14 +31,17 @@
  
       $("#edit-field-erf-registration-fee-und-0-remove-button").hide();
       
-      //Validation of event registration fields
-      $('#edit-field-last-name-und-0-value, #edit-title').keyup(function() {
-        this.value = this.value.replace(/[^a-zA-Z\s.]/g, '');
-      });
-      
-      $('#edit-field-erf-mobile-und-0-value, #edit-field-erf-postal-code-und-0-value').keyup(function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
-      }); 
+      for (var i = 0; i < 10; i++) {
+        //Only Aplphabetic numbers are allowed for state and city
+        $('#edit-field-erf-registration-fee-und-'+i+'-field-erf-name-und-0-value, #edit-field-erf-registration-fee-und-'+i+'-field-erf-state-und-0-value, #edit-field-erf-registration-fee-und-'+i+'-field-erf-city-und-0-value').keyup(function() {
+          this.value = this.value.replace(/[^a-zA-Z\s.]/g, '');
+        });
+        
+        //Only Numeric values are allowed for mobile and pincode
+        $('#edit-field-erf-registration-fee-und-'+i+'-field-erf-mobile-und-0-value, #edit-field-erf-registration-fee-und-'+i+'-field-erf-postal-code-und-0-value').keyup(function() {
+          this.value = this.value.replace(/[^0-9]/g, '');
+        });
+      }
       
       $('.form-field-name-field-erf-registration-fee').on('click', 'legend', function(){            
         $(this).next('.fieldset-wrapper').stop().slideToggle();            
