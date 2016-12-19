@@ -132,6 +132,11 @@ function itg_layout_manager_block_info() {
         'info' => t('Layout Special widget list block'),
         'cache' => DRUPAL_CACHE_GLOBAL,
     );
+    
+    $blocks['layout_highlights_widget_list_block'] = array(
+        'info' => t('Layout highlights widget list block'),
+        'cache' => DRUPAL_CACHE_GLOBAL,
+    );
 
     return $blocks;
 }
@@ -301,6 +306,13 @@ function itg_layout_manager_block_view($delta = '') {
       $widget_array['special_widget'] = get_all_widgets_list_by_setting_page('Special');
       $block['content'] = theme('layout_special_widgets_list_block', array('data' => $widget_array));
     break;
+  
+    case 'layout_highlights_widget_list_block':
+      $highlights_widgets_form = drupal_get_form('highlights_widgets_search_form');
+      $data['highlights_widgets_form'] = drupal_render($highlights_widgets_form);
+      $data['highlights_widget'] = get_highlights_widget_list();
+      $block['content'] = theme('layout_highlights_widgets_list_block', array('data' => $data));
+    break;
   }
 
   return $block;
@@ -387,6 +399,17 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
         'template' => 'layout-html-custom-widget',
         'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
     ),
+    'layout_highlights_widgets_list_block' => array(
+        'arguments' => array('form' => NULL),
+        'template' => 'layout-highlights-widgets-list-block',
+        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+    ),
+    'itg_highlights_widget' => array(
+        'arguments' => array('form' => NULL),
+        'template' => 'layout-itg-highlights-widget',
+        'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+    ),
+      
   );
 
   return $themes;
