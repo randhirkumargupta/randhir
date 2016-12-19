@@ -52,6 +52,9 @@ img{
     max-width: 100%;
     height: auto;
 }
+.def-cur-pointer{
+    cursor: pointer;
+}
 .mr-0{
     margin: 0;
 }
@@ -2505,9 +2508,13 @@ footer{
 
 /*CSS Start Anchor listing detail page*/
 .anchor-detail-menu{
-    border-bottom:1px solid $border-color;
-    white-space: nowrap;
+    max-width: 100%;
+    position: relative;
     overflow: auto;
+    border-bottom: 1px solid #ddd;
+/*    border-bottom:1px solid $border-color;
+    white-space: nowrap;
+    overflow: auto;*/
     .tab-buttons{        
         background: transparent;
         span{
@@ -2520,6 +2527,33 @@ footer{
                 border-top: 3px solid #a00606;
             }
         }
+    }
+    .mCSB_horizontal.mCSB_inside>.mCSB_container{
+        margin-bottom: 10px;
+    }
+    .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar{
+        height: 5px;
+        margin: 2px auto;
+        background-color: #f7f7f7;
+        background-image: linear-gradient(#4a4a4a, #757575);
+        border: 1px solid #c6c6c6;
+        opacity: 1;
+    }
+    .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail{
+        height: 9px;
+        margin: 0 auto;
+        width: 100%;
+        background-image: linear-gradient(#cacaca, #e4e4e4);
+        border: 1px solid #afafaf;
+        opacity: 1;
+        border-radius: 0;
+    }
+    .mCSB_scrollTools.mCSB_scrollTools_horizontal{
+        height: 10px;
+        margin-bottom: 0px;
+    }
+    &.mCustomScrollbar{
+        border-bottom: none;
     }
 }
 #block-views-anchor-landing-page-block{
@@ -2536,6 +2570,9 @@ footer{
             margin-right: 15px;
             margin-bottom: 5px;  
             width: auto;
+            a{
+                display: block;
+            }
     }
     .anchor-right{
         padding-left:0px;
@@ -3896,6 +3933,9 @@ footer{
         font-family: $itg-robotoslab;
     }
     @include listing-with-image(detail,right,10px,pic,discription);
+    .pic a{
+        display: block;
+    }
 }
 /*CSS end program RHS*/
 
@@ -5102,9 +5142,12 @@ footer{
         }        
     }
 }
-.view-event-photo-slider{
-    max-width: 320px;
-    .slick-slider {
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider{
+    max-width: 100%;
+    .slick-slider {        
+        li{
+            width: 320px;
+        }           
         .slick-prev, .slick-next{
             background: #000 none repeat scroll 0 0;
             color: #fff;
@@ -5119,8 +5162,11 @@ footer{
             width: 25px;
             z-index: 1;
         }
+        .slick-prev{
+            right: 50px;
+        }
         .slick-next{
-            right: 0;
+            right: 25px;
             left: auto;
         }
     }
@@ -5452,7 +5498,8 @@ footer{
               padding: 0 10px;
               text-transform: uppercase;
               height: 50px;
-              line-height: 50px;              
+              line-height: 50px;   
+              display:block;
               &:hover, &.active{
                   color:#fff;
               }
@@ -5490,9 +5537,9 @@ footer{
             font-size: 24px;
             display: block;
             text-align: center;
-            text-transform: uppercase;
-            padding: 7px 0;
+            text-transform: uppercase;            
             font-weight: 700;
+            line-height: 33px;
         }
         .event-vanue-detail-place{
             background: #000;

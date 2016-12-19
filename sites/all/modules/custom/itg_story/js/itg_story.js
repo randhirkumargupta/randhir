@@ -120,6 +120,7 @@
 
             $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
             $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
+            $('#edit-field-facebook-gallery-associate-und-0-remove-button').hide();
 
 
             // Display Byline details

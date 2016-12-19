@@ -95,6 +95,10 @@ img {
   height: auto;
 }
 
+.def-cur-pointer {
+  cursor: pointer;
+}
+
 .mr-0, *, #block-formblock-ask-an-expert .form-item .form-item {
   margin: 0;
 }
@@ -3287,9 +3291,13 @@ footer .footer-copyright {
 /*End anchors listing css*/
 /*CSS Start Anchor listing detail page*/
 .anchor-detail-menu {
-  border-bottom: 1px solid #dddddd;
-  white-space: nowrap;
+  max-width: 100%;
+  position: relative;
   overflow: auto;
+  border-bottom: 1px solid #ddd;
+  /*    border-bottom:1px solid $border-color;
+      white-space: nowrap;
+      overflow: auto;*/
 }
 .anchor-detail-menu .tab-buttons {
   background: transparent;
@@ -3304,6 +3312,33 @@ footer .footer-copyright {
 }
 .anchor-detail-menu .tab-buttons span.active {
   border-top: 3px solid #a00606;
+}
+.anchor-detail-menu .mCSB_horizontal.mCSB_inside > .mCSB_container {
+  margin-bottom: 10px;
+}
+.anchor-detail-menu .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
+  height: 5px;
+  margin: 2px auto;
+  background-color: #f7f7f7;
+  background-image: linear-gradient(#4a4a4a, #757575);
+  border: 1px solid #c6c6c6;
+  opacity: 1;
+}
+.anchor-detail-menu .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
+  height: 9px;
+  margin: 0 auto;
+  width: 100%;
+  background-image: linear-gradient(#cacaca, #e4e4e4);
+  border: 1px solid #afafaf;
+  opacity: 1;
+  border-radius: 0;
+}
+.anchor-detail-menu .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  height: 10px;
+  margin-bottom: 0px;
+}
+.anchor-detail-menu.mCustomScrollbar {
+  border-bottom: none;
 }
 
 #block-views-anchor-landing-page-block .anchor {
@@ -3327,6 +3362,9 @@ footer .footer-copyright {
   margin-right: 15px;
   margin-bottom: 5px;
   width: auto;
+}
+#block-views-anchor-landing-page-block .anchor-left a {
+  display: block;
 }
 #block-views-anchor-landing-page-block .anchor-right {
   padding-left: 0px;
@@ -5164,6 +5202,9 @@ footer .footer-copyright {
   line-height: 19px;
   color: #323232;
 }
+.program-rhs .pic a {
+  display: block;
+}
 
 /*CSS end program RHS*/
 /*CSS Start magazine-calander RHS*/
@@ -6551,10 +6592,13 @@ footer .footer-copyright {
   width: 100%;
 }
 
-.view-event-photo-slider {
-  max-width: 320px;
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider {
+  max-width: 100%;
 }
-.view-event-photo-slider .slick-slider .slick-prev, .view-event-photo-slider .slick-slider .slick-next {
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li {
+  width: 320px;
+}
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-prev, #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-next {
   background: #000 none repeat scroll 0 0;
   color: #fff;
   cursor: pointer;
@@ -6568,8 +6612,11 @@ footer .footer-copyright {
   width: 25px;
   z-index: 1;
 }
-.view-event-photo-slider .slick-slider .slick-next {
-  right: 0;
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-prev {
+  right: 50px;
+}
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-next {
+  right: 25px;
   left: auto;
 }
 
@@ -6932,6 +6979,7 @@ footer .footer-copyright {
   text-transform: uppercase;
   height: 50px;
   line-height: 50px;
+  display: block;
 }
 #block-menu-menu-event-menu ul li a:hover, #block-menu-menu-event-menu ul li a.active {
   color: #fff;
@@ -6967,8 +7015,8 @@ footer .footer-copyright {
   display: block;
   text-align: center;
   text-transform: uppercase;
-  padding: 7px 0;
   font-weight: 700;
+  line-height: 33px;
 }
 #block-menu-menu-event-menu .event-detail .event-vanue-detail-place {
   background: #000;

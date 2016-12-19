@@ -500,6 +500,52 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
       ':input[name="field_story_magazine_story_issue[und][magazine_issue_story]"]' => array('checked' => TRUE),
     )
   );
+  // facebook instant Article
+  $form['field_facebook_instant_audio_url']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+    )
+  );
+  $form['field_facebook_audio_position']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+    )
+  );
+  $form['field_animated_image_position']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+    )
+  );
+  $form['field_facebook_animated_image']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+    )
+  );
+  $form['field_facebook_map_position']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+    )
+  );
+  $form['field_map_embed_code']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+    )
+  );
+  $form['field_social_embed_code']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+    )
+  );
+  $form['field_social_embed_code_position']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+    )
+  );
+  $form['field_facebook_gallery_associate']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
+    )
+  );
   // Set form default value for social media fields
 
   $form['field_story_posted_by_twitter']['#default_value'] = $user->mail;

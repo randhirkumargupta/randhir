@@ -48,6 +48,13 @@ function feature_for_state_manager_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    6 => '6',
+    10 => '10',
+  );
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
