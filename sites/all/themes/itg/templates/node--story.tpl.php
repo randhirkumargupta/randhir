@@ -390,6 +390,7 @@ if (!empty($content)):
                   $pid = "voted_" . $get_val;
                   $like = "no-of-likes_" . $get_val;
                   $dislike = "no-of-dislikes_" . $get_val;
+                 
                   ?>
                   <div class="agbutton story-like-dislike">
                       <div id="name-dv"><?php print t('Do You Like This Story'); ?>
@@ -397,9 +398,24 @@ if (!empty($content)):
                           <span id="sty-dv" style="display:none">Awesome! </br> Now share the story </br> <a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
                           <a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
                           <a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
-                          <a href="#"><i class="fa fa-comment"></i></a></span></span>
+                          <?php
+                              if ($config_name == 'vukkul') {
+                                ?>
+                          <a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
+                          <?php } if ($config_name == 'other') { ?> 
+                                <a onclick ="scrollToAnchor('other-comment');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
+                              <?php } ?>
+                          </span></span>
                             <span id="dlky"> <button id="dislike_count" rel="<?php print $get_val; ?>" data-tag="dsty"><i class="fa fa-thumbs-o-down"></i> <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>
-                                <span id="dsty-dv" style="display:none">Too bad.</br> Tell us what you didn't like in the comment section</span>
+                                <?php
+                              if ($config_name == 'vukkul') {
+                                ?>
+                                <span id="dsty-dv" style="display:none"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment">Too bad.</br> Tell us what you didn't like in the comment section</a></span> 
+                            
+                              <?php } if ($config_name == 'other') { ?> 
+                                <span id="dsty-dv" style="display:none"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment">Too bad.</br> Tell us what you didn't like in the comment section</a></span> 
+                              <?php } ?>
+                                
                             </span>                                       
                         </div>                          
                   <p class="error-msg" id="<?php print $pid; ?>"></p>
@@ -420,10 +436,6 @@ if (!empty($content)):
                             <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                             <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                               <?php
-                              if (function_exists(global_comment_last_record)) {
-                                $last_record = $global_comment_last_record;
-                                $config_name = trim($last_record[0]->config_name);
-                              }
                               if ($config_name == 'vukkul') {
                                 ?>
                             <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php  
