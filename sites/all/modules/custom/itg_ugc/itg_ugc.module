@@ -44,6 +44,14 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   // get id of ugc content
   $url_nid = arg(3);
 
+  // condition for front user 
+  if ($user->uid == 0 && !empty($_GET['type'])) {
+    $form['field_ugc_ctype']['#attributes']['class'][] = 'element-hidden';
+    if (isset($_GET['type'])) {
+      $form['field_ugc_ctype'][LANGUAGE_NONE]['#default_value'] = $_GET['type'];
+    }
+  }
+
   if (empty($form['nid']['#value'])) {
     // prefill input value in blog form
     if ($form_id == 'blog_node_form' && !empty($url_nid)) {

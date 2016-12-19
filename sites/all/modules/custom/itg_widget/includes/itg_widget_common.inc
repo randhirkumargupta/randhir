@@ -226,6 +226,18 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
 }
 
 /**
+ * Function to remove term.
+ * @param int $tid
+ */
+function remove_state_term($tid) {
+    if($tid) {
+        taxonomy_term_delete($tid);
+    }
+    drupal_set_message(t("Term Deleted"));
+    drupal_goto($_SERVER['HTTP_REFERER']);
+}
+
+/**
  * Funtion used to delete node combination form itg_widget_order table.
  * 
  * @param string $widget_name
@@ -2647,8 +2659,8 @@ function get_rhs_block_display_condtion($delta = '') {
 function insert_all_node_in_widegt_table() {
 
     try {
-        db_query('alter table itg_widget_order add column constituency varchar(200) NULL after extra')->execute();
-        // db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
+       // db_query('alter table itg_widget_order add column constituency varchar(200) NULL after extra')->execute();
+         db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
     } catch (Exception $ex) {
         drupal_set_message($ex->getMessage());
     }
