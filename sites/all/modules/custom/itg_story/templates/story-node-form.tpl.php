@@ -82,10 +82,13 @@
     <div class="itg-sidebar-form">
       <div id="Briefcase" class="itg-sidebar-form-section">
         <h2 class="story-title"><?php print t('Briefcase'); ?></h2>
-        <?php print drupal_render($form['field_story_highlights']); ?>
+        <div class="itg-form-section hide">
+          <?php print drupal_render($form['field_story_highlights']); ?>
+        </div>
       </div>
       <div id="Configuration" class="itg-sidebar-form-section">
         <h2 class="story-title"><?php print t('Configuration'); ?></h2>
+        <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_configurations']); ?>
         <?php print drupal_render($form['field_poll_start_date']); ?>
         <?php print drupal_render($form['field_story_tv_time']); ?>
@@ -96,15 +99,19 @@
         <?php print drupal_render($form['field_story_client_title']); ?>
         <?php print drupal_render($form['field_story_media_files_syndicat']); ?>
         <?php print drupal_render($form['field_common_related_content']); ?>
+        </div>
       </div>
       <div id="DateTime" class="itg-sidebar-form-section">
         <h2 class="story-title"><?php print t('Date & Time'); ?></h2>
+        <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_schedule_date_time']); ?>
         <?php print drupal_render($form['field_story_expires']); ?> 
         <?php print drupal_render($form['field_story_expiry_date']); ?> 
+        </div>
       </div>
       <div id="SocialMedia" class="itg-sidebar-form-section">
         <h2 class="story-title"><?php print t('Social Media'); ?></h2>
+        <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_social_media_integ']); ?>
         <!-- Facebook fields -->
         <?php print drupal_render($form['field_story_facebook_narrative']); ?>
@@ -127,6 +134,7 @@
         <?php print drupal_render($form['field_story_tweet_image']); ?>  
         <?php print drupal_render($form['field_story_twitter_video_desc']); ?>  
         <?php print drupal_render($form['field_story_twitter_video']); ?>  
+        </div>
       </div>
       <div class="metatags-and-remarks">
       <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>

@@ -1428,6 +1428,10 @@ footer .footer-copyright {
   margin-top: -15px;
   display: none;
 }
+.big-news .big-story-col-1 iframe {
+  width: 100%;
+  height: 46vh;
+}
 .big-news h1 {
   position: relative;
   margin-bottom: 10px;
@@ -1768,6 +1772,7 @@ footer .footer-copyright {
   box-shadow: 2px 2px 2px #f1f1f1;
   color: #323232;
   z-index: 2;
+  right: 40px;
 }
 .view-front-end-global-search .views-exposed-widget .caln label {
   display: inline-block;
@@ -1809,7 +1814,7 @@ footer .footer-copyright {
   border-bottom: 12px solid whitesmoke;
   position: absolute;
   top: -11px;
-  left: 9px;
+  right: 40px;
 }
 .view-front-end-global-search .view-content .itg-search-list {
   overflow: hidden;
@@ -2310,6 +2315,23 @@ footer .footer-copyright {
 .story-section .story-right .stryimg {
   position: relative;
 }
+.story-section .story-right .stryimg .saved-photogallery {
+  background: #fff none repeat scroll 0 0;
+  box-shadow: 0 0 8px #666;
+  font-family: roboto;
+  font-size: 22px;
+  font-weight: 700;
+  height: 160px;
+  left: 50%;
+  line-height: 160px;
+  margin-left: -157px;
+  margin-top: -80px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 315px;
+  z-index: 1;
+}
 .story-section .story-right .stryimg .field-label {
   display: none;
 }
@@ -2481,7 +2503,6 @@ footer .footer-copyright {
   font-size: 0.75rem;
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
-  margin-top: 40px;
   zoom: 1;
 }
 .story-section .social-list:before, .story-section .social-list:after {
@@ -2589,6 +2610,84 @@ footer .footer-copyright {
 .story-section .story-expert-opinion h2:after {
   background: url(../images/down-quote.jpg) no-repeat center center;
 }
+.story-section .agbutton.story-like-dislike {
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  padding: 15px 0;
+  color: #929292;
+  font-family: roboto;
+  font-size: 16px;
+  font-weight: 700;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky, .story-section .agbutton.story-like-dislike #name-dv #dlky {
+  padding: 0 10px;
+  position: relative;
+  display: inline-block;
+  padding: 0 10px;
+  vertical-align: middle;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky button, .story-section .agbutton.story-like-dislike #name-dv #dlky button {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #929292;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky button#like_count span, .story-section .agbutton.story-like-dislike #name-dv #lky button#dislike_count span, .story-section .agbutton.story-like-dislike #name-dv #dlky button#like_count span, .story-section .agbutton.story-like-dislike #name-dv #dlky button#dislike_count span {
+  color: #1f8201;
+  font-weight: 700;
+  font-size: 16px;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky button#dislike_count span, .story-section .agbutton.story-like-dislike #name-dv #dlky button#dislike_count span {
+  color: #ef0401;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky > span, .story-section .agbutton.story-like-dislike #name-dv #dlky > span {
+  padding: 0 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky > span#dlky, .story-section .agbutton.story-like-dislike #name-dv #dlky > span#dlky {
+  padding-left: 0;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv, .story-section .agbutton.story-like-dislike #name-dv #lky #dsty-dv, .story-section .agbutton.story-like-dislike #name-dv #dlky #sty-dv, .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv {
+  background: #fff;
+  width: 200px;
+  position: absolute;
+  box-shadow: 0px 0px 5px #ccc;
+  left: 0;
+  top: 40px;
+  font-weight: normal;
+  color: #000;
+  padding: 15px;
+  border-radius: 5px;
+  line-height: 24px;
+  text-align: left;
+  border: 1px solid #d2d2d2;
+  overflow: visible !important;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv:before, .story-section .agbutton.story-like-dislike #name-dv #lky #dsty-dv:before, .story-section .agbutton.story-like-dislike #name-dv #dlky #sty-dv:before, .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #e0e0e0;
+  position: absolute;
+  left: 12px;
+  top: -10px;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv a, .story-section .agbutton.story-like-dislike #name-dv #lky #dsty-dv a, .story-section .agbutton.story-like-dislike #name-dv #dlky #sty-dv a, .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a {
+  padding: 3px;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+}
+.story-section .agbutton.story-like-dislike .error-msg {
+  color: red;
+  font-weight: 400;
+  font-size: 12px;
+}
 
 .buzz-feedback {
   width: 100%;
@@ -2645,6 +2744,7 @@ footer .footer-copyright {
 .buzz-feedback .buzz-section .buzz-img .social-share {
   position: absolute;
   bottom: 0;
+  z-index: 1;
 }
 .buzz-feedback .buzz-section .buzz-img .social-share ul {
   zoom: 1;
@@ -9861,8 +9961,21 @@ footer .footer-copyright {
 #block-itg-front-end-common-related-photo-block h3 span, #block-itg-front-end-common-related-video-block h3 span {
   padding-left: 0;
 }
-#block-itg-front-end-common-related-photo-block ul li, #block-itg-front-end-common-related-video-block ul li {
-  margin-bottom: 30px;
+#block-itg-front-end-common-related-photo-block ul, #block-itg-front-end-common-related-video-block ul {
+  zoom: 1;
+}
+#block-itg-front-end-common-related-photo-block ul:before, #block-itg-front-end-common-related-photo-block ul:after, #block-itg-front-end-common-related-video-block ul:before, #block-itg-front-end-common-related-video-block ul:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+#block-itg-front-end-common-related-photo-block ul:after, #block-itg-front-end-common-related-video-block ul:after {
+  clear: both;
+}
+#block-itg-front-end-common-related-photo-block ul li a, #block-itg-front-end-common-related-video-block ul li a {
+  display: block;
+  overflow: hidden;
 }
 #block-itg-front-end-common-related-photo-block ul li:nth-child(4n+1), #block-itg-front-end-common-related-video-block ul li:nth-child(4n+1) {
   clear: left;
@@ -9968,6 +10081,11 @@ footer .footer-copyright {
 .story-section .listicle-page.story-right {
   width: 100%;
 }
+.story-section .listicle-page.story-right .byline {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
 .story-section .listicle-page .listicle-detail {
   /*        border-top: 1px solid #ccc;   */
 }
@@ -9983,15 +10101,15 @@ footer .footer-copyright {
   line-height: 34px;
   color: #fff;
   font-weight: 700;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description {
   font-size: 16px;
   color: #282828;
   display: inline-block;
   vertical-align: top;
-  width: 90%;
-  padding: 20px;
+  width: 95%;
+  padding: 18px 20px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description span {
   font-weight: 600;
@@ -10415,3 +10533,39 @@ footer .footer-copyright {
 }
 
 /*css end big story format*/
+/*like dislike photo page start*/
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton, #block-views-video-landing-header-block .section-like-dislike .agbutton {
+  margin-top: 20px;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton a, #block-views-video-landing-header-block .section-like-dislike .agbutton a {
+  color: #026bc5;
+  font-size: 12px;
+  font-size: 0.75rem;
+  display: block;
+  margin-top: 10px;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton button, #block-views-video-landing-header-block .section-like-dislike .agbutton button {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #929292;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton button span, #block-views-video-landing-header-block .section-like-dislike .agbutton button span {
+  color: #1f8201;
+  font-weight: 700;
+  font-size: 16px;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton button#dislike_count span, #block-views-video-landing-header-block .section-like-dislike .agbutton button#dislike_count span {
+  color: #ef0401;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton button#like_count, #block-views-video-landing-header-block .section-like-dislike .agbutton button#like_count {
+  padding-right: 15px;
+}
+#block-views-photo-landing-slider-block .section-like-dislike p.error-msg, #block-views-video-landing-header-block .section-like-dislike p.error-msg {
+  color: #13d21a;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/*like dislike photo page end*/
