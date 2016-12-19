@@ -436,12 +436,12 @@ if (!empty($content)):
                             <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span> SHARES</li>
                             <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
                             
-                             <?php if ($user->uid){ ?>
+                             <?php if ($user->uid > 0){ ?>
                                         <?php $follow_story = flag_create_link('follow', $node->nid); ?>                      
                                         <li><?php print $follow_story; ?></li>
                                           <?php
                                           }
-                                          elseif ($user->uid == 0 || $_GET['q'] != 'user') {
+                                          elseif ($user->uid == 0) {
                                             if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
                                               ?>
 
