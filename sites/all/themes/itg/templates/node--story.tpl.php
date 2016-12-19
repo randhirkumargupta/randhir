@@ -67,17 +67,9 @@ if (!empty($content)):
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
                                 </ul>
                                 <ul class="social-links mhide">
-                                    <li><a href="javascript:" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> <span><?php
-                                    if(function_exists(itg_facebook_share_count)) {
-                                    $fb_count = itg_facebook_share_count($actual_link); 
-                                    }
-                                    if(!empty($fb_count)) { print $fb_count; } else { print '0'; } ?></span></li>
-                                    <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a> <span>0</span></li>
-                                    <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a> <span><?php
-                                    if(function_exists(itg_google_share_count)) {
-                                    $google_count = itg_google_share_count($actual_link);
-                                    if(!empty($google_count)) { print $google_count; } else { print '0'; }
-                                    } ?></span></li>
+                                    <li><a href="javascript:" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                                         <?php
                                         if (function_exists(global_comment_last_record)) {
                                           $last_record = $global_comment_last_record;
@@ -85,13 +77,9 @@ if (!empty($content)):
                                         }
                                         if ($config_name == 'vukkul') {
                                           ?>
-                                          <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
-                                                      if(function_exists(itg_vukkul_comment_count)) {
-                                                      print itg_vukkul_comment_count('story_' . arg(1));
-                                                      }
-                                                      ?></span></a></li>
+                                          <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
                                         <?php } if ($config_name == 'other') { ?> 
-                                          <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
+                                          <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                         <?php } ?>
                               
                                     <?php global $user; ?>
@@ -285,13 +273,12 @@ if (!empty($content)):
                                 $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
      
                               }
-                              $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '"></div></div>';
-                              
                             }
+                            $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '"></div></div>';
                             if (!empty($node->field_story_expert_description)) {
-                              $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2></div>';
+                              $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                             }
-
+                              $expertDetails .= '</div>';
                             $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
                           }
 
@@ -414,19 +401,9 @@ if (!empty($content)):
                     <div class="social-list">
                         <ul>
                             <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                            <li class="mhide"><div id="fb-root"></div><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>, '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i><span>
-                              <?php 
-                              if(function_exists(itg_facebook_share_count)) {
-                              $fb_count = itg_facebook_share_count($actual_link); 
-                              }
-                              if(!empty($fb_count)) { print $fb_count; } else { print '0'; } ?></span></a></li>
-                            <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i><span>0</span></a></li>
-                            <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i><span><?php 
-                            if(function_exists(itg_google_share_count)) {
-                              $google_count = itg_google_share_count($actual_link);
-                              if(!empty($google_count)) { print $google_count; } else { print '0'; }
-                            }
-                            ?></span></a></li>
+                            <li class="mhide"><div id="fb-root"></div><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>, '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                            <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                            <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                               <?php
                               if (function_exists(global_comment_last_record)) {
                                 $last_record = $global_comment_last_record;
@@ -443,7 +420,18 @@ if (!empty($content)):
                                 <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
                               <?php } ?>
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
-                            <li class="mhide"><span class="share-count">4.3k</span> SHARES</li>
+                            <?php
+                            if(function_exists(itg_facebook_share_count)) {
+                              $fb_count = itg_facebook_share_count($actual_link); 
+                            }
+                            
+                            if(function_exists(itg_google_share_count)) {
+                              $google_count = itg_google_share_count($actual_link);
+                            }
+                            
+                            $fb_google_count = $fb_count + $google_count;
+                            ?>
+                            <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span> SHARES</li>
                             <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
                             <li><a href="#">follow the Story</a></li>
                         </ul>
