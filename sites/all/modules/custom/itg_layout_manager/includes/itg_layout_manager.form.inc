@@ -216,10 +216,32 @@ function highlights_widgets_search_form($form, &$form_state) {
     '#maxlength' => 128,
   );  
   
-  $form['section_save'] = array(
-    '#markup' => '<a data-tabwidget='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',
+  $form['highlights_submit'] = array(
+    '#markup' => '<a class="btn btn-save" href="javascript:void(0)" id="layout-highlights-submit">Go</a>',
     '#weight' => 20,
   );  
 
   return $form;
-}//
+}
+
+/**
+ * Implementation of hook_form for html widgets
+ * {@inheritdoc}
+ */
+function html_widgets_search_form($form, &$form_state) {  
+    
+  $form['html_title'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'content-title-list/custom_html_widgets/autocomplete',
+    '#maxlength' => 128,
+  );  
+  
+  $form['html_submit'] = array(
+    '#markup' => '<a class="btn btn-save" href="javascript:void(0)" id="layout-html-submit">Go</a>',
+    '#weight' => 20,
+  );  
+
+  return $form;
+}
