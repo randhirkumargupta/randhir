@@ -6073,9 +6073,13 @@ div.node #comments h2 {
 [id*="views-form-strory-menegment-page"] .btn-generate-xml {
   margin: 10px 10px 0 0;
   height: 32px;
+  line-height: 16px;
 }
 [id*="views-form-strory-menegment-page"] .btn-generate-xml .form-actions {
   margin-top: 10px;
+}
+[id*="views-form-strory-menegment-page"] #edit-actions #edit-submit {
+  margin: 10px 10px 0 0;
 }
 
 [id*="views-exposed-form-section-wise-content-ordering-page"] .form-item-field-story-category-tid .form-select + div.description div.description {
@@ -6886,6 +6890,13 @@ div.node #comments h2 {
 }
 .page-admin-structure-menu-manage #menu-overview-form .form-actions #edit-actions-submit {
   margin-top: 10px;
+}
+.page-admin-structure-menu-manage #menu-overview-form th:last-child {
+  text-align: center;
+}
+.page-admin-structure-menu-manage #menu-overview-form td.menu-operations {
+  text-align: center;
+  width: 70px;
 }
 
 .ad-widget {
@@ -9944,4 +9955,10 @@ div.node #comments h2 {
 }
 .view-section-wise-draggable-content-order .switch-field label:last-of-type {
   border-radius: 0 4px 4px 0;
+}
+
+#itg-widget-issuewidgetlist-filter-form .form-item, #itg-widget-issuewidgetlist-filter-form #view-display-isesue {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
 }
