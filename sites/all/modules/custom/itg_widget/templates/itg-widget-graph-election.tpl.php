@@ -27,8 +27,9 @@ foreach ($data as $index => $row):  ?>
                         
                         <?php
                     
-                        $jsondata = file_get_contents($row->field_election_constituency_tall);                        
-                        $jsondata = json_decode($jsondata_orig);
+                        $jsondata = file_get_contents($row->field_election_constituency_tall_value);                        
+                        $jsondata = json_decode($jsondata);
+          
                         if(!empty($jsondata))
                         {
                         print '<table cellspacing="0" cellpadding="8" border="0" width="100%" id="allianceTable_delhi" class="schedule2"><tbody>

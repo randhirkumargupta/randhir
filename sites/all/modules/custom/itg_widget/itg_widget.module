@@ -717,7 +717,7 @@ function itg_widget_block_view($delta = '') {
       drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
       $data = itg_widget_get_graph_data($info);
       foreach ($data as $index => $row) {
-        $jsondata = file_get_contents($row->field_election_constituency_tall);
+        $jsondata = file_get_contents($row->field_election_constituency_tall_value);
         drupal_add_js(' jQuery(function() {
                    
             var ids = "container_' . $index . '";
