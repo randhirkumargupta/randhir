@@ -40,7 +40,7 @@
         <dfn>26</dfn>
       </span>
     </div>
-      <?php if (isset($data['badge_detail']['earn']) && $data['badge_detail']['earn'] > 1): ?>
+      <?php if (isset($data['badge_detail']['earn']) && $data['badge_detail']['earn'] >= 1): ?>
       <div class="total-point-wrapper">
         <!-- Total Points -->        
         <div class="total-points">
