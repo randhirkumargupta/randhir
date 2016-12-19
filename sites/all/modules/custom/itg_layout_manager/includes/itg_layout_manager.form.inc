@@ -200,3 +200,26 @@ function layout_section_widget2_search_form($form, &$form_state) {
 
   return $form;
 }
+
+/**
+ * Implementation of hook_form for section cards
+ * {@inheritdoc}
+ */
+function highlights_widgets_search_form($form, &$form_state) {
+  
+    
+  $form['highlights_title'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'content-title-list/highlights/autocomplete',
+    '#maxlength' => 128,
+  );  
+  
+  $form['section_save'] = array(
+    '#markup' => '<a data-tabwidget='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section-save">+</a>',
+    '#weight' => 20,
+  );  
+
+  return $form;
+}//

@@ -47,6 +47,43 @@ function features_for_highlights_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'field_collection_item-field_highlights-field_highlights_url'.
+  $field_instances['field_collection_item-field_highlights-field_highlights_url'] = array(
+    'bundle' => 'field_highlights',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Example: http://example.com',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_highlights_url',
+    'label' => 'URL',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'node-heighlights-field_highlights'.
   $field_instances['node-heighlights-field_highlights'] = array(
     'bundle' => 'heighlights',
@@ -94,8 +131,10 @@ function features_for_highlights_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Example: http://example.com');
   t('Highlights');
   t('Text');
+  t('URL');
 
   return $field_instances;
 }
