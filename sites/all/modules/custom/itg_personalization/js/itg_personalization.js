@@ -215,5 +215,13 @@ jQuery(document).ready(function () {
             return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
         }, "Please enter a valid email address.");
     }
-
+    
+    // cod to show ugc tab on personalization
+    var url = window.location.href;
+    var ugc_value = url.substring(url.lastIndexOf('/') + 1);
+    var ugc_value_id = ugc_value.toLowerCase();
+    ugc_arr = ['story', 'videogallery', 'photogallery'];
+    if(jQuery.inArray(ugc_value_id, ugc_arr) != -1) {
+        jQuery('#'+ugc_value_id).trigger('click');
+    }
 });

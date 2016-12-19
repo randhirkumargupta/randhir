@@ -12,7 +12,16 @@ if (!empty($content)):
     $fb_title = addslashes($node->title);
     $share_desc = '';
     $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-    ?>
+    if (function_exists(itg_facebook_share_count)) {
+    $fb_count = itg_facebook_share_count($actual_link);
+    }
+
+    if (function_exists(itg_google_share_count)) {
+      $google_count = itg_google_share_count($actual_link);
+    }
+
+    $fb_google_count = $fb_count + $google_count;
+  ?>
     <div class="story-section <?php print $class_buzz; ?>">
         <div class='<?php print $classes ?>'>
             <?php //pr($node);  ?> 
@@ -61,7 +70,7 @@ if (!empty($content)):
                                         $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
                                         print "<a href='mailto:support@indiatoday.in'>Mail To Author</a>";
                                         ?></li>
-                                    <li class="mhide"><span class="share-count">4.5K</span>SHARES</li>
+                                    <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span>SHARES</li>
                                     <li><?php print date('F j, Y', $node->created); ?>   </li>
                                     <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
@@ -400,8 +409,12 @@ if (!empty($content)):
                 <div class="section-left-bototm">
                     <div class="social-list">
                         <ul>
-                            <li class="mhide"><a href="#"><i class="fa fa-share"></i></a> <span>Submit Your Story</span></li>
-                            <li class="mhide"><div id="fb-root"></div><a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>, '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                            <?php if($user->uid > 0): ?>
+                            <li class="mhide"><a class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/personalization/my-content/<?php print $node->type; ?>"><i class="fa fa-share"></i></a> <span><a class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/personalization/my-content/<?php print $node->type; ?>">Submit Your Story</a></span></li>
+                            <?php else: ?>
+                            <li class="mhide"><a class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i></a> <span><a class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $node->type;?>">Submit Your Story</a></span></li>
+                            <?php endif; ?>
+                            <li class="mhide"><div id="fb-root"></div><a class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
                             <li class="mhide"><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                             <li class="mhide"><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                               <?php
@@ -420,20 +433,31 @@ if (!empty($content)):
                                 <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
                               <?php } ?>
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
-                            <?php
-                            if(function_exists(itg_facebook_share_count)) {
-                              $fb_count = itg_facebook_share_count($actual_link); 
-                            }
-                            
-                            if(function_exists(itg_google_share_count)) {
-                              $google_count = itg_google_share_count($actual_link);
-                            }
-                            
-                            $fb_google_count = $fb_count + $google_count;
-                            ?>
                             <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span> SHARES</li>
                             <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
-                            <li><a href="#">follow the Story</a></li>
+                            
+                             <?php if ($user->uid){ ?>
+                                        <?php $follow_story = flag_create_link('follow', $node->nid); ?>                      
+                                        <li><?php print $follow_story; ?></li>
+                                          <?php
+                                          }
+                                          elseif ($user->uid == 0 || $_GET['q'] != 'user') {
+                                            if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
+                                              ?>
+
+                                        <li> <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="def-cur-pointer">follow the Story</a></li>
+                                             
+                                              <?php
+                                            }
+                                            else {
+                                              ?>
+                                        <li> <a href="javascript:void(0)" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="def-cur-pointer">follow the Story</a></li>
+
+                                              <?php
+                                            }
+                                          }
+                                          ?>    
+                                  
                         </ul>
                     </div>
 
