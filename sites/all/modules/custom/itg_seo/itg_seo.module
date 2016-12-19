@@ -131,3 +131,21 @@ function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
 
   return $form;
 }
+
+/**
+ * Implements 
+ * itg_seo_latest_headlines()
+ */
+function itg_seo_latest_headlines() {
+    $query = db_select('node', 'n')
+        ->fields('n', array('title', 'nid'))
+        ->condition('n.status', 'published')
+        ->range(0,4)
+        ->orderBy('n.created', 'DESC');
+    $result = $query->execute()->fetchAll();
+    $headlines = array();
+    foreach ($result as $key => $val) {
+        $headlines[$val->nid] = $val->title;
+    }
+    return $headlines;
+}

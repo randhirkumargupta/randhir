@@ -22,15 +22,10 @@ global $base_url;
       <h3>Check out Latest Headlines</h3>
       <ul class="latest-headlines-list">
           <?php 
-          $query = db_select('node', 'n')
-                  ->fields('n', array('title', 'nid'))
-                  ->condition('n.status', 'published')
-                  ->range(0,4)
-                  ->orderBy('n.created', 'DESC');
-          $result = $query->execute()->fetchAll();
-          foreach ($result as $key => $val) {
+          $latest_headlines = itg_seo_latest_headlines();
+          foreach ($latest_headlines as $key => $val) { 
           ?>
-        <a href="<?php print url('node/'. $val->nid); ?>" target="_blank"><li><?php print_r($val->title); ?></li></a>
+          <a href="<?php print url('node/'. $key); ?>" target="_blank"><li><?php print_r($val); ?></li></a>
           <?php } ?>
       </ul>
     </div>
