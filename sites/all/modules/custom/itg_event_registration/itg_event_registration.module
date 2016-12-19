@@ -150,6 +150,12 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       if ($registration_type == 'free') {
         unset($form['field_erf_total_fee']);
         $form['field_erf_payment_gateway']['#access'] = FALSE;
+            $form['add_form_scroll_container'] = array(
+            '#prefix' => '<div class= "form-field-name-field-erf-payment-gateway">',
+            '#type' => 'item',
+            '#suffix' => '</div>',
+            '#weight' => 9
+        );
       } else {
         $form['total_fees_container'] = array(
             '#prefix' => '<div class= "event-total-fees-container">',
@@ -159,6 +165,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
             '#suffix' => '</div>',
             '#weight' => 10
         );
+
         $form['have_a_coupon_code'] = array(
             '#prefix' => '<div class= "have-a-coupon-code">',
             '#type' => 'item',
@@ -167,34 +174,17 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
             '#weight' => 11
         );
       }
- 
-    } 
-   
+    }
+
     // Assign event id into source id field
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $current_event_nid;
     $form['field_story_source_id']['#access'] = TRUE;
 
     // After build and validate function 
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
-    //$form['#validate'][] = 'itg_event_registration_form_validate';
 
     // Call custom summit callback
     $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
-  }
-}
-
-/**
- * Custom validate for event registration form
- * @param array $form
- * @param array $form_state
- */
-function itg_event_registration_form_validate($form, &$form_state){
-  foreach($form_state['values']['field_email_address'][LANGUAGE_NONE] as $key => $email){
-    if (is_numeric($key)) {
-      if (!valid_email_address($email['value'])) {
-        form_set_error('field_email_address][' . LANGUAGE_NONE . '][' . $key ,  t('Please enter a valid email id.'));
-      }
-    }
   }
 }
 
@@ -309,6 +299,11 @@ function itg_event_registration_node_validate($node) {
 
     $member = 1;
     foreach ($node->field_erf_registration_fee[LANGUAGE_NONE] as $regdata) {
+      
+      // Validate Ticket type field
+      if (empty($regdata['field_erf_ticket_type'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_ticket_type'][LANGUAGE_NONE][0]['value'] != 'A') {
+        form_set_error('field_erf_ticket_type'.$member, t('Ticket type field is required for Member @member', array('@member' => $member)));
+      }
       
       // Validate Name field
       if (empty($regdata['field_erf_name'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'] != 'A') {
