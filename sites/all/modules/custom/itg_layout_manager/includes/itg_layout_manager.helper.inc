@@ -92,6 +92,9 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   else if (isset($widget_name) && $widget_name == 'custom_html_widget') {
     return get_html_custom_widget($filter_url);    
   }
+  else if (isset($widget_name) && $widget_name == 'highlights_widget') {
+    return get_highlights_widget($filter_url);    
+  }
   else if (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
     return create_setion_widget2($filter_url);
   }
@@ -598,4 +601,33 @@ function get_html_custom_widget($nid) {
   $node = node_load($nid); 
   $html_code = $node->body[LANGUAGE_NONE][0]['value'];  
   return theme("html_custom_widget", array("data" => $html_code));  
+}
+
+/**
+ * Get html_custom widgets for layout
+ * @return theme
+ */
+function get_highlights_widget($nid) {
+  $node = node_load($nid); 
+  $html_code = $node->body[LANGUAGE_NONE][0]['value'];  
+  return theme("itg_highlights_widget", array("data" => $html_code));  
+}
+
+/**
+ * Get all html_custom widgets list for layout setting page
+ * @return array
+ */
+function get_highlights_widget_list() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));  
+  $query->condition('type', 'heighlights');        
+  $itg_result = $query->execute()->fetchAll();
+  
+  $rows = array();
+  
+  foreach ($itg_result as $row) {
+    $widget[$row->nid] = $row->title;
+  }
+  
+  return $widget;
 }

@@ -902,6 +902,45 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-photogallery-field_primary_category_html'.
+  $field_instances['node-photogallery-field_primary_category_html'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 53,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_primary_category_html',
+    'label' => 'Primary category html',
+    'required' => FALSE,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 52,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-photogallery-field_primary_category_html_text'.
   $field_instances['node-photogallery-field_primary_category_html_text'] = array(
@@ -2589,6 +2628,7 @@ function photogallery_field_default_field_instances() {
   t('Posted By Instagram');
   t('Posted by Twitter');
   t('Posted by facebook');
+  t('Primary category html');
   t('Primary category textarea');
   t('Related Content');
   t('Section');
