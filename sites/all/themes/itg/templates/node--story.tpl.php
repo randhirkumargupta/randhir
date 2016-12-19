@@ -373,24 +373,26 @@ if (!empty($content)):
                   $like = itg_flag_get_count($get_val, 'like_count');
                   $dislike = itg_flag_get_count($get_val, 'dislike_count');
                   if (!empty($like)) {
-                    $like_count = '(' . $like . ')';
+                    $like_count = $like;
                   }
                   if (!empty($dislike)) {
-                    $dislike_count = '(' . $dislike . ')';
+                    $dislike_count = $dislike;
                   }
                   $pid = "voted_" . $get_val;
                   $like = "no-of-likes_" . $get_val;
                   $dislike = "no-of-dislikes_" . $get_val;
                   ?>
-                  <div class="agbutton">
-                      <div id="name-dv"><?php print t('Do You Like This Story'); ?></div>
-                          <div id="lky"><button id="like_count" rel="<?php print $get_val; ?>" data-tag="sty">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button>
-                          <div id="sty-dv" style="display:none">Awesome! Now share the story <a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
+                  <div class="agbutton story-like-dislike">
+                      <div id="name-dv"><?php print t('Do You Like This Story'); ?>
+                      <span id="lky"><button id="like_count" rel="<?php print $get_val; ?>" data-tag="sty"><i class="fa fa-thumbs-o-up"></i> <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button>
+                          <span id="sty-dv" style="display:none">Awesome! </br> Now share the story </br> <a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
                           <a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
                           <a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
-                          <a href="#"><i class="fa fa-comment"></i></a></div></div>
-                  <div id="dlky"> <button id="dislike_count" rel="<?php print $get_val; ?>" data-tag="dsty">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>
-                      <div id="dsty-dv" style="display:none">Too bad. Tell us what you didn't like in the comment section</div></div>
+                          <a href="#"><i class="fa fa-comment"></i></a></span></span>
+                            <span id="dlky"> <button id="dislike_count" rel="<?php print $get_val; ?>" data-tag="dsty"><i class="fa fa-thumbs-o-down"></i> <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>
+                                <span id="dsty-dv" style="display:none">Too bad.</br> Tell us what you didn't like in the comment section</span>
+                            </span>                                       
+                        </div>                          
                   <p class="error-msg" id="<?php print $pid; ?>"></p>
                   </div>
                 

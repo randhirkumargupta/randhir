@@ -2020,8 +2020,7 @@ footer{
         color: #939292;
         @include font(12px);
         border-top: 1px solid $border-color;
-        border-bottom: 1px solid $border-color;
-        margin-top: 40px;        
+        border-bottom: 1px solid $border-color;             
         @include clearfix;
         li{
             @include float(left);
@@ -2116,6 +2115,90 @@ footer{
             }
         }
     }
+    .agbutton.story-like-dislike{
+        margin-top: 40px;
+        border-top: 1px solid #ddd;        
+        text-align: center;
+        padding: 15px 0;
+        color:#929292;        
+        font-family: roboto;
+        font-size: 16px;
+        font-weight: 700;
+        #name-dv{
+            #lky, #dlky{
+            padding: 0 10px;
+            @include pos(relative);
+            display: inline-block;
+            padding: 0 10px;
+            vertical-align: middle;
+            button{
+                background: transparent;
+                border: none;
+                font-size: 22px;
+                cursor: pointer;
+                color:#929292;
+                &#like_count, &#dislike_count{
+                    span{
+                        color: #1f8201;
+                        font-weight: 700;
+                        font-size: 16px;
+                    }
+                }
+                &#dislike_count{
+                     span{
+                    color: #ef0401;
+                     }
+                }
+            }
+            > span{
+                padding: 0 15px;
+                display: inline-block;
+                vertical-align: middle;
+                &#dlky{
+                    padding-left: 0;
+                }
+            }
+            #sty-dv, #dsty-dv{
+                background: #fff;
+                width: 200px;
+                position: absolute;
+                box-shadow: 0px 0px 5px #ccc;
+                left: 0;
+                top: 40px;
+                font-weight: normal;
+                color: #000;
+                padding: 15px;
+                border-radius: 5px;
+                line-height: 24px;
+                text-align: left;
+                border: 1px solid #d2d2d2;
+                overflow: visible !important;
+                &:before{
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 10px solid #e0e0e0;
+                    position: absolute;
+                    left: 12px;
+                    top: -10px;
+                }
+                a{
+                    padding: 3px;
+                    display: inline-block;
+                    vertical-align: top;
+                    cursor: pointer;
+                }
+            }
+        }
+        }
+        .error-msg{
+            color: red;
+            font-weight: 400;
+            font-size: 12px;
+        }
+    } 
 }
 .buzz-feedback{    
     @include calculate-width(1);
@@ -8325,11 +8408,15 @@ input[type="radio"]:checked + label:after{
         }
     }
     ul{
-        @extend .list-none;
-        li{
-            margin-bottom: 30px;
+        @extend .list-none; 
+        @include clearfix;            
+        li{            
+            a{
+                display: block;
+                overflow: hidden;
+            }
             &:nth-child(4n+1){
-                clear: left;
+                clear:left;
             }
         }
     }
