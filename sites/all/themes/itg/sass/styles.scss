@@ -1485,6 +1485,7 @@ footer{
             box-shadow: 2px 2px 2px #f1f1f1;
             color:$black-color;
             z-index: 2;
+            right: 40px;
             label{
                 @include display-inline;
                 padding-top: 9px;
@@ -1519,7 +1520,7 @@ footer{
                 border-left: 12px solid transparent;
                 border-right: 12px solid transparent;
                 border-bottom: 12px solid whitesmoke;
-                @include pos(absolute,-11px,null,null,9px);                
+                @include pos(absolute,-11px,40px,null,null);                
             }
         }
     }
@@ -2243,7 +2244,8 @@ footer{
         .buzz-img{
             @include pos(relative);
             .social-share{
-                @include pos(absolute,null,null,0,null);
+                @include pos(absolute,null,null,0,null);                
+                z-index: 1;
                 ul{
                     @include clearfix;
                     li{
@@ -8869,3 +8871,43 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*css end big story format*/
+/*like dislike photo page start*/
+#block-views-photo-landing-slider-block, #block-views-video-landing-header-block{
+    .section-like-dislike{        
+        .agbutton{
+            margin-top:20px;            
+            a{
+                color: #026bc5;
+                @include font(12px);
+                display: block;
+                margin-top: 10px;
+            }
+            button{
+                background: transparent;
+                border: none;
+                font-size: 22px;
+                cursor: pointer;
+                color:#929292;               
+                    span{
+                        color: #1f8201;
+                        font-weight: 700;
+                        font-size: 16px;                     
+                    }
+                    &#dislike_count{
+                        span{
+                               color: #ef0401;
+                        }
+                    }
+                    &#like_count{
+                        padding-right: 15px;
+                    }
+                }
+            }
+            p.error-msg{                
+                color: #13d21a;                
+                margin-top: 10px;
+                text-align: left;
+            }        
+        }
+    }
+/*like dislike photo page end*/

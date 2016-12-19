@@ -1772,6 +1772,7 @@ footer .footer-copyright {
   box-shadow: 2px 2px 2px #f1f1f1;
   color: #323232;
   z-index: 2;
+  right: 40px;
 }
 .view-front-end-global-search .views-exposed-widget .caln label {
   display: inline-block;
@@ -1813,7 +1814,7 @@ footer .footer-copyright {
   border-bottom: 12px solid whitesmoke;
   position: absolute;
   top: -11px;
-  left: 9px;
+  right: 40px;
 }
 .view-front-end-global-search .view-content .itg-search-list {
   overflow: hidden;
@@ -2743,6 +2744,7 @@ footer .footer-copyright {
 .buzz-feedback .buzz-section .buzz-img .social-share {
   position: absolute;
   bottom: 0;
+  z-index: 1;
 }
 .buzz-feedback .buzz-section .buzz-img .social-share ul {
   zoom: 1;
@@ -10531,3 +10533,39 @@ footer .footer-copyright {
 }
 
 /*css end big story format*/
+/*like dislike photo page start*/
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton, #block-views-video-landing-header-block .section-like-dislike .agbutton {
+  margin-top: 20px;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton a, #block-views-video-landing-header-block .section-like-dislike .agbutton a {
+  color: #026bc5;
+  font-size: 12px;
+  font-size: 0.75rem;
+  display: block;
+  margin-top: 10px;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton button, #block-views-video-landing-header-block .section-like-dislike .agbutton button {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #929292;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton button span, #block-views-video-landing-header-block .section-like-dislike .agbutton button span {
+  color: #1f8201;
+  font-weight: 700;
+  font-size: 16px;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton button#dislike_count span, #block-views-video-landing-header-block .section-like-dislike .agbutton button#dislike_count span {
+  color: #ef0401;
+}
+#block-views-photo-landing-slider-block .section-like-dislike .agbutton button#like_count, #block-views-video-landing-header-block .section-like-dislike .agbutton button#like_count {
+  padding-right: 15px;
+}
+#block-views-photo-landing-slider-block .section-like-dislike p.error-msg, #block-views-video-landing-header-block .section-like-dislike p.error-msg {
+  color: #13d21a;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/*like dislike photo page end*/
