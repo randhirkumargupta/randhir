@@ -1833,9 +1833,12 @@ function itg_videogallery_ftp_file_insert_cron() {
         $path_info = pathinfo($file_array[1]);
         $extension = $path_info['extension'];
         $filename = $path_info['filename'];
-
         if (isset($extension) && $extension == 'mp4') {
             $file_size = ftp_size($connection_id, $files);
+            $existfile=check_file_already_exist_or_not_by_ftp($file_array[1]);
+            if(empty($existfile))
+            {
+                    
             $realfilename = check_file_already_exist_or_not($file_array[1]);
 
             // Adding managed file
@@ -1883,13 +1886,14 @@ function itg_videogallery_ftp_file_insert_cron() {
                             'video_duration' => $response['duration'],
                             'dailymotion_published' => 0,
                             'type' => 'ftp',
-                            'name' => $realfilename,
+                            'name' => $file_array[1],
                         ))
                         ->execute();
             } catch (Exception $e) {
                 die($e->getMessage());
             }
             // Code start for Adding  video in daily motion 
+        }
         }
     }
 
@@ -1964,6 +1968,18 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
     return $result;
 }
 
+/**
+ * Checking whether file is already exist or not
+ * @return string
+ */
+function check_file_already_exist_or_not_by_ftp($filename) {
+    $query = db_select('dailymotion_response_details', 'drd');
+    $query->condition('name', $filename, '=');
+    $query->fields('drd');
+    $query->range(0, 1);
+    $results = $query->execute()->fetchAll();
+    return$results[0];
+}
 /**
  * Checking whether file is already exist or not
  * @return string
