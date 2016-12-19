@@ -414,15 +414,16 @@
             
              // for highlights widgets
             $('#layout-highlights-submit').click(function() {
+                
                 var base_url = settings.itg_story.settings.base_url;
-                // html widget value
-                var html_title = $('#edit-html-title').val();                
+                // highlights widget value
+                var highlights_title = $('#edit-highlights-title').val();                
 
                 if (html_title) {
                     $.ajax({
-                        url: base_url + "/layout-search-widgets-list/highlights",
+                        url: base_url + "/layout-search-widgets-list/heighlights",
                         method: 'post',
-                        data: {html_title: html_title},
+                        data: {html_title: highlights_title},
                         beforeSend: function() {
                            // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
                         },

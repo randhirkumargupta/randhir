@@ -92,7 +92,7 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   else if (isset($widget_name) && $widget_name == 'custom_html_widget') {
     return get_html_custom_widget($filter_url);    
   }
-  else if (isset($widget_name) && $widget_name == 'highlights_widget') {
+  else if (isset($widget_name) && $widget_name == 'heighlights') {
     return get_highlights_widget($filter_url);    
   }
   else if (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
@@ -609,7 +609,7 @@ function get_html_custom_widget($nid) {
  */
 function get_highlights_widget($nid) {
   $node = node_load($nid); 
-  $html_code = $node->body[LANGUAGE_NONE][0]['value'];  
+  $html_code = $node->title;  
   return theme("itg_highlights_widget", array("data" => $html_code));  
 }
 
