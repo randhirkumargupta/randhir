@@ -15,88 +15,89 @@
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
 
     // Form alter for event backend node
-    if ($form_id == "event_backend_node_form") {
+  if ($form_id == "event_backend_node_form") {
+    /*
       $form['field_associate_event_photo']['#suffix'] = '<div class="event-photo-des description">'.$form['field_associate_event_photo'][LANGUAGE_NONE]['#description'].'</div>';
       $form['field_associate_event_video']['#suffix'] = '<div class="event-video-des description">'.$form['field_associate_event_video'][LANGUAGE_NONE]['#description'].'</div>';
       $form['field_e_associate_highlights']['#suffix'] = '<div class="event-video-des description">'.$form['field_e_associate_highlights'][LANGUAGE_NONE]['#description'].'</div>';
-        $form['#after_build'][] = 'itg_event_backend_after_build';
-        array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
-        $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), 'manage-event-backend', array('attributes' => array('class' => 'button'))),
-            '#weight' => -10,
-        );
+     */
+    $form['#after_build'][] = 'itg_event_backend_after_build';
+    array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'manage-event-backend', array('attributes' => array('class' => 'button'))),
+        '#weight' => -10,
+    );
 
-        if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
-            $form['actions']['submit']['#submit'][] = 'itg_event_alter_submit_status_message';
-        }
-        // Node redirection code
-        if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
-            $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect';
-        }
-        if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
-            $form['actions']['submit']['#weight'] = -10;
-        }
-        else {
-            $form['actions']['submit']['#weight'] = 10;
-        }
-
-
-        //add extra save button
-        if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
-            $form['actions']['submit2'] = array(
-                '#type' => 'submit',
-                '#name' => 'second_submit',
-                '#value' => t('Save'),
-                '#access' => TRUE,
-                '#submit' => array('node_form_submit', 'itg_event_backend_second_submit', 'itg_event_alter_submit_status_message'),
-                '#weight' => -9,
-                '#attributes' => array('id' => array('save_btn')),
-            );
-        }
-        $form['actions']['cancel']['#weight'] = -10;
-        if ((arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") && $form['#node']->status == 1) {
-            $form['field_event_start_date']['#attributes']['class'][] = 'date-disabled';
-            $form['field_event_close_date']['#attributes']['class'][] = 'date-disabled';
-            $form['field_story_expiry_date']['#attributes']['class'][] = 'date-disabled';
-            $form['field_registration_close_date']['#attributes']['class'][] = 'date-disabled';
-        }
-
-        if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
-            $node_type = 'Event';
-            $node_type = str_replace("_", " ", $node_type);
-            $node_type = ucfirst($node_type);
-            $node_title = $form['#node']->title;
-            $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
-            drupal_set_title($edit_title);
-        }
-        // Current step save in session variable
-        if (isset($form_state['storage']['step'])) {
-            $_SESSION['current_step'] = $form_state['storage']['step'];
-        }
+    if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
+      $form['actions']['submit']['#submit'][] = 'itg_event_alter_submit_status_message';
+    }
+    // Node redirection code
+    if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration' || $form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
+      $form['actions']['submit']['#submit'][] = 'itg_event_backend_configuration_redirect';
+    }
+    if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
+      $form['actions']['submit']['#weight'] = -10;
+    } else {
+      $form['actions']['submit']['#weight'] = 10;
     }
 
-    // Form alter for sponsor node
-    if ($form_id == 'sponsor_node_form') {
-        $form['actions']['submit']['#submit'][] = 'itg_sponsor_alter_submit_status_message';
-        $form['#after_build'][] = 'itg_event_backend_sponsor';
-        $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), 'manage-sponsor', array('attributes' => array('class' => 'button'))),
-            '#weight' => 20,
-        );
+
+    //add extra save button
+    if (arg(0) == "node" && arg(2) == "edit" && is_numeric(arg(1))) {
+      $form['actions']['submit2'] = array(
+          '#type' => 'submit',
+          '#name' => 'second_submit',
+          '#value' => t('Save'),
+          '#access' => TRUE,
+          '#submit' => array('node_form_submit', 'itg_event_backend_second_submit', 'itg_event_alter_submit_status_message'),
+          '#weight' => -9,
+          '#attributes' => array('id' => array('save_btn')),
+      );
+    }
+    $form['actions']['cancel']['#weight'] = -10;
+    if ((arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") && $form['#node']->status == 1) {
+      $form['field_event_start_date']['#attributes']['class'][] = 'date-disabled';
+      $form['field_event_close_date']['#attributes']['class'][] = 'date-disabled';
+      $form['field_story_expiry_date']['#attributes']['class'][] = 'date-disabled';
+      $form['field_registration_close_date']['#attributes']['class'][] = 'date-disabled';
     }
 
-    // Form alter for event configurations node
-    if ($form_id == 'heighlights_node_form') {
-        unset($form['#metatags']);
-        unset($form['actions']['preview']);
-        $form['#after_build'][] = 'itg_event_backend_highlights_after_build';
-        $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), 'manage-highlights', array('attributes' => array('class' => 'button'))),
-            '#weight' => 20,
-        );
+    if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
+      $node_type = 'Event';
+      $node_type = str_replace("_", " ", $node_type);
+      $node_type = ucfirst($node_type);
+      $node_title = $form['#node']->title;
+      $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
+      drupal_set_title($edit_title);
     }
-    $form['field_config_photo']['#access'] = FALSE;
-    $form['field_config_video']['#access'] = FALSE;
+    // Current step save in session variable
+    if (isset($form_state['storage']['step'])) {
+      $_SESSION['current_step'] = $form_state['storage']['step'];
+    }
+  }
+
+  // Form alter for sponsor node
+  if ($form_id == 'sponsor_node_form') {
+    $form['actions']['submit']['#submit'][] = 'itg_sponsor_alter_submit_status_message';
+    $form['#after_build'][] = 'itg_event_backend_sponsor';
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'manage-sponsor', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+    );
+  }
+
+  // Form alter for event configurations node
+  if ($form_id == 'heighlights_node_form') {
+    unset($form['#metatags']);
+    unset($form['actions']['preview']);
+    $form['#after_build'][] = 'itg_event_backend_highlights_after_build';
+    $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), 'manage-highlights', array('attributes' => array('class' => 'button'))),
+        '#weight' => 20,
+    );
+  }
+  $form['field_config_photo']['#access'] = FALSE;
+  $form['field_config_video']['#access'] = FALSE;
 }
 
 /**
@@ -243,8 +244,9 @@ function itg_event_backend_sponsor($form, &$form_state) {
  * @return boolean
  */
 function itg_event_backend_highlights_after_build($form, &$form_state) {
-    $form['path']['#access'] = FALSE;
-    return $form;
+  $form['field_highlights'][LANGUAGE_NONE]['#title'] = '<div style="float:left">Add highligths:</div>';
+  $form['path']['#access'] = FALSE;
+  return $form;
 }
 
 /**
@@ -1493,7 +1495,12 @@ function itg_event_backend_highlights_block_content() {
     $output .= '<div class="highlight-box"><h2 class = "highlights-heading">Highlights</h2><div class="wrap-listing">';
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
       $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
-      $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
+      if(!empty($highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'])) {
+              $text .= '<div class="h-list">' . l($highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'], $highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'], array('attributes' => array('target' => '_blank'))) . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
+      } else {
+              $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value']. itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
+      }
+
     }
 
     $output .= $text. '</div></div>';
