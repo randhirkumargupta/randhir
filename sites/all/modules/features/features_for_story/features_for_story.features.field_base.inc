@@ -1496,8 +1496,8 @@ function features_for_story_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'Exclusive' => 'Exclusive',
-        'Live' => 'Live',
+        'exclusive' => 'Exclusive',
+        'live' => 'Live',
       ),
       'allowed_values_function' => '',
     ),
