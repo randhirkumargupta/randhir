@@ -388,6 +388,53 @@
                   jQuery(this).hide();
                 }
             });
+            
+            // for html widgets
+            $('#layout-html-submit').click(function() {
+                var base_url = settings.itg_story.settings.base_url;
+                // html widget value
+                var html_title = $('#edit-html-title').val();                
+
+                if (html_title) {
+                    $.ajax({
+                        url: base_url + "/layout-search-widgets-list/custom_html_widgets",
+                        method: 'post',
+                        data: {html_title: html_title},
+                        beforeSend: function() {
+                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        },
+                        success: function(data) {
+                            // display category list in block
+                           $('#templates-widgets-html').html(data);
+                           draggable_widgets();
+                        }
+                    });
+                }
+            });
+            
+             // for highlights widgets
+            $('#layout-highlights-submit').click(function() {
+                
+                var base_url = settings.itg_story.settings.base_url;
+                // highlights widget value
+                var highlights_title = $('#edit-highlights-title').val();                
+
+                if (highlights_title) {
+                    $.ajax({
+                        url: base_url + "/layout-search-widgets-list/highlights",
+                        method: 'post',
+                        data: {html_title: highlights_title},
+                        beforeSend: function() {
+                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        },
+                        success: function(data) {
+                            // display category list in block
+                           $('#templates-highlights-widgets').html(data);
+                           draggable_widgets();
+                        }
+                    });
+                }
+            });
         }
 
     };

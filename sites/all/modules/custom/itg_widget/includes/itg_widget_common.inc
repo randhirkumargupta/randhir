@@ -226,6 +226,18 @@ function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, 
 }
 
 /**
+ * Function to remove term.
+ * @param int $tid
+ */
+function remove_state_term($tid) {
+    if($tid) {
+        taxonomy_term_delete($tid);
+    }
+    drupal_set_message(t("Term Deleted"));
+    drupal_goto($_SERVER['HTTP_REFERER']);
+}
+
+/**
  * Funtion used to delete node combination form itg_widget_order table.
  * 
  * @param string $widget_name
@@ -827,6 +839,7 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     }
     
     if($form['#form_id'] == 'views_form_section_wise_draggable_content_order_big_story_format') {
+      if(!isset($_POST['views_bulk_operations'])) {
             drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
             $big_story_value =  itg_big_story_get_extra_value();
             if(in_array('big_story_live_tv_active', $big_story_value)) {
@@ -840,12 +853,13 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
             // Activate live tv button
             $form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '
                 <div class="switch-field">
-                 <div class="switch-title">Activate Live TV: </div>
+                 <div class="switch-title">'.t('Activate Live TV:').' </div>
                  <input type="radio" id="switch_left" name="live_tv_switch_2" value="yes" '.$yes_live.'/>
-                 <label for="switch_left">Yes</label>
+                 <label for="switch_left">'.t('Yes').'</label>
                  <input type="radio" id="switch_right" name="live_tv_switch_2" value="no" '.$no_live.' />
-                 <label for="switch_right">No</label>
+                 <label for="switch_right">'.t('No').'</label>
                </div>';
+      }
     }
 }
 
@@ -2647,8 +2661,8 @@ function get_rhs_block_display_condtion($delta = '') {
 function insert_all_node_in_widegt_table() {
 
     try {
-        db_query('alter table itg_widget_order add column constituency varchar(200) NULL after extra')->execute();
-        // db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
+       // db_query('alter table itg_widget_order add column constituency varchar(200) NULL after extra')->execute();
+         db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
     } catch (Exception $ex) {
         drupal_set_message($ex->getMessage());
     }

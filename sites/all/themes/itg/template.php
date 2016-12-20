@@ -138,7 +138,8 @@ function itg_preprocess_page(&$variables) {
           || $arg[0] == 'sso-user' 
           || $arg[0] == 'sso'
           || $arg[0] == 'password-success' 
-          || $arg[0] == 'complete-page' 
+          || $arg[0] == 'complete-page'
+          || $arg[2] == 'ugc'
           || $arg[0] == 'associate-photo-video-content') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }

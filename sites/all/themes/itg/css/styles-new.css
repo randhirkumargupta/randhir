@@ -52,6 +52,9 @@
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
   position: relative;
   padding-top: 13px;
+  /*            &:hover{
+                  .views-widget{display: block;}
+              }*/
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label {
   display: block;
@@ -65,12 +68,12 @@
   content: '';
   width: 0;
   height: 0;
-  border-style: solid;
-  border: 5px 4px;
-  border-color: #b3b3b3 transparent transparent transparent;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #b3b3b3;
   position: absolute;
-  right: 8px;
-  top: 8px;
+  right: 5px;
+  top: 7px;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
   display: none;
@@ -78,14 +81,11 @@
   left: 0;
   top: 31px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper:hover .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper:hover .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper:hover .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper:hover .views-widget {
-  display: block;
-}
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .form-select {
   height: 95px;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget {
-  padding-right: 40px;
+  padding-right: 20px;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget label {
   font-weight: normal;
@@ -2787,6 +2787,28 @@ body.has-cart-popup {
   float: left;
 }
 
+/* CSS For Material Ripple Effect */
+.ripple {
+  background-color: rgba(255, 255, 255, 0.4);
+  animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
+}
+
+.itg-listing li.ripple {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
 /* Responsive CSS */
 @media all and (max-width: 767px) {
   /* Responsive CSS For Loyalty and Rewards */
