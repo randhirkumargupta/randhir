@@ -1162,6 +1162,9 @@ function itg_print_team_form_comment_form_alter(&$form, &$form_state, $form_id) 
   switch($form_id) {
     case 'comment_node_print_team_integration_form':
       hide($form['author']);
+            drupal_add_js('jQuery(document).ready(function() {                  
+          jQuery(".top-actions").hide();
+     });', array('type' => 'inline', 'scope' => 'footer'));
       break;
   }
 }

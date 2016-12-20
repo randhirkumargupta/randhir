@@ -70,6 +70,24 @@ function itg_videogallery_schema() {
         'description' => 'Video duration',
         'type' => 'varchar',
         'length' => '250',
+        'null' => TRUE,
+      ),
+        'dailymotion_thumb_url' => array(
+        'description' => 'Thumb Url',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+        'dailymotion_published' => array(
+        'description' => 'Publish status',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+        'name' => array(
+        'description' => 'Video name',
+        'type' => 'varchar',
+        'length' => '250',
         'not null' => TRUE,
       ),
         

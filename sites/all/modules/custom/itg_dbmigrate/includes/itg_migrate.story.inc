@@ -104,6 +104,14 @@ class ItgStoryMigration extends XMLMigration {
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
       'keywords' => t('Keywords'),
+      'audio_position' => t('audio_position'),
+      'audio_url' => t('audio_url'),
+      'animated_image_position' => t('animated_image_position'),
+      'animated_image' => t('animated_image'),
+      'map_embed_code_position' => t('map_embed_code_position'),
+      'map_embed_code' => t('map_embed_code'),
+      'social_embed_code_position' => t('social_embed_code_position'),
+      'social_embed_code' => t('social_embed_code'),
     );
 
 
@@ -255,6 +263,15 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
+    // Facebook instant Article migrate code
+    $this->addFieldMapping('field_facebook_audio_position', 'audio_position')->xpath('facebook_instant_article_integration/audio_position');
+    $this->addFieldMapping('field_facebook_instant_audio_url', 'audio_url')->xpath('facebook_instant_article_integration/audio_url');
+    $this->addFieldMapping('field_animated_image_position', 'animated_image_position')->xpath('facebook_instant_article_integration/animated_image_position');
+    $this->addFieldMapping('field_facebook_animated_image', 'animated_image')->xpath('facebook_instant_article_integration/animated_image');
+    $this->addFieldMapping('field_facebook_map_position', 'map_embed_code_position')->xpath('facebook_instant_article_integration/map_embed_code_position');
+    $this->addFieldMapping('field_map_embed_code', 'map_embed_code')->xpath('facebook_instant_article_integration/map_embed_code');
+    $this->addFieldMapping('field_social_embed_code', 'social_embed_code')->xpath('facebook_instant_article_integration/social_embed_code');
+    $this->addFieldMapping('field_social_embed_code_position', 'social_embed_code_position')->xpath('facebook_instant_article_integration/social_embed_code_position');
     //$this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
   }
 
@@ -610,8 +627,27 @@ class ItgStoryMigration extends XMLMigration {
         $count++;
       }
     }
+    
+    //facebook instant article filed
+    if (isset($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate) && !empty($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate)) {
+      $pos_count=0;
+      foreach ($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate as $facebook_article) {
+        $position = (string) $facebook_article->gallery_id_position;
+        $gallery_id = (string) $facebook_article->gallery_id;
+        $values = array(
+          'field_name' => 'field_facebook_gallery_associate',
+          'field_gallery_position' => array(LANGUAGE_NONE => array(array('value' => $position))),          
+          'field_associate_gallery_id' => array(LANGUAGE_NONE => array(array('target_id' => $gallery_id))),          
+        );
+        $field_collection_item_facebook = entity_create('field_collection_item', $values);
+        $field_collection_item_facebook->setHostEntity('node', $node);
+        $field_collection_item_facebook->save(TRUE);
+        $node->field_facebook_gallery_associate[LANGUAGE_NONE][$pos_count]['value'] = $field_collection_item_facebook->item_id;
+        $pos_count++;
+      }
+    }
 
-   if (isset($row->xml->buzz_content->buzz) || isset($row->xml->fulltext_conclaveformat->listicle_content->listicle)) {
+   if (isset($row->xml->buzz_content->buzz) || isset($row->xml->fulltext_conclaveformat->listicle_content->listicle) || (isset($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate) && !empty($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate))) {
      
     field_attach_update('node', $node);
    }
