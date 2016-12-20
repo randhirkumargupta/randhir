@@ -89,10 +89,10 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
     return create_setion_widgets($filter_url, $widget_info[1]);
   }
-  else if (isset($widget_name) && $widget_name == 'custom_html_widget') {
+  else if (isset($widget_name) && $widget_name == 'custom_html_widgets') {
     return get_html_custom_widget($filter_url);    
   }
-  else if (isset($widget_name) && $widget_name == 'highlights_widget') {
+  else if (isset($widget_name) && $widget_name == 'highlights') {
     return get_highlights_widget($filter_url);    
   }
   else if (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
@@ -297,6 +297,7 @@ function get_layout_details($section_name, $template_name, $status) {
     // for widget display name
     if (!empty($itg_val->widget_name)) {
       $widget_info_array = explode('|', $itg_val->widget_info);
+      
       if($widget_info_array[1] !="" &&  $widget_info_array[1] !="undefined") {
         $result['widget_display_name'] = '-'.$widget_info_array[1];  
       } else{
@@ -305,7 +306,8 @@ function get_layout_details($section_name, $template_name, $status) {
     }
     
     $result['widget_name'] = $itg_val->widget_name;
-    $result['block_title']="";
+    $result['block_title'] = "";
+    
     if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
       if (!empty($itg_val->block_title)) {
         $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
@@ -604,13 +606,39 @@ function get_html_custom_widget($nid) {
 }
 
 /**
- * Get html_custom widgets for layout
+ * Get highlights widgets for layout
  * @return theme
  */
-function get_highlights_widget($nid) {
-  $node = node_load($nid); 
-  $html_code = $node->body[LANGUAGE_NONE][0]['value'];  
-  return theme("itg_highlights_widget", array("data" => $html_code));  
+function get_highlights_widget($nid) {  
+    global $theme;
+    $highlights_node = node_load($nid);
+    
+    $output = '';
+    $output .= '<div class="wrap-listing">';
+    foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
+      $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
+      
+      if(!empty($highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'])) {
+        $highlight_title = l($highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'], $highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'], array('attributes' => array('target' => '_blank')));
+      } else {
+          $highlight_title = $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'];
+      }
+      
+      $like_dislike = '';
+      if (function_exists('itg_event_backend_highlights_like_dislike')) {
+        if ($theme != 'itgadmin') {
+          $like_dislike = itg_event_backend_highlights_like_dislike($highlights_arr['value']);
+        }
+      }
+      
+      $text .= '<div class="h-list">' . $highlight_title . $like_dislike . '</div>';      
+
+    }
+
+    $output .= $text. '</div>';
+  
+  
+  return theme("itg_highlights_widget", array("data" => $output));  
 }
 
 /**

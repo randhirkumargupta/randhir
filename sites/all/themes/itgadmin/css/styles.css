@@ -9801,7 +9801,8 @@ div.node #comments h2 {
   margin-bottom: 20px;
 }
 .view-section-wise-draggable-content-order .switch-title {
-  margin: 10px 0 20px 0;
+  float: left;
+  margin: 8px 10px 0px 20px;
 }
 .view-section-wise-draggable-content-order .switch-field input {
   display: none;
@@ -9849,4 +9850,18 @@ div.node #comments h2 {
   display: inline-block;
   vertical-align: top;
   margin-right: 10px;
+}
+
+#videoupload #edit-field-video-upload {
+  display: none;
+}
+#videoupload .ftp_browse_field {
+  margin: 40px 0;
+}
+
+[id*="field-video-upload-add-more-wrapper"] [id*="field-video-upload-values"] thead {
+  display: none;
+}
+[id*="field-video-upload-add-more-wrapper"] [id*="field-video-upload-values"] tr td:nth-child(2) {
+  display: none;
 }
