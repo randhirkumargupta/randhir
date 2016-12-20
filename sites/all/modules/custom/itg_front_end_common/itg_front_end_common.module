@@ -216,6 +216,15 @@ function _related_video_block_content() {
 function _related_photo_block_content() {
   $related_content = itg_get_related_content(arg(1));
   if (!empty($related_content)) {
+    drupal_add_js('jQuery(document).ready(function(){
+        //jQuery("#related-photo .photo-list").slick({
+            //infinite: true,
+            //slidesToShow: 4,
+            //slidesToScroll: 1,
+            //centerPadding: \'30px\'            
+       // });
+    });', array('type' => 'inline', 'scope' => 'footer'));
+        
     $photo_output = '<h3><span>Related content</span></h3>
             <div id="related-photo">';
     $related_content = explode(',', $related_content);

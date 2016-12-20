@@ -200,3 +200,48 @@ function layout_section_widget2_search_form($form, &$form_state) {
 
   return $form;
 }
+
+/**
+ * Implementation of hook_form for section cards
+ * {@inheritdoc}
+ */
+function highlights_widgets_search_form($form, &$form_state) {
+  
+    
+  $form['highlights_title'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'content-title-list/highlights/autocomplete',
+    '#maxlength' => 128,
+  );  
+  
+  $form['highlights_submit'] = array(
+    '#markup' => '<a class="btn btn-save" href="javascript:void(0)" id="layout-highlights-submit">Go</a>',
+    '#weight' => 20,
+  );  
+
+  return $form;
+}
+
+/**
+ * Implementation of hook_form for html widgets
+ * {@inheritdoc}
+ */
+function html_widgets_search_form($form, &$form_state) {  
+    
+  $form['html_title'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'content-title-list/custom_html_widgets/autocomplete',
+    '#maxlength' => 128,
+  );  
+  
+  $form['html_submit'] = array(
+    '#markup' => '<a class="btn btn-save" href="javascript:void(0)" id="layout-html-submit">Go</a>',
+    '#weight' => 20,
+  );  
+
+  return $form;
+}
