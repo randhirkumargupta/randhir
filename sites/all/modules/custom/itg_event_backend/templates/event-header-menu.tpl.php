@@ -5,7 +5,10 @@
  * 
  */
 global $base_url;
-if(is_numeric(arg(1))) {
+$arg = arg();
+if($arg[0] == 'event') {
+  $baseurl = $base_url.'/'.$arg[0].'/'.$arg[1];
+} elseif(is_numeric(arg(1))) {
   $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  arg(1));
 } else {
   $baseurl = $base_url;
@@ -40,7 +43,7 @@ $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $no
               print '<li>'.l('Speakers', $baseurl.'/speakers', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
             }
 
-            print '<li>'.l('Registration', $baseurl.'/event-registration', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+            print '<li>'.l('Registration', $baseurl.'/registration', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
 
             if ($event_config_sponsors) {
               print '<li>'.l('Sponsors', $baseurl.'/sponsors', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';

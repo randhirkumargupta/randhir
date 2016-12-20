@@ -9,12 +9,21 @@
  * @return string|bool
  */
 function itg_event_registration_form($form, &$form_state) {
+  $arg = arg();
   
-  $event_id = itg_event_registration_get_event_nid();
-  $node = node_load($event_id);
+  if ($arg[0] == 'event') {
+    $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+    $node = menu_get_object("node", 1, $path);
+  } elseif (is_numeric($arg[1])) {
+    $node = node_load($arg[1]);
+  } else {
+    $event_id = itg_event_registration_get_event_nid();
+    $node = node_load($event_id);
+  }
 
   $no_of_tickets = $node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
   $event_type = $node->field_event_type[LANGUAGE_NONE][0]['value'];
+  
   // Check for published node, registration is allowed for published event only.
   if ($node->status == 1) {
     if ($event_type == 'invite') {
@@ -89,7 +98,7 @@ function itg_event_registration_users_list() {
             $i++;
             $field_collection_id = $group_user_arr['value'];
             $entity = entity_load('field_collection_item', array($field_collection_id));
-            $data[$i]['name'] = $entity[$field_collection_id]->field_erf_gender[LANGUAGE_NONE][0]['value'] . '. ' . $entity[$field_collection_id]->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $entity[$field_collection_id]->field_last_name[LANGUAGE_NONE][0]['value'];
+            $data[$i]['name'] = $entity[$field_collection_id]->field_erf_name[LANGUAGE_NONE][0]['value'];
             $data[$i]['email'] = $entity[$field_collection_id]->field_email_address[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_email_address[LANGUAGE_NONE][0]['value'] : '-';
             $data[$i]['mobile'] = $entity[$field_collection_id]->field_erf_mobile[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_mobile[LANGUAGE_NONE][0]['value'] : '-';
             $data[$i]['company'] = $entity[$field_collection_id]->field_erf_company_name[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_company_name[LANGUAGE_NONE][0]['value'] : '-';
@@ -163,8 +172,8 @@ function itg_event_registration_group_users_list() {
             $i++;
             $field_collection_id = $group_user_arr['value'];
             $entity = entity_load('field_collection_item', array($field_collection_id));
-            $data[$i]['name'] = $entity[$field_collection_id]->field_erf_gender[LANGUAGE_NONE][0]['value'] . '. ' . $entity[$field_collection_id]->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $entity[$field_collection_id]->field_last_name[LANGUAGE_NONE][0]['value'];
-            $data[$i]['email'] = $entity[$field_collection_id]->field_email_address[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_email_address[LANGUAGE_NONE][0]['value'] : '-';
+            $data[$i]['name'] = $entity[$field_collection_id]->field_erf_name[LANGUAGE_NONE][0]['value'];
+            $data[$i]['email'] = $entity[$field_collection_id]->field_erf_email[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_email[LANGUAGE_NONE][0]['value'] : '-';
             $data[$i]['mobile'] = $entity[$field_collection_id]->field_erf_mobile[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_mobile[LANGUAGE_NONE][0]['value'] : '-';
             $data[$i]['company'] = $entity[$field_collection_id]->field_erf_company_name[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_company_name[LANGUAGE_NONE][0]['value'] : '-';
             $data[$i]['designation'] = $entity[$field_collection_id]->field_erf_designation[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_designation[LANGUAGE_NONE][0]['value'] : '-';
