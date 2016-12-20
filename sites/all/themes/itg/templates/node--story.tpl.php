@@ -523,10 +523,6 @@ if (!empty($content)):
                 ?>
 
                 <?php
-                if (function_exists(global_comment_last_record)) {
-                    $last_record = $global_comment_last_record;
-                    $config_name = trim($last_record[0]->config_name);
-                }
                 if ($config_name == 'vukkul') {
                     ?>
                     <div class="vukkul-comment">
