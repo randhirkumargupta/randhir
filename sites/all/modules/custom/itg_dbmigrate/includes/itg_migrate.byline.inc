@@ -21,7 +21,7 @@ class ItgBylineMigration extends XMLMigration {
       'profile_image' => t('profile_image'),
       'designation' => t('designation'),
       'full_description' => t('full_description'),
-      'sefurl' => t('Sefurl'),
+      'sef_url' => t('sef_url'),
       'twitter_id' => t('twitter_id'),
       'facebook_id' => t('Facebook id'),
       'profile_type' => t('profile_type'),
@@ -85,7 +85,9 @@ class ItgBylineMigration extends XMLMigration {
     $this->addFieldMapping('field_story_extra_large_image', 'profile_image')->xpath('profile_image');
     $this->addFieldMapping('field_story_new_title', 'designation')->xpath('designation');
     $this->addFieldMapping('body', 'full_description')->xpath('full_description');
-    $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
+    //$this->addFieldMapping('pathauto', 'sef_url')->xpath('sef_url');
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
     $this->addFieldMapping('field_reporter_twitter_handle', 'twitter_id')->xpath('twitter_id');
     $this->addFieldMapping('field_reporter_facebook_id', 'facebook_id')->xpath('facebook_id');    
     $this->addFieldMapping('created', 'created_datetime')->xpath('created_datetime');    
@@ -127,7 +129,8 @@ class ItgBylineMigration extends XMLMigration {
     $node->uid = $row->xml->created_by;
   }
   
-  public function complete($entity, $row) {    
+  public function complete($entity, $row) {
+    print (string) $row->xml->id.' - ';
    //code for order set
    if (!empty($row->xml->ordering)) {    
      ordering_set_for_byline($entity->nid, $row->xml->ordering);
@@ -160,9 +163,9 @@ class ItgBylineMigration extends XMLMigration {
      'Mail Today S&D' => 'mail_today_S&D',
      "Reader's Digest Editorial" => 'reader_s_digest_editorial',
      'Robb Report Editorial' => 'robb_report_editorial',
-     'simply' => 'simply',
+     'SIMPLY' => 'simply',
      'Social Media & Content Services' => 'social_media_content_services',
-     'spice' => 'spice',
+     'Spice' => 'spice',
      'Technology-Development' => 'technology_development',
      'Woman' => 'Woman',
      "Men's Health" => 'men_s_health',
