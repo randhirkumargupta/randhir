@@ -9330,13 +9330,14 @@ footer .footer-copyright {
 #block-itg-menu-manager-vertical-menu a {
   font-size: 12px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   line-height: 15px;
   display: block;
   padding: 10px 5px;
   word-wrap: break-word;
+  color: #383838;
 }
 #block-itg-menu-manager-vertical-menu a:hover {
   background: #fff;
@@ -10569,3 +10570,8 @@ footer .footer-copyright {
 }
 
 /*like dislike photo page end*/
+.searh-all-filters .search-filter {
+  text-transform: uppercase;
+  color: #777777;
+  padding-top: 13px;
+}

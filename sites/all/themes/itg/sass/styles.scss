@@ -7879,13 +7879,14 @@ input[type="radio"]:checked + label:after{
         margin-bottom: 8px;
     }
     a{
-        @include font(12px,null,600);
+        @include font(12px,null,500);
         font-family: $itg-roboto;
         text-transform: uppercase;
         line-height: 15px;
         display: block;
         padding: 10px 5px;
         word-wrap: break-word;
+        color:#383838;
          &:hover{
              background: #fff;
              color: #b00202;
@@ -8911,3 +8912,10 @@ input[type="radio"]:checked + label:after{
         }
     }
 /*like dislike photo page end*/
+.searh-all-filters{
+    .search-filter{
+        text-transform: uppercase;
+        color: #777777;
+        padding-top: 13px;
+    }
+}
