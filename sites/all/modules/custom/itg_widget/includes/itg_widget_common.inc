@@ -853,11 +853,11 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
             // Activate live tv button
             $form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '
                 <div class="switch-field">
-                 <div class="switch-title">Activate Live TV: </div>
+                 <div class="switch-title">'.t('Activate Live TV:').' </div>
                  <input type="radio" id="switch_left" name="live_tv_switch_2" value="yes" '.$yes_live.'/>
-                 <label for="switch_left">Yes</label>
+                 <label for="switch_left">'.t('Yes').'</label>
                  <input type="radio" id="switch_right" name="live_tv_switch_2" value="no" '.$no_live.' />
-                 <label for="switch_right">No</label>
+                 <label for="switch_right">'.t('No').'</label>
                </div>';
       }
     }
