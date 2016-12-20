@@ -96,8 +96,7 @@
             }
 
             // Code for points earning callbacks.
-            $('.share, .like, .visit, .follow, .ns, .ugc, .ol-register, .participate, .raf').on('click', function () {
-                //console.log(Drupal.settings.itg_loyalty_reward);
+            $('.share, .like, .visit, .follow, .ns, .ugc, .ol-register, .participate, .raf').on('click', function () {                
                 var base_url = Drupal.settings.itg_loyalty_reward.base_url;
                 var event_type = $(this).attr('class');
                 $.ajax({
