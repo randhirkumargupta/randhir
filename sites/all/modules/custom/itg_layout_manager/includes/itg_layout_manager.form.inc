@@ -205,8 +205,7 @@ function layout_section_widget2_search_form($form, &$form_state) {
  * Implementation of hook_form for section cards
  * {@inheritdoc}
  */
-function highlights_widgets_search_form($form, &$form_state) {
-  
+function highlights_widgets_search_form($form, &$form_state) {  
     
   $form['highlights_title'] = array(
     '#type' => 'textfield',
