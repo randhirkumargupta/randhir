@@ -298,7 +298,7 @@ function features_for_event_registration_views_default_views() {
   $handler->display->display_options['fields']['field_erf_mobile']['table'] = 'field_data_field_erf_mobile';
   $handler->display->display_options['fields']['field_erf_mobile']['field'] = 'field_erf_mobile';
   $handler->display->display_options['fields']['field_erf_mobile']['label'] = 'Mobile No.';
-  /* Field: Field: Via Mail */
+  /* Field: Content: Via Mail */
   $handler->display->display_options['fields']['field_email_address']['id'] = 'field_email_address';
   $handler->display->display_options['fields']['field_email_address']['table'] = 'field_data_field_email_address';
   $handler->display->display_options['fields']['field_email_address']['field'] = 'field_email_address';

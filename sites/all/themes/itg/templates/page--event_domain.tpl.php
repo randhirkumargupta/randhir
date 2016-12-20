@@ -5,10 +5,14 @@
  */
 
 global $base_url;
+$arg = arg();
 
 $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
-if (empty($host_detail) && is_numeric(arg(1))) {
-  $host_node = node_load(arg(1));
+if (empty($host_detail) && $arg[0] == 'event') {
+  $path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
+  $host_node = menu_get_object("node", 1, $path);
+} elseif(empty($host_detail) && is_numeric($arg[1])){
+  $host_node = node_load($arg[1]);
 } else {
   $host_node_arr = explode('/', $host_detail['source']);
   $host_node = node_load($host_node_arr[1]);
@@ -18,7 +22,6 @@ $banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $
 $banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
 $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';
 ?>
-
 <div id="page">
   <div class="event-sidebar">
     <header class="header" id="header" role="banner">
