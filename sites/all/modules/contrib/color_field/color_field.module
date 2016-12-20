@@ -667,7 +667,10 @@ function color_field_field_widget_form(&$form, &$form_state, $field, $instance, 
         '#maxlength' => 7,
         '#attached' => array(
           // Add Spectrum color picker.
-          'library' => array(array('color_field', 'spectrum')),
+          /* patch added in 20th dec, 2016 for- TypeError: $(...).spectrum is not a function,
+           * on story edit page after submitting the form without providing any inputs for the required fields.
+           */
+          'library' => array(array('color_field', 'spectrum'), array('color_field', 'spectrum')),
           'js' => array(
             drupal_get_path('module', 'color_field') . '/color_field_spectrum_color_picker/color_field_spectrum_color_picker.jquery.js',
             array(
