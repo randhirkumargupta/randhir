@@ -839,6 +839,7 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
     }
     
     if($form['#form_id'] == 'views_form_section_wise_draggable_content_order_big_story_format') {
+      if(!isset($_POST['views_bulk_operations'])) {
             drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_live_tv.js', 'file');
             $big_story_value =  itg_big_story_get_extra_value();
             if(in_array('big_story_live_tv_active', $big_story_value)) {
@@ -858,6 +859,7 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
                  <input type="radio" id="switch_right" name="live_tv_switch_2" value="no" '.$no_live.' />
                  <label for="switch_right">No</label>
                </div>';
+      }
     }
 }
 
