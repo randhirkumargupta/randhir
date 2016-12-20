@@ -243,7 +243,7 @@
             if (change_email_mobile) {
                 $('.activate-message').show();
             }
-            jQuery('#main').find('img').parent().addClass('zoom-image');
+            //jQuery('#main').find('img').parent().addClass('zoom-image');
         }
     };
 
@@ -555,31 +555,58 @@ jQuery(document).ready(function () {
         return false;
     }*/
    var el = jQuery('#block-itg-menu-manager-vertical-menu');
-    var totlWidth = jQuery(window).width();
-    var finalWidth = (totlWidth - 1170) / 2 ;
-    el.css('left', finalWidth - 70 + 'px');        
+     var totlWidth = jQuery(window).width();
+     var totlHeight = jQuery(window).height();
      if (el.length) { 
       //var stickyTop = el.offset().top; 
-      var stickyHeight = el.height();
+      //var stickyHeight = el.height();
 
       jQuery(window).scroll(function(){ 
-          var limit = jQuery('footer').offset().top - stickyHeight - 20;
-          var flimit = limit - 375;          
+         var limit = jQuery('footer').offset().top - totlHeight;
+         console.log("footer-set" + limit);         
+          //var flimit = limit - 375;          
           var windowTop = jQuery(window).scrollTop();           
-        if(windowTop > flimit){            
-               el.css({
-                   'position': 'absolute',
-                   'left': -55 + 'px',
-                   'top': flimit - 175 + 'px'
-               })   
-        }
-        else{
-            el.css({
+          console.log(windowTop);
+          if(windowTop > 160 ){              
+                var finalWidth = (totlWidth - 1200) / 2 ;
+                el.css({
                    'position': 'fixed',
-                   'left': finalWidth - 70 + 'px',
-                   'top': 270 + 'px'
-               })
-        }
+                   'left': finalWidth - 60 + 'px',
+                   'top': '100px',
+                   'bottom': 'auto'                   
+               }); 
+          }else{
+              el.css({
+                   'position': 'absolute',
+                   'left': '-60px',
+                   'top': '100px',
+                   'bottom': 'auto'
+               });
+          }
+          if(windowTop > limit){              
+              el.css({
+                   'position': 'absolute',
+                   'left': '-60px',
+                   'top': 'auto',
+                   'bottom': '0px'
+               });              
+          }
+          
+          
+//        if(windowTop > flimit){            
+//               el.css({
+//                   'position': 'absolute',
+//                   'left': -55 + 'px',
+//                   'top': flimit - 175 + 'px'
+//               })   
+//        }
+//        else{
+//            el.css({
+//                   'position': 'fixed',
+//                   'left': finalWidth - 70 + 'px',
+//                   'top': 270 + 'px'
+//               })
+//        }
         });
    }
     
