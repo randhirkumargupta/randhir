@@ -1272,6 +1272,10 @@ footer{
             margin-top: -15px;
             display: none;
         }
+        iframe{
+           width: 100%;
+           height: 46vh;
+        }
     }
     h1{
         @include pos(relative);
@@ -1481,6 +1485,7 @@ footer{
             box-shadow: 2px 2px 2px #f1f1f1;
             color:$black-color;
             z-index: 2;
+            right: 40px;
             label{
                 @include display-inline;
                 padding-top: 9px;
@@ -1515,7 +1520,7 @@ footer{
                 border-left: 12px solid transparent;
                 border-right: 12px solid transparent;
                 border-bottom: 12px solid whitesmoke;
-                @include pos(absolute,-11px,null,null,9px);                
+                @include pos(absolute,-11px,40px,null,null);                
             }
         }
     }
@@ -1847,6 +1852,23 @@ footer{
     .story-right{        
         .stryimg{
             @include pos(relative);
+            .saved-photogallery{
+                background: #fff none repeat scroll 0 0;
+                box-shadow: 0 0 8px #666;
+                font-family: roboto;
+                font-size: 22px;
+                font-weight: 700;
+                height: 160px;
+                left: 50%;
+                line-height: 160px;
+                margin-left: -157px;
+                margin-top: -80px;
+                position: absolute;
+                text-align: center;
+                top: 50%;
+                width: 315px;
+                z-index: 1;
+            }
             .field-label{
                 display: none;
             }
@@ -1999,8 +2021,7 @@ footer{
         color: #939292;
         @include font(12px);
         border-top: 1px solid $border-color;
-        border-bottom: 1px solid $border-color;
-        margin-top: 40px;        
+        border-bottom: 1px solid $border-color;             
         @include clearfix;
         li{
             @include float(left);
@@ -2095,6 +2116,90 @@ footer{
             }
         }
     }
+    .agbutton.story-like-dislike{
+        margin-top: 40px;
+        border-top: 1px solid #ddd;        
+        text-align: center;
+        padding: 15px 0;
+        color:#929292;        
+        font-family: roboto;
+        font-size: 16px;
+        font-weight: 700;
+        #name-dv{
+            #lky, #dlky{
+            padding: 0 10px;
+            @include pos(relative);
+            display: inline-block;
+            padding: 0 10px;
+            vertical-align: middle;
+            button{
+                background: transparent;
+                border: none;
+                font-size: 22px;
+                cursor: pointer;
+                color:#929292;
+                &#like_count, &#dislike_count{
+                    span{
+                        color: #1f8201;
+                        font-weight: 700;
+                        font-size: 16px;
+                    }
+                }
+                &#dislike_count{
+                     span{
+                    color: #ef0401;
+                     }
+                }
+            }
+            > span{
+                padding: 0 15px;
+                display: inline-block;
+                vertical-align: middle;
+                &#dlky{
+                    padding-left: 0;
+                }
+            }
+            #sty-dv, #dsty-dv{
+                background: #fff;
+                width: 200px;
+                position: absolute;
+                box-shadow: 0px 0px 5px #ccc;
+                left: 0;
+                top: 40px;
+                font-weight: normal;
+                color: #000;
+                padding: 15px;
+                border-radius: 5px;
+                line-height: 24px;
+                text-align: left;
+                border: 1px solid #d2d2d2;
+                overflow: visible !important;
+                &:before{
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 10px solid #e0e0e0;
+                    position: absolute;
+                    left: 12px;
+                    top: -10px;
+                }
+                a{
+                    padding: 3px;
+                    display: inline-block;
+                    vertical-align: top;
+                    cursor: pointer;
+                }
+            }
+        }
+        }
+        .error-msg{
+            color: red;
+            font-weight: 400;
+            font-size: 12px;
+        }
+    } 
 }
 .buzz-feedback{    
     @include calculate-width(1);
@@ -2139,7 +2244,8 @@ footer{
         .buzz-img{
             @include pos(relative);
             .social-share{
-                @include pos(absolute,null,null,0,null);
+                @include pos(absolute,null,null,0,null);                
+                z-index: 1;
                 ul{
                     @include clearfix;
                     li{
@@ -8304,11 +8410,15 @@ input[type="radio"]:checked + label:after{
         }
     }
     ul{
-        @extend .list-none;
-        li{
-            margin-bottom: 30px;
+        @extend .list-none; 
+        @include clearfix;            
+        li{            
+            a{
+                display: block;
+                overflow: hidden;
+            }
             &:nth-child(4n+1){
-                clear: left;
+                clear:left;
             }
         }
     }
@@ -8375,7 +8485,12 @@ input[type="radio"]:checked + label:after{
 .story-section {
 .listicle-page{
     &.story-right{
-        @include calculate-width(1);   
+        @include calculate-width(1);
+        .byline{
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }   
     }    
     .listicle-detail{
 /*        border-top: 1px solid #ccc;   */
@@ -8390,14 +8505,14 @@ input[type="radio"]:checked + label:after{
             line-height: 34px;
             color: #fff;
             font-weight: 700;        
-            margin-top: 15px;
+            margin-top: 20px;
         }
         .listicle-description{
             font-size: 16px;
             color: #282828;    
             @include display-inline;
-            width: 90%;
-            padding: 20px;
+            width: 95%;
+            padding: 18px 20px;
             span{
                 font-weight: 600;
                 text-transform: capitalize;
@@ -8756,3 +8871,43 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*css end big story format*/
+/*like dislike photo page start*/
+#block-views-photo-landing-slider-block, #block-views-video-landing-header-block{
+    .section-like-dislike{        
+        .agbutton{
+            margin-top:20px;            
+            a{
+                color: #026bc5;
+                @include font(12px);
+                display: block;
+                margin-top: 10px;
+            }
+            button{
+                background: transparent;
+                border: none;
+                font-size: 22px;
+                cursor: pointer;
+                color:#929292;               
+                    span{
+                        color: #1f8201;
+                        font-weight: 700;
+                        font-size: 16px;                     
+                    }
+                    &#dislike_count{
+                        span{
+                               color: #ef0401;
+                        }
+                    }
+                    &#like_count{
+                        padding-right: 15px;
+                    }
+                }
+            }
+            p.error-msg{                
+                color: #13d21a;                
+                margin-top: 10px;
+                text-align: left;
+            }        
+        }
+    }
+/*like dislike photo page end*/

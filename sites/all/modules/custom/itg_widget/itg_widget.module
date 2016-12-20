@@ -101,6 +101,11 @@ function itg_widget_menu() {
     'page callback' => 'remove_extra_data',
     'access arguments' => array('access administrator'),
   );
+  $items['remove-term-state'] = array(
+    'page callback' => 'remove_state_term',
+    'page arguments' => array(1),
+    'access arguments' => array('administer nodequeue'),
+  );
   $items['setids'] = array(
     'page callback' => 'itg_widget_setids', // load the croper according to size!.
     'type' => MENU_CALLBACK,
@@ -712,14 +717,11 @@ function itg_widget_block_view($delta = '') {
       drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'header', 'weight' => 5));
       $data = itg_widget_get_graph_data($info);
       foreach ($data as $index => $row) {
-        $jsondata = file_get_contents($row->field_election_constituency_tall);
-
-        $jsondata_orig = '{"election": {"aName": "DELHI", "aFullName": "DELHI", "aFullNameHindi": "DELHI", "aSeats": "70", "aSeatOthers": "70", "aColor": "", "aColorOthers": "", "items": [{"pName": "AAP", "pColor": "#DDBC0F", "pfullName": "AAP", "pLead": "0", "pWon": "67"}, {"pName": "BJP+", "pColor": "#F57B19", "pfullName": "BJP+", "pLead": "0", "pWon": "3"}, {"pName": "CONG", "pColor": "#018fff", "pfullName": "CONG", "pLead": "0", "pWon": "0"}, {"pName": "OTH", "pColor": "#9933ff", "pfullName": "OTH", "pLead": "0", "pWon": "0"}]}}';
-
+        $jsondata = file_get_contents($row->field_election_constituency_tall_value);
         drupal_add_js(' jQuery(function() {
                    
             var ids = "container_' . $index . '";
-            var data =' . $jsondata_orig . ';
+            var data =' . $jsondata . ';
             var combined = [];
             var colorArray = [];
             var aName = data.election.aName;
