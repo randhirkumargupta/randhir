@@ -926,41 +926,61 @@ function itg_event_get_story_details($nid){
  * {@inheritdoc}
  */
 function itg_event_backend_menu() {
-    $items['itg-event-test'] = array(
-        'page callback' => 'itg_event_backend_page',
-        'access callback' => TRUE,
-    );
-    $items['programme'] = array(
-        'page callback' => 'itg_event_backend_page',
-        'access callback' => TRUE,
-    );
-    $items['speakers'] = array(
-        'page callback' => 'itg_event_backend_page',
-        'access callback' => TRUE,
-    );
-    $items['sponsors'] = array(
-        'page callback' => 'itg_event_backend_page',
-        'access callback' => TRUE,
-    );
-    $items['sing-and-win'] = array(
-        'page callback' => 'itg_event_backend_page',
-        'access callback' => TRUE,
-    );
-    $items['flashback'] = array(
-        'page callback' => 'itg_event_backend_page',
-        'access callback' => TRUE,
-    );
-    $items['speaker-details'] = array(
-        'page callback' => 'itg_event_backend_page',
-        'title' => 'Speaker Details',
-        'access callback' => TRUE,
-    );
-    $items['sponsor-details'] = array(
-        'page callback' => 'itg_event_backend_page',
-        'title' => 'Sponsor Details',
-        'access callback' => TRUE,
-    );
-    return $items;
+  $items['itg-event-test'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['programme'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['event/%/programme'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['speakers'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['event/%/speakers'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['sponsors'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['event/%/sponsors'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['sing-and-win'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['event/%/sing-and-win'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['flashback'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['event/%/flashback'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'access callback' => TRUE,
+  );
+  $items['speaker-details'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'title' => 'Speaker Details',
+      'access callback' => TRUE,
+  );
+  $items['sponsor-details'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'title' => 'Sponsor Details',
+      'access callback' => TRUE,
+  );
+  return $items;
 }
 
 /**
@@ -1081,6 +1101,7 @@ function itg_event_backend_views_query_alter(&$view, &$query) {
  */
 function itg_event_backend_get_event_node($whole_node = NULL) {
  global $base_url;
+ $arg = arg();
   if (module_exists('redirect')) {
     $query = db_select('redirect', 'red');
     $query->fields('red', array('source'));
@@ -1089,15 +1110,22 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
     $event_id = explode('node/', $result);
 
     if (!empty($whole_node)) {
-      if (is_numeric(arg(1))) {
-        $nid = arg(1);
+      if ($arg[0] == 'event') {
+        $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        $node = menu_get_object("node", 1, $path);
+      } elseif (is_numeric($arg[1])) {
+        $node = node_load($arg[1]);
       } else {
-        $nid = $event_id[1];
+        $node = node_load($event_id[1]);
       }
-      return node_load($nid); 
+      return $node;
     } else {
-      if (is_numeric(arg(1))) {
-        return arg(1);
+      if ($arg[0] == 'event') {
+        $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+        $node = menu_get_object("node", 1, $path);
+        return $node->nid;
+      } elseif (is_numeric($arg[1])) {
+        return $arg[1];
       } else {
         return $event_id[1];
       }
