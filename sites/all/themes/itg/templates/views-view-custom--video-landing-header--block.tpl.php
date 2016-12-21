@@ -28,7 +28,11 @@
                       allowfullscreen></iframe></div></div>
           <div class="social-likes">
             <ul>
-              <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span>585</span></a></li>
+              <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
+              if(function_exists(itg_flag_get_count)) {
+              print $like_count = itg_flag_get_count(arg(1), 'like_count');
+              }
+              ?></span></a></li>
               <li><?php print $row['ops']; ?></li>
               <li><a href="javacript:void();" title ="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
               <li><a href="javacript:void();" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
@@ -45,7 +49,12 @@
                 <?php } if ($config_name == 'other') { ?> 
                 <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                 <?php } ?>
-              <li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>
+                <?php if($user->uid > 0): ?>
+                  <li class="mhide"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+                  <?php else: ?>
+                  <li class="mhide"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+                  <?php endif; ?>
+              <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
             </ul>
           </div>
         </div>

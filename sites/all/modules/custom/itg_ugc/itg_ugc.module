@@ -18,6 +18,12 @@ function itg_ugc_menu() {
     'access arguments' => array('access reject ugc content link'),
     'type' => MENU_CALLBACK,
   );
+  
+  $items['ugc-thank-you'] = array(
+    'page callback' => 'itg_ugc_thank_you',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -461,8 +467,9 @@ function itg_ugc_form_custom_callback($form, &$form_state) {
     $form_state['redirect'] = 'personalization/my-content';
   }
   else {
-    $_REQUEST['destination'] = 'node/add/ugc';
-    $msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
+    $_REQUEST['destination'] = 'ugc-thank-you';
+    $form_state['redirect'] = 'ugc-thank-you';
+    //$msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
   }
 }
 
@@ -762,4 +769,11 @@ function itg_ugc_views_pre_render(&$view) {
     $header_content_ugc = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $view->attachment_before = $header_content_ugc;
   }
+}
+
+/**
+ * Implements itg_ugc_thank_you
+ */
+function itg_ugc_thank_you() {
+ print '<div class="ugc-success">UGC content has been submitted successfully for further review and approval.</div>';
 }
