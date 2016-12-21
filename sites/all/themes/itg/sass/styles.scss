@@ -1914,6 +1914,9 @@ footer{
                     padding-left: 15px;
                 }
             }
+            video{
+                max-width: 100%;
+            }
         }
         .stryimg{
             .tagview{
@@ -8427,17 +8430,30 @@ input[type="radio"]:checked + label:after{
             padding-left: 0;
         }
     }
+    #related-photo{
+        .row{
+            margin: 0;
+        }
+    .col-md-3{
+        width: 200px;
+        span{            
+            padding-right: 30px;
+            display: block;
+        }
+    }
     ul{
         @extend .list-none; 
         @include clearfix;            
-        li{            
+        li{ 
+            padding-right: 0px;
+            padding-left: 0px;
             a{
                 display: block;
                 overflow: hidden;
             }
-            &:nth-child(4n+1){
+/*            &:nth-child(4n+1){
                 clear:left;
-            }
+            }*/
         }
     }
     .views-field-ds-changed{
@@ -8445,6 +8461,29 @@ input[type="radio"]:checked + label:after{
         font-size: 12px;
         color: #b1b1b1;
         padding: 8px 0 5px;
+    }
+    .slick-next, .slick-prev{
+        background: #000 none repeat scroll 0 0;
+        color: #fff;
+        cursor: pointer;
+        font-size: 25px;
+        height: 25px;
+        line-height: 25px;
+        margin-top: -12px;
+        position: absolute;
+        text-align: center;
+        top: 40%;
+        width: 25px;
+        z-index: 1;
+    }
+    .slick-next{
+        right: 0;
+        left: auto;
+    }
+    .slick-prev{
+        right: auto;
+        left: 0;
+    }
     }
 }
 /*css end related content*/
@@ -8961,11 +9000,28 @@ input[type="radio"]:checked + label:after{
                 border: 1px solid #000;
             }
         }
-        select{
-            width: 400px;
+        .form-textarea, .form-text, select{
+            width: 380px;
         }
-        div.description{
+        div.description, span#edit-captcha-response-error{
             padding-left: 0;
+        }
+        input[value="Upload"]{
+            border: none;
+            background: #000;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .messages.error{
+            display: none;
+        }  
+        .form-managed-file .image-widget-data .form-submit[value="Remove"]{
+            position: relative;
+            top: auto;
+            left: auto;
+            margin: 10px 0;
         }
     }
     .form-type-textfield{
@@ -8975,9 +9031,11 @@ input[type="radio"]:checked + label:after{
         }
     }
 }
-#cboxLoadedContent{        
-    background: url(../images/tab-loading.gif);
-    background-position: center;
-    background-repeat: no-repeat;
+.node-type-story{
+    #cboxLoadedContent{        
+        background: url(../images/tab-loading.gif);
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 }
 /*css end story page submit story */
