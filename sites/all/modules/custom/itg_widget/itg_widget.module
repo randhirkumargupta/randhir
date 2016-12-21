@@ -57,10 +57,10 @@ function itg_widget_menu() {
     'access arguments' => array('administer nodequeue'),
   );
   $items['update-keycandidate-status'] = array(
-        'page callback' => 'update_keycandidate_status', 
-        'type' => MENU_CALLBACK,
-        'access arguments' => array('access content'),
-    );
+    'page callback' => 'update_keycandidate_status',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
 
   $items['add-so-sorry-extra-data/%/%'] = array(
     'page callback' => 'add_extra_field_value_for_so_sorry',
@@ -155,6 +155,7 @@ function itg_widget_menu() {
 
   return $items;
 }
+
 /**
  * This function use for update key candidate election status
  */
@@ -313,12 +314,12 @@ function itg_widget_block_view($delta = '') {
       //$block['subject'] = t('');
       $info['widget'] = 'big_story_format_widget';
       $data = itg_widget_big_story_block_data($info);
-      foreach($data as $big_story_data) {
-        if($big_story_data['is_live_tv']) {
+      foreach ($data as $big_story_data) {
+        if ($big_story_data['is_live_tv']) {
           $live_tv_flag = TRUE;
           $big_story_node_data['live_tv'] = itg_live_tv_page_video();
         }
-        if(!empty($big_story_data['node_load_data']->nid)) {
+        if (!empty($big_story_data['node_load_data']->nid)) {
           $content_flag = TRUE;
           $big_story_node_data['node_data'] = $big_story_data['node_load_data'];
         }
@@ -618,9 +619,9 @@ function itg_widget_block_view($delta = '') {
       break;
     // Top takes videos ordering reordering widget case
     case 'anchor_langing_page_menu':
-      drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));  
+      drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
       drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
-        drupal_add_js('             
+      drupal_add_js('             
         jQuery(document).ready(function(){ 
             var getLength = 0;
             var defaultWidth  = jQuery(".anchor-detail-menu").outerWidth(true);
@@ -634,7 +635,7 @@ function itg_widget_block_view($delta = '') {
                 });
             }
        });', array('type' => 'inline', 'scope' => 'footer'));
-        
+
       $block['content'] = theme("anchor_langing_page_menu", array("data" => $data));
       break;
     case 'personlization':
@@ -1035,7 +1036,7 @@ function itg_widget_delete_big_story_live_tv() {
   try {
     $number_deleted = db_delete('itg_widget_order')
         ->condition('widget', 'big_story_format_widget')
-        ->condition('extra','big_story_live_tv_active')
+        ->condition('extra', 'big_story_live_tv_active')
         ->execute();
     if ($number_deleted) {
       return TRUE;
@@ -1058,10 +1059,100 @@ function itg_big_story_get_extra_value() {
           ->fields('iwo', array('extra'))
           ->condition('widget', 'big_story_format_widget')
           ->execute()->fetchAll(PDO::FETCH_ASSOC);
-  if(!empty($select_query)) {
-    foreach($select_query as $data) {
+  if (!empty($select_query)) {
+    foreach ($select_query as $data) {
       $extra_data[] = $data['extra'];
     }
   }
   return $extra_data;
+}
+
+/**
+ * Function used in widget add content to get right value for category tid.
+ * @param type $get_cat
+ * @return int
+ */
+function itg_widget_get_category_for_db_insert($get_cat) {
+  $type_cast_cat = (int) $get_cat;
+  if ($type_cast_cat) {
+    return $get_cat;
+  }
+  else {
+    return 0;
+  }
+}
+
+/**
+ * Function which gives nid and type of perticular node. Which is used in bulk operation.
+ * @param int $nid
+ * @return object
+ */
+function itg_widget_get_required_node_data_for_widget($nid) {
+  $query = db_select('node', 'n')
+      ->fields('n', array('nid', 'type'))
+      ->condition('n.nid', $nid);
+  return $query->execute()->fetchObject();
+}
+
+/**
+ * Function to remove node from widget table.
+ * @param string $widget_name
+ * @param int $nid
+ */
+function itg_widget_delete_data_from_widget($widget_name, $nid = 0) {
+  try {
+    $query = db_delete('itg_widget_order');
+    $query->condition('widget', $widget_name);
+    if ($nid) {
+      $query->condition('nid', $nid);
+    }
+    $query->execute();
+  } catch (Exception $ex) {
+    watchdog($widget_name, $ex->getMessage());
+  }
+}
+
+/**
+ * Comman function to insert widget data.
+ * @param int $node
+ * @param string $widget_name
+ * @param string $category_tid
+ */
+function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extra = NULL) {
+  try {
+    $max_weight = get_max_weight_for_special($widget_name);
+    $node_load_data = itg_widget_get_required_node_data_for_widget($node);
+    db_insert('itg_widget_order')
+        ->fields(array(
+          'nid' => $node,
+          'widget' => $widget_name,
+          'cat_id' => itg_widget_get_category_for_db_insert($category_tid),
+          'content_type' => $node_load_data->type,
+          'extra' => $extra,
+          'weight' => ++$max_weight,
+        ))
+        ->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
+}
+
+/**
+ * Function gives count of node with perticular widget.
+ * 
+ * @param int $nid
+ * @param string $widget
+ * 
+ * @return int
+ */
+function itg_widget_check_node_in_widget($nid, $widget) {
+  $count = 0;
+  if (!empty($nid) && !empty($widget)) {
+    $query = db_select('itg_widget_order', 'iwo')
+        ->fields('iwo', array('nid'))
+        ->condition('iwo.nid', $nid)
+        ->condition('iwo.widget', $widget);
+    $count = $query->execute()->rowCount();
+  }
+  return $count;
 }
