@@ -884,6 +884,7 @@ function features_for_story_field_default_field_bases() {
         'set_as_featured' => 'Set As Featured',
         'tv' => 'Associate Tv',
         'noindex_nofollow' => 'Noindex & No follow',
+        'lock_story' => 'Lock Story',
       ),
       'allowed_values_function' => '',
     ),
