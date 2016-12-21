@@ -21,16 +21,20 @@ function save_highlights_widget_data($highlights_data) {
     
     if (count($selected_node)) {
         foreach ($selected_node as $node) {
-            $node_load_data = node_load($node);
-            db_insert('itg_widget_order')
-                    ->fields(array(
-                        'nid' => $node,
-                        'widget' => $widget_name,
-                        'content_type' => $node_load_data->type,
-                         'cat_id' => $_GET['shs_term_node_tid_depth'],
-                        'weight' => 0,
-                    ))
-                    ->execute();
+            try {
+              $node_load_data = itg_widget_get_required_node_data_for_widget($node);
+              db_insert('itg_widget_order')
+                ->fields(array(
+                    'nid' => $node,
+                    'widget' => $widget_name,
+                    'content_type' => $node_load_data->type,
+                     'cat_id' => itg_widget_get_category_for_db_insert($_GET['shs_term_node_tid_depth']),
+                    'weight' => 0,
+                ))
+                ->execute();
+            } catch (Exception $ex) {
+              drupal_set_message($ex->getMessage());
+            }
         }
         drupal_set_message(t("Nodes has been saved"));
     }

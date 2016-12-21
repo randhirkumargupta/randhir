@@ -17,22 +17,30 @@ function save_most_read_widget_data($most_read_content) {
     $widget_name = "most_read_content";
     if (count($selected_node)) {
         foreach ($selected_node as $node) {
-            $node_load_data = node_load($node);
-            $num_deleted = db_delete('itg_widget_order')
+            $node_load_data = itg_widget_get_required_node_data_for_widget($node);
+            try{
+              db_delete('itg_widget_order')
                     ->condition('widget', $widget_name)
                     ->condition('nid', $node)
                     ->execute();
-            $max_weight=get_max_weight_for_special($widget_name);
-            db_insert('itg_widget_order')
-                    ->fields(array(
-                        'nid' => $node,
-                        'widget' => $widget_name,
-                        'cat_id' => $_GET['category_tid'],
-                        'content_type' => $node_load_data->type,
-                        //'extra' => $field_names[$node],
-                        'weight' => ++$max_weight,
-                    ))
-                    ->execute();
+            } catch (Exception $ex) {
+              watchdog("most_read", $ex->getMessage());
+            }
+            $max_weight= get_max_weight_for_special($widget_name);
+            try {
+                $query = db_insert('itg_widget_order')
+                  ->fields(array(
+                      'nid' => $node,
+                      'widget' => $widget_name,
+                      'cat_id' => itg_widget_get_category_for_db_insert($_GET['category_tid']),
+                      'content_type' => $node_load_data->type,
+                      //'extra' => $field_names[$node],
+                      'weight' => ++$max_weight,
+                  ));
+                  $query->execute();
+            } catch (Exception $ex) {
+              watchdog("most_read", $ex->getMessage());
+            }
         }
         drupal_set_message(t("Nodes has been saved"));
     }

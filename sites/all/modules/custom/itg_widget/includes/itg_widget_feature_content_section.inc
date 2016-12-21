@@ -17,7 +17,7 @@ function save_feature_content_section_widget_data($feature_content) {
     $widget_name = "feature_content_by_section";
     if (count($selected_node)) {
         foreach ($selected_node as $node) {
-            $node_load_data = node_load($node);
+            $node_load_data = itg_widget_get_required_node_data_for_widget($node);
             $num_deleted = db_delete('itg_widget_order')
                     ->condition('widget', $widget_name)
                     ->condition('nid', $node)

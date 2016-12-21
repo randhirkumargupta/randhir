@@ -16,14 +16,20 @@ function save_yearender_left_widget_data($yearender_left) {
   $widget_name = "yearender_left_news_video";
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
-      $node_load_data = node_load($node);
-      $num_deleted = db_delete('itg_widget_order')
+      try{
+        $node_load_data = itg_widget_get_required_node_data_for_widget($node);
+        $num_deleted = db_delete('itg_widget_order')
             ->condition('widget', $widget_name)
             ->condition('nid', $node)
             ->execute();
-                   $max_weight=get_max_weight_for_special($widget_name);
+      } catch (Exception $ex) {
+        drupal_set_message($ex->getMessage());
+      }
+      
+      $max_weight=get_max_weight_for_special($widget_name);
 
-      db_insert('itg_widget_order')
+      try {
+        db_insert('itg_widget_order')
               ->fields(array(
                   'nid' => $node,
                   'widget' => $widget_name,
@@ -32,6 +38,9 @@ function save_yearender_left_widget_data($yearender_left) {
                   'weight' => ++$max_weight,
               ))
               ->execute();
+      } catch (Exception $ex) {
+        drupal_set_message($ex->getMessage());
+      }
     }
     drupal_set_message(t("Nodes has been saved"));
   }

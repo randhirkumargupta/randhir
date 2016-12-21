@@ -1065,3 +1065,27 @@ function itg_big_story_get_extra_value() {
   }
   return $extra_data;
 }
+
+
+function itg_widget_get_category_for_db_insert($get_cat) {
+  $type_cast_cat = (int) $get_cat;
+  if($type_cast_cat) {
+    return $get_cat;
+  }
+  else {
+    return 0;
+  }
+}
+
+
+/**
+ * Function which gives nid and type of perticular node. Which is used in bulk operation.
+ * @param int $nid
+ * @return object
+ */
+function itg_widget_get_required_node_data_for_widget($nid) {
+  $query = db_select('node','n')
+      ->fields('n',array('nid','type'))
+      ->condition('n.nid',$nid);
+  return $query->execute()->fetchObject();
+}

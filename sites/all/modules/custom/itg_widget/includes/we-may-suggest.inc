@@ -53,7 +53,7 @@ function  save_we_may_suggest_widget_data($we_may_suggest_content) {
             ->execute();
 
     foreach ($new_data_to_insert as $key => $nodes) {
-      $node_data = node_load($nodes);
+      $node_data = itg_widget_get_required_node_data_for_widget($nodes);
       db_insert('itg_widget_order')
               ->fields(array(
                   'nid' => $nodes['nid'],
@@ -66,8 +66,7 @@ function  save_we_may_suggest_widget_data($we_may_suggest_content) {
   }
   else {
     foreach ($selected_node as $nodes) {
-      $node_data = node_load($nodes);
-      // watchdog('widget', $nodes);
+      $node_data = itg_widget_get_required_node_data_for_widget($nodes);
       db_insert('itg_widget_order')
               ->fields(array(
                   'nid' => $nodes,

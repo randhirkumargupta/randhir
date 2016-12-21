@@ -16,7 +16,8 @@ function save_poll_widget_data($poll_data) {
     
     if (count($selected_node)) {
         foreach ($selected_node as $node) {
-            $node_load_data = node_load($node);
+            try {
+              $node_load_data = itg_widget_get_required_node_data_for_widget($node);
             db_insert('itg_widget_order')
                     ->fields(array(
                         'nid' => $node,
@@ -26,6 +27,9 @@ function save_poll_widget_data($poll_data) {
                         'weight' => 0,
                     ))
                     ->execute();
+            } catch (Exception $ex) {
+              drupal_set_message($ex->getMessage());
+            }
         }
         drupal_set_message(t("Nodes has been saved"));
     }

@@ -17,7 +17,8 @@ function save_dont_miss_widget_data($dont_miss_content) {
   if (count($selected_node)) {
     foreach ($selected_node as $node) {
       //$node_load_data = node_load($node);
-      db_insert('itg_widget_order')
+      try {
+        db_insert('itg_widget_order')
               ->fields(array(
                   'nid' => $node,
                   'widget' => $widget_name,
@@ -26,6 +27,9 @@ function save_dont_miss_widget_data($dont_miss_content) {
                   'weight' => 0,
               ))
               ->execute();
+      } catch (Exception $ex) {
+        drupal_set_message($ex->getMessage());
+      }
     }
     drupal_set_message(t("Nodes has been saved"));
   }
