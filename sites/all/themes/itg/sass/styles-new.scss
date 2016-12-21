@@ -401,13 +401,13 @@
 }
 
 .view-photo-list-of-category{
-    .view-content{
-        margin: 0 -15px;
+    .view-content{      
         .photo-list{
+            margin: 0 -15px;
             list-style: none;
             overflow: hidden;
             li{
-                padding: 15px 10px;
+                padding: 15px 15px;
                 float: left;                                
                 .tile{
                     figure{                        
