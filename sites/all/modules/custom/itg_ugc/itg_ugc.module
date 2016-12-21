@@ -125,7 +125,8 @@ function itg_get_user_email_by_id($uid) {
  */
 function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
+  
+  
   // get id of ugc content
   $url_nid = arg(3);
 
@@ -133,6 +134,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   if ($user->uid == 0 && !empty($_GET['type'])) {
     $form['field_ugc_ctype']['#attributes']['class'][] = 'element-hidden';
     if (isset($_GET['type'])) {
+      $form['#prefix'] = '<div class="ugc-top-heading"><h2>Submit Your '.$_GET['type'].'</h2></div>';  
       $form['field_ugc_ctype'][LANGUAGE_NONE]['#default_value'] = $_GET['type'];
     }
   }
