@@ -50,7 +50,7 @@ global $theme;
         $result = get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $cat_id, 3, 0);
         $entity_data = array();
         foreach ($result as $entity_data_node) {
-            $entity_data[] = array("node_load_data" => node_load($entity_data_node['nid']), "custom_label" => $entity_data_node['extra']);
+            $entity_data[] = $entity_data_node;
         }
         return $entity_data;
     }

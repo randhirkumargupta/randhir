@@ -16,8 +16,8 @@ function itg_widget_we_may_suggest_ordering_from_custom_table($info) {
     $result = get_view_nodes_form_custom_table_for_widgets($widget_name, MAY_WE_SUGGEST_MAX_RANGE, MAY_WE_SUGGEST_MIN_RANGE , 'ASC');
     $entity_data = array();
     foreach ($result as $entity_data_node) {
-      $entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
-      $entity_data[] = $entity_info[$entity_data_node['nid']];
+      //$entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
+      $entity_data[] = $entity_data_node;
     }
     return $entity_data;
   }
