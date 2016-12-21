@@ -84,7 +84,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         endif;
     ?>
     
-    <main id="main" class="container">
+    <main id="main" class="container pos-rel">
+        <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -111,8 +112,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     }
    
 ?>
-<div class="itg-layout-container <?php echo $itg_class; ?> pos-rel">
-   <?php print render($page['vertical_menu']); ?>
+<div class="itg-layout-container <?php echo $itg_class; ?>"> 
     <div class="row yearend-page">
         <div class="col-md-8 col-sm-12 col-sx-12 left-side">
             <div class="itg-643">

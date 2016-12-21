@@ -9320,7 +9320,6 @@ footer .footer-copyright {
   box-shadow: 2px 2px 3px #ccc;
   text-align: center;
   border-right: 1px solid #b3b3b3;
-  display: none;
 }
 #block-itg-menu-manager-vertical-menu ul {
   -webkit-transition: all 1s ease-in-out;
@@ -10589,3 +10588,46 @@ footer .footer-copyright {
   color: #777777;
   padding-top: 13px;
 }
+
+/*css start story page submit story */
+.ugc-top-heading h2 {
+  text-transform: uppercase;
+  color: #333;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 30px;
+}
+
+#content [id*="ugc-node-form"] {
+  background: #fff;
+  font-family: "Roboto", sans-serif;
+}
+#content [id*="ugc-node-form"] .form-item {
+  margin: 0;
+  margin-bottom: 10px;
+}
+#content [id*="ugc-node-form"] .captcha, #content [id*="ugc-node-form"] .form-actions {
+  padding-left: 220px;
+}
+#content [id*="ugc-node-form"] .captcha .form-submit, #content [id*="ugc-node-form"] .form-actions .form-submit {
+  background: #000;
+  border: 1px solid #000;
+}
+#content [id*="ugc-node-form"] select {
+  width: 400px;
+}
+#content [id*="ugc-node-form"] div.description {
+  padding-left: 0;
+}
+#content .form-type-textfield > label {
+  width: 100%;
+  display: block;
+}
+
+#cboxLoadedContent {
+  background: url(../images/tab-loading.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*css end story page submit story */
