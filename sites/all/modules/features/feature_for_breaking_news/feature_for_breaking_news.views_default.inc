@@ -517,6 +517,66 @@ function feature_for_breaking_news_views_default_views() {
     18 => 0,
   );
   $handler->display->display_options['path'] = 'breaking-news';
+
+  /* Display: Breaking News Band */
+  $handler = $view->new_display('block', 'Breaking News Band', 'block_1');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Content details (field_breaking_content_details) */
+  $handler->display->display_options['relationships']['field_breaking_content_details_value']['id'] = 'field_breaking_content_details_value';
+  $handler->display->display_options['relationships']['field_breaking_content_details_value']['table'] = 'field_data_field_breaking_content_details';
+  $handler->display->display_options['relationships']['field_breaking_content_details_value']['field'] = 'field_breaking_content_details_value';
+  $handler->display->display_options['relationships']['field_breaking_content_details_value']['required'] = TRUE;
+  $handler->display->display_options['relationships']['field_breaking_content_details_value']['delta'] = '-1';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'BREAKING';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Field collection item: Title */
+  $handler->display->display_options['fields']['field_breaking_tile']['id'] = 'field_breaking_tile';
+  $handler->display->display_options['fields']['field_breaking_tile']['table'] = 'field_data_field_breaking_tile';
+  $handler->display->display_options['fields']['field_breaking_tile']['field'] = 'field_breaking_tile';
+  $handler->display->display_options['fields']['field_breaking_tile']['relationship'] = 'field_breaking_content_details_value';
+  $handler->display->display_options['fields']['field_breaking_tile']['label'] = '';
+  $handler->display->display_options['fields']['field_breaking_tile']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'breaking_news' => 'breaking_news',
+  );
+  /* Filter criterion: Content: Type (field_type) */
+  $handler->display->display_options['filters']['field_type_value']['id'] = 'field_type_value';
+  $handler->display->display_options['filters']['field_type_value']['table'] = 'field_data_field_type';
+  $handler->display->display_options['filters']['field_type_value']['field'] = 'field_type_value';
+  $handler->display->display_options['filters']['field_type_value']['value'] = array(
+    'Breaking News' => 'Breaking News',
+  );
+  /* Filter criterion: Field collection item: Mark as Breaking band (field_mark_as_breaking_band) */
+  $handler->display->display_options['filters']['field_mark_as_breaking_band_value']['id'] = 'field_mark_as_breaking_band_value';
+  $handler->display->display_options['filters']['field_mark_as_breaking_band_value']['table'] = 'field_data_field_mark_as_breaking_band';
+  $handler->display->display_options['filters']['field_mark_as_breaking_band_value']['field'] = 'field_mark_as_breaking_band_value';
+  $handler->display->display_options['filters']['field_mark_as_breaking_band_value']['relationship'] = 'field_breaking_content_details_value';
+  $handler->display->display_options['filters']['field_mark_as_breaking_band_value']['value'] = array(
+    1 => '1',
+  );
   $export['breaking_news'] = $view;
 
   return $export;
