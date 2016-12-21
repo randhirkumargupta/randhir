@@ -587,7 +587,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
@@ -777,7 +777,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
@@ -832,7 +832,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
@@ -879,7 +879,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
@@ -948,6 +948,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['body_1']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body_1']['field'] = 'body';
   $handler->display->display_options['fields']['body_1']['label'] = '';
+  $handler->display->display_options['fields']['body_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['body_1']['alter']['text'] = '[body_1] <a href="/itgcms/" class="views-less-link">Less -</a>';
   $handler->display->display_options['fields']['body_1']['element_type'] = 'div';
   $handler->display->display_options['fields']['body_1']['element_class'] = 'product-full-desc default-full-desc';
@@ -1063,7 +1064,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
     'Sold out' => 'Sold out',
   );
-  /* Filter criterion: Content: Other Item (field_poll_itg_state) */
+  /* Filter criterion: Content: ITG State (field_poll_itg_state) */
   $handler->display->display_options['filters']['field_poll_itg_state_value']['id'] = 'field_poll_itg_state_value';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['table'] = 'field_data_field_poll_itg_state';
   $handler->display->display_options['filters']['field_poll_itg_state_value']['field'] = 'field_poll_itg_state_value';
