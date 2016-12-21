@@ -15,6 +15,32 @@
             setTimeout(function() {
                 jQuery(".video-ftp").trigger("click");
             }, 1000);
+
+            $(".ftp-server .asso-filed_single").click(function(e) {
+
+                var selected_check_boxes_index = 0;
+              $("input:radio").each(function() {
+                    if ($(this).is(':checked'))
+                    {
+                        selected_check_boxes_index = $(this).val();
+                    }
+                });
+                if (selected_check_boxes_index == 0) {
+                    alert("Please select video file.");
+                } else {
+
+                    var getbtnmane = $(this).attr('btn_name');
+                    parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(selected_check_boxes_index);
+                    parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_repository][button]").trigger('mousedown');
+
+                    //parent.jQuery("#" + video_field_id + "-button").mousedown();
+                    setTimeout(function() {
+                        parent.jQuery.colorbox.close();
+                        //$("#edit-video-browse-select .form-radio").prop("checked", false);
+                    }, 9000);
+                }
+            });
+
             $(".ftp-server .asso-filed").click(function(e) {
 
                 // Getting selected videos from checkboxes        
@@ -40,8 +66,7 @@
                     //parent.jQuery("#" + video_field_id + "-button").mousedown();
                     setTimeout(function() {
                         parent.jQuery.colorbox.close();
-                        //$("#edit-video-browse-select .form-radio").prop("checked", false);
-                    }, 5000);
+                    }, 9000);
                 }
             });
 
@@ -167,7 +192,7 @@ jQuery('document').ready(function() {
         jQuery.ajax({
             url: base_url + '/dailymotion-ftp-videos-post',
             type: 'post',
-            data: {'case': select_value},
+            data: {'case': select_value, 'value_type': jQuery('#single_add').val()},
             success: function(data) {
                 jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
                 jQuery('.video-options-wrapper').html(data);
@@ -233,7 +258,7 @@ function videosearch() {
     jQuery.ajax({
         url: base_url + '/dailymotion-video-search-filter',
         type: 'post',
-        data: {'back_time': select_val + '@' + search_val + '@' + time_val},
+        data: {'back_time': select_val + '@' + search_val + '@' + time_val, 'value_type': jQuery('#single_add').val()},
         success: function(data) {
             jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
             jQuery('.video-options-wrapper').html(data);
