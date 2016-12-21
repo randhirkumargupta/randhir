@@ -228,6 +228,7 @@ img {
 
 .zoom-image {
   overflow: hidden;
+  display: block;
 }
 .zoom-image img {
   transition: all 500ms ease 0s;
@@ -2673,14 +2674,12 @@ footer .footer-copyright {
 }
 .story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv:before, .story-section .agbutton.story-like-dislike #name-dv #lky #dsty-dv:before, .story-section .agbutton.story-like-dislike #name-dv #dlky #sty-dv:before, .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before {
   content: '';
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid #e0e0e0;
+  height: 21px;
+  background: url(../images/story-up-arrow-icon.png) no-repeat;
   position: absolute;
   left: 12px;
-  top: -10px;
+  top: -21px;
+  width: 25px;
 }
 .story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv a, .story-section .agbutton.story-like-dislike #name-dv #lky #dsty-dv a, .story-section .agbutton.story-like-dislike #name-dv #dlky #sty-dv a, .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a {
   padding: 3px;
@@ -6925,6 +6924,12 @@ footer .footer-copyright {
   font-weight: 700;
 }
 
+#block-views-program-schedule-block-3 .col-md-3 {
+  margin-bottom: 30px;
+}
+#block-views-program-schedule-block-3 .col-md-3:nth-child(4n+1) {
+  clear: left;
+}
 #block-views-program-schedule-block-3 .views-row {
   text-align: center;
   font-family: roboto;
@@ -6941,9 +6946,6 @@ footer .footer-copyright {
   display: block;
   color: #000;
   margin-bottom: 5px;
-}
-#block-views-program-schedule-block-3 .views-row:nth-child(4n+1) {
-  clear: left;
 }
 #block-views-program-schedule-block-3 .views-row .views-row {
   margin-bottom: 30px;
@@ -9310,8 +9312,9 @@ footer .footer-copyright {
 /*eND CSS LIVE tv */
 /*vertical menu fixed position*/
 #block-itg-menu-manager-vertical-menu {
-  position: fixed;
-  top: 270px;
+  left: -60px;
+  position: absolute;
+  top: 100px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 2px 2px 3px #ccc;
@@ -10585,3 +10588,46 @@ footer .footer-copyright {
   color: #777777;
   padding-top: 13px;
 }
+
+/*css start story page submit story */
+.ugc-top-heading h2 {
+  text-transform: uppercase;
+  color: #333;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 30px;
+}
+
+#content [id*="ugc-node-form"] {
+  background: #fff;
+  font-family: "Roboto", sans-serif;
+}
+#content [id*="ugc-node-form"] .form-item {
+  margin: 0;
+  margin-bottom: 10px;
+}
+#content [id*="ugc-node-form"] .captcha, #content [id*="ugc-node-form"] .form-actions {
+  padding-left: 220px;
+}
+#content [id*="ugc-node-form"] .captcha .form-submit, #content [id*="ugc-node-form"] .form-actions .form-submit {
+  background: #000;
+  border: 1px solid #000;
+}
+#content [id*="ugc-node-form"] select {
+  width: 400px;
+}
+#content [id*="ugc-node-form"] div.description {
+  padding-left: 0;
+}
+#content .form-type-textfield > label {
+  width: 100%;
+  display: block;
+}
+
+#cboxLoadedContent {
+  background: url(../images/tab-loading.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*css end story page submit story */

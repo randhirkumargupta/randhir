@@ -162,8 +162,9 @@ function itg_preprocess_page(&$variables) {
     }
   }
   
+
   // Call Event Parent TPL
-  if ((isset($variables['node']->type) && $variables['node']->type == 'event_backend')) {
+  if ($variables['node']->type == 'event_backend' || $arg[0] == 'event') {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
 }
