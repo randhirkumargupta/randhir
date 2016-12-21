@@ -41,36 +41,14 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
   
   $form['widget_name'] = array(
     '#type' => 'select',
-    '#options' => array("$widget" => "widget"),
+    '#options' => array($widget => "widget"),
     '#weight' => -1,
    '#attributes' => array("style" => array("display:none")),
   );
 
-
-  // Adding extra field for related content.
-//  if ($current_display == 'big_story_format' && ($_GET['type'] != 'story' || !isset($_GET['type']))) {
-//    $form['related_content'] = array(
-//      '#type' => 'textfield',
-//      '#title' => t("Related content."),
-//      '#attributes' => array("placeholder" => t("Enter node id by server prefix")),
-//      '#description' => t("Node ids must be comma seperated values ex server1_123,server2_1024, server3_777."),
-//    );
-//  }
   return $form;
 }
 
-/**
- * {@inheritdoc}
- */
-function itg_widget_categories_wise_node_group_validate($form, &$form_state) {
-//  if (isset($form_state['values']['related_content']) && !empty($form_state['values']['related_content'])) {
-//    $regex = "/^[0-9,]+$/";
-//    $related_content = $form_state['values']['related_content'];
-//    if (!preg_match($regex, $related_content)) {
-//      form_set_error('related_content', "Only numbers and commas are allowed on 'Related content' ");
-//    }
-//  }
-}
 
 /**
  * {@inheritdoc}
