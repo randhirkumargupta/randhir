@@ -198,6 +198,13 @@ function itg_widget_section_wise_ordering_for_rhs_from_custom_table($info) {
     $widget_name = _get_widget_name($view_name, 'page');
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    //join  for field value
+    
+    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');    
+    $query->fields('mi_file', array('uri'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));          
+  //end
     $query->fields('iwo', array('nid'))
             ->condition('iwo.cat_id', $cat_id)
             // fix for getting all content type
@@ -208,8 +215,8 @@ function itg_widget_section_wise_ordering_for_rhs_from_custom_table($info) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $entity_data = array();
     foreach ($result as $entity_data_node) {
-      $entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
-      $entity_data[] = $entity_info[$entity_data_node['nid']];
+      //$entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
+      $entity_data[] = $entity_data_node;
     }
     return $entity_data;
   }
