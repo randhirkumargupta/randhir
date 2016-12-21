@@ -8,28 +8,10 @@
 function save_poll_widget_data($poll_data) {
     $selected_node = $poll_data['selection'];
     $widget_name = 'poll_widget';
-    // Delete entry first.
-    
-    $num_deleted = db_delete('itg_widget_order')
-            ->condition('widget', $widget_name)
-            ->execute();
-    
+    itg_widget_delete_data_from_widget($widget_name);
     if (count($selected_node)) {
         foreach ($selected_node as $node) {
-            try {
-              $node_load_data = itg_widget_get_required_node_data_for_widget($node);
-            db_insert('itg_widget_order')
-                    ->fields(array(
-                        'nid' => $node,
-                        'widget' => $widget_name,
-                        'content_type' => $node_load_data->type,
-                        //'extra' => $field_names[$node],
-                        'weight' => 0,
-                    ))
-                    ->execute();
-            } catch (Exception $ex) {
-              drupal_set_message($ex->getMessage());
-            }
+            itg_widget_insert_widget_data($node , $widget_name , 0);
         }
         drupal_set_message(t("Nodes has been saved"));
     }

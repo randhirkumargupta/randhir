@@ -17,21 +17,8 @@ function save_feature_content_section_widget_data($feature_content) {
     $widget_name = "feature_content_by_section";
     if (count($selected_node)) {
         foreach ($selected_node as $node) {
-            $node_load_data = itg_widget_get_required_node_data_for_widget($node);
-            $num_deleted = db_delete('itg_widget_order')
-                    ->condition('widget', $widget_name)
-                    ->condition('nid', $node)
-                    ->execute();
-            db_insert('itg_widget_order')
-                    ->fields(array(
-                        'nid' => $node,
-                        'widget' => $widget_name,
-                        'cat_id' => $_GET['category_tid'],
-                        'content_type' => $node_load_data->type,
-                        //'extra' => $field_names[$node],
-                        'weight' => 0,
-                    ))
-                    ->execute();
+          itg_widget_delete_data_from_widget($widget_name, $node);
+          itg_widget_insert_widget_data($node , $widget_name , $_GET['category_tid']);
         }
         drupal_set_message(t("Nodes has been saved"));
     }
