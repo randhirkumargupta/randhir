@@ -216,7 +216,7 @@ img {
 [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-listicle-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-videogallery-video-upload-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-pti-print-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, [id*="itg-social-media-form"] > div > a, #comments .comment-form .form-actions .form-submit[value="Cancel"], [id*="field-survey-add-questions-values"] > tbody > tr > td > .form-submit, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit, .node-vas_service_content-form #reset-date-button, .operation-form .form-actions .form-submit + a, #views-form-blogs-management-page .form-actions .form-submit + a,
 #views-form-strory-menegment-page .form-actions .form-submit + a, #views-form-podcast-management-page .form-actions .form-submit + a,
-#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .page-manage-budget-list table caption a, .page-budget-predictor-list table caption a, [id*="itg-manage-budget"] .form-submit, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
+#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .page-manage-budget-list table caption a, .page-budget-predictor-list table caption a, [id*="itg-manage-budget"] .form-submit, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
 [id*="field-program-schedule-values"] + div.clearfix .form-submit,
 [id*="field-associate-sponsors-values"] + div.clearfix .form-submit,
 [id*="field-event-highlights-values"] + div.clearfix .form-submit,
@@ -297,7 +297,7 @@ img {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions a,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions a,
 #views-form-most-read-widget-most-read-widget-contents .form-actions a,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions a, #itg-image-croping-crop-form .form-item-aspect-ratio, #itg-image-croping-crop-form .form-item-aspect-ratio label, #itg-image-croping-crop-form .form-item-aspect-ratio .form-select, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block {
+#views-form-photo-carousel-widget-video-carousel-list .form-actions a, #itg-image-croping-crop-form .form-item-aspect-ratio, #itg-image-croping-crop-form .form-item-aspect-ratio label, #itg-image-croping-crop-form .form-item-aspect-ratio .form-select, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size {
   display: inline-block;
 }
 
@@ -380,7 +380,7 @@ img {
 [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-listicle-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-videogallery-video-upload-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-pti-print-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, [id*="itg-social-media-form"] > div > a, #comments .comment-form .form-actions .form-submit[value="Cancel"], [id*="field-survey-add-questions-values"] > tbody > tr > td > .form-submit, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit, .node-vas_service_content-form #reset-date-button, .operation-form .form-actions .form-submit + a, #views-form-blogs-management-page .form-actions .form-submit + a,
 #views-form-strory-menegment-page .form-actions .form-submit + a, #views-form-podcast-management-page .form-actions .form-submit + a,
-#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .page-manage-budget-list table caption a, .page-budget-predictor-list table caption a, [id*="itg-manage-budget"] .form-submit, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
+#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .page-manage-budget-list table caption a, .page-budget-predictor-list table caption a, [id*="itg-manage-budget"] .form-submit, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel, .add-more, .form-submit[value="Add another item"], .itg-add-another-item + div.clearfix .form-submit, [id*="field-breaking-content-details-values"] + div.clearfix .form-submit,
 [id*="field-program-schedule-values"] + div.clearfix .form-submit,
 [id*="field-associate-sponsors-values"] + div.clearfix .form-submit,
 [id*="field-event-highlights-values"] + div.clearfix .form-submit,
@@ -440,7 +440,7 @@ img {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions a,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions a,
 #views-form-most-read-widget-most-read-widget-contents .form-actions a,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions a, #itg-image-croping-crop-form .form-item-aspect-ratio, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block {
+#views-form-photo-carousel-widget-video-carousel-list .form-actions a, #itg-image-croping-crop-form .form-item-aspect-ratio, [id*="itg-widget-issuewidget-filter-form"], [id*="itg-widget-issuewidgetlist-filter-form"], [id*="itg-widget-issuewidget-filter-form"] .form-type-select, [id*="itg-widget-issuewidgetlist-filter-form"] .form-type-select, .load-more-wrapper, .load-more-wrapper .add-more-block, .load-more-wrapper .removes-more-block, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size {
   vertical-align: top;
 }
 
@@ -560,7 +560,7 @@ img {
 .view-link,
 .delete-link,
 .move-link,
-.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .user-profile-div, .block-itg-related .rel-link, .main-cont, .node-videogallery-form #Imageupload .form-field-type-image .image-widget-data, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure, .view-video-list-of-category .view-content .photo-list li .tile figure {
+.edit-cm a, [id*="field-newsl-add-news-values"] fieldset legend .fieldset-title, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, .newsletter-templates .newsletter-header, [id*="field-service-content-values"] .field-name-field-service-content-date, .user-profile-div, .block-itg-related .rel-link, .main-cont, .node-videogallery-form #Imageupload .form-field-type-image .image-widget-data, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2), [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2), [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .field-name-field-audio .filefield-source, .itg-region ul, .view-photo-list-of-category .view-content .photo-list li .tile figure, .view-video-list-of-category .view-content .photo-list li .tile figure, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget {
   position: relative;
 }
 
@@ -588,7 +588,7 @@ img {
 [id*="field-story-reporter-values"] tbody,
 [id*="field-story-template-guru-values"] tbody,
 [id*="field-story-listicle-values"] tbody, [id*="field-videogallery-video-upload-values"] tbody, [id*="field-pti-print-media-values"] tbody, [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper,
-[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-skip, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .newsletter-templates .newsletter-list .title-kicker, .view-view-moderation-history .views-row .field-content, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, .widgets-view .vbo-views-form fieldset#edit-select .nodes_id_container {
+[id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper, [id*="field-survey-add-questions-values"] > tbody .field-name-field-survey-skip, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper, [id*="field-survey-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, [id*="field-quiz-add-questions-values"] .field-name-field-survey-add-media .form-managed-file .file, .node-photogallery-form .form-field-name-field-common-audio-file .form-managed-file .file, .newsletter-templates .newsletter-list .title-kicker, .view-view-moderation-history .views-row .field-content, [id*="field-videogallery-video-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, [id*="field-podcast-audio-upload-values"] tbody tr td:nth-child(2) .form-type-managed-file .file-widget .file a, .widgets-view .vbo-views-form fieldset#edit-select .nodes_id_container, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a {
   overflow: hidden;
 }
 
@@ -673,7 +673,7 @@ html.js fieldset.collapsed {
 [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"],
 [id*="field-story-listicle-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-videogallery-video-upload-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], [id*="field-pti-print-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"], .view .attachment a, .ugc-action .reject-ugc, .ugc-action .manage-ugc, [id*="itg-social-media-form"] > div > a, #comments .comment-form .form-actions .form-submit[value="Cancel"], [id*="field-survey-add-questions-values"] > tbody > tr > td > .form-submit, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit, .node-vas_service_content-form #reset-date-button, .operation-form .form-actions .form-submit + a, #views-form-blogs-management-page .form-actions .form-submit + a,
 #views-form-strory-menegment-page .form-actions .form-submit + a, #views-form-podcast-management-page .form-actions .form-submit + a,
-#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .page-manage-budget-list table caption a, .page-budget-predictor-list table caption a, [id*="itg-manage-budget"] .form-submit {
+#views-form-videogallery-management-page .form-actions .form-submit + a, #edit-preview-changes, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .page-manage-budget-list table caption a, .page-budget-predictor-list table caption a, [id*="itg-manage-budget"] .form-submit, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel {
   background-color: #33a26d;
   border: 1px solid #197e4e;
   color: #fff;
@@ -756,7 +756,7 @@ html.js fieldset.collapsed {
 [id*="field-story-template-guru-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover,
 [id*="field-story-listicle-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, [id*="field-videogallery-video-upload-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, [id*="field-pti-print-media-values"] tbody tr td .ajax-new-content > .form-submit[value="Remove"]:hover, .view .attachment a:hover, .ugc-action .reject-ugc:hover, .ugc-action .manage-ugc:hover, [id*="itg-social-media-form"] > div > a:hover, #comments .comment-form .form-actions .form-submit[value="Cancel"]:hover, [id*="field-survey-add-questions-values"] > tbody > tr > td > .form-submit:hover, [id*="field-survey-add-questions-values"] > tbody > tr > td > .ajax-new-content > .form-submit:hover, [id*="field-newsl-add-news-values"] fieldset legend + .fieldset-wrapper > .form-submit:hover, .node-vas_service_content-form #reset-date-button:hover, .operation-form .form-actions .form-submit + a:hover, #views-form-blogs-management-page .form-actions .form-submit + a:hover,
 #views-form-strory-menegment-page .form-actions .form-submit + a:hover, #views-form-podcast-management-page .form-actions .form-submit + a:hover,
-#views-form-videogallery-management-page .form-actions .form-submit + a:hover, #edit-preview-changes:hover, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:hover, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a:hover, .page-manage-budget-list table caption a:hover, .page-budget-predictor-list table caption a:hover, [id*="itg-manage-budget"] .form-submit:hover {
+#views-form-videogallery-management-page .form-actions .form-submit + a:hover, #edit-preview-changes:hover, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:hover, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a:hover, .page-manage-budget-list table caption a:hover, .page-budget-predictor-list table caption a:hover, [id*="itg-manage-budget"] .form-submit:hover, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel:hover, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel:hover {
   background-color: #197e4e;
   border-color: #197e4e;
   color: #fff;
@@ -884,7 +884,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions a,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions a,
 #views-form-most-read-widget-most-read-widget-contents .form-actions a,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions a, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a {
+#views-form-photo-carousel-widget-video-carousel-list .form-actions a, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel {
   background-color: #fff;
   border: 1px solid #ee4d4d;
   color: #ee4d4d;
@@ -952,7 +952,7 @@ html.js fieldset.collapsed {
 #views-form-special-auto-review-widget-special-auto-review-widget-contents .form-actions a:hover,
 #views-form-yearender-top-news-and-top-videos-yearend-left-widget-contents .form-actions a:hover,
 #views-form-most-read-widget-most-read-widget-contents .form-actions a:hover,
-#views-form-photo-carousel-widget-video-carousel-list .form-actions a:hover, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:hover {
+#views-form-photo-carousel-widget-video-carousel-list .form-actions a:hover, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:hover, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel:hover, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel:hover {
   background-color: #fff;
   border: 1px solid #ee4d4d;
   color: #ee4d4d;
@@ -1557,6 +1557,7 @@ textarea {
 /* Layout CSS */
 #main {
   padding-bottom: 30px;
+  min-height: 700px;
 }
 
 body.sidebar-second .sidebars {
@@ -5322,7 +5323,7 @@ div.node #comments h2 {
 .top-actions #views-form-strory-menegment-page .form-actions .form-submit + a:last-child,
 #views-form-strory-menegment-page .form-actions .top-actions .form-submit + a:last-child, .top-actions #views-form-podcast-management-page .form-actions .form-submit + a:last-child, #views-form-podcast-management-page .form-actions .top-actions .form-submit + a:last-child,
 .top-actions #views-form-videogallery-management-page .form-actions .form-submit + a:last-child,
-#views-form-videogallery-management-page .form-actions .top-actions .form-submit + a:last-child, .top-actions #edit-preview-changes:last-child, .top-actions [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:last-child, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .top-actions a:last-child, .top-actions .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a:last-child, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li .top-actions a:last-child, .top-actions .page-manage-budget-list table caption a:last-child, .page-manage-budget-list table caption .top-actions a:last-child, .top-actions .page-budget-predictor-list table caption a:last-child, .page-budget-predictor-list table caption .top-actions a:last-child, .top-actions [id*="itg-manage-budget"] .form-submit:last-child, [id*="itg-manage-budget"] .top-actions .form-submit:last-child {
+#views-form-videogallery-management-page .form-actions .top-actions .form-submit + a:last-child, .top-actions #edit-preview-changes:last-child, .top-actions [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a:last-child, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions .top-actions a:last-child, .top-actions .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a:last-child, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li .top-actions a:last-child, .top-actions .page-manage-budget-list table caption a:last-child, .page-manage-budget-list table caption .top-actions a:last-child, .top-actions .page-budget-predictor-list table caption a:last-child, .page-budget-predictor-list table caption .top-actions a:last-child, .top-actions [id*="itg-manage-budget"] .form-submit:last-child, [id*="itg-manage-budget"] .top-actions .form-submit:last-child, .top-actions #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel:last-child, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr .top-actions td > .form-submit.cancel:last-child, .top-actions #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel:last-child, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .top-actions .ajax-new-content > .form-submit.cancel:last-child {
   margin-right: 0;
 }
 
@@ -9689,7 +9690,7 @@ div.node #comments h2 {
 #main-container-budget #views-form-strory-menegment-page .form-actions .form-submit + a,
 #views-form-strory-menegment-page .form-actions #main-container-budget .form-submit + a, #main-container-budget #views-form-podcast-management-page .form-actions .form-submit + a, #views-form-podcast-management-page .form-actions #main-container-budget .form-submit + a,
 #main-container-budget #views-form-videogallery-management-page .form-actions .form-submit + a,
-#views-form-videogallery-management-page .form-actions #main-container-budget .form-submit + a, #main-container-budget #edit-preview-changes, #main-container-budget [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions #main-container-budget a, #main-container-budget .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li #main-container-budget a, #main-container-budget .page-manage-budget-list table caption a, .page-manage-budget-list table caption #main-container-budget a, #main-container-budget .page-budget-predictor-list table caption a, .page-budget-predictor-list table caption #main-container-budget a, #main-container-budget [id*="itg-manage-budget"] .form-submit, [id*="itg-manage-budget"] #main-container-budget .form-submit {
+#views-form-videogallery-management-page .form-actions #main-container-budget .form-submit + a, #main-container-budget #edit-preview-changes, #main-container-budget [id*="views-form-so-sorry-so-sorry-videos"] .form-actions a, [id*="views-form-so-sorry-so-sorry-videos"] .form-actions #main-container-budget a, #main-container-budget .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li a, .page-itg-menu-manager #content #block-menu-menu-menu-manager ul.menu li #main-container-budget a, #main-container-budget .page-manage-budget-list table caption a, .page-manage-budget-list table caption #main-container-budget a, #main-container-budget .page-budget-predictor-list table caption a, .page-budget-predictor-list table caption #main-container-budget a, #main-container-budget [id*="itg-manage-budget"] .form-submit, [id*="itg-manage-budget"] #main-container-budget .form-submit, #main-container-budget #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr #main-container-budget td > .form-submit.cancel, #main-container-budget #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td #main-container-budget .ajax-new-content > .form-submit.cancel {
   margin: 0;
   margin-bottom: 10px;
 }
@@ -9862,20 +9863,63 @@ div.node #comments h2 {
   margin-right: 10px;
 }
 
-#videoupload #edit-field-video-upload {
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr:first-child, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] thead, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] + div.clearfix {
   display: none;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget {
+  height: 34px;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget.has-file:before {
+  display: none;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file {
+  font-size: 12px;
+  margin-top: 8px;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file a {
+  color: #2f2f2f;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 82px;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .file-size {
+  font-size: 12px;
+  margin-top: 8px;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget > input[value="Remove"] {
+  border: none;
+  background: url("../images/cross_small.png") center center no-repeat !important;
+  width: 12px;
+  height: 12px;
+  text-indent: -9999px;
+  margin: 12px 0 4px 5px;
+  left: 175px !important;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget .form-file {
+  margin: 6px 0 0;
+  width: 118px;
+}
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td > .form-submit.cancel, #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .ajax-new-content > .form-submit.cancel {
+  margin-left: 220px;
 }
 #videoupload .ftp_browse_field {
-  margin: 40px 0;
+  margin: 10px 0 0;
 }
 
-[id*="field-video-upload-add-more-wrapper"] [id*="field-video-upload-values"] thead {
-  display: none;
-}
-[id*="field-video-upload-add-more-wrapper"] [id*="field-video-upload-values"] tr td:nth-child(2) {
-  display: none;
-}
-
+/*[id*="field-video-upload-add-more-wrapper"]{
+    [id*="field-video-upload-values"]{
+        thead{
+            display: none;
+        }
+        tr{
+            td{
+                &:nth-child(2){
+                    display: none;
+                }
+            }
+        }
+    }
+}*/
 .templates-tab-wrapper {
   padding-top: 10px;
 }
