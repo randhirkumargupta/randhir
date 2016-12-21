@@ -1099,14 +1099,25 @@ function itg_widget_get_required_node_data_for_widget($nid) {
  * @param string $widget_name
  * @param int $nid
  */
-function itg_widget_delete_data_from_widget($widget_name, $nid = 0) {
+function itg_widget_delete_data_from_widget($widget_name, $nid = 0 , $stateid = 0 , $cat_id = 0) {
   try {
     $query = db_delete('itg_widget_order');
     $query->condition('widget', $widget_name);
+    
     if ($nid) {
       $query->condition('nid', $nid);
     }
+    
+    if($stateid) {
+      $query->condition('state', $stateid);
+    }
+    
+    if($cat_id) {
+      $query->condition('cat_id', $cat_id);
+    }
+    
     $query->execute();
+    
   } catch (Exception $ex) {
     watchdog($widget_name, $ex->getMessage());
   }
@@ -1118,7 +1129,7 @@ function itg_widget_delete_data_from_widget($widget_name, $nid = 0) {
  * @param string $widget_name
  * @param string $category_tid
  */
-function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extra = NULL) {
+function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extra = NULL , $state = NULL) {
   try {
     $max_weight = get_max_weight_for_special($widget_name);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
@@ -1129,6 +1140,7 @@ function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extr
           'cat_id' => itg_widget_get_category_for_db_insert($category_tid),
           'content_type' => $node_load_data->type,
           'extra' => $extra,
+          'state' => $state,
           'weight' => ++$max_weight,
         ))
         ->execute();
