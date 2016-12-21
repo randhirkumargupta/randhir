@@ -9056,3 +9056,38 @@ div.node{
     display: none;
   } 
 }
+#layout-html-submit, #layout-highlights-submit{
+  @extend .add-more;
+  margin: 0 10px 10px;
+}
+[id*="daily-motion-video-dashboard"]{
+  @extend .node-form;
+  fieldset{
+    border: none;
+    legend{
+      display: none;
+    }
+    .form-item{
+      padding: 0;
+      float: left;
+      margin-right: 10px;
+      > label{
+        float: none;
+        display: block;
+        padding: 0 0 5px;
+      }
+      &.form-item-filtertype{
+        select{
+          margin-top: 23px;
+        }
+      }
+    }
+    #edit-display-button{
+      @extend .add-more;
+      margin-top: 54px;
+    }
+  }
+  table{
+    @extend .views-table;
+  }
+}
