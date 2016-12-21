@@ -58,6 +58,26 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
     $widget_name = _get_widget_name($view_name, 'page');
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    //join  for field value
+      $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+      $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+      $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+      $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+      $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+      $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+      $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+      $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+      $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+      $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+      $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+      $query->fields('eli_file', array('uri'));
+      $query->fields('li_file', array('uri'));
+      $query->fields('mi_file', array('uri'));
+      $query->fields('si_file', array('uri'));
+      $query->fields('esi_file', array('uri'));          
+      $query->fields('vd', array('field_video_duration_value'));
+      $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));                    
+    //end
     $query->fields('iwo', array('nid', 'weight'))
         ->condition('iwo.cat_id', $cat_id)
         // fix for getting all content type
@@ -71,8 +91,8 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $entity_data = array();
     foreach ($result as $entity_data_node) {
-      $entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
-      $entity_data[] = $entity_info[$entity_data_node['nid']];
+      //$entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
+      $entity_data[] = $entity_data_node;
     }
 
     return $entity_data;
@@ -126,6 +146,24 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
     $widget_name = _get_widget_name($view_name, 'page');
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+    $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+    $query->fields('eli_file', array('uri'));
+    $query->fields('li_file', array('uri'));
+    $query->fields('mi_file', array('uri'));
+    $query->fields('si_file', array('uri'));
+    $query->fields('esi_file', array('uri'));          
+    $query->fields('vd', array('field_video_duration_value'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid')); 
     $query->fields('iwo', array('nid', 'weight'))
         ->condition('iwo.cat_id', $cat_id)
         // fix for getting all content type
