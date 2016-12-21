@@ -248,11 +248,9 @@ function _related_photo_block_content() {
  * @param Array $view
  */
 function itg_front_end_common_views_pre_render(&$view) {
-  global $base_url;
+  global $user, $base_url;
 
   if (isset($view->name) && ($view->name == "related_photo_video_content")) {
-
-    global $user, $base_url;
 
     foreach ($view->result as $related_result) {
       // image condition when image not image
@@ -273,6 +271,31 @@ function itg_front_end_common_views_pre_render(&$view) {
       if (empty($image)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
         $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' width='170' height='127' />";
+      }
+    }
+  }
+  // condition for related story page
+  if (isset($view->name) && ($view->name == "related_story")) {
+
+    foreach ($view->result as $related_story_result) {
+      // image condition when image not image
+      $image = $related_story_result->sm_thumb_story_related_content_138x103_field_story_extra_large_image[0];
+      $pattern = '/src="([^"]*)"/';
+
+      if (preg_match($pattern, $image, $matches)) {
+        $src = $matches[1];
+        if (getimagesize($src) !== false) {
+          $related_story_result->sm_thumb_story_related_content_138x103_field_story_extra_large_image[0] = $related_story_result->sm_thumb_story_related_content_138x103_field_story_extra_large_image[0];
+        }
+        else {
+          $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+          $related_story_result->sm_thumb_story_related_content_138x103_field_story_extra_large_image[0] = "<img src='$img_url' width='138' height='103' />";
+        }
+      }
+
+      if (empty($image)) {
+        $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+        $related_story_result->sm_thumb_story_related_content_138x103_field_story_extra_large_image[0] = "<img src='$img_url' width='138' height='103' />";
       }
     }
   }
