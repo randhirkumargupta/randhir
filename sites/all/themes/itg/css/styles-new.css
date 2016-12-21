@@ -52,6 +52,9 @@
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
   position: relative;
   padding-top: 13px;
+  /*            &:hover{
+                  .views-widget{display: block;}
+              }*/
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper > label, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper > label {
   display: block;
@@ -65,12 +68,12 @@
   content: '';
   width: 0;
   height: 0;
-  border-style: solid;
-  border: 5px 4px;
-  border-color: #b3b3b3 transparent transparent transparent;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #b3b3b3;
   position: absolute;
-  right: 8px;
-  top: 8px;
+  right: 5px;
+  top: 7px;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper .views-widget {
   display: none;
@@ -78,14 +81,11 @@
   left: 0;
   top: 31px;
 }
-[id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper:hover .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper:hover .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper:hover .views-widget, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper:hover .views-widget {
-  display: block;
-}
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .form-select {
   height: 95px;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget {
-  padding-right: 40px;
+  padding-right: 20px;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form .views-exposed-widget label {
   font-weight: normal;
@@ -1190,6 +1190,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name {
   width: 175px;
   padding-right: 10px;
+  text-transform: uppercase;
 }
 .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name a {
   color: #000;
@@ -1955,6 +1956,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .view-redeem-points .more-link a:hover, .view-product .more-link a:hover {
   color: #1a3c8d;
 }
+.view-redeem-points .default-full-desc, .view-product .default-full-desc {
+  display: none;
+}
 
 body.has-cart-popup {
   overflow: hidden;
@@ -2091,6 +2095,10 @@ body.has-cart-popup {
   color: #fff;
   margin-right: 5px;
   vertical-align: top;
+}
+.cart-popup-wrapper .cart-popup .popup-desc {
+  max-height: 400px;
+  overflow: auto;
 }
 
 [id*="itg-quiz-quiz-form"] .question-heading {

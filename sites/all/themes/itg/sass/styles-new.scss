@@ -35,12 +35,12 @@
                     content: '';
                     width: 0;
                     height: 0;
-                    border-style: solid;
-                    border: 5px 4px;
-                    border-color: #b3b3b3 transparent transparent transparent;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-top: 5px solid #b3b3b3;
                     position: absolute;
-                    right: 8px;
-                    top: 8px;
+                    right: 5px;
+                    top: 7px;
                 }
             }
             .views-widget{
@@ -49,15 +49,15 @@
                 left: 0;
                 top: 31px;
             }
-            &:hover{
+/*            &:hover{
                 .views-widget{display: block;}
-            }
+            }*/
         }
         .form-select{
             height: 95px;
         }
         .views-exposed-widget{
-            padding-right: 40px;
+            padding-right: 20px;
             label{
                 font-weight: normal;
                 + select{
@@ -1164,6 +1164,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           &.views-field-name{
             width: 175px;
             padding-right: 10px;
+            text-transform: uppercase;
             a{
               color: #000;
               font-size: 17px;
@@ -1869,6 +1870,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
     }
   }
+  .default-full-desc{
+      display:none
+  }
 }
 body.has-cart-popup{
   overflow: hidden;
@@ -2004,6 +2008,10 @@ body.has-cart-popup{
           margin-right: 5px;
           vertical-align: top;
         }
+      }
+      .popup-desc{
+        max-height:400px;
+        overflow:auto;
       }
   }
 }

@@ -18,6 +18,12 @@ function itg_ugc_menu() {
     'access arguments' => array('access reject ugc content link'),
     'type' => MENU_CALLBACK,
   );
+  
+  $items['ugc-thank-you'] = array(
+    'page callback' => 'itg_ugc_thank_you',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -32,6 +38,85 @@ function itg_ugc_permission() {
       'description' => t('Ugc reject permission.'),
     ),
   );
+}
+
+/**
+ * Implements hook_rules_action_info().
+ *
+ * @return array
+ */
+function itg_ugc_rules_action_info() {
+  return array(
+    'itg_ugc_send_follow_story_content_mail' => array(
+      'label' => t('Send Mail to users for story content'),
+      'parameter' => array(
+        'node' => array('type' => 'node', 'label' => t('Current Node')),
+      ),
+      'group' => t('ITG'),            
+    ),
+  );
+}
+
+/**
+ * Implements callback function for 'itg_ugc_send_follow_story_content_mail'
+ * @param type $node
+ */
+function itg_ugc_send_follow_story_content_mail($node) {
+  if ($node->type == 'story') {
+    $get_user_id = itg_get_follow_story_user($node->nid);
+
+    foreach ($get_user_id as $follow_user) {
+
+      module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+
+      $mail_content = itg_follow_story_get_mail_content($node);
+      
+      $params = array(
+        'body' => $mail_content,
+        'subject' => 'India Today | Story updated',
+      );
+
+      $to = itg_get_user_email_by_id($follow_user);
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+        if ($mail['result']) {
+          return TRUE;
+        }
+        else {
+          $error_msg = 'Failed to send the email!';
+          watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+          return FALSE;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements itg_get_follow_story_user
+ * @param int $nid
+ */
+function itg_get_follow_story_user($nid) {
+  $query = db_select('flagging', 'c');
+  $query->fields('c', array('uid'));
+  $query->condition('c.entity_id', $nid, '=');
+  $result = $query->execute();
+  while ($record = $result->fetchAssoc()) {
+    $options[] = $record['uid'];
+  }
+
+  return $options;
+}
+
+/**
+ * Implements itg_get_user_email_by_id
+ * @param int $uid
+ */
+function itg_get_user_email_by_id($uid) {
+  $query = db_select('users', 'u')
+            ->fields('u', array('mail'))
+            ->condition('u.uid', $uid, '=');
+  return $query->execute()->fetchField();
 }
 
 /**
@@ -382,8 +467,9 @@ function itg_ugc_form_custom_callback($form, &$form_state) {
     $form_state['redirect'] = 'personalization/my-content';
   }
   else {
-    $_REQUEST['destination'] = 'node/add/ugc';
-    $msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
+    $_REQUEST['destination'] = 'ugc-thank-you';
+    $form_state['redirect'] = 'ugc-thank-you';
+    //$msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
   }
 }
 
@@ -579,7 +665,7 @@ function itg_ugc_user_mail($key, &$message, $params) {
     case 'send_Rejected_mail_to_ugc_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -593,7 +679,21 @@ function itg_ugc_user_mail($key, &$message, $params) {
     case 'send_Published_mail_to_ugc_user':
       $headers = array(
         'MIME-Version' => '1.0',
-        'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+    
+      case 'send_mail_to_follow_story_user':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
@@ -669,4 +769,11 @@ function itg_ugc_views_pre_render(&$view) {
     $header_content_ugc = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $view->attachment_before = $header_content_ugc;
   }
+}
+
+/**
+ * Implements itg_ugc_thank_you
+ */
+function itg_ugc_thank_you() {
+ print '<div class="ugc-success">UGC content has been submitted successfully for further review and approval.</div>';
 }
