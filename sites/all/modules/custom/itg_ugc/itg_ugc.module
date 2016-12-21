@@ -131,10 +131,10 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   $url_nid = arg(3);
 
   // condition for front user 
-  if ($user->uid == 0 && !empty($_GET['type'])) {
+  if ($user->uid == 0 && !empty($_GET['type']) && $form_id == 'ugc_node_form') {
     $form['field_ugc_ctype']['#attributes']['class'][] = 'element-hidden';
     if (isset($_GET['type'])) {
-      $form['#prefix'] = '<div class="ugc-top-heading"><h2>Submit Your '.$_GET['type'].'</h2></div>';  
+      $form['#prefix'] = '<div class="ugc-top-heading"><h2>Post Your Content</h2></div>';  
       $form['field_ugc_ctype'][LANGUAGE_NONE]['#default_value'] = $_GET['type'];
     }
   }
