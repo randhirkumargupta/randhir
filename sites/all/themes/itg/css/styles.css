@@ -228,6 +228,7 @@ img {
 
 .zoom-image {
   overflow: hidden;
+  display: block;
 }
 .zoom-image img {
   transition: all 500ms ease 0s;
@@ -516,8 +517,10 @@ header {
   right: 0;
   top: 0;
 }
-#block-itg-layout-manager-header-block .navigation .menu li.has-image a {
-  padding: 0;
+#block-itg-layout-manager-header-block .navigation .menu li.has-image a img {
+  max-height: 37px;
+  width: auto;
+  padding: 4px 0;
 }
 #block-itg-layout-manager-header-block .navigation .menu#newlist li a:after {
   display: none;
@@ -2561,6 +2564,9 @@ footer .footer-copyright {
   font-weight: 700;
   line-height: 35px;
 }
+.story-section .social-list li i.fa-facebook, .story-section .social-list li i.fa-twitter, .story-section .social-list li i.fa-google-plus {
+  padding: 10px 0;
+}
 .story-section .story-expert-opinion {
   background: #f5f5f5;
   width: 320px;
@@ -2668,20 +2674,23 @@ footer .footer-copyright {
 }
 .story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv:before, .story-section .agbutton.story-like-dislike #name-dv #lky #dsty-dv:before, .story-section .agbutton.story-like-dislike #name-dv #dlky #sty-dv:before, .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before {
   content: '';
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid #e0e0e0;
+  height: 21px;
+  background: url(../images/story-up-arrow-icon.png) no-repeat;
   position: absolute;
   left: 12px;
-  top: -10px;
+  top: -21px;
+  width: 25px;
 }
 .story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv a, .story-section .agbutton.story-like-dislike #name-dv #lky #dsty-dv a, .story-section .agbutton.story-like-dislike #name-dv #dlky #sty-dv a, .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a {
   padding: 3px;
   display: inline-block;
   vertical-align: top;
   cursor: pointer;
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky #dsty-dv a, .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a {
+  padding: 0;
+  color: #2877c4;
+  text-decoration: underline;
 }
 .story-section .agbutton.story-like-dislike .error-msg {
   color: red;
@@ -6915,6 +6924,12 @@ footer .footer-copyright {
   font-weight: 700;
 }
 
+#block-views-program-schedule-block-3 .col-md-3 {
+  margin-bottom: 30px;
+}
+#block-views-program-schedule-block-3 .col-md-3:nth-child(4n+1) {
+  clear: left;
+}
 #block-views-program-schedule-block-3 .views-row {
   text-align: center;
   font-family: roboto;
@@ -6931,9 +6946,6 @@ footer .footer-copyright {
   display: block;
   color: #000;
   margin-bottom: 5px;
-}
-#block-views-program-schedule-block-3 .views-row:nth-child(4n+1) {
-  clear: left;
 }
 #block-views-program-schedule-block-3 .views-row .views-row {
   margin-bottom: 30px;
@@ -9300,13 +9312,15 @@ footer .footer-copyright {
 /*eND CSS LIVE tv */
 /*vertical menu fixed position*/
 #block-itg-menu-manager-vertical-menu {
-  position: fixed;
-  top: 270px;
+  left: -60px;
+  position: absolute;
+  top: 100px;
   background: #f2f2f2;
   border-radius: 3px;
   box-shadow: 2px 2px 3px #ccc;
   text-align: center;
   border-right: 1px solid #b3b3b3;
+  display: none;
 }
 #block-itg-menu-manager-vertical-menu ul {
   -webkit-transition: all 1s ease-in-out;
@@ -9330,13 +9344,14 @@ footer .footer-copyright {
 #block-itg-menu-manager-vertical-menu a {
   font-size: 12px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   line-height: 15px;
   display: block;
   padding: 10px 5px;
   word-wrap: break-word;
+  color: #383838;
 }
 #block-itg-menu-manager-vertical-menu a:hover {
   background: #fff;
@@ -10569,3 +10584,8 @@ footer .footer-copyright {
 }
 
 /*like dislike photo page end*/
+.searh-all-filters .search-filter {
+  text-transform: uppercase;
+  color: #777777;
+  padding-top: 13px;
+}

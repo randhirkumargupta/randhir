@@ -862,8 +862,12 @@ jQuery(document).ready(function () {
     }
   });
      
-     
-     
+  // jQuery code for story form templates-tab   
+  jQuery('.templates-tab').on('click', 'span', function(){
+    var get_attr = jQuery(this).attr('data-ripple'), set_class = '.' + get_attr + "-form";
+    console.log(set_class);
+    jQuery(this).addClass('active').siblings().removeClass('active'), jQuery('.tab-form').hide(), jQuery(set_class).show();
+  });   
      
 });
 

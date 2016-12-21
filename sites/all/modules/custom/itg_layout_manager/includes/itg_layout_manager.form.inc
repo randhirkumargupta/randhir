@@ -205,14 +205,13 @@ function layout_section_widget2_search_form($form, &$form_state) {
  * Implementation of hook_form for section cards
  * {@inheritdoc}
  */
-function highlights_widgets_search_form($form, &$form_state) {
-  
+function highlights_widgets_search_form($form, &$form_state) {  
     
   $form['highlights_title'] = array(
     '#type' => 'textfield',
     '#size' => 60,
     '#attributes' => array('placeholder' => t('Search')),
-    '#autocomplete_path' => 'content-title-list/highlights/autocomplete',
+    '#autocomplete_path' => 'content-title-list/heighlights/autocomplete',
     '#maxlength' => 128,
   );  
   
@@ -239,7 +238,7 @@ function html_widgets_search_form($form, &$form_state) {
   );  
   
   $form['html_submit'] = array(
-    '#markup' => '<a class="btn btn-save" href="javascript:void(0)" id="layout-html-submit">Go</a>',
+    '#markup' => '<a href="javascript:void(0)" id="layout-html-submit">Go</a>',
     '#weight' => 20,
   );  
 

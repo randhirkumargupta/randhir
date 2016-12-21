@@ -187,9 +187,10 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     drupal_add_js('
       jQuery(function() {
         jQuery( "#edit-changed-max-datepicker-popup-0 , #edit-changed-min-datepicker-popup-0" ).datepicker({  
+          dateFormat: \'dd/mm/yy\',
           changeMonth:true,
           changeYear:true,
-          maxDate: new Date() 
+          maxDate: new Date() ,
         });
       });
     ',"inline");

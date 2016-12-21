@@ -7333,6 +7333,12 @@ div.node{
   .itg-form-section-wrapper{
     border: 1px solid #d9d9d9;
     margin-top: 20px;
+    display: inline-block;
+    width: 100%;
+    .itg-form-section{
+      float: left;
+      width: 100%;
+    }
   }
   .itg-form-main h2, .itg-sidebar-form h2{
     background-color: #d9d9d9; 
@@ -8928,7 +8934,8 @@ div.node{
     }
 
     .switch-title {
-        margin: 10px 0 20px 0;
+        float: left;
+        margin: 8px 10px 0px 20px;
     }
 
     .switch-field input {
@@ -8985,4 +8992,67 @@ div.node{
     vertical-align: top;
     margin-right: 10px;
     }
+}
+
+#videoupload{
+    #edit-field-video-upload{
+        display: none;
+    }
+    .ftp_browse_field{
+        margin: 40px 0;
+    }
+}
+
+
+[id*="field-video-upload-add-more-wrapper"]{
+    [id*="field-video-upload-values"]{
+        thead{
+            display: none;
+        }
+        tr{
+            td{
+                &:nth-child(2){
+                    display: none;
+                }
+            }
+        }
+    }
+}
+.templates-tab-wrapper{
+  padding-top: 10px;
+  > label{
+    float: left;
+    padding: 6px 20px;
+    width: 220px;
+  }
+  .templates-tab{
+    padding-bottom: 10px;
+    > span{
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 300;
+      padding: 6px 12px;
+      text-align: center;
+      white-space: nowrap;
+      text-decoration: none;
+      background-color: #999;
+      border: 1px solid #999;
+      color: #fff;
+      box-shadow: 0 0 3px 0 #999;
+      text-transform: uppercase;
+      margin-right: 5px;
+      min-width: 100px;
+      display: inline-block;
+      vertical-align: top;
+      transition: all 300ms;
+      &.active{
+        background-color: #1fb5ad;
+        border: 1px solid #1fb5ad;
+      }
+    }
+  }
+  .tab-form{
+    padding-top: 10px;
+    display: none;
+  } 
 }

@@ -7709,6 +7709,14 @@ div.node #comments h2 {
 .node-photogallery-form .itg-form-section-wrapper {
   border: 1px solid #d9d9d9;
   margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+}
+.node-story-form .itg-form-section-wrapper .itg-form-section,
+.node-videogallery-form .itg-form-section-wrapper .itg-form-section,
+.node-photogallery-form .itg-form-section-wrapper .itg-form-section {
+  float: left;
+  width: 100%;
 }
 .node-story-form .itg-form-main h2, .node-story-form .itg-sidebar-form h2,
 .node-videogallery-form .itg-form-main h2,
@@ -9801,7 +9809,8 @@ div.node #comments h2 {
   margin-bottom: 20px;
 }
 .view-section-wise-draggable-content-order .switch-title {
-  margin: 10px 0 20px 0;
+  float: left;
+  margin: 8px 10px 0px 20px;
 }
 .view-section-wise-draggable-content-order .switch-field input {
   display: none;
@@ -9849,4 +9858,57 @@ div.node #comments h2 {
   display: inline-block;
   vertical-align: top;
   margin-right: 10px;
+}
+
+#videoupload #edit-field-video-upload {
+  display: none;
+}
+#videoupload .ftp_browse_field {
+  margin: 40px 0;
+}
+
+[id*="field-video-upload-add-more-wrapper"] [id*="field-video-upload-values"] thead {
+  display: none;
+}
+[id*="field-video-upload-add-more-wrapper"] [id*="field-video-upload-values"] tr td:nth-child(2) {
+  display: none;
+}
+
+.templates-tab-wrapper {
+  padding-top: 10px;
+}
+.templates-tab-wrapper > label {
+  float: left;
+  padding: 6px 20px;
+  width: 220px;
+}
+.templates-tab-wrapper .templates-tab {
+  padding-bottom: 10px;
+}
+.templates-tab-wrapper .templates-tab > span {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  background-color: #999;
+  border: 1px solid #999;
+  color: #fff;
+  box-shadow: 0 0 3px 0 #999;
+  text-transform: uppercase;
+  margin-right: 5px;
+  min-width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  transition: all 300ms;
+}
+.templates-tab-wrapper .templates-tab > span.active {
+  background-color: #1fb5ad;
+  border: 1px solid #1fb5ad;
+}
+.templates-tab-wrapper .tab-form {
+  padding-top: 10px;
+  display: none;
 }
