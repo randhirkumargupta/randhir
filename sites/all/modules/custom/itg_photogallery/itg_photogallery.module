@@ -85,6 +85,73 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
     $node_type = ucfirst($form_state['node']->type);
     $node_type = str_replace("_", " ", $node_type);
     $title = ucfirst($form_state['node']->title);
+ 
+    if($form_state['node']->field_story_facebook_video['und'][0]['fid'])
+    {
+        $fids[]=$form_state['node']->field_story_facebook_video['und'][0]['fid'];
+    }
+    if($form_state['node']->field_story_twitter_video['und'][0]['fid'])
+    {
+        $fids[]=$form_state['node']->field_story_twitter_video['und'][0]['fid'];
+    }
+    // start use video /publish
+    if(!empty($fids))
+    {
+     foreach ($fids as $video_fid) {
+        if ($video_fid != '' && is_numeric($video_fid)) {
+            $query = db_select('dailymotion_response_details', 'drd');
+            $query->fields('drd', array('fid', 'video_id'));
+            $query->condition('fid', $video_fid, '=');
+            $dailymotion_video_result = $query->execute()->fetchAssoc();
+            if (empty($dailymotion_video_result['fid'])) {
+                // Video not uploaded on dailymotion
+                $file_details = file_load($video_fid);
+                $real_path = drupal_realpath($file_details->uri);
+                $response = itg_videogallery_dailymotion($real_path, $file_details->uri, $video_fid, $tags_value, $node_id);
+                // Perform playlist and tags when new video create.
+                $response_result['video_id'] = $response['id'];
+                $response_result['fid'] = $response['fid'];
+                $nid = db_insert('dailymotion_response_details')
+                        ->fields(array(
+                            'title' => $response['title'],
+                            'channel' => $response['channel'],
+                            'fid' => $response['fid'],
+                            'tags' => $response['tags'],
+                            'video_id' => $response['id'],
+                            'nid' => $node_id,
+                            'upload_time' => REQUEST_TIME,
+                            'video_duration' => $response['duration'],
+                            'dailymotion_published' => 1,
+                            'type' => 'local',
+                            'name' => $file_details->filename,
+                        ))
+                        ->execute();
+                itg_videogallery_unlink_video_playlist($response_result, $playlist_name, $tags_value);
+                itg_videogallery_edit_dailymotion($response_result, $playlist_name, $node_id);
+            }
+            else {
+                // Video uploaded on dailymotion
+                // Updating status of video
+                $api = itg_videogallery_dailymotion_api();
+                $api->post('/video/' . $dailymotion_video_result['video_id'], array('published' => true));
+
+                try {
+                    $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+                            ->fields(array(
+                                'dailymotion_published' => 1,
+                            ))
+                            ->condition('fid', $dailymotion_video_result['fid'], '=')
+                            ->execute();
+                } catch (Exception $e) {
+                    
+                }
+
+                itg_videogallery_unlink_video_playlist($dailymotion_video_result, $playlist_name, $tags_value);
+                itg_videogallery_edit_dailymotion($dailymotion_video_result, $playlist_name, $node_id);
+            }
+        }
+    }
+    }
 
     if (isset($_SESSION['messages']['status'])) {
         unset($_SESSION['messages']['status']);
