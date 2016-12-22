@@ -53,9 +53,11 @@ $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $no
               $flash_old_event = itg_event_backend_flashback($node->nid);
               print '<li><a href="#" style="color:'.$menu_font_color.'">Flashback</a>'.$flash_old_event.'</li>';
             }
-
+            
+            if ($node->nid) {
+              print '<li>'.l('Sing and Win', $baseurl.'/sing-and-win', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+            }
           ?>
-        <li><?php print l('Sing and Win', $baseurl.'/sing-and-win', array('attributes' => array("style" => "color:$menu_font_color"))); ?></li>
       </ul>
     </div>
     <div class="col-md-4">
