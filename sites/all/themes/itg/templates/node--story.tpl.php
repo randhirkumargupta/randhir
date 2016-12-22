@@ -269,11 +269,13 @@ if (!empty($content)):
                             $factoidsBlock = '';
                             if (isset($node->field_story_template_factoids) && !empty($node->field_story_template_factoids)) {
                               $factoidsSocialShare['title'] = $node->field_story_factoids_title[LANGUAGE_NONE][0]['value'];
+                              $factoidsSocialShare_title = preg_replace("/'/", "\\'", $factoidsSocialShare['title']);
+                              $factoidsSocial_share_title= htmlentities($factoidsSocialShare_title, ENT_QUOTES);
                               $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
                               $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . addslashes(htmlspecialchars($factoidsSocialShare['title'], ENT_QUOTES)) . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $factoids_img . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $factoids_img . "'" . ')"><i class="fa fa-facebook"></i></a></li>
                                  <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
                                  <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
                                  </ul></div></div>';
