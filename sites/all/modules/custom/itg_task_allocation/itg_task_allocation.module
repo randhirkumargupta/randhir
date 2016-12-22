@@ -166,7 +166,7 @@ function itg_task_allocation_form_views_exposed_form_alter(&$form, &$form_state,
     $form['#info']['filter-created']['label'] = '';
     $form['created']['min'] = array(
       '#type' => 'date_popup',
-      '#title' => t('From'),
+      '#title' => t('Calender From'),
       '#date_format' => 'd/m/Y',
       '#date_year_range' => '-1:' . (date('Y')),
       '#datepicker_options' => array(
