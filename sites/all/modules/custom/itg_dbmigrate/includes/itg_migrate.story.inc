@@ -181,7 +181,9 @@ class ItgStoryMigration extends XMLMigration {
     
     //code for body
     $this->addFieldMapping('body', 'storybody')->xpath('storybody');
-    
+    $this->addFieldMapping('body:format', 'format')
+         ->defaultValue('full_html');
+     $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->defaultValue('published');
     //code for image
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
@@ -279,6 +281,14 @@ class ItgStoryMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
+    //Workbench 
+    if ((string) $row->xml->state == '1') {
+      $row->workbench_moderation_state_new = 'published';
+    }
+    else {
+      $row->workbench_moderation_state_new = 'draft';
+    }
+    
     // Mosimage in body
     if(!empty($row->xml->mosimage)){
       $mos_count= array();
@@ -422,7 +432,14 @@ class ItgStoryMigration extends XMLMigration {
     // change checkboxes value
     if ((string) $row->xml->story_issue == 'yes') {
       $row->xml->story_issue = 'magazine_issue_story';
+    }else{
+      $row->xml->story_issue = '';
     }
+    // select magazine select_magazine
+    if ((string) $row->xml->select_magazine == 0) {
+      $row->xml->select_magazine = '';
+    }
+    
     if ((string) $row->xml->selectlisticletemplates == 1) {
       $row->xml->selectlisticletemplates = 'bullet_points';
     }
@@ -632,9 +649,10 @@ class ItgStoryMigration extends XMLMigration {
     }
     
     //facebook instant article filed
-    if (isset($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate) && !empty($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate)) {
+    if (isset($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate) && !empty($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate->gallery_id)) {
       $pos_count=0;
       foreach ($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate as $facebook_article) {
+       if(!empty($facebook_article->gallery_id_position) || !empty($facebook_article->gallery_id)){
         $position = (string) $facebook_article->gallery_id_position;
         $gallery_id = (string) $facebook_article->gallery_id;
         $values = array(
@@ -647,6 +665,7 @@ class ItgStoryMigration extends XMLMigration {
         $field_collection_item_facebook->save(TRUE);
         $node->field_facebook_gallery_associate[LANGUAGE_NONE][$pos_count]['value'] = $field_collection_item_facebook->item_id;
         $pos_count++;
+       }
       }
     }
 

@@ -1,8 +1,10 @@
 <?php
+if (!empty($data['itg_main_manu_header'])) {
 foreach ($data['itg_main_manu_header'] as $key => $val) {
-  if ($val['#localized_options']['attributes']['title'] == 1) {
+  if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
     $data['itg_main_manu_header'][$key]['#attributes']['class'][] = 'sponser-link';
   }
+}
 }
 ?>
 <div class="header-ads mhide">

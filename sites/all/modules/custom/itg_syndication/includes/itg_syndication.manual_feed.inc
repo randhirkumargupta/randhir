@@ -9,7 +9,9 @@
  * {@inheritdoc}
  */
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
-  $magazine_id = $form_state['input']['magazine-name'];
+  if (!empty($form_state['input']['magazine-name'])) {
+    $magazine_id = $form_state['input']['magazine-name'];
+  }
   if (isset($form_state['view']->name) && $form_state['view']->name == 'syndication_rule_listing') {
     $form['field_syndication_rule_title_value']['#options'] = itg_syndication_get_client("yes");
     unset($form['field_syndication_rule_title_value']['#options']['_none']);
