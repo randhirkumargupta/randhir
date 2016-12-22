@@ -254,7 +254,7 @@ header{
         .row{
             margin: 0 auto;
             @include display-inline;
-        }
+        }        
     }
     .login-link{
         text-align: right;
@@ -8975,7 +8975,8 @@ input[type="radio"]:checked + label:after{
         padding-top: 13px;
     }
 }
-/*css start story page submit story */
+/*css start story page, photo page, video page submit story */
+.node-type-videogallery, .node-type-photogallery, .node-type-story{
     .ugc-top-heading{
         h2{
             text-transform: uppercase;
@@ -9031,8 +9032,7 @@ input[type="radio"]:checked + label:after{
         }
     }
 }
-.node-type-story{
-    #cboxLoadedContent{        
+#cboxLoadedContent{        
         background: url(../images/tab-loading.gif);
         background-position: center;
         background-repeat: no-repeat;
