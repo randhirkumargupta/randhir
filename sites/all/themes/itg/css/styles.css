@@ -1482,7 +1482,7 @@ footer .footer-copyright {
   border-right: none;
 }
 .big-news .big-story-detail {
-  max-height: 160px;
+  max-height: 80px;
   overflow: auto;
 }
 .big-news .big-story-detail li {
