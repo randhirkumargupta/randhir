@@ -70,6 +70,11 @@ function itg_event_registration_theme() {
           'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
           'variables' => array('data' => NULL),
       ),
+      'event_registration_not_published' => array(
+          'template' => 'event-registration-not-published',
+          'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+          'variables' => array('node' => NULL),
+      ),
       'event_registration_closed' => array(
           'template' => 'event-registration-closed',
           'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',

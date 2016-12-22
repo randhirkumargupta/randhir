@@ -14,6 +14,7 @@ function itg_event_registration_form($form, &$form_state) {
   if ($arg[0] == 'event') {
     $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
     $node = menu_get_object("node", 1, $path);
+
   } elseif (is_numeric($arg[1])) {
     $node = node_load($arg[1]);
   } else {
@@ -60,13 +61,7 @@ function itg_event_registration_form($form, &$form_state) {
     }
   }
   else {
-    if ($node->title) {
-      $message = 'Event <strong>' . ucwords($node->title) . '</strong> is unpublished. ';
-    }
-    else {
-      $message = 'Event not found. ';
-    }
-    return $message . 'Sorry! you can not register for this event.';
+      return itg_event_registration_get_status_message($node, 'not_published');
   }
 }
 
