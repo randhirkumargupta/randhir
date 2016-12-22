@@ -181,7 +181,9 @@ class ItgStoryMigration extends XMLMigration {
     
     //code for body
     $this->addFieldMapping('body', 'storybody')->xpath('storybody');
-    
+    $this->addFieldMapping('body:format', 'format')
+         ->defaultValue('full_html');
+     $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->defaultValue('published');
     //code for image
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
@@ -279,6 +281,14 @@ class ItgStoryMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
+    //Workbench 
+    if ((string) $row->xml->state == '1') {
+      $row->workbench_moderation_state_new = 'published';
+    }
+    else {
+      $row->workbench_moderation_state_new = 'draft';
+    }
+    
     // Mosimage in body
     if(!empty($row->xml->mosimage)){
       $mos_count= array();
