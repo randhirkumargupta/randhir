@@ -237,10 +237,9 @@ jQuery('document').ready(function() {
             parent.jQuery('#edit-field-video-upload-add-more-number').val(1);
             parent.jQuery("[name='field_video_upload[file_entity_holder_nums]']").val(videogallery_new_file_hold);
             parent.jQuery("[name='field_video_upload_add_more']").mousedown();
-            $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
-
-                parent.jQuery.colorbox.close();
-            });
+           setTimeout(function() {
+                        parent.jQuery.colorbox.close();
+                    }, 9000);
         } else {
             alert("Select video file and upload");
         }
