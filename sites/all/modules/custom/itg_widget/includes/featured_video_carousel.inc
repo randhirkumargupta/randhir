@@ -15,7 +15,7 @@ module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 function itg_widget_featured_video_carousel_data($info, $slider_type) {
     $data = '';
     if (is_array($info)) {
-        watchdog('Widget', 'inside Home page feature query');
+       // watchdog('Widget', 'inside Home page feature query');
         $view_name = isset($info['view_name']) ? $info['view_name'] : "";
         $page = isset($info['page']) ? $info['page'] : "";
         // condition to validate

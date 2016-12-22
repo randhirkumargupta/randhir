@@ -20,11 +20,11 @@ function itg_task_allocation_init() {
  * Implements hook_form_alter().
  */
 function itg_task_allocation_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'task_idea_allocation_tracking_node_form') {
+  /*if ($form_id == 'task_idea_allocation_tracking_node_form') {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery(".vertical-tabs-list").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+  }*/
 }
 
 /**
@@ -592,14 +592,14 @@ function expiredtask_authormail_content($var) {
 }
 
 /**
- * Implements hook__cronapi().
+ * Implements hook_cronapi().
  * {@inheritdoc}
  */
 function itg_task_allocation_cronapi($op, $job = NULL) {
   $items['task_complete_mail'] = array(
     'description' => 'Mail shoot after task completion date.',
     'weight' => 5,
-    'callback' => 'itg_task_allocation_expiredmail',
+    'callback' => 'itg_task_allocation_expirestatus_enddatemail',
   );
   $items['task_ending_mail'] = array(
     'description' => 'Mail shoot after task ending date.',

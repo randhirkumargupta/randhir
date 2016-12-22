@@ -529,6 +529,7 @@ span.error{
   padding-bottom: 30px;
   @extend .pos-rel;
   @extend .full;
+  min-height: 700px;
 }
 body.sidebar-second{
   .sidebars{
@@ -8996,15 +8997,68 @@ div.node{
 
 #videoupload{
     #edit-field-video-upload{
-        display: none;
+      [id*="field-video-upload-values"]{
+        tbody tr:first-child, thead, & + div.clearfix{
+          display: none;
+        }
+        tbody tr td{
+          .file-widget{
+            height: 34px;
+            @extend .pos-rel;
+            &.has-file:before{
+              display: none;
+            }
+            .file{
+              font-size: 12px;
+              @extend .dib;
+              @extend .vtop;
+              margin-top: 8px;
+              a{
+                color: #2f2f2f;
+                @extend .dib;
+                @extend .of-hide;
+                text-overflow: ellipsis;
+                @extend .vtop;
+                white-space: nowrap;
+                width: 82px;
+              }
+            }
+            .file-size{
+              @extend .dib;
+              font-size: 12px;
+              @extend .vtop;
+              margin-top: 8px;
+            }
+            > input[value="Remove"]{
+              display: none;
+              border: none;
+              background: url('../images/cross_small.png') center center no-repeat !important;
+              width: 12px;
+              height: 12px;
+              text-indent: -9999px;
+              margin: 12px 0 4px 5px;
+              left: 175px !important;
+            }
+            .form-file{
+              margin: 6px 0 0;
+              width: 118px;
+            }
+          }
+          > .form-submit.cancel, .ajax-new-content > .form-submit.cancel{
+            @extend .btn;
+            @extend .btn-cancel;
+            margin-left: 220px;
+          }
+        }
+      }
     }
     .ftp_browse_field{
-        margin: 40px 0;
+        margin: 10px 0 0;
     }
 }
 
 
-[id*="field-video-upload-add-more-wrapper"]{
+/*[id*="field-video-upload-add-more-wrapper"]{
     [id*="field-video-upload-values"]{
         thead{
             display: none;
@@ -9017,7 +9071,7 @@ div.node{
             }
         }
     }
-}
+}*/
 .templates-tab-wrapper{
   padding-top: 10px;
   > label{
@@ -9055,4 +9109,39 @@ div.node{
     padding-top: 10px;
     display: none;
   } 
+}
+#layout-html-submit, #layout-highlights-submit{
+  @extend .add-more;
+  margin: 0 10px 10px;
+}
+[id*="daily-motion-video-dashboard"]{
+  @extend .node-form;
+  fieldset{
+    border: none;
+    legend{
+      display: none;
+    }
+    .form-item{
+      padding: 0;
+      float: left;
+      margin-right: 10px;
+      > label{
+        float: none;
+        display: block;
+        padding: 0 0 5px;
+      }
+      &.form-item-filtertype{
+        select{
+          margin-top: 23px;
+        }
+      }
+    }
+    #edit-display-button{
+      @extend .add-more;
+      margin-top: 54px;
+    }
+  }
+  table{
+    @extend .views-table;
+  }
 }
