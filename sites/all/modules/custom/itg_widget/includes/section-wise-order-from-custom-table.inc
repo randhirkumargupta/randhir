@@ -184,9 +184,9 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
                 ->range(0, $range);
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $entity_data = array();
-        foreach ($result as $entity_data_node) {
-            $entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
-            $entity_data[] = $entity_info[$entity_data_node['nid']];
+       foreach ($result as $entity_data_node) {
+           
+            $entity_data[] = $entity_data_node;
         }
         return $entity_data;
     }

@@ -580,6 +580,7 @@ else if ($widget_style == 'home-watch') {
             <ul class="">
                 <?php
                 foreach ($data as $count => $entity) {
+                    
                     $video_class = "pic-no-icon";
                     if (strtolower($entity['type']) == 'videogallery') {
                         $video_class = 'video-icon';
