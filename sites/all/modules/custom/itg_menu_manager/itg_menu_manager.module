@@ -267,15 +267,15 @@ function itg_menu_manager_form_validate($form, &$form_state) {
   $fid = $values['category_icon'];
   $url = $values['url'];
   
-  if ($fid) {
-    $file = file_load($fid);
-    $image_size = getimagesize(file_create_url($file->uri));
-    $image_width = $image_size[0];
-    $image_height = $image_size[1];
-    if($image_width > 200 || $image_height > 100) {
-      $errors[] = t("Max allowed image width*height is 200*100 in pixel.");
-    }
-  }
+//  if ($fid) {
+//    $file = file_load($fid);
+//    $image_size = getimagesize(file_create_url($file->uri));
+//    $image_width = $image_size[0];
+//    $image_height = $image_size[1];
+//    if($image_width > 200 || $image_height > 100) {
+//      $errors[] = t("Max allowed image width*height is 200*100 in pixel.");
+//    }
+//  }
 
   if ($url_type == 'external' && !empty($url)) {
     if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
@@ -991,7 +991,7 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-function itg_menu_manager_webform_js_submit(&$form, $form_state) {
+function itg_menu_manager_webform_js_submit(&$form, &$form_state) {
   // define the $sid variable (submission id from webform)
   $sid = $form_state['values']['details']['sid'];
   // if we have a sid then we know the form was properly submitted, otherwise, we'll just return the existing $form array
@@ -999,10 +999,8 @@ function itg_menu_manager_webform_js_submit(&$form, $form_state) {
     // create an array up with the confirmation message, retreived from the webform node
     $confirmation = t("You feedback has been recived. Thank you!");
     drupal_set_message($confirmation);
-//    foreach ($form['#node']->webform['components'] as $key => $field_name) {
-//      $form['#node']->webform['components'][$key]['value'] = "test";
-//      //p($form['#node']->webform['components'][$key]);
-//    }
+    $form['submitted']['feedback']['#default_value'] = "";
+    $form['submitted']['feedback']['#value'] = "";
     // return the confirmation message
     return $form;
   }
