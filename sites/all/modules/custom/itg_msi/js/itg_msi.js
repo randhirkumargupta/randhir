@@ -21,29 +21,19 @@
 
       //Restrict print issue date to select previous date in magazine form 
       if(type === 'Magazine'){
-//        $('#edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-0, #edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-1').datepicker({
-//          changeYear: true,
-//          minDate: '0',
-//          readonly: true
-//        });
         $('#edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-0, #edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-1, #edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
       
       if(type === 'Supplement'){
-        $('#edit-field-supp-issue-und-0-value-datepicker-popup-0, #edit-field-supp-issue-und-0-value-datepicker-popup-1').datepicker({
-          changeYear: true,
-          minDate: '0',
-          readonly: true
-        });
         $('#edit-field-supp-issue-und-0-value-datepicker-popup-0, #edit-field-supp-issue-und-0-value-datepicker-popup-1, #edit-field-supp-issue-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
       
       if(type === 'Issue'){
-        $('#edit-field-issue-title-und-0-value-datepicker-popup-0, #edit-field-issue-title-und-0-value-datepicker-popup-1').datepicker({
-          changeYear: true,
-          minDate: '0',
-          readonly: true
-        });
+//        $('#edit-field-issue-title-und-0-value-datepicker-popup-0, #edit-field-issue-title-und-0-value-datepicker-popup-1').datepicker({
+//          changeYear: true,
+//          minDate: '0',
+//          readonly: true
+//        });
         $('#edit-field-issue-title-und-0-value-datepicker-popup-0, #edit-field-issue-title-und-0-value-datepicker-popup-1, #edit-field-issue-title-und-0-value-datepicker-popup-3').prop("readonly", true);
       } 
       
