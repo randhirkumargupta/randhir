@@ -94,7 +94,7 @@ else if ($widget_style == 'buying-guid') {
                     $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                 }
                 else {
-                    $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_170X127.jpg";
+                    $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg";
                 }
 
 
@@ -181,7 +181,7 @@ else if ($widget_style == 'in-depth') {
                         $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                     }
                     else {
-                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_170X127.jpg";
+                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg";
                     }
                     ?>
 
@@ -275,7 +275,7 @@ else if ($widget_style == 'movies-celebrities') {
                         $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                     }
                     else {
-                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_170X127.jpg";
+                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg";
                     }
                     ?>
 
@@ -436,7 +436,7 @@ else if ($widget_style == 'oscar-news') {
                         $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                     }
                     else {
-                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_170X127.jpg";
+                        $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg";
                     }
                     ?>
                     <div class="col-md-12">
@@ -759,7 +759,7 @@ else if ($widget_style == 'election-so-sorry') {
                     else {
                         ?>
                         <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                            <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage_170X127.jpg" />
+                            <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage_370X208.jpg" />
                         </a>
                     <?php } ?>
                     <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['title'] ?> ">
@@ -996,7 +996,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                 else {
                     ?>
                         <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                            <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage_170X127.jpg" />
+                            <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage_370X208.jpg" />
                         </a>
                 <?php } ?>
                     <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
