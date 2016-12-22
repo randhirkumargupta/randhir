@@ -32,10 +32,10 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         unset($errors[$field]);
       }
     }
-
-    $form['field_associate_event_photo']['#suffix'] = '<div class="event-photo-des description">' . $form['field_associate_event_photo'][LANGUAGE_NONE]['#description'] . '</div>';
-    $form['field_associate_event_video']['#suffix'] = '<div class="event-video-des description">' . $form['field_associate_event_video'][LANGUAGE_NONE]['#description'] . '</div>';
-    $form['field_e_associate_highlights']['#suffix'] = '<div class="event-video-des description">' . $form['field_e_associate_highlights'][LANGUAGE_NONE]['#description'] . '</div>';
+//
+//    $form['field_associate_event_photo']['#suffix'] = '<div class="event-photo-des description">' . $form['field_associate_event_photo'][LANGUAGE_NONE]['#description'] . '</div>';
+//    $form['field_associate_event_video']['#suffix'] = '<div class="event-video-des description">' . $form['field_associate_event_video'][LANGUAGE_NONE]['#description'] . '</div>';
+//    $form['field_e_associate_highlights']['#suffix'] = '<div class="event-video-des description">' . $form['field_e_associate_highlights'][LANGUAGE_NONE]['#description'] . '</div>';
     $form['#after_build'][] = 'itg_event_backend_after_build';
     array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
     $form['actions']['cancel'] = array(
@@ -832,7 +832,7 @@ function itg_event_backend_node_insert($node) {
  */
 function itg_event_backend_node_update($node) {
   if ($node->type == 'event_backend') {
-    if ($node->domains != 1) {
+    if ($node->domains != '1' && $_GET['step'] == 'step_configuration') {
       itg_event_backend_insert_into_redirect($node);
     }
     $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
@@ -999,6 +999,7 @@ function itg_event_backend_menu() {
       'page callback' => 'itg_event_backend_page',
       'access callback' => TRUE,
   );
+  
   $items['programme'] = array(
       'page callback' => 'itg_event_backend_page',
       'access callback' => TRUE,
@@ -1044,7 +1045,17 @@ function itg_event_backend_menu() {
       'title' => 'Speaker Details',
       'access callback' => TRUE,
   );
+  $items['event/%/speaker-details'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'title' => 'Speaker Details',
+      'access callback' => TRUE,
+  );
   $items['sponsor-details'] = array(
+      'page callback' => 'itg_event_backend_page',
+      'title' => 'Sponsor Details',
+      'access callback' => TRUE,
+  );
+  $items['event/%/sponsor-details'] = array(
       'page callback' => 'itg_event_backend_page',
       'title' => 'Sponsor Details',
       'access callback' => TRUE,
@@ -1207,12 +1218,13 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
  * @return boolean
  */
 function itg_event_get_host_name() {
-  $arg = arg(1);
-  if (!empty($arg[1]) && is_numeric($arg[1])) {
-    global $base_url;
-    $host = $base_url . '/' . drupal_get_path_alias('node/' . arg(1));
-  }
-  else {
+  global $base_url;
+  $arg = arg();
+  if ($arg[0] == 'event') {
+    $host = $base_url .'/'. $arg[0] . '/' . $arg[1];
+  } elseif (!empty($arg[1]) && is_numeric($arg[1])) {
+    $host = $base_url . '/' . drupal_get_path_alias('node/' . $arg[1]);
+  } else {
     if (module_exists('domain')) {
       $query = db_select('domain', 'd');
       $query->fields('d', array('subdomain', 'scheme'));
@@ -1220,6 +1232,24 @@ function itg_event_get_host_name() {
       $result = $query->execute()->fetchAssoc();
       $host = $result['scheme'] . '://' . $result['subdomain'];
     }
+  }
+  return $host;
+}
+
+/**
+ * Get host for all events(This function is calling from backend(View: managa-event-backend))
+ * @global string $base_url
+ * @param type $nid
+ * @return string
+ */
+function itg_event_get_host_name_for_all_events($nid = NULL) {
+  global $base_url;
+ 
+  $running_on_domain = itg_event_backend_get_redirect_record('source', 'node/'.$nid);
+  if(!empty($running_on_domain)) {
+    $host = $running_on_domain['redirect'];
+  } else {
+    $host = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
   }
   return $host;
 }
