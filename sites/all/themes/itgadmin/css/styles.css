@@ -6679,7 +6679,7 @@ div.node #comments h2 {
 #edit-brief-idea-limit {
   color: green;
   float: right;
-  margin-top: -36px;
+  margin-top: 15px;
   text-align: right;
 }
 
@@ -7551,7 +7551,7 @@ div.node #comments h2 {
 }
 
 .page-submit-idea .top-actions a.button, .page-submit-idea .top-actions [id*="itg-manage-budget"] .form-submit + a, [id*="itg-manage-budget"] .page-submit-idea .top-actions .form-submit + a {
-  padding-top: 9px;
+  padding-top: 6px;
 }
 
 #menu-item-delete-form {
@@ -9985,4 +9985,8 @@ div.node #comments h2 {
 }
 [id*="daily-motion-video-dashboard"] fieldset #edit-display-button {
   margin-top: 54px;
+}
+
+.page-mydraft-story .view .view-filters .views-exposed-form .views-widget-filter-title {
+  width: 380px;
 }

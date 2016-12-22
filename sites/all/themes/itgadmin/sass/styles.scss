@@ -6256,7 +6256,7 @@ div.node{
 #edit-brief-idea-limit {
     color: green;
     float: right;
-    margin-top: -36px;
+    margin-top: 15px;
     text-align: right;
 }
 #pti-basic-info{
@@ -7197,7 +7197,7 @@ div.node{
       @extend .btn-save;
     }
     a.button{
-      padding-top: 9px;
+      padding-top: 6px;
     }
   }
 }
@@ -9144,4 +9144,7 @@ div.node{
   table{
     @extend .views-table;
   }
+}
+.page-mydraft-story .view .view-filters .views-exposed-form .views-widget-filter-title{
+  width: 380px;
 }
