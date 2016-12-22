@@ -9030,6 +9030,7 @@ div.node{
               margin-top: 8px;
             }
             > input[value="Remove"]{
+              display: none;
               border: none;
               background: url('../images/cross_small.png') center center no-repeat !important;
               width: 12px;

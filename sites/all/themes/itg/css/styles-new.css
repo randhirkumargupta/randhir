@@ -29,6 +29,13 @@
 /*mixin for listing with image*/
 /*mixin for pager*/
 /*CSS For Search Page*/
+input[type="text"], textarea {
+  transition: all 300ms;
+}
+input[type="text"]:focus, textarea:focus {
+  border-color: #026bc5;
+}
+
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper {
   width: 100%;
   padding: 0;
