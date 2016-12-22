@@ -72,6 +72,7 @@ window.addEventListener("message", function(ev) {
       <!-- Page title for specific page -->
       <?php $arg = arg(); ?>
       <?php
+          $flag = '';
           switch ($arg[0]) {
               case 'product':
               case 'cart':

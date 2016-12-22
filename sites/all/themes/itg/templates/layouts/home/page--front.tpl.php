@@ -14,7 +14,7 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';  
 }
-
+$gray_bg_layout = '';
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
@@ -464,7 +464,7 @@ if ($theme != 'itgadmin') {
          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="ad-widget">
-                      <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad2']);?></div>
+                      <div class="sidebar-ad"><?php print $itg_ad['200*200_right_bar_ad2'];?></div>
                     </div>
 <!--              <div class="droppable <?php //print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php //print $widget_data['itg-block-11']['widget_name']; ?>">
