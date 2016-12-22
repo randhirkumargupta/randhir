@@ -2668,7 +2668,7 @@ function get_rhs_block_display_condtion($delta = '') {
                 }
                 break;
             case 'top_takes_videos_widget':
-                if ((in_array($arg[1], $top_takes_node_array) && isset($arg[1])) || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'mega_review_critic') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+                if ((in_array($arg[1], $top_takes_node_array) && isset($arg[1])) || $arg[0] == 'itg-quiz' || $arg[0] == 'programmes' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || ($page_argument[0]->type == 'story') || ($page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
                     return TRUE;
                 }
                 break;
