@@ -70,7 +70,8 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>    
-    <main id="main" class="container">
+    <main id="main" class="container pos-rel">
+         <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -91,17 +92,27 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?>">
+<div class="itg-layout-container <?php echo $itg_class; ?>">    
+    <!-- Breaking news band -->
+    <?php $break_news_band = views_embed_view('breaking_news', 'block_1'); ?>
+    <?php if ($break_news_band != ''): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php echo $break_news_band; ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
+    <!-- End of Breaking news band -->
     <?php if(isset($widget_data['big_story'])) : ?>
     <div class="row">
         <div class="col-md-12">
             <?php print $widget_data['big_story']; ?>
-        </div>    
+        </div>            
     </div>
     <?php endif; ?>
 
-    <div class="row itg-top-section pos-rel">
-        <?php print render($page['vertical_menu']); ?>
+    <div class="row itg-top-section">
+       
         <div class="top-block">
 
             <div class="top-colum-2">
@@ -267,8 +278,7 @@ if ($theme != 'itgadmin') {
 <div class="itg-layout-container itg-front">
   <!--Common section strat here-->
   <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row itg-common-section">
-
+    <div class="row itg-common-section">        
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -819,8 +829,7 @@ if( $theme != 'itgadmin')
           <?php //print $sidebar_second; ?>
         </aside>
       <?php endif; ?>
-    </main>
-
+    </main>      
 
     <?php print render($page['footer']); ?>
 

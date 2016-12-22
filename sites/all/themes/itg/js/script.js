@@ -556,17 +556,14 @@ jQuery(document).ready(function () {
     }*/
    var el = jQuery('#block-itg-menu-manager-vertical-menu');
      var totlWidth = jQuery(window).width();
-     var totlHeight = jQuery(window).height();
+     var totlHeight = jQuery(window).outerHeight(true);
      if (el.length) { 
       //var stickyTop = el.offset().top; 
       //var stickyHeight = el.height();
 
       jQuery(window).scroll(function(){ 
-         var limit = jQuery('footer').offset().top - totlHeight;
-         console.log("footer-set" + limit);         
-          //var flimit = limit - 375;          
-          var windowTop = jQuery(window).scrollTop();           
-          console.log(windowTop);
+         var limit = jQuery('footer').offset().top - totlHeight;                   
+          var windowTop = jQuery(window).scrollTop();                     
           if(windowTop > 160 ){              
                 var finalWidth = (totlWidth - 1200) / 2 ;
                 el.css({
@@ -583,7 +580,7 @@ jQuery(document).ready(function () {
                    'bottom': 'auto'
                });
           }
-          if(windowTop > limit){              
+          if(windowTop > limit + 315){              
               el.css({
                    'position': 'absolute',
                    'left': '-60px',

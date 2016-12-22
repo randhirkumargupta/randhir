@@ -3,14 +3,14 @@
     <ul>
       <?php foreach ($data as $key => $node_data) { 
            $video_class = "";
-        if (strtolower($node_data['node_load_data']->type) == 'videogallery') {
+        if (strtolower($node_data['type']) == 'videogallery') {
             $video_class = 'video-icon';
         }
         ?>
         <li class="dont-miss-listing" id="dont-miss-<?php print $key ?>">
-          <?php if (!empty($node_data['node_load_data']->field_story_small_image['und'][0]['uri'])) { ?>
+          <?php if (!empty($node_data['si_file_uri'])) { ?>
             <div class="dm-pic">
-              <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['node_load_data']->nid}") ?>">
+              <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
                 <img src="<?php print image_style_url("widget_small", $node_data['node_load_data']->field_story_small_image['und'][0]['uri']); ?>" />
               </a>
             </div>

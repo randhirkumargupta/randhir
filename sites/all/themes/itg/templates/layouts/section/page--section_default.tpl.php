@@ -83,7 +83,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
           $cls = 'col-md-9';
         endif;
     ?>
-    <main id="main" class="container">
+    <main id="main" class="container pos-rel">
+     <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -118,8 +119,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     </div>
     <?php endif; ?>
 
-    <div class="row itg-top-section pos-rel">
-        <?php print render($page['vertical_menu']); ?>
+    <div class="row itg-top-section">        
         <div class="row">
             <div class="col-md-8 col-sm-12 col-sx-12 left-side">
             <div class="top-colum-2">

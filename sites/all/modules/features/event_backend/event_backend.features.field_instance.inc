@@ -2092,7 +2092,16 @@ function event_backend_field_default_field_instances() {
   // 'node-event_backend-field_story_expert_description'.
   $field_instances['node-event_backend-field_story_expert_description'] = array(
     'bundle' => 'event_backend',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => '<li>Licence of copyright in the website and restrictions on what may be done with the material on the website) </li>
+<li>Disclaimer of liability;</li>
+<li>Clause governing the use of password and restricted areas of the website;</li>
+<li>An acceptable use clause;</li>
+<li>A variation clause;</li>
+<li>An entire agreement clause;</li>',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(

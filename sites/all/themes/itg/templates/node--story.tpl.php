@@ -79,7 +79,11 @@ if (!empty($content)):
                                     <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span>SHARES</li>
                                     <li><?php print date('F j, Y', $node->created); ?>   </li>
                                     <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
-                                    <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
+                                    <?php if(!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+                                    <li>
+                                    <?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?>
+                                    </li>
+                                    <?php } ?>
                                 </ul>
                                 <ul class="social-links mhide">
                                     <li><a href="javascript:" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
@@ -117,6 +121,24 @@ if (!empty($content)):
                         <?php } ?>
                     </div>  
                 <?php } ?>
+                <div class="related-content-left">
+                <?php
+                  $related_content = itg_get_related_content(arg(1));
+                  if (!empty($related_content)) {
+                    $related_story = '<div class="related_story"><h3>Related</h3>';
+                    $related_content = explode(',', $related_content);
+                    foreach ($related_content as $fn_result) {
+                      $related_content = explode('_', $fn_result);
+                      $final_related [] = $related_content[1];
+                    }
+                    $final_related = implode(' OR ', $final_related);
+                    $related_story.= views_embed_view('related_story', 'page', $final_related);
+                    '</div>';
+
+                    //print $related_story;
+                  }
+                ?>        
+                </div>
                 <div class="story-right <?php
                 if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
                     echo 'listicle-page';
@@ -178,7 +200,7 @@ if (!empty($content)):
 
                                 foreach ($getimagetags as $key => $tagval) {
                                     $urltags=addhttp($tagval->tag_url);
-                                    print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="'.$urltags.'" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';;
+                                    print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="'.$urltags.'" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
 
                                 }
                             }
@@ -190,8 +212,8 @@ if (!empty($content)):
                         else {
                             ?>
                             <div class="stryimg"><?php
-                    $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
+                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
                             ?>
                             <?php } ?>
                             <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
@@ -251,7 +273,7 @@ if (!empty($content)):
                               $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . addslashes(htmlspecialchars($factoidsSocialShare['title'], ENT_QUOTES)) . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $img . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . addslashes(htmlspecialchars($factoidsSocialShare['title'], ENT_QUOTES)) . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $factoids_img . "'" . ')"><i class="fa fa-facebook"></i></a></li>
                                  <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
                                  <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
                                  </ul></div></div>';
@@ -462,7 +484,6 @@ if (!empty($content)):
                                           elseif ($user->uid == 0) {
                                             if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
                                               ?>
-
                                         <li> <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="def-cur-pointer">follow the Story</a></li>
                                              
                                               <?php
