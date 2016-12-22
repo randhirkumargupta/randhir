@@ -5,6 +5,8 @@ if ($widget_style == 'auto-road-trip') {
     <div class="auto-road-trip">
         <ul class="trending-videos">
             <?php
+            if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -36,7 +38,7 @@ if ($widget_style == 'auto-road-trip') {
 
                     <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 55, ".."); ?></span></a>
                 </li>
-            <?php } ?>
+            <?php } } ?>
         </ul>
     </div>
     <?php
@@ -46,6 +48,8 @@ else if ($widget_style == 'auto-tips-and-tricks' || $widget_style == 'edu-tips-a
     <div class="auto-tips-n-tricks">
         <ul>
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -63,7 +67,7 @@ else if ($widget_style == 'auto-tips-and-tricks' || $widget_style == 'edu-tips-a
                 </li>
 
 
-            <?php }; ?>
+            <?php } } ?>
         </ul>
     </div>
 
@@ -75,6 +79,8 @@ else if ($widget_style == 'buying-guid') {
     <div class="row buying-guides">
         <div class="col-md-6">
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
 
                 $video_class = "pic-no-icon";
@@ -114,7 +120,7 @@ else if ($widget_style == 'buying-guid') {
                     </ul>
                     <?php
                 }
-            }
+} }
             ?>
 
         </div>
@@ -124,6 +130,8 @@ else if ($widget_style == 'buying-guid') {
             <ul>
 
                 <?php
+                 if(!empty($data))
+            {
                 foreach ($data as $count => $entity) {
                     $desc = $entity['title'];
                     $title = $entity['title'];
@@ -140,7 +148,7 @@ else if ($widget_style == 'buying-guid') {
                         </li>   
                         <?php
                     }
-                }
+            } }
                 ?>
 
 
@@ -158,6 +166,8 @@ else if ($widget_style == 'in-depth') {
     <div class="row buying-guides tech-in-depth">
         <div class="col-md-6">
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -199,7 +209,7 @@ else if ($widget_style == 'in-depth') {
                     </ul>
                     <?php
                 }
-            }
+            } }
             ?>
 
         </div>
@@ -209,6 +219,8 @@ else if ($widget_style == 'in-depth') {
             <ul>
 
                 <?php
+                 if(!empty($data))
+            {
                 foreach ($data as $count => $entity) {
                     $desc = $entity['title'];
 
@@ -230,7 +242,7 @@ else if ($widget_style == 'in-depth') {
                         </li>   
                         <?php
                     }
-                }
+            } }
                 ?>
 
 
@@ -248,6 +260,8 @@ else if ($widget_style == 'movies-celebrities') {
     <div class="row buying-guides tech-in-depth">
         <div class="col-md-6 section-ordering">
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -275,7 +289,7 @@ else if ($widget_style == 'movies-celebrities') {
                     <p><?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>
                     <?php
                 }
-            }
+            } }
             ?>
 
         </div>
@@ -285,6 +299,8 @@ else if ($widget_style == 'movies-celebrities') {
             <ul>
 
                 <?php
+                 if(!empty($data))
+            {
                 foreach ($data as $count => $entity) {
                     $desc = $entity['title'];
                     $nid = $entity['nid'];
@@ -306,7 +322,7 @@ else if ($widget_style == 'movies-celebrities') {
                         </li>   
                         <?php
                     }
-                }
+            } }
                 ?>
 
 
@@ -324,6 +340,8 @@ else if ($widget_style == 'movies-lifestyle') {
     <div class="row buying-guides tech-in-depth">
         <div class="col-md-6 section-ordering">
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -353,7 +371,7 @@ else if ($widget_style == 'movies-lifestyle') {
 
                     <?php
                 }
-            }
+            } }
             ?>
 
         </div>
@@ -363,6 +381,8 @@ else if ($widget_style == 'movies-lifestyle') {
             <ul>
 
                 <?php
+                 if(!empty($data))
+            {
                 foreach ($data as $count => $entity) {
                     $desc = $entity['title'];
                     $nid = $entity['nid'];
@@ -384,7 +404,7 @@ else if ($widget_style == 'movies-lifestyle') {
                         </li>   
                         <?php
                     }
-                }
+            } }
                 ?>
 
 
@@ -402,6 +422,8 @@ else if ($widget_style == 'oscar-news') {
     <div class="oscar-news">
         <div class="row">
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -442,7 +464,7 @@ else if ($widget_style == 'oscar-news') {
                     </div>
                     <?php
                 }
-            }
+            } }
             ?>
 
         </div>
@@ -460,6 +482,8 @@ else if ($widget_style == 'oscar-features') {
 
         <?php
         $coun = 1;
+         if(!empty($data))
+            {
         foreach ($data as $count => $entity) {
             $video_class = "pic-no-icon";
             if (strtolower($entity['type']) == 'videogallery') {
@@ -483,7 +507,7 @@ else if ($widget_style == 'oscar-features') {
             </div>
             <?php
             $coun++;
-        }
+} }
         ?>
 
 
@@ -499,6 +523,8 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
         <ul class="trending-videos">
 
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -526,7 +552,7 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
 
                     <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></span></a>
                 </li>
-            <?php } ?>
+            <?php } } ?>
         </ul>
     </div>
 
@@ -539,6 +565,8 @@ else if ($widget_style == 'home-shows') {
         <ul class="trending-videos">
 
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -566,7 +594,7 @@ else if ($widget_style == 'home-shows') {
 
                     <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></span></a>
                 </li>
-            <?php } ?>
+            <?php } } ?>
         </ul>
     </div>
 
@@ -579,6 +607,8 @@ else if ($widget_style == 'home-watch') {
         <div class="home-watch-new">
             <ul class="">
                 <?php
+                 if(!empty($data))
+            {
                 foreach ($data as $count => $entity) {
                     
                     $video_class = "pic-no-icon";
@@ -607,7 +637,7 @@ else if ($widget_style == 'home-watch') {
 
                         <span class="dm-detail"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></a></span>
                     </li>
-                <?php } ?>
+            <?php } } ?>
             </ul>
         </div></div>
 
@@ -619,6 +649,8 @@ else if ($widget_style == 'budget-decoded') {
     <div class="tech-trip">
         <ul class="slider-budget">
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -646,7 +678,7 @@ else if ($widget_style == 'budget-decoded') {
 
                     <h3><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 65, ".."); ?></a></h3>
                 </li>
-            <?php } ?>
+            <?php } } ?>
         </ul>
     </div>        
 
@@ -659,6 +691,8 @@ else if ($widget_style == 'sport-column') {
         <ul class="trending-videos">
 
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $video_class = "pic-no-icon";
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -690,7 +724,7 @@ else if ($widget_style == 'sport-column') {
 
                     <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 100, ".."); ?></span></a>
                 </li>
-            <?php } ?>
+            <?php }} ?>
         </ul>
     </div>
 
@@ -702,6 +736,8 @@ else if ($widget_style == 'election-so-sorry') {
     <?php if (!empty($data)) : global $base_url; ?>
         <div class="section-ordering">
             <?php
+             if(!empty($data))
+            {
             $extra_large_image_url = "";
             foreach ($data as $count => $entity) {
                 if (strtolower($entity['type']) == 'videogallery') {
@@ -731,7 +767,7 @@ else if ($widget_style == 'election-so-sorry') {
                     </h3>
                 <?php endif; ?>
 
-            <?php } ?>
+            <?php } } ?>
         </div>
     <?php else : ?>
         <span class="no-result-found"><?php print t("Content Not Found") ?></span>
@@ -746,6 +782,8 @@ else if ($widget_style == 'talking-point') {
         <ul class="trending-videos">
 
             <?php
+             if(!empty($data))
+            {
             foreach ($data as $count => $entity) {
                 $reporter = "";
                 $extra_large_image_url = "";
@@ -789,7 +827,7 @@ else if ($widget_style == 'talking-point') {
                     ?>
                     <span><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>"><?php echo mb_strimwidth(strip_tags($desc), 0, 70, ".."); ?></span></a>
                 </li>
-            <?php } ?>
+            <?php } } ?>
         </ul>
     </div>
 
@@ -801,6 +839,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
     <?php if (!empty($data)) : global $base_url; ?>
         <div class="section-ordering">
         <?php
+         if(!empty($data))
+            {
         $extra_large_image_url = "";
         foreach ($data as $count => $entity) {
             $desc = $entity['title'];
@@ -835,7 +875,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                     <?php echo l(mb_strimwidth($entity->title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
                     </p>
                     <?php endif; ?>
-            <?php } ?>
+            <?php } } ?>
         </div>
         <?php else : ?>
         <span class="no-result-found"><?php print t("Content Not Found") ?></span>
@@ -846,6 +886,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
     <?php if (!empty($data)) : global $base_url; ?>
         <div class="section-ordering">
         <?php
+         if(!empty($data))
+            {
         $extra_large_image_url = "";
         foreach ($data as $count => $entity) {
             $desc = $entity['title'];
@@ -857,7 +899,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             <?php echo l(mb_strimwidth($entity['type'], 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
                 </p>
 
-        <?php } ?>
+            <?php } } ?>
         </div>
         <?php else : ?>
         <span class="no-result-found"><?php print t("Content Not Found") ?></span>
@@ -869,6 +911,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
         <div class="from-the-magazine">
 
         <?php
+         if(!empty($data))
+            {
         $extra_large_image_url = "";
         foreach ($data as $count => $entity) {
             $desc = "";
@@ -917,7 +961,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                     <?php echo l(mb_strimwidth($entity['title'], 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
                     </p>
                     <?php endif; ?>
-            <?php } ?>
+            <?php } } ?>
         </div>
         <?php else : ?>
         <span class="no-result-found"><?php print t("Content Not Found") ?></span>
@@ -928,6 +972,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
     <?php if (!empty($data)) : global $base_url; ?>
         <div class="section-ordering">
         <?php
+         if(!empty($data))
+            {
         $extra_large_image_url = "";
         foreach ($data as $count => $entity) {
             $nid = $entity['nid'];
@@ -953,7 +999,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                             <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage_170X127.jpg" />
                         </a>
                 <?php } ?>
-                    <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $type ?> ">
+                    <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
                     <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
                     </h3>
                     <?php endif; ?>
@@ -962,7 +1008,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                     <?php echo l(mb_strimwidth($entity['title'], 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
                     </p>
                     <?php endif; ?>
-            <?php } ?>
+            <?php } } ?>
         </div>
         <?php else : ?>
         <span class="no-result-found"><?php print t("Content Not Found") ?></span>
