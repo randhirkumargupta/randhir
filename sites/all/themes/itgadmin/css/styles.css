@@ -1557,7 +1557,7 @@ textarea {
 /* Layout CSS */
 #main {
   padding-bottom: 30px;
-  min-height: 700px;
+  min-height: 800px;
 }
 
 body.sidebar-second .sidebars {
@@ -10009,4 +10009,11 @@ div.node #comments h2 {
 
 .page-mydraft-story .view .view-filters .views-exposed-form .views-widget-filter-title {
   width: 380px;
+}
+
+[id*="podcast-node-form"] .form-managed-file .image-widget-data {
+  float: left;
+}
+[id*="podcast-node-form"] .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+  left: 400px;
 }
