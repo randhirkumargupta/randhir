@@ -95,6 +95,7 @@
       <?php print $submitted; ?>
     </div>
   <?php endif; ?>
+    <div class="row">
   <?php if (!empty($static_page_menu)) : ?>
     <div class="static_page_menu col-md-4 col-xs-12">
       <?php print $static_page_menu; ?>
@@ -109,6 +110,7 @@
       print render($content);
     ?>
   </div>
+    </div>
 
   <?php print render($content['links']); ?>
 

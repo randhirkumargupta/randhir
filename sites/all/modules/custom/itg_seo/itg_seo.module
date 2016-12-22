@@ -105,6 +105,8 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'syndication_client_node_form' || $form_id == 'syndication_rule_node_form' || $form_id == 'syndication_feed_from_pattern_node_form' || $form_id == 'ads_management_node_form' || $form_id == 'task_idea_allocation_tracking_node_form' || $form_id == 'ugc_node_form' || $form_id == 'notification_node_form') {
     //$form['additional_settings']['#access'] = FALSE;
+    $form['#after_build'][] = 'itg_additional_settings_element_hide';
+     
   }
 }
 
@@ -135,5 +137,38 @@ function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
     $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
   }
 
+  return $form;
+}
+
+/**
+ * Implements 
+ * itg_seo_latest_headlines()
+ */
+function itg_seo_latest_headlines() {
+    $query = db_select('node', 'n')
+        ->fields('n', array('title', 'nid'))
+        ->condition('n.status', 'published')
+        ->range(0,4)
+        ->orderBy('n.created', 'DESC');
+    $result = $query->execute()->fetchAll();
+    $headlines = array();
+    foreach ($result as $key => $val) {
+        $headlines[$val->nid] = $val->title;
+    }
+    return $headlines;
+}
+
+/**
+ * Extra meta tags element hide from form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
+ 
+  drupal_add_js('jQuery(document).ready(function() {
+              jQuery(".vertical-tabs-list").hide();
+              jQuery(".form-item-menu-enabled").hide();              
+            });', array('type' => 'inline', 'scope' => 'footer'));
   return $form;
 }

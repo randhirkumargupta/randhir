@@ -12,24 +12,17 @@ function save_big_story_widget_data($big_story_data) {
   $related_nodes_json = '[]';
   // Delete entry first.
   // Remove except livetv.
-  db_delete('itg_widget_order')
+  try {
+    db_delete('itg_widget_order')
       ->condition('widget', $widget)
       ->condition('extra','[]')
       ->execute();
-  // watchdog("widget", "Delete action has been performed");
-  // Get related nodes then convert into json.
-//  if ($_GET['type'] == 'story') {
-//    $select_node_load = node_load($selected_node);
-//    $related_content_string = $select_node_load->field_common_related_content['und'][0]['value'];
-//    $related_nodes_json = get_related_content_with_server_prefix($related_content_string);
-//  }
-//  // Get related nodes then convert into json.
-//  if ($_GET['type'] == 'breaking_news' || isset($big_story_data['values']['related_content'])) {
-//    $related_content_string = $big_story_data['values']['related_content'];
-//    $related_nodes_json = get_related_content_with_server_prefix($related_content_string);
-//  }
-  // Insert into table.
-  $query = db_insert('itg_widget_order')
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
+
+  try{
+    $query = db_insert('itg_widget_order')
       ->fields(array(
         'nid' => $selected_node,
         'widget' => $widget,
@@ -39,6 +32,9 @@ function save_big_story_widget_data($big_story_data) {
         'extra' => $related_nodes_json,
       ))
       ->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
 }
 
 /**

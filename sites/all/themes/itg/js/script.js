@@ -640,12 +640,45 @@ jQuery(document).ready(function () {
         jQuery('.vertical-more a.more').show();
         jQuery(this).hide();   
     });
-    Array.prototype.forEach.call(document.querySelectorAll('.second-level-menu li, .itg-listing li'), function(element){
-  // find all elements and attach effect
-  new RippleEffect(element); // element is instance of javascript element node
+    jQuery('.page-user .form-submit').wrap('<div class="ripple-effect dib vtop"></div>');
+    jQuery('.second-level-menu li, .itg-listing li, .tab-buttons span, .agbutton button').addClass('ripple-effect');
+    jQuery(".ripple-effect").click(function (e) {
+      
+      // Remove any old one
+      jQuery(".ripple").remove();
+      
+      // Setup
+      var posX = jQuery(this).offset().left,
+              posY = jQuery(this).offset().top,
+              buttonWidth = jQuery(this).width(),
+              buttonHeight = jQuery(this).height();
+
+      // Add the element
+      jQuery(this).prepend("<span class='ripple'></span>");
+
+      // Make it round!
+      if (buttonWidth >= buttonHeight) {
+        buttonHeight = buttonWidth;
+      } else {
+        buttonWidth = buttonHeight;
+      }
+
+      // Get the center of the element
+      var x = e.pageX - posX - buttonWidth / 2;
+      var y = e.pageY - posY - buttonHeight / 2;
+
+      // Add the ripples CSS and start the animation
+      jQuery(".ripple").css({
+        width: buttonWidth,
+        height: buttonHeight,
+        top: y + 'px',
+        left: x + 'px'
+      }).addClass("rippleEffect");
+    });
+
 });
     
-});
+
 
 
 

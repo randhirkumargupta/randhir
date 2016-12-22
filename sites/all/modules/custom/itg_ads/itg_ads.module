@@ -490,6 +490,7 @@ function get_ad_script($page_type) {
 //	if ($dev_info == 'website') {
 //		$device = 'website';
 //	}
+  $arr = array();
 	if (($page_type == 'Home') || ($page_type == 'Rest')) {
 		$current_date = date("Y-m-d H:i:s");
 		$query = db_select('field_data_field_ads_ad_code', 'ac');

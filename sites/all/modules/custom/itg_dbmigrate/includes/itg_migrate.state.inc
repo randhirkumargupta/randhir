@@ -4,18 +4,14 @@
 /**
  * ItgCityMigration extends XMLMigration 
  */
-class ItgCityMigration extends XMLMigration {
+class ItgStateMigration extends XMLMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of terms (city)');
 
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'city' => t('city name'),
-      'metatitle' => t('metatitle'),
-      'metadesc' => t('metadesc'),
-      'metakey' => t('metakey'),      
-      'sef_url' => t('sef_url'),      
+      'state' => t('state'),     
     );
 
     
@@ -40,7 +36,7 @@ class ItgCityMigration extends XMLMigration {
     $destination_options = array(
       'allow_duplicate_terms' => TRUE,
     );
-    $this->destination = new MigrateDestinationTerm('city', $destination_options);
+    $this->destination = new MigrateDestinationTerm('state', $destination_options);
 
     // The source ID here is the one retrieved from each data item in the XML
     // file, and used to identify specific items
@@ -64,7 +60,7 @@ class ItgCityMigration extends XMLMigration {
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
     
-    $this->addFieldMapping('name', 'name')->xpath('city');    
+    $this->addFieldMapping('name', 'name')->xpath('state');    
     //$this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
 //    $this->addFieldMapping('pathauto')->defaultValue(0);
 //    $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
