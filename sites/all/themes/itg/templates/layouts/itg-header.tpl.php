@@ -56,53 +56,27 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
       <ul class="second-level-menu menu">
         <?php
         $menu_manager = $data['menu_manager'];
-        $load_parent = taxonomy_get_parents(arg(2));
-        $parent_key_of_third_level = isset(array_keys($load_parent)[0]) ? array_keys($load_parent)[0] : 0;
+        // Contion to check fucntion isset.
+        $load_parent = (null != arg(2)) ? taxonomy_get_parents(arg(2)): array();
         foreach ($menu_manager as $key => $menu_data) :
           ?>
           <?php
-          $title_array = explode("[tid", $menu_data['db_data']['title']);
-          $link_url = "";
-          $image_class = "";
-          $target = "_self";
-          $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $title_array[0];
-          $url_type = $menu_data['db_data']['url_type'];
-          $db_target = $menu_data['db_data']['target'];
-          $tid = $menu_data['db_data']['tid'];
-          $active_cls = $parent_class = "notactive";
-          $icon_fid = (int) $menu_data['db_data']['menu_name'];
-          if ($icon_fid) {
-            $int_value = (int) $icon_fid;
-            if ($int_value) {
-              $icon_object = file_load((int) $icon_fid);
-              $link_text = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
-              if (!empty($icon_object->uri)) {
-                $image_class = "has-image";
-              }
-            }
-          }
-          $sponsored_class = ($menu_data['db_data']['extra'] == 'Yes') ? "sponsored-active" : "";
-          // if tid is not 0 then its internal url
-          if (($tid && $url_type == 'internal')) {
-            $link_url = "taxonomy/term/$tid";
-            if ($link_url == current_path()) {
-              $active_cls = "active";
-            }
-          }
-          else {
-            $link_url = $menu_data['db_data']['url'];
-          }
-          // manage target
-          if (trim($db_target) == 'new_window') {
-            $target = "_blank";
-          }
-
-          if ($tid == $parent_key_of_third_level) {
-            $parent_class = "active";
-          }
+           if(function_exists('itg_menu_manager_get_menu')) {
+                $menu_link_data = itg_menu_manager_get_menu($menu_data , arg() , $load_parent);
+                $image_class = $menu_link_data['image_class'];
+                $link_text = $menu_link_data['link_text'];
+                $link_url = $menu_link_data['link_url'];
+                $target = $menu_link_data['target'];
+                $active = $menu_link_data['active'];
+                $sponsored_class = $menu_link_data['sponsored_class'];
+                $parent_class = $menu_link_data['parent_class'];
+                $active_cls = $menu_link_data['active_cls'];
           ?>
         <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class)))); ?></li>
-        <?php endforeach;?>
+        <?php 
+           }
+           endforeach;
+        ?>
       </ul>
       <?php //print drupal_render($data['itg_main_manu_header']);    ?>            
     </div>         

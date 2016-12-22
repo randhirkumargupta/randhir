@@ -90,7 +90,7 @@ function remove_from_menu_manager($tid) {
   if ($_GET['section_id'] && $_GET['section_child']) {
     $destination = "menu-manager/third";
     $options = array('query' => array("section_id" => $_GET['section_id'], "section_child" => $_GET['section_child']));
-    drupal_goto($destination, $options);
+    drupal_goto($_SERVER['HTTP_REFERER']);
   }
-  drupal_goto($_REQUEST['destination']);
+  drupal_goto($_SERVER['HTTP_REFERER']);
 }
