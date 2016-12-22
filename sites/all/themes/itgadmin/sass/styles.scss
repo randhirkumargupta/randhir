@@ -2461,6 +2461,14 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   #messages{
     margin: 20px 0;
   }
+  .survey-form-wrapper-all{
+    .ajax-progress-throbber{
+      position: static;
+      display: inline-block;
+      vertical-align: top;
+      margin: 20px 0 0 -15px;
+    }
+  }
   .question-container{
     @extend .hide;
     .question-heading{
@@ -2473,6 +2481,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
     .ajax-progress-throbber{
       position: static;
+      display: inline-block;
+      vertical-align: top;
+      margin: 20px 0 0 -15px;
     }
     .form-submit{
       @extend .btn-save;
@@ -6971,9 +6982,9 @@ div.node{
 [id*="itg-survey-survey-form"] .form-submit {
   min-width: 100px;
   padding: 5px 10px;
-  height: 36px;
-  border: none;
-  border-radius: 1px;
+  height: 36px !important;
+  border: none !important;
+  border-radius: 1px !important;
   box-shadow: 0 1px 3px 0 #666;
   background: red;
   /* For browsers that do not support gradients */
@@ -6985,12 +6996,12 @@ div.node{
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 18px;
+  font-size: 18px !important;
   font-family: Roboto;
   color: #fff;
   font-weight: 400;
-  margin-right: 20px;
-  margin-top: 50px;
+  margin-right: 20px !important;
+  margin-top: 20px;
   cursor: pointer;
 }
 [id*="itg-survey-survey-form"] .success-message, [id*="itg-survey-survey-form"] .messages--status {
@@ -8669,10 +8680,22 @@ div.node{
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created{
     width: 220px;
   }
+  
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-field_task_team_member_target_id{
     width: 280px;
   }
 }
+.page-assigned-task-list{
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created{
+    width: 220px;
+  }
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-mail{
+    width: 280px;
+  }
+}
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-mail, {
+    width: 220px;
+  }
 .browse-video-form .ftp_browse_field div.description{padding: 3px 0 0 200px;}
 #videoupload #loader-data{
   position: fixed;
