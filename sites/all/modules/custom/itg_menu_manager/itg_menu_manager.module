@@ -64,7 +64,20 @@ function itg_menu_manager_menu() {
     'access arguments' => array('administer itg menu manager'),
   );
 
+  $items['insert_all_node_in_widegt_table'] = array(
+    'page callback' => 'create_new_column', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access administrator'),
+  );
+
   return $items;
+}
+
+/**
+ * Script to add new column in itg_menu_manager
+ */
+function create_new_column() {
+  db_query('alter table itg_menu_manager add column display_icon varchar(200) DEFAULT FALSE after extra')->execute();
 }
 
 /**
@@ -206,17 +219,26 @@ function itg_menu_manager_form($form, &$form_state) {
     '#options' => array('Yes' => t('Yes')),
   );
 
-  $form['category_icon'] = array(
-    '#title' => t('Upload the icon'),
-    '#type' => 'managed_file',
-    '#name' => 'category_icon',
-    '#title' => t('Upload category icon'),
-    '#file_validate_extensions' => array(
-      'png gif jpg jpeg'
-    ),
-    '#default_value' => (is_integer($default_values['menu_name'])) ? $default_values['menu_name'] : NULL,
-    '#upload_location' => 'public://category_icon/',
+  $form['display_icon'] = array(
+    '#title' => t('Display'),
+    '#type' => 'radios',
+    '#description' => t('Show title will display "title" field value insteed of icon.'),
+    '#default_value' => isset($default_values['display_icon']) ? $default_values['display_icon'] : 0,
+    '#options' => array(0 => t('Show title'), 1 => t('Show icon')),
   );
+
+  $form['category_icon'] = array(
+      '#title' => t('Upload the icon'),
+      '#type' => 'managed_file',
+      '#name' => 'category_icon',
+      '#title' => t('Upload external menu icon'),
+      '#description' => t('Category icon applicable for <br/>only external link. For internal icon <br/>will come from category manager.'),
+      '#file_validate_extensions' => array(
+        'png gif jpg jpeg'
+      ),
+      '#default_value' => ((int) $default_values['menu_name']) ? $default_values['menu_name'] : NULL,
+      '#upload_location' => 'public://category_icon/',
+    );
   // Submit Button
   $form['submit'] = array(
     '#type' => 'submit',
@@ -253,7 +275,7 @@ function itg_menu_manager_form($form, &$form_state) {
   if ($default_values['menu_level'] == 'second') {
     unset($form['title']['#autocomplete_path']);
   }
-
+  drupal_add_js(drupal_get_path('module', 'itg_menu_manager') . '/js/itg-menu-main.js', 'file');
   return $form;
 }
 
@@ -264,22 +286,11 @@ function itg_menu_manager_form_validate($form, &$form_state) {
   $errors = array();
   $values = $form_state['values'];
   $url_type = $values['url_type'];
-  $fid = $values['category_icon'];
   $url = $values['url'];
-  
-//  if ($fid) {
-//    $file = file_load($fid);
-//    $image_size = getimagesize(file_create_url($file->uri));
-//    $image_width = $image_size[0];
-//    $image_height = $image_size[1];
-//    if($image_width > 200 || $image_height > 100) {
-//      $errors[] = t("Max allowed image width*height is 200*100 in pixel.");
-//    }
-//  }
 
   if ($url_type == 'external' && !empty($url)) {
     if ((strpos($url, 'http') === 0) && filter_var($url, FILTER_VALIDATE_URL)) {
-      watchdog("menu_manager", "Url validated in case of external");
+      //watchdog("menu_manager", "Url validated in case of external");
     }
     else {
       $errors[] = "Please enter valid external url  eg: http://www.example.com";
@@ -492,6 +503,7 @@ function add_or_remove_autocomplete($form, $form_state) {
 function itg_menu_manager_form_submit($form, &$form_state) {
   $edit_id = (null !== filter_input(INPUT_GET, 'edit_id')) ? filter_input(INPUT_GET, 'edit_id') : 0;
   $values = $form_state['values'];
+  $display_icon = $values['display_icon'];
   $url_type = filter_xss($values['url_type']);
   $menu_level = filter_xss($values['menu_level']);
   $sections = filter_xss($values['sections']);
@@ -534,6 +546,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'created' => time(),
             'extra' => $is_sponsored,
             'menu_name' => $file_id,
+            'display_icon' => $display_icon,
               )
           )->condition('id', $edit_id, "=")->execute();
 
@@ -584,6 +597,7 @@ function itg_menu_manager_form_submit($form, &$form_state) {
             'created' => time(),
             'extra' => $is_sponsored,
             'menu_name' => $file_id,
+            'display_icon' => $display_icon,
           ))
           ->execute();
       if ($menu_level == 'second') {
@@ -985,9 +999,9 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
       'effect' => 'fade',
     );
   }
-  if($form_id == 'menu_edit_item' && arg(4) == 'menu-about-us-page-menu') {
-    $form['actions']['submit']['#suffix'] = l("Cancel","admin/structure/menu/manage/menu-about-us-page-menu",array("attributes"=>array("class"=>array("button"))));
-    drupal_add_css(".form-item-expanded {display:block !important}","inline");
+  if ($form_id == 'menu_edit_item' && arg(4) == 'menu-about-us-page-menu') {
+    $form['actions']['submit']['#suffix'] = l("Cancel", "admin/structure/menu/manage/menu-about-us-page-menu", array("attributes" => array("class" => array("button"))));
+    drupal_add_css(".form-item-expanded {display:block !important}", "inline");
   }
 }
 
@@ -1116,4 +1130,99 @@ function itg_menu_manager_form_views_exposed_form_alter(&$form, &$form_state, $f
       }
       break;
   }
+}
+
+/**
+ * Function handling link output of menus.
+ * 
+ * @global global $base_url
+ * @param array $menu_data
+ * @param array $argument
+ * @param array $load_parent
+ * @return array
+ */
+function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()) {
+  global $base_url;
+  $menu_link_data_array = array();
+  $parent_key_of_third_level = !empty($load_parent) ? array_keys($load_parent)[0] : 0;
+  $title_array = explode("[tid", $menu_data['db_data']['title']);
+  $link_url = $active = $image_class = "";
+  $target = "_self";
+  $link_text = $link_title_for_vertical = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $title_array[0];
+  $url_type = $menu_data['db_data']['url_type'];
+  $display_icon = $menu_data['db_data']['display_icon'];
+  $db_target = $menu_data['db_data']['target'];
+  $tid = $menu_data['db_data']['tid'];
+  $active_cls = $parent_class = "notactive";
+  $icon_fid = (int) $menu_data['db_data']['menu_name'];
+  $sponser_logo_uri = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['uri']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['uri'] : 0;
+  $vertical_menu_icon = "";
+  // handel case for external menu.
+  // display_icon is true and icon_fid is set then show icon other wise title.
+  if ($url_type == 'external' && $display_icon && $icon_fid) {
+    $int_value = (int) $icon_fid;
+    if ($int_value) {
+      $icon_object = file_load((int) $icon_fid);
+      // Set icon for internal menu used for vertical menu.
+      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($icon_object->uri) ."' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+      if (!empty($icon_object->uri)) {
+        $image_class = "has-image";
+      }
+    }
+  }
+  // Handle case for default image
+  if ($url_type == 'external' && $display_icon && $icon_fid == "notFound") {
+    $link_text = $vertical_menu_icon = "<img  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
+  }
+ 
+  if ($url_type == 'internal' && $display_icon) {
+    if (is_string($sponser_logo_uri) && !empty($sponser_logo_uri)) {
+      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($sponser_logo_uri) ."' />";//theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
+      $image_class = "has-image";
+    }
+  }
+
+  $sponsored_class = ($menu_data['db_data']['extra'] == 'Yes') ? "sponsored-active" : "";
+  // if tid is not 0 then its internal url
+  if (($tid && $url_type == 'internal')) {
+    $link_url = "taxonomy/term/$tid";
+    if ($link_url == current_path()) {
+      $active_cls = "active";
+    }
+  }
+  else {
+    $link_url = $menu_data['db_data']['url'];
+  }
+  
+  // manage target
+  if (trim($db_target) == 'new_window') {
+    $target = "_blank";
+  }
+
+  if ($tid == $parent_key_of_third_level) {
+    $parent_class = "active";
+  }
+
+  if (!empty($argument[1]) && isset($argument[1])) {
+    $arg1 = $argument[1];
+    $urlalise = drupal_get_path_alias("node/$arg1");
+    $real_path_alise = ($urlalise) ? $urlalise : "node/$arg1";
+    if (end(explode('/', $link_url)) == $real_path_alise) {
+      $active = 'active';
+    }
+  }
+  
+  // Prepare variables
+  $menu_link_data_array['image_class'] = $image_class;
+  $menu_link_data_array['link_text'] = $link_text;
+  $menu_link_data_array['link_url'] = $link_url;
+  $menu_link_data_array['target'] = $target;
+  $menu_link_data_array['active'] = $active;
+  $menu_link_data_array['sponsored_class'] = $sponsored_class;
+  $menu_link_data_array['parent_class'] = $parent_class;
+  $menu_link_data_array['active_cls'] = $active_cls;
+  $menu_link_data_array['icon'] = $vertical_menu_icon;
+  $menu_link_data_array['link_title_for_vertical'] = $link_title_for_vertical;
+
+  return $menu_link_data_array;
 }
