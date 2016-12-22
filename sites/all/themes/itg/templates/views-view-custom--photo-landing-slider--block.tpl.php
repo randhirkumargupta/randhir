@@ -13,9 +13,9 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         <h2><?php print $rows[0]['title']; ?></h2>    
         <div class="social-icon desktop-hide">
             <ul>
-                <li><a title="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
-                <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
-                <li><a title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li><a title="share on google+" class="def-cur-pointer" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
+                <li><a title="share on twitter" class="def-cur-pointer" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="mailto:?body=<?php print urlencode($actual_link);?>" title="Email"><i class="fa fa-envelope"></i></a></li>
                   <?php
                 if (function_exists(global_comment_last_record)) {
@@ -29,7 +29,12 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                 <?php } ?>
                 <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
-                <li class="mhide"><a href="#" title="post video"><i class="fa fa-share"></i></a></li>
+                  <?php if($user->uid > 0): ?>
+                  <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <?php else: ?>
+                  <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <?php endif; ?>
+                <!--<li class="mhide"><a href="#" title="post content"><i class="fa fa-share"></i></a></li>-->
                 <?php global $user; ?>
                   <?php if ($user->uid > 0): ?>
                      <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>                      
@@ -103,9 +108,9 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
         
         <div class="social-icon mhide">
             <ul>
-                <li><a title="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
-                <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
-                <li><a title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link;?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>')"><i class="fa fa-facebook"></i></a></li>
+                <li><a title="share on google+" class="def-cur-pointer" onclick="return googleplusbtn('<?php print $actual_link;?>')"><i class="fa fa-google-plus"></i></a></li>
+                <li><a title="share on twitter" class="def-cur-pointer" onclick="twitter_popup('<?php print urlencode($share_title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="mailto:?body=<?php print urlencode($actual_link);?>" title="Email"><i class="fa fa-envelope"></i></a></li>
                 <?php
                 if (function_exists(global_comment_last_record)) {
@@ -119,7 +124,11 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                 <?php } ?>
                 <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
-                <li><a href="#" title="post video"><i class="fa fa-share"></i></a></li>
+                 <?php if($user->uid > 0):?>
+                  <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <?php else: ?>
+                  <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <?php endif; ?>
                 <?php global $user; ?>
                   <?php if ($user->uid > 0): ?>                     
                      <li><?php print $read_later; ?></li>

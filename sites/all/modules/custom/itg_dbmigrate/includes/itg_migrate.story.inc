@@ -260,9 +260,12 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('field_story_technology_cons', 'item')->xpath('tech-cons/item');
     $this->addFieldMapping('field_story_tech_image_gallery', 'image')->xpath('tech-image-gallery/image');
 
-    $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
+    //$this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
+    $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
     // Facebook instant Article migrate code
     $this->addFieldMapping('field_facebook_audio_position', 'audio_position')->xpath('facebook_instant_article_integration/audio_position');
     $this->addFieldMapping('field_facebook_instant_audio_url', 'audio_url')->xpath('facebook_instant_article_integration/audio_url');

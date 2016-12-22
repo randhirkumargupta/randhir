@@ -30,7 +30,7 @@
                     <div class="cart-action-links">
                         <!-- <span>Item (<?php print $cart_detail['quantity']; ?>)</span> -->
                         <span>
-                            Item (
+                            Item 
                             <select name="quantity">
                                 <?php
                                 $node_id = $cart_detail['product']['nid'];
@@ -45,7 +45,7 @@
                                 }
                                 ?>
                             </select>
-                            )
+                            
                         </span>
                         <?php
                         print l(t('Delete (X)'), 'cart/delete/' .

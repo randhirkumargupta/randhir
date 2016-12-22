@@ -413,15 +413,13 @@
             });
             
              // for highlights widgets
-            $('#layout-highlights-submit').click(function() {
-                
+            $('#layout-highlights-submit').click(function() {                
                 var base_url = settings.itg_story.settings.base_url;
                 // highlights widget value
-                var highlights_title = $('#edit-highlights-title').val();                
-
-                if (html_title) {
+                var highlights_title = $('#edit-highlights-title').val();                                   
+                if (highlights_title) {
                     $.ajax({
-                        url: base_url + "/layout-search-widgets-list/heighlights",
+                        url: base_url + "/layout-search-widgets-list/highlights",
                         method: 'post',
                         data: {html_title: highlights_title},
                         beforeSend: function() {

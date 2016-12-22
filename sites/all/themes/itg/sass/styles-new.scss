@@ -401,13 +401,13 @@
 }
 
 .view-photo-list-of-category{
-    .view-content{
-        margin: 0 -15px;
+    .view-content{      
         .photo-list{
+            margin: 0 -15px;
             list-style: none;
             overflow: hidden;
             li{
-                padding: 15px 10px;
+                padding: 15px 15px;
                 float: left;                                
                 .tile{
                     figure{                        
@@ -1164,6 +1164,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           &.views-field-name{
             width: 175px;
             padding-right: 10px;
+            text-transform: uppercase;
             a{
               color: #000;
               font-size: 17px;
@@ -1869,6 +1870,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
     }
   }
+  .default-full-desc{
+      display:none
+  }
 }
 body.has-cart-popup{
   overflow: hidden;
@@ -2004,6 +2008,10 @@ body.has-cart-popup{
           margin-right: 5px;
           vertical-align: top;
         }
+      }
+      .popup-desc{
+        max-height:400px;
+        overflow:auto;
       }
   }
 }

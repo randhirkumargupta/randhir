@@ -21,6 +21,12 @@ if (!empty($content)):
     }
 
     $fb_google_count = $fb_count + $google_count;
+    
+    // get global comment config
+    if (function_exists(global_comment_last_record)) {
+    $last_record = $global_comment_last_record;
+    $config_name = trim($last_record[0]->config_name);
+    }
   ?>
     <div class="story-section <?php print $class_buzz; ?>">
         <div class='<?php print $classes ?>'>
@@ -73,17 +79,17 @@ if (!empty($content)):
                                     <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span>SHARES</li>
                                     <li><?php print date('F j, Y', $node->created); ?>   </li>
                                     <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
-                                    <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
+                                    <?php if(!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+                                    <li>
+                                    <?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?>
+                                    </li>
+                                    <?php } ?>
                                 </ul>
                                 <ul class="social-links mhide">
                                     <li><a href="javascript:" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
                                     <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                                     <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                                         <?php
-                                        if (function_exists(global_comment_last_record)) {
-                                          $last_record = $global_comment_last_record;
-                                          $config_name = trim($last_record[0]->config_name);
-                                        }
                                         if ($config_name == 'vukkul') {
                                           ?>
                                           <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
@@ -115,6 +121,24 @@ if (!empty($content)):
                         <?php } ?>
                     </div>  
                 <?php } ?>
+                <div class="related-content-left">
+                <?php
+                  $related_content = itg_get_related_content(arg(1));
+                  if (!empty($related_content)) {
+                    $related_story = '<div class="related_story"><h3>Related</h3>';
+                    $related_content = explode(',', $related_content);
+                    foreach ($related_content as $fn_result) {
+                      $related_content = explode('_', $fn_result);
+                      $final_related [] = $related_content[1];
+                    }
+                    $final_related = implode(' OR ', $final_related);
+                    $related_story.= views_embed_view('related_story', 'page', $final_related);
+                    '</div>';
+
+                    //print $related_story;
+                  }
+                ?>        
+                </div>
                 <div class="story-right <?php
                 if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
                     echo 'listicle-page';
@@ -176,7 +200,7 @@ if (!empty($content)):
 
                                 foreach ($getimagetags as $key => $tagval) {
                                     $urltags=addhttp($tagval->tag_url);
-                                    print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="'.$urltags.'" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';;
+                                    print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="'.$urltags.'" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
 
                                 }
                             }
@@ -188,8 +212,8 @@ if (!empty($content)):
                         else {
                             ?>
                             <div class="stryimg"><?php
-                    $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
+                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
                             ?>
                             <?php } ?>
                             <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
@@ -249,7 +273,7 @@ if (!empty($content)):
                               $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . addslashes(htmlspecialchars($factoidsSocialShare['title'], ENT_QUOTES)) . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $img . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . addslashes(htmlspecialchars($factoidsSocialShare['title'], ENT_QUOTES)) . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $factoids_img . "'" . ')"><i class="fa fa-facebook"></i></a></li>
                                  <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
                                  <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
                                  </ul></div></div>';
@@ -355,10 +379,12 @@ if (!empty($content)):
                         if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
                             $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
                             if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
-                                $buzz_output.= '<div class="buzz-img"><div class="social-share">
+                              $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']);
+                              $buzz_title_share= htmlentities($buzz_title, ENT_QUOTES);
+                              $buzz_output.= '<div class="buzz-img"><div class="social-share">
               <ul>
               <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-              <li><a class= "facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . addslashes($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ')" class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a class= "facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $buzz_title_share . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ', ' . "'" . $base_url . "'". ', ' . "'" . $nid . "'".')" class="facebook"><i class="fa fa-facebook"></i></a></li>
               <li><a href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="twitter"><i class="fa fa-twitter"></i></a></li>
               <li><a title="share on google+" href="#" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
@@ -395,26 +421,26 @@ if (!empty($content)):
                   <div class="agbutton story-like-dislike">
                       <div id="name-dv"><?php print t('Do You Like This Story'); ?>
                       <span id="lky"><button id="like_count" rel="<?php print $get_val; ?>" data-tag="sty"><i class="fa fa-thumbs-o-up"></i> <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button>
-                          <span id="sty-dv" style="display:none">Awesome! </br> Now share the story </br> <a onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
-                          <a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
+                          <span id="sty-dv" style="display:none">Awesome! </br> Now share the story </br> <a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
+                          <a title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
                           <a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
                           <?php
                               if ($config_name == 'vukkul') {
-                                ?>
+                          ?>
                           <a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
                           <?php } if ($config_name == 'other') { ?> 
                                 <a onclick ="scrollToAnchor('other-comment');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
-                              <?php } ?>
+                          <?php } ?>
                           </span></span>
                             <span id="dlky"> <button id="dislike_count" rel="<?php print $get_val; ?>" data-tag="dsty"><i class="fa fa-thumbs-o-down"></i> <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>
-                                <?php
+                          <?php
                               if ($config_name == 'vukkul') {
-                                ?>
-                                <span id="dsty-dv" style="display:none"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment">Too bad.</br> Tell us what you didn't like in the comment section</a></span> 
+                          ?>
+                                <span id="dsty-dv" style="display:none">Too bad.</br> Tell us what you didn't like in the <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment">comment section</a></span> 
                             
-                              <?php } if ($config_name == 'other') { ?> 
-                                <span id="dsty-dv" style="display:none"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment">Too bad.</br> Tell us what you didn't like in the comment section</a></span> 
-                              <?php } ?>
+                          <?php } if ($config_name == 'other') { ?> 
+                                <span id="dsty-dv" style="display:none">Too bad.</br> Tell us what you didn't like in the <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment">comment section</a></span> 
+                          <?php } ?>
                                 
                             </span>                                       
                         </div>                          
@@ -458,7 +484,6 @@ if (!empty($content)):
                                           elseif ($user->uid == 0) {
                                             if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
                                               ?>
-
                                         <li> <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="def-cur-pointer">follow the Story</a></li>
                                              
                                               <?php
@@ -519,10 +544,6 @@ if (!empty($content)):
                 ?>
 
                 <?php
-                if (function_exists(global_comment_last_record)) {
-                    $last_record = $global_comment_last_record;
-                    $config_name = trim($last_record[0]->config_name);
-                }
                 if ($config_name == 'vukkul') {
                     ?>
                     <div class="vukkul-comment">

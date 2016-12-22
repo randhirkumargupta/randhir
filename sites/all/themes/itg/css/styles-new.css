@@ -414,15 +414,13 @@
   right: 0;
 }
 
-.view-photo-list-of-category .view-content {
-  margin: 0 -15px;
-}
 .view-photo-list-of-category .view-content .photo-list {
+  margin: 0 -15px;
   list-style: none;
   overflow: hidden;
 }
 .view-photo-list-of-category .view-content .photo-list li {
-  padding: 15px 10px;
+  padding: 15px 15px;
   float: left;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure {
@@ -1190,6 +1188,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name {
   width: 175px;
   padding-right: 10px;
+  text-transform: uppercase;
 }
 .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name a {
   color: #000;
@@ -1955,6 +1954,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .view-redeem-points .more-link a:hover, .view-product .more-link a:hover {
   color: #1a3c8d;
 }
+.view-redeem-points .default-full-desc, .view-product .default-full-desc {
+  display: none;
+}
 
 body.has-cart-popup {
   overflow: hidden;
@@ -2091,6 +2093,10 @@ body.has-cart-popup {
   color: #fff;
   margin-right: 5px;
   vertical-align: top;
+}
+.cart-popup-wrapper .cart-popup .popup-desc {
+  max-height: 400px;
+  overflow: auto;
 }
 
 [id*="itg-quiz-quiz-form"] .question-heading {

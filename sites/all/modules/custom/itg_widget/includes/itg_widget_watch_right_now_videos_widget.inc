@@ -24,10 +24,10 @@ function itg_widget_watch_right_now_videos_widget_ordering_data($info) {
         $watch_right_now_videos = itg_widget_nodes_from_nodequeue($nodequeue_name , TRUE , WATCH_RIGHT_NOW_MIN_RANGE, WATCH_RIGHT_NOW_MAX_RANGE);
       }
       foreach ($watch_right_now_videos as $video) {
-        $video_entity_id = $video['entity_id'];
+        /*$video_entity_id = $video['entity_id'];
         $temp_result = array();
-        $temp_result = get_required_data_from_entity_id($video_entity_id);
-        $result[] = $temp_result[$video_entity_id];
+        $temp_result = get_required_data_from_entity_id($video_entity_id);*/
+        $result[] = $video;
       }
       return $result;
     }

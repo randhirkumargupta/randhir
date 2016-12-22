@@ -18,6 +18,12 @@ function itg_ugc_menu() {
     'access arguments' => array('access reject ugc content link'),
     'type' => MENU_CALLBACK,
   );
+  
+  $items['ugc-thank-you'] = array(
+    'page callback' => 'itg_ugc_thank_you',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -119,14 +125,16 @@ function itg_get_user_email_by_id($uid) {
  */
 function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
+  
+  
   // get id of ugc content
   $url_nid = arg(3);
 
   // condition for front user 
-  if ($user->uid == 0 && !empty($_GET['type'])) {
+  if ($user->uid == 0 && !empty($_GET['type']) && $form_id == 'ugc_node_form') {
     $form['field_ugc_ctype']['#attributes']['class'][] = 'element-hidden';
     if (isset($_GET['type'])) {
+      $form['#prefix'] = '<div class="ugc-top-heading"><h2>Post Your Content</h2></div>';  
       $form['field_ugc_ctype'][LANGUAGE_NONE]['#default_value'] = $_GET['type'];
     }
   }
@@ -461,8 +469,9 @@ function itg_ugc_form_custom_callback($form, &$form_state) {
     $form_state['redirect'] = 'personalization/my-content';
   }
   else {
-    $_REQUEST['destination'] = 'node/add/ugc';
-    $msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
+    $_REQUEST['destination'] = 'ugc-thank-you';
+    $form_state['redirect'] = 'ugc-thank-you';
+    //$msg = itg_custom_message($node_type, $workbench_current_state = NULL, arg(1), $title, $_REQUEST['destination']);
   }
 }
 
@@ -762,4 +771,11 @@ function itg_ugc_views_pre_render(&$view) {
     $header_content_ugc = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $view->attachment_before = $header_content_ugc;
   }
+}
+
+/**
+ * Implements itg_ugc_thank_you
+ */
+function itg_ugc_thank_you() {
+ print '<div class="ugc-success">UGC content has been submitted successfully for further review and approval.</div>';
 }
