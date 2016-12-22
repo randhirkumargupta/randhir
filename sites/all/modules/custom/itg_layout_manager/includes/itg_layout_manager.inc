@@ -147,8 +147,8 @@ function itg_layout_gethomecarddata() {
             || !empty($widget_data[$widget_name2]['widget_name']) 
             || !empty($widget_data[$widget_name3]['widget_name'])) {      
    
-      print '<div class="row itg-common-section mt-50 "  id="content-section-widget">
-            <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name1 . '">
+      print '<div class="row itg-common-section"  id="content-section-widget">
+            <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name1 . '">
             <div class="itg-widget">
             <div class="droppable ' . $gray_bg_layout . '">
             <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
@@ -158,7 +158,7 @@ function itg_layout_gethomecarddata() {
       }
 
       print' <div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div></div></div></div></div>
-            <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name2 . '">
+            <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name2 . '">
             <div class="itg-widget">
             <div class="droppable ' . $gray_bg_layout . '">
             <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
@@ -169,7 +169,7 @@ function itg_layout_gethomecarddata() {
 
       print '<div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div></div></div></div></div>';
 
-      print '<div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name3 . '">
+      print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name3 . '">
             <div class="itg-widget">
             <div class="droppable ' . $gray_bg_layout . '">
             <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';
@@ -225,9 +225,9 @@ function itg_layout_gethomecarddata_new($sectinno) {
   if (!empty($widget_data[$widget_name1]['widget_name']) 
           || !empty($widget_data[$widget_name2]['widget_name']) 
           || !empty($widget_data[$widget_name3]['widget_name'])) {
-    print '<div class="row itg-common-section mt-50 "  id="content-section-widget">
+    print '<div class="row itg-common-section"  id="content-section-widget">
 
-    <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name1 . '">
+    <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name1 . '">
     <div class="itg-widget">
     <div class="droppable ' . $gray_bg_layout . '">
     <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
@@ -238,7 +238,7 @@ function itg_layout_gethomecarddata_new($sectinno) {
 
     print '<div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div></div></div></div></div>
 
-          <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name2 . '">
+          <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name2 . '">
           <div class="itg-widget">
           <div class="droppable ' . $gray_bg_layout . '">
           <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
@@ -249,7 +249,7 @@ function itg_layout_gethomecarddata_new($sectinno) {
 
     print '<div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div></div></div></div></div>';
 
-    print '<div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-' . $widget_name3 . '">
+    print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name3 . '">
            <div class="itg-widget">
            <div class="droppable ' . $gray_bg_layout . '">
            <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';
