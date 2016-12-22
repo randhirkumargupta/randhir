@@ -65,13 +65,13 @@ class ItgCityMigration extends XMLMigration {
     // /categories/category/name).
     
     $this->addFieldMapping('name', 'name')->xpath('city');    
-    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
-    $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
-    $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
-    $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
-    
-    //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
-    //$this->addFieldMapping('metatag_robots', 'nodeword_robots');
+    //$this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+//    $this->addFieldMapping('pathauto')->defaultValue(0);
+//    $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
+//    $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
+//    $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
+//    $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
+
 
   }
 }
