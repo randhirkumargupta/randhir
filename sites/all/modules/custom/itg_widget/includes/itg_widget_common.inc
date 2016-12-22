@@ -2154,10 +2154,13 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     //join  for field value
-      $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');      
+      $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');   
+      $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');      
       $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
-      $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');      
+      $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');  
+        $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');     
       $query->fields('eli_file', array('uri'));
+          $query->fields('si_file', array('uri'));
       $query->fields('vd', array('field_video_duration_value'));
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));                    
     //end
@@ -2169,6 +2172,7 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
             ->orderBy('n.nid', 'ASC')
             ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
 }
 
 /**
@@ -2233,6 +2237,7 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
             ->range($range_min, $range_max)
             ->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+     return $result;
 }
 
 /**
