@@ -19,7 +19,7 @@
             $(".ftp-server .asso-filed_single").click(function(e) {
 
                 var selected_check_boxes_index = 0;
-              $("input:radio").each(function() {
+                $("input:radio").each(function() {
                     if ($(this).is(':checked'))
                     {
                         selected_check_boxes_index = $(this).val();
@@ -239,6 +239,20 @@ jQuery('document').ready(function() {
             parent.jQuery("[name='field_video_upload_add_more']").mousedown();
             $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
 
+                parent.jQuery.colorbox.close();
+            });
+        } else {
+            alert("Select video file and upload");
+        }
+    });
+
+    jQuery(".add-in-single-filedl").click(function(e) {
+        var videogallery_new_file_hold = parseInt(jQuery('input[name="videogallery_new_file[fid]"]').val());
+        if (parseInt(jQuery('input[name="videogallery_new_file[fid]"]').val()) != 0) {
+            var getbtnmane = $(this).attr('btn_name');
+            parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(selected_check_boxes_index);
+            parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_repository][button]").trigger('mousedown');
+            $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
                 parent.jQuery.colorbox.close();
             });
         } else {
