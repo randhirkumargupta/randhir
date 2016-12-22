@@ -1411,10 +1411,10 @@ function itg_videogallery_ajax_ftp_video() {
                 $video_image = '<img src="' . $un_video['thumb_url'] . '">';
             }
             if ($_POST['value_type'] == '1') {
-                $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio video-select" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
+                $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
             }
             else {
-                $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio video-select" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
+                $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
             }
         }
     }
@@ -1492,10 +1492,10 @@ function itg_videogallery_ajax_time_search_video() {
                 $video_image = '<img src="' . $un_video['thumb_url'] . '">';
             }
             if ($_POST['value_type'] == '1') {
-                $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio video-select" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
+                $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="radio" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
             }
             else {
-                $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio video-select" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
+                $val .= '<span class="ftp_video_radio"><input id = "video_id_' . $key . '" type="checkbox" name="video-form" class="form-radio" value="' . $key . '"/><label for = "video_id_' . $key . '">' . $video_image . $un_video['filename'] . '<span class="file_size">' . $un_video['filesize'] . ' MB</span></label></span>';
             }
         }
     }

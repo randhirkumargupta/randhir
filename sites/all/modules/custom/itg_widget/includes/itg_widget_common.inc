@@ -2759,8 +2759,7 @@ function get_rhs_block_display_condtion($delta = '') {
                         || $arg[0] == 'programmes' 
                         || $arg[0] == 'itg-layout-manager' 
                         || $arg[0] == 'insert-layout-setting-ajax' 
-                        || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') 
-                        || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') 
+                        || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story')                         
                         || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') 
                         || $display_block == TRUE) {
                     return TRUE;

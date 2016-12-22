@@ -41,8 +41,8 @@ function itg_story_xml_submit($form, &$form_state) {
     }
     $xml = "<root>";
     foreach ($views_bulk_operations as $nid) {
-      if (!empty($nid)) {
-        $xml .= get_custom_feeds_files($nid, $feed_pattern);
+      if (!empty($nid) && $nid>0) {
+        $xml .= get_custom_feeds_files($nid, $feed_pattern ,'xml');
       }
     }
     $xml .= "</root>";
