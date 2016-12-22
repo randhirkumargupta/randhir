@@ -432,7 +432,14 @@ class ItgStoryMigration extends XMLMigration {
     // change checkboxes value
     if ((string) $row->xml->story_issue == 'yes') {
       $row->xml->story_issue = 'magazine_issue_story';
+    }else{
+      $row->xml->story_issue = '';
     }
+    // select magazine select_magazine
+    if ((string) $row->xml->select_magazine == 0) {
+      $row->xml->select_magazine = '';
+    }
+    
     if ((string) $row->xml->selectlisticletemplates == 1) {
       $row->xml->selectlisticletemplates = 'bullet_points';
     }
@@ -642,9 +649,10 @@ class ItgStoryMigration extends XMLMigration {
     }
     
     //facebook instant article filed
-    if (isset($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate) && !empty($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate)) {
+    if (isset($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate) && !empty($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate->gallery_id)) {
       $pos_count=0;
       foreach ($row->xml->facebook_instant_article_integration->gallery_associate_content->gallery_associate as $facebook_article) {
+       if(!empty($facebook_article->gallery_id_position) || !empty($facebook_article->gallery_id)){
         $position = (string) $facebook_article->gallery_id_position;
         $gallery_id = (string) $facebook_article->gallery_id;
         $values = array(
@@ -657,6 +665,7 @@ class ItgStoryMigration extends XMLMigration {
         $field_collection_item_facebook->save(TRUE);
         $node->field_facebook_gallery_associate[LANGUAGE_NONE][$pos_count]['value'] = $field_collection_item_facebook->item_id;
         $pos_count++;
+       }
       }
     }
 
