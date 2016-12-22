@@ -201,6 +201,7 @@ function itg_reports_block_view($delta = '') {
  *   Array of chart data.
  */
 function itg_report_get_graph_data() {
+  global $base_url;
   $arg = arg();
   $chart_data = array();
   $node = node_load($arg[1]);
@@ -211,11 +212,18 @@ function itg_report_get_graph_data() {
       $movie_details = taxonomy_term_load($tids['tid']);
       $movie_name = $movie_details->name;
       $timestamp = $movie_details->field_reporter_movie_year['und'][0]['value'];
-      $movie_year = format_date($timestamp, 'custom', 'Y');
+      $movie_year = format_date($timestamp, 'custom', 'Y');      
+      $actor_pic_uri = $field_collection['entity']->field_story_extra_large_image['und'][0]['uri'];
+      if (empty($actor_pic_uri)) {
+        $actor_pic_real_uri = file_create_url($base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_career_graph.png');        
+      }
+      else {
+        $actor_pic_real_uri = $actor_pic_uri;
+      }
       $actor_data[] = array(
         'actor_name' => $field_collection['entity']->title,
         'movie_name' => $movie_name,
-        'actor_pic' => $field_collection['entity']->field_story_extra_large_image['und'][0]['uri'],
+        'actor_pic' => $actor_pic_real_uri,
       );
       $data[] = array(
         (int) $movie_year,
@@ -321,16 +329,18 @@ function itg_reports_views_pre_render(&$view) {
  * {@inheritdoc}.
  */
 function itg_reports_form_alter(&$form, &$form_state, $form_id) {
-  if (is_array($form['#term'])) {
-    if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {
-      $form['relations']['#prefix'] = '<div style="display:none;">';
-      $form['relations']['#suffix'] = '</div>';
+  if ($form_id == 'taxonomy_form_term') {
+    if (is_array($form['#term'])) {
+      if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {          
+        $form['relations']['#prefix'] = '<div style="display:none;">';
+        $form['relations']['#suffix'] = '</div>';
+      }
     }
-  }
-  if (is_object($form['#term'])) {
-    if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'movies') {
-      $form['relations']['#prefix'] = '<div style="display:none;">';
-      $form['relations']['#suffix'] = '</div>';
+    if (is_object($form['#term'])) {
+      if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'movies') {
+        $form['relations']['#prefix'] = '<div style="display:none;">';
+        $form['relations']['#suffix'] = '</div>';
+      }
     }
   }
 }
