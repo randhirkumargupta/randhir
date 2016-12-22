@@ -9887,6 +9887,7 @@ div.node #comments h2 {
   margin-top: 8px;
 }
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget > input[value="Remove"] {
+  display: none;
   border: none;
   background: url("../images/cross_small.png") center center no-repeat !important;
   width: 12px;
