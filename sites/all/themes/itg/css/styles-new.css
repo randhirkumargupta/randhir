@@ -414,15 +414,13 @@
   right: 0;
 }
 
-.view-photo-list-of-category .view-content {
-  margin: 0 -15px;
-}
 .view-photo-list-of-category .view-content .photo-list {
+  margin: 0 -15px;
   list-style: none;
   overflow: hidden;
 }
 .view-photo-list-of-category .view-content .photo-list li {
-  padding: 15px 10px;
+  padding: 15px 15px;
   float: left;
 }
 .view-photo-list-of-category .view-content .photo-list li .tile figure {

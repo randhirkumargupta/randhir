@@ -1996,26 +1996,26 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     //join  for field value
       $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-          $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
-          $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
-          $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
-          $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
-          $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-          $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-          $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
-          $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
-          $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
-          $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
-          $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
-          $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
-          $query->fields('eli_file', array('uri'));
-          $query->fields('li_file', array('uri'));
-          $query->fields('mi_file', array('uri'));
-          $query->fields('si_file', array('uri'));
-          $query->fields('esi_file', array('uri'));
-          $query->fields('kt', array('field_story_kicker_text_value'));
-          $query->fields('vd', array('field_video_duration_value'));
-          $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));                    
+      $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+      $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+      $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+      $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+      $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+      $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+      $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+      $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+      $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+      $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+      $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+      $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+      $query->fields('eli_file', array('uri'));
+      $query->fields('li_file', array('uri'));
+      $query->fields('mi_file', array('uri'));
+      $query->fields('si_file', array('uri'));
+      $query->fields('esi_file', array('uri'));
+      $query->fields('kt', array('field_story_kicker_text_value'));
+      $query->fields('vd', array('field_video_duration_value'));
+      $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));                    
     //end
     $query->condition('iwo.widget', $widget_name)
             ->condition('n.status', 1)
@@ -2121,7 +2121,7 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
  * @return array
  */
 function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $content_type, $range_max, $range_min = 0) {
-    $query = db_select('itg_widget_order', 'iwo');
+    /*$query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->condition('iwo.widget', $widget_name)
             ->condition('n.status', 1)
@@ -2150,7 +2150,25 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
                 ->fields('iwo', array('nid', 'extra', 'weight'));
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-    }
+    }*/
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    //join  for field value
+      $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');      
+      $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+      $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');      
+      $query->fields('eli_file', array('uri'));
+      $query->fields('vd', array('field_video_duration_value'));
+      $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));                    
+    //end
+    $query->condition('iwo.widget', $widget_name)
+            ->condition('n.status', 1)
+            ->condition('iwo.content_type', $content_type)
+            ->orderBy('iwo.weight', 'ASC')
+            ->range($range_min, $range_max)
+            ->orderBy('n.nid', 'ASC')
+            ->fields('iwo', array('nid', 'extra', 'weight'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /**
@@ -2163,7 +2181,7 @@ function get_view_nodes_form_custom_table_for_yearend_widgets($widget_name, $con
  */
 function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $cat_id, $range_max, $range_min = 0) {
     //p($cat_id);
-    $query = db_select('itg_widget_order', 'iwo');
+    /*$query = db_select('itg_widget_order', 'iwo');//
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
     $query->condition('iwo.widget', $widget_name)
@@ -2195,7 +2213,26 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
                 ->fields('iwo', array('nid', 'extra', 'weight'));
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-    }
+    }*/
+    $query = db_select('itg_widget_order', 'iwo');//
+    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+    $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
+    //join  for field value
+    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');      
+    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');      
+    $query->fields('si_file', array('uri'));
+    $query->fields('vd', array('field_video_duration_value'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));                    
+    //end
+    $query->condition('iwo.widget', $widget_name)
+            ->condition('n.status', 1)
+            ->condition('tx.tid', $cat_id)
+            ->orderBy('iwo.weight', 'ASC')
+            ->orderBy('n.nid', 'DESC')
+            ->range($range_min, $range_max)
+            ->fields('iwo', array('nid', 'extra', 'weight'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /**
