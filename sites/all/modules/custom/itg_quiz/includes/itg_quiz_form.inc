@@ -10,6 +10,7 @@
  */
 function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
   global $base_url;
+  global $user;
   
   //Get node of current quiz (load all questions ans answer options to generate quiz form)
   if($node_id) {
@@ -60,7 +61,12 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     $form = array();
     
     // Check this survey has been attempted by current user OR not.
-    $cookie_name = 'Drupal_visitor_itgcms_quiz_' . $node->nid;
+    if($user->uid) {
+      $cookie_name = 'Drupal_visitor_itgcms_quiz_' . $node->nid .'_'. $user->uid;
+    } else {
+      $cookie_name = 'Drupal_visitor_itgcms_quiz_' . $node->nid;
+    }
+
     if (isset($_COOKIE[$cookie_name])) {
       $quiz_taken = 'yes';
     } else {

@@ -1754,6 +1754,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   text-transform: uppercase;
   font-family: roboto;
 }
+.home_page_poll_widget_block .poll-data form .form-radios {
+  text-align: center;
+}
 .home_page_poll_widget_block .poll-data form .form-radios .form-item {
   display: inline-block;
   vertical-align: top;

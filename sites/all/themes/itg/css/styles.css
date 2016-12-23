@@ -8572,7 +8572,6 @@ footer .footer-copyright {
 /*css start special page*/
 #block-itg-menu-manager-third-level-menu {
   zoom: 1;
-  overflow: hidden;
 }
 #block-itg-menu-manager-third-level-menu:before, #block-itg-menu-manager-third-level-menu:after {
   content: "";
@@ -8582,6 +8581,9 @@ footer .footer-copyright {
 }
 #block-itg-menu-manager-third-level-menu:after {
   clear: both;
+}
+#block-itg-menu-manager-third-level-menu .select-menu {
+  display: none;
 }
 #block-itg-menu-manager-third-level-menu .menu-wrapper {
   height: 60px;
