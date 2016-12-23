@@ -228,17 +228,17 @@ function itg_menu_manager_form($form, &$form_state) {
   );
 
   $form['category_icon'] = array(
-      '#title' => t('Upload the icon'),
-      '#type' => 'managed_file',
-      '#name' => 'category_icon',
-      '#title' => t('Upload external menu icon'),
-      '#description' => t('Category icon applicable for <br/>only external link. For internal icon <br/>will come from category manager.'),
-      '#file_validate_extensions' => array(
-        'png gif jpg jpeg'
-      ),
-      '#default_value' => ((int) $default_values['menu_name']) ? $default_values['menu_name'] : NULL,
-      '#upload_location' => 'public://category_icon/',
-    );
+    '#title' => t('Upload the icon'),
+    '#type' => 'managed_file',
+    '#name' => 'category_icon',
+    '#title' => t('Upload external menu icon'),
+    '#description' => t('Category icon applicable for <br/>only external link. For internal icon <br/>will come from category manager.'),
+    '#file_validate_extensions' => array(
+      'png gif jpg jpeg'
+    ),
+    '#default_value' => ((int) $default_values['menu_name']) ? $default_values['menu_name'] : NULL,
+    '#upload_location' => 'public://category_icon/',
+  );
   // Submit Button
   $form['submit'] = array(
     '#type' => 'submit',
@@ -676,12 +676,15 @@ function itg_menu_manager_block_view($delta = '') {
         $node_data = node_load(arg(1));
       }
 
-      foreach ($third_level_menu as $db_data) {
-        $temp_data = array();
-        $temp_data['db_data'] = $db_data;
-        $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
-        $data[] = $temp_data;
+      if (!empty($third_level_menu) && isset($third_level_menu)) {
+        foreach ($third_level_menu as $db_data) {
+          $temp_data = array();
+          $temp_data['db_data'] = $db_data;
+          $temp_data['term_load'] = taxonomy_term_load($db_data['tid']);
+          $data[] = $temp_data;
+        }
       }
+
       $block['content'] = theme('third_level_menu', array("data" => $data, "node_load" => $node_data));
       break;
   }
@@ -1029,13 +1032,13 @@ function itg_menu_manager_webform_js_submit(&$form, &$form_state) {
  */
 function itg_menu_manager_custom_submit($form, &$form_state) {
   // Current display for indentifing the view page (Widget name).
-  $current_display = $form_state['build_info']['args'][0]->current_display;
+  //$current_display = $form_state['build_info']['args'][0]->current_display;
   // Below view_name will use to get widget name.
   // Take draggable view input value after submit the form.
   $draggable_view_data = $form_state['input']['draggableviews'];
   // Category tid from url.
   $menu_level = arg(1);
-  if ($menu_level == 'second') {
+  if ($menu_level == 'second' || $menu_level == 'vertical') {
     $total_changed_weight = 0;
 
     foreach ($draggable_view_data as $weight_cal_key => $weight) {
@@ -1077,8 +1080,8 @@ function itg_menu_manager_custom_submit($form, &$form_state) {
           db_merge('itg_menu_manager')
               ->key(array(
                 'tid' => trim($menu_data['id']),
-                'menu_level' => trim($menu_level),
-                'section_id' => trim($section_id),
+//                'menu_level' => trim($menu_level),
+//                'section_id' => trim($section_id),
               ))
               ->fields(array(
                 'weight' => $menu_data['weight'],
@@ -1149,10 +1152,10 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $link_url = $active = $image_class = "";
   $target = "_self";
   $link_text = $link_title_for_vertical = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $title_array[0];
-  $url_type = $menu_data['db_data']['url_type'];
-  $display_icon = $menu_data['db_data']['display_icon'];
-  $db_target = $menu_data['db_data']['target'];
-  $tid = $menu_data['db_data']['tid'];
+  $url_type = isset($menu_data['db_data']['url_type']) ? $menu_data['db_data']['url_type'] : "";
+  $display_icon = isset($menu_data['db_data']['display_icon']) ? $menu_data['db_data']['display_icon'] : "";
+  $db_target = isset($menu_data['db_data']['target']) ? $menu_data['db_data']['target'] : "";
+  $tid = isset($menu_data['db_data']['tid']) ? $menu_data['db_data']['tid'] : 0;
   $active_cls = $parent_class = "notactive";
   $icon_fid = (int) $menu_data['db_data']['menu_name'];
   $sponser_logo_uri = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['uri']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['uri'] : 0;
@@ -1164,7 +1167,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
     if ($int_value) {
       $icon_object = file_load((int) $icon_fid);
       // Set icon for internal menu used for vertical menu.
-      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($icon_object->uri) ."' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($icon_object->uri) . "' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
       if (!empty($icon_object->uri)) {
         $image_class = "has-image";
       }
@@ -1174,10 +1177,10 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   if ($url_type == 'external' && $display_icon && $icon_fid == "notFound") {
     $link_text = $vertical_menu_icon = "<img  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' />";
   }
- 
+
   if ($url_type == 'internal' && $display_icon) {
     if (is_string($sponser_logo_uri) && !empty($sponser_logo_uri)) {
-      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($sponser_logo_uri) ."' />";//theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
+      $link_text = $vertical_menu_icon = "<img  src='" . file_create_url($sponser_logo_uri) . "' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
       $image_class = "has-image";
     }
   }
@@ -1193,7 +1196,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   else {
     $link_url = $menu_data['db_data']['url'];
   }
-  
+
   // manage target
   if (trim($db_target) == 'new_window') {
     $target = "_blank";
@@ -1211,7 +1214,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
       $active = 'active';
     }
   }
-  
+
   // Prepare variables
   $menu_link_data_array['image_class'] = $image_class;
   $menu_link_data_array['link_text'] = $link_text;

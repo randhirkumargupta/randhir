@@ -26,7 +26,7 @@ else if (arg(0) == 'photo-list' || arg(0) == 'video-list') {
 else if ($cat_flag == FALSE) {
   $cat_id = arg(2);
 }
-if ($cat_id == variable_get('ipl_for_widget')) {
+if ($cat_id == variable_get('ipl_for_widget') && isset($cat_id)) {
   drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
                         
@@ -37,9 +37,10 @@ if ($cat_id == variable_get('ipl_for_widget')) {
 
 if ($cat_id == "") {
   $node = itg_videogallery_get_term(arg(1));
-
-  if (in_array(variable_get('ipl_for_widget'), $node)) {
-    $cat_id = variable_get('ipl_for_widget');
+  if(!empty($node)) {
+    if (in_array(variable_get('ipl_for_widget'), $node)) {
+      $cat_id = variable_get('ipl_for_widget');
+    }
   }
 }
 
