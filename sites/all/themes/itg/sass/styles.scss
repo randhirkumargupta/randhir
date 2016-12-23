@@ -7129,10 +7129,12 @@ input[type="radio"]:checked + label:after{
 
 /*css start special page*/
 #block-itg-menu-manager-third-level-menu{    
-    @include clearfix;    
-    overflow:hidden;
+    @include clearfix;            
+     .select-menu{
+            display: none;
+        }
     .menu-wrapper{
-        height:60px;
+        height:60px;       
     }
     img{
         padding-top: 10px;

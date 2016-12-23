@@ -596,28 +596,12 @@ jQuery(document).ready(function () {
           }else{
                jQuery(".home-bottom-vertical").hide();
           }
-          
-          
-//        if(windowTop > flimit){            
-//               el.css({
-//                   'position': 'absolute',
-//                   'left': -55 + 'px',
-//                   'top': flimit - 175 + 'px'
-//               })   
-//        }
-//        else{
-//            el.css({
-//                   'position': 'fixed',
-//                   'left': finalWidth - 70 + 'px',
-//                   'top': 270 + 'px'
-//               })
-//        }
         });
    }
     
+    var menuLength;
     jQuery(".vertical-menu").each(function(){
-        var menuLength  = jQuery(this).find('li').length;
-        console.log(menuLength);
+        menuLength  = jQuery(this).find('li').length;        
         if (menuLength > 5) {
             jQuery('.vertical-more').show();
         }
@@ -680,7 +664,10 @@ jQuery(document).ready(function () {
         left: x + 'px'
       }).addClass("rippleEffect");
     });
-
+    // vertical menu on mobile
+    jQuery('.select-menu').click(function(){
+        jQuery(this).next('ul').stop().slideToggle();
+    });
 });
     
 
