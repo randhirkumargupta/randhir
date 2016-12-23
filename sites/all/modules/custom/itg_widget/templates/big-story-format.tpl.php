@@ -53,7 +53,7 @@ if (!empty($data)) :
           <?php
           $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
           // prepare configuration for sharing
-          $share_title = mb_strimwidth($data['node_data']->title, 0, 65, "..");
+          $share_title = $data['node_data']->title;
           $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
           $short_url = shorten_url($actual_link, 'goo.gl');
           ?>

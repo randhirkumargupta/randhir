@@ -71,19 +71,43 @@
   foreach ($data as $parent_key => $parent_value) {
     $sub_title = '';
     foreach ($parent_value as $key => $value) {
+      // conditon for lock story
+      if(function_exists(itg_msi_get_lock_story_status)) {
+      $lock_story = itg_msi_get_lock_story_status($value->nid);
+      }
       if ($key == 0) {
         $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '"/>';
+        if(!empty($lock_story)) {
+        $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
+        $title = l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+        }
+        else {
         $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
-        $title = l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'node/' . $value->nid);
+        $title = l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'node/' . $value->nid);  
+        }
       }
       elseif ($key > 0 && $key < 3) {
+        if(!empty($lock_story)) {
+         $sub_title .= '<p class="lock">' . l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>'; 
+        }
+        else {
         $sub_title .= '<p>' . l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'node/' . $value->nid) . '</p>';
+        }
       }
     }
-
+    if(!empty($lock_story)) {
+      $lock_class = 'class="lock"';
+    }
     $output = $img;
     $output .= '<span class="widget-title">' . t($value->name) . '</span>';
-    $output .= '<h3>' . $title . '</h3>';
+    
+    if(!empty($lock_story)) {
+      $output .= '<h3 class="lock">' . $title . '</h3>';  
+    }
+    else {
+      $output .= '<h3>' . $title . '</h3>';  
+    }
+    
     if (!empty($sub_title)) {
       $output .= $sub_title;
     }
@@ -100,19 +124,38 @@
     foreach ($supplement_value as $suppliment_key => $suppliment_value) {
       $sup_sub_title = '';
       foreach ($suppliment_value as $key => $s_value) {
-        if ($key == 0) {
-          $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '"/>';
+      if (function_exists(itg_msi_get_lock_story_status)) {
+        $lock_story = itg_msi_get_lock_story_status($s_value->nid);
+      }
+      if ($key == 0) {
+        $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '"/>';
+        if (!empty($lock_story)) {
+          $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
+          $supp_title = l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+        }
+        else {
           $supp_img = l($supp_img_url, 'node/' . $s_value->nid, array('html' => TRUE));
           $supp_title = l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $value->nid);
         }
-        elseif ($key > 0 && $key < 3) {
+      }
+      elseif ($key > 0 && $key < 3) {
+        if (!empty($lock_story)) {
+          $sup_sub_title .= '<p class="lock">' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
+        }
+        else {
           $sup_sub_title .= '<p>' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $value->nid) . '</p>';
+        }
         }
       }
       $supp_output = $supp_img;
       $supp_output .= '<span class="widget-title">' . itg_msi_issue_suppliment_title($s_value->field_story_select_supplement_target_id) . '</span>';
-
+      if(!empty($lock_story)) {
+        $supp_output .= '<h3 class="lock">' . $supp_title . '</h3>';
+      }
+      else {
       $supp_output .= '<h3>' . $supp_title . '</h3>';
+      }
+      
       if (!empty($sup_sub_title)) {
         $supp_output .= $sup_sub_title;
       }

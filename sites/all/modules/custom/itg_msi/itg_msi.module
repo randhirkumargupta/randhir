@@ -245,6 +245,17 @@ function itg_msi_views_pre_render(&$view) {
     $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
     $view->attachment_before = $header_content_issue;
   }
+
+  if ($view->name == "magazine_top_story") {
+    foreach ($view->result as $magazine_top_story) {
+      if (function_exists(itg_msi_get_lock_story_status)) {
+        $lock_story = itg_msi_get_lock_story_status($magazine_top_story->nid);
+      }
+      if (!empty($lock_story)) {
+        $magazine_top_story->field_field_story_extra_large_image[0]['rendered']['#path']['path'] = 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage';
+      }
+    }
+  }
 }
 
 /**
@@ -967,10 +978,38 @@ function itg_msi_issue_suppliment_data($issue_date){
   return $result;
 }
 
+/*
+ * Implements itg_msi_issue_suppliment_title
+ * @param int $nid
+ */
 function itg_msi_issue_suppliment_title($nid){
   $query = db_select('node', 'n');
   $query->fields('n', array('title'));
   $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchField();
   return t($result);
+}
+
+/*
+ * Implements itg_msi_get_lock_story_status
+ * @param int $nid
+ */
+function itg_msi_get_lock_story_status($nid){
+  $query = db_select('field_data_field_story_configurations', 'c');
+  $query->fields('c', array('field_story_configurations_value'));
+  $query->condition('c.entity_id', $nid, '=');
+  $query->condition('c.bundle', 'story', '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+/**
+ * Implements hook_views_api().
+ *
+ * {@inheritdoc}.
+ */
+function itg_msi_views_api() {
+  return array(
+    'api' => 3,
+  );
 }
