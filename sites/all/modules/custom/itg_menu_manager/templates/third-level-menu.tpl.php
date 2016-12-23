@@ -55,14 +55,15 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
   <div class="menu-wrapper" style="background: <?php print $field_cm_category_color; ?>">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4 col-xs-4">
           <?php
           if (!empty($src) && isset($uri)) {
             print "<img src='" . $src . "'>";
           }
           ?>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-8 col-xs-8">
+        <div class="select-menu">Section</div>
           <ul class="third-level-menu">
             <?php foreach ($data as $key => $menu_data) : ?>
               <?php
