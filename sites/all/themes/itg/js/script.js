@@ -583,7 +583,7 @@ jQuery(document).ready(function () {
                    'left': '-60px',
                    'top': '100px',
                    'bottom': 'auto'
-               });
+               });            
           }
           if(windowTop > limit + 315){              
               el.css({
@@ -591,7 +591,10 @@ jQuery(document).ready(function () {
                    'left': '-60px',
                    'top': 'auto',
                    'bottom': '0px'
-               });              
+               });
+               jQuery(".home-bottom-vertical").show();
+          }else{
+               jQuery(".home-bottom-vertical").hide();
           }
           
           
@@ -612,11 +615,13 @@ jQuery(document).ready(function () {
         });
    }
     
-    
-    var menuLength  = jQuery('.vertical-menu li').length;
-    if (menuLength > 5) {
-        jQuery('.vertical-more').show();
-    }   
+    jQuery(".vertical-menu").each(function(){
+        var menuLength  = jQuery(this).find('li').length;
+        console.log(menuLength);
+        if (menuLength > 5) {
+            jQuery('.vertical-more').show();
+        }
+    });
     var calcNum = menuLength % 5;
     var divNum = parseInt(menuLength/5);    
     var count = 0;
