@@ -389,6 +389,11 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).ready(function () {
+    //breaking news hide
+    jQuery(".breaking-new-close").click(function(){
+        jQuery(".breakingnew-home").slideUp();
+    });
+    
     var getmsgsaves = jQuery('.saved-photogallery').text();
     if (getmsgsaves != "")
     {
