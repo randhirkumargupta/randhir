@@ -60,10 +60,10 @@ window.addEventListener("message", function(ev) {
   <?php print render($page['top']); ?>
   <?php print render($page['my_cart']); ?>
   
-  <main id="main" class="container">
+  <main id="main" class="container pos-rel">
+    <?php print render($page['vertical_menu']); ?>
     <div class="row">
-    <section id="content" class="<?php echo $cls;?> pos-rel" role="main">
-      <?php print render($page['vertical_menu']); ?>
+    <section id="content" class="<?php echo $cls;?>" role="main">
       <?php print render($page['highlighted']); ?>
       <?php if(arg(0)!= 'user'): print $breadcrumb; ?>
       <?php endif; ?>
