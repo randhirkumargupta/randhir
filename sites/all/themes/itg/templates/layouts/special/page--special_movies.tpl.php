@@ -71,7 +71,8 @@ if ($theme != 'itgadmin') {
         endif;
     ?>
     
-    <main id="main" class="container">
+    <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -92,8 +93,7 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?> movie-layout-page pos-rel">    
-<?php print render($page['vertical_menu']); ?>
+<div class="itg-layout-container <?php echo $itg_class; ?> movie-layout-page ">
      <div class="row itg-top-section itg-layout-580">
         
         <div class="top-block">
