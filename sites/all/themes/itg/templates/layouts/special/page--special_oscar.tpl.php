@@ -70,7 +70,8 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
-    <main id="main" class="container">
+    <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -91,8 +92,7 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?> oscar-layout-page pos-rel">   
-    <?php print render($page['vertical_menu']); ?>
+<div class="itg-layout-container <?php echo $itg_class; ?> oscar-layout-page ">
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12 left-side">
    <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
