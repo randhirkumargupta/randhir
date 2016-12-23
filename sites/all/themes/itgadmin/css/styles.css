@@ -8968,6 +8968,9 @@ div.node #comments h2 {
   margin-top: 20px;
   -webkit-transition: scale;
 }
+.node-category-form .field-name-field-cm-select-template-type .ajax-progress {
+  display: none;
+}
 
 .page-node-add-recipe .form-managed-file .image-widget-data {
   float: left;

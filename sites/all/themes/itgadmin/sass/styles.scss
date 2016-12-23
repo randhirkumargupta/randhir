@@ -8151,6 +8151,11 @@ div.node{
     margin-top: 20px;
     -webkit-transition: scale
   }
+  .field-name-field-cm-select-template-type{
+    .ajax-progress{
+      display: none;
+    }
+  }
 }
 .page-node-add-recipe, {
   .form-managed-file .image-widget-data{
