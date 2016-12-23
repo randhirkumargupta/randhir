@@ -68,7 +68,8 @@ if ($theme != 'itgadmin') {
     endif;
     ?>
       
-        <main id="main" class="container">
+        <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
             <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
     <?php print $breadcrumb; ?>
@@ -96,8 +97,7 @@ if ($theme != 'itgadmin') {
             }
             ?>
 
-            <div class="itg-layout-container <?php echo $itg_class; ?> sport-home-layout-page pos-rel">   
-                <?php print render($page['vertical_menu']); ?>
+            <div class="itg-layout-container <?php echo $itg_class; ?> sport-home-layout-page ">
                 <div class="row">
                     <div class="col-md-8 col-sm-12 col-xs-12 left-side">
 <?php if (isset($widget_data['itg-block-1']['widget_name']) || $theme == 'itgadmin') { ?>

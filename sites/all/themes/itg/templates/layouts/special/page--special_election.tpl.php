@@ -100,7 +100,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         endif;
         ?>
       
-        <main id="main" class="container">
+        <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
             <section id="content" role="main">
                 <?php print render($page['highlighted']); ?>
                 <?php print $breadcrumb; ?>
@@ -126,8 +127,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 $itg_class = 'itg-front';
             }
             ?>
-            <div class="itg-layout-container election-page <?php echo $itg_class; ?> pos-rel">
-              <?php print render($page['vertical_menu']); ?>
+            <div class="itg-layout-container election-page <?php echo $itg_class; ?> ">
                 <?php
                 if (!empty($highlights['node_data']->title)) {
                     echo '<h1>' . mb_strimwidth($highlights['node_data']->title, 0, 90, "..") . ' <span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></h1>';

@@ -18,6 +18,7 @@ function features_for_print_team_user_default_permissions() {
       'Correspondent' => 'Correspondent',
       'Editor' => 'Editor',
       'Knowledge Centre' => 'Knowledge Centre',
+      'Photographer' => 'Photographer',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
