@@ -698,7 +698,13 @@ function itg_quiz_views_user_list($nid){
  * @param array $form_state
  */
 function itg_quiz_quiz_form_validate($form, &$form_state) {
-  $cookie_name = 'Drupal_visitor_itgcms_quiz_' . $form_state['values']['nid'];
+  global $user;
+  if($user->uid) {
+   $cookie_name = 'Drupal_visitor_itgcms_quiz_' . $form_state['values']['nid'] . '_' . $user->uid; 
+  } else {
+   $cookie_name = 'Drupal_visitor_itgcms_quiz_' . $form_state['values']['nid'];
+  }
+  
   if (isset($_COOKIE[$cookie_name])) {
     form_set_error('answer_option', t('Sorry! You can not proceed, you have already attempted this quiz.'));
   } 

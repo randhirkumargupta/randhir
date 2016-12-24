@@ -26,7 +26,7 @@ else if (arg(0) == 'photo-list' || arg(0) == 'video-list') {
 else if ($cat_flag == FALSE) {
   $cat_id = arg(2);
 }
-if ($cat_id == variable_get('ipl_for_widget')) {
+if ($cat_id == variable_get('ipl_for_widget') && isset($cat_id)) {
   drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
                         
@@ -37,9 +37,10 @@ if ($cat_id == variable_get('ipl_for_widget')) {
 
 if ($cat_id == "") {
   $node = itg_videogallery_get_term(arg(1));
-
-  if (in_array(variable_get('ipl_for_widget'), $node)) {
-    $cat_id = variable_get('ipl_for_widget');
+  if(!empty($node)) {
+    if (in_array(variable_get('ipl_for_widget'), $node)) {
+      $cat_id = variable_get('ipl_for_widget');
+    }
   }
 }
 
@@ -55,14 +56,15 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
   <div class="menu-wrapper" style="background: <?php print $field_cm_category_color; ?>">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4 col-xs-4">
           <?php
           if (!empty($src) && isset($uri)) {
             print "<img src='" . $src . "'>";
           }
           ?>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-8 col-xs-8">
+        <div class="select-menu">Section</div>
           <ul class="third-level-menu">
             <?php foreach ($data as $key => $menu_data) : ?>
               <?php

@@ -2912,12 +2912,9 @@ function itg_widget_node_update($node) {
             $updated_categories[] = $category['tid'];
         }
 
-// Delete unused category from table.
+        // Delete unused category from table.
         $strg = implode(',', $updated_categories);
-        $sqlInsert = "DELETE from {itg_widget_order} where widget='section_wise_widget' and nid = '" . $nid . "' and cat_id not in ($strg)";
-        db_query($sqlInsert);
-
-
+        db_query("DELETE from {itg_widget_order} where widget= :widget and nid = :nid and cat_id not in (:str)" , array(":widget" => 'section_wise_widget' , ':nid' => $nid, ':str' => $strg));
         $new_weight_to_be_inserted = array();
 
         foreach ($updated_categories as $category) {

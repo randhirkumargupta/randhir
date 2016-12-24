@@ -315,7 +315,7 @@ function itg_widget_block_view($delta = '') {
       $info['widget'] = 'big_story_format_widget';
       $data = itg_widget_big_story_block_data($info);
       foreach ($data as $big_story_data) {
-        if ($big_story_data['is_live_tv']) {
+        if (isset($big_story_data['is_live_tv']) && !empty($big_story_data['is_live_tv'])) {
           $live_tv_flag = TRUE;
           $big_story_node_data['live_tv'] = itg_live_tv_page_video();
         }
