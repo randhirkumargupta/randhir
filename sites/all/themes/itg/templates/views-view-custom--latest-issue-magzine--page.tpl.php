@@ -71,7 +71,7 @@
   foreach ($data as $parent_key => $parent_value) {
     $sub_title = '';
     foreach ($parent_value as $key => $value) {
-      // conditon for lock story
+       // get status of lock story
       if(function_exists(itg_msi_get_lock_story_status)) {
       $lock_story = itg_msi_get_lock_story_status($value->nid);
       }
@@ -124,6 +124,7 @@
     foreach ($supplement_value as $suppliment_key => $suppliment_value) {
       $sup_sub_title = '';
       foreach ($suppliment_value as $key => $s_value) {
+        // get status of lock story
       if (function_exists(itg_msi_get_lock_story_status)) {
         $lock_story = itg_msi_get_lock_story_status($s_value->nid);
       }
