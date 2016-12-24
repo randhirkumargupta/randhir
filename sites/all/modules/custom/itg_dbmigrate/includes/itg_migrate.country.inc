@@ -20,7 +20,7 @@ class ItgCountryMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'city.xml';
+    $items_url = $xml_folder . 'country.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
