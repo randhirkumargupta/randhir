@@ -489,7 +489,7 @@
             $('body').find('#' + ID).show();
         });
         $('body').on('click', '.itg-close-popup', function() {
-            $(this).parent().parent().hide();
+            $(this).closest('.itg-popup').hide();
         });
 
         $('body').find('.image-preview').parent().addClass('has-image-preview');
