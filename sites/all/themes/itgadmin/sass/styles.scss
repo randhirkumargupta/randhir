@@ -529,7 +529,7 @@ span.error{
   padding-bottom: 30px;
   @extend .pos-rel;
   @extend .full;
-  min-height: 700px;
+  min-height: 800px;
 }
 body.sidebar-second{
   .sidebars{
@@ -1109,6 +1109,7 @@ div.vertical-tabs {
   }
 }
 .credit-to-all{
+  margin-top: 5px;
   @extend .dib;
   @extend .full;
   > div{
@@ -1122,7 +1123,7 @@ div.vertical-tabs {
     &.form-field-name-field-credit-name{
       .form-item{
         @extend .pd-0;
-        margin: -10px 0 0;
+        margin: -5px 0 0;
         label{
           display: none;
         }
@@ -2461,6 +2462,14 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
   #messages{
     margin: 20px 0;
   }
+  .survey-form-wrapper-all{
+    .ajax-progress-throbber{
+      position: static;
+      display: inline-block;
+      vertical-align: top;
+      margin: 20px 0 0 -15px;
+    }
+  }
   .question-container{
     @extend .hide;
     .question-heading{
@@ -2473,6 +2482,9 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
     }
     .ajax-progress-throbber{
       position: static;
+      display: inline-block;
+      vertical-align: top;
+      margin: 20px 0 0 -15px;
     }
     .form-submit{
       @extend .btn-save;
@@ -6256,7 +6268,7 @@ div.node{
 #edit-brief-idea-limit {
     color: green;
     float: right;
-    margin-top: -36px;
+    margin-top: 15px;
     text-align: right;
 }
 #pti-basic-info{
@@ -6971,9 +6983,9 @@ div.node{
 [id*="itg-survey-survey-form"] .form-submit {
   min-width: 100px;
   padding: 5px 10px;
-  height: 36px;
-  border: none;
-  border-radius: 1px;
+  height: 36px !important;
+  border: none !important;
+  border-radius: 1px !important;
   box-shadow: 0 1px 3px 0 #666;
   background: red;
   /* For browsers that do not support gradients */
@@ -6985,12 +6997,12 @@ div.node{
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 18px;
+  font-size: 18px !important;
   font-family: Roboto;
   color: #fff;
   font-weight: 400;
-  margin-right: 20px;
-  margin-top: 50px;
+  margin-right: 20px !important;
+  margin-top: 20px;
   cursor: pointer;
 }
 [id*="itg-survey-survey-form"] .success-message, [id*="itg-survey-survey-form"] .messages--status {
@@ -7197,7 +7209,7 @@ div.node{
       @extend .btn-save;
     }
     a.button{
-      padding-top: 9px;
+      padding-top: 6px;
     }
   }
 }
@@ -8140,6 +8152,11 @@ div.node{
     margin-top: 20px;
     -webkit-transition: scale
   }
+  .field-name-field-cm-select-template-type{
+    .ajax-progress{
+      display: none;
+    }
+  }
 }
 .page-node-add-recipe, {
   .form-managed-file .image-widget-data{
@@ -8669,10 +8686,22 @@ div.node{
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created{
     width: 220px;
   }
+  
   .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-field_task_team_member_target_id{
     width: 280px;
   }
 }
+.page-assigned-task-list{
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created{
+    width: 220px;
+  }
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-mail{
+    width: 280px;
+  }
+}
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-mail, {
+    width: 220px;
+  }
 .browse-video-form .ftp_browse_field div.description{padding: 3px 0 0 200px;}
 #videoupload #loader-data{
   position: fixed;
@@ -9143,5 +9172,16 @@ div.node{
   }
   table{
     @extend .views-table;
+  }
+}
+.page-mydraft-story .view .view-filters .views-exposed-form .views-widget-filter-title{
+  width: 380px;
+}
+[id*="podcast-node-form"]{
+  .form-managed-file .image-widget-data{
+    float: left;
+    .form-submit[value="Remove"]{
+      left: 400px;
+    }
   }
 }

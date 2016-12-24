@@ -1018,7 +1018,7 @@ function total_poll_count_content($poll_id) {
 function itg_poll_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'poll') {
     $poll_count = total_poll_count_content($node->nid);
-    $node->content['poll_count'] = 'Associate content count: '.$poll_count.' '.l('Associate content view', 'associate-content-poll/'.$node->nid);
+    $node->content['poll_count'] = '<div class="field"><div class="field-label">' . t('Associate content count:'). '</div><div class="field-items">'.$poll_count.'</div></div><div class="field">'.l(t('Associate content view'), 'associate-content-poll/'.$node->nid). '</div>';
   }
 }
 

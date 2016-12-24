@@ -757,8 +757,60 @@
 /*End css program live page*/
 
 #block-itg-menu-manager-third-level-menu{
-    .col-md-8{
+    .menu-wrapper{
+        background: #595959;
+        height: 60px;     
+    }
+    .select-menu{
+        color: #fff;
+        font-family: roboto;
+        width: 95px;
+        background: #3c3a3b;
+        padding-left: 5px;
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        position: relative;       
+        &:after{
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #ccc;
+            position: absolute;
+            top: 13px;
+            right: 9px;
+        }
+    }
+    ul.third-level-menu{
+        padding-top: 0;
+        background: #4d4b4c;
+        position: absolute;
+        z-index: 9999;
+        float: none;
+        width: 95px;
+        top: 30px;
+        left: 15px;
         display: none;
+        li{
+            display: block;            
+            a{
+                font-weight: 500;
+                font-size: 11px;
+                height: 30px;
+                line-height: 30px;
+                padding:0 0 0 8px;   
+                &:hover, &.active{
+                  background: #3d3b3c;  
+                  color:#fff;
+                }
+            }
+        }
+    }
+    .col-md-8{
+        display: block;
+        position: relative;
     }
 }
 
@@ -1579,7 +1631,7 @@
                 padding-left:10px;
                 li{
                     a{
-                        padding: 0 15px;
+                        padding: 0 12px;
                         line-height: 55px;
                     }
                     span.flag-throbber{

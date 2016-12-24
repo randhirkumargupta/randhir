@@ -84,15 +84,23 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
       || $form_id == 'event_configurations_node_form' 
       || $form_id == 'event_backend_node_form' 
       || $form_id == 'issue_node_form' 
-      || $form_id == 'supplement_node_form' 
+      || $form_id == 'supplement_node_form'
+      || $form_id == 'newsletter_node_form'    
       || $form_id == 'magazine_node_form' 
       || $form_id == 'heighlights_node_form' 
-      || $form_id == 'page_node_form' 
-      || $form['#vocabulary']->machine_name == 'category_management' 
-      || $form['#vocabulary']->machine_name == 'movies'
+      || $form_id == 'page_node_form'
+      || $form_id == 'newsletter_node_form'
   ) {
     if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
 
+      $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+    }
+  }
+  // Hide extra metatags on taxonomies.
+  if ($form_id == 'taxonomy_form_term' && 
+      ($form['#vocabulary']->machine_name == 'category_management'  || 
+      $form['#vocabulary']->machine_name == 'movies')) {
+    if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
       $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
     }
   }

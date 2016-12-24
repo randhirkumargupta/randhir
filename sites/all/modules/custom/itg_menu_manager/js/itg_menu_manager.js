@@ -25,28 +25,3 @@ jQuery(".itg_menu_manager_form").ajaxSuccess(function(event, xhr, settings) {
         jQuery("#itg-menu-manager-form input[type=text]").attr("disabled", "disabled");
     }
 });
-
-
-jQuery(".itg_menu_manager_form").ready(function() {
-    //jQuery("#itg-menu-manager-form input[type=text]").attr("disabled", "disabled");
-});
-
-
-(function($) {
-    Drupal.behaviors.itg_menu_manager_form = {
-        attach: function(context, settings) {
-            jQuery(document).ajaxStart(function() {
-                jQuery("#widget-ajex-loader").show();
-            });
-            jQuery(document).ajaxSuccess(function() {
-                $("#widget-ajex-loader").css("display", "none");
-            });
-            
-            jQuery("#edit-section-child").on('change', function() {
-                var section_chlid = jQuery(this).val();
-                jQuery("#edit-section-id").val(section_chlid);
-            })
-
-        }
-    };
-})(jQuery);

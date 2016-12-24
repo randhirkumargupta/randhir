@@ -1557,7 +1557,7 @@ textarea {
 /* Layout CSS */
 #main {
   padding-bottom: 30px;
-  min-height: 700px;
+  min-height: 800px;
 }
 
 body.sidebar-second .sidebars {
@@ -2095,12 +2095,15 @@ div.vertical-tabs .form-textarea-wrapper {
   background-color: #fff;
 }
 
+.credit-to-all {
+  margin-top: 5px;
+}
 .credit-to-all > div.form-field-name-field-credit-to-all .form-item {
   margin-top: 0;
   margin-bottom: 0;
 }
 .credit-to-all > div.form-field-name-field-credit-name .form-item {
-  margin: -10px 0 0;
+  margin: -5px 0 0;
 }
 .credit-to-all > div.form-field-name-field-credit-name .form-item label {
   display: none;
@@ -3216,6 +3219,12 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="itg-survey-survey-form"] #messages, [id*="itg-quiz-quiz-form"] #messages {
   margin: 20px 0;
 }
+[id*="itg-survey-survey-form"] .survey-form-wrapper-all .ajax-progress-throbber, [id*="itg-quiz-quiz-form"] .survey-form-wrapper-all .ajax-progress-throbber {
+  position: static;
+  display: inline-block;
+  vertical-align: top;
+  margin: 20px 0 0 -15px;
+}
 [id*="itg-survey-survey-form"] .question-container .question-heading, [id*="itg-quiz-quiz-form"] .question-container .question-heading {
   font-size: 20px;
   font-weight: 500;
@@ -3223,6 +3232,9 @@ div.image-widget-data .ajax-progress-throbber {
 }
 [id*="itg-survey-survey-form"] .question-container .ajax-progress-throbber, [id*="itg-quiz-quiz-form"] .question-container .ajax-progress-throbber {
   position: static;
+  display: inline-block;
+  vertical-align: top;
+  margin: 20px 0 0 -15px;
 }
 [id*="itg-survey-survey-form"] .answer-container, [id*="itg-quiz-quiz-form"] .answer-container {
   padding: 0;
@@ -6679,7 +6691,7 @@ div.node #comments h2 {
 #edit-brief-idea-limit {
   color: green;
   float: right;
-  margin-top: -36px;
+  margin-top: 15px;
   text-align: right;
 }
 
@@ -7378,9 +7390,9 @@ div.node #comments h2 {
 [id*="itg-survey-survey-form"] .form-submit {
   min-width: 100px;
   padding: 5px 10px;
-  height: 36px;
-  border: none;
-  border-radius: 1px;
+  height: 36px !important;
+  border: none !important;
+  border-radius: 1px !important;
   box-shadow: 0 1px 3px 0 #666;
   background: red;
   /* For browsers that do not support gradients */
@@ -7392,12 +7404,12 @@ div.node #comments h2 {
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
-  font-size: 18px;
+  font-size: 18px !important;
   font-family: Roboto;
   color: #fff;
   font-weight: 400;
-  margin-right: 20px;
-  margin-top: 50px;
+  margin-right: 20px !important;
+  margin-top: 20px;
   cursor: pointer;
 }
 
@@ -7551,7 +7563,7 @@ div.node #comments h2 {
 }
 
 .page-submit-idea .top-actions a.button, .page-submit-idea .top-actions [id*="itg-manage-budget"] .form-submit + a, [id*="itg-manage-budget"] .page-submit-idea .top-actions .form-submit + a {
-  padding-top: 9px;
+  padding-top: 6px;
 }
 
 #menu-item-delete-form {
@@ -8959,6 +8971,9 @@ div.node #comments h2 {
   margin-top: 20px;
   -webkit-transition: scale;
 }
+.node-category-form .field-name-field-cm-select-template-type .ajax-progress {
+  display: none;
+}
 
 .page-node-add-recipe .form-managed-file .image-widget-data {
   float: left;
@@ -9444,6 +9459,17 @@ div.node #comments h2 {
 }
 .page-created-task-list .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-field_task_team_member_target_id {
   width: 280px;
+}
+
+.page-assigned-task-list .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-created {
+  width: 220px;
+}
+.page-assigned-task-list .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-mail {
+  width: 280px;
+}
+
+.view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-mail {
+  width: 220px;
 }
 
 .browse-video-form .ftp_browse_field div.description {
@@ -9985,4 +10011,15 @@ div.node #comments h2 {
 }
 [id*="daily-motion-video-dashboard"] fieldset #edit-display-button {
   margin-top: 54px;
+}
+
+.page-mydraft-story .view .view-filters .views-exposed-form .views-widget-filter-title {
+  width: 380px;
+}
+
+[id*="podcast-node-form"] .form-managed-file .image-widget-data {
+  float: left;
+}
+[id*="podcast-node-form"] .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+  left: 400px;
 }

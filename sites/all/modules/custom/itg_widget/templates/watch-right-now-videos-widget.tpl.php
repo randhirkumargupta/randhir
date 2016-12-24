@@ -4,7 +4,7 @@
         if (empty($is_fron_page)) { ?><h3><span><?php print t("Watch Right Now") ?></span></h3><?php } ?>
         <ul class="">    
                 <?php foreach ($data as $video_key => $video_data) { ?>
-                <li id="watch-right-now-<?php echo $video_data->nid ?>" class="watch-right-now-list watch-right-now-<?php echo $video_key ?>"">        
+                <li id="watch-right-now-<?php echo $video_data['nid'] ?>" class="watch-right-now-list watch-right-now-<?php echo $video_key ?>"">        
         <?php if (!empty($video_data['si_file_uri'])) { ?>
                         <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/". $video_data['nid']); ?>" class="pic">
            

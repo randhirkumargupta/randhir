@@ -389,6 +389,11 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).ready(function () {
+    //breaking news hide
+    jQuery(".breaking-new-close").click(function(){
+        jQuery(".breakingnew-home").slideUp();
+    });
+    
     var getmsgsaves = jQuery('.saved-photogallery').text();
     if (getmsgsaves != "")
     {
@@ -578,7 +583,7 @@ jQuery(document).ready(function () {
                    'left': '-60px',
                    'top': '100px',
                    'bottom': 'auto'
-               });
+               });            
           }
           if(windowTop > limit + 315){              
               el.css({
@@ -586,32 +591,21 @@ jQuery(document).ready(function () {
                    'left': '-60px',
                    'top': 'auto',
                    'bottom': '0px'
-               });              
+               });
+               jQuery(".home-bottom-vertical").show();
+          }else{
+               jQuery(".home-bottom-vertical").hide();
           }
-          
-          
-//        if(windowTop > flimit){            
-//               el.css({
-//                   'position': 'absolute',
-//                   'left': -55 + 'px',
-//                   'top': flimit - 175 + 'px'
-//               })   
-//        }
-//        else{
-//            el.css({
-//                   'position': 'fixed',
-//                   'left': finalWidth - 70 + 'px',
-//                   'top': 270 + 'px'
-//               })
-//        }
         });
    }
     
-    
-    var menuLength  = jQuery('.vertical-menu li').length;
-    if (menuLength > 5) {
-        jQuery('.vertical-more').show();
-    }   
+    var menuLength;
+    jQuery(".vertical-menu").each(function(){
+        menuLength  = jQuery(this).find('li').length;        
+        if (menuLength > 5) {
+            jQuery('.vertical-more').show();
+        }
+    });
     var calcNum = menuLength % 5;
     var divNum = parseInt(menuLength/5);    
     var count = 0;
@@ -670,7 +664,10 @@ jQuery(document).ready(function () {
         left: x + 'px'
       }).addClass("rippleEffect");
     });
-
+    // vertical menu on mobile
+    jQuery('.select-menu').click(function(){
+        jQuery(this).next('ul').stop().slideToggle();
+    });
 });
     
 
