@@ -7599,11 +7599,6 @@ div.node{
         overflow: hidden;
       }
     }
-    .metatags-and-remarks{
-      h2:after{
-        display: none;
-      }
-    }
     .itg-form-section{
       float: left;
       width: 100%;
@@ -9182,6 +9177,21 @@ div.node{
     float: left;
     .form-submit[value="Remove"]{
       left: 400px;
+    }
+  }
+}
+
+.node-story-form .itg-sidebar-form .metatags-and-remarks{
+  background: none;
+  #remarks{
+    fieldset{border: none; padding-top: 10px;}
+  }
+  .vertical-tabs{
+    h2{
+      padding-top: 10px !important;
+      &:before{
+        display: none;
+      }
     }
   }
 }
