@@ -2296,14 +2296,17 @@ function itg_widget_block_view_alter(&$data, $block) {
 
   $page_argument = $item['page_arguments'];
   if (!empty($page_argument)) {
-    $occupation = $page_argument[0]->field_celebrity_pro_occupation['und'];
-    $story_category = $page_argument[0]->field_story_category['und'];
-    foreach ($occupation as $occupation_taxonomy) {
-      $flag_occupation[] = $occupation_taxonomy['taxonomy_term']->name;
+    $occupation = isset($page_argument[0]->field_celebrity_pro_occupation['und']) ? $page_argument[0]->field_celebrity_pro_occupation['und'] : array();
+    $story_category = isset($page_argument[0]->field_story_category['und']) ? $page_argument[0]->field_story_category['und'] : array();
+    if (!empty($occupation)) {
+      foreach ($occupation as $occupation_taxonomy) {
+        $flag_occupation[] = $occupation_taxonomy['taxonomy_term']->name;
+      }
     }
-    
-    foreach ($story_category as $category) {
-      $ipl_category[] = $category['tid'];
+    if (!empty($story_category)) {
+      foreach ($story_category as $category) {
+        $ipl_category[] = $category['tid'];
+      }
     }
   }
 
@@ -2458,7 +2461,7 @@ function get_homepage_current_poll_widget($content_type, $widget_name) {
       ->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1);
   $res = $nodes_already->execute()->fetch();
-  if(isset($res->nid) && !empty($res->nid)) {
+  if (isset($res->nid) && !empty($res->nid)) {
     return $res->nid;
   }
   return;
@@ -2480,13 +2483,13 @@ function itg_poll_home_page_polls_select($nid) {
   }
 
   $poll_image_exist_class = '';
-  if(isset($node->field_poll_answer['und'])) {
+  if (isset($node->field_poll_answer['und'])) {
     foreach ($node->field_poll_answer['und'] as $row) {
       $item_id[] = $row['value']; // fieldcollection id
     }
   }
 // instant or after complete
-  if(!empty($item_id) && isset($item_id)) {
+  if (!empty($item_id) && isset($item_id)) {
     $fieldcollect = entity_load('field_collection_item', $item_id);
   }
   if (is_array($fieldcollect) && count($fieldcollect) > 0) {
@@ -2504,7 +2507,7 @@ function itg_poll_home_page_polls_select($nid) {
   $polls_info['poll_banner_image'] = $poll_banner_image;
   $polls_info['nid'] = isset($nid) ? $nid : "";
   $polls_info['title'] = isset($node->title) ? $node->title : "";
-  $polls_info['updated'] = isset($node->changed) ? t('Updated: ') . date('M d Y H:i', $node->changed): "";
+  $polls_info['updated'] = isset($node->changed) ? t('Updated: ') . date('M d Y H:i', $node->changed) : "";
   $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
 
   return theme('itg_poll_homepage_forms', array('data' => $polls_info));
