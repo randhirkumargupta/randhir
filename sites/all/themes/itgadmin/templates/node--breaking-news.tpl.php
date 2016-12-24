@@ -7,7 +7,7 @@
         <h2>Basic Details</h2>
         <div class="content-details">
           <?php print render($content['field_type']); ?>
-          <?php print render($content['field_content_type']); ?>
+          <?php //print render($content['field_content_type']); ?>
           <?php
           if($node->field_type[LANGUAGE_NONE][0]['value'] == 'Live Blog') {
           if($node->field_story_expires[LANGUAGE_NONE][0]['value'] == 'Yes') {
