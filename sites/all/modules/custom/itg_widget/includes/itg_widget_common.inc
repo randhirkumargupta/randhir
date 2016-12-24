@@ -2288,23 +2288,8 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
  * {@inheritdoc}
  */
 function itg_widget_block_view_alter(&$data, $block) {
-
-//  $item = menu_get_item();
-//  $arg = arg();
-//
-//  $page_argument = $item['page_arguments'];
-//  if ($block->delta == 'programmes-rhs_programmes') {
-//    if ($arg[0] == 'anchors-list' || ($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name == 'Anchor') || ($page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
-//      return TRUE;
-//    }
-//    else {
-//      $data['content'] = array();
-//    }
-//  }
-
   $item = menu_get_item();
-
-  $flag_occupation = array();
+  $flag_occupation = $story_category = $occupation = array();
   $ipl_category = array();
   $arg = arg();
   $user_link = (!empty($arg[1])) ? drupal_get_path_alias('node/' . $arg[1]) : "";
@@ -2316,7 +2301,7 @@ function itg_widget_block_view_alter(&$data, $block) {
     foreach ($occupation as $occupation_taxonomy) {
       $flag_occupation[] = $occupation_taxonomy['taxonomy_term']->name;
     }
-
+    
     foreach ($story_category as $category) {
       $ipl_category[] = $category['tid'];
     }
@@ -2473,7 +2458,10 @@ function get_homepage_current_poll_widget($content_type, $widget_name) {
       ->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1);
   $res = $nodes_already->execute()->fetch();
-  return $res->nid;
+  if(isset($res->nid) && !empty($res->nid)) {
+    return $res->nid;
+  }
+  return;
 }
 
 /**
@@ -2481,10 +2469,10 @@ function get_homepage_current_poll_widget($content_type, $widget_name) {
  * @param type $nid
  */
 function itg_poll_home_page_polls_select($nid) {
-
   $node = node_load($nid);
   $poll_banner_image = '';
-  if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
+  $fieldcollect = array();
+  if (isset($node->field_poll_banner) && !empty($node->field_poll_banner)) {
     $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
   }
   else {
@@ -2492,13 +2480,15 @@ function itg_poll_home_page_polls_select($nid) {
   }
 
   $poll_image_exist_class = '';
-
-  foreach ($node->field_poll_answer['und'] as $row) {
-    $item_id[] = $row['value']; // fieldcollection id
+  if(isset($node->field_poll_answer['und'])) {
+    foreach ($node->field_poll_answer['und'] as $row) {
+      $item_id[] = $row['value']; // fieldcollection id
+    }
   }
 // instant or after complete
-
-  $fieldcollect = entity_load('field_collection_item', $item_id);
+  if(!empty($item_id) && isset($item_id)) {
+    $fieldcollect = entity_load('field_collection_item', $item_id);
+  }
   if (is_array($fieldcollect) && count($fieldcollect) > 0) {
     $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
     $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
@@ -2512,9 +2502,9 @@ function itg_poll_home_page_polls_select($nid) {
 
 
   $polls_info['poll_banner_image'] = $poll_banner_image;
-  $polls_info['nid'] = $nid;
-  $polls_info['title'] = $node->title;
-  $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
+  $polls_info['nid'] = isset($nid) ? $nid : "";
+  $polls_info['title'] = isset($node->title) ? $node->title : "";
+  $polls_info['updated'] = isset($node->changed) ? t('Updated: ') . date('M d Y H:i', $node->changed): "";
   $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
 
   return theme('itg_poll_homepage_forms', array('data' => $polls_info));
@@ -3143,5 +3133,5 @@ function itg_get_link_from_hash_and_entity_solr_search($entity_id, $hash) {
   $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
   $query->addParam('qf', 'entity_id'); // Only search in title
   $resp_search = $query->search();
-  return $resp_search->response->docs[0];
+  return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
 }
