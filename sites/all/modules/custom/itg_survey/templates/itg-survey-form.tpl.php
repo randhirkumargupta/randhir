@@ -29,7 +29,14 @@ else {
     <div class="profile-detail">
       <ul>
         <li class="title"><?php echo $byline_name; ?></li>
-        <li class="twitter"><?php echo $byline_twitter_handler; ?></li>
+        <li class="twitter">
+            <?php
+            $twitter_handle = str_replace('@', '', $byline_twitter_handler);
+            if (!empty($twitter_handle)) {
+              ?>
+          <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>                
+        <?php } ?>
+        <?php //echo $byline_twitter_handler; ?></li>
       </ul>
       <ul class="date-update">
         <li><?php echo $created_date; ?></li>
