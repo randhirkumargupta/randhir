@@ -279,7 +279,7 @@ function itg_reporter_get_twitter_handle($twitter) {
  * {@inheritdoc}.
  */
 function itg_reporter_node_presave($node) {
-  if ($node->type == 'reporter') {
+  if ($node->type == 'reporter' && !empty($node->nid)) {
     $previous_value = node_load($node->nid);
     $previous_title = $previous_value->title;
     $new_title = $node->title;

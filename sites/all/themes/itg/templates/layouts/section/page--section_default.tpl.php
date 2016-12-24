@@ -111,6 +111,14 @@ if ($theme == 'itgadmin' && !isset($preview)) {
     }
 ?>
 <div class="itg-layout-container <?php echo $itg_class; ?> default-section">
+    <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
     <?php if(isset($widget_data['big_story'])) : ?>
     <div class="row">
         <div class="col-md-12">

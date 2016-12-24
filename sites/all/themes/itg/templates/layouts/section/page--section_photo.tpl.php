@@ -175,6 +175,14 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
       }
       ?>
       <div class="itg-layout-container <?php echo $itg_class; ?> default-photo">
+          <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
         <?php if ($theme == 'itgadmin') { ?>
         <div class="row">
           <div class="col-md-12">

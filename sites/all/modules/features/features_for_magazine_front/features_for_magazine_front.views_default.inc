@@ -400,6 +400,13 @@ function features_for_magazine_front_views_default_views() {
     'image_style' => 'magazine_top_three_story_237x133',
     'image_link' => 'content',
   );
+  /* Field: Global: Dynamic Clone Link */
+  $handler->display->display_options['fields']['dynamic_clone_link']['id'] = 'dynamic_clone_link';
+  $handler->display->display_options['fields']['dynamic_clone_link']['table'] = 'views';
+  $handler->display->display_options['fields']['dynamic_clone_link']['field'] = 'dynamic_clone_link';
+  $handler->display->display_options['fields']['dynamic_clone_link']['label'] = '';
+  $handler->display->display_options['fields']['dynamic_clone_link']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['dynamic_clone_link']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -417,7 +424,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="magazin-post">
 [field_story_extra_large_image]
-<h3>[title]</h3>
+<h3>[dynamic_clone_link]</h3>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Field: Content: Nid */
@@ -458,6 +465,13 @@ function features_for_magazine_front_views_default_views() {
     'image_style' => 'magazine_top_story_483x271',
     'image_link' => 'content',
   );
+  /* Field: Global: Dynamic Clone Link */
+  $handler->display->display_options['fields']['dynamic_clone_link']['id'] = 'dynamic_clone_link';
+  $handler->display->display_options['fields']['dynamic_clone_link']['table'] = 'views';
+  $handler->display->display_options['fields']['dynamic_clone_link']['field'] = 'dynamic_clone_link';
+  $handler->display->display_options['fields']['dynamic_clone_link']['label'] = '';
+  $handler->display->display_options['fields']['dynamic_clone_link']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['dynamic_clone_link']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -475,9 +489,16 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="magazin-post">
 [field_story_extra_large_image]
-<h2>[title]</h2>
+<h2>[dynamic_clone_link]</h2>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';

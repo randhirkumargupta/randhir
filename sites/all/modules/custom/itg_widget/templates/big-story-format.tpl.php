@@ -55,7 +55,9 @@ if (!empty($data)) :
           <?php
           $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
           // prepare configuration for sharing
-          $share_title = mb_strimwidth($data['node_data']->title, 0, 65, "..");
+          $share_title = $data['node_data']->title;
+          $bigstory_title = preg_replace("/'/", "\\'", $data['node_data']->title);
+          $bigstory_fb_share= htmlentities($bigstory_title, ENT_QUOTES);
           $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
           $short_url = shorten_url($actual_link, 'goo.gl');
           ?>
@@ -68,7 +70,8 @@ if (!empty($data)) :
           <?php if (!empty($data['node_data']->field_story_kicker_text['und'][0]['value'])) : ?>
             <?php
             // prepare configuration for sharing
-            $share_desc = mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..');
+            $share_desc = preg_replace($data['node_data']->field_story_kicker_text['und'][0]['value']);
+            $share_desc_fb= htmlentities($share_desc, ENT_QUOTES);
             print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..');
             ?>
           <?php endif; ?>
@@ -76,7 +79,8 @@ if (!empty($data)) :
           <?php if (!empty($data['node_data']->field_label['und'][0]['value'])) : ?>
             <?php
             // prepare configuration for sharing
-            $share_desc = mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..');
+            $share_desc = preg_replace($data['node_data']->field_story_kicker_text['und'][0]['value']);
+            $share_desc_fb= htmlentities($share_desc, ENT_QUOTES);
             print mb_strimwidth($data['node_data']->field_label['und'][0]['value'], 0, 165, '..');
             ?>
           <?php endif; ?>
@@ -86,7 +90,7 @@ if (!empty($data)) :
         <?php if(!empty($data['node_data']->nid)) : ?>
           <div class="share-new">
             <ul>
-              <li><a onclick="fbpop ('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
+              <li><a onclick="fbpop ('<?php print $actual_link; ?>', '<?php print $bigstory_fb_share; ?>', '<?php print $share_desc_fb; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
               <li><a href="javascript:" onclick="twitter_popup ('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
               <li><a href="#" title=""><?php echo t('Follow the Story'); ?></a></li>
             </ul>

@@ -128,6 +128,14 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             }
             ?>
             <div class="itg-layout-container election-page <?php echo $itg_class; ?> ">
+                <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
                 <?php
                 if (!empty($highlights['node_data']->title)) {
                     echo '<h1>' . mb_strimwidth($highlights['node_data']->title, 0, 90, "..") . ' <span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></h1>';
