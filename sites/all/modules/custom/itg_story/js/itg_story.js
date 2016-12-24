@@ -47,7 +47,7 @@
             });
             
             // code for lock story check uncheck based on condition
-           $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function() {
+            $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function () {
                 if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
                     $(".form-item-field-story-configurations-und-lock-story").show('');
                     $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
@@ -57,6 +57,17 @@
                     $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
                 }
             });
+
+
+            if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
+                $(".form-item-field-story-configurations-und-lock-story").show('');
+                $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
+            }
+            else {
+                $(".form-item-field-story-configurations-und-lock-story").hide('');
+                $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
+            }
+          
 
             // Code for client Title field value set Null
             $('#edit-field-story-configurations-und-comment').click(function() {
