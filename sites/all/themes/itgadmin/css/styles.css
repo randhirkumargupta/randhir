@@ -8242,11 +8242,6 @@ div.node #comments h2 {
 .node-photogallery-form .itg-sidebar-form .itg-sidebar-form-section#Configuration {
   overflow: hidden;
 }
-.node-story-form .itg-sidebar-form .metatags-and-remarks h2:after,
-.node-videogallery-form .itg-sidebar-form .metatags-and-remarks h2:after,
-.node-photogallery-form .itg-sidebar-form .metatags-and-remarks h2:after {
-  display: none;
-}
 .node-story-form .itg-sidebar-form .itg-form-section,
 .node-videogallery-form .itg-sidebar-form .itg-form-section,
 .node-photogallery-form .itg-sidebar-form .itg-form-section {
@@ -10022,4 +10017,18 @@ div.node #comments h2 {
 }
 [id*="podcast-node-form"] .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   left: 400px;
+}
+
+.node-story-form .itg-sidebar-form .metatags-and-remarks {
+  background: none;
+}
+.node-story-form .itg-sidebar-form .metatags-and-remarks #remarks fieldset {
+  border: none;
+  padding-top: 10px;
+}
+.node-story-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2 {
+  padding-top: 10px !important;
+}
+.node-story-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2:before {
+  display: none;
 }
