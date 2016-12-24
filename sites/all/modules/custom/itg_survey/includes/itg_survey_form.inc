@@ -10,6 +10,7 @@
  */
 function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
   global $base_url;
+  global $user;
   
   //Get node of current survey
   if($node_id) {
@@ -60,7 +61,12 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     $form = array();
     
     // Generate cookie
-    $cookie_name = 'Drupal_visitor_itgcms_survey_' . $node->nid;
+    if($user->uid) {
+      $cookie_name = 'Drupal_visitor_itgcms_survey_' .$node->nid . '_' . $user->uid;
+    } else {
+      $cookie_name = 'Drupal_visitor_itgcms_survey_' . $node->nid;
+    }
+    
     
     // Check this survey has been attempted by current user OR not.
     if (isset($_COOKIE[$cookie_name])) {

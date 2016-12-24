@@ -271,7 +271,9 @@ if ($theme != 'itgadmin') {
         </section>
       <?php } ?>
       
- <main id="main" class="container">
+ <main id="main" class="container pos-rel">
+     <div class="home-bottom-vertical">
+      <?php print render($page['vertical_menu']); ?></div>
       <section id="content" role="main">
 
 <div class="itg-layout-container itg-front">

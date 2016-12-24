@@ -5423,13 +5423,16 @@ footer{
             color: #ef3c24;
         }
         .highlights-video{
+            .live-event-video{
+                height: 345px;    
+                iframe{
+                    width: 100%;
+                    height: 100%;
+                }
+            }            
             h2{                
                 border-bottom: snow;                
-            }
-            iframe{
-                width: 100%;
-                height: 50vh;
-            }
+            }            
         }
         .highlights-container{
             .wrap-listing{
@@ -7126,10 +7129,12 @@ input[type="radio"]:checked + label:after{
 
 /*css start special page*/
 #block-itg-menu-manager-third-level-menu{    
-    @include clearfix;    
-    overflow:hidden;
+    @include clearfix;            
+     .select-menu{
+            display: none;
+        }
     .menu-wrapper{
-        height:60px;
+        height:60px;       
     }
     img{
         padding-top: 10px;
@@ -7152,6 +7157,11 @@ input[type="radio"]:checked + label:after{
                 &:hover, &.active{
                     background: #ededed;
                     color:#000;
+                }
+                img{
+                    max-height: 30px;
+                    width: auto;
+                    padding-top: 0px;
                 }
             }
         }
@@ -9037,7 +9047,7 @@ input[type="radio"]:checked + label:after{
 /*css end story page submit story */
 
 /*css start common highlight */
-.common-highlight{
+.common-highlights{
             .h-list{
                 border-bottom: 1px solid #ccc;
                 padding: 10px 0;
@@ -9114,3 +9124,10 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*css end home page breaking new */
+.home-bottom-vertical{
+    display:none;
+    #block-itg-menu-manager-vertical-menu{
+        top:auto;
+        bottom:0;
+    }
+}

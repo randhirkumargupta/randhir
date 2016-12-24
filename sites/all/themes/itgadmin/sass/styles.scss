@@ -1109,6 +1109,7 @@ div.vertical-tabs {
   }
 }
 .credit-to-all{
+  margin-top: 5px;
   @extend .dib;
   @extend .full;
   > div{
@@ -1122,7 +1123,7 @@ div.vertical-tabs {
     &.form-field-name-field-credit-name{
       .form-item{
         @extend .pd-0;
-        margin: -10px 0 0;
+        margin: -5px 0 0;
         label{
           display: none;
         }
@@ -8150,6 +8151,11 @@ div.node{
     overflow: hidden;
     margin-top: 20px;
     -webkit-transition: scale
+  }
+  .field-name-field-cm-select-template-type{
+    .ajax-progress{
+      display: none;
+    }
   }
 }
 .page-node-add-recipe, {

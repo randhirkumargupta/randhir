@@ -831,9 +831,15 @@ function itg_survey_pqs_associate_poll_with_story($nid){
  * @param array $form_state
  */
 function itg_survey_survey_form_validate($form, &$form_state) {
-  
+  global $user;
   $form_detail = $form_state['values'];
-  $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'];
+  
+  if($user->uid) {
+    $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'] . '_'. $user->uid;
+  } else {
+    $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'];
+  }
+  
 
   if (isset($_COOKIE[$cookie_name])) {
     form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));

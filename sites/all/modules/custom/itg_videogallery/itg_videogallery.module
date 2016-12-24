@@ -1644,7 +1644,7 @@ function itg_videogallery_get_categoryparent($tid) {
  * @return boolean
  */
 function itg_videogallery_get_term($nid) {
-
+    $return = array();
     $query = db_select('field_data_field_story_category', 'iwo');
     $query->condition('iwo.entity_id', $nid)
             ->fields('iwo', array('field_story_category_tid'));
