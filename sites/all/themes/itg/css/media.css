@@ -712,6 +712,22 @@
   }
 
   /*End css program live page*/
+  #block-itg-menu-manager-third-level-menu .col-md-4 {
+    height: 60px;
+  }
+  #block-itg-menu-manager-third-level-menu .col-md-4 img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 0 15px;
+  }
   #block-itg-menu-manager-third-level-menu .menu-wrapper {
     background: #595959;
     height: 60px;
@@ -726,6 +742,7 @@
     line-height: 30px;
     display: block;
     position: relative;
+    margin-top: 15px;
   }
   #block-itg-menu-manager-third-level-menu .select-menu:after {
     content: '';
@@ -745,7 +762,7 @@
     z-index: 9999;
     float: none;
     width: 95px;
-    top: 30px;
+    top: 45px;
     left: 15px;
     display: none;
   }
@@ -757,7 +774,7 @@
     font-size: 11px;
     height: 30px;
     line-height: 30px;
-    padding: 0 0 0 8px;
+    padding: 0 8px 0 8px;
   }
   #block-itg-menu-manager-third-level-menu ul.third-level-menu li a:hover, #block-itg-menu-manager-third-level-menu ul.third-level-menu li a.active {
     background: #3d3b3c;
@@ -1393,6 +1410,12 @@
     font-size: 24px;
     font-size: 1.5rem;
     line-height: 34px;
+  }
+  .buzz-feedback.buzz-related .story-left {
+    width: 21%;
+  }
+  .buzz-feedback.buzz-related .story-right {
+    width: 79%;
   }
 
   /*End Story page css*/

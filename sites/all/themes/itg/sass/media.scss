@@ -757,6 +757,22 @@
 /*End css program live page*/
 
 #block-itg-menu-manager-third-level-menu{
+    .col-md-4{
+        height: 60px;
+        img{
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            padding: 0 15px;
+        }
+    }
     .menu-wrapper{
         background: #595959;
         height: 60px;     
@@ -770,7 +786,8 @@
         height: 30px;
         line-height: 30px;
         display: block;
-        position: relative;       
+        position: relative;  
+        margin-top: 15px;
         &:after{
             content: '';
             width: 0;
@@ -790,7 +807,7 @@
         z-index: 9999;
         float: none;
         width: 95px;
-        top: 30px;
+        top: 45px;
         left: 15px;
         display: none;
         li{
@@ -800,7 +817,7 @@
                 font-size: 11px;
                 height: 30px;
                 line-height: 30px;
-                padding:0 0 0 8px;   
+                padding:0 8px 0 8px;   
                 &:hover, &.active{
                   background: #3d3b3c;  
                   color:#fff;
@@ -1446,6 +1463,14 @@
                     height: 32px;                
                     @include font(24px,34px);                
                 }
+            }
+        }
+        &.buzz-related{
+            .story-left {
+                width: 21%;
+            }
+            .story-right{
+                width: 79%;
             }
         }
     }

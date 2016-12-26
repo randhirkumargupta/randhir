@@ -164,6 +164,9 @@ function itg_recipe_smi_hideshow(&$form) {
   $form['field_story_facebook_narrative']['#states'] = array(
       'visible' => array(
           ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+      ),
+      'required' => array(
+          ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
       )
   );
 
@@ -191,6 +194,9 @@ function itg_recipe_smi_hideshow(&$form) {
   // code for tweet field show and hide 
   $form['field_story_tweet']['#states'] = array(
       'visible' => array(
+          ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+      ),
+      'required' => array(
           ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
       ),
   );

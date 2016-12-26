@@ -1876,7 +1876,7 @@ print \'Status not found.\';
   /* Display: Published video */
   $handler = $view->new_display('page', 'Published video', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Manage video';
+  $handler->display->display_options['title'] = 'Publish video';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -1950,11 +1950,6 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = 'video ID';
-  /* Field: Content: Source type */
-  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
-  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
-  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source';
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
@@ -3551,7 +3546,7 @@ print \'Status not found.\';
   /* Display: In video queue */
   $handler = $view->new_display('page', 'In video queue', 'page_7');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'In video queue';
+  $handler->display->display_options['title'] = 'In Queue Video';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
