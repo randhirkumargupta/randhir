@@ -144,7 +144,7 @@ if (!empty($content)):
                     echo 'listicle-page';
                 }
                 ?>">
-                         <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
+                         <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) {?>
                         <!-- For buzzfeed section start -->
                         <div class="byline"><?php
                             $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
@@ -178,6 +178,18 @@ if (!empty($content)):
                                     <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
                                 </ul>
+                                <!--<ul class="social-share">
+                                    <li><div id="fb-root"></div><a class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                                        <?php
+                                        //if ($config_name == 'vukkul') {
+                                          ?>
+                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                                        <?php //} if ($config_name == 'other') { ?> 
+                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                                        <?php //} ?>
+                                </ul>-->
                             </div>
                         </div>
 
@@ -275,7 +287,7 @@ if (!empty($content)):
                               $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $factoids_img . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ')"><i class="fa fa-facebook"></i></a></li>
                                  <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
                                  <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
                                  </ul></div></div>';
