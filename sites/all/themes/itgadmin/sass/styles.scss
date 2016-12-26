@@ -1754,7 +1754,15 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           @extend .full;
         }
       }
-      .views-widget-filter-title, 
+      .views-widget-filter-title, .views-widget-filter-name{
+        width: 380px;
+        #autocomplete{
+          width: auto !important;
+          min-width: 100%;
+          max-height: 400px;
+          overflow-y: auto;
+        }
+      } 
       .views-widget-filter-field_story_category_tid,
       .views-widget-filter-field_issue_title_value{
         width: 200px;
@@ -4543,7 +4551,7 @@ div.node{
   }
   .scroll-wrap{
     max-height: 438px;
-    width: 885px;
+    width: 100%;
     overflow: auto;
   }
 }
@@ -5852,6 +5860,7 @@ div.node{
 .page-node-add-story, 
 .page-node-add-blog, 
 .page-node-add-podcast, 
+.node-type-podcast,
 .page-node-add-recipe, 
 .node-type-print-team-integration,
 [id*="field-service-content-values"],
@@ -6015,16 +6024,59 @@ div.node{
     padding: 15px 30px;
   }
   [id*="loyality-reward-points-configuration-form"]{
-    .form-type-textfield{
+    .form-type-textfield, .form-type-managed-file{
       > label{
         width: 300px;
-        & + .form-text + span.error{
+        & + .form-text + span.error, & + div{
           padding-left: 300px;
         }
       }
       .form-text{max-width: 110px;}
     }
-    
+    .form-type-managed-file{
+      .form-managed-file{
+        position: relative;
+        .form-file{
+          margin-top: 5px;
+          & + .form-submit{
+            @extend .add-more-wbg;
+          }
+        } 
+        span.file{
+          position: absolute;
+          top: 100%;
+          left: 300px;
+          width: 110px;
+          img{display: none;}
+          a{
+            color: #323232;
+            display: inline-block;
+            font-size: 13px;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: top;
+            white-space: nowrap;
+          }
+        }
+        .upload-preview{
+          margin-right: 30px;
+        }
+        .form-submit[value="Remove"] {
+          background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+          border: medium none;
+          color: #ee4d4d;
+          display: inline-block;
+          font-size: 13px;
+          vertical-align: top;
+          z-index: 9;
+        }
+        & + div.description {
+          left: 655px;
+        }
+        .ajax-progress{display: none;}
+      }
+    }
   }
   #edit-field-primary-category, #edit-field-primary-category-html{
       display: none;
@@ -9169,9 +9221,6 @@ div.node{
     @extend .views-table;
   }
 }
-.page-mydraft-story .view .view-filters .views-exposed-form .views-widget-filter-title{
-  width: 380px;
-}
 [id*="podcast-node-form"]{
   .form-managed-file .image-widget-data{
     float: left;
@@ -9192,6 +9241,32 @@ div.node{
       &:before{
         display: none;
       }
+    }
+  }
+}
+.node-loyalty_and_rewards-form{
+  @extend .image-repo-browse;
+  .form-field-name-field-poll-itg-state{
+    padding-left: 250px;
+  }
+}
+.page-clone-story{
+  .view .view-filters .views-exposed-form .views-exposed-widget{
+    vertical-align: top;
+  }
+  .view .view-filters .views-exposed-form .views-submit-button, .view .view-filters .views-exposed-form .views-reset-button{
+    margin-top: 18px;
+  }
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-keyword{width: 300px;}
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name{display: none;}
+  .views-table{
+    margin-top: 20px;
+    caption{
+      background-color: #1fb5ad;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 10px;
     }
   }
 }
