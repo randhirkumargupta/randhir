@@ -14,8 +14,8 @@ $short_url = shorten_url($actual_link, 'goo.gl');
 </div>
     <div class="social-icon">
         <ul>
-            <li><a class= "def-cur-pointer" title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
-            <li><a class= "def-cur-pointer" title="share on twitter" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Tweet</span></a></li>
+            <li><a class="def-cur-pointer" title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
+            <li><a class="def-cur-pointer" title="share on twitter" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Tweet</span></a></li>
             <li><a href="#"><i class="fa fa-link"></i> <span>Embed</span></a></li>
             <li><a href="#"><i class="fa fa-lightbulb-o"></i> <span>Light on</span></a></li>            
         </ul>
