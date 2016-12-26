@@ -87,7 +87,9 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
       || $form_id == 'supplement_node_form'
       || $form_id == 'newsletter_node_form'    
       || $form_id == 'magazine_node_form' 
-      || $form_id == 'heighlights_node_form' 
+      || $form_id == 'heighlights_node_form'
+      || $form_id == 'survey_node_form'
+      || $form_id == 'quiz_node_form'
       || $form_id == 'page_node_form'
       || $form_id == 'newsletter_node_form'
   ) {
