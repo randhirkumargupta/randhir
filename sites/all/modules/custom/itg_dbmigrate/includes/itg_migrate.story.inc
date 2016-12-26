@@ -100,7 +100,7 @@ class ItgStoryMigration extends XMLMigration {
       'pron-cons-img' => t('pron-cons-img'),
       'item' => t('item'),
       'factoids_title' => t('factoids_title'),
-      'sefurl' => t('Sefurl'),
+      'sefurl' => t('sefurl'),
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
       'keywords' => t('Keywords'),
