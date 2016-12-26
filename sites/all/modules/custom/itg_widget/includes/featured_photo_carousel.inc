@@ -61,8 +61,8 @@ function itg_widget_featured_photo_carousel_data_fetch($result, $slider_type) {
         $data_render[$data['entity_id']]['title'] = $node->title;
         $data_render[$data['entity_id']]['nid'] = $node->nid;
         //$data_render[$data['entity_id']]['primary_category'] = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
-        $data_render[$data['entity_id']]['sid'] = $sid;
-        $data_render[$data['entity_id']]['cat'] = $section_cat_id;
+        $data_render[$data['entity_id']]['sid'] = isset($sid) ? $sid : 0;
+        $data_render[$data['entity_id']]['cat'] = isset($section_cat_id) ? $section_cat_id :0;
     }
     return $data_render;
 }
