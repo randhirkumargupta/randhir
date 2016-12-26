@@ -176,7 +176,7 @@ drupal_add_js("jQuery('.video_landing_menu li a').live('click', function(){
       }
       ?>
       <div class="itg-layout-container <?php echo $itg_class; ?> default-video pos-rel">
-         <!-- Breaking news band -->    
+         <!-- Breaking news band -->            
     <?php if (!empty($page['breaking_news'])): ?>
     <div class="row">
         <div class="col-md-12">

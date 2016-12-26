@@ -886,7 +886,7 @@ function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
   }
   // Handle update case
   if ($context['module'] == 'taxonomy_term' && $context['op'] == 'update' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
-  // find section name
+    // find section name
     $parents = taxonomy_get_parents_all($context['data']['term']->tid);
     $section = end($parents);
     // Set custom alias
@@ -1013,12 +1013,9 @@ function itg_category_manager_views_data() {
  * {@inheritdoc} 
  */
 function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
-
-  if ($form['#vocabulary']->machine_name == 'category_management' && $form_id == 'taxonomy_form_term') {
-
+  if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name == 'category_management') {
     $select_template_type = 'field_cm_select_template_type';
     $select_template = 'field_cm_select_template';
-
     unset($form[$select_template_type][LANGUAGE_NONE]['#options']['_none']);
 
 // add ajax on Select template field
@@ -1088,16 +1085,28 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
   if (is_numeric($editid_new)) {
     $editid = $editid_new;
   }
-  
- if($editid==0 || empty($editid)) {
-    $editid=$form['#node']->field_primary_category[LANGUAGE_NONE][0]['value'];
- }
+
+  if ($editid == 0 || empty($editid)) {
+    $editid = $form['#node']->field_primary_category[LANGUAGE_NONE][0]['value'];
+  }
 
   drupal_add_js('jQuery(document).ready(function() {
-    jQuery("#prim_'.$editid.'").attr("checked", true);
+    jQuery("#prim_' . $editid . '").attr("checked", true);
+        jQuery( "form" ).submit(function( event ) {
+         jQuery("#edit-field-primary-category-und-0-value").val("");
+         jQuery(".primary_category_radio").each(function(){
+    if(jQuery(this).is(":checked"))
+    {
+        var getval = jQuery(this).val();
+        jQuery("#edit-field-primary-category-und-0-value").val(getval);
+
+    }
+    
+  });
+});
      });', array('type' => 'inline', 'scope' => 'footer'));
 
-  
+
   drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', array('type' => 'file', 'scope' => 'footer'));
 
   return $form;
