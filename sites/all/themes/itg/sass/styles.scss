@@ -1844,8 +1844,23 @@ footer{
                         @include calculate-width(1);
                         border-right: none;
                         i{
-                            vertical-align: middle;
+                            vertical-align: top;
                             margin-right: 5px;
+                        }
+                    }
+                    a.unflag-action{
+                        .fa-bookmark{
+                            &:after{
+                                content: "\f00c";
+                                margin-left: 0px;
+                                color: #474747;
+                                font-size: 8px;
+                                margin-top: -15px;
+                                display: block;
+                            }
+                        }
+                        + .flag-throbber{
+                           display: none; 
                         }
                     }
                 }
@@ -2262,6 +2277,13 @@ footer{
                         }                        
                     }
                 }                
+            }
+        }
+    }
+    &.buzz-related{
+        .story-left-section{
+            .related-story{
+                margin-top: 0px;
             }
         }
     }
@@ -3469,7 +3491,10 @@ footer{
                             background: #363636;
                             color: $white-color;
                         }
-                    }                                        
+                    }
+                    .flag-throbber{
+                        display: none;
+                    }
                 }
             }
         }
@@ -9032,6 +9057,26 @@ input[type="radio"]:checked + label:after{
                 margin-top: 10px;
                 text-align: left;
             }        
+        }
+        .social-icon{
+            a.unflag-action{
+                position: relative;
+                font-family: FontAwesome;
+                pointer-events: none;
+                &:after{
+                    content: "\f00c";
+                    position: absolute;
+                    left: 50%;
+                    top: 0;
+                    font-size: 11px;
+                    margin-left: -6px;
+                    color: #474747;
+                    margin-top: -2px;
+                }
+            }
+            + flag-throbber{
+                display: none;  
+            }
         }
     }
 /*like dislike photo page end*/
