@@ -1013,9 +1013,7 @@ function itg_category_manager_views_data() {
  * {@inheritdoc} 
  */
 function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
-
-  if ($form['#vocabulary']->machine_name == 'category_management' && $form_id == 'taxonomy_form_term') {
-
+  if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name == 'category_management') {
     $select_template_type = 'field_cm_select_template_type';
     $select_template = 'field_cm_select_template';
 
