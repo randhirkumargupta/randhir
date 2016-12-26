@@ -1,0 +1,47 @@
+<?php
+/**
+ * @file: itg_dbmigrate.install 
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store event node information
+ * @return array
+ */
+function itg_dbmigrate_schema() {
+  $schema['itg_dbmigrate_relatedcontent'] = array(
+      'description' => 'Table for itg_event_backend module',
+      'fields' => array(
+          'id' => array(
+              'description' => 'The Primary Id',
+              'type' => 'serial',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+          ),
+          'migrated_nid' => array(
+              'description' => 'Node Id',
+              'type' => 'int',
+              'unsigned' => TRUE,
+              'not null' => TRUE,
+              'default' => 0,
+          ),
+          'related_content_type' => array(
+              'description' => 'Story, video, photo',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+          'related_content_id' => array(
+              'description' => 'Related content source id',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ),
+      ),
+      'primary key' => array('id'),
+  );
+
+  return $schema;
+}

@@ -1244,7 +1244,7 @@ function _hs_process_render_db_table($hsid, $dropbox) {
                 $is_selected = $dropbox->save_lineage || ($depth == count($lineage) - 1);
                 $prefix_radio = "";
                 if ($depth == 0) {
-                    $prefix_radio = '<input type="radio" id="prim_'.$last_value['value'].'" value="'.$last_value['value'].'" class="primary_category_radio">';
+                    $prefix_radio = '<input type="radio" id="prim_'.$last_value['value'].'" name="hirarical_radio" value="'.$last_value['value'].'" class="primary_category_radio">';
                 }
                 $element['lineages']["lineage-$x"][$depth] = array(
                     '#markup' => $item['label'],
