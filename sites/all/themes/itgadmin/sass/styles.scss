@@ -8411,7 +8411,7 @@ div.node{
   }
   
 }
-.node-videogallery-form, .node-photogallery-form{
+.node-videogallery-form, .node-photogallery-form, .node-story-form{
   .browse-media-file{
     .itg-form-section{
       height: 250px;
@@ -8558,7 +8558,7 @@ div.node{
             }
           }
           & + div.description{
-            left: 145px;
+            left: 145px !important;
           }
         }
       }
