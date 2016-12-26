@@ -42,6 +42,27 @@ function itg_common_dropdown_supplement($id = '') {
 }
 
 /**
+ * Helper function to populate the second dropdown.
+ * @param string $id
+ * @return array $data
+ */
+function itg_common_dropdown_mazine($id = '') {
+    // Fetch supplements for selected magazine
+    $select = t('- None -');
+    $data = array('_none' => $select);
+    $query = db_select('node', 'n');
+    $query->fields('n', array('title','nid'));
+    $query->condition('n.status', 1, '=');
+    $query->condition('n.type', 'magazine', '=');
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+        $data[$record['nid']] = $record['title'];
+    }
+    return $data;
+}
+
+/**
  * Implements hook_form_alter().
  * {@inheritdoc}
  */
