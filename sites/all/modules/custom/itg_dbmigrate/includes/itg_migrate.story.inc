@@ -124,7 +124,7 @@ class ItgStoryMigration extends XMLMigration {
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/root/story';
+    $item_xpath = '/Root/story';
 
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /story/item/id.
@@ -183,7 +183,13 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('body', 'storybody')->xpath('storybody');
     $this->addFieldMapping('body:format', 'format')
          ->defaultValue('full_html');
-     $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->defaultValue('published');
+    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->defaultValue('published');
+//    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')
+//      ->defaultValue('published');
+//    $this->addFieldMapping('workbench_moderation_state_current', 'workbench_moderation_state_new')
+//      ->defaultValue('published');
+//    $this->addFieldMapping('revision')
+//      ->defaultValue(0);
     //code for image
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
     $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
@@ -281,12 +287,18 @@ class ItgStoryMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
+    //syndication
+    if ((string) $row->xml->syndication == '1') {
+      $row->xml->syndication = 'Yes';
+    }else{
+      $row->xml->syndication = '';
+    }
     //Workbench 
     if ((string) $row->xml->state == '1') {
-      $row->workbench_moderation_state_new = 'published';
+      $row->xml->workbench_moderation_state_new = 'published';
     }
     else {
-      $row->workbench_moderation_state_new = 'draft';
+      $row->xml->workbench_moderation_state_new = 'draft';
     }
     
     // Mosimage in body
@@ -556,6 +568,15 @@ class ItgStoryMigration extends XMLMigration {
       $final_related_content = rtrim($related_content, ', ');
       $row->xml->relatedcontents = $final_related_content;
     }
+    
+     // manage created user
+    if (isset($row->xml->createdby) && !empty($row->xml->createdby)) {
+      $created_uid = (string) $row->xml->createdby;
+      $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
+      $row->xml->createdby = $orignal_crated_uid;
+    }else{
+      $row->xml->createdby = 1;
+    }
 
     return TRUE;
   }
@@ -596,7 +617,7 @@ class ItgStoryMigration extends XMLMigration {
     if(!empty($row->featuredname)){
       $node->field_story_featured_name[LANGUAGE_NONE][0]['tid'] = (string) $row->featuredname;
     }  
-    $node->uid = 415;
+    $node->uid = $row->xml->createdby;
   }
 
   public function complete($entity, $row) {
