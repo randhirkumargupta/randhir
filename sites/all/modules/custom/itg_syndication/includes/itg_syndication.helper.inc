@@ -95,7 +95,7 @@ function itg_syndication_get_client($cond = NULL) {
   $itg_query->condition('n.type', 'syndication_client');
   
   if ($cond == 'yes') {
-    $current_time = date('Y-m-d');
+    $current_time = date('Y-m-d H:i:s');
     $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');        
     $itg_query->condition(db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>='));        
   }      

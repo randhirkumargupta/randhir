@@ -159,6 +159,13 @@ function loyality_reward_points_configuration_form() {
     '#maxlength' => 6,
     '#default_value' => variable_get('lrp_loyality_points_expiry'),
   );
+  $destination = drupal_get_destination();
+  $destination = check_plain($destination['destination']);  
+  // Add cancel button to the form.
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => array('form-submit')))),
+    '#weight' => 20,
+  );
   $form['#submit'][] = 'itg_loyalty_reward_badge_icon_submit';
   
   return system_settings_form($form);

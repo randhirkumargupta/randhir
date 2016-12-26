@@ -73,6 +73,13 @@ function feature_for_personalization_views_default_views() {
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Status';
+  /* Field: Content: Delete link */
+  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['label'] = 'Actions';
+  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">[delete_node]</span>';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';

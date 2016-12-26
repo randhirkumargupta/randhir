@@ -1750,6 +1750,23 @@ footer{
         margin: 0 -15px;
         @include clearfix;
         margin-top: 20px;
+        .buzzfeed-byline{
+            padding: 0 15px;            
+        }
+        .related-story{
+            margin-top: 50px;
+            h3{
+                font-size: 16px;
+                text-transform: uppercase;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+            .views-field-label{
+                color: #575757;
+                margin-top: 10px;
+                margin-bottom: 25px;
+            }
+        }
     }
     .story-left, .story-right{                
         padding: 0 15px;
@@ -1897,6 +1914,9 @@ footer{
             padding-top: 25px;
             @include font(15px,27px);   
             word-wrap: break-word;
+            p{
+                padding: 10px 0;
+            }
         }
         .briefcase {
             margin-top:20px;
@@ -1921,7 +1941,7 @@ footer{
         .stryimg{
             .tagview{
                 position: absolute;      
-                width: 70px;
+                min-width: 70px;
                 height: 50px;
                 text-align: center;
                 .person{
@@ -1937,6 +1957,7 @@ footer{
                     padding: 0px 6px;                    
                     white-space: nowrap;
                     display: none;
+                    line-height: 22px;
                     a{
                         color: #404040;
                         font-size: 11px;
@@ -1951,7 +1972,7 @@ footer{
                             border-right: 7px solid transparent;  
                             border-bottom: 7px solid #fff;
                             position: absolute;
-                            top: -7px;
+                            top: -11px;
                             left: 50%;
                             margin-left: -5px;
                         }
@@ -2215,7 +2236,32 @@ footer{
             font-weight: 400;
             font-size: 12px;
         }
-    } 
+    }
+    .buzzfeed-byline{
+        padding:0 15px;
+        .byline .profile-detail{
+            margin: 0px 0 0 10px;
+            width: 60%;
+        }
+        .social-share-story{
+            li{
+                @include display-inline;
+                a{
+                   padding: 0 15px;
+                   display: block;
+                   i{
+                        @include font(24px);
+                        color:#c0c0c0;
+                    }
+                    &:hover{
+                        i{
+                         color:#1a3c8d;   
+                        }                        
+                    }
+                }                
+            }
+        }
+    }
 }
 .buzz-feedback{    
     @include calculate-width(1);

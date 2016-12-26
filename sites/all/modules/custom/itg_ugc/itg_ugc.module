@@ -128,6 +128,7 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   
 // get id of ugc content
   $url_nid = arg(3);
+  $ugc_heading = '';
   // condition for front user 
   if ($user->uid == 0 && !empty($_GET['type']) && $form_id == 'ugc_node_form') {
     $form['field_ugc_ctype']['#attributes']['class'][] = 'element-hidden';
