@@ -1917,6 +1917,9 @@ footer{
             p{
                 padding: 10px 0;
             }
+            video{
+                max-width: 100%;
+            }
         }
         .briefcase {
             margin-top:20px;
@@ -4194,6 +4197,9 @@ footer{
                 @include font(12px,null,500);                
                 text-transform: uppercase;
             }
+            &:nth-child(2n+1){
+                clear:left;
+            }
         }
     }
 }
@@ -4209,7 +4215,7 @@ footer{
     background: #f6f5f5;
     border: 1px solid $border-color;
     padding-bottom: 10px;
-    a:hover{
+    &a:hover{
         color:#193984;
     }
     .magazin-top{
@@ -6704,10 +6710,10 @@ footer{
     }
     .itg-layout-615{
         .droppable {
-            height: 615px;            
+            height: 640px;            
         }
         .auto-block-1, .auto-block-2{
-                height: 615px;
+                height: 640px;
                 overflow: hidden;
             }
             .auto-block-1{
@@ -6719,6 +6725,11 @@ footer{
                         color: #fff;
                         &:hover{
                             color: #f1f1f1;
+                        }
+                    }
+                    .featured-post{
+                        .no-result-image{
+                            height: 270px;
                         }
                     }
                 }
@@ -9175,5 +9186,21 @@ input[type="radio"]:checked + label:after{
     #block-itg-menu-manager-vertical-menu{
         top:auto;
         bottom:0;
+    }
+}
+.view-latest-issue-magzine{ 
+    .lock{
+        padding-left: 30px;
+        position: relative;
+        &:before{
+            width: 21px;
+            height: 27px;
+            content: '';
+            background: url(../images/Lock-closed-icon.png) no-repeat center center;
+            display: inline-block;
+            position: absolute;
+            top: 3px;
+            left: 0;
+        }
     }
 }
