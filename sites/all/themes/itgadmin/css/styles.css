@@ -10109,3 +10109,42 @@ div.node #comments h2 {
   font-weight: 600;
   padding: 10px;
 }
+
+/* ITG POPUP CSS */
+.itg-popup {
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+.itg-popup .popup-content {
+  background-color: #fff;
+  border-radius: 10px;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-height: 80%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 800px;
+}
+.itg-popup .popup-content .itg-close-popup {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.itg-popup .popup-content .popup-head {
+  border-bottom: 1px solid #d9d9d9;
+  height: 50px;
+  margin: 0 20px 20px;
+}
+.itg-popup .popup-content .popup-body {
+  padding: 0 20px;
+  height: calc(100% - 70px);
+  overflow-y: auto;
+}
