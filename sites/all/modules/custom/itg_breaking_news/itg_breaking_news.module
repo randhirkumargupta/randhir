@@ -203,6 +203,7 @@ function itg_breaking_news_after_build($form, &$form_state) {
 
   global $user, $base_url;
   
+  $form['field_content_type']['#attributes']['class'][] = 'element-hidden';
     if (!isset($form['#node']->nid)) {
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {

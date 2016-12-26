@@ -11,7 +11,8 @@ class ItgStateMigration extends XMLMigration {
 
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'state' => t('state'),     
+      'state' => t('state'),
+      'country_id' => t('country_id'),
     );
 
     
@@ -20,7 +21,7 @@ class ItgStateMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'city.xml';
+    $items_url = $xml_folder . 'state.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -61,6 +62,7 @@ class ItgStateMigration extends XMLMigration {
     // /categories/category/name).
     
     $this->addFieldMapping('name', 'name')->xpath('state');    
+    $this->addFieldMapping('field_state_county', 'country_id')->xpath('country_id');    
     //$this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
 //    $this->addFieldMapping('pathauto')->defaultValue(0);
 //    $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
@@ -69,5 +71,15 @@ class ItgStateMigration extends XMLMigration {
 //    $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
 
 
+  }
+  public function prepareRow($row) {
+     $final_term_name = '';
+     
+    if (isset($row->xml->country_id) && !empty($row->xml->country_id)) {
+        $source_tags = (string) $row->xml->country_id;
+        $orignal_tag = get_itg_destination_id('migrate_map_itgcountry', $source_tags);
+        $final_term_name = itg_db_migrate_term_name($orignal_tag);
+    }
+    $row->xml->country_id = $final_term_name;
   }
 }
