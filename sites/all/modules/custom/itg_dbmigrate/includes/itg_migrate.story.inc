@@ -183,7 +183,7 @@ class ItgStoryMigration extends XMLMigration {
     $this->addFieldMapping('body', 'storybody')->xpath('storybody');
     $this->addFieldMapping('body:format', 'format')
          ->defaultValue('full_html');
-    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->defaultValue('published');
+    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')->xpath('workbench_moderation_state_new');
 //    $this->addFieldMapping('workbench_moderation_state_new', 'workbench_moderation_state_new')
 //      ->defaultValue('published');
 //    $this->addFieldMapping('workbench_moderation_state_current', 'workbench_moderation_state_new')
@@ -304,11 +304,14 @@ class ItgStoryMigration extends XMLMigration {
     // Mosimage in body
     if(!empty($row->xml->mosimage)){
       $mos_count= array();
+      $cap=0;
       foreach($row->xml->mosimage->image as $images){
         $image = (string)$images;
+        $caption = (string) $row->xml->mosimage->caption[$cap];
         if(!empty($image)){
-          $mosimage_array[] = '<img src="'.$image.'">';
+          $mosimage_array[] = '<img alt="'.$caption.'" src="'.$image.'">';
         }
+        $cap++;
       }
      $mos_count = count($mosimage_array);
     }
@@ -329,6 +332,7 @@ class ItgStoryMigration extends XMLMigration {
       $blurb_count = array();
       foreach($row->xml->blurbs->blurb as $blurbs){
         $blurb = (string)$blurbs;
+        
         if(!empty($blurb)){
           $blurb_array[] = $blurb;
         }
@@ -337,7 +341,7 @@ class ItgStoryMigration extends XMLMigration {
     }
     // Blurb assign to body
       if(!empty($row->xml->storybody)){
-      $body_string = (string) $row->xml->storybody;
+      $body_string = (string) $row->xml->storybody;      
       $blurb_tag = substr_count($body_string, '{blurb}');
       if($blurb_count >= $blurb_tag){
         $string = itg_dbmigrate_mosimage_replace($body_string, $blurb_array, '{blurb}');
