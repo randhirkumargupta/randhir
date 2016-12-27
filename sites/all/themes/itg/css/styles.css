@@ -10735,28 +10735,28 @@ footer .footer-copyright {
   margin-bottom: 30px;
 }
 
-#content .ugc-custom-wrapper [id*="ugc-node-form"] {
+#content [id*="ugc-node-form"].ugc-custom-wrapper {
   background: #fff;
   font-family: "Roboto", sans-serif;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .form-item {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item {
   margin: 0;
   margin-bottom: 10px;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .captcha, #content .ugc-custom-wrapper [id*="ugc-node-form"] .form-actions {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha, #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
   padding-left: 220px;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .captcha .form-submit, #content .ugc-custom-wrapper [id*="ugc-node-form"] .form-actions .form-submit {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-submit, #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions .form-submit {
   background: #000;
   border: 1px solid #000;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .form-textarea, #content .ugc-custom-wrapper [id*="ugc-node-form"] .form-text, #content .ugc-custom-wrapper [id*="ugc-node-form"] select {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-textarea, #content [id*="ugc-node-form"].ugc-custom-wrapper .form-text, #content [id*="ugc-node-form"].ugc-custom-wrapper select {
   width: 380px;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] div.description, #content .ugc-custom-wrapper [id*="ugc-node-form"] span#edit-captcha-response-error {
+#content [id*="ugc-node-form"].ugc-custom-wrapper div.description, #content [id*="ugc-node-form"].ugc-custom-wrapper span#edit-captcha-response-error {
   padding-left: 0;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] input[value="Upload"] {
+#content [id*="ugc-node-form"].ugc-custom-wrapper input[value="Upload"] {
   border: none;
   background: #000;
   color: #fff;
@@ -10764,10 +10764,10 @@ footer .footer-copyright {
   border-radius: 4px;
   cursor: pointer;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .messages.error {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .messages.error {
   display: none;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   position: relative;
   top: auto;
   left: auto;
@@ -10932,8 +10932,15 @@ footer .footer-copyright {
   height: 27px;
   content: '';
   background: url(../images/Lock-closed-icon.png) no-repeat center center;
-  display: inline-block;
   position: absolute;
-  top: 3px;
+  display: block;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  content: "";
   left: 0;
+  border-radius: 0;
+  background-size: 100%;
 }
