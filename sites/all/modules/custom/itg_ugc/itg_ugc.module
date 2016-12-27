@@ -133,13 +133,14 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   if ($user->uid == 0 && !empty($_GET['type']) && $form_id == 'ugc_node_form') {
     $form['field_ugc_ctype']['#attributes']['class'][] = 'element-hidden';
     if (isset($_GET['type'])) {
-      $ugc_heading = '<div class="ugc-top-heading"><h2>Post Your Content</h2></div>';  
+      $ugc_heading = '<div class="ugc-top-heading"><h2>Post Your Content</h2></div>';
       $form['field_ugc_ctype'][LANGUAGE_NONE]['#default_value'] = $_GET['type'];
     }
+
+    $form['#prefix'] = '<div class="ugc-custom-wrapper">' . $ugc_heading;
+    $form['#suffix'] = '</div>';
   }
-  
-  $form['#prefix'] = '<div class="ugc-custom-wrapper">'.$ugc_heading;
-  $form['#suffix'] = '</div>';
+
 
   if (empty($form['nid']['#value'])) {
     // prefill input value in blog form
