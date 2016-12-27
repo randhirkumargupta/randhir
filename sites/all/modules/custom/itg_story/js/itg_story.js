@@ -8,11 +8,14 @@
         attach: function(context, settings) {
             var uid = settings.itg_story.settings.uid;
             
-            if ($("#edit-path-pathauto").is(":checked")) {               
+            $('#edit-path-pathauto').click(function() {
+              if ($("#edit-path-pathauto").is(":checked")) {                
                 $("#edit-path-alias").attr('readonly', 'readonly');
-            } else {                
+              } else {                
                 $("#edit-path-alias").removeAttr('readonly');
-            }
+              }  
+            });
+            
             
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
