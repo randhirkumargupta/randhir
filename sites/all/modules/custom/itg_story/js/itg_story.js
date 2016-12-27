@@ -175,7 +175,7 @@
                 var uid = settings.itg_story.settings.uid;
                 var title = jQuery('#edit-title').val();
                 if ($(this).is(':checked')) {
-                    console.log('true');
+                    
                     var associate_id = $(this).attr('id');
 
                     if (associate_id == 'breaking_text') {
@@ -203,10 +203,10 @@
                                 jQuery('#edit-field-story-source-id-und-0-value').val(obj.story_nid);
                             }
                         });
-                        console.log('confirm');
+                        
                         return true;
                     }
-                    console.log('not confirm');
+                    
                     return false;
                 }
 
