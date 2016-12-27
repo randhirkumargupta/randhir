@@ -2740,7 +2740,7 @@ footer .footer-copyright {
 }
 .story-section .buzzfeed-byline .byline .profile-detail {
   margin: 0px 0 0 10px;
-  width: 60%;
+  width: 79%;
 }
 .story-section .buzzfeed-byline .social-share-story li {
   display: inline-block;
@@ -2854,6 +2854,21 @@ footer .footer-copyright {
 }
 .buzz-feedback .buzz-section .buzz-img .social-share ul li a.google {
   background: #cc0808;
+}
+.buzz-feedback .buzz-section .image-alt {
+  color: #929292;
+  font-size: 13px;
+  font-size: 0.8125rem;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+  padding-top: 0;
+}
+.buzz-feedback .buzz-section .photoby {
+  background: black;
+  color: #aeaeae;
+  font-family: "Roboto", sans-serif;
+  padding: 5px;
+  margin-top: -15px;
 }
 .buzz-feedback .snap-post {
   margin-top: 0;
@@ -10235,6 +10250,12 @@ footer .footer-copyright {
   color: #fff;
   font-weight: 700;
   margin-top: 20px;
+}
+.story-section .listicle-page .listicle-detail > span.bullet_points {
+  width: 10px;
+  height: 10px;
+  line-height: 10px;
+  margin-top: 28px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description {
   font-size: 16px;

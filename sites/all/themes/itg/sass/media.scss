@@ -275,7 +275,11 @@
 .story-section .social-list li{
     padding: 10px 10px 5px;
 }
+.story-section .buzzfeed-byline .social-share-story li a{
+    padding: 0 10px;
+}
 /*story page css end*/
+
 
 }   
 @media only screen and (max-width:991px){
@@ -316,9 +320,17 @@
 }
 /* end Event page mobile nav*/
 /*story page css*/
-.story-section .byline .profile-detail ul li.title{
-    border-right: 1px solid #ddd;
-}
+.story-section{
+    .story-right .stryimg .tagview{
+        display: none;
+    }
+    .byline .profile-detail{
+        margin: 0 0 0 10px;
+        ul li.title{
+            border-right: 1px solid #ddd;
+        }
+    } 
+} 
 .story-section .byline{
     margin-bottom:15px;
     .profile-detail ul.date-update li{
@@ -928,7 +940,18 @@
         }*/
     }
     
-
+    [id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3 span, .ask-question-sidebar h3 span{
+        padding: 45px 20px 10px 0px;
+    }
+    .story-section{
+        .social-share-story{
+            display: none;
+        }
+        &.buzz-related .story-left-section .related-story {
+            margin-top: 0px;
+            display: none;
+        }   
+    }
 
 }
 
@@ -1448,6 +1471,11 @@
                 &:nth-child(7){
                     border-left: 1px solid $border-color;
                 }
+            }
+        }
+        .buzzfeed-byline{         
+            .byline .profile-detail{                
+                width: 60%;
             }
         }
     }
