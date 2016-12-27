@@ -5,9 +5,11 @@
         <a href="javascript:;" class="close-preview">&nbsp;</a>
         <?php
         // Load custom block for social media integration 
-        global $user;        
+        global $user;    
         if (!isset($node->op) && in_array('Social Media', $user->roles)):
+            
           $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+        
           ?>
           <div class="itg-smi">
               <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
@@ -19,16 +21,18 @@
                     <a class="itg-close-popup" href="javascript:;"> Close </a>
                 </div>
                 <div class="popup-body">
-                    <?php print render($block['content']); ?>
+                    <?php print render($block['content']); 
+                   
+                    ?>
                 </div>
               </div>
           </div>
         <?php endif; ?>        
         <div class="basic-details content-box">
-            <h2><?php  $termdata="";
+            <h2><?php $termdata="";
             if($content['body']['#object']->field_primary_category['und'][0]['value']!="") {
                 $termdata=itg_videogallery_get_term_name($content['body']['#object']->field_primary_category['und'][0]['value']);
-           
+                
             }
             print t('Quick File'); ?></h2>
             <div class="content-details">
@@ -272,4 +276,4 @@
     print render($content['comments']);
   }
   ?>
-<?php endif; ?>
+<?php endif;?>

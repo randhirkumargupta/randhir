@@ -2167,6 +2167,23 @@ footer .footer-copyright {
 .story-section .story-left-section:after {
   clear: both;
 }
+.story-section .story-left-section .buzzfeed-byline {
+  padding: 0 15px;
+}
+.story-section .story-left-section .related-story {
+  margin-top: 50px;
+}
+.story-section .story-left-section .related-story h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.story-section .story-left-section .related-story .views-field-label {
+  color: #575757;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
 .story-section .story-left, .story-section .story-right {
   padding: 0 15px;
 }
@@ -2364,6 +2381,12 @@ footer .footer-copyright {
   line-height: 27px;
   word-wrap: break-word;
 }
+.story-section .story-right .description p {
+  padding: 10px 0;
+}
+.story-section .story-right .description video {
+  max-width: 100%;
+}
 .story-section .story-right .briefcase {
   margin-top: 20px;
 }
@@ -2396,7 +2419,7 @@ footer .footer-copyright {
 }
 .story-section .story-right .stryimg .tagview {
   position: absolute;
-  width: 70px;
+  min-width: 70px;
   height: 50px;
   text-align: center;
 }
@@ -2413,6 +2436,7 @@ footer .footer-copyright {
   padding: 0px 6px;
   white-space: nowrap;
   display: none;
+  line-height: 22px;
 }
 .story-section .story-right .stryimg .tagview .person a {
   color: #404040;
@@ -2429,7 +2453,7 @@ footer .footer-copyright {
   border-right: 7px solid transparent;
   border-bottom: 7px solid #fff;
   position: absolute;
-  top: -7px;
+  top: -11px;
   left: 50%;
   margin-left: -5px;
 }
@@ -2699,6 +2723,29 @@ footer .footer-copyright {
   color: red;
   font-weight: 400;
   font-size: 12px;
+}
+.story-section .buzzfeed-byline {
+  padding: 0 15px;
+}
+.story-section .buzzfeed-byline .byline .profile-detail {
+  margin: 0px 0 0 10px;
+  width: 60%;
+}
+.story-section .buzzfeed-byline .social-share-story li {
+  display: inline-block;
+  vertical-align: top;
+}
+.story-section .buzzfeed-byline .social-share-story li a {
+  padding: 0 15px;
+  display: block;
+}
+.story-section .buzzfeed-byline .social-share-story li a i {
+  font-size: 24px;
+  font-size: 1.5rem;
+  color: #c0c0c0;
+}
+.story-section .buzzfeed-byline .social-share-story li a:hover i {
+  color: #1a3c8d;
 }
 
 .buzz-feedback {
@@ -5466,6 +5513,9 @@ footer .footer-copyright {
   font-weight: 500;
   text-transform: uppercase;
 }
+#block-views-latest-issue-magzine-block-1 ul li.issue-magazin-row:nth-child(2n+1) {
+  clear: left;
+}
 
 /*CSS end Latest issue magazins*/
 /*CSS start magazins*/
@@ -5482,7 +5532,7 @@ footer .footer-copyright {
   border: 1px solid #dddddd;
   padding-bottom: 10px;
 }
-.magazin-lhs-top a:hover {
+.magazin-lhs-topa:hover {
   color: #193984;
 }
 .magazin-lhs-top .magazin-top {
@@ -8144,10 +8194,10 @@ footer .footer-copyright {
   overflow: hidden;
 }
 .sport-home-layout-page .itg-layout-615 .droppable {
-  height: 615px;
+  height: 640px;
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-1, .sport-home-layout-page .itg-layout-615 .auto-block-2 {
-  height: 615px;
+  height: 640px;
   overflow: hidden;
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-1 {
@@ -8162,6 +8212,9 @@ footer .footer-copyright {
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news a:hover {
   color: #f1f1f1;
+}
+.sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news .featured-post .no-result-image {
+  height: 270px;
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-2 {
   border: 1px solid #ddd;
@@ -10833,4 +10886,19 @@ footer .footer-copyright {
 .home-bottom-vertical #block-itg-menu-manager-vertical-menu {
   top: auto;
   bottom: 0;
+}
+
+.view-latest-issue-magzine .lock {
+  padding-left: 30px;
+  position: relative;
+}
+.view-latest-issue-magzine .lock:before {
+  width: 21px;
+  height: 27px;
+  content: '';
+  background: url(../images/Lock-closed-icon.png) no-repeat center center;
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  left: 0;
 }
