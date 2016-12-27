@@ -45,13 +45,14 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'counter' => 'counter',
     'title' => 'title',
-    'field_newsl_header_headline' => 'field_newsl_header_headline',
+    'field_newsl_newsletter_type' => 'field_newsl_newsletter_type',
     'uid' => 'uid',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
-    'nothing' => 'nothing',
+    'name' => 'name',
     'created' => 'created',
     'changed' => 'changed',
+    'field_survey_start_date' => 'field_survey_start_date',
     'view_node' => 'nothing_1',
     'edit_node' => 'nothing_1',
     'nothing_1' => 'nothing_1',
@@ -70,8 +71,8 @@ function features_for_newsletter_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_newsl_header_headline' => array(
-      'sortable' => 1,
+    'field_newsl_newsletter_type' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -98,13 +99,15 @@ function features_for_newsletter_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'created' => array(
-      'sortable' => 1,
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -112,6 +115,13 @@ function features_for_newsletter_views_default_views() {
     ),
     'changed' => array(
       'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_survey_start_date' => array(
+      'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -337,6 +347,19 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Survey Start Date  */
+  $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
+  $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
+  $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
+  $handler->display->display_options['fields']['field_survey_start_date']['label'] = 'Shedule date';
+  $handler->display->display_options['fields']['field_survey_start_date']['settings'] = array(
+    'format_type' => 'itg_date_with_time',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -356,6 +379,97 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Actions';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'newsletter' => 'newsletter',
+  );
+  /* Filter criterion: Content: Newsletter Type (field_newsl_newsletter_type) */
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['id'] = 'field_newsl_newsletter_type_value';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['table'] = 'field_data_field_newsl_newsletter_type';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['field'] = 'field_newsl_newsletter_type_value';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['operator_id'] = 'field_newsl_newsletter_type_value_op';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['label'] = 'Newsletter Type';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['operator'] = 'field_newsl_newsletter_type_value_op';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['identifier'] = 'field_newsl_newsletter_type_value';
+  $handler->display->display_options['filters']['field_newsl_newsletter_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    19 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+  );
+  /* Filter criterion: Date: Date (node) */
+  $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['table'] = 'node';
+  $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['operator'] = 'between';
+  $handler->display->display_options['filters']['date_filter']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['date_filter']['expose']['operator_id'] = 'date_filter_op';
+  $handler->display->display_options['filters']['date_filter']['expose']['label'] = 'Shedule Date';
+  $handler->display->display_options['filters']['date_filter']['expose']['operator'] = 'date_filter_op';
+  $handler->display->display_options['filters']['date_filter']['expose']['identifier'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
+  $handler->display->display_options['filters']['date_filter']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
+    'field_data_field_survey_start_date.field_survey_start_date_value' => 'field_data_field_survey_start_date.field_survey_start_date_value',
+  );
+  $handler->display->display_options['filters']['date_filter']['date_method'] = 'AND';
   $handler->display->display_options['path'] = 'manage-newsletter';
   $export['manage_newsletter'] = $view;
 
@@ -488,7 +602,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S.No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Field: Subject Line */
+  /* Field: Field: Title */
   $handler->display->display_options['fields']['field_news_title']['id'] = 'field_news_title';
   $handler->display->display_options['fields']['field_news_title']['table'] = 'field_data_field_news_title';
   $handler->display->display_options['fields']['field_news_title']['field'] = 'field_news_title';
