@@ -9224,9 +9224,10 @@ div.node #comments h2 {
 }
 
 .node-photogallery-form .form-type-plupload {
-  margin-left: 220px;
-  margin-right: 20px;
-  margin-top: 30px;
+  margin: 30px 20px 10px 220px;
+}
+.node-photogallery-form .form-type-plupload .description br {
+  display: none;
 }
 .node-photogallery-form [id*="field-gallery-image-values"] thead {
   padding-left: 20px;

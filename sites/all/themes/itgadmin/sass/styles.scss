@@ -8401,9 +8401,8 @@ div.node{
 }
 .node-photogallery-form{
   .form-type-plupload {
-    margin-left: 220px;
-    margin-right: 20px;
-    margin-top: 30px;
+    margin: 30px 20px 10px 220px;
+    .description br{display: none;}
   }
   [id*="field-gallery-image-values"] thead {
     padding-left: 20px;
