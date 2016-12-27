@@ -9097,9 +9097,8 @@ input[type="radio"]:checked + label:after{
         margin-bottom: 30px;
     }
 }
-#content{
-    .ugc-custom-wrapper{
-        [id*="ugc-node-form"]{
+#content{    
+        [id*="ugc-node-form"].ugc-custom-wrapper{
             background: #fff;
             font-family : $itg-roboto; 
             .form-item{
@@ -9138,7 +9137,6 @@ input[type="radio"]:checked + label:after{
             }
         }
     }    
-}
 .node-type-videogallery, .node-type-photogallery, .node-type-story{
 #cboxLoadedContent{        
         background: url(../images/tab-loading.gif);
@@ -9241,11 +9239,18 @@ input[type="radio"]:checked + label:after{
             width: 21px;
             height: 27px;
             content: '';
-            background: url(../images/Lock-closed-icon.png) no-repeat center center;
-            display: inline-block;
+            background: url(../images/Lock-closed-icon.png) no-repeat center center;    
             position: absolute;
-            top: 3px;
+            display: block;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            content: "";
             left: 0;
+            border-radius: 0;
+            background-size: 100%;
         }
     }
 }
