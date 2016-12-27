@@ -2300,8 +2300,19 @@ footer .footer-copyright {
   border-right: none;
 }
 .story-section .byline .profile-detail ul.social-links li:last-child i {
-  vertical-align: middle;
+  vertical-align: top;
   margin-right: 5px;
+}
+.story-section .byline .profile-detail ul.social-links li a.unflag-action .fa-bookmark:after {
+  content: "\f00c";
+  margin-left: 0px;
+  color: #474747;
+  font-size: 8px;
+  margin-top: -15px;
+  display: block;
+}
+.story-section .byline .profile-detail ul.social-links li a.unflag-action + .flag-throbber {
+  display: none;
 }
 .story-section .story-left .briefcase {
   margin: 20px 0;
@@ -2383,6 +2394,9 @@ footer .footer-copyright {
 }
 .story-section .story-right .description p {
   padding: 10px 0;
+}
+.story-section .story-right .description video {
+  max-width: 100%;
 }
 .story-section .story-right .briefcase {
   margin-top: 20px;
@@ -2743,6 +2757,9 @@ footer .footer-copyright {
 }
 .story-section .buzzfeed-byline .social-share-story li a:hover i {
   color: #1a3c8d;
+}
+.story-section.buzz-related .story-left-section .related-story {
+  margin-top: 0px;
 }
 
 .buzz-feedback {
@@ -4488,6 +4505,9 @@ footer .footer-copyright {
   background: #363636;
   color: #fff;
 }
+#block-views-video-landing-header-block .video-header-left .social-likes ul li .flag-throbber {
+  display: none;
+}
 #block-views-video-landing-header-block .video-header-left .iframe-video {
   padding-bottom: 69%;
 }
@@ -5510,6 +5530,9 @@ footer .footer-copyright {
   font-weight: 500;
   text-transform: uppercase;
 }
+#block-views-latest-issue-magzine-block-1 ul li.issue-magazin-row:nth-child(2n+1) {
+  clear: left;
+}
 
 /*CSS end Latest issue magazins*/
 /*CSS start magazins*/
@@ -5526,7 +5549,7 @@ footer .footer-copyright {
   border: 1px solid #dddddd;
   padding-bottom: 10px;
 }
-.magazin-lhs-top a:hover {
+.magazin-lhs-topa:hover {
   color: #193984;
 }
 .magazin-lhs-top .magazin-top {
@@ -8188,10 +8211,10 @@ footer .footer-copyright {
   overflow: hidden;
 }
 .sport-home-layout-page .itg-layout-615 .droppable {
-  height: 615px;
+  height: 640px;
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-1, .sport-home-layout-page .itg-layout-615 .auto-block-2 {
-  height: 615px;
+  height: 640px;
   overflow: hidden;
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-1 {
@@ -8206,6 +8229,9 @@ footer .footer-copyright {
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news a:hover {
   color: #f1f1f1;
+}
+.sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news .featured-post .no-result-image {
+  height: 270px;
 }
 .sport-home-layout-page .itg-layout-615 .auto-block-2 {
   border: 1px solid #ddd;
@@ -10674,6 +10700,24 @@ footer .footer-copyright {
   margin-top: 10px;
   text-align: left;
 }
+#block-views-photo-landing-slider-block .social-icon a.unflag-action, #block-views-video-landing-header-block .social-icon a.unflag-action {
+  position: relative;
+  font-family: FontAwesome;
+  pointer-events: none;
+}
+#block-views-photo-landing-slider-block .social-icon a.unflag-action:after, #block-views-video-landing-header-block .social-icon a.unflag-action:after {
+  content: "\f00c";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  font-size: 11px;
+  margin-left: -6px;
+  color: #474747;
+  margin-top: -2px;
+}
+#block-views-photo-landing-slider-block .social-icon + flag-throbber, #block-views-video-landing-header-block .social-icon + flag-throbber {
+  display: none;
+}
 
 /*like dislike photo page end*/
 .searh-all-filters .search-filter {
@@ -10691,28 +10735,28 @@ footer .footer-copyright {
   margin-bottom: 30px;
 }
 
-#content .ugc-custom-wrapper [id*="ugc-node-form"] {
+#content [id*="ugc-node-form"].ugc-custom-wrapper {
   background: #fff;
   font-family: "Roboto", sans-serif;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .form-item {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-item {
   margin: 0;
   margin-bottom: 10px;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .captcha, #content .ugc-custom-wrapper [id*="ugc-node-form"] .form-actions {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha, #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions {
   padding-left: 220px;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .captcha .form-submit, #content .ugc-custom-wrapper [id*="ugc-node-form"] .form-actions .form-submit {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .captcha .form-submit, #content [id*="ugc-node-form"].ugc-custom-wrapper .form-actions .form-submit {
   background: #000;
   border: 1px solid #000;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .form-textarea, #content .ugc-custom-wrapper [id*="ugc-node-form"] .form-text, #content .ugc-custom-wrapper [id*="ugc-node-form"] select {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-textarea, #content [id*="ugc-node-form"].ugc-custom-wrapper .form-text, #content [id*="ugc-node-form"].ugc-custom-wrapper select {
   width: 380px;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] div.description, #content .ugc-custom-wrapper [id*="ugc-node-form"] span#edit-captcha-response-error {
+#content [id*="ugc-node-form"].ugc-custom-wrapper div.description, #content [id*="ugc-node-form"].ugc-custom-wrapper span#edit-captcha-response-error {
   padding-left: 0;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] input[value="Upload"] {
+#content [id*="ugc-node-form"].ugc-custom-wrapper input[value="Upload"] {
   border: none;
   background: #000;
   color: #fff;
@@ -10720,10 +10764,10 @@ footer .footer-copyright {
   border-radius: 4px;
   cursor: pointer;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .messages.error {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .messages.error {
   display: none;
 }
-#content .ugc-custom-wrapper [id*="ugc-node-form"] .form-managed-file .image-widget-data .form-submit[value="Remove"] {
+#content [id*="ugc-node-form"].ugc-custom-wrapper .form-managed-file .image-widget-data .form-submit[value="Remove"] {
   position: relative;
   top: auto;
   left: auto;
@@ -10877,4 +10921,26 @@ footer .footer-copyright {
 .home-bottom-vertical #block-itg-menu-manager-vertical-menu {
   top: auto;
   bottom: 0;
+}
+
+.view-latest-issue-magzine .lock {
+  padding-left: 30px;
+  position: relative;
+}
+.view-latest-issue-magzine .lock:before {
+  width: 21px;
+  height: 27px;
+  content: '';
+  background: url(../images/Lock-closed-icon.png) no-repeat center center;
+  position: absolute;
+  display: block;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  content: "";
+  left: 0;
+  border-radius: 0;
+  background-size: 100%;
 }

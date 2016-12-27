@@ -381,9 +381,13 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   $tv_date_field = 'field_poll_start_date';
   $tv_time_field = 'field_story_tv_time';
 
+$opt=itg_common_dropdown_mazine();
+$form[$magazine_field]['#options']=$opt;
+
   // set magazine on edit and trigger action
   if (isset($form[$magazine_field][LANGUAGE_NONE]['#default_value'][0]) && !isset($form_state['triggering_element'])) {
     $magazine_id = $form[$magazine_field][LANGUAGE_NONE]['#default_value'][0];
+    
   }
   else {
     $magazine_id = $form_state['input'][$magazine_field][LANGUAGE_NONE];
