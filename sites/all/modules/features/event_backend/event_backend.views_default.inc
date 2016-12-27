@@ -559,6 +559,11 @@ echo itg_event_registration_registered_user_detail($row->nid);
     15 => 0,
     18 => 0,
   );
+  /* Filter criterion: Content: step completion (field_step_completion) */
+  $handler->display->display_options['filters']['field_step_completion_value']['id'] = 'field_step_completion_value';
+  $handler->display->display_options['filters']['field_step_completion_value']['table'] = 'field_data_field_step_completion';
+  $handler->display->display_options['filters']['field_step_completion_value']['field'] = 'field_step_completion_value';
+  $handler->display->display_options['filters']['field_step_completion_value']['value'] = '2';
   $handler->display->display_options['path'] = 'manage-event-backend';
 
   /* Display: Manage  Events */
