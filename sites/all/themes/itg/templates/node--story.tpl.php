@@ -125,11 +125,11 @@ if (!empty($content)):
                                     ?>
                                 </ul>
                             </div>
-                        <?php } ?>
+                        <?php } if (!empty($related_content)) {?>
                         <!--related content-->
                         <div class="related-story">
                             <?php                            
-                                if (!empty($related_content)) {
+                                
                                 $related_story = '<h3>Related</h3>';
                                 $related_content = explode(',', $related_content);
                                 foreach ($related_content as $fn_result) {
@@ -139,12 +139,12 @@ if (!empty($content)):
                                 $final_related = implode(' OR ', $final_related);
                                 $related_story.= views_embed_view('related_story', 'page', $final_related);
                                 print $related_story;
-                                }
+                                
                             ?>
                         </div>
-                        
+                        <?php } ?> 
                     </div>  
-                <?php } ?>
+                <?php }  ?>
                
                 
                  <!-- For buzzfeed section start -->
@@ -185,20 +185,7 @@ if (!empty($content)):
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
                                     <?php } ?>
                                 </ul>
-                                
-                                <!--<ul class="social-share">
-                                    <li><div id="fb-root"></div><a class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                                        <?php
-                                        //if ($config_name == 'vukkul') {
-                                          ?>
-                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                        <?php //} if ($config_name == 'other') { ?> 
-                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                        <?php //} ?>
-                                </ul>-->
-
+                               
                             </div>
                             <div class="social-share-story">
                                  <ul class="">
