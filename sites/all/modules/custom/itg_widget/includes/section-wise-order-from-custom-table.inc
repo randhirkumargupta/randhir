@@ -31,6 +31,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
             'edu-from-the-magazine' => 4,
             'edu-gov-jobs' => 4,
             'buying-guid' => 6,
+            'standpoint' => 5,
             'edu-notification' => 4,
             'tech-tips' => 4,
             'sport-column' => 3,
@@ -50,6 +51,10 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
         if ($widget_style == 'home-watch' || $widget_style == 'election-so-sorry') {
             return itg_widget_section_wise_ordering_from_custom_table_by_content($info, 'videogallery', $widget_style);
         }
+         if ($widget_style == 'standpoint' ) {
+            return itg_widget_section_wise_ordering_from_custom_table_by_content($info, 'photogallery', $widget_style);
+        }
+        
 
 
 
@@ -111,6 +116,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
 function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $content = NULL, $widget_style = NULL) {
     if (is_array($info)) {
         $range = 3;
+        $from_limit=0;
         // set range of data here
         $rangearray = array('auto-road-trip' => 2,
             'auto-tips-and-tricks' => 3,
@@ -124,6 +130,7 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
             'edu-featurefilia' => 4,
             'edu-jobs-and-career' => 4,
             'election-so-sorry' => 1,
+            'standpoint' => 5,
             'edu-tips-and-trick' => 10,
             'edu-sample-paper' => 5,
             'edu-from-the-magazine' => 4,
@@ -142,7 +149,10 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
         if (array_key_exists($widget_style, $rangearray)) {
             $range = $rangearray[$widget_style];
         }
-
+          if($widget_style=='standpoint')
+          {
+              $from_limit=0;
+          }
 
 
         $cat_id = $info['section'];
@@ -181,7 +191,7 @@ function itg_widget_section_wise_ordering_from_custom_table_by_content($info, $c
                 ->orderBy('iwo.weight', 'DESC')
                 ->orderBy('n.nid', 'DESC')
                 ->groupBy('iwo.nid')
-                ->range(0, $range);
+                ->range($from_limit, $range);
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $entity_data = array();
        foreach ($result as $entity_data_node) {
