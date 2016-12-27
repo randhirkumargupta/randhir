@@ -886,7 +886,7 @@ function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
   }
   // Handle update case
   if ($context['module'] == 'taxonomy_term' && $context['op'] == 'update' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
-  // find section name
+    // find section name
     $parents = taxonomy_get_parents_all($context['data']['term']->tid);
     $section = end($parents);
     // Set custom alias
@@ -1013,12 +1013,9 @@ function itg_category_manager_views_data() {
  * {@inheritdoc} 
  */
 function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
-
-  if ($form['#vocabulary']->machine_name == 'category_management' && $form_id == 'taxonomy_form_term') {
-
+  if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name == 'category_management') {
     $select_template_type = 'field_cm_select_template_type';
     $select_template = 'field_cm_select_template';
-
     unset($form[$select_template_type][LANGUAGE_NONE]['#options']['_none']);
 
 // add ajax on Select template field
@@ -1089,138 +1086,27 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
     $editid = $editid_new;
   }
 
+  if ($editid == 0 || empty($editid)) {
+    $editid = $form['#node']->field_primary_category[LANGUAGE_NONE][0]['value'];
+  }
+
   drupal_add_js('jQuery(document).ready(function() {
-var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
-if(rows==0){
-jQuery(".title-select-prim").remove();
-jQuery(".dropbox table").before( "<span class=title-select-prim>Select primary category</span>" );
+    jQuery("#prim_' . $editid . '").attr("checked", true);
+        jQuery( "form" ).submit(function( event ) {
+         jQuery("#edit-field-primary-category-und-0-value").val("");
+         jQuery(".primary_category_radio").each(function(){
+    if(jQuery(this).is(":checked"))
+    {
+        var getval = jQuery(this).val();
+        jQuery("#edit-field-primary-category-und-0-value").val(getval);
 
-}
-jQuery(".form-item-field-primary-category-html-text-und-0-value").hide();
-jQuery(".node-form").append("<input type=hidden name=form_node value=' . $type . ' >");
-jQuery("form").submit(function(){
-var gethtml = jQuery(".prim-html").html();
-
-jQuery("#edit-field-primary-category-html-text-und-0-value").val(gethtml);
-jQuery(".primary-radio").each(function()
-{
-if(jQuery(this).is(":checked"))
-{
-jQuery("#edit-field-primary-category-und-0-value").val(jQuery(this).val());
-
-}
+    }
+    
+  });
 });
-});
-});', array('type' => 'inline', 'scope' => 'footer'));
-
-  drupal_add_js('jQuery(window).load(function() {
-var geteditid="";
-geteditid=' . $editid . ';
-
-var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
-
-if (getvaluehtml != "")
-{
-getvaluehtml="<div class=prim-html>"+getvaluehtml+"</div>";
-jQuery(".prim-html").remove();
-
-jQuery(".form-item-field-primary-category-html-und-0-value").append(getvaluehtml).hide();
-jQuery("#primary-category-data").html(getvaluehtml);
-jQuery(".prim-html").children("span").each(function(){
-var gettoptext=jQuery(this).find(".primary-text").text();
-var selectvalue=jQuery(this).find(".select-prim").val();
-
-if(jQuery("#edit-field-primary-category-und-0-value").val()==selectvalue)
-{
-checkedto="checked=checked";
-} else { checkedto="";}
-
-makeradio = "<input "+checkedto+" class=primary-radio name=primary_radio type=radio  value="+selectvalue+">";
-
-jQuery(".dropbox-entry").each(function(){
-var gettrtext=jQuery(this).children("td:first").text();
-if(gettoptext==gettrtext)
-{
-if (!jQuery(this).children("td:first").find("input").hasClass("primary-radio"))
-{
-jQuery(this).children("td:first").find(".dropbox-item:first").before(makeradio);
-}
-}
-});
-
-})
-}
-jQuery(".primary-radio").each(function()
-{
-if(jQuery(this).val()==geteditid)
-{
-jQuery(this).prop( "checked", true );
-}
-});
-jQuery(".dropbox-remove a").live("mousedown", function() {
-jQuery("#edit-field-primary-category-und-0-value").val("");
-var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
-
-if (getvaluehtml != "")
-{
-getvaluehtml="<div class=prim-html>"+getvaluehtml+"</div>";
-jQuery(".prim-html").remove();
-setTimeout(function(){ 
-jQuery(".form-item-field-primary-category-html-und-0-value").append(getvaluehtml).hide();
-
-}, 500);}
-var getdattext = jQuery(this).parent().siblings("td").text();
-jQuery(document).on("ajaxComplete", function(event, xhr, settings) {
-if (settings.url.indexOf("hierarchical_select_ajax") >= 0) {
-
-var getdoptiontext = jQuery(this).text();
-
-jQuery(".title-select-prim").remove();
-var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
-if(rows==0){
-jQuery(".title-select-prim").remove();
-jQuery(".dropbox table").before( "<span class=title-select-prim>Select primary category</span>" );
-
-}
-jQuery(".prim-html .primary-text").each(function() {
-
-var getdoptiontext = jQuery(this).text();
-if (getdoptiontext == getdattext) {
-
-jQuery(this).parent(".hiddenradio").remove();
-}
-});
-jQuery(".hiddenradio").each(function(){
-var gettoptext=jQuery(this).find(".primary-text").text();
-var selectvalue=jQuery(this).find(".select-prim").val();
-
-makeradio = "<input class=primary-radio name=primary_radio type=radio  value="+selectvalue+">";
+     });', array('type' => 'inline', 'scope' => 'footer'));
 
 
-jQuery(".dropbox-entry").each(function(){
-var gettrtext=jQuery(this).children("td:first").text();
-if(gettoptext==gettrtext)
-{
-if (!jQuery(this).children("td:first").find("input").hasClass("primary-radio"))
-{
-jQuery(this).children("td:first").find(".dropbox-item:first").before(makeradio);
-}
-}
-});
-
-});
-var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
-if(rows>0){
-jQuery(".title-select-prim").remove();
-jQuery(".hiddenradio").remove();
-}
-
-}
-});
-
-});
-});
-', array('type' => 'inline', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', array('type' => 'file', 'scope' => 'footer'));
 
   return $form;

@@ -5,7 +5,12 @@ global $base_url;
 <div class="programe-container">
   <?php
   foreach ($rows as $row) :
-    $status = itg_category_manager_term_state($row['tid']);
+    if (function_exists('itg_category_manager_term_state')) {
+      $status = itg_category_manager_term_state($row['tid']);
+    }
+    else {
+      $status = 0;
+    }
     if ($status) {
       $view = views_get_view('programme_content');
       $args = array($row['tid']);
@@ -36,8 +41,8 @@ global $base_url;
           <?php if (isset($row['field_program_timing_in_days'])) : ?>
             <div class="programe-timing">
               <?php print $row['field_program_timing_in_days']; ?>
-              
-                <?php print t(" at ") ?>
+
+              <?php print t(" at ") ?>
 
               <span class="time">
                 <?php if (!empty($row['field_user_city'])) : ?>

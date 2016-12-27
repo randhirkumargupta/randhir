@@ -68,7 +68,8 @@ if ($theme != 'itgadmin') {
     endif;
     ?>
       
-        <main id="main" class="container">
+        <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
             <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
     <?php print $breadcrumb; ?>
@@ -96,8 +97,15 @@ if ($theme != 'itgadmin') {
             }
             ?>
 
-            <div class="itg-layout-container <?php echo $itg_class; ?> sport-home-layout-page pos-rel">   
-                <?php print render($page['vertical_menu']); ?>
+            <div class="itg-layout-container <?php echo $itg_class; ?> sport-home-layout-page ">
+                <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
                 <div class="row">
                     <div class="col-md-8 col-sm-12 col-xs-12 left-side">
 <?php if (isset($widget_data['itg-block-1']['widget_name']) || $theme == 'itgadmin') { ?>
@@ -256,19 +264,11 @@ if ($theme != 'itgadmin') {
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'] . $widget_data['itg-block-6']['widget_display_name']; ?>">
-    <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-6']['block_title'])) { ?>
-                                                     <span class="widget-title"><?php print $widget_data['itg-block-6']['block_title']; ?></span>
-                                                <?php } ?>
+   
+                                                     <span class="widget-title">Scorcard</span>
+
                                                 <!-- for admin  -->
-                                                <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                                                    <div class="widget-settings">
-                                                        <div class="widget-title-wrapper">
-                                                            <span class="widget-title" data-id="itg-block-6"><?php print $widget_data['itg-block-6']['block_title']; ?></span>
-                                                            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />
-                                                        </div>
-                                                        <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                    </div>
-    <?php } ?>  
+                                               
 
                                                 <div class="data-holder" id="itg-block-6" widget-style="oscar-news"><?php $block = module_invoke('itg_widget', 'block_view', 'live_score');print render($block['content']); ?>
                                                  

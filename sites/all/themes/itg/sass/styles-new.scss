@@ -8,6 +8,13 @@
     background: -moz-linear-gradient($color1, $color2); /* For Firefox */
     background: linear-gradient($color1, $color2); /* Standard syntax */
 }
+input[type="text"], textarea{
+  transition: all 300ms;
+  &:focus{
+    border-color: #026bc5;
+  }
+}
+
 [id="views-exposed-form-front-end-global-search-page"]{
     .views-exposed-form{
         #edit-keyword-wrapper{
@@ -1657,12 +1664,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         font-family: roboto;
       }
       .form-radios{
+        text-align: center;
         .form-item{
             display: inline-block;
             vertical-align: top;
             margin-bottom: 5px;
-            padding-bottom: 0;
-            width: 49%;
+            padding: 0 10px;
           .form-radio{
             float: left;
             margin: 3px 2px 0 0;
@@ -1680,8 +1687,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         font-weight: 500;
         font-family: Roboto;
         margin-top: 20px;        
-        color: #323232;
-        margin: 0 auto;
+        color: #5f5f5f;
+        margin: 15px auto 0;
         display: inherit;
         font-size: 14px;
       }
@@ -2733,30 +2740,111 @@ body.has-cart-popup{
     float: left;
   }
 }
+.story-section .byline .profile-detail ul.social-links,
+.story-section .social-list,
+.date-update{
+  li:hover{
+    .fa, a{
+      color: #1a3c8d;
+    }
+  }
+}
+.story-section .agbutton.story-like-dislike #name-dv #lky button:hover, 
+.story-section .agbutton.story-like-dislike #name-dv #dlky button:hover{
+  color: #1a3c8d;
+}
+
+
 
 
 
 /* CSS For Material Ripple Effect */
-.ripple{
-  background-color: rgba(255,255,255,0.4);
-  animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
+.ripple-effect{
+  position: relative;
+  overflow: hidden;
 }
-.itg-listing li.ripple{
-  background-color: rgba(0,0,0,0.4);
+.ripple {
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  position: absolute;
+  opacity: 1;
+  z-index: 9999;
 }
-@keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  80% {
-    transform: scale(1);
-  }
+.rippleEffect {
+    animation: rippleDrop .8s linear;
+}
+
+@keyframes rippleDrop {
   100% {
+    transform: scale(2);
     opacity: 0;
   }
 }
 
+/* CSS For Block quotes */
+blockquote {
+  color: #000;
+  font: 600 20px/28px "Roboto Slab",sans-serif;
+  margin: 0 0 20px;
+  position: relative;
+  text-align: justify;
+  text-indent: 40px;
+  &:before {
+    content: "\201C";
+    display: inline-block;
+    font: bold 60px/28px Georgia, serif;
+    vertical-align: baseline;
+    position: absolute;
+    left: 0;
+    top: 12px;
+    text-indent: 0;
+  }
+  &:after {
+    content: "\201D";
+    display: inline-block;
+    font: bold 60px/0px Georgia, serif;
+    vertical-align: top;
+    text-indent: 10px;
+    margin-top: 32px;
+  }
+}
+
+
+
+
+/* CSS To Add Zoom Effect on Images */
+
+@media all and(min-width: 1025px){
+  .zoom-image {
+    overflow: hidden;
+    display:block;
+     img {
+      transition: all 500ms ease 0s;
+      &:hover{
+        transform: scale(1.2);
+      }
+    }
+  }
+  .featured-news .featured-post a, 
+  .dm-pic a,
+  .top-takes-list a,
+  .trending-videos-list a,
+  .big-news a,
+  .may-we-suggest > a,
+  .watch-right-now-list > a,
+  .section-ordering a{
+    @extend .zoom-image;
+  }
+  .social-nav li{
+    .fa{transition: all 300ms;}
+    &:hover{
+      .fa{color: #ffc106;}
+    }
+  }
+}
 
 
 
@@ -3588,6 +3676,7 @@ body.has-cart-popup{
             }
           }
           div.description{
+            display: none;
             color: #5f5f5f;
             font: 400 12px/16px Roboto;
             margin-top: 8px;

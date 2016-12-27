@@ -298,7 +298,7 @@ function get_layout_details($section_name, $template_name, $status) {
     if (!empty($itg_val->widget_name)) {
       $widget_info_array = explode('|', $itg_val->widget_info);
       
-      if($widget_info_array[1] !="" &&  $widget_info_array[1] !="undefined") {
+      if(!empty($widget_info_array[1]) &&  $widget_info_array[1] !="undefined") {
         $result['widget_display_name'] = '-'.$widget_info_array[1];  
       } else{
           $result['widget_display_name'] = "";  
@@ -614,6 +614,7 @@ function get_highlights_widget($nid) {
     $highlights_node = node_load($nid);
     
     $output = '';
+    $text = '';
     $output .= '<div class="wrap-listing">';
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
       $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));

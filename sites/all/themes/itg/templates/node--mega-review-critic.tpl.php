@@ -6,6 +6,29 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728164
  */
+
+?>
+<?php
+  // config for sharing
+  global $base_url; 
+  $nid = check_plain(arg(1));   
+  $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+  $short_url = shorten_url($actual_link, 'goo.gl');
+  $fb_title = addslashes($node->title);
+  $share_desc = '';
+  $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+  
+  // get global comment config
+    if (function_exists(global_comment_last_record)) {
+    $last_record = $global_comment_last_record;
+    $config_name = trim($last_record[0]->config_name);
+    }
+    
+   // get facebook share count 
+    if (function_exists(itg_total_share_count)) {
+    $tot_count = itg_total_share_count($actual_link);
+    }
+
 ?>
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
@@ -49,24 +72,28 @@
         </div>
         <div class="social-info">     
             <span class="share-count">
-                <i>4.3K</i>
+                <i><?php if(!empty($tot_count)) { print $tot_count;} else { print 0; } ?></i>
                 SHARES
             </span> 
             <span>
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-                <dfn>1522</dfn>
+                <a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>                
             </span>
             <span>
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-                <dfn>1522</dfn>
+                <a href="javacript:void();" title ="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a>
             </span>
             <span>
-                <i class="fa fa-google-plus" aria-hidden="true"></i>
-                <dfn>1522</dfn>
-            </span>
+                <a href="javacript:void();" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>                
+            </span>            
             <span>
-                <i class="fa fa-comment" aria-hidden="true"></i>
-                <dfn>1522</dfn>
+                <?php
+                if ($config_name == 'vukkul') {
+                  ?>
+                  <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
+                <?php } if ($config_name == 'other') { ?> 
+                  <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
+                <?php } ?>
+                
+                <!--<dfn>1522</dfn>-->
             </span>
         </div>
     </div>
@@ -206,7 +233,7 @@
                       $video_node = node_load($asso_vid_id);
                       $large_image = theme(
                           'image_style', array(
-                        'style_name' => 'mrass_video',
+                        'style_name' => empty($asso_vid_class) ? 'mrass_video' : 'anchors_landing',
                         'path' => $video_node->field_story_extra_large_image['und'][0]['uri'],
                           )
                       );
@@ -236,7 +263,7 @@
                       $photo_node = node_load($asso_photo_gallery);
                       $small_image = theme(
                           'image_style', array(
-                        'style_name' => 'mrass_video',
+                          'style_name' => empty($ass_photo_class) ? 'mrass_video' : 'anchors_landing',
                         'path' => $photo_node->field_story_extra_large_image['und'][0]['uri'],
                           )
                       );

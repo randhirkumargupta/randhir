@@ -389,6 +389,11 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).ready(function () {
+    //breaking news hide
+    jQuery(".breaking-new-close").click(function(){
+        jQuery(".breakingnew-home").slideUp();
+    });
+    
     var getmsgsaves = jQuery('.saved-photogallery').text();
     if (getmsgsaves != "")
     {
@@ -578,7 +583,7 @@ jQuery(document).ready(function () {
                    'left': '-60px',
                    'top': '100px',
                    'bottom': 'auto'
-               });
+               });            
           }
           if(windowTop > limit + 315){              
               el.css({
@@ -586,32 +591,21 @@ jQuery(document).ready(function () {
                    'left': '-60px',
                    'top': 'auto',
                    'bottom': '0px'
-               });              
+               });
+               jQuery(".home-bottom-vertical").show();
+          }else{
+               jQuery(".home-bottom-vertical").hide();
           }
-          
-          
-//        if(windowTop > flimit){            
-//               el.css({
-//                   'position': 'absolute',
-//                   'left': -55 + 'px',
-//                   'top': flimit - 175 + 'px'
-//               })   
-//        }
-//        else{
-//            el.css({
-//                   'position': 'fixed',
-//                   'left': finalWidth - 70 + 'px',
-//                   'top': 270 + 'px'
-//               })
-//        }
         });
    }
     
-    
-    var menuLength  = jQuery('.vertical-menu li').length;
-    if (menuLength > 5) {
-        jQuery('.vertical-more').show();
-    }   
+    var menuLength;
+    jQuery(".vertical-menu").each(function(){
+        menuLength  = jQuery(this).find('li').length;        
+        if (menuLength > 5) {
+            jQuery('.vertical-more').show();
+        }
+    });
     var calcNum = menuLength % 5;
     var divNum = parseInt(menuLength/5);    
     var count = 0;
@@ -635,12 +629,55 @@ jQuery(document).ready(function () {
         jQuery('.vertical-more a.more').show();
         jQuery(this).hide();   
     });
-    Array.prototype.forEach.call(document.querySelectorAll('.second-level-menu li, .itg-listing li'), function(element){
-  // find all elements and attach effect
-  new RippleEffect(element); // element is instance of javascript element node
+    jQuery('.page-user .form-submit').wrap('<div class="ripple-effect dib vtop"></div>');
+    jQuery('.second-level-menu li, .itg-listing li, .tab-buttons span, .agbutton button').addClass('ripple-effect');
+    jQuery(".ripple-effect").click(function (e) {
+      
+      // Remove any old one
+      jQuery(".ripple").remove();
+      
+      // Setup
+      var posX = jQuery(this).offset().left,
+              posY = jQuery(this).offset().top,
+              buttonWidth = jQuery(this).width(),
+              buttonHeight = jQuery(this).height();
+
+      // Add the element
+      jQuery(this).prepend("<span class='ripple'></span>");
+
+      // Make it round!
+      if (buttonWidth >= buttonHeight) {
+        buttonHeight = buttonWidth;
+      } else {
+        buttonWidth = buttonHeight;
+      }
+
+      // Get the center of the element
+      var x = e.pageX - posX - buttonWidth / 2;
+      var y = e.pageY - posY - buttonHeight / 2;
+
+      // Add the ripples CSS and start the animation
+      jQuery(".ripple").css({
+        width: buttonWidth,
+        height: buttonHeight,
+        top: y + 'px',
+        left: x + 'px'
+      }).addClass("rippleEffect");
+    });
+    // vertical menu on mobile
+    var tlmenu = jQuery('#block-itg-menu-manager-third-level-menu .select-menu');
+    tlmenu.click(function(){
+        jQuery(this).next('ul').stop().slideToggle();
+    });
+    jQuery(document).on('click', function () {
+        jQuery('#block-itg-menu-manager-third-level-menu ul.third-level-menu').slideUp();;
+    });
+    tlmenu.click(function (e) {
+        e.stopPropagation();
+    });
 });
     
-});
+
 
 
 

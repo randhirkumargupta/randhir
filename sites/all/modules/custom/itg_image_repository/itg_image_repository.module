@@ -70,6 +70,15 @@ function itg_image_repository_filefield_sources_info() {
         'weight' => -1,
             //'file' => 'sources/itg_image_repository.inc',
     );
+    
+    $source['itg_image_repository'] = array(
+        'name' => t('ITG Video Repository'),
+        'label' => t('ITG Video Repository'),
+        'description' => t('Select a Video to daily motion.'),
+        'process' => 'filefield_source_itg_image_repository_process',
+        'weight' => -1,
+            //'file' => 'sources/itg_image_repository.inc',
+    );
 
     return $source;
 }
@@ -147,8 +156,14 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
     $getimageoptions = explode('(', $element['#description']);
     $getimageoptions = explode(')', $getimageoptions[1]);
     $getimagehightwidth = explode('x', $getimageoptions[0]);
-     $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => $getimagehightwidth[1], 'width' => $getimagehightwidth[0],'btn_name'=>$element['#name'])));
-    $itg_image_repository_function="showimagerepopopu('".$url."')";
+if($element['#field_name']=='field_story_facebook_video' || $element['#field_name']=='field_story_twitter_video')
+    {
+            $url=url('dailymotion-ftp-template/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'no_value' => 'single','btn_name'=>$element['#name'])));
+ 
+    } else {
+             $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => $getimagehightwidth[1], 'width' => $getimagehightwidth[0],'btn_name'=>$element['#name'])));
+
+    }    $itg_image_repository_function="showimagerepopopu('".$url."')";
     $element['filefield_itg_image_repository']['display_path'] = array(
         '#type' => 'markup',
         '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="javascript:void(0)" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
@@ -175,6 +190,8 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
 
     return $element;
 }
+
+
 
 /**
  * A #filefield_value_callback function.

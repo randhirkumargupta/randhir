@@ -42,6 +42,27 @@ function itg_common_dropdown_supplement($id = '') {
 }
 
 /**
+ * Helper function to populate the second dropdown.
+ * @param string $id
+ * @return array $data
+ */
+function itg_common_dropdown_mazine($id = '') {
+    // Fetch supplements for selected magazine
+    $select = t('- None -');
+    $data = array('_none' => $select);
+    $query = db_select('node', 'n');
+    $query->fields('n', array('title','nid'));
+    $query->condition('n.status', 1, '=');
+    $query->condition('n.type', 'magazine', '=');
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+        $data[$record['nid']] = $record['title'];
+    }
+    return $data;
+}
+
+/**
  * Implements hook_form_alter().
  * {@inheritdoc}
  */
@@ -61,9 +82,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
             $form['description']['#title'] = 'Sponser';
           }      
           // Add JS to hide extra element of menu forms
-          drupal_add_js('jQuery(document).ready(function() {                  
-                          // jQuery(".form-item-description").hide();
-                          // jQuery(".form-type-checkbox").hide();
+          drupal_add_js('jQuery(document).ready(function() {
                           jQuery(".form-item-expanded").hide();
                           jQuery(".form-item-parent").hide();
                           jQuery(".form-item-weight").hide();             
@@ -884,4 +903,30 @@ function itg_common_round_rating($average_rating) {
   }
   
   return $average_rating;
+}
+
+/**
+ * Implements itg_total_share_count
+ * @param string $actual_link
+ *   Send url for facebook share
+ * 
+ * @return int
+ *   total share count
+ */
+
+function itg_total_share_count($actual_link) {
+  $fb_google_count = $fb_count = $google_count = 0;
+  
+  if (function_exists(itg_facebook_share_count)) {
+    $fb_count = itg_facebook_share_count($actual_link);
+  }
+
+  // get google share count
+  if (function_exists(itg_google_share_count)) {
+    $google_count = itg_google_share_count($actual_link);
+  }
+
+  $fb_google_count = $fb_count + $google_count;
+
+  return $fb_google_count;
 }

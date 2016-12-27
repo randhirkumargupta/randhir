@@ -70,6 +70,11 @@ function itg_event_registration_theme() {
           'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
           'variables' => array('data' => NULL),
       ),
+      'event_registration_not_published' => array(
+          'template' => 'event-registration-not-published',
+          'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+          'variables' => array('node' => NULL),
+      ),
       'event_registration_closed' => array(
           'template' => 'event-registration-closed',
           'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
@@ -409,17 +414,8 @@ function itg_event_registration_registered_user_detail($nid) {
     $total_registration_users = itg_event_registration_get_total_registration($nid);
     $total_registration_for_event = $total_registration_users ? $total_registration_users : 0;
   }
-
-  $text = 'List Users(' . $total_registration_for_event . ')';
-  $path = 'event-registration/users-list/' . $nid;
-
-  if ($total_registration_for_event < 1) {
-    return 0;
-  }
-  else {
-    //return l($text, $path, array('attributes' => array('target' => '_blank')));
-    return $text;
-  }
+  $total_registered_users =  $total_registration_for_event ? l($total_registration_for_event, 'event-registration/users-list/'.$nid, array('attributes' => array('class' => 'colorbox-load'))) : '0';
+  return $total_registered_users;
 }
 
 /**
@@ -429,8 +425,6 @@ function itg_event_registration_registered_user_detail($nid) {
  */
 function itg_event_registration_get_total_registration($nid) {
 
-  $registration_main_users = itg_common_check_record_existance($nid, 'field_data_field_story_source_id', 'field_story_source_id_value');
-
   // Count group users registration for an event
   $main_user_nid_arr = itg_common_select_field_value('entity_id', 'field_data_field_story_source_id', 'field_story_source_id_value', $nid);
   $registration_group_users = 0;
@@ -439,8 +433,8 @@ function itg_event_registration_get_total_registration($nid) {
     $registration_group_users = $registration_group_users + itg_common_check_record_existance($main_user_nid, 'field_data_field_erf_registration_fee', 'entity_id');
   }
   // Total count for an event
-  $total_registration_users = $registration_main_users + $registration_group_users;
-  return (int)$total_registration_users;
+  $total_registration_users = $registration_group_users;
+  return (int) $total_registration_users;
 }
 
 /**
@@ -497,5 +491,3 @@ function itg_event_registration_get_form() {
   }
   return $form;
 }
-
-

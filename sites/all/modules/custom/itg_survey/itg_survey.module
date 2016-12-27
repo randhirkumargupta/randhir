@@ -190,7 +190,15 @@ function itg_survey_form_after_build($form, &$form_state) {
    $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
    );
-    
+
+   // Hide multiple answer options in case of "rating" 
+   for ($ques = 0; $ques <= $form['field_survey_add_questions']['und']['#max_delta']; $ques++) {
+     if($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_type'][LANGUAGE_NONE]['#default_value'][0] == 'rating') {
+        unset($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_option_2']);
+
+     }
+   }
+
   // Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
@@ -831,9 +839,15 @@ function itg_survey_pqs_associate_poll_with_story($nid){
  * @param array $form_state
  */
 function itg_survey_survey_form_validate($form, &$form_state) {
-  
+  global $user;
   $form_detail = $form_state['values'];
-  $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'];
+  
+  if($user->uid) {
+    $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'] . '_'. $user->uid;
+  } else {
+    $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'];
+  }
+  
 
   if (isset($_COOKIE[$cookie_name])) {
     form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));

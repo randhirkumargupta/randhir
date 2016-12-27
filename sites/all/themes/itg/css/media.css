@@ -712,8 +712,77 @@
   }
 
   /*End css program live page*/
-  #block-itg-menu-manager-third-level-menu .col-md-8 {
+  #block-itg-menu-manager-third-level-menu .col-md-4 {
+    height: 60px;
+  }
+  #block-itg-menu-manager-third-level-menu .col-md-4 img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 0 15px;
+  }
+  #block-itg-menu-manager-third-level-menu .menu-wrapper {
+    background: #595959;
+    height: 60px;
+  }
+  #block-itg-menu-manager-third-level-menu .select-menu {
+    color: #fff;
+    font-family: roboto;
+    width: 95px;
+    background: #3c3a3b;
+    padding-left: 5px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    position: relative;
+    margin-top: 15px;
+  }
+  #block-itg-menu-manager-third-level-menu .select-menu:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ccc;
+    position: absolute;
+    top: 13px;
+    right: 9px;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu {
+    padding-top: 0;
+    background: #4d4b4c;
+    position: absolute;
+    z-index: 9999;
+    float: none;
+    width: 95px;
+    top: 45px;
+    left: 15px;
     display: none;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu li {
+    display: block;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu li a {
+    font-weight: 500;
+    font-size: 11px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 8px 0 8px;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu li a:hover, #block-itg-menu-manager-third-level-menu ul.third-level-menu li a.active {
+    background: #3d3b3c;
+    color: #fff;
+  }
+  #block-itg-menu-manager-third-level-menu .col-md-8 {
+    display: block;
+    position: relative;
   }
 
   /*Start css online archive story page*/
@@ -1342,6 +1411,12 @@
     font-size: 1.5rem;
     line-height: 34px;
   }
+  .buzz-feedback.buzz-related .story-left {
+    width: 21%;
+  }
+  .buzz-feedback.buzz-related .story-right {
+    width: 79%;
+  }
 
   /*End Story page css*/
   /*Start css ITG globle search result page*/
@@ -1582,7 +1657,7 @@
     padding-left: 10px;
   }
   #block-views-photo-landing-slider-block .social-icon ul li a {
-    padding: 0 15px;
+    padding: 0 12px;
     line-height: 55px;
   }
   #block-views-photo-landing-slider-block .social-icon ul li span.flag-throbber {
