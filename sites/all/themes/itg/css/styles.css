@@ -2300,8 +2300,19 @@ footer .footer-copyright {
   border-right: none;
 }
 .story-section .byline .profile-detail ul.social-links li:last-child i {
-  vertical-align: middle;
+  vertical-align: top;
   margin-right: 5px;
+}
+.story-section .byline .profile-detail ul.social-links li a.unflag-action .fa-bookmark:after {
+  content: "\f00c";
+  margin-left: 0px;
+  color: #474747;
+  font-size: 8px;
+  margin-top: -15px;
+  display: block;
+}
+.story-section .byline .profile-detail ul.social-links li a.unflag-action + .flag-throbber {
+  display: none;
 }
 .story-section .story-left .briefcase {
   margin: 20px 0;
@@ -2746,6 +2757,9 @@ footer .footer-copyright {
 }
 .story-section .buzzfeed-byline .social-share-story li a:hover i {
   color: #1a3c8d;
+}
+.story-section.buzz-related .story-left-section .related-story {
+  margin-top: 0px;
 }
 
 .buzz-feedback {
@@ -4490,6 +4504,9 @@ footer .footer-copyright {
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a:hover {
   background: #363636;
   color: #fff;
+}
+#block-views-video-landing-header-block .video-header-left .social-likes ul li .flag-throbber {
+  display: none;
 }
 #block-views-video-landing-header-block .video-header-left .iframe-video {
   padding-bottom: 69%;
@@ -10682,6 +10699,24 @@ footer .footer-copyright {
   color: #13d21a;
   margin-top: 10px;
   text-align: left;
+}
+#block-views-photo-landing-slider-block .social-icon a.unflag-action, #block-views-video-landing-header-block .social-icon a.unflag-action {
+  position: relative;
+  font-family: FontAwesome;
+  pointer-events: none;
+}
+#block-views-photo-landing-slider-block .social-icon a.unflag-action:after, #block-views-video-landing-header-block .social-icon a.unflag-action:after {
+  content: "\f00c";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  font-size: 11px;
+  margin-left: -6px;
+  color: #474747;
+  margin-top: -2px;
+}
+#block-views-photo-landing-slider-block .social-icon + flag-throbber, #block-views-video-landing-header-block .social-icon + flag-throbber {
+  display: none;
 }
 
 /*like dislike photo page end*/
