@@ -48,13 +48,13 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
       );
       return $form;
     }
-    if(time() > $quiz_expiry_date) {
-       $form['quiz_expiry_status'] = array(
-         '#type' => 'markup',
-         '#markup' => '<div style="margin-top:10px"><h2>Quiz "'.$node->title.'" has been expired!</h2></div>',
-      );
-       return $form;
-     }
+//    if(time() > $quiz_expiry_date) {
+//       $form['quiz_expiry_status'] = array(
+//         '#type' => 'markup',
+//         '#markup' => '<div style="margin-top:10px"><h2>Quiz "'.$node->title.'" has been expired!</h2></div>',
+//      );
+//       return $form;
+//     }
 
     // Creation of quiz form 
     $num = 0;
@@ -285,6 +285,12 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
 
       // Next button for all questions, if type is "One question at a time"
       if ($quiz_question_format == 'One question at a time') {
+        if ($button_text == 'Submit' && time() > $quiz_expiry_date) {
+          $form['quiz_has_been_expired' . $num] = array(
+              '#type' => 'markup',
+              '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This quiz has been expired. So you can not submit!</strong></div>',
+          );
+        } else {
           $form['quiz_submit_' . $num] = array(
               '#type' => 'submit',
               '#value' => $button_text,
@@ -297,6 +303,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
               '#attributes' => array('class' => array('quiz-submit'))
           );
         }
+      }
       
       if ($quiz_question_format == 'All questions at a time') {
           $form['close_question_container' . $num] = array(
@@ -366,17 +373,25 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
     );
     
    // Single submit button, if all questions are showing at once
-   if($quiz_question_format == 'All questions at a time') {
-     $form['quiz_submit_' . $num] = array(
-          '#type' => 'submit',
-          '#value' => 'Submit',
-          '#name' => 'quizsubmit_' . $num,
-          '#ajax' => array(
-              'callback' => 'quiz_form_ajax_handler',
-              'effect' => 'fade',
-          ),
-          '#attributes' => array('class' => array('quiz-submit'))
-      );
+   if ($quiz_question_format == 'All questions at a time') {
+
+      if (time() > $quiz_expiry_date) {
+        $form['quiz_has_been_expired' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This quiz has been expired. So you can not submit!</strong></div>',
+        );
+      } else {
+        $form['quiz_submit_' . $num] = array(
+            '#type' => 'submit',
+            '#value' => 'Submit',
+            '#name' => 'quizsubmit_' . $num,
+            '#ajax' => array(
+                'callback' => 'quiz_form_ajax_handler',
+                'effect' => 'fade',
+            ),
+            '#attributes' => array('class' => array('quiz-submit'))
+        );
+      }
     }
   } 
   else { 

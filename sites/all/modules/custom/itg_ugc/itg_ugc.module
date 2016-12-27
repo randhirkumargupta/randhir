@@ -133,13 +133,15 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   if ($user->uid == 0 && !empty($_GET['type']) && $form_id == 'ugc_node_form') {
     $form['field_ugc_ctype']['#attributes']['class'][] = 'element-hidden';
     if (isset($_GET['type'])) {
-      $ugc_heading = '<div class="ugc-top-heading"><h2>Post Your Content</h2></div>';  
+      $form['ugc_head'] = array(
+       '#weight' => -1,   
+       '#markup' => '<div class="ugc-top-heading"><h2>Post Your Content</h2></div>');
       $form['field_ugc_ctype'][LANGUAGE_NONE]['#default_value'] = $_GET['type'];
     }
+
+    $form['#attributes']['class'][] = 'ugc-custom-wrapper';
   }
-  
-  $form['#prefix'] = '<div class="ugc-custom-wrapper">'.$ugc_heading;
-  $form['#suffix'] = '</div>';
+
 
   if (empty($form['nid']['#value'])) {
     // prefill input value in blog form
@@ -278,7 +280,6 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 
-  $user_fields = user_load($user->uid);
   
   // alter the section for election xml 
   if ($form_id == 'election_graph_xml_node_form') {
@@ -303,7 +304,8 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'ugc_node_form') {
-    if ($user->uid != '1') {
+   $user_fields = user_load($user->uid);
+  if ($user->uid != '1') {
       // hide source and type field from other users
       if ($form_id == 'ugc_node_form') {
         $form['field_story_source_type']['#access'] = FALSE;

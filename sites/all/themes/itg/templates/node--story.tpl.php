@@ -125,11 +125,11 @@ if (!empty($content)):
                                     ?>
                                 </ul>
                             </div>
-                        <?php } ?>
+                        <?php } if (!empty($related_content)) {?>
                         <!--related content-->
                         <div class="related-story">
                             <?php                            
-                                if (!empty($related_content)) {
+                                
                                 $related_story = '<h3>Related</h3>';
                                 $related_content = explode(',', $related_content);
                                 foreach ($related_content as $fn_result) {
@@ -139,12 +139,12 @@ if (!empty($content)):
                                 $final_related = implode(' OR ', $final_related);
                                 $related_story.= views_embed_view('related_story', 'page', $final_related);
                                 print $related_story;
-                                }
+                                
                             ?>
                         </div>
-                        
+                        <?php } ?> 
                     </div>  
-                <?php } ?>
+                <?php }  ?>
                
                 
                  <!-- For buzzfeed section start -->
@@ -180,8 +180,12 @@ if (!empty($content)):
                                 <ul class="date-update">
                                     <li><?php print date('F j, Y', $node->created); ?>   </li>
                                     <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
+                                    <?php if(!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name))
+                                    { ?>
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
-                                </ul>                                
+                                    <?php } ?>
+                                </ul>
+                               
                             </div>
                             <div class="social-share-story">
                                  <ul class="">
@@ -199,10 +203,10 @@ if (!empty($content)):
                              </div>
                         </div>
                     </div>
-                   
+                   <?php if (!empty($related_content)) { ?>
                     <div class="story-left related-story">
                 <?php
-                  if (!empty($related_content)) {
+                   
                     $related_story = '<h3>Related</h3>'; 
                     $related_content = explode(',', $related_content);
                     foreach ($related_content as $fn_result) {
@@ -212,12 +216,12 @@ if (!empty($content)):
                     $final_related = implode(' OR ', $final_related);
                     $related_story.= views_embed_view('related_story', 'page', $final_related);
                     print $related_story;
-                  }
+                  
                 ?>
                         </div>
                   <!-- For buzzfeed section end --> 
                               
-                 <?php } ?>
+                   <?php } } ?>
                    
                 <div class="story-right <?php
                 if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
@@ -367,8 +371,15 @@ if (!empty($content)):
                               $type = $i->field_story_listicle_type->value();
                               $description = $i->field_story_listicle_description->value();
                               $color = $i->field_story_listicle_color->value();
+                              $li_type =$node->field_story_templates[LANGUAGE_NONE][0]['value'];
                               $color = ($color['rgb']) ? $color['rgb'] : '#000000';
-                              print '<span>' . $num . '</span>';
+                              if($li_type=='bullet_points')
+                              {
+                                  print '<span class="bullet_points"></span>';
+                              } else {
+                                  print '<span>' . $num . '</span>';
+                              }
+                              
                               if (isset($type)) {
                                 $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
                               }
