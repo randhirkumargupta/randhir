@@ -51,7 +51,7 @@
         </div>
       </div>
     </div>
-    <div id="browse-image" class="itg-form-section-wrapper">
+    <div id="browse-image" class="itg-form-section-wrapper browse-media-file">
       <h2 class="story-title"><?php print t('Browse Image'); ?></h2>
       <div class="itg-form-section hide">
         <?php print drupal_render($form['field_story_extra_large_image']); ?>

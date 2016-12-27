@@ -376,8 +376,7 @@ function _get_order_item() {
  * @global stdObject $user
  * @return array
  */
-function itg_loyalty_reward_order_summary() {
-  
+function itg_loyalty_reward_order_summary() {  
   global $user;
   // Add js file.
   drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
@@ -400,6 +399,8 @@ function itg_loyalty_reward_order_summary() {
  * @return array
  */
 function itg_loyalty_reward_order_confirmation() {
+  // Add js for disabling 
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
   if (!isset($_SESSION['placed-item'])) {
     drupal_goto('product');
   }

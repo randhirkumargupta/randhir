@@ -1,4 +1,5 @@
 <?php
+  global $base_url, $user;
 if (!empty($data['itg_main_manu_header'])) {
 foreach ($data['itg_main_manu_header'] as $key => $val) {
   if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
@@ -14,7 +15,15 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 
 <div class="head-live-tv desktop-hide">
   <ul>
-    <li> <a href="javascript:void(0)" ><i class="fa fa-user"></i></a></li>
+    <li> 
+        <?php if ($user->uid == 0): ?>
+        <a href="<?php print $base_url . '/user/login'; ?>" ><i class="fa fa-user"></i></a>
+        <?php else: ?>        
+          <a href="javascript:void(0)" ><i class="fa fa-user"></i></a>        
+        <?php $block = module_invoke('system', 'block_view', 'user-menu'); ?>
+        <?php print render($block['content']); ?> 
+        <?php endif; ?>
+    </li>
     <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
     <li><a href="javascript:void(0)" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv"></a></li> 
   </ul>
@@ -85,23 +94,46 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
   <div class="menu-login mhide">
     <div class="container ">   
       <div class="user-menu">
-        <?php
-        global $user;
-
-        if ($user->uid == 0 || $_GET['q'] != 'user') {
-          ?>
-          <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
-
-            <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
-            <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
-
             <?php
-          }
-          else {
+                  
+                  $get_user_detail = user_load($user->uid);
+        
+                  if (!empty($get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri'])) {
+                    $user_pic = theme('image_style', array('style_name' => 'user_header_image_30x30', 'path' => $get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri']));
+                  }
+                  else {
+                    $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
+                    $user_pic = "<img src=$file width='30' height='30' alt='user-image'>";
+                  }
+                  
+            if ($_GET['q'] != 'user') {
             ?>
-            <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon"><i class="fa fa-user"></i></a>
+            <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
+              if ($user->uid == 0) { ?>
+                  
+                  <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="user-icon"><i class="fa fa-user"></i></a>
+                  <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/signup/domain_info', 'indiatoday');" class="register-icon" style="display:none;"><i class="fa fa-user"></i></a>
 
-            <?php
+                  <?php
+                }
+                else {
+                  ?>
+                  <a href="<?php print $base_url;?>/personalization/edit-profile/general-settings" class="user-icon"><?php print $user_pic; ?></a>
+                  <?php
+                }
+              }
+              else {
+                if ($user->uid == 0) {
+                  ?>
+                  <a onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="user-icon"><i class="fa fa-user"></i></a>
+
+                  <?php
+                }
+                else {
+                  ?>
+                  <a href="<?php print $base_url;?>/personalization/edit-profile/general-settings" class="user-icon"><?php print $user_pic; ?></a>
+              <?php
+            }
           }
         }
         ?>
