@@ -150,6 +150,7 @@ function itg_seo_latest_headlines() {
     $query = db_select('node', 'n')
         ->fields('n', array('title', 'nid'))
         ->condition('n.status', 'published')
+        ->condition('n.type', 'story')
         ->range(0,4)
         ->orderBy('n.created', 'DESC');
     $result = $query->execute()->fetchAll();

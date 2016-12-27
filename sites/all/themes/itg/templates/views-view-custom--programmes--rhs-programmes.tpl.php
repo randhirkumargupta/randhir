@@ -4,7 +4,12 @@
     <?php
     global $base_url;
     foreach ($rows as $row)  :
-      $status = itg_category_manager_term_state($row['tid']);
+      if(function_exists('itg_category_manager_term_state')) {
+        $status = itg_category_manager_term_state($row['tid']);
+      }
+      else {
+        $status = 0;
+      }
       if ($status) {
         $view = views_get_view('programme_content');
         $args = array($row['tid']);

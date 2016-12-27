@@ -8,7 +8,7 @@
  */
 
 /**
- * Implemets hook_form_alter().
+ * Implements hook_form_alter().
  * {@inheritdoc}
  */
 function itg_workflow_form_alter(&$form, &$form_state, $form_id) {
@@ -165,7 +165,8 @@ function itg_workflow_after_build($form, &$form_state) {
     
     drupal_add_js(drupal_get_path('module', 'itg_workflow') . '/js/itg_workflow.js', array('weight' => 1));
 
-    // Code for UGC
+    // Code for UGC. For now below code is commented may be we need it in future.
+    /*
     $arg3 = arg(3);
     
     if (arg(1) == 'add' && isset($arg3) && is_numeric($arg3)) {
@@ -173,6 +174,8 @@ function itg_workflow_after_build($form, &$form_state) {
               jQuery("#edit-submit").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
     }
+     * 
+     */
    
     return $form;
 }

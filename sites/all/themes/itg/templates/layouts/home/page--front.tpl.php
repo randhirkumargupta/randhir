@@ -93,12 +93,11 @@ if ($theme != 'itgadmin') {
  
 
 <div class="itg-layout-container <?php echo $itg_class; ?>">    
-    <!-- Breaking news band -->
-    <?php $break_news_band = views_embed_view('breaking_news', 'block_1'); ?>
-    <?php if ($break_news_band != ''): ?>
+    <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
     <div class="row">
         <div class="col-md-12">
-          <?php echo $break_news_band; ?>
+          <?php print render($page['breaking_news']); ?>
         </div>      
     </div>    
     <?php endif; ?>

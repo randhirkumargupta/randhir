@@ -40,9 +40,11 @@ jQuery("#slider-range").slider({
           //console.log(sTimestamp1);
         var flag = 0;
         var tcount;
+        if(sTimestamp1 !="000")
+        {
         jQuery('.dwrap').each(function(){
            tcount = $(this).attr('tcount');
-          if(parseInt(sTimestamp1)< parseInt($(this).attr('timevalue')))
+          if(parseInt(sTimestamp1)>= parseInt($(this).attr('timevalue')))
           {
             jQuery(this).show().removeClass('hide-div');
             jQuery('.no-record').hide();
@@ -67,6 +69,7 @@ jQuery("#slider-range").slider({
         {
           jQuery('.no-record').show();
         }
+    }
 
        // jQuery("#time").text(startTime + ' - ' + endTime);
        jQuery('#slider-range a').first().text(startTime);

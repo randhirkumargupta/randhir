@@ -1,10 +1,16 @@
 <?php
 if (!empty($content)):
     global $base_url;
+
+    // get related content associated with story
+    $related_content = itg_get_related_content(arg(1));
     ?>
     <?php
     if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
         $class_buzz = 'buzz-feedback';
+    }
+    if (!empty($related_content)) {
+        $class_related = ' buzz-related';
     }
     // prepare url for sharing
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -27,8 +33,9 @@ if (!empty($content)):
     $last_record = $global_comment_last_record;
     $config_name = trim($last_record[0]->config_name);
     }
+    
   ?>
-    <div class="story-section <?php print $class_buzz; ?>">
+    <div class="story-section <?php print $class_buzz."".$class_related;?>">
         <div class='<?php print $classes ?>'>
             <?php //pr($node);  ?> 
             <div class="comment-mobile desktop-hide">
@@ -119,34 +126,31 @@ if (!empty($content)):
                                 </ul>
                             </div>
                         <?php } ?>
+                        <!--related content-->
+                        <div class="related-story">
+                            <?php                            
+                                if (!empty($related_content)) {
+                                $related_story = '<h3>Related</h3>';
+                                $related_content = explode(',', $related_content);
+                                foreach ($related_content as $fn_result) {
+                                $related_content = explode('_', $fn_result);
+                                $final_related [] = $related_content[1];
+                                }
+                                $final_related = implode(' OR ', $final_related);
+                                $related_story.= views_embed_view('related_story', 'page', $final_related);
+                                print $related_story;
+                                }
+                            ?>
+                        </div>
+                        
                     </div>  
                 <?php } ?>
-                <div class="related-content-left">
-                <?php
-                  $related_content = itg_get_related_content(arg(1));
-                  if (!empty($related_content)) {
-                    $related_story = '<div class="related_story"><h3>Related</h3>';
-                    $related_content = explode(',', $related_content);
-                    foreach ($related_content as $fn_result) {
-                      $related_content = explode('_', $fn_result);
-                      $final_related [] = $related_content[1];
-                    }
-                    $final_related = implode(' OR ', $final_related);
-                    $related_story.= views_embed_view('related_story', 'page', $final_related);
-                    '</div>';
-
-                    //print $related_story;
-                  }
-                ?>        
-                </div>
-                <div class="story-right <?php
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
-                    echo 'listicle-page';
-                }
-                ?>">
-                         <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
-                        <!-- For buzzfeed section start -->
-                        <div class="byline"><?php
+               
+                
+                 <!-- For buzzfeed section start -->
+                         <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) {?>                       
+                <div class="buzzfeed-byline">
+                 <div class="byline"><?php
                             $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
                             $reporter_node = node_load($byline_id);
                             ?>
@@ -176,14 +180,67 @@ if (!empty($content)):
                                 <ul class="date-update">
                                     <li><?php print date('F j, Y', $node->created); ?>   </li>
                                     <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
+                                    <?php if(!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name))
+                                    { ?>
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
+                                    <?php } ?>
                                 </ul>
+                                
+                                <!--<ul class="social-share">
+                                    <li><div id="fb-root"></div><a class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                                        <?php
+                                        //if ($config_name == 'vukkul') {
+                                          ?>
+                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                                        <?php //} if ($config_name == 'other') { ?> 
+                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                                        <?php //} ?>
+                                </ul>-->
+
                             </div>
+                            <div class="social-share-story">
+                                 <ul class="">
+                                     <li><div id="fb-root"></div><a class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                                     <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                                     <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                                     <?php
+                                     if ($config_name == 'vukkul') {
+                                     ?>
+                                     <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                                     <?php } if ($config_name == 'other') { ?> 
+                                     <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                                     <?php } ?>
+                                 </ul>
+                             </div>
                         </div>
-
-                        <!-- For buzzfeed section end -->
-
-                    <?php } ?>
+                    </div>
+                   
+                    <div class="story-left related-story">
+                <?php
+                  if (!empty($related_content)) {
+                    $related_story = '<h3>Related</h3>'; 
+                    $related_content = explode(',', $related_content);
+                    foreach ($related_content as $fn_result) {
+                      $related_content = explode('_', $fn_result);
+                      $final_related [] = $related_content[1];
+                    }
+                    $final_related = implode(' OR ', $final_related);
+                    $related_story.= views_embed_view('related_story', 'page', $final_related);
+                    print $related_story;
+                  }
+                ?>
+                        </div>
+                  <!-- For buzzfeed section end --> 
+                              
+                 <?php } ?>
+                   
+                <div class="story-right <?php
+                if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+                    echo 'listicle-page';
+                }
+                ?>">
 
                     <?php
                     if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
@@ -275,7 +332,7 @@ if (!empty($content)):
                               $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $factoids_img . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ')"><i class="fa fa-facebook"></i></a></li>
                                  <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
                                  <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
                                  </ul></div></div>';
@@ -327,8 +384,15 @@ if (!empty($content)):
                               $type = $i->field_story_listicle_type->value();
                               $description = $i->field_story_listicle_description->value();
                               $color = $i->field_story_listicle_color->value();
+                              $li_type =$node->field_story_templates[LANGUAGE_NONE][0]['value'];
                               $color = ($color['rgb']) ? $color['rgb'] : '#000000';
-                              print '<span>' . $num . '</span>';
+                              if($li_type=='bullet_points')
+                              {
+                                  print '<span class="bullet_points"></span>';
+                              } else {
+                                  print '<span>' . $num . '</span>';
+                              }
+                              
                               if (isset($type)) {
                                 $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
                               }

@@ -665,8 +665,15 @@ jQuery(document).ready(function () {
       }).addClass("rippleEffect");
     });
     // vertical menu on mobile
-    jQuery('.select-menu').click(function(){
+    var tlmenu = jQuery('#block-itg-menu-manager-third-level-menu .select-menu');
+    tlmenu.click(function(){
         jQuery(this).next('ul').stop().slideToggle();
+    });
+    jQuery(document).on('click', function () {
+        jQuery('#block-itg-menu-manager-third-level-menu ul.third-level-menu').slideUp();;
+    });
+    tlmenu.click(function (e) {
+        e.stopPropagation();
     });
 });
     

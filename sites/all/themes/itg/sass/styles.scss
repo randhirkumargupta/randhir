@@ -1750,6 +1750,23 @@ footer{
         margin: 0 -15px;
         @include clearfix;
         margin-top: 20px;
+        .buzzfeed-byline{
+            padding: 0 15px;            
+        }
+        .related-story{
+            margin-top: 50px;
+            h3{
+                font-size: 16px;
+                text-transform: uppercase;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+            .views-field-label{
+                color: #575757;
+                margin-top: 10px;
+                margin-bottom: 25px;
+            }
+        }
     }
     .story-left, .story-right{                
         padding: 0 15px;
@@ -1827,8 +1844,23 @@ footer{
                         @include calculate-width(1);
                         border-right: none;
                         i{
-                            vertical-align: middle;
+                            vertical-align: top;
                             margin-right: 5px;
+                        }
+                    }
+                    a.unflag-action{
+                        .fa-bookmark{
+                            &:after{
+                                content: "\f00c";
+                                margin-left: 0px;
+                                color: #474747;
+                                font-size: 8px;
+                                margin-top: -15px;
+                                display: block;
+                            }
+                        }
+                        + .flag-throbber{
+                           display: none; 
                         }
                     }
                 }
@@ -1897,6 +1929,12 @@ footer{
             padding-top: 25px;
             @include font(15px,27px);   
             word-wrap: break-word;
+            p{
+                padding: 10px 0;
+            }
+            video{
+                max-width: 100%;
+            }
         }
         .briefcase {
             margin-top:20px;
@@ -1921,7 +1959,7 @@ footer{
         .stryimg{
             .tagview{
                 position: absolute;      
-                width: 70px;
+                min-width: 70px;
                 height: 50px;
                 text-align: center;
                 .person{
@@ -1937,6 +1975,7 @@ footer{
                     padding: 0px 6px;                    
                     white-space: nowrap;
                     display: none;
+                    line-height: 22px;
                     a{
                         color: #404040;
                         font-size: 11px;
@@ -1951,7 +1990,7 @@ footer{
                             border-right: 7px solid transparent;  
                             border-bottom: 7px solid #fff;
                             position: absolute;
-                            top: -7px;
+                            top: -11px;
                             left: 50%;
                             margin-left: -5px;
                         }
@@ -2215,7 +2254,39 @@ footer{
             font-weight: 400;
             font-size: 12px;
         }
-    } 
+    }
+    .buzzfeed-byline{
+        padding:0 15px;
+        .byline .profile-detail{
+            margin: 0px 0 0 10px;
+            width: 60%;
+        }
+        .social-share-story{
+            li{
+                @include display-inline;
+                a{
+                   padding: 0 15px;
+                   display: block;
+                   i{
+                        @include font(24px);
+                        color:#c0c0c0;
+                    }
+                    &:hover{
+                        i{
+                         color:#1a3c8d;   
+                        }                        
+                    }
+                }                
+            }
+        }
+    }
+    &.buzz-related{
+        .story-left-section{
+            .related-story{
+                margin-top: 0px;
+            }
+        }
+    }
 }
 .buzz-feedback{    
     @include calculate-width(1);
@@ -3420,7 +3491,10 @@ footer{
                             background: #363636;
                             color: $white-color;
                         }
-                    }                                        
+                    }
+                    .flag-throbber{
+                        display: none;
+                    }
                 }
             }
         }
@@ -4148,6 +4222,9 @@ footer{
                 @include font(12px,null,500);                
                 text-transform: uppercase;
             }
+            &:nth-child(2n+1){
+                clear:left;
+            }
         }
     }
 }
@@ -4163,7 +4240,7 @@ footer{
     background: #f6f5f5;
     border: 1px solid $border-color;
     padding-bottom: 10px;
-    a:hover{
+    &a:hover{
         color:#193984;
     }
     .magazin-top{
@@ -6658,10 +6735,10 @@ footer{
     }
     .itg-layout-615{
         .droppable {
-            height: 615px;            
+            height: 640px;            
         }
         .auto-block-1, .auto-block-2{
-                height: 615px;
+                height: 640px;
                 overflow: hidden;
             }
             .auto-block-1{
@@ -6673,6 +6750,11 @@ footer{
                         color: #fff;
                         &:hover{
                             color: #f1f1f1;
+                        }
+                    }
+                    .featured-post{
+                        .no-result-image{
+                            height: 270px;
                         }
                     }
                 }
@@ -8976,6 +9058,26 @@ input[type="radio"]:checked + label:after{
                 text-align: left;
             }        
         }
+        .social-icon{
+            a.unflag-action{
+                position: relative;
+                font-family: FontAwesome;
+                pointer-events: none;
+                &:after{
+                    content: "\f00c";
+                    position: absolute;
+                    left: 50%;
+                    top: 0;
+                    font-size: 11px;
+                    margin-left: -6px;
+                    color: #474747;
+                    margin-top: -2px;
+                }
+            }
+            + flag-throbber{
+                display: none;  
+            }
+        }
     }
 /*like dislike photo page end*/
 .searh-all-filters{
@@ -9129,5 +9231,21 @@ input[type="radio"]:checked + label:after{
     #block-itg-menu-manager-vertical-menu{
         top:auto;
         bottom:0;
+    }
+}
+.view-latest-issue-magzine{ 
+    .lock{
+        padding-left: 30px;
+        position: relative;
+        &:before{
+            width: 21px;
+            height: 27px;
+            content: '';
+            background: url(../images/Lock-closed-icon.png) no-repeat center center;
+            display: inline-block;
+            position: absolute;
+            top: 3px;
+            left: 0;
+        }
     }
 }

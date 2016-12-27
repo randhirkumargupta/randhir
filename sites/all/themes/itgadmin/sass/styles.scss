@@ -1754,7 +1754,15 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
           @extend .full;
         }
       }
-      .views-widget-filter-title, 
+      .views-widget-filter-title, .views-widget-filter-name{
+        width: 380px;
+        #autocomplete{
+          width: auto !important;
+          min-width: 100%;
+          max-height: 400px;
+          overflow-y: auto;
+        }
+      } 
       .views-widget-filter-field_story_category_tid,
       .views-widget-filter-field_issue_title_value{
         width: 200px;
@@ -3501,15 +3509,36 @@ div.node{
         position: absolute;
         left: 590px;
         .form-submit{
-          @extend .add-more-wbg;
-          font-size: 30px;
-          line-height: 18px;
-          padding: 4px 6px 8px;
+          width: 36px;
+          height: 36px;
+          border: none;
+          background: url(../images/add-item.png) center center no-repeat;
+          display: inline-block;
+          vertical-align: top;
+          text-indent: -9999px;
         }
         .ajax-progress-throbber{
           position: absolute; 
           left: 100%;
           top: 15px;
+        }
+      }
+      table{
+        td{
+          position: relative;
+          > .ajax-new-content > .itg-fields-remove-button,
+          > .itg-fields-remove-button{
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: url(../images/remove-item.png) center center no-repeat;
+            bottom: 10px;
+            display: inline-block;
+            vertical-align: top;
+            left: 380px;
+            position: absolute;
+            text-indent: -9999px;
+          }
         }
       }
     }
@@ -4543,7 +4572,7 @@ div.node{
   }
   .scroll-wrap{
     max-height: 438px;
-    width: 885px;
+    width: 100%;
     overflow: auto;
   }
 }
@@ -5852,6 +5881,7 @@ div.node{
 .page-node-add-story, 
 .page-node-add-blog, 
 .page-node-add-podcast, 
+.node-type-podcast,
 .page-node-add-recipe, 
 .node-type-print-team-integration,
 [id*="field-service-content-values"],
@@ -6015,16 +6045,59 @@ div.node{
     padding: 15px 30px;
   }
   [id*="loyality-reward-points-configuration-form"]{
-    .form-type-textfield{
+    .form-type-textfield, .form-type-managed-file{
       > label{
         width: 300px;
-        & + .form-text + span.error{
+        & + .form-text + span.error, & + div{
           padding-left: 300px;
         }
       }
       .form-text{max-width: 110px;}
     }
-    
+    .form-type-managed-file{
+      .form-managed-file{
+        position: relative;
+        .form-file{
+          margin-top: 5px;
+          & + .form-submit{
+            @extend .add-more-wbg;
+          }
+        } 
+        span.file{
+          position: absolute;
+          top: 100%;
+          left: 300px;
+          width: 110px;
+          img{display: none;}
+          a{
+            color: #323232;
+            display: inline-block;
+            font-size: 13px;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: top;
+            white-space: nowrap;
+          }
+        }
+        .upload-preview{
+          margin-right: 30px;
+        }
+        .form-submit[value="Remove"] {
+          background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+          border: medium none;
+          color: #ee4d4d;
+          display: inline-block;
+          font-size: 13px;
+          vertical-align: top;
+          z-index: 9;
+        }
+        & + div.description {
+          left: 655px;
+        }
+        .ajax-progress{display: none;}
+      }
+    }
   }
   #edit-field-primary-category, #edit-field-primary-category-html{
       display: none;
@@ -7599,11 +7672,6 @@ div.node{
         overflow: hidden;
       }
     }
-    .metatags-and-remarks{
-      h2:after{
-        display: none;
-      }
-    }
     .itg-form-section{
       float: left;
       width: 100%;
@@ -8364,7 +8432,7 @@ div.node{
   }
   
 }
-.node-videogallery-form, .node-photogallery-form{
+.node-videogallery-form, .node-photogallery-form, .node-story-form{
   .browse-media-file{
     .itg-form-section{
       height: 250px;
@@ -8511,7 +8579,7 @@ div.node{
             }
           }
           & + div.description{
-            left: 145px;
+            left: 145px !important;
           }
         }
       }
@@ -9174,9 +9242,6 @@ div.node{
     @extend .views-table;
   }
 }
-.page-mydraft-story .view .view-filters .views-exposed-form .views-widget-filter-title{
-  width: 380px;
-}
 [id*="podcast-node-form"]{
   .form-managed-file .image-widget-data{
     float: left;
@@ -9184,4 +9249,84 @@ div.node{
       left: 400px;
     }
   }
+}
+
+.node-story-form .itg-sidebar-form .metatags-and-remarks{
+  background: none;
+  #remarks{
+    fieldset{border: none; padding-top: 10px;}
+  }
+  .vertical-tabs{
+    h2{
+      padding-top: 10px !important;
+      &:before{
+        display: none;
+      }
+    }
+  }
+}
+.node-loyalty_and_rewards-form{
+  @extend .image-repo-browse;
+  .form-field-name-field-poll-itg-state{
+    padding-left: 250px;
+  }
+}
+.page-clone-story{
+  .view .view-filters .views-exposed-form .views-exposed-widget{
+    vertical-align: top;
+  }
+  .view .view-filters .views-exposed-form .views-submit-button, .view .view-filters .views-exposed-form .views-reset-button{
+    margin-top: 18px;
+  }
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-keyword{width: 300px;}
+  .view .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-bundle_name{display: none;}
+  .views-table{
+    margin-top: 20px;
+    caption{
+      background-color: #1fb5ad;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 10px;
+    }
+  }
+}
+
+/* ITG POPUP CSS */
+.itg-popup{
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    .popup-content{
+        background-color: #fff;
+        border-radius: 10px;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        max-height: 80%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 800px;
+        .itg-close-popup{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        .popup-head {
+            border-bottom: 1px solid #d9d9d9;
+            height: 50px;
+            margin: 0 20px 20px;
+        }
+        .popup-body {
+            padding: 0 20px;
+            height: calc(100% - 70px);
+            overflow-y: auto;
+        }
+    }
 }

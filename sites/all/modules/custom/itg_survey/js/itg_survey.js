@@ -155,6 +155,26 @@
         }
       });
       
+      var select_value =  $('.form-field-name-field-survey-add-questions tr .form-select').val();
+      var hideOption = $('.form-field-name-field-survey-add-questions tr').find('.field-name-field-survey-answer-option-2');
+      if(select_value == "rating"){
+          hideOption.hide();
+        }
+        else{
+          hideOption.show();
+        }
+      
+      $('.form-field-name-field-survey-add-questions').on('change', '.form-select', function(){
+        var selvalue = $(this).val();
+        var hide_option = $(this).closest('tr').find('.field-name-field-survey-answer-option-2');
+        if(selvalue == "rating"){
+          hide_option.hide();
+        }
+        else{
+          hide_option.show();
+        }
+      });
+      
     }
   };
 })(jQuery, Drupal, this, this.document);
