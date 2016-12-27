@@ -561,10 +561,14 @@ function itg_photogallery_node_view($node, $view_mode, $langcode) {
       $view_output = views_embed_view('photo_list_of_category', 'block_1');
     }
     else {
+      if(!empty($node->field_primary_category[LANGUAGE_NONE]) && isset($node->field_primary_category[LANGUAGE_NONE])){
+        $sec = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+      }else{
       foreach ($node->field_story_category[LANGUAGE_NONE] as $sections) {
         $section .= $sections['tid'] . '+';
       }
       $sec = rtrim($section, '+');
+      }
       $view_output = views_embed_view('photo_list_of_category', 'block_3', $sec);
     }
     $node->view_output = $view_output;
