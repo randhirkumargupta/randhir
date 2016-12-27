@@ -9224,9 +9224,10 @@ div.node #comments h2 {
 }
 
 .node-photogallery-form .form-type-plupload {
-  margin-left: 220px;
-  margin-right: 20px;
-  margin-top: 30px;
+  margin: 30px 20px 10px 220px;
+}
+.node-photogallery-form .form-type-plupload .description br {
+  display: none;
 }
 .node-photogallery-form [id*="field-gallery-image-values"] thead {
   padding-left: 20px;
@@ -10167,4 +10168,8 @@ div.node #comments h2 {
   padding: 0 20px;
   height: calc(100% - 70px);
   overflow-y: auto;
+}
+
+#edit-field-story-template-buzz-und-0-field-buzz-headline .cke_toolgroup a[title="Insert Factoids"] {
+  display: none;
 }
