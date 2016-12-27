@@ -566,7 +566,7 @@ function feature_category_management_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 7,
+      'weight' => 22,
     ),
   );
 
