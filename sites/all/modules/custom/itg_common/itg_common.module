@@ -82,9 +82,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
             $form['description']['#title'] = 'Sponser';
           }      
           // Add JS to hide extra element of menu forms
-          drupal_add_js('jQuery(document).ready(function() {                  
-                          // jQuery(".form-item-description").hide();
-                          // jQuery(".form-type-checkbox").hide();
+          drupal_add_js('jQuery(document).ready(function() {
                           jQuery(".form-item-expanded").hide();
                           jQuery(".form-item-parent").hide();
                           jQuery(".form-item-weight").hide();             

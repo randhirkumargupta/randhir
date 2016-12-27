@@ -90,12 +90,20 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     }
 
     if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
+      $nid = $form['nid']['#value'];
+      $node_obj = node_load($nid);
+      $step_completion = $node_obj->field_step_completion['und'][0]['value'];
       $node_type = 'Event';
       $node_type = str_replace("_", " ", $node_type);
       $node_type = ucfirst($node_type);
       $node_title = $form['#node']->title;
-      $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
-      drupal_set_title($edit_title);
+      if ($step_completion == '2') {
+        $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
+        drupal_set_title($edit_title);
+      } else {
+          $edit_title = 'Create' . ' ' . $node_type;
+          drupal_set_title($edit_title);
+      }
     }
     // Current step save in session variable
     if (isset($form_state['storage']['step'])) {
@@ -837,6 +845,11 @@ function itg_event_backend_node_update($node) {
     }
     $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
     itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
+    $query_param = drupal_get_query_parameters();
+    if ($query_param['step'] == 'step_configuration') {
+        $node->field_step_completion['und'][0]['value'] = '2';
+        field_attach_update('node', $node);
+    }
   }
 }
 
