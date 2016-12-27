@@ -10168,3 +10168,7 @@ div.node #comments h2 {
   height: calc(100% - 70px);
   overflow-y: auto;
 }
+
+#edit-field-story-template-buzz-und-0-field-buzz-headline a[title="Insert Factoids"] {
+  display: none;
+}
