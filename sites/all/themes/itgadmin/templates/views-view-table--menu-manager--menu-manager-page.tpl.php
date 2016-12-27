@@ -87,6 +87,9 @@ if ($classes) {
             if ($arg[1] == 'third') {
               $link = l("<span class='delete-link'>Remove</span>", $base_url . "/itg-menu-manager-remove/" . $row['id'], array("html" => TRUE, "attributes" => array("class" => array("menu-manager-delete")), "query" => array("delete_path" => "menu-manager/third", "section_id" => $_GET['section_id'], "section_child" => $_GET['section_child'])));
             }
+            else if ($arg[1] == 'vertical') {
+              $link = l("<span class='delete-link'>Remove</span>", $base_url . "/itg-menu-manager-remove/" . $row['id'], array("html" => TRUE, "attributes" => array("class" => array("menu-manager-delete")), "query" => array("delete_path" => "menu-manager/vertical", "section_id" => $_GET['section_id'], "section_child" => $_GET['section_child'])));
+            }
             else {
               $link = l("<span class='delete-link'>Remove</span>", $base_url . "/itg-menu-manager-remove/" . $row['id'], array("html" => TRUE, "attributes" => array("class" => array("menu-manager-delete")), "query" => array("destination" => "menu-manager/second")));
             }
