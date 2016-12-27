@@ -142,9 +142,9 @@ if (!empty($content)):
                                 
                             ?>
                         </div>
-                        
+                        <?php } ?> 
                     </div>  
-                <?php } } ?>
+                <?php }  ?>
                
                 
                  <!-- For buzzfeed section start -->
