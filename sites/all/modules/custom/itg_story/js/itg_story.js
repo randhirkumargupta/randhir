@@ -175,7 +175,7 @@
                 var uid = settings.itg_story.settings.uid;
                 var title = jQuery('#edit-title').val();
                 if ($(this).is(':checked')) {
-                    
+
                     var associate_id = $(this).attr('id');
 
                     if (associate_id == 'breaking_text') {
@@ -183,14 +183,13 @@
                     }
 
                     if (msg == true && title.length != 0) {
-                        
+
                         var post_data = "&title=" + title + "&uid=" + uid;
                         $.ajax({
                             'url': base_url + '/breaking-news-ajax',
                             'data': post_data,
                             'cache': false,
                             'type': 'POST',
-                            // dataType: 'json',
                             beforeSend: function () {
                                 $('#widget-ajex-loader').show();
                             },
@@ -199,14 +198,13 @@
                                 var obj = jQuery.parseJSON(result);
 
                                 $('#widget-ajex-loader').hide();
-                                console.log(obj.story_nid);
                                 jQuery('#edit-field-story-source-id-und-0-value').val(obj.story_nid);
                             }
                         });
-                        
+
                         return true;
                     }
-                    
+
                     return false;
                 }
 
