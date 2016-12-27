@@ -2088,6 +2088,51 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event_backend-field_step_completion'.
+  $field_instances['node-event_backend-field_step_completion'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 47,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_step_completion',
+    'label' => 'step completion',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 31,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-event_backend-field_story_expert_description'.
   $field_instances['node-event_backend-field_story_expert_description'] = array(
@@ -2464,6 +2509,7 @@ function event_backend_field_default_field_instances() {
   t('This displays information about the event.');
   t('Values – Paid, Free and Invite');
   t('Video');
+  t('step completion');
 
   return $field_instances;
 }
