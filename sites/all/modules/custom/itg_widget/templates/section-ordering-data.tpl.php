@@ -448,8 +448,8 @@ else if ($widget_style == 'oscar-news') {
                     <?php
                 }
                 else if ($count > 0) {
-                    if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                        $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                    if ((!empty($entity['si_file_uri']) && isset($entity['si_file_uri']))) {
+                        $extra_large_image_url = image_style_url("widget_small", $entity['si_file_uri']);
                     }
                     else {
                         $extra_large_image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/default_for_all.png";
@@ -457,7 +457,7 @@ else if ($widget_style == 'oscar-news') {
                     ?>
                     <div class="col-md-6 col-sm-6 col-xs-6">                   
                         <span class="pic  <?php echo $video_class; ?>"> <a class="pic  <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                                <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>">
+                                <img  height="127" width="170" src="<?php echo $extra_large_image_url; ?>">
                             </a></span>
 
                         <p><?php echo l(mb_strimwidth($desc, 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?></p>                      

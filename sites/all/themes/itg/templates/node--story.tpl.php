@@ -180,8 +180,25 @@ if (!empty($content)):
                                 <ul class="date-update">
                                     <li><?php print date('F j, Y', $node->created); ?>   </li>
                                     <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
+                                    <?php if(!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name))
+                                    { ?>
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
-                                </ul>                                
+                                    <?php } ?>
+                                </ul>
+                                
+                                <!--<ul class="social-share">
+                                    <li><div id="fb-root"></div><a class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                                        <?php
+                                        //if ($config_name == 'vukkul') {
+                                          ?>
+                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                                        <?php //} if ($config_name == 'other') { ?> 
+                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                                        <?php //} ?>
+                                </ul>-->
+
                             </div>
                             <div class="social-share-story">
                                  <ul class="">
@@ -367,8 +384,15 @@ if (!empty($content)):
                               $type = $i->field_story_listicle_type->value();
                               $description = $i->field_story_listicle_description->value();
                               $color = $i->field_story_listicle_color->value();
+                              $li_type =$node->field_story_templates[LANGUAGE_NONE][0]['value'];
                               $color = ($color['rgb']) ? $color['rgb'] : '#000000';
-                              print '<span>' . $num . '</span>';
+                              if($li_type=='bullet_points')
+                              {
+                                  print '<span class="bullet_points"></span>';
+                              } else {
+                                  print '<span>' . $num . '</span>';
+                              }
+                              
                               if (isset($type)) {
                                 $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
                               }
