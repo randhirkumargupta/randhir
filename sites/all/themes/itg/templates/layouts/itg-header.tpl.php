@@ -1,4 +1,5 @@
 <?php
+  global $base_url, $user;
 if (!empty($data['itg_main_manu_header'])) {
 foreach ($data['itg_main_manu_header'] as $key => $val) {
   if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
@@ -14,7 +15,15 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 
 <div class="head-live-tv desktop-hide">
   <ul>
-    <li> <a href="javascript:void(0)" ><i class="fa fa-user"></i></a></li>
+    <li> 
+        <?php if ($user->uid == 0): ?>
+        <a href="<?php print $base_url . '/user/login'; ?>" ><i class="fa fa-user"></i></a>
+        <?php else: ?>        
+          <a href="javascript:void(0)" ><i class="fa fa-user"></i></a>        
+        <?php $block = module_invoke('system', 'block_view', 'user-menu'); ?>
+        <?php print render($block['content']); ?> 
+        <?php endif; ?>
+    </li>
     <li><a href="javascript:void(0)" class="search-icon" title=""><i class="fa fa-search"></i></a></li>
     <li><a href="javascript:void(0)" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv"></a></li> 
   </ul>
@@ -86,7 +95,7 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
     <div class="container ">   
       <div class="user-menu">
             <?php
-                  global $user;
+                  
                   $get_user_detail = user_load($user->uid);
         
                   if (!empty($get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri'])) {

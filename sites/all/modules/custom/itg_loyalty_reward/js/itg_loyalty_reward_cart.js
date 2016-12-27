@@ -96,7 +96,7 @@
             }
 
             // Code for points earning callbacks.
-            $('.share, .like, .visit, .follow, .ns, .ugc, .ol-register, .participate, .raf').on('click', function () {                
+            $('.share, .like, .visit, .follow, .ns, .ugc, .ol-register, .participate, .raf').on('click', function () {
                 var base_url = Drupal.settings.itg_loyalty_reward.base_url;
                 var event_type = $(this).attr('class');
                 $.ajax({
@@ -195,9 +195,11 @@
                 });
             });
             // Product popup show more/less code.
-            if ($('body').hasClass('page-product')) {
-
-
+            if ($('body').hasClass('page-order-confirmation')) {
+                history.pushState(null, null, document.title);
+                window.addEventListener('popstate', function () {
+                    history.pushState(null, null, document.title);
+                });
             }
             // Product popup show more/less code end here.
 
