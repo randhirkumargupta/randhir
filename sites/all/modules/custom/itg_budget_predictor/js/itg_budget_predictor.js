@@ -6,10 +6,10 @@
 Drupal.behaviors.itg_budget_predictor = {
     attach: function (context, settings) {
         jQuery(function ()
-        {
+        {   
             if (Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {
                 var isUpdated;
-                var year = Drupal.settings.itg_budget_predictor.settings.year;
+                var section_id = Drupal.settings.itg_budget_predictor.settings.section_id;
                 jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
                         {
                             connectWith: '.connectedSortable',
@@ -22,7 +22,7 @@ Drupal.behaviors.itg_budget_predictor = {
                                     jQuery.ajax(
                                             {
                                                 type: "POST",
-                                                url: Drupal.settings.itg_budget_predictor.settings.basePath + '/ajax/budget-ranking/' + year,
+                                                url: Drupal.settings.itg_budget_predictor.settings.basePath + '/ajax/budget-ranking/' + section_id,
                                                 data:
                                                         {
                                                             sort1: jQuery("#sortable1").sortable('serialize'),
@@ -89,13 +89,13 @@ function badget_google_plus_share(url, title, img) {
     return false;
 }
 
-function captureCurrentDiv(year)
+function captureCurrentDiv(section_id)
 {
     html2canvas([document.getElementById('main-container-budget')], {
         onrendered: function (canvas)
         {
             var img = canvas.toDataURL()
-            jQuery.post("/budget-save/"+year, {data: img}, function (file) {
+            jQuery.post("/budget-save/"+section_id, {data: img}, function (file) {
                 window.location.reload();
             });
         }
