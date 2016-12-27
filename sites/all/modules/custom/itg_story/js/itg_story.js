@@ -155,22 +155,6 @@
             $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
             $('#edit-field-facebook-gallery-associate-und-0-remove-button').hide();
 
-
-            // Display Byline details
-//            $('#edit-field-story-reporter-und-0-target-id').blur(function() {
-//                var base_url = settings.itg_story.settings.base_url;
-//                $.ajax({
-//                    url: base_url + "/reporter-details-ajax",
-//                    method: 'post',
-//                    data: {'reporter_id': $('#edit-field-story-reporter-und-0-target-id').val()},
-//                    success: function(data) {
-//                        $('#reporter-details').html(data);
-//                    }
-//                });
-//            });
-
-            
-
             // Code issue date exit or not.
             $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').blur(function() {
                 var base_url = settings.itg_story.settings.base_url;
@@ -185,19 +169,48 @@
                 });
             });
             
-             // Code issue date exit or not.
-//            $('#associate').onclick(function() {
-//                var associate_id = $(this).attr('data-associate');
-//                var base_url = settings.itg_story.settings.base_url;
-//                $.ajax({
-//                    url: base_url + "/associate-photo-video-content/"+associate_id,
-//                    method: 'post',
-//                    data: {},
-//                    success: function(data) {
-//                        
-//                    }
-//                });
-//            });
+            // Code to create breaking news.
+            $('#breaking_text').click(function () {
+                var base_url = settings.itg_story.settings.base_url;
+                var uid = settings.itg_story.settings.uid;
+                var title = jQuery('#edit-title').val();
+                if ($(this).is(':checked')) {
+                    console.log('true');
+                    var associate_id = $(this).attr('id');
+
+                    if (associate_id == 'breaking_text') {
+                        var msg = confirm("Are you sure you want to pubish long headline as breaking band?");
+                    }
+
+                    if (msg == true && title.length != 0) {
+                        
+                        var post_data = "&title=" + title + "&uid=" + uid;
+                        $.ajax({
+                            'url': base_url + '/breaking-news-ajax',
+                            'data': post_data,
+                            'cache': false,
+                            'type': 'POST',
+                            // dataType: 'json',
+                            beforeSend: function () {
+                                $('#widget-ajex-loader').show();
+                            },
+                            'success': function (result)
+                            {
+                                var obj = jQuery.parseJSON(result);
+
+                                $('#widget-ajex-loader').hide();
+                                console.log(obj.story_nid);
+                                jQuery('#edit-field-story-source-id-und-0-value').val(obj.story_nid);
+                            }
+                        });
+                        console.log('confirm');
+                        return true;
+                    }
+                    console.log('not confirm');
+                    return false;
+                }
+
+            });
 
 
         }

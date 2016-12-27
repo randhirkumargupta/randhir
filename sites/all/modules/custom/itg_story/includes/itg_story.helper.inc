@@ -64,13 +64,13 @@ function itg_story_checked_issue($issue_date) {
 
 /**
  * Breaking news create after story create.
- * @param string $story_node
  */
-function itg_story_create_breaking_news($story_node) {
+function itg_story_create_breaking_news() {
   global $user;
-
+  $title = $_POST['title'];
+  $uid = $_POST['uid'];
   $node = new stdClass();
-  $node->title = $story_node->title;
+  $node->title = $title;
   $node->type = "breaking_news";
 
   node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
@@ -78,35 +78,17 @@ function itg_story_create_breaking_news($story_node) {
   $node->language = LANGUAGE_NONE;
   $node->field_content_type[LANGUAGE_NONE][0]['value'] = 'Story';
   $node->field_type[LANGUAGE_NONE][0]['value'] = 'Breaking News';
-  $node->field_source[LANGUAGE_NONE][0]['value'] = $story_node->nid;
-  $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = $story_node->field_stroy_city[LANGUAGE_NONE][0]['tid'];
-  $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
-
-  // get selected taxonomy of node
-  $story_taxonomy = $story_node->field_story_category[LANGUAGE_NONE];
-
-  foreach ($story_taxonomy as $value1) {
-    $story_array[] = $value1['tid'];
-  }
-
-  //get all parent category
-  $taxonomy_parent = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-  foreach ($taxonomy_parent as $key => $value) {
-    $taxonomy_parent_array[] = $value->tid;
-  }
-
-  // after intersect
-  $taxonomy_result = array_intersect($taxonomy_parent_array, $story_array);
-
-  foreach ($taxonomy_result as $key1 => $tax_id) {
-    $node->field_section[LANGUAGE_NONE][]['tid'] = $tax_id;
-  }
-
-  $node->uid = $user->uid;
+  $node->uid = $uid;
   $node->status = 1; //(1 or 0): Published or not
   $node->promote = 0; //(1 or 0): Promoted to front page
   $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
-
+  $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_breaking_content_details'));
+  $field_collection_item->setHostEntity('node', $node);
+  $field_collection_item->field_breaking_tile[LANGUAGE_NONE][0]['value'] = $title;
+  $field_collection_item->field_mark_as_breaking_band[LANGUAGE_NONE][0]['value'] = '1';
+  $field_collection_item->save();
   node_save($node);
 
+  $response = array('story_nid' => $node->nid);
+  print json_encode($response);
 }
