@@ -14,20 +14,16 @@ function itg_personalization_edit_profile_form() {
   global $user;
   //prepare url for change mobile and email
   if (strpos($user->name, '@') != false || is_numeric($user->name)) {
-  $edit_email_url = 'http://'.PARENT_SSO.'/sso-user/email/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
-  $edit_email_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, '."'".$edit_email_url."'".');">Edit</a>';
-  $edit_mobile_url = 'http://'.PARENT_SSO.'/sso-user/mobile/'.base64_encode($user->name).'/'.base64_encode($_SERVER['HTTP_HOST']);
-  $edit_mobile_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, '."'".$edit_mobile_url."'".');">Edit</a>';
+    $edit_email_url = 'http://' . PARENT_SSO . '/sso-user/email/' . base64_encode($user->name) . '/' . base64_encode($_SERVER['HTTP_HOST']);
+    $edit_email_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, ' . "'" . $edit_email_url . "'" . ');">Edit</a>';
+    $edit_mobile_url = 'http://' . PARENT_SSO . '/sso-user/mobile/' . base64_encode($user->name) . '/' . base64_encode($_SERVER['HTTP_HOST']);
+    $edit_mobile_link = '<a href="javascript:void(0)"  onclick="CenterWindow(550, 200, 50, ' . "'" . $edit_mobile_url . "'" . ');">Edit</a>';
   }
-  
-  
-  
   $user_detail = user_load($user->uid);
-  if(is_numeric($user_detail->name)) {
+  if (is_numeric($user_detail->name)) {
     $mobile = $user_detail->name;
   }
-  else
-  {
+  else {
     $mobile = $user_detail->field_mobile_number['und'][0]['value'];
   }
   $form['fname'] = array(
@@ -57,7 +53,7 @@ function itg_personalization_edit_profile_form() {
     ),
     '#prefix' => '<div class="change-email">',
     '#default_value' => $user_detail->mail,
-    '#suffix' => $edit_email_link.'</div>',
+    '#suffix' => $edit_email_link . '</div>',
   );
   $form['mobile'] = array(
     '#title' => t('Mobile'),
@@ -68,7 +64,7 @@ function itg_personalization_edit_profile_form() {
       'readonly' => TRUE,
     ),
     '#prefix' => '<div class="change-mobile">',
-    '#suffix' => $edit_mobile_link.'</div>',
+    '#suffix' => $edit_mobile_link . '</div>',
     '#default_value' => $mobile,
   );
   $form['dob'] = array(
@@ -134,7 +130,7 @@ function itg_personalization_edit_profile_form() {
   $form['news_letter'] = array(
     '#title' => t('Subscribe Our Newsletters'),
     '#type' => 'checkboxes',
-    '#options' => drupal_map_assoc(array('India Today', 'Aaj Tak', 'Business Today')),    
+    '#options' => drupal_map_assoc(array('India Today', 'Aaj Tak', 'Business Today')),
     '#default_value' => $data,
   );
   $form['submit'] = array(
@@ -169,9 +165,6 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
     if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
       form_set_error('lname', t('Please enter only letters, dot and white space allowed.'));
     }
-  }
-  if (!is_numeric($form_state['values']['mobile'])) {
-    form_set_error('mobile', t('Please enter valid mobile number.'));
   }  
 }
 
@@ -180,56 +173,56 @@ function itg_personalization_edit_profile_form_validate($form, &$form_state) {
  *
  * {@inheritdoc}.
  */
-function itg_personalization_edit_profile_form_submit($form, &$form_state) {  
+function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   global $user;
-  $inputs = $form_state['values'];  
+  $inputs = $form_state['values'];
   $user_detail = user_load($user->uid);
-  
+
   // Update First Name.
   if (!empty($inputs['fname'])) {
     $user_detail->field_first_name['und'][0]['value'] = check_plain($inputs['fname']);
   }
-  
+
   // Update Last Name.
   if (!empty($inputs['lname'])) {
     $user_detail->field_last_name['und'][0]['value'] = check_plain($inputs['lname']);
-  } 
-  
+  }
+
   // Update dob field.
   if (!empty($inputs['dob'])) {
     $user_detail->field_story_issue_date['und'][0]['value'] = check_plain($inputs['dob']);
   }
-  
+
   // Update gender field.
   if (!empty($inputs['gender'])) {
     $user_detail->field_user_gender['und'][0]['value'] = check_plain($inputs['gender']);
   }
-  
+
   // Update profile pic
   if (!empty($inputs['profile_pic'])) {
     $user_detail->field_user_picture['und'][0]['fid'] = check_plain($inputs['profile_pic']);
   }
-  
+
   // Update Qualification field.
   if (!empty($inputs['qualification']) && $inputs['qualification'] !== '_none') {
     $user_detail->field_user_qualification['und'][0]['tid'] = check_plain($inputs['qualification']);
   }
-  
+
   // Update address field.
   if (!empty($inputs['address'])) {
     $user_detail->field_short_description['und'][0]['value'] = check_plain($inputs['address']);
   }
-  
+
   // Update zipcode field.
   if (!empty($inputs['zip_code'])) {
     $user_detail->field_user_pincode['und'][0]['value'] = check_plain($inputs['zip_code']);
   }
-  
+
   //Update News Letters field.  
   $flag = FALSE;
   foreach ($inputs['news_letter'] as $value) {
     $flag = TRUE;
-    if ($value != '0') {      
+    if ($value != '0') {
       $data[]['value'] = $value;
       itg_loyalty_reward_earnpoint(0, 'ns', $user->uid, $value);
     }
@@ -237,8 +230,9 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
   if ($flag) {
     $user_detail->field_subscribe_for_newsletter['und'] = $data;
   }
-  
+
   // Save user object.
   user_save($user_detail);
 }
+
 ?>

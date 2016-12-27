@@ -40,7 +40,7 @@ function feature_category_management_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_category_section_flag',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(
@@ -185,7 +185,7 @@ function feature_category_management_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_cm_hide_cat_from_home',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(

@@ -264,19 +264,11 @@ if ($theme != 'itgadmin') {
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'] . $widget_data['itg-block-6']['widget_display_name']; ?>">
-    <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-6']['block_title'])) { ?>
-                                                     <span class="widget-title"><?php print $widget_data['itg-block-6']['block_title']; ?></span>
-                                                <?php } ?>
+   
+                                                     <span class="widget-title">Scorcard</span>
+
                                                 <!-- for admin  -->
-                                                <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                                                    <div class="widget-settings">
-                                                        <div class="widget-title-wrapper">
-                                                            <span class="widget-title" data-id="itg-block-6"><?php print $widget_data['itg-block-6']['block_title']; ?></span>
-                                                            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />
-                                                        </div>
-                                                        <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                    </div>
-    <?php } ?>  
+                                               
 
                                                 <div class="data-holder" id="itg-block-6" widget-style="oscar-news"><?php $block = module_invoke('itg_widget', 'block_view', 'live_score');print render($block['content']); ?>
                                                  

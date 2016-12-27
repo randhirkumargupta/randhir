@@ -24,13 +24,13 @@ function itg_videogallery_schema() {
         'description' => 'Video title',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
       'channel' => array(
         'description' => 'Video category on dailymotion',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
         'type' => array(
         'description' => 'Video type on dailymotion',
@@ -41,30 +41,30 @@ function itg_videogallery_schema() {
       'fid' => array(
         'description' => 'file id from file manage table',
         'type' => 'int',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
       'nid' => array(
         'description' => 'video_nid',
         'type' => 'int',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
       'tags' => array(
         'description' => 'Tags of video',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
       'upload_time' => array(
         'description' => 'Video upload time',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
       'video_id' => array(
         'description' => 'Video id which return by dailymotion',
         'type' => 'varchar',
         'length' => '250',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
       'video_duration' => array(
         'description' => 'Video duration',
@@ -88,7 +88,7 @@ function itg_videogallery_schema() {
         'description' => 'Video name',
         'type' => 'varchar',
         'length' => '250',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
         
     ),
@@ -101,19 +101,19 @@ function itg_videogallery_schema() {
       'id' => array(
         'description' => 'id',
         'type' => 'serial',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
        'pid' => array(
         'description' => 'playlist id from dailymotion',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => TRUE,
+        'null' => TRUE,
       ),
       'playlist_name' => array(
         'description' => 'playlist name from dailymotion',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => TRUE,
+        ' null' => TRUE,
       ),
       'node_id' => array(
         'description' => 'node id',
@@ -136,12 +136,12 @@ function itg_videogallery_schema() {
       'id' => array(
         'description' => 'id',
         'type' => 'serial',
-        'not null' => TRUE,
+        ' null' => TRUE,
       ),
       'fid' => array(
         'description' => 'node id',
         'type' => 'int',
-        'not null' => TRUE,
+        ' null' => TRUE,
       ),
     ),
     'primary key' => array('id'),

@@ -487,13 +487,8 @@ function itg_widget_keycandidate_form($form, $form_state) {
  */
 function getsaction_list() {
   $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-
-  foreach ($tax as $key => $term) {
-
-    if (!itg_category_manager_term_state($term->tid)) {
-      unset($tax[$key]);
-    }
-  }
+  // override taxonomy.
+  $tax = itg_widget_get_active_taxonomy($tax);
   $op = array("All" => " - None -");
   foreach ($tax as $key => $val) {
     $op[$val->tid] = $val->name;
@@ -697,23 +692,14 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
-    foreach ($tax as $key => $term) {
-
-      if (!itg_category_manager_term_state($term->tid)) {
-        unset($tax[$key]);
-      }
-    }
+    // override taxonomy.
+    $tax = itg_widget_get_active_taxonomy($tax);
   }
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'most_read_widget' && ($form_state['view']->current_display == 'most_read_widget_contents' || $form_state['view']->current_display == 'most_read_widget_list')) {
     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-
-    foreach ($tax as $key => $term) {
-
-      if (!itg_category_manager_term_state($term->tid)) {
-        unset($tax[$key]);
-      }
-    }
+    // override taxonomy.
+    $tax = itg_widget_get_active_taxonomy($tax);
     $op = array("All" => " - None -");
     foreach ($tax as $key => $val) {
       $op[$val->tid] = $val->name;
@@ -725,13 +711,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-
-    foreach ($tax as $key => $term) {
-
-      if (!itg_category_manager_term_state($term->tid)) {
-        unset($tax[$key]);
-      }
-    }
+    // override taxonomy.
+    $tax = itg_widget_get_active_taxonomy($tax);
     $op = array("All" => " - None -");
     foreach ($tax as $key => $val) {
       $op[$val->tid] = $val->name;
@@ -744,13 +725,8 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'special_how_i_made_it' && ($form_state['view']->current_display == 'special_how_made_it_widget_contents' || $form_state['view']->current_display == 'special_how_made_widget_list')) {
 
     $tax = taxonomy_get_tree(4, $parent = 0, $max_depth = 1, $load_entities = FALSE);
-
-    foreach ($tax as $key => $term) {
-
-      if (!itg_category_manager_term_state($term->tid)) {
-        unset($tax[$key]);
-      }
-    }
+    // override taxonomy.
+    $tax = itg_widget_get_active_taxonomy($tax);
 
     $op = array("All" => " - None -");
     foreach ($tax as $key => $val) {
@@ -3129,7 +3105,12 @@ function itg_widget_get_site_hash_from_solr($site_prefix) {
     return isset($site_hash[$site_prefix]) ? $site_hash[strtolower($site_prefix)] : $site_hash['dev'];
   }
 }
-
+/**
+ * Function to get data from solr.
+ * @param int $entity_id
+ * @param string $hash
+ * @return string
+ */
 function itg_get_link_from_hash_and_entity_solr_search($entity_id, $hash) {
   $solr = apachesolr_get_solr();
   $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id and hash: $hash"));
@@ -3137,4 +3118,21 @@ function itg_get_link_from_hash_and_entity_solr_search($entity_id, $hash) {
   $query->addParam('qf', 'entity_id'); // Only search in title
   $resp_search = $query->search();
   return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+}
+
+/**
+ * Function return only active taxonomy
+ * @param array $taxonomy
+ * @return array
+ */
+function itg_widget_get_active_taxonomy($taxonomy = array()) {
+  if (function_exists('itg_category_manager_term_state')) {
+    foreach ($taxonomy as $key => $term) {
+
+      if (!itg_category_manager_term_state($term->tid)) {
+        unset($taxonomy[$key]);
+      }
+    }
+  }
+  return $taxonomy;
 }

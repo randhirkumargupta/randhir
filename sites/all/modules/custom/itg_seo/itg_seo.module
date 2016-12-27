@@ -87,7 +87,9 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
       || $form_id == 'supplement_node_form'
       || $form_id == 'newsletter_node_form'    
       || $form_id == 'magazine_node_form' 
-      || $form_id == 'heighlights_node_form' 
+      || $form_id == 'heighlights_node_form'
+      || $form_id == 'survey_node_form'
+      || $form_id == 'quiz_node_form'
       || $form_id == 'page_node_form'
       || $form_id == 'newsletter_node_form'
   ) {
@@ -150,6 +152,7 @@ function itg_seo_latest_headlines() {
     $query = db_select('node', 'n')
         ->fields('n', array('title', 'nid'))
         ->condition('n.status', 'published')
+        ->condition('n.type', 'story')
         ->range(0,4)
         ->orderBy('n.created', 'DESC');
     $result = $query->execute()->fetchAll();
