@@ -3509,15 +3509,36 @@ div.node{
         position: absolute;
         left: 590px;
         .form-submit{
-          @extend .add-more-wbg;
-          font-size: 30px;
-          line-height: 18px;
-          padding: 4px 6px 8px;
+          width: 36px;
+          height: 36px;
+          border: none;
+          background: url(../images/add-item.png) center center no-repeat;
+          display: inline-block;
+          vertical-align: top;
+          text-indent: -9999px;
         }
         .ajax-progress-throbber{
           position: absolute; 
           left: 100%;
           top: 15px;
+        }
+      }
+      table{
+        td{
+          position: relative;
+          > .ajax-new-content > .itg-fields-remove-button,
+          > .itg-fields-remove-button{
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: url(../images/remove-item.png) center center no-repeat;
+            bottom: 10px;
+            display: inline-block;
+            vertical-align: top;
+            left: 380px;
+            position: absolute;
+            text-indent: -9999px;
+          }
         }
       }
     }

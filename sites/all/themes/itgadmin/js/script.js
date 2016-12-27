@@ -241,9 +241,6 @@
             $('select').blur();
         });
 
-        $('.field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .field-add-more-submit').val('+');
-
-
         $('#edit-field-gallery-image .field-name-field-images').find('.image-widget-data .file-size').each(function() {
             var txt = $(this).text();
             $(this).prev().attr('title', txt);
