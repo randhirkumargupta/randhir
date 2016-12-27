@@ -2842,6 +2842,34 @@ body.has-cart-popup {
     opacity: 0;
   }
 }
+/* CSS For Block quotes */
+blockquote {
+  color: #000;
+  font: 600 20px/28px "Roboto Slab",sans-serif;
+  margin: 0 0 20px;
+  position: relative;
+  text-align: justify;
+  text-indent: 40px;
+}
+blockquote:before {
+  content: "\201C";
+  display: inline-block;
+  font: bold 60px/28px Georgia, serif;
+  vertical-align: baseline;
+  position: absolute;
+  left: 0;
+  top: 12px;
+  text-indent: 0;
+}
+blockquote:after {
+  content: "\201D";
+  display: inline-block;
+  font: bold 60px/0px Georgia, serif;
+  vertical-align: top;
+  text-indent: 10px;
+  margin-top: 32px;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, .featured-news .featured-post a,
