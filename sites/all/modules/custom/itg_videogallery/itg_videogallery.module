@@ -1122,34 +1122,31 @@ function itg_videogallery_duration_time() {
  */
 function itg_videogallery_thumb_assign() {
 
-    $subquery = db_select('field_data_field_video_upload', 'upload_video');
-    $subquery->fields('upload_video', array('entity_id'));
-
-    //$subquery->condition('large_image.bundle', 'videogallery', '=')->execute()->fetchAll();
-    $subt = $subquery->execute()->fetchAll();
-    foreach ($subt as $sub) {
-        $subquery_data[] = $sub->entity_id;
-    }
-    $query = db_select('field_data_field_upload_video', 'up_video');
+    $query = db_select('field_data_field_videogallery_video_upload', 'up_video');
     $query->fields('up_video', array('entity_id'));
-    if (isset($subquery_data) && !empty($subquery_data)) {
-        $subcondition = $query->condition('up_video.entity_id', $subquery_data, 'NOT IN');
-    }
-    $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_upload_video_fid');
-    $query->fields('drd', array('fid', 'video_id'));
+    $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_videogallery_video_upload_fid');
+    $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
+    $query->fields('up_video', array('entity_id'));
+
     $result = $query->execute()->fetchAll();
     if (isset($result) && !empty($result)) {
+
         $api = itg_videogallery_dailymotion_api();
         foreach ($result as $val) {
+            $query = db_select('field_data_field_video_upload', 'fvd');
+            $query->fields('fvd', array('entity_id'));
+            $query->condition('field_video_upload_value', $val->entity_id);
+            $result_video = $query->execute()->fetchAll();
             $thumb_url = $api->get(
-                    '/video/' . $val->video_id, array('fields' => array('dailymotion_thumb_url'))
+                    '/video/' . $val->video_id, array('fields' => array('thumbnail_url'))
             );
-            $image_url = $thumb_url['thumbnail_url'];
-            $imagedata = file_get_contents($image_url);
-            $file = file_save_data($imagedata, file_default_scheme() . '://' . end(explode('/', $image_url)));
-            file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-            $node = node_load($val->entity_id);
+            $node = node_load($result_video[0]->entity_id);
             if ($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == 0) {
+                $image_url = $thumb_url['thumbnail_url'];
+                $imagedata = file_get_contents($image_url);
+                $image_url = 'itg' . time() . end(explode('/', $image_url));
+                $file = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
                 $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
                 field_attach_update('node', $node);
             }
