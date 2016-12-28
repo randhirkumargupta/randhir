@@ -1,4 +1,4 @@
-<?php if (!empty($content)): ?>
+<?php   if (!empty($content)): ?>
     <div class='<?php print $classes ?>'>
         <?php if ($view_mode == 'full'): ?>
             <a href="javascript:;" class="close-preview">&nbsp;</a>
@@ -42,17 +42,18 @@
                     <h2><?php print t('Video Upload'); ?></h2>
                     <div class="content-details">
                         <?php print render($content['field_upload_video']); ?>
-                        <?php $short_des = render($content['field_story_expert_name']);
+                        <?php
+                        $short_des = render($content['field_story_expert_name']);
                         if (!empty($short_des)):
                             ?>
                             <?php print render($content['field_story_expert_name']); ?>
-                        <?php
+                            <?php
                         endif;
                         $short_des = render($content['field_story_expert_description']);
                         if (!empty($short_des)):
                             ?>
-                <?php print render($content['field_story_expert_description']); ?>
-                <?php endif; ?>
+                            <?php print render($content['field_story_expert_description']); ?>
+            <?php endif; ?>
                     </div>
                 </div> 
             <?php } ?>
@@ -63,7 +64,7 @@
                 <div class="BrowseMedia">
                     <h2>Image Upload </h2>
                     <div class="content-details">
-                <?php print render($content['field_story_extra_large_image']); ?>
+            <?php print render($content['field_story_extra_large_image']); ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -98,7 +99,7 @@
                                     print render($content['field_story_twitter_video']);
                             }
                             ?>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -139,15 +140,14 @@
 
             <?php
             $termdata = "";
-
-            if ($content['field_story_extra_large_image']['#object']->field_primary_category['und'][0]['value'] != "") {
-                $termdata = itg_videogallery_get_term_name($content['field_story_extra_large_image']['#object']->field_primary_category['und'][0]['value']);
+            if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
+                $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
             }
             $field_story_category = render($content['field_story_category']);
             if (!empty($field_story_category)):
                 ?>
-            <?php print render($content['field_story_category']); ?>
-                    <?php endif; ?>
+                <?php print render($content['field_story_category']); ?>
+            <?php endif; ?>
             <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
             <div class="Story-details">
@@ -163,7 +163,7 @@
                 </div>
             </div> 
 
-    <?php endif; // end of view mode full condition ?></div>
+        <?php endif; // end of view mode full condition ?></div>
     <?php
 //            $comment_checkbox = $node->field_video_configurations[LANGUAGE_NONE];
 //            if(isset($comment_checkbox)){

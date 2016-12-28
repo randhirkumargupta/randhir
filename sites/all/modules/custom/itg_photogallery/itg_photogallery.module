@@ -377,6 +377,9 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
         $photo_by = explode(') (', $_POST['field_photo_by'][LANGUAGE_NONE]);
         $photo_byline = explode(')', $photo_by[1]);
         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_photo_byline['und'][0]['target_id'] = $photo_byline[0];
+        if(!empty($_POST['field_common_audio_file'][LANGUAGE_NONE][0]['fid'])){
+          $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_audio['und'][0]['fid'] = $_POST['field_common_audio_file'][LANGUAGE_NONE][0]['fid'];
+        }
       }
       $i++;
     }
@@ -509,7 +512,7 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
     );
     $form['field_featured_value_op']['#options'] = $new_options;
     drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery_expose_filter.js', 'file');
-    drupal_add_css(".form-item-field-featured-value {display:block !important}","inline");
+    drupal_add_css(".form-item-field-featured-value {display:none !important}","inline");
   }
 }
 

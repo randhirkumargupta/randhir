@@ -477,7 +477,7 @@ else if ($widget_style == 'oscar-news') {
     <?php
 }
 else if ($widget_style == 'standpoint') {
-    print '<div class="flexslider">
+    print '<div class="tech-block_5"><div class="flexslider">
       <ul class="slides"> ';
     foreach ($data as $count => $entity) {
 
@@ -501,7 +501,7 @@ else if ($widget_style == 'standpoint') {
         <li> <img  src="<?php echo $extra_large_image_url; ?>">
 
             <div class="detail">
-                <p class="flex-caption"><?php print mb_strimwidth($desc, 0, 100, ".."); ?></p>
+                <p class="flex-caption"><a href="#"><?php print mb_strimwidth($desc, 0, 100, ".."); ?></a></p>
             </div>
 
         </li>
@@ -512,6 +512,7 @@ else if ($widget_style == 'standpoint') {
     
     ?>
  </ul>
+   </div>
         </div>
 
     <?php

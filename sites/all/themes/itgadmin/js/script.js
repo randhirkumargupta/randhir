@@ -645,6 +645,23 @@
         jQuery('.node-story-form .vertical-tabs h2, .node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
         jQuery('.node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
         jQuery('.node-story-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+        
+      
+        var category_mgr_meta_title = jQuery('.node-category-form .path-form').prev();
+//        var category_mgr_path_form = jQuery('.node-category-form .path-form');
+//        var category_mgr_meta_form = jQuery('.node-category-form .metatags-form');
+//        $(category_mgr_path_form, category_mgr_meta_title, category_mgr_meta_form).wrapAll('<div class="category-manager-meta"></div>');
+        category_mgr_meta_title.css('margin-top', '20px').nextAll().hide();
+        category_mgr_meta_title.click(function(){
+          $(this).toggleClass('active');
+          if($(this).hasClass('active')){
+            $(this).nextAll().show();
+          }
+          else{
+            $(this).nextAll().hide();
+          }
+        });
+        
 
     };
 })(jQuery);
@@ -739,7 +756,7 @@ jQuery(document).ready(function() {
 
     // jQuery code to toggle Cotegory manager form
     jQuery('.category-manager-basic-details h2').addClass('active');
-    jQuery('.category-manager-basic-details, .category-manager-selection-details, .cotegory-manager-settings').on('click', 'h2', function() {
+    jQuery('.category-manager-basic-details, .category-manager-selection-details, .cotegory-manager-settings, .category-manager-meta').on('click', 'h2', function() {
         var titleHeight = jQuery(this).outerHeight(true);
         jQuery(this).toggleClass('active');
         if (jQuery(this).hasClass('active')) {

@@ -295,6 +295,9 @@ function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $for
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/newsletter/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));
+    $form['date_filter']['min']['#date_format'] = 'd/m/Y';
+    $form['date_filter']['max']['#date_format'] = 'd/m/Y';
+    $form['#validate'][] = 'itg_newsletter_shedule_date_validate';
   }
 
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-templates-page') {
@@ -305,6 +308,37 @@ function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $for
   }
 }
 
+
+/**
+ * Function to validate expose form
+ * {@inheritdoc}
+ */
+function itg_newsletter_shedule_date_validate($form, &$form_state) {
+  
+  if($form['#id'] == 'views-exposed-form-manage-newsletter-page') {
+    $min = $form_state['values']['date_filter']['min'];
+    $max = $form_state['values']['date_filter']['max'];
+    
+    if(!empty($min) && empty($max)) {
+      form_set_error('date_filter', 'Please select End date.');
+    }
+    
+    if(!empty($max) && empty($min)) {
+      form_set_error('date_filter', 'Please select Start date.');
+    }
+    
+    if(!empty($min) && !empty($max) && (strtotime($min)> strtotime($max))) {
+      form_set_error('date_filter', 'Start date can\'t be greater then End date.');
+    }
+    // Reset button handling
+    if(!empty($form_state['clicked_button']['#value']) && $form_state['clicked_button']['#value'] == 'Reset') {
+      // Remove error message
+      drupal_get_messages("error");
+      drupal_goto('manage-newsletter');
+    }
+    
+  }
+}
 /**
  * Implementation of hook_node_presave
  * {@inheritdoc}

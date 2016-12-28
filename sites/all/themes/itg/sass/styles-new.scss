@@ -2019,6 +2019,9 @@ body.has-cart-popup{
       .popup-desc{
         max-height:400px;
         overflow:auto;
+        .views-more-link, .views-less-link{
+          color: #a00606;
+        }
       }
   }
 }
@@ -2811,7 +2814,11 @@ blockquote {
     margin-top: 32px;
   }
 }
-
+.data-holder{
+  a:hover{
+    color: #193984;
+  }
+}
 
 
 
@@ -4492,6 +4499,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       margin-bottom: 20px;
     }
   }
+}
+.view-product{
+  @include pager;
 }
 
 

@@ -136,7 +136,7 @@ function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
 
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
 
-  $arr_seo_heading_not_req = array('event_backend_node_form', 'issue_node_form', 'supplement_node_form', 'magazine_node_form');
+  $arr_seo_heading_not_req = array('event_backend_node_form', 'issue_node_form', 'supplement_node_form', 'magazine_node_form', 'survey_node_form', 'quiz_node_form');
   if (!in_array($form['#form_id'], $arr_seo_heading_not_req)) {
     $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
   }
