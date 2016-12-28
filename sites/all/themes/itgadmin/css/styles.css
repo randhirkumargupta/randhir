@@ -10221,3 +10221,18 @@ div.node #comments h2 {
   pointer-events: none;
   vertical-align: baseline;
 }
+
+.node-story-form .form-type-textfield.form-item-title {
+  float: left;
+  width: 580px;
+}
+
+.breaking_class {
+  display: inline-block;
+  margin-top: 15px;
+  vertical-align: top;
+}
+.breaking_class input[type="checkbox"] {
+  float: left;
+  margin: 2px 5px 0 0;
+}
