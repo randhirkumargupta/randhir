@@ -5,10 +5,10 @@
  */
 function itg_budget_predictor_menu() {
   $items = array();
-  $items['budget-predictor/%'] = array(
+  $items['budget-predictor/%/%'] = array(
     'page callback' => 'itg_budget_predictor_custom',
     'type' => MENU_CALLBACK,
-    'access callback' => 'user_is_logged_in',
+    'access arguments' => array('access content'),
   );
   $items['ajax/budget-ranking/%'] = array(
     'page callback' => 'itg_budget_predictor_update_budget',
@@ -65,25 +65,26 @@ function itg_budget_predictor_custom() {
   global $base_url, $user;
   $user_id = $user->uid;
   $allowed_roles = array('Editor', 'Site Admin', 'administrator');
-
-  $year = arg(1);
-  $budget_status = check_budget($year);
+  $arg = arg();
+  $section_id = isset($arg[1]) ? $arg[1] : '';
+  $budget_status = check_budget($section_id);
   $data = itg_budget_predictor_get_taxonomy();
   $settings = array();
   $settings['stopPredictor'] = '1';
-  if ($budget_status['status'] == 1 && empty($data['file_names'])) {
+  if ($budget_status['status'] == 1 && empty($data['file_names']) && !empty($user->uid)) {
     $settings['stopPredictor'] = '2';
   }
   else {
     $data['file_name'] = $base_url . '/sites/default/files/' . $data['file_names'];
   }
-  
+
   /* JS library  added to Cheaper dearer */
   $settings['basePath'] = $base_url;
-  $settings['year'] = arg(1);
+  $settings['section_id'] = $section_id;
   if (count(array_intersect($user->roles, $allowed_roles)) > 0) {
     $data['admin_user'] = 1;
   }
+  $data['user_id'] = $user_id;
   drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
   drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
   drupal_add_js(array('itg_budget_predictor' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
@@ -103,4 +104,61 @@ function itg_budget_predictor_theme() {
     ),
   );
   return $themes;
+}
+
+/**
+ * Implement hook_views_pre_render
+ * @param Object $view
+ */
+function itg_budget_predictor_views_pre_render(&$view) {
+  if (isset($view->name) && $view->name == "budget_predictor_image") {
+    if (arg(0) == 'budget-predictor-image') {
+      // Add "Create Predictor Image" button on listing page of Budget Predictor Image
+      $header_content_term = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content_term .= l(t('Create Predictor Image'), 'admin/structure/taxonomy/cheaper_dearer/add') . " " . l(t('Manage Budget'), 'manage-budget-list');
+      $view->attachment_before = $header_content_term;
+    }
+  }
+}
+
+/*
+ * Implementation of hook_form_FORM_ID_alter
+ * @param array $form
+ * @param array reference $form_state
+ * Hiding taxonomy term description field
+ */
+
+function itg_budget_predictor_form_taxonomy_form_term_alter(&$form, &$form_state) {
+  if (is_array($form['#term']) && count($form['#term']) > 0) {
+    if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'cheaper_dearer') {
+      $destination = 'budget-predictor-image';
+
+      $form['actions']['cancel'] = array(
+        '#markup' => l(t('Cancel'), $destination, array(
+          'attributes' => array(
+            'class' => 'button'
+          )
+        )),
+        '#weight' => 21,
+        '#value' => t('Cancel')
+      );
+      unset($form['#metatags']);
+      $form['description']['#access'] = FALSE;
+      $form['relations']['#access'] = FALSE;
+    }
+  }
+}
+
+/**
+ * Implementation of hook_form_views_exposed_form_alter().
+ * @param array $form
+ * @param array reference $form_state
+ */
+function itg_budget_predictor_form_views_exposed_form_alter(&$form, &$form_state) {
+  if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-budget-predictor-image-page') {
+    $form['name']['#autocomplete_path'] = 'texonomy/39/autocomplete';
+    $form['name']['#attributes'] = array(
+      'placeholder' => t('Name')
+    );
+  }
 }
