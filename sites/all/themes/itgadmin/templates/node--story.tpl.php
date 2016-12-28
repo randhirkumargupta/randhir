@@ -30,9 +30,8 @@
         <?php endif; ?>        
         <div class="basic-details content-box">
             <h2><?php $termdata="";
-            if($content['body']['#object']->field_primary_category['und'][0]['value']!="") {
-                $termdata=itg_videogallery_get_term_name($content['body']['#object']->field_primary_category['und'][0]['value']);
-                
+            if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
+                $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
             }
             print t('Quick File'); ?></h2>
             <div class="content-details">
