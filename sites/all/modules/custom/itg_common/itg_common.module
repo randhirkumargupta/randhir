@@ -904,3 +904,29 @@ function itg_common_round_rating($average_rating) {
   
   return $average_rating;
 }
+
+/**
+ * Implements itg_total_share_count
+ * @param string $actual_link
+ *   Send url for facebook share
+ * 
+ * @return int
+ *   total share count
+ */
+
+function itg_total_share_count($actual_link) {
+  $fb_google_count = $fb_count = $google_count = 0;
+  
+  if (function_exists(itg_facebook_share_count)) {
+    $fb_count = itg_facebook_share_count($actual_link);
+  }
+
+  // get google share count
+  if (function_exists(itg_google_share_count)) {
+    $google_count = itg_google_share_count($actual_link);
+  }
+
+  $fb_google_count = $fb_count + $google_count;
+
+  return $fb_google_count;
+}

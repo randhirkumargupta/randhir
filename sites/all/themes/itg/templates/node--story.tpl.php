@@ -1,7 +1,6 @@
 <?php
 if (!empty($content)):
     global $base_url;
-
     // get related content associated with story
     $related_content = itg_get_related_content(arg(1));
     ?>
@@ -21,11 +20,9 @@ if (!empty($content)):
     if (function_exists(itg_facebook_share_count)) {
     $fb_count = itg_facebook_share_count($actual_link);
     }
-
     if (function_exists(itg_google_share_count)) {
       $google_count = itg_google_share_count($actual_link);
     }
-
     $fb_google_count = $fb_count + $google_count;
     
     // get global comment config
@@ -125,11 +122,11 @@ if (!empty($content)):
                                     ?>
                                 </ul>
                             </div>
-                        <?php } ?>
+                        <?php } if (!empty($related_content)) {?>
                         <!--related content-->
                         <div class="related-story">
                             <?php                            
-                                if (!empty($related_content)) {
+                                
                                 $related_story = '<h3>Related</h3>';
                                 $related_content = explode(',', $related_content);
                                 foreach ($related_content as $fn_result) {
@@ -139,12 +136,12 @@ if (!empty($content)):
                                 $final_related = implode(' OR ', $final_related);
                                 $related_story.= views_embed_view('related_story', 'page', $final_related);
                                 print $related_story;
-                                }
+                                
                             ?>
                         </div>
                         
                     </div>  
-                <?php } ?>
+                <?php } } ?>
                
                 
                  <!-- For buzzfeed section start -->
@@ -185,20 +182,7 @@ if (!empty($content)):
                                     <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
                                     <?php } ?>
                                 </ul>
-                                
-                                <!--<ul class="social-share">
-                                    <li><div id="fb-root"></div><a class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                                        <?php
-                                        //if ($config_name == 'vukkul') {
-                                          ?>
-                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                        <?php //} if ($config_name == 'other') { ?> 
-                                          <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-                                        <?php //} ?>
-                                </ul>-->
-
+                               
                             </div>
                             <div class="social-share-story">
                                  <ul class="">
@@ -216,10 +200,10 @@ if (!empty($content)):
                              </div>
                         </div>
                     </div>
-                   
+                   <?php if (!empty($related_content)) { ?>
                     <div class="story-left related-story">
                 <?php
-                  if (!empty($related_content)) {
+                   
                     $related_story = '<h3>Related</h3>'; 
                     $related_content = explode(',', $related_content);
                     foreach ($related_content as $fn_result) {
@@ -229,12 +213,12 @@ if (!empty($content)):
                     $final_related = implode(' OR ', $final_related);
                     $related_story.= views_embed_view('related_story', 'page', $final_related);
                     print $related_story;
-                  }
+                  
                 ?>
                         </div>
                   <!-- For buzzfeed section end --> 
                               
-                 <?php } ?>
+                   <?php } } ?>
                    
                 <div class="story-right <?php
                 if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
@@ -248,20 +232,15 @@ if (!empty($content)):
                         ?>
                         <div class="stryimg" ><?php
                             $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-
                             $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-
                             $file_uri = file_create_url($story_image);
-                            print '<img alt="" src="' . $file_uri . '">';
+                            print '<img alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
                             if (!empty($getimagetags)) {
-
                                 foreach ($getimagetags as $key => $tagval) {
                                     $urltags=addhttp($tagval->tag_url);
                                     print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="'.$urltags.'" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
-
                                 }
                             }
-
                             // print theme('image_style', array('style_name' => 'story_image', 'path' => $story_image));
                             ?>
                             <?php
@@ -270,7 +249,17 @@ if (!empty($content)):
                             ?>
                             <div class="stryimg"><?php
                             $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                            print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
+                            //print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
+                             $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+                            $file_uri = file_create_url($story_image);
+                            print '<img alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
+                            if (!empty($getimagetags)) {
+                                foreach ($getimagetags as $key => $tagval) {
+                                    $urltags=addhttp($tagval->tag_url);
+                                    print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="'.$urltags.'" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
+                                }
+                            }
                             ?>
                             <?php } ?>
                             <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
@@ -302,14 +291,12 @@ if (!empty($content)):
                        <div class="description">
                           <?php
                           $story_body = $node->body['und'][0]['value'];
-
                           if (strpos($story_body, '[ITG:SURVEY:')) {
                             if (preg_match('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)) {
                               $survey_nid = $matches_survey[1];
                             }
                             $story_body = str_replace('[ITG:SURVEY:' . $survey_nid . ']', '', $story_body);
                           }
-
                           if (strpos($story_body, '[ITG:QUIZ:')) {
                             if (preg_match('/ITG:QUIZ:([0-9]+)/', $story_body, $matches_quiz)) {
                               $quiz_nid = $matches_quiz[1];
@@ -332,7 +319,7 @@ if (!empty($content)):
                               $factoidsSocialShare['icons'] = '<div class="factoids-page">
                                  <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                 <li><a class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'". ', ' . "'" . $image . "'" . ')"><i class="fa fa-facebook"></i></a></li>
                                  <li><a class="twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
                                  <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
                                  </ul></div></div>';
@@ -373,9 +360,7 @@ if (!empty($content)):
                               $expertDetails .= '</div>';
                             $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
                           }
-
                           if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
-
                             $wrapper = entity_metadata_wrapper('node', $node);
                             $num = 1;
                             foreach ($wrapper->field_story_listicle as $i):
@@ -405,13 +390,11 @@ if (!empty($content)):
                             // Print story body
                             print $story_body;
                           }
-
                           // If survey is associated with story, render survey form
                           if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
                             $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:' . $survey_nid . ']'), $story_body);
                             print $story_body_survey;
                           }
-
                           // If quiz is associated with story, render quiz form
                           if (strpos($node->body['und'][0]['value'], '[ITG:QUIZ:')) {
                             $story_body_quiz = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:QUIZ:' . $quiz_nid . ']'), $story_body);
@@ -441,7 +424,7 @@ if (!empty($content)):
                         $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
                         $share_uri = $file->uri;
                         $share_image = file_create_url($share_uri);
-                        $img = '<img src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
+                        $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '">';
                         if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
                             $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
                             if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
@@ -454,7 +437,7 @@ if (!empty($content)):
               <li><a href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="twitter"><i class="fa fa-twitter"></i></a></li>
               <li><a title="share on google+" href="#" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
-          </div>' . $img . '</div>';
+          </div>' . $img . '</div><div class="photoby">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '</div><div class="image-alt">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '</div>';
                             }
                             if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';

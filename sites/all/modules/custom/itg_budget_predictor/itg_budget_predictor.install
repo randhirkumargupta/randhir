@@ -23,7 +23,6 @@ function itg_budget_predictor_schema() {
           'entity_id' => array(
             'description' => t('entity id'),
             'type' => 'int',
-            'size' => 'medium',
             'not null' => TRUE,
           ),
           'ranking_value' => array(
@@ -46,6 +45,11 @@ function itg_budget_predictor_schema() {
           ),
           'user_id' => array(
             'description' => t('user id'),
+            'type' => 'int',
+            'not null' => TRUE,
+          ),
+          'section_id' => array(
+            'description' => t('section id'),
             'type' => 'int',
             'not null' => TRUE,
           ),
@@ -107,12 +111,16 @@ function itg_budget_predictor_schema() {
             'type' => 'text',
             'not null' => TRUE,
           ),
-          'budget_year' => array(
-            'description' => t('Year'),
-            'type' => 'varchar',
-            'length' => '100',
+          'budget_section' => array(
+            'description' => t('Budget section'),
+            'type' => 'int',
             'not null' => TRUE,
           ),  
+          'file_id' => array(
+            'description' => t('file_id'),
+            'type' => 'int',
+            'not null' => TRUE,
+          ),
           'status' => array(
             'description' => t('status'),
             'type' => 'int',
