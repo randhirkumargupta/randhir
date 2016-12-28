@@ -17,13 +17,11 @@ if (!empty($content)):
     $fb_title = addslashes($node->title);
     $share_desc = '';
     $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-    if (function_exists(itg_facebook_share_count)) {
-    $fb_count = itg_facebook_share_count($actual_link);
+    
+    // get total share count
+    if (function_exists(itg_total_share_count)) {
+    $tot_count = itg_total_share_count($actual_link);
     }
-    if (function_exists(itg_google_share_count)) {
-      $google_count = itg_google_share_count($actual_link);
-    }
-    $fb_google_count = $fb_count + $google_count;
     
     // get global comment config
     if (function_exists(global_comment_last_record)) {
@@ -140,10 +138,10 @@ if (!empty($content)):
                             ?>
                         </div>
                         
-                    </div>  
-                <?php } } ?>
-               
-                
+                      
+                <?php } ?>
+                </div>
+                <?php } ?>
                  <!-- For buzzfeed section start -->
                          <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) {?>                       
                 <div class="buzzfeed-byline">
