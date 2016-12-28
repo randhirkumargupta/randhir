@@ -255,6 +255,7 @@
 //                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(3)').val(jQuery('#imcheigth').val());
                     parent.jQuery.colorbox.close();
                 } else {
+
                     jQuery('.imagefid').each(function() {
                         var getvalue = jQuery(this).val();
                         getvalue = getvalue.split('#');
@@ -270,8 +271,6 @@
 
                             if (settings.url.indexOf(field_name) >= 0) {
 
-                                var image_alttext = jQuery('#img_alttext').val();
-                                var image_title = jQuery('#img_title').val();
 
                                 if (image_alttext == "")
                                 {
@@ -286,12 +285,21 @@
                                     image_title = image_title.substr(0, image_title.lastIndexOf('.'));
                                 }
 
-                                image_title = image_title.replace(/%20/g, " ");
-                                image_alttext = image_alttext.replace(/%20/g, " ");
+                                var image_title = jQuery('#alt_text_image').val();
+                                var image_alttext = jQuery('#image_title_exta').val();
 
                                 setTimeout(function() {
-                                    //  parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
-                                    // parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+                                    if (image_title != "")
+                                    {
+                                        parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
+
+                                    }
+                                    if (image_alttext != "")
+                                    {
+                                        parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+
+                                    }
+
                                     var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
                                     var captionid = getbame + '[field_image_caption][und][0][value]';
                                     captionid = captionid.replace('[field_images][und][0]', "");
