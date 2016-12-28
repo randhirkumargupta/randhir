@@ -960,6 +960,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   max-width: 750px;
   text-align: left;
 }
+#content #block-formblock-ugc .messages--error {
+  margin-top: 20px;
+}
+#content #block-formblock-ugc .node-ugc-form .file-widget .form-submit[value="Remove"] {
+  top: 13px;
+}
 #content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype {
   text-align: center;
 }
@@ -1089,7 +1095,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   float: none;
 }
 #content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield {
-  max-width: 200px;
+  max-width: 215px;
   border: none;
   border-radius: 0;
   margin: 0;
@@ -2873,7 +2879,7 @@ blockquote:after {
   margin-top: 32px;
 }
 
-.data-holder a:hover {
+.recom-listing a:hover, .data-holder a:hover {
   color: #193984;
 }
 
