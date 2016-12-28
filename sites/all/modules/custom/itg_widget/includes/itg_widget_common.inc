@@ -1866,27 +1866,27 @@ function itg_widget_nodes_from_nodequeue($nodequeue_name, $is_dont_expire = FALS
   $nq_query = db_select('nodequeue_nodes', 'nq');
   $nq_query->leftJoin('node', 'n', 'n.nid=nq.nid');
   //join  for field value
-  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-  $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
-  $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
-  $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
-  $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
-  $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
-  $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
-  $query->fields('eli_file', array('uri'));
-  $query->fields('li_file', array('uri'));
-  $query->fields('mi_file', array('uri'));
-  $query->fields('si_file', array('uri'));
-  $query->fields('esi_file', array('uri'));
-  $query->fields('kt', array('field_story_kicker_text_value'));
-  $query->fields('vd', array('field_video_duration_value'));
-  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+  $nq_query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $nq_query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+  $nq_query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+  $nq_query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+  $nq_query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+  $nq_query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+  $nq_query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $nq_query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+  $nq_query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+  $nq_query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+  $nq_query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+  $nq_query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+  $nq_query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+  $nq_query->fields('eli_file', array('uri'));
+  $nq_query->fields('li_file', array('uri'));
+  $nq_query->fields('mi_file', array('uri'));
+  $nq_query->fields('si_file', array('uri'));
+  $nq_query->fields('esi_file', array('uri'));
+  $nq_query->fields('kt', array('field_story_kicker_text_value'));
+  $nq_query->fields('vd', array('field_video_duration_value'));
+  $nq_query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
   //end
   if (!$is_dont_expire) {
     $nq_query->leftJoin('field_data_field_story_expiry_date', 'fsed', 'fsed.entity_id=n.nid');
@@ -2774,12 +2774,12 @@ function get_rhs_block_display_condtion($delta = '') {
  */
 function insert_all_node_in_widegt_table() {
 
-  try {
-    // db_query('alter table itg_widget_order add column constituency varchar(200) NULL after extra')->execute();
-    db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
-  } catch (Exception $ex) {
-    drupal_set_message($ex->getMessage());
-  }
+//  try {
+//    // db_query('alter table itg_widget_order add column constituency varchar(200) NULL after extra')->execute();
+//    db_query('alter table itg_widget_order add id int NOT NULL AUTO_INCREMENT PRIMARY KEY')->execute();
+//  } catch (Exception $ex) {
+//    drupal_set_message($ex->getMessage());
+//  }
 
 
 //    $nodes = db_select('node', 'n')
@@ -2829,27 +2829,15 @@ function itg_widget_node_insert($node) {
             ->execute();
       }
     }
-//
-//    // If there is not any feature in sosorry widget then insert during node insert.
-//    if ($node->type == 'videogallery') {
-//      // Handle sosorry widget ITG-2043
-//      $number_of_feature = count_sosorry_feature();
-//      if (!$number_of_feature) {
-//        db_insert('itg_widget_order')
-//            ->fields(array(
-//              'nid' => $nid,
-//              'widget' => 'so_sorry_widget',
-//              'content_type' => "",
-//              'cat_id' => 0,
-//              'weight' => $nid,
-//              'extra' => "feature",
-//            ))
-//            ->execute();
-//      }
-//    }
   }
 }
 
+/**
+ * Function returns max weight.
+ * @param int $tid
+ * @param string $type
+ * @return int
+ */
 function get_max_weight($tid, $type) {
   $max_query = db_select('itg_widget_order');
   $max_query->addExpression('MAX(weight)');
@@ -2858,8 +2846,13 @@ function get_max_weight($tid, $type) {
   $max_query->condition('widget', 'section_wise_widget');
   $max_result = $max_query->execute()->fetchField();
   return $max_result;
-}
+} 
 
+/**
+ * Function returns max weight of perticular content type.
+ * @param string $type
+ * @return int
+ */
 function get_max_weight_for_special($type) {
   $max_query = db_select('itg_widget_order');
   $max_query->addExpression('MAX(weight)');
@@ -2869,7 +2862,7 @@ function get_max_weight_for_special($type) {
 }
 
 /**
- * Implements hook__node_insert().
+ * Implements hook__node_update().
  * {@inheritdoc}
  */
 function itg_widget_node_update($node) {

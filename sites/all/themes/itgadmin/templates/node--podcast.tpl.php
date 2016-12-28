@@ -55,17 +55,17 @@
             <?php
             $termdata = "";
 
-            if ($content['field_story_category']['#object']->field_primary_category['und'][0]['value'] != "") {
-                $termdata = itg_videogallery_get_term_name($content['field_story_category']['#object']->field_primary_category['und'][0]['value']);
+            if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
+                $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
             }
             $field_story_category = render($content['field_story_category']);
             if (!empty($field_story_category)):
                 ?>
                 <?php print render($content['field_story_category']); ?>
-        <?php endif; ?>
+            <?php endif; ?>
             <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
 
-    <?php endif; // end of view mode full condition  ?></div>
+        <?php endif; // end of view mode full condition  ?></div>
 
 <?php endif; ?>

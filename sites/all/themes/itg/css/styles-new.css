@@ -2873,6 +2873,10 @@ blockquote:after {
   margin-top: 32px;
 }
 
+.data-holder a:hover {
+  color: #193984;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, .featured-news .featured-post a,

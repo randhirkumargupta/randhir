@@ -735,23 +735,34 @@ function itg_survey_pqs_generatetokens() {
   $type = arg(2);
   drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1));
   
-  
   $query = db_select('node', 'n');
-  $query->join('field_data_field_survey_start_date', 'sd', 'n.nid = sd.entity_id');
-  $query->join('field_data_field_survey_end_date', 'ed', 'n.nid = ed.entity_id');
+  if ($type == 'poll') {
+    $query->join('field_data_field_poll_start_date', 'sd', 'n.nid = sd.entity_id');
+    $query->join('field_data_field_poll_end_date', 'ed', 'n.nid = ed.entity_id');
+    $query->fields('sd', array('field_poll_start_date_value'))
+            ->fields('ed', array('field_poll_end_date_value'));
+  } else {
+    $query->join('field_data_field_survey_start_date', 'sd', 'n.nid = sd.entity_id');
+    $query->join('field_data_field_survey_end_date', 'ed', 'n.nid = ed.entity_id');
+    $query->fields('sd', array('field_survey_start_date_value'))
+            ->fields('ed', array('field_survey_end_date_value'));
+  }
+
   $query->fields('n', array('nid', 'title'))
-        ->fields('sd', array('field_survey_start_date_value'))
-          ->fields('ed', array('field_survey_end_date_value'))
-  ->condition('n.type', $type)
-  ->condition('n.status', '1')
-  ->orderBy('n.changed', 'DESC');
+          ->condition('n.type', $type)
+          ->condition('n.status', '1')
+          ->orderBy('n.changed', 'DESC');
   $result = $query->execute();
   
   // Fetch node title and nid
   while ($record = $result->fetchAssoc()) {
-    $start_date = strtotime($record['field_survey_start_date_value']);
-    $end_date = strtotime('+1 day', strtotime($record['field_survey_end_date_value']));
-    if (time() >= $start_date && time() <= $end_date) {
+    if ($type == 'poll') {
+      $end_date = strtotime('+1 day', strtotime($record['field_poll_end_date_value']));
+    } else {
+      $end_date = strtotime('+1 day', strtotime($record['field_survey_end_date_value']));
+    }
+    
+    if (time() <= $end_date) {
       if (strlen($record['title']) > 30) {
         $title = substr($record['title'], 0, 30) . '...';
       } else {

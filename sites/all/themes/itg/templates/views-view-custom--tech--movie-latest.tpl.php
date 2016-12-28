@@ -11,10 +11,10 @@
             <li class="dont-miss-listing">
                 <div class="dm-pic"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}");?>" class="pic <?php echo $video_class;?>"><?php print $row['field_story_extra_small_image']; ?></a></div>
 
-                <div class="dm-detail"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></div>       
+                <div class="dm-detail"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")); ?></div>       
             </li>
 
 
-<?php }; ?>
+<?php } ?>
     </ul>
 </div>

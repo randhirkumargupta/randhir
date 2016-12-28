@@ -131,8 +131,8 @@
                                 <?php
                                 $termdata = "";
 
-                                if ($content['field_story_category']['#object']->field_primary_category['und'][0]['value'] != "") {
-                                    $termdata = itg_videogallery_get_term_name($content['field_story_category']['#object']->field_primary_category['und'][0]['value']);
+                                 if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
+                                    $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
                                 }
                                 $selection = render($content['field_story_category']);
                                 if (!empty($selection)):
