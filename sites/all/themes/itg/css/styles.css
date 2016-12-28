@@ -2524,7 +2524,7 @@ footer .footer-copyright {
 .story-section .tags ul li {
   display: inline-block;
   vertical-align: top;
-  padding: 0px 12px;
+  padding: 0px 6px;
   color: #c0c0c0;
   font-size: 12px;
   font-size: 0.75rem;
@@ -2740,7 +2740,7 @@ footer .footer-copyright {
 }
 .story-section .buzzfeed-byline .byline .profile-detail {
   margin: 0px 0 0 10px;
-  width: 60%;
+  width: 79%;
 }
 .story-section .buzzfeed-byline .social-share-story li {
   display: inline-block;
@@ -2854,6 +2854,21 @@ footer .footer-copyright {
 }
 .buzz-feedback .buzz-section .buzz-img .social-share ul li a.google {
   background: #cc0808;
+}
+.buzz-feedback .buzz-section .image-alt {
+  color: #929292;
+  font-size: 13px;
+  font-size: 0.8125rem;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+  padding-top: 0;
+}
+.buzz-feedback .buzz-section .photoby {
+  background: black;
+  color: #aeaeae;
+  font-family: "Roboto", sans-serif;
+  padding: 5px;
+  margin-top: -15px;
 }
 .buzz-feedback .snap-post {
   margin-top: 0;
@@ -5980,6 +5995,7 @@ footer .footer-copyright {
   top: -39px;
   text-align: center;
   font-size: 28px;
+  padding-top: 5px;
 }
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu {
   position: absolute;
@@ -8523,22 +8539,26 @@ footer .footer-copyright {
 .movie-layout-page .itg-layout-580 .itg-widget-child .droppable {
   height: 218px;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .widget-title {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .widget-title, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .widget-title {
   top: 0;
   left: 15px;
+  position: absolute;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider {
+  border: none;
+}
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .slides li {
   position: relative;
   border: none;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .slides li .detail {
   position: absolute;
   bottom: 0;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-count {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-count, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .slides li .detail .flex-count {
   display: none;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .slides li .detail .flex-caption {
   background: rgba(255, 255, 255, 0.74);
   font-size: 20px;
   font-weight: 700;
@@ -8548,31 +8568,37 @@ footer .footer-copyright {
   max-width: 100%;
   min-height: inherit;
   color: #000;
+  padding: 10px;
+  width: auto;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .slides li .detail .flex-caption a {
   color: #000;
+  line-height: 24px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a:hover {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .slides li .detail .flex-caption a:hover, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .slides li .detail .flex-caption a:hover {
   color: #193984;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .flex-direction-nav {
   display: block;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .flex-direction-nav a {
   width: 20px;
   height: 20px;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a:before {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a:before, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .flex-direction-nav a:before {
   width: 20px;
   height: 20px;
   line-height: 20px;
   font-size: 20px;
   background: #000;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-prev {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-prev, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .flex-direction-nav a.flex-prev {
   left: 0;
 }
-.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-next {
+.movie-layout-page .itg-layout-580 .itg-widget-child .tech-block_5 .flexslider .flex-direction-nav a.flex-next, .movie-layout-page .itg-layout-580 .itg-widget-child .section_wise_order-standpoint .flexslider .flex-direction-nav a.flex-next {
   right: 0;
 }
 .movie-layout-page .itg-layout-580 .auto-block-2 {
@@ -9378,10 +9404,19 @@ footer .footer-copyright {
 .view-live-tv-programs .program-row {
   position: relative;
   margin-bottom: 10px;
+  padding: 0 5px;
+}
+.view-live-tv-programs .program-row .programe-title a {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #525252;
+  font-weight: 500;
+  height: 22px;
+  line-height: 22px;
 }
 .view-live-tv-programs .toggle-icon {
   position: absolute;
-  right: 10px;
+  right: 5px;
   top: 50%;
   margin-top: -10px;
   font-size: 20px;
@@ -10235,6 +10270,12 @@ footer .footer-copyright {
   color: #fff;
   font-weight: 700;
   margin-top: 20px;
+}
+.story-section .listicle-page .listicle-detail > span.bullet_points {
+  width: 10px;
+  height: 10px;
+  line-height: 10px;
+  margin-top: 28px;
 }
 .story-section .listicle-page .listicle-detail .listicle-description {
   font-size: 16px;
