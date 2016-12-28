@@ -68,7 +68,6 @@ function itg_story_checked_issue($issue_date) {
 function itg_story_create_breaking_news() {
   global $user;
   $title = $_POST['title'];
-  $uid = $_POST['uid'];
   $node = new stdClass();
   $node->title = $title;
   $node->type = "breaking_news";
@@ -78,7 +77,7 @@ function itg_story_create_breaking_news() {
   $node->language = LANGUAGE_NONE;
   $node->field_content_type[LANGUAGE_NONE][0]['value'] = 'Story';
   $node->field_type[LANGUAGE_NONE][0]['value'] = 'Breaking News';
-  $node->uid = $uid;
+  $node->uid = $user->uid;
   $node->status = 1; //(1 or 0): Published or not
   $node->promote = 0; //(1 or 0): Promoted to front page
   $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write

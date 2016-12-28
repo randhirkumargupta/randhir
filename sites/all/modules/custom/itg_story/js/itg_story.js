@@ -169,46 +169,13 @@
                 });
             });
             
-            // Code to create breaking news.
-            $('#breaking_text').click(function () {
-                var base_url = settings.itg_story.settings.base_url;
-                var uid = settings.itg_story.settings.uid;
-                var title = jQuery('#edit-title').val();
-                if ($(this).is(':checked')) {
-
-                    var associate_id = $(this).attr('id');
-
-                    if (associate_id == 'breaking_text') {
-                        var msg = confirm("Are you sure you want to pubish long headline as breaking band?");
-                    }
-
-                    if (msg == true && title.length != 0) {
-
-                        var post_data = "&title=" + title + "&uid=" + uid;
-                        $.ajax({
-                            'url': base_url + '/breaking-news-ajax',
-                            'data': post_data,
-                            'cache': false,
-                            'type': 'POST',
-                            beforeSend: function () {
-                                $('#widget-ajex-loader').show();
-                            },
-                            'success': function (result)
-                            {
-                                var obj = jQuery.parseJSON(result);
-
-                                $('#widget-ajex-loader').hide();
-                                jQuery('#edit-field-story-source-id-und-0-value').val(obj.story_nid);
-                            }
-                        });
-
-                        return true;
-                    }
-
-                    return false;
+            // handle issue checked on unchecked
+             jQuery("#edit-field-story-magazine-story-issue-und-magazine-issue-story").click(function(){
+                if(!jQuery(this).is(':checked')) {
+                  jQuery("#edit-field-story-source-type-und-0-value").val("");
                 }
-
             });
+           
 
 
         }
@@ -217,3 +184,46 @@
 
 
 })(jQuery, Drupal, this, this.document);
+
+        jQuery(document).ready(function () {
+    // Code to create breaking news.
+        jQuery('#breaking_text').click(function () {
+        var title = jQuery('#edit-title').val();
+        if (jQuery(this).is(':checked')) {
+            
+            var associate_id = jQuery(this).attr('id');
+
+            if (associate_id == 'breaking_text') {
+                var msg = confirm("Are you sure you want to pubish long headline as breaking band?");
+            }
+
+            if (msg == true && title.length != 0) {
+
+                var post_data = "&title=" + title;
+                jQuery.ajax({
+                    'url': Drupal.settings.baseUrl.baseUrl + '/breaking-news-ajax',
+                    'data': post_data,
+                    'cache': false,
+                    'type': 'POST',
+                    beforeSend: function () {
+                        jQuery('#widget-ajex-loader').show();
+                    },
+                    'success': function (result)
+                    {
+                        var obj = jQuery.parseJSON(result);
+
+                        jQuery('#widget-ajex-loader').hide();
+                        jQuery('#breaking_text').attr('checked', true);
+                        jQuery('#edit-field-story-source-id-und-0-value').val(obj.story_nid);
+                        jQuery('#edit-field-story-source-type-und-0-value').val('breaking');
+                    }
+                });
+
+                return true;
+            }
+
+            return false;
+        }
+
+    });
+});

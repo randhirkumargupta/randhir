@@ -143,7 +143,8 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
     switch ($form_id) {
         case 'story_node_form':
             $source_id = $form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'];
-            if(empty($source_id)) {
+            $source_type = trim($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']);
+            if(empty($source_id) && empty($source_type)) {
             $form['title']['#suffix'] = '<div class="breaking_class"><input type="checkbox" title="breaking_text" id="breaking_text"></div>';
             }
             $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
