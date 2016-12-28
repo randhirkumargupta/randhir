@@ -501,6 +501,7 @@
     padding: 5px;
     box-shadow: 0 0 3px #000;
     display: none;
+    z-index: 1;
   }
   #block-itg-layout-manager-header-block .head-live-tv ul li:first-child .menu li {
     padding: 5px 0;
@@ -957,6 +958,43 @@
   .story-section .listicle-page .listicle-detail .listicle-description {
     width: 91%;
     padding: 10px;
+  }
+
+  /*home page breaking news*/
+  .breakingnew-home {
+    text-align: center;
+    background: #ffc106;
+    margin: -15px -15px 15px -15px;
+    padding: 7px;
+  }
+  .breakingnew-home .title {
+    float: none;
+    width: 80px;
+    font-size: 14px;
+    line-height: 22px;
+    height: 20px;
+    padding: 0 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  .breakingnew-home .new-detail {
+    height: inherit;
+    line-height: 20px;
+    font-size: 16px;
+    padding: 0;
+    width: 100%;
+    float: none;
+  }
+  .breakingnew-home .new-detail .social-share {
+    display: none;
+  }
+  .breakingnew-home .new-detail .live-tv-link .live-tv-icon {
+    display: none;
+  }
+  .breakingnew-home .new-detail .live-tv-link .breaking-new-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }
 @media only screen and (max-width: 680px) {
@@ -1465,11 +1503,40 @@
     font-size: 1.5rem;
     line-height: 34px;
   }
-  .buzz-feedback.buzz-related .story-left {
-    width: 21%;
+  .buzz-feedback.buzz-related .related-story {
+    margin-bottom: 50px;
   }
-  .buzz-feedback.buzz-related .story-right {
-    width: 79%;
+  .buzz-feedback.buzz-related .related-story h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #bb0a0a;
+    display: none;
+    position: relative;
+  }
+  .buzz-feedback.buzz-related .related-story h3 span {
+    background: #fff;
+    z-index: 1;
+    position: relative;
+    /* padding-left: 10px; */
+    padding: 45px 20px 10px 10px;
+    display: inline-block;
+  }
+  .buzz-feedback.buzz-related .related-story h3:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 20px;
+    height: 5px;
+    margin-top: -2px;
+    background: #ddd;
+  }
+  .buzz-feedback.buzz-related .related-story h3 {
+    display: block;
+  }
+  .buzz-feedback.buzz-related .related-story h3 span {
+    padding-top: 25px;
+    padding-left: 0;
   }
 
   /*End Story page css*/

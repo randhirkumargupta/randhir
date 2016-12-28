@@ -200,25 +200,8 @@ if (!empty($content)):
                              </div>
                         </div>
                     </div>
-                   <?php if (!empty($related_content)) { ?>
-                    <div class="story-left related-story">
-                <?php
                    
-                    $related_story = '<h3>Related</h3>'; 
-                    $related_content = explode(',', $related_content);
-                    foreach ($related_content as $fn_result) {
-                      $related_content = explode('_', $fn_result);
-                      $final_related [] = $related_content[1];
-                    }
-                    $final_related = implode(' OR ', $final_related);
-                    $related_story.= views_embed_view('related_story', 'page', $final_related);
-                    print $related_story;
-                  
-                ?>
-                        </div>
-                  <!-- For buzzfeed section end --> 
-                              
-                   <?php } } ?>
+                   <?php }  ?>
                    
                 <div class="story-right <?php
                 if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
@@ -584,6 +567,28 @@ if (!empty($content)):
                             ?>
                         </ul>
                     </div>
+                    <!-- For buzzfeed section stary --> 
+                    <?php
+                        if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
+                    <?php if (!empty($related_content)) { ?>
+                    <div class="related-story">
+                <?php
+                   
+                    $related_story = '<h3><span>Related</span></h3>'; 
+                    $related_content = explode(',', $related_content);
+                    foreach ($related_content as $fn_result) {
+                      $related_content = explode('_', $fn_result);
+                      $final_related [] = $related_content[1];
+                    }
+                    $final_related = implode(' OR ', $final_related);
+                    $related_story.= views_embed_view('related_story', 'page', $final_related);
+                    print $related_story;
+                  
+                ?>
+                        </div>
+                  <!-- For buzzfeed section end --> 
+                <?php } } ?>
+                    
                 </div>
 
                 <?php
