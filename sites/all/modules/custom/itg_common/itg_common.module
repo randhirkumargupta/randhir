@@ -930,3 +930,15 @@ function itg_total_share_count($actual_link) {
 
   return $fb_google_count;
 }
+
+/**
+ * Implements itg_common_node_type
+ * @param int $nid
+ * 
+ * @return string $node->type
+ */
+
+function itg_common_node_type($nid) {
+  $node = node_load($nid);
+  return $node->type;
+}
