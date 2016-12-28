@@ -142,6 +142,10 @@
                     $('#newlist').hide();
                 });
                 
+                $('.head-live-tv .mobile-user').click(function(){
+                    $(this).next('ul.menu').toggle();
+                });
+                
             }
 
             // jQuery Code for tabbing

@@ -4599,6 +4599,7 @@ footer{
                 top: -39px;                
                 text-align: center;
                 font-size: 28px;
+                padding-top: 5px;
             }
             }
             ul.menu{
@@ -7968,10 +7969,21 @@ input[type="radio"]:checked + label:after{
     .program-row{
         @include pos(relative);  
         margin-bottom: 10px;
+        padding: 0 5px;
+        .programe-title{
+            a{
+               font-size: 14px;
+               text-transform: uppercase;
+               color: #525252;
+               font-weight: 500;
+               height: 22px;
+               line-height: 22px;   
+            }            
+        }
     }
     .toggle-icon{
         position: absolute;
-        right: 10px;
+        right: 5px;
         top: 50%;
         margin-top: -10px;
         font-size: 20px;

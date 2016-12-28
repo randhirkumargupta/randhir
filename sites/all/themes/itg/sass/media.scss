@@ -489,6 +489,21 @@
                             font-size: 18px;
                         }
                     }
+                    &:first-child{
+                        @include pos(relative);
+                        .menu{
+                            position: absolute;
+                            right: 0;
+                            top: 20px;
+                            background: #a00606;
+                            padding: 5px;
+                            box-shadow: 0 0 3px #000;
+                            display:none;
+                            li{
+                                padding: 5px 0;                                
+                            }
+                        }
+                    }
                 }
             }
             .globle-search{

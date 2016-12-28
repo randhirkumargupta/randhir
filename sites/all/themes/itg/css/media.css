@@ -490,6 +490,21 @@
   #block-itg-layout-manager-header-block .head-live-tv ul li a i {
     font-size: 18px;
   }
+  #block-itg-layout-manager-header-block .head-live-tv ul li:first-child {
+    position: relative;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv ul li:first-child .menu {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    background: #a00606;
+    padding: 5px;
+    box-shadow: 0 0 3px #000;
+    display: none;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv ul li:first-child .menu li {
+    padding: 5px 0;
+  }
   #block-itg-layout-manager-header-block .head-live-tv .globle-search {
     position: absolute;
     top: 0px;
