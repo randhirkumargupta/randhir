@@ -7116,6 +7116,7 @@ input[type="radio"]:checked + label:after{
                             color: #000;
                             padding: 10px;
                             width: auto;
+                            height: inherit;
                             a{
                                 color: #000;
                                 line-height:24px;                                
@@ -7187,6 +7188,28 @@ input[type="radio"]:checked + label:after{
         .widget-title{
             margin-bottom: 5px;
         }
+        .osscar-video ul .dont-miss-listing{
+            padding:0;
+            position: relative;
+            &:after {
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 1PX;
+                background: #DDD;
+                left: 0;
+                bottom: 0px;
+                z-index: 1;
+            }
+            + .dont-miss-listing {
+                padding-top: 10px;
+            }
+            &:last-child{
+                &:after {
+                    display: none;
+                }
+            }
+        }
     }
     .osscar-video{
         background:transparent;
@@ -7229,7 +7252,20 @@ input[type="radio"]:checked + label:after{
             top:10px;
             left:10px;
         }
-    }    
+    }
+    .tech-movie_latest{
+        .widget-settings, .widget-title{
+            left: 0;
+            top: 0;
+        }
+        .osscar-video ul .dont-miss-listing{
+            padding-bottom: 15px;
+            + .dont-miss-listing{
+                padding: 15px 0;
+                border-top: 1px solid #ddd;
+            }
+        }   
+    }
 }
 /*CSS End for movie page*/
 
