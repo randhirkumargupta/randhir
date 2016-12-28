@@ -99,40 +99,12 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  /* Field: Field: Category Icon */
-  $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
-  $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
-  $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
-  $handler->display->display_options['fields']['field_sponser_logo']['label'] = '';
-  $handler->display->display_options['fields']['field_sponser_logo']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_sponser_logo']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_sponser_logo']['settings'] = array(
-    'image_style' => 'widget_very_small',
-    'image_link' => '',
-  );
   /* Field: Taxonomy term: Display Title */
   $handler->display->display_options['fields']['field_cm_display_title']['id'] = 'field_cm_display_title';
   $handler->display->display_options['fields']['field_cm_display_title']['table'] = 'field_data_field_cm_display_title';
   $handler->display->display_options['fields']['field_cm_display_title']['field'] = 'field_cm_display_title';
   $handler->display->display_options['fields']['field_cm_display_title']['label'] = '';
   $handler->display->display_options['fields']['field_cm_display_title']['element_label_colon'] = FALSE;
-  /* Field: Field: City */
-  $handler->display->display_options['fields']['field_user_city']['id'] = 'field_user_city';
-  $handler->display->display_options['fields']['field_user_city']['table'] = 'field_data_field_user_city';
-  $handler->display->display_options['fields']['field_user_city']['field'] = 'field_user_city';
-  $handler->display->display_options['fields']['field_user_city']['label'] = '';
-  $handler->display->display_options['fields']['field_user_city']['element_label_colon'] = FALSE;
-  /* Field: Taxonomy term: Term description */
-  $handler->display->display_options['fields']['description']['id'] = 'description';
-  $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['fields']['description']['field'] = 'description';
-  $handler->display->display_options['fields']['description']['label'] = '';
-  $handler->display->display_options['fields']['description']['alter']['trim_whitespace'] = TRUE;
-  $handler->display->display_options['fields']['description']['alter']['max_length'] = '85';
-  $handler->display->display_options['fields']['description']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['description']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['description']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
   $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
