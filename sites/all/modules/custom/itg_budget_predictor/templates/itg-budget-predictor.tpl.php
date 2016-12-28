@@ -15,7 +15,8 @@ $budget_message_flag = $data['budget_message_flag'];
 $budget_message_front_flag = $data['budget_message_front_flag'];
 $budget_social_message_flag = $data['budget_social_message_flag'];
 $admin_user = $data['admin_user'];
-$budget_year = $data['budget_year'];
+$section_id = $data['section_id'];
+$user_id = $data['user_id'];
 ?>
 
 <style>
@@ -35,6 +36,9 @@ $budget_year = $data['budget_year'];
 
 <?php if ($budget_exist == 1) { ?>    
   <h1 class="budget-predictor-heading"><?php print t('Budget - Predictor'); ?></h1>
+  <?php if(empty($user_id)) { ?>
+    <h3 class="budget-predictor-msg"><?php print t('Only Logged in user will be able to play this widget.'); ?></h3>
+  <?php } ?>
   <div id="main-container-budget">
       <div class="top-side-block">
           <div id="ranking-content" class="col-md-2 col-list col-list-1">
@@ -80,7 +84,7 @@ $budget_year = $data['budget_year'];
   <?php } ?>
 
               <?php if (empty($file_name) && empty($budget_message_flag)) { ?>
-                <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $budget_year; ?>)"><?php print t('Submit'); ?></button>
+                <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button>
                 <?php
               }
             }
