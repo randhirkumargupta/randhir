@@ -27,11 +27,11 @@
             <?php if (!empty($title_prefix)) print render($title_prefix); ?>
 
             <?php if (!empty($title) && !$page): ?>
-        <!--        <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
+            <!--        <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
                 <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-                  <a href="<?php print $node_url ?>"><?php print $title ?></a>
-                  
-                </h2>-->
+                      <a href="<?php print $node_url ?>"><?php print $title ?></a>
+                      
+                    </h2>-->
             <?php endif; ?>
 
             <?php if (!empty($title_suffix)) print render($title_suffix); ?>
@@ -92,8 +92,8 @@
                                 <?php
                                 $termdata = "";
 
-                                if ($content['field_story_category']['#object']->field_primary_category['und'][0]['value'] != "") {
-                                    $termdata = itg_videogallery_get_term_name($content['field_story_category']['#object']->field_primary_category['und'][0]['value']);
+                                if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
+                                    $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
                                 }
                                 print render($content['field_story_category']);
                                 $selection = render($content['field_story_category']);
