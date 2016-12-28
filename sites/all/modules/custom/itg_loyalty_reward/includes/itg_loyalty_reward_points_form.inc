@@ -163,7 +163,7 @@ function loyality_reward_points_configuration_form() {
   $destination = check_plain($destination['destination']);  
   // Add cancel button to the form.
   $form['actions']['cancel'] = array(
-    '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => array('form-submit')))),
+    '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => array('button')))),
     '#weight' => 20,
   );
   $form['#submit'][] = 'itg_loyalty_reward_badge_icon_submit';
