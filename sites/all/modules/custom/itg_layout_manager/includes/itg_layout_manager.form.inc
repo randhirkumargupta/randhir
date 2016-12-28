@@ -216,7 +216,7 @@ function highlights_widgets_search_form($form, &$form_state) {
   );  
   
   $form['highlights_submit'] = array(
-    '#markup' => '<a class="btn btn-save" href="javascript:void(0)" id="layout-highlights-submit">Go</a>',
+    '#markup' => '<div class="go-btn-div"><a class="btn btn-save fright" href="javascript:void(0)" id="layout-highlights-submit">Go</a></div>',
     '#weight' => 20,
   );  
 
@@ -238,7 +238,7 @@ function html_widgets_search_form($form, &$form_state) {
   );  
   
   $form['html_submit'] = array(
-    '#markup' => '<a href="javascript:void(0)" id="layout-html-submit">Go</a>',
+    '#markup' => '<div class="go-btn-div"><a class="fright" href="javascript:void(0)" id="layout-html-submit">Go</a></div>',
     '#weight' => 20,
   );  
 

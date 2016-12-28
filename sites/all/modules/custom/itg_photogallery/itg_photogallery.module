@@ -377,6 +377,9 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
         $photo_by = explode(') (', $_POST['field_photo_by'][LANGUAGE_NONE]);
         $photo_byline = explode(')', $photo_by[1]);
         $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_photo_byline['und'][0]['target_id'] = $photo_byline[0];
+        if(!empty($_POST['field_common_audio_file'][LANGUAGE_NONE][0]['fid'])){
+          $form_state['field']['field_gallery_image']['und']['entity'][$key]->field_audio['und'][0]['fid'] = $_POST['field_common_audio_file'][LANGUAGE_NONE][0]['fid'];
+        }
       }
       $i++;
     }
