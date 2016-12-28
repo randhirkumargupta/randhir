@@ -949,26 +949,10 @@ function itg_widget_remove_unpublised_node() {
       ->fields('n', array('nid'))
       ->condition('n.status', 0);
   $data = $select_node->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $order_re_order_widgtes = array(
-    '\'personalization_widget\'',
-    '\'issue_magazin_widget\'',
-    '\'yearender_left_news_video\'',
-    '\'special_auto_review_content\'',
-    '\'most_read_content\'',
-    '\'feature_content_by_section\'',
-    '\'special_how_made_it_content\'',
-    '\'poll_widget\'',
-    '\'section_wise_widget\'',
-    '\'dont_miss_content_widget\'',
-    '\'we_may_suggest_widget\'',
-    '\'big_story_format_widget\'',
-    '\'so_sorry_widget\'',
-  );
-  $strg = implode(',', $order_re_order_widgtes);
-  foreach ($data as $nids) {
-    $nid = $nids['nid'];
-    $delete_query = "DELETE from {itg_widget_order} where nid = '" . $nid . "' and widget in ($strg)";
-    db_query($delete_query);
+  if (!empty($data)) {
+    foreach ($data as $nids) {
+      itg_widget_handle_unpublished_node($nids['nid']);
+    }
   }
 }
 
@@ -1103,25 +1087,24 @@ function itg_widget_get_required_node_data_for_widget($nid) {
  * @param string $widget_name
  * @param int $nid
  */
-function itg_widget_delete_data_from_widget($widget_name, $nid = 0 , $stateid = 0 , $cat_id = 0) {
+function itg_widget_delete_data_from_widget($widget_name, $nid = 0, $stateid = 0, $cat_id = 0) {
   try {
     $query = db_delete('itg_widget_order');
     $query->condition('widget', $widget_name);
-    
+
     if ($nid) {
       $query->condition('nid', $nid);
     }
-    
-    if($stateid) {
+
+    if ($stateid) {
       $query->condition('state', $stateid);
     }
-    
-    if($cat_id) {
+
+    if ($cat_id) {
       $query->condition('cat_id', $cat_id);
     }
-    
+
     $query->execute();
-    
   } catch (Exception $ex) {
     watchdog($widget_name, $ex->getMessage());
   }
@@ -1133,7 +1116,7 @@ function itg_widget_delete_data_from_widget($widget_name, $nid = 0 , $stateid = 
  * @param string $widget_name
  * @param string $category_tid
  */
-function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extra = NULL , $state = NULL) {
+function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extra = NULL, $state = NULL) {
   try {
     $max_weight = get_max_weight_for_special($widget_name);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
@@ -1171,4 +1154,34 @@ function itg_widget_check_node_in_widget($nid, $widget) {
     $count = $query->execute()->rowCount();
   }
   return $count;
+}
+
+/**
+ * Function to delete nodes from widget and nodequeue.
+ * @param int $nid
+ */
+function itg_widget_handle_unpublished_node($nid) {
+  if ($nid) {
+    // List of all widget.
+    // IF number of widget is increses then increse this list.  
+    // Delete query for itg_widget_query.
+    // Widgets are define above from which node is to be delete.
+      try {
+        db_delete('itg_widget_order')
+            ->condition('nid', $nid)
+            //->condition('widget', 'key_candidate' ,'!=')
+            ->execute();
+      } catch (Exception $ex) {
+        watchdog("widget_delete", "From itg_widget_order " + $ex->getMessage());
+      }
+      // Delete from nodequeue. As we have used nodequeue only for widgets. So we can remove from nodeid.
+      try {
+        db_delete('nodequeue_nodes')
+            ->condition('nid', $nid)
+            ->execute();
+      } catch (Exception $ex) {
+        watchdog("widget_delete", "From nodequeue_nodes " + $ex->getMessage());
+      }
+  }
+      
 }

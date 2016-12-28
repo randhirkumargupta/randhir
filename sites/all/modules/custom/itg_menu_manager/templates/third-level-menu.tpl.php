@@ -64,6 +64,7 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
           ?>
         </div>
         <div class="col-md-8 col-sm-8 col-xs-8">
+          <?php if(!empty($data)) : ?>
         <div class="select-menu">Section</div>
           <ul class="third-level-menu">
             <?php foreach ($data as $key => $menu_data) : ?>
@@ -82,6 +83,7 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
               endforeach; 
               ?>
           </ul>
+        <?php endif; ?>
         </div>
 
       </div>
