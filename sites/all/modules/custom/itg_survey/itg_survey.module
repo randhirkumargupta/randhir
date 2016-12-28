@@ -733,25 +733,45 @@ function itg_survey_get_mail_content($node, $user){
  */
 function itg_survey_pqs_generatetokens() {
   $type = arg(2);
-    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1));
+  
   $query = db_select('node', 'n');
+  if ($type == 'poll') {
+    $query->join('field_data_field_poll_start_date', 'sd', 'n.nid = sd.entity_id');
+    $query->join('field_data_field_poll_end_date', 'ed', 'n.nid = ed.entity_id');
+    $query->fields('sd', array('field_poll_start_date_value'))
+            ->fields('ed', array('field_poll_end_date_value'));
+  } else {
+    $query->join('field_data_field_survey_start_date', 'sd', 'n.nid = sd.entity_id');
+    $query->join('field_data_field_survey_end_date', 'ed', 'n.nid = ed.entity_id');
+    $query->fields('sd', array('field_survey_start_date_value'))
+            ->fields('ed', array('field_survey_end_date_value'));
+  }
+
   $query->fields('n', array('nid', 'title'))
-        ->condition('n.status', '1', '=')
-        ->condition('n.type', $type, '=');
+          ->condition('n.type', $type)
+          ->condition('n.status', '1')
+          ->orderBy('n.changed', 'DESC');
   $result = $query->execute();
   
   // Fetch node title and nid
-  while($record = $result->fetchAssoc()){
-    if(strlen($record['title']) > 30) {
-      $title = substr($record['title'], 0, 30).'...';
-    } 
-    else {
-      $title = $record['title'];
+  while ($record = $result->fetchAssoc()) {
+    if ($type == 'poll') {
+      $end_date = strtotime('+1 day', strtotime($record['field_poll_end_date_value']));
+    } else {
+      $end_date = strtotime('+1 day', strtotime($record['field_survey_end_date_value']));
     }
     
-    $options['[ITG:'.strtoupper($type).':'.$record['nid'].']'] = $title;
+    if (time() <= $end_date) {
+      if (strlen($record['title']) > 30) {
+        $title = substr($record['title'], 0, 30) . '...';
+      } else {
+        $title = $record['title'];
+      }
+      $options['[ITG:' . strtoupper($type) . ':' . $record['nid'] . ']'] = $title;
+    }
   }
-  
+
   $form = array();
   $form['pqs-listing-heading'] = array(
       '#type' => 'markup',
@@ -1075,7 +1095,11 @@ function itg_survey_survey_form_submit($form, &$form_state) {
   if(strtolower($form_state['clicked_button']['#value']) == 'submit') {
     
     // Set cookie for survey
-    user_cookie_save(array('itgcms_survey_'.$form_state['values']['nid'] => 1));
+    if($user->uid) {
+      user_cookie_save(array('itgcms_survey_'.$form_state['values']['nid'].'_'.$user->uid => 1));
+    } else {
+      user_cookie_save(array('itgcms_survey_'.$form_state['values']['nid'] => 1));
+    }
     
     // Insert in to survey user table
     db_insert('itg_survey_user')

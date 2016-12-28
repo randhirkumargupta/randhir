@@ -302,7 +302,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['fields']['field_type']['table'] = 'field_data_field_type';
   $handler->display->display_options['fields']['field_type']['field'] = 'field_type';
   $handler->display->display_options['fields']['field_type']['element_label_colon'] = FALSE;
-  /* Field: Content: Activate Live TV */
+  /* Field: Content: Story expires */
   $handler->display->display_options['fields']['field_story_expires']['id'] = 'field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['table'] = 'field_data_field_story_expires';
   $handler->display->display_options['fields']['field_story_expires']['field'] = 'field_story_expires';
@@ -597,6 +597,12 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Content details (field_breaking_content_details) */
@@ -632,7 +638,7 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['arguments']['field_section_tid']['field'] = 'field_section_tid';
   $handler->display->display_options['arguments']['field_section_tid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['field_section_tid']['default_argument_type'] = 'raw';
-  $handler->display->display_options['arguments']['field_section_tid']['default_argument_options']['index'] = '0';
+  $handler->display->display_options['arguments']['field_section_tid']['default_argument_options']['index'] = '2';
   $handler->display->display_options['arguments']['field_section_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_section_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_section_tid']['summary_options']['items_per_page'] = '25';
@@ -641,7 +647,6 @@ function feature_for_breaking_news_views_default_views() {
   $handler->display->display_options['arguments']['field_section_tid']['validate_options']['vocabularies'] = array(
     'category_management' => 'category_management',
   );
-  $handler->display->display_options['arguments']['field_section_tid']['validate_options']['type'] = 'convert';
   $handler->display->display_options['arguments']['field_section_tid']['validate_options']['transform'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;

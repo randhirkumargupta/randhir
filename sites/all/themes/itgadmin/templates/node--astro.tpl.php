@@ -68,14 +68,14 @@
                                             <?php
                                             $termdata = "";
 
-                                            if ($content['field_story_category']['#object']->field_primary_category['und'][0]['value'] != "") {
-                                                $termdata = itg_videogallery_get_term_name($content['field_story_category']['#object']->field_primary_category['und'][0]['value']);
+                                            if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
+                                                $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
                                             }
                                             print render($content['field_story_category']);
                                             ?>
 
                                         </div>
-                                      <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
+                                        <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@
                                                 </div>
                                             </div>
 
-                                        <?php
+                                            <?php
                                         }
 
                                         if (!isset($node->op)) {

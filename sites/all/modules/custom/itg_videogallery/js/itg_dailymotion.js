@@ -90,7 +90,7 @@
                         type: 'post',
                         data: {'checkvalue': selected_check_boxes_values},
                         success: function(data) {
-                            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(data);
+                            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(data);
                             parent.jQuery.colorbox.close();
                         },
                         error: function(xhr, desc, err) {

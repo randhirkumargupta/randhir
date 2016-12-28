@@ -127,10 +127,11 @@
                 $('.container.header-logo').prependTo('.itg-logo-container');
                 $('.search-icon').click(function () {
                     $(this).parents('div').find('.globle-search').css('width', '255px');
-                });
-
-
+                });                
                 $(document).on('click', function () {
+                    $('.globle-search').css('width', '0px');
+                });
+                $(document).on('tap', function () {
                     $('.globle-search').css('width', '0px');
                 });
                 $('.search-icon, .globle-search').click(function (e) {
@@ -139,6 +140,10 @@
                 
                 $('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function(){                    
                     $('#newlist').hide();
+                });
+                
+                $('.head-live-tv .mobile-user').click(function(){
+                    $(this).next('ul.menu').toggle();
                 });
                 
             }
