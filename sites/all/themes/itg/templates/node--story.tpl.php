@@ -78,7 +78,7 @@ if (!empty($content)):
                                         $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
                                         print "<a href='mailto:support@indiatoday.in'>Mail To Author</a>";
                                         ?></li>
-                                    <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span>SHARES</li>
+                                    <li class="mhide"><span class="share-count"><?php if(!empty($tot_count)) { print $tot_count;} else { print 0; } ?></span>SHARES</li>
                                     <li><?php print date('F j, Y', $node->created); ?>   </li>
                                     <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
                                     <?php if(!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
