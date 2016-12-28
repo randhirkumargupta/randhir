@@ -512,7 +512,7 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
     );
     $form['field_featured_value_op']['#options'] = $new_options;
     drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery_expose_filter.js', 'file');
-    drupal_add_css(".form-item-field-featured-value {display:block !important}","inline");
+    drupal_add_css(".form-item-field-featured-value {display:none !important}","inline");
   }
 }
 

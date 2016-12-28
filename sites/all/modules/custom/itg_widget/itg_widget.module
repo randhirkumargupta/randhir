@@ -300,9 +300,9 @@ function itg_widget_block_info() {
     'info' => t('Live Score')
   );
   $blocks['cheaper_dearer'] = array(
-   'info' => t('Widget : Cheaper Dearer from custom table')
-  ); 
-  
+    'info' => t('Widget : Cheaper Dearer from custom table')
+  );
+
   return $blocks;
 }
 
@@ -874,7 +874,7 @@ function itg_widget_block_view($delta = '') {
 
       $block['content'] = theme("live_score_data", array("data" => $data));
       break;
-     case 'cheaper_dearer':
+    case 'cheaper_dearer':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_budget_predictor');
       $data = itg_budget_predictor_cheaper_dearer_data();
       $block['content'] = $data;
@@ -1174,22 +1174,42 @@ function itg_widget_handle_unpublished_node($nid) {
     // IF number of widget is increses then increse this list.  
     // Delete query for itg_widget_query.
     // Widgets are define above from which node is to be delete.
-      try {
-        db_delete('itg_widget_order')
-            ->condition('nid', $nid)
-            //->condition('widget', 'key_candidate' ,'!=')
-            ->execute();
-      } catch (Exception $ex) {
-        watchdog("widget_delete", "From itg_widget_order " + $ex->getMessage());
-      }
-      // Delete from nodequeue. As we have used nodequeue only for widgets. So we can remove from nodeid.
-      try {
-        db_delete('nodequeue_nodes')
-            ->condition('nid', $nid)
-            ->execute();
-      } catch (Exception $ex) {
-        watchdog("widget_delete", "From nodequeue_nodes " + $ex->getMessage());
-      }
+    try {
+      db_delete('itg_widget_order')
+          ->condition('nid', $nid)
+          //->condition('widget', 'key_candidate' ,'!=')
+          ->execute();
+    } catch (Exception $ex) {
+      watchdog("widget_delete", "From itg_widget_order " + $ex->getMessage());
+    }
+    // Delete from nodequeue. As we have used nodequeue only for widgets. So we can remove from nodeid.
+    try {
+      db_delete('nodequeue_nodes')
+          ->condition('nid', $nid)
+          ->execute();
+    } catch (Exception $ex) {
+      watchdog("widget_delete", "From nodequeue_nodes " + $ex->getMessage());
+    }
   }
-      
+}
+
+/**
+ * Function return max weight from draggable view.
+ * @param string $view_name
+ * @param string $view_display
+ * @param string $args
+ *   by default draggable views insert [].
+ * @return int
+ */
+function itg_widget_get_draggable_view_max_weight($view_name, $view_display, $args = "[]") {
+  if (!empty($view_name) && !empty($view_display)) {
+    $max_query = db_select('draggableviews_structure');
+    $max_query->addExpression('MAX(weight)');
+    $max_query->condition('view_name', $view_name);
+    $max_query->condition('view_display', $view_display);
+    $max_query->condition('args', '$args');
+    $max_result = $max_query->execute()->fetchField();
+    return $max_result;
+  }
+  return 0;
 }

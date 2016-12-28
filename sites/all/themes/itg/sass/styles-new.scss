@@ -927,7 +927,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
     margin: 0 auto;
     max-width: 750px;
     text-align: left;
+    .messages--error{
+      margin-top: 20px;
+    }
     .node-ugc-form{
+      .file-widget .form-submit[value="Remove"]{top: 13px;}
       .form-field-name-field-ugc-ctype{
         text-align: center;
         .form-select{
@@ -1057,7 +1061,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         div.image-widget-data{
           float: none;
           .form-type-textfield{
-            max-width: 200px;
+            max-width: 215px;
             border: none;
             border-radius: 0;
             margin: 0;
@@ -2814,7 +2818,7 @@ blockquote {
     margin-top: 32px;
   }
 }
-.data-holder{
+.recom-listing, .data-holder{
   a:hover{
     color: #193984;
   }
