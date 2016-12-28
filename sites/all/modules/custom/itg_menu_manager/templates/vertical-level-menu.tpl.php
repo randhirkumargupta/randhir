@@ -1,3 +1,4 @@
+<?php if(!empty($data)) :?>
 <div class="vertical-menu-parent"><ul class="vertical-menu">
   <?php
   global $base_url;
@@ -31,4 +32,4 @@
         <span><i class="fa fa-chevron-up" aria-hidden="true"></i></span>
     </a>    
 </div>
-
+<?php endif; ?>

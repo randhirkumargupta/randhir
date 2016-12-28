@@ -15,11 +15,11 @@ foreach ($data['itg_main_manu_header'] as $key => $val) {
 
 <div class="head-live-tv desktop-hide">
   <ul>
-    <li> 
+      <li> 
         <?php if ($user->uid == 0): ?>
         <a href="<?php print $base_url . '/user/login'; ?>" ><i class="fa fa-user"></i></a>
         <?php else: ?>        
-          <a href="javascript:void(0)" ><i class="fa fa-user"></i></a>        
+          <a href="javascript:void(0)" class="mobile-user"><i class="fa fa-user"></i></a>        
         <?php $block = module_invoke('system', 'block_view', 'user-menu'); ?>
         <?php print render($block['content']); ?> 
         <?php endif; ?>
