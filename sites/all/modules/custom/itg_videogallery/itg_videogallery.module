@@ -694,7 +694,7 @@ function itg_videogallery_menu() {
         'title' => 'Daily Motion Video Dashboard Video Delete',
         'description' => 'Daily Motion Video Dashboard Video Delete',
         'page callback' => 'delete_daily_motion_video_callback',
-        'access arguments' => array('daily motion video dashboard perm')
+       'access arguments' => array('access content'),
     );
     $items['get-file-details'] = array(
         'page callback' => 'itg_videogallery_get_file_details',
