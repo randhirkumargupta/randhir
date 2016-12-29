@@ -9,27 +9,27 @@
  */
 
 // Register the plugin within the editor.
-CKEDITOR.plugins.add('itgvideo', {
+CKEDITOR.plugins.add('itgimage', {
     // Register the icons.
-    icons: 'itgvideo',
+    icons: 'itgimage',
     // The plugin initialization logic goes inside this method.
     init: function(editor) {
 
         // Define an editor command that opens our dialog window.
-        editor.addCommand('itgvideo', new CKEDITOR.dialogCommand('itgvideoDialog'));
+        editor.addCommand('itgimage', new CKEDITOR.dialogCommand('itgimageDialog'));
 
         // Create a toolbar button that executes the above command.
-        editor.ui.addButton('itgvideo', {
+        editor.ui.addButton('itgimage', {
             // The text part of the button (if available) and the tooltip.
-            label: 'Insert video',
+            label: 'Insert image',
             // The command to execute on click.
-            command: 'itgvideo',
-            icon: this.path + 'icons/itgvideo.png',
+            command: 'itgimage',
+            icon: this.path + 'icons/itgimage.png',
             // The button placement in the toolbar (toolbar group name).
             toolbar: 'insert'
         });
 
         // Register our dialog file -- this.path is the plugin folder path.
-        CKEDITOR.dialog.add('itgvideoDialog', this.path + 'dialogs/itgvideo.js');
+        CKEDITOR.dialog.add('itgimageDialog', this.path + 'dialogs/itgimage.js');
     }
 });

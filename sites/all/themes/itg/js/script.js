@@ -246,6 +246,12 @@
                 $('.activate-message').show();
             }
             //jQuery('#main').find('img').parent().addClass('zoom-image');
+            
+            // jQuery code to set message error on my content page
+            var my_content_error = jQuery('.page-personalization-my-content').find('.messages--error');
+            if(my_content_error){
+              jQuery('.page-personalization-my-content #block-formblock-ugc').prepend(my_content_error);
+            }
         }
     };
 

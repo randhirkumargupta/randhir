@@ -187,7 +187,7 @@ function features_for_story_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 0,
     ),
   );
 

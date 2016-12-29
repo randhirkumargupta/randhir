@@ -6406,7 +6406,7 @@ div.node{
   }
   .attach-video, .browse-local{
     @extend .add-more;
-    margin-top: 20px;
+    margin: 20px auto 0 250px;
     cursor: pointer;
   }
 }
@@ -9335,4 +9335,64 @@ div.node{
 }
 #edit-field-story-template-buzz-und-0-field-buzz-headline{
 .cke_toolgroup  a[title="Insert Factoids"]{display: none;}
+}
+.view.view-manage-newsletter .view-filters .views-exposed-form .views-exposed-widget.views-widget-filter-date_filter{
+  width: 300px;
+  > label{display: none;}
+  .views-widget{
+    > div{
+      float: left;
+      max-width: 50%;
+      &:first-child{padding-right: 5px;}
+      &:last-child{padding-left: 5px;}
+      .description{display: none;}
+    }
+  }
+}
+.node-videogallery-form .browse-media-file.active .itg-form-section{height: auto;}
+.local_browse{
+  .form-managed-file{
+    .form-file{
+      width: 257px;
+      margin-right: 5px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: 5px;
+    }
+    .form-submit{
+      @extend .add-more;
+    }
+    span.file{
+      display: inline-block;
+      margin-right: 5px;
+      margin-top: 8px;
+      vertical-align: top
+      img{
+        display: inline-block;
+        vertical-align: baseline;
+      }
+      a{
+        color: #323232;
+        display: inline-block;
+        font-size: 13px;
+        pointer-events: none;
+        vertical-align: baseline;
+      }
+    }
+  }
+}
+
+.node-story-form .form-type-textfield.form-item-title{
+  float: left;
+  width: 580px;
+}
+.breaking_class{
+  display: inline-block;
+  margin-top: 15px;
+  vertical-align: top;
+  input[type="checkbox"]{
+    float: left;
+    margin: 2px 5px 0 0;
+  }
 }
