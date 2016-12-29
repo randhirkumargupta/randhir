@@ -345,7 +345,7 @@ function task_get_mail_content($node, $event, $to, $user_name) {
     $task_subject = t('New Comment has been added, please find below detail.');
   }
 
-  $node_url = $base_url . '/node/' . $node->nid;
+  $node_url = $base_url.'/'.drupal_lookup_path('alias',"node/".$node->nid);
   $finish_date = date("d/m/Y H:i:s", strtotime($node->field_task_finish_date_and_time[LANGUAGE_NONE][0]['value']));
 
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
@@ -572,6 +572,7 @@ function expiredtask_authormail_content($var) {
   $task_subject = t('A task has been expired that was created by you');
   $subject = t('Task Expired');
   $node_url = $base_url . '/' . drupal_get_path_alias('node/'. $var->nid);
+  
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
                 <head><title></title></head>
