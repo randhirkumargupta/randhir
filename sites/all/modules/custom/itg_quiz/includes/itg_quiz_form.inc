@@ -294,13 +294,15 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
           $form['quiz_submit_' . $num] = array(
               '#type' => 'submit',
               '#value' => $button_text,
+              '#prefix' => '<div class="quiz-submit-btn-wrapper">',
               '#name' => 'quizsubmit_' . $num,
               '#suffix' => '</div>',
               '#ajax' => array(
                   'callback' => 'quiz_form_ajax_handler',
                   'effect' => 'fade',
               ),
-              '#attributes' => array('class' => array('quiz-submit'))
+              '#attributes' => array('class' => array('quiz-submit')),
+              '#suffix' => '</div>'
           );
         }
       }
@@ -384,12 +386,14 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
         $form['quiz_submit_' . $num] = array(
             '#type' => 'submit',
             '#value' => 'Submit',
+            '#prefix' => '<div class="quiz-submit-btn-wrapper">',
             '#name' => 'quizsubmit_' . $num,
             '#ajax' => array(
                 'callback' => 'quiz_form_ajax_handler',
                 'effect' => 'fade',
             ),
-            '#attributes' => array('class' => array('quiz-submit'))
+            '#attributes' => array('class' => array('quiz-submit')),
+            '#suffix' => '</div>'
         );
       }
     }
