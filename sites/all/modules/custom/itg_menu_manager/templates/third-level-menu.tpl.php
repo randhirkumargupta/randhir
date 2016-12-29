@@ -36,17 +36,19 @@ if ($cat_id == variable_get('ipl_for_widget') && isset($cat_id)) {
 }
 
 if ($cat_id == "") {
-  $node = itg_videogallery_get_term(arg(1));
-  if(!empty($node)) {
-    if (in_array(variable_get('ipl_for_widget'), $node)) {
-      $cat_id = variable_get('ipl_for_widget');
+  if (function_exists('itg_videogallery_get_term')) {
+    $node = itg_videogallery_get_term(arg(1));
+    if (!empty($node)) {
+      if (in_array(variable_get('ipl_for_widget'), $node)) {
+        $cat_id = variable_get('ipl_for_widget');
+      }
     }
   }
 }
 
 $section_banner_data = taxonomy_term_load($cat_id);
 $uri = !empty($section_banner_data->field_cm_category_banner['und'][0]['uri']) ? $section_banner_data->field_cm_category_banner['und'][0]['uri'] : "";
-if(!empty($uri)) {
+if (!empty($uri)) {
   $src = file_create_url($uri);
 }
 $field_cm_category_color = isset($section_banner_data->field_cm_category_color['und'][0]['rgb']) ? $section_banner_data->field_cm_category_color['und'][0]['rgb'] : "#595959";
@@ -64,26 +66,26 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
           ?>
         </div>
         <div class="col-md-8 col-sm-8 col-xs-8">
-          <?php if(!empty($data)) : ?>
-        <div class="select-menu">Section</div>
-          <ul class="third-level-menu">
-            <?php foreach ($data as $key => $menu_data) : ?>
-              <?php
-              if(function_exists('itg_menu_manager_get_menu')) {
-                $menu_link_data = itg_menu_manager_get_menu($menu_data , arg());
-                $image_class = $menu_link_data['image_class'];
-                $link_text = $menu_link_data['link_text'];
-                $link_url = $menu_link_data['link_url'];
-                $target = $menu_link_data['target'];
-                $active = $menu_link_data['active'];
+          <?php if (!empty($data)) : ?>
+            <div class="select-menu">Section</div>
+            <ul class="third-level-menu">
+              <?php foreach ($data as $key => $menu_data) : ?>
+                <?php
+                if (function_exists('itg_menu_manager_get_menu')) {
+                  $menu_link_data = itg_menu_manager_get_menu($menu_data, arg());
+                  $image_class = $menu_link_data['image_class'];
+                  $link_text = $menu_link_data['link_text'];
+                  $link_url = $menu_link_data['link_url'];
+                  $target = $menu_link_data['target'];
+                  $active = $menu_link_data['active'];
+                  ?>
+                  <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class)))); ?></li>
+                  <?php
+                }
+              endforeach;
               ?>
-              <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class)))); ?></li>
-              <?php 
-              }
-              endforeach; 
-              ?>
-          </ul>
-        <?php endif; ?>
+            </ul>
+          <?php endif; ?>
         </div>
 
       </div>
