@@ -249,7 +249,7 @@ function itg_msi_views_pre_render(&$view) {
   if ($view->name == "magazine_top_story") {
     foreach ($view->result as $magazine_top_story) {
       if (function_exists(itg_msi_get_lock_story_status)) {
-        $lock_story = itg_msi_get_lock_story_status($magazine_top_story->nid);
+        $lock_story = itg_msi_get_lock_story_status($magazine_top_story->nid, 'lock_story');
       }
       if (!empty($lock_story)) {
         $magazine_top_story->field_field_story_extra_large_image[0]['rendered']['#path']['path'] = 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage';
@@ -993,12 +993,14 @@ function itg_msi_issue_suppliment_title($nid){
 /*
  * Implements itg_msi_get_lock_story_status
  * @param int $nid
+ * @param string $val
  */
-function itg_msi_get_lock_story_status($nid){
+function itg_msi_get_lock_story_status($nid, $val){
   $query = db_select('field_data_field_story_configurations', 'c');
   $query->fields('c', array('field_story_configurations_value'));
   $query->condition('c.entity_id', $nid, '=');
   $query->condition('c.bundle', 'story', '=');
+  $query->condition('c.field_story_configurations_value', $val, '=');
   $result = $query->execute()->fetchField();
   return $result;
 }

@@ -375,12 +375,14 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         $form['survey_submit_' . $num] = array(
             '#type' => 'submit',
             '#value' => 'Submit',
+            '#prefix' => '<div class="survey-submit-btn-wrapper">',
             '#name' => 'surveysubmit_' . $num,
             '#ajax' => array(
                 'callback' => 'survey_form_ajax_handler',
                 'effect' => 'fade',
             ),
-            '#attributes' => array('class' => array('survey-submit'))
+            '#attributes' => array('class' => array('survey-submit')),
+            '#suffix' => '</div>'
         );
       }
     }

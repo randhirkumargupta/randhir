@@ -11,6 +11,9 @@ if (!empty($content)):
     if (!empty($related_content)) {
         $class_related = ' buzz-related';
     }
+    if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+        $class_listicle = ' buzz-feedback listicle-feedback';
+    }
     // prepare url for sharing
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     $short_url = shorten_url($actual_link, 'goo.gl');
@@ -29,8 +32,12 @@ if (!empty($content)):
     $config_name = trim($last_record[0]->config_name);
     }
     
+    // get developing story status
+    if (function_exists(itg_msi_get_lock_story_status)) {
+    $get_develop_story_status = itg_msi_get_lock_story_status($node->nid, 'developing_story');
+    }
   ?>
-    <div class="story-section <?php print $class_buzz."".$class_related;?>">
+    <div class="story-section <?php print $class_buzz."".$class_related."".$class_listicle;?>">
         <div class='<?php print $classes ?>'>
             <?php //pr($node);  ?> 
             <div class="comment-mobile desktop-hide">
@@ -42,7 +49,11 @@ if (!empty($content)):
                 </ul>
 
             </div>
+            <?php if(!empty($get_develop_story_status)) {?>
+            <h1><?php print $node->title; ?> <i class="fa fa-circle" aria-hidden="true"></i> <i class="fa fa-circle" aria-hidden="true"></i></h1>
+            <?php } else { ?>
             <h1><?php print $node->title; ?></h1>
+            <?php } ?>
             <div class="story-left-section">
                 <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                     <div class="story-left">
@@ -194,29 +205,15 @@ if (!empty($content)):
                                      <?php } if ($config_name == 'other') { ?> 
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                      <?php } ?>
+                                     <li><a href="javascript:void(0)"><i class="fa fa-bookmark"></i></a>
+                                         <span></span>
+                                     </li>
                                  </ul>
                              </div>
                         </div>
                     </div>
-                   <?php if (!empty($related_content)) { ?>
-                    <div class="story-left related-story">
-                <?php
                    
-                    $related_story = '<h3>Related</h3>'; 
-                    $related_content = explode(',', $related_content);
-                    foreach ($related_content as $fn_result) {
-                      $related_content = explode('_', $fn_result);
-                      $final_related [] = $related_content[1];
-                    }
-                    $final_related = implode(' OR ', $final_related);
-                    $related_story.= views_embed_view('related_story', 'page', $final_related);
-                    print $related_story;
-                  
-                ?>
-                        </div>
-                  <!-- For buzzfeed section end --> 
-                              
-                   <?php } } ?>
+                   <?php }  ?>
                    
                 <div class="story-right <?php
                 if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
@@ -356,8 +353,20 @@ if (!empty($content)):
                               $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                             }
                               $expertDetails .= '</div>';
-                            $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
+                               
+                              if (!empty($node->field_story_expert_description['und'][0]['value']) && !empty($node->field_story_expert_name)) {
+                                    $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
+                                }
+                                else {
+                                    $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
+                                }
                           }
+
+                           if($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {
+                          print '<h3 class="listical_title">'.$node->field_story_template_guru[LANGUAGE_NONE][0]['value'].'</h3>';
+                               
+                           }
+
                           if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
                             $wrapper = entity_metadata_wrapper('node', $node);
                             $num = 1;
@@ -522,28 +531,8 @@ if (!empty($content)):
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
                             <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span> SHARES</li>
                             <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
-                            
-                             <?php if ($user->uid > 0){ ?>
-                                        <?php $follow_story = flag_create_link('follow', $node->nid); ?>                      
-                                        <li><?php print $follow_story; ?></li>
-                                          <?php
-                                          }
-                                          elseif ($user->uid == 0) {
-                                            if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
-                                              ?>
-                                        <li> <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="def-cur-pointer">follow the Story</a></li>
-                                             
-                                              <?php
-                                            }
-                                            else {
-                                              ?>
-                                        <li> <a href="javascript:void(0)" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="def-cur-pointer">follow the Story</a></li>
+                             <li class="mhide"><a href="#" class="def-cur-pointer">follow the Story</a></li>
 
-                                              <?php
-                                            }
-                                          }
-                                          ?>    
-                                  
                         </ul>
                     </div>
 
@@ -582,6 +571,27 @@ if (!empty($content)):
                             ?>
                         </ul>
                     </div>
+                    <!-- For buzzfeed section stary --> 
+                    
+                    <?php if (!empty($related_content)) { ?>
+                    <div class="related-story related-story-bottom">
+                <?php
+                   
+                    $related_story = '<h3><span>Related</span></h3>'; 
+                    $related_content = explode(',', $related_content);
+                    foreach ($related_content as $fn_result) {
+                      $related_content = explode('_', $fn_result);
+                      $final_related [] = $related_content[1];
+                    }
+                    $final_related = implode(' OR ', $final_related);
+                    $related_story.= views_embed_view('related_story', 'page', $final_related);
+                    print $related_story;
+                  
+                ?>
+                        </div>
+                  <!-- For buzzfeed section end --> 
+                <?php } ?>
+                    
                 </div>
 
                 <?php
