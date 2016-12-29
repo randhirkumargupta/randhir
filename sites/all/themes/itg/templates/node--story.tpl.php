@@ -511,28 +511,8 @@ if (!empty($content)):
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
                             <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span> SHARES</li>
                             <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
-                            
-                             <?php if ($user->uid > 0){ ?>
-                                        <?php $follow_story = flag_create_link('follow', $node->nid); ?>                      
-                                        <li><?php print $follow_story; ?></li>
-                                          <?php
-                                          }
-                                          elseif ($user->uid == 0) {
-                                            if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
-                                              ?>
-                                        <li> <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="def-cur-pointer">follow the Story</a></li>
-                                             
-                                              <?php
-                                            }
-                                            else {
-                                              ?>
-                                        <li> <a href="javascript:void(0)" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="def-cur-pointer">follow the Story</a></li>
+                             <li class="mhide"><a href="#" class="def-cur-pointer">follow the Story</a></li>
 
-                                              <?php
-                                            }
-                                          }
-                                          ?>    
-                                  
                         </ul>
                     </div>
 
