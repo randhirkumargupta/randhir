@@ -7,7 +7,7 @@
     Drupal.behaviors.itg_story = {
         attach: function(context, settings) {
             var uid = settings.itg_story.settings.uid;
-            
+            $(".form-item-field-story-configurations-und-breaking-news").hide('');
             $('#edit-path-pathauto').click(function() {
               if ($("#edit-path-pathauto").is(":checked")) {                
                 $("#edit-path-alias").attr('readonly', 'readonly');
