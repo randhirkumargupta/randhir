@@ -5058,6 +5058,15 @@ div.node #comments h2 {
 .node-newsletter-form #edit-field-newsl-time .form-type-select .form-select + div.description {
   left: 115px;
 }
+.node-newsletter-form .form-actions .form-submit[value="Publish"] {
+  background-color: #3295a7;
+  border: 1px solid #227d8d;
+}
+.node-newsletter-form .form-actions .form-submit[value="Publish"]:hover {
+  background-color: #227d8d;
+  border-color: #227d8d;
+  color: #fff;
+}
 
 #colorbox .view .view-filters .views-exposed-form .views-exposed-widget {
   width: 170px;
@@ -10235,4 +10244,8 @@ div.node #comments h2 {
 .breaking_class input[type="checkbox"] {
   float: left;
   margin: 2px 5px 0 0;
+}
+
+.node-category-form .form-actions {
+  display: block !important;
 }
