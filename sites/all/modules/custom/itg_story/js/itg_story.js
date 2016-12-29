@@ -7,7 +7,7 @@
     Drupal.behaviors.itg_story = {
         attach: function(context, settings) {
             var uid = settings.itg_story.settings.uid;
-            
+            $(".form-item-field-story-configurations-und-breaking-news").hide('');
             $('#edit-path-pathauto').click(function() {
               if ($("#edit-path-pathauto").is(":checked")) {                
                 $("#edit-path-alias").attr('readonly', 'readonly');
@@ -155,22 +155,6 @@
             $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
             $('#edit-field-facebook-gallery-associate-und-0-remove-button').hide();
 
-
-            // Display Byline details
-//            $('#edit-field-story-reporter-und-0-target-id').blur(function() {
-//                var base_url = settings.itg_story.settings.base_url;
-//                $.ajax({
-//                    url: base_url + "/reporter-details-ajax",
-//                    method: 'post',
-//                    data: {'reporter_id': $('#edit-field-story-reporter-und-0-target-id').val()},
-//                    success: function(data) {
-//                        $('#reporter-details').html(data);
-//                    }
-//                });
-//            });
-
-            
-
             // Code issue date exit or not.
             $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').blur(function() {
                 var base_url = settings.itg_story.settings.base_url;
@@ -185,19 +169,13 @@
                 });
             });
             
-             // Code issue date exit or not.
-//            $('#associate').onclick(function() {
-//                var associate_id = $(this).attr('data-associate');
-//                var base_url = settings.itg_story.settings.base_url;
-//                $.ajax({
-//                    url: base_url + "/associate-photo-video-content/"+associate_id,
-//                    method: 'post',
-//                    data: {},
-//                    success: function(data) {
-//                        
-//                    }
-//                });
-//            });
+            // handle issue checked on unchecked
+             jQuery("#edit-field-story-magazine-story-issue-und-magazine-issue-story").click(function(){
+                if(!jQuery(this).is(':checked')) {
+                  jQuery("#edit-field-story-source-type-und-0-value").val("");
+                }
+            });
+           
 
 
         }
@@ -206,3 +184,46 @@
 
 
 })(jQuery, Drupal, this, this.document);
+
+        jQuery(document).ready(function () {
+    // Code to create breaking news.
+        jQuery('#breaking_text').click(function () {
+        var title = jQuery('#edit-title').val();
+        if (jQuery(this).is(':checked')) {
+            
+            var associate_id = jQuery(this).attr('id');
+
+            if (associate_id == 'breaking_text') {
+                var msg = confirm("Are you sure you want to publish long headline as breaking band?");
+            }
+
+            if (msg == true && title.length != 0) {
+
+                var post_data = "&title=" + title;
+                jQuery.ajax({
+                    'url': Drupal.settings.baseUrl.baseUrl + '/breaking-news-ajax',
+                    'data': post_data,
+                    'cache': false,
+                    'type': 'POST',
+                    beforeSend: function () {
+                        jQuery('#widget-ajex-loader').show();
+                    },
+                    'success': function (result)
+                    {
+                        var obj = jQuery.parseJSON(result);
+
+                        jQuery('#widget-ajex-loader').hide();
+                        jQuery('#breaking_text').attr('checked', true);
+                        jQuery('#edit-field-story-source-id-und-0-value').val(obj.story_nid);
+                        jQuery('#edit-field-story-source-type-und-0-value').val('breaking');
+                    }
+                });
+
+                return true;
+            }
+
+            return false;
+        }
+
+    });
+});

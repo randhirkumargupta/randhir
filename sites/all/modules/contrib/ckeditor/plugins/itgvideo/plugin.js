@@ -21,7 +21,7 @@ CKEDITOR.plugins.add('itgvideo', {
         // Create a toolbar button that executes the above command.
         editor.ui.addButton('itgvideo', {
             // The text part of the button (if available) and the tooltip.
-            label: 'Insert Polls',
+            label: 'Insert video',
             // The command to execute on click.
             command: 'itgvideo',
             icon: this.path + 'icons/itgvideo.png',

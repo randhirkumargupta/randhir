@@ -199,6 +199,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
 
 
     $fids = array();
+
     foreach ($form_state['values']['field_video_upload']['und'] as $videofields) {
 
         if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
@@ -206,7 +207,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         }
     }
 
-
+//p($fids);
 
     $tag_value = implode(', ', $tag);
     $tags_value = trim($tag_value, ",");
@@ -674,6 +675,16 @@ function itg_videogallery_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
+    $items['dailymotion-image'] = array(
+        'page callback' => 'itg_videogallery_thumb_assign',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+    $items['dailymotion-bitrate'] = array(
+        'page callback' => 'itg_videogallery_video_bitrate',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
 
     $items['daily-motion-video-dashboard'] = array(
         'title' => 'Daily Motion Video Dashboard',
@@ -689,8 +700,9 @@ function itg_videogallery_menu() {
         'title' => 'Daily Motion Video Dashboard Video Delete',
         'description' => 'Daily Motion Video Dashboard Video Delete',
         'page callback' => 'delete_daily_motion_video_callback',
-        'access arguments' => array('daily motion video dashboard perm')
+        'access arguments' => array('access content'),
     );
+
     $items['get-file-details'] = array(
         'page callback' => 'itg_videogallery_get_file_details',
         'access arguments' => array('access content'),
@@ -723,6 +735,7 @@ function delete_daily_motion_video_callback() {
         $query->condition('video_id', $video_id);
         $query->condition('fid', $fid);
         if ($query->execute()) {
+            drupal_set_message('Video has been deleted successfully');
             drupal_goto('daily-motion-video-dashboard');
         }
     }
@@ -1116,35 +1129,61 @@ function itg_videogallery_duration_time() {
  * Implement cron function for add video thumb from dailymotion
  */
 function itg_videogallery_thumb_assign() {
-    $subquery = db_select('field_data_field_upload_video', 'upload_video');
-    $subquery->fields('upload_video', array('entity_id'));
-    $subquery->join('field_data_field_story_extra_large_image', 'large_image', 'large_image.entity_id = upload_video.entity_id');
-    //$subquery->condition('large_image.bundle', 'videogallery', '=')->execute()->fetchAll();
-    $subt = $subquery->execute()->fetchAll();
-    foreach ($subt as $sub) {
-        $subquery_data[] = $sub->entity_id;
-    }
-    $query = db_select('field_data_field_upload_video', 'up_video');
+
+    $query = db_select('field_data_field_videogallery_video_upload', 'up_video');
     $query->fields('up_video', array('entity_id'));
-    if (isset($subquery_data) && !empty($subquery_data)) {
-        $subcondition = $query->condition('up_video.entity_id', $subquery_data, 'NOT IN');
+    $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_videogallery_video_upload_fid');
+    $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
+    $query->fields('up_video', array('entity_id'));
+    $query->orderBy('entity_id','ASC');
+    $result = $query->execute()->fetchAll();
+    if (isset($result) && !empty($result)) {
+
+        $api = itg_videogallery_dailymotion_api();
+        foreach ($result as $val) {
+            $query = db_select('field_data_field_video_upload', 'fvd');
+            $query->fields('fvd', array('entity_id'));
+            $query->condition('field_video_upload_value', $val->entity_id);
+            $result_video = $query->execute()->fetchAll();
+            $thumb_url = $api->get(
+                    '/video/' . $val->video_id, array('fields' => array('thumbnail_url'))
+            );
+            $node = node_load($result_video[0]->entity_id);
+            if ($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == 0) {
+                $image_url = $thumb_url['thumbnail_url'];
+                $imagedata = file_get_contents($image_url);
+                $image_url = 'itg' . time() . end(explode('/', $image_url));
+                $file = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
+                field_attach_update('node', $node);
+            }
+        }
     }
-    $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_upload_video_fid');
-    $query->fields('drd', array('fid', 'video_id'));
+}
+
+/**
+ * Implement cron function for add video thumb from dailymotion
+ */
+function itg_videogallery_video_bitrate() {
+
+    $query = db_select('field_data_field_videogallery_video_upload', 'up_video');
+    $query->fields('up_video', array('entity_id'));
+    $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_videogallery_video_upload_fid');
+    $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
+    $query->fields('up_video', array('entity_id'));
     $result = $query->execute()->fetchAll();
     if (isset($result) && !empty($result)) {
         $api = itg_videogallery_dailymotion_api();
         foreach ($result as $val) {
+            $query = db_select('field_data_field_video_upload', 'fvd');
+            $query->fields('fvd', array('entity_id'));
+            $query->condition('field_video_upload_value', $val->entity_id);
+            $result_video = $query->execute()->fetchAll();
             $thumb_url = $api->get(
-                    '/video/' . $val->video_id, array('fields' => array('thumbnail_url'))
+                    '/video/' . $val->video_id, array('fields' => array('live_video_bitrate'))
             );
-            $image_url = $thumb_url['thumbnail_url'];
-            $imagedata = file_get_contents($image_url);
-            $file = file_save_data($imagedata, file_default_scheme() . '://' . end(explode('/', $image_url)));
-            file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
-            $node = node_load($val->entity_id);
-            $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
-            field_attach_update('node', $node);
+            pr($thumb_url);
         }
     }
 }
@@ -1358,9 +1397,8 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
                jQuery('#edit-field-story-category-tid').trigger('change');
                jQuery(this).find('a').addClass('active');
            });", array('type' => 'inline', 'scope' => 'footer'));
-        if(!empty($_GET['category']))
-        {
-        drupal_add_js("jQuery(document).ready(function(){
+        if (!empty($_GET['category'])) {
+            drupal_add_js("jQuery(document).ready(function(){
                jQuery('#edit-field-story-category-tid').val(" . $_GET['category'] . "); 
                jQuery('#edit-field-story-category-tid').trigger('change');
                jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
@@ -1879,30 +1917,31 @@ function itg_videogallery_ftp_file_insert_cron() {
 
                 // Perform playlist and tags when new video create.
 
+                if (!empty($response)) {
+                    $response_result['video_id'] = $response['id'];
+                    $response_result['fid'] = $response['fid'];
+                    try {
 
-                $response_result['video_id'] = $response['id'];
-                $response_result['fid'] = $response['fid'];
-                try {
-
-                    $nid = db_insert('dailymotion_response_details')
-                            ->fields(array(
-                                'title' => $response['title'],
-                                'channel' => $response['channel'],
-                                'fid' => $response['fid'],
-                                'tags' => ' ',
-                                'video_id' => $response['id'],
-                                'nid' => 0,
-                                'upload_time' => REQUEST_TIME,
-                                'video_duration' => $response['duration'],
-                                'dailymotion_published' => 0,
-                                'type' => 'ftp',
-                                'name' => $file_array[1],
-                            ))
-                            ->execute();
-                } catch (Exception $e) {
-                    die($e->getMessage());
+                        $nid = db_insert('dailymotion_response_details')
+                                ->fields(array(
+                                    'title' => $response['title'],
+                                    'channel' => $response['channel'],
+                                    'fid' => $response['fid'],
+                                    'tags' => ' ',
+                                    'video_id' => $response['id'],
+                                    'nid' => 0,
+                                    'upload_time' => REQUEST_TIME,
+                                    'video_duration' => $response['duration'],
+                                    'dailymotion_published' => 0,
+                                    'type' => 'ftp',
+                                    'name' => $file_array[1],
+                                ))
+                                ->execute();
+                    } catch (Exception $e) {
+                        die($e->getMessage());
+                    }
+                    // Code start for Adding  video in daily motion 
                 }
-                // Code start for Adding  video in daily motion 
             }
         }
     }
@@ -1973,7 +2012,6 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
             drupal_set_message($e->getMessage(), 'error');
         }
     }
-
 
     return $result;
 }

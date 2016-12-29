@@ -50,6 +50,12 @@ function itg_story_menu() {
         'type' => MENU_CALLBACK,
         'file' => 'includes/itg_story.inc',
     );
+    $items['breaking-news-ajax'] = array(
+    'page callback' => 'itg_story_create_breaking_news',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.helper.inc',
+    );
 
     return $items;
 }
@@ -136,6 +142,11 @@ function itg_story_ckeditor_plugin_alter(&$plugins) {
 function itg_story_form_alter(&$form, &$form_state, $form_id) {
     switch ($form_id) {
         case 'story_node_form':
+            $source_id = $form['#node']->field_story_source_id[LANGUAGE_NONE][0]['value'];
+            $source_type = trim($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']);
+            if(empty($source_id) && empty($source_type)) {
+            $form['title']['#suffix'] = '<div class="breaking_class"><input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span></div>';
+            }
             $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
             unset($form['actions']['preview_changes']);
             unset($form['field_story_templates'][LANGUAGE_NONE]['#options']['_none']);
@@ -196,7 +207,7 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
         $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
     }
     if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
-        $form['field_story_configurations_value']['#options'] = array('All' => '- All -', 'display_lock' => 'Locked Story');
+        $form['field_story_configurations_value']['#options'] = array('All' => '- All -', 'lock_story' => 'Locked Story');
     }
 
     if (in_array($form['#id'], $soruce_type_filter_display_views)) {

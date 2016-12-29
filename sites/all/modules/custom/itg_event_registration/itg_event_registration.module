@@ -50,6 +50,14 @@ function itg_event_registration_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_event_registration.inc',
   );
+  $items['event-registration/users-list/download/%'] = array(
+    'title' => 'Registered Users List Download',
+    'page callback' => 'itg_event_registration_users_list_download',
+    'access callback' => 'user_access',
+    'access arguments' => array('event registered users'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_event_registration.inc',
+  );
   return $items;
 }
 

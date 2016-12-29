@@ -78,11 +78,13 @@ function itg_workflow_after_build($form, &$form_state) {
     if (array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) 
             || array_key_exists(COPY_EDITOR, $user->roles) 
             || array_key_exists(EDITOR, $user->roles) 
-            || array_key_exists(UGC_MODERATOR, $user->roles)) {
+            || array_key_exists(UGC_MODERATOR, $user->roles)
+            || array_key_exists(SITE_ADMIN, $user->roles)) {
         if (!isset($form['#node']->workbench_moderation['current'])) {
             $state_class = ' published';
             $submit_name = 'Publish';
             $form['actions']['submit']['#value'] = t('Save as Draft');
+            
         }
         elseif (isset($form['#node']->workbench_moderation['current'])) {
             if ($form['#node']->workbench_moderation['current']->state == 'draft') {

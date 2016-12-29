@@ -42,13 +42,13 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     }
     
    // If survey has been expired. 
-   if(time() > $survey_expiry_date) {
-      $form['survey_expiry_status'] = array(
-        '#type' => 'markup',
-        '#markup' => '<div style="margin-top:10px"><h2>This survey has been expired!</h2></div>',
-     );
-      return $form;
-    }
+//   if(time() > $survey_expiry_date) {
+//      $form['survey_expiry_status'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div style="margin-top:10px"><h2>This survey has been expired!</h2></div>',
+//     );
+//      return $form;
+//    }
     
     $survey_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
     
@@ -66,7 +66,6 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     } else {
       $cookie_name = 'Drupal_visitor_itgcms_survey_' . $node->nid;
     }
-    
     
     // Check this survey has been attempted by current user OR not.
     if (isset($_COOKIE[$cookie_name])) {
@@ -190,7 +189,6 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
       $form['answer' . $num] = array(
           '#type' => 'markup',
           '#prefix' => '<div id="answer-container-'.$num.'" class="answer-container">',
-          //'#markup' => '<div class="answer-heading">Answer: ' . $required . '</div> ',
       ); 
 
       if ($answer_type == 'textfield') { // Answer options for textfield
@@ -209,7 +207,6 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
           
           $txt_num++;
         }
-//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } elseif ($answer_type == 'rating') { // Answer option for rating
         $rating_num = 0;
@@ -228,14 +225,12 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
           
           $rating_num++;
         }
-//        $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
         
       } else {  //Answer option for radios and checkboxes
         $form['answer_option' . $num] = array(
             '#title' => t(''),
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
-//            '#suffix' => '</div>',
         );
       }
       
@@ -263,19 +258,27 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         }
       }
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
+      
       // Render multiple submit buttons, if questions are displaying one-by-one
       if ($survey_question_format == 'One question at a time') {
-        $form['survey_submit_' . $num] = array(
-            '#type' => 'submit',
-            '#value' => $button_text,
-            '#name' => 'surveysubmit_' . $num,
-            '#ajax' => array(
-                'callback' => 'survey_form_ajax_handler',
-                'effect' => 'fade',
-            ),
-            '#attributes' => array('class' => array('survey-submit'))
-        );
-
+        if ($button_text == 'Submit' && time() > $survey_expiry_date) {
+          $form['survey_has_been_expired' . $num] = array(
+              '#type' => 'markup',
+              '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This Survey has been expired. So you can not submit!</strong></div>',
+          );
+        } else {
+          $form['survey_submit_' . $num] = array(
+              '#type' => 'submit',
+              '#value' => $button_text,
+              '#name' => 'surveysubmit_' . $num,
+              '#ajax' => array(
+                  'callback' => 'survey_form_ajax_handler',
+                  'effect' => 'fade',
+              ),
+              '#attributes' => array('class' => array('survey-submit'))
+          );
+        }
+    
         // Skip button for all qustions except last one
         if ($skip_question[$num] == 'yes') {
           if (($total_num_of_ques - 1) !== $num) {
@@ -363,16 +366,25 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
    
    // Render a single submit button, if all questions are showing at once
    if($survey_question_format == 'All questions at a time') {
-     $form['survey_submit_' . $num] = array(
-          '#type' => 'submit',
-          '#value' => 'Submit',
-          '#name' => 'surveysubmit_' . $num,
-          '#ajax' => array(
-              'callback' => 'survey_form_ajax_handler',
-              'effect' => 'fade',
-          ),
-          '#attributes' => array('class' => array('survey-submit'))
-      );
+     if (time() > $survey_expiry_date) {
+        $form['survey_has_been_expired' . $num] = array(
+            '#type' => 'markup',
+            '#markup' => '<div style="margin: 10px 0px 20px 0px;"><strong>This Survey has been expired. So you can not submit!</strong></div>',
+        );
+      } else {
+        $form['survey_submit_' . $num] = array(
+            '#type' => 'submit',
+            '#value' => 'Submit',
+            '#prefix' => '<div class="survey-submit-btn-wrapper">',
+            '#name' => 'surveysubmit_' . $num,
+            '#ajax' => array(
+                'callback' => 'survey_form_ajax_handler',
+                'effect' => 'fade',
+            ),
+            '#attributes' => array('class' => array('survey-submit')),
+            '#suffix' => '</div>'
+        );
+      }
     }
   }
   else {

@@ -184,10 +184,7 @@ function itg_loyalty_reward_form_alter(&$form, &$form_state, $form_id) {
 
   // Alter for "loyalty_and_rewards_node_form"
   if ($form_id == 'loyalty_and_rewards_node_form') {
-
-    drupal_set_title(t('Add New Item:'));
-    unset($form['#metatags']);
-    unset($form['actions']['preview']);
+    drupal_set_title(t('Add New Item:'));    
 
     // Add cancel button
     $form['actions']['cancel'] = array(

@@ -17,13 +17,11 @@ if (!empty($content)):
     $fb_title = addslashes($node->title);
     $share_desc = '';
     $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-    if (function_exists(itg_facebook_share_count)) {
-    $fb_count = itg_facebook_share_count($actual_link);
+    
+    // get total share count
+    if (function_exists(itg_total_share_count)) {
+    $tot_count = itg_total_share_count($actual_link);
     }
-    if (function_exists(itg_google_share_count)) {
-      $google_count = itg_google_share_count($actual_link);
-    }
-    $fb_google_count = $fb_count + $google_count;
     
     // get global comment config
     if (function_exists(global_comment_last_record)) {
@@ -80,7 +78,7 @@ if (!empty($content)):
                                         $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
                                         print "<a href='mailto:support@indiatoday.in'>Mail To Author</a>";
                                         ?></li>
-                                    <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span>SHARES</li>
+                                    <li class="mhide"><span class="share-count"><?php if(!empty($tot_count)) { print $tot_count;} else { print 0; } ?></span>SHARES</li>
                                     <li><?php print date('F j, Y', $node->created); ?>   </li>
                                     <li>UPDATED <?php print date('H:i', $node->changed); ?> IST</li>
                                     <?php if(!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
@@ -140,10 +138,10 @@ if (!empty($content)):
                             ?>
                         </div>
                         
-                    </div>  
-                <?php } } ?>
-               
-                
+                      
+                <?php } ?>
+                </div>
+                <?php } ?>
                  <!-- For buzzfeed section start -->
                          <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_listicle[LANGUAGE_NONE])) {?>                       
                 <div class="buzzfeed-byline">
@@ -358,7 +356,17 @@ if (!empty($content)):
                               $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                             }
                               $expertDetails .= '</div>';
-                            $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
+                               
+                              if (!empty($node->field_story_expert_description['und'][0]['value']) && !empty($node->field_story_expert_name)) {
+                                    $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
+                                }
+                                else {
+                                    $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
+                                }
+                          }
+                          if($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {
+                           print '<div class="listical_title">'.$node->field_story_template_guru[LANGUAGE_NONE][0]['value'].'</div>';
+                              
                           }
                           if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
                             $wrapper = entity_metadata_wrapper('node', $node);
@@ -524,28 +532,8 @@ if (!empty($content)):
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
                             <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span> SHARES</li>
                             <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
-                            
-                             <?php if ($user->uid > 0){ ?>
-                                        <?php $follow_story = flag_create_link('follow', $node->nid); ?>                      
-                                        <li><?php print $follow_story; ?></li>
-                                          <?php
-                                          }
-                                          elseif ($user->uid == 0) {
-                                            if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
-                                              ?>
-                                        <li> <a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, 'http://<?php print PARENT_SSO; ?>/saml_login/other/domain_info', 'indiatoday');" class="def-cur-pointer">follow the Story</a></li>
-                                             
-                                              <?php
-                                            }
-                                            else {
-                                              ?>
-                                        <li> <a href="javascript:void(0)" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')" class="def-cur-pointer">follow the Story</a></li>
+                             <li class="mhide"><a href="#" class="def-cur-pointer">follow the Story</a></li>
 
-                                              <?php
-                                            }
-                                          }
-                                          ?>    
-                                  
                         </ul>
                     </div>
 

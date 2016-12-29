@@ -5,13 +5,13 @@
 
 (function ($) {
     Drupal.behaviors.itg_sso_login = {
-        attach: function (context, settings) {
+        attach: function (context, settings) { 
             //alert(document.referrer);
-            var base_url = settings.itg_flag.settings.base_url;
-            var uid = settings.itg_sso_login.settings.uid;
-            var check_sso_link = settings.itg_sso_login.settings.check_sso_url;
-            var check_user_arg = settings.itg_sso_login.settings.user_arg;
-            var check_change_arg = settings.itg_sso_login.settings.change_arg;
+            var base_url = Drupal.settings.itg_sso_login.settings.base_url;
+            var uid = Drupal.settings.itg_sso_login.settings.uid;
+            var check_sso_link = Drupal.settings.itg_sso_login.settings.check_sso_url;
+            var check_user_arg = Drupal.settings.itg_sso_login.settings.user_arg;
+            var check_change_arg = Drupal.settings.itg_sso_login.settings.change_arg;
             //alert(check_user_arg);
             if (uid) {
                 //self.opener.location.reload(); 
@@ -36,7 +36,7 @@
             // code for logout 
             jQuery("a#myhref").attr('href', 'javascript:void(0)');
 
-            jQuery('#myhref').on('click', function () {
+            jQuery('body').on('click', '#myhref', function () {
                 //Call Ajax
                 jQuery.ajax({
                     url: base_url + '/itguserlogout',

@@ -4,6 +4,7 @@
  */
 global $base_url;
 $node = $form['node']['#value'];
+$from_story = $form['from_story']['#value'];
 $byline_node = node_load($node->field_story_reporter[LANGUAGE_NONE][0]['target_id']);
 
 $byline_name = $byline_node->title;
@@ -21,6 +22,8 @@ else {
 ?>
 <div class="survey-form-main-container" style="margin: 10px 0px 10px 0px;">
   <h1 class="survey-title"><?php echo 'Survey: '.$node->title; ?></h1>
+  
+  <?php if ($from_story != 'yes') { ?>
   <div class="survey-description"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
   <div class="byline">
     <div class="profile-pic">
@@ -61,7 +64,7 @@ else {
       
     </div>
   </div>
-  
+  <?php } ?>
   <!-- Render survey form -->
   <div class="<?php echo $form_class; ?>">
     <?php print drupal_render_children($form); ?>
