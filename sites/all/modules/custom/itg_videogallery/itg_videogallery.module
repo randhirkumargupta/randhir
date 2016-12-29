@@ -199,6 +199,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
 
 
     $fids = array();
+    
     foreach ($form_state['values']['field_video_upload']['und'] as $videofields) {
 
         if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
@@ -206,7 +207,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
         }
     }
 
-
+//p($fids);
 
     $tag_value = implode(', ', $tag);
     $tags_value = trim($tag_value, ",");
@@ -679,6 +680,11 @@ function itg_videogallery_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_CALLBACK,
     );
+    $items['dailymotion-bitrate'] = array(
+        'page callback' => 'itg_videogallery_video_bitrate',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
 
     $items['daily-motion-video-dashboard'] = array(
         'title' => 'Daily Motion Video Dashboard',
@@ -696,6 +702,7 @@ function itg_videogallery_menu() {
         'page callback' => 'delete_daily_motion_video_callback',
        'access arguments' => array('access content'),
     );
+    
     $items['get-file-details'] = array(
         'page callback' => 'itg_videogallery_get_file_details',
         'access arguments' => array('access content'),
@@ -728,6 +735,7 @@ function delete_daily_motion_video_callback() {
         $query->condition('video_id', $video_id);
         $query->condition('fid', $fid);
         if ($query->execute()) {
+            drupal_set_message('Video has been deleted successfully');
             drupal_goto('daily-motion-video-dashboard');
         }
     }
@@ -1150,6 +1158,34 @@ function itg_videogallery_thumb_assign() {
                 $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
                 field_attach_update('node', $node);
             }
+        }
+    }
+}
+
+
+/**
+ * Implement cron function for add video thumb from dailymotion
+ */
+function itg_videogallery_video_bitrate() {
+
+    $query = db_select('field_data_field_videogallery_video_upload', 'up_video');
+    $query->fields('up_video', array('entity_id'));
+    $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_videogallery_video_upload_fid');
+    $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
+    $query->fields('up_video', array('entity_id'));
+    $result = $query->execute()->fetchAll();
+    if (isset($result) && !empty($result)) {
+        $api = itg_videogallery_dailymotion_api();
+        foreach ($result as $val) {
+            $query = db_select('field_data_field_video_upload', 'fvd');
+            $query->fields('fvd', array('entity_id'));
+            $query->condition('field_video_upload_value', $val->entity_id);
+            $result_video = $query->execute()->fetchAll();
+            $thumb_url = $api->get(
+                    '/video/' . $val->video_id, array('fields' => array('live_video_bitrate'))
+            );
+            pr($thumb_url);
+           
         }
     }
 }
