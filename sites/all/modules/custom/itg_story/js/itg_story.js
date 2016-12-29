@@ -194,7 +194,7 @@
             var associate_id = jQuery(this).attr('id');
 
             if (associate_id == 'breaking_text') {
-                var msg = confirm("Are you sure you want to pubish long headline as breaking band?");
+                var msg = confirm("Are you sure you want to publish long headline as breaking band?");
             }
 
             if (msg == true && title.length != 0) {
