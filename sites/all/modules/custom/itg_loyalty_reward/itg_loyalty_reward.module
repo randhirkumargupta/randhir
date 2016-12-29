@@ -174,7 +174,6 @@ function itg_loyalty_reward_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_loyalty_reward_form_alter(&$form, &$form_state, $form_id) {
-
   // Alter for "loyalty_points_configuration_form"
   if ($form_id == 'loyality_reward_points_configuration_form') {
     drupal_set_title(t('Loyalty Points Configuration Form'));
@@ -346,6 +345,21 @@ function itg_loyalty_reward_node_update($node) {
           ->condition('nid', $node->nid, '=')
           ->execute();
   }
+}
+
+/**
+ * Implements hook_node_validate().
+ *
+ * {@inheritdoc}.
+ */
+function itg_loyalty_reward_node_validate($node, $form, &$form_state) {
+  if ($node->type == 'loyalty_and_rewards') {
+    $actual_price = $node->field_lrp_actual_price['und'][0]['value'];
+    $discount_price = $node->field_lrp_discounted_price['und'][0]['value'];
+    if ($discount_price > $actual_price) {
+      form_set_error('field_lrp_actual_price', t('Actual price must be greater than discounted price.'));
+    }
+  }  
 }
 
 /**
