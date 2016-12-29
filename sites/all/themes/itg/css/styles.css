@@ -2154,6 +2154,10 @@ footer .footer-copyright {
   font-weight: 700;
   line-height: 30px;
 }
+.story-section h1 i {
+  font-size: 13px;
+  color: #f40000;
+}
 .story-section .comment-mobile {
   background: #1c1c1c;
   margin: -15px -15px 20px;

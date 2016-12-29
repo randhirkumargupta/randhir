@@ -1737,7 +1737,11 @@ footer{
         @extend .list-none;
     }
     h1{
-        @include font(24px,30px,700);       
+        @include font(24px,30px,700);  
+        i{
+            font-size: 13px;
+            color: #f40000;
+        }
     }
     .comment-mobile{
         background: #1c1c1c;

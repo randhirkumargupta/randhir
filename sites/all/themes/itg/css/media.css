@@ -1484,7 +1484,10 @@
     border-left: 1px solid #dddddd;
   }
   .story-section .buzzfeed-byline .byline .profile-detail {
-    width: 60%;
+    width: 50%;
+  }
+  .story-section .buzzfeed-byline .social-share-story {
+    float: right;
   }
 
   .buzz-feedback .story-right {
