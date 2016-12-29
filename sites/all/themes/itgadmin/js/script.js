@@ -1,6 +1,24 @@
 /**
  * Implementation of Drupal behavior.
  */
+jQuery(document).ready(function() {
+  jQuery('.node-story-form #title-metatags, .node-story-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-story-form .vertical-tabs h2, .node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
+  jQuery('.node-story-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+  var category_mgr_meta_title = jQuery('.node-category-form .path-form').prev();
+  category_mgr_meta_title.css('margin-top', '20px').nextAll().hide();
+  category_mgr_meta_title.click(function(){
+  jQuery(this).toggleClass('active');
+    if(jQuery(this).hasClass('active')){
+      jQuery(this).nextAll().show();
+    }
+    else{
+      jQuery(this).nextAll().hide();
+    }
+  });
+});
+
 (function($) {
     Drupal.behaviors.rubik = {};
     Drupal.behaviors.rubik.attach = function(context, settings) {
@@ -640,28 +658,6 @@
             $(this).prev().toggleClass('active');
             $(this).prev('.widget-title-wrapper.active').find('input[type="text"]').focus();
         });
-        
-        jQuery('.node-story-form #title-metatags, .node-story-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
-        jQuery('.node-story-form .vertical-tabs h2, .node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
-        jQuery('.node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
-        jQuery('.node-story-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
-        
-      
-        var category_mgr_meta_title = jQuery('.node-category-form .path-form').prev();
-//        var category_mgr_path_form = jQuery('.node-category-form .path-form');
-//        var category_mgr_meta_form = jQuery('.node-category-form .metatags-form');
-//        $(category_mgr_path_form, category_mgr_meta_title, category_mgr_meta_form).wrapAll('<div class="category-manager-meta"></div>');
-        category_mgr_meta_title.css('margin-top', '20px').nextAll().hide();
-        category_mgr_meta_title.click(function(){
-          $(this).toggleClass('active');
-          if($(this).hasClass('active')){
-            $(this).nextAll().show();
-          }
-          else{
-            $(this).nextAll().hide();
-          }
-        });
-        
 
     };
 })(jQuery);
@@ -785,6 +781,7 @@ jQuery(document).ready(function() {
             return false;
         }
     });
+    
 });
 
 

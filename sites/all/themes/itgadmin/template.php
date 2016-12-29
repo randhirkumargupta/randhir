@@ -135,14 +135,20 @@
  */
 function itgadmin_preprocess_comment(&$vars) {
   // Remove comment title from display
+  
   $vars['title'] = '';
   $comment = $vars['elements']['#comment'];
   $node = $vars['elements']['#node'];
+  
   if ($node->type == 'story' || $node->type == 'blog') {
     $vars['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
     $vars['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
 
     $vars['submitted'] = t('Submitted by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
+  } else if ($node->type == 'task_idea_allocation_tracking') {
+      $vars['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
+      $vars['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
+      $vars['submitted'] = t('Commented by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
   }
 }
 
