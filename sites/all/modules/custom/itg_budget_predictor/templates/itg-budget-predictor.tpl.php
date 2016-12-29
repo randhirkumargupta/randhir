@@ -66,10 +66,10 @@ $user_id = $data['user_id'];
               </ul>
               <?php
                   if ($budget_message_flag) {
-                    print '<p class="success">'.$budget_social_message.'</p>';
+                     print '<p class="success">'.$budget_message.'</p>';
                   }
                   elseif ($budget_message_front_flag) {
-                    print '<p class="success">'.$budget_message.'</p>';
+                    print '<p class="success">'.$budget_social_message.'</p>';
                     ?>      
                     <div class="budget-predictor-block">
                         <div class="budget-predictor-social-share">
@@ -84,7 +84,12 @@ $user_id = $data['user_id'];
   <?php } ?>
 
               <?php if (empty($file_name) && empty($budget_message_flag)) { ?>
-                <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button>
+                <?php if(empty($user_id)) { ?>
+                  <button class="btn btn-save" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '/saml_login/other')"><?php print t('Submit'); ?></button>
+                <?php } else { ?>
+                  <button class="btn btn-save" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button> 
+                <?php } ?>
+                
                 <?php
               }
             }
