@@ -53,7 +53,16 @@ if (!empty($data)) :
       <div class="big-story-col-2">
         <?php if (!empty($data['node_data']->title)) : ?>
           <?php
+          $red_dot_class = "";
           $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
+          // get developing story status
+          if (function_exists(itg_msi_get_lock_story_status)) {
+              $get_develop_story_status = itg_msi_get_lock_story_status($data['node_data']->nid, 'developing_story');
+              if(!empty($get_develop_story_status)) {
+                $red_dot_class = 'story-red-two-dot';
+              }
+           }
+           
           // prepare configuration for sharing
           $share_title = $data['node_data']->title;
           $bigstory_title = preg_replace("/'/", "\\'", $data['node_data']->title);
