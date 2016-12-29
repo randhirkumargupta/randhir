@@ -16,15 +16,56 @@
                 </div>
             </div>
 
-            <?php if (!isset($node->op) && $node->op != 'Preview') {
+            <?php //if (!isset($node->op) && $node->op != 'Preview') {
                 ?>
                 <div class="Story-details">
                     <h2><?php print t('Audio Upload'); ?></h2>
                     <div class="content-details">
-                        <?php print render($content['field_podcast_audio_upload']); ?>
+                        <?php
+                         $items = field_get_items('node', $node, 'field_podcast_audio_upload');
+        foreach ($items as $imagecollection):
+            $imgfid = $imagecollection['field_podcast_audio_image_upload'][LANGUAGE_NONE][0]['fid'];
+            $audfid = $imagecollection['field_podcast_upload_audio_file'][LANGUAGE_NONE][0]['fid'];
+            if ($imgfid != 0) {
+                $output .= '<li>';
+                if (module_exists('itg_photogallery')) {
+                    if (!empty($imgfid)) {
+                        $imguri = _itg_photogallery_fid($imgfid);
+                        $style = 'photogallery_slide';
+                        $output .='<div class="field-audio-image">Image: </div><img width="300" height="300" src="' . image_style_url($style, $imguri) . '"/><div class="details-parent">';
+                    }
+                }
+
+             
+
+                if (module_exists('itg_photogallery')) {
+                    if (!empty($audfid)) {
+                        $audiouri = _itg_photogallery_fid($audfid);
+                        $output .= '<div class="field-audio-audio">Audio: </div><audio controls>
+                              <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
+                              Your browser does not support the audio element.
+                            </audio>';
+                    }
+                    elseif (isset($node->field_common_audio_file[LANGUAGE_NONE]) && !empty($node->field_common_audio_file[LANGUAGE_NONE][0]['uri'])) {
+                        if (isset($node->field_common_audio[LANGUAGE_NONE]) && $node->field_common_audio[LANGUAGE_NONE][0]['value'] == 1) {
+                            $audiouri = $node->field_common_audio_file[LANGUAGE_NONE][0]['uri'];
+                            $output .= '<div class="audio-div"><audio controls>
+                                  <source src="' . file_create_url($audiouri) . '" type="audio/mpeg">
+                                  Your browser does not support the audio element.
+                                </audio></div>';
+                        }
+                    }
+                }
+                $output .= '</div></li>';
+            }
+        endforeach;
+        //p($output)
+                        ?>
+                        <?php //print render($content['field_podcast_audio_upload']); ?>
+                         <?php print $output; ?>
                     </div>
                 </div> 
-            <?php } ?>
+            <?php// } ?>
 
             <?php
             $browsemedia = render($content['field_story_extra_large_image']);

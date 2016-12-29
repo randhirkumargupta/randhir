@@ -931,3 +931,23 @@ function itg_total_share_count($actual_link) {
 
   return $fb_google_count;
 }
+
+
+/**
+ * Check story state(draft, unpublished, published etc.)
+ * @param int $nid
+ * @return boolean
+ */
+function itg_common_get_story_status($nid) {
+  $query = db_select('workbench_moderation_node_history', 's');
+  $query->fields('s', array('state'))
+        ->condition('s.nid', $nid, '=')
+          ->condition('s.is_current', 1, '=');
+  $result = $query->execute();
+  $story_status = $result->fetchField();
+  if($story_status) {
+    return $story_status; 
+  } else {
+    return FALSE;
+  }
+}
