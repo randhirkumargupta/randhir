@@ -11,6 +11,9 @@ if (!empty($content)):
     if (!empty($related_content)) {
         $class_related = ' buzz-related';
     }
+    if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
+        $class_listicle = ' buzz-feedback listicle-feedback';
+    }
     // prepare url for sharing
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     $short_url = shorten_url($actual_link, 'goo.gl');
@@ -29,8 +32,12 @@ if (!empty($content)):
     $config_name = trim($last_record[0]->config_name);
     }
     
+    // get developing story status
+    if (function_exists(itg_msi_get_lock_story_status)) {
+    $get_develop_story_status = itg_msi_get_lock_story_status($node->nid, 'developing_story');
+    }
   ?>
-    <div class="story-section <?php print $class_buzz."".$class_related;?>">
+    <div class="story-section <?php print $class_buzz."".$class_related."".$class_listicle;?>">
         <div class='<?php print $classes ?>'>
             <?php //pr($node);  ?> 
             <div class="comment-mobile desktop-hide">
@@ -42,7 +49,11 @@ if (!empty($content)):
                 </ul>
 
             </div>
+            <?php if(!empty($get_develop_story_status)) {?>
+            <h1><?php print $node->title; ?> <i class="fa fa-circle" aria-hidden="true"></i> <i class="fa fa-circle" aria-hidden="true"></i></h1>
+            <?php } else { ?>
             <h1><?php print $node->title; ?></h1>
+            <?php } ?>
             <div class="story-left-section">
                 <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                     <div class="story-left">
@@ -552,10 +563,9 @@ if (!empty($content)):
                         </ul>
                     </div>
                     <!-- For buzzfeed section stary --> 
-                    <?php
-                        if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
+                    
                     <?php if (!empty($related_content)) { ?>
-                    <div class="related-story">
+                    <div class="related-story related-story-bottom">
                 <?php
                    
                     $related_story = '<h3><span>Related</span></h3>'; 
@@ -571,7 +581,7 @@ if (!empty($content)):
                 ?>
                         </div>
                   <!-- For buzzfeed section end --> 
-                <?php } } ?>
+                <?php } ?>
                     
                 </div>
 

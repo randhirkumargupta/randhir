@@ -476,7 +476,6 @@
   #block-itg-layout-manager-header-block .head-live-tv {
     text-align: right;
     padding: 0 10px;
-    margin-top: -10px;
     position: relative;
   }
   #block-itg-layout-manager-header-block .head-live-tv ul {
@@ -486,6 +485,7 @@
     display: inline-block;
     vertical-align: bottom;
     padding-left: 15px;
+    line-height: 25px;
   }
   #block-itg-layout-manager-header-block .head-live-tv ul li a i {
     font-size: 18px;
@@ -749,8 +749,6 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
-    right: 0;
     margin: auto;
     padding: 0 15px;
   }
@@ -1503,44 +1501,45 @@
     font-size: 1.5rem;
     line-height: 34px;
   }
-  .buzz-feedback.buzz-related .related-story {
-    margin-bottom: 50px;
-  }
-  .buzz-feedback.buzz-related .related-story h3 {
-    text-transform: uppercase;
-    font-weight: 700;
-    color: #bb0a0a;
-    display: none;
-    position: relative;
-  }
-  .buzz-feedback.buzz-related .related-story h3 span {
-    background: #fff;
-    z-index: 1;
-    position: relative;
-    /* padding-left: 10px; */
-    padding: 45px 20px 10px 10px;
-    display: inline-block;
-  }
-  .buzz-feedback.buzz-related .related-story h3:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    bottom: 20px;
-    height: 5px;
-    margin-top: -2px;
-    background: #ddd;
-  }
-  .buzz-feedback.buzz-related .related-story h3 {
+  .buzz-feedback .related-story.related-story-bottom {
     display: block;
   }
-  .buzz-feedback.buzz-related .related-story h3 span {
-    padding-top: 25px;
-    padding-left: 0;
+
+  .related-story.related-story-bottom {
+    display: none;
+  }
+  .related-story.related-story-bottom .view-content .views-row {
+    width: 25%;
+  }
+  .related-story.related-story-bottom .view-content .views-row:nth-child(2n+1) {
+    clear: none;
+  }
+  .related-story.related-story-bottom .view-content .views-row:nth-child(4n+1) {
+    clear: left;
+  }
+
+  .listicle-feedback .related-story.related-story-bottom {
+    display: block;
   }
 
   /*End Story page css*/
   /*Start css ITG globle search result page*/
+  .view-front-end-global-search .searh-all-filters {
+    white-space: inherit;
+    overflow-x: inherit;
+  }
+  .view-front-end-global-search .searh-all-filters .views-exposed-widget {
+    float: left;
+  }
+  .view-front-end-global-search .view-filters {
+    margin-bottom: 40px;
+  }
+  .view-front-end-global-search .view-content li.itg-search-list {
+    padding: 25px 0;
+  }
+  .view-front-end-global-search .view-content li.itg-search-list + li {
+    border-top: none;
+  }
   .view-front-end-global-search .view-content .search-pic {
     width: 170px;
     height: 127px;
