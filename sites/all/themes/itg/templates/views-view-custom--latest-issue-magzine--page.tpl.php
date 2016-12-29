@@ -55,8 +55,10 @@
     </div>
 <div class="row magazin-section">
   <?php
+  global $base_url;
 // category based story according issue date
   $data = itg_msi_issue_category_data($issue_attribute_date);
+  
   $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date);
   if (isset($supplement_value)) {
     $class = '';
@@ -76,7 +78,11 @@
       $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
       }
       if ($key == 0) {
-        $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '"/>';
+        if(!empty($value->uri)) {
+          $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '"/>';
+        }else{
+          $img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg' />";
+        }
         if(!empty($lock_story)) {
         $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
         $title = l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
@@ -113,14 +119,15 @@
     }
     print '<div ' . $class . '><div class="section-ordering">' . $output . '</div></div>';
   }
-  if (isset($supplement_value)) {
+  if (isset($supplement_value) && !empty($supplement_value)) {
     print '</div>';
   }
 
 
 // suppliment based story according issue date
 
-  if (isset($supplement_value)) {
+  if (isset($supplement_value) && !empty($supplement_value)) {
+    print '<div class="col-md-6 col-sm-6 col-xs-12 mt-50">';
     foreach ($supplement_value as $suppliment_key => $suppliment_value) {
       $sup_sub_title = '';
       foreach ($suppliment_value as $key => $s_value) {
@@ -129,7 +136,11 @@
         $lock_story = itg_msi_get_lock_story_status($s_value->nid, 'lock_story');
       }
       if ($key == 0) {
-        $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '"/>';
+         if(!empty($s_value->uri)) {
+          $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '"/>';
+        }else{
+          $supp_img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/dimage_370X208.jpg' />";
+        }
         if (!empty($lock_story)) {
           $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
           $supp_title = l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
@@ -160,8 +171,9 @@
       if (!empty($sup_sub_title)) {
         $supp_output .= $sup_sub_title;
       }
-      print '<div class="col-md-6 col-sm-6 col-xs-12 mt-50"><div class="section-ordering">' . $supp_output . '</div></div>';
+      print '<div class="section-ordering">' . $supp_output . '</div>';
     }
+    print '</div>';
   }
   ?>
 </div>
