@@ -292,11 +292,13 @@
                                     if (image_title != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
+                                         parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
 
                                     }
                                     if (image_alttext != "")
                                     {
                                         parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+                                         parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
 
                                     }
 
