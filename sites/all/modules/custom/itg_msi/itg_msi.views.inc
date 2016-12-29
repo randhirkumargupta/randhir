@@ -54,7 +54,7 @@ class itg_msi_views_handler_field_dynamic_clone_link extends views_handler_field
   function render($values) {
     // Get info about node is locked or active.
     if(function_exists(itg_msi_get_lock_story_status)) {
-      $lock_story = itg_msi_get_lock_story_status($values->nid);
+      $lock_story = itg_msi_get_lock_story_status($values->nid, 'lock_story');
     }
     // Prepare dynamic link on title field.
     if (!empty($lock_story)) {
