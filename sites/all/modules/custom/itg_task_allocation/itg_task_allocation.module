@@ -58,16 +58,19 @@ function itg_task_allocation_expirestatus_enddatemail() {
   $query = db_select('node', 'n');
   $query->leftjoin('field_data_field_task_finish_date_and_time', 'f', 'n.nid = f.entity_id');
   $query->leftjoin('field_data_field_task_comment_change_status', 's', 'n.nid = s.entity_id');
+  $query->leftjoin('field_data_field_task_team_member', 'ttm', 'n.nid = ttm.entity_id');
   $query->fields('n', array('nid'));
   $query->condition('n.status', 1);
   $query->fields('f', array('field_task_finish_date_and_time_value'));
   $query->fields('s', array('field_task_comment_change_status_value'));
   $query->join('users', 'u', 'u.uid = n.uid');
+  $query->join('users', 'ur', 'ur.uid = ttm.field_task_team_member_target_id');
   $query->fields('u', array('mail'));
+  $query->fields('ur', array('mail'));
   $query->condition('s.field_task_comment_change_status_value', 'open', '=');
   $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
   $result = $query->execute();
-  foreach ($result as $value) {
+  foreach ($result as $value) {    
     $node = node_load($value->nid);
     $node->field_task_comment_change_status['und'][0]['value'] = 'expired';
     field_attach_update('node', $node);
@@ -117,13 +120,14 @@ function itg_task_allocation_form_comment_node_task_idea_allocation_tracking_for
   if ($form['#node']->field_task_comment_change_status[LANGUAGE_NONE][0]['value'] == 'closed') {
     $form['#access'] = FALSE;
   }
+  //hide($form['author']);
   $form['author']['_author']['#markup'] = $form['author']['name']['#value'];
   $_GET['destination'] = 'assigned-task-list';
   drupal_add_js('jQuery(document).ready(function() {                  
                      jQuery(".comment-add").hide(); 
                      jQuery(".comment-reply").hide(); 
           });', array('type' => 'inline', 'scope' => 'footer'));
-  $form['#after_build'][] = 'itg_task_allocation_form_after_build';
+  //$form['#after_build'][] = 'itg_task_allocation_form_after_build';
   // Add cancel button to create/edit astro page
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), 'assigned-task-list', array('attributes' => array('class' => 'button'))),
@@ -226,6 +230,7 @@ function itg_task_allocation_form_custom_callback($form, &$form_state) {
  *  
  */
 function itg_task_allocation_comment_insert($comment) {
+  
   if ($comment->node_type == 'comment_node_task_idea_allocation_tracking') {
     $node = node_load($comment->nid);
     $uid_array = array($node->uid => $node->uid, $node->field_task_team_member[LANGUAGE_NONE][0]['target_id'] => $node->field_task_team_member[LANGUAGE_NONE][0]['target_id']);
@@ -586,8 +591,10 @@ function expiredtask_authormail_content($var) {
     'body' => $content,
     'subject' => $subject,
   );
-
-  $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $var->mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  
+  $to_user_mail = array($var->mail, $var->ur_mail);
+  
+  $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_user_mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
   }
@@ -608,11 +615,11 @@ function itg_task_allocation_cronapi($op, $job = NULL) {
     'weight' => 5,
     'callback' => 'itg_task_allocation_expirestatus_enddatemail',
   );
-  $items['task_ending_mail'] = array(
+  /*$items['task_ending_mail'] = array(
     'description' => 'Mail shoot after task ending date.',
     'weight' => 5,
     'callback' => 'itg_task_allocation_expiredmail_enddate',
-  );
+  );*/
   return $items;
 }
 
