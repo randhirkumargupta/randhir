@@ -361,10 +361,12 @@ if (!empty($content)):
                                     $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
                                 }
                           }
+
                            if($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {
                           print '<h3 class="listical_title">'.$node->field_story_template_guru[LANGUAGE_NONE][0]['value'].'</h3>';
                                
                            }
+
                           if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
                             $wrapper = entity_metadata_wrapper('node', $node);
                             $num = 1;

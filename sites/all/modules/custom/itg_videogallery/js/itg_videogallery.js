@@ -7,7 +7,7 @@
     Drupal.behaviors.itg_videogallery = {
         attach: function(context, settings) {
             var uid = settings.itg_videogallery.settings.uid;
-            
+
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);
             // Code for client Title field value set Null
@@ -55,7 +55,7 @@
                 $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
             });
             $('.plupload_container').removeAttr("title");
- 
+
             // FTP browse js
             $('document').ready(function() {
                 var old_vid = $("input[name='field_upload_video[und][0][fid]']").val();
@@ -135,7 +135,7 @@
 
             });
 
-           // This code is written for restricting past date access for expiry date in video gallery content type   
+            // This code is written for restricting past date access for expiry date in video gallery content type   
             try {
                 jQuery('#videogallery-node-form #edit-field-story-expiry-date-und-0-value-datepicker-popup-1').datepicker({
                     minDate: 0
@@ -144,16 +144,25 @@
 
             }
 
-          try {
-               jQuery("[name='field_video_upload_add_more']").css('visibility', 'hidden');
+            try {
+                jQuery("[name='field_video_upload_add_more']").css('visibility', 'hidden');
             } catch (e) {
 
             }
 
 
-            
+
 
         }
 
     };
 })(jQuery, Drupal, this, this.document);
+jQuery('document').ready(function() {
+    var first_fid = jQuery("input[name='field_video_upload[und][0][field_videogallery_video_upload][und][0][fid]").val();
+    if (first_fid != "" && first_fid != 0)
+    {
+        jQuery('#field-video-upload-values tbody tr:first').show();
+    }
+    jQuery('.file-icon').next('a').attr("href", 'javascript:void(0)').removeAttr('target');
+
+});
