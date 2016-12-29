@@ -356,7 +356,13 @@ if (!empty($content)):
                               $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                             }
                               $expertDetails .= '</div>';
-                            $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
+                               
+                              if (!empty($node->field_story_expert_description['und'][0]['value']) && !empty($node->field_story_expert_name)) {
+                                    $story_body = str_replace('[ITG:EXPERT-CHUNK]', $expertDetails, $story_body);
+                                }
+                                else {
+                                    $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
+                                }
                           }
                           if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
                             $wrapper = entity_metadata_wrapper('node', $node);
