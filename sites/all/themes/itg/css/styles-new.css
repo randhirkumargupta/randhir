@@ -39,6 +39,7 @@ input[type="text"]:focus, textarea:focus {
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper {
   width: 100%;
   padding: 0;
+  float: none;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-keyword-wrapper .form-text {
   font-size: 16px;
@@ -3041,6 +3042,22 @@ blockquote:after {
   }
 
   /* End of Quiz And Survey */
+  .total-point-wrapper {
+    display: block;
+    margin-top: 20px;
+  }
+  .total-point-wrapper .pregress-bar .pregress-bar-active {
+    max-width: 60%;
+  }
+  .total-point-wrapper .pregress-bar span.current-badge {
+    left: 15px;
+  }
+  .total-point-wrapper .pregress-bar span.next-badge {
+    right: 15px;
+  }
+  .total-point-wrapper .points-to-go {
+    padding-right: 15px;
+  }
 }
 [id*="protected-pages-enter-password"] fieldset {
   border: none;
@@ -3485,11 +3502,6 @@ blockquote:after {
 [id*="itg-personalization-refer-a-friend-form"] > div [id*="edit-submit"] {
   margin: 60px auto 0;
   display: block;
-}
-
-[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file img {
-  max-height: 80px;
-  margin-bottom: 10px;
 }
 
 #block-itg-personalization-personalization-edit-profile, #block-itg-personalization-personalization-refer-friend {
@@ -4578,24 +4590,35 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     margin-top: 8px;
     padding-left: 270px;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file {
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: top;
-    white-space: nowrap;
-    width: 240px;
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .upload-preview, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .upload-preview {
+    max-height: 80px;
+    margin-bottom: 20px;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file a, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file a {
-    font: 400 14px/18px Roboto;
-    color: #757575;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file + .form-submit, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file + .form-submit {
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .upload-preview + .form-submit, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .upload-preview + .form-submit {
     color: #ee4d4d;
     font: 400 13px/18px Roboto;
     border: none;
     background-color: #fff;
     cursor: pointer;
+    margin-left: 30px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    position: absolute;
+    left: 160px;
+    bottom: 0;
+    width: 130px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file img, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file img {
+    display: none;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file a, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file a {
+    font: 400 13px/18px Roboto;
+    color: #323232;
+    pointer-events: none;
   }
   [id*="itg-personalization-edit-profile-form"] > div div.image-widget-data, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data {
     float: none;
@@ -4955,8 +4978,22 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     display: none;
   }
 
+  #block-itg-personalization-personalization-edit-profile li a, #block-itg-personalization-personalization-refer-friend li a {
+    padding: 10px;
+  }
+
+  #block-itg-personalization-personalization-refer-friend .social-edit > ul > li {
+    padding: 0 5px;
+  }
+  #block-itg-personalization-personalization-refer-friend .social-edit > ul > li:first-child {
+    margin-top: 10px;
+  }
+  #block-itg-personalization-personalization-refer-friend .social-edit > ul > li img {
+    max-width: 35px;
+  }
+
   [id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"] {
-    border: 1px solid #d9d9d9;
+    background-color: #f8f8f8;
     text-align: left;
     padding: 15px;
   }
@@ -4972,10 +5009,65 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   [id*="itg-personalization-edit-profile-form"] .form-item-dob .form-type-textfield label, [id*="itg-personalization-refer-a-friend-form"] .form-item-dob .form-type-textfield label {
     display: none;
   }
-  [id*="itg-personalization-edit-profile-form"] .form-type-radios > label, [id*="itg-personalization-edit-profile-form"] .form-type-checkboxes > label, [id*="itg-personalization-edit-profile-form"] .form-type-managed-file > label, [id*="itg-personalization-edit-profile-form"] .form-item-dob > label, [id*="itg-personalization-edit-profile-form"] .form-type-textfield > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-radios > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-checkboxes > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-managed-file > label, [id*="itg-personalization-refer-a-friend-form"] .form-item-dob > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-textfield > label {
+  [id*="itg-personalization-edit-profile-form"] .form-type-radios > label, [id*="itg-personalization-edit-profile-form"] .form-type-checkboxes > label, [id*="itg-personalization-edit-profile-form"] .form-type-managed-file > label, [id*="itg-personalization-edit-profile-form"] .form-item-dob > label, [id*="itg-personalization-edit-profile-form"] .form-type-textfield > label, [id*="itg-personalization-edit-profile-form"] .form-type-select > label, [id*="itg-personalization-edit-profile-form"] .form-type-textarea > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-radios > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-checkboxes > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-managed-file > label, [id*="itg-personalization-refer-a-friend-form"] .form-item-dob > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-textfield > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-select > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-textarea > label {
     display: block;
     padding-bottom: 5px;
     font-weight: 600;
+  }
+  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file {
+    position: relative;
+  }
+  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .ajax-progress, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .ajax-progress {
+    display: none;
+  }
+  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .form-file, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .form-file {
+    max-width: 185px;
+    margin-right: 5px;
+  }
+  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .form-file + .form-submit, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .form-file + .form-submit {
+    padding: 5px 10px;
+    background-color: #ededed;
+    border: 1px solid #bababa;
+    border-radius: 3px;
+    color: #fff;
+  }
+  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file span.file, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file span.file {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipses;
+    font-size: 13px;
+  }
+  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file span.file img, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file span.file img {
+    display: none;
+  }
+  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .upload-preview, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .upload-preview {
+    margin-bottom: 20px;
+  }
+  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .upload-preview + .form-submit, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .upload-preview + .form-submit {
+    border: none;
+    color: #ee4d4d;
+    background-color: transparent;
+    margin-left: 30px;
+    font-size: 13px;
+  }
+  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .description, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .description {
+    font-size: 12px;
+    color: #828282;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div [id*="edit-submit"], [id*="itg-personalization-refer-a-friend-form"] > div [id*="edit-submit"] {
+    background: url(../images/btn-blue.png) no-repeat 0 0;
+    border: medium none;
+    color: #fff;
+    cursor: pointer;
+    font: 300 20px/28px Roboto;
+    height: 41px;
+    width: 170px;
+    margin: 30px auto 0;
+    display: block;
   }
 }
 @media all and (max-width: 480px) {
