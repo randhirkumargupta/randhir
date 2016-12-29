@@ -885,6 +885,7 @@ function features_for_story_field_default_field_bases() {
         'tv' => 'Associate Tv',
         'noindex_nofollow' => 'Noindex & No follow',
         'lock_story' => 'Lock Story',
+        'developing_story' => 'Developing Story',
       ),
       'allowed_values_function' => '',
     ),
