@@ -2958,6 +2958,10 @@ footer .footer-copyright {
   height: 127px;
 }
 
+.listicle-feedback .listical_title {
+  text-transform: uppercase;
+  font-weight: 700;
+}
 .listicle-feedback .related-story.related-story-bottom {
   display: block;
 }

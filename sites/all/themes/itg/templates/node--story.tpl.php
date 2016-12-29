@@ -205,6 +205,9 @@ if (!empty($content)):
                                      <?php } if ($config_name == 'other') { ?> 
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                      <?php } ?>
+                                     <li><a href="javascript:void(0)"><i class="fa fa-bookmark"></i></a>
+                                         <span></span>
+                                     </li>
                                  </ul>
                              </div>
                         </div>
@@ -358,6 +361,10 @@ if (!empty($content)):
                                     $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
                                 }
                           }
+                           if($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {
+                          print '<h3 class="listical_title">'.$node->field_story_template_guru[LANGUAGE_NONE][0]['value'].'</h3>';
+                               
+                           }
                           if (!empty($node->field_story_listicle[LANGUAGE_NONE])) {
                             $wrapper = entity_metadata_wrapper('node', $node);
                             $num = 1;
