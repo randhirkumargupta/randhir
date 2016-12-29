@@ -44,7 +44,7 @@
               </ul>
           </div>        
           <div class="live-tv-link">
-              <a href="#"><img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png'; ?>"</a>
+              <a href="#" class="live-tv-icon"><img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png'; ?>"></a>
               <a href="javascript:void(0)" class="breaking-new-close">X</a>            
           </div>
           

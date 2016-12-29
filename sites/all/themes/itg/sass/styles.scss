@@ -1451,10 +1451,20 @@ footer{
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/
 .view-front-end-global-search{
+    .searh-all-filters{
+        @include clearfix;
+        white-space: nowrap;
+        overflow-x: auto;
+        .views-exposed-widget{
+            float: none;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
     .view-filters{
         @include itg-font($itg-roboto);
         color: #b3b3b3;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
     .views-widget{
         @include pos(relative);
@@ -1535,7 +1545,10 @@ footer{
             @extend .list-none;
         }        
         li.itg-search-list{
-            padding: 25px 0;
+            padding: 15px 0;
+            + li{
+                border-top: 1px solid #ddd;
+            }
         }
         .search-pic{
             width: 144px;
@@ -1575,7 +1588,7 @@ footer{
             overflow: hidden;
             width: 100%;
         }
-    }
+    }   
     .item-list{
         @include pager;
     }
@@ -1724,7 +1737,11 @@ footer{
         @extend .list-none;
     }
     h1{
-        @include font(24px,30px,700);       
+        @include font(24px,30px,700);  
+        i{
+            font-size: 13px;
+            color: #f40000;
+        }
     }
     .comment-mobile{
         background: #1c1c1c;
@@ -2279,14 +2296,7 @@ footer{
                 }                
             }
         }
-    }
-    &.buzz-related{
-        .story-left-section{
-            .related-story{
-                margin-top: 0px;
-            }
-        }
-    }
+    }   
 }
 .buzz-feedback{    
     @include calculate-width(1);
@@ -2380,6 +2390,48 @@ footer{
     }
     .snap-post{ 
         margin-top: 0;
+    }      
+}
+.related-story.related-story-bottom{            
+    margin-bottom: 30px;
+    @include sidebar-heading;
+    h3{
+        display: block;
+        span{
+            padding-top: 25px;
+            padding-left: 0;
+        }    
+    }
+    .view-content{
+        @include clearfix;
+        margin:0 -15px;
+        .views-row{
+            @include calculate-width(2);
+            padding: 0 15px;
+            margin-bottom: 20px;
+            @include float(left);
+            .views-field-label{
+                span{
+                    margin-top: 10px;
+                    display: block;
+                }
+            }
+            &:nth-child(2n+1){
+                clear: left;
+            }
+        }
+    }
+    .related-default{
+        height: 127px;
+    }
+}
+.listicle-feedback{
+    .listical_title{
+        text-transform: uppercase;
+        font-weight: 700;   
+    }
+    .related-story.related-story-bottom{
+        display: block;
     }
 }
 
@@ -4373,7 +4425,7 @@ footer{
 }
 /*End start magazins*/
 /*CSS Start RHS add block*/
-#block-itg-ads-ad-right-sidebar-1{
+[id*="block-itg-ads-ad-right-sidebar"]{
     @include display-inline;
      padding: 30px 34px;
     border-bottom: 1px solid $border-color;   
@@ -4598,8 +4650,10 @@ footer{
                 color: #ac0000;
                 top: -39px;                
                 text-align: center;
-                font-size: 28px;
-                padding-top: 5px;
+                font-size: 28px;               
+            }
+            img{
+                 padding-top: 5px;
             }
             }
             ul.menu{
@@ -8761,6 +8815,9 @@ input[type="radio"]:checked + label:after{
         font-family: roboto;
         border-bottom: 1px solid #ddd;        
         @include sidebar-heading;        
+        ul{
+            list-style-type: none;
+        }
         h3{
             margin-bottom: 10px;
             display: block;
@@ -9255,11 +9312,12 @@ input[type="radio"]:checked + label:after{
         color:#fff;
         height: 33px;
         line-height: 33px;
-        padding: 0 10px;
-        width:10%;
-        font-size:20px;
+        padding: 0 10px;        
+        width: 10.3%;
+        font-size: 1.3vw;
         font-weight:600;
         @include float(left);
+        text-align: center;
     }
     .new-detail{
         @include clearfix;        
@@ -9268,11 +9326,14 @@ input[type="radio"]:checked + label:after{
         height: 33px;
         line-height: 33px;
         padding: 0 10px;
-        width:90%;
+        width:89.7%;
         @include float(left);
         font-size:20px;
         .field-content{
             @include display-inline;
+            a{
+                color:#000;
+            }
         }
         .social-share{
             @include display-inline;
@@ -9331,3 +9392,18 @@ input[type="radio"]:checked + label:after{
         }
     }
 }
+/*homepage marquee*/
+.marquee {  
+    overflow: hidden;    
+}
+.marquee a {
+    display: block;        
+    position: relative;
+    animation: marquee 5s linear infinite;
+}
+@keyframes marquee {
+    0% { left: 0; }
+    100% { left: -100%; }
+}
+
+/*homepage marquee end*/
