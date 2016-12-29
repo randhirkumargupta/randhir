@@ -1022,7 +1022,30 @@
         }
         
     }
-    
+/*story page comment section*/
+#content{
+    .story-section{
+        #other-comment{
+            #comments{
+                .comment-form{
+                    .form-item{
+                        margin: 0;
+                        margin-bottom: 20px;
+                    }
+                    div.description, .form-type-textarea > label + div, .form-actions{
+                        padding-left: 0;
+                    }         
+                }
+                .comment {
+                    ul.links{
+                        position: inherit;
+                    }
+                }
+            }  
+        }   
+    }
+}    
+/*story page comment section end*/
 }
 
 @media only screen and (max-width:680px){ 
