@@ -199,7 +199,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
 
 
     $fids = array();
-    
+
     foreach ($form_state['values']['field_video_upload']['und'] as $videofields) {
 
         if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
@@ -700,9 +700,9 @@ function itg_videogallery_menu() {
         'title' => 'Daily Motion Video Dashboard Video Delete',
         'description' => 'Daily Motion Video Dashboard Video Delete',
         'page callback' => 'delete_daily_motion_video_callback',
-       'access arguments' => array('access content'),
+        'access arguments' => array('access content'),
     );
-    
+
     $items['get-file-details'] = array(
         'page callback' => 'itg_videogallery_get_file_details',
         'access arguments' => array('access content'),
@@ -1135,7 +1135,7 @@ function itg_videogallery_thumb_assign() {
     $query->join('dailymotion_response_details', 'drd', 'drd.fid = up_video.field_videogallery_video_upload_fid');
     $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
     $query->fields('up_video', array('entity_id'));
-
+    $query->orderBy('entity_id','ASC');
     $result = $query->execute()->fetchAll();
     if (isset($result) && !empty($result)) {
 
@@ -1162,7 +1162,6 @@ function itg_videogallery_thumb_assign() {
     }
 }
 
-
 /**
  * Implement cron function for add video thumb from dailymotion
  */
@@ -1185,7 +1184,6 @@ function itg_videogallery_video_bitrate() {
                     '/video/' . $val->video_id, array('fields' => array('live_video_bitrate'))
             );
             pr($thumb_url);
-           
         }
     }
 }
@@ -1919,30 +1917,31 @@ function itg_videogallery_ftp_file_insert_cron() {
 
                 // Perform playlist and tags when new video create.
 
+                if (!empty($response)) {
+                    $response_result['video_id'] = $response['id'];
+                    $response_result['fid'] = $response['fid'];
+                    try {
 
-                $response_result['video_id'] = $response['id'];
-                $response_result['fid'] = $response['fid'];
-                try {
-
-                    $nid = db_insert('dailymotion_response_details')
-                            ->fields(array(
-                                'title' => $response['title'],
-                                'channel' => $response['channel'],
-                                'fid' => $response['fid'],
-                                'tags' => ' ',
-                                'video_id' => $response['id'],
-                                'nid' => 0,
-                                'upload_time' => REQUEST_TIME,
-                                'video_duration' => $response['duration'],
-                                'dailymotion_published' => 0,
-                                'type' => 'ftp',
-                                'name' => $file_array[1],
-                            ))
-                            ->execute();
-                } catch (Exception $e) {
-                    die($e->getMessage());
+                        $nid = db_insert('dailymotion_response_details')
+                                ->fields(array(
+                                    'title' => $response['title'],
+                                    'channel' => $response['channel'],
+                                    'fid' => $response['fid'],
+                                    'tags' => ' ',
+                                    'video_id' => $response['id'],
+                                    'nid' => 0,
+                                    'upload_time' => REQUEST_TIME,
+                                    'video_duration' => $response['duration'],
+                                    'dailymotion_published' => 0,
+                                    'type' => 'ftp',
+                                    'name' => $file_array[1],
+                                ))
+                                ->execute();
+                    } catch (Exception $e) {
+                        die($e->getMessage());
+                    }
+                    // Code start for Adding  video in daily motion 
                 }
-                // Code start for Adding  video in daily motion 
             }
         }
     }
@@ -2013,7 +2012,6 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
             drupal_set_message($e->getMessage(), 'error');
         }
     }
-
 
     return $result;
 }

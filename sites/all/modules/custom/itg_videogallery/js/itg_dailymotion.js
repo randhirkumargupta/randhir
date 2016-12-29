@@ -63,12 +63,9 @@
                     //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
                     parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                     parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
-
+                        parent.jQuery.colorbox.close();
                     });
-                    //parent.jQuery("#" + video_field_id + "-button").mousedown();
-//                    setTimeout(function() {
-//                        parent.jQuery.colorbox.close();
-//                    }, 9000);
+                   
                 }
             });
 
@@ -103,7 +100,7 @@
                 }
 
             });
-        
+
             // Browse Local
 //            $(".browse-local").click(function() {
 //                parent.jQuery("#" + video_field_id + "").trigger('click');
