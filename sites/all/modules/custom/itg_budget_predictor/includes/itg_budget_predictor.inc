@@ -19,7 +19,7 @@ function itg_budget_predictor_get_taxonomy() {
   $arg = arg();
   $section_id = isset($arg[1]) ? $arg[1] : '';
   $cookies_id = $_COOKIE['COOKIES_IT_' . $section_id];
-  if($user_id) {
+  if($user_id && $cookies_id) {
     update_user_by_cookies($user_id, $section_id, $cookies_id);
   }
 
