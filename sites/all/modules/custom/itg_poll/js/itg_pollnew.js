@@ -7,6 +7,7 @@
 
     Drupal.behaviors.itg_poll_form = {
         attach: function(context, settings) {
+            $('#edit-field-poll-itg-state').hide();
             jQuery('input[name="field_poll_start_date[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_poll_end_date[und][0][value][date]"]').keydown(false);
             var getOptionAnswerValnew = $("#edit-field-poll-answer-option-und option:selected").val();

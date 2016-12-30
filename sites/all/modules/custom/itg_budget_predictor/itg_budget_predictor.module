@@ -14,7 +14,7 @@ function itg_budget_predictor_menu() {
     'page callback' => 'itg_budget_predictor_update_budget',
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_budget_predictor.inc',
-    'access callback' => 'user_is_logged_in',
+    'access arguments' => array('access content'),
   );
   $items['budget-save/%'] = array(
     'page callback' => 'itg_budget_crop_image',
@@ -59,6 +59,9 @@ function itg_budget_predictor_menu() {
 
 /**
  * Custom callback for itg_budget_predictor
+ * @global string $base_url
+ * @global array $user
+ * @return type
  */
 function itg_budget_predictor_custom() {
   module_load_include('inc', 'itg_budget_predictor', 'includes/itg_budget_predictor');
@@ -71,7 +74,17 @@ function itg_budget_predictor_custom() {
   $data = itg_budget_predictor_get_taxonomy();
   $settings = array();
   $settings['stopPredictor'] = '1';
-  if ($budget_status['status'] == 1 && empty($data['file_names']) && !empty($user->uid)) {
+
+  if (empty($user_id)) {
+    $budget_predictor_cookies_id = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2) . time();
+    $settings['budget_predictor_cookies_id'] = $budget_predictor_cookies_id;
+  }
+
+  if ($budget_status['status'] == 1 && empty($data['file_names']) && (empty($user->uid) || empty($cookies_id))) {
+    $settings['stopPredictor'] = '2';
+  }
+
+  if ($budget_status['status'] == 1 && empty($data['file_names']) && (!empty($user->uid) || !empty($cookies_id))) {
     $settings['stopPredictor'] = '2';
   }
   else {
@@ -84,12 +97,14 @@ function itg_budget_predictor_custom() {
   if (count(array_intersect($user->roles, $allowed_roles)) > 0) {
     $data['admin_user'] = 1;
   }
+
   $data['user_id'] = $user_id;
   drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
   drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
   drupal_add_js(array('itg_budget_predictor' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/itg_budget_predictor.js', array('weight' => 4, 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/html2canvas.js', 'file');
+  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/jquery.cookie.js', 'file');
   return theme('itg_budget_predictor_cheaper', array('data' => $data));
 }
 
@@ -127,7 +142,6 @@ function itg_budget_predictor_views_pre_render(&$view) {
  * @param array reference $form_state
  * Hiding taxonomy term description field
  */
-
 function itg_budget_predictor_form_taxonomy_form_term_alter(&$form, &$form_state) {
   if (is_array($form['#term']) && count($form['#term']) > 0) {
     if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'cheaper_dearer') {
@@ -156,7 +170,8 @@ function itg_budget_predictor_form_taxonomy_form_term_alter(&$form, &$form_state
  */
 function itg_budget_predictor_form_views_exposed_form_alter(&$form, &$form_state) {
   if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-budget-predictor-image-page') {
-    $form['name']['#autocomplete_path'] = 'texonomy/39/autocomplete';
+    $vocuvolary = taxonomy_vocabulary_machine_name_load('cheaper_dearer');
+    $form['name']['#autocomplete_path'] = 'texonomy/' . $vocuvolary->vid . '/autocomplete';
     $form['name']['#attributes'] = array(
       'placeholder' => t('Name')
     );
