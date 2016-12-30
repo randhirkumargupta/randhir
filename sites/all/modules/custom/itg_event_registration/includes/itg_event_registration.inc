@@ -141,7 +141,7 @@ function itg_event_registration_users_list_download() {
     if ($node_event->type == 'event_backend') {
         $registered_user_nids = itg_common_select_field_value('entity_id', 'field_data_field_story_source_id', 'field_story_source_id_value', $node_event->nid);
         $file = 'users_list_csv';
-        $users_list_csv = "Name" . "," . "Email" . "," . "Mobile" . "," . "Company" . "," . "Designation" . "," . "City" . "," . "State" . "," . "Registration Date" . "|\n\r\0";
+        $users_list_csv = "Name" . "," . "Email" . "," . "Mobile" . "," . "Company" . "," . "Designation" . "," . "City" . "," . "State" . "," . "Registration Date" . "\n\r\0";
         $i = 0;
       foreach ($registered_user_nids as $main_user_nid) {
         $node = node_load($main_user_nid);
@@ -159,7 +159,7 @@ function itg_event_registration_users_list_download() {
             $data[$i][$j]['state'] = $entity[$field_collection_id]->field_erf_state[LANGUAGE_NONE][0]['value'] ? $entity[$field_collection_id]->field_erf_state[LANGUAGE_NONE][0]['value'] : '-';
             $data[$i][$j]['rdate'] = $node->created ? $node->created : '-';
             $data_date = format_date($data[$i][$j]['rdate'], $type = 'custom_date_d_m_y_', $format = '', $timezone = NULL, $langcode = NULL);
-            $users_list_csv .= $data[$i][$j]['name'] . "," . $data[$i][$j]['email'] . "," . $data[$i][$j]['mobile'] . ",". $data[$i][$j]['company'] . "," . $data[$i][$j]['designation'] . "," . $data[$i][$j]['city'] . "," . $data[$i][$j]['state'] . "," . $data_date . "|\n\r\0";
+            $users_list_csv .= $data[$i][$j]['name'] . "," . $data[$i][$j]['email'] . "," . $data[$i][$j]['mobile'] . ",". $data[$i][$j]['company'] . "," . $data[$i][$j]['designation'] . "," . $data[$i][$j]['city'] . "," . $data[$i][$j]['state'] . "," . $data_date . "\n\r\0";
             $j++;
           }
         }
