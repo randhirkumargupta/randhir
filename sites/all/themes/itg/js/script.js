@@ -672,7 +672,8 @@ jQuery(document).ready(function () {
         left: x + 'px'
       }).addClass("rippleEffect");
     });
-    // vertical menu on mobile
+    
+    // third-level-menu on mobile
     var tlmenu = jQuery('#block-itg-menu-manager-third-level-menu .select-menu');
     tlmenu.click(function(){
         jQuery(this).next('ul').stop().slideToggle();
@@ -683,6 +684,16 @@ jQuery(document).ready(function () {
     tlmenu.click(function (e) {
         e.stopPropagation();
     });
+    
+    //story page social share for mobile
+    var getclick;
+    jQuery('.comment-mobile .share-icon').toggle(function(){
+        getclick = jQuery(this).parents('.comment-mobile').find('.social-share');
+        getclick.css({'display' : 'inline-block'});
+    }, function(){
+        getclick.css({'display' : 'none'});
+    });    
+    
 });
     
 

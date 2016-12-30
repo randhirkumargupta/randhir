@@ -30,7 +30,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_pattern_listing') {
     if(!empty($form['field_syndication_feed_content_value']['#options']['photogallery'])) {
-      $form['field_syndication_feed_content_value']['#options']['photogallery'] = t('Photo Gallery');
+      $form['field_syndication_feed_content_value']['#options']['photogallery'] = t('Photogallery');
     }
   }
   
@@ -357,6 +357,14 @@ function syndication_selector_custom_form_validate($form, &$form_state) {
 
   if (empty($form_state['values']['itg_row_selector_client'])) {
     form_set_error('client_title', t('Please select Client.'));
+  }
+  
+  if($form_state['values']['feed_type'] == 'ussd' 
+      || $form_state['values']['feed_type'] == 'sms'
+      || $form_state['values']['feed_type'] == 'stf'
+      || $form_state['values']['feed_type'] == 'html'
+      ) {
+    form_set_error('feed_type', t('Feed type format does not exists to generate.'));
   }
 }
 

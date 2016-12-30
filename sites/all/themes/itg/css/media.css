@@ -751,6 +751,7 @@
     bottom: 0;
     margin: auto;
     padding: 0 15px;
+    left: 0;
   }
   #block-itg-menu-manager-third-level-menu .menu-wrapper {
     background: #595959;
@@ -939,7 +940,7 @@
   .story-section .social-share-story {
     display: none;
   }
-  .story-section.buzz-related .story-left-section .related-story {
+  .story-section.buzz-related .story-left-section .related-story-page {
     margin-top: 0px;
     display: none;
   }
@@ -994,6 +995,20 @@
     top: 10px;
     right: 10px;
   }
+
+  /*story page comment section*/
+  #content .story-section #other-comment #comments .comment-form .form-item {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  #content .story-section #other-comment #comments .comment-form div.description, #content .story-section #other-comment #comments .comment-form .form-type-textarea > label + div, #content .story-section #other-comment #comments .comment-form .form-actions {
+    padding-left: 0;
+  }
+  #content .story-section #other-comment #comments .comment ul.links {
+    position: inherit;
+  }
+
+  /*story page comment section end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1511,13 +1526,10 @@
   .related-story.related-story-bottom {
     display: none;
   }
-  .related-story.related-story-bottom .view-content .views-row {
-    width: 25%;
-  }
-  .related-story.related-story-bottom .view-content .views-row:nth-child(2n+1) {
+  .related-story.related-story-bottom li:nth-child(2n+1) {
     clear: none;
   }
-  .related-story.related-story-bottom .view-content .views-row:nth-child(4n+1) {
+  .related-story.related-story-bottom li:nth-child(4n+1) {
     clear: left;
   }
 
@@ -1898,6 +1910,9 @@
     border-bottom: none;
     margin-bottom: 0;
   }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul {
+    display: inherit;
+  }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li {
     float: none;
   }
@@ -1906,6 +1921,9 @@
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
     display: inline-block;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
+    margin-right: 5px;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
     border-top: 1px solid #000;

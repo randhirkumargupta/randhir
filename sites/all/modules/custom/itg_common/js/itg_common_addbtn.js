@@ -12,7 +12,7 @@
 
 (function($) {
 
-    var actionbtnshtml = jQuery('#edit-actions').html();
+    var actionbtnshtml = jQuery('#edit-actions, #edit-actions--2').html();
     if(actionbtnshtml!=null)
     {
     actionbtnshtml = actionbtnshtml.replace(/id=/g, "data-id=");
