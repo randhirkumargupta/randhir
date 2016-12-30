@@ -64,9 +64,7 @@
                         $output .= '';
 
                     endforeach;
-                    //p($output)
                     ?>
-                    <?php //print render($content['field_podcast_audio_upload']); ?>
                     <?php print $output; ?>
                 </div>
             </div> 
