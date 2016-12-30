@@ -1912,6 +1912,9 @@
     border-bottom: none;
     margin-bottom: 0;
   }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul {
+    display: inherit;
+  }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li {
     float: none;
   }
@@ -1920,6 +1923,9 @@
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
     display: inline-block;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
+    margin-right: 5px;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
     border-top: 1px solid #000;

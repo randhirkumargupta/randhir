@@ -3550,21 +3550,19 @@ footer{
             @include calculate-width(1);
             background: #1a1a1a;   
             padding: 10px 0;
-            border-bottom: 1px solid rgba(170, 169, 169, 0.31);
-            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(170, 169, 169, 0.31);            
             ul{
-                li{
-                    @include float(left);
+                display: inline-flex;
+                li{                    
                     a{
-                        display: block;
-                        padding:10px 13px 10px 13px;
+                        display: block;                        
                         color: #aaa9a9;
                         font-family:$itg-roboto;
                         font-size:12px;
+                        padding:10px;
                         i{
                             font-size: 18px;
-                            vertical-align: middle;
-                            margin-right: 5px;                            
+                            vertical-align: middle;                                                     
                         }
                         span{
                             display: none;
@@ -3576,7 +3574,7 @@ footer{
                     }
                     .flag-throbber{
                         display: none;
-                    }
+                    }                                        
                 }
             }
         }
@@ -3594,7 +3592,12 @@ footer{
     }   
     .video-header-right{
         position: relative; 
-        padding-bottom:15px;        
+        padding-bottom:15px;
+        p{
+            &:first-child{
+                margin-top: 15px;
+            }
+        }
         p.upload-date{
             font-size: 12px;
             color: $white-color;

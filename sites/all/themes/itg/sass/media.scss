@@ -1952,16 +1952,20 @@
                 border-bottom: none;
                 margin-bottom: 0;
                 ul{
+                    display: inherit;
                     li{
                         @include float(none);
                         a{
                             padding:  20px 5px 19px 10px;
                             span{
                                 display: inline-block;    
-                            } 
+                            }
+                            i{
+                               margin-right: 5px;  
+                            }
                         }
                         + li a{
-                            border-top:1px solid #000;
+                            border-top:1px solid #000;                            
                         }
                     }
                 }
