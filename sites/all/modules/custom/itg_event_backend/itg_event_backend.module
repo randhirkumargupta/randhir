@@ -113,6 +113,9 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
 
   // Form alter for sponsor node
   if ($form_id == 'sponsor_node_form') {
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery("#edit-path").hide();                           
+            });', array('type' => 'inline', 'scope' => 'footer'));
     $form['actions']['submit']['#submit'][] = 'itg_sponsor_alter_submit_status_message';
     $form['#after_build'][] = 'itg_event_backend_sponsor';
     $form['actions']['cancel'] = array(
