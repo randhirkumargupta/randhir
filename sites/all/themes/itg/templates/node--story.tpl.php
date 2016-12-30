@@ -45,10 +45,14 @@ if (!empty($content)):
                 <ul>
                     <li><a href="#"><i class="fa fa-envelope"></i> Mail to author</a></li>
                     <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
-                    <li><a href="#"><i class="fa fa-comment"></i></a></li>
-                    <li><a href="#"><i class="fa fa-share-alt"></i></a></li>              
+                    <li><a href="#"><i class="fa fa-comment"></i></a></li> 
+                    <li><a href="#" class="share-icon"><i class="fa fa-share-alt"></i></a>
                 </ul>
-
+                <ul class="social-share">                   
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>                            
+                </ul> 
             </div>
             <?php if(!empty($get_develop_story_status)) {?>
             <h1><?php print $node->title; ?> <i class="fa fa-circle" aria-hidden="true"></i> <i class="fa fa-circle" aria-hidden="true"></i></h1>
