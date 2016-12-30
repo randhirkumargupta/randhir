@@ -1281,6 +1281,12 @@ footer{
            width: 100%;
            height: 46vh;
         }
+        i{
+            position: absolute;
+            right: 30px;
+            bottom: 10px;
+            font-size: 26px;
+        }
     }
     h1{
         @include pos(relative);
@@ -1292,6 +1298,15 @@ footer{
             background: #f40000;
             border-radius: 100%;
             display: inline-block;    
+        }
+        a{
+            i{
+                color: #f40000;    
+                font-size: .4em;    
+                padding-bottom: 7px;
+                display: inline-block;
+                vertical-align: bottom;
+            }
         }
     }
     a{
@@ -3721,7 +3736,7 @@ footer{
     .view-content{      
         .photo-list{
             list-style: none;
-            margin:0 -10px;
+            margin:0 -15px;
             @include clearfix;
             li{
                 padding: 15px;
@@ -3921,11 +3936,16 @@ footer{
             font-size: 14px;
             font-weight: 400;
             color: #33363b;
+            &.desktop-hide{
+                width: 100%;
+                overflow: hidden;
+                padding-top: 8px;
+            }
         }
     }
     .heading{
         position: relative;
-        padding: 10px 0;
+        padding: 15px 0 0 0;
         h3{
             background: #fff none repeat scroll 0 0;
             color: #969696;
@@ -3942,7 +3962,7 @@ footer{
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
+            top: 15px;
             bottom: 0;
             margin: auto;
             width: 100%;
@@ -9149,9 +9169,9 @@ input[type="radio"]:checked + label:after{
             }
         }
     }
-    .live-tv-big-story{
+/*    .live-tv-big-story{
         margin-bottom: 50px;
-    }
+    }*/
 }
 /*css end big story format*/
 /*like dislike photo page start*/

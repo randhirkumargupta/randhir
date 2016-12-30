@@ -2,6 +2,7 @@
     <ul class="photo-list">
   <?php
   $url = "#";
+  $more_link = "";
   global $base_url;
   foreach ($rows as $key => $row) :
     $section_cat_id = trim($row['field_story_category']);
@@ -49,9 +50,10 @@
     </li>
     <?php
     if ($key == 3 && count($rows) > 3) {
-      print '<div class="col-md-12"><div class="more">' . $url . '</div></div>';
+      $more_link = '<div class="row"><div class="col-md-12"><div class="more">' . $url . '</div></div></div>';
     }
     ?>
   <?php endforeach; ?>
     </ul>
+   <?php print $more_link ?> 
 </div>

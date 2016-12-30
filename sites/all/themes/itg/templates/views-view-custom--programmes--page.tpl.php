@@ -21,14 +21,14 @@ global $base_url;
       <div class="program-row">
         <?php if (!empty($row['field_sponser_logo'])) : ?>
           <div class="pic">
-            <?php print l($row['field_sponser_logo'], 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+            <?php print l($row['field_sponser_logo'], 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>              
           </div>
         <?php else : ?>
           <div class="pic">
             <?php
             $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_video.jpg' />";
             ?>
-            <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+            <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>             
           </div>
         <?php endif; ?>
         <div class="program-right">
@@ -58,11 +58,18 @@ global $base_url;
 
 
           <?php if (isset($row['description'])) : ?>
-            <div class="description-timing">
-              <?php print $row['description']; ?>
+            <div class="description-timing mhide">
+             <p> <?php print $row['description']; ?></p>
             </div>
           <?php endif; ?>
         </div>
+          
+           <?php if (isset($row['description'])) : ?>
+            <div class="description-timing desktop-hide">
+                <p><?php print $row['description']; ?></p>
+            </div>
+          <?php endif; ?>
+          
       </div>
       <div class="heading">
         <?php
