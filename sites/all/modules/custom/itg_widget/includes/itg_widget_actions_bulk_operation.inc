@@ -123,6 +123,14 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_user');
     save_default_user_for_every_section($form_state);
   }
+  elseif ($current_display == 'issue_category_magazin_widget') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_magazine');
+    save_primary_category_acccording_issue_magazine($form_state);
+  }
+  elseif ($current_display == 'supplement_base_magazin_widget') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_magazine');
+    save_supplement_acccording_issue_magazine($form_state);
+  }
   else {
     // Logic to skip nodes which are already in itg_widget_order table
     $nodes_already = db_select('itg_widget_order', 'iwo')
