@@ -48,6 +48,12 @@ function itg_budget_predictor_schema() {
             'type' => 'int',
             'not null' => TRUE,
           ),
+          'cookies_id' => array(
+            'description' => t('user id'),
+            'type' => 'varchar',
+            'length' => '255',
+            'not null' => TRUE,
+          ),
           'section_id' => array(
             'description' => t('section id'),
             'type' => 'int',
