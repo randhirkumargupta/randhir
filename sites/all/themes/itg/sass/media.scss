@@ -961,7 +961,7 @@
         .social-share-story{
             display: none;
         }
-        &.buzz-related .story-left-section .related-story {
+        &.buzz-related .story-left-section .related-story-page {
             margin-top: 0px;
             display: none;
         }
@@ -1595,17 +1595,14 @@
 }
 .related-story.related-story-bottom{
     display: none;
-    .view-content{
-        .views-row{
-            @include calculate-width(4);  
-            &:nth-child(2n+1){
-                clear: none;
-            } 
-            &:nth-child(4n+1){
-                clear: left;
-            }                        
-        }
-    }   
+    li{
+        &:nth-child(2n+1){
+            clear: none;
+        } 
+        &:nth-child(4n+1){
+            clear: left;           
+        }   
+    }            
 }
 .listicle-feedback{
     .related-story.related-story-bottom{

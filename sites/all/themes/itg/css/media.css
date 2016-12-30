@@ -939,7 +939,7 @@
   .story-section .social-share-story {
     display: none;
   }
-  .story-section.buzz-related .story-left-section .related-story {
+  .story-section.buzz-related .story-left-section .related-story-page {
     margin-top: 0px;
     display: none;
   }
@@ -1525,13 +1525,10 @@
   .related-story.related-story-bottom {
     display: none;
   }
-  .related-story.related-story-bottom .view-content .views-row {
-    width: 25%;
-  }
-  .related-story.related-story-bottom .view-content .views-row:nth-child(2n+1) {
+  .related-story.related-story-bottom li:nth-child(2n+1) {
     clear: none;
   }
-  .related-story.related-story-bottom .view-content .views-row:nth-child(4n+1) {
+  .related-story.related-story-bottom li:nth-child(4n+1) {
     clear: left;
   }
 

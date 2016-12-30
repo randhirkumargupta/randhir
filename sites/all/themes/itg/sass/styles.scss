@@ -1746,7 +1746,7 @@ footer{
 .story-section{
     iframe{
         width: 100%;
-        height: 50vh;
+        height: 40vh;
     }
     ul{
         @extend .list-none;
@@ -1784,21 +1784,7 @@ footer{
         margin-top: 20px;
         .buzzfeed-byline{
             padding: 0 15px;            
-        }
-        .related-story{
-            margin-top: 50px;
-            h3{
-                font-size: 16px;
-                text-transform: uppercase;
-                font-weight: 700;
-                margin-bottom: 5px;
-            }
-            .views-field-label{
-                color: #575757;
-                margin-top: 10px;
-                margin-bottom: 25px;
-            }
-        }
+        }        
     }
     .story-left, .story-right{                
         padding: 0 15px;
@@ -2407,6 +2393,23 @@ footer{
         margin-top: 0;
     }      
 }
+.related-story-page{
+            margin-top: 50px;
+            h3{
+                font-size: 16px;
+                text-transform: uppercase;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+            li{
+                margin-bottom: 20px;
+                span.tile{
+                    margin-top: 10px;
+                    display: block;                    
+                    color: #575757;
+                }
+            }           
+        }
 .related-story.related-story-bottom{            
     margin-bottom: 30px;
     @include sidebar-heading;
@@ -2417,25 +2420,19 @@ footer{
             padding-left: 0;
         }    
     }
-    .view-content{
-        @include clearfix;
-        margin:0 -15px;
-        .views-row{
-            @include calculate-width(2);
-            padding: 0 15px;
-            margin-bottom: 20px;
-            @include float(left);
-            .views-field-label{
-                span{
-                    margin-top: 10px;
-                    display: block;
-                }
-            }
-            &:nth-child(2n+1){
-                clear: left;
-            }
+    li{
+        margin-bottom: 20px;
+        span.tile{
+            margin-top: 10px;
+            display: block;
         }
-    }
+        &:nth-child(2n+1){
+            clear: left;
+        }
+        &:nth-child(4n+1){
+            clear: none;
+        }
+    }    
     .related-default{
         height: 127px;
     }
