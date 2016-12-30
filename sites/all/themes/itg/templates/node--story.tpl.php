@@ -542,7 +542,7 @@ if (!empty($content)):
                                 <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
                               <?php } ?>
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
-                            <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span> SHARES</li>
+                            <li class="mhide"><span class="share-count"><?php if(!empty($tot_count)) { print $tot_count;} else { print 0; } ?></span> SHARES</li>
                             <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
                              <li class="mhide"><a href="#" class="def-cur-pointer">follow the Story</a></li>
 

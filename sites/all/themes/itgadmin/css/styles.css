@@ -4929,6 +4929,7 @@ div.node #comments h2 {
   right: 50px;
   top: 55px;
   width: 250px;
+  z-index: 1;
 }
 .block-itg-related .my-saved-search ul {
   overflow-y: auto;
@@ -8848,6 +8849,7 @@ div.node #comments h2 {
 .node-type-videogallery .action-with-title #page-title,
 .page-node-add-photogallery .action-with-title #page-title,
 .node-type-photogallery .action-with-title #page-title,
+.page-taxonomy-term-edit .action-with-title #page-title,
 .page-admin-structure-taxonomy-category-management .action-with-title #page-title {
   width: 500px;
 }
@@ -8857,6 +8859,7 @@ div.node #comments h2 {
 .node-type-videogallery .action-with-title.fixed,
 .page-node-add-photogallery .action-with-title.fixed,
 .node-type-photogallery .action-with-title.fixed,
+.page-taxonomy-term-edit .action-with-title.fixed,
 .page-admin-structure-taxonomy-category-management .action-with-title.fixed {
   padding: 10px 0;
 }
@@ -8876,6 +8879,9 @@ div.node #comments h2 {
 .node-type-photogallery .top-actions .button,
 .node-type-photogallery .top-actions [id*="itg-manage-budget"] .form-submit + a,
 [id*="itg-manage-budget"] .node-type-photogallery .top-actions .form-submit + a,
+.page-taxonomy-term-edit .top-actions .button,
+.page-taxonomy-term-edit .top-actions [id*="itg-manage-budget"] .form-submit + a,
+[id*="itg-manage-budget"] .page-taxonomy-term-edit .top-actions .form-submit + a,
 .page-admin-structure-taxonomy-category-management .top-actions .button,
 .page-admin-structure-taxonomy-category-management .top-actions [id*="itg-manage-budget"] .form-submit + a,
 [id*="itg-manage-budget"] .page-admin-structure-taxonomy-category-management .top-actions .form-submit + a {
@@ -8906,6 +8912,9 @@ div.node #comments h2 {
 .node-type-photogallery .top-actions .button:hover,
 .node-type-photogallery .top-actions [id*="itg-manage-budget"] .form-submit + a:hover,
 [id*="itg-manage-budget"] .node-type-photogallery .top-actions .form-submit + a:hover,
+.page-taxonomy-term-edit .top-actions .button:hover,
+.page-taxonomy-term-edit .top-actions [id*="itg-manage-budget"] .form-submit + a:hover,
+[id*="itg-manage-budget"] .page-taxonomy-term-edit .top-actions .form-submit + a:hover,
 .page-admin-structure-taxonomy-category-management .top-actions .button:hover,
 .page-admin-structure-taxonomy-category-management .top-actions [id*="itg-manage-budget"] .form-submit + a:hover,
 [id*="itg-manage-budget"] .page-admin-structure-taxonomy-category-management .top-actions .form-submit + a:hover {
@@ -8922,6 +8931,8 @@ div.node #comments h2 {
 .page-node-add-photogallery .top-actions a[data-id="story_submit_link"],
 .node-type-photogallery .top-actions .form-submit,
 .node-type-photogallery .top-actions a[data-id="story_submit_link"],
+.page-taxonomy-term-edit .top-actions .form-submit,
+.page-taxonomy-term-edit .top-actions a[data-id="story_submit_link"],
 .page-admin-structure-taxonomy-category-management .top-actions .form-submit,
 .page-admin-structure-taxonomy-category-management .top-actions a[data-id="story_submit_link"] {
   border-radius: 1px;
@@ -8946,6 +8957,8 @@ div.node #comments h2 {
 .page-node-add-photogallery .top-actions a[data-id="story_submit_link"]:hover,
 .node-type-photogallery .top-actions .form-submit:hover,
 .node-type-photogallery .top-actions a[data-id="story_submit_link"]:hover,
+.page-taxonomy-term-edit .top-actions .form-submit:hover,
+.page-taxonomy-term-edit .top-actions a[data-id="story_submit_link"]:hover,
 .page-admin-structure-taxonomy-category-management .top-actions .form-submit:hover,
 .page-admin-structure-taxonomy-category-management .top-actions a[data-id="story_submit_link"]:hover {
   box-shadow: 0 0 2px #3a8a82;
@@ -10248,4 +10261,41 @@ div.node #comments h2 {
 
 .node-category-form .form-actions {
   display: block !important;
+}
+
+.survey-submit-btn-wrapper {
+  position: relative;
+}
+.survey-submit-btn-wrapper .ajax-progress {
+  position: absolute;
+  left: 130px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+.survey-submit-btn-wrapper .ajax-progress .message {
+  display: none;
+}
+
+.survey-form-wrapper-one .ajax-progress {
+  margin: 10px 0 0 -10px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+.survey-form-wrapper-one .ajax-progress .message {
+  display: none;
+}
+
+.node-category-form #edit-relations[disabled] {
+  height: auto;
+}
+.node-category-form #edit-relations[disabled] legend:after {
+  content: '\f056';
 }

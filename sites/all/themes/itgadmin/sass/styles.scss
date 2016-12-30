@@ -4405,6 +4405,7 @@ div.node{
     right: 50px;
     top: 55px;
     width: 250px;
+    z-index: 1;
     ul{
       overflow-y: auto;
       max-height: 270px;
@@ -8070,6 +8071,7 @@ div.node{
 .node-type-videogallery,
 .page-node-add-photogallery,
 .node-type-photogallery,
+.page-taxonomy-term-edit,
 .page-admin-structure-taxonomy-category-management{
   .action-with-title #page-title{
     width: 500px;
@@ -9406,3 +9408,35 @@ div.node{
   }
 }
 .node-category-form .form-actions{display: block !important;}
+.survey-submit-btn-wrapper{
+  position: relative;
+  .ajax-progress{
+    position: absolute;
+    left: 130px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: top;
+    .message{display: none;}
+  }
+}
+.survey-form-wrapper-one{
+  .ajax-progress{
+    margin: 10px 0 0 -10px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: top;
+    .message{display: none;}
+  }
+}
+.node-category-form #edit-relations[disabled]{
+  height: auto;
+  legend:after{
+    content: '\f056';
+  }
+}
