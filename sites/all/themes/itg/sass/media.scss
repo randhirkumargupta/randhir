@@ -961,7 +961,7 @@
         .social-share-story{
             display: none;
         }
-        &.buzz-related .story-left-section .related-story {
+        &.buzz-related .story-left-section .related-story-page {
             margin-top: 0px;
             display: none;
         }
@@ -1022,7 +1022,30 @@
         }
         
     }
-    
+/*story page comment section*/
+#content{
+    .story-section{
+        #other-comment{
+            #comments{
+                .comment-form{
+                    .form-item{
+                        margin: 0;
+                        margin-bottom: 20px;
+                    }
+                    div.description, .form-type-textarea > label + div, .form-actions{
+                        padding-left: 0;
+                    }         
+                }
+                .comment {
+                    ul.links{
+                        position: inherit;
+                    }
+                }
+            }  
+        }   
+    }
+}    
+/*story page comment section end*/
 }
 
 @media only screen and (max-width:680px){ 
@@ -1572,17 +1595,14 @@
 }
 .related-story.related-story-bottom{
     display: none;
-    .view-content{
-        .views-row{
-            @include calculate-width(4);  
-            &:nth-child(2n+1){
-                clear: none;
-            } 
-            &:nth-child(4n+1){
-                clear: left;
-            }                        
-        }
-    }   
+    li{
+        &:nth-child(2n+1){
+            clear: none;
+        } 
+        &:nth-child(4n+1){
+            clear: left;           
+        }   
+    }            
 }
 .listicle-feedback{
     .related-story.related-story-bottom{
@@ -1929,16 +1949,20 @@
                 border-bottom: none;
                 margin-bottom: 0;
                 ul{
+                    display: inherit;
                     li{
                         @include float(none);
                         a{
                             padding:  20px 5px 19px 10px;
                             span{
                                 display: inline-block;    
-                            } 
+                            }
+                            i{
+                               margin-right: 5px;  
+                            }
                         }
                         + li a{
-                            border-top:1px solid #000;
+                            border-top:1px solid #000;                            
                         }
                     }
                 }
