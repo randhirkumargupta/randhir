@@ -72,13 +72,13 @@ foreach ($data as $key => $value) {
       $max = max(array(count($session_result['photo']), count($session_result['video']), count($session_result['audio'])));
       for($i = 0; $i < $max; $i++) {
         if (!empty($session_result['photo'][$i])) {
-          $output_media .= l('<i class="fa fa-camera"></i> ' . t('Session Photo'), $baseurl.drupal_get_path_alias('node/'. $session_result['photo'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+          $output_media .= l('<i class="fa fa-camera"></i> ' . t('Session Photo'), $base_url.drupal_get_path_alias('node/'. $session_result['photo'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
         if (!empty($session_result['video'][$i])) {
-          $output_media .= l('<i class="fa fa-video-camera"></i> ' . t('Session Video'), $baseurl.drupal_get_path_alias('node/'. $session_result['video'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+          $output_media .= l('<i class="fa fa-video-camera"></i> ' . t('Session Video'), $base_url.drupal_get_path_alias('node/'. $session_result['video'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
         if (!empty($session_result['audio'][$i])) {
-          $output_media .= l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), $baseurl.drupal_get_path_alias('node/'. $session_result['audio'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+          $output_media .= l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), $base_url.drupal_get_path_alias('node/'. $session_result['audio'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
         $output_media .= '<br>';
       }
