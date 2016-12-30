@@ -97,11 +97,11 @@ function alter_submit_status_message(&$form, $form_state) {
 function itg_poll_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3));
   global $user, $base_url;
-  unset($form['metatags']['intro_text']['#markup']);
-  $form['title']['#title'] = 'Poll Question';
-  $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+//  unset($form['metatags']['intro_text']['#markup']);
+//  $form['title']['#title'] = 'Poll Question';
+//  $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
+//  unset($form['metatags']['intro_text']['#markup']);
+//  unset($form['metatags']['#description']);
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -1101,7 +1101,7 @@ function associate_content_poll() {
  */
 function itg_poll_node_insert($node) {  
   if ($node->type == 'story') {
-    poll_count_of_content($node->body['und'][0]['value'], $node);
+    poll_count_of_content($node->body['und'][0]['value'], $node, 'insert');
   }  
 }
 
@@ -1111,7 +1111,7 @@ function itg_poll_node_insert($node) {
  */
 function itg_poll_node_update($node) {  
   if ($node->type == 'story') {
-    poll_count_of_content($node->body['und'][0]['value'], $node);
+    poll_count_of_content($node->body['und'][0]['value'], $node, 'update');
   }
 }
 
@@ -1122,18 +1122,18 @@ function itg_poll_node_update($node) {
  * @return //2464
  */
 
-function poll_count_of_content($desc, $node) {
+function poll_count_of_content($desc, $node, $action) {
+  if ($action == 'update') {
+    //row delete
+    db_delete('itg_poll_count_content')->condition('content_id', $node->nid)->execute();
+  }
+        
   if (strpos($desc,'[ITG:POLL:')) {
-    if ( preg_match_all ('/ITG:POLL:([0-9]+)/', $desc, $matches_poll)) {
+    if (preg_match_all ('/ITG:POLL:([0-9]+)/', $desc, $matches_poll)) {
 
       $poll_nid = $matches_poll[1];
       
-      if (isset($poll_nid)) {
-        //row delete
-        db_delete('itg_poll_count_content')
-                ->condition('content_id', $node->nid)                 
-                ->execute();
-        
+      if (isset($poll_nid)) {       
         //row insert
         foreach ($poll_nid as  $key => $val) {
           $query = db_insert('itg_poll_count_content');

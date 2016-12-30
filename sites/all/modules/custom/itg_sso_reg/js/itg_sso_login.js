@@ -36,7 +36,7 @@
             // code for logout 
             jQuery("a#myhref").attr('href', 'javascript:void(0)');
 
-            jQuery('#myhref').on('click', function () {
+            jQuery('body').on('click', '#myhref', function () {
                 //Call Ajax
                 jQuery.ajax({
                     url: base_url + '/itguserlogout',

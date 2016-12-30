@@ -7,6 +7,23 @@
     Drupal.behaviors.itg_story = {
         attach: function(context, settings) {
             var uid = settings.itg_story.settings.uid;
+            $(".form-item-field-story-configurations-und-breaking-news").hide('');
+            // enable check box of developing story based on condition 
+            var longheadline = $('#edit-title').val();
+            
+            if(longheadline == '') {
+                $('#breaking_text').prop("disabled", true);
+            }
+            
+            $("#edit-title").on('keyup blur', function () {
+                if (this.value != '') {
+                   
+                    $('#breaking_text').removeAttr('disabled');
+                }
+                else {
+                     $('#breaking_text').prop('disabled', true);
+                }
+            });
             
             $('#edit-path-pathauto').click(function() {
               if ($("#edit-path-pathauto").is(":checked")) {                
@@ -194,7 +211,7 @@
             var associate_id = jQuery(this).attr('id');
 
             if (associate_id == 'breaking_text') {
-                var msg = confirm("Are you sure you want to pubish long headline as breaking band?");
+                var msg = confirm("Are you sure you want to publish long headline as breaking band?");
             }
 
             if (msg == true && title.length != 0) {
@@ -211,7 +228,7 @@
                     'success': function (result)
                     {
                         var obj = jQuery.parseJSON(result);
-
+                        jQuery('#edit-field-story-configurations-und-breaking-news').attr('checked', true);
                         jQuery('#widget-ajex-loader').hide();
                         jQuery('#breaking_text').attr('checked', true);
                         jQuery('#edit-field-story-source-id-und-0-value').val(obj.story_nid);

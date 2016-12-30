@@ -22,7 +22,7 @@ CKEDITOR.plugins.add( 'expertchunk', {
    editor.ui.addButton( 'expertchunk_button', {
     label: 'Insert Expert Chunk', //this is the tooltip text for the button
     command: 'expertchunk_command',
-    icon: this.path + 'icons/expertchunk.png'
+    icon: this.path + 'icons/expert.png'
    });
   }
  });
