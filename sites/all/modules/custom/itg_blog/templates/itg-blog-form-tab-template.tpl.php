@@ -11,6 +11,5 @@
 <span class="target-link" data-target-id="BlogDetails"><?php echo t('Blog Description'); ?></span>
 <span class="target-link" data-target-id="Bloggers"><?php echo t('Bloggers Name'); ?></span>
 <span class="target-link" data-target-id="categorySection"><?php echo t('Section'); ?></span>
-<span class="target-link" data-target-id="Relatedcontent"><?php print t('Related content'); ?></span>
 <span class="target-link" data-target-id="title-metatags"><?php echo t('SEO Meta Details'); ?></span>
 </div>

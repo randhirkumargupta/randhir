@@ -3,6 +3,7 @@ if (!empty($content)):
     global $base_url;
     // get related content associated with story
     $related_content = itg_get_related_content(arg(1));
+    if(function_exists(itg_get_related_story_id)) { $related_result = itg_get_related_story_id($related_content); }
     ?>
     <?php
     if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
@@ -36,18 +37,33 @@ if (!empty($content)):
     if (function_exists(itg_msi_get_lock_story_status)) {
     $get_develop_story_status = itg_msi_get_lock_story_status($node->nid, 'developing_story');
     }
+    
+    //get byline detail
+    $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    $reporter_node = node_load($byline_id);
   ?>
     <div class="story-section <?php print $class_buzz."".$class_related."".$class_listicle;?>">
         <div class='<?php print $classes ?>'>
             <?php //pr($node);  ?> 
             <div class="comment-mobile desktop-hide">
                 <ul>
-                    <li><a href="#"><i class="fa fa-envelope"></i> Mail to author</a></li>
+                    <li><a href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> Mail to author</a></li>
                     <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
-                    <li><a href="#"><i class="fa fa-comment"></i></a></li>
-                    <li><a href="#"><i class="fa fa-share-alt"></i></a></li>              
+                    <?php
+                    if ($config_name == 'vukkul') {
+                      ?>
+                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                    <?php } if ($config_name == 'other') { ?> 
+                      <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                    <?php } ?>
+                    <li><a href="#" class="share-icon"><i class="fa fa-share-alt"></i></a>
                 </ul>
-
+                <ul class="social-share">
+                     <li><a class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                     <li><a href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                     <li><a title="share on google+" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+                                            
+                </ul> 
             </div>
             <?php if(!empty($get_develop_story_status)) {?>
             <h1><?php print $node->title; ?> <i class="fa fa-circle" aria-hidden="true"></i> <i class="fa fa-circle" aria-hidden="true"></i></h1>
@@ -57,10 +73,7 @@ if (!empty($content)):
             <div class="story-left-section">
                 <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                     <div class="story-left">
-                        <div class="byline"><?php
-                            $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-                            $reporter_node = node_load($byline_id);
-                            ?>                      
+                        <div class="byline">              
                             <div class="profile-pic">
                                 <?php
                                 $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
@@ -133,20 +146,11 @@ if (!empty($content)):
                             </div>
                         <?php } if (!empty($related_content)) {?>
                         <!--related content-->
-                        <div class="related-story">
+                        <div class="related-story-page">
                             <?php                            
-                                
-                                $related_story = '<h3>Related</h3>';
-                                $related_content = explode(',', $related_content);
-                                foreach ($related_content as $fn_result) {
-                                $related_content = explode('_', $fn_result);
-                                $final_related [] = $related_content[1];
-                                }
-                                $final_related = implode(' OR ', $final_related);
-                                $related_story.= views_embed_view('related_story', 'page', $final_related);
-                                print $related_story;
-                                
-                            ?>
+                               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_left_block');
+                                print render($block['content']);
+                             ?>
                         </div>
                         
                       
@@ -575,19 +579,10 @@ if (!empty($content)):
                     
                     <?php if (!empty($related_content)) { ?>
                     <div class="related-story related-story-bottom">
-                <?php
-                   
-                    $related_story = '<h3><span>Related</span></h3>'; 
-                    $related_content = explode(',', $related_content);
-                    foreach ($related_content as $fn_result) {
-                      $related_content = explode('_', $fn_result);
-                      $final_related [] = $related_content[1];
-                    }
-                    $final_related = implode(' OR ', $final_related);
-                    $related_story.= views_embed_view('related_story', 'page', $final_related);
-                    print $related_story;
-                  
-                ?>
+                            <?php                            
+                               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_left_block');
+                                print render($block['content']);
+                             ?>
                         </div>
                   <!-- For buzzfeed section end --> 
                 <?php } ?>
