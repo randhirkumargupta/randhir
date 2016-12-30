@@ -3,6 +3,7 @@ if (!empty($content)):
     global $base_url;
     // get related content associated with story
     $related_content = itg_get_related_content(arg(1));
+    if(function_exists(itg_get_related_story_id)) { $related_result = itg_get_related_story_id($related_content); }
     ?>
     <?php
     if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
@@ -133,20 +134,32 @@ if (!empty($content)):
                             </div>
                         <?php } if (!empty($related_content)) {?>
                         <!--related content-->
-                        <div class="related-story">
+                        <div class="related-story-page">
                             <?php                            
-                                
                                 $related_story = '<h3>Related</h3>';
-                                $related_content = explode(',', $related_content);
-                                foreach ($related_content as $fn_result) {
-                                $related_content = explode('_', $fn_result);
-                                $final_related [] = $related_content[1];
-                                }
-                                $final_related = implode(' OR ', $final_related);
-                                $related_story.= views_embed_view('related_story', 'page', $final_related);
-                                print $related_story;
-                                
-                            ?>
+                                       $related_story.= "<div class='row'><ul>";
+                                        foreach ($related_result as $site_hash_key) {
+                                            $current_entity_id = $site_hash_key;
+                                            $related_data = itg_get_related_story_content($current_entity_id);
+                                            if (!empty($related_data)) {
+                                                $related_title = mb_strimwidth($related_data->label, 0, 200, "..");
+                                                $related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+
+
+                                                if (empty($related_image)) {
+                                                    $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+                                                    $related_story.= "<li class='col-md-12'><img src='$img_url' class='related-default'></img>";
+                                                    $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
+                                                } else {
+                                                    $related_story.= "<li class='col-md-12'>" . $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+                                                    $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
+                                                }
+                                                
+                                            }
+                                        }
+                                        $related_story.= "</ul></div>";
+                                        print $related_story;
+                                        ?>
                         </div>
                         
                       
@@ -529,7 +542,7 @@ if (!empty($content)):
                                 <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
                               <?php } ?>
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
-                            <li class="mhide"><span class="share-count"><?php if(!empty($fb_google_count)) { print $fb_google_count;} else { print 0; } ?></span> SHARES</li>
+                            <li class="mhide"><span class="share-count"><?php if(!empty($tot_count)) { print $tot_count;} else { print 0; } ?></span> SHARES</li>
                             <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
                              <li class="mhide"><a href="#" class="def-cur-pointer">follow the Story</a></li>
 
@@ -577,15 +590,27 @@ if (!empty($content)):
                     <div class="related-story related-story-bottom">
                 <?php
                    
-                    $related_story = '<h3><span>Related</span></h3>'; 
-                    $related_content = explode(',', $related_content);
-                    foreach ($related_content as $fn_result) {
-                      $related_content = explode('_', $fn_result);
-                      $final_related [] = $related_content[1];
-                    }
-                    $final_related = implode(' OR ', $final_related);
-                    $related_story.= views_embed_view('related_story', 'page', $final_related);
-                    print $related_story;
+                    $related_story = '<h3><span>Related</span></h3>';                     
+                    $related_story.= "<div class='row'><ul>";
+                     foreach ($related_result as $site_hash_key) {
+                         $current_entity_id = $site_hash_key;
+                         $related_data = itg_get_related_story_content($current_entity_id);
+                         if (!empty($related_data)) {
+                             $related_title = mb_strimwidth($related_data->label, 0, 200, "..");
+                             $related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+                             if (empty($related_image)) {
+                                 $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
+                                 $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><img src='$img_url' class='related-default'></img>";
+                                 $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
+                             } else {
+                                 $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'>" . $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+                                 $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
+                             }
+                             
+                         }
+                     }
+                     $related_story.= "</ul></div>";
+                     print $related_story;
                   
                 ?>
                         </div>

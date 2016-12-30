@@ -30,15 +30,15 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                 <?php } ?>
                 <li><a href="#" title="Embed"><i class="fa fa-link"></i></a></li>
                   <?php if($user->uid > 0): ?>
-                  <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                   <?php else: ?>
-                  <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                   <?php endif; ?>
                 <!--<li class="mhide"><a href="#" title="post content"><i class="fa fa-share"></i></a></li>-->
                 <?php global $user; ?>
                   <?php if ($user->uid > 0): ?>
                      <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>                      
-                     <li class="mhide"><?php print $read_later; ?></li>
+                     <li><?php print $read_later; ?></li>
                   <?php else: ?>
                      <?php print '<li class="mhide">' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'Save'))) . '</li>'; ?>
                 <?php endif; ?>                  

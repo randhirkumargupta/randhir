@@ -28,33 +28,6 @@ function features_for_loyalty_and_rewards_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_lrp_category'.
-  $field_bases['field_lrp_category'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lrp_category',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'india_today' => 'India Today',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
-  );
-
   // Exported field_base: 'field_lrp_completed'.
   $field_bases['field_lrp_completed'] = array(
     'active' => 1,

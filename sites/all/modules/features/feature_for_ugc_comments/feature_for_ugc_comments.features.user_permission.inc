@@ -95,6 +95,7 @@ function feature_for_ugc_comments_user_default_permissions() {
       'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
       'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );

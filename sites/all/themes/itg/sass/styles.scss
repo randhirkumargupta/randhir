@@ -1281,6 +1281,12 @@ footer{
            width: 100%;
            height: 46vh;
         }
+        i{
+            position: absolute;
+            right: 30px;
+            bottom: 10px;
+            font-size: 26px;
+        }
     }
     h1{
         @include pos(relative);
@@ -1292,6 +1298,15 @@ footer{
             background: #f40000;
             border-radius: 100%;
             display: inline-block;    
+        }
+        a{
+            i{
+                color: #f40000;    
+                font-size: .4em;    
+                padding-bottom: 7px;
+                display: inline-block;
+                vertical-align: bottom;
+            }
         }
     }
     a{
@@ -1731,7 +1746,7 @@ footer{
 .story-section{
     iframe{
         width: 100%;
-        height: 50vh;
+        height: 40vh;
     }
     ul{
         @extend .list-none;
@@ -1769,21 +1784,7 @@ footer{
         margin-top: 20px;
         .buzzfeed-byline{
             padding: 0 15px;            
-        }
-        .related-story{
-            margin-top: 50px;
-            h3{
-                font-size: 16px;
-                text-transform: uppercase;
-                font-weight: 700;
-                margin-bottom: 5px;
-            }
-            .views-field-label{
-                color: #575757;
-                margin-top: 10px;
-                margin-bottom: 25px;
-            }
-        }
+        }        
     }
     .story-left, .story-right{                
         padding: 0 15px;
@@ -2392,6 +2393,23 @@ footer{
         margin-top: 0;
     }      
 }
+.related-story-page{
+            margin-top: 50px;
+            h3{
+                font-size: 16px;
+                text-transform: uppercase;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+            li{
+                margin-bottom: 20px;
+                span.tile{
+                    margin-top: 10px;
+                    display: block;                    
+                    color: #575757;
+                }
+            }           
+        }
 .related-story.related-story-bottom{            
     margin-bottom: 30px;
     @include sidebar-heading;
@@ -2402,25 +2420,19 @@ footer{
             padding-left: 0;
         }    
     }
-    .view-content{
-        @include clearfix;
-        margin:0 -15px;
-        .views-row{
-            @include calculate-width(2);
-            padding: 0 15px;
-            margin-bottom: 20px;
-            @include float(left);
-            .views-field-label{
-                span{
-                    margin-top: 10px;
-                    display: block;
-                }
-            }
-            &:nth-child(2n+1){
-                clear: left;
-            }
+    li{
+        margin-bottom: 20px;
+        span.tile{
+            margin-top: 10px;
+            display: block;
         }
-    }
+        &:nth-child(2n+1){
+            clear: left;
+        }
+        &:nth-child(4n+1){
+            clear: none;
+        }
+    }    
     .related-default{
         height: 127px;
     }
@@ -3535,21 +3547,19 @@ footer{
             @include calculate-width(1);
             background: #1a1a1a;   
             padding: 10px 0;
-            border-bottom: 1px solid rgba(170, 169, 169, 0.31);
-            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(170, 169, 169, 0.31);            
             ul{
-                li{
-                    @include float(left);
+                display: inline-flex;
+                li{                    
                     a{
-                        display: block;
-                        padding:10px 13px 10px 13px;
+                        display: block;                        
                         color: #aaa9a9;
                         font-family:$itg-roboto;
                         font-size:12px;
+                        padding:10px;
                         i{
                             font-size: 18px;
-                            vertical-align: middle;
-                            margin-right: 5px;                            
+                            vertical-align: middle;                                                     
                         }
                         span{
                             display: none;
@@ -3561,7 +3571,7 @@ footer{
                     }
                     .flag-throbber{
                         display: none;
-                    }
+                    }                                        
                 }
             }
         }
@@ -3579,7 +3589,12 @@ footer{
     }   
     .video-header-right{
         position: relative; 
-        padding-bottom:15px;        
+        padding-bottom:15px;
+        p{
+            &:first-child{
+                margin-top: 15px;
+            }
+        }
         p.upload-date{
             font-size: 12px;
             color: $white-color;
@@ -3721,7 +3736,7 @@ footer{
     .view-content{      
         .photo-list{
             list-style: none;
-            margin:0 -10px;
+            margin:0 -15px;
             @include clearfix;
             li{
                 padding: 15px;
@@ -3921,11 +3936,16 @@ footer{
             font-size: 14px;
             font-weight: 400;
             color: #33363b;
+            &.desktop-hide{
+                width: 100%;
+                overflow: hidden;
+                padding-top: 8px;
+            }
         }
     }
     .heading{
         position: relative;
-        padding: 10px 0;
+        padding: 15px 0 0 0;
         h3{
             background: #fff none repeat scroll 0 0;
             color: #969696;
@@ -3942,7 +3962,7 @@ footer{
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
+            top: 15px;
             bottom: 0;
             margin: auto;
             width: 100%;
@@ -9149,9 +9169,9 @@ input[type="radio"]:checked + label:after{
             }
         }
     }
-    .live-tv-big-story{
+/*    .live-tv-big-story{
         margin-bottom: 50px;
-    }
+    }*/
 }
 /*css end big story format*/
 /*like dislike photo page start*/

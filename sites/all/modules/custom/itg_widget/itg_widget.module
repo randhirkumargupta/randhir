@@ -21,6 +21,8 @@ module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
 
 module_load_include('inc', 'itg_widget', 'includes/itg_widget_common');
 
+module_load_include('inc', 'itg_widget', 'itg_widget.helper');
+
 /**
  * {@inheritdoc}
  */
@@ -134,6 +136,13 @@ function itg_widget_menu() {
     'page callback' => 'insert_all_node_in_widegt_table', // load the croper according to size!.
     'type' => MENU_CALLBACK,
     'access arguments' => array('administer nodequeue'),
+  );
+
+  $items['test_function_callback'] = array(
+    'page callback' => 'itg_sent_email', // load the croper according to size!.
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+//    'access arguments' => array('access content'),
   );
 
   $items['issue_filter_widget'] = array(
@@ -371,29 +380,40 @@ function itg_widget_block_view($delta = '') {
       break;
     // Top story ordering reordering widget case
     case 'top_stories_ordering':
-      module_load_include('inc', 'itg_widget', 'includes/section-odering');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'page_2'; // page name
-      $info['nodequeue'] = 'top_stories';
-      $data = itg_widget_top_stories_ordering_data($info);
+//      module_load_include('inc', 'itg_widget', 'includes/section-odering');
+//      $info['view_name'] = 'story_widget'; // view name
+//      $info['page'] = 'page_2'; // page name
+//      $info['nodequeue'] = 'top_stories';
+      $info['widget'] = 'top_stories_widget';
+      $info['max_limit'] = TOP_STORIES_LIMIT;
+      $info['min_limit'] = TOP_STORIES_MIN_RANGE;
+      $info['order'] = 'ASC';
+      $data = itg_widget_get_widget_data_data($info);
       $block['content'] = theme("top_stories_ordering", array("data" => $data));
       break;
     // Top story ordering reordering widget case
     case 'most_popular':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'most_popular_widget'; // page name
-      $info['nodequeue'] = 'most_popular';
-      $data = itg_widget_most_popular_ordering_data($info);
+//     module_load_include('inc', 'itg_widget', 'includes/itg_widget_most_popular');
+//      $info['view_name'] = 'story_widget'; // view name
+//      $info['page'] = 'most_popular_widget'; // page name
+//      $info['nodequeue'] = 'most_popular';
+//      $data = itg_widget_most_popular_ordering_data($info);
+      $info['widget'] = 'most_popular_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = MOST_POPULAR_MAX_RANGE;
+      $info['min_limit'] = MOST_POPULAR_MIN_RANGE;
+      $data = itg_widget_get_widget_data_data($info);
       $block['content'] = theme("most_popular_widget", array("data" => $data));
       break;
     // Top story ordering reordering widget case
     case 'dont_miss':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
-      $info['widget_name'] = 'dont_miss_content_widget';
-      $data = itg_widget_dont_miss_ordering_data($info);
+      //module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
+      $info['widget'] = 'dont_miss_content_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = DONT_MISS_MAX_RANGE;
+      $info['min_limit'] = DONT_MISS_MIN_RANGE;
+      $data = itg_widget_get_widget_data_data($info);
       $block['content'] = theme("dont_miss_widget", array("data" => $data));
-      drupal_add_css("");
       break;
     case 'yearende_left_top_news':
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_yearender_left');
@@ -418,11 +438,12 @@ function itg_widget_block_view($delta = '') {
       break;
     // Trending videos ordering reordering widget case
     case 'trending_videos_widget':
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'trending_videos_widget'; // page name
-      $info['nodequeue'] = 'trending_videos';
-      $data = itg_widget_trending_videos_widget_ordering_data($info);
+      //module_load_include('inc', 'itg_widget', 'includes/itg_widget_trending_videos_widget');
+      $info['widget'] = 'trending_videos_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
+      $info['min_limit'] = TREANDING_VIDEO_MIN_RANGE;
+      $data = itg_widget_get_widget_data_data($info);
       $block['content'] = theme("trending_videos_widget", array("data" => $data));
       break;
     // Watch Right Now ordering reordering widget case
@@ -431,11 +452,11 @@ function itg_widget_block_view($delta = '') {
       if (empty($display)) {
         return;
       }
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_watch_right_now_videos_widget');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'watch_right_now_widget'; // page name
-      $info['nodequeue'] = 'watch_right_now';
-      $data = itg_widget_watch_right_now_videos_widget_ordering_data($info);
+      $info['widget'] = 'watch_right_now_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = WATCH_RIGHT_NOW_MAX_RANGE;
+      $info['min_limit'] = WATCH_RIGHT_NOW_MIN_RANGE;
+      $data = itg_widget_get_widget_data_data($info);
       $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
       break;
     // Top takes videos ordering reordering widget case
@@ -444,21 +465,20 @@ function itg_widget_block_view($delta = '') {
       if (empty($display)) {
         return;
       }
-
-      module_load_include('inc', 'itg_widget', 'includes/itg_widget_top_takes_videos_widget');
-      $info['view_name'] = 'story_widget'; // view name
-      $info['page'] = 'top_takes_video_widget'; // page name
-      $info['nodequeue'] = 'top_takes_videos';
-      $data = itg_widget_top_takes_videos_widget_ordering_data($info);
+      $info['widget'] = 'top_takes_video_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = TOP_TAKES_MAX_RANGE;
+      $info['min_limit'] = TOP_TAKES_MIN_RANGE;
+      $data = itg_widget_get_widget_data_data($info);
       $block['content'] = theme("top_takes_videos_widget", array("data" => $data));
       break;
     // home page feature ordering reordering widget case
     case 'home_page_feature':
-      module_load_include('inc', 'itg_widget', 'includes/home-page-feature');
-      $info['view_name'] = 'home_page_feature_widget'; // view name
-      $info['page'] = 'page_2'; // page name
-      $info['nodequeue'] = 'home_page_feature';
-      $data = itg_widget_home_page_feature_data($info);
+      $info['widget'] = 'home_page_feature_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = HOME_PAGE_FEATURE_MAX_RANGE;
+      $info['min_limit'] = HOME_PAGE_FEATURE_MIN_RANGE;
+      $data = itg_widget_get_widget_data_data($info);
       $block['content'] = theme("home_page_feature", array("data" => $data));
       break;
     // featured photo carousel reordering widget case
@@ -489,10 +509,12 @@ function itg_widget_block_view($delta = '') {
             }', 'inline');
 
 
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'photo_carousel'; // page name
-      $info['nodequeue'] = 'photo_carousel';
-      $data = itg_widget_featured_photo_carousel_data($info, 'flexslider');
+      $info['widget'] = 'photo_carousel_list_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = PHOTO_CAROUSEL_MAX_RANGE;
+      $info['min_limit'] = PHOTO_CAROUSEL_MIN_RANGE;
+      $result = itg_widget_get_widget_data_data($info);
+      $data = itg_widget_featured_photo_carousel_data_fetch($result, 'flexslider');
       $block['content'] = theme("featured_photo_carousel", array("data" => $data));
       break;
 
@@ -524,24 +546,12 @@ function itg_widget_block_view($delta = '') {
             }
           });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
       );
-
-      /* drupal_add_js($base_url . '/sites/all/libraries/rollingslider/script/jquery.rollingslider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_css($base_url . '/sites/all/libraries/rollingslider/style/index.css', array('type' => 'external', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_js("jQuery('#featuredphoto').RollingSlider({
-        showArea:'#example',
-        prev:'#jprev',
-        next:'#jnext',
-        moveSpeed:300,
-        autoPlay:false
-        });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-        );
-        drupal_add_js('misc/jquery.js'); */
-      module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
-      $info['view_name'] = 'photo_carousel_widget'; // view name
-      $info['page'] = 'photo_carousel'; // page name
-      $data = itg_widget_featured_photo_carousel_data($info, 'rolling');
+      $info['widget'] = 'photo_carousel_list_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = PHOTO_CAROUSEL_MAX_RANGE;
+      $info['min_limit'] = PHOTO_CAROUSEL_MIN_RANGE;
+      $result = itg_widget_get_widget_data_data($info);
+      $data = itg_widget_featured_photo_carousel_data_fetch($result, 'rolling');
       $block['content'] = theme("featured_photo_carousel_rollingslider", array("data" => $data));
       break;
 
@@ -1126,7 +1136,7 @@ function itg_widget_delete_data_from_widget($widget_name, $nid = 0, $stateid = 0
  */
 function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extra = NULL, $state = NULL) {
   try {
-    $max_weight = get_max_weight_for_special($widget_name);
+    $max_weight = get_min_weight_for_special($widget_name);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
     db_insert('itg_widget_order')
         ->fields(array(
@@ -1136,7 +1146,7 @@ function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extr
           'content_type' => $node_load_data->type,
           'extra' => $extra,
           'state' => $state,
-          'weight' => ++$max_weight,
+          'weight' => --$max_weight,
         ))
         ->execute();
   } catch (Exception $ex) {
@@ -1219,9 +1229,339 @@ function itg_widget_get_draggable_view_max_weight($view_name, $view_display, $ar
     $max_query->addExpression('MAX(weight)');
     $max_query->condition('view_name', $view_name);
     $max_query->condition('view_display', $view_display);
-    $max_query->condition('args', '$args');
+    $max_query->condition('args', $args);
     $max_result = $max_query->execute()->fetchField();
     return $max_result;
   }
   return 0;
 }
+
+############################## WIDGET REWORK ########################
+
+/**
+ * Function to use insert data into custom table.
+ *
+ * @param array $dont_miss_content
+ */
+function itg_widget_save_bulk_operation_widget_data($form_state, $widget_name) {
+  $selected_node = $form_state['selection'];
+  if (count($selected_node)) {
+    foreach ($selected_node as $node) {
+      itg_widget_delete_data_from_widget($widget_name, $node);
+      itg_widget_insert_widget_data_by_min_weight($node, $widget_name, 0);
+    }
+    drupal_set_message(t("Nodes has been saved"));
+  }
+}
+
+/**
+ * Comman function to insert widget data.
+ * @param int $node
+ * @param string $widget_name
+ * @param string $category_tid
+ */
+function itg_widget_insert_widget_data_by_min_weight($node, $widget_name, $category_tid, $extra = NULL, $state = NULL) {
+  try {
+    $max_weight = get_min_weight_for_special($widget_name);
+    $node_load_data = itg_widget_get_required_node_data_for_widget($node);
+    // Handel case if node already exist.
+    db_delete('itg_widget_order')
+        ->condition('nid', $node)
+        ->condition('widget', $widget_name)
+        ->execute();
+    //  Then delete old entry add newsone.
+    db_insert('itg_widget_order')
+        ->fields(array(
+          'nid' => $node,
+          'widget' => $widget_name,
+          'cat_id' => itg_widget_get_category_for_db_insert($category_tid),
+          'content_type' => $node_load_data->type,
+          'extra' => $extra,
+          'state' => $state,
+          'weight' => --$max_weight,
+        ))
+        ->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
+}
+
+/**
+ * Function returns max weight of perticular content type.
+ * @param string $type
+ * @return int
+ */
+function get_min_weight_for_special($type) {
+  $max_query = db_select('itg_widget_order');
+  $max_query->addExpression('MIN(weight)');
+  $max_query->condition('widget', $type);
+  $max_result = $max_query->execute()->fetchField();
+  return isset($max_result) ? $max_result : 1;
+}
+
+/**
+ * Function for save new order in custom table itg_widget_order for we may suggest widget.
+ *
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_update_weight_during_order_reorder($form, &$form_state) {
+  $view_current_display = $form_state['build_info']['args'][0]->current_display;
+  $view_name = $form_state['build_info']['args'][0]->name;
+  $widget = itg_widget_get_widget_name_from_views($view_name, $view_current_display);
+  $draggable_view_data = $form_state['input']['draggableviews'];
+  $weightcount = 0;
+  foreach ($draggable_view_data as $key => $value) {
+    $weightcount = $weightcount + $value['weight'];
+  }
+  if ($weightcount > 0) {
+    foreach ($draggable_view_data as $key => $value) {
+      try {
+        db_update('itg_widget_order')
+            ->fields(array('weight' => $value['weight']))
+            ->condition('widget', $widget)
+            ->condition('nid', $value['id'])
+            ->execute();
+      } catch (Exception $ex) {
+        drupal_set_message($ex->getMessage());
+      }
+    }
+  }
+  else {
+    drupal_set_message("This order already saved.");
+  }
+}
+
+function itg_widget_get_widget_name_from_views($view_name, $view_current_display) {
+  $widget_name = "";
+//  pr($view_name);
+//  p($view_current_display);
+  if ($view_name == 'story_widget' && $view_current_display == 'page_2') {
+    $widget_name = "top_stories_widget";
+  }
+  if ($view_name == 'home_page_feature_widget' && $view_current_display == 'page_2') {
+    $widget_name = "home_page_feature_widget";
+  }
+  if ($view_name == 'photo_carousel_widget' && $view_current_display == 'photo_carousel') {
+    $widget_name = "photo_carousel_list_widget";
+  }
+  if ($view_name == 'photo_carousel_widget' && $view_current_display == 'video_carousel') {
+    $widget_name = "video_carousel_list_widget";
+  }
+  if ($view_name == 'story_widget' && $view_current_display == 'trending_videos_widget') {
+    $widget_name = "trending_videos_widget";
+  }
+  if ($view_name == 'story_widget' && $view_current_display == 'most_popular_widget') {
+    $widget_name = "most_popular_widget";
+  }
+  if ($view_name == 'story_widget' && $view_current_display == 'top_takes_video_widget') {
+    $widget_name = "top_takes_video_widget";
+  }
+  if ($view_name == 'story_widget' && $view_current_display == 'watch_right_now_widget') {
+    $widget_name = "watch_right_now_widget";
+  }
+  if ($view_name == 'widget_anchors_listing' && $view_current_display == 'anchors_listing_widget') {
+    $widget_name = "anchors_listing_widget";
+  }
+  return $widget_name;
+}
+
+/**
+ * Function used to get widget name
+ * 
+ * {@inheritdoc}
+ */
+function _get_widget_name($view_name, $page_name) {
+  $widget = "";
+// TODO: Use switch-case
+  if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
+    $widget = 'section_wise_widget';
+  }
+  else if ($view_name == "views_form_story_widget_page" && $page_name == "page_1") {
+    $widget = 'top_stories_widget';
+  }
+  else if ($view_name == "views_form_story_widget_page" && $page_name == "trending_videos") {
+    $widget = 'trending_videos_widget';
+  }
+  else if ($view_name == "views_form_story_widget_page" && $page_name == "most_popular") {
+    $widget = 'most_popular_widget';
+  }
+  else if ($view_name == "views_form_story_widget_page" && $page_name == "top_takes_video") {
+    $widget = 'top_takes_video_widget';
+  }
+  else if ($view_name == "views_form_story_widget_page" && $page_name == "watch_right_now") {
+    $widget = 'watch_right_now_widget';
+  }
+  else if ($view_name == "views_form_widget_anchors_listing_page" && $page_name == "anchors_listing_page") {
+    $widget = 'anchors_listing_widget';
+  }
+  else if ($view_name == "views_form_home_page_feature_widget_page" && $page_name == "page_1") {
+    $widget = 'home_page_feature_widget';
+  }
+  else if ($view_name == "views_form_photo_carousel_widget_page" && $page_name == "photo_carousel_list") {
+    $widget = 'photo_carousel_list_widget';
+  }
+  else if ($view_name == "views_form_photo_carousel_widget_page" && $page_name == "video_carousel_list") {
+    $widget = 'video_carousel_list_widget';
+  }
+  else if ($page_name == 'we_may_suggest_widget') {
+    $widget = 'we_may_suggest_widget';
+  }
+  else if ($page_name == 'most_popular_widget') {
+    $widget = 'we_may_suggest_widget';
+  }
+  else if ($page_name == 'big_story_format') {
+    $widget = 'big_story_format_widget';
+  }
+  else if ($page_name == 'photo_carousel_list') {
+    $widget = 'photo_carousel_list_widget';
+  }
+  else if ($page_name == 'video_carousel_list') {
+    $widget = 'video_carousel_list_widget';
+  }
+  else if ($page_name == 'dont_miss_content') {
+    $widget = 'dont_miss_content_widget';
+  }
+  return $widget;
+}
+
+function itg_widget_order_reorder_form() {
+  $forms = array(
+    'views_form_story_widget_trending_videos_widget', // Trending video widget
+    'views_form_story_widget_most_popular_widget', // most popular
+    'views_form_story_widget_top_takes_video_widget', // top takes
+    'views_form_story_widget_watch_right_now_widget', // watch right now
+    'views_form_story_widget_page_2', // top story
+    'views_form_home_page_feature_widget_page_2',
+    'views_form_photo_carousel_widget_photo_carousel', // photo carousel
+    'views_form_photo_carousel_widget_video_carousel',
+    'views_form_widget_anchors_listing_anchors_listing_widget',
+    'views_form_section_wise_content_ordering_list_we_may_suggest_widget'
+  );
+  return $forms;
+}
+
+/**
+ * Function is responsible to sent widget data.
+ * @param array $info
+ * @return array
+ */
+function itg_widget_get_widget_data_data($info) {
+  if (is_array($info)) {
+    $result = array();
+    $entity_data = array();
+    $widget_name = isset($info['widget']) ? $info['widget'] : FALSE;
+    $max_limit = isset($info['max_limit']) ? $info['max_limit'] : FALSE;
+    $min_limit = isset($info['min_limit']) ? $info['min_limit'] : FALSE;
+    $order = isset($info['order']) ? $info['order'] : FALSE;
+    if (isset($widget_name) && isset($max_limit) && isset($min_limit) && isset($order)) {
+      $result = get_view_nodes_form_custom_table_for_widgets($widget_name, $max_limit, $min_limit, $order);
+    }
+    if (!empty($result)) {
+      foreach ($result as $entity_data_node) {
+        $entity_data[] = $entity_data_node;
+      }
+      return $entity_data;
+    }
+    return $result;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+function itg_widget_form_views_form_section_wise_content_ordering_list_page_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data";
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_story_widget_trending_videos_widget_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_story_widget_most_popular_widget_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_story_widget_top_takes_video_widget_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_story_widget_watch_right_now_widget_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_story_widget_page_2_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_home_page_feature_widget_page_2_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_photo_carousel_widget_photo_carousel_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_photo_carousel_widget_video_carousel_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_widget_anchors_listing_anchors_listing_widget_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
+//}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * {@inheritdoc}
+ */
+//function itg_widget_form_views_form_section_wise_content_ordering_list_we_may_suggest_widget_alter(&$form, &$form_state, $form_id) {
+//  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_we_may_suggest";
+//}

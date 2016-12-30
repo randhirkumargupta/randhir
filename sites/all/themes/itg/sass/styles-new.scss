@@ -27,6 +27,7 @@ input[type="text"], textarea{
                 height: 46px;
                 box-shadow: 0 1px 5px -2px #b6b6b6 inset;
                 @include gradient(#fefefe, #f3f3f3);
+                color:#b7b7b7;
             }
         }
         #edit-tm-vid-4-names-wrapper, #edit-sm-field-itg-common-by-line-name-wrapper, #edit-bundle-name-wrapper, #edit-hash-wrapper{
@@ -266,14 +267,15 @@ input[type="text"], textarea{
                     a{
                         font-size: 22px;
                         color: #c0c0c0;
-                        padding: 0 12px;
+                        padding: 0 10px;
                         line-height: 35px;
                         display: block;
                         cursor: pointer;
                         &:hover{
                             background: #222222;
                         }
-                    }              
+                    }  
+                    .flag-throbber{display: none;}
                 }
             }
             &.desktop-hide{
@@ -2829,7 +2831,32 @@ blockquote {
     color: #193984;
   }
 }
-
+.survey-submit-btn-wrapper{
+  position: relative;
+  .ajax-progress{
+    position: absolute;
+    left: 130px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: top;
+    .message{display: none;}
+  }
+}
+.survey-form-wrapper-one{
+  .ajax-progress{
+    margin: 10px 0 0 -10px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: top;
+    .message{display: none;}
+  }
+}
 
 
 /* CSS To Add Zoom Effect on Images */

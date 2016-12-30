@@ -19,6 +19,9 @@ function itg_budget_predictor_get_taxonomy() {
   $arg = arg();
   $section_id = isset($arg[1]) ? $arg[1] : '';
   $cookies_id = $_COOKIE['COOKIES_IT_' . $section_id];
+  if($user_id && $cookies_id) {
+    update_user_by_cookies($user_id, $section_id, $cookies_id);
+  }
 
   $check_budget_status = check_budget_status($section_id);
   $check_budget_status_front_user = check_budget_status_front_user($section_id);
@@ -626,19 +629,22 @@ function itg_manage_budget() {
  * This function is used to budget form validation
  * {@inheritdoc}
  */
-function itg_manage_budget_validate_old($form, &$form_state) {
+function itg_manage_budget_validate($form, &$form_state) {
   $budget_action = $form_state['values']['budget_action'];
-  if (empty($budget_action)) {
-    $budget_year = $form_state['values']['budget_year'];
+  //if (empty($budget_action)) {
+    $budget_section = $form_state['values']['budget_section'];
     $query = db_select('itg_manage_budget', 'm');
-    $query->condition('m.budget_year', $budget_year, '=');
+    $query->condition('m.budget_section', $budget_section, '=');
+    if($budget_action) {
+       $query->condition('m.id', $budget_action, '<>');
+    }
     $query->fields('m', array('id'));
     # execute the query
     $results = $query->execute()->fetchObject();
     if ($results->id) {
-      form_set_error('field', t('Budget Predictor already exist in our system for ' . $budget_year));
+      form_set_error('field', t('Budget Predictor already exist.'));
     }
-  }
+ // }
 }
 
 /**
@@ -722,23 +728,13 @@ function itg_budget_crop_image() {
     $uri = substr($data, strpos($data, ",") + 1);
     // save to file
     file_put_contents('public://budget/' . $file, base64_decode($uri));
-    echo "cookies_id =" . $cookies_id;
-    if (empty($cookies_id)) {
+
       $num_updated = db_update('itg_budget_predictor')
           ->fields(array('file_name' => $file_name))
           ->condition('section_id', $section_id)
           ->condition('user_id', $user->uid, '=')
           ->execute();
-    }
-    else {
-      $num_updated = db_update('itg_budget_predictor')
-          ->fields(array('file_name' => $file_name, 'user_id' => $user->uid))
-          ->condition('section_id', $section_id)
-          ->condition('cookies_id', $cookies_id, '=')
-          ->execute();
-    }
-
-
+   
     if (!$num_updated) {
       drupal_set_message('Please Drag and Drop Images.', 'error');
     }
@@ -854,4 +850,19 @@ function itg_budget_download_excel() {
     echo $mail;
     echo "\015\012";
   }
+}
+
+/**
+ * update user by cookies
+ * @param int $user_id
+ * @param int $section_id
+ * @param string $cookies_id
+ */
+function update_user_by_cookies($user_id, $section_id, $cookies_id) {
+  db_update('itg_budget_predictor')
+          ->fields(array('user_id' => $user_id))
+          ->condition('section_id', $section_id)
+          ->condition('cookies_id', $cookies_id, '=')
+          ->condition('user_id', 0, '=')
+          ->execute();
 }
