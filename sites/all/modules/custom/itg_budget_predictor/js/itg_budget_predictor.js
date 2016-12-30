@@ -11,7 +11,7 @@ Drupal.behaviors.itg_budget_predictor = {
             var budget_predictor_cookies_id = Drupal.settings.itg_budget_predictor.settings.budget_predictor_cookies_id;
             var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);            
             if (cookies_id === undefined || cookies_id == null || cookies_id.length <= 0) {
-                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: 7 }); // Sample 3
+                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: 90 }); // Sample 3
             }
             
             if (Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {

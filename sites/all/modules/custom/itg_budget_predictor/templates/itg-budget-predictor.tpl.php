@@ -37,7 +37,7 @@ $user_id = $data['user_id'];
 <?php if ($budget_exist == 1) { ?>    
   <h1 class="budget-predictor-heading"><?php print t('Budget - Predictor'); ?></h1>
   <?php if(empty($user_id)) { ?>
-    <h3 class="budget-predictor-msg"><?php print t('Only Logged in user will be able to play this widget.'); ?></h3>
+    <h3 class="budget-predictor-msg"><?php print t('Please drag and drop images and please login if you know, your prediction will right or not.'); ?></h3>
   <?php } ?>
   <div id="main-container-budget">
       <div class="top-side-block">

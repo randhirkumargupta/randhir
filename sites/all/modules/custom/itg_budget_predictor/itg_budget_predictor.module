@@ -76,8 +76,7 @@ function itg_budget_predictor_custom() {
   $settings['stopPredictor'] = '1';
 
   if (empty($user_id)) {
-    $date_of_expiry = time() + 86400 * 365 * 1;
-    $budget_predictor_cookies_id = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 5);
+    $budget_predictor_cookies_id = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2) . time();
     $settings['budget_predictor_cookies_id'] = $budget_predictor_cookies_id;
   }
 
