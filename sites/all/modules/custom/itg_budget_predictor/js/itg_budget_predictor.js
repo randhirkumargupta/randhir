@@ -7,9 +7,16 @@ Drupal.behaviors.itg_budget_predictor = {
     attach: function (context, settings) {
         jQuery(function ()
         {   
+            var section_id = Drupal.settings.itg_budget_predictor.settings.section_id;
+            var budget_predictor_cookies_id = Drupal.settings.itg_budget_predictor.settings.budget_predictor_cookies_id;
+            var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);            
+            if (cookies_id === undefined || cookies_id == null || cookies_id.length <= 0) {
+                jQuery.cookie("COOKIES_IT_" + section_id, budget_predictor_cookies_id, { expires: 90 }); // Sample 3
+            }
+            
             if (Drupal.settings.itg_budget_predictor.settings.stopPredictor == 2) {
                 var isUpdated;
-                var section_id = Drupal.settings.itg_budget_predictor.settings.section_id;
+               
                 jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
                         {
                             connectWith: '.connectedSortable',
@@ -27,7 +34,8 @@ Drupal.behaviors.itg_budget_predictor = {
                                                         {
                                                             sort1: jQuery("#sortable1").sortable('serialize'),
                                                             sort2: jQuery("#sortable2").sortable('serialize'),
-                                                            sort3: jQuery("#sortable3").sortable('serialize')
+                                                            sort3: jQuery("#sortable3").sortable('serialize'),
+                                                            cookies_id: jQuery.cookie("COOKIES_IT_" + section_id),
                                                         },
                                                 success: function (html)
                                                 {
@@ -91,11 +99,12 @@ function badget_google_plus_share(url, title, img) {
 
 function captureCurrentDiv(section_id)
 {
+    var cookies_id = jQuery.cookie("COOKIES_IT_" + section_id);
     html2canvas([document.getElementById('main-container-budget')], {
         onrendered: function (canvas)
         {
             var img = canvas.toDataURL()
-            jQuery.post("/budget-save/"+section_id, {data: img}, function (file) {
+            jQuery.post("/budget-save/"+section_id, {data: img, cookies_id: cookies_id }, function (file) {
                 window.location.reload();
             });
         }
