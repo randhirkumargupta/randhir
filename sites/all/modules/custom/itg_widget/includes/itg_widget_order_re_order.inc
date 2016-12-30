@@ -742,3 +742,57 @@ function update_itg_widget_order_table_data_for_speaker($form, &$form_state) {
         }
     }
 }
+
+function itg_widget_form_views_form_category_of_stroy_base_magazin_widget_issue_magazin_widget_list_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_issue_magazin_primary_cat";
+}
+function itg_widget_form_views_form_supplement_base_magazin_widget_supplement_base_magazin_widget_list_alter(&$form, &$form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_issue_magazin_supplement";
+}
+
+function update_itg_widget_order_table_data_for_issue_magazin_primary_cat(&$form, &$form_state, $form_id){
+  $draggable_view_data = $form_state['input']['draggableviews'];
+  $widget = 'issue_primary_category_magazin_widget';
+  $extra_values = array();
+  $issue_date = $_GET['field_story_issue_date_value']['value']['date'];
+  $weightcount = 0;
+  foreach ($draggable_view_data as $key => $value) {
+    $weightcount = $weightcount + $value['weight'];
+  }
+  // Get extra , nid , content type from custom_table because it will further use to insert again.
+  foreach ($draggable_view_data as $key => $value) {
+    if ($weightcount > 0) {
+      $primary_cat = itg_widget_get_primary_cat($value['id']);
+      db_update('itg_widget_order')
+              ->fields(array('weight' => $value['weight'], 'extra' => $issue_date,))
+              ->condition('widget', 'issue_primary_category_magazin_widget')
+              ->condition('nid', $value['id'])
+              ->condition('extra', $issue_date)
+              ->condition('cat_id', $primary_cat)
+              ->execute();
+    }
+  }
+}
+
+function update_itg_widget_order_table_data_for_issue_magazin_supplement(&$form, &$form_state, $form_id){
+  $draggable_view_data = $form_state['input']['draggableviews'];
+  $widget = 'issue_supplement_magazin_widget';
+  $extra_values = array();
+  $issue_date = $_GET['field_story_issue_date_value']['value']['date'];
+  $weightcount = 0;
+  foreach ($draggable_view_data as $key => $value) {
+    $weightcount = $weightcount + $value['weight'];
+  }
+  // Get extra , nid , content type from custom_table because it will further use to insert again.
+  foreach ($draggable_view_data as $key => $value) {
+    if ($weightcount > 0) {
+      $primary_cat = itg_widget_get_primary_cat($value['id']);
+      db_update('itg_widget_order')
+              ->fields(array('weight' => $value['weight'], 'extra' => $issue_date,))
+              ->condition('widget', 'issue_supplement_magazin_widget')
+              ->condition('nid', $value['id'])
+              ->condition('extra', $issue_date)
+              ->execute();
+    }
+  }
+}

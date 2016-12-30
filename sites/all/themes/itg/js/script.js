@@ -122,7 +122,6 @@
 
             headerMain();
             function headerMain() {
-
                 //var logotxt = $('.container.header-logo').html();
                 $('.container.header-logo').prependTo('.itg-logo-container');
                 $('.search-icon').click(function () {
@@ -144,10 +143,8 @@
                 
                 $('.head-live-tv .mobile-user').click(function(){
                     $(this).next('ul.menu').toggle();
-                });
-                
-            }
-
+                });                
+            }            
             // jQuery Code for tabbing
             $('.tab-buttons').on('click', 'span', function () {
                 var dataID = '.' + $(this).attr('data-id');
@@ -249,6 +246,12 @@
                 $('.activate-message').show();
             }
             //jQuery('#main').find('img').parent().addClass('zoom-image');
+            
+            // jQuery code to set message error on my content page
+            var my_content_error = jQuery('.page-personalization-my-content').find('.messages--error');
+            if(my_content_error){
+              jQuery('.page-personalization-my-content #block-formblock-ugc').prepend(my_content_error);
+            }
         }
     };
 

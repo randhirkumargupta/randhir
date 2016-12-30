@@ -62,11 +62,10 @@
 
                     //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
                     parent.jQuery("[name='field_video_upload_add_more']").mousedown();
-
-                    //parent.jQuery("#" + video_field_id + "-button").mousedown();
-                    setTimeout(function() {
+                    parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
                         parent.jQuery.colorbox.close();
-                    }, 9000);
+                    });
+                   
                 }
             });
 
@@ -237,9 +236,9 @@ jQuery('document').ready(function() {
             parent.jQuery('#edit-field-video-upload-add-more-number').val(1);
             parent.jQuery("[name='field_video_upload[file_entity_holder_nums]']").val(videogallery_new_file_hold);
             parent.jQuery("[name='field_video_upload_add_more']").mousedown();
-           setTimeout(function() {
-                        parent.jQuery.colorbox.close();
-                    }, 9000);
+            setTimeout(function() {
+                parent.jQuery.colorbox.close();
+            }, 9000);
         } else {
             alert("Select video file and upload");
         }
@@ -258,6 +257,7 @@ jQuery('document').ready(function() {
             alert("Select video file and upload");
         }
     });
+
 
 });
 

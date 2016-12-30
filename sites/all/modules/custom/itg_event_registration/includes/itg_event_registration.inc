@@ -96,7 +96,9 @@ function itg_event_registration_users_list() {
         $i++;
       }
     
-      $output_header = '<div><strong>Event: ' . $node_event->title . '</strong><div>'.l('Download', 'event-registration/users-list/download/' . $node_event->nid, array('attributes' => array('class' => array('btn-save', 'fright')))). '</div></div>
+
+      $output_header = '<div class="dib full"><strong>Event: ' . $node_event->title . '</strong><div>'.l('Download', 'event-registration/users-list/download/' . $node_event->nid, array('attributes' => array('class' => array('btn-save', 'fright')))). '</div></div>
+
       <table class="views-table">
       <thead>
         <tr>

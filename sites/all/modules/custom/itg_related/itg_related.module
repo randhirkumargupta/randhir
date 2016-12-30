@@ -137,10 +137,19 @@ function itg_related_views_pre_render(&$view) {
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
       }
-
-      $splittedsite = explode("/", $related_result->site);
-      $explode_site = explode(".", $splittedsite[2]);
-      $related_result->site = strtoupper($explode_site[0]);
+      
+      if ($related_result->hash == '5fyeg7') {
+        $related_result->site = 'DEV';
+      }
+      elseif ($related_result->hash == '2e1u4m') {
+        $related_result->site = 'QA';
+      }
+      elseif ($related_result->hash == 'e49it8') {
+        $related_result->site = 'STAGE';
+      }
+//      $splittedsite = explode("/", $related_result->site);
+//      $explode_site = explode(".", $splittedsite[2]);
+//      $related_result->site = strtoupper($explode_site[0]);
       
     }
   }

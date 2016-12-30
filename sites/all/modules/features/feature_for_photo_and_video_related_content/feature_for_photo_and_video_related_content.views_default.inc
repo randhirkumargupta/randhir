@@ -235,7 +235,7 @@ function feature_for_photo_and_video_related_content_views_default_views() {
   $handler->display->display_options['title'] = 'Related Story';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Apache Solr: url */
@@ -243,15 +243,15 @@ function feature_for_photo_and_video_related_content_views_default_views() {
   $handler->display->display_options['fields']['url']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['url']['field'] = 'url';
   $handler->display->display_options['fields']['url']['exclude'] = TRUE;
-  /* Field: Apache Solr: sm_thumb_story_related_content_138x103_field_story_extra_large_image */
-  $handler->display->display_options['fields']['sm_thumb_story_related_content_138x103_field_story_extra_large_image']['id'] = 'sm_thumb_story_related_content_138x103_field_story_extra_large_image';
-  $handler->display->display_options['fields']['sm_thumb_story_related_content_138x103_field_story_extra_large_image']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['sm_thumb_story_related_content_138x103_field_story_extra_large_image']['field'] = 'sm_thumb_story_related_content_138x103_field_story_extra_large_image';
-  $handler->display->display_options['fields']['sm_thumb_story_related_content_138x103_field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['sm_thumb_story_related_content_138x103_field_story_extra_large_image']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['sm_thumb_story_related_content_138x103_field_story_extra_large_image']['alter']['path'] = '[url]';
-  $handler->display->display_options['fields']['sm_thumb_story_related_content_138x103_field_story_extra_large_image']['alter']['target'] = '_blank';
-  $handler->display->display_options['fields']['sm_thumb_story_related_content_138x103_field_story_extra_large_image']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image */
+  $handler->display->display_options['fields']['sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image']['id'] = 'sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image';
+  $handler->display->display_options['fields']['sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image']['field'] = 'sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image';
+  $handler->display->display_options['fields']['sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image']['label'] = '';
+  $handler->display->display_options['fields']['sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image']['alter']['path'] = '[url]';
+  $handler->display->display_options['fields']['sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image']['element_label_colon'] = FALSE;
   /* Field: Apache Solr: label */
   $handler->display->display_options['fields']['label']['id'] = 'label';
   $handler->display->display_options['fields']['label']['table'] = 'apachesolr__solr';
@@ -259,6 +259,8 @@ function feature_for_photo_and_video_related_content_views_default_views() {
   $handler->display->display_options['fields']['label']['label'] = '';
   $handler->display->display_options['fields']['label']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['label']['alter']['text'] = '<a href="[url] " target="_blank">[label]</a>';
+  $handler->display->display_options['fields']['label']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['label']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['label']['element_label_colon'] = FALSE;
   /* Field: Apache Solr: hash */
   $handler->display->display_options['fields']['hash']['id'] = 'hash';
