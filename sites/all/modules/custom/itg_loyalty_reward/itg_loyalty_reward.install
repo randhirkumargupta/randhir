@@ -290,6 +290,13 @@ function itg_loyalty_reward_schema() {
         'serialize' => TRUE,
         'description' => 'Serialized data containing the product complete information.',
       ),
+      'nids' => array(
+        'description' => 'Comma separated nids',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
       'created' => array(
         'type' => 'int',
         'not null' => TRUE,

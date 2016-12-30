@@ -16,8 +16,8 @@
 function itg_loyalty_reward_address_form($form, &$form_state) {
   global $user;
   // validate cart total.
-  $cart_total_valid = _cart_total_point($user->uid, 'compare');  
-  if (!$cart_total_valid) {    
+  $cart_total_valid = _cart_total_point($user->uid, 'compare');
+  if (!$cart_total_valid) {
     drupal_goto('cart');
   }
   // Load user fields.
@@ -97,15 +97,15 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
  *
  * {@inheridoc} 
  */
-function itg_loyalty_reward_address_form_validate($form, &$form_state) {  
-  $inputs = $form_state['values']; 
+function itg_loyalty_reward_address_form_validate($form, &$form_state) {
+  $inputs = $form_state['values'];
   // Validate address field.
   if (empty($inputs['address'])) {
     form_set_error('address', 'Address field is required.');
-  }  
+  }
   if (empty($inputs['zip_code'])) {
     form_set_error('zip_code', 'Pincode field is required.');
-  }  
+  }
 }
 
 /**
@@ -113,10 +113,10 @@ function itg_loyalty_reward_address_form_validate($form, &$form_state) {
  *
  * {@inheritdoc}.
  */
-function itg_loyalty_reward_address_form_submit($form, &$form_state) {  
+function itg_loyalty_reward_address_form_submit($form, &$form_state) {
   global $user;
   //Prepare array for saving product information.  
-  $inputs = $form_state['values'];  
+  $inputs = $form_state['values'];
   // Get product info.
   $user_fields = user_load($user->uid);
   $user_fields->field_short_description['und'][0]['value'] = $inputs['address'];
@@ -159,18 +159,65 @@ function _cart_total_point($uid, $op = NULL) {
 }
 
 /**
+ * Compare product quantity on cart and node.
+ *
+ * @param array $cart_detail
+ *   Product details available on cart.
+ *
+ * @return array
+ *   Return node title and quantity of product in case cart quantity is
+ *   is greater than actual quantity on node.
+ */
+function itg_loyalty_reward_product_availability($cart_detail) {
+  $data = array();
+  foreach ($cart_detail as $cart_value) {
+    // Load node from node id.
+    $node = node_load($cart_value['product']['nid']);
+
+    // Update quantity field.
+    $available_quantity = $node->field_lrp_product_count[LANGUAGE_NONE][0]['value'];
+
+    // Compare cart and available quantity.
+    if ($available_quantity < $cart_value['quantity']) {
+      $data['not_available'][] = array(
+        'title' => $node->title,
+        'quantity' => $available_quantity
+      );
+    }
+    else {
+      $data['nid'][] = $cart_value['product']['nid'];
+    }
+  }
+
+  return $data;
+}
+
+/**
  * Page callback function for order place page.
  *
  * @global stdObject $user
  */
 function itg_loyalty_reward_place_order() {
-  global $user;
+  global $user, $base_url;
   // Get product info.
   $cart_detail = _get_cart_full_details($user->uid);
   $errors = array_filter($cart_detail);
   if (empty($errors)) {
     drupal_goto('product');
-  }  
+  }
+  // Check availability of the product.
+  $product_availability = itg_loyalty_reward_product_availability($cart_detail);
+  $errors = array_filter($product_availability['not_available']);
+  if (!empty($errors)) {
+    foreach ($product_availability['not_available'] as $product) {
+      drupal_set_message(
+          t('@name Only @quantity left in stock', array('@name' =>
+        $product['title'], '@quantity' => $product['quantity'])), 'error');
+    }
+    drupal_goto($base_url . '/cart');
+  }
+
+  // Load user from user id.
   $user_detail = user_load($user->uid);
   $fname = $user_detail->field_first_name['und'][0]['value'];
   $lname = $user_detail->field_last_name['und'][0]['value'];
@@ -180,15 +227,16 @@ function itg_loyalty_reward_place_order() {
     'phone' => $user_detail->field_mobile_number['und'][0]['value'],
     'address' => $user_detail->field_short_description['und'][0]['value'],
     'city' => $inputs['city'],
-    'zip_code' => 462011,
+    'zip_code' => $user_detail->field_user_pincode['und'][0]['value'],
   );
-  
-  $data['cart-items'] = $cart_detail;  
+
+  $data['cart-items'] = $cart_detail;
   // Save data into order table.
   $presave = array(
     'uid' => $user->uid,
     'product_information' => serialize($data),
     'created' => REQUEST_TIME,
+    'nids' => implode(',', $product_availability['nid']),
   );
   $order_placed = 0;
   try {
@@ -212,8 +260,68 @@ function itg_loyalty_reward_place_order() {
         ->condition('uid', $user->uid)
         ->execute();
     // Set cart order into session for order confirmation page.
-    $_SESSION['placed-item'] = $cart_detail;    
-    drupal_goto('order-confirmation');
+    $_SESSION['placed-item'] = $cart_detail;
+    $_SESSION['order_id'] = $order_placed;
+    // Update product count value is product node.
+    foreach ($cart_detail as $cart_value) {
+      // Load node from node id.
+      $node = node_load($cart_value['product']['nid']);
+      // Update quantity field.
+      $current_quantity = $node->field_lrp_product_count[LANGUAGE_NONE][0]['value'];
+      $updated_quantity = $current_quantity - $cart_value['quantity'];
+      if ($updated_quantity == 0) {
+        $node->field_lrp_completed[LANGUAGE_NONE][0]['value'] = 'Sold out';
+        $node->field_lrp_product_count[LANGUAGE_NONE][0]['value'] = $updated_quantity;
+      }
+      else {
+        $node->field_lrp_product_count[LANGUAGE_NONE][0]['value'] = $updated_quantity;
+      }
+      // Save node object.
+      node_save($node);
+    }
+    drupal_goto($base_url . '/order-confirmation');
   }
-  drupal_goto('order-confirmation');
+  drupal_goto($base_url . '/order-confirmation');
+}
+
+/**
+ * Implements sold history page callback.
+ *
+ * @param int $nid
+ *   Node if of product.
+ * @return array
+ *   Return table layout of the sold history.
+ */
+function itg_loyalty_reward_product_sold_history($nid) {
+  $itg_result = array();
+  // get all order ids who have selected node id.
+  $itg_query = db_select('itg_loyalty_reward_order', 'itg');
+  $itg_query->fields('itg', array('order_id', 'uid'))
+      ->condition('nids', '%' . db_like($nid) . '%', 'LIKE')
+      ->orderBy('order_id', 'desc');
+  $itg_result = $itg_query->execute()->fetchAll();
+  // Make table header.
+  $header = array(
+    t('Sr. No.'),
+    t('Username'),
+    t('Order No'),
+  );
+  $errors = array_filter($itg_result);
+  if (!empty($errors)) {
+    foreach ($itg_result as $key => $value) {
+      $user_detail = user_load($value->uid);
+      $rows[] = array(
+        $key + 1,
+        $user_detail->name,
+        $value->order_id,
+      );
+    }
+  }
+
+  return theme('table', array(
+    'header' => $header,
+    'rows' => $rows,
+    'attributes' => array('class' => array('views-table'))
+      )
+  );
 }
