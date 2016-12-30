@@ -30,7 +30,7 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_pattern_listing') {
     if(!empty($form['field_syndication_feed_content_value']['#options']['photogallery'])) {
-      $form['field_syndication_feed_content_value']['#options']['photogallery'] = t('Photo Gallery');
+      $form['field_syndication_feed_content_value']['#options']['photogallery'] = t('Photogallery');
     }
   }
   

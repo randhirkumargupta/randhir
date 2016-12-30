@@ -639,7 +639,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
   $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#options'] = itg_syndication_get_client("yes");
   $form['field_syndication_feed_clients']['#validated'] = TRUE;
   if(!empty($form['field_syndication_feed_content']['und']['#options']['photogallery'])) {
-      $form['field_syndication_feed_content']['und']['#options']['photogallery'] = t('Photo Gallery');
+      $form['field_syndication_feed_content']['und']['#options']['photogallery'] = t('Photogallery');
     }
   /* Check if nid exists then set predefine variables */
   if (isset($form_state['build_info']['args'][0]->nid)) {
