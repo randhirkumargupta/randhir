@@ -488,6 +488,16 @@ function itg_videogallery_custom_validate($form, &$form_state) {
     if (isset($expiry_date) && ($schedule_date > $expiry_date)) {
         form_set_error('field_story_expiry_date', t("Expiry date should be greater then schedule start date"));
     }
+    foreach ($form_state['values']['field_video_upload']['und'] as $videofields) {
+
+        if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
+            $fids[] = (int) $videofields['field_videogallery_video_upload']['und'][0]['fid'];
+        }
+    }
+    if(empty($fids))
+    {
+       form_set_error('field_video_upload', t("Please select video."));  
+    }
     //comment question validation
     $comment_checkbox = $form_state['values']['field_video_configurations'][LANGUAGE_NONE][0]['value'];
     if (isset($comment_checkbox) && $form_state['values']['field_story_comment_question'][LANGUAGE_NONE][0]['value'] == '') {
@@ -1168,7 +1178,7 @@ function itg_videogallery_thumb_assign() {
  */
 function get_video_filed_collection_by_its_id($entity_fid) {
     $query = db_select('field_data_field_videogallery_video_upload', 'fvd');
-    $query->fields('fvd', array('field_videogallery_video_upload_fid','field_videogallery_video_upload_description'));
+    $query->fields('fvd', array('field_videogallery_video_upload_fid', 'field_videogallery_video_upload_description'));
     $query->condition('	entity_id', $entity_fid);
     $result_video = $query->execute()->fetchAll();
     return $result_video;
@@ -1220,6 +1230,7 @@ function itg_videogallery_ftp_file_insert() {
     $file_path = drupal_realpath('public://');
     $connection_id = itg_videogallery_ftp_video_list();
     ftp_pasv($connection_id, true);
+
     $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
 
     ftp_close($connection_id);
@@ -1886,6 +1897,21 @@ function itg_videogallery_ftp_file_insert_cron() {
     $file_path = drupal_realpath('public://');
     $connection_id = itg_videogallery_ftp_video_list();
     ftp_pasv($connection_id, true);
+    $ftp_filess = ftp_nlist($connection_id, "/public_html/videos/");
+    foreach ($ftp_filess as $files_n) {
+
+        $file_data_array = explode('/public_html/videos/', $files_n);
+
+        $path_info_data = pathinfo($file_data_array[1]);
+        $filename = $path_info_data['filename'];
+        $extension = $path_info_data['extension'];
+        $exist_space = preg_match('/\s/', $filename);
+        if ($exist_space) {
+            $newfile = str_replace(' ', '_', $filename);
+            ftp_rename($connection_id, $files_n, '/public_html/videos/'.$newfile.'.'.$extension);
+        }
+    }
+    
     $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
     foreach ($ftp_files as $files) {
         $file_array = explode('/public_html/videos/', $files);
