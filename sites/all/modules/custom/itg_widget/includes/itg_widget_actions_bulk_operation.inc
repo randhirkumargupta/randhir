@@ -69,6 +69,38 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     $big_story_data = $form_state;
     save_big_story_widget_data($big_story_data);
   }
+  ######################## WIDGET CHANGES ###################
+  elseif ($widget_name == "top_stories_widget" && $current_display == "page_1") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "trending_videos_widget" && $current_display == "trending_videos") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "most_popular_widget" && $current_display == "most_popular") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "top_takes_video_widget" && $current_display == "top_takes_video") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "watch_right_now_widget" && $current_display == "watch_right_now") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "home_page_feature_widget" && $current_display == "page_1") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "photo_carousel_list_widget" && $current_display == "photo_carousel_list") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "video_carousel_list_widget" && $current_display == "video_carousel_list") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "we_may_suggest_widget" && $current_display == "photo_carousel_list") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "anchors_listing_widget" && $current_display == "anchors_listing_page") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  #################################################################
   elseif ($current_display == 'dont_miss_content') {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
     $dont_miss_content = $form_state;

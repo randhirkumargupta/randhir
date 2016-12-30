@@ -129,12 +129,12 @@ function sydication_pattren_file_name($name, $extention) {
 
 function sydication_feed_file_path($feed, $feed_dir, $filename) {
   $file = file_save_data($feed, "$feed_dir/" . $filename);
-  $file_server_path = getcwd() . '/' . str_replace('public:/', variable_get('file_public_path', 'sites/default/files'), $file->uri);
-  //$uri = 'public://';
+  //$file_server_path = getcwd() . '/' . str_replace('public:/', variable_get('file_public_path', 'sites/default/files'), $file->uri);
   $path = file_create_url($feed_dir);
   $file_path['file_path'] = $path . '/' . $filename;
   $file_path['file_name'] = $filename;
-  $file_path['real_path'] = $file_server_path;
+  $file_path['real_path'] = $feed_dir ."/". $filename;
+  //$uri = 'public://';
   return $file_path;
 }
 
@@ -489,14 +489,14 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
           }
           elseif ($field_name == 'body') {
             if (function_exists('remove_extra_tag_in_body')) {
-              $required_value[] = "<![CDATA[" . remove_extra_tag_in_body($field_item[0]['value'], ENT_XML1, 'UTF-8') . "]]>";
+              $required_value[] = "<![CDATA[ " . remove_extra_tag_in_body(htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8')) . " ]]>";
             }
             else {
-              $required_value[] = "<![CDATA[" . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . "]]>";
+              $required_value[] = "<![CDATA[ " . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . " ]]>";
             }
           }
           else {
-            $required_value[] = "<![CDATA[" . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . "]]>";
+            $required_value[] = "<![CDATA[ " . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . " ]]>";
           }
           break;
       }
@@ -638,7 +638,9 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
   /* Client list */
   $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#options'] = itg_syndication_get_client("yes");
   $form['field_syndication_feed_clients']['#validated'] = TRUE;
-
+  if(!empty($form['field_syndication_feed_content']['und']['#options']['photogallery'])) {
+      $form['field_syndication_feed_content']['und']['#options']['photogallery'] = t('Photo Gallery');
+    }
   /* Check if nid exists then set predefine variables */
   if (isset($form_state['build_info']['args'][0]->nid)) {
     $content_type = $form_state['build_info']['args'][0]->field_syndication_feed_content['und'][0]['value'];
