@@ -147,7 +147,7 @@
         }
         else {
           $supp_img = l($supp_img_url, 'node/' . $s_value->nid, array('html' => TRUE));
-          $supp_title = l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $value->nid);
+          $supp_title = l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $s_value->nid);
         }
       }
       elseif ($key > 0 && $key < 3) {
@@ -155,7 +155,7 @@
           $sup_sub_title .= '<p class="lock">' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
         }
         else {
-          $sup_sub_title .= '<p>' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $value->nid) . '</p>';
+          $sup_sub_title .= '<p>' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $s_value->nid) . '</p>';
         }
         }
       }
