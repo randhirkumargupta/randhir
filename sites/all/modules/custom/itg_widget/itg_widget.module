@@ -1582,4 +1582,4 @@ function itg_widget_form_views_form_section_wise_content_ordering_list_page_alte
 //function itg_widget_form_views_form_section_wise_content_ordering_list_we_may_suggest_widget_alter(&$form, &$form_state, $form_id) {
 //  $form['actions']['submit']['#submit'][] = "update_itg_widget_order_table_data_for_we_may_suggest";
 //}
->>>>>>> da06acab8ea4a55651220cb926814cd95be8054a
+
