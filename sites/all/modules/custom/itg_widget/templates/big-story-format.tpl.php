@@ -55,15 +55,17 @@ if (!empty($data)) :
           <?php
           $red_dot_class = "";
           $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
+          $node_title = mb_strimwidth($data['node_data']->title, 0, 65, "..");
           // get developing story status
-          if (function_exists(itg_msi_get_lock_story_status)) {
+          if (function_exists(itg_msi_get_lock_story_status) && $data['node_data']->type == 'story') {
               $get_develop_story_status = itg_msi_get_lock_story_status($data['node_data']->nid, 'developing_story');
-              if(!empty($get_develop_story_status)) {
-                $red_dot_class = 'story-red-two-dot';
+              if (!empty($get_develop_story_status)) {
+                $red_dot_class = "";
+                $node_title = $node_title . "<i class='fa fa-circle' aria-hidden='true'></i>";
               }
-           }
-           
-          // prepare configuration for sharing
+            }
+
+            // prepare configuration for sharing
           $share_title = $data['node_data']->title;
           $bigstory_title = preg_replace("/'/", "\\'", $data['node_data']->title);
           $bigstory_fb_share= htmlentities($bigstory_title, ENT_QUOTES);
@@ -71,7 +73,7 @@ if (!empty($data)) :
           $short_url = shorten_url($actual_link, 'goo.gl');
           ?>
           <h1 class="big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?>">
-            <?php echo l(mb_strimwidth($data['node_data']->title, 0, 65, ".."), $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}")); ?>
+            <?php echo l($node_title, $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}"), array('html' => TRUE)); ?>
           </h1>
         <?php endif; ?>
         <p>
