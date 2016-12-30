@@ -1277,6 +1277,9 @@ function itg_widget_views_api() {
 function itg_widget_views_query_alter(&$view, &$query) {
 
   global $user;
+//  if($view->name = 'programme_content' && $view->current_display == 'block') {
+//    //pr($query->where[1]['conditions']);
+//  }
   if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
 
     foreach ($query->table_queue as $queue => $queue_value) {
