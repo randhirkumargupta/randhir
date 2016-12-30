@@ -30,7 +30,7 @@ function itg_loyalty_reward_permission() {
  */
 function itg_loyalty_reward_menu() {
   // Configuration page menu.
-  $items['loyalty-points-configuration'] = array(
+  $items['admin/loyalty/loyalty-points-configuration'] = array(
     'title' => 'Loyalty Points Configuration Form',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('loyality_reward_points_configuration_form'),
