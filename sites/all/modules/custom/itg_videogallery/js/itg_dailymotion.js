@@ -63,7 +63,13 @@
                     //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
                     parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                     parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
-                        parent.jQuery.colorbox.close();
+                       try {
+                           parent.jQuery.colorbox.close();
+                       } catch(err) {
+                          alert(err);
+                       }
+                        
+                        
                     });
                    
                 }
