@@ -9261,7 +9261,9 @@ div.node{
   }
 }
 
-.node-story-form .itg-sidebar-form .metatags-and-remarks{
+.node-story-form .itg-sidebar-form .metatags-and-remarks, 
+.node-videogallery-form .itg-sidebar-form .metatags-and-remarks, 
+.node-photogallery-form .itg-sidebar-form .metatags-and-remarks{
   background: none;
   #remarks{
     fieldset{border: none; padding-top: 10px;}
@@ -9440,3 +9442,11 @@ div.node{
     content: '\f056';
   }
 }
+.node-photogallery-form{
+  .tabledrag-changed-warning{
+    text-align: center;
+  }
+  [id*="field-gallery-image-values"] tbody .field-multiple-drag{
+    display: block;
+  }
+} 
