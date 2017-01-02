@@ -10112,17 +10112,25 @@ div.node #comments h2 {
   left: 400px;
 }
 
-.node-story-form .itg-sidebar-form .metatags-and-remarks {
+.node-story-form .itg-sidebar-form .metatags-and-remarks,
+.node-videogallery-form .itg-sidebar-form .metatags-and-remarks,
+.node-photogallery-form .itg-sidebar-form .metatags-and-remarks {
   background: none;
 }
-.node-story-form .itg-sidebar-form .metatags-and-remarks #remarks fieldset {
+.node-story-form .itg-sidebar-form .metatags-and-remarks #remarks fieldset,
+.node-videogallery-form .itg-sidebar-form .metatags-and-remarks #remarks fieldset,
+.node-photogallery-form .itg-sidebar-form .metatags-and-remarks #remarks fieldset {
   border: none;
   padding-top: 10px;
 }
-.node-story-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2 {
+.node-story-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2,
+.node-videogallery-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2,
+.node-photogallery-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2 {
   padding-top: 10px !important;
 }
-.node-story-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2:before {
+.node-story-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2:before,
+.node-videogallery-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2:before,
+.node-photogallery-form .itg-sidebar-form .metatags-and-remarks .vertical-tabs h2:before {
   display: none;
 }
 
@@ -10298,4 +10306,11 @@ div.node #comments h2 {
 }
 .node-category-form #edit-relations[disabled] legend:after {
   content: '\f056';
+}
+
+.node-photogallery-form .tabledrag-changed-warning {
+  text-align: center;
+}
+.node-photogallery-form [id*="field-gallery-image-values"] tbody .field-multiple-drag {
+  display: block;
 }
