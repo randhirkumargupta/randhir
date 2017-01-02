@@ -211,7 +211,7 @@ function domain_source_node_load($nodes, $types) {
  */
 function domain_source_node_insert($node) {
   // If not set, we ignore.
-  if (!isset($node->domain_source) || is_null($node->domain_source)) {
+  if (empty($node->domain_source) || is_null($node->domain_source)) {
     return;
   }
   domain_source_node_delete($node);

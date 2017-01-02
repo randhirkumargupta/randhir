@@ -898,37 +898,29 @@ function itg_event_backend_insert_event_publish_details($nid, $event_start_date,
 function itg_event_backend_program_schedule_tab() {
   $event_id = itg_event_backend_get_event_node();
   $node = node_load($event_id);
-  $cat_id = $node->nid;
-  $query = db_select('itg_widget_order', 'w')
-    ->fields('w', array('nid'))
-    ->condition('w.cat_id', $cat_id)
-    ->orderBy('w.weight', 'DESC');
-  $result = $query->execute()->fetchAll();
-
   $counter = 0;
-  $output = array();
-  foreach ($result as $key => $value) {
-    $node_detail = entity_load('field_collection_item', array($value->nid));
-    $old_keys = explode(':', $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value']);
+  foreach ($node->field_program_schedule[LANGUAGE_NONE] as $program_schedule) {
+    $ans_detail = entity_load('field_collection_item', array($program_schedule['value']));
+    $old_keys = explode(':', $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value']);
     $keys = explode('Day-', $old_keys[0]);
-//    if ($node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'] != $key) {
-        $output[$keys[1]][$counter]['daywise'] = $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-        $output[$keys[1]][$counter]['session_title'] = $node_detail[$value->nid]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
-        $output[$keys[1]][$counter]['start_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-        $output[$keys[1]][$counter]['end_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-        $output[$keys[1]][$counter]['speaker'] = $node_detail[$value->nid]->field_select_speaker[LANGUAGE_NONE];
-//    }
-//    else {
-//        $output[$keys[1]][$counter]['daywise'] = $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-//        $output[$keys[1]][$counter]['session_title'] = $node_detail[$value->nid]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
-//        $output[$keys[1]][$counter]['start_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-//        $output[$keys[1]][$counter]['end_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-//        $output[$keys[1]][$counter]['speaker'] = $node_detail[$value->nid]->field_select_speaker[LANGUAGE_NONE]; 
-//    }
-//    $key = $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+    if ($ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'] != $key) {
+      $val[$keys[1]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      $val[$keys[1]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
+      $val[$keys[1]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+      $val[$keys[1]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+      $val[$keys[1]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
+    }
+    else {
+      $val[$keys[1]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      $val[$keys[1]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
+      $val[$keys[1]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+      $val[$keys[1]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+      $val[$keys[1]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
+    }
+    $key = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
     $counter++;
   }
-  return $output;
+  return $val;
 }
 
 /**
