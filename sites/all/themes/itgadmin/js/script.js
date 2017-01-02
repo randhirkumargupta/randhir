@@ -6,6 +6,17 @@ jQuery(document).ready(function() {
   jQuery('.node-story-form .vertical-tabs h2, .node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
   jQuery('.node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
   jQuery('.node-story-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+  
+  jQuery('.node-photogallery-form #title-metatags, .node-photogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-photogallery-form .vertical-tabs h2, .node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
+  jQuery('.node-photogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+  
+  jQuery('.node-videogallery-form #title-metatags, .node-videogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-videogallery-form .vertical-tabs h2, .node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
+  jQuery('.node-videogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+  
   var category_mgr_meta_title = jQuery('.node-category-form .path-form').prev();
   category_mgr_meta_title.css('margin-top', '20px').nextAll().hide();
   category_mgr_meta_title.click(function(){
@@ -865,17 +876,17 @@ jQuery(document).ready(function () {
         });
      });
      
-  jQuery('a.colorbox-load').each(function () {
-    var href = jQuery(this).attr('href');
-    jQuery(this).attr('jshref', href);
-  });
-  jQuery('a.colorbox-load').bind('click', function (e) {
-    e.preventDefault();
-    var href = jQuery(this).attr('jshref');
-    if (!e.metaKey && e.ctrlKey) {
-      e.metaKey = e.ctrlKey;
-    }
-  });
+//  jQuery('a.colorbox-load').each(function () {
+//    var href = jQuery(this).attr('href');
+//    jQuery(this).attr('jshref', href);
+//  });
+//  jQuery('a.colorbox-load').bind('click', function (e) {
+//    e.preventDefault();
+//    var href = jQuery(this).attr('jshref');
+//    if (!e.metaKey && e.ctrlKey) {
+//      e.metaKey = e.ctrlKey;
+//    }
+//  });
   jQuery("a.colorbox-load").bind("contextmenu",function(){
    return false;
   });

@@ -56,8 +56,10 @@
         <div class="itg-sidebar-form">
         <div id="Configuration" class="itg-sidebar-form-section">
   <h2 class="story-title">Configuration</h2>
+  <div class="itg-form-section hide">
   <?php print drupal_render($form['field_featured']); ?>
   <?php print drupal_render($form['field_common_related_content']); ?>
+  </div>
 </div>
 <!--<div id="Categorization" class="itg-sidebar-form-section">
   <h2 class="story-title">Categorization</h2>
@@ -66,6 +68,7 @@
 </div>-->
 <div id="SocialMedia" class="itg-sidebar-form-section image-repo-browse">
   <h2 class="story-title"><?php print t('Social Media'); ?></h2>
+  <div class="itg-form-section hide">
   <?php print drupal_render($form['field_story_social_media_integ']); ?>
   <!-- Facebook fields -->
   <?php print drupal_render($form['field_story_facebook_narrative']); ?>
@@ -78,12 +81,12 @@
   <?php print drupal_render($form['field_story_tweet_image']); ?>  
   <?php print drupal_render($form['field_story_twitter_video_desc']); ?>  
   <?php print drupal_render($form['field_story_twitter_video']); ?>  
-  
+  </div>
 </div>
 
 
 <div class="metatags-and-remarks">
-    <h2 class="story-title"><?php print t('Remarks'); ?></h2>
+    <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
     <?php print drupal_render_children($form); ?> 
 </div>    
     </div>
