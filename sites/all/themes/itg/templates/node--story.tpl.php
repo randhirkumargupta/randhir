@@ -580,7 +580,7 @@ if (!empty($content)):
                     <?php if (!empty($related_content)) { ?>
                     <div class="related-story related-story-bottom">
                             <?php                            
-                               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_left_block');
+                               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_bottom_block');
                                 print render($block['content']);
                              ?>
                         </div>
