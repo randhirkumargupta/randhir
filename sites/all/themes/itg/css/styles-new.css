@@ -56,6 +56,7 @@ input[type="text"]:focus, textarea:focus {
   /* For Firefox */
   background: linear-gradient(#fefefe, #f3f3f3);
   /* Standard syntax */
+  color: #b7b7b7;
 }
 [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-tm-vid-4-names-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-sm-field-itg-common-by-line-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-bundle-name-wrapper, [id="views-exposed-form-front-end-global-search-page"] .views-exposed-form #edit-hash-wrapper {
   position: relative;
@@ -290,13 +291,16 @@ input[type="text"]:focus, textarea:focus {
 #block-views-photo-landing-slider-block .social-icon ul li a {
   font-size: 22px;
   color: #c0c0c0;
-  padding: 0 12px;
+  padding: 0 10px;
   line-height: 35px;
   display: block;
   cursor: pointer;
 }
 #block-views-photo-landing-slider-block .social-icon ul li a:hover {
   background: #222222;
+}
+#block-views-photo-landing-slider-block .social-icon ul li .flag-throbber {
+  display: none;
 }
 #block-views-photo-landing-slider-block .social-icon.desktop-hide {
   margin: 10px 0;
@@ -2887,6 +2891,36 @@ blockquote:after {
 
 .recom-listing a:hover, .data-holder a:hover {
   color: #193984;
+}
+
+.survey-submit-btn-wrapper {
+  position: relative;
+}
+.survey-submit-btn-wrapper .ajax-progress {
+  position: absolute;
+  left: 130px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+.survey-submit-btn-wrapper .ajax-progress .message {
+  display: none;
+}
+
+.survey-form-wrapper-one .ajax-progress {
+  margin: 10px 0 0 -10px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+.survey-form-wrapper-one .ajax-progress .message {
+  display: none;
 }
 
 /* CSS To Add Zoom Effect on Images */

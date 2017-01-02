@@ -194,14 +194,6 @@
                     }
                 });
             });
-            // Product popup show more/less code.
-            if ($('body').hasClass('page-order-confirmation')) {
-                history.pushState(null, null, document.title);
-                window.addEventListener('popstate', function () {
-                    history.pushState(null, null, document.title);
-                });
-            }
-            // Product popup show more/less code end here.
 
             // Code end for product page.
 

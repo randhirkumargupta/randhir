@@ -526,86 +526,14 @@ function itg_widget_keycandidate_form_submit($form, $form_state) {
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
-
-
-  $setting = array();
-  $queue_flag = "";
-  $view_name = isset($form_state['view']->name) ? $form_state['view']->name : "";
-  $current_display = isset($form_state['view']->current_display) ? $form_state['view']->current_display : "";
-  /* Load all nodes queues */
-  $queues = nodequeue_load_queues(nodequeue_get_all_qids());
-  switch ($view_name) {
-// top story
-    case 'story_widget':
-      if ($current_display == 'most_popular') {
-//  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Most Popular");
-        $queue_flag = 5; // most popular
-      }
-      elseif ($current_display == 'trending_videos') {
-//  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-        $queue_flag = 4; // top story widget qid
-      }
-      elseif ($current_display == 'top_takes_video') {
-//  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-        $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('top_takes_videos'); // top story widget qid
-      }
-      elseif ($current_display == 'watch_right_now') {
-//  watchdog("Widget", "Nodequeue bulk operation settings has been found for : Trending video");
-        $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('watch_right_now'); // top story widget qid
-      }
-      else {
-        $queue_flag = 1; // trending_videos widget qid
-      }
-      break;
-// home page feature
-    case 'home_page_feature_widget':
-// watchdog("Widget", "Nodequeue bulk operation settings has been found for : home page feature");
-      $queue_flag = 2; // home page feature qid
-      break;
-// We may suggest
-    case 'we_may_suggest':
-// watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
-      $queue_flag = 3; // home page feature qid
-      break;
-    case 'widget_anchors_listing':
-// watchdog("Widget", "Nodequeue bulk operation settings has been found for : we may suggest");
-      $queue_flag = $queue_flag = get_nodequeue_load_queue_by_name('widget_anchor'); // anchor widget nodequeue
-      break;
-
-    case 'photo_carousel_widget':
-      if ($current_display == 'photo_carousel_list') {
-//watchdog("Widget", "Nodequeue bulk operation settings has been found for : Photo Carousel video");
-        $queue_flag = get_nodequeue_load_queue_by_name('photo_carousel');
-        ; // photo carousel list widget qid
-      }
-      if ($current_display == 'video_carousel_list') {
-//watchdog("Widget", "Nodequeue bulk operation settings has been found for : Video Carousel video");
-        $queue_flag = get_nodequeue_load_queue_by_name('video_carousel'); // video carousel list widget qid
-      }
-
-      break;
-  }
-  if (!empty($queues[$queue_flag])) {
-    $setting['name'] = $queues[$queue_flag]->name;
-    $setting['qid'] = $queues[$queue_flag]->qid;
-    $setting['title'] = $queues[$queue_flag]->title;
-// add js for setting
-    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.main.js', 'file');
-// pass setting to js for bulk operation
-    drupal_add_js(array('itg_widget' => array('data' => $setting)), 'setting');
-  }
-// Alter form for confirm message during bulk operation.
-// Below forms are thoese which are not doing action for nodequeue.
-// Nodequeue from are being altered form itg_widget.main.js.
+  // Alter form for confirm message during bulk operation.
   $form_id_array_to_alter = array(
     'views_form_section_wise_draggable_content_order_big_story_format',
     'views_form_section_wise_draggable_content_order_dont_miss_content',
     'views_form_section_wise_draggable_content_order_we_may_suggest_widget',
     'views_form_section_wise_draggable_content_order_page',
   );
-
-
-
+  
   if (in_array($form_id, $form_id_array_to_alter)) {
     $form['actions']['submit']['#value'] = t('Confirm');
   }
@@ -738,6 +666,10 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
 // Hiding section filed from basic page (Static page node form)
   if ($form_id == 'page_node_form') {
     drupal_add_css("div.form-item-field-page-section-und {display:none}", 'inline');
+  }
+  
+  if(in_array($form_id, itg_widget_order_reorder_form())) {
+    $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
   }
 // Assign deafult values in case of checkbox are checked.
   $form = get_sessions_of_ticked_nodes($form);
@@ -1322,38 +1254,6 @@ function autocomplete_for_year_end_widgets() {
   }
 }
 
-/**
- * Function used to get widget name
- * 
- * {@inheritdoc}
- */
-function _get_widget_name($view_name, $page_name) {
-  $widget = "";
-// TODO: Use switch-case
-
-  if (($view_name == 'views_form_section_wise_draggable_content_order_page' || $view_name == 'views_form_section_wise_content_ordering_list_page') && $page_name == 'page') {
-    $widget = 'section_wise_widget';
-  }
-  else if ($page_name == 'we_may_suggest_widget') {
-    $widget = 'we_may_suggest_widget';
-  }
-  else if ($page_name == 'most_popular_widget') {
-    $widget = 'we_may_suggest_widget';
-  }
-  else if ($page_name == 'big_story_format') {
-    $widget = 'big_story_format_widget';
-  }
-  else if ($page_name == 'photo_carousel_list') {
-    $widget = 'photo_carousel_list_widget';
-  }
-  else if ($page_name == 'video_carousel_list') {
-    $widget = 'video_carousel_list_widget';
-  }
-  else if ($page_name == 'dont_miss_content') {
-    $widget = 'dont_miss_content_widget';
-  }
-  return $widget;
-}
 
 /**
  * Implements hook_views_api().
@@ -1377,6 +1277,9 @@ function itg_widget_views_api() {
 function itg_widget_views_query_alter(&$view, &$query) {
 
   global $user;
+//  if($view->name = 'programme_content' && $view->current_display == 'block') {
+//    //pr($query->where[1]['conditions']);
+//  }
   if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
 
     foreach ($query->table_queue as $queue => $queue_value) {
@@ -1422,7 +1325,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
   }
 
-  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_display_page') || ($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
+  if (($view->name == 'widget_anchors_listing' && $view->current_display == 'anchors_listing_page')) {
     $anchor_tid = variable_get('anchor_id_for_widget');
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
     if (strlen($anchor_tid) <= 0) {

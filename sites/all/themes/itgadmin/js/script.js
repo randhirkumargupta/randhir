@@ -876,6 +876,9 @@ jQuery(document).ready(function () {
       e.metaKey = e.ctrlKey;
     }
   });
+  jQuery("a.colorbox-load").bind("contextmenu",function(){
+   return false;
+  });
      
   // jQuery code for story form templates-tab   
   jQuery('.templates-tab').on('click', 'span', function(){
