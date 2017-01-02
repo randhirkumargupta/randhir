@@ -1060,6 +1060,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
             .ajax-progress-throbber{
               display: none;
             }
+            .image-preview{
+              img{
+                max-width: 100px;
+                max-height: 80px;
+              }
+            }
           }
           div.description{
             margin-top: 40px;
