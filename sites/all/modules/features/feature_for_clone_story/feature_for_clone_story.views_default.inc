@@ -170,16 +170,9 @@ function feature_for_clone_story_views_default_views() {
   $handler->display->display_options['fields']['ds_created']['table'] = 'apachesolr__solr';
   $handler->display->display_options['fields']['ds_created']['field'] = 'ds_created';
   $handler->display->display_options['fields']['ds_created']['label'] = 'Created date';
-  $handler->display->display_options['fields']['ds_created']['date_format'] = 'medium';
+  $handler->display->display_options['fields']['ds_created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['ds_created']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['ds_created']['second_date_format'] = 'long';
-  /* Field: Apache Solr: ds_changed */
-  $handler->display->display_options['fields']['ds_changed']['id'] = 'ds_changed';
-  $handler->display->display_options['fields']['ds_changed']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['fields']['ds_changed']['field'] = 'ds_changed';
-  $handler->display->display_options['fields']['ds_changed']['label'] = 'Updated date';
-  $handler->display->display_options['fields']['ds_changed']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['ds_changed']['date_format'] = 'medium';
-  $handler->display->display_options['fields']['ds_changed']['second_date_format'] = 'long';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';

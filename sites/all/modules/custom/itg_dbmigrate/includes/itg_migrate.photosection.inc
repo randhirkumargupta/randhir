@@ -4,7 +4,7 @@
 /**
  * ItgSectionMigration extends XMLMigration 
  */
-class ItgSectionMigration extends XMLMigration {
+class ItgPhotoMigration extends XMLMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of terms (category)');
@@ -28,7 +28,7 @@ class ItgSectionMigration extends XMLMigration {
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'section.xml';
+    $items_url = $xml_folder . 'photo_category.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -70,26 +70,35 @@ class ItgSectionMigration extends XMLMigration {
     
     $this->addFieldMapping('name', 'name')->xpath('name'); 
     $this->addFieldMapping('field_cm_display_title', 'title')->xpath('title');
-    $this->addFieldMapping('field_sponser_logo', 'image')->xpath('image');
-    $this->addFieldMapping('description', 'description')->xpath('description');
-    $this->addFieldMapping('field_category_section_flag', 'section_flag')->xpath('section_flag'); 
+    $this->addFieldMapping('weight', 'ordering')->xpath('ordering');
     $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
     $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sef_url')->xpath(t('sef_url'));
+    $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
+    // add parent of photo category
+    $this->addFieldMapping('parent', 'section_id')->xpath('section_id');
+   /* $this->addFieldMapping('field_sponser_logo', 'image')->xpath('image');
+    $this->addFieldMapping('description', 'description')->xpath('description');
+    $this->addFieldMapping('field_category_section_flag', 'section_flag')->xpath('section_flag'); 
     $this->addFieldMapping('field_cm_select_template_type', 'template_name')->xpath('template_name');
-    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
     $this->addFieldMapping('field_cm_select_type', 'content_type')->xpath('content_type');
     $this->addFieldMapping('field_cm_category_banner', 'header_image')->xpath('header_image');
-    $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
     $this->addFieldMapping('field_cm_category_color', 'content_display_color')->xpath('header_image');
-    $this->addFieldMapping('weight', 'ordering')->xpath('ordering');
-    $this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type');       
+    $this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type');*/    
     //<issue_free>0</issue_free> (not clear)
     //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
     //$this->addFieldMapping('metatag_robots', 'nodeword_robots');
 
   }
-  
+   public function prepareRow($row) {
+     $term_name = 'Photo';
+     $vid = 4;
+     $parent_tid = itg_db_migrate_parent_term($term_name, $vid);
+     $row->xml->section_id = $parent_tid;
+   }
+   
   public function complete($entity, $row) {  
     $created = !empty($row->xml->created) ? (string) $row->xml->created : time();
     $status = isset($row->xml->published) ? (string) $row->xml->published : 1;

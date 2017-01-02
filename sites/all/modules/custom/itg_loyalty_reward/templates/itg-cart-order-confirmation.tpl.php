@@ -7,14 +7,14 @@
 
 <div class="order-confirmation">
     <div class="thankyou-block">
-        <h2>Thank you for your order</h2>
-        <p>Your order has been placed and is being processed. Once the item is shipped, you will
-            receive an email with details.
+        <h2><?php print t('Thank you for your order'); ?></h2>
+        <p><?php print t('Your order has been placed and is being processed. Once the item is shipped, you will
+            receive an email with details.'); ?>
         </p>
     </div>
     <div class="order-summary-block">
-        <h3>Your order summary</h3>
-        <div class="order-id">Order id: <span><?php print 12345; ?></span></div>
+        <h3><?php print t('Your order summary'); ?></h3>
+        <div class="order-id">Order id: <span><?php print $_SESSION['order_id']; ?></span></div>
         <div class="order-detail">            
             <?php $cart_total = 0; ?>
             <?php foreach ($_SESSION['placed-item'] as $cart_detail): ?>
@@ -47,6 +47,7 @@
                 </div>
             <?php endforeach; ?>
             <?php unset($_SESSION['placed-item']); ?>
+            <?php unset($_SESSION['order_id']); ?>
         </div>
     </div>
 </div>
