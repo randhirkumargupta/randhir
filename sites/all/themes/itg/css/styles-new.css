@@ -2936,6 +2936,7 @@ blockquote:after {
   .big-story-col-1 a,
   .may-we-suggest > a,
   .watch-right-now-list > a,
+  .recom-listing .pic a,
   .section-ordering a {
     overflow: hidden;
     display: block;
@@ -2947,6 +2948,7 @@ blockquote:after {
   .big-story-col-1 a img,
   .may-we-suggest > a img,
   .watch-right-now-list > a img,
+  .recom-listing .pic a img,
   .section-ordering a img {
     transition: all 500ms ease 0s;
   }
@@ -2957,6 +2959,7 @@ blockquote:after {
   .big-story-col-1 a img:hover,
   .may-we-suggest > a img:hover,
   .watch-right-now-list > a img:hover,
+  .recom-listing .pic a img:hover,
   .section-ordering a img:hover {
     transform: scale(1.2);
   }
