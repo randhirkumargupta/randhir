@@ -494,9 +494,8 @@ function itg_videogallery_custom_validate($form, &$form_state) {
             $fids[] = (int) $videofields['field_videogallery_video_upload']['und'][0]['fid'];
         }
     }
-    if(empty($fids))
-    {
-       form_set_error('field_video_upload', t("Please select video."));  
+    if (empty($fids)) {
+        form_set_error('field_video_upload', t("Please select video."));
     }
     //comment question validation
     $comment_checkbox = $form_state['values']['field_video_configurations'][LANGUAGE_NONE][0]['value'];
@@ -1211,6 +1210,22 @@ function itg_videogallery_video_bitrate() {
 }
 
 /**
+ * This function use for get field colloction data by nid
+ * 
+ */
+function get_video_in_fieldcollection_by_nid($nid) {
+    $query = db_select('field_data_field_video_upload', 'up_video');
+    $query->join('field_data_field_videogallery_video_upload', 'fvu', 'up_video.field_video_upload_value = fvu.entity_id');
+    $query->join('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
+    $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
+    $query->fields('up_video', array('entity_id'));
+    $query->condition('up_video.entity_id', $nid);
+    $query->orderBy('field_video_upload_value','ASC');
+    $result = $query->execute()->fetchAll();
+    return $result;
+}
+
+/**
  * Implements function for get videoid by file id
  * @param int $fid
  */
@@ -1891,11 +1906,11 @@ function videogallery_new_fileupload_form($form, &$form_state) {
 /**
  * This function use for allow file extension .
  */
-
 function itg_video_file_managed_file_process($element) {
-  $element['upload']['#attributes']['accept'] = '.mp4';
-  return $element;
+    $element['upload']['#attributes']['accept'] = '.mp4';
+    return $element;
 }
+
 /**
  * Implements function for get options for Local FTP file list and used
  * @return array
@@ -1917,10 +1932,10 @@ function itg_videogallery_ftp_file_insert_cron() {
         $exist_space = preg_match('/\s/', $filename);
         if ($exist_space) {
             $newfile = str_replace(' ', '_', $filename);
-            ftp_rename($connection_id, $files_n, '/public_html/videos/'.$newfile.'.'.$extension);
+            ftp_rename($connection_id, $files_n, '/public_html/videos/' . $newfile . '.' . $extension);
         }
     }
-    
+
     $ftp_files = ftp_nlist($connection_id, "/public_html/videos/");
     foreach ($ftp_files as $files) {
         $file_array = explode('/public_html/videos/', $files);
