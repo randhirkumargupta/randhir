@@ -47,7 +47,7 @@ if (!empty($content)):
             <?php //pr($node);  ?> 
             <div class="comment-mobile desktop-hide">
                 <ul>
-                    <li><a href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> Mail to author</a></li>
+                    <li class="mail-to-author"><a href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> Mail to author</a></li>
                     <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
                     <?php
                     if ($config_name == 'vukkul') {
