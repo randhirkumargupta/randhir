@@ -8324,6 +8324,7 @@ div.node{
 #draggableviews-table-photo-carousel-widget-video-carousel .tabledrag-hide {display:none !important}
 #draggableviews-table-issue-base-magazin-widget-issue-magazin-widget-list .tabledrag-hide {display:none !important}
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-image-caption textarea{height: 50px;}
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio input[type="file"]{max-width: 104px;}
 [id*="views-exposed-form-Event-backend-page"]{
   .views-submit-button{
     .form-submit{
