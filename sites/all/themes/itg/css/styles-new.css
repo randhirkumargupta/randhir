@@ -2887,6 +2887,9 @@ blockquote {
   position: relative;
   text-align: justify;
   text-indent: 40px;
+  float: right;
+  width: 50%;
+  margin-left: 15px;
 }
 blockquote:before {
   content: "\201C";
@@ -3112,6 +3115,12 @@ blockquote:after {
   }
   .total-point-wrapper .points-to-go {
     padding-right: 15px;
+  }
+
+  blockquote {
+    margin-left: 0;
+    float: none;
+    width: 100%;
   }
 }
 [id*="protected-pages-enter-password"] fieldset {
