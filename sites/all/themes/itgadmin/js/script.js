@@ -876,17 +876,17 @@ jQuery(document).ready(function () {
         });
      });
      
-//  jQuery('a.colorbox-load').each(function () {
-//    var href = jQuery(this).attr('href');
-//    jQuery(this).attr('jshref', href);
-//  });
-//  jQuery('a.colorbox-load').bind('click', function (e) {
-//    e.preventDefault();
-//    var href = jQuery(this).attr('jshref');
-//    if (!e.metaKey && e.ctrlKey) {
-//      e.metaKey = e.ctrlKey;
-//    }
-//  });
+  jQuery('a.colorbox-load').each(function () {
+    var href = jQuery(this).attr('href');
+    jQuery(this).attr('jshref', href);
+  });
+  jQuery('a.colorbox-load').bind('click', function (e) {
+    e.preventDefault();
+    var href = jQuery(this).attr('jshref');
+    if (!e.metaKey && e.ctrlKey) {
+      e.metaKey = e.ctrlKey;
+    }
+  });
   jQuery("a.colorbox-load").bind("contextmenu",function(){
    return false;
   });
