@@ -36,7 +36,14 @@
     <div class="breakingnew-home">
       <div class="title">Breaking</div>    
       <div class="new-detail">  
+          <div class="marquee">
           <?php print $field->content; ?>        
+          </div>
+                  
+          <div class="live-tv-link">
+              <a href="#"><img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png'; ?>"</a>
+              <a href="javascript:void(0)" class="breaking-new-close">X</a>            
+          </div>
           <div class="social-share">
               <ul>
                   <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
@@ -44,10 +51,6 @@
                   <li><a href="javascript:"  class="twitter"><i class="fa fa-twitter"></i></a></li>
                   <li><a title="share on google+" href="#"  class="google"></a></li>
               </ul>
-          </div>        
-          <div class="live-tv-link">
-              <a href="#"><img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png'; ?>"</a>
-              <a href="javascript:void(0)" class="breaking-new-close">X</a>            
           </div>
       </div>
   </div>    
