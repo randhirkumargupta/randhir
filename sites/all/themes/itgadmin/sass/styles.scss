@@ -9450,3 +9450,6 @@ div.node{
     display: block;
   }
 } 
+[id*="field-highlights-values"]{
+  @extend .itg-add-another-item;
+}

@@ -339,7 +339,29 @@
         }
     } 
 }
-/*story page css add*/
+/*story page css end*/
+
+/*sports page css start*/
+.sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news{
+    padding: 5px;
+    margin: 0;
+}
+.page-sports-video .view-content .photo-list{
+    white-space: nowrap;
+    overflow: auto;
+    li{
+      float: none;
+      display: inline-block;
+      width: 170px;
+      vertical-align: top;
+        a{
+            white-space: pre-wrap;
+        }
+    }  
+}
+/*story page css end*/
+
+
 }
 
 @media only screen and (max-width:768px){
@@ -1007,19 +1029,22 @@
             padding: 0;
             width: 100%;
             float: none;
+            .marquee{
+                width: 100%;
+            }
             .social-share{
-            display: none;
-        }
-        .live-tv-link{
-            .live-tv-icon{
                 display: none;
             }
-            .breaking-new-close{
-                position: absolute;
-                top: 10px;
-                right: 10px;
+            .live-tv-link{
+                .live-tv-icon{
+                    display: none;
+                }
+                .breaking-new-close{
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                }
             }
-        }
         }
         
     }
@@ -1047,6 +1072,18 @@
     }
 }    
 /*story page comment section end*/
+
+/*Home page css start*/
+.home_page_poll_widget_block, .sport-home-layout-page{
+    .poll-data{
+        padding:0;
+        .poll-banner-image img{
+            max-width: 100%;
+        }
+    }  
+} 
+/*Home page css end*/
+
 }
 
 @media only screen and (max-width:680px){ 
