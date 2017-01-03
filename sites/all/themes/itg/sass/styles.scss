@@ -1279,7 +1279,7 @@ footer{
         }
         iframe{
            width: 100%;
-           height: 46vh;
+           height: 45vh;
         }
         i{
             position: absolute;
@@ -1344,7 +1344,7 @@ footer{
         }
     }
     .big-story-detail{
-        max-height: 80px;
+        max-height: 106px;
         overflow: auto;
         li{
             @include before-icon-list(6px, 6px, 5px, 0, #ffffff, 50%);
@@ -2395,7 +2395,12 @@ footer{
     }
     .snap-post{ 
         margin-top: 0;
-    }      
+    }
+    .comment-mobile{
+        li.mail-to-author{            
+            display: none;            
+        }
+    }
 }
 .related-story-page{
             margin-top: 50px;
@@ -9353,14 +9358,19 @@ input[type="radio"]:checked + label:after{
         width:89.7%;
         @include float(left);
         font-size:20px;
-        .field-content{
-            @include display-inline;
-            a{
-                color:#000;
+        .marquee{
+            width: 75%;
+            overflow: hidden;           
+            @include float(left);
+            .field-content{                
+                @include display-inline;           
+                a{
+                    color:#000;
+                }
             }
         }
         .social-share{
-            @include display-inline;
+           @include float(right);
             @include social-share;     
             padding-top: 6px;
             ul{
@@ -9417,17 +9427,42 @@ input[type="radio"]:checked + label:after{
     }
 }
 /*homepage marquee*/
-.marquee {  
-    overflow: hidden;    
+.marquee .field-content {       
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;    
+    -moz-transform:translateX(100%);
+    -webkit-transform:translateX(100%);	
+    transform:translateX(100%);
+    -moz-animation: marquee 30s linear infinite;
+    -webkit-animation: marquee 30s linear infinite;
+    animation: marquee 30s linear infinite;
 }
-.marquee a {
-    display: block;        
-    position: relative;
-    animation: marquee 5s linear infinite;
+.marquee .field-content:hover {
+    animation-play-state: paused
+}
+/* Move it (define the animation) */
+@-moz-keyframes marquee {
+    0%   { -moz-transform: translateX(100%); }
+    100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes marquee {
+    0%   { -webkit-transform: translateX(100%); }
+    100% { -webkit-transform: translateX(-100%); }
 }
 @keyframes marquee {
-    0% { left: 0; }
-    100% { left: -100%; }
+    0%   { 
+        -moz-transform: translateX(100%); /* Firefox bug fix */
+        -webkit-transform: translateX(100%); /* Firefox bug fix */
+        transform: translateX(100%); 		
+    }
+    100% { 
+        -moz-transform: translateX(-100%); /* Firefox bug fix */
+        -webkit-transform: translateX(-100%); /* Firefox bug fix */
+        transform: translateX(-100%); 
+    }
 }
+ /*homepage marquee end*/
 
-/*homepage marquee end*/
+

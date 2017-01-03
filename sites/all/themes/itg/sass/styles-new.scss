@@ -1060,6 +1060,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
             .ajax-progress-throbber{
               display: none;
             }
+            .image-preview{
+              img{
+                max-width: 100px;
+                max-height: 80px;
+              }
+            }
           }
           div.description{
             margin-top: 40px;
@@ -1651,15 +1657,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       background-color: #000;
       float: left;
       width: 100%;
-      height: 68px;
-      margin-bottom: 11px;
+      margin-bottom: 16px;
       overflow: hidden;
       h2{
         color: #fff;
         font-size: 20px;
         line-height: 24px;
         margin: 0;
-        padding: 10px;
+        padding:13px 10px;
       }
       .updated-msg{
         display: none;
@@ -1690,15 +1695,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
     }
     .poll-replace-id .form-submit{
-        width: 100px;
-        height: 36px;
+        width: 95px;
+        height: 32px;
         background-color: #e3e3e3;
-        border: none;
-        width: 100px;
-        height: 36px;
+        border: none;               
         font-weight: 500;
-        font-family: Roboto;
-        margin-top: 20px;        
+        font-family: Roboto;            
         color: #5f5f5f;
         margin: 15px auto 0;
         display: inherit;
@@ -2879,6 +2881,7 @@ blockquote {
   .big-story-col-1 a,
   .may-we-suggest > a,
   .watch-right-now-list > a,
+  .recom-listing .pic a,
   .section-ordering a{
     @extend .zoom-image;
   }

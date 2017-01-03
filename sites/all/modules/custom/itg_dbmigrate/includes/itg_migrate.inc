@@ -76,6 +76,9 @@ function itg_dbmigrate_migrate_api() {
       'itg_state' => array(
         'title' => t('Itg State Migration'),
       ),
+      'itg_Photo_category' => array(
+        'title' => t('Itg Photo Category Migration'),
+      ),
       /*'itg_magazine' => array(
         'title' => t('Itg magazine Imports'),
       ),
@@ -164,6 +167,10 @@ function itg_dbmigrate_migrate_api() {
       'ItgState' => array(
         'class_name' => 'ItgStateMigration',
         'group_name' => 'itg_state',
+      ),
+      'ItgPhoto' => array(
+        'class_name' => 'ItgPhotoMigration',
+        'group_name' => 'itg_Photo_category',
       ),
       /*'ItgMagazine' => array(
         'class_name' => 'ItgMagazineMigration',

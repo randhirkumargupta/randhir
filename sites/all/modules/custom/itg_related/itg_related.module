@@ -389,7 +389,7 @@ function itg_related_save_search() {
 
     $final_link = str_replace("&width=900&height=700&iframe=true", "", $save_search_result_info['search_path']);
 
-    print '<li><a href="' . $final_link . '&width=900&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
+    print '<li><a oncontextmenu="return false;" href="' . $final_link . '&width=900&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
   }
 
   print '</ul>';

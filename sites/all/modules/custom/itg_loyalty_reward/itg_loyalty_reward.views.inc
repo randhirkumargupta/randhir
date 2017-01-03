@@ -16,7 +16,144 @@ function itg_loyalty_reward_views_data() {
       'handler' => 'itg_loyalty_reward_views_handler_field_current_path',
     ),
   );
+  $data['itg_loyalty_reward_order']['table']['group'] = t('ITG Order');
+  $data['itg_loyalty_reward_order']['table']['base'] = array(
+    'field' => 'order_id',
+    'title' => t('ITG Order'),
+    'default' => array(
+      'field' => 'order_id',
+    ),
+  );
+
+  $data['itg_loyalty_reward_order']['product_information'] = array(
+    'title' => t('Product Information'),
+    'help' => t('Product Information.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
+  );
+  $data['itg_loyalty_reward_order']['nids'] = array(
+    'title' => t('Node ids'),
+    'help' => t('Product ids available on current order.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
+  );
+
+  // Order_id
+  $data['itg_loyalty_reward_order']['order_id'] = array(
+    'title' => t('Order Id'),
+    'help' => t('The order id.'),
+    // Information for displaying the nid
+    'field' => array(
+      'handler' => 'views_handler_field_node',
+      'click sortable' => TRUE,
+    ),
+    // Information for accepting a nid as a filter
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    // Information for sorting on a nid.
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+  // Created date
+  $data['itg_loyalty_reward_order']['created'] = array(
+    'title' => t('Created Date'),
+    'help' => t('Order created date.'),
+    'field' => array(
+      'handler' => 'views_handler_field_date',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort_date',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_date',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_date'
+    ),
+  );
+
+  // Product information.
+  $data['views']['product_information'] = array(
+    'title' => t('Product Information'),
+    'help' => t('Product Information.'),        
+    'field' => array(
+      'handler' => 'itg_loyalty_reward_views_handler_field_product_information',
+    ),    
+  );
+  
   return $data;
+}
+
+class itg_loyalty_reward_views_handler_field_product_information extends views_handler_field {
+  /**
+   * {@inheritdoc}
+   */
+  function query() {
+    // Do nothing -- to override the parent query.
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function option_definition() {
+    $options = parent::option_definition();
+    
+    return $options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function options_form(&$form, &$form_state) {    
+    parent::options_form($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function render($values) {    
+    $product_info = unserialize($values->itg_loyalty_reward_order_product_information);   
+    
+    // Prepare product information.
+    
+    foreach ($product_info['cart-items'] as $product) {
+      $output = '';
+      $output = '<div>';
+      $output .= '<div>' . $product['product']['nid'] . '</div>';      
+      $output .= '<div>' . $product['product']['title'] . '</div>';
+      $output .= '<div>' . $product['product']['points'] . '</div>';
+      $output .= '<div>' . $product['quantity'] . '</div>';
+      $output .= '</div>';
+    }
+    
+    
+    return $output;
+  }
 }
 
 /**
