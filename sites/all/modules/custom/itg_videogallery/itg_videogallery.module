@@ -1217,8 +1217,11 @@ function get_video_in_fieldcollection_by_nid($nid) {
     $query = db_select('field_data_field_video_upload', 'up_video');
     $query->join('field_data_field_videogallery_video_upload', 'fvu', 'up_video.field_video_upload_value = fvu.entity_id');
     $query->join('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
+       $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
+
     $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
     $query->fields('up_video', array('entity_id'));
+     $query->fields('ads_inc', array('field_include_ads_value'));
     $query->condition('up_video.entity_id', $nid);
     $query->orderBy('field_video_upload_value','ASC');
     $result = $query->execute()->fetchAll();

@@ -10,6 +10,7 @@ $share_desc = '';
 $image = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 
 $videoids = get_video_in_fieldcollection_by_nid($nid);
+
 ?>
 <?php foreach ($rows as $row): ?>
     <div class="container">
@@ -39,11 +40,16 @@ $videoids = get_video_in_fieldcollection_by_nid($nid);
                                 $newimageds.= '<img data-tag="video_'.$video_value->video_id.'" src="'.$base_url . '/' . drupal_get_path('theme', 'itg').'/images/default_for_all.png" height="66" width="88">';
  
                             }
+                            $ads_flag=0;
+                            if($video_value->field_include_ads_value=='yes') {
+                                $ads_flag=1;
+                                
+                            }
                             ?>
 
                                 <div class="iframe-video">
                                     <iframe frameborder="0"
-                                            src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&ui-start-screen-info"
+                                            src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag;?>&ui-start-screen-info"
                                             allowfullscreen></iframe></div>
 
                             </div>
