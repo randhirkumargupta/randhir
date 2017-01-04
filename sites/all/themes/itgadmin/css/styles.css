@@ -10326,3 +10326,7 @@ div.node #comments h2 {
 .node-type-videogallery [id*="field-video-upload-values"] tbody tr:first-child {
   display: block !important;
 }
+
+span.file a {
+  pointer-events: none;
+}
