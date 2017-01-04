@@ -728,12 +728,12 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
 
 // Add a node id contianer just below the bulk operation.
   if (isset($form['select']['action::nodequeue_add_action'])) {
-    $form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
+    //$form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
   }
 
   if (isset($form['select']['action::itg_widget_categories_wise_node_group'])) {
 
-    $form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
+    //$form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
 //    $form['select']['action::itg_widget_categories_wise_node_group']['#ajax'] = array(
 //      'callback' => "itg_widget_categories_wise_node_group_submit",
 //      'wrapper' => "edit-actionitg-widget-categories-wise-node-group",
@@ -1442,16 +1442,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
-    if (!empty($_GET['nid']) && empty($_GET['title'])) {
-      $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
-    } if (empty($_GET['nid']) && !empty($_GET['title'])) {
-      $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
-    }
-    else if (!empty($_GET['nid']) && !empty($_GET['title'])) {
-      $query->where[1]['conditions'][5]['value'] = variable_get('year_end_for_widget');
-    }
-    else if (empty($_GET['nid']) && empty($_GET['title'])) {
-      $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    if (!empty($query->where[1]['conditions'])) {
+        foreach($query->where[1]['conditions'] as $key=>$condition) {
+            if($query->where[1]['conditions'][$key]['field'] == 'taxonomy_index.tid') {
+                $query->where[1]['conditions'][$key]['value'] = variable_get('year_end_for_widget');
+            }
+        }
     }
   }
   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
@@ -2386,7 +2382,7 @@ function itg_poll_home_page_polls_select($nid) {
 
   $polls_info['poll_banner_image'] = $poll_banner_image;
   $polls_info['nid'] = isset($nid) ? $nid : "";
-  $polls_info['title'] = isset($node->title) ? $node->title : "";
+  $polls_info['title'] = isset($node->title) ? t(substr(check_plain($node->title),0, 65)).'..' : "";
   $polls_info['updated'] = isset($node->changed) ? t('Updated: ') . date('M d Y H:i', $node->changed) : "";
   $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
 
