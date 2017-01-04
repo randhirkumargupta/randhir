@@ -14,10 +14,10 @@
  */
 function itg_users_user_presave(&$edit, $account, $category) {
 
-  if ($edit['field_first_name'][LANGUAGE_NONE][0]['value']) {
+  if (!empty($edit['field_first_name'][LANGUAGE_NONE][0]['value'])) {
     $edit['field_first_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_first_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
-  if ($edit['field_last_name'][LANGUAGE_NONE][0]['value']) {
+  if (!empty($edit['field_last_name'][LANGUAGE_NONE][0]['value'])) {
     $edit['field_last_name'][LANGUAGE_NONE][0]['value'] = trim($edit['field_last_name'][LANGUAGE_NONE][0]['value'], '. ');
   }
 }

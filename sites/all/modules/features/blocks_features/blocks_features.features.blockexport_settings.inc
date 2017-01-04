@@ -28522,7 +28522,7 @@ itg-layout-manager/special',
   'theme' => 'bartik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -29390,7 +29390,7 @@ itg-layout-manager/special',
   'theme' => 'itgadmin',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -29859,7 +29859,7 @@ itg-layout-manager/special',
   'theme' => 'rubik',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -30357,7 +30357,7 @@ itg-layout-manager/special',
   'theme' => 'seven',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -30870,7 +30870,7 @@ itg-layout-manager/special',
   'theme' => 'tao',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -31383,7 +31383,7 @@ itg-layout-manager/special',
   'theme' => 'zen',
   'status' => 0,
   'weight' => 0,
-  'region' => -1,
+  'region' => '',
   'custom' => 0,
   'visibility' => 0,
   'pages' => 'user
@@ -32816,6 +32816,321 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'title' => '',
   'cache' => -1,
 );
+  $export['block'][] = array(
+  'bid' => 2279,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_left_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2280,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_bottom_block',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2281,
+  'module' => 'menu',
+  'delta' => 'menu-loyalty-management-tab',
+  'theme' => 'bartik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'admin/loyalty/lrp-manage-items
+admin/loyalty/lrp-expired-product
+admin/loyalty/lrp-sold-item-history
+admin/loyalty/lrp-sold-items',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2282,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_left_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2283,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_bottom_block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2284,
+  'module' => 'menu',
+  'delta' => 'menu-loyalty-management-tab',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'admin/loyalty/lrp-manage-items
+admin/loyalty/lrp-expired-product
+admin/loyalty/lrp-sold-item-history
+admin/loyalty/lrp-sold-items',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2285,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_left_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2286,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_bottom_block',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2287,
+  'module' => 'menu',
+  'delta' => 'menu-loyalty-management-tab',
+  'theme' => 'itgadmin',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'form_tab',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'admin/loyalty/lrp-manage-items
+admin/loyalty/lrp-expired-product
+admin/loyalty/lrp-sold-item-history
+admin/loyalty/lrp-sold-items',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2288,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_left_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2289,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_bottom_block',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2290,
+  'module' => 'menu',
+  'delta' => 'menu-loyalty-management-tab',
+  'theme' => 'rubik',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'admin/loyalty/lrp-manage-items
+admin/loyalty/lrp-expired-product
+admin/loyalty/lrp-sold-item-history
+admin/loyalty/lrp-sold-items',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2291,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_left_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2292,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_bottom_block',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2293,
+  'module' => 'menu',
+  'delta' => 'menu-loyalty-management-tab',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'admin/loyalty/lrp-manage-items
+admin/loyalty/lrp-expired-product
+admin/loyalty/lrp-sold-item-history
+admin/loyalty/lrp-sold-items',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2294,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_left_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2295,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_bottom_block',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2296,
+  'module' => 'menu',
+  'delta' => 'menu-loyalty-management-tab',
+  'theme' => 'tao',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'admin/loyalty/lrp-manage-items
+admin/loyalty/lrp-expired-product
+admin/loyalty/lrp-sold-item-history
+admin/loyalty/lrp-sold-items',
+  'title' => '<none>',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2297,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_left_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2298,
+  'module' => 'itg_front_end_common',
+  'delta' => 'related_story_bottom_block',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2299,
+  'module' => 'menu',
+  'delta' => 'menu-loyalty-management-tab',
+  'theme' => 'zen',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 1,
+  'pages' => 'admin/loyalty/lrp-manage-items
+admin/loyalty/lrp-expired-product
+admin/loyalty/lrp-sold-item-history
+admin/loyalty/lrp-sold-items',
+  'title' => '<none>',
+  'cache' => -1,
+);
   $export['block_custom'][] = array(
   'bid' => 1,
   'body' => '<div class="ad-display-block">Ad</div>
@@ -32831,38 +33146,13 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'format' => 'filtered_html',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'ads_management',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'article',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'ask_an_expert',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_astro',
   'delta' => 'astro_tab_form_block',
   'type' => 'astro',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'astro',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_blog',
   'delta' => 'blog_tab_form_block',
-  'type' => 'blog',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
   'type' => 'blog',
 );
   $export['block_node_type'][] = array(
@@ -32881,34 +33171,9 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'type' => 'breaking_news',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'breaking_news',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_related',
   'delta' => 'related_form_block',
   'type' => 'breaking_news',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'clients_creation',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'client_service_association',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'cooking_tips',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'custom_html_widgets',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_event_backend',
@@ -32916,84 +33181,9 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'type' => 'event_backend',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'event_backend',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'event_configurations',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'event_registration',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'food_news',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'issue',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'itg_celebrity_profile',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'itg_template_widgets',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'live_tv_integration',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'loyalty_and_rewards',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'magazine',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_mega_reviews_critics',
   'delta' => 'mega_reviews_tab_form_block',
   'type' => 'mega_review_critic',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'mega_review_critic',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'newsletter',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'newsletter_templates',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'notification',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'page',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_front_end_common',
@@ -33036,11 +33226,6 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'type' => 'photogallery',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'podcast',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_podcast',
   'delta' => 'podcast_tab_form_block',
   'type' => 'podcast',
@@ -33056,24 +33241,9 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'type' => 'podcast',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'poll',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_poll',
   'delta' => 'poll_tab_form_block',
   'type' => 'poll',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'print_team_integration',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'quiz',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_quiz',
@@ -33081,19 +33251,9 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'type' => 'quiz',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'recipe',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_recipe',
   'delta' => 'recipe_tab_form_block',
   'type' => 'recipe',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'reporter',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_reporter',
@@ -33101,24 +33261,9 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'type' => 'reporter',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'service_creation',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_event_backend',
   'delta' => 'sponsor_tab_form_block',
   'type' => 'sponsor',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'sponsor',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'story',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_related',
@@ -33141,16 +33286,6 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'type' => 'story',
 );
   $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'supplement',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'survey',
-);
-  $export['block_node_type'][] = array(
   'module' => 'itg_related',
   'delta' => 'related_form_block',
   'type' => 'survey',
@@ -33159,36 +33294,6 @@ if (arg(0) == \'node\' && is_numeric(arg(1)) && arg(2) == \'edit\' && $query[\'s
   'module' => 'itg_survey',
   'delta' => 'survey_tab_form_block',
   'type' => 'survey',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'syndication_client',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'syndication_feed_from_pattern',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'syndication_rule',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'task_idea_allocation_tracking',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'ugc',
-);
-  $export['block_node_type'][] = array(
-  'module' => 'itg_menu_manager',
-  'delta' => 'vertical_menu',
-  'type' => 'vas_service_content',
 );
   $export['block_node_type'][] = array(
   'module' => 'itg_front_end_common',

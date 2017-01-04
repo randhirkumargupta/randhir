@@ -706,25 +706,25 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
 // Form id which will use session value.
 // Session value is set by ajax.
 // Extra funtionality to display nodeid with cross.
-  $form_to_used_session_checked = forms_uses_checked_content_id();
-  if (in_array($form['#form_id'], $form_to_used_session_checked)) {
-// $form_state['selection'] value is set by bulk operation submit.
-// Only selected nodes are come in $form_state['selection'] array.
-// Here we are forcely changing the array.
-// for big story we are using single selection so skip for big story.
-    $form_state['selection'] = $_SESSION[$form['#form_id']];
-    $form_state['values']['views_bulk_operations'] = $form_state['selection'];
-    $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
-    $end_value = end($_SESSION[$form['#form_id']]);
-    $form['views_bulk_operations'][] = array(
-      '#attributes' => array("class" => array('handle-unckeck-on-page')),
-      '#return_value' => end($_SESSION[$form['#form_id']]),
-      '#default_value' => !empty($end_value) ? $end_value : NULL,
-      '#type' => 'checkbox',
-      '#prefix' => '<div style=\'display:none\'>',
-      '#suffix' => '</div>',
-    );
-  }
+//  $form_to_used_session_checked = forms_uses_checked_content_id();
+//  if (in_array($form['#form_id'], $form_to_used_session_checked)) {
+//// $form_state['selection'] value is set by bulk operation submit.
+//// Only selected nodes are come in $form_state['selection'] array.
+//// Here we are forcely changing the array.
+//// for big story we are using single selection so skip for big story.
+//    $form_state['selection'] = $_SESSION[$form['#form_id']];
+//    $form_state['values']['views_bulk_operations'] = $form_state['selection'];
+//    $form['actions']['submit']['#submit'][] = "itg_widget_custom_session_destory";
+//    $end_value = end($_SESSION[$form['#form_id']]);
+//    $form['views_bulk_operations'][] = array(
+//      '#attributes' => array("class" => array('handle-unckeck-on-page')),
+//      '#return_value' => end($_SESSION[$form['#form_id']]),
+//      '#default_value' => !empty($end_value) ? $end_value : NULL,
+//      '#type' => 'checkbox',
+//      '#prefix' => '<div style=\'display:none\'>',
+//      '#suffix' => '</div>',
+//    );
+//  }
 
 // Add a node id contianer just below the bulk operation.
   if (isset($form['select']['action::nodequeue_add_action'])) {

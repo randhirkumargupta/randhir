@@ -234,7 +234,14 @@ else {
                         <div class="sidebar-section-photo">
                             <div class="itg-widget">
                                 <div class="ad-widget">
-                                    <div class="sidebar-ad droppable"><?php print $itg_ad['200*200_section_video_right_bar_ad1']; ?></div>
+                                    <div class="sidebar-ad droppable">
+                                      
+                                      <?php
+                                      if (!empty($itg_ad['200*200_section_video_right_bar_ad1'])) {
+                                        print $itg_ad['200*200_section_video_right_bar_ad1'];
+                                      }
+                                        ?>
+                                    </div>
                                 </div>              
                             </div>
                             <div class="itg-widget">
