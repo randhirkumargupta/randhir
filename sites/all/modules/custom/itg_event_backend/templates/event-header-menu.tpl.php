@@ -53,8 +53,12 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
             }
 
             if ($event_config_flashback) {
-              $flash_old_event = itg_event_backend_flashback($node->nid);
-              print '<li>'.l('Flashback', $baseurl, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
+              $flash_old = itg_event_backend_flashback($node->nid);
+              $flash_old_event = '';
+              if(!empty($flash_old)){
+                $flash_old_event = $flash_old;
+              }
+              print '<li>'.l('Flashback', 'node/'.$node->nid, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
             }
             
             if ($node->nid) {

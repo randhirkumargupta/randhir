@@ -78,8 +78,9 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
                   $link_url = $menu_link_data['link_url'];
                   $target = $menu_link_data['target'];
                   $active = $menu_link_data['active'];
+                  $url_type = $menu_link_data['url_type'];
                   ?>
-                  <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class)))); ?></li>
+                  <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class , $url_type)))); ?></li>
                   <?php
                 }
               endforeach;

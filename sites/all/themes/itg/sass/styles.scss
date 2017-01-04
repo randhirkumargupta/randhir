@@ -3922,6 +3922,9 @@ footer{
     @include sidebar-heading;
     h3{
         display: block;
+        span{
+            padding: 45px 20px 10px 0px;
+        }
     }
 }
 .view-photo-list-of-category, .view-video-list-of-category{
@@ -5031,10 +5034,9 @@ footer{
             }
         }
     }
-    .auto-block-1{
-        border: 1px solid #ddd;  
+    .auto-block-1{        
         .featured-news{
-            border: none;
+            border: none;            
         }
     }
     .auto-block-2{
@@ -5057,6 +5059,19 @@ footer{
             padding: 10px;
         }
     }
+    .itg-h450-section{        
+            .col-md-4{
+                .droppable{  
+                    height: 450px;
+                    background: #f3f3f3;                   
+                    .widget-wrapper{
+                        overflow: auto;
+                        height: auto;
+                        max-height: 100%;
+                    }
+                }
+            }        
+        }
     .special-top-news{
         ul{
             padding-top:20px !important;
