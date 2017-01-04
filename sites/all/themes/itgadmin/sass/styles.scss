@@ -9455,3 +9455,9 @@ div.node{
   @extend .itg-add-another-item;
 }
 .messages em{font-weight: 600;}
+.node-type-videogallery [id*="field-video-upload-values"]{
+  tbody{
+    tr:first-child{display: block !important;}
+  }
+}
+span.file a{pointer-events: none;}

@@ -909,7 +909,7 @@ function itg_event_backend_insert_event_publish_details($nid, $event_start_date,
  */
 function itg_event_backend_program_schedule_tab() {
   $event_id = itg_event_backend_get_event_node();
-  if (!empty($event_id)) {
+  if (!empty($event_id) && itg_event_backend_get_node_type($event_id) == 'event_backend') {
     $node = node_load($event_id);
     $counter = 0;
     foreach ($node->field_program_schedule[LANGUAGE_NONE] as $program_schedule) {
@@ -971,9 +971,15 @@ function itg_event_backend_get_session_photo_video($daywise) {
   $result = $query->execute();
   foreach ($result as $value) {
     $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
-    $session['photo'][] = $daywise_detail[$value->field_event_media_value]->field_event_photo[LANGUAGE_NONE][0]['target_id'];
-    $session['video'][] = $daywise_detail[$value->field_event_media_value]->field_event_video[LANGUAGE_NONE][0]['target_id'];
-    $session['audio'][] = $daywise_detail[$value->field_event_media_value]->field_event_audio[LANGUAGE_NONE][0]['target_id'];
+    if(!empty($daywise_detail[$value->field_event_media_value]->field_event_photo)){
+      $session['photo'][] = $daywise_detail[$value->field_event_media_value]->field_event_photo[LANGUAGE_NONE][0]['target_id'];
+    }
+    if($daywise_detail[$value->field_event_media_value]->field_event_video) {
+      $session['video'][] = $daywise_detail[$value->field_event_media_value]->field_event_video[LANGUAGE_NONE][0]['target_id'];
+    }
+    if($daywise_detail[$value->field_event_media_value]->field_event_audio) {
+      $session['audio'][] = $daywise_detail[$value->field_event_media_value]->field_event_audio[LANGUAGE_NONE][0]['target_id'];
+    } 
   }
   return $session;
 }
@@ -1598,8 +1604,9 @@ function itg_event_backend_flashback($curr_event_id) {
   $query->condition('event_close_date.field_event_close_date_value', $current_date_time, '<');
   $query->orderBy('n.created', 'DESC');
   $result = $query->execute();
+  $flash_back_link = '';
   foreach ($result as $value) {
-    $flash_back_link .= '<li>' . l(t($value->title), 'node/'.$value->nid, array('attributes' => array("style" => "color:$menu_font_color", 'target' => '_blank'))) . '</li>';
+    $flash_back_link .= '<li>' . l(t($value->title), 'node/'.$value->nid, array('attributes' => array('target' => '_blank'))) . '</li>';
 //    $val[] = 'node/' . $value->nid;
 //    $detail['node/' . $value->nid] = array(
 //      'key' => 'node/' . $value->nid,
@@ -1676,6 +1683,7 @@ function itg_event_backend_highlights_block_content() {
 
     $output = '';
     $output .= '<div class="highlight-box"><h2 class = "highlights-heading">Highlights</h2><div class="wrap-listing">';
+    $text = '';
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
       $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
       if (!empty($highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'])) {
@@ -1804,4 +1812,15 @@ function itg_event_backend_form_taxonomy_form_term_alter(&$form, &$form_state) {
       $form['tags']['und']['#metatags']['#access'] = FALSE;
     }
   }
+}
+
+/***
+ * Implements function for get node type
+ */
+function itg_event_backend_get_node_type($nid) {
+  $query = db_select('node', 'n');
+  $query -> fields('n', array('type'));
+  $query -> condition('nid', $nid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
 }
