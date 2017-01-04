@@ -10330,3 +10330,14 @@ div.node #comments h2 {
 span.file a {
   pointer-events: none;
 }
+
+.node-photogallery-form [id*="field-gallery-image-values"] tbody tr.drag td:nth-child(2)::after {
+  background-color: rgba(0, 0, 0, 0.5);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+}
