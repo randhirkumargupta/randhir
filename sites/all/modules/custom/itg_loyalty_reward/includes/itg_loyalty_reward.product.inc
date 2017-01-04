@@ -403,6 +403,7 @@ function itg_loyalty_reward_order_confirmation() {
   if (!isset($_SESSION['placed-item'])) {
     drupal_goto($base_url . '/product');
   }
+  $data = array();
   
   return theme('cart_order_confirmation', array('data' => $data));
 }

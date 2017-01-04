@@ -207,7 +207,11 @@ function itg_loyalty_reward_place_order() {
   }
   // Check availability of the product.
   $product_availability = itg_loyalty_reward_product_availability($cart_detail);
-  $errors = array_filter($product_availability['not_available']);
+  $errors = array();
+  if (!empty($product_availability['not_available'])) {
+    $errors = array_filter($product_availability['not_available']);
+  }  
+  
   if (!empty($errors)) {
     foreach ($product_availability['not_available'] as $product) {
       drupal_set_message(
@@ -225,8 +229,7 @@ function itg_loyalty_reward_place_order() {
     'name' => $fname . ' ' . $lname,
     'email' => $user_detail->mail,
     'phone' => $user_detail->field_mobile_number['und'][0]['value'],
-    'address' => $user_detail->field_short_description['und'][0]['value'],
-    'city' => $inputs['city'],
+    'address' => $user_detail->field_short_description['und'][0]['value'],    
     'zip_code' => $user_detail->field_user_pincode['und'][0]['value'],
   );
 

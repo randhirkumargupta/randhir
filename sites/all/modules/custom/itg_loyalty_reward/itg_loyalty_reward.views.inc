@@ -90,6 +90,27 @@ function itg_loyalty_reward_views_data() {
       'handler' => 'views_handler_argument_date'
     ),
   );
+  // Order status field.
+  $data['itg_loyalty_reward_order']['status'] = array(
+    'title' => t('Status'),
+    'help' => t('Order status complete/pending.'),
+    'field' => array(
+      'handler' => 'views_handler_field_boolean',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_boolean_operator',
+      // Note that you can override the field-wide label:
+      'label' => t('Complete'),
+      // This setting is used by the boolean filter handler, as possible option.
+      'type' => 'yes-no',
+      // use boolean_field = 1 instead of boolean_field <> 0 in WHERE statement.
+      'use equal' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
 
   return $data;
 }
@@ -133,13 +154,14 @@ class itg_loyalty_reward_views_handler_field_product_information extends views_h
           }
         }
         elseif ($itg_keys[0] == 'cart-items') {          
+          $output = '';
           // Product Info logic.
           foreach ($value[$itg_keys[0]] as $item_key => $cart_value) {                                 
             $output .= '<div class="product-wrapper">';
-            $output .= '<div class="title">' . $cart_value['product']['title'] . '</div>';
-            $output .= '<div class="point">' . $cart_value['product']['points'] . '</div>';
-            $output .= '<div class="quantity">' . $cart_value['quantity'] . '</div>';
-            $output .= '<div class="total-point">' . $cart_value['quantity'] * $cart_value['product']['points'] . '</div>';
+            $output .= '<div class="title">Product Id: <span>' . $cart_value['product']['nid'] . '</span></div>';
+            $output .= '<div class="title">Title: <span>' . $cart_value['product']['title'] . '</span></div>';
+            $output .= '<div class="point">Point: <span>' . $cart_value['product']['points'] . '</span></div>';
+            $output .= '<div class="quantity">Quantity: <span>' . $cart_value['quantity'] . '</span></div>';            
             $output .= '</div>';            
           }
           return $output;
