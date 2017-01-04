@@ -40,12 +40,13 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
    * @return 
    */
   function views_form(&$form, &$form_state) {
+    $arg = arg();
     // The view is empty, abort.
     if (empty($this->view->result)) {
       return;
-    }    
-    if ($form['#action'] == '/itgcms/admin/loyalty/lrp-sold-item') {
-      // Add custom submit function to mark a product as complete.
+    }
+    if (!empty($arg[1]) && !empty($arg[2]) && $arg[1] == 'loyalty' && $arg[2] == 'lrp-sold-item-history') {
+      // Add custom submit function to mark a product as complete.      
       $form['#submit'][] = 'itg_row_selector_complete_product';
     }
 
@@ -53,39 +54,36 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
       '#tree' => TRUE,
     );
     foreach ($this->view->result as $row_index => $row) {
-      if (isset($row->nid)) {
+      if (!empty($arg[1]) && !empty($arg[2]) && $arg[1] == 'loyalty' && $arg[2] == 'lrp-sold-item') {
+        if ($row->itg_loyalty_reward_order_status == 0) {
+          $form[$this->options['id']][$row_index] = array(
+            '#type' => 'checkbox',
+            '#return_value' => $row->order_id,
+            '#default_value' => FALSE,
+            '#attributes' => array('class' => array('itg-row-selector-select')),
+          );
+        }
+      }
+      if (!empty($arg[0]) && $arg[0] == 'syndication-feed-generator') {
         $form[$this->options['id']][$row_index] = array(
           '#type' => 'checkbox',
           '#return_value' => $row->nid,
           //'#default_value' => FALSE,
           '#attributes' => array('class' => array('itg-row-selector-select')),
         );
-      }
-      if ($row->order_id) {
-        $form[$this->options['id']]['order_id'][$row_index] = array(
+        $form[$this->options['id'] . '_client'] = array(
           '#type' => 'hidden',
-          '#default_value' => $row->order_id,
+          '#default_value' => $_GET['client_title'] != '_none' ? check_plain($_GET['client_title']) : NULL,
+        );
+        $form[$this->options['id'] . '_web_property'] = array(
+          '#type' => 'hidden',
+          '#default_value' => $_GET['type'] != '_none' ? check_plain($_GET['type']) : NULL,
+        );
+        $form[$this->options['id'] . '_issue'] = array(
+          '#type' => 'hidden',
+          '#default_value' => $_GET['issue'] != '_none' ? check_plain($_GET['issue']) : NULL,
         );
       }
-
-      $form[$this->options['id']][$row_index] = array(
-        '#type' => 'checkbox',
-        '#return_value' => $row->nid,
-        //'#default_value' => FALSE,
-        '#attributes' => array('class' => array('itg-row-selector-select')),
-      );
-      $form[$this->options['id'] . '_client'] = array(
-        '#type' => 'hidden',
-        '#default_value' => $_GET['client_title'] != '_none' ? check_plain($_GET['client_title']) : NULL,
-      );
-      $form[$this->options['id'] . '_web_property'] = array(
-        '#type' => 'hidden',
-        '#default_value' => $_GET['type'] != '_none' ? check_plain($_GET['type']) : NULL,
-      );
-      $form[$this->options['id'] . '_issue'] = array(
-        '#type' => 'hidden',
-        '#default_value' => $_GET['issue'] != '_none' ? check_plain($_GET['issue']) : NULL,
-      );
     }
   }
 
@@ -94,13 +92,14 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
    * @param array $form
    * @param array $form_state
    */
-  function views_form_validate($form, &$form_state) {
+  function views_form_validate($form, &$form_state) {    
     $field_name = $this->options['id'];
-    $selection = array_filter($form_state['values'][$field_name]);
-
+    if (!empty($form_state['values'][$field_name])) {
+      $selection = array_filter($form_state['values'][$field_name]);
+    }
+    
     if (empty($selection)) {
       form_set_error($field_name, t('Please select at least one item.'));
     }
   }
-
 }
