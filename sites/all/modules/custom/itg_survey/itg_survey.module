@@ -571,7 +571,7 @@ function itg_survey_node_access($node, $op, $account) {
   if (!in_array('Site Admin', $user->roles)) {
     
     // Check for survey and quiz
-    if ($node->type == 'survey' || $node->type == 'quiz') {
+    if (!empty($node->type) && ($node->type == 'survey' || $node->type == 'quiz')) {
       $curr_time = strtotime(date('Y-m-d') . ' 00:00:00');
       $survey_start_date = strtotime($node->field_survey_start_date[LANGUAGE_NONE][0]['value']);
       $survey_end_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']);

@@ -930,21 +930,23 @@ function itg_videogallery_get_video($fid) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_access($node, $op, $account) {
-    if ($account->uid == 0 && !empty($node) && $node->type == 'videogallery') {//shravan
-        $current_time = time();
-        $video_schedule_date = "";
-        $video_expire_date = "";
-        if (!empty($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'])) {
-            $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
-        }
-        if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
-            $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
-        }
-        if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
-            return NODE_ACCESS_ALLOW;
-        }
-        elseif (($current_time > $video_expire_date) && ($node->type == 'videogallery') && ($op == 'view')) {
-            return NODE_ACCESS_DENY;
+    if (!empty($account) && !empty($node)) {
+        if ($account->uid == 0 && $node->type == 'videogallery') {//shravan
+            $current_time = time();
+            $video_schedule_date = "";
+            $video_expire_date = "";
+            if (!empty($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'])) {
+                $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+            }
+            if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
+                $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+            }
+            if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
+                return NODE_ACCESS_ALLOW;
+            }
+            elseif (($current_time > $video_expire_date) && ($node->type == 'videogallery') && ($op == 'view')) {
+                return NODE_ACCESS_DENY;
+            }
         }
     }
     return NODE_ACCESS_IGNORE;

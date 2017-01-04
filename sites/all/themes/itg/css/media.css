@@ -1024,14 +1024,14 @@
   }
 
   /*story page comment section*/
-  #content .story-section #other-comment #comments .comment-form .form-item {
+  #content #other-comment #comments .comment-form .form-item {
     margin: 0;
     margin-bottom: 20px;
   }
-  #content .story-section #other-comment #comments .comment-form div.description, #content .story-section #other-comment #comments .comment-form .form-type-textarea > label + div, #content .story-section #other-comment #comments .comment-form .form-actions {
+  #content #other-comment #comments .comment-form div.description, #content #other-comment #comments .comment-form .form-type-textarea > label + div, #content #other-comment #comments .comment-form .form-actions {
     padding-left: 0;
   }
-  #content .story-section #other-comment #comments .comment ul.links {
+  #content #other-comment #comments .comment ul.links {
     position: inherit;
   }
 
@@ -1975,6 +1975,25 @@
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
     border-top: 1px solid #000;
+  }
+  #block-views-video-landing-header-block .video-header-left .slick-slider .slick-next, #block-views-video-landing-header-block .video-header-left .slick-slider .slick-prev {
+    width: 50px;
+    height: 100px;
+    margin-top: -50px;
+  }
+  #block-views-video-landing-header-block .video-header-left .slick-slider .slick-next:before, #block-views-video-landing-header-block .video-header-left .slick-slider .slick-prev:before {
+    top: 38px;
+    font-size: 30px;
+  }
+  #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-slider {
+    padding: 10px 45px;
+  }
+  #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-prev, #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-next {
+    background: transparent;
+    color: #fff;
+  }
+  #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-prev:hover, #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-next:hover {
+    background: transparent;
   }
   #block-views-video-landing-header-block .video-header-right {
     height: 474px;
