@@ -10322,3 +10322,7 @@ div.node #comments h2 {
 .messages em {
   font-weight: 600;
 }
+
+.node-type-videogallery [id*="field-video-upload-values"] tbody tr:first-child {
+  display: block !important;
+}
