@@ -131,12 +131,22 @@ if (!empty($device[0])) {
                 <?php endif; ?>
                 <?php
                 if (!empty($highlights['node_data']->title)) {
-                  echo '<h1>' . mb_strimwidth($highlights['node_data']->title, 0, 90, "..") . '<span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span></h1>';
-                }
+                     if($_GET['type'] != 'budget-predictor') {
+                        echo '<h1>' . mb_strimwidth($highlights['node_data']->title, 0, 90, "..") . '<span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></span></h1>';
+                     }
+                  }
                 ?>
                 <div class="row itg-325-layout">
                     <?php if ($live_url != "" || !empty($highlights['node_data']->field_story_highlights['und']) || $theme == 'itgadmin') { ?>
-                      <div class="col-md-4 mt-50">
+                    <?php if($_GET['type'] == 'budget-predictor') { ?>
+                     <div class="col-md-8 itg-h747-section">
+                     <?php
+                      $block = module_invoke('itg_budget_predictor', 'block_view', 'budget_pradictor');
+                      print render($block['content']);
+                      ?>
+                     </div>   
+                      <?php } else { ?>
+                     <div class="col-md-4 mt-50">
                           <div class="itg-widget">
                               <div class="droppable <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
@@ -203,6 +213,7 @@ if (!empty($device[0])) {
                               </div>
                           </div>
                       </div>
+                    <?php } ?>   
                       <div class="col-md-4 mt-50">                    
                           <div class="itg-widget-parent">
                               <div class="itg-widget">
@@ -212,7 +223,6 @@ if (!empty($device[0])) {
                               </div>
                           </div>                    
                       </div>
-
                     <?php } ?>
                 </div>
 
@@ -362,6 +372,7 @@ if (!empty($device[0])) {
 <?php if (isset($widget_data['itg-block-10']['widget_name']) || isset($widget_data['itg-block-11']['widget_name']) || isset($widget_data['itg-block-12']['widget_name']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-8 mt-50">
                           <div class="row">
+                              <?php if($_GET['type'] != 'budget-predictor') { ?>
                               <div class="col-md-12 m-bottom40">
                                   <div class="itg-widget itg-widget-parent">
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -387,7 +398,7 @@ if (!empty($device[0])) {
                                       </div>
                                   </div>
                               </div>
-
+                              <?php } ?>
                               <div class="col-md-12">
                                   <div class="itg-widget itg-widget-child">
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
