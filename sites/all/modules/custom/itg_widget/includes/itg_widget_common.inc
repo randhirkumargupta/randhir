@@ -728,12 +728,12 @@ function itg_widget_views_bulk_operations_form_alter(&$form, &$form_state, $vbo)
 
 // Add a node id contianer just below the bulk operation.
   if (isset($form['select']['action::nodequeue_add_action'])) {
-    $form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
+    //$form['select']['action::nodequeue_add_action']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
   }
 
   if (isset($form['select']['action::itg_widget_categories_wise_node_group'])) {
 
-    $form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
+    //$form['select']['action::itg_widget_categories_wise_node_group']['#suffix'] = '<div class="nodes_id_container" id="nodes_id_container"></div>';
 //    $form['select']['action::itg_widget_categories_wise_node_group']['#ajax'] = array(
 //      'callback' => "itg_widget_categories_wise_node_group_submit",
 //      'wrapper' => "edit-actionitg-widget-categories-wise-node-group",
@@ -1442,16 +1442,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
   }
 
   if ($view->name == 'yearender_top_news_and_top_videos' && $view->current_display == 'yearend_left_widget_contents') {
-    if (!empty($_GET['nid']) && empty($_GET['title'])) {
-      $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
-    } if (empty($_GET['nid']) && !empty($_GET['title'])) {
-      $query->where[1]['conditions'][4]['value'] = variable_get('year_end_for_widget');
-    }
-    else if (!empty($_GET['nid']) && !empty($_GET['title'])) {
-      $query->where[1]['conditions'][5]['value'] = variable_get('year_end_for_widget');
-    }
-    else if (empty($_GET['nid']) && empty($_GET['title'])) {
-      $query->where[1]['conditions'][3]['value'] = variable_get('year_end_for_widget');
+    if (!empty($query->where[1]['conditions'])) {
+        foreach($query->where[1]['conditions'] as $key=>$condition) {
+            if($query->where[1]['conditions'][$key]['field'] == 'taxonomy_index.tid') {
+                $query->where[1]['conditions'][$key]['value'] = variable_get('year_end_for_widget');
+            }
+        }
     }
   }
   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_contents') {
