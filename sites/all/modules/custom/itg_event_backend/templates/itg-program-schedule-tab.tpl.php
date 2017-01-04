@@ -5,24 +5,30 @@
  */
 global $base_url;
 $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
-if (empty($host_detail) && is_numeric(arg(1))) {
-  $host_node = node_load(arg(1));
+$arg1 = arg(1);
+if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {//shravan
+  $host_node = node_load($arg1);
 } else {
-  $host_node_arr = explode('/', $host_detail['source']);
-  $host_node = node_load($host_node_arr[1]);
+    if (!empty($host_detail['source'])) {//shravan
+      $host_node_arr = explode('/', $host_detail['source']);
+    }
+    if (!empty($host_node_arr[1])) {//shravan
+      $host_node = node_load($host_node_arr[1]);
+    }
 }
 
 $current_date = strtotime(date('Y-m-d  H:i:s'));
-$event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
-$event_close_date = strtotime($host_node->field_event_close_date[LANGUAGE_NONE][0]['value']);
+if (!empty($host_node)) {//shravan
+  $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
+  $event_close_date = strtotime($host_node->field_event_close_date[LANGUAGE_NONE][0]['value']);
 
-// Css variables
-$heading_background_color = $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
-$font_color = $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';
-$content_font_color = $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
-$program_title_font_color = $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] : '#000';
-$tab_highlighted_color = $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
-
+  // Css variables
+  $heading_background_color = $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->	field_e_heading_bck_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
+  $font_color = $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] : '#ef2a24';
+  $content_font_color = $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+  $program_title_font_color = $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+  $tab_highlighted_color = $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
+}
 $actual_host_name = itg_event_get_host_name();
 if($actual_host_name) {
   $baseurl = $actual_host_name.'/';
@@ -31,8 +37,10 @@ else {
   $baseurl = $base_url.'/';
 }
 
-ksort($data);
+
 if($current_date < $event_close_date) {
+if (!empty($data)) {//shravan
+ksort($data);
 foreach ($data as $key => $value) {
   $tabs .= '<li style="background: '.$tab_highlighted_color.'" data-tag="Day-' . $key . '" class="event-program-tabs Day-' . $key . '">Day ' . $key . '</li>';
 }
@@ -108,6 +116,7 @@ foreach ($data as $key => $value) {
     }
     print '</div>';
   }
+}
 } else {
   $block = block_load('itg_event_backend', 'post_event_block');
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));

@@ -7,6 +7,7 @@
 global $user;
 global $base_url;
 $nid = $data['nid'];
+$poll_image_exist_class = '';
 
 // Title
 
