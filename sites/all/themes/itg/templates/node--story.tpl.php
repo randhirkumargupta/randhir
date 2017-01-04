@@ -47,7 +47,7 @@ if (!empty($content)):
             <?php //pr($node);  ?> 
             <div class="comment-mobile desktop-hide">
                 <ul>
-                    <li><a href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> Mail to author</a></li>
+                    <li class="mail-to-author"><a href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> Mail to author</a></li>
                     <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
                     <?php
                     if ($config_name == 'vukkul') {
@@ -65,10 +65,16 @@ if (!empty($content)):
                                             
                 </ul> 
             </div>
-            <?php if(!empty($get_develop_story_status)) {?>
-            <h1><?php print $node->title; ?> <i class="fa fa-circle" aria-hidden="true"></i> <i class="fa fa-circle" aria-hidden="true"></i></h1>
+            <?php 
+            $pipelinetext="";
+            if(!empty($node->field_story_new_title) &&  !empty($node->field_story_redirection_url_titl))
+            {
+                $pipelinetext=' | <a href="'.$node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'].'">'.ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']).'</a>';
+            }
+            if(!empty($get_develop_story_status)) {?>
+            <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true"></i> <i class="fa fa-circle" aria-hidden="true"></i></h1>
             <?php } else { ?>
-            <h1><?php print $node->title; ?></h1>
+            <h1><?php print $node->title.$pipelinetext; ?></h1>
             <?php } ?>
             <div class="story-left-section">
                 <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
@@ -569,7 +575,7 @@ if (!empty($content)):
                                     $term = taxonomy_term_load($tags['tid']);
                                     $t_name = $term->name;
                                     $comma_sep_tag[] = $t_name;
-                                    print '<li>#' . $t_name . '</li>';
+                                    print '<li>#<a target="_blank" href="'.$base_url.'/site-search?keyword='.$t_name.'">' . $t_name . '</a></li>';
                                 }
                             }
                             ?>
@@ -580,7 +586,7 @@ if (!empty($content)):
                     <?php if (!empty($related_content)) { ?>
                     <div class="related-story related-story-bottom">
                             <?php                            
-                               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_left_block');
+                               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_bottom_block');
                                 print render($block['content']);
                              ?>
                         </div>

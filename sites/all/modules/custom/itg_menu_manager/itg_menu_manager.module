@@ -1210,8 +1210,12 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
     $arg1 = $argument[1];
     $urlalise = drupal_get_path_alias("node/$arg1");
     $real_path_alise = ($urlalise) ? $urlalise : "node/$arg1";
-    if (end(explode('/', $link_url)) == $real_path_alise) {
-      $active = 'active';
+    if (!empty($link_url)) {      
+      $link_url_array = explode('/', $link_url);
+      $link_url_end = end($link_url_array);//shravan
+      if ($link_url_end == $real_path_alise) {
+        $active = 'active';
+      }
     }
   }
 

@@ -283,18 +283,8 @@ function itg_loyalty_reward_views_pre_render(&$view) {
     $view->attachment_before = $header_content_loyalty;
   }
   if ($view->name == 'sold_item_history') {        
-    foreach ($view->result as $key => $rows) {      
-      $output = '';
-      $user_info = unserialize($rows->itg_loyalty_reward_order_product_information);      
-      $output .= '<div>';
-      $output .= '<div>Name: ' . $user_info['user_info']['name'] . '</div>';
-      $output .= '<div>Email: ' . $user_info['user_info']['email'] . '</div>';
-      $output .= '<div>Phone: ' . $user_info['user_info']['phone'] . '</div>';
-      $output .= '<div>Address: ' . $user_info['user_info']['address'] . '</div>';
-      $output .= '<div>City: ' . $user_info['user_info']['city'] . '</div>';      
-      $output .= '</div>';
-      $view->result[$key]->itg_loyalty_reward_order_product_information = $output;
-    }
+    $header_content_loyalty = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';    
+    $view->attachment_before = $header_content_loyalty;
   }
 }
 

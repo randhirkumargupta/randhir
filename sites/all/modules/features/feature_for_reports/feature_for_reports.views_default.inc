@@ -329,7 +329,7 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = 'Edited';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[nid]';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'report/moderation-history/[nid_1]';
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'report-content-moderation/[nid_1]';
   $handler->display->display_options['fields']['nothing']['alter']['target'] = '_blank';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';

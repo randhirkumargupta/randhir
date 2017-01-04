@@ -11,6 +11,40 @@ function feature_for_video_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_video_upload-field_include_ads'.
+  $field_instances['field_collection_item-field_video_upload-field_include_ads'] = array(
+    'bundle' => 'field_video_upload',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_include_ads',
+    'label' => 'Include Ads',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_video_upload-field_videogallery_description'.
   $field_instances['field_collection_item-field_video_upload-field_videogallery_description'] = array(
     'bundle' => 'field_video_upload',
@@ -106,7 +140,7 @@ function feature_for_video_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -2044,6 +2078,7 @@ function feature_for_video_field_default_field_instances() {
   t('Image Size (613x460)');
   t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
+  t('Include Ads');
   t('Kicker');
   t('Large image');
   t('Long Description');
