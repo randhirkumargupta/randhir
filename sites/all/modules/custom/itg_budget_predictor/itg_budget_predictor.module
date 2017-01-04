@@ -193,6 +193,7 @@ function itg_budget_predictor_block_view($delta = '') {
       $data = itg_budget_predictor_custom();
       $block['content'] = $data;
       break;
+    
   }
   return $block;
 }  
