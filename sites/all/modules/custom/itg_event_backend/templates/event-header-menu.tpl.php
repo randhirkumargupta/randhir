@@ -15,7 +15,7 @@ if($arg[0] == 'event') {
 }
 
 $node = itg_event_backend_get_event_node('node');
-if (!empty($node)) {//shravan
+if (!empty($node) && ($node->type == 'event_backend')) {//shravan
   $event_start_date = date('F d, Y', strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']));
   $event_location = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
   $event_config_home = $node->field_config_home[LANGUAGE_NONE][0]['value'];
@@ -53,8 +53,12 @@ if (!empty($node)) {//shravan
             }
 
             if ($event_config_flashback) {
-              $flash_old_event = itg_event_backend_flashback($node->nid);
-              print '<li>'.l('Flashback', $baseurl, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
+              $flash_old = itg_event_backend_flashback($node->nid);
+              $flash_old_event = '';
+              if(!empty($flash_old)){
+                $flash_old_event = $flash_old;
+              }
+              print '<li>'.l('Flashback', 'node/'.$node->nid, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
             }
             
             if ($node->nid) {

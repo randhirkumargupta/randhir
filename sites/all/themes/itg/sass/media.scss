@@ -1050,8 +1050,7 @@
         
     }
 /*story page comment section*/
-#content{
-    .story-section{
+#content{    
         #other-comment{
             #comments{
                 .comment-form{
@@ -1069,8 +1068,7 @@
                     }
                 }
             }  
-        }   
-    }
+        }       
 }    
 /*story page comment section end*/
 
@@ -1093,6 +1091,7 @@
     }
 }
 /*side bar for all pages end*/
+
 
 }
 
@@ -2018,6 +2017,27 @@
                     }
                 }
             }
+            .slick-slider .slick-next, .slick-slider .slick-prev{
+                width: 50px;
+                height: 100px;
+                margin-top: -50px;
+                &:before{
+                    top: 38px;
+                    font-size: 30px;
+                }
+            }  
+            .video-slider-images{
+                .slick-slider{
+                    padding: 10px 45px;   
+                }
+                .slick-prev, .slick-next{
+                    background: transparent;                
+                    color:#fff;
+                    &:hover{
+                        background: transparent;    
+                    }
+                }
+            }
         } 
         .video-header-right{
             height: 474px;
@@ -2032,6 +2052,9 @@
 
     /*css start for special auto page*/
     .auto-layout-page{
+        .auto-block-1{
+            border: 1px solid #ddd;
+        }
         .itg-top-section{
             .top-colum-1, .top-colum-2{
                 .droppable{
@@ -2043,20 +2066,7 @@
                     height: 247px;               
                 }
             }
-        }
-        .itg-h450-section{        
-            .col-md-4{
-                .droppable{  
-                    padding: 10px;
-                    background: #f3f3f3;                   
-                    .widget-wrapper{
-                        overflow: auto;
-                        height: auto;
-                        max-height: 100%;
-                    }
-                }
-            }        
-        }
+        }        
     }
     /*css end for special auto page*/
 

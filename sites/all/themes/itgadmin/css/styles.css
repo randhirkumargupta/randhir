@@ -10318,3 +10318,15 @@ div.node #comments h2 {
 .node-photogallery-form [id*="field-gallery-image-values"] tbody .field-multiple-drag {
   display: block;
 }
+
+.messages em {
+  font-weight: 600;
+}
+
+.node-type-videogallery [id*="field-video-upload-values"] tbody tr:first-child {
+  display: block !important;
+}
+
+span.file a {
+  pointer-events: none;
+}
