@@ -897,38 +897,40 @@ function itg_event_backend_insert_event_publish_details($nid, $event_start_date,
  */
 function itg_event_backend_program_schedule_tab() {
   $event_id = itg_event_backend_get_event_node();
-  $node = node_load($event_id);
-  $cat_id = $node->nid;
-  $query = db_select('itg_widget_order', 'w')
-    ->fields('w', array('nid'))
-    ->condition('w.cat_id', $cat_id)
-    ->orderBy('w.weight', 'DESC');
-  $result = $query->execute()->fetchAll();
+  if (!empty($event_id)) {//shravan
+    $node = node_load($event_id);
+    $cat_id = $node->nid;
+    $query = db_select('itg_widget_order', 'w')
+      ->fields('w', array('nid'))
+      ->condition('w.cat_id', $cat_id)
+      ->orderBy('w.weight', 'DESC');
+    $result = $query->execute()->fetchAll();
 
-  $counter = 0;
-  $output = array();
-  foreach ($result as $key => $value) {
-    $node_detail = entity_load('field_collection_item', array($value->nid));
-    $old_keys = explode(':', $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value']);
-    $keys = explode('Day-', $old_keys[0]);
-//    if ($node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'] != $key) {
-        $output[$keys[1]][$counter]['daywise'] = $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-        $output[$keys[1]][$counter]['session_title'] = $node_detail[$value->nid]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
-        $output[$keys[1]][$counter]['start_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-        $output[$keys[1]][$counter]['end_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-        $output[$keys[1]][$counter]['speaker'] = $node_detail[$value->nid]->field_select_speaker[LANGUAGE_NONE];
-//    }
-//    else {
-//        $output[$keys[1]][$counter]['daywise'] = $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-//        $output[$keys[1]][$counter]['session_title'] = $node_detail[$value->nid]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
-//        $output[$keys[1]][$counter]['start_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-//        $output[$keys[1]][$counter]['end_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-//        $output[$keys[1]][$counter]['speaker'] = $node_detail[$value->nid]->field_select_speaker[LANGUAGE_NONE]; 
-//    }
-//    $key = $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-    $counter++;
+    $counter = 0;
+    $output = array();
+    foreach ($result as $key => $value) {
+      $node_detail = entity_load('field_collection_item', array($value->nid));
+      $old_keys = explode(':', $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value']);
+      $keys = explode('Day-', $old_keys[0]);
+  //    if ($node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'] != $key) {
+          $output[$keys[1]][$counter]['daywise'] = $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+          $output[$keys[1]][$counter]['session_title'] = $node_detail[$value->nid]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
+          $output[$keys[1]][$counter]['start_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+          $output[$keys[1]][$counter]['end_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+          $output[$keys[1]][$counter]['speaker'] = $node_detail[$value->nid]->field_select_speaker[LANGUAGE_NONE];
+  //    }
+  //    else {
+  //        $output[$keys[1]][$counter]['daywise'] = $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+  //        $output[$keys[1]][$counter]['session_title'] = $node_detail[$value->nid]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
+  //        $output[$keys[1]][$counter]['start_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+  //        $output[$keys[1]][$counter]['end_time'] = format_date(strtotime($node_detail[$value->nid]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+  //        $output[$keys[1]][$counter]['speaker'] = $node_detail[$value->nid]->field_select_speaker[LANGUAGE_NONE]; 
+  //    }
+  //    $key = $node_detail[$value->nid]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      $counter++;
+    }
+    return $output;
   }
-  return $output;
 }
 
 /**
@@ -1213,6 +1215,7 @@ function itg_event_backend_views_query_alter(&$view, &$query) {
 function itg_event_backend_get_event_node($whole_node = NULL) {
  global $base_url;
  $arg = arg();
+ $node = '';//shravan
   if (module_exists('redirect')) {
     $query = db_select('redirect', 'red');
     $query->fields('red', array('source'));
@@ -1224,10 +1227,12 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
       if ($arg[0] == 'event') {
         $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
         $node = menu_get_object("node", 1, $path);
-      } elseif (is_numeric($arg[1])) {
+      } elseif (!empty($arg[1]) && is_numeric($arg[1])) {
         $node = node_load($arg[1]);
       } else {
-        $node = node_load($event_id[1]);
+        if (!empty($event_id[1])) {//shravan
+          $node = node_load($event_id[1]);
+        }
       }
       return $node;
     } else {
@@ -1235,10 +1240,12 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
         $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
         $node = menu_get_object("node", 1, $path);
         return $node->nid;
-      } elseif (is_numeric($arg[1])) {
+      } elseif (!empty($arg[1]) && is_numeric($arg[1])) {//shravan
         return $arg[1];
       } else {
-        return $event_id[1];
+          if (!empty($event_id[1])) {//shravan
+            return $event_id[1];
+          }
       }
     }
   }
@@ -1311,6 +1318,7 @@ function itg_event_backend_get_domain($domain_id) {
  * @return array
  */
 function itg_event_backend_get_redirect_record($c_name, $c_val) {
+  $records = '';//shravan
   $query = db_select('redirect', 'r')
       ->fields('r');
   $query->condition('r.' . $c_name, $c_val, '=');
