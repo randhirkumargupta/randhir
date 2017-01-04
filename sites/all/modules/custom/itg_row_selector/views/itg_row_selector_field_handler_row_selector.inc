@@ -54,7 +54,7 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
       '#tree' => TRUE,
     );
     foreach ($this->view->result as $row_index => $row) {
-      if (!empty($arg[1]) && !empty($arg[2]) && $arg[1] == 'loyalty' && $arg[2] == 'lrp-sold-item') {
+      if (!empty($arg[1]) && !empty($arg[2]) && $arg[1] == 'loyalty' && $arg[2] == 'lrp-sold-item-history') {
         if ($row->itg_loyalty_reward_order_status == 0) {
           $form[$this->options['id']][$row_index] = array(
             '#type' => 'checkbox',
@@ -64,7 +64,7 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
           );
         }
       }
-      if (!empty($arg[0]) && $arg[0] == 'syndication-feed-generator') {
+      else {
         $form[$this->options['id']][$row_index] = array(
           '#type' => 'checkbox',
           '#return_value' => $row->nid,
@@ -83,7 +83,7 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
           '#type' => 'hidden',
           '#default_value' => $_GET['issue'] != '_none' ? check_plain($_GET['issue']) : NULL,
         );
-      }
+      }      
     }
   }
 
