@@ -76,9 +76,9 @@ function itg_menu_manager_menu() {
 /**
  * Script to add new column in itg_menu_manager
  */
-//function create_new_column() {
-//  db_query('alter table itg_menu_manager add column display_icon varchar(200) DEFAULT FALSE after extra')->execute();
-//}
+function create_new_column() {
+  db_query('alter table itg_menu_manager add column display_icon varchar(200) DEFAULT FALSE after extra')->execute();
+}
 
 /**
  * {@inheritdoc}
