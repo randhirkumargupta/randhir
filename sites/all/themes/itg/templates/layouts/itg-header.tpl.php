@@ -84,8 +84,9 @@ if (!empty($data['itg_main_manu_header'])) {
                 $sponsored_class = $menu_link_data['sponsored_class'];
                 $parent_class = $menu_link_data['parent_class'];
                 $active_cls = $menu_link_data['active_cls'];
+                $url_type = $menu_link_data['url_type'];
           ?>
-        <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class)))); ?></li>
+        <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
         <?php 
            }
            endforeach;
