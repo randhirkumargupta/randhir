@@ -11,18 +11,32 @@
                 var pic = $(this).html();
                 var added_on = $(this).siblings('.post-date').html();
                 var title = $(this).siblings('.product-title').html();
-                var desc = $(this).siblings('.product-description').html();
+                var full_desc = $(this).parent().siblings('.product-full-desc').html();
+                var desc = $(this).parent().siblings('.product-desc').html();
                 var redeem_points = $(this).siblings('.redeem-points').html();
                 redeem_points = parseInt(redeem_points);
                 var actions = $(this).siblings('.product-actions').html();
                 var popup_html = '<div class="cart-popup-wrapper">\n\
                                 <div class="cart-popup"><a class="cart-close" href="javascript:;"><i class="fa fa-times" aria-hidden="true"></i></a>\n\
                                 <div class="col-md-4 pic">' + pic + '<span>' + added_on + '</span></div>\n\
-                                <div class="col-md-8"><h2>' + title + '</h2><p>' + desc + '</p>\n\
+                                <div class="col-md-8"><h2>' + title + '</h2><div class="popup-desc"><div class="desc"><p>' + desc + '<p></div><div class="full-desc"><p>' + full_desc + '<p></div></div>\n\
                                 <div class="redeem-points"><strong>You can claim this product for:</strong><span>' + redeem_points + ' Reward Points only</span></div>\n\
                                 <div class="cart-actions">' + actions + '</div></div></div></div>';
                 $('body').addClass('has-cart-popup').remove('.cart-popup-wrapper');
                 $('body').append(popup_html);
+
+                // More/Less logic for product popup.
+                $('.cart-popup .popup-desc .full-desc').hide();
+                $('.views-more-link').on('click', function (event) {
+                    event.preventDefault();
+                    $(this).parents('.popup-desc').find('.full-desc').show();
+                    $(this).parent().parent().hide();
+                });
+                $('.views-less-link').on('click', function (event) {
+                    event.preventDefault();
+                    $(this).parents('.popup-desc').find('.desc').show();
+                    $(this).parent().parent().hide();
+                });
             });
             $('body').on('click', '.cart-close', function () {
                 $(this).closest('.cart-popup-wrapper').fadeOut();
@@ -83,7 +97,6 @@
 
             // Code for points earning callbacks.
             $('.share, .like, .visit, .follow, .ns, .ugc, .ol-register, .participate, .raf').on('click', function () {
-                //console.log(Drupal.settings.itg_loyalty_reward);
                 var base_url = Drupal.settings.itg_loyalty_reward.base_url;
                 var event_type = $(this).attr('class');
                 $.ajax({
@@ -158,17 +171,17 @@
                     type: 'post',
                     data: {'item_count': item_count, 'encoded_id': spliteed_id[0]},
                     dataType: "JSON",
-                    success: function (data) {                        
+                    success: function (data) {
                         switch (data.code) {
-                            case -2:
+                            case - 2:
                                 alert('Insufficient points to redeem this product.');
                                 location.reload();
                                 break;
-                                
-                            case -1:
+
+                            case - 1:
                                 alert('Something went wrong please try after some time.');
                                 break;
-                                
+
                             case 1:
                                 location.reload();
                         }

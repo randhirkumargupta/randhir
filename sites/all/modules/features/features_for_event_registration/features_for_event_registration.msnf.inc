@@ -11,7 +11,7 @@ function features_for_event_registration_msnf_step_info() {
   $export = array();
 
   $msnf = new stdClass();
-  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->disabled = TRUE; /* Edit this to true to make a default msnf disabled initially */
   $msnf->api_version = 1;
   $msnf->identifier = 'step_erf_basic_details|node|event_registration';
   $msnf->step_name = 'step_erf_basic_details';
@@ -50,7 +50,7 @@ function features_for_event_registration_msnf_step_info() {
   $export['step_erf_basic_details|node|event_registration'] = $msnf;
 
   $msnf = new stdClass();
-  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->disabled = TRUE; /* Edit this to true to make a default msnf disabled initially */
   $msnf->api_version = 1;
   $msnf->identifier = 'step_erf_company_details|node|event_registration';
   $msnf->step_name = 'step_erf_company_details';
@@ -89,7 +89,7 @@ function features_for_event_registration_msnf_step_info() {
   $export['step_erf_company_details|node|event_registration'] = $msnf;
 
   $msnf = new stdClass();
-  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->disabled = TRUE; /* Edit this to true to make a default msnf disabled initially */
   $msnf->api_version = 1;
   $msnf->identifier = 'step_erf_order_summary|node|event_registration';
   $msnf->step_name = 'step_erf_order_summary';
@@ -123,7 +123,7 @@ function features_for_event_registration_msnf_step_info() {
   $export['step_erf_order_summary|node|event_registration'] = $msnf;
 
   $msnf = new stdClass();
-  $msnf->disabled = FALSE; /* Edit this to true to make a default msnf disabled initially */
+  $msnf->disabled = TRUE; /* Edit this to true to make a default msnf disabled initially */
   $msnf->api_version = 1;
   $msnf->identifier = 'step_erf_registration_fee|node|event_registration';
   $msnf->step_name = 'step_erf_registration_fee';

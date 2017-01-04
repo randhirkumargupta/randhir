@@ -1,3 +1,6 @@
+<?php
+global $base_url;
+?>
 <section class="footer-top">
     <div class="container">
         <div class="footer-top-link">
@@ -23,7 +26,11 @@
  <section class="footer-mid mhide">
         <div class="container">
 <!--         <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">-->
-        <?php  print ($data['itg_top']['150*150_footer']); ?>
+        <?php
+          if (!empty($data['itg_top']['150*150_footer'])) {
+            print $data['itg_top']['150*150_footer'];
+          }
+        ?>
         </div>
  </section>
    <section class="footer-bottom">

@@ -28,6 +28,7 @@ function itg_seo_menu() {
  * @return array
  */
 function itg_seo_access_denied() {
+  
   return theme('itg_seo_access_denied');
 }
 
@@ -37,7 +38,10 @@ function itg_seo_access_denied() {
  * @return array
  */
 function itg_seo_not_found() {
-  return theme('itg_seo_not_found');
+  if(function_exists(itg_seo_latest_headlines)) { 
+   $latest_headlines =  itg_seo_latest_headlines();
+  }
+  return theme('itg_seo_not_found', array('data' => $latest_headlines));
 }
 
 /**
@@ -54,6 +58,7 @@ function itg_seo_theme() {
     'itg_seo_not_found' => array(
       'template' => 'itg-seo-not-found',
       'path' => drupal_get_path('module', 'itg_seo') . '/templates',
+      'variables' => array('data' => NULL),
     ),
   );
 
@@ -65,6 +70,7 @@ function itg_seo_theme() {
  * {@inheritdoc}
  */
 function itg_seo_form_alter(&$form, &$form_state, $form_id) {
+  
   // Extra meta tags element hide from form
   if ($form_id == 'mega_review_critic_node_form' 
       || $form_id == 'story_node_form' 
@@ -84,21 +90,42 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
       || $form_id == 'event_configurations_node_form' 
       || $form_id == 'event_backend_node_form' 
       || $form_id == 'issue_node_form' 
-      || $form_id == 'supplement_node_form' 
+      || $form_id == 'supplement_node_form'
+      || $form_id == 'newsletter_node_form'    
       || $form_id == 'magazine_node_form' 
-      || $form_id == 'heighlights_node_form' 
-      || $form_id == 'page_node_form' 
-      || $form['#vocabulary']->machine_name == 'category_management' 
-      || $form['#vocabulary']->machine_name == 'movies'
+      || $form_id == 'heighlights_node_form'
+      || $form_id == 'survey_node_form'
+      || $form_id == 'quiz_node_form'
+      || $form_id == 'page_node_form'      
+      || $form_id == 'poll_node_form'
+      || $form_id == 'sponsor_node_form'
   ) {
     if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
 
       $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
     }
   }
+  // Hide extra metatags on taxonomies.
+  if ($form_id == 'taxonomy_form_term' && 
+      ($form['#vocabulary']->machine_name == 'category_management'  || 
+      $form['#vocabulary']->machine_name == 'movies')) {
+    if (!array_key_exists(ADMINISTRATOR, $user->roles)) {
+      $form['#after_build'][] = 'itg_meta_tags_extra_element_hide';
+    }
+  }
 
-  if ($form_id == 'syndication_client_node_form' || $form_id == 'syndication_rule_node_form' || $form_id == 'syndication_feed_from_pattern_node_form' || $form_id == 'ads_management_node_form' || $form_id == 'task_idea_allocation_tracking_node_form' || $form_id == 'ugc_node_form' || $form_id == 'notification_node_form') {
+
+  if ($form_id == 'syndication_client_node_form' 
+          || $form_id == 'syndication_rule_node_form' 
+          || $form_id == 'syndication_feed_from_pattern_node_form' 
+          || $form_id == 'ads_management_node_form' 
+          || $form_id == 'task_idea_allocation_tracking_node_form' 
+          || $form_id == 'ugc_node_form' 
+          || $form_id == 'notification_node_form'
+          ) {
     //$form['additional_settings']['#access'] = FALSE;
+    $form['#after_build'][] = 'itg_additional_settings_element_hide';
+     
   }
 }
 
@@ -124,10 +151,48 @@ function itg_meta_tags_extra_element_hide($form, &$form_state, $form_id) {
 
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
 
-  $arr_seo_heading_not_req = array('event_backend_node_form', 'issue_node_form', 'supplement_node_form', 'magazine_node_form');
+  $arr_seo_heading_not_req = array('event_backend_node_form', 'issue_node_form', 'supplement_node_form', 'magazine_node_form', 'survey_node_form', 'quiz_node_form');
   if (!in_array($form['#form_id'], $arr_seo_heading_not_req)) {
     $form['path']['#prefix'] = '<h2 class="story-title">' . t('SEO Meta Tags') . '</h2>';
   }
 
+  return $form;
+}
+
+/**
+ * Implements 
+ * itg_seo_latest_headlines()
+ */
+function itg_seo_latest_headlines() {
+    $query = db_select('node', 'n')
+        ->fields('n', array('title', 'nid'))
+        ->condition('n.status', 1)
+        ->condition('n.type', 'story')
+        ->range(0,4)
+        ->orderBy('n.created', 'DESC');
+    $result = $query->execute()->fetchAll();
+    $headlines = array();
+    foreach ($result as $key => $val) {
+        $headlines[$val->nid] = $val->title;
+    }
+    return $headlines;
+}
+
+/**
+ * Extra meta tags element hide from form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
+  global $user;
+  if ($user->uid != '1') {
+    drupal_add_js('jQuery(document).ready(function() {
+              jQuery(".vertical-tabs-list").hide();
+              jQuery(".form-item-menu-enabled").hide();
+              jQuery(".form-item-path-alias").hide();              
+              jQuery(".form-item-path-pathauto").hide();  
+            });', array('type' => 'inline', 'scope' => 'footer'));
+  }
   return $form;
 }

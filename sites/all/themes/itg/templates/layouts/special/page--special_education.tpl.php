@@ -70,7 +70,8 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
-    <main id="main" class="container">
+    <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -92,10 +93,15 @@ if ($theme != 'itgadmin') {
  
 
 <div class="itg-layout-container <?php echo $itg_class; ?> education-layout-page">
-
-    <div class="row itg-top-section itg-layout-672 pos-rel">
-         
-        <?php print render($page['vertical_menu']); ?>
+    <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
+    <div class="row itg-top-section itg-layout-672 ">
         <div class="top-block">
         <div class="col-md-8">
             <div class="">
@@ -125,7 +131,13 @@ if ($theme != 'itgadmin') {
                 <div class="itg-widget-parent m-bottom40 col-md-12 col-sm-6 col-xs-12">
                   <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']);?></div>
+                      <div class="sidebar-ad">
+                         <?php
+                          if (!empty($itg_ad['200*200_right_bar_ad1'])) {
+                            print $itg_ad['200*200_right_bar_ad1'];
+                          }
+                        ?>
+                      </div>
                     </div>
 
                   </div>
@@ -399,7 +411,13 @@ if ($theme != 'itgadmin') {
             <div class="itg-widget-parent">
                   <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']);?></div>
+                      <div class="sidebar-ad">
+                         <?php
+                          if (!empty($itg_ad['200*200_right_bar_ad2'])) {
+                            print $itg_ad['200*200_right_bar_ad2'];
+                          }
+                          ?>
+                      </div>
                     </div>
                 </div>         
         </div>

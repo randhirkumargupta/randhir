@@ -41,18 +41,69 @@
                 <div class="Story-details">
                     <h2><?php print t('Video Upload'); ?></h2>
                     <div class="content-details">
-                        <?php print render($content['field_upload_video']); ?>
-                        <?php $short_des = render($content['field_story_expert_name']);
+                        <?php
+                        
+                        $items = field_get_items('node', $node, 'field_video_upload');
+           
+                        foreach ($items as $imagecollection):
+                           $video_fid_data = get_video_filed_collection_by_its_id($imagecollection['value']);
+                  
+  
+                            if ($video_fid_data[0]->field_videogallery_video_upload_fid !="") {
+                                $video_data = itg_videogallery_get_videoid($video_fid_data[0]->field_videogallery_video_upload_fid);
+                            }
+   
+                            if (!empty($video_data)) {
+                                
+                                $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+                            }
+
+                            if (isset($video_fid_data) && !empty($video_fid_data[0]->field_videogallery_video_upload_description)) {
+                                $output .= '<div class="field-audio-image">Description:</div><div class="photo-title"><strong>' . $video_fid_data[0]->field_videogallery_video_upload_description . '</strong></div>';
+                            }
+                        endforeach;
+                        ?>
+                        <?php print $output; ?>
+                        <?php
+                        $short_des = render($content['field_story_expert_name']);
                         if (!empty($short_des)):
                             ?>
                             <?php print render($content['field_story_expert_name']); ?>
-                        <?php
+                            <?php
                         endif;
                         $short_des = render($content['field_story_expert_description']);
                         if (!empty($short_des)):
                             ?>
-                <?php print render($content['field_story_expert_description']); ?>
-                <?php endif; ?>
+                            <?php print render($content['field_story_expert_description']); ?>
+                        <?php endif; ?>
+                    </div>
+                </div> 
+            <?php } else { ?>
+                <div class="Story-details">
+                    <h2><?php print t('Video Upload'); ?></h2>
+                    <div class="content-details">
+                        <?php
+                        
+                        $items = field_get_items('node', $node, 'field_video_upload');
+                        foreach ($items as $imagecollection):
+                            $video_fid = $imagecollection['field_videogallery_video_upload'][LANGUAGE_NONE][0]['fid'];
+                            if ($video_fid != "") {
+                                $video_data = itg_videogallery_get_videoid($video_fid);
+                            }
+
+                            if (!empty($video_data)) {
+
+                                $output .= ' <iframe frameborder="0" src="https://www.dailymotion.com/embed/video/' . $video_data . '?autoplay=0&mute=1&ui-start-screen-info" allowfullscreen></iframe>';
+                            }
+
+                            if (isset($imagecollection['field_videogallery_description'][LANGUAGE_NONE]) && !empty($imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'])) {
+                                $output .= '<div class="field-audio-image">Description:</div><div class="photo-title"><strong>' . $imagecollection['field_videogallery_description'][LANGUAGE_NONE][0]['value'] . '</strong></div>';
+                            }
+
+
+                        endforeach;
+                        ?>
+                        <?php print $output; ?>
                     </div>
                 </div> 
             <?php } ?>
@@ -63,7 +114,7 @@
                 <div class="BrowseMedia">
                     <h2>Image Upload </h2>
                     <div class="content-details">
-                <?php print render($content['field_story_extra_large_image']); ?>
+                        <?php print render($content['field_story_extra_large_image']); ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -98,7 +149,7 @@
                                     print render($content['field_story_twitter_video']);
                             }
                             ?>
-                <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -139,15 +190,14 @@
 
             <?php
             $termdata = "";
-
-            if ($content['field_story_extra_large_image']['#object']->field_primary_category['und'][0]['value'] != "") {
-                $termdata = itg_videogallery_get_term_name($content['field_story_extra_large_image']['#object']->field_primary_category['und'][0]['value']);
+            if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
+                $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
             }
             $field_story_category = render($content['field_story_category']);
             if (!empty($field_story_category)):
                 ?>
-            <?php print render($content['field_story_category']); ?>
-                    <?php endif; ?>
+                <?php print render($content['field_story_category']); ?>
+            <?php endif; ?>
             <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
             <div class="Story-details">
@@ -163,8 +213,8 @@
                 </div>
             </div> 
 
-    <?php endif; // end of view mode full condition ?></div>
-    <?php
+        <?php endif; // end of view mode full condition  ?></div>
+        <?php
 //            $comment_checkbox = $node->field_video_configurations[LANGUAGE_NONE];
 //            if(isset($comment_checkbox)){
 //              foreach ($node->field_video_configurations[LANGUAGE_NONE] as $key => $val) {

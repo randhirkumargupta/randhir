@@ -16,6 +16,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
  */
 function itg_common_init() {
   global $user;
+  //phpinfo();exit;
 }
 
 /**
@@ -42,6 +43,27 @@ function itg_common_dropdown_supplement($id = '') {
 }
 
 /**
+ * Helper function to populate the second dropdown.
+ * @param string $id
+ * @return array $data
+ */
+function itg_common_dropdown_mazine($id = '') {
+    // Fetch supplements for selected magazine
+    $select = t('- None -');
+    $data = array('_none' => $select);
+    $query = db_select('node', 'n');
+    $query->fields('n', array('title','nid'));
+    $query->condition('n.status', 1, '=');
+    $query->condition('n.type', 'magazine', '=');
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+        $data[$record['nid']] = $record['title'];
+    }
+    return $data;
+}
+
+/**
  * Implements hook_form_alter().
  * {@inheritdoc}
  */
@@ -61,9 +83,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
             $form['description']['#title'] = 'Sponser';
           }      
           // Add JS to hide extra element of menu forms
-          drupal_add_js('jQuery(document).ready(function() {                  
-                          // jQuery(".form-item-description").hide();
-                          // jQuery(".form-type-checkbox").hide();
+          drupal_add_js('jQuery(document).ready(function() {
                           jQuery(".form-item-expanded").hide();
                           jQuery(".form-item-parent").hide();
                           jQuery(".form-item-weight").hide();             
@@ -132,17 +152,21 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'mega_review_critic_node_form' || $form_id=='custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form') {      
       $form['#after_build'][] = 'itg_common_cancel_button';
     }
-    if(is_array($form['#term']))
-    {
-    if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {
-      $form['#after_build'][] = 'itg_common_cancel_button';
+    if (!empty($form['#term']) && is_array($form['#term'])) {
+      if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'movies') {
+        $form['#after_build'][] = 'itg_common_cancel_button';
+      }
+      if (isset($form['#term']['vocabulary_machine_name']) && $form['#term']['vocabulary_machine_name'] == 'state_managment') {
+        $form['#after_build'][] = 'itg_common_cancel_button';
+      }
     }
-    }
-    if(is_object($form['#term']))
-    {
-     if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'movies') {
-      $form['#after_build'][] = 'itg_common_cancel_button';
-    }   
+    if (!empty($form['#term']) && is_object($form['#term'])) {
+      if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'movies') {
+        $form['#after_build'][] = 'itg_common_cancel_button';
+      }  
+      if (isset($form['#term']->vocabulary_machine_name) && $form['#term']->vocabulary_machine_name == 'state_managment') {
+        $form['#after_build'][] = 'itg_common_cancel_button';
+      }  
     }
     // Auto Generate image according photo gallery
     if ($form_id == 'photogallery_node_form' || $form_id == 'story_node_form' || $form_id == 'recipe_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'cooking_tips_node_form' || $form_id == 'food_news_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'podcast_node_form') {
@@ -843,11 +867,116 @@ function itg_content_inactive() {
   
   foreach ($itg_result as $itg_val) {    
     $node = node_load($itg_val->nid);
-    $nodeid[] = $node;    
+    $nodeid[] = $node->nid;    
     $node->status = 0;
-    node_save($node);    
+    node_save($node);
+    itg_widget_handle_unpublished_node($node->nid);
   }
   
   watchdog("cron content expiry", '<pre>'. print_r($nodeid, TRUE) .'</pre>'); 
   
+}
+
+/**
+ * Round average rating into interval of 0.5.
+ *
+ * @param float $average_rating
+ * @return real
+ */
+function itg_common_round_rating($average_rating) {  
+  $temp = fmod($average_rating, 1);  
+  $temp = (string) $temp;
+  $average_rating -= $temp;  
+  switch ($temp) {
+    case '0.1':
+    case '0.2':
+    case '0.3':
+    case '0.4':
+    case '0.5':      
+      $average_rating += 0.5;
+      break;
+    case '0.6':
+    case '0.7':
+    case '0.8':
+    case '0.9':      
+      ++$average_rating;      
+  }
+  
+  return $average_rating;
+}
+
+/**
+ * Implements itg_total_share_count
+ * @param string $actual_link
+ *   Send url for facebook share
+ * 
+ * @return int
+ *   total share count
+ */
+
+function itg_total_share_count($actual_link) {
+  $fb_google_count = $fb_count = $google_count = 0;
+  
+  if (function_exists(itg_facebook_share_count)) {
+    $fb_count = itg_facebook_share_count($actual_link);
+  }
+
+  // get google share count
+  if (function_exists(itg_google_share_count)) {
+    $google_count = itg_google_share_count($actual_link);
+  }
+
+  $fb_google_count = $fb_count + $google_count;
+
+  return $fb_google_count;
+}
+
+
+/**
+ * Check story state(draft, unpublished, published etc.)
+ * @param int $nid
+ * @return boolean
+ */
+function itg_common_get_story_status($nid) {
+  $query = db_select('workbench_moderation_node_history', 's');
+  $query->fields('s', array('state'))
+        ->condition('s.nid', $nid, '=')
+          ->condition('s.is_current', 1, '=');
+  $result = $query->execute();
+  $story_status = $result->fetchField();
+  if($story_status) {
+    return $story_status; 
+  } else {
+    return FALSE;
+  }
+}
+
+/**
+ * Implements itg_get_related_story
+ * @param int $entity_id
+ */
+function itg_get_related_story_content($entity_id) {
+  $solr = apachesolr_get_solr();
+  $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id"));
+  $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
+  $query->addParam('qf', 'entity_id'); // Only search in id
+  $query->addParam('bs_status', 'true'); // Only search in title
+  $resp_search = $query->search();
+  return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+}
+
+/**
+ * Implements itg_get_related_story_id
+ * @param string $entity_id
+ */
+function itg_get_related_story_id($related_content) {
+ $related_content = explode(',', $related_content);
+                    foreach ($related_content as $fn_result) {
+                      $related_content = explode('_', $fn_result);
+                      $final_related [] = $related_content[1];
+                    }
+                    $final_related = implode(',', $final_related);
+                    $final_related = explode(',', $final_related);
+                    
+                    return $final_related;
 }

@@ -18,7 +18,7 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -65,7 +65,7 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -105,45 +105,6 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-loyalty_and_rewards-field_lrp_category'.
-  $field_instances['node-loyalty_and_rewards-field_lrp_category'] = array(
-    'bundle' => 'loyalty_and_rewards',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 9,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_lrp_category',
-    'label' => 'Category',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 14,
-    ),
-  );
-
   // Exported field_instance: 'node-loyalty_and_rewards-field_lrp_completed'.
   $field_instances['node-loyalty_and_rewards-field_lrp_completed'] = array(
     'bundle' => 'loyalty_and_rewards',
@@ -152,7 +113,7 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -192,7 +153,7 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -239,11 +200,11 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'thumbnail',
         ),
         'type' => 'image',
         'weight' => 1,
@@ -317,7 +278,7 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -366,7 +327,7 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -418,7 +379,7 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -459,15 +420,15 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'custom_date_d_m_y_',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_remaining_days' => FALSE,
+          'show_remaining_days' => 0,
         ),
         'type' => 'date_default',
         'weight' => 3,
@@ -498,7 +459,7 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 1,
-        'input_format' => 'Y-m-d H:i:s',
+        'input_format' => 'd/m/Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -513,7 +474,6 @@ function features_for_loyalty_and_rewards_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Actual Price');
-  t('Category');
   t('Completed(Sold out)');
   t('Discounted Price');
   t('Image');

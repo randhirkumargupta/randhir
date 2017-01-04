@@ -100,7 +100,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         endif;
         ?>
       
-        <main id="main" class="container">
+        <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
             <section id="content" role="main">
                 <?php print render($page['highlighted']); ?>
                 <?php print $breadcrumb; ?>
@@ -126,8 +127,15 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 $itg_class = 'itg-front';
             }
             ?>
-            <div class="itg-layout-container election-page <?php echo $itg_class; ?> pos-rel">
-              <?php print render($page['vertical_menu']); ?>
+            <div class="itg-layout-container election-page <?php echo $itg_class; ?> ">
+                <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
                 <?php
                 if (!empty($highlights['node_data']->title)) {
                     echo '<h1>' . mb_strimwidth($highlights['node_data']->title, 0, 90, "..") . ' <span class="disc-share"><a href="#"><i class="fa fa-share-alt"></i></a></h1>';
@@ -377,7 +385,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <div class="<?php echo $adsclass;?>">
                             <div class="itg-widget election-topadd">
                                 <div class="ad-widget droppable">
-                                    <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']); ?></div>
+                                    <div class="sidebar-ad">
+                                       <?php
+                                          if (!empty($itg_ad['200*200_right_bar_ad1'])) {
+                                            print $itg_ad['200*200_right_bar_ad1'];
+                                          }
+                                          ?></div>
                                 </div>
                             </div>
                         </div> 
@@ -461,7 +474,13 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <div class="mt-50">
                             <div class="itg-widget">
                                 <div class="ad-widget droppable">
-                                    <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']); ?></div>
+                                    <div class="sidebar-ad">
+                                       <?php
+                                        if (!empty($itg_ad['200*200_right_bar_ad2'])) {
+                                          print $itg_ad['200*200_right_bar_ad2'];
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </div> 

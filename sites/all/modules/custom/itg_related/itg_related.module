@@ -137,10 +137,19 @@ function itg_related_views_pre_render(&$view) {
       if ($related_result->bs_status == '1') {
         $related_result->bs_status = 'Published';
       }
-
-      $splittedsite = explode("/", $related_result->site);
-      $explode_site = explode(".", $splittedsite[2]);
-      $related_result->site = strtoupper($explode_site[0]);
+      
+      if ($related_result->hash == '5fyeg7') {
+        $related_result->site = 'DEV';
+      }
+      elseif ($related_result->hash == '2e1u4m') {
+        $related_result->site = 'QA';
+      }
+      elseif ($related_result->hash == 'e49it8') {
+        $related_result->site = 'STAGE';
+      }
+//      $splittedsite = explode("/", $related_result->site);
+//      $explode_site = explode(".", $splittedsite[2]);
+//      $related_result->site = strtoupper($explode_site[0]);
       
     }
   }
@@ -380,7 +389,7 @@ function itg_related_save_search() {
 
     $final_link = str_replace("&width=900&height=700&iframe=true", "", $save_search_result_info['search_path']);
 
-    print '<li><a href="' . $final_link . '&width=900&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
+    print '<li><a oncontextmenu="return false;" href="' . $final_link . '&width=900&height=700&iframe=true" class="colorbox-load">' . $save_search_result_info['search_title'] . '</a></li>';
   }
 
   print '</ul>';

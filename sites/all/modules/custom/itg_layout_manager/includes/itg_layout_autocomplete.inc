@@ -89,3 +89,29 @@ function section_widgets_ajax() {
   exit;
   
 }
+
+/**
+ * Implements page callback for layout-search-widgets-list.
+ * @return 
+ */
+function itg_search_widgets_list() {
+  if (arg(1) == 'highlights') {
+    $arg1 = 'heighlights';
+  } else {
+      $arg1 = arg(1);
+  }
+  
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));  
+  $query->condition('type', $arg1);
+  $query->condition('title', $_GET['html_title']);
+  $itg_result = $query->execute()->fetchAll();
+  
+  foreach ($itg_result as $key => $val) {
+    $content .= '<li id="'.$val->title.'" data-widget="'.arg(1).'#'.$val->nid.'" data-widget-info="">
+    <span>'.$val->title.'</span></li>';
+  }
+  
+  echo $content;
+  exit;
+}

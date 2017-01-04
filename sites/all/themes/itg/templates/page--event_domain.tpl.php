@@ -5,18 +5,23 @@
  */
 
 global $base_url;
+$arg = arg();
+
 $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
-$host_node_arr = explode('/', $host_detail['source']);
-$host_node = node_load($host_node_arr[1]);
+if (empty($host_detail) && $arg[0] == 'event') {
+  $path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
+  $host_node = menu_get_object("node", 1, $path);
+} elseif(empty($host_detail) && is_numeric($arg[1])){
+  $host_node = node_load($arg[1]);
+} else {
+  $host_node_arr = explode('/', $host_detail['source']);
+  $host_node = node_load($host_node_arr[1]);
+}
 
 $banner_image = $base_url.'/'.str_replace('public://', 'sites/default/files/', $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
 $banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
-
-// Css variables
 $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';
-
 ?>
-
 <div id="page">
   <div class="event-sidebar">
     <header class="header" id="header" role="banner">
@@ -147,10 +152,11 @@ drupal_add_js("jQuery(document).ready(function(){
         jQuery('.'+getVal).show();
     });
     
-    jQuery('.view-event-photo-slider ul').slick({
+    jQuery('#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider ul').slick({
         infinite: true,    
         autoplay:true,
         dots: false,
+        variableWidth:true,
         prevArrow: '<i class=\"fa fa-angle-left slick-prev\"></i>',
         nextArrow: '<i class=\"fa fa-angle-right slick-next\"></i>'
     });

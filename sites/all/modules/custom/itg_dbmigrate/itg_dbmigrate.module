@@ -93,3 +93,30 @@ function ordering_set_for_byline($nid, $weight) {
     'parent' => 0,
     ))->execute();
   }
+  
+  /**
+   * Implements function for get term name
+   * @param int $tid
+   * @return
+   */
+  function itg_db_migrate_term_name($tid){
+   $query = db_select('taxonomy_term_data', 'ttd');
+   $query = $query->fields('ttd',array('name'));
+   $query = $query->condition('tid', $tid, '=');
+   $result = $query->execute()->fetchField();
+   return $result;
+  }
+  
+  /**
+   * Implements function for get parent section id for photo category
+   * @param string $term_name
+   * @return
+   */
+  function itg_db_migrate_parent_term($term_name, $vid) {
+    $query = db_select('taxonomy_term_data', 'ttd');
+    $query -> fields('ttd', array('tid'));
+    $query -> condition('vid', $vid, '=');
+    $query -> condition('name', $term_name, '=');
+    $result = $query->execute()->fetchField();
+    return $result;
+  }

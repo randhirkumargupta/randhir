@@ -4,6 +4,7 @@
  */
 global $base_url;
 $node = $form['node']['#value'];
+$from_story = $form['from_story']['#value'];
 $byline_node = node_load($node->field_story_reporter[LANGUAGE_NONE][0]['target_id']);
 
 $byline_name = $byline_node->title;
@@ -21,6 +22,8 @@ else {
 ?>
 <div class="survey-form-main-container" style="margin: 10px 0px 10px 0px;">
   <h1 class="survey-title"><?php echo 'Survey: '.$node->title; ?></h1>
+  
+  <?php if ($from_story != 'yes') { ?>
   <div class="survey-description"><?php echo $node->body[LANGUAGE_NONE][0]['value']; ?></div>
   <div class="byline">
     <div class="profile-pic">
@@ -29,7 +32,12 @@ else {
     <div class="profile-detail">
       <ul>
         <li class="title"><?php echo $byline_name; ?></li>
-        <li class="twitter"><?php echo $byline_twitter_handler; ?></li>
+          <?php
+          $twitter_handle = str_replace('@', '', $byline_twitter_handler);
+          if (!empty($twitter_handle)) {
+            ?>
+          <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>                
+          <?php } ?>
       </ul>
       <ul class="date-update">
         <li><?php echo $created_date; ?></li>
@@ -56,7 +64,7 @@ else {
       
     </div>
   </div>
-  
+  <?php } ?>
   <!-- Render survey form -->
   <div class="<?php echo $form_class; ?>">
     <?php print drupal_render_children($form); ?>

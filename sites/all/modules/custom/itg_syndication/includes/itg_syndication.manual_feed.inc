@@ -9,7 +9,9 @@
  * {@inheritdoc}
  */
 function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
-  $magazine_id = $form_state['input']['magazine-name'];
+  if (!empty($form_state['input']['magazine-name'])) {
+    $magazine_id = $form_state['input']['magazine-name'];
+  }
   if (isset($form_state['view']->name) && $form_state['view']->name == 'syndication_rule_listing') {
     $form['field_syndication_rule_title_value']['#options'] = itg_syndication_get_client("yes");
     unset($form['field_syndication_rule_title_value']['#options']['_none']);
@@ -26,6 +28,12 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = 'syndication_selector_custom_form_validate';
   }
 
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_pattern_listing') {
+    if(!empty($form['field_syndication_feed_content_value']['#options']['photogallery'])) {
+      $form['field_syndication_feed_content_value']['#options']['photogallery'] = t('Photogallery');
+    }
+  }
+  
   // Add client dropdown to view
   if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'syndication_feed_generator') {
     global $user, $base_url;
@@ -187,9 +195,10 @@ function itg_syndication_form_alter(&$form, &$form_state, $form_id) {
     drupal_add_js('
       jQuery(function() {
         jQuery( "#edit-changed-max-datepicker-popup-0 , #edit-changed-min-datepicker-popup-0" ).datepicker({  
+          dateFormat: \'dd/mm/yy\',
           changeMonth:true,
           changeYear:true,
-          maxDate: new Date() 
+          maxDate: new Date() ,
         });
       });
     ',"inline");
@@ -348,6 +357,14 @@ function syndication_selector_custom_form_validate($form, &$form_state) {
 
   if (empty($form_state['values']['itg_row_selector_client'])) {
     form_set_error('client_title', t('Please select Client.'));
+  }
+  
+  if($form_state['values']['feed_type'] == 'ussd' 
+      || $form_state['values']['feed_type'] == 'sms'
+      || $form_state['values']['feed_type'] == 'stf'
+      || $form_state['values']['feed_type'] == 'html'
+      ) {
+    form_set_error('feed_type', t('Feed type format does not exists to generate.'));
   }
 }
 

@@ -94,7 +94,7 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
 
   // Set destination for newsletter form
   if ($form_id == 'newsletter_node_form') {
-
+  
     // Modify content id(show content id only instead of title and content id)
     if (arg(0) == 'node' && arg(2) == 'edit') {
       for ($delta_counter = 0; $delta_counter <= $form['field_newsl_add_news']['und']['#max_delta']; $delta_counter++) {
@@ -114,7 +114,8 @@ function itg_newsletter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
-
+    
+    $form['actions']['submit']['#value'] = 'Publish';
     unset($form['title']);
     unset($form['field_newsl_website_name']);
 
@@ -295,6 +296,9 @@ function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $for
     // Call function autocomplete to show matching titles
     $form['title']['#autocomplete_path'] = 'content-title-list/newsletter/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Subject Line'));
+    $form['date_filter']['min']['#date_format'] = 'd/m/Y';
+    $form['date_filter']['max']['#date_format'] = 'd/m/Y';
+    $form['#validate'][] = 'itg_newsletter_shedule_date_validate';
   }
 
   if ($form['#id'] == 'views-exposed-form-manage-newsletter-templates-page') {
@@ -305,6 +309,37 @@ function itg_newsletter_form_views_exposed_form_alter(&$form, &$form_state, $for
   }
 }
 
+
+/**
+ * Function to validate expose form
+ * {@inheritdoc}
+ */
+function itg_newsletter_shedule_date_validate($form, &$form_state) {
+  
+  if($form['#id'] == 'views-exposed-form-manage-newsletter-page') {
+    $min = $form_state['values']['date_filter']['min'];
+    $max = $form_state['values']['date_filter']['max'];
+    
+    if(!empty($min) && empty($max)) {
+      form_set_error('date_filter', 'Please select End date.');
+    }
+    
+    if(!empty($max) && empty($min)) {
+      form_set_error('date_filter', 'Please select Start date.');
+    }
+    
+    if(!empty($min) && !empty($max) && (strtotime($min)> strtotime($max))) {
+      form_set_error('date_filter', 'Start date can\'t be greater then End date.');
+    }
+    // Reset button handling
+    if(!empty($form_state['clicked_button']['#value']) && $form_state['clicked_button']['#value'] == 'Reset') {
+      // Remove error message
+      drupal_get_messages("error");
+      drupal_goto('manage-newsletter');
+    }
+    
+  }
+}
 /**
  * Implementation of hook_node_presave
  * {@inheritdoc}
@@ -486,6 +521,24 @@ function itg_newsletter_node_validate($node, $form, &$form_state) {
           form_set_error('field_newsl_time', t('Time should be greater than current time for current date.'));
         }
       }
+    }
+
+    //Validate content id
+    $i = 1;
+    foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news) {
+      if ($news['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal') {
+        $story_id = $news['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+        $story_status = itg_common_get_story_status($story_id);
+        if ($story_status != 'published' && $story_id != 'A') {
+          if(empty($story_id)) {
+              form_set_error('field_news_cid', t('Please enter valid and published Content ID for Title @titlenum.', array('@titlenum' => $i)));
+          } else {
+              form_set_error('field_news_cid' . $story_id, t('Content Id <strong>@contentid</strong> is not published.', array('@contentid' => $story_id)));
+          }
+        
+        }
+      }
+      $i++;
     }
   }
 }

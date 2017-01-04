@@ -16,6 +16,7 @@
                 $('#photogallery-node-form').ajaxComplete(function(event, request, settings) {  
                     if (jQuery('input[name="field_gallery_image[und][0][field_images][und][0][fid]"]').val() == 0) {
                         jQuery('.field-multiple-table tbody tr:first .cancel').mousedown();
+                        jQuery( this ).off( event );
                     }
 
                 });

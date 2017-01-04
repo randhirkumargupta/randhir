@@ -533,7 +533,7 @@ function photogallery_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'No Story Found.';
+  $handler->display->display_options['empty']['area']['content'] = 'Content Not Found.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
@@ -840,6 +840,18 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
+  /* Field: Content: Section */
+  $handler->display->display_options['fields']['field_story_category_1']['id'] = 'field_story_category_1';
+  $handler->display->display_options['fields']['field_story_category_1']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['field'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['delta_offset'] = '0';
+  /* Field: Content: Set As Featured */
+  $handler->display->display_options['fields']['field_featured']['id'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['fields']['field_featured']['field'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['label'] = 'Featured';
+  $handler->display->display_options['fields']['field_featured']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_featured']['delta_offset'] = '0';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -1035,6 +1047,43 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Set As Featured (field_featured) */
+  $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator_id'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['label'] = 'Featured';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['identifier'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'unpublished-photogallery';
 
   /* Display: Published Photogallery */
@@ -1069,13 +1118,6 @@ function photogallery_views_default_views() {
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['header']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Draggableviews: Content */
-  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['table'] = 'node';
-  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
@@ -1132,6 +1174,11 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
   /* Field: Content: Section */
+  $handler->display->display_options['fields']['field_story_category_1']['id'] = 'field_story_category_1';
+  $handler->display->display_options['fields']['field_story_category_1']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['field'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['delta_offset'] = '0';
+  /* Field: Content: Section */
   $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
@@ -1141,6 +1188,13 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
+  /* Field: Content: Set As Featured */
+  $handler->display->display_options['fields']['field_featured']['id'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['fields']['field_featured']['field'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['label'] = 'Featured';
+  $handler->display->display_options['fields']['field_featured']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_featured']['delta_offset'] = '0';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -1377,6 +1431,43 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['field_story_source_type_value']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
   $handler->display->display_options['filters']['field_story_source_type_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Set As Featured (field_featured) */
+  $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator_id'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['label'] = 'Featured';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['identifier'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'published-photogallery';
 
   /* Display: My Un Published Photogallery */
@@ -1830,6 +1921,19 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
+  /* Field: Content: Section */
+  $handler->display->display_options['fields']['field_story_category_1']['id'] = 'field_story_category_1';
+  $handler->display->display_options['fields']['field_story_category_1']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['field'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['label'] = 'Sections';
+  $handler->display->display_options['fields']['field_story_category_1']['delta_offset'] = '0';
+  /* Field: Content: Set As Featured */
+  $handler->display->display_options['fields']['field_featured']['id'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['fields']['field_featured']['field'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['label'] = 'Featured';
+  $handler->display->display_options['fields']['field_featured']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_featured']['delta_offset'] = '0';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -2027,6 +2131,43 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Set As Featured (field_featured) */
+  $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator_id'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['label'] = 'Featured';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['identifier'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'mydraft-photogallery';
 
   /* Display: My Published Photogallery */
@@ -2828,6 +2969,11 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
   /* Field: Content: Section */
+  $handler->display->display_options['fields']['field_story_category_1']['id'] = 'field_story_category_1';
+  $handler->display->display_options['fields']['field_story_category_1']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['field'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['delta_offset'] = '0';
+  /* Field: Content: Section */
   $handler->display->display_options['fields']['field_story_category']['id'] = 'field_story_category';
   $handler->display->display_options['fields']['field_story_category']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['fields']['field_story_category']['field'] = 'field_story_category';
@@ -2837,6 +2983,13 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
+  /* Field: Content: Set As Featured */
+  $handler->display->display_options['fields']['field_featured']['id'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['fields']['field_featured']['field'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['label'] = 'Featured';
+  $handler->display->display_options['fields']['field_featured']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_featured']['delta_offset'] = '0';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -3012,6 +3165,43 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Set As Featured (field_featured) */
+  $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator_id'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['label'] = 'Featured';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['identifier'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'in-queue-photogallery';
 
   /* Display: Archive photogallery */
@@ -3082,6 +3272,18 @@ function photogallery_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_limit'] = '2';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
+  /* Field: Content: Section */
+  $handler->display->display_options['fields']['field_story_category_1']['id'] = 'field_story_category_1';
+  $handler->display->display_options['fields']['field_story_category_1']['table'] = 'field_data_field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['field'] = 'field_story_category';
+  $handler->display->display_options['fields']['field_story_category_1']['delta_offset'] = '0';
+  /* Field: Content: Set As Featured */
+  $handler->display->display_options['fields']['field_featured']['id'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['fields']['field_featured']['field'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['label'] = 'Featured';
+  $handler->display->display_options['fields']['field_featured']['empty'] = 'No';
+  $handler->display->display_options['fields']['field_featured']['delta_offset'] = '0';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -3245,6 +3447,43 @@ function photogallery_views_default_views() {
   $handler->display->display_options['filters']['field_story_archive_value_1']['table'] = 'field_data_field_story_archive';
   $handler->display->display_options['filters']['field_story_archive_value_1']['field'] = 'field_story_archive_value';
   $handler->display->display_options['filters']['field_story_archive_value_1']['operator'] = 'not empty';
+  /* Filter criterion: Content: Set As Featured (field_featured) */
+  $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator_id'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['label'] = 'Featured';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['identifier'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+  );
   $handler->display->display_options['path'] = 'archive-photogallery';
 
   /* Display: My photogallery Rejected */
@@ -4015,7 +4254,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Photo By */
+  /* Field: Field: Photo By */
   $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
   $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
@@ -4053,6 +4292,94 @@ echo $total_items = $view->query->pager->get_total_items();
 
   /* Display: photogallery landing header block */
   $handler = $view->new_display('block', 'photogallery landing header block', 'block');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Field collection item: Image */
+  $handler->display->display_options['fields']['field_images']['id'] = 'field_images';
+  $handler->display->display_options['fields']['field_images']['table'] = 'field_data_field_images';
+  $handler->display->display_options['fields']['field_images']['field'] = 'field_images';
+  $handler->display->display_options['fields']['field_images']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['field_images']['label'] = '';
+  $handler->display->display_options['fields']['field_images']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_images']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_images']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_images']['settings'] = array(
+    'image_style' => 'photgallery_landing_slider_753x543',
+    'image_link' => '',
+  );
+  /* Field: Field collection item: Caption */
+  $handler->display->display_options['fields']['field_image_caption']['id'] = 'field_image_caption';
+  $handler->display->display_options['fields']['field_image_caption']['table'] = 'field_data_field_image_caption';
+  $handler->display->display_options['fields']['field_image_caption']['field'] = 'field_image_caption';
+  $handler->display->display_options['fields']['field_image_caption']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['field_image_caption']['label'] = '';
+  $handler->display->display_options['fields']['field_image_caption']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_image_caption']['element_label_colon'] = FALSE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+echo $total_items = $view->query->pager->get_total_items();
+?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = '';
+  $handler->display->display_options['fields']['counter']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['counter']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['counter']['alter']['text'] = '[counter] of [php] ';
+  $handler->display->display_options['fields']['counter']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
+  /* Field: Field collection item: Image */
+  $handler->display->display_options['fields']['field_images_1']['id'] = 'field_images_1';
+  $handler->display->display_options['fields']['field_images_1']['table'] = 'field_data_field_images';
+  $handler->display->display_options['fields']['field_images_1']['field'] = 'field_images';
+  $handler->display->display_options['fields']['field_images_1']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['field_images_1']['label'] = '';
+  $handler->display->display_options['fields']['field_images_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_images_1']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_images_1']['settings'] = array(
+    'image_style' => 'photo_landing_slider_thumb_88_86',
+    'image_link' => '',
+  );
+  /* Field: Field collection item: Photo By */
+  $handler->display->display_options['fields']['field_photo_byline']['id'] = 'field_photo_byline';
+  $handler->display->display_options['fields']['field_photo_byline']['table'] = 'field_data_field_photo_byline';
+  $handler->display->display_options['fields']['field_photo_byline']['field'] = 'field_photo_byline';
+  $handler->display->display_options['fields']['field_photo_byline']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['field_photo_byline']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Field: Photo By */
+  $handler->display->display_options['fields']['field_photo_by']['id'] = 'field_photo_by';
+  $handler->display->display_options['fields']['field_photo_by']['table'] = 'field_data_field_photo_by';
+  $handler->display->display_options['fields']['field_photo_by']['field'] = 'field_photo_by';
+  $handler->display->display_options['fields']['field_photo_by']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Field collection item: Field collection item ID */
+  $handler->display->display_options['fields']['item_id']['id'] = 'item_id';
+  $handler->display->display_options['fields']['item_id']['table'] = 'field_collection_item';
+  $handler->display->display_options['fields']['item_id']['field'] = 'item_id';
+  $handler->display->display_options['fields']['item_id']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['item_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['item_id']['separator'] = '';
   $export['photo_landing_slider'] = $view;
 
   return $export;

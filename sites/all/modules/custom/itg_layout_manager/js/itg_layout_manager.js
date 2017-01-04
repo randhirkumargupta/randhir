@@ -115,8 +115,8 @@
                                 $('#' + content_place).html(data);
                                 //code by sunil                                
                                 jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings, #defalt-section-top-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
-                                //code by avanish                              
-                                if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1]== 'block_5') {
+                                //code by avanish   
+                                if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1]== 'block_5' || widget_style=='standpoint') {
                                     jQuery(".flexslider").flexslider({
                                         animation: "slide",
                                         prevText: "",
@@ -386,6 +386,51 @@
             jQuery('.add-more-block').each(function() {
                 if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').is(":visible")) {
                   jQuery(this).hide();
+                }
+            });
+            
+            // for html widgets
+            $('#layout-html-submit').click(function() {
+                var base_url = settings.itg_story.settings.base_url;
+                // html widget value
+                var html_title = $('#edit-html-title').val();                
+
+                if (html_title) {
+                    $.ajax({
+                        url: base_url + "/layout-search-widgets-list/custom_html_widgets",
+                        method: 'post',
+                        data: {html_title: html_title},
+                        beforeSend: function() {
+                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        },
+                        success: function(data) {
+                            // display category list in block
+                           $('#templates-widgets-html').html(data);
+                           draggable_widgets();
+                        }
+                    });
+                }
+            });
+            
+             // for highlights widgets
+            $('#layout-highlights-submit').click(function() {                
+                var base_url = settings.itg_story.settings.base_url;
+                // highlights widget value
+                var highlights_title = $('#edit-highlights-title').val();                                   
+                if (highlights_title) {
+                    $.ajax({
+                        url: base_url + "/layout-search-widgets-list/highlights",
+                        method: 'post',
+                        data: {html_title: highlights_title},
+                        beforeSend: function() {
+                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        },
+                        success: function(data) {
+                            // display category list in block
+                           $('#templates-highlights-widgets').html(data);
+                           draggable_widgets();
+                        }
+                    });
                 }
             });
         }

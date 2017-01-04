@@ -67,7 +67,7 @@ function itg_personalization_badge($uid) {
   // Compare earned points with badge points.
   $earned_badge = $points_to_go = 0;
   foreach ($badge as $key => $point) {    
-    if ($point >= $data['total_earned_so_far']) {      
+    if ($data['total_earned_so_far'] > 0 && $point >= $data['total_earned_so_far']) {      
       $earned_badge = $key + 1;
       $points_to_go = $point - $data['total_earned_so_far'];
       break;

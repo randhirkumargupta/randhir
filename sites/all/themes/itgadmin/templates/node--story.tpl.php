@@ -5,9 +5,11 @@
         <a href="javascript:;" class="close-preview">&nbsp;</a>
         <?php
         // Load custom block for social media integration 
-        global $user;        
+        global $user;    
         if (!isset($node->op) && in_array('Social Media', $user->roles)):
+            
           $block = module_invoke('itg_social_media', 'block_view', 'social_media_form');
+        
           ?>
           <div class="itg-smi">
               <button data-id="smi-popup" class="btn data-popup-link">Promote Content</button>
@@ -19,16 +21,17 @@
                     <a class="itg-close-popup" href="javascript:;"> Close </a>
                 </div>
                 <div class="popup-body">
-                    <?php print render($block['content']); ?>
+                    <?php print render($block['content']); 
+                   
+                    ?>
                 </div>
               </div>
           </div>
         <?php endif; ?>        
         <div class="basic-details content-box">
-            <h2><?php  $termdata="";
-            if($content['body']['#object']->field_primary_category['und'][0]['value']!="") {
-                $termdata=itg_videogallery_get_term_name($content['body']['#object']->field_primary_category['und'][0]['value']);
-           
+            <h2><?php $termdata="";
+            if ($node->field_primary_category['und'][0]['value'] != "" && isset($node->field_primary_category['und'])) {
+                $termdata = itg_videogallery_get_term_name($node->field_primary_category['und'][0]['value']);
             }
             print t('Quick File'); ?></h2>
             <div class="content-details">
@@ -113,7 +116,19 @@
                         print render($content['field_story_tweet']);
                         print render($content['field_story_tweet_image']);
                         print render($content['field_story_twitter_video_desc']);
-                        print render($content['field_story_twitter_video']);                        
+                        print render($content['field_story_twitter_video']);
+                        break;
+                      
+                      case 'facebook_instant_article':
+                        print render($content['field_facebook_audio_position']);
+                        print render($content['field_facebook_instant_audio_url']);
+                        print render($content['field_animated_image_position']);
+                        print render($content['field_facebook_animated_image']);                        
+                        print render($content['field_facebook_map_position']);                        
+                        print render($content['field_map_embed_code']);                        
+                        //print render($content['field_facebook_gallery_associate']);                        
+                        print render($content['field_social_embed_code_position']);                        
+                        print render($content['field_social_embed_code']);                        
                     }
                     ?>
                   <?php endforeach; ?>
@@ -260,4 +275,4 @@
     print render($content['comments']);
   }
   ?>
-<?php endif; ?>
+<?php endif;?>

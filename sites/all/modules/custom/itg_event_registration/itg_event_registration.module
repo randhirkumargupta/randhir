@@ -30,17 +30,29 @@ function itg_event_registration_menu() {
 
   $items = array();
 
-  $items['event-registration'] = array(
+  $items['registration'] = array(
     'title' => 'Event Registration',
     'page callback' => 'itg_event_reg_form',
     'access callback' => TRUE,
-    //'type' => MENU_CALLBACK,
-    //'file' => 'includes/itg_event_registration.inc',
+  );
+  
+  $items['event/%/registration'] = array(
+    'title' => 'Event Registration',
+    'page callback' => 'itg_event_reg_form',
+    'access callback' => TRUE,
   );
 
   $items['event-registration/users-list/%'] = array(
     'title' => 'Registered Users List',
     'page callback' => 'itg_event_registration_users_list',
+    'access callback' => 'user_access',
+    'access arguments' => array('event registered users'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_event_registration.inc',
+  );
+  $items['event-registration/users-list/download/%'] = array(
+    'title' => 'Registered Users List Download',
+    'page callback' => 'itg_event_registration_users_list_download',
     'access callback' => 'user_access',
     'access arguments' => array('event registered users'),
     'type' => MENU_CALLBACK,
@@ -65,6 +77,11 @@ function itg_event_registration_theme() {
           'template' => 'event-registration-form-tab',
           'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
           'variables' => array('data' => NULL),
+      ),
+      'event_registration_not_published' => array(
+          'template' => 'event-registration-not-published',
+          'path' => drupal_get_path('module', 'itg_event_registration') . '/templates',
+          'variables' => array('node' => NULL),
       ),
       'event_registration_closed' => array(
           'template' => 'event-registration-closed',
@@ -93,13 +110,13 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'event_registration_node_form') {
     
-    $form['field_no_of_members']= array(
+/*    $form['field_no_of_members']= array(
         '#prefix' => '<div class= "event-member-container">',
         '#title' => 'No. Of Memebers',
         '#type' => 'item',
-        '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input value="1" type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
+        '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input readonly value="1" type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
         '#suffix'=> '</div>'
-    );
+    );*/
     
     $current_event_nid = itg_event_registration_get_event_nid();
     $max_delta = $form['field_erf_registration_fee'][LANGUAGE_NONE]['#max_delta'] + 1;
@@ -128,42 +145,54 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
     if (isset($max_delta) && $max_delta >= $_SESSION['total_ava_ticket']) {
       unset($form['field_erf_registration_fee']['und']['add_more']);
     }
- 
-   unset($form['field_erf_registration_fee']['und'][0]['field_erf_ticket_type']['und']['#options']['_none']);
-//    $ticket_type_options = array(1=>'Student', 2=>'Young Professional', 3=>'Senior Citizen',4=>'Business Professional');
-//    $form['field_erf_registration_fee']['und'][0]['field_erf_ticket_type']['und']['#options'] = $ticket_type_options;
-
     
+    // Hide none option from ticket type
+    for($member = 0; $member < $max_delta; $member++) {
+      unset($form['field_erf_registration_fee']['und'][$member]['field_erf_ticket_type']['und']['#options']['_none']);
+    }
+  
     // Hide metatags and priview button
     unset($form['title']);
     unset($form['#metatags']);
     unset($form['actions']['preview']);
+    $form['field_erf_total_fee']['#access'] = FALSE;
     
     // Rename submit button from "Save" to "Submit"
     $form['actions']['submit']['#value'] = 'Submit';
-/*
+    //$form['actions']['submit']['#attributes'] = array("onclick" => "javascript: this.value='Please Wait...'; this.disabled = true;");
+
     if (isset($current_event_nid)) {
       $event_node = node_load($current_event_nid);
       $registration_type = $event_node->field_event_type[LANGUAGE_NONE][0]['value'];
-
+     
       if ($registration_type == 'free') {
-        // Hide fee field & payment drop-down field and display a message, if registration is free.
         unset($form['field_erf_total_fee']);
         $form['field_erf_payment_gateway']['#access'] = FALSE;
+            $form['add_form_scroll_container'] = array(
+            '#prefix' => '<div class= "form-field-name-field-erf-payment-gateway">',
+            '#type' => 'item',
+            '#suffix' => '</div>',
+            '#weight' => 9
+        );
       } else {
-        $count_people = 0;
-        foreach ($form['#node']->field_erf_registration_fee[LANGUAGE_NONE] as $registered_people) {
-          if (!empty($registered_people['field_first_name'])) {
-            $count_people = $count_people + 1;
-          }
-        }
-      }
-      $total_fee = ceil($total_fee);
-    } */
+        $form['total_fees_container'] = array(
+            '#prefix' => '<div class= "event-total-fees-container">',
+            '#title' => 'Total Fees',
+            '#type' => 'item',
+            '#markup' => '<span class="event-total-fees-text"><span class="event-fees-amount">Rs 00</span> for <span class="event-number-of-members">1</span> Members',
+            '#suffix' => '</div>',
+            '#weight' => 10
+        );
 
-    $total_fee = $total_fee ? $total_fee : '0.00';
-    $form['field_erf_total_fee'][LANGUAGE_NONE][0]['value']['#value'] = $total_fee;
-    $form['field_erf_total_fee']['#disabled'] = TRUE;
+        $form['have_a_coupon_code'] = array(
+            '#prefix' => '<div class= "have-a-coupon-code">',
+            '#type' => 'item',
+            '#markup' => '<span class="event-number-of-members">Have a Coupon Code?</span> <a class="have-a-coupon-code-link" href="javascript:">Apply</a>',
+            '#suffix' => '</div>',
+            '#weight' => 11
+        );
+      }
+    }
 
     // Assign event id into source id field
     $form['field_story_source_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $current_event_nid;
@@ -171,25 +200,9 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
     // After build and validate function 
     $form['#after_build'][] = 'itg_event_registration_form_after_build';
-    $form['#validate'][] = 'itg_event_registration_form_validate';
 
     // Call custom summit callback
     $form['actions']['submit']['#submit'][] = 'itg_event_registration_form_custom_submit_callback';
-  }
-}
-
-/**
- * Custom validate for event registration form
- * @param array $form
- * @param array $form_state
- */
-function itg_event_registration_form_validate($form, &$form_state){
-  foreach($form_state['values']['field_email_address'][LANGUAGE_NONE] as $key => $email){
-    if (is_numeric($key)) {
-      if (!valid_email_address($email['value'])) {
-        form_set_error('field_email_address][' . LANGUAGE_NONE . '][' . $key ,  t('Please enter a valid email id.'));
-      }
-    }
   }
 }
 
@@ -220,20 +233,20 @@ function itg_event_registration_form_after_build($form, &$form_state) {
 
    // Dynamic title of each form
    $form['field_erf_registration_fee'][LANGUAGE_NONE]['#title'] = '';
-   $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
-   $form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['#suffix'] = '</div>';
    for ($ereg = 0; $ereg <= $form['field_erf_registration_fee']['und']['#max_delta']; $ereg++) {
      $count = $ereg + 1;
-     $form['field_erf_registration_fee']['und'][$ereg]['#title'] = t('Member ') . $count;
-     //$form['field_erf_registration_fee']['und'][0]['field_erf_date_of_birth']['und'][$ereg]['#title'] = 'Date of Birth';
+     $form['field_erf_registration_fee']['und'][$ereg]['#prefix'] = '<div class="event-registration-form-header" id="event-registration-memeber-'.$count.'">Member '.$count.'</div><div class="event-registration-form-content">';
+     $form['field_erf_registration_fee']['und'][$ereg]['#suffix'] = '</div>';
+     $form['field_erf_registration_fee']['und'][$ereg]['field_erf_date_of_birth']['und'][0]['#prefix'] = '<div class="date-box-wrapper"><label>Date of Birth</label>';
+     $form['field_erf_registration_fee']['und'][$ereg]['field_erf_date_of_birth']['und'][0]['#suffix'] = '</div>';
    }
    
   // If limited tickets are available
-  $event_node = node_load($current_event_nid);
-  $no_of_tickets = $event_node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
-
-  $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
-  $tickets_available = $no_of_tickets - $total_registered_users;
+//  $event_node = node_load($current_event_nid);
+//  $no_of_tickets = $event_node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
+//
+//  $total_registered_users = itg_event_registration_get_total_registration($current_event_nid);
+//  $tickets_available = $no_of_tickets - $total_registered_users;
 
   return $form;
 }
@@ -244,7 +257,16 @@ function itg_event_registration_form_after_build($form, &$form_state) {
  * @param array $form_state
  */
 function itg_event_registration_form_custom_submit_callback($form, &$form_state) {
-
+  global $base_url;
+  $arg = arg();
+  if ($arg[0] == 'event') {
+    $baseurl = $base_url . '/' . $arg[0] . '/' . $arg[1];
+  } elseif (is_numeric(arg(1))) {
+    $baseurl = $base_url . '/' . drupal_get_path_alias('node/' . arg(1));
+  } else {
+    $baseurl = $base_url;
+  }
+  
   // Unset drupal redirection and add custom redirection URL
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
@@ -256,14 +278,7 @@ function itg_event_registration_form_custom_submit_callback($form, &$form_state)
   }
 
   $current_event_nid = itg_event_registration_get_event_nid();
-
-  // Set Redirection after completion of event registration form
-  if (!empty($current_event_nid)) {
-    $form_state['redirect'] = array('event-registration', array('query' => array('event_id' => $current_event_nid)));
-  }
-  else {
-    $form_state['redirect'] = 'event-registration';
-  }
+  $form_state['redirect'] = $baseurl.'/registration';
   $event_name = itg_common_get_node_title($current_event_nid);
   drupal_set_message(t('Congratulations! You have successfully registered yourself for the event <strong>@eventname</strong>.', array('@eventname' => $event_name)));
 }
@@ -309,22 +324,49 @@ function itg_event_registration_node_validate($node) {
 
   if ($node->type == 'event_registration') {
 
+    $member = 1;
     foreach ($node->field_erf_registration_fee[LANGUAGE_NONE] as $regdata) {
-      if (!preg_match("/^[a-zA-Z ]*$/", $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'])) {
-          form_set_error('field_erf_name', t('Name <strong>@name</strong> must be alphabetic.', array('@name' => $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'])));
+      
+      // Validate Ticket type field
+      if (empty($regdata['field_erf_ticket_type'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_ticket_type'][LANGUAGE_NONE][0]['value'] != 'A') {
+        form_set_error('field_erf_ticket_type'.$member, t('Ticket type field is required for Member @member', array('@member' => $member)));
       }
-      if (!preg_match("/^[0-9]{10}$/", $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
-          form_set_error('field_erf_mobile', t('Mobile number <strong>@mobile</strong> must be 10 digit numeric value.', array('@mobile' => $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'])));
+      
+      // Validate Name field
+      if (empty($regdata['field_erf_name'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'] != 'A') {
+        form_set_error('field_erf_name'.$member, t('Name field is required for Member @member', array('@member' => $member)));
+      } else {
+        if (!preg_match("/^[a-zA-Z ]*$/", $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'])) {
+          form_set_error('field_erf_name'.$member, t('Name <strong>@name</strong> must be alphabetic for Member @member', array('@name' => $regdata['field_erf_name'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
+        }
       }
-      if (substr($regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'], 0, -8) == '000' && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
-          form_set_error('field_erf_mobile', t('Mobile number <strong>@mobile</strong> is not a valid mobile number.', array('@mobile' => $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'])));
+      
+      // Validate Mobile field
+      if (empty($regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
+        form_set_error('field_erf_mobile' . $member, t('Mobile field is required for Member @member', array('@member' => $member)));
+      } else {
+        if (!preg_match("/^[0-9]{10}$/", $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
+          form_set_error('field_erf_mobile'.$member, t('Mobile number <strong>@mobile</strong> must be 10 digit numeric value for Member @member', array('@mobile' => $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
+        }
+        if (substr($regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'], 0, -8) == '000' && $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'] != 'A') {
+          form_set_error('field_erf_mobile'.$member, t('Mobile number <strong>@mobile</strong> is not a valid mobile number for Member @member', array('@mobile' => $regdata['field_erf_mobile'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
+        }
       }
-      if (!empty($regdata['field_email_address'][LANGUAGE_NONE][0]['value']) && !valid_email_address($regdata['field_email_address'][LANGUAGE_NONE][0]['value'])) {
-          form_set_error('field_email_address', t('Email <strong>@email</strong> is not a valid email.', array('@email' => $regdata['field_email_address'][LANGUAGE_NONE][0]['value'])));
+      
+      // Validate Email field
+      if (empty($regdata['field_erf_email'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_email'][LANGUAGE_NONE][0]['value'] != 'A') {
+        form_set_error('field_erf_email'.$member, t('Email field is required for Member @member', array('@member' => $member)));
+      } else {
+        if (!valid_email_address($regdata['field_erf_email'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_email'][LANGUAGE_NONE][0]['value'] != 'A') {
+          form_set_error('field_erf_email'.$member, t('Email <strong>@email</strong> is not a valid email for Member @member', array('@email' => $regdata['field_erf_email'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
+        }
       }
-      if (!empty($regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'] == '000000') {
-          form_set_error('field_erf_postal_code', t('Pincode <strong>@pincode</strong> is not a valid pincode.', array('@pincode' => $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'])));
+      
+      // Validate Pincode
+      if (!empty($regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value']) && $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'] == '000000' && $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'] != 'A') {
+          form_set_error('field_erf_postal_code'.$member, t('Pincode <strong>@pincode</strong> is not a valid pincode for Member @member', array('@pincode' => $regdata['field_erf_postal_code'][LANGUAGE_NONE][0]['value'], '@member' => $member)));
       }
+      $member++;
     }
   }
 }
@@ -380,17 +422,8 @@ function itg_event_registration_registered_user_detail($nid) {
     $total_registration_users = itg_event_registration_get_total_registration($nid);
     $total_registration_for_event = $total_registration_users ? $total_registration_users : 0;
   }
-
-  $text = 'List Users(' . $total_registration_for_event . ')';
-  $path = 'event-registration/users-list/' . $nid;
-
-  if ($total_registration_for_event < 1) {
-    return 0;
-  }
-  else {
-    //return l($text, $path, array('attributes' => array('target' => '_blank')));
-    return $text;
-  }
+  $total_registered_users =  $total_registration_for_event ? l($total_registration_for_event, 'event-registration/users-list/'.$nid, array('attributes' => array('class' => 'colorbox-load'))) : '0';
+  return $total_registered_users;
 }
 
 /**
@@ -400,8 +433,6 @@ function itg_event_registration_registered_user_detail($nid) {
  */
 function itg_event_registration_get_total_registration($nid) {
 
-  $registration_main_users = itg_common_check_record_existance($nid, 'field_data_field_story_source_id', 'field_story_source_id_value');
-
   // Count group users registration for an event
   $main_user_nid_arr = itg_common_select_field_value('entity_id', 'field_data_field_story_source_id', 'field_story_source_id_value', $nid);
   $registration_group_users = 0;
@@ -410,8 +441,8 @@ function itg_event_registration_get_total_registration($nid) {
     $registration_group_users = $registration_group_users + itg_common_check_record_existance($main_user_nid, 'field_data_field_erf_registration_fee', 'entity_id');
   }
   // Total count for an event
-  $total_registration_users = $registration_main_users + $registration_group_users;
-  return (int)$total_registration_users;
+  $total_registration_users = $registration_group_users;
+  return (int) $total_registration_users;
 }
 
 /**
@@ -421,9 +452,18 @@ function itg_event_registration_get_total_registration($nid) {
  */
 function itg_event_registration_get_event_nid() {
   global $base_url;
-  $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
-  $host_node_arr = explode('/', $host_detail['source']);
-  return $host_node_arr[1];
+  $arg = arg();
+  if ($arg[0] == 'event') {
+    $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
+    $node = menu_get_object("node", 1, $path);
+    return $node->nid;
+  } elseif (is_numeric($arg[1])) {
+    return $arg[1];
+  } else {
+    $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
+    $host_node_arr = explode('/', $host_detail['source']);
+    return $host_node_arr[1];
+  }
 }
 
 /**
@@ -453,8 +493,8 @@ function itg_event_registration_get_form() {
   if(!empty($host_node->field_story_expert_description[LANGUAGE_NONE])){
   $form['cutomtext'] = array(
       '#type' => 'item',
-      '#markup' => '<div class="event-registration-main-container"><div><b>Terms and Conditions:</b></div><div class="tc-txt"> '.$host_node->field_story_expert_description[LANGUAGE_NONE][0]['value'].'  </span></div></div>',
-      '#weight' => 100,
+      '#markup' => '<div class="event-registration-main-container"><div><b>Terms and Conditions:</b></div><div class="tc-txt"> <ul>'.$host_node->field_story_expert_description[LANGUAGE_NONE][0]['value'].'  </ul></div></div>',
+      '#weight' => 1000,
   );
   }
   return $form;

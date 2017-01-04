@@ -25,3 +25,6 @@ files[] = includes/itg_migrate.photogallery.inc
 files[] = includes/itg_migrate.section.inc
 files[] = includes/itg_migrate.subcategory.inc
 files[] = includes/itg_migrate.subsubcategory.inc
+files[] = includes/itg_migrate.country.inc
+files[] = includes/itg_migrate.state.inc
+files[] = includes/itg_migrate.photosection.inc

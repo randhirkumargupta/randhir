@@ -41,36 +41,14 @@ function itg_widget_categories_wise_node_group_form($form, &$form_state) {
   
   $form['widget_name'] = array(
     '#type' => 'select',
-    '#options' => array("$widget" => "widget"),
+    '#options' => array($widget => "widget"),
     '#weight' => -1,
    '#attributes' => array("style" => array("display:none")),
   );
 
-
-  // Adding extra field for related content.
-//  if ($current_display == 'big_story_format' && ($_GET['type'] != 'story' || !isset($_GET['type']))) {
-//    $form['related_content'] = array(
-//      '#type' => 'textfield',
-//      '#title' => t("Related content."),
-//      '#attributes' => array("placeholder" => t("Enter node id by server prefix")),
-//      '#description' => t("Node ids must be comma seperated values ex server1_123,server2_1024, server3_777."),
-//    );
-//  }
   return $form;
 }
 
-/**
- * {@inheritdoc}
- */
-function itg_widget_categories_wise_node_group_validate($form, &$form_state) {
-//  if (isset($form_state['values']['related_content']) && !empty($form_state['values']['related_content'])) {
-//    $regex = "/^[0-9,]+$/";
-//    $related_content = $form_state['values']['related_content'];
-//    if (!preg_match($regex, $related_content)) {
-//      form_set_error('related_content', "Only numbers and commas are allowed on 'Related content' ");
-//    }
-//  }
-}
 
 /**
  * {@inheritdoc}
@@ -91,6 +69,38 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
     $big_story_data = $form_state;
     save_big_story_widget_data($big_story_data);
   }
+  ######################## WIDGET CHANGES ###################
+  elseif ($widget_name == "top_stories_widget" && $current_display == "page_1") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "trending_videos_widget" && $current_display == "trending_videos") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "most_popular_widget" && $current_display == "most_popular") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "top_takes_video_widget" && $current_display == "top_takes_video") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "watch_right_now_widget" && $current_display == "watch_right_now") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "home_page_feature_widget" && $current_display == "page_1") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "photo_carousel_list_widget" && $current_display == "photo_carousel_list") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "video_carousel_list_widget" && $current_display == "video_carousel_list") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "we_may_suggest_widget" && $current_display == "photo_carousel_list") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  elseif ($widget_name == "anchors_listing_widget" && $current_display == "anchors_listing_page") {
+   itg_widget_save_bulk_operation_widget_data($form_state, $widget_name);
+  }
+  #################################################################
   elseif ($current_display == 'dont_miss_content') {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_dont_miss');
     $dont_miss_content = $form_state;
@@ -144,6 +154,14 @@ function itg_widget_categories_wise_node_group_submit($form, &$form_state) {
   elseif ($current_display == 'user_selection_for_section') {
     module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_user');
     save_default_user_for_every_section($form_state);
+  }
+  elseif ($current_display == 'issue_category_magazin_widget') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_magazine');
+    save_primary_category_acccording_issue_magazine($form_state);
+  }
+  elseif ($current_display == 'supplement_base_magazin_widget') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_section_wise_magazine');
+    save_supplement_acccording_issue_magazine($form_state);
   }
   else {
     // Logic to skip nodes which are already in itg_widget_order table

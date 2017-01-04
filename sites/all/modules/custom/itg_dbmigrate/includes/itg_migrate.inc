@@ -70,6 +70,15 @@ function itg_dbmigrate_migrate_api() {
       'itg_user' => array(
         'title' => t('Itg User Migration'),
       ),
+      'itg_country' => array(
+        'title' => t('Itg Country Migration'),
+      ),
+      'itg_state' => array(
+        'title' => t('Itg State Migration'),
+      ),
+      'itg_Photo_category' => array(
+        'title' => t('Itg Photo Category Migration'),
+      ),
       /*'itg_magazine' => array(
         'title' => t('Itg magazine Imports'),
       ),
@@ -150,6 +159,18 @@ function itg_dbmigrate_migrate_api() {
       'ItgUser' => array(
         'class_name' => 'ItgUserMigration',
         'group_name' => 'itg_user',
+      ),
+      'ItgCountry' => array(
+        'class_name' => 'ItgCountryMigration',
+        'group_name' => 'itg_country',
+      ),
+      'ItgState' => array(
+        'class_name' => 'ItgStateMigration',
+        'group_name' => 'itg_state',
+      ),
+      'ItgPhoto' => array(
+        'class_name' => 'ItgPhotoMigration',
+        'group_name' => 'itg_Photo_category',
       ),
       /*'ItgMagazine' => array(
         'class_name' => 'ItgMagazineMigration',

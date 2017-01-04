@@ -94,6 +94,11 @@ function itg_image_croping_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('access content'),
     );
+    $items['itg_videogallery_ftp_file_insert_cron'] = array(
+        'page callback' => 'itg_videogallery_ftp_file_insert_cron',
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('access content'),
+    );
 
     return $items;
 }
@@ -147,8 +152,8 @@ function itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $imag
  * This function use for load the croper according to size!
  */
 function itg_image_croping_ajax_make_ajax() {
-    $image_height = 500;  //set the inital height of croper
-    $image_width = 750;    //set the inital width of croper 
+    $image_height = 363;  //set the inital height of croper
+    $image_width = 647;    //set the inital width of croper 
 
     $image_id = $_POST['imageId'];
     $field_name = $_POST['field_id'];
@@ -265,25 +270,24 @@ function itg_image_croping_get_image_tags() {
 /**
  * This function use for add http in url
  */
-
 function addhttp($url) {
     if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
         $url = "http://" . $url;
     }
     return $url;
 }
+
 /**
  * This function use for get image tag by fid
  * $resuly array
  */
- function itg_image_croping_get_image_tags_by_fid($fid) {
-     $query = db_select('image_tags', 'tags')
+function itg_image_croping_get_image_tags_by_fid($fid) {
+    $query = db_select('image_tags', 'tags')
             ->fields('tags')
             ->condition('image_id', $fid, '=');
     $result = $query->execute()->fetchAll();
     return $result;
- }
-
+}
 
 /**
  * This function use for get the all tags on image
@@ -465,11 +469,11 @@ function itg_image_saveimage_info() {
 
     if (!empty($output_info['fids'])) {
         for ($i = 0; $i < count($output_info['fids']); $i++) {
-            $fid=  explode('#', $output_info['fids'][$i]);
-             $syndicatin_name='syndicate_'.$fid[0];
-            if ($output_info['courtesy'][$i] != "" || $output_info[$syndicatin_name]!= "")
+            $fid = explode('#', $output_info['fids'][$i]);
+            $syndicatin_name = 'syndicate_' . $fid[0];
+            if ($output_info['courtesy'][$i] != "" || $output_info[$syndicatin_name] != "")
                 $inserted_data = db_insert('image_info')->fields(array(
-                            'fid' =>$fid[0] ,
+                            'fid' => $fid[0],
                             'image_courtesy' => $output_info['courtesy'][$i],
                             'image_syndicate' => $output_info[$syndicatin_name],
                         ))->execute();
@@ -559,10 +563,12 @@ function mageimagedimesion() {
     // Dimension for videogallery
     $image_dim['videogallery']['field_story_extra_large_image']['width'] = 647;
     $image_dim['videogallery']['field_story_extra_large_image']['height'] = 363;
-    $image_dim['videogallery']['field_story_large_image']['width'] = 613;
-    $image_dim['videogallery']['field_story_large_image']['height'] = 460;
-    $image_dim['videogallery']['field_story_medium_image']['width'] = 483;
-    $image_dim['videogallery']['field_story_medium_image']['height'] = 271;
+    $image_dim['videogallery']['field_story_player_image']['width'] = 613;
+    $image_dim['videogallery']['field_story_player_image']['height'] = 460;
+    $image_dim['videogallery']['field_story_large_image']['width'] = 483;
+    $image_dim['videogallery']['field_story_large_image']['height'] = 271;
+    $image_dim['videogallery']['field_story_medium_image']['width'] = 370;
+    $image_dim['videogallery']['field_story_medium_image']['height'] = 208;
     $image_dim['videogallery']['field_story_small_image']['width'] = 170;
     $image_dim['videogallery']['field_story_small_image']['height'] = 127;
     $image_dim['videogallery']['field_story_extra_small_image']['width'] = 88;
@@ -575,6 +581,8 @@ function mageimagedimesion() {
     $image_dim['photogallery']['field_story_large_image']['height'] = 271;
     $image_dim['photogallery']['field_story_small_image']['width'] = 170;
     $image_dim['photogallery']['field_story_small_image']['height'] = 127;
+    $image_dim['photogallery']['field_story_medium_image']['width'] = 370;
+    $image_dim['photogallery']['field_story_medium_image']['height'] = 208;
 
     // Dimension for story
     $image_dim['story']['field_story_extra_large_image']['width'] = 647;
@@ -641,20 +649,29 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         </div>',
     );
     if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'recipe' || $content_name == 'mega_review_critic' || $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
-
+        $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
+        $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
+        $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
+        $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
         if ($content_name == 'photogallery') {
-            $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
-            $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
 
             $checkoption = array(
                 'field_story_large_image' => t("Large Image  $largsize"),
+                'field_story_medium_image' => t("Medium Image $mediumsize"),
                 'field_story_small_image' => t("Small Image  $smallsize"));
         }
+        else if ($content_name == 'videogallery') {
+            $extralargsize2 = '(' . $imgdim[$content_name]['field_story_player_image']['width'] . 'X' . $imgdim[$content_name]['field_story_player_image']['height'] . ')';
+            $checkoption = array(
+                'field_story_player_image' => t("Extra large Image 2  $extralargsize2"),
+                'field_story_large_image' => t("Large Image  $largsize"),
+                'field_story_medium_image' => t("Medium Image $mediumsize"),
+                'field_story_small_image' => t("Small Image  $smallsize"),
+                'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
+            );
+        }
         else {
-            $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
-            $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
-            $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
-            $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
+
             $checkoption = array(
                 'field_story_large_image' => t("Large Image  $largsize"),
                 'field_story_medium_image' => t("Medium Image $mediumsize"),

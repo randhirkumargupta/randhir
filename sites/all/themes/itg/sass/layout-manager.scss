@@ -1956,14 +1956,17 @@ img{
             .droppable{
              height: 218px;            
             }
-            .tech-block_5{
-        .widget-title{
-            top: 0;
-            left: 15px;   
-        }
+            .tech-block_5, .section_wise_order-standpoint{
+            .widget-title{
+                top: 0;
+                left: 15px;   
+            }
             .flexslider{
+                border: none;
+                .slides{
                 li{
                     @include pos(relative);
+                    border:none;
                     .detail{
                         position: absolute;
                         bottom: 0;
@@ -1971,11 +1974,24 @@ img{
                             display: none;   
                         }
                         .flex-caption{
-                            background: rgba(255, 255, 255, 0.74);
+                            background: rgba(255,255,255,0.74);
                             font-size: 20px;
                             font-weight: 700;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 100%;
+                            min-height: inherit;
+                            color: #000;
+                            padding: 10px;
+                            width: auto;
+                            height: inherit;
                             a{
                                 color: #000;
+                                line-height:24px;                                
+                                font-size: 20px;
+                                font-weight: 700;                                                                
+                                font-family: $itg-roboto;
                                 &:hover{
                                     color: #193984;
                                 }
@@ -1983,11 +1999,9 @@ img{
                         }
                     }                
                 }
+                }
                 .flex-direction-nav{
-                    display: block;
-                    position:absolute;
-                    top:50%;
-                    width: 100%;
+                    display: block;                    
                     a{
                         width: 20px;
                         height: 20px;
@@ -1998,9 +2012,15 @@ img{
                             font-size: 20px;
                             background: #000;
                         }
+                        &.flex-prev{
+                            left: 0;
+                        }
+                        &.flex-next{
+                            right: 0;
+                        }
                     }
                 }   
-            }        
+            }     
     }
         }
         .auto-block-2{
@@ -2035,6 +2055,28 @@ img{
     .tech-block_8{        
         .widget-title, .widget-settings{
             margin-bottom: 5px;
+        }
+        .osscar-video ul .dont-miss-listing{
+            padding:0;
+            position: relative;
+            &:after {
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 1PX;
+                background: #DDD;
+                left: 0;
+                bottom: 0px;
+                z-index: 1;
+            }
+            + .dont-miss-listing {
+                padding-top: 10px;
+            }
+            &:last-child{
+                &:after {
+                    display: none;
+                }
+            }
         }
     }
     .osscar-video{
@@ -2078,6 +2120,19 @@ img{
             top:10px;
             left:10px;
         }
+    }
+    .tech-movie_latest{
+        .widget-settings{
+            left: 0;
+            top: 0;
+        }
+        .osscar-video ul .dont-miss-listing{
+            padding-bottom: 15px;
+            + .dont-miss-listing{
+                padding: 15px 0;
+                border-top: 1px solid #ddd;
+            }
+        }   
     }
 }
 /*CSS End for movie page*/
@@ -2793,3 +2848,23 @@ img{
         }
     }
     /*css End Ask an expret for all page*/
+    /*css start common highlight */
+.common-highlights{
+            .h-list{
+                border-bottom: 1px solid #ccc;
+                padding: 10px 0;
+            }
+            button{
+                background: transparent;
+                border: none;
+                margin: 10px 0 5px 0;
+                margin-right: 20px;
+                cursor: pointer;
+                i{
+                    font-size: 24px;
+                    font-weight: normal;
+                    color: #464646;
+                }
+            }
+}            
+/*css End common highlight */   

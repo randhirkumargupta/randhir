@@ -272,6 +272,10 @@
     padding: 10px 10px 5px;
   }
 
+  .story-section .buzzfeed-byline .social-share-story li a {
+    padding: 0 10px;
+  }
+
   /*story page css end*/
 }
 @media only screen and (max-width: 991px) {
@@ -314,6 +318,12 @@
 
   /* end Event page mobile nav*/
   /*story page css*/
+  .story-section .story-right .stryimg .tagview {
+    display: none;
+  }
+  .story-section .byline .profile-detail {
+    margin: 0 0 0 10px;
+  }
   .story-section .byline .profile-detail ul li.title {
     border-right: 1px solid #ddd;
   }
@@ -325,7 +335,28 @@
     border-left: 1px solid #ddd;
   }
 
-  /*story page css add*/
+  /*story page css end*/
+  /*sports page css start*/
+  .sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news {
+    padding: 5px;
+    margin: 0;
+  }
+
+  .page-sports-video .view-content .photo-list {
+    white-space: nowrap;
+    overflow: auto;
+  }
+  .page-sports-video .view-content .photo-list li {
+    float: none;
+    display: inline-block;
+    width: 170px;
+    vertical-align: top;
+  }
+  .page-sports-video .view-content .photo-list li a {
+    white-space: pre-wrap;
+  }
+
+  /*story page css end*/
 }
 @media only screen and (max-width: 768px) {
   header {
@@ -466,7 +497,6 @@
   #block-itg-layout-manager-header-block .head-live-tv {
     text-align: right;
     padding: 0 10px;
-    margin-top: -10px;
     position: relative;
   }
   #block-itg-layout-manager-header-block .head-live-tv ul {
@@ -476,9 +506,26 @@
     display: inline-block;
     vertical-align: bottom;
     padding-left: 15px;
+    line-height: 25px;
   }
   #block-itg-layout-manager-header-block .head-live-tv ul li a i {
     font-size: 18px;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv ul li:first-child {
+    position: relative;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv ul li:first-child .menu {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    background: #a00606;
+    padding: 5px;
+    box-shadow: 0 0 3px #000;
+    display: none;
+    z-index: 1;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv ul li:first-child .menu li {
+    padding: 5px 0;
   }
   #block-itg-layout-manager-header-block .head-live-tv .globle-search {
     position: absolute;
@@ -665,6 +712,9 @@
 
   /*css end side bar section for video and photo*/
   /*CSS Starts Photo landing page*/
+  .view-video-list-of-category .view-content .photo-list, .view-photo-list-of-category .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .page-sports-video .view-content .photo-list, .page-sports-photo .view-content .photo-list, .view-programme-content-live-tv .view-content .photo-list {
+    margin: 0 -10px;
+  }
   .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 33.33333%;
     padding: 15px 10px;
@@ -712,8 +762,76 @@
   }
 
   /*End css program live page*/
-  #block-itg-menu-manager-third-level-menu .col-md-8 {
+  #block-itg-menu-manager-third-level-menu .col-md-4 {
+    height: 60px;
+  }
+  #block-itg-menu-manager-third-level-menu .col-md-4 img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 0 15px;
+    left: 0;
+  }
+  #block-itg-menu-manager-third-level-menu .menu-wrapper {
+    background: #595959;
+    height: 60px;
+  }
+  #block-itg-menu-manager-third-level-menu .select-menu {
+    color: #fff;
+    font-family: roboto;
+    width: 95px;
+    background: #3c3a3b;
+    padding-left: 5px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    position: relative;
+    margin-top: 15px;
+  }
+  #block-itg-menu-manager-third-level-menu .select-menu:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ccc;
+    position: absolute;
+    top: 13px;
+    right: 9px;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu {
+    padding-top: 0;
+    background: #4d4b4c;
+    position: absolute;
+    z-index: 9999;
+    float: none;
+    width: 95px;
+    top: 45px;
+    left: 15px;
     display: none;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu li {
+    display: block;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu li a {
+    font-weight: 500;
+    font-size: 11px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 8px 0 8px;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu li a:hover, #block-itg-menu-manager-third-level-menu ul.third-level-menu li a.active {
+    background: #3d3b3c;
+    color: #fff;
+  }
+  #block-itg-menu-manager-third-level-menu .col-md-8 {
+    display: block;
+    position: relative;
   }
 
   /*Start css online archive story page*/
@@ -838,6 +956,102 @@
                 margin-top: -28px;
             }*/
   }
+
+  [id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3 span, .ask-question-sidebar h3 span {
+    padding: 45px 20px 10px 0px;
+  }
+
+  .story-section .social-share-story {
+    display: none;
+  }
+  .story-section.buzz-related .story-left-section .related-story-page {
+    margin-top: 0px;
+    display: none;
+  }
+  .story-section .listicle-page .listicle-detail > span {
+    width: 24px;
+    height: 24px;
+    margin-top: 14px;
+    line-height: 24px;
+    font-size: 16px;
+  }
+  .story-section .listicle-page .listicle-detail > span.bullet_points {
+    margin-top: 20px;
+  }
+  .story-section .listicle-page .listicle-detail .listicle-description {
+    width: 91%;
+    padding: 10px;
+  }
+
+  /*home page breaking news*/
+  .breakingnew-home {
+    text-align: center;
+    background: #ffc106;
+    margin: -15px -15px 15px -15px;
+    padding: 7px;
+  }
+  .breakingnew-home .title {
+    float: none;
+    width: 80px;
+    font-size: 14px;
+    line-height: 22px;
+    height: 20px;
+    padding: 0 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  .breakingnew-home .new-detail {
+    height: inherit;
+    line-height: 20px;
+    font-size: 16px;
+    padding: 0;
+    width: 100%;
+    float: none;
+  }
+  .breakingnew-home .new-detail .marquee {
+    width: 100%;
+  }
+  .breakingnew-home .new-detail .social-share {
+    display: none;
+  }
+  .breakingnew-home .new-detail .live-tv-link .live-tv-icon {
+    display: none;
+  }
+  .breakingnew-home .new-detail .live-tv-link .breaking-new-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  /*story page comment section*/
+  #content #other-comment #comments .comment-form .form-item {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  #content #other-comment #comments .comment-form div.description, #content #other-comment #comments .comment-form .form-type-textarea > label + div, #content #other-comment #comments .comment-form .form-actions {
+    padding-left: 0;
+  }
+  #content #other-comment #comments .comment ul.links {
+    position: inherit;
+  }
+
+  /*story page comment section end*/
+  /*Home page css start*/
+  .home_page_poll_widget_block .poll-data, .sport-home-layout-page .poll-data {
+    padding: 0;
+  }
+  .home_page_poll_widget_block .poll-data .poll-banner-image img, .sport-home-layout-page .poll-data .poll-banner-image img {
+    max-width: 100%;
+  }
+
+  /*Home page css end*/
+  /*side bar for all pages start*/
+  .sidebars .block-itg-widget span.no-result-found {
+    margin: 30px 0;
+    width: 290px;
+  }
+
+  /*side bar for all pages end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1327,6 +1541,12 @@
   .story-section .social-list li:nth-child(7) {
     border-left: 1px solid #dddddd;
   }
+  .story-section .buzzfeed-byline .byline .profile-detail {
+    width: 50%;
+  }
+  .story-section .buzzfeed-byline .social-share-story {
+    float: right;
+  }
 
   .buzz-feedback .story-right {
     width: 100%;
@@ -1342,9 +1562,42 @@
     font-size: 1.5rem;
     line-height: 34px;
   }
+  .buzz-feedback .related-story.related-story-bottom {
+    display: block;
+  }
+
+  .related-story.related-story-bottom {
+    display: none;
+  }
+  .related-story.related-story-bottom li:nth-child(2n+1) {
+    clear: none;
+  }
+  .related-story.related-story-bottom li:nth-child(4n+1) {
+    clear: left;
+  }
+
+  .listicle-feedback .related-story.related-story-bottom {
+    display: block;
+  }
 
   /*End Story page css*/
   /*Start css ITG globle search result page*/
+  .view-front-end-global-search .searh-all-filters {
+    white-space: inherit;
+    overflow-x: inherit;
+  }
+  .view-front-end-global-search .searh-all-filters .views-exposed-widget {
+    float: left;
+  }
+  .view-front-end-global-search .view-filters {
+    margin-bottom: 40px;
+  }
+  .view-front-end-global-search .view-content li.itg-search-list {
+    padding: 25px 0;
+  }
+  .view-front-end-global-search .view-content li.itg-search-list + li {
+    border-top: none;
+  }
   .view-front-end-global-search .view-content .search-pic {
     width: 170px;
     height: 127px;
@@ -1582,7 +1835,7 @@
     padding-left: 10px;
   }
   #block-views-photo-landing-slider-block .social-icon ul li a {
-    padding: 0 15px;
+    padding: 0 12px;
     line-height: 55px;
   }
   #block-views-photo-landing-slider-block .social-icon ul li span.flag-throbber {
@@ -1650,6 +1903,11 @@
     font-size: 26px;
   }
 
+  #block-itg-widget-so-sorry-front-politoons .politoons-sosorry h2 {
+    font-size: 26px;
+    font-size: 1.625rem;
+    font-weight: 300;
+  }
   #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(3n+1) {
     clear: left;
   }
@@ -1700,6 +1958,9 @@
     border-bottom: none;
     margin-bottom: 0;
   }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul {
+    display: inherit;
+  }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li {
     float: none;
   }
@@ -1709,8 +1970,30 @@
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
     display: inline-block;
   }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
+    margin-right: 5px;
+  }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
     border-top: 1px solid #000;
+  }
+  #block-views-video-landing-header-block .video-header-left .slick-slider .slick-next, #block-views-video-landing-header-block .video-header-left .slick-slider .slick-prev {
+    width: 50px;
+    height: 100px;
+    margin-top: -50px;
+  }
+  #block-views-video-landing-header-block .video-header-left .slick-slider .slick-next:before, #block-views-video-landing-header-block .video-header-left .slick-slider .slick-prev:before {
+    top: 38px;
+    font-size: 30px;
+  }
+  #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-slider {
+    padding: 10px 45px;
+  }
+  #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-prev, #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-next {
+    background: transparent;
+    color: #fff;
+  }
+  #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-prev:hover, #block-views-video-landing-header-block .video-header-left .video-slider-images .slick-next:hover {
+    background: transparent;
   }
   #block-views-video-landing-header-block .video-header-right {
     height: 474px;
@@ -1723,20 +2006,14 @@
 
   /*CSS end program landing page*/
   /*css start for special auto page*/
+  .auto-layout-page .auto-block-1 {
+    border: 1px solid #ddd;
+  }
   .auto-layout-page .itg-top-section .top-colum-1 .droppable, .auto-layout-page .itg-top-section .top-colum-2 .droppable {
     height: 608px;
   }
   .auto-layout-page .itg-top-section .top-colum-3 .droppable {
     height: 247px;
-  }
-  .auto-layout-page .itg-h450-section .col-md-4 .droppable {
-    padding: 10px;
-    background: #f3f3f3;
-  }
-  .auto-layout-page .itg-h450-section .col-md-4 .droppable .widget-wrapper {
-    overflow: auto;
-    height: auto;
-    max-height: 100%;
   }
 
   /*css end for special auto page*/

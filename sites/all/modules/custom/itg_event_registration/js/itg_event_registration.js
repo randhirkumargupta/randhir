@@ -31,20 +31,94 @@
  
       $("#edit-field-erf-registration-fee-und-0-remove-button").hide();
       
-      //Validation of event registration fields
-      $('#edit-field-last-name-und-0-value, #edit-title').keyup(function() {
-        this.value = this.value.replace(/[^a-zA-Z\s.]/g, '');
+      for (var i = 0; i < 10; i++) {
+        //Only Aplphabetic numbers are allowed for state and city
+        $('#edit-field-erf-registration-fee-und-'+i+'-field-erf-name-und-0-value, #edit-field-erf-registration-fee-und-'+i+'-field-erf-state-und-0-value, #edit-field-erf-registration-fee-und-'+i+'-field-erf-city-und-0-value').keyup(function() {
+          this.value = this.value.replace(/[^a-zA-Z\s.]/g, '');
+        });
+        
+        //Only Numeric values are allowed for mobile and pincode
+        $('#edit-field-erf-registration-fee-und-'+i+'-field-erf-mobile-und-0-value, #edit-field-erf-registration-fee-und-'+i+'-field-erf-postal-code-und-0-value').keyup(function() {
+          this.value = this.value.replace(/[^0-9]/g, '');
+        });
+      }
+      
+      $('.form-field-name-field-erf-registration-fee').on('click', 'legend', function(){            
+        $(this).next('.fieldset-wrapper').stop().slideToggle();            
       });
       
-      $('#edit-field-erf-mobile-und-0-value, #edit-field-erf-postal-code-und-0-value').keyup(function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
-      });
     }
   };
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function(){
-    jQuery("span.event-form-add").click(function() {        
-        jQuery("#edit-field-erf-registration-fee-und-add-more").trigger("click");
-    });    
+        var offset = jQuery('.form-field-name-field-erf-payment-gateway').offset();   
+          //event regestration
+        jQuery('.event-form-add').click(function() {
+            jQuery('html, body').animate({
+                            scrollTop:offset.top - 200
+                            }, 'slow');
+            var $eventNum = jQuery(".event-form-number");
+            var a = $eventNum.val();
+            a++;        
+            $eventNum.val(a);
+            jQuery(".field-add-more-submit").trigger("mousedown");                      
+        });        
+        
+        jQuery('.event-form-remove').click(function() {
+            var $eventNum = jQuery(".event-form-number");
+            var b = $eventNum.val();
+            console.log(b);
+            if (b > 1) {
+              jQuery("table.field-multiple-table tr td:last").prev().find(".cancel.form-submit").trigger("mousedown");
+              jQuery('html, body').animate({
+               scrollTop:offset.top - 200
+               }, 'slow');   
+               jQuery("table.field-multiple-table tr").eq(b).remove();  
+              b--;
+              $eventNum.val(b);              
+            }             
+            priceCalc();
+            var totalMember = jQuery('.event-total-fees-text .event-number-of-members');
+            var a = $eventNum.val();                        
+            totalMember.html(a);                         
+        });                              
+        
+        var priceCalc = function(){
+            var memberPrice = 0;
+            jQuery('.form-radio').each(function(){   
+               if(jQuery(this).is(':checked'))
+               {
+                   memberPrice =  parseInt(memberPrice) +  parseInt(jQuery(this).val());                     
+               }                                        
+            });                 
+            var $total = jQuery('#edit-total-fees-container .event-fees-amount');           
+            $total.html("Rs " + memberPrice);            
+        }
+        
+        jQuery(document).on('change', 'input[type="radio"]', function() {  
+            var $eventNum = jQuery(".event-form-number");
+            var totalMember = jQuery('.event-total-fees-text .event-number-of-members');
+            var a = $eventNum.val();                        
+            totalMember.html(a); 
+            priceCalc();
+        });
+        
+        
+        jQuery(document).on('click','.event-registration-form-header', function(){        
+            jQuery('.event-registration-form-header').removeClass('.event-registration-header-open');
+            var nextContent = jQuery(this).next('.event-registration-form-content');            
+            if(nextContent.is(":visible")){
+                nextContent.stop().slideUp();
+                jQuery(this).addClass('event-registration-header-close'); 
+                jQuery(this).removeClass('event-registration-header-open');
+            }else{
+                nextContent.stop().slideDown();
+                jQuery(this).addClass('event-registration-header-open');                
+                jQuery(this).removeClass('event-registration-header-close');
+            }
+            
+        });
+        
+        
 });

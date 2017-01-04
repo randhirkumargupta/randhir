@@ -11,10 +11,12 @@
  * @param array $form_state
  */
 function itg_story_xml_validate($form, &$form_state) {
-  $views_bulk_operations = $form_state['values']['views_bulk_operations'];
-  if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
-    if (!max($views_bulk_operations) > 0) {
-      form_set_error('views_bulk_operations', t('Please select atleast one checkbox to generate story xml.'));
+  if ($form_state['input']['op'] == 'Generate XML') {
+    $views_bulk_operations = $form_state['values']['views_bulk_operations'];
+    if (is_array($views_bulk_operations) && count($views_bulk_operations) > 0) {
+      if (!max($views_bulk_operations) > 0) {
+        form_set_error('views_bulk_operations', t('Please select atleast one checkbox to generate story xml.'));
+      }
     }
   }
 }
@@ -39,8 +41,8 @@ function itg_story_xml_submit($form, &$form_state) {
     }
     $xml = "<root>";
     foreach ($views_bulk_operations as $nid) {
-      if (!empty($nid)) {
-        $xml .= get_custom_feeds_files($nid, $feed_pattern);
+      if (!empty($nid) && $nid>0) {
+        $xml .= get_custom_feeds_files($nid, $feed_pattern ,'xml');
       }
     }
     $xml .= "</root>";

@@ -11,23 +11,18 @@ function save_big_story_widget_data($big_story_data) {
   $selected_node = $big_story_data['selection'][0];
   $related_nodes_json = '[]';
   // Delete entry first.
-  db_delete('itg_widget_order')
+  // Remove except livetv.
+  try {
+    db_delete('itg_widget_order')
       ->condition('widget', $widget)
+      ->condition('extra','[]')
       ->execute();
-  // watchdog("widget", "Delete action has been performed");
-  // Get related nodes then convert into json.
-//  if ($_GET['type'] == 'story') {
-//    $select_node_load = node_load($selected_node);
-//    $related_content_string = $select_node_load->field_common_related_content['und'][0]['value'];
-//    $related_nodes_json = get_related_content_with_server_prefix($related_content_string);
-//  }
-//  // Get related nodes then convert into json.
-//  if ($_GET['type'] == 'breaking_news' || isset($big_story_data['values']['related_content'])) {
-//    $related_content_string = $big_story_data['values']['related_content'];
-//    $related_nodes_json = get_related_content_with_server_prefix($related_content_string);
-//  }
-  // Insert into table.
-  $query = db_insert('itg_widget_order')
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
+
+  try{
+    $query = db_insert('itg_widget_order')
       ->fields(array(
         'nid' => $selected_node,
         'widget' => $widget,
@@ -37,6 +32,9 @@ function save_big_story_widget_data($big_story_data) {
         'extra' => $related_nodes_json,
       ))
       ->execute();
+  } catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
 }
 
 /**
@@ -61,20 +59,23 @@ function get_related_content_with_server_prefix($related_content_string) {
  * @return array
  */
 function itg_widget_big_story_block_data($info) {
+  $big_story_block_data = array();
   $widget_name = isset($info['widget']) ? $info['widget'] : "";
   if (!empty($widget_name)) {
-    $big_story_live_tv_extra = itg_big_story_get_extra_value();
-    if ($big_story_live_tv_extra == 'big_story_live_tv_active') {
-      $std = new stdClass();
-      $std->is_live_tv_activeted =  TRUE;
-      $entity_data = array("node_data" => $std);
-    }
-    else {
-      $result = get_view_nodes_form_custom_table_for_widgets($widget_name, 1, 0);
-      foreach ($result as $entity_data_node) {
-        $entity_data = array("node_data" => node_load($entity_data_node['nid']));
+    $query = db_select('itg_widget_order','iwo')
+        ->fields('iwo',array('nid','extra'))
+        ->orderBy('iwo.nid','ASC')
+        ->condition('widget',$widget_name);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    
+    foreach($result as $big_story_data) {
+      if($big_story_data['extra'] == 'big_story_live_tv_active' && $big_story_data['nid'] == 0) {
+        $big_story_block_data[] = array("is_live_tv" => TRUE);
+      }
+      else if ($big_story_data['nid']) {
+        $big_story_block_data[] = array("node_load_data" => node_load($big_story_data['nid']));
       }
     }
-    return $entity_data;
+    return $big_story_block_data;
   }
 }

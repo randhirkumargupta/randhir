@@ -71,7 +71,8 @@ if ($theme != 'itgadmin') {
         endif;
     ?>
     
-    <main id="main" class="container">
+    <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -92,8 +93,15 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?> tech-layout-page pos-rel">
-  <?php print render($page['vertical_menu']); ?>
+<div class="itg-layout-container <?php echo $itg_class; ?> tech-layout-page">
+    <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
     <?php // $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
  // print render($block['content']); ?>
     <?php if(isset($widget_data['big_story'])) : ?>
@@ -134,7 +142,12 @@ if ($theme != 'itgadmin') {
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
                     <div class="ad-widget">
-                      <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']);?></div>
+                      <div class="sidebar-ad">
+                         <?php
+                          if (!empty($itg_ad['200*200_right_bar_ad1'])) {
+                            print $itg_ad['200*200_right_bar_ad1'];
+                          }
+                        ?></div>
                     </div>
 <!--                    <div class="droppable <?php //print $gray_bg_layout; ?>">
                       <div class="widget-wrapper <?php //print $widget_data['itg-block-4']['widget_name']; ?>">
@@ -376,7 +389,12 @@ if ($theme != 'itgadmin') {
          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="ad-widget">
-                      <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad2']);?></div>
+                      <div class="sidebar-ad">
+                         <?php
+                        if (!empty($itg_ad['200*200_right_bar_ad2'])) {
+                          print $itg_ad['200*200_right_bar_ad2'];
+                        }
+                        ?></div>
                     </div>
             </div>  
         </div>

@@ -1,6 +1,35 @@
 /**
  * Implementation of Drupal behavior.
  */
+jQuery(document).ready(function() {
+  jQuery('.node-story-form #title-metatags, .node-story-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-story-form .vertical-tabs h2, .node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
+  jQuery('.node-story-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+  
+  jQuery('.node-photogallery-form #title-metatags, .node-photogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-photogallery-form .vertical-tabs h2, .node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
+  jQuery('.node-photogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+  
+  jQuery('.node-videogallery-form #title-metatags, .node-videogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-videogallery-form .vertical-tabs h2, .node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
+  jQuery('.node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
+  jQuery('.node-videogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
+  
+  var category_mgr_meta_title = jQuery('.node-category-form .path-form').prev();
+  category_mgr_meta_title.css('margin-top', '20px').nextAll().hide();
+  category_mgr_meta_title.click(function(){
+  jQuery(this).toggleClass('active');
+    if(jQuery(this).hasClass('active')){
+      jQuery(this).nextAll().show();
+    }
+    else{
+      jQuery(this).nextAll().hide();
+    }
+  });
+});
+
 (function($) {
     Drupal.behaviors.rubik = {};
     Drupal.behaviors.rubik.attach = function(context, settings) {
@@ -240,9 +269,6 @@
         $('#block-menu-menu-admin-left-menu').mouseover(function() {
             $('select').blur();
         });
-
-        $('.field-name-field-survey-answer-option-2 > div > .form-item > div.clearfix .field-add-more-submit').val('+');
-
 
         $('#edit-field-gallery-image .field-name-field-images').find('.image-widget-data .file-size').each(function() {
             var txt = $(this).text();
@@ -489,7 +515,7 @@
             $('body').find('#' + ID).show();
         });
         $('body').on('click', '.itg-close-popup', function() {
-            $(this).parent().parent().hide();
+            $(this).closest('.itg-popup').hide();
         });
 
         $('body').find('.image-preview').parent().addClass('has-image-preview');
@@ -644,7 +670,6 @@
             $(this).prev('.widget-title-wrapper.active').find('input[type="text"]').focus();
         });
 
-
     };
 })(jQuery);
 
@@ -730,7 +755,7 @@ jQuery(document).ready(function() {
     });
 
     // jQuery code to toggle ITG-STORY Form
-    jQuery('.itg-form-section-wrapper').on('click', 'h2', function() {
+    jQuery('.itg-form-section-wrapper, .itg-sidebar-form-section').on('click', 'h2', function() {
       jQuery(this).toggleClass('active');
       jQuery(this).next().slideToggle();
       jQuery(this).parent().toggleClass('active');
@@ -738,7 +763,7 @@ jQuery(document).ready(function() {
 
     // jQuery code to toggle Cotegory manager form
     jQuery('.category-manager-basic-details h2').addClass('active');
-    jQuery('.category-manager-basic-details, .category-manager-selection-details, .cotegory-manager-settings').on('click', 'h2', function() {
+    jQuery('.category-manager-basic-details, .category-manager-selection-details, .cotegory-manager-settings, .category-manager-meta').on('click', 'h2', function() {
         var titleHeight = jQuery(this).outerHeight(true);
         jQuery(this).toggleClass('active');
         if (jQuery(this).hasClass('active')) {
@@ -767,6 +792,7 @@ jQuery(document).ready(function() {
             return false;
         }
     });
+    
 });
 
 
@@ -849,5 +875,28 @@ jQuery(document).ready(function () {
             }
         });
      });
+     
+  jQuery('a.colorbox-load').each(function () {
+    var href = jQuery(this).attr('href');
+    jQuery(this).attr('jshref', href);
+  });
+  jQuery('a.colorbox-load').bind('click', function (e) {
+    e.preventDefault();
+    var href = jQuery(this).attr('jshref');
+    if (!e.metaKey && e.ctrlKey) {
+      e.metaKey = e.ctrlKey;
+    }
+  });
+  jQuery("a.colorbox-load").bind("contextmenu",function(){
+   return false;
+  });
+     
+  // jQuery code for story form templates-tab   
+  jQuery('.templates-tab').on('click', 'span', function(){
+    var get_attr = jQuery(this).attr('data-ripple'), set_class = '.' + get_attr + "-form";
+    console.log(set_class);
+    jQuery(this).addClass('active').siblings().removeClass('active'), jQuery('.tab-form').hide(), jQuery(set_class).show();
+  });   
+     
 });
 

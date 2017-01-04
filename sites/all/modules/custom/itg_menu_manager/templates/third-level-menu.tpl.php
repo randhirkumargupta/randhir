@@ -26,7 +26,7 @@ else if (arg(0) == 'photo-list' || arg(0) == 'video-list') {
 else if ($cat_flag == FALSE) {
   $cat_id = arg(2);
 }
-if ($cat_id == variable_get('ipl_for_widget')) {
+if ($cat_id == variable_get('ipl_for_widget') && isset($cat_id)) {
   drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
                         
@@ -36,81 +36,57 @@ if ($cat_id == variable_get('ipl_for_widget')) {
 }
 
 if ($cat_id == "") {
-  $node = itg_videogallery_get_term(arg(1));
-
-  if (in_array(variable_get('ipl_for_widget'), $node)) {
-    $cat_id = variable_get('ipl_for_widget');
+  if (function_exists('itg_videogallery_get_term')) {
+    $node = itg_videogallery_get_term(arg(1));
+    if (!empty($node)) {
+      if (in_array(variable_get('ipl_for_widget'), $node)) {
+        $cat_id = variable_get('ipl_for_widget');
+      }
+    }
   }
 }
 
 $section_banner_data = taxonomy_term_load($cat_id);
-$uri = $section_banner_data->field_cm_category_banner['und'][0]['uri'];
-$src = file_create_url($uri);
-$field_cm_category_color = ($section_banner_data->field_cm_category_color['und'][0]['rgb']) ? $section_banner_data->field_cm_category_color['und'][0]['rgb'] : "#595959";
+$uri = !empty($section_banner_data->field_cm_category_banner['und'][0]['uri']) ? $section_banner_data->field_cm_category_banner['und'][0]['uri'] : "";
+if (!empty($uri)) {
+  $src = file_create_url($uri);
+}
+$field_cm_category_color = isset($section_banner_data->field_cm_category_color['und'][0]['rgb']) ? $section_banner_data->field_cm_category_color['und'][0]['rgb'] : "#595959";
 ?>
 <?php if (!empty($data[0]['db_data']) || (!empty($src) && isset($uri))) {
   ?>
   <div class="menu-wrapper" style="background: <?php print $field_cm_category_color; ?>">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4 col-xs-4">
           <?php
           if (!empty($src) && isset($uri)) {
             print "<img src='" . $src . "'>";
           }
           ?>
         </div>
-
-
-        <div class="col-md-8">
-          <?php
-          if (!empty($ipl_link) && strlen($ipl_link) > 0) {
-            //print $ipl_link;
-          }
-          ?>
-          <ul class="third-level-menu">
-            <?php foreach ($data as $key => $menu_data) : ?>
-              <?php
-              $link_url = "";
-              $image_class = "";
-              $target = "_self";
-              $link_text = isset($menu_data['term_load']->name) ? $menu_data['term_load']->name : $menu_data['db_data']['title'];
-              $url_type = $menu_data['db_data']['url_type'];
-              $db_target = $menu_data['db_data']['target'];
-              $tid = $menu_data['db_data']['tid'];
-              $icon_fid = (int) $menu_data['db_data']['menu_name'];
-              if ($icon_fid) {
-                $int_value = (int) $icon_fid;
-                if ($int_value) {
-                  $icon_object = file_load((int) $icon_fid);
-                  $link_text = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
-                  if (!empty($icon_object->uri)) {
-                    $image_class = "has-image";
-                  }
+        <div class="col-md-8 col-sm-8 col-xs-8">
+          <?php if (!empty($data)) : ?>
+            <div class="select-menu">Section</div>
+            <ul class="third-level-menu">
+              <?php foreach ($data as $key => $menu_data) : ?>
+                <?php
+                if (function_exists('itg_menu_manager_get_menu')) {
+                  $menu_link_data = itg_menu_manager_get_menu($menu_data, arg());
+                  $image_class = $menu_link_data['image_class'];
+                  $link_text = $menu_link_data['link_text'];
+                  $link_url = $menu_link_data['link_url'];
+                  $target = $menu_link_data['target'];
+                  $active = $menu_link_data['active'];
+                  $url_type = $menu_link_data['url_type'];
+                  ?>
+                  <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class , $url_type)))); ?></li>
+                  <?php
                 }
-              }
-              // if tid is not 0 then its internal url
-              if ($tid && $url_type == 'internal') {
-                $link_url = "taxonomy/term/$tid";
-              }
-              else {
-                $link_url = $menu_data['db_data']['url'];
-              }
-              // manage target
-              if (trim($db_target) == 'new_window') {
-                $target = "_blank";
-              }
-              $active = '';
-              $arg1 = arg(1);
-              $urlalise = drupal_get_path_alias("node/$arg1");
-              $real_path_alise = ($urlalise) ? $urlalise : "node/$arg1";
-              if (end(explode('/', $link_url)) == $real_path_alise) {
-                $active = 'active';
-              }
+              endforeach;
               ?>
-              <li class="<?php print $image_class; ?>"><?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("third-level-child", "third-level-child-$key", $active, $image_class)))); ?></li>
-            <?php endforeach; ?>
-          </ul>
+            </ul>
+          <?php endif; ?>
         </div>
 
       </div>

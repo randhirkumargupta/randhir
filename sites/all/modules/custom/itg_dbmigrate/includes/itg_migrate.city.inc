@@ -12,10 +12,7 @@ class ItgCityMigration extends XMLMigration {
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
       'city' => t('city name'),
-      'metatitle' => t('metatitle'),
-      'metadesc' => t('metadesc'),
-      'metakey' => t('metakey'),      
-      'sef_url' => t('sef_url'),      
+      'state_id' => t('state_id'),     
     );
 
     
@@ -64,14 +61,25 @@ class ItgCityMigration extends XMLMigration {
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
     
-    $this->addFieldMapping('name', 'name')->xpath('city');    
-    $this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
-    $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
-    $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
-    $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
-    
-    //$this->addFieldMapping('metatag_abstract', 'nodeword_abstract');    
-    //$this->addFieldMapping('metatag_robots', 'nodeword_robots');
+    $this->addFieldMapping('name', 'name')->xpath('city'); 
+    $this->addFieldMapping('field_city_states', 'state_id')->xpath('state_id');
+    //$this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
+//    $this->addFieldMapping('pathauto')->defaultValue(0);
+//    $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
+//    $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
+//    $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
+//    $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
 
+
+  }
+  public function prepareRow($row) {
+     $final_term_name = '';
+     
+    if (isset($row->xml->state_id) && !empty($row->xml->state_id) && $row->xml->state_id != 0) {
+        $source_tags = (string) $row->xml->state_id;
+        $orignal_tag = get_itg_destination_id('migrate_map_itgstate', $source_tags);
+        $final_term_name = itg_db_migrate_term_name($orignal_tag);
+    }
+    $row->xml->state_id = $final_term_name;
   }
 }

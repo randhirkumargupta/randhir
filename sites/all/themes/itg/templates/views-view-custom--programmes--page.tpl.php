@@ -5,7 +5,12 @@ global $base_url;
 <div class="programe-container">
   <?php
   foreach ($rows as $row) :
-    $status = itg_category_manager_term_state($row['tid']);
+    if (function_exists('itg_category_manager_term_state')) {
+      $status = itg_category_manager_term_state($row['tid']);
+    }
+    else {
+      $status = 0;
+    }
     if ($status) {
       $view = views_get_view('programme_content');
       $args = array($row['tid']);
@@ -16,14 +21,14 @@ global $base_url;
       <div class="program-row">
         <?php if (!empty($row['field_sponser_logo'])) : ?>
           <div class="pic">
-            <?php print l($row['field_sponser_logo'], 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+            <?php print l($row['field_sponser_logo'], 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>              
           </div>
         <?php else : ?>
           <div class="pic">
             <?php
             $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_video.jpg' />";
             ?>
-            <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+            <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>             
           </div>
         <?php endif; ?>
         <div class="program-right">
@@ -36,8 +41,8 @@ global $base_url;
           <?php if (isset($row['field_program_timing_in_days'])) : ?>
             <div class="programe-timing">
               <?php print $row['field_program_timing_in_days']; ?>
-              
-                <?php print t(" at ") ?>
+
+              <?php print t(" at ") ?>
 
               <span class="time">
                 <?php if (!empty($row['field_user_city'])) : ?>
@@ -53,11 +58,18 @@ global $base_url;
 
 
           <?php if (isset($row['description'])) : ?>
-            <div class="description-timing">
-              <?php print $row['description']; ?>
+            <div class="description-timing mhide">
+             <p> <?php print $row['description']; ?></p>
             </div>
           <?php endif; ?>
         </div>
+          
+           <?php if (isset($row['description'])) : ?>
+            <div class="description-timing desktop-hide">
+                <p><?php print $row['description']; ?></p>
+            </div>
+          <?php endif; ?>
+          
       </div>
       <div class="heading">
         <?php

@@ -46,7 +46,7 @@ function itg_preprocess_node(&$variables) {
     // Add new template variation.
     $variables['theme_hook_suggestions'][] = 'node__' . $title;
     $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
-    if (function_exists(global_comment_last_record)) {
+    if (function_exists('global_comment_last_record')) {
       $variables['global_comment_last_record'] = global_comment_last_record();
     }
   }
@@ -133,12 +133,13 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
   
-  if ($arg[0] == 'signup' 
+  if ((!empty($arg[2]) && $arg[2] == 'ugc') 
+          ||$arg[0] == 'signup' 
           || $arg[0] == 'forgot-password' 
           || $arg[0] == 'sso-user' 
           || $arg[0] == 'sso'
           || $arg[0] == 'password-success' 
-          || $arg[0] == 'complete-page' 
+          || $arg[0] == 'complete-page'          
           || $arg[0] == 'associate-photo-video-content') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
@@ -155,9 +156,16 @@ function itg_preprocess_page(&$variables) {
     // Add another page.tpl file for existing domains
     $parse = parse_url($base_url);
 
+    // Call Event Parent TPL
     if (in_array($parse['host'], $options)) {
       $variables['theme_hook_suggestions'][] = 'page__event_domain';
     }
+  }
+  
+
+  // Call Event Parent TPL
+  if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
+    $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
 }
 

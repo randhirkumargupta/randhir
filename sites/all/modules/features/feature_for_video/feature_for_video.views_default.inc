@@ -900,10 +900,6 @@ allowfullscreen></iframe>';
   $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['required'] = 0;
   $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'my_saved_content';
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['field_upload_video_fid']['id'] = 'field_upload_video_fid';
-  $handler->display->display_options['relationships']['field_upload_video_fid']['table'] = 'field_data_field_upload_video';
-  $handler->display->display_options['relationships']['field_upload_video_fid']['field'] = 'field_upload_video_fid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -914,14 +910,6 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: File: File ID */
-  $handler->display->display_options['fields']['fid']['id'] = 'fid';
-  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
-  $handler->display->display_options['fields']['fid']['field'] = 'fid';
-  $handler->display->display_options['fields']['fid']['relationship'] = 'field_upload_video_fid';
-  $handler->display->display_options['fields']['fid']['label'] = '';
-  $handler->display->display_options['fields']['fid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['fid']['element_label_colon'] = FALSE;
   /* Field: Field: Long Description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
@@ -1129,7 +1117,7 @@ return variable_get(\'ipl_for_widget\');
       'empty_column' => 0,
     ),
   );
-  /* Relationship: Broken/missing handler */
+  /* Relationship: : field_upload_video (field_upload_video:fid) */
   $handler->display->display_options['relationships']['field_upload_video_fid']['id'] = 'field_upload_video_fid';
   $handler->display->display_options['relationships']['field_upload_video_fid']['table'] = 'field_data_field_upload_video';
   $handler->display->display_options['relationships']['field_upload_video_fid']['field'] = 'field_upload_video_fid';
@@ -1876,7 +1864,7 @@ print \'Status not found.\';
   /* Display: Published video */
   $handler = $view->new_display('page', 'Published video', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Manage video';
+  $handler->display->display_options['title'] = 'Publish video';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -1905,13 +1893,6 @@ print \'Status not found.\';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['header']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Draggableviews: Content */
-  $handler->display->display_options['fields']['draggableviews']['id'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['table'] = 'node';
-  $handler->display->display_options['fields']['draggableviews']['field'] = 'draggableviews';
-  $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
   /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
@@ -1957,11 +1938,6 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = 'video ID';
-  /* Field: Content: Source type */
-  $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
-  $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
-  $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
-  $handler->display->display_options['fields']['field_story_source_type']['label'] = 'Source';
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
@@ -3558,7 +3534,7 @@ print \'Status not found.\';
   /* Display: In video queue */
   $handler = $view->new_display('page', 'In video queue', 'page_7');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'In video queue';
+  $handler->display->display_options['title'] = 'In Queue Video';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(

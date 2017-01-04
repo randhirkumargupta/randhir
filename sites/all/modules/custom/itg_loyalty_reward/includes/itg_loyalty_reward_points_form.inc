@@ -158,6 +158,11 @@ function loyality_reward_points_configuration_form() {
     '#required' => TRUE,
     '#maxlength' => 6,
     '#default_value' => variable_get('lrp_loyality_points_expiry'),
+  );    
+  // Add cancel button to the form.
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), 'cms-user-dashboard', array('attributes' => array('class' => array('button')))),
+    '#weight' => 20,
   );
   $form['#submit'][] = 'itg_loyalty_reward_badge_icon_submit';
   

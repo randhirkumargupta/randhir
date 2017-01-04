@@ -30,13 +30,21 @@ function itg_loyalty_reward_permission() {
  */
 function itg_loyalty_reward_menu() {
   // Configuration page menu.
-  $items['loyalty-points-configuration'] = array(
+  $items['admin/loyalty/loyalty-points-configuration'] = array(
     'title' => 'Loyalty Points Configuration Form',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('loyality_reward_points_configuration_form'),
     'access callback' => 'user_access',
     'access arguments' => array('loyalty points configuration form'),
     'file' => 'includes/itg_loyalty_reward_points_form.inc',
+  );
+  $items['admin/loyalty/sold-item-history/%'] = array(
+    'title' => 'Product Sold History',
+    'page callback' => 'itg_loyalty_reward_product_sold_history',
+    'page arguments' => array(3),
+    'access callback' => 'user_access',
+    'access arguments' => array('loyalty points configuration form'),
+    'file' => 'includes/itg_loyalty_reward.checkout.inc',
   );
   // Redeem points page.
   $items['redeem-points'] = array(
@@ -106,6 +114,7 @@ function itg_loyalty_reward_menu() {
     'file' => 'includes/itg_loyalty_reward.product.inc',
   );
   $items['order-confirmation'] = array(
+    'title' => 'ORDER CONFIRMATION',
     'page callback' => 'itg_loyalty_reward_order_confirmation',
     'access arguments' => array('view product page'),
     'type' => MENU_NORMAL_ITEM,
@@ -174,7 +183,6 @@ function itg_loyalty_reward_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_loyalty_reward_form_alter(&$form, &$form_state, $form_id) {
-
   // Alter for "loyalty_points_configuration_form"
   if ($form_id == 'loyality_reward_points_configuration_form') {
     drupal_set_title(t('Loyalty Points Configuration Form'));
@@ -184,14 +192,11 @@ function itg_loyalty_reward_form_alter(&$form, &$form_state, $form_id) {
 
   // Alter for "loyalty_and_rewards_node_form"
   if ($form_id == 'loyalty_and_rewards_node_form') {
-
     drupal_set_title(t('Add New Item:'));
-    unset($form['#metatags']);
-    unset($form['actions']['preview']);
 
     // Add cancel button
     $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), 'lrp-manage-items', array('attributes' => array('class' => 'button'))),
+      '#markup' => l(t('Cancel'), 'admin/loyalty/lrp-manage-items', array('attributes' => array('class' => 'button'))),
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
@@ -221,7 +226,7 @@ function itg_loyalty_reward_submit_handler_for_redirect($form, &$form_state) {
     $op = 'added successfully';
   }
 
-  $form_state['redirect'] = 'lrp-manage-items';
+  $form_state['redirect'] = 'admin/loyalty/lrp-manage-items';
   drupal_set_message(t('Item <strong>@ideatitle</strong> has been @operation.', array('@ideatitle' => $form_state['node']->title, '@operation' => $op)));
 }
 
@@ -270,11 +275,15 @@ function itg_loyalty_reward_form_after_build($form, &$form_state) {
  * Implements hook_views_pre_render
  * {@inheritdoc}
  */
-function itg_loyalty_reward_views_pre_render(&$view) {
+function itg_loyalty_reward_views_pre_render(&$view) {  
   // Add "Add new Item" button on listing page of items
   if ($view->name == "lrp_manage_items") {
     $header_content_loyalty = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_loyalty .= l(t('Add new Item'), 'node/add/loyalty-and-rewards');
+    $view->attachment_before = $header_content_loyalty;
+  }
+  if ($view->name == 'sold_item_history') {        
+    $header_content_loyalty = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';    
     $view->attachment_before = $header_content_loyalty;
   }
 }
@@ -320,7 +329,7 @@ function itg_loyalty_reward_node_insert($node) {
       $query = db_insert('itg_loyalty_reward_cron');
       $query->fields(array(
         'nid' => $node->nid,
-        'type' => $node->type,        
+        'type' => $node->type,
         'scheduled_time' => strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']),
         'status' => 0,
         'created' => time()
@@ -348,6 +357,21 @@ function itg_loyalty_reward_node_update($node) {
           ))
           ->condition('nid', $node->nid, '=')
           ->execute();
+  }
+}
+
+/**
+ * Implements hook_node_validate().
+ *
+ * {@inheritdoc}.
+ */
+function itg_loyalty_reward_node_validate($node, $form, &$form_state) {
+  if ($node->type == 'loyalty_and_rewards') {
+    $actual_price = $node->field_lrp_actual_price['und'][0]['value'];
+    $discount_price = $node->field_lrp_discounted_price['und'][0]['value'];
+    if ($discount_price > $actual_price) {
+      form_set_error('field_lrp_actual_price', t('Actual price must be greater than discounted price.'));
+    }
   }
 }
 
@@ -614,3 +638,4 @@ function itg_loyalty_reward_views_api() {
     'api' => 3,
   );
 }
+

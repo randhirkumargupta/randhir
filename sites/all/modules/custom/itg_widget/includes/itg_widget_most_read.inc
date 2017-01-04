@@ -17,22 +17,8 @@ function save_most_read_widget_data($most_read_content) {
     $widget_name = "most_read_content";
     if (count($selected_node)) {
         foreach ($selected_node as $node) {
-            $node_load_data = node_load($node);
-            $num_deleted = db_delete('itg_widget_order')
-                    ->condition('widget', $widget_name)
-                    ->condition('nid', $node)
-                    ->execute();
-            $max_weight=get_max_weight_for_special($widget_name);
-            db_insert('itg_widget_order')
-                    ->fields(array(
-                        'nid' => $node,
-                        'widget' => $widget_name,
-                        'cat_id' => $_GET['category_tid'],
-                        'content_type' => $node_load_data->type,
-                        //'extra' => $field_names[$node],
-                        'weight' => ++$max_weight,
-                    ))
-                    ->execute();
+          itg_widget_delete_data_from_widget($widget_name, $node);
+          itg_widget_insert_widget_data($node , $widget_name , $_GET['category_tid']);
         }
         drupal_set_message(t("Nodes has been saved"));
     }
@@ -64,7 +50,7 @@ global $theme;
         $result = get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name, $cat_id, 3, 0);
         $entity_data = array();
         foreach ($result as $entity_data_node) {
-            $entity_data[] = array("node_load_data" => node_load($entity_data_node['nid']), "custom_label" => $entity_data_node['extra']);
+            $entity_data[] = $entity_data_node;
         }
         return $entity_data;
     }

@@ -300,6 +300,11 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content revision: Nid */
+  $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['fields']['nid_1']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid_1']['label'] = 'Node Id';
   /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
@@ -317,13 +322,15 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = 'Edited';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Workbench Moderation: Moderation history link */
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['id'] = 'workbench_moderation_history_link';
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['table'] = 'node';
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['field'] = 'workbench_moderation_history_link';
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['label'] = 'Edited';
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['alter']['text'] = '[nid]';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Edited';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'report-content-moderation/[nid_1]';
+  $handler->display->display_options['fields']['nothing']['alter']['target'] = '_blank';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -696,6 +703,11 @@ function feature_for_reports_views_default_views() {
     25 => 0,
     26 => 0,
   );
+  /* Filter criterion: Workbench Moderation: Current */
+  $handler->display->display_options['filters']['is_current']['id'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['is_current']['field'] = 'is_current';
+  $handler->display->display_options['filters']['is_current']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -707,7 +719,6 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
-  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -716,6 +727,11 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content revision: Nid */
+  $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['fields']['nid_1']['table'] = 'node_revision';
+  $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid_1']['label'] = 'Node Id';
   /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
@@ -733,13 +749,15 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = 'Edited';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Workbench Moderation: Moderation history link */
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['id'] = 'workbench_moderation_history_link';
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['table'] = 'node';
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['field'] = 'workbench_moderation_history_link';
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['label'] = 'Edited';
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['workbench_moderation_history_link']['alter']['text'] = '[nid]';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Edited';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'report/moderation-history/[nid_1]';
+  $handler->display->display_options['fields']['nothing']['alter']['target'] = '_blank';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -791,7 +809,7 @@ function feature_for_reports_views_default_views() {
   );
   $handler->display->display_options['use_batch'] = 'batch';
   $handler->display->display_options['return_path'] = 'report/filed-content';
-  $handler->display->display_options['segment_size'] = '20';
+  $handler->display->display_options['segment_size'] = '50';
   $export['report_filed_content'] = $view;
 
   return $export;

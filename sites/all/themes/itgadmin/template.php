@@ -135,14 +135,20 @@
  */
 function itgadmin_preprocess_comment(&$vars) {
   // Remove comment title from display
+  
   $vars['title'] = '';
   $comment = $vars['elements']['#comment'];
   $node = $vars['elements']['#node'];
+  
   if ($node->type == 'story' || $node->type == 'blog') {
     $vars['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
     $vars['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
 
     $vars['submitted'] = t('Submitted by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
+  } else if ($node->type == 'task_idea_allocation_tracking') {
+      $vars['created'] = format_date($comment->created, 'custom', 'D, d/m/Y h:i');
+      $vars['changed'] = format_date($comment->changed, 'custom', 'D, d/m/Y h:i');
+      $vars['submitted'] = t('Commented by !username on !datetime', array('!username' => $vars['author'], '!datetime' => $vars['created']));
   }
 }
 
@@ -401,6 +407,8 @@ function itgadmin_preprocess_page(&$vars) {
       , 'most-popular-widget-order-reorder'
       , 'dont-miss-widget-list'
       , 'dailymotion-ftp-template'
+      , 'issue-magazin-primary-cat-widget-list'
+      , 'supplement-base-magazin-widget-list'
   );
 
   if (in_array(arg(0), $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
@@ -411,6 +419,10 @@ function itgadmin_preprocess_page(&$vars) {
   if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || arg(1) == 'associate-with-story' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs' || ($vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
+  
+//  if ((isset($vars['node']->type) && $vars['node']->type == 'event_backend')) {
+//    $vars['theme_hook_suggestions'][] = 'page__event_domain';
+//  }
 }
 
 /**
