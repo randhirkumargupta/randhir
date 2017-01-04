@@ -8,8 +8,8 @@ global $base_url;
 $arg = arg();
 if($arg[0] == 'event') {
   $baseurl = $base_url.'/'.$arg[0].'/'.$arg[1];
-} elseif(!empty(arg(1)) && is_numeric(arg(1))) {//shravan
-  $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  arg(1));
+} elseif(!empty($arg[1]) && is_numeric($arg[1])) {//shravan
+  $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  $arg[1]);
 } else {
   $baseurl = $base_url;
 }
@@ -28,6 +28,7 @@ if (!empty($node)) {//shravan
   $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] : '#f7ee23';
 
 ?>
+
 <div id="block-menu-menu-event-menu" class="container event-header-menu-container">
   <div class="row">
     <div class="col-md-8" style="color:<?php print $menu_font_color; ?>">
