@@ -596,7 +596,7 @@ function event_backend_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 3,
+      'weight' => 35,
     ),
   );
 
@@ -1501,7 +1501,7 @@ function event_backend_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 6,
+      'weight' => 38,
     ),
   );
 
@@ -1638,7 +1638,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 2,
+      'weight' => 34,
     ),
   );
 
@@ -1696,7 +1696,7 @@ function event_backend_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 5,
+      'weight' => 37,
     ),
   );
 
@@ -1740,6 +1740,45 @@ function event_backend_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_event_types'.
+  $field_instances['node-event_backend-field_event_types'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 48,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_event_types',
+    'label' => 'Event Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 32,
     ),
   );
 
@@ -2084,7 +2123,7 @@ function event_backend_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 8,
+      'weight' => 40,
     ),
   );
 
@@ -2239,7 +2278,7 @@ function event_backend_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 7,
+      'weight' => 39,
     ),
   );
 
@@ -2281,7 +2320,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 36,
     ),
   );
 

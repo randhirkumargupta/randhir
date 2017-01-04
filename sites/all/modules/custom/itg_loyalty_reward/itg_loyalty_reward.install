@@ -283,6 +283,13 @@ function itg_loyalty_reward_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'status' => array(
+        'description' => 'Order status 1 for complete and 0 for pending.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'product_information' => array(
         'type' => 'blob',
         'size' => 'big',

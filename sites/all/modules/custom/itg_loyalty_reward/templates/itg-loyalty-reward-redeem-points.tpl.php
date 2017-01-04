@@ -12,10 +12,7 @@
       </div>
       <div class="user-name">
         <?php print $data['full_name']; ?>
-      </div>
-      <div class="logout-link">
-        <?php print $data['logout']; ?>
-      </div>
+      </div>      
     </div>  
     <ul class="header-cart">        
         <li id="my-cart-items"> 

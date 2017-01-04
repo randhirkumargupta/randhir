@@ -9,16 +9,16 @@ $arg1 = arg(1);
 if (empty($host_detail) && !empty($arg1) &&  is_numeric($arg1)) {
   $host_node = node_load($arg1);
 } else {
-    if (!empty($host_detail['source'])) {//shravan
+    if (!empty($host_detail['source'])) {
       $host_node_arr = explode('/', $host_detail['source']);
     }
-    if (!empty($host_node_arr[1])) {//shravan
+    if (!empty($host_node_arr[1])) {
       $host_node = node_load($host_node_arr[1]);
     }
 }
 
 $current_date = strtotime(date('Y-m-d  H:i:s'));
-if (!empty($host_node)) {//shravan
+if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
   $event_close_date = strtotime($host_node->field_event_close_date[LANGUAGE_NONE][0]['value']);
 
@@ -29,7 +29,7 @@ if (!empty($host_node)) {//shravan
   $program_title_font_color = $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] : '#000';
   $tab_highlighted_color = $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
 }
-if (!empty($data)) {//shravan
+if (!empty($data)) {
 ksort($data);
 $count = 0;
 foreach ($data as $key => $value) {

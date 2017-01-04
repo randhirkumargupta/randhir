@@ -187,7 +187,12 @@ if ($theme != 'itgadmin') {
                         <div class="itg-widget-parent">
                             <div class="itg-widget">
                                 <div class="ad-widget">
-                                    <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad1']); ?></div>
+                                    <div class="sidebar-ad"> 
+                                      <?php
+                                        if (!empty($itg_ad['200*200_right_bar_ad1'])) {
+                                          print $itg_ad['200*200_right_bar_ad1'];
+                                        }
+                                        ?></div>
                                 </div>
                             </div>
                         </div>                    
