@@ -807,6 +807,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         height: 210px;
         img{
           width: 100%;
+          transition: all 500ms ease 0s;
         }
       }
       .personal-caption{
@@ -827,7 +828,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         max-width: 100%;
       }
       .personal-action{
-        display: none;
+        opacity: 0;
+        transition: 300ms;
         position: absolute;
         background-color: rgba(255, 255, 255, .8);
         left: 0;
@@ -882,10 +884,22 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       line-height: 24px;
       color: #323232;
       padding-top: 15px;
+      &:hover{
+        color: #1a3c8d;
+      }
     }
-    &:hover .personal-action{
-        display: block;
-    }
+    &:hover{
+      .personal-details{
+        .personal-pic{
+          img:hover{
+            transform: scale(1.2);
+          }
+        }
+        .personal-action{
+          opacity: 1;
+        }
+      }
+    } 
   }
 }
 
@@ -1060,6 +1074,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
             .ajax-progress-throbber{
               display: none;
             }
+            .image-preview{
+              img{
+                max-width: 100px;
+                max-height: 80px;
+              }
+            }
           }
           div.description{
             margin-top: 40px;
@@ -1107,6 +1127,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           font: 300 20px/28px Roboto;
           color: #fff;
           cursor: pointer;
+          &:hover{
+            background: #3C91F2;
+          }
         }
         a.button{
           background: url(../images/btn-blue.png) 0 0 / 100% 100% no-repeat;
@@ -1114,10 +1137,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           border: none;
           width: 170px;
           max-width: 40%;
+          border-radius: 4px;
           font: 300 20px/41px Roboto;
           display: inline-block;
           vertical-align: top;
           color: #fff;
+          &:hover{
+            background: #3C91F2;
+          }
         }
       }
       table{
@@ -1651,15 +1678,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       background-color: #000;
       float: left;
       width: 100%;
-      height: 68px;
-      margin-bottom: 11px;
+      margin-bottom: 16px;
       overflow: hidden;
       h2{
         color: #fff;
         font-size: 20px;
         line-height: 24px;
         margin: 0;
-        padding: 10px;
+        padding:13px 10px;
       }
       .updated-msg{
         display: none;
@@ -1690,15 +1716,12 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       }
     }
     .poll-replace-id .form-submit{
-        width: 100px;
-        height: 36px;
+        width: 95px;
+        height: 32px;
         background-color: #e3e3e3;
-        border: none;
-        width: 100px;
-        height: 36px;
+        border: none;               
         font-weight: 500;
-        font-family: Roboto;
-        margin-top: 20px;        
+        font-family: Roboto;            
         color: #5f5f5f;
         margin: 15px auto 0;
         display: inherit;
@@ -2316,7 +2339,7 @@ body.has-cart-popup{
 }
 .cart-total-block{
   background-color: #ededed;
-  padding: 25px 15px;
+  padding: 25px 15px 35px;
   text-align: center;
   .cart-total-inner{
     max-width: 320px;
@@ -2555,6 +2578,9 @@ body.has-cart-popup{
         height: 32px;
         text-transform: uppercase;
         margin: 0;
+        &:hover{
+          box-shadow: 0 0 10px 0 #1a3c8d;
+        }
       }
     }
   }
@@ -2807,6 +2833,9 @@ blockquote {
   position: relative;
   text-align: justify;
   text-indent: 40px;
+  float: right;
+  width: 50%;
+  margin-left: 15px;
   &:before {
     content: "\201C";
     display: inline-block;
@@ -2879,6 +2908,7 @@ blockquote {
   .big-story-col-1 a,
   .may-we-suggest > a,
   .watch-right-now-list > a,
+  .recom-listing .pic a,
   .section-ordering a{
     @extend .zoom-image;
   }
@@ -3049,6 +3079,11 @@ blockquote {
     .points-to-go{
       padding-right: 15px;
     }
+  }
+  blockquote {
+    margin-left: 0;
+    float: none;
+    width: 100%;
   }
 }
 [id*="protected-pages-enter-password"]{
@@ -3368,6 +3403,7 @@ blockquote {
   }
   #main{
     padding: 50px 0;
+    > row{margin: 0;}
   }
   .rhs-address{
     border: 1px solid #ddd;
@@ -4883,6 +4919,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       display: block;
     }
   }
+  .cart-dropdown{
+    left: auto;
+    right: -5px;
+    width: 300px;
+  }
 }
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 
@@ -4892,5 +4933,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   }
   #block-itg-personalization-user-my-point .unit-description th:first-child{
     min-width: 240px;
+  }
+}
+@media all and (max-width: 360px){
+  .cart-total-block .points-balance span:first-child{
+    width: 150px;
+    text-align: left;
   }
 }
