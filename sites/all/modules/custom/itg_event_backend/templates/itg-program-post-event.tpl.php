@@ -16,6 +16,7 @@ if (empty($host_detail) && !empty($arg1) &&  is_numeric($arg1)) {
       $host_node = node_load($host_node_arr[1]);
     }
 }
+
 $current_date = strtotime(date('Y-m-d  H:i:s'));
 if (!empty($host_node)) {//shravan
   $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);

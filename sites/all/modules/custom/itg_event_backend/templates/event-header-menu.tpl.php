@@ -28,6 +28,7 @@ if (!empty($node)) {//shravan
   $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] : '#f7ee23';
 
 ?>
+
 <div id="block-menu-menu-event-menu" class="container event-header-menu-container">
   <div class="row">
     <div class="col-md-8" style="color:<?php print $menu_font_color; ?>">
