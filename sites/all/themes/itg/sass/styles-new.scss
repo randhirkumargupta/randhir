@@ -2886,7 +2886,15 @@ blockquote {
     .message{display: none;}
   }
 }
-
+footer .footer-top ul li a:hover{
+  color: #ffc106;
+}
+.itg-layout-container .big-story-detail ul li:hover a, 
+.big-news .big-story-detail li a:hover{color: #ffc106;}
+.quotes .author{
+  font-size: 12px;
+  color: #828282;
+}
 
 /* CSS To Add Zoom Effect on Images */
 
@@ -3080,7 +3088,7 @@ blockquote {
       padding-right: 15px;
     }
   }
-  blockquote {
+  .quotes {
     margin-left: 0;
     float: none;
     width: 100%;
