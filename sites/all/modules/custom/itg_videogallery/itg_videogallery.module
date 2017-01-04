@@ -932,8 +932,14 @@ function itg_videogallery_get_video($fid) {
 function itg_videogallery_node_access($node, $op, $account) {
     if ($account->uid == 0 && !empty($node) && $node->type == 'videogallery') {//shravan
         $current_time = time();
-        $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
-        $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+        $video_schedule_date = "";
+        $video_expire_date = "";
+        if (!empty($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'])) {
+            $video_schedule_date = strtotime($node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value']);
+        }
+        if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
+            $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+        }
         if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
             return NODE_ACCESS_ALLOW;
         }
@@ -1217,13 +1223,13 @@ function get_video_in_fieldcollection_by_nid($nid) {
     $query = db_select('field_data_field_video_upload', 'up_video');
     $query->join('field_data_field_videogallery_video_upload', 'fvu', 'up_video.field_video_upload_value = fvu.entity_id');
     $query->join('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
-       $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
+    $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
 
     $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
     $query->fields('up_video', array('entity_id'));
-     $query->fields('ads_inc', array('field_include_ads_value'));
+    $query->fields('ads_inc', array('field_include_ads_value'));
     $query->condition('up_video.entity_id', $nid);
-    $query->orderBy('field_video_upload_value','ASC');
+    $query->orderBy('field_video_upload_value', 'ASC');
     $result = $query->execute()->fetchAll();
     return $result;
 }

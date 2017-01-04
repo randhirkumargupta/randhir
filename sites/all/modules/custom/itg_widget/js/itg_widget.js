@@ -135,7 +135,7 @@ Drupal.behaviors.itg_widgets = {
         url: Drupal.settings.basePath + 'setids',
         type: 'post',
         beforeSend: function () {
-          jQuery ('#widget-ajex-loader').show ();
+         // jQuery ('#widget-ajex-loader').show ();
 
         },
         data: {
@@ -146,7 +146,7 @@ Drupal.behaviors.itg_widgets = {
         success: function (data) {
           setTimeout (function () {
 
-            jQuery ('#widget-ajex-loader').hide ();
+           // jQuery ('#widget-ajex-loader').hide ();
 
           }, 500);
 
@@ -176,7 +176,7 @@ Drupal.behaviors.itg_widgets = {
         url: Drupal.settings.basePath + 'setids',
         type: 'post',
         beforeSend: function () {
-          jQuery ('#widget-ajex-loader').show ();
+        //  jQuery ('#widget-ajex-loader').show ();
           jQuery (".vbo-select").attr ("disabled", true);
         },
         data: {
@@ -192,7 +192,7 @@ Drupal.behaviors.itg_widgets = {
           }
           setTimeout (function () {
 
-            jQuery ('#widget-ajex-loader').hide ();
+           // jQuery ('#widget-ajex-loader').hide ();
             jQuery (".vbo-select").attr ("disabled", false);
           }, 500);
 
@@ -223,7 +223,7 @@ Drupal.behaviors.itg_widgets = {
         url: Drupal.settings.basePath + 'setids',
         type: 'post',
         beforeSend: function () {
-          jQuery ('#widget-ajex-loader').show ();
+          //jQuery ('#widget-ajex-loader').show ();
           jQuery (".vbo-select").attr ("disabled", true);
         },
         data: {
@@ -234,7 +234,7 @@ Drupal.behaviors.itg_widgets = {
         success: function (data) {
           setTimeout (function () {
 
-            jQuery ('#widget-ajex-loader').hide ();
+           // jQuery ('#widget-ajex-loader').hide ();
             jQuery (".vbo-select").attr ("disabled", false);
           }, 500);
 
