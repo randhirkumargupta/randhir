@@ -28,7 +28,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $content_font_color = $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
   $program_title_font_color = $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] : '#000';
   $tab_highlighted_color = $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
-}
+
 $actual_host_name = itg_event_get_host_name();
 if($actual_host_name) {
   $baseurl = $actual_host_name.'/';
@@ -41,6 +41,7 @@ else {
 if($current_date < $event_close_date) {
 if (!empty($data)) {
 ksort($data);
+$tabs = '';
 foreach ($data as $key => $value) {
   $tabs .= '<li style="background: '.$tab_highlighted_color.'" data-tag="Day-' . $key . '" class="event-program-tabs Day-' . $key . '">Day ' . $key . '</li>';
 }
@@ -122,5 +123,6 @@ foreach ($data as $key => $value) {
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
   $output = render($render_array);
   print $output;
+}
 }
 ?>
