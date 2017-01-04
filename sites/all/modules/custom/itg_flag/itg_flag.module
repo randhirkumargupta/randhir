@@ -35,6 +35,11 @@ function itg_flag_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  $items['user-activity-front-end'] = array(
+    'page callback' => 'itg_user_activity_front',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -155,4 +160,60 @@ function itg_flag_get_nid($nid) {
   $nid_check ->range(0,1);  
   $result = $nid_check->execute()->fetchfield();
   return $result;
+}
+
+/** code for front user activity  **/
+
+/**
+ * Implements itg_user_activity_front
+ */
+function itg_user_activity_front() {
+  global $user;
+  
+  $nd_id = $_POST['nd_id'];
+  $dtag = $_POST['dtag'];
+  $user_activity = $_POST['data_activity'];
+  $activity_date = date('d-m-Y');
+  $activity_date_time = date('d-m-Y h:i:s');
+  
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    if ($con) {
+      $people = $con->front_user_activity;
+      $get_previous_info = itg_get_front_activity_info($nd_id, $dtag, $user->uid, $user_activity);
+      if(empty($get_previous_info['nid'])) {
+      $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time);
+      $result = $people->insert($qry);
+      $response = array('success' => 'success');
+      print json_encode($response);
+      }
+      else
+      {
+      $response = array('error' => 'error');
+      print json_encode($response);
+      }
+    }
+  }
+}
+
+
+/**
+ * Helper function to get previous insert record.
+ * @param int $nid
+ * @param string $ntype
+ * @param int $uid
+ * @param string $activity
+ */
+function itg_get_front_activity_info($nid, $ntype, $uid, $activity) {
+
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cond = array('nid' => $nid, 'ntype' => $ntype, 'uid' => $uid, 'activity' => $activity);
+    $cursor = $people->find($cond);
+    foreach ($cursor as $document) {
+      $data['nid'] = $document['nid'];
+    }
+    return $data;
+  } 
 }

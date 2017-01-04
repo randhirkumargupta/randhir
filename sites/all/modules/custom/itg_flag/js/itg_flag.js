@@ -50,6 +50,40 @@
                 });
 
             });
+            
+            // jquery for front user activity
+            $('#user-activity').click(function (event) {
+
+                var nd_id = jQuery(this).attr('rel');
+                var dtag = jQuery(this).attr('data-tag');
+                var data_activity = jQuery(this).attr('data-activity');
+                var post_data = "&nd_id=" + nd_id + "&dtag=" + dtag + "&data_activity=" + data_activity;
+
+                $.ajax({
+                    'url': base_url + '/user-activity-front-end',
+                    'data': post_data,
+                    'cache': false,
+                    'type': 'POST',
+                    // dataType: 'json',
+                    beforeSend: function () {
+
+                    },
+                    'success': function (result)
+                    {
+                        var obj = jQuery.parseJSON(result);
+                        if (obj.success == 'success') {
+
+                            $(".follow-story").html('Following');
+                        }
+                        if (obj.error == 'error') {
+
+                        }
+                    }
+                });
+
+            });
+            
+            // end here
         }
 
     };
