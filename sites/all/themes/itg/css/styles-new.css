@@ -810,6 +810,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 }
 .personal-list > li .personal-details .personal-pic img {
   width: 100%;
+  transition: all 500ms ease 0s;
 }
 .personal-list > li .personal-details .personal-caption {
   position: absolute;
@@ -829,7 +830,8 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   max-width: 100%;
 }
 .personal-list > li .personal-details .personal-action {
-  display: none;
+  opacity: 0;
+  transition: 300ms;
   position: absolute;
   background-color: rgba(255, 255, 255, 0.8);
   left: 0;
@@ -884,8 +886,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #323232;
   padding-top: 15px;
 }
-.personal-list > li:hover .personal-action {
-  display: block;
+.personal-list > li > a:hover {
+  color: #1a3c8d;
+}
+.personal-list > li:hover .personal-details .personal-pic img:hover {
+  transform: scale(1.2);
+}
+.personal-list > li:hover .personal-details .personal-action {
+  opacity: 1;
 }
 
 .view-personalization-my-content .views-table {
@@ -1147,16 +1155,23 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #fff;
   cursor: pointer;
 }
+#content #block-formblock-ugc .node-ugc-form .form-actions .form-submit:hover {
+  background: #3C91F2;
+}
 #content #block-formblock-ugc .node-ugc-form .form-actions a.button {
   background: url(../images/btn-blue.png) 0 0/100% 100% no-repeat;
   height: 41px;
   border: none;
   width: 170px;
   max-width: 40%;
+  border-radius: 4px;
   font: 300 20px/41px Roboto;
   display: inline-block;
   vertical-align: top;
   color: #fff;
+}
+#content #block-formblock-ugc .node-ugc-form .form-actions a.button:hover {
+  background: #3C91F2;
 }
 #content #block-formblock-ugc .node-ugc-form table td {
   position: relative;
@@ -2395,7 +2410,7 @@ body.has-cart-popup {
 
 .cart-total-block {
   background-color: #ededed;
-  padding: 25px 15px;
+  padding: 25px 15px 35px;
   text-align: center;
 }
 .cart-total-block .cart-total-inner {
@@ -2624,6 +2639,9 @@ body.has-cart-popup {
   height: 32px;
   text-transform: uppercase;
   margin: 0;
+}
+.view-product .view-filters form .form-submit:hover {
+  box-shadow: 0 0 10px 0 #1a3c8d;
 }
 
 .page-user form {
@@ -2869,6 +2887,9 @@ blockquote {
   position: relative;
   text-align: justify;
   text-indent: 40px;
+  float: right;
+  width: 50%;
+  margin-left: 15px;
 }
 blockquote:before {
   content: "\201C";
@@ -3094,6 +3115,12 @@ blockquote:after {
   }
   .total-point-wrapper .points-to-go {
     padding-right: 15px;
+  }
+
+  blockquote {
+    margin-left: 0;
+    float: none;
+    width: 100%;
   }
 }
 [id*="protected-pages-enter-password"] fieldset {
@@ -3408,6 +3435,9 @@ blockquote:after {
 }
 .page-order-summary #main {
   padding: 50px 0;
+}
+.page-order-summary #main > row {
+  margin: 0;
 }
 .page-order-summary .rhs-address {
   border: 1px solid #ddd;
@@ -5106,6 +5136,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     margin: 30px auto 0;
     display: block;
   }
+
+  .cart-dropdown {
+    left: auto;
+    right: -5px;
+    width: 300px;
+  }
 }
 @media all and (max-width: 480px) {
   .photos-videos-wrapper .movie-videos,
@@ -5116,5 +5152,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   #block-itg-personalization-user-my-point .unit-description th:first-child {
     min-width: 240px;
+  }
+}
+@media all and (max-width: 360px) {
+  .cart-total-block .points-balance span:first-child {
+    width: 150px;
+    text-align: left;
   }
 }
