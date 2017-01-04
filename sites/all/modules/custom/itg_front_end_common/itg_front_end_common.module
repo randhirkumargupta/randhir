@@ -126,12 +126,16 @@ function _vukkul_block_content() {
     $reporter_node = itg_common_get_node_title($byline_id);
   }
   $n_title = $node->title . " - India Today";
-  foreach ($node->field_story_itg_tags['und'] as $tags) {
-    $term = taxonomy_term_load($tags['tid']);
-    $t_name = $term->name;
-    $comma_sep_tag[] = $t_name;
+  if (!empty($node->field_story_itg_tags['und'])) {
+    foreach ($node->field_story_itg_tags['und'] as $tags) {
+      $term = taxonomy_term_load($tags['tid']);
+      $t_name = $term->name;
+      $comma_sep_tag[] = $t_name;
+    }
   }
+  if(!empty($comma_sep_tag)) {
   $tag = implode(',', $comma_sep_tag);
+  }
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($reporter_node);
   drupal_add_js('http://vuukle.com/js/vuukle.js', external);

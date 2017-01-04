@@ -6,19 +6,19 @@
 global $base_url;
 $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
 $arg1 = arg(1);
-if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {//shravan
+if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {
   $host_node = node_load($arg1);
 } else {
-    if (!empty($host_detail['source'])) {//shravan
+    if (!empty($host_detail['source'])) {
       $host_node_arr = explode('/', $host_detail['source']);
     }
-    if (!empty($host_node_arr[1])) {//shravan
+    if (!empty($host_node_arr[1])) {
       $host_node = node_load($host_node_arr[1]);
     }
 }
 
 $current_date = strtotime(date('Y-m-d  H:i:s'));
-if (!empty($host_node)) {//shravan
+if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
   $event_close_date = strtotime($host_node->field_event_close_date[LANGUAGE_NONE][0]['value']);
 
@@ -28,7 +28,7 @@ if (!empty($host_node)) {//shravan
   $content_font_color = $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_content_font_color[LANGUAGE_NONE][0]['rgb'] : '#000';
   $program_title_font_color = $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_program_title_color[LANGUAGE_NONE][0]['rgb'] : '#000';
   $tab_highlighted_color = $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_tab_color[LANGUAGE_NONE][0]['rgb'] : '#eee';
-}
+
 $actual_host_name = itg_event_get_host_name();
 if($actual_host_name) {
   $baseurl = $actual_host_name.'/';
@@ -39,8 +39,9 @@ else {
 
 
 if($current_date < $event_close_date) {
-if (!empty($data)) {//shravan
+if (!empty($data)) {
 ksort($data);
+$tabs = '';
 foreach ($data as $key => $value) {
   $tabs .= '<li style="background: '.$tab_highlighted_color.'" data-tag="Day-' . $key . '" class="event-program-tabs Day-' . $key . '">Day ' . $key . '</li>';
 }
@@ -122,5 +123,6 @@ foreach ($data as $key => $value) {
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
   $output = render($render_array);
   print $output;
+}
 }
 ?>

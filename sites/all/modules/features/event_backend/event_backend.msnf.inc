@@ -84,7 +84,8 @@ function event_backend_msnf_step_info() {
       4 => 'field_registration_close_date',
       5 => 'field_story_expiry_date',
       6 => 'field_story_kicker_text',
-      7 => 'title',
+      7 => 'field_event_types',
+      8 => 'title',
     ),
     'format_type' => 'default',
     'format_settings' => array(

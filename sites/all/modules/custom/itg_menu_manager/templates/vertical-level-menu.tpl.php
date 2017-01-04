@@ -17,8 +17,9 @@
     $parent_class = $menu_link_data['parent_class'];
     $active_cls = $menu_link_data['active_cls'];
     $icon = $menu_link_data['icon'];
+    $url_type = $menu_link_data['url_type'];
     ?>
-    <li><?php print l($icon . $link_text, $link_url, array("html" => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class)))); ?></li>
+    <li><?php print l($icon . $link_text, $link_url, array("html" => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class , $url_type)))); ?></li>
   <?php
   endforeach;
   ?>
