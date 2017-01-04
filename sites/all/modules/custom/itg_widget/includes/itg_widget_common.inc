@@ -2167,6 +2167,7 @@ function get_view_nodes_form_custom_table_for_spacila_auto_widgets($widget_name,
  * {@inheritdoc}
  */
 function itg_widget_block_view_alter(&$data, $block) {
+  
   $item = menu_get_item();
   $flag_occupation = $story_category = $occupation = array();
   $ipl_category = array();
@@ -2371,7 +2372,7 @@ function itg_poll_home_page_polls_select($nid) {
   if (!empty($item_id) && isset($item_id)) {
     $fieldcollect = entity_load('field_collection_item', $item_id);
   }
-  if (is_array($fieldcollect) && count($fieldcollect) > 0) {
+  if (!empty($fieldcollect) && is_array($fieldcollect) && count($fieldcollect) > 0) {
     $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
     $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
     if (isset($poll_answer_image) && $poll_answer_image > 0) {

@@ -1433,7 +1433,7 @@ footer .footer-copyright {
 }
 .big-news .big-story-col-1 iframe {
   width: 100%;
-  height: 46vh;
+  height: 45vh;
 }
 .big-news .big-story-col-1 i {
   position: absolute;
@@ -1495,7 +1495,7 @@ footer .footer-copyright {
   border-right: none;
 }
 .big-news .big-story-detail {
-  max-height: 80px;
+  max-height: 106px;
   overflow: auto;
 }
 .big-news .big-story-detail li {
@@ -2899,6 +2899,9 @@ footer .footer-copyright {
 }
 .buzz-feedback .snap-post {
   margin-top: 0;
+}
+.buzz-feedback .comment-mobile li.mail-to-author {
+  display: none;
 }
 
 .related-story-page {
@@ -5122,7 +5125,7 @@ footer .footer-copyright {
     display: inline-block;
     vertical-align: top;
     float: none;
-    width: inherit;
+    width: 170px;
   }
   .view-programme-content .view-content .photo-list li a {
     white-space: initial;
@@ -5646,6 +5649,7 @@ footer .footer-copyright {
   width: 50%;
   text-align: center;
   margin-bottom: 30px;
+  padding: 0 10px;
 }
 #block-views-latest-issue-magzine-block-1 ul li.issue-magazin-row span {
   color: #193984;
@@ -5944,7 +5948,7 @@ footer .footer-copyright {
     display: inline-block;
     vertical-align: top;
     float: none;
-    width: inherit;
+    width: 170px;
   }
   #block-views-so-sorry-most-watched .view-so-sorry .view-content .photo-list li a {
     white-space: initial;
@@ -6038,8 +6042,8 @@ footer .footer-copyright {
 }
 
 #block-itg-widget-so-sorry-front-politoons .politoons-sosorry h2 {
-  font-size: 26px;
-  font-size: 1.625rem;
+  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 300;
   color: #db1314;
   text-transform: uppercase;
@@ -8462,7 +8466,7 @@ footer .footer-copyright {
     display: inline-block;
     vertical-align: top;
     float: none;
-    width: inherit;
+    width: 170px;
   }
   .sport-home-layout-page .sports-video .view-content .photo-list li a {
     white-space: initial;
@@ -11039,16 +11043,20 @@ footer .footer-copyright {
 .breakingnew-home .new-detail:after {
   clear: both;
 }
-.breakingnew-home .new-detail .field-content {
+.breakingnew-home .new-detail .marquee {
+  width: 75%;
+  overflow: hidden;
+  float: left;
+}
+.breakingnew-home .new-detail .marquee .field-content {
   display: inline-block;
   vertical-align: top;
 }
-.breakingnew-home .new-detail .field-content a {
+.breakingnew-home .new-detail .marquee .field-content a {
   color: #000;
 }
 .breakingnew-home .new-detail .social-share {
-  display: inline-block;
-  vertical-align: top;
+  float: right;
   padding-top: 6px;
 }
 .breakingnew-home .new-detail .social-share ul {
@@ -11118,9 +11126,11 @@ footer .footer-copyright {
   bottom: 0;
 }
 
+/*magzine lock icon*/
 .view-latest-issue-magzine .lock {
-  padding-left: 30px;
+  padding-left: 25px;
   position: relative;
+  display: block;
 }
 .view-latest-issue-magzine .lock:before {
   width: 21px;
@@ -11129,34 +11139,85 @@ footer .footer-copyright {
   background: url(../images/Lock-closed-icon.png) no-repeat center center;
   position: absolute;
   display: block;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
   content: "";
   left: 0;
   border-radius: 0;
+}
+
+.magazin-top-left .lock {
+  padding-left: 30px;
+}
+.magazin-top-left .lock:before {
+  top: 3px;
   background-size: 100%;
 }
 
+.magazin-bottom .lock {
+  padding-left: 30px;
+}
+.magazin-bottom .lock:before {
+  top: 0px;
+  background-size: 70%;
+}
+
+.magazin-section .lock {
+  padding-left: 30px;
+}
+.magazin-section .lock:before {
+  top: 12px;
+  background-size: 70%;
+}
+
+/*magzine lock icon end*/
 /*homepage marquee*/
-.marquee {
+.marquee .field-content {
+  margin: 0 auto;
   overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  -moz-animation: marquee 30s linear infinite;
+  -webkit-animation: marquee 30s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
-.marquee a {
-  display: block;
-  position: relative;
-  animation: marquee 5s linear infinite;
+.marquee .field-content:hover {
+  animation-play-state: paused;
 }
 
-@keyframes marquee {
+/* Move it (define the animation) */
+@-moz-keyframes marquee {
   0% {
-    left: 0;
+    -moz-transform: translateX(100%);
   }
   100% {
-    left: -100%;
+    -moz-transform: translateX(-100%);
+  }
+}
+@-webkit-keyframes marquee {
+  0% {
+    -webkit-transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
+@keyframes marquee {
+  0% {
+    -moz-transform: translateX(100%);
+    /* Firefox bug fix */
+    -webkit-transform: translateX(100%);
+    /* Firefox bug fix */
+    transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+    /* Firefox bug fix */
+    -webkit-transform: translateX(-100%);
+    /* Firefox bug fix */
+    transform: translateX(-100%);
   }
 }
 /*homepage marquee end*/

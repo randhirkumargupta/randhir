@@ -66,7 +66,7 @@
                        try {
                            parent.jQuery.colorbox.close();
                        } catch(err) {
-                          alert(err);
+                         
                        }
                         
                         
