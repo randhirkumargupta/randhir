@@ -53,7 +53,7 @@ if (!empty($node)) {//shravan
 
             if ($event_config_flashback) {
               $flash_old_event = itg_event_backend_flashback($node->nid);
-              print '<li><a href="#" style="color:'.$menu_font_color.'">Flashback</a>'.$flash_old_event.'</li>';
+              print '<li>'.l('Flashback', $baseurl, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
             }
             
             if ($node->nid) {
