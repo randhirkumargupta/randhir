@@ -745,6 +745,7 @@
     .view-video-list-of-category, .view-photo-list-of-category, .view-so-sorry, .view-programme-content, .page-sports-video, .page-sports-photo, .view-programme-content-live-tv{
         .view-content{      
             .photo-list{
+                margin:0 -10px;
                 li{ 
                     @include calculate-width(3);
                     padding:15px 10px;
@@ -1083,6 +1084,15 @@
     }  
 } 
 /*Home page css end*/
+
+/*side bar for all pages start*/
+.sidebars .block-itg-widget{
+    span.no-result-found{        
+        margin: 30px 0;                
+        width: 290px;        
+    }
+}
+/*side bar for all pages end*/
 
 }
 
@@ -1918,8 +1928,11 @@
             font-size: 26px;                        
         }
     }
-    #block-itg-widget-so-sorry-front-politoons{
+    #block-itg-widget-so-sorry-front-politoons{        
         .politoons-sosorry {
+            h2{
+                @include font(26px,null,300);   
+            }
             .col-md-4{
                 &:nth-child(3n+1){
                     clear: left;
