@@ -17,7 +17,7 @@
             }, 1000);
 
             $(".ftp-server .asso-filed_single").click(function(e) {
-
+                jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                 var selected_check_boxes_index = 0;
                 $("input:radio").each(function() {
                     if ($(this).is(':checked'))
@@ -28,16 +28,21 @@
                 if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
-
+                    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     var getbtnmane = $(this).attr('btn_name');
                     parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(selected_check_boxes_index);
                     parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_repository][button]").trigger('mousedown');
 
                     //parent.jQuery("#" + video_field_id + "-button").mousedown();
-                    setTimeout(function() {
-                        parent.jQuery.colorbox.close();
-                        //$("#edit-video-browse-select .form-radio").prop("checked", false);
-                    }, 9000);
+                    parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                        try {
+                            parent.jQuery.colorbox.close();
+                        } catch (err) {
+
+                        }
+
+
+                    });
                 }
             });
 
@@ -59,19 +64,19 @@
                 if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
-
+                    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
                     parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                     parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
-                       try {
-                           parent.jQuery.colorbox.close();
-                       } catch(err) {
-                         
-                       }
-                        
-                        
+                        try {
+                            parent.jQuery.colorbox.close();
+                        } catch (err) {
+
+                        }
+
+
                     });
-                   
+
                 }
             });
 
@@ -88,6 +93,7 @@
 
                 if (selected_check_boxes_values.length > 0)
                 {
+                    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     //var base_url = Drupal.settings.basePath;
                     var base_url = Drupal.settings.baseUrl.baseUrl;
                     jQuery.ajax({
@@ -242,9 +248,15 @@ jQuery('document').ready(function() {
             parent.jQuery('#edit-field-video-upload-add-more-number').val(1);
             parent.jQuery("[name='field_video_upload[file_entity_holder_nums]']").val(videogallery_new_file_hold);
             parent.jQuery("[name='field_video_upload_add_more']").mousedown();
-            setTimeout(function() {
-                parent.jQuery.colorbox.close();
-            }, 9000);
+            parent.jQuery('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+                try {
+                    parent.jQuery.colorbox.close();
+                } catch (err) {
+
+                }
+
+
+            });
         } else {
             alert("Select video file and upload");
         }
@@ -257,6 +269,7 @@ jQuery('document').ready(function() {
             parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(selected_check_boxes_index);
             parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_repository][button]").trigger('mousedown');
             $('#videogallery-node-form').ajaxComplete(function(event, request, settings) {
+
                 parent.jQuery.colorbox.close();
             });
         } else {
