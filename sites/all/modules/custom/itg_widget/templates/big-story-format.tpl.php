@@ -63,7 +63,7 @@ if (!empty($data)) :
           $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
           $node_title = mb_strimwidth($data['node_data']->title, 0, 65, "..");
           // get developing story status
-          if (function_exists(itg_msi_get_lock_story_status) && $data['node_data']->type == 'story') {
+          if (function_exists('itg_msi_get_lock_story_status') && $data['node_data']->type == 'story') {
               $get_develop_story_status = itg_msi_get_lock_story_status($data['node_data']->nid, 'developing_story');
               if (!empty($get_develop_story_status)) {
                 $red_dot_class = "";
@@ -96,8 +96,10 @@ if (!empty($data)) :
           <?php if (!empty($data['node_data']->field_label['und'][0]['value'])) : ?>
             <?php
             // prepare configuration for sharing
-            $share_desc = preg_replace($data['node_data']->field_story_kicker_text['und'][0]['value']);
-            $share_desc_fb= htmlentities($share_desc, ENT_QUOTES);
+            if (!empty($data['node_data']->field_story_kicker_text['und'][0]['value'])) {
+              $share_desc = preg_replace($data['node_data']->field_story_kicker_text['und'][0]['value']);
+              $share_desc_fb= htmlentities($share_desc, ENT_QUOTES);
+            } 
             print mb_strimwidth($data['node_data']->field_label['und'][0]['value'], 0, 165, '..');
             ?>
           <?php endif; ?>

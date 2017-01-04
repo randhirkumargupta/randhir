@@ -160,16 +160,12 @@
             });
 
             // code to copy story longheadline to story title
-            $('#edit-title').on('keyup keypress blur change', function(e) {
-                $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
+            $('#edit-title').on('blur', function() {
+                var long_headline = $('#edit-title').val();
+                $('#edit-field-story-long-head-line-und-0-value').val(long_headline);
+                $('#edit-field-story-short-headline-und-0-value').val(long_headline);
             });
 
-            $('#edit-title').on('keyup keypress blur change', function(e) {
-                $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
-            });
-
-            $('#edit-field-story-long-head-line-und-0-value').val($('#edit-title').val());
-            $('#edit-field-story-short-headline-und-0-value').val($('#edit-title').val());
             $('#edit-field-facebook-gallery-associate-und-0-remove-button').hide();
 
             // Code issue date exit or not.
