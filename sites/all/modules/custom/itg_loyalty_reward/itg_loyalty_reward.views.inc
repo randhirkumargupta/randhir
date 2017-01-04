@@ -90,6 +90,27 @@ function itg_loyalty_reward_views_data() {
       'handler' => 'views_handler_argument_date'
     ),
   );
+  // Order status field.
+  $data['itg_loyalty_reward_order']['status'] = array(
+    'title' => t('Status'),
+    'help' => t('Order status complete/pending.'),
+    'field' => array(
+      'handler' => 'views_handler_field_boolean',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_boolean_operator',
+      // Note that you can override the field-wide label:
+      'label' => t('Complete'),
+      // This setting is used by the boolean filter handler, as possible option.
+      'type' => 'yes-no',
+      // use boolean_field = 1 instead of boolean_field <> 0 in WHERE statement.
+      'use equal' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
 
   return $data;
 }

@@ -221,3 +221,13 @@ function _views_row_selector_get_from_views_result($views_result, $field, $key =
   }
   return $value;
 }
+
+function itg_row_selector_complete_product($form, &$form_state) {  
+  $values = $form_state['values']['itg_row_selector']['order_id'];
+  $errors = array_filter($values);
+  if (!empty($errors)) {
+    foreach ($values as $order_id) {
+      dpm($order_id);
+    }
+  }
+}

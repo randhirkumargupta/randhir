@@ -23,7 +23,7 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
   function query() {
     // Do nothing.
   }
-  
+
   /**
    * Render checkbox in each row.
    * @param array $values
@@ -43,12 +43,31 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
     // The view is empty, abort.
     if (empty($this->view->result)) {
       return;
+    }    
+    if ($form['#action'] == '/itgcms/admin/loyalty/lrp-sold-item') {
+      // Add custom submit function to mark a product as complete.
+      $form['#submit'][] = 'itg_row_selector_complete_product';
     }
 
     $form[$this->options['id']] = array(
       '#tree' => TRUE,
     );
     foreach ($this->view->result as $row_index => $row) {
+      if (isset($row->nid)) {
+        $form[$this->options['id']][$row_index] = array(
+          '#type' => 'checkbox',
+          '#return_value' => $row->nid,
+          //'#default_value' => FALSE,
+          '#attributes' => array('class' => array('itg-row-selector-select')),
+        );
+      }
+      if ($row->order_id) {
+        $form[$this->options['id']]['order_id'][$row_index] = array(
+          '#type' => 'hidden',
+          '#default_value' => $row->order_id,
+        );
+      }
+
       $form[$this->options['id']][$row_index] = array(
         '#type' => 'checkbox',
         '#return_value' => $row->nid,
@@ -69,6 +88,7 @@ class itg_row_selector_field_handler_row_selector extends views_handler_field {
       );
     }
   }
+
   /**
    * views form validate function to validate checkbox
    * @param array $form
