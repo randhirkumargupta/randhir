@@ -10318,3 +10318,7 @@ div.node #comments h2 {
 .node-photogallery-form [id*="field-gallery-image-values"] tbody .field-multiple-drag {
   display: block;
 }
+
+.messages em {
+  font-weight: 600;
+}

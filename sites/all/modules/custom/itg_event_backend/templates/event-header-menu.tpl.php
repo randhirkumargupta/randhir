@@ -15,7 +15,7 @@ if($arg[0] == 'event') {
 }
 
 $node = itg_event_backend_get_event_node('node');
-if (!empty($node)) {//shravan
+if (!empty($node) && ($node->type == 'event_backend')) {//shravan
   $event_start_date = date('F d, Y', strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']));
   $event_location = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
   $event_config_home = $node->field_config_home[LANGUAGE_NONE][0]['value'];
