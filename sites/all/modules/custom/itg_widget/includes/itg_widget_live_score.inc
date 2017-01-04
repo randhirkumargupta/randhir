@@ -9,7 +9,8 @@
  * get tweets
  */
 function live_score() {
-    $dataxml=  simplexml_load_file("http://cricketlive.intoday.in/data/scores-gadget.xml");
-   
+  $dataxml=  simplexml_load_file("http://cricketlive.intoday.in/data/scores-gadget.xml");
+  if (!empty($dataxml)) {
     return (array)$dataxml->match;
+  }
 }

@@ -291,7 +291,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
                 // Code for Twitter validation
                 if ($val_media['value'] == 'twitter' && empty($node->field_story_tweet[LANGUAGE_NONE][0]['value'])) {
-                    form_set_error('field_story_tweet', t("Twitter field is required."));
+                    form_set_error('field_story_tweet', t("Twitter Narrative field is required."));
                 }
             }
         }

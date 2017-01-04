@@ -930,7 +930,7 @@ function itg_videogallery_get_video($fid) {
  * {@inheritdoc}
  */
 function itg_videogallery_node_access($node, $op, $account) {
-    if ($account->uid == 0) {
+    if ($account->uid == 0 && !empty($node) && $node->type == 'videogallery') {//shravan
         $current_time = time();
         $video_schedule_date = "";
         $video_expire_date = "";

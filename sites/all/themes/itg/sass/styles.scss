@@ -4311,6 +4311,7 @@ footer{
             @include calculate-width(2);
             @include text-align(center);
             margin-bottom:30px;
+            padding:0 10px;
             span{
                 color:#193984;
                 display: block;
@@ -4624,7 +4625,7 @@ footer{
 #block-itg-widget-so-sorry-front-politoons{
     .politoons-sosorry{
         h2{
-            @include font(26px,null,300);        
+            @include font(20px,null,300);        
             color: #db1314;
             text-transform: uppercase;
             margin-bottom:20px;
@@ -9403,29 +9404,54 @@ input[type="radio"]:checked + label:after{
         bottom:0;
     }
 }
+
+/*magzine lock icon*/
 .view-latest-issue-magzine{ 
     .lock{
-        padding-left: 30px;
+        padding-left: 25px;
         position: relative;
+        display: block;
         &:before{
             width: 21px;
             height: 27px;
             content: '';
             background: url(../images/Lock-closed-icon.png) no-repeat center center;    
             position: absolute;
-            display: block;
-            top: 50%;
-            -webkit-transform: translateY(-50%);
-            -moz-transform: translateY(-50%);
-            -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
+            display: block;            
             content: "";
             left: 0;
-            border-radius: 0;
+            border-radius: 0;            
+        }
+    }
+}
+.magazin-top-left{
+    .lock{
+        padding-left: 30px;
+        &:before{
+            top: 3px;
             background-size: 100%;
         }
     }
 }
+.magazin-bottom{
+    .lock{
+        padding-left: 30px;
+        &:before{
+            top: 0px;
+            background-size: 70%;
+        }
+    }
+}
+.magazin-section{
+    .lock{
+        padding-left: 30px;
+        &:before{
+            top: 12px;
+            background-size: 70%;
+        }
+    }
+}
+/*magzine lock icon end*/
 /*homepage marquee*/
 .marquee .field-content {       
     margin: 0 auto;
