@@ -1,16 +1,20 @@
 <?php
-  global $base_url, $user;
+global $base_url, $user;
 if (!empty($data['itg_main_manu_header'])) {
-foreach ($data['itg_main_manu_header'] as $key => $val) {
-  if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
-    $data['itg_main_manu_header'][$key]['#attributes']['class'][] = 'sponser-link';
+  foreach ($data['itg_main_manu_header'] as $key => $val) {
+    if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
+      $data['itg_main_manu_header'][$key]['#attributes']['class'][] = 'sponser-link';
+    }
   }
-}
 }
 ?>
 <div class="header-ads mhide">
  <!--   <img src="<?php //print base_path()                  ?>sites/all/themes/itg/images/header-ads.png" alt="ads"> -->
-  <?php print ($data['itg_top']['200*200_header']); ?>
+ <?php
+  if (!empty($data['itg_top']['200*200_header'])) {
+    print $data['itg_top']['200*200_header'];
+  }
+ ?>
 </div>                               
 
 <div class="head-live-tv desktop-hide">
