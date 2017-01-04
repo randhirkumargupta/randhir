@@ -8,8 +8,8 @@ global $base_url;
 $arg = arg();
 if($arg[0] == 'event') {
   $baseurl = $base_url.'/'.$arg[0].'/'.$arg[1];
-} elseif(!empty(arg(1)) && is_numeric(arg(1))) {//shravan
-  $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  arg(1));
+} elseif(!empty($arg[1]) && is_numeric($arg[1])) {//shravan
+  $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  $arg[1]);
 } else {
   $baseurl = $base_url;
 }
