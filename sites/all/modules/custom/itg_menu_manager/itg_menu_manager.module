@@ -235,7 +235,7 @@ function itg_menu_manager_form($form, &$form_state) {
     '#type' => 'managed_file',
     '#name' => 'category_icon',
     '#title' => t('Upload external menu icon'),
-    '#description' => t('Category icon applicable for <br/>only external link. For internal icon <br/>will come from category manager. <br/> Preferred size 46x37.'),
+    '#description' => t('Category icon applicable for <br/>only external link. For internal icon <br/>will come from category manager. <br/> Preferred image size 46x37.'),
     '#file_validate_extensions' => array(
       'png gif jpg jpeg'
     ),
@@ -1234,6 +1234,6 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $menu_link_data_array['active_cls'] = $active_cls;
   $menu_link_data_array['icon'] = $vertical_menu_icon;
   $menu_link_data_array['link_title_for_vertical'] = $link_title_for_vertical;
-
+  $menu_link_data_array['url_type'] = "url-type-" .$menu_data['db_data']['url_type'];
   return $menu_link_data_array;
 }
