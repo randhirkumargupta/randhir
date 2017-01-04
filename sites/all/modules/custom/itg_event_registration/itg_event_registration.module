@@ -110,13 +110,13 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'event_registration_node_form') {
     
-    $form['field_no_of_members']= array(
+/*    $form['field_no_of_members']= array(
         '#prefix' => '<div class= "event-member-container">',
         '#title' => 'No. Of Memebers',
         '#type' => 'item',
         '#markup' => '<div class = "event-no-of-memeber"><span class="event-form-remove">-</span><input readonly value="1" type="text" name="no_of_mem" class="event-form-number" /><span class="event-form-add">+</span></div>',
         '#suffix'=> '</div>'
-    );
+    );*/
     
     $current_event_nid = itg_event_registration_get_event_nid();
     $max_delta = $form['field_erf_registration_fee'][LANGUAGE_NONE]['#max_delta'] + 1;
