@@ -8,8 +8,11 @@ $short_url = shorten_url($actual_link, 'goo.gl');
 $fb_title = addslashes($video_node->title);
 $share_desc = '';
 $image = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-
+$videoids="";
+if(function_exists('get_video_in_fieldcollection_by_nid'))
+{
 $videoids = get_video_in_fieldcollection_by_nid($nid);
+}
 
 ?>
 <?php foreach ($rows as $row): ?>
