@@ -179,7 +179,7 @@ function itg_widget_views_pre_render(&$view) {
   
   elseif ($view->name == "poll_widget" && $view->current_display == 'poll_widget_format') {
     if (!isset($_POST['views_bulk_operations'])) {
-     // $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Poll Widget'), 'poll-format-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
@@ -187,7 +187,7 @@ function itg_widget_views_pre_render(&$view) {
   
   elseif ($view->name == "issue_base_magazin_widget" && $view->current_display == 'issue_base_magazin_widget') {
     if (!isset($_POST['views_bulk_operations'])) {
-      //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Issue Magazine Widget'), 'issue-magazin-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
@@ -195,14 +195,14 @@ function itg_widget_views_pre_render(&$view) {
   
   elseif ($view->name == "special_auto_review_widget" && $view->current_display == 'special_auto_review_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
-    //  $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Special Review Widget'), 'special-auto-review-widget-lsit' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }
    elseif ($view->name == "special_how_i_made_it" && $view->current_display == 'special_how_made_it_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
-    //  $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Special How I Made It Widget'), 'special-how-made-it-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
@@ -210,7 +210,7 @@ function itg_widget_views_pre_render(&$view) {
  
   elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
-//      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Year End Top News & Video'), 'yearend-left-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
@@ -218,42 +218,42 @@ function itg_widget_views_pre_render(&$view) {
  
   elseif ($view->name == "most_read_widget" && $view->current_display == 'most_read_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
-//      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Most Read Widget'), 'most-read-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }
   elseif ($view->name == "feature_content_by_section_widget" && $view->current_display == 'feature_content_section_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
-      //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Feature Content By Section Widget'), 'feature-content-section-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }
   elseif ($view->name == "highlights_widget" && $view->current_display == 'highlights_widget_conent') {
     if (!isset($_POST['views_bulk_operations'])) {
-      //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Highlights Content By Section Widget'), 'highlights-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }
    elseif ($view->name == "key_candidate" && $view->current_display == 'special_key_candidate_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
-      //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Key Candidate Content Widget'), 'special-key-candidate-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }
    elseif ($view->name == "category_of_stroy_base_magazin_widget" && $view->current_display == 'issue_category_magazin_widget') {
     if (!isset($_POST['views_bulk_operations'])) {
-      //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Widget - Category List'), 'issue-magazin-primary-cat-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }
    elseif ($view->name == "supplement_base_magazin_widget" && $view->current_display == 'supplement_base_magazin_widget') {
     if (!isset($_POST['views_bulk_operations'])) {
-      //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Widget - Supplement List'), 'supplement-base-magazin-widget-list' , array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
