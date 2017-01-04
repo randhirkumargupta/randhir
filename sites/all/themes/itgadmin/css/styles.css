@@ -9184,6 +9184,10 @@ div.node #comments h2 {
   height: 50px;
 }
 
+[id*="field-gallery-image-values"] tbody tr td:nth-child(2) .field-name-field-audio input[type="file"] {
+  max-width: 104px;
+}
+
 [id*="views-exposed-form-Event-backend-page"] .views-submit-button .form-submit {
   margin-top: 26px !important;
 }

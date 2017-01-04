@@ -332,7 +332,7 @@ function itg_workflow_query_alter(QueryAlterableInterface $query) {
         static $count;
         $view = & $query->getMetaData('view');
         
-        if ($view->name == 'view_moderation_history' || $view->current_display == 'block_1') {
+        if ($view->name == 'view_moderation_history' || $view->current_display == 'block_1' || $view->current_display == 'page_1') {
             $query->groupBy('node_revision_vid');
         }
     }
@@ -365,11 +365,13 @@ function itg_workflow_node_access($node, $op, $account) {
     // code for lock story  
     if (isset($node->type) && $node->type == 'story' && $node->status == 1) {
         if (!array_key_exists(COPY_EDITOR, $user->roles) && !array_key_exists(SECTION_EDITOR, $user->roles) && !array_key_exists(EDITOR, $user->roles)) {
-            foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+           if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {    
+             foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
                 if ($val['value'] == 'display_lock') {
                     return NODE_ACCESS_DENY;
                 }
-            }
+             }
+           }
         }
     }
 

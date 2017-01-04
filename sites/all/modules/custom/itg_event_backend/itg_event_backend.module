@@ -100,9 +100,10 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       if ($step_completion == '2') {
         $edit_title = 'Edit ' . $node_type . ' - ' . $node_title;
         drupal_set_title($edit_title);
-      } else {
-          $edit_title = 'Create' . ' ' . $node_type;
-          drupal_set_title($edit_title);
+      }
+      else {
+        $edit_title = 'Create' . ' ' . $node_type;
+        drupal_set_title($edit_title);
       }
     }
     // Current step save in session variable
@@ -857,8 +858,8 @@ function itg_event_backend_node_update($node) {
     itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
     $query_param = drupal_get_query_parameters();
     if ($query_param['step'] == 'step_configuration') {
-        $node->field_step_completion['und'][0]['value'] = '2';
-        field_attach_update('node', $node);
+      $node->field_step_completion['und'][0]['value'] = '2';
+      field_attach_update('node', $node);
     }
   }
 }
@@ -897,30 +898,32 @@ function itg_event_backend_insert_event_publish_details($nid, $event_start_date,
  */
 function itg_event_backend_program_schedule_tab() {
   $event_id = itg_event_backend_get_event_node();
-  $node = node_load($event_id);
-  $counter = 0;
-  foreach ($node->field_program_schedule[LANGUAGE_NONE] as $program_schedule) {
-    $ans_detail = entity_load('field_collection_item', array($program_schedule['value']));
-    $old_keys = explode(':', $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value']);
-    $keys = explode('Day-', $old_keys[0]);
-    if ($ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'] != $key) {
-      $val[$keys[1]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-      $val[$keys[1]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
-      $val[$keys[1]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-      $val[$keys[1]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-      $val[$keys[1]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
+  if (!empty($event_id)) {
+    $node = node_load($event_id);
+    $counter = 0;
+    foreach ($node->field_program_schedule[LANGUAGE_NONE] as $program_schedule) {
+      $ans_detail = entity_load('field_collection_item', array($program_schedule['value']));
+      $old_keys = explode(':', $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value']);
+      $keys = explode('Day-', $old_keys[0]);
+      if ($ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'] != $key) {
+        $val[$keys[1]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $val[$keys[1]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
+        $val[$keys[1]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+        $val[$keys[1]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+        $val[$keys[1]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
+      }
+      else {
+        $val[$keys[1]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $val[$keys[1]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
+        $val[$keys[1]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+        $val[$keys[1]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
+        $val[$keys[1]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
+      }
+      $key = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      $counter++;
     }
-    else {
-      $val[$keys[1]][$counter]['daywise'] = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-      $val[$keys[1]][$counter]['session_title'] = $ans_detail[$program_schedule['value']]->field_story_expert_name[LANGUAGE_NONE][0]['value'];
-      $val[$keys[1]][$counter]['start_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-      $val[$keys[1]][$counter]['end_time'] = format_date(strtotime($ans_detail[$program_schedule['value']]->field_start_time[LANGUAGE_NONE][0]['value2']), $type = 'itg_time', $format = '', $timezone = NULL, $langcode = NULL);
-      $val[$keys[1]][$counter]['speaker'] = $ans_detail[$program_schedule['value']]->field_select_speaker[LANGUAGE_NONE];
-    }
-    $key = $ans_detail[$program_schedule['value']]->field_daywise_event[LANGUAGE_NONE][0]['value'];
-    $counter++;
+    return $val;
   }
-  return $val;
 }
 
 /**
@@ -1019,69 +1022,69 @@ function itg_event_get_story_details($nid) {
  */
 function itg_event_backend_menu() {
   $items['itg-event-test'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
-  
+
   $items['programme'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['event/%/programme'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['speakers'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['event/%/speakers'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['sponsors'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['event/%/sponsors'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['sing-and-win'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['event/%/sing-and-win'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['flashback'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['event/%/flashback'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
   );
   $items['speaker-details'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'title' => 'Speaker Details',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'title' => 'Speaker Details',
+    'access callback' => TRUE,
   );
   $items['event/%/speaker-details'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'title' => 'Speaker Details',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'title' => 'Speaker Details',
+    'access callback' => TRUE,
   );
   $items['sponsor-details'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'title' => 'Sponsor Details',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'title' => 'Sponsor Details',
+    'access callback' => TRUE,
   );
   $items['event/%/sponsor-details'] = array(
-      'page callback' => 'itg_event_backend_page',
-      'title' => 'Sponsor Details',
-      'access callback' => TRUE,
+    'page callback' => 'itg_event_backend_page',
+    'title' => 'Sponsor Details',
+    'access callback' => TRUE,
   );
   return $items;
 }
@@ -1203,8 +1206,9 @@ function itg_event_backend_views_query_alter(&$view, &$query) {
  * @return int
  */
 function itg_event_backend_get_event_node($whole_node = NULL) {
- global $base_url;
- $arg = arg();
+  global $base_url;
+  $arg = arg();
+  $node = ''; //shravan
   if (module_exists('redirect')) {
     $query = db_select('redirect', 'red');
     $query->fields('red', array('source'));
@@ -1216,21 +1220,30 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
       if ($arg[0] == 'event') {
         $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
         $node = menu_get_object("node", 1, $path);
-      } elseif (is_numeric($arg[1])) {
+      }
+      elseif (!empty($arg[1]) && is_numeric($arg[1])) {
         $node = node_load($arg[1]);
-      } else {
-        $node = node_load($event_id[1]);
+      }
+      else {
+        if (!empty($event_id[1])) {//shravan
+          $node = node_load($event_id[1]);
+        }
       }
       return $node;
-    } else {
+    }
+    else {
       if ($arg[0] == 'event') {
         $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
         $node = menu_get_object("node", 1, $path);
         return $node->nid;
-      } elseif (is_numeric($arg[1])) {
+      }
+      elseif (!empty($arg[1]) && is_numeric($arg[1])) {//shravan
         return $arg[1];
-      } else {
-        return $event_id[1];
+      }
+      else {
+        if (!empty($event_id[1])) {//shravan
+          return $event_id[1];
+        }
       }
     }
   }
@@ -1244,10 +1257,12 @@ function itg_event_get_host_name() {
   global $base_url;
   $arg = arg();
   if ($arg[0] == 'event') {
-    $host = $base_url .'/'. $arg[0] . '/' . $arg[1];
-  } elseif (!empty($arg[1]) && is_numeric($arg[1])) {
+    $host = $base_url . '/' . $arg[0] . '/' . $arg[1];
+  }
+  elseif (!empty($arg[1]) && is_numeric($arg[1])) {
     $host = $base_url . '/' . drupal_get_path_alias('node/' . $arg[1]);
-  } else {
+  }
+  else {
     if (module_exists('domain')) {
       $query = db_select('domain', 'd');
       $query->fields('d', array('subdomain', 'scheme'));
@@ -1267,11 +1282,12 @@ function itg_event_get_host_name() {
  */
 function itg_event_get_host_name_for_all_events($nid = NULL) {
   global $base_url;
- 
-  $running_on_domain = itg_event_backend_get_redirect_record('source', 'node/'.$nid);
-  if(!empty($running_on_domain)) {
+
+  $running_on_domain = itg_event_backend_get_redirect_record('source', 'node/' . $nid);
+  if (!empty($running_on_domain)) {
     $host = $running_on_domain['redirect'];
-  } else {
+  }
+  else {
     $host = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
   }
   return $host;
@@ -1303,6 +1319,7 @@ function itg_event_backend_get_domain($domain_id) {
  * @return array
  */
 function itg_event_backend_get_redirect_record($c_name, $c_val) {
+  $records = ''; //shravan
   $query = db_select('redirect', 'r')
       ->fields('r');
   $query->condition('r.' . $c_name, $c_val, '=');
