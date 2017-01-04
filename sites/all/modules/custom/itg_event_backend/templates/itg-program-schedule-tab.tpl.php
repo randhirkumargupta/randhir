@@ -5,8 +5,9 @@
  */
 global $base_url;
 $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
-if (empty($host_detail) && !empty(arg(1)) && is_numeric(arg(1))) {//shravan
-  $host_node = node_load(arg(1));
+$arg1 = arg(1);
+if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {//shravan
+  $host_node = node_load($arg1);
 } else {
     if (!empty($host_detail['source'])) {//shravan
       $host_node_arr = explode('/', $host_detail['source']);

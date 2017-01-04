@@ -1726,6 +1726,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
         margin: 15px auto 0;
         display: inherit;
         font-size: 14px;
+        &:hover{
+          box-shadow: 0 0 5px 0 #999;
+        }
       }
   }
 }
@@ -1776,6 +1779,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
       vertical-align: bottom;
       margin-left: 5px;
     }
+    &:hover{box-shadow: 0 0 5px 0 #666;}
   }
 }
 
@@ -2791,13 +2795,12 @@ body.has-cart-popup{
   }
 }
 .story-section .agbutton.story-like-dislike #name-dv #lky button:hover, 
+#block-itg-front-end-common-related-photo-block #related-photo ul li a:hover, 
+#block-itg-front-end-common-related-video-block #related-photo ul li a:hover,
+.may-we-suggest a:hover,
 .story-section .agbutton.story-like-dislike #name-dv #dlky button:hover{
   color: #1a3c8d;
 }
-
-
-
-
 
 /* CSS For Material Ripple Effect */
 .ripple-effect{
@@ -2886,7 +2889,15 @@ blockquote {
     .message{display: none;}
   }
 }
-
+footer .footer-top ul li a:hover{
+  color: #ffc106;
+}
+.itg-layout-container .big-story-detail ul li:hover a, 
+.big-news .big-story-detail li a:hover{color: #ffc106;}
+.quotes .author{
+  font-size: 12px;
+  color: #828282;
+}
 
 /* CSS To Add Zoom Effect on Images */
 
@@ -2901,6 +2912,8 @@ blockquote {
       }
     }
   }
+  #block-itg-front-end-common-related-photo-block #related-photo ul li a, 
+  #block-itg-front-end-common-related-video-block #related-photo ul li a,
   .featured-news .featured-post a, 
   .dm-pic a,
   .top-takes-list a,
@@ -3080,7 +3093,7 @@ blockquote {
       padding-right: 15px;
     }
   }
-  blockquote {
+  .quotes {
     margin-left: 0;
     float: none;
     width: 100%;
@@ -3883,6 +3896,12 @@ article.node-mega-review-critic{
           dfn{
               font: normal 400 12px/18px Roboto;
               display: block;
+          }
+          a{
+            color: #bebebe;
+            &:hover{
+              color: #1a3c8d;
+            }
           }
       }
       span.share-count{

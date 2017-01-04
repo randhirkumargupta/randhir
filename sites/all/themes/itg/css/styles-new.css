@@ -1813,6 +1813,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: inherit;
   font-size: 14px;
 }
+.home_page_poll_widget_block .poll-data .poll-replace-id .form-submit:hover {
+  box-shadow: 0 0 5px 0 #999;
+}
 
 .home_page_poll_widget_block .widget-settings {
   position: absolute;
@@ -1861,6 +1864,9 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font-size: 16px;
   vertical-align: bottom;
   margin-left: 5px;
+}
+.load-more-wrapper .add-more-block:hover, .load-more-wrapper .add-more-block-front:hover, .load-more-wrapper .removes-more-block:hover, .load-more-wrapper-front .add-more-block:hover, .load-more-wrapper-front .add-more-block-front:hover, .load-more-wrapper-front .removes-more-block:hover {
+  box-shadow: 0 0 5px 0 #666;
 }
 
 .page-personalization header {
@@ -2848,6 +2854,9 @@ body.has-cart-popup {
 }
 
 .story-section .agbutton.story-like-dislike #name-dv #lky button:hover,
+#block-itg-front-end-common-related-photo-block #related-photo ul li a:hover,
+#block-itg-front-end-common-related-video-block #related-photo ul li a:hover,
+.may-we-suggest a:hover,
 .story-section .agbutton.story-like-dislike #name-dv #dlky button:hover {
   color: #1a3c8d;
 }
@@ -2944,9 +2953,25 @@ blockquote:after {
   display: none;
 }
 
+footer .footer-top ul li a:hover {
+  color: #ffc106;
+}
+
+.itg-layout-container .big-story-detail ul li:hover a,
+.big-news .big-story-detail li a:hover {
+  color: #ffc106;
+}
+
+.quotes .author {
+  font-size: 12px;
+  color: #828282;
+}
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
-  .zoom-image, .featured-news .featured-post a,
+  .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
+  #block-itg-front-end-common-related-video-block #related-photo ul li a,
+  .featured-news .featured-post a,
   .dm-pic a,
   .top-takes-list a,
   .trending-videos-list a,
@@ -2958,7 +2983,9 @@ blockquote:after {
     overflow: hidden;
     display: block;
   }
-  .zoom-image img, .featured-news .featured-post a img,
+  .zoom-image img, #block-itg-front-end-common-related-photo-block #related-photo ul li a img,
+  #block-itg-front-end-common-related-video-block #related-photo ul li a img,
+  .featured-news .featured-post a img,
   .dm-pic a img,
   .top-takes-list a img,
   .trending-videos-list a img,
@@ -2969,7 +2996,9 @@ blockquote:after {
   .section-ordering a img {
     transition: all 500ms ease 0s;
   }
-  .zoom-image img:hover, .featured-news .featured-post a img:hover,
+  .zoom-image img:hover, #block-itg-front-end-common-related-photo-block #related-photo ul li a img:hover,
+  #block-itg-front-end-common-related-video-block #related-photo ul li a img:hover,
+  .featured-news .featured-post a img:hover,
   .dm-pic a img:hover,
   .top-takes-list a img:hover,
   .trending-videos-list a img:hover,
@@ -3117,7 +3146,7 @@ blockquote:after {
     padding-right: 15px;
   }
 
-  blockquote {
+  .quotes {
     margin-left: 0;
     float: none;
     width: 100%;
@@ -3988,6 +4017,12 @@ article.node-mega-review-critic .rating-and-social-wrapper .social-info span .fa
 article.node-mega-review-critic .rating-and-social-wrapper .social-info span dfn {
   font: normal 400 12px/18px Roboto;
   display: block;
+}
+article.node-mega-review-critic .rating-and-social-wrapper .social-info span a {
+  color: #bebebe;
+}
+article.node-mega-review-critic .rating-and-social-wrapper .social-info span a:hover {
+  color: #1a3c8d;
 }
 article.node-mega-review-critic .rating-and-social-wrapper .social-info span.share-count {
   color: #bebebe;
