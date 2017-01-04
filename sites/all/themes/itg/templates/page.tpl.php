@@ -61,7 +61,12 @@ window.addEventListener("message", function(ev) {
   <?php print render($page['my_cart']); ?>
   
   <main id="main" class="container pos-rel">
-    <?php print render($page['vertical_menu']); ?>
+    <?php
+      if(isset($node->type) && ($node->type != "videogallery" || $node->type != "photogallery")) {
+        $page['vertical_menu'] = array();
+      }
+      print render($page['vertical_menu']);
+    ?>
     <div class="row">
     <section id="content" class="<?php echo $cls;?>" role="main">
       <?php print render($page['highlighted']); ?>
