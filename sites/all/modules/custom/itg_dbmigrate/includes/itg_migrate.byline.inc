@@ -4,6 +4,9 @@
 /**
  * ItgBylineMigration extends XMLMigration 
  */
+
+//http://feeds.intoday.in/migration/byline-master.xml
+
 class ItgBylineMigration extends XMLMigration {
   public function __construct($arguments) {
     parent::__construct($arguments);
@@ -13,18 +16,25 @@ class ItgBylineMigration extends XMLMigration {
     
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'title' => t('title'),
-      'reporter_email_id' => t('reporter_email_id'),
-      'reporter_twitter_handle' => t('reporter_twitter_handle'),
-      'facebook_page' => t('facebook_page'),
-      'occupation' => t('occupation'),
-      'categories' => t('categories'),
-      'picture' => t('picture'),
+      'author_name' => t('title'),
+      'author_email' => t('author_email'),
+      'profile_image' => t('profile_image'),
       'designation' => t('designation'),
-      'about' => t('about'),
-      'sefurl' => t('Sefurl'),
+      'full_description' => t('full_description'),
+      'sef_url' => t('sef_url'),
+      'twitter_id' => t('twitter_id'),
+      'facebook_id' => t('Facebook id'),
+      'profile_type' => t('profile_type'),
+      'created_datetime' => t('created_datetime'),
+      'modified_datetime' => t('modified_datetime'),
+      'created_by' => t('created_by'),
+      'modified_by' => t('modified_by'),
+      'published' => t('published'),
+      'ordering' => t('ordering'),
+      'company' => t('company'),
+      'department' => t('department'),
+      'occupation' => t('occupation'),
       'pagetitle' => t('Page title'),
-      'description' => t('Description'),
       'keywords' => t('Keywords'),
     );
     
@@ -37,7 +47,7 @@ class ItgBylineMigration extends XMLMigration {
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
-    $item_xpath = '/data/byline';
+    $item_xpath = '/data/row';
     
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /story/item/id.
@@ -70,46 +80,97 @@ class ItgBylineMigration extends XMLMigration {
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name)
     
-    $this->addFieldMapping('title', 'title')->xpath('title');
-    $this->addFieldMapping('field_reporter_email_id', 'reporter_email_id')->xpath('reporter_email_id');
-    $this->addFieldMapping('field_reporter_twitter_handle', 'reporter_twitter_handle')->xpath('reporter_twitter_handle');
-    $this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');    
+    $this->addFieldMapping('title', 'author_name')->xpath('author_name');
+    $this->addFieldMapping('field_reporter_email_id', 'author_email')->xpath('author_email');
+    $this->addFieldMapping('field_story_extra_large_image', 'profile_image')->xpath('profile_image');
     $this->addFieldMapping('field_story_new_title', 'designation')->xpath('designation');
-    $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');
-    $this->addFieldMapping('field_story_extra_large_image', 'picture')->xpath('picture');
-    $this->addFieldMapping('body', 'about')->xpath('about');
+    $this->addFieldMapping('body', 'full_description')->xpath('full_description');
+    //$this->addFieldMapping('pathauto', 'sef_url')->xpath('sef_url');
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
+    $this->addFieldMapping('field_reporter_twitter_handle', 'twitter_id')->xpath('twitter_id');
+    $this->addFieldMapping('field_reporter_facebook_id', 'facebook_id')->xpath('facebook_id');    
+    $this->addFieldMapping('created', 'created_datetime')->xpath('created_datetime');    
+    $this->addFieldMapping('changed', 'modified_datetime')->xpath('modified_datetime');    
+    $this->addFieldMapping('status', 'published')->xpath('published');
     
-    // for meta tags
-    $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
+    $this->addFieldMapping('field_reporter_profile_type', 'profile_type')->xpath('profile_type');
+    $this->addFieldMapping('field_reporter_company', 'company')->xpath('company');
+    $this->addFieldMapping('field_reporter_department', 'department')->xpath('department'); 
+    
+    //$this->addFieldMapping('uid', 'created_by')->xpath('created_by');
+    
+    /*$this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');
+    $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
-    $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
-
+    $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');*/
+    
   }
   
   public function prepareRow($row) {
-    // Category migrate
-    $data_category = '';
-
-    if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
-      foreach ($row->xml->categories->category as $final_category) {
-        $source_cid = (string) $final_category;
-        $orignal_category = get_itg_destination_id('migrate_map_itgcategory', $source_cid);
-        $data_category[]['tid'] = $orignal_category;
-      }
+      // manage created user
+    if (isset($row->xml->created_by) && !empty($row->xml->created_by)) {
+      $created_uid = (string) $row->xml->created_by;
+      $orignal_crated_uid = get_itg_destination_id('migrate_map_itguser', $created_uid);
+      $row->xml->created_by = $orignal_crated_uid;
+    }
+    // Manage department in byline
+    if (isset($row->xml->department) && !empty($row->xml->department)) {
+      $department_value = (string) $row->xml->department;
+      $department_option_value = itg_migrate_byline_department($department_value);
+      $row->xml->department = $department_option_value;
     }
     
-    $row->category_new = $data_category;
-    // End category migrate
   }
   
-  public function prepare($node, stdClass $row) {
-    if (!empty($row->category_new)) {
-      $node->field_story_category[LANGUAGE_NONE] = $row->category_new;
-    }
-    
-    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][]['tid'] = (string) $row->xml->occupation;
-    
-    $node->uid = 1;
+  public function prepare($node, stdClass $row) {       
+    $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 403; // fix for reporter
+    $node->uid = $row->xml->created_by;
+  }
+  
+  public function complete($entity, $row) {
+    print (string) $row->xml->id.' - ';
+   //code for order set
+   if (!empty($row->xml->ordering)) {    
+     ordering_set_for_byline($entity->nid, $row->xml->ordering);
+   }
+   
   }
 }
+
+ function itg_migrate_byline_department($key){
+   $department = array(
+     'Mail Today Editorial' => 'mail_today_editorial',
+     'Auto Shows - Magazine' => 'auto_shows_magazine',
+     'Business Today Editorial' => 'business_today_editorial',
+     'Consumer and Personal Finance' => 'consumer_and_personal_finance',
+     'Corporate' => 'Corporate',
+     'Cosmopolitan' => 'Cosmopolitan',
+     'Editorial AT' => 'Editorial_AT',
+     'Editorial DAT' => 'Editorial_DAT',
+     'Editorial HLT' => 'Editorial_HLT',
+     'Editorial India Today TV' => 'editorial_india_today_TV',
+     'Editorial TVTN' => 'Editorial_TVTN',
+     'Good Housekeeping' => 'good_housekeeping',
+     "Harper's Bazaar" => 'harper_s_bazaar',
+     "Harper's Bazaar Bride" => 'harper_s_bazaar_bride',
+     'Impact' => 'Impact',
+     'INDIA TODAY - SUPPLEMENTS' => 'INDIA_TODAY_SUPPLEMENTS',
+     'ITE Editorial' => 'ITE_editorial',
+     'ITGD - Editorial' => 'ITGD_editorial',
+     'ITH Editorial' => 'ITH_editorial',
+     'Mail Today S&D' => 'mail_today_S&D',
+     "Reader's Digest Editorial" => 'reader_s_digest_editorial',
+     'Robb Report Editorial' => 'robb_report_editorial',
+     'SIMPLY' => 'simply',
+     'Social Media & Content Services' => 'social_media_content_services',
+     'Spice' => 'spice',
+     'Technology-Development' => 'technology_development',
+     'Woman' => 'Woman',
+     "Men's Health" => 'men_s_health',
+     
+     
+   );
+   return $department[$key];
+ }

@@ -16,14 +16,14 @@
 function itg_theme() {
   $items = array();
   $items['user_login'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-login',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-login',
   );
   $items['user_pass'] = array(
-      'render element' => 'form',
-      'path' => drupal_get_path('theme', 'itg') . '/templates',
-      'template' => 'user-pass',
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'user-pass',
   );
   return $items;
 }
@@ -34,6 +34,43 @@ function itg_theme() {
  */
 function itg_preprocess_node(&$variables) {
   unset($variables['content']['links']['node']['#links']['node-readmore']);
+  // Inclue pathauto module
+  module_load_all_includes('inc', 'pathauto', 'pathauto');
+  if (function_exists('pathauto_cleanstring')) {
+    // This assumes that you are using Pathauto for generating clean URLs.
+    // Get the "clean" title.
+    $title = pathauto_cleanstring($variables['node']->title);
+    // Replace all dashes with underscores. This is necessary for recognizing the
+    // template filenames.
+    $title = str_replace('-', '_', $title);
+    // Add new template variation.
+    $variables['theme_hook_suggestions'][] = 'node__' . $title;
+    $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
+    if (function_exists(global_comment_last_record)) {
+      $variables['global_comment_last_record'] = global_comment_last_record();
+    }
+  }
+
+  if ($variables['type'] == 'webform') {
+    unset($variables['submitted']);
+    //$variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
+  }
+  
+}
+
+/**
+ * Returns blocks.
+ * @param string $module
+ * @param string $block_id
+ * @return array
+ */
+function itg_block_render($module, $block_id) {
+  $block = block_load($module, $block_id); 
+  $block_content = _block_render_blocks(array($block));
+  unset($block_content['menu_menu-about-us-page-menu']->subject);
+  $build = _block_get_renderable_array($block_content);
+  $block_rendered = drupal_render($build);
+  return $block_rendered;
 }
 
 /**
@@ -80,6 +117,8 @@ function itg_preprocess_field(&$vars) {
  * {@inheritdoc}
  */
 function itg_preprocess_page(&$variables) {
+  global $base_url;
+  $base_root;
   $arg = arg();
   if ($arg[0] == 'taxonomy' && $arg[1] == 'term') {
     $term = taxonomy_term_load($arg[2]);
@@ -88,14 +127,45 @@ function itg_preprocess_page(&$variables) {
       unset($variables['page']['content']['system_main']);
     }
   }
-  
+
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
   
-  if ($arg[0] == 'signup' || $arg[0] == 'forgot-password') {
+  if ((!empty($arg[2]) && $arg[2] == 'ugc') 
+          ||$arg[0] == 'signup' 
+          || $arg[0] == 'forgot-password' 
+          || $arg[0] == 'sso-user' 
+          || $arg[0] == 'sso'
+          || $arg[0] == 'password-success' 
+          || $arg[0] == 'complete-page'          
+          || $arg[0] == 'associate-photo-video-content') {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
+  }
+
+  // Access domain
+  if (function_exists('domain_select_format')) {
+    $format = domain_select_format();
+    foreach (domain_domains() as $data) {
+      if ($data['valid'] || user_access('access inactive domains')) {
+        $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
+      }
+    }
+
+    // Add another page.tpl file for existing domains
+    $parse = parse_url($base_url);
+
+    // Call Event Parent TPL
+    if (in_array($parse['host'], $options)) {
+      $variables['theme_hook_suggestions'][] = 'page__event_domain';
+    }
+  }
+  
+
+  // Call Event Parent TPL
+  if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
+    $variables['theme_hook_suggestions'][] = 'page__event_domain';
   }
 }
 
@@ -124,4 +194,3 @@ function itg_breadcrumb($variables) {
   }
   return $crumbs;
 }
-

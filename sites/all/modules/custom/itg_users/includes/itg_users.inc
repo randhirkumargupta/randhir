@@ -33,31 +33,20 @@ function itg_users_cms_user_dashboard() {
 }
 
 /**
- * query to block user on expirt date
+ * Implements itg_users_block_user
  */
 
 function itg_users_block_user() {
-
-  $query = db_select('users', 'u');
-  $query->join('field_data_field_story_expiry_date', 'de', 'u.uid = de.entity_id');
-  $query->fields('u', array('uid'));
-  $query->fields('de', array('field_story_expiry_date_value'));
-  $result = $query->execute();
-
-  while ($user_record = $result->fetchAssoc()) {
-    $user_id = $user_record['uid'];
-    $user_exp_date = strtotime($user_record['field_story_expiry_date_value']);
-    $user_exp_date = date('Y-m-d', $user_exp_date);
-    $current_date = date('Y-m-d');
-
-    if ($user_exp_date == $current_date) {
-      // block user
-      db_update('users')
-          ->fields(array(
-            'status' => 0
-          ))
-          ->condition('uid', $user_id)
-          ->execute();
+  $users = entity_load('user');
+  $current_date = date('Y-m-d');
+  foreach ($users as $user) {
+    if ($user->uid != 0 && !empty($user->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
+      $user_exp_date = strtotime($user->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
+      $user_exp_date = date('Y-m-d', $user_exp_date);
+      if ($user_exp_date == $current_date) {
+        $user->status = 0;
+        entity_save('user', $user);
+      }
     }
   }
 }

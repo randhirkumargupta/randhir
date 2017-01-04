@@ -283,7 +283,7 @@ function syndication_feature_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_syndication_mode',
-    'label' => 'Select Delivery Mode',
+    'label' => 'Select Delivery End Point',
     'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -969,6 +969,7 @@ function syndication_feature_field_default_field_instances() {
   t('FTP Username');
   t('Select Client title');
   t('Select Content Type');
+  t('Select Delivery End Point');
   t('Select Delivery Mode');
   t('Select Feed type');
   t('Select Frequency');

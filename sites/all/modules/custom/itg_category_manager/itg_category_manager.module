@@ -313,7 +313,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
       $form['name']['#title'] = t('Category Title');
       $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
-      //unset($form['description']);
+//unset($form['description']);
       unset($form['field_cm_sponsored_category']);
 //Hide settings title levels
       unset($form['field_cm_hide_cat_from_home'][LANGUAGE_NONE]['#title']);
@@ -351,7 +351,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
         '#type' => 'markup',
         '#markup' => '<div class="cotegory-manager-settings"><h2>Settings</h2><div class="setting-div">',
         '#weight' => 0,
-      );      
+      );
       $form['term-state-wrap']['term_state'] = array(
         '#type' => 'checkbox',
         '#title' => t('Active'),
@@ -388,6 +388,24 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
 //Call valiadte and after build
       $form['#validate'][] = 'itg_category_manager_term_validate';
       $form['#after_build'][] = 'itg_category_manager_add_form_after_build';
+    }
+  }
+  if (is_array($form['#term'])) {
+    if ($form['#term']['vocabulary_machine_name'] == 'state_managment') {
+
+      unset($form['relations']);
+      unset($form['metatags']);
+      unset($form['redirect']);
+      drupal_add_css(
+          '#edit-metatags{display:none}', array(
+        'group' => CSS_THEME,
+        'type' => 'inline',
+        'media' => 'screen',
+        'preprocess' => FALSE,
+        'weight' => '9999',
+          )
+      );
+//  vertical-tabs-list
     }
   }
 }
@@ -442,10 +460,10 @@ function itg_category_manager_term_validate($form, &$form_state) {
   }
 
 
-//  if ($form_state['values']['parent'][0] == 0 && $form_state['values']['field_cm_select_type']['und'][0]['value'] == NULL) {
-//
-//    form_set_error('field_cm_select_type', t('Content Type field is required for root.'));
-//  }
+  if ($form_state['values']['parent'][0] == 0 && $form_state['values']['field_cm_select_type']['und'][0]['value'] == NULL) {
+
+    form_set_error('field_cm_select_type', t('Content Type field is required for root.'));
+  }
 
   if ($form_state['values']['field_user_city']['und'][0]['value'] != NULL) {
     if (!preg_match('/^([01]?[0-9]|2[0-3])(:[0-5][0-9]){1}$/', $form_state['values']['field_user_city']['und'][0]['value'])) {
@@ -747,7 +765,7 @@ function itg_category_manager_get_mail_content($entity) {
   $redirection_url = isset($entity->field_cm_redirection_url['und'][0]['value']) ? $entity->field_cm_redirection_url['und'][0]['value'] : 'NA';
 
   $output = '<ul>';
-  // Find content type value
+// Find content type value
   if (count($entity->field_cm_select_type['und']) >= 1) {
     foreach ($entity->field_cm_select_type['und'] as $value) {
       $output .= '<li>' . ucfirst($value['value']) . '</li>';
@@ -780,9 +798,10 @@ function itg_category_manager_get_mail_content($entity) {
 }
 
 /**
- * Implement hook_taxonomy_term_insert().
+ * Implements hook_taxonomy_term_insert().
+ *
  * @param Object $term 
- * Insert row to itg_category_manager at the time of term creation.
+ *   Insert row to itg_category_manager at the time of term creation.
  */
 function itg_category_manager_taxonomy_term_insert($term) {
   global $user;
@@ -801,19 +820,22 @@ function itg_category_manager_taxonomy_term_insert($term) {
     'changed' => time(),
   );
   if ($term->path['alias'] != NULL) {
+    $term->path['alias'] = rtrim($term->path['alias'], '/');
     $data['sef_url'] = $term->path['alias'];
   }
   drupal_write_record('itg_sef_url', $data);
 }
 
 /**
- * Implements hook_taxonomy_term_presave($term).
- * @param Object $term An object of type term.
+ * Implements hook_taxonomy_term_presave().
  * Update logs for Sef Url and modification time.
+ * @param Object $term 
+ *   An object of type term.
  */
 function itg_category_manager_taxonomy_term_presave($term) {
   if ($term->tid !== NULL && $term->path['pathauto'] == 0) {
     global $user;
+    $term->path['alias'] = rtrim($term->path['alias'], '/');
     $data = array();
     $data = array(
       'tid' => $term->tid,
@@ -842,12 +864,12 @@ function itg_category_manager_taxonomy_term_presave($term) {
  */
 function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
   global $user;
-// Handle Insert case
+  // Handle Insert case
   if ($context['module'] == 'taxonomy_term' && $context['op'] == 'insert' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
-// find section name
+    // find section name
     $parents = taxonomy_get_parents_all($context['data']['term']->tid);
     $section = end($parents);
-// Set custom alias
+    // Set custom alias
     if ($section->tid == $context['data']['term']->tid) {
       $alias = str_replace(' ', '-', strtolower($context['data']['term']->name));
     }
@@ -855,17 +877,19 @@ function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
       $new_alias = str_replace(' ', '-', strtolower($section->name)) . '/' . str_replace(' ', '-', strtolower($context['data']['term']->name));
       $alias = $new_alias;
     }
+    // Remove trailing slash from sef url.
+    $alias = rtrim($alias, '/');
     db_update('itg_sef_url')
         ->fields(array('sef_url' => $alias))
         ->condition('tid', $context['data']['term']->tid)
         ->execute();
   }
-// Handle update case
+  // Handle update case
   if ($context['module'] == 'taxonomy_term' && $context['op'] == 'update' && $context['data']['term']->vocabulary_machine_name == 'category_management') {
-// find section name
+    // find section name
     $parents = taxonomy_get_parents_all($context['data']['term']->tid);
     $section = end($parents);
-// Set custom alias
+    // Set custom alias
     if ($section->tid == $context['data']['term']->tid) {
       $alias = $alias = str_replace(' ', '-', strtolower($context['data']['term']->name));
     }
@@ -873,7 +897,8 @@ function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
       $new_alias = str_replace(' ', '-', strtolower($section->name)) . '/' . str_replace(' ', '-', strtolower($context['data']['term']->name));
       $alias = $new_alias;
     }
-
+    // Remove trailing slash from sef url.
+    $alias = rtrim($alias, '/');
     $data = array();
     $data = array(
       'tid' => $context['data']['term']->tid,
@@ -883,7 +908,7 @@ function itg_category_manager_pathauto_alias_alter(&$alias, &$context) {
     );
     drupal_write_record('itg_sef_url', $data);
 
-// Update modified date on itg_category_manager table
+    // Update modified date on itg_category_manager table
     $status = isset($context['data']['term']->term_state) ? $context['data']['term']->term_state : 1;
     db_update('itg_category_manager')
         ->fields(array('changed' => time(), 'status' => $status))
@@ -988,22 +1013,19 @@ function itg_category_manager_views_data() {
  * {@inheritdoc} 
  */
 function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
-
-  if ($form['#vocabulary']->machine_name == 'category_management' && $form_id == 'taxonomy_form_term') {
-
+  if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name == 'category_management') {
     $select_template_type = 'field_cm_select_template_type';
     $select_template = 'field_cm_select_template';
-
     unset($form[$select_template_type][LANGUAGE_NONE]['#options']['_none']);
 
-    // add ajax on Select template field
+// add ajax on Select template field
     $form[$select_template_type][LANGUAGE_NONE]['#ajax'] = array(
       'event' => 'change',
       'callback' => 'itg_template_ajax_callback',
       'wrapper' => $select_template . '_replace',
     );
 
-    // set Select template type on edit and trigger action
+// set Select template type on edit and trigger action
 
     if (isset($form[$select_template_type][LANGUAGE_NONE]['#default_value']) && !isset($form_state['triggering_element'])) {
       $template_type = $form[$select_template_type][LANGUAGE_NONE]['#default_value'];
@@ -1012,7 +1034,7 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
       $template_type = $form_state['input'][$select_template_type][LANGUAGE_NONE];
     }
 
-    // Setup template type
+// Setup template type
     $form[$select_template][LANGUAGE_NONE]['#prefix'] = '<div id="' . $select_template . '_replace">';
     $form[$select_template][LANGUAGE_NONE]['#suffix'] = '</div>';
 
@@ -1021,7 +1043,17 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
       $form[$select_template][LANGUAGE_NONE]['#default_value'] = $form[$select_template][LANGUAGE_NONE]['#entity']->field_cm_select_template[LANGUAGE_NONE][0]['value'];
     }
   }
-
+  if ($form_id == 'election_graph_xml_node_form') {
+    drupal_add_css(
+        '.vertical-tabs-list{display:none}', array(
+      'group' => CSS_THEME,
+      'type' => 'inline',
+      'media' => 'screen',
+      'preprocess' => FALSE,
+      'weight' => '9999',
+        )
+    );
+  }
 
   if ($form_id == 'views_exposed_form' && isset($form['status']['#options'][1])) {
     drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/clipboard.min.js', 'file');
@@ -1033,7 +1065,7 @@ function itg_category_manager_form_alter(&$form, &$form_state, $form_id) {
   }
 
 // code use for append field for primary category and category list by contant type
-  $code_append_array = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form', 'quiz_node_form', 'videogallery_node_form', 'blog_node_form', 'recipe_node_form', 'cooking_tips_node_form', 'food_news_node_form', 'print_team_integration_node_form');
+  $code_append_array = array('story_node_form', 'photogallery_node_form', 'podcast_node_form', 'astro_node_form', 'videogallery_node_form', 'blog_node_form', 'recipe_node_form', 'cooking_tips_node_form', 'food_news_node_form', 'print_team_integration_node_form');
   if (in_array($form_id, $code_append_array)) {
 
     $form['#after_build'][] = 'itg_categor_form_edit_category_radio';
@@ -1054,136 +1086,27 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
     $editid = $editid_new;
   }
 
+  if ($editid == 0 || empty($editid)) {
+    $editid = $form['#node']->field_primary_category[LANGUAGE_NONE][0]['value'];
+  }
+
   drupal_add_js('jQuery(document).ready(function() {
-        var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
-        if(rows==0){
-         jQuery(".title-select-prim").remove();
-        jQuery(".dropbox table").before( "<span class=title-select-prim>Select primary category</span>" );
-       
-        }
-  jQuery(".form-item-field-primary-category-html-text-und-0-value").hide();
-jQuery(".node-form").append("<input type=hidden name=form_node value=' . $type . ' >");
-jQuery("form").submit(function(){
-var gethtml = jQuery(".prim-html").html();
-
-jQuery("#edit-field-primary-category-html-text-und-0-value").val(gethtml);
-jQuery(".primary-radio").each(function()
+    jQuery("#prim_' . $editid . '").attr("checked", true);
+        jQuery( "form" ).submit(function( event ) {
+         jQuery("#edit-field-primary-category-und-0-value").val("");
+         jQuery(".primary_category_radio").each(function(){
+    if(jQuery(this).is(":checked"))
     {
-      if(jQuery(this).is(":checked"))
-      {
-      jQuery("#edit-field-primary-category-und-0-value").val(jQuery(this).val());
+        var getval = jQuery(this).val();
+        jQuery("#edit-field-primary-category-und-0-value").val(getval);
 
-      }
-    });
-  });
-});', array('type' => 'inline', 'scope' => 'footer'));
-
-  drupal_add_js('jQuery(window).load(function() {
-  var geteditid="";
-   geteditid=' . $editid . ';
-
-  var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
-    if (getvaluehtml != "")
-    {
-    getvaluehtml="<div class=prim-html>"+getvaluehtml+"</div>";
-    jQuery(".prim-html").remove();
- 
-     jQuery(".form-item-field-primary-category-html-und-0-value").append(getvaluehtml).hide();
-        jQuery("#primary-category-data").html(getvaluehtml);
-        jQuery(".prim-html").children("span").each(function(){
-          var gettoptext=jQuery(this).find(".primary-text").text();
-          var selectvalue=jQuery(this).find(".select-prim").val();
-       
-          if(jQuery("#edit-field-primary-category-und-0-value").val()==selectvalue)
-          {
-          checkedto="checked=checked";
-          } else { checkedto="";}
-     
-        makeradio = "<input "+checkedto+" class=primary-radio name=primary_radio type=radio  value="+selectvalue+">";
-                        
-                         jQuery(".dropbox-entry").each(function(){
-                            var gettrtext=jQuery(this).children("td:first").text();
-                            if(gettoptext==gettrtext)
-                            {
-                             if (!jQuery(this).children("td:first").find("input").hasClass("primary-radio"))
-                                {
-                                jQuery(this).children("td:first").find(".dropbox-item:first").before(makeradio);
-                                }
-                            }
-                          });
-
-        })
     }
-    jQuery(".primary-radio").each(function()
-    {
-      if(jQuery(this).val()==geteditid)
-      {
-       jQuery(this).prop( "checked", true );
-      }
-    });
-    jQuery(".dropbox-remove a").live("mousedown", function() {
-    var getvaluehtml = jQuery("#edit-field-primary-category-html-text-und-0-value").val();
-
-if (getvaluehtml != "")
-    {
-    getvaluehtml="<div class=prim-html>"+getvaluehtml+"</div>";
-       jQuery(".prim-html").remove();
-         setTimeout(function(){ 
-        jQuery(".form-item-field-primary-category-html-und-0-value").append(getvaluehtml).hide();
-       
-}, 500);}
-        var getdattext = jQuery(this).parent().siblings("td").text();
-        jQuery(document).on("ajaxComplete", function(event, xhr, settings) {
-            if (settings.url.indexOf("hierarchical_select_ajax") >= 0) {
-            jQuery("#edit-field-primary-category-und-0-value").val(0);
-                var getdoptiontext = jQuery(this).text();
-                
-        jQuery(".title-select-prim").remove();
-        var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
-        if(rows==0){
-        jQuery(".title-select-prim").remove();
-        jQuery(".dropbox table").before( "<span class=title-select-prim>Select primary category</span>" );
-       
-        }
-                jQuery(".prim-html .primary-text").each(function() {
-
-                    var getdoptiontext = jQuery(this).text();
-                    if (getdoptiontext == getdattext) {
-
-                        jQuery(this).parent(".hiddenradio").remove();
-                    }
-                });
-                jQuery(".hiddenradio").each(function(){
-          var gettoptext=jQuery(this).find(".primary-text").text();
-          var selectvalue=jQuery(this).find(".select-prim").val();
-          
-        makeradio = "<input class=primary-radio name=primary_radio type=radio  value="+selectvalue+">";
-
-                        
-                         jQuery(".dropbox-entry").each(function(){
-                            var gettrtext=jQuery(this).children("td:first").text();
-                            if(gettoptext==gettrtext)
-                            {
-                            if (!jQuery(this).children("td:first").find("input").hasClass("primary-radio"))
-                                {
-                                jQuery(this).children("td:first").find(".dropbox-item:first").before(makeradio);
-                               }
-                            }
-                          });
-
-        });
-        var rows= jQuery(".dropbox table tbody tr.dropbox-is-empty").length;
-        if(rows>0){
-        jQuery(".title-select-prim").remove();
-        jQuery(".hiddenradio").remove();
-        }
-
-            }
-        });
-
-    });
+    
+  });
 });
-', array('type' => 'inline', 'scope' => 'footer'));
+     });', array('type' => 'inline', 'scope' => 'footer'));
+
+
   drupal_add_js(drupal_get_path('module', 'itg_category_manager') . '/js/primary_category.js', array('type' => 'file', 'scope' => 'footer'));
 
   return $form;
@@ -1367,14 +1290,13 @@ function itg_category_manager_disable_forcefully() {
   $current_term = check_plain($_POST['tid']);
   $is_child = taxonomy_get_tree(4, $current_term);
   if (count($is_child) > 0) {
-    drupal_set_message(t('Category has child categories can not be inactivated.'));
-    echo 0;
+    drupal_set_message(t('Category has child categories can not be inactivated.'));    
   }
   else {
     $all_parent = taxonomy_get_parents_all($current_term);
+    $nodes_used_by_current_tid = taxonomy_select_nodes($current_term);
     if (count($all_parent) > 1) {
-      $updated_term = $all_parent[1]->tid;
-      $nodes_used_by_current_tid = taxonomy_select_nodes($current_term);
+      $updated_term = $all_parent[1]->tid;      
       if (count($nodes_used_by_current_tid) > 0) {
         foreach ($nodes_used_by_current_tid as $key => $value) {
           $node = node_load($value);
@@ -1393,14 +1315,46 @@ function itg_category_manager_disable_forcefully() {
             ->condition('tid', $current_term)
             ->execute();
         drupal_set_message(t('Category has been disabled succesfully.'));
-      }
-      echo 1;
+      }      
     }
     else {
-      drupal_set_message(t('Sorry! You can not disable section.'), 'error');
-      echo 0;
+      $template = itg_category_manager_template_term($current_term);      
+      $node_error = array_filter($nodes_used_by_current_tid);
+      $template_error = array_filter($template);
+      if (!empty($node_error)) {
+        drupal_set_message(t('Section is used by some nodes, you can not disable this section.'), 'error');        
+      }
+      elseif (!empty($template_error)) {
+        drupal_set_message(t('Section is used by template manager, you can not disbale this section.'), 'error');        
+      }
+      else {        
+        db_update('itg_category_manager')
+            ->fields(array('status' => 0))
+            ->condition('tid', $current_term)
+            ->execute();
+        drupal_set_message(t('Section has been disabled succesfully.'));
+      }            
     }
   }
+}
+
+/**
+ * Implements 'itg_category_manager_template_term' to get information about
+ * about term used in template manager.
+ *
+ * @param int $current_term
+ *   Current active term.
+ *
+ * @return array
+ */
+function itg_category_manager_template_term($current_term) {
+  $itg_result = array();
+  $itg_query = db_select('itg_layout_tpl', 'itg');
+  $itg_query->fields('itg', array('id'))
+      ->condition('section_name', $current_term);
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  return $itg_result;
 }
 
 /**
@@ -1470,11 +1424,14 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
   $is_child = taxonomy_get_tree('4', $current_term);
   if (count($is_child) > 0) {
     drupal_set_message(t('Category has child categories can not be inactivated.'));
+    p('have child');
   }
   else {
     $all_term_count = count($parent_category);
     $updated_term = $parent_category[$all_term_count - 1];
     $nodes_used_by_current_tid = taxonomy_select_nodes($current_term);
+    $template = itg_category_manager_template_term($current_term);
+    $template_error = array_filter($template);
     if (count($nodes_used_by_current_tid) > 0) {
       foreach ($nodes_used_by_current_tid as $key => $value) {
         $node = node_load($value);
@@ -1486,9 +1443,12 @@ function itg_category_manager_disable_manually_form_submit($form, &$form_state) 
           ->fields(array('status' => 0))
           ->condition('tid', $current_term)
           ->execute();
-      drupal_set_message(t('Category has been disabled and contents have been mapped with selected category.'));
+      drupal_set_message(t('Category has been disabled and contents have been mapped with selected category.'));      
     }
-    else {
+    elseif (!empty($template_error)) {
+      drupal_set_message(t('Section is used by template manager, you can not disbale this section.'), 'error');
+    }
+    else {      
       db_update('itg_category_manager')
           ->fields(array('status' => 0))
           ->condition('tid', $current_term)

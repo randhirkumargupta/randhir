@@ -98,6 +98,12 @@ function photogallery_strongarm() {
         'path' => array(
           'weight' => '31',
         ),
+        'domain' => array(
+          'weight' => '1',
+        ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),

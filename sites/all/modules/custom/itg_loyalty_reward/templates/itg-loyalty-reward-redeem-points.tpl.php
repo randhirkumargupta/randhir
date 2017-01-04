@@ -23,9 +23,9 @@
             $block = module_invoke('itg_loyalty_reward', 'block_view', 'itg_cart_block');
             print render($block['content']);
           ?> 
-          
+          <?php if ($data['item_after'] != 0): ?>
           <div class="cart-dropdown">
-            <?php if ($data['item_after'] != 0): ?>
+            <span class="cart-dropdown-close"><i class="fa fa-times" aria-hidden="true"></i></span>
               <?php 
                 $product_pic = theme(
                   'image_style', array(
@@ -49,10 +49,10 @@
                 // Print statis message.
                 echo '<span class="cart-dropdown-added"> has been added to your cart</span>';
                 ?>
-                <div class="btn-redeem-points">
+                <div class="btn-redeem-points no-loader">
                 <?php
                 // Print points.
-                echo $data['item_after']['points'] . 'POINTS REDEEM';
+                echo $data['item_after']['points'] . ' POINTS REDEEMED';
                 ?>
                 </div>
               </div>
@@ -65,14 +65,14 @@
                 <?php
                 unset($_SESSION['cart_after_popup']);
                ?>
-            <?php endif; ?>
+            
           </div>
-          
+          <?php endif; ?>
         </li>
         <li id="my-remaining-points">          
           <span><?php print empty($data['remaining_point']) ? 0 : $data['remaining_point']; ?></span> POINTS LEFT
         </li>
-        <li><span><?php print l(t('MY HISTORY'), 'order'); ?></span></li>
+        <li class="my-history-link"><?php print l(t('MY HISTORY'), 'order'); ?></li>
     </ul>
         
  </div> 

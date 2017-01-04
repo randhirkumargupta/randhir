@@ -19,6 +19,7 @@ var colorboxFlag = 1;
 var dailymotionFlag = 1;
 var uploadName = '';
 var frequencyFlag = 1;
+var descriptionFlag = 1;
 (function ($) {
 
     Drupal.behaviors.itg_mobile_service_form = {
@@ -102,9 +103,10 @@ var frequencyFlag = 1;
             }
 
             var description_message = jQuery('textarea#edit-field-service-content-und-12-field-story-expert-description-und-0-value--2').html();
-            if (description_message) {
+            if (description_message && descriptionFlag == 1) {
                 $("#widget-ajex-loader").css("display", "none");
                 dynamicFlag = 1;
+                descriptionFlag++;
             }
 
             jQuery.fn.content_create_custom_js = function () {

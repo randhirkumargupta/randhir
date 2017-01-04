@@ -29,11 +29,41 @@ function event_backend_views_api($module = NULL, $api = NULL) {
 function event_backend_image_default_styles() {
   $styles = array();
 
+  // Exported image style: 110x82.
+  $styles['110x82'] = array(
+    'label' => '110x82',
+    'effects' => array(
+      11 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 110,
+          'height' => 82,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: event_364x205.
   $styles['event_364x205'] = array(
     'label' => 'event_364x205',
     'effects' => array(
       10 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 364,
+          'height' => 205,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: event_post_364x205.
+  $styles['event_post_364x205'] = array(
+    'label' => 'event_post_364x205',
+    'effects' => array(
+      13 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 364,
@@ -68,6 +98,36 @@ function event_backend_image_default_styles() {
         'data' => array(
           'width' => 72,
           'height' => 72,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: speaker_detail_168x168.
+  $styles['speaker_detail_168x168'] = array(
+    'label' => 'speaker_detail_168x168',
+    'effects' => array(
+      12 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 168,
+          'height' => 168,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: speaker_right_103x103.
+  $styles['speaker_right_103x103'] = array(
+    'label' => 'speaker_right_103x103',
+    'effects' => array(
+      11 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 103,
+          'height' => 103,
         ),
         'weight' => 1,
       ),

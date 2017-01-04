@@ -20,6 +20,8 @@
   <?php print drupal_render($form['field_recipe_ingredients']); ?>
   <?php print drupal_render($form['field_recipe_garnishing']); ?>
   <?php print drupal_render($form['field_associate_photo_gallery']); ?>
+   <?php print drupal_render($form['field_recipe_writer_image']); ?>
+  
 </div>
 
 <div id="RecipeDetails">
@@ -69,6 +71,6 @@
    <?php print drupal_render($form['field_primary_cat_data']); ?>
   
 </div>
-<h2 id="title-metatags" class="story-title"><?php echo t('SEO Meta Tags'); ?></h2>
+
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

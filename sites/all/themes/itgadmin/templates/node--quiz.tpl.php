@@ -1,5 +1,9 @@
 <?php
  global $base_url;
+ $get_all_category = taxonomy_get_parents_all($node->field_survey_category[LANGUAGE_NONE][0]['tid']);
+ foreach($get_all_category as $categories) {
+   $all_categories[] = $categories->name;
+ }
 ?>
 <a href="javascript:;" class="close-preview">&nbsp;</a>
 <?php if (!empty($pre_object)) print render($pre_object) ?>
@@ -98,8 +102,16 @@
             <h2><?php echo t('Categorization'); ?></h2>
             <div class="content-details">
               <div class="field">
-                <div class="field-label">Section:</div>
-                <div class="field-items"><?php echo $node->field_survey_category[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
+                <div class="field-label">Section & categories:</div>
+                <div class="field-items">
+                  <?php
+                  $total_cat = count($all_categories);
+                  for($i = $total_cat-1; $i >= 0; $i--) {
+                    $separator = $i ? '->' : '';
+                    echo $all_categories[$i]. $separator;
+                  }
+                  ?>
+                </div>
               </div>
             </div>
           </div>

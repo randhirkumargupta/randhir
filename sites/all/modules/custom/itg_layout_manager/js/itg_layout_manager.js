@@ -24,12 +24,10 @@
                     appendTo: "body",
                     helper: "clone",
                     drag: function(event, ui) {
-                        widget_name = $(this).attr('data-widget');
-                        widget_info = $(this).attr('data-widget-info');
-                        
+                        widget_name = $(this).attr('data-widget');                        
+                        widget_info = $(this).attr('data-widget-info');                        
                         // for category tab
-                        category_name_tab = $(this).attr('id');
-                        //alert(widget_name);
+                        category_name_tab = $(this).attr('id');                        
                     }
                 });
 
@@ -44,8 +42,6 @@
                             alert("You can't drag any widget in this content area!");
                             return false;
                         }
-                        //alert(widget_name);
-
                         
                         $(this).removeClass("gray-bg-layout");
                         // content block id for display content widget
@@ -61,9 +57,9 @@
                             else {
                               widget_info = 'custom|common-category-style';  
                             }
-                            wid_name='section_wise_order';
+                            wid_name = 'section_wise_order';
                         }
-                        //alert(block_name);
+                        
                         // tamplate section value
                         var section_name = $('#edit-section').val();
                         // template name
@@ -79,8 +75,6 @@
                             return false;
                         }
 
-                        
-
                         if (display_area) {
                             var content_place = display_area;
                         }
@@ -94,38 +88,47 @@
                             method: 'post',
                             data: {block_name: block_name, widget_name: widget_name, section_name: section_name, template_name: template_name, layout_type:layout_type, block_title: category_name_tab, widget_info:widget_info},
                             beforeSend: function() {
-
-                                $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
+                              $('#' + content_place).html('<div class="widget-loader-wrapper"><img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." /></div>');
                             },
                             success: function(data) {
                                       var splitewigitinfo= widget_info.split('|');
-                                      if(splitewigitinfo[1] !="")
-                                      {
+                                      if(splitewigitinfo[1] !="") {
                                          wid_name=wid_name+'-'+ splitewigitinfo[1];
                                       }
                                 // for category tab widget
                                 $('input[name = ' + block_name + ']').val(category_name_tab);
                                 $('.widget-title[data-id="' + block_name + '"]').html(category_name_tab);
                                 $('.tab-buttons span[data-class="' + block_name + '"]').html(category_name_tab);
-                                $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
-                                //$('#block_name').html(category_name_tab);
+                                
+                                if(wid_name == 'sport_poll_widget_block'){
+                                  $('#' + block_name).closest('.widget-wrapper').attr('class', 'widget-wrapper ' + wid_name);
+                                }
+                                if(wid_name == 'home_page_poll_widget_block'){
+                                  $('#section-cart-' + block_name).addClass('home-page-poll-block-wrap');                                    
+                                }
+                        
+                                
                                 if (display_area) {
                                     $('#' + block_name).html(category_name_tab);
                                 }
-
+                                console.log("blockname"+ block_name);
                                 $('#' + content_place).html(data);
-                                //code by sunil
-                                //console.log("here i am");
-                                jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
-                                //code by avanish
-                              
-                                if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1]== 'block_5') {
+                                //code by sunil                                
+                                jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings, #defalt-section-top-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
+                                //code by avanish   
+                                if (widget_name == 'featured_photo_carousel' || splitewigitinfo[1]== 'block_5' || widget_style=='standpoint') {
                                     jQuery(".flexslider").flexslider({
                                         animation: "slide",
                                         prevText: "",
                                         nextText: "",
                                     });
                                 }
+                                jQuery('.year-slider').slick({
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    arrows: true,
+                                    fade: false         
+                                });  
                             }
                         });
                     }
@@ -172,7 +175,7 @@
                         if (section_name == 'home_page') {
                             var dis_url = "/itg-layout-manager/home?section=home_page&template_name=page--front";
                         } else {
-                            var dis_url = "/itg-layout-list";
+                            var dis_url = "/itg-layout-list/section";
                         }
                         window.location.href = base_url + dis_url;
                     }
@@ -185,7 +188,7 @@
                 var section_name = $('#edit-section').val();
                 var template_name = $('#edit-template-name').val();
                 var block_title = $(this).val();
-                // alert(block_id);
+                
                 var base_url = settings.itg_story.settings.base_url;
 
                 /* var input_val = '';
@@ -381,9 +384,53 @@
                 }
             });
             jQuery('.add-more-block').each(function() {
-
                 if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').is(":visible")) {
-                    jQuery(this).hide();
+                  jQuery(this).hide();
+                }
+            });
+            
+            // for html widgets
+            $('#layout-html-submit').click(function() {
+                var base_url = settings.itg_story.settings.base_url;
+                // html widget value
+                var html_title = $('#edit-html-title').val();                
+
+                if (html_title) {
+                    $.ajax({
+                        url: base_url + "/layout-search-widgets-list/custom_html_widgets",
+                        method: 'post',
+                        data: {html_title: html_title},
+                        beforeSend: function() {
+                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        },
+                        success: function(data) {
+                            // display category list in block
+                           $('#templates-widgets-html').html(data);
+                           draggable_widgets();
+                        }
+                    });
+                }
+            });
+            
+             // for highlights widgets
+            $('#layout-highlights-submit').click(function() {                
+                var base_url = settings.itg_story.settings.base_url;
+                // highlights widget value
+                var highlights_title = $('#edit-highlights-title').val();                                   
+                if (highlights_title) {
+                    $.ajax({
+                        url: base_url + "/layout-search-widgets-list/highlights",
+                        method: 'post',
+                        data: {html_title: highlights_title},
+                        beforeSend: function() {
+                           // $('#section_widgets_list').html('<img class="widget-loader" align="center" src="' + Drupal.settings.basePath + '/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />');
+                        },
+                        success: function(data) {
+                            // display category list in block
+                           $('#templates-highlights-widgets').html(data);
+                           draggable_widgets();
+                        }
+                    });
                 }
             });
         }

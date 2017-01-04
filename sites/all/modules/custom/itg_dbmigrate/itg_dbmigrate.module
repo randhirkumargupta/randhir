@@ -20,3 +20,103 @@ function get_itg_destination_id($table_name, $sourceid) {
   
   return $query->execute()->fetchField();
 }
+
+/**
+ * Order set of content
+ * @param array $node
+ * @return
+ */
+function ordering_set_of_content($node, $count) {  
+  
+  $nid = $node->nid;
+  $cat_id = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+  
+  if (!empty($cat_id)) {
+    $query = db_insert('itg_widget_order')
+        ->fields(array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => $node->type,
+          'cat_id' => $cat_id,
+          'weight' => $count,
+          'extra' => "",
+        ))
+        ->execute();        
+  }
+    
+}    
+ 
+
+/**
+ * insert value of flag count in db.
+ * @param int $nid
+ * @param string $type
+ * @param string $val
+ */
+function itg_flag_insert_like_dislike($nid, $like, $dis_like) {
+  
+  $active = db_insert('itg_custom_flag_count')
+      ->fields(array(
+        'nid' => $nid,
+        'like_count' => $like,
+        'dislike_count' => $dis_like,
+        'created' => date('Y-m-d G:i:s'),
+      ))
+      ->execute();
+  
+}
+
+/**
+ * Implements function for mosimage replace
+ * @param string $body_string
+ * @param array $mosimage_array
+ * @return string
+ */
+function itg_dbmigrate_mosimage_replace($body_string, $mosimage_array, $token){
+  $str = str_replace(array('%', $token), array('%%', '%s'), $body_string);
+  $newstr = vsprintf($str, $mosimage_array);
+  return $newstr;
+}
+
+/**
+ * Order set for byline
+ * @param array $node
+ * @return
+ */
+function ordering_set_for_byline($nid, $weight) {
+    db_insert('draggableviews_structure')->fields(array(
+    'view_name' => 'widget_anchors_listing',
+    'view_display' => 'anchors_listing_widget',
+    'args' => '[]',
+    'entity_id' => $nid,
+    'weight' => $weight,
+    'parent' => 0,
+    ))->execute();
+  }
+  
+  /**
+   * Implements function for get term name
+   * @param int $tid
+   * @return
+   */
+  function itg_db_migrate_term_name($tid){
+   $query = db_select('taxonomy_term_data', 'ttd');
+   $query = $query->fields('ttd',array('name'));
+   $query = $query->condition('tid', $tid, '=');
+   $result = $query->execute()->fetchField();
+   return $result;
+  }
+  
+  /**
+   * Implements function for get parent section id for photo category
+   * @param string $term_name
+   * @return
+   */
+  function itg_db_migrate_parent_term($term_name, $vid) {
+    $query = db_select('taxonomy_term_data', 'ttd');
+    $query -> fields('ttd', array('tid'));
+    $query -> condition('vid', $vid, '=');
+    $query -> condition('name', $term_name, '=');
+    $result = $query->execute()->fetchField();
+    return $result;
+  }

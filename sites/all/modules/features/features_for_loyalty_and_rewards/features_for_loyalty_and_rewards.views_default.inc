@@ -50,8 +50,10 @@ function features_for_loyalty_and_rewards_views_default_views() {
     'field_story_expiry_date' => 'field_story_expiry_date',
     'created' => 'created',
     'changed' => 'changed',
+    'field_lrp_completed' => 'field_lrp_completed',
     'view_node' => 'nothing',
     'edit_node' => 'nothing',
+    'delete_node' => 'nothing',
     'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -117,6 +119,11 @@ function features_for_loyalty_and_rewards_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_lrp_completed' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'view_node' => array(
       'align' => '',
       'separator' => '',
@@ -127,9 +134,14 @@ function features_for_loyalty_and_rewards_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nothing' => array(
+    'delete_node' => array(
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing' => array(
+      'align' => '',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
   );
@@ -228,16 +240,26 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span> ';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
+  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
+  /* Field: Content: Delete link */
+  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
+  $handler->display->display_options['fields']['delete_node']['label'] = '';
+  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">[delete_node]</span>';
+  $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -298,9 +320,205 @@ function features_for_loyalty_and_rewards_views_default_views() {
     24 => 0,
   );
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'lrp-manage-items';
+  /* Display: Active */
+  $handler = $view->new_display('page', 'Active', 'page');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'loyalty_and_rewards' => 'loyalty_and_rewards',
+  );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Product Title';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+  );
+  /* Filter criterion: Content: Completed(Sold out) (field_lrp_completed) */
+  $handler->display->display_options['filters']['field_lrp_completed_value']['id'] = 'field_lrp_completed_value';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['table'] = 'field_data_field_lrp_completed';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['field'] = 'field_lrp_completed_value';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
+    'Sold out' => 'Sold out',
+  );
+  /* Filter criterion: Date: Date (node) */
+  $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['table'] = 'node';
+  $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['operator'] = '>=';
+  $handler->display->display_options['filters']['date_filter']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
+  $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
+    'field_data_field_story_expiry_date.field_story_expiry_date_value' => 'field_data_field_story_expiry_date.field_story_expiry_date_value',
+  );
+  $handler->display->display_options['path'] = 'admin/loyalty/lrp-manage-items';
+
+  /* Display: Expired */
+  $handler = $view->new_display('page', 'Expired', 'page_1');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'loyalty_and_rewards' => 'loyalty_and_rewards',
+  );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Product Title';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+  );
+  /* Filter criterion: Date: Date (node) */
+  $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['table'] = 'node';
+  $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['operator'] = '<';
+  $handler->display->display_options['filters']['date_filter']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
+  $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
+    'field_data_field_story_expiry_date.field_story_expiry_date_value' => 'field_data_field_story_expiry_date.field_story_expiry_date_value',
+  );
+  $handler->display->display_options['path'] = 'admin/loyalty/lrp-expired-product';
+
+  /* Display: Sold Item */
+  $handler = $view->new_display('page', 'Sold Item', 'page_2');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'loyalty_and_rewards' => 'loyalty_and_rewards',
+  );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Product Title';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+  );
+  /* Filter criterion: Content: Completed(Sold out) (field_lrp_completed) */
+  $handler->display->display_options['filters']['field_lrp_completed_value']['id'] = 'field_lrp_completed_value';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['table'] = 'field_data_field_lrp_completed';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['field'] = 'field_lrp_completed_value';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
+    'Sold out' => 'Sold out',
+  );
+  $handler->display->display_options['path'] = 'admin/loyalty/lrp-sold-item';
   $export['lrp_manage_items'] = $view;
 
   $view = new view();
@@ -427,8 +645,24 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['nl2br'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['max_length'] = '350';
+  $handler->display->display_options['fields']['body']['alter']['more_link'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['more_link_text'] = 'More +';
+  $handler->display->display_options['fields']['body']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_type'] = 'div';
+  $handler->display->display_options['fields']['body']['element_class'] = 'product-desc default-full-desc';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body_1']['id'] = 'body_1';
+  $handler->display->display_options['fields']['body_1']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body_1']['field'] = 'body';
+  $handler->display->display_options['fields']['body_1']['label'] = '';
+  $handler->display->display_options['fields']['body_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['body_1']['alter']['text'] = '[body_1] <a href="/itgcms/" class="views-less-link">Less -</a>';
+  $handler->display->display_options['fields']['body_1']['element_type'] = 'div';
+  $handler->display->display_options['fields']['body_1']['element_class'] = 'product-full-desc default-full-desc';
+  $handler->display->display_options['fields']['body_1']['element_label_colon'] = FALSE;
   /* Field: Global: Current Path */
   $handler->display->display_options['fields']['current_path']['id'] = 'current_path';
   $handler->display->display_options['fields']['current_path']['table'] = 'views';
@@ -461,7 +695,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'REDEEM POINTS';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now?destination=[current_path]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now';
   $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn-redeem-points';
   $handler->display->display_options['fields']['nothing_1']['element_type'] = 'div';
   $handler->display->display_options['fields']['nothing_1']['element_class'] = 'redeem-point';
@@ -476,7 +710,6 @@ function features_for_loyalty_and_rewards_views_default_views() {
 <div class="product-pic">[field_lrp_image]</div>
 <div class="product-title">[title_1]</div>
 <div class="post-date">[created]</div>
-<div class="product-description">[body]</div>
 <div class="redeem-points">[field_lrp_loyalty_points]</div>
 <div class="product-actions">[nothing][nothing_1]</div>
 </div>';
@@ -484,6 +717,11 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing_2']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['nothing_2']['element_default_classes'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
+  $handler->display->display_options['sorts']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
+  $handler->display->display_options['sorts']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
+  $handler->display->display_options['sorts']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -500,49 +738,11 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'loyalty_and_rewards' => 'loyalty_and_rewards',
   );
-  /* Filter criterion: Content: Category (field_lrp_category) */
-  $handler->display->display_options['filters']['field_lrp_category_value']['id'] = 'field_lrp_category_value';
-  $handler->display->display_options['filters']['field_lrp_category_value']['table'] = 'field_data_field_lrp_category';
-  $handler->display->display_options['filters']['field_lrp_category_value']['field'] = 'field_lrp_category_value';
-  $handler->display->display_options['filters']['field_lrp_category_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_lrp_category_value']['expose']['operator_id'] = 'field_lrp_category_value_op';
-  $handler->display->display_options['filters']['field_lrp_category_value']['expose']['label'] = 'Category';
-  $handler->display->display_options['filters']['field_lrp_category_value']['expose']['operator'] = 'field_lrp_category_value_op';
-  $handler->display->display_options['filters']['field_lrp_category_value']['expose']['identifier'] = 'field_lrp_category_value';
-  $handler->display->display_options['filters']['field_lrp_category_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    7 => 0,
-    9 => 0,
-    5 => 0,
-    20 => 0,
-    6 => 0,
-    21 => 0,
-    19 => 0,
-    10 => 0,
-    13 => 0,
-    11 => 0,
-    16 => 0,
-    17 => 0,
-    14 => 0,
-    12 => 0,
-    15 => 0,
-    18 => 0,
-    23 => 0,
-    22 => 0,
-    24 => 0,
-    25 => 0,
-    26 => 0,
-  );
   /* Filter criterion: Content: Loyalty Points (field_lrp_loyalty_points) */
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['id'] = 'field_lrp_loyalty_points_value';
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['table'] = 'field_data_field_lrp_loyalty_points';
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['field'] = 'field_lrp_loyalty_points_value';
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['operator'] = 'between';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['min'] = '0';
-  $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['value']['max'] = '500';
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['expose']['operator_id'] = 'field_lrp_loyalty_points_value_op';
   $handler->display->display_options['filters']['field_lrp_loyalty_points_value']['expose']['label'] = 'Points';
@@ -719,7 +919,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'REDEEM POINTS';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now?destination=[current_path]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now';
   $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn-redeem-points';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
@@ -931,8 +1131,24 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['nl2br'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['max_length'] = '350';
+  $handler->display->display_options['fields']['body']['alter']['more_link'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['more_link_text'] = 'More +';
+  $handler->display->display_options['fields']['body']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_type'] = 'div';
+  $handler->display->display_options['fields']['body']['element_class'] = 'product-desc default-full-desc';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body_1']['id'] = 'body_1';
+  $handler->display->display_options['fields']['body_1']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body_1']['field'] = 'body';
+  $handler->display->display_options['fields']['body_1']['label'] = '';
+  $handler->display->display_options['fields']['body_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['body_1']['alter']['text'] = '[body_1] <a href="/itgcms/" class="views-less-link">Less -</a>';
+  $handler->display->display_options['fields']['body_1']['element_type'] = 'div';
+  $handler->display->display_options['fields']['body_1']['element_class'] = 'product-full-desc default-full-desc';
+  $handler->display->display_options['fields']['body_1']['element_label_colon'] = FALSE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -1000,7 +1216,7 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'REDEEM POINTS';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now?destination=[current_path]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'cart/add/[nid]/buy-now';
   $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn-redeem-points';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
@@ -1012,7 +1228,6 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '<div class="product-wrapper">
 <div class="product-pic">[field_lrp_image]</div>
 <div class="product-title">[title]</div>
-<div class="product-description">[body]</div>
 <div class="post-date">[created]</div>
 <div class="redeem-points">[field_lrp_loyalty_points]</div>
 <div class="product-actions">[nothing][nothing_1]</div>

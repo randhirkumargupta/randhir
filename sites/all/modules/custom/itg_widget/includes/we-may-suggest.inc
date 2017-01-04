@@ -16,8 +16,8 @@ function itg_widget_we_may_suggest_ordering_from_custom_table($info) {
     $result = get_view_nodes_form_custom_table_for_widgets($widget_name, MAY_WE_SUGGEST_MAX_RANGE, MAY_WE_SUGGEST_MIN_RANGE , 'ASC');
     $entity_data = array();
     foreach ($result as $entity_data_node) {
-      $entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
-      $entity_data[] = $entity_info[$entity_data_node['nid']];
+      //$entity_info = get_required_data_from_entity_id($entity_data_node['nid']);
+      $entity_data[] = $entity_data_node;
     }
     return $entity_data;
   }
@@ -30,52 +30,12 @@ function itg_widget_we_may_suggest_ordering_from_custom_table($info) {
  */
 function  save_we_may_suggest_widget_data($we_may_suggest_content) {
   $selected_node = $we_may_suggest_content['selection'];
-
-  $already_nodes = db_select('itg_widget_order', 'iwo')
-                  ->fields('iwo')
-                  ->condition('widget', 'we_may_suggest_widget')
-                  ->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $new_data_to_insert = array();
-  // Check if there is any data in custom table
-  if (count($already_nodes)) {
-
-    foreach ($already_nodes as $table_nodes) {
-      $new_data_to_insert[$table_nodes['nid']] = $table_nodes;
+  $widget_name = 'we_may_suggest_widget';
+  itg_widget_delete_data_from_widget($widget_name);
+    if (count($selected_node)) {
+        foreach ($selected_node as $node) {
+          itg_widget_insert_widget_data($node, $widget_name, 0);
+        }
+        drupal_set_message(t("Nodes has been saved"));
     }
-    //pr($selected_node);
-
-    foreach ($selected_node as $new_selected_node) {
-      $new_data_to_insert[$new_selected_node]['nid'] = $new_selected_node;
-    }
-
-    $num = db_delete('itg_widget_order')
-            ->condition('widget', 'we_may_suggest_widget')
-            ->execute();
-
-    foreach ($new_data_to_insert as $key => $nodes) {
-      $node_data = node_load($nodes);
-      db_insert('itg_widget_order')
-              ->fields(array(
-                  'nid' => $nodes['nid'],
-                  'widget' => 'we_may_suggest_widget',
-                  'content_type' => " ",
-                  'cat_id' => 0,
-                  'weight' => 0,
-              ))->execute();
-    }
-  }
-  else {
-    foreach ($selected_node as $nodes) {
-      $node_data = node_load($nodes);
-      // watchdog('widget', $nodes);
-      db_insert('itg_widget_order')
-              ->fields(array(
-                  'nid' => $nodes,
-                  'widget' => 'we_may_suggest_widget',
-                  'content_type' => $node_data->type,
-                  'cat_id' => 0,
-                  'weight' => 0,
-              ))->execute();
-    }
-  }
 }

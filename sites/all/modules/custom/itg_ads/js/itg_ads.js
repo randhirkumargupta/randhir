@@ -8,7 +8,7 @@
         attach: function(context) {
             // Module Code start
             //$('.tabledrag-toggle-weight-wrapper').hide();
-            $('.vertical-tabs').hide();
+            //$('.vertical-tabs').hide();
 
             // Disable edit mode of date fields
             $('input[name="field_ads_start_date[und][0][value][date]"]').keydown(false);

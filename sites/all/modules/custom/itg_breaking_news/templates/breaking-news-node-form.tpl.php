@@ -12,7 +12,7 @@
   <h2 class="breaking-title">Basic Details</h2>
   <?php print drupal_render($form['field_type']); ?>
   <?php print drupal_render($form['field_story_expires']); ?>
-  <?php print drupal_render($form['field_content_type']); ?>
+  <?php //print drupal_render($form['field_content_type']); ?>
   <?php print drupal_render($form['title']); ?>
            </div>
 
@@ -29,6 +29,7 @@
   <?php print drupal_render($form['field_display_on']); ?>
   <?php print drupal_render($form['field_section']); ?>
              </div>
+<?php print drupal_render($form['field_story_itg_tags']); ?>
 
 <div id="BrowseMedia">
   <h2 class="story-title">Browse Media</h2>
@@ -45,13 +46,13 @@
   <?php print drupal_render($form['field_story_highlights']); ?>
 </div>
 
-<div id="Relatedcontent">
+<!--<div id="Relatedcontent">
   <h2 class="story-title">Related content</h2>
-  <?php print drupal_render($form['field_common_related_content']); ?>
-</div>
+  <?php //print drupal_render($form['field_common_related_content']); ?>
+</div>-->
 
 
-<h2 id="title-metatags" class="story-title"><?php echo t('SEO Meta Tags'); ?></h2>
-<?php print drupal_render($form['field_story_itg_tags']); ?>
+<!--<h2 id="title-metatags" class="story-title"><?php //echo t('SEO Meta Tags'); ?></h2>-->
+
  <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

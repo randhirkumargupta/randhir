@@ -35,19 +35,19 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   $template = get_template_name($arg1);
     
   $form['section'] = array(
-       '#type' => 'select',
-       '#title' => t('Select Section'),
-       '#options' => $op,
-       '#required' => TRUE,
-       '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
+    '#type' => 'select',
+    '#title' => t('Select Section'),
+    '#options' => $op,
+    '#required' => TRUE,
+    '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
    );
   
   $form['template_name'] = array(
-       '#type' => 'select',
-       '#title' => t('Select template'),
-       '#options' => $template,
-       '#required' => TRUE,
-       '#default_value' => isset($_GET['template_name']) ? $_GET['template_name'] : "",       
+    '#type' => 'select',
+    '#title' => t('Select template'),
+    '#options' => $template,
+    '#required' => TRUE,
+    '#default_value' => isset($_GET['template_name']) ? $_GET['template_name'] : "",       
    );
    
   $form['submit'] = array(
@@ -95,11 +95,11 @@ function itg_layout_manager_filter_form($form, &$form_state) {
   }  
   
   $form['section'] = array(
-       '#type' => 'select',
-       '#title' => t('Select Section'),
-       '#options' => $op,
-       '#required' => TRUE,
-       '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
+    '#type' => 'select',
+    '#title' => t('Select Section'),
+    '#options' => $op,
+    '#required' => TRUE,
+    '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
   );
   
   $form['items_per_page'] = array(
@@ -181,8 +181,7 @@ function layout_section_widget2_search_form($form, &$form_state) {
   
   if ($_GET['template_name'] != 'page--front' ) {
     $arg = $_GET['section'];
-  }
-  
+  }  
   
   $widgets_type = 'section_widget2_wise_order';
   
@@ -196,6 +195,50 @@ function layout_section_widget2_search_form($form, &$form_state) {
   
   $form['section_widget2_save'] = array(
     '#markup' => '<a data-section-widget2='.$widgets_type.' class="btn btn-save" href="javascript:void(0)" id="layout-section_widget2-save">+</a>',
+    '#weight' => 20,
+  );  
+
+  return $form;
+}
+
+/**
+ * Implementation of hook_form for section cards
+ * {@inheritdoc}
+ */
+function highlights_widgets_search_form($form, &$form_state) {  
+    
+  $form['highlights_title'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'content-title-list/heighlights/autocomplete',
+    '#maxlength' => 128,
+  );  
+  
+  $form['highlights_submit'] = array(
+    '#markup' => '<div class="go-btn-div"><a class="btn btn-save fright" href="javascript:void(0)" id="layout-highlights-submit">Go</a></div>',
+    '#weight' => 20,
+  );  
+
+  return $form;
+}
+
+/**
+ * Implementation of hook_form for html widgets
+ * {@inheritdoc}
+ */
+function html_widgets_search_form($form, &$form_state) {  
+    
+  $form['html_title'] = array(
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#attributes' => array('placeholder' => t('Search')),
+    '#autocomplete_path' => 'content-title-list/custom_html_widgets/autocomplete',
+    '#maxlength' => 128,
+  );  
+  
+  $form['html_submit'] = array(
+    '#markup' => '<div class="go-btn-div"><a class="fright" href="javascript:void(0)" id="layout-html-submit">Go</a></div>',
     '#weight' => 20,
   );  
 

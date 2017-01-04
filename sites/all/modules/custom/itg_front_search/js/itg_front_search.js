@@ -12,21 +12,19 @@
             $("#edit-reset").hide();
 
             $('#edit-custom-drp').change(function () {
+                 $(".searh-all-filters .views-widget").hide();
                 var datetypevalue = $('#edit-custom-drp').val();
 
                 if (datetypevalue == 'calender') { // Image question
                     $(".caln").show();
-                    $(".caln").show();
+                    $(".caln").show();                   
                 } else
                 {
                     $(".caln").hide();
                     $(".caln").hide();
                     $('#edit-ds-changed-datepicker-popup-0').val("");
                     $('#edit-ds-changed-max-datepicker-popup-0').val("");
-
                 }
-
-
             });
 
             if (custom_field_val != 'calender') {
@@ -44,6 +42,13 @@
             // trigger reset button
             $('#reset_button').click(function () {
                 $('#edit-reset').trigger('click');
+            });
+            
+            //ON CLICK SHOW FILTER TYPES
+            $("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
+            $("body, html").on("click", ".searh-all-filters label", function(){
+            $(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
+                $(this).next('div').show();    
             });
 
             $(function () {
@@ -82,6 +87,14 @@
                         speed: 300,
                         slidesToShow: 7,
                         slidesToScroll: 1,
+                         responsive: [  
+                                       {
+                                          breakpoint: 600,
+                                          settings: {
+                                            slidesToShow: 5                                            
+                                          }
+                                        }
+                                      ]
                     });
                 }
                 
@@ -123,3 +136,8 @@ function getParameterByName(name, url) {
         return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
+jQuery(document).ready(function(){
+     //ON CLICK SHOW FILTER TYPES
+    jQuery("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
+});

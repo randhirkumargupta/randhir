@@ -1089,17 +1089,18 @@ function itg_mobile_services_form_views_exposed_form_alter(&$form, &$form_state,
       $form['title']['#autocomplete_path'] = 'content-title-list/service_creation/autocomplete';
       break;
     case 'views-exposed-form-clients-details-page-3':
-      $form['title']['#attributes'] = array(
+      $form['field_service_title_value']['#attributes'] = array(
         'placeholder' => t('Title')
       );
       $form['title']['#autocomplete_path'] = 'content-title-list/vas_service_content/autocomplete';
       break;
     case 'views-exposed-form-clients-details-page-2':
-      $form['field_service_title_value']['#attributes'] = array(
+     // pr($form);
+      $form['title']['#attributes'] = array(
         'placeholder' => t('Title')
       );
 
-      $form['field_service_association_title_target_id']['#autocomplete_path'] = 'mobile_services/service_creation/autocomplete';
+      $form['title']['#autocomplete_path'] = 'mobile_services/service_creation/autocomplete';
       break;
   }
 }
@@ -1146,7 +1147,7 @@ function itg_mobile_services_get_content_title($title) {
 
     $result = $query->execute();
     while ($record = $result->fetchAssoc()) {
-      $options[$record['title'] . '(' . $record['nid'] . ')'] = $record['title'];
+      $options[$record['title']] = $record['title'];
     }
     drupal_json_output($options);
   }
@@ -1157,19 +1158,7 @@ function itg_mobile_services_get_content_title($title) {
  * {@inheritdoc}
  */
 function itg_mobile_services_views_query_alter(&$view, &$query) {
-  if ((isset($view->name) && $view->name === 'clients_details' && $view->current_display == 'page_2') && isset($_GET['field_service_association_title_target_id'])) {
-    $association = explode('(', $_GET['field_service_association_title_target_id']);
-    $association = rtrim($association['1'], ')');
-    $association_condition = $association;
-    if (isset($view->query->where[1]['conditions'][1]['field'])) {
-      foreach ($query->where[1]['conditions'] as $idx => $condition) {
-        if (!is_object($condition['field']) && $condition['field'] == 'field_data_field_service_association_title.field_service_association_title_target_id') {
-          $view->query->where[1]['conditions'][$idx]['value'] = $association_condition;
-        }
-      }
-    }
-  } 
-  elseif ((isset($view->name) && $view->name === 'clients_details' && $view->current_display == 'page_3')) {
+  if ((isset($view->name) && $view->name === 'clients_details' && $view->current_display == 'page_3')) {
       unset($_SESSION['service_title_id']);
       unset($_SESSION['service_frequency_id']);
   }
@@ -1548,7 +1537,7 @@ function itg_mobile_content_reset_callback($association_nid, $service_frequency_
  */
 function itg_mobile_services_cronapi($op, $job = NULL) {
   $items['mobile_services_feeds'] = array(
-    'description' => 'send fedds to Mail, ftp, url.',
+    'description' => 'send mobile vas feeds to Mail, ftp, url.',
     'weight' => 5,
     'callback' => 'itg_mobile_services_cron',
     'file' => 'includes/itg_mobile_services.inc',

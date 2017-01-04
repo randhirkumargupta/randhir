@@ -13,42 +13,26 @@
       var uid = settings.itg_breaking_news.settings.uid;
       var type = $('#edit-field-type-und').val();
 
-
-      // code to hide body text format filter 
-      if (uid != 1) {
-        $('.vertical-tabs-list').hide();
-        $('#edit-metatags').show();
-        $('#edit-metatags-und-advanced').hide();
-
-      }
-
       // type check for add form
       $("#edit-field-type-und").change(function () {
         
         if (this.value == 'Live Blog') {
-
           $(".field-name-field-mark-as-breaking-band").hide();
           $(".field-name-field-breaking-publish-time").hide();
           $("input[id*=field-mark-as-breaking-band]").removeAttr('checked');
           $(".highlight-title").show();
-
-
-
         }
-        else
-        {
+        else {
           $(".highlight-title").hide();
           $(".field-name-field-mark-as-breaking-band").show();
           $(".field-name-field-breaking-publish-time").show();
-
         }
         
         // hide Live tv checkbox if type is breaking news
         var typevalue = $('#edit-field-type-und').val();
-                if (typevalue == 'Breaking News') {
-                    $('#edit-field-story-expires-und-yes').attr('checked', false);
-
-                }
+        if (typevalue == 'Breaking News') {
+          $('#edit-field-story-expires-und-yes').attr('checked', false);
+        }
       });
 
       // type check for edit form
@@ -103,7 +87,7 @@
         $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').find('.collapsible .fieldset-legend a').css('background-color', '#bcf2fc');
       });
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox:checked').parents('tr').find('#edit-field-breaking-content-details-und-0 .fieldset-legend a').css('background-color', '#bcf2fc');
-  $('body').on('change', '.field-name-field-mark-as-breaking-band .form-checkbox', function () {
+    $('body').on('change', '.field-name-field-mark-as-breaking-band .form-checkbox', function () {
     var el_check = $(this).is(':checked');
     if(el_check == true){
       $('body').find('.field-name-field-mark-as-breaking-band .form-checkbox').attr({checked: false, disabled: true});

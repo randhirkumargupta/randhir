@@ -13,9 +13,10 @@
         print '<span>' . l(t('Redeemed Points : <strong>@redeemed</strong></span>', 
             array('@redeemed' => $data['redeemed_points'])), 'order', array('html' => TRUE)) . '</span>';
         print '<span>' . l(t('Remaining Points : <strong>@remaining</strong>', 
-            array('@remaining' => $data['remaining_point'])), 'redeem-points', array('html' => TRUE)) . '</span>';
+            array('@remaining' => $data['remaining_point'])), 'product', array('html' => TRUE)) . '</span>';
       ?>        
     </div>
+  <div class="overflow-x-auto">
     <table class="unit-description">
       <thead>
         <tr>
@@ -39,5 +40,6 @@
         </tr>
       </tbody>     
     </table>
+  </div>
 </div>
 

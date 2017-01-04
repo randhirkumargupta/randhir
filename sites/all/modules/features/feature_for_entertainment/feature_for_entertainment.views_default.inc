@@ -135,7 +135,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -290,7 +290,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -360,6 +360,11 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: File Usage: File */
+  $handler->display->display_options['relationships']['node_to_file']['id'] = 'node_to_file';
+  $handler->display->display_options['relationships']['node_to_file']['table'] = 'file_usage';
+  $handler->display->display_options['relationships']['node_to_file']['field'] = 'node_to_file';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
@@ -370,7 +375,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'anchors_landing',
-    'image_link' => '',
+    'image_link' => 'content',
   );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -410,7 +415,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '439';
+  $handler->display->display_options['filters']['cat_id']['value'] = '591';
   $handler->display->display_options['filters']['cat_id']['group'] = 1;
   $handler->display->display_options['filters']['cat_id']['exposed'] = TRUE;
   $handler->display->display_options['filters']['cat_id']['expose']['operator_id'] = 'cat_id_op';
@@ -442,6 +447,7 @@ function feature_for_entertainment_views_default_views() {
     22 => 0,
     24 => 0,
     25 => 0,
+    26 => 0,
   );
 
   /* Display: Entertainment Oscar Slider */
@@ -469,7 +475,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
     'image_style' => 'image750x447',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -498,7 +504,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -516,6 +522,7 @@ function feature_for_entertainment_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['field'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['label'] = '';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_story_extra_large_image_1']['empty'] = ' <img src="./sites/all/themes/itg/images/default_video.jpg" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_large_image_1']['settings'] = array(
     'image_style' => 'video_landing_page_170_x_127',

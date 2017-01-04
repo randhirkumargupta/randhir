@@ -57,7 +57,6 @@ function itg_msi_menu() {
  * @param String $form_id
  */
 function itg_msi_form_alter(&$form, &$form_state, $form_id) {
-
   global $user;
 
   //Set destination for magazine form
@@ -101,14 +100,6 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
     //Call function after build
     $form['#after_build'][] = 'itg_msi_form_after_build';
   }
-
-  //Hide source type and source id from story add and edit form.
-//  if ($form_id == 'story_node_form') {
-//    if(!in_array('administrator', $user->roles)){ 
-//      unset($form['field_story_source_type']);
-//      unset($form['field_story_source_id']);
-//    }
-//  }
 }
 
 /**
@@ -253,6 +244,17 @@ function itg_msi_views_pre_render(&$view) {
     $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
     $view->attachment_before = $header_content_issue;
   }
+
+  if ($view->name == "magazine_top_story") {
+    foreach ($view->result as $magazine_top_story) {
+      if (function_exists(itg_msi_get_lock_story_status)) {
+        $lock_story = itg_msi_get_lock_story_status($magazine_top_story->nid, 'lock_story');
+      }
+      if (!empty($lock_story)) {
+        $magazine_top_story->field_field_story_extra_large_image[0]['rendered']['#path']['path'] = 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage';
+      }
+    }
+  }
 }
 
 /**
@@ -262,6 +264,15 @@ function itg_msi_views_pre_render(&$view) {
  * @param String $form_id
  */
 function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  
+  // Space should not be accepted in title search for all content listing
+   drupal_add_js('jQuery(document).ready(function() {          
+        jQuery("#edit-title, #edit-field-story-category-tid, #edit-name, #edit-uid").on("keypress", function(e) {
+          if (e.which === 32 && !this.value.length)
+          e.preventDefault();
+        });
+    });', array('type' => 'inline', 'scope' => 'footer'));
+      
 
   if ($form['#id'] == 'views-exposed-form-manage-magazines-page' || $form['#id'] == 'views-exposed-form-manage-supplements-page') {
     if ($form_state['view']->name == 'manage_magazines') {
@@ -290,6 +301,19 @@ function itg_msi_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   if ($form['#id'] == 'views-exposed-form-issue-listing-page-1') {
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
+  if($form['#id'] == "views-exposed-form-category-of-stroy-base-magazin-widget-issue-category-magazin-widget") {
+    $form['field_story_issue_date_value']['value']['#date_format'] = 'd-m-Y';
+  }
+  if($form['#id'] == "views-exposed-form-category-of-stroy-base-magazin-widget-issue-magazin-widget-list") {
+    $form['field_story_issue_date_value']['value']['#date_format'] = 'd-m-Y';
+  }
+  if($form['#id'] == 'views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget') {
+    $form['field_story_issue_date_value']['value']['#date_format'] = 'd-m-Y';
+  }
+  if($form['#id'] == 'views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget-list') {
+    $form['field_story_issue_date_value']['value']['#date_format'] = 'd-m-Y';
+  }
+  
 }
 
 /* * *****************************Node Related hooks**************************** */
@@ -412,7 +436,6 @@ function itg_msi_node_presave($node) {
 function itg_msi_node_validate($node, $form, &$form_state) {
 
   if ($node->type == 'magazine' || $node->type == 'supplement') { // Validate duplicacy on titles for magazine and supplement
-    //if (!isset($node->nid)) {
     $title = $form_state['values']['title'];
     if (isset($node->nid)) {
       $results = db_select('node')->fields('node', array('title'))->condition('title', $title, '=')->condition('type', $node->type)->condition('nid', $node->nid, '!=')->execute();
@@ -437,9 +460,9 @@ function itg_msi_node_validate($node, $form, &$form_state) {
         $_SESSION['messages']['error'] = $message_arr_new;
       }
     }
-
-    //Case: Supplement creation (If issue is already exist, throw an error)
-    if ($node->type == 'supplement') {
+    
+    if($node->type == 'supplement') {
+            //If issue is already exist, throw an error
       $is_issue_exist = itg_msi_check_for_issue_existence($node, 'supplement');
       if (!$is_issue_exist) {
         form_set_error('field_supp_issue', t('This issue doesn\'t exist. Please select another issue to map supplement.'));
@@ -458,6 +481,84 @@ function itg_msi_node_validate($node, $form, &$form_state) {
 
     if ($is_issue_exist) {
       form_set_error('field_supp_issue', t('This issue is already exist.'));
+    }
+  }
+  
+  // Validate XML 
+  if ($node->type == 'issue' || $node->type == 'supplement') {
+    
+    if($node->type == 'supplement') {
+      $file = $node->field_supp_import_xml[LANGUAGE_NONE];
+      $field = 'field_supp_import_xml';
+    }
+    
+    if($node->type == 'issue') {
+      $file = $node->field_field_issue_import_xml[LANGUAGE_NONE];
+      $field = 'field_field_issue_import_xml';
+    }
+    
+    foreach ($file as $result) {
+      $xml_file = file_load($result['fid']);
+      $xml_file_path = str_replace('public://', 'sites/default/files/', $xml_file->uri);
+      $xml = simplexml_load_file($xml_file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
+
+      if (!empty($xml)) {
+        //Get XML unique UID
+        foreach ($xml->attributes() as $key => $value) {
+          $xml_uid = $value;
+        }
+
+        //Get City
+        $city = trim($xml->City);
+        $city_tid = itg_msi_get_term_from_name($city, 'city');
+
+        //Get Parent Category
+        $section = trim($xml->Section);
+        $section_tid = itg_msi_get_term_from_name($section, 'category_management');
+
+
+        //Get kicker, headline, byline and body from this array($xml_other)
+        foreach ($xml as $key => $value) {
+          $xml_other[strtolower($key)] = $value;
+        }
+
+        $byline = trim($xml_other['byline']->p);
+        $byline_id = itg_msi_get_nid_using_title_type(trim($xml_other['byline']->p), 'reporter');
+
+        $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $xml_other['headline']->p))));
+
+        //Add check for required fields
+        //$existing_xml = itg_msi_get_associated_fid_node($node, $xml_uid);
+
+//        if (count($existing_xml) > 0) {
+//          form_set_error($field . '1' . $result['fid'], t('Sorry! <strong>@xmlfilename</strong> is a duplicate xml file. Please upload another one.', array('@xmlfilename' => $xml_file->filename)));
+//        }
+        if (empty($city)) {
+          form_set_error($field . '2' . $result['fid'], t('No city found in the file <strong>@xmlfilename</strong>. Please upload file with city name and try again.', array('@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($city_tid) && !empty($city)) {
+          form_set_error($field . '3' . $result['fid'], t('City <strong>@cityname</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another city and try again.', array('@cityname' => $city, '@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($section)) {
+          form_set_error($field . '4' . $result['fid'], t('No section found in the file <strong>@xmlfilename</strong>. Please upload file with section and try again.', array('@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($section_tid) && !empty($section)) {
+          form_set_error($field . '5' . $result['fid'], t('Section <strong>@sectionname</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another section and try again.', array('@sectionname' => $section, '@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($byline)) {
+          form_set_error($field . '6' . $result['fid'], t('No Author found in the file <strong>@xmlfilename</strong>. Please upload file with author name and try again.', array('@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($byline_id) && !empty($byline)) {
+          form_set_error($field . '7' . $result['fid'], t('Author <strong>@byline</strong> in the file @xmlfilename doesn\'t exist in our database. Please choose another Author and try again.', array('@byline' => $byline, '@xmlfilename' => $xml_file->filename)));
+        }
+        if (empty($headline) || $headline == 'NA') {
+          form_set_error($field . '8' . $result['fid'], t('No story headline found in the file <strong>@xmlfilename</strong>. Please upload file with story headline and try again.', array('@xmlfilename' => $xml_file->filename)));
+        }
+      } else {
+        if ($xml_file->uri) {
+          form_set_error($field, t('File <strong>@xmlfilename</strong> is a invalid xml file. Please try with another file.', array('@xmlfilename' => $xml_file->filename)));
+        }
+      }
     }
   }
 }
@@ -840,25 +941,32 @@ function itg_msi_get_current_issue() {
  * @return array
  */
 function itg_msi_issue_category_data($issue_date){
+  $time = strtotime($issue_date);
+  $issue_date_cat = date('d-m-Y', $time);
   $query = db_select('node', 'n');
   $query->join('field_data_field_story_magazine_story_issue', 'issue_based', 'n.nid = issue_based.entity_id');
   $query->join('field_data_field_story_issue_date', 'issue_date', 'n.nid = issue_date.entity_id');
-  $query->join('field_data_field_story_category', 'story_section', 'n.nid = story_section.entity_id');
-  $query->join('taxonomy_term_data', 'term_name', 'story_section.field_story_category_tid = term_name.tid');
-  $query->join('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
-  $query->join('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
+  //$query->join('field_data_field_story_category', 'story_section', 'n.nid = story_section.entity_id');
+  $query->join('field_data_field_primary_category', 'story_section', 'n.nid = story_section.entity_id');
+  $query->join('taxonomy_term_data', 'term_name', 'story_section.field_primary_category_value = term_name.tid');
+  $query->leftJoin('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->leftJoin('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
+  $query->join('itg_widget_order', 'itg_order', 'story_section.field_primary_category_value = itg_order.cat_id');
   $query->fields('n', array('nid', 'title'));
   $query->fields('term_name', array('name'));
   $query->fields('issue_date', array('field_story_issue_date_value'));
   $query->fields('f_managed', array('fid', 'uri'));
-  $query->fields('story_section', array('field_story_category_tid'));
+  $query->fields('story_section', array('field_primary_category_value'));
   $query->condition(db_or()->isnotNull('issue_date.field_story_issue_date_value'));
   $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
   $query->condition('story_section.bundle', 'story', '=');
-  $query->orderBy('n.created', DESC);
+  $query->fields('itg_order');
+  $query->condition('itg_order.extra','%' . db_like($issue_date_cat) . '%', 'LIKE');
+  $query->condition('itg_order.widget', 'issue_primary_category_magazin_widget', '=');
+  $query->orderBy('itg_order.weight', ASC);
   $results = $query->execute();
   foreach($results as $value){
-    $result[$value->field_story_category_tid][] = $value;
+    $result[$value->field_primary_category_value][] = $value;
   }
   return $result;
 }
@@ -869,19 +977,24 @@ function itg_msi_issue_category_data($issue_date){
  * @return array
  */
 function itg_msi_issue_suppliment_data($issue_date){
+  $time = strtotime($issue_date);
+  $issue_date_cat = date('d-m-Y', $time);
   $query = db_select('node', 'n');
   $query->join('field_data_field_story_magazine_story_issue', 'issue_based', 'n.nid = issue_based.entity_id');
   $query->join('field_data_field_story_issue_date', 'issue_date', 'n.nid = issue_date.entity_id');
   $query->join('field_data_field_story_select_supplement', 'story_supplement', 'n.nid = story_supplement.entity_id');
-  $query->join('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
-  $query->join('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
+  $query->leftJoin('field_data_field_story_extra_large_image', 'story_large_image', 'n.nid = story_large_image.entity_id');
+  $query->leftJoin('file_managed', 'f_managed', 'f_managed.fid = story_large_image.field_story_extra_large_image_fid');
   $query->fields('n', array('nid', 'title'));
   $query->fields('issue_date', array('field_story_issue_date_value'));
   $query->fields('f_managed', array('fid', 'uri'));
   $query->fields('story_supplement', array('field_story_select_supplement_target_id'));
+  $query->join('itg_widget_order', 'itg_order', 'story_supplement.field_story_select_supplement_target_id = itg_order.nid');
  // $query->condition(db_or()->isnotNull('story_supplement.field_story_select_supplement_target_id'));
   $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
-  $query->orderBy('n.created', DESC);
+  $query->condition('itg_order.extra','%' . db_like($issue_date_cat) . '%', 'LIKE');
+  $query->condition('itg_order.widget', 'issue_supplement_magazin_widget', '=');
+  $query->orderBy('itg_order.weight', ASC);
   $results = $query->execute();
   foreach($results as $value){
     $result[$value->field_story_select_supplement_target_id][] = $value;
@@ -889,10 +1002,40 @@ function itg_msi_issue_suppliment_data($issue_date){
   return $result;
 }
 
+/*
+ * Implements itg_msi_issue_suppliment_title
+ * @param int $nid
+ */
 function itg_msi_issue_suppliment_title($nid){
   $query = db_select('node', 'n');
   $query->fields('n', array('title'));
   $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchField();
   return t($result);
+}
+
+/*
+ * Implements itg_msi_get_lock_story_status
+ * @param int $nid
+ * @param string $val
+ */
+function itg_msi_get_lock_story_status($nid, $val){
+  $query = db_select('field_data_field_story_configurations', 'c');
+  $query->fields('c', array('field_story_configurations_value'));
+  $query->condition('c.entity_id', $nid, '=');
+  $query->condition('c.bundle', 'story', '=');
+  $query->condition('c.field_story_configurations_value', $val, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+/**
+ * Implements hook_views_api().
+ *
+ * {@inheritdoc}.
+ */
+function itg_msi_views_api() {
+  return array(
+    'api' => 3,
+  );
 }

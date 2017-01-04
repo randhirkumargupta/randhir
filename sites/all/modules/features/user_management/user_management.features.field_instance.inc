@@ -481,6 +481,48 @@ function user_management_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_user_pincode'.
+  $field_instances['user-user-field_user_pincode'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 14,
+      ),
+    ),
+    'entity_type' => 'user',
+    'exclude_cv' => 0,
+    'field_name' => 'field_user_pincode',
+    'label' => 'Pincode',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 31,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_user_qualification'.
   $field_instances['user-user-field_user_qualification'] = array(
     'bundle' => 'user',
@@ -559,6 +601,7 @@ function user_management_field_default_field_instances() {
   t('Mobile number');
   t('Notify user of update account');
   t('Picture');
+  t('Pincode');
   t('Please enter your first name.');
   t('Please enter your last name.');
   t('Please enter your mobile number.');

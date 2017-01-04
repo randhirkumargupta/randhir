@@ -92,12 +92,14 @@ function feature_for_reporter_views_default_views() {
   $handler->display->display_options['fields']['field_reporter_email_id']['table'] = 'field_data_field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['field'] = 'field_reporter_email_id';
   $handler->display->display_options['fields']['field_reporter_email_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_reporter_email_id']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_reporter_email_id']['alter']['text'] = '([field_reporter_email_id])';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title] ([field_reporter_email_id])';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title] [field_reporter_email_id]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Has taxonomy term ID */

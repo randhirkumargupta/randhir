@@ -70,7 +70,9 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
-    <main id="main" class="container">
+    
+    <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -92,8 +94,16 @@ if ($theme != 'itgadmin') {
  
 
 <div class="itg-layout-container <?php echo $itg_class; ?> tech-layout-page">
-    <?php $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
-  print render($block['content']); ?>
+    <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
+    <?php // $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
+ // print render($block['content']); ?>
     <?php if(isset($widget_data['big_story'])) : ?>
     <div class="row">
         <div class="col-md-12">

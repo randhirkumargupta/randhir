@@ -1,4 +1,4 @@
-<div class="sports-video">
+<div class="page-sports-video">
     <div class="view-content">
         <ul class="photo-list">  
             <?php
@@ -7,7 +7,7 @@
                 ?>
                 <li class="col-md-3">
                     <div class="tile">
-                        <figure><?php print $row['field_story_extra_large_image']; ?>
+                        <figure><?php print $row['field_story_small_image']; ?>
                             <figcaption><i class="fa fa-play-circle"></i> <?php echo $row['field_video_duration']; ?></figcaption>
                         </figure>
                         <span class="posted-on"><?php echo $row['created']; ?></span>

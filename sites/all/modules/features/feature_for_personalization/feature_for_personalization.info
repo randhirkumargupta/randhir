@@ -11,7 +11,6 @@ dependencies[] = sliderfield
 dependencies[] = views_infinite_scroll
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
-features[flag][] = follow
 features[flag][] = my_saved_content
 features[user_permission][] = flag my_saved_content
 features[user_permission][] = unflag my_saved_content

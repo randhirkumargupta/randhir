@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature Live tv front page feature.
+ */
+
+include_once 'feature_live_tv_front_page.features.inc';

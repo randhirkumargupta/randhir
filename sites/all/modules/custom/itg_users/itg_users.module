@@ -34,13 +34,13 @@ function itg_users_menu() {
     'file' => 'includes/itg_users.inc',
   );
 
-  $items['user-block'] = array(
-    'title' => 'User Block',
-    'page callback' => 'itg_users_block_user',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_users.inc',
-  );
+//  $items['user-block'] = array(
+//    'title' => 'User Block',
+//    'page callback' => 'itg_users_block_user',
+//    'access callback' => TRUE,
+//    'type' => MENU_CALLBACK,
+//    'file' => 'includes/itg_users.inc',
+//  );
 
   $items['access-denied'] = array(
     'page callback' => 'itg_users_access_denied',
@@ -53,9 +53,14 @@ function itg_users_menu() {
 /**
  * Implements hook_form_alter().
  */
-function itg_users_form_alter(&$form, &$form_state, $form_id) {
+function itg_users_form_alter(&$form, &$form_state, $form_id) {  
   global $user;
-
+  if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
+    // Sort roles in alphabetical order.
+    $edrole = $form['account']['roles']['#options'];
+    asort($edrole);
+    $form['account']['roles']['#options'] = $edrole;
+  }
   if (isset($form['confirm']['#value'])) {
     // hide remove button of first field on add form 
     drupal_add_js('jQuery(document).ready(function() {
@@ -79,7 +84,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_profile_form') {
     // access denied code for direct hit 
     if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2) == 'edit' && arg(1) != $user->uid) {
-      $arg = arg(1);            
+      $arg = arg(1);
       $user_child_roles = itg_users_role_delegation($user->roles);
       $user_role = user_load($arg);
       $user_intersec = array_intersect($user_role->roles, $user_child_roles);
@@ -459,7 +464,7 @@ function itg_users_theme($existing, $type, $theme, $path) {
  */
 function itg_users_user_login(&$edit, $account) {
   $role_count = count($account->roles);
-  
+
   //p($account->roles);
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
@@ -762,4 +767,18 @@ function itg_users_access_denied() {
  */
 function itg_users_js_alter(&$javascript) {
   $javascript['modules/user/user.js']['data'] = drupal_get_path('module', 'itg_users') . '/js/custom_user.js';
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_users_cronapi($op, $job = NULL) {
+  $items['itg-user-block'] = array(
+    'description' => 'user expired by cron.',
+    'callback' => 'itg_users_block_user',
+    'file' => 'includes/itg_users.inc',
+  );
+
+  return $items;
 }

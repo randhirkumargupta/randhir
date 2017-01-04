@@ -190,7 +190,15 @@ function itg_survey_form_after_build($form, &$form_state) {
    $form['#attached']['js'] = array(
     drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js',
    );
-    
+
+   // Hide multiple answer options in case of "rating" 
+   for ($ques = 0; $ques <= $form['field_survey_add_questions']['und']['#max_delta']; $ques++) {
+     if($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_type'][LANGUAGE_NONE]['#default_value'][0] == 'rating') {
+        unset($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_option_2']);
+
+     }
+   }
+
   // Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
   unset($form['metatags'][LANGUAGE_NONE]['basic']['#title']);
@@ -725,25 +733,45 @@ function itg_survey_get_mail_content($node, $user){
  */
 function itg_survey_pqs_generatetokens() {
   $type = arg(2);
-    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1));
+  drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1));
+  
   $query = db_select('node', 'n');
+  if ($type == 'poll') {
+    $query->join('field_data_field_poll_start_date', 'sd', 'n.nid = sd.entity_id');
+    $query->join('field_data_field_poll_end_date', 'ed', 'n.nid = ed.entity_id');
+    $query->fields('sd', array('field_poll_start_date_value'))
+            ->fields('ed', array('field_poll_end_date_value'));
+  } else {
+    $query->join('field_data_field_survey_start_date', 'sd', 'n.nid = sd.entity_id');
+    $query->join('field_data_field_survey_end_date', 'ed', 'n.nid = ed.entity_id');
+    $query->fields('sd', array('field_survey_start_date_value'))
+            ->fields('ed', array('field_survey_end_date_value'));
+  }
+
   $query->fields('n', array('nid', 'title'))
-        ->condition('n.status', '1', '=')
-        ->condition('n.type', $type, '=');
+          ->condition('n.type', $type)
+          ->condition('n.status', '1')
+          ->orderBy('n.changed', 'DESC');
   $result = $query->execute();
   
   // Fetch node title and nid
-  while($record = $result->fetchAssoc()){
-    if(strlen($record['title']) > 30) {
-      $title = substr($record['title'], 0, 30).'...';
-    } 
-    else {
-      $title = $record['title'];
+  while ($record = $result->fetchAssoc()) {
+    if ($type == 'poll') {
+      $end_date = strtotime('+1 day', strtotime($record['field_poll_end_date_value']));
+    } else {
+      $end_date = strtotime('+1 day', strtotime($record['field_survey_end_date_value']));
     }
     
-    $options['[ITG:'.strtoupper($type).':'.$record['nid'].']'] = $title;
+    if (time() <= $end_date) {
+      if (strlen($record['title']) > 30) {
+        $title = substr($record['title'], 0, 30) . '...';
+      } else {
+        $title = $record['title'];
+      }
+      $options['[ITG:' . strtoupper($type) . ':' . $record['nid'] . ']'] = $title;
+    }
   }
-  
+
   $form = array();
   $form['pqs-listing-heading'] = array(
       '#type' => 'markup',
@@ -786,6 +814,44 @@ function itg_survey_pqs_associate_with_story($token) {
    print drupal_render($form);
 }
 
+function itg_survey_pqs_associate_poll_with_story($nid){
+  
+  $node = node_load($nid);
+  $poll_banner_image = '';
+  if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
+    $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
+  }
+  else {
+    $poll_banner_image = '';
+  }
+  
+  $poll_image_exist_class = '';
+
+  foreach ($node->field_poll_answer['und'] as $row) {
+    $item_id[] = $row['value']; // fieldcollection id
+  }
+// instant or after complete
+
+  $fieldcollect = entity_load('field_collection_item', $item_id);
+  if (is_array($fieldcollect) && count($fieldcollect) > 0) {
+    $temp_ent = array_shift(array_slice($fieldcollect, 0, 1));
+    $poll_answer_image = isset($temp_ent->field_poll_answer_image[LANGUAGE_NONE]) ? $temp_ent->field_poll_answer_image[LANGUAGE_NONE][0]['fid'] : '';
+    if (isset($poll_answer_image) && $poll_answer_image > 0) {
+      $poll_image_exist_class = 'poll-option-image';
+    }
+    else {
+      $poll_image_exist_class = '';
+    }
+  }
+
+
+  $polls_info['poll_banner_image'] = $poll_banner_image;
+  $polls_info['nid'] = $nid;
+  $polls_info['title'] = $node->title;
+  $polls_info['updated'] = t('Updated: ') . date('M d Y H:i', $node->changed);
+  $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
+  return theme('itg_poll_homepage_forms', array('data' => $polls_info));
+}
 
 /**
  * Validate function of survey form
@@ -793,9 +859,15 @@ function itg_survey_pqs_associate_with_story($token) {
  * @param array $form_state
  */
 function itg_survey_survey_form_validate($form, &$form_state) {
-  
+  global $user;
   $form_detail = $form_state['values'];
-  $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'];
+  
+  if($user->uid) {
+    $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'] . '_'. $user->uid;
+  } else {
+    $cookie_name = 'Drupal_visitor_itgcms_survey_' . $form_state['values']['nid'];
+  }
+  
 
   if (isset($_COOKIE[$cookie_name])) {
     form_set_error('answer_option', t('Sorry! You can not proceed, you have already taken this survey!'));
@@ -1023,7 +1095,11 @@ function itg_survey_survey_form_submit($form, &$form_state) {
   if(strtolower($form_state['clicked_button']['#value']) == 'submit') {
     
     // Set cookie for survey
-    user_cookie_save(array('itgcms_survey_'.$form_state['values']['nid'] => 1));
+    if($user->uid) {
+      user_cookie_save(array('itgcms_survey_'.$form_state['values']['nid'].'_'.$user->uid => 1));
+    } else {
+      user_cookie_save(array('itgcms_survey_'.$form_state['values']['nid'] => 1));
+    }
     
     // Insert in to survey user table
     db_insert('itg_survey_user')
@@ -1045,6 +1121,13 @@ function itg_survey_survey_form_submit($form, &$form_state) {
             ->execute();
     
     unset($_SESSION['survey_unique_key']);
+
+    // Call loyalty & rewards function to save points for a user
+    if(function_exists('itg_loyalty_reward_earnpoint')) {
+      if($user->uid) {
+        itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
+      }
+    }
   }
 
   // Display message on final submit.

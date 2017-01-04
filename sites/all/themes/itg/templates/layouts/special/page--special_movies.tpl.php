@@ -70,7 +70,9 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
-    <main id="main" class="container">
+    
+    <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
@@ -91,9 +93,15 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?> movie-layout-page">    
-<?php $block = module_invoke('itg_menu_manager', 'block_view', 'third_level_menu');
-  print render($block['content']); ?>
+<div class="itg-layout-container <?php echo $itg_class; ?> movie-layout-page ">
+    <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
      <div class="row itg-top-section itg-layout-580">
         
         <div class="top-block">
@@ -145,7 +153,7 @@ if ($theme != 'itgadmin') {
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                 </div>  
                               <?php } ?>                   
-                            <div class="data-holder" widget-style="auto-road-trip" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
+                            <div class="data-holder" widget-style="standpoint" id="itg-block-3"><?php print $widget_data['itg-block-3']['widget']; ?></div>
                           </div>
                         </div>
                       </div>

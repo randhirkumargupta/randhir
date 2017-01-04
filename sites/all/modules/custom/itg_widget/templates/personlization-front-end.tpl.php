@@ -19,9 +19,9 @@
             if (isset($node_info['node_data']['uri'])) {
               $style_name = ($frist_key == 0) ? 'recommended_for_you_large' : "video_landing_page_170_x_127";
               print theme('image_style', array(
-                  'style_name' => $style_name,
-                  'path' => $node_info['node_data']['uri'],
-                              )
+                'style_name' => $style_name,
+                'path' => $node_info['node_data']['uri'],
+                      )
               );
             }
             else {
@@ -32,7 +32,7 @@
           </a>
         </div>
         <div class="detail">
-          <h4><?php print $node_info['taxonomy_name']; ?>  </h4>
+          <h4><?php print l($node_info['taxonomy_name']->name, "taxonomy/term/" . $node_info['taxonomy_name']->tid) ?>  </h4>
           <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
             <?php
             if ($frist_key == 0) {
@@ -61,9 +61,9 @@
               <?php
               if (isset($node_info['node_data']['uri'])) {
                 print theme('image_style', array(
-                    'style_name' => 'video_landing_page_170_x_127',
-                    'path' => $node_info['node_data']['uri'],
-                                )
+                  'style_name' => 'video_landing_page_170_x_127',
+                  'path' => $node_info['node_data']['uri'],
+                        )
                 );
               }
               else {
@@ -74,7 +74,7 @@
           </div>
 
           <div class="detail">
-            <h4><?php print $node_info['taxonomy_name']; ?></h4>
+            <h4><?php print l($node_info['taxonomy_name']->name, "taxonomy/term/" . $node_info['taxonomy_name']->tid) ?>  </h4>
             <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_info['node_data']['nid']}"); ?>">
               <?php echo mb_strimwidth($node_info['node_data']['title'], 0, 80, ".."); ?>
             </a>

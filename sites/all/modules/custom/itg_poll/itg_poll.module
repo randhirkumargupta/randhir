@@ -97,11 +97,11 @@ function alter_submit_status_message(&$form, $form_state) {
 function itg_poll_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_poll') . '/js/itg_pollnew.js', array('weight' => 3));
   global $user, $base_url;
-  unset($form['metatags']['intro_text']['#markup']);
-  $form['title']['#title'] = 'Poll Question';
-  $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+//  unset($form['metatags']['intro_text']['#markup']);
+//  $form['title']['#title'] = 'Poll Question';
+//  $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
+//  unset($form['metatags']['intro_text']['#markup']);
+//  unset($form['metatags']['#description']);
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
@@ -505,7 +505,7 @@ function itg_poll_theme($existing, $type, $theme, $path) {
  * {@inheritdoc}
  */
 function itg_poll_views_pre_render(&$view) {
-  if ($view->name == "poll_listing" && ($view->current_display == 'page' || $view->current_display == 'page_1')) {
+  if ($view->name == "poll_listing" && ($view->current_display == 'page' || $view->current_display == 'page_1' || $view->current_display == 'page_2')) {
     $poll_content = '';
     $poll_content .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $poll_content .= l(t('Create Poll'), 'node/add/poll', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
@@ -747,8 +747,16 @@ function itg_poll_get_past_data($nid) {
       }
     }
   }
-
+  //pr(date('Y-m-d H:i:s'));
+ 
+if($node->field_display_result[LANGUAGE_NONE][0]['value']==1)
+{
   return '<ul class="past-poll">' . $outputnew . '</ul>';
+}else if($node->field_display_result[LANGUAGE_NONE][0]['value']==2 && $node->field_poll_end_date[LANGUAGE_NONE][0]['value']<= date('Y-m-d H:i:s')){
+      return '<ul class="past-poll">' . $outputnew . '</ul>';
+}else{
+   return '<p class="get-result">You will get the result after poll compilation</p>';   
+}
 }
 
 /**
@@ -760,6 +768,11 @@ function itg_poll_menu() {
     'title' => 'Active Polls',
     'page callback' => 'itg_active_polls_page',
     'access callback' => TRUE,
+  );
+  $items['associate-content-poll'] = array(
+        'page callback' => 'associate_content_poll',
+        'access arguments' => array('access itg story'),
+        'type' => MENU_CALLBACK,        
   );
 
   return $items;
@@ -989,4 +1002,150 @@ function itg_poll_query_poll_landing_past_poll_alter(QueryAlterableInterface $qu
   $db_and->condition('o.field_poll_end_date_value', $cur_date, '<');
   $or->condition($db_and);
   $query->condition($or);
+}
+
+/**
+ * Get total content count of poll
+ * @param int $poll_id
+ * @return int
+ */
+function total_poll_count_content($poll_id) {
+  return db_select('itg_poll_count_content', 'p')
+          ->fields('p', array('id'))
+          ->condition('p.poll_id', $poll_id)->execute()->rowCount();
+}
+
+function itg_poll_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'poll') {
+    $poll_count = total_poll_count_content($node->nid);
+    $node->content['poll_count'] = '<div class="field"><div class="field-label">' . t('Associate content count:'). '</div><div class="field-items">'.$poll_count.'</div></div><div class="field">'.l(t('Associate content view'), 'associate-content-poll/'.$node->nid). '</div>';
+  }
+}
+
+/**
+ * Get associate content poll list
+ * @return array $output //http://localhost/itg-cms/content/testttt
+ */
+function associate_content_poll() {
+  // configure the table header columns
+  $header = array(
+    array('data' => t('S.No.')),
+    array('data' => t('Title')),
+    array('data' => t('ID')),
+    array('data' => t('Status')),
+    array('data' => t('Content type')),    
+    array('data' => t('Action')),
+  );
+  
+  if ($_GET['items_per_page']) {
+    $items_per_page = $_GET['items_per_page'];
+  }
+  else {
+    $items_per_page = 10;
+  }
+  $current_time = date("Y-m-d H:i:s");
+  
+  $itg_query = db_select('itg_poll_count_content', 'p');
+  $itg_query->fields('p', array('content_id', 'content_type'));  
+  $itg_query->join('node', 'n', 'n.nid = p.content_id');
+  $itg_query->join('workbench_moderation_node_history', 'w', 'w.nid = n.nid');
+  $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id'); 
+  $itg_query->fields('n', array('title', 'status'));
+  $itg_query->fields('expiry', array('field_story_expiry_date_value'));
+  $itg_query->fields('w', array('state'));
+  $itg_query->extend('PagerDefault')->limit($items_per_page);
+  $itg_query->condition('p.poll_id', arg(1));
+  $itg_query->condition('w.is_current', 1);
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  $rows = array();
+  
+  $count = 0;
+  
+  foreach ($itg_result as $row) {
+    if (empty($row->field_story_expiry_date_value) || ($row->field_story_expiry_date_value >= $current_time)) {
+      $action_link = l(t('Edit'), 'node/'.$row->content_id.'/edit');
+      $status = $row->state;
+    } else {
+      $action_link = '';
+      $status = 'Expired';
+    }
+    
+    $rows[] = array(
+      array('data' => $count+1),
+      array('data' => $row->title),
+      array('data' => $row->content_id),
+      array('data' => $status),
+      array('data' => $row->content_type),
+      array('data' => $action_link),
+      //array('data' => l(t('Edit'), 'itg-layout-manager/'.  arg(1), array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
+    );
+    $count++;
+  }
+  
+  
+  $output = '<div class="view"><div class="attachment"><span class="count">Count (' . $count . ') </span>';    
+  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
+
+  // add the pager
+  $output .= theme('pager');
+
+  return $output;
+ 
+}
+
+/**
+ * Implements hook_node_insert
+ * {@inheritdoc}
+ */
+function itg_poll_node_insert($node) {  
+  if ($node->type == 'story') {
+    poll_count_of_content($node->body['und'][0]['value'], $node, 'insert');
+  }  
+}
+
+/**
+ * Implements hook_node_update
+ * {@inheritdoc}
+ */
+function itg_poll_node_update($node) {  
+  if ($node->type == 'story') {
+    poll_count_of_content($node->body['und'][0]['value'], $node, 'update');
+  }
+}
+
+/**
+ * save content id with poll in custom table
+ * @param string $desc
+ * @param array $node
+ * @return //2464
+ */
+
+function poll_count_of_content($desc, $node, $action) {
+  if ($action == 'update') {
+    //row delete
+    db_delete('itg_poll_count_content')->condition('content_id', $node->nid)->execute();
+  }
+        
+  if (strpos($desc,'[ITG:POLL:')) {
+    if (preg_match_all ('/ITG:POLL:([0-9]+)/', $desc, $matches_poll)) {
+
+      $poll_nid = $matches_poll[1];
+      
+      if (isset($poll_nid)) {       
+        //row insert
+        foreach ($poll_nid as  $key => $val) {
+          $query = db_insert('itg_poll_count_content');
+          $query->fields(array(
+             'content_id' => $node->nid,
+             'poll_id' => $val,
+             'content_type' => $node->type,                 
+           ));          
+          $query->execute();
+        }
+        
+      }
+    }
+  }
 }

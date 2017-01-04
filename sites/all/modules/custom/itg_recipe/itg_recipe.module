@@ -42,6 +42,7 @@ function itg_recipe_node_presave($node) {
 function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'recipe_node_form':
+    case 'page_node_form':
       // Social Media Integration field show hide
       itg_recipe_smi_hideshow($form);
       // Save as draft button
@@ -120,6 +121,10 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
     case 'videogallery_node_form':
       itg_recipe_smi_hideshow($form);
       break;
+    case 'survey_node_form':
+    case 'quiz_node_form':
+    case 'newsletter_node_form':
+    case 'podcast_node_form':
     case 'astro_node_form':
       itg_recepi_save_draft_button($form);
       break;
@@ -128,6 +133,12 @@ function itg_recipe_form_alter(&$form, &$form_state, $form_id) {
       if ($form['field_poll_itg_state']['und']['#default_value'] == 0) {
         itg_recepi_save_draft_button($form);
       }
+    case 'event_backend_node_form':
+      // Save as draft button
+      if ($form['field_step_completion']['und'][0]['value']['#default_value'] == '0') {
+        itg_recepi_save_draft_button($form);
+      }
+      break;
   }
 }
 
@@ -163,6 +174,9 @@ function itg_recipe_smi_hideshow(&$form) {
   $form['field_story_facebook_narrative']['#states'] = array(
       'visible' => array(
           ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
+      ),
+      'required' => array(
+          ':input[name="field_story_social_media_integ[und][facebook]"]' => array('checked' => TRUE),
       )
   );
 
@@ -190,6 +204,9 @@ function itg_recipe_smi_hideshow(&$form) {
   // code for tweet field show and hide 
   $form['field_story_tweet']['#states'] = array(
       'visible' => array(
+          ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
+      ),
+      'required' => array(
           ':input[name="field_story_social_media_integ[und][twitter]"]' => array('checked' => TRUE),
       ),
   );
@@ -259,10 +276,8 @@ function itg_cooking_tips_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-  
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  }  
+ 
   //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
   $settings = array();
   $settings['base_url'] = $base_url;
@@ -316,10 +331,8 @@ function itg_food_news_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-  
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
+  }  
+ 
   //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
   $settings = array();
   $settings['base_url'] = $base_url;
@@ -370,10 +383,8 @@ function itg_recipe_after_build($form, &$form_state) {
     drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-reporter-und-0-remove-button").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));
-  }
+  }  
   
-  unset($form['metatags']['intro_text']['#markup']);
-  unset($form['metatags']['#description']);
   //$form['field_recipe_description']['und'][0]['value']['#title'] = t('Description / Procedure').'<span class="form-required" title="This field is required."> *</span>';  
   $settings = array();
   $settings['base_url'] = $base_url;

@@ -8,6 +8,10 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   $arg = arg();
   if(!empty($arg[1]) && $arg[1] == 'domain_info') {
     $appnd_to_lnk = '/'.$arg[1];
+    $domain_arg = $arg[1];
+  }
+  if(!empty($arg[1]) && $arg[1] != 'domain_info') {
+    $url_arg = $arg[1];
   }
 // If $form_state['step'] is not set, we set it to 1
   $form_state['step'] = isset($form_state['step']) ? $form_state['step'] : 1;
@@ -18,14 +22,17 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
 
   drupal_add_js(array('itg_sso_reg' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js');
-
-  if ($form_state['step'] == '1') {
+  
+  $step_ext_div = '';
+  
+  if (isset($form_state['step']) && ($form_state['step'] == '1')) {
     $fn_link = 'saml_login/other'.$appnd_to_lnk;
-    $ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
+    $step_ext_div = '<div class="sign-in-link">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
   }
   // Add a wrapper div that will be used by the Form API to update the form using AJAX
   $form['#prefix'] = '<div id="itg_sso_reg_multistep_form">';
-  $form['#suffix'] = $ext_div . '</div>';
+  $form['#suffix'] = $step_ext_div . '</div>';
+  $form['#attributes'] = array('autocomplete' => 'off');
 
   // Depending on which step of the form we are on, we output different form fields
   switch ($form_state['step']) {
@@ -44,7 +51,17 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#id' => '',
         '#type' => 'hidden',
-        '#value' => $arg[1],
+        '#value' => $domain_arg,
+        '#attributes' => array('placeholder' => t('')),
+        
+      );
+      
+      $form['url_info'] = array(
+        '#title' => '',
+        '#description' => '',
+        '#id' => '',
+        '#type' => 'hidden',
+        '#value' => $url_arg,
         '#attributes' => array('placeholder' => t('')),
         
       );
@@ -73,10 +90,10 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#description' => '',
         '#type' => 'textfield',
         '#attributes' => array('placeholder' => t('Email'), 'autocomplete' => 'off'),
-        '#prefix' => '<div class="form-row"><div id="umail" class="col-xs-6">',
+        '#prefix' => '<div class="form-row email-or-mobile"><div id="umail" class="col-xs-6">',
         '#suffix' => '</div>',
       );
-
+      
       $form['mobile'] = array(
         '#title' => 'Mobile',
         '#description' => '',
@@ -126,7 +143,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         $mail = $form_state['values']['mail'];
       }
       else {
-        $mail = $form_state['values']['fname'] . '@' . 'indiatoday.com';
+        $mail = $form_state['values']['fname'] . '@' . 'nowhere.com';
       }
 
       $form['domain_info'] = array(
@@ -218,7 +235,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       );
       
       $form['thank-you'] = array(
-        '#markup' => '<div id="email-sucess">You are registered successfully please check your mail for further information!</div>',
+        '#markup' => '<div id="email-sucess">Your account has been successfully created.Please check your email for further information!</div>',
       );
 
       $form['sgn-link'] = array(
@@ -384,7 +401,17 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
 
       $pass = $form_state['values']['password'];
       $cpass = $form_state['values']['password_again'];
-
+      
+      $min_length = 3;
+      $max_length = 10;
+      
+      if (strlen($pass) < $min_length) {
+        form_set_error('pass', t('password is too short, minimum is '. $min_length. ' characters '));
+      }
+      elseif (strlen($pass) > $max_length) {
+        form_set_error('pass', t('password is too long, maximum is '. $max_length. ' characters '));
+      }
+      
       if ($pass != $cpass) {
         form_set_error('pass', t('Password do not match.'));
       }
@@ -436,15 +463,15 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
         $mobile = $form_state['values']['mobile'];
       }
 
-      // if email field empty fill firstname@indiatoday.com as dummy name
+      // if email field empty fill firstname@nowhere.com as dummy name
       if (empty($form_state['values']['mail'])) {
-        $mail = $form_state['values']['fname'] . '@' . 'indiatoday.com';
+        $mail = $form_state['values']['fname'] . '@' . 'nowhere.com';
       }
       else {
         $mail = $form_state['values']['mail'];
       }
-
-
+      
+      // prepare array for user
       $edit = array(
         'name' => $mobile,
         'pass' => $form_state['values']['password'],
@@ -471,19 +498,35 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
           FRONT_USER => 'Front User',
         ),
       );
+      
+      if (is_numeric($mobile)) {
+        $edit['field_mobile_number'] = array(LANGUAGE_NONE => array(
+            0 => array(
+              'value' => $mobile
+            )
+          )
+        );
+      }
+
 
       try {
 
         $account = user_save(NULL, $edit);
 
-
+        if(function_exists(itg_personalization_reddem_referfriend)) {
+          itg_personalization_reddem_referfriend($_SESSION['referral_key']);
+          unset($_SESSION['referral_key']);
+        }
         // Set operation.
         $op = 'register_no_approval_required';
         // Send an email.
         if (empty($form_state['values']['mobile'])) {
           // _user_mail_notify($op, $account);
           if (function_exists(itg_sso_get_mail_content)) {
-            $mail_content = itg_sso_get_mail_content($account, $mail);
+            if(!empty($form_state['values']['url_info'])) {
+              $url_info = $form_state['values']['url_info'];
+            }
+            $mail_content = itg_sso_get_mail_content($account, $mail, $url_info);
           }
           itg_user_mapping_activate($account->uid);
         }

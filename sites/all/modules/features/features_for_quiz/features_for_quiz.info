@@ -96,5 +96,6 @@ features[variable][] = menu_parent_quiz
 features[variable][] = node_options_quiz
 features[variable][] = node_preview_quiz
 features[variable][] = node_submitted_quiz
+features[variable][] = pathauto_node_quiz_pattern
 features[views_view][] = manage_quiz
 features[views_view][] = question_list

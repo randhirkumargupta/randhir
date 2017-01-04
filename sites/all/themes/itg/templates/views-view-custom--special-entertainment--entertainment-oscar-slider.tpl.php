@@ -3,13 +3,25 @@
         <ul>
             <?php
             foreach ($rows as $index => $row) {
+                
+                    $video_class = "";
+                    if (strtolower($row['type']) == 'videogallery') {
+                        $video_class = 'video-icon';
+                    }
                 $first_image="";
                 if($index==0)
                 {
                     $first_image="first-image";
                 }
+                if(!empty($row['field_story_extra_large_image'])){
+                  $img = $row['field_story_extra_large_image'];
+                  
+                }else{
+                  global $base_url;
+                  $img = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_video_slider.jpg' />";
+                }
                 ?>
-            <li class="<?php echo $first_image; ?> image-tab-<?php echo $index; ?> common-img"><?php print $row['field_story_extra_large_image']; ?></li>
+            <li class="<?php echo $first_image; ?> image-tab-<?php echo $index; ?> common-img"><?php print l($img, 'node/'.$row['nid'], array('html' => TRUE)); ?><?php if (strtolower($row['type']) == 'videogallery') {print '<span class="osccar-play-icon"><i class="fa fa-play" aria-hidden="true"></i></span>';}?></li>
             <?php }; ?>
         </ul>
 
@@ -18,11 +30,15 @@
         <ul>
             <?php
             foreach ($rows as $index => $row) {
+                
+                    $video_class = "";
+                    if (strtolower($row['type']) == 'videogallery') {
+                        $video_class = 'video-icon';
+                    }
                 $desc = $row['title'];                                
                 ?>
-            
                 <li data-tag="image-tab-<?php echo $index; ?>">
-                    <?php print $row['field_story_extra_large_image_1']; ?>
+                    <a href="javascript:void(0)" class="<?php echo $video_class;?>"><?php print $row['field_story_extra_large_image_1']; ?></a>
                     <p class="title"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
                 </li>
             <?php }; ?>

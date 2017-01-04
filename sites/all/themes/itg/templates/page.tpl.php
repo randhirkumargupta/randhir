@@ -8,7 +8,7 @@
  */
 
 ?>
-<?php if($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
+<?php if($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 <script>
 window.addEventListener("message", function(ev) {
     if (ev.data.message === "requestResult") {
@@ -59,7 +59,9 @@ window.addEventListener("message", function(ev) {
     endif; ?>
   <?php print render($page['top']); ?>
   <?php print render($page['my_cart']); ?>
-  <main id="main" class="container">
+  
+  <main id="main" class="container pos-rel">
+    <?php print render($page['vertical_menu']); ?>
     <div class="row">
     <section id="content" class="<?php echo $cls;?>" role="main">
       <?php print render($page['highlighted']); ?>
@@ -67,9 +69,22 @@ window.addEventListener("message", function(ev) {
       <?php endif; ?>
      
       <a id="main-content"></a>
+      <!-- Page title for specific page -->
+      <?php $arg = arg(); ?>
+      <?php
+          $flag = '';
+          switch ($arg[0]) {
+              case 'product':
+              case 'cart':
+              case 'order':
+              case 'order-summary':
+                  $flag = TRUE;
+                  break;
+          }
+      ?>
       <?php print render($title_prefix); ?>
-      <?php if ($title): ?>
-        <h1 class="page__title title" id="page-title"><?php //print $title; ?></h1>
+      <?php if ($title && $flag): ?>
+        <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
@@ -127,6 +142,3 @@ window.addEventListener("message", function(ev) {
 
 <?php print render($page['bottom']); ?>
 <?php global $base_url; ?>
-<div id="widget-ajex-loader" style="display: none">
-    <img class="widget-loader" align="center" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
-</div>

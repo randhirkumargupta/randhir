@@ -46,11 +46,12 @@ function photogallery_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 0,
+            'upload' => 'upload',
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -69,7 +70,7 @@ function photogallery_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -177,7 +178,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -268,13 +269,13 @@ function photogallery_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 6,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_by',
-    'label' => 'Photo by',
+    'label' => 'Photo By',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -288,8 +289,8 @@ function photogallery_field_default_field_instances() {
         'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 4,
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 0,
     ),
   );
 
@@ -314,7 +315,7 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_byline',
-    'label' => 'Byline',
+    'label' => 'Photo By',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
@@ -330,6 +331,43 @@ function photogallery_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete_tags',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_gallery_image-field_story_strap_headline'.
+  $field_instances['field_collection_item-field_gallery_image-field_story_strap_headline'] = array(
+    'bundle' => 'field_gallery_image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_strap_headline',
+    'label' => 'Strap headline',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
     ),
   );
 
@@ -452,11 +490,12 @@ function photogallery_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 0,
+            'upload' => 'upload',
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -692,50 +731,6 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-photogallery-field_gallery_kicer'.
-  $field_instances['node-photogallery-field_gallery_kicer'] = array(
-    'bundle' => 'photogallery',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 1,
-    'field_name' => 'field_gallery_kicer',
-    'label' => 'Gallery Slug',
-    'required' => 0,
-    'settings' => array(
-      'display_summary' => 0,
-      'exclude_cv' => FALSE,
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 10,
-        'summary_rows' => 5,
-      ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-photogallery-field_itg_common_by_line_name'.
   $field_instances['node-photogallery-field_itg_common_by_line_name'] = array(
     'bundle' => 'photogallery',
@@ -875,7 +870,7 @@ function photogallery_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 25,
+        'weight' => 56,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -887,14 +882,9 @@ function photogallery_field_default_field_instances() {
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_photo_by',
-    'label' => 'Photo by',
+    'label' => 'Photo By',
     'required' => 0,
     'settings' => array(
-      'behaviors' => array(
-        'taxonomy-index' => array(
-          'status' => TRUE,
-        ),
-      ),
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
     ),
@@ -907,7 +897,7 @@ function photogallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 15,
+      'weight' => 56,
     ),
   );
 
@@ -935,7 +925,7 @@ function photogallery_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_primary_category',
     'label' => 'primary category',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -949,88 +939,6 @@ function photogallery_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 50,
-    ),
-  );
-
-  // Exported field_instance: 'node-photogallery-field_primary_category_html'.
-  $field_instances['node-photogallery-field_primary_category_html'] = array(
-    'bundle' => 'photogallery',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 53,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_primary_category_html',
-    'label' => 'Primary category html',
-    'required' => FALSE,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 52,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-photogallery-field_primary_category_html_text'.
-  $field_instances['node-photogallery-field_primary_category_html_text'] = array(
-    'bundle' => 'photogallery',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 55,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html_text',
-    'label' => 'Primary category textarea',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 55,
     ),
   );
 
@@ -1112,11 +1020,54 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-photogallery-field_story_expert_description'.
+  $field_instances['node-photogallery-field_story_expert_description'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 57,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_expert_description',
+    'label' => 'Short description',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 58,
+    ),
+  );
+
   // Exported field_instance: 'node-photogallery-field_story_extra_large_image'.
   $field_instances['node-photogallery-field_story_extra_large_image'] = array(
     'bundle' => 'photogallery',
     'deleted' => 0,
-    'description' => 'Image Size (650 x 445)',
+    'description' => 'Image Size (647 x 363)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1162,7 +1113,6 @@ function photogallery_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1469,7 +1419,8 @@ function photogallery_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -1546,7 +1497,7 @@ function photogallery_field_default_field_instances() {
   $field_instances['node-photogallery-field_story_large_image'] = array(
     'bundle' => 'photogallery',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 350)',
+    'description' => 'Image Size (483 x 271)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1592,7 +1543,6 @@ function photogallery_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -1623,7 +1573,7 @@ function photogallery_field_default_field_instances() {
   $field_instances['node-photogallery-field_story_medium_image'] = array(
     'bundle' => 'photogallery',
     'deleted' => 0,
-    'description' => 'Image Size (300 x 225)',
+    'description' => 'Image Size (370 x 208)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1866,11 +1816,53 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-photogallery-field_story_short_introtext'.
+  $field_instances['node-photogallery-field_story_short_introtext'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 59,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_short_introtext',
+    'label' => 'Content url',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 62,
+    ),
+  );
+
   // Exported field_instance: 'node-photogallery-field_story_small_image'.
   $field_instances['node-photogallery-field_story_small_image'] = array(
     'bundle' => 'photogallery',
     'deleted' => 0,
-    'description' => 'Image Size (210 x 145)',
+    'description' => 'Image Size (170 x 127)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1916,7 +1908,6 @@ function photogallery_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
-            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -2073,6 +2064,48 @@ function photogallery_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-photogallery-field_story_strap_headline'.
+  $field_instances['node-photogallery-field_story_strap_headline'] = array(
+    'bundle' => 'photogallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 58,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_strap_headline',
+    'label' => 'Strap headline',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 60,
+    ),
+  );
+
   // Exported field_instance: 'node-photogallery-field_story_syndication'.
   $field_instances['node-photogallery-field_story_syndication'] = array(
     'bundle' => 'photogallery',
@@ -2085,7 +2118,7 @@ function photogallery_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 44,
+        'weight' => 60,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2108,7 +2141,7 @@ function photogallery_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 34,
+      'weight' => 64,
     ),
   );
 
@@ -2128,6 +2161,7 @@ function photogallery_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 41,
@@ -2162,6 +2196,7 @@ function photogallery_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
+        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
@@ -2186,6 +2221,7 @@ function photogallery_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 43,
@@ -2220,6 +2256,7 @@ function photogallery_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
+        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
@@ -2244,6 +2281,7 @@ function photogallery_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 42,
@@ -2278,6 +2316,7 @@ function photogallery_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
+        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
@@ -2445,7 +2484,8 @@ function photogallery_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -2520,11 +2560,11 @@ function photogallery_field_default_field_instances() {
   t('Are you sure you want to Archive?');
   t('Audio');
   t('Bulk media upload');
-  t('Byline');
   t('Caption');
   t('Common Audio');
   t('Common Audio file');
   t('Common by line');
+  t('Content url');
   t('Credit Name');
   t('Credit/Source');
   t('Extra large image');
@@ -2534,29 +2574,28 @@ function photogallery_field_default_field_instances() {
   t('Facebook image');
   t('Facebook narrative');
   t('Gallery Image');
-  t('Gallery Slug');
   t('Image');
-  t('Image Size (210 x 145)');
-  t('Image Size (300 x 225)');
-  t('Image Size (300 x 350)');
-  t('Image Size (650 x 445)');
+  t('Image Size (170 x 127)');
+  t('Image Size (370 x 208)');
+  t('Image Size (483 x 271)');
+  t('Image Size (647 x 363)');
   t('Image Size (88 x 66)');
   t('Large image');
   t('Medium image');
   t('Node Identity');
-  t('Photo by');
+  t('Photo By');
   t('Posted By Instagram');
   t('Posted by Twitter');
   t('Posted by facebook');
-  t('Primary category html');
-  t('Primary category textarea');
   t('Related Content');
   t('Section');
   t('Set As Featured');
+  t('Short description');
   t('Small image');
   t('Social media integration');
   t('Source id');
   t('Source type');
+  t('Strap headline');
   t('Syndication');
   t('Tags');
   t('Time Facebook');

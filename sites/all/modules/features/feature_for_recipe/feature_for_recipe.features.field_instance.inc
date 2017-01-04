@@ -81,7 +81,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_primary_category',
     'label' => 'primary category',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -967,7 +967,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_primary_category',
     'label' => 'primary category',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -992,9 +992,10 @@ function feature_for_recipe_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 15,
       ),
       'teaser' => array(
@@ -1825,9 +1826,10 @@ function feature_for_recipe_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 50,
       ),
       'teaser' => array(
@@ -1841,7 +1843,7 @@ function feature_for_recipe_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_primary_category',
     'label' => 'primary category',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -1896,47 +1898,6 @@ function feature_for_recipe_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 52,
-    ),
-  );
-
-  // Exported field_instance: 'node-recipe-field_primary_category_html_text'.
-  $field_instances['node-recipe-field_primary_category_html_text'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 52,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_primary_category_html_text',
-    'label' => 'Primary category textarea',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 54,
     ),
   );
 
@@ -3513,48 +3474,6 @@ function feature_for_recipe_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-recipe-field_story_short_headline'.
-  $field_instances['node-recipe-field_story_short_headline'] = array(
-    'bundle' => 'recipe',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please enter strap headline.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 23,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_story_short_headline',
-    'label' => 'Strap headline (Short Headline)',
-    'required' => 1,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 8,
-    ),
-  );
-
   // Exported field_instance: 'node-recipe-field_story_small_image'.
   $field_instances['node-recipe-field_story_small_image'] = array(
     'bundle' => 'recipe',
@@ -4068,7 +3987,6 @@ function feature_for_recipe_field_default_field_instances() {
   t('Please enter kicker headline.');
   t('Please enter recipe garnishing.');
   t('Please enter recipe ingredients one value per line.');
-  t('Please enter strap headline.');
   t('Please select Ailment (e.g. Cancer, Hypertension etc.)');
   t('Please select Calorie Type (e.g. Medium etc.)');
   t('Please select Content type.');
@@ -4092,7 +4010,6 @@ function feature_for_recipe_field_default_field_instances() {
   t('Social media integration');
   t('Source id');
   t('Source type');
-  t('Strap headline (Short Headline)');
   t('Syndication');
   t('Time');
   t('Tweet');

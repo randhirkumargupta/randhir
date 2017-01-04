@@ -27,7 +27,7 @@ $row_nid = $row->nid;
 ?>
 <?php 
 if($view->name == 'live_tv_integration') {
-$output  = "<Input type = 'Radio' Name ='Web' value= 'Web' class = '$class' rel='$row_nid'> Web <Input type = 'Radio' Name ='Web Mobil' value= 'Web Mobil' class = '$class' rel='$row_nid'> Web Mobil <Input type = 'Radio' Name ='iOS' value= 'iOS' class = '$class' rel='$row_nid'> iOS <Input type = 'Radio' Name ='Android' value= 'Android' class = '$class' rel='$row_nid'> Android <Input type = 'Radio' Name ='Window' value= 'Window' class = '$class' rel='$row_nid'> Window";
+$output  = "<Input type = 'Radio' Name ='Web' value= 'Web' class = '$class' rel='$row_nid'> Web <Input type = 'Radio' Name ='Web Mobile' value= 'Web Mobile' class = '$class' rel='$row_nid'> Web Mobile <Input type = 'Radio' Name ='iOS' value= 'iOS' class = '$class' rel='$row_nid'> iOS <Input type = 'Radio' Name ='Android' value= 'Android' class = '$class' rel='$row_nid'> Android <Input type = 'Radio' Name ='Window' value= 'Window' class = '$class' rel='$row_nid'> Window";
 } 
 print $output; ?>
 

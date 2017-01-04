@@ -17,13 +17,11 @@ function save_itg_widget_personalization_data($updates) {
   $nids = array_keys($updates);
   // Delete all the tids from table if they are not in $updates variable
   // unsued tid should be delete
-  foreach ($updates as $tid => $weight) {
-    db_delete('itg_widget_order')
+  db_delete('itg_widget_order')
         ->condition('widget', $widget_name)
         ->condition('nid', $nids, "NOT IN")
         ->condition('extra', $user->uid)
         ->execute();
-  }
   // Update the weight of tids if exists or insert if dont exists.
   foreach ($updates as $termId => $weight) {
     db_merge('itg_widget_order')
@@ -36,7 +34,7 @@ function save_itg_widget_personalization_data($updates) {
         ))
         ->execute();
   }
-  drupal_set_message("My Preferences Has Been Save");
+  drupal_set_message("My Preferences Has Been Save.");
 }
 
 /**
@@ -180,7 +178,7 @@ function get_personlization_front_block_data() {
       $tid = $persionalization_data;
       $temp_node_data = get_personlization_node_data_for_front($nid);
       $texonomy_data = taxonomy_term_load($tid);
-      $front_end_data[] = array("node_data" => $temp_node_data[0], "taxonomy_name" => $texonomy_data->name);
+      $front_end_data[] = array("node_data" => $temp_node_data[0], "taxonomy_name" => $texonomy_data);
     }
   }
   return $front_end_data;

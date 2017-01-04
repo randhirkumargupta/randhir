@@ -76,13 +76,9 @@
     margin-left: 135px;
     margin-right: 50px;
     padding-left: 0;
-    white-space: nowrap;
-    overflow-x: scroll;
   }
-  #block-itg-layout-manager-header-block .navigation .menu li {
-    display: inline-block;
-    vertical-align: top;
-    float: none;
+  #block-itg-layout-manager-header-block .navigation .menu li a {
+    padding: 0 8px;
   }
 
   /*    special event page css start here*/
@@ -96,7 +92,7 @@
 
   /*special event page css start here*/
   /*css start snappost page*/
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button button {
     width: 160px;
   }
 
@@ -121,6 +117,166 @@
   }
 
   /*CSS End Photo and video header crusal page*/
+  /*Css start year end page*/
+  .yearender h2 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
+    padding: 10px 10px 25px 10px;
+  }
+  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+
+  /*Css end year end page*/
+  /*Start Dont miss Home page css*/
+  .dont-miss ul .dont-miss-listing {
+    width: 100%;
+    padding: 0px 0px 20px 0;
+  }
+  .dont-miss ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+  .dont-miss ul .dont-miss-listing:nth-child(3) {
+    padding-bottom: 20px;
+  }
+
+  /*End Dont miss Home page css*/
+  /*start Event page registration*/
+  #block-itg-event-backend-event-registration h1, #block-itg-event-backend-event-sign-and-win h1 {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  .event-registration-link, .sign-and-win-contest {
+    margin-bottom: 30px;
+  }
+
+  /* Event page registration end*/
+  /*start css footer*/
+  footer .footer-top .footer-top-link {
+    float: none;
+  }
+  footer .footer-top .footer-social-link {
+    width: 280px;
+    position: relative;
+    margin: 0 auto;
+    float: none;
+    padding-right: 0;
+  }
+  footer .footer-top .footer-social-link .globle-search {
+    right: 50px;
+  }
+
+  /*end css footer*/
+  /*start css home page*/
+  .top-block .top-colum-2, .top-block .top-colum-1 {
+    float: left;
+  }
+
+  .top-block .top-colum-2 {
+    width: 62%;
+  }
+
+  .top-block .top-colum-1 {
+    width: 38%;
+  }
+
+  .top-block .top-colum-3 {
+    width: 100%;
+  }
+  .top-block .top-colum-3 > .itg-widget-parent {
+    float: left;
+    width: 48%;
+  }
+  .top-block .top-colum-3 .trending-list {
+    float: right;
+    width: 48%;
+  }
+
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    width: 50%;
+    float: left;
+  }
+
+  .watch-video-home .osscar-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+
+  .itg-layout-container .itg-top-section .top-colum-2 .droppable {
+    height: auto;
+  }
+
+  /* End css home page*/
+  /*sider bar css start*/
+  #block-itg-ads-ad-right-sidebar-1 {
+    padding: 0;
+  }
+
+  /*sider bar css end*/
+  /*css start poll page*/
+  .poll-banner .detail {
+    width: auto;
+    display: block;
+    overflow: hidden;
+    float: none;
+    padding-right: 0px;
+  }
+  .poll-banner .detail .detail-content h4 {
+    font-size: 15px;
+    font-size: 0.9375rem;
+    line-height: 20px;
+  }
+  .poll-banner .poll-list .pic {
+    width: 145px;
+    margin-right: 10px;
+  }
+  .poll-banner .poll-list .voting-data {
+    float: none;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 15px;
+  }
+
+  /*css end poll page*/
+  /*css start osscar page */
+  .oscar-layout-page .osscar-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
+  }
+
+  /*css start osscar page */
+  /* css start vertical bar */
+  #block-itg-menu-manager-vertical-menu {
+    display: none;
+  }
+
+  /*end css vertical bar */
+  /*css start photo landing*/
+  #block-views-photo-landing-slider-block .other-details-main {
+    padding-bottom: 30px;
+    height: auto !important;
+  }
+  #block-views-photo-landing-slider-block .other-details-main .photo-ad {
+    margin: 30px auto 0px auto;
+  }
+
+  #block-views-photo-landing-slider-block .other-details-main .caption {
+    min-height: auto;
+  }
+
+  /*css start photo landing*/
+  /*story page css start*/
+  .story-section .social-list li {
+    padding: 10px 10px 5px;
+  }
+
+  .story-section .buzzfeed-byline .social-share-story li a {
+    padding: 0 10px;
+  }
+
+  /*story page css end*/
 }
 @media only screen and (max-width: 991px) {
   /*CSS start education page special*/
@@ -141,6 +297,66 @@
   }
 
   /*CSS end education page special*/
+  /* start Event page mobile nav*/
+  #block-menu-menu-event-menu .mobile-nav {
+    color: #fff;
+    font-size: 30px;
+    padding: 0 15px;
+    height: 40px;
+    line-height: 40px;
+  }
+  #block-menu-menu-event-menu ul {
+    display: none;
+  }
+  #block-menu-menu-event-menu ul li {
+    float: none;
+  }
+  #block-menu-menu-event-menu ul li a {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  /* end Event page mobile nav*/
+  /*story page css*/
+  .story-section .story-right .stryimg .tagview {
+    display: none;
+  }
+  .story-section .byline .profile-detail {
+    margin: 0 0 0 10px;
+  }
+  .story-section .byline .profile-detail ul li.title {
+    border-right: 1px solid #ddd;
+  }
+
+  .story-section .byline {
+    margin-bottom: 15px;
+  }
+  .story-section .byline .profile-detail ul.date-update li + li {
+    border-left: 1px solid #ddd;
+  }
+
+  /*story page css end*/
+  /*sports page css start*/
+  .sport-home-layout-page .itg-layout-615 .auto-block-1 .featured-news {
+    padding: 5px;
+    margin: 0;
+  }
+
+  .page-sports-video .view-content .photo-list {
+    white-space: nowrap;
+    overflow: auto;
+  }
+  .page-sports-video .view-content .photo-list li {
+    float: none;
+    display: inline-block;
+    width: 170px;
+    vertical-align: top;
+  }
+  .page-sports-video .view-content .photo-list li a {
+    white-space: pre-wrap;
+  }
+
+  /*story page css end*/
 }
 @media only screen and (max-width: 768px) {
   header {
@@ -230,8 +446,7 @@
     zoom: 1;
     margin: 0px;
     padding-left: 0;
-    white-space: pre-wrap;
-    overflow-x: inherit;
+    padding-right: 0;
   }
   #block-itg-layout-manager-header-block .navigation .menu:before, #block-itg-layout-manager-header-block .navigation .menu:after {
     content: "";
@@ -256,6 +471,9 @@
   #block-itg-layout-manager-header-block .navigation .menu li a.active, #block-itg-layout-manager-header-block .navigation .menu li a:hover {
     color: #ffc106;
   }
+  #block-itg-layout-manager-header-block .navigation .menu li a:after {
+    display: none;
+  }
   #block-itg-layout-manager-header-block .navigation .menu li.all-menu a {
     border-right: none;
   }
@@ -279,7 +497,6 @@
   #block-itg-layout-manager-header-block .head-live-tv {
     text-align: right;
     padding: 0 10px;
-    margin-top: -10px;
     position: relative;
   }
   #block-itg-layout-manager-header-block .head-live-tv ul {
@@ -289,9 +506,26 @@
     display: inline-block;
     vertical-align: bottom;
     padding-left: 15px;
+    line-height: 25px;
   }
   #block-itg-layout-manager-header-block .head-live-tv ul li a i {
     font-size: 18px;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv ul li:first-child {
+    position: relative;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv ul li:first-child .menu {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    background: #a00606;
+    padding: 5px;
+    box-shadow: 0 0 3px #000;
+    display: none;
+    z-index: 1;
+  }
+  #block-itg-layout-manager-header-block .head-live-tv ul li:first-child .menu li {
+    padding: 5px 0;
   }
   #block-itg-layout-manager-header-block .head-live-tv .globle-search {
     position: absolute;
@@ -334,8 +568,14 @@
   .itg-layout-container .itg-top-section .top-colum-2 .droppable,
   .itg-layout-container .itg-top-section .top-colum-1 .droppable,
   .itg-layout-container .top-colum-3 .droppable,
-  .itg-common-section .droppable {
+  .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
+  .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
+  .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable {
     height: auto;
+  }
+
+  .itg-layout-container .itg-common-section .home-page-poll-block-wrap .droppable {
+    min-height: inherit;
   }
 
   /*End CSS Top Block Grid Home Page*/
@@ -343,21 +583,39 @@
   .oscar-layout-page .left-side {
     margin-bottom: 50px;
   }
+  .oscar-layout-page .oscar-features .col-md-6 {
+    margin-bottom: 20px;
+  }
+  .oscar-layout-page .oscar-features .col-md-6:nth-child(n+3) {
+    margin-top: 0;
+  }
+  .oscar-layout-page .oscar-news h3 {
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
   .oscar-layout-page .oscor-photo {
     overflow: auto;
     white-space: nowrap;
+  }
+  .oscar-layout-page .oscor-photo .row {
+    margin: 0;
   }
   .oscar-layout-page .oscor-photo .col-md-6 {
     margin: 0px;
     float: none;
     display: inline-block;
     vertical-align: top;
+    width: 300px;
+    padding: 0;
   }
   .oscar-layout-page .oscor-photo .col-md-6 .title h3 {
-    height: inherit;
+    min-height: 60px;
     white-space: pre-wrap;
+    font-size: 16px;
+    line-height: 22px;
+    padding: 10px;
   }
-  .oscar-layout-page .oscor-photo .col-md-6 :nth-child(n+3) {
+  .oscar-layout-page .oscor-photo .col-md-6:nth-child(n+3) {
     margin-top: 0;
   }
   .oscar-layout-page .oscar-slider .bottom-slider {
@@ -366,11 +624,18 @@
   .oscar-layout-page .oscar-slider .bottom-slider li {
     padding: 10px;
     width: 100% !important;
+    height: auto;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li a.video-icon {
+    float: left;
   }
   .oscar-layout-page .oscar-slider .bottom-slider li img {
     float: left;
     margin-right: 10px;
     width: 145px;
+  }
+  .oscar-layout-page .oscar-slider .bottom-slider li p {
+    margin-top: 0;
   }
   .oscar-layout-page .oscar-slider .bottom-slider i {
     color: #ccc;
@@ -404,23 +669,20 @@
   .page-snappost .view-content .views-row .snap-post-btm .snap-button {
     margin-top: 30px;
   }
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button button {
     width: 120px;
     height: 40px;
     font-size: 16px;
     font-size: 1rem;
     line-height: 40px;
   }
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a.disagree {
+  .page-snappost .view-content .views-row .snap-post-btm .snap-button button.disagree {
     margin-left: 20px;
   }
 
   .page-snappost .view-content .views-row .snap-post-btm .snap-button {
     float: none;
     width: 100%;
-  }
-  .page-snappost .view-content .views-row .snap-post-btm .snap-button a {
-    width: 130px;
   }
   .page-snappost .view-content .views-row .snap-post-btm .snap-social {
     width: 100%;
@@ -450,18 +712,346 @@
 
   /*css end side bar section for video and photo*/
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .sports-video .view-content .photo-list li, .sports-photo .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list, .view-photo-list-of-category .view-content .photo-list, .view-so-sorry .view-content .photo-list, .view-programme-content .view-content .photo-list, .page-sports-video .view-content .photo-list, .page-sports-photo .view-content .photo-list, .view-programme-content-live-tv .view-content .photo-list {
+    margin: 0 -10px;
+  }
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 33.33333%;
     padding: 15px 10px;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .sports-video .view-content .photo-list li:nth-child(4n+1), .sports-photo .view-content .photo-list li:nth-child(4n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1), .view-so-sorry .view-content .photo-list li:nth-child(4n+1), .view-programme-content .view-content .photo-list li:nth-child(4n+1), .page-sports-video .view-content .photo-list li:nth-child(4n+1), .page-sports-photo .view-content .photo-list li:nth-child(4n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(4n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .sports-video .view-content .photo-list li:nth-child(3n+1), .sports-photo .view-content .photo-list li:nth-child(3n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
     clear: left;
   }
 
   /*CSS End Photo landing page*/
+  /*css starts sport page*/
+  .sport-home-layout-page .itg-layout-615 .auto-block-1 {
+    margin-bottom: 50px;
+  }
+
+  .sport-home-layout-page .right-side .col-md-12 .ad-widget {
+    margin-top: 40px;
+  }
+  .sport-home-layout-page .right-side .col-md-12 .droppable {
+    margin-top: 40px;
+    border-bottom: 1px solid #ddd;
+  }
+  .sport-home-layout-page .sports-video .view-content .photo-list {
+    margin: 0;
+  }
+  .sport-home-layout-page .sports-video .view-content .photo-list li {
+    padding: 0 5px;
+  }
+
+  /*css end sport page*/
+  /*start event page*/
+  #block-views-program-schedule-block-3 .views-row:nth-child(4n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(3n+1) {
+    clear: left;
+  }
+
+  /*end event page*/
+  /*Start css program live page*/
+  #block-itg-live-tv-live-tv-video-page .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
+    clear: none;
+  }
+
+  /*End css program live page*/
+  #block-itg-menu-manager-third-level-menu .col-md-4 {
+    height: 60px;
+  }
+  #block-itg-menu-manager-third-level-menu .col-md-4 img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 0 15px;
+    left: 0;
+  }
+  #block-itg-menu-manager-third-level-menu .menu-wrapper {
+    background: #595959;
+    height: 60px;
+  }
+  #block-itg-menu-manager-third-level-menu .select-menu {
+    color: #fff;
+    font-family: roboto;
+    width: 95px;
+    background: #3c3a3b;
+    padding-left: 5px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    position: relative;
+    margin-top: 15px;
+  }
+  #block-itg-menu-manager-third-level-menu .select-menu:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ccc;
+    position: absolute;
+    top: 13px;
+    right: 9px;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu {
+    padding-top: 0;
+    background: #4d4b4c;
+    position: absolute;
+    z-index: 9999;
+    float: none;
+    width: 95px;
+    top: 45px;
+    left: 15px;
+    display: none;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu li {
+    display: block;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu li a {
+    font-weight: 500;
+    font-size: 11px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 8px 0 8px;
+  }
+  #block-itg-menu-manager-third-level-menu ul.third-level-menu li a:hover, #block-itg-menu-manager-third-level-menu ul.third-level-menu li a.active {
+    background: #3d3b3c;
+    color: #fff;
+  }
+  #block-itg-menu-manager-third-level-menu .col-md-8 {
+    display: block;
+    position: relative;
+  }
+
+  /*Start css online archive story page*/
+  .view-archive-story .archive-header {
+    border: none;
+    margin: 0 -15px;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider, .view-archive-story .archive-header .archive-calender-custom {
+    float: none;
+    width: 100%;
+  }
+  .view-archive-story .archive-header .archive-calender-custom {
+    text-align: right;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider ul {
+    padding: 0 20px;
+  }
+  .view-archive-story .archive-header #archive-story-date-slider .slick-prev, .view-archive-story .archive-header #archive-story-date-slider .slick-next {
+    width: 20px;
+  }
+  .view-archive-story .archive-header .archive-calender-custom .views-exposed-form .views-exposed-widget {
+    padding: 10px 0 0 0;
+  }
+  .view-archive-story .view-content li.itg-search-list {
+    border-bottom: 1px solid #ddd;
+  }
+
+  /*End css online archive story page*/
+  /*css start poll page*/
+  .poll-wrapper .poll-data {
+    padding: 5px;
+  }
+  .poll-wrapper .poll-data .poll-banner-image {
+    max-width: 145px;
+    margin-right: 8px;
+  }
+  .poll-wrapper .active-poll-title h2 {
+    font-size: 17px;
+    font-size: 1.0625rem;
+    line-height: 20px;
+  }
+
+  .poll-banner .detail .detail-content h4 {
+    font-size: 15px;
+    font-size: 0.9375rem;
+    line-height: 20px;
+  }
+  .poll-banner .vota-time.desktop-hide {
+    width: 100%;
+    color: #8a8a8a;
+    font-size: 12px;
+    clear: both;
+    width: 100%;
+    padding-top: 15px;
+  }
+  .poll-banner .vota-time.desktop-hide div {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul {
+    list-style-type: none;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li {
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 8px;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a {
+    background: #000;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    display: block;
+    color: #fff;
+    text-align: center;
+    line-height: 23px;
+  }
+}
+@media only screen and (max-width: 768px) and (min-width: 768px) {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a {
+    width: 23px;
+    height: 23px;
+    line-height: 25px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.share {
+    color: #d0d0d0;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.share, .poll-banner .vota-time.desktop-hide .social-share ul li a.google {
+    background: transparent;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.facebook {
+    background: #0b4887;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.twitter {
+    background: #05a3d2;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li a.google {
+    background: url(../images/google-icon.jpg) no-repeat center center;
+  }
+  .poll-banner .vota-time.desktop-hide .social-share ul li {
+    padding-right: 4px;
+  }
+
+  /*css end poll page*/
+  #block-views-photo-landing-slider-block .slick-thumbs .slick-thumbs-slider {
+    padding: 0 5px;
+    /*        .slick-prev, .slick-next{
+                background: transparent;
+                top: 50%;
+                color: #fff;
+                margin-top: -28px;
+            }*/
+  }
+
+  [id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3 span, .ask-question-sidebar h3 span {
+    padding: 45px 20px 10px 0px;
+  }
+
+  .story-section .social-share-story {
+    display: none;
+  }
+  .story-section.buzz-related .story-left-section .related-story-page {
+    margin-top: 0px;
+    display: none;
+  }
+  .story-section .listicle-page .listicle-detail > span {
+    width: 24px;
+    height: 24px;
+    margin-top: 14px;
+    line-height: 24px;
+    font-size: 16px;
+  }
+  .story-section .listicle-page .listicle-detail > span.bullet_points {
+    margin-top: 20px;
+  }
+  .story-section .listicle-page .listicle-detail .listicle-description {
+    width: 91%;
+    padding: 10px;
+  }
+
+  /*home page breaking news*/
+  .breakingnew-home {
+    text-align: center;
+    background: #ffc106;
+    margin: -15px -15px 15px -15px;
+    padding: 7px;
+  }
+  .breakingnew-home .title {
+    float: none;
+    width: 80px;
+    font-size: 14px;
+    line-height: 22px;
+    height: 20px;
+    padding: 0 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  .breakingnew-home .new-detail {
+    height: inherit;
+    line-height: 20px;
+    font-size: 16px;
+    padding: 0;
+    width: 100%;
+    float: none;
+  }
+  .breakingnew-home .new-detail .marquee {
+    width: 100%;
+  }
+  .breakingnew-home .new-detail .social-share {
+    display: none;
+  }
+  .breakingnew-home .new-detail .live-tv-link .live-tv-icon {
+    display: none;
+  }
+  .breakingnew-home .new-detail .live-tv-link .breaking-new-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  /*story page comment section*/
+  #content .story-section #other-comment #comments .comment-form .form-item {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  #content .story-section #other-comment #comments .comment-form div.description, #content .story-section #other-comment #comments .comment-form .form-type-textarea > label + div, #content .story-section #other-comment #comments .comment-form .form-actions {
+    padding-left: 0;
+  }
+  #content .story-section #other-comment #comments .comment ul.links {
+    position: inherit;
+  }
+
+  /*story page comment section end*/
+  /*Home page css start*/
+  .home_page_poll_widget_block .poll-data, .sport-home-layout-page .poll-data {
+    padding: 0;
+  }
+  .home_page_poll_widget_block .poll-data .poll-banner-image img, .sport-home-layout-page .poll-data .poll-banner-image img {
+    max-width: 100%;
+  }
+
+  /*Home page css end*/
+  /*side bar for all pages start*/
+  .sidebars .block-itg-widget span.no-result-found {
+    margin: 30px 0;
+    width: 290px;
+  }
+
+  /*side bar for all pages end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -508,20 +1098,282 @@
   }
 
   /*CSS end video landing page*/
+  /*start event page*/
+  #block-itg-event-backend-program-tab-block .event-listing .side-right {
+    width: 81%;
+    border-left: 1px dashed #9f9f9f;
+    padding-left: 10px;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .title {
+    font-size: 13px;
+    font-size: 0.8125rem;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .section-part {
+    float: none;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .section-part a {
+    width: 49%;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail {
+    float: none;
+    width: 100%;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop {
+    padding-left: 0;
+    border-left: none;
+  }
+  #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop:before {
+    display: none;
+  }
+
+  #block-views-program-schedule-block-1 .content-list ul.profile-detail li:first-child {
+    width: 28%;
+    padding-top: 15px;
+    font-size: 12px;
+  }
+  #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
+    width: 26%;
+    text-align: center;
+  }
+  #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
+    width: 45%;
+  }
+
+  #block-itg-event-backend-event-sign-and-win h1, #block-itg-event-backend-event-registration h1 {
+    font-size: 20px;
+  }
+  #block-itg-event-backend-event-sign-and-win .buy-ticket-txt, #block-itg-event-backend-event-registration .buy-ticket-txt {
+    text-align: left;
+  }
+
+  .sign-and-win-contest, .event-registration-link {
+    font-size: 15px;
+    padding: 5px 5px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  #block-views-program-schedule-block-1 h2, #block-views-program-schedule-block-3 h2, #block-views-program-schedule-block-4 h2, #block-itg-event-backend-program-tab-block h2, #block-itg-event-backend-event-sign-and-win h2, #block-itg-event-backend-event-registration h2 {
+    margin-bottom: 15px;
+  }
+
+  /*End event page*/
+  /*Home page start css*/
+  .big-news .big-story-col-1, .big-news .big-story-col-2 {
+    width: 100%;
+    float: none;
+  }
+
+  .big-news .big-story-col-2 {
+    padding-top: 15px;
+  }
+
+  .top-block .top-colum-3 > .itg-widget-parent {
+    float: none;
+    width: 100%;
+  }
+  .top-block .top-colum-3 .trending-list {
+    float: none;
+    width: 100%;
+  }
+
+  /*Home page end css*/
+  /*start event page*/
+  #block-views-program-schedule-block-3 .views-row:nth-child(3n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(2n+1) {
+    clear: left;
+  }
+
+  /*end event page*/
+  /*css start live tv page*/
+  #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list li {
+    padding: 10px;
+    height: auto;
+    width: 100% !important;
+  }
+  #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list li figure {
+    float: left;
+    margin-right: 10px;
+    width: 145px;
+  }
+  #block-itg-live-tv-live-tv-video-page .latest-livetv-video .photo-list i.slick-arrow {
+    color: #ccc;
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv {
+    padding: 10px;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon, #block-itg-live-tv-live-tv-video-page .program-livetv .live_tv_video {
+    width: 100%;
+    float: none;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li {
+    display: inline-block;
+    vertical-align: top;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li a {
+    border-bottom: none;
+    padding: 10px;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li a i {
+    font-size: 20px;
+    font-size: 1.25rem;
+    padding-right: 5px;
+  }
+  #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon li a span {
+    display: none;
+  }
+
+  /*css end live tv page*/
+  /*Css start home page photo crousal*/
+  .itg-h450-section .col-md-8 .widget-wrapper {
+    height: 100%;
+    padding: 0px;
+    background-color: #f3f3f3;
+  }
+
+  .featured_photo_carousel .widget-title, .tech-block_5 .widget-title, .auto-block_5 .widget-title {
+    top: 0;
+    left: 0;
+  }
+
+  .itg-h321-section .tech_reviews, .itg-h321-section .auto_reviews, .itg-h321-section .dont_miss {
+    padding: 5px 10px 5px;
+  }
+
+  /*Css ens home page photo crousal*/
+  /*css start megzin page*/
+  .magazin-mob {
+    display: block;
+  }
+
+  .magazin-desktop {
+    display: none;
+  }
+
+  .magazin-lhs-top .magazin-top {
+    margin-bottom: 0;
+  }
+  .magazin-lhs-top .magazin-top .magazin-subscribe, .magazin-lhs-top .magazin-top .magazin-top-left {
+    width: 100%;
+    float: none;
+  }
+  .magazin-lhs-top .magazin-top .magazin-top-left {
+    padding: 5px;
+    padding-top: 5px;
+  }
+  .magazin-lhs-top .magazin-top .magazin-top-left .web-excl {
+    top: 5px;
+    left: 5px;
+  }
+  .magazin-lhs-top .magazin-bottom ul {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  .magazin-lhs-top .magazin-bottom ul li {
+    width: 145px;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 5px;
+    margin-top: 20px;
+  }
+  .magazin-lhs-top .magazin-bottom ul li h3 {
+    margin-top: 10px;
+    white-space: pre-wrap;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .magazin-lhs-top.magazin-mob {
+    background: transparent;
+    border: none;
+    margin-top: 50px;
+    padding-bottom: 0;
+  }
+
+  /*css start megzin page*/
+  #block-views-video-landing-header-block-1 {
+    background: #111111;
+    border-top: 5px solid #111111;
+  }
+  #block-views-video-landing-header-block-1 .view-header h3 {
+    margin-bottom: 15px;
+    background: #111111;
+  }
+  #block-views-video-landing-header-block-1 .defalt-bar {
+    background: #111;
+  }
+
+  #block-views-video-landing-header-block .video-header-right {
+    padding-bottom: 0px;
+  }
+  #block-views-video-landing-header-block .video-header-right p.upload-date {
+    border-bottom: 1px solid rgba(170, 169, 169, 0.2);
+    padding-bottom: 10px;
+    color: #d9d9d9;
+  }
+}
+@media only screen and (max-width: 640px) {
+  #block-views-anchor-landing-page-block .anchor-left {
+    width: 50%;
+  }
+
+  .itg-layout-container .ad-widget {
+    border: none;
+    height: auto;
+    padding: 0;
+  }
+  .itg-layout-container .ad-widget .sidebar-ad {
+    background: transparent;
+    height: 100%;
+  }
 }
 @media only screen and (max-width: 560px) {
   /*CSS Starts Photo landing page*/
-  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .sports-video .view-content .photo-list li, .sports-photo .view-content .photo-list li {
+  .view-video-list-of-category .view-content .photo-list li, .view-photo-list-of-category .view-content .photo-list li, .view-so-sorry .view-content .photo-list li, .view-programme-content .view-content .photo-list li, .page-sports-video .view-content .photo-list li, .page-sports-photo .view-content .photo-list li, .view-programme-content-live-tv .view-content .photo-list li {
     width: 50%;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .sports-video .view-content .photo-list li:nth-child(3n+1), .sports-photo .view-content .photo-list li:nth-child(3n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(3n+1), .view-so-sorry .view-content .photo-list li:nth-child(3n+1), .view-programme-content .view-content .photo-list li:nth-child(3n+1), .page-sports-video .view-content .photo-list li:nth-child(3n+1), .page-sports-photo .view-content .photo-list li:nth-child(3n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(3n+1) {
     clear: none;
   }
-  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1), .sports-video .view-content .photo-list li:nth-child(2n+1), .sports-photo .view-content .photo-list li:nth-child(2n+1) {
+  .view-video-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-photo-list-of-category .view-content .photo-list li:nth-child(2n+1), .view-so-sorry .view-content .photo-list li:nth-child(2n+1), .view-programme-content .view-content .photo-list li:nth-child(2n+1), .page-sports-video .view-content .photo-list li:nth-child(2n+1), .page-sports-photo .view-content .photo-list li:nth-child(2n+1), .view-programme-content-live-tv .view-content .photo-list li:nth-child(2n+1) {
     clear: left;
   }
 
   /*CSS End Photo landing page*/
+}
+@media only screen and (max-width: 480px) {
+  #block-views-anchor-landing-page-block .anchor-left {
+    width: 100%;
+  }
+  #block-views-anchor-landing-page-block .anchor-right {
+    padding-top: 15px;
+  }
+
+  /*start event page*/
+  #block-views-program-schedule-block-3 .views-row:nth-child(2n+1) {
+    clear: none;
+  }
+  #block-views-program-schedule-block-3 .views-row:nth-child(1n+1) {
+    clear: left;
+  }
+
+  /*end event page*/
+  /*story page css*/
+  .story-section .story-expert-opinion {
+    width: 280px;
+    float: none;
+    padding: 10px 15px;
+    margin: 0 auto;
+  }
+
+  /*story page css end*/
 }
 /*Start header CSS Desktop version*/
 @media only screen and (min-width: 769px) {
@@ -561,37 +1413,6 @@
   }
 
   /*CSS End story section */
-  /*Start Dont miss Home page css*/
-  .dont-miss, #block-itg-widget-yearende-left-top-news .top-news, #block-itg-widget-yearende-left-top-videos .top-video {
-    /*padding: 20px 0px 0px 10px;*/
-  }
-  .dont-miss ul .dont-miss-listing, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
-    float: left;
-    width: 50%;
-    padding: 0px 10px 25px 0;
-  }
-  .dont-miss ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-pic, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-pic {
-    width: 170px;
-  }
-  .dont-miss ul .dont-miss-listing:nth-child(2n+1), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(2n+1), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(2n+1) {
-    clear: left;
-  }
-  .dont-miss ul .dont-miss-listing:nth-child(3), .dont-miss ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
-    padding-bottom: 0;
-  }
-
-  /*End Dont miss Home page css*/
-  /*CSS Start year end top news*/
-  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing, #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing {
-    float: none;
-    width: 100%;
-    padding: 25px 10px;
-  }
-  #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(4), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(3), #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing:nth-child(4) {
-    padding-bottom: 25px;
-  }
-
-  /*CSS End year end top news*/
   /*Start photo section slider Homepage*/
   .featured_photo_carousel .flexslider .flex-direction-nav, .tech-block_5 .flexslider .flex-direction-nav, .auto-block_5 .flexslider .flex-direction-nav {
     display: block;
@@ -720,6 +1541,12 @@
   .story-section .social-list li:nth-child(7) {
     border-left: 1px solid #dddddd;
   }
+  .story-section .buzzfeed-byline .byline .profile-detail {
+    width: 50%;
+  }
+  .story-section .buzzfeed-byline .social-share-story {
+    float: right;
+  }
 
   .buzz-feedback .story-right {
     width: 100%;
@@ -735,9 +1562,42 @@
     font-size: 1.5rem;
     line-height: 34px;
   }
+  .buzz-feedback .related-story.related-story-bottom {
+    display: block;
+  }
+
+  .related-story.related-story-bottom {
+    display: none;
+  }
+  .related-story.related-story-bottom li:nth-child(2n+1) {
+    clear: none;
+  }
+  .related-story.related-story-bottom li:nth-child(4n+1) {
+    clear: left;
+  }
+
+  .listicle-feedback .related-story.related-story-bottom {
+    display: block;
+  }
 
   /*End Story page css*/
   /*Start css ITG globle search result page*/
+  .view-front-end-global-search .searh-all-filters {
+    white-space: inherit;
+    overflow-x: inherit;
+  }
+  .view-front-end-global-search .searh-all-filters .views-exposed-widget {
+    float: left;
+  }
+  .view-front-end-global-search .view-filters {
+    margin-bottom: 40px;
+  }
+  .view-front-end-global-search .view-content li.itg-search-list {
+    padding: 25px 0;
+  }
+  .view-front-end-global-search .view-content li.itg-search-list + li {
+    border-top: none;
+  }
   .view-front-end-global-search .view-content .search-pic {
     width: 170px;
     height: 127px;
@@ -946,17 +1806,6 @@
   }
 
   /*End start program RHS*/
-  /*CSS Start Anchor listing detail page*/
-  #block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
-    float: left;
-    width: 50%;
-  }
-  #block-views-anchor-landing-page-block .anchor-right {
-    padding-left: 15px;
-    padding-top: 0px;
-  }
-
-  /*CSS End Anchor listing detail page*/
   /*CSS Start Photo landing page*/
   .region-top {
     padding: 20px 0;
@@ -986,7 +1835,7 @@
     padding-left: 10px;
   }
   #block-views-photo-landing-slider-block .social-icon ul li a {
-    padding: 0 15px;
+    padding: 0 12px;
     line-height: 55px;
   }
   #block-views-photo-landing-slider-block .social-icon ul li span.flag-throbber {
@@ -1054,10 +1903,22 @@
     font-size: 26px;
   }
 
+  #block-itg-widget-so-sorry-front-politoons .politoons-sosorry h2 {
+    font-size: 26px;
+    font-size: 1.625rem;
+    font-weight: 300;
+  }
+  #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(3n+1) {
+    clear: left;
+  }
+  #block-itg-widget-so-sorry-front-politoons .politoons-sosorry .col-md-4:nth-child(2n+1) {
+    clear: none;
+  }
+
   /*CSS End So sorry page*/
   /*CSS Start RHS add block*/
   #block-itg-ads-ad-right-sidebar-1 {
-    padding: 30px 34px 0;
+    width: 100%;
   }
 
   /*CSS End RHS add block*/
@@ -1097,6 +1958,9 @@
     border-bottom: none;
     margin-bottom: 0;
   }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul {
+    display: inherit;
+  }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li {
     float: none;
   }
@@ -1105,6 +1969,9 @@
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
     display: inline-block;
+  }
+  #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
+    margin-right: 5px;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes ul li + li a {
     border-top: 1px solid #000;
@@ -1126,33 +1993,20 @@
   .auto-layout-page .itg-top-section .top-colum-3 .droppable {
     height: 247px;
   }
+  .auto-layout-page .itg-h450-section .col-md-4 .droppable {
+    padding: 10px;
+    background: #f3f3f3;
+  }
   .auto-layout-page .itg-h450-section .col-md-4 .droppable .widget-wrapper {
     overflow: auto;
+    height: auto;
+    max-height: 100%;
   }
 
   /*css end for special auto page*/
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
-  .top-block .top-colum-2 {
-    width: 100%;
-    margin-bottom: 50px;
-  }
-
-  .top-block .top-colum-1, .top-block .top-colum-3 {
-    width: 50%;
-    float: left;
-  }
-
-  .big-news .big-story-col-1, .big-news .big-story-col-2 {
-    width: 100%;
-  }
-
-  .big-news .big-story-col-2 {
-    padding-top: 20px;
-    padding-left: 15px;
-  }
-
   .widget-wrapper.top_stories_ordering .data-holder .block-itg-widget {
     overflow: scroll;
     height: 663px;
@@ -1172,17 +2026,4 @@
   #block-views-video-landing-header-block .social-likes ul li {
     float: left;
   }
-}
-@media only screen and (min-width: 640px) {
-  /*CSS Start Anchor listing detail page*/
-  #block-views-anchor-landing-page-block .anchor-left, #block-views-anchor-landing-page-block .anchor-right {
-    float: left;
-    width: 50%;
-  }
-  #block-views-anchor-landing-page-block .anchor-right {
-    padding-left: 15px;
-    padding-top: 0px;
-  }
-
-  /*CSS End Anchor listing detail page*/
 }

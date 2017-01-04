@@ -90,123 +90,187 @@ function itg_layout_list() {
  
 }
 
+/** 
+ * This function use for term details
+ */
+function itg_layout_getterm_detials() {
+  $tid = $_POST['state_id'];
+  $dataterm = taxonomy_term_load($tid);
+
+  $svgurl = $dataterm->field_state_svg_json['und'][0]['value'];
+  $mapgurl = $dataterm->field_state_map_json['und'][0]['value'];
+  $colorurl=$dataterm->field_state_map_color_json['und'][0]['value'];
+
+  $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl,'color_url'=>$colorurl);
+  print json_encode($urlarray);
+  die;
+}
+
 
 /**
- * Get itg layout list for admin
- * @return array $output
+ * callback for gethomecarddata
+ * {@inheritdoc}
  */
-function itg_layout_list_delete() {
-  // configure the table header columns
-  $header = array(
-    array('data' => t('ID')),
-    array('data' => t('Section name')),
-    array('data' => t('Template name')),
-    array('data' => t('Delete')),
-    array('data' => t('Edit')),
-  );
+function itg_layout_gethomecarddata() {
+  global $theme;
   
-  if ($_GET['items_per_page']) {
-    $items_per_page = $_GET['items_per_page'];
+  $arg = arg();
+  
+  $sectinno = end(explode('-', $_POST['section_ids']));
+  
+  $is_fron_page = drupal_is_front_page();
+
+  if ($sectinno == 16) {
+    $sectinno = 20;
+  }
+
+  if ($sectinno == 20) {
+    $widget_name1 = 'itg-block-' . ($sectinno);
+    $widget_name2 = 'itg-block-' . ($sectinno + 1);
+    $widget_name3 = 'itg-block-' . ($sectinno + 2);
   }
   else {
-    $items_per_page = 10;
+    $widget_name1 = 'itg-block-' . ($sectinno + 1);
+    $widget_name2 = 'itg-block-' . ($sectinno + 2);
+    $widget_name3 = 'itg-block-' . ($sectinno + 3);
   }
-  if (arg(1) == 'home') {
-    $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-    $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'status', 'created_date'));  
+
+  $block_name = array($widget_name1, $widget_name2, $widget_name3);
+  $section = 'home_page';
+  $template_name = 'page--front';
+  $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
+  $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 3);
+
+  $widget_data = $data;
+  
+  if (!empty($widget_data[$widget_name1]['widget_name']) 
+            || !empty($widget_data[$widget_name2]['widget_name']) 
+            || !empty($widget_data[$widget_name3]['widget_name'])) {      
+   
+      print '<div class="row itg-common-section"  id="content-section-widget">
+            <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name1 . '">
+            <div class="itg-widget">
+            <div class="droppable ' . $gray_bg_layout . '">
+            <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
+      
+      if (!empty($widget_data[$widget_name1]['block_title'])) {
+        print '<span class="widget-title">' . $widget_data[$widget_name1]['block_title'] . '</span>';
+      }
+
+      print' <div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div></div></div></div></div>
+            <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name2 . '">
+            <div class="itg-widget">
+            <div class="droppable ' . $gray_bg_layout . '">
+            <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
+      
+      if (!empty($widget_data[$widget_name2]['block_title'])) {
+        print' <span class="widget-title">' . $widget_data[$widget_name2]['block_title'] . '</span>';
+      }
+
+      print '<div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div></div></div></div></div>';
+
+      print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name3 . '">
+            <div class="itg-widget">
+            <div class="droppable ' . $gray_bg_layout . '">
+            <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';
+      
+      if (!empty($widget_data[$widget_name3]['block_title'])) {
+        print' <span class="widget-title">' . $widget_data[$widget_name3]['block_title'] . '</span>';
+      }
+
+      print '<div class="data-holder" id="' . $widget_name3 . '">' . $widget_data[$widget_name3]['widget'] . '</div></div></div></div></div>';
+      
+       if ($nextdata != 0 && $sectinno+3 < 40) {
+          
+         print '<div class="load-more-wrapper-front">
+        <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+        </div>';
+      }
+      
+      print '</div>';
+    }
+    else {
+        itg_layout_gethomecarddata_new($sectinno + 4);
+    }
+      
+    exit();  
+}
+
+
+/**
+ * Implements hook_manager_preprocess_page().
+ * {@inheritdoc}
+ */
+function itg_layout_gethomecarddata_new($sectinno) {
+  global $theme;
+  $arg = arg();
+
+  $widget_name1 = 'itg-block-' . ($sectinno);
+  $widget_name2 = 'itg-block-' . ($sectinno + 1);
+  $widget_name3 = 'itg-block-' . ($sectinno + 2);
+  
+  $block_name = array($widget_name1, $widget_name2, $widget_name3);
+  $section = 'home_page';
+  $template_name = 'page--front';
+  
+  $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
+  if($data=="" && $sectinno<80)
+  {
+     itg_layout_gethomecarddata_new($sectinno + 3); 
+  }
+  
+   $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 3);
+  $widget_data = $data;
+
+  if (!empty($widget_data[$widget_name1]['widget_name']) 
+          || !empty($widget_data[$widget_name2]['widget_name']) 
+          || !empty($widget_data[$widget_name3]['widget_name'])) {
+    print '<div class="row itg-common-section"  id="content-section-widget">
+
+    <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name1 . '">
+    <div class="itg-widget">
+    <div class="droppable ' . $gray_bg_layout . '">
+    <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
     
-    $itg_query->condition('layout_tpl.section_name', 'home_page', '=');
+    if (!empty($widget_data[$widget_name1]['block_title'])) {
+      print '<span class="widget-title">' . $widget_data[$widget_name1]['block_title'] . '</span>';
+    }
+
+    print '<div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div></div></div></div></div>
+
+          <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name2 . '">
+          <div class="itg-widget">
+          <div class="droppable ' . $gray_bg_layout . '">
+          <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
     
-    $itg_query->extend('PagerDefault')->limit($items_per_page);
+    if (!empty($widget_data[$widget_name2]['block_title'])) {
+      print' <span class="widget-title">' . $widget_data[$widget_name2]['block_title'] . '</span>';
+    }
+
+    print '<div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div></div></div></div></div>';
+
+    print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name3 . '">
+           <div class="itg-widget">
+           <div class="droppable ' . $gray_bg_layout . '">
+           <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';
+    if (!empty($widget_data[$widget_name3]['block_title'])) {
+      print' <span class="widget-title">' . $widget_data[$widget_name3]['block_title'] . '</span>';
+    }
+
+    print '<div class="data-holder" id="' . $widget_name3 . '">' . $widget_data[$widget_name3]['widget'] . '</div></div></div></div></div>';
+     if ($nextdata != 0 && $sectinno+3 < 40) {
+         
+       print '<div class="load-more-wrapper-front">
+              <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+              </div>';       
+    }
+    print'</div>';
   }
   else {
-    $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-    $itg_query->fields('layout_tpl', array('id','section_name', 'template_name', 'status', 'created_date'));  
-    $itg_query->join('taxonomy_term_data', 'ttd', 'ttd.tid = layout_tpl.section_name');
-    $itg_query->fields('ttd', array('name'));
-    $itg_query->groupBy('layout_tpl.section_name');
-    $itg_query->extend('PagerDefault')->limit($items_per_page);
-  }
-  
-  /*if (!empty($_GET['section'])) {
-    $itg_query->condition('layout_tpl.section_name', $_GET['section']);
-  }
-  else {
-    $itg_query->condition('layout_tpl.section_name', 'home_page', '!=');
-  } */
-  
-  $itg_result = $itg_query->execute()->fetchAll();
-  
-  $rows = array();
-  
-  $count = 0;
-  
-  foreach ($itg_result as $row) {
-    $rows[] = array(
-      array('data' => $count+1),
-      array('data' => $row->name),
-      array('data' => $row->template_name),
-      array('data' => l(t('delete'), 'itg-delete-layout/'.$row->id)),
-      array('data' => l(t('Edit'), 'itg-layout-manager/section', array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)))),
-    );
-    $count++;
-  }
-  
-  $output = render(drupal_get_form('itg_layout_manager_filter_form'));
-  $output .= '<div class="view"><div class="attachment"><span class="count">Count (' . $count . ') </span>';
-  $output .= l(t('Add New Template'), 'itg-layout-manager/section').'</div></div>';  
-  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
 
-  // add the pager
-  $output .= theme('pager');
+  }
 
-  return $output;
- 
+  exit();
 }
 
-/**
- * for layout delete for admin
- * @return array $output
- */
-function itg_layout_delete() {
-  db_delete('itg_layout_manager')->condition('layout_id', arg(1))->execute();
-  db_delete('itg_layout_tpl')->condition('id', arg(1))->execute();
-  drupal_goto('itg-admin-layout-list');
-}
 
-/**
- * for layout delete for admin
- * @return array $output
- */
-function itg_section_widgets_list_delete() {
-  $result = db_truncate('itg_section_widgets_list')->execute();
-  echo 'truncate';exit;
-}
- 
-/**
- * for layout delete for admin
- * @return array $output
- */
-function itg_update_table() {
-  $check2 = db_field_exists('itg_section_widgets_list', 'widget_type');
-  $check = db_field_exists('itg_layout_tpl', 'layout_type');
-  $check1 = db_field_exists('itg_layout_manager', 'widget_info');
-  
-  if(empty($check)) {
-      db_query("ALTER TABLE `itg_layout_tpl` ADD `layout_type` TEXT NOT NULL AFTER `template_name`")->execute();
-  }
-  if(empty($check1)) {
-   db_query("ALTER TABLE `itg_layout_manager` ADD `widget_info` TEXT NULL AFTER `block_title`")->execute();   
-  }
-   if(empty($check2)) {
-   db_query("ALTER TABLE `itg_section_widgets_list` ADD `widget_type` TEXT NULL AFTER `category_id`")->execute();   
-  }
-  
-  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'home' WHERE template_name = 'page--front'")->execute();
-  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'section' WHERE template_name = 'page--section_photo'")->execute();
-  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'section' WHERE template_name = 'page--section_default'")->execute();
-  db_query("UPDATE `itg_layout_tpl` SET `layout_type` = 'section' WHERE template_name = 'page--section_video'")->execute();
-  
-  echo '@@@@';exit;
-}
- 

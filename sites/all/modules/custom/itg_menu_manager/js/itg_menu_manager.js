@@ -11,13 +11,13 @@ jQuery(".itg_menu_manager_form").ajaxSuccess(function(event, xhr, settings) {
     var url_type = jQuery("input[name=url_type]").val();
     if (menu_level_val == 'third' && section_value == 0) {
         jQuery("input[type=text]").val("");
-        jQuery("input[name=title]").attr("disabled", "disabled");
+        //jQuery("input[name=title]").attr("disabled", "disabled");
         jQuery("input[name=url]").attr("disabled", "disabled");
         jQuery("div#decided-section").css("display", "inline-block !important");
     }
 
     if (menu_level_val == 'second') {
-        jQuery("input[name=title]").removeAttr("disabled");
+        //jQuery("input[name=title]").removeAttr("disabled");
         jQuery("input[name=url]").removeAttr("disabled");
     }
 
@@ -25,28 +25,3 @@ jQuery(".itg_menu_manager_form").ajaxSuccess(function(event, xhr, settings) {
         jQuery("#itg-menu-manager-form input[type=text]").attr("disabled", "disabled");
     }
 });
-
-
-jQuery(".itg_menu_manager_form").ready(function() {
-    jQuery("#itg-menu-manager-form input[type=text]").attr("disabled", "disabled");
-});
-
-
-(function($) {
-    Drupal.behaviors.itg_menu_manager_form = {
-        attach: function(context, settings) {
-            jQuery(document).ajaxStart(function() {
-                jQuery("#widget-ajex-loader").show();
-            });
-            jQuery(document).ajaxSuccess(function() {
-                $("#widget-ajex-loader").css("display", "none");
-            });
-            
-            jQuery("#edit-section-child").on('change', function() {
-                var section_chlid = jQuery(this).val();
-                jQuery("#edit-section-id").val(section_chlid);
-            })
-
-        }
-    };
-})(jQuery);

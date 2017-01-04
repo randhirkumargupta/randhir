@@ -16,7 +16,7 @@
     }
     // manage target
     if (trim($db_target) == 'new_window') {
-      $target = "__blank";
+      $target = "_blank";
     }
     ?>
     <li><?php print l($link_text, $link_url, array('attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key")))); ?></li>

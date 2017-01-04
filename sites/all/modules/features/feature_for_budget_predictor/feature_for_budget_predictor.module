@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the feature for budget predictor feature.
+ */
+
+include_once 'feature_for_budget_predictor.features.inc';

@@ -18,7 +18,7 @@
      
       <div class="detail">
         <p class="flex-count"><i class="fa fa-camera"></i> <?php print $row['delta'];?> Images</p>
-        <p class="flex-caption"><?php print ucfirst($row['title']);?></p>
+        <p class="flex-caption"><?php print mb_strimwidth($row['title'], 0, 200, "..");?></p>
       </div>
   
  </li>

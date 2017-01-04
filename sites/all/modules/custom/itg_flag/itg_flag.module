@@ -4,17 +4,23 @@
  * @file
  * The ITG Flag module.
  *
- * Contains functionality for Flag. *
+ * Contains functionality for Flag.
  */
 
 /**
  * Tmplements hook_init()
  */
 function itg_flag_init() {
-  global $user, $base_url;
+  global $user, $base_url;  
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
-
+  if (isset($_GET['referral_key']) && !empty($_GET['referral_key'])) {
+    $_SESSION['referral_key'] = check_plain($_GET['referral_key']);
+    drupal_add_js('jQuery(document).ready(function() {                  
+                 jQuery(".register-icon").trigger("click");             
+          });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
   drupal_add_js(array('itg_flag' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1));
 }
@@ -40,6 +46,7 @@ function itg_flag_details() {
   global $user;
   $nd_id = $_POST['nd_id'];
   $typ = $_POST['typ'];
+  $dtag = $_POST['dtag'];
   if(isset($_COOKIE['likeDislike'."_".$nd_id])) {
     $response = array('error' => 'error', 'nd_id' => $nd_id);
     print json_encode($response);
@@ -66,9 +73,18 @@ function itg_flag_details() {
       itg_loyalty_reward_earnpoint($nd_id, 'like', $user->uid);
     }
   }
-
-  $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id);
-  print json_encode($response);
+  if ($dtag != 'undefined') {
+      if ($dtag == 'sty') {
+        $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id, 'chk' => 'sty');
+      }
+      if ($dtag == 'dsty') {
+        $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id, 'chk' => 'dsty');
+      }
+    }
+    else {
+      $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id);
+    }
+    print json_encode($response);
   }
 }
 

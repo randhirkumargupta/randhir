@@ -11,12 +11,7 @@
       $('.field-name-field-astro-zodiac-sign-name').css('display', 'none');
 
       // Code for astro node form to expand sef url and meta fields.
-      var uid = Drupal.settings.uid;
-      if (uid != 1) {
-        $('#edit-metatags').show();
-        $('.vertical-tabs-list').hide();
-        $('#edit-metatags-und-advanced').hide();
-      }
+      var uid = Drupal.settings.uid;      
 
       // Map date with frequency.
       $('input[name="field_astro_frequency[und]"]').on('change', function () {

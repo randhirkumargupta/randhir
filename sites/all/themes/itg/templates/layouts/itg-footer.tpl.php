@@ -1,3 +1,6 @@
+<?php
+global $base_url;
+?>
 <section class="footer-top">
     <div class="container">
         <div class="footer-top-link">
@@ -23,7 +26,11 @@
  <section class="footer-mid mhide">
         <div class="container">
 <!--         <img src="<?php print base_path() ?>sites/all/themes/itg/images/header-ads.png" alt="ads">-->
-        <?php  print ($data['itg_top']['150*150_footer']); ?>
+        <?php
+          if (!empty($data['itg_top']['150*150_footer'])) {
+            print $data['itg_top']['150*150_footer'];
+          }
+        ?>
         </div>
  </section>
    <section class="footer-bottom">
@@ -72,3 +79,7 @@
         <div class="container"><p>Copyright &copy; <?php echo date("Y") ?> Living Media India Limited. For reprint rights: Syndications Today</p></div>
     </section>
 </section>
+<div id="widget-ajex-loader" style="display: none">
+    <img class="widget-loader" align="center" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
+</div>
+<div id="iframe-display" style="display: none"></div>

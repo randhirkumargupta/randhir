@@ -83,14 +83,17 @@ function check_template_of_section($section_name, $template_name) {
  * @return array $render_array
  */
 function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NULL) {
-  
+
   $widget_info = explode('|', $widget_info);
   
   if (isset($widget_name) && $widget_name == 'section_wise_order') {
     return create_setion_widgets($filter_url, $widget_info[1]);
   }
-  else if (isset($widget_name) && $widget_name == 'custom_html_widget') {
+  else if (isset($widget_name) && $widget_name == 'custom_html_widgets') {
     return get_html_custom_widget($filter_url);    
+  }
+  else if (isset($widget_name) && $widget_name == 'highlights') {
+    return get_highlights_widget($filter_url);    
   }
   else if (isset($widget_name) && $widget_name == 'section_widget2_wise_order') {
     return create_setion_widget2($filter_url);
@@ -109,8 +112,15 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
   else if ($widget_info[0] == 'view') {
     return views_embed_view($widget_name, $widget_info[1], $widget_info[2]);
   }
-  else {      
-    $block = block_load('itg_widget', $widget_name);
+  else {  
+      
+      if($widget_name=='custom_ask_expert_form_block')
+      {
+           $block = block_load('itg_ask_expert', $widget_name);
+      } else {
+           $block = block_load('itg_widget', $widget_name);
+      }
+   
     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
     return render($render_array);
   }
@@ -154,6 +164,98 @@ function get_template_name($tpl_dir) {
   return $data;
 }
 
+
+/**
+ * Get layout details by section_name and template_name for front and admin
+ * @param string $section_name
+ * @param string $template_name 
+ * @return array $data
+ */
+function get_layout_details_by_block_name($section_name, $template_name, $status,$block_name) {
+  
+  if ($status == 'admin') {
+    //Get last layout setting
+    $query = db_select('itg_layout_tpl', 'tpl');
+    $query->fields('tpl', array('id', 'status'));  
+    $query->condition('section_name', $section_name)
+          ->condition('template_name', $template_name)
+          ->condition('block_name',$block_name,'IN');
+    $query->orderBy('tpl.id', 'DESC')->range(0,1);
+
+    $last_tpl = $query->execute()->fetchField();
+  }
+  
+  //Get layout setting details info
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('widget_name', 'block_name', 'block_title', 'widget_info', 'filter_url'));  
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');  
+  $itg_query->condition('layout_tpl.section_name', $section_name);    
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  $itg_query->condition('block_name',$block_name,'IN');
+  
+  //condition for front
+  if ($status == 'front') {
+    $itg_query->condition('layout_tpl.status', 1);
+  } //condition for admin
+  elseif ($status == 'admin') {
+    $itg_query->condition('layout_tpl.id', $last_tpl);     
+  }
+  
+  $itg_result = $itg_query->execute()->fetchAll();
+  
+  foreach ($itg_result as $itg_val) {
+    $filter_url = $itg_val->filter_url;
+    // for widget display name
+    if (!empty($itg_val->widget_name)) {
+      $widget_info_array = explode('|', $itg_val->widget_info);
+      if($widget_info_array[1] !="" &&  $widget_info_array[1] !="undefined") {
+        $result['widget_display_name'] = '-'.$widget_info_array[1];  
+      } else {
+          $result['widget_display_name'] = "";  
+      }
+    }
+    
+    $result['widget_name'] = $itg_val->widget_name;
+    $result['block_title'] = "";
+    if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
+      if (!empty($itg_val->block_title)) {
+        $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      }
+      $result['more_url'] = l('More[+]', 'taxonomy/term/'.$filter_url);
+    }else {
+      $result['block_title'] = $itg_val->block_title; //for default widgets
+    }
+    
+    // for photo section and video section
+    if ($status == 'front' && ($itg_val->widget_name == 'photo_list_of_category' || $itg_val->widget_name == 'video_list_of_category')) {
+      $result['cat_id'] = $filter_url; // category id
+      
+      if (isset($_GET['category'])) {
+        $filter_url = $_GET['category'];
+      }
+      else {
+        // Temp code
+       $filter_url =  get_first_category_of_media_widget(arg(2), $template_name, $itg_val->widget_name);
+      }
+    }
+    
+    if (isset($itg_val->widget_name)) {
+      // get widget block     
+      $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
+    } 
+    else {
+      $widget = '<p>Drag template widgets here !</p>';
+    }
+    
+    $result['widget'] = $widget;
+    
+    $data[$itg_val->block_name] = $result;
+  }
+  
+  return $data; 
+  
+}
+
 /**
  * Get layout details by section_name and template_name for front and admin
  * @param string $section_name
@@ -195,17 +297,21 @@ function get_layout_details($section_name, $template_name, $status) {
     // for widget display name
     if (!empty($itg_val->widget_name)) {
       $widget_info_array = explode('|', $itg_val->widget_info);
-      if($widget_info_array[1] !="" &&  $widget_info_array[1] !="undefined")
-      {
-      $result['widget_display_name'] = '-'.$widget_info_array[1];  
-      }else{
+      
+      if(!empty($widget_info_array[1]) &&  $widget_info_array[1] !="undefined") {
+        $result['widget_display_name'] = '-'.$widget_info_array[1];  
+      } else{
           $result['widget_display_name'] = "";  
       }
     }
     
     $result['widget_name'] = $itg_val->widget_name;
+    $result['block_title'] = "";
+    
     if ($status == 'front' && $itg_val->widget_name == 'section_wise_order') { // for section card widgets
-      $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      if (!empty($itg_val->block_title)) {
+        $result['block_title'] = l($itg_val->block_title, 'taxonomy/term/'.$filter_url);
+      }
       $result['more_url'] = l('More[+]', 'taxonomy/term/'.$filter_url);
     }else {
       $result['block_title'] = $itg_val->block_title; //for default widgets
@@ -227,8 +333,7 @@ function get_layout_details($section_name, $template_name, $status) {
     }
     
     if (isset($itg_val->widget_name)) {
-      // get widget block
-      //p($filter_url);
+      // get widget block     
       $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url);
     } 
     else {
@@ -498,4 +603,60 @@ function get_html_custom_widget($nid) {
   $node = node_load($nid); 
   $html_code = $node->body[LANGUAGE_NONE][0]['value'];  
   return theme("html_custom_widget", array("data" => $html_code));  
+}
+
+/**
+ * Get highlights widgets for layout
+ * @return theme
+ */
+function get_highlights_widget($nid) {  
+    global $theme;
+    $highlights_node = node_load($nid);
+    
+    $output = '';
+    $text = '';
+    $output .= '<div class="wrap-listing">';
+    foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
+      $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
+      
+      if(!empty($highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'])) {
+        $highlight_title = l($highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'], $highlights_detail[$highlights_arr['value']]->field_highlights_url[LANGUAGE_NONE][0]['value'], array('attributes' => array('target' => '_blank')));
+      } else {
+          $highlight_title = $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'];
+      }
+      
+      $like_dislike = '';
+      if (function_exists('itg_event_backend_highlights_like_dislike')) {
+        if ($theme != 'itgadmin') {
+          $like_dislike = itg_event_backend_highlights_like_dislike($highlights_arr['value']);
+        }
+      }
+      
+      $text .= '<div class="h-list">' . $highlight_title . $like_dislike . '</div>';      
+
+    }
+
+    $output .= $text. '</div>';
+  
+  
+  return theme("itg_highlights_widget", array("data" => $output));  
+}
+
+/**
+ * Get all html_custom widgets list for layout setting page
+ * @return array
+ */
+function get_highlights_widget_list() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));  
+  $query->condition('type', 'heighlights');        
+  $itg_result = $query->execute()->fetchAll();
+  
+  $rows = array();
+  
+  foreach ($itg_result as $row) {
+    $widget[$row->nid] = $row->title;
+  }
+  
+  return $widget;
 }

@@ -14,7 +14,7 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';  
 }
-
+$gray_bg_layout = '';
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
@@ -69,15 +69,16 @@ if ($theme != 'itgadmin') {
         if ($sidebar_first || $sidebar_second):
           $cls = 'col-md-9';
         endif;
-    ?>
-    <main id="main" class="container">
+    ?>    
+    <main id="main" class="container pos-rel">
+         <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>
         <?php print $breadcrumb; ?>
         <a id="main-content"></a>
         <?php print render($title_prefix); ?>
         <?php if ($title): ?>
-          <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
+          <h1 class="page__title title" id="page-title"><?php // print $title; ?></h1>
         <?php endif; ?>
         <?php print render($title_suffix); ?>
         <?php print $messages; ?>
@@ -91,16 +92,27 @@ if ($theme != 'itgadmin') {
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
  
 
-<div class="itg-layout-container <?php echo $itg_class; ?>">
+<div class="itg-layout-container <?php echo $itg_class; ?>">    
+    <!-- Breaking news band --> 
+    <?php //p($page); ?>
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
+    <!-- End of Breaking news band -->
     <?php if(isset($widget_data['big_story'])) : ?>
     <div class="row">
         <div class="col-md-12">
             <?php print $widget_data['big_story']; ?>
-        </div>    
+        </div>            
     </div>
     <?php endif; ?>
 
     <div class="row itg-top-section">
+       
         <div class="top-block">
 
             <div class="top-colum-2">
@@ -260,14 +272,15 @@ if ($theme != 'itgadmin') {
         </section>
       <?php } ?>
       
- <main id="main" class="container">
+ <main id="main" class="container pos-rel">
+     <div class="home-bottom-vertical">
+      <?php print render($page['vertical_menu']); ?></div>
       <section id="content" role="main">
 
 <div class="itg-layout-container itg-front">
   <!--Common section strat here-->
   <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row itg-common-section">
-
+    <div class="row itg-common-section">        
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -453,7 +466,7 @@ if ($theme != 'itgadmin') {
          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="ad-widget">
-                      <div class="sidebar-ad"><?php print ($itg_ad['200*200_right_bar_ad2']);?></div>
+                      <div class="sidebar-ad"><?php print $itg_ad['200*200_right_bar_ad2'];?></div>
                     </div>
 <!--              <div class="droppable <?php //print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php //print $widget_data['itg-block-11']['widget_name']; ?>">
@@ -509,7 +522,7 @@ if ($theme != 'itgadmin') {
          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
-               <div class="widget-wrapper <?php print $widget_data['itg-block-13']['widget_name']; ?>">
+               <div class="widget-wrapper watch-video-home <?php print $widget_data['itg-block-13']['widget_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-13']['block_title'])) { ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-13']['block_title']; ?></span>
                   <?php } ?>
@@ -524,7 +537,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-13"><?php print $widget_data['itg-block-13']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-13" widget-style="home-watch"><?php print $widget_data['itg-block-13']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  
@@ -533,10 +546,13 @@ if ($theme != 'itgadmin') {
   <?php } ?>
   <!--Photo slider and Watch now section starts here--> 
 
-
+<?php if ($theme != 'itgadmin')
+{
+print '<div id="second-section-card">';
+}?>
 <!--Common section strat here-->
 <?php if (isset($widget_data['itg-block-14']['widget_name']) || isset($widget_data['itg-block-15']['widget_name']) || isset($widget_data['itg-block-16']['widget_name']) || $theme == 'itgadmin') { ?>
-    <div class="row itg-common-section">
+    <div class="row itg-common-section" >
 
         <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
             <div class="itg-widget">
@@ -558,7 +574,7 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-14"><?php print $widget_data['itg-block-14']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-14" ><?php print $widget_data['itg-block-14']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>  
@@ -588,7 +604,7 @@ if ($theme != 'itgadmin') {
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+        <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-itg-block-16">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-16']['widget_name']; ?>">
@@ -606,21 +622,30 @@ if ($theme != 'itgadmin') {
                     </div>
                    <?php } ?>  
                   
-                    <div class="data-holder" id="itg-block-16"><?php print $widget_data['itg-block-16']['widget']; ?></div>
+                    <div class="data-holder" id="itg-block-16" widget-style="home-shows"><?php print $widget_data['itg-block-16']['widget']; ?></div>
                   </div>             
                 </div>               
             </div>          
         </div>
-
+<?php if($theme == 'itgadmin') { ?>
       <div class="load-more-wrapper">
         <a href="javascript:void(0)" class="add-more-block">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
       </div>
+<?php } else { ?>
+    <div class="load-more-wrapper-front">
+        <a href="javascript:void(0)" class="add-more-block-front">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+      </div>
+<?php } ?>
     </div>
 <?php } ?>
 <!--End of Common section-->  
-
+<?php if ($theme != 'itgadmin')
+{
+print '</div>';
+}?>
 <!--Common section add more strat here-->
-<?php $count_widget = 19; ?>
+<?php if($theme == 'itgadmin'){
+    $count_widget = 19; ?>
 <?php $last_val = 0;
 $divcounter=1;
 $divcou=0;
@@ -650,7 +675,7 @@ if( $theme != 'itgadmin')
 ?>
 <div class="row itg-common-section mt-50 show-on-add" <?php echo $display_style; ?> id="content-section-widget-<?php print $divcounter;?>">
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-<?php echo $widget_name1;?>">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data[$widget_name1]['widget_name']; ?>">
@@ -675,7 +700,7 @@ if( $theme != 'itgadmin')
             </div>  
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-<?php echo $widget_name2;?>">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data[$widget_name2]['widget_name']; ?>">
@@ -700,7 +725,7 @@ if( $theme != 'itgadmin')
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12 sectioncart" id="section-cart-<?php echo $widget_name3;?>">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data[$widget_name3]['widget_name']; ?>">
@@ -737,9 +762,9 @@ if( $theme != 'itgadmin')
 <?php } ?>
 
 <?php $count_widget = 3 + $count_widget;$divcounter++; ?>
-<?php } ?>
+<?php } }?>
   <!--End of Common section-->
-  
+  <div class="no-more-card" style="display:none">No More Result Found.</div>
 
   <!--Load More Loader
   <div class="load-more">
@@ -806,8 +831,7 @@ if( $theme != 'itgadmin')
           <?php //print $sidebar_second; ?>
         </aside>
       <?php endif; ?>
-    </main>
-
+    </main>      
 
     <?php print render($page['footer']); ?>
 
@@ -854,7 +878,7 @@ if($theme != 'itgadmin')
 }
 
 ?>
-<?php if($_SERVER['HTTP_HOST'] == 'dev.indiatodayonline.in') { ?>
+<?php if($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 <script>
 window.addEventListener("message", function(ev) {
     if (ev.data.message === "requestResult") {
@@ -865,3 +889,10 @@ window.addEventListener("message", function(ev) {
 
 </script>
 <?php } ?>
+
+<div class="activate-message" style="display:none">
+  <div class="message-body">
+    <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
+    <p>Your Account Activated Successfully!</p>
+  </div>
+</div>

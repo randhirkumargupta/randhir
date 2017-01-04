@@ -90,16 +90,35 @@ function feature_for_video_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '23',
+          'weight' => '25',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '22',
+          'weight' => '24',
+        ),
+        'domain' => array(
+          'weight' => '2',
+        ),
+        'redirect' => array(
+          'weight' => '31',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'domain' => array(
+          'default' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+        ),
+        'flag_my_saved_content' => array(
+          'default' => array(
+            'weight' => '10',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__videogallery'] = $strongarm;

@@ -236,56 +236,95 @@
     }
     jQuery('.maptofield').click(function() {
         showloader();
-        var getbame = jQuery('#btn_name').val();
-        parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
+        var form_value = jQuery('#image_teg_form').serialize();
+        jQuery.ajax({
+            url: Drupal.settings.basePath + 'saveimageinfo',
+            type: 'post',
+            data: {'form_value': form_value},
+            success: function(data) {
+
+                var getbame = jQuery('#btn_name').val();
+                if (jQuery('#ckeditor_yes').val() == 1)
+                {
+                    var imagename = jQuery('#imcurl').val();
+                    var getimagename = '<img src="' + imagename + '">';
+                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(getimagename);
+//
+//                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(jQuery('#imcurl').val());
+//                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(2)').val(jQuery('#imcwidth').val());
+//                    parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(3)').val(jQuery('#imcheigth').val());
+                    parent.jQuery.colorbox.close();
+                } else {
+
+                    jQuery('.imagefid').each(function() {
+                        var getvalue = jQuery(this).val();
+                        getvalue = getvalue.split('#');
+                        var newbname = getbame;
+                        var replaced = newbname.substring(newbname.indexOf("[") + 1);
+                        replaced = getvalue[1] + '[' + replaced;
+                        parent.jQuery('[name="' + replaced + '[fid]"]').val(getvalue[0]);
+                        parent.jQuery("body").find("input[name='" + replaced + "[filefield_itg_image_repository][button]").trigger('mousedown');
+                        parent.jQuery('[name="' + getbame + '[fid]"]').val(image_fiedlid);
+                        parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
+
+                        parent.jQuery(document).ajaxComplete(function(event, request, settings) {
+
+                            if (settings.url.indexOf(field_name) >= 0) {
 
 
-        if (jQuery('#ckeditor_yes').val() == 1)
-        {
-            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(0)').val(jQuery('#imcurl').val());
-            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(2)').val(jQuery('#imcwidth').val());
-            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text:eq(3)').val(jQuery('#imcheigth').val());
-            parent.jQuery.colorbox.close();
-        } else {
-            parent.jQuery("body").find("input[name='" + getbame + "[filefield_itg_image_repository][button]").trigger('mousedown');
-            parent.jQuery(document).ajaxComplete(function(event, request, settings) {
+                                if (image_alttext == "")
+                                {
+                                    var imagealt = jQuery('#imgtag img').attr('src');
+                                    var image_alttext = imagealt.substring(imagealt.lastIndexOf("/") + 1, imagealt.length);
+                                    image_alttext = image_alttext.substr(0, image_alttext.lastIndexOf('.'));
+                                }
+                                if (image_title == "")
+                                {
+                                    var imagetitle = jQuery('#imgtag img').attr('src');
+                                    var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
+                                    image_title = image_title.substr(0, image_title.lastIndexOf('.'));
+                                }
 
-                if (settings.url.indexOf(field_name) >= 0) {
+                                var image_title = jQuery('#alt_text_image').val();
+                                var image_alttext = jQuery('#image_title_exta').val();
 
-                    var image_alttext = jQuery('#img_alttext').val();
-                    var image_title = jQuery('#img_title').val();
-                    if (image_alttext == "")
-                    {
-                        var imagealt = jQuery('#imgtag img').attr('src');
-                        var image_alttext = imagealt.substring(imagealt.lastIndexOf("/") + 1, imagealt.length);
-                    }
-                    if (image_title == "")
-                    {
-                        var imagetitle = jQuery('#imgtag img').attr('src');
-                        var image_title = imagetitle.substring(imagetitle.lastIndexOf("/") + 1, imagetitle.length);
-                    }
+                                setTimeout(function() {
+                                    if (image_title != "")
+                                    {
+                                        parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
+                                         parent.jQuery('[name="' + replaced + '[alt]"]').val(image_alttext);
 
-                    image_title = image_title.replace(/%20/g, " ");
-                    image_alttext = image_alttext.replace(/%20/g, " ");
+                                    }
+                                    if (image_alttext != "")
+                                    {
+                                        parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
+                                         parent.jQuery('[name="' + replaced + '[title]"]').val(image_title);
 
-                    setTimeout(function() {
-                        parent.jQuery('[name="' + getbame + '[alt]"]').val(image_alttext);
-                        parent.jQuery('[name="' + getbame + '[title]"]').val(image_title);
-                        var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
-                        var captionid = getbame + '[field_image_caption][und][0][value]';
-                        captionid = captionid.replace('[field_images][und][0]', "");
-                        var captionid1 = getbame + '[field_credit][und][0][value]';
-                        captionid1 = captionid1.replace('[field_images][und][0]', "");
-                        parent.jQuery('[name="' + captionid + '"]').val(image_title);
-                        parent.jQuery('[name="' + captionid1 + '"]').val(credit);
-                        hideloader();
-                        parent.jQuery.colorbox.close();
-                    }, 500);
+                                    }
+
+                                    var credit = parent.jQuery('#edit-field-credit-name-und-0-value').val();
+                                    var captionid = getbame + '[field_image_caption][und][0][value]';
+                                    captionid = captionid.replace('[field_images][und][0]', "");
+                                    var captionid1 = getbame + '[field_credit][und][0][value]';
+                                    captionid1 = captionid1.replace('[field_images][und][0]', "");
+                                    //  parent.jQuery('[name="' + captionid + '"]').val(image_title);
+                                    parent.jQuery('[name="' + captionid1 + '"]').val(credit);
+                                    hideloader();
+                                    parent.jQuery.colorbox.close();
+                                }, 500);
+                            }
+
+
+                        });
+                    });
                 }
 
-
-            });
-        }
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
 
 
 
@@ -302,3 +341,4 @@ function hideloader()
 {
     jQuery('#loader-data').hide();
 }
+
