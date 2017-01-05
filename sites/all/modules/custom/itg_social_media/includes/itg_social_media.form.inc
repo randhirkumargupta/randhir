@@ -139,7 +139,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   $form['twit_wrap']['itg_twitter_narrative'] = array(
     '#type' => 'textfield',
     '#title' => t('Image Narrative'),
-    '#maxlength' => 255,
+    '#maxlength' => 126,
     '#default_value' => isset($node->field_story_tweet['und'][0]['value']) ? $node->field_story_tweet['und'][0]['value'] : '',
     '#states' => array(
       'visible' => array(
@@ -189,7 +189,7 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
   $form['twit_wrap']['field_story_twitter_video_desc'] = array(
     '#type' => 'textfield',
     '#title' => t('Video Narrative'),
-    '#maxlength' => 255,
+    '#maxlength' => 126,
     '#default_value' => isset($node->field_story_twitter_video_desc['und'][0]['value']) ? $node->field_story_twitter_video_desc['und'][0]['value'] : '',
     '#states' => array(
       'visible' => array(
@@ -260,9 +260,10 @@ function itg_social_media_form($form, &$form_state, $c_type, $nid) {
  * @return array
  *   Altered form element array.
  */
-function itg_social_media_form_after_build($form, &$form_state) {
+function itg_social_media_form_after_build($form, &$form_state) {  
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');  
+  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
   drupal_add_js(drupal_get_path('module', 'itg_social_media') . '/js/itg_social_media.js');
-  drupal_add_js(drupal_get_path('module', 'itg_astro') . '/js/moment.js');
   
   return $form;
 }

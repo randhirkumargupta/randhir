@@ -277,7 +277,6 @@ function itg_videogallery_custom_submit($form, &$form_state) {
     }
 }
 
-
 /**
  * Implements function for dailymotion api
  * @return object
@@ -1165,9 +1164,21 @@ function itg_videogallery_thumb_assign() {
             $query->condition('field_video_upload_value', $val->entity_id);
             $result_video = $query->execute()->fetchAll();
             $thumb_url = $api->get(
-                    '/video/' . $val->video_id, array('fields' => array('thumbnail_url'))
+                    '/video/' . $val->video_id, array('fields' => array('thumbnail_url', 'duration'))
             );
+            
             $node = node_load($result_video[0]->entity_id);
+            if ($thumb_url['duration'] > 0) {
+                $duration = '';
+                if ($thumb_url['duration'] < 3600) {
+                    $duration = gmdate("i:s", $thumb_url['duration']);
+                }
+                else {
+                    $duration = gmdate("H:i:s", $thumb_url['duration']);
+                }
+                $node->field_video_duration[LANGUAGE_NONE][0]['value'] = $duration;
+                field_attach_update('node', $node);
+            }
             if ($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] == 0) {
                 $image_url = $thumb_url['thumbnail_url'];
                 $imagedata = file_get_contents($image_url);
@@ -1175,6 +1186,24 @@ function itg_videogallery_thumb_assign() {
                 $file = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
                 file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
                 $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
+                field_attach_update('node', $node);
+            }
+            if ($node->field_story_small_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] == 0) {
+                $image_url = $thumb_url['thumbnail_url'];
+                $imagedata = file_get_contents($image_url);
+                $image_url = 'itg' . time() . end(explode('/', $image_url));
+                $file = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
+                field_attach_update('node', $node);
+            }
+            if ($node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == 0) {
+                $image_url = $thumb_url['thumbnail_url'];
+                $imagedata = file_get_contents($image_url);
+                $image_url = 'itg' . time() . end(explode('/', $image_url));
+                $file = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
                 field_attach_update('node', $node);
             }
         }
@@ -1227,7 +1256,7 @@ function get_video_in_fieldcollection_by_nid($nid) {
     $query->join('field_data_field_videogallery_video_upload', 'fvu', 'up_video.field_video_upload_value = fvu.entity_id');
     $query->join('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
     $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
-     $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
+    $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
     $query->fields('drd', array('fid', 'video_id', 'dailymotion_thumb_url'));
     $query->fields('up_video', array('entity_id'));
     $query->fields('ads_inc', array('field_include_ads_value'));

@@ -1,6 +1,6 @@
 <?php
 if (!empty($data)) : 
-  global $base_url;
+  global $base_url, $user;
   $is_videogallery = FALSE;
   $href = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
   $data_nid = "";
@@ -87,7 +87,7 @@ if (!empty($data)) :
           <?php if (!empty($data['node_data']->field_story_kicker_text['und'][0]['value'])) : ?>
             <?php
             // prepare configuration for sharing
-            $share_desc = preg_replace($data['node_data']->field_story_kicker_text['und'][0]['value']);
+            $share_desc = preg_replace("/'/", "\\'", $data['node_data']->field_story_kicker_text['und'][0]['value']);
             $share_desc_fb= htmlentities($share_desc, ENT_QUOTES);
             print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 165, '..');
             ?>
@@ -111,7 +111,22 @@ if (!empty($data)) :
             <ul>
               <li><a onclick="fbpop ('<?php print $actual_link; ?>', '<?php print $bigstory_fb_share; ?>', '<?php print $share_desc_fb; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
               <li><a href="javascript:" onclick="twitter_popup ('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#" title=""><?php echo t('Follow the Story'); ?></a></li>
+              
+              <?php if(!empty($data['node_data']->type) && $data['node_data']->type == 'story') :
+              if (function_exists('itg_get_front_activity_info')) {
+                 $follow_status = itg_get_front_activity_info($data['node_data']->nid, $data['node_data']->type, $user->uid, 'follow_story');
+              }
+              if($user->uid > 0): 
+              if(!empty($follow_status['nid'])): 
+              ?>  
+              <li class="following"><?php print t('Following'); ?></li>
+              <?php else:?>
+              <li class="follow-story"><a title = "follow story" href="javascript:" id="user-activity" rel="<?php print $data['node_data']->nid;?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" class="def-cur-pointer"><?php print t('follow the Story'); ?></a></li>
+              <?php endif; else: ?>
+              <li class="mhide"><?php if(function_exists(itg_sso_url)) { print itg_sso_url('follow story'); }  ?></li>
+              <?php endif; ?>
+              <?php endif;?>
+              
             </ul>
           </div>
         <?php endif; ?>
