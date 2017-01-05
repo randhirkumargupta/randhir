@@ -40,7 +40,7 @@ $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE
                      <?php $read_later = flag_create_link('my_saved_content', arg(1)); ?>                      
                      <li><?php print $read_later; ?></li>
                   <?php else: ?>
-                     <?php print '<li class="mhide">' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'Save'))) . '</li>'; ?>
+                     <?php print '<li>' . l('<i class="fa fa-bookmark"></i>', 'user/login', array('html' => TRUE, 'attributes' => array('title' => 'Save'))) . '</li>'; ?>
                 <?php endif; ?>                  
             </ul>
         </div>

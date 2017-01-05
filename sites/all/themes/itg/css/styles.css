@@ -80,7 +80,7 @@ h4.heading a {
   clear: both;
 }
 
-.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul {
+.list-none, #block-itg-layout-manager-header-block ul, footer ul, .big-news ul, .trending-videos, .view-front-end-global-search .view-content ul, .dont-miss ul, #block-itg-widget-yearende-left-top-news .top-news ul, #block-itg-widget-yearende-left-top-videos .top-video ul, .osscar-video ul, .story-section ul, .may-be-suggest-container ul, .top-takes-video-container ul, .watch-right-now-video ul, .page-snappost ul, #block-views-anchor-landing-page-block .anchor-right .social-icon ul, .live-block ul, .poll-wrapper ul, .poll-navigation ul, .poll-banner ul, #block-views-video-landing-header-block ul, #block-views-video-landing-header-block-1 ul, .rhs-section-ordering ul, #breadcrumbs ul, .view-archive-story .view-content ul, .program-rhs ul, #block-itg-msi-magazine-calendar ul, #block-views-latest-issue-magzine-block-1 ul, .magazin-lhs-top .magazin-top ul, .magazin-lhs-top .magazin-bottom ul, #block-itg-layout-manager-header-sosorry-block .sosory-footer ul, .sosorry-social ul, .recommended-for-you ul, .tech-layout-page .buying-guides ul, #block-itg-event-backend-program-tab-block ul, #block-views-event-photo-slider-block ul, #block-views-event-associate-video-block ul, #block-views-event-subsite-speaker-block ul, #block-views-program-schedule-block-1 ul, #block-menu-menu-event-menu ul, .education-layout-page .how-made-it ul, .sport-home-layout-page .sports-video ul, #block-itg-menu-manager-third-level-menu ul, .election-page .key-candidate ul, #block-itg-live-tv-live-tv-video-page ul, #block-menu-menu-about-us-page-menu ul, #block-itg-front-end-common-related-photo-block #related-photo ul, #block-itg-front-end-common-related-video-block #related-photo ul {
   list-style-type: none;
 }
 
@@ -6668,9 +6668,6 @@ footer .footer-copyright {
   height: 672px;
   overflow: hidden;
 }
-.tech-layout-page .auto-block-1 {
-  border: 1px solid #ddd;
-}
 .tech-layout-page .auto-block-1 .featured-news {
   border: none;
 }
@@ -6757,6 +6754,7 @@ footer .footer-copyright {
   padding: 10px 0;
   border-bottom: 1px solid #dddddd;
   margin-bottom: 15px;
+  font-size: 20px;
 }
 .tech-layout-page .buying-guides ul li span a {
   color: #b00202;
@@ -6812,6 +6810,9 @@ footer .footer-copyright {
 }
 .tech-layout-page .tech-block_8 .widget-title {
   margin-bottom: 5px;
+}
+.tech-layout-page .techwatch {
+  background: none;
 }
 .tech-layout-page .techwatch.osscar-video ul .dont-miss-listing {
   padding: 0 0 10px 0;
@@ -9705,6 +9706,13 @@ footer .footer-copyright {
   height: 75px;
   overflow: hidden;
 }
+#block-itg-menu-manager-vertical-menu li:hover {
+  background: #fff;
+}
+#block-itg-menu-manager-vertical-menu li:hover a {
+  background: #fff;
+  color: #b00202;
+}
 #block-itg-menu-manager-vertical-menu img {
   margin: 0 auto;
   display: block;
@@ -9721,10 +9729,6 @@ footer .footer-copyright {
   padding: 10px 5px;
   word-wrap: break-word;
   color: #383838;
-}
-#block-itg-menu-manager-vertical-menu a:hover {
-  background: #fff;
-  color: #b00202;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent {
   height: 375px;
