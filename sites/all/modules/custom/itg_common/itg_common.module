@@ -971,12 +971,35 @@ function itg_get_related_story_content($entity_id) {
  */
 function itg_get_related_story_id($related_content) {
  $related_content = explode(',', $related_content);
-                    foreach ($related_content as $fn_result) {
-                      $related_content = explode('_', $fn_result);
-                      $final_related [] = $related_content[1];
-                    }
-                    $final_related = implode(',', $final_related);
-                    $final_related = explode(',', $final_related);
-                    
-                    return $final_related;
+  foreach ($related_content as $fn_result) {
+    $related_content = explode('_', $fn_result);
+    $final_related [] = $related_content[1];
+  }
+  $final_related = implode(',', $final_related);
+  $final_related = explode(',', $final_related);
+
+  return $final_related;
+}
+
+/** 
+ * Implements itg_sso_url
+ * @param string $link_name
+ */
+
+function itg_sso_url($link_name) {
+  $site = 'indiatoday';
+  if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
+    if ($user->uid == 0) {
+      $url = 'http://' . PARENT_SSO . '/saml_login/other/domain_info';
+      return '<a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
+    }
+  }
+  else {
+    if ($user->uid == 0) {
+      $url = PARENT_SSO;
+      $sam_param = '/saml_login/other';
+      return '<a href="javascript:void(0)" onclick="Go (550, 500, 50, ' . "'" . $site . "'" . ', ' . "'" . $site . "'" . ', ' . "'" . $url . "'" . ', ' . "'" . $sam_param . "'" . ')">'. $link_name .'</a>';
+     
+    }
+  }
 }

@@ -1,6 +1,6 @@
 <?php
 if (!empty($content)):
-    global $base_url;
+    global $base_url, $user;
     // get related content associated with story
     $related_content = itg_get_related_content(arg(1));
     if(function_exists(itg_get_related_story_id)) { $related_result = itg_get_related_story_id($related_content); }
@@ -36,6 +36,11 @@ if (!empty($content)):
     // get developing story status
     if (function_exists(itg_msi_get_lock_story_status)) {
     $get_develop_story_status = itg_msi_get_lock_story_status($node->nid, 'developing_story');
+    }
+    
+    //get follow story status
+    if(function_exists(itg_get_front_activity_info)) {
+      $follow_status = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'follow_story');
     }
     
     //get byline detail
@@ -541,7 +546,13 @@ if (!empty($content)):
                             <!--<li class="mhide"><a href="#"><i class="fa fa-comment"></i></a> <span>1522</span></li>-->
                             <li class="mhide"><span class="share-count"><?php if(!empty($tot_count)) { print $tot_count;} else { print 0; } ?></span> SHARES</li>
                             <!--<li><span>Edited by</span> Arunava Chatterjee</li>-->
-                             <li class="mhide"><a href="#" class="def-cur-pointer">follow the Story</a></li>
+                            <?php if($user->uid > 0): if(!empty($follow_status['nid'])): ?>  
+                            <li class="mhide follow-story"><?php print t('Following'); ?></li>
+                            <?php else:?>
+                            <li class="mhide follow-story"><a href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" class="def-cur-pointer">follow the Story</a></li>
+                             <?php endif; else: ?>
+                            <li class="mhide"><?php if(function_exists(itg_sso_url)) { print itg_sso_url('follow story'); }  ?></li>
+                             <?php endif; ?>
 
                         </ul>
                     </div>

@@ -122,6 +122,8 @@ function itg_social_media_form_views_exposed_form_alter(&$form, &$form_state, $f
       
       break;  
     case 'views-exposed-form-sold-item-history-page':
+      $form['status']['#options'][1] = t('Complete');
+      $form['status']['#options'][0] = t('Pending');
     case 'views-exposed-form-browse-content-page':
       $form['created']['min'] = array(        
         '#type' => 'date_popup',
