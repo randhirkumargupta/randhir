@@ -353,10 +353,10 @@ function itg_event_backend_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_event_backend' => array('settings' => $settings)), array('type' => 'setting'));
 
-  $end_date = strtotime('+1 day', strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']));
+  $end_date = @strtotime('+1 day', strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']));
   $start_date = $form_state['values']['field_event_start_date'][LANGUAGE_NONE][0]['value'];
   $end_date_new = date('Y-m-d', $end_date);
-  $start_date_new = explode(' ', $start_date);
+  $start_date_new = @explode(' ', $start_date);
   $options_daywise = itg_event_backend_date_interval($start_date_new[0], $end_date_new);
   $highlight_options = array('_none' => t('- Select Daywise -'));
   $media_options = array('_none' => t('- Select Daywise -'));
@@ -705,7 +705,10 @@ function itg_event_backend_block_view($delta = '') {
       $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
       break;
     case 'tweet_right_sidebar_event':
-      $block['content'] = theme('tweet_right_sidebar_event');
+      $twitter_content = itg_event_backend_twitter_data();
+      if(!empty($twitter_content)){
+        $block['content'] = theme('tweet_right_sidebar_event', array('data' => $twitter_content));
+      }
       break;
     case 'event_registration':
       module_load_include('inc', 'itg_event_registration', 'includes/itg_event_registration');
@@ -1362,8 +1365,8 @@ function itg_event_backend_get_redirect_all_domains($except_this_node = NULL) {
   }
   $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
-    $redirect_arr = explode('://', $record['redirect']);
-    $records[] = $redirect_arr[1];
+      $redirect_arr = explode('://', $record['redirect']);
+      $records[] = @$redirect_arr[1];
   }
   return $records;
 }
@@ -1814,7 +1817,23 @@ function itg_event_backend_form_taxonomy_form_term_alter(&$form, &$form_state) {
   }
 }
 
-/* * *
+
+/**
+ * Implements function for event twitter block
+ */
+function itg_event_backend_twitter_data() {
+  $event_id = itg_event_backend_get_event_node();
+  if (!empty($event_id) && itg_event_backend_get_node_type($event_id) == 'event_backend') {
+    $query = db_select('field_data_field_event_twitter', 'event_twitter');
+    $query->fields('event_twitter', array('field_event_twitter_value'));
+    $query->condition('entity_id', $event_id, '=');
+    $query->condition('bundle', 'event_backend', '=');
+    $result = $query->execute()->fetchField();
+    return $result;
+  }
+}
+
+/***
  * Implements function for get node type
  */
 function itg_event_backend_get_node_type($nid) {

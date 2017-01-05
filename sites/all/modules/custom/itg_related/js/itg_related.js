@@ -17,9 +17,9 @@
             $('#filter-save', context).click(function (event) {
                 
                 var title = $("#edit-label").val();
-                var type = $("#edit-bundle-name").val();
+                var type = $("#edit-bundle").val();
                 var search_name = $("#search-title").val();
-                var bundle_name = $("#edit-bundle-name").val();
+                var bundle_name = $("#edit-bundle").val();
                 var section_id = $("#edit-im-vid-4").val();
                 var hash = $("#edit-hash").val();
 

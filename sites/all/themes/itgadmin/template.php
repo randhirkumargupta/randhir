@@ -266,13 +266,13 @@ function itgadmin_breadcrumb($vars) {
         $node = node_load(arg(1));
 
         //Set issue view page breadcrumb
-        if ($node->type == 'issue') {
+        if (!empty($node->type) && $node->type == 'issue') {
           $title_arr = explode('00:', $node->title);
           $vars['breadcrumb'][1] = date('d/m/Y', strtotime($title_arr[0]));
         }
 
         //Set UGC view page breadcrumb
-        if ($node->type == 'ugc') {
+        if (!empty($node->type) && $node->type == 'ugc') {
           $vars['breadcrumb'][1] = $node->title;
         }
       }
@@ -416,7 +416,13 @@ function itgadmin_preprocess_page(&$vars) {
   }
 
   //Add tpl for event registration view page
-  if ((isset($vars['node']->type) && $vars['node']->type == 'event_registration') || $arg0 == 'comment_view' || $arg0 == 'event-users-list' || arg(1) == 'associate-with-story' || $arg0 == 'comment_edit' || arg(0) === 'social-media-logs' || ($vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
+  if ((!empty($vars['node']->type) && $vars['node']->type == 'event_registration') 
+          || $arg0 == 'comment_view' 
+          || $arg0 == 'event-users-list' 
+          || arg(1) == 'associate-with-story' 
+          || $arg0 == 'comment_edit' 
+          || $arg0 === 'social-media-logs' 
+          || (!empty($vars['node']->type) && $vars['node']->type == 'print_team_integration' && $_GET['type'] == 'commentform' )) {
     $vars['theme_hook_suggestions'][] = 'page__event_registration';
   }
   
