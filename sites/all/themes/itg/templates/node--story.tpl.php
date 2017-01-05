@@ -67,7 +67,7 @@ if (!empty($content)):
             $pipelinetext="";
             if(!empty($node->field_story_new_title) &&  !empty($node->field_story_redirection_url_titl))
             {
-                $pipelinetext=' | <a href="'.$node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'].'">'.ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']).'</a>';
+                $pipelinetext=' <span class="story-pipline">||</span> <a target="_blank" href="'.$node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'].'">'.ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']).'</a>';
             }
             if(!empty($get_develop_story_status)) {?>
             <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true"></i> <i class="fa fa-circle" aria-hidden="true"></i></h1>
@@ -577,7 +577,7 @@ if (!empty($content)):
                                     $term = taxonomy_term_load($tags['tid']);
                                     $t_name = $term->name;
                                     $comma_sep_tag[] = $t_name;
-                                    print '<li>#<a target="_blank" href="'.$base_url.'/site-search?keyword='.$t_name.'">' . $t_name . '</a></li>';
+                                    print '<li><a target="_blank" href="'.$base_url.'/site-search?keyword='.$t_name.'">#' . $t_name . '</a></li>';
                                 }
                             }
                             ?>
