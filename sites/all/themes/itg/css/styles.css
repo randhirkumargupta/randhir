@@ -2175,6 +2175,9 @@ footer .footer-copyright {
   font-size: 13px;
   color: #f40000;
 }
+.story-section h1 span {
+  color: #bb0a0a;
+}
 .story-section .comment-mobile {
   background: #1c1c1c;
   margin: -15px -15px 20px;
