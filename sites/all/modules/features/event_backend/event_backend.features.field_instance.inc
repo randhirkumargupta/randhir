@@ -1700,6 +1700,48 @@ function event_backend_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event_backend-field_event_twitter'.
+  $field_instances['node-event_backend-field_event_twitter'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 49,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_event_twitter',
+    'label' => 'Twitter',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 27,
+    ),
+  );
+
   // Exported field_instance: 'node-event_backend-field_event_type'.
   $field_instances['node-event_backend-field_event_type'] = array(
     'bundle' => 'event_backend',
@@ -2220,7 +2262,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 4,
       ),
       'type' => 'text_textarea',
-      'weight' => 27,
+      'weight' => 28,
     ),
   );
 
@@ -2546,6 +2588,7 @@ function event_backend_field_default_field_instances() {
   t('Terms & Conditions');
   t('The complete description of the event.');
   t('This displays information about the event.');
+  t('Twitter');
   t('Values – Paid, Free and Invite');
   t('Video');
   t('step completion');
