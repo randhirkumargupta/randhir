@@ -570,7 +570,7 @@
   .itg-layout-container .top-colum-3 .droppable,
   .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
   .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-  .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable {
+  .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable, .tech-layout-page .itg-h385-section .droppable {
     height: auto;
   }
 
@@ -1037,10 +1037,13 @@
 
   /*story page comment section end*/
   /*Home page css start*/
-  .home_page_poll_widget_block .poll-data, .sport-home-layout-page .poll-data {
+  .home_page_poll_widget_block .poll-wrapper .poll-data, .sport-home-layout-page .poll-wrapper .poll-data {
     padding: 0;
   }
-  .home_page_poll_widget_block .poll-data .poll-banner-image img, .sport-home-layout-page .poll-data .poll-banner-image img {
+  .home_page_poll_widget_block .poll-wrapper .poll-data .poll-banner-image, .sport-home-layout-page .poll-wrapper .poll-data .poll-banner-image {
+    max-width: 100%;
+  }
+  .home_page_poll_widget_block .poll-wrapper .poll-data .poll-banner-image img, .sport-home-layout-page .poll-wrapper .poll-data .poll-banner-image img {
     max-width: 100%;
   }
 
@@ -1317,6 +1320,10 @@
     border-bottom: 1px solid rgba(170, 169, 169, 0.2);
     padding-bottom: 10px;
     color: #d9d9d9;
+  }
+
+  .tech-layout-page .techwatch.osscar-video ul .dont-miss-listing .dm-pic {
+    width: 124px;
   }
 }
 @media only screen and (max-width: 640px) {
@@ -1948,6 +1955,7 @@
     float: left;
     width: 84.5%;
     padding: 10px;
+    border: 1px solid #242424;
   }
   #block-views-video-landing-header-block .video-header-left .social-likes {
     float: left;
@@ -1999,6 +2007,9 @@
     height: 474px;
     padding-bottom: 0px;
   }
+  #block-views-video-landing-header-block .video-header-right p:first-child {
+    margin-top: 0px;
+  }
   #block-views-video-landing-header-block h2 {
     font-size: 24px;
     font-size: 1.5rem;
@@ -2017,6 +2028,12 @@
   }
 
   /*css end for special auto page*/
+  /*css for tech page start*/
+  .tech-layout-page .auto-block-1 {
+    border: 1px solid #ddd;
+  }
+
+  /*css for tech page end*/
 }
 /*End CSS Desktop version*/
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
