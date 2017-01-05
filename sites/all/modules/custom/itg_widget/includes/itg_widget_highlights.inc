@@ -6,8 +6,9 @@
  * @param array $poll_data
  */
 function save_highlights_widget_data($highlights_data) {
-  if (empty($_GET['shs_term_node_tid_depth'])) {
-    drupal_set_message('Please select section');
+  if (empty($_GET['shs_term_node_tid_depth']) ) {
+    drupal_set_message('Please select section','error');
+    
   }
   else {
     $selected_node = $highlights_data['selection'];

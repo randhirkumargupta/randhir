@@ -9,47 +9,6 @@
             var uid = settings.itg_flag.settings.uid;
             var base_url = settings.itg_flag.settings.base_url;
             //alert(base_url);
-            $('#like_count,#dislike_count').click(function (event) {
-
-                var nd_id = jQuery(this).attr('rel');
-                var typ = jQuery(this).attr('id');
-                var dtag = jQuery(this).attr('data-tag');
-                var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag;
-
-                $.ajax({
-                    'url': base_url + '/flag-details-ajax',
-                    'data': post_data,
-                    'cache': false,
-                    'type': 'POST',
-                    // dataType: 'json',
-                    beforeSend: function () {
-
-                    },
-                    'success': function (result)
-                    {
-                        var obj = jQuery.parseJSON(result);
-
-                        $('#widget-ajex-loader').hide();
-                        if (obj.type == 'like_count') {
-                            $("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
-                        }
-                        if (obj.chk == 'sty') {
-                            $("#sty-dv").show(0);
-                        }
-                        if (obj.chk == 'dsty') {
-                            $("#dsty-dv").show(0);
-                        }
-                        if (obj.type == 'dislike_count') {
-                            $("#no-of-dislikes_" + obj.nd_id).html("(" + obj.count + ")");
-                        }
-                        if (obj.error == 'error') {
-
-                            $("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
-                        }
-                    }
-                });
-
-            });
             
             // jquery for front user activity
             $('#user-activity').click(function (event) {
@@ -154,3 +113,47 @@ function scrollToAnchor(aid) {
     var aTag = jQuery("div[id='" + aid + "']");
     jQuery('html,body').animate({scrollTop: aTag.offset().top}, 'slow');
 }
+
+// code for like dislike
+jQuery(document).ready(function () {
+    jQuery('#like_count,#dislike_count').click(function (event) {
+        var nd_id = jQuery(this).attr('rel');
+        var typ = jQuery(this).attr('id');
+        var dtag = jQuery(this).attr('data-tag');
+        var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag;
+
+        jQuery.ajax({
+            'url': Drupal.settings.baseUrl.baseUrl + '/flag-details-ajax',
+            'data': post_data,
+            'cache': false,
+            'type': 'POST',
+            // dataType: 'json',
+            beforeSend: function () {
+
+            },
+            'success': function (result)
+            {
+                var obj = jQuery.parseJSON(result);
+
+                jQuery('#widget-ajex-loader').hide();
+                if (obj.type == 'like_count') {
+                    jQuery("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
+                }
+                if (obj.chk == 'sty') {
+                    jQuery("#sty-dv").show(0);
+                }
+                if (obj.chk == 'dsty') {
+                    jQuery("#dsty-dv").show(0);
+                }
+                if (obj.type == 'dislike_count') {
+                    jQuery("#no-of-dislikes_" + obj.nd_id).html("(" + obj.count + ")");
+                }
+                if (obj.error == 'error') {
+
+                    jQuery("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                }
+            }
+        });
+
+    });
+});

@@ -5093,7 +5093,7 @@ div.node #comments h2 {
   margin-top: 18px;
 }
 .view-related-content-new .scroll-wrap {
-  max-height: 438px;
+  max-height: 320px;
   width: 100%;
   overflow: auto;
 }
@@ -8968,6 +8968,16 @@ div.node #comments h2 {
   display: none;
 }
 
+.top-actions .form-submit[value="Publish"] {
+  background-color: #33a26d !important;
+  border: 1px solid #197e4e !important;
+}
+.top-actions .form-submit[value="Publish"]:hover {
+  background-color: #197e4e !important;
+  border-color: #197e4e !important;
+  color: #fff !important;
+}
+
 [id*="itg-quiz-quiz-form"] .question-heading {
   font: 400 20/28px Roboto;
   color: #000;
@@ -10046,15 +10056,19 @@ div.node #comments h2 {
 .templates-tab-wrapper {
   padding-top: 10px;
 }
-.templates-tab-wrapper > label {
-  float: left;
-  padding: 6px 20px;
-  width: 220px;
+.templates-tab-wrapper .form-field-name-field-story-select-templates .form-type-radios .form-radios .form-type-radio {
+  margin-right: 5px;
+  position: relative;
 }
-.templates-tab-wrapper .templates-tab {
-  padding-bottom: 10px;
+.templates-tab-wrapper .form-field-name-field-story-select-templates .form-type-radios .form-radios .form-type-radio .form-radio {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
 }
-.templates-tab-wrapper .templates-tab > span {
+.templates-tab-wrapper .form-field-name-field-story-select-templates .form-type-radios .form-radios .form-type-radio .form-radio + label {
   cursor: pointer;
   font-size: 14px;
   font-weight: 300;
@@ -10067,19 +10081,21 @@ div.node #comments h2 {
   color: #fff;
   box-shadow: 0 0 3px 0 #999;
   text-transform: uppercase;
-  margin-right: 5px;
   min-width: 100px;
   display: inline-block;
   vertical-align: top;
   transition: all 300ms;
 }
-.templates-tab-wrapper .templates-tab > span.active {
+.templates-tab-wrapper .form-field-name-field-story-select-templates .form-type-radios .form-radios .form-type-radio .form-radio:checked + label {
   background-color: #1fb5ad;
   border: 1px solid #1fb5ad;
 }
 .templates-tab-wrapper .tab-form {
   padding-top: 10px;
   display: none;
+}
+.templates-tab-wrapper .tab-form.listicle-tab-form {
+  display: block;
 }
 
 #layout-html-submit, #layout-highlights-submit {
@@ -10340,4 +10356,27 @@ span.file a {
   top: 0;
   width: 100%;
   z-index: 9;
+}
+
+.form-item-bs-status .form-select[multiple="multiple"] {
+  min-height: 0;
+  height: 45px;
+}
+
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr:first-child td .file-widget > input[value="Remove"] {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.page-related-content #main {
+  min-height: 0 !important;
+}
+
+.node-type-event-backend .action-with-title #page-title {
+  width: 700;
+}
+
+.primary_category_radio {
+  float: left;
+  margin: 2px 5px;
 }
