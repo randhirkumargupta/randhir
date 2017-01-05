@@ -1384,9 +1384,14 @@
     }
 } 
 .tech-layout-page{
-    .techwatch.osscar-video ul .dont-miss-listing .dm-pic{
-        width: 124px;
-    }
+    .techwatch.osscar-video ul .dont-miss-listing{
+      .dm-pic{
+            width: 124px;
+        }
+        .dm-detail{
+            overflow: initial;
+        }  
+    } 
 }
 
 }

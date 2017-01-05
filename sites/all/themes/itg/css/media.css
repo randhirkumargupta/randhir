@@ -1325,6 +1325,9 @@
   .tech-layout-page .techwatch.osscar-video ul .dont-miss-listing .dm-pic {
     width: 124px;
   }
+  .tech-layout-page .techwatch.osscar-video ul .dont-miss-listing .dm-detail {
+    overflow: initial;
+  }
 }
 @media only screen and (max-width: 640px) {
   #block-views-anchor-landing-page-block .anchor-left {

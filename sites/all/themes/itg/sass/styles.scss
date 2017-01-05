@@ -5273,8 +5273,7 @@ footer{
                 span{
                    a{
                        color: #b00202;
-                       @include font(12px);
-                       margin-bottom: 5px;                       
+                       @include font(12px);                                            
                     }
                 }
                 &:first-child{
@@ -5309,7 +5308,7 @@ footer{
             }
         }
     }
-    /*Start photo section slider*/
+/*    Start photo section slider
     .tech-block_5{
         a{
             color:#fff;
@@ -5333,7 +5332,7 @@ footer{
             @include pos(absolute,null,null,78px,0px);
         }
     }    
-    /*End photo section slider*/
+    End photo section slider*/
     .tech-block_8{
         .widget-title{
             margin-bottom: 5px;
@@ -6477,9 +6476,24 @@ footer{
             padding-left: 0;
         }
     }
-    .form-submit[value="Add another item"], .form-submit[value="Remove"]{
+    /*.form-submit[value="Add another item"], .form-submit[value="Remove"]{
             display: none;
-        } 
+        } */
+        .form-submit[value="Add another item"]{
+            margin-left: 0;
+        }
+        .form-submit[value="Remove"]{
+            background: #ef3c24;
+            float: right;
+            margin-top: 20px;
+            margin-right: 20px;
+            border: none;
+            padding: 5px 10px;
+            color: #fff;
+            font-weight: 500;
+            font-family: roboto;
+            border-radius: 4px;
+        }
     }        
 }
 #block-itg-event-backend-event-registration{
@@ -7270,6 +7284,13 @@ input[type="radio"]:checked + label:after{
 
 /*CSS start for movie page*/
 .movie-layout-page{
+    .featured-post-first{
+        h2{
+            a{
+                margin-bottom: 0;
+            }
+        }
+    }
     .itg-layout-580{
         .droppable{
             height: 580px;

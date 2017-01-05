@@ -6661,8 +6661,31 @@ footer .footer-copyright {
 /*CSS End special auto page */
 /*CSS Start special tech page */
 .tech-layout-page {
-  /*Start photo section slider*/
-  /*End photo section slider*/
+  /*    Start photo section slider
+      .tech-block_5{
+          a{
+              color:#fff;
+          }
+          .flexslider .flex-direction-nav{
+              display: block;
+          }       
+          .flexslider .slides li{
+              &:hover a{
+                  color: #fff;
+              }
+              .detail .flex-caption{
+                  @include font(18px,24px,$itg-font-medium);  
+                  padding: 10px;   
+                  min-height: 68px;
+                  max-height: auto;
+                  overflow: initial;            
+              }   
+          }
+          .flexslider .slides li .detail .flex-count{
+              @include pos(absolute,null,null,78px,0px);
+          }
+      }    
+      End photo section slider*/
 }
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2 {
   height: 672px;
@@ -6760,7 +6783,6 @@ footer .footer-copyright {
   color: #b00202;
   font-size: 12px;
   font-size: 0.75rem;
-  margin-bottom: 5px;
 }
 .tech-layout-page .buying-guides ul li:first-child {
   padding-bottom: 15px;
@@ -6783,30 +6805,6 @@ footer .footer-copyright {
   float: left;
   margin-bottom: 0;
   margin-right: 10px;
-}
-.tech-layout-page .tech-block_5 a {
-  color: #fff;
-}
-.tech-layout-page .tech-block_5 .flexslider .flex-direction-nav {
-  display: block;
-}
-.tech-layout-page .tech-block_5 .flexslider .slides li:hover a {
-  color: #fff;
-}
-.tech-layout-page .tech-block_5 .flexslider .slides li .detail .flex-caption {
-  font-size: 18px;
-  font-size: 1.125rem;
-  font-weight: 500;
-  line-height: 24px;
-  padding: 10px;
-  min-height: 68px;
-  max-height: auto;
-  overflow: initial;
-}
-.tech-layout-page .tech-block_5 .flexslider .slides li .detail .flex-count {
-  position: absolute;
-  bottom: 78px;
-  left: 0px;
 }
 .tech-layout-page .tech-block_8 .widget-title {
   margin-bottom: 5px;
@@ -7734,6 +7732,11 @@ footer .footer-copyright {
   font-weight: 700;
 }
 
+#content [id*='event-registration-node-form'] {
+  /*.form-submit[value="Add another item"], .form-submit[value="Remove"]{
+          display: none;
+      } */
+}
 #content [id*='event-registration-node-form'] .form-field-type-field-collection .form-item .form-item {
   margin: 15px 0;
 }
@@ -7945,8 +7948,20 @@ footer .footer-copyright {
 #content [id*='event-registration-node-form'] .captcha span.error {
   padding-left: 0;
 }
-#content [id*='event-registration-node-form'] .form-submit[value="Add another item"], #content [id*='event-registration-node-form'] .form-submit[value="Remove"] {
-  display: none;
+#content [id*='event-registration-node-form'] .form-submit[value="Add another item"] {
+  margin-left: 0;
+}
+#content [id*='event-registration-node-form'] .form-submit[value="Remove"] {
+  background: #ef3c24;
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+  border: none;
+  padding: 5px 10px;
+  color: #fff;
+  font-weight: 500;
+  font-family: roboto;
+  border-radius: 4px;
 }
 
 #block-itg-event-backend-event-registration .event-registration-main-container {
@@ -8744,6 +8759,9 @@ footer .footer-copyright {
 
 /*CSS End sport home page*/
 /*CSS start for movie page*/
+.movie-layout-page .featured-post-first h2 a {
+  margin-bottom: 0;
+}
 .movie-layout-page .itg-layout-580 .droppable {
   height: 580px;
 }
