@@ -4581,7 +4581,7 @@ div.node{
     }
   }
   .scroll-wrap{
-    max-height: 438px;
+    max-height: 300px;
     width: 100%;
     overflow: auto;
   }
@@ -9472,4 +9472,8 @@ span.file a{pointer-events: none;}
     width: 100%;
     z-index: 9;
   }
+}
+.form-item-bs-status .form-select[multiple="multiple"] {
+  min-height: 0;
+  height: 45px;
 }
