@@ -591,7 +591,7 @@ function itg_users_user_update(&$edit, $account, $category) {
   }
 
   // send mail when user select notification chekbox
-  if ($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
+  if (!empty($account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value']) && $account->field_subscribe_for_newsletter[LANGUAGE_NONE][0]['value'] == '1') {
 
     $news_info = 'You have sucessfully subscribed for India Today newsletters.';
     $mail_content = itg_users_get_mail_content($news_info);

@@ -27,20 +27,25 @@ function itg_personalization_rules_action_info() {
  * @param type $node
  */
 function itg_personalization_send_new_content_mail($node) {
-
+  global $base_url;
 //    $mail_ids = array();
     foreach ($node->field_story_itg_tags['und'] as $k => $value) {
       $tid = $value['tid'];
       $query = db_select('flagging', 'f');
           $query->join('users', 'u', 'f.uid = u.uid');
+          $query->leftJoin('field_data_field_first_name', 'n', 'u.uid = n.entity_id');
+          $query->leftJoin('field_data_field_last_name', 'l', 'u.uid = l.entity_id');
           $query->fields('u', array('mail', 'name'));
+          $query->fields('n', array('field_first_name_value'));
+          $query->fields('l', array('field_last_name_value'));
           $query->condition('f.entity_id', $tid, '=');
       $result = $query->execute()->fetchAll();
 
       foreach ($result as $val) {
 //        $mail_ids[] = $val->mail;
-        
-        $data = "Hi $val->name, new story has been published of your interest.";
+        $alias = drupal_get_path_alias('node/'. $node->nid);
+        $data = 'Hi ' . $val->field_first_name_value . ' ' . $val->field_last_name_value . ', new content has been published of your interest. ';
+        $data .= 'Click ' . l('here', $base_url. '/' . $alias) . ' to see the content.';
         $key = 'personalization_mail';
         $subject = 'New content published';
         $to = $val->mail;
