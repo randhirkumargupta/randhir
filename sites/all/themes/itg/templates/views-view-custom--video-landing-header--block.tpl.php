@@ -25,7 +25,9 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
     <?php
     if (!empty($videoids)) {
         $hide_player = "";
+        $description_slider="";
         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
+        $description_slider = '<div class="row"><div class="video-slider-description"><ul>';
         foreach ($videoids as $keys => $video_value) {
             if ($keys != 0) {
                 $hide_player = 'hide-player';
@@ -53,7 +55,9 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 </div>
 
             <?php
+            $description_slider.= '<li><div id="video_dec_' . $video_value->video_id . '" >'.  ucfirst($video_value->field_videogallery_description_value).'</div></li>';
         }
+        $description_slider.='</ul></div></div>';
         $newimageds.='</ul></div></div></div>';
     }
     ?>
@@ -131,7 +135,8 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
 
 
                 </div>
-                <div class="col-md-4 video-header-right"><p><?php print $row['field_story_expert_description']; ?></p>
+                <?php //$row['field_story_expert_description'];?>
+                <div class="col-md-4 video-header-right"><p><?php print $description_slider; ?></p>
                     <p class="upload-date"><?php print $row['timestamp']; ?></p>
                     <div class="section-like-dislike">
                         <div id="btn-div">
