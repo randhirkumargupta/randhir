@@ -5093,7 +5093,7 @@ div.node #comments h2 {
   margin-top: 18px;
 }
 .view-related-content-new .scroll-wrap {
-  max-height: 438px;
+  max-height: 300px;
   width: 100%;
   overflow: auto;
 }
@@ -10340,4 +10340,14 @@ span.file a {
   top: 0;
   width: 100%;
   z-index: 9;
+}
+
+.form-item-bs-status .form-select[multiple="multiple"] {
+  min-height: 0;
+  height: 45px;
+}
+
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr:first-child td .file-widget > input[value="Remove"] {
+  display: inline-block;
+  vertical-align: top;
 }
