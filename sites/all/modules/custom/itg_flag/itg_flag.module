@@ -207,13 +207,13 @@ function itg_user_activity_front() {
 function itg_get_front_activity_info($nid, $ntype, $uid, $activity) {
 
   if (function_exists('mongodb')) {
-    $con = mongodb();
-    $people = $con->front_user_activity;
-    $cond = array('nid' => $nid, 'ntype' => $ntype, 'uid' => $uid, 'activity' => $activity);
-    $cursor = $people->find($cond);
-    foreach ($cursor as $document) {
-      $data['nid'] = $document['nid'];
-    }
+//    $con = mongodb();
+//    $people = $con->front_user_activity;
+//    $cond = array('nid' => $nid, 'ntype' => $ntype, 'uid' => $uid, 'activity' => $activity);
+//    $cursor = $people->find($cond);
+//    foreach ($cursor as $document) {
+//      $data['nid'] = $document['nid'];
+//    }
     return $data;
   } 
 }
