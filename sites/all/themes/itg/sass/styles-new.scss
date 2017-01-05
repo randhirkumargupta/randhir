@@ -2798,6 +2798,17 @@ body.has-cart-popup{
 #block-itg-front-end-common-related-photo-block #related-photo ul li a:hover, 
 #block-itg-front-end-common-related-video-block #related-photo ul li a:hover,
 .may-we-suggest a:hover,
+.related-story-page span.title a:hover,
+.view-category-wise-content-list .catagory-listing .detail h3 a:hover,
+.programe-title a:hover,
+.view-video-list-of-category .view-content .photo-list li .tile a:hover, 
+.view-video-landing-header .view-content .photo-list li .tile a:hover, 
+.view-so-sorry .view-content .photo-list li .tile a:hover, 
+.view-programme-content .view-content .photo-list li .tile a:hover, 
+.page-sports-video .view-content .photo-list li .tile a:hover, 
+.page-sports-photo .view-content .photo-list li .tile a:hover, 
+#block-itg-live-tv-live-tv-video-page .view-content .photo-list li .tile a:hover, 
+.view-programme-content-live-tv .view-content .photo-list li .tile a:hover,
 .story-section .agbutton.story-like-dislike #name-dv #dlky button:hover{
   color: #1a3c8d;
 }
@@ -2836,9 +2847,6 @@ blockquote {
   position: relative;
   text-align: justify;
   text-indent: 40px;
-  float: right;
-  width: 50%;
-  margin-left: 15px;
   &:before {
     content: "\201C";
     display: inline-block;
@@ -2894,10 +2902,16 @@ footer .footer-top ul li a:hover{
 }
 .itg-layout-container .big-story-detail ul li:hover a, 
 .big-news .big-story-detail li a:hover{color: #ffc106;}
-.quotes .author{
-  font-size: 12px;
-  color: #828282;
-}
+.quotes{
+  float: right;
+  margin: 5px 0 5px 15px;
+  width: 50%;
+  .author{
+    font-size: 12px;
+    color: #828282;
+    text-align: right;
+  }
+} 
 
 /* CSS To Add Zoom Effect on Images */
 
