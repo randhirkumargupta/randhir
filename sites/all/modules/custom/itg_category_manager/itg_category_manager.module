@@ -1081,12 +1081,15 @@ function itg_categor_form_edit_category_radio($form, &$form_state) {
     $type = $node->type;
   }
   $editid = 0;
+  if(!empty($form_state['input']['field_primary_category'])) {
   $editid_new = $form_state['input']['field_primary_category'][LANGUAGE_NONE][0]['value'];
   if (is_numeric($editid_new)) {
     $editid = $editid_new;
+  } 
+  
   }
 
-  if ($editid == 0 || empty($editid)) {
+  if (($editid == 0 || empty($editid)) && !empty($form['#node']->field_primary_category[LANGUAGE_NONE][0]['value'])) {
     $editid = $form['#node']->field_primary_category[LANGUAGE_NONE][0]['value'];
   }
 

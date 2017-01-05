@@ -10,7 +10,7 @@
  * @param boolean $dropbox
  * @return array
  */
-function itg_category_manager_hierarchical_select_root_level($params,&$form_state,$dropbox = FALSE) {  
+function itg_category_manager_hierarchical_select_root_level($params,$dropbox = FALSE) {  // remove @$form_state second argument
   $vocabulary = taxonomy_vocabulary_load($params['vid']);
   if(arg(0) == 'node' && arg(1) == 'add'){
       $type = arg(2);

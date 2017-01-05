@@ -69,6 +69,42 @@
       jQuery('input[name="tw_vid_schedule_time[date]"]').attr('placeholder', date_holder);
       jQuery('input[name="tw_vid_schedule_time[time]"]').attr('placeholder', time_holder);
       
+      // Twitter field validation.
+      $("#itg-social-media-form").validate({
+        onfocusout: function (element) {
+          $(element).valid();
+        },
+        ignore: '',
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          var elementName = element.attr('name');
+          var errorPlaceHolder = '';
+          switch (elementName) {
+            default:
+              errorPlaceHolder = element.parent();
+          }
+          error.appendTo(errorPlaceHolder);
+        },
+        rules: {
+          'itg_twitter_narrative': {
+            required: true
+          },
+          },
+        messages: {
+          'itg_twitter_narrative': {
+            required: 'This field is required.'
+          }
+        }
+      });
+      jQuery.validator.addMethod("validateRange", function (value, element) {
+        return validate_date_range(value, element);
+      }, "Please enter valid date.");
+      jQuery.validator.addMethod("validateSignName", function (value, element) {
+        return validate_sign_name_value(value, element);
+      }, "This field is required.");
+      jQuery.validator.addMethod("validate_astro_category", function (value, element) {
+        return validate_astro_category_name(value, element);
+      }, "This field is required.");      
       // Moduel code end.      
     }
   };

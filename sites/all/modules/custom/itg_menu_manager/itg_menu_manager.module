@@ -76,9 +76,9 @@ function itg_menu_manager_menu() {
 /**
  * Script to add new column in itg_menu_manager
  */
-function create_new_column() {
-  db_query('alter table itg_menu_manager add column display_icon varchar(200) DEFAULT FALSE after extra')->execute();
-}
+//function create_new_column() {
+//  db_query('alter table itg_menu_manager add column display_icon varchar(200) DEFAULT FALSE after extra')->execute();
+//}
 
 /**
  * {@inheritdoc}
@@ -1005,10 +1005,13 @@ function itg_menu_manager_form_alter(&$form, &$form_state, $form_id) {
       'effect' => 'fade',
     );
   }
-  if ($form_id == 'menu_edit_item' && arg(4) == 'menu-about-us-page-menu') {
+  
+  if ($form_id == 'menu_edit_item' && (arg(4) == 'menu-about-us-page-menu' || arg(5) == 'edit')) {
     $form['actions']['submit']['#suffix'] = l("Cancel", "admin/structure/menu/manage/menu-about-us-page-menu", array("attributes" => array("class" => array("button"))));
     drupal_add_css(".form-item-expanded {display:block !important}", "inline");
   }
+  
+  
 }
 
 function itg_menu_manager_webform_js_submit(&$form, &$form_state) {
