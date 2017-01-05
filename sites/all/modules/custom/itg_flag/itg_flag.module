@@ -205,7 +205,7 @@ function itg_user_activity_front() {
  * @param string $activity
  */
 function itg_get_front_activity_info($nid, $ntype, $uid, $activity) {
-
+  $data = '';
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->front_user_activity;
