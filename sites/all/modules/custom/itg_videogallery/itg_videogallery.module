@@ -932,7 +932,7 @@ function itg_videogallery_get_video($fid) {
  */
 function itg_videogallery_node_access($node, $op, $account) {
     if (!empty($account) && !empty($node)) {
-        if ($account->uid == 0 && $node->type == 'videogallery') {//shravan
+        if ($account->uid == 0 && !empty($node->type) && $node->type == 'videogallery') {//shravan
             $current_time = time();
             $video_schedule_date = "";
             $video_expire_date = "";
@@ -1699,8 +1699,8 @@ function itg_videogallery_views_query_alter(&$view, &$query) {
         if (isset($_GET['category']) && is_numeric($_GET['category'])) {
             $parent = taxonomy_get_parents($_GET['category']);
             $key = key($parent);
-            $parent_name = $parent[$key]->name;
-            if ($parent[$key]->name == 'program' && empty($_GET['sid']) && empty($_GET['category'])) {
+            //$parent_name = $parent[$key]->name;
+            if (!empty($parent[$key]->name) && $parent[$key]->name == 'program' && empty($_GET['sid']) && empty($_GET['category'])) {
                 $query->where[0]['conditions'][0]['value'][':field_data_field_story_category_field_story_category_tid'] = NULL;
             }
         }

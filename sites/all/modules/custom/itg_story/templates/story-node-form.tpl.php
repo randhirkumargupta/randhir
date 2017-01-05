@@ -24,6 +24,8 @@
             <h2 class="story-title"><?php print t('Templates'); ?></h2>
             <div class="itg-form-section hide">
                 <div class="templates-tab-wrapper">
+                  <?php print drupal_render($form['field_story_select_templates']); ?>
+                 
                     <label>Select templates</label>
                     <div class="templates-tab">
                         <span data-ripple="listicle-tab"> Listicle </span>
