@@ -34,7 +34,10 @@ global $base_url;
                             <option value="24"><?php print t("24 Hours"); ?></option>
                         </select>
                     </div>
-                    <div class="reset_video_filter" style="display:none">
+                     <div class="apply_video_filter">
+                        <span class="button apply_video_filters">Apply</span>
+                    </div>
+                    <div class="reset_video_filter">
                         <span class="button reset_video_filters">Reset</span>
                     </div>
                 </div>
@@ -43,7 +46,7 @@ global $base_url;
                     <a href="javascript:void(0)" class = "button asso-with-ckeditor"><?php print t('Associate Video'); ?></a>
                     <input type="hidden" id="single_add" name="single_add" value="0">
                 <?php }
-                else if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] =='field_story_twitter_video') {
+                else if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] =='field_story_twitter_video' || $_GET['field_name'] =='field_videogallery_video_upload') {
                     ?>
                     <input type="hidden" id="single_add" name="single_add" value="1">
                     <a href="javascript:void(0)" class = "button asso-filed_single" btn_name="<?php echo $_GET['btn_name'];?>" field_name="<?php echo $_GET['field_name'];?>"><?php print t('Associate Video'); ?></a>
@@ -60,7 +63,7 @@ global $base_url;
 
 <?php print drupal_render(drupal_get_form('videogallery_new_fileupload_form')); ?>
 
-<?php if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] =='field_story_twitter_video') { ?>
+<?php if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] =='field_story_twitter_video' || $_GET['field_name'] =='field_videogallery_video_upload') { ?>
        <span class="button add-in-single-filed" btn_name="<?php echo $_GET['btn_name'];?>" field_name="<?php echo $_GET['field_name'];?>">
                     <?php
                     print t('Upload Video');

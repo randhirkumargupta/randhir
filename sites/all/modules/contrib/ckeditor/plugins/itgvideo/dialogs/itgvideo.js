@@ -34,6 +34,7 @@ CKEDITOR.dialog.add('itgvideoDialog', function(editor) {
                         label: 'Get Videos',
                         title: 'Video',
                         onClick: function() {
+                              var get_form_id=jQuery('[name="form_id"]').val();
                             var bas_path = window.location.origin ? window.location.origin + '/' : window.location.protocol + '/' + window.location.host + '/';
 
                             if (bas_path == 'http://localhost/') {
