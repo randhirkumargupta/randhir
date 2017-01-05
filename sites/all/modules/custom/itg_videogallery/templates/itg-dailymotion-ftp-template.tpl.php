@@ -34,7 +34,10 @@ global $base_url;
                             <option value="24"><?php print t("24 Hours"); ?></option>
                         </select>
                     </div>
-                    <div class="reset_video_filter" style="display:none">
+                     <div class="apply_video_filter">
+                        <span class="button apply_video_filters">Apply</span>
+                    </div>
+                    <div class="reset_video_filter">
                         <span class="button reset_video_filters">Reset</span>
                     </div>
                 </div>
