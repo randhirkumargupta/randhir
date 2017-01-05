@@ -4,7 +4,7 @@
   $url = "#";
   global $base_url;
   foreach ($rows as $key => $row) :
-    $section_cat_id = trim($row['field_story_category']);
+    $section_cat_id = trim($row['cat_id']);
     ?>
     <li class="col-md-3">          
       <span class="tile">

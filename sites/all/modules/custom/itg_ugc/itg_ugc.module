@@ -64,7 +64,7 @@ function itg_ugc_rules_action_info() {
 function itg_ugc_send_follow_story_content_mail($node) {
   if ($node->type == 'story') {
     $get_user_id = itg_get_follow_story_user($node->nid);
-
+    watchdog("follow_story", '<pre>' . print_r( $get_user_id, true) . '</pre>'); 
     foreach ($get_user_id as $follow_user) {
 
       module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
@@ -97,15 +97,16 @@ function itg_ugc_send_follow_story_content_mail($node) {
  * @param int $nid
  */
 function itg_get_follow_story_user($nid) {
-  $query = db_select('flagging', 'c');
-  $query->fields('c', array('uid'));
-  $query->condition('c.entity_id', $nid, '=');
-  $result = $query->execute();
-  while ($record = $result->fetchAssoc()) {
-    $options[] = $record['uid'];
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cond = array('nid' => $nid);
+    $cursor = $people->find($cond);
+    foreach ($cursor as $document) {
+      $options[] = $document['uid'];
+    }
+    return $options;
   }
-
-  return $options;
 }
 
 /**

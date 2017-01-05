@@ -15,6 +15,7 @@
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   // Form alter for event backend node
   if ($form_id == "event_backend_node_form") {
+    $form['actions']['submit']['#submit'][] = 'itg_event_save_initial_speaker_weight';
     if (isset($_GET['button_action']) || $form_state['clicked_button']['#name'] == 'previous') {
       //Hijack our errors so they don't display normally.
       $errors = form_get_errors();
@@ -64,7 +65,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         '#name' => 'second_submit',
         '#value' => t('Save'),
         '#access' => TRUE,
-        '#submit' => array('node_form_submit', 'itg_event_backend_second_submit', 'itg_event_alter_submit_status_message'),
+        '#submit' => array('node_form_submit', 'itg_event_backend_second_submit', 'itg_event_alter_submit_status_message', 'itg_event_save_initial_speaker_weight'),
         '#weight' => -9,
         '#attributes' => array('id' => array('save_btn')),
       );
@@ -75,7 +76,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         '#name' => 'second_submit',
         '#value' => t('Next'),
         '#access' => TRUE,
-        '#submit' => array('node_form_submit', 'itg_event_backend_frist_form_submit'),
+        '#submit' => array('node_form_submit', 'itg_event_backend_frist_form_submit', 'itg_event_save_initial_speaker_weight'),
         '#weight' => -9,
         '#attributes' => array('id' => array('save_btn')),
       );
@@ -352,10 +353,10 @@ function itg_event_backend_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   drupal_add_js(array('itg_event_backend' => array('settings' => $settings)), array('type' => 'setting'));
 
-  $end_date = strtotime('+1 day', strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']));
+  $end_date = @strtotime('+1 day', strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']));
   $start_date = $form_state['values']['field_event_start_date'][LANGUAGE_NONE][0]['value'];
   $end_date_new = date('Y-m-d', $end_date);
-  $start_date_new = explode(' ', $start_date);
+  $start_date_new = @explode(' ', $start_date);
   $options_daywise = itg_event_backend_date_interval($start_date_new[0], $end_date_new);
   $highlight_options = array('_none' => t('- Select Daywise -'));
   $media_options = array('_none' => t('- Select Daywise -'));
@@ -704,7 +705,10 @@ function itg_event_backend_block_view($delta = '') {
       $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
       break;
     case 'tweet_right_sidebar_event':
-      $block['content'] = theme('tweet_right_sidebar_event');
+      $twitter_content = itg_event_backend_twitter_data();
+      if(!empty($twitter_content)){
+        $block['content'] = theme('tweet_right_sidebar_event', array('data' => $twitter_content));
+      }
       break;
     case 'event_registration':
       module_load_include('inc', 'itg_event_registration', 'includes/itg_event_registration');
@@ -776,12 +780,12 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
     $form['title']['#autocomplete_path'] = 'content-title-list/sponsor/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
-  
+
   if ($form["#id"] == 'views-exposed-form-event-types-listing-page') {
     $form['name']['#autocomplete_path'] = 'texonomy/40/autocomplete';
     $form['name']['#attributes'] = array('placeholder' => t('Event Type'));
   }
-  
+
   if ($form["#id"] == 'views-exposed-form-Event-backend-page') {
     $form['event_type'] = array(
       '#type' => 'select',
@@ -971,15 +975,15 @@ function itg_event_backend_get_session_photo_video($daywise) {
   $result = $query->execute();
   foreach ($result as $value) {
     $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
-    if(!empty($daywise_detail[$value->field_event_media_value]->field_event_photo)){
+    if (!empty($daywise_detail[$value->field_event_media_value]->field_event_photo)) {
       $session['photo'][] = $daywise_detail[$value->field_event_media_value]->field_event_photo[LANGUAGE_NONE][0]['target_id'];
     }
-    if($daywise_detail[$value->field_event_media_value]->field_event_video) {
+    if ($daywise_detail[$value->field_event_media_value]->field_event_video) {
       $session['video'][] = $daywise_detail[$value->field_event_media_value]->field_event_video[LANGUAGE_NONE][0]['target_id'];
     }
-    if($daywise_detail[$value->field_event_media_value]->field_event_audio) {
+    if ($daywise_detail[$value->field_event_media_value]->field_event_audio) {
       $session['audio'][] = $daywise_detail[$value->field_event_media_value]->field_event_audio[LANGUAGE_NONE][0]['target_id'];
-    } 
+    }
   }
   return $session;
 }
@@ -1361,8 +1365,8 @@ function itg_event_backend_get_redirect_all_domains($except_this_node = NULL) {
   }
   $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
-    $redirect_arr = explode('://', $record['redirect']);
-    $records[] = $redirect_arr[1];
+      $redirect_arr = explode('://', $record['redirect']);
+      $records[] = @$redirect_arr[1];
   }
   return $records;
 }
@@ -1606,7 +1610,7 @@ function itg_event_backend_flashback($curr_event_id) {
   $result = $query->execute();
   $flash_back_link = '';
   foreach ($result as $value) {
-    $flash_back_link .= '<li>' . l(t($value->title), 'node/'.$value->nid, array('attributes' => array('target' => '_blank'))) . '</li>';
+    $flash_back_link .= '<li>' . l(t($value->title), 'node/' . $value->nid, array('attributes' => array('target' => '_blank'))) . '</li>';
 //    $val[] = 'node/' . $value->nid;
 //    $detail['node/' . $value->nid] = array(
 //      'key' => 'node/' . $value->nid,
@@ -1623,7 +1627,6 @@ function itg_event_backend_flashback($curr_event_id) {
   }
   return $output;
 }
-
 
 /**
  * Implement function for get redirect node in flashback
@@ -1814,13 +1817,127 @@ function itg_event_backend_form_taxonomy_form_term_alter(&$form, &$form_state) {
   }
 }
 
+
+/**
+ * Implements function for event twitter block
+ */
+function itg_event_backend_twitter_data() {
+  $event_id = itg_event_backend_get_event_node();
+  if (!empty($event_id) && itg_event_backend_get_node_type($event_id) == 'event_backend') {
+    $query = db_select('field_data_field_event_twitter', 'event_twitter');
+    $query->fields('event_twitter', array('field_event_twitter_value'));
+    $query->condition('entity_id', $event_id, '=');
+    $query->condition('bundle', 'event_backend', '=');
+    $result = $query->execute()->fetchField();
+    return $result;
+  }
+}
+
 /***
  * Implements function for get node type
  */
 function itg_event_backend_get_node_type($nid) {
   $query = db_select('node', 'n');
-  $query -> fields('n', array('type'));
-  $query -> condition('nid', $nid, '=');
+  $query->fields('n', array('type'));
+  $query->condition('nid', $nid, '=');
   $result = $query->execute()->fetchField();
   return $result;
+}
+
+/**
+ * Implements alter message function().
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_event_save_initial_speaker_weight(&$form, $form_state) {
+  $field_program_schedule = $form_state['values']['field_program_schedule']['und'];
+  $target_id = itg_event_get_target_id_of_speakers($field_program_schedule);
+  $widget_name = "itg_event_speaker_widget";
+  $cat_id = arg(1);
+  if (!empty($target_id)) {
+    if ($cat_id != 'add') {
+      // Delete unused speakers
+      db_delete('itg_widget_order')
+          ->condition('nid', array($target_id), 'NOT IN')
+          ->condition('cat_id', $cat_id)
+          ->execute();
+    }
+    // Below node is will save in cat_id of itg_widget_order_table.
+    foreach ($target_id as $node_data) {
+      $node_in_widget = itg_event_backend_is_node_in_widget($node_data, $cat_id, $widget_name);
+      if ($node_in_widget) {
+        continue;
+      }
+      else {
+        try {
+          $weight_data = itg_event_backend_get_min_weight($widget_name, $cat_id);
+          db_insert('itg_widget_order')
+              ->fields(array(
+                'nid' => $node_data,
+                'cat_id' => $cat_id,
+                'weight' => --$weight_data,
+                'widget' => 'itg_event_speaker_widget',
+              ))->execute();
+        } catch (Exception $ex) {
+          drupal_set_message($ex->getMessage());
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Function returns weight corossponding to speaker.
+ * @param string $type
+ * @param int $cat_id
+ * @return int
+ */
+function itg_event_backend_get_min_weight($type, $cat_id) {
+  $max_query = db_select('itg_widget_order');
+  $max_query->addExpression('MIN(weight)');
+  $max_query->condition('widget', $type);
+  $max_query->condition('cat_id', $cat_id);
+  $max_result = $max_query->execute()->fetchField();
+  return isset($max_result) ? $max_result : 1;
+}
+
+/**
+ * Returns number of rows.
+ * @param int $nid
+ * @param int $cat_id
+ * @param string $widget
+ * @return int
+ */
+function itg_event_backend_is_node_in_widget($nid, $cat_id, $widget) {
+  $count = 0;
+  if (!empty($nid) && !empty($widget)) {
+    $query = db_select('itg_widget_order', 'iwo')
+        ->fields('iwo', array('nid'))
+        ->condition('iwo.nid', $nid)
+        ->condition('iwo.cat_id', $cat_id)
+        ->condition('iwo.widget', $widget);
+    $count = $query->execute()->rowCount();
+  }
+  return $count;
+}
+
+/**
+ * Function returns field collections target id of speakars.
+ * @param array $field_program_schedule
+ * @return array
+ */
+function itg_event_get_target_id_of_speakers($field_program_schedule) {
+  $target_id = array();
+  if (!empty($field_program_schedule)) {
+    foreach ($field_program_schedule as $key => $field_select_speaker) {
+      $spekar_target_id = (int) $field_select_speaker['field_select_speaker']['und'][0]['target_id'];
+      // Field collection give emtpy target id for add more to skip this.
+      if ($spekar_target_id) {
+        if (!empty($field_select_speaker['field_select_speaker']['und'][0]['target_id'])) {
+          $target_id[] = $field_select_speaker['field_select_speaker']['und'][0]['target_id'];
+        }
+      }
+    }
+  }
+  return $target_id;
 }

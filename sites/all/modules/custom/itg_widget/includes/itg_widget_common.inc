@@ -1997,9 +1997,18 @@ function get_view_nodes_form_custom_table_for_widgets_by_category($widget_name, 
  * @return array
  */
 function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat_id, $range_max, $range_min = 0, $order_by = 'ASC') {
-  $query = db_select('itg_widget_order', 'iwo');
+//  
+   $query = db_select('itg_widget_order', 'iwo'); //
   $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
   $query->Join('taxonomy_index', 'tx', 'n.nid=tx.nid');
+  //join  for field value
+  $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+  $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+  $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+  $query->fields('si_file', array('uri'));
+  $query->fields('vd', array('field_video_duration_value'));
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+  //end
   $query->condition('iwo.widget', $widget_name)
       ->condition('n.status', 1)
       ->condition('tx.tid', $cat_id)
@@ -2008,26 +2017,7 @@ function get_view_nodes_form_custom_table_for_widgets_special($widget_name, $cat
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-  $weight = 0;
-  foreach ($result as $data) {
-    $weight +=$data['weight'];
-  }
-  if ($weight > 0) {
-    return $result;
-  }
-  else {
-// Query for renctaly careated node if weight is not saved
-    $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
-    $query->condition('iwo.widget', $widget_name)
-        ->condition('n.status', 1)
-        ->orderBy('n.nid', 'DESC')
-        ->range($range_min, $range_max)
-        ->fields('iwo', array('nid', 'extra', 'weight'));
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
-  }
+  return $result;
 }
 
 /**

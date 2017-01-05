@@ -48,7 +48,7 @@ function itg_workflow_after_build($form, &$form_state) {
     $form['revision_information']['workbench_moderation_state_new'] = $state;
 
     // Code for rejection master message
-    if ($form['#entity']->workbench_moderation['current']->state == 'needs_review') {
+    if (!empty($form['#entity']->workbench_moderation['current']->state) && $form['#entity']->workbench_moderation['current']->state == 'needs_review') {
         $vid = taxonomy_vocabulary_machine_name_load('reasons_for_reject');
         $terms = taxonomy_get_tree($vid->vid);
         foreach ($terms as $key => $val) {

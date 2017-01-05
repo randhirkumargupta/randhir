@@ -24,13 +24,7 @@
             <h2 class="story-title"><?php print t('Templates'); ?></h2>
             <div class="itg-form-section hide">
                 <div class="templates-tab-wrapper">
-                    <label>Select templates</label>
-                    <div class="templates-tab">
-                        <span data-ripple="listicle-tab"> Listicle </span>
-                        <span data-ripple="quote-tab"> Quote </span>
-                        <span data-ripple="factoid-tab"> Factoid </span>
-                        <span data-ripple="buzz-tab"> Buzz </span>
-                    </div>
+                  <?php print drupal_render($form['field_story_select_templates']); ?>
                     <div class="listicle-tab-form tab-form">
                         <?php print drupal_render($form['field_story_templates']); ?>
                         <?php print drupal_render($form['field_story_template_guru']); ?>
