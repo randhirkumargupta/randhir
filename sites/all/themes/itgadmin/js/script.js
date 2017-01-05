@@ -892,9 +892,13 @@ jQuery(document).ready(function () {
   });
      
   // jQuery code for story form templates-tab   
-  jQuery('.templates-tab').on('click', 'span', function(){
-    var get_attr = jQuery(this).attr('data-ripple'), set_class = '.' + get_attr + "-form";
-    jQuery(this).addClass('active').siblings().removeClass('active'), jQuery('.tab-form').hide(), jQuery(set_class).show();
+//  jQuery('.templates-tab').on('click', 'span', function(){
+//    var get_attr = jQuery(this).attr('data-ripple'), set_class = '.' + get_attr + "-form";
+//    jQuery(this).addClass('active').siblings().removeClass('active'), jQuery('.tab-form').hide(), jQuery(set_class).show();
+//  });   
+  jQuery('.form-field-name-field-story-select-templates').on('change', '.form-radio', function(){
+    get_value = jQuery(this).val(), set_class = '.' + get_value + "-tab-form";
+    jQuery(this).closest('.templates-tab-wrapper').find(set_class).show().siblings('.tab-form').hide();
   });   
      
 });
