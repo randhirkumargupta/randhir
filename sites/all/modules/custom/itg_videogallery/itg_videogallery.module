@@ -1166,7 +1166,7 @@ function itg_videogallery_thumb_assign() {
             $thumb_url = $api->get(
                     '/video/' . $val->video_id, array('fields' => array('thumbnail_url', 'duration'))
             );
-            
+
             $node = node_load($result_video[0]->entity_id);
             if ($thumb_url['duration'] > 0) {
                 $duration = '';
@@ -1195,6 +1195,15 @@ function itg_videogallery_thumb_assign() {
                 $file = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
                 file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
                 $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
+                field_attach_update('node', $node);
+            }
+            if ($node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] == 0) {
+                $image_url = $thumb_url['thumbnail_url'];
+                $imagedata = file_get_contents($image_url);
+                $image_url = 'itg' . time() . end(explode('/', $image_url));
+                $file = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+                file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+                $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $file->fid;
                 field_attach_update('node', $node);
             }
             if ($node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == "" || $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] == 0) {
