@@ -345,7 +345,9 @@ function itg_facebook_share_count($url) {
   $run_url = "http://graph.facebook.com/?id=".$url;
   $content = file_get_contents($run_url);
   $share_count = json_decode($content);
+  if(isset($share_count->share->share_count)) {
   return $share_count->share->share_count;
+  }
 }
 
 
@@ -356,7 +358,9 @@ function itg_facebook_share_count($url) {
 
 function itg_google_share_count($url) {
     $html =  file_get_contents( "https://plusone.google.com/_/+1/fastbutton?url=".urlencode($url));
-    $doc = new DOMDocument();   $doc->loadHTML($html);
+    $doc = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $doc->loadHTML($html);
     $counter=$doc->getElementById('aggregateCount');
     return $counter->nodeValue;
 }
