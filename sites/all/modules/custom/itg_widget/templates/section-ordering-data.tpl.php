@@ -77,7 +77,7 @@ else if ($widget_style == 'auto-tips-and-tricks' || $widget_style == 'edu-tips-a
 else if ($widget_style == 'buying-guid') {
     ?>
     <div class="row buying-guides">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6">
             <?php
             if (!empty($data)) {
                 foreach ($data as $count => $entity) {
@@ -125,7 +125,7 @@ else if ($widget_style == 'buying-guid') {
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6">
 
             <ul>
 
