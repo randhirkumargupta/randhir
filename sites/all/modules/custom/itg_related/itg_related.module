@@ -75,7 +75,7 @@ function itg_related_form_alter(&$form, &$form_state, $form_id) {
     $form['bundle']['#multiple'] = TRUE;
 
     //'iibckc' => 'Dev'
-    $hash = array('bw8w8n' => 'Ankush-localhost', '5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
+    $hash = array('5fyeg7' => 'Dev Server', '2e1u4m' => 'QA Server', 'e49it8' => 'Stage Server');
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
