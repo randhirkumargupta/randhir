@@ -9477,3 +9477,7 @@ span.file a{pointer-events: none;}
   min-height: 0;
   height: 45px;
 }
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr:first-child td .file-widget > input[value="Remove"]{
+  display: inline-block;
+  vertical-align: top;
+}
