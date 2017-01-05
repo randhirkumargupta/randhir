@@ -2,10 +2,8 @@
 if (!empty($content)):
     global $base_url, $user;
     // get related content associated with story
-    $related_content = itg_get_related_content(arg(1));
-    if(function_exists(itg_get_related_story_id)) { $related_result = itg_get_related_story_id($related_content); }
-    ?>
-    <?php
+    $related_content = $node->content['related_content'];
+    
     if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
         $class_buzz = 'buzz-feedback';
     }
@@ -23,29 +21,24 @@ if (!empty($content)):
     $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     
     // get total share count
-    if (function_exists(itg_total_share_count)) {
-    $tot_count = itg_total_share_count($actual_link);
-    }
+    $tot_count = $node->content['total_share_count'];
     
-    // get global comment config
-    if (function_exists(global_comment_last_record)) {
-    $last_record = $global_comment_last_record;
-    $config_name = trim($last_record[0]->config_name);
-    }
+    // get global comment config    
+   
+    $config_name = trim($global_comment_last_record[0]->config_name);
+   
     
     // get developing story status
-    if (function_exists(itg_msi_get_lock_story_status)) {
-    $get_develop_story_status = itg_msi_get_lock_story_status($node->nid, 'developing_story');
-    }
+    
+    $get_develop_story_status = $node->content['develop_story_status'];   
     
     //get follow story status
-    if(function_exists(itg_get_front_activity_info)) {
-      $follow_status = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'follow_story');
-    }
+    
+    $follow_status = $node->content['follow_status'];
     
     //get byline detail
-    $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-    $reporter_node = node_load($byline_id);
+    
+    $reporter_node = $node->content['byline_node'];
   ?>
     <div class="story-section <?php print $class_buzz."".$class_related."".$class_listicle;?>">
         <div class='<?php print $classes ?>'>
@@ -594,7 +587,7 @@ if (!empty($content)):
                     </div>
                     <!-- For buzzfeed section stary --> 
                     
-                    <?php if (!empty($related_content)) { ?>
+                    <?php if (!empty($related_content) &&  !empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
                     <div class="related-story related-story-bottom">
                             <?php                            
                                $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_bottom_block');
