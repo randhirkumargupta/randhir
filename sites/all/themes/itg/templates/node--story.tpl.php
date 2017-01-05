@@ -538,7 +538,7 @@ if (!empty($content)):
                               <?php } ?>
                             <li class="mhide"><span class="share-count"><?php if(!empty($tot_count)) { print $tot_count;} else { print 0; } ?></span> SHARES</li>
                             <?php if($user->uid > 0): if(!empty($follow_status['nid'])): ?>  
-                            <li class="mhide follow-story"><?php print t('Following'); ?></li>
+                            <li class="mhide following"><?php print t('Following'); ?></li>
                             <?php else:?>
                             <li class="mhide follow-story"><a title = "follow story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" class="def-cur-pointer">follow the Story</a></li>
                              <?php endif; else: ?>
