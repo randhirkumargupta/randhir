@@ -4581,7 +4581,7 @@ div.node{
     }
   }
   .scroll-wrap{
-    max-height: 300px;
+    max-height: 320px;
     width: 100%;
     overflow: auto;
   }
@@ -8119,6 +8119,15 @@ div.node{
     }
   }
 }
+.top-actions .form-submit[value="Publish"]{
+  background-color: #33a26d !important;
+  border: 1px solid #197e4e !important;
+  &:hover{
+    background-color: #197e4e !important;
+    border-color: #197e4e !important;
+    color: #fff !important;
+  }
+}
 [id*="views-form-so-sorry-so-sorry-videos"]{
   @extend .confirmation;
   .form-actions{
@@ -9481,3 +9490,5 @@ span.file a{pointer-events: none;}
   display: inline-block;
   vertical-align: top;
 }
+.page-related-content #main{min-height: 0 !important;}
+.node-type-event-backend .action-with-title #page-title{width: 700;}

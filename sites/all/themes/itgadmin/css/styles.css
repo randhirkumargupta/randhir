@@ -5093,7 +5093,7 @@ div.node #comments h2 {
   margin-top: 18px;
 }
 .view-related-content-new .scroll-wrap {
-  max-height: 300px;
+  max-height: 320px;
   width: 100%;
   overflow: auto;
 }
@@ -8968,6 +8968,16 @@ div.node #comments h2 {
   display: none;
 }
 
+.top-actions .form-submit[value="Publish"] {
+  background-color: #33a26d !important;
+  border: 1px solid #197e4e !important;
+}
+.top-actions .form-submit[value="Publish"]:hover {
+  background-color: #197e4e !important;
+  border-color: #197e4e !important;
+  color: #fff !important;
+}
+
 [id*="itg-quiz-quiz-form"] .question-heading {
   font: 400 20/28px Roboto;
   color: #000;
@@ -10350,4 +10360,12 @@ span.file a {
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr:first-child td .file-widget > input[value="Remove"] {
   display: inline-block;
   vertical-align: top;
+}
+
+.page-related-content #main {
+  min-height: 0 !important;
+}
+
+.node-type-event-backend .action-with-title #page-title {
+  width: 700;
 }
