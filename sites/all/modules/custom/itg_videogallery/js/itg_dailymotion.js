@@ -276,30 +276,51 @@ jQuery('document').ready(function() {
             alert("Select video file and upload");
         }
     });
+    jQuery('.apply_video_filters').click(function() {
+        var select_val = jQuery('.used-unused-select').val();
+        var search_val = jQuery('#video_text_search').val();
+        var time_val = jQuery('.time-filter-select').val();
+        jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+        var base_url = Drupal.settings.baseUrl.baseUrl;
+        jQuery.ajax({
+            url: base_url + '/dailymotion-video-search-filter',
+            type: 'post',
+            data: {'back_time': select_val + '@' + search_val + '@' + time_val, 'value_type': jQuery('#single_add').val()},
+            success: function(data) {
+                jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+                jQuery('.video-options-wrapper').html(data);
+
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError:" + err);
+            }
+        });
+    })
 
 
 });
 
 // Implement function for video search by title
 function videosearch() {
-    var select_val = jQuery('.used-unused-select').val();
-    var search_val = jQuery('#video_text_search').val();
-    var time_val = jQuery('.time-filter-select').val();
-    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-    var base_url = Drupal.settings.baseUrl.baseUrl;
-    jQuery.ajax({
-        url: base_url + '/dailymotion-video-search-filter',
-        type: 'post',
-        data: {'back_time': select_val + '@' + search_val + '@' + time_val, 'value_type': jQuery('#single_add').val()},
-        success: function(data) {
-            jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
-            jQuery('.video-options-wrapper').html(data);
-
-        },
-        error: function(xhr, desc, err) {
-            console.log(xhr);
-            console.log("Details: " + desc + "\nError:" + err);
-        }
-    });
+//    var select_val = jQuery('.used-unused-select').val();
+//    var search_val = jQuery('#video_text_search').val();
+//    var time_val = jQuery('.time-filter-select').val();
+//    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+//    var base_url = Drupal.settings.baseUrl.baseUrl;
+//    jQuery.ajax({
+//        url: base_url + '/dailymotion-video-search-filter',
+//        type: 'post',
+//        data: {'back_time': select_val + '@' + search_val + '@' + time_val, 'value_type': jQuery('#single_add').val()},
+//        success: function(data) {
+//            jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+//            jQuery('.video-options-wrapper').html(data);
+//
+//        },
+//        error: function(xhr, desc, err) {
+//            console.log(xhr);
+//            console.log("Details: " + desc + "\nError:" + err);
+//        }
+//    });
 }
 
