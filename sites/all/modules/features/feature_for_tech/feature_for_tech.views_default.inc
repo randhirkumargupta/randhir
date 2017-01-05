@@ -125,7 +125,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['exclude'] = TRUE;
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Field: Field: Long Description */
+  /* Field: Field: iOS */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -166,7 +166,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_story_large_image']['empty'] = '<img src="./sites/all/themes/itg/images/default_for_all.png" height="271" width="483" class=\'no-result-image\'>';
   $handler->display->display_options['fields']['field_story_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_large_image']['settings'] = array(
-    'image_style' => '',
+    'image_style' => 'magazine_top_story_483x271',
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
@@ -488,7 +488,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
-  $handler->display->display_options['pager']['options']['offset'] = '20';
+  $handler->display->display_options['pager']['options']['offset'] = '';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
