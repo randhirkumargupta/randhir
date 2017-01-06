@@ -4499,11 +4499,35 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 @media all and (max-width: 767px){
   .page-personalization{
     .personalized-wrapper{
-      .personalized-user-area, .personalized-user, .personalized-user-info {
+      .personalized-user-area {
         display: inline-block;
         height: auto; 
         vertical-align: top;
+        padding-left: 10px;
          width: 100%;
+         .personalized-user{
+            border: none;
+            float: left;
+            width: 32%;
+            .user-pic{
+              width: 50px;
+              height: 50px;
+            }
+            .user-name{
+              font-size: 14px;
+              line-height: 18px;
+            }
+         } 
+         .personalized-user-info{
+            border: none;
+            overflow: hidden;
+            padding: 0;
+            text-align: center;
+            span{
+              padding: 0 5px;
+              dfn{font-size: 14px;}
+            }
+         }
       }
       .personalized-user-info span{padding: 0 12px;}
     }
@@ -4512,9 +4536,87 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     .saved-item-tab, .personal-menu-tab{
       width: 100%;
     }
+    .personal-menu-tab-wrapper{
+      margin: 0 -15px;
+    }
+    .personal-menu-tab-mobile{
+      background-color: #ddd;
+      color: #4f4f4f;
+      cursor: pointer;
+      font: 300 18px/40px Roboto;
+      height: 40px;
+      text-align: left;
+      position: relative;
+      .tab-text{
+        display: block;
+        color: #4f4f4f;
+        font: 300 18px/18px Roboto;
+        padding: 10px 8px;
+        background-color: #f6f6f7;
+        &:before{
+          display: inline-block;
+          margin-right: 5px;
+          color: #8d8d8d;
+          font-family: 'FontAwesome';
+        }
+        
+        &.saved-items:before{
+          content: '\f02e';
+        }
+        &.my-content:before{
+            content: '\f064';
+        }
+        &.my-Preferences:before{
+            content: '\f013';
+        }
+        &.following:before{
+            content: '\f007';
+        }
+        &.my-credits:before{
+            content: '\f1c0';
+        }
+        &.edit-profile:before{
+            content: '\f040';
+        }
+      }
+      .tab-trigger{
+        background-color: #828282;
+        position: absolute;
+        right: 15px;
+        width: 30px;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        height: 3px;
+        &:before{
+          background-color: #828282;
+          content: '';
+          position: absolute;
+          width: 30px;
+          height: 3px;
+          left: 0;
+          top: -7px;
+        }
+        &:after{
+          background-color: #828282;
+          content: '';
+          position: absolute;
+          width: 30px;
+          height: 3px;
+          left: 0;
+          top: 7px;
+        }
+      }
+    }
     .personal-menu-tab{
+      text-align: left;
       border: none;
-      li{float: none; border: none; border-top: 1px solid #c6c6c6;}
+      li{
+        float: none; 
+        border: none; 
+        border-top: 1px solid #c6c6c6;
+        a{padding: 10px 15px;}
+      }
     }
     .profile-edit-tab{
       list-style: none;
