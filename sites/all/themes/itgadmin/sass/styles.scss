@@ -9517,15 +9517,9 @@ div.node{
 }
 span.file a{pointer-events: none;}
 .node-photogallery-form [id*="field-gallery-image-values"] tbody tr.drag{
-  td:nth-child(2)::after {
-    background-color: rgba(0, 0, 0, 0.5);
-    content: "";
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 9;
+  td:nth-child(2){
+    border-color: #1fb5ad;
+    box-shadow: 0 0 10px 0 #1fb5ad;
   }
 }
 .form-item-bs-status .form-select[multiple="multiple"] {
