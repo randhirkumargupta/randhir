@@ -739,7 +739,7 @@ function itg_survey_pqs_generatetokens() {
   $type = arg(2);
   drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_associate_story_ckeditor.js', array('weight' => 1));
   $cur_date = date('Y-m-d H:i:s');
-  if ($type == 'poll') {
+  if ($type == 'poll') { 
     $query = db_select('node', 'n');
     $query->leftjoin('field_data_field_poll_start_date', 'sd', 'n.nid = sd.entity_id');
     $query->leftjoin('field_data_field_poll_end_date', 'ed', 'n.nid = ed.entity_id');
