@@ -280,6 +280,18 @@
 }
 /*story page css end*/
 
+/*Election page css start*/
+.election-page{
+    h1 {
+        margin-top: 20px;
+    }
+    .election-graph{      
+        .col-el-5{
+            width: 240px;
+        }   
+    }    
+}
+/*Election page css end*/
 
 }   
 @media only screen and (max-width:991px){
@@ -574,7 +586,8 @@
     .itg-layout-container .top-colum-3 .droppable,
     .itg-common-section .droppable, .sport-home-layout-page .itg-layout-615 .auto-block-1,
     .sport-home-layout-page .itg-layout-615 .auto-block-2, .sport-home-layout-page .itg-layout-615 .droppable,
-    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable, .tech-layout-page .itg-h385-section .droppable{
+    .sport-home-layout-page .itg-layout-225 .droppable, .sport-home-layout-page .itg-layout-485 .droppable, .tech-layout-page .itg-h396-section .droppable,
+    .tech-layout-page .itg-h385-section .droppable, .election-page .left-side .itg-photo .droppable{
         height: auto;        
     }
     
@@ -1097,6 +1110,54 @@
 }
 /*side bar for all pages end*/
 
+/*election page css start*/
+.election-page {
+    margin: 0 0px 20px 0px;
+    
+}
+.election-page{
+    .key-candidate .list-state {
+        white-space: nowrap;
+        overflow: auto;
+    }
+    .itg-most-popular .most_popular {
+        .col-md-3{
+            &:nth-child(2n+1){
+                clear:left;
+            }
+        }
+    }
+    .left-side{
+        .itg-325-layout, .itg-415-layout, .itg-map, .itg-most-popular, .itg-photo{
+            .droppable{
+               min-height: auto;
+               height: auto;
+            }
+        }                       
+    }
+    .right-side .key_candidate_extra_block .droppable{
+        min-height: auto;
+        height: auto;
+    }
+} 
+/*election page css end*/
+
+/*Start category wise content list css*/
+.view-category-wise-content-list{
+    .catagory-grid{                 
+        .col-md-3{            
+            &:nth-child(4n+1){
+                clear: none;
+            }
+            &:nth-child(3n+1){
+                clear: left;
+            }
+        }        
+    }
+}
+/*end category wise content list css*/
+
+
 
 }
 
@@ -1393,6 +1454,20 @@
         }  
     } 
 }
+/*Start category wise content list css*/
+.view-category-wise-content-list{
+    .catagory-grid{                 
+        .col-md-3{                       
+            &:nth-child(3n+1){
+                clear: none;
+            }
+            &:nth-child(2n+1){
+                clear: left;
+            }
+        }        
+    }
+}
+/*end category wise content list css*/
 
 }
 @media only screen and (max-width:640px){
@@ -1459,7 +1534,23 @@
         margin: 0 auto;
     }
     /*story page css end*/
-    
+    /*election page css end*/
+    .election-page{
+        h1 {
+            margin-top: 20px;
+        }
+        .election-graph{     
+            margin-top: -50px;
+            padding-bottom:50px;
+            .col-el-5{
+                width: 100%;
+            }
+        }
+        .col-el-5.mt-50 {
+            margin-top: 0;
+        }
+    }
+    /*election page css end*/
 }
 
 /*Start header CSS Desktop version*/
