@@ -856,6 +856,7 @@ function itg_poll_form_new_ajax_submit($form, &$form_state) {
  * @return array
  */
 function itg_poll_form_home_page($form, &$form_state, $nid) {
+  global $user;
   $form = array();
   $form['#id'] = 'subspollformhomepage';
   $form["wrapper"] = array(
@@ -923,7 +924,8 @@ function itg_poll_form_home_page($form, &$form_state, $nid) {
 //    '#captcha_type' => 'recaptcha/reCAPTCHA',
 //    '#prefix' => '<span class="poll-ajax-error"></span>',
 //  );
-  $form['submit'] = array(
+  if(isset($user->uid) && !empty($user->uid) && ($user->uid > 0)){
+   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',
     '#ajax' => array(
@@ -933,6 +935,13 @@ function itg_poll_form_home_page($form, &$form_state, $nid) {
       'validate_first' => TRUE,
     ),
   );
+  } else {
+  if(function_exists(itg_sso_url)){
+    print itg_sso_url('follow story');
+  }
+    
+  }
+
 
 
   return $form;
