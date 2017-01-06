@@ -226,7 +226,7 @@ if (!empty($content)):
                                      <?php } if ($config_name == 'other') { ?> 
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                      <?php } ?>
-                                     <li><a href="javascript:void(0)"><i class="fa fa-bookmark"></i></a>
+                                     <li><a href="javascript:void(0)" title="READ LATER"><i class="fa fa-bookmark"></i></a>
                                          <span></span>
                                      </li>
                                  </ul>
