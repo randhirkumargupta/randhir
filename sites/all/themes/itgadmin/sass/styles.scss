@@ -466,6 +466,37 @@ ul.pager{
     }
   }
 }
+.video-repo-browse, [id*="field-video-upload-values"]{
+  .field-name-field-videogallery-video-upload{
+    .form-managed-file{
+      a.filefield-sources-imce-browse{
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        &:after{
+          background-color: #fff;
+          border: 1px solid #d9d9d9;
+          border-radius: 5px;
+          box-sizing: border-box;
+          color: #2f2f2f;
+          content: "Choose Your File";
+          cursor: pointer;
+          font-size: 12px;
+          font-weight: 300;
+          height: 28px;
+          left: 0;
+          line-height: 26px;
+          position: absolute;
+          text-align: center;
+          top: 0;
+          width: 134px;
+        }
+      }
+    }
+  }
+}
 #page-title{
   @extend .mb-10;
 }
@@ -7643,6 +7674,7 @@ div.node{
       position: absolute;
       right: 15px;
     }
+    a.ckeditor_links{margin-left: 0;}
   }
   #Templates{
     table{
@@ -8944,7 +8976,7 @@ div.node{
      display: none;        
     }
     + div.clearfix{
-        bottom: 84px;        
+        top: 10px;        
     }
     tbody tr td{
       border:none;
@@ -9233,10 +9265,6 @@ div.node{
   }
   .tab-form{
     padding-top: 10px;
-    display: none;
-    &.listicle-tab-form{
-      display: block;
-    }
   } 
 }
 #layout-html-submit, #layout-highlights-submit{
@@ -9505,3 +9533,4 @@ span.file a{pointer-events: none;}
 .page-related-content #main{min-height: 0 !important;}
 .node-type-event-backend .action-with-title #page-title{width: 700;}
 .primary_category_radio{float: left; margin: 2px 5px;}
+.node-category-form .metatags-form > legend{display: none;}
