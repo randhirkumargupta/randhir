@@ -2175,6 +2175,9 @@ footer .footer-copyright {
   font-size: 13px;
   color: #f40000;
 }
+.story-section h1 span {
+  color: #bb0a0a;
+}
 .story-section .comment-mobile {
   background: #1c1c1c;
   margin: -15px -15px 20px;
@@ -2652,6 +2655,7 @@ footer .footer-copyright {
   font-family: "Roboto Slab",sans-serif;
   font-size: 22px;
   font-weight: 700;
+  color: #000;
 }
 .story-section .story-expert-opinion img {
   width: 70px;
@@ -2668,14 +2672,17 @@ footer .footer-copyright {
   line-height: 18px;
   margin-bottom: 5px;
   color: #000;
+  padding: 0;
 }
 .story-section .story-expert-opinion .left-side p {
   color: #747474;
   line-height: 18px;
   font-size: 12px;
+  padding: 0;
 }
 .story-section .story-expert-opinion h2 {
   font-family: "Roboto Slab", sans-serif;
+  color: #000;
 }
 .story-section .story-expert-opinion h2:before, .story-section .story-expert-opinion h2:after {
   width: 20px;
@@ -3501,6 +3508,32 @@ footer .footer-copyright {
   line-height: 19px;
   color: #696969;
   display: none;
+}
+.view-category-wise-content-list .list-grid {
+  margin: 20px 0;
+  font-size: 16px;
+  font-family: roboto;
+}
+.view-category-wise-content-list .list-grid a:hover {
+  color: #a00606;
+}
+.view-category-wise-content-list .list-grid span.pipline {
+  padding: 0 10px;
+}
+.view-category-wise-content-list .catagory-grid h3 {
+  font-size: 15px;
+  line-height: 20px;
+  margin-top: 5px;
+}
+.view-category-wise-content-list .catagory-grid p {
+  color: #777;
+  margin-top: 10px;
+}
+.view-category-wise-content-list .catagory-grid .col-md-3 {
+  margin-bottom: 40px;
+}
+.view-category-wise-content-list .catagory-grid .col-md-3:nth-child(4n+1) {
+  clear: left;
 }
 .view-category-wise-content-list .item-list ul.pager {
   margin: 10px 0;
@@ -6661,8 +6694,31 @@ footer .footer-copyright {
 /*CSS End special auto page */
 /*CSS Start special tech page */
 .tech-layout-page {
-  /*Start photo section slider*/
-  /*End photo section slider*/
+  /*    Start photo section slider
+      .tech-block_5{
+          a{
+              color:#fff;
+          }
+          .flexslider .flex-direction-nav{
+              display: block;
+          }       
+          .flexslider .slides li{
+              &:hover a{
+                  color: #fff;
+              }
+              .detail .flex-caption{
+                  @include font(18px,24px,$itg-font-medium);  
+                  padding: 10px;   
+                  min-height: 68px;
+                  max-height: auto;
+                  overflow: initial;            
+              }   
+          }
+          .flexslider .slides li .detail .flex-count{
+              @include pos(absolute,null,null,78px,0px);
+          }
+      }    
+      End photo section slider*/
 }
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2 {
   height: 672px;
@@ -6760,7 +6816,6 @@ footer .footer-copyright {
   color: #b00202;
   font-size: 12px;
   font-size: 0.75rem;
-  margin-bottom: 5px;
 }
 .tech-layout-page .buying-guides ul li:first-child {
   padding-bottom: 15px;
@@ -6783,30 +6838,6 @@ footer .footer-copyright {
   float: left;
   margin-bottom: 0;
   margin-right: 10px;
-}
-.tech-layout-page .tech-block_5 a {
-  color: #fff;
-}
-.tech-layout-page .tech-block_5 .flexslider .flex-direction-nav {
-  display: block;
-}
-.tech-layout-page .tech-block_5 .flexslider .slides li:hover a {
-  color: #fff;
-}
-.tech-layout-page .tech-block_5 .flexslider .slides li .detail .flex-caption {
-  font-size: 18px;
-  font-size: 1.125rem;
-  font-weight: 500;
-  line-height: 24px;
-  padding: 10px;
-  min-height: 68px;
-  max-height: auto;
-  overflow: initial;
-}
-.tech-layout-page .tech-block_5 .flexslider .slides li .detail .flex-count {
-  position: absolute;
-  bottom: 78px;
-  left: 0px;
 }
 .tech-layout-page .tech-block_8 .widget-title {
   margin-bottom: 5px;
@@ -7734,6 +7765,11 @@ footer .footer-copyright {
   font-weight: 700;
 }
 
+#content [id*='event-registration-node-form'] {
+  /*.form-submit[value="Add another item"], .form-submit[value="Remove"]{
+          display: none;
+      } */
+}
 #content [id*='event-registration-node-form'] .form-field-type-field-collection .form-item .form-item {
   margin: 15px 0;
 }
@@ -7945,8 +7981,20 @@ footer .footer-copyright {
 #content [id*='event-registration-node-form'] .captcha span.error {
   padding-left: 0;
 }
-#content [id*='event-registration-node-form'] .form-submit[value="Add another item"], #content [id*='event-registration-node-form'] .form-submit[value="Remove"] {
-  display: none;
+#content [id*='event-registration-node-form'] .form-submit[value="Add another item"] {
+  margin-left: 0;
+}
+#content [id*='event-registration-node-form'] .form-submit[value="Remove"] {
+  background: #ef3c24;
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+  border: none;
+  padding: 5px 10px;
+  color: #fff;
+  font-weight: 500;
+  font-family: roboto;
+  border-radius: 4px;
 }
 
 #block-itg-event-backend-event-registration .event-registration-main-container {
@@ -8744,6 +8792,9 @@ footer .footer-copyright {
 
 /*CSS End sport home page*/
 /*CSS start for movie page*/
+.movie-layout-page .featured-post-first h2 a {
+  margin-bottom: 0;
+}
 .movie-layout-page .itg-layout-580 .droppable {
   height: 580px;
 }
@@ -9366,11 +9417,12 @@ footer .footer-copyright {
   width: 25%;
 }
 .election-page .key-candidate .key-candidate-detail ul li:nth-child(2) {
-  width: 60%;
+  width: 56%;
   padding-top: 5px;
 }
 .election-page .key-candidate .key-candidate-detail ul li:nth-child(3) {
-  width: 15%;
+  width: 18%;
+  text-align: center;
 }
 .election-page .key-candidate .key-candidate-detail ul li .candidate-name {
   font-size: 14px;
@@ -9406,6 +9458,9 @@ footer .footer-copyright {
   font-size: 28px;
   background: #ccc;
   margin-top: 12px;
+}
+.election-page .key-candidate .key-candidate-detail ul li .status span {
+  display: block;
 }
 .election-page .key-candidate .key-candidate-detail ul li .status.green {
   color: #418b32;
@@ -9729,6 +9784,7 @@ footer .footer-copyright {
   padding: 10px 5px;
   word-wrap: break-word;
   color: #383838;
+  height: 100%;
 }
 #block-itg-menu-manager-vertical-menu .vertical-menu-parent {
   height: 375px;
