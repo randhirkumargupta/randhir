@@ -114,16 +114,16 @@ if (!empty($data)) :
               
               <?php if(!empty($data['node_data']->type) && $data['node_data']->type == 'story') :
               if (function_exists('itg_get_front_activity_info')) {
-                 $follow_status = itg_get_front_activity_info($data['node_data']->nid, $data['node_data']->type, $user->uid, 'follow_story');
+                 $follow_status = itg_get_front_activity_info($data['node_data']->nid, $data['node_data']->type, $user->uid, 'follow_story', $status='');
               }
               if($user->uid > 0): 
-              if(!empty($follow_status['nid'])): 
+              if(!empty($follow_status['nid']) && $follow_status['status'] == '1'): 
               ?>  
-              <li class="following"><?php print t('Following'); ?></li>
+              <li class="follow-story"><a title = "Unfollow Story" href="javascript:" id="user-activity" rel="<?php print $data['node_data']->nid;?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" data-status="0" class="def-cur-pointer"><?php print t('Unfollow Story'); ?></a></li>
               <?php else:?>
-              <li class="follow-story"><a title = "follow story" href="javascript:" id="user-activity" rel="<?php print $data['node_data']->nid;?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" class="def-cur-pointer"><?php print t('follow the Story'); ?></a></li>
+              <li class="follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" rel="<?php print $data['node_data']->nid;?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer"><?php print t('Follow the Story'); ?></a></li>
               <?php endif; else: ?>
-              <li class="mhide"><?php if(function_exists(itg_sso_url)) { print itg_sso_url('follow story'); }  ?></li>
+              <li class="mhide"><?php if(function_exists(itg_sso_url)) { print itg_sso_url('Follow the Story'); }  ?></li>
               <?php endif; ?>
               <?php endif;?>
               
