@@ -2,7 +2,7 @@
 if (!empty($content)):
     global $base_url, $user;
     // get related content associated with story
-    $related_content = $node->content['related_content'];
+    $related_content = $content['related_content'];
     
     if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
         $class_buzz = 'buzz-feedback';
@@ -21,7 +21,7 @@ if (!empty($content)):
     $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     
     // get total share count
-    $tot_count = $node->content['total_share_count'];
+    $tot_count = $content['total_share_count'];
     
     // get global comment config    
    
@@ -30,15 +30,15 @@ if (!empty($content)):
     
     // get developing story status
     
-    $get_develop_story_status = $node->content['develop_story_status'];   
+    $get_develop_story_status = $content['develop_story_status'];   
     
     //get follow story status
     
-    $follow_status = $node->content['follow_status'];
-    
+    $follow_status = $content["follow_status"];
+   
     //get byline detail
     
-    $reporter_node = $node->content['byline_node'];
+    $reporter_node = $content['byline_node'];
   ?>
     <div class="story-section <?php print $class_buzz."".$class_related."".$class_listicle;?>">
         <div class='<?php print $classes ?>'>
@@ -79,6 +79,19 @@ if (!empty($content)):
                     <div class="story-left">
                         <div class="byline">              
                             <div class="profile-pic">
+                               <?php
+              /*$associate_type = '';
+              $associate_id = '';
+                        
+              if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                $associate_type = 'gallery';
+                $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+              } else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                  $associate_type = 'video';
+                  $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+              }*/
+              ?>
+<!--              <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php //echo $associate_type;?>-<?php //echo $associate_id;?>">click</a>-->
                                 <?php
                                 $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                                 if (!empty($file)) {
@@ -213,7 +226,7 @@ if (!empty($content)):
                                      <?php } if ($config_name == 'other') { ?> 
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                      <?php } ?>
-                                     <li><a href="javascript:void(0)"><i class="fa fa-bookmark"></i></a>
+                                     <li><a href="javascript:void(0)" title="READ LATER"><i class="fa fa-bookmark"></i></a>
                                          <span></span>
                                      </li>
                                  </ul>
@@ -564,7 +577,7 @@ if (!empty($content)):
                             $like = "no-of-likes_" . arg(1);
                             $dislike = "no-of-dislikes_" . arg(1);
                             ?>
-                            <div class="agbutton"><button title ="Agree" id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Disagree" id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snappost"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
+                            <div class="agbutton"><button title ="Like" id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Dislike" id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snappost"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
                         </div>
                     <?php } ?>
                     <div class="tags">

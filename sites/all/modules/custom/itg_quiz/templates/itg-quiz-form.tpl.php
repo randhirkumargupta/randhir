@@ -29,7 +29,7 @@ else {
     </div>
     <div class="profile-detail">
       <ul>
-        <li class="title" style="line-height: 15px"><?php echo $byline_name; ?> |</li>
+        <li class="title" style="line-height: 15px"><?php echo $byline_name; ?></li>
          <?php
           $twitter_handle = str_replace('@', '', $byline_twitter_handler);
           if (!empty($twitter_handle)) {

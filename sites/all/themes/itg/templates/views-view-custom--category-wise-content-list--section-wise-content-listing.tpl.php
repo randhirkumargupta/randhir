@@ -11,7 +11,15 @@ global $base_url;
   <h3><?php print $title; ?></h3>
 <?php endif; ?>
 <?php foreach ($rows as $id => $row) { ?>
-  <div class="catagory-listing">
+  <?php
+    if($_GET['view_type'] =='list'){
+    print '<div class="catagory-listing">'; 
+
+    } elseif($_GET['view_type'] =='grid'){
+        print '<div class="catagory-grid">'; 
+    }
+  ?>
+
     <div class="pic">
       <?php if ($row['field_story_small_image'] != '') { ?>
         <?php print $row['field_story_small_image']; ?>

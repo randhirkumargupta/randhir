@@ -25,29 +25,21 @@
             <div class="itg-form-section hide">
                 <div class="templates-tab-wrapper">
                   <?php print drupal_render($form['field_story_select_templates']); ?>
-                 
-                    <label>Select templates</label>
-                    <div class="templates-tab">
-                        <span data-ripple="listicle-tab"> Listicle </span>
-                        <span data-ripple="quote-tab"> Quote </span>
-                        <span data-ripple="factoid-tab"> Factoid </span>
-                        <span data-ripple="buzz-tab"> Buzz </span>
-                    </div>
                     <div class="listicle-tab-form tab-form">
                         <?php print drupal_render($form['field_story_templates']); ?>
                         <?php print drupal_render($form['field_story_template_guru']); ?>
                         <?php print drupal_render($form['field_story_listicle']); ?>    
                     </div>
-                    <div class="quote-tab-form tab-form">
+                    <div class="quote-tab-form tab-form hide">
                         <?php print drupal_render($form['field_story_quote_title']); ?>
                         <?php print drupal_render($form['field_story_quote_image']); ?>
                         <?php print drupal_render($form['field_story_template_quotes']); ?>
                     </div>            
-                    <div class="factoid-tab-form tab-form">
+                    <div class="factoid-tab-form tab-form hide">
                         <?php print drupal_render($form['field_story_factoids_title']); ?>
                         <?php print drupal_render($form['field_story_template_factoids']); ?>
                     </div>
-                    <div class="buzz-tab-form tab-form">
+                    <div class="buzz-tab-form tab-form hide">
                         <?php print drupal_render($form['field_story_template_buzz']); ?>
                     </div>
                 </div>
