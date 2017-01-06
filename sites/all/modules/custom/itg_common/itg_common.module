@@ -917,12 +917,12 @@ function itg_common_round_rating($average_rating) {
 function itg_total_share_count($actual_link) {
   $fb_google_count = $fb_count = $google_count = 0;
   
-  if (function_exists(itg_facebook_share_count)) {
+  if (function_exists('itg_facebook_share_count')) {
     $fb_count = itg_facebook_share_count($actual_link);
   }
 
   // get google share count
-  if (function_exists(itg_google_share_count)) {
+  if (function_exists('itg_google_share_count')) {
     $google_count = itg_google_share_count($actual_link);
   }
 
@@ -991,14 +991,14 @@ function itg_sso_url($link_name) {
   if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
     if ($user->uid == 0) {
       $url = 'http://' . PARENT_SSO . '/saml_login/other/domain_info';
-      return '<a href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
+      return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
     }
   }
   else {
     if ($user->uid == 0) {
       $url = PARENT_SSO;
       $sam_param = '/saml_login/other';
-      return '<a href="javascript:void(0)" onclick="Go (550, 500, 50, ' . "'" . $site . "'" . ', ' . "'" . $site . "'" . ', ' . "'" . $url . "'" . ', ' . "'" . $sam_param . "'" . ')">'. $link_name .'</a>';
+      return '<a title ="'.$link_name.'" href="javascript:void(0)" onclick="Go (550, 500, 50, ' . "'" . $site . "'" . ', ' . "'" . $site . "'" . ', ' . "'" . $url . "'" . ', ' . "'" . $sam_param . "'" . ')">'. $link_name .'</a>';
      
     }
   }

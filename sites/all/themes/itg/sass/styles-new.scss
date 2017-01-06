@@ -1468,13 +1468,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
           }
           &.twitter{
             color: #0783ec;
-            margin-top: 0px;
+            margin-top: -3px;
             line-height: 18px;
             padding-left: 0;
             &:before{
               content: '|';
               margin: 0 5px 0 0;
               color: #6b6b6b;
+              vertical-align: top;
             }
           }
           &.title{
@@ -2798,6 +2799,20 @@ body.has-cart-popup{
 #block-itg-front-end-common-related-photo-block #related-photo ul li a:hover, 
 #block-itg-front-end-common-related-video-block #related-photo ul li a:hover,
 .may-we-suggest a:hover,
+.related-story-page span.title a:hover,
+.view-category-wise-content-list .catagory-listing .detail h3 a:hover,
+.programe-title a:hover,
+.view-video-list-of-category .view-content .photo-list li .tile a:hover, 
+.view-video-landing-header .view-content .photo-list li .tile a:hover, 
+.view-so-sorry .view-content .photo-list li .tile a:hover, 
+.view-programme-content .view-content .photo-list li .tile a:hover, 
+.page-sports-video .view-content .photo-list li .tile a:hover, 
+.page-sports-photo .view-content .photo-list li .tile a:hover, 
+#block-itg-live-tv-live-tv-video-page .view-content .photo-list li .tile a:hover, 
+.view-programme-content-live-tv .view-content .photo-list li .tile a:hover,
+.magazin-post a:hover,
+.magazin-section a:hover,
+.story-section .tags ul li a:hover,
 .story-section .agbutton.story-like-dislike #name-dv #dlky button:hover{
   color: #1a3c8d;
 }
@@ -2836,9 +2851,6 @@ blockquote {
   position: relative;
   text-align: justify;
   text-indent: 40px;
-  float: right;
-  width: 50%;
-  margin-left: 15px;
   &:before {
     content: "\201C";
     display: inline-block;
@@ -2894,10 +2906,16 @@ footer .footer-top ul li a:hover{
 }
 .itg-layout-container .big-story-detail ul li:hover a, 
 .big-news .big-story-detail li a:hover{color: #ffc106;}
-.quotes .author{
-  font-size: 12px;
-  color: #828282;
-}
+.quotes{
+  float: right;
+  margin: 5px 0 5px 15px;
+  width: 50%;
+  .author{
+    font-size: 12px;
+    color: #828282;
+    text-align: right;
+  }
+} 
 
 /* CSS To Add Zoom Effect on Images */
 
@@ -2939,166 +2957,7 @@ footer .footer-top ul li a:hover{
 
 
 
-/* Responsive CSS */
-@media all and(max-width: 767px){
-  /* Responsive CSS For Loyalty and Rewards */
-  [id*="block-views-redeem-points-block"]{
-    .block-title{
-      font: 500 18px/24px Roboto;
-    }
-  }
-  #block-itg-loyalty-reward-itg-loyalty-reward-header{
-    .cart-user{
-      width: 50%;
-    }
-    .header-cart{
-      max-width: 48%;
-      text-align: right;
-      padding-top: 25px;
-      li{
-        padding-bottom: 10px;
-        float: none;
-        & + li:before{
-          display: none;
-        }
-      }
-    }
-  }
-  .view-redeem-points, .view-product{
-    .more-link{
-      top: 3px;
-      font-size: 13px;
-    }
-    .view-content{
-      .col-md-4{
-        & + .col-md-4{
-          .product-wrapper{
-            margin: 50px 0 0;
-          }
-        }
-      }
-    }
-    .product-wrapper{
-      padding: 15px 10px;
-      .product-title{
-        font-size: 14px;
-      }
-      .redeem-points{
-        font-size: 16px;
-      }
-      .btn-add-cart, .btn-redeem-points{
-        font: 500 13px/18px Roboto;
-        padding: 5px 8px;
-        margin: 0;
-      }
-      .btn-add-cart{
-        margin-right: 8px;
-      }
-    }
-  }
-  .page-order{
-    table{
-      th, td{
-        padding: 10px 5px;
-      }
-      td{
-        .checkout-inner{
-          font-size: 13px;
-          img{
-            margin: 0;
-            float: none;
-          }
-          .checkout-inner-details{
-            span{
-              width: 110px;
-            }
-          }
-        }
-      }
-    }
-  }
-  .cart-popup-wrapper{
-    .cart-popup{
-      margin: auto;
-      max-height: 96%;
-      max-width: 96%;
-      overflow-y: auto;
-      text-align: center;
-      h2{
-        margin-top: 30px;
-      }
-      .cart-actions{
-        padding-bottom: 30px;
-        .btn-add-cart, .btn-redeem-points{
-          font: 500 13px/18px Roboto;
-          padding: 5px 8px;
-          margin: 0;
-        }
-        .btn-add-cart{
-          margin-right: 8px;
-        }
-      }
-    }
-  }
-  /* End of Loyalty and Rewards */
-  /* Responsive CSS For Quiz And Survey */
-  .survey-form-main-container{
-    .byline{
-      .social-info{
-        display: none;
-      }
-      .profile-pic{
-        margin-right: 10px;
-      }
-      .profile-detail {
-        float: none;
-        overflow: hidden;
-        margin: 0;
-        width: auto;
-        padding: 0;
-      }
-    }
-  } 
-  [id*="itg-quiz-quiz-form"]{
-    .answer-container{
-      padding-left: 0;
-      .form-type-checkboxes, .form-type-radios{
-        .form-type-checkbox, .form-type-radio{
-          > label{
-            width: 100%;
-          }
-        }
-      }
-      .quiz-media-container{
-        width: 130px;
-        margin-right: 10px;
-      }
-    }
-  }    
-  /* End of Quiz And Survey */
-  
-  .total-point-wrapper{
-    display: block;
-    margin-top: 20px;
-    .pregress-bar .pregress-bar-active{
-      max-width: 60%;
-    }
-    .pregress-bar span.current-badge{
-      left: 15px;
-    }
-    .pregress-bar span.next-badge{
-      right: 15px;
-    }
-    .points-to-go{
-      padding-right: 15px;
-    }
-  }
-  .quotes {
-    margin-left: 0;
-    float: none;
-    width: 100%;
-  }
-}
+
 [id*="protected-pages-enter-password"]{
   fieldset{
     border: none;
@@ -3306,26 +3165,7 @@ footer .footer-top ul li a:hover{
   }
 }
 
-@media all and (max-width: 1024px){
-  .featured_photo_carousel .flexslider .slides li, 
-  .tech-block_5 .flexslider .slides li, 
-  .auto-block_5 .flexslider .slides li{
-    border-right: none;
-  }
-  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev, 
-  .tech-block_5 .flexslider .flex-direction-nav a.flex-prev, 
-  .auto-block_5 .flexslider .flex-direction-nav a.flex-prev{
-    left: 0;
-    right: auto;
-    border-right: none;
-    width: 40px;
-  }
-  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-next, 
-  .tech-block_5 .flexslider .flex-direction-nav a.flex-next, 
-  .auto-block_5 .flexslider .flex-direction-nav a.flex-next{
-    right: 0;
-  }
-}
+
 
 .page-order-confirmation{
   header{
@@ -3930,13 +3770,24 @@ article.node-mega-review-critic{
     margin-top: 30px;
     width: 100%;
     .movie-trailer{
-      height: 271px;
       background-color: #ddd;
       float: left;
       width: 63%;
+      > div{
+        position: relative;
+        padding-bottom: 49.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: auto; 
+        -webkit-overflow-scrolling:touch; 
+        border: solid black 1px;
+      }
       iframe{
-        height: 271px;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
+        height: 100%;
       }
     }
     .movie-review-text{
@@ -4126,8 +3977,13 @@ article.node-mega-review-critic{
             background: #000 none repeat scroll 0 0;
             color: #fff;
             font-size: 24px;
-            padding: 28px 0 28px 190px;
+            padding: 28px 20px 28px 190px;
             text-align: left;
+            line-height: 28px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: right;
         }
         img{
             position: absolute;
@@ -4617,6 +4473,28 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     }
   }
 }
+
+/* Responsive CSS */
+@media all and (max-width: 1024px){
+  .featured_photo_carousel .flexslider .slides li, 
+  .tech-block_5 .flexslider .slides li, 
+  .auto-block_5 .flexslider .slides li{
+    border-right: none;
+  }
+  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev, 
+  .tech-block_5 .flexslider .flex-direction-nav a.flex-prev, 
+  .auto-block_5 .flexslider .flex-direction-nav a.flex-prev{
+    left: 0;
+    right: auto;
+    border-right: none;
+    width: 40px;
+  }
+  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-next, 
+  .tech-block_5 .flexslider .flex-direction-nav a.flex-next, 
+  .auto-block_5 .flexslider .flex-direction-nav a.flex-next{
+    right: 0;
+  }
+}
 /* Responsive CSS Personalization pages */
 @media all and (max-width: 767px){
   .page-personalization{
@@ -4807,6 +4685,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     border-left: none;
     margin-left: 0;
     border-top: 1px solid #ddd;
+    display: none;
   }
   #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item{
     margin-top: 0;
@@ -4944,14 +4823,205 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     width: 300px;
   }
 }
+@media all and(max-width: 767px){
+  /* Responsive CSS For Loyalty and Rewards */
+  [id*="block-views-redeem-points-block"]{
+    .block-title{
+      font: 500 18px/24px Roboto;
+    }
+  }
+  #block-itg-loyalty-reward-itg-loyalty-reward-header{
+    .cart-user{
+      width: 50%;
+    }
+    .header-cart{
+      max-width: 48%;
+      text-align: right;
+      padding-top: 25px;
+      li{
+        padding-bottom: 10px;
+        float: none;
+        & + li:before{
+          display: none;
+        }
+      }
+    }
+  }
+  .view-redeem-points, .view-product{
+    .more-link{
+      top: 3px;
+      font-size: 13px;
+    }
+    .view-content{
+      .col-md-4{
+        & + .col-md-4{
+          .product-wrapper{
+            margin: 50px 0 0;
+          }
+        }
+      }
+    }
+    .product-wrapper{
+      padding: 15px 10px;
+      .product-title{
+        font-size: 14px;
+      }
+      .redeem-points{
+        font-size: 16px;
+      }
+      .btn-add-cart, .btn-redeem-points{
+        font: 500 13px/18px Roboto;
+        padding: 5px 8px;
+        margin: 0;
+      }
+      .btn-add-cart{
+        margin-right: 8px;
+      }
+    }
+  }
+  .page-order{
+    table{
+      th, td{
+        padding: 10px 5px;
+      }
+      td{
+        .checkout-inner{
+          font-size: 13px;
+          img{
+            margin: 0;
+            float: none;
+          }
+          .checkout-inner-details{
+            span{
+              width: 110px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .cart-popup-wrapper{
+    .cart-popup{
+      margin: auto;
+      max-height: 96%;
+      max-width: 96%;
+      overflow-y: auto;
+      text-align: center;
+      h2{
+        margin-top: 30px;
+      }
+      .cart-actions{
+        padding-bottom: 30px;
+        .btn-add-cart, .btn-redeem-points{
+          font: 500 13px/18px Roboto;
+          padding: 5px 8px;
+          margin: 0;
+        }
+        .btn-add-cart{
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+  /* End of Loyalty and Rewards */
+  /* Responsive CSS For Quiz And Survey */
+  .survey-form-main-container{
+    .byline{
+      .social-info{
+        display: none;
+      }
+      .profile-pic{
+        margin-right: 10px;
+      }
+      .profile-detail {
+        float: none;
+        overflow: hidden;
+        margin: 0;
+        width: auto;
+        padding: 0;
+      }
+    }
+  } 
+  [id*="itg-quiz-quiz-form"]{
+    .answer-container{
+      padding-left: 0;
+      .form-type-checkboxes, .form-type-radios{
+        .form-type-checkbox, .form-type-radio{
+          > label{
+            width: 100%;
+          }
+        }
+      }
+      .quiz-media-container{
+        width: 130px;
+        margin-right: 10px;
+      }
+    }
+  }    
+  /* End of Quiz And Survey */
+  
+  .total-point-wrapper{
+    display: block;
+    margin-top: 20px;
+    .pregress-bar .pregress-bar-active{
+      max-width: 60%;
+    }
+    .pregress-bar span.current-badge{
+      left: 15px;
+    }
+    .pregress-bar span.next-badge{
+      right: 15px;
+    }
+    .points-to-go{
+      padding-right: 15px;
+    }
+  }
+  .quotes {
+    margin-left: 0;
+    float: none;
+    width: 100%;
+  }
+  .survey-form-main-container .byline{
+    border: none;
+  }
+  .survey-form-main-container .byline .profile-detail ul li.twitter:before{display: none;}
+  .survey-form-main-container h1, article.node-mega-review-critic h1{
+    font-size: 24px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 30px;
+  }
+  article.node-mega-review-critic h1{margin-bottom: 10px;}
+  article.node-mega-review-critic .rating-and-social-wrapper .social-info span.share-count{margin-left: 0;}
+  article.node-mega-review-critic .rating-and-social-wrapper .movie-rating{padding: 0; height: 40px; margin-top: 0;}
+  .career-graph .career-graph-data{
+    margin-top: 50px;
+    .gray-bg{
+      padding: 10px;
+    }
+    .black-bg{
+      padding: 10px 10px 10px 100px;
+      font-size: 18px;
+    }
+    img{
+      max-width: 90px;
+    }
+  }
+}
 @media all and (max-width: 480px){
   .photos-videos-wrapper .movie-videos, 
   .photos-videos-wrapper .movie-photos{
     width: 100%;
-    padding: 0;
   }
   #block-itg-personalization-user-my-point .unit-description th:first-child{
     min-width: 240px;
+  }
+  article.node-mega-review-critic .movie-review-wrapper .movie-trailer > div{
+    padding-bottom: 45.25%;
+  }
+  article.node-mega-review-critic .other-reviews .other-reviews-posted-on .other-reviews-by{
+    display: block;
+    padding-right: 0;
   }
 }
 @media all and (max-width: 360px){

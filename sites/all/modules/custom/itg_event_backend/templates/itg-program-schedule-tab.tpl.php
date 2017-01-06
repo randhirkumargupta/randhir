@@ -4,8 +4,13 @@
  * Theme implementation for poll form in tab display. 
  */
 global $base_url;
-$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
 $arg1 = arg(1);
+
+if (!empty($arg1) && is_numeric($arg1)) {
+  $host_node = node_load($arg1);
+}
+
+/*$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url); me
 if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {
   $host_node = node_load($arg1);
 } else {
@@ -15,7 +20,7 @@ if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {
     if (!empty($host_node_arr[1])) {
       $host_node = node_load($host_node_arr[1]);
     }
-}
+}*/
 
 $current_date = strtotime(date('Y-m-d  H:i:s'));
 if (!empty($host_node) && ($host_node->type == 'event_backend')) {
@@ -33,9 +38,9 @@ $actual_host_name = itg_event_get_host_name();
 if($actual_host_name) {
   $baseurl = $actual_host_name.'/';
 }
-else {
+/*else { me
   $baseurl = $base_url.'/';
-}
+}*/
 
 
 if($current_date < $event_close_date) {
@@ -81,13 +86,13 @@ foreach ($data as $key => $value) {
       $max = max(array(count($session_result['photo']), count($session_result['video']), count($session_result['audio'])));
       for($i = 0; $i < $max; $i++) {
         if (!empty($session_result['photo'][$i])) {
-          $output_media .= l('<i class="fa fa-camera"></i> ' . t('Session Photo'), $base_url.drupal_get_path_alias('node/'. $session_result['photo'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+          $output_media .= l('<i class="fa fa-camera"></i> ' . t('Session Photo'), $base_url.'/'.drupal_get_path_alias('node/'. $session_result['photo'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
         if (!empty($session_result['video'][$i])) {
-          $output_media .= l('<i class="fa fa-video-camera"></i> ' . t('Session Video'), $base_url.drupal_get_path_alias('node/'. $session_result['video'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+          $output_media .= l('<i class="fa fa-video-camera"></i> ' . t('Session Video'), $base_url.'/'.drupal_get_path_alias('node/'. $session_result['video'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
         if (!empty($session_result['audio'][$i])) {
-          $output_media .= l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), $base_url.drupal_get_path_alias('node/'. $session_result['audio'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+          $output_media .= l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), $base_url.'/'.drupal_get_path_alias('node/'. $session_result['audio'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
         }
         $output_media .= '<br>';
       }
@@ -101,10 +106,10 @@ foreach ($data as $key => $value) {
               if(!empty($spk_detail)){
               print '<div class="profile-loop"><label style="color:'.$font_color.'">Speaker:</label>';
               //$spk_title = '<div class="speaker-title"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank" style="color:'.$content_font_color.'">'.$spk_detail[0]->title.'</a></div>';
-              $spk_title = '<div class="speaker-title">'.l(t($spk_detail[0]->title), 'speaker-details', array('attributes' => array('style' => 'color:'.$content_font_color),'query' => array('speaker' => $spk_detail[0]->nid))).'</div>';
+              $spk_title = '<div class="speaker-title">'.l(t($spk_detail[0]->title), $baseurl.'speaker-details', array('attributes' => array('style' => 'color:'.$content_font_color),'query' => array('speaker' => $spk_detail[0]->nid))).'</div>';
               $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . '/>';
               //print '<div class="speaker-image"><a href="'.$baseurl.'node/'.$spk_detail[0]->nid.'" target="_blank">'.$img.'</a></div>';
-              print '<div class="speaker-image">'. l($img, 'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)).'</div>';
+              print '<div class="speaker-image">'. l($img, $baseurl.'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)).'</div>';
               print '<div class="speaker-designation" style="color:'.$content_font_color.'">' . t($spk_title . $spk_detail[0]->field_story_new_title_value) . '</div></div>';
               }
             }

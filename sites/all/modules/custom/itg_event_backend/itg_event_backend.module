@@ -867,7 +867,7 @@ function itg_event_backend_node_insert($node) {
 function itg_event_backend_node_update($node) {
   if ($node->type == 'event_backend') {
     if ($node->domains != '1' && $_GET['step'] == 'step_configuration') {
-      itg_event_backend_insert_into_redirect($node);
+      //itg_event_backend_insert_into_redirect($node); me
     }
     $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
     itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
@@ -1231,11 +1231,11 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
   $arg = arg();
   $node = ''; //shravan
   if (module_exists('redirect')) {
-    $query = db_select('redirect', 'red');
+    /*$query = db_select('redirect', 'red'); me
     $query->fields('red', array('source'));
     $query->condition('redirect', $base_url, '=');
     $result = $query->execute()->fetchField();
-    $event_id = explode('node/', $result);
+    $event_id = explode('node/', $result);*/
 
     if (!empty($whole_node)) {
       if ($arg[0] == 'event') {
@@ -1245,11 +1245,11 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
       elseif (!empty($arg[1]) && is_numeric($arg[1])) {
         $node = node_load($arg[1]);
       }
-      else {
+      /*else { me
         if (!empty($event_id[1])) {//shravan
           $node = node_load($event_id[1]);
         }
-      }
+      }*/
       return $node;
     }
     else {
@@ -1261,11 +1261,11 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
       elseif (!empty($arg[1]) && is_numeric($arg[1])) {//shravan
         return $arg[1];
       }
-      else {
+     /* else { me
         if (!empty($event_id[1])) {//shravan
           return $event_id[1];
         }
-      }
+      }*/
     }
   }
 }
@@ -1283,7 +1283,7 @@ function itg_event_get_host_name() {
   elseif (!empty($arg[1]) && is_numeric($arg[1])) {
     $host = $base_url . '/' . drupal_get_path_alias('node/' . $arg[1]);
   }
-  else {
+  /*else { me
     if (module_exists('domain')) {
       $query = db_select('domain', 'd');
       $query->fields('d', array('subdomain', 'scheme'));
@@ -1291,7 +1291,7 @@ function itg_event_get_host_name() {
       $result = $query->execute()->fetchAssoc();
       $host = $result['scheme'] . '://' . $result['subdomain'];
     }
-  }
+  }*/
   return $host;
 }
 
