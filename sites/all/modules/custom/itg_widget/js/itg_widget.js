@@ -4,7 +4,7 @@
  */
 Drupal.behaviors.itg_widgets = {
   attach: function (context, settings) {
-      alert('@@@');
+      //alert('@@@');
 
     //        jQuery('#edit-actionitg-widget-categories-wise-node-group').click(function() {
     //            if (confirm('Are you sure?'))
