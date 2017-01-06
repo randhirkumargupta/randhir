@@ -31,6 +31,17 @@ define('EXTRA_SECTION_CARDS', 21);
 define('SECTION_TAB', 20);
 define('FRONT_USER', 25);
 define('PARENT_SSO', 'dev.indiatodayonline.in');
+define('EXTRA_LARGE_IMAGE_WIDTH', 647);
+define('EXTRA_LARGE_IMAGE_HEIGHT', 363);
+define('LARGE_IMAGE_WIDTH', 483);
+define('LARGE_IMAGE_HEIGHT', 271);
+define('MEDIUM_IMAGE_WIDTH', 370);
+define('MEDIUM_IMAGE_HEIGHT', 208);
+define('SMALL_IMAGE_WIDTH', 170);
+define('SMALL_IMAGE_HEIGHT', 127);
+define('EXTRA_SMALL_IMAGE_WIDTH', 88);
+define('EXTRA_SMALL_IMAGE_HEIGHT', 66);
+
 
 
 /**

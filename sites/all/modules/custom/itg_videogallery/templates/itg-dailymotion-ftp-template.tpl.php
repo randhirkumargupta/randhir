@@ -35,10 +35,10 @@ global $base_url;
                         </select>
                     </div>
                      <div class="apply_video_filter">
-                        <span class="btn-save apply_video_filters">Apply</span>
+                        <span class="btn-save apply_video_filters"><?php print t("Apply"); ?></span>
                     </div>
                     <div class="reset_video_filter">
-                        <span class="button reset_video_filters">Reset</span>
+                        <span class="button reset_video_filters"><?php print t("Reset"); ?></span>
                     </div>
                 </div>
                 <div class="video-options-wrapper"></div>
@@ -64,14 +64,14 @@ global $base_url;
 <?php print drupal_render(drupal_get_form('videogallery_new_fileupload_form')); ?>
 
 <?php if ($_GET['field_name'] == 'field_story_facebook_video' || $_GET['field_name'] =='field_story_twitter_video' || $_GET['field_name'] =='field_videogallery_video_upload') { ?>
-       <span class="button add-in-single-filed" btn_name="<?php echo $_GET['btn_name'];?>" field_name="<?php echo $_GET['field_name'];?>">
+       <span class="button browse-local" btn_name="<?php echo $_GET['btn_name'];?>" field_name="<?php echo $_GET['field_name'];?>">
                     <?php
                     print t('Upload Video');
                     ?>
 
                 </span>
 <?php } else { ?>
-       <span class="button browse-local">
+       <span class="button browse-local" btn_name="">
                     <?php
                     print t('Upload Video');
                     ?>
