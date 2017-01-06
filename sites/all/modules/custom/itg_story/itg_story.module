@@ -148,9 +148,12 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
             if (!empty($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
               $source_type = trim($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']);
             }
+            
+            
             if (empty($source_id) && empty($source_type)) {
-                $form['title']['#suffix'] = '<div class="breaking_class"><input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span></div>';
+              $breaking_check = '<input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span>';
             }
+            $form['title']['#suffix'] = '<div class="breaking_class">'.$breaking_check.'</div>';    
             $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
             $form['field_story_syndication'][LANGUAGE_NONE]['#options'] = array('Yes' => $form['field_story_syndication'][LANGUAGE_NONE]['#title']);
             $form['field_story_syndication'][LANGUAGE_NONE]['#title'] = "";
