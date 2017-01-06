@@ -823,25 +823,25 @@ function forms_uses_checked_content_id() {
  * @return array
  */
 function get_sessions_of_ticked_nodes(&$form) {
-  if (isset($form['views_bulk_operations'])) {
-    foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
-      if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
-        $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
-        $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
-      }
-    }
-    drupal_add_js('jQuery(window).load(function() {
-            var sessionids="' . implode($_SESSION[$form['#form_id']], ',') . '";
-                if(sessionids!="")
-                {
-                sessionids=sessionids.split(",");
-                }
-                jQuery.each(sessionids, function( index, value ) {
-                jQuery(".nodes_id_container").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
-                
-            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-    );
-  }
+//  if (isset($form['views_bulk_operations'])) {
+//    foreach ($form['views_bulk_operations'] as $key => $form_node_data) {
+//      if (in_array($form_node_data['#return_value'], $_SESSION[$form['#form_id']])) {
+//        $form['views_bulk_operations'][$key]['#attributes']['class'][] = 'custom-selected';
+//        $form['views_bulk_operations'][$key]['#default_value'] = $form_node_data['#return_value'];
+//      }
+//    }
+//    drupal_add_js('jQuery(window).load(function() {
+//            var sessionids="' . implode($_SESSION[$form['#form_id']], ',') . '";
+//                if(sessionids!="")
+//                {
+//                sessionids=sessionids.split(",");
+//                }
+//                jQuery.each(sessionids, function( index, value ) {
+//                jQuery(".nodes_id_container").append("<span id=spn_"+value+" class=content-ids>"+value+"<a class=removeid cid="+value+" href=javascript:void(0)>X</a></span>");});
+//                
+//            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+//    );
+//  }
 
   return $form;
 }
