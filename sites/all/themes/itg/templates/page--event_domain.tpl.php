@@ -6,8 +6,8 @@
 
 global $base_url;
 $arg = arg();
-if (!empty($arg1) && is_numeric($arg1)) {
-  $host_node = node_load($arg1);
+if (!empty($arg[1]) && is_numeric($arg[1])) {
+  $host_node = node_load($arg[1]);
 }elseif($arg[0] == 'event'){
   $path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
   $host_node = menu_get_object("node", 1, $path);
