@@ -53,7 +53,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
             }
 
             if ($event_config_flashback) {
-              $flash_old = itg_event_backend_flashback($node->nid);
+              $flash_old = itg_event_backend_flashback($node->nid, $menu_font_color);
               $flash_old_event = '';
               if(!empty($flash_old)){
                 $flash_old_event = $flash_old;

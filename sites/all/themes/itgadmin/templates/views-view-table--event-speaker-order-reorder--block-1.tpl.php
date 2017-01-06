@@ -37,32 +37,9 @@
   <tbody>
     <?php foreach ($rows as $row_count => $row): ?>
       <tr <?php if ($row_classes[$row_count]) { print 'class="' . implode(' ', $row_classes[$row_count]) .'"';  } ?>>
-        <?php foreach ($row as $field => $content):?>
-          <?php
-            $id = (int) filter_var($row['item_id'], FILTER_SANITIZE_NUMBER_INT);
-//            $data = entity_load('field_collection_item', array($id));
-//            $target_id = $data[$id]->field_select_speaker['und'][0]['target_id'];
-          ?>
+        <?php foreach ($row as $field => $content): ?>
           <td <?php if ($field_classes[$field][$row_count]) { print 'class="'. $field_classes[$field][$row_count] . '" '; } ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
-            <?php
-              if($field == 'draggableviews') {
-                  $key = $row['counter'];
-                  ?>
-              <select class="draggableviews-weight form-select" id="edit-draggableviews-1-weight" name="draggableviews[<?php print $key; ?>][weight]">
-                  <?php
-                  $option_range = range(-count($rows),count($rows));
-                  foreach($option_range as $weight_key => $weight) {
-                   print "<option value='" . $weight_key . "'>" . $weight . "</option>";   
-                  }
-                  ?>
-              </select>
-              <input class="draggableviews-id" name="draggableviews[<?php print $key ?>][id]" value="<?php print $id ?>" type="hidden">
-              <?php
-              }
-              else {
-                    print $content;
-              }           
-            ?>
+            <?php print $content; ?>
           </td>
         <?php endforeach; ?>
       </tr>
