@@ -110,6 +110,20 @@ function itg_widget_views_data() {
             'handler' => 'views_handler_sort',
         ),
     );
+       $data['itg_widget_order']['nid'] = array(
+        'title' => t('nid'),
+        'help' => t('nid.'),
+        'field' => array(
+            'handler' => 'views_handler_field',
+            'click sortable' => TRUE,
+        ),
+        'filter' => array(
+            'handler' => 'views_handler_filter_string',
+        ),
+        'sort' => array(
+            'handler' => 'views_handler_sort',
+        ),
+    );
     
       $data['itg_widget_order']['extra'] = array(
         'title' => t('extra'),

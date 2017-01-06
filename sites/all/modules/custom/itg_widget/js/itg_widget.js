@@ -4,6 +4,7 @@
  */
 Drupal.behaviors.itg_widgets = {
   attach: function (context, settings) {
+      //alert('@@@');
 
     //        jQuery('#edit-actionitg-widget-categories-wise-node-group').click(function() {
     //            if (confirm('Are you sure?'))
@@ -23,6 +24,26 @@ Drupal.behaviors.itg_widgets = {
     //            // Prevent default action.
     //            return false;
     //        });
+    jQuery ('.associate-content-block').click (function () {        
+        var widgets_type = jQuery(this).attr('data-widget');
+        
+        var widgets_type_array = widgets_type.split("-");
+        var widgets_type = widgets_type_array[0];
+        var widgets_id = widgets_type_array[1];
+
+        jQuery.ajax({
+                url: Drupal.settings.basePath + "associate-photo-video-content/"+widgets_type+"/"+widgets_id,
+                method: 'post',
+                //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
+                beforeSend: function() {
+                   // $('.itg-ajax-loader').show();
+                },
+                success: function(data) {
+                   jQuery("#associate_content_block").html(data);
+                }
+            });
+    });
+    
     jQuery ('#edit-state1').change (function () {
       var getval = jQuery (this).val ();
       if (getval == 0)
