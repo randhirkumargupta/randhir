@@ -2,7 +2,7 @@
 if (!empty($content)):
     global $base_url, $user;
     // get related content associated with story
-    $related_content = $node->content['related_content'];
+    $related_content = $content['related_content'];
     
     if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
         $class_buzz = 'buzz-feedback';
@@ -21,7 +21,7 @@ if (!empty($content)):
     $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     
     // get total share count
-    $tot_count = $node->content['total_share_count'];
+    $tot_count = $content['total_share_count'];
     
     // get global comment config    
    
@@ -30,15 +30,15 @@ if (!empty($content)):
     
     // get developing story status
     
-    $get_develop_story_status = $node->content['develop_story_status'];   
+    $get_develop_story_status = $content['develop_story_status'];   
     
     //get follow story status
     
-    $follow_status = $node->content['follow_status'];
-    
+    $follow_status = $content["follow_status"];
+   
     //get byline detail
     
-    $reporter_node = $node->content['byline_node'];
+    $reporter_node = $content['byline_node'];
   ?>
     <div class="story-section <?php print $class_buzz."".$class_related."".$class_listicle;?>">
         <div class='<?php print $classes ?>'>
@@ -79,6 +79,19 @@ if (!empty($content)):
                     <div class="story-left">
                         <div class="byline">              
                             <div class="profile-pic">
+                               <?php
+              /*$associate_type = '';
+              $associate_id = '';
+                        
+              if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                $associate_type = 'gallery';
+                $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+              } else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                  $associate_type = 'video';
+                  $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+              }*/
+              ?>
+<!--              <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php //echo $associate_type;?>-<?php //echo $associate_id;?>">click</a>-->
                                 <?php
                                 $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                                 if (!empty($file)) {

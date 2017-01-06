@@ -22,6 +22,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                 </div>
                 <div class="col-md-8 video-header-left">
                     <div class="video">
+
     <?php
     if (!empty($videoids)) {
         $hide_player = "";
@@ -33,6 +34,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                 $hide_player = 'hide-player';
             }
             ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
+
                                 if (module_exists('itg_videogallery')) {
                                     $vid = itg_videogallery_get_videoid($row['fid']);
                                 }
@@ -48,7 +50,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                                 }
                                 ?>
                                     <div class="iframe-video">
-                                        <iframe frameborder="0"
+                                        <iframe frameborder="0" scrolling="no"
                                                 src="https://www.dailymotion.com/embed/video/<?php print $video_value->video_id; ?>?autoplay=0&mute=1&endscreen-enable=<?php echo $ads_flag; ?>&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>
 
@@ -61,27 +63,28 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
         $newimageds.='</ul></div></div></div>';
     }
     ?>
+
                     </div>
 
                     <div class="social-likes mhide">
                         <ul>
                             <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
-                    if (function_exists(itg_flag_get_count)) {
-                        print $like_count = itg_flag_get_count(arg(1), 'like_count');
-                    }
-                    ?></span></a></li>
+                                        if (function_exists(itg_flag_get_count)) {
+                                            print $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                        }
+                                        ?></span></a></li>
                             <li><?php print $row['ops']; ?></li>
                             <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
                             <li><a class="def-cur-pointer" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
                             <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i> <span>Email</span></a></li>
                             <li><a href="#" title="Embed"><i class="fa fa-link"></i> <span>Embed</span></a></li>
-    <?php
-    if (function_exists(global_comment_last_record)) {
-        $last_record = global_comment_last_record();
-        $config_name = trim($last_record[0]->config_name);
-    }
-    if ($config_name == 'vukkul') {
-        ?>
+                            <?php
+                            if (function_exists(global_comment_last_record)) {
+                                $last_record = global_comment_last_record();
+                                $config_name = trim($last_record[0]->config_name);
+                            }
+                            if ($config_name == 'vukkul') {
+                                ?>
                                 <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                             <?php } if ($config_name == 'other') { ?> 
                                 <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
@@ -91,35 +94,35 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                             <?php else: ?>
                                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                             <?php endif; ?>
-                <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
+            <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
                         </ul>
                     </div>
                     <div class="clearfix"></div>
-                            <?php
-                            if (!empty($videoids) && count($videoids) > 1) {
-                                print $newimageds;
-                            }
-                            ?>
+                    <?php
+                    if (!empty($videoids) && count($videoids) > 1) {
+                        print $newimageds;
+                    }
+                    ?>
 
                     <div class="social-likes desktop-hide">
                         <ul>
                             <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span><?php
-                            if (function_exists(itg_flag_get_count)) {
-                                print $like_count = itg_flag_get_count(arg(1), 'like_count');
-                            }
-                            ?></span></a></li>
+                                        if (function_exists(itg_flag_get_count)) {
+                                            print $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                        }
+                                        ?></span></a></li>
                             <li><?php print $row['ops']; ?></li>
                             <li><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
                             <li><a class="def-cur-pointer" title="share on twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($video_node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
                             <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i> <span>Email</span></a></li>
                             <li><a href="#" title="Embed"><i class="fa fa-link"></i> <span>Embed</span></a></li>
-    <?php
-    if (function_exists(global_comment_last_record)) {
-        $last_record = global_comment_last_record();
-        $config_name = trim($last_record[0]->config_name);
-    }
-    if ($config_name == 'vukkul') {
-        ?>
+                            <?php
+                            if (function_exists(global_comment_last_record)) {
+                                $last_record = global_comment_last_record();
+                                $config_name = trim($last_record[0]->config_name);
+                            }
+                            if ($config_name == 'vukkul') {
+                                ?>
                                 <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                             <?php } if ($config_name == 'other') { ?> 
                                 <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
@@ -129,7 +132,7 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                             <?php else: ?>
                                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                             <?php endif; ?>
-                <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
+            <!--<li class="mhide"><a href="#" title="Submit Video"><i class="fa fa-share"></i> <span>Submit Video</span></a></li>-->
                         </ul>
                     </div>
 
@@ -140,12 +143,12 @@ if (function_exists('get_video_in_fieldcollection_by_nid')) {
                     <p class="upload-date"><?php print $row['timestamp']; ?></p>
                     <div class="section-like-dislike">
                         <div id="btn-div">
-    <?php
-    if (function_exists(itg_event_backend_highlights_like_dislike)) {
-        $val = arg(1);
-        print itg_event_backend_highlights_like_dislike($val);
-    }
-    ?>
+                            <?php
+                            if (function_exists(itg_event_backend_highlights_like_dislike)) {
+                                $val = arg(1);
+                                print itg_event_backend_highlights_like_dislike($val);
+                            }
+                            ?>
                         </div>
 
                     </div>
