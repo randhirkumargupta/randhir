@@ -226,7 +226,7 @@ if (!empty($content)):
                                      <?php } if ($config_name == 'other') { ?> 
                                      <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                                      <?php } ?>
-                                     <li><a href="javascript:void(0)"><i class="fa fa-bookmark"></i></a>
+                                     <li><a href="javascript:void(0)" title="READ LATER"><i class="fa fa-bookmark"></i></a>
                                          <span></span>
                                      </li>
                                  </ul>
@@ -577,7 +577,7 @@ if (!empty($content)):
                             $like = "no-of-likes_" . arg(1);
                             $dislike = "no-of-dislikes_" . arg(1);
                             ?>
-                            <div class="agbutton"><button title ="Agree" id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Disagree" id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snappost"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
+                            <div class="agbutton"><button title ="Like" id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Dislike" id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snappost"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
                         </div>
                     <?php } ?>
                     <div class="tags">

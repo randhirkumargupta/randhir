@@ -1601,7 +1601,7 @@ function itg_event_backend_convert_number_to_words($number) {
 /**
  * Implement function for get old event flasback
  */
-function itg_event_backend_flashback($curr_event_id) {
+function itg_event_backend_flashback($curr_event_id, $menu_font_color) {
   $current_date_time = date('Y-m-d H:i:s');
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title', 'created'));
@@ -1615,7 +1615,7 @@ function itg_event_backend_flashback($curr_event_id) {
   $result = $query->execute();
   $flash_back_link = '';
   foreach ($result as $value) {
-    $flash_back_link .= '<li>' . l(t($value->title), 'node/' . $value->nid, array('attributes' => array('target' => '_blank'))) . '</li>';
+    $flash_back_link .= '<li>' . l(t($value->title), 'node/' . $value->nid, array('attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
 //    $val[] = 'node/' . $value->nid;
 //    $detail['node/' . $value->nid] = array(
 //      'key' => 'node/' . $value->nid,
