@@ -4,7 +4,13 @@
  * Theme implementation for poll form in tab display. 
  */
 global $base_url;
-$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
+$arg1 = arg(1);
+
+if (!empty($arg1) && is_numeric($arg1)) {
+  $host_node = node_load($arg1);
+}
+
+/*$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url); me
 $arg1 = arg(1);
 if (empty($host_detail) && !empty($arg1) && is_numeric($arg1)) {
   $host_node = node_load($arg1);
@@ -16,7 +22,7 @@ else {
   if (!empty($host_node_arr[1])) {
     $host_node = node_load($host_node_arr[1]);
   }
-}
+}*/
 
 $current_date = strtotime(date('Y-m-d  H:i:s'));
 if (!empty($host_node) && ($host_node->type == 'event_backend')) {
@@ -84,6 +90,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
               $output_story_kicker = $detail['kicker'];
             }
           }
+          /* old code
           $output_photo = '';
           foreach ($session_result['photo'] as $session) {
             if (!empty($session)) {
@@ -101,12 +108,26 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
             if (!empty($session)) {
               $output_audio = l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), 'node/' . $session, array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
             }
-          }
+          }*/
+          $output_media = '';
+      $max = max(array(count($session_result['photo']), count($session_result['video']), count($session_result['audio'])));
+      for($i = 0; $i < $max; $i++) {
+        if (!empty($session_result['photo'][$i])) {
+          $output_media .= l('<i class="fa fa-camera"></i> ' . t('Session Photo'), $base_url.'/'.drupal_get_path_alias('node/'. $session_result['photo'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+        }
+        if (!empty($session_result['video'][$i])) {
+          $output_media .= l('<i class="fa fa-video-camera"></i> ' . t('Session Video'), $base_url.'/'.drupal_get_path_alias('node/'. $session_result['video'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+        }
+        if (!empty($session_result['audio'][$i])) {
+          $output_media .= l('<i class="fa fa-headphones"></i> ' . t('Session Audio'), $base_url.'/'.drupal_get_path_alias('node/'. $session_result['audio'][$i]), array("attributes" => array("target" => "_blank", "style" => "color: $font_color"), 'html' => TRUE));
+        }
+        $output_media .= '<br>';
+      }
           if (!empty($output_story_title)) {
             ?>
             <div class="content-detail">
               <div class="side-right"><p class="small-title"><?php print $program["session_title"]; ?></p><div class="title"><?php print $output_story_title; ?></div> 
-                <div class="listing-detail"><div class="section-part"><?php print $output_story_kicker . ' <div class="bottom-links">' . $output_photo . ' ' . $output_video . ' ' . $output_audio . '</div>'; ?></div>
+                <div class="listing-detail"><div class="section-part"><?php print $output_story_kicker . ' <div class="bottom-links">' . $output_media . '</div>'; ?></div>
 
                 </div>
               </div> 
