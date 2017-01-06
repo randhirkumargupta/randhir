@@ -90,7 +90,18 @@ function itg_story_get_content_nid($nid) {
   }
 }
 
+/**
+ * Callback for associate_photo_video_content
+ * 
+ */
 function associate_photo_video_content() {
-   $nid = arg(1);
-   return views_embed_view('photo_landing_slider','block_1', $nid);   
+  
+   if (arg(1) == 'video') {
+     if (function_exists('get_video_in_fieldcollection_by_nid')) {
+      $videoids = get_video_in_fieldcollection_by_nid(arg(2));
+    }
+   } else if (arg(1) == 'gallery') {
+      echo views_embed_view('photo_landing_slider','block', arg(2));
+   }    
+      
 }
