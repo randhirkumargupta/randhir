@@ -227,7 +227,7 @@ function itg_event_registration_form_after_build($form, &$form_state) {
 
   $form['event_registration_title'] = array(
        '#type' => 'item',
-       '#markup' => '<div class="event-registration-title"><h2>REGISTRATION</h2></div>',
+       '#markup' => '<div class="event-registration-title"><h2>REGISTRATION</h2><span>Fill out the form to register to our event</span></div>',
        '#weight' => -100,
      );
 
@@ -486,9 +486,11 @@ function itg_event_registration_get_form() {
   module_load_include('inc', 'node', 'node.pages');
   $form = node_add('event_registration');
   
-  $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
+  /*$host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
   $host_node_arr = explode('/', $host_detail['source']);
-  $host_node = node_load($host_node_arr[1]);
+  $host_node = node_load($host_node_arr[1]);*/
+  $event_node = itg_event_backend_get_event_node();
+  $host_node = node_load($event_node);
   $form['#cache'] = TRUE;
   if(!empty($host_node->field_story_expert_description[LANGUAGE_NONE])){
   $form['cutomtext'] = array(
