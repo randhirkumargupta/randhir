@@ -884,35 +884,36 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             $extra_large_image_url = "";
             foreach ($data as $count => $entity) {
                 $desc = $entity['title'];
-                $nid = $entity['nid'];
-                if ($count == 0 && (!empty($entity->field_story_extra_large_image['und'][0]['uri']) && isset($entity->field_story_extra_large_image['und'][0]['uri']))) {
-                    $extra_large_image_url = image_style_url("section_ordering_widget", $entity->field_story_extra_large_image['und'][0]['uri']);
+               $nid = $entity['nid'];
+                if ($count == 0 && (!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
+                    $extra_large_image_url = image_style_url("section_ordering_widget", $entity['mi_file_uri']);
                 }
+               
                 $video_class = "pic-no-icon";
-                if (strtolower($entity->type) == 'videogallery') {
+                if (strtolower($entity['type']) == 'videogallery') {
                     $video_class = 'video-icon';
                 }
                 ?>
                     <?php if ($count == 0) : ?>
                         <?php if (!empty($extra_large_image_url)) { ?>
-                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
+                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                                 <img  src="<?php print $extra_large_image_url ?>" />
                             </a>
                         <?php
                     }
                     else {
                         ?>
-                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">
-                                <img height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/default_for_all.png" />
+                            <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
+                                <img height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/dimage_370X208.jpg" />
                             </a>
                     <?php } ?>
-                        <h3 class="frist-heading heading-<?php echo $entity->nid ?> <?php echo $entity->type ?> ">
-                        <?php echo l(mb_strimwidth($entity->title, 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
+                        <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
+                        <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
                         </h3>
                         <?php endif; ?>
                         <?php if ($count != 0) : ?>
-                        <p class="<?php print $entity->type ?> section-order-<?php print $entity->nid ?>">
-                        <?php echo l(mb_strimwidth($entity->title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$entity->nid")); ?>
+                        <p class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
+                        <?php echo l(mb_strimwidth($entity['title'], 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
                         </p>
                         <?php endif; ?>
                     <?php }
@@ -936,7 +937,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
 
 
                     <p class="<?php print $entity['type'] ?> section-order-<?php print $entity['nid'] ?>">
-                <?php echo l(mb_strimwidth($entity['type'], 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
+                <?php echo l(mb_strimwidth($desc, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/$nid")); ?>
                     </p>
 
                     <?php }
