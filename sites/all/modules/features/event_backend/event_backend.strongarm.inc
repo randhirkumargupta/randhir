@@ -151,10 +151,10 @@ function event_backend_strongarm() {
           'weight' => '17',
         ),
         'domain' => array(
-          'weight' => '18',
+          'weight' => '8',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '9',
         ),
       ),
       'display' => array(

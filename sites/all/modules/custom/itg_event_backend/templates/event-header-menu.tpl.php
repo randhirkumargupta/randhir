@@ -10,9 +10,9 @@ if($arg[0] == 'event') {
   $baseurl = $base_url.'/'.$arg[0].'/'.$arg[1];
 } elseif(!empty($arg[1]) && is_numeric($arg[1])) {//shravan
   $baseurl = $base_url.'/'.drupal_get_path_alias('node/'.  $arg[1]);
-} else {
+} /*else { me
   $baseurl = $base_url;
-}
+}*/
 
 $node = itg_event_backend_get_event_node('node');
 if (!empty($node) && ($node->type == 'event_backend')) {//shravan
