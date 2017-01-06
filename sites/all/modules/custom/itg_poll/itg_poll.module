@@ -934,7 +934,7 @@ function itg_poll_form_home_page($form, &$form_state, $nid) {
   }
   else {
     if (function_exists(itg_sso_url)) {
-      print itg_sso_url('follow story');
+      print itg_sso_url('Submit');
     }
   }
 
