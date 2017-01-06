@@ -2011,6 +2011,7 @@ div.image-widget-data .ajax-progress-throbber{display: none;}
 [id*="field-story-template-factoids-values"],
 [id*="field-story-reporter-values"],
 [id*="field-story-template-guru-values"],
+[id*="field-video-anchor-values"],
 [id*="field-story-listicle-values"]{
   @extend .itg-add-another-item;
 }
@@ -6799,6 +6800,7 @@ div.node{
   border: none;
 }
 [id*="field-story-reporter-values"],
+[id*="field-video-anchor-values"],
 [id*="field-story-template-quotes-values"], 
 [id*="field-story-template-factoids-values"],
 [id*="field-story-template-guru-values"]{
@@ -7568,7 +7570,9 @@ div.node{
   [id*="field-story-template-quotes-values"], 
   [id*="field-story-template-factoids-values"], 
   [id*="field-story-template-buzz-values"], 
-  [id*="field-story-template-guru-values"],[id*="field-story-listicle-values"]{
+  [id*="field-story-template-guru-values"],
+  [id*="field-video-anchor-values"],
+  [id*="field-story-listicle-values"]{
     thead{
       padding-left: 20px;
       padding-right: 10px;
@@ -7683,6 +7687,7 @@ div.node{
   }
   .form-field-type-text, 
   .form-field-name-field-story-reporter,
+  .form-field-name-field-video-anchor,
   .form-field-type-field-collection{
     position: relative;
   }
@@ -8668,7 +8673,8 @@ div.node{
     }
   }
 }
-[id="edit-field-story-reporter"]{
+[id*="edit-field-story-reporter"], 
+[id*="field-video-anchor-values"]{
   table tbody{
     overflow: visible !important;
   }
@@ -9534,3 +9540,6 @@ span.file a{pointer-events: none;}
 .node-type-event-backend .action-with-title #page-title{width: 700;}
 .primary_category_radio{float: left; margin: 2px 5px;}
 .node-category-form .metatags-form > legend{display: none;}
+.node-videogallery-form #BasicDetails.itg-form-section-wrapper .itg-form-section{
+  padding-bottom: 10px;
+}
