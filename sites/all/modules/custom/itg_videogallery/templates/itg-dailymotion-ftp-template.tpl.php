@@ -35,7 +35,7 @@ global $base_url;
                         </select>
                     </div>
                      <div class="apply_video_filter">
-                        <span class="button apply_video_filters">Apply</span>
+                        <span class="btn-save apply_video_filters">Apply</span>
                     </div>
                     <div class="reset_video_filter">
                         <span class="button reset_video_filters">Reset</span>
