@@ -76,7 +76,12 @@ function itg_common_dropdown_mazine($id = '') {
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
     global $user;
-
+   
+    if (arg(0) == 'user' && empty($user->uid)) {     
+      drupal_add_js('jQuery(document).ready(function() {
+                          jQuery("#skip-link").hide();                                      
+          });', array('type' => 'inline', 'scope' => 'footer'));
+    }
     if ($user->uid != '1') {        
         
       if ($form_id == 'menu_edit_item') {      
