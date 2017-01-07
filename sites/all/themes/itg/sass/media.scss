@@ -1161,7 +1161,22 @@
 }
 /*end category wise content list css*/
 
-
+/*pop up big story*/
+#block-itg-widget-big-story-format{
+    .video-slider-images{
+        .slick-slider{
+            padding: 10px 45px;   
+        }
+        .slick-prev, .slick-next{
+            background: transparent;                
+            color:#fff;
+            &:hover{
+                background: transparent;    
+            }
+        }
+    }
+}
+/*pop up big story end*/
 
 }
 
@@ -2029,6 +2044,18 @@
         h2{
             @include font(26px,null,300);
         }
+        .video-slider-images{
+                .slick-slider{
+                    padding: 10px 45px;   
+                }
+                .slick-prev, .slick-next{
+                    background: transparent;                
+                    color:#fff;
+                    &:hover{
+                        background: transparent;    
+                    }
+                }
+            }
     }
     .view-display-id-so_sorry_page{
         margin:0;
