@@ -131,7 +131,7 @@ function itg_event_registration_form_alter(&$form, &$form_state, $form_id) {
       $_SESSION['total_ava_ticket'] = $group_tickets_available;
     }
 
-    if ($tickets_available == 1) {
+    if ($tickets_available == 0) {
       drupal_add_js('jQuery(document).ready(function() {                  
           jQuery("#field-erf-registration-fee-values").hide();
           jQuery("#edit-field-erf-type").append("<p><strong>No more tickets available for this event.</strong></p>");
