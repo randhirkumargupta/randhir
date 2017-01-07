@@ -138,7 +138,7 @@ if (!empty($device[0])) {
                     <?php if ($live_url != "" || !empty($highlights['node_data']->field_story_highlights['und']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-4 mt-50">
                           <div class="itg-widget">
-                              <div class="droppable <?php print $gray_bg_layout; ?>">
+                              <div class=" <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
                                      
                                         <h4 class="heading">LIVE TV</h4>
@@ -153,32 +153,47 @@ if (!empty($device[0])) {
                       </div>
                       <div class="col-md-4 mt-50">
                           <div class="itg-widget">
-                              <div class="droppable <?php print $gray_bg_layout; ?>">
+                              <div class=" droppable <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-2']['widget_name']; ?>">
                                      
-                                        <h4 class="heading">HIGHLIGHTS</h4>
+                                       <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-2']['block_title'])) { ?>
+                   <h4 class="heading"><?php print $widget_data['itg-block-2']['block_title']; ?></h4>
+                  <?php } ?>
+                   <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
+                    <div class="widget-settings">
+                      <div class="widget-title-wrapper">
+                        <?php if (isset($widget_data['itg-block-2']['block_title'])) {?>
+                        <span class="widget-title" data-id="itg-block-2"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                        <?php } ?>
+                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
+                      </div>
+                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    </div>
+                   <?php } ?>  
                 
                                       <!-- for admin  -->
                                        
 
-                                      <div class="data-holder highlight" id="itg-block-2"> <div class="auto-block-2">
+<!--                                      <div class="data-holder highlight" id="itg-block-2"> <div class="auto-block-2">
                                               <div class="special-top-news">
 
                                                   <ul class="itg-listing">   
                                                       <?php
-                                                      foreach ($highlights['node_data']->field_story_highlights['und'] as $index => $row) {
+                                                     // foreach ($highlights['node_data']->field_story_highlights['und'] as $index => $row) {
 
-                                                        $desc = $row['value'];
+                                                       // $desc = $row['value'];
                                                         ?>
-                                                        <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$highlights['node_data']->nid}")) ?></li>
+                                                        <li><?php //echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$highlights['node_data']->nid}")) ?></li>
 
-                                                      <?php } ?>
+                                                      <?php //} ?>
 
                                                   </ul>
 
                                               </div>
 
-                                          </div></div>
+                                          </div></div>-->
+
+                    <div class="data-holder" id="itg-block-2"><?php print $widget_data['itg-block-2']['widget']; ?></div>
                                   </div>             
                               </div>
                           </div>

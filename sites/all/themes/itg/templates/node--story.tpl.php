@@ -394,19 +394,20 @@ if (!empty($content)):
                             $num = 1;
                             foreach ($wrapper->field_story_listicle as $i):
                               $listicletype = '';
+                           
                               print '<div class="listicle-detail">';
                               $type = $i->field_story_listicle_type->value();
                               $description = $i->field_story_listicle_description->value();
-                              $color = $i->field_story_listicle_color->value();
+                               $color = $i->field_listicle_color ->value();
                               $li_type =$node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                              $color = ($color['rgb']) ? $color['rgb'] : '#000000';
+                              $color = ($color) ? $color : '#000000';
                               if($li_type=='bullet_points')
                               {
                                   print '<span class="bullet_points"></span>';
                               } else {
                                   print '<span>' . $num . '</span>';
                               }
-                              
+
                               if (isset($type)) {
                                 $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
                               }
