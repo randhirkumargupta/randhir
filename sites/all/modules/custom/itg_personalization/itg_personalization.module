@@ -166,6 +166,38 @@ function itg_personalization_block_info() {
 }
 
 /**
+ * Get menu text and class for mobile view.
+ *
+ * @return array
+ *   Name of the menu and menu class.
+ */
+function itg_personalization_getmenu_title() {
+  $arg = arg();
+  $sticky_title = '';
+  $data_tab = '';
+  if (!empty($arg[1])) {
+    switch ($arg[1]) {
+      case 'my-preferences':
+      case 'my-content':
+      case 'my-credits':
+      case 'edit-profile':
+      case 'saved-items':      
+        $title = str_replace('-', ' ', $arg[1]);
+        $sticky_title = t(ucwords($title));
+        $data_tab = $arg[1];
+        break;
+      case 'my-following':        
+        $sticky_title = t('Following');
+        $data_tab = $arg[1];
+    }
+    $data['menu_title'] = $sticky_title;
+    $data['data_tab'] = $data_tab;
+  }
+  
+  return $data;
+}
+
+/**
  * Implements hook_block_view().
  *
  * {@inheritdoc}.
@@ -189,7 +221,8 @@ function itg_personalization_block_view($delta = '') {
   switch ($delta) {
     // Load personalized menu tab.
     case 'personalized_content_menu_tab':
-      $block['content'] = theme('personalization_menu_tab');
+      $data = itg_personalization_getmenu_title();      
+      $block['content'] = theme('personalization_menu_tab', array('data' => $data));
       break;
     // Load personalized saved content menu tab.
     case 'personalized_saved_content':

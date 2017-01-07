@@ -848,6 +848,8 @@
   .view-archive-story .archive-header {
     border: none;
     margin: 0 -15px;
+    padding-top: 35px;
+    position: relative;
   }
   .view-archive-story .archive-header #archive-story-date-slider, .view-archive-story .archive-header .archive-calender-custom {
     float: none;
@@ -855,6 +857,8 @@
   }
   .view-archive-story .archive-header .archive-calender-custom {
     text-align: right;
+    position: absolute;
+    top: -15px;
   }
   .view-archive-story .archive-header #archive-story-date-slider {
     border-top: 1px solid #ddd;
@@ -1096,6 +1100,19 @@
   }
 
   /*end category wise content list css*/
+  /*pop up big story*/
+  #block-itg-widget-big-story-format .video-slider-images .slick-slider {
+    padding: 10px 45px;
+  }
+  #block-itg-widget-big-story-format .video-slider-images .slick-prev, #block-itg-widget-big-story-format .video-slider-images .slick-next {
+    background: transparent;
+    color: #fff;
+  }
+  #block-itg-widget-big-story-format .video-slider-images .slick-prev:hover, #block-itg-widget-big-story-format .video-slider-images .slick-next:hover {
+    background: transparent;
+  }
+
+  /*pop up big story end*/
 }
 @media only screen and (max-width: 680px) {
   /*CSS start video landing page*/
@@ -1971,6 +1988,16 @@
     font-size: 26px;
     font-size: 1.625rem;
     font-weight: 300;
+  }
+  .view-so-sorry .video-slider-images .slick-slider {
+    padding: 10px 45px;
+  }
+  .view-so-sorry .video-slider-images .slick-prev, .view-so-sorry .video-slider-images .slick-next {
+    background: transparent;
+    color: #fff;
+  }
+  .view-so-sorry .video-slider-images .slick-prev:hover, .view-so-sorry .video-slider-images .slick-next:hover {
+    background: transparent;
   }
 
   .view-display-id-so_sorry_page {
