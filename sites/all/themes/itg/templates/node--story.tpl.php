@@ -70,7 +70,7 @@ if (!empty($content)):
                 $pipelinetext=' <span class="story-pipline">||</span> <a target="_blank" href="'.$node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'].'">'.ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']).'</a>';
             }
             if(!empty($get_develop_story_status)) {?>
-            <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true"></i> <i class="fa fa-circle" aria-hidden="true"></i></h1>
+            <h1><?php print $node->title.$pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true"></i></h1>
             <?php } else { ?>
             <h1><?php print $node->title.$pipelinetext; ?></h1>
             <?php } ?>
@@ -550,10 +550,10 @@ if (!empty($content)):
                                 <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $comment_count; ?></span></a></li>
                               <?php } ?>
                             <li class="mhide"><span class="share-count"><?php if(!empty($tot_count)) { print $tot_count;} else { print 0; } ?></span> SHARES</li>
-                            <?php if($user->uid > 0): if(!empty($follow_status['nid'])): ?>  
-                            <li class="mhide following"><?php print t('Following'); ?></li>
+                            <?php if($user->uid > 0): if(!empty($follow_status['nid']) && $follow_status['status'] == '1'): ?>  
+                            <li class="mhide follow-story"><a title = "Unfollow Story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="0" class="def-cur-pointer">Unfollow Story</a></li>
                             <?php else:?>
-                            <li class="mhide follow-story"><a title = "follow story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" class="def-cur-pointer">follow the Story</a></li>
+                            <li class="mhide follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer">Follow the Story</a></li>
                              <?php endif; else: ?>
                             <li class="mhide"><?php if(function_exists(itg_sso_url)) { print itg_sso_url('follow story'); }  ?></li>
                              <?php endif; ?>
