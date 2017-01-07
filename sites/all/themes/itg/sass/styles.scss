@@ -1300,7 +1300,7 @@ footer{
             height: 14px;    
             background: #f40000;
             border-radius: 100%;
-            display: inline-block;    
+            display: none;    
         }
         a{
             i{
@@ -1309,7 +1309,11 @@ footer{
                 padding-bottom: 7px;
                 display: inline-block;
                 vertical-align: bottom;
-            }
+                -webkit-animation-name: blinker; 
+                -webkit-animation-iteration-count: infinite; 
+                -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+                -webkit-animation-duration: 1s;
+            }            
         }
     }
     a{
@@ -1366,6 +1370,8 @@ footer{
         margin: 10px 0 0 10px;
     }
 }
+@-webkit-keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
+@keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
 /*End CSS Big New Home page*/
 .itg-top-section{
     @include pos(relative);
@@ -1760,6 +1766,10 @@ footer{
         i{
             font-size: 13px;
             color: #f40000;
+            -webkit-animation-name: blinker; 
+            -webkit-animation-iteration-count: infinite; 
+            -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+            -webkit-animation-duration: 1s;
         }
         span{
             color: #bb0a0a;
@@ -9686,8 +9696,13 @@ input[type="radio"]:checked + label:after{
         #comments .comment-form fieldset.captcha{
             margin: 10px 0 30px 0;
         }
-        #comments .comment-form .form-actions{
+/*        #comments .comment-form .form-actions{
             padding-left: 0;
+        }*/
+        #comment-body-add-more-wrapper{
+            fieldset{
+                display: none;
+            }   
         }
     }
 }
