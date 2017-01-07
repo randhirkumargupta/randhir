@@ -229,6 +229,7 @@ function itg_event_registration_form_after_build($form, &$form_state) {
        '#type' => 'item',
        '#markup' => '<div class="event-registration-title"><h2>REGISTRATION<span>Fill out the form to register to our event</span></h2></div>',
        '#weight' => -100,
+       '#suffix' => '<div class="mandatory-message"><span class="error"><span class="form-required">*</span> Indicates mandatory fields</span></div>',
      );
 
    // Dynamic title of each form
@@ -459,11 +460,11 @@ function itg_event_registration_get_event_nid() {
     return $node->nid;
   } elseif (is_numeric($arg[1])) {
     return $arg[1];
-  } else {
+  } /*else {
     $host_detail = itg_event_backend_get_redirect_record('redirect', $base_url);
     $host_node_arr = explode('/', $host_detail['source']);
     return $host_node_arr[1];
-  }
+  }*/
 }
 
 /**
