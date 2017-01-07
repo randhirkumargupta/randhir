@@ -279,7 +279,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
   }
 
 // Delete category functionality.
-  if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete')) {
+  if (isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == t('Delete') && $form['#vocabulary']->machine_name == 'category_management') {
     $tid = $form_state['term']->tid;
     $used_by_content = taxonomy_select_nodes($tid);
     if (count($used_by_content) > 0) {
@@ -310,7 +310,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form, &$form_state
     }
   }
   else {
-    if ($form['#term']['vocabulary_machine_name'] == 'category_management') {
+    if ($form['#vocabulary']->machine_name == 'category_management') {
       $form['name']['#title'] = t('Category Title');
       $form['name']['#description'] = '<p>' . t('Please enter category title.') . '</p>';
 //unset($form['description']);
