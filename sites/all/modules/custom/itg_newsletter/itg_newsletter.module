@@ -18,7 +18,7 @@ function itg_newsletter_menu() {
     'page callback' => 'itg_newsletter_content_data',
     'access callback' => TRUE,
   );
-
+  
   $items['test_mail'] = array(
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_newslatter_register_form'),
@@ -663,12 +663,14 @@ function itg_newsletter_send_automatic_newsletter() {
   while ($record_auto = $result_auto->fetchAssoc()) {
     $automatic_nids[] = $record_auto['nid'];
   }
-
+  
   // Send automatic mail
   if (!empty($automatic_nids)) {
     foreach ($automatic_nids as $auto_nids) {
       $node_auto = node_load($auto_nids);
+      if(!empty($node_auto)) {
       itg_send_mail_newsletter($node_auto, 'automatically', 'stories');
+      }
     }
   }
 }

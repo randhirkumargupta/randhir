@@ -148,9 +148,12 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
             if (!empty($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
               $source_type = trim($form['#node']->field_story_source_type[LANGUAGE_NONE][0]['value']);
             }
+            
+            
             if (empty($source_id) && empty($source_type)) {
-                $form['title']['#suffix'] = '<div class="breaking_class"><input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span></div>';
+              $breaking_check = '<input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span>';
             }
+            $form['title']['#suffix'] = '<div class="breaking_class">'.$breaking_check.'</div>';    
             $form['field_story_magazine_story_issue'][LANGUAGE_NONE]['#title'] = '';
             $form['field_story_syndication'][LANGUAGE_NONE]['#options'] = array('Yes' => $form['field_story_syndication'][LANGUAGE_NONE]['#title']);
             $form['field_story_syndication'][LANGUAGE_NONE]['#title'] = "";
@@ -374,7 +377,7 @@ function itg_story_node_insert($node) {
     if ($node->type == 'story' && $node->workbench_moderation_state_new != 'draft' && isset($node->field_story_configurations[LANGUAGE_NONE])) {
         foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
             if ($val['value'] == 'breaking_news') {
-                itg_story_create_breaking_news($node);
+                //itg_story_create_breaking_news($node);
             }
         }
     }
@@ -390,7 +393,7 @@ function itg_story_node_update($node) {
             if ($val['value'] == 'breaking_news') {
                 $breaking_cond = get_breaking_id($node->nid);
                 if (!$breaking_cond) {
-                    itg_story_create_breaking_news($node);
+                    //itg_story_create_breaking_news($node);
                 }
             }
         }
@@ -685,7 +688,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     }
     
     if(function_exists('itg_get_front_activity_info')) {
-      $node->content['follow_status'] = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'follow_story');
+      $node->content['follow_status'] = itg_get_front_activity_info($node->nid, $node->type, $user->uid, 'follow_story', $status='');
     }
     
     if(!empty($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
