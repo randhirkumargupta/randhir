@@ -194,7 +194,7 @@ function features_for_event_registration_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_erf_email',
     'label' => 'Email',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -268,7 +268,7 @@ function features_for_event_registration_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_erf_mobile',
     'label' => 'Mobile',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -305,7 +305,7 @@ function features_for_event_registration_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_erf_name',
     'label' => 'Name',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
