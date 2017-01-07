@@ -2252,7 +2252,8 @@ div.vertical-tabs .form-textarea-wrapper {
   max-width: none;
 }
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview img {
-  max-height: 124px;
+  height: 124px;
+  width: 100%;
 }
 [id*="field-gallery-image-values"] tbody tr td:nth-child(2) .form-type-managed-file .has-preview .image-preview:hover .image-fullname {
   display: block;
@@ -9558,8 +9559,8 @@ div.node #comments h2 {
   margin: 3px 5px;
 }
 
-[id*="edit-field-story-reporter"] table tbody,
-[id*="field-video-anchor-values"] table tbody {
+[id*="edit-field-story-reporter"] tbody,
+[id*="field-video-anchor-values"] tbody {
   overflow: visible !important;
 }
 
@@ -10483,4 +10484,12 @@ span.file a {
 
 .node-videogallery-form #BasicDetails.itg-form-section-wrapper .itg-form-section {
   padding-bottom: 10px;
+}
+
+.node-story-form .itg-sidebar-form .form-field-name-field-story-syndication, .node-story-form .itg-sidebar-form .form-field-name-field-story-syndications-photo {
+  float: left;
+  width: 50%;
+}
+.node-story-form .itg-sidebar-form .form-field-name-field-story-syndication .form-type-checkboxes, .node-story-form .itg-sidebar-form .form-field-name-field-story-syndications-photo .form-type-checkboxes {
+  margin-top: 0;
 }

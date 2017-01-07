@@ -723,7 +723,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
 .personal-menu-tab li.my-content a:before {
   content: '\f064';
 }
-.personal-menu-tab li.my-Preferences a:before {
+.personal-menu-tab li.my-preferences a:before {
   content: '\f013';
 }
 .personal-menu-tab li.following a:before {
@@ -973,21 +973,21 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   display: none;
 }
 
-#content #block-formblock-ugc {
+.page-personalization #block-formblock-ugc {
   margin: 0 auto;
   max-width: 750px;
   text-align: left;
 }
-#content #block-formblock-ugc .messages--error {
+.page-personalization #block-formblock-ugc .messages--error {
   margin-top: 20px;
 }
-#content #block-formblock-ugc .node-ugc-form .file-widget .form-submit[value="Remove"] {
+.page-personalization #block-formblock-ugc .node-ugc-form .file-widget .form-submit[value="Remove"] {
   top: 13px;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype {
   text-align: center;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype .form-select {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype .form-select {
   width: 450px;
   max-width: 100%;
   height: 44px;
@@ -998,7 +998,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   font: 300 16px/normal Roboto;
   text-align: center;
 }
-#content #block-formblock-ugc .node-ugc-form .form-type-textfield {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -1008,7 +1008,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-#content #block-formblock-ugc .node-ugc-form .form-type-textfield label {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label {
   width: 150px;
   padding: 0 20px;
   font: 300 14px/36px Roboto;
@@ -1017,7 +1017,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   z-index: 99;
   position: relative;
 }
-#content #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
   position: absolute;
   left: 0;
   top: 0;
@@ -1027,13 +1027,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   padding-left: 160px;
   z-index: 9;
 }
-#content #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
   position: absolute;
   right: 5px;
   top: 8px;
   z-index: 9;
 }
-#content #block-formblock-ugc .node-ugc-form .form-type-textarea {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -1043,7 +1043,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-#content #block-formblock-ugc .node-ugc-form .form-type-textarea label {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea label {
   width: 150px;
   height: 570px;
   padding: 0 20px;
@@ -1053,7 +1053,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   z-index: 99;
   position: relative;
 }
-#content #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper {
   padding-left: 150px;
   position: absolute;
   left: 0;
@@ -1061,13 +1061,13 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   width: 100%;
   height: 100%;
 }
-#content #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea {
   border: none;
   width: 100%;
   height: 100%;
   padding: 10px;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -1077,7 +1077,7 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file label, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file label, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file label {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file label, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file label, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file label {
   width: 150px;
   height: 125px;
   padding: 0 20px;
@@ -1087,14 +1087,14 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   z-index: 99;
   position: relative;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file {
   width: 100%;
   padding: 10px 10px 10px 160px;
   position: absolute;
   left: 0;
   top: 0;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
   width: 100px;
   background-color: #ededed;
   border: 1px solid #bababa;
@@ -1102,38 +1102,38 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   float: right;
   cursor: pointer;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .ajax-progress-throbber, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .ajax-progress-throbber, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .ajax-progress-throbber {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .ajax-progress-throbber, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .ajax-progress-throbber, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .ajax-progress-throbber {
   display: none;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .image-preview img, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .image-preview img {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .image-preview img, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .image-preview img {
   max-width: 100px;
   max-height: 80px;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.description, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.description, #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file div.description {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.description, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.description, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file div.description {
   margin-top: 40px;
   padding-left: 160px;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data, #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data, #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data {
   float: none;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield {
   max-width: 215px;
   border: none;
   border-radius: 0;
   margin: 0;
   overflow: hidden;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield .form-text, #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield .form-text, #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield .form-text {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield .form-text, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield .form-text, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield .form-text {
   border: 1px solid #ddd;
   height: 34px;
   padding: 5px;
   position: static;
   width: 100%;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield div.description, #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield div.description, #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield div.description {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-type-textfield div.description, .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-type-textfield div.description, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-type-textfield div.description {
   display: none;
 }
-#content #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-submit[value="Remove"], #content #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-submit[value="Remove"], #content #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-submit[value="Remove"] {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image div.image-widget-data .form-submit[value="Remove"], .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image div.image-widget-data .form-submit[value="Remove"], .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file div.image-widget-data .form-submit[value="Remove"] {
   color: #ee4d4d;
   font-size: 13px;
   left: 550px;
@@ -1141,11 +1141,11 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   top: 16px;
   cursor: pointer;
 }
-#content #block-formblock-ugc .node-ugc-form .form-actions {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-actions {
   padding: 20px 0;
   text-align: center;
 }
-#content #block-formblock-ugc .node-ugc-form .form-actions .form-submit {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-actions .form-submit {
   background: url(../images/btn-blue.png) 0 0/100% 100% no-repeat;
   height: 41px;
   border: none;
@@ -1155,10 +1155,10 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   color: #fff;
   cursor: pointer;
 }
-#content #block-formblock-ugc .node-ugc-form .form-actions .form-submit:hover {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-actions .form-submit:hover {
   background: #3C91F2;
 }
-#content #block-formblock-ugc .node-ugc-form .form-actions a.button {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-actions a.button {
   background: url(../images/btn-blue.png) 0 0/100% 100% no-repeat;
   height: 41px;
   border: none;
@@ -1170,39 +1170,39 @@ $debug: "width:645px"; // TODO: move to _settings.scss
   vertical-align: top;
   color: #fff;
 }
-#content #block-formblock-ugc .node-ugc-form .form-actions a.button:hover {
+.page-personalization #block-formblock-ugc .node-ugc-form .form-actions a.button:hover {
   background: #3C91F2;
 }
-#content #block-formblock-ugc .node-ugc-form table td {
+.page-personalization #block-formblock-ugc .node-ugc-form table td {
   position: relative;
 }
-#content #block-formblock-ugc .node-ugc-form table td > .form-submit[value="Remove"], #content #block-formblock-ugc .node-ugc-form table td .ajax-new-content > .form-submit[value="Remove"] {
+.page-personalization #block-formblock-ugc .node-ugc-form table td > .form-submit[value="Remove"], .page-personalization #block-formblock-ugc .node-ugc-form table td .ajax-new-content > .form-submit[value="Remove"] {
   position: absolute;
   right: 10px;
   margin: 0;
   bottom: 20px;
 }
-#content #block-formblock-ugc .node-ugc-form table td .ajax-progress {
+.page-personalization #block-formblock-ugc .node-ugc-form table td .ajax-progress {
   display: none;
 }
-#content #block-formblock-ugc .node-ugc-form table + div .field-add-more-submit {
+.page-personalization #block-formblock-ugc .node-ugc-form table + div .field-add-more-submit {
   margin-left: 0;
 }
-#content #block-formblock-ugc .node-ugc-form .messages.error.file-upload-js-error {
+.page-personalization #block-formblock-ugc .node-ugc-form .messages.error.file-upload-js-error {
   display: none;
 }
-#content #block-formblock-ugc .node-ugc-form input[type="file"] {
+.page-personalization #block-formblock-ugc .node-ugc-form input[type="file"] {
   width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#content #block-formblock-ugc .node-ugc-form .captcha {
+.page-personalization #block-formblock-ugc .node-ugc-form .captcha {
   max-width: 100%;
   margin-left: 0;
   border: 1px solid #e0e0e0;
 }
-#content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
+.page-personalization #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
   margin-left: 0;
   margin-right: 0;
 }
@@ -4310,25 +4310,437 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   display: none;
 }
 
+[id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"] {
+  max-width: 780px;
+  margin: 0 auto;
+  background-color: #f8f8f8;
+}
+[id*="itg-personalization-edit-profile-form"] > div, [id*="itg-personalization-refer-a-friend-form"] > div {
+  text-align: left;
+  padding: 40px 0;
+  max-width: 480px;
+  width: 100%;
+  vertical-align: top;
+  display: inline-block;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype, [id*="itg-personalization-refer-a-friend-form"] > div .form-field-name-field-ugc-ctype {
+  text-align: center;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype .form-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-field-name-field-ugc-ctype .form-select {
+  width: 450px;
+  height: 44px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 3px 0 #ccc;
+  color: #bababa;
+  font: 300 16px/normal Roboto;
+  text-align: center;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textfield .form-text, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield .form-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 160px;
+  z-index: 9;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-select label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-select .form-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select .form-select {
+  position: absolute;
+  left: 150px;
+  top: 0;
+  border: none;
+  width: 328px;
+  height: 100%;
+  z-index: 9;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea label {
+  width: 150px;
+  height: 128px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea-wrapper, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea .form-textarea-wrapper {
+  padding-left: 150px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea .form-textarea {
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes > label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes > label {
+  font: 300 14px/18px Roboto;
+  color: #000;
+  display: block;
+  padding: 5px 0;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes {
+  padding: 10px 0;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox {
+  display: inline-block;
+  margin-right: 30px;
+  margin-bottom: 10px;
+  vertical-align: top;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label {
+  font: 400 13px/18px Roboto;
+  vertical-align: top;
+  color: #757575;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios > label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios > label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px 0 0 5px;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios .form-radios .form-type-radio {
+  float: left;
+  margin: 0 0 0 40px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios .form-radios .form-type-radio label {
+  font: 300 14px/36px Roboto;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup div.description, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup div.description {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"], [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"] {
+  background: #fff url(../images/calender-icon.png) no-repeat right center;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding label, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding label {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield {
+  margin: 0;
+  height: 100%;
+  border: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield .form-text, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield .form-text {
+  width: 100%;
+  height: 100%;
+}
+[id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup > label, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup > label {
+  width: 150px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  position: relative;
+  float: left;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file label {
+  width: 150px;
+  height: 125px;
+  padding: 0 20px;
+  font: 300 14px/36px Roboto;
+  background-color: #fbfbfb;
+  border-right: 1px solid #e0e0e0;
+  z-index: 10;
+  float: left;
+  position: relative;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file {
+  width: 100%;
+  padding: 10px 10px 10px 160px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .form-submit[value="Upload"], [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
+  width: 100px;
+  background-color: #ededed;
+  border: 1px solid #bababa;
+  height: 28px;
+  float: right;
+  cursor: pointer;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .ajax-progress-throbber, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file .ajax-progress-throbber {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file div.description, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file div.description {
+  display: none;
+  color: #5f5f5f;
+  font: 400 12px/16px Roboto;
+  margin-top: 8px;
+  padding-left: 270px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .upload-preview, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .upload-preview {
+  max-height: 80px;
+  margin-bottom: 20px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .upload-preview + .form-submit, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .upload-preview + .form-submit {
+  color: #ee4d4d;
+  font: 400 13px/18px Roboto;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  margin-left: 30px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  position: absolute;
+  left: 160px;
+  bottom: 0;
+  width: 130px;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file img, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file img {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file a, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file a {
+  font: 400 13px/18px Roboto;
+  color: #323232;
+  pointer-events: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data {
+  float: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data .form-type-textfield {
+  max-width: 200px;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  overflow: hidden;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield .form-text, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data .form-type-textfield .form-text {
+  border: 1px solid #ddd;
+  height: 34px;
+  padding: 5px;
+  position: static;
+  width: 100%;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-type-textfield div.description, [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data .form-type-textfield div.description {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div div.image-widget-data .form-submit[value="Remove"], [id*="itg-personalization-refer-a-friend-form"] > div div.image-widget-data .form-submit[value="Remove"] {
+  color: #ee4d4d;
+  font-size: 13px;
+  left: 550px;
+  position: absolute;
+  top: 16px;
+  cursor: pointer;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-actions, [id*="itg-personalization-refer-a-friend-form"] > div .form-actions {
+  padding: 20px 0;
+  text-align: center;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-actions .form-submit, [id*="itg-personalization-refer-a-friend-form"] > div .form-actions .form-submit {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/28px Roboto;
+  color: #fff;
+  cursor: pointer;
+}
+[id*="itg-personalization-edit-profile-form"] > div .form-actions a.button, [id*="itg-personalization-refer-a-friend-form"] > div .form-actions a.button {
+  background: url(../images/btn-blue.png) no-repeat;
+  height: 41px;
+  border: none;
+  width: 170px;
+  font: 300 20px/41px Roboto;
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+}
+[id*="itg-personalization-edit-profile-form"] > div table td, [id*="itg-personalization-refer-a-friend-form"] > div table td {
+  position: relative;
+}
+[id*="itg-personalization-edit-profile-form"] > div table td > .form-submit[value="Remove"], [id*="itg-personalization-edit-profile-form"] > div table td .ajax-new-content > .form-submit[value="Remove"], [id*="itg-personalization-refer-a-friend-form"] > div table td > .form-submit[value="Remove"], [id*="itg-personalization-refer-a-friend-form"] > div table td .ajax-new-content > .form-submit[value="Remove"] {
+  position: absolute;
+  right: 10px;
+  margin: 0;
+  bottom: 20px;
+}
+[id*="itg-personalization-edit-profile-form"] > div table td .ajax-progress, [id*="itg-personalization-refer-a-friend-form"] > div table td .ajax-progress {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div table + div .field-add-more-submit, [id*="itg-personalization-refer-a-friend-form"] > div table + div .field-add-more-submit {
+  margin-left: 0;
+}
+[id*="itg-personalization-edit-profile-form"] > div .messages.error.file-upload-js-error, [id*="itg-personalization-refer-a-friend-form"] > div .messages.error.file-upload-js-error {
+  display: none;
+}
+[id*="itg-personalization-edit-profile-form"] > div input[type="file"], [id*="itg-personalization-refer-a-friend-form"] > div input[type="file"] {
+  width: 200px;
+  max-width: 100%;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+[id*="itg-personalization-edit-profile-form"] > div [id*="edit-submit"], [id*="itg-personalization-refer-a-friend-form"] > div [id*="edit-submit"] {
+  background: transparent url("../images/btn-blue.png") no-repeat scroll 0 0;
+  border: medium none;
+  color: #fff;
+  cursor: pointer;
+  font: 300 20px/28px Roboto;
+  height: 41px;
+  width: 170px;
+  margin: 30px auto 0;
+  display: block;
+}
+[id*="itg-personalization-edit-profile-form"] .change-mobile, [id*="itg-personalization-edit-profile-form"] .change-email, [id*="itg-personalization-refer-a-friend-form"] .change-mobile, [id*="itg-personalization-refer-a-friend-form"] .change-email {
+  position: relative;
+}
+[id*="itg-personalization-edit-profile-form"] .change-mobile a, [id*="itg-personalization-edit-profile-form"] .change-email a, [id*="itg-personalization-refer-a-friend-form"] .change-mobile a, [id*="itg-personalization-refer-a-friend-form"] .change-email a {
+  position: absolute;
+  top: 20px;
+  display: inline-block;
+  right: 8px;
+  z-index: 9;
+  font-size: 13px;
+  color: #0db533;
+}
+
 @media all and (min-width: 768px) {
-  [id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"] {
-    max-width: 780px;
-    margin: 0 auto;
-    background-color: #f8f8f8;
+  .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
+    display: inline-block !important;
   }
-  [id*="itg-personalization-edit-profile-form"] > div, [id*="itg-personalization-refer-a-friend-form"] > div {
-    text-align: left;
-    padding: 40px 0;
-    max-width: 480px;
-    width: 100%;
-    vertical-align: top;
-    display: inline-block;
+
+  .personal-menu-tab-mobile {
+    display: none;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype, [id*="itg-personalization-refer-a-friend-form"] > div .form-field-name-field-ugc-ctype {
+}
+/* Responsive CSS */
+@media all and (max-width: 1024px) {
+  .featured_photo_carousel .flexslider .slides li,
+  .tech-block_5 .flexslider .slides li,
+  .auto-block_5 .flexslider .slides li {
+    border-right: none;
+  }
+
+  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev,
+  .tech-block_5 .flexslider .flex-direction-nav a.flex-prev,
+  .auto-block_5 .flexslider .flex-direction-nav a.flex-prev {
+    left: 0;
+    right: auto;
+    border-right: none;
+    width: 40px;
+  }
+
+  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-next,
+  .tech-block_5 .flexslider .flex-direction-nav a.flex-next,
+  .auto-block_5 .flexslider .flex-direction-nav a.flex-next {
+    right: 0;
+  }
+}
+/* Responsive CSS Personalization pages */
+@media all and (max-width: 767px) {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype {
     text-align: center;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype .form-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-field-name-field-ugc-ctype .form-select {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-name-field-ugc-ctype .form-select {
     width: 450px;
+    max-width: 100%;
     height: 44px;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -4337,249 +4749,481 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     font: 300 16px/normal Roboto;
     text-align: center;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-textfield, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield {
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    position: relative;
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-name-field-recipe-audio .form-type-managed-file {
+    margin: 20px 0;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield {
+    overflow: visible;
+    margin: 20px 0 !important;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield label {
+    width: 115px;
+    padding: 0 8px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
+    padding-left: 125px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
+    right: 0;
+    top: 40px;
+    padding-left: 0;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea {
+    margin: 20px 0;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea label {
     width: 100%;
-    margin: 10px 0;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
+    height: auto;
+    padding: 0 8px;
+    border-right: none;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-textfield label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield label {
-    width: 150px;
-    padding: 0 20px;
-    font: 300 14px/36px Roboto;
-    background-color: #fbfbfb;
-    border-right: 1px solid #e0e0e0;
-    z-index: 10;
-    position: relative;
-    float: left;
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper {
+    padding-left: 0;
+    position: static;
+    width: 100%;
+    height: 805px;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-textfield .form-text, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield .form-text {
-    position: absolute;
-    left: 0;
-    top: 0;
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper > .cke {
     border: none;
-    width: 100%;
-    height: 100%;
-    padding-left: 160px;
-    z-index: 9;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select {
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    margin: 10px 0;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-select label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select label {
-    width: 150px;
-    padding: 0 20px;
-    font: 300 14px/36px Roboto;
-    background-color: #fbfbfb;
-    border-right: 1px solid #e0e0e0;
-    z-index: 10;
-    position: relative;
-    float: left;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-select .form-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select .form-select {
-    position: absolute;
-    left: 150px;
-    top: 0;
-    border: none;
-    width: 328px;
-    height: 100%;
-    z-index: 9;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-textarea, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea {
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    margin: 10px 0;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-textarea label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea label {
-    width: 150px;
-    height: 128px;
-    padding: 0 20px;
-    font: 300 14px/36px Roboto;
-    background-color: #fbfbfb;
-    border-right: 1px solid #e0e0e0;
-    z-index: 10;
-    position: relative;
-    float: left;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea-wrapper, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea .form-textarea-wrapper {
-    padding-left: 150px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea .form-textarea {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea {
     border: none;
     width: 100%;
     height: 100%;
     padding: 10px;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes > label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes > label {
-    font: 300 14px/18px Roboto;
-    color: #757575;
-    display: block;
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file label, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file label {
+    width: 115px;
+    padding: 0 8px;
+    height: 200px;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes {
-    padding: 10px 0;
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data {
+    float: none;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox {
-    display: inline-block;
-    margin-right: 30px;
-    vertical-align: top;
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield {
+    margin: 10px 0 0 !important;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label {
-    font: 400 13px/18px Roboto;
-    vertical-align: top;
-    color: #757575;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-radios, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios {
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    margin: 10px 0;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-radios > label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios > label {
-    width: 150px;
-    padding: 0 20px;
-    font: 300 14px/36px Roboto;
-    background-color: #fbfbfb;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px 0 0 5px;
-    z-index: 10;
-    position: relative;
-    float: left;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios .form-radios .form-type-radio {
-    float: left;
-    margin: 0 0 0 40px;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios .form-radios .form-type-radio label {
-    font: 300 14px/36px Roboto;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup {
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    margin: 10px 0;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup div.description, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup div.description {
-    display: none;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding {
-    position: absolute;
-    left: 0;
-    top: 0;
-    border: none;
-    width: 100%;
-    height: 100%;
-    z-index: 9;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"], [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding input[type="text"] {
-    background: #fff url(../images/calender-icon.png) no-repeat right center;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding label, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding label {
-    display: none;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield {
-    margin: 0;
-    height: 100%;
-    border: none;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield .form-text, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup .date-padding .form-type-textfield .form-text {
-    width: 100%;
-    height: 100%;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup > label, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup > label {
-    width: 150px;
-    padding: 0 20px;
-    font: 300 14px/36px Roboto;
-    background-color: #fbfbfb;
-    border-right: 1px solid #e0e0e0;
-    z-index: 10;
-    position: relative;
-    float: left;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file {
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    margin: 10px 0;
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file label {
-    width: 150px;
-    height: 125px;
-    padding: 0 20px;
-    font: 300 14px/36px Roboto;
-    background-color: #fbfbfb;
-    border-right: 1px solid #e0e0e0;
-    z-index: 10;
-    float: left;
-    position: relative;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file {
-    width: 100%;
-    padding: 10px 10px 10px 160px;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .form-submit[value="Upload"], [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
-    width: 100px;
-    background-color: #ededed;
-    border: 1px solid #bababa;
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield .form-text, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield .form-text {
+    border: 1px solid #ddd;
     height: 28px;
+    padding: 5px;
+    position: static;
+    width: 100%;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield div.description, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data .form-type-textfield div.description {
+    display: none;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data .form-submit[value="Remove"], .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data .form-submit[value="Remove"] {
+    left: auto;
+    right: 10px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.description, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.description {
+    display: none;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file {
+    padding-left: 125px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"], .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
+    width: 100px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file .image-preview img, .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file .image-preview img {
+    max-width: 100px;
+    max-height: 80px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file label {
+    width: 115px;
+    padding: 0 8px;
+    height: 85px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file {
+    padding-left: 125px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file .form-submit[value="Upload"] {
+    width: 100px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file div.description {
+    display: none;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file span.file {
+    position: static;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file span.file img {
+    display: none;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file span.file a {
+    font: 400 13px/18px Roboto;
+    color: #323232;
+    pointer-events: none;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file span.file-size {
+    font-size: 12px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-submit[value="Remove"] {
+    position: static;
     float: right;
     cursor: pointer;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file .ajax-progress-throbber, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file .ajax-progress-throbber {
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-actions {
+    padding: 20px 0;
+    text-align: center;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-actions .form-submit {
+    background: url(../images/btn-blue.png) 0 0/100% 100% no-repeat;
+    height: 41px;
+    border: none;
+    width: 170px;
+    max-width: 40%;
+    font: 300 20px/28px Roboto;
+    color: #fff;
+    cursor: pointer;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-actions .form-submit:hover {
+    background: #3C91F2;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-actions a.button {
+    background: url(../images/btn-blue.png) 0 0/100% 100% no-repeat;
+    height: 41px;
+    border: none;
+    width: 170px;
+    max-width: 40%;
+    border-radius: 4px;
+    font: 300 20px/41px Roboto;
+    display: inline-block;
+    vertical-align: top;
+    color: #fff;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-actions a.button:hover {
+    background: #3C91F2;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form table td {
+    position: relative;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form table td > .form-submit[value="Remove"], .page-personalization #block-formblock-ugc .node-ugc-form table td .ajax-new-content > .form-submit[value="Remove"] {
+    position: absolute;
+    right: 10px;
+    margin: 0;
+    bottom: 20px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form table td .ajax-progress {
     display: none;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file div.description, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file div.description {
-    display: none;
-    color: #5f5f5f;
-    font: 400 12px/16px Roboto;
-    margin-top: 8px;
-    padding-left: 270px;
+  .page-personalization #block-formblock-ugc .node-ugc-form table + div .field-add-more-submit {
+    margin-left: 0;
   }
-  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .upload-preview, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .upload-preview {
-    max-height: 80px;
-    margin-bottom: 20px;
+  .page-personalization #block-formblock-ugc .node-ugc-form .messages.error.file-upload-js-error {
+    display: none;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form input[type="file"] {
+    width: 200px;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+  .page-personalization #block-formblock-ugc .node-ugc-form .captcha {
+    max-width: 100%;
+    margin-left: 0;
+    border: 1px solid #e0e0e0;
+  }
+  .page-personalization #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .page-personalization .personalized-wrapper .personalized-user-area {
+    display: inline-block;
+    height: auto;
+    vertical-align: top;
+    padding-left: 10px;
+    width: 100%;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user {
+    border: none;
+    float: left;
+    width: 32%;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-pic {
+    width: 50px;
+    height: 50px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-name {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info {
+    border: none;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span {
+    padding: 0 3px;
+    width: 36px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span dfn {
+    font-size: 12px;
+  }
+  .page-personalization .personalized-wrapper .personalized-user-info span {
+    padding: 0 12px;
+  }
+
+  .block-itg-personalization .saved-item-tab, .block-itg-personalization .personal-menu-tab {
+    width: 100%;
+  }
+  .block-itg-personalization .personal-menu-tab-wrapper {
+    margin: 0 -15px;
+  }
+  .block-itg-personalization .personal-menu-tab-mobile {
+    background-color: #e7e5e6;
+    color: #4f4f4f;
+    cursor: pointer;
+    font: 300 18px/40px Roboto;
+    text-align: left;
+    position: relative;
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-text {
+    display: block;
+    color: #4f4f4f;
+    font: 300 18px/18px Roboto;
+    padding: 10px 8px;
+    background-color: #e7e5e6;
+    height: 40px;
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-text:before {
+    display: inline-block;
+    margin-right: 5px;
+    color: #8d8d8d;
+    font-family: 'FontAwesome';
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-text[data-tab="saved-items"]:before {
+    content: '\f02e';
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-text[data-tab="my-content"]:before {
+    content: '\f064';
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-text[data-tab="my-preferences"]:before {
+    content: '\f013';
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-text[data-tab="following"]:before {
+    content: '\f007';
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-text[data-tab="my-credits"]:before {
+    content: '\f1c0';
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-text[data-tab="edit-profile"]:before {
+    content: '\f040';
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-trigger {
+    background-color: #828282;
+    position: absolute;
+    right: 15px;
+    width: 30px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    height: 3px;
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-trigger:before {
+    background-color: #828282;
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    left: 0;
+    top: -7px;
+  }
+  .block-itg-personalization .personal-menu-tab-mobile .tab-trigger:after {
+    background-color: #828282;
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    left: 0;
+    top: 7px;
+  }
+  .block-itg-personalization .personal-menu-tab {
+    text-align: left;
+    display: none;
+    border: none;
+  }
+  .block-itg-personalization .personal-menu-tab li {
+    float: none;
+    border: none;
+    border-top: 1px solid #c6c6c6;
+  }
+  .block-itg-personalization .personal-menu-tab li a {
+    padding: 10px 15px;
+  }
+  .block-itg-personalization .personal-menu-tab li a.active {
+    background-color: #f6f6f7;
+  }
+  .block-itg-personalization .personal-menu-tab li:last-child {
+    border-bottom: 1px solid #c6c6c6;
+  }
+  .block-itg-personalization .profile-edit-tab {
+    list-style: none;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .block-itg-personalization .profile-edit-tab li {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2px;
+  }
+  .block-itg-personalization .profile-edit-tab li a {
+    padding: 10px;
+    display: block;
+    background: #f8f8f8;
+    border-radius: 10px 10px 0 0;
+  }
+
+  #block-itg-personalization-personalized-saved-content {
+    overflow-x: auto;
+  }
+  #block-itg-personalization-personalized-saved-content .saved-item-tab {
+    margin: 30px 0;
+    white-space: nowrap;
+  }
+  #block-itg-personalization-personalized-saved-content .saved-item-tab li {
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+  }
+  #block-itg-personalization-personalized-saved-content .saved-item-tab li + li {
+    margin-left: -3px;
+  }
+
+  .view-personalization-my-content .view-content {
+    overflow-x: auto;
+  }
+  .view-personalization-my-content .views-table th:first-child {
+    min-width: 100px;
+  }
+
+  article.node-mega-review-critic .movie-review-wrapper .movie-trailer,
+  article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
+    width: 100%;
+  }
+
+  article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
+    height: auto;
+  }
+
+  article.node-mega-review-critic .rating-and-social-wrapper .social-info {
+    width: 100%;
+    border-left: none;
+    margin-left: 0;
+    border-top: 1px solid #ddd;
+    display: none;
+  }
+
+  #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
+    margin-top: 0;
+  }
+
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high {
+    padding: 30px 0 0;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table {
+    width: 100%;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name {
+    font-size: 13px;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table .form-type-slider {
+    min-width: 180px;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table .form-type-slider .sliderfield-display-values-field {
+    font-size: 13px;
+  }
+  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-submit, .view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-reset {
+    background-size: 100% 100%;
+    width: 120px;
+    margin: 0 10px;
+  }
+
+  .page-personalization-my-following #block-views-follow-tags-block,
+  .page-personalization-my-following #block-views-follow-tags-block-1 {
+    width: 50%;
+    float: left;
+    padding: 50px 0 0;
+  }
+
+  #block-itg-personalization-user-my-point .header-point {
+    padding: 20px 0;
+  }
+  #block-itg-personalization-user-my-point .header-point span {
+    padding: 5px 0;
+    display: block;
+  }
+  #block-itg-personalization-user-my-point .header-point span + span:before {
+    display: none;
+  }
+
+  #block-itg-personalization-personalization-edit-profile li a, #block-itg-personalization-personalization-refer-friend li a {
+    padding: 10px;
+  }
+
+  #block-itg-personalization-personalization-refer-friend .social-edit > ul > li {
+    padding: 0 5px;
+  }
+  #block-itg-personalization-personalization-refer-friend .social-edit > ul > li:first-child {
+    margin-top: 10px;
+  }
+  #block-itg-personalization-personalization-refer-friend .social-edit > ul > li img {
+    max-width: 35px;
+  }
+
+  .cart-dropdown {
+    left: auto;
+    right: -5px;
+    width: 300px;
+  }
+
+  [id*="itg-personalization-edit-profile-form"] > div .form-field-name-field-ugc-ctype, [id*="itg-personalization-refer-a-friend-form"] > div .form-field-name-field-ugc-ctype {
+    text-align: center;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-textfield label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield label {
+    width: 100px;
+    padding: 0 8px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-textfield .form-text, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield .form-text {
+    padding-left: 110px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-select label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select label {
+    width: 100px;
+    padding: 0 8px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-select .form-select, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select .form-select {
+    left: 0;
+    width: 100%;
+    padding-left: 110px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-textarea label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea label {
+    width: 100px;
+    padding: 0 8px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-textarea .form-textarea-wrapper, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textarea .form-textarea-wrapper {
+    padding-left: 100px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-radios > label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios > label {
+    width: 100px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios .form-radios .form-type-radio {
+    margin-left: 30px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup > label, [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup > label {
+    width: 100px;
+    padding: 0 8px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file label, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file label {
+    width: 100px;
+    padding: 0 8px;
+  }
+  [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .form-managed-file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .form-managed-file {
+    padding: 10px 10px 10px 110px;
   }
   [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .upload-preview + .form-submit, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .upload-preview + .form-submit {
-    color: #ee4d4d;
-    font: 400 13px/18px Roboto;
-    border: none;
-    background-color: #fff;
-    cursor: pointer;
-    margin-left: 30px;
+    margin: 0;
+    float: right;
   }
   [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file {
     overflow: hidden;
@@ -4587,8 +5231,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     white-space: nowrap;
     font-size: 13px;
     position: absolute;
-    left: 160px;
-    bottom: 0;
+    left: 110px;
+    top: 80px;
     width: 130px;
   }
   [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file img, [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file img {
@@ -4696,488 +5340,6 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     z-index: 9;
     font-size: 13px;
     color: #0db533;
-  }
-}
-/* Responsive CSS */
-@media all and (max-width: 1024px) {
-  .featured_photo_carousel .flexslider .slides li,
-  .tech-block_5 .flexslider .slides li,
-  .auto-block_5 .flexslider .slides li {
-    border-right: none;
-  }
-
-  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-prev,
-  .tech-block_5 .flexslider .flex-direction-nav a.flex-prev,
-  .auto-block_5 .flexslider .flex-direction-nav a.flex-prev {
-    left: 0;
-    right: auto;
-    border-right: none;
-    width: 40px;
-  }
-
-  .featured_photo_carousel .flexslider .flex-direction-nav a.flex-next,
-  .tech-block_5 .flexslider .flex-direction-nav a.flex-next,
-  .auto-block_5 .flexslider .flex-direction-nav a.flex-next {
-    right: 0;
-  }
-}
-/* Responsive CSS Personalization pages */
-@media all and (max-width: 767px) {
-  .page-personalization .personalized-wrapper .personalized-user-area {
-    display: inline-block;
-    height: auto;
-    vertical-align: top;
-    padding-left: 10px;
-    width: 100%;
-  }
-  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user {
-    border: none;
-    float: left;
-    width: 32%;
-  }
-  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-pic {
-    width: 50px;
-    height: 50px;
-  }
-  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-name {
-    font-size: 14px;
-    line-height: 18px;
-  }
-  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info {
-    border: none;
-    overflow: hidden;
-    padding: 0;
-    text-align: center;
-  }
-  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span {
-    padding: 0 5px;
-  }
-  .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info span dfn {
-    font-size: 14px;
-  }
-  .page-personalization .personalized-wrapper .personalized-user-info span {
-    padding: 0 12px;
-  }
-
-  .block-itg-personalization .saved-item-tab, .block-itg-personalization .personal-menu-tab {
-    width: 100%;
-  }
-  .block-itg-personalization .personal-menu-tab-wrapper {
-    margin: 0 -15px;
-  }
-  .block-itg-personalization .personal-menu-tab-mobile {
-    background-color: #ddd;
-    color: #4f4f4f;
-    cursor: pointer;
-    font: 300 18px/40px Roboto;
-    height: 40px;
-    text-align: left;
-    position: relative;
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-text {
-    display: block;
-    color: #4f4f4f;
-    font: 300 18px/18px Roboto;
-    padding: 10px 8px;
-    background-color: #f6f6f7;
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-text:before {
-    display: inline-block;
-    margin-right: 5px;
-    color: #8d8d8d;
-    font-family: 'FontAwesome';
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-text.saved-items:before {
-    content: '\f02e';
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-text.my-content:before {
-    content: '\f064';
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-text.my-Preferences:before {
-    content: '\f013';
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-text.following:before {
-    content: '\f007';
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-text.my-credits:before {
-    content: '\f1c0';
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-text.edit-profile:before {
-    content: '\f040';
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-trigger {
-    background-color: #828282;
-    position: absolute;
-    right: 15px;
-    width: 30px;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    height: 3px;
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-trigger:before {
-    background-color: #828282;
-    content: '';
-    position: absolute;
-    width: 30px;
-    height: 3px;
-    left: 0;
-    top: -7px;
-  }
-  .block-itg-personalization .personal-menu-tab-mobile .tab-trigger:after {
-    background-color: #828282;
-    content: '';
-    position: absolute;
-    width: 30px;
-    height: 3px;
-    left: 0;
-    top: 7px;
-  }
-  .block-itg-personalization .personal-menu-tab {
-    text-align: left;
-    border: none;
-  }
-  .block-itg-personalization .personal-menu-tab li {
-    float: none;
-    border: none;
-    border-top: 1px solid #c6c6c6;
-  }
-  .block-itg-personalization .personal-menu-tab li a {
-    padding: 10px 15px;
-  }
-  .block-itg-personalization .profile-edit-tab {
-    list-style: none;
-    max-width: 780px;
-    margin: 0 auto;
-  }
-  .block-itg-personalization .profile-edit-tab li {
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 2px;
-  }
-  .block-itg-personalization .profile-edit-tab li a {
-    padding: 10px;
-    display: block;
-    background: #f8f8f8;
-    border-radius: 10px 10px 0 0;
-  }
-
-  #block-itg-personalization-personalized-saved-content {
-    overflow-x: auto;
-  }
-  #block-itg-personalization-personalized-saved-content .saved-item-tab {
-    margin: 30px 0;
-    white-space: nowrap;
-  }
-  #block-itg-personalization-personalized-saved-content .saved-item-tab li {
-    float: none;
-    display: inline-block;
-    vertical-align: top;
-  }
-  #block-itg-personalization-personalized-saved-content .saved-item-tab li + li {
-    margin-left: -3px;
-  }
-
-  #content #block-formblock-ugc .node-ugc-form .form-type-textfield {
-    border: none;
-    overflow: visible;
-    border-radius: 0;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-type-textfield label {
-    background-color: #fff;
-    border-right: medium none;
-    display: block;
-    font: 300 14px/28px Roboto;
-    padding: 0;
-    position: relative;
-    width: 100%;
-    z-index: 99;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-type-textfield .form-text {
-    border: 1px solid #e0e0e0;
-    padding-left: 10px;
-    height: auto;
-    position: static;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-type-textfield span.error {
-    position: static;
-    padding-left: 0;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-type-textarea {
-    border: none;
-    overflow: visible;
-    border-radius: 0;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-type-textarea label {
-    background-color: #fff;
-    border-right: medium none;
-    display: block;
-    font: 300 14px/28px Roboto;
-    padding: 0;
-    position: relative;
-    width: 100%;
-    z-index: 99;
-    height: auto;
-    float: none;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-type-textarea .form-textarea-wrapper {
-    height: auto;
-    padding-left: 0;
-    position: static;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file, #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file {
-    border: none;
-    overflow: visible;
-    border-radius: 0;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file label, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file label, #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file label {
-    background-color: #fff;
-    border-right: medium none;
-    display: block;
-    font: 300 14px/28px Roboto;
-    padding: 0;
-    position: relative;
-    width: 100%;
-    z-index: 99;
-    height: auto;
-    float: none;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file .form-managed-file, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file .form-managed-file, #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file .form-managed-file {
-    padding: 0;
-    position: static;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file input[type="file"], #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file input[type="file"], #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file input[type="file"] {
-    max-width: 185px;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file div.description, #content #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.description, #content #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.description {
-    margin-top: 3px;
-    padding: 0;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .file-widget span.file a {
-    max-width: 50%;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-file .file-widget .form-submit[value="Remove"] {
-    left: auto;
-    right: 0;
-    top: 27px;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data {
-    position: relative;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data span.file {
-    font-size: 12px;
-    left: 0;
-    overflow: hidden;
-    padding: 75px 0 0;
-    position: absolute;
-    text-overflow: ellipsis;
-    top: 0;
-    width: 100%;
-    pointer-events: none;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file img, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data span.file img {
-    display: none;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data span.file-size, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data span.file-size {
-    display: none;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-submit[value="Remove"], #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-submit[value="Remove"] {
-    left: auto;
-    right: 0;
-    top: -1px;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-type-textfield {
-    left: 0;
-    max-width: none;
-    padding-left: 105px;
-    position: absolute;
-    top: 18px;
-    width: 100%;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield label, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-type-textfield label {
-    display: none;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield + .form-type-textfield, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-type-textfield + .form-type-textfield {
-    top: 49px;
-    margin: 0 !important;
-  }
-  #content #block-formblock-ugc .node-ugc-form .form-field-type-image .image-preview + .image-widget-data .form-type-textfield .form-text, #content #block-formblock-ugc .node-ugc-form .field-type-image .image-preview + .image-widget-data .form-type-textfield .form-text {
-    height: 26px;
-    padding: 0 5px;
-  }
-
-  .view-personalization-my-content .view-content {
-    overflow-x: auto;
-  }
-  .view-personalization-my-content .views-table th:first-child {
-    min-width: 100px;
-  }
-
-  article.node-mega-review-critic .movie-review-wrapper .movie-trailer,
-  article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
-    width: 100%;
-  }
-
-  article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
-    height: auto;
-  }
-
-  article.node-mega-review-critic .rating-and-social-wrapper .social-info {
-    width: 100%;
-    border-left: none;
-    margin-left: 0;
-    border-top: 1px solid #ddd;
-    display: none;
-  }
-
-  #content #block-formblock-ugc [id*="field-ugc-personalization-photo-add-more-wrapper"] > .form-item {
-    margin-top: 0;
-  }
-
-  #content #block-formblock-ugc .node-ugc-form table td > .form-submit[value="Remove"],
-  #content #block-formblock-ugc .node-ugc-form table td .ajax-new-content > .form-submit[value="Remove"] {
-    position: static;
-  }
-
-  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high {
-    padding: 30px 0 0;
-  }
-  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table {
-    width: 100%;
-  }
-  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table tr {
-    display: inline-block;
-    padding-bottom: 20px;
-    vertical-align: top;
-    width: 100%;
-  }
-  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td {
-    padding: 10px 0;
-    display: block;
-    float: left;
-    width: 100%;
-  }
-  .view-personalization-my-preferences #views-form-personalization-my-preferences-block table td.views-field-name {
-    padding: 0;
-  }
-  .view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-submit, .view-personalization-my-preferences #views-form-personalization-my-preferences-block .form-actions .form-reset {
-    background-size: 100% 100%;
-    width: 120px;
-  }
-
-  .page-personalization-my-following #block-views-follow-tags-block,
-  .page-personalization-my-following #block-views-follow-tags-block-1 {
-    width: 100%;
-    padding: 50px 0 0;
-  }
-
-  #block-itg-personalization-user-my-point .header-point {
-    padding: 20px 0;
-  }
-  #block-itg-personalization-user-my-point .header-point span {
-    padding: 5px 0;
-    display: block;
-  }
-  #block-itg-personalization-user-my-point .header-point span + span:before {
-    display: none;
-  }
-
-  #block-itg-personalization-personalization-edit-profile li a, #block-itg-personalization-personalization-refer-friend li a {
-    padding: 10px;
-  }
-
-  #block-itg-personalization-personalization-refer-friend .social-edit > ul > li {
-    padding: 0 5px;
-  }
-  #block-itg-personalization-personalization-refer-friend .social-edit > ul > li:first-child {
-    margin-top: 10px;
-  }
-  #block-itg-personalization-personalization-refer-friend .social-edit > ul > li img {
-    max-width: 35px;
-  }
-
-  [id*="itg-personalization-edit-profile-form"], [id*="itg-personalization-refer-a-friend-form"] {
-    background-color: #f8f8f8;
-    text-align: left;
-    padding: 15px;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item, [id*="itg-personalization-refer-a-friend-form"] .form-item {
-    margin-bottom: 15px;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item .form-item, [id*="itg-personalization-refer-a-friend-form"] .form-item .form-item {
-    margin: 0;
-  }
-  [id*="itg-personalization-edit-profile-form"] input[type="text"], [id*="itg-personalization-edit-profile-form"] select, [id*="itg-personalization-edit-profile-form"] input[type="password"], [id*="itg-personalization-refer-a-friend-form"] input[type="text"], [id*="itg-personalization-refer-a-friend-form"] select, [id*="itg-personalization-refer-a-friend-form"] input[type="password"] {
-    width: 100%;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-dob .form-type-textfield label, [id*="itg-personalization-refer-a-friend-form"] .form-item-dob .form-type-textfield label {
-    display: none;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-type-radios > label, [id*="itg-personalization-edit-profile-form"] .form-type-checkboxes > label, [id*="itg-personalization-edit-profile-form"] .form-type-managed-file > label, [id*="itg-personalization-edit-profile-form"] .form-item-dob > label, [id*="itg-personalization-edit-profile-form"] .form-type-textfield > label, [id*="itg-personalization-edit-profile-form"] .form-type-select > label, [id*="itg-personalization-edit-profile-form"] .form-type-textarea > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-radios > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-checkboxes > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-managed-file > label, [id*="itg-personalization-refer-a-friend-form"] .form-item-dob > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-textfield > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-select > label, [id*="itg-personalization-refer-a-friend-form"] .form-type-textarea > label {
-    display: block;
-    padding-bottom: 5px;
-    font-weight: 600;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file {
-    position: relative;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .ajax-progress, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .ajax-progress {
-    display: none;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .form-file, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .form-file {
-    max-width: 185px;
-    margin-right: 5px;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .form-file + .form-submit, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .form-file + .form-submit {
-    padding: 5px 10px;
-    background-color: #ededed;
-    border: 1px solid #bababa;
-    border-radius: 3px;
-    color: #fff;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file span.file, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file span.file {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 130px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipses;
-    font-size: 13px;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file span.file img, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file span.file img {
-    display: none;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .upload-preview, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .upload-preview {
-    margin-bottom: 20px;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .form-managed-file .upload-preview + .form-submit, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .form-managed-file .upload-preview + .form-submit {
-    border: none;
-    color: #ee4d4d;
-    background-color: transparent;
-    margin-left: 30px;
-    font-size: 13px;
-  }
-  [id*="itg-personalization-edit-profile-form"] .form-item-profile-pic .description, [id*="itg-personalization-refer-a-friend-form"] .form-item-profile-pic .description {
-    font-size: 12px;
-    color: #828282;
-  }
-  [id*="itg-personalization-edit-profile-form"] > div [id*="edit-submit"], [id*="itg-personalization-refer-a-friend-form"] > div [id*="edit-submit"] {
-    background: url(../images/btn-blue.png) no-repeat 0 0;
-    border: medium none;
-    color: #fff;
-    cursor: pointer;
-    font: 300 20px/28px Roboto;
-    height: 41px;
-    width: 170px;
-    margin: 30px auto 0;
-    display: block;
-  }
-
-  .cart-dropdown {
-    left: auto;
-    right: -5px;
-    width: 300px;
   }
 }
 @media all and (max-width: 767px) {
@@ -5380,5 +5542,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .cart-total-block .points-balance span:first-child {
     width: 150px;
     text-align: left;
+  }
+}
+@media all and (max-width: 330px) {
+  .page-personalization #block-formblock-ugc .node-ugc-form .field-type-image .form-type-managed-file div.image-widget-data .form-submit[value="Remove"],
+  .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data .form-submit[value="Remove"] {
+    right: 3px;
   }
 }
