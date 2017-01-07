@@ -10,7 +10,7 @@
  */
 function itg_event_registration_form($form, &$form_state) {
   $arg = arg();
-  
+  $event_id = itg_event_registration_get_event_nid();
   if ($arg[0] == 'event') {
     $path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
     $node = menu_get_object("node", 1, $path);
@@ -18,13 +18,13 @@ function itg_event_registration_form($form, &$form_state) {
   } elseif (is_numeric($arg[1])) {
     $node = node_load($arg[1]);
   } else {
-    $event_id = itg_event_registration_get_event_nid();
+    //$event_id = itg_event_registration_get_event_nid();
     $node = node_load($event_id);
   }
 
   $no_of_tickets = $node->field_no_of_tickets[LANGUAGE_NONE][0]['value'];
+  $total_registration_users = itg_event_registration_get_total_registration($event_id); // default = 0
   $event_type = $node->field_event_type[LANGUAGE_NONE][0]['value'];
-  
   // Check for published node, registration is allowed for published event only.
   if ($node->status == 1) {
     if ($event_type == 'invite') {
@@ -36,13 +36,17 @@ function itg_event_registration_form($form, &$form_state) {
       $current_date = strtotime(date('Y-m-d  H:i:s'));
       $event_reg_start_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       $event_reg_close_date = strtotime($node->field_registration_close_date[LANGUAGE_NONE][0]['value']);
-
+      $event_close_date = strtotime($node->field_event_close_date[LANGUAGE_NONE][0]['value']);
       if ($current_date < $event_reg_start_date) {
         return itg_event_registration_get_status_message($node, 'not_started');
       } 
       elseif ($current_date > $event_reg_close_date) {
-        if($node->field_force_registration_open[LANGUAGE_NONE][0]['value']) {
-          return itg_event_registration_get_form();
+        if((($node->field_force_registration_open[LANGUAGE_NONE][0]['value']) && ($event_close_date > $current_date)) || (!$node->field_force_registration_open[LANGUAGE_NONE][0]['value']) && ($event_close_date > $current_date) && ($current_date > $event_reg_start_date)) {
+          if ((1 >= $no_of_tickets) || ($total_registration_users >= $no_of_tickets)) {
+            return itg_event_registration_get_status_message($node, 'tickets_not_available');
+          }else{
+            return itg_event_registration_get_form();
+          }
         }
         else {
           return itg_event_registration_get_status_message($node, 'closed');
@@ -50,7 +54,7 @@ function itg_event_registration_form($form, &$form_state) {
       } 
       else {
         $total_registration_users = itg_event_registration_get_total_registration($event_id);
-        if (1 >= $no_of_tickets) {
+        if ((1 >= $no_of_tickets) || ($total_registration_users >= $no_of_tickets)) {
           return itg_event_registration_get_status_message($node, 'tickets_not_available');
           return '';
         }
