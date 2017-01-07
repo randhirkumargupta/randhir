@@ -227,7 +227,7 @@ function itg_event_registration_form_after_build($form, &$form_state) {
 
   $form['event_registration_title'] = array(
        '#type' => 'item',
-       '#markup' => '<div class="event-registration-title"><h2>REGISTRATION</h2><span>Fill out the form to register to our event</span></div>',
+       '#markup' => '<div class="event-registration-title"><h2>REGISTRATION<span>Fill out the form to register to our event</span></h2></div>',
        '#weight' => -100,
      );
 
