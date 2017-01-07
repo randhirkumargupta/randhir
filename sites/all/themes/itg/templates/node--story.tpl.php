@@ -74,24 +74,25 @@ if (!empty($content)):
             <?php } else { ?>
             <h1><?php print $node->title.$pipelinetext; ?></h1>
             <?php } ?>
+            <?php
+              $associate_type = '';
+              $associate_id = '';
+                   
+              if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                $associate_type = 'gallery';
+                $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+              } else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') {
+                  $associate_type = 'video';
+                  $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+              }
+              ?>
+           <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php echo $associate_type;?>-<?php echo $associate_id;?>">click</a>
             <div class="story-left-section">
                 <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_listicle[LANGUAGE_NONE])) { ?>
                     <div class="story-left">
                         <div class="byline">              
                             <div class="profile-pic">
-                               <?php
-              /*$associate_type = '';
-              $associate_id = '';
-                        
-              if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
-                $associate_type = 'gallery';
-                $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
-              } else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
-                  $associate_type = 'video';
-                  $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-              }*/
-              ?>
-<!--              <a href="javascript:void(0)" class="associate-content-block" data-widget="<?php //echo $associate_type;?>-<?php //echo $associate_id;?>">click</a>-->
+                               
                                 <?php
                                 $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                                 if (!empty($file)) {
