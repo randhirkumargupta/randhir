@@ -145,7 +145,8 @@
               <?php if ($reviews[$field_collection['value']]->field_story_review_type['und'][0]['value'] == 'external'): ?>
                 <?php print '<h2>' . t('Other Reviewers') . '</h2>'; ?>
               <?php endif; ?>
-              <h2><?php print $reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value']; ?></h2>
+              
+              <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline['und'][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link['und'][0]['value']); ?></h2>
               <div class="other-reviews-posted-on">
                   <!-- Byline reporter -->
                   <!-- Get Multiple reviewers name -->

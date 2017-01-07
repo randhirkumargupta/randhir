@@ -93,9 +93,8 @@ if ($theme != 'itgadmin') {
  
 
 <div class="itg-layout-container <?php echo $itg_class; ?>">    
-    <!-- Breaking news band --> 
-    <?php //p($page); ?>
-    <?php if (!empty($page['breaking_news'])): ?>
+    <!-- Breaking news band -->         
+    <?php if (!empty($page['breaking_news'])): ?>    
     <div class="row">
         <div class="col-md-12">
           <?php print render($page['breaking_news']); ?>
