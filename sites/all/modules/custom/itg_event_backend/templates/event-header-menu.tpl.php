@@ -61,9 +61,9 @@ if (!empty($node) && ($node->type == 'event_backend')) {//shravan
               print '<li>'.l('Flashback', 'node/'.$node->nid, array('attributes' => array("style" => "color:$menu_font_color"))).$flash_old_event.'</li>';
             }
             
-            if ($node->nid) {
-              print '<li>'.l('Sing and Win', $baseurl.'/sing-and-win', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
-            }
+//            if ($node->nid) {
+//              print '<li>'.l('Sing and Win', $baseurl.'/sing-and-win', array('attributes' => array("style" => "color:$menu_font_color"))).'</li>';
+//            }
           ?>
       </ul>
     </div>

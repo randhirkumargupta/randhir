@@ -1611,6 +1611,7 @@ function itg_event_backend_flashback($curr_event_id, $menu_font_color) {
   $query->condition('n.type', 'event_backend', '=');
   $query->condition('n.nid', $curr_event_id, '!=');
   $query->condition('event_close_date.field_event_close_date_value', $current_date_time, '<');
+  $query->condition('n.status', 1, '=');
   $query->orderBy('n.created', 'DESC');
   $result = $query->execute();
   $flash_back_link = '';
