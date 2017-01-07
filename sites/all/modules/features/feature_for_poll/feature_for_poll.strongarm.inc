@@ -101,12 +101,6 @@ function feature_for_poll_strongarm() {
         'flag' => array(
           'weight' => '10',
         ),
-        'domain' => array(
-          'weight' => '1',
-        ),
-        'redirect' => array(
-          'weight' => '30',
-        ),
       ),
       'display' => array(),
     ),

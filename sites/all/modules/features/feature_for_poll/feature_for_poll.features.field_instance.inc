@@ -198,19 +198,21 @@ function feature_for_poll_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-poll-field_common_related_content'.
-  $field_instances['node-poll-field_common_related_content'] = array(
+  // Exported field_instance: 'node-poll-field_associate_poll'.
+  $field_instances['node-poll-field_associate_poll'] = array(
     'bundle' => 'poll',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please Search by title.',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 17,
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -221,22 +223,23 @@ function feature_for_poll_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_common_related_content',
-    'label' => 'Related Content',
+    'field_name' => 'field_associate_poll',
+    'label' => 'Associate poll',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'entityreference',
       'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
         'size' => 60,
       ),
-      'type' => 'text_textfield',
-      'weight' => 32,
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 16,
     ),
   );
 
@@ -989,10 +992,12 @@ function feature_for_poll_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Associate poll');
   t('Caption');
   t('Display Result');
   t('End Date');
   t('ITG State');
+  t('Please Search by title.');
   t('Poll Answer');
   t('Poll Answer Image');
   t('Poll Answer Text');
@@ -1003,7 +1008,6 @@ function feature_for_poll_field_default_field_instances() {
   t('Poll Question Video');
   t('Poll Type');
   t('Poll manipulate');
-  t('Related Content');
   t('Result format');
   t('Show End Date');
   t('Start Date');
