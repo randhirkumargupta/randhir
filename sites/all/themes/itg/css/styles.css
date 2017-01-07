@@ -1455,7 +1455,7 @@ footer .footer-copyright {
   height: 14px;
   background: #f40000;
   border-radius: 100%;
-  display: inline-block;
+  display: none;
 }
 .big-news h1 a i {
   color: #f40000;
@@ -1463,6 +1463,10 @@ footer .footer-copyright {
   padding-bottom: 7px;
   display: inline-block;
   vertical-align: bottom;
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
+  -webkit-animation-duration: 1s;
 }
 .big-news a {
   color: #fff;
@@ -1547,6 +1551,22 @@ footer .footer-copyright {
   color: #fff;
 }
 
+@-webkit-keyframes blinker {
+  from {
+    opacity: 1.0;
+  }
+  to {
+    opacity: 0.0;
+  }
+}
+@keyframes blinker {
+  from {
+    opacity: 1.0;
+  }
+  to {
+    opacity: 0.0;
+  }
+}
 /*End CSS Big New Home page*/
 .itg-top-section {
   position: relative;
@@ -2174,6 +2194,10 @@ footer .footer-copyright {
 .story-section h1 i {
   font-size: 13px;
   color: #f40000;
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
+  -webkit-animation-duration: 1s;
 }
 .story-section h1 span {
   color: #bb0a0a;
@@ -11388,11 +11412,16 @@ footer .footer-copyright {
 }
 /*homepage marquee end*/
 /*other comment section start*/
+#content #other-comment {
+  /*        #comments .comment-form .form-actions{
+              padding-left: 0;
+          }*/
+}
 #content #other-comment #comments .comment-form fieldset.captcha {
   margin: 10px 0 30px 0;
 }
-#content #other-comment #comments .comment-form .form-actions {
-  padding-left: 0;
+#content #other-comment #comment-body-add-more-wrapper fieldset {
+  display: none;
 }
 
 /*other comment section end*/
