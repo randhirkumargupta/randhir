@@ -388,11 +388,11 @@ function _related_story_left_block_content() {
 
       if (empty($related_image)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-        $related_story.= "<li class='col-md-12'><a href='$related_data->url' title='$related_title'><img src='$img_url' class='related-default'></img></a>";
+        $related_story.= "<li class='col-md-12'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default'></img></a>";
         $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
       else {
-        $related_story.= "<li class='col-md-12'><a href='$related_data->url' title='$related_title'>" . $related_image;
+        $related_story.= "<li class='col-md-12'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_image;
         $related_story.= "</a><span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
     }
@@ -426,11 +426,11 @@ function _related_story_bottom_block_content() {
       $related_image = $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
       if (empty($related_image)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_group.jpg';
-        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' title='$related_title'><img src='$img_url' class='related-default'></img></a>";
+        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'><img src='$img_url' class='related-default'></img></a>";
         $related_story.= "<span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
       else {
-        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' title='$related_title'>" . $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
+        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$related_data->url' target='_blank' title='$related_title'>" . $related_data->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0];
         $related_story.= "</a><span class='tile'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank"))) . "</span></li>";
       }
     }
