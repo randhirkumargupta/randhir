@@ -3217,8 +3217,6 @@ echo  $baseurl;
   $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
-    6 => '6',
-    19 => '19',
     10 => '10',
   );
   $handler->display->display_options['cache']['type'] = 'none';
