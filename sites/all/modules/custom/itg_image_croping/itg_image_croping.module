@@ -608,7 +608,7 @@ function mageimagedimesion() {
     $image_dim['mega_review_critic']['field_story_extra_small_image']['width'] = 88;
     $image_dim['mega_review_critic']['field_story_extra_small_image']['height'] = 66;
     // Dimension for recipe
-    $image_dim['recipe']['field_story_extra_large_image']['width'] = 674;
+    $image_dim['recipe']['field_story_extra_large_image']['width'] = 647;
     $image_dim['recipe']['field_story_extra_large_image']['height'] = 363;
     $image_dim['recipe']['field_story_large_image']['width'] = 483;
     $image_dim['recipe']['field_story_large_image']['height'] = 271;
@@ -618,6 +618,52 @@ function mageimagedimesion() {
     $image_dim['recipe']['field_story_small_image']['height'] = 127;
     $image_dim['recipe']['field_story_extra_small_image']['width'] = 88;
     $image_dim['recipe']['field_story_extra_small_image']['height'] = 66;
+    // Dimension for recipe
+    $image_dim['breaking_news']['field_story_extra_large_image']['width'] = 647;
+    $image_dim['breaking_news']['field_story_extra_large_image']['height'] = 363;
+    $image_dim['breaking_news']['field_story_large_image']['width'] = 483;
+    $image_dim['breaking_news']['field_story_large_image']['height'] = 271;
+    $image_dim['breaking_news']['field_story_medium_image']['width'] = 370;
+    $image_dim['breaking_news']['field_story_medium_image']['height'] = 208;
+    $image_dim['breaking_news']['field_story_small_image']['width'] = 170;
+    $image_dim['breaking_news']['field_story_small_image']['height'] = 127;
+    $image_dim['breaking_news']['field_story_extra_small_image']['width'] = 88;
+    $image_dim['breaking_news']['field_story_extra_small_image']['height'] = 66;
+
+    $image_dim['podcast']['field_story_extra_large_image']['width'] = 647;
+    $image_dim['podcast']['field_story_extra_large_image']['height'] = 363;
+    $image_dim['podcast']['field_story_large_image']['width'] = 483;
+    $image_dim['podcast']['field_story_large_image']['height'] = 271;
+    $image_dim['podcast']['field_story_medium_image']['width'] = 370;
+    $image_dim['podcast']['field_story_medium_image']['height'] = 208;
+    $image_dim['podcast']['field_story_small_image']['width'] = 170;
+    $image_dim['podcast']['field_story_small_image']['height'] = 127;
+    $image_dim['podcast']['field_story_extra_small_image']['width'] = 88;
+    $image_dim['podcast']['field_story_extra_small_image']['height'] = 66;
+
+    $image_dim['cooking_tips']['field_story_extra_large_image']['width'] = 647;
+    $image_dim['cooking_tips']['field_story_extra_large_image']['height'] = 363;
+    $image_dim['cooking_tips']['field_story_large_image']['width'] = 483;
+    $image_dim['cooking_tips']['field_story_large_image']['height'] = 271;
+    $image_dim['cooking_tips']['field_story_medium_image']['width'] = 370;
+    $image_dim['cooking_tips']['field_story_medium_image']['height'] = 208;
+    $image_dim['cooking_tips']['field_story_small_image']['width'] = 170;
+    $image_dim['cooking_tips']['field_story_small_image']['height'] = 127;
+    $image_dim['cooking_tips']['field_recipe_writer_image']['width'] = 88;
+    $image_dim['cooking_tips']['field_recipe_writer_image']['height'] = 66;
+    
+    $image_dim['food_news']['field_story_extra_large_image']['width'] = 647;
+    $image_dim['food_news']['field_story_extra_large_image']['height'] = 363;
+    $image_dim['food_news']['field_story_large_image']['width'] = 483;
+    $image_dim['food_news']['field_story_large_image']['height'] = 271;
+    $image_dim['food_news']['field_story_medium_image']['width'] = 370;
+    $image_dim['food_news']['field_story_medium_image']['height'] = 208;
+    $image_dim['food_news']['field_story_small_image']['width'] = 170;
+    $image_dim['food_news']['field_story_small_image']['height'] = 127;
+    $image_dim['food_news']['field_recipe_writer_image']['width'] = 88;
+    $image_dim['food_news']['field_recipe_writer_image']['height'] = 66;
+
+
 
     return $image_dim;
 }
@@ -648,12 +694,15 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
         <input type="range" class="cropit-image-zoom-input">
         </div>',
     );
-    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'recipe' || $content_name == 'mega_review_critic' || $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
+
+    if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && $field_name == 'field_story_extra_large_image') {
         $largsize = '(' . $imgdim[$content_name]['field_story_large_image']['width'] . 'X' . $imgdim[$content_name]['field_story_large_image']['height'] . ')';
         $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image']['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image']['height'] . ')';
         $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image']['height'] . ')';
+       $writer_image= '(' . $imgdim[$content_name]['field_recipe_writer_image']['width'] . 'X' . $imgdim[$content_name]['field_recipe_writer_image']['height'] . ')';
+
         $smallsize = '(' . $imgdim[$content_name]['field_story_small_image']['width'] . 'X' . $imgdim[$content_name]['field_story_small_image']['height'] . ')';
-        if ($content_name == 'photogallery') {
+        if ($content_name == 'photogallery' || $content_name == 'recipe') {
 
             $checkoption = array(
                 'field_story_large_image' => t("Large Image  $largsize"),
@@ -668,6 +717,14 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
                 'field_story_medium_image' => t("Medium Image $mediumsize"),
                 'field_story_small_image' => t("Small Image  $smallsize"),
                 'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
+            );
+        }
+        else if ($content_name == 'cooking_tips' || $content_name == 'food_news') {
+            $checkoption = array(
+                'field_story_large_image' => t("Large Image  $largsize"),
+                'field_story_medium_image' => t("Medium Image $mediumsize"),
+                'field_story_small_image' => t("Small Image  $smallsize"),
+                'field_recipe_writer_image' => t("Writer's image  $writer_image")
             );
         }
         else {
