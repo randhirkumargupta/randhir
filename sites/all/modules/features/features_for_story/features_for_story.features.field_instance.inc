@@ -130,26 +130,29 @@ function features_for_story_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'color_field',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'color_field_default_formatter',
-        'weight' => 2,
+        'type' => 'text_default',
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'field_collection_item',
     'exclude_cv' => 0,
     'field_name' => 'field_story_listicle_color',
-    'label' => 'Listicle color',
+    'label' => 'Listicle Color',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'color_field',
-      'settings' => array(),
-      'type' => 'color_field_spectrum_widget',
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
       'weight' => 2,
     ),
   );
@@ -4787,7 +4790,7 @@ function features_for_story_field_default_field_instances() {
   t('Kicker image caption');
   t('Large image');
   t('Listicle');
-  t('Listicle color');
+  t('Listicle Color');
   t('Listicle description');
   t('Listicle title');
   t('Listicle type');
